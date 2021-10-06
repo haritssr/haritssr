@@ -4,8 +4,14 @@ import { Menu } from '@headlessui/react';
 export default function NavMobile() {
   return (
     <nav className='flex items-center justify-between w-full h-auto bg-white md:hidden bg-opacity-90 backdrop-blur-sm'>
-      <Link href='/'>
+      {/* <Link href='/'>
         <a className='flex items-center pl-5 text-gray-700'>haritssr.com</a>
+      </Link> */}
+      <Link href='/'>
+        <a className='pl-5 text-lg font-semibold group'>
+          <span className='text-gray-500 group-hover:text-gray-400'>harits</span>
+          <span className='text-gray-800 underline group-hover:text-gray-400'>sr</span>
+        </a>
       </Link>
 
       <Menu as='div' className='z-50'>

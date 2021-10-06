@@ -5,6 +5,7 @@ import FloatingLabels from '@/components/showcase/tailwindcss/floatingLabels';
 import Glowing from '@/components/showcase/tailwindcss/glowing';
 import Grid from '@/components/showcase/tailwindcss/grid';
 import IOS15clone from '@/components/showcase/tailwindcss/IOS15clone';
+import YoutubeThumbnail from '@/components/showcase/tailwindcss/youtubeThumbnail';
 
 export default function Tailwindcss() {
   return (
@@ -13,6 +14,11 @@ export default function Tailwindcss() {
 
       <Topic name='Blurry Animation Background' />
       <Blurry />
+
+      <div className='mt-32'>
+        <Topic name='Youtube Thumbnail' />
+        <YoutubeThumbnail />
+      </div>
 
       <div className='mt-32'>
         <Topic name='Floating Labels' />

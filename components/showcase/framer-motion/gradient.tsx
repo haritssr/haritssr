@@ -6,8 +6,8 @@ export default function Gradient() {
         <motion.div
           key={a.id}
           className={`w-24 h-24 rounded-lg bg-gradient-to-b shadow-lg ${a.gradient}`}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ rotate: 90 }}
+          whileTap={{ scale: 0.6 }}
+          whileHover={{ rotate: 180 }}
           dragConstraints={{
             right: 10,
             left: 10,
@@ -21,8 +21,8 @@ export default function Gradient() {
         <motion.div
           key={a.id}
           className={`w-24 h-24 rounded-lg bg-gradient-to-b shadow-lg ${a.gradient}`}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ rotate: 90 }}
+          whileTap={{ scale: 0.6 }}
+          whileHover={{ rotate: 180 }}
           dragConstraints={{
             right: 10,
             left: 10,
@@ -36,8 +36,8 @@ export default function Gradient() {
         <motion.div
           key={a.id}
           className={`w-auto h-auto rounded-lg bg-gradient-to-b shadow-lg ${a.gradient}`}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ rotate: 90 }}
+          whileTap={{ scale: 0.6 }}
+          whileHover={{ rotate: 180 }}
           dragConstraints={{
             right: 10,
             left: 10,

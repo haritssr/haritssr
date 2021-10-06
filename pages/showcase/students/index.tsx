@@ -2,7 +2,6 @@ import Layout from '@/components/Layout';
 import { InternalLink, Title, Topic } from '@/components/DesignSystem';
 
 export default function Students({ students }) {
-  console.log(students);
   return (
     <Layout browserTitle='All Student' description='All Student'>
       <Title name='Students' />

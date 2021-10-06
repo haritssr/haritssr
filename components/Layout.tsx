@@ -6,9 +6,9 @@ export default function Layout({ children, browserTitle, description }) {
   const image = 'https://harislab.com/public/HarisLab.png';
   const type = 'website';
   return (
-    <div className='bg-[#F5F5F7] pb-40'>
+    <div className='bg-[#F5F5F7] pb-10'>
       <Head>
-        <title>{browserTitle} – haritssr.com</title>
+        <title>{browserTitle} – haritssr</title>
         <link rel='icon' href='/harislab_ico.ico' />
         <meta name='robots' content='follow, index' />
         <meta content={description} name='description' />

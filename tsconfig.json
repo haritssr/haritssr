@@ -20,7 +20,7 @@
        "@/showcase":["components/showcase"]
      }
    },
-   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","**/**/*.tsx" , "tailwind.config.js"],
+   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","**/**/*.tsx" , "tailwind.config.js", "pages/showcase/framer-motion"],
    "exclude": ["node_modules"]
  }
  

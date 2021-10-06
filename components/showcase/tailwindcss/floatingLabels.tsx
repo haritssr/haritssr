@@ -12,7 +12,7 @@ export default function FloatingLabels() {
           htmlFor='email'
           className='absolute left-0 text-sm -top-5 peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:left-4'
         >
-          Email address
+          Email Address
         </label>
       </div>
     </div>
