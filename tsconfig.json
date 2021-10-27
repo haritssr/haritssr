@@ -1,26 +1,45 @@
 {
-    "compilerOptions": {
-     "target": "es5",
-     "lib": ["dom", "dom.iterable", "esnext"],
-     "allowJs": true,
-     "skipLibCheck": true,
-     "strict": false,
-     "forceConsistentCasingInFileNames": true,
-     "noEmit": true,
-     "esModuleInterop": true,
-     "module": "esnext",
-     "moduleResolution": "node",
-     "resolveJsonModule": true,
-     "isolatedModules": true,
-     "jsx": "preserve",
-     "baseUrl": ".",
-     "paths": {
-       "@/components/*": ["components/*"],
-       "@/Icons": ["components/Icons"],
-       "@/showcase":["components/showcase"]
-     }
-   },
-   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","**/**/*.tsx" , "tailwind.config.js", "pages/showcase/framer-motion"],
-   "exclude": ["node_modules"]
- }
- 
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/Icons": [
+        "components/Icons"
+      ],
+      "@/showcase": [
+        "components/work"
+      ]
+    },
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/**/*.tsx",
+    "tailwind.config.js",
+    "pages/showcase/framer-motion"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

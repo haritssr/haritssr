@@ -1,16 +1,14 @@
 import Link from 'next/link';
 import { Menu } from '@headlessui/react';
+import { useRouter } from 'next/router';
 
 export default function NavMobile() {
   return (
-    <nav className='flex items-center justify-between w-full h-auto bg-white md:hidden bg-opacity-90 backdrop-blur-sm'>
-      {/* <Link href='/'>
-        <a className='flex items-center pl-5 text-gray-700'>haritssr.com</a>
-      </Link> */}
+    <nav className='flex items-center justify-between w-full h-auto bg-white border-b border-gray-200 shadow-sm md:hidden bg-opacity-90 backdrop-blur-sm'>
       <Link href='/'>
-        <a className='pl-5 text-lg font-semibold group'>
-          <span className='text-gray-500 group-hover:text-gray-400'>harits</span>
-          <span className='text-gray-800 underline group-hover:text-gray-400'>sr</span>
+        <a className='pl-5 space-x-1 text-lg font-semibold duration-200 hover:underline font-mw'>
+          <span className='text-gray-700'>Harits</span>
+          <span className='text-gray-500'>Syah</span>
         </a>
       </Link>
 
@@ -22,10 +20,9 @@ export default function NavMobile() {
             </Menu.Button>
 
             <Menu.Items className='absolute top-0 right-0  w-full h-screen mt-[43px] overflow-y-auto  bg-white'>
-              <section className='flex flex-col px-8 py-5 space-y-2 border-t border-gray-600 divide-y divide-gray-600 '>
-                <Navigation to='about' title='about' />
-                <Navigation to='blog' title='blog' />
-                <Navigation to='showcase' title='showcase' />
+              <section className='flex flex-col px-8 py-5 space-y-2 border-t border-gray-400 divide-y divide-gray-400 '>
+                <Navigation href='/about' title='About' />
+                <Navigation href='/work' title='Work' />
               </section>
             </Menu.Items>
           </>
@@ -35,19 +32,33 @@ export default function NavMobile() {
   );
 }
 
-const Navigation = ({ to, title }) => {
-  const style = ' text-lg block text-gray-700 pt-2 pb-1';
+//refactor this fucking a lot of code
+const Navigation = ({ href, title }) => {
+  const router = useRouter();
+
   return (
     <Menu.Item>
       {({ active }) => (
         <button className='w-full text-left'>
           {active ? (
-            <Link href={`/${to}`}>
-              <a className={style}>{title}</a>
+            <Link href={href}>
+              <a
+                className={`${
+                  router.asPath === href ? 'text-gray-700' : 'text-gray-500'
+                } hover:text-gray-500 text-lg block pt-2 pb-1 font-semibold`}
+              >
+                {title}
+              </a>
             </Link>
           ) : (
-            <Link href={`/${to}`}>
-              <a className={style}>{title}</a>
+            <Link href={href}>
+              <a
+                className={`${
+                  router.asPath === href ? 'text-gray-700' : 'text-gray-500'
+                } hover:text-gray-500 text-lg block pt-2 pb-1 font-semibold`}
+              >
+                {title}
+              </a>
             </Link>
           )}
         </button>
