@@ -1,13 +1,6 @@
 export default function YoutubeThumbnail() {
   return (
     <div className='w-[640px] h-[360px] bg-white relative overflow-hidden'>
-      {/* Top left circle */}
-      {/* <div
-        aria-hidden='true'
-        className='w-[200px] h-[200px] bg-purple-200 rounded-full absolute -top-16 -left-16'
-      >
-        <PlayButton />
-      </div> */}
       <div>
         <Play />
       </div>
