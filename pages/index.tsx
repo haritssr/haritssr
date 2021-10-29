@@ -26,19 +26,6 @@ export default function Home() {
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={image} />
       </Head>
-      {/* 
-      <section className='sticky top-0 z-50 '>
-        <nav className='bg-white border-b border-gray-300 bg-opacity-90 backdrop-blur-sm'>
-          <div className='text-center max-w-5xl px-5 py-2.5 mx-auto xl:px-0'>
-            <Link href='/'>
-              <a className='space-x-1 text-base font-semibold duration-200'>
-                <span className='text-gray-500 font-inter'>{`Hi, I'm`}</span>
-                <span className='text-gray-600 font-mw'>Harits Syah</span>
-              </a>
-            </Link>
-          </div>
-        </nav>
-      </section> */}
 
       <main className='w-full max-w-5xl min-h-screen px-5 pb-5 mx-auto sm:pb-0 xl:px-0 font-inter'>
         <div className='flex flex-col items-center justify-center h-screen -mt-20 space-y-7 '>

@@ -20,7 +20,6 @@ export default function Work() {
       </SubTitle>
       <div className='grid grid-cols-1 gap-10 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
         <WorkWrapper topic='Human Interface'>
-          <InternalLink name='Framer Motion' href='/work/framer-motion' />
           <InternalLink name='Framer Motion 5' href='/work/framer-motion-5' />
           <InternalLink name='HeadlessUI' href='/work/headlessui' />
           <InternalLink name='Tailwindcss' href='/work/tailwindcss' />
