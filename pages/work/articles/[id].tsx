@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 export default function Halaman({ posts }) {
   return (
     <Layout browserTitle={posts.title} description={posts.title}>
-      <TitleBack back='all article' name={posts.title} />
+      <TitleBack href='All article' name={posts.title} />
       <div className='text-blue-500 '>Article {posts.id}</div>
       <div>{posts.body}</div>
     </Layout>

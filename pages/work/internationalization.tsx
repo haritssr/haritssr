@@ -9,7 +9,7 @@ export default function Interntionalization() {
 
   return (
     <Layout browserTitle='Internationalization' description='Internationalization'>
-      <TitleBack name='Internationalization' back='work' />
+      <TitleBack href='Work' name='Internationalization'  />
       <div className='mb-10'>
         <Topic name='router object' />
         <div>Route saat ini : {router.asPath}</div>

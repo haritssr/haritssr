@@ -13,7 +13,7 @@ export default function ScriptPage() {
   return (
     <Layout browserTitle='Script' description='Script'>
       <div className='h-screen'>
-        <TitleBack back='work' name='Script' />
+        <TitleBack href='Work' name='Script' />
 
         <div className='h-screen bg-blue-500'></div>
         <button id='tombol' className='px-4 py-2 bg-red-500 border border-gray-400 rounded-full'>

@@ -7,7 +7,7 @@ export default function DynamicPage({ person }) {
   // console.log(id);
   return (
     <Layout browserTitle='Student Details' description='Student Details'>
-      <TitleBack back='all student' name='Student Details' />
+      <TitleBack href='All student' name='Student Details' />
       <Topic name='Identity' />
       <div className='text-emerald-500'>
         <span className='font-semibold text-gray-700'>Name :</span> {person.name}

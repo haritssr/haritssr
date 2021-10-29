@@ -45,7 +45,7 @@ export default function NumberGame() {
   if (state.score === 10) {
     return (
       <Layout browserTitle='Number Game' description='Number Game'>
-        <TitleBack back="showcase" name='Number Game' />
+        <TitleBack href='Work' name='Number Game' />
         <div className='pt-24 text-4xl font-bold text-center text-green-500'>You win!</div>
         {/* kasih kaya vercel kalo selesai bikin domain baru */}
 
@@ -63,7 +63,7 @@ export default function NumberGame() {
 
   return (
     <Layout browserTitle='Number Game' description='Number Game'>
-      <TitleBack back="work" name='Number Game' />
+      <TitleBack href='Work' name='Number Game' />
       <div className='flex flex-col items-center justify-center max-w-xl pt-24 mx-auto'>
         <div className={state.incorrect ? 'incorrect' : ''}>
           {state.num1}+{state.num2}

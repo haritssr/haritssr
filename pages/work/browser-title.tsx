@@ -12,7 +12,7 @@ export default function BrowserTitle() {
 
   return (
     <Layout browserTitle='Browser Title' description='Browser Title'>
-      <TitleBack back='showcase' name='Browser Title' />
+      <TitleBack href='Work' name='Browser Title' />
       <div className='flex flex-col items-center justify-center min-h-screen space-y-5'>
         <p>You clicked {count} times</p>
         <button onClick={() => setCount(count + 2)} className={style}>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Articles({ posts }) {
   return (
     <Layout browserTitle='Articles' description='Articles'>
-      <TitleBack back='work' name='Articles' />
+      <TitleBack href='Work' name='Articles' />
 
       <div>
         <b>Notes :</b>

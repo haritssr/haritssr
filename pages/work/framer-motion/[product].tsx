@@ -10,7 +10,7 @@ export default function Product() {
   } = useRouter();
   return (
     <Layout browserTitle={product} description={product}>
-      <TitleBack back='Framer Motion' name={product} />
+      <TitleBack href='Framer Motion' name={product} />
       <div className='flex gap-5'>
         <motion.div layoutId={`${product}`} className=' drop-shadow-md'>
           <Image

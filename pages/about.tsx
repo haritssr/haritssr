@@ -11,7 +11,7 @@ import InspirationDesignSources from '@/components/about/InspirationDesignSource
 export default function About() {
   return (
     <Layout browserTitle='About' description='About'>
-      <TitleBackHome name='About Me' />
+      <TitleBackHome title='About Me' />
       <div className='grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-2'>
         <Hello />
         <WebTech />

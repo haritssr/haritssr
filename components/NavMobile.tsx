@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 export default function NavMobile() {
   return (
-    <nav className='flex items-center justify-between w-full h-auto bg-white border-b border-gray-200 shadow-sm md:hidden bg-opacity-90 backdrop-blur-sm'>
+    <nav className='flex items-center justify-between w-full h-auto bg-white border-b border-gray-300 md:hidden bg-opacity-90 backdrop-blur-sm'>
       <Link href='/'>
         <a className='pl-5 space-x-1 text-lg font-semibold duration-200 hover:underline font-mw'>
           <span className='text-gray-700'>Harits</span>
@@ -19,8 +19,8 @@ export default function NavMobile() {
               {open ? <X /> : <TwoLines />}
             </Menu.Button>
 
-            <Menu.Items className='absolute top-0 right-0  w-full h-screen mt-[43px] overflow-y-auto  bg-white'>
-              <section className='flex flex-col px-8 py-5 space-y-2 border-t border-gray-400 divide-y divide-gray-400 '>
+            <Menu.Items className='absolute top-0 right-0 items-center  w-full h-screen mt-[43px] overflow-y-auto  bg-white justify-center flex'>
+              <section className='flex flex-col px-8 py-5 space-y-2 border-t border-b border-gray-400'>
                 <Navigation href='/about' title='About' />
                 <Navigation href='/work' title='Work' />
               </section>
@@ -39,13 +39,13 @@ const Navigation = ({ href, title }) => {
   return (
     <Menu.Item>
       {({ active }) => (
-        <button className='w-full text-left'>
+        <button className='w-full text-center'>
           {active ? (
             <Link href={href}>
               <a
                 className={`${
                   router.asPath === href ? 'text-gray-700' : 'text-gray-500'
-                } hover:text-gray-500 text-lg block pt-2 pb-1 font-semibold`}
+                } hover:text-gray-500 text-2xl block pt-2 pb-1 font-medium`}
               >
                 {title}
               </a>
@@ -55,7 +55,7 @@ const Navigation = ({ href, title }) => {
               <a
                 className={`${
                   router.asPath === href ? 'text-gray-700' : 'text-gray-500'
-                } hover:text-gray-500 text-lg block pt-2 pb-1 font-semibold`}
+                } hover:text-gray-500 text-2xl block pt-2 pb-1 font-medium`}
               >
                 {title}
               </a>

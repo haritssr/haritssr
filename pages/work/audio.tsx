@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 export default function Audio() {
   return (
     <Layout browserTitle='Audio' description='Audio'>
-      <TitleBack back='showcase' name='Audio' />
+      <TitleBack href='Work' name='Audio' />
 
       <div className='space-y-10'>
         <Music src='/yoasobi-loveletter.mp3' author='Yoasobi' title='Love Letter' />

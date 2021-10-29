@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 export default function Button() {
   return (
     <Layout browserTitle='Button' description='Button'>
-      <TitleBack back='work' name='Button' />
+      <TitleBack href='Work' name='Button' />
       <div className='grid grid-cols-2 gap-5 sm:grid-cols 3 md:grid-cols-4 lg:grid-cols-6'>
         <button className='px-4 py-1.5 text-white border rounded bg-harislab hover:text-harislab hover:bg-white border-harislab duration-100 active:ring-2 active:ring-harislab'>
           Button

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export function TitleBack({ name, back }) {
+export function TitleBack({ name, href }) {
   return (
     <div className='pt-10 pb-8'>
       <button
@@ -8,7 +8,7 @@ export function TitleBack({ name, back }) {
         onClick={() => history.back()}
       >
         <LeftArrow />
-        <div className='text-gray-500 group-hover:text-blue-600 '>{back}</div>
+        <div className='text-gray-500 group-hover:text-blue-600 '>{href}</div>
       </button>
       <h1 className='z-40 block w-full h-auto mx-auto text-3xl font-bold text-left text-gray-800 sm:text-4xl'>
         {name}
@@ -17,7 +17,7 @@ export function TitleBack({ name, back }) {
   );
 }
 
-export function TitleBackHome({ name }) {
+export function TitleBackHome({ title }) {
   return (
     <div className='pt-10 pb-8'>
       <Link href='/'>
@@ -29,7 +29,7 @@ export function TitleBackHome({ name }) {
         </a>
       </Link>
       <h1 className='z-40 block w-full h-auto mx-auto text-3xl font-bold text-left text-gray-800 sm:text-4xl'>
-        {name}
+        {title}
       </h1>
     </div>
   );
@@ -58,7 +58,7 @@ export const SubTopic = ({ children }) => {
 export function InternalLink({ name, href }) {
   return (
     <Link href={href}>
-      <a className='flex items-center space-x-2 text-blue-600 cursor-pointer hover:underline'>
+      <a className='flex items-center space-x-2 text-blue-600 cursor-pointer hover:underline active:text-purple-600'>
         {name}
         <RightArrow />
       </a>

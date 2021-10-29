@@ -14,7 +14,7 @@ export default function UseEffect() {
   };
   return (
     <Layout browserTitle='UseEffect' description='UseEffect'>
-      <TitleBack back='work' name='UseEffect' />
+      <TitleBack href='Work' name='UseEffect' />
     </Layout>
   );
 }

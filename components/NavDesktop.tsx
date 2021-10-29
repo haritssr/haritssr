@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 export default function NavDesktop() {
   return (
-    <nav className='hidden bg-white border-b border-gray-200 shadow-sm md:block bg-opacity-90 backdrop-blur-sm'>
+    <nav className='hidden bg-white border-b border-gray-300 md:block bg-opacity-90 backdrop-blur-sm'>
       <div className='flex flex-row justify-between max-w-5xl px-5 py-2.5 mx-auto xl:px-0'>
         <Link href='/'>
           <a className='space-x-1 text-lg font-semibold duration-200 font-mw'>

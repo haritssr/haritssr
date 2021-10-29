@@ -4,7 +4,7 @@ import { InternalLink, Title, TitleBack, Topic } from '@/components/DesignSystem
 export default function Students({ students }) {
   return (
     <Layout browserTitle='All Student' description='All Student'>
-      <TitleBack back='work' name='Students' />
+      <TitleBack href='Work' name='Students' />
       <Topic name='All students' />
       <div className='space-y-3 '>
         {students.map(a => (

@@ -8,7 +8,7 @@ export default function DateUtilities() {
   console.log(date);
   return (
     <Layout browserTitle='Date' description='Gradient'>
-      <TitleBack back="work" name='Date' />
+      <TitleBack href="Work" name='Date' />
       <div>
         <span className='font-semibold'>{dateString}</span> adalah tanggal dan waktu sekarang.
       </div>

@@ -13,7 +13,7 @@ export default function HeadlessUI() {
   const box = 'h-auto p-4 rounded-xl bg-white shadow-sm';
   return (
     <Layout browserTitle='HeadlessUI' description='HeadlessUI'>
-      <TitleBack back='work' name='HeadlessUI' />
+      <TitleBack href='Work' name='HeadlessUI' />
 
       <div className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
         {/* <div className={box}>

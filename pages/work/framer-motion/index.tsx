@@ -1,15 +1,16 @@
 import Layout from '@/components/Layout';
-import { Title, TitleBack, Topic } from '@/components/DesignSystem';
-import Gradient from '@/components/work/framer-motion/gradient';
-import Box from '@/components/work/framer-motion/box';
-import Card from '@/components/work/framer-motion/card';
+import Gradient from '@/components/work/framer-motion/Gradient';
+import Box from '@/components/work/framer-motion/Box';
+import Card from '@/components/work/framer-motion/Card';
+import MyShop from '@/components/work/framer-motion/MyShop';
+
+import { TitleBack, Topic } from '@/components/DesignSystem';
 import { motion } from 'framer-motion';
-import MyShop from '@/components/work/framer-motion/myshop';
 
 export default function FramerMotion() {
   return (
     <Layout browserTitle='Framer Motion' description='Framer Motion'>
-      <TitleBack back='Work' name='Framer Motion' />
+      <TitleBack href='Work' name='Framer Motion' />
 
       <div>
         <Topic name='My Shop' />

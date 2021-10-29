@@ -4,7 +4,7 @@ import { Title, TitleBack } from '@/components/DesignSystem';
 export default function Video() {
   return (
     <Layout browserTitle='Video' description='Video'>
-      <TitleBack back='work' name='Video' />
+      <TitleBack href='Work' name='Video' />
 
       <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 '>
         <VideoPlayer src='/rgb.mp4' author='Yoasobi' title='Love Letter' />

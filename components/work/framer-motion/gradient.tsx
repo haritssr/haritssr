@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+
 export default function Gradient() {
   return (
     <section className='grid grid-cols-3 gap-5 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-9'>

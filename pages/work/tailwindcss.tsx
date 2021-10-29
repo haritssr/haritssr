@@ -1,16 +1,16 @@
 import { TitleBack, Topic } from '@/components/DesignSystem';
 import Layout from '@/components/Layout';
-import Blurry from '@/components/work/tailwindcss/blurry';
-import FloatingLabels from '@/components/work/tailwindcss/floatingLabels';
-import Glowing from '@/components/work/tailwindcss/glowing';
-import Grid from '@/components/work/tailwindcss/grid';
+import Blurry from '@/components/work/tailwindcss/Blurry';
+import FloatingLabels from '@/components/work/tailwindcss/FloatingLabels';
+import Glowing from '@/components/work/tailwindcss/Glowing';
+import Grid from '@/components/work/tailwindcss/Grid';
 import IOS15clone from '@/components/work/tailwindcss/IOS15clone';
-import YoutubeThumbnail from '@/components/work/tailwindcss/youtubeThumbnail';
+import YoutubeThumbnail from '@/components/work/tailwindcss/YoutubeThumbnail';
 
 export default function Tailwindcss() {
   return (
     <Layout browserTitle='Tailwindcss' description='Tailwindcss'>
-      <TitleBack back='work' name='Tailwindcss' />
+      <TitleBack href='Work' name='Tailwindcss' />
 
       <div className='space-y-32'>
         <div>
