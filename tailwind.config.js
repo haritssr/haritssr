@@ -5,8 +5,12 @@ module.exports = {
   mode: 'jit',
   purge: [
     './pages/**/*.tsx',
-    './components/**/*.tsx',
+    './pages/*.tsx',
+    './pages/**/*.tsx',
     './components/*.tsx',
+    './components/**/*.tsx',
+    './components/**/**/*.tsx',
+    './components/**/**/**/*.tsx',
     './components/List/*.tsx',
   ],
   darkMode: false, // or 'media' or 'class'
