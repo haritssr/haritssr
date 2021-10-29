@@ -9,7 +9,7 @@ export default function Home() {
   const type = 'website';
   const description = 'Harits Syah - Web Developer & Designer';
   return (
-    <div className='bg-[#f2f1f7]'>
+    <div className='bg-[#f2f1f7] mt-20'>
       <Head>
         <title>{description}</title>
         <link rel='icon' href='/harislab_ico.ico' />
@@ -26,7 +26,7 @@ export default function Home() {
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={image} />
       </Head>
-
+      {/* 
       <section className='sticky top-0 z-50 '>
         <nav className='bg-white border-b border-gray-300 bg-opacity-90 backdrop-blur-sm'>
           <div className='text-center max-w-5xl px-5 py-2.5 mx-auto xl:px-0'>
@@ -38,17 +38,16 @@ export default function Home() {
             </Link>
           </div>
         </nav>
-        {/* <NavMobile /> */}
-      </section>
+      </section> */}
 
       <main className='w-full max-w-5xl min-h-screen px-5 pb-5 mx-auto sm:pb-0 xl:px-0 font-inter'>
         <div className='flex flex-col items-center justify-center h-screen -mt-20 space-y-7 '>
-          <div className='flex flex-col text-5xl font-bold text-center text-gray-700 lg:flex-row sm:text-7xl'>
-            <div>Welcome to&nbsp;</div>
-            <div>the world of</div>
+          <div className='flex flex-col text-5xl font-bold text-center text-gray-700 md:flex-row sm:text-6xl lg:text-7xl'>
+            <div>Hi,&nbsp;</div>
+            <div>{`I'm Harits Syah`}</div>
           </div>
           <div className='text-xl text-center text-gray-600 sm:text-3xl'>
-            Web Developer & Web Designer
+            Welcome to my work of Web Design & Web Development
           </div>
           <div className='flex items-center justify-center mx-auto space-x-5 lg:space-x-8 xs:flex-row'>
             <Link href='/work'>
@@ -105,7 +104,7 @@ const RightArrowAbout = () => {
   );
 };
 
-const DesktopLink = ({ href, title }) => {
+const DesktopLink = ({ href, title }: { href: string; title: string }) => {
   const router = useRouter();
 
   return (
