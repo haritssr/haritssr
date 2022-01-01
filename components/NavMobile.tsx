@@ -22,6 +22,7 @@ export default function NavMobile() {
             <Menu.Items className='absolute top-0 right-0 items-center  w-full h-screen mt-[43px] overflow-y-auto  bg-white justify-center flex'>
               <section className='flex flex-col px-8 py-5 space-y-2 border-t border-b border-gray-400'>
                 <Navigation href='/about' title='About' />
+                <Navigation href='/blog' title='Blog' />
                 <Navigation href='/work' title='Work' />
               </section>
             </Menu.Items>
@@ -32,7 +33,7 @@ export default function NavMobile() {
   );
 }
 
-//refactor this fucking a lot of code
+//refactor this fucking a lot of unneccesary code
 const Navigation = ({ href, title }) => {
   const router = useRouter();
 

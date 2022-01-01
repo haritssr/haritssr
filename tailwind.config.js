@@ -1,9 +1,9 @@
 // const { urlObjectKeys } = require('next/dist/next-server/lib/utils')
-const colors = require('tailwindcss/colors');
+// const colors = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
-  purge: [
+  content: [
     './pages/**/*.tsx',
     './pages/*.tsx',
     './pages/**/*.tsx',
@@ -13,7 +13,7 @@ module.exports = {
     './components/**/**/**/*.tsx',
     './components/List/*.tsx',
   ],
-  darkMode: false, // or 'media' or 'class'
+  // darkMode: false, // or 'media' or 'class'
   theme: {
     fill: theme => ({
       blue: theme('colors.blue.400'),
@@ -35,30 +35,11 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
-    colors: {
-      harislab: '#007AFF',
-      black: '#262626',
-      white: '#FFFFFF',
-      gray: colors.gray,
-      red: colors.red,
-      orange: colors.orange,
-      lime: colors.lime,
-      rose: colors.rose,
-      yellow: colors.yellow,
-      amber: colors.amber,
-      green: colors.green,
-      emerald: colors.emerald,
-      teal: colors.teal,
-      sky: colors.sky,
-      cyan: colors.cyan,
-      blue: colors.blue,
-      pink: colors.pink,
-      purple: colors.purple,
-      indigo: colors.indigo,
-      fuschsia: colors.fuchsia,
-      violet: colors.violet,
-    },
+
     extend: {
+      colors: {
+        harislab: '#007AFF',
+      },
       strokeWidth: {
         1.5: '1.5',
         2: '2',
@@ -129,5 +110,11 @@ module.exports = {
       fill: ['hover', 'focus'],
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('tailwindcss-text-indent')()],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('tailwindcss-radix')({
+      variantPrefix: 'rdx',
+    }),
+    require('tailwindcss-text-indent')(),
+  ],
 };

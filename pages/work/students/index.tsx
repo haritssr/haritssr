@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import { InternalLink, Title, TitleBack, Topic } from '@/components/DesignSystem';
+import { InternalLink, TitleBack, Topic } from '@/components/DesignSystem';
 
 export default function Students({ students }) {
   return (

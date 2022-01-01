@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import NavDesktop from '@/components/NavDesktop';
-import NavMobile from '@/components/NavMobile';
-import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function Home() {
   const image = 'https://harislab.com/public/HarisLab.png';
   const type = 'website';
-  const description = 'Harits Syah - Web Developer & Designer';
+  const description = 'Harits Syah - Web & Design';
+
   return (
-    <div className='bg-[#f2f1f7] mt-20'>
+    <div className='mt-20 bg-[#f2f1f7]'>
       <Head>
         <title>{description}</title>
         <link rel='icon' href='/harislab_ico.ico' />
@@ -28,37 +27,47 @@ export default function Home() {
       </Head>
 
       <main className='w-full max-w-5xl min-h-screen px-5 pb-5 mx-auto sm:pb-0 xl:px-0 font-inter'>
-        <div className='flex flex-col items-center justify-center h-screen -mt-20 space-y-7 '>
-          <div className='flex flex-col text-5xl font-bold text-center text-gray-700 md:flex-row sm:text-6xl lg:text-7xl'>
-            <div>Hi,&nbsp;</div>
-            <div>{`I'm Harits Syah`}</div>
+        <div className='flex flex-col items-center justify-center h-screen -mt-20 space-y-5 '>
+          <Image
+            src='/me.jpg'
+            height='150'
+            width='150'
+            className='rounded-full '
+            alt='Harits Syah'
+            blurDataURL='/me.jpg'
+            placeholder='blur'
+          />
+
+          <div className='text-4xl font-bold text-center text-gray-800 '>
+            <div>Harits Syah</div>
           </div>
-          <div className='text-xl text-center text-gray-600 sm:text-3xl'>
-            Welcome to my work of Web Design & Web Development
+          <div className='w-4/5 text-xl text-center text-gray-500 sm:text-2xl xs:w-full'>
+            Designing web with Figma & Developing it with Next.js
           </div>
-          <div className='flex items-center justify-center mx-auto space-x-5 lg:space-x-8 xs:flex-row'>
+          <div className='flex items-center justify-center mx-auto space-x-5 xs:flex-row'>
             <Link href='/work'>
-              <a className='flex flex-row items-center py-2 pl-4 pr-3 space-x-2 font-medium text-gray-100 duration-300 bg-blue-500 rounded-full shadow active:ring-2 active:ring-blue-400 hover:bg-blue-600 hover:shadow-none'>
-                My Work
+              <a className='flex flex-row items-center py-2 pl-4 pr-3 space-x-1 font-medium text-gray-100 duration-100 bg-blue-600 rounded-full shadow hover:bg-blue-700 hover:shadow-none '>
+                <p>My Work</p>
                 <RightArrow />
               </a>
             </Link>
             <Link href='/about'>
-              <a className='flex flex-row items-center py-2 pl-4 pr-3 space-x-2 font-medium text-blue-500 duration-300 bg-white border border-gray-300 rounded-full shadow active:ring-2 active:ring-blue-400 hover:bg-gray-50 hover:shadow-none'>
-                About Me
+              <a className='flex flex-row items-center py-2 pl-4 pr-3 space-x-1 font-medium text-blue-500 duration-100 bg-white border border-gray-200 rounded-full shadow hover:border-gray-400 active:ring-2 active:ring-blue-400 hover:bg-gray-50 hover:shadow-none '>
+                <p>About Me</p>
                 <RightArrowAbout />
               </a>
             </Link>
           </div>
         </div>
+
+        <footer className='pb-5 mx-auto space-y-3 text-center xl:px-0'>
+          <Link href='/about'>
+            <a className='text-gray-500 duration-100 hover:text-gray-700 '>
+              Harits Syah &copy; {new Date().getFullYear()}
+            </a>
+          </Link>
+        </footer>
       </main>
-      <footer className='max-w-5xl px-5 pt-10 pb-5 mx-auto mt-20 text-center xl:px-0'>
-        <Link href='/'>
-          <a className='text-gray-700 duration-200 hover:text-emerald-500 '>
-            Harits Syah &copy; {new Date().getFullYear()}
-          </a>
-        </Link>
-      </footer>
     </div>
   );
 }
@@ -88,21 +97,5 @@ const RightArrowAbout = () => {
     >
       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
     </svg>
-  );
-};
-
-const DesktopLink = ({ href, title }: { href: string; title: string }) => {
-  const router = useRouter();
-
-  return (
-    <Link href={href}>
-      <a
-        className={`${
-          router.asPath === href ? 'text-gray-700 font-semibold' : 'text-gray-500'
-        } hover:text-gray-800`}
-      >
-        {title}
-      </a>
-    </Link>
   );
 };

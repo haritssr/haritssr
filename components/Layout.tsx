@@ -2,12 +2,13 @@ import Head from 'next/head';
 import NavDesktop from './NavDesktop';
 import NavMobile from './NavMobile';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import Footer from './Footer';
 
 export default function Layout({ children, browserTitle, description }) {
   const router = useRouter();
   const image = 'https://harislab.com/public/HarisLab.png';
   const type = 'website';
+  // bg-[#f2f1f7]
   return (
     <div className='bg-[#f2f1f7]'>
       <Head>
@@ -36,17 +37,11 @@ export default function Layout({ children, browserTitle, description }) {
         <NavMobile />
       </section>
 
-      <main className='w-full max-w-5xl min-h-screen px-8 pb-5 mx-auto sm:pb-0 xl:px-0 font-inter'>
+      <main className='w-full max-w-4xl min-h-screen px-8 pb-5 mx-auto sm:pb-0 xl:px-0 font-inter'>
         {children}
       </main>
 
-      <footer className='max-w-5xl px-5 pt-10 pb-5 mx-auto mt-20 text-center xl:px-0'>
-        <Link href='/'>
-          <a className='text-gray-700 duration-200 hover:text-emerald-500 '>
-            Harits Syah &copy; {new Date().getFullYear()}
-          </a>
-        </Link>
-      </footer>
+      <Footer />
     </div>
   );
 }

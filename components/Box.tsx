@@ -4,11 +4,11 @@ export const Box = ({ href, children }) => {
       href={href}
       target='_blank'
       rel='noreferrer'
-      className='flex items-center justify-between w-auto px-3 py-2.5 sm:py-2 space-x-2 duration-100 ease-out bg-white  rounded-lg shadow hover:shadow-lg active:ring-2 active:ring-blue-500'
+      className='flex items-center justify-between w-auto px-3 py-2 space-x-2 duration-100 ease-out bg-white rounded-lg shadow hover:shadow-lg active:ring-2 active:ring-blue-500 group'
     >
       {children}
       <svg
-        className='w-6 h-6 text-gray-400 pt-0.5'
+        className='w-6 h-6 text-gray-400 group-hover:text-gray-600 pt-0.5'
         viewBox='0 0 24 24'
         width='24'
         height='24'

@@ -39,7 +39,7 @@
     "**/**/*.tsx",
     "tailwind.config.js",
     "pages/showcase/framer-motion"
-  ],
+, "pages/work/framer-motion/api"  ],
   "exclude": [
     "node_modules"
   ]

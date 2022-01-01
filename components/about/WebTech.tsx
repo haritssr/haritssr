@@ -1,5 +1,6 @@
 import { SubTopic, Topic } from '../DesignSystem';
-import { Box } from '@/components/Box';
+import TechLink from '../TechLink';
+
 import {
   TypeScriptLogo,
   TailwindCSSLogo,
@@ -14,16 +15,14 @@ import {
 export default function WebTech() {
   return (
     <div>
-      <Topic name='Web Technology' />
-      <SubTopic>
-        Web technology that I feel eloquent enough to make an aesthetic integrity websites
-      </SubTopic>
+      <Topic name='Web Stack' />
+      <SubTopic>Stack to make an aesthetic integrity websites</SubTopic>
       <div className='grid grid-cols-1 gap-3 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-2'>
         <TechLink name='TypeScript' href='https://www.typescriptlang.org/'>
           <TypeScriptLogo />
         </TechLink>
 
-        <TechLink name='React JS' href='https://beta.reactjs.org/'>
+        <TechLink name='React' href='https://beta.reactjs.org/'>
           <ReactLogo />
         </TechLink>
 
@@ -54,14 +53,3 @@ export default function WebTech() {
     </div>
   );
 }
-
-const TechLink = ({ children, name, href }) => {
-  return (
-    <Box href={href}>
-      <div className='flex items-center space-x-3'>
-        {children}
-        <div className='font-medium text-gray-700'>{name}</div>
-      </div>
-    </Box>
-  );
-};

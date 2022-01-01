@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Title, TitleBack } from '@/components/DesignSystem';
-import Layout from '@/components/Layout';
 import Link from 'next/link';
+import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
 
 export default function NumberGame() {
   function inputKeyPress(event) {
@@ -42,28 +41,28 @@ export default function NumberGame() {
     incorrect: false,
   });
 
-  if (state.score === 10) {
+  if (state.score === 2) {
     return (
-      <Layout browserTitle='Number Game' description='Number Game'>
-        <TitleBack href='Work' name='Number Game' />
+      <LayoutSubWorkToTopic title='Number Game' href='/work' hrefName='Work'>
         <div className='pt-24 text-4xl font-bold text-center text-green-500'>You win!</div>
         {/* kasih kaya vercel kalo selesai bikin domain baru */}
 
         {/* halaman tidak reload */}
-        <Link href='https://www.haritssr.vercel.app/showcase/number-game'>
+        {/* href harus dikasih ke domain yang on -> haritssr.com/work/number-game */}
+        {/* dan halaman akan reload */}
+        <Link href='/work/number-game'>
           <a className='flex justify-center mt-5'>
             <div className='inline-block px-4 py-2 mx-auto text-center border rounded-md text-harislab border-harislab hover:bg-blue-50'>
               Play Again
             </div>
           </a>
         </Link>
-      </Layout>
+      </LayoutSubWorkToTopic>
     );
   }
 
   return (
-    <Layout browserTitle='Number Game' description='Number Game'>
-      <TitleBack href='Work' name='Number Game' />
+    <LayoutSubWorkToTopic title='Number Game' href='/work' hrefName='Work'>
       <div className='flex flex-col items-center justify-center max-w-xl pt-24 mx-auto'>
         <div className={state.incorrect ? 'incorrect' : ''}>
           {state.num1}+{state.num2}
@@ -78,6 +77,6 @@ export default function NumberGame() {
         />
         <div>Score : {state.score}</div>
       </div>
-    </Layout>
+    </LayoutSubWorkToTopic>
   );
 }
