@@ -26,23 +26,23 @@ export default function Radix() {
       </SubTitle>
 
       <main className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
-        <BlueBox>
+        <Box>
           <AccordionDemo title='Accordion'>
             A vertically stacked set of interactive headings that each reveal an associated section
             of content.
           </AccordionDemo>
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <AlertDialogDemo
             buttonTitle='Alert Dialog'
             actionDesc='Yes, delete'
             contentDesc='A dialog that displays a message and an OK button.'
             contentTitle='Are you sure?'
           />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <AspectRatioDemo>
             <Image
               src='https://images.unsplash.com/photo-1535025183041-0991a977e25b?w=300&dpr=2&q=80'
@@ -50,42 +50,42 @@ export default function Radix() {
               layout='fill'
             />
           </AspectRatioDemo>
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <CheckboxDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <CollapsibleDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <ContextMenuDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <DialogDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <DropdownMenuDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <HoverCardDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           <LabelDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           {/* Lol, opened only on the right direction */}
           <PopoverDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           {/* 
           TYPESCRIPT ALERT
           const setProgress: (value: React.SetStateAction<number>) => void
@@ -95,23 +95,23 @@ export default function Radix() {
             index.d.ts(901, 27): The expected type comes from the return type of this signature. 
           */}
           <ProgressDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           {/* still don't understand the use of lots of API */}
           <ScrollAreaDemo />
-        </BlueBox>
+        </Box>
 
-        <BlueBox>
+        <Box>
           {/* Error, i'm tired -_- */}
           <RadioGroupDemo />
-        </BlueBox>
+        </Box>
       </main>
     </LayoutSubWorkToTopic>
   );
 }
 
-const BlueBox = ({ children }) => (
+const Box = ({ children }) => (
   <div className='flex items-center justify-center h-auto p-10 bg-blue-200 rounded-md'>
     {children}
   </div>

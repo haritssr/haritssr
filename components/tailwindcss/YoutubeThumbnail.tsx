@@ -1,29 +1,29 @@
-import { SubTitle } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import { SubTitle, SubTopic, Topic } from '@/components/DesignSystem';
 
 export default function YoutubeThumbnail() {
   return (
-    <LayoutSubWorkToTopic
-      title='Youtube Thumbnail'
-      href='/work/tailwindcss'
-      hrefName='Tailwind CSS'
-    >
-      <SubTitle>YouTube thumbnail</SubTitle>
-      <div className='w-[640px] h-[360px] bg-white relative overflow-hidden'>
-        <div>
-          <Play />
-        </div>
-        <div aria-hidden='true' className='w-[512px]h-[512px] bg-purple-400 absolute'></div>
+    <div>
+      <Topic name='Youtube Thumbnail' />
+      <SubTopic>Youtube Thumbnail example</SubTopic>
+      <div className='p-3 border border-zinc-300'>
+        <div className='w-[640px] h-[360px] bg-white relative overflow-hidden'>
+          <div>
+            <Play />
+          </div>
+          <div aria-hidden='true' className='w-[512px]h-[512px] bg-purple-400 absolute'></div>
 
-        <div className='relative flex flex-col justify-end w-2/3 h-full p-8 space-y-4'>
-          <p className='font-semibold text-purple-600 uppercase text-cs'>How we&apos;d build it</p>
-          <h1 className='text-4xl font-semibold text-gray 900'>
-            YoutubeThumbail with Tailwind CSS
-          </h1>
-          <TailwindSVG />
+          <div className='relative flex flex-col justify-end w-2/3 h-full p-8 space-y-4'>
+            <p className='font-semibold text-purple-600 uppercase text-cs'>
+              How we&apos;d build it
+            </p>
+            <h1 className='text-4xl font-semibold text-gray 900'>
+              YoutubeThumbail with Tailwind CSS
+            </h1>
+            <TailwindSVG />
+          </div>
         </div>
       </div>
-    </LayoutSubWorkToTopic>
+    </div>
   );
 }
 

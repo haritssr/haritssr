@@ -14,7 +14,7 @@ export default function LayoutSubWorkToTopic({ children, title, href, hrefName }
   const image = 'https://harislab.com/public/HarisLab.png';
   //bg-[#f2f1f7]
   return (
-    <div className='bg-[#f2f1f7]'>
+    <div className='bg-white'>
       <Head>
         <title>{title} - Harits Syah</title>
         {/* {router.asPath === '/' ? (

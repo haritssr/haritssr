@@ -1,27 +1,40 @@
-export const Box = ({ href, children }) => {
+export default function Box({
+  href,
+  title,
+  children,
+  name,
+}: {
+  href: string;
+  title: string;
+  children: React.ReactNode;
+  name: string;
+}) {
   return (
     <a
+      title={title}
       href={href}
       target='_blank'
-      rel='noreferrer'
-      className='flex items-center justify-between w-auto px-3 py-2 space-x-2 duration-100 ease-out bg-white rounded-lg shadow hover:shadow-lg active:ring-2 active:ring-blue-500 group'
+      rel='noreferrer noopener'
+      className='flex items-center justify-between w-auto px-4 py-3 space-x-2 duration-100 ease-out border rounded-md bg-zinc-50 border-zinc-300 hover:border-zinc-500 sm:px-3 sm:py-2 active:ring-2 active:ring-blue-500 group hover:bg-zinc-50'
     >
-      {children}
+      <div className='flex items-center space-x-3 overflow-hidden'>
+        {children}
+        <div className='font-medium text-gray-700 truncate group-hover:text-gray-700'>{name}</div>
+      </div>
       <svg
-        className='w-6 h-6 text-gray-400 group-hover:text-gray-600 pt-0.5'
-        viewBox='0 0 24 24'
-        width='24'
-        height='24'
-        stroke='currentColor'
-        strokeWidth='1.5'
-        strokeLinecap='round'
-        strokeLinejoin='round'
+        xmlns='http://www.w3.org/2000/svg'
+        className='w-5 h-5 text-gray-500 group-hover:text-gray-700 pt-0.5'
         fill='none'
-        shapeRendering='geometricPrecision'
+        viewBox='0 0 24 24'
+        stroke='currentColor'
       >
-        <path d='M7 17L17 7' />
-        <path d='M7 7h10v10' />
+        <path
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          strokeWidth={1.5}
+          d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+        />
       </svg>
     </a>
   );
-};
+}

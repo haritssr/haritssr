@@ -4,16 +4,24 @@ import NavMobile from './NavMobile';
 import { useRouter } from 'next/router';
 import Footer from './Footer';
 
-export default function Layout({ children, browserTitle, description }) {
+export default function Layout({
+  children,
+  browserTitle,
+  description,
+}: {
+  children: React.ReactNode;
+  browserTitle: string;
+  description: string;
+}) {
   const router = useRouter();
   const image = 'https://harislab.com/public/HarisLab.png';
   const type = 'website';
   // bg-[#f2f1f7]
   return (
-    <div className='bg-[#f2f1f7]'>
+    <div className='bg-white'>
       <Head>
         {router.asPath === '/' ? (
-          <title>Harits Syah - Web Developer & Designer</title>
+          <title>Harits Syah - Front End Engineer & Web Designer</title>
         ) : (
           <title>{browserTitle} - Harits Syah</title>
         )}{' '}

@@ -14,7 +14,7 @@ export default function HalamanTidakDitemukan() {
             Back to home
           </a>
         </Link>
-        <InternalLink name='Or see my work' href='/work' />
+        <InternalLink name='Or see my work' href='/#work' />
       </div>
     </Layout>
   );

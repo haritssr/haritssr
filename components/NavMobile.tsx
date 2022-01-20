@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 
 export default function NavMobile() {
   return (
-    <nav className='flex items-center justify-between w-full h-auto bg-white border-b border-gray-300 md:hidden bg-opacity-90 backdrop-blur-sm'>
+    <nav className='flex items-center justify-between w-full h-auto bg-white border border-b md:hidden bg-opacity-90 backdrop-blur-sm border-zinc-300'>
       <Link href='/'>
-        <a className='pl-5 space-x-1 text-lg font-semibold duration-200 hover:underline font-mw'>
-          <span className='text-gray-700'>Harits</span>
-          <span className='text-gray-500'>Syah</span>
+        <a className=' pl-5 flex items-center justify-center py-2.5 space-x-1 text-lg duration-200 group font-bold font-mw'>
+          <span className='text-gray-700 group-hover:underline'>Harits</span>
+          <span className='text-gray-500 group-hover:underline'>Syah</span>
         </a>
       </Link>
 
