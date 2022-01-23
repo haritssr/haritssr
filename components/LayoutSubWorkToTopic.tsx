@@ -22,7 +22,7 @@ export default function LayoutSubWorkToTopic({ children, title, href, hrefName }
         ) : (
           <title>{title} - Harits Syah</title>
         )}{' '} */}
-        <link rel='icon' href='/harislab_ico.ico' />
+        <link rel='icon' href='/haritssr-rounded.ico' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={title} />
         <meta property='og:type' content='website' />

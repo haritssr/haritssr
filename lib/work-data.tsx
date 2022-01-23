@@ -1,48 +1,47 @@
 import Image from 'next/image';
 
 export const framerMotionData = [
-  { name: 'Animation', href: '/work/framer-motion/animation' },
-  { name: 'Gestures', href: '/work/framer-motion/gestures' },
-  { name: 'Lazy Motion', href: '/work/framer-motion/lazy-motion' },
-  { name: 'Motion Components', href: '/work/framer-motion/motion-components' },
-  { name: 'Motion Value', href: '/work/framer-motion/motion-value' },
-  { name: 'Transition', href: '/work/framer-motion/transition' },
-  { name: 'Animate Presence', href: '/work/framer-motion/animate-presence' },
-  { name: 'Motion Config', href: '/work/framer-motion/motion-config' },
+  { name: 'Animation', href: '/projects/framer-motion/animation' },
+  { name: 'Gestures', href: '/projects/framer-motion/gestures' },
+  { name: 'Lazy Motion', href: '/projects/framer-motion/lazy-motion' },
+  { name: 'Motion Components', href: '/projects/framer-motion/motion-components' },
+  { name: 'Motion Value', href: '/projects/framer-motion/motion-value' },
+  { name: 'Transition', href: '/projects/framer-motion/transition' },
+  { name: 'Animate Presence', href: '/projects/framer-motion/animate-presence' },
+  { name: 'Motion Config', href: '/projects/framer-motion/motion-config' },
 ];
 
 export const nextjsData = [
-  { name: 'Image Component', href: '/work/nextjs/image-components' },
-  { name: 'Router', href: '/work/nextjs/router' },
-  { name: 'Dynamic Pages', href: '/work/nextjs/dynamic-pages' },
-  { name: 'getStaticProps', href: '/work/nextjs/getStaticProps' },
-  { name: 'getServerSideProps', href: '/work/nextjs/getServerSideProps' },
-  { name: 'Middleware', href: '/work/nextjs/middleware' },
-  { name: 'Script Component', href: '/work/nextjs/script' },
+  { name: 'Image Component', href: '/projects/nextjs/image-components' },
+  { name: 'Router', href: '/projects/nextjs/router' },
+  { name: 'Dynamic Pages', href: '/projects/nextjs/dynamic-pages' },
+  { name: 'getStaticProps', href: '/projects/nextjs/getStaticProps' },
+  { name: 'getServerSideProps', href: '/projects/nextjs/getServerSideProps' },
+  { name: 'Middleware', href: '/projects/nextjs/middleware' },
+  { name: 'Script Component', href: '/projects/nextjs/script' },
 ];
 
 export const reactData = [
-  { name: 'useState', href: '/work/react/useState' },
-  { name: 'useState - form', href: '/work/react/useState-form' },
-  { name: 'useEffect', href: '/work/react/useEffect' },
-  { name: 'useContext', href: '/work/react/useCOntext' },
-  { name: 'useRef', href: '/work/react/useRef' },
-  { name: 'useMemo', href: '/work/react/useMemo' },
-  { name: 'Todo List', href: '/work/react/TodoList' },
-  { name: 'Rock Paper Scissors', href: '/work/react/rock-paper-scissors' },
+  { name: 'useState', href: '/projects/react/useState' },
+  { name: 'useState - form', href: '/projects/react/useState-form' },
+  { name: 'useEffect', href: '/projects/react/useEffect' },
+  { name: 'useContext', href: '/projects/react/useCOntext' },
+  { name: 'useRef', href: '/projects/react/useRef' },
+  { name: 'useMemo', href: '/projects/react/useMemo' },
+  { name: 'Todo List', href: '/projects/react/TodoList' },
+  { name: 'Rock Paper Scissors', href: '/projects/react/rock-paper-scissors' },
 ];
 
 export const othersInternalData = [
-  { name: 'Number Game', href: '/work/others/number-game' },
-  { name: 'SWR', href: '/work/others/swr' },
+  { name: 'Number Game', href: '/projects/others/number-game' },
+  { name: 'SWR', href: '/projects/others/swr' },
 ];
 
 export const othersExternalData = [
   { name: 'NextAuth', href: 'https://www.nextauth-harislab.vercel.app' },
   { name: 'Notion', href: 'https://www.notion-harislab.vercel.app' },
-  { name: 'Cloudinary', href: '/work/others/cloudinary' },
+  { name: 'Cloudinary', href: '/projects/others/cloudinary' },
 ];
-
 
 export const onboardedWebsiteData = [
   {

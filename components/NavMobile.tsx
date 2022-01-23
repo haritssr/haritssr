@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import { Menu } from '@headlessui/react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function NavMobile() {
   return (
     <nav className='flex items-center justify-between w-full h-auto bg-white border border-b md:hidden bg-opacity-90 backdrop-blur-sm border-zinc-300'>
       <Link href='/'>
-        <a className=' pl-5 flex items-center justify-center py-2.5 space-x-1 text-lg duration-200 group font-bold font-mw'>
-          <span className='text-gray-700 group-hover:underline'>Harits</span>
-          <span className='text-gray-500 group-hover:underline'>Syah</span>
+        <a className='flex items-center py-2.5 space-x-1.5 pl-5'>
+          <Image src='/haritssr_logo.svg' height='20' width='20' alt='Harits Syah Logo' />
+          <div className='text-lg font-medium text-gray-800'>Harits Syah</div>
         </a>
       </Link>
 
@@ -19,11 +20,12 @@ export default function NavMobile() {
               {open ? <X /> : <TwoLines />}
             </Menu.Button>
 
-            <Menu.Items className='absolute top-0 right-0 items-center  w-full h-screen mt-[43px] overflow-y-auto  bg-white justify-center flex'>
-              <section className='flex flex-col px-8 py-5 space-y-2 border-t border-b border-gray-400'>
-                <Navigation href='/about' title='About' />
+            <Menu.Items className='absolute top-0 right-0 items-center  w-full h-screen mt-[45px] overflow-y-auto  bg-zinc-50 justify-center flex border-t border-zinc-400'>
+              <section className='flex flex-col px-8 py-5 space-y-2'>
+                <Navigation href='/projects' title='Projects' />
+                <Navigation href='/experiments' title='Experiments' />
                 <Navigation href='/blog' title='Blog' />
-                <Navigation href='/work' title='Work' />
+                <Navigation href='/about' title='About' />
               </section>
             </Menu.Items>
           </>
@@ -45,8 +47,8 @@ const Navigation = ({ href, title }) => {
             <Link href={href}>
               <a
                 className={`${
-                  router.asPath === href ? 'text-gray-700' : 'text-gray-500'
-                } hover:text-gray-500 text-2xl block pt-2 pb-1 font-medium`}
+                  router.asPath === href ? 'text-gray-700' : 'text-gray-400'
+                } hover:text-gray-700 text-2xl block pt-2 pb-1`}
               >
                 {title}
               </a>
@@ -55,8 +57,8 @@ const Navigation = ({ href, title }) => {
             <Link href={href}>
               <a
                 className={`${
-                  router.asPath === href ? 'text-gray-700' : 'text-gray-500'
-                } hover:text-gray-500 text-2xl block pt-2 pb-1 font-medium`}
+                  router.asPath === href ? 'text-gray-700' : 'text-gray-400'
+                } hover:text-gray-700 text-2xl block pt-2 pb-1`}
               >
                 {title}
               </a>

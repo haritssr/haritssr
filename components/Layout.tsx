@@ -21,11 +21,11 @@ export default function Layout({
     <div className='bg-white'>
       <Head>
         {router.asPath === '/' ? (
-          <title>Harits Syah - Front End Engineer & Web Designer</title>
+          <title>Harits Syah</title>
         ) : (
           <title>{browserTitle} - Harits Syah</title>
         )}{' '}
-        <link rel='icon' href='/harislab_ico.ico' />
+        <link rel='icon' href='/haritssr_logo.ico' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={description} />
         <meta property='og:type' content={type} />

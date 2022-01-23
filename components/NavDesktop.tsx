@@ -1,20 +1,22 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function NavDesktop() {
   return (
-    <nav className='hidden border-b bg-opacity-95 md:block backdrop-blur-lg border-zinc-300'>
-      <div className='flex flex-row justify-between max-w-4xl px-5 mx-auto xl:px-0'>
+    <nav className='hidden bg-opacity-95 md:block backdrop-blur-lg'>
+      <div className='flex flex-row justify-between max-w-4xl px-5 pt-2 mx-auto xl:px-0'>
         <Link href='/'>
-          <a className='flex items-center justify-center py-2.5 space-x-1 text-lg duration-200 group font-bold font-mw'>
-            <span className='text-gray-700 group-hover:underline'>Harits</span>
-            <span className='text-gray-500 group-hover:underline'>Syah</span>
+          <a className='flex items-center py-2.5 space-x-1.5 '>
+            <Image src='/haritssr_logo.svg' height='20' width='20' alt='Harits Syah Logo' />
+            <div className='text-lg font-medium text-gray-800'>Harits Syah</div>
           </a>
         </Link>
-        <div className='flex flex-row items-center space-x-2'>
-          <DesktopLink href='/#work' title='Work' />
-          <DesktopLink href='/#blog' title='Blog' />
-          <DesktopLink href='/#about' title='About' />
+        <div className='flex flex-row items-center space-x-10'>
+          <DesktopLink href='/projects' title='Projects' />
+          <DesktopLink href='/experiments' title='Experiments' />
+          <DesktopLink href='/blog' title='Blog' />
+          <DesktopLink href='/about' title='About' />
         </div>
       </div>
     </nav>
@@ -27,8 +29,8 @@ const DesktopLink = ({ href, title }) => {
   return (
     <Link href={href}>
       <a
-        className={`${router.asPath === href ? ' text-gray-800 font-medium' : 'text-gray-500'}
-        px-4 `}
+        className={`${router.asPath === href ? ' text-gray-800' : 'text-gray-400'}
+        hover:text-gray-800`}
       >
         {title}
       </a>

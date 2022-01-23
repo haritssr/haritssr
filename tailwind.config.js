@@ -4,14 +4,12 @@
 module.exports = {
   mode: 'jit',
   content: [
-    './pages/**/*.tsx',
     './pages/*.tsx',
     './pages/**/*.tsx',
     './components/*.tsx',
     './components/**/*.tsx',
     './components/**/**/*.tsx',
     './components/**/**/**/*.tsx',
-    './components/List/*.tsx',
   ],
   // darkMode: false, // or 'media' or 'class'
   theme: {
@@ -105,6 +103,8 @@ module.exports = {
       },
     },
   },
+
+  //this variants can be deleted
   variants: {
     extend: {
       fill: ['hover', 'focus'],

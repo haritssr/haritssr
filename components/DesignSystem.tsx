@@ -24,7 +24,7 @@ export function TitleBackToTopic({ title, href, hrefName }) {
     <div className='pt-8 pb-5 '>
       <Link href={href}>
         <a className='inline-block'>
-          <div className='flex flex-row items-center pl-2 pr-2.5 py-1 justify-center mb-4 group rounded-md bg-zinc-100 border border-zinc-200 hover:bg-zinc-200 hover:border-zinc-300'>
+          <div className='flex flex-row items-center pr-2.5 -ml-5 py-1 justify-center mb-4 group rounded-md '>
             <LeftArrow />
             <div className='text-blue-500 group-hover:text-blue-700'>Back to {hrefName}</div>
           </div>
@@ -38,11 +38,11 @@ export function TitleBackToTopic({ title, href, hrefName }) {
 }
 
 export function SubTitle({ children }) {
-  return <p className='mb-10 -mt-3 text-lg text-gray-600'>{children}</p>;
+  return <p className='mb-10 text-lg text-gray-500'>{children}</p>;
 }
 
 export const Topic = ({ name }) => {
-  return <h2 className='mb-2 text-xl font-semibold text-gray-700 '>{name}</h2>;
+  return <h2 className='text-xl font-semibold text-gray-700 '>{name}</h2>;
 };
 
 export const TopicWork = ({ name, href }) => {
@@ -56,7 +56,7 @@ export const TopicWork = ({ name, href }) => {
 };
 
 export const SubTopic = ({ children }) => {
-  return <p className='mb-4 -mt-1 text-gray-500 '>{children}</p>;
+  return <p className='mb-2 text-gray-400 '>{children}</p>;
 };
 
 export function InternalLink({ name, href }) {
