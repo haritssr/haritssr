@@ -1,12 +1,12 @@
 import { SubTitle, Topic } from '@/components/DesignSystem';
 import { useRouter } from 'next/router';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function Router() {
   const router = useRouter();
   const style = 'text-gray-500';
   return (
-    <LayoutSubWorkToTopic title='Router' href='/work/nextjs' hrefName='Next.js'>
+    <LayoutToExperiments title='Router' domain='Next.js'>
       <SubTitle>My implementation of Next.js Router </SubTitle>
       <div className='mb-10'>
         <Topic name='router object' />
@@ -44,6 +44,6 @@ export default function Router() {
       >
         Go to My Work
       </button>
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }

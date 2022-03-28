@@ -1,10 +1,10 @@
 import { SubTitle } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function getStaticProps() {
   return (
-    <LayoutSubWorkToTopic title='getStaticProps' href='/work/nextjs' hrefName='Next.js'>
+    <LayoutToExperiments title='getStaticProps' domain='Next.js'>
       <SubTitle>My implementation of Next.js getStaticProps </SubTitle>
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }

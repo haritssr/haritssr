@@ -1,5 +1,5 @@
 import { SubTitle } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 import { Pie } from '@visx/shape';
 import { Group } from '@visx/group';
@@ -20,7 +20,7 @@ export default function PieChart() {
   console.log(active);
 
   return (
-    <LayoutSubWorkToTopic title='Pie Chart' href='/work/visx' hrefName='VisX'>
+    <LayoutToExperiments title='Pie Chart' domain='VisX'>
       <SubTitle>Hover the ring to see which and how much coin that i have</SubTitle>
       <svg width={width} height={width}>
         <Group top={halfWidth} left={halfWidth}>
@@ -70,6 +70,6 @@ export default function PieChart() {
           )}
         </Group>
       </svg>
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }

@@ -1,5 +1,5 @@
 import { TitleBack } from '@/components/DesignSystem';
-import Layout from '@/components/Layout';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useEffect } from 'react';
 
 export default function ScriptPage() {
@@ -11,7 +11,7 @@ export default function ScriptPage() {
     });
   });
   return (
-    <Layout browserTitle='Script' description='Script'>
+    <LayoutToExperiments title='Script Components' domain='Next.js'>
       <div className='h-screen'>
         <TitleBack href='Work' name='Script' />
 
@@ -20,6 +20,6 @@ export default function ScriptPage() {
           Button
         </button>
       </div>
-    </Layout>
+    </LayoutToExperiments>
   );
 }

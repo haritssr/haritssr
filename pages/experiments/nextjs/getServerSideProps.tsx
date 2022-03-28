@@ -1,10 +1,10 @@
 import { SubTitle } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function getServerSideProps() {
   return (
-    <LayoutSubWorkToTopic title='getServerSideProps' href='/work/nextjs' hrefName='Next.js'>
+    <LayoutToExperiments title='getServerSideProps' domain='Next.js'>
       <SubTitle>My implementation of Next.js getServerSideProps </SubTitle>
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }

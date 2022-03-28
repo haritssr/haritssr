@@ -11,7 +11,7 @@ import { timeFormat } from 'd3-time-format';
 import { TouchEvent, MouseEvent } from 'react';
 
 import { SubTitle } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 const data = appleStock.slice(0, 20);
 const margin = 32;
@@ -55,7 +55,7 @@ export default function BarChart() {
   });
 
   return (
-    <LayoutSubWorkToTopic title='Bar Chart' href='/work/visx' hrefName='VisX'>
+    <LayoutToExperiments title='Bar Chart' domain='VisX'>
       <SubTitle>Bar Chart of Apple Stock</SubTitle>
       <svg ref={ref} className='w-full' viewBox={`0 0 ${width} ${height}`}>
         <Group>
@@ -111,6 +111,6 @@ export default function BarChart() {
           {getYValue(tooltipData)}
         </TooltipWithBounds>
       ) : null}
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }

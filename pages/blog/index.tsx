@@ -4,15 +4,61 @@ import Layout from '@/components/Layout';
 export default function Blog() {
   return (
     <Layout browserTitle='Blog' description='Blog'>
-      <h2
-        id='work'
-        className='z-40 block w-full h-auto pt-16 pb-3 mx-auto text-3xl font-extrabold text-gray-800 sm:text-4xl '
-      >
-        Blog
+      <h2 id='work' className='z-40 flex h-auto items-center  space-x-4 pt-16 pb-3'>
+        <div className='text-3xl font-extrabold text-gray-800 sm:text-4xl'>Blog</div>
+        <svg
+          width='30'
+          height='30'
+          viewBox='0 0 300 300'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <circle cx='150' cy='150' r='150' fill='#93C5FD' />
+          <circle cx='150' cy='150' r='100' fill='#3B82F6' />
+          <circle cx='150' cy='150' r='50' fill='#1D4ED8' />
+          <g filter='url(#filter0_d_994_83)'>
+            <path
+              d='M186.899 72.732L227.268 113.101L186.899 72.732ZM204.024 55.607C209.377 50.2537 216.638 47.2462 224.208 47.2462C231.779 47.2462 239.04 50.2537 244.393 55.607C249.746 60.9603 252.754 68.2209 252.754 75.7916C252.754 83.3624 249.746 90.623 244.393 95.9763L87.2083 253.161H47.25V212.381L204.024 55.607V55.607Z'
+              stroke='white'
+              strokeWidth='10'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            />
+          </g>
+          <defs>
+            <filter
+              id='filter0_d_994_83'
+              x='3'
+              y='0'
+              width='314'
+              height='314'
+              filterUnits='userSpaceOnUse'
+              colorInterpolationFilters='sRGB'
+            >
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+                result='hardAlpha'
+              />
+              <feOffset dx='10' dy='7' />
+              <feGaussianBlur stdDeviation='10' />
+              <feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0' />
+              <feBlend mode='normal' in2='BackgroundImageFix' result='effect1_dropShadow_994_83' />
+              <feBlend
+                mode='normal'
+                in='SourceGraphic'
+                in2='effect1_dropShadow_994_83'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
       </h2>
       <SubTitle>All Blog</SubTitle>
       <section>
-        <div>
+        <div className='font-mw text-lg'>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit a perspiciatis provident,
           fugiat omnis nesciunt reprehenderit amet? Dolores consectetur quae illum itaque, quaerat
           quod ullam pariatur non, maxime, recusandae sed ab impedit aperiam fuga perspiciatis

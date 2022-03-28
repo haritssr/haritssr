@@ -1,85 +1,114 @@
 import Link from 'next/link';
-import { ArrowUpRight, LeftArrow, RightArrow } from './Icons';
+import { ArrowUpRight, LeftArrow, RightArrowBlue } from './Icons';
 
-export function TitleBack({ name, href }) {
+export function TitleBack({ name, href }: { name: string; href: string }) {
   return (
     <div className='py-8'>
       <button
-        className='flex flex-row items-center mb-5 -ml-5 group'
+        className='group mb-5 flex flex-row items-center space-x-1 sm:-ml-5'
         onClick={() => history.back()}
       >
         <LeftArrow />
-        <div className='text-gray-500 group-hover:text-gray-700 '>{href}</div>
+        <div className='text-zinc-400 hover:underline group-hover:text-zinc-800'>{href}</div>
       </button>
-      <h1 className='z-40 block w-full h-auto mx-auto text-3xl font-bold text-left text-gray-800 sm:text-4xl'>
+      <h1 className='z-40 mx-auto block h-auto w-full text-left text-3xl font-bold text-zinc-800 sm:text-4xl'>
         {name}
       </h1>
     </div>
   );
 }
 
-// /work/tailwindcss/ios15.tsx -> /work/tailwindcss
-export function TitleBackToTopic({ title, href, hrefName }) {
-  return (
-    <div className='pt-8 pb-5 '>
-      <Link href={href}>
-        <a className='inline-block'>
-          <div className='flex flex-row items-center pr-2.5 -ml-5 py-1 justify-center mb-4 group rounded-md '>
-            <LeftArrow />
-            <div className='text-blue-500 group-hover:text-blue-700'>Back to {hrefName}</div>
-          </div>
-        </a>
-      </Link>
-      <h1 className='z-40 block w-full h-auto mx-auto text-3xl font-bold text-left text-gray-800 sm:text-4xl'>
-        {title}
-      </h1>
-    </div>
-  );
+export function SubTitle({ children }: { children: React.ReactNode }) {
+  return <div className='mb-8 break-words pb-5 text-lg text-zinc-500'>{children}</div>;
 }
 
-export function SubTitle({ children }) {
-  return <p className='mb-10 text-lg text-gray-500'>{children}</p>;
-}
-
-export const Topic = ({ name }) => {
-  return <h2 className='text-xl font-semibold text-gray-700 '>{name}</h2>;
+export const Topic = ({ name }: { name: string }) => {
+  return <h2 className='text-xl font-semibold text-zinc-700'>{name}</h2>;
 };
 
-export const TopicWork = ({ name, href }) => {
+export const TopicWork = ({ name, href }: { name: string; href: string }) => {
   return (
     <Link href={href}>
       <a>
-        <h2 className='mb-2 text-xl font-semibold text-gray-700 hover:underline'>{name}</h2>
+        <h2 className='mb-2 text-xl font-semibold text-zinc-700 hover:underline'>{name}</h2>
       </a>
     </Link>
   );
 };
 
-export const SubTopic = ({ children }) => {
-  return <p className='mb-2 text-gray-400 '>{children}</p>;
+export const SubTopic = ({ children }: { children: React.ReactNode }) => {
+  return <p className='mb-2 text-zinc-400 '>{children}</p>;
 };
 
 export function InternalLink({ name, href }) {
   return (
     <Link href={href}>
-      <a className='flex items-center text-blue-600 cursor-pointer hover:underline active:text-purple-600'>
-        <p className='truncate'>{name}</p>
-        <RightArrow />
+      <a className='group flex w-fit cursor-pointer items-center justify-start text-[#06c] hover:underline '>
+        <p>{name}</p>
+        {/* Arrow Right */}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-4 w-4 pt-[0.25px] text-[#06c] group-hover:underline'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+        </svg>
       </a>
     </Link>
   );
 }
 
-export function ExternalLink({ name, href }) {
+export function ExternalLink({ name, href }: { name: string; href: string }) {
   return (
     <a
       href={href}
       target='_blank'
-      rel='noreferrer'
-      className='flex items-center text-blue-600 cursor-pointer hover:underline '
+      rel='noopener noreferrer'
+      className='group inline-block w-fit cursor-pointer items-center text-orange-500 hover:underline  active:text-rose-600'
     >
-      <div>{name}</div>
-      <ArrowUpRight />
+      <div className='flex items-center'>
+        <div>{name}</div>
+        {/* Arrow Up Right */}
+        <svg
+          className='h-5 w-5 pt-[0.25px] text-orange-500 group-hover:underline'
+          viewBox='0 0 24 24'
+          width='24'
+          height='24'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          fill='none'
+          shapeRendering='geometricPrecision'
+        >
+          <path d='M7 17L17 7' />
+          <path d='M7 7h10v10' />
+        </svg>
+      </div>
     </a>
+  );
+}
+
+export function ExternalCodeLink({ children, href }: { children: React.ReactNode; href: string }) {
+  return (
+    <a href={href} target='_blank' rel='noreferrer noopener'>
+      {' '}
+      <code className='rounded border border-zinc-300 bg-zinc-100 px-1.5 py-0.5 text-sm text-orange-500 duration-100 hover:bg-zinc-200'>
+        {children}
+      </code>{' '}
+    </a>
+  );
+}
+
+export function BigInternalLink({ href, name }: { href: string; name: string }) {
+  return (
+    <Link href={href}>
+      <a className='flex w-auto cursor-pointer items-center justify-center duration-300 ease-in-out'>
+        <div className='text-lg font-medium text-blue-500 hover:underline'>{name}</div>
+        <RightArrowBlue />
+      </a>
+    </Link>
   );
 }

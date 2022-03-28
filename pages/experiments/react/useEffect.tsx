@@ -1,5 +1,5 @@
 import { SubTitle, TitleBack } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useEffect } from 'react';
 
 export default function UseEffect() {
@@ -13,8 +13,8 @@ export default function UseEffect() {
     console.log(Math.round(scrollY));
   };
   return (
-    <LayoutSubWorkToTopic title='useEffect' href='/work/react' hrefName='React'>
+    <LayoutToExperiments title='useEffect' domain='React'>
       <SubTitle>Ya</SubTitle>
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }

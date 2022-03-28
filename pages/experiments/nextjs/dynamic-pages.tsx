@@ -1,10 +1,10 @@
 import { SubTitle } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function DynamicPages() {
   return (
-    <LayoutSubWorkToTopic title='Dynamic Pages' href='/work/nextjs' hrefName='Next.js'>
+    <LayoutToExperiments title='Dynamic Pages' domain='Next.js'>
       <SubTitle>My implementation of Next.js Dynamic Pages </SubTitle>
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }

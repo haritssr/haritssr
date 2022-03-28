@@ -1,18 +1,15 @@
 import Head from 'next/head';
-import NavDesktop from './NavDesktop';
-import NavMobile from './NavMobile';
+import GlobalNavigation from './GlobalNavigation';
 import { useRouter } from 'next/router';
 import Footer from './Footer';
 
-export default function Layout({
-  children,
-  browserTitle,
-  description,
-}: {
+interface LayoutType {
   children: React.ReactNode;
   browserTitle: string;
   description: string;
-}) {
+}
+
+export default function Layout({ children, browserTitle, description }: LayoutType) {
   const router = useRouter();
   const image = 'https://harislab.com/public/HarisLab.png';
   const type = 'website';
@@ -25,7 +22,7 @@ export default function Layout({
         ) : (
           <title>{browserTitle} - Harits Syah</title>
         )}{' '}
-        <link rel='icon' href='/haritssr_logo.ico' />
+        <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={description} />
         <meta property='og:type' content={type} />
@@ -40,12 +37,9 @@ export default function Layout({
         <meta name='twitter:image' content={image} />
       </Head>
 
-      <section className='sticky top-0 z-50 '>
-        <NavDesktop />
-        <NavMobile />
-      </section>
+      <GlobalNavigation />
 
-      <main className='w-full max-w-4xl min-h-screen px-8 pb-5 mx-auto sm:pb-0 xl:px-0 font-inter'>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-8 pb-5 sm:pb-0 xl:px-0'>
         {children}
       </main>
 

@@ -1,7 +1,8 @@
 import { SubTitle } from '@/components/DesignSystem';
-import LayoutSubWorkToTopic from '@/components/LayoutSubWorkToTopic';
+import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const ProductData = [
   { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
@@ -15,8 +16,12 @@ const ProductData = [
 ];
 
 export default function ImageComponents() {
+  const router = useRouter();
+  const ruteSaatIni = router.asPath;
+  console.log(ruteSaatIni);
+
   return (
-    <LayoutSubWorkToTopic title='Image Component' href='/work/nextjs' hrefName='Next.js'>
+    <LayoutToExperiments title='Image Component' domain='Next.js'>
       <SubTitle>My implementation of Next.js Image Components </SubTitle>
       <main className='z-0 grid max-w-4xl grid-cols-1 gap-5 py-32 mx-auto xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
         {ProductData.map(a => (
@@ -36,7 +41,7 @@ export default function ImageComponents() {
           placeholder='blur'
         />
       </div>
-    </LayoutSubWorkToTopic>
+    </LayoutToExperiments>
   );
 }
 

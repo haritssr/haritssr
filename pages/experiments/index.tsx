@@ -1,32 +1,21 @@
-import { SubTitle } from '@/components/DesignSystem';
 import Layout from '@/components/Layout';
-import ProjectsBox from '@/components/ProjectBox';
-import { ExperimentsData } from '../../lib/ExperimentsData';
+import ExperimentsBox from '@/components/ExperimentsBox';
+import { SubTitle } from '@/components/DesignSystem';
+import { ExperimentsLogo } from '@/components/Icons';
+import { ExperimentsData } from '../../data/ExperimentsData';
 
 export default function Experiments() {
   return (
     <Layout browserTitle='Experiments' description='Experiments'>
-      <h2
-        id='work'
-        className='z-40 block w-full h-auto pt-16 pb-3 mx-auto text-3xl font-extrabold text-gray-800 sm:text-4xl '
-      >
-        Experiments
+      <h2 id='work' className='z-40 flex h-auto items-center  space-x-4 pt-16 pb-3'>
+        <div className='text-3xl font-extrabold text-gray-800 sm:text-4xl'>Experiments</div>
+        <ExperimentsLogo />
       </h2>
-      <SubTitle>All Experiments</SubTitle>
-      <section>
-        <div className='grid grid-cols-1 gap-5 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 skew '>
-          {ExperimentsData.map(d => (
-            <ProjectsBox
-              key={d.title}
-              href={d.href}
-              description={d.description}
-              title={d.title}
-              period={d.period}
-              color={d.color}
-              status={d.status}
-            />
-          ))}
-        </div>
+      <SubTitle>All my experiments in the following domains</SubTitle>
+      <section className='grid grid-cols-1 gap-10 xs:grid-cols-2 sm:grid-cols-3 sm:gap-10 '>
+        {ExperimentsData.map(({ id, title, imgSrc, links }) => (
+          <ExperimentsBox key={id} imgSrc={imgSrc} title={title} links={links} />
+        ))}
       </section>
     </Layout>
   );
