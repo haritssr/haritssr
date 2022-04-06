@@ -76,8 +76,17 @@ export default function ProjectsBox({
         </div>
       </section>
       <Link href={hrefCaseStudy}>
-        <a className='block bg-zinc-200 px-3 py-2 font-medium text-zinc-700 hover:bg-zinc-300 sm:text-[12px]'>
-          Read case study
+        <a className='flex w-full items-center justify-between bg-zinc-200 px-3 py-2 font-medium text-zinc-700 hover:bg-zinc-300 sm:text-[12px]'>
+          <div>Read case study</div>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-4 w-4 text-zinc-700'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M9 5l7 7-7 7' />
+          </svg>
         </a>
       </Link>
     </section>

@@ -13,8 +13,6 @@ import {
   FontItalicIcon,
 } from '@radix-ui/react-icons';
 
-
-
 const StyledToolbar = styled(ToolbarPrimitive.Root, {
   display: 'flex',
   padding: 10,
@@ -93,36 +91,38 @@ export default function ToolbarR() {
         menus.
       </SubTitle>
 
-      <Toolbar aria-label='Formatting options'>
-        <ToolbarToggleGroup type='multiple' aria-label='Text formatting'>
-          <ToolbarToggleItem value='bold' aria-label='Bold'>
-            <FontBoldIcon />
-          </ToolbarToggleItem>
-          <ToolbarToggleItem value='italic' aria-label='Italic'>
-            <FontItalicIcon />
-          </ToolbarToggleItem>
-          <ToolbarToggleItem value='strikethrough' aria-label='Strike through'>
-            <StrikethroughIcon />
-          </ToolbarToggleItem>
-        </ToolbarToggleGroup>
-        <ToolbarSeparator />
-        <ToolbarToggleGroup type='single' defaultValue='center' aria-label='Text alignment'>
-          <ToolbarToggleItem value='left' aria-label='Left aligned'>
-            <TextAlignLeftIcon />
-          </ToolbarToggleItem>
-          <ToolbarToggleItem value='center' aria-label='Center aligned'>
-            <TextAlignCenterIcon />
-          </ToolbarToggleItem>
-          <ToolbarToggleItem value='right' aria-label='Right aligned'>
-            <TextAlignRightIcon />
-          </ToolbarToggleItem>
-        </ToolbarToggleGroup>
-        <ToolbarSeparator />
-        <ToolbarLink href='#' target='_blank' css={{ marginRight: 10 }}>
-          Edited 2 hours ago
-        </ToolbarLink>
-        <ToolbarButton css={{ marginLeft: 'auto' }}>Share</ToolbarButton>
-      </Toolbar>
+      <div className='w-full overflow-x-auto p-1'>
+        <Toolbar aria-label='Formatting options'>
+          <ToolbarToggleGroup type='multiple' aria-label='Text formatting'>
+            <ToolbarToggleItem value='bold' aria-label='Bold'>
+              <FontBoldIcon />
+            </ToolbarToggleItem>
+            <ToolbarToggleItem value='italic' aria-label='Italic'>
+              <FontItalicIcon />
+            </ToolbarToggleItem>
+            <ToolbarToggleItem value='strikethrough' aria-label='Strike through'>
+              <StrikethroughIcon />
+            </ToolbarToggleItem>
+          </ToolbarToggleGroup>
+          <ToolbarSeparator />
+          <ToolbarToggleGroup type='single' defaultValue='center' aria-label='Text alignment'>
+            <ToolbarToggleItem value='left' aria-label='Left aligned'>
+              <TextAlignLeftIcon />
+            </ToolbarToggleItem>
+            <ToolbarToggleItem value='center' aria-label='Center aligned'>
+              <TextAlignCenterIcon />
+            </ToolbarToggleItem>
+            <ToolbarToggleItem value='right' aria-label='Right aligned'>
+              <TextAlignRightIcon />
+            </ToolbarToggleItem>
+          </ToolbarToggleGroup>
+          <ToolbarSeparator />
+          <ToolbarLink href='#' target='_blank' css={{ marginRight: 10 }}>
+            Edited 2 hours ago
+          </ToolbarLink>
+          <ToolbarButton css={{ marginLeft: 'auto' }}>Share</ToolbarButton>
+        </Toolbar>
+      </div>
     </LayoutToExperiments>
   );
 }

@@ -19,7 +19,7 @@ export function TitleBack({ name, href }: { name: string; href: string }) {
 }
 
 export function SubTitle({ children }: { children: React.ReactNode }) {
-  return <div className='mb-8 break-words pb-5 text-lg text-zinc-500'>{children}</div>;
+  return <div className='mb-8 break-words pb-5 text-zinc-500'>{children}</div>;
 }
 
 export const Topic = ({ name }: { name: string }) => {
@@ -43,12 +43,12 @@ export const SubTopic = ({ children }: { children: React.ReactNode }) => {
 export function InternalLink({ name, href }) {
   return (
     <Link href={href}>
-      <a className='group flex w-fit cursor-pointer items-center justify-start text-[#06c] hover:underline '>
+      <a className='group flex w-fit cursor-pointer items-center justify-start text-blue-500 hover:underline '>
         <p>{name}</p>
         {/* Arrow Right */}
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='h-4 w-4 pt-[0.25px] text-[#06c] group-hover:underline'
+          className='h-4 w-4 pt-[0.25px] text-blue-500 group-hover:underline'
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -72,12 +72,12 @@ export function ExternalLink({ name, href }: { name: string; href: string }) {
         <div>{name}</div>
         {/* Arrow Up Right */}
         <svg
-          className='h-5 w-5 pt-[0.25px] text-orange-500 group-hover:underline'
+          className='h-5 w-5 pt-[0.25px] text-orange-400 group-hover:underline'
           viewBox='0 0 24 24'
           width='24'
           height='24'
           stroke='currentColor'
-          strokeWidth='2'
+          strokeWidth='1.5'
           strokeLinecap='round'
           strokeLinejoin='round'
           fill='none'

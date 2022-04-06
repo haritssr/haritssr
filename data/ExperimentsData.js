@@ -3,8 +3,8 @@
 export const ExperimentsData = [
   {
     id: 1,
-    imgSrc: '/experimentsDomainIcons/tailwindcss.png',
     title: 'Tailwind CSS',
+    description: 'For styling web pages',
     links: [
       { name: 'Apple NavBar' },
       { name: 'Blurry' },
@@ -20,8 +20,8 @@ export const ExperimentsData = [
   },
   {
     id: 2,
-    imgSrc: '/experimentsDomainIcons/react.svg',
     title: 'React',
+    description: 'For manipulating user interface',
     links: [
       { name: 'useState form' },
       { name: 'useEffect' },
@@ -45,8 +45,8 @@ export const ExperimentsData = [
   },
   {
     id: 3,
-    imgSrc: '/experimentsDomainIcons/nextjs.ico',
     title: 'Nextjs',
+    description: 'For building web pages',
     links: [
       { name: 'Image Components' },
       { name: 'Router' },
@@ -64,8 +64,8 @@ export const ExperimentsData = [
   },
   {
     id: 4,
-    imgSrc: '/techIcons/chrome.svg',
     title: 'Browser API',
+    description: 'Browser built-in utilities',
     links: [
       { name: 'Browser Title' },
       { name: 'Audio' },
@@ -74,32 +74,34 @@ export const ExperimentsData = [
       { name: 'Number game' },
       { name: 'Rafi' },
       { name: 'Search' },
-      { name: 'Range' },
+      { name: 'Input' },
+      { name: 'Details' },
+      { name: 'Select' },
     ],
   },
   {
     id: 5,
-    imgSrc: '/experimentsDomainIcons/visx.png',
     title: 'VisX',
+    description: 'Data visualization',
     links: [{ name: 'Bar Chart' }, { name: 'Pie Chart' }, { name: 'Areas' }],
   },
 
   {
     id: 6,
-    imgSrc: '/experimentsDomainIcons/framer-motion.png',
     title: 'Framer Motion',
+    description: 'Animation for user interface',
     links: [{ name: 'Staggered Animation' }, { name: 'Basic' }],
   },
   {
     id: 7,
-    imgSrc: '/experimentsDomainIcons/notion.png',
     title: 'Notion API',
+    description: 'Free CMS',
     links: [{ name: 'Notion Simple Table' }, { name: 'Notion Toggle' }],
   },
   {
     id: 8,
-    imgSrc: '/experimentsDomainIcons/headlessui.png',
     title: 'Headless UI',
+    description: 'Unstyled react components',
     links: [
       { name: 'Menu' },
       { name: 'Listbox' },
@@ -110,13 +112,12 @@ export const ExperimentsData = [
       { name: 'Popover' },
       { name: 'Radio' },
       { name: 'Tabs' },
-      { name: 'Transition' },
     ],
   },
   {
     id: 9,
-    imgSrc: '/experimentsDomainIcons/radix.png',
     title: 'Radix UI',
+    description: 'Unstyled react components',
     links: [
       { name: 'Accordion' },
       { name: 'Alert Dialog' },
@@ -124,7 +125,7 @@ export const ExperimentsData = [
       { name: 'Collapsible' },
       { name: 'Context Menu' },
       { name: 'Dialog' },
-      { name: 'Dropdown' },
+      { name: 'Dropdown Menu' },
       { name: 'Hover Card' },
       { name: 'Label' },
       { name: 'Popover' },
@@ -142,5 +143,11 @@ export const ExperimentsData = [
       { name: 'Navigation Menu' },
       { name: 'Toast' },
     ],
+  },
+  {
+    id: 10,
+    title: 'Sandpack',
+    description: 'Live code editor',
+    links: [{ name: 'Example 1' }],
   },
 ];

@@ -6,8 +6,11 @@ import { GetStaticProps } from 'next';
 //getStaticPaths di [].tsx gunanya untuk ngambil dynamic route endpoint saja, untuk diteruskan ke getStaticProps
 // alternatif tanpa typescript, export async function getStaticPaths() {
 export const getStaticPaths: GetStaticPaths = async () => {
-  //mengambil data keseluruhan
-  const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(post => post.json());
+  //mengambil data keseluruhan (hanya 20 dari 100 yang diberikan API endpoint)
+  //https://stackoverflow.com/questions/52842039/how-to-limit-the-amount-of-data-returned-from-a-json-file-using-fetch
+  const posts = await fetch('https://jsonplaceholder.typicode.com/posts/?_limit=20').then(post =>
+    post.json()
+  );
 
   //mengambil data,  dimana dari data keseluruhan yang akan dijadikan sebagai route
   //disini data.id yang dipilih untuk menjadi dynamic route

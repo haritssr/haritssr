@@ -4,7 +4,10 @@ import Link from 'next/link';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
 
 export async function getStaticProps() {
-  const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(post => post.json());
+  // https://stackoverflow.com/questions/52842039/how-to-limit-the-amount-of-data-returned-from-a-json-file-using-fetch
+  const posts = await fetch('https://jsonplaceholder.typicode.com/posts/?_limit=20').then(post =>
+    post.json()
+  );
   return {
     props: {
       posts,

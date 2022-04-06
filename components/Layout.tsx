@@ -2,6 +2,7 @@ import Head from 'next/head';
 import GlobalNavigation from './GlobalNavigation';
 import { useRouter } from 'next/router';
 import Footer from './Footer';
+import BottomNavMobile from './BottomNavMobile';
 
 interface LayoutType {
   children: React.ReactNode;
@@ -22,7 +23,7 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
         ) : (
           <title>{browserTitle} - Harits Syah</title>
         )}{' '}
-        <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
+        <link rel='icon' href='/logo_haritssr.svg' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={description} />
         <meta property='og:type' content={type} />
@@ -44,6 +45,7 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
       </main>
 
       <Footer />
+      <BottomNavMobile />
     </div>
   );
 }

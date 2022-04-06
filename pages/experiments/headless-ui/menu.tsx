@@ -20,7 +20,7 @@ const ImportedMenu = () => {
 const MenuExample1 = () => {
   return (
     //border to identify the width of the Menu.Button
-    <div className='relative w-52 text-right '>
+    <div className='relative w-52 text-left '>
       <Menu as='div' className='relative inline-block text-left'>
         <div>
           <Menu.Button className='inline-flex w-full justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>

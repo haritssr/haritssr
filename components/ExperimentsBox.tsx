@@ -1,26 +1,30 @@
 import { InternalLink } from './DesignSystem';
-import Image from 'next/image';
 import Link from 'next/link';
 
 interface ExperimentsType {
   title: string;
-  imgSrc: string;
+  description: string;
   links: Array<{ name: string }>;
 }
 
-export default function ExperimentBox({ title, links, imgSrc }: ExperimentsType) {
+export default function ExperimentBox({ title, links, description }: ExperimentsType) {
   return (
-    <div className='h-fit rounded-lg bg-[#fafafa] px-5 py-4'>
-      <section className='ml-5'>
-        <div className='-ml-5 flex items-center'>
+    <div className='h-fit'>
+      {/* ml-7 */}
+      <section className=''>
+        {/* -ml-7 */}
+        <div className='mb-2 flex w-full flex-col items-center'>
           <Link href={`/experiments/${title.toLowerCase().replace(' ', '-')}`}>
-            <a className=' mr-2 py-1.5 text-lg font-semibold text-zinc-700 hover:underline'>
+            <a className='block w-full pt-1.5 text-left font-semibold text-zinc-700 hover:underline'>
               {title}
             </a>
           </Link>
-          <Image src={imgSrc} alt='' height='16' width='16' />
+          <div className='w-full border-b border-zinc-300 pb-1 text-left text-zinc-500'>
+            {description}
+          </div>
         </div>
-        <ol className='flex  list-outside list-decimal flex-col space-y-2 pt-2'>
+        {/* list-outside list-decimal */}
+        <ol className='flex flex-col space-y-2'>
           {links.map(link => (
             <li key={link.name} className='text-zinc-600'>
               <InternalLink
