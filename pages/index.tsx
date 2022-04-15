@@ -24,7 +24,7 @@ export default function Home() {
             placeholder='blur'
           />
         </article>
-        <article className='space-y-3 text-center sm:my-auto md:text-left'>
+        <article className='space-y-4 text-center sm:my-auto md:text-left'>
           <div className='text-3xl font-bold text-zinc-700 sm:text-5xl'>Harits Syah</div>
           <div className='text-lg font-medium text-zinc-600 sm:text-2xl'>
             Frontend Engineer & Web Designer

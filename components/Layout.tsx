@@ -40,7 +40,7 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
 
       <GlobalNavigation />
 
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-8 pb-5 sm:pb-0 xl:px-0'>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
         {children}
       </main>
 

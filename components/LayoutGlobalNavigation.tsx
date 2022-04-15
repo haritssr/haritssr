@@ -46,7 +46,7 @@ export default function LayoutGlobalNavigation({
 
       <GlobalNavigation />
 
-      <div className='sticky inset-x-0 top-0 z-40 w-full border-b border-zinc-300  bg-white/80 py-1.5 backdrop-blur mb-10'>
+      <div className='sticky inset-x-0 top-0 z-40 mb-10 w-full border-b  border-zinc-200 bg-white/80 py-1.5 backdrop-blur'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           <h2 id='work' className='z-40 flex h-auto items-center'>
             <div className='text-xl font-bold text-gray-700 '>{domain}</div>
@@ -54,7 +54,7 @@ export default function LayoutGlobalNavigation({
         </section>
       </div>
 
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-8 pb-5 sm:pb-0 xl:px-0'>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
         {children}
       </main>
 

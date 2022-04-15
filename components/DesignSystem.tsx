@@ -43,12 +43,12 @@ export const SubTopic = ({ children }: { children: React.ReactNode }) => {
 export function InternalLink({ name, href }) {
   return (
     <Link href={href}>
-      <a className='group flex w-fit cursor-pointer items-center justify-start text-blue-500 hover:underline '>
+      <a className='group flex w-fit cursor-pointer items-center justify-start text-lg text-blue-600 hover:underline sm:text-base'>
         <p>{name}</p>
         {/* Arrow Right */}
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='h-4 w-4 pt-[0.25px] text-blue-500 group-hover:underline'
+          className='h-4 w-4 pt-[0.25px] text-blue-600 group-hover:underline'
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -62,32 +62,34 @@ export function InternalLink({ name, href }) {
 
 export function ExternalLink({ name, href }: { name: string; href: string }) {
   return (
-    <a
-      href={href}
-      target='_blank'
-      rel='noopener noreferrer'
-      className='group inline-block w-fit cursor-pointer items-center text-orange-500 hover:underline  active:text-rose-600'
-    >
-      <div className='flex items-center'>
-        <div>{name}</div>
-        {/* Arrow Up Right */}
-        <svg
-          className='h-5 w-5 pt-[0.25px] text-orange-400 group-hover:underline'
-          viewBox='0 0 24 24'
-          width='24'
-          height='24'
-          stroke='currentColor'
-          strokeWidth='1.5'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          fill='none'
-          shapeRendering='geometricPrecision'
-        >
-          <path d='M7 17L17 7' />
-          <path d='M7 7h10v10' />
-        </svg>
-      </div>
-    </a>
+    <cite className='not-italic underline hover:no-underline'>
+      <a
+        href={href}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='group inline-block w-fit cursor-pointer items-center text-purple-500 hover:underline  active:text-rose-600'
+      >
+        <div className='flex items-center'>
+          <div>{name}</div>
+          {/* Arrow Up Right */}
+          <svg
+            className='-ml-0.5 h-5 w-5 pt-[0.25px] text-purple-400 group-hover:underline '
+            viewBox='0 0 24 24'
+            width='24'
+            height='24'
+            stroke='currentColor'
+            strokeWidth='1.5'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            fill='none'
+            shapeRendering='geometricPrecision'
+          >
+            <path d='M7 17L17 7' />
+            <path d='M7 7h10v10' />
+          </svg>
+        </div>
+      </a>
+    </cite>
   );
 }
 

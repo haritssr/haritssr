@@ -4,9 +4,7 @@ import Footer from './Footer';
 import React from 'react';
 import { LeftArrow } from './Icons';
 import { useRouter } from 'next/router';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { ExperimentsData } from 'data/ExperimentsData';
-import { InternalLink } from './DesignSystem';
+import BottomNavMobile from './BottomNavMobile';
 
 export default function LayoutToExperiments({
   children,
@@ -41,13 +39,13 @@ export default function LayoutToExperiments({
 
       <GlobalNavigation />
 
-      <div className='sticky top-0 z-40 mb-5 w-full border-b  border-zinc-300 bg-white/80 py-1 backdrop-blur sm:py-2.5'>
+      <div className='sticky top-0 z-40 mb-5 w-full border-b  border-zinc-300 bg-white/80 py-1 backdrop-blur sm:py-2'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           <button onClick={() => window.history.back()} className='flex w-1/3 items-center '>
             <a className=' inline-block w-full'>
               <div className='group flex items-center'>
                 <LeftArrow />
-                <div className='-ml-1 text-blue-500 group-hover:text-purple-700'>Back</div>
+                <div className='-ml-1 text-blue-600 group-hover:text-purple-700'>Back</div>
               </div>
             </a>
           </button>
@@ -87,7 +85,7 @@ export default function LayoutToExperiments({
         </section>
       </div>
 
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-8 pb-5 sm:pb-0 xl:px-0'>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
         <div className='mt-6 mb-1'>
           {/* Title of the page */}
           <h1 className='z-40 mx-auto block h-auto w-full text-left text-xl font-bold text-zinc-700 sm:text-3xl'>
@@ -99,6 +97,7 @@ export default function LayoutToExperiments({
       </main>
 
       <Footer />
+      <BottomNavMobile />
     </div>
   );
 }

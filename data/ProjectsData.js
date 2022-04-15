@@ -26,7 +26,7 @@ export const ProjectsData = [
   {
     href: 'https://www.haritssr.com',
     title: 'Harits Syah',
-    description: 'My personal site. Article and experiments.',
+    description: 'My personal site. Blog and experiments.',
     period: 'Jan 2022 - Now',
     status: 'Production',
     imgSrc: <LogoHaritssr />,

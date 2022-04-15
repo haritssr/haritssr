@@ -17,7 +17,7 @@ export default function BottomNavMobile() {
 const IkonWrapper = ({ to, path }: { to: string; path: string }) => {
   const router = useRouter();
   const toN = to === '/beranda' ? '/' : to;
-  const iconColor = router.asPath === toN ? 'text-blue-600' : 'text-zinc-500';
+  const iconColor = router.asPath === toN ? 'text-blue-600' : 'text-zinc-600';
   function capitalizeFirstLetter(to: string) {
     return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
   }
@@ -29,11 +29,11 @@ const IkonWrapper = ({ to, path }: { to: string; path: string }) => {
           <div>
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className={`${iconColor} h-5 w-5`}
+              className={`${iconColor} h-6 w-6`}
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
-              strokeWidth={1.5}
+              strokeWidth={2}
             >
               <path strokeLinecap='round' strokeLinejoin='round' d={path} />
             </svg>

@@ -3,7 +3,7 @@ import Layout from '@/components/Layout';
 import { GetStaticPaths } from 'next';
 import { GetStaticProps } from 'next';
 
-//getStaticPaths di [].tsx gunanya untuk ngambil dynamic route endpoint saja, untuk diteruskan ke getStaticProps
+//getStaticPaths di [id].tsx gunanya untuk ngambil dynamic route endpoint saja, untuk diteruskan ke getStaticProps
 // alternatif tanpa typescript, export async function getStaticPaths() {
 export const getStaticPaths: GetStaticPaths = async () => {
   //mengambil data keseluruhan (hanya 20 dari 100 yang diberikan API endpoint)

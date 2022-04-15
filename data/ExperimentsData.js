@@ -4,8 +4,10 @@ export const ExperimentsData = [
   {
     id: 1,
     title: 'Tailwind CSS',
+    logoSrc: '/ExperimentsDomainIcons/tailwindcss.svg',
     description: 'For styling web pages',
     links: [
+      { name: 'Position' },
       { name: 'Apple NavBar' },
       { name: 'Blurry' },
       { name: 'Dark Mode' },
@@ -16,11 +18,13 @@ export const ExperimentsData = [
       { name: 'Sidebar' },
       { name: 'YouTube Thumbnail' },
       { name: 'Newspaper' },
+      { name: 'Centering Div' },
     ],
   },
   {
     id: 2,
     title: 'React',
+    logoSrc: '/ExperimentsDomainIcons/react.ico',
     description: 'For manipulating user interface',
     links: [
       { name: 'useState form' },
@@ -46,13 +50,14 @@ export const ExperimentsData = [
   {
     id: 3,
     title: 'Nextjs',
+    logoSrc: '/ExperimentsDomainIcons/nextjs.ico',
     description: 'For building web pages',
     links: [
       { name: 'Image Components' },
       { name: 'Router' },
       { name: 'Dynamic Pages' },
-      { name: 'getStaticProps' },
-      { name: 'getServerSideProps' },
+      // { name: 'getStaticProps' },
+      // { name: 'getServerSideProps' },
       { name: 'Middleware' },
       { name: 'Script Component' },
       { name: 'SWR' },
@@ -64,7 +69,8 @@ export const ExperimentsData = [
   },
   {
     id: 4,
-    title: 'Browser API',
+    title: 'Browser',
+    logoSrc: '/ExperimentsDomainIcons/chrome.svg',
     description: 'Browser built-in utilities',
     links: [
       { name: 'Browser Title' },
@@ -77,11 +83,16 @@ export const ExperimentsData = [
       { name: 'Input' },
       { name: 'Details' },
       { name: 'Select' },
+      { name: 'Glosary' },
+      { name: 'Figure' },
+      { name: 'Text Editing' },
+      { name: 'YouTube Embed' },
     ],
   },
   {
     id: 5,
     title: 'VisX',
+    logoSrc: '/ExperimentsDomainIcons/visx.png',
     description: 'Data visualization',
     links: [{ name: 'Bar Chart' }, { name: 'Pie Chart' }, { name: 'Areas' }],
   },
@@ -89,18 +100,21 @@ export const ExperimentsData = [
   {
     id: 6,
     title: 'Framer Motion',
+    logoSrc: '/ExperimentsDomainIcons/framer-motion.png',
     description: 'Animation for user interface',
     links: [{ name: 'Staggered Animation' }, { name: 'Basic' }],
   },
   {
     id: 7,
     title: 'Notion API',
+    logoSrc: '/ExperimentsDomainIcons/notion.png',
     description: 'Free CMS',
-    links: [{ name: 'Notion Simple Table' }, { name: 'Notion Toggle' }],
+    links: [{ name: 'Table' }],
   },
   {
     id: 8,
     title: 'Headless UI',
+    logoSrc: '/ExperimentsDomainIcons/headlessui.png',
     description: 'Unstyled react components',
     links: [
       { name: 'Menu' },
@@ -117,6 +131,7 @@ export const ExperimentsData = [
   {
     id: 9,
     title: 'Radix UI',
+    logoSrc: '/ExperimentsDomainIcons/radix.png',
     description: 'Unstyled react components',
     links: [
       { name: 'Accordion' },
@@ -147,6 +162,7 @@ export const ExperimentsData = [
   {
     id: 10,
     title: 'Sandpack',
+    logoSrc: '/ExperimentsDomainIcons/sandpack.ico',
     description: 'Live code editor',
     links: [{ name: 'Example 1' }],
   },
