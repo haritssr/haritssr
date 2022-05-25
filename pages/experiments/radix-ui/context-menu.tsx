@@ -74,7 +74,6 @@ const StyledItemIndicator = styled(ContextMenuPrimitive.ItemIndicator, {
   justifyContent: 'center',
 });
 
-// Exports
 export const ContextMenu = ContextMenuPrimitive.Root;
 export const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
 export const ContextMenuContent = StyledContent;
@@ -105,7 +104,7 @@ const RightSlot = styled('div', {
   '[data-disabled] &': { color: mauve.mauve8 },
 });
 
-export default function ContextMenuDemo() {
+export default function ExportedContextMenu() {
   const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
   const [urlsChecked, setUrlsChecked] = React.useState(false);
   const [person, setPerson] = React.useState('pedro');

@@ -1,4 +1,4 @@
-import { SubTitle, Topic } from '@/components/DesignSystem';
+import { ExternalCodeLink, SubTitle, Topic } from '@/components/DesignSystem';
 import { useRouter } from 'next/router';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
@@ -7,7 +7,12 @@ export default function Router() {
   const style = 'text-gray-500';
   return (
     <LayoutToExperiments title='Router' domain='Next.js'>
-      <SubTitle>My implementation of Next.js Router </SubTitle>
+      <SubTitle>
+        <ExternalCodeLink href='https://nextjs.org/docs/api-reference/next/router#router-object'>
+          router
+        </ExternalCodeLink>
+        Object{' '}
+      </SubTitle>
       <div className='mb-10'>
         <Topic name='router object' />
         <div>
@@ -39,10 +44,10 @@ export default function Router() {
       <Topic name='router.push' />
       <p>This button using router.push instead using Link from next/link</p>
       <button
-        className='px-4 py-2 mt-2 text-white bg-blue-600 rounded-md bg-opacity-90 hover:bg-opacity-100'
-        onClick={() => router.push('/work')}
+        className='mt-2 rounded-md bg-blue-600 bg-opacity-90 px-4 py-2 text-white hover:bg-opacity-100'
+        onClick={() => router.push('/experiments')}
       >
-        Go to My Work
+        Go to Experiments
       </button>
     </LayoutToExperiments>
   );

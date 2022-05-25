@@ -1,3 +1,5 @@
+// used in index.tsx
+
 export const ContactData = [
   {
     title: 'My personal website, www.haritssr.com',

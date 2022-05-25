@@ -1,3 +1,5 @@
+import LayoutToExperiments from '@/components/LayoutToExperiments';
+
 import React, { useMemo, useCallback } from 'react';
 import { AreaClosed, Line, Bar } from '@visx/shape';
 import appleStock, { AppleStock } from '@visx/mock-data/lib/mocks/appleStock';
@@ -10,15 +12,16 @@ import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
-import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 type TooltipData = AppleStock;
 
-const stock = appleStock.slice(800);
 export const background = '#3b6978';
 export const background2 = '#204051';
 export const accentColor = '#edffea';
 export const accentColorDark = '#75daad';
+
+const stock = appleStock.slice(800);
+
 const tooltipStyles = {
   ...defaultStyles,
   background,
@@ -66,6 +69,7 @@ export default withTooltip<AreaProps, TooltipData>(
         }),
       [innerWidth, margin.left]
     );
+
     const stockValueScale = useMemo(
       () =>
         scaleLinear({

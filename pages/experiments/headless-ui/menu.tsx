@@ -1,10 +1,10 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 
-const ImportedMenu = () => {
+export default function ExportedMenu() {
   return (
     <LayoutToExperiments title='Menu' domain='Headless UI'>
       <SubTitle>
@@ -15,12 +15,12 @@ const ImportedMenu = () => {
       <MenuExample1 />
     </LayoutToExperiments>
   );
-};
+}
 
 const MenuExample1 = () => {
   return (
     //border to identify the width of the Menu.Button
-    <div className='relative w-52 text-left '>
+    <div className='relative w-52 text-left'>
       <Menu as='div' className='relative inline-block text-left'>
         <div>
           <Menu.Button className='inline-flex w-full justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
@@ -123,5 +123,3 @@ const MenuExample1 = () => {
     </div>
   );
 };
-
-export default ImportedMenu;

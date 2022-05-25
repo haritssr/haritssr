@@ -1,17 +1,15 @@
 import { Tab } from '@headlessui/react';
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import { RadioGroup } from '@headlessui/react';
+import { useState } from 'react';
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function ImportedRadio() {
+export default function ExportedTabs() {
   return (
-    <LayoutToExperiments title='Disclosure' domain='Headless UI'>
+    <LayoutToExperiments title='Tabs' domain='Headless UI'>
       <SubTitle>
         A fully-managed, renderless dialog component jam-packed with accessibility and keyboard
         features, perfect for building completely custom modal and dialog windows for your next
@@ -77,17 +75,15 @@ function Example1() {
   return (
     <div className='w-full max-w-md px-2 py-16 sm:px-0'>
       <Tab.Group>
-        <Tab.List className='flex space-x-1 rounded-xl bg-blue-900/20 p-1'>
+        <Tab.List className='flex space-x-1 rounded-xl bg-zinc-200 p-1'>
           {Object.keys(categories).map(category => (
             <Tab
               key={category}
               className={({ selected }) =>
                 classNames(
-                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
-                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                  selected
-                    ? 'bg-white shadow'
-                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-zinc-600',
+                  '  focus:shadow focus:outline-none',
+                  selected ? 'bg-white text-zinc-700' : 'hover:bg-zinc-300 hover:text-zinc-800'
                 )
               }
             >
@@ -96,6 +92,8 @@ function Example1() {
           ))}
         </Tab.List>
         <Tab.Panels className='mt-2'>
+          {/* Object.values(object) returns an 'array of string' from the keys of the object */}
+          {/* Here's we looping the keys of the object 'categories' */}
           {Object.values(categories).map((posts, idx) => (
             <Tab.Panel
               key={idx}

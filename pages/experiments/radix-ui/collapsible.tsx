@@ -3,7 +3,7 @@ import { InternalLink, SubTitle, Topic } from '@/components/DesignSystem';
 import { useState } from 'react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
-export default function CollapsibleDemo() {
+export default function ExportedCollapsible() {
   const [open, setOpen] = useState(false);
   return (
     <LayoutToExperiments title='Collapsible' domain='Radix UI'>
@@ -13,7 +13,7 @@ export default function CollapsibleDemo() {
           <Topic name="Try to click more"/>
           <Collapsible.Trigger className='rounded-md bg-gray-200 px-2 py-0.5 text-gray-700 hover:bg-gray-300'>
             {open ? 'less' : 'more'}
-          </Collapsible.Trigger>
+          </Collapsible.Trigger>k
         </div>
         <div className='space-y-2'>
           <InternalLink name='This is Accoordion' href='/work/radix-ui/accordion' />

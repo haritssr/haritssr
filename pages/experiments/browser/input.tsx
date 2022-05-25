@@ -8,7 +8,7 @@ const buttonStyle =
 export default function Input() {
   return (
     <LayoutToExperiments title='Input Element' domain='Browser'>
-      <SubTitle>Browser built in input element</SubTitle>
+      <SubTitle>Browser built-in input elements</SubTitle>
       <div className='grid grid-cols-1 gap-10 sm:grid-cols-3'>
         <Wrapper name='text'>
           <InputText />
@@ -40,7 +40,7 @@ export default function Input() {
         <Wrapper name='email'>
           <InputEmail />
         </Wrapper>
-        <Wrapper name='Month'>
+        <Wrapper name='month'>
           <InputMonth />
         </Wrapper>
         <Wrapper name='number'>

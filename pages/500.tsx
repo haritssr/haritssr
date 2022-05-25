@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout';
 import Link from 'next/link';
 
-export default function HalamanTidakDitemukan() {
+export default function ErrorPage() {
   return (
     <Layout browserTitle='500' description='Kasian nyasar'>
       <div className='flex h-screen flex-col items-center justify-center space-y-5'>

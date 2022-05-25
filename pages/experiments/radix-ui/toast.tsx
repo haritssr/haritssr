@@ -195,7 +195,7 @@ function prettyDate(date: number | Date) {
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'short' }).format(date);
 }
 
-export default function ToastExample() {
+export default function ExportedToast() {
   return (
     <LayoutToExperiments title='Toast' domain='Radix'>
       <SubTitle>A succinct message that is displayed temporarily.</SubTitle>

@@ -83,6 +83,15 @@ const StyledToggleItem = styled(ToolbarPrimitive.ToggleItem, {
   '&:first-child': { marginLeft: 0 },
   '&[data-state=on]': { backgroundColor: violet.violet5, color: violet.violet11 },
 });
+
+// Exports
+export const Toolbar = StyledToolbar;
+export const ToolbarButton = StyledButton;
+export const ToolbarSeparator = StyledSeparator;
+export const ToolbarLink = StyledLink;
+export const ToolbarToggleGroup = StyledToggleGroup;
+export const ToolbarToggleItem = StyledToggleItem;
+
 export default function ToolbarR() {
   return (
     <LayoutToExperiments title='Toolbar' domain='Radix UI'>
@@ -126,11 +135,3 @@ export default function ToolbarR() {
     </LayoutToExperiments>
   );
 }
-
-// Exports
-export const Toolbar = StyledToolbar;
-export const ToolbarButton = StyledButton;
-export const ToolbarSeparator = StyledSeparator;
-export const ToolbarLink = StyledLink;
-export const ToolbarToggleGroup = StyledToggleGroup;
-export const ToolbarToggleItem = StyledToggleItem;

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUpRight, LeftArrow, RightArrowBlue } from './Icons';
+import { LeftArrow, RightArrowBlue } from './Icons';
 
 export function TitleBack({ name, href }: { name: string; href: string }) {
   return (
@@ -40,12 +40,12 @@ export const SubTopic = ({ children }: { children: React.ReactNode }) => {
   return <p className='mb-2 text-zinc-400 '>{children}</p>;
 };
 
-export function InternalLink({ name, href }) {
+export function InternalLink({ name, href }: { name: string; href: string }) {
   return (
     <Link href={href}>
       <a className='group flex w-fit cursor-pointer items-center justify-start text-lg text-blue-600 hover:underline sm:text-base'>
         <p>{name}</p>
-        {/* Arrow Right */}
+        {/* arrow right icon */}
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-4 w-4 pt-[0.25px] text-blue-600 group-hover:underline'
@@ -60,20 +60,30 @@ export function InternalLink({ name, href }) {
   );
 }
 
+export function InternalLinkWithoutArrow({ name, href }: { name: string; href: string }) {
+  return (
+    <Link href={href}>
+      <a className='inline cursor-pointer text-lg text-blue-600 hover:underline sm:text-base'>
+        {name}
+      </a>
+    </Link>
+  );
+}
+
 export function ExternalLink({ name, href }: { name: string; href: string }) {
   return (
-    <cite className='not-italic underline hover:no-underline'>
+    <cite className='not-italic hover:underline'>
       <a
         href={href}
         target='_blank'
         rel='noopener noreferrer'
-        className='group inline-block w-fit cursor-pointer items-center text-purple-500 hover:underline  active:text-rose-600'
+        className='group inline-block w-fit cursor-pointer items-center text-rose-500 hover:underline  active:text-rose-600'
       >
         <div className='flex items-center'>
           <div>{name}</div>
-          {/* Arrow Up Right */}
+          {/* arrow upper right icon */}
           <svg
-            className='-ml-0.5 h-5 w-5 pt-[0.25px] text-purple-400 group-hover:underline '
+            className='-ml-0.5 h-5 w-5 pt-[0.25px] text-rose-400 group-hover:underline '
             viewBox='0 0 24 24'
             width='24'
             height='24'

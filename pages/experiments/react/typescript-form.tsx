@@ -29,7 +29,7 @@ export default function TypeScriptForm() {
 
   return (
     <LayoutToExperiments title='TypeScript Form' domain='React'>
-      <SubTitle>TypeScript React form</SubTitle>
+      <SubTitle>TypeScript React form. Open console log to use it.</SubTitle>
       <form onSubmit={onSubmit} className='mx-auto max-w-sm space-y-5'>
         <div className={wrapperStyle}>
           <label htmlFor='title'>Title</label>

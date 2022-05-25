@@ -4,8 +4,7 @@ import { Listbox } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 
-// listbox STRUCTURE
-// --------------------
+// LISTBOX STRUCTURE
 // <Listbox>
 // <Listbox.Button/>
 // <Listbox.Options>
@@ -13,11 +12,10 @@ import { useState } from 'react';
 // <Listbox.Options/>
 
 // NOTES
-// -----
 // Still not understand how to use render prop of 'selected' in <Listbox.Option/>
 // Not yet using 'horizontal, value, unmount, static' prop & 'open' render prop
 
-const ImportedListbox = () => {
+export default function ExportedListbox() {
   return (
     <LayoutToExperiments title='Listbox' domain='Headless UI'>
       <SubTitle>
@@ -28,7 +26,7 @@ const ImportedListbox = () => {
       <ListboxExample1 />
     </LayoutToExperiments>
   );
-};
+}
 
 const ListboxExample1 = () => {
   const people = [
@@ -46,7 +44,7 @@ const ListboxExample1 = () => {
         <ChevronDownIcon className='h-5 w-5' />
       </Listbox.Button>
 
-      <Listbox.Options className='mt-2 w-64 rounded-md border p-2 shadow-xl space-y-1'>
+      <Listbox.Options className='mt-2 w-64 space-y-1 rounded-md border p-2 shadow-xl'>
         {people.map(person => (
           <Listbox.Option key={person.id} value={person} disabled={person.unavailable}>
             {({ active, selected, disabled }) => (
@@ -54,7 +52,7 @@ const ListboxExample1 = () => {
                 <div
                   className={`
                   ${active && 'bg-blue-500 text-white'} 
-                  ${selected && 'text-white bg-blue-500 '}
+                  ${selected && 'bg-blue-500 text-white '}
                   ${disabled && 'cursor-not-allowed text-zinc-400'} 
                   cursor-pointer rounded-md px-2 py-1
                   `}
@@ -69,5 +67,3 @@ const ListboxExample1 = () => {
     </Listbox>
   );
 };
-
-export default ImportedListbox;

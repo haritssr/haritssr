@@ -37,7 +37,7 @@ const Label = styled('label', {
   userSelect: 'none',
 });
 
-export default function CheckboxDemo() {
+export default function ExportedCheckbox() {
   return (
     <LayoutToExperiments title='CheckBox' domain='Radix UI'>
       <SubTitle>A control that allows the user to toggle between checked and not checked.</SubTitle>

@@ -115,7 +115,7 @@ export const SelectScrollDownButton = StyledScrollDownButton;
 // Your app...
 const Box = styled('div', {});
 
-export const SelectDemo = () => (
+export const SelectComponent = () => (
   <Box>
     <Select defaultValue='blueberry'>
       <SelectTrigger aria-label='Food'>
@@ -124,37 +124,44 @@ export const SelectDemo = () => (
           <ChevronDownIcon />
         </SelectIcon>
       </SelectTrigger>
+
       <SelectContent>
         <SelectScrollUpButton>
           <ChevronUpIcon />
         </SelectScrollUpButton>
+
         <SelectViewport>
           <SelectGroup>
             <SelectLabel>Fruits</SelectLabel>
+
             <SelectItem value='apple'>
               <SelectItemText>Apple</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='banana'>
               <SelectItemText>Banana</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='blueberry'>
               <SelectItemText>Blueberry</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='grapes'>
               <SelectItemText>Grapes</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='pineapple'>
               <SelectItemText>Pineapple</SelectItemText>
               <SelectItemIndicator>
@@ -167,30 +174,35 @@ export const SelectDemo = () => (
 
           <SelectGroup>
             <SelectLabel>Vegetables</SelectLabel>
+
             <SelectItem value='aubergine'>
               <SelectItemText>Aubergine</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='broccoli'>
               <SelectItemText>Broccoli</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='carrot' disabled>
               <SelectItemText>Carrot</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='courgette'>
               <SelectItemText>Courgette</SelectItemText>
               <SelectItemIndicator>
                 <CheckIcon />
               </SelectItemIndicator>
             </SelectItem>
+
             <SelectItem value='leek'>
               <SelectItemText>leek</SelectItemText>
               <SelectItemIndicator>
@@ -198,37 +210,8 @@ export const SelectDemo = () => (
               </SelectItemIndicator>
             </SelectItem>
           </SelectGroup>
-
-          <SelectSeparator />
-
-          <SelectGroup>
-            <SelectLabel>Meat</SelectLabel>
-            <SelectItem value='beef'>
-              <SelectItemText>Beef</SelectItemText>
-              <SelectItemIndicator>
-                <CheckIcon />
-              </SelectItemIndicator>
-            </SelectItem>
-            <SelectItem value='chicken'>
-              <SelectItemText>Chicken</SelectItemText>
-              <SelectItemIndicator>
-                <CheckIcon />
-              </SelectItemIndicator>
-            </SelectItem>
-            <SelectItem value='lamb'>
-              <SelectItemText>Lamb</SelectItemText>
-              <SelectItemIndicator>
-                <CheckIcon />
-              </SelectItemIndicator>
-            </SelectItem>
-            <SelectItem value='pork'>
-              <SelectItemText>Pork</SelectItemText>
-              <SelectItemIndicator>
-                <CheckIcon />
-              </SelectItemIndicator>
-            </SelectItem>
-          </SelectGroup>
         </SelectViewport>
+
         <SelectScrollDownButton>
           <ChevronDownIcon />
         </SelectScrollDownButton>
@@ -237,15 +220,13 @@ export const SelectDemo = () => (
   </Box>
 );
 
-const SelectExample = () => {
+export default function ExportedSelect() {
   return (
     <LayoutToExperiments title='Select' domain='Radix'>
       <SubTitle>
         Displays a list of options for the user to pick from—triggered by a button.
       </SubTitle>
-      <SelectDemo />
+      <SelectComponent />
     </LayoutToExperiments>
   );
-};
-
-export default SelectExample;
+}

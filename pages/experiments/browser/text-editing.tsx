@@ -4,7 +4,9 @@ import { useEffect, useRef } from 'react';
 
 export default function TextEditing() {
   const elementSelected = useRef(null);
+
   useEffect(() => console.log(elementSelected), []);
+
   return (
     <LayoutToExperiments title='Text Editing' domain='Browser API'>
       <SubTitle>Image with figcaption</SubTitle>

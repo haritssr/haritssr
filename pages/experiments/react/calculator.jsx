@@ -149,7 +149,6 @@ function evaluate({ currentOperand, previousOperand, operation }){
 
 
 function Calculator() {
-  
   const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(reducer, {});
 
   // dispatch({ type: ACTIONS.ADD_DIGIT, payload: { digit: 1 } });

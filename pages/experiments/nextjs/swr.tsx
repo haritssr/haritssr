@@ -1,18 +1,22 @@
 import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { Key } from 'react';
 import useSWR from 'swr';
 
-const fetcher = url => fetch(url).then(res => res.json());
+const fetcher = (url: RequestInfo) => fetch(url).then(res => res.json());
 
 export default function SWR() {
   const { data, error } = useSWR('/api/hello', fetcher);
+  
   if (error) return 'An error has occurred.';
+
   if (!data)
     return (
       <LayoutToExperiments title='Loading...' domain='Next.js'>
         <div>No Data</div>
       </LayoutToExperiments>
     );
+
   return (
     <LayoutToExperiments title='SWR' domain='Next.js'>
       <SubTitle>
@@ -25,7 +29,7 @@ export default function SWR() {
         component
       </SubTitle>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-3'>
-        {data.map(d => (
+        {data.map((d: { id: Key; name: string; age: number; city: string; }) => (
           <NameCard key={d.id} name={d.name} age={d.age} city={d.city} />
         ))}
       </div>

@@ -37,7 +37,7 @@ const ToggleGroup = StyledToggleGroup;
 const ToggleGroupItem = StyledItem;
 
 // Your app...
-export default function ToggleGroupDemo() {
+export default function ExportedToggleGroup() {
   return (
     <LayoutToExperiments title='ToggleGroup' domain='Radix UI'>
       <SubTitle>A set of two-state buttons that can be toggled on or off.</SubTitle>

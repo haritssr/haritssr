@@ -37,10 +37,19 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/**/*.tsx",
+    "**/**/*.tsx",  
     "tailwind.config.js",
-    "pages/showcase/framer-motion"
-, "pages/experiments/framer-motion/api", "data/ExperimentsData.js", "pages/experiments/react/calculator.jsx", "pages/experiments/radix-ui/navigation-menu.jsx", "pages/experiments/react/useStateTodo.js", "utils/store-context-selector.js", "pages/experiments/react/store-context-selector.tes", "utils/store-context.js", "pages/experiments/react/store-context-selector.tsz", "pages/experiments/react/store-zustand.js"  ],
+    "pages/showcase/framer-motion",
+    "pages/experiments/framer-motion/api",
+    "data/ExperimentsData.js",
+    "pages/experiments/react/calculator.jsx",
+    "pages/experiments/radix-ui/navigation-menu.tsx",
+    "pages/experiments/react/useStateTodo.js",
+    "utils/store-context-selector.js",
+    "pages/experiments/react/store-context-selector.tes",
+    "utils/store-context.js",
+    "pages/experiments/react/store-context-selector.tsz",
+    "pages/experiments/react/store-zustand.js" ],
   "exclude": [
     "node_modules"
   ]

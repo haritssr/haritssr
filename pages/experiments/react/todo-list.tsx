@@ -32,7 +32,7 @@ export default function TodoList() {
   const [todos, setTodos] = useState([]);
   const [edit, setEdit] = useState({ id: '', activity: '' });
 
-  function saveTodoHandler(e) {
+  function saveTodoHandler(e: { preventDefault: () => void; }) {
     e.preventDefault();
     setTodos([
       ...todos,

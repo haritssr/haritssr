@@ -2,7 +2,6 @@ import React from 'react';
 import { styled } from '@stitches/react';
 import { violet, mauve, blackA, whiteA } from '@radix-ui/colors';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import LayoutSubWorkToTopic from '@/components/LayoutToExperiments';
 import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
@@ -45,7 +44,7 @@ const Label = styled('label', {
   userSelect: 'none',
 });
 
-export default function SwitchDemo() {
+export default function ExportedSwitch() {
   return (
     <LayoutToExperiments title='Switch' domain='Radix UI'>
       <SubTitle>A control that allows the user to toggle between checked and not checked.</SubTitle>

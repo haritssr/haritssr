@@ -25,24 +25,25 @@ export default function DynamicPage({ person }) {
 
 // export async function getStaticPaths() {
 export const getStaticPaths: GetStaticPaths = async () => {
-  const users = await fetch('https://jsonplaceholder.typicode.com/users').then(u => u.json());
-  const paths = users.map((u) => {
-    return { params: { id: u.id.toString() } };
+  const users = await fetch('https://jsonplaceholder.typicode.com/users').then(user => user.json());
+
+  const paths = users.map((user: { id: { toString: () => string } }) => {
+    return { params: { id: user.id.toString() } };
   });
+
   return {
     paths,
     fallback: false,
   };
 };
 
-//export const getStaticProps = async context => {}
-// export async function getStaticProps(context) {
-  // ini adalah data statis yang akan difetching untuk setiap page di dinamic pages
+//Export const getStaticProps = async context => {}
+//Export async function getStaticProps(context) {
+//This is the static data that will be fetch for every page inside dynamic pages
 export const getStaticProps: GetStaticProps = async context => {
-  const id = context.params.id;
-  const person = await fetch('https://jsonplaceholder.typicode.com/users/' + id).then(p =>
-    p.json()
-  );
+  const person = await fetch(
+    'https://jsonplaceholder.typicode.com/users/' + context.params.id
+  ).then(p => p.json());
   return {
     props: { person },
   };

@@ -1,9 +1,9 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 
-export default function ImportedDialog() {
+export default function ExportedDialog() {
   return (
     <LayoutToExperiments title='Disclosure' domain='Headless UI'>
       <SubTitle>
@@ -11,6 +11,7 @@ export default function ImportedDialog() {
         features, perfect for building completely custom modal and dialog windows for your next
         application. <ExternalLink name='Source' href='https://headlessui.dev/react/dialog' />
       </SubTitle>
+
       <div className='space-y-10'>
         <Wrapper title='Dialog without transition'>
           <DialogExample1 />
@@ -102,6 +103,7 @@ const DialogExample2 = () => {
           >
             <Dialog.Overlay className='fixed inset-0 bg-zinc-800/80' />
           </Transition.Child>
+
           <div className='relative z-50 rounded-md bg-white p-4 shadow-xl'>
             <Dialog.Title className='text-xl font-semibold'>Title</Dialog.Title>
             <Dialog.Description className='text-zinc-600'>

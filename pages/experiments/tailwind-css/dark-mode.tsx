@@ -27,6 +27,7 @@ export default function DarkMode() {
         className='mb-5 rounded border border-zinc-400 px-2 py-1 hover:bg-zinc-100 hover:text-zinc-700 dark:bg-zinc-600 dark:text-white'
       >
         {theme === 'dark' ? (
+          // Moon
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6'
@@ -42,6 +43,7 @@ export default function DarkMode() {
             />
           </svg>
         ) : (
+          // Sun
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6'

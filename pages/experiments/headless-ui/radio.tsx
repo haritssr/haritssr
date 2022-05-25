@@ -1,7 +1,6 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { SVGProps, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 
 const plans = [
@@ -25,7 +24,7 @@ const plans = [
   },
 ];
 
-export default function ImportedRadio() {
+export default function ExportedRadio() {
   return (
     <LayoutToExperiments title='Disclosure' domain='Headless UI'>
       <SubTitle>
@@ -99,7 +98,7 @@ function Example1() {
   );
 }
 
-function CheckIcon(props) {
+function CheckIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox='0 0 24 24' fill='none' {...props}>
       <circle cx={12} cy={12} r={12} fill='#fff' opacity='0.2' />

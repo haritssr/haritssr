@@ -1,9 +1,8 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import { Popover, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
 
-export default function ImportedPopover() {
+export default function ExportedPopover() {
   return (
     <LayoutToExperiments title='Disclosure' domain='Headless UI'>
       <SubTitle>

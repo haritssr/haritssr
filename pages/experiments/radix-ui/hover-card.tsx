@@ -2,7 +2,7 @@ import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as HoverCard from '@radix-ui/react-hover-card';
 
-export default function HoverCardDemo() {
+export default function ExportedHoverCard() {
   return (
     <LayoutToExperiments title='Hover Card' domain='Radix UI'>
       <SubTitle>For sighted users to preview content available behind a link.</SubTitle>

@@ -21,7 +21,7 @@ const Data = [
   },
 ];
 
-const ImportedDisclosure = () => {
+export default function ExportedDisclosure() {
   return (
     <LayoutToExperiments title='Disclosure' domain='Headless UI'>
       <SubTitle>
@@ -37,7 +37,7 @@ const ImportedDisclosure = () => {
       </div>
     </LayoutToExperiments>
   );
-};
+}
 
 const Wrapper = ({ children, title }: { children: React.ReactNode; title: string }) => {
   return (
@@ -237,5 +237,3 @@ const DisclosurePlusNaked = () => {
     </Wrapper>
   );
 };
-
-export default ImportedDisclosure;

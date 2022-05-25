@@ -3,7 +3,7 @@ import { Switch } from '@headlessui/react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 
-const ImportedSwitch = () => {
+export default function ExportedSwitch() {
   return (
     <LayoutToExperiments title='Listbox' domain='Headless UI'>
       <SubTitle>
@@ -14,7 +14,7 @@ const ImportedSwitch = () => {
       <SwitchExample1 />
     </LayoutToExperiments>
   );
-};
+}
 
 const SwitchExample1 = () => {
   const [enabled, setEnabled] = useState(true);
@@ -39,5 +39,3 @@ const SwitchExample1 = () => {
     </Switch.Group>
   );
 };
-
-export default ImportedSwitch;

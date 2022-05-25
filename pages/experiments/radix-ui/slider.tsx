@@ -2,7 +2,6 @@ import React from 'react';
 import { styled } from '@stitches/react';
 import { violet, blackA } from '@radix-ui/colors';
 import * as SliderPrimitive from '@radix-ui/react-slider';
-import LayoutSubWorkToTopic from '@/components/LayoutToExperiments';
 import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
@@ -54,7 +53,7 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
   '&:focus': { boxShadow: `0 0 0 5px ${blackA.blackA8}` },
 });
 
-export default function SliderDemo() {
+export default function ExportedSlider() {
   return (
     <LayoutToExperiments title='Slider' domain='Radix UI'>
       <SubTitle>An input where the user selects a value from within a given range.</SubTitle>

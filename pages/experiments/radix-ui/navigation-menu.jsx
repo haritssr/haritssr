@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 
-
 // NEED TO CHANGE TO JSX because TYPESCRIPT IS FUCKING PERFECTIONIST ABOUT EVERYTHING
+
 import React from 'react';
 import { styled, keyframes } from '@stitches/react';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';

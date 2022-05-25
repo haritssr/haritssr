@@ -10,12 +10,24 @@ export default function Experiments() {
       description='Experiments'
       domain='Experiments'
     >
-      <div className='mb-14 border border-zinc-200 p-2 sm:w-1/2'>
-        {/* <div className='font-semibold  text-zinc-700 text-xl'>Introduction</div> */}
-        <div className='text-zinc-500'>
+      {/* Search */}
+      <div className='mb-5 flex justify-start'>
+        <div className='justfy-center flex w-full items-center sm:w-1/3'>
+          <input
+            type='search'
+            placeholder='Search experiments..'
+            className='w-full focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 rounded-md px-2.5 py-1.5 border border-zinc-400'
+          />
+        </div>
+      </div>
+
+      {/* Notes */}
+      <div className='mb-14 rounded border border-zinc-300 p-2'>
+        <div className='text-sm font-bold'>NOTE</div>
+        <div className='text-zinc-600'>
           Below is all of my experiments with these technology stack, I made these to document what
           I&apos;ve made so that I don&apos;t forget, can be reused, and hopefully it can benefit
-          others. The source code can be found{' '}
+          others. Grouped by tech stack. The source code can be found{' '}
           <ExternalLink href='https://github.com/haritssr/haritssr' name='here' />
         </div>
       </div>

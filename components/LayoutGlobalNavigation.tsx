@@ -4,7 +4,9 @@ import { useRouter } from 'next/router';
 import Footer from './Footer';
 import BottomNavMobile from './BottomNavMobile';
 
-interface LayoutType {
+// This layout used in the first page of  Experiments and Blog
+
+interface LayoutGlobalNavigationType {
   children: React.ReactNode;
   browserTitle: string;
   description: string;
@@ -16,7 +18,7 @@ export default function LayoutGlobalNavigation({
   browserTitle,
   description,
   domain,
-}: LayoutType) {
+}: LayoutGlobalNavigationType) {
   const router = useRouter();
   const image = 'https://harislab.com/public/HarisLab.png';
   const type = 'website';
@@ -30,6 +32,7 @@ export default function LayoutGlobalNavigation({
           <title>{browserTitle} - Harits Syah</title>
         )}{' '}
         <link rel='icon' href='/logo_haritssr.svg' />
+        <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={description} />
         <meta property='og:type' content={type} />
@@ -46,17 +49,15 @@ export default function LayoutGlobalNavigation({
 
       <GlobalNavigation />
 
-      <div className='sticky inset-x-0 top-0 z-40 mb-10 w-full border-b  border-zinc-200 bg-white/80 py-1.5 backdrop-blur'>
+      <div className='sticky inset-x-0 top-0 z-40 mb-5 sm:mb-10 w-full border-b  border-zinc-300 bg-white/80 py-1.5 backdrop-blur'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           <h2 id='work' className='z-40 flex h-auto items-center'>
-            <div className='text-xl font-bold text-gray-700 '>{domain}</div>
+            <div className='text-xl font-bold text-gray-800 '>{domain}</div>
           </h2>
         </section>
       </div>
 
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
-        {children}
-      </main>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>{children}</main>
 
       <Footer />
       <BottomNavMobile />

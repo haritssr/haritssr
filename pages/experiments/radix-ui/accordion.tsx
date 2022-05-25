@@ -2,7 +2,7 @@ import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as Accordion from '@radix-ui/react-accordion';
 
-export default function AccordionDemo() {
+export default function ExportedAccordion() {
   return (
     <LayoutToExperiments title='Accordion' domain='Radix UI'>
       <SubTitle>

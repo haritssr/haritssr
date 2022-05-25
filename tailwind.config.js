@@ -46,9 +46,9 @@ module.exports = {
       zIndex: {
         90: '90',
       },
-      animation: {
-        'background-spin': 'halfSpin 10s ease-in-out infinite',
-      },
+      // animation: {
+      //   'background-spin': 'halfSpin 10s ease-in-out infinite',
+      // },
       fontFamily: {
         inter: ['Inter'],
         mw: ['Merriweather'],
@@ -69,12 +69,15 @@ module.exports = {
       fill: ['hover', 'focus'],
     },
   },
+  
   plugins: [
     require('@tailwindcss/typography'),
     require('tailwindcss-radix')({
       variantPrefix: 'rdx',
     }),
     require('tailwindcss-text-indent')(),
-    require('@tailwindcss/forms'),
+    require('@tailwindcss/forms')({
+      strategy: 'classop',
+    }),
   ],
 };

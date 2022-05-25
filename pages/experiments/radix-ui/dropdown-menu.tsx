@@ -2,7 +2,7 @@ import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-export default function DropdownMenuDemo() {
+export default function ExportedDropdownMenu() {
   const item =
     'px-5 py-0.25 w-full bg-white text-gray-700 hover:bg-blue-500 hover:text-white text-tiny hover:cursor-pointer';
   const group = 'mb-2';
@@ -32,7 +32,21 @@ export default function DropdownMenuDemo() {
             <DropdownMenu.Root>
               <DropdownMenu.TriggerItem className={`${item} flex items-center justify-between`}>
                 <div>Arrage by</div>
-                <Icon />
+                {/* Chevron Down Icon */}
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-3 w-3'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 5l7 7-7 7'
+                  />
+                </svg>
               </DropdownMenu.TriggerItem>
               <DropdownMenu.Content className='divide-y divide-gray-500 shadow-xl'>
                 <DropdownMenu.Item className={item}>List view</DropdownMenu.Item>
@@ -52,15 +66,3 @@ export default function DropdownMenuDemo() {
     </LayoutToExperiments>
   );
 }
-
-const Icon = () => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    className='h-3 w-3'
-    fill='none'
-    viewBox='0 0 24 24'
-    stroke='currentColor'
-  >
-    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-  </svg>
-);

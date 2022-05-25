@@ -6,16 +6,16 @@ export default function YoutubeThumbnail() {
     <LayoutToExperiments title='YouTube thumbnail' domain='Tailwind CSS'>
       <SubTitle>Youtube Thumbnail example</SubTitle>
 
-      <div className='relative h-[360px] w-[640px] overflow-hidden bg-white shadow'>
+      <div className='relative h-[360px] w-[640px] overflow-hidden  rounded-md bg-gradient-to-br from-zinc-50 to-purple-100 border border-purple-300 shadow-md shadow-purple-100'>
         <div>
           <Play />
         </div>
         <div aria-hidden='true' className='w-[512px]h-[512px] absolute bg-purple-400'></div>
 
         <div className='relative flex h-full w-2/3 flex-col justify-end space-y-4 p-8'>
-          <p className='text-cs font-semibold uppercase text-purple-600'>How we&apos;d build it</p>
+          <p className='text-xs font-semibold uppercase text-purple-600'>How we&apos;d build it</p>
           <h1 className='text-gray 900 text-4xl font-semibold'>
-            YoutubeThumbail with Tailwind CSS
+            Youtube Thumbail with Tailwind CSS
           </h1>
           <TailwindSVG />
         </div>

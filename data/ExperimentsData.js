@@ -1,4 +1,7 @@
 // The way this data works is under topic is always one level deep of content, no second level and so on.
+// You can't using '-' in name
+// The system will automatically adding '-' to space inside name
+// It is used in all experiments routes, for displaying and routing
 
 export const ExperimentsData = [
   {
@@ -27,8 +30,8 @@ export const ExperimentsData = [
     logoSrc: '/ExperimentsDomainIcons/react.ico',
     description: 'For manipulating user interface',
     links: [
-      { name: 'useState form' },
-      { name: 'useEffect' },
+      { name: 'useState Form' },
+      { name: 'useEffect Title' },
       // { name: 'useContext' },
       // { name: 'useMemo' },
       // { name: 'useRef' },
@@ -45,6 +48,7 @@ export const ExperimentsData = [
       { name: 'Generic TypeScript' },
       { name: 'useContext CheckBox' },
       { name: 'useState Todo' },
+      { name: 'Form' },
     ],
   },
   {
@@ -58,12 +62,12 @@ export const ExperimentsData = [
       { name: 'Dynamic Pages' },
       // { name: 'getStaticProps' },
       // { name: 'getServerSideProps' },
-      { name: 'Middleware' },
-      { name: 'Script Component' },
+      // { name: 'Middleware' },
+      // { name: 'Script Component' },
       { name: 'SWR' },
       { name: 'Articles' },
       { name: 'Students' },
-      { name: 'With and Without SWR' },
+      // { name: 'With and Without SWR' },
       { name: 'Posts' },
     ],
   },
@@ -73,20 +77,19 @@ export const ExperimentsData = [
     logoSrc: '/ExperimentsDomainIcons/chrome.svg',
     description: 'Browser built-in utilities',
     links: [
-      { name: 'Browser Title' },
-      { name: 'Audio' },
-      { name: 'Video' },
+      // { name: 'Browser Title' },
       { name: 'Clock' },
       { name: 'Number game' },
-      { name: 'Rafi' },
       { name: 'Search' },
+      { name: 'Search Books' },
       { name: 'Input' },
       { name: 'Details' },
       { name: 'Select' },
-      { name: 'Glosary' },
+      { name: 'Glossary' },
       { name: 'Figure' },
       { name: 'Text Editing' },
       { name: 'YouTube Embed' },
+      // { name: 'Range Effect' },
     ],
   },
   {
@@ -102,7 +105,7 @@ export const ExperimentsData = [
     title: 'Framer Motion',
     logoSrc: '/ExperimentsDomainIcons/framer-motion.png',
     description: 'Animation for user interface',
-    links: [{ name: 'Staggered Animation' }, { name: 'Basic' }],
+    links: [{ name: 'Staggered Animation' }, { name: 'Basic' }, { name: 'Parallax Effect' }],
   },
   {
     id: 7,
@@ -119,7 +122,8 @@ export const ExperimentsData = [
     links: [
       { name: 'Menu' },
       { name: 'Listbox' },
-      { name: 'Combobox' },
+      { name: 'Combobox HeadlessUIData' },
+      { name: 'Combobox ExperimentsData' },
       { name: 'Switch' },
       { name: 'Disclosure' },
       { name: 'Dialog' },
@@ -149,7 +153,7 @@ export const ExperimentsData = [
       { name: 'Scroll Area' },
       { name: 'Slider' },
       { name: 'Switch' },
-      { name: 'Tabs' },
+      // { name: 'Tabs' },
       { name: 'Toggle' },
       { name: 'Toggle Group' },
       { name: 'Toolbar' },

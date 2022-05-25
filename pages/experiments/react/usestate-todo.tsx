@@ -1,6 +1,6 @@
 import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { useState } from 'react';
+import { Key, SetStateAction, useState } from 'react';
 
 let nextId = 3;
 const initialTodos = [
@@ -81,7 +81,7 @@ interface TodoType {
 function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
   return (
     <ul className='space-y-2'>
-      {todos.map(todo => (
+      {todos.map((todo: { id: Key }) => (
         <li key={todo.id}>
           <Task todo={todo} onChange={onChangeTodo} onDelete={onDeleteTodo} />
         </li>

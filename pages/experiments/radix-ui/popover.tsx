@@ -2,7 +2,7 @@ import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as Popover from '@radix-ui/react-popover';
 
-export default function PopoverDemo() {
+export default function ExportedPopover() {
   return (
     <LayoutToExperiments title='Popover' domain='Radix UI'>
       <SubTitle>Displays rich content in a portal, triggered by a button.</SubTitle>
@@ -11,7 +11,11 @@ export default function PopoverDemo() {
           Open
         </Popover.Trigger>
         {/* <Popover.Anchor /> */}
-        <Popover.Content className='bg-white p-2 border border-zinc-400 rounded' sideOffset={10} side='bottom'>
+        <Popover.Content
+          className='rounded border border-zinc-400 bg-white p-2'
+          sideOffset={10}
+          side='bottom'
+        >
           <div className='max-w-lg text-gray-700'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur vel fugit ipsum est,
             perferendis animi accusantium molestiae impedit minima ea debitis cumque vitae

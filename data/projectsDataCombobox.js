@@ -1,4 +1,4 @@
-export const projects = [
+export const projectsDataCombobox = [
   {
     id: 1,
     domain: 'Product Manager',

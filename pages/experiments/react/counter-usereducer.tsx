@@ -39,6 +39,7 @@ const ResetButton = () => {
     </button>
   );
 };
+
 const AddOneButton = () => {
   const [, dispatch] = useContext(CounterContext);
   return (
@@ -47,6 +48,7 @@ const AddOneButton = () => {
     </button>
   );
 };
+
 const SubstractOneButton = () => {
   const [, dispatch] = useContext(CounterContext);
   return (
@@ -62,7 +64,6 @@ const Counter = () => {
 };
 
 function CounterUseState() {
-  // const [counter, setCounter] = useState(0);
   return (
     <div className={`${divStyle}`}>
       <div className={`${divStyle} space-y-3`}>

@@ -3,32 +3,35 @@ import Layout from '@/components/Layout';
 import { GetStaticPaths } from 'next';
 import { GetStaticProps } from 'next';
 
-//getStaticPaths di [id].tsx gunanya untuk ngambil dynamic route endpoint saja, untuk diteruskan ke getStaticProps
-// alternatif tanpa typescript, export async function getStaticPaths() {
+//getStaticPaths in [id].tsx used to take dynamic-route-endpoint only, to ocntinue to getStaticProps
+//Alternative wihtout TypeScript -> export async function getStaticPaths() {...}
 export const getStaticPaths: GetStaticPaths = async () => {
-  //mengambil data keseluruhan (hanya 20 dari 100 yang diberikan API endpoint)
-  //https://stackoverflow.com/questions/52842039/how-to-limit-the-amount-of-data-returned-from-a-json-file-using-fetch
+  //fetch 20 of 100 data
+  //https://stackoverflow.com/questions/52842039 how-to-limit-the-amount-of-data-returned-from-a-json-file-using-fetch
   const posts = await fetch('https://jsonplaceholder.typicode.com/posts/?_limit=20').then(post =>
     post.json()
   );
 
-  //mengambil data,  dimana dari data keseluruhan yang akan dijadikan sebagai route
-  //disini data.id yang dipilih untuk menjadi dynamic route
-  //jangan lupa diubah ke string karena data mentah (a) masih berupa json, (id) sudah berupa string
-  const paths = posts.map(post => ({
+  // Mapping the posts array to new paths array with structure [{ params: { id: '1' }, { params: { id: '2' }]
+  const paths = posts.map((post: { id: { toString: () => any } }) => ({
     params: {
+      // Where from all of the retrived data, only the data.id is needed to dynamic route.
+      // post.id is in json, change to string
       id: post.id.toString(),
     },
   }));
 
-  //kita mengembalikan nilai berupa keseluruhan path, yaitu const paths berupa array of string of post.id.toString()
+  //We retrive all of the path, which is const paths as an array of string of post.id.toString()
   //falback: false, artinya selain route yang ada di paths, maka akan ke halaman 404
+  // paths = paths : paths
   return { paths, fallback: false };
 };
 
-//getStaticProps di [dynamicRoute].tsx digunakan untuk fetching data dan dikasih ke komponen dan juga untuk menaruh dynamic endpoint routenya
-// tapa typescript, export async function getStaticProps({ params }) {
+//getStaticProps in [dynamicRoute].tsx used to fetching data and passes to components that needed and for placing the dynamic endpoint route
+//Tanpa TypeScript, export async function getStaticProps({ params }) {...}
+// context.params
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  //fetch specific data based on the id from the API endpoint for every page inside the next.js dynamic route
   const posts = await fetch('https://jsonplaceholder.typicode.com/posts/' + params.id).then(post =>
     post.json()
   );
@@ -39,6 +42,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
+//Each dynamic pages
 export default function Halaman({ posts }) {
   return (
     <Layout browserTitle={posts.title} description={posts.title}>

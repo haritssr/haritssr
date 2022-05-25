@@ -1,6 +1,6 @@
 import { ExternalCodeLink, ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { useKBar } from 'kbar';
+// import { useKBar } from 'kbar';
 
 import {
   KBarProvider,
@@ -14,7 +14,9 @@ import {
 } from 'kbar';
 
 export default function Search() {
-  const { query } = useKBar();
+
+  // const { query } = useKBar();
+
   return (
     <KBarProvider actions={actions}>
       <KBarPortal>
@@ -36,6 +38,7 @@ export default function Search() {
           // onClick={query.toggle}
           className='group rounded-md bg-zinc-200 p-1.5 hover:bg-zinc-300'
         >
+          {/* Search Button from Heroicons */}
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-4 w-4 text-zinc-600 hover:text-zinc-900'
@@ -47,15 +50,15 @@ export default function Search() {
               strokeLinecap='round'
               strokeLinejoin='round'
               strokeWidth={1.5}
-              // Search Button from Heroicons
               d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
             />
           </svg>
         </button>
+
         <div>
           Please press <code className='text-green-600'>ctrl+k</code>, because the above{' '}
-          <code>&quot;onClick=query.toggle&quot;</code> toggle button does not work when i move to this
-          page from the _app.js page.
+          <code>&quot;onClick=query.toggle&quot;</code> toggle button does not work when i move to
+          this page from the _app.js page.
         </div>
       </LayoutToExperiments>
     </KBarProvider>
@@ -92,6 +95,7 @@ const actions = [
 ];
 
 function RenderResults() {
+
   const { results } = useMatches();
 
   return (

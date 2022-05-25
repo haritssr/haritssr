@@ -25,9 +25,11 @@ const LoginSection = () => {
     </div>
   );
 };
+
 const UserSection = () => {
   return <div className={divStyle}> User: {useUser()}</div>;
 };
+
 const CartCountSection = () => {
   return <div className={divStyle}>CartCount : {useCartCount()}</div>;
 };

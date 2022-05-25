@@ -1,6 +1,8 @@
 import { LogoHaritssr, LogoHarisStudio, LogoHarisLab } from '@/Icons';
 import Image from 'next/image';
 
+//It is used in index.tsx
+
 export const ProjectsData = [
   {
     href: 'https://www.harislab.com',
