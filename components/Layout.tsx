@@ -23,7 +23,7 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
         ) : (
           <title>{browserTitle} - Harits Syah</title>
         )}{' '}
-        <link rel='icon' href='/logo_haritssr.svg' />
+        <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
         <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={description} />

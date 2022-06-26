@@ -1,16 +1,15 @@
 import Layout from '@/components/Layout';
 import Image from 'next/image';
 import ContactComponent from '@/components/ContactComponent';
-import { BigInternalLink, InternalLink, Topic } from '@/components/DesignSystem';
+import { InternalLink } from '@/components/DesignSystem';
 import { TechnologyData } from '../data/TechnologyData';
-
 import { ContactData } from '../data/ContactData';
 import ProjectsBox from '@/components/ProjectBox';
 import { ProjectsData } from '../data/ProjectsData';
+import { DesignProjectsData } from '../data/DesignProjectsData';
 import { BooksData } from 'data/BooksData';
 import { MainAppsData } from 'data/MainAppsData';
-
-import Link from 'next/link';
+import { LogoHarisLab } from '@/components/Icons';
 
 export default function Home() {
   return (
@@ -27,52 +26,21 @@ export default function Home() {
             placeholder='blur'
           />
         </article>
-        <article className='space-y-4 text-center sm:my-auto md:text-left'>
-          <div className='text-3xl font-bold text-zinc-800 sm:text-5xl'>Harits Syah</div>
-          <div className='text-lg font-medium text-zinc-700 sm:text-2xl'>
-            Frontend Engineer & Web Designer
+        <article className='space-y-3 text-center sm:my-auto sm:space-y-4 md:text-left'>
+          <div className='text-3xl font-bold text-zinc-800 sm:text-4xl'>Harits Syah</div>
+          <div className='text-lg text-zinc-600 sm:text-2xl'>
+            Web Frontend <span className='text-blue-600'>React</span> Engineer
           </div>
-          <div className='text-lg text-zinc-600 sm:text-xl'>
-            Creator of {``}
-            <a
-              href='www.harislab.com'
-              target='_blank'
-              rel='noopener norefferer'
-              className='hover:text-white-500 hover:underline'
-            >
-              Haris Lab
-            </a>{' '}
-            &{' '}
-            <a
-              href='www.harislab.com'
-              target='_blank'
-              rel='noopener norefferer'
-              className='hover:text-white-500 hover:underline'
-            >
-              Haris Studio
-            </a>
-          </div>
-
-          <div className='flex w-full flex-col items-center justify-center space-y-3 p-8 sm:flex-row sm:space-y-0 sm:space-x-5 sm:p-0 md:justify-start'>
-            <Link href='/experiments'>
-              <a className='text-whitehover:border-blue-600 flex w-full items-center justify-center space-x-2 rounded-md border border-blue-500 bg-blue-500 px-4 py-1.5 text-center text-white hover:bg-blue-600 sm:w-2/5'>
-                Experiments
-              </a>
-            </Link>
-            <Link href='/blog'>
-              <a className='text-zinc-700hover:bg-zinc-100 flex w-full items-center justify-center space-x-2 rounded-md border border-zinc-400 px-4 py-1.5 text-center text-zinc-700 hover:bg-zinc-50 sm:w-2/5'>
-                Blog
-              </a>
-            </Link>
-            {/* <BigInternalLink href='/experiments' name='Experiments' />
-            <BigInternalLink href='/blog' name='Blog' /> */}
+          <div className='mx-auto flex w-fit cursor-pointer items-center space-x-1.5 rounded-lg bg-zinc-100 px-2.5 py-1 hover:bg-zinc-200 sm:mx-0 border border-zinc-300'>
+            <LogoHarisLab />
+            <div className='text-lg font-medium text-zinc-800'>Haris Lab</div>
           </div>
         </article>
       </section>
 
-      <section className='my-28' id='projects'>
-        <Topic name='Projects' />
-        <div className='mt-3 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4'>
+      <section className='my-28 px-5 sm:px-0' id='projects'>
+        <TopicIndex name='Frontend Projects' />
+        <div className='mt-5 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4'>
           {ProjectsData.map(d => (
             <ProjectsBox
               key={d.title}
@@ -88,30 +56,48 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='mb-28'>
-        <Topic name='Technology' />
-        <div className='mt-3 grid grid-flow-row grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-5 md:grid-cols-4'>
+      <section className='my-28 px-5 sm:px-0' id='projects'>
+        <TopicIndex name='Design Projects' />
+        <div className='mt-5 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4'>
+          {DesignProjectsData.map(d => (
+            <ProjectsBox
+              key={d.title}
+              href={d.href}
+              description={d.description}
+              title={d.title}
+              period={d.period}
+              status={d.status}
+              imgSrc={d.imgSrc}
+              industry={d.industry}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className='mb-28 px-5 sm:px-0'>
+        <TopicIndex name='Technologies' />
+        <div className='grid grid-flow-row grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4'>
           {TechnologyData.map(c => (
             <ContactComponent href={c.href} name={c.name} key={c.name} imgSrc={c.imgSrc} />
           ))}
         </div>
       </section>
 
-      <section className='mb-28'> 
-        <Topic name='Main Apps' />
-        <div className='mt-3 grid grid-flow-row grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-5 md:grid-cols-4'>
+      <section className='mb-28 px-5 sm:px-0'>
+        <TopicIndex name='Main Apps' />
+        <div className='grid grid-flow-row grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4'>
           {MainAppsData.map(c => (
             <ContactComponent href={c.href} name={c.name} key={c.name} imgSrc={c.imgSrc} />
           ))}
         </div>
       </section>
 
-      <section className='mb-28'>
-        <Topic name='Favorite Reading' />
-        <div className='mt-3 grid w-fit grid-flow-row grid-cols-2 gap-5 sm:grid-cols-3 sm:gap-x-5 md:grid-cols-5'>
+      <section className='mb-28 px-5 sm:px-0'>
+        <TopicIndex name='Favorite Reading' />
+        <div className='grid w-fit grid-flow-row grid-cols-2 gap-3 rounded-md bg-gray-50 p-4 sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
           {BooksData.map(({ title, href, imgSrc }) => (
             <div className='flex h-full flex-col' key={title}>
-              <div className='rounded-md  bg-zinc-100 hover:bg-zinc-200'>
+              <div className='rounded-md '>
                 <a
                   title={title}
                   href={href}
@@ -120,9 +106,7 @@ export default function Home() {
                   className='mb-1 inline-block h-full px-3 pt-3'
                 >
                   <Image src={imgSrc} alt={title} height={190} width={150} />
-                  <div className='pb-1 text-[12px] font-medium text-zinc-700 sm:text-sm'>
-                    {title}
-                  </div>
+                  <div className='pb-1 text-[12px] text-zinc-700 sm:text-sm'>{title}</div>
                 </a>
               </div>
             </div>
@@ -130,8 +114,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='mb-28 space-y-2'>
-        <Topic name="What Do I Mean by Me As A Web 'Frontend Engineer'?" />
+      <section className='mb-28 space-y-2 px-5 text-zinc-600 sm:px-0'>
+        <TopicIndex name='What do i mean me as a Web Frontend Engineer?' />
         <div>
           Being Web Frontend Engineer means doing data manipulation from many sources staticly or
           dynamicly and display it on web platform in a lot of unique ways by laveraging built-in
@@ -151,13 +135,14 @@ export default function Home() {
             <li>Testing</li>
           </ul>
         </div>
-        <div>
-          <InternalLink href='/#projects' name='See my comperhensive frontend projects' />
-          <InternalLink href='/experiments' name='See my experimental frontend projects' />
+        <div className='space-y-2 pt-2'>
+          <InternalLink href='/#projects' name='Frontend projects' />
+          <InternalLink href='/experiments' name='Experiments projects' />
         </div>
       </section>
-      <section className='mb-28 space-y-2'>
-        <Topic name="What Do I Mean by Me As A 'Web Designer'?" />
+
+      <section className='mb-28 space-y-2 px-5 text-zinc-600 sm:px-0 '>
+        <TopicIndex name='What do i mean me as a Web Designer?' />
         <div>
           Being Web Designer mean using design tools to mapping the web owner or bussiness logic to
           mockup as a way to solve the need of operation of the bussiness or intent.
@@ -169,12 +154,14 @@ export default function Home() {
             <li>Prototyping</li>
           </ul>
         </div>
-        <InternalLink href='/' name='See my design projects' />
+        <div className='pt-2'>
+          <InternalLink href='/' name='Design projects' />
+        </div>
       </section>
 
-      <section id='contacts'>
-        <Topic name='Contacts' />
-        <div className='mt-3 grid grid-flow-row grid-cols-1 gap-2 sm:w-fit sm:gap-x-5'>
+      <section id='contacts' className='px-5 sm:px-0'>
+        <TopicIndex name='Contacts' />
+        <div className='grid grid-flow-row grid-cols-1 gap-3 sm:w-fit sm:gap-x-5'>
           {ContactData.map(c => (
             <ContactComponent href={c.href} name={c.name} key={c.imgSrc} imgSrc={c.imgSrc} />
           ))}
@@ -183,3 +170,7 @@ export default function Home() {
     </Layout>
   );
 }
+
+const TopicIndex = ({ name }: { name: string }) => {
+  return <h2 className='mb-5 text-2xl font-semibold text-zinc-700'>{name}</h2>;
+};

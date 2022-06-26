@@ -32,7 +32,7 @@ export const ProjectsData = [
     period: 'Jan 2022 - Now',
     status: 'Production',
     imgSrc: <LogoHaritssr />,
-    industry: 'Personal',
+    industry: 'Personal Blog',
     hrefCaseStudy: '/experiments',
   },
   {
@@ -42,7 +42,7 @@ export const ProjectsData = [
     period: 'May 21 - Des 2021',
     status: 'Change mgmnt',
     imgSrc: <Image src='/aka.PNG' width='24' height='24' alt='' />,
-    industry: 'Coffee',
+    industry: 'Coffee & Spices',
     hrefCaseStudy: '/experiments',
   },
 ];

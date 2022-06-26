@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LeftArrow, RightArrowBlue } from './Icons';
+import { ChevronLeftIcon } from '@heroicons/react/outline';
 
 export function TitleBack({ name, href }: { name: string; href: string }) {
   return (
@@ -8,7 +8,10 @@ export function TitleBack({ name, href }: { name: string; href: string }) {
         className='group mb-5 flex flex-row items-center space-x-1 sm:-ml-5'
         onClick={() => history.back()}
       >
-        <LeftArrow />
+        <ChevronLeftIcon
+          className='-ml-0.5 h-6 w-6 text-blue-600 group-hover:text-blue-400'
+          strokeWidth={2}
+        />
         <div className='text-zinc-400 hover:underline group-hover:text-zinc-800'>{href}</div>
       </button>
       <h1 className='z-40 mx-auto block h-auto w-full text-left text-3xl font-bold text-zinc-800 sm:text-4xl'>
@@ -43,7 +46,7 @@ export const SubTopic = ({ children }: { children: React.ReactNode }) => {
 export function InternalLink({ name, href }: { name: string; href: string }) {
   return (
     <Link href={href}>
-      <a className='group flex w-fit cursor-pointer items-center justify-start text-lg text-blue-600 hover:underline sm:text-base'>
+      <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:underline sm:text-base'>
         <p>{name}</p>
         {/* arrow right icon */}
         <svg
@@ -111,16 +114,5 @@ export function ExternalCodeLink({ children, href }: { children: React.ReactNode
         {children}
       </code>{' '}
     </a>
-  );
-}
-
-export function BigInternalLink({ href, name }: { href: string; name: string }) {
-  return (
-    <Link href={href}>
-      <a className='flex w-auto cursor-pointer items-center justify-center duration-300 ease-in-out'>
-        <div className='text-lg font-medium text-blue-500 hover:underline'>{name}</div>
-        <RightArrowBlue />
-      </a>
-    </Link>
   );
 }

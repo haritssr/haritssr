@@ -2,8 +2,8 @@ import Head from 'next/head';
 import GlobalNavigation from './GlobalNavigation';
 import Footer from './Footer';
 import React from 'react';
-import { LeftArrow } from './Icons';
 import BottomNavMobile from './BottomNavMobile';
+import { ChevronLeftIcon } from '@heroicons/react/outline';
 
 // This layout used for every pages under the Experiments and Blog
 
@@ -20,7 +20,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
     <div className='bg-white'>
       <Head>
         <title>{title} - Harits Syah</title>
-        <link rel='icon' href='/logo_haritssr.svg' />
+        <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
         <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={title} />
@@ -38,7 +38,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
       <GlobalNavigation />
 
-      <div className='sticky top-0 z-40 mb-5 w-full border-b  border-zinc-300 bg-white/80 py-1 backdrop-blur sm:py-2'>
+      <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 py-1 saturate-150 backdrop-blur sm:py-2'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           {/* General back button, will back to /experiments if we have been there, else will back to whatever in the browser history stack */}
           <button
@@ -47,8 +47,11 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
           >
             <a className=' inline-block w-full'>
               <div className='group flex items-center'>
-                <LeftArrow />
-                <div className='-ml-1 text-blue-600 group-hover:text-rose-600'>Back</div>
+                <ChevronLeftIcon
+                  className='-ml-0.5 h-6 w-6 text-blue-600 group-hover:text-blue-400'
+                  strokeWidth={2}
+                />
+                <div className='-ml-1 text-blue-600 group-hover:text-blue-400'>Back</div>
               </div>
             </a>
           </button>
@@ -63,30 +66,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
             </div>
           </div>
           {/* Table of content (recently deleted because i don't know how to implement this) */}
-          <div className='flex w-1/3 justify-end sm:w-1/6 '>
-            <div></div>
-            {/* <DropdownMenu.Root>
-              <DropdownMenu.Trigger className='cursor-pointer  text-blue-500 hover:text-blue-800 hover:outline-none '>
-                Daftar isi
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Content className='mt-2 rounded-xl border bg-white p-3 shadow-md backdrop-blur'>
-                <ol className='space-y-1 hover:outline-none'>
-                  {ExperimentsData[0].links.map(link => (
-                    <DropdownMenu.Item key={link.name}>
-                      <li className=' text-zinc-600'>
-                        <InternalLink
-                          href={`/experiments/${title.toLowerCase().replace(' ', '-')}/${link.name
-                            .toLowerCase()
-                            .replace(/\s/g, '-')}`}
-                          name={link.name}
-                        />
-                      </li>
-                    </DropdownMenu.Item>
-                  ))}
-                </ol>
-              </DropdownMenu.Content>
-            </DropdownMenu.Root> */}
-          </div>
+          <div className='flex w-1/3 justify-end sm:w-1/6 '></div>
         </section>
       </div>
       {/* content */}

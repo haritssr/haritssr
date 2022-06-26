@@ -31,7 +31,7 @@ export default function LayoutGlobalNavigation({
         ) : (
           <title>{browserTitle} - Harits Syah</title>
         )}{' '}
-        <link rel='icon' href='/logo_haritssr.svg' />
+        <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
         <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={description} />
@@ -49,10 +49,10 @@ export default function LayoutGlobalNavigation({
 
       <GlobalNavigation />
 
-      <div className='sticky inset-x-0 top-0 z-40 mb-5 sm:mb-10 w-full border-b  border-zinc-300 bg-white/80 py-1.5 backdrop-blur'>
+      <div className='sticky inset-x-0 top-[48px] z-40 mb-5 w-full border-b border-zinc-300   bg-gray-100/50 py-1 sm:py-2 saturate-150 backdrop-blur-md sm:mb-10'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           <h2 id='work' className='z-40 flex h-auto items-center'>
-            <div className='text-xl font-bold text-gray-800 '>{domain}</div>
+            <div className='font-semibold text-zinc-700 '>{domain}</div>
           </h2>
         </section>
       </div>

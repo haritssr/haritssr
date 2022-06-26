@@ -6,14 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const ProductData = [
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
-  { id: '1', src: '/new/gambir.jpg', name: 'gambier', href: '/work' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
 ];
 
 export default function ImageComponents() {
@@ -23,7 +23,7 @@ export default function ImageComponents() {
       <div className=' pb-2 text-center'>Grid Images</div>
       <main className='z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pt-2 pb-20 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
         {ProductData.map(a => (
-          <ProductCard key={a.id} href={a.href} src={a.src} name={`${a.name}`} />
+          <ProductCard key={a.id} href={a.href} src={a.src} name={a.name} />
         ))}
       </main>
 
@@ -31,13 +31,13 @@ export default function ImageComponents() {
         <div className=' pb-2 text-center'>Large Image</div>
         <Image
           alt='Image'
-          src='/new/hero.jpg'
+          src='/hero.jpg'
           height='582'
           width='1007'
           objectFit='cover'
           quality={75}
           className='overflow-hidden rounded-md'
-          blurDataURL='/new/hero.jpg'
+          blurDataURL='/hero.jpg'
           placeholder='blur'
         />
       </div>
@@ -48,7 +48,7 @@ export default function ImageComponents() {
 
           <img
             alt=''
-            src='/new/hero.jpg'
+            src='/hero.jpg'
             // height={2000}
             // width={5000}
             className='h-96 w-full rounded-md object-cover object-top'
@@ -60,14 +60,14 @@ export default function ImageComponents() {
           <div className='relative h-96'>
             <Image
               alt='Image'
-              src='/new/hero.jpg'
+              src='/hero.jpg'
               layout='fill'
               height='582'
               width='1007'
               objectFit='cover'
               quality={75}
-              className='overflow-hidden rounded-md rounded-md'
-              blurDataURL='/new/hero.jpg'
+              className='overflow-hidden rounded-md'
+              blurDataURL='/hero.jpg'
               placeholder='blur'
             />
           </div>

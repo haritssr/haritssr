@@ -16,7 +16,28 @@ export default function ExportedTabs() {
         application. <ExternalLink name='Source' href='https://headlessui.dev/react/dialog' />
       </SubTitle>
       <Example1 />
+      <Example2 />
     </LayoutToExperiments>
+  );
+}
+
+function Example2() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  return (
+    <>
+      <Tab.Group selectedIndex={selectedIndex} onChange={() => setSelectedIndex(1)}>
+        <Tab.List>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </Tab.List>
+        <Tab.Panels>
+          <Tab.Panel>Content 1</Tab.Panel>
+          <Tab.Panel>Content 2</Tab.Panel>
+          <Tab.Panel>Content 3</Tab.Panel>
+        </Tab.Panels>
+      </Tab.Group>
+    </>
   );
 }
 
