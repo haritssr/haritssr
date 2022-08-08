@@ -53,7 +53,8 @@ export const ExperimentsData = [
       { name: 'TodoList useReducer' },
       { name: 'useState Draggable Box' },
       { name: 'useContext Dark Mode' },
-      {name: 'Reacting To Input'}
+      { name: 'Reacting To Input' },
+      { name: 'Edit Profile' },
     ],
   },
   {

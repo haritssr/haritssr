@@ -83,11 +83,9 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
       </div>
       {/* content */}
       <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
-        <div className='mt-6 mb-2'>
-          <h1 className='z-40 mx-auto block h-auto w-full text-left text-3xl font-bold text-zinc-800'>
-            {title}
-          </h1>
-        </div>
+        <h1 className='z-40 mx-auto mt-6 mb-2 block h-auto w-full text-left text-3xl font-bold text-zinc-800'>
+          {title}
+        </h1>
         {children}
       </main>
 
@@ -101,7 +99,7 @@ const Source = ({ href, name }: { href: string; name: string }) => {
   return (
     <cite className='not-italic'>
       <a
-        title={href}
+        title='This page source code'
         href={href}
         target='_blank'
         rel='noopener noreferrer'

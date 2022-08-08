@@ -14,7 +14,7 @@ export default function GlobalHead() {
           </a>
         </Link>
         <div className='hidden sm:block'>
-          <a title='Source code' href='https://www.github.com/haritssr/haritssr'>
+          <a title='Whole site source code' href='https://www.github.com/haritssr/haritssr'>
             <svg
               className='h-5 w-5 cursor-alias text-zinc-400 hover:text-white'
               viewBox='0 0 15 15'

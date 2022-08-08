@@ -10,7 +10,7 @@ input[type='email'],
 input[type='password'],
 input[type='number'],
 input[type='tel'] {
-  @apply w-full rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
+  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
 }
 
 input[type='time'],
@@ -18,18 +18,18 @@ input[type='date'],
 input[type='week'],
 input[type='month'],
 select {
-  @apply w-full rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
+  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
 }
 
 input[type='reset'],
 input[type='submit'],
 input[type='button'],
 button[type='submit'] {
-  @apply cursor-pointer rounded-md bg-blue-600 px-3 py-1.5 text-center text-white hover:bg-blue-600/90;
+  @apply w-fit cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90;
 }
 
 button {
-  @apply cursor-pointer rounded-md bg-blue-600 px-3 py-1.5 text-center text-white hover:bg-blue-600/90;
+  @apply cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90;
 }
 
 /* This is styles for useState Dark Mode */
