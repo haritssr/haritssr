@@ -102,7 +102,7 @@ const Source = ({ href, name }: { href: string; name: string }) => {
     <cite className='not-italic'>
       <a
         title={href}
-        href={href}
+k        href={href}
         target='_blank'
         rel='noopener noreferrer'
         className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'

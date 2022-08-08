@@ -14,7 +14,7 @@ export default function GlobalHead() {
             </div>
           </a>
         </Link>
-        <div className='hidden sm:block'>
+        <div className='hidden skm:block'>
           <GlobalNavigationDesktop />
         </div>
 
