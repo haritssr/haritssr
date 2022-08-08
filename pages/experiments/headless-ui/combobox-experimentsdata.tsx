@@ -14,7 +14,6 @@ import { useRouter } from 'next/router';
 //Combobox.Options
 //Combobox.Option
 
-//Types
 interface useStateStringType {
   target: { value: SetStateAction<string> };
 }
@@ -42,7 +41,7 @@ const ExportedComboboxExperimentsData = () => {
   );
 };
 
-//projects data (ExperimentsData) come from API or database
+//projects data (ExperimentsData) comes from API or database
 const ComboboxExample1 = ({ ExperimentsData }) => {
   const router = useRouter();
 
@@ -158,7 +157,7 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
               </Combobox.Options>
             )}
 
-            {/* Rendered if there is nothing in input */}
+            {/* Rendered if the input not found */}
             {query && filteredExperimentsData.length === 0 && (
               <p className='p-4 text-sm text-gray-500'>No results found</p>
             )}

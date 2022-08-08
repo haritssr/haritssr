@@ -2,20 +2,20 @@ import { InternalLink } from './DesignSystem';
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface ExperimentsType {
+interface ExperimentsBoxType {
   title: string;
   description: string;
   links: Array<{ name: string }>;
   logoSrc: string;
 }
 
-export default function ExperimentBox({ title, links, description, logoSrc }: ExperimentsType) {
+export default function ExperimentBox({ title, links, description, logoSrc }: ExperimentsBoxType) {
   return (
     <article className='h-fit' id={`#${title.toLowerCase().replace(' ', '-')}`}>
       <div className='mb-1 flex w-full flex-col items-center space-y-1 sm:mb-2'>
         <div className='flex w-full items-center space-x-2'>
           <Link href={`/experiments/${title.toLowerCase().replace(' ', '-')}`}>
-            <a className='block text-left text-xl font-semibold text-zinc-700 hover:underline'>
+            <a className='block text-left text-xl font-semibold text-zinc-800 hover:underline'>
               {title}
             </a>
           </Link>

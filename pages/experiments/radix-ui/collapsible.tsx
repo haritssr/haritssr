@@ -10,10 +10,10 @@ export default function ExportedCollapsible() {
       <SubTitle>An interactive component which expands/collapses a panel.</SubTitle>{' '}
       <Collapsible.Root open={open} onOpenChange={setOpen} className='w-full sm:w-2/3'>
         <div className='mb-3 flex flex-row items-center justify-between'>
-          <Topic name="Try to click more"/>
+          <Topic name='Try to click more' />
           <Collapsible.Trigger className='rounded-md bg-gray-200 px-2 py-0.5 text-gray-700 hover:bg-gray-300'>
             {open ? 'less' : 'more'}
-          </Collapsible.Trigger>k
+          </Collapsible.Trigger>
         </div>
         <div className='space-y-2'>
           <InternalLink name='This is Accoordion' href='/work/radix-ui/accordion' />

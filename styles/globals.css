@@ -3,99 +3,58 @@
 @tailwind utilities;
 @tailwind base;
 
-@layer base {
-  .person-card:hover > div:first-child {
-    overflow: visible;
-    @apply shadow-md;
-  }
+input[type='text'],
+input[type='search'],
+input[type='url'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+input[type='tel'] {
+  @apply w-full rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
 }
 
-@layer utilities {
-  .square {
-    aspect-ratio: 1/1;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
+input[type='time'],
+input[type='date'],
+input[type='week'],
+input[type='month'],
+select {
+  @apply w-full rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
 }
 
-.blackA {
-  --blackA1: hsl(0 0% 0% / 0.012);
-  --blackA2: hsl(0 0% 0% / 0.027);
-  --blackA3: hsl(0 0% 0% / 0.047);
-  --blackA4: hsl(0 0% 0% / 0.071);
-  --blackA5: hsl(0 0% 0% / 0.09);
-  --blackA6: hsl(0 0% 0% / 0.114);
-  --blackA7: hsl(0 0% 0% / 0.141);
-  --blackA8: hsl(0 0% 0% / 0.22);
-  --blackA9: hsl(0 0% 0% / 0.439);
-  --blackA10: hsl(0 0% 0% / 0.478);
-  --blackA11: hsl(0 0% 0% / 0.565);
-  --blackA12: hsl(0 0% 0% / 0.91);
+input[type='reset'],
+input[type='submit'],
+input[type='button'],
+button[type='submit'] {
+  @apply cursor-pointer rounded-md bg-blue-600 px-3 py-1.5 text-center text-white hover:bg-blue-600/90;
 }
 
-.bgWrap {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  z-index: -1;
+button {
+  @apply cursor-pointer rounded-md bg-blue-600 px-3 py-1.5 text-center text-white hover:bg-blue-600/90;
 }
 
-.bgText {
-  margin: 0;
-  font-size: 2rem;
-  line-height: 3rem;
-  text-align: center;
-  padding-top: 40vh;
-  text-shadow: 1px 1px 1px #3c5c5e;
+/* This is styles for useState Dark Mode */
+/* start */
+.button-dark {
+  @apply rounded-md border border-zinc-500 bg-zinc-700 px-4 py-1 text-white hover:bg-zinc-800;
 }
 
-.alert-overlay {
-  background-color: hsl(0 0% 0% / 0.439);
-  position: 'fixed';
-  inset: 0;
-  transform: 'translate(-50%, -50%)';
-}
-.alert-content {
-  background-color: white;
-  position: 'fixed';
-  top: '50%';
-  left: '50%';
-  transform: 'translate(-50%; -50%)';
-  width: '90vw';
-  max-width: '500px';
-  max-height: '85vh';
-  padding: 25px;
+.button-light {
+  @apply rounded-md border border-zinc-300 bg-white px-4 py-1 text-zinc-700 shadow hover:bg-zinc-50;
 }
 
-/* Radix */
-
-/* scroll-area */
-.scrollArea {
-  display: 'flex';
-  /* // ensures no selection */
-  /* user-select: 'none'; */
-  /* // disable browser handling of all panning and zooming gestures on touch devices */
-  /* touch-action: 'none'; */
-  padding: '2';
-  background-color: '#fafafa';
-  transition: '#fafafa 160ms ease-out';
-  /* '&:hover': { background-color: #fafafa };
-  '&[data-orientation="vertical"]': { width: 10 };
-  '&[data-orientation="horizontal"]': {
-    flex-direction: 'column';
-    height: 10;
-  } */
+.panel-dark {
+  @apply bg-zinc-800 text-white;
 }
+
+.panel-light {
+  @apply bg-white text-zinc-700;
+}
+/* start */
 
 html {
   -webkit-tap-highlight-color: transparent;
+  scroll-behavior: auto;
+  scroll-padding-top: 100px;
 }
 
 body {
@@ -113,6 +72,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-
-

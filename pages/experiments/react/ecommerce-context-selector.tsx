@@ -7,21 +7,15 @@ import {
   StoreContextProvider,
 } from '../../../utils/store-context-selector.js';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalCodeLink, SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 
 const divStyle = 'p-2 border border-zinc-400 rounded-md';
-const buttonStyle =
-  'rounded-md border border-zinc-600 bg-zinc-200 hover:bg-zinc-300 text-sm px-1 py-0.5';
 
 const LoginSection = () => {
   return (
     <div className={`${divStyle} space-x-2`}>
-      <button className={buttonStyle} onClick={useLogin()}>
-        Login
-      </button>
-      <button className={buttonStyle} onClick={useLogout()}>
-        Logout
-      </button>
+      <button onClick={useLogin()}>Login</button>
+      <button onClick={useLogout()}>Logout</button>
     </div>
   );
 };
@@ -35,11 +29,7 @@ const CartCountSection = () => {
 };
 
 const AddToCartSection = () => {
-  return (
-    <button className={buttonStyle} onClick={useAddToCart()}>
-      AddToCart
-    </button>
-  );
+  return <button onClick={useAddToCart()}>AddToCart</button>;
 };
 
 function ContextPage() {
@@ -57,10 +47,11 @@ export default function ContextPageWrapper() {
   return (
     <LayoutToExperiments title='Counter Context useState' domain='React'>
       <SubTitle>
-        Minimizing rerender using Daishi Kato&apos;s{' '}
-        <ExternalCodeLink href='https://github.com/dai-shi/use-context-selector'>
-          use-context-selector
-        </ExternalCodeLink>
+        Re-render experiments.Minimizing rerender using Daishi Kato&apos;s{' '}
+        <ExternalLink
+          name='use-context-selector'
+          href='https://github.com/dai-shi/use-context-selector'
+        />
       </SubTitle>
       <StoreContextProvider>
         <ContextPage />

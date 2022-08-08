@@ -1,5 +1,8 @@
+//still confuse what it is actually, it has so many possible props
 import { Bar } from '@visx/shape';
+// <g/>
 import { Group } from '@visx/group';
+//
 import { localPoint } from '@visx/event';
 import { AxisLeft, AxisBottom } from '@visx/axis';
 import { scaleBand, scaleLinear } from '@visx/scale';
@@ -30,6 +33,7 @@ const tooltipStyles = {
 
 export default function BarChart() {
   const [ref, bounds] = useMeasure();
+  // console.log(bounds);
   const {
     showTooltip,
     hideTooltip,
@@ -59,13 +63,12 @@ export default function BarChart() {
       <SubTitle>Bar Chart of Apple Stock</SubTitle>
       <svg ref={ref} className='w-full' viewBox={`0 0 ${width} ${height}`}>
         <Group>
-          {data.map(d => {
-            const xValue = getXValue(d);
+          {data.map(datum => {
+            const xValue = getXValue(datum);
             const barWidht = xScale.bandwidth();
-            const barHeight = innerHeight - (yScale(getYValue(d)) ?? 0);
+            const barHeight = innerHeight - (yScale(getYValue(datum)) ?? 0);
             const barX = xScale(xValue);
             const barY = innerHeight - barHeight;
-
             return (
               <Bar
                 key={`bar-${xValue}`}
@@ -78,7 +81,7 @@ export default function BarChart() {
                   const point = localPoint(event);
                   if (!point) return;
                   showTooltip({
-                    tooltipData: d,
+                    tooltipData: datum,
                     tooltipLeft: point.x,
                     tooltipTop: point.y,
                   });

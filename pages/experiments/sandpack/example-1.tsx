@@ -30,11 +30,18 @@ export default function Example1() {
 
 const APP_CODE = `
 import { sum } from 'lodash';
+import { useState } from 'react'
 
 export default function App() {
+  const [number, setNumber] = useState(0)
   return <>
     <h1>Hello Sandpack!</h1>
     <h2>{sum([2, 3])}</h2>
+    <p>This is paragraph</p>
+    <button onClick={() => setNumber(n => n+1)}>
+      +1
+    </button>
+    <div>{number}</div>
   </>
 }
 `.trim();

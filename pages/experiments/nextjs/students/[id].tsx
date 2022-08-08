@@ -6,18 +6,17 @@ export default function DynamicPage({ person }) {
   return (
     <Layout browserTitle='Student Details' description='Student Details'>
       <TitleBack href='All student' name='Student Details' />
-      <Topic name='Identity' />
-      <div className='text-emerald-500'>
-        <span className='text-zinc-500'>Name :</span> {person.name}
+      <div className='text-zinc-500'>
+        <span className='font-semibold text-zinc-800'>Name :</span> {person.name}
       </div>
-      <div className='text-emerald-500'>
-        <span className='text-zinc-500'>Email </span>: {person.email}
+      <div className='text-zinc-500'>
+        <span className='font-semibold text-zinc-800'>Email </span>: {person.email}
       </div>
-      <div className='text-emerald-500'>
-        <span className='text-zinc-500'>Website</span> : {person.website}
+      <div className='text-zinc-500'>
+        <span className='font-semibold text-zinc-800'>Website</span> : {person.website}
       </div>
-      <div className='text-emerald-500'>
-        <span className='text-zinc-500'>City :</span> {person.address.city}
+      <div className='text-zinc-500'>
+        <span className='font-semibold text-zinc-800'>City :</span> {person.address.city}
       </div>
     </Layout>
   );
@@ -42,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 //This is the static data that will be fetch for every page inside dynamic pages
 export const getStaticProps: GetStaticProps = async context => {
   const person = await fetch(
-    'https://jsonplaceholder.typicode.com/users/' + context.params.id
+    'https://jsonplaceholder.typicode.com/users/' + context.params?.id
   ).then(p => p.json());
   return {
     props: { person },

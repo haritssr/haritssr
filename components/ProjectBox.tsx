@@ -22,7 +22,7 @@ export default function ProjectsBox({
 }: ProjectBoxTypes) {
   return (
     <section className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-md border border-zinc-300 shadow'>
-      <section className='flex flex-col justify-between px-4 pb-4 pt-5'>
+      <section className='flex flex-col justify-between p-4'>
         <div className='mb-2 flex items-center justify-between'>
           <div className='text-xl font-semibold text-zinc-700'>{title}</div>
           {imgSrc}

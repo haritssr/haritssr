@@ -14,32 +14,54 @@ import { LogoHarisLab } from '@/components/Icons';
 export default function Home() {
   return (
     <Layout browserTitle='Projects' description='Home'>
-      <section className='mx-auto mt-10 mb-24 flex flex-col justify-center gap-y-10 rounded-xl sm:mt-20 md:flex-row-reverse md:justify-between md:gap-y-0 md:gap-x-10  xl:px-0'>
-        <article className='sm:jusitfy-center flex justify-center object-center sm:flex sm:h-auto sm:items-center'>
-          <Image
-            src='/me.jpg'
-            height='200'
-            width='200'
-            className='z-10 rounded-full'
-            alt='Harits Syah'
-            blurDataURL='/me.jpg'
-            placeholder='blur'
-          />
-        </article>
-        <article className='space-y-3 text-center sm:my-auto sm:space-y-4 md:text-left'>
-          <div className='text-3xl font-bold text-zinc-800 sm:text-4xl'>Harits Syah</div>
-          <div className='text-lg text-zinc-600 sm:text-2xl'>
-            Web Frontend <span className='text-blue-600'>React</span> Engineer
+      <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-0  sm:border-b sm:border-zinc-200'>
+        <section className='mx-auto mt-10 mb-24 flex flex-col sm:mx-0 sm:mr-10 sm:mb-10 sm:mt-20 sm:px-0 '>
+          <article className=' mb-5 flex justify-center object-center sm:flex sm:h-auto sm:items-center sm:justify-start'>
+            <Image
+              src='/me.jpg'
+              height='180'
+              width='180'
+              className='z-10 rounded-full'
+              alt='Harits Syah'
+              blurDataURL='/me.jpg'
+              placeholder='blur'
+            />
+          </article>
+          <article className='space-y-3 text-center sm:my-auto sm:text-left'>
+            <div className='text-3xl font-bold text-zinc-800'>Harits Syah R</div>
+            <div className='text-lg font-medium text-zinc-700'>Web Frontend React Engineer</div>
+            <div className='flex sm:justify-start'>
+              <a
+                href='https://www.harislab.com'
+                title='https://www.harislab.com'
+                target='_blank'
+                rel='noreferrer noopener'
+                className='mx-auto flex w-fit cursor-pointer  items-center space-x-1.5 rounded-md  bg-zinc-50 px-3 py-1 hover:bg-zinc-100 sm:mx-0'
+              >
+                <LogoHarisLab />
+                <div className='text-lg font-medium text-zinc-800'>Haris Lab</div>
+              </a>
+            </div>
+          </article>
+        </section>
+        <section id='contacts' className='top-24 px-5 sm:top-0 sm:mt-[82px] sm:px-0 sm:pl-10'>
+          <Topic name='Contacts' />
+          <div className='grid grid-flow-row grid-cols-1 gap-4 sm:w-fit'>
+            {ContactData.map(c => (
+              <ContactComponent
+                href={c.href}
+                name={c.name}
+                key={c.imgSrc}
+                imgSrc={c.imgSrc}
+                title={c.title}
+              />
+            ))}
           </div>
-          <div className='mx-auto flex w-fit cursor-pointer items-center space-x-1.5 rounded-lg bg-zinc-100 px-2.5 py-1 hover:bg-zinc-200 sm:mx-0 border border-zinc-300'>
-            <LogoHarisLab />
-            <div className='text-lg font-medium text-zinc-800'>Haris Lab</div>
-          </div>
-        </article>
-      </section>
+        </section>
+      </div>
 
-      <section className='my-28 px-5 sm:px-0' id='projects'>
-        <TopicIndex name='Frontend Projects' />
+      <section className='mt-16 mb-28 px-5 sm:px-0' id='projects'>
+        <Topic name='Frontend Projects' />
         <div className='mt-5 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4'>
           {ProjectsData.map(d => (
             <ProjectsBox
@@ -57,8 +79,8 @@ export default function Home() {
       </section>
 
       <section className='my-28 px-5 sm:px-0' id='projects'>
-        <TopicIndex name='Design Projects' />
-        <div className='mt-5 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4'>
+        <Topic name='Design Projects' />
+        <div className='mt-5 grid grid-cols-1 gap-8 sm:grid-cols-4 sm:gap-5 lg:grid-cols-4'>
           {DesignProjectsData.map(d => (
             <ProjectsBox
               key={d.title}
@@ -74,26 +96,38 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='mb-28 px-5 sm:px-0'>
-        <TopicIndex name='Technologies' />
+      <section className='my-28 px-5 sm:px-0'>
+        <Topic name='Technologies' />
         <div className='grid grid-flow-row grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4'>
           {TechnologyData.map(c => (
-            <ContactComponent href={c.href} name={c.name} key={c.name} imgSrc={c.imgSrc} />
+            <ContactComponent
+              href={c.href}
+              name={c.name}
+              key={c.name}
+              imgSrc={c.imgSrc}
+              title={c.href}
+            />
           ))}
         </div>
       </section>
 
       <section className='mb-28 px-5 sm:px-0'>
-        <TopicIndex name='Main Apps' />
+        <Topic name='Main Apps' />
         <div className='grid grid-flow-row grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4'>
           {MainAppsData.map(c => (
-            <ContactComponent href={c.href} name={c.name} key={c.name} imgSrc={c.imgSrc} />
+            <ContactComponent
+              href={c.href}
+              name={c.name}
+              key={c.name}
+              imgSrc={c.imgSrc}
+              title={c.href}
+            />
           ))}
         </div>
       </section>
 
       <section className='mb-28 px-5 sm:px-0'>
-        <TopicIndex name='Favorite Reading' />
+        <Topic name='Favorite Reading' />
         <div className='grid w-fit grid-flow-row grid-cols-2 gap-3 rounded-md bg-gray-50 p-4 sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
           {BooksData.map(({ title, href, imgSrc }) => (
             <div className='flex h-full flex-col' key={title}>
@@ -114,8 +148,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='mb-28 space-y-2 px-5 text-zinc-600 sm:px-0'>
-        <TopicIndex name='What do i mean me as a Web Frontend Engineer?' />
+      {/* <section className='mb-28 space-y-2 px-5 text-zinc-600 sm:px-0'>
+        <Topic name='What do i mean me as a Web Frontend Engineer?' />
         <div>
           Being Web Frontend Engineer means doing data manipulation from many sources staticly or
           dynamicly and display it on web platform in a lot of unique ways by laveraging built-in
@@ -135,14 +169,13 @@ export default function Home() {
             <li>Testing</li>
           </ul>
         </div>
-        <div className='space-y-2 pt-2'>
-          <InternalLink href='/#projects' name='Frontend projects' />
-          <InternalLink href='/experiments' name='Experiments projects' />
+        <div className='pt-2'>
+          <InternalLink href='/#projects' name='See Frontend projects' />
         </div>
       </section>
 
       <section className='mb-28 space-y-2 px-5 text-zinc-600 sm:px-0 '>
-        <TopicIndex name='What do i mean me as a Web Designer?' />
+        <Topic name='What do i mean me as a Web Designer?' />
         <div>
           Being Web Designer mean using design tools to mapping the web owner or bussiness logic to
           mockup as a way to solve the need of operation of the bussiness or intent.
@@ -155,22 +188,27 @@ export default function Home() {
           </ul>
         </div>
         <div className='pt-2'>
-          <InternalLink href='/' name='Design projects' />
+          <InternalLink href='/' name='See Design projects' />
+        </div>
+      </section> */}
+
+      <section className='mb-28 px-5 sm:px-0'>
+        <Topic name='Experiments' />
+        <div className='grid grid-flow-row grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4'>
+          <InternalLink name='See all experiments' href='/experiments' />
         </div>
       </section>
 
-      <section id='contacts' className='px-5 sm:px-0'>
-        <TopicIndex name='Contacts' />
-        <div className='grid grid-flow-row grid-cols-1 gap-3 sm:w-fit sm:gap-x-5'>
-          {ContactData.map(c => (
-            <ContactComponent href={c.href} name={c.name} key={c.imgSrc} imgSrc={c.imgSrc} />
-          ))}
+      <section className='mb-28 px-5 sm:px-0'>
+        <Topic name='Blog' />
+        <div className='grid grid-flow-row grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4'>
+          <InternalLink name='See all blogs' href='/blog' />
         </div>
       </section>
     </Layout>
   );
 }
 
-const TopicIndex = ({ name }: { name: string }) => {
-  return <h2 className='mb-5 text-2xl font-semibold text-zinc-700'>{name}</h2>;
+const Topic = ({ name }: { name: string }) => {
+  return <h2 className='mb-2 text-2xl font-semibold text-zinc-700'>{name}</h2>;
 };

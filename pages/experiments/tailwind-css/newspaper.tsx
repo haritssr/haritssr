@@ -1,16 +1,19 @@
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Image from 'next/image';
 
 export default function Newspaper() {
   return (
     <LayoutToExperiments domain='Tailwindcss' title='Newspaper'>
-      <SubTitle>Newspaper reading experience</SubTitle>
+      <SubTitle>
+        Responsive newspaper reading experience with Tailwind CSS columns.{' '}
+        <ExternalLink name='Source' href='https://tailwindcss.com/docs/columns' />
+      </SubTitle>
       <div className='my-10 border border-zinc-400 p-5 tracking-wide '>
-        <h1 className='my-2 text-4xl font-bold text-zinc-700'>Amazing Title</h1>
-        <h2 className='mb-5 font-mw text-lg italic text-zinc-400'>This is beautiful subtitle</h2>
+        <h1 className='my-2 text-4xl font-bold text-zinc-800'>Amazing Title</h1>
+        <h2 className='font-mw mb-5 text-lg italic text-zinc-600'>This is beautiful subtitle</h2>
 
-        <p className='columns-3 text-zinc-500'>
+        <p className='columns-1 text-zinc-700 sm:columns-2 lg:columns-3'>
           <div className='float-none p-2'>
             <Image className='rounded shadow-md' alt='' src='/me.jpg' height={200} width={200} />
           </div>

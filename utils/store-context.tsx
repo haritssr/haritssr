@@ -7,8 +7,8 @@ export const StoreContextProvider = ({ children }) => (
 );
 
 const useStore = () => {
-  const [user, setUser] = useState('');
-  const [cartCount, setCartCount] = useState(0);
+  const [user, setUser] = useState<string>('');
+  const [cartCount, setCartCount] = useState<number>(0);
   return {
     user,
     cartCount,

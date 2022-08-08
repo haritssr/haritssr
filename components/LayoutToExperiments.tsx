@@ -1,9 +1,10 @@
 import Head from 'next/head';
-import GlobalNavigation from './GlobalNavigation';
+import GlobalHead from './GlobalHead';
 import Footer from './Footer';
 import React from 'react';
-import BottomNavMobile from './BottomNavMobile';
+import GlobalNavigationMobile from './GlobalNavigationMobile';
 import { ChevronLeftIcon } from '@heroicons/react/outline';
+import { useRouter } from 'next/router';
 
 // This layout used for every pages under the Experiments and Blog
 
@@ -14,12 +15,19 @@ interface LayoutToExperimentsType {
 }
 
 export default function LayoutToExperiments({ children, title, domain }: LayoutToExperimentsType) {
+  const lastThreeSegmentRoute = useRouter().asPath;
+  const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
+  // const lastThreeSegmentRoute = useRouter().asPath.split('/').slice(-3).join('/');
+  // const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages/${lastThreeSegmentRoute}.tsx`;
+
   const image = 'https://harislab.com/public/HarisLab.png';
   //bg-[#f2f1f7]
+
+  const yes = `${title} - Harits Syah`;
   return (
     <div className='bg-white'>
       <Head>
-        <title>{title} - Harits Syah</title>
+        <title>{yes}</title>
         <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
         <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
@@ -36,43 +44,47 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
         <meta name='twitter:image' content={image} />
       </Head>
 
-      <GlobalNavigation />
+      <GlobalHead />
 
-      <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 py-1 saturate-150 backdrop-blur sm:py-2'>
+      <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 saturate-150 backdrop-blur sm:py-2'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
-          {/* General back button, will back to /experiments if we have been there, else will back to whatever in the browser history stack */}
-          <button
+          {/* General back button, will back to /experiments if we have been there, else will back to whatever in the browser history stack , prepare for the New Navigation API*/}
+          <a
+            // back navigation work, but the scroll position not
             onClick={() => window.history.back()}
-            className='flex w-1/3 items-center sm:w-1/6 '
+            // alternative: onClick={() => router.push('/experiments', '', { scroll: false })}
+            className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'
           >
-            <a className=' inline-block w-full'>
-              <div className='group flex items-center'>
+            <span className=' inline-block w-full'>
+              <span className='group flex items-center'>
                 <ChevronLeftIcon
-                  className='-ml-0.5 h-6 w-6 text-blue-600 group-hover:text-blue-400'
+                  className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'
                   strokeWidth={2}
                 />
-                <div className='-ml-1 text-blue-600 group-hover:text-blue-400'>Back</div>
-              </div>
-            </a>
-          </button>
+                <div className='-ml-1 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
+                  Back
+                </div>
+              </span>
+            </span>
+          </a>
           {/* Title and Domain*/}
-          <div className='inline w-1/3 sm:w-2/3 '>
-            <div className='flex flex-col-reverse items-center justify-center sm:flex-row sm:space-x-2'>
-              <div className='-mt-0.5 text-[10px] text-zinc-500 sm:-mt-0 sm:text-base'>
-                {domain}
-              </div>
+          <div className='-mr-2 inline w-3/4 sm:-mr-0 sm:w-2/3'>
+            <div className='flex flex-col items-center justify-center -space-y-1 py-0.5 sm:flex-row sm:-space-y-0 sm:space-x-2 sm:py-0'>
+              <div className='text-sm font-semibold text-zinc-800 sm:text-base'>{domain}</div>
               <div className='hidden text-zinc-600 sm:block'>/</div>
-              <div className='text-[12px]  font-semibold text-zinc-700 sm:text-base'>{title}</div>
+              <div className=' text-[12px] text-zinc-600 sm:text-base'>{title}</div>
             </div>
           </div>
           {/* Table of content (recently deleted because i don't know how to implement this) */}
-          <div className='flex w-1/3 justify-end sm:w-1/6 '></div>
+          <div className='flex w-1/4 justify-end sm:w-1/6 '>
+            <Source href={githubRoute} name='Source' />
+          </div>
         </section>
       </div>
       {/* content */}
       <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
-        <div className='mt-6 mb-1'>
-          <h1 className='z-40 mx-auto block h-auto w-full text-left text-xl font-bold text-zinc-700 sm:text-3xl'>
+        <div className='mt-6 mb-2'>
+          <h1 className='z-40 mx-auto block h-auto w-full text-left text-3xl font-bold text-zinc-800'>
             {title}
           </h1>
         </div>
@@ -80,7 +92,23 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
       </main>
 
       <Footer />
-      <BottomNavMobile />
+      <GlobalNavigationMobile />
     </div>
   );
 }
+
+const Source = ({ href, name }: { href: string; name: string }) => {
+  return (
+    <cite className='not-italic'>
+      <a
+        title={href}
+        href={href}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'
+      >
+        {name}
+      </a>
+    </cite>
+  );
+};

@@ -1,7 +1,6 @@
 //For ExportedComboboxHeadlessUIData
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
-import { projectsDataCombobox } from '../../../data/projectsDataCombobox.js';
 
 //For ComboboxExample1
 import { Dialog, Combobox, Transition } from '@headlessui/react';
@@ -9,7 +8,6 @@ import { Fragment, SetStateAction, useState, useEffect } from 'react';
 import { SearchIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 
-//Types
 interface useStateStringType {
   target: { value: SetStateAction<string> };
 }
@@ -28,18 +26,16 @@ const ExportedComboboxHeadlessUIData = () => {
         <ExternalLink href='https://headlessui.dev/react/combobox' name='Source' />. Press ctrl+b to
         open search dialog.
       </SubTitle>
-      <ComboboxExample1 projects={projectsDataCombobox} />
+      <ComboboxExample1 projects={Data} />
     </LayoutToExperiments>
   );
 };
 
-//Projects data from API or database
 const ComboboxExample1 = ({ projects }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
-  // Why use useEffect?
   useEffect(() => {
     function onKeydown(event: { key: string; metaKey: any; ctrlKey: any }) {
       if (event.key === 'b' && (event.metaKey || event.ctrlKey)) {
@@ -52,7 +48,6 @@ const ComboboxExample1 = ({ projects }) => {
     };
   }, [isOpen]);
 
-  // This data only appear (filtered) in <Combobox.Options/> when user typing, haven't gone to certain page
   const filteredProjects = query
     ? projects.filter(
         (project: { domain: string; team: string }) =>
@@ -64,7 +59,7 @@ const ComboboxExample1 = ({ projects }) => {
   return (
     <Transition.Root show={isOpen} as={Fragment} afterLeave={() => setQuery('')}>
       <Dialog
-        // open={isOpen} had been move to <Transition.Root/>
+        // open={isOpen} had been move to <Transition.Root/> as a show={isOpen}
         onClose={setIsOpen} //onClose={() => {setIsOpen(false);}}
         className='fixed inset-0 z-50 overflow-y-auto p-8 pt-[25vh]'
       >
@@ -113,7 +108,7 @@ const ComboboxExample1 = ({ projects }) => {
                 {/* : filteredProjectsType */}
                 {/* value={{ id, domain, team }} */}
                 {filteredProjects.map((project: filteredProjectsType) => (
-                  <Combobox.Option key={project.id} value={projectsDataCombobox}>
+                  <Combobox.Option key={project.id} value={Data}>
                     {({ active }) => (
                       <div
                         className={`space-x-1 px-4 py-2 ${
@@ -132,7 +127,7 @@ const ComboboxExample1 = ({ projects }) => {
                 ))}
               </Combobox.Options>
             )}
-            {/* Fallback when nothing is typed in input */}
+
             {query && filteredProjects.length === 0 && (
               <p className='p-4 text-sm text-gray-500'>No results found</p>
             )}
@@ -144,3 +139,56 @@ const ComboboxExample1 = ({ projects }) => {
 };
 
 export default ExportedComboboxHeadlessUIData;
+
+const Data = [
+  {
+    id: 1,
+    domain: 'Product Manager',
+    team: 'Director',
+  },
+  {
+    id: 2,
+    domain: 'React Developer',
+    team: 'Engineering',
+  },
+  {
+    id: 3,
+    domain: 'UX Researcher',
+    team: 'Design',
+  },
+  {
+    id: 4,
+    domain: 'UI Designer',
+    team: 'Design',
+  },
+  {
+    id: 5,
+    domain: 'Sales',
+    team: 'Marketing',
+  },
+  {
+    id: 6,
+    domain: 'Ads',
+    team: 'Marketing',
+  },
+  {
+    id: 7,
+    domain: 'Database developer',
+    team: 'Engineering',
+  },
+  {
+    id: 8,
+    domain: 'Chief Executive Officer',
+    team: 'Director',
+  },
+  {
+    id: 9,
+    domain: 'Chief Financial Officer',
+    team: 'Director',
+  },
+  {
+    id: 10,
+    domain: 'Chief Technology Officer',
+    team: 'Director',
+  },
+];

@@ -5,17 +5,17 @@ import React from 'react';
 export default function CenteringDiv() {
   return (
     <LayoutToExperiments title='Centering Div' domain='Tailwind CSS'>
-      <SubTitle>Methods to centering div via Tailwind CSS or inline CSS</SubTitle>
+      <SubTitle>Methods to centering div in Tailwind CSS or inline CSS</SubTitle>
 
       <section className='grid grid-cols-1 gap-10 sm:grid-cols-2'>
-        <Wrapper title='flex justify-center items-center'>
+        <Wrapper child='h-20 w-20 ' parent='flex  aspect-square items-center justify-center'>
           <div className='flex  aspect-square w-full items-center justify-center bg-purple-500'>
-            <div className='h-20 w-20 bg-orange-400'></div>
+            <div className='h-20 w-20 bg-orange-400' />
           </div>
         </Wrapper>
-        <Wrapper title='relative absolute inset-44'>
+        <Wrapper child='absolute inset-44' parent='relative aspect-square'>
           <div className='relative aspect-square w-full bg-purple-500'>
-            <div className='absolute inset-44 bg-orange-400'></div>
+            <div className='absolute inset-44 bg-orange-400' />
           </div>
         </Wrapper>
       </section>
@@ -23,11 +23,23 @@ export default function CenteringDiv() {
   );
 }
 
-const Wrapper = ({ title, children }: { title: string; children: React.ReactNode }) => {
+const Wrapper = ({
+  parent,
+  child,
+  children,
+}: {
+  parent: string;
+  child: string;
+  children: React.ReactNode;
+}) => {
   return (
-    <div>
-      <div className='font-medium text-zinc-700'>className</div>
-      <div className='mb-2  text-zinc-500'>{title}</div>
+    <div className='text-zinc-500'>
+      <div>
+        <span className='font-semibold text-zinc-800'>Parent</span> : {parent}
+      </div>
+      <div className='mb-2 '>
+        <span className='font-semibold text-zinc-800'>Child</span> : {child}
+      </div>
       {children}
     </div>
   );

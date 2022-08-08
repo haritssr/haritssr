@@ -202,8 +202,8 @@ const DisclosurePlusNaked = () => {
                 className={`flex w-full items-center justify-between border-t  pr-3 pt-2 `}
               >
                 <div
-                  className={`truncate hover:text-zinc-700 ${
-                    open ? 'font-medium text-zinc-700' : ' text-zinc-500'
+                  className={`truncate hover:underline ${
+                    open ? 'font-medium text-zinc-800' : ' text-zinc-500'
                   }`}
                 >
                   {title}
@@ -226,7 +226,7 @@ const DisclosurePlusNaked = () => {
               <Disclosure.Panel
                 className={` text-zinc-600 ${
                   open ? 'border-zinc-500' : 'border-zinc-300'
-                } py-2 pl-7 text-sm`}
+                } py-2 pl-5 text-sm`}
               >
                 {description}
               </Disclosure.Panel>

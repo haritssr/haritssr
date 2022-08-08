@@ -1,34 +1,34 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { SubTitle } from '@/components/DesignSystem';
+import { SubTitle, Topic } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const ProductData = [
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
-  { id: '1', src: '/gambir.jpg', name: 'gambier', href: '/experiments' },
+  { id: '1', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '2', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '3', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '4', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '5', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '6', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '7', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '8', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
 ];
 
 export default function ImageComponents() {
   return (
     <LayoutToExperiments title='Image Component' domain='Next.js'>
       <SubTitle>My implementation of Next.js Image Components </SubTitle>
-      <div className=' pb-2 text-center'>Grid Images</div>
-      <main className='z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pt-2 pb-20 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
+      <Topic name='Grid System' />
+      <main className='z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pb-20 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
         {ProductData.map(a => (
           <ProductCard key={a.id} href={a.href} src={a.src} name={a.name} />
         ))}
       </main>
 
       <div>
-        <div className=' pb-2 text-center'>Large Image</div>
+        <Topic name='Large Image' />
         <Image
           alt='Image'
           src='/hero.jpg'
@@ -44,8 +44,7 @@ export default function ImageComponents() {
 
       <div className='mx-auto mt-20 flex h-auto max-w-5xl flex-col space-y-20'>
         <div>
-          <div className=' pb-2 text-center'>img tag</div>
-
+          <Topic name='default img tag' />
           <img
             alt=''
             src='/hero.jpg'
@@ -56,7 +55,7 @@ export default function ImageComponents() {
           />
         </div>
         <div>
-          <div className=' pb-2 text-center'>next image components</div>
+          <Topic name='nextjs image component' />
           <div className='relative h-96'>
             <Image
               alt='Image'
@@ -82,7 +81,7 @@ const ProductCard = ({ href, src, name }) => {
     <Link href={href}>
       <a className='relative h-52 w-full'>
         <Image
-          alt='Mountains'
+          alt='Street with car'
           src={src}
           layout='fill'
           objectFit='cover'

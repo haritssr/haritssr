@@ -7,55 +7,35 @@ import {
   StoreContextProvider,
 } from '../../../utils/store-context';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { SubTitle } from '@/components/DesignSystem';
 
 const divStyle = 'p-2 border border-zinc-400 rounded-md';
-const buttonStyle =
-  'rounded-md border border-zinc-600 bg-zinc-200 hover:bg-zinc-300 text-sm px-1 py-0.5';
-
-const LoginSection = () => {
-  return (
-    <div className={`${divStyle} space-x-2`}>
-      <button className={buttonStyle} onClick={useLogin()}>
-        Login
-      </button>
-      <button className={buttonStyle} onClick={useLogout()}>
-        Logout
-      </button>
-    </div>
-  );
-};
-const UserSection = () => {
-  return <div className={divStyle}> User: {useUser()}</div>;
-};
-const CartCountSection = () => {
-  return <div className={divStyle}>CartCount : {useCartCount()}</div>;
-};
-
-const AddToCartSection = () => {
-  return (
-    <button className={buttonStyle} onClick={useAddToCart()}>
-      AddToCart
-    </button>
-  );
-};
-
-function ContextPage() {
-  return (
-    <LayoutToExperiments title='Zustand' domain='React'>
-      <div className={`${divStyle} space-y-2`}>
-        <LoginSection />
-        <UserSection />
-        <AddToCartSection />
-        <CartCountSection />
-      </div>
-    </LayoutToExperiments>
-  );
-}
 
 export default function ContextPageWrapper() {
   return (
     <StoreContextProvider>
       <ContextPage />
     </StoreContextProvider>
+  );
+}
+
+function ContextPage() {
+  return (
+    <LayoutToExperiments title='Ecommerse Context' domain='React'>
+      <SubTitle>
+        Re-render experiments. Using Context to only render what correlated. Activate react dev
+        tools profiler and checklist the highlight updates button to see when components render
+        correspond to event.
+      </SubTitle>
+      <div className='space-y-2 rounded-md border border-zinc-400 p-2'>
+        <div className={`${divStyle} space-x-2`}>
+          <button onClick={useLogin()}>Login</button>
+          <button onClick={useLogout()}>Logout</button>
+        </div>
+        <div className={divStyle}> User: {useUser()}</div>
+        <button onClick={useAddToCart()}>AddToCart</button>
+        <div className={divStyle}>CartCount : {useCartCount()}</div>{' '}
+      </div>
+    </LayoutToExperiments>
   );
 }

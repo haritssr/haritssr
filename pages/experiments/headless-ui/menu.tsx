@@ -2,7 +2,7 @@ import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, FireIcon } from '@heroicons/react/solid';
 
 export default function ExportedMenu() {
   return (
@@ -40,7 +40,7 @@ const MenuExample1 = () => {
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <Menu.Items className='absolute right-0 mt-2 w-52 origin-top-right space-y-1 rounded-md bg-white p-1 shadow-lg ring-2 ring-blue-500 ring-opacity-5 focus:outline-none'>
+          <Menu.Items className='absolute right-0 mt-2 w-52 origin-top-right space-y-1 rounded-md bg-rose-600 p-1 shadow-lg ring-2 ring-blue-500 ring-opacity-5 focus:outline-none'>
             <Menu.Item>
               {({ active }) => (
                 <button
@@ -49,20 +49,7 @@ const MenuExample1 = () => {
                   }`}
                 >
                   <div>Action</div>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-5 w-5'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z'
-                    />
-                  </svg>
+                  <FireIcon />
                 </button>
               )}
             </Menu.Item>
@@ -75,45 +62,7 @@ const MenuExample1 = () => {
                   }`}
                 >
                   <div>Disabled Action</div>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-5 w-5'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z'
-                    />
-                  </svg>
-                </button>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
-                    active ? 'bg-blue-500 text-white' : ''
-                  }`}
-                >
-                  <div>Action</div>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-5 w-5'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z'
-                    />
-                  </svg>
+                  <FireIcon />
                 </button>
               )}
             </Menu.Item>

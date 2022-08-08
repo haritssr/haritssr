@@ -1,5 +1,6 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 type Base = {
@@ -60,17 +61,22 @@ const teachers: Teacher[] = [
 ];
 
 export default function GenericTypeScript() {
+  const lastThreeSegmentRoute = useRouter().asPath.split('/').slice(-3).join('/');
+  const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages/${lastThreeSegmentRoute}.tsx`;
+
   const [subject, setSubject] = useState<Subject>(subjects[0]);
   const [teacher, setTeacher] = useState<Teacher>(teachers[0]);
 
   return (
-    <LayoutToExperiments title='Generic TypeScript on <select>' domain='React'>
+    <LayoutToExperiments title='Generic TS on <select>' domain='React'>
       <SubTitle>
         Inspired by{' '}
         <ExternalLink
           href='https://www.developerway.com/posts/typescript-generics-for-react-developers'
           name='Nadia Makarevich'
         />
+        .
+        <ExternalLink href={githubRoute} name='Source code' />
       </SubTitle>
       <div>
         <div className='my-5 space-y-1'>

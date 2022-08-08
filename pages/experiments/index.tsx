@@ -1,6 +1,7 @@
 import LayoutGlobalNavigation from '@/components/LayoutGlobalNavigation';
 import ExperimentsBox from '@/components/ExperimentsBox';
 import { ExperimentsData } from '../../data/ExperimentsData';
+import { ExternalLink } from '@/components/DesignSystem';
 
 export default function Experiments() {
   return (
@@ -9,14 +10,20 @@ export default function Experiments() {
       description='Experiments'
       domain='Experiments'
     >
+      <div className='mb-5 mt-3 text-zinc-800'>
+        These experiments are UI exploration for{' '}
+        <ExternalLink href='https://www.harislab.com' name='Haris Lab' /> website. Every link
+        include their own uniqe things.
+        <ExternalLink
+          href='https://github.com/haritssr/haritssr/tree/main/pages/experiments'
+          name='See the full code'
+        />
+      </div>
+
       {/* Search */}
       <div className='mb-10 flex justify-start'>
         <div className='justfy-center flex w-full items-center sm:w-1/3'>
-          <input
-            type='search'
-            placeholder='Search experiments..'
-            className='w-full rounded-md border border-zinc-400 px-2.5 py-1.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200'
-          />
+          <input type='search' placeholder='Search experiments' />
         </div>
       </div>
 

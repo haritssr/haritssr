@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Position() {
   return (
     <LayoutToExperiments title='Position' domain='Browser'>
-      <SubTitle>Image with figcaption</SubTitle>
+      <SubTitle>CSS position with Tailwind CSS</SubTitle>
       <div className='space-y-10'>
         <Wrapper title='relative + absolute'>
           <div className='relative h-40 bg-blue-500'>
@@ -15,7 +15,7 @@ export default function Position() {
             </div>
           </div>
         </Wrapper>
-        <Wrapper title='relative + absolute'>
+        <Wrapper title='static + absolute'>
           <div className='static h-40 bg-blue-500'>
             <div className='absolute bottom-0 mx-auto max-w-4xl bg-purple-500'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto exercitationem

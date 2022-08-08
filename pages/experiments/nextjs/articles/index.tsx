@@ -1,4 +1,4 @@
-import { ExternalCodeLink, SubTitle } from '@/components/DesignSystem';
+import { ExternalCodeLink, ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Link from 'next/link';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
@@ -21,18 +21,21 @@ export default function Articles({ posts }) {
   return (
     <LayoutToExperiments title='Articles ' domain='Next.js'>
       <SubTitle>
-        getStaticProps + Dynamic Pages. This data generated from external API
-        (https://jsonplaceholder.typicode.com/posts) using
-        <ExternalCodeLink href='https://nextjs.org/docs/basic-features/data-fetching/get-static-props'>
-          getStaticProps
-        </ExternalCodeLink>
+        getStaticProps + Dynamic Pages. This data generated from{' '}
+        <ExternalLink name='json placeholder' href='https://jsonplaceholder.typicode.com/posts' />{' '}
+        using
+        <ExternalLink
+          name='getStaticProps'
+          href='https://nextjs.org/docs/basic-features/data-fetching/get-static-props'
+        />
         and populated to new page for each article using
-        <ExternalCodeLink href='https://nextjs.org/docs/basic-features/data-fetching/get-static-paths'>
-          getStaticPaths
-        </ExternalCodeLink>
+        <ExternalLink
+          name='getStaticPaths'
+          href='https://nextjs.org/docs/basic-features/data-fetching/get-static-paths'
+        />
       </SubTitle>
 
-      <div className='xs:grid-cols-2 mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 '>
+      <div className='mt-5 grid grid-cols-1 gap-5 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 '>
         {posts.map(
           (post: {
             id: number;

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronLeftIcon } from '@heroicons/react/outline';
+import { ChevronLeftIcon, ExternalLinkIcon } from '@heroicons/react/outline';
 
 export function TitleBack({ name, href }: { name: string; href: string }) {
   return (
@@ -9,10 +9,10 @@ export function TitleBack({ name, href }: { name: string; href: string }) {
         onClick={() => history.back()}
       >
         <ChevronLeftIcon
-          className='-ml-0.5 h-6 w-6 text-blue-600 group-hover:text-blue-400'
+          className='h-5 w-5 text-blue-600 group-hover:text-blue-600'
           strokeWidth={2}
         />
-        <div className='text-zinc-400 hover:underline group-hover:text-zinc-800'>{href}</div>
+        <div className='text-blue-500 hover:underline  group-hover:text-blue-600'>{href}</div>
       </button>
       <h1 className='z-40 mx-auto block h-auto w-full text-left text-3xl font-bold text-zinc-800 sm:text-4xl'>
         {name}
@@ -22,11 +22,11 @@ export function TitleBack({ name, href }: { name: string; href: string }) {
 }
 
 export function SubTitle({ children }: { children: React.ReactNode }) {
-  return <div className='mb-8 break-words pb-5 text-zinc-500'>{children}</div>;
+  return <div className='mb-8 break-words pb-5 text-zinc-600'>{children}</div>;
 }
 
 export const Topic = ({ name }: { name: string }) => {
-  return <h2 className='text-xl font-semibold text-zinc-700'>{name}</h2>;
+  return <h2 className='mb-4 text-xl font-semibold text-zinc-700'>{name}</h2>;
 };
 
 export const TopicWork = ({ name, href }: { name: string; href: string }) => {
@@ -73,35 +73,34 @@ export function InternalLinkWithoutArrow({ name, href }: { name: string; href: s
   );
 }
 
+export function ErrorBagde({ name }: { name: string }) {
+  return (
+    <span className='rounded-full border border-red-100 bg-red-50 px-3 py-1 text-sm text-red-500'>
+      {name}
+    </span>
+  );
+}
+
 export function ExternalLink({ name, href }: { name: string; href: string }) {
   return (
-    <cite className='not-italic hover:underline'>
+    <cite className='not-italic'>
+      {' '}
       <a
+        title={href}
         href={href}
         target='_blank'
         rel='noopener noreferrer'
-        className='group inline-block w-fit cursor-pointer items-center text-rose-500 hover:underline  active:text-rose-600'
+        className='group inline-block w-fit cursor-pointer items-center text-blue-500 hover:underline active:text-blue-500'
       >
         <div className='flex items-center'>
           <div>{name}</div>
           {/* arrow upper right icon */}
-          <svg
-            className='-ml-0.5 h-5 w-5 pt-[0.25px] text-rose-400 group-hover:underline '
-            viewBox='0 0 24 24'
-            width='24'
-            height='24'
-            stroke='currentColor'
-            strokeWidth='1.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            fill='none'
-            shapeRendering='geometricPrecision'
-          >
-            <path d='M7 17L17 7' />
-            <path d='M7 7h10v10' />
-          </svg>
+          <ExternalLinkIcon
+            className='ml-1 h-4 w-4 text-blue-500 group-hover:underline '
+            strokeWidth={2}
+          />
         </div>
-      </a>
+      </a>{' '}
     </cite>
   );
 }
@@ -110,9 +109,17 @@ export function ExternalCodeLink({ children, href }: { children: React.ReactNode
   return (
     <a href={href} target='_blank' rel='noreferrer noopener'>
       {' '}
-      <code className='rounded border border-zinc-300 bg-zinc-100 px-1.5 py-0.5 text-sm text-orange-500 duration-100 hover:bg-zinc-200'>
+      <code className='rounded border border-purple-200 bg-purple-50 px-1.5 py-0.5 text-sm text-purple-500 duration-100 '>
         {children}
       </code>{' '}
     </a>
   );
 }
+
+/*
+export const inputStyle =
+  'rounded-md border-[1.4px] border-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 px-2 py-1 placeholder:text-zinc-500 w-full ';
+
+export const buttonStyle =
+  'px-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-md py-1.5 text-center cursor-pointer';
+*/

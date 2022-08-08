@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { useRouter } from 'next/router';
+import { SubTitle } from '@/components/DesignSystem';
 
 export default function NumberGame() {
+  const router = useRouter();
   // the state of the game
   const [state, setState] = useState({
     num1: 1,
@@ -12,7 +15,6 @@ export default function NumberGame() {
     incorrect: false,
   });
 
-  
   function inputKeyPress(event: { key: string }) {
     if (event.key === 'Enter') {
       const answer = parseInt(state.response);
@@ -43,20 +45,21 @@ export default function NumberGame() {
     });
   }
 
-  if (state.score === 2) {
+  if (state.score === 10) {
     return (
       <LayoutToExperiments title='Number Game' domain='Browser'>
+        <SubTitle>Play addition game</SubTitle>
         <div className='pt-24 text-center text-4xl font-bold text-green-500'>You win!</div>
-        {/* kasih kaya vercel kalo selesai bikin domain baru (confetti)*/}
 
-        {/* halaman tidak reload */}
-        {/* href harus dikasih ke domain yang on -> haritssr.com/work/number-game */}
-        {/* dan halaman akan reload */}
-        <Link href='/work/number-game'>
+        <Link href='/experiments/browser/number-game'>
           <a className='mt-5 flex justify-center'>
-            <div className='mx-auto inline-block rounded-md border border-harislab px-4 py-2 text-center text-harislab hover:bg-blue-50'>
+            <button
+              autoFocus
+              onClick={() => router.reload()}
+              className='border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50'
+            >
               Play Again
-            </div>
+            </button>
           </a>
         </Link>
       </LayoutToExperiments>
@@ -65,12 +68,13 @@ export default function NumberGame() {
 
   return (
     <LayoutToExperiments title='Number Game' domain='Browser'>
+      <SubTitle>Play addition game</SubTitle>
       <div className='mx-auto flex max-w-xl flex-col items-center justify-center pt-24'>
         <div className={state.incorrect ? 'incorrect' : ''}>
           {state.num1}+{state.num2}
         </div>
         <input
-          className='rounded-md border border-gray-500 py-1 pl-2 focus:outline-none focus:ring-1 focus:ring-harislab'
+          className='focus:ring-harislab rounded-md border border-gray-500 py-1 pl-2 focus:outline-none focus:ring-1'
           value={state.response}
           onChange={updateResponse}
           onKeyPress={inputKeyPress}

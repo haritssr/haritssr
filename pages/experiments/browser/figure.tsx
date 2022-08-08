@@ -9,8 +9,16 @@ export default function Figure() {
       <div>
         {/* Unfortunately the default behavior of figcaption has been overrided by tailwindcss preflight, so the figcaption is not italic by default */}
         <figure>
-          <Image src='/new/hero.jpg' height='582' width='1007' alt='' />
-          <figcaption>Image of woman looking at leaf</figcaption>
+          <Image
+            src='/hero.jpg'
+            height='582'
+            width='1007'
+            blurDataURL='/hero.jpg'
+            alt='Mountain with beautiful panoramic sky wadadaw'
+          />
+          <figcaption className='text-center italic text-zinc-500'>
+            Image 1. Mountain with beautiful panoramic sky wadadaw
+          </figcaption>
         </figure>
       </div>
     </LayoutToExperiments>

@@ -21,7 +21,7 @@ export default function Posts({ allPostsData }) {
           <li className='' key={id}>
             <Link href={`/experiments/nextjs/posts/${id}`}>
               <a className='block'>
-                <div className='font-medium text-zinc-600 hover:text-zinc-800'>{title}</div>
+                <div className='font-medium text-zinc-700 hover:text-zinc-800'>{title}</div>
                 <div className='text-zinc-500'>{date}</div>
               </a>
             </Link>

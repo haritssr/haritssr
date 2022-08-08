@@ -1,5 +1,4 @@
-// const { urlObjectKeys } = require('next/dist/next-server/lib/utils')
-// const colors = require('tailwindcss/colors');
+/** @type {import('tailwindcss').Config} */
 
 module.exports = {
   mode: 'jit',
@@ -14,10 +13,10 @@ module.exports = {
   ],
   // darkMode: false, // or 'media' or 'class'
   theme: {
-    fill: theme => ({
-      blue: theme('colors.blue.400'),
-      gray: theme('colors.gray.400'),
-    }),
+    // fill: theme => ({
+    //   blue: theme('colors.blue.400'),
+    //   gray: theme('colors.gray.400'),
+    // }),
     textIndent: (theme, { negative }) => ({
       ...{
         no: '0rem',
@@ -36,22 +35,11 @@ module.exports = {
     },
 
     extend: {
-      colors: {
-        harislab: '#007AFF',
-      },
-      strokeWidth: {
-        1.5: '1.5',
-        2: '2',
-      },
       zIndex: {
         90: '90',
       },
-      // animation: {
-      //   'background-spin': 'halfSpin 10s ease-in-out infinite',
-      // },
       fontFamily: {
         inter: ['Inter'],
-        mw: ['Merriweather'],
       },
       fontSize: {
         tiny: '.900rem',
@@ -69,7 +57,7 @@ module.exports = {
       fill: ['hover', 'focus'],
     },
   },
-  
+
   plugins: [
     require('@tailwindcss/typography'),
     require('tailwindcss-radix')({

@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import GlobalNavigation from './GlobalNavigation';
+import GlobalHead from './GlobalHead';
 import { useRouter } from 'next/router';
 import Footer from './Footer';
-import BottomNavMobile from './BottomNavMobile';
+import GlobalNavigationMobile from './GlobalNavigationMobile';
 
 // This layout used in the first page of  Experiments and Blog
 
@@ -23,14 +23,11 @@ export default function LayoutGlobalNavigation({
   const image = 'https://harislab.com/public/HarisLab.png';
   const type = 'website';
   // bg-[#f2f1f7]
+  const yes = `${browserTitle} - Harits Syah`;
   return (
     <div className='bg-white'>
       <Head>
-        {router.asPath === '/' ? (
-          <title>Harits Syah</title>
-        ) : (
-          <title>{browserTitle} - Harits Syah</title>
-        )}{' '}
+        {router.asPath === '/' ? <title>Harits Syah</title> : <title>{yes}</title>}
         <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
         <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
@@ -47,12 +44,12 @@ export default function LayoutGlobalNavigation({
         <meta name='twitter:image' content={image} />
       </Head>
 
-      <GlobalNavigation />
+      <GlobalHead />
 
-      <div className='sticky inset-x-0 top-[48px] z-40 mb-5 w-full border-b border-zinc-300   bg-gray-100/50 py-1 sm:py-2 saturate-150 backdrop-blur-md sm:mb-10'>
+      <div className='sticky inset-x-0 top-[48px] z-40 mb-5 w-full border-b border-zinc-300   bg-gray-100/50 py-2 saturate-150 backdrop-blur-md sm:mb-10'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           <h2 id='work' className='z-40 flex h-auto items-center'>
-            <div className='font-semibold text-zinc-700 '>{domain}</div>
+            <div className='font-semibold text-zinc-700 sm:text-lg'>{domain}</div>
           </h2>
         </section>
       </div>
@@ -60,7 +57,7 @@ export default function LayoutGlobalNavigation({
       <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>{children}</main>
 
       <Footer />
-      <BottomNavMobile />
+      <GlobalNavigationMobile />
     </div>
   );
 }

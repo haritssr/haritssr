@@ -3,9 +3,9 @@ import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 
 export default function Glossary() {
   return (
-    <LayoutToExperiments title='Glosary with dl,dt,dd' domain='Browser'>
+    <LayoutToExperiments title='Glossary with dl,dt,dd' domain='Browser'>
       <SubTitle>
-        Glosary with dl, dt, dd api. The default style overrided by{' '}
+        Glossary with dl, dt, dd api. The default style overrided by{' '}
         <ExternalLink name='Tailwind CSS preflight' href='https://tailwindcss.com/docs/preflight' />
       </SubTitle>
       <div>

@@ -1,6 +1,6 @@
 import { ExternalCodeLink, ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-// import { useKBar } from 'kbar';
+import { useKBar } from 'kbar';
 
 import {
   KBarProvider,
@@ -14,8 +14,7 @@ import {
 } from 'kbar';
 
 export default function Search() {
-
-  // const { query } = useKBar();
+  const { query } = useKBar();
 
   return (
     <KBarProvider actions={actions}>
@@ -35,7 +34,7 @@ export default function Search() {
         </SubTitle>
 
         <button
-          // onClick={query.toggle}
+          onClick={() => query?.toggle}
           className='group rounded-md bg-zinc-200 p-1.5 hover:bg-zinc-300'
         >
           {/* Search Button from Heroicons */}
@@ -95,7 +94,6 @@ const actions = [
 ];
 
 function RenderResults() {
-
   const { results } = useMatches();
 
   return (
