@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ChevronLeftIcon, ExternalLinkIcon } from '@heroicons/react/outline';
+import { useState } from 'react';
 
 export function TitleBack({ name, href }: { name: string; href: string }) {
   return (
@@ -81,7 +82,7 @@ export function ErrorBagde({ name }: { name: string }) {
   );
 }
 
-export function ExternalLink({ name, href }: { name: string; href: string }) {
+export function ExternalLink({ name, href, big }: { name: string; href: string; big?: boolean }) {
   return (
     <cite className='not-italic'>
       {' '}
@@ -93,7 +94,7 @@ export function ExternalLink({ name, href }: { name: string; href: string }) {
         className='group inline-block w-fit cursor-pointer items-center text-blue-500 hover:underline active:text-blue-500'
       >
         <div className='flex items-center'>
-          <div>{name}</div>
+          <div className={`${big ? 'text-lg' : 'text-base'}`}>{name}</div>
           {/* arrow upper right icon */}
           <ExternalLinkIcon
             className='ml-1 h-4 w-4 text-blue-500 group-hover:underline '

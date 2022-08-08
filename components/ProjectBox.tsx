@@ -21,8 +21,8 @@ export default function ProjectsBox({
   industry,
 }: ProjectBoxTypes) {
   return (
-    <section className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-md border border-zinc-300 shadow'>
-      <section className='flex flex-col justify-between p-4'>
+    <section className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 '>
+      <section className='from-zinc-50 flex flex-col justify-between bg-gradient-to-b to-white p-4'>
         <div className='mb-2 flex items-center justify-between'>
           <div className='text-xl font-semibold text-zinc-700'>{title}</div>
           {imgSrc}
@@ -40,7 +40,7 @@ export default function ProjectsBox({
           <ExternalLinkIcon className='ml-1 h-4 w-4 pt-0.5 text-blue-500' />
         </a>
       </section>
-      <section className='flex flex-col space-y-0.5 border-t border-zinc-400 bg-gray-100 px-4 py-3 text-zinc-700 sm:text-[12px]'>
+      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 px-4 py-3 text-zinc-700 sm:text-[12px]'>
         <article className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
             <div className='font-semibold text-zinc-700'>Period</div>
