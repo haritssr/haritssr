@@ -62,7 +62,7 @@ const Contacts = () => {
   return (
     <div
       id='contacts'
-      className='grid grid-cols-1 gap-10 rounded-2xl border border-zinc-300 bg-gradient-to-b from-zinc-50 via-white to-white p-5 sm:grid-cols-2 sm:gap-0 sm:bg-gradient-to-r sm:via-zinc-50 sm:p-10'
+      className='grid grid-cols-1 gap-10 rounded-2xl border border-zinc-300 bg-gradient-to-b from-zinc-50 via-white to-white px-5 py-10 sm:grid-cols-2 sm:gap-0 sm:bg-gradient-to-r sm:via-zinc-50 sm:p-10'
     >
       <section className='mx-auto flex flex-col sm:mx-0 sm:mr-10  sm:px-0 sm:pl-4'>
         <article className=' mb-5 flex justify-center object-center sm:flex sm:h-auto sm:items-center sm:justify-start'>
