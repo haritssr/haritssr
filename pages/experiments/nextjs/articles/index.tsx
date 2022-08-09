@@ -19,7 +19,7 @@ export async function getStaticProps() {
 
 export default function Articles({ posts }) {
   return (
-    <LayoutToExperiments title='Articles ' domain='Next.js'>
+    <LayoutToExperiments title='Articles ' domain='Nextjs'>
       <SubTitle>
         getStaticProps + Dynamic Pages. This data generated from{' '}
         <ExternalLink name='json placeholder' href='https://jsonplaceholder.typicode.com/posts' />{' '}

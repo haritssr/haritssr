@@ -4,7 +4,7 @@ import { ExperimentsData } from '../../../data/ExperimentsData';
 
 export default function NextJs() {
   return (
-    <LayoutNodeExperiments domain='Next.js' title='Next.js'>
+    <LayoutNodeExperiments domain='Nextjs' title='Nextjs'>
       <section>
         {[ExperimentsData[2]].map(({ id, title, links, description, logoSrc }) => (
           <ExperimentsBox

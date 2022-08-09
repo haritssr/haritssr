@@ -219,8 +219,8 @@ const Exp = ({
   sum: number;
 }) => {
   return (
-    <div className='flex flex-col justify-between rounded-lg border border-zinc-200 bg-zinc-50 p-4'>
-      <div className='mb-5'>
+    <div className='flex flex-col justify-between rounded-lg border border-zinc-200 bg-zinc-50 px-4 pt-4 pb-3'>
+      <div className='mb-5 space-y-1'>
         <Image src={imgSrc} height={30} width={30} alt={title} />
         <div className='text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</div>
         <div className='text-zinc-500'>{sum} Experiments</div>

@@ -6,7 +6,7 @@ export default function Router() {
   const router = useRouter();
   const style = 'text-gray-500';
   return (
-    <LayoutToExperiments title='Router' domain='Next.js'>
+    <LayoutToExperiments title='Router' domain='Nextjs'>
       <SubTitle>
         <ExternalCodeLink href='https://nextjs.org/docs/api-reference/next/router#router-object'>
           router

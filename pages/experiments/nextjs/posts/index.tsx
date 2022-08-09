@@ -14,8 +14,8 @@ export async function getStaticProps() {
 
 export default function Posts({ allPostsData }) {
   return (
-    <LayoutToExperiments title='Posts' domain='Next.js'>
-      <SubTitle>Posts by Next.js tutorial</SubTitle>
+    <LayoutToExperiments title='Posts' domain='Nextjs'>
+      <SubTitle>Posts by Nextjs tutorial</SubTitle>
       <ul className='space-y-5'>
         {allPostsData.map(({ id, date, title }) => (
           <li className='' key={id}>

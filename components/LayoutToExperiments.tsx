@@ -46,7 +46,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
       <GlobalHead />
 
-      <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 saturate-150 backdrop-blur sm:py-2'>
+      <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 py-1.5 saturate-150 backdrop-blur'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           {/* General back button, will back to /experiments if we have been there, else will back to whatever in the browser history stack , prepare for the New Navigation API*/}
           <Link href={`/experiments/${domain.toLowerCase()}`}>
@@ -58,18 +58,15 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
                     strokeWidth={2}
                   />
                   <div className='-ml-1 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
-                    Back
+                    {domain}
                   </div>
                 </span>
               </span>
             </a>
           </Link>
-          {/* Title and Domain*/}
           <div className='-mr-2 inline w-3/4 sm:-mr-0 sm:w-2/3'>
             <div className='flex flex-col items-center justify-center -space-y-1 py-0.5 sm:flex-row sm:-space-y-0 sm:space-x-2 sm:py-0'>
-              <div className='text-sm font-semibold text-zinc-800 sm:text-base'>{domain}</div>
-              <div className='hidden text-zinc-600 sm:block'>/</div>
-              <div className=' text-[12px] text-zinc-600 sm:text-base'>{title}</div>
+              <div className=' text-lg font-semibold text-zinc-800'>{title}</div>
             </div>
           </div>
           {/* Table of content (recently deleted because i don't know how to implement this) */}

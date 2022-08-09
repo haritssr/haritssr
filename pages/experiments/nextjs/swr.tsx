@@ -12,13 +12,13 @@ export default function SWR() {
 
   if (!data)
     return (
-      <LayoutToExperiments title='Loading...' domain='Next.js'>
+      <LayoutToExperiments title='Loading...' domain='Nextjs'>
         <div>No Data</div>
       </LayoutToExperiments>
     );
 
   return (
-    <LayoutToExperiments title='SWR' domain='Next.js'>
+    <LayoutToExperiments title='SWR' domain='Nextjs'>
       <SubTitle>
         Using SWR to fetch data from{' '}
         <code className='rounded-md border border-green-200 bg-green-50 px-2 py-1 font-mono text-sm text-green-500'>

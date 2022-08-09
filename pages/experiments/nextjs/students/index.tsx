@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next';
 
 export default function Students({ students }) {
   return (
-    <LayoutToExperiments title='Students' domain='Next.js'>
+    <LayoutToExperiments title='Students' domain='Nextjs'>
       <SubTitle>A list of students come from JSONPlaceholder API</SubTitle>
       <div className='mt-2 space-y-3'>
         {students.map(a => (

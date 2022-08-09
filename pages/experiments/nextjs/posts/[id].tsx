@@ -5,7 +5,7 @@ import Date from '@/components/date';
 
 export default function Post({ postData }) {
   return (
-    <LayoutToExperiments title={postData.title} domain='Next.js'>
+    <LayoutToExperiments title={postData.title} domain='Nextjs'>
       <SubTitle>
         <Date dateString={postData.date}></Date>
       </SubTitle>

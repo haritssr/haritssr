@@ -18,8 +18,8 @@ const ProductData = [
 
 export default function ImageComponents() {
   return (
-    <LayoutToExperiments title='Image Component' domain='Next.js'>
-      <SubTitle>My implementation of Next.js Image Components </SubTitle>
+    <LayoutToExperiments title='Image Component' domain='Nextjs'>
+      <SubTitle>My implementation of Nextjs Image Components </SubTitle>
       <Topic name='Grid System' />
       <main className='z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pb-20 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
         {ProductData.map(a => (
