@@ -11,8 +11,15 @@ const coins = [
   { symbol: 'BTC', amount: 0.005, color: '#F59E0B', inUSD: 37363 },
 ];
 
+interface yes {
+  symbol: string;
+  amount: number;
+  color: string;
+  inUSD: number;
+}
+
 export default function PieChart() {
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState<yes | null>(null);
 
   const width = 400;
   const halfWidth = width / 2;
@@ -42,7 +49,7 @@ export default function PieChart() {
                     onMouseEnter={() => setActive(arc.data)}
                     onMouseLeave={() => setActive(null)}
                   >
-                    <path d={pie.path(arc)} fill={arc.data.color}></path>
+                    <path d={pie.path(arc) as string} fill={arc.data.color}></path>
                   </g>
                 );
               });

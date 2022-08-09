@@ -11,7 +11,7 @@ const GlobalNavigationDesktopLink = ({ href, title }: { href: string; title: str
           router.asPath.substring(0, href.length) === href
             ? 'text-white'
             : 'text-zinc-400 hover:text-zinc-300'
-        } rounded-md py-0.5 `}
+        } rounded-md py-0.5 text-tiny`}
       >
         {title}
       </a>
@@ -21,9 +21,14 @@ const GlobalNavigationDesktopLink = ({ href, title }: { href: string; title: str
 
 export default function GlobalNavigationDesktop() {
   return (
-    <div className='flex flex-row items-center space-x-5  sm:space-x-8'>
-      <GlobalNavigationDesktopLink href='/experiments' title='Experiments' />
-      <GlobalNavigationDesktopLink href='/blog' title='Blog' />
+    <div className='hidden sm:block'>
+      <div className='flex  flex-row items-center  space-x-5   sm:space-x-10'>
+        <GlobalNavigationDesktopLink href='/#Projects' title='Projects' />
+        <GlobalNavigationDesktopLink href='/#Experiments' title='Experiments' />
+        <GlobalNavigationDesktopLink href='/#TechStack' title='Tech Stack' />
+        <GlobalNavigationDesktopLink href='/#Blog' title='Blog' />
+        <GlobalNavigationDesktopLink href='/#Reading' title='Reading' />
+      </div>
     </div>
   );
 }

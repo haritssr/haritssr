@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // context.params
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   //fetch specific data based on the id from the API endpoint for every page inside the next.js dynamic route
-  const posts = await fetch('https://jsonplaceholder.typicode.com/posts/' + params.id).then(post =>
+  const posts = await fetch('https://jsonplaceholder.typicode.com/posts/' + params!.id).then(post =>
     post.json()
   );
   return {

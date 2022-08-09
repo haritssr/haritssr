@@ -1,22 +1,21 @@
-import LayoutToExperiments from '@/components/LayoutToExperiments';
+import LayoutNodeExperiments from '@/components/LayoutNodeExperiments';
+import ExperimentsBox from '@/components/ExperimentsBox';
 import { ExperimentsData } from '../../../data/ExperimentsData';
-import { InternalLink, SubTitle } from '@/components/DesignSystem';
 
-export default function BrowserAPIIndex() {
-  // console.log(ExperimentsData[3].link);
+export default function Browser() {
   return (
-    <LayoutToExperiments title='Browser API' domain='Browser'>
-      <SubTitle>My Browser API example</SubTitle>
-      <ol className='flex flex-col space-y-2'>
-        {ExperimentsData[3].links.map(({ name }) => (
-          <li key={name} className='text-zinc-600'>
-            <InternalLink
-              href={`/experiments/browser-api/${name.toLowerCase().replace(/\s/g, '-')}`}
-              name={name}
-            />
-          </li>
+    <LayoutNodeExperiments domain='Browser' title='Browser'>
+      <section>
+        {[ExperimentsData[3]].map(({ id, title, links, description, logoSrc }) => (
+          <ExperimentsBox
+            key={id}
+            title={title}
+            links={links}
+            description={description}
+            logoSrc={logoSrc}
+          />
         ))}
-      </ol>
-    </LayoutToExperiments>
+      </section>
+    </LayoutNodeExperiments>
   );
 }

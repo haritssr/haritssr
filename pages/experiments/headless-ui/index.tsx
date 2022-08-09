@@ -2,11 +2,11 @@ import LayoutNodeExperiments from '@/components/LayoutNodeExperiments';
 import ExperimentsBox from '@/components/ExperimentsBox';
 import { ExperimentsData } from '../../../data/ExperimentsData';
 
-export default function FramerMotion() {
+export default function HeadleesUI() {
   return (
-    <LayoutNodeExperiments domain='Framer Motion' title='Framer Motion'>
+    <LayoutNodeExperiments domain='Headlees UI' title='Headlees UI'>
       <section>
-        {[ExperimentsData[5]].map(({ id, title, links, description, logoSrc }) => (
+        {[ExperimentsData[7]].map(({ id, title, links, description, logoSrc }) => (
           <ExperimentsBox
             key={id}
             title={title}

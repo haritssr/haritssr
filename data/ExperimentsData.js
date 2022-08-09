@@ -47,7 +47,7 @@ export const ExperimentsData = [
       { name: 'Search Table' },
       { name: 'Search Books' },
       { name: 'Search Interpol' },
-      { name: 'IsPrime' },
+      // { name: 'IsPrime' },
       { name: 'Functional Props' },
       { name: 'TodoList useState' },
       { name: 'TodoList useReducer' },

@@ -1,19 +1,23 @@
-import Link from 'next/link';
 import { LogoHaritssr } from './Icons';
 import GlobalNavigationDesktop from './GlobalNavigationDesktop';
+import Link from 'next/link';
 
 export default function GlobalHead() {
   return (
     <nav className='sticky top-0 z-30 bg-zinc-800'>
       <div className='mx-auto flex h-12 max-w-4xl flex-row items-center justify-between px-3 py-2 xl:px-0'>
         <Link href='/'>
-          <a className='group flex items-center space-x-1.5 py-1'>
-            <div className='group text-[17px] text-zinc-400'>
-              harits<span className='group-hover:text-white'>sr</span>.com
+          <a className='group flex items-center space-x-2'>
+            <LogoHaritssr />
+            <div className='group flex items-center space-x-1.5 py-1'>
+              <div className='group text-[17px] text-zinc-400'>
+                harits<span className='group-hover:text-white'>sr</span>.com
+              </div>
             </div>
           </a>
         </Link>
-        <div className='hidden sm:block'>
+        {/* <GlobalNavigationDesktop /> */}
+        <div>
           <a title='Whole site source code' href='https://www.github.com/haritssr/haritssr'>
             <svg
               className='h-5 w-5 cursor-alias text-zinc-400 hover:text-white'
@@ -29,14 +33,6 @@ export default function GlobalHead() {
               ></path>
             </svg>
           </a>
-        </div>
-
-        <div className='flex items-center space-x-2 sm:hidden'>
-          <Link href='/#contacts'>
-            <a className='flex items-center rounded-md border border-zinc-600 bg-zinc-700 px-3 py-1 text-[12px] font-medium text-white'>
-              Contact Me
-            </a>
-          </Link>
         </div>
       </div>
     </nav>

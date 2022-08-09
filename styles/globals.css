@@ -10,7 +10,7 @@ input[type='email'],
 input[type='password'],
 input[type='number'],
 input[type='tel'] {
-  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
+  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
 }
 
 input[type='time'],
@@ -18,7 +18,7 @@ input[type='date'],
 input[type='week'],
 input[type='month'],
 select {
-  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
+  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
 }
 
 input[type='reset'],
