@@ -49,7 +49,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
       <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 py-1.5 saturate-150 backdrop-blur'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           {/* General back button, will back to /experiments if we have been there, else will back to whatever in the browser history stack , prepare for the New Navigation API*/}
-          <Link href={`/experiments/${domain.toLowerCase()}`}>
+          <Link href={`/experiments/${domain.toLowerCase().replace(/\s/g, '-')}`}>
             <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
               <span className=' inline-block w-full'>
                 <span className='group flex items-center'>
