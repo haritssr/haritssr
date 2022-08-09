@@ -6,7 +6,6 @@ import GlobalNavigationMobile from './GlobalNavigationMobile';
 import { ChevronLeftIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-// This layout used for every pages under the Experiments and Blog
 
 interface LayoutToExperimentsType {
   children: React.ReactNode;
@@ -48,7 +47,6 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
       <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 py-1.5 saturate-150 backdrop-blur'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
-          {/* General back button, will back to /experiments if we have been there, else will back to whatever in the browser history stack , prepare for the New Navigation API*/}
           <Link href={`/experiments/${domain.toLowerCase().replace(/\s/g, '-')}`}>
             <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
               <span className=' inline-block w-full'>
@@ -69,13 +67,11 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
               <div className=' text-lg font-semibold text-zinc-800'>{title}</div>
             </div>
           </div>
-          {/* Table of content (recently deleted because i don't know how to implement this) */}
           <div className='flex w-1/4 justify-end sm:w-1/6 '>
             <Source href={githubRoute} name='Source' />
           </div>
         </section>
       </div>
-      {/* content */}
       <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
         <h1 className='z-40 mx-auto mt-6 mb-2 block h-auto w-full text-left text-3xl font-bold text-zinc-800'>
           {title}
