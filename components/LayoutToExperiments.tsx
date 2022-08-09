@@ -5,7 +5,7 @@ import React from 'react';
 import GlobalNavigationMobile from './GlobalNavigationMobile';
 import { ChevronLeftIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 // This layout used for every pages under the Experiments and Blog
 
 interface LayoutToExperimentsType {
@@ -49,25 +49,21 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
       <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 saturate-150 backdrop-blur sm:py-2'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           {/* General back button, will back to /experiments if we have been there, else will back to whatever in the browser history stack , prepare for the New Navigation API*/}
-          <a
-            // back navigation work, but the scroll position not
-            // onClick={() => window.history.back()}
-            href={`/experiments/${domain.toLowerCase()}`}
-            // alternative: onClick={() => router.push('/experiments', '', { scroll: false })}
-            className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'
-          >
-            <span className=' inline-block w-full'>
-              <span className='group flex items-center'>
-                <ChevronLeftIcon
-                  className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'
-                  strokeWidth={2}
-                />
-                <div className='-ml-1 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
-                  Back
-                </div>
+          <Link href={`/experiments/${domain.toLowerCase()}`}>
+            <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
+              <span className=' inline-block w-full'>
+                <span className='group flex items-center'>
+                  <ChevronLeftIcon
+                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'
+                    strokeWidth={2}
+                  />
+                  <div className='-ml-1 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
+                    Back
+                  </div>
+                </span>
               </span>
-            </span>
-          </a>
+            </a>
+          </Link>
           {/* Title and Domain*/}
           <div className='-mr-2 inline w-3/4 sm:-mr-0 sm:w-2/3'>
             <div className='flex flex-col items-center justify-center -space-y-1 py-0.5 sm:flex-row sm:-space-y-0 sm:space-x-2 sm:py-0'>
