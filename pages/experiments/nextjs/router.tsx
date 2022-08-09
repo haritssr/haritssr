@@ -1,4 +1,4 @@
-import { ExternalCodeLink, SubTitle, Topic } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle, Topic } from '@/components/DesignSystem';
 import { useRouter } from 'next/router';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
@@ -8,10 +8,10 @@ export default function Router() {
   return (
     <LayoutToExperiments title='Router' domain='Nextjs'>
       <SubTitle>
-        <ExternalCodeLink href='https://nextjs.org/docs/api-reference/next/router#router-object'>
-          router
-        </ExternalCodeLink>
-        Object{' '}
+        <ExternalLink
+          name='next/router'
+          href='https://nextjs.org/docs/api-reference/next/router#router-object'
+        />
       </SubTitle>
       <div className='mb-10'>
         <Topic name='router object' />

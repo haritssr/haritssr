@@ -3,11 +3,17 @@ import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function Select() {
   return (
-    <LayoutToExperiments title='Select' domain='Browser API'>
+    <LayoutToExperiments title='Select' domain='Browser'>
       <SubTitle>
-        Browser built in select api. The chevron down is bad, you can not manipulate that. So
-        alternatively, using{' '}
-        <ExternalLink href='https://headlessui.com/react/listbox' name='Headless UI Listbox' /> or{' '}
+        Browser built in select API.
+        <br />
+        The chevron down is bad, you can not manipulate that.
+        <br />
+        Alternative using{' '}
+        <ExternalLink
+          href='https://headlessui.com/react/listbox'
+          name='Headless UI Listbox'
+        /> or{' '}
         <ExternalLink
           href='https://www.radix-ui.com/docs/primitives/components/select'
           name='Radix Primitive Select'

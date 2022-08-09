@@ -48,7 +48,13 @@ export default function NumberGame() {
   if (state.score === 10) {
     return (
       <LayoutToExperiments title='Number Game' domain='Browser'>
-        <SubTitle>Play addition game</SubTitle>
+        <SubTitle>
+          Random additional game.
+          <br />
+          Win if correct 10 times.
+          <br />
+          Every wrong answer decrease one score.
+        </SubTitle>
         <div className='pt-24 text-center text-4xl font-bold text-green-500'>You win!</div>
 
         <Link href='/experiments/browser/number-game'>
@@ -68,7 +74,13 @@ export default function NumberGame() {
 
   return (
     <LayoutToExperiments title='Number Game' domain='Browser'>
-      <SubTitle>Play addition game</SubTitle>
+      <SubTitle>
+        Random additional game.
+        <br />
+        Win if correct 10 times.
+        <br />
+        Every wrong answer decrease one score.
+      </SubTitle>
       <div className='mx-auto flex max-w-xl flex-col items-center justify-center pt-24'>
         <div className={state.incorrect ? 'incorrect' : ''}>
           {state.num1}+{state.num2}

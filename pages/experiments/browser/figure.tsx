@@ -5,9 +5,13 @@ import Image from 'next/image';
 export default function Figure() {
   return (
     <LayoutToExperiments title='Figure' domain='Browser'>
-      <SubTitle>Image with figcaption</SubTitle>
+      <SubTitle>
+        Image with figcaption.
+        <br />
+        Unfortunately the default behavior of figcaption has been overrided by tailwindcss
+        preflight, so the figcaption is not italic by default, I need to design it.
+      </SubTitle>
       <div>
-        {/* Unfortunately the default behavior of figcaption has been overrided by tailwindcss preflight, so the figcaption is not italic by default */}
         <figure>
           <Image
             src='/hero.jpg'

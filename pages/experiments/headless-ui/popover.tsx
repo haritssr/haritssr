@@ -4,11 +4,12 @@ import { Popover, Transition } from '@headlessui/react';
 
 export default function ExportedPopover() {
   return (
-    <LayoutToExperiments title='Disclosure' domain='Headless UI'>
+    <LayoutToExperiments title='Popover' domain='Headless UI'>
       <SubTitle>
-        A fully-managed, renderless dialog component jam-packed with accessibility and keyboard
-        features, perfect for building completely custom modal and dialog windows for your next
-        application. <ExternalLink name='Source' href='https://headlessui.dev/react/dialog' />
+        <ExternalLink name='Headless UI Popover' href='https://headlessui.dev/react/dialog' />
+        <br />A fully-managed, renderless dialog component jam-packed with accessibility and
+        keyboard features, perfect for building completely custom modal and dialog windows for your
+        next application.
       </SubTitle>
       <div className='space-y-10'>
         <Wrapper title='Popover Navigation'>

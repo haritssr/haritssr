@@ -8,8 +8,8 @@ export default function TextEditing() {
   useEffect(() => console.log(elementSelected), []);
 
   return (
-    <LayoutToExperiments title='Text Editing' domain='Browser API'>
-      <SubTitle>Image with figcaption</SubTitle>
+    <LayoutToExperiments title='Text Editing' domain='Browser'>
+      <SubTitle>HTML built-in text editing tag</SubTitle>
       <div className='flex flex-col space-y-2' ref={elementSelected}>
         <del>del</del>
         <s>s</s>

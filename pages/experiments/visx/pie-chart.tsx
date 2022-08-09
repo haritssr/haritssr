@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 import { Pie } from '@visx/shape';
@@ -28,7 +28,12 @@ export default function PieChart() {
 
   return (
     <LayoutToExperiments title='Pie Chart' domain='VisX'>
-      <SubTitle>Hover the ring to see which and how much coin that i have</SubTitle>
+      <SubTitle>
+        Inspired by{' '}
+        <ExternalLink href='https://www.youtube.com/watch?v=bL3P9CqQkKw' name='Leight Halliday' />{' '}
+        <br />
+        Hover the ring to see which and how much coin that I have.
+      </SubTitle>
       <svg width={width} height={width}>
         <Group top={halfWidth} left={halfWidth}>
           <Pie

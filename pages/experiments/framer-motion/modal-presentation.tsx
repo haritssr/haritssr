@@ -11,7 +11,8 @@ export default function ModalPresentation() {
   return (
     <LayoutToExperiments title='Modal Presentation' domain='Framer Motion'>
       <SubTitle>
-        By <ExternalLink name='Sam Selikoff' href='https://www.youtube.com/watch?v=ELvqt944ch4' />
+        Inspired by{' '}
+        <ExternalLink name='Sam Selikoff' href='https://www.youtube.com/watch?v=ELvqt944ch4' />
       </SubTitle>
       <div className='relative border p-4'>
         <h1 className='text-center text-xl font-semibold'>Favorites</h1>

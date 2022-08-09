@@ -8,9 +8,10 @@ export default function ExportedMenu() {
   return (
     <LayoutToExperiments title='Menu' domain='Headless UI'>
       <SubTitle>
+        <ExternalLink href='https://headlessui.dev/react/menu' name='Headless UI Menu (Dropdown)' />
+        <br />
         Menus offer an easy way to build custom, accessible dropdown components with robust support
-        for keyboard navigation.{' '}
-        <ExternalLink href='https://headlessui.dev/react/menu' name='Source' />
+        for keyboard navigation.
       </SubTitle>
       <MenuExample1 />
     </LayoutToExperiments>

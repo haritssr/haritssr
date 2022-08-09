@@ -13,7 +13,7 @@ import useMeasure from 'react-use-measure';
 import { timeFormat } from 'd3-time-format';
 import { TouchEvent, MouseEvent } from 'react';
 
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 const data = appleStock.slice(0, 20);
@@ -60,7 +60,17 @@ export default function BarChart() {
 
   return (
     <LayoutToExperiments title='Bar Chart' domain='VisX'>
-      <SubTitle>Bar Chart of Apple Stock</SubTitle>
+      <SubTitle>
+        Inspired by
+        <ExternalLink
+          href='https://www.youtube.com/playlist?list=PLIHT2Jhq922bBwhH07uT_QRaPCaKZGgR_'
+          name='Oh My Function'
+        />{' '}
+        <br />
+        Bar Chart of Apple Stock.
+        <br />
+        Hover the bar to see details.
+      </SubTitle>
       <svg ref={ref} className='w-full' viewBox={`0 0 ${width} ${height}`}>
         <Group>
           {data.map(datum => {

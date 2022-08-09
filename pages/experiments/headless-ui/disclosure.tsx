@@ -25,9 +25,12 @@ export default function ExportedDisclosure() {
   return (
     <LayoutToExperiments title='Disclosure' domain='Headless UI'>
       <SubTitle>
-        A simple, accessible foundation for building custom UIs that show and hide content, like
-        togglable accordion panels.{' '}
-        <ExternalLink name='Source' href='https://headlessui.dev/react/disclosure' />
+        <ExternalLink
+          name='Headless UI Disclosure'
+          href='https://headlessui.dev/react/disclosure'
+        />
+        <br />A simple, accessible foundation for building custom UIs that show and hide content,
+        like togglable accordion panels.
       </SubTitle>
       <div className='grid grid-cols-1 gap-16 sm:grid-cols-2'>
         <DisclosureChevron />

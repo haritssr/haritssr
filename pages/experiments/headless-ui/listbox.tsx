@@ -21,9 +21,13 @@ export default function ExportedSelect() {
   return (
     <LayoutToExperiments title='Listbox' domain='Headless UI'>
       <SubTitle>
-        Listboxes (select) are a great foundation for building custom, accessible select menus for
-        your app, complete with robust support for keyboard navigation.{' '}
-        <ExternalLink name='Souce' href='https://headlessui.dev/react/listbox' />
+        <ExternalLink
+          name='Headless UI Listbox (Select)'
+          href='https://headlessui.dev/react/listbox'
+        />
+        <br />
+        Listboxes are a great foundation for building custom, accessible select menus for your app,
+        complete with robust support for keyboard navigation.{' '}
       </SubTitle>
       <SelectExample1 />
     </LayoutToExperiments>

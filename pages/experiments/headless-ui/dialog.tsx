@@ -5,11 +5,12 @@ import { Fragment, useState } from 'react';
 
 export default function ExportedDialog() {
   return (
-    <LayoutToExperiments title='Disclosure' domain='Headless UI'>
+    <LayoutToExperiments title='Dialog' domain='Headless UI'>
       <SubTitle>
-        A fully-managed, renderless dialog component jam-packed with accessibility and keyboard
-        features, perfect for building completely custom modal and dialog windows for your next
-        application. <ExternalLink name='Source' href='https://headlessui.dev/react/dialog' />
+        <ExternalLink name='Headless UI Dialog' href='https://headlessui.dev/react/dialog' />
+        <br />A fully-managed, renderless dialog component jam-packed with accessibility and
+        keyboard features, perfect for building completely custom modal and dialog windows for your
+        next application.
       </SubTitle>
 
       <div className='space-y-10'>

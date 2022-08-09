@@ -11,9 +11,10 @@ export default function ExportedTabs() {
   return (
     <LayoutToExperiments title='Tabs' domain='Headless UI'>
       <SubTitle>
-        A fully-managed, renderless dialog component jam-packed with accessibility and keyboard
+        <ExternalLink name='Headless UI Tabs' href='https://headlessui.dev/react/dialog' /> <br />A
+        fully-managed, renderless dialog component jam-packed with accessibility and keyboard
         features, perfect for building completely custom modal and dialog windows for your next
-        application. <ExternalLink name='Source' href='https://headlessui.dev/react/dialog' />
+        application.
       </SubTitle>
       <Example1 />
       <Example2 />

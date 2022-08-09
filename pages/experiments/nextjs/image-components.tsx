@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { SubTitle, Topic } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle, Topic } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,7 +19,13 @@ const ProductData = [
 export default function ImageComponents() {
   return (
     <LayoutToExperiments title='Image Component' domain='Nextjs'>
-      <SubTitle>My implementation of Nextjs Image Components </SubTitle>
+      <SubTitle>
+        My implementation of
+        <ExternalLink
+          href='https://nextjs.org/docs/api-reference/next/image'
+          name='Nextjs Image Components'
+        />
+      </SubTitle>
       <Topic name='Grid System' />
       <main className='z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pb-20 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
         {ProductData.map(a => (
