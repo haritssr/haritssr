@@ -87,7 +87,7 @@ export const ExperimentsData = [
     title: 'VisX',
     logoSrc: '/techIcons/visx.png',
     description: 'Data visualization',
-    links: [{ name: 'Bar Chart' }, { name: 'Pie Chart' }, { name: 'Areas' }],
+    links: [{ name: 'Bar Chart' }, { name: 'Pie Chart' }],
   },
 
   {
@@ -95,7 +95,7 @@ export const ExperimentsData = [
     title: 'Framer Motion',
     logoSrc: '/techIcons/framermotion.png',
     description: 'Animation for user interface',
-    links: [{ name: 'Modal Presentation' }],
+    links: [{ name: 'Modal Presentation' }, { name: 'Random' }],
   },
   {
     id: 7,
@@ -118,7 +118,7 @@ export const ExperimentsData = [
       { name: 'Disclosure' },
       { name: 'Dialog' },
       { name: 'Popover' },
-      { name: 'Radio' },
+      { name: 'Radio Group' },
       { name: 'Tabs' },
     ],
   },

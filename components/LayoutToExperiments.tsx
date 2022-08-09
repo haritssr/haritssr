@@ -62,9 +62,9 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
               </span>
             </a>
           </Link>
-          <div className='-mr-2 inline w-3/4 sm:-mr-0 sm:w-2/3'>
-            <div className='flex flex-col items-center justify-center -space-y-1 py-0.5 sm:flex-row sm:-space-y-0 sm:space-x-2 sm:py-0'>
-              <div className=' text-lg font-semibold text-zinc-800'>{title}</div>
+          <div className='-mr-2 inline w-2/3 sm:-mr-0 sm:w-2/3'>
+            <div className='flex justify-center py-0.5 sm:py-0'>
+              <div className=' truncate text-lg font-semibold text-zinc-800'>{title}</div>
             </div>
           </div>
           <div className='flex w-1/4 justify-end sm:w-1/6 '>

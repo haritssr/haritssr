@@ -735,10 +735,10 @@
     "@floating-ui/dom" "^0.5.3"
     "use-isomorphic-layout-effect" "^1.1.1"
 
-"@headlessui/react@^1.5.0":
-  "integrity" "sha512-aaRnYxBb3MU2FNJf3Ut9RMTUqqU3as0aI1lQhgo2n9Fa67wRu14iOGqx93xB+uMNVfNwZ5B3y/Ndm7qZGuFeMQ=="
-  "resolved" "https://registry.npmjs.org/@headlessui/react/-/react-1.5.0.tgz"
-  "version" "1.5.0"
+"@headlessui/react@^1.6.6":
+  "integrity" "sha512-MFJtmj9Xh/hhBMhLccGbBoSk+sk61BlP6sJe4uQcVMtXZhCgGqd2GyIQzzmsdPdTEWGSF434CBi8mnhR6um46Q=="
+  "resolved" "https://registry.npmjs.org/@headlessui/react/-/react-1.6.6.tgz"
+  "version" "1.6.6"
 
 "@heroicons/react@^1.0.6":
   "integrity" "sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ=="
