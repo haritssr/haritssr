@@ -17,7 +17,7 @@ export default function GlobalNavigationMobile() {
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const router = useRouter();
   const toN = to === '/home' ? '/' : to;
-  const iconColor = router.asPath === toN ? 'text-blue-600' : 'text-zinc-700';
+  const iconColor = router.asPath === toN ? 'text-blue-600' : 'text-zinc-500';
   function capitalizeFirstLetter(to: string) {
     return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
   }
@@ -35,7 +35,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
           >
             {path}
           </svg>
-          <div className={`text-[10px] ${iconColor}`}>{capitalizeFirstLetter(to)}</div>
+          <div className={`text-[11px] ${iconColor}`}>{capitalizeFirstLetter(to)}</div>
         </div>
       </a>
     </Link>
@@ -44,7 +44,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 
 const Data = [
   {
-    id: 'home',
+    id: 'contacts',
     path: (
       <path
         strokeLinecap='round'
@@ -54,12 +54,32 @@ const Data = [
     ),
   },
   {
+    id: 'projects',
+    path: (
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z'
+      />
+    ),
+  },
+  {
     id: 'experiments',
     path: (
       <path
         strokeLinecap='round'
         strokeLinejoin='round'
-        d='M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'
+        d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'
+      />
+    ),
+  },
+  {
+    id: 'tech stack',
+    path: (
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01'
       />
     ),
   },

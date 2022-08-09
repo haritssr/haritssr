@@ -9,18 +9,20 @@ export default function GlobalHead() {
         <Link href='/'>
           <a className='group flex items-center space-x-2'>
             <LogoHaritssr />
-            <div className='group flex items-center space-x-1.5 py-1'>
-              <div className='group text-[17px] text-zinc-400'>
-                harits<span className='group-hover:text-white'>sr</span>.com
-              </div>
-            </div>
           </a>
         </Link>
-        {/* <GlobalNavigationDesktop /> */}
+        <GlobalNavigationDesktop />
+        <div className='cursor-pointer sm:hidden'>
+          <div className='group flex items-center space-x-1.5 py-1'>
+            <div className='group text-lg text-zinc-400'>
+              harits<span className='group-hover:text-white'>sr</span>.com
+            </div>
+          </div>
+        </div>
         <div>
           <a title='Whole site source code' href='https://www.github.com/haritssr/haritssr'>
             <svg
-              className='h-5 w-5 cursor-alias text-zinc-400 hover:text-white'
+              className='h-5 w-5 cursor-alias text-zinc-200 hover:text-white'
               viewBox='0 0 15 15'
               fill='none'
               xmlns='http://www.w3.org/2000/svg'

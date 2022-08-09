@@ -23,11 +23,11 @@ export default function GlobalNavigationDesktop() {
   return (
     <div className='hidden sm:block'>
       <div className='flex  flex-row items-center  space-x-5   sm:space-x-10'>
+        <GlobalNavigationDesktopLink href='/' title='Contacts' />
         <GlobalNavigationDesktopLink href='/#Projects' title='Projects' />
         <GlobalNavigationDesktopLink href='/#Experiments' title='Experiments' />
         <GlobalNavigationDesktopLink href='/#TechStack' title='Tech Stack' />
         <GlobalNavigationDesktopLink href='/#Blog' title='Blog' />
-        <GlobalNavigationDesktopLink href='/#Reading' title='Reading' />
       </div>
     </div>
   );
