@@ -56,7 +56,7 @@ export default function LayoutNodeExperiments({
               <span className=' inline-block w-full'>
                 <span className='group flex items-center'>
                   <ChevronLeftIcon
-                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:-ml-5 sm:hover:underline sm:group-hover:text-blue-700'
+                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700 lg:-ml-5'
                     strokeWidth={2}
                   />
                   <div className='-ml-1 truncate text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
@@ -66,7 +66,7 @@ export default function LayoutNodeExperiments({
               </span>
             </a>
           </Link>
-          <div className='-ml-3 inline w-3/4 sm:-mr-5 sm:w-2/3'>
+          <div className='-ml-3 inline w-3/4 sm:w-2/3 lg:-mr-5'>
             <div className='flex flex-col items-center justify-center -space-y-1 py-0.5 sm:flex-row sm:-space-y-0 sm:space-x-2 sm:py-0'>
               <div className=' text-lg font-semibold text-zinc-800'>{domain}</div>
             </div>
@@ -76,7 +76,7 @@ export default function LayoutNodeExperiments({
           </div>
         </section>
       </div>
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>{children}</main>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 lg:px-0'>{children}</main>
 
       <Footer />
       <GlobalNavigationMobile />
