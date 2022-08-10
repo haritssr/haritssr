@@ -22,8 +22,6 @@ export default function LayoutNodeExperiments({
 }: LayoutNodeExperimentsType) {
   const lastThreeSegmentRoute = useRouter().asPath;
   const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
-  // const lastThreeSegmentRoute = useRouter().asPath.split('/').slice(-3).join('/');
-  // const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages/${lastThreeSegmentRoute}.tsx`;
 
   const image = 'https://harislab.com/public/HarisLab.png';
   //bg-[#f2f1f7]
@@ -58,26 +56,21 @@ export default function LayoutNodeExperiments({
               <span className=' inline-block w-full'>
                 <span className='group flex items-center'>
                   <ChevronLeftIcon
-                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'
+                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:-ml-5 sm:hover:underline sm:group-hover:text-blue-700'
                     strokeWidth={2}
                   />
-                  <div className='-ml-1 block text-blue-600 hover:no-underline sm:hidden sm:hover:underline sm:group-hover:text-blue-700'>
-                    Exps
-                  </div>
-                  <div className='-ml-1 hidden text-blue-600 hover:no-underline sm:block sm:hover:underline sm:group-hover:text-blue-700'>
+                  <div className='-ml-1 truncate text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
                     Experiments
                   </div>
                 </span>
               </span>
             </a>
           </Link>
-          {/* Title and Domain*/}
-          <div className='-mr-2 inline w-3/4 sm:-mr-0 sm:w-2/3'>
+          <div className='-ml-3 inline w-3/4 sm:-mr-5 sm:w-2/3'>
             <div className='flex flex-col items-center justify-center -space-y-1 py-0.5 sm:flex-row sm:-space-y-0 sm:space-x-2 sm:py-0'>
               <div className=' text-lg font-semibold text-zinc-800'>{domain}</div>
             </div>
           </div>
-          {/* Table of content (recently deleted because i don't know how to implement this) */}
           <div className='flex w-1/4 justify-end sm:w-1/6 '>
             <Source href={githubRoute} name='Source' />
           </div>

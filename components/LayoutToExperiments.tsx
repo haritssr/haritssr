@@ -16,8 +16,6 @@ interface LayoutToExperimentsType {
 export default function LayoutToExperiments({ children, title, domain }: LayoutToExperimentsType) {
   const lastThreeSegmentRoute = useRouter().asPath;
   const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
-  // const lastThreeSegmentRoute = useRouter().asPath.split('/').slice(-3).join('/');
-  // const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages/${lastThreeSegmentRoute}.tsx`;
 
   const image = 'https://harislab.com/public/HarisLab.png';
   //bg-[#f2f1f7]
@@ -52,17 +50,17 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
               <span className=' inline-block w-full'>
                 <span className='group flex items-center'>
                   <ChevronLeftIcon
-                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'
+                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:-ml-5 sm:hover:underline sm:group-hover:text-blue-700'
                     strokeWidth={2}
                   />
-                  <div className='-ml-1 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
+                  <div className='-ml-1 truncate text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
                     {domain}
                   </div>
                 </span>
               </span>
             </a>
           </Link>
-          <div className='-mr-2 inline w-2/3 sm:-mr-0 sm:w-2/3'>
+          <div className='-mr-2 inline w-2/3 sm:-mr-5 sm:w-2/3'>
             <div className='flex justify-center py-0.5 sm:py-0'>
               <div className=' truncate text-lg font-semibold text-zinc-800'>{title}</div>
             </div>
