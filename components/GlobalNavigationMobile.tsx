@@ -24,19 +24,17 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 
   return (
     <Link href={`${to === '/home' ? '/' : to}`}>
-      <a className='block'>
-        <div className='flex flex-col items-center justify-center py-1'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className={`${iconColor} h-6 w-6`}
-            fill='none'
-            stroke='currentColor'
-            strokeWidth={2}
-          >
-            {path}
-          </svg>
-          <div className={`text-[11px] ${iconColor}`}>{capitalizeFirstLetter(to)}</div>
-        </div>
+      <a className='flex flex-col items-center justify-center py-1'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className={`${iconColor} h-6 w-6`}
+          fill='none'
+          stroke='currentColor'
+          strokeWidth={2}
+        >
+          {path}
+        </svg>
+        <div className={`text-[11px] ${iconColor}`}>{capitalizeFirstLetter(to)}</div>
       </a>
     </Link>
   );
@@ -49,7 +47,7 @@ const Data = [
       <path
         strokeLinecap='round'
         strokeLinejoin='round'
-        d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+        d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
       />
     ),
   },
