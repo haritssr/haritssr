@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronLeftIcon, ExternalLinkIcon } from '@heroicons/react/outline';
+import { ChevronLeftIcon, ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 
 export function TitleBack({ name, href }: { name: string; href: string }) {
@@ -46,16 +46,10 @@ export function InternalLink({ name, href }: { name: string; href: string }) {
     <Link href={href}>
       <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:underline sm:text-base'>
         <p>{name}</p>
-        {/* arrow right icon */}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
+        <ChevronRightIcon
           className='h-4 w-4 pt-[0.25px] text-blue-600 group-hover:underline'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-        </svg>
+          strokeWidth={2}
+        />
       </a>
     </Link>
   );
@@ -88,16 +82,17 @@ export function ExternalLink({ name, href, big }: { name: string; href: string; 
         href={href}
         target='_blank'
         rel='noopener noreferrer'
-        className='group inline-block w-fit cursor-pointer items-center text-blue-500 hover:underline active:text-blue-500'
+        className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'
       >
-        <div className='flex items-center'>
-          <div className={`${big ? 'text-lg' : 'text-base'}`}>{name}</div>
-          {/* arrow upper right icon */}
+        <a className='flex items-center'>
+          <a className={`${big ? 'text-lg font-medium' : 'text-base'}`}>{name}</a>
           <ExternalLinkIcon
-            className='ml-1 h-4 w-4 text-blue-500 group-hover:underline '
-            strokeWidth={2}
+            className={`${
+              big ? 'h-[18px] w-[18px]' : 'h-4 w-4'
+            } ml-1  text-blue-500 group-hover:underline`}
+            strokeWidth={`${big ? 2.2 : 2}`}
           />
-        </div>
+        </a>
       </a>{' '}
     </cite>
   );
@@ -113,11 +108,3 @@ export function ExternalCodeLink({ children, href }: { children: React.ReactNode
     </a>
   );
 }
-
-/*
-export const inputStyle =
-  'rounded-md border-[1.4px] border-zinc-500 hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 px-2 py-1 placeholder:text-zinc-500 w-full ';
-
-export const buttonStyle =
-  'px-3 bg-blue-600 hover:bg-blue-600/90 text-white rounded-md py-1.5 text-center cursor-pointer';
-*/
