@@ -84,15 +84,15 @@ export function ExternalLink({ name, href, big }: { name: string; href: string; 
         rel='noopener noreferrer'
         className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'
       >
-        <a className='flex items-center'>
-          <a className={`${big ? 'text-lg font-medium' : 'text-base'}`}>{name}</a>
+        <span className='flex items-center'>
+          <span className={`${big ? 'text-lg font-medium' : 'text-base'}`}>{name}</span>
           <ExternalLinkIcon
             className={`${
               big ? 'h-[18px] w-[18px]' : 'h-4 w-4'
             } ml-1  text-blue-500 group-hover:underline`}
             strokeWidth={`${big ? 2.2 : 2}`}
           />
-        </a>
+        </span>
       </a>{' '}
     </cite>
   );
