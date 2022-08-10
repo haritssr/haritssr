@@ -14,11 +14,7 @@ export default function ExperimentBox({ title, links, description, logoSrc }: Ex
     <article className='h-fit' id={`#${title.toLowerCase().replace(' ', '-')}`}>
       <div className='mb-1 flex w-full flex-col items-center space-y-1 sm:mb-2'>
         <div className='flex w-full items-center space-x-2'>
-          <Link href={`/experiments/${title.toLowerCase().replace(' ', '-')}`}>
-            <a className='block text-left text-2xl font-semibold text-zinc-800 hover:underline'>
-              {title}
-            </a>
-          </Link>
+          <div className=' text-left text-2xl font-semibold text-zinc-800'>{title}</div>
           <div className='flex items-center'>
             <Image src={logoSrc} height={18} width={18} alt={title} />
           </div>
