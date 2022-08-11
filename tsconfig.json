@@ -28,8 +28,8 @@
       "@/Icons": [
         "components/Icons"
       ],
-      "@/showcase": [
-        "components/work"
+      "@/styles/*": [
+        "styles/*"
       ]
     },
     "incremental": true
@@ -50,7 +50,9 @@
     "pages/experiments/react/store-context-selector.tes",
     "utils/store-context.js",
     "pages/experiments/react/store-context-selector.tsz",
-    "pages/experiments/react/store-zustand.js" ],
+    "pages/experiments/react/store-zustand.js",
+    "styles/*.css",
+    "styles/*.module.css" ],
   "exclude": [
     "node_modules"
   ]

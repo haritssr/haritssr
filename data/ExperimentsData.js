@@ -80,6 +80,7 @@ export const ExperimentsData = [
       { name: 'Figure' },
       { name: 'Text Editing' },
       { name: 'YouTube Embed' },
+      { name: 'Intersection Observer API' },
     ],
   },
   {
