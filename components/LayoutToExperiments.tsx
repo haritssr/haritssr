@@ -6,6 +6,7 @@ import GlobalNavigationMobile from './GlobalNavigationMobile';
 import { ChevronLeftIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { GitHubIcon } from './Icons';
 
 interface LayoutToExperimentsType {
   children: React.ReactNode;
@@ -45,29 +46,9 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
       <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80 py-1.5 saturate-150 backdrop-blur'>
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
-          <Link href={`/experiments/${domain.toLowerCase().replace(/\s/g, '-')}`}>
-            <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
-              <span className=' inline-block w-full'>
-                <span className='group flex items-center'>
-                  <ChevronLeftIcon
-                    className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:-ml-5 sm:hover:underline sm:group-hover:text-blue-700'
-                    strokeWidth={2}
-                  />
-                  <div className='-ml-1 truncate text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
-                    {domain}
-                  </div>
-                </span>
-              </span>
-            </a>
-          </Link>
-          <div className='-mr-2 inline w-2/3 sm:-mr-5 sm:w-2/3'>
-            <div className='flex justify-center py-0.5 sm:py-0'>
-              <div className=' truncate text-lg font-semibold text-zinc-800'>{title}</div>
-            </div>
-          </div>
-          <div className='flex w-1/4 justify-end sm:w-1/6 '>
-            <Source href={githubRoute} name='Source' />
-          </div>
+          <BackToExperiments domain={domain} />
+          <PageTitle title={title} />
+          <PageSource href={githubRoute} />
         </section>
       </div>
       <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
@@ -82,19 +63,50 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
     </div>
   );
 }
-
-const Source = ({ href, name }: { href: string; name: string }) => {
+const BackToExperiments = ({ domain }: { domain: string }) => {
   return (
-    <cite className='not-italic'>
-      <a
-        title='This page source code'
-        href={href}
-        target='_blank'
-        rel='noopener noreferrer'
-        className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'
-      >
-        {name}
+    <Link href={`/experiments/${domain.toLowerCase().replace(/\s/g, '-')}`}>
+      <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
+        <span className=' inline-block w-full'>
+          <span className='group flex items-center'>
+            <ChevronLeftIcon
+              className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'
+              strokeWidth={2}
+            />
+            <div className='-ml-1 truncate text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
+              {domain}
+            </div>
+          </span>
+        </span>
       </a>
-    </cite>
+    </Link>
+  );
+};
+
+const PageTitle = ({ title }: { title: string }) => {
+  return (
+    <div className='sm:2/3  -mr-2 inline w-3/5'>
+      <div className='flex justify-center py-0.5 sm:py-0'>
+        <div className=' truncate text-lg font-semibold text-zinc-800'>{title}</div>
+      </div>
+    </div>
+  );
+};
+
+const PageSource = ({ href }: { href: string }) => {
+  return (
+    <div className='flex w-1/4 justify-end sm:w-1/6 '>
+      <cite className='not-italic'>
+        <a
+          title='This page source code'
+          href={href}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='group flex w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'
+        >
+          <GitHubIcon className='h-5 w-5 cursor-pointer text-blue-600 hover:text-blue-700' />
+        </a>
+      </cite>
+    </div>
   );
 };
