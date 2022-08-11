@@ -1,5 +1,5 @@
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: [
