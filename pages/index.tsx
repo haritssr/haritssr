@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout';
 import Image from 'next/image';
 import ContactComponent from '@/components/ContactComponent';
-import { ExternalLink, InternalLink } from '@/components/DesignSystem';
+import { ExternalLink } from '@/components/DesignSystem';
 import {
   Backend,
   DataVisulization,
@@ -22,9 +22,8 @@ import { BooksData } from 'data/BooksData';
 import React from 'react';
 import { LocationMarkerIcon } from '@heroicons/react/solid';
 import { TechStackComponent } from '@/components/TechStackComponents';
-import { ExperimentsData } from '../data/ExperimentsData';
-import { ChevronRightIcon } from '@heroicons/react/outline';
-import Link from 'next/link';
+import ExperimentsIndexBox from '@/components/ExperimentsIndexBox';
+import { ExperimentIndexData } from 'data/ExperimentsIndexData';
 
 export default function Home() {
   return (
@@ -64,7 +63,7 @@ const Contacts = () => {
   return (
     <div
       id='Contacts'
-      className='grid grid-cols-1 gap-10 rounded-lg border border-zinc-300 bg-gradient-to-t from-zinc-50 via-white to-white px-5 py-10 shadow sm:grid-cols-2 sm:gap-0 sm:bg-gradient-to-bl sm:via-zinc-50 sm:p-10'
+      className='grid grid-cols-1 gap-10 rounded-lg border border-zinc-300 bg-gradient-to-t from-zinc-100 via-white to-white px-5 py-10 shadow sm:grid-cols-2 sm:gap-0 sm:bg-gradient-to-bl sm:via-zinc-50 sm:p-10'
     >
       <section className='mx-auto flex flex-col sm:mx-0 sm:mr-10  sm:px-0 sm:pl-4'>
         <article className=' mb-5 flex justify-center object-center sm:flex sm:h-auto sm:items-center sm:justify-start'>
@@ -118,7 +117,7 @@ const Projects = () => {
     <Wrapper
       id='Projects'
       topic='Projects'
-      className='grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4'
+      className='grid grid-cols-1 gap-8 px-20 sm:grid-cols-3 sm:gap-5 sm:px-0 lg:grid-cols-4'
     >
       {ProjectsData.map(d => (
         <ProjectsBox
@@ -143,123 +142,18 @@ const TechStack = () => {
       topic='Tech Stack'
       className='grid grid-flow-row grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4'
     >
-      <TechStackComponent data={ProgrammingLanguage} title='Programming Language' />
-      <TechStackComponent data={ComponentLibrary} title='Component Library' />
-      <TechStackComponent data={FrontendFramework} title='Frontend Framework' />
-      <TechStackComponent data={Styling} title='Styling' />
-      <TechStackComponent data={Hosting} title='Hosting' />
       <TechStackComponent data={Backend} title='Backend' />
       <TechStackComponent data={DataVisulization} title='Data Visualization' />
       <TechStackComponent data={Animation} title='Animation' />
+      <TechStackComponent data={Hosting} title='Hosting' />
+      <TechStackComponent data={ProgrammingLanguage} title='Programming Language' />
+      <TechStackComponent data={FrontendFramework} title='Frontend Framework' />
       <TechStackComponent data={Documentation} title='Documentation' />
+      <TechStackComponent data={Styling} title='Styling' />
+      <TechStackComponent data={ComponentLibrary} title='Component Library' />
       <TechStackComponent data={CodeManagement} title='Code Management' />
       <TechStackComponent data={MainTools} title='Main Tools' />
     </Wrapper>
-  );
-};
-
-const data = [
-  {
-    sum: ExperimentsData[0].links.length,
-    title: 'Tailwind CSS',
-    imgSrc: '/techIcons/tailwindcss.svg',
-    href: '/experiments/tailwind-css',
-    type: 'CSS for styling',
-  },
-  {
-    sum: ExperimentsData[1].links.length,
-    title: 'React.js',
-    imgSrc: '/techIcons/reactjs.ico',
-    href: '/experiments/react',
-    type: 'UI library',
-  },
-  {
-    sum: ExperimentsData[2].links.length,
-    title: 'Next.js',
-    imgSrc: '/techIcons/nextjs.ico',
-    href: '/experiments/nextjs',
-    type: 'React Framework',
-  },
-  {
-    sum: ExperimentsData[3].links.length,
-    title: 'Browser',
-    imgSrc: '/techIcons/chrome.svg',
-    href: '/experiments/browser',
-    type: 'Browser API',
-  },
-  {
-    sum: ExperimentsData[4].links.length,
-    title: 'VisX',
-    imgSrc: '/techIcons/visx.png',
-    href: '/experiments/visx',
-    type: 'Data Visualization',
-  },
-
-  {
-    sum: ExperimentsData[5].links.length,
-    title: 'Framer Motion',
-    imgSrc: '/techIcons/framermotion.png',
-    href: '/experiments/framer-motion',
-    type: 'Animation',
-  },
-  {
-    sum: ExperimentsData[6].links.length,
-    title: 'Mantine',
-    imgSrc: '/techIcons/mantine-logo.svg',
-    href: '/experiments/mantine',
-    type: 'Headless components',
-  },
-  {
-    sum: ExperimentsData[7].links.length,
-    title: 'Headless UI',
-    imgSrc: '/techIcons/headlessui.png',
-    href: '/experiments/headless-ui',
-    type: 'Headless components',
-  },
-  {
-    sum: ExperimentsData[8].links.length,
-    title: 'Radix UI',
-    imgSrc: '/techIcons/radixui.png',
-    href: '/experiments/radix-ui',
-    type: 'Headless components',
-  },
-];
-
-const Exp = ({
-  title,
-  imgSrc,
-  href,
-  sum,
-  type,
-}: {
-  title: string;
-  imgSrc: string;
-  href: string;
-  sum: number;
-  type: string;
-}) => {
-  return (
-    <div className='flex flex-col justify-between rounded-lg border border-zinc-300 bg-gradient-to-bl from-zinc-50 via-white to-white px-4 pt-4 pb-3 shadow'>
-      <div className='mb-5 space-y-1 sm:space-y-1.5'>
-        <Image src={imgSrc} height={30} width={30} alt={title} />
-        <div className='text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</div>
-        <div className='w-fit rounded-md border border-zinc-200  bg-zinc-100 px-2 py-0.5 text-center text-[12px] font-medium text-zinc-600'>
-          {type}
-        </div>
-        <div className='text-zinc-500'>{sum} Experiments</div>
-      </div>
-      {/* <InternalLink name='See all exploration' href={href} /> */}
-      <Link href={href}>
-        <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:underline sm:text-base'>
-          <p className='xs:hidden'>See all</p>
-          <p className='xs:inline hidden'>See all exploration</p>
-          <ChevronRightIcon
-            className='h-4 w-4 pt-[0.25px] text-blue-600 group-hover:underline'
-            strokeWidth={2}
-          />
-        </a>
-      </Link>
-    </div>
   );
 };
 
@@ -270,8 +164,15 @@ const Experiments = () => {
       topic='Experiments'
       className='grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 '
     >
-      {data.map(({ title, href, imgSrc, sum, type }) => (
-        <Exp key={title} href={href} imgSrc={imgSrc} title={title} sum={sum} type={type} />
+      {ExperimentIndexData.map(({ title, href, imgSrc, sum, type }) => (
+        <ExperimentsIndexBox
+          key={title}
+          href={href}
+          imgSrc={imgSrc}
+          title={title}
+          sum={sum}
+          type={type}
+        />
       ))}
     </Wrapper>
   );
