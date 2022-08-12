@@ -21,26 +21,26 @@ export default function ProjectsBox({
   industry,
 }: ProjectBoxTypes) {
   return (
-    <section className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 shadow shadow-zinc-300'>
-      <section className=' flex flex-col justify-between  p-4 bg-zinc-50'>
+    <section className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 shadow'>
+      <section className=' flex flex-col justify-between  bg-white p-4'>
         <div className='mb-2 flex items-center justify-between'>
           <div className='text-xl font-semibold text-zinc-700'>{title}</div>
           {imgSrc}
         </div>
 
-        <div className='mb-4 text-zinc-600 sm:text-tiny'>{description}</div>
+        <div className='sm:text-tiny mb-4 text-zinc-600'>{description}</div>
         <a
           href={href}
           target='_blank'
           rel='noopener noreferrer'
-          className='flex items-center text-blue-500 hover:cursor-pointer hover:underline sm:text-tiny'
+          className='sm:text-tiny flex items-center text-blue-500 hover:cursor-pointer hover:underline'
         >
           {href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
 
           <ExternalLinkIcon className='ml-1 h-4 w-4 pt-0.5 text-blue-500' />
         </a>
       </section>
-      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 px-4 py-3 text-zinc-700 sm:text-[12px]'>
+      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-zinc-50 px-4 py-3 text-zinc-700 sm:text-[12px]'>
         <article className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
             <div className='font-semibold text-zinc-700'>Period</div>

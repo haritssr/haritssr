@@ -3,11 +3,11 @@ import { ExternalLinkIcon } from '@heroicons/react/outline';
 
 export const TechStackComponent = ({ title, data }) => {
   return (
-    <div className='h-fit overflow-hidden rounded-lg border border-zinc-300 shadow '>
-      <div className='truncate border-b border-zinc-300 bg-gradient-to-r from-white to-zinc-50 py-2 px-3 text-tiny font-medium text-zinc-700 sm:px-3 sm:text-base'>
+    <div className='h-fit overflow-hidden rounded-lg border border-zinc-300 shadow'>
+      <div className='text-tiny truncate border-b border-zinc-300 bg-zinc-50 py-2 px-3 font-medium text-zinc-700 sm:px-3 sm:text-base'>
         {title}
       </div>
-      <div className='space-y-1 p-2'>
+      <div className='space-y-1 bg-white p-2'>
         {data.map(d => (
           <a
             key={d.name}
@@ -19,9 +19,7 @@ export const TechStackComponent = ({ title, data }) => {
           >
             <section className='flex items-center space-x-2 overflow-hidden'>
               <Image src={d.imgSrc} height={20} width={20} alt={d.name} />
-              <div className='truncate text-zinc-500 group-hover:text-zinc-700'>
-                {d.name}
-              </div>
+              <div className='truncate text-zinc-500 group-hover:text-zinc-700'>{d.name}</div>
             </section>
             <ExternalLinkIcon
               className='hidden h-5 w-5 pt-0.5 text-zinc-500 group-hover:text-zinc-700 sm:block'
