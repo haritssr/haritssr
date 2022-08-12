@@ -4,7 +4,7 @@ import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function SnapScrolling() {
   return (
-    <LayoutToExperiments domain='TailwindCSS' title='Snap Scrolling'>
+    <LayoutToExperiments domain='Tailwind CSS' title='Snap Scrolling'>
       <SubTitle>
         Responsive Tailwind CSS snap scrolling on images.{' '}
         <ExternalLink name='Source' href='https://tailwindcss.com/docs/scroll-snap-type' />
