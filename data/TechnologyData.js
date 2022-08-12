@@ -70,6 +70,11 @@ export const ComponentLibrary = [
     imgSrc: '/techIcons/headlessui.png',
     name: 'Headless UI',
   },
+  {
+    href: 'https://mantine.dev/',
+    imgSrc: '/techIcons/mantine-logo.svg',
+    name: 'Mantine',
+  },
 ];
 
 export const FrontendFramework = [
