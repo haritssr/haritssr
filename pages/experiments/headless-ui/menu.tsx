@@ -10,8 +10,10 @@ export default function ExportedMenu() {
       <SubTitle>
         <ExternalLink href='https://headlessui.dev/react/menu' name='Headless UI Menu (Dropdown)' />
         <br />
-        Menus offer an easy way to build custom, accessible dropdown components with robust support
-        for keyboard navigation.
+        • Menus offer an easy way to build custom, accessible dropdown components with robust
+        support for keyboard navigation.
+        <br />• Click the button and the list of option will appear in the form of box which contain
+        several types of button.
       </SubTitle>
       <MenuExample1 />
     </LayoutToExperiments>
@@ -41,7 +43,7 @@ const MenuExample1 = () => {
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <Menu.Items className='absolute right-0 mt-2 w-52 origin-top-right space-y-1 rounded-md bg-rose-600 p-1 shadow-lg ring-2 ring-blue-500 ring-opacity-5 focus:outline-none'>
+          <Menu.Items className='absolute left-0 mt-2 w-52 origin-top-left space-y-1 rounded-md border border-zinc-300 p-1 shadow-lg ring-2 ring-blue-500 ring-opacity-5 focus:outline-none'>
             <Menu.Item>
               {({ active }) => (
                 <button
@@ -50,7 +52,7 @@ const MenuExample1 = () => {
                   }`}
                 >
                   <div>Action</div>
-                  <FireIcon />
+                  <FireIcon className='h-5 w-5' />
                 </button>
               )}
             </Menu.Item>
@@ -63,7 +65,19 @@ const MenuExample1 = () => {
                   }`}
                 >
                   <div>Disabled Action</div>
-                  <FireIcon />
+                  <FireIcon className='h-5 w-5' />
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
+                    active ? 'bg-blue-500 text-white' : 'text-zinc-700'
+                  }`}
+                >
+                  <div>Action</div>
+                  <FireIcon className='h-5 w-5' />
                 </button>
               )}
             </Menu.Item>

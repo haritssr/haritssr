@@ -9,8 +9,9 @@ export default function ExportedSwitch() {
       <SubTitle>
         <ExternalLink name='Headless UI Switch' href='https://headlessui.dev/react/switch' />
         <br />
-        Switches are a pleasant interface for toggling a value between two states, and offer the
+        • Switches are a pleasant interface for toggling a value between two states, and offer the
         same semantics and keyboard navigation as native checkbox elements.
+        <br />• Click the button to change between state. Usually represent on and off state.
       </SubTitle>
       <SwitchExample1 />
     </LayoutToExperiments>

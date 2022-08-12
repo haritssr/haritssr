@@ -28,10 +28,13 @@ export default function ExportedRadioGroup() {
   return (
     <LayoutToExperiments title='  Radio Group' domain='Headless UI'>
       <SubTitle>
-        <ExternalLink name='Headless UI Radio Group' href='https://headlessui.dev/react/dialog' />{' '}
-        <br /> A fully-managed, renderless dialog component jam-packed with accessibility and
-        keyboard features, perfect for building completely custom modal and dialog windows for your
-        next application.
+        <ExternalLink
+          name='Headless UI Radio Group'
+          href='https://headlessui.dev/react/radio-group'
+        />
+        <br />• Radio Groups give you the same functionality as native HTML radio inputs, without
+        any of the styling. They are perfect for building out custom UIs for selectors.
+        <br />• Click the radio to choose one to serve as an option
       </SubTitle>
       <Example1 />
     </LayoutToExperiments>

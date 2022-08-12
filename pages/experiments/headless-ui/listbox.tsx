@@ -25,9 +25,10 @@ export default function ExportedSelect() {
           name='Headless UI Listbox (Select)'
           href='https://headlessui.dev/react/listbox'
         />
-        <br />
-        Listboxes are a great foundation for building custom, accessible select menus for your app,
-        complete with robust support for keyboard navigation.{' '}
+        <br />• Listboxes are a great foundation for building custom, accessible select menus for
+        your app, complete with robust support for keyboard navigation.
+        <br />• Click button to select the available option and the options are displayed on the
+        main button.
       </SubTitle>
       <SelectExample1 />
     </LayoutToExperiments>
