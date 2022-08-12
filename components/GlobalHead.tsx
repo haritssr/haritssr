@@ -9,15 +9,13 @@ export default function GlobalHead() {
         <Link href='/'>
           <a className='group flex items-center space-x-2 sm:w-1/5'>
             <LogoHaritssr />
-            <div className='hidden text-tiny text-zinc-400 hover:text-white sm:block'>
-              Harits Syah
-            </div>
+            <div className='text-tiny hidden text-white sm:block'>Harits Syah</div>
           </a>
         </Link>
         <GlobalNavigationDesktop />
         <div className='flex w-3/5 cursor-pointer justify-center sm:hidden'>
           <div className='group flex items-center space-x-1.5 py-1'>
-            <div className='group text-lg text-zinc-200 hover:text-white'>Harits Syah</div>
+            <div className='group text-lg text-white'>Harits Syah</div>
           </div>
         </div>
         <div className='flex justify-end sm:w-1/5'>
