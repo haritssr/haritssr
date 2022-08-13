@@ -42,18 +42,23 @@ export default function Home() {
 
 const Wrapper = ({
   topic,
+  subtitle,
   className,
   children,
   id,
 }: {
   topic: string;
+  subtitle: string;
   className?: string;
   children: React.ReactNode;
   id: string;
 }) => {
   return (
     <div id={id}>
-      <div className='mb-8 text-2xl font-semibold text-zinc-700 sm:text-3xl'>{topic}</div>
+      <div className='mb-8'>
+        <span className='text-2xl font-semibold text-zinc-800 sm:text-3xl'>{topic}. </span>
+        <span className='text-2xl font-medium text-zinc-500 sm:text-3xl'>{subtitle}</span>
+      </div>
       <div className={className}>{children}</div>
     </div>
   );
@@ -117,6 +122,7 @@ const Projects = () => {
     <Wrapper
       id='Projects'
       topic='Projects'
+      subtitle='Projects that already hosted.'
       className='grid grid-cols-1 gap-8 px-20 sm:grid-cols-3 sm:gap-5 sm:px-0 lg:grid-cols-4'
     >
       {ProjectsData.map(d => (
@@ -140,6 +146,7 @@ const TechStack = () => {
     <Wrapper
       id='TechStack'
       topic='Tech Stack'
+      subtitle='Frontend technology I have used.'
       className='grid grid-flow-row grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4'
     >
       <TechStackComponent data={Backend} title='Backend' />
@@ -162,6 +169,7 @@ const Experiments = () => {
     <Wrapper
       id='Experiments'
       topic='Experiments'
+      subtitle='My exploration on these Tech Stack.'
       className='grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 '
     >
       {ExperimentIndexData.map(({ title, href, imgSrc, sum, type }) => (
@@ -180,7 +188,7 @@ const Experiments = () => {
 
 const Blog = () => {
   return (
-    <Wrapper id='Blog' topic='Blog' className='space-y-4'>
+    <Wrapper id='Blog' topic='Blog' subtitle='A place to pour my thoughts.' className='space-y-4'>
       <div>
         <div className='cursor-pointer text-zinc-700 hover:underline'>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, natus?
@@ -243,6 +251,7 @@ const FavoriteReading = () => {
     <Wrapper
       id='Reading'
       topic='Reading'
+      subtitle='I reading and enjoy re-reading these.'
       className='grid w-fit grid-flow-row grid-cols-2 gap-5  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'
     >
       {BooksData.map(({ title, href, imgSrc }) => (
