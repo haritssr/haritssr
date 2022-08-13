@@ -1,11 +1,21 @@
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as HoverCard from '@radix-ui/react-hover-card';
 
 export default function ExportedHoverCard() {
   return (
     <LayoutToExperiments title='Hover Card' domain='Radix UI'>
-      <SubTitle>For sighted users to preview content available behind a link.</SubTitle>
+      <SubTitle>
+        <ExternalLink
+          href='https://www.radix-ui.com/docs/primitives/components/hover-card'
+          name='Radix UI Hover Card'
+        />
+        <ExplanationList>
+          <li>For sighted users to preview content available behind a link.</li>
+          <li>Hover over the card and the box will appear and ready to click to another page.</li>
+        </ExplanationList>
+      </SubTitle>
       <HoverCard.Root>
         <HoverCard.Trigger
           className='rounded-md bg-white px-3 py-1.5 font-medium text-gray-600 shadow-md hover:cursor-pointer hover:bg-gray-100'

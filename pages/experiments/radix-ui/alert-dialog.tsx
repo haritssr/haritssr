@@ -1,4 +1,5 @@
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 
@@ -6,7 +7,16 @@ export default function ExportedAlertDialog() {
   return (
     <LayoutToExperiments title='Alert Dialog' domain='Radix UI'>
       <SubTitle>
-        A modal dialog that interrupts the user with important content and expects a response.
+        <ExternalLink
+          href='https://www.radix-ui.com/docs/primitives/components/alert-dialog'
+          name='Radix UI Alert Dialog'
+        />
+        <ExplanationList>
+          <li>
+            A modal dialog that interrupts the user with important content and expects a response.
+          </li>
+          <li>Click the button and the popup will appear in the middle of the screen.</li>
+        </ExplanationList>
       </SubTitle>
       <AlertDialog
         buttonTitle='Delete'

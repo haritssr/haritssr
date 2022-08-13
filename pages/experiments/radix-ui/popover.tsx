@@ -1,11 +1,21 @@
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as Popover from '@radix-ui/react-popover';
 
 export default function ExportedPopover() {
   return (
     <LayoutToExperiments title='Popover' domain='Radix UI'>
-      <SubTitle>Displays rich content in a portal, triggered by a button.</SubTitle>
+      <SubTitle>
+        <ExternalLink
+          href='https://www.radix-ui.com/docs/primitives/components/popover'
+          name='Radix UI Popover'
+        />
+        <ExplanationList>
+          <li>Displays rich content in a portal, triggered by a button.</li>
+          <li>Click the button and the portal will appear below.</li>
+        </ExplanationList>
+      </SubTitle>
       <Popover.Root>
         <Popover.Trigger className='w-auto rounded-md border border-zinc-400 bg-zinc-50 px-2 py-1 hover:bg-zinc-100'>
           Open

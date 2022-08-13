@@ -1,57 +1,38 @@
 import React from 'react';
-import { styled } from '@stitches/react';
-import { violet, blackA } from '@radix-ui/colors';
 import { CheckIcon } from '@radix-ui/react-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { SubTitle } from '@/components/DesignSystem';
-
-const StyledCheckbox = styled(CheckboxPrimitive.Root, {
-  all: 'unset',
-  backgroundColor: 'white',
-  width: 25,
-  height: 25,
-  borderRadius: 4,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  boxShadow: `0 2px 10px ${blackA.blackA7}`,
-  '&:hover': { backgroundColor: violet.violet3 },
-  '&:focus': { boxShadow: `0 0 0 2px black` },
-});
-
-const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
-  color: violet.violet11,
-});
-
-// Exports
-const Checkbox = StyledCheckbox;
-const CheckboxIndicator = StyledIndicator;
-
-// Your app...
-const Flex = styled('div', { display: 'flex' });
-const Label = styled('label', {
-  color: 'white',
-  fontSize: 15,
-  lineHeight: 1,
-  userSelect: 'none',
-});
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedCheckbox() {
   return (
     <LayoutToExperiments title='CheckBox' domain='Radix UI'>
-      <SubTitle>A control that allows the user to toggle between checked and not checked.</SubTitle>
+      <SubTitle>
+        <ExternalLink
+          href='https://www.radix-ui.com/docs/primitives/components/checkbox'
+          name='Radix UI Checkbox'
+        />
+        <ExplanationList>
+          <li>A control that allows the user to toggle between checked and not checked.</li>
+          <li>Click the checklist button and the state will change.</li>
+        </ExplanationList>
+      </SubTitle>
       <form>
-        <Flex css={{ alignItems: 'center' }}>
-          <Checkbox defaultChecked id='c1'>
-            <CheckboxIndicator>
+        <div className='align-center flex'>
+          <CheckboxPrimitive.Root
+            className='flex h-6 w-6 items-center justify-center rounded-md border border-zinc-300 bg-white shadow hover:bg-purple-50'
+            // defaultChecked
+            id='c1'
+          >
+            <CheckboxPrimitive.Indicator className='text-blue-600'>
               <CheckIcon />
-            </CheckboxIndicator>
-          </Checkbox>
-          <Label css={{ paddingLeft: 15 }} htmlFor='c1'>
+            </CheckboxPrimitive.Indicator>
+          </CheckboxPrimitive.Root>
+          <label className='select-none pl-4 text-zinc-700' htmlFor='c1'>
             Accept terms and conditions.
-          </Label>
-        </Flex>
+          </label>
+        </div>
       </form>
     </LayoutToExperiments>
   );

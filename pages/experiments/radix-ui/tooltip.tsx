@@ -1,19 +1,29 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { ExclamationCircleIcon } from '@heroicons/react/outline';
+import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedTooltip() {
   return (
     <LayoutToExperiments title='Tooltip' domain='Radix UI'>
       <SubTitle>
-        A popup that displays information related to an element when the element receives keyboard
-        focus or the mouse hovers over it.
+        <ExternalLink
+          href='https://www.radix-ui.com/docs/primitives/components/tooltip'
+          name='Radix UI Tooltip'
+        />
+        <ExplanationList>
+          <li>
+            A popup that displays information related to an element when the element receives
+            keyboard focus or the mouse hovers over it.
+          </li>
+          <li>Hover or click will show a tooltip above.</li>
+        </ExplanationList>
       </SubTitle>
       <Tooltip.Root>
         <div className='flex space-x-1'>
           <div className='text-zinc-700'>MDN</div>
-          <Tooltip.Trigger className='flex items-center rounded px-1 py-0.5 active:ring-1 active:ring-zinc-700 hover:bg-zinc-100'>
+          <Tooltip.Trigger className='flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700'>
             <ExclamationCircleIcon
               className='h-4 w-4 text-zinc-600 hover:text-zinc-700'
               strokeWidth={2}

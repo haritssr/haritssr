@@ -1,13 +1,26 @@
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { XIcon } from '@heroicons/react/outline';
 import * as Dialog from '@radix-ui/react-dialog';
 
 export default function ExportedDialog() {
   return (
     <LayoutToExperiments title='Dialog' domain='Radix UI'>
       <SubTitle>
-        A window overlaid on either the primary window or another dialog window, rendering the
-        content underneath inert.
+        <ExternalLink
+          href='https://www.radix-ui.com/docs/primitives/components/dialog'
+          name='Radix UI Dialog'
+        />
+        <ExplanationList>
+          <li>
+            A window overlaid on either the primary window or another dialog window, rendering the
+            content underneath inert.
+          </li>
+          <li>
+            Click the button and popup will appear waiting to you to confirm to close the popup.
+          </li>
+        </ExplanationList>
       </SubTitle>
       <Dialog.Root>
         <Dialog.Trigger className='rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1.5 font-medium  text-zinc-700 duration-100 hover:bg-zinc-100 active:translate-y-0.5'>
@@ -21,21 +34,7 @@ export default function ExportedDialog() {
                 Are you sure want to Edit your profile ?
               </Dialog.Title>
               <Dialog.Close>
-                {/* Close Icon */}
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-7 w-7 rounded-full p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-700'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M6 18L18 6M6 6l12 12'
-                  />
-                </svg>
+                <XIcon className='h-7 w-7 rounded-full p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-700' />
               </Dialog.Close>
             </div>
             <Dialog.Description className='text-gray-500'>
