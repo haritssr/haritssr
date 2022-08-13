@@ -3,17 +3,23 @@ import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { ChevronDownIcon, FireIcon } from '@heroicons/react/solid';
+import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedMenu() {
   return (
     <LayoutToExperiments title='Menu' domain='Headless UI'>
       <SubTitle>
         <ExternalLink href='https://headlessui.dev/react/menu' name='Headless UI Menu (Dropdown)' />
-        <br />
-        • Menus offer an easy way to build custom, accessible dropdown components with robust
-        support for keyboard navigation.
-        <br />• Click the button and the list of option will appear in the form of box which contain
-        several types of button.
+        <ExplanationList>
+          <li>
+            Menus offer an easy way to build custom, accessible dropdown components with robust
+            support for keyboard navigation.
+          </li>
+          <li>
+            Click the button and the list of option will appear in the form of box which contain
+            several types of button.
+          </li>
+        </ExplanationList>
       </SubTitle>
       <MenuExample1 />
     </LayoutToExperiments>

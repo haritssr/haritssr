@@ -8,6 +8,7 @@ import { Dialog, Combobox, Transition } from '@headlessui/react';
 import { Fragment, SetStateAction, useState, useEffect } from 'react';
 import { SearchIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
+import ExplanationList from '@/components/ExplanationList';
 
 //Combobox
 //Combobox.Input
@@ -31,10 +32,14 @@ const ExportedComboboxExperimentsData = () => {
   return (
     <LayoutToExperiments title='Combobox - Experiments Data' domain='Headless UI'>
       <SubTitle>
-        Comboboxes are the foundation of accessible autocompletes and command palettes for your app,
-        complete with robust support for keyboard navigation.{' '}
-        <ExternalLink href='https://headlessui.dev/react/combobox' name='Source' />. Press ctrl+b to
-        open search dialog.
+        <ExternalLink href='https://headlessui.dev/react/combobox' name='Headless UI Combobox' />.
+        <ExplanationList>
+          <li>
+            Comboboxes are the foundation of accessible autocompletes and command palettes for your
+            app, complete with robust support for keyboard navigation.
+          </li>
+          <li>Press ctrl+b to open search dialog.</li>
+        </ExplanationList>
       </SubTitle>
       <ComboboxExample1 ExperimentsData={ExperimentsData} />
     </LayoutToExperiments>

@@ -2,6 +2,7 @@ import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { SVGProps, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
+import ExplanationList from '@/components/ExplanationList';
 
 const plans = [
   {
@@ -32,9 +33,13 @@ export default function ExportedRadioGroup() {
           name='Headless UI Radio Group'
           href='https://headlessui.dev/react/radio-group'
         />
-        <br />• Radio Groups give you the same functionality as native HTML radio inputs, without
-        any of the styling. They are perfect for building out custom UIs for selectors.
-        <br />• Click the radio to choose one to serve as an option
+        <ExplanationList>
+          <li>
+            Radio Groups give you the same functionality as native HTML radio inputs, without any of
+            the styling. They are perfect for building out custom UIs for selectors.
+          </li>
+          <li>Click the radio to choose one to serve as an option.</li>
+        </ExplanationList>
       </SubTitle>
       <Example1 />
     </LayoutToExperiments>

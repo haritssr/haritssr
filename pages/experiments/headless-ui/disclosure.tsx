@@ -1,4 +1,5 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { Disclosure, Transition } from '@headlessui/react';
 import React from 'react';
@@ -29,11 +30,16 @@ export default function ExportedDisclosure() {
           name='Headless UI Disclosure'
           href='https://headlessui.dev/react/disclosure'
         />
-        <br />
-        • A simple, accessible foundation for building custom UIs that show and hide content, like
-        togglable accordion panels.
-        <br />• Disclosure is button that contain more explanation if you click on it. The text on
-        button represent the summary of the description inside.
+        <ExplanationList>
+          <li>
+            A simple, accessible foundation for building custom UIs that show and hide content, like
+            togglable accordion panels.
+          </li>
+          <li>
+            Disclosure is button that contain more explanation if you click on it. The text on
+            button represent the summary of the description inside.
+          </li>
+        </ExplanationList>
       </SubTitle>
       <div className='grid grid-cols-1 gap-16 sm:grid-cols-2'>
         <DisclosureChevron />

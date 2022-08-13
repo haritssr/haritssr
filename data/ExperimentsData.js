@@ -121,14 +121,14 @@ export const ExperimentsData = [
     links: [
       { name: 'Menu' },
       { name: 'Listbox' },
-      { name: 'Combobox HeadlessUIData' },
-      { name: 'Combobox ExperimentsData' },
       { name: 'Switch' },
       { name: 'Disclosure' },
       { name: 'Dialog' },
       { name: 'Popover' },
       { name: 'Radio Group' },
       { name: 'Tabs' },
+      { name: 'Combobox ExperimentsData' },
+      { name: 'Combobox HeadlessUIData' },
     ],
   },
   {

@@ -2,16 +2,20 @@ import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedSwitch() {
   return (
     <LayoutToExperiments title='Switch' domain='Headless UI'>
       <SubTitle>
         <ExternalLink name='Headless UI Switch' href='https://headlessui.dev/react/switch' />
-        <br />
-        • Switches are a pleasant interface for toggling a value between two states, and offer the
-        same semantics and keyboard navigation as native checkbox elements.
-        <br />• Click the button to change between state. Usually represent on and off state.
+        <ExplanationList>
+          <li>
+            Switches are a pleasant interface for toggling a value between two states, and offer the
+            same semantics and keyboard navigation as native checkbox elements.
+          </li>
+          <li>Click the button to change between state. Usually represent on and off state.</li>
+        </ExplanationList>
       </SubTitle>
       <SwitchExample1 />
     </LayoutToExperiments>

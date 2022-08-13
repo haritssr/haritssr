@@ -1,4 +1,5 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { Listbox } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
@@ -25,10 +26,16 @@ export default function ExportedSelect() {
           name='Headless UI Listbox (Select)'
           href='https://headlessui.dev/react/listbox'
         />
-        <br />• Listboxes are a great foundation for building custom, accessible select menus for
-        your app, complete with robust support for keyboard navigation.
-        <br />• Click button to select the available option and the options are displayed on the
-        main button.
+        <ExplanationList>
+          <li>
+            Listboxes are a great foundation for building custom, accessible select menus for your
+            app, complete with robust support for keyboard navigation.
+          </li>
+          <li>
+            Click button to select the available option and the options are displayed on the main
+            button.
+          </li>
+        </ExplanationList>
       </SubTitle>
       <SelectExample1 />
     </LayoutToExperiments>

@@ -2,17 +2,24 @@ import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedDialog() {
   return (
     <LayoutToExperiments title='Dialog' domain='Headless UI'>
       <SubTitle>
         <ExternalLink name='Headless UI Dialog' href='https://headlessui.dev/react/dialog' />
-        <br />• A fully-managed, renderless dialog component jam-packed with accessibility and
-        keyboard features, perfect for building completely custom modal and dialog windows for your
-        next application.
-        <br />• Click the button and the box will appear (usually) in the center of screen, and the
-        user should close it using close button or click on the outside the box area.
+        <ExplanationList>
+          <li>
+            A fully-managed, renderless dialog component jam-packed with accessibility and keyboard
+            features, perfect for building completely custom modal and dialog windows for your next
+            application.
+          </li>
+          <li>
+            Click the button and the box will appear (usually) in the center of screen, and the user
+            should close it using close button or click on the outside the box area.
+          </li>
+        </ExplanationList>
       </SubTitle>
 
       <div className='space-y-10'>

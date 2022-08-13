@@ -2,6 +2,7 @@ import { Tab } from '@headlessui/react';
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
+import ExplanationList from '@/components/ExplanationList';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -12,9 +13,16 @@ export default function ExportedTabs() {
     <LayoutToExperiments title='Tabs' domain='Headless UI'>
       <SubTitle>
         <ExternalLink name='Headless UI Tabs' href='https://headlessui.com/react/tabs' />
-        <br />• A fully-managed, renderless dialog component jam-packed with accessibility and
-        keyboard features, perfect for building completely custom modal and dialog windows for your
-        next application.
+        <ExplanationList>
+          <li>
+            A fully-managed, renderless dialog component jam-packed with accessibility and keyboard
+            features, perfect for building completely custom modal and dialog windows for your next
+            application.
+          </li>
+          <li>
+            Click each tab to see what inside and the screen will change to clicked tabs button.
+          </li>
+        </ExplanationList>
       </SubTitle>
       <Example1 />
       <Example2 />
