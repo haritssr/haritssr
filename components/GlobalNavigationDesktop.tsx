@@ -27,15 +27,14 @@ const GlobalNavigationDesktopLink = ({ href, title }: { href: string; title: str
 
 export default function GlobalNavigationDesktop() {
   return (
-    <div className='hidden sm:w-3/5 md:block'>
-      <div className='flex justify-center'>
-        <div className='flex  flex-row items-center  space-x-5   sm:space-x-10'>
-          <GlobalNavigationDesktopLink href='/#Contacts' title='Contacts' />
-          <GlobalNavigationDesktopLink href='/#Projects' title='Projects' />
-          <GlobalNavigationDesktopLink href='/#Experiments' title='Experiments' />
-          <GlobalNavigationDesktopLink href='/#TechStack' title='Tech Stack' />
-          <GlobalNavigationDesktopLink href='/#Blog' title='Blog' />
-        </div>
+    <div className='hidden w-full md:block'>
+      <div className='flex flex-row items-center justify-center  space-x-5   sm:space-x-10'>
+        <GlobalNavigationDesktopLink href='/#Contacts' title='Contacts' />
+        <GlobalNavigationDesktopLink href='/#Projects' title='Projects' />
+        <GlobalNavigationDesktopLink href='/#Experiments' title='Experiments' />
+        <GlobalNavigationDesktopLink href='/#TechStack' title='Tech Stack' />
+        <GlobalNavigationDesktopLink href='/#Blog' title='Blog' />
+        <GlobalNavigationDesktopLink href='/#Reading' title='Reading' />
       </div>
     </div>
   );
