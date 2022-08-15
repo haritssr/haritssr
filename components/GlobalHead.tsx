@@ -9,7 +9,7 @@ export default function GlobalHead() {
         <Link href='/'>
           <a className='group flex items-center space-x-2 sm:w-1/5'>
             <LogoHaritssr />
-            <div className='text-tiny hidden text-white sm:block'>Harits Syah</div>
+            <div className='text-tiny hidden text-white sm:block sm:text-base'>Harits Syah</div>
           </a>
         </Link>
         <GlobalNavigationDesktop />
