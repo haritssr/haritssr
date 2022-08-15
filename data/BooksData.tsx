@@ -1,6 +1,6 @@
 // used in index.tsx
 
-export const BooksData = [
+export const TechicalBooksData = [
   {
     title: 'Eloquent JavaScript',
     href: 'https://eloquentjavascript.net/',
@@ -21,6 +21,22 @@ export const BooksData = [
     href: 'https://www.patterns.dev/',
     imgSrc: '/books/learn_patterns.png',
   },
+
+  {
+    title: 'JavaScript - The Definitive Guide',
+    href: 'https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/',
+    imgSrc: '/books/javascript_the_definitive_guide.jpg',
+  },
+];
+
+export const MathPhysicsBooks = [
+  {
+    title: 'Math(s) Fix',
+    href: 'https://www.computerbasedmath.org/the-maths-fix/',
+    imgSrc: '/books/mathfix.jpg',
+  },
+];
+export const UIUXBooksData = [
   {
     title: 'Refactoring UI',
     href: 'https://www.refactoringui.com/',
@@ -28,16 +44,6 @@ export const BooksData = [
   },
   { title: 'Laws of UX', href: 'https://lawsofux.com/', imgSrc: '/books/laws_of_ux.jpg' },
 
-  {
-    title: 'JavaScript - The Definitive Guide',
-    href: 'https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/',
-    imgSrc: '/books/javascript_the_definitive_guide.jpg',
-  },
-  {
-    title: 'The Modern JavaScript Tutorial',
-    href: 'https://javascript.info/',
-    imgSrc: '/books/javascript_info.png',
-  },
   {
     title: 'Apple - Human Interface Design',
     href: 'https://developer.apple.com/design/human-interface-guidelines/',

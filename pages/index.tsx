@@ -18,12 +18,23 @@ import {
 import { ContactData } from '../data/ContactData';
 import ProjectsBox from '@/components/ProjectBox';
 import { ProjectsData } from '../data/ProjectsData';
-import { BooksData } from 'data/BooksData';
+import { MathPhysicsBooks, TechicalBooksData, UIUXBooksData } from 'data/BooksData';
 import React from 'react';
 import { LocationMarkerIcon } from '@heroicons/react/solid';
 import { TechStackComponent } from '@/components/TechStackComponents';
 import ExperimentsIndexBox from '@/components/ExperimentsIndexBox';
 import { ExperimentIndexData } from 'data/ExperimentsIndexData';
+import { useState, Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import ExplanationList from '@/components/ExplanationList';
+import {
+  BellIcon,
+  ExclamationCircleIcon,
+  LockClosedIcon,
+  QuestionMarkCircleIcon,
+  XIcon,
+} from '@heroicons/react/outline';
+import DialogButton from '@/components/DialogButton';
 
 export default function Home() {
   return (
@@ -34,7 +45,7 @@ export default function Home() {
         <Experiments />
         <TechStack />
         <Blog />
-        <FavoriteReading />
+        <Reading />
       </div>
     </Layout>
   );
@@ -246,31 +257,95 @@ const Blog = () => {
     </Wrapper>
   );
 };
-const FavoriteReading = () => {
+const Reading = () => {
   return (
-    <Wrapper
-      id='Reading'
-      topic='Reading'
-      subtitle='I reading and enjoy re-reading these.'
-      className='grid w-fit grid-flow-row grid-cols-2 gap-5  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'
-    >
-      {BooksData.map(({ title, href, imgSrc }) => (
-        <div
-          className='flex h-full flex-col rounded-md border border-zinc-300 bg-white bg-gradient-to-b from-zinc-50 to-white p-2 shadow hover:to-zinc-50 '
-          key={title}
-        >
-          <a
-            title={title}
-            href={href}
-            target='_blank'
-            rel='noreferrer noopener'
-            className='mb-1 inline-block h-full px-3 pt-3'
-          >
-            <Image src={imgSrc} alt={title} height={190} width={150} />
-            <div className='pb-1 text-[12px] text-zinc-700 sm:text-sm'>{title}</div>
-          </a>
+    <div id='Reading'>
+      <div className=''>
+        <span className='text-2xl font-semibold text-zinc-800 sm:text-3xl'>Reading. </span>
+        <span className='text-2xl font-medium text-zinc-500 sm:text-3xl'>
+          I reading and enjoy re-reading these.
+        </span>
+      </div>
+      <DialogButton
+        titleButton='What does these book means?'
+        titleDescription='
+        The list of books below means:'
+      >
+        <li>I have read those books</li>
+        <li>I love thems so I reread regularly</li>
+        <li>You can discuss with me about the content of the book</li>
+        <li>
+          These books are my source of inspiration when i building user interface and the user
+          experience around it
+        </li>
+      </DialogButton>
+      <div className='rounded-md border border-zinc-200  p-5'>
+        <div className='mb-3 text-xl font-semibold text-zinc-700'>Technical Frontend Books</div>
+        <div className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
+          {TechicalBooksData.map(({ title, href, imgSrc }) => (
+            <div className=' flex h-full flex-col rounded-md ' key={title}>
+              <a
+                title={title}
+                href={href}
+                target='_blank'
+                rel='noreferrer noopener'
+                className='inline-block h-full'
+              >
+                <Image src={imgSrc} alt={title} height={190} width={150} />
+                <div className='text-[12px] text-zinc-500 sm:text-sm'>{title}</div>
+              </a>
+            </div>
+          ))}
         </div>
-      ))}
-    </Wrapper>
+        <div className='mt-10 mb-3 text-xl font-semibold text-zinc-700'>
+          User Interface & User Experience Book
+        </div>
+        <div className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
+          {UIUXBooksData.map(({ title, href, imgSrc }) => (
+            <div className='border-zinc-2s00 flex h-full flex-col ' key={title}>
+              <a
+                title={title}
+                href={href}
+                target='_blank'
+                rel='noreferrer noopener'
+                className='inline-block h-full'
+              >
+                <Image src={imgSrc} alt={title} height={190} width={150} />
+                <div className=' text-[12px] text-zinc-500 sm:text-sm'>{title}</div>
+              </a>
+            </div>
+          ))}
+        </div>
+        <div className='mt-10 mb-3 text-xl font-semibold text-zinc-700'>Math & Physics</div>
+        <div className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
+          {MathPhysicsBooks.map(({ title, href, imgSrc }) => (
+            <div className='border-zinc-2s00 flex h-full flex-col ' key={title}>
+              <a
+                title={title}
+                href={href}
+                target='_blank'
+                rel='noreferrer noopener'
+                className='inline-block h-full'
+              >
+                <Image src={imgSrc} alt={title} height={190} width={150} />
+                <div className='text-[12px] text-zinc-500 sm:text-sm'>{title}</div>
+              </a>
+            </div>
+          ))}
+        </div>
+        <div className='mt-10 mb-3 text-xl font-semibold text-zinc-700'>
+          {' '}
+          My Other Learning Sources
+        </div>
+        <div className='flex flex-col space-y-2'>
+          {[
+            { name: 'Mozilla Developer Network', href: 'https://developer.mozilla.org/en-US/' },
+            { name: 'JavaScript.info', href: 'https://javascript.info/' },
+          ].map(({ name, href }) => (
+            <ExternalLink key={name} name={name} href={href} />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
