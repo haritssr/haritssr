@@ -4,6 +4,8 @@
 //   res.status(200).json({ name: 'John Doe' })
 // }
 
+//this api used in /pages/experiments/nextjs/swr
+
 export default function handler(req, res) {
   res.status(200).json([
     { id: '1', name: 'Harits Syah', age: '22', city: 'San Francisco, California' },

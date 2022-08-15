@@ -1,5 +1,7 @@
 import { Users } from '../../data/searchWithApi';
 
+//this api used in pages\experiments\react\search-table.tsx
+
 export default function handler(req, res) {
   const { q } = req.query;
   console.log(q);
