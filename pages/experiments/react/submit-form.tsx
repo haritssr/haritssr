@@ -1,4 +1,5 @@
 import { SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 
@@ -30,8 +31,12 @@ export default function SubmitForm() {
 
   return (
     <LayoutToExperiments title='Submit Form' domain='React'>
-      <SubTitle>Submit (as console.log) contents of input.</SubTitle>
-      <form onSubmit={onSubmit} className='mx-auto max-w-sm space-y-5'>
+      <SubTitle>
+        <ExplanationList>
+          <li>Submit (as console.log) contents of input.</li>
+        </ExplanationList>
+      </SubTitle>
+      <form onSubmit={onSubmit} className='w-full space-y-5 sm:w-1/3'>
         <div className={wrapperStyle}>
           <label htmlFor='title'>Title</label>
           <input
