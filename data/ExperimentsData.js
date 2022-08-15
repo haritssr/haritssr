@@ -10,7 +10,7 @@ export const ExperimentsData = [
     title: 'Tailwind CSS',
     logoSrc: '/icons/tailwindcss.png',
     description:
-      'These are my exploration of using atomic CSS like Tailwind CSS for building user interface. I really like Tailwind CSS because it solve separation of concern problem, the API really easy to use, the documentation is really good, and the future of the framework are promising.',
+      'These are my exploration of using atomic CSS like Tailwind CSS for building user interface. I really like Tailwind CSS because it solve separation of concern problem, the API really easy to use, the documentation is really good, and the future of the framework are promising. All projects on this website use tailwind including Haris Lab, Haris Studio, haritssr.com, and AKA Trading Indonesia.',
     links: [
       { name: 'Position' },
       { name: 'Apple NavBar' },
