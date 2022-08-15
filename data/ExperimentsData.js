@@ -38,7 +38,7 @@ export const ExperimentsData = [
       { name: 'useEffect Title' },
       { name: 'Object State Form' },
       { name: 'Submit Form' },
-      { name: 'Generic TypeScript' },
+      { name: 'Generic Select' },
       { name: 'Searchable Product Data' },
       { name: 'Search Table' },
       { name: 'Search Books' },
@@ -176,5 +176,13 @@ export const ExperimentsData = [
     description:
       'Notion as a Free CMS, we can connect notion app to any web service via their Notion API to built unique possible application.',
     links: [{ name: 'Table' }],
+  },
+
+  {
+    id: 12,
+    title: 'UI Explorations',
+    logoSrc: '/techIcons/radixui.png',
+    description: 'UI Explorations',
+    links: [{ name: 'Notion NavBar' }],
   },
 ];

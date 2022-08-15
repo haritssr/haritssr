@@ -65,4 +65,11 @@ export const ExperimentIndexData = [
     href: '/experiments/radix-ui',
     type: 'Headless components',
   },
+  {
+    sum: ExperimentsData[11].links.length,
+    title: 'UI Exploration',
+    imgSrc: '/techIcons/radixui.png',
+    href: '/experiments/ui-explorations',
+    type: 'User Interfaces',
+  },
 ];
