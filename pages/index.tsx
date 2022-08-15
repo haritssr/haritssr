@@ -133,7 +133,7 @@ const Projects = () => {
     <Wrapper
       id='Projects'
       topic='Projects'
-      subtitle='Projects that already hosted.'
+      subtitle='Frontend projects that already hosted.'
       className='grid grid-cols-1 gap-8 px-20 sm:grid-cols-3 sm:gap-5 sm:px-0 lg:grid-cols-4'
     >
       {ProjectsData.map(d => (
@@ -278,6 +278,10 @@ const Reading = () => {
           These books are my source of inspiration when i building user interface and the user
           experience around it
         </li>
+        <li>
+          I&#39;m ready to be asked and have the responsibility to be criticized for the knowledge
+          of these books
+        </li>
       </DialogButton>
       <div className='rounded-md border border-zinc-200  p-5'>
         <div className='mb-3 text-xl font-semibold text-zinc-700'>Technical Frontend Books</div>
@@ -341,6 +345,10 @@ const Reading = () => {
           {[
             { name: 'Mozilla Developer Network', href: 'https://developer.mozilla.org/en-US/' },
             { name: 'JavaScript.info', href: 'https://javascript.info/' },
+            { name: 'FreeCodeCamp', href: 'https://javascript.info/' },
+            { name: 'HackerRank', href: 'https://www.hackerrank.com/' },
+            { name: 'LeetCode', href: 'https://leetcode.com/' },
+            { name: 'SoloLearn', href: 'https://www.sololearn.com/' },
           ].map(({ name, href }) => (
             <ExternalLink key={name} name={name} href={href} />
           ))}
