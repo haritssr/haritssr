@@ -1,11 +1,21 @@
-import { SubTitle } from '@/components/DesignSystem';
+import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as Toggle from '@radix-ui/react-toggle';
 
 export default function ExportedToggle() {
   return (
     <LayoutToExperiments title='Toggle' domain='Radix UI'>
-      <SubTitle>A two-state button that can be either on or off.</SubTitle>
+      <SubTitle>
+        <ExternalLink
+          href='https://www.radix-ui.com/docs/primitives/components/toggle'
+          name='Radix UI Toggle'
+        />
+        <ExplanationList>
+          <li>A two-state button that can be either on or off.</li>
+          <li>Click to change.</li>
+        </ExplanationList>
+      </SubTitle>
       <Toggle.Root
         onPressedChange={() => alert('Toggle being pressed!')}
         pressed={true}
