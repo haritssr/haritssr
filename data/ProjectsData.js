@@ -32,7 +32,7 @@ export const ProjectsData = [
     period: 'Jan 2022 - Now',
     status: 'Production',
     imgSrc: <LogoHaritssr />,
-    industry: 'Personal Blog',
+    industry: 'Personal Site',
     hrefCaseStudy: '/experiments',
   },
   {
