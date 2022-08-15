@@ -1,15 +1,17 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
-interface dataType {
+interface productDataType {
   category: string;
   price: string;
   stocked: boolean;
   name: string;
 }
 
-const data: dataType[] = [
+//e.g. data from API
+const productData: productDataType[] = [
   { category: 'Fruits', price: '$1', stocked: true, name: 'Apple' },
   { category: 'Fruits', price: '$1', stocked: true, name: 'Dragonfruit' },
   { category: 'Fruits', price: '$2', stocked: false, name: 'Passionfruit' },
@@ -17,35 +19,6 @@ const data: dataType[] = [
   { category: 'Vegetables', price: '$4', stocked: false, name: 'Pumpkin' },
   { category: 'Vegetables', price: '$1', stocked: true, name: 'Peas' },
 ];
-
-/*
-    ALL PIECE OF DATA OF THIS APPLICATION
-    1. The original list of products
-    2. The search text the user has entered
-    3. The value of the checkbox
-    4. The filtered list of products
-
-
-    WHICH ONE IS STATE?
-    - Does it remain unchanged over time? If so, it is not state
-    - Is it passed in from a parent via props? If so, it is not state
-    - Can you compute it based on existing state or props in your component? If so, it is not state
-    - The original list of products is passed as props, so it is not state.
-    - The search text seems to be state since it changes over time and can't be computed from anything.
-    - The value of the checkbox seems to be state since it change over time and can't be computed from anything.
-    - The filtered list of products isn't state because it can be computed by taking the original list of products and filtering it according to the search text and value of the checkbox.
-
-    STATE
-    - Search text
-    - Checkbox value
-
-    STRATEGY FOR STATE
-    1. Identify components that use state
-       - ProductTable needs to filter the product list based on that state (search text and checkbox value)
-       - SearchBar needs to display that state (search text and checkbox value)
-    2. Find their common parent: The first parent components both components share is FilterableProductTable.
-
-*/
 
 export default function SearchableProductData() {
   return (
@@ -56,8 +29,12 @@ export default function SearchableProductData() {
           name='beta.reactjs.org'
           href='https://beta.reactjs.org/learn/thinking-in-react'
         />
+        <ExplanationList>
+          <li>Stock finder with filter.</li>
+          <li>Haven&#39;t applied debounce.</li>
+        </ExplanationList>
       </SubTitle>
-      <FilterableProductTable products={data} />
+      <FilterableProductTable products={productData} />
     </LayoutToExperiments>
   );
 }
@@ -70,14 +47,14 @@ const ProductCategoryRow = ({ category }: { category: string }) => {
   );
 };
 
-const ProductRow = ({ product }: { product: dataType }) => {
+const ProductRow = ({ product }: { product: productDataType }) => {
   const name = product.stocked ? (
     product.name
   ) : (
     <span style={{ color: 'red' }}>{product.name}</span>
   );
   return (
-    <tr>
+    <tr className=''>
       <td>{name}</td>
       <td>{product.price}</td>
     </tr>
@@ -89,23 +66,20 @@ const ProductTable = ({
   filterText,
   inStockOnly,
 }: {
-  products: dataType[];
+  products: productDataType[];
   filterText: string;
   inStockOnly: boolean;
 }) => {
   const rows: Array<JSX.Element> = [];
   let lastCategory: string | null = null;
 
-  products.forEach((product: dataType) => {
+  products.forEach((product: productDataType) => {
+    //couldn't destructure product in as a '({caterogry, name, stocked} : productDataType)' in forEach callback parameter because <ProductRow/> below need 'product' variabel
     const { category, name, stocked } = product;
 
-    if (name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
-      return;
-    }
+    if (name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) return;
 
-    if (inStockOnly && !stocked) {
-      return;
-    }
+    if (inStockOnly && !stocked) return;
 
     if (category !== lastCategory) {
       rows.push(<ProductCategoryRow category={category} key={category} />);
@@ -116,7 +90,7 @@ const ProductTable = ({
   });
 
   return (
-    <table>
+    <table className='rounded border p-2'>
       <thead>
         <tr>
           <th>Name</th>
@@ -128,7 +102,7 @@ const ProductTable = ({
   );
 };
 
-const SearchBar = ({
+const SearchBarWithFilter = ({
   filterText,
   inStockOnly,
   onFilterTextChange,
@@ -140,14 +114,14 @@ const SearchBar = ({
   onInStockOnlyChange: Dispatch<SetStateAction<boolean>>;
 }) => {
   return (
-    <form>
+    <form className='flex w-fit flex-col gap-2'>
       <input
         type='text'
         placeholder='Search...'
         value={filterText}
         onChange={e => onFilterTextChange(e.target.value)}
       />
-      <label>
+      <label className='text-sm text-zinc-400'>
         <input
           type='checkbox'
           checked={inStockOnly}
@@ -159,12 +133,12 @@ const SearchBar = ({
   );
 };
 
-const FilterableProductTable = ({ products }: { products: dataType[] }) => {
+const FilterableProductTable = ({ products }: { products: productDataType[] }) => {
   const [filterText, setFilterText] = useState('');
   const [inStockOnly, setInStockOnly] = useState(false);
   return (
-    <div>
-      <SearchBar
+    <div className='space-y-2'>
+      <SearchBarWithFilter
         filterText={filterText}
         inStockOnly={inStockOnly}
         onFilterTextChange={setFilterText}

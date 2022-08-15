@@ -1,4 +1,5 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 
@@ -15,7 +16,9 @@ export default function EditProfile() {
           name='beta.reactjs.org'
         />{' '}
         <br />
-        Try to edit the profile and see the change happed instantly.
+        <ExplanationList>
+          <li>Try to edit the profile and save to see the result of change.</li>
+        </ExplanationList>
       </SubTitle>
       <form
         onSubmit={e => {

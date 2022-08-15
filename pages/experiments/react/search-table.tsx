@@ -1,4 +1,5 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useEffect, useState } from 'react';
 
@@ -39,9 +40,21 @@ export default function SearchTable() {
   return (
     <LayoutToExperiments title='Search Table' domain='React'>
       <SubTitle>
-        By <ExternalLink href='https://www.youtube.com/watch?v=MY6ZZIn93V8' name='Lama Dev' />. Data
-        from
-        <ExternalLink href='https://jsonplaceholder.typicode.com/users' name='JSONPlaceHolder' />.
+        <ExplanationList>
+          <li>
+            Inspired by{' '}
+            <ExternalLink href='https://www.youtube.com/watch?v=MY6ZZIn93V8' name='Lama Dev' />
+          </li>
+          <li>
+            Data source
+            <ExternalLink
+              href='https://jsonplaceholder.typicode.com/users'
+              name='JSONPlaceHolder'
+            />
+            .
+          </li>
+          <li>Already applied debounce on search.</li>
+        </ExplanationList>
       </SubTitle>
       <input
         className='mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200'

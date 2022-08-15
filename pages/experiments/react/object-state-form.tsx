@@ -1,4 +1,5 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 
@@ -10,6 +11,7 @@ export default function ObjectStateForm() {
   });
 
   function handleChange(e: { target: { name: string; value: string } }) {
+    // console.log(e.target.name);
     setPerson({
       ...person,
       [e.target.name]: e.target.value,
@@ -22,11 +24,15 @@ export default function ObjectStateForm() {
   return (
     <LayoutToExperiments domain='React' title='Object state Form'>
       <SubTitle>
-        By{' '}
         <ExternalLink
           href='https://beta.reactjs.org/learn/updating-objects-in-state'
           name='Updating objects in state'
         />
+        <ExplanationList>
+          <li>
+            Fill the input and simultaneously the value of the input will appear in the buttom.
+          </li>
+        </ExplanationList>
       </SubTitle>
       <form className='mb-5 flex flex-col space-y-3'>
         <label className={labelStyle}>
@@ -37,6 +43,7 @@ export default function ObjectStateForm() {
             onChange={handleChange}
             className={inputStyle}
             placeholder='First Name'
+            name='firstName'
           />
         </label>
         <label className={labelStyle}>
@@ -47,6 +54,7 @@ export default function ObjectStateForm() {
             onChange={handleChange}
             className={inputStyle}
             placeholder='Last Name'
+            name='lastName'
           />
         </label>
         <label className={labelStyle}>
@@ -57,15 +65,16 @@ export default function ObjectStateForm() {
             onChange={handleChange}
             className={inputStyle}
             placeholder='Email'
+            name='email'
           />
         </label>
       </form>
-      <p className='flex flex-col'>
+      <div className='flex flex-col'>
         <div>
           Full Name : {person.firstName} {person.lastName}
         </div>
         <div>Email : {person.email}</div>
-      </p>
+      </div>
     </LayoutToExperiments>
   );
 }
