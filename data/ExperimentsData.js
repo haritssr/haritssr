@@ -8,7 +8,7 @@ export const ExperimentsData = [
   {
     id: 1,
     title: 'Tailwind CSS',
-    logoSrc: '/techIcons/tailwindcss.png',
+    logoSrc: '/icons/tailwindcss.png',
     description:
       'These are my exploration of using atomic CSS like Tailwind CSS for building user interface. I really like Tailwind CSS because it solve separation of concern problem, the API really easy to use, the documentation is really good, and the future of the framework are promising.',
     links: [
@@ -30,7 +30,7 @@ export const ExperimentsData = [
   {
     id: 2,
     title: 'React',
-    logoSrc: '/techIcons/reactjs.ico',
+    logoSrc: '/icons/reactjs.ico',
     description:
       'React.js are javascript library for building user interface on web or mobile, but for me i just using it for web, whether is mobile web or desktop web. React.js have a lot of API like Hooks and component API.',
     links: [
@@ -55,7 +55,7 @@ export const ExperimentsData = [
   {
     id: 3,
     title: 'Nextjs',
-    logoSrc: '/techIcons/nextjs.ico',
+    logoSrc: '/icons/nextjs.ico',
     description:
       'These are my exploration and implementation of Next.js API, from data fetching, image optimization, rendering method, routing, and others, which usually different from just React.js',
     links: [
@@ -71,7 +71,7 @@ export const ExperimentsData = [
   {
     id: 4,
     title: 'Browser',
-    logoSrc: '/techIcons/chrome.svg',
+    logoSrc: '/icons/chrome.svg',
     description:
       'These are my exploration of native built-in browser API, from UI, optimization, text-editing,  multimedia, and others.',
     links: [
@@ -90,7 +90,7 @@ export const ExperimentsData = [
   {
     id: 5,
     title: 'VisX',
-    logoSrc: '/techIcons/visx.png',
+    logoSrc: '/icons/visx.png',
     description:
       'VisX are data vizualitaion library specially made for react that made by Airbnb, used by them, and maintine by them. Below are my exploration of these library. The library are very rich and have so many combination of possibility of layout that we can made. It is actually fun to try every one of them, since Data Visualization will never be die, there are always innovation on them.',
     links: [{ name: 'Bar Chart' }, { name: 'Pie Chart' }],
@@ -99,7 +99,7 @@ export const ExperimentsData = [
   {
     id: 6,
     title: 'Framer Motion',
-    logoSrc: '/techIcons/framermotion.png',
+    logoSrc: '/icons/framermotion.png',
     description:
       'These are my exploration and implementation of web animation from library Framer Motion which is specially to react.',
     links: [{ name: 'Modal Presentation' }, { name: 'Random' }],
@@ -107,7 +107,7 @@ export const ExperimentsData = [
   {
     id: 7,
     title: 'Mantine',
-    logoSrc: '/techIcons/mantine-logo.svg',
+    logoSrc: '/icons/mantine-logo.svg',
     description:
       'These are my exploration of headless user interface components (components UI without bound to any styling) of Mantine, each pages might have more than one example since I tried manipulating one thing in many ways. My implementation using Tailwind CSS or Emotion CSS-in-JS.',
     links: [{ name: 'Carousel' }],
@@ -115,7 +115,7 @@ export const ExperimentsData = [
   {
     id: 8,
     title: 'Headless UI',
-    logoSrc: '/techIcons/headlessui.png',
+    logoSrc: '/icons/headlessui.png',
     description:
       'These are my exploration of headless user interface components (components UI without bound to any styling) of Headless UI, each pages might have more than one example since I might tried manipulating one thing in many ways. The styling using Tailwind CSS.',
     links: [
@@ -134,7 +134,7 @@ export const ExperimentsData = [
   {
     id: 9,
     title: 'Radix UI',
-    logoSrc: '/techIcons/radixui.png',
+    logoSrc: '/icons/radixui.png',
     description:
       'These are my exploration of headless user interface components (components UI without bound to any styling) of Radix UI, each pages might have more than one example since I tried manipulating one thing in many ways. The styling using Tailwind CSS after changing from Stitches.',
     links: [
@@ -164,7 +164,7 @@ export const ExperimentsData = [
   {
     id: 10,
     title: 'Sandpack',
-    logoSrc: '/techIcons/sandpack.ico',
+    logoSrc: '/icons/sandpack.ico',
     description: 'Live code editor',
     links: [{ name: 'Example 1' }],
   },
@@ -172,7 +172,7 @@ export const ExperimentsData = [
   {
     id: 11,
     title: 'Notion API',
-    logoSrc: '/techIcons/notion.png',
+    logoSrc: '/icons/notion.png',
     description:
       'Notion as a Free CMS, we can connect notion app to any web service via their Notion API to built unique possible application.',
     links: [{ name: 'Table' }],
@@ -181,7 +181,7 @@ export const ExperimentsData = [
   {
     id: 12,
     title: 'UI Explorations',
-    logoSrc: '/techIcons/radixui.png',
+    logoSrc: '/icons/radixui.png',
     description: 'UI Explorations',
     links: [{ name: 'Notion NavBar' }],
   },

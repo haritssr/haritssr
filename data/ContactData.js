@@ -10,25 +10,25 @@ export const ContactData = [
   {
     title: 'Outlook',
     href: 'mailto:haritssr@outlook.co.id',
-    imgSrc: '/techIcons/outlook.svg',
+    imgSrc: '/icons/outlook.svg',
     name: 'haritssr@outlook.co.id',
   },
   {
     title: 'GMail',
     href: 'mailto:haritssr@gmail.com',
-    imgSrc: '/techIcons/gmail.svg',
+    imgSrc: '/icons/gmail.svg',
     name: 'haritssr@gmail.com',
   },
   {
     title: 'Twitter',
     href: 'https://www.twitter.com/haritssr',
-    imgSrc: '/techIcons/twitter.svg',
+    imgSrc: '/icons/twitter.svg',
     name: 'twitter/haritssr',
   },
   {
     title: 'GitHub',
     href: 'https://www.github.com/haritssr',
-    imgSrc: '/techIcons/github.svg',
+    imgSrc: '/icons/github.svg',
     name: 'github/haritssr',
   },
 ];

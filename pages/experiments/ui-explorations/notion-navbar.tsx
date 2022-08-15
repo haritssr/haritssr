@@ -34,7 +34,7 @@ export default function NotionNavBar() {
 function Logo() {
   return (
     <div className='mr-2 flex items-center space-x-2'>
-      <Image src='/techIcons/notion.png' height='40' width='40' alt='' />
+      <Image src='/icons/notion.png' height='40' width='40' alt='' />
       <div className='text-lg font-semibold text-black'>Notion</div>
     </div>
   );

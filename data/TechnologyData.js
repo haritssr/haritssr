@@ -1,12 +1,12 @@
 export const TechnologyData = [
   {
     href: 'https://katex.org/',
-    imgSrc: '/techIcons/latex.ico',
+    imgSrc: '/icons/latex.ico',
     name: 'KaTeX',
   },
   {
     href: 'https://developers.notion.com/',
-    imgSrc: '/techIcons/notion.png',
+    imgSrc: '/icons/notion.png',
     name: 'Notion API',
   },
 ];
@@ -14,7 +14,7 @@ export const TechnologyData = [
 export const Backend = [
   {
     href: 'https://www.nodejs.org/',
-    imgSrc: '/techIcons/nodejs.svg',
+    imgSrc: '/icons/nodejs.svg',
     name: 'Node JS',
   },
 ];
@@ -22,7 +22,7 @@ export const Backend = [
 export const Hosting = [
   {
     href: 'https://www.vercel.com/',
-    imgSrc: '/techIcons/vercel.ico',
+    imgSrc: '/icons/vercel.ico',
     name: 'Vercel',
   },
 ];
@@ -30,12 +30,12 @@ export const Hosting = [
 export const Database = [
   {
     href: 'https://planetscale.com/',
-    imgSrc: '/techIcons/planetscale.ico',
+    imgSrc: '/icons/planetscale.ico',
     name: 'PlanetScale',
   },
   {
     href: 'https://prisma.io/',
-    imgSrc: '/techIcons/prisma.ico',
+    imgSrc: '/icons/prisma.ico',
     name: 'Prisma',
   },
 ];
@@ -43,18 +43,18 @@ export const Database = [
 export const CodeManagement = [
   {
     href: 'https://git-scm.com/',
-    imgSrc: '/techIcons/git.svg',
+    imgSrc: '/icons/git.svg',
     name: 'Git',
   },
   {
     href: 'https://www.github.com',
-    imgSrc: '/techIcons/github.png',
+    imgSrc: '/icons/github.png',
     name: 'GitHub',
   },
 
   {
     href: 'https://www.turborepo.org',
-    imgSrc: '/techIcons/turborepo.png',
+    imgSrc: '/icons/turborepo.png',
     name: 'Turborepo',
   },
 ];
@@ -62,17 +62,17 @@ export const CodeManagement = [
 export const ComponentLibrary = [
   {
     href: 'https://www.radix-ui.com/',
-    imgSrc: '/techIcons/radixui.png',
+    imgSrc: '/icons/radixui.png',
     name: 'Radix UI',
   },
   {
     href: 'https://headlessui.dev/',
-    imgSrc: '/techIcons/headlessui.png',
+    imgSrc: '/icons/headlessui.png',
     name: 'Headless UI',
   },
   {
     href: 'https://mantine.dev/',
-    imgSrc: '/techIcons/mantine-logo.svg',
+    imgSrc: '/icons/mantine-logo.svg',
     name: 'Mantine',
   },
 ];
@@ -80,12 +80,12 @@ export const ComponentLibrary = [
 export const FrontendFramework = [
   {
     href: 'https://beta.reactjs.org/',
-    imgSrc: '/techIcons/reactjs.ico',
+    imgSrc: '/icons/reactjs.ico',
     name: 'React.js',
   },
   {
     href: 'https://nextjs.org/',
-    imgSrc: '/techIcons/nextjs.ico',
+    imgSrc: '/icons/nextjs.ico',
     name: 'Next.js',
   },
 ];
@@ -93,12 +93,12 @@ export const FrontendFramework = [
 export const ProgrammingLanguage = [
   {
     href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
-    imgSrc: '/techIcons/javascript.svg',
+    imgSrc: '/icons/javascript.svg',
     name: 'JavaScript',
   },
   {
     href: 'https://www.typescriptlang.org/',
-    imgSrc: '/techIcons/typescript.png',
+    imgSrc: '/icons/typescript.png',
     name: 'TypeScript',
   },
 ];
@@ -106,7 +106,7 @@ export const ProgrammingLanguage = [
 export const DataVisulization = [
   {
     href: 'https://airbnb.io/visx/',
-    imgSrc: '/techIcons/visx.png',
+    imgSrc: '/icons/visx.png',
     name: 'VisX',
   },
 ];
@@ -114,12 +114,12 @@ export const DataVisulization = [
 export const Styling = [
   {
     href: 'https://tailwindcss.com/',
-    imgSrc: '/techIcons/tailwindcss.png',
+    imgSrc: '/icons/tailwindcss.png',
     name: 'Tailwind CSS',
   },
   {
     href: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
-    imgSrc: '/techIcons/css.svg',
+    imgSrc: '/icons/css.svg',
     name: 'CSS 3',
   },
 ];
@@ -127,12 +127,12 @@ export const Styling = [
 export const Documentation = [
   {
     href: 'https://mdxjs.com/',
-    imgSrc: '/techIcons/mdx.svg',
+    imgSrc: '/icons/mdx.svg',
     name: 'MDX',
   },
   {
     href: 'https://docusaurus.io/',
-    imgSrc: '/techIcons/docusaurus.png',
+    imgSrc: '/icons/docusaurus.png',
     name: 'Docusaurus',
   },
 ];
@@ -140,7 +140,7 @@ export const Documentation = [
 export const Animation = [
   {
     href: 'https://www.framer.com/motion',
-    imgSrc: '/techIcons/framermotion.png',
+    imgSrc: '/icons/framermotion.png',
     name: 'Framer Motion',
   },
 ];
@@ -148,22 +148,22 @@ export const Animation = [
 export const MainTools = [
   {
     href: 'https://www.google.com/chrome/',
-    imgSrc: '/techIcons/chrome.svg',
+    imgSrc: '/icons/chrome.svg',
     name: 'Chrome',
   },
   {
     href: 'https://www.figma.com/',
-    imgSrc: '/techIcons/figma.svg',
+    imgSrc: '/icons/figma.svg',
     name: 'Figma',
   },
   {
     href: 'https://www.notion.so/',
-    imgSrc: '/techIcons/notion.png',
+    imgSrc: '/icons/notion.png',
     name: 'Notion',
   },
   {
     href: 'https://code.visualstudio.com/',
-    imgSrc: '/techIcons/vscode.svg',
+    imgSrc: '/icons/vscode.svg',
     name: 'VS Code',
   },
 ];
