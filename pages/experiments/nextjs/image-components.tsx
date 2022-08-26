@@ -6,14 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const ProductData = [
-  { id: '1', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
-  { id: '2', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
-  { id: '3', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
-  { id: '4', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
-  { id: '5', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
-  { id: '6', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
-  { id: '7', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
-  { id: '8', src: '/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '1', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '2', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '3', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '4', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '5', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '6', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '7', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
+  { id: '8', src: '/images/street.jpg', name: 'Street Car', href: '/experiments' },
 ];
 
 export default function ImageComponents() {
@@ -27,7 +27,7 @@ export default function ImageComponents() {
         />
       </SubTitle>
       <Topic name='Grid System' />
-      <main className='z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pb-20 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
+      <main className='xs:grid-cols-2 z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pb-20 sm:grid-cols-3 lg:grid-cols-4'>
         {ProductData.map(a => (
           <ProductCard key={a.id} href={a.href} src={a.src} name={a.name} />
         ))}
@@ -37,23 +37,23 @@ export default function ImageComponents() {
         <Topic name='Large Image' />
         <Image
           alt='Image'
-          src='/hero.jpg'
+          src='/images/hero.jpg'
           height='582'
           width='1007'
           objectFit='cover'
           quality={75}
           className='overflow-hidden rounded-md'
-          blurDataURL='/hero.jpg'
+          blurDataURL='/images/hero.jpg'
           placeholder='blur'
         />
       </div>
 
       <div className='mx-auto mt-20 flex h-auto max-w-5xl flex-col space-y-20'>
         <div>
-          <Topic name='default img tag' />
+          <Topic name='Default <img/>' />
           <img
             alt=''
-            src='/hero.jpg'
+            src='/images/hero.jpg'
             // height={2000}
             // width={5000}
             className='h-96 w-full rounded-md object-cover object-top'
@@ -61,18 +61,18 @@ export default function ImageComponents() {
           />
         </div>
         <div>
-          <Topic name='nextjs image component' />
+          <Topic name='Next.js <Image/>' />
           <div className='relative h-96'>
             <Image
               alt='Image'
-              src='/hero.jpg'
+              src='/images/hero.jpg'
               layout='fill'
               height='582'
               width='1007'
               objectFit='cover'
               quality={75}
               className='overflow-hidden rounded-md'
-              blurDataURL='/hero.jpg'
+              blurDataURL='/images/hero.jpg'
               placeholder='blur'
             />
           </div>

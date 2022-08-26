@@ -15,7 +15,13 @@ export default function Newspaper() {
 
         <p className='columns-1 text-zinc-700 sm:columns-2 lg:columns-3'>
           <div className='float-none p-2'>
-            <Image className='rounded shadow-md' alt='' src='/me.jpg' height={200} width={200} />
+            <Image
+              className='rounded shadow-md'
+              alt=''
+              src='/images/me.jpg'
+              height={200}
+              width={200}
+            />
           </div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolore ab nisi ut
           praesentium blanditiis quasi facilis accusamus repellat cum est tempore assumenda deleniti

@@ -74,12 +74,12 @@ const Contacts = () => {
       <section className='mx-auto flex flex-col sm:mx-0 sm:mr-10  sm:px-0 sm:pl-4'>
         <article className=' mb-5 flex justify-center object-center sm:flex sm:h-auto sm:items-center sm:justify-start'>
           <Image
-            src='/me.jpg'
+            src='/images/me.jpg'
             height='180'
             width='180'
             className='z-10 rounded-full'
             alt='Harits Syah'
-            blurDataURL='/me.jpg'
+            blurDataURL='/images/me.jpg'
             placeholder='blur'
           />
         </article>

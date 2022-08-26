@@ -17,7 +17,7 @@ interface LayoutToExperimentsType {
 export default function LayoutToExperiments({ children, title, domain }: LayoutToExperimentsType) {
   const lastThreeSegmentRoute = useRouter().asPath;
   const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
-  const image = '/hero.jpg';
+  const image = '/images/hero.jpg';
   const yes = `${title} - Harits Syah`;
   return (
     <div className='bg-white'>

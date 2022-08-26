@@ -14,10 +14,10 @@ export default function Figure() {
       <div>
         <figure>
           <Image
-            src='/hero.jpg'
+            src='/images/hero.jpg'
             height='582'
             width='1007'
-            blurDataURL='/hero.jpg'
+            blurDataURL='/images/hero.jpg'
             alt='Mountain with beautiful panoramic sky wadadaw'
           />
           <figcaption className='text-center italic text-zinc-500'>

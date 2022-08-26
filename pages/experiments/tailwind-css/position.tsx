@@ -67,7 +67,7 @@ export default function Position() {
         </Wrapper>
         <Wrapper title='image on background'>
           <div className='relative h-96'>
-            <Image src='/new/hero.jpg' objectFit='cover' alt='' layout='fill' />
+            <Image src='/new/images/hero.jpg' objectFit='cover' alt='' layout='fill' />
 
             <div className='absolute inset-0 bg-zinc-800/80 text-zinc-200'>
               <div className='p-5'>

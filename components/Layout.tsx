@@ -12,7 +12,7 @@ interface LayoutType {
 
 export default function Layout({ children, browserTitle, description }: LayoutType) {
   const router = useRouter();
-  const image = '/hero.jpg';
+  const image = '/images/hero.jpg';
   const type = 'website';
   return (
     <div className='bg-white'>
