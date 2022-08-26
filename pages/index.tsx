@@ -24,22 +24,12 @@ import { LocationMarkerIcon } from '@heroicons/react/solid';
 import { TechStackComponent } from '@/components/TechStackComponents';
 import ExperimentsIndexBox from '@/components/ExperimentsIndexBox';
 import { ExperimentIndexData } from 'data/ExperimentsIndexData';
-import { useState, Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import ExplanationList from '@/components/ExplanationList';
-import {
-  BellIcon,
-  ExclamationCircleIcon,
-  LockClosedIcon,
-  QuestionMarkCircleIcon,
-  XIcon,
-} from '@heroicons/react/outline';
 import DialogButton from '@/components/DialogButton';
 
 export default function Home() {
   return (
     <Layout browserTitle='Projects' description='Home'>
-      <div className='mt-5 space-y-28 sm:mt-10'>
+      <div className='mt-5 space-y-28 sm:mt-10 sm:space-y-32'>
         <Contacts />
         <Projects />
         <Experiments />
