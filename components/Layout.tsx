@@ -12,18 +12,13 @@ interface LayoutType {
 
 export default function Layout({ children, browserTitle, description }: LayoutType) {
   const router = useRouter();
-  const image = 'https://harislab.com/public/HarisLab.png';
+  const image = '/hero.jpg';
   const type = 'website';
-  // bg-[#f2f1f7]
   return (
     <div className='bg-white'>
       <Head>
-        {router.asPath === '/' ? (
-          <title>Harits Syah</title>
-        ) : (
-          <title>{browserTitle} - Harits Syah</title>
-        )}{' '}
-        <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
+        <title>{router.asPath === '/' ? 'Harits Syah' : `${browserTitle} - Harits Syah`}</title>
+        <link rel='icon' href='/icons/haritssr.svg' />
         <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={description} />

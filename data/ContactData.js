@@ -4,7 +4,7 @@ export const ContactData = [
   {
     title: 'Personal Website',
     href: 'https://www.haritssr.com',
-    imgSrc: '/logo_hariscorp/logo_haritssr.svg',
+    imgSrc: '/icons/haritssr.svg',
     name: 'haritssr.com',
   },
   {

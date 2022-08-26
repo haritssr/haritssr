@@ -23,16 +23,13 @@ export default function LayoutNodeExperiments({
 }: LayoutNodeExperimentsType) {
   const lastThreeSegmentRoute = useRouter().asPath;
   const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
-
-  const image = 'https://harislab.com/public/HarisLab.png';
-  //bg-[#f2f1f7]
-
+  const image = '/hero.jpg';
   const yes = `${title} - Harits Syah`;
   return (
     <div className='bg-white'>
       <Head>
         <title>{yes}</title>
-        <link rel='icon' href='/logo_hariscorp/logo_haritssr.svg' />
+        <link rel='icon' href='/icons/haritssr.svg' />
         <meta name='theme-color' content='#27272a' />
         <meta name='robots' content='follow, index' />
         <meta name='description' content={title} />

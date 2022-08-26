@@ -41,7 +41,7 @@ export const ProjectsData = [
     description: 'Coffee and spices from Indonesia',
     period: 'May 21 - Des 2021',
     status: 'Change mgmnt',
-    imgSrc: <Image src='/aka.PNG' width='24' height='24' alt='' />,
+    imgSrc: <Image src='/icons/aka.PNG' width='24' height='24' alt='' />,
     industry: 'Coffee & Spices',
     hrefCaseStudy: '/experiments',
   },
