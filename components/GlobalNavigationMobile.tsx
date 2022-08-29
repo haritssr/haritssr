@@ -7,7 +7,7 @@ export default function GlobalNavigationMobile() {
     <div className='sticky bottom-0 block w-full border-t border-zinc-300 bg-gray-100/80 saturate-150 backdrop-blur sm:hidden'>
       <div className='flex w-full items-center justify-around '>
         {Data.map(({ id, path }) => (
-          <IconWrapper key={id} to={`/${id}`} path={path} />
+          <IconWrapper key={id} to={`${id}`} path={path} />
         ))}
       </div>
     </div>
@@ -16,14 +16,13 @@ export default function GlobalNavigationMobile() {
 
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const router = useRouter();
-  const toN = to === '/home' ? '/' : to;
-  const iconColor = router.asPath === toN ? 'text-blue-600' : 'text-zinc-500';
+  const iconColor = router.asPath === to ? 'text-blue-600' : 'text-zinc-500';
   function capitalizeFirstLetter(to: string) {
     return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
   }
 
   return (
-    <Link href={`${to === '/home' ? '/' : to}`}>
+    <Link href={`#${to}`}>
       <a className='flex flex-col items-center justify-center py-1'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
