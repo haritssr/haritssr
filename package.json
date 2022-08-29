@@ -67,6 +67,7 @@
     "motion": "^10.0.1",
     "next": "^12.2.3",
     "next-themes": "^0.0.15",
+    "pnpm": "^7.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.4.0",
