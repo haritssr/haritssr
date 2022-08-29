@@ -14,6 +14,7 @@ import {
   Animation,
   FrontendFramework,
   Documentation,
+  Testing,
 } from '../data/TechnologyData';
 import { ContactData } from '../data/ContactData';
 import ProjectsBox from '@/components/ProjectBox';
@@ -33,8 +34,8 @@ export default function Home() {
         <Contacts />
         <Projects />
         <Experiments />
-        <TechStack />
         <Blog />
+        <TechStack />
         <Reading />
       </div>
     </Layout>
@@ -56,9 +57,14 @@ const Wrapper = ({
 }) => {
   return (
     <div id={id}>
-      <div className='mb-8'>
-        <span className='text-2xl font-semibold text-zinc-800 sm:text-3xl'>{topic}. </span>
-        <span className='text-2xl font-medium text-zinc-500 sm:text-3xl'>{subtitle}</span>
+      <div className='mb-6 space-y-2'>
+        <div className='flex items-center justify-between'>
+          <div className='text-2xl font-semibold text-zinc-800 sm:text-3xl'>{topic} </div>
+          {/* <div className='cursor-pointer text-xl font-medium text-blue-600 hover:underline'>
+            See All
+          </div> */}
+        </div>
+        <div className='text-2xl font-medium text-zinc-400 sm:text-3xl '>{subtitle}</div>
       </div>
       <div className={className}>{children}</div>
     </div>
@@ -68,7 +74,7 @@ const Wrapper = ({
 const Contacts = () => {
   return (
     <div
-      id='Contacts'
+      id='contacts'
       className='grid grid-cols-1 gap-10 rounded-lg border border-zinc-300 bg-gradient-to-t from-zinc-100 via-white to-white px-5 py-10 shadow sm:grid-cols-2 sm:gap-0 sm:bg-gradient-to-bl sm:via-zinc-50 sm:p-10'
     >
       <section className='mx-auto flex flex-col sm:mx-0 sm:mr-10  sm:px-0 sm:pl-4'>
@@ -121,10 +127,10 @@ const Contacts = () => {
 const Projects = () => {
   return (
     <Wrapper
-      id='Projects'
+      id='projects'
       topic='Projects'
-      subtitle='Frontend projects that already hosted.'
-      className='grid grid-cols-1 gap-8 px-20 sm:grid-cols-3 sm:gap-5 sm:px-0 lg:grid-cols-4'
+      subtitle='Hosted frontend projects.'
+      className='grid grid-cols-1 gap-8 px-10 sm:grid-cols-3 sm:gap-5 sm:px-0 lg:grid-cols-4'
     >
       {ProjectsData.map(d => (
         <ProjectsBox
@@ -145,9 +151,9 @@ const Projects = () => {
 const TechStack = () => {
   return (
     <Wrapper
-      id='TechStack'
+      id='techstack'
       topic='Tech Stack'
-      subtitle='Frontend technology I have used.'
+      subtitle='Technology I have used.'
       className='grid grid-flow-row grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4'
     >
       <TechStackComponent data={Backend} title='Backend' />
@@ -161,6 +167,7 @@ const TechStack = () => {
       <TechStackComponent data={ComponentLibrary} title='Component Library' />
       <TechStackComponent data={CodeManagement} title='Code Management' />
       <TechStackComponent data={MainTools} title='Main Tools' />
+      <TechStackComponent data={Testing} title='Testing' />
     </Wrapper>
   );
 };
@@ -168,9 +175,9 @@ const TechStack = () => {
 const Experiments = () => {
   return (
     <Wrapper
-      id='Experiments'
+      id='experiments'
       topic='Experiments'
-      subtitle='My exploration on these Tech Stack.'
+      subtitle='My tech stack exploration'
       className='grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 '
     >
       {ExperimentIndexData.map(({ title, href, imgSrc, sum, type }) => (
@@ -189,7 +196,7 @@ const Experiments = () => {
 
 const Blog = () => {
   return (
-    <Wrapper id='Blog' topic='Blog' subtitle='A place to pour my thoughts.' className='space-y-4'>
+    <Wrapper id='blog' topic='Blog' subtitle='A place to pour my thoughts.' className='space-y-4'>
       <div>
         <div className='cursor-pointer text-zinc-700 hover:underline'>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, natus?
@@ -249,7 +256,7 @@ const Blog = () => {
 };
 const Reading = () => {
   return (
-    <div id='Reading'>
+    <div id='reading'>
       <div className=''>
         <span className='text-2xl font-semibold text-zinc-800 sm:text-3xl'>Reading. </span>
         <span className='text-2xl font-medium text-zinc-500 sm:text-3xl'>
@@ -274,8 +281,8 @@ const Reading = () => {
         </li>
       </DialogButton>
       <div className='rounded-md border border-zinc-200  p-5'>
-        <div className='mb-3 text-xl font-semibold text-zinc-700'>Technical Frontend Books</div>
-        <div className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
+        <h2 className='mb-3 text-2xl font-semibold text-zinc-700'>Technical Frontend Books</h2>
+        <section className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 sm:pl-10 md:grid-cols-5'>
           {TechicalBooksData.map(({ title, href, imgSrc }) => (
             <div className=' flex h-full flex-col rounded-md ' key={title}>
               <a
@@ -290,11 +297,11 @@ const Reading = () => {
               </a>
             </div>
           ))}
-        </div>
-        <div className='mt-10 mb-3 text-xl font-semibold text-zinc-700'>
+        </section>
+        <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>
           User Interface & User Experience Book
-        </div>
-        <div className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
+        </h2>
+        <section className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 sm:pl-10 md:grid-cols-5'>
           {UIUXBooksData.map(({ title, href, imgSrc }) => (
             <div className='border-zinc-2s00 flex h-full flex-col ' key={title}>
               <a
@@ -309,9 +316,9 @@ const Reading = () => {
               </a>
             </div>
           ))}
-        </div>
-        <div className='mt-10 mb-3 text-xl font-semibold text-zinc-700'>Math & Physics</div>
-        <div className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 md:grid-cols-5'>
+        </section>
+        <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>Math & Physics</h2>
+        <section className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 sm:pl-10 md:grid-cols-5'>
           {MathPhysicsBooks.map(({ title, href, imgSrc }) => (
             <div className='border-zinc-2s00 flex h-full flex-col ' key={title}>
               <a
@@ -326,12 +333,11 @@ const Reading = () => {
               </a>
             </div>
           ))}
-        </div>
-        <div className='mt-10 mb-3 text-xl font-semibold text-zinc-700'>
-          {' '}
+        </section>
+        <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>
           My Other Learning Sources
-        </div>
-        <div className='flex flex-col space-y-2'>
+        </h2>
+        <section className='flex flex-col space-y-2 sm:pl-10'>
           {[
             { name: 'Mozilla Developer Network', href: 'https://developer.mozilla.org/en-US/' },
             { name: 'JavaScript.info', href: 'https://javascript.info/' },
@@ -342,7 +348,45 @@ const Reading = () => {
           ].map(({ name, href }) => (
             <ExternalLink key={name} name={name} href={href} />
           ))}
-        </div>
+        </section>
+        <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>
+          Computer Science Concepts
+        </h2>
+        <section className='flex flex-col space-y-2 sm:pl-10'>
+          {[
+            {
+              concept: 'Functional Programming',
+              book: 'Grokking Simplicity',
+              href: 'https://developer.mozilla.org/en-US/',
+            },
+            {
+              concept: 'Object Oriented Programming with TypeScript',
+              book: 'Jeff Zhang',
+              href: 'https://www.youtube.com/watch?v=HsWKyERYGKQ&list=PLn4fTSbSpY5eY_M1mKWxGa9pViEodofKy',
+            },
+            {
+              concept: 'Web Design Pattern',
+              book: 'Learn Patterns',
+              href: 'https://www.patterns.dev/posts/#design-patterns',
+            },
+            {
+              concept: 'Web Rendering Pattern',
+              book: 'Learn Patterns',
+              href: 'https://www.patterns.dev/posts/#rendering-patterns',
+            },
+            {
+              concept: 'Web Performance Pattern',
+              book: 'Learn Patterns',
+              href: 'https://www.patterns.dev/posts/#performance-patterns',
+            },
+          ].map(({ concept, book, href }) => (
+            <div className='flex space-x-2' key={concept}>
+              <div>{concept}</div>
+              <div>—</div>
+              <ExternalLink name={book} href={href} />
+            </div>
+          ))}
+        </section>
       </div>
     </div>
   );

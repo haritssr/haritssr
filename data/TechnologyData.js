@@ -145,6 +145,14 @@ export const Animation = [
   },
 ];
 
+export const Testing = [
+  {
+    href: 'https://jestjs.io/',
+    imgSrc: '/icons/jest.png',
+    name: 'Jest',
+  },
+];
+
 export const MainTools = [
   {
     href: 'https://www.google.com/chrome/',
