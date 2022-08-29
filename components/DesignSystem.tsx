@@ -89,7 +89,7 @@ export function ExternalLink({ name, href, big }: { name: string; href: string; 
           <ExternalLinkIcon
             className={`${
               big ? 'h-[18px] w-[18px]' : 'h-4 w-4'
-            } ml-1  text-blue-500 group-hover:underline`}
+            } ml-1  text-blue-600 group-hover:underline`}
             strokeWidth={`${big ? 2.2 : 2}`}
           />
         </span>
