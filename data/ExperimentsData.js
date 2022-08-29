@@ -185,4 +185,18 @@ export const ExperimentsData = [
     description: 'UI Explorations',
     links: [{ name: 'Notion NavBar' }],
   },
+  {
+    id: 13,
+    title: 'Emotion',
+    logoSrc: '/icons/emotion.png',
+    description: 'Styling',
+    links: [{ name: 'Example 1' }, { name: 'Example 2' }],
+  },
+  {
+    id: 14,
+    title: 'React Aria',
+    logoSrc: '/icons/react-aria.png',
+    description: 'UI Components Library',
+    links: [{ name: 'Example 1' }, { name: 'Example 2' }],
+  },
 ];

@@ -72,4 +72,18 @@ export const ExperimentIndexData = [
     href: '/experiments/ui-explorations',
     type: 'User Interfaces',
   },
+  {
+    sum: ExperimentsData[12].links.length,
+    title: 'Emotion',
+    imgSrc: '/icons/emotion.png',
+    href: '/experiments/emotion',
+    type: 'Styling',
+  },
+  {
+    sum: ExperimentsData[13].links.length,
+    title: 'React Aria',
+    imgSrc: '/icons/react-aria.png',
+    href: '/experiments/react-aria',
+    type: 'UI components',
+  },
 ];

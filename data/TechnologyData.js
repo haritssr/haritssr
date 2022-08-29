@@ -122,6 +122,11 @@ export const Styling = [
     imgSrc: '/icons/css.svg',
     name: 'CSS 3',
   },
+  {
+    href: 'https://emotion.sh/',
+    imgSrc: '/icons/emotion.png',
+    name: 'Emotion',
+  },
 ];
 
 export const Documentation = [

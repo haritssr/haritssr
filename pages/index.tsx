@@ -163,11 +163,11 @@ const TechStack = () => {
       <TechStackComponent data={ProgrammingLanguage} title='Programming Language' />
       <TechStackComponent data={FrontendFramework} title='Frontend Framework' />
       <TechStackComponent data={Documentation} title='Documentation' />
-      <TechStackComponent data={Styling} title='Styling' />
+      <TechStackComponent data={Testing} title='Testing' />
       <TechStackComponent data={ComponentLibrary} title='Component Library' />
       <TechStackComponent data={CodeManagement} title='Code Management' />
       <TechStackComponent data={MainTools} title='Main Tools' />
-      <TechStackComponent data={Testing} title='Testing' />
+      <TechStackComponent data={Styling} title='Styling' />
     </Wrapper>
   );
 };
