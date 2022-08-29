@@ -6,7 +6,7 @@ export default function Footer() {
       <section>
         <Link href='/'>
           <a className=' text-zinc-500 duration-100 hover:text-zinc-800 '>
-            harits<span className='text-zinc-700 font-semibold'>sr</span>.com by Harits Syah &copy;
+            harits<span className='font-semibold text-zinc-700'>sr</span>.com — Harits Syah —
             <span className='text-[12px] sm:text-tiny'> 2021–{new Date().getFullYear()}</span>
           </a>
         </Link>
