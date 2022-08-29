@@ -1,7 +1,7 @@
-import { Dialog, Transition } from '@headlessui/react';
-import React, { useState, Fragment } from 'react';
+import { Dialog } from '@headlessui/react';
+import React, { useState } from 'react';
 import ExplanationList from '@/components/ExplanationList';
-import { ExclamationCircleIcon, XIcon } from '@heroicons/react/outline';
+import { XIcon } from '@heroicons/react/outline';
 
 export default function DialogButton({
   children,
@@ -16,24 +16,13 @@ export default function DialogButton({
 
   return (
     <div className='my-5'>
-      {/* <button
-        type='button'
-        onClick={() => setIsOpen(true)}
-        className={`flex items-center space-x-1 rounded-md border border-zinc-300 py-2 px-3 text-sm font-medium text-zinc-600 duration-200 hover:border-blue-600 hover:ring-2 hover:ring-blue-200 active:ring-2 active:ring-blue-600 ${
-          isOpen ? 'ring-2 ring-blue-600' : ''
-        }`}
-      >
-        <ExclamationCircleIcon className='h-5 w-5   text-zinc-600' />
-        <span>{titleButton}</span>
-      </button> */}
       <button
         type='button'
         onClick={() => setIsOpen(true)}
-        className={`flex items-center space-x-1 rounded-md bg-blue-500 py-2 px-3 text-sm font-medium text-white duration-200 hover:bg-blue-600 ${
-          isOpen ? 'ring-2 ring-orange-300' : ''
+        className={`flex items-center space-x-1 rounded-md border border-blue-500 bg-white py-2 px-3  text-blue-600 duration-200 hover:bg-zinc-50 ${
+          isOpen ? 'ring-2 ring-blue-600' : ''
         }`}
       >
-        <ExclamationCircleIcon className='text-white-600 h-5   w-5' />
         <span>{titleButton}</span>
       </button>
       {/* <Transition.Root show={isOpen} as={Fragment}> */}
@@ -42,16 +31,7 @@ export default function DialogButton({
         onClose={() => setIsOpen(false)}
         className='fixed inset-x-0 top-[25vh] z-40 mx-auto h-fit w-[90%] sm:w-1/3'
       >
-        {/* <Transition.Child
-            enter='duration-300 ease-out'
-            enterFrom='opacity-0'
-            enterTo='opacity-100'
-            leave='duration-200 ease-in'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
-          > */}
         <Dialog.Overlay className='fixed inset-0 bg-zinc-800/80' />
-        {/* </Transition.Child> */}
 
         <Dialog.Panel className='relative z-50 rounded-xl bg-white p-5 shadow-xl'>
           <div className='mb-3 flex items-center justify-between  '>
@@ -68,7 +48,7 @@ export default function DialogButton({
             </div>
           </div>
           <Dialog.Title as='div' className='mb-2 text-xl font-semibold'>
-            <div className=''>{titleDescription}</div>
+            <div>{titleDescription}</div>
           </Dialog.Title>
           <Dialog.Description as='div' className='text-zinc-600'>
             <ExplanationList>{children}</ExplanationList>
