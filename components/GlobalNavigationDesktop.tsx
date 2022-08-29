@@ -29,11 +29,10 @@ export default function GlobalNavigationDesktop() {
   return (
     <div className='hidden w-full md:block'>
       <div className='flex flex-row items-center justify-center  space-x-5   sm:space-x-10'>
-        <GlobalNavigationDesktopLink href='/#Contacts' title='Contacts' />
         <GlobalNavigationDesktopLink href='/#Projects' title='Projects' />
         <GlobalNavigationDesktopLink href='/#Experiments' title='Experiments' />
-        <GlobalNavigationDesktopLink href='/#TechStack' title='Tech Stack' />
         <GlobalNavigationDesktopLink href='/#Blog' title='Blog' />
+        <GlobalNavigationDesktopLink href='/#TechStack' title='Tech Stack' />
         <GlobalNavigationDesktopLink href='/#Reading' title='Reading' />
       </div>
     </div>

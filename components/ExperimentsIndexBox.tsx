@@ -16,27 +16,23 @@ export default function ExperimentsIndexBox({
   type: string;
 }) {
   return (
-    <div className='flex flex-col justify-between rounded-lg border border-zinc-300 bg-gradient-to-bl from-zinc-50 via-white to-white px-4 pt-4 pb-3 shadow'>
+    <div className='flex flex-col justify-between rounded-lg border border-zinc-300 bg-white p-3 shadow'>
       <div className='space-y-1 sm:space-y-2'>
-        <div className='flex items-center justify-between'>
-          <div className='text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</div>
+        <div className='flex items-center space-x-2'>
           <Image src={imgSrc} height={20} width={20} alt={title} />
+          <div className='truncate text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</div>
         </div>
-        <div className='w-fit rounded-md border border-zinc-200  bg-zinc-50 px-2 py-0.5 text-center text-[12px] font-medium text-zinc-600'>
+        <div className='w-fit rounded-md border border-purple-500 px-2 py-0.5 text-center text-[12px] text-purple-600'>
           {type}
         </div>
-        <div className='text-zinc-500'>{sum} Experiments</div>
-        <Link href={href}>
-          <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:underline sm:text-base'>
-            <p className='xs:hidden'>See all</p>
-            <p className='xs:inline hidden'>See all exploration</p>
-            <ChevronRightIcon
-              className='h-4 w-4 pt-[0.25px] text-blue-600 group-hover:underline'
-              strokeWidth={2}
-            />
-          </a>
-        </Link>
+        <div className='text-zinc-600'>{sum} Experiments</div>
       </div>
+      <Link href={href}>
+        <a className='group mt-5 flex w-full cursor-pointer items-center justify-center rounded-md border border-blue-500 bg-blue-500 px-3  pb-[4px] pt-1 text-sm text-white duration-200 hover:bg-white hover:text-blue-600'>
+          <p className='xs:hidden'>See all</p>
+          <p className='xs:inline hidden'>See experiments</p>
+        </a>
+      </Link>
     </div>
   );
 }
