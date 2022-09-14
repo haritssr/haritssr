@@ -20,7 +20,7 @@ export function TitleBack({ name, href }: { name: string; href: string }) {
 }
 
 export function SubTitle({ children }: { children: React.ReactNode }) {
-  return <div className='mb-8 break-words pb-5 text-zinc-600'>{children}</div>;
+  return <div className='mb-8 break-words pb-5 text-zinc-600 space-y-1'>{children}</div>;
 }
 
 export const Topic = ({ name }: { name: string }) => {
