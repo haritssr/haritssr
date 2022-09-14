@@ -39,6 +39,10 @@ const ExportedComboboxExperimentsData = () => {
             app, complete with robust support for keyboard navigation.
           </li>
           <li>Press ctrl+b to open search dialog.</li>
+          <li>
+            The idea is this search box can be used to searching all my entire experiments in this
+            site.
+          </li>
         </ExplanationList>
       </SubTitle>
       <ComboboxExample1 ExperimentsData={ExperimentsData} />
@@ -87,10 +91,10 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
       >
         {/* Transition for Overlay */}
         <Transition.Child
-          enter='duration-300 ease-out'
+          enter='duration-100 ease-out'
           enterFrom='opacity-0'
           enterTo='opacity-100'
-          leave='duration-200 ease-in'
+          leave='duration-100 ease-in'
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
@@ -99,10 +103,10 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
 
         {/* Transition for Combobox */}
         <Transition.Child
-          enter='duration-300 ease-out'
+          enter='duration-100 ease-out'
           enterFrom='opacity-0 scale-95'
           enterTo='opacity-100 scale-100'
-          leave='duration-200 ease-in'
+          leave='duration-100 ease-in'
           leaveFrom='opacity-100 scale-100'
           leaveTo='opacity-0 scale-95'
         >
@@ -146,14 +150,12 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
                           {ExperimentData.title}
                         </span>
                         {ExperimentData.links.map(link => (
-                          <>
-                            <span
-                              key={link.name}
-                              className={` ${active ? 'text-blue-200' : 'text-gray-400'}`}
-                            >
-                              in {link.name}
-                            </span>
-                          </>
+                          <span
+                            key={link.name}
+                            className={` ${active ? 'text-blue-200' : 'text-gray-400'}`}
+                          >
+                            in {link.name}
+                          </span>
                         ))}
                       </div>
                     )}

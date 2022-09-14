@@ -69,20 +69,20 @@ const ComboboxExample1 = ({ projects }) => {
         className='fixed inset-0 z-50 overflow-y-auto p-8 pt-[25vh]'
       >
         <Transition.Child
-          enter='duration-300 ease-out'
+          enter='duration-100 ease-out'
           enterFrom='opacity-0'
           enterTo='opacity-100'
-          leave='duration-200 ease-in'
+          leave='duration-100 ease-in'
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
           <Dialog.Overlay className='fixed inset-0 bg-zinc-800/80 backdrop-blur-sm' />
         </Transition.Child>
         <Transition.Child
-          enter='duration-300 ease-out'
+          enter='duration-100 ease-out'
           enterFrom='opacity-0 scale-95'
           enterTo='opacity-100 scale-100'
-          leave='duration-200 ease-in'
+          leave='duration-100 ease-in'
           leaveFrom='opacity-100 scale-100'
           leaveTo='opacity-0 scale-95'
         >
