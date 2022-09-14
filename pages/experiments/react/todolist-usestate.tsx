@@ -51,12 +51,12 @@ export default function TodoListUseState() {
 function AddTodo({ onAddTodo }) {
   const [title, setTitle] = useState('');
   return (
-    <div className='mb-5'>
+    <div className='mb-5 space-y-2 sm:space-y-0 sm:space-x-2'>
       <input
-        placeholder='Add todo'
+        placeholder='Write todo'
         value={title}
         onChange={e => setTitle(e.target.value)}
-        className='rounded border border-zinc-700 px-1 py-0.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300'
+        className='w-full rounded border border-zinc-700 px-2 py-0.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 sm:w-fit'
       />
       <button
         onClick={() => {
@@ -64,18 +64,12 @@ function AddTodo({ onAddTodo }) {
           onAddTodo(title);
           //handleChangeTodo(nextTodo)
         }}
-        className='ml-2 rounded border border-blue-500 bg-blue-500 px-2 py-0.5 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300'
+        className='w-full rounded border border-blue-500 bg-blue-500 px-2 py-0.5 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 sm:w-fit'
       >
         Add
       </button>
     </div>
   );
-}
-
-interface TodoType {
-  id: number;
-  title: string;
-  done: boolean;
 }
 
 function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
