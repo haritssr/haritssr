@@ -35,6 +35,16 @@ export const MathPhysicsBooks = [
     href: 'https://www.computerbasedmath.org/the-maths-fix/',
     imgSrc: '/books/mathfix.jpg',
   },
+  {
+    title: 'Quanta Magazine',
+    href: 'https://www.quantamagazine.org',
+    imgSrc: '/books/quantamagazine.webp',
+  },
+  {
+    title: 'Increment',
+    href: 'https://www.increment.com/',
+    imgSrc: '/books/increment.jpg',
+  },
 ];
 export const UIUXBooksData = [
   {
