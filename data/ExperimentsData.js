@@ -102,7 +102,7 @@ export const ExperimentsData = [
     logoSrc: '/icons/framermotion.png',
     description:
       'These are my exploration and implementation of web animation from library Framer Motion which is specially to react.',
-    links: [{ name: 'Modal Presentation' }, { name: 'Random' }],
+    links: [{ name: 'Random' }],
   },
   {
     id: 7,
