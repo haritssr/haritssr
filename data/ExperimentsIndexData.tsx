@@ -7,6 +7,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/tailwindcss.svg',
     href: '/experiments/tailwind-css',
     type: 'CSS for styling',
+    ver: '3.1.8',
   },
   {
     sum: ExperimentsData[1].links.length,
@@ -14,6 +15,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/reactjs.ico',
     href: '/experiments/react',
     type: 'UI library',
+    ver: '18.2',
   },
   {
     sum: ExperimentsData[2].links.length,
@@ -21,6 +23,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/nextjs.ico',
     href: '/experiments/nextjs',
     type: 'React Framework',
+    ver: '12.3',
   },
   {
     sum: ExperimentsData[3].links.length,
@@ -28,6 +31,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/chrome.svg',
     href: '/experiments/browser',
     type: 'Browser API',
+    ver: '-',
   },
   {
     sum: ExperimentsData[4].links.length,
@@ -35,6 +39,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/visx.png',
     href: '/experiments/visx',
     type: 'Data Visualization',
+    ver: '2.10',
   },
 
   {
@@ -43,6 +48,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/framermotion.png',
     href: '/experiments/framer-motion',
     type: 'Animation',
+    ver: '7.3.5',
   },
   {
     sum: ExperimentsData[6].links.length,
@@ -50,6 +56,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/mantine-logo.svg',
     href: '/experiments/mantine',
     type: 'UI components',
+    ver: '5.3.1',
   },
   {
     sum: ExperimentsData[7].links.length,
@@ -57,6 +64,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/headlessui.png',
     href: '/experiments/headless-ui',
     type: 'UI components',
+    ver: '1.7.1',
   },
   {
     sum: ExperimentsData[8].links.length,
@@ -64,13 +72,15 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/radixui.png',
     href: '/experiments/radix-ui',
     type: 'UI components',
+    ver: '1.0.0',
   },
   {
     sum: ExperimentsData[11].links.length,
     title: 'UI Exploration',
-    imgSrc: '/icons/radixui.png',
+    imgSrc: '/icons/ui.svg',
     href: '/experiments/ui-explorations',
     type: 'User Interfaces',
+    ver: '-',
   },
   {
     sum: ExperimentsData[12].links.length,
@@ -78,6 +88,7 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/emotion.png',
     href: '/experiments/emotion',
     type: 'Styling',
+    ver: '11.10.4',
   },
   {
     sum: ExperimentsData[13].links.length,
@@ -85,5 +96,6 @@ export const ExperimentIndexData = [
     imgSrc: '/icons/react-aria.png',
     href: '/experiments/react-aria',
     type: 'UI components',
+    ver: '3.19.0',
   },
 ];

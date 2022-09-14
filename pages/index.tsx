@@ -180,8 +180,9 @@ const Experiments = () => {
       subtitle='My tech stack exploration'
       className='grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 '
     >
-      {ExperimentIndexData.map(({ title, href, imgSrc, sum, type }) => (
+      {ExperimentIndexData.map(({ title, href, imgSrc, sum, type, ver }) => (
         <ExperimentsIndexBox
+          ver={ver}
           key={title}
           href={href}
           imgSrc={imgSrc}
@@ -299,7 +300,7 @@ const Reading = () => {
           ))}
         </section>
         <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>
-          User Interface & User Experience Book
+          User Interface & User Experience Books
         </h2>
         <section className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 sm:pl-10 md:grid-cols-5'>
           {UIUXBooksData.map(({ title, href, imgSrc }) => (
@@ -317,7 +318,7 @@ const Reading = () => {
             </div>
           ))}
         </section>
-        <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>Math & Physics</h2>
+        <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>Math & Physics Books</h2>
         <section className='grid w-fit grid-flow-row grid-cols-2 gap-5 rounded-md  sm:grid-cols-3 sm:gap-5 sm:gap-x-5 sm:pl-10 md:grid-cols-5'>
           {MathPhysicsBooks.map(({ title, href, imgSrc }) => (
             <div className='border-zinc-2s00 flex h-full flex-col ' key={title}>
@@ -337,7 +338,7 @@ const Reading = () => {
         <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>
           My Other Learning Sources
         </h2>
-        <section className='flex flex-col space-y-2 sm:pl-10'>
+        <section className='flex flex-col space-y-2.5 sm:pl-10'>
           {[
             { name: 'Mozilla Developer Network', href: 'https://developer.mozilla.org/en-US/' },
             { name: 'JavaScript.info', href: 'https://javascript.info/' },
@@ -352,40 +353,40 @@ const Reading = () => {
         <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>
           Computer Science Concepts
         </h2>
-        <section className='flex flex-col space-y-2 sm:pl-10'>
-          {[
-            {
-              concept: 'Functional Programming',
-              book: 'Grokking Simplicity',
-              href: 'https://developer.mozilla.org/en-US/',
-            },
-            {
-              concept: 'Object Oriented Programming with TypeScript',
-              book: 'Jeff Zhang',
-              href: 'https://www.youtube.com/watch?v=HsWKyERYGKQ&list=PLn4fTSbSpY5eY_M1mKWxGa9pViEodofKy',
-            },
-            {
-              concept: 'Web Design Pattern',
-              book: 'Learn Patterns',
-              href: 'https://www.patterns.dev/posts/#design-patterns',
-            },
-            {
-              concept: 'Web Rendering Pattern',
-              book: 'Learn Patterns',
-              href: 'https://www.patterns.dev/posts/#rendering-patterns',
-            },
-            {
-              concept: 'Web Performance Pattern',
-              book: 'Learn Patterns',
-              href: 'https://www.patterns.dev/posts/#performance-patterns',
-            },
-          ].map(({ concept, book, href }) => (
-            <div className='flex space-x-2' key={concept}>
-              <div>{concept}</div>
-              <div>—</div>
-              <ExternalLink name={book} href={href} />
-            </div>
-          ))}
+        <section className='flex flex-col  sm:pl-10'>
+          <ul className='list-outside list-disc space-y-2.5 pl-4'>
+            {[
+              {
+                concept: 'Functional Programming',
+                book: 'Grokking Simplicity',
+                href: 'https://developer.mozilla.org/en-US/',
+              },
+              {
+                concept: 'Object Oriented Programming with TypeScript',
+                book: 'Jeff Zhang',
+                href: 'https://www.youtube.com/watch?v=HsWKyERYGKQ&list=PLn4fTSbSpY5eY_M1mKWxGa9pViEodofKy',
+              },
+              {
+                concept: 'Web Design Pattern',
+                book: 'Learn Patterns',
+                href: 'https://www.patterns.dev/posts/#design-patterns',
+              },
+              {
+                concept: 'Web Rendering Pattern',
+                book: 'Learn Patterns',
+                href: 'https://www.patterns.dev/posts/#rendering-patterns',
+              },
+              {
+                concept: 'Web Performance Pattern',
+                book: 'Learn Patterns',
+                href: 'https://www.patterns.dev/posts/#performance-patterns',
+              },
+            ].map(({ concept, book, href }) => (
+              <li key={concept}>
+                <span>{concept}</span> <span>—</span> <ExternalLink name={book} href={href} />
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </div>
