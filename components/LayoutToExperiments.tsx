@@ -49,7 +49,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
         </section>
       </div>
       <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
-        <h1 className='z-40 mx-auto mt-6 mb-2 block h-auto w-full text-left text-3xl font-bold text-zinc-800'>
+        <h1 className='z-40 mx-auto mt-12 mb-2 block h-auto w-full text-left text-3xl font-bold text-zinc-800'>
           {title}
         </h1>
         {children}
