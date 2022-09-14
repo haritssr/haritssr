@@ -156,6 +156,11 @@ export const Testing = [
     imgSrc: '/icons/jest.png',
     name: 'Jest',
   },
+  {
+    href: 'https://testing-library.com/',
+    imgSrc: '/icons/testing-library.png',
+    name: 'React Testing Library',
+  },
 ];
 
 export const MainTools = [
