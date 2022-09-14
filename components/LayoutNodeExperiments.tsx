@@ -64,7 +64,7 @@ export default function LayoutNodeExperiments({
 }
 const BackToExperiments = () => {
   return (
-    <Link href='/#Experiments'>
+    <Link href='/#experiments'>
       <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
         <span className=' inline-block w-full'>
           <span className='group flex items-center'>
