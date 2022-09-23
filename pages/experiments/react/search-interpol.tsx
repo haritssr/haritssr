@@ -1,7 +1,7 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { useEffect, useState } from 'react';
 
 //type generate automatically via app.quicktype.io
@@ -33,8 +33,8 @@ function useDebounce(value: string | null, delay: number) {
       setDebouncedValue(value);
     }, delay);
     return () => {
-        clearTimeout(handler);
-      };
+      clearTimeout(handler);
+    };
   }, [value, delay]);
 
   return debouncedValue;
@@ -98,8 +98,8 @@ export default function SearchInterpol() {
               <div>
                 <Image
                   src={notice._links.thumbnail.href}
-                  width='100px'
-                  height='100px'
+                  width='100'
+                  height='100'
                   alt={notice.name}
                 />
                 <div>{notice.forename}</div>

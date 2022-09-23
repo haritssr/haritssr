@@ -3,7 +3,7 @@ import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { ChevronDownIcon, CloudDownloadIcon, HomeIcon } from '@heroicons/react/outline';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 export default function NotionNavBar() {
   return (
@@ -21,7 +21,7 @@ export default function NotionNavBar() {
             to enable this features.
           </li>
         </ExplanationList>
-        <div className='mt-20 flex items-center justify-between'>
+        <div className='mt-40 flex items-center justify-between '>
           <div className='flex w-full items-center space-x-2'>
             <Logo />
             <Yes />
@@ -33,8 +33,8 @@ export default function NotionNavBar() {
 }
 function Logo() {
   return (
-    <div className='mr-2 flex items-center space-x-2'>
-      <Image src='/icons/notion.png' height='40' width='40' alt='' />
+    <div className='mr-2  flex items-center space-x-2'>
+      <Image src='/icons/notion.png' height='30' width='30' alt='' />
       <div className='text-lg font-semibold text-black'>Notion</div>
     </div>
   );
@@ -46,7 +46,7 @@ function Yes() {
         <NavigationMenu.Item className='rounded px-2 py-1 hover:bg-zinc-100'>
           <NavigationMenu.Trigger className='group flex items-center space-x-1'>
             <div className='text-sm font-semibold text-black'>Product</div>
-            <ChevronDownIcon className='group-rdx-state-open:rotate-180 h-3 w-3' strokeWidth={3} />
+            <ChevronDownIcon className='h-3 w-3 group-rdx-state-open:rotate-180' strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className='absolute mt-2 -ml-2 w-fit  rounded bg-white p-1 drop-shadow-lg'>
             <div className='cursor-pointer rounded px-2 py-1 text-sm hover:bg-zinc-50'>
@@ -67,7 +67,7 @@ function Yes() {
         <NavigationMenu.Item className='rounded px-2 py-1 hover:bg-zinc-100'>
           <NavigationMenu.Trigger className='group flex items-center space-x-1'>
             <div className='text-sm font-semibold text-black'>Download</div>
-            <ChevronDownIcon className='group-rdx-state-open:rotate-180 h-3 w-3' strokeWidth={3} />
+            <ChevronDownIcon className='h-3 w-3 group-rdx-state-open:rotate-180' strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className='absolute mt-2 -ml-2 w-fit  rounded bg-white p-1 text-sm font-medium drop-shadow-lg'>
             <div className='space-y-1'>
@@ -86,7 +86,7 @@ function Yes() {
         <NavigationMenu.Item className='rounded px-2 py-1 hover:bg-zinc-100'>
           <NavigationMenu.Trigger className='group flex items-center space-x-1'>
             <div className='text-sm font-semibold text-black'>Solutions</div>
-            <ChevronDownIcon className='group-rdx-state-open:rotate-180 h-3 w-3' strokeWidth={3} />
+            <ChevronDownIcon className='h-3 w-3 group-rdx-state-open:rotate-180' strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className='absolute mt-2 -ml-2 w-fit  rounded bg-white p-1 font-medium drop-shadow-lg'>
             <div className='flex divide-x divide-zinc-300'>
@@ -150,7 +150,7 @@ function Yes() {
         <NavigationMenu.Item className='rounded px-2 py-1 hover:bg-zinc-100'>
           <NavigationMenu.Trigger className='group flex items-center space-x-1'>
             <div className='text-sm font-semibold text-black'>Resources</div>
-            <ChevronDownIcon className='group-rdx-state-open:rotate-180 h-3 w-3' strokeWidth={3} />
+            <ChevronDownIcon className='h-3 w-3 group-rdx-state-open:rotate-180' strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className='absolute mt-2 -ml-2 w-fit  rounded bg-white p-1 text-sm font-medium drop-shadow-lg'>
             <div className='space-y-1'>

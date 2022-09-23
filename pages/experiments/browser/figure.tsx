@@ -1,6 +1,6 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { SubTitle } from '@/components/DesignSystem';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 export default function Figure() {
   return (

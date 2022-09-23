@@ -1,6 +1,6 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { SubTitle } from '@/components/DesignSystem';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 export default function Position() {
   return (
@@ -66,8 +66,8 @@ export default function Position() {
           </div>
         </Wrapper>
         <Wrapper title='image on background'>
-          <div className='relative h-96'>
-            <Image src='/new/images/hero.jpg' objectFit='cover' alt='' layout='fill' />
+          <div className='relative h-96 overflow-hidden'>
+            <Image src='/images/hero.jpg' width='5760' height='3840' alt='' />
 
             <div className='absolute inset-0 bg-zinc-800/80 text-zinc-200'>
               <div className='p-5'>

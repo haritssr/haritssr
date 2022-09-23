@@ -1,6 +1,6 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 export default function Newspaper() {
   return (

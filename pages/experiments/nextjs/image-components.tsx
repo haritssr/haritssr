@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { ExternalLink, SubTitle, Topic } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Link from 'next/link';
 
 const ProductData = [
@@ -22,12 +22,12 @@ export default function ImageComponents() {
       <SubTitle>
         My implementation of
         <ExternalLink
-          href='https://nextjs.org/docs/api-reference/next/image'
+          href='https://nextjs.org/docs/api-reference/next/future/image'
           name='Nextjs Image Components'
         />
       </SubTitle>
       <Topic name='Grid System' />
-      <main className='xs:grid-cols-2 z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pb-20 sm:grid-cols-3 lg:grid-cols-4'>
+      <main className='z-0 mx-auto grid max-w-4xl grid-cols-1 gap-5 pb-20 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
         {ProductData.map(a => (
           <ProductCard key={a.id} href={a.href} src={a.src} name={a.name} />
         ))}
@@ -40,7 +40,7 @@ export default function ImageComponents() {
           src='/images/hero.jpg'
           height='582'
           width='1007'
-          objectFit='cover'
+          // objectFit='cover'
           quality={75}
           className='overflow-hidden rounded-md'
           blurDataURL='/images/hero.jpg'
@@ -66,10 +66,10 @@ export default function ImageComponents() {
             <Image
               alt='Image'
               src='/images/hero.jpg'
-              layout='fill'
-              height='582'
-              width='1007'
-              objectFit='cover'
+              // layout='fill'
+              height='5760'
+              width='3840'
+              // objectFit='cover'
               quality={75}
               className='overflow-hidden rounded-md'
               blurDataURL='/images/hero.jpg'
@@ -89,13 +89,15 @@ const ProductCard = ({ href, src, name }) => {
         <Image
           alt='Street with car'
           src={src}
-          layout='fill'
-          objectFit='cover'
+          // layout='fill'
+          // objectFit='cover'
           quality={75}
           className='rounded-md'
           priority
           blurDataURL={src}
           placeholder='blur'
+          width='4493'
+          height='4493'
         />
         <div className='absolute flex h-full w-full items-center justify-center bg-gradient-to-b from-white/0 via-black/20 to-white/0 text-center text-lg text-white hover:via-black/30'>
           <div>{name}</div>

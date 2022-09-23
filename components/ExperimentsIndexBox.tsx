@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Link from 'next/link';
 
 export default function ExperimentsIndexBox({
@@ -17,7 +17,7 @@ export default function ExperimentsIndexBox({
   ver: string;
 }) {
   return (
-    <div className='flex flex-col justify-between rounded-lg border border-zinc-300 bg-gradient-to-bl from-zinc-50/50 to-white p-3'>
+    <div className='flex flex-col justify-between rounded-lg border border-zinc-200 bg-gradient-to-bl from-zinc-50 via-white  to-white p-3 shadow'>
       <div className='space-y-1 sm:space-y-2'>
         <div className='flex items-center space-x-2'>
           <Image src={imgSrc} height={20} width={20} alt={title} />
@@ -31,7 +31,7 @@ export default function ExperimentsIndexBox({
         </div>
       </div>
       <Link href={href}>
-        <a className='group mt-7 flex w-full cursor-pointer items-center justify-center rounded-md border border-zinc-300 bg-zinc-100 px-3 pb-[5px]  pt-1.5 text-sm font-semibold text-zinc-700 duration-200 hover:bg-zinc-200'>
+        <a className='group mt-7 flex w-full cursor-pointer items-center justify-center rounded-md border border-zinc-300 bg-zinc-200/80 px-3 pb-[5px]  pt-1.5 text-sm font-medium text-zinc-800 duration-75 hover:bg-zinc-100 active:scale-95'>
           <p className='xs:hidden'>See all</p>
           <p className='hidden xs:inline'>See experiments</p>
         </a>

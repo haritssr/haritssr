@@ -1,6 +1,6 @@
 import { InternalLink } from './DesignSystem';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 interface ExperimentsBoxType {
   title: string;
@@ -11,7 +11,7 @@ interface ExperimentsBoxType {
 
 export default function ExperimentBox({ title, links, description, logoSrc }: ExperimentsBoxType) {
   return (
-    <article className='h-fit mt-12' id={`#${title.toLowerCase().replace(' ', '-')}`}>
+    <article className='mt-12 h-fit' id={`#${title.toLowerCase().replace(' ', '-')}`}>
       <div className='mb-1 flex w-full flex-col items-center space-y-1 sm:mb-2'>
         <div className='flex w-full items-center space-x-2'>
           <div className='text-left text-3xl font-bold text-zinc-800'>{title}</div>
@@ -19,9 +19,11 @@ export default function ExperimentBox({ title, links, description, logoSrc }: Ex
             <Image src={logoSrc} height={22} width={22} alt={title} />
           </div>
         </div>
-        <div className='w-full text-left text-[17px] text-zinc-700 sm:text-base'>{description}</div>
+        <p className='w-full text-left text-[17px] leading-relaxed text-zinc-700 sm:text-base'>
+          {description}
+        </p>
       </div>
-      <ol className='mt-5 grid w-full grid-cols-1 gap-2 sm:grid-cols-2'>
+      <ol className='mt-5 grid w-full grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3'>
         {links.map(link => (
           <li key={link.name} className='text-zinc-600'>
             <InternalLink

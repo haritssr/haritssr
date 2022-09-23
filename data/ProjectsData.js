@@ -1,5 +1,5 @@
 import { LogoHaritssr, LogoHarisStudio, LogoHarisLab } from '@/Icons';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 //It is used in index.tsx
 
