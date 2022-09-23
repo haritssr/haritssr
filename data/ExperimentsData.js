@@ -24,7 +24,6 @@ export const ExperimentsData = [
       { name: 'YouTube Thumbnail' },
       { name: 'Newspaper' },
       { name: 'Centering Div' },
-      { name: 'Snap Scrolling' },
     ],
   },
   {
@@ -50,6 +49,10 @@ export const ExperimentsData = [
       { name: 'useContext Dark Mode' },
       { name: 'Reacting To Input' },
       { name: 'Edit Profile' },
+      { name: 'useContextExample' },
+      { name: 'forwardRefExample' },
+      { name: 'useImperativeHandle' },
+      { name: 'useMemoExample' },
     ],
   },
   {
