@@ -25,6 +25,8 @@ export default function LayoutNodeExperiments({
   const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
   const image = '/images/hero.jpg';
   const yes = `${title} - Harits Syah`;
+  const router = useRouter();
+
   return (
     <div className='bg-white'>
       <Head>
@@ -47,7 +49,11 @@ export default function LayoutNodeExperiments({
 
       <GlobalHead />
 
-      <div className='sticky top-[48px] z-40 mb-5 w-full border-b  border-zinc-300 bg-gray-100/80  py-1.5 saturate-150 backdrop-blur'>
+      <div
+        className={`${
+          router.asPath === '/' ? '' : 'sticky top-0 sm:top-[45px]'
+        } z-40 mb-5 w-full border-b border-zinc-200 bg-white/80 py-2 saturate-150 backdrop-blur`}
+      >
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
           <BackToExperiments />
           <PageTitle domain={domain} />
@@ -65,16 +71,14 @@ export default function LayoutNodeExperiments({
 const BackToExperiments = () => {
   return (
     <Link href='/#experiments'>
-      <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
+      <a className='-ml-2 flex w-1/3 cursor-pointer items-center sm:-ml-0 sm:w-1/3'>
         <span className=' inline-block w-full'>
           <span className='group flex items-center'>
             <ChevronLeftIcon
-              className='-ml-0.5 h-6 w-6 text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'
+              className='-ml-0.5 h-6 w-6 text-blue-600 sm:group-hover:text-blue-400'
               strokeWidth={2}
             />
-            <div className='-ml-1 truncate text-blue-600 hover:no-underline sm:hover:underline sm:group-hover:text-blue-700'>
-              Experiments
-            </div>
+            <div className='-ml-1 text-blue-600 sm:group-hover:text-blue-400'>Experiments</div>
           </span>
         </span>
       </a>
@@ -84,9 +88,9 @@ const BackToExperiments = () => {
 
 const PageTitle = ({ domain }: { domain: string }) => {
   return (
-    <div className=' inline w-3/4 sm:w-2/3'>
+    <div className=' inline w-1/3 sm:w-1/3'>
       <div className='flex flex-col items-center justify-center -space-y-1 py-0.5 sm:flex-row sm:-space-y-0 sm:space-x-2 sm:py-0'>
-        <div className=' -ml-1 text-lg font-semibold text-zinc-800 sm:-mr-3'>{domain}</div>
+        <div className='-ml-1 truncate text-lg font-semibold text-zinc-800 sm:-mr-3'>{domain}</div>
       </div>
     </div>
   );
@@ -94,16 +98,19 @@ const PageTitle = ({ domain }: { domain: string }) => {
 
 const PageSource = ({ href }: { href: string }) => {
   return (
-    <div className='flex w-1/4 justify-end sm:w-1/6 '>
+    <div className='flex w-1/3 justify-end sm:w-1/3 '>
       <cite className='not-italic'>
         <a
           title='This page source code'
           href={href}
           target='_blank'
           rel='noopener noreferrer'
-          className='group flex w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'
+          className='group flex w-fit cursor-pointer items-center text-blue-600  active:text-blue-600'
         >
-          <GitHubIcon className='h-5 w-5 cursor-pointer text-blue-600 hover:text-blue-700' />
+          <span className='mr-2 hidden text-blue-600 group-hover:text-blue-400 sm:inline-block'>
+            Source
+          </span>{' '}
+          <GitHubIcon className='h-5 w-5 cursor-pointer text-blue-600 group-hover:text-blue-400' />
         </a>
       </cite>
     </div>
