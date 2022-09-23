@@ -18,7 +18,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const router = useRouter();
   const iconColor = router.asPath === to ? 'text-blue-600' : 'text-zinc-500';
   function capitalizeFirstLetter(to: string) {
-    return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
+    return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
   }
 
   return (
