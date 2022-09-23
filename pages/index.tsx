@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import ContactComponent from '@/components/ContactComponent';
 import { ExternalLink } from '@/components/DesignSystem';
 import {
@@ -58,13 +58,11 @@ const Wrapper = ({
   return (
     <div id={id}>
       <div className='mb-6 space-y-2'>
-        <div className='flex items-center justify-between'>
-          <div className='text-2xl font-semibold text-zinc-800 sm:text-3xl'>{topic} </div>
-          {/* <div className='cursor-pointer text-xl font-medium text-blue-600 hover:underline'>
-            See All
-          </div> */}
+        <div className='flex items-center'>
+          <span className='text-2xl font-semibold text-zinc-800'>
+            {topic}.<span className='ml-1 text-2xl font-medium text-zinc-500 '>{subtitle}</span>
+          </span>
         </div>
-        <div className='text-2xl font-medium text-zinc-400 sm:text-3xl '>{subtitle}</div>
       </div>
       <div className={className}>{children}</div>
     </div>
@@ -75,7 +73,7 @@ const Contacts = () => {
   return (
     <div
       id='contacts'
-      className='grid grid-cols-1 gap-10 rounded-lg border border-zinc-300 bg-gradient-to-t from-zinc-100 via-white to-white px-5 py-10 shadow sm:grid-cols-2 sm:gap-0 sm:bg-gradient-to-bl sm:via-zinc-50 sm:p-10'
+      className='grid grid-cols-1 gap-10 rounded-lg border border-zinc-200 bg-gradient-to-t from-zinc-100 via-white to-white px-5 py-10 shadow sm:grid-cols-2 sm:gap-0 sm:bg-gradient-to-bl sm:via-zinc-50 sm:p-10'
     >
       <section className='mx-auto flex flex-col sm:mx-0 sm:mr-10  sm:px-0 sm:pl-4'>
         <article className=' mb-5 flex justify-center object-center sm:flex sm:h-auto sm:items-center sm:justify-start'>
@@ -92,7 +90,7 @@ const Contacts = () => {
         <article className='space-y-2 text-center sm:text-left'>
           <div className='text-2xl font-bold text-zinc-800'>Harits Syah</div>
           <div className='flex items-center space-x-1 text-lg text-zinc-500'>
-            <div className='div'>South Tangerang City, Indonesia</div>{' '}
+            <div className='div'>South Tangerang, Indonesia</div>{' '}
             <a
               href='https://goo.gl/maps/zNCvRABE5bfJHPcbA'
               target='_blank'
@@ -351,7 +349,7 @@ const Reading = () => {
           ))}
         </section>
         <h2 className='mt-10 mb-3 text-2xl font-semibold text-zinc-700'>
-          Computer Science Concepts
+          My Computer Science Concepts Learning Sources
         </h2>
         <section className='flex flex-col  sm:pl-10'>
           <ul className='list-outside list-disc space-y-2.5 pl-4'>
