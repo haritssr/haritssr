@@ -1,6 +1,11 @@
 export const LogoHaritssr = () => {
   return (
-    <svg className='h-5 w-5' viewBox='0 0 300 300' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      className='h-5 w-5 rounded-full shadow'
+      viewBox='0 0 300 300'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <circle cx='150' cy='150' r='150' fill='#93C5FD' />
       <circle cx='150' cy='150' r='100' fill='#3B82F6' />
       <circle cx='150' cy='150' r='50' fill='#1D4ED8' />

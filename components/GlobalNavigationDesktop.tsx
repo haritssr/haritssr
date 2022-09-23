@@ -15,8 +15,8 @@ const GlobalNavigationDesktopLink = ({ href, title }: { href: string; title: str
           // router.asPath.substring(0, title.length + 1) are /experiments and /blog, only
           // `/${title.toLowerCase()}` are /experiments and /blog, only
           router.asPath.substring(0, title.length + 1) === `/${title.toLowerCase()}`
-            ? 'text-white'
-            : 'text-zinc-400 hover:text-zinc-300'
+            ? 'text-zinc-400'
+            : 'text-zinc-600 hover:text-zinc-400'
         } text-tiny `}
       >
         {title}
@@ -28,7 +28,7 @@ const GlobalNavigationDesktopLink = ({ href, title }: { href: string; title: str
 export default function GlobalNavigationDesktop() {
   return (
     <div className='hidden w-full md:block'>
-      <div className='flex flex-row items-center justify-center  space-x-5   sm:space-x-10'>
+      <div className='flex flex-row items-center justify-center  space-x-5   sm:space-x-8'>
         <GlobalNavigationDesktopLink href='/#projects' title='Projects' />
         <GlobalNavigationDesktopLink href='/#experiments' title='Experiments' />
         <GlobalNavigationDesktopLink href='/#blog' title='Blog' />
