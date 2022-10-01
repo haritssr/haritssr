@@ -24,6 +24,7 @@ export const ExperimentsData = [
       { name: 'YouTube Thumbnail' },
       { name: 'Newspaper' },
       { name: 'Centering Div' },
+      { name: 'Columns' },
     ],
   },
   {
