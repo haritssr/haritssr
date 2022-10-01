@@ -20,7 +20,7 @@ export function TitleBack({ name, href }: { name: string; href: string }) {
 }
 
 export function SubTitle({ children }: { children: React.ReactNode }) {
-  return <div className='mb-8 break-words pb-5 text-zinc-600 space-y-1'>{children}</div>;
+  return <div className='mb-8 space-y-1 break-words pb-5 text-zinc-600'>{children}</div>;
 }
 
 export const Topic = ({ name }: { name: string }) => {
@@ -47,7 +47,7 @@ export function InternalLink({ name, href }: { name: string; href: string }) {
       <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:underline sm:text-base'>
         <p>{name}</p>
         <ChevronRightIcon
-          className='h-4 w-4 pt-[0.25px] text-blue-600 group-hover:underline'
+          className='h-4 w-4 pt-[0.25px] text-blue-600 duration-200 group-hover:translate-x-1 group-hover:underline'
           strokeWidth={2}
         />
       </a>
