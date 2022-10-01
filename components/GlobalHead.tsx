@@ -7,10 +7,12 @@ export default function GlobalHead() {
   return (
     <nav
       className={`${
-        router.asPath === '/' ? 'sticky top-0' : 'hidden sm:sticky sm:top-0 sm:block'
-      } z-30 border-b border-zinc-200  bg-zinc-50/50 saturate-150 backdrop-blur-lg`}
+        router.asPath === '/' || '#experiments'
+          ? 'sticky top-0'
+          : 'hidden sm:sticky sm:top-0 sm:block'
+      } z-30 border-b border-zinc-200  bg-zinc-100/50 saturate-150 backdrop-blur-lg`}
     >
-      <div className='mx-auto flex max-w-4xl flex-row items-center justify-between px-3 py-2.5 sm:px-5'>
+      <div className='mx-auto flex max-w-4xl flex-row items-center justify-between px-3 py-2.5 sm:px-0'>
         <Link href='/'>
           <a className='flex items-center space-x-2 sm:w-1/4'>
             <LogoHaritssr />
