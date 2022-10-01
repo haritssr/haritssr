@@ -79,15 +79,15 @@ const Contacts = () => {
         />
       </section>
       <section className='space-y-3'>
-        <div className='font-semibold text-zinc-800'>Harits Syah</div>
-        <div className=' text-zinc-400'>Frontend Engineer</div>
-        <div className=' text-zinc-400'>
+        <div className='text-xl font-bold text-zinc-800'>Harits Syah</div>
+        <div className=' text-zinc-600'>Frontend Engineer</div>
+        <div className=' text-zinc-600'>
           Founder,{' '}
-          <span className='cursor-pointer font-semibold text-zinc-500 hover:underline'>
+          <span className='cursor-pointer font-semibold text-zinc-600 hover:underline'>
             Haris Lab
           </span>
         </div>
-        <div className=' text-zinc-400'>Tangerang, Indonesia</div>
+        <div className=' text-zinc-600'>Tangerang, Indonesia</div>
       </section>
       <section className='space-y-3'>
         {ContactData.map(c => (
