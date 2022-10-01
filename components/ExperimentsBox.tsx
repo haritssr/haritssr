@@ -12,14 +12,14 @@ interface ExperimentsBoxType {
 export default function ExperimentBox({ title, links, description, logoSrc }: ExperimentsBoxType) {
   return (
     <article className='mt-12 h-fit' id={`#${title.toLowerCase().replace(' ', '-')}`}>
-      <div className='mb-1 flex w-full flex-col items-center space-y-1 sm:mb-2'>
-        <div className='flex w-full items-center space-x-2'>
+      <div className='mb-1 flex w-full flex-col items-center space-y-1 sm:mb-5'>
+        <div className='mb-2 flex w-full items-center space-x-2'>
           <div className='text-left text-3xl font-bold text-zinc-800'>{title}</div>
           <div className='flex items-center'>
             <Image src={logoSrc} height={22} width={22} alt={title} />
           </div>
         </div>
-        <p className='w-full text-left text-[17px] leading-relaxed text-zinc-700 sm:text-base'>
+        <p className=' w-full text-left text-[17px] leading-relaxed text-zinc-700 sm:text-base'>
           {description}
         </p>
       </div>
