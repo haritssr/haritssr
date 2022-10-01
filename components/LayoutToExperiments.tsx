@@ -49,13 +49,13 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
           router.asPath === '/' ? '' : 'sticky top-0 sm:top-[45px]'
         } z-40 mb-5 w-full border-b  border-zinc-200 bg-white/80 py-2 saturate-150 backdrop-blur`}
       >
-        <section className='mx-auto flex max-w-4xl items-center justify-between px-3 sm:px-5'>
+        <section className='mx-auto flex max-w-4xl items-center justify-between px-3 sm:px-0'>
           <BackToExperiments domain={domain} />
           <PageTitle inView={inView} title={title} />
           <PageSource href={githubRoute} />
         </section>
       </div>
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-5'>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 sm:px-0'>
         <h1
           className='z-40 mx-auto mt-12 mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800'
           ref={ref}
