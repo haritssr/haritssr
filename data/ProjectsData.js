@@ -20,7 +20,7 @@ export const ProjectsData = [
     title: 'Haris Studio',
     description: 'Create, booking, and maintaining website.',
     period: 'Jan 2022 - Now',
-    status: 'Development',
+    status: 'Suspended',
     imgSrc: <LogoHarisStudio />,
     industry: 'Website agency',
     hrefCaseStudy: '/experiments',
