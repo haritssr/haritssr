@@ -57,6 +57,15 @@ html {
   scroll-padding-top: 90px;
 }
 
+//mobile
+/* html { scroll-padding-top: 90px;} */
+
+//sm
+/* @media (min-width: 640px) { html { scroll-padding-top: 120px;} } */
+
+//xl
+/* @media (min-width: 1280px) { html { scroll-padding-top: 150px;} } */
+
 body {
   padding: 0;
   margin: 0;
