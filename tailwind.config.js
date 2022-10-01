@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const {fontFamily } = require('tailwindcss/defaultTheme');
+
 
 module.exports = {
   mode: 'jit',
@@ -39,7 +41,8 @@ module.exports = {
         90: '90',
       },
       fontFamily: {
-        inter: ['Inter'],
+        // inter: ['Inter'],
+        sans: ['Inter', ...fontFamily.sans],
       },
       fontSize: {
         tiny: '.900rem',
