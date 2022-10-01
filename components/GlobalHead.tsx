@@ -12,7 +12,7 @@ export default function GlobalHead() {
           : 'hidden sm:sticky sm:top-0 sm:block'
       } z-30 border-b border-zinc-200  bg-zinc-100/50 saturate-150 backdrop-blur-lg`}
     >
-      <div className='mx-auto flex max-w-4xl flex-row items-center justify-between px-3 py-2.5 sm:px-0'>
+      <div className='mx-auto flex max-w-4xl flex-row items-center justify-between px-3 py-2.5 lg:px-0'>
         <Link href='/'>
           <a className='flex items-center space-x-2 sm:w-1/4'>
             <LogoHaritssr />
@@ -21,7 +21,7 @@ export default function GlobalHead() {
         </Link>
         <div className='flex w-3/5 cursor-pointer justify-center sm:hidden'>
           <div className='group flex items-center space-x-1.5'>
-            <div className='group text-base text-zinc-700'>Harits Syah</div>
+            <div className='group text-base text-zinc-800'>Harits Syah</div>
           </div>
         </div>
         <a
