@@ -8,12 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --collectCoverage",
-    "type-coverage":"type-coverage",
+    "type-coverage": "type-coverage",
     "ts-coverage": "typescript-coverage-report"
   },
   "dependencies": {
-    "@codesandbox/sandpack-client": "^0.17.0",
-    "@codesandbox/sandpack-react": "^0.17.0",
     "@emotion/react": "^11.10.0",
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
