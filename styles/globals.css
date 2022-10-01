@@ -57,13 +57,13 @@ html {
   scroll-padding-top: 90px;
 }
 
-//mobile
+/* mobile */
 /* html { scroll-padding-top: 90px;} */
 
-//sm
+/* sm */
 /* @media (min-width: 640px) { html { scroll-padding-top: 120px;} } */
 
-//xl
+/* xl */
 /* @media (min-width: 1280px) { html { scroll-padding-top: 150px;} } */
 
 body {
