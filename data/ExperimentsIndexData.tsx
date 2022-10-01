@@ -53,7 +53,7 @@ export const ExperimentIndexData = [
   {
     sum: ExperimentsData[6].links.length,
     title: 'Mantine',
-    imgSrc: '/icons/mantine-logo.svg',
+    imgSrc: '/icons/mantine.svg',
     href: '/experiments/mantine',
     type: 'UI components',
     ver: '5.3.1',

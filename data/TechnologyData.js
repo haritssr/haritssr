@@ -48,7 +48,7 @@ export const CodeManagement = [
   },
   {
     href: 'https://www.github.com',
-    imgSrc: '/icons/github.png',
+    imgSrc: '/icons/github.svg',
     name: 'GitHub',
   },
 
@@ -72,7 +72,7 @@ export const ComponentLibrary = [
   },
   {
     href: 'https://mantine.dev/',
-    imgSrc: '/icons/mantine-logo.svg',
+    imgSrc: '/icons/mantine.svg',
     name: 'Mantine',
   },
 ];

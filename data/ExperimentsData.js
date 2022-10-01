@@ -111,7 +111,7 @@ export const ExperimentsData = [
   {
     id: 7,
     title: 'Mantine',
-    logoSrc: '/icons/mantine-logo.svg',
+    logoSrc: '/icons/mantine.svg',
     description:
       'These are my exploration of headless user interface components (components UI without bound to any styling) of Mantine, each pages might have more than one example since I tried manipulating one thing in many ways. My implementation using Tailwind CSS or Emotion CSS-in-JS.',
     links: [{ name: 'Carousel' }],
