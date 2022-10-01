@@ -2,7 +2,6 @@ import Head from 'next/head';
 import GlobalHead from './GlobalHead';
 import { useRouter } from 'next/router';
 import Footer from './Footer';
-import GlobalNavigationMobile from './GlobalNavigationMobile';
 
 interface LayoutType {
   children: React.ReactNode;
@@ -39,7 +38,6 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
       <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>{children}</main>
 
       <Footer />
-      <GlobalNavigationMobile />
     </div>
   );
 }
