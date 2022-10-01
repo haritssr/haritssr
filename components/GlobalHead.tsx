@@ -1,17 +1,9 @@
 import { GitHubIcon, LogoHaritssr } from './Icons';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 export default function GlobalHead() {
-  const router = useRouter();
   return (
-    <nav
-      className={`${
-        router.asPath === '/' || '#experiments'
-          ? 'sticky top-0'
-          : 'hidden sm:sticky sm:top-0 sm:block'
-      } z-30 border-b border-zinc-200  bg-zinc-100/50 saturate-150 backdrop-blur-lg`}
-    >
+    <nav className='z-30 border-b border-zinc-200  bg-zinc-100/50 saturate-150 backdrop-blur-lg'>
       <div className='mx-auto flex max-w-4xl flex-row items-center justify-between px-3 py-2.5 lg:px-0'>
         <Link href='/'>
           <a className='flex items-center space-x-2 sm:w-1/4'>

@@ -51,7 +51,7 @@ export default function LayoutNodeExperiments({
 
       <div
         className={`${
-          router.asPath === '/' ? '' : 'sticky top-0 sm:top-[45px]'
+          router.asPath === '/' ? '' : 'sticky top-0 sm:top-0'
         } z-40 mb-5 w-full border-b border-zinc-200 bg-white/80 py-2 saturate-150 backdrop-blur`}
       >
         <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
