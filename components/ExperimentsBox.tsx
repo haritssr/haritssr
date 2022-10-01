@@ -23,7 +23,7 @@ export default function ExperimentBox({ title, links, description, logoSrc }: Ex
           {description}
         </p>
       </div>
-      <ol className='mt-5 grid w-full grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3'>
+      <ol className='col-1 sm:col-2 mt-5 grid w-full gap-2'>
         {links.map(link => (
           <li key={link.name} className='text-zinc-600'>
             <InternalLink

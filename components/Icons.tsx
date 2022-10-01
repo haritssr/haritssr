@@ -1,7 +1,7 @@
 export const LogoHaritssr = () => {
   return (
     <svg
-      className='h-5 w-5 rounded-full shadow'
+      className='h-5 w-5 rounded-full'
       viewBox='0 0 300 300'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

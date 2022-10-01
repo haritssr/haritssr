@@ -1,4 +1,5 @@
-import { ExternalLinkIcon } from '@heroicons/react/outline';
+import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/outline';
+import Image from 'next/future/image';
 import { ReactElement } from 'react';
 
 interface ProjectBoxTypes {
@@ -21,26 +22,31 @@ export default function ProjectsBox({
   industry,
 }: ProjectBoxTypes) {
   return (
-    <section className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 shadow'>
-      <section className=' flex flex-col justify-between  bg-white p-4'>
-        <div className='mb-2 flex items-center justify-between'>
-          <div className='text-xl font-semibold text-zinc-700'>{title}</div>
-          {imgSrc}
+    <a
+      href={href}
+      target='_blank'
+      rel='noopener noreferrer'
+      className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 hover:border-zinc-500'
+    >
+      <section className=' flex flex-col justify-between  bg-white p-3'>
+        <div className='mb-4 flex items-center justify-between space-x-2'>
+          <div className='flex items-center space-x-2'>
+            {imgSrc}
+            <div className='truncate text-lg font-semibold text-zinc-600'>{title}</div>
+          </div>
+          <ExternalLinkIcon
+            strokeWidth={1.5}
+            className='h-5 w-5 text-zinc-400 duration-100 group-hover:translate-x-0.5'
+          />
         </div>
 
-        <div className='sm:text-tiny mb-4 text-zinc-600'>{description}</div>
-        <a
-          href={href}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='sm:text-tiny flex items-center text-blue-500 hover:cursor-pointer hover:underline'
-        >
-          {href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
+        <div className='mb-2 text-zinc-600 sm:text-tiny'>{description}</div>
 
-          <ExternalLinkIcon className='ml-1 h-4 w-4 pt-0.5 text-blue-500' />
-        </a>
+        <div className='text-blue-500 sm:text-tiny'>
+          {href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
+        </div>
       </section>
-      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-zinc-50 px-4 py-3 text-zinc-700 sm:text-[12px]'>
+      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-zinc-50 px-3 py-3 text-zinc-500 sm:text-[12px]'>
         <article className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
             <div className='font-semibold text-zinc-700'>Period</div>
@@ -63,6 +69,6 @@ export default function ProjectsBox({
           <div>{industry}</div>
         </div>
       </section>
-    </section>
+    </a>
   );
 }
