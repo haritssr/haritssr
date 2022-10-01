@@ -2,11 +2,11 @@ import Head from 'next/head';
 import GlobalHead from './GlobalHead';
 import Footer from './Footer';
 import React from 'react';
-import GlobalNavigationMobile from './GlobalNavigationMobile';
 import { ChevronLeftIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { GitHubIcon } from './Icons';
+import { useInView } from 'react-intersection-observer';
 
 interface LayoutToExperimentsType {
   children: React.ReactNode;
@@ -20,6 +20,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
   const image = '/images/hero.jpg';
   const yes = `${title} - Harits Syah`;
   const router = useRouter();
+  const { ref, inView } = useInView({ rootMargin: '-90px' });
 
   return (
     <div className='bg-white'>
@@ -48,35 +49,37 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
           router.asPath === '/' ? '' : 'sticky top-0 sm:top-[45px]'
         } z-40 mb-5 w-full border-b  border-zinc-200 bg-white/80 py-2 saturate-150 backdrop-blur`}
       >
-        <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
+        <section className='mx-auto flex max-w-4xl items-center justify-between px-3 sm:px-5'>
           <BackToExperiments domain={domain} />
-          <PageTitle title={title} />
+          <PageTitle inView={inView} title={title} />
           <PageSource href={githubRoute} />
         </section>
       </div>
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>
-        <h1 className='z-40 mx-auto mt-12 mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800'>
+      <main className='mx-auto min-h-screen w-full max-w-4xl px-5'>
+        <h1
+          className='z-40 mx-auto mt-12 mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800'
+          ref={ref}
+        >
           {title}
         </h1>
         {children}
       </main>
 
       <Footer />
-      <GlobalNavigationMobile />
     </div>
   );
 }
 const BackToExperiments = ({ domain }: { domain: string }) => {
   return (
     <Link href={`/experiments/${domain.toLowerCase().replace(/\s/g, '-')}`}>
-      <a className='-ml-2 flex w-1/4 cursor-pointer items-center sm:-ml-0 sm:w-1/6'>
+      <a className='-ml-1 flex w-1/4 cursor-pointer items-center sm:w-1/6'>
         <span className=' inline-block w-full'>
           <span className='group flex items-center'>
             <ChevronLeftIcon
-              className='-ml-0.5 h-6 w-6 text-blue-600 sm:group-hover:text-blue-400'
+              className='-ml-0.5 h-6 w-6 text-blue-600 sm:group-hover:text-purple-800'
               strokeWidth={2}
             />
-            <div className='-ml-1 truncate text-blue-600 sm:group-hover:text-blue-400 '>
+            <div className='-ml-1 truncate text-blue-600 sm:group-hover:text-purple-800 '>
               {domain}
             </div>
           </span>
@@ -86,11 +89,17 @@ const BackToExperiments = ({ domain }: { domain: string }) => {
   );
 };
 
-const PageTitle = ({ title }: { title: string }) => {
+const PageTitle = ({ title, inView }: { title: string; inView: any }) => {
   return (
     <div className='sm:2/4  -mr-2 inline w-1/2'>
       <div className='flex justify-center py-0.5 sm:py-0'>
-        <div className=' truncate text-center text-lg font-semibold text-zinc-800'>{title}</div>
+        <div
+          className={`truncate text-center text-lg font-semibold  ${
+            inView ? 'text-transparent' : 'text-zinc-800'
+          }`}
+        >
+          {title}
+        </div>
       </div>
     </div>
   );
@@ -105,12 +114,10 @@ const PageSource = ({ href }: { href: string }) => {
           href={href}
           target='_blank'
           rel='noopener noreferrer'
-          className='group flex w-fit cursor-pointer items-center text-blue-600 active:text-blue-600'
+          className='flex w-fit cursor-pointer items-center text-blue-600 hover:text-purple-800'
         >
-          <span className='mr-2 hidden text-blue-600 group-hover:text-blue-400 sm:inline-block'>
-            Source
-          </span>{' '}
-          <GitHubIcon className='h-5 w-5 cursor-pointer text-blue-600 group-hover:text-blue-400' />
+          <span className='mr-2 hidden sm:inline-block'>Source</span>{' '}
+          <GitHubIcon className='h-5 w-5 cursor-pointer  ' />
         </a>
       </cite>
     </div>

@@ -88,6 +88,7 @@ export const ExperimentsData = [
       { name: 'Text Editing' },
       { name: 'YouTube Embed' },
       { name: 'Intersection Observer API' },
+      { name: 'Scroll Title' },
     ],
   },
   {
@@ -200,6 +201,6 @@ export const ExperimentsData = [
     title: 'React Aria',
     logoSrc: '/icons/react-aria.png',
     description: 'UI Components Library',
-    links: [{ name: 'Example 1' }, { name: 'Example 2' }],
+    links: [{ name: 'Calendar' }, { name: 'Range Calendar' }],
   },
 ];
