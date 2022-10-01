@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+#typescript-coverage
+/coverage-ts
+/coverage
+
 # testing
 /coverage
 
