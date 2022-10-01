@@ -21,7 +21,7 @@ export default function ContactComponent({
     >
       <section className='flex items-center space-x-3 overflow-hidden sm:space-x-3'>
         <Image src={imgSrc} height={20} width={20} alt={name} />
-        <div className=' text-zinc-400 hover:text-zinc-500 hover:underline'>{name}</div>
+        <div className=' text-zinc-700 hover:text-zinc-500 hover:underline'>{name}</div>
       </section>
     </a>
   );
