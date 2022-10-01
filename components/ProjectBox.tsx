@@ -26,7 +26,7 @@ export default function ProjectsBox({
       href={href}
       target='_blank'
       rel='noopener noreferrer'
-      className='mx-auto flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 hover:border-zinc-500'
+      className='group flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 selection:mx-auto hover:border-zinc-500'
     >
       <section className=' flex flex-col justify-between  bg-white p-3'>
         <div className='mb-4 flex items-center justify-between space-x-2'>
@@ -36,7 +36,7 @@ export default function ProjectsBox({
           </div>
           <ExternalLinkIcon
             strokeWidth={1.5}
-            className='h-5 w-5 text-zinc-400 duration-100 group-hover:translate-x-0.5'
+            className='h-5 w-5 text-zinc-400 duration-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
           />
         </div>
 
