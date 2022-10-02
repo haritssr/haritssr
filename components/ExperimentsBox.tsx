@@ -14,7 +14,7 @@ export default function ExperimentBox({ title, links, description, logoSrc }: Ex
     <article className='mt-12 h-fit' id={`#${title.toLowerCase().replace(' ', '-')}`}>
       <div className='mb-1 flex w-full flex-col items-center space-y-1 sm:mb-5'>
         <div className='mb-2 flex w-full items-center space-x-2'>
-          <div className='text-left text-3xl font-bold text-zinc-800'>{title}</div>
+          <div className='text-left text-2xl font-bold text-zinc-800 sm:text-3xl'>{title}</div>
           <div className='flex items-center'>
             <Image src={logoSrc} height={22} width={22} alt={title} />
           </div>

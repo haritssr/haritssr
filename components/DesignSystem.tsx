@@ -44,10 +44,10 @@ export const SubTopic = ({ children }: { children: React.ReactNode }) => {
 export function InternalLink({ name, href }: { name: string; href: string }) {
   return (
     <Link href={href}>
-      <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:underline sm:text-base'>
+      <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:text-purple-600 hover:underline sm:text-base'>
         <p>{name}</p>
         <ChevronRightIcon
-          className='h-4 w-4 pt-[0.25px] text-blue-600 duration-200 group-hover:translate-x-1 group-hover:underline'
+          className='h-4 w-4 pt-[0.25px] text-blue-600 duration-200 group-hover:translate-x-1 group-hover:text-purple-600 group-hover:underline'
           strokeWidth={2}
         />
       </a>
@@ -75,21 +75,21 @@ export function ErrorBagde({ name }: { name: string }) {
 
 export function ExternalLink({ name, href, big }: { name: string; href: string; big?: boolean }) {
   return (
-    <cite className='not-italic'>
+    <cite className='group not-italic'>
       {' '}
       <a
         title={href}
         href={href}
         target='_blank'
         rel='noopener noreferrer'
-        className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline active:text-blue-600'
+        className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline group-hover:text-purple-600'
       >
         <span className='flex items-center'>
           <span className={`${big ? 'text-lg font-medium' : 'text-base'}`}>{name}</span>
           <ExternalLinkIcon
             className={`${
               big ? 'h-[18px] w-[18px]' : 'h-4 w-4'
-            } ml-1  text-blue-600 group-hover:underline`}
+            } ml-1  text-blue-600 group-hover:text-purple-600`}
             strokeWidth={`${big ? 2.2 : 2}`}
           />
         </span>
