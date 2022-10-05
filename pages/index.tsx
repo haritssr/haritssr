@@ -248,13 +248,13 @@ const DesignSystem = () => {
           <div className='text-zinc-500'>Internal Link</div>
         </div>
         <div className='space-y-1'>
-          <button className='rounded-full bg-blue-600 px-4 py-1 text-white hover:bg-blue-500'>
+          <button className='rounded-md bg-blue-600 px-4 py-1 text-white hover:bg-blue-500'>
             Button
           </button>
           <div className='text-zinc-500'>Primary Button</div>
         </div>
         <div className='space-y-1'>
-          <button className='rounded-full border border-blue-600 bg-white px-4 py-1 text-blue-600 hover:bg-blue-100'>
+          <button className='rounded-md border border-blue-600 bg-white px-4 py-1 text-blue-600 hover:bg-blue-100'>
             Button
           </button>
           <div className='text-zinc-500'>Secondary Button</div>

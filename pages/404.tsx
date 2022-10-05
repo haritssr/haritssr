@@ -10,7 +10,7 @@ export default function NotFoundPage() {
 
         <div
           onClick={() => history.back()}
-          className='flex cursor-pointer items-center rounded-full border border-blue-600 px-6 pt-1 pb-1.5 text-blue-600 hover:bg-blue-100'
+          className='flex cursor-pointer items-center rounded-md border border-blue-600 px-3 py-1.5 text-blue-600 hover:bg-blue-100'
         >
           <div className=''>Back</div>
         </div>
