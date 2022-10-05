@@ -54,6 +54,7 @@ export const ExperimentsData = [
       { name: 'forwardRefExample' },
       { name: 'useImperativeHandle' },
       { name: 'useMemoExample' },
+      { name: 'Font Mixer' },
     ],
   },
   {
