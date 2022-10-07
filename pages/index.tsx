@@ -162,8 +162,8 @@ const Experiments = () => {
     >
       {ExperimentIndexData.map(({ title, href, imgSrc, sum, type, ver }) => (
         <ExperimentsIndexBox
-          ver={ver}
           key={title}
+          ver={ver}
           href={href}
           imgSrc={imgSrc}
           title={title}
@@ -231,7 +231,7 @@ const DesignSystem = () => {
       <section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
         {color.map(data => (
           <div className='space-y-1' key={data.name}>
-            <div className={`bg-[${data.hex}] h-16 w-16 rounded-md border`} />
+            <div style={{ backgroundColor: data.hex }} className={` h-16 w-16 rounded-md border`} />
             <div className='text-zinc-700'>{data.hex}</div>
             <div className='text-zinc-500'>{data.name}</div>
           </div>
