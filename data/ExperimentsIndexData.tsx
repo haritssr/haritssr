@@ -98,4 +98,12 @@ export const ExperimentIndexData = [
     type: 'UI components',
     ver: '3.19.0',
   },
+  {
+    sum: ExperimentsData[14].links.length,
+    title: 'KaTeX',
+    imgSrc: '/icons/react-aria.png',
+    href: '/experiments/katex',
+    type: 'Math Symbols',
+    ver: '0.16.0',
+  },
 ];

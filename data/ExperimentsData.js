@@ -15,7 +15,6 @@ export const ExperimentsData = [
       { name: 'Position' },
       { name: 'Apple NavBar' },
       { name: 'Blurry' },
-      { name: 'Dark Mode' },
       { name: 'Floating Labels' },
       { name: 'Glowing Background' },
       { name: 'Grid' },
@@ -25,6 +24,7 @@ export const ExperimentsData = [
       { name: 'Newspaper' },
       { name: 'Centering Div' },
       { name: 'Columns' },
+      { name: 'Tailwind vs Apple Color' },
     ],
   },
   {
@@ -204,5 +204,12 @@ export const ExperimentsData = [
     logoSrc: '/icons/react-aria.png',
     description: 'UI Components Library',
     links: [{ name: 'Calendar' }, { name: 'Range Calendar' }],
+  },
+  {
+    id: 15,
+    title: 'KaTeX',
+    logoSrc: '/icons/react-aria.png',
+    description: 'Math Symbols',
+    links: [{ name: 'Basic' }],
   },
 ];
