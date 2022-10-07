@@ -3,7 +3,7 @@ import { ExternalLinkIcon } from '@heroicons/react/outline';
 
 export const TechStackComponent = ({ title, data }) => {
   return (
-    <div className='h-fit overflow-hidden rounded-md border border-zinc-300 bg-gradient-to-bl from-zinc-50 via-white to-white'>
+    <div className='h-fit overflow-hidden rounded-md border border-apple-gray4 bg-white'>
       <div className='truncate px-3 pt-2 text-tiny font-semibold text-zinc-700 sm:px-3 sm:text-base'>
         {title}
       </div>

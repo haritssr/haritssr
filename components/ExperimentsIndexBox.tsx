@@ -18,15 +18,16 @@ export default function ExperimentsIndexBox({
   ver: string;
 }) {
   return (
+    // bg-gradient-to-bl from-zinc-50 via-white to-white
     <Link href={href}>
-      <a className='group flex flex-col justify-between space-y-1 rounded-md border border-zinc-300 bg-gradient-to-bl from-zinc-50 via-white to-white py-3 pl-3 pr-2 hover:border-zinc-500 sm:space-y-2'>
+      <a className='group flex flex-col justify-between space-y-1 rounded-md border border-apple-gray6 bg-apple-gray6 py-3 pl-3 pr-2 hover:border-apple-gray1 sm:space-y-2'>
         <div className='flex items-center justify-between space-x-2'>
           <div className='flex items-center space-x-2'>
             <Image src={imgSrc} height={18} width={18} alt={title} />
           </div>
           <div className='flex items-center'>
-            <div className='text-zinc-400'>{sum}</div>
-            <ChevronRightIcon className='h-5 w-5 text-zinc-400 duration-100 group-hover:translate-x-0.5' />
+            <div className='text-apple-gray1'>{sum}</div>
+            <ChevronRightIcon className='h-5 w-5 text-apple-gray1' />
           </div>
         </div>
         <div className='truncate text-lg font-semibold text-zinc-700'>{title}</div>

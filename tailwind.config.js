@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const {fontFamily } = require('tailwindcss/defaultTheme');
-
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   mode: 'jit',
@@ -19,6 +18,7 @@ module.exports = {
     //   blue: theme('colors.blue.400'),
     //   gray: theme('colors.gray.400'),
     // }),
+
     textIndent: (theme, { negative }) => ({
       ...{
         no: '0rem',
@@ -50,6 +50,16 @@ module.exports = {
       },
       scale: {
         101: '1.01',
+      },
+      colors: {
+        apple: {
+          gray1: '#8e8e93',
+          gray2: '#aeaeb2',
+          gray3: '#c7c7cc',
+          gray4: '#d1d1d6',
+          gray5: '#e5e5ea',
+          gray6: '#f2f2f7',
+        },
       },
     },
   },
