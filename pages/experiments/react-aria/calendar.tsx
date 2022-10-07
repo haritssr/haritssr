@@ -1,6 +1,6 @@
 import { SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Calendar from '../../../comp/Calendar.js';
+import Calendar from '../../../utils/react-aria/Calendar.js';
 import { today, getLocalTimeZone } from '@internationalized/date';
 
 export default function CalendarC() {
