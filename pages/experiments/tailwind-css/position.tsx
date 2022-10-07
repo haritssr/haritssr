@@ -4,7 +4,7 @@ import Image from 'next/future/image';
 
 export default function Position() {
   return (
-    <LayoutToExperiments title='Position' domain='Browser'>
+    <LayoutToExperiments title='Position' domain='Tailwind CSS'>
       <SubTitle>CSS position with Tailwind CSS</SubTitle>
       <div className='space-y-10'>
         <Wrapper title='relative + absolute'>
