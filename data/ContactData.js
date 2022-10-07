@@ -23,12 +23,12 @@ export const ContactData = [
     title: 'Twitter',
     href: 'https://www.twitter.com/haritssr',
     imgSrc: '/icons/twitter.svg',
-    name: 'twitter/haritssr',
+    name: 'twitter.com/haritssr',
   },
   {
     title: 'GitHub',
     href: 'https://www.github.com/haritssr',
     imgSrc: '/icons/github.svg',
-    name: 'github/haritssr',
+    name: 'github.com/haritssr',
   },
 ];
