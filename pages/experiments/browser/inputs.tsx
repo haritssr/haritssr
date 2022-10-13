@@ -1,6 +1,5 @@
 import { SubTitle, Topic } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { SearchIcon } from '@heroicons/react/outline';
 import React, { useState } from 'react';
 
 export default function Inputs() {

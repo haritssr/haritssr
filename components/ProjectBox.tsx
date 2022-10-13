@@ -1,4 +1,4 @@
-import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/outline';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import Image from 'next/future/image';
 import { ReactElement } from 'react';
 
@@ -32,9 +32,9 @@ export default function ProjectsBox({
         <div className='mb-4 flex items-center justify-between space-x-2'>
           <div className='flex items-center space-x-2'>
             {imgSrc}
-            <div className='truncate text-lg font-semibold text-zinc-600'>{title}</div>
+            <div className='truncate text-lg font-semibold text-zinc-700'>{title}</div>
           </div>
-          <ExternalLinkIcon
+          <ArrowTopRightOnSquareIcon
             strokeWidth={1.5}
             className='h-5 w-5 text-apple-gray1 duration-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
           />
@@ -42,7 +42,7 @@ export default function ProjectsBox({
 
         <div className='mb-2 text-zinc-600 sm:text-tiny'>{description}</div>
 
-        <div className='text-blue-500 sm:text-tiny'>
+        <div className='text-[#06c] sm:text-tiny'>
           {href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
         </div>
       </section>

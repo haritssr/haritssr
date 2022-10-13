@@ -1,6 +1,6 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { BeakerIcon } from '@heroicons/react/outline';
+import { BeakerIcon } from '@heroicons/react/24/outline';
 
 export default function GlowingBackground() {
   return (

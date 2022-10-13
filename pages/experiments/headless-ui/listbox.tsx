@@ -2,21 +2,8 @@ import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { Listbox } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
-
-/*
-<Listbox>
-<Listbox.Button/>
-<Listbox.Options>
-  <Listbox.Option/>
-<Listbox.Options/>
-*/
-
-/*
-Still not understand how to use render prop of 'selected' in <Listbox.Option/>
-Not yet using 'horizontal, value, unmount, static' prop & 'open' render prop
-*/
 
 export default function ExportedSelect() {
   return (

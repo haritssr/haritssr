@@ -1,7 +1,7 @@
 import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { XIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import * as Dialog from '@radix-ui/react-dialog';
 
 export default function ExportedDialog() {
@@ -27,14 +27,14 @@ export default function ExportedDialog() {
           Edit Profile
         </Dialog.Trigger>
         <Dialog.Overlay className='fixed inset-0 bg-gray-900/70' />
-        <Dialog.Content className='max-w-screen-xs fixed top-1/2 left-1/2 max-h-[80vh] -translate-x-1/2 -translate-y-1/2 rounded-md bg-white px-5 py-4 shadow-xl'>
+        <Dialog.Content className='fixed top-1/2 left-1/2 max-h-[80vh] max-w-screen-xs -translate-x-1/2 -translate-y-1/2 rounded-md bg-white px-5 py-4 shadow-xl'>
           <div className='space-y-3'>
             <div className='flex items-center justify-between'>
               <Dialog.Title className='text-lg font-semibold text-gray-700'>
                 Are you sure want to Edit your profile ?
               </Dialog.Title>
               <Dialog.Close>
-                <XIcon className='h-7 w-7 rounded-full p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-700' />
+                <XMarkIcon className='h-7 w-7 rounded-full p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-700' />
               </Dialog.Close>
             </div>
             <Dialog.Description className='text-gray-500'>

@@ -5,7 +5,7 @@ import { ExternalLink, SubTitle } from '@/components/DesignSystem';
 //For ComboboxExample1
 import { Dialog, Combobox, Transition } from '@headlessui/react';
 import { Fragment, SetStateAction, useState, useEffect } from 'react';
-import { SearchIcon } from '@heroicons/react/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import ExplanationList from '@/components/ExplanationList';
 
@@ -99,7 +99,7 @@ const ComboboxExample1 = ({ projects }) => {
             className='relative mx-auto max-w-xl divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black/5'
           >
             <div className='flex items-center px-4'>
-              <SearchIcon className='h-6 w-6 text-gray-500' />
+              <MagnifyingGlassIcon className='h-6 w-6 text-gray-500' />
               <Combobox.Input
                 onChange={(event: useStateStringType) => {
                   setQuery(event.target.value);

@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { ChevronLeftIcon, ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/outline';
-import { useState } from 'react';
+import { ChevronLeftIcon, ChevronRightIcon, ArrowUpRightIcon } from '@heroicons/react/24/outline';
 
 export function TitleBack({ name, href }: { name: string; href: string }) {
   return (
@@ -44,10 +43,10 @@ export const SubTopic = ({ children }: { children: React.ReactNode }) => {
 export function InternalLink({ name, href }: { name: string; href: string }) {
   return (
     <Link href={href}>
-      <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-blue-600 hover:text-purple-600 hover:underline sm:text-base'>
+      <a className='group flex w-fit cursor-pointer items-center justify-start text-[17px] text-[#06c] hover:text-blue-700 hover:underline sm:text-base'>
         <p>{name}</p>
         <ChevronRightIcon
-          className='h-4 w-4 pt-[0.25px] text-blue-600 duration-200 group-hover:translate-x-1 group-hover:text-purple-600 group-hover:underline'
+          className='h-4 w-4 pt-[0.25px] text-[#06c] duration-200 group-hover:translate-x-1 group-hover:text-blue-700 group-hover:underline'
           strokeWidth={2}
         />
       </a>
@@ -82,14 +81,14 @@ export function ExternalLink({ name, href, big }: { name: string; href: string; 
         href={href}
         target='_blank'
         rel='noopener noreferrer'
-        className='group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline group-hover:text-purple-600'
+        className='group inline-block w-fit cursor-pointer items-center text-[#06c] hover:underline group-hover:text-blue-700'
       >
         <span className='flex items-center'>
           <span className={`${big ? 'text-lg font-medium' : 'text-base'}`}>{name}</span>
-          <ExternalLinkIcon
+          <ArrowUpRightIcon
             className={`${
-              big ? 'h-[18px] w-[18px]' : 'h-4 w-4'
-            } ml-1  text-blue-600 group-hover:text-purple-600`}
+              big ? 'h-[18px] w-[18px]' : 'h-3 w-3'
+            } ml-1  text-[#06c] group-hover:text-blue-700`}
             strokeWidth={`${big ? 2.2 : 2}`}
           />
         </span>
