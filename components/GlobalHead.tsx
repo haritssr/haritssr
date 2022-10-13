@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function GlobalHead() {
   return (
     <nav className='z-30 border-b border-zinc-200  bg-apple-gray6/50 saturate-150 backdrop-blur-lg'>
-      <div className='mx-auto flex max-w-4xl flex-row items-center justify-between px-3 py-2.5 lg:px-0'>
+      <div className='mx-auto flex max-w-5xl flex-row items-center justify-between px-3 py-2.5 lg:px-0'>
         <Link href='/'>
           <a className='flex items-center space-x-2 sm:w-1/4'>
             <LogoHaritssr />

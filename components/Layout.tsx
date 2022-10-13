@@ -35,7 +35,7 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
 
       <GlobalHead />
 
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>{children}</main>
+      <main className='mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0'>{children}</main>
 
       <Footer />
     </div>
