@@ -54,7 +54,7 @@ const Wrapper = ({
   return (
     <div id={id}>
       <div className='mb-6 space-y-2'>
-        <span className='text-2xl font-bold text-zinc-800 sm:text-3xl'>{topic}</span>
+        <h1 className='text-2xl font-bold text-zinc-800 sm:text-3xl'>{topic}</h1>
       </div>
       <div className={className}>{children}</div>
     </div>

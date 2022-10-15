@@ -18,7 +18,7 @@ export const TechStackComponent = ({ title, data }) => {
             className='group flex w-auto items-center justify-between space-x-2 rounded-md py-1.5 px-1 hover:bg-zinc-50 sm:px-2'
           >
             <section className='flex items-center space-x-2 overflow-hidden'>
-              <Image src={d.imgSrc} height={18} width={18} alt={d.name} />
+              <Image src={d.imgSrc} height={18} width={18} alt={d.name} className='aspect-auto' />
               <div className='truncate text-zinc-500 group-hover:text-zinc-700'>{d.name}</div>
             </section>
             <ArrowTopRightOnSquareIcon

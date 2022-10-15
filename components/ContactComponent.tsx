@@ -20,8 +20,8 @@ export default function ContactComponent({
       className='group flex w-auto'
     >
       <section className='flex items-center space-x-3 overflow-hidden sm:space-x-3'>
-        <Image src={imgSrc} height={20} width={20} alt={name} />
-        <div className=' text-zinc-700 hover:text-zinc-500 hover:underline'>{name}</div>
+        <Image src={imgSrc} height={20} width={20} alt={name} className='aspect-auto' />
+        <div className=' text-zinc-800 hover:text-zinc-500 hover:underline'>{name}</div>
       </section>
     </a>
   );

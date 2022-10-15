@@ -33,7 +33,7 @@ export default function ExportedCollapsible() {
           <InternalLink name='Dropdown Menu' href='/work/radix-ui/dropdown-menu' />
           <InternalLink name='Blurry Effect' href='/work/tailwindcss/blurry' />
         </Collapsible.Content>
-        <Collapsible.Trigger className='py-1 text-rose-400 hover:underline'>
+        <Collapsible.Trigger className='py-1 text-lg text-rose-500 hover:underline sm:text-base'>
           {open ? 'Collapse' : 'Load more...'}
         </Collapsible.Trigger>
       </Collapsible.Root>

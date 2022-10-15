@@ -40,30 +40,30 @@ export default function ProjectsBox({
           />
         </div>
 
-        <div className='mb-2 text-zinc-600 sm:text-tiny'>{description}</div>
+        <div className='mb-2 text-zinc-800 sm:text-tiny'>{description}</div>
 
         <div className='text-[#06c] sm:text-tiny'>
           {href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
         </div>
       </section>
-      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-apple-gray6 px-3 py-3 text-zinc-500 sm:text-[12px]'>
+      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-apple-gray6 px-3 py-3 text-zinc-800 sm:text-[12px]'>
         <article className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
-            <div className='font-semibold text-zinc-700'>Period</div>
+            <div className='font-semibold text-zinc-800'>Period</div>
             <div>:</div>
           </div>
           <div>{period}</div>
         </article>
         <article className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
-            <div className='font-semibold text-zinc-700'>Status</div>
+            <div className='font-semibold text-zinc-800'>Status</div>
             <div>:</div>
           </div>
           <div>{status}</div>
         </article>
         <div className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
-            <div className='font-semibold text-zinc-700'>Industry</div>
+            <div className='font-semibold text-zinc-800'>Industry</div>
             <div>:</div>
           </div>
           <div>{industry}</div>

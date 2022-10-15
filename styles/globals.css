@@ -3,6 +3,14 @@
 @tailwind utilities;
 @tailwind base;
 
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: optional;
+  src: url(/Inter.var.woff2) format('woff2');
+}
+
 input[type='text'],
 input[type='search'],
 input[type='url'],
