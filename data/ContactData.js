@@ -1,5 +1,3 @@
-// used in index.tsx
-
 export const ContactData = [
   {
     title: 'Personal Website',
