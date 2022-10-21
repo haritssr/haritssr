@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout';
+import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 export default function NotFoundPage() {
   return (
@@ -10,9 +11,10 @@ export default function NotFoundPage() {
 
         <div
           onClick={() => history.back()}
-          className='flex cursor-pointer items-center rounded-md border border-blue-600 px-3 py-1.5 text-blue-600 hover:bg-blue-100'
+          className='flex cursor-pointer items-center space-x-1 rounded-full bg-blue-600 py-1 pl-3 pr-5 text-white hover:bg-blue-500'
         >
-          <div className=''>Back</div>
+          <ChevronLeftIcon className='h-4 w-4' strokeWidth={3} />
+          <div className='pb-[1px]'>Back</div>
         </div>
       </div>
     </Layout>
