@@ -31,6 +31,7 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
         <meta name='twitter:title' content={browserTitle} />
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={image} />
+        <link rel='manifest' href='/static/favicons/site.webmanifest' />
       </Head>
 
       <GlobalHead />
