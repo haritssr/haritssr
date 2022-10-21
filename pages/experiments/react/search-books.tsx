@@ -3,6 +3,7 @@ import LayoutToExperiments from '@/components/LayoutToExperiments';
 import React, { useRef, useState } from 'react';
 import data from '../../../data/Search2Data.json';
 import { Combobox } from '@headlessui/react';
+import ExplanationList from '@/components/ExplanationList';
 
 interface DataType {
   author: string;
@@ -45,7 +46,12 @@ const Search2: React.FC<{}> = (): JSX.Element => {
   // const parsedData = JSON.parse(data);
   return (
     <LayoutToExperiments title='Search Books' domain='React'>
-      <SubTitle>Include : case sensitive (lowercase). Not include: space sensitive. </SubTitle>
+      <SubTitle>
+        <ExplanationList>
+          <li>Include : case sensitive (lowercase).</li>
+          <li>Not include: space sensitive.</li>
+        </ExplanationList>
+      </SubTitle>
       <Combobox value={data['title']} as='div' onChange={() => null}>
         <div className='group mx-auto flex items-center focus:border-neutral-800 sm:w-1/3'>
           <Combobox.Input
@@ -88,7 +94,7 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 export default Search2;
 
 // MANUAL CLOSE ICON
-// Rendered via wordEntered state
+// Rendered via 'wordEntered' state
 // Closed via clearInput()
 // Placed after input field
 // {
