@@ -1,29 +1,17 @@
-import Layout from '@/components/Layout';
-import Image from 'next/future/image';
 import ContactComponent from '@/components/ContactComponent';
-import { ExternalLink, InternalLink } from '@/components/DesignSystem';
-import {
-  Backend,
-  DataVisulization,
-  Hosting,
-  MainTools,
-  CodeManagement,
-  ComponentLibrary,
-  ProgrammingLanguage,
-  Styling,
-  Animation,
-  FrontendFramework,
-  Documentation,
-  Testing,
-} from '../data/TechnologyData';
-import { ContactData } from '../data/ContactData';
+import { ExternalLink, InternalLink, InternalLinkWithoutArrow } from '@/components/DesignSystem';
+import Layout from '@/components/Layout';
 import ProjectsBox from '@/components/ProjectBox';
-import { ProjectsData } from '../data/ProjectsData';
-import { MathPhysicsBooks, TechicalBooksData, UIUXBooksData, OthersBookData } from 'data/BooksData';
-import React from 'react';
 import { TechStackComponent } from '@/components/TechStackComponents';
-import { ExperimentsData } from 'data/ExperimentsData';
 import { BriefcaseIcon, BuildingOfficeIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MathPhysicsBooks, OthersBookData, TechicalBooksData, UIUXBooksData } from 'data/BooksData';
+import { ExperimentsData } from 'data/ExperimentsData';
+import Image from 'next/future/image';
+import Link from 'next/link';
+import React from 'react';
+import { ContactData } from '../data/ContactData';
+import { ProjectsData } from '../data/ProjectsData';
+import { TechStackData } from '../data/TechStackData';
 
 export default function Home() {
   return (
@@ -54,7 +42,9 @@ const Wrapper = ({
   return (
     <div id={id}>
       <div className='mb-6 space-y-2'>
-        <h1 className='text-2xl font-bold text-zinc-800 sm:text-3xl'>{topic}</h1>
+        <Link href={`/#${id}`}>
+          <a className='text-2xl font-bold text-zinc-800 sm:text-3xl'>{topic}</a>
+        </Link>
       </div>
       <div className={className}>{children}</div>
     </div>
@@ -82,15 +72,14 @@ const Contacts = () => {
         <div className='text-2xl font-bold text-zinc-800'>Harits Syah</div>
         <div className='flex items-center space-x-1'>
           <BriefcaseIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
-          <div className=' text-zinc-800'>Frontend Engineer</div>
+          <div className=' text-zinc-800'>
+            Software Engineer, <InternalLinkWithoutArrow href='#techstack' name='Web' />
+          </div>
         </div>
         <div className='flex items-center space-x-1'>
           <BuildingOfficeIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
           <div className=' text-zinc-800'>
-            Founder,{' '}
-            <span className='cursor-pointer font-semibold text-zinc-800 hover:underline'>
-              Haris Lab
-            </span>
+            Founder, <ExternalLink href='https://www.harislab.com' name='Haris Lab' />
           </div>
         </div>
         <div className='flex items-center space-x-1'>
@@ -143,24 +132,28 @@ const Experiments = () => {
       className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
     >
       {ExperimentsData.map(experiment => (
-        <article className='rounded-md border border-apple-gray5 px-3 py-2' key={experiment.id}>
-          <section className='mb-1 flex space-x-1.5'>
-            <div className='text-xl font-semibold text-zinc-700'>{experiment.title}</div>
-            <section className='flex items-center'>
-              <Image src={experiment.logoSrc} height={18} width={18} alt={experiment.title} />
-            </section>
+        <article
+          className='overflow-hidden rounded-md border border-apple-gray4'
+          key={experiment.id}
+        >
+          <section className='mb-1 flex justify-between  border-b border-apple-gray4 px-3 py-1.5'>
+            <div className='flex items-center space-x-2'>
+              <div className='font-semibold text-zinc-700'>{experiment.title}</div>
+              <section className='flex items-center'>
+                <Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
+              </section>
+            </div>
+            <div className='text-tiny text-zinc-600'>{experiment.links.length}</div>
           </section>
-          <ol className='space-y-1.5'>
+          <ol className='space-y-1 px-3 py-2'>
             {experiment.links.map(link => (
-              <li key={link.name} className='text-zinc-600'>
-                <InternalLink
-                  href={`/experiments/${experiment.title
-                    .toLowerCase()
-                    .replace(' ', '-')}/${link.name
+              <li key={link} className='text-zinc-600'>
+                <InternalLinkWithoutArrow
+                  href={`/experiments/${experiment.title.toLowerCase().replace(' ', '-')}/${link
                     .toLowerCase()
                     // /\s/g regex -> search all (g = global) whitespace, and replace them with '-'
                     .replace(/\s/g, '-')}`}
-                  name={link.name}
+                  name={link}
                 />
               </li>
             ))}
@@ -175,20 +168,11 @@ const TechStack = () => {
     <Wrapper
       id='techstack'
       topic='Tech Stack'
-      className='grid grid-flow-row grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4'
+      className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
     >
-      <TechStackComponent data={Backend} title='Backend' />
-      <TechStackComponent data={DataVisulization} title='Data Visualization' />
-      <TechStackComponent data={Animation} title='Animation' />
-      <TechStackComponent data={Hosting} title='Hosting' />
-      <TechStackComponent data={ProgrammingLanguage} title='Programming Language' />
-      <TechStackComponent data={FrontendFramework} title='Framework' />
-      <TechStackComponent data={Documentation} title='Documentation' />
-      <TechStackComponent data={Testing} title='Testing' />
-      <TechStackComponent data={ComponentLibrary} title='Component Library' />
-      <TechStackComponent data={CodeManagement} title='Code Management' />
-      <TechStackComponent data={MainTools} title='Main Tools' />
-      <TechStackComponent data={Styling} title='Styling' />
+      {TechStackData.map(data => (
+        <TechStackComponent domain={data?.domain} links={data?.links} key={data?.domain} />
+      ))}
     </Wrapper>
   );
 };
