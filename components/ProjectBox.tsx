@@ -1,5 +1,4 @@
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
-import Image from 'next/future/image';
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
 import { ReactElement } from 'react';
 
 interface ProjectBoxTypes {
@@ -32,21 +31,21 @@ export default function ProjectsBox({
         <div className='mb-4 flex items-center justify-between space-x-2'>
           <div className='flex items-center space-x-2'>
             {imgSrc}
-            <div className='truncate text-lg font-semibold text-zinc-700'>{title}</div>
+            <div className='truncate text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</div>
           </div>
-          <ArrowTopRightOnSquareIcon
+          <ArrowUpRightIcon
             strokeWidth={1.5}
             className='h-5 w-5 text-apple-gray1 duration-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
           />
         </div>
 
-        <div className='mb-2 text-zinc-800 sm:text-tiny'>{description}</div>
+        <div className='mb-2 text-zinc-800'>{description}</div>
 
-        <div className='text-[#06c] sm:text-tiny'>
+        <div className='text-[#06c]'>
           {href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
         </div>
       </section>
-      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-apple-gray6 px-3 py-3 text-zinc-800 sm:text-[12px]'>
+      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-apple-gray6 px-3 py-3 text-zinc-800 sm:text-sm'>
         <article className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
             <div className='font-semibold text-zinc-800'>Period</div>
