@@ -53,7 +53,7 @@ export default function SearchInterpol() {
       setNotices([]);
 
       const data =
-        await fetch(`https://ws-public.interpol.int/notices/v1/red?forename=${debouncedSearch}&resultPerPage=200
+        await fetch(`https://ws-public.interpol.int/notices/v1/red?forename=${debouncedSearch}&resultPerPage=50
         `).then(r => r.json());
 
       setNotices(data._embedded.notices);
