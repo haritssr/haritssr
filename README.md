@@ -12,4 +12,4 @@ Commit rules ini mengacu pada kaidah penulisan commit yang baik yaitu 50/72, 50 
 
 ## About My Repo
 
-- I tried to minimize my GitHub repo because I focus on my blog, there is where the experiments placed
+- I tried to minimize my GitHub repo because I focus on my blog, there are where the experiments placed
