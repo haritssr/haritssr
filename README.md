@@ -9,3 +9,7 @@ Commit rules ini mengacu pada kaidah penulisan commit yang baik yaitu 50/72, 50 
 - delete = menghapus sesuatu tanpa menggantinya dengan yang baru
 - bugfix = memperbaiki behaviour dari kasus yang tidak disadari/terjangkau dari hasil kode yang dibuat
 - style = redesign
+
+## About My Repo
+
+- I tried to minimize my GitHub repo because I focus on my blog, there are where the experiments placed
