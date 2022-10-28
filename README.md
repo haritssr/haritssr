@@ -1,5 +1,9 @@
 This is Harits Syah (@haritssr) personal website
 
+## Visit The Site
+
+[haritssr.vercel.app](https://haritssr.vercel.app)
+
 ## Commit Rules
 
 Commit rules ini mengacu pada kaidah penulisan commit yang baik yaitu 50/72, 50 untuk maksimal karakter commit message, dan 72 untuk maksimal karakter commit description
