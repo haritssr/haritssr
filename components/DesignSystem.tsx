@@ -65,11 +65,7 @@ export function InternalLinkWithoutArrow({
 }) {
   return (
     <Link href={href}>
-      <a
-        className={` cursor-pointer text-lg text-blue-600 hover:underline sm:text-base ${
-          block ? 'block' : 'inline'
-        }`}
-      >
+      <a className={`cursor-pointer text-blue-600 hover:underline ${block ? 'block' : 'inline'}`}>
         {name}
       </a>
     </Link>
