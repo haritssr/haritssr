@@ -1,13 +1,4 @@
-import { comments } from '../../../data/comments';
-
-export default function Comment({ comment }) {
-  return (
-    <div>
-      <div>{comment.id}</div>
-      <div>{comment.text}</div>
-    </div>
-  );
-}
+import { comments } from '../../data/comments';
 
 export async function getStaticPaths() {
   //    this is possible but unnecessary, since the data already in app
@@ -16,9 +7,9 @@ export async function getStaticPaths() {
   //   const dataArray = data.map(comment => ({ params: { commentId: comment.id } }));
   return {
     paths: [
-      { params: { commentId: 1 } },
-      { params: { commentId: 2 } },
-      { params: { commentId: 3 } },
+      { params: { commentId: '1' } },
+      { params: { commentId: '2' } },
+      { params: { commentId: '3' } },
     ],
     fallback: false,
   };
@@ -38,4 +29,13 @@ export async function getStaticProps(context) {
   const comment = comments.find(comment => comment.id === parseInt(commentId));
   console.log(comment);
   return { props: { comment } };
+}
+
+export default function Comment({ comment }) {
+  return (
+    <div>
+      <div>{comment.id}</div>
+      <div>{comment.comment}</div>
+    </div>
+  );
 }
