@@ -2,7 +2,7 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  important: true,
+  important: false,
   mode: 'jit',
   content: [
     './pages/*.tsx',
