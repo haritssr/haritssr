@@ -1,4 +1,5 @@
-import { SubTitle, Topic } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import Topic from '@/components/Topic';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import React, { useState } from 'react';
 
