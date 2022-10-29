@@ -14,7 +14,7 @@ import { makeData, Person } from '../../../utils/react-table/makeData';
 
 import { useDrag, useDrop } from 'react-dnd';
 
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function ColumnOrdering() {

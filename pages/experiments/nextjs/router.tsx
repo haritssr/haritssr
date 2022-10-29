@@ -1,4 +1,7 @@
-import { ExternalLink, SubTitle, Topic } from '@/components/DesignSystem';
+import Topic from '@/components/Topic';
+import ExternalLink from '@/components/ExternalLink';
+import SubTitle from '@/components/SubTitle';
+
 import { useRouter } from 'next/router';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 

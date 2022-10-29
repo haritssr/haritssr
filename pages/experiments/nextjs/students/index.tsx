@@ -1,5 +1,6 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { InternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import InternalLink from '@/components/InternalLink';
 import { GetStaticProps } from 'next';
 
 export default function Students({ students }) {

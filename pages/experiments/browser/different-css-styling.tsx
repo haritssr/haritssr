@@ -1,4 +1,5 @@
-import { SubTitle, Topic } from '@/components/DesignSystem';
+import Topic from '@/components/Topic';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import style from '../../../styles/different.module.css';
 

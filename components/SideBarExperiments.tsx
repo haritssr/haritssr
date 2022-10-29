@@ -2,7 +2,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ExperimentsData } from 'data/ExperimentsData';
 import Image from 'next/future/image';
-import { InternalLinkWithoutArrow } from './DesignSystem';
+import InternalLinkWithoutArrow from '@/components/InternalLinkWithoutArrow';
 
 export default function SideBarExperiments() {
   return (

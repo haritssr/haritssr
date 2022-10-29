@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import faker from '@faker-js/faker';
 import { useState } from 'react';

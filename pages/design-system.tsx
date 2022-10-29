@@ -1,4 +1,6 @@
-import { ExternalLink, InternalLink, Topic } from '@/components/DesignSystem';
+import Topic from '@/components/Topic';
+import InternalLink from '@/components/InternalLink';
+import ExternalLink from '@/components/ExternalLink';
 import { LogoHaritssr } from '@/components/Icons';
 import Layout from '@/components/Layout';
 import React from 'react';

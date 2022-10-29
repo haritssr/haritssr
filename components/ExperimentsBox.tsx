@@ -1,5 +1,4 @@
-import { InternalLink } from './DesignSystem';
-import Link from 'next/link';
+import InternalLink from '@/components/InternalLink';
 import Image from 'next/future/image';
 
 interface ExperimentsBoxType {

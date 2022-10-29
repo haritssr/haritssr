@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import React, { useRef, useState } from 'react';
 import data from '../../../data/Search2Data.json';

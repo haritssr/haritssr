@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Link from 'next/link';
 import { getSortedPostsData } from '../../../../utils/posts';

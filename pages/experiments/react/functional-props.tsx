@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ export default function FunctionalProps() {
       {/* Why we can change the items array can be other than string? */}
       <List
         className='mt-10'
-        items={['Jack', "Mo", "Ji"]}
+        items={['Jack', 'Mo', 'Ji']}
         render={(item: string) => <div>{item}</div>}
       />
     </LayoutToExperiments>

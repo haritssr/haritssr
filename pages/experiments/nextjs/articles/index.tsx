@@ -1,4 +1,5 @@
-import { ExternalCodeLink, ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Link from 'next/link';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';

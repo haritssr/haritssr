@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useRouter } from 'next/router';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 
 export default function NumberGame() {
   const router = useRouter();

@@ -8,7 +8,7 @@ import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { violet, mauve, indigo, purple, blackA } from '@radix-ui/colors';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 
 const enterFromRight = keyframes({
   from: { transform: 'translateX(200px)', opacity: 0 },

@@ -1,6 +1,7 @@
 //For ExportedComboboxHeadlessUIData
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 
 //For ComboboxExample1
 import { Dialog, Combobox, Transition } from '@headlessui/react';

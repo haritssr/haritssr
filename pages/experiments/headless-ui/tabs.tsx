@@ -1,5 +1,7 @@
 import { Tab } from '@headlessui/react';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 import ExplanationList from '@/components/ExplanationList';

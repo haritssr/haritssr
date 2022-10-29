@@ -1,5 +1,8 @@
 import ContactComponent from '@/components/ContactComponent';
-import { ExternalLink, InternalLink, InternalLinkWithoutArrow } from '@/components/DesignSystem';
+import InternalLink from '@/components/InternalLink';
+import InternalLinkWithoutArrow from '@/components/InternalLinkWithoutArrow';
+
+import ExternalLink from '@/components/ExternalLink';
 import Layout from '@/components/Layout';
 import ProjectsBox from '@/components/ProjectBox';
 import { TechStackComponent } from '@/components/TechStackComponents';

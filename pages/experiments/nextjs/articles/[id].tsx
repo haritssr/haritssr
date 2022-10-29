@@ -1,4 +1,4 @@
-import { TitleBack } from '@/components/DesignSystem';
+import TitleBack from '@/components/TitleBack';
 import Layout from '@/components/Layout';
 import { GetStaticPaths } from 'next';
 import { GetStaticProps } from 'next';

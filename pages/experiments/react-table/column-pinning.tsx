@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table';
 import { makeData, Person } from '../../../utils/react-table/makeData';
 
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 

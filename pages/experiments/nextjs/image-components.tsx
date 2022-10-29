@@ -1,6 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { ExternalLink, SubTitle, Topic } from '@/components/DesignSystem';
+import Topic from '@/components/Topic';
+import SubTitle from '@/components/SubTitle';
+
+import ExternalLink from '@/components/ExternalLink';
+
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Image from 'next/future/image';
 import Link from 'next/link';

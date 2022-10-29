@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { LightBulbIcon, MoonIcon } from '@heroicons/react/24/outline';
 import { useContext, createContext, useState } from 'react';

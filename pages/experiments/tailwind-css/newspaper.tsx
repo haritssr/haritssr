@@ -1,4 +1,5 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Image from 'next/future/image';
 

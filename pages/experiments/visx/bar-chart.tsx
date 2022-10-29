@@ -13,7 +13,8 @@ import useMeasure from 'react-use-measure';
 import { timeFormat } from 'd3-time-format';
 import { TouchEvent, MouseEvent } from 'react';
 
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 const data = appleStock.slice(0, 20);

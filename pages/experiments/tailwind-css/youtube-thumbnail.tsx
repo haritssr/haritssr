@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 export default function YoutubeThumbnail() {
@@ -6,7 +6,7 @@ export default function YoutubeThumbnail() {
     <LayoutToExperiments title='YouTube thumbnail' domain='Tailwind CSS'>
       <SubTitle>Youtube Thumbnail example</SubTitle>
 
-      <div className='relative h-[360px] w-[640px] overflow-hidden  rounded-md bg-gradient-to-br from-zinc-50 to-purple-100 border border-purple-300 shadow-md shadow-purple-100'>
+      <div className='relative h-[360px] w-[640px] overflow-hidden  rounded-md border border-purple-300 bg-gradient-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100'>
         <div>
           <Play />
         </div>

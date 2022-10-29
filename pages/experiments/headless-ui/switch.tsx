@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedSwitch() {

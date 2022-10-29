@@ -1,5 +1,9 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { ExternalLink, InternalLink, SubTitle, Topic } from '@/components/DesignSystem';
+import Topic from '@/components/Topic';
+import InternalLink from '@/components/InternalLink';
+import ExternalLink from '@/components/ExternalLink';
+import SubTitle from '@/components/SubTitle';
+
 import { useState } from 'react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import ExplanationList from '@/components/ExplanationList';

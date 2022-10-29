@@ -1,5 +1,6 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import ExternalLink from '@/components/ExternalLink';
 
 export default function Details() {
   return (

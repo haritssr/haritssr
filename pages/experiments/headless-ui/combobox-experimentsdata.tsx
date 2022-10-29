@@ -1,6 +1,8 @@
 //For ExportedComboboxExperimentsData
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import { ExperimentsData } from '../../../data/ExperimentsData.js';
 
 //For ComboboxExample1
