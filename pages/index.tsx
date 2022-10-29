@@ -55,7 +55,7 @@ const Contacts = () => {
   return (
     <div
       id='contacts'
-      className='grid grid-cols-1 gap-10 bg-white px-5 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4'
+      className='grid grid-cols-1 gap-10 bg-white px-10 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4'
     >
       <section className=''>
         <Image
@@ -128,7 +128,7 @@ const Experiments = () => {
   return (
     <Wrapper
       id='experiments'
-      topic='Experiments'
+      topic='My Experiments'
       className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
     >
       {ExperimentsData.map(experiment => (
@@ -167,7 +167,7 @@ const TechStack = () => {
   return (
     <Wrapper
       id='techstack'
-      topic='Tech Stack'
+      topic='My Tech Stack'
       className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
     >
       {TechStackData.map(data => (
