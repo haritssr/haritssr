@@ -1,7 +1,7 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useQuery } from '@tanstack/react-query';
 import { Key } from 'react';
-import { SubTitle } from '../../../components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 
 export default function UseQueryExample() {
   return (
