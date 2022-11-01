@@ -23,7 +23,7 @@ const initialTask = [
   - Ketikda klik dua kali secara cepat pada sebuah kata, malah men-select kata nya, dan tiga kali secara cepat malah menyelek kalimat, padahal mengklik pada kata di task berguna untuk menchecklist (karena pakai <label/>)
 */
 
-export default function TodoListUseReducer() {
+export default function UseReducerTodoList() {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTask);
   function handleAddTask(text) {
     dispatch({
@@ -47,7 +47,7 @@ export default function TodoListUseReducer() {
     });
   }
   return (
-    <LayoutToExperiments domain='React' title='TodoList useReducer'>
+    <LayoutToExperiments domain='React' title='useReducer Todo List'>
       <SubTitle>
         Todo list with useReducer by{' '}
         <ExternalLink

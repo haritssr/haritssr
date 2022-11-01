@@ -4,7 +4,7 @@ import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useState } from 'react';
 
-export default function ObjectStateForm() {
+export default function UseStateObjectForm() {
   const [person, setPerson] = useState({
     firstName: '',
     lastName: '',
@@ -23,7 +23,7 @@ export default function ObjectStateForm() {
     'focus:outline-none focus:ring-2 border border-zinc-400 focus:border-blue-500 focus:ring-blue-200 px-2 py-0.5 rounded text-base';
   const labelStyle = 'flex flex-col space-y-0.5 w-full sm:w-fit text-sm';
   return (
-    <LayoutToExperiments domain='React' title='Object state Form'>
+    <LayoutToExperiments domain='React' title='useState Object Form'>
       <SubTitle>
         <ExternalLink
           href='https://beta.reactjs.org/learn/updating-objects-in-state'

@@ -13,14 +13,14 @@ function Profil() {
   return <div className=''></div>;
 }
 
-export default function useContextExample() {
+export default function UseContext1() {
   const [theme, setTheme] = useState('light');
   const [currentUser, setCurrentUser] = useState({ name: 'Taylor' });
 
   return (
     <ThemeContext.Provider value={theme}>
       <AuthContext.Provider value={currentUser}>
-        <LayoutToExperiments domain='React' title='useContextExample'>
+        <LayoutToExperiments domain='React' title='useContext 1'>
           <SubTitle>Example</SubTitle>
         </LayoutToExperiments>
       </AuthContext.Provider>

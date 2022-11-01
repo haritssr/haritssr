@@ -9,7 +9,7 @@ const initialTodos = [
   { id: 2, title: 'Brew tea', done: false },
 ];
 
-export default function TodoListUseState() {
+export default function UseStateTodoList() {
   const [todos, setTodos] = useState(initialTodos);
   function handleAddTodo(title: string) {
     setTodos([
@@ -38,7 +38,7 @@ export default function TodoListUseState() {
 
   return (
     <>
-      <LayoutToExperiments title='TodoList useState' domain='React'>
+      <LayoutToExperiments title='useState Todo List' domain='React'>
         <SubTitle>Todo list with useState</SubTitle>
         <AddTodo onAddTodo={handleAddTodo} />
         <TaskList todos={todos} onChangeTodo={handleChangeTodo} onDeleteTodo={handleDeleteTodo} />

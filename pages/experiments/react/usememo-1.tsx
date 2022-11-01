@@ -2,12 +2,12 @@ import { createContext, memo, SetStateAction, useContext, useState } from 'react
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import SubTitle from '@/components/SubTitle';
 
-export default function useMemoExample() {
+export default function UseMemo1() {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
 
   return (
-    <LayoutToExperiments domain='React' title='useMemoExample'>
+    <LayoutToExperiments domain='React' title='useMemo 1'>
       <SubTitle>
         useMemo lets you skip re-rendering components when the props are unchanged
       </SubTitle>

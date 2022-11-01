@@ -4,9 +4,9 @@ import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useRouter } from 'next/router';
 import { SetStateAction, useState } from 'react';
 
-export default function ReactingToInput() {
+export default function UseStateReactingToInput() {
   return (
-    <LayoutToExperiments domain='React' title='Reacting To Input'>
+    <LayoutToExperiments domain='React' title='useState Reacting To Input'>
       <SubTitle>
         From{' '}
         <ExternalLink

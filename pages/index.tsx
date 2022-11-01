@@ -109,7 +109,7 @@ const Projects = () => {
   return (
     <Wrapper
       id='projects'
-      topic='Projects'
+      topic='My Projects'
       className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-4'
     >
       {ProjectsData.map(d => (
@@ -146,7 +146,7 @@ const Experiments = () => {
                 <Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
               </section>
             </div>
-            <div className='text-tiny text-zinc-600'>{experiment.links.length}</div>
+            <div className='text-tiny text-zinc-400'>{experiment.links.length}</div>
           </section>
           <ol className='space-y-1 px-3 py-2'>
             {experiment.links.map(link => (
@@ -225,7 +225,7 @@ const Reading = () => {
 const DesignSystem = () => {
   return (
     <Wrapper id='DesignSystem' topic='Design System' className=''>
-      <InternalLink name='Design System' href='/design-system' />
+      <InternalLink name='This & Haris Lab Site Design System' href='/design-system' />
     </Wrapper>
   );
 };
