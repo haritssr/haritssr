@@ -46,6 +46,7 @@ export const ExperimentsData = [
       'useMemo 1',
       'useImperativeHandle',
       'useReducer Todo List',
+      'useReducer Todo List Immer',
       'Submit Form',
       'Generic Select',
       'Searchable Product Data',
