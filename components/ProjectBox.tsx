@@ -35,17 +35,17 @@ export default function ProjectsBox({
           </div>
           <ArrowUpRightIcon
             strokeWidth={1.5}
-            className='h-5 w-5 text-apple-gray1 duration-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+            className='h-5 w-5 text-apple-gray1 group-hover:text-zinc-800 duration-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
           />
         </div>
 
         <div className='mb-2 text-zinc-800'>{description}</div>
 
-        <div className='text-[#06c]'>
+        <div className='text-blue-600'>
           {href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
         </div>
       </section>
-      <section className='flex flex-col space-y-0.5 border-t border-zinc-300 bg-apple-gray6 px-3 py-3 text-zinc-800 sm:text-sm'>
+      <section className='flex flex-col space-y-1.5 border-t border-zinc-300 bg-apple-gray6 px-3 py-3 text-zinc-800 sm:text-sm'>
         <article className='flex items-center justify-between'>
           <div className='flex w-1/3 items-center justify-between'>
             <div className='font-semibold text-zinc-800'>Period</div>

@@ -88,25 +88,23 @@ export default function ImageComponents() {
 
 const ProductCard = ({ href, src, name }) => {
   return (
-    <Link href={href}>
-      <a className='relative h-52 w-full'>
-        <Image
-          alt='Street with car'
-          src={src}
-          // layout='fill'
-          // objectFit='cover'
-          quality={75}
-          className='rounded-md'
-          priority
-          blurDataURL={src}
-          placeholder='blur'
-          width='4493'
-          height='4493'
-        />
-        <div className='absolute flex h-full w-full items-center justify-center bg-gradient-to-b from-white/0 via-black/20 to-white/0 text-center text-lg text-white hover:via-black/30'>
-          <div>{name}</div>
-        </div>
-      </a>
+    <Link passHref href={href} className='relative h-52 w-full'>
+      <Image
+        alt='Street with car'
+        src={src}
+        // layout='fill'
+        // objectFit='cover'
+        quality={75}
+        className='rounded-md'
+        priority
+        blurDataURL={src}
+        placeholder='blur'
+        width='4493'
+        height='4493'
+      />
+      <div className='absolute flex h-full w-full items-center justify-center bg-gradient-to-b from-white/0 via-black/20 to-white/0 text-center text-lg text-white hover:via-black/30'>
+        <div>{name}</div>
+      </div>
     </Link>
   );
 };

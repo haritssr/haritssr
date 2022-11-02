@@ -52,11 +52,14 @@ function App() {
             <div className='mt-5 mb-1 pl-2 text-zinc-500'>LINK CEPAT</div>
             <div className='space-y-1 overflow-y-auto'>
               {quickLinks.map(({ icon, name }) => (
-                <Link href='/' key={name}>
-                  <a className='flex items-center space-x-1 rounded-md px-2 py-1 text-zinc-800 hover:bg-apple-gray6'>
-                    <span>{icon}</span>
-                    <p>{name}</p>
-                  </a>
+                <Link
+                  passHref
+                  href='/'
+                  key={name}
+                  className='flex items-center space-x-1 rounded-md px-2 py-1 text-zinc-800 hover:bg-apple-gray6'
+                >
+                  <span>{icon}</span>
+                  <p>{name}</p>
                 </Link>
               ))}
             </div>

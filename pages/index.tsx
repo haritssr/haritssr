@@ -45,8 +45,8 @@ const Wrapper = ({
   return (
     <div id={id}>
       <div className='mb-6 space-y-2'>
-        <Link href={`/#${id}`}>
-          <a className='text-2xl font-bold text-zinc-800 sm:text-3xl'>{topic}</a>
+        <Link href={`/#${id}`} className='text-2xl font-bold text-zinc-800 sm:text-3xl'>
+          {topic}
         </Link>
       </div>
       <div className={className}>{children}</div>
@@ -146,7 +146,7 @@ const Experiments = () => {
                 <Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
               </section>
             </div>
-            <div className='text-tiny text-zinc-400'>{experiment.links.length}</div>
+            <div className='text-tiny text-zinc-500'>{experiment.links.length}</div>
           </section>
           <ol className='space-y-1 px-3 py-2'>
             {experiment.links.map(link => (

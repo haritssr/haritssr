@@ -10,10 +10,12 @@ export default function InternalLinkWithoutArrow({
   block?: boolean;
 }) {
   return (
-    <Link href={href}>
-      <a className={`cursor-pointer text-blue-600 hover:underline ${block ? 'block' : 'inline'}`}>
-        {name}
-      </a>
-    </Link>
+    (<Link
+      href={href}
+      className={`cursor-pointer text-blue-600 hover:underline ${block ? 'block' : 'inline'}`}>
+
+      {name}
+
+    </Link>)
   );
 }

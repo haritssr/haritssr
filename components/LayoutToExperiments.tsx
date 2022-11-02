@@ -84,20 +84,22 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 }
 const BackToExperiments = () => {
   return (
-    <Link href={`/#experiments`}>
-      <a className='-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6'>
-        <span className=' inline-block w-full'>
-          <span className='group flex items-center'>
-            <ChevronLeftIcon
-              className='-ml-0.5 h-6 w-6 text-blue-600 sm:group-hover:text-purple-800'
-              strokeWidth={2}
-            />
-            <span className=' -ml-1 block truncate text-blue-600 sm:group-hover:text-purple-800 '>
-              Experiments
-            </span>
+    <Link
+      passHref
+      href={`/#experiments`}
+      className='-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6'
+    >
+      <span className=' inline-block w-full'>
+        <span className='group flex items-center'>
+          <ChevronLeftIcon
+            className='-ml-0.5 h-6 w-6 text-blue-600 sm:group-hover:text-purple-800'
+            strokeWidth={2}
+          />
+          <span className=' -ml-1 block truncate text-blue-600 sm:group-hover:text-purple-800 '>
+            Experiments
           </span>
         </span>
-      </a>
+      </span>
     </Link>
   );
 };
