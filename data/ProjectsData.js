@@ -1,5 +1,5 @@
 import { LogoHaritssr, LogoHarisStudio, LogoHarisLab } from '@/Icons';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 export const ProjectsData = [
   {

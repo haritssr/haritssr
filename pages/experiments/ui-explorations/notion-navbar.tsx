@@ -8,7 +8,7 @@ import {
   BuildingOffice2Icon,
 } from '@heroicons/react/24/outline';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 export default function NotionNavBar() {
   return (

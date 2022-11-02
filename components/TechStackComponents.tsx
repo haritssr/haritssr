@@ -1,5 +1,5 @@
 import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { ClassAttributes, HTMLAttributes } from 'react';
 
 export const TechStackComponent = (

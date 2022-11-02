@@ -9,7 +9,7 @@ import { TechStackComponent } from '@/components/TechStackComponents';
 import { BriefcaseIcon, BuildingOfficeIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { MathPhysicsBooks, OthersBookData, TechicalBooksData, UIUXBooksData } from 'data/BooksData';
 import { ExperimentsData } from 'data/ExperimentsData';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { ContactData } from '../data/ContactData';
@@ -139,7 +139,7 @@ const Experiments = () => {
           className='overflow-hidden rounded-md border border-apple-gray4'
           key={experiment.id}
         >
-          <section className='mb-1 flex justify-between  border-b border-apple-gray4 px-3 py-1.5'>
+          <section className='mb-1 flex justify-between  border-b border-apple-gray4 px-3 py-1.5 bg-apple-gray6/50'>
             <div className='flex items-center space-x-2'>
               <div className='font-semibold text-zinc-700'>{experiment.title}</div>
               <section className='flex items-center'>

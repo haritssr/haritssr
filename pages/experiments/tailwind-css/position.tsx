@@ -1,6 +1,6 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import SubTitle from '@/components/SubTitle';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 export default function Position() {
   return (

@@ -2,7 +2,7 @@ import SubTitle from '@/components/SubTitle';
 import ExternalLink from '@/components/ExternalLink';
 import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 //type generate automatically via app.quicktype.io

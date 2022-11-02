@@ -6,7 +6,7 @@ import SubTitle from '@/components/SubTitle';
 import ExternalLink from '@/components/ExternalLink';
 
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const ProductData = [
@@ -26,7 +26,7 @@ export default function ImageComponents() {
       <SubTitle>
         My implementation of
         <ExternalLink
-          href='https://nextjs.org/docs/api-reference/next/future/image'
+          href='https://nextjs.org/docs/api-reference/next/image'
           name='Nextjs Image Components'
         />
       </SubTitle>

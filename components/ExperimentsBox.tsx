@@ -1,5 +1,5 @@
 import InternalLink from '@/components/InternalLink';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 interface ExperimentsBoxType {
   title: string;
