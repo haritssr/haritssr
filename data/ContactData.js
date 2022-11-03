@@ -29,4 +29,10 @@ export const ContactData = [
     imgSrc: '/icons/github.svg',
     name: '@haritssr',
   },
+  {
+    title: 'Lichess',
+    href: 'https://lichess.org/@/haritssr',
+    imgSrc: '/icons/lichess.png',
+    name: '@haritssr',
+  },
 ];
