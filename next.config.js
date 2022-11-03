@@ -13,7 +13,7 @@ module.exports = {
     return [
       {
         source: '/experiments',
-        destination: '/#Experiments',
+        destination: '/#experiments',
         permanent: false,
       },
     ];

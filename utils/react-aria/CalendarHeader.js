@@ -1,6 +1,6 @@
 import { useDateFormatter } from '@react-aria/i18n';
 import { Button } from './Button';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 
 export function CalendarHeader({ state, calendarProps, prevButtonProps, nextButtonProps }) {

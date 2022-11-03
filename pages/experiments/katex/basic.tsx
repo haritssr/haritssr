@@ -1,5 +1,5 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import katexify from '../../../utils/katexify';
 
 export default function ExportedDialog() {

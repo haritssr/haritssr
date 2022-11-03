@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { useRouter } from 'next/router';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 
 export default function NumberGame() {
   const router = useRouter();
@@ -57,16 +57,14 @@ export default function NumberGame() {
         </SubTitle>
         <div className='pt-24 text-center text-4xl font-bold text-green-500'>You win!</div>
 
-        <Link href='/experiments/browser/number-game'>
-          <a className='mt-5 flex justify-center'>
-            <button
-              autoFocus
-              onClick={() => router.reload()}
-              className='border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50'
-            >
-              Play Again
-            </button>
-          </a>
+        <Link passHref href='/experiments/browser/number-game' className='mt-5 flex justify-center'>
+          <button
+            autoFocus
+            onClick={() => router.reload()}
+            className='border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50'
+          >
+            Play Again
+          </button>
         </Link>
       </LayoutToExperiments>
     );

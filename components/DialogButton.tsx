@@ -1,7 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import React, { useState } from 'react';
 import ExplanationList from '@/components/ExplanationList';
-import { XIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function DialogButton({
   children,
@@ -43,7 +43,7 @@ export default function DialogButton({
                 className='rounded-full bg-zinc-200 p-2 ring-inset hover:bg-zinc-300 active:ring-1 active:ring-zinc-600'
                 onClick={() => setIsOpen(false)}
               >
-                <XIcon className='h-4 w-4 text-zinc-700 hover:text-zinc-800' strokeWidth={3} />
+                <XMarkIcon className='h-4 w-4 text-zinc-700 hover:text-zinc-800' strokeWidth={3} />
               </button>
             </div>
           </div>

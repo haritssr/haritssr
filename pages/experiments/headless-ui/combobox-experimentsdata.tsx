@@ -1,12 +1,14 @@
 //For ExportedComboboxExperimentsData
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import { ExperimentsData } from '../../../data/ExperimentsData.js';
 
 //For ComboboxExample1
 import { Dialog, Combobox, Transition } from '@headlessui/react';
 import { Fragment, SetStateAction, useState, useEffect } from 'react';
-import { SearchIcon } from '@heroicons/react/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import ExplanationList from '@/components/ExplanationList';
 
@@ -124,7 +126,7 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
           >
             {/* Search Input */}
             <div className='flex items-center space-x-2 px-4'>
-              <SearchIcon className='h-6 w-6 text-gray-500' />
+              <MagnifyingGlassIcon className='h-6 w-6 text-gray-500' />
               <Combobox.Input
                 // Just string
                 onChange={(event: useStateStringType) => {

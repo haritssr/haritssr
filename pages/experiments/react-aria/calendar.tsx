@@ -1,4 +1,4 @@
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import Calendar from '../../../utils/react-aria/Calendar.js';
 import { today, getLocalTimeZone } from '@internationalized/date';

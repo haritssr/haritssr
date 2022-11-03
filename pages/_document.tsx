@@ -3,11 +3,11 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang='en'>
         <Head>
           <link
             rel='preload'
-            href='/fonts/Inter.var.woff2'
+            href='/Inter.var.woff2'
             as='font'
             type='font/woff2'
             crossOrigin='anonymous'

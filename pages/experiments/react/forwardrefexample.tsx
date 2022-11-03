@@ -1,5 +1,5 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import { Dispatch, forwardRef, SetStateAction, useRef, useState } from 'react';
 
 interface propsType {

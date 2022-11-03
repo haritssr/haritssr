@@ -1,7 +1,9 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ChevronDownIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import * as Accordion from '@radix-ui/react-accordion';
 
 export default function ExportedAccordion() {
@@ -33,13 +35,13 @@ function AccordionComponents({ title, children }) {
     <Accordion.Root type='multiple' className='w-full sm:w-1/3'>
       <Accordion.Item value='item-1'>
         <Accordion.Header className='group'>
-          <Accordion.Trigger className='text-tiny group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-300 flex w-full items-center justify-between rounded-t-md rounded-b-md border  border-zinc-600 bg-zinc-200 px-2.5 py-2 text-left font-medium text-zinc-900 hover:bg-zinc-200'>
+          <Accordion.Trigger className='flex w-full items-center justify-between rounded-t-md rounded-b-md border border-zinc-600 bg-zinc-200 px-2.5  py-2 text-left text-tiny font-medium text-zinc-900 hover:bg-zinc-200 group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-300'>
             <div>{title}</div>
-            <ChevronDownIcon className='group-rdx-state-open:rotate-180 h-5 w-5 text-zinc-600' />
+            <ChevronDownIcon className='h-5 w-5 text-zinc-600 group-rdx-state-open:rotate-180' />
           </Accordion.Trigger>
         </Accordion.Header>
 
-        <Accordion.Content className='text-tiny rounded-b-md border-b border-l border-r border-zinc-600 bg-white p-2.5 text-zinc-700'>
+        <Accordion.Content className='rounded-b-md border-b border-l border-r border-zinc-600 bg-white p-2.5 text-tiny text-zinc-700'>
           {children}
         </Accordion.Content>
       </Accordion.Item>

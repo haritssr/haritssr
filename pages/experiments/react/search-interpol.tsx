@@ -1,7 +1,8 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 //type generate automatically via app.quicktype.io
@@ -53,7 +54,7 @@ export default function SearchInterpol() {
       setNotices([]);
 
       const data =
-        await fetch(`https://ws-public.interpol.int/notices/v1/red?forename=${debouncedSearch}&resultPerPage=200
+        await fetch(`https://ws-public.interpol.int/notices/v1/red?forename=${debouncedSearch}&resultPerPage=50
         `).then(r => r.json());
 
       setNotices(data._embedded.notices);

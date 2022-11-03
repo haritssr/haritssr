@@ -1,7 +1,8 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import * as Tooltip from '@radix-ui/react-tooltip';
-import { ExclamationCircleIcon } from '@heroicons/react/outline';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedTooltip() {

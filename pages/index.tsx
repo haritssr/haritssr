@@ -1,44 +1,32 @@
-import Layout from '@/components/Layout';
-import Image from 'next/future/image';
 import ContactComponent from '@/components/ContactComponent';
-import { ExternalLink, InternalLink, Topic } from '@/components/DesignSystem';
-import {
-  Backend,
-  DataVisulization,
-  Hosting,
-  MainTools,
-  CodeManagement,
-  ComponentLibrary,
-  ProgrammingLanguage,
-  Styling,
-  Animation,
-  FrontendFramework,
-  Documentation,
-  Testing,
-} from '../data/TechnologyData';
-import { ContactData } from '../data/ContactData';
+import InternalLink from '@/components/InternalLink';
+import InternalLinkWithoutArrow from '@/components/InternalLinkWithoutArrow';
+
+import ExternalLink from '@/components/ExternalLink';
+import Layout from '@/components/Layout';
 import ProjectsBox from '@/components/ProjectBox';
-import { ProjectsData } from '../data/ProjectsData';
-import { MathPhysicsBooks, TechicalBooksData, UIUXBooksData, OthersBookData } from 'data/BooksData';
-import React from 'react';
 import { TechStackComponent } from '@/components/TechStackComponents';
-import ExperimentsIndexBox from '@/components/ExperimentsIndexBox';
-import { ExperimentIndexData } from 'data/ExperimentsIndexData';
-import { color } from '../data/DesignSystemData';
-import { LogoHaritssr } from '@/components/Icons';
+import { BriefcaseIcon, BuildingOfficeIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MathPhysicsBooks, OthersBookData, TechicalBooksData, UIUXBooksData } from 'data/BooksData';
+import { ExperimentsData } from 'data/ExperimentsData';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import { ContactData } from '../data/ContactData';
+import { ProjectsData } from '../data/ProjectsData';
+import { TechStackData } from '../data/TechStackData';
 
 export default function Home() {
   return (
     <Layout browserTitle='Projects' description='Home'>
-      <div className='mt-5 space-y-20 sm:mt-10 '>
+      <section className='mt-5 space-y-20 sm:mt-10 '>
         <Contacts />
         <Projects />
         <Experiments />
-        {/* <Blog /> */}
         <TechStack />
         <Reading />
         <DesignSystem />
-      </div>
+      </section>
     </Layout>
   );
 }
@@ -57,7 +45,9 @@ const Wrapper = ({
   return (
     <div id={id}>
       <div className='mb-6 space-y-2'>
-        <span className='text-2xl font-bold text-zinc-800 sm:text-3xl'>{topic}</span>
+        <Link href={`/#${id}`} className='text-2xl font-bold text-zinc-800 sm:text-3xl'>
+          {topic}
+        </Link>
       </div>
       <div className={className}>{children}</div>
     </div>
@@ -68,7 +58,7 @@ const Contacts = () => {
   return (
     <div
       id='contacts'
-      className='grid grid-cols-1 gap-5 bg-white px-5 pt-5 sm:grid-cols-3 sm:px-0 sm:pt-10 lg:grid-cols-4'
+      className='grid grid-cols-1 gap-10 bg-white px-10 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4'
     >
       <section className=''>
         <Image
@@ -82,15 +72,23 @@ const Contacts = () => {
         />
       </section>
       <section className='space-y-3'>
-        <div className='text-xl font-bold text-zinc-800'>Harits Syah</div>
-        <div className=' text-zinc-700'>Frontend Engineer</div>
-        <div className=' text-zinc-700'>
-          Founder,{' '}
-          <span className='cursor-pointer font-semibold text-zinc-700 hover:underline'>
-            Haris Lab
-          </span>
+        <div className='text-2xl font-bold text-zinc-800'>Harits Syah</div>
+        <div className='flex items-center space-x-1'>
+          <BriefcaseIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
+          <div className=' text-zinc-800'>
+            Software Engineer, <InternalLinkWithoutArrow href='#techstack' name='Web' />
+          </div>
         </div>
-        <div className=' text-zinc-700'>Tangerang, Indonesia</div>
+        <div className='flex items-center space-x-1'>
+          <BuildingOfficeIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
+          <div className=' text-zinc-800'>
+            Founder, <ExternalLink href='https://www.harislab.com' name='Haris Lab' />
+          </div>
+        </div>
+        <div className='flex items-center space-x-1'>
+          <MapPinIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
+          <div className=' text-zinc-800'>Tangerang, Indonesia</div>
+        </div>
       </section>
       <section className='space-y-3'>
         {ContactData.map(c => (
@@ -111,8 +109,8 @@ const Projects = () => {
   return (
     <Wrapper
       id='projects'
-      topic='Projects'
-      className='grid grid-cols-1 gap-8 px-5  sm:grid-cols-3 sm:gap-5 sm:px-0 lg:grid-cols-4'
+      topic='My Projects'
+      className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-4'
     >
       {ProjectsData.map(d => (
         <ProjectsBox
@@ -129,65 +127,65 @@ const Projects = () => {
     </Wrapper>
   );
 };
-
-const TechStack = () => {
-  return (
-    <Wrapper
-      id='techstack'
-      topic='Tech Stack'
-      className='grid grid-flow-row grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4'
-    >
-      <TechStackComponent data={Backend} title='Backend' />
-      <TechStackComponent data={DataVisulization} title='Data Visualization' />
-      <TechStackComponent data={Animation} title='Animation' />
-      <TechStackComponent data={Hosting} title='Hosting' />
-      <TechStackComponent data={ProgrammingLanguage} title='Programming Language' />
-      <TechStackComponent data={FrontendFramework} title='Framework' />
-      <TechStackComponent data={Documentation} title='Documentation' />
-      <TechStackComponent data={Testing} title='Testing' />
-      <TechStackComponent data={ComponentLibrary} title='Component Library' />
-      <TechStackComponent data={CodeManagement} title='Code Management' />
-      <TechStackComponent data={MainTools} title='Main Tools' />
-      <TechStackComponent data={Styling} title='Styling' />
-    </Wrapper>
-  );
-};
-
 const Experiments = () => {
   return (
     <Wrapper
       id='experiments'
-      topic='Experiments'
-      className='grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 '
+      topic='My Experiments'
+      className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
     >
-      {ExperimentIndexData.map(({ title, href, imgSrc, sum, type, ver }) => (
-        <ExperimentsIndexBox
-          key={title}
-          ver={ver}
-          href={href}
-          imgSrc={imgSrc}
-          title={title}
-          sum={sum}
-          type={type}
-        />
+      {ExperimentsData.map(experiment => (
+        <article
+          className='overflow-hidden rounded-md border border-apple-gray4'
+          key={experiment.id}
+        >
+          <section className='mb-1 flex justify-between  border-b border-apple-gray4 px-3 py-1.5 bg-apple-gray6/50'>
+            <div className='flex items-center space-x-2'>
+              <div className='font-semibold text-zinc-700'>{experiment.title}</div>
+              <section className='flex items-center'>
+                <Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
+              </section>
+            </div>
+            <div className='text-tiny text-zinc-500'>{experiment.links.length}</div>
+          </section>
+          <ol className='space-y-1 px-3 py-2'>
+            {experiment.links.map(link => (
+              <li key={link} className='text-zinc-600'>
+                <InternalLinkWithoutArrow
+                  href={`/experiments/${experiment.title.toLowerCase().replace(' ', '-')}/${link
+                    .toLowerCase()
+                    // /\s/g regex -> search all (g = global) whitespace, and replace them with '-'
+                    .replace(/\s/g, '-')}`}
+                  name={link}
+                />
+              </li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </Wrapper>
+  );
+};
+const TechStack = () => {
+  return (
+    <Wrapper
+      id='techstack'
+      topic='My Tech Stack'
+      className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
+    >
+      {TechStackData.map(data => (
+        <TechStackComponent domain={data?.domain} links={data?.links} key={data?.domain} />
       ))}
     </Wrapper>
   );
 };
 
-const Blog = () => {
-  return (
-    <Wrapper id='blog' topic='Blog' className='space-y-4'>
-      <div className=''></div>
-    </Wrapper>
-  );
-};
 const Reading = () => {
   return (
     <Wrapper id='Reading' topic='Reading' className='columns-1 sm:columns-2 sm:gap-5'>
       <section>
-        <h2 className='mb-4 text-xl font-semibold text-zinc-700'>Technical Frontend Books</h2>
-        <section className='grid grid-cols-1 gap-2.5'>
+        <h2 className='mb-2 text-xl font-semibold text-zinc-700'>Technical Frontend Books</h2>
+        <section className='grid grid-cols-1 gap-2'>
           {TechicalBooksData.map(({ title, href }) => (
             <ExternalLink name={title} href={href} key={title} />
           ))}
@@ -195,8 +193,8 @@ const Reading = () => {
       </section>
 
       <section>
-        <h2 className='mt-6 mb-4 text-xl font-semibold text-zinc-700'>UI/UX Books</h2>
-        <section className='grid grid-cols-1 gap-2.5'>
+        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>UI/UX Books</h2>
+        <section className='grid grid-cols-1 gap-2'>
           {UIUXBooksData.map(({ title, href }) => (
             <ExternalLink name={title} href={href} key={title} />
           ))}
@@ -204,8 +202,8 @@ const Reading = () => {
       </section>
 
       <section>
-        <h2 className='mt-6 mb-4 text-xl font-semibold text-zinc-700'>Math & Physics Books</h2>
-        <section className='grid grid-cols-1 gap-2.5'>
+        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>Math & Physics Books</h2>
+        <section className='grid grid-cols-1 gap-2'>
           {MathPhysicsBooks.map(({ title, href }) => (
             <ExternalLink name={title} href={href} key={title} />
           ))}
@@ -213,8 +211,8 @@ const Reading = () => {
       </section>
 
       <section>
-        <h2 className='mt-6 mb-4 text-xl font-semibold text-zinc-700'>Others</h2>
-        <section className='grid grid-cols-1 gap-2.5'>
+        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>Others</h2>
+        <section className='grid grid-cols-1 gap-2'>
           {OthersBookData.map(({ title, href }) => (
             <ExternalLink key={title} name={title} href={href} />
           ))}
@@ -226,91 +224,8 @@ const Reading = () => {
 
 const DesignSystem = () => {
   return (
-    <Wrapper topic='Design System' className='' id='DesignSystem'>
-      <Topic name='Color' />
-      <section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
-        {color.map(data => (
-          <div className='space-y-1' key={data.name}>
-            <div style={{ backgroundColor: data.hex }} className={` h-16 w-16 rounded-md border`} />
-            <div className='text-zinc-700'>{data.hex}</div>
-            <div className='text-zinc-500'>{data.name}</div>
-          </div>
-        ))}
-      </section>
-      <Topic name='Button' />
-      <section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
-        <div className='space-y-1'>
-          <ExternalLink href='/' name='ExternalLink' />
-          <div className='text-zinc-500'>External Link</div>
-        </div>
-        <div className='space-y-1'>
-          <InternalLink href='/' name='InternalLink' />
-          <div className='text-zinc-500'>Internal Link</div>
-        </div>
-        <div className='space-y-1'>
-          <button className='rounded-md bg-blue-600 px-4 py-1 text-white hover:bg-blue-500'>
-            Button
-          </button>
-          <div className='text-zinc-500'>Primary Button</div>
-        </div>
-        <div className='space-y-1'>
-          <button className='rounded-md border border-blue-600 bg-white px-4 py-1 text-blue-600 hover:bg-blue-100'>
-            Button
-          </button>
-          <div className='text-zinc-500'>Secondary Button</div>
-        </div>
-      </section>
-      <Topic name='Typography' />
-      <section className='mb-10 -mt-2  grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
-        <div className='space-y-1'>
-          <div className='text-2xl font-bold text-zinc-800 sm:text-3xl'>Heading</div>
-          <div className='text-zinc-500'>Heading</div>
-        </div>
-        <div className='space-y-1'>
-          <div className='text-xl font-semibold text-zinc-700'>Heading 2</div>
-          <div className='text-zinc-500'>Heading 2</div>
-        </div>
-        <div className='space-y-1'>
-          <div className='text-[17px] leading-relaxed text-zinc-700 sm:text-base'>
-            Short paragraph example
-          </div>
-          <div className='text-zinc-500'>Paragraph</div>
-        </div>
-      </section>
-      <Topic name='Icon' />
-      <section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
-        <div className='space-y-1'>
-          <LogoHaritssr />
-          <div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
-          <div className='text-zinc-500'>Mobile</div>
-        </div>
-        <div className='space-y-1'>
-          <LogoHaritssr />
-          <div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
-          <div className='text-zinc-500'>Desktop</div>
-        </div>
-        <div className='space-y-1'>
-          <div className='w-fit rounded-md border bg-zinc-800 p-2'>
-            <LogoHaritssr />
-          </div>
-          <div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
-          <div className='text-zinc-500'>On dark background</div>
-        </div>
-        <div className='space-y-1'>
-          <div className='w-fit rounded-md border bg-white p-2'>
-            <LogoHaritssr />
-          </div>
-          <div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
-          <div className='text-zinc-500'>On light background</div>
-        </div>
-      </section>
-      <Topic name='Box' />
-      <section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
-        <div className='space-y-1'>
-          <div className='h-40 overflow-hidden rounded-md border border-zinc-300 bg-gradient-to-bl from-zinc-50 via-white to-white' />
-          <div className='text-zinc-500'>Box</div>
-        </div>
-      </section>
+    <Wrapper id='DesignSystem' topic='Design System' className=''>
+      <InternalLink name='This & Haris Lab Site Design System' href='/design-system' />
     </Wrapper>
   );
 };

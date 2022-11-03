@@ -1,4 +1,6 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { SVGProps, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';

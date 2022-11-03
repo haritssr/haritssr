@@ -31,11 +31,12 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
         <meta name='twitter:title' content={browserTitle} />
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={image} />
+        <link rel='manifest' href='/static/favicons/site.webmanifest' />
       </Head>
 
       <GlobalHead />
 
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 xl:px-0'>{children}</main>
+      <main className='mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0'>{children}</main>
 
       <Footer />
     </div>

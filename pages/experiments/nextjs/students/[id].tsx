@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout';
-import { TitleBack, Topic } from '@/components/DesignSystem';
+import TitleBack from '@/components/TitleBack';
+
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 export default function DynamicPage({ person }) {

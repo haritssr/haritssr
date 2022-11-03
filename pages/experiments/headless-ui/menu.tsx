@@ -1,8 +1,10 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { ChevronDownIcon, FireIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, FireIcon } from '@heroicons/react/24/solid';
 import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedMenu() {

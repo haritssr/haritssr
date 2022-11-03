@@ -1,5 +1,5 @@
 import * as ToolbarPrimitive from '@radix-ui/react-toolbar';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import { styled } from '@stitches/react';
 import { violet, blackA, mauve } from '@radix-ui/colors';
 import LayoutToExperiments from '@/components/LayoutToExperiments';

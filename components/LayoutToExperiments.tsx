@@ -1,12 +1,13 @@
+import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 import Head from 'next/head';
-import GlobalHead from './GlobalHead';
-import Footer from './Footer';
-import React from 'react';
-import { ChevronLeftIcon } from '@heroicons/react/outline';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { GitHubIcon } from './Icons';
+import { useRouter } from 'next/router';
+import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import Footer from './Footer';
+import GlobalHead from './GlobalHead';
+import { GitHubIcon } from './Icons';
+import SideBarExperiments from './SideBarExperiments';
 
 interface LayoutToExperimentsType {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
   const { ref, inView } = useInView({ rootMargin: '-90px' });
 
   return (
-    <div className='bg-white'>
+    <>
       <Head>
         <title>{yes}</title>
         <link rel='icon' href='/icons/haritssr.svg' />
@@ -40,58 +41,72 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
         <meta name='twitter:title' content={title} />
         <meta name='twitter:description' content={title} />
         <meta name='twitter:image' content={image} />
+        <link rel='manifest' href='/static/favicons/site.webmanifest' />
       </Head>
 
       <GlobalHead />
 
-      <div
-        className={`${
-          router.asPath === '/' ? '' : 'sticky top-0 sm:top-0'
-        } z-40 mb-5 w-full border-b  border-zinc-200 bg-white/80 py-2 saturate-150 backdrop-blur`}
-      >
-        <section className='mx-auto flex max-w-4xl items-center justify-between px-3 lg:px-0'>
-          <BackToExperiments domain={domain} />
-          <PageTitle inView={inView} title={title} />
-          <PageSource href={githubRoute} />
-        </section>
-      </div>
-      <main className='mx-auto min-h-screen w-full max-w-4xl px-5 lg:px-0'>
-        <h1
-          className='z-40 mx-auto mt-12 mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800'
-          ref={ref}
-        >
-          {title}
-        </h1>
-        {children}
+      <main className='mx-auto flex max-w-5xl sm:mt-10 sm:gap-10 lg:px-0'>
+        <SideBarExperiments />
+        <article className='mx-auto min-h-screen w-full max-w-4xl sm:w-3/4 sm:px-0'>
+          {/* Navigation */}
+          <div
+            className={`${router.asPath === '/' ? '' : 'sticky -top-0.5'} ${
+              inView ? '' : 'border-b'
+            } z-40 mb-5  w-full border-apple-gray4 bg-white py-2 sm:rounded sm:border`}
+          >
+            <div className='mx-auto flex max-w-5xl items-center justify-between px-3 lg:px-5'>
+              <BackToExperiments />
+              <PageTitleCenter inView={inView} title={title} />
+              <PageSource href={githubRoute} />
+            </div>
+          </div>
+
+          {/* Header */}
+          <div className='px-5 sm:px-0'>
+            <div className='mt-5 mb-2 w-fit rounded-full border border-zinc-300 px-3 pb-0.5 pt-1 text-[12px] font-semibold text-zinc-800 sm:mt-10'>
+              {domain}
+            </div>
+            <h1
+              className='z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl'
+              ref={ref}
+            >
+              {title}
+            </h1>
+            {children}
+          </div>
+        </article>
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
-const BackToExperiments = ({ domain }: { domain: string }) => {
+const BackToExperiments = () => {
   return (
-    <Link href={`/experiments/${domain.toLowerCase().replace(/\s/g, '-')}`}>
-      <a className='-ml-1 flex w-1/4 cursor-pointer items-center sm:w-1/6'>
-        <span className=' inline-block w-full'>
-          <span className='group flex items-center'>
-            <ChevronLeftIcon
-              className='-ml-0.5 h-6 w-6 text-blue-600 sm:group-hover:text-purple-800'
-              strokeWidth={2}
-            />
-            <div className='-ml-1 truncate text-blue-600 sm:group-hover:text-purple-800 '>
-              {domain}
-            </div>
+    <Link
+      passHref
+      href={`/#experiments`}
+      className='-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6'
+    >
+      <span className=' inline-block w-full'>
+        <span className='group flex items-center'>
+          <ChevronLeftIcon
+            className='-ml-0.5 h-6 w-6 text-blue-600 sm:group-hover:text-purple-800'
+            strokeWidth={2}
+          />
+          <span className=' -ml-1 block truncate text-blue-600 sm:group-hover:text-purple-800 '>
+            Experiments
           </span>
         </span>
-      </a>
+      </span>
     </Link>
   );
 };
 
-const PageTitle = ({ title, inView }: { title: string; inView: any }) => {
+const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
   return (
-    <div className='sm:2/4  -mr-2 inline w-1/2'>
+    <div className='sm:2/4  -mr-2 inline w-1/3'>
       <div className='flex justify-center py-0.5 sm:py-0'>
         <div
           className={`truncate text-center text-lg font-semibold duration-100  ${
@@ -107,7 +122,7 @@ const PageTitle = ({ title, inView }: { title: string; inView: any }) => {
 
 const PageSource = ({ href }: { href: string }) => {
   return (
-    <div className='flex w-1/4  justify-end sm:w-1/6 '>
+    <div className='flex w-1/3  justify-end sm:w-1/6 '>
       <cite className='not-italic'>
         <a
           title='This page source code'

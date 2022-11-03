@@ -1,6 +1,8 @@
 import { Image } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 export default function ExportedCarousel() {
   return (

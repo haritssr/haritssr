@@ -3,6 +3,14 @@
 @tailwind utilities;
 @tailwind base;
 
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: optional;
+  src: url(/Inter.var.woff2) format('woff2');
+}
+
 input[type='text'],
 input[type='search'],
 input[type='url'],
@@ -80,4 +88,26 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/* CUSTOM SCROLL BAR */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

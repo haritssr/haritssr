@@ -1,5 +1,6 @@
 import React from 'react';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import * as Slider from '@radix-ui/react-slider';
 import ExplanationList from '@/components/ExplanationList';

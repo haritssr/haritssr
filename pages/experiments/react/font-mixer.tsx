@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 
 export default function FontMixerP() {
   return (

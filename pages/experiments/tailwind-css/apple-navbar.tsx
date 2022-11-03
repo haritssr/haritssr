@@ -1,5 +1,7 @@
-import { ExternalLink, SubTitle, Topic } from '../../../components/DesignSystem';
+import Topic from '@/components/Topic';
+import ExternalLink from '@/components/ExternalLink';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
+import SubTitle from '@/components/SubTitle';
 
 export default function AppleNavbar() {
   return (

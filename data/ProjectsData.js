@@ -1,7 +1,5 @@
 import { LogoHaritssr, LogoHarisStudio, LogoHarisLab } from '@/Icons';
-import Image from 'next/future/image';
-
-//It is used in index.tsx
+import Image from 'next/image';
 
 export const ProjectsData = [
   {
@@ -22,7 +20,7 @@ export const ProjectsData = [
     period: 'Jan 2022 - Now',
     status: 'Suspended',
     imgSrc: <LogoHarisStudio />,
-    industry: 'Website agency',
+    industry: 'Website Agency',
     hrefCaseStudy: '/experiments',
   },
   {
@@ -40,9 +38,19 @@ export const ProjectsData = [
     title: 'AKA Trading',
     description: 'Coffee and spices from Indonesia',
     period: 'May 21 - Des 2021',
-    status: 'Change mgmnt',
+    status: 'Production',
     imgSrc: <Image src='/icons/aka.PNG' width='24' height='24' alt='' />,
     industry: 'Coffee & Spices',
+    hrefCaseStudy: '/experiments',
+  },
+  {
+    href: 'https://www.mixaperkasa.com',
+    title: 'Mixa Perkasa',
+    description: 'Perusahaan yang bergerak di bidang struktur dan beton.',
+    period: 'Oktober 2022',
+    status: 'Production',
+    imgSrc: <Image src='/icons/mpi.svg' width='24' height='24' alt='' />,
+    industry: 'Struktur dan Beton',
     hrefCaseStudy: '/experiments',
   },
 ];

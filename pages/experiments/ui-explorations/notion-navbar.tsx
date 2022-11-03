@@ -1,9 +1,14 @@
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ChevronDownIcon, CloudDownloadIcon, HomeIcon } from '@heroicons/react/outline';
+import {
+  ChevronDownIcon,
+  ArrowDownCircleIcon,
+  BuildingOffice2Icon,
+} from '@heroicons/react/24/outline';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 export default function NotionNavBar() {
   return (
@@ -21,11 +26,9 @@ export default function NotionNavBar() {
             to enable this features.
           </li>
         </ExplanationList>
-        <div className='mt-40 flex items-center justify-between '>
-          <div className='flex w-full items-center space-x-2'>
-            <Logo />
-            <Yes />
-          </div>
+        <div className='flex items-center space-x-2 pt-16'>
+          <Logo />
+          <Yes />
         </div>
       </SubTitle>
     </LayoutToExperiments>
@@ -55,7 +58,7 @@ function Yes() {
             </div>
             <div className='mt-2 mb-1 px-2'>
               <div className='flex cursor-pointer items-center justify-center space-x-1 rounded-md border border-zinc-200 py-1 text-black'>
-                <CloudDownloadIcon className='h-4 w-4' strokeWidth={3} />
+                <ArrowDownCircleIcon className='h-4 w-4' strokeWidth={1} />
                 <div className='text-sm font-medium'>Download Notion</div>
               </div>
               <div className='mt-1 text-sm font-light text-zinc-400'>
@@ -94,21 +97,30 @@ function Yes() {
                 <div className='mb-2 text-[10px] text-zinc-400'>BY TEAM SIZE</div>
                 <div className='space-y-1'>
                   <section className='flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50'>
-                    <HomeIcon strokeWidth={1.5} className='h-8   w-8 fill-zinc-200 text-zinc-700' />
+                    <BuildingOffice2Icon
+                      strokeWidth={1.5}
+                      className='h-8   w-8 fill-zinc-200 text-zinc-700'
+                    />
                     <div className='flex flex-col justify-center text-[12px]'>
                       <div className='font-medium text-zinc-800'>Enterprise</div>
                       <div className='text-zinc-400'>Advance features for your org</div>
                     </div>
                   </section>
                   <section className='flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50'>
-                    <HomeIcon strokeWidth={1.5} className='h-8   w-8 fill-zinc-200 text-zinc-700' />
+                    <BuildingOffice2Icon
+                      strokeWidth={1.5}
+                      className='h-8   w-8 fill-zinc-200 text-zinc-700'
+                    />
                     <div className='flex flex-col justify-center text-[12px]'>
                       <div className='font-medium text-zinc-800'>Small bussiness </div>
                       <div className='text-zinc-400'>Run your team on one tool</div>
                     </div>
                   </section>
                   <section className='flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50'>
-                    <HomeIcon strokeWidth={1.5} className='h-8   w-8 fill-zinc-200 text-zinc-700' />
+                    <BuildingOffice2Icon
+                      strokeWidth={1.5}
+                      className='h-8   w-8 fill-zinc-200 text-zinc-700'
+                    />
                     <div className='flex flex-col justify-center text-[12px]'>
                       <div className='font-medium text-zinc-800'>Personal</div>
                       <div className='text-zinc-400'>Free for individual</div>

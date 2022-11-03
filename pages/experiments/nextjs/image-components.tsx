@@ -1,8 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { ExternalLink, SubTitle, Topic } from '@/components/DesignSystem';
+import Topic from '@/components/Topic';
+import SubTitle from '@/components/SubTitle';
+
+import ExternalLink from '@/components/ExternalLink';
+
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const ProductData = [
@@ -22,7 +26,7 @@ export default function ImageComponents() {
       <SubTitle>
         My implementation of
         <ExternalLink
-          href='https://nextjs.org/docs/api-reference/next/future/image'
+          href='https://nextjs.org/docs/api-reference/next/image'
           name='Nextjs Image Components'
         />
       </SubTitle>
@@ -84,25 +88,23 @@ export default function ImageComponents() {
 
 const ProductCard = ({ href, src, name }) => {
   return (
-    <Link href={href}>
-      <a className='relative h-52 w-full'>
-        <Image
-          alt='Street with car'
-          src={src}
-          // layout='fill'
-          // objectFit='cover'
-          quality={75}
-          className='rounded-md'
-          priority
-          blurDataURL={src}
-          placeholder='blur'
-          width='4493'
-          height='4493'
-        />
-        <div className='absolute flex h-full w-full items-center justify-center bg-gradient-to-b from-white/0 via-black/20 to-white/0 text-center text-lg text-white hover:via-black/30'>
-          <div>{name}</div>
-        </div>
-      </a>
+    <Link passHref href={href} className='relative h-52 w-full'>
+      <Image
+        alt='Street with car'
+        src={src}
+        // layout='fill'
+        // objectFit='cover'
+        quality={75}
+        className='rounded-md'
+        priority
+        blurDataURL={src}
+        placeholder='blur'
+        width='4493'
+        height='4493'
+      />
+      <div className='absolute flex h-full w-full items-center justify-center bg-gradient-to-b from-white/0 via-black/20 to-white/0 text-center text-lg text-white hover:via-black/30'>
+        <div>{name}</div>
+      </div>
     </Link>
   );
 };

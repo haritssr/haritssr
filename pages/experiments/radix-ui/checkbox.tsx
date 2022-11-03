@@ -2,7 +2,9 @@ import React from 'react';
 import { CheckIcon } from '@radix-ui/react-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
+
 import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedCheckbox() {

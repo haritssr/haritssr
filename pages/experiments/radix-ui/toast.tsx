@@ -1,5 +1,6 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { ExternalLink, SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
+import ExternalLink from '@/components/ExternalLink';
 import ExplanationList from '@/components/ExplanationList';
 
 export default function ExportedToast() {

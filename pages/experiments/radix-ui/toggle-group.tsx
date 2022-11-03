@@ -3,7 +3,7 @@ import { styled } from '@stitches/react';
 import { violet, blackA, mauve } from '@radix-ui/colors';
 import { TextAlignLeftIcon, TextAlignCenterIcon, TextAlignRightIcon } from '@radix-ui/react-icons';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
-import { SubTitle } from '@/components/DesignSystem';
+import SubTitle from '@/components/SubTitle';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
 const StyledToggleGroup = styled(ToggleGroupPrimitive.Root, {
