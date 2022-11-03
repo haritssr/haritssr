@@ -3,7 +3,7 @@ export const WorkContacts = [
     title: 'LinkedIn',
     href: 'https://www.linkedin.com/in/haritssr',
     imgSrc: '/icons/linkedin.png',
-    name: '/in/haritssr',
+    name: 'linkedin.com/in/haritssr',
   },
   {
     title: 'Outlook',
