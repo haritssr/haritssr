@@ -25,7 +25,7 @@ export default function ProjectsBox({
       href={href}
       target='_blank'
       rel='noopener noreferrer'
-      className='group flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:border-apple-gray1'
+      className='group flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:border-zinc-800'
     >
       <section className=' flex flex-col justify-between  bg-white p-3'>
         <div className='mb-4 flex items-center justify-between space-x-2'>
