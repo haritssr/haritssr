@@ -21,11 +21,11 @@ export default function ContactComponent({
     >
       <section className='flex items-center space-x-2 overflow-hidden sm:space-x-3'>
         <Image src={imgSrc} height={20} width={20} alt={name} className='aspect-auto h-5 w-5' />
-        <div className=' text-zinc-800 hover:text-zinc-500 hover:underline'>{name}</div>
+        <div className=' text-zinc-800 hover:text-blue-600 group-hover:underline'>{name}</div>
         {/* External Link Icon */}
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='h-4 w-4 text-zinc-400'
+          className='h-4 w-4 text-zinc-400 group-hover:text-blue-600'
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'

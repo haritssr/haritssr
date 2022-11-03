@@ -20,7 +20,8 @@ import { ExperimentsData } from 'data/ExperimentsData';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { ContactData } from '../data/ContactData';
+import { WorkContacts } from '../data/WorkContacts';
+import { SocialMediaContacts } from '../data/SocialMediaContacts';
 import { ProjectsData } from '../data/ProjectsData';
 import { TechStackData } from '../data/TechStackData';
 
@@ -99,7 +100,18 @@ const Contacts = () => {
         </div>
       </section>
       <section className='space-y-3'>
-        {ContactData.map(c => (
+        {WorkContacts.map(c => (
+          <ContactComponent
+            href={c.href}
+            name={c.name}
+            key={c.imgSrc}
+            imgSrc={c.imgSrc}
+            title={c.title}
+          />
+        ))}
+      </section>
+      <section className='space-y-3'>
+        {SocialMediaContacts.map(c => (
           <ContactComponent
             href={c.href}
             name={c.name}
