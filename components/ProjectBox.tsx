@@ -33,10 +33,21 @@ export default function ProjectsBox({
             {imgSrc}
             <div className='truncate text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</div>
           </div>
-          <ArrowUpRightIcon
-            strokeWidth={1.5}
+          {/* External Link Icon */}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
             className='h-5 w-5 text-apple-gray1 group-hover:text-zinc-800 duration-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
-          />
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+            strokeWidth={1.5}
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+            />
+          </svg>
         </div>
 
         <div className='mb-2 text-zinc-800'>{description}</div>

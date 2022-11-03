@@ -166,7 +166,7 @@ export const TechStackData = [
     ],
   },
   {
-    domain: 'Domain',
+    domain: 'Main Tools',
     links: [
       {
         href: 'https://www.google.com/chrome/',
