@@ -7,7 +7,15 @@ import Layout from '@/components/Layout';
 import ProjectsBox from '@/components/ProjectBox';
 import { TechStackComponent } from '@/components/TechStackComponents';
 import { BriefcaseIcon, BuildingOfficeIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import { MathPhysicsBooks, OthersBookData, TechicalBooksData, UIUXBooksData } from 'data/BooksData';
+import {
+  MathPhysicsBooks,
+  JavaScriptDocumentation,
+  FrontEndBooks,
+  UIUXBooks,
+  CodingPlatform,
+  ReactPatterns,
+  ReactBlogs,
+} from 'data/BooksData';
 import { ExperimentsData } from 'data/ExperimentsData';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -186,7 +194,7 @@ const Reading = () => {
       <section>
         <h2 className='mb-2 text-xl font-semibold text-zinc-700'>Technical Frontend Books</h2>
         <section className='grid grid-cols-1 gap-2'>
-          {TechicalBooksData.map(({ title, href }) => (
+          {FrontEndBooks.map(({ title, href }) => (
             <ExternalLink name={title} href={href} key={title} />
           ))}
         </section>
@@ -195,7 +203,7 @@ const Reading = () => {
       <section>
         <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>UI/UX Books</h2>
         <section className='grid grid-cols-1 gap-2'>
-          {UIUXBooksData.map(({ title, href }) => (
+          {UIUXBooks.map(({ title, href }) => (
             <ExternalLink name={title} href={href} key={title} />
           ))}
         </section>
@@ -211,9 +219,36 @@ const Reading = () => {
       </section>
 
       <section>
-        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>Others</h2>
+        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>Coding Platforms</h2>
         <section className='grid grid-cols-1 gap-2'>
-          {OthersBookData.map(({ title, href }) => (
+          {CodingPlatform.map(({ title, href }) => (
+            <ExternalLink key={title} name={title} href={href} />
+          ))}
+        </section>
+      </section>
+
+      <section>
+        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>JavaScript Documentation</h2>
+        <section className='grid grid-cols-1 gap-2'>
+          {JavaScriptDocumentation.map(({ title, href }) => (
+            <ExternalLink key={title} name={title} href={href} />
+          ))}
+        </section>
+      </section>
+
+      <section>
+        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>React Patterns</h2>
+        <section className='grid grid-cols-1 gap-2'>
+          {ReactPatterns.map(({ title, href }) => (
+            <ExternalLink key={title} name={title} href={href} />
+          ))}
+        </section>
+      </section>
+
+      <section>
+        <h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>React Blogs</h2>
+        <section className='grid grid-cols-1 gap-2'>
+          {ReactBlogs.map(({ title, href }) => (
             <ExternalLink key={title} name={title} href={href} />
           ))}
         </section>

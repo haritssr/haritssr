@@ -1,4 +1,4 @@
-export const TechicalBooksData = [
+export const FrontEndBooks = [
   {
     title: 'Eloquent JavaScript',
     href: 'https://eloquentjavascript.net/',
@@ -36,7 +36,7 @@ export const MathPhysicsBooks = [
     href: 'https://www.increment.com/',
   },
 ];
-export const UIUXBooksData = [
+export const UIUXBooks = [
   {
     title: 'Refactoring UI',
     href: 'https://www.refactoringui.com/',
@@ -49,16 +49,22 @@ export const UIUXBooksData = [
   },
 ];
 
-export const OthersBookData = [
+export const JavaScriptDocumentation = [
   {
     title: 'Mozilla Developer Network',
     href: 'https://developer.mozilla.org/en-US/',
   },
   { title: 'JavaScript.info', href: 'https://javascript.info/' },
+];
+
+export const CodingPlatform = [
   { title: 'FreeCodeCamp', href: 'https://javascript.info/' },
   { title: 'HackerRank', href: 'https://www.hackerrank.com/' },
   { title: 'LeetCode', href: 'https://leetcode.com/' },
   { title: 'SoloLearn', href: 'https://www.sololearn.com/' },
+];
+
+export const ReactPatterns = [
   {
     title: 'Jeff Zhang - OOP with TypeScript',
     href: 'https://www.youtube.com/watch?v=HsWKyERYGKQ&list=PLn4fTSbSpY5eY_M1mKWxGa9pViEodofKy',
@@ -75,4 +81,18 @@ export const OthersBookData = [
     title: 'Learn Patterns - Web Performance Pattern',
     href: 'https://www.patterns.dev/posts/#performance-patterns',
   },
+];
+
+export const ReactBlogs = [
+  { title: 'Josh W. Comeau', href: 'https://www.joshwcomeau.com/' },
+  { title: 'Nadia Makarevich', href: 'https://www.developerway.com/' },
+  { title: 'Vladimir Klepov', href: 'https://blog.thoughtspile.tech/' },
+  { title: 'Kent C. Doods', href: 'https://kentcdodds.com/' },
+  { title: 'Maxime Heckel', href: 'https://blog.maximeheckel.com/' },
+  { title: 'Linton Ye', href: 'https://learnreact.design/' },
+  { title: 'Swizec', href: 'https://swizec.com/' },
+  { title: 'Dominik TkKodo', href: 'https://tkdodo.eu/blog/' },
+  { title: 'Amelia Wattenberger', href: 'https://wattenberger.com/' },
+  { title: 'Bobby Hadz', href: 'https://bobbyhadz.com/' },
+  { title: 'Travis Arnold', href: 'https://souporserious.com/' },
 ];
