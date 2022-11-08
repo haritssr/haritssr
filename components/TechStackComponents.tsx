@@ -23,7 +23,7 @@ export const TechStackComponent = (
               href={href}
               target='_blank'
               rel='noreferrer noopener'
-              className='group flex w-auto items-center justify-between space-x-2 rounded-md py-1.5 px-1 hover:border-apple-gray3 border border-white sm:px-2'
+              className='group flex w-auto items-center justify-between space-x-2 rounded-md py-1 px-1 hover:border-apple-gray3 border border-white sm:px-2'
             >
               <section className='flex items-center space-x-2 overflow-hidden'>
                 <Image src={imgSrc} height={18} width={18} alt={name} className='aspect-auto' />

@@ -1,4 +1,4 @@
-const projectCaseStudyData = [
+export const projectCaseStudyData = [
 	{
 		project_name: 'Haris Lab',
 		about_client: {
