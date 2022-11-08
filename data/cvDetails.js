@@ -4,7 +4,7 @@ export const cvDetails = [
 		section_lists: [
 			{
 				id: 1,
-				logo_src: '/icons/haritssr.svg',
+				logo_src: '/haris-lab.png',
 				office: 'PT Haris Laboratorium Indonesia (Haris Lab)',
 				role: 'Software Engineer',
 				periode: 'Jun 2021 - Present (1 year, 5 months)',
@@ -13,7 +13,7 @@ export const cvDetails = [
 			},
 			{
 				id: 2,
-				logo_src: '/icons/haritssr.svg',
+				logo_src: '/aka-tradingindo.PNG',
 				office: 'PT AKA Trading Indonesia',
 				role: 'Frontend Developer',
 				periode: 'Jan 2021 - Des 2021 (6 months)',
@@ -22,7 +22,7 @@ export const cvDetails = [
 			},
 			{
 				id: 3,
-				logo_src: '/icons/haritssr.svg',
+				logo_src: '/haris-studio.png',
 				office: 'PT Haris Web Studio (Haris Studio)',
 				role: 'Frontend Developer',
 				periode: 'Jan 2021 - Present (1 year, 5 months)',
@@ -31,7 +31,7 @@ export const cvDetails = [
 			},
 			{
 				id: 4,
-				logo_src: '/icons/haritssr.svg',
+				logo_src: '/awm.png',
 				office: 'PT Asriyasa Dwiyata Mandiri',
 				role: 'Frontend Developer',
 				periode: 'Nov 2022 (1 month)',
@@ -40,7 +40,7 @@ export const cvDetails = [
 			},
 			{
 				id: 5,
-				logo_src: '/icons/haritssr.svg',
+				logo_src: '/mixa-perkasa.png',
 				office: 'PT Mixa Perkasa Indonesia',
 				role: 'Frontend Developer',
 				periode: 'Oct 2022 (1 month)',

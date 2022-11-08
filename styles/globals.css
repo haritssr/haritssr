@@ -4,11 +4,11 @@
 @tailwind base;
 
 @font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: optional;
-  src: url(/Inter.var.woff2) format('woff2');
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: optional;
+	src: url(/Inter.var.woff2) format('woff2');
 }
 
 input[type='text'],
@@ -18,7 +18,7 @@ input[type='email'],
 input[type='password'],
 input[type='number'],
 input[type='tel'] {
-  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
+	@apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
 }
 
 input[type='time'],
@@ -26,43 +26,43 @@ input[type='date'],
 input[type='week'],
 input[type='month'],
 select {
-  @apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
+	@apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
 }
 
 input[type='reset'],
 input[type='submit'],
 input[type='button'],
 button[type='submit'] {
-  @apply w-full cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90 sm:w-fit;
+	@apply w-full cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90 sm:w-fit;
 }
 
 buttonASd {
-  @apply cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90;
+	@apply cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90;
 }
 
 /* This is styles for useState Dark Mode */
 /* start */
 .button-dark {
-  @apply rounded-md border border-zinc-500 bg-zinc-700 px-4 py-1 text-white hover:bg-zinc-800;
+	@apply rounded-md border border-zinc-500 bg-zinc-700 px-4 py-1 text-white hover:bg-zinc-800;
 }
 
 .button-light {
-  @apply rounded-md border border-zinc-300 bg-white px-4 py-1 text-zinc-700 shadow hover:bg-zinc-50;
+	@apply rounded-md border border-zinc-300 bg-white px-4 py-1 text-zinc-700 shadow hover:bg-zinc-50;
 }
 
 .panel-dark {
-  @apply bg-zinc-800 text-white;
+	@apply bg-zinc-800 text-white;
 }
 
 .panel-light {
-  @apply bg-white text-zinc-700;
+	@apply bg-white text-zinc-700;
 }
 /* start */
 
 html {
-  -webkit-tap-highlight-color: transparent;
-  scroll-behavior: auto;
-  scroll-padding-top: 50px;
+	-webkit-tap-highlight-color: transparent;
+	scroll-behavior: auto;
+	scroll-padding-top: 50px;
 }
 
 /* mobile */
@@ -75,39 +75,39 @@ html {
 /* @media (min-width: 1280px) { html { scroll-padding-top: 150px;} } */
 
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+		Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* CUSTOM SCROLL BAR */
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+	background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+	background: #888;
 }
+/* border-radius: 4px; /*
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+	background: #555;
 }

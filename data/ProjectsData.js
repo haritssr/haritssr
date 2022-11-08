@@ -10,7 +10,7 @@ export const ProjectsData = [
 		status: 'Production',
 		imgSrc: <LogoHarisLab />,
 		industry: 'Education',
-		hrefCaseStudy: '/case-studies/aka-tradingindo',
+		hrefCaseStudy: 'aka-tradingindo',
 	},
 
 	{
@@ -21,7 +21,7 @@ export const ProjectsData = [
 		status: 'Suspended',
 		imgSrc: <LogoHarisStudio />,
 		industry: 'Website Agency',
-		hrefCaseStudy: '/case-studies/aka-tradingindo',
+		hrefCaseStudy: 'aka-tradingindo',
 	},
 	{
 		href: 'https://www.haritssr.com',
@@ -31,7 +31,7 @@ export const ProjectsData = [
 		status: 'Production',
 		imgSrc: <LogoHaritssr />,
 		industry: 'Personal Site',
-		hrefCaseStudy: '/case-studies/aka-tradingindo',
+		hrefCaseStudy: 'aka-tradingindo',
 	},
 	{
 		href: 'https://www.aka-tradingindo.com',
@@ -41,7 +41,7 @@ export const ProjectsData = [
 		status: 'Production',
 		imgSrc: <Image src='/icons/aka.PNG' width='24' height='24' alt='' />,
 		industry: 'Coffee & Spices',
-		hrefCaseStudy: '/case-studies/aka-tradingindo',
+		hrefCaseStudy: 'aka-tradingindo',
 	},
 	{
 		href: 'https://www.mixaperkasa.com',
@@ -51,6 +51,6 @@ export const ProjectsData = [
 		status: 'Production',
 		imgSrc: <Image src='/icons/mpi.svg' width='24' height='24' alt='' />,
 		industry: 'Struktur dan Beton',
-		hrefCaseStudy: '/case-studies/aka-tradingindo',
+		hrefCaseStudy: 'aka-tradingindo',
 	},
 ];

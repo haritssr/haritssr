@@ -23,10 +23,9 @@ import Link from 'next/link';
 import React from 'react';
 import { WorkContacts } from '../data/WorkContacts';
 import { SocialMediaContacts } from '../data/SocialMediaContacts';
-import { ProjectsData } from '../data/ProjectsData';
 import { TechStackData } from '../data/TechStackData';
 import ExplanationList from '@/components/ExplanationList';
-import { ExternalCodeLink } from '@/components/ExternalCodeLink';
+import { projectCaseStudyData } from 'data/projectCaseStudyData';
 
 export default function Home() {
 	return (
@@ -38,6 +37,7 @@ export default function Home() {
 				<TechStack />
 				<Reading />
 				<DesignSystem />
+				<CaseStudies />
 				<CV />
 			</section>
 		</Layout>
@@ -136,16 +136,16 @@ const Projects = () => {
 			topic='My Projects'
 			className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-4'
 		>
-			{ProjectsData.map(d => (
+			{projectCaseStudyData.map(d => (
 				<ProjectsBox
-					key={d.title}
-					href={d.href}
-					description={d.description}
-					title={d.title}
-					period={d.period}
-					status={d.status}
-					imgSrc={d.imgSrc}
-					industry={d.industry}
+					key={d.project_name}
+					href={d.about_client.website}
+					description={d.about_client.short_about}
+					title={d.project_name}
+					period={d.about_project.working_period}
+					status={d.about_project.website_status}
+					imgSrc={d.about_client.logo_src}
+					industry={d.about_client.industry}
 					hrefCaseStudy={d.hrefCaseStudy}
 				/>
 			))}
@@ -277,14 +277,22 @@ const Reading = () => {
 const DesignSystem = () => {
 	return (
 		<Wrapper id='DesignSystem' topic='Design System' className=''>
-			<InternalLink name='This & Haris Lab Site Design System' href='/design-system' />
+			<InternalLink name='Design System' href='/design-system' />
+		</Wrapper>
+	);
+};
+
+const CaseStudies = () => {
+	return (
+		<Wrapper id='CaseStudies' topic='Case Studies' className=''>
+			<InternalLink name='Case Studies' href='/case-studies' />
 		</Wrapper>
 	);
 };
 
 const CV = () => {
 	return (
-		<Wrapper id='CV' topic='Curiculum Vitae (CV)' className='space-y-4'>
+		<Wrapper id='CV' topic='Curriculum Vitae' className='space-y-4'>
 			<details className='border border-zinc-400 rounded-md px-4 py-2 select-none cursor-pointer'>
 				<summary>CV Summary</summary>
 				<div className='pl-4 pt-2'>

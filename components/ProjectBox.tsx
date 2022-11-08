@@ -1,13 +1,13 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { ReactElement } from 'react';
 
 interface ProjectBoxTypes {
 	href: string;
 	title: string;
 	description: string;
 	period: string | null;
-	status: string;
-	imgSrc: ReactElement;
+	status: string[];
+	imgSrc: string;
 	industry: string;
 	hrefCaseStudy: string;
 }
@@ -23,16 +23,16 @@ export default function ProjectsBox({
 	hrefCaseStudy,
 }: ProjectBoxTypes) {
 	return (
-		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto'>
+		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:shadow-lg hover:border-apple-gray2 duration-300'>
 			<section className=' flex flex-col justify-between  bg-white p-3'>
 				<div className='mb-3 flex items-center justify-between space-x-2'>
 					<div className='flex items-center space-x-2'>
-						{imgSrc}
-						<div className='truncate text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</div>
+						<Image src={imgSrc} alt={title} width='24' height='24' />
+						<p className='truncate text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</p>
 					</div>
 				</div>
 
-				<div className='mb-1 text-zinc-800'>{description}</div>
+				<div className='mb-1 text-zinc-700'>{description}</div>
 
 				<div className='text-zinc-500 mb-3'>
 					{href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
@@ -45,7 +45,7 @@ export default function ProjectsBox({
 						rel='noopener noreferrer'
 						className='flex items-center justify-center border border-zinc-700 py-1 rounded space-x-1 bg-zinc-700 hover:bg-zinc-600 hover:border-zinc-600 text-white w-1/2 group'
 					>
-						<div className='text-tiny'>Visit Site</div>
+						<div className='text-tiny'>Visit site</div>
 						{/* External Link Icon */}
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -64,10 +64,10 @@ export default function ProjectsBox({
 					</a>
 					<Link
 						passHref
-						href={hrefCaseStudy}
+						href={`/case-studies/${hrefCaseStudy}`}
 						className='bg-white border border-zinc-400 py-1 hover:bg-apple-gray6 rounded text-zinc-600 w-1/2 flex items-center justify-center group'
 					>
-						<div className='text-tiny'>Case Study</div>
+						<div className='text-tiny'>Case study</div>
 						{/* Chevron Right Icon */}
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -95,15 +95,15 @@ export default function ProjectsBox({
 						<div className='font-semibold'>Status</div>
 						<div>:</div>
 					</div>
-					<div>{status}</div>
+					<div>{status[0]}</div>
 				</article>
-				<div className='flex items-center justify-between text-zinc-700'>
+				<article className='flex items-center justify-between text-zinc-700'>
 					<div className='flex w-1/3 items-center justify-between'>
 						<div className='font-semibold'>Industry</div>
 						<div>:</div>
 					</div>
 					<div>{industry}</div>
-				</div>
+				</article>
 			</section>
 		</div>
 	);
