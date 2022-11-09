@@ -50,6 +50,17 @@ export default function Next13Image() {
 						</p>
 					</div>
 				</div>
+
+				<Topic name='Using fill' />
+				<div className='relative h-96'>
+					<Image
+						src={LenovoWallpaper}
+						alt='Lenovo Wallpaper'
+						placeholder='blur'
+						fill
+						className='object-cover object-center'
+					/>
+				</div>
 			</section>
 		</LayoutToExperiments>
 	);
