@@ -294,7 +294,7 @@ const CV = () => {
 	return (
 		<Wrapper id='CV' topic='Curriculum Vitae' className='space-y-4'>
 			<details className='border border-zinc-400 rounded-md px-4 py-2 select-none cursor-pointer'>
-				<summary>CV Summary</summary>
+				<summary>Core Skills</summary>
 				<div className='pl-4 pt-2'>
 					<ExplanationList>
 						<li className='font-semibold'>Software Engineering (Web Platform)</li>
