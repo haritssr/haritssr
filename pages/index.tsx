@@ -298,7 +298,9 @@ const CV = () => {
 				<div className='pl-4 pt-2'>
 					<ExplanationList>
 						<li className='font-semibold'>Software Engineering (Web Platform)</li>
-						<p className='text-zinc-500'>JavaScript, TypeScript, Next.js, React.js ecosystems.</p>
+						<p className='text-zinc-500'>
+							JavaScript, TypeScript, Next.js, React.js ecosystems, Web platform, PWA.
+						</p>
 						<li className='font-semibold'>UI Design (with Figma)</li>
 						<p className='text-zinc-500'>
 							Experiments, mockup, prototyping UI for mobile/desktop web.
