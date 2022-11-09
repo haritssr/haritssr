@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GitHubIcon, LogoHaritssr } from './Icons';
+import { GitHubIcon } from './Icons';
 
 export default function GlobalHead() {
 	return (
