@@ -61,6 +61,34 @@ export default function Next13Image() {
 						className='object-cover object-center'
 					/>
 				</div>
+
+				<Topic name='Using sizes' />
+				<div className='relative h-96'>
+					<Image
+						src={LenovoWallpaper}
+						alt='Lenovo Wallpaper'
+						placeholder='blur'
+						fill
+						className='object-cover object-center'
+						sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+					/>
+				</div>
+
+				{/* Still confused about this part */}
+				{/* https://beta.nextjs.org/docs/api-reference/components/image#style */}
+				<Topic name='Using style + height/width auto' />
+				<div className='relative h-96'>
+					<Image
+						src={LenovoWallpaper}
+						alt='Lenovo Wallpaper'
+						placeholder='blur'
+						// fill
+						// height="auto"
+						style={{}}
+						className='object-cover object-center'
+						sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+					/>
+				</div>
 			</section>
 		</LayoutToExperiments>
 	);
