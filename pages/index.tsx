@@ -7,7 +7,12 @@ import ExternalLink from '@/components/ExternalLink';
 import Layout from '@/components/Layout';
 import ProjectsBox from '@/components/ProjectBox';
 import { TechStackComponent } from '@/components/TechStackComponents';
-import { BriefcaseIcon, BuildingOfficeIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import {
+	BriefcaseIcon,
+	BuildingOfficeIcon,
+	ChevronDownIcon,
+	MapPinIcon,
+} from '@heroicons/react/24/outline';
 import {
 	MathPhysicsBooks,
 	JavaScriptDocumentation,
@@ -27,18 +32,20 @@ import { TechStackData } from '../data/TechStackData';
 import ExplanationList from '@/components/ExplanationList';
 import { projectCaseStudyData } from 'data/projectCaseStudyData';
 
+import { Disclosure } from '@headlessui/react';
+
 export default function Home() {
 	return (
 		<Layout browserTitle='Projects' description='Home'>
 			<section className='mt-5 space-y-20 sm:mt-10 '>
 				<Contacts />
 				<Projects />
+				<CV />
 				<Experiments />
 				<TechStack />
 				<Reading />
 				<DesignSystem />
 				<CaseStudies />
-				<CV />
 			</section>
 		</Layout>
 	);
@@ -71,7 +78,7 @@ const Contacts = () => {
 	return (
 		<div
 			id='contacts'
-			className='grid grid-cols-1 gap-10 bg-white px-10 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4'
+			className='grid grid-cols-1 gap-10 bg-white px-14 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4'
 		>
 			<section className='flex justify-center sm:justify-start'>
 				<Image
@@ -85,7 +92,9 @@ const Contacts = () => {
 				/>
 			</section>
 			<section className='space-y-3'>
-				<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left'>Harits Syah</div>
+				<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-6 sm:mb-0'>
+					Harits Syah
+				</div>
 				<div className='flex items-center space-x-1'>
 					<BriefcaseIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
 					<div className=' text-zinc-800'>
@@ -293,60 +302,79 @@ const CaseStudies = () => {
 
 const CV = () => {
 	return (
-		<Wrapper id='CV' topic='Curriculum Vitae' className='space-y-4'>
-			<details className='border border-zinc-400 rounded-md px-4 py-2 select-none cursor-pointer'>
-				<summary>Core Skills</summary>
-				<div className='pl-4 pt-2'>
-					<ExplanationList>
-						<li className='font-semibold'>Software Engineering (Web Platform)</li>
-						<p className='text-zinc-500'>
-							JavaScript, TypeScript, Next.js, React.js ecosystems, Web platform, PWA.
-						</p>
-						<li className='font-semibold'>UI Design (with Figma)</li>
-						<p className='text-zinc-500'>
-							Experiments, mockup, prototyping UI for mobile/desktop web.
-						</p>
-						<li className='font-semibold'>Math & Phycics</li>
-						<p className='text-zinc-500'>High school and early college level.</p>
-					</ExplanationList>
-				</div>
-			</details>
+		<Wrapper id='CV' topic='Curriculum Vitae' className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+			<Disclosure as='div'>
+				{({ open }) => (
+					<>
+						<Disclosure.Button
+							className={` border border-apple-gray4 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
+								open ? 'rounded-b-none rounded-t-md' : 'rounded-md'
+							}`}
+						>
+							<div>Core Skills</div>
+							<ChevronDownIcon className={` h-5 w-5 ${open ? 'rotate-180' : ''}`} />
+						</Disclosure.Button>
+						<Disclosure.Panel className='-mt-[1px] p-4 border border-apple-gray4 rounded-b'>
+							<div className='font-semibold'>Software Engineering (Web Platform)</div>
+							<p className='text-zinc-500 pb-4'>
+								JavaScript, TypeScript, Next.js, React.js, Web platform, PWA.
+							</p>
+							<div className='font-semibold'>UI Design (with Figma)</div>
+							<p className='text-zinc-500 pb-4'>
+								Experiments, mockup, prototyping UI for mobile/desktop web.
+							</p>
+							<div className='font-semibold'>Math & Phycics</div>
+							<p className='text-zinc-500'>High school and early college level.</p>
+						</Disclosure.Panel>
+					</>
+				)}
+			</Disclosure>
 
-			<details className='border border-zinc-400 rounded-md px-4 py-2 select-none cursor-pointer'>
-				<summary>CV Details</summary>
-				<div className='pl-4 pt-2'>
-					<section></section>
-					<section className='space-y-4'>
-						{cvDetails.map(data => (
-							<div key={data.section} className='space-y-4'>
-								<div className='font-semibold text-2xl'>{data.section}</div>
-								{data.section_lists.map(section => (
-									<div key={section.id}>
-										<div className='flex items-center space-x-2'>
-											<Image
-												src={section.logo_src}
-												height={20}
-												width={20}
-												alt={section.office}
-												className='aspect-auto h-5 w-5'
-											/>
-											<div className='font-semibold text-lg'>{section.role}</div>
-										</div>
-										<div className='pl-7 text-zinc-500 space-y-1.5 mt-1.5'>
-											<div className=''>{section.office}</div>
-											<div className=''>{section.periode}</div>
-											<div className=''>{section.desc}</div>
-											<div>
-												<ExternalLink href={section.site_link} name={section.site_link} />
+			<Disclosure as='div'>
+				{({ open }) => (
+					<>
+						<Disclosure.Button
+							className={` border border-apple-gray4 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
+								open ? 'rounded-b-none rounded-t-md' : 'rounded-md'
+							}`}
+						>
+							<div>CV Details</div>
+							<ChevronDownIcon className={` h-5 w-5 ${open ? 'rotate-180' : ''}`} />
+						</Disclosure.Button>
+						<Disclosure.Panel className='-mt-[1px] p-4 border border-apple-gray4 rounded-b'>
+							<section className='space-y-4'>
+								{cvDetails.map(data => (
+									<div key={data.section} className='space-y-4'>
+										<div className='font-semibold text-2xl'>{data.section}</div>
+										{data.section_lists.map(section => (
+											<div key={section.id}>
+												<div className='flex items-center space-x-2'>
+													<Image
+														src={section.logo_src}
+														height={20}
+														width={20}
+														alt={section.office}
+														className='aspect-auto h-5 w-5'
+													/>
+													<div className='font-semibold text-lg'>{section.role}</div>
+												</div>
+												<div className='pl-7 text-zinc-500 space-y-1.5 mt-1.5'>
+													<div>{section.office}</div>
+													<div>{section.periode}</div>
+													<div>{section.desc}</div>
+													<div>
+														<ExternalLink href={section.site_link} name={section.site_link} />
+													</div>
+												</div>
 											</div>
-										</div>
+										))}
 									</div>
 								))}
-							</div>
-						))}
-					</section>
-				</div>
-			</details>
+							</section>
+						</Disclosure.Panel>
+					</>
+				)}
+			</Disclosure>
 		</Wrapper>
 	);
 };

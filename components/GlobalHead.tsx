@@ -7,10 +7,10 @@ export default function GlobalHead() {
 			<div className='mx-auto flex max-w-5xl flex-row items-center justify-between px-3 py-2.5 lg:px-0'>
 				<Link
 					href='/'
-					className=' text-zinc-800 tracking-widest duration-100 hover:text-zinc-500 active:scale-95'
+					className=' text-zinc-800 duration-100 hover:text-zinc-500 active:scale-95'
 					aria-label='site logo'
 				>
-					HARITS SYAH
+					Harits Syah
 				</Link>
 				<a
 					className='flex justify-end'
