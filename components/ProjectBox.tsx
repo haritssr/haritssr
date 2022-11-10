@@ -23,12 +23,12 @@ export default function ProjectsBox({
 	hrefCaseStudy,
 }: ProjectBoxTypes) {
 	return (
-		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:shadow-lg hover:border-apple-gray2 duration-300'>
+		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto sm:hover:shadow-lg hover:border-apple-gray2 duration-100 cursor-grab'>
 			<section className=' flex flex-col justify-between  bg-white p-3'>
 				<div className='mb-3 flex items-center justify-between space-x-2'>
 					<div className='flex items-center space-x-2'>
 						<Image src={imgSrc} alt={title} width='24' height='24' />
-						<p className='truncate text-lg font-semibold text-zinc-700 sm:text-xl'>{title}</p>
+						<p className='truncate font-semibold text-zinc-700 text-xl'>{title}</p>
 					</div>
 				</div>
 
