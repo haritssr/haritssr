@@ -16,7 +16,9 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
 			{/*<React.StrictMode> //disabled for react-dnd preview bug for now */}
 			<DndProvider backend={HTML5Backend}>
 				<IdProvider>
-					<Component {...pageProps} className={inter.className} />
+					<main className={inter.className}>
+						<Component {...pageProps} />
+					</main>
 				</IdProvider>
 			</DndProvider>
 		</QueryClientProvider>
