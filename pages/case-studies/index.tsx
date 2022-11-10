@@ -39,7 +39,9 @@ export default function CaseStudiesHomePage() {
 
 			<main className='mx-auto min-h-screen w-full max-w-3xl px-5 xl:px-0'>
 				<BackButton href='/#project' name='All Projects' />
-				<div className='text-3xl mt-5 sm:text-4xl break-words font-semibold pb-5'>Case Studies</div>
+				<div className='text-3xl mt-5 sm:mt-14 break-words font-semibold pb-3 font-["Hubot_Sans"]'>
+					Case Studies
+				</div>
 				<section className='space-y-3'>
 					{projectCaseStudyData.map(({ project_name, hrefCaseStudy }) => (
 						<InternalLink

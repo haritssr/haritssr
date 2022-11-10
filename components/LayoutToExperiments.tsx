@@ -68,7 +68,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 							{domain}
 						</div>
 						<h1
-							className='z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl'
+							className='z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl font-["Hubot_Sans"]'
 							ref={ref}
 						>
 							{title}
@@ -94,7 +94,9 @@ const BackToExperiments = ({ inView }: { inView: any }) => {
 			<span className=' inline-block w-full'>
 				<span className='group flex items-center'>
 					<ChevronLeftIcon
-						className='-ml-0.5 mt-0.5 h-5 w-5 text-blue-600 sm:group-hover:text-purple-800'
+						className={`${
+							inView ? '-ml-0.5' : 'ml-0.5 sm:ml-2'
+						}  mt-[1px] h-5 w-5 text-blue-600 sm:group-hover:text-purple-800 `}
 						strokeWidth={2}
 					/>
 					<span className='-ml-0.5 block truncate text-blue-600 sm:group-hover:text-purple-800 '>

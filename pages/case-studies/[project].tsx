@@ -68,8 +68,10 @@ export default function CaseStudyPage({ project }) {
 				{/* Title */}
 				<section className='mt-5 sm:mt-10 py-5 flex items-center justify-between'>
 					<div className=''>
-						<div className='mb-1 text-zinc-600 font-serif text-xl sm:text-2xl'>Case Study</div>
-						<div className='text-3xl sm:text-4xl break-words font-bold'>{project.project_name}</div>
+						<div className='mb-1 text-zinc-600 text-xl sm:text-2xl'>Case Study</div>
+						<div className='text-3xl sm:text-4xl break-words font-bold font-["Hubot_Sans"]'>
+							{project.project_name}
+						</div>
 					</div>
 					<Image
 						src={project.about_client.logo_src}
@@ -81,61 +83,67 @@ export default function CaseStudyPage({ project }) {
 				<section className='mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 sm:gap-32 gap-10'>
 					{/* About The Client */}
 					<section>
-						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase'>About The Client</h2>
-						<div className='border-b border-dashed border-zinc-300' />
-						<div className='mt-4 text-zinc-600 font-medium'>Brand Name</div>
-						<p className='text-zinc-400'>{project.about_client.brand_name}</p>
+						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Hubot_Sans"]'>
+							About The Client
+						</h2>
+						<div className='border-zinc-300' />
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Brand Name</div>
+						<p className='text-zinc-500'>{project.about_client.brand_name}</p>
 
-						<div className='mt-4 text-zinc-600 font-medium'>About</div>
-						<p className='text-zinc-400'>{project.about_client.long_about}</p>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>About</div>
+						<p className='text-zinc-500'>{project.about_client.long_about}</p>
 
-						<div className='mt-4 text-zinc-600 font-medium'>Company Name</div>
-						<p className='text-zinc-400'>{project.about_client.company_name}</p>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Company Name</div>
+						<p className='text-zinc-500'>{project.about_client.company_name}</p>
 
-						<div className='mt-4 text-zinc-600 font-medium'>Phone Number</div>
-						<p className='text-zinc-400'>{project.about_client.phone_number}</p>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Phone Number</div>
+						<p className='text-zinc-500'>{project.about_client.phone_number}</p>
 
-						<div className='mt-4 text-zinc-600 font-medium'>Website</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Website</div>
 						<ExternalLink href={project.about_client.website} name={project.about_client.website} />
-						<div className='mt-4 text-zinc-600 font-medium'>Office Location</div>
-						<p className='text-zinc-400'>{project.about_client.office_location}</p>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>
+							Office Location
+						</div>
+						<p className='text-zinc-500'>{project.about_client.office_location}</p>
 					</section>
 
 					{/* About The Project */}
 					<section>
-						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase'>
+						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Hubot_Sans"]'>
 							About The Project
 						</h2>
-						<div className='border-b border-dashed border-zinc-300' />
+						<div className='border-zinc-300' />
 
-						<div className='mt-4 text-zinc-600 font-medium'>Client</div>
-						<p className='text-zinc-400'>{project.about_project.client}</p>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Client</div>
+						<p className='text-zinc-500'>{project.about_project.client}</p>
 
-						<div className='mt-4 text-zinc-600 font-medium'>My Role</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>My Role</div>
 						<ExplanationList>
 							{project.about_project.my_role.map((a: string) => (
-								<li className='text-zinc-400' key={a}>
+								<li className='text-zinc-500' key={a}>
 									{a}
 								</li>
 							))}
 						</ExplanationList>
 
-						<div className='mt-4 text-zinc-600 font-medium'>Working Periode</div>
-						<p className='text-zinc-400'>{project.about_project.working_period}</p>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>
+							Working Periode
+						</div>
+						<p className='text-zinc-500'>{project.about_project.working_period}</p>
 
-						<div className='mt-4 text-zinc-600 font-medium'>Website Status</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Website Status</div>
 						<ExplanationList>
 							{project.about_project.website_status.map((a: string) => (
-								<li className='text-zinc-400' key={a}>
+								<li className='text-zinc-500' key={a}>
 									{a}
 								</li>
 							))}
 						</ExplanationList>
 
-						<div className='mt-4 text-zinc-600 font-medium'>Website Routes</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Website Routes</div>
 						<ExplanationList>
 							{project.about_project.routes.map((a: string) => (
-								<li className='text-zinc-400' key={a}>
+								<li className='text-zinc-500' key={a}>
 									{a}
 								</li>
 							))}
