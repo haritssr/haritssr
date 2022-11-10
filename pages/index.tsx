@@ -29,7 +29,6 @@ import React from 'react';
 import { WorkContacts } from '../data/WorkContacts';
 import { SocialMediaContacts } from '../data/SocialMediaContacts';
 import { TechStackData } from '../data/TechStackData';
-import ExplanationList from '@/components/ExplanationList';
 import { projectCaseStudyData } from 'data/projectCaseStudyData';
 
 import { Disclosure } from '@headlessui/react';
@@ -64,12 +63,31 @@ const Wrapper = ({
 }) => {
 	return (
 		<div id={id}>
-			<div className='mb-6 space-y-2'>
-				<Link href={`/#${id}`} className='text-2xl font-bold text-zinc-800 sm:text-3xl'>
-					{topic}
-				</Link>
-			</div>
-			<div className={className}>{children}</div>
+			<Disclosure defaultOpen={true}>
+				{({ open }) => (
+					<>
+						<section className='mb-6 flex items-center justify-between'>
+							<Link
+								href={`/#${id}`}
+								className=' font-["Hubot_Sans"] text-2xl font-bold text-zinc-800 sm:text-3xl'
+							>
+								{topic}
+							</Link>
+							<Disclosure.Button>
+								<div className='h-8 w-8 bg-apple-gray6/50 hover:bg-apple-gray4/50 flex items-center justify-center rounded-full border border-zinc-200'>
+									<ChevronDownIcon
+										className={` text-zinc-700 h-4 w-4 ${open ? 'rotate-180' : ''}`}
+										strokeWidth={3}
+									/>
+								</div>
+							</Disclosure.Button>
+						</section>
+						<Disclosure.Panel>
+							<div className={className}>{children}</div>
+						</Disclosure.Panel>
+					</>
+				)}
+			</Disclosure>
 		</div>
 	);
 };
@@ -92,7 +110,7 @@ const Contacts = () => {
 				/>
 			</section>
 			<section className='space-y-3'>
-				<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-6 sm:mb-0'>
+				<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-6 sm:mb-0 font-["Mona_Sans"]'>
 					Harits Syah
 				</div>
 				<div className='flex items-center space-x-1'>
