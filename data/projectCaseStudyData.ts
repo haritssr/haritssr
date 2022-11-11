@@ -20,7 +20,9 @@ export const projectCaseStudyData = [
 			website_status: ['Production'],
 			routes: ['Home','Referensi','Analisis', 'Latihan', 'Bimbel']
 		},
-		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Fnode-id%3D2147%253A5142"
+		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Fnode-id%3D2147%253A5142",
+		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
+
 		
 	},
 	{
@@ -44,7 +46,8 @@ export const projectCaseStudyData = [
 			website_status: ['Production', 'Change management (site manage by AKA Trading team, not by me anymore)'],
 			routes: ['Home','About us','Products', 'Contact']
 		},
-		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FOO23zC5c2iErduRQkQAfsI%2FAKA-Trading-Indonesia%3Fnode-id%3D202%253A2"
+		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FOO23zC5c2iErduRQkQAfsI%2FAKA-Trading-Indonesia%3Fnode-id%3D202%253A2",
+		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
 	},
 	{
 		project_name: 'Haris Studio',
@@ -67,7 +70,9 @@ export const projectCaseStudyData = [
 			website_status: ['Production'],
 			routes: ['Home','Referensi','Analisis', 'Latihan', 'Bimbel']
 		},
-		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuGmQbyzyBBOS3RAUEJKQws%2FHaris-Studio%3Fnode-id%3D0%253A1"
+		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuGmQbyzyBBOS3RAUEJKQws%2FHaris-Studio%3Fnode-id%3D0%253A1",
+		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
+
 	},
 	{
 		project_name: 'Mixa Perkasa',
@@ -90,9 +95,11 @@ export const projectCaseStudyData = [
 			website_status: ['Production'],
 			routes: ['Home','Project','Product', 'About']
 		},
-		figma: "Tidak ada"
+		figma: "",
+		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
 	},
 	{
+		
 		project_name: 'Arsya Wyata Mandiri',
 		hrefCaseStudy: 'arsya-wyata-mandiri',
 		about_client: {
@@ -113,8 +120,10 @@ export const projectCaseStudyData = [
 			website_status: ['Production'],
 			routes: ['Home', 'Nice Time', 'About us']
 		},
-		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F5UlfaU19xiex5E4sECrKu1%2FAWM"
+		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F5UlfaU19xiex5E4sECrKu1%2FAWM",
+		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
 	},
+
 	{
 		project_name: 'Harits Syah',
 		hrefCaseStudy: 'haritssr',
@@ -123,7 +132,7 @@ export const projectCaseStudyData = [
 			brand_name: 'Harits Syah Personal Site',
 			short_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a lot of frontend experiments.',
 			long_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a lot of frontend experiments.',
-			company_name: '-',
+			company_name: 'Personal Site',
 			phone_number: '+62-8953-3110-3401',
 			website: 'www.haritssr.com',
 			office_location: '-',
@@ -136,7 +145,9 @@ export const projectCaseStudyData = [
 			website_status: ['Production'],
 			routes: ['Home','Experiments','Case Studies','Design Systems']
 		},
-		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FbLTdTJgThkmzd5aAZVP8Rr%2Fharitssr%3Fnode-id%3D17%253A2"
+		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FbLTdTJgThkmzd5aAZVP8Rr%2Fharitssr%3Fnode-id%3D17%253A2",
+		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
+
 	}
 ]
 

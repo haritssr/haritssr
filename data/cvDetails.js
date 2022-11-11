@@ -1,7 +1,17 @@
 export const cvDetails = [
 	{
-		section: 'Experience',
 		section_lists: [
+			/**
+			 * {
+			 id -> project_name
+			 logo_src -> about_client.logo_src:
+			 office -> company_name
+			 role -> about_project.my_role[0]
+			 periode -> 
+			 desc -> 
+			 site_link -> about_client.website
+			 * }
+			 */
 			{
 				id: 1,
 				logo_src: '/haris-lab.png',

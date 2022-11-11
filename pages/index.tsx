@@ -2,7 +2,6 @@ import ContactComponent from '@/components/ContactComponent';
 import InternalLink from '@/components/InternalLink';
 import InternalLinkWithoutArrow from '@/components/InternalLinkWithoutArrow';
 
-import { cvDetails } from 'data/cvDetails';
 import ExternalLink from '@/components/ExternalLink';
 import Layout from '@/components/Layout';
 import ProjectsBox from '@/components/ProjectBox';
@@ -11,6 +10,7 @@ import {
 	BriefcaseIcon,
 	BuildingOfficeIcon,
 	ChevronDownIcon,
+	ChevronRightIcon,
 	MapPinIcon,
 } from '@heroicons/react/24/outline';
 import {
@@ -32,6 +32,8 @@ import { TechStackData } from '../data/TechStackData';
 import { projectCaseStudyData } from 'data/projectCaseStudyData';
 
 import { Disclosure } from '@headlessui/react';
+import { educationData } from 'data/educationData';
+import { nonFormalEducationData } from 'data/nonFormalEducationData';
 
 export default function Home() {
 	return (
@@ -359,33 +361,91 @@ const CV = () => {
 							<div>CV Details</div>
 							<ChevronDownIcon className={` h-5 w-5 ${open ? 'rotate-180' : ''}`} />
 						</Disclosure.Button>
-						<Disclosure.Panel className='-mt-[1px] p-4 border border-apple-gray4 rounded-b'>
-							<section className='space-y-4'>
-								{cvDetails.map(data => (
-									<div key={data.section} className='space-y-4'>
-										<div className='font-semibold text-2xl'>{data.section}</div>
-										{data.section_lists.map(section => (
-											<div key={section.id}>
-												<div className='flex items-center space-x-2'>
-													<Image
-														src={section.logo_src}
-														height={20}
-														width={20}
-														alt={section.office}
-														className='aspect-auto h-5 w-5'
-													/>
-													<div className='font-semibold text-lg'>{section.role}</div>
-												</div>
-												<div className='pl-7 text-zinc-500 space-y-1.5 mt-1.5'>
-													<div>{section.office}</div>
-													<div>{section.periode}</div>
-													<div>{section.desc}</div>
-													<div>
-														<ExternalLink href={section.site_link} name={section.site_link} />
-													</div>
+						<Disclosure.Panel className='-mt-[1px] px-4 py-8 border border-apple-gray4	 rounded-b'>
+							<section className='space-y-8'>
+								<div className='font-semibold text-2xl'>Experience</div>
+
+								{projectCaseStudyData.map(project => (
+									<div key={project.project_name}>
+										<div className='flex items-center justify-between'>
+											<div className='flex items-center space-x-2'>
+												<Image
+													src={project.about_client.logo_src}
+													height={20}
+													width={20}
+													alt={project.about_client.company_name}
+													className='aspect-auto h-5 w-5'
+												/>
+												<div className='font-semibold text-lg'>
+													{project.about_project.my_role[0]}
 												</div>
 											</div>
-										))}
+											<Link
+												passHref
+												href={`/case-studies/${project.hrefCaseStudy}`}
+												className='flex items-center justify-end text-zinc-400 hover:underline'
+											>
+												<div className='text-tiny '>Details</div>
+												<ChevronRightIcon className='h-4 w-4' />
+											</Link>
+										</div>
+										<div className='pl-7 text-zinc-500 space-y-1.5 mt-1.5'>
+											<div>{project.about_client.company_name}</div>
+											<div>{project.about_project.working_period}</div>
+											<div>{project.skills}</div>
+											<div>
+												<ExternalLink
+													href={project.about_client.website}
+													name={project.about_client.website}
+												/>
+											</div>
+										</div>
+									</div>
+								))}
+
+								<div className='font-semibold text-2xl'>Formal Education</div>
+
+								{educationData.map(school => (
+									<div key={school.school}>
+										<div className='flex items-center space-x-2'>
+											<Image
+												src={school.logo}
+												height={20}
+												width={20}
+												alt={school.school}
+												className='aspect-auto h-5 w-5'
+											/>
+											<div className='font-semibold text-lg'>{school.level}</div>
+										</div>
+
+										<div className='pl-7 text-zinc-500 space-y-1.5 mt-1.5'>
+											<div>{school.school}</div>
+											<div>{school.period}</div>
+											<div>{school.status}</div>
+										</div>
+									</div>
+								))}
+
+								<div className='font-semibold text-2xl'>Non Formal Education</div>
+
+								{nonFormalEducationData.map(school => (
+									<div key={school.school}>
+										<div className='flex items-center space-x-2'>
+											<Image
+												src={school.logo}
+												height={20}
+												width={20}
+												alt={school.school}
+												className='aspect-auto h-5 w-5'
+											/>
+											<div className='font-semibold text-lg'>{school.level}</div>
+										</div>
+										<div className='pl-7 text-zinc-500 space-y-1.5 mt-1.5'>
+											<div>{school.school}</div>
+											<div>{school.period}</div>
+											<div>{school.status}</div>
+											<ExternalLink name='Sertificate' href='www.harislab.com' />
+										</div>
 									</div>
 								))}
 							</section>

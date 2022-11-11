@@ -86,15 +86,14 @@ export default function CaseStudyPage({ project }) {
 						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Hubot_Sans"]'>
 							About The Client
 						</h2>
-						<div className='border-zinc-300' />
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Company Name</div>
+						<p className='text-zinc-500'>{project.about_client.company_name}</p>
+
 						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Brand Name</div>
 						<p className='text-zinc-500'>{project.about_client.brand_name}</p>
 
 						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>About</div>
 						<p className='text-zinc-500'>{project.about_client.long_about}</p>
-
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Company Name</div>
-						<p className='text-zinc-500'>{project.about_client.company_name}</p>
 
 						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Phone Number</div>
 						<p className='text-zinc-500'>{project.about_client.phone_number}</p>
@@ -112,10 +111,6 @@ export default function CaseStudyPage({ project }) {
 						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Hubot_Sans"]'>
 							About The Project
 						</h2>
-						<div className='border-zinc-300' />
-
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Client</div>
-						<p className='text-zinc-500'>{project.about_project.client}</p>
 
 						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>My Role</div>
 						<ExplanationList>
@@ -126,9 +121,7 @@ export default function CaseStudyPage({ project }) {
 							))}
 						</ExplanationList>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>
-							Working Periode
-						</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Working Period</div>
 						<p className='text-zinc-500'>{project.about_project.working_period}</p>
 
 						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Website Status</div>
@@ -155,7 +148,11 @@ export default function CaseStudyPage({ project }) {
 				<section className='mt-10'>
 					<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase'>Design</h2>
 					<Suspense fallback={<div>Loading...</div>}>
-						<iframe className='w-full h-[450px]' src={project.figma} allowFullScreen></iframe>
+						{project.figma !== '' ? (
+							<iframe className='w-full h-[450px]' src={project.figma} allowFullScreen></iframe>
+						) : (
+							<p className='text-zinc-800 font-["Hubot_Sans"]'>No design</p>
+						)}
 					</Suspense>
 				</section>
 			</main>
