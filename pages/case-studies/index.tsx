@@ -18,7 +18,7 @@ export default function CaseStudiesHomePage() {
 		<div className='bg-white'>
 			<Head>
 				<title>{router.asPath === '/' ? 'Harits Syah' : `${browserTitle} - Harits Syah`}</title>
-				<link rel='icon' href='/icons/haritssr.svg' />
+				<link rel='icon' href='/icons/haritssr.png' />
 				<meta name='theme-color' content='#27272a' />
 				<meta name='robots' content='follow, index' />
 				<meta name='description' content={description} />

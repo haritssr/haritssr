@@ -68,15 +68,12 @@ const Wrapper = ({
 			<Disclosure defaultOpen={true}>
 				{({ open }) => (
 					<>
-						<section className='mb-6 flex items-center justify-between'>
-							<Link
-								href={`/#${id}`}
-								className=' font-["Hubot_Sans"] text-2xl font-bold text-zinc-800 sm:text-3xl'
-							>
+						<section className='mb-6 sm:mb-8 flex items-center justify-between'>
+							<Link href={`/#${id}`} className=' text-2xl font-bold text-zinc-800 sm:text-3xl'>
 								{topic}
 							</Link>
 							<Disclosure.Button>
-								<div className='h-8 w-8 bg-apple-gray6/50 hover:bg-apple-gray4/50 flex items-center justify-center rounded-full border border-zinc-200'>
+								<div className='h-8 w-8 bg-apple-gray6/50 hover:bg-apple-gray4/50 flex items-center justify-center rounded-full border border-zinc-200 hover:border-zinc-300'>
 									<ChevronDownIcon
 										className={` text-zinc-700 h-4 w-4 ${open ? 'rotate-180' : ''}`}
 										strokeWidth={3}
@@ -194,13 +191,13 @@ const Experiments = () => {
 					key={experiment.id}
 				>
 					<section className='mb-1 flex justify-between  border-b border-apple-gray4 px-3 py-1.5 bg-apple-gray6/50'>
-						<div className='flex items-center space-x-2'>
+						<div className='flex items-center '>
 							<div className='font-semibold text-zinc-700'>{experiment.title}</div>
-							<section className='flex items-center'>
-								<Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
-							</section>
 						</div>
-						<div className='text-tiny text-zinc-500'>{experiment.links.length}</div>
+						<section className='flex items-center space-x-2'>
+							<div className='text-tiny text-zinc-500'>{experiment.links.length}</div>
+							<Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
+						</section>
 					</section>
 					<ol className='space-y-1 px-3 py-2'>
 						{experiment.links.map(link => (

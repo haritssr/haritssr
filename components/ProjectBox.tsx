@@ -23,7 +23,7 @@ export default function ProjectsBox({
 	hrefCaseStudy,
 }: ProjectBoxTypes) {
 	return (
-		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto sm:hover:shadow-lg hover:border-apple-gray2 duration-100 cursor-grab'>
+		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:border-apple-gray2 duration-100'>
 			<section className=' flex flex-col justify-between  bg-white p-3'>
 				<div className='mb-3 flex items-center justify-between space-x-2'>
 					<div className='flex items-center space-x-2'>
@@ -43,7 +43,7 @@ export default function ProjectsBox({
 						href={href}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='flex items-center justify-center border border-zinc-700 py-1 rounded space-x-1 bg-zinc-700 hover:bg-zinc-600 hover:border-zinc-600 text-white w-1/2 group'
+						className='flex items-center justify-center border border-zinc-700 py-1 rounded space-x-1 bg-zinc-700 hover:bg-zinc-800 text-white w-1/2 group'
 					>
 						<div className='text-tiny'>Visit site</div>
 						{/* External Link Icon */}
@@ -65,7 +65,7 @@ export default function ProjectsBox({
 					<Link
 						passHref
 						href={`/case-studies/${hrefCaseStudy}`}
-						className='bg-white border border-zinc-400 py-1 hover:bg-apple-gray6 rounded text-zinc-600 w-1/2 flex items-center justify-center group'
+						className='bg-white border border-zinc-400 py-1 hover:bg-apple-gray6 hover:text-zinc-800 rounded text-zinc-600 w-1/2 flex items-center justify-center group'
 					>
 						<div className='text-tiny'>Case study</div>
 						{/* Chevron Right Icon */}

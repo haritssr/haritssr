@@ -30,7 +30,9 @@ const Wrapper = ({
 	return (
 		<div id={id}>
 			<div className='mb-6 space-y-2'>
-				<span className='text-2xl font-bold text-zinc-800 sm:text-3xl'>{topic}</span>
+				<span className='text-2xl font-bold text-zinc-800 sm:text-3xl font-["Mona_Sans"]'>
+					{topic}
+				</span>
 			</div>
 			<div className={className}>{children}</div>
 		</div>
@@ -41,7 +43,7 @@ const A = () => {
 	return (
 		<Wrapper topic='Design System' className='' id='DesignSystem'>
 			<Topic name='Color' />
-			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
+			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				{color.map(data => (
 					<div className='space-y-1' key={data.name}>
 						<div style={{ backgroundColor: data.hex }} className={` h-16 w-16 rounded-md border`} />
@@ -51,7 +53,7 @@ const A = () => {
 				))}
 			</section>
 			<Topic name='Button' />
-			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
+			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				<div className='space-y-1'>
 					<ExternalLink href='/' name='ExternalLink' />
 					<div className='text-zinc-500'>External Link</div>
@@ -74,13 +76,17 @@ const A = () => {
 				</div>
 			</section>
 			<Topic name='Typography' />
-			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
+			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				<div className='space-y-1'>
-					<div className='text-2xl font-bold text-zinc-800 sm:text-3xl'>Heading</div>
+					<div className='text-2xl font-bold text-zinc-800 sm:text-3xl font-["Mona_Sans"]'>
+						Page Title
+					</div>
 					<div className='text-zinc-500'>Heading</div>
 				</div>
 				<div className='space-y-1'>
-					<div className='text-xl font-semibold text-zinc-700'>Heading 2</div>
+					<div className='text-xl font-semibold text-zinc-800 font-["Hubot_Sans"]'>
+						Section Title
+					</div>
 					<div className='text-zinc-500'>Heading 2</div>
 				</div>
 				<div className='space-y-1'>
@@ -90,38 +96,64 @@ const A = () => {
 					<div className='text-zinc-500'>Paragraph</div>
 				</div>
 			</section>
-			<Topic name='Icon' />
-			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
+
+			<Topic name='Fonts' />
+			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
+				<div className="space-y-1 font-['Hubot_Sans']">
+					<div className='font-semibold text-zinc-800 '>Hubot Sans</div>
+					<div className='text-zinc-500'>Section title</div>
+				</div>
+				<div className="space-y-1 font-['Mona_Sans']">
+					<div className='font-semibold text-zinc-800 '>Mona Sans</div>
+					<div className='text-zinc-500'>Page title</div>
+				</div>
 				<div className='space-y-1'>
-					<Image src='/haritssr.png' alt='' width='20' height='20' />
+					<div className='font-semibold text-zinc-800 '>Inter</div>
+					<div className='text-zinc-500'>Paragraph, description</div>
+				</div>
+			</section>
+
+			<Topic name='Icon' />
+			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 border p-4'>
+				<div className='space-y-1'>
+					<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Mobile</div>
 				</div>
 				<div className='space-y-1'>
-					<Image src='/haritssr.png' alt='' width='20' height='20' />
+					<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Desktop</div>
 				</div>
 				<div className='space-y-1'>
 					<div className='w-fit rounded-md border bg-zinc-800 p-2'>
-						<Image src='/haritssr.png' alt='' width='20' height='20' />
+						<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
 					</div>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
-					<div className='text-zinc-500'>On dark background</div>
+					<div className='text-zinc-500'>Dark background</div>
 				</div>
 				<div className='space-y-1'>
 					<div className='w-fit rounded-md border bg-white p-2'>
-						<Image src='/haritssr.png' alt='' width='20' height='20' />
+						<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
 					</div>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
-					<div className='text-zinc-500'>On light background</div>
+					<div className='text-zinc-500'>Light background</div>
 				</div>
 			</section>
 			<Topic name='Box' />
-			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 border-t pt-2 sm:grid-cols-3 lg:grid-cols-4'>
+			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4'>
 				<div className='space-y-1'>
-					<div className='h-40 overflow-hidden rounded-md border border-zinc-300 bg-gradient-to-bl from-zinc-50 via-white to-white' />
+					<div className='h-40 overflow-hidden rounded-md border border-zinc-300 bg-white' />
 					<div className='text-zinc-500'>Box</div>
+				</div>
+				<div className='space-y-1'>
+					<div className='h-40 overflow-hidden rounded-md border border-zinc-300 bg-white'>
+						<div className='px-3 py-1.5 rounded-t-md font-semibold border-b border-zinc-300 bg-apple-gray6/50 text-zinc-800'>
+							Title
+						</div>
+						<div className='rounded-b-md'></div>
+					</div>
+					<div className='text-zinc-500'>Named Box</div>
 				</div>
 			</section>
 		</Wrapper>

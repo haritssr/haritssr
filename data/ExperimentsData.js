@@ -31,7 +31,7 @@ export const ExperimentsData = [
 	{
 		id: 2,
 		title: 'React',
-		logoSrc: '/icons/reactjs.ico',
+		logoSrc: '/icons/react.png',
 		description:
 			'React.js are javascript library for building user interface on web or mobile, but for me i just using it for web, whether is mobile web or desktop web. React.js have a lot of API like Hooks and component API.',
 		links: [
@@ -62,7 +62,7 @@ export const ExperimentsData = [
 	{
 		id: 3,
 		title: 'Nextjs',
-		logoSrc: '/icons/nextjs.ico',
+		logoSrc: '/icons/nextjs.png',
 		description:
 			'These are my exploration and implementation of Next.js API, from data fetching, image optimization, rendering method, routing, and others, which usually different from just React.js',
 		links: [
@@ -81,7 +81,7 @@ export const ExperimentsData = [
 	{
 		id: 4,
 		title: 'Browser',
-		logoSrc: '/icons/chrome.svg',
+		logoSrc: '/icons/chrome.png',
 		description:
 			'These are my exploration of native built-in browser API, from UI, optimization, text-editing,  multimedia, and others.',
 		links: [
@@ -120,7 +120,7 @@ export const ExperimentsData = [
 	{
 		id: 7,
 		title: 'Mantine',
-		logoSrc: '/icons/mantine.svg',
+		logoSrc: '/icons/mantine.png',
 		description:
 			'These are my exploration of headless user interface components (components UI without bound to any styling) of Mantine, each pages might have more than one example since I tried manipulating one thing in many ways. My implementation using Tailwind CSS or Emotion CSS-in-JS.',
 		links: ['Carousel'],
@@ -175,14 +175,6 @@ export const ExperimentsData = [
 		],
 	},
 	{
-		id: 10,
-		title: 'Sandpack',
-		logoSrc: '/icons/sandpack.ico',
-		description: 'Live code editor',
-		links: ['Example 1'],
-	},
-
-	{
 		id: 11,
 		title: 'Notion API',
 		logoSrc: '/icons/notion.png',
@@ -222,7 +214,7 @@ export const ExperimentsData = [
 	{
 		id: 16,
 		title: 'React Table',
-		logoSrc: '/icons/KaTeX.png',
+		logoSrc: '/icons/tanstack.png',
 		description: 'Table',
 		links: [
 			'Basic',
@@ -237,7 +229,7 @@ export const ExperimentsData = [
 	{
 		id: 17,
 		title: 'React Query',
-		logoSrc: '/icons/KaTeX.png',
+		logoSrc: '/icons/tanstack.png',
 		description:
 			'Fetching, caching, synchronizing and updating server state in your React applications.',
 		links: ['Basic'],
@@ -245,7 +237,7 @@ export const ExperimentsData = [
 	{
 		id: 18,
 		title: 'Haris Lab',
-		logoSrc: '/icons/KaTeX.png',
+		logoSrc: '/icons/harislab.png',
 		description: 'Haris Lab Components',
 		links: ['Global Modal', 'Context Modal', 'Side Bar'],
 	},

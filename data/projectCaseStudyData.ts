@@ -3,7 +3,7 @@ export const projectCaseStudyData = [
 		project_name: 'Haris Lab',
 		hrefCaseStudy: 'haris-lab',
 		about_client: {
-			logo_src: '/haris-lab.png',
+			logo_src: '/icons/harislab.png',
 			brand_name: 'Haris Lab',
 			short_about: 'Reference, analyze, practice, assesment, tutoring Math and Physics.',
 			long_about: 'Provide online platform for reference, analyze, practice, assesment, and offline tutoring math and physics high school and early college level.',
@@ -29,7 +29,7 @@ export const projectCaseStudyData = [
 		project_name: 'AKA Trading Indonesia',
 		hrefCaseStudy: 'aka-tradingindo',
 		about_client: {
-			logo_src: '/aka-tradingindo.PNG',
+			logo_src: '/icons/aka-tradingindo.PNG',
 			brand_name: 'AKA Trading Indonesia',
 			short_about: 'Provide agricultural product for all your need. From coffee to spices.',
 			long_about: 'Cooperating and collaborating with various stakeholders to produce and distribute agricultural products that meet your qualifications.',
@@ -53,7 +53,7 @@ export const projectCaseStudyData = [
 		project_name: 'Haris Studio',
 		hrefCaseStudy: 'haris-studio',
 		about_client: {
-			logo_src: '/haris-studio.png',
+			logo_src: '/icons/harisstudio.png',
 			brand_name: 'Haris Studio',
 			short_about: 'Provide web design, web creation, and web user experience services.',
 			long_about: '-',
@@ -78,7 +78,7 @@ export const projectCaseStudyData = [
 		project_name: 'Mixa Perkasa',
 		hrefCaseStudy: 'mixa-perkasa',
 		about_client: {
-			logo_src: '/mixa-perkasa.png',
+			logo_src: '/icons/mixa-perkasa.png',
 			brand_name: 'Mixa Perkasa',
 			short_about: 'Renovation contractor, new building, interior design, landscape work, etc.',
 			long_about: 'Starting from a small business with experience in the field of construction and land, now it has grown into a company engaged in Renovation Contractors, New Buildings, Interior Design and Landscape Works.',
@@ -103,7 +103,7 @@ export const projectCaseStudyData = [
 		project_name: 'Arsya Wyata Mandiri',
 		hrefCaseStudy: 'arsya-wyata-mandiri',
 		about_client: {
-			logo_src: '/awm.png',
+			logo_src: '/icons/awm.png',
 			brand_name: 'Arsya, Nice Time',
 			short_about: 'Providing good food, drinks, and good place for our loved customers.',
 			long_about: '-',
@@ -128,7 +128,7 @@ export const projectCaseStudyData = [
 		project_name: 'Harits Syah',
 		hrefCaseStudy: 'haritssr',
 		about_client: {
-			logo_src: '/haritssr.png',
+			logo_src: '/icons/haritssr.png',
 			brand_name: 'Harits Syah Personal Site',
 			short_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a lot of frontend experiments.',
 			long_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a lot of frontend experiments.',

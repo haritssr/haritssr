@@ -44,7 +44,7 @@ export default function CaseStudyPage({ project }) {
 		<div className='bg-white'>
 			<Head>
 				<title>{router.asPath === '/' ? 'Harits Syah' : `${browserTitle} - Harits Syah`}</title>
-				<link rel='icon' href='/icons/haritssr.svg' />
+				<link rel='icon' href='/icons/haritssr.png' />
 				<meta name='theme-color' content='#27272a' />
 				<meta name='robots' content='follow, index' />
 				<meta name='description' content={description} />
@@ -69,7 +69,7 @@ export default function CaseStudyPage({ project }) {
 				<section className='mt-5 sm:mt-10 py-5 flex items-center justify-between'>
 					<div className=''>
 						<div className='mb-1 text-zinc-600 text-xl sm:text-2xl'>Case Study</div>
-						<div className='text-3xl sm:text-4xl break-words font-bold font-["Hubot_Sans"]'>
+						<div className='text-3xl sm:text-4xl break-words font-bold font-["Mona_Sans"]'>
 							{project.project_name}
 						</div>
 					</div>
@@ -149,7 +149,7 @@ export default function CaseStudyPage({ project }) {
 					<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase'>Design</h2>
 					<Suspense fallback={<div>Loading...</div>}>
 						{project.figma !== '' ? (
-							<iframe className='w-full h-[450px]' src={project.figma} allowFullScreen></iframe>
+							<iframe className='w-full h-[600px]' src={project.figma} allowFullScreen></iframe>
 						) : (
 							<p className='text-zinc-800 font-["Hubot_Sans"]'>No design</p>
 						)}

@@ -27,7 +27,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 		<>
 			<Head>
 				<title>{yes}</title>
-				<link rel='icon' href='/icons/haritssr.svg' />
+				<link rel='icon' href='/icons/haritssr.png' />
 				<meta name='theme-color' content='#27272a' />
 				<meta name='robots' content='follow, index' />
 				<meta name='description' content={title} />
@@ -51,9 +51,9 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 				<article className='mx-auto min-h-screen w-full max-w-4xl sm:w-3/4 sm:px-0'>
 					{/* Navigation */}
 					<div
-						className={`${router.asPath === '/' ? '' : 'sticky -top-0.5 sm:top-5'} border-b ${
-							inView ? '' : 'border-b'
-						} z-40 mb-5  w-full border-apple-gray4 bg-white py-2 sm:rounded-full sm:border sm:shadow-md`}
+						className={`sticky -top-0.5 sm:top-5 border-b ${
+							inView ? 'border-zinc-300' : 'border-b sm:shadow'
+						} z-40 mb-5  w-full  bg-white py-2 sm:rounded-full sm:border `}
 					>
 						<div className='mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5'>
 							<BackToExperiments inView={inView} />
@@ -96,7 +96,7 @@ const BackToExperiments = ({ inView }: { inView: any }) => {
 					<ChevronLeftIcon
 						className={`${
 							inView ? '-ml-0.5' : 'ml-0.5 sm:ml-2'
-						}  mt-[1px] h-5 w-5 text-blue-600 sm:group-hover:text-purple-800 `}
+						}  h-5 w-5 text-blue-600 sm:group-hover:text-purple-800 `}
 						strokeWidth={2}
 					/>
 					<span className='-ml-0.5 block truncate text-blue-600 sm:group-hover:text-purple-800 '>
