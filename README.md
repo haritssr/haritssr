@@ -7,7 +7,7 @@
 # Hi, I'm Haris 👋
 
 > _Software Engineer & Designer, Haris Lab_
-> I am a **user experience designer** with a focus on **design systems**. My path started in illustration and fine art and evolved to where I am today. I'm facinated by color an visual perception, as well as the mathematics of design. I'm an author and maintainer of our enterprise-level design system tokens at Adobe.
+> I am a Software Engineer at Haris Lab, a place to learn math and physics for high school and early college science student level. I also run blog at [here](https://www.haritssr.com) 
 
 ### Find me elsewhere
 
