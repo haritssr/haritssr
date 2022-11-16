@@ -37,7 +37,7 @@ import { nonFormalEducationData } from 'data/nonFormalEducationData';
 
 export default function Home() {
 	return (
-		<Layout browserTitle='Projects' description='Home'>
+		<Layout browserTitle='Home' description='Home'>
 			<section className='mt-5 space-y-20 sm:mt-10 '>
 				<Contacts />
 				<Projects />
@@ -158,8 +158,8 @@ const Contacts = () => {
 const Projects = () => {
 	return (
 		<Wrapper
-			id='projects'
-			topic='My Projects'
+			id='my-experience'
+			topic='My Experiences'
 			className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-4'
 		>
 			{projectCaseStudyData.map(d => (
