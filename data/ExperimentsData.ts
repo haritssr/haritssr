@@ -244,3 +244,5 @@ export const ExperimentsData = [
 ];
 
 // console.log(sizeof(ExperimentsData));
+
+export type ExperimentsData = typeof ExperimentsData[0]

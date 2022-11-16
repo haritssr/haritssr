@@ -34,6 +34,7 @@ import { projectCaseStudyData } from 'data/projectCaseStudyData';
 import { Disclosure } from '@headlessui/react';
 import { educationData } from 'data/educationData';
 import { nonFormalEducationData } from 'data/nonFormalEducationData';
+import ExperimentsBox from '@/components/ExperimentsBox';
 
 export default function Home() {
 	return (
@@ -186,33 +187,9 @@ const Experiments = () => {
 			className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
 		>
 			{ExperimentsData.map(experiment => (
-				<article
-					className='overflow-hidden rounded-md border border-apple-gray4'
-					key={experiment.id}
-				>
-					<section className='mb-1 flex justify-between  border-b border-apple-gray4 px-3 py-1.5 bg-apple-gray6/50'>
-						<div className='flex items-center '>
-							<div className='font-semibold text-zinc-700'>{experiment.title}</div>
-						</div>
-						<section className='flex items-center space-x-2'>
-							<div className='text-tiny text-zinc-500'>{experiment.links.length}</div>
-							<Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
-						</section>
-					</section>
-					<ol className='space-y-1 px-3 py-2'>
-						{experiment.links.map(link => (
-							<li key={link} className='text-zinc-600'>
-								<InternalLink
-									href={`/experiments/${experiment.title.toLowerCase().replace(' ', '-')}/${link
-										.toLowerCase()
-										// /\s/g regex -> search all (g = global) whitespace, and replace them with '-'
-										.replace(/\s/g, '-')}`}
-									name={link}
-								/>
-							</li>
-						))}
-					</ol>
-				</article>
+				<div key={experiment.id}>
+					<ExperimentsBox experiment={experiment} />
+				</div>
 			))}
 		</Wrapper>
 	);
