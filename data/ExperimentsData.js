@@ -57,6 +57,7 @@ export const ExperimentsData = [
 			'Edit Profile',
 			'forwardRefExample',
 			'Font Mixer',
+			'Counter',
 		],
 	},
 	{
