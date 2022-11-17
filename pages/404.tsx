@@ -11,12 +11,8 @@ export default function NotFoundPage() {
 
 				<div
 					onClick={() => history.back()}
-					className='flex cursor-pointer items-center space-x-1 rounded-full bg-white border border-blue-600 py-1 pl-3 pr-5 text-blue-600 hover:bg-blue-100 group'
+					className='flex cursor-pointer items-center rounded-full bg-white border border-blue-600 py-1 px-4 text-blue-600 hover:bg-blue-50 group'
 				>
-					<ChevronLeftIcon
-						className='h-4 w-4 group-hover:-translate-x-[1px] duration-100'
-						strokeWidth={2}
-					/>
 					<div>Back</div>
 				</div>
 			</div>

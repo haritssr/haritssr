@@ -161,7 +161,6 @@ export const ExperimentsData = [
 			'Hover Card',
 			'Navigation Menu',
 			'Popover',
-			'Progress',
 			'Radio Group',
 			'Scroll Area',
 			'Select',
