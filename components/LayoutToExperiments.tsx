@@ -46,7 +46,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
 			<GlobalHead />
 
-			<main className='mx-auto flex max-w-5xl sm:mt-10 sm:gap-10 lg:px-0'>
+			<main className='mx-auto flex max-w-5xl sm:mt-10 sm:gap-10 sm:px-5 xl:px-0'>
 				<SideBarExperiments />
 				<article className='mx-auto min-h-screen w-full max-w-4xl sm:w-3/4 sm:px-0'>
 					{/* Navigation */}

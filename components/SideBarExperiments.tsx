@@ -6,7 +6,7 @@ import InternalLink from './InternalLink';
 
 export default function SideBarExperiments() {
 	return (
-		<div className='sticky top-10 h-auto sm:w-1/4 hidden sm:block'>
+		<div className='sticky top-10 h-auto sm:w-1/4 hidden lg:block'>
 			<div className='-ml-2 space-y-1 bg-zinc-100 rounded-md p-2'>
 				{ExperimentsData.map(({ id, title, logoSrc, links }) => (
 					<Accordion.Root type='multiple' key={id}>
