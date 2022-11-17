@@ -5,7 +5,7 @@ import ExternalLink from '@/components/ExternalLink';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ExplanationList from '@/components/ExplanationList';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 
 export default function ExportedDialog() {
 	return (
@@ -40,7 +40,7 @@ export default function ExportedDialog() {
 const Wrapper = ({ title, children }: { title: string; children: React.ReactNode }) => {
 	return (
 		<div>
-			<Topic name={title} />
+			<Section name={title} />
 			{children}
 		</div>
 	);

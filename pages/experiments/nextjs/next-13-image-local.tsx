@@ -5,7 +5,7 @@ import LenovoWallpaper from '../../../public/images/LenovoWallPaper.jpg';
 import Image from 'next/image';
 import SubTitle from '@/components/SubTitle';
 import ExternalLink from '@/components/ExternalLink';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 
 export default function Next13Image() {
 	return (
@@ -18,10 +18,10 @@ export default function Next13Image() {
 			</SubTitle>
 
 			<section className='space-y-5'>
-				<Topic name='Bare minimum' />
+				<Section name='Bare minimum' />
 				<Image src={LenovoWallpaper} alt='Lenovo Wallpaper' placeholder='blur' />
 
-				<Topic name='Rounded image' />
+				<Section name='Rounded image' />
 				<Image
 					src={LenovoWallpaper}
 					alt='Lenovo Wallpaper'
@@ -29,7 +29,7 @@ export default function Next13Image() {
 					className='rounded-md'
 				/>
 
-				<Topic name='Group images' />
+				<Section name='Group images' />
 				<div className='grid grid-cols-2 gap-5'>
 					<Image src={LenovoWallpaper} alt='Lenovo Wallpaper' placeholder='blur' />
 					<Image src={LenovoWallpaper} alt='Lenovo Wallpaper' placeholder='blur' />
@@ -37,7 +37,7 @@ export default function Next13Image() {
 					<Image src={LenovoWallpaper} alt='Lenovo Wallpaper' placeholder='blur' />
 				</div>
 
-				<Topic name='Text over image' />
+				<Section name='Text over image' />
 				<div className='relative'>
 					<Image src={LenovoWallpaper} alt='Lenovo Wallpaper' placeholder='blur' />
 					<div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-zinc-700/40 w-full h-full flex items-center justify-center'>
@@ -51,7 +51,7 @@ export default function Next13Image() {
 					</div>
 				</div>
 
-				<Topic name='Using fill' />
+				<Section name='Using fill' />
 				<div className='relative h-96'>
 					<Image
 						src={LenovoWallpaper}
@@ -62,7 +62,7 @@ export default function Next13Image() {
 					/>
 				</div>
 
-				<Topic name='Using sizes' />
+				<Section name='Using sizes' />
 				<div className='relative h-96'>
 					<Image
 						src={LenovoWallpaper}
@@ -76,7 +76,7 @@ export default function Next13Image() {
 
 				{/* Still confused about this part */}
 				{/* https://beta.nextjs.org/docs/api-reference/components/image#style */}
-				<Topic name='Using style + height/width auto' />
+				<Section name='Using style + height/width auto' />
 				<div className='relative h-96'>
 					<Image
 						src={LenovoWallpaper}

@@ -5,7 +5,7 @@ import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { Disclosure, Transition } from '@headlessui/react';
 import React from 'react';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 
 const Data = [
 	{
@@ -57,7 +57,7 @@ export default function ExportedDisclosure() {
 const Wrapper = ({ children, title }: { children: React.ReactNode; title: string }) => {
 	return (
 		<div>
-			<Topic name={title} />
+			<Section name={title} />
 			<div className='space-y-2'>{children}</div>
 		</div>
 	);

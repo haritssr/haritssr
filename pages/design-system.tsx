@@ -1,4 +1,4 @@
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 import InternalLink from '@/components/InternalLink';
 import ExternalLink from '@/components/ExternalLink';
 import Layout from '@/components/Layout';
@@ -42,7 +42,7 @@ const Wrapper = ({
 const A = () => {
 	return (
 		<Wrapper topic='Design System' className='' id='DesignSystem'>
-			<Topic name='Color' />
+			<Section name='Color' />
 			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				{color.map(data => (
 					<div className='space-y-1' key={data.name}>
@@ -52,7 +52,7 @@ const A = () => {
 					</div>
 				))}
 			</section>
-			<Topic name='Button' />
+			<Section name='Button' />
 			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				<div className='space-y-1'>
 					<ExternalLink href='/' name='ExternalLink' />
@@ -75,7 +75,7 @@ const A = () => {
 					<div className='text-zinc-500'>Secondary Button</div>
 				</div>
 			</section>
-			<Topic name='Typography' />
+			<Section name='Typography' />
 			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				<div className='space-y-1'>
 					<div className='text-2xl font-bold text-zinc-800 sm:text-3xl font-["Mona_Sans"]'>
@@ -97,7 +97,7 @@ const A = () => {
 				</div>
 			</section>
 
-			<Topic name='Fonts' />
+			<Section name='Fonts' />
 			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				<div className="space-y-1 font-['Hubot_Sans']">
 					<div className='font-semibold text-zinc-800 '>Hubot Sans</div>
@@ -113,7 +113,7 @@ const A = () => {
 				</div>
 			</section>
 
-			<Topic name='Icon' />
+			<Section name='Icon' />
 			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 border p-4'>
 				<div className='space-y-1'>
 					<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
@@ -140,7 +140,7 @@ const A = () => {
 					<div className='text-zinc-500'>Light background</div>
 				</div>
 			</section>
-			<Topic name='Box' />
+			<Section name='Box' />
 			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4'>
 				<div className='space-y-1'>
 					<div className='h-40 overflow-hidden rounded-md border border-zinc-300 bg-white' />

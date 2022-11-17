@@ -2,7 +2,7 @@ import BackButton from '@/components/BackButton';
 import ExplanationList from '@/components/ExplanationList';
 import ExternalLink from '@/components/ExternalLink';
 import Layout from '@/components/Layout';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 import { projectCaseStudyData } from 'data/projectCaseStudyData';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';

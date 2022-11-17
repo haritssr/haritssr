@@ -4,7 +4,7 @@ import ExternalLink from '@/components/ExternalLink';
 
 import { Popover, Transition } from '@headlessui/react';
 import ExplanationList from '@/components/ExplanationList';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 
 export default function ExportedPopover() {
 	return (
@@ -35,7 +35,7 @@ export default function ExportedPopover() {
 const Wrapper = ({ title, children }: { title: string; children: React.ReactNode }) => {
 	return (
 		<div>
-			<Topic name={title} />
+			<Section name={title} />
 			{children}
 		</div>
 	);

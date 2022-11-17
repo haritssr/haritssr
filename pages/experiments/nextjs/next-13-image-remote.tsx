@@ -5,7 +5,7 @@ import LenovoWallpaper from '../../../public/images/LenovoWallPaper.jpg';
 import Image from 'next/image';
 import SubTitle from '@/components/SubTitle';
 import ExternalLink from '@/components/ExternalLink';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 
 export default function Next13ImageRemote() {
 	return (
@@ -19,7 +19,7 @@ export default function Next13ImageRemote() {
 
 			<section className='space-y-5'>
 				{/* FAIL */}
-				{/* <Topic name='Bare minimum' />
+				{/* <Section name='Bare minimum' />
 				<Image
 					src='https://unsplash.com/photos/FouyeA9HH5U'
 					width='600'

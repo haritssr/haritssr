@@ -1,5 +1,5 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 import InternalLink from '@/components/InternalLink';
 import ExternalLink from '@/components/ExternalLink';
 import SubTitle from '@/components/SubTitle';
@@ -26,7 +26,7 @@ export default function ExportedCollapsible() {
 				</ExplanationList>
 			</SubTitle>
 			<Collapsible.Root open={open} onOpenChange={setOpen} className='w-full sm:w-2/3'>
-				<Topic name='List of a groceries' />
+				<Section name='List of a groceries' />
 				<div className='space-y-2'>
 					<InternalLink name='This is Accoordion' href='/work/radix-ui/accordion' />
 					<InternalLink name='This is Dropdown Menu' href='/work/radix-ui/dropdown-menu' />

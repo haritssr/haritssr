@@ -5,7 +5,7 @@ import ExplanationList from '@/components/ExplanationList';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import * as Accordion from '@radix-ui/react-accordion';
-import Topic from '@/components/Topic';
+import Section from '@/components/Section';
 
 export default function ExportedAccordion() {
 	return (
@@ -24,7 +24,7 @@ export default function ExportedAccordion() {
 				</ExplanationList>
 			</SubTitle>
 			<div className='space-y-2'>
-				<Topic name='Accordion + (transition)' />
+				<Section name='Accordion + (transition)' />
 				<AccordionComponents title='Title'>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias reiciendis animi, error in
 					rerum modi numquam impedit dolore odit ex fugit vel, iste voluptates rem optio sint
