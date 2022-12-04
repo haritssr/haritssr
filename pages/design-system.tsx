@@ -116,25 +116,52 @@ const A = () => {
 			<Section name='Icon' />
 			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 border p-4'>
 				<div className='space-y-1'>
-					<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
+					<Image
+						src='/icons/haritssr.png'
+						alt=''
+						width='20'
+						height='20'
+						blurDataURL='/icons/haritssr.png'
+						placeholder='blur'
+					/>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Mobile</div>
 				</div>
 				<div className='space-y-1'>
-					<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
+					<Image
+						src='/icons/haritssr.png'
+						alt=''
+						width='20'
+						height='20'
+						blurDataURL='/icons/haritssr.png'
+						placeholder='blur'
+					/>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Desktop</div>
 				</div>
 				<div className='space-y-1'>
 					<div className='w-fit rounded-md border bg-zinc-800 p-2'>
-						<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
+						<Image
+							src='/icons/haritssr.png'
+							alt=''
+							width='20'
+							height='20'
+							blurDataURL='/icons/haritssr.png'
+						/>
 					</div>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Dark background</div>
 				</div>
 				<div className='space-y-1'>
 					<div className='w-fit rounded-md border bg-white p-2'>
-						<Image src='/icons/haritssr.png' alt='' width='20' height='20' />
+						<Image
+							src='/icons/haritssr.png'
+							alt=''
+							width='20'
+							height='20'
+							blurDataURL='/icons/haritssr.png'
+							placeholder='blur'
+						/>
 					</div>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Light background</div>

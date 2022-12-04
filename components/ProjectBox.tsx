@@ -27,7 +27,15 @@ export default function ProjectsBox({
 			<section className=' flex flex-col justify-between  bg-white p-3'>
 				<div className='mb-3 flex items-center justify-between space-x-2'>
 					<div className='flex items-center space-x-2'>
-						<Image src={imgSrc} alt={title} width='24' height='24' />
+						<Image
+							src={imgSrc}
+							alt={title}
+							width='24'
+							height='24'
+							blurDataURL={imgSrc}
+							className='aspect-auto h-6 w-6'
+							// placeholder='blur'
+						/>
 						<p className='truncate font-semibold text-zinc-700 text-xl'>{title}</p>
 					</div>
 				</div>
@@ -75,7 +83,7 @@ export default function ProjectsBox({
 							viewBox='0 0 24 24'
 							strokeWidth={1.8}
 							stroke='currentColor'
-							className='h-4 w-4 group-hover:translate-x-0.5 duration-100 ease-in'
+							className='h-4 w-4'
 						>
 							<path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
 						</svg>

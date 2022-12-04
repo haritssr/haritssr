@@ -1,12 +1,9 @@
 import BackButton from '@/components/BackButton';
 import ExplanationList from '@/components/ExplanationList';
 import ExternalLink from '@/components/ExternalLink';
-import Layout from '@/components/Layout';
-import Section from '@/components/Section';
 import { projectCaseStudyData } from 'data/projectCaseStudyData';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Suspense } from 'react';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -78,41 +75,41 @@ export default function CaseStudyPage({ project }) {
 						alt={project.project_name}
 						height='70'
 						width='70'
+						blurDataURL={project.about_client.logo_src}
+						// placeholder='blur'
 					/>
 				</section>
 				<section className='mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 sm:gap-32 gap-10'>
 					{/* About The Client */}
 					<section>
-						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Hubot_Sans"]'>
+						<h2 className='mb-4 text-xl font-bold text-zinc-800 uppercase font-["Mona_Sans"]'>
 							About The Client
 						</h2>
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Company Name</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Company Name</div>
 						<p className='text-zinc-500'>{project.about_client.company_name}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Brand Name</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Brand Name</div>
 						<p className='text-zinc-500'>{project.about_client.brand_name}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>About</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>About</div>
 						<p className='text-zinc-500'>{project.about_client.long_about}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Phone Number</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Phone Number</div>
 						<p className='text-zinc-500'>{project.about_client.phone_number}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Website</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Website</div>
 						<ExternalLink href={project.about_client.website} name={project.about_client.website} />
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>
-							Office Location
-						</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Office Location</div>
 						<p className='text-zinc-500'>{project.about_client.office_location}</p>
 					</section>
 
 					{/* About The Project */}
 					<section>
-						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Hubot_Sans"]'>
+						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Mona_Sans"]'>
 							About The Project
 						</h2>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>My Role</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>My Role</div>
 						<ExplanationList>
 							{project.about_project.my_role.map((a: string) => (
 								<li className='text-zinc-500' key={a}>
@@ -121,10 +118,10 @@ export default function CaseStudyPage({ project }) {
 							))}
 						</ExplanationList>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Working Period</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Working Period</div>
 						<p className='text-zinc-500'>{project.about_project.working_period}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Website Status</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Website Status</div>
 						<ExplanationList>
 							{project.about_project.website_status.map((a: string) => (
 								<li className='text-zinc-500' key={a}>
@@ -133,7 +130,7 @@ export default function CaseStudyPage({ project }) {
 							))}
 						</ExplanationList>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Hubot_Sans"]'>Website Routes</div>
+						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Website Routes</div>
 						<ExplanationList>
 							{project.about_project.routes.map((a: string) => (
 								<li className='text-zinc-500' key={a}>
@@ -151,7 +148,7 @@ export default function CaseStudyPage({ project }) {
 						{project.figma !== '' ? (
 							<iframe className='w-full h-[600px]' src={project.figma} allowFullScreen></iframe>
 						) : (
-							<p className='text-zinc-800 font-["Hubot_Sans"]'>No design</p>
+							<p className='text-zinc-800 font-["Mona_Sans"]'>No design</p>
 						)}
 					</Suspense>
 				</section>

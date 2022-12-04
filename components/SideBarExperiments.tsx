@@ -16,7 +16,14 @@ export default function SideBarExperiments() {
 									{/* grayscale group-hover:grayscale-0 */}
 									<div className='flex items-center space-x-1.5'>
 										<div className='rdx-state-open:grayscale-0'>
-											<Image src={logoSrc} height={16} width={16} alt={title} />
+											<Image
+												src={logoSrc}
+												height={16}
+												width={16}
+												alt={title}
+												blurDataURL={logoSrc}
+												// placeholder='blur'
+											/>
 										</div>
 										<span>{title}</span>
 									</div>

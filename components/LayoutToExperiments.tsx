@@ -20,7 +20,6 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 	const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
 	const image = '/images/hero.jpg';
 	const yes = `${title} - Harits Syah`;
-	const router = useRouter();
 	const { ref, inView } = useInView({ rootMargin: '-90px' });
 
 	return (

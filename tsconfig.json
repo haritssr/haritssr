@@ -2,6 +2,7 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "strictNullChecks": true,
+    // "noUnusedLocals":true,
     "target": "es5",
     "importHelpers":true,
     "lib": [

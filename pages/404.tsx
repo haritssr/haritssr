@@ -1,5 +1,4 @@
 import Layout from '@/components/Layout';
-import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 export default function NotFoundPage() {
 	return (

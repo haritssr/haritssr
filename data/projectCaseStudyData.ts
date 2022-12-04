@@ -67,7 +67,7 @@ export const projectCaseStudyData = [
 			client: 'PT Haris Studio Indonesia, via Harits Syah*',
 			my_role: ['Software Engineer', 'Designer', 'Owner'],
 			working_period: 'Jun 2021 - Present',
-			website_status: ['Production'],
+			website_status: ['Development'],
 			routes: ['Home','Referensi','Analisis', 'Latihan', 'Bimbel']
 		},
 		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuGmQbyzyBBOS3RAUEJKQws%2FHaris-Studio%3Fnode-id%3D0%253A1",

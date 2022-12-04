@@ -1,11 +1,7 @@
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 
-import LenovoWallpaper from '../../../public/images/LenovoWallPaper.jpg';
-
-import Image from 'next/image';
 import SubTitle from '@/components/SubTitle';
 import ExternalLink from '@/components/ExternalLink';
-import Section from '@/components/Section';
 
 export default function Next13ImageRemote() {
 	return (

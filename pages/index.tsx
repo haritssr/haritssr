@@ -105,7 +105,7 @@ const Contacts = () => {
 					className='z-10 rounded-full aspect-ratio'
 					alt='Harits Syah'
 					blurDataURL='/images/me.jpg'
-					placeholder='blur'
+					// placeholder='blur'
 				/>
 			</section>
 			<section className='space-y-3'>
@@ -196,7 +196,14 @@ const Experiments = () => {
 						</div>
 						<section className='flex items-center space-x-2'>
 							<div className='text-tiny text-zinc-500'>{experiment.links.length}</div>
-							<Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
+							<Image
+								src={experiment.logoSrc}
+								height={16}
+								width={16}
+								alt={experiment.title}
+								blurDataURL={experiment.logoSrc}
+								// placeholder='blur'
+							/>
 						</section>
 					</section>
 					<ol className='space-y-1 px-3 py-2'>
@@ -372,6 +379,8 @@ const CV = () => {
 													width={20}
 													alt={project.about_client.company_name}
 													className='aspect-auto h-5 w-5'
+													blurDataURL={project.about_client.logo_src}
+													// placeholder='blur'
 												/>
 												<div className='font-semibold text-lg'>
 													{project.about_project.my_role[0]}
@@ -411,6 +420,8 @@ const CV = () => {
 												width={20}
 												alt={school.school}
 												className='aspect-auto h-5 w-5'
+												blurDataURL={school.logo}
+												// placeholder='blur'
 											/>
 											<div className='font-semibold text-lg'>{school.level}</div>
 										</div>
@@ -434,6 +445,8 @@ const CV = () => {
 												width={20}
 												alt={school.school}
 												className='aspect-auto h-5 w-5'
+												blurDataURL={school.logo}
+												// placeholder='blur'
 											/>
 											<div className='font-semibold text-lg'>{school.level}</div>
 										</div>
