@@ -57,7 +57,7 @@ export default function ProjectsBox({
 						{/* External Link Icon */}
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
-							className='h-4 w-4 group-hover:-translate-y-[1px] group-hover:translate-x-[1px] duration-100 ease-in'
+							className='h-4 w-4'
 							fill='none'
 							viewBox='0 0 24 24'
 							stroke='currentColor'

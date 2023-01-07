@@ -7,12 +7,11 @@
 # Hi, I'm Haris 👋
 
 > _Software Engineer & Designer, Haris Lab_
-> I am a **user experience designer** with a focus on **design systems**. My path started in illustration and fine art and evolved to where I am today. I'm facinated by color an visual perception, as well as the mathematics of design. I'm an author and maintainer of our enterprise-level design system tokens at Adobe.
+> I am a **Software Engineer and Math&Physics Teacher** with a focus on **User Experience of UI**. My path started in math and physics education and evolved with frontend engineering to where I am today. I'm facinated by data visualization, information architecture, UI, UX, and the capability of the web as a information tool. I'm the founder of [Haris Lab](https://harislab.com) and several mini-project company. I do several freelance too.
 
 ### Find me elsewhere
 
-- [Twitter](https://twitter.com/NateBaldwinArt)
-- [Medium](https://medium.com/@NateBaldwin)
+- [Twitter](https://twitter.com/haritssr)
 - [LinkedIn](https://www.linkedin.com/in/haritssr)
 - [Outlook](mailto:haritssr@outlook.co.id)
 - [GMail](mailto:haritssr@gmail.com)
