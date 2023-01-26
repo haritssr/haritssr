@@ -58,6 +58,7 @@ export const ExperimentsData = [
 			'forwardRefExample',
 			'Font Mixer',
 			'Counter',
+			'React Wrap Balancer'
 		],
 	},
 	{
