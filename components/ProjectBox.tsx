@@ -57,7 +57,7 @@ export default function ProjectsBox({
 						{/* External Link Icon */}
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
-							className='h-4 w-4'
+							className='h-3.5 w-3.5'
 							fill='none'
 							viewBox='0 0 24 24'
 							stroke='currentColor'
@@ -83,7 +83,7 @@ export default function ProjectsBox({
 							viewBox='0 0 24 24'
 							strokeWidth={1.8}
 							stroke='currentColor'
-							className='h-4 w-4'
+							className='h-3.5 w-3.5'
 						>
 							<path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
 						</svg>

@@ -39,7 +39,7 @@ import ExperimentsBox from '@/components/ExperimentsBox';
 export default function Home() {
 	return (
 		<Layout browserTitle='Home' description='Home'>
-			<section className='mt-5 space-y-20 sm:mt-10 '>
+			<section className='mt-5 space-y-24 sm:mt-10 '>
 				<Contacts />
 				<Projects />
 				<CV />
@@ -69,7 +69,7 @@ const Wrapper = ({
 			<Disclosure defaultOpen={true}>
 				{({ open }) => (
 					<>
-						<section className='mb-6 sm:mb-8 flex items-center justify-between'>
+						<section className='mb-5 flex items-center justify-between'>
 							<Link href={`/#${id}`} className=' text-2xl font-bold text-zinc-800 sm:text-3xl'>
 								{topic}
 							</Link>
