@@ -57,11 +57,13 @@ const Wrapper = ({
 	className,
 	children,
 	id,
+	explanation,
 }: {
 	topic: string;
 	className?: string;
 	children: React.ReactNode;
 	id: string;
+	explanation: string;
 }) => {
 	return (
 		<div id={id}>
@@ -82,6 +84,7 @@ const Wrapper = ({
 							</Disclosure.Button>
 						</section>
 						<Disclosure.Panel>
+							<div className="mb-5 text-lg text-zinc-600">{explanation}</div>
 							<div className={className}>{children}</div>
 						</Disclosure.Panel>
 					</>
@@ -158,9 +161,10 @@ const Contacts = () => {
 const Projects = () => {
 	return (
 		<Wrapper
-			id='experience'
+			id='experiences'
 			topic='Experiences'
 			className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-4'
+			explanation="All of my projects with use cases"
 		>
 			{projectCaseStudyData.map(d => (
 				<ProjectsBox
@@ -184,6 +188,7 @@ const Experiments = () => {
 			id='experiments'
 			topic='Experiments'
 			className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
+			explanation="My experiments across my javascript and react ecosystem stack"
 		>
 			{ExperimentsData.map(experiment => (
 				<div key={experiment.id}>
@@ -200,6 +205,7 @@ const TechStack = () => {
 			id='techstack'
 			topic='Tech Stack'
 			className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
+			explanation="My choosen libraries and framework to build web application"
 		>
 			{TechStackData.map(data => (
 				<TechStackComponent domain={data?.domain} links={data?.links} key={data?.domain} />
@@ -210,7 +216,7 @@ const TechStack = () => {
 
 const DesignSystem = () => {
 	return (
-		<Wrapper id='DesignSystem' topic='Design System' className=''>
+		<Wrapper id='DesignSystem' topic='Design System' className='' explanation="My user interface components library and guidelines">
 			<InternalLink name='Design System' href='/design-system' />
 		</Wrapper>
 	);
@@ -218,7 +224,7 @@ const DesignSystem = () => {
 
 const CaseStudies = () => {
 	return (
-		<Wrapper id='CaseStudies' topic='Case Studies' className=''>
+		<Wrapper id='CaseStudies' topic='Case Studies' className='' explanation="Case studies for my Experiences Section">
 			<InternalLink name='Case Studies' href='/case-studies' />
 		</Wrapper>
 	);
@@ -226,7 +232,7 @@ const CaseStudies = () => {
 
 const CV = () => {
 	return (
-		<Wrapper id='CV' topic='Curriculum Vitae' className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+		<Wrapper id='CV' topic='Curriculum Vitae' className='grid grid-cols-1 sm:grid-cols-2 gap-5' explanation="Formal CV sorted by time">
 			<Disclosure as='div'>
 				{({ open }) => (
 					<>
