@@ -13,15 +13,6 @@ import {
 	ChevronRightIcon,
 	MapPinIcon,
 } from '@heroicons/react/24/outline';
-import {
-	MathPhysicsBooks,
-	JavaScriptDocumentation,
-	FrontEndBooks,
-	UIUXBooks,
-	CodingPlatform,
-	ReactPatterns,
-	ReactBlogs,
-} from 'data/BooksData';
 import { ExperimentsData } from 'data/ExperimentsData';
 import Image from 'next/image';
 import Link from 'next/link';
