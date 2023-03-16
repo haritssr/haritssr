@@ -154,7 +154,7 @@ const Projects = () => {
 		<Wrapper
 			id='experiences'
 			topic='Experiences'
-			className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-4'
+			className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-3'
 			explanation="All of my projects with use cases"
 		>
 			{projectCaseStudyData.map(d => (
