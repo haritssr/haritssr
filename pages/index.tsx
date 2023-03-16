@@ -45,7 +45,6 @@ export default function Home() {
 				<CV />
 				<Experiments />
 				<TechStack />
-				<Reading />
 				<DesignSystem />
 				<CaseStudies />
 			</section>
@@ -159,8 +158,8 @@ const Contacts = () => {
 const Projects = () => {
 	return (
 		<Wrapper
-			id='my-experience'
-			topic='My Experiences'
+			id='experience'
+			topic='Experiences'
 			className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-4'
 		>
 			{projectCaseStudyData.map(d => (
@@ -183,7 +182,7 @@ const Experiments = () => {
 	return (
 		<Wrapper
 			id='experiments'
-			topic='My Experiments'
+			topic='Experiments'
 			className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
 		>
 			{ExperimentsData.map(experiment => (
@@ -199,81 +198,12 @@ const TechStack = () => {
 	return (
 		<Wrapper
 			id='techstack'
-			topic='My Tech Stack'
+			topic='Tech Stack'
 			className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
 		>
 			{TechStackData.map(data => (
 				<TechStackComponent domain={data?.domain} links={data?.links} key={data?.domain} />
 			))}
-		</Wrapper>
-	);
-};
-
-const Reading = () => {
-	return (
-		<Wrapper id='Reading' topic='Reading' className='columns-1 sm:columns-2 sm:gap-5'>
-			<section>
-				<h2 className='mb-2 text-xl font-semibold text-zinc-700'>Technical Frontend Books</h2>
-				<section className='grid grid-cols-1 gap-2'>
-					{FrontEndBooks.map(({ title, href }) => (
-						<ExternalLink name={title} href={href} key={title} />
-					))}
-				</section>
-			</section>
-
-			<section>
-				<h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>UI/UX Books</h2>
-				<section className='grid grid-cols-1 gap-2'>
-					{UIUXBooks.map(({ title, href }) => (
-						<ExternalLink name={title} href={href} key={title} />
-					))}
-				</section>
-			</section>
-
-			<section>
-				<h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>Math & Physics Books</h2>
-				<section className='grid grid-cols-1 gap-2'>
-					{MathPhysicsBooks.map(({ title, href }) => (
-						<ExternalLink name={title} href={href} key={title} />
-					))}
-				</section>
-			</section>
-
-			<section>
-				<h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>Coding Platforms</h2>
-				<section className='grid grid-cols-1 gap-2'>
-					{CodingPlatform.map(({ title, href }) => (
-						<ExternalLink key={title} name={title} href={href} />
-					))}
-				</section>
-			</section>
-
-			<section>
-				<h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>JavaScript Documentation</h2>
-				<section className='grid grid-cols-1 gap-2'>
-					{JavaScriptDocumentation.map(({ title, href }) => (
-						<ExternalLink key={title} name={title} href={href} />
-					))}
-				</section>
-			</section>
-
-			<section>
-				<h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>React Patterns</h2>
-				<section className='grid grid-cols-1 gap-2'>
-					{ReactPatterns.map(({ title, href }) => (
-						<ExternalLink key={title} name={title} href={href} />
-					))}
-				</section>
-			</section>
-
-			<section>
-				<h2 className='mt-6 mb-2 text-xl font-semibold text-zinc-700'>React Blogs</h2>
-				<section className='grid grid-cols-1 gap-2'>
-					{ReactBlogs.map(({ title, href }) => (
-						<ExternalLink key={title} name={title} href={href} />
-					))}
-				</section>
-			</section>
 		</Wrapper>
 	);
 };
