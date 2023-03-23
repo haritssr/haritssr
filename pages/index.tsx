@@ -61,7 +61,7 @@ const Wrapper = ({
 			<Disclosure defaultOpen={true}>
 				{({ open }) => (
 					<>
-						<section className='mb-5 flex items-center justify-between'>
+						<section className='mb-4 flex items-center justify-between'>
 							<Link href={`/#${id}`} className=' text-2xl font-bold text-zinc-800 sm:text-3xl'>
 								{topic}
 							</Link>
@@ -173,6 +173,7 @@ const Projects = () => {
 		</Wrapper>
 	);
 };
+
 const Experiments = () => {
 	return (
 		<Wrapper
