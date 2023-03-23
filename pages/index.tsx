@@ -102,7 +102,7 @@ const Contacts = () => {
 					// placeholder='blur'
 				/>
 			</section>
-			<section className='space-y-3'>
+			<section className='space-y-4'>
 				<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-6 sm:mb-0 font-["Mona_Sans"]'>
 					Harits Syah
 				</div>
@@ -123,7 +123,7 @@ const Contacts = () => {
 					<div className=' text-zinc-800'>Tangerang, Indonesia</div>
 				</div>
 			</section>
-			<section className='space-y-3'>
+			<section className='space-y-[18px]'>
 				{WorkContacts.map(c => (
 					<ContactComponent
 						href={c.href}
@@ -134,7 +134,7 @@ const Contacts = () => {
 					/>
 				))}
 			</section>
-			<section className='space-y-3'>
+			<section className='space-y-[18px]'>
 				{SocialMediaContacts.map(c => (
 					<ContactComponent
 						href={c.href}
@@ -183,7 +183,7 @@ const Experiments = () => {
 		>
 			{ExperimentsData.map(experiment => (
 				<div key={experiment.id}>
-					<ExperimentsBox experiment={experiment} />
+					<ExperimentsBox	 experiment={experiment} />
 				</div>
 			))}
 		</Wrapper>
