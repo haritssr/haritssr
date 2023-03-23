@@ -90,7 +90,7 @@ export default function ProjectsBox({
 					</Link>
 				</section>
 			</section>
-			<section className='flex flex-col space-y-1.5 border-t border-zinc-300 bg-apple-gray6 px-3 py-3 text-zinc-800 sm:text-sm'>
+			<section className='flex flex-col space-y-1.5 border-t border-zinc-300 bg-apple-gray6 px-3 pt-3 pb-2.5 text-zinc-800 sm:text-sm'>
 				<article className='flex items-center justify-between text-zinc-700'>
 					<div className='flex w-1/3 items-center justify-between'>
 						<div className='font-semibold'>Period</div>

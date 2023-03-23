@@ -130,8 +130,8 @@ export const projectCaseStudyData = [
 		about_client: {
 			logo_src: '/icons/haritssr.png',
 			brand_name: 'Harits Syah Personal Site',
-			short_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a lot of frontend experiments.',
-			long_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a lot of frontend experiments.',
+			short_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a frontend experiments.',
+			long_about: 'Harits Syah\'s personal site. Portofolio, blogs, and a frontend experiments.',
 			company_name: 'Personal Site',
 			phone_number: '+62-8953-3110-3401',
 			website: 'www.haritssr.com',
