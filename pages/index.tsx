@@ -233,20 +233,20 @@ const CV = () => {
 								open ? 'rounded-b-none rounded-t-md' : 'rounded-md'
 							}`}
 						>
-							<div>Core Skills</div>
+							<div>Skills</div>
 							<ChevronDownIcon className={` h-5 w-5 ${open ? 'rotate-180' : ''}`} />
 						</Disclosure.Button>
 						<Disclosure.Panel className='-mt-[1px] p-4 border border-apple-gray4 rounded-b'>
 							<div className='font-semibold'>Software Engineering (Web Platform)</div>
 							<p className='text-zinc-500 pb-4'>
-								JavaScript, TypeScript, Next.js, React.js, Web platform, PWA.
+								JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js.
 							</p>
+							<div className='font-semibold'>Math & Physics</div>
+							<p className='text-zinc-500 pb-4'>High school and early college level.</p>
 							<div className='font-semibold'>UI Design (with Figma)</div>
-							<p className='text-zinc-500 pb-4'>
+							<p className='text-zinc-500 '>
 								Experiments, mockup, prototyping UI for mobile/desktop web.
 							</p>
-							<div className='font-semibold'>Math & Phycics</div>
-							<p className='text-zinc-500'>High school and early college level.</p>
 						</Disclosure.Panel>
 					</>
 				)}
