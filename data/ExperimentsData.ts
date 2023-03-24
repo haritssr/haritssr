@@ -10,7 +10,7 @@ export const ExperimentsData = [
 		title: 'Tailwind CSS',
 		logoSrc: '/icons/tailwindcss.png',
 		description:
-			'These are my exploration of using atomic CSS like Tailwind CSS for building user interface. I really like Tailwind CSS because it solve separation of concern problem, the API really easy to use, the documentation is really good, and the future of the framework are promising. All projects on this website use tailwind including Haris Lab, Haris Studio, haritssr.com, and AKA Trading Indonesia.',
+			'CSS Library',
 		links: [
 			'Position',
 			'Apple NavBar',
@@ -33,7 +33,7 @@ export const ExperimentsData = [
 		title: 'React',
 		logoSrc: '/icons/react.png',
 		description:
-			'React.js are javascript library for building user interface on web or mobile, but for me i just using it for web, whether is mobile web or desktop web. React.js have a lot of API like Hooks and component API.',
+			'React.js are javascript library for building user interface on web.',
 		links: [
 			'useState Todo List',
 			'useState Form',
@@ -66,7 +66,7 @@ export const ExperimentsData = [
 		title: 'Nextjs',
 		logoSrc: '/icons/nextjs.png',
 		description:
-			'These are my exploration and implementation of Next.js API, from data fetching, image optimization, rendering method, routing, and others, which usually different from just React.js',
+			'Next.js',
 		links: [
 			'Image Components',
 			'Router',
@@ -107,7 +107,7 @@ export const ExperimentsData = [
 		title: 'VisX',
 		logoSrc: '/icons/visx.png',
 		description:
-			'VisX are data vizualitaion library specially made for react that made by Airbnb, used by them, and maintine by them. Below are my exploration of these library. The library are very rich and have so many combination of possibility of layout that we can made. It is actually fun to try every one of them, since Data Visualization will never be die, there are always innovation on them.',
+			'Data visualization using React.js',
 		links: ['Bar Chart', 'Pie Chart'],
 	},
 
@@ -124,7 +124,7 @@ export const ExperimentsData = [
 		title: 'Mantine',
 		logoSrc: '/icons/mantine.png',
 		description:
-			'These are my exploration of headless user interface components (components UI without bound to any styling) of Mantine, each pages might have more than one example since I tried manipulating one thing in many ways. My implementation using Tailwind CSS or Emotion CSS-in-JS.',
+			'UI Component Library',
 		links: ['Carousel'],
 	},
 	{

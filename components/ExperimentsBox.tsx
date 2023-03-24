@@ -3,6 +3,9 @@ import InternalLink from './InternalLink';
 import type { ExperimentsData } from '../data/ExperimentsData';
 import { Disclosure } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import * as Tooltip from '@radix-ui/react-tooltip';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+
 
 export default function ExperimentsBox({ experiment }: { experiment: ExperimentsData }) {
 	return (
@@ -15,9 +18,28 @@ export default function ExperimentsBox({ experiment }: { experiment: Experiments
 								<div className='flex items-center space-x-2'>
 									<Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
 									<div className='font-semibold text-zinc-700'>{experiment.title}</div>
+									<Tooltip.Root>
+										<div className='flex space-x-1'>
+											{/* <div className='text-zinc-700'>MDN</div> */}
+											<Tooltip.Trigger className='flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700'>
+												<ExclamationCircleIcon
+													className='h-4 w-4 text-zinc-400 hover:text-zinc-700'
+													strokeWidth={2}
+												/>
+											</Tooltip.Trigger>
+											<Tooltip.Content
+												side='top'
+												align='center'
+												className='rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl'
+											>
+												<div>{experiment.description}</div>
+												<Tooltip.Arrow offset={5} width={10} height={5} className='fill-[#3F3F46]' />
+											</Tooltip.Content>
+										</div>
+									</Tooltip.Root>
 								</div>
 								<section className='flex items-center space-x-2'>
-									<div className='text-tiny text-zinc-500'>{experiment.links?.length}</div>
+									<div className='text-tiny text-zinc-400'>{experiment.links?.length}</div>
 									<ChevronDownIcon className={`w-4 h-4 ${open ? 'rotate-180' : ''}`} />
 								</section>
 							</section>
