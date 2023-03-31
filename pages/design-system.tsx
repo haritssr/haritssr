@@ -42,6 +42,7 @@ const Wrapper = ({
 const A = () => {
 	return (
 		<Wrapper topic='Design System' className='' id='DesignSystem'>
+			<div className="mb-20 text-zinc-600">This design system used in <ExternalLink name='haritssr.com' href='haritssr.com'/> and <ExternalLink name='Haris Lab' href="harislab.com" /></div>
 			<Section name='Color' />
 			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				{color.map(data => (
