@@ -66,11 +66,11 @@ const Wrapper = ({
 								{topic}
 							</Link>
 							<Disclosure.Button>
-								<div className='px-1.5 sm:pl-3.5 sm:pr-3 py-1.5 group sm:space-x-1.5 bg-apple-gray6/50 hover:bg-apple-gray4/30 flex items-center justify-center rounded-full border border-zinc-200 hover:border-zinc-300'>
-									<div className="hidden sm:block text-zinc-700 group-hover:text-zinc-600">{open ? "Minimize" : "Expand"}</div>
+								<div className='px-1.5 sm:pl-3.5 sm:pr-3 py-1.5 sm:py-1 group sm:space-x-1 bg-apple-gray6/50 hover:bg-apple-gray4/30 flex items-center justify-center rounded-full border border-zinc-200 hover:border-zinc-300'>
+									<div className="hidden sm:block text-tiny text-zinc-700 group-hover:text-zinc-600">{open ? "Minimize" : "Expand"}</div>
 									<ChevronDownIcon
 										className={` text-zinc-700 group-hover:text-zinc-500 h-4 w-4 ${open ? 'rotate-180' : ''}`}
-										strokeWidth={3}
+										strokeWidth={2}
 									/>
 								</div>
 							</Disclosure.Button>
