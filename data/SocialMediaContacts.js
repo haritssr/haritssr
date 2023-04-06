@@ -12,12 +12,6 @@ export const SocialMediaContacts = [
 		name: 'github.com/haritssr',
 	},
 	{
-		title: 'Lichess',
-		href: 'https://lichess.org/@/haritssr',
-		imgSrc: '/icons/lichess.webp',
-		name: 'lichess.org/@/haritssr',
-	},
-	{
 		title: 'Leetcode',
 		href: 'https://leetcode.com/haritssr/',
 		imgSrc: '/icons/leetcode.png',

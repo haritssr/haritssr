@@ -104,7 +104,7 @@ const Contacts = () => {
 				/>
 			</section>
 			<section className='space-y-3 sm:space-y-4'>
-				<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-6 sm:mb-0 font-["Mona_Sans"]'>
+				<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0 font-["Mona_Sans"]'>
 					Harits Syah
 				</div>
 				<div className='flex items-center space-x-1'>
@@ -124,7 +124,10 @@ const Contacts = () => {
 					<div className=' text-zinc-800'>Tangerang, Indonesia</div>
 				</div>
 			</section>
-			<section className='space-y-3 sm:space-y-[18px]'>
+			<section className='space-y-3 sm:space-y-4'>
+			<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0 font-["Mona_Sans"]'>
+					Contacts
+				</div>
 				{WorkContacts.map(c => (
 					<ContactComponent
 						href={c.href}
@@ -135,7 +138,10 @@ const Contacts = () => {
 					/>
 				))}
 			</section>
-			<section className='space-y-3 sm:space-y-[18px]'>
+			<section className='space-y-3 sm:space-y-4'>
+			<div className='text-2xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0 font-["Mona_Sans"]'>
+					Social Media
+				</div>
 				{SocialMediaContacts.map(c => (
 					<ContactComponent
 						href={c.href}

@@ -17,10 +17,4 @@ export const WorkContacts = [
 		imgSrc: '/icons/gmail.png',
 		name: 'haritssr@gmail.com',
 	},
-	{
-		title: 'Personal Website',
-		href: 'https://www.haritssr.com',
-		imgSrc: '/icons/haritssr.png',
-		name: 'haritssr.com',
-	},
 ];
