@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface ProjectBoxTypes {
+interface ExperienceBoxTypes {
 	href: string;
 	title: string;
 	description: string;
@@ -12,7 +12,7 @@ interface ProjectBoxTypes {
 	hrefCaseStudy: string;
 }
 
-export default function ProjectsBox({
+export default function ExperienceBox({
 	href,
 	title,
 	description,
@@ -21,10 +21,10 @@ export default function ProjectsBox({
 	imgSrc,
 	industry,
 	hrefCaseStudy,
-}: ProjectBoxTypes) {
+}: ExperienceBoxTypes) {
 	return (
 		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:border-apple-gray2 duration-100'>
-			<section className=' flex flex-col justify-between  bg-white p-3'>
+			<section className=' flex flex-col justify-between  bg-white p-3 space-y-3'>
 				<div className='mb-3 flex items-center justify-between space-x-2'>
 					<div className='flex items-center space-x-2'>
 						<Image
@@ -40,9 +40,9 @@ export default function ProjectsBox({
 					</div>
 				</div>
 
-				<div className='mb-1 text-zinc-700'>{description}</div>
+				<div className='text-zinc-700'>{description}</div>
 
-				<div className='text-zinc-500 mb-3'>
+				<div className='text-zinc-500'>
 					{href.substring(0, 12) === `https://www.` ? href.slice(12, href.length) : href}
 				</div>
 
@@ -53,11 +53,11 @@ export default function ProjectsBox({
 						rel='noopener noreferrer'
 						className='flex items-center justify-center border border-zinc-700 py-1 rounded space-x-1 bg-zinc-700 hover:bg-zinc-800 text-white w-1/2 group'
 					>
-						<div className='text-tiny'>Visit site</div>
+						<div className='text-tiny'>Visit</div>
 						{/* External Link Icon */}
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
-							className='h-3.5 w-3.5'
+							className='h-4 w-4'
 							fill='none'
 							viewBox='0 0 24 24'
 							stroke='currentColor'
@@ -75,7 +75,7 @@ export default function ProjectsBox({
 						href={`/case-studies/${hrefCaseStudy}`}
 						className='bg-white border border-zinc-400 py-1 hover:bg-apple-gray6 hover:text-zinc-800 rounded text-zinc-600 w-1/2 flex items-center justify-center group'
 					>
-						<div className='text-tiny'>Case study</div>
+						<div className='text-tiny'>Details</div>
 						{/* Chevron Right Icon */}
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -83,7 +83,7 @@ export default function ProjectsBox({
 							viewBox='0 0 24 24'
 							strokeWidth={1.8}
 							stroke='currentColor'
-							className='h-3.5 w-3.5'
+							className='h-4 w-4'
 						>
 							<path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
 						</svg>

@@ -4,12 +4,14 @@ import InternalLinkWithoutArrow from '@/components/InternalLinkWithoutArrow';
 
 import ExternalLink from '@/components/ExternalLink';
 import Layout from '@/components/Layout';
-import ProjectsBox from '@/components/ProjectBox';
+import ExperienceBox from '@/components/ExperienceBox';
 import { TechStackComponent } from '@/components/TechStackComponents';
 import {
 	BriefcaseIcon,
 	BuildingOfficeIcon,
 	ChevronDownIcon,
+	ArrowsPointingOutIcon,
+	ArrowsPointingInIcon,
 	ChevronRightIcon,
 	MapPinIcon,
 } from '@heroicons/react/24/outline';
@@ -20,7 +22,7 @@ import React from 'react';
 import { WorkContacts } from '../data/WorkContacts';
 import { SocialMediaContacts } from '../data/SocialMediaContacts';
 import { TechStackData } from '../data/TechStackData';
-import { projectCaseStudyData } from 'data/projectCaseStudyData';
+import { experienceCaseStudyData } from 'data/experienceCaseStudyData';
 
 import { Disclosure } from '@headlessui/react';
 import { educationData } from 'data/educationData';
@@ -32,7 +34,7 @@ export default function Home() {
 		<Layout browserTitle='Home' description='Home'>
 			<section className='mt-5 space-y-24 sm:mt-10 '>
 				<Contacts />
-				<Projects />
+				<Experiences />
 				<CV />
 				<Experiments />
 				<TechStack />
@@ -65,13 +67,13 @@ const Wrapper = ({
 							<Link href={`/#${id}`} className=' text-2xl font-bold text-zinc-800 sm:text-3xl'>
 								{topic}
 							</Link>
-							<Disclosure.Button>
-								<div className='px-1.5 sm:pl-3.5 sm:pr-3 py-1.5 sm:py-1 group sm:space-x-1 bg-apple-gray6/50 hover:bg-apple-gray4/30 flex items-center justify-center rounded-full border border-zinc-200 hover:border-zinc-300'>
-									<div className="hidden sm:block text-tiny text-zinc-700 group-hover:text-zinc-600">{open ? "Minimize" : "Expand"}</div>
-									<ChevronDownIcon
-										className={` text-zinc-700 group-hover:text-zinc-500 h-4 w-4 ${open ? 'rotate-180' : ''}`}
-										strokeWidth={2}
-									/>
+							<Disclosure.Button className="group">
+								<div className={`px-1.5 sm:pl-3.5 sm:pr-3 py-1.5  sm:py-1 group sm:space-x-2 flex items-center justify-center rounded-full border  group-hover:border-blue-600 ${open ? "border-zinc-300" : "border-blue-600"}`}>
+									<div className={`hidden sm:block text-tiny  group-hover:text-blue-600 ${open ? "text-zinc-500" : "text-blue-600"}`}>{open ? "Minimize" : "Expand" }</div>
+									{open ? 
+									<ArrowsPointingInIcon className="text-zinc-500 h-4 w-4 group-hover:text-blue-600" strokeWidth={1.8}/>
+									: 
+									<ArrowsPointingOutIcon className="text-blue-600 h-4 w-4 group-hover:text-blue-600" strokeWidth={1.8}/>}
 								</div>
 							</Disclosure.Button>
 						</section>
@@ -156,16 +158,16 @@ const Contacts = () => {
 	);
 };
 
-const Projects = () => {
+const Experiences = () => {
 	return (
 		<Wrapper
 			id='experiences'
 			topic='Experiences'
-			className='grid grid-cols-1 gap-5 sm:grid-cols-3 sm:px-0 lg:grid-cols-3'
+			className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0'
 			explanation="All of my projects with use cases"
 		>
-			{projectCaseStudyData.map(d => (
-				<ProjectsBox
+			{experienceCaseStudyData.map(d => (
+				<ExperienceBox
 					key={d.project_name}
 					href={d.about_client.website}
 					description={d.about_client.short_about}
@@ -187,7 +189,7 @@ const Experiments = () => {
 			id='experiments'
 			topic='Experiments'
 			className='columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
-			explanation="My experiments across my javascript and react ecosystem stack"
+			explanation="My experiments across JavaScript and React ecosystem stack"
 		>
 			{ExperimentsData.map(experiment => (
 				<div key={experiment.id}>
@@ -274,7 +276,7 @@ const CV = () => {
 							<section className='space-y-8'>
 								<div className='font-semibold text-2xl'>Experience</div>
 
-								{projectCaseStudyData.map(project => (
+								{experienceCaseStudyData.map(project => (
 									<div key={project.project_name}>
 										<div className='flex items-center justify-between'>
 											<div className='flex items-center space-x-2'>

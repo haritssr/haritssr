@@ -1,13 +1,13 @@
 import BackButton from '@/components/BackButton';
 import ExplanationList from '@/components/ExplanationList';
 import ExternalLink from '@/components/ExternalLink';
-import { projectCaseStudyData } from 'data/projectCaseStudyData';
+import { experienceCaseStudyData } from 'data/experienceCaseStudyData';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = projectCaseStudyData.map(({ hrefCaseStudy }) => {
+	const paths = experienceCaseStudyData.map(({ hrefCaseStudy }) => {
 		return { params: { project: hrefCaseStudy } };
 	});
 
@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async context => {
-	const project = projectCaseStudyData.filter(p => p.hrefCaseStudy === context.params?.project)[0];
+	const project = experienceCaseStudyData.filter(p => p.hrefCaseStudy === context.params?.project)[0];
 
 	return {
 		props: { project },

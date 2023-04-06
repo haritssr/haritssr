@@ -1,6 +1,6 @@
 import InternalLink from '@/components/InternalLink';
 import BackButton from '@/components/BackButton';
-import { projectCaseStudyData } from 'data/projectCaseStudyData';
+import { experienceCaseStudyData } from 'data/experienceCaseStudyData';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -43,7 +43,7 @@ export default function CaseStudiesHomePage() {
 					Case Studies
 				</div>
 				<section className='space-y-3'>
-					{projectCaseStudyData.map(({ project_name, hrefCaseStudy }) => (
+					{experienceCaseStudyData.map(({ project_name, hrefCaseStudy }) => (
 						<InternalLink
 							key={project_name}
 							name={project_name}

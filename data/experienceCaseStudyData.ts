@@ -1,4 +1,4 @@
-export const projectCaseStudyData = [
+export const experienceCaseStudyData = [
 	{
 		project_name: 'Haris Lab',
 		hrefCaseStudy: 'haris-lab',
@@ -61,7 +61,7 @@ export const projectCaseStudyData = [
 			phone_number: '+62-8953-3110-3401',
 			website: 'www.harisstudio.com',
 			office_location: '-',
-			industry: 'Web Design Agency'
+			industry: 'Web Design'
 		},
 		about_project: {
 			client: 'PT Haris Studio Indonesia, via Harits Syah*',
