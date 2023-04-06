@@ -42,7 +42,7 @@ const Wrapper = ({
 const A = () => {
 	return (
 		<Wrapper topic='Design System' className='' id='DesignSystem'>
-			<div className="mb-20 text-zinc-600">This design system used in <ExternalLink name='haritssr.com' href='haritssr.com'/> and <ExternalLink name='Haris Lab' href="harislab.com" /></div>
+			<div className="mb-10 sm:mb-20 text-zinc-600">This design system used in <ExternalLink name='haritssr.com' href='haritssr.com'/> and <ExternalLink name='Haris Lab' href="harislab.com" /></div>
 			<Section name='Color' />
 			<section className='mb-10 -mt-2  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border'>
 				{color.map(data => (
@@ -123,7 +123,6 @@ const A = () => {
 						width='20'
 						height='20'
 						blurDataURL='/icons/haritssr.png'
-						placeholder='blur'
 					/>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Mobile</div>
@@ -135,7 +134,6 @@ const A = () => {
 						width='20'
 						height='20'
 						blurDataURL='/icons/haritssr.png'
-						placeholder='blur'
 					/>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
 					<div className='text-zinc-500'>Desktop</div>
@@ -161,7 +159,7 @@ const A = () => {
 							width='20'
 							height='20'
 							blurDataURL='/icons/haritssr.png'
-							placeholder='blur'
+
 						/>
 					</div>
 					<div className='text-zinc-700'>w-5 h-5 [20x20px]</div>
