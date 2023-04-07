@@ -32,6 +32,11 @@ export const TechStackData = [
 				imgSrc: '/icons/vercel.png',
 				name: 'Vercel',
 			},
+			{
+				href: 'https://www.idcloudhost.com/',
+				imgSrc: '/icons/idcloudhost.png',
+				name: 'ID CloudHost',
+			},
 		],
 	},
 	{
