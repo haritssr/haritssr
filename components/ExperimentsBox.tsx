@@ -7,12 +7,12 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 export default function ExperimentsBox({ experiment }: { experiment: ExperimentsData }) {
 	return (
-		<article className='overflow-hidden rounded-md border border-apple-gray4'>
+		<article className='overflow-hidden rounded-md bg-apple-gray6/40 border border-zinc-200'>
 			<Disclosure defaultOpen={true}>
 				{({ open }) => (
 					<>
 						<Disclosure.Button className='w-full'>
-							<section className='flex justify-between  border-b border-apple-gray4 px-3 py-1.5 bg-apple-gray6/50 hover:bg-zinc-100'>
+							<section className='flex justify-between px-3 py-2  hover:bg-zinc-100'>
 								<div className='flex items-center space-x-2'>
 									<Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
 									<div className='font-semibold text-zinc-700'>{experiment.title}</div>
@@ -24,7 +24,7 @@ export default function ExperimentsBox({ experiment }: { experiment: Experiments
 							</section>
 						</Disclosure.Button>
 						<Disclosure.Panel>
-							<ol className='space-y-1 px-3.5 py-2'>
+							<ol className='space-y-1 px-3.5 pb-2 pt-0'>
 								{experiment.links?.map(link => (
 									<li key={link} className='text-zinc-600'>
 										<InternalLink

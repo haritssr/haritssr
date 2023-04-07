@@ -50,7 +50,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 				<article className='mx-auto min-h-screen w-full max-w-4xl sm:w-3/4 sm:px-0'>
 					{/* Navigation */}
 					<div
-						className={`sticky -top-0.5 sm:top-5 border-b ${
+						className={`sticky -top-0 sm:top-5 border-b ${
 							inView ? 'border-zinc-300' : 'border-b sm:shadow'
 						} z-40 mb-5  w-full  bg-white py-2 sm:rounded-full sm:border `}
 					>
