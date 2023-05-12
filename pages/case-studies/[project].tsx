@@ -82,34 +82,34 @@ export default function CaseStudyPage({ project }) {
 				<section className='mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 sm:gap-32 gap-10'>
 					{/* About The Client */}
 					<section>
-						<h2 className='mb-4 text-xl font-bold text-zinc-800 uppercase font-["Mona_Sans"]'>
+						<h2 className='mb-5 text-xl font-bold text-zinc-800 uppercase font-["Mona_Sans"]'>
 							About The Client
 						</h2>
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Company Name</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Company Name</div>
 						<p className='text-zinc-500'>{project.about_client.company_name}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Brand Name</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Brand Name</div>
 						<p className='text-zinc-500'>{project.about_client.brand_name}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>About</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>About</div>
 						<p className='text-zinc-500'>{project.about_client.long_about}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Phone Number</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Phone Number</div>
 						<p className='text-zinc-500'>{project.about_client.phone_number}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Website</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Website</div>
 						<ExternalLink href={project.about_client.website} name={project.about_client.website} />
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Office Location</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Office Location</div>
 						<p className='text-zinc-500'>{project.about_client.office_location}</p>
 					</section>
 
 					{/* About The Project */}
 					<section>
-						<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase font-["Mona_Sans"]'>
+						<h2 className='mb-5 text-xl font-semibold text-zinc-800 uppercase font-["Mona_Sans"]'>
 							About The Project
 						</h2>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>My Role</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>My Role</div>
 						<ExplanationList>
 							{project.about_project.my_role.map((a: string) => (
 								<li className='text-zinc-500' key={a}>
@@ -118,10 +118,10 @@ export default function CaseStudyPage({ project }) {
 							))}
 						</ExplanationList>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Working Period</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Working Period</div>
 						<p className='text-zinc-500'>{project.about_project.working_period}</p>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Website Status</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Website Status</div>
 						<ExplanationList>
 							{project.about_project.website_status.map((a: string) => (
 								<li className='text-zinc-500' key={a}>
@@ -130,9 +130,18 @@ export default function CaseStudyPage({ project }) {
 							))}
 						</ExplanationList>
 
-						<div className='mt-4 text-zinc-800 font-medium font-["Mona_Sans"]'>Website Routes</div>
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Website Routes</div>
 						<ExplanationList>
 							{project.about_project.routes.map((a: string) => (
+								<li className='text-zinc-500' key={a}>
+									{a}
+								</li>
+							))}
+						</ExplanationList>
+
+						<div className='mt-5 text-zinc-800 font-medium font-["Mona_Sans"]'>Website Features</div>
+						<ExplanationList>
+							{project.about_project.features.map((a: string) => (
 								<li className='text-zinc-500' key={a}>
 									{a}
 								</li>
@@ -143,7 +152,7 @@ export default function CaseStudyPage({ project }) {
 
 				{/* Design */}
 				<section className='mt-10'>
-					<h2 className='mb-4 text-xl font-semibold text-zinc-800 uppercase'>Design</h2>
+					<h2 className='mb-5 text-xl font-semibold text-zinc-800 uppercase'>Design</h2>
 					<Suspense fallback={<div>Loading...</div>}>
 						{project.figma !== '' ? (
 							<iframe className='w-full h-[600px]' src={project.figma} allowFullScreen></iframe>

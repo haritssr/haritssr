@@ -10,10 +10,10 @@ export const TechStackComponent = (
 ) => {
 	return (
 		<div {...props} className='h-fit overflow-hidden rounded-md bg-apple-gray6/40 border border-zinc-200'>
-			<div className='truncate px-3 py-2 text-tiny font-semibold text-zinc-700 sm:text-base'>
+			<div className='truncate px-3 py-2 text-tiny font-semibold text-zinc-700 sm:text-base border-b'>
 				{domain}	
 			</div>
-			<div className='space-y-1 px-2 pb-2 pt-0'>
+			<div className='space-y-1 px-2 py-2'>
 				{links?.map(({ href, imgSrc, name }) => {
 					return (
 						<a
@@ -22,7 +22,7 @@ export const TechStackComponent = (
 							href={href}
 							target='_blank'
 							rel='noreferrer noopener'
-							className='group flex w-auto items-center justify-between space-x-2 rounded-md py-1 px-1 hover:border-apple-gray3 border border-zinc-50 sm:px-2'
+							className='group flex w-auto items-center justify-between space-x-2 rounded-md py-1 px-1 hover:border-zinc-300 border border-zinc-50 sm:px-2'
 						>
 							<section className='flex items-center space-x-2 overflow-hidden'>
 								<Image

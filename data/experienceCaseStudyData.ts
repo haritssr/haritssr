@@ -18,7 +18,8 @@ export const experienceCaseStudyData = [
 			my_role: ['Software Engineer', 'Designer', 'Owner'],
 			working_period: 'Jun 2021 - Oct 2022',
 			website_status: ['Production'],
-			routes: ['Home','Referensi','Analisis', 'Latihan', 'Bimbel']
+			routes: ['Home','Referensi','Analisis', 'Latihan', 'Bimbel'],
+			features: ['Analytics', 'Global Navigation']
 		},
 		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Fnode-id%3D2147%253A5142",
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
@@ -44,7 +45,8 @@ export const experienceCaseStudyData = [
 			my_role: ['Frontend developer','Pre-designing site in Figma','Convert design to responsive Next.js site on mobile and desktop size','Deploying site', 'Updating the website according to the owner\'s request'],
 			working_period: 'Jun 2021 - Des 2021',
 			website_status: ['Production', 'Change management (site manage by AKA Trading team, not by me anymore)'],
-			routes: ['Home','About us','Products', 'Contact']
+			routes: ['Home','About us','Products', 'Contact'],
+			features: ['Form Email', 'Map', 'Global Navigation']
 		},
 		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FOO23zC5c2iErduRQkQAfsI%2FAKA-Trading-Indonesia%3Fnode-id%3D202%253A2",
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
@@ -68,7 +70,8 @@ export const experienceCaseStudyData = [
 			my_role: ['Software Engineer', 'Designer', 'Owner'],
 			working_period: 'Jun 2021 - Present',
 			website_status: ['Development'],
-			routes: ['Home','Referensi','Analisis', 'Latihan', 'Bimbel']
+			routes: ['Home','Referensi','Analisis', 'Latihan', 'Bimbel'],
+			features: ['']
 		},
 		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuGmQbyzyBBOS3RAUEJKQws%2FHaris-Studio%3Fnode-id%3D0%253A1",
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
@@ -93,7 +96,8 @@ export const experienceCaseStudyData = [
 			my_role: ['Frontend developer','Deploying'],
 			working_period: 'Oct 2022',
 			website_status: ['Production'],
-			routes: ['Home','Project','Product', 'About']
+			routes: ['Home','Project','Product', 'About'],
+			features: ['Global Navigation']
 		},
 		figma: "",
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
@@ -118,7 +122,8 @@ export const experienceCaseStudyData = [
 			my_role: ['Frontend developer'],
 			working_period: 'Nov 2022',
 			website_status: ['Production'],
-			routes: ['Home', 'Nice Time', 'About us']
+			routes: ['Home', 'Nice Time', 'About us'],
+			features: ['Global Navigation']
 		},
 		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F5UlfaU19xiex5E4sECrKu1%2FAWM",
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
@@ -143,7 +148,8 @@ export const experienceCaseStudyData = [
 			my_role: ['Software Engineer', 'Designer', 'Owner'],
 			working_period: 'Jun 2021 - Present',
 			website_status: ['Production'],
-			routes: ['Home','Experiments','Case Studies','Design Systems']
+			routes: ['Home','Experiments','Case Studies','Design Systems'],
+			features: ['Global Navigation', 'CV', 'Case Studies', 'Experiment']
 		},
 		figma: "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FbLTdTJgThkmzd5aAZVP8Rr%2Fharitssr%3Fnode-id%3D17%253A2",
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale" 
