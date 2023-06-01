@@ -5,14 +5,14 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 
-export default function ExperimentsBox({ experiment }: { experiment: ExperimentsData }) {
+export default function ExperimentsComponent({ experiment }: { experiment: ExperimentsData }) {
 	return (
-		<article className='overflow-hidden rounded-md border border-zinc-200'>
+		<article className='overflow-hidden rounded-md border border-apple-gray3'>
 			<Disclosure defaultOpen={true}>
 				{({ open }) => (
 					<>
 						<Disclosure.Button className='w-full'>
-							<section className='flex justify-between px-3 py-2  hover:bg-zinc-50 border-b'>
+							<section className='flex justify-between px-3 py-2  hover:bg-zinc-50 border-b border-apple-gray3'>
 								<div className='flex items-center space-x-2'>
 									<Image src={experiment.logoSrc} height={16} width={16} alt={experiment.title} />
 									<div className='font-semibold text-zinc-700'>{experiment.title}</div>

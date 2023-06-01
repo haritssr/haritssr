@@ -68,6 +68,7 @@ specifiers:
   eslint: 7.32.0
   eslint-config-next: 11.1.0
   eslint-config-prettier: ^8.6.0
+  eslint-plugin-react-hooks: ^4.6.0
   framer-motion: ^4.1.17
   gray-matter: ^4.0.3
   immer: ^9.0.17
@@ -200,6 +201,7 @@ devDependencies:
   eslint: 7.32.0
   eslint-config-next: 11.1.0_67ye6dyvoxcu2fajdj5awu234m
   eslint-config-prettier: 8.6.0_eslint@7.32.0
+  eslint-plugin-react-hooks: 4.6.0_eslint@7.32.0
   postcss: 8.4.21
   prettier: 2.8.1
   prettier-plugin-tailwindcss: 0.1.13_prettier@2.8.1

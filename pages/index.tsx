@@ -1,33 +1,41 @@
+// Internal Components
+import ExperimentsComponent from '@/components/ExperimentsComponent';
 import ContactComponent from '@/components/ContactComponent';
 import InternalLink from '@/components/InternalLink';
 import InternalLinkWithoutArrow from '@/components/InternalLinkWithoutArrow';
-
 import ExternalLink from '@/components/ExternalLink';
 import Layout from '@/components/Layout';
-import ExperienceBox from '@/components/ExperienceBox';
+import ExperienceComponent from '@/components/ExperienceComponent';
 import { TechStackComponent } from '@/components/TechStackComponents';
+
+// Icons
 import {
 	BriefcaseIcon,
 	BuildingOfficeIcon,
 	ChevronDownIcon,
-	ArrowsPointingOutIcon,
-	ArrowsPointingInIcon,
 	ChevronRightIcon,
+	ChevronUpIcon,
 	MapPinIcon,
 } from '@heroicons/react/24/outline';
-import { ExperimentsData } from 'data/ExperimentsData';
+
+// Internal Next.js
 import Image from 'next/image';
 import Link from 'next/link';
+
+// Internal React.js
 import React from 'react';
+
+// Data
+import { ExperimentsData } from 'data/ExperimentsData';
 import { WorkContacts } from '../data/WorkContacts';
 import { SocialMediaContacts } from '../data/SocialMediaContacts';
 import { TechStackData } from '../data/TechStackData';
 import { experienceCaseStudyData } from 'data/experienceCaseStudyData';
-
-import { Disclosure } from '@headlessui/react';
-import { educationData } from 'data/educationData';
 import { nonFormalEducationData } from 'data/nonFormalEducationData';
-import ExperimentsBox from '@/components/ExperimentsBox';
+import { educationData } from 'data/educationData';
+
+// Headless UI
+import { Disclosure } from '@headlessui/react';
 
 export default function Home() {
 	return (
@@ -63,22 +71,22 @@ const Wrapper = ({
 			<Disclosure defaultOpen={true}>
 				{({ open }) => (
 					<>
-						<section className='mb-4 flex items-center justify-between'>
-							<Link href={`/#${id}`} className=' text-2xl font-bold text-zinc-800 sm:text-3xl'>
+						<section className='mb-3 flex items-center justify-between'>
+							<Link href={`/#${id}`} className=' text-2xl font-bold text-zinc-800'>
 								{topic}
 							</Link>
 							<Disclosure.Button className="group">
-								<div className={`px-1.5 sm:pl-3.5 sm:pr-3 py-1.5  sm:py-1 group sm:space-x-2 flex items-center justify-center rounded-full border  group-hover:border-blue-600 ${open ? "border-zinc-300" : "border-blue-600"}`}>
-									<div className={`hidden sm:block text-tiny  group-hover:text-blue-600 ${open ? "text-zinc-500" : "text-blue-600"}`}>{open ? "Minimize" : "Expand" }</div>
+								<div className={`px-1.5 sm:px-3 py-1.5 sm:py-1 group sm:space-x-1 flex items-center justify-center rounded-full border  group-hover:border-zinc-700 ${open ? "border-zinc-300" : "border-zinc-700"}`}>
 									{open ? 
-									<ArrowsPointingInIcon className="text-zinc-500 h-4 w-4 group-hover:text-blue-600" strokeWidth={1.8}/>
+									<ChevronUpIcon className="text-zinc-500 h-4 w-4 group-hover:text-zinc-700" strokeWidth={2}/>
 									: 
-									<ArrowsPointingOutIcon className="text-blue-600 h-4 w-4 group-hover:text-blue-600" strokeWidth={1.8}/>}
+									<ChevronDownIcon className="text-zinc-700 h-4 w-4 group-hover:text-zinc-700" strokeWidth={2}/>}
+									<div className={`hidden sm:block text-tiny  group-hover:text-zinc-700 ${open ? "text-zinc-500" : "text-zinc-700"}`}>{open ? "Show less" : "Show more" }</div>
 								</div>
 							</Disclosure.Button>
 						</section>
 						<Disclosure.Panel>
-							<div className="mb-5 text-lg text-zinc-600">{explanation}</div>
+							<div className="mb-4 text-lg text-zinc-500">{explanation}</div>
 							<div className={className}>{children}</div>
 						</Disclosure.Panel>
 					</>
@@ -96,12 +104,12 @@ const Contacts = () => {
 		>
 			<section className='flex justify-center sm:justify-start'>
 				<Image
-					src='/images/me.jpg'
-					height='150'
-					width='150'
-					className='z-10 rounded-full aspect-ratio'
+					src='/images/blur.jpg'
+					height='165'
+					width='165'
+					className='z-10 rounded-full aspect-ratio grayscale hover:grayscale-0'
 					alt='Harits Syah'
-					blurDataURL='/images/me.jpg'
+					blurDataURL='/images/blur.jpg'
 					// placeholder='blur'
 				/>
 			</section>
@@ -111,19 +119,19 @@ const Contacts = () => {
 				</div>
 				<div className='flex items-center space-x-1'>
 					<BriefcaseIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
-					<div className=' text-zinc-800'>
+					<div className=' text-zinc-500'>
 						Software Engineer, <InternalLinkWithoutArrow href='#techstack' name='Web' />
 					</div>
 				</div>
 				<div className='flex items-center space-x-1'>
 					<BuildingOfficeIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
-					<div className=' text-zinc-800'>
+					<div className=' text-zinc-500'>
 						Founder, <ExternalLink href='https://www.harislab.com' name='Haris Lab' />
 					</div>
 				</div>
 				<div className='flex items-center space-x-1'>
 					<MapPinIcon className=' h-5 w-5 text-zinc-700' strokeWidth={1.8} />
-					<div className=' text-zinc-800'>Tangerang, Indonesia</div>
+					<div className=' text-zinc-500'>Tangerang, Indonesia</div>
 				</div>
 			</section>
 			<section className='space-y-3 sm:space-y-4'>
@@ -167,7 +175,7 @@ const Experiences = () => {
 			explanation="All of my projects with use cases"
 		>
 			{experienceCaseStudyData.map(d => (
-				<ExperienceBox
+				<ExperienceComponent
 					key={d.project_name}
 					href={d.about_client.website}
 					description={d.about_client.short_about}
@@ -193,7 +201,7 @@ const Experiments = () => {
 		>
 			{ExperimentsData.map(experiment => (
 				<div key={experiment.id}>
-					<ExperimentsBox	 experiment={experiment} />
+					<ExperimentsComponent	 experiment={experiment} />
 				</div>
 			))}
 		</Wrapper>

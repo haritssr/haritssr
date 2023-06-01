@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface ExperienceBoxTypes {
+interface ExperienceComponentTypes {
 	href: string;
 	title: string;
 	description: string;
@@ -12,7 +12,7 @@ interface ExperienceBoxTypes {
 	hrefCaseStudy: string;
 }
 
-export default function ExperienceBox({
+export default function ExperienceComponent({
 	href,
 	title,
 	description,
@@ -21,7 +21,7 @@ export default function ExperienceBox({
 	imgSrc,
 	industry,
 	hrefCaseStudy,
-}: ExperienceBoxTypes) {
+}: ExperienceComponentTypes) {
 	return (
 		<div className='flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:border-apple-gray2 duration-100'>
 			<section className=' flex flex-col justify-between  bg-white p-3 space-y-3'>
