@@ -19,10 +19,10 @@ export default function Newspaper() {
 						<Image
 							className='rounded shadow-md'
 							alt=''
-							src='/images/me.jpg'
+							src='/images/blur.jpg'
 							height={200}
 							width={200}
-							blurDataURL='/images/me.jpg'
+							blurDataURL='/images/blur.jpg'
 						/>
 					</div>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolore ab nisi ut
