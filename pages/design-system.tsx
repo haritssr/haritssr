@@ -182,6 +182,79 @@ const A = () => {
 					<div className='text-zinc-500'>Named Box</div>
 				</div>
 			</section>
+			<Section name='Toggle' />
+			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4'>
+				<Toggle/>
+			</section>
+			<Section name='Modal' />
+			<section className='mb-10 -mt-2 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4'>
+				<Modal/>
+			</section>
 		</Wrapper>
 	);
 };
+
+import { useState } from 'react';
+import { Switch } from '@headlessui/react';
+
+const Toggle = () => {
+	const [enabled, setEnabled] = useState(true);
+
+	return (
+		<Switch.Group as='div'>
+			{/* <Switch.Label>Nyalakan notifikasi</Switch.Label> */}
+			<Switch
+				as='div'
+				checked={enabled}
+				onChange={setEnabled}
+				className={`${
+					enabled
+						? 'bg-green-500 border-green-600 hover:border-green-800'
+						: 'bg-zinc-200 border-zinc-300 hover:border-zinc-500'
+				} relative inline-flex w-[58px] cursor-pointer items-center border  rounded-full p-1 transition duration-100 ease-out `}
+			>
+				<div
+					className={`${
+						enabled ? 'translate-x-6' : 'translate-x-0.5'
+					} inline-block h-6 w-6 transform rounded-full bg-white shadow-md`}
+				/>
+			</Switch>
+			<div className='font-["Mona_Sans"] text-zinc-500 mt-2'>{enabled ? "Active" : "Inactive"}</div>
+		</Switch.Group>
+	);
+};
+
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import * as Dialog from '@radix-ui/react-dialog';
+
+const Modal = () => {
+	return <Dialog.Root>
+	<Dialog.Trigger className='rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1.5 font-medium text-zinc-800 hover:bg-zinc-100 rdx-state-open:ring-2 rdx-state-open:ring-blue-600'>
+		Show dialog
+	</Dialog.Trigger>
+	<Dialog.Overlay className='fixed inset-0 bg-zinc-900/70 z-50' />
+	<Dialog.Content className='fixed top-1/2 left-1/2 w-3/4  max-w-screen-xs -translate-x-1/2 -translate-y-1/2 rounded-md bg-white px-5 py-4 z-50'>
+		<div className='space-y-3'>
+			<div className='flex items-center justify-between'>
+				<Dialog.Title className='text-lg sm:text-xl font-bold text-zinc-800'>
+					Title for Anything
+				</Dialog.Title>
+				<Dialog.Close>
+					<XMarkIcon className='h-7 w-7 rounded-full p-1 text-gray-500 hover:bg-gray-200 hover:text-zinc-800' />
+				</Dialog.Close>
+			</div>
+			<Dialog.Description className='text-gray-500'>
+				This modal can contain anything you need to perform, while at the same time make the
+				UI behind not moving or inert.
+			</Dialog.Description>
+			<div className='flex justify-end'>
+				<Dialog.Close>
+					<div className='rounded-md bg-blue-600 px-3 py-1 text-white hover:bg-blue-700'>
+						Confirm
+					</div>
+				</Dialog.Close>
+			</div>
+		</div>
+	</Dialog.Content>
+</Dialog.Root>
+}
