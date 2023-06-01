@@ -104,6 +104,7 @@ const Contacts = () => {
 		>
 			<section className='flex justify-center sm:justify-start'>
 				<Image
+					priority
 					src='/images/blur.jpg'
 					height='165'
 					width='165'
