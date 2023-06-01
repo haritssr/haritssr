@@ -33,8 +33,5 @@ module.exports = {
 				permanent: false,
 			},
 		];
-	},
-	experimental: {
-		fontLoaders: [{ loader: '@next/font/google', options: { subsets: ['latin'] } }],
-	},
+	}
 };
