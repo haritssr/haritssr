@@ -64,6 +64,7 @@
     "@visx/text": "^2.17.0",
     "@visx/tooltip": "^2.17.0",
     "axios": "^1.2.2",
+    "cmdk": "^0.2.0",
     "d3-time-format": "^4.1.0",
     "date-fns": "^2.29.3",
     "embla-carousel-react": "^7.0.5",

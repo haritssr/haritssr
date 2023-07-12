@@ -4,7 +4,7 @@
     "strictNullChecks": true,
     // "noUnusedLocals":true,
     "target": "es5",
-    "importHelpers":true,
+    "importHelpers": true,
     "lib": [
       "dom",
       "dom.iterable",
@@ -33,13 +33,18 @@
         "styles/*"
       ]
     },
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/**/*.tsx",  
+    "**/**/*.tsx",
     "tailwind.config.js",
     "pages/showcase/framer-motion",
     "pages/experiments/framer-motion/api",
@@ -53,7 +58,9 @@
     "pages/experiments/react/store-context-selector.tsz",
     "pages/experiments/react/store-zustand.js",
     "styles/*.css",
-    "styles/*.module.css" ],
+    "styles/*.module.css",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
