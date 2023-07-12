@@ -48,7 +48,7 @@ export default function ExperienceComponent({
 
 				<section className='flex items-center space-x-3'>
 					<a
-						href={href}
+						href={`https://${href}`}
 						target='_blank'
 						rel='noopener noreferrer'
 						className='flex items-center justify-center border border-zinc-700 py-1 rounded space-x-1 bg-zinc-700 hover:bg-zinc-800 text-white w-1/2 group'
