@@ -128,7 +128,7 @@ const Contacts = () => {
           src="/images/blur.jpg"
           height="165"
           width="165"
-          className="z-10 rounded-full aspect-ratio grayscale hover:grayscale-0"
+          className="z-10 rounded-full aspect-ratio"
           alt="Harits Syah"
           blurDataURL="/images/blur.jpg"
           // placeholder='blur'
