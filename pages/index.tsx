@@ -1,11 +1,11 @@
 // Internal Components
-import ExperimentsComponent from "@/components/ExperimentsComponent";
-import ContactComponent from "@/components/ContactComponent";
+import ExperimentsComponent from "@/components/ExperimentsCard";
+import Contact from "@/components/Contact";
 import InternalLink from "@/components/InternalLink";
 import InternalLinkWithoutArrow from "@/components/InternalLinkWithoutArrow";
 import ExternalLink from "@/components/ExternalLink";
 import Layout from "@/components/Layout";
-import ExperienceComponent from "@/components/ExperienceComponent";
+import ExperienceCard from "@/components/ExperienceCard";
 import { TechStackComponent } from "@/components/TechStackComponents";
 
 // Icons
@@ -41,7 +41,6 @@ export default function Home() {
   return (
     <Layout browserTitle="Home" description="Home">
       <section className="mt-5 space-y-24 sm:mt-10 ">
-        <a href="https://www.w3schools.com">w3schools</a>
         <Contacts />
         <Experiences />
         <CV />
@@ -166,7 +165,7 @@ const Contacts = () => {
           Contacts
         </div>
         {WorkContacts.map((c) => (
-          <ContactComponent
+          <Contact
             href={c.href}
             name={c.name}
             key={c.imgSrc}
@@ -180,7 +179,7 @@ const Contacts = () => {
           Social Media
         </div>
         {SocialMediaContacts.map((c) => (
-          <ContactComponent
+          <Contact
             href={c.href}
             name={c.name}
             key={c.imgSrc}
@@ -202,7 +201,7 @@ const Experiences = () => {
       explanation="All of my projects with use cases"
     >
       {experienceCaseStudyData.map((d) => (
-        <ExperienceComponent
+        <ExperienceCard
           key={d.project_name}
           href={d.about_client.website}
           description={d.about_client.short_about}
