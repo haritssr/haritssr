@@ -23,7 +23,8 @@ export default function ModalInsideModal() {
               Edit profile
             </Dialog.Title>
             <Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
-              Make changes to your profile here. Click save when you're done.
+              Make changes to your profile here. Click save when you&apos;re
+              done.
             </Dialog.Description>
             <fieldset className="mb-[15px] flex items-center gap-5">
               <label
@@ -65,8 +66,8 @@ export default function ModalInsideModal() {
                     Another Edit profile
                   </Dialog.Title>
                   <Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
-                    Make changes to your profile here. Click save when you're
-                    done.
+                    Make changes to your profile here. Click save when
+                    you&apos;re done.
                   </Dialog.Description>
                   <fieldset className="mb-[15px] flex items-center gap-5">
                     <label

@@ -25,13 +25,13 @@ module.exports = {
 			'unsplash.com',
 		],
 	},
-	async redirects() {
-		return [
-			{
-				source: '/experiments',
-				destination: '/#experiments',
-				permanent: false,
-			},
-		];
-	}
+	// async redirects() {
+	// 	return [
+	// 		{
+	// 			source: '/experiments',
+	// 			destination: '/#experiments',
+	// 			permanent: false,
+	// 		},
+	// 	];
+	// }
 };

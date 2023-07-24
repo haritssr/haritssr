@@ -26,7 +26,6 @@ import Link from "next/link";
 import React from "react";
 
 // Data
-import { ExperimentsData } from "data/ExperimentsData";
 import { WorkContacts } from "../data/WorkContacts";
 import { SocialMediaContacts } from "../data/SocialMediaContacts";
 import { TechStackData } from "../data/TechStackData";
@@ -36,6 +35,7 @@ import { educationData } from "data/educationData";
 
 // Headless UI
 import { Disclosure } from "@headlessui/react";
+import ExperimentsGrid from "@/components/ExperimentsGrid";
 
 export default function Home() {
   return (
@@ -74,7 +74,7 @@ const Wrapper = ({
             <section className="mb-3 flex items-center justify-between">
               <Link
                 href={`/#${id}`}
-                className=" text-2xl font-bold text-zinc-800"
+                className=" text-2xl sm:text-3xl font-bold text-zinc-800"
               >
                 {topic}
               </Link>
@@ -222,14 +222,9 @@ const Experiments = () => {
     <Wrapper
       id="experiments"
       topic="Experiments"
-      className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4"
       explanation="My experiments across JavaScript and React ecosystem stack"
     >
-      {ExperimentsData.map((experiment) => (
-        <div key={experiment.id}>
-          <ExperimentsComponent experiment={experiment} />
-        </div>
-      ))}
+      <ExperimentsGrid />
     </Wrapper>
   );
 };
@@ -272,7 +267,7 @@ const CaseStudies = () => {
       id="CaseStudies"
       topic="Case Studies"
       className=""
-      explanation="Case studies for my Experiences Section"
+      explanation="Case studies for my experiences"
     >
       <InternalLink name="Case Studies" href="/case-studies" />
     </Wrapper>
@@ -291,7 +286,7 @@ const CV = () => {
         {({ open }) => (
           <>
             <Disclosure.Button
-              className={` border border-apple-gray4 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
+              className={` border border-zinc-400 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
                 open ? "rounded-b-none rounded-t-md" : "rounded-md"
               }`}
             >
@@ -300,7 +295,7 @@ const CV = () => {
                 className={` h-5 w-5 ${open ? "rotate-180" : ""}`}
               />
             </Disclosure.Button>
-            <Disclosure.Panel className="-mt-[1px] p-4 border border-apple-gray4 rounded-b">
+            <Disclosure.Panel className="-mt-[1px] p-4 border border-zinc-400 rounded-b">
               <div className="font-semibold">
                 Software Engineering (Web Platform)
               </div>
@@ -325,7 +320,7 @@ const CV = () => {
         {({ open }) => (
           <>
             <Disclosure.Button
-              className={` border border-apple-gray4 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
+              className={` border border-zinc-400 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
                 open ? "rounded-b-none rounded-t-md" : "rounded-md"
               }`}
             >
@@ -334,7 +329,7 @@ const CV = () => {
                 className={` h-5 w-5 ${open ? "rotate-180" : ""}`}
               />
             </Disclosure.Button>
-            <Disclosure.Panel className="-mt-[1px] px-4 py-8 border border-apple-gray4	 rounded-b">
+            <Disclosure.Panel className="-mt-[1px] px-4 py-8 border border-zinc-400	 rounded-b">
               <section className="space-y-8">
                 <div className="font-semibold text-2xl">Experience</div>
 

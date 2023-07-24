@@ -4,12 +4,14 @@
 // It is used in all experiments routes, for displaying and routing
 // Every pages should be .tsx extentions, if not, <source/> in <LayoutToExperiments/> won't work
 
+import TailwindCSS from "pages/experiments/tailwind-css";
+
 export const ExperimentsData = [
   {
     id: 1,
     title: "Tailwind CSS",
     logoSrc: "/icons/tailwindcss.png",
-    description: "CSS Library",
+    description: "CSS library for styling websites",
     links: [
       "Position",
       "Apple NavBar",
@@ -31,8 +33,7 @@ export const ExperimentsData = [
     id: 2,
     title: "React",
     logoSrc: "/icons/react.png",
-    description:
-      "React.js are javascript library for building user interface on web.",
+    description: "JavaScript library for building user interfaces",
     links: [
       "useState Todo List",
       "useState Form",
@@ -65,7 +66,7 @@ export const ExperimentsData = [
     id: 3,
     title: "Nextjs",
     logoSrc: "/icons/nextjs.png",
-    description: "Next.js",
+    description: "The React framework for the web",
     links: [
       "Image Components",
       "Router",
@@ -83,8 +84,7 @@ export const ExperimentsData = [
     id: 4,
     title: "Browser",
     logoSrc: "/icons/chrome.png",
-    description:
-      "These are my exploration of native built-in browser API, from UI, optimization, text-editing,  multimedia, and others.",
+    description: "Native built-in browser API utilities exploration",
     links: [
       "Clock",
       "Number game",
@@ -113,23 +113,21 @@ export const ExperimentsData = [
     id: 6,
     title: "Framer Motion",
     logoSrc: "/icons/framermotion.png",
-    description:
-      "These are my exploration and implementation of web animation from library Framer Motion which is specially to react.",
+    description: "Animation library for React.js by Framer Team",
     links: ["Random"],
   },
   {
     id: 7,
     title: "Mantine",
     logoSrc: "/icons/mantine.png",
-    description: "UI Component Library",
+    description: "A fully featured React component libray",
     links: ["Carousel"],
   },
   {
     id: 8,
     title: "Headless UI",
     logoSrc: "/icons/headlessui.png",
-    description:
-      "These are my exploration of headless user interface components (components UI without bound to any styling) of Headless UI, each pages might have more than one example since I might tried manipulating one thing in many ways. The styling using Tailwind CSS.",
+    description: "Headless UI components by Tailwind CSS Team",
     links: [
       "Menu",
       "Listbox",
@@ -147,8 +145,7 @@ export const ExperimentsData = [
     id: 9,
     title: "Radix UI",
     logoSrc: "/icons/radixui.png",
-    description:
-      "These are my exploration of headless user interface components (components UI without bound to any styling) of Radix UI, each pages might have more than one example since I tried manipulating one thing in many ways. The styling using Tailwind CSS after changing from Stitches.",
+    description: "Headless UI for design system in React.js",
     links: [
       "Accordion",
       "Alert Dialog",
@@ -176,8 +173,7 @@ export const ExperimentsData = [
     id: 11,
     title: "Notion API",
     logoSrc: "/icons/notion.png",
-    description:
-      "Notion as a Free CMS, we can connect notion app to any web service via their Notion API to built unique possible application.",
+    description: "Notion as a free CMS via Notion API",
     links: ["Table"],
   },
 
@@ -185,35 +181,35 @@ export const ExperimentsData = [
     id: 12,
     title: "UI Explorations",
     logoSrc: "/icons/radixui.png",
-    description: "UI Explorations",
+    description: "Random user interfaces explorations",
     links: ["Notion NavBar"],
   },
   {
     id: 13,
     title: "Emotion",
     logoSrc: "/icons/emotion.png",
-    description: "Styling",
+    description: "CSS library for styling websites",
     links: ["Example 1", "Example 2"],
   },
   {
     id: 14,
     title: "React Aria",
     logoSrc: "/icons/react-aria.png",
-    description: "UI Components Library",
+    description: "A library of React Hooks, UI primitives, and more",
     links: ["Calendar", "Range Calendar"],
   },
   {
     id: 15,
     title: "KaTeX",
     logoSrc: "/icons/KaTeX.png",
-    description: "Math Symbols",
+    description: "The math typesetting library for the web",
     links: ["Basic"],
   },
   {
     id: 16,
     title: "React Table",
     logoSrc: "/icons/tanstack.png",
-    description: "Table",
+    description: "Headless UI for building tables & datagrids",
     links: [
       "Basic",
       "Column Group",
@@ -228,15 +224,14 @@ export const ExperimentsData = [
     id: 17,
     title: "React Query",
     logoSrc: "/icons/tanstack.png",
-    description:
-      "Fetching, caching, synchronizing and updating server state in your React applications.",
+    description: "Asynchronous state management for TS/JS",
     links: ["Basic"],
   },
   {
     id: 18,
     title: "Haris Lab",
     logoSrc: "/icons/harislab.png",
-    description: "Haris Lab Components",
+    description: "Haris Lab user interfaces design systems",
     links: ["Global Modal", "Context Modal", "Side Bar"],
   },
 ];
@@ -244,3 +239,21 @@ export const ExperimentsData = [
 // console.log(sizeof(ExperimentsData));
 
 export type ExperimentsData = typeof ExperimentsData[0];
+
+export const TailwindCSSData = ExperimentsData[0];
+export const ReactData = ExperimentsData[1];
+export const NextjsData = ExperimentsData[2];
+export const BrowserData = ExperimentsData[3];
+export const VisXData = ExperimentsData[4];
+export const FramerMotionData = ExperimentsData[5];
+export const MantineData = ExperimentsData[6];
+export const HeadlessUIData = ExperimentsData[7];
+export const RadixUIData = ExperimentsData[8];
+export const NotionAPIData = ExperimentsData[10];
+export const UIExplorationData = ExperimentsData[11];
+export const EmotionData = ExperimentsData[12];
+export const ReactAriaData = ExperimentsData[12];
+export const KaTeXData = ExperimentsData[13];
+export const ReactTableData = ExperimentsData[14];
+export const ReactQueryData = ExperimentsData[15];
+export const HarisLabData = ExperimentsData[16];

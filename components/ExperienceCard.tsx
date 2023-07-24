@@ -23,7 +23,7 @@ export default function ExperienceCard({
   hrefCaseStudy,
 }: ExperienceCardTypes) {
   return (
-    <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-apple-gray3 selection:mx-auto hover:border-apple-gray2 duration-100">
+    <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400 selection:mx-auto hover:border-apple-gray2 duration-100">
       <section className=" flex flex-col justify-between  bg-white p-3 space-y-3">
         <div className="mb-3 flex items-center justify-between space-x-2">
           <div className="flex items-center space-x-2">
@@ -98,7 +98,7 @@ export default function ExperienceCard({
           </Link>
         </section>
       </section>
-      <section className="flex flex-col space-y-1.5 border-t border-zinc-300 bg-apple-gray6 px-3 pt-3 pb-2.5 text-zinc-800 sm:text-sm">
+      <section className="flex flex-col space-y-1.5 border-t border-zinc-400 bg-zinc-50 px-3 pt-3 pb-2.5 text-zinc-800 sm:text-sm">
         <article className="flex items-center justify-between text-zinc-700">
           <div className="flex w-1/3 items-center justify-between">
             <div className="font-semibold">Period</div>

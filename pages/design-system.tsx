@@ -44,7 +44,7 @@ const Wrapper = ({
   return (
     <div id={id}>
       <div className="mt-16 mb-6 space-y-2">
-        <span className='text-2xl font-bold text-zinc-800 sm:text-5xl font-["Mona_Sans"]'>
+        <span className='text-2xl font-bold text-zinc-800 sm:text-4xl font-["Mona_Sans"]'>
           Haris Lab Design Systems
         </span>
       </div>
