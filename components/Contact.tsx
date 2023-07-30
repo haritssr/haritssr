@@ -29,7 +29,7 @@ export default function Contact({
           blurDataURL={imgSrc}
           // placeholder='blur'
         />
-        <div className=" text-zinc-500 hover:text-blue-600 group-hover:underline">
+        <div className=" text-zinc-500 hover:text-zinc-800 group-hover:underline">
           {name}
         </div>
       </section>

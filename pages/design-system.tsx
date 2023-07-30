@@ -44,7 +44,7 @@ const Wrapper = ({
   return (
     <div id={id}>
       <div className="mt-16 mb-6 space-y-2">
-        <span className='text-2xl font-bold text-zinc-800 sm:text-4xl font-["Mona_Sans"]'>
+        <span className="text-2xl font-bold text-zinc-800 sm:text-4xl ">
           Haris Lab Design Systems
         </span>
       </div>
@@ -100,13 +100,13 @@ const A = () => {
       <Section name="Typography" />
       <section className="mb-10 -mt-2 sm:mb-16  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border">
         <div className="space-y-1">
-          <div className='text-2xl font-bold text-zinc-800 sm:text-3xl font-["Mona_Sans"]'>
+          <div className="text-2xl font-bold text-zinc-800 sm:text-3xl ">
             Page Title
           </div>
           <div className="text-zinc-500">Heading</div>
         </div>
         <div className="space-y-1">
-          <div className='text-xl font-semibold text-zinc-800 font-["Hubot_Sans"]'>
+          <div className="text-xl font-semibold text-zinc-800 ">
             Section Title
           </div>
           <div className="text-zinc-500">Heading 2</div>
@@ -236,7 +236,7 @@ const Toggle = () => {
           } inline-block h-6 w-6 transform rounded-full bg-white shadow-md`}
         />
       </Switch>
-      <div className='font-["Mona_Sans"] text-zinc-500 mt-2'>
+      <div className=" text-zinc-500 mt-2">
         {enabled ? "Active" : "Inactive"}
       </div>
     </Switch.Group>

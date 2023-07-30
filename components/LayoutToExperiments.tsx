@@ -74,7 +74,7 @@ export default function LayoutToExperiments({
             >
               {domain}
             </div>
-            <h1 className='z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl font-["Hubot_Sans"]'>
+            <h1 className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl ">
               {title}
             </h1>
             {children}
