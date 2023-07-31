@@ -113,7 +113,9 @@ const Wrapper = ({
               </div>
             </section>
             <Disclosure.Panel className="mb-20">
-              <div className="mb-4 text-lg text-zinc-500">{explanation}</div>
+              <div className="mb-[18px] text-lg text-zinc-600">
+                {explanation}
+              </div>
               <div className={className}>{children}</div>
             </Disclosure.Panel>
           </>

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { SubTitleMain } from "@/components/SubTitle";
 
 export default function CaseStudiesHomePage() {
   const router = useRouter();
@@ -43,9 +44,9 @@ export default function CaseStudiesHomePage() {
       <GlobalHead />
 
       <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
-        <div className="text-3xl mt-10 sm:mt-20 mb-10 break-words font-semibold pb-3 ">
-          Case Studies
-        </div>
+        <SubTitleMain title="Case Studies">
+          Detail informations on how I handle projects
+        </SubTitleMain>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {experienceCaseStudyData.map(
             ({ project_name, hrefCaseStudy, about_client }) => (
