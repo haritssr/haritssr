@@ -1,5 +1,3 @@
-import InternalLink from "@/components/InternalLink";
-import BackButton from "@/components/BackButton";
 import { experienceCaseStudyData } from "data/experienceCaseStudyData";
 
 import Head from "next/head";
@@ -44,25 +42,40 @@ export default function CaseStudiesHomePage() {
 
       <GlobalHead />
 
-      <main className="mx-auto min-h-screen w-full max-w-3xl px-6 xl:px-0">
+      <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
         <div className="text-3xl mt-10 sm:mt-20 mb-10 break-words font-semibold pb-3 ">
           Case Studies
         </div>
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-10">
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {experienceCaseStudyData.map(
             ({ project_name, hrefCaseStudy, about_client }) => (
-              <div className="space-y-1.5" key={project_name}>
-                <Image
-                  src={about_client.logo_src}
-                  alt={project_name}
-                  height={40}
-                  width={40}
-                />
-                <InternalLink
-                  name={project_name}
-                  href={`/case-studies/${hrefCaseStudy}`}
-                />
-              </div>
+              <Link
+                passHref
+                href={`/case-studies/${hrefCaseStudy}`}
+                key={project_name}
+                className="space-y-1 p-4 bg-zinc-50/50 hover:bg-zinc-100 border border-zinc-300 rounded-lg"
+              >
+                <div className="flex justify-between">
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2">
+                      <Image
+                        src={about_client.logo_src}
+                        alt={project_name}
+                        height={18}
+                        width={18}
+                      />
+                    </div>
+
+                    <div className="text-lg font-semibold">{project_name}</div>
+                  </div>
+                  <ChevronRightIcon
+                    width={2}
+                    className="w-5 h-5 text-zinc-500"
+                  />
+                </div>
+                <div className="text-zinc-800">{about_client.short_about}</div>
+                <div className="text-zinc-400">{about_client.website}</div>
+              </Link>
             )
           )}
         </section>
