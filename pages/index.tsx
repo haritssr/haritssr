@@ -48,7 +48,6 @@ export default function Home() {
         <Experiments />
         <TechStack />
         <DesignSystem />
-        <CaseStudies />
       </section>
     </Layout>
   );
@@ -266,19 +265,6 @@ const DesignSystem = () => {
       explanation="My user interface components library and guidelines"
     >
       <InternalLink name="Design System" href="/design-system" />
-    </Wrapper>
-  );
-};
-
-const CaseStudies = () => {
-  return (
-    <Wrapper
-      id="CaseStudies"
-      topic="Case Studies"
-      className=""
-      explanation="Case studies for my experiences"
-    >
-      <InternalLink name="Case Studies" href="/case-studies" />
     </Wrapper>
   );
 };
