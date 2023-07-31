@@ -23,7 +23,7 @@ export default function ExperienceCard({
   hrefCaseStudy,
 }: ExperienceCardTypes) {
   return (
-    <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400 selection:mx-auto hover:border-apple-gray2 duration-100">
+    <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/70 selection:mx-auto hover:ring-2 hover:ring-blue-600/70">
       <section className=" flex flex-col justify-between  bg-white p-3 space-y-3">
         <div className="mb-3 flex items-center justify-between space-x-2">
           <div className="flex items-center space-x-2">
@@ -77,7 +77,7 @@ export default function ExperienceCard({
           <Link
             passHref
             href={`/case-studies/${hrefCaseStudy}`}
-            className="bg-white border border-zinc-400 pt-1 pb-[3px] hover:bg-apple-gray6 hover:text-zinc-800 rounded text-zinc-600 w-1/2 flex items-center justify-center group"
+            className="bg-white border border-zinc-400/70 pt-1 pb-[3px] hover:bg-apple-gray6 hover:text-zinc-800 rounded text-zinc-600 w-1/2 flex items-center justify-center group"
           >
             <div className="text-tiny">Details</div>
             {/* Chevron Right Icon */}
@@ -98,24 +98,24 @@ export default function ExperienceCard({
           </Link>
         </section>
       </section>
-      <section className="flex flex-col space-y-1.5 border-t border-zinc-400 bg-zinc-50 px-3 pt-3 pb-2.5 text-zinc-800 sm:text-sm">
-        <article className="flex items-center justify-between text-zinc-700">
+      <section className="flex flex-col space-y-1.5 border-t border-zinc-400/70 bg-gradient-to-b from-zinc-50 to-zinc-100/80 px-3 pt-3 pb-2.5 text-zinc-600 sm:text-sm">
+        <article className="flex items-center justify-between">
           <div className="flex w-1/3 items-center justify-between">
-            <div className="font-semibold">Period</div>
+            <div className="font-medium">Period</div>
             <div>:</div>
           </div>
           <div>{period}</div>
         </article>
-        <article className="flex items-center justify-between text-zinc-700">
+        <article className="flex items-center justify-between">
           <div className="flex w-1/3 items-center justify-between">
-            <div className="font-semibold">Status</div>
+            <div className="font-medium">Status</div>
             <div>:</div>
           </div>
           <div>{status[0]}</div>
         </article>
-        <article className="flex items-center justify-between text-zinc-700">
+        <article className="flex items-center justify-between">
           <div className="flex w-1/3 items-center justify-between">
-            <div className="font-semibold">Industry</div>
+            <div className="font-medium">Industry</div>
             <div>:</div>
           </div>
           <div>{industry}</div>

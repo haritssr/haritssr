@@ -13,7 +13,7 @@ export default function InternalLinkWithoutArrow({
     <Link
       href={href}
       passHref
-      className={`cursor-pointer text-blue-500 hover:underline ${
+      className={`cursor-pointer text-blue-600/90 hover:underline ${
         block ? "block" : "inline"
       }`}
     >

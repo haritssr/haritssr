@@ -107,7 +107,7 @@ const BackToExperiments = ({
             className={`${
               inView
                 ? "-ml-0.5 text-zinc-700 sm:group-hover:text-zinc-500"
-                : "ml-0.5 sm:ml-1 text-blue-700 sm:group-hover:text-blue-500"
+                : "ml-0.5 sm:ml-1 text-blue-600/90 sm:group-hover:text-blue-400"
             }  h-5 w-5  `}
             strokeWidth={2}
           />
@@ -115,7 +115,7 @@ const BackToExperiments = ({
             className={`-ml-0.5 block truncate  ${
               inView
                 ? "text-zinc-700 sm:group-hover:text-zinc-500"
-                : "text-blue-700 sm:group-hover:text-blue-500"
+                : "text-blue-600/90 sm:group-hover:text-blue-400"
             }`}
           >
             {inView ? domain : ""}
@@ -154,7 +154,7 @@ const PageSource = ({ href, inView }: { href: string; inView: any }) => {
           className={`flex w-fit cursor-pointer items-center  ${
             inView
               ? "text-zinc-700 hover:text-zinc-500"
-              : "text-blue-700 hover:text-blue-500"
+              : "text-blue-600/90 hover:text-blue-400"
           }`}
         >
           <span className="mr-2 hidden sm:inline-block">Source</span>{" "}
