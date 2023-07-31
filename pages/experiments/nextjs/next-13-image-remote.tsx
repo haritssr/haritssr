@@ -27,7 +27,7 @@ export default function Next13ImageRemote() {
 
 				<Image
 					alt='Next.js logo'
-					src='https://assets.vercel.com/image/upload/v1538361091/repositories/next-js/next-js-bg.png'
+					src='https://assets.vercel.com/image/upload/v1538361091/repositories/next-js/next-js-bg.jpg'
 					width={1200}
 					height={400}
 					style={{

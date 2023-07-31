@@ -47,7 +47,7 @@ export default function CaseStudyPage({ project }) {
             ? "Harits Syah"
             : `${browserTitle} - Harits Syah`}
         </title>
-        <link rel="icon" href="/icons/haritssr.png" />
+        <link rel="icon" href="/icons/haritssr.jpg" />
         <meta name="theme-color" content="#27272a" />
         <meta name="robots" content="follow, index" />
         <meta name="description" content={description} />

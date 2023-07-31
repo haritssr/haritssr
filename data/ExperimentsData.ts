@@ -10,7 +10,7 @@ export const ExperimentsData = [
   {
     id: 1,
     title: "Tailwind CSS",
-    logoSrc: "/icons/tailwindcss.png",
+    logoSrc: "/icons/tailwindcss.jpg",
     description: "CSS library for styling websites",
     links: [
       "Position",
@@ -32,7 +32,7 @@ export const ExperimentsData = [
   {
     id: 2,
     title: "React",
-    logoSrc: "/icons/react.png",
+    logoSrc: "/icons/react.jpg",
     description: "JavaScript library for building user interfaces",
     links: [
       "useState Todo List",
@@ -65,7 +65,7 @@ export const ExperimentsData = [
   {
     id: 3,
     title: "Nextjs",
-    logoSrc: "/icons/nextjs.png",
+    logoSrc: "/icons/nextjs.jpg",
     description: "The React framework for the web",
     links: [
       "Image Components",
@@ -83,7 +83,7 @@ export const ExperimentsData = [
   {
     id: 4,
     title: "Browser",
-    logoSrc: "/icons/chrome.png",
+    logoSrc: "/icons/chrome.jpg",
     description: "Native built-in browser API utilities exploration",
     links: [
       "Clock",
@@ -104,7 +104,7 @@ export const ExperimentsData = [
   {
     id: 5,
     title: "VisX",
-    logoSrc: "/icons/visx.png",
+    logoSrc: "/icons/visx.jpg",
     description: "Data visualization using React.js",
     links: ["Bar Chart", "Pie Chart"],
   },
@@ -112,21 +112,21 @@ export const ExperimentsData = [
   {
     id: 6,
     title: "Framer Motion",
-    logoSrc: "/icons/framermotion.png",
+    logoSrc: "/icons/framermotion.jpg",
     description: "Animation library for React.js by Framer Team",
     links: ["Random"],
   },
   {
     id: 7,
     title: "Mantine",
-    logoSrc: "/icons/mantine.png",
+    logoSrc: "/icons/mantine.jpg",
     description: "A fully featured React component libray",
     links: ["Carousel"],
   },
   {
     id: 8,
     title: "Headless UI",
-    logoSrc: "/icons/headlessui.png",
+    logoSrc: "/icons/headlessui.jpg",
     description: "Headless UI components by Tailwind CSS Team",
     links: [
       "Menu",
@@ -144,7 +144,7 @@ export const ExperimentsData = [
   {
     id: 9,
     title: "Radix UI",
-    logoSrc: "/icons/radixui.png",
+    logoSrc: "/icons/radixui.jpg",
     description: "Headless UI for design system in React.js",
     links: [
       "Accordion",
@@ -172,7 +172,7 @@ export const ExperimentsData = [
   {
     id: 11,
     title: "Notion API",
-    logoSrc: "/icons/notion.png",
+    logoSrc: "/icons/notion.jpg",
     description: "Notion as a free CMS via Notion API",
     links: ["Table"],
   },
@@ -180,35 +180,35 @@ export const ExperimentsData = [
   {
     id: 12,
     title: "UI Explorations",
-    logoSrc: "/icons/radixui.png",
+    logoSrc: "/icons/radixui.jpg",
     description: "Random user interfaces explorations",
     links: ["Notion NavBar"],
   },
   {
     id: 13,
     title: "Emotion",
-    logoSrc: "/icons/emotion.png",
+    logoSrc: "/icons/emotion.jpg",
     description: "CSS library for styling websites",
     links: ["Example 1", "Example 2"],
   },
   {
     id: 14,
     title: "React Aria",
-    logoSrc: "/icons/react-aria.png",
+    logoSrc: "/icons/react-aria.jpg",
     description: "A library of React Hooks, UI primitives, and more",
     links: ["Calendar", "Range Calendar"],
   },
   {
     id: 15,
     title: "KaTeX",
-    logoSrc: "/icons/KaTeX.png",
+    logoSrc: "/icons/KaTeX.jpg",
     description: "The math typesetting library for the web",
     links: ["Basic"],
   },
   {
     id: 16,
     title: "React Table",
-    logoSrc: "/icons/tanstack.png",
+    logoSrc: "/icons/tanstack.jpg",
     description: "Headless UI for building tables & datagrids",
     links: [
       "Basic",
@@ -223,14 +223,14 @@ export const ExperimentsData = [
   {
     id: 17,
     title: "React Query",
-    logoSrc: "/icons/tanstack.png",
+    logoSrc: "/icons/tanstack.jpg",
     description: "Asynchronous state management for TS/JS",
     links: ["Basic"],
   },
   {
     id: 18,
     title: "Haris Lab",
-    logoSrc: "/icons/harislab.png",
+    logoSrc: "/icons/harislab.jpg",
     description: "Haris Lab user interfaces design systems",
     links: ["Global Modal", "Context Modal", "Side Bar"],
   },
