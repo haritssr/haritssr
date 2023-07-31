@@ -6,14 +6,13 @@
 
 # Hi, I'm Haris 👋
 
-> _Software Engineer & Designer, Haris Lab_
-> I am a Software Engineer at Haris Lab, a place to learn math and physics for high school and early college science student level. I also run blog at [here](https://www.haritssr.com) 
+_Software Engineer & Designer, Haris Lab_
+I am a Software Engineer at Haris Lab, a place to learn math and physics for high school and early college science student level. I also run blog at [haritssr.vercel.app](https://haritssr.vercel.app)
 
 ### Find me elsewhere
 
-- [Twitter](https://twitter.com/NateBaldwinArt)
-- [Medium](https://medium.com/@NateBaldwin)
+- [Twitter](https://twitter.com/haritssr)
 - [LinkedIn](https://www.linkedin.com/in/haritssr)
 - [Outlook](mailto:haritssr@outlook.co.id)
 - [GMail](mailto:haritssr@gmail.com)
-- [Personal Website](https://www.haritssr.com)
+- [Personal Website](https://haritssr.vercel.app)

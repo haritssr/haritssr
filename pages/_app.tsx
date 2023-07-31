@@ -4,9 +4,9 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
-import { Inter } from '@next/font/google';
+import { Inter } from 'next/font/google';
 
-const inter = Inter();
+const inter = Inter({ subsets: ['latin'] })
 
 const queryClient = new QueryClient();
 

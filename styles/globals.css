@@ -78,7 +78,7 @@ buttonASd {
 html {
 	-webkit-tap-highlight-color: transparent;
 	scroll-behavior: auto;
-	scroll-padding-top: 50px;
+	scroll-padding-top: 100px;
 }
 
 /* mobile */
