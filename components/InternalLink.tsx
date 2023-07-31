@@ -12,12 +12,12 @@ export default function InternalLink({
     <Link
       passHref
       href={href}
-      className="group flex w-fit cursor-pointer items-center justify-start py-0.5 text-[17px] text-blue-600 hover:text-blue-700 hover:underline sm:text-base"
+      className="group flex w-fit cursor-pointer items-center justify-start py-0.5 text-[17px] text-blue-500 hover:text-blue-600 hover:underline sm:text-base"
     >
       <p className="flex items-center">
         {name}
         <ChevronRightIcon
-          className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700 group-hover:underline"
+          className="h-4 w-4 text-blue-500 -mb-[1.5px] duration-200 group-hover:text-blue-600 group-hover:underline"
           strokeWidth={2}
         />
       </p>

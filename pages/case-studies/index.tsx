@@ -45,34 +45,23 @@ export default function CaseStudiesHomePage() {
       <GlobalHead />
 
       <main className="mx-auto min-h-screen w-full max-w-3xl px-6 xl:px-0">
-        <BackButton href="/#my-experience" name="All Projects" />
-        <div className="text-3xl mt-5 sm:mt-10 mb-10 break-words font-semibold pb-3 ">
+        <div className="text-3xl mt-10 sm:mt-20 mb-10 break-words font-semibold pb-3 ">
           Case Studies
         </div>
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-10">
           {experienceCaseStudyData.map(
             ({ project_name, hrefCaseStudy, about_client }) => (
-              <div className="space-y-1">
+              <div className="space-y-1.5" key={project_name}>
                 <Image
                   src={about_client.logo_src}
                   alt={project_name}
                   height={40}
                   width={40}
                 />
-                <Link
-                  key={project_name}
-                  passHref
+                <InternalLink
+                  name={project_name}
                   href={`/case-studies/${hrefCaseStudy}`}
-                  className="block group w-fit cursor-pointer items-center justify-start py-0.5 text-[17px] text-blue-600 hover:text-blue-700 hover:underline sm:text-base"
-                >
-                  <p className="flex items-center">
-                    {project_name}
-                    <ChevronRightIcon
-                      className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700 group-hover:underline"
-                      strokeWidth={2}
-                    />
-                  </p>
-                </Link>
+                />
               </div>
             )
           )}

@@ -55,7 +55,7 @@ export default function ExperienceCard({
             href={`https://${href}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center border border-zinc-700 py-1 rounded space-x-1 bg-zinc-700 hover:bg-zinc-800 text-white w-1/2 group"
+            className="flex items-center justify-center border border-zinc-700 pt-1 pb-[3px] rounded space-x-1 bg-zinc-700 hover:bg-zinc-800 text-white w-1/2 group"
           >
             <div className="text-tiny">Visit</div>
             {/* External Link Icon */}
@@ -77,7 +77,7 @@ export default function ExperienceCard({
           <Link
             passHref
             href={`/case-studies/${hrefCaseStudy}`}
-            className="bg-white border border-zinc-400 py-1 hover:bg-apple-gray6 hover:text-zinc-800 rounded text-zinc-600 w-1/2 flex items-center justify-center group"
+            className="bg-white border border-zinc-400 pt-1 pb-[3px] hover:bg-apple-gray6 hover:text-zinc-800 rounded text-zinc-600 w-1/2 flex items-center justify-center group"
           >
             <div className="text-tiny">Details</div>
             {/* Chevron Right Icon */}

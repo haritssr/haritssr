@@ -10,6 +10,7 @@ import { TechStackComponent } from "@/components/TechStackComponents";
 
 // Icons
 import {
+  ArrowRightIcon,
   BriefcaseIcon,
   BuildingOfficeIcon,
   ChevronDownIcon,
@@ -40,7 +41,7 @@ import ExperimentsGrid from "@/components/ExperimentsGrid";
 export default function Home() {
   return (
     <Layout browserTitle="Home" description="Home">
-      <section className="mt-5 space-y-24 sm:mt-10 ">
+      <section className="mt-5 sm:mt-10 space-y-10 sm:space-y-16">
         <Contacts />
         <Experiences />
         <CV />
@@ -74,38 +75,44 @@ const Wrapper = ({
             <section className="mb-3 flex items-center justify-between">
               <Link
                 href={`/#${id}`}
-                className=" text-2xl sm:text-3xl font-bold text-zinc-800"
+                className=" text-2xl sm:text-3xl font-bold text-zinc-700"
               >
                 {topic}
               </Link>
-              <Disclosure.Button className="group">
-                <div
-                  className={`px-1.5 sm:px-3 py-1.5 sm:py-1 group sm:space-x-1 flex items-center justify-center rounded-full border  group-hover:border-zinc-700 ${
-                    open ? "border-zinc-300" : "border-zinc-700"
-                  }`}
-                >
-                  {open ? (
-                    <ChevronUpIcon
-                      className="text-zinc-500 h-4 w-4 group-hover:text-zinc-700"
-                      strokeWidth={2}
-                    />
-                  ) : (
-                    <ChevronDownIcon
-                      className="text-zinc-700 h-4 w-4 group-hover:text-zinc-700"
-                      strokeWidth={2}
-                    />
-                  )}
-                  <div
-                    className={`hidden sm:block text-tiny  group-hover:text-zinc-700 ${
-                      open ? "text-zinc-500" : "text-zinc-700"
-                    }`}
-                  >
-                    {open ? "Show less" : "Show more"}
+              <div className="flex space-x-1.5 sm:space-x-2">
+                <Disclosure.Button className="group">
+                  <div className="px-1.5 pb-[5px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center hover:bg-zinc-200/70 rounded-full bg-zinc-100 group">
+                    {open ? (
+                      <ChevronUpIcon
+                        className="text-zinc-500 h-4 w-4 group-hover:text-zinc-700"
+                        strokeWidth={2}
+                      />
+                    ) : (
+                      <ChevronDownIcon
+                        className="text-zinc-500 h-4 w-4 group-hover:text-zinc-700"
+                        strokeWidth={2}
+                      />
+                    )}
+                    <div className="hidden sm:block text-tiny text-zinc-500 group-hover:text-zinc-700">
+                      {open ? "Show Less" : "Show More"}
+                    </div>
                   </div>
-                </div>
-              </Disclosure.Button>
+                </Disclosure.Button>
+                <Link
+                  href={`/${topic.toLowerCase().replace(" ", "-")}`}
+                  className="pl-2.5 pr-1 pb-[1.5px] pt-[2.5px] sm:pl-3.5 sm:pr-2 sm:py-[5px] flex items-center justify-center hover:bg-zinc-200/70 rounded-full bg-zinc-100 group"
+                >
+                  <div className="text-sm sm:text-tiny text-blue-500 group-hover:text-blue-600">
+                    Details
+                  </div>
+                  <ChevronRightIcon
+                    strokeWidth={2}
+                    className="text-blue-500 h-4 w-4 group-hover:text-blue-600"
+                  />
+                </Link>
+              </div>
             </section>
-            <Disclosure.Panel>
+            <Disclosure.Panel className="mb-20">
               <div className="mb-4 text-lg text-zinc-500">{explanation}</div>
               <div className={className}>{children}</div>
             </Disclosure.Panel>
@@ -120,7 +127,7 @@ const Contacts = () => {
   return (
     <div
       id="contacts"
-      className="grid grid-cols-1 gap-10 bg-white px-14 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4"
+      className="grid grid-cols-1 gap-10 bg-white px-14 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4 mb-16 sm:mb-20"
     >
       <section className="flex justify-center sm:justify-start">
         <Image
@@ -135,7 +142,7 @@ const Contacts = () => {
         />
       </section>
       <section className="space-y-3 sm:space-y-4">
-        <div className="text-2xl sm:text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
+        <div className="text-xl font-bold text-zinc-700 text-center sm:text-left mb-3 sm:mb-0">
           Harits Syah
         </div>
         <div className="flex items-center space-x-1">
@@ -161,7 +168,7 @@ const Contacts = () => {
         </div>
       </section>
       <section className="space-y-3 sm:space-y-4">
-        <div className="text-2xl sm:text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
+        <div className="text-xl font-bold text-zinc-700 text-center sm:text-left mb-3 sm:mb-0">
           Contacts
         </div>
         {WorkContacts.map((c) => (
@@ -175,7 +182,7 @@ const Contacts = () => {
         ))}
       </section>
       <section className="space-y-3 sm:space-y-4">
-        <div className="text-2xl sm:text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
+        <div className="text-xl font-bold text-zinc-700 text-center sm:text-left mb-3 sm:mb-0">
           Social Media
         </div>
         {SocialMediaContacts.map((c) => (
