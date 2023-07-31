@@ -6,8 +6,8 @@
 
 # Hi, I'm Haris 👋
 
-> _Software Engineer & Designer, Haris Lab_
-> I am a **Software Engineer and Math&Physics Teacher** with a focus on **User Experience of UI**. My path started in math and physics education and evolved with frontend engineering to where I am today. I'm facinated by data visualization, information architecture, UI, UX, and the capability of the web as a information tool. I'm the founder of [Haris Lab](https://harislab.com) and several mini-project company. I do several freelance too.
+_Software Engineer & Designer, Haris Lab_
+I am a Software Engineer at Haris Lab, a place to learn math and physics for high school and early college science student level. I also run blog at [haritssr.vercel.app](https://haritssr.vercel.app)
 
 ### Find me elsewhere
 
@@ -15,4 +15,4 @@
 - [LinkedIn](https://www.linkedin.com/in/haritssr)
 - [Outlook](mailto:haritssr@outlook.co.id)
 - [GMail](mailto:haritssr@gmail.com)
-- [Personal Website](https://www.haritssr.com)
+- [Personal Website](https://haritssr.vercel.app)
