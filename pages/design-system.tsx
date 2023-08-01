@@ -11,10 +11,16 @@ import { Switch } from "@headlessui/react";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import * as Dialog from "@radix-ui/react-dialog";
+import { SubTitleMain } from "@/components/SubTitle";
 
 export default function DesignSystem() {
   return (
-    <Layout browserTitle="Design System" description="Design System">
+    <Layout browserTitle="Design Systems" description="Design Systems">
+      <SubTitleMain title="Design Systems">
+        This design system used in{" "}
+        <ExternalLink name="haritssr.com" href="haritssr.com" /> and{" "}
+        <ExternalLink name="Haris Lab" href="harislab.com" />
+      </SubTitleMain>
       <div className="mt-5 space-y-20">
         <A />
         <div>
@@ -43,11 +49,6 @@ const Wrapper = ({
 }) => {
   return (
     <div id={id}>
-      <div className="mt-16 mb-6 space-y-2">
-        <span className="text-2xl font-bold text-zinc-800 sm:text-4xl ">
-          Haris Lab Design Systems
-        </span>
-      </div>
       <div className={className}>{children}</div>
     </div>
   );
@@ -55,12 +56,7 @@ const Wrapper = ({
 
 const A = () => {
   return (
-    <Wrapper className="" id="DesignSystem">
-      <div className="mb-10 sm:mb-16 text-zinc-600">
-        This design system used in{" "}
-        <ExternalLink name="haritssr.com" href="haritssr.com" /> and{" "}
-        <ExternalLink name="Haris Lab" href="harislab.com" />
-      </div>
+    <div>
       <Section name="Color" />
       <section className="mb-10 -mt-2 sm:mb-16  grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 p-4 border">
         {color.map((data) => (
@@ -210,7 +206,7 @@ const A = () => {
       <section className="mb-10 -mt-2 sm:mb-16 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
         <Modal />
       </section>
-    </Wrapper>
+    </div>
   );
 };
 

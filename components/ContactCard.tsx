@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Contact({
+export default function ContactCard({
   href,
   imgSrc,
   name,
@@ -29,7 +29,7 @@ export default function Contact({
           blurDataURL={imgSrc}
           // placeholder='blur'
         />
-        <div className=" text-zinc-500 hover:text-zinc-800 group-hover:underline">
+        <div className=" text-zinc-600 hover:text-zinc-800 group-hover:underline">
           {name}
         </div>
       </section>

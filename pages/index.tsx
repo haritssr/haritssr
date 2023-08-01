@@ -1,16 +1,15 @@
 // Internal Components
-import ExperimentsComponent from "@/components/ExperimentsCard";
-import Contact from "@/components/Contact";
+import ExperimentsGrid from "@/components/ExperimentsGrid";
+import Contact from "@/components/ContactCard";
 import InternalLink from "@/components/InternalLink";
-import InternalLinkWithoutArrow from "@/components/InternalLinkWithoutArrow";
 import ExternalLink from "@/components/ExternalLink";
 import Layout from "@/components/Layout";
 import ExperienceCard from "@/components/ExperienceCard";
 import { TechStackCard } from "@/components/TechStackCard";
+import ContactCard from "@/components/ContactCard";
 
 // Icons
 import {
-  ArrowRightIcon,
   BriefcaseIcon,
   BuildingOfficeIcon,
   ChevronDownIcon,
@@ -36,7 +35,6 @@ import { educationData } from "data/educationData";
 
 // Headless UI
 import { Disclosure } from "@headlessui/react";
-import ExperimentsGrid from "@/components/ExperimentsGrid";
 
 export default function Home() {
   return (
@@ -74,7 +72,7 @@ const Wrapper = ({
             <section className="mb-3 flex items-center justify-between">
               <Link
                 href={`/#${id}`}
-                className=" text-2xl sm:text-3xl font-bold text-zinc-700"
+                className=" text-2xl sm:text-3xl font-bold text-zinc-800"
               >
                 {topic}
               </Link>
@@ -89,7 +87,7 @@ const Wrapper = ({
                       <ChevronUpIcon
                         className={`h-4 w-4 ${
                           open
-                            ? "text-zinc-700 group-hover:text-zinc-800"
+                            ? "text-zinc-800 group-hover:text-zinc-800"
                             : "text-zinc-50 group-hover:text-zinc-50"
                         }`}
                         strokeWidth={2}
@@ -98,7 +96,7 @@ const Wrapper = ({
                       <ChevronDownIcon
                         className={`h-4 w-4 ${
                           open
-                            ? "text-zinc-700 group-hover:text-zinc-800"
+                            ? "text-zinc-800 group-hover:text-zinc-800"
                             : "text-zinc-50 group-hover:text-zinc-50"
                         }`}
                         strokeWidth={2}
@@ -107,7 +105,7 @@ const Wrapper = ({
                     <div
                       className={`hidden sm:block text-tiny  ${
                         open
-                          ? "text-zinc-700 group-hover:text-zinc-800"
+                          ? "text-zinc-800 group-hover:text-zinc-800"
                           : "text-zinc-50 group-hover:text-zinc-50"
                       }`}
                     >
@@ -119,12 +117,12 @@ const Wrapper = ({
                   href={`/${topic.toLowerCase().replace(" ", "-")}`}
                   className="pl-2.5 pr-1 pb-[1.5px] pt-[2.5px] sm:pl-3.5 sm:pr-2 sm:py-[5px] flex items-center justify-center hover:bg-zinc-200/70 rounded-full bg-zinc-100 group"
                 >
-                  <div className="text-sm sm:text-tiny text-blue-600/90 group-hover:text-blue-700">
+                  <div className="text-sm sm:text-tiny text-blue-600 group-hover:text-blue-700">
                     Details
                   </div>
                   <ChevronRightIcon
                     strokeWidth={2}
-                    className="text-blue-600/90 h-4 w-4 group-hover:text-blue-700"
+                    className="text-blue-600 h-4 w-4 group-hover:text-blue-700"
                   />
                 </Link>
               </div>
@@ -161,32 +159,30 @@ const Contacts = () => {
         />
       </section>
       <section className="space-y-3 sm:space-y-4">
-        <div className="text-xl font-bold text-zinc-700 text-center sm:text-left mb-3 sm:mb-0">
+        <div className="text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
           Harits Syah
         </div>
         <div className="flex items-center space-x-1">
-          <BriefcaseIcon className=" h-5 w-5 text-zinc-700" strokeWidth={1.8} />
-          <div className=" text-zinc-500">
-            Web Software Engineer
-          </div>
+          <BriefcaseIcon className=" h-5 w-5 text-zinc-800" strokeWidth={1.8} />
+          <div className=" text-zinc-600">Web Software Engineer</div>
         </div>
         <div className="flex items-center space-x-1">
           <BuildingOfficeIcon
-            className=" h-5 w-5 text-zinc-700"
+            className=" h-5 w-5 text-zinc-800"
             strokeWidth={1.8}
           />
-          <div className=" text-zinc-500">
+          <div className=" text-zinc-600">
             Founder,{" "}
             <ExternalLink href="https://www.harislab.com" name="Haris Lab" />
           </div>
         </div>
         <div className="flex items-center space-x-1">
-          <MapPinIcon className=" h-5 w-5 text-zinc-700" strokeWidth={1.8} />
-          <div className=" text-zinc-500">Tangerang, Indonesia</div>
+          <MapPinIcon className=" h-5 w-5 text-zinc-800" strokeWidth={1.8} />
+          <div className=" text-zinc-600">Tangerang, Indonesia</div>
         </div>
       </section>
       <section className="space-y-3 sm:space-y-4">
-        <div className="text-xl font-bold text-zinc-700 text-center sm:text-left mb-3 sm:mb-0">
+        <div className="text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
           Contacts
         </div>
         {WorkContacts.map((c) => (
@@ -200,11 +196,11 @@ const Contacts = () => {
         ))}
       </section>
       <section className="space-y-3 sm:space-y-4">
-        <div className="text-xl font-bold text-zinc-700 text-center sm:text-left mb-3 sm:mb-0">
+        <div className="text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
           Social Media
         </div>
         {SocialMediaContacts.map((c) => (
-          <Contact
+          <ContactCard
             href={c.href}
             name={c.name}
             key={c.imgSrc}
