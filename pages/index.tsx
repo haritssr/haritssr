@@ -167,8 +167,7 @@ const Contacts = () => {
         <div className="flex items-center space-x-1">
           <BriefcaseIcon className=" h-5 w-5 text-zinc-700" strokeWidth={1.8} />
           <div className=" text-zinc-500">
-            Software Engineer,{" "}
-            <InternalLinkWithoutArrow href="#techstack" name="Web" />
+            Web Software Engineer
           </div>
         </div>
         <div className="flex items-center space-x-1">
