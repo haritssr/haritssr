@@ -170,43 +170,42 @@ export const ExperimentsData = [
     ],
   },
   {
-    id: 11,
+    id: 10,
     title: "Notion API",
     logoSrc: "/icons/notion.jpg",
     description: "Notion as a free CMS via Notion API",
     links: ["Table"],
   },
-
   {
-    id: 12,
+    id: 11,
     title: "UI Explorations",
     logoSrc: "/icons/radixui.jpg",
     description: "Random user interfaces explorations",
     links: ["Notion NavBar"],
   },
   {
-    id: 13,
-    title: "Emotion",
-    logoSrc: "/icons/emotion.jpg",
-    description: "CSS library for styling websites",
-    links: ["Example 1", "Example 2"],
+    id: 12,
+    title: "Haris Lab",
+    logoSrc: "/icons/harislab.jpg",
+    description: "Haris Lab user interfaces design systems",
+    links: ["Global Modal", "Context Modal", "Side Bar"],
   },
   {
-    id: 14,
+    id: 13,
     title: "React Aria",
     logoSrc: "/icons/react-aria.jpg",
     description: "A library of React Hooks, UI primitives, and more",
     links: ["Calendar", "Range Calendar"],
   },
   {
-    id: 15,
+    id: 14,
     title: "KaTeX",
     logoSrc: "/icons/KaTeX.jpg",
     description: "The math typesetting library for the web",
     links: ["Basic"],
   },
   {
-    id: 16,
+    id: 15,
     title: "React Table",
     logoSrc: "/icons/tanstack.jpg",
     description: "Headless UI for building tables & datagrids",
@@ -221,18 +220,11 @@ export const ExperimentsData = [
     ],
   },
   {
-    id: 17,
+    id: 16,
     title: "React Query",
     logoSrc: "/icons/tanstack.jpg",
     description: "Asynchronous state management for TS/JS",
     links: ["Basic"],
-  },
-  {
-    id: 18,
-    title: "Haris Lab",
-    logoSrc: "/icons/harislab.jpg",
-    description: "Haris Lab user interfaces design systems",
-    links: ["Global Modal", "Context Modal", "Side Bar"],
   },
 ];
 
@@ -249,11 +241,10 @@ export const FramerMotionData = ExperimentsData[5];
 export const MantineData = ExperimentsData[6];
 export const HeadlessUIData = ExperimentsData[7];
 export const RadixUIData = ExperimentsData[8];
-export const NotionAPIData = ExperimentsData[10];
-export const UIExplorationData = ExperimentsData[11];
-export const EmotionData = ExperimentsData[12];
+export const NotionAPIData = ExperimentsData[9];
+export const UIExplorationData = ExperimentsData[10];
+export const HarisLabData = ExperimentsData[11];
 export const ReactAriaData = ExperimentsData[12];
 export const KaTeXData = ExperimentsData[13];
 export const ReactTableData = ExperimentsData[14];
 export const ReactQueryData = ExperimentsData[15];
-export const HarisLabData = ExperimentsData[16];

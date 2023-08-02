@@ -11,7 +11,6 @@
     "ts-coverage": "typescript-coverage-report"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
     "@faker-js/faker": "^6.3.1",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
