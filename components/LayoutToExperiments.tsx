@@ -49,36 +49,32 @@ export default function LayoutToExperiments({
       <GlobalHead />
 
       <main className="mx-auto flex max-w-5xl sm:mt-10 sm:gap-10 sm:px-5 xl:px-0">
-        {/* <SideBarExperiments /> */}
         <article className="mx-auto min-h-screen w-full max-w-4xl sm:px-0">
           {/* Navigation */}
-          <div
-            className={`sticky -top-0 sm:top-14 border-b ${
+          <section
+            className={`sticky -top-0 sm:top-[44px] border-b ${
               inView
                 ? "border-zinc-300"
-                : " sm:mx-auto sm:w-1/2 border-b sm:bg-apple-gray6/60 sm:saturate-150 sm:backdrop-blur-lg"
-            } z-40 mb-5 bg-white py-2 sm:rounded-full sm:border`}
+                : "border-b sm:bg-apple-gray6/90 sm:saturate-150 sm:backdrop-blur-lg"
+            } z-40 mb-5 bg-white py-2.5 sm:border-none`}
           >
             <div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
               <BackToExperiments inView={inView} domain={domain} />
               <PageTitleCenter inView={inView} title={title} />
               <PageSource inView={inView} href={githubRoute} />
             </div>
-          </div>
+          </section>
 
           {/* Header */}
-          <div className="px-5 sm:px-0">
-            <div
-              className="mt-5 mb-4 w-fit rounded-full border border-zinc-300 px-3 pb-0.5 pt-1 text-xs text-zinc-800 sm:mt-10"
+          <header className="px-5 sm:px-0">
+            <h1
               ref={ref}
+              className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl mt-10"
             >
-              {domain}
-            </div>
-            <h1 className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl ">
               {title}
             </h1>
             {children}
-          </div>
+          </header>
         </article>
       </main>
 
@@ -98,27 +94,17 @@ const BackToExperiments = ({
       passHref
       href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
       className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${
-        inView ? "w-1/3" : "w-1/4"
+        inView ? "w-1/3 sm:-ml-8" : "w-1/4"
       }`}
     >
       <span className=" inline-block w-full">
         <span className="group flex items-center">
           <ChevronLeftIcon
-            className={`${
-              inView
-                ? "-ml-0.5 text-zinc-700 sm:group-hover:text-zinc-500"
-                : "ml-0.5 sm:ml-1 text-blue-600 sm:group-hover:text-blue-400"
-            }  h-5 w-5  `}
+            className=" text-zinc-800 sm:group-hover:text-zinc-400 h-5 w-5"
             strokeWidth={2}
           />
-          <span
-            className={`-ml-0.5 block truncate  ${
-              inView
-                ? "text-zinc-700 sm:group-hover:text-zinc-500"
-                : "text-blue-600 sm:group-hover:text-blue-400"
-            }`}
-          >
-            {inView ? domain : ""}
+          <span className="-ml-0.5 block truncate text-zinc-800 sm:group-hover:text-zinc-400">
+            {domain}
           </span>
         </span>
       </span>
@@ -144,18 +130,18 @@ const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
 
 const PageSource = ({ href, inView }: { href: string; inView: any }) => {
   return (
-    <div className={`flex justify-end sm:w-1/6 ${inView ? "w-1/3" : "w-1/4"}`}>
+    <div
+      className={`flex justify-end sm:w-1/6 ${
+        inView ? "w-1/3 sm:-mr-3.5" : "w-1/4"
+      }`}
+    >
       <cite className="not-italic">
         <a
           title="This page source code"
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex w-fit cursor-pointer items-center  ${
-            inView
-              ? "text-zinc-700 hover:text-zinc-500"
-              : "text-blue-600 hover:text-blue-400"
-          }`}
+          className={`flex w-fit cursor-pointer items-center text-zinc-800 hover:text-zinc-500`}
         >
           <span className="mr-2 hidden sm:inline-block">Source</span>{" "}
           <GitHubIcon className="h-5 w-5 cursor-pointer" />

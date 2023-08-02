@@ -79,7 +79,7 @@ const Wrapper = ({
               <div className="flex space-x-1.5 sm:space-x-2">
                 <Disclosure.Button className="group">
                   <div
-                    className={`px-1.5 pb-[5px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center  rounded-full  group transition duration-100 ${
+                    className={`px-1.5 pb-[5px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center  rounded-full group ${
                       open ? "hover:bg-zinc-200/70 bg-zinc-100" : "bg-zinc-800"
                     }`}
                   >

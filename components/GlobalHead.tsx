@@ -7,7 +7,7 @@ export default function GlobalHead() {
       <div className="mx-auto flex max-w-5xl flex-row items-center justify-between px-3 py-2.5 lg:px-0">
         <Link
           href="/"
-          className=" text-zinc-700 font-medium duration-100 hover:text-zinc-500"
+          className=" text-zinc-700 font-medium hover:text-zinc-400"
           aria-label="site logo"
         >
           Harits Syah

@@ -17,10 +17,14 @@ export default function ExperimentIndexPage({
       browserTitle={experiment.title}
       description={experiment.description}
     >
-      <div className="div max-w-4xl mx-auto mt-16">
-        <Link passHref href="/experiments" className="flex items-center mb-10">
-          <ChevronLeftIcon className="h-5 w-5 text-zinc-700" strokeWidth={2} />
-          <span className="text-zinc-700 hover:underline">Experiments</span>
+      <div className="div max-w-5xl mx-auto mt-14">
+        <Link
+          passHref
+          href="/experiments"
+          className="flex sm:-ml-5 items-center w-fit mb-12 text-zinc-800 hover:text-zinc-400"
+        >
+          <ChevronLeftIcon className="h-5 w-5" strokeWidth={2} />
+          <span>Experiments</span>
         </Link>
 
         <div className="mb-10 space-y-2">
@@ -40,7 +44,7 @@ export default function ExperimentIndexPage({
             {experiment.links.length} experiments
           </div>
         </div>
-        <ol className="space-y-1 px-3.5 py-2 -ml-4">
+        <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 px-3.5 py-2 -ml-4">
           {experiment.links?.map((link) => (
             <li key={link} className="text-zinc-600">
               <InternalLink
