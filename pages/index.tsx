@@ -76,7 +76,7 @@ const Wrapper = ({
               >
                 {topic}
               </Link>
-              <div className="flex space-x-1.5 sm:space-x-2">
+              <div className="flex space-x-2">
                 <Disclosure.Button className="group">
                   <div
                     className={`px-1.5 pb-[5px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center  rounded-full group ${
@@ -114,6 +114,7 @@ const Wrapper = ({
                   </div>
                 </Disclosure.Button>
                 <Link
+                  passHref
                   href={`/${topic.toLowerCase().replace(" ", "-")}`}
                   className="pl-2.5 pr-1 pb-[1.5px] pt-[2.5px] sm:pl-3.5 sm:pr-2 sm:py-[5px] flex items-center justify-center hover:bg-zinc-200/70 rounded-full bg-zinc-100 group"
                 >
@@ -168,6 +169,7 @@ const Contacts = () => {
                 className="block text-center text-zinc-500"
                 href="https://www.twitter.com/haritssr"
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 @haritssr
               </a>

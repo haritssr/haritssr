@@ -4,7 +4,7 @@ import { aboutMeDataFull } from "data/contactData";
 
 export default function About() {
   return (
-    <Layout browserTitle="Home" description="Home">
+    <Layout browserTitle="About" description="About">
       <div className="my-8">
         <div className="justify-center w-full flex ">
           <section className="flex justify-center">
@@ -28,6 +28,7 @@ export default function About() {
             className="block text-center text-zinc-500"
             href="https://www.twitter.com/haritssr"
             target="_blank"
+            rel="noreferrer noopener"
           >
             @haritssr
           </a>
@@ -37,7 +38,7 @@ export default function About() {
       <div className="space-y-14">
         {aboutMeDataFull.map((section) => {
           return (
-            <div className="">
+            <div key={section.section}>
               <div className="text-zinc-800 text-xl font-semibold mb-1.5">
                 {section.section}
               </div>
