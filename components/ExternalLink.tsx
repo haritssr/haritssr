@@ -15,7 +15,7 @@ export default function ExternalLink({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline group-hover:text-blue-600"
+        className="group inline-block w-fit cursor-pointer items-center text-blue-600 hover:underline group-hover:text-blue-700"
       >
         <span className="flex items-center">
           <span className={`${big ? "text-lg font-medium" : "text-base"}`}>

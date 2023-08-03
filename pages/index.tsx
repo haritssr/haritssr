@@ -142,74 +142,107 @@ const Wrapper = ({
 
 const Contacts = () => {
   return (
-    <div
-      id="contacts"
-      className="grid grid-cols-1 gap-10 bg-white px-14 pt-5 sm:grid-cols-3 sm:gap-5 sm:px-0 sm:pt-10 lg:grid-cols-4 mb-16 sm:mb-20"
-    >
-      <section className="flex justify-center sm:justify-start">
-        <Image
-          priority
-          src="/images/blur.jpg"
-          height="165"
-          width="165"
-          className="z-10 rounded-full aspect-ratio"
-          alt="Harits Syah"
-          blurDataURL="/images/blur.jpg"
-          // placeholder='blur'
-        />
-      </section>
-      <section className="space-y-3 sm:space-y-4">
-        <div className="text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
-          Harits Syah
-        </div>
-        <div className="flex items-center space-x-1">
-          <BriefcaseIcon className=" h-5 w-5 text-zinc-800" strokeWidth={1.8} />
-          <div className=" text-zinc-600">Web Software Engineer</div>
-        </div>
-        <div className="flex items-center space-x-1">
-          <BuildingOfficeIcon
-            className=" h-5 w-5 text-zinc-800"
-            strokeWidth={1.8}
-          />
-          <div className=" text-zinc-600">
-            Founder,{" "}
-            <ExternalLink href="https://www.harislab.com" name="Haris Lab" />
+    <section className="grid grid-cols-1 lg:grid-cols-4 md:items-center my-8 gap-8 md:gap-5">
+      <section className="lg:col-span-1 space-y-5 md:mb-0 rounded-md lg:border lg:border-zinc-300 lg:h-full lg:self-center lg:grid">
+        <div className="grid lg:border-white rounded-md lg:border">
+          <div className="self-center lg:space-y-2">
+            <div className="justify-center w-full flex ">
+              <section className="flex justify-center">
+                <Image
+                  priority
+                  src="/images/blur.jpg"
+                  height="165"
+                  width="165"
+                  className="z-10 rounded-full aspect-ratio"
+                  alt="Harits Syah"
+                  blurDataURL="/images/blur.jpg"
+                  // placeholder='blur'
+                />
+              </section>
+            </div>
+            <div className="">
+              <div className="text-zinc-800 w-full text-center text-lg font-semibold">
+                Harits Syah
+              </div>
+              <a
+                className="block text-center text-zinc-500"
+                href="https://www.twitter.com/haritssr"
+                target="_blank"
+              >
+                @haritssr
+              </a>
+              <div className="bg-zinc-200"></div>
+            </div>
           </div>
         </div>
-        <div className="flex items-center space-x-1">
-          <MapPinIcon className=" h-5 w-5 text-zinc-800" strokeWidth={1.8} />
-          <div className=" text-zinc-600">Tangerang, Indonesia</div>
+      </section>
+      <section className="lg:col-span-3 lg:border lg:border-zinc-300 rounded lg:pt-2 lg:px-4">
+        <div className="divide-y divide-zinc-200">
+          <div className="grid grid-cols-3 py-1.5">
+            <span className="text-zinc-800 font-semibold">Role</span>
+            <span className="text-zinc-400 col-span-2">
+              Web Software Engineer
+            </span>
+          </div>
+          <div className="grid grid-cols-3 py-1.5">
+            <span className="text-white font-semibold">Role</span>
+            <span className="text-zinc-400 col-span-2">Web Designer</span>
+          </div>
+          <div className="grid grid-cols-3 py-1.5">
+            <span className="text-white font-semibold">Role</span>
+            <span className="text-zinc-400 col-span-2">
+              Math Physics Teacher
+            </span>
+          </div>
+          <div className="grid grid-cols-3 py-1.5">
+            <span className="text-zinc-800 font-semibold">At</span>
+            <span className="text-zinc-400 col-span-2">
+              <cite className="group not-italic">
+                <a
+                  title="Haris Laboratorium Indonesia"
+                  href="https://www.harislab.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-block w-fit cursor-pointer items-center text-zinc-400 hover:underline group-hover:text-zinc-600"
+                >
+                  <span className="flex items-center">
+                    <span className="text-base">Haris Lab</span>
+                    {/* External Link Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 ml-1  text-zinc-400 group-hover:text-zinc-600 mt-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.7}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </cite>
+            </span>
+          </div>
+          <div className="grid grid-cols-3 py-1.5">
+            <span className="text-zinc-800 font-semibold">Email</span>
+            <span className="text-zinc-400 col-span-2">haritssr@gmail.com</span>
+          </div>
+          <div className="grid grid-cols-3 py-1.5">
+            <span className="text-zinc-800 font-semibold">Location</span>
+            <span className="text-zinc-400 col-span-2">
+              South Tangerang, Indonesia
+            </span>
+          </div>
+          <div className="py-1.5">
+            <InternalLink href="/about" name="More Details" />
+          </div>
         </div>
       </section>
-      <section className="space-y-3 sm:space-y-4">
-        <div className="text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
-          Contacts
-        </div>
-        {WorkContacts.map((c) => (
-          <Contact
-            href={c.href}
-            name={c.name}
-            key={c.imgSrc}
-            imgSrc={c.imgSrc}
-            title={c.title}
-          />
-        ))}
-      </section>
-      <section className="space-y-3 sm:space-y-4">
-        <div className="text-xl font-bold text-zinc-800 text-center sm:text-left mb-3 sm:mb-0">
-          Social Media
-        </div>
-        {SocialMediaContacts.map((c) => (
-          <ContactCard
-            href={c.href}
-            name={c.name}
-            key={c.imgSrc}
-            imgSrc={c.imgSrc}
-            title={c.title}
-          />
-        ))}
-      </section>
-    </div>
+    </section>
   );
 };
 
@@ -294,7 +327,7 @@ const CV = () => {
         {({ open }) => (
           <>
             <Disclosure.Button
-              className={` border border-zinc-400 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
+              className={` border border-zinc-400/70 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
                 open ? "rounded-b-none rounded-t-md" : "rounded-md"
               }`}
             >
@@ -303,7 +336,7 @@ const CV = () => {
                 className={` h-5 w-5 ${open ? "rotate-180" : ""}`}
               />
             </Disclosure.Button>
-            <Disclosure.Panel className="-mt-[1px] p-4 border border-zinc-400 rounded-b">
+            <Disclosure.Panel className="-mt-[1px] p-4 border border-zinc-400/70 rounded-b">
               <div className="font-semibold">
                 Software Engineering (Web Platform)
               </div>
@@ -328,7 +361,7 @@ const CV = () => {
         {({ open }) => (
           <>
             <Disclosure.Button
-              className={` border border-zinc-400 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
+              className={` border border-zinc-400/70 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
                 open ? "rounded-b-none rounded-t-md" : "rounded-md"
               }`}
             >
@@ -337,7 +370,7 @@ const CV = () => {
                 className={` h-5 w-5 ${open ? "rotate-180" : ""}`}
               />
             </Disclosure.Button>
-            <Disclosure.Panel className="-mt-[1px] px-4 py-8 border border-zinc-400	 rounded-b">
+            <Disclosure.Panel className="-mt-[1px] px-4 py-8 border border-zinc-400/70	 rounded-b">
               <section className="space-y-8">
                 <div className="font-semibold text-2xl">Experience</div>
 
