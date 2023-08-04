@@ -1,13 +1,13 @@
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import { experienceCaseStudyData } from "data/experienceCaseStudyData";
+import { experiencesData } from "data/experiencesData";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = experienceCaseStudyData.map(({ hrefCaseStudy }) => {
+  const paths = experiencesData.map(({ hrefCaseStudy }) => {
     return { params: { project: hrefCaseStudy } };
   });
 
@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const project = experienceCaseStudyData.filter(
+  const project = experiencesData.filter(
     (p) => p.hrefCaseStudy === context.params?.project
   )[0];
 
@@ -32,13 +32,13 @@ import { useRouter } from "next/router";
 import GlobalHead from "@/components/GlobalHead";
 import Footer from "@/components/Footer";
 
-export default function CaseStudyPage({ project }) {
+export default function ExperiencesPage({ project }) {
   const router = useRouter();
   const image = "/images/hero.jpg";
   const type = "website";
 
-  const browserTitle = "Case Study";
-  const description = "Case Studies";
+  const browserTitle = "Experiences";
+  const description = "Lists of experience or project";
   return (
     <div className="bg-white">
       <Head>
@@ -67,11 +67,11 @@ export default function CaseStudyPage({ project }) {
       <GlobalHead />
 
       <main className="mx-auto min-h-screen w-full max-w-3xl px-5 xl:px-0">
-        <BackButton href="/case-studies" name="All Case Studies" />
+        <BackButton href="/experiences" name="All experience" />
         {/* Title */}
         <section className="mt-5 sm:mt-10 py-5 flex items-center justify-between">
           <div className="">
-            <div className="mb-1 text-zinc-500 text-xl">Case Study</div>
+            <div className="mb-1 text-zinc-500 text-xl">All experiences</div>
             <div className="text-3xl sm:text-4xl break-words font-bold ">
               {project.project_name}
             </div>

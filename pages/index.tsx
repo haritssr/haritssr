@@ -27,7 +27,7 @@ import React from "react";
 
 // Data
 import { TechStackData } from "../data/TechStackData";
-import { experienceCaseStudyData } from "data/experienceCaseStudyData";
+import { experiencesData } from "data/experiencesData";
 import { nonFormalEducationData } from "data/nonFormalEducationData";
 import { educationData } from "data/educationData";
 
@@ -40,7 +40,7 @@ export default function Home() {
       <section className="mt-5 sm:mt-10 space-y-16">
         <Contacts />
         <Experiences />
-        <CV />
+        <Resume />
         <Experiments />
         <TechStack />
         <DesignSystem />
@@ -299,7 +299,7 @@ const Experiences = () => {
       className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0"
       explanation="All of my projects with use cases"
     >
-      {experienceCaseStudyData.map((d) => (
+      {experiencesData.map((d) => (
         <ExperienceCard
           key={d.project_name}
           href={d.about_client.website}
@@ -350,7 +350,7 @@ const TechStack = () => {
 const DesignSystem = () => {
   return (
     <Wrapper
-      id="DesignSystem"
+      id="design-system"
       topic="Design System"
       className=""
       explanation="My user interface components library and guidelines"
@@ -360,13 +360,13 @@ const DesignSystem = () => {
   );
 };
 
-const CV = () => {
+const Resume = () => {
   return (
     <Wrapper
-      id="CV"
-      topic="Curriculum Vitae"
+      id="resume"
+      topic="Resume"
       className="grid grid-cols-1 sm:grid-cols-2 gap-5"
-      explanation="Formal CV sorted by time"
+      explanation="What I have been doing"
     >
       <Disclosure as="div">
         {({ open }) => (
@@ -410,7 +410,7 @@ const CV = () => {
                 open ? "rounded-b-none rounded-t-md" : "rounded-md"
               }`}
             >
-              <div>CV Details</div>
+              <div>Details</div>
               <ChevronDownIcon
                 className={` h-5 w-5 ${open ? "rotate-180" : ""}`}
               />
@@ -419,7 +419,7 @@ const CV = () => {
               <section className="space-y-8">
                 <div className="font-semibold text-2xl">Experience</div>
 
-                {experienceCaseStudyData.map((project) => (
+                {experiencesData.map((project) => (
                   <div key={project.project_name}>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
@@ -438,7 +438,7 @@ const CV = () => {
                       </div>
                       <Link
                         passHref
-                        href={`/case-studies/${project.hrefCaseStudy}`}
+                        href={`/experiences/${project.hrefCaseStudy}`}
                         className="flex items-center justify-end text-zinc-400 hover:underline"
                       >
                         <div className="text-tiny ">Details</div>

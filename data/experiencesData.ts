@@ -1,4 +1,4 @@
-export const experienceCaseStudyData = [
+export const experiencesData = [
   {
     project_name: "Haris Lab",
     hrefCaseStudy: "haris-lab",
@@ -170,8 +170,8 @@ export const experienceCaseStudyData = [
       my_role: ["Software Engineer", "Designer", "Owner"],
       working_period: "Jun 2021 - Present",
       website_status: ["Production"],
-      routes: ["Home", "Experiments", "Case Studies", "Design Systems"],
-      features: ["Global Navigation", "CV", "Case Studies", "Experiment"],
+      routes: ["Home", "Experiments", "Experiences", "Design Systems"],
+      features: ["Global Navigation", "CV", "Experiences", "Experiment"],
     },
     figma:
       "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FbLTdTJgThkmzd5aAZVP8Rr%2Fharitssr%3Fnode-id%3D17%253A2",

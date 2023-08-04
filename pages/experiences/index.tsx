@@ -1,4 +1,4 @@
-import { experienceCaseStudyData } from "data/experienceCaseStudyData";
+import { experiencesData } from "data/experiencesData";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -9,13 +9,14 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { SubTitleMain } from "@/components/SubTitle";
 
-export default function CaseStudiesHomePage() {
+export default function ExperiencesHomePage() {
   const router = useRouter();
   const image = "/images/hero.jpg";
   const type = "website";
 
-  const browserTitle = "Case Study";
-  const description = "Case Studies";
+  const browserTitle = "Experiences";
+  const description =
+    "Detail informations on how projects I belong to being handled";
   return (
     <div className="bg-white">
       <Head>
@@ -44,15 +45,15 @@ export default function CaseStudiesHomePage() {
       <GlobalHead />
 
       <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
-        <SubTitleMain title="Case Studies">
-          Detail informations on how I handle projects
+        <SubTitleMain title="Experiences">
+          Detail informations on how projects I belong to being handled
         </SubTitleMain>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {experienceCaseStudyData.map(
+          {experiencesData.map(
             ({ project_name, hrefCaseStudy, about_client }) => (
               <Link
                 passHref
-                href={`/case-studies/${hrefCaseStudy}`}
+                href={`/experiences/${hrefCaseStudy}`}
                 key={project_name}
                 className="space-y-1 p-4 bg-zinc-50/50 hover:bg-zinc-100 border border-zinc-300 rounded-lg"
               >
