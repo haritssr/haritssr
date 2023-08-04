@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Image from "next/image";
-import { aboutMeDataFull } from "data/contactData";
+import { aboutMeData } from "data/aboutMeData";
 
 export default function About() {
   return (
@@ -36,17 +36,36 @@ export default function About() {
         </div>
       </div>
       <div className="space-y-14">
-        {aboutMeDataFull.map((section) => {
+        {aboutMeData.map((section) => {
           return (
             <div key={section.section}>
               <div className="text-zinc-800 text-xl font-semibold mb-1.5">
                 {section.section}
               </div>
               <div className="mb-1.5 text-zinc-800">{section.description}</div>
-              <ul className="block sm:list-disc list-inside divide-y divide-zinc-200 border-t border-b border-zinc-200">
+              <ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
                 {section.points.map((point) => (
-                  <li key={point} className="text-zinc-400 py-1.5">
-                    {point}
+                  <li key={point} className="text-zinc-500 py-1.5">
+                    {point.startsWith("https://") ? (
+                      <a
+                        title={point}
+                        className="hover:underline hover:text-zinc-800"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        href={point}
+                      >
+                        {point.slice(12)}
+                      </a>
+                    ) : point.includes("@") ? (
+                      <a
+                        className="hover:underline hover:text-zinc-800"
+                        href={`mailto:${point}`}
+                      >
+                        {point}
+                      </a>
+                    ) : (
+                      point
+                    )}
                   </li>
                 ))}
               </ul>

@@ -107,7 +107,7 @@ export const experienceCaseStudyData = [
       website: "www.mixaperkasa.com",
       office_location:
         "Emerald Avenue Comercial Park Blok EA-A27 Jl. Boulevard CBD Bintaro, RT. 003 RW. 007, Perigi Pondok Aren, Kota Tangerang Selatan Banten",
-      industry: "Concreate, Structure",
+      industry: "Construction",
     },
     about_project: {
       client: "PT Mixa Perkasa Indonesia, via Ahmad Rifqi Baidhowi*",

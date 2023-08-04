@@ -30,7 +30,7 @@ export default function ExternalLink({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={1.5}
+            strokeWidth={1.7}
           >
             <path
               strokeLinecap="round"

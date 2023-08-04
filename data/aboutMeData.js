@@ -1,4 +1,4 @@
-export const aboutMeDataFull = [
+export const aboutMeData = [
   {
     section: "Introduction",
     description: "Brief facts about me",
@@ -15,7 +15,7 @@ export const aboutMeDataFull = [
     section: "Contacts",
     description: "My preferable communication channel",
     points: [
-      "linkedin.com/in/haritssr",
+      "https://www.linkedin.com/in/haritssr",
       "haritssr@gmail.com",
       "haritssr@outlook.com",
     ],
@@ -24,24 +24,30 @@ export const aboutMeDataFull = [
     section: "Social Media",
     description: "Find my online activity here",
     points: [
-      "twitter.com/haritssr",
-      "github.com/haritssr",
-      "leetcode.com/haritssr",
-      "haritssr.com",
+      "https://www.twitter.com/haritssr",
+      "https://www.github.com/haritssr",
+      "https://www.leetcode.com/haritssr",
+      "https://www.haritssr.com",
     ],
   },
   {
     section: "UX",
     description: "My preferable source of UX principles",
     points: [
-      "nngroup.com",
-      "lawsofux.com",
-      "developer.apple.com/design/human-interface-guidelines",
+      "https://www.nngroup.com",
+      "https://www.lawsofux.com",
+      "https://www.developer.apple.com/design/human-interface-guidelines",
     ],
   },
   {
     section: "Web Design",
-    description: "I like how their user interface is presented",
-    points: ["apple.com", "linear.app", "vercel.com", "notion.so"],
+    description:
+      "I like how their user interface is presented and inspired to be like that",
+    points: [
+      "https://www.apple.com",
+      "https://www.linear.app",
+      "https://www.vercel.com",
+      "https://www.notion.so",
+    ],
   },
 ];

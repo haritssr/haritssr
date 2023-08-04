@@ -26,8 +26,6 @@ import Link from "next/link";
 import React from "react";
 
 // Data
-import { WorkContacts } from "../data/WorkContacts";
-import { SocialMediaContacts } from "../data/SocialMediaContacts";
 import { TechStackData } from "../data/TechStackData";
 import { experienceCaseStudyData } from "data/experienceCaseStudyData";
 import { nonFormalEducationData } from "data/nonFormalEducationData";
@@ -39,7 +37,7 @@ import { Disclosure } from "@headlessui/react";
 export default function Home() {
   return (
     <Layout browserTitle="Home" description="Home">
-      <section className="mt-5 sm:mt-10 space-y-10 sm:space-y-16">
+      <section className="mt-5 sm:mt-10 space-y-16">
         <Contacts />
         <Experiences />
         <CV />
@@ -70,42 +68,64 @@ const Wrapper = ({
         {({ open }) => (
           <>
             <section className="mb-3 flex items-center justify-between">
-              <Link
-                href={`/#${id}`}
-                className=" text-2xl sm:text-3xl font-bold text-zinc-800"
-              >
-                {topic}
-              </Link>
-              <div className="flex space-x-2">
+              <div className="space-x-2 sm:space-x-3 flex items-center">
+                <Link
+                  href={`/#${id}`}
+                  className=" text-2xl sm:text-3xl font-bold text-zinc-800"
+                >
+                  {topic}
+                </Link>
+                <svg
+                  className="-rotate-45 text-zinc-400 h-5 w-5 hover:text-zinc-800"
+                  fill="none"
+                  shapeRendering="geometricPrecision"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
+                  <path d="M8 12h8" />
+                </svg>
+              </div>
+              <div className="flex space-x-2 sm:space-x-3 text-tiny">
+                <Link
+                  passHref
+                  href={`/${topic.toLowerCase().replace(" ", "-")}`}
+                  className="px-3 py-1 flex items-center justify-center hover:bg-zinc-200/80 rounded-full bg-zinc-100/60 sm:font-medium text-blue-600 group-hover:text-blue-700"
+                >
+                  Details
+                </Link>
                 <Disclosure.Button className="group">
                   <div
-                    className={`px-1.5 pb-[5px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center  rounded-full group ${
-                      open ? "hover:bg-zinc-200/70 bg-zinc-100" : "bg-zinc-800"
+                    className={`px-1.5 pb-[5.25px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center  rounded-full group ${
+                      open
+                        ? "hover:bg-zinc-200/80 bg-zinc-100"
+                        : "bg-zinc-800 hover:bg-zinc-700"
                     }`}
                   >
                     {open ? (
                       <ChevronUpIcon
-                        className={`h-4 w-4 ${
+                        className={`h-[17.5px] w-[17.5px] stroke-[2.5] sm:stroke-2 ${
                           open
-                            ? "text-zinc-800 group-hover:text-zinc-800"
+                            ? "text-zinc-600 group-hover:text-zinc-800"
                             : "text-zinc-50 group-hover:text-zinc-50"
                         }`}
-                        strokeWidth={2}
                       />
                     ) : (
                       <ChevronDownIcon
-                        className={`h-4 w-4 ${
+                        className={`h-[17.5px] w-[17.5px] stroke-[2.5] sm:stroke-2 ${
                           open
-                            ? "text-zinc-800 group-hover:text-zinc-800"
+                            ? "text-zinc-600 group-hover:text-zinc-800"
                             : "text-zinc-50 group-hover:text-zinc-50"
                         }`}
-                        strokeWidth={2}
                       />
                     )}
                     <div
                       className={`hidden sm:block text-tiny  ${
                         open
-                          ? "text-zinc-800 group-hover:text-zinc-800"
+                          ? "text-zinc-600 group-hover:text-zinc-800"
                           : "text-zinc-50 group-hover:text-zinc-50"
                       }`}
                     >
@@ -113,23 +133,10 @@ const Wrapper = ({
                     </div>
                   </div>
                 </Disclosure.Button>
-                <Link
-                  passHref
-                  href={`/${topic.toLowerCase().replace(" ", "-")}`}
-                  className="pl-2.5 pr-1 pb-[1.5px] pt-[2.5px] sm:pl-3.5 sm:pr-2 sm:py-[5px] flex items-center justify-center hover:bg-zinc-200/70 rounded-full bg-zinc-100 group"
-                >
-                  <div className="text-sm sm:text-tiny text-blue-600 group-hover:text-blue-700">
-                    Details
-                  </div>
-                  <ChevronRightIcon
-                    strokeWidth={2}
-                    className="text-blue-600 h-4 w-4 group-hover:text-blue-700"
-                  />
-                </Link>
               </div>
             </section>
             <Disclosure.Panel className="mb-20">
-              <div className="mb-[18px] text-lg text-zinc-600">
+              <div className="mb-5 sm:mb-[18px] text-base sm:text-lg text-zinc-600">
                 {explanation}
               </div>
               <div className={className}>{children}</div>
@@ -144,8 +151,8 @@ const Wrapper = ({
 const Contacts = () => {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-4 md:items-center my-8 gap-8 md:gap-5">
-      <section className="lg:col-span-1 space-y-5 md:mb-0 rounded-md lg:border lg:border-zinc-300 lg:h-full lg:self-center lg:grid">
-        <div className="grid lg:border-white rounded-md lg:border">
+      <section className="lg:col-span-1 space-y-5 md:mb-0 rounded-xl lg:bg-zinc-50 lg:border lg:border-zinc-300 lg:h-full lg:self-center lg:grid">
+        <div className="grid lg:border-white rounded-xl lg:border">
           <div className="self-center lg:space-y-2">
             <div className="justify-center w-full flex ">
               <section className="flex justify-center">
@@ -166,7 +173,8 @@ const Contacts = () => {
                 Harits Syah
               </div>
               <a
-                className="block text-center text-zinc-500"
+                title="twitter.com/haritssr | Harits Syah"
+                className="block text-center text-zinc-500 hover:underline"
                 href="https://www.twitter.com/haritssr"
                 target="_blank"
                 rel="noreferrer noopener"
@@ -178,41 +186,42 @@ const Contacts = () => {
           </div>
         </div>
       </section>
-      <section className="lg:col-span-3 lg:border lg:border-zinc-300 rounded lg:pt-2 lg:px-4">
+      {/* lg:pt-2 lg:px-4 */}
+      <section className="lg:col-span-3 lg:border lg:border-zinc-300 rounded-lg lg:pt-1">
         <div className="divide-y divide-zinc-200">
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 font-semibold">Role</span>
-            <span className="text-zinc-400 col-span-2">
+            <span className="text-zinc-800 lg:pl-3.5 font-medium">Roles</span>
+            <span className="text-zinc-500 col-span-2">
               Web Software Engineer
             </span>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-white font-semibold">Role</span>
-            <span className="text-zinc-400 col-span-2">Web Designer</span>
+            <span className="text-white lg:pl-3.5 font-medium">Role</span>
+            <span className="text-zinc-500 col-span-2">Web Designer</span>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-white font-semibold">Role</span>
-            <span className="text-zinc-400 col-span-2">
+            <span className="text-white lg:pl-3.5 font-medium">Role</span>
+            <span className="text-zinc-500 col-span-2">
               Math Physics Teacher
             </span>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 font-semibold">At</span>
-            <span className="text-zinc-400 col-span-2">
+            <span className="text-zinc-800 lg:pl-3.5 font-medium">At</span>
+            <span className="text-zinc-500 col-span-2">
               <cite className="group not-italic">
                 <a
-                  title="Haris Laboratorium Indonesia"
+                  title="harislab.com | Haris Lab : Reference, analyze, and test math-physics for high school students"
                   href="https://www.harislab.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-block w-fit cursor-pointer items-center text-zinc-400 hover:underline group-hover:text-zinc-600"
+                  className="group inline-block w-fit cursor-pointer items-center text-zinc-500 hover:underline group-hover:text-zinc-800"
                 >
                   <span className="flex items-center">
                     <span className="text-base">Haris Lab</span>
                     {/* External Link Icon */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 ml-1  text-zinc-400 group-hover:text-zinc-600 mt-0.5"
+                      className="h-4 w-4 ml-1  text-zinc-500 group-hover:text-zinc-800 mt-0.5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -230,16 +239,30 @@ const Contacts = () => {
             </span>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 font-semibold">Email</span>
-            <span className="text-zinc-400 col-span-2">haritssr@gmail.com</span>
+            <span className="text-zinc-800 lg:pl-3.5 font-medium">Email</span>
+            <a
+              title="Send me an email"
+              href="mailto:haritssr@gmail.com"
+              className="text-zinc-500 col-span-2 hover:underline hover:text-zinc-800"
+            >
+              haritssr@gmail.com
+            </a>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 font-semibold">Location</span>
-            <span className="text-zinc-400 col-span-2">
-              South Tangerang, Indonesia
+            <span className="text-zinc-800 lg:pl-3.5 font-medium">
+              Location
             </span>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              title="See South Tangerang at Google Maps"
+              href="https://www.google.com/maps/place/Tangerang+Selatan,+Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x8706481c2c4aafe4?sa=X&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgPEAA&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgQEAI"
+              className="text-zinc-500 col-span-2 hover:underline hover:text-zinc-800"
+            >
+              South Tangerang, Indonesia
+            </a>
           </div>
-          <div className="py-1.5">
+          <div className="py-1.5 lg:pl-3.5">
             <InternalLink href="/about" name="More Details" />
           </div>
         </div>
