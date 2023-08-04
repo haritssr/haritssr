@@ -19,7 +19,7 @@ export default function GlobalHead() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className="text-sm">Source</span>
+          <span className="text-sm sm:text-base">Source</span>
           <GitHubIcon className="h-5 w-5 cursor-pointer" />
         </a>
       </div>

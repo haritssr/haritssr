@@ -49,6 +49,81 @@ export default function Home() {
   );
 }
 
+import * as Toast from "@radix-ui/react-toast";
+
+const ToastCopy = ({
+  topic,
+  handleCopy,
+}: {
+  topic: string;
+  handleCopy: (page: string) => Promise<void>;
+}) => {
+  const [open, setOpen] = React.useState(false);
+  const eventDateRef = React.useRef(new Date());
+  const timerRef = React.useRef(0);
+
+  React.useEffect(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  function oneWeekAway() {
+    const now = new Date();
+    const inOneWeek = now.setDate(now.getDate() + 7);
+    return new Date(inOneWeek);
+  }
+
+  return (
+    <Toast.Provider swipeDirection="right">
+      <a
+        title="Copy this section page"
+        className="cursor-pointer active:scale-95 active:ring-1 active:ring-blue-600"
+        onClick={() => {
+          handleCopy(
+            `haritssr.vercel.app/${topic.toLowerCase().split(" ").join("-")}`
+          );
+          setOpen(false);
+          window.clearTimeout(timerRef.current);
+          timerRef.current = window.setTimeout(() => {
+            eventDateRef.current = oneWeekAway();
+            setOpen(true);
+          }, 100);
+        }}
+      >
+        <svg
+          className="-rotate-45 text-zinc-400 h-5 w-5 hover:text-zinc-800"
+          fill="none"
+          shapeRendering="geometricPrecision"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+          viewBox="0 0 24 24"
+        >
+          <path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
+          <path d="M8 12h8" />
+        </svg>
+      </a>
+
+      <Toast.Root
+        className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-md shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] p-[15px] grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut"
+        open={open}
+        onOpenChange={setOpen}
+      >
+        <Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
+          Link copied to clipboard
+        </Toast.Title>
+        <Toast.Description asChild>
+          <div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.vercel.app/${topic
+            .toLowerCase()
+            .split(" ")
+            .join("-")}`}</div>
+        </Toast.Description>
+      </Toast.Root>
+      <Toast.Viewport className="[--viewport-padding:_25px] fixed bottom-0 right-0 flex flex-col p-[var(--viewport-padding)] gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
+    </Toast.Provider>
+  );
+};
+
 const Wrapper = ({
   topic,
   className,
@@ -82,32 +157,8 @@ const Wrapper = ({
                 >
                   {topic}
                 </Link>
-                <a
-                  title="Copy this section page"
-                  className="cursor-pointer active:scale-95"
-                  onClick={() =>
-                    handleCopy(
-                      `haritssr.vercel.app/${topic
-                        .toLowerCase()
-                        .split(" ")
-                        .join("-")}`
-                    )
-                  }
-                >
-                  <svg
-                    className="-rotate-45 text-zinc-400 h-5 w-5 hover:text-zinc-800"
-                    fill="none"
-                    shapeRendering="geometricPrecision"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
-                    <path d="M8 12h8" />
-                  </svg>
-                </a>
+
+                <ToastCopy topic={topic} handleCopy={handleCopy} />
               </div>
               <div className="flex space-x-2 sm:space-x-3 text-tiny">
                 <Link
