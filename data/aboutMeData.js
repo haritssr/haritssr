@@ -50,4 +50,12 @@ export const aboutMeData = [
       "https://www.notion.so",
     ],
   },
+  {
+    section: "Podcast",
+    description: "Favorite one that I frequently listen",
+    points: [
+      "https://www.frontendfirst.fm",
+      "https://www.hackersincorporated.com",
+    ],
+  },
 ];
