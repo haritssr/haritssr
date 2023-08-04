@@ -11,16 +11,16 @@ import { Switch } from "@headlessui/react";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import * as Dialog from "@radix-ui/react-dialog";
-import { SubTitleMain } from "@/components/SubTitle";
+import { PageTitle } from "@/components/SubTitle";
 
 export default function DesignSystem() {
   return (
     <Layout browserTitle="Design Systems" description="Design Systems">
-      <SubTitleMain title="Design Systems">
+      <PageTitle title="Design Systems">
         This design system used in{" "}
         <ExternalLink name="haritssr.com" href="haritssr.com" /> and{" "}
         <ExternalLink name="Haris Lab" href="harislab.com" />
-      </SubTitleMain>
+      </PageTitle>
       <div className="mt-5 space-y-20">
         <A />
         <div>

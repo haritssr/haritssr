@@ -8,7 +8,7 @@ export default function SubTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function SubTitleMain({
+export function PageTitle({
   title,
   children,
 }: {
@@ -17,8 +17,8 @@ export function SubTitleMain({
 }) {
   return (
     <div>
-      <div className="text-4xl font-bold text-zinc-700 mt-16">{title}</div>
-      <div className="mt-4 mb-10 break-words text-zinc-600">{children}</div>
+      <div className="text-4xl font-bold text-zinc-800 mt-16">{title}</div>
+      <div className="mt-4 mb-10 break-words text-zinc-700">{children}</div>
     </div>
   );
 }

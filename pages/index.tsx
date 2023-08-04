@@ -37,7 +37,7 @@ import { Disclosure } from "@headlessui/react";
 export default function Home() {
   return (
     <Layout browserTitle="Home" description="Home">
-      <section className="mt-5 sm:mt-10 space-y-16">
+      <section className="mt-5 sm:mt-10 space-y-16 sm:space-y-24">
         <Contacts />
         <Experiences />
         <Resume />

@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { SubTitleMain } from "@/components/SubTitle";
+import { PageTitle } from "@/components/SubTitle";
 
 export default function ExperiencesHomePage() {
   const router = useRouter();
@@ -45,9 +45,9 @@ export default function ExperiencesHomePage() {
       <GlobalHead />
 
       <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
-        <SubTitleMain title="Experiences">
+        <PageTitle title="Experiences">
           Detail informations on how projects I belong to being handled
-        </SubTitleMain>
+        </PageTitle>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {experiencesData.map(
             ({ project_name, hrefCaseStudy, about_client }) => (
