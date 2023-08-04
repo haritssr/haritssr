@@ -68,7 +68,7 @@ export default function ExperienceCard({
           </span>
         </a>
       </cite>
-      <section className="flex flex-col space-y-1.5 border-t border-b border-zinc-400/70 bg-zinc-50/40 px-3 py-2 text-zinc-600 sm:text-sm">
+      <section className="flex flex-col space-y-1.5 border-t border-b border-zinc-400/70 bg-zinc-50/40 px-3 py-2 text-zinc-600 text-sm">
         <article className="flex items-center justify-between">
           <div className="flex w-1/3 items-center justify-between">
             <div>Period</div>

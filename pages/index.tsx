@@ -62,6 +62,13 @@ const Wrapper = ({
   id: string;
   explanation: string;
 }) => {
+  async function handleCopy(page: string) {
+    try {
+      await navigator.clipboard.writeText(page);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
   return (
     <div id={id}>
       <Disclosure defaultOpen={true}>
@@ -75,19 +82,32 @@ const Wrapper = ({
                 >
                   {topic}
                 </Link>
-                <svg
-                  className="-rotate-45 text-zinc-400 h-5 w-5 hover:text-zinc-800"
-                  fill="none"
-                  shapeRendering="geometricPrecision"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  viewBox="0 0 24 24"
+                <a
+                  title="Copy this section page"
+                  className="cursor-pointer active:scale-95"
+                  onClick={() =>
+                    handleCopy(
+                      `haritssr.vercel.app/${topic
+                        .toLowerCase()
+                        .split(" ")
+                        .join("-")}`
+                    )
+                  }
                 >
-                  <path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
-                  <path d="M8 12h8" />
-                </svg>
+                  <svg
+                    className="-rotate-45 text-zinc-400 h-5 w-5 hover:text-zinc-800"
+                    fill="none"
+                    shapeRendering="geometricPrecision"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
+                    <path d="M8 12h8" />
+                  </svg>
+                </a>
               </div>
               <div className="flex space-x-2 sm:space-x-3 text-tiny">
                 <Link
