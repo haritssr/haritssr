@@ -153,7 +153,7 @@ const Wrapper = ({
               <div className="space-x-2 sm:space-x-3 flex items-center">
                 <Link
                   href={`/#${id}`}
-                  className=" text-2xl sm:text-3xl font-bold text-zinc-800"
+                  className=" text-lg sm:text-3xl font-semibold sm:font-bold text-zinc-800"
                 >
                   {topic}
                 </Link>
@@ -207,7 +207,7 @@ const Wrapper = ({
               </div>
             </section>
             <Disclosure.Panel className="mb-20">
-              <div className="mb-5 sm:mb-[18px] text-base sm:text-lg text-zinc-600">
+              <div className="mb-5 sm:mb-[18px] text-base text-zinc-600">
                 {explanation}
               </div>
               <div className={className}>{children}</div>
