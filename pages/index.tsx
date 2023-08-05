@@ -232,7 +232,7 @@ const Contacts = () => {
                   src="/images/blur.jpg"
                   height="165"
                   width="165"
-                  className="z-10 rounded-full aspect-ratio"
+                  className="z-10 rounded-full aspect-ratio h-28 w-28"
                   alt="Harits Syah"
                   blurDataURL="/images/blur.jpg"
                   // placeholder='blur'
@@ -262,14 +262,32 @@ const Contacts = () => {
         <div className="divide-y divide-zinc-200">
           <div className="grid grid-cols-3 py-1.5">
             <span className="text-zinc-800 lg:pl-3.5 font-medium">Roles</span>
-            <span className="text-zinc-500 col-span-2">
-              Web Software Engineer
+            <span className=" col-span-2 flex items-center space-x-2">
+              <span className="text-zinc-500">Web Product Engineer</span>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.twitter.com/leeerob/status/1687446725919711232"
+                title="Product engineers consider the frontend, backend, design, and everything in between to create a great user experience."
+              >
+                <svg
+                  className="w-4 h-4 text-zinc-400 hover:text-blue-600 active:scale-90"
+                  fill="none"
+                  shapeRendering="geometricPrecision"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                  <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
+                  <circle cx="12" cy="17" r=".5" />
+                </svg>
+              </a>
             </span>
           </div>
-          <div className="grid grid-cols-3 py-1.5">
-            <span className="text-white lg:pl-3.5 font-medium">Role</span>
-            <span className="text-zinc-500 col-span-2">Web Designer</span>
-          </div>
+
           <div className="grid grid-cols-3 py-1.5">
             <span className="text-white lg:pl-3.5 font-medium">Role</span>
             <span className="text-zinc-500 col-span-2">
