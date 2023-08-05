@@ -1,4 +1,4 @@
-export const educationData = [
+export const EducationData = [
   {
     logo: "/icons/uinjkt.jpg",
     school: "UIN Syarif Hidayatullah Jakarta, Banten, Indonesia",

@@ -1,4 +1,4 @@
-import { experiencesData } from "data/experiencesData";
+import { ExperiencesData } from "data/ExperiencesData";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -49,7 +49,7 @@ export default function ExperiencesHomePage() {
           Detail informations on how projects I belong to being handled
         </PageTitle>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {experiencesData.map(({ project_name, about_client }) => (
+          {ExperiencesData.map(({ project_name, about_client }) => (
             <Link
               passHref
               href={`/experiences/${project_name

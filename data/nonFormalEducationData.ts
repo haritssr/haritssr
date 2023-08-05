@@ -1,4 +1,4 @@
-export const nonFormalEducationData = [
+export const NonFormalEducationData = [
   {
     logo: "/icons/fcc.jpg",
     school: "FreeCodeCamp",

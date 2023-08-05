@@ -1,4 +1,4 @@
-export const experiencesData = [
+export const ExperiencesData = [
   {
     project_name: "Haris Lab",
     about_client: {

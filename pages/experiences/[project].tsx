@@ -1,13 +1,13 @@
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import { experiencesData } from "data/experiencesData";
+import { ExperiencesData } from "data/ExperiencesData";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = experiencesData.map(({ project_name }) => {
+  const paths = ExperiencesData.map(({ project_name }) => {
     return {
       params: { project: project_name.toLowerCase().split(" ").join("-") },
     };
@@ -20,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const project = experiencesData.filter(
+  const project = ExperiencesData.filter(
     (p) =>
       p.project_name.toLowerCase().split(" ").join("-") ===
       context.params?.project

@@ -1,4 +1,4 @@
-export const aboutMeData = [
+export const AboutMeData = [
   {
     section: "Introduction",
     description: "Brief facts about me",

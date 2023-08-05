@@ -27,9 +27,9 @@ import React from "react";
 
 // Data
 import { TechStackData } from "../data/TechStackData";
-import { experiencesData } from "data/experiencesData";
-import { nonFormalEducationData } from "data/nonFormalEducationData";
-import { educationData } from "data/educationData";
+import { ExperiencesData } from "data/ExperiencesData";
+import { NonFormalEducationData } from "data/NonFormalEducationData";
+import { EducationData } from "data/EducationData";
 
 // Headless UI
 import { Disclosure } from "@headlessui/react";
@@ -350,7 +350,7 @@ const Experiences = () => {
       className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0"
       explanation="All of my projects with use cases"
     >
-      {experiencesData.map((d) => (
+      {ExperiencesData.map((d) => (
         <ExperienceCard
           key={d.project_name}
           href={d.about_client.website}
@@ -469,7 +469,7 @@ const Resume = () => {
               <section className="space-y-8">
                 <div className="font-semibold text-2xl">Experience</div>
 
-                {experiencesData.map((project) => (
+                {ExperiencesData.map((project) => (
                   <div key={project.project_name}>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
@@ -514,7 +514,7 @@ const Resume = () => {
 
                 <div className="font-semibold text-2xl">Formal Education</div>
 
-                {educationData.map((school) => (
+                {EducationData.map((school) => (
                   <div key={school.school}>
                     <div className="flex items-center space-x-2">
                       <Image
@@ -543,7 +543,7 @@ const Resume = () => {
                   Non Formal Education
                 </div>
 
-                {nonFormalEducationData.map((school) => (
+                {NonFormalEducationData.map((school) => (
                   <div key={school.school}>
                     <div className="flex items-center space-x-2">
                       <Image

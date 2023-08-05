@@ -1,7 +1,7 @@
-import SubTitle from '@/components/SubTitle';
-import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Link from 'next/link';
-import { getSortedPostsData } from '../../../../utils/posts';
+import SubTitle from "@/components/SubTitle";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import Link from "next/link";
+import { getSortedPostsData } from "../../../../utils/posts";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -14,14 +14,20 @@ export async function getStaticProps() {
 
 export default function Posts({ allPostsData }) {
   return (
-    <LayoutToExperiments title='Posts' domain='Nextjs'>
+    <LayoutToExperiments title="Posts" domain="Nextjs">
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
-      <ul className='space-y-5'>
+      <ul className="space-y-5">
         {allPostsData.map(({ id, date, title }) => (
-          <li className='' key={id}>
-            <Link passHref href={`/experiments/nextjs/posts/${id}`} className='block'>
-              <div className='font-medium text-zinc-700 hover:text-zinc-800'>{title}</div>
-              <div className='text-zinc-500'>{date}</div>
+          <li className="" key={id}>
+            <Link
+              passHref
+              href={`/experiments/nextjs/posts/${id}`}
+              className="block"
+            >
+              <div className="font-medium text-zinc-700 hover:text-zinc-800">
+                {title}
+              </div>
+              <div className="text-zinc-500">{date}</div>
             </Link>
           </li>
         ))}
