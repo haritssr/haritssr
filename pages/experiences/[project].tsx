@@ -7,8 +7,10 @@ import Image from "next/image";
 import { Suspense } from "react";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = experiencesData.map(({ hrefCaseStudy }) => {
-    return { params: { project: hrefCaseStudy } };
+  const paths = experiencesData.map(({ project_name }) => {
+    return {
+      params: { project: project_name.toLowerCase().split(" ").join("-") },
+    };
   });
 
   return {
@@ -19,7 +21,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const project = experiencesData.filter(
-    (p) => p.hrefCaseStudy === context.params?.project
+    (p) =>
+      p.project_name.toLowerCase().split(" ").join("-") ===
+      context.params?.project
   )[0];
 
   return {
@@ -67,28 +71,31 @@ export default function ExperiencesPage({ project }) {
       <GlobalHead />
 
       <main className="mx-auto min-h-screen w-full max-w-3xl px-5 xl:px-0">
-        <BackButton href="/experiences" name="All experience" />
+        <BackButton href="/experiences" name="Experiences" />
         {/* Title */}
-        <section className="mt-5 sm:mt-10 py-5 flex items-center justify-between">
+        <section className="mt-10 mb-8 sm:mt-16 sm:mb-12 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-lg bg-gradient-to-br from-zinc-50 to-zinc-100 shadow border border-zinc-300">
           <div className="">
-            <div className="mb-1 text-zinc-500 text-xl">All experiences</div>
-            <div className="text-3xl sm:text-4xl break-words font-bold ">
+            <div className="text-2xl sm:text-3xl break-words font-bold ">
               {project.project_name}
+            </div>
+            <div className="text-zinc-500 text-lg">
+              {project.about_client.website}
             </div>
           </div>
           <Image
             src={project.about_client.logo_src}
             alt={project.project_name}
-            height="70"
-            width="70"
+            height="40"
+            width="40"
+            className="h-12 w-12 sm:w-16 sm:h-16"
             blurDataURL={project.about_client.logo_src}
             // placeholder='blur'
           />
         </section>
-        <section className="mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 sm:gap-32 gap-10">
+        <section className="grid grid-cols-1 sm:grid-cols-2 sm:gap-16 gap-10">
           {/* About The Client */}
           <section>
-            <h2 className="mb-5 text-xl font-bold text-zinc-800 uppercase ">
+            <h2 className="mb-5 text-xl font-bold text-zinc-800 border-b pb-4 border-zinc-300">
               About The Client
             </h2>
             <div className="mt-5 text-zinc-800 font-medium ">Company Name</div>
@@ -118,7 +125,7 @@ export default function ExperiencesPage({ project }) {
 
           {/* About The Project */}
           <section>
-            <h2 className="mb-5 text-xl font-semibold text-zinc-800 uppercase ">
+            <h2 className="mb-5 text-xl font-semibold text-zinc-800 border-b pb-4 border-zinc-300">
               About The Project
             </h2>
 

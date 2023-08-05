@@ -360,7 +360,6 @@ const Experiences = () => {
           status={d.about_project.website_status}
           imgSrc={d.about_client.logo_src}
           industry={d.about_client.industry}
-          hrefCaseStudy={d.hrefCaseStudy}
         />
       ))}
     </Wrapper>
@@ -489,7 +488,10 @@ const Resume = () => {
                       </div>
                       <Link
                         passHref
-                        href={`/experiences/${project.hrefCaseStudy}`}
+                        href={`/experiences/${project.project_name
+                          .toLowerCase()
+                          .split(" ")
+                          .join("-")}`}
                         className="flex items-center justify-end text-zinc-400 hover:underline"
                       >
                         <div className="text-tiny ">Details</div>

@@ -1,7 +1,6 @@
 export const experiencesData = [
   {
     project_name: "Haris Lab",
-    hrefCaseStudy: "haris-lab",
     about_client: {
       logo_src: "/icons/harislab.jpg",
       brand_name: "Haris Lab",
@@ -29,7 +28,6 @@ export const experiencesData = [
   },
   {
     project_name: "AKA Trading Indonesia",
-    hrefCaseStudy: "aka-tradingindo",
     about_client: {
       logo_src: "/icons/aka-tradingindo.PNG",
       brand_name: "AKA Trading Indonesia",
@@ -67,7 +65,6 @@ export const experiencesData = [
   },
   {
     project_name: "Haris Studio",
-    hrefCaseStudy: "haris-studio",
     about_client: {
       logo_src: "/icons/harisstudio.jpg",
       brand_name: "Haris Studio",
@@ -94,7 +91,6 @@ export const experiencesData = [
   },
   {
     project_name: "Mixa Perkasa",
-    hrefCaseStudy: "mixa-perkasa",
     about_client: {
       logo_src: "/icons/mixa-perkasa.jpg",
       brand_name: "Mixa Perkasa",
@@ -122,7 +118,6 @@ export const experiencesData = [
   },
   {
     project_name: "Arsya Wyata Mandiri",
-    hrefCaseStudy: "arsya-wyata-mandiri",
     about_client: {
       logo_src: "/icons/awm.jpg",
       brand_name: "Arsya, Nice Time",
@@ -151,7 +146,6 @@ export const experiencesData = [
 
   {
     project_name: "Harits Syah",
-    hrefCaseStudy: "haritssr",
     about_client: {
       logo_src: "/icons/haritssr.jpg",
       brand_name: "Harits Syah Personal Site",

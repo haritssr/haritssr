@@ -11,7 +11,6 @@ interface ExperienceCardTypes {
   status: string[];
   imgSrc: string;
   industry: string;
-  hrefCaseStudy: string;
 }
 
 export default function ExperienceCard({
@@ -22,7 +21,6 @@ export default function ExperienceCard({
   status,
   imgSrc,
   industry,
-  hrefCaseStudy,
 }: ExperienceCardTypes) {
   return (
     <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/70 selection:mx-auto ">
@@ -94,7 +92,7 @@ export default function ExperienceCard({
       <section className="bg-zinc-100 px-3 py-2 hover:bg-zinc-200/80">
         <Link
           passHref
-          href={`/experiences/${hrefCaseStudy}`}
+          href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
           className="text-blue-600 sm:text-sm hover:text-blue-700 flex justify-center"
         >
           More Details
