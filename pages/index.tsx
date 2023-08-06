@@ -486,7 +486,6 @@ const Resume = () => {
             <Disclosure.Panel className="-mt-[1px] px-4 py-8 border border-zinc-400/70	 rounded-b">
               <section className="space-y-8">
                 <div className="font-semibold text-2xl">Experience</div>
-
                 {ExperiencesData.map((project) => (
                   <div key={project.project_name}>
                     <div className="flex items-center justify-between">
@@ -529,9 +528,30 @@ const Resume = () => {
                     </div>
                   </div>
                 ))}
+                <div className="font-semibold text-2xl">Working Experience</div>
+                <div className="">
+                  <div className="flex items-center space-x-2">
+                    <Image
+                      src="/icons/sman5.jpg"
+                      height={20}
+                      width={20}
+                      alt="logo"
+                      className="aspect-auto h-5 w-5"
+                      blurDataURL="/icons/sman5.jpg"
+                    />
+                    <div className="font-semibold text-lg">Privat Teacher</div>
+                  </div>
+                  <div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+                    <div>Lia Privat</div>
+                    <div> June 2018 - Now (5 years)</div>
+                    <div>
+                      Teaching math and physics for junior and senior highschool
+                      students at home
+                    </div>
+                  </div>
+                </div>
 
                 <div className="font-semibold text-2xl">Formal Education</div>
-
                 {EducationData.map((school) => (
                   <div key={school.school}>
                     <div className="flex items-center space-x-2">
@@ -560,7 +580,6 @@ const Resume = () => {
                 <div className="font-semibold text-2xl">
                   Non Formal Education
                 </div>
-
                 {NonFormalEducationData.map((school) => (
                   <div key={school.school}>
                     <div className="flex items-center space-x-2">
