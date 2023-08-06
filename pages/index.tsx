@@ -431,8 +431,8 @@ const DesignSystem = () => {
 const Resume = () => {
   return (
     <Wrapper
-      id="resume"
-      topic="Résume"
+      id="cv"
+      topic="CV"
       className="grid grid-cols-1 sm:grid-cols-2 gap-5"
       explanation="What I have been doing"
     >
@@ -450,12 +450,10 @@ const Resume = () => {
               />
             </Disclosure.Button>
             <Disclosure.Panel className="-mt-[1px] p-4 border border-zinc-400/70 rounded-b">
-              <div className="font-semibold">
-                Software Engineering (Web Platform)
-              </div>
+              <div className="font-semibold">Web Software Engineering</div>
               <p className="text-zinc-500 pb-4">
                 JavaScript, TypeScript, React.js, Next.js, Web platform, PWA,
-                Node.js.
+                Node.js ecosystem.
               </p>
               <div className="font-semibold">Math & Physics</div>
               <p className="text-zinc-500 pb-4">
