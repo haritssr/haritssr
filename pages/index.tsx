@@ -352,7 +352,7 @@ const Contacts = () => {
             </a>
           </div>
           <div className="py-1.5 lg:pl-3.5">
-            <InternalLink href="/about" name="More Details" />
+            <InternalLink href="/about" name="Details" />
           </div>
         </div>
       </section>

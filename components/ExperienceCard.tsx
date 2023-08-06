@@ -95,7 +95,7 @@ export default function ExperienceCard({
           href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
           className="text-blue-600 sm:text-sm hover:text-blue-700 flex justify-center"
         >
-          More Details
+          Details
         </Link>
       </section>
     </div>
