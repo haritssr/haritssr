@@ -1,20 +1,6 @@
 module.exports = {
   reactStrictMode: false,
   images: {
-    // remotePatterns: [
-    // 	{
-    // 		protocol: 'https',
-    // 		hostname: 'assets.vercel.com',
-    // 		port: '',
-    // 		pathname: '/image/upload/**',
-    // 	},
-    // 	{
-    // 		protocol: 'https',
-    // 		hostname: 'unsplash.com',
-    // 		port: '',
-    // 		pathname: '/photos/**',
-    // 	},
-    // ],
     formats: ["image/avif", "image/webp"],
     domains: [
       "vignette.wikia.nocookie.net",
@@ -24,14 +10,5 @@ module.exports = {
       "assets.vercel.com",
       "unsplash.com",
     ],
-  },
-  async redirects() {
-    return [
-      {
-        source: "/resume",
-        destination: "/#resume",
-        permanent: false,
-      },
-    ];
   },
 };

@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Image from "next/image";
-import { AboutMeData } from "data/AboutMeData";
+import { AboutData } from "data/AboutData";
 
 export default function About() {
   return (
@@ -36,7 +36,7 @@ export default function About() {
         </div>
       </div>
       <div className="space-y-14">
-        {AboutMeData.map((section) => {
+        {AboutData.map((section) => {
           return (
             <div key={section.section}>
               <div className="text-zinc-800 text-xl font-semibold mb-1.5">

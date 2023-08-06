@@ -38,7 +38,7 @@ export default function ExperienceCard({
 
         <div className="text-zinc-600">{description}</div>
       </section>
-      <cite className="group px-3 py-2 border-t border-zinc-400/70 not-italic">
+      <cite className="group px-3 py-2 border-t border-zinc-400/70 not-italic bg-zinc-50/20">
         <a
           title={href}
           href={`https://${href}`}
@@ -66,7 +66,7 @@ export default function ExperienceCard({
           </span>
         </a>
       </cite>
-      <section className="flex flex-col space-y-1.5 border-t border-b border-zinc-400/70 bg-zinc-50/40 px-3 py-2 text-zinc-600 text-sm">
+      <section className="flex flex-col space-y-1.5 border-t border-b border-zinc-400/70 bg-zinc-50/20 px-3 py-2 text-zinc-600 text-sm">
         <article className="flex items-center justify-between">
           <div className="flex w-1/3 items-center justify-between">
             <div>Period</div>
@@ -89,13 +89,15 @@ export default function ExperienceCard({
           <div>{industry}</div>
         </article>
       </section>
-      <section className="bg-zinc-100 px-3 py-2 hover:bg-zinc-200/80">
+      <section className="bg-zinc-50 px-3 py-2 hover:bg-zinc-100">
         <Link
           passHref
           href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-          className="text-blue-600 sm:text-sm hover:text-blue-700 flex justify-center"
+          className="flex justify-center"
         >
-          More Details
+          <span className="hover:text-blue-700 hover:underline sm:text-sm text-blue-600">
+            Details
+          </span>
         </Link>
       </section>
     </div>
