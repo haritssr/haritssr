@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 
-const postsDirectory = path.join(process.cwd(), "/data/PostsData");
+const postsDirectory = path.join(process.cwd(), "/data/postsData");
 
 export function getSortedPostsData() {
   // Get file names under /posts as an array
