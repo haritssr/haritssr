@@ -164,7 +164,7 @@ const Wrapper = ({
                 <Link
                   passHref
                   href={`/${topic.toLowerCase().replace(" ", "-")}`}
-                  className="px-3 py-1 flex items-center justify-center hover:bg-zinc-200/80 rounded-full bg-zinc-100/60 sm:font-medium text-blue-600 group-hover:text-blue-700"
+                  className="px-3 py-1 flex items-center justify-center hover:bg-zinc-200/80 rounded-full bg-zinc-100/60 text-blue-600 group-hover:text-blue-700"
                 >
                   Details
                 </Link>
