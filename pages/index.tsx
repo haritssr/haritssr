@@ -432,7 +432,7 @@ const Resume = () => {
   return (
     <Wrapper
       id="resume"
-      topic="Resume"
+      topic="Résume"
       className="grid grid-cols-1 sm:grid-cols-2 gap-5"
       explanation="What I have been doing"
     >
