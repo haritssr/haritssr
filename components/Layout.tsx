@@ -25,7 +25,7 @@ export default function Layout({
             ? "Harits Syah"
             : `${browserTitle} - Harits Syah`}
         </title>
-        <link rel="icon" href="/Icons/haritssr.jpg" />
+        <link rel="icon" href="/Icons/haritssr.svg" />
         <meta name="theme-color" content="#27272a" />
         <meta name="robots" content="follow, index" />
         <meta name="description" content={description} />

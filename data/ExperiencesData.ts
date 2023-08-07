@@ -2,7 +2,7 @@ export const ExperiencesData = [
   {
     project_name: "Haris Lab",
     about_client: {
-      logo_src: "/Icons/harislab.jpg",
+      logo_src: "/Icons/harislab.svg",
       brand_name: "Haris Lab",
       short_about:
         "Reference, analyze, practice, assesment, tutoring Math and Physics.",
@@ -66,7 +66,7 @@ export const ExperiencesData = [
   {
     project_name: "Haris Studio",
     about_client: {
-      logo_src: "/Icons/harisstudio.jpg",
+      logo_src: "/Icons/harisstudio.svg",
       brand_name: "Haris Studio",
       short_about:
         "Provide web design, web creation, and web user experience services.",
@@ -147,7 +147,7 @@ export const ExperiencesData = [
   {
     project_name: "Harits Syah",
     about_client: {
-      logo_src: "/Icons/haritssr.jpg",
+      logo_src: "/Icons/haritssr.svg",
       brand_name: "Harits Syah Personal Site",
       short_about:
         "Harits Syah's personal site. Portofolio, blogs, and a frontend experiments.",
