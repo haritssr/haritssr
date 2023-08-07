@@ -1,8 +1,8 @@
-import SubTitle from '@/components/SubTitle';
-import ExternalLink from '@/components/ExternalLink';
-import ExplanationList from '@/components/ExplanationList';
-import LayoutToExperiments from '@/components/LayoutToExperiments';
-import { useEffect, useState } from 'react';
+import SubTitle from "@/components/SubTitle";
+import ExternalLink from "@/components/ExternalLink";
+import ExplanationList from "@/components/ExplanationList";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import { useEffect, useState } from "react";
 
 function useDebounce(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -20,16 +20,18 @@ function useDebounce(value: string, delay: number) {
 }
 
 export default function SearchTable() {
-  const [query, setQuery] = useState<string>('');
+  const [query, setQuery] = useState<string>("");
   const [users, setUsers] = useState<Array<any>>([]);
 
   const debouncedSearch = useDebounce(query, 1000);
 
   useEffect(() => {
     const dataFetch = async () => {
-      const data = await fetch(`/api/searchWithApi?q=${debouncedSearch}`).then(r => r.json());
+      const data = await fetch(`/api/searchWithApi?q=${debouncedSearch}`).then(
+        (r) => r.json()
+      );
       setUsers(data);
-      console.log(data);
+      // console.log(data);
     };
     // if (debouncedSearch) dataFetch();
 
@@ -39,18 +41,21 @@ export default function SearchTable() {
   }, [debouncedSearch]);
 
   return (
-    <LayoutToExperiments title='Search Table' domain='React'>
+    <LayoutToExperiments title="Search Table" domain="React">
       <SubTitle>
         <ExplanationList>
           <li>
-            Inspired by{' '}
-            <ExternalLink href='https://www.youtube.com/watch?v=MY6ZZIn93V8' name='Lama Dev' />
+            Inspired by{" "}
+            <ExternalLink
+              href="https://www.youtube.com/watch?v=MY6ZZIn93V8"
+              name="Lama Dev"
+            />
           </li>
           <li>
             Data source
             <ExternalLink
-              href='https://jsonplaceholder.typicode.com/users'
-              name='JSONPlaceHolder'
+              href="https://jsonplaceholder.typicode.com/users"
+              name="JSONPlaceHolder"
             />
             .
           </li>
@@ -58,14 +63,14 @@ export default function SearchTable() {
         </ExplanationList>
       </SubTitle>
       <input
-        className='mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200'
-        type='search'
+        className="mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+        type="search"
         value={query}
-        placeholder='Search'
-        onChange={e => setQuery(e.target.value)}
+        placeholder="Search"
+        onChange={(e) => setQuery(e.target.value)}
       />
       {/* <ol className='list-item list-inside list-decimal'> */}
-      <table className='border'>
+      <table className="border">
         <thead>
           <tr>
             <th>No</th>
@@ -77,12 +82,12 @@ export default function SearchTable() {
         <tbody>
           {/*data => data.firstName.toLowerCase().includes(query.toLowerCase()) */}
           {users
-            .filter(item =>
-              ['firstName', 'lastName', 'maidenName'].some(key =>
+            .filter((item) =>
+              ["firstName", "lastName", "maidenName"].some((key) =>
                 item[key].toLowerCase().includes(query.toLocaleLowerCase())
               )
             )
-            .map(d => (
+            .map((d) => (
               <tr key={d.id}>
                 <td>{d.id}</td>
                 <td>{d.firstName}</td>

@@ -1,4 +1,4 @@
-import { comments } from '../../data/comments';
+import { comments } from "../../data/comments";
 
 export async function getStaticPaths() {
   //    this is possible but unnecessary, since the data already in app
@@ -7,9 +7,9 @@ export async function getStaticPaths() {
   //   const dataArray = data.map(comment => ({ params: { commentId: comment.id } }));
   return {
     paths: [
-      { params: { commentId: '1' } },
-      { params: { commentId: '2' } },
-      { params: { commentId: '3' } },
+      { params: { commentId: "1" } },
+      { params: { commentId: "2" } },
+      { params: { commentId: "3" } },
     ],
     fallback: false,
   };
@@ -26,8 +26,9 @@ export async function getStaticProps(context) {
    * - not do those will save 100ms uneccessary trip
    * - you should not call an api route for pre-rendering
    */
-  const comment = comments.find(comment => comment.id === parseInt(commentId));
-  console.log(comment);
+  const comment = comments.find(
+    (comment) => comment.id === parseInt(commentId)
+  );
   return { props: { comment } };
 }
 

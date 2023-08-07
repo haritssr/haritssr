@@ -1,24 +1,26 @@
-import LayoutToExperiments from '@/components/LayoutToExperiments';
-import SubTitle from '@/components/SubTitle';
-import { useEffect, useRef } from 'react';
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
+import { useRef } from "react";
 
 export default function TextEditing() {
   const elementSelected = useRef(null);
 
-  useEffect(() => console.log(elementSelected), []);
+  // useEffect(() => console.log(elementSelected), []);
 
   return (
-    <LayoutToExperiments title='Text Editing' domain='Browser'>
+    <LayoutToExperiments title="Text Editing" domain="Browser">
       <SubTitle>HTML built-in text editing tag</SubTitle>
-      <div className='flex flex-col space-y-2' ref={elementSelected}>
+      <div className="flex flex-col space-y-2" ref={elementSelected}>
         <del>del</del>
         <s>s</s>
         <mark>mark</mark>
-        <blockquote className='border-l-2 border-zinc-400 bg-zinc-100 py-1 pl-3 text-zinc-600'>
-          blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote
-          blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote
-          blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote
-          blockquote blockquote blockquote blockquote blockquote blockquote blockquote blockquote
+        <blockquote className="border-l-2 border-zinc-400 bg-zinc-100 py-1 pl-3 text-zinc-600">
+          blockquote blockquote blockquote blockquote blockquote blockquote
+          blockquote blockquote blockquote blockquote blockquote blockquote
+          blockquote blockquote blockquote blockquote blockquote blockquote
+          blockquote blockquote blockquote blockquote blockquote blockquote
+          blockquote blockquote blockquote blockquote blockquote blockquote
+          blockquote blockquote
         </blockquote>
         <strong>strong</strong>
         <b>b</b>
