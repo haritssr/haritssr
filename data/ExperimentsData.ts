@@ -10,7 +10,7 @@ export const ExperimentsData = [
   {
     id: 1,
     title: "Tailwind CSS",
-    logoSrc: "/icons/tailwindcss.jpg",
+    logoSrc: "/Icons/tailwindcss.jpg",
     description: "CSS library for styling websites",
     links: [
       "Position",
@@ -32,7 +32,7 @@ export const ExperimentsData = [
   {
     id: 2,
     title: "React",
-    logoSrc: "/icons/react.jpg",
+    logoSrc: "/Icons/react.jpg",
     description: "JavaScript library for building user interfaces",
     links: [
       "useState Todo List",
@@ -65,7 +65,7 @@ export const ExperimentsData = [
   {
     id: 3,
     title: "Nextjs",
-    logoSrc: "/icons/nextjs.jpg",
+    logoSrc: "/Icons/nextjs.jpg",
     description: "The React framework for the web",
     links: [
       "Image Components",
@@ -83,7 +83,7 @@ export const ExperimentsData = [
   {
     id: 4,
     title: "Browser",
-    logoSrc: "/icons/chrome.jpg",
+    logoSrc: "/Icons/chrome.jpg",
     description: "Native built-in browser API utilities exploration",
     links: [
       "Clock",
@@ -104,7 +104,7 @@ export const ExperimentsData = [
   {
     id: 5,
     title: "VisX",
-    logoSrc: "/icons/visx.jpg",
+    logoSrc: "/Icons/visx.jpg",
     description: "Data visualization using React.js",
     links: ["Bar Chart", "Pie Chart"],
   },
@@ -112,21 +112,21 @@ export const ExperimentsData = [
   {
     id: 6,
     title: "Framer Motion",
-    logoSrc: "/icons/framermotion.jpg",
+    logoSrc: "/Icons/framermotion.jpg",
     description: "Animation library for React.js by Framer Team",
     links: ["Random"],
   },
   {
     id: 7,
     title: "Mantine",
-    logoSrc: "/icons/mantine.jpg",
+    logoSrc: "/Icons/mantine.jpg",
     description: "A fully featured React component libray",
     links: ["Carousel"],
   },
   {
     id: 8,
     title: "Headless UI",
-    logoSrc: "/icons/headlessui.jpg",
+    logoSrc: "/Icons/headlessui.jpg",
     description: "Headless UI components by Tailwind CSS Team",
     links: [
       "Menu",
@@ -144,7 +144,7 @@ export const ExperimentsData = [
   {
     id: 9,
     title: "Radix UI",
-    logoSrc: "/icons/radixui.jpg",
+    logoSrc: "/Icons/radixui.jpg",
     description: "Headless UI for design system in React.js",
     links: [
       "Accordion",
@@ -172,42 +172,42 @@ export const ExperimentsData = [
   {
     id: 10,
     title: "Notion API",
-    logoSrc: "/icons/notion.jpg",
+    logoSrc: "/Icons/notion.jpg",
     description: "Notion as a free CMS via Notion API",
     links: ["Table"],
   },
   {
     id: 11,
     title: "UI Explorations",
-    logoSrc: "/icons/radixui.jpg",
+    logoSrc: "/Icons/radixui.jpg",
     description: "Random user interfaces explorations",
     links: ["Notion NavBar"],
   },
   {
     id: 12,
     title: "Haris Lab",
-    logoSrc: "/icons/harislab.jpg",
+    logoSrc: "/Icons/harislab.jpg",
     description: "Haris Lab user interfaces design systems",
     links: ["Global Modal", "Context Modal", "Side Bar"],
   },
   {
     id: 13,
     title: "React Aria",
-    logoSrc: "/icons/react-aria.jpg",
+    logoSrc: "/Icons/react-aria.jpg",
     description: "A library of React Hooks, UI primitives, and more",
     links: ["Calendar", "Range Calendar"],
   },
   {
     id: 14,
     title: "KaTeX",
-    logoSrc: "/icons/KaTeX.jpg",
+    logoSrc: "/Icons/KaTeX.jpg",
     description: "The math typesetting library for the web",
     links: ["Basic"],
   },
   {
     id: 15,
     title: "React Table",
-    logoSrc: "/icons/tanstack.jpg",
+    logoSrc: "/Icons/tanstack.jpg",
     description: "Headless UI for building tables & datagrids",
     links: [
       "Basic",
@@ -222,7 +222,7 @@ export const ExperimentsData = [
   {
     id: 16,
     title: "React Query",
-    logoSrc: "/icons/tanstack.jpg",
+    logoSrc: "/Icons/tanstack.jpg",
     description: "Asynchronous state management for TS/JS",
     links: ["Basic"],
   },

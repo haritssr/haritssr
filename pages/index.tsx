@@ -530,12 +530,12 @@ const Resume = () => {
                 <div className="">
                   <div className="flex items-center space-x-2">
                     <Image
-                      src="/icons/sman5.jpg"
+                      src="/Icons/sman5.jpg"
                       height={20}
                       width={20}
                       alt="logo"
                       className="aspect-auto h-5 w-5"
-                      blurDataURL="/icons/sman5.jpg"
+                      blurDataURL="/Icons/sman5.jpg"
                     />
                     <div className="font-semibold text-lg">Privat Teacher</div>
                   </div>

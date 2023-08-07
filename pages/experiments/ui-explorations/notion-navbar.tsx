@@ -41,11 +41,11 @@ function Logo() {
   return (
     <div className="mr-2  flex items-center space-x-2">
       <Image
-        src="/icons/notion.jpg"
+        src="/Icons/notion.jpg"
         height="30"
         width="30"
         alt=""
-        blurDataURL="/icons/notion.jpg"
+        blurDataURL="/Icons/notion.jpg"
       />
       <div className="text-lg font-semibold text-black">Notion</div>
     </div>
