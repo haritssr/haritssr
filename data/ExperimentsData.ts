@@ -186,7 +186,7 @@ export const ExperimentsData = [
   {
     id: 12,
     title: "Haris Lab",
-    logoSrc: "/Icons/harislab.jpg",
+    logoSrc: "/Icons/harislab.svg",
     description: "Haris Lab user interfaces design systems",
     links: ["Global Modal", "Context Modal", "Side Bar"],
   },
