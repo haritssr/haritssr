@@ -104,7 +104,7 @@ export const ExperimentsData = [
   {
     id: 5,
     title: "VisX",
-    logoSrc: "/Icons/visx.jpg",
+    logoSrc: "/Icons/VisX.jpg",
     description: "Data visualization using React.js",
     links: ["Bar Chart", "Pie Chart"],
   },

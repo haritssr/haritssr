@@ -130,7 +130,7 @@ export const TechStackData = [
     links: [
       {
         href: "https://airbnb.io/visx/",
-        imgSrc: "/Icons/visx.jpg",
+        imgSrc: "/Icons/VisX.jpg",
         name: "VisX",
       },
     ],
