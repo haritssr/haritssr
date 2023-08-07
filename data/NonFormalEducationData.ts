@@ -1,6 +1,6 @@
 export const NonFormalEducationData = [
   {
-    logo: "/icons/fcc.jpg",
+    logo: "/Icons/fcc.jpg",
     school: "FreeCodeCamp",
     period: "-",
     level: "JavaScript Data Structure & Algorithm",

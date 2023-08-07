@@ -4,12 +4,12 @@ export const TechStackData = [
     links: [
       {
         href: "https://katex.org/",
-        imgSrc: "/icons/KaTeX.jpg",
+        imgSrc: "/Icons/KaTeX.jpg",
         name: "KaTeX",
       },
       {
         href: "https://developers.notion.com/",
-        imgSrc: "/icons/notion.jpg",
+        imgSrc: "/Icons/notion.jpg",
         name: "Notion API",
       },
     ],
@@ -19,7 +19,7 @@ export const TechStackData = [
     links: [
       {
         href: "https://www.nodejs.org/",
-        imgSrc: "/icons/nodejs.jpg",
+        imgSrc: "/Icons/nodejs.jpg",
         name: "Node JS",
       },
     ],
@@ -29,12 +29,12 @@ export const TechStackData = [
     links: [
       {
         href: "https://www.vercel.com/",
-        imgSrc: "/icons/vercel.jpg",
+        imgSrc: "/Icons/vercel.jpg",
         name: "Vercel",
       },
       {
         href: "https://www.idcloudhost.com/",
-        imgSrc: "/icons/idcloudhost.jpg",
+        imgSrc: "/Icons/idcloudhost.jpg",
         name: "ID CloudHost",
       },
     ],
@@ -44,12 +44,12 @@ export const TechStackData = [
     links: [
       {
         href: "https://planetscale.com/",
-        imgSrc: "/icons/planetscale.jpg",
+        imgSrc: "/Icons/planetscale.jpg",
         name: "PlanetScale",
       },
       {
         href: "https://prisma.io/",
-        imgSrc: "/icons/prisma.jpg",
+        imgSrc: "/Icons/prisma.jpg",
         name: "Prisma",
       },
     ],
@@ -59,18 +59,18 @@ export const TechStackData = [
     links: [
       {
         href: "https://git-scm.com/",
-        imgSrc: "/icons/git.jpg",
+        imgSrc: "/Icons/git.jpg",
         name: "Git",
       },
       {
         href: "https://www.github.com",
-        imgSrc: "/icons/github.jpg",
+        imgSrc: "/Icons/github.jpg",
         name: "GitHub",
       },
 
       {
         href: "https://www.turborepo.org",
-        imgSrc: "/icons/turborepo.jpg",
+        imgSrc: "/Icons/turborepo.jpg",
         name: "Turborepo",
       },
     ],
@@ -80,17 +80,17 @@ export const TechStackData = [
     links: [
       {
         href: "https://www.radix-ui.com/",
-        imgSrc: "/icons/radixui.jpg",
+        imgSrc: "/Icons/radixui.jpg",
         name: "Radix UI",
       },
       {
         href: "https://headlessui.dev/",
-        imgSrc: "/icons/headlessui.jpg",
+        imgSrc: "/Icons/headlessui.jpg",
         name: "Headless UI",
       },
       {
         href: "https://mantine.dev/",
-        imgSrc: "/icons/mantine.jpg",
+        imgSrc: "/Icons/mantine.jpg",
         name: "Mantine",
       },
     ],
@@ -100,12 +100,12 @@ export const TechStackData = [
     links: [
       {
         href: "https://beta.reactjs.org/",
-        imgSrc: "/icons/react.jpg",
+        imgSrc: "/Icons/react.jpg",
         name: "React.js",
       },
       {
         href: "https://nextjs.org/",
-        imgSrc: "/icons/nextjs.jpg",
+        imgSrc: "/Icons/nextjs.jpg",
         name: "Next.js",
       },
     ],
@@ -115,12 +115,12 @@ export const TechStackData = [
     links: [
       {
         href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-        imgSrc: "/icons/javascript.jpg",
+        imgSrc: "/Icons/javascript.jpg",
         name: "JavaScript",
       },
       {
         href: "https://www.typescriptlang.org/",
-        imgSrc: "/icons/typescript.jpg",
+        imgSrc: "/Icons/typescript.jpg",
         name: "TypeScript",
       },
     ],
@@ -130,7 +130,7 @@ export const TechStackData = [
     links: [
       {
         href: "https://airbnb.io/visx/",
-        imgSrc: "/icons/visx.jpg",
+        imgSrc: "/Icons/visx.jpg",
         name: "VisX",
       },
     ],
@@ -140,17 +140,17 @@ export const TechStackData = [
     links: [
       {
         href: "https://tailwindcss.com/",
-        imgSrc: "/icons/tailwindcss.jpg",
+        imgSrc: "/Icons/tailwindcss.jpg",
         name: "Tailwind CSS",
       },
       {
         href: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-        imgSrc: "/icons/css.jpg",
+        imgSrc: "/Icons/css.jpg",
         name: "CSS 3",
       },
       {
         href: "https://emotion.sh/",
-        imgSrc: "/icons/emotion.jpg",
+        imgSrc: "/Icons/emotion.jpg",
         name: "Emotion",
       },
     ],
@@ -160,12 +160,12 @@ export const TechStackData = [
     links: [
       {
         href: "https://mdxjs.com/",
-        imgSrc: "/icons/mdx.jpg",
+        imgSrc: "/Icons/mdx.jpg",
         name: "MDX",
       },
       {
         href: "https://docusaurus.io/",
-        imgSrc: "/icons/docusaurus.jpg",
+        imgSrc: "/Icons/docusaurus.jpg",
         name: "Docusaurus",
       },
     ],
@@ -175,22 +175,22 @@ export const TechStackData = [
     links: [
       {
         href: "https://www.google.com/chrome/",
-        imgSrc: "/icons/chrome.jpg",
+        imgSrc: "/Icons/chrome.jpg",
         name: "Chrome",
       },
       {
         href: "https://www.figma.com/",
-        imgSrc: "/icons/figma.jpg",
+        imgSrc: "/Icons/figma.jpg",
         name: "Figma",
       },
       {
         href: "https://www.notion.so/",
-        imgSrc: "/icons/notion.jpg",
+        imgSrc: "/Icons/notion.jpg",
         name: "Notion",
       },
       {
         href: "https://code.visualstudio.com/",
-        imgSrc: "/icons/vscode.jpg",
+        imgSrc: "/Icons/vscode.jpg",
         name: "VS Code",
       },
     ],
@@ -200,12 +200,12 @@ export const TechStackData = [
     links: [
       {
         href: "https://jestjs.io/",
-        imgSrc: "/icons/jest.jpg",
+        imgSrc: "/Icons/jest.jpg",
         name: "Jest",
       },
       {
         href: "https://testing-library.com/",
-        imgSrc: "/icons/testing-library.jpg",
+        imgSrc: "/Icons/testing-library.jpg",
         name: "React Testing Library",
       },
     ],
@@ -215,7 +215,7 @@ export const TechStackData = [
     links: [
       {
         href: "https://www.framer.com/motion",
-        imgSrc: "/icons/framermotion.jpg",
+        imgSrc: "/Icons/framermotion.jpg",
         name: "Framer Motion",
       },
     ],

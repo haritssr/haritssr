@@ -51,7 +51,7 @@ export default function ExperiencesPage({ project }) {
             ? "Harits Syah"
             : `${browserTitle} - Harits Syah`}
         </title>
-        <link rel="icon" href="/icons/haritssr.jpg" />
+        <link rel="icon" href="/Icons/haritssr.jpg" />
         <meta name="theme-color" content="#27272a" />
         <meta name="robots" content="follow, index" />
         <meta name="description" content={description} />

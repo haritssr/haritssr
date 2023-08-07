@@ -29,7 +29,7 @@ export default function LayoutToExperiments({
     <>
       <Head>
         <title>{yes}</title>
-        <link rel="icon" href="/icons/haritssr.jpg" />
+        <link rel="icon" href="/Icons/haritssr.jpg" />
         <meta name="theme-color" content="#27272a" />
         <meta name="robots" content="follow, index" />
         <meta name="description" content={title} />

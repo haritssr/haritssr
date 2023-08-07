@@ -135,22 +135,22 @@ const A = () => {
       <section className="mb-10 -mt-2 sm:mb-16 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 border p-4">
         <div className="space-y-1">
           <Image
-            src="/icons/haritssr.jpg"
+            src="/Icons/haritssr.jpg"
             alt=""
             width="20"
             height="20"
-            blurDataURL="/icons/haritssr.jpg"
+            blurDataURL="/Icons/haritssr.jpg"
           />
           <div className="text-zinc-700">w-5 h-5 [20x20px]</div>
           <div className="text-zinc-500">Mobile</div>
         </div>
         <div className="space-y-1">
           <Image
-            src="/icons/haritssr.jpg"
+            src="/Icons/haritssr.jpg"
             alt=""
             width="20"
             height="20"
-            blurDataURL="/icons/haritssr.jpg"
+            blurDataURL="/Icons/haritssr.jpg"
           />
           <div className="text-zinc-700">w-5 h-5 [20x20px]</div>
           <div className="text-zinc-500">Desktop</div>
@@ -158,11 +158,11 @@ const A = () => {
         <div className="space-y-1">
           <div className="w-fit rounded-md border bg-zinc-800 p-2">
             <Image
-              src="/icons/haritssr.jpg"
+              src="/Icons/haritssr.jpg"
               alt=""
               width="20"
               height="20"
-              blurDataURL="/icons/haritssr.jpg"
+              blurDataURL="/Icons/haritssr.jpg"
             />
           </div>
           <div className="text-zinc-700">w-5 h-5 [20x20px]</div>
@@ -171,11 +171,11 @@ const A = () => {
         <div className="space-y-1">
           <div className="w-fit rounded-md border bg-white p-2">
             <Image
-              src="/icons/haritssr.jpg"
+              src="/Icons/haritssr.jpg"
               alt=""
               width="20"
               height="20"
-              blurDataURL="/icons/haritssr.jpg"
+              blurDataURL="/Icons/haritssr.jpg"
             />
           </div>
           <div className="text-zinc-700">w-5 h-5 [20x20px]</div>
