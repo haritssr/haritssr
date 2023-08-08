@@ -17,7 +17,7 @@ export default function ExperimentIndexPage({
       browserTitle={experiment.title}
       description={experiment.description}
     >
-      <div className="div max-w-5xl mx-auto mt-14">
+      <div className="div max-w-4xl mx-auto mt-14">
         <Link
           passHref
           href="/experiments"
