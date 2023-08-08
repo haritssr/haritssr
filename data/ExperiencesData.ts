@@ -23,7 +23,7 @@ export const ExperiencesData = [
       features: ["Analytics", "Global Navigation"],
     },
     figma:
-      "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Fnode-id%3D2147%253A5142",
+      "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3D5Uuj3yJYxE0m8oO0-1",
     skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale",
   },
   {
