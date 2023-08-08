@@ -7,20 +7,22 @@ export default function GlobalHead() {
       <div className="mx-auto flex max-w-5xl flex-row items-center justify-between px-3 py-2.5 lg:px-0">
         <Link
           href="/"
-          className=" text-zinc-800 font-medium hover:text-zinc-500"
+          className=" text-zinc-800 hover:text-zinc-400 text-tiny sm:text-base"
           aria-label="site logo"
         >
           Harits Syah
         </Link>
         <a
-          className="flex items-center space-x-2 hover:text-zinc-500 text-zinc-800"
+          className="flex items-center space-x-2 group"
           title="Whole site source code"
           href="https://www.github.com/haritssr/haritssr"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className="text-sm sm:text-base">Source</span>
-          <GitHubIcon className="h-5 w-5 cursor-pointer" />
+          <span className="text-tiny sm:text-base group-hover:text-zinc-400 text-zinc-800">
+            Source
+          </span>
+          <GitHubIcon className="h-5 w-5 cursor-pointer text-zinc-800 group-hover:text-zinc-400" />
         </a>
       </div>
     </div>
