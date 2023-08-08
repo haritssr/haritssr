@@ -94,7 +94,7 @@ const BackToExperiments = ({
       passHref
       href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
       className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${
-        inView ? "w-1/3 sm:-ml-8" : "w-1/4"
+        inView ? "w-1/2 sm:-ml-8" : "w-1/4"
       }`}
     >
       <span className=" inline-block w-full">
@@ -114,11 +114,11 @@ const BackToExperiments = ({
 
 const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
   return (
-    <div className={`sm:2/4 -mr-2 inline ${inView ? "w-1/3" : "w-1/2"}`}>
+    <div className={`sm:2/4 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
       <div className="flex justify-center py-0.5">
         <div
           className={`truncate text-center font-semibold text-tiny sm:text-base ${
-            inView ? "text-transparent" : "text-zinc-800"
+            inView ? "text-transparent hidden" : "text-zinc-800 block"
           }`}
         >
           {title}
@@ -132,7 +132,7 @@ const PageSource = ({ href, inView }: { href: string; inView: any }) => {
   return (
     <div
       className={`flex justify-end sm:w-1/6 ${
-        inView ? "w-1/3 sm:-mr-3.5" : "w-1/4"
+        inView ? "w-1/2 sm:-mr-3.5" : "w-1/4"
       }`}
     >
       <cite className="not-italic group">
