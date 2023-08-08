@@ -69,7 +69,7 @@ export default function LayoutToExperiments({
           <header className="px-5 sm:px-0">
             <h1
               ref={ref}
-              className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left text-3xl font-bold text-zinc-800 sm:text-4xl mt-10"
+              className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left font-bold text-zinc-800 text-2xl sm:text-3xl mt-10"
             >
               {title}
             </h1>
