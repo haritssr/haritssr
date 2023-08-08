@@ -25,7 +25,7 @@ export default function ExperimentsCard({
               alt={experiment.title}
             />
           </div>
-          <div className="text-lg text-zinc-700 font-semibold">
+          <div className="sm:text-lg text-zinc-700 font-semibold">
             {experiment.title}
           </div>
         </div>
