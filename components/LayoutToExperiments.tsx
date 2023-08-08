@@ -55,7 +55,7 @@ export default function LayoutToExperiments({
             className={`sticky -top-0 sm:top-[44px] border-b ${
               inView
                 ? "border-zinc-300"
-                : "border-b sm:bg-apple-gray6/90 sm:saturate-150 sm:backdrop-blur-lg"
+                : "border-b bg-apple-gray6/60 saturate-150 backdrop-blur-lg"
             } z-40 mb-5 bg-white py-2.5 sm:border-none`}
           >
             <div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
