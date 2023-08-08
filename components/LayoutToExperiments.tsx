@@ -100,10 +100,10 @@ const BackToExperiments = ({
       <span className=" inline-block w-full">
         <span className="group flex items-center">
           <ChevronLeftIcon
-            className=" text-zinc-800 sm:group-hover:text-zinc-400 h-5 w-5"
+            className=" text-blue-600 sm:group-hover:text-blue-400 h-5 w-5"
             strokeWidth={2}
           />
-          <span className="-ml-0.5 block truncate text-zinc-800 sm:group-hover:text-zinc-400 text-tiny sm:text-base">
+          <span className="-ml-0.5 block truncate text-blue-600 sm:group-hover:text-blue-400 text-tiny sm:text-base">
             {domain}
           </span>
         </span>
@@ -135,16 +135,18 @@ const PageSource = ({ href, inView }: { href: string; inView: any }) => {
         inView ? "w-1/3 sm:-mr-3.5" : "w-1/4"
       }`}
     >
-      <cite className="not-italic">
+      <cite className="not-italic group">
         <a
           title="This page source code"
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex w-fit cursor-pointer items-center text-zinc-800 hover:text-zinc-500`}
+          className={`flex w-fit cursor-pointer items-center text-blue-600 hover:text-blue-400`}
         >
-          <span className="mr-2 hidden sm:inline-block">Source</span>{" "}
-          <GitHubIcon className="h-5 w-5 cursor-pointer" />
+          <span className="mr-2 hidden sm:inline-block text-blue-600 group-hover:text-blue-400">
+            Source
+          </span>{" "}
+          <GitHubIcon className="h-5 w-5 cursor-pointer text-blue-600 group-hover:text-blue-400" />
         </a>
       </cite>
     </div>
