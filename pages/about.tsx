@@ -5,7 +5,7 @@ import { AboutData } from "data/AboutData";
 export default function About() {
   return (
     <Layout browserTitle="About" description="About">
-      <div className="my-8">
+      <div className="my-8 space-y-2">
         <div className="justify-center w-full flex ">
           <section className="flex justify-center">
             <Image
@@ -13,10 +13,9 @@ export default function About() {
               src="/images/blur.jpg"
               height="165"
               width="165"
-              className="z-10 rounded-full aspect-ratio"
+              className="z-10 rounded-full aspect-ratio h-32 w-32"
               alt="Harits Syah"
               blurDataURL="/images/blur.jpg"
-              // placeholder='blur'
             />
           </section>
         </div>

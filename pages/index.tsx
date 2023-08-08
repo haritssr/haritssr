@@ -224,7 +224,7 @@ const Contacts = () => {
     <section className="grid grid-cols-1 lg:grid-cols-4 md:items-center my-8 gap-8 md:gap-5">
       <section className="lg:col-span-1 space-y-5 md:mb-0 rounded-xl lg:bg-zinc-50 lg:border lg:border-zinc-300 lg:h-full lg:self-center lg:grid">
         <div className="grid lg:border-white rounded-xl lg:border">
-          <div className="self-center lg:space-y-2">
+          <div className="self-center space-y-2">
             <div className="justify-center w-full flex ">
               <section className="flex justify-center">
                 <Image
@@ -232,7 +232,7 @@ const Contacts = () => {
                   src="/images/blur.jpg"
                   height="165"
                   width="165"
-                  className="z-10 rounded-full aspect-ratio h-28 w-28"
+                  className="z-10 rounded-full aspect-ratio h-32 w-32"
                   alt="Harits Syah"
                   blurDataURL="/images/blur.jpg"
                   // placeholder='blur'
