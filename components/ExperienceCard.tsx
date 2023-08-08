@@ -34,7 +34,9 @@ export default function ExperienceCard({
           className="aspect-auto mb-1.5"
           // placeholder='blur'
         />
-        <div className="truncate font-semibold text-zinc-700 ">{title}</div>
+        <div className="truncate font-semibold text-zinc-700 sm:text-lg">
+          {title}
+        </div>
 
         <div className="text-zinc-600">{description}</div>
       </section>

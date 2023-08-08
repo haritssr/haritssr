@@ -153,7 +153,7 @@ const Wrapper = ({
               <div className="space-x-2 sm:space-x-3 flex items-center">
                 <Link
                   href={`/#${id}`}
-                  className=" text-lg sm:text-3xl font-semibold sm:font-bold text-zinc-800"
+                  className=" text-xl sm:text-3xl font-semibold sm:font-bold text-zinc-800"
                 >
                   {topic}
                 </Link>
