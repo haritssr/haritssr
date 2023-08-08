@@ -190,7 +190,7 @@ const A = () => {
         </div>
         <div className="space-y-1">
           <div className="h-40 overflow-hidden rounded-md border border-zinc-300 bg-white">
-            <div className="px-3 py-1.5 rounded-t-md font-semibold border-b border-zinc-300 bg-apple-gray6/50 text-zinc-800">
+            <div className="px-3 py-1.5 rounded-t-md font-semibold border-b border-zinc-300 bg-zinc-100/60 text-zinc-800">
               Title
             </div>
             <div className="rounded-b-md"></div>
