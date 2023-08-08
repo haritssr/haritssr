@@ -103,7 +103,7 @@ const BackToExperiments = ({
             className=" text-zinc-800 sm:group-hover:text-zinc-400 h-5 w-5"
             strokeWidth={2}
           />
-          <span className="-ml-0.5 block truncate text-zinc-800 sm:group-hover:text-zinc-400">
+          <span className="-ml-0.5 block truncate text-zinc-800 sm:group-hover:text-zinc-400 text-tiny sm:text-base">
             {domain}
           </span>
         </span>
@@ -117,7 +117,7 @@ const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
     <div className={`sm:2/4 -mr-2 inline ${inView ? "w-1/3" : "w-1/2"}`}>
       <div className="flex justify-center py-0.5">
         <div
-          className={`truncate text-center font-semibold ${
+          className={`truncate text-center font-semibold text-tiny sm:text-base ${
             inView ? "text-transparent" : "text-zinc-800"
           }`}
         >
