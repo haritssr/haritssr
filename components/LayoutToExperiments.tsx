@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import Footer from "./Footer";
-import GlobalHead from "./GlobalHead";
+import GlobalNavigation from "./GlobalNavigation";
 import { GitHubIcon } from "./Icons";
 
 interface LayoutToExperimentsType {
@@ -46,7 +46,7 @@ export default function LayoutToExperiments({
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
       </Head>
 
-      <GlobalHead />
+      <GlobalNavigation />
 
       <main className="mx-auto flex max-w-5xl sm:mt-10 sm:gap-10 sm:px-5 xl:px-0">
         <article className="mx-auto min-h-screen w-full max-w-4xl sm:px-0">
@@ -55,7 +55,7 @@ export default function LayoutToExperiments({
             className={`sticky -top-0 sm:top-[44.5px] border-b ${
               inView
                 ? "border-zinc-300"
-                : "border-b bg-zinc-100/60 saturate-150 backdrop-blur-lg"
+                : "border-b bg-white/60 saturate-150 backdrop-blur-lg"
             } z-40 mb-5 bg-white py-2.5 sm:border-none`}
           >
             <div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">

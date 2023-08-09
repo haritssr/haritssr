@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 import Head from "next/head";
 import { useRouter } from "next/router";
-import GlobalHead from "@/components/GlobalHead";
+import GlobalNavigation from "@/components/GlobalNavigation";
 import Footer from "@/components/Footer";
 
 export default function ExperiencesPage({ project }) {
@@ -68,7 +68,7 @@ export default function ExperiencesPage({ project }) {
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
       </Head>
 
-      <GlobalHead />
+      <GlobalNavigation />
 
       <main className="mx-auto min-h-screen w-full max-w-3xl px-5 xl:px-0">
         <BackButton href="/experiences" name="Experiences" />

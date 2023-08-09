@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { GitHubIcon } from "./Icons";
 
-export default function GlobalHead() {
+export default function GlobalNavigation() {
   return (
-    <div className="sticky top-0 z-30 border-b border-zinc-300  bg-zinc-100/60 saturate-150 backdrop-blur-lg">
+    <div className="sticky top-0 z-30 border-b border-zinc-300  bg-white/60 saturate-150 backdrop-blur-lg">
       <div className="mx-auto flex max-w-5xl flex-row items-center justify-between px-3 py-2.5 lg:px-0">
         <Link
           href="/"
