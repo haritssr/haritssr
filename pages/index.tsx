@@ -40,10 +40,10 @@ export default function Home() {
       <section className="mt-5 sm:mt-10 space-y-16 sm:space-y-24">
         <Contacts />
         <Experiences />
-        <Resume />
         <Experiments />
         <TechStack />
         <DesignSystem />
+        <Blog />
       </section>
     </Layout>
   );
@@ -74,9 +74,9 @@ const ToastCopy = ({
 
   return (
     <Toast.Provider swipeDirection="right">
-      <a
+      <div
         title="Copy this section page"
-        className="cursor-pointer active:scale-95 active:ring-1 active:ring-blue-600"
+        className="cursor-pointer p-[5px] bg-zinc-50 border rounded-full hover:bg-zinc-200/80"
         onClick={() => {
           handleCopy(
             `haritssr.vercel.app/${topic.toLowerCase().split(" ").join("-")}`
@@ -90,19 +90,18 @@ const ToastCopy = ({
         }}
       >
         <svg
-          className="-rotate-45 text-zinc-400 h-5 w-5 hover:text-zinc-800"
+          className="-rotate-45 text-zinc-600 h-4 w-4 hover:text-zinc-800 stroke-2"
           fill="none"
           shapeRendering="geometricPrecision"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
           viewBox="0 0 24 24"
         >
           <path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
           <path d="M8 12h8" />
         </svg>
-      </a>
+      </div>
 
       <Toast.Root
         className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-3 px-4 grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"
@@ -150,60 +149,56 @@ const Wrapper = ({
         {({ open }) => (
           <>
             <section className="mb-3 flex items-center justify-between">
-              <div className="space-x-2 sm:space-x-3 flex items-center">
-                <Link
-                  href={`/#${id}`}
-                  className=" text-xl sm:text-3xl font-semibold sm:font-bold text-zinc-800"
-                >
-                  {topic}
-                </Link>
-
-                <ToastCopy topic={topic} handleCopy={handleCopy} />
-              </div>
-              <div className="flex space-x-2 sm:space-x-3 text-tiny">
+              <Link
+                href={`/#${id}`}
+                className=" text-xl sm:text-3xl font-semibold sm:font-bold text-zinc-800"
+              >
+                {topic}
+              </Link>
+              <div className="flex items-center space-x-3 ">
+                <div>
+                  <ToastCopy topic={topic} handleCopy={handleCopy} />
+                </div>
+                <Disclosure.Button as="div" className="group cursor-pointer">
+                  {open ? (
+                    <div
+                      className={`px-[5px] pt-[6px] pb-[4px] rounded-full border border-zinc-200 group hover:bg-zinc-200/80 bg-zinc-50`}
+                    >
+                      <ChevronDownIcon
+                        className={`h-4 w-4 stroke-[2.5] ${
+                          open
+                            ? "text-zinc-600 group-hover:text-zinc-800"
+                            : "text-zinc-50 group-hover:text-zinc-50"
+                        }`}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className={`p-[5px] rounded-full border border-zinc-800 group bg-zinc-800 hover:bg-zinc-700`}
+                    >
+                      <ChevronUpIcon
+                        className={`h-4 w-4 stroke-[2.5] ${
+                          open
+                            ? "text-zinc-600 group-hover:text-zinc-800"
+                            : "text-zinc-50 group-hover:text-zinc-50"
+                        }`}
+                      />
+                    </div>
+                  )}
+                </Disclosure.Button>
                 <Link
                   passHref
                   href={`/${topic.toLowerCase().replace(" ", "-")}`}
-                  className="px-3 py-1 flex items-center justify-center hover:bg-zinc-200/80 rounded-full bg-zinc-100 text-blue-600 group-hover:text-blue-700"
+                  className="group flex w-fit cursor-pointer items-center justify-start py-1 text-[13px] border bg-zinc-50 hover:bg-zinc-100 rounded-full pl-3 pr-1.5 text-blue-600 hover:text-blue-700sm:text-sm select-none"
                 >
-                  Details
+                  <p className="flex items-center">
+                    Explore
+                    <ChevronRightIcon
+                      className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700"
+                      strokeWidth={2}
+                    />
+                  </p>
                 </Link>
-                <Disclosure.Button className="group">
-                  <div
-                    className={`px-1.5 pb-[5.25px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center  rounded-full group ${
-                      open
-                        ? "hover:bg-zinc-200/80 bg-zinc-100"
-                        : "bg-zinc-800 hover:bg-zinc-700"
-                    }`}
-                  >
-                    {open ? (
-                      <ChevronUpIcon
-                        className={`h-[17.5px] w-[17.5px] stroke-[2.5] sm:stroke-2 ${
-                          open
-                            ? "text-zinc-600 group-hover:text-zinc-800"
-                            : "text-zinc-50 group-hover:text-zinc-50"
-                        }`}
-                      />
-                    ) : (
-                      <ChevronDownIcon
-                        className={`h-[17.5px] w-[17.5px] stroke-[2.5] sm:stroke-2 ${
-                          open
-                            ? "text-zinc-600 group-hover:text-zinc-800"
-                            : "text-zinc-50 group-hover:text-zinc-50"
-                        }`}
-                      />
-                    )}
-                    <div
-                      className={`hidden sm:block text-tiny  ${
-                        open
-                          ? "text-zinc-600 group-hover:text-zinc-800"
-                          : "text-zinc-50 group-hover:text-zinc-50"
-                      }`}
-                    >
-                      {open ? "Show Less" : "Show More"}
-                    </div>
-                  </div>
-                </Disclosure.Button>
               </div>
             </section>
             <Disclosure.Panel className="mb-20">
@@ -359,7 +354,7 @@ const Contacts = () => {
               South Tangerang, Indonesia
             </a>
           </div>
-          <div className="py-1.5">
+          <div className="grid grid-cols-3 py-1.5">
             <Link
               passHref
               href="/about"
@@ -373,6 +368,21 @@ const Contacts = () => {
                 />
               </p>
             </Link>
+            <span className=" col-span-2 flex items-center space-x-2">
+              <Link
+                passHref
+                href="/cv"
+                className="group flex w-fit cursor-pointer items-center justify-start py-0.5 text-tiny text-blue-600 hover:text-blue-700 hover:underline sm:text-base"
+              >
+                <p className="flex items-center">
+                  Curicullum Vitae
+                  <ChevronRightIcon
+                    className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700 group-hover:underline"
+                    strokeWidth={2}
+                  />
+                </p>
+              </Link>
+            </span>
           </div>
         </div>
       </section>
@@ -443,193 +453,20 @@ const DesignSystem = () => {
       className=""
       explanation="My user interface components library and guidelines"
     >
-      <InternalLink name="Design System" href="/design-system" />
+      <InternalLink name="Take a look" href="/design-system" />
     </Wrapper>
   );
 };
 
-const Resume = () => {
+const Blog = () => {
   return (
     <Wrapper
-      id="cv"
-      topic="CV"
+      id="blog"
+      topic="Blog"
       className="grid grid-cols-1 sm:grid-cols-2 gap-5"
-      explanation="What I have been doing"
+      explanation="Selected notes to share with the world."
     >
-      <Disclosure as="div">
-        {({ open }) => (
-          <>
-            <Disclosure.Button
-              className={` border border-zinc-400/70 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
-                open ? "rounded-b-none rounded-t-md" : "rounded-md"
-              }`}
-            >
-              <div>Skills</div>
-              <ChevronDownIcon
-                className={` h-5 w-5 ${open ? "rotate-180" : ""}`}
-              />
-            </Disclosure.Button>
-            <Disclosure.Panel className="-mt-[1px] p-4 border border-zinc-400/70 rounded-b">
-              <div className="font-semibold">Web Software Engineering</div>
-              <p className="text-zinc-500 pb-4">
-                JavaScript, TypeScript, React.js, Next.js, Web platform, PWA,
-                Node.js ecosystem.
-              </p>
-              <div className="font-semibold">Math & Physics</div>
-              <p className="text-zinc-500 pb-4">
-                High school and early college level.
-              </p>
-              <div className="font-semibold">UI Design (with Figma)</div>
-              <p className="text-zinc-500 ">
-                Experiments, mockup, prototyping UI for mobile/desktop web.
-              </p>
-            </Disclosure.Panel>
-          </>
-        )}
-      </Disclosure>
-
-      <Disclosure as="div">
-        {({ open }) => (
-          <>
-            <Disclosure.Button
-              className={` border border-zinc-400/70 w-full flex items-center justify-between  px-4 py-2 select-none cursor-pointer ${
-                open ? "rounded-b-none rounded-t-md" : "rounded-md"
-              }`}
-            >
-              <div>Details</div>
-              <ChevronDownIcon
-                className={` h-5 w-5 ${open ? "rotate-180" : ""}`}
-              />
-            </Disclosure.Button>
-            <Disclosure.Panel className="-mt-[1px] px-4 py-8 border border-zinc-400/70	 rounded-b">
-              <section className="space-y-8">
-                <div className="font-semibold text-2xl">Experience</div>
-                {ExperiencesData.map((project) => (
-                  <div key={project.project_name}>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <Image
-                          src={project.about_client.logo_src}
-                          height={20}
-                          width={20}
-                          alt={project.about_client.company_name}
-                          className="aspect-auto h-5 w-5"
-                          blurDataURL={project.about_client.logo_src}
-                          // placeholder='blur'
-                        />
-                        <div className="font-semibold text-lg">
-                          {project.about_project.my_role[0]}
-                        </div>
-                      </div>
-                      <Link
-                        passHref
-                        href={`/experiences/${project.project_name
-                          .toLowerCase()
-                          .split(" ")
-                          .join("-")}`}
-                        className="flex items-center justify-end text-zinc-400 hover:underline"
-                      >
-                        <div className="text-tiny ">Details</div>
-                        <ChevronRightIcon className="h-4 w-4" />
-                      </Link>
-                    </div>
-                    <div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-                      <div>{project.about_client.company_name}</div>
-                      <div>{project.about_project.working_period}</div>
-                      <div>{project.skills}</div>
-                      <div>
-                        <ExternalLink
-                          href={project.about_client.website}
-                          name={project.about_client.website}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                <div className="font-semibold text-2xl">Working Experience</div>
-                <div className="">
-                  <div className="flex items-center space-x-2">
-                    <Image
-                      src="/Icons/sman5.jpg"
-                      height={20}
-                      width={20}
-                      alt="logo"
-                      className="aspect-auto h-5 w-5"
-                      blurDataURL="/Icons/sman5.jpg"
-                    />
-                    <div className="font-semibold text-lg">Privat Teacher</div>
-                  </div>
-                  <div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-                    <div>Lia Privat</div>
-                    <div> June 2018 - Now (5 years)</div>
-                    <div>
-                      Teaching math and physics for junior and senior highschool
-                      students at home
-                    </div>
-                  </div>
-                </div>
-
-                <div className="font-semibold text-2xl">Formal Education</div>
-                {EducationData.map((school) => (
-                  <div key={school.school}>
-                    <div className="flex items-center space-x-2">
-                      <Image
-                        src={school.logo}
-                        height={20}
-                        width={20}
-                        alt={school.school}
-                        className="aspect-auto h-5 w-5"
-                        blurDataURL={school.logo}
-                        // placeholder='blur'
-                      />
-                      <div className="font-semibold text-lg">
-                        {school.level}
-                      </div>
-                    </div>
-
-                    <div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-                      <div>{school.school}</div>
-                      <div>{school.period}</div>
-                      <div>{school.status}</div>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="font-semibold text-2xl">
-                  Non Formal Education
-                </div>
-                {NonFormalEducationData.map((school) => (
-                  <div key={school.school}>
-                    <div className="flex items-center space-x-2">
-                      <Image
-                        src={school.logo}
-                        height={20}
-                        width={20}
-                        alt={school.school}
-                        className="aspect-auto h-5 w-5"
-                        blurDataURL={school.logo}
-                        // placeholder='blur'
-                      />
-                      <div className="font-semibold text-lg">
-                        {school.level}
-                      </div>
-                    </div>
-                    <div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-                      <div>{school.school}</div>
-                      <div>{school.period}</div>
-                      <div>{school.status}</div>
-                      <ExternalLink
-                        name="Sertificate"
-                        href="www.harislab.com"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </section>
-            </Disclosure.Panel>
-          </>
-        )}
-      </Disclosure>
+      List of blogs. Coming soon.
     </Wrapper>
   );
 };
