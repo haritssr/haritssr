@@ -359,7 +359,7 @@ const Contacts = () => {
               South Tangerang, Indonesia
             </a>
           </div>
-          <div className="py-1.5">
+          <div className="grid grid-cols-3 py-1.5">
             <Link
               passHref
               href="/about"
@@ -373,6 +373,21 @@ const Contacts = () => {
                 />
               </p>
             </Link>
+            <span className=" col-span-2 flex items-center space-x-2">
+              <Link
+                passHref
+                href="/cv"
+                className="group flex w-fit cursor-pointer items-center justify-start py-0.5 text-tiny text-blue-600 hover:text-blue-700 hover:underline sm:text-base"
+              >
+                <p className="flex items-center">
+                  Curicullum Vitae
+                  <ChevronRightIcon
+                    className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700 group-hover:underline"
+                    strokeWidth={2}
+                  />
+                </p>
+              </Link>
+            </span>
           </div>
         </div>
       </section>
