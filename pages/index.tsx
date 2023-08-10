@@ -453,7 +453,7 @@ const DesignSystem = () => {
       className=""
       explanation="My user interface components library and guidelines"
     >
-      <InternalLink name="Design System" href="/design-system" />
+      <InternalLink name="Take a look" href="/design-system" />
     </Wrapper>
   );
 };
