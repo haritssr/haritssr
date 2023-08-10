@@ -29,7 +29,7 @@ export default function ExperimentIndexPage({
         className={`sticky -top-0 sm:top-[44.5px] border-b -mx-6 sm:max-w-4xl sm:mx-auto sm:mt-10 ${
           inView
             ? "border-zinc-300"
-            : "border-b bg-zinc-100/60 saturate-150 backdrop-blur-lg"
+            : "border-b bg-white/60 saturate-150 backdrop-blur-lg"
         } z-40 mb-5 bg-white py-2.5 sm:border-none`}
       >
         <div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
@@ -93,7 +93,7 @@ const BackToExperiments = ({ inView }: { inView: any }) => {
             strokeWidth={2}
           />
           <span
-            className={`-ml-0.5 truncate text-blue-600 sm:group-hover:text-blue-400 text-tiny sm:text-base ${
+            className={`-ml-0.5 truncate text-blue-600 sm:group-hover:text-blue-400 text-[15px] leading-[22px] sm:text-base ${
               inView ? "block" : "hidden"
             }`}
           >
@@ -110,7 +110,7 @@ const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
     <div className={`sm:2/4 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
       <div className="flex justify-center py-0.5">
         <div
-          className={`truncate text-center font-semibold text-sm sm:text-base ${
+          className={`truncate text-center font-semibold text-[15px] leading-[18px] sm:text-base ${
             inView ? "text-transparent hidden" : "text-zinc-800 block"
           }`}
         >

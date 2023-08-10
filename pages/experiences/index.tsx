@@ -2,7 +2,7 @@ import { ExperiencesData } from "data/ExperiencesData";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
-import GlobalHead from "@/components/GlobalHead";
+import GlobalNavigation from "@/components/GlobalNavigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
@@ -42,7 +42,7 @@ export default function ExperiencesHomePage() {
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
       </Head>
 
-      <GlobalHead />
+      <GlobalNavigation />
 
       <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
         <PageTitle title="Experiences">

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import GlobalHead from "./GlobalHead";
+import GlobalNavigation from "./GlobalNavigation";
 import { useRouter } from "next/router";
 import Footer from "./Footer";
 
@@ -42,7 +42,7 @@ export default function Layout({
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
       </Head>
 
-      <GlobalHead />
+      <GlobalNavigation />
 
       <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
         {children}

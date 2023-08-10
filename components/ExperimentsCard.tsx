@@ -13,7 +13,7 @@ export default function ExperimentsCard({
       passHref
       href={`/experiments/${experiment.title.toLowerCase().replace(" ", "-")}`}
       key={experiment.id}
-      className="space-y-1 p-3.5 bg-gradient-to-br from-zinc-50/20 to-zinc-50 hover:ring-2 hover:ring-blue-600/70 border border-zinc-400/50 rounded-lg"
+      className="space-y-1 p-3.5 bg-gradient-to-br from-zinc-50/20 to-zinc-50 shadow hover:ring-2 hover:ring-blue-600/70 border border-zinc-400/50 rounded-lg"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">

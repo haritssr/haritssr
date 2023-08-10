@@ -258,12 +258,16 @@ const Contacts = () => {
         </div>
       </section>
       {/* lg:pt-2 lg:px-4 */}
-      <section className="lg:col-span-3 lg:border lg:border-zinc-300 rounded-lg lg:pt-1">
+      <section className="lg:col-span-3 lg:border lg:border-zinc-300 rounded-lg lg:pt-[5px] lg:pl-3.5">
         <div className="divide-y divide-zinc-200">
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 lg:pl-3.5 font-medium">Roles</span>
+            <span className="text-zinc-800 font-medium text-tiny sm:text-base">
+              Roles
+            </span>
             <span className=" col-span-2 flex items-center space-x-2">
-              <span className="text-zinc-500">Web Product Engineer</span>
+              <span className="text-zinc-500 text-tiny sm:text-base">
+                Web Product Engineer
+              </span>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -289,13 +293,15 @@ const Contacts = () => {
           </div>
 
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-white lg:pl-3.5 font-medium">Role</span>
-            <span className="text-zinc-500 col-span-2">
+            <span className="text-white font-medium ">Role</span>
+            <span className="text-zinc-500 col-span-2 text-tiny sm:text-base">
               Math Physics Teacher
             </span>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 lg:pl-3.5 font-medium">At</span>
+            <span className="text-zinc-800 font-medium  text-tiny sm:text-base">
+              At
+            </span>
             <span className="text-zinc-500 col-span-2">
               <cite className="group not-italic">
                 <a
@@ -306,7 +312,7 @@ const Contacts = () => {
                   className="group inline-block w-fit cursor-pointer items-center text-zinc-500 hover:underline group-hover:text-zinc-800"
                 >
                   <span className="flex items-center">
-                    <span className="text-base">Haris Lab</span>
+                    <span className="text-tiny sm:text-base">Haris Lab</span>
                     {/* External Link Icon */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -328,17 +334,19 @@ const Contacts = () => {
             </span>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 lg:pl-3.5 font-medium">Email</span>
+            <span className="text-zinc-800 font-medium  text-tiny sm:text-base">
+              Email
+            </span>
             <a
               title="Send me an email"
               href="mailto:haritssr@gmail.com"
-              className="text-zinc-500 col-span-2 hover:underline hover:text-zinc-800"
+              className="text-zinc-500 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
             >
               haritssr@gmail.com
             </a>
           </div>
           <div className="grid grid-cols-3 py-1.5">
-            <span className="text-zinc-800 lg:pl-3.5 font-medium">
+            <span className="text-zinc-800 font-medium  text-tiny sm:text-base">
               Location
             </span>
             <a
@@ -346,13 +354,25 @@ const Contacts = () => {
               rel="noopener noreferrer"
               title="See South Tangerang at Google Maps"
               href="https://www.google.com/maps/place/Tangerang+Selatan,+Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x8706481c2c4aafe4?sa=X&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgPEAA&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgQEAI"
-              className="text-zinc-500 col-span-2 hover:underline hover:text-zinc-800"
+              className="text-zinc-500 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
             >
               South Tangerang, Indonesia
             </a>
           </div>
-          <div className="py-1.5 lg:pl-3.5">
-            <InternalLink href="/about" name="Details" />
+          <div className="py-1.5">
+            <Link
+              passHref
+              href="/about"
+              className="group flex w-fit cursor-pointer items-center justify-start py-0.5 text-tiny text-blue-600 hover:text-blue-700 hover:underline sm:text-base"
+            >
+              <p className="flex items-center">
+                Details
+                <ChevronRightIcon
+                  className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700 group-hover:underline"
+                  strokeWidth={2}
+                />
+              </p>
+            </Link>
           </div>
         </div>
       </section>
