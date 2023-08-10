@@ -44,6 +44,7 @@ export default function Home() {
         <Experiments />
         <TechStack />
         <DesignSystem />
+        <Blog />
       </section>
     </Layout>
   );
@@ -630,6 +631,19 @@ const Resume = () => {
           </>
         )}
       </Disclosure>
+    </Wrapper>
+  );
+};
+
+const Blog = () => {
+  return (
+    <Wrapper
+      id="blog"
+      topic="Blog"
+      className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+      explanation="Selected notes to share with the world."
+    >
+      List of blogs
     </Wrapper>
   );
 };
