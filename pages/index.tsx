@@ -74,9 +74,9 @@ const ToastCopy = ({
 
   return (
     <Toast.Provider swipeDirection="right">
-      <a
+      <div
         title="Copy this section page"
-        className="cursor-pointer active:scale-95 active:ring-1 active:ring-blue-600"
+        className="cursor-pointer p-[5px] bg-zinc-50 border rounded-full hover:bg-zinc-200/80"
         onClick={() => {
           handleCopy(
             `haritssr.vercel.app/${topic.toLowerCase().split(" ").join("-")}`
@@ -90,19 +90,18 @@ const ToastCopy = ({
         }}
       >
         <svg
-          className="-rotate-45 text-zinc-400 h-5 w-5 hover:text-zinc-800"
+          className="-rotate-45 text-zinc-600 h-4 w-4 hover:text-zinc-800 stroke-2"
           fill="none"
           shapeRendering="geometricPrecision"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
           viewBox="0 0 24 24"
         >
           <path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
           <path d="M8 12h8" />
         </svg>
-      </a>
+      </div>
 
       <Toast.Root
         className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-3 px-4 grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"
@@ -150,60 +149,56 @@ const Wrapper = ({
         {({ open }) => (
           <>
             <section className="mb-3 flex items-center justify-between">
-              <div className="space-x-2 sm:space-x-3 flex items-center">
-                <Link
-                  href={`/#${id}`}
-                  className=" text-xl sm:text-3xl font-semibold sm:font-bold text-zinc-800"
-                >
-                  {topic}
-                </Link>
-
-                <ToastCopy topic={topic} handleCopy={handleCopy} />
-              </div>
-              <div className="flex space-x-2 sm:space-x-3 text-tiny">
+              <Link
+                href={`/#${id}`}
+                className=" text-xl sm:text-3xl font-semibold sm:font-bold text-zinc-800"
+              >
+                {topic}
+              </Link>
+              <div className="flex items-center space-x-3 ">
+                <div>
+                  <ToastCopy topic={topic} handleCopy={handleCopy} />
+                </div>
+                <Disclosure.Button as="div" className="group cursor-pointer">
+                  {open ? (
+                    <div
+                      className={`px-[5px] pt-[6px] pb-[4px] rounded-full border border-zinc-200 group hover:bg-zinc-200/80 bg-zinc-50`}
+                    >
+                      <ChevronDownIcon
+                        className={`h-4 w-4 stroke-[2.5] ${
+                          open
+                            ? "text-zinc-600 group-hover:text-zinc-800"
+                            : "text-zinc-50 group-hover:text-zinc-50"
+                        }`}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className={`p-[5px] rounded-full border border-zinc-800 group bg-zinc-800 hover:bg-zinc-700`}
+                    >
+                      <ChevronUpIcon
+                        className={`h-4 w-4 stroke-[2.5] ${
+                          open
+                            ? "text-zinc-600 group-hover:text-zinc-800"
+                            : "text-zinc-50 group-hover:text-zinc-50"
+                        }`}
+                      />
+                    </div>
+                  )}
+                </Disclosure.Button>
                 <Link
                   passHref
                   href={`/${topic.toLowerCase().replace(" ", "-")}`}
-                  className="px-3 py-1 flex items-center justify-center hover:bg-zinc-200/80 rounded-full bg-zinc-100 text-blue-600 group-hover:text-blue-700"
+                  className="group flex w-fit cursor-pointer items-center justify-start py-1 text-[13px] border bg-zinc-50 hover:bg-zinc-100 rounded-full pl-3 pr-1.5 text-blue-600 hover:text-blue-700sm:text-sm select-none"
                 >
-                  Details
+                  <p className="flex items-center">
+                    Explore
+                    <ChevronRightIcon
+                      className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700"
+                      strokeWidth={2}
+                    />
+                  </p>
                 </Link>
-                <Disclosure.Button className="group">
-                  <div
-                    className={`px-1.5 pb-[5.25px] pt-1.5 sm:pl-2.5 sm:pr-[15px] sm:py-[5px] sm:space-x-1 flex items-center justify-center  rounded-full group ${
-                      open
-                        ? "hover:bg-zinc-200/80 bg-zinc-100"
-                        : "bg-zinc-800 hover:bg-zinc-700"
-                    }`}
-                  >
-                    {open ? (
-                      <ChevronUpIcon
-                        className={`h-[17.5px] w-[17.5px] stroke-[2.5] sm:stroke-2 ${
-                          open
-                            ? "text-zinc-600 group-hover:text-zinc-800"
-                            : "text-zinc-50 group-hover:text-zinc-50"
-                        }`}
-                      />
-                    ) : (
-                      <ChevronDownIcon
-                        className={`h-[17.5px] w-[17.5px] stroke-[2.5] sm:stroke-2 ${
-                          open
-                            ? "text-zinc-600 group-hover:text-zinc-800"
-                            : "text-zinc-50 group-hover:text-zinc-50"
-                        }`}
-                      />
-                    )}
-                    <div
-                      className={`hidden sm:block text-tiny  ${
-                        open
-                          ? "text-zinc-600 group-hover:text-zinc-800"
-                          : "text-zinc-50 group-hover:text-zinc-50"
-                      }`}
-                    >
-                      {open ? "Show Less" : "Show More"}
-                    </div>
-                  </div>
-                </Disclosure.Button>
               </div>
             </section>
             <Disclosure.Panel className="mb-20">
