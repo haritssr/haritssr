@@ -23,7 +23,7 @@ export default function ExperienceCard({
   industry,
 }: ExperienceCardTypes) {
   return (
-    <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/70 selection:mx-auto ">
+    <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 selection:mx-auto shadow">
       <section className=" flex flex-col justify-between  bg-white p-3 space-y-2">
         <Image
           src={imgSrc}
@@ -40,7 +40,7 @@ export default function ExperienceCard({
 
         <div className="text-zinc-600">{description}</div>
       </section>
-      <cite className="group px-3 py-2 border-t border-zinc-400/70 not-italic bg-zinc-50/20">
+      <cite className="group px-3 py-2 border-t border-zinc-300 not-italic bg-zinc-50/20">
         <a
           title={href}
           href={`https://${href}`}
@@ -68,7 +68,7 @@ export default function ExperienceCard({
           </span>
         </a>
       </cite>
-      <section className="flex flex-col space-y-1.5 border-t border-b border-zinc-400/70 bg-zinc-50/20 px-3 py-2 text-zinc-600 text-sm">
+      <section className="flex flex-col space-y-1.5 border-t border-b border-zinc-300 bg-zinc-50/20 px-3 py-2 text-zinc-600 text-sm">
         <article className="flex items-center justify-between">
           <div className="flex w-1/3 items-center justify-between">
             <div>Period</div>
@@ -97,7 +97,7 @@ export default function ExperienceCard({
           href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
           className="flex justify-center"
         >
-          <span className="hover:text-blue-700 hover:underline sm:text-sm text-blue-600">
+          <span className="hover:text-blue-700 hover:underline text-sm text-blue-600">
             Details
           </span>
         </Link>
