@@ -25,7 +25,8 @@ import { PageTitle } from "@/components/SubTitle";
 export default function ExperimentsPage() {
   return (
     <Layout browserTitle="CV" description="What I have been doing.">
-      <PageTitle title="CV">
+      <PageTitle title="CV">What I have been doing.</PageTitle>
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Disclosure as="div">
           {({ open }) => (
             <>
@@ -57,7 +58,6 @@ export default function ExperimentsPage() {
             </>
           )}
         </Disclosure>
-
         <Disclosure as="div">
           {({ open }) => (
             <>
@@ -142,7 +142,6 @@ export default function ExperimentsPage() {
                       </div>
                     </div>
                   </div>
-
                   <div className="font-semibold text-2xl">Formal Education</div>
                   {EducationData.map((school) => (
                     <div key={school.school}>
@@ -160,7 +159,6 @@ export default function ExperimentsPage() {
                           {school.level}
                         </div>
                       </div>
-
                       <div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
                         <div>{school.school}</div>
                         <div>{school.period}</div>
@@ -168,7 +166,6 @@ export default function ExperimentsPage() {
                       </div>
                     </div>
                   ))}
-
                   <div className="font-semibold text-2xl">
                     Non Formal Education
                   </div>
@@ -204,7 +201,7 @@ export default function ExperimentsPage() {
             </>
           )}
         </Disclosure>
-      </PageTitle>
+      </div>
     </Layout>
   );
 }
