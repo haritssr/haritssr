@@ -466,7 +466,7 @@ const Blog = () => {
       className="grid grid-cols-1 sm:grid-cols-2 gap-5"
       explanation="Selected notes to share with the world."
     >
-      List of blogs. Coming soon.
+      List of posts. Coming soon.
     </Wrapper>
   );
 };
