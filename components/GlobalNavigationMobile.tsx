@@ -5,7 +5,7 @@ import { TitleAndPathData } from "data/TitleAndPathData";
 
 export default function GlobalNavigationMobile() {
   return (
-    <div className="sticky bottom-0 block  w-full border-t border-zinc-300 bg-white sm:hidden">
+    <div className="sticky bottom-0 block  w-full border-t border-zinc-300 bg-white/70 saturate-150 backdrop-blur-lg sm:hidden">
       <div className="flex w-full items-center ">
         {TitleAndPathData.map(({ title, path }) => (
           <IconWrapper key={title} to={`/${title}`} path={path} />
@@ -38,14 +38,14 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
       <div className="flex flex-col items-center justify-center py-[5px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className={`h-7 w-7 ${color}`}
+          className={`h-6 w-6 ${color}`}
           viewBox="0 0 24 24"
           fill="currentColor"
         >
           {path}
         </svg>
 
-        <div className={`text-[12px] -mt-[1px] ${color}`}>
+        <div className={`text-[12px] leading-[16px] -mt-[1px] ${color}`}>
           {capitalizeFirstLetter(to)}
         </div>
       </div>
