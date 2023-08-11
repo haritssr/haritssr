@@ -10,6 +10,7 @@ export default function ExperimentsPage() {
       <PageTitle title="Blog">
         Selected notes to share with the world.
       </PageTitle>
+      Coming soon.
     </Layout>
   );
 }
