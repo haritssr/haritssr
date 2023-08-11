@@ -7,7 +7,7 @@ export default function GlobalNavigation() {
       <div className="mx-auto flex max-w-5xl flex-row items-center justify-between px-3 py-2.5 lg:px-0">
         <Link
           href="/"
-          className=" text-zinc-800 hover:text-zinc-400 text-[15px] leading-[22px] sm:text-base"
+          className=" text-zinc-800 hover:text-zinc-400"
           aria-label="site logo"
         >
           Harits Syah
@@ -19,7 +19,7 @@ export default function GlobalNavigation() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className="text-[15px] leading-[22px] sm:text-base group-hover:text-zinc-400 text-zinc-800">
+          <span className="group-hover:text-zinc-400 text-zinc-800">
             Source
           </span>
           <GitHubIcon className="h-5 w-5 cursor-pointer text-zinc-800 group-hover:text-zinc-400" />
