@@ -2,6 +2,7 @@ import Head from "next/head";
 import GlobalNavigation from "./GlobalNavigation";
 import { useRouter } from "next/router";
 import Footer from "./Footer";
+import GlobalNavigationMobile from "./GlobalNavigationMobile";
 
 interface LayoutType {
   children: React.ReactNode;
@@ -49,6 +50,7 @@ export default function Layout({
       </main>
 
       <Footer />
+      <GlobalNavigationMobile />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { PageTitle } from "@/components/SubTitle";
+import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 
 export default function ExperiencesHomePage() {
   const router = useRouter();
@@ -82,6 +83,7 @@ export default function ExperiencesHomePage() {
       </main>
 
       <Footer />
+      <GlobalNavigationMobile />
     </div>
   );
 }
