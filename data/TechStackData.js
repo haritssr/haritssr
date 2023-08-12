@@ -148,11 +148,6 @@ export const TechStackData = [
         imgSrc: "/Icons/css.jpg",
         name: "CSS 3",
       },
-      {
-        href: "https://emotion.sh/",
-        imgSrc: "/Icons/emotion.jpg",
-        name: "Emotion",
-      },
     ],
   },
   {
