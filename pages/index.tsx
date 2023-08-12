@@ -431,7 +431,7 @@ const TechStack = () => {
     <Wrapper
       id="techstack"
       topic="Tech Stack"
-      className="columns-1 gap-5 space-y-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4"
       explanation="My choosen libraries and framework to build web application"
     >
       {TechStackData.map((data) => (
