@@ -1,0 +1,26 @@
+import Layout from "@/components/Layout";
+import { PageTitle } from "@/components/SubTitle";
+import { TechStackData } from "data/TechStackData";
+import { TechnologyCard } from "@/components/TechnologyCard";
+
+export default function TechStackPage() {
+  return (
+    <Layout
+      browserTitle="Technology"
+      description="My choosen libraries and framework to build web application"
+    >
+      <PageTitle title="Technology">
+        My choosen libraries and framework to build web application
+      </PageTitle>
+      <div className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4">
+        {TechStackData.map((data) => (
+          <TechnologyCard
+            domain={data?.domain}
+            links={data?.links}
+            key={data?.domain}
+          />
+        ))}
+      </div>
+    </Layout>
+  );
+}

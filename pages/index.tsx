@@ -1,21 +1,15 @@
 // Internal Components
 import ExperimentsGrid from "@/components/ExperimentsGrid";
-import Contact from "@/components/ContactCard";
 import InternalLink from "@/components/InternalLink";
-import ExternalLink from "@/components/ExternalLink";
 import Layout from "@/components/Layout";
 import ExperienceCard from "@/components/ExperienceCard";
-import { TechStackCard } from "@/components/TechStackCard";
-import ContactCard from "@/components/ContactCard";
+import { TechnologyCard } from "@/components/TechnologyCard";
 
 // Icons
 import {
-  BriefcaseIcon,
-  BuildingOfficeIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  MapPinIcon,
 } from "@heroicons/react/24/outline";
 
 // Internal Next.js
@@ -28,8 +22,6 @@ import React from "react";
 // Data
 import { TechStackData } from "../data/TechStackData";
 import { ExperiencesData } from "data/ExperiencesData";
-import { NonFormalEducationData } from "data/NonFormalEducationData";
-import { EducationData } from "data/EducationData";
 
 // Headless UI
 import { Disclosure } from "@headlessui/react";
@@ -375,7 +367,7 @@ const Contacts = () => {
                 className="group flex w-fit cursor-pointer items-center justify-start py-0.5 text-tiny text-blue-600 hover:text-blue-700 hover:underline sm:text-base"
               >
                 <p className="flex items-center">
-                  Curicullum Vitae
+                  Curriculum Vitae
                   <ChevronRightIcon
                     className="h-4 w-4 text-blue-600 -mb-[1.5px] duration-200 group-hover:text-blue-700 group-hover:underline"
                     strokeWidth={2}
@@ -429,13 +421,13 @@ const Experiments = () => {
 const TechStack = () => {
   return (
     <Wrapper
-      id="techstack"
-      topic="Tech Stack"
+      id="technology"
+      topic="Technology"
       className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4"
       explanation="My choosen libraries and framework to build web application"
     >
       {TechStackData.map((data) => (
-        <TechStackCard
+        <TechnologyCard
           domain={data?.domain}
           links={data?.links}
           key={data?.domain}
@@ -466,7 +458,7 @@ const Blog = () => {
       className="grid grid-cols-1 sm:grid-cols-2 gap-5"
       explanation="Selected notes to share with the world."
     >
-      List of blogs. Coming soon.
+      List of posts. Coming soon.
     </Wrapper>
   );
 };
