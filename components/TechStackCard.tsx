@@ -30,7 +30,7 @@ export const TechStackCard = (
               href={href}
               target="_blank"
               rel="noreferrer noopener"
-              className="group flex w-auto items-center justify-between space-x-2 py-[7px] px-3 hover:bg-zinc-100"
+              className="group flex w-auto items-center justify-between space-x-2 py-[7px] px-3 hover:bg-zinc-100/50"
             >
               <section className="flex items-center space-x-2 overflow-hidden">
                 <Image
