@@ -39,22 +39,10 @@ export default function GlobalNavigation() {
   );
 }
 
-const links = [
-  "home",
-  "experiences",
-  "experiments",
-  "blog",
-  "tech stack",
-  "cv",
-];
+const links = ["experiences", "experiments", "blog", "tech stack", "cv"];
 
 function Destination({ link }: { link: string }) {
   const router = useRouter();
-
-  // function handleClick() {
-  //   console.log(router.asPath);
-  //   console.log(link);
-  // }
 
   function capitalizeFirstLetter(to: string) {
     return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
@@ -63,8 +51,6 @@ function Destination({ link }: { link: string }) {
   let color: string;
 
   if (router.asPath === `/${link}`) {
-    color = "text-blue-700";
-  } else if (router.asPath === "/" && link === "home") {
     color = "text-blue-700";
   } else {
     color = "text-zinc-600 hover:text-zinc-800";
