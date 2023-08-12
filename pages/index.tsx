@@ -1,21 +1,15 @@
 // Internal Components
 import ExperimentsGrid from "@/components/ExperimentsGrid";
-import Contact from "@/components/ContactCard";
 import InternalLink from "@/components/InternalLink";
-import ExternalLink from "@/components/ExternalLink";
 import Layout from "@/components/Layout";
 import ExperienceCard from "@/components/ExperienceCard";
 import { TechnologyCard } from "@/components/TechnologyCard";
-import ContactCard from "@/components/ContactCard";
 
 // Icons
 import {
-  BriefcaseIcon,
-  BuildingOfficeIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  MapPinIcon,
 } from "@heroicons/react/24/outline";
 
 // Internal Next.js
@@ -28,8 +22,6 @@ import React from "react";
 // Data
 import { TechStackData } from "../data/TechStackData";
 import { ExperiencesData } from "data/ExperiencesData";
-import { NonFormalEducationData } from "data/NonFormalEducationData";
-import { EducationData } from "data/EducationData";
 
 // Headless UI
 import { Disclosure } from "@headlessui/react";
