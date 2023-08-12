@@ -39,7 +39,7 @@ export default function GlobalNavigation() {
   );
 }
 
-const links = ["experiences", "experiments", "blog", "tech stack", "cv"];
+const links = ["experiences", "experiments", "blog", "technology", "cv"];
 
 function Destination({ link }: { link: string }) {
   const router = useRouter();

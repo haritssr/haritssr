@@ -1,21 +1,15 @@
 // Internal Components
 import ExperimentsGrid from "@/components/ExperimentsGrid";
-import Contact from "@/components/ContactCard";
 import InternalLink from "@/components/InternalLink";
-import ExternalLink from "@/components/ExternalLink";
 import Layout from "@/components/Layout";
 import ExperienceCard from "@/components/ExperienceCard";
-import { TechStackCard } from "@/components/TechStackCard";
-import ContactCard from "@/components/ContactCard";
+import { TechnologyCard } from "@/components/TechnologyCard";
 
 // Icons
 import {
-  BriefcaseIcon,
-  BuildingOfficeIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  MapPinIcon,
 } from "@heroicons/react/24/outline";
 
 // Internal Next.js
@@ -28,8 +22,6 @@ import React from "react";
 // Data
 import { TechStackData } from "../data/TechStackData";
 import { ExperiencesData } from "data/ExperiencesData";
-import { NonFormalEducationData } from "data/NonFormalEducationData";
-import { EducationData } from "data/EducationData";
 
 // Headless UI
 import { Disclosure } from "@headlessui/react";
@@ -429,13 +421,13 @@ const Experiments = () => {
 const TechStack = () => {
   return (
     <Wrapper
-      id="techstack"
-      topic="Tech Stack"
-      className="columns-1 gap-5 space-y-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      id="technology"
+      topic="Technology"
+      className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4"
       explanation="My choosen libraries and framework to build web application"
     >
       {TechStackData.map((data) => (
-        <TechStackCard
+        <TechnologyCard
           domain={data?.domain}
           links={data?.links}
           key={data?.domain}
