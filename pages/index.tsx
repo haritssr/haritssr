@@ -5,7 +5,7 @@ import InternalLink from "@/components/InternalLink";
 import ExternalLink from "@/components/ExternalLink";
 import Layout from "@/components/Layout";
 import ExperienceCard from "@/components/ExperienceCard";
-import { TechStackCard } from "@/components/TechStackCard";
+import { TechnologyCard } from "@/components/TechnologyCard";
 import ContactCard from "@/components/ContactCard";
 
 // Icons
@@ -429,13 +429,13 @@ const Experiments = () => {
 const TechStack = () => {
   return (
     <Wrapper
-      id="techstack"
-      topic="Tech Stack"
+      id="technology"
+      topic="Technology"
       className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4"
       explanation="My choosen libraries and framework to build web application"
     >
       {TechStackData.map((data) => (
-        <TechStackCard
+        <TechnologyCard
           domain={data?.domain}
           links={data?.links}
           key={data?.domain}

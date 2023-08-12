@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ClassAttributes, HTMLAttributes } from "react";
 
-export const TechStackCard = (
+export const TechnologyCard = (
   {
     domain,
     links,
