@@ -31,6 +31,7 @@ export default function Home() {
     <Layout browserTitle="Home" description="Home">
       <section className="mt-5 sm:mt-10 space-y-16 sm:space-y-24">
         <Contacts />
+        <Services />
         <Experiences />
         <Experiments />
         <TechStack />
@@ -203,6 +204,24 @@ const Wrapper = ({
         )}
       </Disclosure>
     </div>
+  );
+};
+
+const Services = () => {
+  return (
+    <Wrapper
+      id="services"
+      topic="Services"
+      className="bg-zinc-100 rounded-md p-5 w-full flex space-x-5 justify-end items-center"
+      explanation="Open for design and programming a website services for personal or small business."
+    >
+      <div className="rounded-md bg-blue-600 text-white px-3 py-2">
+        See example
+      </div>
+      <div className="rounded-md bg-blue-600 text-white px-3 py-2">
+        Place an order
+      </div>
+    </Wrapper>
   );
 };
 
