@@ -277,7 +277,7 @@ const Contacts = () => {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://www.twitter.com/leeerob/status/1687446725919711232"
+                href="https://leerob.io/blog/product-engineers"
                 title="Product engineers consider the frontend, backend, design, and everything in between to create a great user experience."
               >
                 <svg
