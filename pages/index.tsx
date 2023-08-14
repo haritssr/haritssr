@@ -212,13 +212,13 @@ const Services = () => {
     <Wrapper
       id="services"
       topic="Services"
-      className="bg-zinc-100 rounded-md p-5 w-full flex space-x-5 justify-end items-center"
+      className="bg-zinc-100 rounded-md p-5 w-full flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-5 justify-end items-center"
       explanation="Open for design and programming a website services for personal or small business."
     >
-      <div className="rounded-md bg-blue-600 text-white px-3 py-2">
+      <div className="rounded-md bg-blue-600 text-white px-3 py-2 text-center w-full sm:w-fit">
         See example
       </div>
-      <div className="rounded-md bg-blue-600 text-white px-3 py-2">
+      <div className="rounded-md bg-blue-600 text-white px-3 py-2 text-center w-full sm:w-fit">
         Place an order
       </div>
     </Wrapper>
