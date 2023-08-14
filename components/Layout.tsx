@@ -19,7 +19,7 @@ export default function Layout({
   const image = "/images/hero.jpg";
   const type = "website";
   return (
-    <div className="bg-white">
+    <>
       <Head>
         <title>
           {router.asPath === "/"
@@ -51,6 +51,6 @@ export default function Layout({
 
       <Footer />
       <GlobalNavigationMobile />
-    </div>
+    </>
   );
 }
