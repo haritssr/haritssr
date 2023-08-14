@@ -45,7 +45,11 @@ function Destination({ link }: { link: string }) {
   const router = useRouter();
 
   function capitalizeFirstLetter(to: string) {
-    return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
+    if (link === "cv") {
+      return "CV";
+    } else {
+      return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
+    }
   }
 
   let color: string;
