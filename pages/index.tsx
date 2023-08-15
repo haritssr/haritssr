@@ -32,6 +32,7 @@ export default function Home() {
       <section className="mt-5 sm:mt-10 space-y-16 sm:space-y-24">
         <Contacts />
         <Services />
+        <HarisLabBanner />
         <Experiences />
         <Experiments />
         <TechStack />
@@ -222,6 +223,27 @@ const Services = () => {
         Place an order
       </div>
     </Wrapper>
+  );
+};
+
+const HarisLabBanner = () => {
+  return (
+    <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 space-y-3">
+      <div className="text-blue-800">INFORMATION</div>
+      <div className="text-zinc-800">
+        I&#39;m currently building a services, it's called Haris Lab. A place to
+        Reference, Analyze, Test, and Tutoring math-physics for Junior and High
+        School Students.
+      </div>
+      <a
+        href="https://www.harislab.com"
+        rel="noopener noreferrer"
+        target="_blank"
+        className="block w-full sm:w-fit hover:bg-blue-500 bg-blue-600 text-white py-2 sm:py-1.5 sm:px-3 rounded-md text-center"
+      >
+        Take a look
+      </a>
+    </div>
   );
 };
 
