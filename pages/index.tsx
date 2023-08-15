@@ -210,19 +210,21 @@ const Wrapper = ({
 
 const Services = () => {
   return (
-    <Wrapper
-      id="services"
-      topic="Services"
-      className="bg-zinc-100 rounded-md p-5 w-full flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-5 justify-end items-center"
-      explanation="Open for design and programming a website services for personal or small business."
-    >
-      <div className="rounded-md bg-blue-600 text-white px-3 py-2 text-center w-full sm:w-fit">
-        See example
+    <div className="bg-zinc-100 rounded-md p-5 space-y-3">
+      <div className="text-zinc-800">I OPEN FOR DESIGN SERVICES</div>
+      <div className="">
+        Open for design and programming a website services for personal or small
+        business.
       </div>
-      <div className="rounded-md bg-blue-600 text-white px-3 py-2 text-center w-full sm:w-fit">
-        Place an order
+      <div className="flex items-center space-x-3">
+        <div className="rounded-md bg-zinc-800 text-white px-3 py-2 text-center w-full sm:w-fit">
+          See example
+        </div>
+        <div className="rounded-md bg-zinc-800 text-white px-3 py-2 text-center w-full sm:w-fit">
+          Place an order
+        </div>
       </div>
-    </Wrapper>
+    </div>
   );
 };
 
