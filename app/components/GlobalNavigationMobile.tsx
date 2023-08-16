@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { TitleAndPathData } from "data/TitleAndPathData";
 
@@ -16,11 +18,11 @@ export default function GlobalNavigationMobile() {
 }
 
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
-  const router = useRouter();
+  const router = usePathname();
   let color: string;
-  if (router.asPath === to) {
+  if (router === to) {
     color = "text-blue-600";
-  } else if (router.asPath === "/" && to === "/home") {
+  } else if (router === "/" && to === "/home") {
     color = "text-blue-600/90";
   } else {
     color = "text-zinc-500";

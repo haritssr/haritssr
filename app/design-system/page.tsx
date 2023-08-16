@@ -1,21 +1,10 @@
-import Section from "@/components/Section";
-import InternalLink from "@/components/InternalLink";
 import ExternalLink from "@/components/ExternalLink";
-import Layout from "@/components/Layout";
 import React from "react";
-import { color } from "../data/DesignSystemData";
-import Image from "next/image";
-
-import { useState } from "react";
-import { Switch } from "@headlessui/react";
-
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import * as Dialog from "@radix-ui/react-dialog";
 import { PageTitle } from "@/components/SubTitle";
 
 export default function DesignSystem() {
   return (
-    <Layout browserTitle="Design Systems" description="Design Systems">
+    <>
       <PageTitle title="Design Systems">
         This design system used in{" "}
         <ExternalLink name="haritssr.com" href="haritssr.com" /> and{" "}
@@ -30,6 +19,6 @@ export default function DesignSystem() {
           allowFullScreen
         ></iframe>
       </div>
-    </Layout>
+    </>
   );
 }

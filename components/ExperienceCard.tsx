@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import ExternalLink from "./ExternalLink";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronDoubleRightIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 
 interface ExperienceCardTypes {
   href: string;
@@ -23,52 +26,33 @@ export default function ExperienceCard({
   industry,
 }: ExperienceCardTypes) {
   return (
-    <div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/60 selection:mx-auto">
-      <section className=" flex flex-col justify-between  bg-white p-3 space-y-2">
-        <Image
-          src={imgSrc}
-          alt={title}
-          width={30}
-          height={30}
-          blurDataURL={imgSrc}
-          className="aspect-auto mb-1.5"
-          // placeholder='blur'
-        />
+    <Link
+      passHref
+      href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
+      className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/60 selection:mx-auto"
+    >
+      {/* Header + Title + Explanation */}
+      <section className=" flex flex-col justify-between p-3 space-y-2">
+        <div className="flex justify-between items-center">
+          <Image
+            src={imgSrc}
+            alt={title}
+            width={30}
+            height={30}
+            blurDataURL={imgSrc}
+            className="mb-1.5 h-7 w-7"
+            // placeholder='blur'
+          />
+          <ChevronRightIcon className="w-5 h-5 text-zinc-400 stroke-2" />
+        </div>
         <div className="truncate font-semibold text-zinc-700 sm:text-lg">
           {title}
         </div>
 
         <div className="text-zinc-600">{description}</div>
       </section>
-      <cite className="group px-3 py-2 border-t border-zinc-400/60 not-italic bg-zinc-50/20">
-        <a
-          title={href}
-          href={`https://${href}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-block w-fit cursor-pointer items-center text-zinc-600 hover:underline group-hover:text-zinc-800"
-        >
-          <span className="flex items-center">
-            <span className={`text-base`}>{href.slice(4)}</span>
-            {/* External Link Icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className={`h-4 w-4 ml-1  text-zinc-600 group-hover:text-zinc-800 mt-0.5`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1.7}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
-          </span>
-        </a>
-      </cite>
-      <section className="flex flex-col space-y-1.5 border-t border-b border-zinc-400/60 bg-zinc-50/20 px-3 py-2 text-zinc-600 text-sm">
+      {/* Details */}
+      <section className=" flex flex-col space-y-1.5 border-t border-b border-zinc-400/60 px-3 py-2 text-zinc-600 text-sm">
         <article className="flex items-center justify-between">
           <div className="flex w-1/3 items-center justify-between">
             <div>Period</div>
@@ -91,17 +75,19 @@ export default function ExperienceCard({
           <div>{industry}</div>
         </article>
       </section>
-      <section className="bg-zinc-50 px-3 py-2 hover:bg-zinc-100">
-        <Link
-          passHref
-          href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-          className="flex justify-center"
-        >
-          <span className="hover:text-blue-700 hover:underline text-sm text-blue-600">
-            Details
-          </span>
-        </Link>
-      </section>
-    </div>
+      {/* Site Link */}
+      <cite className="group px-3 py-2 not-italic">
+        <span className={`text-base`}>{href.slice(4)}</span>
+      </cite>
+    </Link>
   );
+}
+
+{
+  /* Details  Link
+<section className="px-3 py-2 hover:bg-zinc-100">
+  
+    
+  </Link>
+</section> */
 }

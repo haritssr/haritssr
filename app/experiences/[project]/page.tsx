@@ -1,3 +1,5 @@
+"use client";
+
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
@@ -5,39 +7,24 @@ import { ExperiencesData } from "data/ExperiencesData";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
+import Head from "next/head";
+import { usePathname } from "next/navigation";
+import GlobalNavigation from "@/components/GlobalNavigation";
+import Footer from "@/components/Footer";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = ExperiencesData.map(({ project_name }) => {
+export async function generateStaticParams() {
+  return ExperiencesData.map(({ project_name }) => {
     return {
       params: { project: project_name.toLowerCase().split(" ").join("-") },
     };
   });
+}
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export default function ExperiencesPage({ params }) {
   const project = ExperiencesData.filter(
-    (p) =>
-      p.project_name.toLowerCase().split(" ").join("-") ===
-      context.params?.project
+    (p) => p.project_name.toLowerCase().split(" ").join("-") === params?.project
   )[0];
-
-  return {
-    props: { project },
-  };
-};
-
-import Head from "next/head";
-import { useRouter } from "next/router";
-import GlobalNavigation from "@/components/GlobalNavigation";
-import Footer from "@/components/Footer";
-
-export default function ExperiencesPage({ project }) {
-  const router = useRouter();
+  const router = usePathname();
   const image = "/images/hero.jpg";
   const type = "website";
 
@@ -47,9 +34,7 @@ export default function ExperiencesPage({ project }) {
     <div className="bg-white">
       <Head>
         <title>
-          {router.asPath === "/"
-            ? "Harits Syah"
-            : `${browserTitle} - Harits Syah`}
+          {router === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}
         </title>
         <link rel="icon" href="/Icons/haritssr.svg" />
         <meta name="theme-color" content="#27272a" />
@@ -67,8 +52,6 @@ export default function ExperiencesPage({ project }) {
         <meta name="twitter:image" content={image} />
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
       </Head>
-
-      <GlobalNavigation />
 
       <main className="mx-auto min-h-screen w-full max-w-3xl px-5 xl:px-0">
         <BackButton href="/experiences" name="Experiences" />

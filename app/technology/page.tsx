@@ -1,14 +1,10 @@
-import Layout from "@/components/Layout";
 import { PageTitle } from "@/components/SubTitle";
 import { TechStackData } from "data/TechStackData";
 import { TechnologyCard } from "@/components/TechnologyCard";
 
 export default function TechStackPage() {
   return (
-    <Layout
-      browserTitle="Technology"
-      description="My choosen libraries and framework to build web application"
-    >
+    <>
       <PageTitle title="Technology">
         My choosen libraries and framework to build web application
       </PageTitle>
@@ -21,6 +17,6 @@ export default function TechStackPage() {
           />
         ))}
       </div>
-    </Layout>
+    </>
   );
 }

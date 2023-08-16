@@ -12,8 +12,9 @@ module.exports = {
     "./pages/**/**/*.tsx",
     "./components/*.tsx",
     "./components/**/*.tsx",
-    "./components/**/**/*.tsx",
-    "./components/**/**/**/*.tsx",
+    "./app/**/*.{ts,tsx}",
+    "./app/**/**/*.{ts,tsx}",
+    "./content/**/*.mdx",
   ],
   theme: {
     textIndent: (theme, { negative }) => ({

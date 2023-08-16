@@ -2,12 +2,11 @@ import { ExperiencesData } from "data/ExperiencesData";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { PageTitle } from "@/components/SubTitle";
-import Layout from "@/components/Layout";
 import Link from "next/link";
 
 export default function ExperiencesPage() {
   return (
-    <Layout browserTitle="Experiences" description="Home">
+    <>
       <PageTitle title="Experiences">
         Detail informations on how projects I belong to being handled.
       </PageTitle>
@@ -20,7 +19,7 @@ export default function ExperiencesPage() {
               .split(" ")
               .join("-")}`}
             key={project_name}
-            className="space-y-1 p-4 bg-zinc-50/50 hover:bg-zinc-100 border border-zinc-300 rounded-lg"
+            className="space-y-1 p-4 hover:bg-zinc-50 border border-zinc-300 rounded-lg"
           >
             <div className="flex justify-between">
               <div className="flex items-center space-x-2">
@@ -42,6 +41,6 @@ export default function ExperiencesPage() {
           </Link>
         ))}
       </section>
-    </Layout>
+    </>
   );
 }
