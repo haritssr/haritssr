@@ -1,11 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import { GitHubIcon } from "./Icons";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 export default function GlobalNavigation() {
   return (
-    <nav className="sticky top-0 z-30 border-b border-zinc-300  bg-white/60 saturate-150 backdrop-blur-lg">
-      <div className="mx-auto flex max-w-5xl justify-between px-3 py-2.5 lg:px-0">
+    <nav className="sticky top-0 z-30 border-b border-zinc-200  bg-white/60 saturate-150 backdrop-blur-lg">
+      <div className="mx-auto flex max-w-5xl justify-between items-center px-3 py-2.5 lg:px-0">
         <Link
           href="/"
           className=" text-zinc-800 hover:text-zinc-400"
@@ -32,35 +33,35 @@ export default function GlobalNavigation() {
           <span className="group-hover:text-zinc-400 text-zinc-800">
             Source
           </span>
-          <GitHubIcon className="h-5 w-5 cursor-pointer text-zinc-800 group-hover:text-zinc-400" />
         </a>
       </div>
     </nav>
   );
 }
 
-const links = ["experiences", "experiments", "blog", "technology", "cv"];
+const links = ["experiences", "experiments", "blog", "technology"];
 
 function Destination({ link }: { link: string }) {
-  const router = useRouter();
+  const router = usePathname();
 
   function capitalizeFirstLetter(to: string) {
-    return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
+    if (link === "cv") {
+      return "CV";
+    } else {
+      return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
+    }
   }
 
   let color: string;
 
-  if (router.asPath === `/${link}`) {
+  if (router === `/${link}`) {
     color = "text-blue-700";
   } else {
-    color = "text-zinc-600 hover:text-zinc-800";
+    color = "text-zinc-800 hover:text-zinc-400";
   }
   return (
     <li>
-      <Link
-        className={`${color} text-[15px] leading-[24px]`}
-        href={`${link === "home" ? "/" : link}`}
-      >
+      <Link className={`${color}`} href={`${link === "home" ? "/" : link}`}>
         {capitalizeFirstLetter(link)}
       </Link>
     </li>

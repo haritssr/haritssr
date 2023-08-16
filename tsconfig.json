@@ -5,11 +5,7 @@
     // "noUnusedLocals":true,
     "target": "es5",
     "importHelpers": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -23,15 +19,10 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/Icons": [
-        "components/Icons"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/Icons": ["components/Icons"],
+      "@/styles/*": ["styles/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "incremental": true,
     "plugins": [
@@ -59,9 +50,8 @@
     "pages/experiments/react/store-zustand.js",
     "styles/*.css",
     "styles/*.module.css",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".contentlayer/generated"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

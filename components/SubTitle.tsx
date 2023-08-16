@@ -17,7 +17,9 @@ export function PageTitle({
 }) {
   return (
     <div>
-      <div className="text-4xl font-bold text-zinc-800 mt-16">{title}</div>
+      <div className="text-4xl font-bold text-zinc-800 mt-10 sm:mt-16">
+        {title}
+      </div>
       <div className="mt-4 mb-10 break-words text-zinc-700">{children}</div>
     </div>
   );

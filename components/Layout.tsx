@@ -1,8 +1,10 @@
+"use client";
+
 import Head from "next/head";
 import GlobalNavigation from "./GlobalNavigation";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import Footer from "./Footer";
-import GlobalNavigationMobile from "./GlobalNavigationMobile";
+import GlobalNavigationMobile from "../app/components/GlobalNavigationMobile";
 
 interface LayoutType {
   children: React.ReactNode;
@@ -15,16 +17,14 @@ export default function Layout({
   browserTitle,
   description,
 }: LayoutType) {
-  const router = useRouter();
+  const router = usePathname();
   const image = "/images/hero.jpg";
   const type = "website";
   return (
-    <div className="bg-white">
+    <>
       <Head>
         <title>
-          {router.asPath === "/"
-            ? "Harits Syah"
-            : `${browserTitle} - Harits Syah`}
+          {router === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}
         </title>
         <link rel="icon" href="/Icons/haritssr.svg" />
         <meta name="theme-color" content="#27272a" />
@@ -51,6 +51,6 @@ export default function Layout({
 
       <Footer />
       <GlobalNavigationMobile />
-    </div>
+    </>
   );
 }
