@@ -2,6 +2,9 @@ import GlobalNavigation from "@/components/GlobalNavigation";
 import "../styles/globals.css";
 import Footer from "@/components/Footer";
 import GlobalNavigationMobile from "app/components/GlobalNavigationMobile";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Next.js",
@@ -14,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="">
+    <html lang="en" className={inter.className}>
+      <body>
         <GlobalNavigation />
         <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
           {children}

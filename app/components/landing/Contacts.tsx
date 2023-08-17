@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function Contacts() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-4 md:items-center gap-8 md:gap-5 sm:pt-5 mb-16">
-      <section className="lg:col-span-2 space-y-5 md:mb-0 rounded-md lg:border lg:border-zinc-300 lg:h-full lg:self-center lg:grid">
+    <section className="grid grid-cols-1 lg:grid-cols-4 md:items-center gap-8 md:gap-5 pt-5 mb-16">
+      <section className="lg:col-span-2 space-y-5 md:mb-0 rounded-md lg:border lg:border-zinc-400/60 lg:h-full lg:self-center lg:grid">
         <div className="grid lg:border-white rounded-md lg:border">
           <div className="self-center space-y-2">
             <div className="justify-center w-full flex ">
@@ -42,9 +42,9 @@ export default function Contacts() {
         </div>
       </section>
       {/* lg:pt-2 lg:px-4 */}
-      <section className="lg:col-span-2 lg:border lg:border-zinc-300 rounded-md">
-        <div className="divide-y divide-zinc-300">
-          <div className="grid grid-cols-3 py-2 sm:pl-3.5">
+      <section className="lg:col-span-2 border border-zinc-400/60 rounded-md">
+        <div className="divide-y divide-zinc-400/60">
+          <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-zinc-800 text-tiny sm:text-base">Roles</span>
             <span className=" col-span-2 flex items-center space-x-2">
               <span className="text-zinc-800 text-tiny sm:text-base">
@@ -74,13 +74,13 @@ export default function Contacts() {
             </span>
           </div>
 
-          <div className="grid grid-cols-3 py-2 sm:pl-3.5">
+          <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-white font-medium ">Role</span>
             <span className="text-zinc-800 col-span-2 text-tiny sm:text-base">
               Math Physics Teacher
             </span>
           </div>
-          <div className="grid grid-cols-3 py-2 sm:pl-3.5">
+          <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-zinc-800 text-tiny sm:text-base">At</span>
             <span className="text-zinc-800 col-span-2">
               <cite className="group not-italic">
@@ -113,7 +113,7 @@ export default function Contacts() {
               </cite>
             </span>
           </div>
-          <div className="grid grid-cols-3 py-2 sm:pl-3.5">
+          <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-zinc-800 text-tiny sm:text-base">Email</span>
             <a
               title="Send me an email"
@@ -123,7 +123,7 @@ export default function Contacts() {
               haritssr@gmail.com
             </a>
           </div>
-          <div className="grid grid-cols-3 py-2 sm:pl-3.5">
+          <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-zinc-800 text-tiny sm:text-base">
               Location
             </span>
@@ -137,7 +137,7 @@ export default function Contacts() {
               South Tangerang, Indonesia
             </a>
           </div>
-          <div className="grid grid-cols-3 py-2 sm:pl-3.5">
+          <div className="grid grid-cols-3 py-2 pl-3.5">
             <InternalLink href="/about" name="Details" />
           </div>
         </div>

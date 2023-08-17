@@ -1,5 +1,7 @@
+"use client";
+
 import * as Toast from "@radix-ui/react-toast";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const CopyLinkAllPage = () => {
@@ -25,15 +27,14 @@ const CopyLinkAllPage = () => {
     }
   }
 
-  const router = useRouter();
-  console.log(router.asPath);
+  const router = usePathname();
 
   return (
     <Toast.Provider swipeDirection="right">
       <div
-        className="text-zinc-700 hover:text-blue-600 active:text-blue-400 cursor-pointer select-none"
+        className="text-zinc-700 hover:text-zinc-400 cursor-pointer select-none"
         onClick={() => {
-          handleCopy(`haritssr.vercel.app${router.asPath}`);
+          handleCopy(`haritssr.vercel.app${router}`);
           setOpen(false);
           window.clearTimeout(timerRef.current);
           timerRef.current = window.setTimeout(() => {
@@ -54,7 +55,7 @@ const CopyLinkAllPage = () => {
           Link copied to clipboard
         </Toast.Title>
         <Toast.Description asChild>
-          <div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.vercel.app${router.asPath}`}</div>
+          <div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.vercel.app${router}`}</div>
         </Toast.Description>
       </Toast.Root>
       <Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />

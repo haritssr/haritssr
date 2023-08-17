@@ -16,7 +16,7 @@ export default function Home() {
         <Services />
         <HarisLabBanner />
       </div> */}
-      <div className="space-y-16">
+      <div className="space-y-16 sm:space-y-20">
         <Experiences />
         <Experiments />
         <Technology />

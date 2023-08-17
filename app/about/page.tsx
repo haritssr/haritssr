@@ -100,7 +100,6 @@ export default function About() {
           </section>
 
           <section className="-mt-[1px] p-4 border border-zinc-300 rounded-lg">
-            <Section name="Experience" />
             <section className="space-y-6">
               {ExperiencesData.map((project) => (
                 <div key={project.project_name}>
@@ -144,7 +143,7 @@ export default function About() {
                   </div>
                 </div>
               ))}
-              <Section name="WoNon rking  xperience" />
+              <Section name="Non Working Experience" />
               <div className="">
                 <div className="flex items-center space-x-2">
                   <Image

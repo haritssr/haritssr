@@ -4,13 +4,10 @@ import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import { ExperiencesData } from "data/ExperiencesData";
-import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
-import GlobalNavigation from "@/components/GlobalNavigation";
-import Footer from "@/components/Footer";
 
 export async function generateStaticParams() {
   return ExperiencesData.map(({ project_name }) => {
@@ -56,7 +53,7 @@ export default function ExperiencesPage({ params }) {
       <main className="mx-auto min-h-screen w-full max-w-3xl px-5 xl:px-0">
         <BackButton href="/experiences" name="Experiences" />
         {/* Title */}
-        <section className="mt-10 mb-8 sm:mt-16 sm:mb-12 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-lg bg-gradient-to-br from-zinc-50 to-zinc-100 shadow border border-zinc-300">
+        <section className="mt-10 mb-8 sm:mt-16 sm:mb-12 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
           <div className="">
             <div className="text-2xl sm:text-3xl break-words font-bold ">
               {project.project_name}
@@ -70,7 +67,7 @@ export default function ExperiencesPage({ params }) {
             alt={project.project_name}
             height="40"
             width="40"
-            className="h-12 w-12 sm:w-16 sm:h-16"
+            className="h-12 w-12"
             blurDataURL={project.about_client.logo_src}
             // placeholder='blur'
           />
@@ -181,8 +178,6 @@ export default function ExperiencesPage({ params }) {
           </Suspense>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
