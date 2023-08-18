@@ -35,7 +35,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
     <Link
       passHref
       href={`${to === "/home" ? "/" : to}`}
-      className="block w-1/5"
+      className="block w-1/5 active:scale-95"
     >
       <div className="flex flex-col items-center justify-center py-[5px]">
         <svg
