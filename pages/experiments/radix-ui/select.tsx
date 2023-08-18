@@ -3,7 +3,7 @@ import SubTitle from '@/components/SubTitle';
 
 export default function ExportedSelect() {
 	return (
-		<LayoutToExperiments title='Select' domain='Radix'>
+		<LayoutToExperiments title='Select' domain='Radix UI'>
 			<SubTitle>
 				Displays a list of options for the user to pick from—triggered by a button.
 			</SubTitle>
