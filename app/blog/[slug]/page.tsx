@@ -23,8 +23,8 @@ export async function generateMetadata({
     slug,
   } = post;
   const ogImage = image
-    ? `https://leerob.io${image}`
-    : `https://leerob.io/og?title=${title}`;
+    ? `https://haritssr.vercel.app${image}`
+    : `https://haritssr.vercel.app/og?title=${title}`;
 
   return {
     title,
