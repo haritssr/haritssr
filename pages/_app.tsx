@@ -1,4 +1,3 @@
-import { IdProvider } from "@radix-ui/react-id";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -18,11 +17,9 @@ export default function MyApp({
     <QueryClientProvider client={queryClient}>
       {/*<React.StrictMode> //disabled for react-dnd preview bug for now */}
       <DndProvider backend={HTML5Backend}>
-        <IdProvider>
           <main className={inter.className}>
             <Component {...pageProps} />
           </main>
-        </IdProvider>
       </DndProvider>
     </QueryClientProvider>
   );
