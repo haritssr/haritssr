@@ -4,8 +4,6 @@
 // It is used in all experiments routes, for displaying and routing
 // Every pages should be .tsx extentions, if not, <source/> in <LayoutToExperiments/> won't work
 
-import TailwindCSS from "pages/experiments/tailwind-css";
-
 export const ExperimentsData = [
   {
     id: 1,
@@ -151,11 +149,9 @@ export const ExperimentsData = [
       "Alert Dialog",
       "Checkbox",
       "Collapsible",
-      "Context Menu",
       "Dialog",
       "Dropdown Menu",
       "Hover Card",
-      "Navigation Menu",
       "Popover",
       "Radio Group",
       "Scroll Area",

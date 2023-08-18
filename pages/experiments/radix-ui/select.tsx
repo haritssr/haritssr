@@ -1,7 +1,5 @@
-import React from 'react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import SubTitle from '@/components/SubTitle';
-import * as Select from '@radix-ui/react-select';
 
 export default function ExportedSelect() {
 	return (
