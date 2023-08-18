@@ -1,4 +1,6 @@
-module.exports = {
+const { withContentlayer } = require("next-contentlayer");
+
+const nextConfig = {
   reactStrictMode: false,
   images: {
     formats: ["image/avif", "image/webp"],
@@ -12,3 +14,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = withContentlayer(nextConfig);

@@ -1,43 +1,27 @@
+"use client";
+
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import { ExperiencesData } from "data/ExperiencesData";
-import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
+import Head from "next/head";
+import { usePathname } from "next/navigation";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = ExperiencesData.map(({ project_name }) => {
+export async function generateStaticParams() {
+  return ExperiencesData.map(({ project_name }) => {
     return {
       params: { project: project_name.toLowerCase().split(" ").join("-") },
     };
   });
+}
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export default function ExperiencesPage({ params }) {
   const project = ExperiencesData.filter(
-    (p) =>
-      p.project_name.toLowerCase().split(" ").join("-") ===
-      context.params?.project
+    (p) => p.project_name.toLowerCase().split(" ").join("-") === params?.project
   )[0];
-
-  return {
-    props: { project },
-  };
-};
-
-import Head from "next/head";
-import { useRouter } from "next/router";
-import GlobalNavigation from "@/components/GlobalNavigation";
-import Footer from "@/components/Footer";
-
-export default function ExperiencesPage({ project }) {
-  const router = useRouter();
+  const router = usePathname();
   const image = "/images/hero.jpg";
   const type = "website";
 
@@ -47,9 +31,7 @@ export default function ExperiencesPage({ project }) {
     <div className="bg-white">
       <Head>
         <title>
-          {router.asPath === "/"
-            ? "Harits Syah"
-            : `${browserTitle} - Harits Syah`}
+          {router === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}
         </title>
         <link rel="icon" href="/Icons/haritssr.svg" />
         <meta name="theme-color" content="#27272a" />
@@ -68,12 +50,10 @@ export default function ExperiencesPage({ project }) {
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
       </Head>
 
-      <GlobalNavigation />
-
       <main className="mx-auto min-h-screen w-full max-w-3xl px-5 xl:px-0">
         <BackButton href="/experiences" name="Experiences" />
         {/* Title */}
-        <section className="mt-10 mb-8 sm:mt-16 sm:mb-12 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-lg bg-gradient-to-br from-zinc-50 to-zinc-100 shadow border border-zinc-300">
+        <section className="mt-10 mb-8 sm:mt-16 sm:mb-12 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
           <div className="">
             <div className="text-2xl sm:text-3xl break-words font-bold ">
               {project.project_name}
@@ -87,7 +67,7 @@ export default function ExperiencesPage({ project }) {
             alt={project.project_name}
             height="40"
             width="40"
-            className="h-12 w-12 sm:w-16 sm:h-16"
+            className="h-12 w-12"
             blurDataURL={project.about_client.logo_src}
             // placeholder='blur'
           />
@@ -198,8 +178,6 @@ export default function ExperiencesPage({ project }) {
           </Suspense>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

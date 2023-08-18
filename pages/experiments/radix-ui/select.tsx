@@ -1,11 +1,9 @@
-import React from 'react';
 import LayoutToExperiments from '@/components/LayoutToExperiments';
 import SubTitle from '@/components/SubTitle';
-import * as Select from '@radix-ui/react-select';
 
 export default function ExportedSelect() {
 	return (
-		<LayoutToExperiments title='Select' domain='Radix'>
+		<LayoutToExperiments title='Select' domain='Radix UI'>
 			<SubTitle>
 				Displays a list of options for the user to pick from—triggered by a button.
 			</SubTitle>

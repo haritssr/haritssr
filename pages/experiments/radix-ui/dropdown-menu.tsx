@@ -42,10 +42,10 @@ export default function ExportedDropdownMenu() {
 							<DropdownMenu.Item className={item}>Option 2</DropdownMenu.Item>
 							<DropdownMenu.Item className={item}>Option 3</DropdownMenu.Item>
 							<DropdownMenu.Root>
-								<DropdownMenu.TriggerItem className={`${item} flex items-center justify-between`}>
+								<DropdownMenu.Trigger className={`${item} flex items-center justify-between`}>
 									<div>Arrage by</div>
 									<ChevronRightIcon className='h-3.5 w-3.5' strokeWidth={2} />
-								</DropdownMenu.TriggerItem>
+								</DropdownMenu.Trigger>
 								<DropdownMenu.Content className='divide-y divide-gray-800 border border-zinc-800 rounded-md overflow-hidden'>
 									<DropdownMenu.Item className={item}>List view</DropdownMenu.Item>
 									<DropdownMenu.Item className={item}>Details View</DropdownMenu.Item>
