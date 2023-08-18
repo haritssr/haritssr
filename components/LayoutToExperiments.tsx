@@ -7,6 +7,7 @@ import { useInView } from "react-intersection-observer";
 import Footer from "./Footer";
 import GlobalNavigation from "./GlobalNavigation";
 import { GitHubIcon } from "./Icons";
+import GlobalNavigationMobile from "app/components/GlobalNavigationMobile";
 
 interface LayoutToExperimentsType {
   children: React.ReactNode;
@@ -54,7 +55,7 @@ export default function LayoutToExperiments({
           <section
             className={`sticky -top-0 sm:top-[44.5px] border-b ${
               inView
-                ? "border-zinc-300"
+                ? "border-zinc-200"
                 : "border-b bg-white/60 saturate-150 backdrop-blur-lg"
             } z-40 mb-5 bg-white py-2.5 sm:border-none`}
           >
@@ -79,6 +80,7 @@ export default function LayoutToExperiments({
       </main>
 
       <Footer />
+      <GlobalNavigationMobile/>
     </>
   );
 }
