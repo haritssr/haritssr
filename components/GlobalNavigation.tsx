@@ -7,6 +7,7 @@ export default function GlobalNavigation() {
   return (
     <nav className="sticky top-0 z-30 border-b border-zinc-200  bg-white/60 saturate-150 backdrop-blur-lg">
       <div className="mx-auto flex max-w-5xl justify-between items-center px-3 py-2.5 lg:px-0">
+        {/* Harits Syah */}
         <Link
           href="/"
           className=" text-zinc-800 hover:text-zinc-400"
@@ -15,6 +16,7 @@ export default function GlobalNavigation() {
           Harits Syah
         </Link>
 
+        {/* Links */}
         <div className="hidden sm:block">
           <ul className="flex space-x-10">
             {links.map((link) => {
@@ -23,6 +25,7 @@ export default function GlobalNavigation() {
           </ul>
         </div>
 
+        {/* Source to GitHub */}
         <a
           className="flex items-center space-x-2 group"
           title="Whole site source code"
