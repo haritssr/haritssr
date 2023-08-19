@@ -19,10 +19,14 @@ export default function GlobalNavigationMobile() {
 
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 	const router = usePathname();
+	const CurrentPageBaseRoute = router?.split("/")[1];
+
 	let color: string;
 	if (router === to) {
-		color = "text-blue-600";
+		color = "text-blue-600/90";
 	} else if (router === "/" && to === "/home") {
+		color = "text-blue-600/90";
+	} else if (CurrentPageBaseRoute === to.substring(1)) {
 		color = "text-blue-600/90";
 	} else {
 		color = "text-zinc-500";
