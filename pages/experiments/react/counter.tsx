@@ -1,12 +1,12 @@
-import LayoutToExperiments from '@/components/LayoutToExperiments';
-import SubTitle from '@/components/SubTitle';
-import { useCallback, useEffect, useState } from 'react';
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
+import { useCallback, useEffect, useState } from "react";
 
 function formatTime(second: number) {
 	const minute = Math.floor(second / 60);
 	second = second % 60;
 
-	return (minute + '').padStart(2, '0') + ':' + (second + '').padStart(2, '0');
+	return (minute + "").padStart(2, "0") + ":" + (second + "").padStart(2, "0");
 }
 
 export default function Counter() {
@@ -15,7 +15,7 @@ export default function Counter() {
 	useEffect(() => {
 		if (!play) return;
 		const interval = setInterval(() => {
-			setSecond(prev => prev + 1);
+			setSecond((prev) => prev + 1);
 		}, 100);
 		return () => {
 			clearInterval(interval);
@@ -23,7 +23,7 @@ export default function Counter() {
 	}, [play]);
 
 	const onToggle = useCallback(() => {
-		setPlay(play => !play);
+		setPlay((play) => !play);
 	}, []);
 	const onReset = useCallback(() => {
 		setSecond(0);
@@ -31,18 +31,24 @@ export default function Counter() {
 	}, []);
 
 	return (
-		<LayoutToExperiments domain='React' title='Counter'>
+		<LayoutToExperiments domain="React" title="Counter">
 			<SubTitle>Counter</SubTitle>
 			<div>{formatTime(second)}</div>
 			<div>{second}</div>
-			<div onClick={onToggle} className='cursor-pointer select-none hover:text-blue-600'>
+			<div
+				onClick={onToggle}
+				className="cursor-pointer select-none hover:text-action"
+			>
 				{play
-					? 'Stop'
+					? "Stop"
 					: play === false && second > 0
-					? 'Continue'
-					: play === false && second === 0 && 'Start'}
+					? "Continue"
+					: play === false && second === 0 && "Start"}
 			</div>
-			<div onClick={onReset} className='cursor-pointer select-none hover:text-blue-600'>
+			<div
+				onClick={onReset}
+				className="cursor-pointer select-none hover:text-action"
+			>
 				Reset
 			</div>
 		</LayoutToExperiments>
