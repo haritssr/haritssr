@@ -28,15 +28,15 @@ export function PageTitle({
 		return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
 	}
 
-	let router = usePathname() as string;
+	let pathname = usePathname() as string;
 	return (
 		<div>
 			<div
 				className={`${
 					inView ? "hidden" : "block sm:hidden"
-				} sticky top-[44.5px] border-b bg-white/70 saturate-150 backdrop-blur-lg py-2.5 z-20 -mx-6 sm:-mx-0 px-3 sm:px-0 text-center font-semibold`}
+				} sticky top-[44.5px] border-b bg-white/80 saturate-150 backdrop-blur-lg py-2.5 z-20 -mx-6 sm:-mx-0 px-3 sm:px-0 text-center font-semibold`}
 			>
-				{capitalizeFirstLetter(router)}
+				{capitalizeFirstLetter(pathname)}
 			</div>
 			<div
 				ref={ref}
