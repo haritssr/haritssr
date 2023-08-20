@@ -5,7 +5,7 @@ import { PageTitle } from "@/components/SubTitle";
 export default function DesignSystem() {
 	return (
 		<PageTitle
-			title="Pure Design Systems"
+			title="Pure Design System"
 			description={
 				<>
 					This design system used in{" "}
