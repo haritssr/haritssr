@@ -5,11 +5,12 @@ import { PageTitle } from "@/components/SubTitle";
 export default function DesignSystem() {
 	return (
 		<PageTitle
-			title="Design Systems"
+			title="Pure Design Systems"
 			description={
 				<>
 					This design system used in{" "}
-					<ExternalLink name="haritssr.com" href="haritssr.com" /> and{" "}
+					<ExternalLink name="haritssr.com" href="haritssr.com" />,
+					<ExternalLink name="Haris Studio" href="harisstudio.com" /> and{" "}
 					<ExternalLink name="Haris Lab" href="harislab.com" />
 				</>
 			}
