@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export default function GlobalNavigation() {
 	return (
-		<nav className="sticky top-0 z-30 border-b border-zinc-200  bg-white/60 saturate-150 backdrop-blur-lg">
+		<nav className="sticky top-0 z-30 border-b border-zinc-200  bg-white/80 saturate-150 backdrop-blur-lg">
 			<div className="mx-auto flex max-w-5xl justify-between items-center px-3 py-2.5 lg:px-0">
 				{/* Harits Syah */}
 				<Link
@@ -45,9 +45,9 @@ export default function GlobalNavigation() {
 const links = ["experiences", "experiments", "blog", "technology", "about"];
 
 function Destination({ link }: { link: string }) {
-	const router = usePathname();
+	const pathname = usePathname();
 
-	const CurrentPageBaseRoute = router?.split("/")[1];
+	const CurrentPageBaseRoute = pathname?.split("/")[1];
 
 	function capitalizeFirstLetter(to: string) {
 		return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
@@ -55,7 +55,7 @@ function Destination({ link }: { link: string }) {
 
 	let color: string;
 
-	if (router === `/${link}`) {
+	if (pathname === `/${link}`) {
 		color = "text-blue-700";
 	} else if (CurrentPageBaseRoute === link) {
 		color = "text-blue-700";

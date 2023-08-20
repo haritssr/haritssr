@@ -7,7 +7,7 @@ import { TitleAndPathData } from "data/TitleAndPathData";
 
 export default function GlobalNavigationMobile() {
 	return (
-		<div className="sticky bottom-0 block  w-full border-t border-zinc-300 bg-white/70 saturate-150 backdrop-blur-lg sm:hidden">
+		<div className="sticky bottom-0 block  w-full border-t border-zinc-300 bg-white/80 saturate-150 backdrop-blur-lg sm:hidden">
 			<div className="flex w-full items-center ">
 				{TitleAndPathData.map(({ title, path }) => (
 					<IconWrapper key={title} to={`/${title}`} path={path} />
@@ -18,16 +18,16 @@ export default function GlobalNavigationMobile() {
 }
 
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
-	const router = usePathname();
-	const CurrentPageBaseRoute = router?.split("/")[1];
+	const pathname = usePathname();
+	const CurrentPageBaseRoute = pathname?.split("/")[1];
 
 	let color: string;
-	if (router === to) {
-		color = "text-blue-600/90";
-	} else if (router === "/" && to === "/home") {
-		color = "text-blue-600/90";
+	if (pathname === to) {
+		color = "text-action";
+	} else if (pathname === "/" && to === "/home") {
+		color = "text-action";
 	} else if (CurrentPageBaseRoute === to.substring(1)) {
-		color = "text-blue-600/90";
+		color = "text-action";
 	} else {
 		color = "text-zinc-500";
 	}
