@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Mdx } from "app/components/mdx";
 import { allBlogs } from ".contentlayer/generated";
-// import { getTweets } from "lib/twitter";
 import Balancer from "react-wrap-balancer";
-import Link from "next/link";
-// import { getViewsCount } from "lib/metrics";
+import BackButton from "@/components/BackButton";
 
 export async function generateMetadata({
 	params,
@@ -89,9 +87,7 @@ export default function Blog({ params }) {
 	return (
 		<section className="max-w-2xl mx-auto py-20">
 			<div className="mb-5">
-				<Link href="/blog" className="text-action hover:text-blue-400">
-					All Articles
-				</Link>
+				<BackButton href="/blog" name="All articles" />
 			</div>
 			<script type="application/ld+json" suppressHydrationWarning>
 				{JSON.stringify(post.structuredData)}
