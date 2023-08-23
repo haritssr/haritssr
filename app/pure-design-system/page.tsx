@@ -18,6 +18,12 @@ import InternalLink from "@/components/InternalLink";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import ExplanationList from "@/components/ExplanationList";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Pure Design System - Harits Syah",
+	description: "Design System by Harits Syah",
+};
 
 export default function DesignSystem() {
 	const [pressed, setPressed] = useState(false);
@@ -343,7 +349,7 @@ export default function DesignSystem() {
 			</section>
 			<div className="mt-10" />
 			<Section name="Figma Design" />
-			{/* <div className="mt-5 space-y-20">
+			<div className="mt-5 space-y-20">
 				<iframe
 					className="border w-full min-h-screen"
 					width="800"
@@ -351,7 +357,7 @@ export default function DesignSystem() {
 					src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3DwxLQxcZHLYNHFvrj-1"
 					allowFullScreen
 				></iframe>
-			</div> */}
+			</div>
 		</PageTitle>
 	);
 }
