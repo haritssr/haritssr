@@ -18,12 +18,6 @@ import InternalLink from "@/components/InternalLink";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import ExplanationList from "@/components/ExplanationList";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-	title: "Pure Design System - Harits Syah",
-	description: "Design System by Harits Syah",
-};
 
 export default function DesignSystem() {
 	const [pressed, setPressed] = useState(false);
