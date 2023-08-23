@@ -9,7 +9,7 @@ export default function DesignSystem() {
 			className=""
 			explanation="User interface components library and guidelines. Used in haritssr.com, harisstudio.com, and harislab.com"
 		>
-			<InternalLink name="Take a look" href="/design-system" />
+			<InternalLink name="Take a look" href="/pure-design-system" />
 		</Wrapper>
 	);
 }

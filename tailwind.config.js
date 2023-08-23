@@ -13,7 +13,6 @@ module.exports = {
 		"./components/*.tsx",
 		"./components/**/*.tsx",
 		"./app/**/*.{ts,tsx}",
-		"./app/**/**/*.{ts,tsx}",
 		"./content/**/*.mdx",
 	],
 	theme: {
@@ -50,6 +49,7 @@ module.exports = {
 			},
 			scale: {
 				101: "1.01",
+				98: "0.98",
 			},
 		},
 	},
