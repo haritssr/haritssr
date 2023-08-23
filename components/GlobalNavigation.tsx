@@ -42,7 +42,14 @@ export default function GlobalNavigation() {
 	);
 }
 
-const links = ["experiences", "experiments", "blog", "technology", "about"];
+const links = [
+	"experiences",
+	"experiments",
+	"blog",
+	"technology",
+	"pure",
+	"about",
+];
 
 function Destination({ link }: { link: string }) {
 	const pathname = usePathname();
@@ -67,7 +74,13 @@ function Destination({ link }: { link: string }) {
 		<li>
 			<Link
 				className={`${color}`}
-				href={`${link === "home" ? "/" : `/${link}`}`}
+				href={`${
+					link === "home"
+						? "/"
+						: link === "pure"
+						? "/pure-design-system"
+						: `/${link}`
+				}`}
 				onClick={() => console.log(link)}
 			>
 				{capitalizeFirstLetter(link)}

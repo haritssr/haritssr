@@ -68,7 +68,7 @@ export default function LayoutToExperiments({
 						<div className="font-semibold px-5 py-2 sticky top-[45px] bg-white border-b">
 							{domain}
 						</div>
-						<div className="flex flex-col space-y-2 p-5">
+						<div className="flex flex-col space-y-1 py-5 px-3">
 							{links.map((a) => {
 								const destination = a.toLowerCase().split(" ").join("-");
 								return (
@@ -80,9 +80,9 @@ export default function LayoutToExperiments({
 										key={a}
 										className={`${
 											lastSegment === destination
-												? "text-action"
-												: "text-zinc-700"
-										} hover:underline`}
+												? "text-white bg-action"
+												: "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
+										}  px-2 py-1 rounded-md`}
 									>
 										{a}
 									</Link>

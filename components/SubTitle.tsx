@@ -25,7 +25,11 @@ export function PageTitle({
 	const { ref, inView } = useInView({ rootMargin: "-90px" });
 
 	function capitalizeFirstLetter(to: string) {
-		return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
+		return to
+			.substring(1)
+			.split("-")
+			.map((link) => link.charAt(0).toUpperCase() + link.slice(1))
+			.join(" ");
 	}
 
 	let pathname = usePathname() as string;
