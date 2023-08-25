@@ -13,7 +13,7 @@ export default function GlobalNavigation() {
 				<div className="flex items-center space-x-2 group">
 					<Image
 						alt="Harits Syah"
-						src="/icons/haritssr.svg"
+						src="/Icons/haritssr.svg"
 						height={20}
 						width={20}
 						priority
