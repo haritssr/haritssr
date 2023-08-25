@@ -90,11 +90,11 @@ export default function LayoutToExperiments({
 							})}
 						</div>
 					</div>
-					<div className="sm:col-span-3 border-t border-r border-b">
+					<div className="sm:col-span-3 sm:border-t border-r border-b">
 						<article className="sm:px-0">
 							{/* SubNavigation */}
 							<section
-								className={`sticky -top-0 sm:top-[44.5px] border-b ${
+								className={`sticky top-0 sm:top-[44.5px] border-b ${
 									inView
 										? "border-zinc-200"
 										: "border-b bg-white/80 saturate-150 backdrop-blur-lg"
