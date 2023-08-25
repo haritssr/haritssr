@@ -9,20 +9,20 @@ import HarisLabBanner from "app/components/landing/HarisLabBanner";
 import "../styles/globals.css";
 
 export default function Home() {
-  return (
-    <section className="mt-5 sm:mt-10">
-      <Contacts />
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 mb-16">
+	return (
+		<section className="mt-5 sm:mt-10">
+			<Contacts />
+			{/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 mb-16">
         <Services />
         <HarisLabBanner />
       </div> */}
-      <div className="space-y-16 sm:space-y-20">
-        <Experiences />
-        <Experiments />
-        <Technology />
-        <DesignSystem />
-        <Blog />
-      </div>
-    </section>
-  );
+			<div className="space-y-16 sm:space-y-20">
+				<Experiences />
+				<Experiments />
+				<Blog />
+				<Technology />
+				<DesignSystem />
+			</div>
+		</section>
+	);
 }
