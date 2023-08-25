@@ -63,6 +63,13 @@ export default function DesignSystem() {
 					familiarity.
 				</li>
 				<li>This design system is accesible at mobile and desktop web.</li>
+				<li>
+					You can see the component code{" "}
+					<ExternalLink
+						href="https://github.com/haritssr/haritssr/tree/main/components"
+						name="here"
+					/>
+				</li>
 			</ExplanationList>
 			<div className="mb-10" />
 			<Section name="UI Components" />
