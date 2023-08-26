@@ -29,6 +29,7 @@ export default function ExperiencesPage() {
 										alt={project_name}
 										height={18}
 										width={18}
+										className="h-[18px] w-[18px]"
 									/>
 								</div>
 
