@@ -52,7 +52,7 @@ export default function RootLayout({
 		<html lang="en" className={inter.className}>
 			<body>
 				<GlobalNavigation />
-				<main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
+				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
 					{children}
 				</main>
 				<Footer />
