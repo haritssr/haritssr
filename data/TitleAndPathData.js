@@ -51,7 +51,7 @@ export const TitleAndPathData = [
 	},
 
 	{
-		title: "pureDS",
+		title: "pure",
 		path: (
 			<>
 				<path
