@@ -51,7 +51,9 @@ export default function ExperiencesPage({ params }) {
 			</Head>
 
 			<main className="mx-auto min-h-screen w-full max-w-3xl">
-				<BackButton href="/experiences" name="All Experiences" />
+				<div className="mt-5 sm:mt-10">
+					<BackButton href="/experiences" name="All Experiences" />
+				</div>
 				{/* Title */}
 				<section className="mt-10 mb-8 sm:mt-16 sm:mb-12 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
 					<div className="">

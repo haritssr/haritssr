@@ -54,7 +54,7 @@ export default function About() {
 								<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
 									{section.points.map((point) => (
 										<li key={point} className="text-zinc-500 py-1.5">
-											{point.startsWith("https://") ? (
+											{point.startsWith("https://www.") ? (
 												<a
 													title={point}
 													className="hover:underline hover:text-zinc-800"
@@ -63,6 +63,16 @@ export default function About() {
 													href={point}
 												>
 													{point.slice(12)}
+												</a>
+											) : point.startsWith("https://") ? (
+												<a
+													title={point}
+													className="hover:underline hover:text-zinc-800"
+													target="_blank"
+													rel="noreferrer noopener"
+													href={point}
+												>
+													{point.slice(8)}
 												</a>
 											) : point.includes("@") ? (
 												<a
@@ -137,7 +147,7 @@ export default function About() {
 										<div>
 											<ExternalLink
 												href={project.about_client.website}
-												name={project.about_client.website}
+												name={project.about_client.website.slice(8)}
 											/>
 										</div>
 									</div>

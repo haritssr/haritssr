@@ -1,7 +1,7 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
-import React from "react";
+import React, { Suspense } from "react";
 import { PageTitle } from "@/components/SubTitle";
 import * as Toggle from "@radix-ui/react-toggle";
 import { useState } from "react";
@@ -18,6 +18,8 @@ import InternalLink from "@/components/InternalLink";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import ExplanationList from "@/components/ExplanationList";
+import BackButton from "@/components/BackButton";
+import { truncate } from "fs";
 
 export default function DesignSystem() {
 	const [pressed, setPressed] = useState(false);
@@ -38,6 +40,13 @@ export default function DesignSystem() {
 	}
 	// -----------------------------------------------------
 
+	const [loading, setLoading] = useState<boolean>(false);
+	function handleClick() {
+		// setTimeout(() => {
+		// 	setLoading(false);
+		// }, 2000);
+		setLoading(!loading);
+	}
 	return (
 		<PageTitle
 			title="Pure Design System"
@@ -53,16 +62,34 @@ export default function DesignSystem() {
 			<Section name="Design Principles" />
 			<ExplanationList>
 				<li>
-					Mimicing the traditional (most cases) environment when student solving
-					math and physis problem, like in paper, pencil, white board, pencil
-					cases, etc, especially in Analysis (MAKI) process.
+					What is Design System? Design System is a set of specific rules of
+					design principles or opiniated design that transcendence to the user
+					interface that affect user experience as a whole.
 				</li>
+				<li>
+					Pure design system mimicing the traditional (most cases) environment
+					when student solving math and physis problem, like in paper, pencil,
+					white board, pencil cases, etc, especially in Analysis (MAKI) process.
+				</li>
+				<li>Why called &quot;Pure&quot;?</li>
+				<ul className="block list-outside list-disc space-y-1 pl-4">
+					<li>Well, honestly, I have no idea on naming.</li>
+					<li>
+						Blue, black, gray, and white seems pure and minimalist color to me,
+						and it actually my four favourite colors.
+					</li>
+					<li>
+						The word &quot;Pure&quot; also not a long word so it can fit on the
+						TabBars (bottom navigation on mobile-like apps) and top navigation
+						bar at desktop).
+					</li>
+				</ul>
 				<li>
 					Strive to only using basic color and UI components provided in design
 					system to accelerate development, maintaining consistency, and
 					familiarity.
 				</li>
-				<li>This design system is accesible at mobile and desktop web.</li>
+				<li>This design system is accessible at mobile and desktop web.</li>
 				<li>
 					You can see the component code{" "}
 					<ExternalLink
@@ -130,7 +157,7 @@ export default function DesignSystem() {
 				<Box title="Popover">
 					<Popover.Root>
 						<Popover.Trigger>
-							<div className="w-auto rounded px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white active:ring-offset-1 active:ring-2 active:ring-blue-400">
+							<div className="w-auto rounded px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400">
 								Show Popover
 							</div>
 						</Popover.Trigger>
@@ -150,21 +177,21 @@ export default function DesignSystem() {
 					</Popover.Root>
 				</Box>
 				<Box title="Table">
-					<table className="w-[200px] border border-zinc-300 divide-y divide-zinc-300 text-zinc-800 ">
+					<table className="w-[200px] sm:w-[300px] border border-zinc-300 divide-y divide-zinc-300 text-zinc-800">
 						<thead>
-							<tr className="bg-zinc-50 border border-zinc-300 divide-x divide-zinc-300 ">
+							<tr className="bg-zinc-50 border border-zinc-300 divide-x divide-zinc-300">
 								<th className="font-medium">Title</th>
 								<th className="font-medium">Title</th>
 								<th className="font-medium">Title</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="divide-x divide-zinc-300">
+							<tr className="divide-x divide-zinc-300 border-b border">
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
 							</tr>
-							<tr className="divide-x divide-zinc-300">
+							<tr className="divide-x divide-zinc-300 border-b border">
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
@@ -219,7 +246,7 @@ export default function DesignSystem() {
 				<Box title="Toast">
 					<Toast.Provider swipeDirection="right">
 						<button
-							className="text-white bg-action rounded px-3 py-1.5 hover:bg-blue-700 active:ring-offset-1 active:ring-2 active:ring-blue-400"
+							className="text-white bg-action rounded px-3 py-1.5 hover:bg-blue-700 active:ring-offset-1 active:ring-1 active:ring-blue-400"
 							onClick={() => {
 								setOpen(false);
 								window.clearTimeout(timerRef.current);
@@ -233,7 +260,7 @@ export default function DesignSystem() {
 						</button>
 
 						<Toast.Root
-							className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-3 px-4 grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"
+							className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-3 pl-4 pr-6 grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"
 							open={open}
 							onOpenChange={setOpen}
 						>
@@ -247,7 +274,9 @@ export default function DesignSystem() {
 									</div>
 								</Toast.Description>
 							</div>
-							<Toast.Close>Close</Toast.Close>
+							<Toast.Close className="text-action hover:text-blue-400">
+								OK
+							</Toast.Close>
 						</Toast.Root>
 						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
 					</Toast.Provider>
@@ -287,17 +316,28 @@ export default function DesignSystem() {
 					</Tooltip.Provider>
 				</Box>
 				<Box title="Button: Primary">
-					<button className="px-3 py-1 bg-action text-white hover:bg-blue-700 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400">
+					<button className="px-3 py-1 bg-action text-white hover:bg-blue-700 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
 						Button
 					</button>
 				</Box>
+				<Box title="Button: Loading">
+					<button
+						className="px-3 py-1 bg-action text-white hover:bg-blue-700 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none"
+						onClick={handleClick}
+					>
+						{loading === true ? "Loading..." : "Button"}
+					</button>
+				</Box>
 				<Box title="Button: Secondary">
-					<button className="px-3 py-1 bg-zinc-100 border border-zinc-300 text-zinc-800 font-medium hover:bg-zinc-200/70 rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500">
+					<button className="px-3 py-1 bg-zinc-100 border border-zinc-300 text-zinc-800 font-medium hover:bg-zinc-200/70 rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none">
 						Button
 					</button>
 				</Box>
 				<Box title="Button: Disabled">
-					<button className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium cursor-not-allowed rounded">
+					<button
+						className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium cursor-not-allowed rounded select-none"
+						disabled
+					>
 						Button
 					</button>
 				</Box>
@@ -340,6 +380,13 @@ export default function DesignSystem() {
 						placeholder="Type something..."
 					/>
 				</Box>
+				<Box title="Input: Search">
+					<input
+						type="search"
+						className="shadow border border-zinc-300"
+						placeholder="Search"
+					/>
+				</Box>
 				<Box title="Input: Number">
 					<input
 						type="number"
@@ -347,18 +394,42 @@ export default function DesignSystem() {
 						placeholder="0"
 					/>
 				</Box>
+				<Box title="Box">
+					<div className="border border-zinc-400/50 rounded overflow-hidden w-[200px] sm:w-[300px]">
+						<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
+							Title
+						</div>
+						<div className="h-32 p-5 flex items-center justify-center">
+							Content
+						</div>
+					</div>
+				</Box>
+				<Box title="Text Area">
+					<textarea
+						placeholder="Write something"
+						className="border border-zinc-300 p-2 focus:outline-1 focus:outline-action rounded-md w-[200px] sm:w-[300px]"
+					/>
+				</Box>
+				<Box title="Breadcrumbs">
+					<span className="text-zinc-500">/main/trunk/leaf</span>
+				</Box>
+				<Box title="Back Button">
+					<BackButton href="/" name="Previous Page" />
+				</Box>
 			</section>
 			<div className="mt-10" />
 			<Section name="Figma Design" />
-			<div className="mt-5 space-y-20">
-				<iframe
-					className="border w-full min-h-screen"
-					width="800"
-					height="450"
-					src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3DwxLQxcZHLYNHFvrj-1"
-					allowFullScreen
-				></iframe>
-			</div>
+			<Suspense fallback={`"Loading...`}>
+				<div className="mt-5 space-y-20">
+					<iframe
+						className="border w-full min-h-screen"
+						width="800"
+						height="450"
+						src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3DwxLQxcZHLYNHFvrj-1"
+						allowFullScreen
+					/>
+				</div>
+			</Suspense>
 		</PageTitle>
 	);
 }
