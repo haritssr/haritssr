@@ -4,6 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GitHubIcon } from "./Icons";
 import Image from "next/image";
+import {
+	MagnifyingGlassIcon,
+	MoonIcon,
+	SunIcon,
+} from "@heroicons/react/24/outline";
+import Mode from "app/components/Mode";
 
 export default function GlobalNavigation() {
 	return (
@@ -33,19 +39,22 @@ export default function GlobalNavigation() {
 					</ul>
 				</div>
 
-				{/* Source to GitHub */}
-				<a
-					className="flex items-center space-x-2 group"
-					title="Whole site source code"
-					href="https://www.github.com/haritssr/haritssr"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<span className="group-hover:text-zinc-400 text-zinc-800">
-						Source
-					</span>
-					<GitHubIcon className="h-5 w-5 cursor-pointer text-zinc-800 group-hover:text-zinc-400" />
-				</a>
+				<div className="flex items-center space-x-3">
+					{/* Search */}
+					<MagnifyingGlassIcon className="h-5 w-5 text-zinc-800 hover:text-zinc-400 cursor-pointer" />
+					{/* Light/Dark Mode Toggle */}
+					<Mode />
+					{/* Source to GitHub */}
+					<a
+						className="flex items-center space-x-2 group"
+						title="Whole site source code"
+						href="https://www.github.com/haritssr/haritssr"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<GitHubIcon className="h-5 w-5 cursor-pointer text-zinc-800 group-hover:text-zinc-400" />
+					</a>
+				</div>
 			</div>
 		</nav>
 	);
