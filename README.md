@@ -1,18 +1,13 @@
-## About My Repo
+### About This Repo
 
-- This is Harits Syah (@haritssr) personal website
-- I tried to minimize my GitHub repo because I focus on my blog, there are where the experiments placed
-- More than 50%+ of this repo is concentrated in [here](https://github.com/haritssr/haritssr/tree/main/pages/experiments)
+This repo is Harits Syah's personal site. Includes Experiences, Experiments, Design System, Technology, and Blog.
 
-# Hi, I'm Haris 👋
+### About Me
 
-_Software Engineer & Designer, Haris Lab_
-I am a Software Engineer at Haris Lab, a place to learn math and physics for high school and early college science student level. I also run blog at [haritssr.com](https://haritssr.com)
-
-### Find me elsewhere
-
-- [Twitter](https://twitter.com/haritssr)
-- [LinkedIn](https://www.linkedin.com/in/haritssr)
-- [Outlook](mailto:haritssr@outlook.co.id)
-- [GMail](mailto:haritssr@gmail.com)
-- [Personal Website](https://haritssr.com)
+- Name : Harits Syah
+- Roles : Web Product Engineer, Web Designer, and Math-Physics Teacher.
+- At : [Haris Lab](https://www.harislab.com)
+- Location : [South Tangerang, Indonesia](https://www.google.com/maps/place/Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x1c880c046d198c94?sa=X&ved=2ahUKEwiCnd3VqvqAAxXzcmwGHTlLDx8Q8gF6BAgYEAA&ved=2ahUKEwiCnd3VqvqAAxXzcmwGHTlLDx8Q8gF6BAgZEAI)
+- Email : [haritssr@gmail.com](mailto:haritssr@gmail.com)
+- Social Media : [twitter.com/haritssr](x.com/haritssr)
+- Site : [haritssr.com](https://www.haritssr.com)
