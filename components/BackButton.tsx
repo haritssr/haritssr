@@ -9,7 +9,7 @@ export default function BackButton({
 	href: string;
 }) {
 	return (
-		<Link passHref href={href} className="mt-5 sm:mt-10 block">
+		<Link passHref href={href} className="block">
 			<span className=" inline-block w-full">
 				<span className="group flex items-center">
 					<ChevronLeftIcon

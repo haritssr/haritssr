@@ -147,7 +147,7 @@ export default function About() {
 										<div>
 											<ExternalLink
 												href={project.about_client.website}
-												name={project.about_client.website}
+												name={project.about_client.website.slice(8)}
 											/>
 										</div>
 									</div>

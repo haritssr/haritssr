@@ -86,7 +86,7 @@ export default function Blog({ params }) {
 
 	return (
 		<section className="max-w-2xl mx-auto py-20">
-			<div className="mb-5">
+			<div className="mb-5 mt-5 sm:mt-10">
 				<BackButton href="/blog" name="All articles" />
 			</div>
 			<script type="application/ld+json" suppressHydrationWarning>
