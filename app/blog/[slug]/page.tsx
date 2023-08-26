@@ -21,8 +21,8 @@ export async function generateMetadata({
 		slug,
 	} = post;
 	const ogImage = image
-		? `https://haritssr.vercel.app${image}`
-		: `https://haritssr.vercel.app/og?title=${title}`;
+		? `https://haritssr.com${image}`
+		: `https://haritssr.com/og?title=${title}`;
 
 	return {
 		title,
@@ -32,7 +32,7 @@ export async function generateMetadata({
 			description,
 			type: "article",
 			publishedTime,
-			url: `https://leerob.io/blog/${slug}`,
+			url: `https://haritssr.com/blog/${slug}`,
 			images: [
 				{
 					url: ogImage,

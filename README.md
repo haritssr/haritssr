@@ -7,7 +7,7 @@
 # Hi, I'm Haris 👋
 
 _Software Engineer & Designer, Haris Lab_
-I am a Software Engineer at Haris Lab, a place to learn math and physics for high school and early college science student level. I also run blog at [haritssr.vercel.app](https://haritssr.vercel.app)
+I am a Software Engineer at Haris Lab, a place to learn math and physics for high school and early college science student level. I also run blog at [haritssr.com](https://haritssr.com)
 
 ### Find me elsewhere
 
@@ -15,4 +15,4 @@ I am a Software Engineer at Haris Lab, a place to learn math and physics for hig
 - [LinkedIn](https://www.linkedin.com/in/haritssr)
 - [Outlook](mailto:haritssr@outlook.co.id)
 - [GMail](mailto:haritssr@gmail.com)
-- [Personal Website](https://haritssr.vercel.app)
+- [Personal Website](https://haritssr.com)

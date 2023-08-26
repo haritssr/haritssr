@@ -34,7 +34,7 @@ const CopyLinkAllPage = () => {
 			<div
 				className="text-zinc-700 hover:text-zinc-400 cursor-pointer select-none"
 				onClick={() => {
-					handleCopy(`haritssr.vercel.app${pathname}`);
+					handleCopy(`haritssr.com${pathname}`);
 					setOpen(false);
 					window.clearTimeout(timerRef.current);
 					timerRef.current = window.setTimeout(() => {
@@ -55,7 +55,7 @@ const CopyLinkAllPage = () => {
 					Link copied to clipboard
 				</Toast.Title>
 				<Toast.Description asChild>
-					<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.vercel.app${pathname}`}</div>
+					<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.com${pathname}`}</div>
 				</Toast.Description>
 			</Toast.Root>
 			<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
