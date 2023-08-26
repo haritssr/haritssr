@@ -83,14 +83,7 @@ function Destination({ link }: { link: string }) {
 		<li>
 			<Link
 				className={`${color}`}
-				href={`${
-					link === "home"
-						? "/"
-						: link === "pure"
-						? "/pure-design-system"
-						: `/${link}`
-				}`}
-				onClick={() => console.log(link)}
+				href={`${link === "pure" ? "/pure" : `/${link}`}`}
 			>
 				{capitalizeFirstLetter(link)}
 			</Link>
