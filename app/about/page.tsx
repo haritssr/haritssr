@@ -109,118 +109,126 @@ export default function About() {
 						</p>
 					</section>
 
-					<section className="-mt-[1px] p-4 border border-zinc-300 rounded-lg">
-						<section className="space-y-6">
-							{ExperiencesData.map((project) => (
-								<div key={project.project_name}>
-									<div className="flex items-center justify-between">
-										<div className="flex items-center space-x-2">
-											<Image
-												src={project.about_client.logo_src}
-												height={20}
-												width={20}
-												alt={project.about_client.company_name}
-												className="aspect-auto h-5 w-5"
-												blurDataURL={project.about_client.logo_src}
-												// placeholder='blur'
-											/>
-											<div className="font-semibold text-lg">
-												{project.about_project.my_role[0]}
-											</div>
-										</div>
-										<Link
-											passHref
-											href={`/experiences/${project.project_name
-												.toLowerCase()
-												.split(" ")
-												.join("-")}`}
-											className="flex items-center justify-end text-zinc-400 hover:underline"
-										>
-											<div className="text-tiny ">Details</div>
-											<ChevronRightIcon className="h-4 w-4" />
-										</Link>
-									</div>
-									<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-										<div>{project.about_client.company_name}</div>
-										<div>{project.about_project.working_period}</div>
-										<div>{project.skills}</div>
-										<div>
-											<ExternalLink
-												href={project.about_client.website}
-												name={project.about_client.website.slice(8)}
-											/>
+					<section className="p-4 border border-zinc-300 rounded-lg">
+						<Section name="Experiences" />
+						{ExperiencesData.map((project) => (
+							<div key={project.project_name} className="mb-4">
+								<div className="flex items-center justify-between">
+									<div className="flex items-center space-x-2">
+										<Image
+											src={project.about_client.logo_src}
+											height={20}
+											width={20}
+											alt={project.about_client.company_name}
+											className="aspect-auto h-5 w-5"
+											blurDataURL={project.about_client.logo_src}
+											// placeholder='blur'
+										/>
+										<div className="font-semibold text-lg">
+											{project.about_project.my_role[0]}
 										</div>
 									</div>
-								</div>
-							))}
-							<Section name="Formal Working Experience" />
-							<div className="">
-								<div className="flex items-center space-x-2">
-									<Image
-										src="/Icons/sman5.jpg"
-										height={20}
-										width={20}
-										alt="logo"
-										className="aspect-auto h-5 w-5"
-										blurDataURL="/Icons/sman5.jpg"
-									/>
-									<div className="font-semibold text-lg">Privat Teacher</div>
+									<Link
+										passHref
+										href={`/experiences/${project.project_name
+											.toLowerCase()
+											.split(" ")
+											.join("-")}`}
+										className="flex items-center justify-end text-zinc-400 hover:underline"
+									>
+										<div className="text-tiny ">Details</div>
+										<ChevronRightIcon className="h-4 w-4" />
+									</Link>
 								</div>
 								<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-									<div>Lia Privat</div>
-									<div> June 2018 - Now (5 years)</div>
+									<div>{project.about_client.company_name}</div>
+									<div>{project.about_project.working_period}</div>
+									<div>{project.skills}</div>
 									<div>
-										Teaching math and physics for junior and senior highschool
-										students at home
+										<ExternalLink
+											href={project.about_client.website}
+											name={project.about_client.website.slice(8)}
+										/>
 									</div>
 								</div>
 							</div>
-							<Section name="Formal Education" />
-							{EducationData.map((school) => (
-								<div key={school.school}>
-									<div className="flex items-center space-x-2">
-										<Image
-											src={school.logo}
-											height={20}
-											width={20}
-											alt={school.school}
-											className="aspect-auto h-5 w-5"
-											blurDataURL={school.logo}
-											// placeholder='blur'
-										/>
-										<div className="font-semibold text-lg">{school.level}</div>
-									</div>
-									<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-										<div>{school.school}</div>
-										<div>{school.period}</div>
-										<div>{school.status}</div>
-									</div>
+						))}
+					</section>
+
+					<section className="p-4 border border-zinc-300 rounded-lg">
+						<Section name="Formal Working Experience" />
+						<div className="">
+							<div className="flex items-center space-x-2">
+								<Image
+									src="/Icons/sman5.jpg"
+									height={20}
+									width={20}
+									alt="logo"
+									className="aspect-auto h-5 w-5"
+									blurDataURL="/Icons/sman5.jpg"
+								/>
+								<div className="font-semibold text-lg">Privat Teacher</div>
+							</div>
+							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+								<div>Lia Privat</div>
+								<div> June 2018 - Now (5 years)</div>
+								<div>
+									Teaching math and physics for junior and senior highschool
+									students at home
 								</div>
-							))}
-							<Section name="Non Formal Education" />
-							{NonFormalEducationData.map((school) => (
-								<div key={school.school}>
-									<div className="flex items-center space-x-2">
-										<Image
-											src={school.logo}
-											height={20}
-											width={20}
-											alt={school.school}
-											className="aspect-auto h-5 w-5"
-											blurDataURL={school.logo}
-											// placeholder='blur'
-										/>
-										<div className="font-semibold text-lg">{school.level}</div>
-									</div>
-									<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-										<div>{school.school}</div>
-										<div>{school.period}</div>
-										<div>{school.status}</div>
-										<ExternalLink name="Sertificate" href="www.harislab.com" />
-									</div>
+							</div>
+						</div>
+					</section>
+
+					<section className="p-4 border border-zinc-300 rounded-lg">
+						<Section name="Formal Education" />
+						{EducationData.map((school) => (
+							<div key={school.school} className="mb-4">
+								<div className="flex items-center space-x-2">
+									<Image
+										src={school.logo}
+										height={20}
+										width={20}
+										alt={school.school}
+										className="aspect-auto h-5 w-5"
+										blurDataURL={school.logo}
+										// placeholder='blur'
+									/>
+									<div className="font-semibold text-lg">{school.level}</div>
 								</div>
-							))}
-						</section>
+								<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+									<div>{school.school}</div>
+									<div>{school.period}</div>
+									<div>{school.status}</div>
+								</div>
+							</div>
+						))}
+					</section>
+
+					<section className="p-4 border border-zinc-300 rounded-lg">
+						<Section name="Non Formal Education" />
+						{NonFormalEducationData.map((school) => (
+							<div key={school.school}>
+								<div className="flex items-center space-x-2">
+									<Image
+										src={school.logo}
+										height={20}
+										width={20}
+										alt={school.school}
+										className="aspect-auto h-5 w-5"
+										blurDataURL={school.logo}
+										// placeholder='blur'
+									/>
+									<div className="font-semibold text-lg">{school.level}</div>
+								</div>
+								<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+									<div>{school.school}</div>
+									<div>{school.period}</div>
+									<div>{school.status}</div>
+									<ExternalLink name="Sertificate" href="www.harislab.com" />
+								</div>
+							</div>
+						))}
 					</section>
 				</div>
 			</div>

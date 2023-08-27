@@ -19,7 +19,8 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import ExplanationList from "@/components/ExplanationList";
 import BackButton from "@/components/BackButton";
-import { truncate } from "fs";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 export default function DesignSystem() {
 	const [pressed, setPressed] = useState(false);
@@ -62,12 +63,12 @@ export default function DesignSystem() {
 			<Section name="Design Principles" />
 			<ExplanationList>
 				<li>
-					What is Design System? Design System is a set of specific rules of
-					design principles or opiniated design that transcendence to the user
-					interface that affect user experience as a whole.
+					Design System is a set of specific rules of design principles or
+					opiniated design that transcendence to the user interface that affect
+					user experience as a whole.
 				</li>
 				<li>
-					Pure design system mimicing the traditional (most cases) environment
+					Pure Design System mimicing the traditional (most cases) environment
 					when student solving math and physis problem, like in paper, pencil,
 					white board, pencil cases, etc, especially in Analysis (MAKI) process.
 				</li>
@@ -374,25 +375,13 @@ export default function DesignSystem() {
 					</div>
 				</Box>
 				<Box title="Input: Text">
-					<input
-						type="text"
-						className="shadow border border-zinc-300"
-						placeholder="Type something..."
-					/>
+					<input type="text" placeholder="Type something..." />
 				</Box>
 				<Box title="Input: Search">
-					<input
-						type="search"
-						className="shadow border border-zinc-300"
-						placeholder="Search"
-					/>
+					<input type="search" placeholder="Search" />
 				</Box>
 				<Box title="Input: Number">
-					<input
-						type="number"
-						className="shadow border border-zinc-300"
-						placeholder="0"
-					/>
+					<input type="number" placeholder="0" />
 				</Box>
 				<Box title="Box">
 					<div className="border border-zinc-400/50 rounded overflow-hidden w-[200px] sm:w-[300px]">
@@ -415,6 +404,49 @@ export default function DesignSystem() {
 				</Box>
 				<Box title="Back Button">
 					<BackButton href="/" name="Previous Page" />
+				</Box>
+				<Box title="Modal">
+					<Dialog.Root>
+						<Dialog.Trigger asChild>
+							<button className="px-3 py-1 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-300 text-zinc-800 font-medium rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none">
+								Open Modal
+							</button>
+						</Dialog.Trigger>
+						<Dialog.Portal>
+							<Dialog.Overlay className="bg-blackA9 fixed inset-0" />
+							<Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-[25px] shadow-lg border border-zinc-300 focus:outline-none">
+								<Dialog.Title className="text-zinc-800 text-base font-medium">
+									Title
+								</Dialog.Title>
+								<Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
+									Description
+								</Dialog.Description>
+								<div className="h-24 flex items-center justify-center">
+									Some content
+								</div>
+								<div className="mt-[25px] flex justify-end space-x-2	">
+									<Dialog.Close asChild>
+										<button className="px-3 py-1 bg-zinc-100 border border-zinc-300 text-zinc-800 font-medium hover:bg-zinc-200/70 rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none">
+											Action
+										</button>
+									</Dialog.Close>
+									<Dialog.Close asChild>
+										<button className="px-3 py-1 bg-action text-white hover:bg-blue-700 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
+											Action
+										</button>
+									</Dialog.Close>
+								</div>
+								<Dialog.Close asChild>
+									<button
+										className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+										aria-label="Close"
+									>
+										<Cross2Icon />
+									</button>
+								</Dialog.Close>
+							</Dialog.Content>
+						</Dialog.Portal>
+					</Dialog.Root>
 				</Box>
 			</section>
 			<div className="mt-10" />

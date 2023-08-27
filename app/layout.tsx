@@ -8,56 +8,56 @@ import type { Metadata } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.haritssr.vercel.app"),
-  title: {
-    default: "Harits Syah",
-    template: "%s | Harits Syah",
-  },
-  description: "Developer, teacher, and founder.",
-  openGraph: {
-    title: "Harits Syah",
-    description: "Developer, teacher, and founder.",
-    url: "https://leerob.io",
-    siteName: "Lee Robinson",
-    locale: "en-US",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  twitter: {
-    title: "Harits Syah",
-    card: "summary_large_image",
-  },
-  // verification: {
-  //   google: 'eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw',
-  //   yandex: '14d2e73487fa6c71',
-  // },
+	metadataBase: new URL("https://www.haritssr.com"),
+	title: {
+		default: "Harits Syah",
+		template: "%s | Harits Syah",
+	},
+	description: "Developer, teacher, and founder.",
+	openGraph: {
+		title: "Harits Syah",
+		description: "Developer, teacher, and founder.",
+		url: "https://leerob.io",
+		siteName: "Lee Robinson",
+		locale: "en-US",
+		type: "website",
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
+	},
+	twitter: {
+		title: "Harits Syah",
+		card: "summary_large_image",
+	},
+	// verification: {
+	//   google: 'eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw',
+	//   yandex: '14d2e73487fa6c71',
+	// },
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" className={inter.className}>
-      <body>
-        <GlobalNavigation />
-        <main className="mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0">
-          {children}
-        </main>
-        <Footer />
-        <GlobalNavigationMobile />
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" className={inter.className}>
+			<body>
+				<GlobalNavigation />
+				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
+					{children}
+				</main>
+				<Footer />
+				<GlobalNavigationMobile />
+			</body>
+		</html>
+	);
 }

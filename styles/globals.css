@@ -26,7 +26,6 @@
 	font-weight: 200 900;
 	font-stretch: 75% 125%;
 }
-
 input[type="text"],
 input[type="search"],
 input[type="url"],
@@ -34,7 +33,7 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 input[type="tel"] {
-	@apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 ring-inset placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-[1.4px] focus:ring-blue-500;
+	@apply rounded-md ring-1 ring-zinc-950/20 px-2.5 py-1 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow;
 }
 
 input[type="time"],

@@ -26,8 +26,6 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 		color = "text-action";
 	} else if (pathname === "/" && to === "/home") {
 		color = "text-action";
-	} else if (pathname === "/pure-design-system" && to === "/pureDS") {
-		color = "text-action";
 	} else if (CurrentPageBaseRoute === to.substring(1)) {
 		color = "text-action";
 	} else {
@@ -40,9 +38,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 	return (
 		<Link
 			passHref
-			href={`${
-				to === "/home" ? "/" : to === "/pureDS" ? "/pure-design-system" : to
-			}`}
+			href={`${to === "/home" ? "/" : to}`}
 			className="block w-1/5 active:scale-95"
 		>
 			<div className="flex flex-col items-center justify-center py-[5px]">

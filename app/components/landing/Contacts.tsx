@@ -10,7 +10,7 @@ export default function Contacts() {
 				<div className="grid lg:border-white rounded-md lg:border">
 					<div className="self-center space-y-2">
 						<div className="justify-center w-full flex ">
-							<section className="flex justify-center">
+							<section className="flex justify-center select-none">
 								<Image
 									priority
 									src="/images/blur.jpg"
