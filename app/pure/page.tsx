@@ -375,25 +375,13 @@ export default function DesignSystem() {
 					</div>
 				</Box>
 				<Box title="Input: Text">
-					<input
-						type="text"
-						className="shadow border border-zinc-300"
-						placeholder="Type something..."
-					/>
+					<input type="text" placeholder="Type something..." />
 				</Box>
 				<Box title="Input: Search">
-					<input
-						type="search"
-						className="shadow border border-zinc-300"
-						placeholder="Search"
-					/>
+					<input type="search" placeholder="Search" />
 				</Box>
 				<Box title="Input: Number">
-					<input
-						type="number"
-						className="shadow border border-zinc-300"
-						placeholder="0"
-					/>
+					<input type="number" placeholder="0" />
 				</Box>
 				<Box title="Box">
 					<div className="border border-zinc-400/50 rounded overflow-hidden w-[200px] sm:w-[300px]">
