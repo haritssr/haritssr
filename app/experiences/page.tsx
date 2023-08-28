@@ -38,7 +38,15 @@ export default function ExperiencesPage() {
 							<ChevronRightIcon width={2} className="w-5 h-5 text-zinc-500" />
 						</div>
 						<div className="text-zinc-800">{about_client.short_about}</div>
-						<div className="text-zinc-400">{about_client.website.slice(8)}</div>
+						{about_client.website.startsWith("https://www.") ? (
+							<div className="text-zinc-400">
+								{about_client.website.slice(12)}
+							</div>
+						) : (
+							<div className="text-zinc-400">
+								{about_client.website.slice(8)}
+							</div>
+						)}
 					</Link>
 				))}
 			</section>

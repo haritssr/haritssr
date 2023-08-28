@@ -1,10 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import ExternalLink from "./ExternalLink";
-import {
-	ChevronDoubleRightIcon,
-	ChevronRightIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 interface ExperienceCardTypes {
 	href: string;
@@ -53,7 +49,11 @@ export default function ExperienceCard({
 
 				{/* Site Link */}
 				<cite className="group not-italic">
-					<span className={`text-base text-zinc-700`}>{href.slice(8)}</span>
+					{href.startsWith("https://www.") ? (
+						<span className={`text-base text-zinc-700`}>{href.slice(12)}</span>
+					) : (
+						<span className={`text-base text-zinc-700`}>{href.slice(8)}</span>
+					)}
 				</cite>
 			</section>
 
