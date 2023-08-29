@@ -2,7 +2,20 @@
 
 This repo is Harits Syah's personal site. Includes Experiences, Experiments, Design System, Technology, and Blog.
 
-### About Me
+### Site Structure
+
+```mermaid
+graph TD
+  haritssr["haritssr.com"]
+  haritssr --> experiences["experiences"]
+  haritssr --> experiments["experiments"]
+  haritssr --> blog["blog"]
+  haritssr --> technology["technology"]
+  haritssr --> pure["pure(design system)"]
+  haritssr --> about["about"]
+```
+
+### About Author
 
 - Name : Harits Syah
 - Roles : Web Product Engineer, Web Designer, and Math-Physics Teacher.

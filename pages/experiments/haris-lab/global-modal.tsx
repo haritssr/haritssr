@@ -79,8 +79,14 @@ const quickLinks = [
 		icon: <BookOpenIcon className="h-5 w-5 text-zinc-400" />,
 		name: "Matematika",
 	},
-	{ icon: <BookOpenIcon className="h-5 w-5 text-zinc-400" />, name: "Fisika" },
-	{ icon: <ScaleIcon className="h-5 w-5 text-zinc-400" />, name: "Analisis" },
+	{
+		icon: <BookOpenIcon className="h-5 w-5 text-zinc-400" />,
+		name: "Fisika",
+	},
+	{
+		icon: <ScaleIcon className="h-5 w-5 text-zinc-400" />,
+		name: "Analisis",
+	},
 	{
 		icon: <ClipboardDocumentListIcon className="h-5 w-5 text-zinc-400" />,
 		name: "Latihan",
@@ -89,5 +95,8 @@ const quickLinks = [
 		icon: <AcademicCapIcon className="h-5 w-5 text-zinc-400" />,
 		name: "Bimbel",
 	},
-	{ icon: <DocumentIcon className="h-5 w-5 text-zinc-400" />, name: "About" },
+	{
+		icon: <DocumentIcon className="h-5 w-5 text-zinc-400" />,
+		name: "About",
+	},
 ];
