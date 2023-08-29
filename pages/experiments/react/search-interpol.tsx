@@ -1,9 +1,9 @@
-import SubTitle from '@/components/SubTitle';
-import ExternalLink from '@/components/ExternalLink';
-import ExplanationList from '@/components/ExplanationList';
-import LayoutToExperiments from '@/components/LayoutToExperiments';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import SubTitle from "@/components/SubTitle";
+import ExternalLink from "@/components/ExternalLink";
+import ExplanationList from "@/components/ExplanationList";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 //type generate automatically via app.quicktype.io
 export interface Notice {
@@ -55,7 +55,7 @@ export default function SearchInterpol() {
 
 			const data =
 				await fetch(`https://ws-public.interpol.int/notices/v1/red?forename=${debouncedSearch}&resultPerPage=50
-        `).then(r => r.json());
+        `).then((r) => r.json());
 
 			setNotices(data._embedded.notices);
 			setLoading(false);
@@ -64,43 +64,48 @@ export default function SearchInterpol() {
 	}, [debouncedSearch]);
 
 	return (
-		<LayoutToExperiments domain='React' title='Search Interpol'>
+		<LayoutToExperiments domain="React" title="Search Interpol">
 			<SubTitle>
 				<ExplanationList>
 					<li>
-						Inspired by{' '}
-						<ExternalLink href='https://www.youtube.com/watch?v=PySFIsgXNZ0' name='TomDoesTech' />
+						Inspired by{" "}
+						<ExternalLink
+							href="https://www.youtube.com/watch?v=PySFIsgXNZ0"
+							name="TomDoesTech"
+						/>
 					</li>
 					<li>
-						Data source{' '}
+						Data source{" "}
 						<ExternalLink
-							href='https://ws-public.interpol.int/notices/v1/red'
-							name='ws-public interpol'
+							href="https://ws-public.interpol.int/notices/v1/red"
+							name="ws-public interpol"
 						/>
 					</li>
 					<li>Already applied debounce on search</li>
-					<li>Search by name with the result of prisoners from interpol public API</li>
+					<li>
+						Search by name with the result of prisoners from interpol public API
+					</li>
 				</ExplanationList>
 			</SubTitle>
 
 			<input
-				type='search'
-				className='cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-200'
-				placeholder='search'
-				onChange={e => setSearch(e.target.value)}
+				type="search"
+				className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-200"
+				placeholder="search"
+				onChange={(e) => setSearch(e.target.value)}
 			/>
 
 			{loading && <div>Loading...</div>}
-			<div className='mt-10 grid grid-cols-2 gap-5 sm:grid-cols-4'>
-				{notices.map(notice => (
+			<div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-4">
+				{notices.map((notice) => (
 					<div key={notice.entity_id}>
 						{/* Conditionally show image if the 'notices' have a href (src attribute of img) */}
 						{notice._links.thumbnail?.href && (
 							<div>
 								<Image
 									src={notice._links.thumbnail.href}
-									width='100'
-									height='100'
+									width="100"
+									height="100"
 									alt={notice.name}
 									blurDataURL={notice._links.thumbnail.href}
 								/>

@@ -86,6 +86,21 @@ export default function DesignSystem() {
 					</li>
 				</ul>
 				<li>
+					Distinguish between link and button, link to navigate, button for
+					action.
+				</li>
+				<ul className="block list-outside list-disc space-y-1 pl-4">
+					<li>
+						Both link and button, they must be have hover and active state UI
+						representation.
+					</li>
+					<li>
+						Hover state mean you hovering the UI so you ready to act on it, but
+						now acting on it yet, and active state is when you act on the UI and
+						it doing their own functionality (navigate or doing action)
+					</li>
+				</ul>
+				<li>
 					Strive to only using basic color and UI components provided in design
 					system to accelerate development, maintaining consistency, and
 					familiarity.

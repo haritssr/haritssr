@@ -112,7 +112,7 @@ export default function Wrapper({
 				</div>
 			</section>
 			<div className="mb-16">
-				<div className="mb-5 sm:mb-[18px] text-base sm:text-lg text-zinc-800 select-none">
+				<div className="mb-3 text-base sm:text-lg text-zinc-800 select-none">
 					{explanation}
 				</div>
 				<div className={className}>{children}</div>

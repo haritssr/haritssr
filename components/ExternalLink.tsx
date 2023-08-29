@@ -15,7 +15,7 @@ export default function ExternalLink({
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="group inline-block w-fit cursor-pointer items-center text-action hover:underline group-hover:text-blue-700"
+				className="group inline-block w-fit cursor-pointer items-center text-action active:underline group-hover:text-blue-400"
 			>
 				<span className="flex items-center">
 					<span className={`${big ? "text-lg font-medium" : "text-base"}`}>
@@ -26,7 +26,7 @@ export default function ExternalLink({
 						xmlns="http://www.w3.org/2000/svg"
 						className={` ${
 							big ? "h-[18px] w-[18px]" : "h-4 w-4"
-						} ml-1  text-action group-hover:text-blue-700 mt-0.5`}
+						} ml-1  text-action group-hover:text-blue-400 mt-0.5`}
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"

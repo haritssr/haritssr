@@ -7,7 +7,7 @@ export default function DesignSystem() {
 			id="design-system"
 			topic="Pure Design System"
 			className=""
-			explanation="User interface components library and guidelines. Used in haritssr.com, harisstudio.com, and harislab.com"
+			explanation="User interface component library, design priciples, and guidelines. Used in haritssr.com, harisstudio.com, and harislab.com"
 		>
 			<InternalLink name="Take a look" href="/pure" />
 		</Wrapper>
