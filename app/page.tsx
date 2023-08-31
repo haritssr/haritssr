@@ -1,10 +1,11 @@
 import Technology from "app/components/landing/Technology";
 import Experiences from "app/components/landing/Experiences";
+import About from "app/components/landing/About";
 import Contacts from "app/components/landing/Contacts";
-import Services from "app/components/landing/Services";
 import Blog from "app/components/landing/Blog";
 import DesignSystem from "app/components/landing/DesignSystem";
 import Experiments from "app/components/landing/Experiments";
+import Services from "app/components/landing/Services";
 import HarisLabBanner from "app/components/landing/HarisLabBanner";
 import "../styles/globals.css";
 
@@ -22,6 +23,7 @@ export default function Home() {
 				<Blog />
 				<Technology />
 				<DesignSystem />
+				<About />
 			</div>
 		</section>
 	);

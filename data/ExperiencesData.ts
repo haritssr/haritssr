@@ -150,9 +150,9 @@ export const ExperiencesData = [
 			logo_src: "/Icons/haritssr.svg",
 			brand_name: "Harits Syah Personal Site",
 			short_about:
-				"Harits Syah's personal site. Portfolio, blogs, and a frontend experiments.",
+				"Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
 			long_about:
-				"Harits Syah's personal site. Portfolio, blogs, and a frontend experiments.",
+				"Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
 			company_name: "Personal Site",
 			phone_number: "+62-8953-3110-3401",
 			website: "https://www.haritssr.com",

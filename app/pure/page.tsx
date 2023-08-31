@@ -21,6 +21,7 @@ import ExplanationList from "@/components/ExplanationList";
 import BackButton from "@/components/BackButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import Box from "app/components/Box";
 
 export default function DesignSystem() {
 	const [pressed, setPressed] = useState(false);
@@ -56,7 +57,7 @@ export default function DesignSystem() {
 					This design system used in{" "}
 					<ExternalLink name="haritssr.com" href="haritssr.com" />,
 					<ExternalLink name="Haris Studio" href="harisstudio.com" /> and{" "}
-					<ExternalLink name="Haris Lab" href="harislab.com" />
+					<ExternalLink name="Haris Lab" href="harislab.com" />.
 				</>
 			}
 		>
@@ -96,7 +97,7 @@ export default function DesignSystem() {
 					</li>
 					<li>
 						Hover state mean you hovering the UI so you ready to act on it, but
-						now acting on it yet, and active state is when you act on the UI and
+						not acting on it yet, and active state is when you act on the UI and
 						it doing their own functionality (navigate or doing action)
 					</li>
 				</ul>
@@ -104,6 +105,10 @@ export default function DesignSystem() {
 					Strive to only using basic color and UI components provided in design
 					system to accelerate development, maintaining consistency, and
 					familiarity.
+				</li>
+				<li>
+					Each component already have hover and active state (not all component
+					need that state though)
 				</li>
 				<li>This design system is accessible at mobile and desktop web.</li>
 				<li>
@@ -410,8 +415,8 @@ export default function DesignSystem() {
 				</Box>
 				<Box title="Text Area">
 					<textarea
-						placeholder="Write something"
-						className="border border-zinc-300 p-2 focus:outline-1 focus:outline-action rounded-md w-[200px] sm:w-[300px]"
+						placeholder="Write something here..."
+						className="w-[200px] sm:w-[300px] rounded-md ring-1 ring-zinc-950/20 px-2.5 py-1 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow"
 					/>
 				</Box>
 				<Box title="Breadcrumbs">
@@ -478,24 +483,5 @@ export default function DesignSystem() {
 				</div>
 			</Suspense>
 		</PageTitle>
-	);
-}
-
-function Box({
-	title,
-	children,
-}: {
-	title: string;
-	children: React.ReactNode;
-}) {
-	return (
-		<div className="border border-zinc-400/50 rounded overflow-hidden">
-			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
-				{title}
-			</div>
-			<div className="h-72 p-5 flex items-center justify-center">
-				<div>{children}</div>
-			</div>
-		</div>
 	);
 }

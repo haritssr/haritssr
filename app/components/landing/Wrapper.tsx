@@ -3,6 +3,8 @@
 import * as Toast from "@radix-ui/react-toast";
 import Link from "next/link";
 import React from "react";
+import { Disclosure } from "@headlessui/react";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
 const ToastCopy = ({
 	topic,
@@ -82,12 +84,14 @@ export default function Wrapper({
 	children,
 	id,
 	explanation,
+	collapsible = false,
 }: {
 	topic: string;
 	className?: string;
 	children: React.ReactNode;
 	id: string;
 	explanation: string;
+	collapsible?: boolean;
 }) {
 	async function handleCopy(page: string) {
 		try {
@@ -98,25 +102,86 @@ export default function Wrapper({
 	}
 	return (
 		<div id={id}>
-			<section className="mb-3 flex items-center justify-between">
-				<div className="flex items-center space-x-2">
-					<Link
-						href={`/#${id}`}
-						className=" text-2xl sm:text-3xl font-bold text-zinc-800"
-					>
-						{topic}
-					</Link>
-					<div>
-						<ToastCopy topic={topic} handleCopy={handleCopy} />
+			{collapsible ? (
+				<Disclosure as="div" defaultOpen>
+					{({ open }) => (
+						<>
+							<div className="flex items-center justify-between w-full">
+								<div className="flex items-center space-x-2">
+									<Link
+										href={`/#${id}`}
+										className=" text-2xl sm:text-3xl font-bold text-zinc-800"
+									>
+										{topic}
+									</Link>
+									<div>
+										<ToastCopy topic={topic} handleCopy={handleCopy} />
+									</div>
+								</div>
+
+								<div className="flex items-center space-x-2">
+									<Link
+										href={`/${id}`}
+										className="rounded-full text-action border border-zinc-300 hover:bg-zinc-100 text-tiny px-2.5 sm:px-3 py-[3px] select-none active:ring-2 active:ring-action active:ring-offset-1"
+									>
+										Detail
+									</Link>
+									<Disclosure.Button>
+										{open ? (
+											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-2.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 border-zinc-300">
+												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700" />
+												<span className="text-tiny hidden sm:block text-zinc-700 select-none">
+													Show Less
+												</span>
+											</div>
+										) : (
+											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-2.5 sm:py-[3px] rounded-full border border-zinc-800 bg-zinc-800 text-white hover:bg-zinc-700">
+												<ChevronDownIcon className="h-4 w-4 stroke-2" />
+												<span className="text-tiny hidden sm:block select-none">
+													Show More
+												</span>
+											</div>
+										)}
+									</Disclosure.Button>
+								</div>
+							</div>
+							{/* body */}
+							<Disclosure.Panel>
+								<div className="mb-16">
+									<div className="my-4 text-base sm:text-lg text-zinc-800 select-none">
+										{explanation}
+									</div>
+									<div className={className}>{children}</div>
+								</div>
+							</Disclosure.Panel>
+						</>
+					)}
+				</Disclosure>
+			) : (
+				<>
+					{/* header */}
+					<section className="mb-4 flex items-center justify-between">
+						<div className="flex items-center space-x-2">
+							<Link
+								href={`/#${id}`}
+								className=" text-2xl sm:text-3xl font-bold text-zinc-800"
+							>
+								{topic}
+							</Link>
+							<div>
+								<ToastCopy topic={topic} handleCopy={handleCopy} />
+							</div>
+						</div>
+					</section>
+					{/* body */}
+					<div className="mb-16">
+						<div className="mb-4 text-base sm:text-lg text-zinc-800 select-none">
+							{explanation}
+						</div>
+						<div className={className}>{children}</div>
 					</div>
-				</div>
-			</section>
-			<div className="mb-16">
-				<div className="mb-3 text-base sm:text-lg text-zinc-800 select-none">
-					{explanation}
-				</div>
-				<div className={className}>{children}</div>
-			</div>
+				</>
+			)}
 		</div>
 	);
 }
