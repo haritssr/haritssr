@@ -16,7 +16,7 @@ export default function BackButton({
 						className="-ml-4 h-5 w-5 text-action sm:group-hover:text-blue-400"
 						strokeWidth={2}
 					/>
-					<span className="-ml-0.5 block truncate text-action sm:group-hover:text-blue-400">
+					<span className="-ml-0.5 block truncate text-action sm:group-hover:text-blue-400 active:underline">
 						{name}
 					</span>
 				</span>

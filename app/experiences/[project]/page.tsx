@@ -51,11 +51,11 @@ export default function ExperiencesPage({ params }) {
 			</Head>
 
 			<main className="mx-auto min-h-screen w-full max-w-3xl">
-				<div className="mt-5 sm:mt-10">
+				<div className="pt-10 sm:pt-20">
 					<BackButton href="/experiences" name="All Experiences" />
 				</div>
 				{/* Title */}
-				<section className="mt-10 mb-8 sm:mt-16 sm:mb-12 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
+				<section className="my-8 sm:my-10 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
 					<div className="">
 						<div className="text-2xl sm:text-3xl break-words font-bold ">
 							{project.project_name}

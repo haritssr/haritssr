@@ -85,7 +85,7 @@ export default function Blog({ params }) {
 	}
 
 	return (
-		<section className="max-w-2xl mx-auto py-20">
+		<section className="max-w-2xl mx-auto py-5 sm:py-10">
 			<div className="mb-5 mt-5 sm:mt-10">
 				<BackButton href="/blog" name="All articles" />
 			</div>

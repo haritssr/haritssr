@@ -6,14 +6,15 @@ export const AboutData = [
 			"My name is Harits Syah, I prefer to be called Haris.",
 			"haritssr at haritssr.com mean harits syah rahmatullah.",
 			"I am a Web Software Engineer, Web Designer, and Math-Physics Teacher.",
+			"I am a touch typer",
 			"I am a physics students at UIN Syarif Hidayatullah, Jakarta.",
 			"Founder of Haris Lab, a place to analyze math and physics problem.",
-			"I am based on South Tangerang, Indonesia.",
+			"I am based on South Tangerang, Indonesia.", 
 		],
 	},
 	{
 		section: "Contacts",
-		description: "My preferable communication channel",
+		description: "My preferable communication channels",
 		points: [
 			"https://www.linkedin.com/in/haritssr",
 			"haritssr@gmail.com",
@@ -32,7 +33,7 @@ export const AboutData = [
 	},
 	{
 		section: "UX",
-		description: "My preferable source of UX principles",
+		description: "My preferable sources of UX principles",
 		points: [
 			"https://www.nngroup.com",
 			"https://www.lawsofux.com",
