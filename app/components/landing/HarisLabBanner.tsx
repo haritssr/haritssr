@@ -13,7 +13,7 @@ export default function HarisLabBanner() {
 				target="_blank"
 				className="block w-full sm:w-fit hover:bg-blue-500 bg-blue-600 text-white py-2 sm:py-1.5 sm:px-3 rounded-md text-center"
 			>
-				Take a look
+				Take A Look
 			</a>
 		</div>
 	);

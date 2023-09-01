@@ -12,7 +12,7 @@ export default function InternalLink({
 		<Link
 			passHref
 			href={href}
-			className="group flex w-fit cursor-pointer items-center justify-start py-0.5 text-action hover:text-blue-400 active:underline"
+			className="group inline-flex w-fit cursor-pointer items-center justify-start py-0.5 text-action hover:text-blue-400 active:underline"
 		>
 			<p className="flex items-center">
 				{name}

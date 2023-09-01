@@ -118,6 +118,11 @@ export default function DesignSystem() {
 						name="here"
 					/>
 				</li>
+				<li>
+					If you want to see other variation of this component you can see{" "}
+					<InternalLink href="/experiments/radix-ui" name="here" /> or{" "}
+					<InternalLink href="/experiments/headless-ui" name="here" />
+				</li>
 			</ExplanationList>
 			<div className="mb-10" />
 			<Section name="UI Components" />

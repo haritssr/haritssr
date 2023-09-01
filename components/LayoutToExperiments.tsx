@@ -62,8 +62,9 @@ export default function LayoutToExperiments({
 
 			<GlobalNavigation />
 
-			<main className="mx-auto flex max-w-5xl sm:mt-10 sm:gap-10 sm:px-5 xl:px-0">
+			<main className="mx-auto flex max-w-5xl sm:-mt-[1px] sm:gap-10 sm:px-5 xl:px-0">
 				<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
+					{/* Sidebar */}
 					<div className="hidden sm:block sm:col-span-1 border">
 						<div className="font-semibold px-5 py-2 sticky top-[45px] bg-white border-b">
 							{domain}
@@ -90,6 +91,8 @@ export default function LayoutToExperiments({
 							})}
 						</div>
 					</div>
+
+					{/* Content */}
 					<div className="sm:col-span-3 sm:border-t border-r border-b">
 						<article className="sm:px-0">
 							{/* SubNavigation */}
