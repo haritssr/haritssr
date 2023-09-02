@@ -165,7 +165,7 @@ export default function DesignSystem() {
 				<Box title="Popover">
 					<Popover.Root>
 						<Popover.Trigger>
-							<div className="w-auto rounded px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400">
+							<div className="w-auto rounded px-3 py-1.5 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400">
 								Show Popover
 							</div>
 						</Popover.Trigger>
@@ -245,7 +245,7 @@ export default function DesignSystem() {
 				<Box title="Toast">
 					<Toast.Provider swipeDirection="right">
 						<button
-							className="text-white bg-action rounded px-3 py-1.5 hover:bg-blue-700 active:ring-offset-1 active:ring-1 active:ring-blue-400"
+							className="text-white bg-action rounded px-3 py-1.5 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400"
 							onClick={() => {
 								setOpen(false);
 								window.clearTimeout(timerRef.current);
@@ -273,7 +273,7 @@ export default function DesignSystem() {
 									</div>
 								</Toast.Description>
 							</div>
-							<Toast.Close className="text-action hover:text-blue-400">OK</Toast.Close>
+							<Toast.Close className="text-action hover:text-[#2563eb]/90">OK</Toast.Close>
 						</Toast.Root>
 						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
 					</Toast.Provider>
@@ -305,26 +305,26 @@ export default function DesignSystem() {
 					</Tooltip.Provider>
 				</Box>
 				<Box title="Button: Primary">
-					<button className="px-3 py-1 bg-action text-white hover:bg-blue-700 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
+					<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
 						Button
 					</button>
 				</Box>
 				<Box title="Button: Loading">
 					<button
-						className="px-3 py-1 bg-action text-white hover:bg-blue-700 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none"
+						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none"
 						onClick={handleClick}
 					>
 						{loading === true ? "Loading..." : "Button"}
 					</button>
 				</Box>
 				<Box title="Button: Secondary">
-					<button className="px-3 py-1 bg-zinc-100 border border-zinc-300 text-zinc-800 font-medium hover:bg-zinc-200/70 rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none">
+					<button className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800  shadow">
 						Button
 					</button>
 				</Box>
 				<Box title="Button: Disabled">
 					<button
-						className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium cursor-not-allowed rounded select-none"
+						className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium cursor-not-allowed rounded-md select-none"
 						disabled
 					>
 						Button
@@ -382,7 +382,7 @@ export default function DesignSystem() {
 				<Box title="Text Area">
 					<textarea
 						placeholder="Write something here..."
-						className="w-[200px] sm:w-[300px] rounded-md ring-1 ring-zinc-950/20 px-2.5 py-1 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow"
+						className="w-[200px] sm:w-[300px] rounded-md ring-1 ring-zinc-950/20 p-2 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow"
 					/>
 				</Box>
 				<Box title="Breadcrumbs">
@@ -394,7 +394,7 @@ export default function DesignSystem() {
 				<Box title="Modal">
 					<Dialog.Root>
 						<Dialog.Trigger asChild>
-							<button className="px-3 py-1 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-300 text-zinc-800 font-medium rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none">
+							<button className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow">
 								Open Modal
 							</button>
 						</Dialog.Trigger>
@@ -413,7 +413,7 @@ export default function DesignSystem() {
 										</button>
 									</Dialog.Close>
 									<Dialog.Close asChild>
-										<button className="px-3 py-1 bg-action text-white hover:bg-blue-700 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
+										<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
 											Action
 										</button>
 									</Dialog.Close>

@@ -16,31 +16,31 @@ export default function Sidebar() {
 					</div>
 					<ul className="space-y-1 p-4">
 						<li className="rounded bg-blue-500 px-2 py-1 text-white">JavaScript</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
-						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-blue-500 hover:text-white">
+						<li className="cursor-pointer rounded px-2 py-1 text-zinc-800 hover:bg-[#2563eb]/90 hover:text-white">
 							JavaScript
 						</li>
 					</ul>

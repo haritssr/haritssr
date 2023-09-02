@@ -20,21 +20,16 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 	const [filteredData, setFilteredData] = useState<DataType[]>([]);
 	const [wordEntered, setWordEntered] = useState<string>("");
 
-	const inputRef: React.RefObject<HTMLInputElement> =
-		useRef<HTMLInputElement>(null);
+	const inputRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 	if (typeof window !== "undefined") {
 		window.addEventListener("load", () => inputRef.current?.focus());
 	}
 
-	const handleFilter = ({
-		target,
-	}: React.ChangeEvent<HTMLInputElement>): void => {
+	const handleFilter = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
 		const searchWord: string = target.value.toLowerCase();
 		setWordEntered(searchWord);
 
-		const newFilter: DataType[] = data.filter(({ title }): boolean =>
-			title.toLowerCase().includes(searchWord)
-		);
+		const newFilter: DataType[] = data.filter(({ title }): boolean => title.toLowerCase().includes(searchWord));
 
 		if (!searchWord) return setFilteredData([]);
 		setFilteredData(newFilter);
@@ -77,7 +72,7 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 											href={link}
 											target="_blank"
 											rel="noopener noreferrer"
-											className={`flex px-2 py-1 hover:bg-blue-500 hover:text-white ${
+											className={`flex px-2 py-1 hover:bg-[#2563eb]/90 hover:text-white ${
 												active ? "bg-blue-500 text-white" : ""
 											}`}
 										>
