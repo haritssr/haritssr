@@ -15,7 +15,7 @@ export default function BlogPage() {
 				title="Blog"
 				description="Selected notes that I want to share to the world."
 			>
-				<div className="space-y-3">
+				<div className="grid grid-cols-1 gap-3">
 					{allBlogs
 						.sort((a, b) => {
 							if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
