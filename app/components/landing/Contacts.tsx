@@ -24,32 +24,18 @@ export default function Contacts() {
 							</section>
 						</div>
 						<div className="">
-							<div className="text-zinc-800 w-full text-center text-lg font-semibold">
-								Harits Syah
-							</div>
-							<a
-								title="twitter.com/haritssr | Harits Syah"
-								className="block text-center text-zinc-800 hover:underline"
-								href="https://www.twitter.com/haritssr"
-								target="_blank"
-								rel="noreferrer noopener"
-							>
-								@haritssr
-							</a>
-							<div className="bg-zinc-200"></div>
+							<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			{/* lg:pt-2 lg:px-4 */}
 			<section className="lg:col-span-2 border border-zinc-400/60 rounded-md">
-				<div className="divide-y divide-zinc-400/60">
+				<div className="divide-y divide-zinc-200">
 					<div className="grid grid-cols-3 py-2 pl-3.5">
 						<span className="text-zinc-800 text-tiny sm:text-base">Roles</span>
 						<span className=" col-span-2 flex items-center space-x-2">
-							<span className="text-zinc-800 text-tiny sm:text-base">
-								Web Product Engineer
-							</span>
+							<span className="text-zinc-800 text-tiny sm:text-base">Web Product Engineer</span>
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
@@ -76,9 +62,7 @@ export default function Contacts() {
 
 					<div className="grid grid-cols-3 py-2 pl-3.5">
 						<span className="text-white font-medium ">Role</span>
-						<span className="text-zinc-800 col-span-2 text-tiny sm:text-base">
-							Math Physics Teacher
-						</span>
+						<span className="text-zinc-800 col-span-2 text-tiny sm:text-base">Math Physics Teacher</span>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
 						<span className="text-zinc-800 text-tiny sm:text-base">At</span>
@@ -124,9 +108,7 @@ export default function Contacts() {
 						</a>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base">
-							Location
-						</span>
+						<span className="text-zinc-800 text-tiny sm:text-base">Location</span>
 						<a
 							target="_blank"
 							rel="noopener noreferrer"

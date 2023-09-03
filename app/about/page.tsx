@@ -24,18 +24,7 @@ export default function About() {
 						/>
 					</section>
 				</div>
-				<div className="">
-					<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
-					<a
-						className="block text-center text-zinc-500"
-						href="https://www.twitter.com/haritssr"
-						target="_blank"
-						rel="noreferrer noopener"
-					>
-						@haritssr
-					</a>
-					<div className="bg-zinc-200"></div>
-				</div>
+				<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
 			</div>
 
 			<div className="space-y-14 mb-14">

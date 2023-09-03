@@ -1,7 +1,7 @@
 export const AboutData = [
 	{
 		section: "Introduction",
-		description: "Brief facts about me",
+		description: "Brief facts about me.",
 		points: [
 			"My name is Harits Syah, I prefer to be called Haris.",
 			"haritssr at haritssr.com mean harits syah rahmatullah.",
@@ -14,7 +14,7 @@ export const AboutData = [
 	},
 	{
 		section: "UX",
-		description: "My preferable sources of UX principles",
+		description: "My preferable sources of UX principles.",
 		points: [
 			"https://www.nngroup.com",
 			"https://www.lawsofux.com",
@@ -23,14 +23,14 @@ export const AboutData = [
 	},
 	{
 		section: "Web Design",
-		description: "I like how their user interface is presented and inspired to be like that",
+		description: "I like how their user interface is presented and inspired to be like them.",
 		points: ["https://www.apple.com", "https://www.linear.app", "https://www.vercel.com", "https://www.notion.so"],
 	},
 ];
 
 export const ContactData = {
 	section: "Contacts",
-	description: "My preferable communication channels",
+	description: "My preferable communication channels.",
 	points: [
 		{
 			icon: "/Icons/linkedin.jpg",
