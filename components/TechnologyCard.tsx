@@ -18,7 +18,7 @@ export const TechnologyCard = (
 			{...props}
 			className="h-fit overflow-hidden rounded-md border border-zinc-400/60"
 		>
-			<div className="truncate px-3 py-2 text-tiny font-semibold text-zinc-700 sm:text-base border-b border-zinc-400/60">
+			<div className="truncate px-3 py-1.5 bg-zinc-50 text-tiny font-semibold text-zinc-700 sm:text-base border-b border-zinc-400/60">
 				{domain}
 			</div>
 			<div className="">

@@ -6,18 +6,13 @@ import Link from "next/link";
 
 export default function ExperiencesPage() {
 	return (
-		<PageTitle
-			title="Experiences"
-			description="Detail informations on how projects I belong to being handled."
-		>
+		<>
+			<PageTitle title="Experiences" description="Detail informations on how projects I belong to being handled." />
 			<section className="grid grid-cols-1 sm:grid-cols-3 gap-5">
 				{ExperiencesData.map(({ project_name, about_client }) => (
 					<Link
 						passHref
-						href={`/experiences/${project_name
-							.toLowerCase()
-							.split(" ")
-							.join("-")}`}
+						href={`/experiences/${project_name.toLowerCase().split(" ").join("-")}`}
 						key={project_name}
 						className="space-y-1 p-4 hover:bg-zinc-50 border border-zinc-300 rounded-lg"
 					>
@@ -39,17 +34,13 @@ export default function ExperiencesPage() {
 						</div>
 						<div className="text-zinc-800">{about_client.short_about}</div>
 						{about_client.website.startsWith("https://www.") ? (
-							<div className="text-zinc-400">
-								{about_client.website.slice(12)}
-							</div>
+							<div className="text-zinc-400">{about_client.website.slice(12)}</div>
 						) : (
-							<div className="text-zinc-400">
-								{about_client.website.slice(8)}
-							</div>
+							<div className="text-zinc-400">{about_client.website.slice(8)}</div>
 						)}
 					</Link>
 				))}
 			</section>
-		</PageTitle>
+		</>
 	);
 }

@@ -17,11 +17,7 @@ interface LayoutToExperimentsType {
 	domain: string;
 }
 
-export default function LayoutToExperiments({
-	children,
-	title,
-	domain,
-}: LayoutToExperimentsType) {
+export default function LayoutToExperiments({ children, title, domain }: LayoutToExperimentsType) {
 	const lastThreeSegmentRoute = useRouter().asPath;
 	const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
 	const image = "/images/hero.jpg";
@@ -62,21 +58,17 @@ export default function LayoutToExperiments({
 
 			<GlobalNavigation />
 
-			<main className="mx-auto flex max-w-5xl sm:mt-10 sm:gap-10 sm:px-5 xl:px-0">
+			<main className="mx-auto flex max-w-5xl sm:-mt-[1px] sm:gap-10 sm:px-5 xl:px-0">
 				<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
+					{/* Sidebar */}
 					<div className="hidden sm:block sm:col-span-1 border">
-						<div className="font-semibold px-5 py-2 sticky top-[45px] bg-white border-b">
-							{domain}
-						</div>
+						<div className="font-semibold px-5 py-2 sticky top-[45px] bg-white border-b">{domain}</div>
 						<div className="flex flex-col space-y-1 py-5 px-3">
 							{links.map((a) => {
 								const destination = a.toLowerCase().split(" ").join("-");
 								return (
 									<Link
-										href={`/experiments/${domain
-											.toLowerCase()
-											.split(" ")
-											.join("-")}/${destination}`}
+										href={`/experiments/${domain.toLowerCase().split(" ").join("-")}/${destination}`}
 										key={a}
 										className={`${
 											lastSegment === destination
@@ -90,14 +82,14 @@ export default function LayoutToExperiments({
 							})}
 						</div>
 					</div>
+
+					{/* Content */}
 					<div className="sm:col-span-3 sm:border-t border-r border-b">
 						<article className="sm:px-0">
 							{/* SubNavigation */}
 							<section
 								className={`sticky top-0 sm:top-[44.5px] border-b ${
-									inView
-										? "border-zinc-200"
-										: "border-b bg-white/80 saturate-150 backdrop-blur-lg"
+									inView ? "border-zinc-200" : "border-b bg-white/80 saturate-150 backdrop-blur-lg"
 								} z-40 mb-5 bg-white py-2`}
 							>
 								<div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
@@ -127,29 +119,18 @@ export default function LayoutToExperiments({
 		</>
 	);
 }
-const BackToExperiments = ({
-	inView,
-	domain,
-}: {
-	inView: any;
-	domain: string;
-}) => {
+const BackToExperiments = ({ inView, domain }: { inView: any; domain: string }) => {
 	return (
 		<Link
 			passHref
 			href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
-			className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${
-				inView ? "w-1/2" : "w-1/4"
-			}`}
+			className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${inView ? "w-1/2" : "w-1/4"}`}
 		>
 			<span className=" inline-block w-full">
 				<span className="group flex items-center">
-					<ChevronLeftIcon
-						className=" text-action sm:group-hover:text-blue-400 h-5 w-5"
-						strokeWidth={2}
-					/>
+					<ChevronLeftIcon className=" text-action sm:group-hover:text-[#2563eb]/90 h-5 w-5" strokeWidth={2} />
 					<span
-						className={`-ml-0.5 truncate text-action sm:group-hover:text-blue-400 text-base ${
+						className={`-ml-0.5 truncate text-action sm:group-hover:text-[#2563eb]/90 text-base ${
 							inView ? "block" : "hidden sm:block"
 						}`}
 					>
@@ -166,9 +147,7 @@ const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
 		<div className={`sm:2/4 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
 			<div className="flex justify-center py-0.5 sm:py-0">
 				<div
-					className={`truncate text-center font-semibold ${
-						inView ? "text-transparent hidden" : "text-zinc-800 block"
-					}`}
+					className={`truncate text-center font-semibold ${inView ? "text-transparent hidden" : "text-zinc-800 block"}`}
 				>
 					{title}
 				</div>
@@ -186,12 +165,10 @@ const PageSource = ({ href, inView }: { href: string; inView: any }) => {
 					href={href}
 					target="_blank"
 					rel="noopener noreferrer"
-					className={`flex w-fit cursor-pointer items-center text-action hover:text-blue-400`}
+					className={`flex w-fit cursor-pointer items-center text-action hover:text-[#2563eb]/90`}
 				>
-					<span className="mr-2 hidden sm:inline-block text-action group-hover:text-blue-400">
-						Source
-					</span>{" "}
-					<GitHubIcon className="h-5 w-5 cursor-pointer text-action group-hover:text-blue-400" />
+					<span className="mr-2 hidden sm:inline-block text-action group-hover:text-[#2563eb]/90">Source</span>{" "}
+					<GitHubIcon className="h-5 w-5 cursor-pointer text-action group-hover:text-[#2563eb]/90" />
 				</a>
 			</cite>
 		</div>

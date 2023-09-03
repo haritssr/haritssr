@@ -14,13 +14,10 @@ export default function ExperimentsPage() {
 			<PageTitle
 				title="Experiments"
 				description={
-					<>
-						{`${totalExperiment} unique individual (per page) experiments across Javascript-React ecosystem stack`}
-					</>
+					<>{`${totalExperiment} unique individual (per page) experiments across Javascript-React ecosystem stack`}</>
 				}
-			>
-				<ExperimentsGrid />
-			</PageTitle>
+			/>
+			<ExperimentsGrid />
 		</Layout>
 	);
 }

@@ -1,13 +1,11 @@
 import Image from "next/image";
-import { AboutData } from "data/AboutData";
-import Section from "@/components/Section";
+import { AboutData, ContactData } from "data/AboutData";
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import ExternalLink from "@/components/ExternalLink";
 import { EducationData } from "data/EducationData";
 import { ExperiencesData } from "data/ExperiencesData";
 import { NonFormalEducationData } from "data/NonFormalEducationData";
-import { PageTitle } from "@/components/SubTitle";
 
 export default function About() {
 	return (
@@ -26,28 +24,14 @@ export default function About() {
 						/>
 					</section>
 				</div>
-				<div className="">
-					<div className="text-zinc-800 w-full text-center text-lg font-semibold">
-						Harits Syah
-					</div>
-					<a
-						className="block text-center text-zinc-500"
-						href="https://www.twitter.com/haritssr"
-						target="_blank"
-						rel="noreferrer noopener"
-					>
-						@haritssr
-					</a>
-					<div className="bg-zinc-200"></div>
-				</div>
+				<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
 			</div>
-			<div className="space-y-14 mb-16">
+
+			<div className="space-y-14 mb-14">
 				{AboutData.map((section) => {
 					return (
 						<div key={section.section}>
-							<div className="text-zinc-800 text-xl font-semibold mb-1.5">
-								{section.section}
-							</div>
+							<div className="text-zinc-800 text-xl font-semibold mb-1.5">{section.section}</div>
 							<div className="mb-1.5 text-zinc-800">{section.description}</div>
 							<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
 								{section.points.map((point) => (
@@ -73,10 +57,7 @@ export default function About() {
 												{point.slice(8)}
 											</a>
 										) : point.includes("@") ? (
-											<a
-												className="hover:underline hover:text-zinc-800"
-												href={`mailto:${point}`}
-											>
+											<a className="hover:underline hover:text-zinc-800" href={`mailto:${point}`}>
 												{point}
 											</a>
 										) : (
@@ -89,26 +70,60 @@ export default function About() {
 					);
 				})}
 			</div>
-			<div className="space-y-5">
+			{/* Contacts */}
+			<div className="mb-14">
+				<div className="text-zinc-800 text-xl font-semibold mb-1.5">{ContactData.section}</div>
+				<div className="mb-1.5 text-zinc-800">{ContactData.description}</div>
+				<ul className="block divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
+					{ContactData.points.map((each) => (
+						<li key={each.link} className="text-zinc-500 py-1.5 flex space-x-3 items-center">
+							<Image alt={each.link} src={each.icon} height={20} width={20} className="h-[18px] w-[18px]" />
+							{each.link.startsWith("https://www.") ? (
+								<a
+									title={each.link}
+									className="hover:underline hover:text-zinc-800"
+									target="_blank"
+									rel="noreferrer noopener"
+									href={each.link}
+								>
+									{each.link.slice(12)}
+								</a>
+							) : each.link.startsWith("https://") ? (
+								<a
+									title={each.link}
+									className="hover:underline hover:text-zinc-800"
+									target="_blank"
+									rel="noreferrer noopener"
+									href={each.link}
+								>
+									{each.link.slice(8)}
+								</a>
+							) : each.link.includes("@") ? (
+								<a className="hover:underline hover:text-zinc-800" href={`mailto:${each.link}`}>
+									{each.link}
+								</a>
+							) : (
+								each.link
+							)}
+						</li>
+					))}
+				</ul>
+			</div>
+			<div className="space-y-14">
 				<Box title="Core Skills">
 					<div className="space-y-1">
 						<div className="font-semibold">Web Software Engineering</div>
 						<p className="text-zinc-500 pb-4">
-							JavaScript, TypeScript, React.js, Next.js, Web platform, PWA,
-							Node.js ecosystem.
+							JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js ecosystem.
 						</p>
 					</div>
 					<div className="space-y-1">
 						<div className="font-semibold">Math & Physics</div>
-						<p className="text-zinc-500 pb-4">
-							High school and early college level.
-						</p>
+						<p className="text-zinc-500 pb-4">High school and early college level.</p>
 					</div>
 					<div className="space-y-1">
 						<div className="font-semibold">UI Design (with Figma)</div>
-						<p className="text-zinc-500 ">
-							Experiments, mockup, prototyping UI for mobile/desktop web.
-						</p>
+						<p className="text-zinc-500 ">Experiments, mockup, prototyping UI for mobile/desktop web.</p>
 					</div>
 				</Box>
 
@@ -126,16 +141,11 @@ export default function About() {
 										blurDataURL={project.about_client.logo_src}
 										// placeholder='blur'
 									/>
-									<div className="font-semibold text-lg">
-										{project.about_project.my_role[0]}
-									</div>
+									<div className="font-semibold text-lg">{project.about_project.my_role[0]}</div>
 								</div>
 								<Link
 									passHref
-									href={`/experiences/${project.project_name
-										.toLowerCase()
-										.split(" ")
-										.join("-")}`}
+									href={`/experiences/${project.project_name.toLowerCase().split(" ").join("-")}`}
 									className="flex items-center justify-end text-zinc-400 hover:underline"
 								>
 									<div className="text-tiny ">Details</div>
@@ -147,10 +157,7 @@ export default function About() {
 								<div>{project.about_project.working_period}</div>
 								<div>{project.skills}</div>
 								<div>
-									<ExternalLink
-										href={project.about_client.website}
-										name={project.about_client.website.slice(8)}
-									/>
+									<ExternalLink href={project.about_client.website} name={project.about_client.website.slice(8)} />
 								</div>
 							</div>
 						</div>
@@ -172,10 +179,7 @@ export default function About() {
 					<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
 						<div>Lia Privat</div>
 						<div> June 2018 - Now (5 years)</div>
-						<div>
-							Teaching math and physics for junior and senior highschool
-							students at home
-						</div>
+						<div>Teaching math and physics for junior and senior highschool students at home</div>
 					</div>
 				</Box>
 
@@ -231,13 +235,7 @@ export default function About() {
 	);
 }
 
-function Box({
-	title,
-	children,
-}: {
-	title: string;
-	children: React.ReactNode;
-}) {
+function Box({ title, children }: { title: string; children: React.ReactNode }) {
 	return (
 		<div className="border border-zinc-400/50 rounded overflow-hidden">
 			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">

@@ -11,20 +11,15 @@ export default function ExportedDialog() {
 	return (
 		<LayoutToExperiments title="Dialog" domain="Headless UI">
 			<SubTitle>
-				<ExternalLink
-					name="Headless UI Dialog"
-					href="https://headlessui.dev/react/dialog"
-				/>
+				<ExternalLink name="Headless UI Dialog" href="https://headlessui.dev/react/dialog" />
 				<ExplanationList>
 					<li>
-						A fully-managed, renderless dialog component jam-packed with
-						accessibility and keyboard features, perfect for building completely
-						custom modal and dialog windows for your next application.
+						A fully-managed, renderless dialog component jam-packed with accessibility and keyboard features, perfect
+						for building completely custom modal and dialog windows for your next application.
 					</li>
 					<li>
-						Click the button and the box will appear (usually) in the center of
-						screen, and the user should close it using close button or click on
-						the outside the box area.
+						Click the button and the box will appear (usually) in the center of screen, and the user should close it
+						using close button or click on the outside the box area.
 					</li>
 				</ExplanationList>
 			</SubTitle>
@@ -41,13 +36,7 @@ export default function ExportedDialog() {
 	);
 }
 
-const Wrapper = ({
-	title,
-	children,
-}: {
-	title: string;
-	children: React.ReactNode;
-}) => {
+const Wrapper = ({ title, children }: { title: string; children: React.ReactNode }) => {
 	return (
 		<div>
 			<Section name={title} />
@@ -63,7 +52,7 @@ const DialogExample1 = () => {
 			<button
 				// type='button'
 				onClick={() => setIsOpen(true)}
-				className={`rounded-full px-4 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white active:ring-orange-500 ${
+				className={`rounded-full px-4 py-2 text-sm font-medium bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-orange-500 ${
 					isOpen ? "ring-2 ring-orange-500" : ""
 				}`}
 			>
@@ -80,9 +69,8 @@ const DialogExample1 = () => {
 				<div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
 					<Dialog.Title className="text-xl font-semibold">Title</Dialog.Title>
 					<Dialog.Description className="text-zinc-600">
-						Lorem ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry&apos;s standard dummy
-						text ever since the 1500s.
+						Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+						industry&apos;s standard dummy text ever since the 1500s.
 					</Dialog.Description>
 					<div className="flex w-full justify-end">
 						<button
@@ -105,7 +93,7 @@ const DialogExample2 = () => {
 			<button
 				// type='button'
 				onClick={() => setIsOpen(true)}
-				className={`rounded-full bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm font-medium text-white active:ring-orange-500 ${
+				className={`rounded-full bg-blue-600 hover:bg-[#2563eb]/90 px-4 py-2 text-sm font-medium text-white active:ring-orange-500 ${
 					isOpen ? "ring-2 ring-orange-500" : ""
 				}`}
 			>
@@ -131,9 +119,8 @@ const DialogExample2 = () => {
 					<div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
 						<Dialog.Title className="text-xl font-semibold">Title</Dialog.Title>
 						<Dialog.Description className="text-zinc-600">
-							Lorem ipsum is simply dummy text of the printing and typesetting
-							industry. Lorem Ipsum has been the industry&apos;s standard dummy
-							text ever since the 1500s.
+							Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+							industry&apos;s standard dummy text ever since the 1500s.
 						</Dialog.Description>
 						<div className="flex w-full justify-end">
 							<button
