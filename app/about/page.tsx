@@ -109,7 +109,7 @@ export default function About() {
 					))}
 				</ul>
 			</div>
-			<div className="space-y-14">
+			<div className="space-y-14 mb-14">
 				<Box title="Core Skills">
 					<div className="space-y-1">
 						<div className="font-semibold">Web Software Engineering</div>
@@ -230,6 +230,11 @@ export default function About() {
 						</div>
 					))}
 				</Box>
+			</div>
+			<div className="p-4 border border-zinc-400/50 rounded-md text-zinc-400">
+				harits<span className="font-semibold text-zinc-800">sr</span> = harits{" "}
+				<span className="font-semibold text-zinc-800">s</span>yah <span className="font-semibold text-zinc-800">r</span>
+				ahmatullah
 			</div>
 		</div>
 	);
