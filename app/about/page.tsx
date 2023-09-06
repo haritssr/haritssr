@@ -32,7 +32,7 @@ export default function About() {
 					return (
 						<div key={section.section}>
 							<div className="text-zinc-800 text-xl font-semibold mb-1.5">{section.section}</div>
-							<div className="mb-1.5 text-zinc-800">{section.description}</div>
+							<div className="mb-1.5 text-zinc-500">{section.description}</div>
 							<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
 								{section.points.map((point) => (
 									<li key={point} className="text-zinc-500 py-1.5">
@@ -73,7 +73,7 @@ export default function About() {
 			{/* Contacts */}
 			<div className="mb-14">
 				<div className="text-zinc-800 text-xl font-semibold mb-1.5">{ContactData.section}</div>
-				<div className="mb-1.5 text-zinc-800">{ContactData.description}</div>
+				<div className="mb-1.5 text-zinc-500">{ContactData.description}</div>
 				<ul className="block divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
 					{ContactData.points.map((each) => (
 						<li key={each.link} className="text-zinc-500 py-1.5 flex space-x-3 items-center">

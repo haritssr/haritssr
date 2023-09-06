@@ -40,7 +40,6 @@ export const ContactData = {
 		{ icon: "/Icons/outlook.jpg", link: "haritssr@outlook.com" },
 		{ icon: "/Icons/twitter.jpg", link: "https://www.twitter.com/haritssr" },
 		{ icon: "/Icons/github.jpg", link: "https://www.github.com/haritssr" },
-		{ icon: "/Icons/leetcode.jpg", link: "https://www.leetcode.com/haritssr" },
 		{ icon: "/Icons/haritssr.svg", link: "https://www.haritssr.com" },
 	],
 };

@@ -1,7 +1,5 @@
 import InternalLink from "@/components/InternalLink";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Contacts() {
 	return (
