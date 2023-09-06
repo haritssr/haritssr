@@ -4,7 +4,6 @@ export const AboutData = [
 		description: "Brief facts about me.",
 		points: [
 			"My name is Harits Syah, I prefer to be called Haris.",
-			"haritssr at haritssr.com mean harits syah rahmatullah.",
 			"I am a Web Software Engineer, Web Designer, and Math-Physics Teacher.",
 			"I am a touch typer.",
 			"I am a physics students at UIN Syarif Hidayatullah, Jakarta.",
@@ -40,7 +39,6 @@ export const ContactData = {
 		{ icon: "/Icons/outlook.jpg", link: "haritssr@outlook.com" },
 		{ icon: "/Icons/twitter.jpg", link: "https://www.twitter.com/haritssr" },
 		{ icon: "/Icons/github.jpg", link: "https://www.github.com/haritssr" },
-		{ icon: "/Icons/leetcode.jpg", link: "https://www.leetcode.com/haritssr" },
 		{ icon: "/Icons/haritssr.svg", link: "https://www.haritssr.com" },
 	],
 };

@@ -9,7 +9,7 @@ export default function Technology() {
 			className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4"
 			explanation="My choosen libraries and framework to build web application."
 		>
-			<InternalLink name="Take A Look" href="/technology" />
+			<InternalLink name="Explore" href="/technology" />
 		</Wrapper>
 	);
 }

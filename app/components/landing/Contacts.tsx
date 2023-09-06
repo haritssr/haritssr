@@ -1,7 +1,6 @@
 import InternalLink from "@/components/InternalLink";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import Link from "next/link";
+import PopoverContact from "../PopoverContact";
 
 export default function Contacts() {
 	return (
@@ -23,8 +22,9 @@ export default function Contacts() {
 								/>
 							</section>
 						</div>
-						<div className="">
+						<div className="space-y-1">
 							<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
+							<PopoverContact />
 						</div>
 					</div>
 				</div>

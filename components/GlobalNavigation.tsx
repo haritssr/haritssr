@@ -11,14 +11,7 @@ export default function GlobalNavigation() {
 			<div className="mx-auto flex max-w-5xl justify-between items-center px-3 py-2.5 lg:px-0">
 				{/* Harits Syah */}
 				<div className="flex items-center space-x-2 group">
-					<Image
-						alt="Harits Syah"
-						src="/Icons/haritssr.svg"
-						height={20}
-						width={20}
-						priority
-						className="h-5 w-5"
-					/>
+					<Image alt="Harits Syah" src="/Icons/haritssr.svg" height={20} width={20} priority className="h-5 w-5" />
 					<Link href="/" className=" text-zinc-800" aria-label="site logo">
 						Harits Syah
 					</Link>
@@ -56,11 +49,4 @@ export default function GlobalNavigation() {
 	);
 }
 
-const links = [
-	"experiences",
-	"experiments",
-	"blog",
-	"technology",
-	"pure",
-	"about",
-];
+const links = ["experiences", "experiments", "blog", "pure", "about"];
