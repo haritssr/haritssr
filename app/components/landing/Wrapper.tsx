@@ -6,13 +6,7 @@ import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
-const ToastCopy = ({
-	topic,
-	handleCopy,
-}: {
-	topic: string;
-	handleCopy: (page: string) => Promise<void>;
-}) => {
+const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: string) => Promise<void> }) => {
 	const [open, setOpen] = React.useState(false);
 	const eventDateRef = React.useRef(new Date());
 	const timerRef = React.useRef(0);
@@ -33,9 +27,7 @@ const ToastCopy = ({
 				title="Copy this section page"
 				className="cursor-pointer p-[5px]"
 				onClick={() => {
-					handleCopy(
-						`haritssr.com/${topic.toLowerCase().split(" ").join("-")}`
-					);
+					handleCopy(`haritssr.com/${topic.toLowerCase().split(" ").join("-")}`);
 					setOpen(false);
 					window.clearTimeout(timerRef.current);
 					timerRef.current = window.setTimeout(() => {
@@ -108,10 +100,7 @@ export default function Wrapper({
 						<>
 							<div className="flex items-center justify-between w-full">
 								<div className="flex items-center space-x-2">
-									<Link
-										href={`/#${id}`}
-										className=" text-2xl sm:text-3xl font-bold text-zinc-800"
-									>
+									<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800">
 										{topic}
 									</Link>
 									<div>
@@ -130,16 +119,12 @@ export default function Wrapper({
 										{open ? (
 											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-2.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 border-zinc-300">
 												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700" />
-												<span className="text-tiny hidden sm:block text-zinc-700 select-none">
-													Show Less
-												</span>
+												<span className="text-tiny hidden sm:block text-zinc-700 select-none">Show Less</span>
 											</div>
 										) : (
 											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-2.5 sm:py-[3px] rounded-full border border-zinc-800 bg-zinc-800 text-white hover:bg-zinc-700">
 												<ChevronDownIcon className="h-4 w-4 stroke-2" />
-												<span className="text-tiny hidden sm:block select-none">
-													Show More
-												</span>
+												<span className="text-tiny hidden sm:block select-none">Show More</span>
 											</div>
 										)}
 									</Disclosure.Button>
@@ -148,9 +133,7 @@ export default function Wrapper({
 							{/* body */}
 							<Disclosure.Panel>
 								<div className="mb-16">
-									<div className="my-4 text-base sm:text-lg text-zinc-800 select-none">
-										{explanation}
-									</div>
+									<div className="my-4 text-base sm:text-lg text-zinc-500 select-none">{explanation}</div>
 									<div className={className}>{children}</div>
 								</div>
 							</Disclosure.Panel>
@@ -162,10 +145,7 @@ export default function Wrapper({
 					{/* header */}
 					<section className="mb-4 flex items-center justify-between">
 						<div className="flex items-center space-x-2">
-							<Link
-								href={`/#${id}`}
-								className=" text-2xl sm:text-3xl font-bold text-zinc-800"
-							>
+							<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800">
 								{topic}
 							</Link>
 							<div>
@@ -175,9 +155,7 @@ export default function Wrapper({
 					</section>
 					{/* body */}
 					<div className="mb-16">
-						<div className="mb-4 text-base sm:text-lg text-zinc-800 select-none">
-							{explanation}
-						</div>
+						<div className="mb-4 text-base sm:text-lg text-zinc-500 select-none">{explanation}</div>
 						<div className={className}>{children}</div>
 					</div>
 				</>
