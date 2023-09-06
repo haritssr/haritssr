@@ -27,6 +27,45 @@ export default function About() {
 				<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
 			</div>
 
+			{/* Contacts */}
+			<div className="mb-14">
+				<div className="text-zinc-800 text-xl font-semibold mb-1.5">{ContactData.section}</div>
+				<div className="mb-1.5 text-zinc-500">{ContactData.description}</div>
+				<ul className="block divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
+					{ContactData.points.map((each) => (
+						<li key={each.link} className="text-zinc-500 py-1.5 flex space-x-3 items-center">
+							<Image alt={each.link} src={each.icon} height={20} width={20} className="h-[18px] w-[18px]" />
+							{each.link.startsWith("https://www.") ? (
+								<a
+									title={each.link}
+									className="hover:underline hover:text-zinc-800"
+									target="_blank"
+									rel="noreferrer noopener"
+									href={each.link}
+								>
+									{each.link.slice(12)}
+								</a>
+							) : each.link.startsWith("https://") ? (
+								<a
+									title={each.link}
+									className="hover:underline hover:text-zinc-800"
+									target="_blank"
+									rel="noreferrer noopener"
+									href={each.link}
+								>
+									{each.link.slice(8)}
+								</a>
+							) : each.link.includes("@") ? (
+								<a className="hover:underline hover:text-zinc-800" href={`mailto:${each.link}`}>
+									{each.link}
+								</a>
+							) : (
+								each.link
+							)}
+						</li>
+					))}
+				</ul>
+			</div>
 			<div className="space-y-14 mb-14">
 				{AboutData.map((section) => {
 					return (
@@ -70,46 +109,8 @@ export default function About() {
 					);
 				})}
 			</div>
-			{/* Contacts */}
-			<div className="mb-14">
-				<div className="text-zinc-800 text-xl font-semibold mb-1.5">{ContactData.section}</div>
-				<div className="mb-1.5 text-zinc-500">{ContactData.description}</div>
-				<ul className="block divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
-					{ContactData.points.map((each) => (
-						<li key={each.link} className="text-zinc-500 py-1.5 flex space-x-3 items-center">
-							<Image alt={each.link} src={each.icon} height={20} width={20} className="h-[18px] w-[18px]" />
-							{each.link.startsWith("https://www.") ? (
-								<a
-									title={each.link}
-									className="hover:underline hover:text-zinc-800"
-									target="_blank"
-									rel="noreferrer noopener"
-									href={each.link}
-								>
-									{each.link.slice(12)}
-								</a>
-							) : each.link.startsWith("https://") ? (
-								<a
-									title={each.link}
-									className="hover:underline hover:text-zinc-800"
-									target="_blank"
-									rel="noreferrer noopener"
-									href={each.link}
-								>
-									{each.link.slice(8)}
-								</a>
-							) : each.link.includes("@") ? (
-								<a className="hover:underline hover:text-zinc-800" href={`mailto:${each.link}`}>
-									{each.link}
-								</a>
-							) : (
-								each.link
-							)}
-						</li>
-					))}
-				</ul>
-			</div>
-			<div className="space-y-14 mb-14">
+
+			<div className="space-y-6 mb-6">
 				<Box title="Core Skills">
 					<div className="space-y-1">
 						<div className="font-semibold">Web Software Engineering</div>
@@ -149,7 +150,7 @@ export default function About() {
 									className="flex items-center justify-end text-zinc-400 hover:underline"
 								>
 									<div className="text-tiny ">Details</div>
-									<ChevronRightIcon className="h-4 w-4" />
+									<ChevronRightIcon className="h-4 w-4 pt-[2px] stroke-2" />
 								</Link>
 							</div>
 							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
