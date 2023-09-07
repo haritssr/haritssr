@@ -29,7 +29,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 	} else if (CurrentPageBaseRoute === to.substring(1)) {
 		color = "text-action";
 	} else {
-		color = "text-zinc-500";
+		color = "text-zinc-600";
 	}
 	function capitalizeFirstLetter(to: string) {
 		return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
@@ -38,7 +38,14 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 	return (
 		<Link passHref href={`${to === "/home" ? "/" : to}`} className="block w-1/5 active:scale-95">
 			<div className="flex flex-col items-center justify-center py-[5px]">
-				<svg xmlns="http://www.w3.org/2000/svg" className={`h-7 w-7 ${color}`} viewBox="0 0 24 24" fill="currentColor">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className={`h-7 w-7 ${color}`}
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					fill="none"
+					strokeWidth={1.5}
+				>
 					{path}
 				</svg>
 
