@@ -89,7 +89,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 							{/* SubNavigation */}
 							<section
 								className={`sticky top-0 sm:top-[44.5px] border-b ${
-									inView ? "border-zinc-200" : "border-b bg-white/80 saturate-150 backdrop-blur-lg"
+									inView ? "border-zinc-200" : "border-b bg-white/70 saturate-150 backdrop-blur-lg"
 								} z-40 mb-5 bg-white py-2`}
 							>
 								<div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
