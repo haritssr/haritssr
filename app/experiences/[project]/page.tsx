@@ -30,9 +30,7 @@ export default function ExperiencesPage({ params }) {
 	return (
 		<div className="bg-white">
 			<Head>
-				<title>
-					{pathname === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}
-				</title>
+				<title>{pathname === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}</title>
 				<link rel="icon" href="/Icons/haritssr.svg" />
 				<meta name="theme-color" content="#27272a" />
 				<meta name="robots" content="follow, index" />
@@ -57,12 +55,8 @@ export default function ExperiencesPage({ params }) {
 				{/* Title */}
 				<section className="my-8 sm:my-10 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
 					<div className="">
-						<div className="text-2xl sm:text-3xl break-words font-bold ">
-							{project.project_name}
-						</div>
-						<div className="text-zinc-500 text-lg">
-							{project.about_client.website}
-						</div>
+						<div className="text-2xl sm:text-3xl break-words font-bold ">{project.project_name}</div>
+						<div className="text-zinc-500 text-lg">{project.about_client.website}</div>
 					</div>
 					<Image
 						src={project.about_client.logo_src}
@@ -77,9 +71,7 @@ export default function ExperiencesPage({ params }) {
 				<section className="grid grid-cols-1 sm:grid-cols-2 sm:gap-16 gap-10">
 					{/* About The Client */}
 					<section>
-						<h2 className="mb-5 text-xl font-bold text-zinc-800 border-b pb-4 border-zinc-300">
-							About The Client
-						</h2>
+						<h2 className="mb-5 text-xl text-zinc-800 border-b pb-4 border-zinc-300 font-semibold">About The Client</h2>
 						<div className="mt-5 text-zinc-800 font-medium ">Company Name</div>
 						<p className="text-zinc-500">{project.about_client.company_name}</p>
 
@@ -93,16 +85,9 @@ export default function ExperiencesPage({ params }) {
 						<p className="text-zinc-500">{project.about_client.phone_number}</p>
 
 						<div className="mt-5 text-zinc-800 font-medium ">Website</div>
-						<ExternalLink
-							href={project.about_client.website}
-							name={project.about_client.website}
-						/>
-						<div className="mt-5 text-zinc-800 font-medium ">
-							Office Location
-						</div>
-						<p className="text-zinc-500">
-							{project.about_client.office_location}
-						</p>
+						<ExternalLink href={project.about_client.website} name={project.about_client.website} />
+						<div className="mt-5 text-zinc-800 font-medium ">Office Location</div>
+						<p className="text-zinc-500">{project.about_client.office_location}</p>
 					</section>
 
 					{/* About The Project */}
@@ -120,16 +105,10 @@ export default function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 font-medium ">
-							Working Period
-						</div>
-						<p className="text-zinc-500">
-							{project.about_project.working_period}
-						</p>
+						<div className="mt-5 text-zinc-800 font-medium ">Working Period</div>
+						<p className="text-zinc-500">{project.about_project.working_period}</p>
 
-						<div className="mt-5 text-zinc-800 font-medium ">
-							Website Status
-						</div>
+						<div className="mt-5 text-zinc-800 font-medium ">Website Status</div>
 						<ExplanationList>
 							{project.about_project.website_status.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
@@ -138,9 +117,7 @@ export default function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 font-medium ">
-							Website Routes
-						</div>
+						<div className="mt-5 text-zinc-800 font-medium ">Website Routes</div>
 						<ExplanationList>
 							{project.about_project.routes.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
@@ -149,9 +126,7 @@ export default function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 font-medium ">
-							Website Features
-						</div>
+						<div className="mt-5 text-zinc-800 font-medium ">Website Features</div>
 						<ExplanationList>
 							{project.about_project.features.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
@@ -164,16 +139,10 @@ export default function ExperiencesPage({ params }) {
 
 				{/* Design */}
 				<section className="mt-10">
-					<h2 className="mb-5 text-xl font-semibold text-zinc-800 uppercase">
-						Design
-					</h2>
+					<h2 className="mb-5 text-xl font-semibold text-zinc-800 uppercase">Design</h2>
 					<Suspense fallback={<div>Loading...</div>}>
-						{project.figma !== "" ? (
-							<iframe
-								className="w-full h-[600px]"
-								src={project.figma}
-								allowFullScreen
-							></iframe>
+						{project.figma.length !== 0 ? (
+							project.figma.map((a) => <iframe key={a} className="w-full h-[600px]" src={a} allowFullScreen></iframe>)
 						) : (
 							<p className="text-zinc-800 ">No design</p>
 						)}
