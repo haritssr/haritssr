@@ -10,7 +10,7 @@ export default function BackButton({ name, href }: { name: string; href: string 
 						className="-ml-2 h-5 w-5 pt-[1px] text-action sm:group-hover:text-[#2563eb]/80"
 						strokeWidth={2}
 					/>
-					<span className="-ml-0.5 block truncate text-action sm:group-hover:text-[#2563eb]/80 active:underline">
+					<span className="-ml-0.5 block truncate text-action sm:group-hover:text-[#2563eb]/80 sm:active:underline">
 						{name}
 					</span>
 				</span>
