@@ -4,8 +4,7 @@ export const ExperiencesData = [
 		about_client: {
 			logo_src: "/Icons/harislab.svg",
 			brand_name: "Haris Lab",
-			short_about:
-				"Reference, analyze, practice, assesment, tutoring Math and Physics.",
+			short_about: "Reference, analyze, practice, assesment, tutoring Math and Physics.",
 			long_about:
 				"Provide online platform for reference, analyze, practice, assesment, and offline tutoring math and physics high school and early college level.",
 			company_name: "PT Haris Laboratorium Indonesia",
@@ -17,13 +16,24 @@ export const ExperiencesData = [
 		about_project: {
 			client: "PT Haris Laboratorium Indonesia, via Harits Syah*",
 			my_role: ["Software Engineer", "Designer", "Owner"],
-			working_period: "Jun 2021 - Oct 2022",
+			working_period: "Jun 2021 - Present",
 			website_status: ["Production"],
 			routes: ["Home", "Referensi", "Analisis", "Latihan", "Bimbel"],
-			features: ["Analytics", "Global Navigation"],
+			features: [
+				"Analytics",
+				"Global Navigation",
+				"Intellisense (Coming soon)",
+				"Global Search (Coming soon)",
+				"Order Privat Teacher to Home",
+				"etc",
+			],
 		},
-		figma:
+		figma: [
 			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3D5Uuj3yJYxE0m8oO0-1",
+			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1569%253A398%26mode%3Ddesign%26t%3DtKJz20Q2FkrlCAP8-1",
+			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1679%253A1158%26mode%3Ddesign%26t%3DjY8E0rsBg5LkLvHK-1",
+			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1405%253A2%26mode%3Ddesign%26t%3DjY8E0rsBg5LkLvHK-1",
+		],
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale",
 	},
 	{
@@ -31,8 +41,7 @@ export const ExperiencesData = [
 		about_client: {
 			logo_src: "/Icons/aka-tradingindo.PNG",
 			brand_name: "AKA Trading Indonesia",
-			short_about:
-				"Provide agricultural product for all your need. From coffee to spices.",
+			short_about: "Provide agricultural product for all your need. From coffee to spices.",
 			long_about:
 				"Cooperating and collaborating with various stakeholders to produce and distribute agricultural products that meet your qualifications.",
 			company_name: "PT AKA Trading Indonesia",
@@ -52,15 +61,13 @@ export const ExperiencesData = [
 				"Updating the website according to the owner's request",
 			],
 			working_period: "Jun 2021 - Des 2021",
-			website_status: [
-				"Production",
-				"Change management (site manage by AKA Trading team, not by me anymore)",
-			],
+			website_status: ["Production", "Change management (site manage by AKA Trading team, not by me anymore)"],
 			routes: ["Home", "About us", "Products", "Contact"],
 			features: ["Form Email", "Map", "Global Navigation"],
 		},
-		figma:
+		figma: [
 			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FOO23zC5c2iErduRQkQAfsI%2FAKA-Trading-Indonesia%3Fnode-id%3D202%253A2",
+		],
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale",
 	},
 	{
@@ -68,12 +75,11 @@ export const ExperiencesData = [
 		about_client: {
 			logo_src: "/Icons/harisstudio.svg",
 			brand_name: "Haris Studio",
-			short_about:
-				"Provide web design, web creation, and web user experience services.",
+			short_about: "Provide web design, web creation, and web user experience services.",
 			long_about: "-",
 			company_name: "PT Haris Studio Indonesia",
 			phone_number: "+62-8953-3110-3401",
-			website: "https://www.harisstudio.com",
+			website: "https://harisstudio.vercel.app",
 			office_location: "-",
 			industry: "Web Design",
 		},
@@ -85,8 +91,9 @@ export const ExperiencesData = [
 			routes: ["Home", "Referensi", "Analisis", "Latihan", "Bimbel"],
 			features: [""],
 		},
-		figma:
+		figma: [
 			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuGmQbyzyBBOS3RAUEJKQws%2FHaris-Studio%3Fnode-id%3D0%253A1",
+		],
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale",
 	},
 	{
@@ -94,8 +101,7 @@ export const ExperiencesData = [
 		about_client: {
 			logo_src: "/Icons/mixa-perkasa.jpg",
 			brand_name: "Mixa Perkasa",
-			short_about:
-				"Renovation contractor, new building, interior design, landscape work, etc.",
+			short_about: "Renovation contractor, new building, interior design, landscape work, etc.",
 			long_about:
 				"Starting from a small business with experience in the field of construction and land, now it has grown into a company engaged in Renovation Contractors, New Buildings, Interior Design and Landscape Works.",
 			company_name: "PT Mixa Perkasa Indonesia",
@@ -113,7 +119,7 @@ export const ExperiencesData = [
 			routes: ["Home", "Project", "Product", "About"],
 			features: ["Global Navigation"],
 		},
-		figma: "",
+		figma: [],
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale",
 	},
 	{
@@ -121,8 +127,7 @@ export const ExperiencesData = [
 		about_client: {
 			logo_src: "/Icons/awm.jpg",
 			brand_name: "Arsya, Nice Time",
-			short_about:
-				"Providing good food, drinks, and good place for our loved customers.",
+			short_about: "Providing good food, drinks, and good place for our loved customers.",
 			long_about: "-",
 			company_name: "CV Asriyasa Wyata Mandiri",
 			phone_number: "(021)-222-10-200",
@@ -139,8 +144,9 @@ export const ExperiencesData = [
 			routes: ["Home", "Nice Time", "About us"],
 			features: ["Global Navigation"],
 		},
-		figma:
+		figma: [
 			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F5UlfaU19xiex5E4sECrKu1%2FAWM",
+		],
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale",
 	},
 
@@ -149,10 +155,8 @@ export const ExperiencesData = [
 		about_client: {
 			logo_src: "/Icons/haritssr.svg",
 			brand_name: "Harits Syah Personal Site",
-			short_about:
-				"Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
-			long_about:
-				"Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
+			short_about: "Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
+			long_about: "Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
 			company_name: "Personal Site",
 			phone_number: "+62-8953-3110-3401",
 			website: "https://www.haritssr.com",
@@ -167,8 +171,9 @@ export const ExperiencesData = [
 			routes: ["Home", "Experiments", "Experiences", "Design Systems"],
 			features: ["Global Navigation", "CV", "Experiences", "Experiment"],
 		},
-		figma:
+		figma: [
 			"https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FbLTdTJgThkmzd5aAZVP8Rr%2Fharitssr%3Fnode-id%3D17%253A2",
+		],
 		skills: "Skills: React, Next.js, TypeScript, Prisma, PlanetScale",
 	},
 ];

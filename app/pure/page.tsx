@@ -102,9 +102,13 @@ export default function DesignSystem() {
 					<ExternalLink href="https://github.com/haritssr/haritssr/tree/main/components" name="here" />
 				</li>
 				<li>
-					If you want to see other variation of this component you can see{" "}
+					If you want to see other variation of these component you can see{" "}
 					<InternalLink href="/experiments/radix-ui" name="here" /> or{" "}
 					<InternalLink href="/experiments/headless-ui" name="here" />
+				</li>
+				<li>
+					There is a lot of work to be done in this design system, like: typography, use cases, example, do&apos;s and
+					don&apos;t&apos;s, description to each UI component, and guidelines. Coming soon.
 				</li>
 			</ExplanationList>
 			<div className="mb-10" />
