@@ -106,6 +106,10 @@ export default function DesignSystem() {
 					<InternalLink href="/experiments/radix-ui" name="here" /> or{" "}
 					<InternalLink href="/experiments/headless-ui" name="here" />
 				</li>
+				<li>
+					There is a lot of work to be done in this design system, like: typography, use cases, example, do&apos;s and
+					don&apos;t&apos;s, description to each UI component, and guidelines. Coming soon.
+				</li>
 			</ExplanationList>
 			<div className="mb-10" />
 			<Section name="UI Components" />
