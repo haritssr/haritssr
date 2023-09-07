@@ -96,7 +96,7 @@ export default function DesignSystem() {
 					maintaining consistency, and familiarity.
 				</li>
 				<li>Each component already have hover and active state (not all component need that state though)</li>
-				<li>This design system is accessible at mobile and desktop web.</li>
+				<li>This design system is accessible at mobile and desktop web (a.k.a responsive).</li>
 				<li>
 					You can see the component code{" "}
 					<ExternalLink href="https://github.com/haritssr/haritssr/tree/main/components" name="here" />
