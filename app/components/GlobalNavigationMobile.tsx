@@ -7,7 +7,7 @@ import { TitleAndPathData } from "data/TitleAndPathData";
 
 export default function GlobalNavigationMobile() {
 	return (
-		<div className="sticky bottom-0 block  w-full border-t border-zinc-300 bg-white/80 saturate-150 backdrop-blur-lg sm:hidden">
+		<div className="sticky bottom-0 block  w-full border-t border-zinc-200 bg-white/80 saturate-150 backdrop-blur-lg sm:hidden">
 			<div className="flex w-full items-center ">
 				{TitleAndPathData.map(({ title, path }) => (
 					<IconWrapper key={title} to={`/${title}`} path={path} />
@@ -36,24 +36,13 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 	}
 
 	return (
-		<Link
-			passHref
-			href={`${to === "/home" ? "/" : to}`}
-			className="block w-1/5 active:scale-95"
-		>
+		<Link passHref href={`${to === "/home" ? "/" : to}`} className="block w-1/5 active:scale-95">
 			<div className="flex flex-col items-center justify-center py-[5px]">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					className={`h-7 w-7 ${color}`}
-					viewBox="0 0 24 24"
-					fill="currentColor"
-				>
+				<svg xmlns="http://www.w3.org/2000/svg" className={`h-7 w-7 ${color}`} viewBox="0 0 24 24" fill="currentColor">
 					{path}
 				</svg>
 
-				<div className={`text-[11px] leading-[15px] -mt-[1px] ${color}`}>
-					{capitalizeFirstLetter(to)}
-				</div>
+				<div className={`text-[11px] leading-[15px] -mt-[1px] ${color}`}>{capitalizeFirstLetter(to)}</div>
 			</div>
 		</Link>
 	);
