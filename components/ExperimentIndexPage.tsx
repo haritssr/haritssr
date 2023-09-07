@@ -19,8 +19,8 @@ export default function ExperimentIndexPage({ experiment }: { experiment: Experi
 		<Layout browserTitle={experiment.title} description={experiment.description}>
 			{/* SubNavigation */}
 			<section
-				className={`sticky -top-0 sm:top-[44.5px] border-b -mx-6 sm:max-w-3xl sm:mx-auto sm:mt-10 ${
-					inView ? "border-zinc-300" : "border-b bg-white/80 saturate-150 backdrop-blur-lg"
+				className={`sticky -top-0 sm:top-[44.5px] border-b -mx-5 sm:max-w-3xl sm:mx-auto sm:mt-10 ${
+					inView ? "border-zinc-200" : "border-b bg-white/70 saturate-150 backdrop-blur-lg"
 				} z-40 mb-5 bg-white py-2.5 sm:border-none`}
 			>
 				<div className="mx-auto flex max-w-3xl items-center justify-between px-3 sm:px-3.5">

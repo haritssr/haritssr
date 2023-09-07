@@ -13,7 +13,7 @@ export const AboutData = [
 	},
 	{
 		section: "UX",
-		description: "My preferable sources of UX principles.",
+		description: "My preferable sources of UX principles when designing web application.",
 		points: [
 			"https://www.nngroup.com",
 			"https://www.lawsofux.com",
@@ -21,7 +21,7 @@ export const AboutData = [
 		],
 	},
 	{
-		section: "Web Design",
+		section: "My Web Design Taste",
 		description: "I like how their user interface is presented and inspired to be like them.",
 		points: ["https://www.apple.com", "https://www.linear.app", "https://www.vercel.com", "https://www.notion.so"],
 	},

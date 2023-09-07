@@ -7,7 +7,7 @@ export default function ExternalLink({ name, href, big }: { name: string; href: 
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="group inline-block w-fit cursor-pointer items-center text-action active:underline group-hover:text-[#2563eb]/80"
+				className="group inline-block w-fit cursor-pointer items-center text-action sm:active:underline group-hover:text-[#2563eb]/80"
 			>
 				<span className="flex items-center">
 					<span className={`${big ? "text-lg font-medium" : "text-base"}`}>{name}</span>
