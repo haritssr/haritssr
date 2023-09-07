@@ -40,7 +40,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 			<div className="flex flex-col items-center justify-center py-[5px]">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					className={`h-7 w-7 ${color}`}
+					className={`h-6 w-6 ${color}`}
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 					fill="none"
