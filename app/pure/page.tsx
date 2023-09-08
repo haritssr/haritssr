@@ -114,17 +114,6 @@ export default function DesignSystem() {
 			<div className="mb-10" />
 			<Section name="UI Components" />
 			<section className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-				<Box title="Toggle">
-					<Toggle.Root
-						onPressedChange={() => {
-							setPressed(!pressed);
-						}}
-						pressed={pressed}
-						className=" rounded-md border border-zinc-400 bg-white px-3 py-1 text-zinc-800 data-[state=on]:bg-blue-50 hover:bg-zinc-50 data-[state=on]:border-blue-600 data-[state=on]:text-action"
-					>
-						{pressed ? "Toggle : ON" : "Toggle : OFF"}
-					</Toggle.Root>
-				</Box>
 				<Box title="Switch">
 					<Switch.Root
 						defaultChecked
@@ -332,35 +321,101 @@ export default function DesignSystem() {
 					</button>
 				</Box>
 				<Box title="Main Colors">
-					<div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
-						<div className="|">
-							<div className="h-20 w-20 rounded bg-action" />
-							<div className="text-zinc-500">#2563eb</div>
+					<div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
+						<div>
+							<div className="h-12 w-12 rounded bg-green-500" />
+							<div className="text-zinc-400 text-[13px]">Success</div>
+							<div className="text-zinc-400 text-[13px]">#34c759</div>
 						</div>
-						<div className="">
-							<div className="h-20 w-20 rounded bg-zinc-800" />
-							<div className="text-zinc-500">#27272a</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-yellow-500" />
+							<div className="text-zinc-400 text-[13px]">Attention</div>
+							<div className="text-zinc-400 text-[13px]">#eab308</div>
 						</div>
-						<div className="">
-							<div className="h-20 w-20 rounded bg-white border" />
-							<div className="text-zinc-500">#fff</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-red-500" />
+							<div className="text-zinc-400 text-[13px]">Danger</div>
+							<div className="text-zinc-400 text-[13px]">#ef4444</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-action" />
+							<div className="text-zinc-400 text-[13px]">Action</div>
+							<div className="text-zinc-400 text-[13px]">#2563eb</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-800" />
+							<div className="text-zinc-400 text-[13px]">Black</div>
+							<div className="text-zinc-400 text-[13px]">#27272a</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-white border" />
+							<div className="text-zinc-400 text-[13px]">Background</div>
+							<div className="text-zinc-400 text-[13px]">#fff</div>
 						</div>
 					</div>
 				</Box>
 				<Box title="Hierachical Colors">
-					<div className="grid grid-cols-4 gap-5">
-						<div className="h-10 w-10 rounded bg-white border" />
-						<div className="h-10 w-10 rounded bg-zinc-50 border" />
-						<div className="h-10 w-10 rounded bg-zinc-100" />
-						<div className="h-10 w-10 rounded bg-zinc-200" />
-						<div className="h-10 w-10 rounded bg-zinc-300" />
-						<div className="h-10 w-10 rounded bg-zinc-400" />
-						<div className="h-10 w-10 rounded bg-zinc-500" />
-						<div className="h-10 w-10 rounded bg-zinc-600" />
-						<div className="h-10 w-10 rounded bg-zinc-700" />
-						<div className="h-10 w-10 rounded bg-zinc-800" />
-						<div className="h-10 w-10 rounded bg-zinc-900" />
-						<div className="h-10 w-10 rounded bg-black" />
+					<div className="grid grid-cols-4 sm:grid-cols-6 gap-x-5 gap-y-1 sm:gap-y-5">
+						<div>
+							<div className="h-12 w-12 rounded bg-white border" />
+							<div className="text-zinc-400 text-[13px]">white</div>
+							<div className="text-zinc-400 text-[13px]">#fff</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-50 border" />
+							<div className="text-zinc-400 text-[13px]">zinc-50</div>
+							<div className="text-zinc-400 text-[13px]">#fafafa</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-100" />
+							<div className="text-zinc-400 text-[13px]">zinc-100</div>
+							<div className="text-zinc-400 text-[13px]">#f4f4f5</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-200" />
+							<div className="text-zinc-400 text-[13px]">zinc-200</div>
+							<div className="text-zinc-400 text-[13px]">#e4e4e7</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-300" />
+							<div className="text-zinc-400 text-[13px]">zinc-300</div>
+							<div className="text-zinc-400 text-[13px]">#d4d4d8</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-400" />
+							<div className="text-zinc-400 text-[13px]">zinc-400</div>
+							<div className="text-zinc-400 text-[13px]">#a1a1aa</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-500" />
+							<div className="text-zinc-400 text-[13px]">zinc-500</div>
+							<div className="text-zinc-400 text-[13px]">#6b7280</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-600" />
+							<div className="text-zinc-400 text-[13px]">zinc-600</div>
+							<div className="text-zinc-400 text-[13px]">#52525b</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-700" />
+							<div className="text-zinc-400 text-[13px]">zinc-700</div>
+							<div className="text-zinc-400 text-[13px]">#3f3f46</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-800" />
+							<div className="text-zinc-400 text-[13px]">zinc-800</div>
+							<div className="text-zinc-400 text-[13px]">#27272a</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-zinc-900" />
+							<div className="text-zinc-400 text-[13px]">zinc-900</div>
+							<div className="text-zinc-400 text-[13px]">#18181b</div>
+						</div>
+						<div>
+							<div className="h-12 w-12 rounded bg-black" />
+							<div className="text-zinc-400 text-[13px]">black</div>
+							<div className="text-zinc-400 text-[13px]">#000</div>
+						</div>
 					</div>
 				</Box>
 				<Box title="Input: Text">
@@ -385,6 +440,17 @@ export default function DesignSystem() {
 						placeholder="Write something here..."
 						className="w-[200px] sm:w-[300px] rounded-md ring-1 ring-zinc-950/20 p-2 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow"
 					/>
+				</Box>
+				<Box title="Toggle">
+					<Toggle.Root
+						onPressedChange={() => {
+							setPressed(!pressed);
+						}}
+						pressed={pressed}
+						className=" rounded-md border border-zinc-400 bg-white px-3 py-1 text-zinc-800 data-[state=on]:bg-blue-50 hover:bg-zinc-50 data-[state=on]:border-blue-600 data-[state=on]:text-action"
+					>
+						{pressed ? "Toggle : ON" : "Toggle : OFF"}
+					</Toggle.Root>
 				</Box>
 				<Box title="Breadcrumbs">
 					<span className="text-zinc-500">/main/trunk/leaf</span>
