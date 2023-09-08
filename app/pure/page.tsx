@@ -327,10 +327,7 @@ export default function DesignSystem() {
 					</button>
 				</Box>
 				<Box title="Button: Disabled">
-					<button
-						className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium cursor-not-allowed rounded-md select-none"
-						disabled
-					>
+					<button className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium rounded-md cursor-not-allowed select-none">
 						Button
 					</button>
 				</Box>
