@@ -497,6 +497,21 @@ export default function DesignSystem() {
 						</Dialog.Portal>
 					</Dialog.Root>
 				</Box>
+				<Box title="Select">
+					<ComingSoon />
+				</Box>
+				<Box title="Bottom Navigation Mobile">
+					<ComingSoon />
+				</Box>
+				<Box title="Slider">
+					<ComingSoon />
+				</Box>
+				<Box title="Context Menus">
+					<ComingSoon />
+				</Box>
+				<Box title="Date Picker">
+					<ComingSoon />
+				</Box>
 			</section>
 			<div className="mt-10" />
 			<Section name="Figma Design" />
@@ -512,5 +527,13 @@ export default function DesignSystem() {
 				</div>
 			</Suspense>
 		</>
+	);
+}
+
+function ComingSoon() {
+	return (
+		<div className="text-purple-600 bg-purple-50 rounded-full px-3 py-1 font-semibold border border-purple-300 text-tiny select-none hover:shadow-xl hover:shadow-purple-50">
+			Coming Soon
+		</div>
 	);
 }
