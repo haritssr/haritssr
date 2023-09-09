@@ -68,7 +68,7 @@ export default function DesignSystem() {
 					user interface that affect user experience as a whole.
 				</li>
 				<li>
-					Pure Design System mimicing the traditional (most cases) environment when student solving math and physis
+					Pure Design System mimicing the traditional (most cases) environment when student solving math and physics
 					problem, like in paper, pencil, white board, pencil cases, etc, especially in Analysis (MAKI) process.
 				</li>
 				<li>Why called &quot;Pure&quot;?</li>
