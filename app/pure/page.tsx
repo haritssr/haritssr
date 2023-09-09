@@ -158,7 +158,7 @@ export default function DesignSystem() {
 				<Box title="Popover">
 					<Popover.Root>
 						<Popover.Trigger>
-							<div className="w-auto rounded px-3 py-1.5 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400">
+							<div className="w-auto rounded-md px-3 py-1.5 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400">
 								Show Popover
 							</div>
 						</Popover.Trigger>
@@ -238,7 +238,7 @@ export default function DesignSystem() {
 				<Box title="Toast">
 					<Toast.Provider swipeDirection="right">
 						<button
-							className="text-white bg-action rounded px-3 py-1.5 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400"
+							className="text-white bg-action rounded-md px-3 py-1.5 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400"
 							onClick={() => {
 								setOpen(false);
 								window.clearTimeout(timerRef.current);
@@ -470,7 +470,7 @@ export default function DesignSystem() {
 					<input type="number" placeholder="0" />
 				</Box>
 				<Box title="Box">
-					<div className="border border-zinc-400/50 rounded overflow-hidden w-[200px] sm:w-[300px]">
+					<div className="border border-zinc-400/50 rounded-md overflow-hidden w-[200px] sm:w-[300px]">
 						<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
 							Title
 						</div>
