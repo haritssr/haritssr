@@ -315,6 +315,11 @@ export default function DesignSystem() {
 						Button
 					</button>
 				</Box>
+				<Box title="Button: Danger">
+					<button className="px-3 py-1 text-red-600 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-red-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-600 shadow">
+						Button
+					</button>
+				</Box>
 				<Box title="Button: Disabled">
 					<button className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium rounded-md cursor-not-allowed select-none">
 						Button
