@@ -497,6 +497,25 @@ export default function DesignSystem() {
 				<Box title="Breadcrumbs">
 					<span className="text-zinc-500">/main/trunk/leaf</span>
 				</Box>
+				<Box title="Badges">
+					<div className="grid grid-cols-1 gap-5">
+						<div className="text-zinc-600 rounded-full px-2.5 py-0.5 border border-zinc-300 text-sm select-none hover:shadow-zinc-50 font-medium text-center w-fit">
+							General
+						</div>
+						<div className="text-green-600 rounded-full px-2.5 py-0.5 border border-green-300 text-sm select-none hover:shadow-green-50 font-medium text-center w-fit">
+							Success
+						</div>
+						<div className="text-red-600 rounded-full px-2.5 py-0.5 border border-red-300 text-sm select-none hover:shadow-red-50 font-medium text-center w-fit">
+							Danger
+						</div>
+						<div className="text-yellow-600 rounded-full px-2.5 py-0.5 border border-yellow-300 text-sm select-none hover:shadow-yellow-50 font-medium text-center w-fit">
+							Attention
+						</div>
+						<div className="text-purple-600 rounded-full px-2.5 py-0.5 border border-purple-300 text-sm select-none hover:shadow-purple-50 font-medium text-center w-fit">
+							Information
+						</div>
+					</div>
+				</Box>
 				<Box title="Back Button">
 					<BackButton href="/" name="Previous Page" />
 				</Box>
@@ -574,7 +593,7 @@ export default function DesignSystem() {
 
 function ComingSoon() {
 	return (
-		<div className="text-purple-600 bg-purple-50 rounded-full px-3 py-1 font-semibold border border-purple-300 text-tiny select-none hover:shadow-xl hover:shadow-purple-50">
+		<div className="text-purple-600 rounded-full px-3 py-1 font-semibold border border-purple-300 text-tiny select-none hover:shadow-xl hover:shadow-purple-50">
 			Coming Soon
 		</div>
 	);
