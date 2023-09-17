@@ -68,6 +68,11 @@ export default function DesignSystem() {
 					user interface that affect user experience as a whole.
 				</li>
 				<li>
+					Design Principles explain <span className="font-semibold">why</span> we do specific things, now{" "}
+					<span className="font-semibold">how</span>, <span className="font-semibold">how</span> part is the
+					implementation of the code.
+				</li>
+				<li>
 					Pure Design System mimicing the traditional (most cases) environment when student solving math and physics
 					problem, like in paper, pencil, white board, pencil cases, etc, especially in Analysis (MAKI) process.
 				</li>
