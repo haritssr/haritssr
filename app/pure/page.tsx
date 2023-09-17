@@ -140,7 +140,7 @@ export default function DesignSystem() {
 					</Accordion.Root>
 				</Box>
 				<Box title="Checkbox">
-					<div className="flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:items-center">
+					<div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:items-center">
 						<CheckboxPrimitive.Root
 							className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-400 bg-white hover:bg-zinc-100 rdx-state-checked:bg-action rdx-state-checked:border-action rdx-state-checked:shadow-blue-300 shadow hover:border-zinc-500"
 							// defaultChecked
