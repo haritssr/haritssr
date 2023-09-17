@@ -36,7 +36,7 @@ export const ContactData = {
 			link: "https://www.linkedin.com/in/haritssr",
 		},
 		{ icon: "/Icons/gmail.jpg", link: "haritssr@gmail.com" },
-		{ icon: "/Icons/outlook.jpg", link: "haritssr@outlook.com" },
+		{ icon: "/Icons/outlook.jpg", link: "haritssr@outlook.co.id" },
 		{ icon: "/Icons/twitter.jpg", link: "https://www.twitter.com/haritssr" },
 		{ icon: "/Icons/github.jpg", link: "https://www.github.com/haritssr" },
 		{ icon: "/Icons/haritssr.svg", link: "https://www.haritssr.com" },
