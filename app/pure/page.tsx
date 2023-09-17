@@ -163,7 +163,7 @@ export default function DesignSystem() {
 				<Box title="Popover">
 					<Popover.Root>
 						<Popover.Trigger>
-							<div className="w-auto rounded-md px-3 py-1.5 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400">
+							<div className="w-auto rounded-md px-3 py-1 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400 ring-1 ring-action">
 								Show Popover
 							</div>
 						</Popover.Trigger>
@@ -243,7 +243,7 @@ export default function DesignSystem() {
 				<Box title="Toast">
 					<Toast.Provider swipeDirection="right">
 						<button
-							className="text-white bg-action rounded-md px-3 py-1.5 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400"
+							className="text-white bg-action rounded-md px-3 py-1 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400 ring-1 ring-action"
 							onClick={() => {
 								setOpen(false);
 								window.clearTimeout(timerRef.current);
@@ -303,13 +303,13 @@ export default function DesignSystem() {
 					</Tooltip.Provider>
 				</Box>
 				<Box title="Button: Primary">
-					<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
+					<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action">
 						Button
 					</button>
 				</Box>
 				<Box title="Button: Loading">
 					<button
-						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none"
+						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action"
 						onClick={handleClick}
 					>
 						{loading === true ? "Loading..." : "Button"}
