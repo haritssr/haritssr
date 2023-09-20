@@ -5,7 +5,7 @@ import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import { ExperiencesData } from "data/ExperiencesData";
 import Image from "next/image";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
 
@@ -18,15 +18,18 @@ export async function generateStaticParams() {
 }
 
 export default function ExperiencesPage({ params }) {
-	const project = ExperiencesData.filter(
-		(p) => p.project_name.toLowerCase().split(" ").join("-") === params?.project
-	)[0];
+	const project = ExperiencesData.filter((p) => p.project_name.toLowerCase().split(" ").join("-") === params?.project)[0];
 	const pathname = usePathname();
 	const image = "/images/hero.jpg";
 	const type = "website";
 
 	const browserTitle = "Experiences";
 	const description = "Lists of experience or project";
+
+	const [loading, setLoading] = useState(true);
+	function hideLoading() {
+		setLoading(false);
+	}
 	return (
 		<div className="bg-white">
 			<Head>
@@ -92,9 +95,7 @@ export default function ExperiencesPage({ params }) {
 
 					{/* About The Project */}
 					<section>
-						<h2 className="mb-5 text-xl font-semibold text-zinc-800 border-b pb-4 border-zinc-300">
-							About The Project
-						</h2>
+						<h2 className="mb-5 text-xl font-semibold text-zinc-800 border-b pb-4 border-zinc-300">About The Project</h2>
 
 						<div className="mt-5 text-zinc-800 font-medium ">My Role</div>
 						<ExplanationList>
@@ -139,14 +140,13 @@ export default function ExperiencesPage({ params }) {
 
 				{/* Design */}
 				<section className="mt-10">
-					<h2 className="mb-5 text-xl font-semibold text-zinc-800 uppercase">Design</h2>
-					<Suspense fallback={<div>Loading...</div>}>
-						{project.figma.length !== 0 ? (
-							project.figma.map((a) => <iframe key={a} className="w-full h-[600px]" src={a} allowFullScreen></iframe>)
-						) : (
-							<p className="text-zinc-800 ">No design</p>
-						)}
-					</Suspense>
+					<h2 className="mb-5 text-xl font-semibold text-zinc-800">Design (at Figma)</h2>
+					{loading ? <div className="w-full border border-zinc-300 flex items-center justify-center py-10">Loading...</div> : null}
+					{project.figma.length !== 0 ? (
+						project.figma.map((a) => <iframe key={a} onLoad={hideLoading} className="w-full h-[600px]" src={a} allowFullScreen></iframe>)
+					) : (
+						<p className="text-zinc-800 ">No design</p>
+					)}
 				</section>
 			</main>
 		</div>
