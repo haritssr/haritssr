@@ -8,7 +8,7 @@ export default function Experiences() {
 			id="experiences"
 			topic="Experiences"
 			className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0"
-			explanation="All of my projects with use cases and details."
+			explanation="Detail informations on how projects I belong to being handled."
 			collapsible
 		>
 			{ExperiencesData.map((d) => (
