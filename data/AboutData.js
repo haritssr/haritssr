@@ -14,22 +14,12 @@ export const AboutData = [
 	{
 		section: "UX",
 		description: "My preferable sources of UX principles when designing web application.",
-		points: [
-			"https://www.nngroup.com",
-			"https://www.lawsofux.com",
-			"https://developer.apple.com/design/human-interface-guidelines",
-		],
+		points: ["https://www.nngroup.com", "https://www.lawsofux.com", "https://developer.apple.com/design/human-interface-guidelines"],
 	},
 	{
 		section: "My Web Design Taste",
 		description: "I like how their user interface is presented and inspired to be like them.",
-		points: [
-			"https://www.apple.com",
-			"https://www.linear.app",
-			"https://www.vercel.com",
-			"https://www.notion.so",
-			"https://www.raycast.com",
-		],
+		points: ["https://www.apple.com", "https://www.linear.app", "https://www.vercel.com", "https://www.notion.so", "https://www.raycast.com"],
 	},
 ];
 
@@ -43,7 +33,7 @@ export const ContactData = {
 		},
 		{ icon: "/Icons/gmail.jpg", link: "haritssr@gmail.com" },
 		{ icon: "/Icons/outlook.jpg", link: "haritssr@outlook.co.id" },
-		{ icon: "/Icons/twitter.jpg", link: "https://www.twitter.com/haritssr" },
+		{ icon: "/Icons/x.png", link: "https://www.x.com/haritssr" },
 		{ icon: "/Icons/github.jpg", link: "https://www.github.com/haritssr" },
 		{ icon: "/Icons/haritssr.svg", link: "https://www.haritssr.com" },
 	],
