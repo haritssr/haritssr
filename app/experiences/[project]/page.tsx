@@ -5,7 +5,7 @@ import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import { ExperiencesData } from "data/ExperiencesData";
 import Image from "next/image";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
 
