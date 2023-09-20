@@ -55,9 +55,7 @@ const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: st
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
-					Link copied to clipboard
-				</Toast.Title>
+				<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">Link copied to clipboard</Toast.Title>
 				<Toast.Description asChild>
 					<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.com/${topic
 						.toLowerCase()
@@ -117,12 +115,12 @@ export default function Wrapper({
 									</Link>
 									<Disclosure.Button>
 										{open ? (
-											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-2.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 border-zinc-300">
+											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 border-zinc-300">
 												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700" />
 												<span className="text-tiny hidden sm:block text-zinc-700 select-none">Show Less</span>
 											</div>
 										) : (
-											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-2.5 sm:py-[3px] rounded-full border border-zinc-800 bg-zinc-800 text-white hover:bg-zinc-700">
+											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border border-zinc-800 bg-zinc-800 text-white hover:bg-zinc-700">
 												<ChevronDownIcon className="h-4 w-4 stroke-2" />
 												<span className="text-tiny hidden sm:block select-none">Show More</span>
 											</div>

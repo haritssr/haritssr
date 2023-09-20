@@ -68,6 +68,11 @@ export default function DesignSystem() {
 					user interface that affect user experience as a whole.
 				</li>
 				<li>
+					Design Principles explain <span className="font-semibold">why</span> we do specific things, now{" "}
+					<span className="font-semibold">how</span>, <span className="font-semibold">how</span> part is the
+					implementation of the code.
+				</li>
+				<li>
 					Pure Design System mimicing the traditional (most cases) environment when student solving math and physics
 					problem, like in paper, pencil, white board, pencil cases, etc, especially in Analysis (MAKI) process.
 				</li>
@@ -95,7 +100,7 @@ export default function DesignSystem() {
 					Strive to only using basic color and UI components provided in design system to accelerate development,
 					maintaining consistency, and familiarity.
 				</li>
-				<li>Each component already have hover and active state (not all component need that state though)</li>
+				<li>Each component already have hover, active, and focus state (not all component need that state though)</li>
 				<li>This design system is accessible at mobile and desktop web (a.k.a responsive).</li>
 				<li>
 					You can see the component code{" "}
@@ -140,7 +145,7 @@ export default function DesignSystem() {
 					</Accordion.Root>
 				</Box>
 				<Box title="Checkbox">
-					<div className="flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:items-center">
+					<div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:items-center">
 						<CheckboxPrimitive.Root
 							className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-400 bg-white hover:bg-zinc-100 rdx-state-checked:bg-action rdx-state-checked:border-action rdx-state-checked:shadow-blue-300 shadow hover:border-zinc-500"
 							// defaultChecked
@@ -158,7 +163,7 @@ export default function DesignSystem() {
 				<Box title="Popover">
 					<Popover.Root>
 						<Popover.Trigger>
-							<div className="w-auto rounded-md px-3 py-1.5 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400">
+							<div className="w-auto rounded-md px-3 py-1 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400 ring-1 ring-action">
 								Show Popover
 							</div>
 						</Popover.Trigger>
@@ -238,7 +243,7 @@ export default function DesignSystem() {
 				<Box title="Toast">
 					<Toast.Provider swipeDirection="right">
 						<button
-							className="text-white bg-action rounded-md px-3 py-1.5 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400"
+							className="text-white bg-action rounded-md px-3 py-1 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400 ring-1 ring-action"
 							onClick={() => {
 								setOpen(false);
 								window.clearTimeout(timerRef.current);
@@ -298,13 +303,13 @@ export default function DesignSystem() {
 					</Tooltip.Provider>
 				</Box>
 				<Box title="Button: Primary">
-					<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
+					<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action">
 						Button
 					</button>
 				</Box>
 				<Box title="Button: Loading">
 					<button
-						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none"
+						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action"
 						onClick={handleClick}
 					>
 						{loading === true ? "Loading..." : "Button"}
