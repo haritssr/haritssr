@@ -199,9 +199,9 @@ export const TechStackData = [
         name: "Jest",
       },
       {
-        href: "https://testing-library.com/",
-        imgSrc: "/Icons/testing-library.jpg",
-        name: "React Testing Library",
+        href: "https://vitest.dev",
+        imgSrc: "/Icons/vitest.svg",
+        name: "Vitest",
       },
     ],
   },
