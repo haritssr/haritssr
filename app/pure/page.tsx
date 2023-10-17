@@ -22,6 +22,7 @@ import BackButton from "@/components/BackButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import Box from "app/components/Box";
+import Image from "next/image";
 
 export default function DesignSystem() {
 	const [pressed, setPressed] = useState(false);
@@ -64,56 +65,50 @@ export default function DesignSystem() {
 			<Section name="Design Principles" />
 			<ExplanationList>
 				<li>
-					Design System is a set of specific rules of design principles or opiniated design that transcendence to the
-					user interface that affect user experience as a whole.
+					Design System is a set of specific rules of design principles or opiniated design that transcendence to the user interface that affect user
+					experience as a whole.
 				</li>
 				<li>
-					Design Principles explain <span className="font-semibold">why</span> we do specific things, now{" "}
-					<span className="font-semibold">how</span>, <span className="font-semibold">how</span> part is the
-					implementation of the code.
+					Design Principles explain <span className="font-semibold">why</span> we do specific things, now <span className="font-semibold">how</span>,{" "}
+					<span className="font-semibold">how</span> part is the implementation of the code.
 				</li>
 				<li>
-					Pure Design System mimicing the traditional (most cases) environment when student solving math and physics
-					problem, like in paper, pencil, white board, pencil cases, etc, especially in Analysis (MAKI) process.
+					Pure Design System mimicing the traditional (most cases) environment when student solving math and physics problem, like in paper, pencil,
+					white board, pencil cases, etc, especially in Analysis (MAKI) process.
 				</li>
 				<li>Why called &quot;Pure&quot;?</li>
 				<ul className="block list-outside list-disc space-y-1 pl-4">
 					<li>Well, honestly, I have no idea on naming.</li>
+					<li>Blue, black, gray, and white seems pure and minimalist color to me, and it actually my four favourite colors.</li>
 					<li>
-						Blue, black, gray, and white seems pure and minimalist color to me, and it actually my four favourite
-						colors.
-					</li>
-					<li>
-						The word &quot;Pure&quot; also not a long word so it can fit on the TabBars (bottom navigation on
-						mobile-like apps) and top navigation bar at desktop).
+						The word &quot;Pure&quot; also not a long word so it can fit on the TabBars (bottom navigation on mobile-like apps) and top navigation bar
+						at desktop).
 					</li>
 				</ul>
 				<li>Distinguish between link and button, link to navigate, button for action.</li>
 				<ul className="block list-outside list-disc space-y-1 pl-4">
 					<li>Both link and button, they must be have hover and active state UI representation.</li>
 					<li>
-						Hover state mean you hovering the UI so you ready to act on it, but not acting on it yet, and active state
-						is when you act on the UI and it doing their own functionality (navigate or doing action)
+						Hover state mean you hovering the UI so you ready to act on it, but not acting on it yet, and active state is when you act on the UI and
+						it doing their own functionality (navigate or doing action)
 					</li>
 				</ul>
 				<li>
-					Strive to only using basic color and UI components provided in design system to accelerate development,
-					maintaining consistency, and familiarity.
+					Strive to only using basic color and UI components provided in design system to accelerate development, maintaining consistency, and
+					familiarity.
 				</li>
 				<li>Each component already have hover, active, and focus state (not all component need that state though)</li>
 				<li>This design system is accessible at mobile and desktop web (a.k.a responsive).</li>
 				<li>
-					You can see the component code{" "}
-					<ExternalLink href="https://github.com/haritssr/haritssr/tree/main/components" name="here" />
+					You can see the component code <ExternalLink href="https://github.com/haritssr/haritssr/tree/main/components" name="here" />
 				</li>
 				<li>
-					If you want to see other variation of these component you can see{" "}
-					<InternalLink href="/experiments/radix-ui" name="here" /> or{" "}
+					If you want to see other variation of these component you can see <InternalLink href="/experiments/radix-ui" name="here" /> or{" "}
 					<InternalLink href="/experiments/headless-ui" name="here" />
 				</li>
 				<li>
-					There is a lot of work to be done in this design system, like: typography, use cases, example, do&apos;s and
-					don&apos;t&apos;s, description to each UI component, and guidelines. Coming soon.
+					There is a lot of work to be done in this design system, like: typography, use cases, example, do&apos;s and don&apos;t&apos;s, description
+					to each UI component, and guidelines. Coming soon.
 				</li>
 			</ExplanationList>
 			<div className="mb-10" />
@@ -174,8 +169,8 @@ export default function DesignSystem() {
 							sideOffset={10}
 							side="bottom"
 						>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur vel fugit ipsum est, perferendis animi
-							accusantium molestiae impedit minima ea debitis.
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur vel fugit ipsum est, perferendis animi accusantium molestiae impedit
+							minima ea debitis.
 							<Popover.Close />
 							<Popover.Arrow className="fill-zinc-300" />
 						</Popover.Content>
@@ -220,22 +215,16 @@ export default function DesignSystem() {
 								Password
 							</Tabs.Trigger>
 						</Tabs.List>
-						<Tabs.Content
-							className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
-							value="tab1"
-						>
+						<Tabs.Content className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200" value="tab1">
 							<div className="">
-								Account description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias veritatis
-								ullam quae rem quis aliquam, accusantium debitis sint praesentium.
+								Account description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias veritatis ullam quae rem quis aliquam,
+								accusantium debitis sint praesentium.
 							</div>
 						</Tabs.Content>
-						<Tabs.Content
-							className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
-							value="tab2"
-						>
+						<Tabs.Content className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200" value="tab2">
 							<div className="">
-								Password description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias veritatis
-								ullam quae rem quis aliquam, accusantium debitis sint praesentium.
+								Password description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias veritatis ullam quae rem quis aliquam,
+								accusantium debitis sint praesentium.
 							</div>
 						</Tabs.Content>
 					</Tabs.Root>
@@ -262,13 +251,9 @@ export default function DesignSystem() {
 							onOpenChange={setOpen}
 						>
 							<div className="">
-								<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
-									Hai, I am Toast!
-								</Toast.Title>
+								<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">Hai, I am Toast!</Toast.Title>
 								<Toast.Description asChild>
-									<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">
-										Thanks for clicking me!
-									</div>
+									<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">Thanks for clicking me!</div>
 								</Toast.Description>
 							</div>
 							<Toast.Close className="text-action hover:text-[#2563eb]/90">OK</Toast.Close>
@@ -290,11 +275,7 @@ export default function DesignSystem() {
 								<Tooltip.Trigger className="flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700">
 									<ExclamationCircleIcon className="h-4 w-4 text-zinc-600 hover:text-zinc-700" strokeWidth={2} />
 								</Tooltip.Trigger>
-								<Tooltip.Content
-									side="top"
-									align="center"
-									className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl"
-								>
+								<Tooltip.Content side="top" align="center" className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl">
 									<div>Hey, I am Tooltip!</div>
 									<Tooltip.Arrow offset={5} width={10} height={5} className="fill-[#3F3F46]" />
 								</Tooltip.Content>
@@ -363,9 +344,7 @@ export default function DesignSystem() {
 					</button>
 				</Box>
 				<Box title="Button: Disabled">
-					<button className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium rounded-md cursor-not-allowed select-none">
-						Button
-					</button>
+					<button className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium rounded-md cursor-not-allowed select-none">Button</button>
 				</Box>
 				<Box title="Main Colors">
 					<div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
@@ -476,9 +455,7 @@ export default function DesignSystem() {
 				</Box>
 				<Box title="Box">
 					<div className="border border-zinc-400/50 rounded-md overflow-hidden w-[200px] sm:w-[300px]">
-						<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
-							Title
-						</div>
+						<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">Title</div>
 						<div className="h-32 p-5 flex items-center justify-center">Content</div>
 					</div>
 				</Box>
@@ -524,6 +501,37 @@ export default function DesignSystem() {
 				<Box title="Back Button">
 					<BackButton href="/" name="Previous Page" />
 				</Box>
+				<Box title="Logo">
+					<div className="space-x-10 items-center flex">
+						<div className="space-y-2">
+							<Image alt="harissr image" src="/Icons/haritssr.svg" width={10} height={10} className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center" />
+							<div className="flex flex-col">
+								<span className="text-sm sm:text-base text-gray-800 justify-self-center">Harits Syah</span>
+								<span className="text-sm sm:text-base text-gray-400 justify-self-center">haritssr.com</span>
+							</div>
+						</div>
+						<div className="space-y-2">
+							<Image alt="Haris Lab image" src="/Icons/harislab.svg" width={10} height={10} className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center" />
+							<div className="flex flex-col">
+								<span className="text-sm sm:text-base text-gray-800 justify-self-center">Haris Lab</span>
+								<span className="text-sm sm:text-base text-gray-400 justify-self-center">harislab.com</span>
+							</div>
+						</div>
+						<div className="space-y-2">
+							<Image
+								alt="Haris Studio image"
+								src="/Icons/harisstudio.svg"
+								width={10}
+								height={10}
+								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
+							/>
+							<div className="flex flex-col">
+								<span className="text-sm sm:text-base text-gray-800 justify-self-center">Haris Studio</span>
+								<span className="text-sm sm:text-base text-gray-400 justify-self-center">harisstudio.com</span>
+							</div>
+						</div>
+					</div>
+				</Box>
 				<Box title="Modal">
 					<Dialog.Root>
 						<Dialog.Trigger asChild>
@@ -535,9 +543,7 @@ export default function DesignSystem() {
 							<Dialog.Overlay className="bg-blackA9 fixed inset-0" />
 							<Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-[25px] shadow-lg border border-zinc-300 focus:outline-none">
 								<Dialog.Title className="text-zinc-800 text-base font-medium">Title</Dialog.Title>
-								<Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
-									Description
-								</Dialog.Description>
+								<Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">Description</Dialog.Description>
 								<div className="h-24 flex items-center justify-center">Some content</div>
 								<div className="mt-[25px] flex justify-end space-x-2	">
 									<Dialog.Close asChild>
