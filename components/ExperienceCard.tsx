@@ -1,3 +1,4 @@
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,12 +19,32 @@ export default function ExperienceCard({ href, title, description, period, statu
 			<section className=" flex flex-col justify-between p-3 space-y-2">
 				<div className="flex justify-between items-center">
 					<Image src={imgSrc} alt={title} width={30} height={30} blurDataURL={imgSrc} className="mb-1.5 h-7 w-7" />
+
+					<a
+						href={href}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full border border-zinc-400 text-zinc-600 hover:text-zinc-700 hover:border-zinc-500 cursor-pointer hover:bg-zinc-50"
+					>
+						<p className="text-sm">Visit</p>
+						{/* External Link Icon */}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-4 w-4 ml-1  mt-0.5"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							strokeWidth={1.7}
+						>
+							<path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+						</svg>
+					</a>
 				</div>
 				<div className="truncate font-semibold text-zinc-800 text-lg">{title}</div>
 
 				<div className="text-zinc-800">{description}</div>
 
-				{/* Site Link */}
+				{/* Site Link (Text Only) */}
 				<cite className="group not-italic">
 					{href.startsWith("https://www.") ? (
 						<span className={`text-base text-zinc-400`}>{href.slice(12)}</span>
@@ -34,20 +55,13 @@ export default function ExperienceCard({ href, title, description, period, statu
 			</section>
 
 			<section className="px-3 pb-3 flex items-center space-x-3">
-				<a
-					href={href}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-zinc-500 select-none rounded ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 w-full text-tiny text-center"
-				>
-					Visit
-				</a>
 				<Link
 					passHref
 					href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-					className="px-3 py-1 bg-zinc-800 text-white hover:bg-zinc-900 rounded active:ring-1 active:ring-black select-none w-full text-tiny text-center ring-1 ring-zinc-800"
+					className="py-1.5 text-zinc-800 bg-zinc-100 hover:bg-zinc-200 rounded select-none w-full text-tiny text-center border border-zinc-400 hover:shadow-sm flex items-center space-x-2 justify-center"
 				>
-					Case Study
+					<p>Case Study</p>
+					<DocumentTextIcon className="w-[18px] h-[18px]" />
 				</Link>
 			</section>
 		</div>
