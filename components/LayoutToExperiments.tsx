@@ -61,14 +61,14 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 			<main className="mx-auto flex max-w-5xl sm:-mt-[1px] sm:gap-10 sm:px-5 xl:px-0">
 				<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
 					{/* Sidebar */}
-					<div className="hidden sm:block sm:col-span-1 border">
+					<div className="hidden sm:block sm:col-span-1 border  ">
 						<Link
 							className="block font-medium px-5 py-2 sticky top-[45px] bg-white border-b"
 							href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
 						>
 							{domain}
 						</Link>
-						<div className="flex flex-col space-y-1 py-5 px-3">
+						<div className="flex flex-col space-y-1 py-5 px-3 sm:max-h-screen sm:overflow-auto">
 							{links.map((a) => {
 								const destination = a.toLowerCase().split(" ").join("-");
 								return (
