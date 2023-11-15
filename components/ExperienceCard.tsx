@@ -17,14 +17,14 @@ export default function ExperienceCard({ href, title, description, period, statu
 		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/60 selection:mx-auto group shadow-sm shadow-zinc-200">
 			{/* Header + Title + Explanation */}
 			<section className=" flex flex-col justify-between p-3 space-y-2">
-				<div className="flex justify-between items-center">
+				<div className="flex justify-between items-start">
 					<Image src={imgSrc} alt={title} width={30} height={30} blurDataURL={imgSrc} className="mb-1.5 h-7 w-7" />
 
 					<a
 						href={href}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full border border-zinc-400 text-zinc-600 hover:text-zinc-700 hover:border-zinc-500 cursor-pointer hover:bg-zinc-50"
+						className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full border border-zinc-400 text-zinc-600 hover:text-zinc-700 hover:border-zinc-500 cursor-pointer hover:bg-zinc-50 active:ring-blue-500 active:ring-1 active:border active:border-blue-500"
 					>
 						<p className="text-sm">Visit</p>
 						{/* External Link Icon */}
@@ -54,14 +54,13 @@ export default function ExperienceCard({ href, title, description, period, statu
 				</cite>
 			</section>
 
-			<section className="px-3 pb-3 flex items-center space-x-3">
+			<section className="px-3 pb-3">
 				<Link
 					passHref
 					href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-					className="py-1.5 text-zinc-800 bg-zinc-100 hover:bg-zinc-200 rounded select-none w-full text-tiny text-center border border-zinc-400 hover:shadow-sm flex items-center space-x-2 justify-center"
+					className="py-1.5 text-zinc-800 bg-zinc-100 hover:bg-zinc-200 rounded select-none w-full text-tiny text-center border border-zinc-400 hover:shadow-sm flex items-center space-x-2 justify-center active:ring-blue-500 active:ring-1 active:border active:border-blue-500"
 				>
-					<p>Case Study</p>
-					<DocumentTextIcon className="w-[18px] h-[18px]" />
+					<p>Read Case Study</p>
 				</Link>
 			</section>
 		</div>
