@@ -62,7 +62,12 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 				<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
 					{/* Sidebar */}
 					<div className="hidden sm:block sm:col-span-1 border">
-						<div className="font-semibold px-5 py-2 sticky top-[45px] bg-white border-b">{domain}</div>
+						<Link
+							className="block font-medium px-5 py-2 sticky top-[45px] bg-white border-b"
+							href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
+						>
+							{domain}
+						</Link>
 						<div className="flex flex-col space-y-1 py-5 px-3">
 							{links.map((a) => {
 								const destination = a.toLowerCase().split(" ").join("-");
@@ -71,9 +76,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 										href={`/experiments/${domain.toLowerCase().split(" ").join("-")}/${destination}`}
 										key={a}
 										className={`${
-											lastSegment === destination
-												? "text-white bg-action"
-												: "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
+											lastSegment === destination ? "text-white bg-action" : "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
 										}  px-2 py-1 rounded-md`}
 									>
 										{a}
@@ -130,7 +133,7 @@ const BackToExperiments = ({ inView, domain }: { inView: any; domain: string }) 
 				<span className="group flex items-center">
 					<ChevronLeftIcon className=" text-action sm:group-hover:text-[#2563eb]/90 h-5 w-5" strokeWidth={2} />
 					<span
-						className={`-ml-0.5 truncate text-action sm:group-hover:text-[#2563eb]/90 text-base ${
+						className={`-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base ${
 							inView ? "block" : "hidden sm:block"
 						}`}
 					>
@@ -146,11 +149,7 @@ const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
 	return (
 		<div className={`sm:2/4 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
 			<div className="flex justify-center py-0.5 sm:py-0">
-				<div
-					className={`truncate text-center font-semibold ${inView ? "text-transparent hidden" : "text-zinc-800 block"}`}
-				>
-					{title}
-				</div>
+				<div className={`truncate text-center font-semibold ${inView ? "text-transparent hidden" : "text-zinc-800 block"}`}>{title}</div>
 			</div>
 		</div>
 	);

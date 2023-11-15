@@ -61,16 +61,12 @@ export default function ExperimentIndexPage({ experiment }: { experiment: Experi
 
 const BackToExperiments = ({ inView }: { inView: any }) => {
 	return (
-		<Link
-			passHref
-			href="/experiments"
-			className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${inView ? "w-1/2 sm:-ml-8" : "w-1/4"}`}
-		>
+		<Link passHref href="/experiments" className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${inView ? "w-1/2 sm:-ml-8" : "w-1/4"}`}>
 			<span className=" inline-block w-full">
 				<span className="group flex items-center">
 					<ChevronLeftIcon className=" text-action sm:group-hover:text-[#2563eb]/90 h-5 w-5" strokeWidth={2} />
 					<span
-						className={`-ml-0.5 truncate text-action sm:group-hover:text-[#2563eb]/90 text-base ${
+						className={`-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base ${
 							inView ? "block" : "hidden"
 						}`}
 					>
@@ -86,11 +82,7 @@ const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
 	return (
 		<div className={`sm:2/4 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
 			<div className="flex justify-center py-0.5">
-				<div
-					className={`truncate text-center font-semibold ${inView ? "text-transparent hidden" : "text-zinc-800 block"}`}
-				>
-					{title}
-				</div>
+				<div className={`truncate text-center font-semibold ${inView ? "text-transparent hidden" : "text-zinc-800 block"}`}>{title}</div>
 			</div>
 		</div>
 	);
