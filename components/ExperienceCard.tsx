@@ -14,7 +14,7 @@ interface ExperienceCardTypes {
 
 export default function ExperienceCard({ href, title, description, period, status, imgSrc, industry }: ExperienceCardTypes) {
 	return (
-		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/60 selection:mx-auto group shadow-sm shadow-zinc-200">
+		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-400/70 selection:mx-auto group shadow-sm shadow-zinc-200">
 			{/* Header + Title + Explanation */}
 			<section className=" flex flex-col justify-between p-3 space-y-2">
 				<div className="flex justify-between items-start">
@@ -24,7 +24,7 @@ export default function ExperienceCard({ href, title, description, period, statu
 						href={href}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full border border-zinc-400 text-zinc-600 hover:text-zinc-700 hover:border-zinc-500 cursor-pointer hover:bg-zinc-50 active:ring-blue-500 active:ring-1 active:border active:border-blue-500"
+						className="flex items-center space-x-1.5 px-2.5 py-[3px] rounded-md  text-zinc-600 hover:text-zinc-700 hover:bg-zinc-100 cursor-pointer border border-zinc-400/70 justify-center bg-zinc-50"
 					>
 						<p className="text-sm">Visit</p>
 						{/* External Link Icon */}
@@ -47,9 +47,9 @@ export default function ExperienceCard({ href, title, description, period, statu
 				{/* Site Link (Text Only) */}
 				<cite className="group not-italic">
 					{href.startsWith("https://www.") ? (
-						<span className={`text-base text-zinc-400`}>{href.slice(12)}</span>
+						<span className={`text-base text-zinc-500/60`}>{href.slice(12)}</span>
 					) : (
-						<span className={`text-base text-zinc-400`}>{href.slice(8)}</span>
+						<span className={`text-base text-zinc-500/60`}>{href.slice(8)}</span>
 					)}
 				</cite>
 			</section>
@@ -58,7 +58,7 @@ export default function ExperienceCard({ href, title, description, period, statu
 				<Link
 					passHref
 					href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-					className="py-1.5 text-zinc-800 bg-zinc-100 hover:bg-zinc-200 rounded select-none w-full text-tiny text-center border border-zinc-400 hover:shadow-sm flex items-center space-x-2 justify-center active:ring-blue-500 active:ring-1 active:border active:border-blue-500"
+					className="py-1.5 text-zinc-100 bg-zinc-800 hover:bg-zinc-700 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center font-medium"
 				>
 					<p>Read Case Study</p>
 				</Link>
