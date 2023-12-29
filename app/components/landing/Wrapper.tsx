@@ -131,7 +131,7 @@ export default function Wrapper({
 							{/* body */}
 							<Disclosure.Panel>
 								<div className="mb-16">
-									<div className="my-4 text-base sm:text-lg text-zinc-500 select-none">{explanation}</div>
+									<div className="my-4 text-base sm:text-lg text-zinc-800 select-none">{explanation}</div>
 									<div className={className}>{children}</div>
 								</div>
 							</Disclosure.Panel>
@@ -153,7 +153,7 @@ export default function Wrapper({
 					</section>
 					{/* body */}
 					<div className="mb-16">
-						<div className="mb-4 text-base sm:text-lg text-zinc-500 select-none">{explanation}</div>
+						<div className="mb-4 text-base sm:text-lg text-zinc-800 select-none">{explanation}</div>
 						<div className={className}>{children}</div>
 					</div>
 				</>
