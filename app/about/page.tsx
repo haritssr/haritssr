@@ -6,7 +6,7 @@ import ExternalLink from "@/components/ExternalLink";
 import { EducationData } from "data/EducationData";
 import { ExperiencesData } from "data/ExperiencesData";
 import { NonFormalEducationData } from "data/NonFormalEducationData";
-import PopoverContact from "app/components/PopoverContact";
+import ContactList from "app/components/ContactList";
 
 export default function About() {
 	return (
@@ -27,7 +27,7 @@ export default function About() {
 				</div>
 				<div className="space-y-1">
 					<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
-					<PopoverContact />
+					<ContactList />
 				</div>
 			</div>
 
