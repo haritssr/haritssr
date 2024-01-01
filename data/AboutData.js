@@ -9,6 +9,7 @@ export const AboutData = [
 			"I am a physics students at UIN Syarif Hidayatullah, Jakarta.",
 			"Founder of Haris Lab, a place to analyze math and physics problem.",
 			"I am based on South Tangerang, Indonesia.",
+			"haritssr = harits syah rahmatullah",
 		],
 	},
 	{
