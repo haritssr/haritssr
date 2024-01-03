@@ -5,10 +5,11 @@ export const AboutData = [
 		points: [
 			"My name is Harits Syah, I prefer to be called Haris.",
 			"I am a Web Software Engineer, Web Designer, and Math-Physics Teacher.",
-			"I am a touch typer.",
+			"I am a touch typist, ⁓90 WPM.",
 			"I am a physics students at UIN Syarif Hidayatullah, Jakarta.",
 			"Founder of Haris Lab, a place to analyze math and physics problem.",
 			"I am based on South Tangerang, Indonesia.",
+			"haritssr = harits syah rahmatullah",
 		],
 	},
 	{

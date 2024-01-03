@@ -7,7 +7,7 @@ import { TitleAndPathData } from "data/TitleAndPathData";
 
 export default function GlobalNavigationMobile() {
 	return (
-		<div className="sticky bottom-0 block  w-full border-t border-zinc-200 bg-white/70 saturate-150 backdrop-blur-lg sm:hidden">
+		<div className="sticky bottom-0 block  w-full border-t border-zinc-200 bg-white/90 saturate-150 backdrop-blur-lg sm:hidden">
 			<div className="flex w-full items-center ">
 				{TitleAndPathData.map(({ title, path }) => (
 					<IconWrapper key={title} to={`/${title}`} path={path} />

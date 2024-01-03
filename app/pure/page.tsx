@@ -502,7 +502,7 @@ export default function DesignSystem() {
 					<BackButton href="/" name="Previous Page" />
 				</Box>
 				<Box title="Logo">
-					<div className="space-x-10 items-center flex">
+					<div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
 						<div className="space-y-2">
 							<Image alt="harissr image" src="/Icons/haritssr.svg" width={10} height={10} className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center" />
 							<div className="flex flex-col">

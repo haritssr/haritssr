@@ -6,7 +6,7 @@ import ExternalLink from "@/components/ExternalLink";
 import { EducationData } from "data/EducationData";
 import { ExperiencesData } from "data/ExperiencesData";
 import { NonFormalEducationData } from "data/NonFormalEducationData";
-import PopoverContact from "app/components/PopoverContact";
+import ContactList from "app/components/ContactList";
 
 export default function About() {
 	return (
@@ -27,7 +27,7 @@ export default function About() {
 				</div>
 				<div className="space-y-1">
 					<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
-					<PopoverContact />
+					<ContactList />
 				</div>
 			</div>
 
@@ -40,23 +40,11 @@ export default function About() {
 						<li key={each.link} className="text-zinc-500 py-1.5 flex space-x-3 items-center">
 							<Image alt={each.link} src={each.icon} height={20} width={20} className="h-[18px] w-[18px]" />
 							{each.link.startsWith("https://www.") ? (
-								<a
-									title={each.link}
-									className="hover:underline hover:text-zinc-800"
-									target="_blank"
-									rel="noreferrer noopener"
-									href={each.link}
-								>
+								<a title={each.link} className="hover:underline hover:text-zinc-800" target="_blank" rel="noreferrer noopener" href={each.link}>
 									{each.link.slice(12)}
 								</a>
 							) : each.link.startsWith("https://") ? (
-								<a
-									title={each.link}
-									className="hover:underline hover:text-zinc-800"
-									target="_blank"
-									rel="noreferrer noopener"
-									href={each.link}
-								>
+								<a title={each.link} className="hover:underline hover:text-zinc-800" target="_blank" rel="noreferrer noopener" href={each.link}>
 									{each.link.slice(8)}
 								</a>
 							) : each.link.includes("@") ? (
@@ -80,23 +68,11 @@ export default function About() {
 								{section.points.map((point) => (
 									<li key={point} className="text-zinc-500 py-1.5">
 										{point.startsWith("https://www.") ? (
-											<a
-												title={point}
-												className="hover:underline hover:text-zinc-800"
-												target="_blank"
-												rel="noreferrer noopener"
-												href={point}
-											>
+											<a title={point} className="hover:underline hover:text-zinc-800" target="_blank" rel="noreferrer noopener" href={point}>
 												{point.slice(12)}
 											</a>
 										) : point.startsWith("https://") ? (
-											<a
-												title={point}
-												className="hover:underline hover:text-zinc-800"
-												target="_blank"
-												rel="noreferrer noopener"
-												href={point}
-											>
+											<a title={point} className="hover:underline hover:text-zinc-800" target="_blank" rel="noreferrer noopener" href={point}>
 												{point.slice(8)}
 											</a>
 										) : point.includes("@") ? (
@@ -118,9 +94,7 @@ export default function About() {
 				<Box title="Core Skills">
 					<div className="space-y-1">
 						<div className="font-semibold">Web Software Engineering</div>
-						<p className="text-zinc-500 pb-4">
-							JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js ecosystem.
-						</p>
+						<p className="text-zinc-500 pb-4">JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js ecosystem.</p>
 					</div>
 					<div className="space-y-1">
 						<div className="font-semibold">Math & Physics</div>
@@ -171,14 +145,7 @@ export default function About() {
 
 				<Box title="Formal Working Experiences">
 					<div className="flex items-center space-x-2">
-						<Image
-							src="/Icons/sman5.jpg"
-							height={20}
-							width={20}
-							alt="logo"
-							className="aspect-auto h-5 w-5"
-							blurDataURL="/Icons/sman5.jpg"
-						/>
+						<Image src="/Icons/sman5.jpg" height={20} width={20} alt="logo" className="aspect-auto h-5 w-5" blurDataURL="/Icons/sman5.jpg" />
 						<div className="font-semibold text-lg">Privat Teacher</div>
 					</div>
 					<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
@@ -236,10 +203,15 @@ export default function About() {
 					))}
 				</Box>
 			</div>
-			<div className="p-4 border border-zinc-400/50 rounded-md text-zinc-400">
-				harits<span className="font-semibold text-zinc-800">sr</span> = harits{" "}
-				<span className="font-semibold text-zinc-800">s</span>yah <span className="font-semibold text-zinc-800">r</span>
-				ahmatullah
+
+			<div className="flex justify-end">
+				<a
+					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
+					href="/cv.pdf"
+					download="cv.pdf"
+				>
+					Download CV
+				</a>
 			</div>
 		</div>
 	);
@@ -248,9 +220,7 @@ export default function About() {
 function Box({ title, children }: { title: string; children: React.ReactNode }) {
 	return (
 		<div className="border border-zinc-400/50 rounded overflow-hidden">
-			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
-				{title}
-			</div>
+			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">{title}</div>
 			<div className="p-5 space-y-4">{children}</div>
 		</div>
 	);
