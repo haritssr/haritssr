@@ -1,13 +1,11 @@
-"use client";
-
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import { ExperiencesData } from "data/ExperiencesData";
 import Image from "next/image";
-import { useState } from "react";
 import Head from "next/head";
-import { usePathname } from "next/navigation";
+import LoadingFigma from "./LoadingFigma";
+import Title from "./Title";
 
 export async function generateStaticParams() {
 	return ExperiencesData.map(({ project_name }) => {
@@ -19,21 +17,17 @@ export async function generateStaticParams() {
 
 export default function ExperiencesPage({ params }) {
 	const project = ExperiencesData.filter((p) => p.project_name.toLowerCase().split(" ").join("-") === params?.project)[0];
-	const pathname = usePathname();
+
 	const image = "/images/hero.jpg";
 	const type = "website";
 
 	const browserTitle = "Experiences";
 	const description = "Lists of experience or project";
 
-	const [loading, setLoading] = useState(true);
-	function hideLoading() {
-		setLoading(false);
-	}
 	return (
 		<div className="bg-white">
 			<Head>
-				<title>{pathname === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}</title>
+				<Title browserTitle={browserTitle} />
 				<link rel="icon" href="/Icons/haritssr.svg" />
 				<meta name="theme-color" content="#27272a" />
 				<meta name="robots" content="follow, index" />
@@ -141,12 +135,7 @@ export default function ExperiencesPage({ params }) {
 				{/* Design */}
 				<section className="mt-10">
 					<h2 className="mb-5 text-xl font-semibold text-zinc-800">Design (at Figma)</h2>
-					{loading ? <div className="w-full border border-zinc-300 flex items-center justify-center py-10">Loading...</div> : null}
-					{project.figma.length !== 0 ? (
-						project.figma.map((a) => <iframe key={a} onLoad={hideLoading} className="w-full h-[600px]" src={a} allowFullScreen></iframe>)
-					) : (
-						<p className="text-zinc-800 ">No design</p>
-					)}
+					<LoadingFigma project={project} />
 				</section>
 			</main>
 		</div>

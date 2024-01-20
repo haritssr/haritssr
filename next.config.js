@@ -1,18 +1,48 @@
 const { withContentlayer } = require("next-contentlayer");
 
 const nextConfig = {
-  reactStrictMode: false,
-  images: {
-    formats: ["image/avif", "image/webp"],
-    domains: [
-      "vignette.wikia.nocookie.net",
-      "unsplash.com",
-      "res.cloudinary.com",
-      "ws-public.interpol.int",
-      "assets.vercel.com",
-      "unsplash.com",
-    ],
-  },
+	reactStrictMode: false,
+	images: {
+		formats: ["image/avif", "image/webp"],
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "vignette.wikia.nocookie.net",
+				port: "",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "unsplash.com",
+				port: "",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "res.cloudinary.com",
+				port: "",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "ws-public.interpol.intt",
+				port: "",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "assets.vercel.com",
+				port: "",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "vignette.wikia.nocookie.net",
+				port: "",
+				pathname: "/**",
+			},
+		],
+	},
 };
 
 module.exports = withContentlayer(nextConfig);
