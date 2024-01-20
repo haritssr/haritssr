@@ -3,7 +3,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import type { ExperimentsData } from "../data/ExperimentsData";
 import Link from "next/link";
 
-export default function ExperimentsCard({ experiment }: { experiment: ExperimentsData }) {
+export default function ExperimentCard({ experiment }: { experiment: ExperimentsData }) {
 	return (
 		<Link
 			passHref
