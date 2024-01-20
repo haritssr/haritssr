@@ -1,5 +1,5 @@
 import ExperimentsGrid from "@/components/ExperimentsGrid";
-import Wrapper from "./Wrapper";
+import HomeSectionWrapper from "./HomeSectionWrapper";
 import { ExperimentsData } from "data/ExperimentsData";
 
 export default function Experiments() {
@@ -9,13 +9,13 @@ export default function Experiments() {
 	}
 
 	return (
-		<Wrapper
+		<HomeSectionWrapper
 			id="experiments"
 			topic="Experiments"
 			explanation={`${totalExperiment} unique individual (per page) experiments across TypeScript-React ecosystem stack and collection of common user interfaces on the mobile and desktop web.`}
 			collapsible
 		>
 			<ExperimentsGrid />
-		</Wrapper>
+		</HomeSectionWrapper>
 	);
 }

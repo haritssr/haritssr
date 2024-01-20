@@ -68,7 +68,7 @@ const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: st
 	);
 };
 
-export default function Wrapper({
+export default function HomeSectionWrapper({
 	topic,
 	className,
 	children,

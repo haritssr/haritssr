@@ -1,10 +1,10 @@
 import { ExperiencesData } from "data/ExperiencesData";
-import Wrapper from "./Wrapper";
+import HomeSectionWrapper from "./HomeSectionWrapper";
 import ExperienceCard from "@/components/ExperienceCard";
 
 export default function Experiences() {
 	return (
-		<Wrapper
+		<HomeSectionWrapper
 			id="experiences"
 			topic="Experiences"
 			className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0"
@@ -23,6 +23,6 @@ export default function Experiences() {
 					industry={d.about_client.industry}
 				/>
 			))}
-		</Wrapper>
+		</HomeSectionWrapper>
 	);
 }
