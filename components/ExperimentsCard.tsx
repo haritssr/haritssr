@@ -18,7 +18,7 @@ export default function ExperimentsCard({ experiment }: { experiment: Experiment
 					</div>
 					<div className="sm:text-lg text-zinc-700 font-semibold">{experiment.title}</div>
 				</div>
-				<ChevronRightIcon width={2} className="w-5 h-5 text-zinc-400 group-hover:text-action" />
+				<ChevronRightIcon width={2} className="w-5 h-5 text-zinc-500 group-hover:text-zinc-800" />
 			</div>
 			<div className="text-zinc-700">{experiment.description}</div>
 			<div className="text-zinc-500/60">{experiment.links.length} experiments</div>
