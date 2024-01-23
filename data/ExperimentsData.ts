@@ -185,7 +185,7 @@ export const ExperimentsData = [
 		title: "Haris Lab",
 		logoSrc: "/Icons/harislab.svg",
 		description: "Haris Lab user interfaces design systems",
-		links: ["Global Modal", "Context Modal", "Side Bar"],
+		links: ["Global Modal", "Context Modal", "Side Bar", "Sidebar Hierarchy"],
 	},
 	{
 		id: 13,
@@ -206,15 +206,7 @@ export const ExperimentsData = [
 		title: "React Table",
 		logoSrc: "/Icons/tanstack.jpg",
 		description: "Headless UI for building tables & datagrids",
-		links: [
-			"Basic",
-			"Column Group",
-			"Column Ordering",
-			"Column Ordering DnD",
-			"Column Pinning",
-			"Column Sizing",
-			"Column Visibility",
-		],
+		links: ["Basic", "Column Group", "Column Ordering", "Column Ordering DnD", "Column Pinning", "Column Sizing", "Column Visibility"],
 	},
 	{
 		id: 16,
