@@ -1,15 +1,20 @@
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import React from "react";
+
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+
 import { useInView } from "react-intersection-observer";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+
 import Footer from "./Footer";
 import GlobalNavigation from "./GlobalNavigation";
 import { GitHubIcon } from "./Icons";
 import GlobalNavigationMobile from "app/components/GlobalNavigationMobile";
-import { ExperimentsData } from "data/ExperimentsData";
+
+// used in sidebar
 import { usePathname } from "next/navigation";
+import { ExperimentsData } from "data/ExperimentsData";
 
 interface LayoutToExperimentsType {
 	children: React.ReactNode;
@@ -23,17 +28,6 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 	const image = "/images/hero.jpg";
 	const yes = `${title} - Harits Syah`;
 	const { ref, inView } = useInView({ rootMargin: "-90px" });
-
-	function getArrayDomain(domain: string) {
-		const experiment = ExperimentsData.find((exp) => exp.title === domain);
-		return experiment ? experiment.links : [];
-	}
-
-	const links = getArrayDomain(domain);
-
-	const pathname = usePathname();
-	const segments = pathname?.split("/") as string[];
-	const lastSegment = segments[segments.length - 1];
 
 	return (
 		<>
@@ -60,31 +54,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
 			<main className="mx-auto flex max-w-5xl sm:-mt-[1px] sm:gap-10 sm:px-5 xl:px-0">
 				<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
-					{/* Sidebar */}
-					<div className="hidden sm:block sm:col-span-1 border  ">
-						<Link
-							className="block font-medium px-5 py-2 sticky top-[45px] bg-white border-b"
-							href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
-						>
-							{domain}
-						</Link>
-						<div className="flex flex-col space-y-1 py-5 px-3 sm:max-h-screen sm:overflow-auto">
-							{links.map((a) => {
-								const destination = a.toLowerCase().split(" ").join("-");
-								return (
-									<Link
-										href={`/experiments/${domain.toLowerCase().split(" ").join("-")}/${destination}`}
-										key={a}
-										className={`${
-											lastSegment === destination ? "text-white bg-action" : "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
-										}  px-2 py-1 rounded-md`}
-									>
-										{a}
-									</Link>
-								);
-							})}
-						</div>
-					</div>
+					<SideBar domain={domain} />
 
 					{/* Content */}
 					<div className="sm:col-span-3 sm:border-t border-r border-b">
@@ -122,6 +92,50 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 		</>
 	);
 }
+
+const SideBar = ({ domain }: { domain: string }) => {
+	//getting a links of experiments under domain as an array
+	function getArrayDomain(domain: string) {
+		const experiment = ExperimentsData.find((exp) => exp.title === domain);
+		return experiment ? experiment.links : [];
+	}
+	const links = getArrayDomain(domain);
+
+	// getting a "last segment of the url" to match with the "experiment page under domain" for hover coloring logic at sidebar
+	const pathname = usePathname();
+	const segments = pathname?.split("/") as string[];
+	const lastSegment = segments[segments.length - 1];
+
+	return (
+		<div className="hidden sm:block sm:col-span-1 border  ">
+			<Link
+				className="block font-medium px-5 py-2 sticky top-[45px] bg-white border-b"
+				href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
+			>
+				{domain}
+			</Link>
+			<div className="flex flex-col space-y-1 py-5 px-3 sm:max-h-screen sm:overflow-auto">
+				{links.map((experimentPage) => {
+					// experimentPage = string; e.g. Apple Navbar, Floating Labels
+					// experimentPageEdited = a lowercased with "-"; e.g. apple-navbar, floating-labels
+					const experimentPageEdited = experimentPage.toLowerCase().split(" ").join("-");
+					return (
+						<Link
+							href={`/experiments/${domain.toLowerCase().split(" ").join("-")}/${experimentPageEdited}`}
+							key={experimentPage}
+							className={`${
+								lastSegment === experimentPageEdited ? "text-white bg-action" : "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
+							}  px-2 py-1 rounded-md`}
+						>
+							{experimentPage}
+						</Link>
+					);
+				})}
+			</div>
+		</div>
+	);
+};
+
 const BackToExperiments = ({ inView, domain }: { inView: any; domain: string }) => {
 	return (
 		<Link
