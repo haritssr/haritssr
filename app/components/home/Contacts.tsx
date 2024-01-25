@@ -33,7 +33,7 @@ export default function Contacts() {
 			<section className="lg:col-span-2 border border-zinc-400/60 rounded-md">
 				<div className="divide-y divide-zinc-200">
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base">Roles</span>
+						<span className="text-zinc-800 text-tiny sm:text-base font-medium">Roles :</span>
 						<span className=" col-span-2 flex items-center space-x-2">
 							<span className="text-zinc-800 text-tiny sm:text-base">Web Product Engineer</span>
 							<a
@@ -61,11 +61,11 @@ export default function Contacts() {
 					</div>
 
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-white font-medium ">Role</span>
+						<span className="text-white">Role</span>
 						<span className="text-zinc-800 col-span-2 text-tiny sm:text-base">Math Physics Teacher</span>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base">At</span>
+						<span className="text-zinc-800 text-tiny sm:text-base font-medium">At :</span>
 						<span className="text-zinc-800 col-span-2">
 							<cite className="group not-italic">
 								<a
@@ -76,7 +76,7 @@ export default function Contacts() {
 									className="group inline-block w-fit cursor-pointer items-center text-zinc-800 hover:underline group-hover:text-zinc-800"
 								>
 									<span className="flex items-center">
-										<span className="text-tiny sm:text-base">Haris Lab</span>
+										<span className="text-tiny sm:text-base ">Haris Lab</span>
 										{/* External Link Icon */}
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ export default function Contacts() {
 						</span>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base">Email</span>
+						<span className="text-zinc-800 text-tiny sm:text-base font-medium">Email :</span>
 						<a
 							title="Send me an email"
 							href="mailto:haritssr@gmail.com"
@@ -108,7 +108,7 @@ export default function Contacts() {
 						</a>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base">Location</span>
+						<span className="text-zinc-800 text-tiny sm:text-base font-medium">Location :</span>
 						<a
 							target="_blank"
 							rel="noopener noreferrer"
