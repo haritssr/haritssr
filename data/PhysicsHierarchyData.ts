@@ -1,10 +1,10 @@
-type PhysicsTableSimple = {
-	domain: string;
-	chapters: {
-		title: string;
-		material: string[];
-	}[];
-}[];
+// type PhysicsTableCombine = {
+// 	domain_title: string;
+// 	chapters: {
+// 		title: string;
+// 		material: string[];
+// 	}[];
+// }[];
 
 // each will represent in database table
 type PhysicsTable = domain[];
@@ -15,100 +15,100 @@ type MateriTable = materi[];
 type materi = string;
 
 interface domain {
-	domain: string;
+	domain_title: string;
 	chapters: ChaptersTable;
 }
 
 interface chapter {
-	title: string;
+	chapter_title: string;
 	material: MateriTable;
 }
 
-export const PhysicsHiearchyData: PhysicsTable = [
+export const PhysicsHierarchyData: PhysicsTable = [
 	{
-		domain: "Pengukuran",
+		domain_title: "Pengukuran",
 		chapters: [
 			{
-				title: "Besaran",
+				chapter_title: "Besaran",
 				material: ["Pengantar", "Besaran pokok", "Besaran satuan"],
 			},
 			{
-				title: "Satuan",
+				chapter_title: "Satuan",
 				material: ["Pengantar", "Daftar satuan", "Konversi satuan"],
 			},
 			{
-				title: "Dimensi",
+				chapter_title: "Dimensi",
 				material: ["Pengantar", "Daftar dimensi", "Analisis dimensi"],
 			},
 			{
-				title: "Notasi Ilmiah",
+				chapter_title: "Notasi Ilmiah",
 				material: ["Pengantar", "Angka penting"],
 			},
 			{
-				title: "Ketepatan",
+				chapter_title: "Ketepatan",
 				material: ["Pengantar", "Akurasi", "Presisi", "Keteledoran", "Kesalahan acak", "Kesalahan sistematis"],
 			},
 			{
-				title: "Alat Ukur",
+				chapter_title: "Alat Ukur",
 				material: ["Pengantar", "Jangka sorong", "Miktometer sekrup", "Mistar", "Tahun Cahaya"],
 			},
 		],
 	},
 	{
-		domain: "Gerak",
+		domain_title: "Gerak",
 		chapters: [
 			{
-				title: "Gerak Lurus",
+				chapter_title: "Gerak Lurus",
 				material: ["Pengantar", "Gerak Lurus Beraturan", "Gerak Lurus Berubah Beraturan"],
 			},
 			{
-				title: "Gerak Rotasi",
+				chapter_title: "Gerak Rotasi",
 				material: ["Pengantar", "Momentum Sudut", "Torsi - Momen Gaya", "Momen Inersia"],
 			},
 			{
-				title: "Gerak Parabola",
+				chapter_title: "Gerak Parabola",
 				material: ["Pengantar", "Gerak Parabola Simetri", "Gerak Parabola Asimetri"],
 			},
 			{
-				title: "Gerak Melingkar",
+				chapter_title: "Gerak Melingkar",
 				material: ["Pengantar", "Gerak Melingkar Beraturan", "Percepatan Setripetal", "Momentum Sudut", "Hukum Kekekalan Energi"],
 			},
 		],
 	},
 	{
-		domain: "Dinamika",
+		domain_title: "Dinamika",
 		chapters: [
-			{ title: "Gaya", material: ["Gaya Newton", "Gaya Gesek", "Gaya Gravitasi"] },
-			{ title: "Usaha", material: ["Pengantar Usaha", "Hubungan usaha dengan energi"] },
-			{ title: "Momentum", material: ["Pengantar momentum", "Hukum kekekalan momentum", "Impuls"] },
+			{ chapter_title: "Gaya", material: ["Gaya Newton", "Gaya Gesek", "Gaya Gravitasi"] },
+			{ chapter_title: "Usaha", material: ["Pengantar Usaha", "Hubungan usaha dengan energi"] },
+			{ chapter_title: "Momentum", material: ["Pengantar momentum", "Hukum kekekalan momentum", "Impuls"] },
 			{
-				title: "Energi",
+				chapter_title: "Energi",
 				material: ["Pengantar", "Energi Kinetik", "Energi Potensial", "Energi Menanik"],
 			},
 		],
 	},
 	{
-		domain: "Fluida",
+		domain_title: "Fluida",
 		chapters: [
 			{
-				title: "Fluida Statis",
+				chapter_title: "Fluida Statis",
 				material: ["Pengantar Fluida Statis", "Tekanan", "Hukum Pascal", "Hukum Archimedes"],
 			},
 			{
-				title: "Fluida Dinamis",
+				chapter_title: "Fluida Dinamis",
 				material: ["Pengantar Fluida Dinamis", "Aliran fluida ideal", "Debit", "Kontinuitas", "Hukum Bernoulli"],
 			},
 		],
 	},
 	{
-		domain: "Gelombang",
+		domain_title: "Gelombang",
 		chapters: [
 			{
-				title: "Gelombang Dasar",
+				chapter_title: "Gelombang Dasar",
 				material: ["Pengantar", "Jenis gelombang", "Sifat gelombang", "Properti gelombang"],
 			},
 			{
-				title: "Gelombang Bunyi",
+				chapter_title: "Gelombang Bunyi",
 				material: [
 					"Pengantar",
 					"Taraf intensitas bunyi",
@@ -120,38 +120,38 @@ export const PhysicsHiearchyData: PhysicsTable = [
 				],
 			},
 			{
-				title: "Gelombang Elektromagnetik",
+				chapter_title: "Gelombang Elektromagnetik",
 				material: ["Pengantar", "Sifat", "Spektrum", "Energi"],
 			},
 		],
 	},
 
 	{
-		domain: "Termodinamika",
+		domain_title: "Termodinamika",
 		chapters: [
 			{
-				title: "Hukum termodinamika",
+				chapter_title: "Hukum termodinamika",
 				material: ["Pengantar", "Hukum termodinamika 0", "Hukum termodinamika 1", "Hukum termodinamika 2", "Hukum termodinamika 3"],
 			},
 			{
-				title: "Suhu",
+				chapter_title: "Suhu",
 				material: ["Pengantar Suhu", "Alat ukur suhu", "Konversi suhu"],
 			},
 			{
-				title: "Kalor",
+				chapter_title: "Kalor",
 				material: ["Pengantar", "Transfer kalor", "Pemuaian kalor", "Asas Black", "Kalor jenis", "Kalor lebur", "Kalor laten", "Kapasitas kalor"],
 			},
 			{
-				title: "Fenomena Gas",
+				chapter_title: "Fenomena Gas",
 				material: ["Pengantar", "Isobaris", "Isokhoris", "Isotermis", "Adiabatis"],
 			},
 		],
 	},
 	{
-		domain: "Listrik",
+		domain_title: "Listrik",
 		chapters: [
 			{
-				title: "Listrik Statis",
+				chapter_title: "Listrik Statis",
 				material: [
 					"Pengantar",
 					"Muatan listrik",
@@ -165,7 +165,7 @@ export const PhysicsHiearchyData: PhysicsTable = [
 				],
 			},
 			{
-				title: "Listrik Dinamis",
+				chapter_title: "Listrik Dinamis",
 				material: [
 					"Pengantar",
 					"Arus Listrik",
@@ -180,7 +180,7 @@ export const PhysicsHiearchyData: PhysicsTable = [
 				],
 			},
 			{
-				title: "Magnet",
+				chapter_title: "Magnet",
 				material: ["Pengantar", "Medan Magnet", "Gaya Magnet", "Fluks Magnet", "Momen Kopel", "Transformator"],
 			},
 		],
