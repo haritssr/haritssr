@@ -205,16 +205,7 @@ export default function About() {
 					))}
 				</Box>
 			</div>
-
-			<div className="flex justify-end">
-				<a
-					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
-					href="/cv.pdf"
-					download="cv.pdf"
-				>
-					Download CV
-				</a>
-			</div>
+			<DownloadCVButton />
 		</div>
 	);
 }
@@ -224,6 +215,20 @@ function Box({ title, children }: { title: string; children: React.ReactNode }) 
 		<div className="border border-zinc-400/50 rounded overflow-hidden">
 			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">{title}</div>
 			<div className="px-5 pb-5 space-y-5 divide-y">{children}</div>
+		</div>
+	);
+}
+
+function DownloadCVButton() {
+	return (
+		<div className="flex justify-end">
+			<a
+				className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
+				href="/cv.pdf"
+				download="cv.pdf"
+			>
+				Download CV
+			</a>
 		</div>
 	);
 }
