@@ -92,23 +92,23 @@ export default function About() {
 
 			<div className="space-y-6 mb-6">
 				<Box title="Core Skills">
-					<div className="space-y-1">
+					<div className="pt-5">
 						<div className="font-semibold">Web Software Engineering</div>
-						<p className="text-zinc-500 pb-4">JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js ecosystem.</p>
+						<p className="text-zinc-500">JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js ecosystem.</p>
 					</div>
-					<div className="space-y-1">
+					<div className="pt-5">
 						<div className="font-semibold">Math & Physics</div>
-						<p className="text-zinc-500 pb-4">High school and early college level.</p>
+						<p className="text-zinc-500">High school and early college level.</p>
 					</div>
-					<div className="space-y-1">
+					<div className="pt-5">
 						<div className="font-semibold">UI Design (with Figma)</div>
-						<p className="text-zinc-500 ">Experiments, mockup, prototyping UI for mobile/desktop web.</p>
+						<p className="text-zinc-500">Experiments, mockup, prototyping UI for mobile/desktop web.</p>
 					</div>
 				</Box>
 
 				<Box title="Experiences">
 					{ExperiencesData.map((project) => (
-						<div key={project.project_name}>
+						<div key={project.project_name} className="pt-5">
 							<div className="flex items-center justify-between">
 								<div className="flex items-center space-x-2">
 									<Image
@@ -144,20 +144,22 @@ export default function About() {
 				</Box>
 
 				<Box title="Formal Working Experiences">
-					<div className="flex items-center space-x-2">
-						<Image src="/Icons/sman5.jpg" height={20} width={20} alt="logo" className="aspect-auto h-5 w-5" blurDataURL="/Icons/sman5.jpg" />
-						<div className="font-semibold text-lg">Privat Teacher</div>
-					</div>
-					<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
-						<div>Lia Privat</div>
-						<div> June 2018 - Now (5 years)</div>
-						<div>Teaching math and physics for junior and senior highschool students at home</div>
+					<div className="pt-5">
+						<div className="flex items-center space-x-2">
+							<Image src="/Icons/sman5.jpg" height={20} width={20} alt="logo" className="aspect-auto h-5 w-5" blurDataURL="/Icons/sman5.jpg" />
+							<div className="font-semibold text-lg">Privat Teacher</div>
+						</div>
+						<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+							<div>Lia Privat</div>
+							<div> June 2018 - Now (5 years)</div>
+							<div>Teaching math and physics for junior and senior highschool students at home</div>
+						</div>
 					</div>
 				</Box>
 
 				<Box title="Formal Education">
 					{EducationData.map((school) => (
-						<div key={school.school}>
+						<div key={school.school} className="pt-5">
 							<div className="flex items-center space-x-2">
 								<Image
 									src={school.logo}
@@ -181,7 +183,7 @@ export default function About() {
 
 				<Box title="Non Formal Education">
 					{NonFormalEducationData.map((school) => (
-						<div key={school.school}>
+						<div key={school.school} className="pt-5">
 							<div className="flex items-center space-x-2">
 								<Image
 									src={school.logo}
@@ -221,7 +223,7 @@ function Box({ title, children }: { title: string; children: React.ReactNode }) 
 	return (
 		<div className="border border-zinc-400/50 rounded overflow-hidden">
 			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">{title}</div>
-			<div className="p-5 space-y-4">{children}</div>
+			<div className="px-5 pb-5 space-y-5 divide-y">{children}</div>
 		</div>
 	);
 }
