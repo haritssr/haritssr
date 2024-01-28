@@ -5,13 +5,8 @@ import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function TailwindColorVSAppleColor() {
 	return (
-		<LayoutToExperiments
-			title="Tailwind CSS vs Apple Gray Color"
-			domain="Tailwind CSS"
-		>
-			<SubTitle>
-				Methods to centering div in Tailwind CSS or inline CSS
-			</SubTitle>
+		<LayoutToExperiments title="Tailwind CSS vs Apple Gray Color" domain="Tailwind CSS">
+			<SubTitle>The difference between Tailwind CSS Gray colors vs Apple Gray colors</SubTitle>
 			<Section name="Apple" />
 			<div className="mb-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
 				{appleColorData.map(({ name, color }) => (
