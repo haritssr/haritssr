@@ -131,7 +131,7 @@ export default function HomeSectionWrapper({
 							{/* body */}
 							<Disclosure.Panel>
 								<div className="mb-16">
-									<div className="my-4 text-base sm:text-lg text-zinc-800 select-none">{explanation}</div>
+									<div className="my-4 text-lg sm:text-xl text-zinc-800 select-none">{explanation}</div>
 									<div className={className}>{children}</div>
 								</div>
 							</Disclosure.Panel>
@@ -153,7 +153,7 @@ export default function HomeSectionWrapper({
 					</section>
 					{/* body */}
 					<div className="mb-16">
-						<div className="mb-4 text-base sm:text-lg text-zinc-800 select-none">{explanation}</div>
+						<div className="mb-4 text-lg sm:text-xl text-zinc-800 select-none">{explanation}</div>
 						<div className={className}>{children}</div>
 					</div>
 				</>
