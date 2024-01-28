@@ -74,10 +74,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
 							{/* Header */}
 							<div className="px-5">
-								<h1
-									ref={ref}
-									className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left font-bold text-zinc-800 text-2xl sm:text-3xl mt-10"
-								>
+								<h1 ref={ref} className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left font-bold text-zinc-800 text-3xl mt-10">
 									{title}
 								</h1>
 								{children}
@@ -141,17 +138,13 @@ const BackToExperiments = ({ inView, domain }: { inView: any; domain: string }) 
 		<Link
 			passHref
 			href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
-			className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${inView ? "w-1/2" : "w-1/4"}`}
+			className={`-ml-1 flex cursor-pointer items-center sm:w-1/4 ${inView ? "w-1/2" : "w-1/4"}`}
 		>
 			<span className=" inline-block w-full">
 				<span className="group flex items-center">
 					<ChevronLeftIcon className=" text-action sm:group-hover:text-[#2563eb]/90 h-5 w-5" strokeWidth={2} />
-					<span
-						className={`-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base ${
-							inView ? "block" : "hidden sm:block"
-						}`}
-					>
-						{domain}
+					<span className={`-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base `}>
+						{inView ? domain : "Back"}
 					</span>
 				</span>
 			</span>
@@ -161,7 +154,7 @@ const BackToExperiments = ({ inView, domain }: { inView: any; domain: string }) 
 
 const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
 	return (
-		<div className={`sm:2/4 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
+		<div className={`sm:1/2 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
 			<div className="flex justify-center py-0.5 sm:py-0">
 				<div className={`truncate text-center font-semibold ${inView ? "text-transparent hidden" : "text-zinc-800 block"}`}>{title}</div>
 			</div>
@@ -171,7 +164,7 @@ const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
 
 const PageSource = ({ href, inView }: { href: string; inView: any }) => {
 	return (
-		<div className={`flex justify-end sm:w-1/6 ${inView ? "w-1/2" : "w-1/4"}`}>
+		<div className={`flex justify-end sm:w-1/4 ${inView ? "w-1/2" : "w-1/4"}`}>
 			<cite className="not-italic group">
 				<a
 					title="This page source code"
