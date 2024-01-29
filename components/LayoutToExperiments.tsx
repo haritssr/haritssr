@@ -15,6 +15,7 @@ import GlobalNavigationMobile from "app/components/GlobalNavigationMobile";
 // used in sidebar
 import { usePathname } from "next/navigation";
 import { ExperimentsData } from "data/ExperimentsData";
+import Breadcrumbs from "app/components/breadcrumbs";
 
 interface LayoutToExperimentsType {
 	children: React.ReactNode;
@@ -74,6 +75,7 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 
 							{/* Header */}
 							<div className="px-5">
+								<Breadcrumbs />
 								<h1 ref={ref} className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left font-bold text-zinc-800 text-3xl mt-10">
 									{title}
 								</h1>

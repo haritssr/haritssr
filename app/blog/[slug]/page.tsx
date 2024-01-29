@@ -4,25 +4,16 @@ import { Mdx } from "app/components/mdx";
 import { allBlogs } from ".contentlayer/generated";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
+import Breadcrumbs from "app/components/breadcrumbs";
 
-export async function generateMetadata({
-	params,
-}): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }): Promise<Metadata | undefined> {
 	const post = allBlogs.find((post) => post.slug === params.slug);
 	if (!post) {
 		return;
 	}
 
-	const {
-		title,
-		publishedAt: publishedTime,
-		summary: description,
-		image,
-		slug,
-	} = post;
-	const ogImage = image
-		? `https://haritssr.com${image}`
-		: `https://haritssr.com/og?title=${title}`;
+	const { title, publishedAt: publishedTime, summary: description, image, slug } = post;
+	const ogImage = image ? `https://haritssr.com${image}` : `https://haritssr.com/og?title=${title}`;
 
 	return {
 		title,
@@ -86,8 +77,9 @@ export default function Blog({ params }) {
 
 	return (
 		<section className="max-w-2xl mx-auto py-5 sm:py-10">
+			<Breadcrumbs />
 			<div className="mb-5 mt-5 sm:mt-10">
-				<BackButton href="/blog" name="All articles" />
+				<BackButton href="/blog" name="All Articles" />
 			</div>
 			<script type="application/ld+json" suppressHydrationWarning>
 				{JSON.stringify(post.structuredData)}
