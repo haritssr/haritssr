@@ -2,16 +2,14 @@ import GlobalNavigation from "@/components/GlobalNavigation";
 import "../styles/globals.css";
 import Footer from "@/components/Footer";
 import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
-import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-
-const inter = Inter({ subsets: ["latin"] });
+import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.haritssr.com"),
 	title: {
 		default: "Harits Syah",
-		template: "%s | Harits Syah",
+		template: "%s - Harits Syah",
 	},
 	description: "Developer, teacher, and founder.",
 	openGraph: {
@@ -45,8 +43,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={inter.className}>
-			<body>
+		<html lang="en">
+			<body className={GeistSans.className}>
 				<GlobalNavigation />
 				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">{children}</main>
 				<Footer />

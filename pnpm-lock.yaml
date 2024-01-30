@@ -179,6 +179,9 @@ dependencies:
   framer-motion:
     specifier: ^4.1.17
     version: 4.1.17(react-dom@18.2.0)(react@18.2.0)
+  geist:
+    specifier: ^1.2.1
+    version: 1.2.1(next@14.1.0)
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
@@ -6595,6 +6598,14 @@ packages:
   /fuse.js@6.6.2:
     resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
     engines: {node: '>=10'}
+    dev: false
+
+  /geist@1.2.1(next@14.1.0):
+    resolution: {integrity: sha512-xCl7zWfnWqc+TbCG5qqyeT5tnVlOO4pSJsT3Ei59DN1SR4N2VlauF8Fv0D1pPFXGUJgu6RMoeZX+wsR4T9bMhg==}
+    peerDependencies:
+      next: ^13.2 || ^14
+    dependencies:
+      next: 14.1.0(@babel/core@7.22.8)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /gensync@1.0.0-beta.2:
