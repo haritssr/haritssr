@@ -1,7 +1,7 @@
 import GlobalNavigation from "@/components/GlobalNavigation";
 import "../styles/globals.css";
 import Footer from "@/components/Footer";
-import GlobalNavigationMobile from "app/components/GlobalNavigationMobile";
+import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 

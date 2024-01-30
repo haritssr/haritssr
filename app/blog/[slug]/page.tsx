@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Mdx } from "app/components/mdx";
+import { Mdx } from "@/components/mdx";
 import { allBlogs } from ".contentlayer/generated";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
-import Breadcrumbs from "app/components/breadcrumbs";
+import Breadcrumbs from "@/components/breadcrumbs";
 
 export async function generateMetadata({ params }): Promise<Metadata | undefined> {
 	const post = allBlogs.find((post) => post.slug === params.slug);

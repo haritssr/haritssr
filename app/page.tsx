@@ -1,12 +1,12 @@
-import Technology from "app/components/home/Technology";
-import Experiences from "app/components/home/Experiences";
-import About from "app/components/home/About";
-import Contacts from "app/components/home/Contacts";
-import Blog from "app/components/home/Blog";
-import DesignSystem from "app/components/home/DesignSystem";
-import Experiments from "app/components/home/Experiments";
-import Services from "app/components/home/Services";
-import HarisLabBanner from "app/components/home/HarisLabBanner";
+import Technology from "@/components/home/Technology";
+import Experiences from "@/components/home/Experiences";
+import About from "@/components/home/About";
+import Contacts from "@/components/home/Contacts";
+import Blog from "@/components/home/Blog";
+import DesignSystem from "@/components/home/DesignSystem";
+import Experiments from "@/components/home/Experiments";
+import Services from "@/components/home/Services";
+import HarisLabBanner from "@/components/home/HarisLabBanner";
 import "../styles/globals.css";
 
 export default function Home() {

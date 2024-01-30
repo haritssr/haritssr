@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 export default function SubTitle({ children }: { children: React.ReactNode }) {

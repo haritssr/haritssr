@@ -21,7 +21,7 @@ import ExplanationList from "@/components/ExplanationList";
 import BackButton from "@/components/BackButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import Box from "app/components/Box";
+import Box from "@/components/Box";
 import Image from "next/image";
 
 export default function DesignSystem() {

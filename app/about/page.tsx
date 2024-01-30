@@ -6,7 +6,7 @@ import ExternalLink from "@/components/ExternalLink";
 import { EducationData } from "data/EducationData";
 import { ExperiencesData } from "data/ExperiencesData";
 import { NonFormalEducationData } from "data/NonFormalEducationData";
-import ContactList from "app/components/ContactList";
+import ContactList from "@/components/ContactList";
 import SecondaryButton from "@/components/SecondaryButton";
 
 export default function About() {
