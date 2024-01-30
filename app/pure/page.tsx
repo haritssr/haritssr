@@ -24,6 +24,14 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import Box from "@/components/Box";
 import Image from "next/image";
 
+// import { Metadata } from "next";
+// can't do this, since metadata only possible on server, and this /pure is client, see "use client"
+// possible solution: write all of the component below in their own client component
+// export const metadata: Metadata = {
+// 	title: "Pure",
+// 	description: "Design system used in haritssr.com Haris Studio and Haris Lab",
+// };
+
 export default function DesignSystem() {
 	const [pressed, setPressed] = useState(false);
 

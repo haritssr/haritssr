@@ -1,6 +1,12 @@
 import { ExperiencesData } from "data/ExperiencesData";
 import { PageTitle } from "@/components/SubTitle";
 import ExperienceCard from "@/components/ExperienceCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Experiences",
+	description: "Detail informations on how projects I belong to being handled.",
+};
 
 export default function ExperiencesPage() {
 	return (

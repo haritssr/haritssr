@@ -8,6 +8,12 @@ import { ExperiencesData } from "data/ExperiencesData";
 import { NonFormalEducationData } from "data/NonFormalEducationData";
 import ContactList from "@/components/ContactList";
 import SecondaryButton from "@/components/SecondaryButton";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "About",
+	description: "About Harits Syah",
+};
 
 export default function About() {
 	return (
