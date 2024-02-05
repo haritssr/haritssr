@@ -1,6 +1,7 @@
 import { allBlogs } from ".contentlayer/generated";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import countWords from "utils/word-count";
 
 export default function BlogGrid() {
 	return (
@@ -25,6 +26,7 @@ export default function BlogGrid() {
 							<div>
 								<p className="font-medium text-zinc-700">{post.title}</p>
 								<p className="text-zinc-400">{post.publishedAt}</p>
+								<p className="text-zinc-400">{countWords(post.title)} Words</p>
 							</div>
 							<ChevronRightIcon width={2} className="w-5 h-5 text-zinc-500 group-hover:text-zinc-800" />
 						</>
