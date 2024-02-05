@@ -1,7 +1,5 @@
 const { withContentlayer } = require("next-contentlayer");
 
-// import { withContentlayer } from "next-contentLayer";
-
 const nextConfig = {
 	transpilePackages: ["geist"],
 	reactStrictMode: false,

@@ -3,6 +3,8 @@ import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import countWords from "./utils/word-count";
+
 // disableImportAliasWarning: true
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -11,7 +13,7 @@ const computedFields = {
 		resolve: (doc) => doc._raw.flattenedPath,
 	},
 	structuredData: {
-		type: "object",
+		type: "object & {wordCount: number}",
 		resolve: (doc) => ({
 			"@context": "https://schema.org",
 			"@type": "BlogPosting",
@@ -19,9 +21,9 @@ const computedFields = {
 			datePublished: doc.publishedAt,
 			dateModified: doc.publishedAt,
 			description: doc.summary,
-			image: doc.image
-				? `https://haritssr.com${doc.image}`
-				: `https://haritssr.com/og?title=${doc.title}`,
+			topic: doc.topic,
+			wordCount: countWords(doc.title),
+			image: doc.image ? `https://haritssr.com${doc.image}` : `https://haritssr.com/og?title=${doc.title}`,
 			url: `https://haritssr.com/blog/${doc._raw.flattenedPath}`,
 			author: {
 				"@type": "Person",
@@ -45,6 +47,10 @@ export const Blog = defineDocumentType(() => ({
 			required: true,
 		},
 		summary: {
+			type: "string",
+			required: true,
+		},
+		topic: {
 			type: "string",
 			required: true,
 		},

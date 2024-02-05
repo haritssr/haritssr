@@ -52,7 +52,8 @@
 		"styles/*.module.css",
 		".next/types/**/*.ts",
 		".contentlayer/generated",
-		"utils/getAllMDXFileInsideFolder.js"
+		"utils/getAllMDXFileInsideFolder.js",
+		"utils/word-count.ts"
 	],
 	"exclude": ["node_modules"]
 }
