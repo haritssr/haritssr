@@ -2,15 +2,12 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 export default function Destination({ link }: { link: string }) {
 	const pathname = usePathname();
 
 	const CurrentPageBaseRoute = pathname?.split("/")[1];
-
-	function capitalizeFirstLetter(to: string) {
-		return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
-	}
 
 	let color: string;
 
@@ -24,10 +21,7 @@ export default function Destination({ link }: { link: string }) {
 
 	return (
 		<li>
-			<Link
-				className={`${color}`}
-				href={`${link === "pure" ? "/pure" : `/${link}`}`}
-			>
+			<Link className={`${color}`} href={`${link === "pure" ? "/pure" : `/${link}`}`}>
 				{capitalizeFirstLetter(link)}
 			</Link>
 		</li>

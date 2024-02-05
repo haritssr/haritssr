@@ -3,15 +3,12 @@
 import { allBlogs } from "contentlayer/generated";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 export default function SidebarBlog() {
 	const pathname = usePathname();
 	const segments = pathname?.split("/") as string[];
 	const lastSegment = segments[segments.length - 1];
-
-	function capitalizeFirstLetter(to: string) {
-		return to.substring(0).charAt(0).toUpperCase() + to.slice(1);
-	}
 
 	return (
 		<div className="hidden sm:block sm:col-span-1 border ">
