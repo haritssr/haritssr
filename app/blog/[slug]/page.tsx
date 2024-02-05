@@ -69,6 +69,8 @@ function formatDate(date: string) {
 	return `${fullDate} (${formattedDate})`;
 }
 
+const arr = ["heading 1", "heading 2", "heading 3", "heading 4", "heading 5", "heading 6", "heading 7", "heading 8", "heading 9", "heading 10"];
+
 export default function Blog({ params }) {
 	const post = allBlogs.find((post) => post.slug === params.slug);
 
@@ -92,11 +94,24 @@ export default function Blog({ params }) {
 				<h1 className="font-bold text-2xl tracking-tighter">
 					<Balancer>{post.title}</Balancer>
 				</h1>
-				<div className="flex justify-between items-center mt-2 mb-8 text-sm">
-					<p className="text-sm ">{formatDate(post.publishedAt)}</p>
+				<div className="flex items-center mt-2 mb-8 text-sm">
+					<p>{formatDate(post.publishedAt)}</p>
+					&nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
+					<p>{post.structuredData.wordCount} Words</p>
 				</div>
 				<Mdx code={post.body.code} />
 			</div>
+			{/* Table of Content */}
+			<section className="sm:col-span-1 sm:border-r sm:border-b ">
+				<div className="sticky top-[45px]">
+					<div className="font-medium py-2  bg-white border-b px-5">Table Of Content</div>
+					<div className="space-y-2 sm:p-5">
+						{arr.map((heading) => (
+							<p key={heading}>{heading}</p>
+						))}
+					</div>
+				</div>
+			</section>
 		</div>
 	);
 }
