@@ -108,22 +108,23 @@ a {
 /* width */
 
 ::-webkit-scrollbar {
-	width: 10px;
-	height: 8px;
+	width: 7px;
+	/* height: 8px; */
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #f1f1f1;
+	background: #e4e4e7;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #888;
+	background: #a1a1aa;
+	border-radius: 4px;
 }
 /* border-radius: 4px; /*
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+	background: #71717a;
 }

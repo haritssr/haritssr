@@ -78,10 +78,10 @@ export default function Blog({ params }) {
 
 	return (
 		// <section className="max-w-2xl mx-auto py-5 sm:py-10">
-		<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
+		<div className="grid grid-cols-1 sm:grid-cols-5 min-h-screen w-full">
 			<SidebarBlog />
 			{/* Content */}
-			<div className="sm:col-span-3 sm:border-t sm:border-r sm:border-b py-5 sm:p-5">
+			<div className="sm:col-span-3 sm:border-t sm:border-b sm:border-r py-5 sm:p-5">
 				<Breadcrumbs />
 				<div className="mb-5 mt-5 sm:mt-10">
 					<BackButton href="/blog" name="All Articles" />
@@ -98,6 +98,5 @@ export default function Blog({ params }) {
 				<Mdx code={post.body.code} />
 			</div>
 		</div>
-		// </section>
 	);
 }

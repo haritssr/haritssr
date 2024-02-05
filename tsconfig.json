@@ -1,57 +1,58 @@
 {
-  "compilerOptions": {
-    "noImplicitAny": false,
-    "strictNullChecks": true,
-    // "noUnusedLocals":true,
-    "target": "es5",
-    "importHelpers": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@/components/*": ["components/*"],
-      "@/Icons": ["components/Icons"],
-      "@/styles/*": ["styles/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
-    },
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/**/*.tsx",
-    "tailwind.config.js",
-    "pages/showcase/framer-motion",
-    "pages/experiments/framer-motion/api",
-    "data/ExperimentsData.ts",
-    "pages/experiments/react/calculator.jsx",
-    "pages/experiments/radix-ui/navigation-menu.tsx",
-    "pages/experiments/react/useStateTodo.js",
-    "utils/store-context-selector.js",
-    "pages/experiments/react/store-context-selector.tes",
-    "utils/store-context.js",
-    "pages/experiments/react/store-context-selector.tsz",
-    "pages/experiments/react/store-zustand.js",
-    "styles/*.css",
-    "styles/*.module.css",
-    ".next/types/**/*.ts",
-    ".contentlayer/generated"
-  ],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"noImplicitAny": false,
+		"strictNullChecks": true,
+		// "noUnusedLocals":true,
+		"target": "es5",
+		"importHelpers": true,
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"baseUrl": ".",
+		"paths": {
+			"@/components/*": ["components/*"],
+			"@/Icons": ["components/Icons"],
+			"@/styles/*": ["styles/*"],
+			"contentlayer/generated": ["./.contentlayer/generated"]
+		},
+		"incremental": true,
+		"plugins": [
+			{
+				"name": "next"
+			}
+		]
+	},
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"**/**/*.tsx",
+		"tailwind.config.js",
+		"pages/showcase/framer-motion",
+		"pages/experiments/framer-motion/api",
+		"data/ExperimentsData.ts",
+		"pages/experiments/react/calculator.jsx",
+		"pages/experiments/radix-ui/navigation-menu.tsx",
+		"pages/experiments/react/useStateTodo.js",
+		"utils/store-context-selector.js",
+		"pages/experiments/react/store-context-selector.tes",
+		"utils/store-context.js",
+		"pages/experiments/react/store-context-selector.tsz",
+		"pages/experiments/react/store-zustand.js",
+		"styles/*.css",
+		"styles/*.module.css",
+		".next/types/**/*.ts",
+		".contentlayer/generated",
+		"utils/getAllMDXFileInsideFolder.js"
+	],
+	"exclude": ["node_modules"]
 }
