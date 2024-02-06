@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { TitleAndPathData } from "data/TitleAndPathData";
-import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 export default function GlobalNavigationMobile() {
 	return (
@@ -16,6 +15,11 @@ export default function GlobalNavigationMobile() {
 			</div>
 		</div>
 	);
+}
+
+function capitalizeFirstLetter(to: string): string {
+	const capitalize = to.substring(1).charAt(0).toUpperCase() + to.slice(2);
+	return capitalize;
 }
 
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
