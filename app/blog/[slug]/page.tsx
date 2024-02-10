@@ -6,6 +6,7 @@ import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
 import Breadcrumbs from "@/components/breadcrumbs";
 import SidebarBlog from "./SidebarBlog";
+import TableOfContents from "./TableOfContent";
 
 export async function generateMetadata({ params }): Promise<Metadata | undefined> {
 	const post = allBlogs.find((post) => post.slug === params.slug);
@@ -69,8 +70,6 @@ function formatDate(date: string) {
 	return `${fullDate} (${formattedDate})`;
 }
 
-const arr = ["heading 1", "heading 2", "heading 3", "heading 4", "heading 5", "heading 6", "heading 7", "heading 8", "heading 9", "heading 10"];
-
 export default function Blog({ params }) {
 	const post = allBlogs.find((post) => post.slug === params.slug);
 
@@ -83,9 +82,9 @@ export default function Blog({ params }) {
 		<div className="grid grid-cols-1 sm:grid-cols-5 min-h-screen w-full">
 			<SidebarBlog />
 			{/* Content */}
-			<div className="sm:col-span-3 sm:border-t sm:border-b sm:border-r py-5 sm:p-5">
+			<div className="sm:col-span-3 sm:border-t sm:border-b sm:border-r pb-5 sm:px-5">
 				<Breadcrumbs />
-				<div className="mb-5 mt-5 sm:mt-10">
+				<div className="my-5">
 					<BackButton href="/blog" name="All Articles" />
 				</div>
 				<script type="application/ld+json" suppressHydrationWarning>
@@ -102,16 +101,7 @@ export default function Blog({ params }) {
 				<Mdx code={post.body.code} />
 			</div>
 			{/* Table of Content */}
-			<section className="sm:col-span-1 sm:border-r sm:border-b ">
-				<div className="sticky top-[45px]">
-					<div className="font-medium py-2  bg-white border-b px-5">Table Of Content</div>
-					<div className="space-y-2 sm:p-5">
-						{arr.map((heading) => (
-							<p key={heading}>{heading}</p>
-						))}
-					</div>
-				</div>
-			</section>
+			<TableOfContents title={post.title.toLocaleLowerCase().split(" ").join("-")} />
 		</div>
 	);
 }
