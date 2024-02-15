@@ -45,14 +45,16 @@ export default function BlogGrid() {
 						passHref
 						key={post.slug}
 						href={`/blog/${post.slug}`}
-						className="rounded-lg border border-zinc-400/70 pl-3 pr-4 py-2 hover:bg-zinc-50 flex items-center justify-between  group"
+						className="rounded-lg border border-zinc-300 px-3 py-2 hover:bg-zinc-50 flex items-start justify-between  group"
 					>
 						<>
-							<div className="w-full">
+							<div className="w-full ">
 								<p className="font-medium text-zinc-700">{post.title}</p>
 								<p className="text-zinc-400 inline text-[14px]">{post.publishedAt}</p>
 								&nbsp; <span className="text-zinc-400">•</span> &nbsp;
 								<p className="text-zinc-400 inline text-[14px]">{post.structuredData.wordCount} Words</p>
+								&nbsp; <span className="text-zinc-400">•</span> &nbsp;
+								<p className="text-zinc-400 inline text-[14px]">{Math.ceil(post.structuredData.wordCount / 200)} min read</p>
 								<br />
 								<p
 									className={`inline ${
@@ -62,7 +64,7 @@ export default function BlogGrid() {
 									{post.topic}
 								</p>
 							</div>
-							<ChevronRightIcon width={2} className="w-5 h-5 text-zinc-500 group-hover:text-zinc-800" />
+							<ChevronRightIcon width={2} className="mt-1  w-5 h-5 text-zinc-400 group-hover:text-zinc-800" />
 						</>
 					</Link>
 				))}
