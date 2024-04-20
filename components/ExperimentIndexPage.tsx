@@ -1,5 +1,4 @@
 import Image from "next/image";
-import InternalLink from "./InternalLink";
 import type { ExperimentsData } from "../data/ExperimentsData";
 import Layout from "./Layout";
 import Link from "next/link";
