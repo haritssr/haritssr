@@ -5,8 +5,8 @@ import ContactList from "../ContactList";
 export default function Contacts() {
 	return (
 		<section className="grid grid-cols-1 lg:grid-cols-4 md:items-center gap-8 md:gap-5 pt-5 mb-16">
-			<section className="lg:col-span-2 space-y-5 md:mb-0 rounded-md lg:border lg:border-zinc-400/60 lg:h-full lg:self-center lg:grid">
-				<div className="grid lg:border-white rounded-md lg:border">
+			<section className="lg:col-span-2 space-y-5 md:mb-0 rounded-md lg:dark:border-zinc-700 lg:h-full lg:self-center lg:grid lg:border border-zinc-300">
+				<div className="grid rounded-md">
 					<div className="self-center space-y-2">
 						<div className="justify-center w-full flex ">
 							<section className="flex justify-center select-none">
@@ -23,19 +23,19 @@ export default function Contacts() {
 							</section>
 						</div>
 						<div className="space-y-1">
-							<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
+							<div className="text-zinc-800 dark:text-zinc-200 w-full text-center text-lg font-semibold">Harits Syah</div>
 							<ContactList />
 						</div>
 					</div>
 				</div>
 			</section>
 			{/* lg:pt-2 lg:px-4 */}
-			<section className="lg:col-span-2 border border-zinc-400/60 rounded-md">
-				<div className="divide-y divide-zinc-200">
+			<section className="lg:col-span-2 border border-zinc-300 dark:border-zinc-700 rounded-md">
+				<div className="divide-y divide-zinc-200 dark:divide-zinc-700">
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base font-medium">Roles :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">Roles :</span>
 						<span className=" col-span-2 flex items-center space-x-2">
-							<span className="text-zinc-800 text-tiny sm:text-base">Web Product Engineer</span>
+							<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200">Web Product Engineer</span>
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
@@ -61,11 +61,11 @@ export default function Contacts() {
 					</div>
 
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-white">Role</span>
-						<span className="text-zinc-800 col-span-2 text-tiny sm:text-base">Math Physics Teacher</span>
+						<span className="text-white dark:text-zinc-200">Role</span>
+						<span className="text-zinc-800 dark:text-zinc-200 col-span-2 text-tiny sm:text-base">Math Physics Teacher</span>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base font-medium">At :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">At :</span>
 						<span className="text-zinc-800 col-span-2">
 							<cite className="group not-italic">
 								<a
@@ -73,7 +73,7 @@ export default function Contacts() {
 									href="https://www.harislab.com"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="group inline-block w-fit cursor-pointer items-center text-zinc-800 hover:underline group-hover:text-zinc-800"
+									className="group inline-block w-fit cursor-pointer items-center text-zinc-800 dark:text-zinc-200 hover:underline group-hover:text-zinc-800"
 								>
 									<span className="flex items-center">
 										<span className="text-tiny sm:text-base ">Haris Lab</span>
@@ -98,23 +98,23 @@ export default function Contacts() {
 						</span>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base font-medium">Email :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">Email :</span>
 						<a
 							title="Send me an email"
 							href="mailto:haritssr@gmail.com"
-							className="text-zinc-800 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
+							className="text-zinc-800 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base dark:text-zinc-200"
 						>
 							haritssr@gmail.com
 						</a>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base font-medium">Location :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">Location :</span>
 						<a
 							target="_blank"
 							rel="noopener noreferrer"
 							title="See South Tangerang at Google Maps"
 							href="https://www.google.com/maps/place/Tangerang+Selatan,+Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x8706481c2c4aafe4?sa=X&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgPEAA&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgQEAI"
-							className="text-zinc-800 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
+							className="text-zinc-800 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base dark:text-zinc-200"
 						>
 							South Tangerang, Indonesia
 						</a>

@@ -98,7 +98,7 @@ export default function HomeSectionWrapper({
 						<>
 							<div className="flex items-center justify-between w-full">
 								<div className="flex items-center space-x-2">
-									<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800">
+									<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200">
 										{topic}
 									</Link>
 									<div>
@@ -109,15 +109,15 @@ export default function HomeSectionWrapper({
 								<div className="flex items-center space-x-2">
 									<Link
 										href={`/${id}`}
-										className="rounded-full text-action border border-zinc-300 hover:bg-zinc-100 text-tiny px-2.5 sm:px-3 py-[3px] select-none active:ring-2 active:ring-action active:ring-offset-1"
+										className="rounded-full text-action border border-zinc-300 hover:bg-zinc-100 text-tiny px-2.5 sm:px-3 py-[3px] select-none active:ring-2 active:ring-action active:ring-offset-1 dark:text-blue-500 dark:border-zinc-600 dark:hover:bg-zinc-800"
 									>
 										Detail
 									</Link>
 									<Disclosure.Button>
 										{open ? (
-											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 border-zinc-300">
-												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700" />
-												<span className="text-tiny hidden sm:block text-zinc-700 select-none">Show Less</span>
+											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 dark:hover:bg-zinc-800 border-zinc-300 dark:border-zinc-600">
+												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700 dark:text-zinc-300" />
+												<span className="text-tiny hidden sm:block text-zinc-700 dark:text-zinc-300 select-none">Show Less</span>
 											</div>
 										) : (
 											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border border-zinc-800 bg-zinc-800 text-white hover:bg-zinc-700">
@@ -131,7 +131,7 @@ export default function HomeSectionWrapper({
 							{/* body */}
 							<Disclosure.Panel>
 								<div className="mb-16">
-									<div className="my-4 text-lg sm:text-xl text-zinc-800 select-none">{explanation}</div>
+									<div className="my-4 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">{explanation}</div>
 									<div className={className}>{children}</div>
 								</div>
 							</Disclosure.Panel>
@@ -143,7 +143,7 @@ export default function HomeSectionWrapper({
 					{/* header */}
 					<section className="mb-4 flex items-center justify-between">
 						<div className="flex items-center space-x-2">
-							<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800">
+							<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200">
 								{topic}
 							</Link>
 							<div>
@@ -153,7 +153,7 @@ export default function HomeSectionWrapper({
 					</section>
 					{/* body */}
 					<div className="mb-16">
-						<div className="mb-4 text-lg sm:text-xl text-zinc-800 select-none">{explanation}</div>
+						<div className="mb-4 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">{explanation}</div>
 						<div className={className}>{children}</div>
 					</div>
 				</>

@@ -52,9 +52,7 @@ const CopyLinkAllPage = () => {
 				onOpenChange={setOpen}
 			>
 				<div className="">
-					<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
-						Link copied to clipboard
-					</Toast.Title>
+					<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">Link copied to clipboard</Toast.Title>
 					<Toast.Description asChild>
 						<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.com${pathname}`}</div>
 					</Toast.Description>

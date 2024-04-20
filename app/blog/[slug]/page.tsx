@@ -82,7 +82,7 @@ export default function Blog({ params }) {
 		<div className="grid grid-cols-1 sm:grid-cols-5 min-h-screen w-full">
 			<SidebarBlog />
 			{/* Content */}
-			<div className="sm:col-span-3 sm:border-t sm:border-b sm:border-r pb-5 sm:px-5">
+			<div className="sm:col-span-3 sm:border-t sm:border-b sm:border-r dark:border-zinc-700 pb-5 sm:px-5">
 				<Breadcrumbs />
 				<div className="my-5">
 					<BackButton href="/blog" name="All Articles" />

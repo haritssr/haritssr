@@ -9,16 +9,11 @@ export const TechnologyCard = (
 		domain?: string;
 		links?: Array<{ href: string; imgSrc: string; name: string }>;
 	},
-	props: JSX.IntrinsicAttributes &
-		ClassAttributes<HTMLDivElement> &
-		HTMLAttributes<HTMLDivElement>
+	props: JSX.IntrinsicAttributes & ClassAttributes<HTMLDivElement> & HTMLAttributes<HTMLDivElement>
 ) => {
 	return (
-		<div
-			{...props}
-			className="h-fit overflow-hidden rounded-md border border-zinc-400/60"
-		>
-			<div className="truncate px-3 py-1.5 bg-zinc-50 text-tiny font-semibold text-zinc-700 sm:text-base border-b border-zinc-400/60">
+		<div {...props} className="h-fit overflow-hidden rounded-md border border-zinc-400/60 dark:border-zinc-700">
+			<div className="truncate px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 text-tiny font-semibold text-zinc-700 sm:text-base border-b border-zinc-400/60">
 				{domain}
 			</div>
 			<div className="">
@@ -30,7 +25,7 @@ export const TechnologyCard = (
 							href={href}
 							target="_blank"
 							rel="noreferrer noopener"
-							className="group flex w-auto items-center justify-between space-x-2 py-[7px] px-3 hover:bg-zinc-100/50"
+							className="group flex w-auto items-center justify-between space-x-2 py-[7px] px-3 hover:bg-zinc-100/50 dark:hover:bg-zinc-700/60"
 						>
 							<section className="flex items-center space-x-2 overflow-hidden">
 								<Image
@@ -42,24 +37,18 @@ export const TechnologyCard = (
 									blurDataURL={imgSrc}
 									// placeholder='blur'
 								/>
-								<div className="truncate text-zinc-500 group-hover:text-zinc-700">
-									{name}
-								</div>
+								<div className="truncate text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200">{name}</div>
 							</section>
 							{/* External Link Icon */}
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="hidden h-4 w-4 text-white group-hover:text-zinc-800 sm:block"
+								className="hidden h-4 w-4 text-white dark:text-zinc-400 dark:group-hover:text-zinc-400 group-hover:text-zinc-800 sm:block"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
 								strokeWidth={1.5}
 							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-								/>
+								<path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 							</svg>
 						</a>
 					);
