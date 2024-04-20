@@ -58,6 +58,7 @@ export const ExperimentsData = [
 			"Counter",
 			"React Wrap Balancer",
 			"Modal Inside Modal",
+			"Confetti",
 		],
 	},
 	{
