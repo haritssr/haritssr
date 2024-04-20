@@ -19,7 +19,7 @@ export default function generateTOC(mdxFilePath) {
 		}
 
 		// Generate table of contents
-		// tableOfContens: string[] //
+		// tableOfContents: string[]
 		const heading = headings.map(({ level, title }) => {
 			const indent = "  ".repeat(level - 1);
 			// return `${indent}- [${title}](#${title.toLowerCase().replace(/\s/g, "-")})`;
