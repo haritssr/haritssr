@@ -11,7 +11,7 @@ export default function SidebarBlog() {
 	const lastSegment = segments[segments.length - 1];
 
 	return (
-		<div className="hidden sm:block sm:col-span-1 border dark:border-zinc-700">
+		<div className="hidden sm:block sm:col-span-1 border-r border-b border-l dark:border-zinc-700">
 			<Link className="block font-medium px-4 py-2 sticky top-[45px] bg-white dark:bg-zinc-800 border-b dark:border-zinc-700" href="/blog">
 				Blog
 			</Link>
