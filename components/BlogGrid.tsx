@@ -57,7 +57,7 @@ export default function BlogGrid() {
 								&nbsp; <span className="text-zinc-400">•</span> &nbsp;
 								<p className="text-zinc-400 inline text-[14px]">{post.structuredData.wordCount} Words</p>
 								&nbsp; <span className="text-zinc-400">•</span> &nbsp;
-								<p className="text-zinc-400 inline text-[14px]">{Math.ceil(post.structuredData.wordCount / 200)} min read</p>
+								<p className="text-zinc-400 inline text-[14px]">{Math.ceil(post.structuredData.wordCount / 200)} Min Read</p>
 								<br />
 								<p
 									className={`inline ${
