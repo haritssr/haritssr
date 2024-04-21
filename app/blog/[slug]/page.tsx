@@ -97,6 +97,8 @@ export default function Blog({ params }) {
 					<p>{formatDate(post.publishedAt)}</p>
 					&nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
 					<p>{post.structuredData.wordCount} Words</p>
+					&nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
+					<p>{Math.ceil(post.structuredData.wordCount / 200)} Min Read</p>
 				</div>
 				<Mdx code={post.body.code} />
 			</div>
