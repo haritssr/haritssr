@@ -12,11 +12,11 @@ export default function SidebarBlog() {
 
 	return (
 		<div className="hidden sm:block sm:col-span-1 border dark:border-zinc-700">
-			<Link className="block font-medium px-5 py-2 sticky top-[45px] bg-white dark:bg-zinc-800 border-b dark:border-zinc-700" href="/blog">
+			<Link className="block font-medium px-4 py-2 sticky top-[45px] bg-white dark:bg-zinc-800 border-b dark:border-zinc-700" href="/blog">
 				Blog
 			</Link>
 
-			<div className="flex flex-col space-y-1 py-5 px-3 sm:max-h-screen sm:overflow-auto">
+			<div className="flex flex-col space-y-1.5 py-5 px-2 sm:max-h-screen sm:overflow-auto">
 				{allBlogs
 					.sort((a, b) => {
 						if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
