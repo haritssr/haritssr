@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function About() {
 	return (
 		<div className="max-w-3xl mx-auto">
-			<div className="my-8 sm:my-20 space-y-2">
+			<section className="my-8 sm:my-20 space-y-2">
 				<div className="justify-center w-full flex ">
 					<section className="flex justify-center">
 						<Image
@@ -33,18 +33,18 @@ export default function About() {
 					</section>
 				</div>
 				<div className="space-y-1">
-					<div className="text-zinc-800 w-full text-center text-lg font-semibold">Harits Syah</div>
+					<div className="text-zinc-800 dark:text-zinc-200 w-full text-center text-lg font-semibold">Harits Syah</div>
 					<ContactList />
 				</div>
-			</div>
+			</section>
 
 			{/* Contacts */}
 			<div className="mb-14">
-				<div className="text-zinc-800 text-xl font-semibold mb-1.5">{ContactData.section}</div>
-				<div className="mb-1.5 text-zinc-700">{ContactData.description}</div>
-				<ul className="block divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
+				<div className="text-zinc-800 text-xl font-semibold mb-1.5 dark:text-zinc-200">{ContactData.section}</div>
+				<div className="mb-1.5 text-zinc-700 dark:text-zinc-200">{ContactData.description}</div>
+				<ul className="block divide-y divide-zinc-200/70 dark:divide-zinc-700 border-t border-b border-zinc-200/70 dark:border-zinc-700">
 					{ContactData.points.map((each) => (
-						<li key={each.link} className="text-zinc-500 py-1.5 flex space-x-3 items-center">
+						<li key={each.link} className="text-zinc-500 py-1.5 dark:text-zinc-400 flex space-x-3 items-center">
 							<Image alt={each.link} src={each.icon} height={20} width={20} className="h-[18px] w-[18px]" />
 							{each.link.startsWith("https://www.") ? (
 								<a title={each.link} className="hover:underline hover:text-zinc-800" target="_blank" rel="noreferrer noopener" href={each.link}>
@@ -69,11 +69,11 @@ export default function About() {
 				{AboutData.map((section) => {
 					return (
 						<div key={section.section}>
-							<div className="text-zinc-800 text-xl font-semibold mb-1.5">{section.section}</div>
-							<div className="mb-1.5 text-zinc-700">{section.description}</div>
-							<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
+							<div className="text-zinc-800 text-xl font-semibold mb-1.5 dark:text-zinc-200">{section.section}</div>
+							<div className="mb-1.5 text-zinc-700 dark:text-zinc-200">{section.description}</div>
+							<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 dark:divide-zinc-700 border-t border-b border-zinc-200/70 dark:border-zinc-700">
 								{section.points.map((point) => (
-									<li key={point} className="text-zinc-500 py-1.5">
+									<li key={point} className="text-zinc-500 py-1.5 dark:text-zinc-400">
 										{point.startsWith("https://www.") ? (
 											<a title={point} className="hover:underline hover:text-zinc-800" target="_blank" rel="noreferrer noopener" href={point}>
 												{point.slice(12)}
@@ -138,7 +138,7 @@ export default function About() {
 									<ChevronRightIcon className="h-4 w-4 pt-[2px] stroke-2" />
 								</Link>
 							</div>
-							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+							<div className="pl-7 text-zinc-500 dark:text-zinc-400 space-y-1.5 mt-1.5">
 								<div>{project.about_client.company_name}</div>
 								<div>{project.about_project.working_period}</div>
 								<div>{project.skills}</div>
@@ -156,7 +156,7 @@ export default function About() {
 							<Image src="/Icons/sman5.jpg" height={20} width={20} alt="logo" className="aspect-auto h-5 w-5" blurDataURL="/Icons/sman5.jpg" />
 							<div className="font-semibold text-lg">Privat Teacher</div>
 						</div>
-						<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+						<div className="pl-7 text-zinc-500 dark:text-zinc-400 space-y-1.5 mt-1.5">
 							<div>Lia Privat</div>
 							<div> June 2018 - Now (5 years)</div>
 							<div>Teaching math and physics for junior and senior highschool students at home</div>
@@ -179,7 +179,7 @@ export default function About() {
 								/>
 								<div className="font-semibold text-lg">{school.level}</div>
 							</div>
-							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+							<div className="pl-7 text-zinc-500 dark:text-zinc-400 space-y-1.5 mt-1.5">
 								<div>{school.school}</div>
 								<div>{school.period}</div>
 								<div>{school.status}</div>
@@ -203,7 +203,7 @@ export default function About() {
 								/>
 								<div className="font-semibold text-lg">{school.level}</div>
 							</div>
-							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+							<div className="pl-7 text-zinc-500 dark:text-zinc-400 space-y-1.5 mt-1.5">
 								<div>{school.school}</div>
 								<div>{school.period}</div>
 								<div>Status: {school.status}</div>
@@ -217,7 +217,7 @@ export default function About() {
 				<SecondaryButton
 					href="/cv.pdf"
 					download="cv.pdf"
-					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
+					className="px-3 py-1 text-zinc-800 dark:text-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 dark:ring-zinc-700 focus:outline-none focus:ring-zinc-800 dark:focus:ring-zinc-700 dark:hover:bg-zinc-700/60 shadow"
 				>
 					Download Curriculum Vitae
 				</SecondaryButton>
@@ -228,9 +228,11 @@ export default function About() {
 
 function Box({ title, children }: { title: string; children: React.ReactNode }) {
 	return (
-		<div className="border border-zinc-400/50 rounded overflow-hidden">
-			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">{title}</div>
-			<div className="px-5 pb-5 space-y-5 divide-y">{children}</div>
+		<div className="border border-zinc-400/50 dark:border-zinc-700 rounded overflow-hidden">
+			<div className="bg-zinc-50 dark:bg-zinc-700/60 px-3 py-2 dark:border-zinc-700 border-b border-zinc-400/50 text-zinc-800 dark:text-zinc-200 select-none font-medium">
+				{title}
+			</div>
+			<div className="px-5 pb-5 space-y-5 divide-y dark:divide-zinc-700">{children}</div>
 		</div>
 	);
 }

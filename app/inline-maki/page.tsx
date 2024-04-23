@@ -3,11 +3,7 @@
 import * as Accordion from "@radix-ui/react-accordion";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import * as Switch from "@radix-ui/react-switch";
-import {
-	ChevronDownIcon,
-	PlusIcon,
-	QuestionMarkCircleIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronDownIcon, PlusIcon, QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
 export default function InlineMakiPage() {
 	return (
@@ -27,7 +23,7 @@ function InlineMAKI({ value }: { value: string }) {
 			<Accordion.Item value={value}>
 				<Accordion.Header className="group">
 					<Accordion.Trigger className="w-full">
-						<div className="w-full flex items-center justify-between rounded-md bg-zinc-50/50 border border-zinc-200 px-3 py-1 group-rdx-state-open:rounded-b-none group-rdx-state-open:border-b-0 text-tiny">
+						<div className="w-full flex items-center justify-between rounded-md bg-zinc-50/50 border border-zinc-200 px-3 py-1 group-rdx-state-open:rounded-b-0 group-rdx-state-open:border-b-0 text-tiny">
 							<div className="text-zinc-400">Nomor Soal</div>
 							<div className="text-action">Kerjakan</div>
 						</div>
@@ -60,23 +56,11 @@ function Section({ title }: { title: string }) {
 							<Tooltip.Provider>
 								<Tooltip.Root>
 									<Tooltip.Trigger className="flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700">
-										<QuestionMarkCircleIcon
-											className="h-4 w-4 text-zinc-400"
-											strokeWidth={2}
-										/>
+										<QuestionMarkCircleIcon className="h-4 w-4 text-zinc-400" strokeWidth={2} />
 									</Tooltip.Trigger>
-									<Tooltip.Content
-										side="top"
-										align="center"
-										className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl"
-									>
+									<Tooltip.Content side="top" align="center" className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl">
 										<div>Mozilla Developer Network</div>
-										<Tooltip.Arrow
-											offset={5}
-											width={10}
-											height={5}
-											className="fill-[#3F3F46]"
-										/>
+										<Tooltip.Arrow offset={5} width={10} height={5} className="fill-[#3F3F46]" />
 									</Tooltip.Content>
 								</Tooltip.Root>
 							</Tooltip.Provider>
@@ -95,11 +79,7 @@ function Section({ title }: { title: string }) {
 					</section>
 				</Accordion.Header>
 				<Accordion.Content className=" border border-zinc-400 rounded-b-md duration-100">
-					<textarea
-						className="w-full px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-600 h-auto"
-						rows={1}
-						placeholder="Empty"
-					/>
+					<textarea className="w-full px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-600 h-auto" rows={1} placeholder="Empty" />
 					<div className="p-2 space-x-2 flex items-center overscroll-auto border-t border-zinc-400">
 						<ActionButton />
 						<ActionButton />

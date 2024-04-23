@@ -7,14 +7,14 @@ export default function ExternalLink({ name, href, big }: { name: string; href: 
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="group inline-block w-fit cursor-pointer items-center text-action sm:hover:underline group-hover:text-[#2563eb]/80"
+				className="group inline-block w-fit cursor-pointer items-center text-action  dark:text-blue-500 sm:hover:underline group-hover:text-[#2563eb]/80"
 			>
 				<span className="flex items-center">
-					<span className={`${big ? "text-lg font-medium" : "text-base"}`}>{name}</span>
+					<span className={`${big ? "text-lg font-medium" : "text-base"} `}>{name}</span>
 					{/* External Link Icon */}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className={` ${big ? "h-[18px] w-[18px]" : "h-4 w-4"} ml-1  text-action group-hover:text-[#2563eb]/80 mt-0.5`}
+						className={` ${big ? "h-[18px] w-[18px]" : "h-4 w-4"} ml-1  text-action group-hover:text-[#2563eb]/80 mt-0.5 dark:text-blue-500`}
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"

@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import ThemeProvider from "provider/ThemeProvider";
 
 class MyDocument extends Document {
 	render() {

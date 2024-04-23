@@ -3,29 +3,6 @@
 @tailwind utilities;
 @tailwind base;
 
-/* @font-face {
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 100 900;
-	font-display: optional;
-	src: url(/Inter.var.woff2) format("woff2");
-}
-
-@font-face {
-	font-family: "Mona Sans";
-	src: url("/Mona-Sans.woff2") format("woff2 supports variations"),
-		url("/Mona-Sans.woff2") format("woff2-variations");
-	font-weight: 200 900;
-	font-stretch: 75% 125%;
-}
-
-@font-face {
-	font-family: "Hubot Sans";
-	src: url("/Hubot-Sans.woff2") format("woff2 supports variations"),
-		url("/Hubot-Sans.woff2") format("woff2-variations");
-	font-weight: 200 900;
-	font-stretch: 75% 125%;
-} */
 input[type="text"],
 input[type="search"],
 input[type="url"],
@@ -92,7 +69,7 @@ html {
 body {
 	padding: 0;
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	/* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
 a {
@@ -109,21 +86,21 @@ a {
 
 ::-webkit-scrollbar {
 	width: 10px;
-	height: 8px;
+	/* height: 8px; */
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #f1f1f1;
+	background: #e4e4e7;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #888;
+	background: #a1a1aa;
+	border-radius: 2px;
 }
-/* border-radius: 4px; /*
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+	background: #71717a;
 }

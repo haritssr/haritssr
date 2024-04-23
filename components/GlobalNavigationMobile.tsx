@@ -17,6 +17,11 @@ export default function GlobalNavigationMobile() {
 	);
 }
 
+function capitalizeFirstLetter(to: string): string {
+	const capitalize = to.substring(1).charAt(0).toUpperCase() + to.slice(2);
+	return capitalize;
+}
+
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 	const pathname = usePathname();
 	const CurrentPageBaseRoute = pathname?.split("/")[1];
@@ -30,9 +35,6 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 		color = "text-action";
 	} else {
 		color = "text-zinc-600";
-	}
-	function capitalizeFirstLetter(to: string) {
-		return to.substring(1).charAt(0).toUpperCase() + to.slice(2);
 	}
 
 	return (

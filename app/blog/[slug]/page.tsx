@@ -4,7 +4,9 @@ import { Mdx } from "@/components/mdx";
 import { allBlogs } from ".contentlayer/generated";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
-import Breadcrumbs from "@/components/breadcrumbs";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import SidebarBlog from "./SidebarBlog";
+import TableOfContents from "./TableOfContent";
 
 export async function generateMetadata({ params }): Promise<Metadata | undefined> {
 	const post = allBlogs.find((post) => post.slug === params.slug);
@@ -76,21 +78,30 @@ export default function Blog({ params }) {
 	}
 
 	return (
-		<section className="max-w-2xl mx-auto py-5 sm:py-10">
-			<Breadcrumbs />
-			<div className="mb-5 mt-5 sm:mt-10">
-				<BackButton href="/blog" name="All Articles" />
+		// <section className="max-w-2xl mx-auto py-5 sm:py-10">
+		<div className="grid grid-cols-1 sm:grid-cols-5 min-h-screen w-full">
+			<SidebarBlog />
+			{/* Content */}
+			<div className="sm:col-span-3 sm:border-t sm:border-b sm:border-r dark:border-zinc-700 pb-5 sm:px-5">
+				<Breadcrumbs />
+				<div className="my-5">
+					<BackButton href="/blog" name="All Articles" />
+				</div>
+				<script type="application/ld+json" suppressHydrationWarning>
+					{JSON.stringify(post.structuredData)}
+				</script>
+				<h1 className="font-bold text-2xl tracking-tighter">
+					<Balancer>{post.title}</Balancer>
+				</h1>
+				<div className="flex items-center mt-2 mb-8 text-sm">
+					<p>{formatDate(post.publishedAt)}</p>
+					&nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
+					<p>{post.structuredData.wordCount} Words</p>
+				</div>
+				<Mdx code={post.body.code} />
 			</div>
-			<script type="application/ld+json" suppressHydrationWarning>
-				{JSON.stringify(post.structuredData)}
-			</script>
-			<h1 className="font-bold text-2xl tracking-tighter">
-				<Balancer>{post.title}</Balancer>
-			</h1>
-			<div className="flex justify-between items-center mt-2 mb-8 text-sm">
-				<p className="text-sm ">{formatDate(post.publishedAt)}</p>
-			</div>
-			<Mdx code={post.body.code} />
-		</section>
+			{/* Table of Content */}
+			<TableOfContents title={post.title.toLocaleLowerCase().split(" ").join("-")} />
+		</div>
 	);
 }
