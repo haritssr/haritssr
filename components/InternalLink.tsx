@@ -11,7 +11,7 @@ export default function InternalLink({ name, href }: { name: string; href: strin
 			<p className="flex items-center">
 				{name}
 				<ChevronRightIcon
-					className="h-4 w-4 text-action dark:text-blue-500 -mb-[1.5px] group-hover:text-[#2563eb]/80 pt-[1px] group-hover:text-blue-400"
+					className="h-4 w-4 text-action dark:text-blue-500 -mb-[1.5px] group-hover:text-[#2563eb]/80  group-hover:text-blue-400"
 					strokeWidth={2.25}
 				/>
 			</p>
