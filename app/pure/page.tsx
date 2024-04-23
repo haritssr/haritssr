@@ -512,7 +512,13 @@ export default function DesignSystem() {
 				<Box title="Logo">
 					<div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
 						<div className="space-y-2">
-							<Image alt="harissr image" src="/Icons/haritssr.svg" width={10} height={10} className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center" />
+							<Image
+								alt="haritssr.com image"
+								src="/Icons/haritssr.svg"
+								width={10}
+								height={10}
+								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
+							/>
 							<div className="flex flex-col">
 								<span className="text-sm sm:text-base text-gray-800 justify-self-center">Harits Syah</span>
 								<span className="text-sm sm:text-base text-gray-400 justify-self-center">haritssr.com</span>
