@@ -22,16 +22,6 @@ export default function BlogGrid() {
 							<p className="text-zinc-400 inline text-[14px]">{post.structuredData.wordCount} Words</p>
 							&nbsp; <span className="text-zinc-400">•</span> &nbsp;
 							<p className="text-zinc-400 inline text-[14px]">{Math.ceil(post.structuredData.wordCount / 200)} min read</p>
-							<br />
-							<p
-								className={`inline ${
-									post.topic === "Humanity\r"
-										? "bg-green-50 dark:bg-zinc-800 text-green-500 dark:text-green-600  border-green-200 dark:border-green-700"
-										: "bg-violet-50 dark:bg-zinc-800 text-violet-500 dark:text-violet-500  border-violet-200 dark:border-violet-700"
-								} rounded px-1.5 py-0.5 text-[12px] border`}
-							>
-								{post.topic}
-							</p>
 						</div>
 						<ChevronRightIcon
 							width={2}
