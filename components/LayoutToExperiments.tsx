@@ -15,7 +15,7 @@ import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 // used in sidebar
 import { usePathname } from "next/navigation";
 import { ExperimentsData } from "data/ExperimentsData";
-import Breadcrumbs from "@/components/breadcrumbs";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 interface LayoutToExperimentsType {
 	children: React.ReactNode;

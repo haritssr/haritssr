@@ -4,7 +4,7 @@ import { Mdx } from "@/components/mdx";
 import { allBlogs } from ".contentlayer/generated";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
-import Breadcrumbs from "@/components/breadcrumbs";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import SidebarBlog from "./SidebarBlog";
 import TableOfContents from "./TableOfContent";
 
