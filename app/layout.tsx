@@ -3,7 +3,9 @@ import "../styles/globals.css";
 import Footer from "@/components/Footer";
 import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.haritssr.com"),
@@ -43,8 +45,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
-			<body className={`${GeistSans.className}`}>
+		<html lang="en" className={inter.className}>
+			<body>
 				<GlobalNavigation />
 				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0 ">{children}</main>
 				<Footer />

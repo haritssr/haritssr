@@ -70,7 +70,6 @@
 		"date-fns": "^2.29.3",
 		"embla-carousel-react": "^7.0.5",
 		"framer-motion": "^4.1.17",
-		"geist": "^1.2.1",
 		"gray-matter": "^4.0.3",
 		"immer": "^9.0.17",
 		"katex": "^0.16.4",
