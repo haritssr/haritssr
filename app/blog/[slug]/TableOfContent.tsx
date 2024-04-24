@@ -9,13 +9,11 @@ export default function TableOfContents({ title }: { title: string }) {
 	return (
 		<section className="sm:col-span-1 sm:border-r sm:border-b hidden sm:block dark:border-zinc-700">
 			<div className="sticky top-[45px]">
-				<div className="font-medium py-2 text-zinc-500 dark:text-zinc-200 bg-white dark:bg-zinc-800 dark:border-zinc-700 border-b px-5">
-					In This Page
-				</div>
+				<div className="py-1.5 text-zinc-400 dark:text-zinc-200 bg-white dark:bg-zinc-800 dark:border-zinc-700 border-b px-5">In This Page</div>
 
 				<div className="space-y-2 sm:p-5 overflow-y-auto">
 					{articleTOC.map((heading) => (
-						<Link key={heading} href={`#${heading.split(" ").join("-")}`} className="block text-zinc-500 dark:text-zinc-400 hover:underline text-sm">
+						<Link key={heading} href={`#${heading.split(" ").join("-")}`} className="block text-zinc-400 dark:text-zinc-400 hover:underline text-sm">
 							{capitalizeFirstLetter(heading)}
 						</Link>
 					))}
