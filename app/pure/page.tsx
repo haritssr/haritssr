@@ -64,9 +64,9 @@ export default function DesignSystem() {
 				title="Pure Design System"
 				description={
 					<>
-						Design system used in <ExternalLink name="haritssr.com" href="https://www.haritssr.com" />,
-						<ExternalLink name="Haris Studio" href="https://harisstudio.vercel.app" /> and{" "}
-						<ExternalLink name="Haris Lab" href="https://www.harislab.com" />.
+						Design system used in <ExternalLink big name="haritssr.com" href="https://www.haritssr.com" />,
+						<ExternalLink big name="Haris Studio" href="https://harisstudio.vercel.app" /> and{" "}
+						<ExternalLink big name="Haris Lab" href="https://www.harislab.com" />.
 					</>
 				}
 			/>

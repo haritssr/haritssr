@@ -10,7 +10,7 @@ export default function ExternalLink({ name, href, big }: { name: string; href: 
 				className="group inline-block w-fit cursor-pointer items-center text-action  dark:text-blue-500 sm:hover:underline group-hover:text-[#2563eb]/80"
 			>
 				<span className="flex items-center">
-					<span className={`${big ? "text-lg font-medium" : "text-base"} `}>{name}</span>
+					<span className={`${big ? "text-lg" : "text-base"} `}>{name}</span>
 					{/* External Link Icon */}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
