@@ -11,7 +11,7 @@ export default function Home() {
 	return (
 		<section className="mt-5 sm:mt-10">
 			<Contacts />
-			<div className="space-y-16 sm:space-y-20">
+			<div className="space-y-16 sm:space-y-24">
 				<Experiences />
 				<Experiments />
 				<Blog />

@@ -12,8 +12,8 @@ export const TechnologyCard = (
 	props: JSX.IntrinsicAttributes & ClassAttributes<HTMLDivElement> & HTMLAttributes<HTMLDivElement>
 ) => {
 	return (
-		<div {...props} className="h-fit overflow-hidden rounded-md border border-zinc-400/60 dark:border-zinc-700">
-			<div className="truncate px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 text-tiny font-semibold text-zinc-700 sm:text-base border-b border-zinc-400/60">
+		<div {...props} className="h-fit overflow-hidden rounded-md border border-zinc-300 dark:border-zinc-700">
+			<div className="truncate px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 text-tiny font-medium text-zinc-700 sm:text-base border-b border-zinc-300">
 				{domain}
 			</div>
 			<div className="">

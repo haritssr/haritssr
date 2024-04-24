@@ -30,7 +30,7 @@ export default function ExperimentIndexPage({ experiment }: { experiment: Experi
 				</div>
 			</section>
 			{/* mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0 */}
-			<div className="mt-14 mx-auto min-h-screen w-full sm:px-0">
+			<div className="mt-10 mx-auto min-h-screen w-full sm:px-0">
 				<div className="mb-10 space-y-2">
 					<div className="flex items-center space-x-2">
 						<Image src={experiment.logoSrc} height={36} width={36} alt={experiment.title} />
@@ -38,12 +38,12 @@ export default function ExperimentIndexPage({ experiment }: { experiment: Experi
 					<div ref={ref} className="text-2xl sm:text-3xl font-semibold">
 						{experiment.title}
 					</div>
-					<div className="text-zinc-800">{experiment.description}</div>
-					<div className="text-zinc-400">{experiment.links.length} experiments</div>
+					<div className="text-zinc-800 text-lg">{experiment.description}</div>
+					<div className="text-zinc-400 text-lg">{experiment.links.length} experiments</div>
 				</div>
 				<ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-3.5 py-2 -ml-[14px]">
 					{experiment.links?.map((link) => (
-						<li key={link} className="text-zinc-600">
+						<li key={link}>
 							<Link
 								passHref
 								key={link}
@@ -51,12 +51,10 @@ export default function ExperimentIndexPage({ experiment }: { experiment: Experi
 									.toLowerCase()
 									// /\s/g regex -> search all (g = global) whitespace, and replace them with '-'
 									.replace(/\s/g, "-")}`}
-								className="rounded-lg border border-zinc-400/70 pl-3 pr-4 py-2 hover:bg-zinc-50 flex items-center justify-between  group"
+								className="rounded-md border border-zinc-300 pl-3 pr-3.5 py-2 hover:bg-zinc-50 flex items-center justify-between  group"
 							>
 								<>
-									<div>
-										<p className="font-medium text-zinc-700">{link}</p>
-									</div>
+									<div className="text-zinc-700">{link}</div>
 									<ChevronRightIcon width={2} className="w-5 h-5 text-zinc-500 group-hover:text-zinc-800" />
 								</>
 							</Link>

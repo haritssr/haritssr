@@ -24,7 +24,7 @@ const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: st
 	return (
 		<Toast.Provider swipeDirection="right">
 			<div
-				title="Copy this section page"
+				title="Copy this page section"
 				className="cursor-pointer p-[5px]"
 				onClick={() => {
 					handleCopy(`haritssr.com/${topic.toLowerCase().split(" ").join("-")}`);

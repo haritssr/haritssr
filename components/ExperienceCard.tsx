@@ -13,7 +13,7 @@ interface ExperienceCardTypes {
 
 export default function ExperienceCard({ href, title, description, period, status, imgSrc, industry }: ExperienceCardTypes) {
 	return (
-		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 selection:mx-auto group shadow-sm shadow-zinc-200 dark:shadow-none">
+		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 selection:mx-auto group dark:shadow-none">
 			{/* Header + Title + Explanation */}
 			<section className=" flex flex-col justify-between p-3 space-y-2">
 				<div className="flex justify-between items-start">
