@@ -3,7 +3,6 @@ import { GitHubIcon } from "./Icons";
 import Image from "next/image";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Destination from "@/components/Destination";
-import { DarkModeToggle } from "./DarkMode";
 
 export default function GlobalNavigation() {
 	return (
@@ -30,7 +29,6 @@ export default function GlobalNavigation() {
 					<a title="Search: Coming soon">
 						<MagnifyingGlassIcon className="h-5 w-5 text-zinc-800 dark:text-zinc-100 hover:text-zinc-400 cursor-pointer" />
 					</a>
-					<DarkModeToggle />
 					{/* Source to GitHub */}
 					<a
 						className="flex items-center space-x-2 group"
