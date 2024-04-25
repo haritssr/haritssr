@@ -70,7 +70,7 @@ export default function LayoutToExperiments({
 									inView
 										? "border-zinc-200"
 										: "border-b bg-white/70 saturate-150 backdrop-blur-lg"
-								} z-40 mb-5 bg-white py-2`}
+								} z-40 bg-white py-2`}
 							>
 								<div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
 									<BackToExperiments inView={inView} domain={domain} />
