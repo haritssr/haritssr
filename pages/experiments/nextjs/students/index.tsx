@@ -11,9 +11,10 @@ export default function Students({ students }) {
 				{students.map((a) => (
 					<InternalLink
 						key={a.id}
-						name={a.name}
 						href={`/experiments/nextjs/students/${a.id}`}
-					/>
+					>
+						{a.name}
+					</InternalLink>
 				))}
 			</div>
 		</LayoutToExperiments>

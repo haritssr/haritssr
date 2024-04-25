@@ -33,26 +33,24 @@ export default function ExportedCollapsible() {
 			>
 				<Section name="List of a groceries" />
 				<div className="space-y-2">
-					<InternalLink
-						name="This is Accoordion"
-						href="/work/radix-ui/accordion"
-					/>
-					<InternalLink
-						name="This is Dropdown Menu"
-						href="/work/radix-ui/dropdown-menu"
-					/>
-					<InternalLink
-						name="This is Blurry Effect"
-						href="/work/tailwindcss/blurry"
-					/>
+					<InternalLink href="/work/radix-ui/accordion">
+						This is Accordion
+					</InternalLink>
+					<InternalLink href="/work/radix-ui/dropdown-menu">
+						This is Dropdown Menu
+					</InternalLink>
+					<InternalLink href="/work/tailwindcss/blurry">
+						This is Blurry Effect
+					</InternalLink>
 				</div>
 				<Collapsible.Content className="mt-2 space-y-2">
-					<InternalLink name="Accoordion" href="/work/radix-ui/accordion" />
-					<InternalLink
-						name="Dropdown Menu"
-						href="/work/radix-ui/dropdown-menu"
-					/>
-					<InternalLink name="Blurry Effect" href="/work/tailwindcss/blurry" />
+					<InternalLink href="/work/radix-ui/accordion">Acordion</InternalLink>
+					<InternalLink href="/work/radix-ui/dropdown-menu">
+						Dropdown Menu
+					</InternalLink>
+					<InternalLink href="/work/tailwindcss/blurry">
+						Blurry Effect
+					</InternalLink>
 				</Collapsible.Content>
 				<Collapsible.Trigger className="py-1 text-lg text-zinc-500 hover:underline sm:text-base">
 					{open ? "Collapse" : "Load more..."}

@@ -154,8 +154,8 @@ export default function DesignSystem() {
 				</li>
 				<li>
 					If you want to see other variation of these component you can see{" "}
-					<InternalLink href="/experiments/radix-ui" name="here" /> or{" "}
-					<InternalLink href="/experiments/headless-ui" name="here" />
+					<InternalLink href="/experiments/radix-ui">here</InternalLink> or{" "}
+					<InternalLink href="/experiments/headless-ui">here</InternalLink>
 				</li>
 				<li>
 					There is a lot of work to be done in this design system, like:
@@ -337,7 +337,7 @@ export default function DesignSystem() {
 					</Toast.Provider>
 				</Box>
 				<Box title="Internal Link">
-					<InternalLink href="/" name="Internal Link" />
+					<InternalLink href="/">Internal Link</InternalLink>
 				</Box>
 				<Box title="External Link">
 					<ExternalLink href="https://www.harislab.com" name="External Link" />

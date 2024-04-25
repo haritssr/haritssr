@@ -135,7 +135,7 @@ export default function Contacts() {
 						</a>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<InternalLink href="/about" name="Details" />
+						<InternalLink href="/about">Details</InternalLink>
 					</div>
 				</div>
 			</section>
