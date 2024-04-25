@@ -1,3 +1,5 @@
+"use client";
+
 import { type FC, useState } from "react";
 
 import {
@@ -17,12 +19,17 @@ import { useDrag, useDrop } from "react-dnd";
 import SubTitle from "@/components/SubTitle";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 export default function ColumnOrdering() {
 	return (
-		<LayoutToExperiments domain="React Table" title="Column Ordering DnD">
-			<SubTitle>Basic table from react table</SubTitle>
-			<TableIDK />
-		</LayoutToExperiments>
+		<DndProvider backend={HTML5Backend}>
+			<LayoutToExperiments domain="React Table" title="Column Ordering DnD">
+				<SubTitle>Basic table from react table</SubTitle>
+				<TableIDK />
+			</LayoutToExperiments>
+		</DndProvider>
 	);
 }
 
