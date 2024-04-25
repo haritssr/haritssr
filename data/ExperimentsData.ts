@@ -210,7 +210,6 @@ export const ExperimentsData = [
 			"Column Ordering",
 			"Column Ordering DnD",
 			"Column Pinning",
-			"Column Sizing",
 			"Column Visibility",
 		],
 	},
