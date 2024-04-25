@@ -1,7 +1,7 @@
 import { ExperiencesData } from "data/ExperiencesData";
 import { PageTitle } from "@/components/SubTitle";
 import ExperienceCard from "@/components/ExperienceCard";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Experiences",
@@ -11,7 +11,10 @@ export const metadata: Metadata = {
 export default function ExperiencesPage() {
 	return (
 		<>
-			<PageTitle title="Experiences" description="Detail informations on how projects I belong to being handled." />
+			<PageTitle
+				title="Experiences"
+				description="Detail informations on how projects I belong to being handled."
+			/>
 			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0">
 				{ExperiencesData.map((d) => (
 					<ExperienceCard

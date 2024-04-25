@@ -1,6 +1,6 @@
 import SubTitle from "@/components/SubTitle";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { Key, useState } from "react";
+import { type Key, useState } from "react";
 
 let nextId = 3;
 const initialTodos = [
@@ -26,10 +26,8 @@ export default function UseStateTodoList() {
 			todos.map((t) => {
 				if (t.id === nextTodo.id) {
 					return nextTodo;
-				} else {
-					return t;
 				}
-			})
+			}),
 		);
 	}
 	function handleDeleteTodo(todoId: number) {
@@ -46,7 +44,9 @@ export default function UseStateTodoList() {
 					onChangeTodo={handleChangeTodo}
 					onDeleteTodo={handleDeleteTodo}
 				/>
-				<button onClick={() => console.log(todos)}>Console Todos</button>
+				<button type="button" onClick={() => console.log(todos)}>
+					Console Todos
+				</button>
 			</LayoutToExperiments>
 		</>
 	);
@@ -63,6 +63,7 @@ function AddTodo({ onAddTodo }) {
 				className="w-full rounded border border-zinc-700 px-2 py-0.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 sm:w-fit"
 			/>
 			<button
+				type="button"
 				onClick={() => {
 					setTitle("");
 					onAddTodo(title);
@@ -90,6 +91,7 @@ function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
 
 function Task({ todo, onChange, onDelete }) {
 	const [isEditing, setIsEditing] = useState(false);
+	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	let todoContent: {};
 	if (isEditing) {
 		todoContent = (
@@ -102,6 +104,7 @@ function Task({ todo, onChange, onDelete }) {
 					className="rounded border border-zinc-700 px-1 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
 				/>
 				<button
+					type="button"
 					onClick={() => setIsEditing(false)}
 					className="ml-2 rounded border border-green-500 bg-green-500 px-2 text-sm text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
 				>
@@ -114,6 +117,7 @@ function Task({ todo, onChange, onDelete }) {
 			<>
 				{todo.title}
 				<button
+					type="button"
 					onClick={() => setIsEditing(true)}
 					className="ml-2 rounded border border-yellow-500 bg-yellow-500 px-2 text-sm text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300"
 				>
@@ -135,6 +139,7 @@ function Task({ todo, onChange, onDelete }) {
 			/>
 			{todoContent}
 			<button
+				type="button"
 				onClick={() => onDelete(todo.id)}
 				className="ml-2 rounded border border-rose-500 bg-rose-500 px-2 text-sm text-white hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-300"
 			>

@@ -1,25 +1,26 @@
-import Section from '@/components/Section';
-import ExternalLink from '@/components/ExternalLink';
-import SubTitle from '@/components/SubTitle';
+import Section from "@/components/Section";
+import ExternalLink from "@/components/ExternalLink";
+import SubTitle from "@/components/SubTitle";
 
-import { useRouter } from 'next/router';
-import LayoutToExperiments from '@/components/LayoutToExperiments';
+import { useRouter } from "next/router";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function Router() {
 	const router = useRouter();
-	const style = 'text-gray-500';
+	const style = "text-gray-500";
 	return (
-		<LayoutToExperiments title='Router' domain='Nextjs'>
+		<LayoutToExperiments title="Router" domain="Nextjs">
 			<SubTitle>
 				<ExternalLink
-					name='next/router'
-					href='https://nextjs.org/docs/api-reference/next/router#router-object'
+					name="next/router"
+					href="https://nextjs.org/docs/api-reference/next/router#router-object"
 				/>
 			</SubTitle>
-			<div className='mb-10'>
-				<Section name='router object' />
+			<div className="mb-10">
+				<Section name="router object" />
 				<div>
-					asPath = <span className={style}>{router.asPath}</span> (Route saat ini)
+					asPath = <span className={style}>{router.asPath}</span> (Route saat
+					ini)
 				</div>
 				<div>
 					pathname <span className={style}>{router.pathname}</span>
@@ -40,15 +41,17 @@ export default function Router() {
 					isReady = <span className={style}>{router.isReady.toString()}</span>
 				</div>
 				<div>
-					isPreview = <span className={style}>{router.isPreview.toString()}</span>
+					isPreview ={" "}
+					<span className={style}>{router.isPreview.toString()}</span>
 				</div>
 			</div>
 
-			<Section name='router.push' />
+			<Section name="router.push" />
 			<p>This button using router.push instead using Link from next/link</p>
 			<button
-				className='mt-2 rounded-md bg-blue-600 bg-opacity-90 px-4 py-2 text-white hover:bg-opacity-100'
-				onClick={() => router.push('/experiments')}
+				type="button"
+				className="mt-2 rounded-md bg-blue-600 bg-opacity-90 px-4 py-2 text-white hover:bg-opacity-100"
+				onClick={() => router.push("/experiments")}
 			>
 				Go to Experiments
 			</button>

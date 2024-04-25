@@ -17,7 +17,7 @@ export default function NumberGame() {
 
 	function inputKeyPress(event: { key: string }) {
 		if (event.key === "Enter") {
-			const answer = parseInt(state.response);
+			const answer = Number.parseInt(state.response);
 			if (state.num1 + state.num2 === answer) {
 				setState({
 					...state,
@@ -38,7 +38,7 @@ export default function NumberGame() {
 		}
 	}
 
-	function updateResponse(event: { target: { value: any } }) {
+	function updateResponse(event: { target: { value: string } }) {
 		setState({
 			...state,
 			response: event.target.value,
@@ -65,7 +65,7 @@ export default function NumberGame() {
 					className="mt-5 flex justify-center"
 				>
 					<button
-						autoFocus
+						type="button"
 						onClick={() => router.reload()}
 						className="border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50"
 					>
@@ -93,9 +93,7 @@ export default function NumberGame() {
 					className="focus:ring-harislab rounded-md border border-gray-500 py-1 pl-2 focus:outline-none focus:ring-1"
 					value={state.response}
 					onChange={updateResponse}
-					onKeyPress={inputKeyPress}
-					autoFocus={true}
-					//autoFocus={true} doesn't work
+					onKeyDown={inputKeyPress}
 				/>
 				<div>Score : {state.score}</div>
 			</div>

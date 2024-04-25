@@ -23,6 +23,7 @@ export default function UseContextDarkMode() {
 function ToggleThemeButton({ theme, setTheme }) {
 	return (
 		<button
+			type="button"
 			className={`${
 				theme === "light"
 					? "border border-zinc-300 bg-white shadow hover:bg-zinc-50"
@@ -52,7 +53,7 @@ function Form() {
 
 function Panel({ title, children }) {
 	const theme = useContext(ThemeContext);
-	const className = "panel-" + theme;
+	const className = `panel-${theme}`;
 	return (
 		<section className={`${className} space-y-2 rounded-md p-2`}>
 			<h1 className="text-xl">{title}</h1>
@@ -63,6 +64,10 @@ function Panel({ title, children }) {
 
 function Button({ children }) {
 	const theme = useContext(ThemeContext);
-	const className = "button-" + theme;
-	return <button className={className}>{children}</button>;
+	const className = `button-${theme}`;
+	return (
+		<button type="button" className={className}>
+			{children}
+		</button>
+	);
 }

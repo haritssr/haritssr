@@ -12,7 +12,10 @@ export default function SidebarBlog() {
 
 	return (
 		<div className="hidden sm:block sm:col-span-1 border-r border-b border-l dark:border-zinc-700">
-			<Link className="block font-medium px-4 py-1.5 sticky top-[45px] bg-white dark:bg-zinc-800 border-b dark:border-zinc-700" href="/blog">
+			<Link
+				className="block font-medium px-4 py-1.5 sticky top-[45px] bg-white dark:bg-zinc-800 border-b dark:border-zinc-700"
+				href="/blog"
+			>
 				Blog
 			</Link>
 

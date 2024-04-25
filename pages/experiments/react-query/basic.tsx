@@ -1,6 +1,6 @@
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useQuery } from "@tanstack/react-query";
-import { Key } from "react";
+import type { Key } from "react";
 import SubTitle from "@/components/SubTitle";
 
 export default function UseQueryExample() {
@@ -14,7 +14,7 @@ export default function UseQueryExample() {
 
 function Example() {
 	const { isLoading, error, data, isFetching } = useQuery(["repoData"], () =>
-		fetch("/api/react-query-basic").then((res) => res.json())
+		fetch("/api/react-query-basic").then((res) => res.json()),
 	);
 	if (isLoading) return <div>Loading...</div>;
 	if (error) return <div>An error has occurred</div>;
@@ -25,12 +25,12 @@ function Example() {
 				{data.map(
 					(d: {
 						id: Key | null | undefined;
-						name: any;
-						age: any;
-						city: any;
+						name: unknown;
+						age: unknown;
+						city: unknown;
 					}) => (
 						<NameCard key={d.id} name={d.name} age={d.age} city={d.city} />
-					)
+					),
 				)}
 			</div>
 		</div>

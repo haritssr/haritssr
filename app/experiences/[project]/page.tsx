@@ -16,7 +16,10 @@ export async function generateStaticParams() {
 }
 
 export default function ExperiencesPage({ params }) {
-	const project = ExperiencesData.filter((p) => p.project_name.toLowerCase().split(" ").join("-") === params?.project)[0];
+	const project = ExperiencesData.filter(
+		(p) =>
+			p.project_name.toLowerCase().split(" ").join("-") === params?.project,
+	)[0];
 
 	const image = "/images/hero.jpg";
 	const type = "website";
@@ -52,8 +55,12 @@ export default function ExperiencesPage({ params }) {
 				{/* Title */}
 				<section className="my-8 sm:my-10 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700">
 					<div className="">
-						<div className="text-2xl sm:text-3xl break-words font-bold ">{project.project_name}</div>
-						<div className="text-zinc-500 dark:text-zinc-400 text-lg">{project.about_client.website}</div>
+						<div className="text-2xl sm:text-3xl break-words font-bold ">
+							{project.project_name}
+						</div>
+						<div className="text-zinc-500 dark:text-zinc-400 text-lg">
+							{project.about_client.website}
+						</div>
 					</div>
 					<Image
 						src={project.about_client.logo_src}
@@ -71,22 +78,47 @@ export default function ExperiencesPage({ params }) {
 						<h2 className="mb-5 text-xl text-zinc-800 dark:text-zinc-200 border-b pb-4 border-zinc-300 dark:border-zinc-700 font-semibold">
 							About The Client
 						</h2>
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Company Name</div>
-						<p className="text-zinc-500 dark:text-zinc-400">{project.about_client.company_name}</p>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Company Name
+						</div>
+						<p className="text-zinc-500 dark:text-zinc-400">
+							{project.about_client.company_name}
+						</p>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Brand Name</div>
-						<p className="text-zinc-500 dark:text-zinc-400">{project.about_client.brand_name}</p>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Brand Name
+						</div>
+						<p className="text-zinc-500 dark:text-zinc-400">
+							{project.about_client.brand_name}
+						</p>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">About</div>
-						<p className="text-zinc-500 dark:text-zinc-400">{project.about_client.long_about}</p>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							About
+						</div>
+						<p className="text-zinc-500 dark:text-zinc-400">
+							{project.about_client.long_about}
+						</p>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Phone Number</div>
-						<p className="text-zinc-500 dark:text-zinc-400">{project.about_client.phone_number}</p>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Phone Number
+						</div>
+						<p className="text-zinc-500 dark:text-zinc-400">
+							{project.about_client.phone_number}
+						</p>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Website</div>
-						<ExternalLink href={project.about_client.website} name={project.about_client.website} />
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Office Location</div>
-						<p className="text-zinc-500 dark:text-zinc-400">{project.about_client.office_location}</p>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Website
+						</div>
+						<ExternalLink
+							href={project.about_client.website}
+							name={project.about_client.website}
+						/>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Office Location
+						</div>
+						<p className="text-zinc-500 dark:text-zinc-400">
+							{project.about_client.office_location}
+						</p>
 					</section>
 
 					{/* About The Project */}
@@ -95,7 +127,9 @@ export default function ExperiencesPage({ params }) {
 							About The Project
 						</h2>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">My Role</div>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							My Role
+						</div>
 						<ExplanationList>
 							{project.about_project.my_role.map((a: string) => (
 								<li className="text-zinc-500 dark:text-zinc-400" key={a}>
@@ -104,10 +138,16 @@ export default function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Working Period</div>
-						<p className="text-zinc-500 dark:text-zinc-400">{project.about_project.working_period}</p>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Working Period
+						</div>
+						<p className="text-zinc-500 dark:text-zinc-400">
+							{project.about_project.working_period}
+						</p>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Website Status</div>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Website Status
+						</div>
 						<ExplanationList>
 							{project.about_project.website_status.map((a: string) => (
 								<li className="text-zinc-500 dark:text-zinc-400" key={a}>
@@ -116,7 +156,9 @@ export default function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Website Routes</div>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Website Routes
+						</div>
 						<ExplanationList>
 							{project.about_project.routes.map((a: string) => (
 								<li className="text-zinc-500 dark:text-zinc-400" key={a}>
@@ -125,7 +167,9 @@ export default function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">Website Features</div>
+						<div className="mt-5 text-zinc-800 dark:text-zinc-200 font-medium ">
+							Website Features
+						</div>
 						<ExplanationList>
 							{project.about_project.features.map((a: string) => (
 								<li className="text-zinc-500 dark:text-zinc-400" key={a}>
@@ -138,7 +182,9 @@ export default function ExperiencesPage({ params }) {
 
 				{/* Design */}
 				<section className="mt-10">
-					<h2 className="mb-5 text-xl font-semibold text-zinc-800 dark:text-zinc-200">Design (at Figma)</h2>
+					<h2 className="mb-5 text-xl font-semibold text-zinc-800 dark:text-zinc-200">
+						Design (at Figma)
+					</h2>
 					<LoadingFigma project={project} />
 				</section>
 			</main>

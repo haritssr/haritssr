@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import type React from "react";
 import { TitleAndPathData } from "data/TitleAndPathData";
 
 export default function GlobalNavigationMobile() {
@@ -38,7 +38,11 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 	}
 
 	return (
-		<Link passHref href={`${to === "/home" ? "/" : to}`} className="block w-1/5 active:scale-95">
+		<Link
+			passHref
+			href={`${to === "/home" ? "/" : to}`}
+			className="block w-1/5 active:scale-95"
+		>
 			<div className="flex flex-col items-center justify-center py-[5px]">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -48,10 +52,13 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 					fill="none"
 					strokeWidth={1.5}
 				>
+					<title>{to}</title>
 					{path}
 				</svg>
 
-				<div className={`text-[11px] leading-[15px] -mt-[1px] ${color}`}>{capitalizeFirstLetter(to)}</div>
+				<div className={`text-[11px] leading-[15px] -mt-[1px] ${color}`}>
+					{capitalizeFirstLetter(to)}
+				</div>
 			</div>
 		</Link>
 	);

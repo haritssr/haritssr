@@ -1,16 +1,16 @@
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 
 import {
-	Column,
-	ColumnDef,
-	ColumnOrderState,
+	type Column,
+	type ColumnDef,
+	type ColumnOrderState,
 	flexRender,
 	getCoreRowModel,
-	Header,
-	Table,
+	type Header,
+	type Table,
 	useReactTable,
 } from "@tanstack/react-table";
-import { makeData, Person } from "../../../utils/react-table/makeData";
+import { makeData, type Person } from "../../../utils/react-table/makeData";
 
 import { useDrag, useDrop } from "react-dnd";
 
@@ -21,7 +21,7 @@ export default function ColumnOrdering() {
 	return (
 		<LayoutToExperiments domain="React Table" title="Column Ordering DnD">
 			<SubTitle>Basic table from react table</SubTitle>
-			<Table />
+			<TableIDK />
 		</LayoutToExperiments>
 	);
 }
@@ -71,12 +71,12 @@ const defaultColumns: ColumnDef<Person>[] = [
 const reorderColumn = (
 	draggedColumnId: string,
 	targetColumnId: string,
-	columnOrder: string[]
+	columnOrder: string[],
 ): ColumnOrderState => {
 	columnOrder.splice(
 		columnOrder.indexOf(targetColumnId),
 		0,
-		columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0] as string
+		columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0] as string,
 	);
 	return [...columnOrder];
 };
@@ -95,7 +95,7 @@ const DraggableColumnHeader: FC<{
 			const newColumnOrder = reorderColumn(
 				draggedColumn.id,
 				column.id,
-				columnOrder
+				columnOrder,
 			);
 			setColumnOrder(newColumnOrder);
 		},
@@ -119,18 +119,20 @@ const DraggableColumnHeader: FC<{
 				{header.isPlaceholder
 					? null
 					: flexRender(header.column.columnDef.header, header.getContext())}
-				<button ref={dragRef}>=</button>
+				<button type="button" ref={dragRef}>
+					=
+				</button>
 			</div>
 		</th>
 	);
 };
 
-function Table() {
+function TableIDK() {
 	const [data, setData] = useState(() => makeData(20));
 	const [columns] = useState(() => [...defaultColumns]);
 
 	const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(
-		columns.map((column) => column.id as string) //must start out with populated columnOrder so we can splice
+		columns.map((column) => column.id as string), //must start out with populated columnOrder so we can splice
 	);
 
 	const regenerateData = () => setData(() => makeData(20));
@@ -155,10 +157,18 @@ function Table() {
 		<div className="p-2">
 			<div className="h-4" />
 			<div className="flex flex-wrap gap-2">
-				<button onClick={() => regenerateData()} className="border p-1">
+				<button
+					type="button"
+					onClick={() => regenerateData()}
+					className="border p-1"
+				>
 					Regenerate
 				</button>
-				<button onClick={() => resetOrder()} className="border p-1">
+				<button
+					type="button"
+					onClick={() => resetOrder()}
+					className="border p-1"
+				>
 					Reset Order
 				</button>
 			</div>
@@ -208,8 +218,8 @@ function Table() {
 											? null
 											: flexRender(
 													header.column.columnDef.footer,
-													header.getContext()
-											  )}
+													header.getContext(),
+												)}
 									</th>
 								))}
 							</tr>

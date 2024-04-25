@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 export default function BlogPage() {
 	return (
 		<>
-			<PageTitle title="Blog" description="Selected notes that I want to share to the world." />
+			<PageTitle
+				title="Blog"
+				description="Selected notes that I want to share to the world."
+			/>
 			<BlogGrid />
 		</>
 	);

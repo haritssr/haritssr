@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -23,7 +23,11 @@ interface LayoutToExperimentsType {
 	domain: string;
 }
 
-export default function LayoutToExperiments({ children, title, domain }: LayoutToExperimentsType) {
+export default function LayoutToExperiments({
+	children,
+	title,
+	domain,
+}: LayoutToExperimentsType) {
 	const lastThreeSegmentRoute = useRouter().asPath;
 	const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
 	const image = "/images/hero.jpg";
@@ -63,7 +67,9 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 							{/* SubNavigation */}
 							<section
 								className={`sticky top-0 sm:top-[44.5px] border-b ${
-									inView ? "border-zinc-200" : "border-b bg-white/70 saturate-150 backdrop-blur-lg"
+									inView
+										? "border-zinc-200"
+										: "border-b bg-white/70 saturate-150 backdrop-blur-lg"
 								} z-40 mb-5 bg-white py-2`}
 							>
 								<div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
@@ -76,7 +82,10 @@ export default function LayoutToExperiments({ children, title, domain }: LayoutT
 							{/* Header */}
 							<div className="px-5">
 								<Breadcrumbs />
-								<h1 ref={ref} className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left font-bold text-zinc-800 text-3xl mt-10">
+								<h1
+									ref={ref}
+									className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left font-bold text-zinc-800 text-3xl mt-10"
+								>
 									{title}
 								</h1>
 								{children}
@@ -117,13 +126,21 @@ const SideBar = ({ domain }: { domain: string }) => {
 				{links.map((experimentPage) => {
 					// experimentPage = string; e.g. Apple Navbar, Floating Labels
 					// experimentPageEdited = a lowercased with "-"; e.g. apple-navbar, floating-labels
-					const experimentPageEdited = experimentPage.toLowerCase().split(" ").join("-");
+					const experimentPageEdited = experimentPage
+						.toLowerCase()
+						.split(" ")
+						.join("-");
 					return (
 						<Link
-							href={`/experiments/${domain.toLowerCase().split(" ").join("-")}/${experimentPageEdited}`}
+							href={`/experiments/${domain
+								.toLowerCase()
+								.split(" ")
+								.join("-")}/${experimentPageEdited}`}
 							key={experimentPage}
 							className={`${
-								lastSegment === experimentPageEdited ? "text-white bg-action" : "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
+								lastSegment === experimentPageEdited
+									? "text-white bg-action"
+									: "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
 							}  px-2 py-1 rounded-md`}
 						>
 							{experimentPage}
@@ -135,17 +152,25 @@ const SideBar = ({ domain }: { domain: string }) => {
 	);
 };
 
-const BackToExperiments = ({ inView, domain }: { inView: any; domain: string }) => {
+const BackToExperiments = ({
+	inView,
+	domain,
+}: { inView: unknown; domain: string }) => {
 	return (
 		<Link
 			passHref
 			href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
-			className={`-ml-1 flex cursor-pointer items-center sm:w-1/4 ${inView ? "w-1/2" : "w-1/4"}`}
+			className={`-ml-1 flex cursor-pointer items-center sm:w-1/4 ${
+				inView ? "w-1/2" : "w-1/4"
+			}`}
 		>
 			<span className=" inline-block w-full">
 				<span className="group flex items-center">
-					<ChevronLeftIcon className=" text-action sm:group-hover:text-[#2563eb]/90 h-5 w-5" strokeWidth={2} />
-					<span className={`-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base `}>
+					<ChevronLeftIcon
+						className=" text-action sm:group-hover:text-[#2563eb]/90 h-5 w-5"
+						strokeWidth={2}
+					/>
+					<span className="-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base">
 						{inView ? domain : "Back"}
 					</span>
 				</span>
@@ -154,17 +179,26 @@ const BackToExperiments = ({ inView, domain }: { inView: any; domain: string }) 
 	);
 };
 
-const PageTitleCenter = ({ title, inView }: { title: string; inView: any }) => {
+const PageTitleCenter = ({
+	title,
+	inView,
+}: { title: string; inView: unknown }) => {
 	return (
 		<div className={`sm:1/2 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
 			<div className="flex justify-center py-0.5 sm:py-0">
-				<div className={`truncate text-center font-semibold ${inView ? "text-transparent hidden" : "text-zinc-800 block"}`}>{title}</div>
+				<div
+					className={`truncate text-center font-semibold ${
+						inView ? "text-transparent hidden" : "text-zinc-800 block"
+					}`}
+				>
+					{title}
+				</div>
 			</div>
 		</div>
 	);
 };
 
-const PageSource = ({ href, inView }: { href: string; inView: any }) => {
+const PageSource = ({ href, inView }: { href: string; inView: unknown }) => {
 	return (
 		<div className={`flex justify-end sm:w-1/4 ${inView ? "w-1/2" : "w-1/4"}`}>
 			<cite className="not-italic group">
@@ -173,9 +207,11 @@ const PageSource = ({ href, inView }: { href: string; inView: any }) => {
 					href={href}
 					target="_blank"
 					rel="noopener noreferrer"
-					className={`flex w-fit cursor-pointer items-center text-action hover:text-[#2563eb]/90`}
+					className="flex w-fit cursor-pointer items-center text-action hover:text-[#2563eb]/90"
 				>
-					<span className="mr-2 hidden sm:inline-block text-action group-hover:text-[#2563eb]/90">Source</span>{" "}
+					<span className="mr-2 hidden sm:inline-block text-action group-hover:text-[#2563eb]/90">
+						Source
+					</span>{" "}
 					<GitHubIcon className="h-5 w-5 cursor-pointer text-action group-hover:text-[#2563eb]/90" />
 				</a>
 			</cite>

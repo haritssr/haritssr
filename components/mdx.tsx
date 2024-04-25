@@ -19,7 +19,14 @@ const CustomLink = (props) => {
 		return <a {...props} />;
 	}
 
-	return <a target="_blank" rel="noopener noreferrer" className="text-zinc-800 dark:text-zinc-300" {...props} />;
+	return (
+		<a
+			target="_blank"
+			rel="noopener noreferrer"
+			className="text-zinc-800 dark:text-zinc-300"
+			{...props}
+		/>
+	);
 };
 
 const components = {

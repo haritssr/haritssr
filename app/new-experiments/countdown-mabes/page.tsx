@@ -23,12 +23,12 @@ export default function CountdownMabes() {
 
 	function thousandify(number: number): string {
 		// Convert number to string
-		let numString = number.toString();
+		const numString = number.toString();
 
 		// Split the string into parts
 		const parts = numString.split(".");
 		let integerPart = parts[0];
-		let decimalPart = parts.length > 1 ? "." + parts[1] : "";
+		const decimalPart = parts.length > 1 ? `.${parts[1]}` : "";
 
 		// Insert dots as separators for thousands
 		integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -124,7 +124,12 @@ function CountdownTimer() {
 	const [targetDate] = useState(new Date("2024-04-10T00:00:00"));
 	const calculateTimeLeft = () => {
 		const difference = +new Date(targetDate) - +new Date();
-		let timeLeft: { hours: number; minutes: number; seconds: number; difference: number } = { hours: 0, minutes: 0, seconds: 0, difference: 0 };
+		let timeLeft: {
+			hours: number;
+			minutes: number;
+			seconds: number;
+			difference: number;
+		} = { hours: 0, minutes: 0, seconds: 0, difference: 0 };
 		if (difference > 0) {
 			timeLeft = {
 				hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
@@ -147,13 +152,15 @@ function CountdownTimer() {
 		return () => clearInterval(timer);
 	});
 
-	const formatTime = (time: any) => {
+	const formatTime = (time: number) => {
 		return time < 10 ? `0${time}` : time;
 	};
 
 	return (
 		<div>
-			<span>{formatTime(timeLeft.hours)}</span>:<span>{formatTime(timeLeft.minutes)}</span>:<span>{formatTime(timeLeft.seconds)}</span>
+			<span>{formatTime(timeLeft.hours)}</span>:
+			<span>{formatTime(timeLeft.minutes)}</span>:
+			<span>{formatTime(timeLeft.seconds)}</span>
 			<div>{formatTime(timeLeft.hours)}</div>
 			<div>{formatTime(timeLeft.minutes)}</div>
 			<div>{formatTime(timeLeft.seconds)}</div>

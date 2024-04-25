@@ -118,7 +118,7 @@ function Table() {
 										? null
 										: flexRender(
 												header.column.columnDef.header,
-												header.getContext()
+												header.getContext(),
 										  )}
 								</th>
 							))}
@@ -151,7 +151,7 @@ function Table() {
 										? null
 										: flexRender(
 												header.column.columnDef.footer,
-												header.getContext()
+												header.getContext(),
 										  )}
 								</th>
 							))}
@@ -160,7 +160,11 @@ function Table() {
 				</tfoot>
 			</table>
 			<div className="h-4" />
-			<button onClick={() => rerender()} className="border border-zinc-700 p-2">
+			<button
+				type="button"
+				onClick={() => rerender()}
+				className="border border-zinc-700 p-2"
+			>
 				Rerender
 			</button>
 		</div>

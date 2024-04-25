@@ -43,12 +43,16 @@ export const metadata: Metadata = {
 	// },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+	children,
+}: { children: React.ReactNode }) {
 	return (
 		<html lang="en" className={inter.className}>
 			<body>
 				<GlobalNavigation />
-				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0 ">{children}</main>
+				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0 ">
+					{children}
+				</main>
 				<Footer />
 				<GlobalNavigationMobile />
 			</body>

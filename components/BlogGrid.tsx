@@ -16,10 +16,17 @@ export default function BlogGrid() {
 				>
 					<>
 						<div className="w-full text-zinc-400">
-							<p className="font-medium text-zinc-800 dark:text-zinc-100">{post.title}</p>
+							<p className="font-medium text-zinc-800 dark:text-zinc-100">
+								{post.title}
+							</p>
 							<p className="inline text-[14px]">{post.publishedAt}</p>.&nbsp;
-							<p className="inline text-[14px]">{post.structuredData.wordCount} Words</p>, &nbsp;
-							<p className="inline text-[14px]">{Math.ceil(post.structuredData.wordCount / 200)} min read.</p>
+							<p className="inline text-[14px]">
+								{post.structuredData.wordCount} Words
+							</p>
+							, &nbsp;
+							<p className="inline text-[14px]">
+								{Math.ceil(post.structuredData.wordCount / 200)} min read.
+							</p>
 						</div>
 						<ChevronRightIcon
 							width={3}

@@ -1,6 +1,6 @@
 import SubTitle from "@/components/SubTitle";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { Key } from "react";
+import type { Key } from "react";
 import useSWR from "swr";
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
@@ -23,7 +23,9 @@ export default function SWR() {
 					/api/hello
 				</code>{" "}
 				and populate the data to{" "}
-				<code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-sm text-rose-500">{`<NameCard/>`}</code>{" "}
+				<code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-sm text-rose-500">
+					{"<NameCard/>"}
+				</code>{" "}
 				component
 			</SubTitle>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-3">

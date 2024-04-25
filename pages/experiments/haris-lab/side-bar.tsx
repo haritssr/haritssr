@@ -17,10 +17,12 @@ function App() {
 			{/* Domains */}
 			{fisika.map((domain) => (
 				<div key={domain.domain_name}>
-					<div className="">
+					<div>
 						<div className="pl-2 text-lg font-medium">{domain.domain_name}</div>
-						<button onClick={() => setOpenAll(!openAll)}>Open All</button>
-						<div className="">{openAll.toString()}</div>
+						<button type="button" onClick={() => setOpenAll(!openAll)}>
+							Open All
+						</button>
+						<div>{openAll.toString()}</div>
 					</div>
 					<div>
 						{/* Chapters */}

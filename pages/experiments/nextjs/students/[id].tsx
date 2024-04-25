@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import TitleBack from "@/components/TitleBack";
 
-import { GetStaticPaths, GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps } from "next";
 
 export default function DynamicPage({ person }) {
 	return (
@@ -30,7 +30,7 @@ export default function DynamicPage({ person }) {
 // export async function getStaticPaths() {
 export const getStaticPaths: GetStaticPaths = async () => {
 	const users = await fetch("https://jsonplaceholder.typicode.com/users").then(
-		(user) => user.json()
+		(user) => user.json(),
 	);
 
 	const paths = users.map((user: { id: { toString: () => string } }) => {
@@ -48,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 //This is the static data that will be fetch for every page inside dynamic pages
 export const getStaticProps: GetStaticProps = async (context) => {
 	const person = await fetch(
-		"https://jsonplaceholder.typicode.com/users/" + context.params?.id
+		`https://jsonplaceholder.typicode.com/users/${context.params?.id}`,
 	).then((p) => p.json());
 	return {
 		props: { person },

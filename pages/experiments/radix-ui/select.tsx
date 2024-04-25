@@ -1,6 +1,6 @@
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import React from "react";
+import type React from "react";
 import * as Select from "@radix-ui/react-select";
 import classnames from "classnames";
 import {
@@ -89,7 +89,7 @@ function SelectItem({
 }: {
 	children: React.ReactNode;
 	value: string;
-	props?: any;
+	props?: unknown;
 }) {
 	return (
 		<Select.Item

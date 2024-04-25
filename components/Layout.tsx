@@ -12,14 +12,20 @@ interface LayoutType {
 	description: string;
 }
 
-export default function Layout({ children, browserTitle, description }: LayoutType) {
+export default function Layout({
+	children,
+	browserTitle,
+	description,
+}: LayoutType) {
 	const pathname = usePathname();
 	const image = "/images/hero.jpg";
 	const type = "website";
 	return (
 		<>
 			<Head>
-				<title>{pathname === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}</title>
+				<title>
+					{pathname === "/" ? "Harits Syah" : `${browserTitle} - Harits Syah`}
+				</title>
 				<link rel="icon" href="/Icons/haritssr.svg" />
 				<meta name="theme-color" content="#27272a" />
 				<meta name="robots" content="follow, index" />
@@ -39,7 +45,9 @@ export default function Layout({ children, browserTitle, description }: LayoutTy
 
 			<GlobalNavigation />
 
-			<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">{children}</main>
+			<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
+				{children}
+			</main>
 
 			<Footer />
 			<GlobalNavigationMobile />

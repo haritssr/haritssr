@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Mode() {
 	const [mode, setMode] = useState(true);
 	return (
-		<div onClick={() => setMode(!mode)}>
+		<div onClick={() => setMode(!mode)} onKeyDown={() => setMode(!mode)}>
 			{mode ? (
 				<SunIcon className="h-5 w-5 text-zinc-800 hover:text-zinc-400 cursor-pointer" />
 			) : (

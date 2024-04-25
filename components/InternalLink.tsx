@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
-export default function InternalLink({ name, href }: { name: string; href: string }) {
+export default function InternalLink({
+	name,
+	href,
+}: { name: string; href: string }) {
 	return (
 		<Link
 			passHref

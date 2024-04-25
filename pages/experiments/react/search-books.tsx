@@ -1,6 +1,7 @@
 import SubTitle from "@/components/SubTitle";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import React, { useRef, useState } from "react";
+import type React from "react";
+import { useRef, useState } from "react";
 import data from "../../../data/Search2Data.json";
 import { Combobox } from "@headlessui/react";
 import ExplanationList from "@/components/ExplanationList";
@@ -20,16 +21,21 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 	const [filteredData, setFilteredData] = useState<DataType[]>([]);
 	const [wordEntered, setWordEntered] = useState<string>("");
 
-	const inputRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+	const inputRef: React.RefObject<HTMLInputElement> =
+		useRef<HTMLInputElement>(null);
 	if (typeof window !== "undefined") {
 		window.addEventListener("load", () => inputRef.current?.focus());
 	}
 
-	const handleFilter = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+	const handleFilter = ({
+		target,
+	}: React.ChangeEvent<HTMLInputElement>): void => {
 		const searchWord: string = target.value.toLowerCase();
 		setWordEntered(searchWord);
 
-		const newFilter: DataType[] = data.filter(({ title }): boolean => title.toLowerCase().includes(searchWord));
+		const newFilter: DataType[] = data.filter(({ title }): boolean =>
+			title.toLowerCase().includes(searchWord),
+		);
 
 		if (!searchWord) return setFilteredData([]);
 		setFilteredData(newFilter);
@@ -50,7 +56,7 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 					<li>Not include: space sensitive.</li>
 				</ExplanationList>
 			</SubTitle>
-			<Combobox value={data["title"]} as="div" onChange={() => null}>
+			<Combobox value={data[0].title} as="div" onChange={() => null}>
 				<div className="group mx-auto flex items-center  sm:w-1/3">
 					<Combobox.Input
 						type="search"
@@ -66,7 +72,7 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 					<Combobox.Options className="mx-auto mt-2 overflow-hidden rounded border border-zinc-600 sm:w-1/3">
 						<div className="max-h-52 min-h-fit space-y-1 overflow-y-auto py-2">
 							{filteredData.map(({ link, title }, key) => (
-								<Combobox.Option key={key} value={data}>
+								<Combobox.Option key={title} value={data}>
 									{({ active }) => (
 										<a
 											href={link}

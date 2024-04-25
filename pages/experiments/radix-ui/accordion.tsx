@@ -11,18 +11,30 @@ export default function ExportedAccordion() {
 	return (
 		<LayoutToExperiments title="Accordion" domain="Radix UI">
 			<SubTitle>
-				<ExternalLink href="https://www.radix-ui.com/docs/primitives/components/accordion" name="Radix UI Accordion" />
+				<ExternalLink
+					href="https://www.radix-ui.com/docs/primitives/components/accordion"
+					name="Radix UI Accordion"
+				/>
 				<ExplanationList>
-					<li>A vertically stacked set of interactive headings that each reveal an associated section of content.</li>
-					<li>Click the button with name and icon and the explanation box will appear</li>
+					<li>
+						A vertically stacked set of interactive headings that each reveal an
+						associated section of content.
+					</li>
+					<li>
+						Click the button with name and icon and the explanation box will
+						appear
+					</li>
 				</ExplanationList>
 			</SubTitle>
 			<div className="space-y-2">
 				<Section name="Accordion + (transition)" />
 				<AccordionComponents title="Title">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias reiciendis animi, error in rerum modi numquam impedit dolore odit ex fugit
-					vel, iste voluptates rem optio sint eveniet tenetur eaque, neque mollitia. Nisi ut aperiam numquam, culpa repudiandae cumque expedita
-					consequatur, sint aut omnis incidunt maiores porro repellendus? Magnam, labore?
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+					reiciendis animi, error in rerum modi numquam impedit dolore odit ex
+					fugit vel, iste voluptates rem optio sint eveniet tenetur eaque, neque
+					mollitia. Nisi ut aperiam numquam, culpa repudiandae cumque expedita
+					consequatur, sint aut omnis incidunt maiores porro repellendus?
+					Magnam, labore?
 				</AccordionComponents>
 			</div>
 		</LayoutToExperiments>

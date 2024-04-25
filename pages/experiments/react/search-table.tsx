@@ -28,7 +28,7 @@ export default function SearchTable() {
 	useEffect(() => {
 		const dataFetch = async () => {
 			const data = await fetch(`/api/searchWithApi?q=${debouncedSearch}`).then(
-				(r) => r.json()
+				(r) => r.json(),
 			);
 			setUsers(data);
 			// console.log(data);
@@ -84,8 +84,8 @@ export default function SearchTable() {
 					{users
 						.filter((item) =>
 							["firstName", "lastName", "maidenName"].some((key) =>
-								item[key].toLowerCase().includes(query.toLocaleLowerCase())
-							)
+								item[key].toLowerCase().includes(query.toLocaleLowerCase()),
+							),
 						)
 						.map((d) => (
 							<tr key={d.id}>
