@@ -74,13 +74,15 @@ const ProductTable = ({
 	const rows: Array<JSX.Element> = [];
 	let lastCategory: string | null = null;
 
-	for (const product of products) {
+	// for (const product of products) {
+	// biome-ignore lint/complexity/noForEach: <explanation>
+	products.forEach((product: productDataType) => {
 		//couldn't destructure product in as a '({caterogry, name, stocked} : productDataType)' in forEach callback parameter because <ProductRow/> below need 'product' variabel
 		const { category, name, stocked } = product;
 
 		if (name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) return;
 
-		if (inStockOnly && !stocked) continue;
+		if (inStockOnly && !stocked) return;
 
 		if (category !== lastCategory) {
 			rows.push(<ProductCategoryRow category={category} key={category} />);
@@ -88,7 +90,7 @@ const ProductTable = ({
 
 		rows.push(<ProductRow product={product} key={name} />);
 		lastCategory = category;
-	}
+	});
 	// products.forEach((product: productDataType) => {});
 
 	return (
