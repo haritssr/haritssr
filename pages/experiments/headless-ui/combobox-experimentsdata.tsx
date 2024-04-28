@@ -7,7 +7,7 @@ import { ExperimentsData } from "data/ExperimentsData";
 
 //For ComboboxExample1
 import { Dialog, Combobox, Transition } from "@headlessui/react";
-import { Fragment, SetStateAction, useState, useEffect } from "react";
+import { Fragment, type SetStateAction, useState, useEffect } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import ExplanationList from "@/components/ExplanationList";
@@ -72,7 +72,11 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
 
 	//kenapa harus di useEffect ?
 	useEffect(() => {
-		function onKeydown(event: { key: string; metaKey: any; ctrlKey: any }) {
+		function onKeydown(event: {
+			key: string;
+			metaKey: unknown;
+			ctrlKey: unknown;
+		}) {
 			if (event.key === "b" && (event.metaKey || event.ctrlKey)) {
 				setIsOpen(!isOpen);
 			}
@@ -89,9 +93,9 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
 				(ExperimentData: ExperimentDataType) =>
 					ExperimentData.title.toLowerCase().includes(query.toLowerCase()) ||
 					ExperimentData.links.map((link) =>
-						link.name.toLowerCase().includes(query.toLowerCase())
-					)
-		  )
+						link.name.toLowerCase().includes(query.toLowerCase()),
+					),
+			)
 		: [];
 
 	return (
@@ -133,7 +137,7 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
 							router.push(
 								`/experiments/${ExperimentsData.title
 									.toLocaleLowerCase()
-									.replace(" ", "-")}`
+									.replace(" ", "-")}`,
 							);
 						}}
 						value={ExperimentsData.id}
@@ -191,7 +195,7 @@ const ComboboxExample1 = ({ ExperimentsData }) => {
 												</div>
 											)}
 										</Combobox.Option>
-									)
+									),
 								)}
 							</Combobox.Options>
 						)}

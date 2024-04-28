@@ -10,7 +10,8 @@ const defaultFormData = {
 const inputStyle =
 	"focus:outline-none focus:border focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-md px-2 py-0.5 border border-zinc-400";
 const wrapperStyle = "flex flex-col";
-const buttonStyle = "w-full rounded-md bg-blue-600 px-2 py-1.5 text-white hover:bg-[#2563eb]/90";
+const buttonStyle =
+	"w-full rounded-md bg-blue-600 px-2 py-1.5 text-white hover:bg-[#2563eb]/90";
 
 export default function SubmitForm() {
 	const [formData, setFormData] = useState(defaultFormData);
@@ -39,11 +40,23 @@ export default function SubmitForm() {
 			<form onSubmit={onSubmit} className="w-full space-y-5 sm:w-1/3">
 				<div className={wrapperStyle}>
 					<label htmlFor="title">Title</label>
-					<input type="text" id="title" value={title} onChange={(e) => onChange(e)} className={inputStyle} />
+					<input
+						type="text"
+						id="title"
+						value={title}
+						onChange={(e) => onChange(e)}
+						className={inputStyle}
+					/>
 				</div>
 				<div className={wrapperStyle}>
 					<label htmlFor="body">Body</label>
-					<input type="text" id="body" value={body} onChange={(e) => onChange(e)} className={inputStyle} />
+					<input
+						type="text"
+						id="body"
+						value={body}
+						onChange={(e) => onChange(e)}
+						className={inputStyle}
+					/>
 				</div>
 				<button type="submit" className={buttonStyle}>
 					Submit

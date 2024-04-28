@@ -3,7 +3,12 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 export function DarkModeToggle() {
@@ -17,7 +22,10 @@ export function DarkModeToggle() {
 					<span className="sr-only">Toggle theme</span>
 				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end" className="bg-white border dark:border-zinc-700 dark:bg-zinc-800 shadow rounded-md">
+			<DropdownMenuContent
+				align="end"
+				className="bg-white border dark:border-zinc-700 dark:bg-zinc-800 shadow rounded-md"
+			>
 				<DropdownMenuItem
 					className="dark:text-zinc-100 cursor-pointer outline-none hover:bg-zinc-100 dark:hover:bg-zinc-700/60 py-1 px-2"
 					onClick={() => setTheme("light")}

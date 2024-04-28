@@ -14,13 +14,25 @@ export const AboutData = [
 	},
 	{
 		section: "UX",
-		description: "My preferable sources of UX principles when designing web application.",
-		points: ["https://www.nngroup.com", "https://www.lawsofux.com", "https://developer.apple.com/design/human-interface-guidelines"],
+		description:
+			"My preferable sources of UX principles when designing web application.",
+		points: [
+			"https://www.nngroup.com",
+			"https://www.lawsofux.com",
+			"https://developer.apple.com/design/human-interface-guidelines",
+		],
 	},
 	{
 		section: "My Web Design Taste",
-		description: "I like how their user interface is presented and inspired to be like them.",
-		points: ["https://www.apple.com", "https://www.linear.app", "https://www.vercel.com", "https://www.notion.so", "https://www.raycast.com"],
+		description:
+			"I like how their user interface is presented and inspired to be like them.",
+		points: [
+			"https://www.apple.com",
+			"https://www.linear.app",
+			"https://www.vercel.com",
+			"https://www.notion.so",
+			"https://www.raycast.com",
+		],
 	},
 ];
 

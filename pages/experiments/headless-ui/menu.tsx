@@ -63,6 +63,7 @@ const MenuExample1 = () => {
 								<Menu.Item>
 									{({ active }) => (
 										<button
+											type="button"
 											className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
 												active ? "bg-blue-600 text-white" : "text-zinc-700"
 											}`}
@@ -76,6 +77,7 @@ const MenuExample1 = () => {
 								<Menu.Item>
 									{({ active }) => (
 										<button
+											type="button"
 											className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
 												active ? "bg-blue-600 text-white" : "text-zinc-700"
 											}`}
@@ -89,6 +91,7 @@ const MenuExample1 = () => {
 								<Menu.Item disabled={true}>
 									{({ disabled }) => (
 										<button
+											type="button"
 											className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
 												disabled ? "text-zinc-400" : ""
 											}`}

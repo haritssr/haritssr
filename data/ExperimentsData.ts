@@ -66,7 +66,15 @@ export const ExperimentsData = [
 		title: "Nextjs",
 		logoSrc: "/Icons/nextjs.jpg",
 		description: "The React framework for the web",
-		links: ["Router", "SWR", "Articles", "Students", "Posts", "Next 13 Image Local", "Next 13 Image Remote"],
+		links: [
+			"Router",
+			"SWR",
+			"Articles",
+			"Students",
+			"Posts",
+			"Next 13 Image Local",
+			"Next 13 Image Remote",
+		],
 	},
 	{
 		id: 4,
@@ -196,7 +204,14 @@ export const ExperimentsData = [
 		title: "React Table",
 		logoSrc: "/Icons/tanstack.jpg",
 		description: "Headless UI for building tables & datagrids",
-		links: ["Basic", "Column Group", "Column Ordering", "Column Ordering DnD", "Column Pinning", "Column Sizing", "Column Visibility"],
+		links: [
+			"Basic",
+			"Column Group",
+			"Column Ordering",
+			"Column Ordering DnD",
+			"Column Pinning",
+			"Column Visibility",
+		],
 	},
 	{
 		id: 16,
@@ -209,7 +224,7 @@ export const ExperimentsData = [
 
 // console.log(sizeof(ExperimentsData));
 
-export type ExperimentsData = typeof ExperimentsData[0];
+export type ExperimentsData = (typeof ExperimentsData)[0];
 
 export const TailwindCSSData = ExperimentsData[0];
 export const ReactData = ExperimentsData[1];

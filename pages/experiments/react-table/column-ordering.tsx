@@ -4,13 +4,13 @@ import faker from "@faker-js/faker";
 import { useState } from "react";
 
 import {
-	ColumnDef,
-	ColumnOrderState,
+	type ColumnDef,
+	type ColumnOrderState,
 	flexRender,
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { makeData, Person } from "../../../utils/react-table/makeData";
+import { makeData, type Person } from "../../../utils/react-table/makeData";
 
 export default function ColumnOrdering() {
 	return (
@@ -99,7 +99,7 @@ function Table() {
 
 	const randomizeColumns = () => {
 		table.setColumnOrder(
-			faker.helpers.shuffle(table.getAllLeafColumns().map((d) => d.id))
+			faker.helpers.shuffle(table.getAllLeafColumns().map((d) => d.id)),
 		);
 	};
 
@@ -140,11 +140,15 @@ function Table() {
 			<div className="h-4" />
 
 			<div className="flex flex-wrap gap-2">
-				<button onClick={() => rerender()} className="border p-1">
+				<button type="button" onClick={() => rerender()} className="border p-1">
 					Regenerate
 				</button>
 
-				<button onClick={() => randomizeColumns()} className="border p-1">
+				<button
+					type="button"
+					onClick={() => randomizeColumns()}
+					className="border p-1"
+				>
 					Shuffle Columns
 				</button>
 			</div>
@@ -166,8 +170,8 @@ function Table() {
 											? null
 											: flexRender(
 													header.column.columnDef.header,
-													header.getContext()
-											  )}
+													header.getContext(),
+												)}
 									</th>
 								))}
 							</tr>
@@ -200,8 +204,8 @@ function Table() {
 											? null
 											: flexRender(
 													header.column.columnDef.footer,
-													header.getContext()
-											  )}
+													header.getContext(),
+												)}
 									</th>
 								))}
 							</tr>

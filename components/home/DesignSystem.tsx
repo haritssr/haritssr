@@ -9,7 +9,7 @@ export default function DesignSystem() {
 			className=""
 			explanation="User interface component library, design priciples, and guidelines."
 		>
-			<InternalLink name="Learn more" href="/pure" />
+			<InternalLink href="/pure">Learn more</InternalLink>
 		</HomeSectionWrapper>
 	);
 }

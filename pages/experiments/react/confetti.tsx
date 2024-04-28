@@ -10,7 +10,12 @@ export default function EditProfile() {
 	return (
 		<LayoutToExperiments domain="React" title="Edit Profile">
 			<SubTitle>
-				From <ExternalLink href="https://beta.reactjs.org/learn/  reacting-to-input-with-state#challenges" name="beta.reactjs.org" /> <br />
+				From{" "}
+				<ExternalLink
+					href="https://beta.reactjs.org/learn/  reacting-to-input-with-state#challenges"
+					name="beta.reactjs.org"
+				/>{" "}
+				<br />
 				<ExplanationList>
 					<li>Try to edit the profile and save to see the result of change.</li>
 				</ExplanationList>

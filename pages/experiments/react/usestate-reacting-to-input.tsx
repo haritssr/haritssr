@@ -2,7 +2,7 @@ import SubTitle from "@/components/SubTitle";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useRouter } from "next/router";
-import { SetStateAction, useState } from "react";
+import { type SetStateAction, useState } from "react";
 
 export default function UseStateReactingToInput() {
 	return (
@@ -28,6 +28,7 @@ const Example = () => {
 	const Button = () => {
 		return (
 			<button
+				type="button"
 				className="cursor-pointer"
 				onClick={() => {
 					router.reload();
@@ -82,7 +83,10 @@ const Example = () => {
 						value={answer}
 						onChange={handleTextareaChange}
 					/>
-					<button disabled={answer.length === 0 || status === "submitting"}>
+					<button
+						type="submit"
+						disabled={answer.length === 0 || status === "submitting"}
+					>
 						Submit{" "}
 					</button>
 					{error}
@@ -95,7 +99,7 @@ const Example = () => {
 function submitForm(answer: string) {
 	return new Promise<void>((resolve, reject) => {
 		setTimeout(() => {
-			let shouldError = answer.toLowerCase() !== "lima";
+			const shouldError = answer.toLowerCase() !== "lima";
 			if (shouldError) {
 				reject(new Error("salah"));
 			} else {

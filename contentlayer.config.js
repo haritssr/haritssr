@@ -23,7 +23,9 @@ const computedFields = {
 			description: doc.summary,
 			topic: doc.topic,
 			wordCount: countWords(doc.title),
-			image: doc.image ? `https://haritssr.com${doc.image}` : `https://haritssr.com/og?title=${doc.title}`,
+			image: doc.image
+				? `https://haritssr.com${doc.image}`
+				: `https://haritssr.com/og?title=${doc.title}`,
 			url: `https://haritssr.com/blog/${doc._raw.flattenedPath}`,
 			author: {
 				"@type": "Person",
@@ -35,7 +37,7 @@ const computedFields = {
 
 export const Blog = defineDocumentType(() => ({
 	name: "Blog",
-	filePathPattern: `**/*.mdx`,
+	filePathPattern: "**/*.mdx",
 	contentType: "mdx",
 	fields: {
 		title: {

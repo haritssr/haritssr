@@ -3,8 +3,9 @@ export default function HarisLabBanner() {
 		<div className=" border border-blue-300 rounded-lg p-4 space-y-3">
 			<div className="text-blue-800">INFORMATION</div>
 			<div className="text-zinc-600">
-				I&#39;m currently building a services, it&apos;s called Haris Lab. A place to Reference, Analyze, Test, and
-				Tutoring math-physics for Junior and High School Students.
+				I&#39;m currently building a services, it&apos;s called Haris Lab. A
+				place to Reference, Analyze, Test, and Tutoring math-physics for Junior
+				and High School Students.
 			</div>
 			<a
 				href="https://www.harislab.com"

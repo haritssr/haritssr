@@ -21,6 +21,7 @@ function useDebounce(value: string, delay: number) {
 
 export default function SearchTable() {
 	const [query, setQuery] = useState<string>("");
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const [users, setUsers] = useState<Array<any>>([]);
 
 	const debouncedSearch = useDebounce(query, 1000);
@@ -28,7 +29,7 @@ export default function SearchTable() {
 	useEffect(() => {
 		const dataFetch = async () => {
 			const data = await fetch(`/api/searchWithApi?q=${debouncedSearch}`).then(
-				(r) => r.json()
+				(r) => r.json(),
 			);
 			setUsers(data);
 			// console.log(data);
@@ -84,8 +85,8 @@ export default function SearchTable() {
 					{users
 						.filter((item) =>
 							["firstName", "lastName", "maidenName"].some((key) =>
-								item[key].toLowerCase().includes(query.toLocaleLowerCase())
-							)
+								item[key].toLowerCase().includes(query.toLocaleLowerCase()),
+							),
 						)
 						.map((d) => (
 							<tr key={d.id}>

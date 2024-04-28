@@ -4,7 +4,7 @@ import ExternalLink from "@/components/ExternalLink";
 import ExplanationList from "@/components/ExplanationList";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { Disclosure, Transition } from "@headlessui/react";
-import React from "react";
+import type React from "react";
 import Section from "@/components/Section";
 
 const Data = [
@@ -95,6 +95,7 @@ const DisclosureChevronTransitions = () => {
 									stroke="currentColor"
 									strokeWidth={1.5}
 								>
+									<title>Chevron Down Icon</title>
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -133,9 +134,7 @@ const DisclosureChevronNaked = () => {
 				<Disclosure className="w-full" as="div" key={title}>
 					{({ open }) => (
 						<>
-							<Disclosure.Button
-								className={`flex w-full items-center justify-between border-t  pr-3 pt-2 `}
-							>
+							<Disclosure.Button className="flex w-full items-center justify-between border-t  pr-3 pt-2">
 								<div
 									className={`truncate hover:text-zinc-700 ${
 										open ? "font-medium text-zinc-700" : " text-zinc-500"
@@ -155,6 +154,7 @@ const DisclosureChevronNaked = () => {
 									stroke="currentColor"
 									strokeWidth={1.5}
 								>
+									<title>Chevron Up Icon</title>
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -211,6 +211,8 @@ const DisclosurePlus = () => {
 									stroke="currentColor"
 									strokeWidth={1.5}
 								>
+									<title>Plus Icon</title>
+
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -240,9 +242,7 @@ const DisclosurePlusNaked = () => {
 				<Disclosure className="w-full" as="div" key={title}>
 					{({ open }) => (
 						<>
-							<Disclosure.Button
-								className={`flex w-full items-center justify-between  border-t  pr-3 pt-2 `}
-							>
+							<Disclosure.Button className="flex w-full items-center justify-between  border-t  pr-3 pt-2">
 								<div
 									className={`truncate hover:underline ${
 										open ? "font-medium text-zinc-800" : " text-zinc-500"
@@ -262,6 +262,7 @@ const DisclosurePlusNaked = () => {
 									stroke="currentColor"
 									strokeWidth={1.5}
 								>
+									<title>Plus Icon</title>
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"

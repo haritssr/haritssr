@@ -34,17 +34,37 @@ export default function Comments() {
 
 	return (
 		<div className="space-x-5">
-			<input type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
-			<button className="bg-blue-600 px-3 py-2 text-white hover:bg-[#2563eb]/90" onClick={submitComment}>
+			<input
+				type="text"
+				value={comment}
+				onChange={(e) => setComment(e.target.value)}
+			/>
+			<button
+				type="button"
+				className="bg-blue-600 px-3 py-2 text-white hover:bg-[#2563eb]/90"
+				onClick={submitComment}
+				onKeyDown={submitComment}
+			>
 				Submit comment
 			</button>
-			<button onClick={fetchComments} className="bg-blue-600 px-3 py-2 text-white hover:bg-[#2563eb]/90">
+			<button
+				type="button"
+				onClick={fetchComments}
+				onKeyDown={fetchComments}
+				className="bg-blue-600 px-3 py-2 text-white hover:bg-[#2563eb]/90"
+			>
 				load comments
 			</button>
 			{comments.map((comment) => (
 				<div key={comment.id}>
 					<div>{comment.comment}</div>
-					<button onClick={() => deleteComment(comment.id)}>Delete</button>
+					<button
+						type="button"
+						onClick={() => deleteComment(comment.id)}
+						onKeyDown={() => deleteComment(comment.id)}
+					>
+						Delete
+					</button>
 				</div>
 			))}
 		</div>

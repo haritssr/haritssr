@@ -9,13 +9,33 @@ export default function ContactList() {
 			<ul className="flex space-x-4">
 				{ContactData.points.map((each) => (
 					<li key={each.link} className="cursor-pointer">
-						{each.link.startsWith("https://www.") || each.link.startsWith("https://www.") ? (
-							<a title={each.link} target="_blank" rel="noreferrer noopener" href={each.link}>
-								<Image alt={each.link} src={each.icon} height={20} width={20} className="h-5 w-h-5 grayscale hover:grayscale-0" title={each.link} />
+						{each.link.startsWith("https://www.") ||
+						each.link.startsWith("https://www.") ? (
+							<a
+								title={each.link}
+								target="_blank"
+								rel="noreferrer noopener"
+								href={each.link}
+							>
+								<Image
+									alt={each.link}
+									src={each.icon}
+									height={20}
+									width={20}
+									className="h-5 w-h-5 grayscale hover:grayscale-0"
+									title={each.link}
+								/>
 							</a>
 						) : each.link.includes("@") ? (
 							<a href={`mailto:${each.link}`}>
-								<Image alt={each.link} src={each.icon} height={20} width={20} className="h-5 w-h-5 grayscale hover:grayscale-0" title={each.link} />
+								<Image
+									alt={each.link}
+									src={each.icon}
+									height={20}
+									width={20}
+									className="h-5 w-h-5 grayscale hover:grayscale-0"
+									title={each.link}
+								/>
 							</a>
 						) : null}
 					</li>

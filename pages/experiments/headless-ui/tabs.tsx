@@ -36,7 +36,7 @@ export default function ExportedTabs() {
 }
 
 function Example1() {
-	let [categories] = useState({
+	const [categories] = useState({
 		Recent: [
 			{
 				id: 1,
@@ -100,7 +100,7 @@ function Example1() {
 								"focus:outline-none text-center cursor-pointer ",
 								selected
 									? "bg-white border-zinc-300 border"
-									: "border border-zinc-100 hover:border-zinc-300"
+									: "border border-zinc-100 hover:border-zinc-300",
 							)
 						}
 					>
@@ -113,10 +113,11 @@ function Example1() {
 				{/* Here's we looping the keys of the object 'categories' */}
 				{Object.values(categories).map((posts, idx) => (
 					<Tab.Panel
+						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 						key={idx}
 						className={classNames(
 							"rounded-xl bg-white  p-1.5",
-							"ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+							"ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
 						)}
 					>
 						<ul>
@@ -137,11 +138,10 @@ function Example1() {
 										<li>{post.shareCount} shares</li>
 									</ul>
 
-									<a
-										href="#"
+									<span
 										className={classNames(
 											"absolute inset-0 rounded-md",
-											"ring-blue-400 focus:z-10 focus:outline-none focus:ring-2"
+											"ring-blue-400 focus:z-10 focus:outline-none focus:ring-2",
 										)}
 									/>
 								</li>

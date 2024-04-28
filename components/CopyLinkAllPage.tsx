@@ -22,10 +22,20 @@ const CopyLinkAllPage = () => {
 	async function handleCopy(page: string) {
 		try {
 			await navigator.clipboard.writeText(page);
-		} catch (err: any) {
+		} catch (err: unknown) {
 			console.log(err);
 		}
 	}
+
+	const ButtonHandler = () => {
+		handleCopy(`haritssr.com${pathname}`);
+		setOpen(false);
+		window.clearTimeout(timerRef.current);
+		timerRef.current = window.setTimeout(() => {
+			eventDateRef.current = oneWeekAway();
+			setOpen(true);
+		}, 100);
+	};
 
 	const pathname = usePathname();
 
@@ -33,15 +43,8 @@ const CopyLinkAllPage = () => {
 		<Toast.Provider swipeDirection="right">
 			<div
 				className="text-zinc-400 hover:text-zinc-800 cursor-pointer select-none"
-				onClick={() => {
-					handleCopy(`haritssr.com${pathname}`);
-					setOpen(false);
-					window.clearTimeout(timerRef.current);
-					timerRef.current = window.setTimeout(() => {
-						eventDateRef.current = oneWeekAway();
-						setOpen(true);
-					}, 100);
-				}}
+				onClick={ButtonHandler}
+				onKeyDown={ButtonHandler}
 			>
 				Share This Page
 			</div>
@@ -52,12 +55,16 @@ const CopyLinkAllPage = () => {
 				onOpenChange={setOpen}
 			>
 				<div className="">
-					<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">Link copied to clipboard</Toast.Title>
+					<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
+						Link copied to clipboard
+					</Toast.Title>
 					<Toast.Description asChild>
 						<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.com${pathname}`}</div>
 					</Toast.Description>
 				</div>
-				<Toast.Close className="text-action hover:text-[#2563eb]/90 h-12 w-12">OK</Toast.Close>
+				<Toast.Close className="text-action hover:text-[#2563eb]/90 h-12 w-12">
+					OK
+				</Toast.Close>
 			</Toast.Root>
 			<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
 		</Toast.Provider>

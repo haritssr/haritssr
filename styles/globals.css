@@ -32,31 +32,6 @@ buttonASd {
 	@apply cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90;
 }
 
-/* This is styles for useState Dark Mode */
-/* start */
-.button-dark {
-	@apply rounded-md border border-zinc-500 bg-zinc-700 px-4 py-1 text-white hover:bg-zinc-800;
-}
-
-.button-light {
-	@apply rounded-md border border-zinc-300 bg-white px-4 py-1 text-zinc-700 shadow hover:bg-zinc-50;
-}
-
-.panel-dark {
-	@apply bg-zinc-800 text-white;
-}
-
-.panel-light {
-	@apply bg-white text-zinc-700;
-}
-/* start */
-
-html {
-	-webkit-tap-highlight-color: transparent;
-	scroll-behavior: auto;
-	scroll-padding-top: 100px;
-}
-
 /* mobile */
 /* html { scroll-padding-top: 90px;} */
 
@@ -65,6 +40,12 @@ html {
 
 /* xl */
 /* @media (min-width: 1280px) { html { scroll-padding-top: 150px;} } */
+
+html {
+	-webkit-tap-highlight-color: transparent;
+	scroll-behavior: auto;
+	scroll-padding-top: 100px;
+}
 
 body {
 	padding: 0;
@@ -82,9 +63,9 @@ a {
 }
 
 /* CUSTOM SCROLL BAR */
-/* width */
 
-::-webkit-scrollbar {
+/* Width */
+s ::-webkit-scrollbar {
 	width: 10px;
 	/* height: 8px; */
 }

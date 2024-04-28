@@ -1,14 +1,14 @@
 import faker from "@faker-js/faker";
 
 import {
-	ColumnDef,
-	ColumnOrderState,
+	type ColumnDef,
+	type ColumnOrderState,
 	flexRender,
 	getCoreRowModel,
 	useReactTable,
-	VisibilityState,
+	type VisibilityState,
 } from "@tanstack/react-table";
-import { makeData, Person } from "../../../utils/react-table/makeData";
+import { makeData, type Person } from "../../../utils/react-table/makeData";
 
 import SubTitle from "@/components/SubTitle";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
@@ -105,7 +105,7 @@ function Table() {
 
 	const randomizeColumns = () => {
 		table.setColumnOrder(
-			faker.helpers.shuffle(table.getAllLeafColumns().map((d) => d.id))
+			faker.helpers.shuffle(table.getAllLeafColumns().map((d) => d.id)),
 		);
 	};
 
@@ -143,10 +143,14 @@ function Table() {
 			</div>
 			<div className="h-4" />
 			<div className="flex flex-wrap gap-2">
-				<button onClick={() => rerender()} className="border p-1">
+				<button type="button" onClick={() => rerender()} className="border p-1">
 					Regenerate
 				</button>
-				<button onClick={() => randomizeColumns()} className="border p-1">
+				<button
+					type="button"
+					onClick={() => randomizeColumns()}
+					className="border p-1"
+				>
 					Shuffle Columns
 				</button>
 			</div>
@@ -180,13 +184,14 @@ function Table() {
 													? null
 													: flexRender(
 															header.column.columnDef.header,
-															header.getContext()
-													  )}
+															header.getContext(),
+														)}
 											</div>
 											{!header.isPlaceholder && header.column.getCanPin() && (
 												<div className="flex justify-center gap-1">
 													{header.column.getIsPinned() !== "left" ? (
 														<button
+															type="button"
 															className="rounded border px-2"
 															onClick={() => {
 																header.column.pin("left");
@@ -197,6 +202,7 @@ function Table() {
 													) : null}
 													{header.column.getIsPinned() ? (
 														<button
+															type="button"
 															className="rounded border px-2"
 															onClick={() => {
 																header.column.pin(false);
@@ -207,6 +213,7 @@ function Table() {
 													) : null}
 													{header.column.getIsPinned() !== "right" ? (
 														<button
+															type="button"
 															className="rounded border px-2"
 															onClick={() => {
 																header.column.pin("right");
@@ -234,7 +241,7 @@ function Table() {
 													<td key={cell.id}>
 														{flexRender(
 															cell.column.columnDef.cell,
-															cell.getContext()
+															cell.getContext(),
 														)}
 													</td>
 												);
@@ -263,13 +270,14 @@ function Table() {
 												? null
 												: flexRender(
 														header.column.columnDef.header,
-														header.getContext()
-												  )}
+														header.getContext(),
+													)}
 										</div>
 										{!header.isPlaceholder && header.column.getCanPin() && (
 											<div className="flex justify-center gap-1">
 												{header.column.getIsPinned() !== "left" ? (
 													<button
+														type="button"
 														className="rounded border px-2"
 														onClick={() => {
 															header.column.pin("left");
@@ -280,6 +288,7 @@ function Table() {
 												) : null}
 												{header.column.getIsPinned() ? (
 													<button
+														type="button"
 														className="rounded border px-2"
 														onClick={() => {
 															header.column.pin(false);
@@ -290,6 +299,7 @@ function Table() {
 												) : null}
 												{header.column.getIsPinned() !== "right" ? (
 													<button
+														type="button"
 														className="rounded border px-2"
 														onClick={() => {
 															header.column.pin("right");
@@ -320,7 +330,7 @@ function Table() {
 												<td key={cell.id}>
 													{flexRender(
 														cell.column.columnDef.cell,
-														cell.getContext()
+														cell.getContext(),
 													)}
 												</td>
 											);
@@ -346,13 +356,14 @@ function Table() {
 													? null
 													: flexRender(
 															header.column.columnDef.header,
-															header.getContext()
-													  )}
+															header.getContext(),
+														)}
 											</div>
 											{!header.isPlaceholder && header.column.getCanPin() && (
 												<div className="flex justify-center gap-1">
 													{header.column.getIsPinned() !== "left" ? (
 														<button
+															type="button"
 															className="rounded border px-2"
 															onClick={() => {
 																header.column.pin("left");
@@ -363,6 +374,7 @@ function Table() {
 													) : null}
 													{header.column.getIsPinned() ? (
 														<button
+															type="button"
 															className="rounded border px-2"
 															onClick={() => {
 																header.column.pin(false);
@@ -373,6 +385,7 @@ function Table() {
 													) : null}
 													{header.column.getIsPinned() !== "right" ? (
 														<button
+															type="button"
 															className="rounded border px-2"
 															onClick={() => {
 																header.column.pin("right");
@@ -400,7 +413,7 @@ function Table() {
 													<td key={cell.id}>
 														{flexRender(
 															cell.column.columnDef.cell,
-															cell.getContext()
+															cell.getContext(),
 														)}
 													</td>
 												);

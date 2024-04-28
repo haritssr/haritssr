@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ClassAttributes, HTMLAttributes } from "react";
+import type { ClassAttributes, HTMLAttributes } from "react";
 
 export const TechnologyCard = (
 	{
@@ -9,11 +9,16 @@ export const TechnologyCard = (
 		domain?: string;
 		links?: Array<{ href: string; imgSrc: string; name: string }>;
 	},
-	props: JSX.IntrinsicAttributes & ClassAttributes<HTMLDivElement> & HTMLAttributes<HTMLDivElement>
+	props: JSX.IntrinsicAttributes &
+		ClassAttributes<HTMLDivElement> &
+		HTMLAttributes<HTMLDivElement>,
 ) => {
 	return (
-		<div {...props} className="h-fit overflow-hidden rounded-md border border-zinc-400/60 dark:border-zinc-700">
-			<div className="truncate px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 text-tiny font-semibold text-zinc-700 sm:text-base border-b border-zinc-400/60">
+		<div
+			{...props}
+			className="h-fit overflow-hidden rounded-md border border-zinc-300 dark:border-zinc-700"
+		>
+			<div className="truncate px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 text-tiny font-medium text-zinc-700 sm:text-base border-b border-zinc-300">
 				{domain}
 			</div>
 			<div className="">
@@ -37,7 +42,9 @@ export const TechnologyCard = (
 									blurDataURL={imgSrc}
 									// placeholder='blur'
 								/>
-								<div className="truncate text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200">{name}</div>
+								<div className="truncate text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200">
+									{name}
+								</div>
 							</section>
 							{/* External Link Icon */}
 							<svg
@@ -48,7 +55,12 @@ export const TechnologyCard = (
 								stroke="currentColor"
 								strokeWidth={1.5}
 							>
-								<path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+								<title>External Link Icon</title>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+								/>
 							</svg>
 						</a>
 					);

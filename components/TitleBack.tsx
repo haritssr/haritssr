@@ -10,6 +10,7 @@ export default function TitleBack({
 	return (
 		<div className="py-8">
 			<button
+				type="button"
 				className="group mb-5 flex flex-row items-center sm:-ml-5"
 				onClick={() => history.back()}
 			>

@@ -13,7 +13,7 @@ export default function YoutubeThumbnail() {
 				<div
 					aria-hidden="true"
 					className="w-[512px]h-[512px] absolute bg-purple-400"
-				></div>
+				/>
 
 				<div className="relative flex h-full flex-col justify-end space-y-4 p-8">
 					<p className="text-xs font-semibold uppercase text-purple-600">
@@ -37,6 +37,7 @@ const Play = () => {
 			viewBox="0 0 20 20"
 			fill="currentColor"
 		>
+			<title>Play Icon</title>
 			<path
 				fillRule="evenodd"
 				d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
@@ -54,6 +55,7 @@ const TailwindSVG = () => {
 			viewBox="0 0 262 33"
 			className="w-36"
 		>
+			<title>Tailwind CSS SVG</title>
 			<g fillRule="evenodd" clipPath="url(#prefix__clip0)" clipRule="evenodd">
 				<path
 					fill="#06B6D4"

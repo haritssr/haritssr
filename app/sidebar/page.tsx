@@ -11,7 +11,7 @@ export default function Sidebar() {
 					})}
 				</div>
 			</div>
-			<div className="col-span-3 bg-green-400"></div>
+			<div className="col-span-3 bg-green-400" />
 		</div>
 	);
 }

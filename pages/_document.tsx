@@ -1,12 +1,11 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import ThemeProvider from "provider/ThemeProvider";
 
 class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang="en">
 				<Head />
-				<body>
+				<body className="font-inter">
 					<Main />
 					<NextScript />
 				</body>

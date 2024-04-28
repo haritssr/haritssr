@@ -64,59 +64,103 @@ export default function DesignSystem() {
 				title="Pure Design System"
 				description={
 					<>
-						Design system used in <ExternalLink name="haritssr.com" href="https://www.haritssr.com" />,
-						<ExternalLink name="Haris Studio" href="https://harisstudio.vercel.app" /> and{" "}
-						<ExternalLink name="Haris Lab" href="https://www.harislab.com" />.
+						Design system used in{" "}
+						<ExternalLink
+							big
+							name="haritssr.com"
+							href="https://www.haritssr.com"
+						/>
+						,
+						<ExternalLink
+							big
+							name="Haris Studio"
+							href="https://harisstudio.vercel.app"
+						/>{" "}
+						and{" "}
+						<ExternalLink
+							big
+							name="Haris Lab"
+							href="https://www.harislab.com"
+						/>
+						.
 					</>
 				}
 			/>
 			<Section name="Design Principles" />
 			<ExplanationList>
 				<li>
-					Design System is a set of specific rules of design principles or opiniated design that transcendence to the user interface that affect user
-					experience as a whole.
+					Design System is a set of specific rules of design principles or
+					opiniated design that transcendence to the user interface that affect
+					user experience as a whole.
 				</li>
 				<li>
-					Design Principles explain <span className="font-semibold">why</span> we do specific things, now <span className="font-semibold">how</span>,{" "}
-					<span className="font-semibold">how</span> part is the implementation of the code.
+					Design Principles explain <span className="font-semibold">why</span>{" "}
+					we do specific things, now <span className="font-semibold">how</span>,{" "}
+					<span className="font-semibold">how</span> part is the implementation
+					of the code.
 				</li>
 				<li>
-					Pure Design System mimicing the traditional (most cases) environment when student solving math and physics problem, like in paper, pencil,
+					Pure Design System mimicing the traditional (most cases) environment
+					when student solving math and physics problem, like in paper, pencil,
 					white board, pencil cases, etc, especially in Analysis (MAKI) process.
 				</li>
 				<li>Why called &quot;Pure&quot;?</li>
 				<ul className="block list-outside list-disc space-y-1 pl-4">
 					<li>Well, honestly, I have no idea on naming.</li>
-					<li>Blue, black, gray, and white seems pure and minimalist color to me, and it actually my four favourite colors.</li>
 					<li>
-						The word &quot;Pure&quot; also not a long word so it can fit on the TabBars (bottom navigation on mobile-like apps) and top navigation bar
-						at desktop).
+						Blue, black, gray, and white seems pure and minimalist color to me,
+						and it actually my four favourite colors.
+					</li>
+					<li>
+						The word &quot;Pure&quot; also not a long word so it can fit on the
+						TabBars (bottom navigation on mobile-like apps) and top navigation
+						bar at desktop).
 					</li>
 				</ul>
-				<li>Distinguish between link and button, link to navigate, button for action.</li>
+				<li>
+					Distinguish between link and button, link to navigate, button for
+					action.
+				</li>
 				<ul className="block list-outside list-disc space-y-1 pl-4">
-					<li>Both link and button, they must be have hover and active state UI representation.</li>
 					<li>
-						Hover state mean you hovering the UI so you ready to act on it, but not acting on it yet, and active state is when you act on the UI and
+						Both link and button, they must be have hover and active state UI
+						representation.
+					</li>
+					<li>
+						Hover state mean you hovering the UI so you ready to act on it, but
+						not acting on it yet, and active state is when you act on the UI and
 						it doing their own functionality (navigate or doing action)
 					</li>
 				</ul>
 				<li>
-					Strive to only using basic color and UI components provided in design system to accelerate development, maintaining consistency, and
+					Strive to only using basic color and UI components provided in design
+					system to accelerate development, maintaining consistency, and
 					familiarity.
 				</li>
-				<li>Each component already have hover, active, and focus state (not all component need that state though)</li>
-				<li>This design system is accessible at mobile and desktop web (a.k.a responsive).</li>
 				<li>
-					You can see the component code <ExternalLink href="https://github.com/haritssr/haritssr/tree/main/components" name="here" />
+					Each component already have hover, active, and focus state (not all
+					component need that state though)
 				</li>
 				<li>
-					If you want to see other variation of these component you can see <InternalLink href="/experiments/radix-ui" name="here" /> or{" "}
-					<InternalLink href="/experiments/headless-ui" name="here" />
+					This design system is accessible at mobile and desktop web (a.k.a
+					responsive).
 				</li>
 				<li>
-					There is a lot of work to be done in this design system, like: typography, use cases, example, do&apos;s and don&apos;t&apos;s, description
-					to each UI component, and guidelines. Coming soon.
+					You can see the component code{" "}
+					<ExternalLink
+						href="https://github.com/haritssr/haritssr/tree/main/components"
+						name="here"
+					/>
+				</li>
+				<li>
+					If you want to see other variation of these component you can see{" "}
+					<InternalLink href="/experiments/radix-ui">here</InternalLink> or{" "}
+					<InternalLink href="/experiments/headless-ui">here</InternalLink>
+				</li>
+				<li>
+					There is a lot of work to be done in this design system, like:
+					typography, use cases, example, do&apos;s and don&apos;t&apos;s,
+					description to each UI component, and guidelines. Coming soon.
 				</li>
 			</ExplanationList>
 			<div className="mb-10" />
@@ -142,7 +186,8 @@ export default function DesignSystem() {
 							</Accordion.Header>
 
 							<Accordion.Content className="duration-300 rounded-b-md border-b border-l border-r border-zinc-400 bg-white p-2.5 text-tiny text-zinc-800 w-[200px]">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias reiciendis animi, error in rerum modi.
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+								reiciendis animi, error in rerum modi.
 							</Accordion.Content>
 						</Accordion.Item>
 					</Accordion.Root>
@@ -154,8 +199,8 @@ export default function DesignSystem() {
 							// defaultChecked
 							id="c1"
 						>
-							<CheckboxPrimitive.Indicator className={`text-white`}>
-								<CheckIcon className={`h-5 w-5 `} />
+							<CheckboxPrimitive.Indicator className="text-white">
+								<CheckIcon className="h-5 w-5" />
 							</CheckboxPrimitive.Indicator>
 						</CheckboxPrimitive.Root>
 						<label className="select-none text-zinc-800" htmlFor="c1">
@@ -177,8 +222,9 @@ export default function DesignSystem() {
 							sideOffset={10}
 							side="bottom"
 						>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur vel fugit ipsum est, perferendis animi accusantium molestiae impedit
-							minima ea debitis.
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
+							vel fugit ipsum est, perferendis animi accusantium molestiae
+							impedit minima ea debitis.
 							<Popover.Close />
 							<Popover.Arrow className="fill-zinc-300" />
 						</Popover.Content>
@@ -208,8 +254,14 @@ export default function DesignSystem() {
 					</table>
 				</Box>
 				<Box title="Tabs">
-					<Tabs.Root className="flex flex-col w-full max-w-[300px]" defaultValue="tab1">
-						<Tabs.List className="shrink-0 flex bg-zinc-100 rounded-lg p-1 space-x-1" aria-label="Manage your account">
+					<Tabs.Root
+						className="flex flex-col w-full max-w-[300px]"
+						defaultValue="tab1"
+					>
+						<Tabs.List
+							className="shrink-0 flex bg-zinc-100 rounded-lg p-1 space-x-1"
+							aria-label="Manage your account"
+						>
 							<Tabs.Trigger
 								className="bg-white py-1 flex-1 flex items-center justify-center select-none data-[state=active]:text-zinc-800 data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-none cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500  border data-[state=active]:border-zinc-300 hover:border-zinc-300 border-transparent"
 								value="tab1"
@@ -223,16 +275,24 @@ export default function DesignSystem() {
 								Password
 							</Tabs.Trigger>
 						</Tabs.List>
-						<Tabs.Content className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200" value="tab1">
+						<Tabs.Content
+							className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
+							value="tab1"
+						>
 							<div className="">
-								Account description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias veritatis ullam quae rem quis aliquam,
-								accusantium debitis sint praesentium.
+								Account description. Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Ut molestias veritatis ullam quae rem quis
+								aliquam, accusantium debitis sint praesentium.
 							</div>
 						</Tabs.Content>
-						<Tabs.Content className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200" value="tab2">
+						<Tabs.Content
+							className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
+							value="tab2"
+						>
 							<div className="">
-								Password description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias veritatis ullam quae rem quis aliquam,
-								accusantium debitis sint praesentium.
+								Password description. Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Ut molestias veritatis ullam quae rem quis
+								aliquam, accusantium debitis sint praesentium.
 							</div>
 						</Tabs.Content>
 					</Tabs.Root>
@@ -240,6 +300,7 @@ export default function DesignSystem() {
 				<Box title="Toast">
 					<Toast.Provider swipeDirection="right">
 						<button
+							type="button"
 							className="text-white bg-action rounded-md px-3 py-1 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400 ring-1 ring-action"
 							onClick={() => {
 								setOpen(false);
@@ -259,18 +320,24 @@ export default function DesignSystem() {
 							onOpenChange={setOpen}
 						>
 							<div className="">
-								<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">Hai, I am Toast!</Toast.Title>
+								<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
+									Hai, I am Toast!
+								</Toast.Title>
 								<Toast.Description asChild>
-									<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">Thanks for clicking me!</div>
+									<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">
+										Thanks for clicking me!
+									</div>
 								</Toast.Description>
 							</div>
-							<Toast.Close className="text-action hover:text-[#2563eb]/90">OK</Toast.Close>
+							<Toast.Close className="text-action hover:text-[#2563eb]/90">
+								OK
+							</Toast.Close>
 						</Toast.Root>
 						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
 					</Toast.Provider>
 				</Box>
 				<Box title="Internal Link">
-					<InternalLink href="/" name="Internal Link" />
+					<InternalLink href="/">Internal Link</InternalLink>
 				</Box>
 				<Box title="External Link">
 					<ExternalLink href="https://www.harislab.com" name="External Link" />
@@ -281,23 +348,39 @@ export default function DesignSystem() {
 							<div className="flex space-x-1">
 								<div className="text-zinc-700">Tooltip</div>
 								<Tooltip.Trigger className="flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700">
-									<ExclamationCircleIcon className="h-4 w-4 text-zinc-600 hover:text-zinc-700" strokeWidth={2} />
+									<ExclamationCircleIcon
+										className="h-4 w-4 text-zinc-600 hover:text-zinc-700"
+										strokeWidth={2}
+									/>
 								</Tooltip.Trigger>
-								<Tooltip.Content side="top" align="center" className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl">
+								<Tooltip.Content
+									side="top"
+									align="center"
+									className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl"
+								>
 									<div>Hey, I am Tooltip!</div>
-									<Tooltip.Arrow offset={5} width={10} height={5} className="fill-[#3F3F46]" />
+									<Tooltip.Arrow
+										offset={5}
+										width={10}
+										height={5}
+										className="fill-[#3F3F46]"
+									/>
 								</Tooltip.Content>
 							</div>
 						</Tooltip.Root>
 					</Tooltip.Provider>
 				</Box>
 				<Box title="Button: Primary">
-					<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action">
+					<button
+						type="button"
+						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action"
+					>
 						Button
 					</button>
 				</Box>
 				<Box title="Button: Loading">
 					<button
+						type="button"
 						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action"
 						onClick={handleClick}
 					>
@@ -305,12 +388,18 @@ export default function DesignSystem() {
 					</button>
 				</Box>
 				<Box title="Button: Secondary">
-					<button className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow">
+					<button
+						type="button"
+						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
+					>
 						Button
 					</button>
 				</Box>
 				<Box title="Button: With Icon">
-					<button className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow flex items-center space-x-1">
+					<button
+						type="button"
+						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow flex items-center space-x-1"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -319,6 +408,7 @@ export default function DesignSystem() {
 							stroke="currentColor"
 							className="w-[18px] h-[18px] text-zinc-800"
 						>
+							<title>IDK</title>
 							<path
 								strokeLinecap="round"
 								strokeLinejoin="round"
@@ -329,7 +419,10 @@ export default function DesignSystem() {
 					</button>
 				</Box>
 				<Box title="Button: Only Icon">
-					<button className="p-1.5 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow flex items-center space-x-1">
+					<button
+						type="button"
+						className="p-1.5 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow flex items-center space-x-1"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -338,6 +431,7 @@ export default function DesignSystem() {
 							stroke="currentColor"
 							className="w-5 h-5 text-zinc-800"
 						>
+							<title>IDK</title>
 							<path
 								strokeLinecap="round"
 								strokeLinejoin="round"
@@ -347,12 +441,20 @@ export default function DesignSystem() {
 					</button>
 				</Box>
 				<Box title="Button: Danger">
-					<button className="px-3 py-1 text-red-600 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-red-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-600 shadow">
+					<button
+						type="button"
+						className="px-3 py-1 text-red-600 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-red-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-600 shadow"
+					>
 						Button
 					</button>
 				</Box>
 				<Box title="Button: Disabled">
-					<button className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium rounded-md cursor-not-allowed select-none">Button</button>
+					<button
+						type="button"
+						className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium rounded-md cursor-not-allowed select-none"
+					>
+						Button
+					</button>
 				</Box>
 				<Box title="Main Colors">
 					<div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
@@ -463,8 +565,12 @@ export default function DesignSystem() {
 				</Box>
 				<Box title="Box">
 					<div className="border border-zinc-400/50 rounded-md overflow-hidden w-[200px] sm:w-[300px]">
-						<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">Title</div>
-						<div className="h-32 p-5 flex items-center justify-center">Content</div>
+						<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
+							Title
+						</div>
+						<div className="h-32 p-5 flex items-center justify-center">
+							Content
+						</div>
 					</div>
 				</Box>
 				<Box title="Text Area">
@@ -520,15 +626,29 @@ export default function DesignSystem() {
 								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
 							/>
 							<div className="flex flex-col">
-								<span className="text-sm sm:text-base text-gray-800 justify-self-center">Harits Syah</span>
-								<span className="text-sm sm:text-base text-gray-400 justify-self-center">haritssr.com</span>
+								<span className="text-sm sm:text-base text-gray-800 justify-self-center">
+									Harits Syah
+								</span>
+								<span className="text-sm sm:text-base text-gray-400 justify-self-center">
+									haritssr.com
+								</span>
 							</div>
 						</div>
 						<div className="space-y-2">
-							<Image alt="Haris Lab image" src="/Icons/harislab.svg" width={10} height={10} className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center" />
+							<Image
+								alt="Haris Lab image"
+								src="/Icons/harislab.svg"
+								width={10}
+								height={10}
+								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
+							/>
 							<div className="flex flex-col">
-								<span className="text-sm sm:text-base text-gray-800 justify-self-center">Haris Lab</span>
-								<span className="text-sm sm:text-base text-gray-400 justify-self-center">harislab.com</span>
+								<span className="text-sm sm:text-base text-gray-800 justify-self-center">
+									Haris Lab
+								</span>
+								<span className="text-sm sm:text-base text-gray-400 justify-self-center">
+									harislab.com
+								</span>
 							</div>
 						</div>
 						<div className="space-y-2">
@@ -540,8 +660,12 @@ export default function DesignSystem() {
 								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
 							/>
 							<div className="flex flex-col">
-								<span className="text-sm sm:text-base text-gray-800 justify-self-center">Haris Studio</span>
-								<span className="text-sm sm:text-base text-gray-400 justify-self-center">harisstudio.com</span>
+								<span className="text-sm sm:text-base text-gray-800 justify-self-center">
+									Haris Studio
+								</span>
+								<span className="text-sm sm:text-base text-gray-400 justify-self-center">
+									harisstudio.com
+								</span>
 							</div>
 						</div>
 					</div>
@@ -549,30 +673,46 @@ export default function DesignSystem() {
 				<Box title="Modal">
 					<Dialog.Root>
 						<Dialog.Trigger asChild>
-							<button className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow">
+							<button
+								type="button"
+								className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
+							>
 								Open Modal
 							</button>
 						</Dialog.Trigger>
 						<Dialog.Portal>
 							<Dialog.Overlay className="bg-blackA9 fixed inset-0" />
 							<Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-[25px] shadow-lg border border-zinc-300 focus:outline-none">
-								<Dialog.Title className="text-zinc-800 text-base font-medium">Title</Dialog.Title>
-								<Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">Description</Dialog.Description>
-								<div className="h-24 flex items-center justify-center">Some content</div>
+								<Dialog.Title className="text-zinc-800 text-base font-medium">
+									Title
+								</Dialog.Title>
+								<Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
+									Description
+								</Dialog.Description>
+								<div className="h-24 flex items-center justify-center">
+									Some content
+								</div>
 								<div className="mt-[25px] flex justify-end space-x-2	">
 									<Dialog.Close asChild>
-										<button className="px-3 py-1 bg-zinc-100 border border-zinc-300 text-zinc-800 font-medium hover:bg-zinc-200/70 rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none">
+										<button
+											type="button"
+											className="px-3 py-1 bg-zinc-100 border border-zinc-300 text-zinc-800 font-medium hover:bg-zinc-200/70 rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none"
+										>
 											Action
 										</button>
 									</Dialog.Close>
 									<Dialog.Close asChild>
-										<button className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none">
+										<button
+											type="button"
+											className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none"
+										>
 											Action
 										</button>
 									</Dialog.Close>
 								</div>
 								<Dialog.Close asChild>
 									<button
+										type="button"
 										className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
 										aria-label="Close"
 									>
@@ -604,6 +744,7 @@ export default function DesignSystem() {
 			<Suspense fallback={`"Loading...`}>
 				<div className="mt-5 space-y-20">
 					<iframe
+						title="idk"
 						className="border w-full min-h-screen"
 						width="800"
 						height="450"

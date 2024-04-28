@@ -3,8 +3,9 @@ import "../styles/globals.css";
 import Footer from "@/components/Footer";
 import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import ThemeProvider from "provider/ThemeProvider";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.haritssr.com"),
@@ -42,18 +43,18 @@ export const metadata: Metadata = {
 	// },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+	children,
+}: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
-			<body className={`${GeistSans.className}`}>
-				<ThemeProvider>
-					<div className="dark:bg-zinc-900">
-						<GlobalNavigation />
-						<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0 ">{children}</main>
-						<Footer />
-						<GlobalNavigationMobile />
-					</div>
-				</ThemeProvider>
+		<html lang="en" className={inter.className}>
+			<body>
+				<GlobalNavigation />
+				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0 ">
+					{children}
+				</main>
+				<Footer />
+				<GlobalNavigationMobile />
 			</body>
 		</html>
 	);

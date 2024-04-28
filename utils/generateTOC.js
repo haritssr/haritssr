@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 
 export default function generateTOC(mdxFilePath) {
 	try {
@@ -9,10 +9,10 @@ export default function generateTOC(mdxFilePath) {
 
 		//headings: Heading[]
 		const headings = [];
-		let match;
+		const match = headingRegex.exec(mdxContent);
 
 		// Extract headings from MDX content
-		while ((match = headingRegex.exec(mdxContent)) !== null) {
+		while (match !== null) {
 			const level = match[0].indexOf("#") + 1;
 			const title = match[1].trim();
 			headings.push({ level, title });

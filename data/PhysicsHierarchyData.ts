@@ -46,11 +46,24 @@ export const PhysicsHierarchyData: PhysicsTable = [
 			},
 			{
 				chapter_title: "Ketepatan",
-				material: ["Pengantar", "Akurasi", "Presisi", "Keteledoran", "Kesalahan acak", "Kesalahan sistematis"],
+				material: [
+					"Pengantar",
+					"Akurasi",
+					"Presisi",
+					"Keteledoran",
+					"Kesalahan acak",
+					"Kesalahan sistematis",
+				],
 			},
 			{
 				chapter_title: "Alat Ukur",
-				material: ["Pengantar", "Jangka sorong", "Miktometer sekrup", "Mistar", "Tahun Cahaya"],
+				material: [
+					"Pengantar",
+					"Jangka sorong",
+					"Miktometer sekrup",
+					"Mistar",
+					"Tahun Cahaya",
+				],
 			},
 		],
 	},
@@ -59,31 +72,64 @@ export const PhysicsHierarchyData: PhysicsTable = [
 		chapters: [
 			{
 				chapter_title: "Gerak Lurus",
-				material: ["Pengantar", "Gerak Lurus Beraturan", "Gerak Lurus Berubah Beraturan"],
+				material: [
+					"Pengantar",
+					"Gerak Lurus Beraturan",
+					"Gerak Lurus Berubah Beraturan",
+				],
 			},
 			{
 				chapter_title: "Gerak Rotasi",
-				material: ["Pengantar", "Momentum Sudut", "Torsi - Momen Gaya", "Momen Inersia"],
+				material: [
+					"Pengantar",
+					"Momentum Sudut",
+					"Torsi - Momen Gaya",
+					"Momen Inersia",
+				],
 			},
 			{
 				chapter_title: "Gerak Parabola",
-				material: ["Pengantar", "Gerak Parabola Simetri", "Gerak Parabola Asimetri"],
+				material: [
+					"Pengantar",
+					"Gerak Parabola Simetri",
+					"Gerak Parabola Asimetri",
+				],
 			},
 			{
 				chapter_title: "Gerak Melingkar",
-				material: ["Pengantar", "Gerak Melingkar Beraturan", "Percepatan Setripetal", "Momentum Sudut", "Hukum Kekekalan Energi"],
+				material: [
+					"Pengantar",
+					"Gerak Melingkar Beraturan",
+					"Percepatan Setripetal",
+					"Momentum Sudut",
+					"Hukum Kekekalan Energi",
+				],
 			},
 		],
 	},
 	{
 		domain_title: "Dinamika",
 		chapters: [
-			{ chapter_title: "Gaya", material: ["Gaya Newton", "Gaya Gesek", "Gaya Gravitasi"] },
-			{ chapter_title: "Usaha", material: ["Pengantar Usaha", "Hubungan usaha dengan energi"] },
-			{ chapter_title: "Momentum", material: ["Pengantar momentum", "Hukum kekekalan momentum", "Impuls"] },
+			{
+				chapter_title: "Gaya",
+				material: ["Gaya Newton", "Gaya Gesek", "Gaya Gravitasi"],
+			},
+			{
+				chapter_title: "Usaha",
+				material: ["Pengantar Usaha", "Hubungan usaha dengan energi"],
+			},
+			{
+				chapter_title: "Momentum",
+				material: ["Pengantar momentum", "Hukum kekekalan momentum", "Impuls"],
+			},
 			{
 				chapter_title: "Energi",
-				material: ["Pengantar", "Energi Kinetik", "Energi Potensial", "Energi Menanik"],
+				material: [
+					"Pengantar",
+					"Energi Kinetik",
+					"Energi Potensial",
+					"Energi Menanik",
+				],
 			},
 		],
 	},
@@ -92,11 +138,22 @@ export const PhysicsHierarchyData: PhysicsTable = [
 		chapters: [
 			{
 				chapter_title: "Fluida Statis",
-				material: ["Pengantar Fluida Statis", "Tekanan", "Hukum Pascal", "Hukum Archimedes"],
+				material: [
+					"Pengantar Fluida Statis",
+					"Tekanan",
+					"Hukum Pascal",
+					"Hukum Archimedes",
+				],
 			},
 			{
 				chapter_title: "Fluida Dinamis",
-				material: ["Pengantar Fluida Dinamis", "Aliran fluida ideal", "Debit", "Kontinuitas", "Hukum Bernoulli"],
+				material: [
+					"Pengantar Fluida Dinamis",
+					"Aliran fluida ideal",
+					"Debit",
+					"Kontinuitas",
+					"Hukum Bernoulli",
+				],
 			},
 		],
 	},
@@ -105,7 +162,12 @@ export const PhysicsHierarchyData: PhysicsTable = [
 		chapters: [
 			{
 				chapter_title: "Gelombang Dasar",
-				material: ["Pengantar", "Jenis gelombang", "Sifat gelombang", "Properti gelombang"],
+				material: [
+					"Pengantar",
+					"Jenis gelombang",
+					"Sifat gelombang",
+					"Properti gelombang",
+				],
 			},
 			{
 				chapter_title: "Gelombang Bunyi",
@@ -131,7 +193,13 @@ export const PhysicsHierarchyData: PhysicsTable = [
 		chapters: [
 			{
 				chapter_title: "Hukum termodinamika",
-				material: ["Pengantar", "Hukum termodinamika 0", "Hukum termodinamika 1", "Hukum termodinamika 2", "Hukum termodinamika 3"],
+				material: [
+					"Pengantar",
+					"Hukum termodinamika 0",
+					"Hukum termodinamika 1",
+					"Hukum termodinamika 2",
+					"Hukum termodinamika 3",
+				],
 			},
 			{
 				chapter_title: "Suhu",
@@ -139,11 +207,26 @@ export const PhysicsHierarchyData: PhysicsTable = [
 			},
 			{
 				chapter_title: "Kalor",
-				material: ["Pengantar", "Transfer kalor", "Pemuaian kalor", "Asas Black", "Kalor jenis", "Kalor lebur", "Kalor laten", "Kapasitas kalor"],
+				material: [
+					"Pengantar",
+					"Transfer kalor",
+					"Pemuaian kalor",
+					"Asas Black",
+					"Kalor jenis",
+					"Kalor lebur",
+					"Kalor laten",
+					"Kapasitas kalor",
+				],
 			},
 			{
 				chapter_title: "Fenomena Gas",
-				material: ["Pengantar", "Isobaris", "Isokhoris", "Isotermis", "Adiabatis"],
+				material: [
+					"Pengantar",
+					"Isobaris",
+					"Isokhoris",
+					"Isotermis",
+					"Adiabatis",
+				],
 			},
 		],
 	},
@@ -181,7 +264,14 @@ export const PhysicsHierarchyData: PhysicsTable = [
 			},
 			{
 				chapter_title: "Magnet",
-				material: ["Pengantar", "Medan Magnet", "Gaya Magnet", "Fluks Magnet", "Momen Kopel", "Transformator"],
+				material: [
+					"Pengantar",
+					"Medan Magnet",
+					"Gaya Magnet",
+					"Fluks Magnet",
+					"Momen Kopel",
+					"Transformator",
+				],
 			},
 		],
 	},

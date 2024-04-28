@@ -4,7 +4,14 @@ import { styled } from "@stitches/react";
 import { violet, blackA, mauve } from "@radix-ui/colors";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 
-import { StrikethroughIcon, TextAlignLeftIcon, TextAlignCenterIcon, TextAlignRightIcon, FontBoldIcon, FontItalicIcon } from "@radix-ui/react-icons";
+import {
+	StrikethroughIcon,
+	TextAlignLeftIcon,
+	TextAlignCenterIcon,
+	TextAlignRightIcon,
+	FontBoldIcon,
+	FontItalicIcon,
+} from "@radix-ui/react-icons";
 
 const StyledToolbar = styled(ToolbarPrimitive.Root, {
 	display: "flex",
@@ -41,7 +48,7 @@ const StyledButton = styled(
 		color: "white",
 		backgroundColor: "#2563eb",
 	},
-	{ "&:hover": { color: "white", backgroundColor: "rgb(37, 99, 235, 0.5)" } }
+	{ "&:hover": { color: "white", backgroundColor: "rgb(37, 99, 235, 0.5)" } },
 );
 
 const StyledLink = styled(
@@ -54,7 +61,7 @@ const StyledLink = styled(
 		justifyContent: "center",
 		alignItems: "center",
 	},
-	{ "&:hover": { backgroundColor: "transparent", cursor: "pointer" } }
+	{ "&:hover": { backgroundColor: "transparent", cursor: "pointer" } },
 );
 
 const StyledSeparator = styled(ToolbarPrimitive.Separator, {
@@ -74,7 +81,10 @@ const StyledToggleItem = styled(ToolbarPrimitive.ToggleItem, {
 	backgroundColor: "white",
 	marginLeft: 2,
 	"&:first-child": { marginLeft: 0 },
-	"&[data-state=on]": { backgroundColor: "rgb(37, 99, 235, 0.5)", color: "rgb(37, 99, 235, 0.5)" },
+	"&[data-state=on]": {
+		backgroundColor: "rgb(37, 99, 235, 0.5)",
+		color: "rgb(37, 99, 235, 0.5)",
+	},
 });
 
 // Exports
@@ -88,7 +98,10 @@ export const ToolbarToggleItem = StyledToggleItem;
 export default function ToolbarR() {
 	return (
 		<LayoutToExperiments title="Toolbar" domain="Radix UI">
-			<SubTitle>A container for grouping a set of controls, such as buttons, toggle groups or dropdown menus.</SubTitle>
+			<SubTitle>
+				A container for grouping a set of controls, such as buttons, toggle
+				groups or dropdown menus.
+			</SubTitle>
 
 			<div className="w-full overflow-x-auto p-1">
 				<Toolbar aria-label="Formatting options">
@@ -99,12 +112,19 @@ export default function ToolbarR() {
 						<ToolbarToggleItem value="italic" aria-label="Italic">
 							<FontItalicIcon />
 						</ToolbarToggleItem>
-						<ToolbarToggleItem value="strikethrough" aria-label="Strike through">
+						<ToolbarToggleItem
+							value="strikethrough"
+							aria-label="Strike through"
+						>
 							<StrikethroughIcon />
 						</ToolbarToggleItem>
 					</ToolbarToggleGroup>
 					<ToolbarSeparator />
-					<ToolbarToggleGroup type="single" defaultValue="center" aria-label="Text alignment">
+					<ToolbarToggleGroup
+						type="single"
+						defaultValue="center"
+						aria-label="Text alignment"
+					>
 						<ToolbarToggleItem value="left" aria-label="Left aligned">
 							<TextAlignLeftIcon />
 						</ToolbarToggleItem>

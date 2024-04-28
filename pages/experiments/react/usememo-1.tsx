@@ -1,7 +1,7 @@
 import {
 	createContext,
 	memo,
-	SetStateAction,
+	type SetStateAction,
 	useContext,
 	useState,
 } from "react";
@@ -96,13 +96,15 @@ function ThemeYeah({ name }: { name: string }) {
 		setTheme(
 			theme === "text-black bg-zinc-50"
 				? "text-white bg-zinc-700"
-				: "text-black bg-zinc-50"
+				: "text-black bg-zinc-50",
 		);
 	}
 	return (
 		<ThemeContext.Provider value={theme}>
 			<div className="border p-2">
-				<button onClick={handleClick}>Switch theme</button>
+				<button type="button" onClick={handleClick}>
+					Switch theme
+				</button>
 				<GreetingTheme name={name} />
 			</div>
 		</ThemeContext.Provider>
@@ -112,7 +114,7 @@ function ThemeYeah({ name }: { name: string }) {
 const GreetingTheme = memo(function GreetingTheme({ name }: { name: string }) {
 	console.log(
 		"Greeting Theme was rendered at",
-		new Date().toLocaleDateString()
+		new Date().toLocaleDateString(),
 	);
 	const theme = useContext(ThemeContext);
 	return (

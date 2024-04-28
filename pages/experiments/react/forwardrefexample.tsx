@@ -1,10 +1,16 @@
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import { Dispatch, forwardRef, SetStateAction, useRef, useState } from "react";
+import {
+	type Dispatch,
+	forwardRef,
+	type SetStateAction,
+	useRef,
+	useState,
+} from "react";
 
 interface propsType {
 	label: string;
-	otherProps?: any;
+	otherProps?: unknown;
 	data: string;
 	onDataChange: Dispatch<SetStateAction<string>>;
 }
@@ -12,6 +18,7 @@ interface propsType {
 const buttonStyle =
 	"rounded-lg border border-zinc-400 bg-zinc-200 px-3 py-1 hover:bg-zinc-300 active:bg-zinc-200";
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const MyInput = forwardRef(function MyInput(props: propsType, ref: any) {
 	const { label, data, onDataChange, ...otherProps } = props;
 
@@ -61,10 +68,17 @@ interface videoType {
 
 const VideoPlayer = forwardRef(function VideoPlayer(
 	{ src, type, width }: videoType,
-	ref: React.LegacyRef<HTMLVideoElement>
+	ref: React.LegacyRef<HTMLVideoElement>,
 ) {
 	return (
-		<video autoPlay={true} controls className="w-full" width={width} ref={ref}>
+		<video
+			muted
+			autoPlay={true}
+			controls
+			className="w-full"
+			width={width}
+			ref={ref}
+		>
 			<source src={src} type={type} />
 		</video>
 	);
@@ -81,10 +95,14 @@ function MyVideoPlayer() {
 	}
 	return (
 		<>
-			<button className={buttonStyle} onClick={() => ref.current?.play()}>
+			<button
+				type="button"
+				className={buttonStyle}
+				onClick={() => ref.current?.play()}
+			>
 				Play
 			</button>
-			<button className={buttonStyle} onClick={handlePause}>
+			<button type="button" className={buttonStyle} onClick={handlePause}>
 				Pause
 			</button>
 			<VideoPlayer

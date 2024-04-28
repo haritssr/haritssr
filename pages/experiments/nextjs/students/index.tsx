@@ -1,7 +1,7 @@
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 import InternalLink from "@/components/InternalLink";
-import { GetStaticProps } from "next";
+import type { GetStaticProps } from "next";
 
 export default function Students({ students }) {
 	return (
@@ -9,7 +9,12 @@ export default function Students({ students }) {
 			<SubTitle>A list of students come from JSONPlaceholder API</SubTitle>
 			<div className="space-y-3 flex flex-col">
 				{students.map((a) => (
-					<InternalLink key={a.id} name={a.name} href={`/experiments/nextjs/students/${a.id}`} />
+					<InternalLink
+						key={a.id}
+						href={`/experiments/nextjs/students/${a.id}`}
+					>
+						{a.name}
+					</InternalLink>
 				))}
 			</div>
 		</LayoutToExperiments>

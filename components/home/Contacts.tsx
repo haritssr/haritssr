@@ -23,7 +23,9 @@ export default function Contacts() {
 							</section>
 						</div>
 						<div className="space-y-1">
-							<div className="text-zinc-800 dark:text-zinc-200 w-full text-center text-lg font-semibold">Harits Syah</div>
+							<div className="text-zinc-800 dark:text-zinc-200 w-full text-center text-lg font-semibold">
+								Harits Syah
+							</div>
 							<ContactList />
 						</div>
 					</div>
@@ -33,9 +35,13 @@ export default function Contacts() {
 			<section className="lg:col-span-2 border border-zinc-300 dark:border-zinc-700 rounded-md">
 				<div className="divide-y divide-zinc-200 dark:divide-zinc-700">
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">Roles :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">
+							Roles :
+						</span>
 						<span className=" col-span-2 flex items-center space-x-2">
-							<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200">Web Product Engineer</span>
+							<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200">
+								Web Product Engineer
+							</span>
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
@@ -52,6 +58,7 @@ export default function Contacts() {
 									strokeWidth="2"
 									viewBox="0 0 24 24"
 								>
+									<title>Exclamation Mark</title>
 									<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
 									<path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
 									<circle cx="12" cy="17" r=".5" />
@@ -62,10 +69,14 @@ export default function Contacts() {
 
 					<div className="grid grid-cols-3 py-2 pl-3.5">
 						<span className="text-white dark:text-zinc-200">Role</span>
-						<span className="text-zinc-800 dark:text-zinc-200 col-span-2 text-tiny sm:text-base">Math Physics Teacher</span>
+						<span className="text-zinc-800 dark:text-zinc-200 col-span-2 text-tiny sm:text-base">
+							Math Physics Teacher
+						</span>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">At :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">
+							At :
+						</span>
 						<span className="text-zinc-800 col-span-2">
 							<cite className="group not-italic">
 								<a
@@ -77,7 +88,6 @@ export default function Contacts() {
 								>
 									<span className="flex items-center">
 										<span className="text-tiny sm:text-base ">Haris Lab</span>
-										{/* External Link Icon */}
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											className="h-4 w-4 ml-1  text-zinc-400 mt-0.5"
@@ -86,6 +96,7 @@ export default function Contacts() {
 											stroke="currentColor"
 											strokeWidth={1.7}
 										>
+											<title>External Link Icon</title>
 											<path
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -98,7 +109,9 @@ export default function Contacts() {
 						</span>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">Email :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">
+							Email :
+						</span>
 						<a
 							title="Send me an email"
 							href="mailto:haritssr@gmail.com"
@@ -108,7 +121,9 @@ export default function Contacts() {
 						</a>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">Location :</span>
+						<span className="text-zinc-800 text-tiny sm:text-base dark:text-zinc-200 font-medium">
+							Location :
+						</span>
 						<a
 							target="_blank"
 							rel="noopener noreferrer"
@@ -120,7 +135,7 @@ export default function Contacts() {
 						</a>
 					</div>
 					<div className="grid grid-cols-3 py-2 pl-3.5">
-						<InternalLink href="/about" name="Details" />
+						<InternalLink href="/about">Details</InternalLink>
 					</div>
 				</div>
 			</section>

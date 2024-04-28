@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-// const { fontFamily } = require("tailwindcss/defaultTheme");
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 module.exports = {
 	darkMode: "class",
@@ -40,6 +40,9 @@ module.exports = {
 			},
 			zIndex: {
 				90: "90",
+			},
+			fontFamily: {
+				sans: ["Inter", ...fontFamily.sans],
 			},
 			fontSize: {
 				tiny: ".900rem",

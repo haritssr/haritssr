@@ -8,14 +8,24 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SidebarBlog from "./SidebarBlog";
 import TableOfContents from "./TableOfContent";
 
-export async function generateMetadata({ params }): Promise<Metadata | undefined> {
+export async function generateMetadata({
+	params,
+}): Promise<Metadata | undefined> {
 	const post = allBlogs.find((post) => post.slug === params.slug);
 	if (!post) {
 		return;
 	}
 
-	const { title, publishedAt: publishedTime, summary: description, image, slug } = post;
-	const ogImage = image ? `https://haritssr.com${image}` : `https://haritssr.com/og?title=${title}`;
+	const {
+		title,
+		publishedAt: publishedTime,
+		summary: description,
+		image,
+		slug,
+	} = post;
+	const ogImage = image
+		? `https://haritssr.com${image}`
+		: `https://haritssr.com/og?title=${title}`;
 
 	return {
 		title,
@@ -103,7 +113,9 @@ export default function Blog({ params }) {
 				<Mdx code={post.body.code} />
 			</div>
 			{/* Table of Content */}
-			<TableOfContents title={post.title.toLocaleLowerCase().split(" ").join("-")} />
+			<TableOfContents
+				title={post.title.toLocaleLowerCase().split(" ").join("-")}
+			/>
 		</div>
 	);
 }

@@ -5,7 +5,7 @@ import ExternalLink from "@/components/ExternalLink";
 
 //For ComboboxExample1
 import { Dialog, Combobox, Transition } from "@headlessui/react";
-import { Fragment, SetStateAction, useState, useEffect } from "react";
+import { Fragment, type SetStateAction, useState, useEffect } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import ExplanationList from "@/components/ExplanationList";
@@ -51,7 +51,11 @@ const ComboboxExample1 = ({ projects }) => {
 	const [query, setQuery] = useState("");
 
 	useEffect(() => {
-		function onKeydown(event: { key: string; metaKey: any; ctrlKey: any }) {
+		function onKeydown(event: {
+			key: string;
+			metaKey: unknown;
+			ctrlKey: unknown;
+		}) {
 			if (event.key === "b" && (event.metaKey || event.ctrlKey)) {
 				setIsOpen(!isOpen);
 			}
@@ -66,8 +70,8 @@ const ComboboxExample1 = ({ projects }) => {
 		? projects.filter(
 				(project: { domain: string; team: string }) =>
 					project.domain.toLowerCase().includes(query.toLowerCase()) ||
-					project.team.toLowerCase().includes(query.toLowerCase())
-		  )
+					project.team.toLowerCase().includes(query.toLowerCase()),
+			)
 		: [];
 
 	return (

@@ -3,7 +3,6 @@ import { GitHubIcon } from "./Icons";
 import Image from "next/image";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Destination from "@/components/Destination";
-import { DarkModeToggle } from "./DarkMode";
 
 export default function GlobalNavigation() {
 	return (
@@ -11,8 +10,19 @@ export default function GlobalNavigation() {
 			<div className="mx-auto flex max-w-5xl justify-between items-center px-3 py-2.5 lg:px-0">
 				{/* Harits Syah */}
 				<div className="flex items-center space-x-2 group">
-					<Image alt="Harits Syah" src="/Icons/haritssr.svg" height={20} width={20} priority className="h-5 w-5" />
-					<Link href="/" className=" text-zinc-800 dark:text-zinc-100" aria-label="site logo">
+					<Image
+						alt="Harits Syah"
+						src="/Icons/haritssr.svg"
+						height={20}
+						width={20}
+						priority
+						className="h-5 w-5"
+					/>
+					<Link
+						href="/"
+						className=" text-zinc-800 dark:text-zinc-100"
+						aria-label="site logo"
+					>
 						Harits Syah
 					</Link>
 				</div>
@@ -27,10 +37,9 @@ export default function GlobalNavigation() {
 				</div>
 
 				<div className="flex items-center space-x-3">
-					<a title="Search: Coming soon">
+					<div title="Search: Coming soon">
 						<MagnifyingGlassIcon className="h-5 w-5 text-zinc-800 dark:text-zinc-100 hover:text-zinc-400 cursor-pointer" />
-					</a>
-					<DarkModeToggle />
+					</div>
 					{/* Source to GitHub */}
 					<a
 						className="flex items-center space-x-2 group"

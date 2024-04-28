@@ -23,7 +23,7 @@ export default function ScrollTitle() {
 					<GlobalTools />
 				</div>
 			</nav>
-			<h1 ref={ref} className={`mt-20 text-3xl font-bold`}>
+			<h1 ref={ref} className="mt-20 text-3xl font-bold">
 				Title
 			</h1>
 			<p className="text-zinc-600">
@@ -97,6 +97,7 @@ const Left = () => {
 			stroke="currentColor"
 			className="h-6 w-6"
 		>
+			<title>Left Icon</title>
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"
@@ -116,6 +117,7 @@ const GlobalTools = () => {
 			stroke="currentColor"
 			className="h-6 w-6"
 		>
+			<title>Global Tools Icon</title>
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"

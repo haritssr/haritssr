@@ -6,7 +6,10 @@ import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
-const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: string) => Promise<void> }) => {
+const ToastCopy = ({
+	topic,
+	handleCopy,
+}: { topic: string; handleCopy: (page: string) => Promise<void> }) => {
 	const [open, setOpen] = React.useState(false);
 	const eventDateRef = React.useRef(new Date());
 	const timerRef = React.useRef(0);
@@ -21,20 +24,23 @@ const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: st
 		return new Date(inOneWeek);
 	}
 
+	const ButtonHandler = () => {
+		handleCopy(`haritssr.com/${topic.toLowerCase().split(" ").join("-")}`);
+		setOpen(false);
+		window.clearTimeout(timerRef.current);
+		timerRef.current = window.setTimeout(() => {
+			eventDateRef.current = oneWeekAway();
+			setOpen(true);
+		}, 100);
+	};
+
 	return (
 		<Toast.Provider swipeDirection="right">
 			<div
-				title="Copy this section page"
+				title="Copy this page section"
 				className="cursor-pointer p-[5px]"
-				onClick={() => {
-					handleCopy(`haritssr.com/${topic.toLowerCase().split(" ").join("-")}`);
-					setOpen(false);
-					window.clearTimeout(timerRef.current);
-					timerRef.current = window.setTimeout(() => {
-						eventDateRef.current = oneWeekAway();
-						setOpen(true);
-					}, 100);
-				}}
+				onClick={ButtonHandler}
+				onKeyDown={ButtonHandler}
 			>
 				<svg
 					className="-rotate-45 text-zinc-400 h-4 w-4 hover:text-zinc-800 stroke-2"
@@ -45,6 +51,7 @@ const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: st
 					strokeLinejoin="round"
 					viewBox="0 0 24 24"
 				>
+					<title>Chain Icon</title>
 					<path d="M15 7h3a5 5 0 015 5 5 5 0 01-5 5h-3m-6 0H6a5 5 0 01-5-5 5 5 0 015-5h3" />
 					<path d="M8 12h8" />
 				</svg>
@@ -55,7 +62,9 @@ const ToastCopy = ({ topic, handleCopy }: { topic: string; handleCopy: (page: st
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">Link copied to clipboard</Toast.Title>
+				<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
+					Link copied to clipboard
+				</Toast.Title>
 				<Toast.Description asChild>
 					<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.com/${topic
 						.toLowerCase()
@@ -86,7 +95,7 @@ export default function HomeSectionWrapper({
 	async function handleCopy(page: string) {
 		try {
 			await navigator.clipboard.writeText(page);
-		} catch (err: any) {
+		} catch (err: unknown) {
 			console.log(err);
 		}
 	}
@@ -98,7 +107,10 @@ export default function HomeSectionWrapper({
 						<>
 							<div className="flex items-center justify-between w-full">
 								<div className="flex items-center space-x-2">
-									<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200">
+									<Link
+										href={`/#${id}`}
+										className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200"
+									>
 										{topic}
 									</Link>
 									<div>
@@ -117,12 +129,16 @@ export default function HomeSectionWrapper({
 										{open ? (
 											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 dark:hover:bg-zinc-800 border-zinc-300 dark:border-zinc-600">
 												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700 dark:text-zinc-300" />
-												<span className="text-tiny hidden sm:block text-zinc-700 dark:text-zinc-300 select-none">Show Less</span>
+												<span className="text-tiny hidden sm:block text-zinc-700 dark:text-zinc-300 select-none">
+													Show Less
+												</span>
 											</div>
 										) : (
 											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border border-zinc-800 bg-zinc-800 text-white hover:bg-zinc-700">
 												<ChevronDownIcon className="h-4 w-4 stroke-2" />
-												<span className="text-tiny hidden sm:block select-none">Show More</span>
+												<span className="text-tiny hidden sm:block select-none">
+													Show More
+												</span>
 											</div>
 										)}
 									</Disclosure.Button>
@@ -131,7 +147,9 @@ export default function HomeSectionWrapper({
 							{/* body */}
 							<Disclosure.Panel>
 								<div className="mb-16">
-									<div className="my-4 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">{explanation}</div>
+									<div className="my-4 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">
+										{explanation}
+									</div>
 									<div className={className}>{children}</div>
 								</div>
 							</Disclosure.Panel>
@@ -143,7 +161,10 @@ export default function HomeSectionWrapper({
 					{/* header */}
 					<section className="mb-4 flex items-center justify-between">
 						<div className="flex items-center space-x-2">
-							<Link href={`/#${id}`} className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200">
+							<Link
+								href={`/#${id}`}
+								className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200"
+							>
 								{topic}
 							</Link>
 							<div>
@@ -153,7 +174,9 @@ export default function HomeSectionWrapper({
 					</section>
 					{/* body */}
 					<div className="mb-16">
-						<div className="mb-4 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">{explanation}</div>
+						<div className="mb-4 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">
+							{explanation}
+						</div>
 						<div className={className}>{children}</div>
 					</div>
 				</>
