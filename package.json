@@ -101,6 +101,7 @@
 		"ts-node": "^10.9.2",
 		"tslib": "^2.4.1",
 		"type-coverage": "^2.24.1",
+		"update-browserslist-db": "^1.0.13",
 		"use-context-selector": "^1.4.1",
 		"use-immer": "^0.7.0"
 	},
