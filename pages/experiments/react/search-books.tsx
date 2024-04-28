@@ -17,6 +17,7 @@ interface DataType {
 	year: number;
 }
 
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
 const Search2: React.FC<{}> = (): JSX.Element => {
 	const [filteredData, setFilteredData] = useState<DataType[]>([]);
 	const [wordEntered, setWordEntered] = useState<string>("");
@@ -29,7 +30,10 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 
 	const handleFilter = ({
 		target,
-	}: React.ChangeEvent<HTMLInputElement>): void => {
+	}: React.ChangeEvent<HTMLInputElement>):
+		| unknown
+		| React.SetStateAction<DataType[]>
+		| undefined => {
 		const searchWord: string = target.value.toLowerCase();
 		setWordEntered(searchWord);
 

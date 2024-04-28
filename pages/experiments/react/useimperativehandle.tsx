@@ -2,6 +2,7 @@ import SubTitle from "@/components/SubTitle";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useRef, useImperativeHandle, forwardRef } from "react";
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const MyInput = forwardRef(function MyInput(props, ref: any) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,11 +43,14 @@ function SomeApp() {
 	);
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const AddComments = forwardRef(function AddComents(props, ref: any) {
 	return <input type="text" placeholder="yada yada" ref={ref} />;
 });
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const CommentsList = forwardRef(function CommentList(props, ref: any) {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const divRef = useRef<any>(null);
 
 	useImperativeHandle(
@@ -74,6 +78,7 @@ const CommentsList = forwardRef(function CommentList(props, ref: any) {
 	);
 });
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const Post = forwardRef(function Post(props, ref: any) {
 	const commentListRef = useRef<unknown>(null);
 	const addCommentRef = useRef<HTMLInputElement>(null);
@@ -82,7 +87,7 @@ const Post = forwardRef(function Post(props, ref: any) {
 		() => {
 			return {
 				scrollAndFocusAddComment() {
-					commentListRef.current?.scrollToBottom();
+					// commentListRef.current?.scrollToBottom();
 					addCommentRef.current?.focus();
 				},
 			};
@@ -99,6 +104,7 @@ const Post = forwardRef(function Post(props, ref: any) {
 });
 
 function Yada() {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const buttonRef = useRef<any>(null);
 	function handleClick() {
 		buttonRef.current?.scrollAndFocusAddComment();

@@ -21,6 +21,7 @@ function useDebounce(value: string, delay: number) {
 
 export default function SearchTable() {
 	const [query, setQuery] = useState<string>("");
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const [users, setUsers] = useState<Array<any>>([]);
 
 	const debouncedSearch = useDebounce(query, 1000);

@@ -59,7 +59,7 @@ function List<ListItem>({
 	return (
 		<ul className={className}>
 			{items.map((item, index) => (
-				<li key={item}>{render(item)}</li>
+				<li key={`${index}${item}`}>{render(item)}</li>
 			))}
 		</ul>
 	);
