@@ -26,7 +26,7 @@ const nextConfig = {
 			},
 			{
 				protocol: "https",
-				hostname: "ws-public.interpol.intt",
+				hostname: "ws-public.interpol.int",
 				port: "",
 				pathname: "/**",
 			},
