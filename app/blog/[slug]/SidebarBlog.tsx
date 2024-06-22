@@ -11,9 +11,9 @@ export default function SidebarBlog() {
 	const lastSegment = segments[segments.length - 1];
 
 	return (
-		<div className="hidden sm:block sm:col-span-1 border-r border-b border-l dark:border-zinc-700">
+		<div className="hidden sm:block sm:col-span-1 border-r border-b border-l">
 			<Link
-				className="block font-medium px-4 py-2 sticky top-[45px] bg-white dark:bg-zinc-800 border-b dark:border-zinc-700"
+				className="block font-medium px-4 py-2 sticky top-[45px] bg-white border-b"
 				href="/blog"
 			>
 				Blog
@@ -35,7 +35,7 @@ export default function SidebarBlog() {
 								className={`${
 									lastSegment === article.slug
 										? "text-white  bg-action"
-										: "text-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
+										: "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
 								}  px-2 py-1 rounded-md text-sm`}
 							>
 								{article.slug

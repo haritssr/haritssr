@@ -47,8 +47,8 @@ function AccordionComponents({ title, children }) {
 			<Accordion.Item value="item-1">
 				<Accordion.Header className="group">
 					<Accordion.Trigger className="flex w-full items-center justify-between rounded-t-md rounded-b-md border border-zinc-400 bg-zinc-200 px-2.5  py-2 text-left text-tiny font-medium text-zinc-800 hover:bg-zinc-100 group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-100">
-						<div className="dark:text-white">{title}</div>
-						<ChevronDownIcon className="h-5 w-5 text-zinc-800 dark:text-white group-rdx-state-open:rotate-180 duration-200" />
+						<div>{title}</div>
+						<ChevronDownIcon className="h-5 w-5 text-zinc-800 group-rdx-state-open:rotate-180 duration-200" />
 					</Accordion.Trigger>
 				</Accordion.Header>
 

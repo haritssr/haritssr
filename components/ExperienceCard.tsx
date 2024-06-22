@@ -21,7 +21,7 @@ export default function ExperienceCard({
 	industry,
 }: ExperienceCardTypes) {
 	return (
-		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 selection:mx-auto group dark:shadow-none">
+		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 selection:mx-auto group">
 			{/* Header + Title + Explanation */}
 			<section className=" flex flex-col justify-between p-3 space-y-2">
 				<div className="flex justify-between items-start">
@@ -38,7 +38,7 @@ export default function ExperienceCard({
 						href={href}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center space-x-1.5 px-2.5 py-[3px] rounded-md  text-zinc-600 hover:text-zinc-700 hover:bg-zinc-100 cursor-pointer border border-zinc-400/70 justify-center bg-zinc-50  dark:text-zinc-300  dark:border-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+						className="flex items-center space-x-1.5 px-2.5 py-[3px] rounded-md  text-zinc-600 hover:text-zinc-700 hover:bg-zinc-50 cursor-pointer border border-zinc-300 justify-center"
 					>
 						<p className="text-sm">Visit</p>
 						<svg
@@ -58,15 +58,15 @@ export default function ExperienceCard({
 						</svg>
 					</a>
 				</div>
-				<div className="truncate font-semibold text-zinc-800 text-lg dark:text-zinc-200">
+				<div className="truncate font-semibold text-zinc-800 text-lg">
 					{title}
 				</div>
 
-				<div className="text-zinc-800 dark:text-zinc-400">{description}</div>
+				<div className="text-zinc-800">{description}</div>
 
 				{/* Site Link (Text Only) */}
 				<cite className="group not-italic">
-					<span className="text-base text-zinc-500/60 dark:text-zinc-500">
+					<span className="text-base text-zinc-500/60">
 						{href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
 					</span>
 				</cite>
@@ -76,7 +76,7 @@ export default function ExperienceCard({
 				<Link
 					passHref
 					href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-					className="py-1.5 text-zinc-100 dark:text-zinc-800 dark:bg-zinc-200 bg-zinc-800 hover:bg-zinc-700 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center font-mediumd dark:hover:bg-zinc-300 font-medium"
+					className="py-1.5 text-zinc-800 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-300 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center font-medium"
 				>
 					<p>Read Case Study</p>
 				</Link>

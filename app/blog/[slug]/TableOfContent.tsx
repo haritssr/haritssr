@@ -7,9 +7,9 @@ export default function TableOfContents({ title }: { title: string }) {
 	const articleTOC = generateTOC(`../haritssr/content/${title}.mdx`);
 
 	return (
-		<section className="sm:col-span-1 sm:border-r sm:border-b hidden sm:block dark:border-zinc-700">
+		<section className="sm:col-span-1 sm:border-r sm:border-b hidden sm:block">
 			<div className="sticky top-[45px]">
-				<div className="py-2 text-zinc-400 dark:text-zinc-200 bg-white dark:bg-zinc-800 dark:border-zinc-700 border-b px-5">
+				<div className="py-2 text-zinc-400 bg-white border-b px-5">
 					In This Page
 				</div>
 
@@ -18,7 +18,7 @@ export default function TableOfContents({ title }: { title: string }) {
 						<Link
 							key={heading}
 							href={`#${heading.split(" ").join("-")}`}
-							className="block text-zinc-400 dark:text-zinc-400 hover:underline text-sm"
+							className="block text-zinc-400 hover:underline text-sm"
 						>
 							{capitalizeFirstLetter(heading)}
 						</Link>
