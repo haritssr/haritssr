@@ -16,9 +16,9 @@ export const TechnologyCard = (
 	return (
 		<div
 			{...props}
-			className="h-fit overflow-hidden rounded-md border border-zinc-300 dark:border-zinc-700"
+			className="h-fit overflow-hidden rounded-md border border-zinc-300"
 		>
-			<div className="truncate px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 text-tiny font-medium text-zinc-700 sm:text-base border-b border-zinc-300">
+			<div className="truncate px-3 py-1.5 bg-zinc-50 text-tiny font-medium text-zinc-700 sm:text-base border-b border-zinc-300">
 				{domain}
 			</div>
 			<div className="">
@@ -30,7 +30,7 @@ export const TechnologyCard = (
 							href={href}
 							target="_blank"
 							rel="noreferrer noopener"
-							className="group flex w-auto items-center justify-between space-x-2 py-[7px] px-3 hover:bg-zinc-100/50 dark:hover:bg-zinc-700/60"
+							className="group flex w-auto items-center justify-between space-x-2 py-[7px] px-3 hover:bg-zinc-100/50"
 						>
 							<section className="flex items-center space-x-2 overflow-hidden">
 								<Image
@@ -42,14 +42,14 @@ export const TechnologyCard = (
 									blurDataURL={imgSrc}
 									// placeholder='blur'
 								/>
-								<div className="truncate text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200">
+								<div className="truncate text-zinc-500 group-hover:text-zinc-700">
 									{name}
 								</div>
 							</section>
 							{/* External Link Icon */}
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="hidden h-4 w-4 text-white dark:text-zinc-400 dark:group-hover:text-zinc-400 group-hover:text-zinc-800 sm:block"
+								className="hidden h-4 w-4 text-white group-hover:text-zinc-800 sm:block"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"

@@ -109,7 +109,7 @@ export default function HomeSectionWrapper({
 								<div className="flex items-center space-x-2">
 									<Link
 										href={`/#${id}`}
-										className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200"
+										className=" text-2xl sm:text-3xl font-bold text-zinc-800"
 									>
 										{topic}
 									</Link>
@@ -127,9 +127,9 @@ export default function HomeSectionWrapper({
 									</Link>
 									<Disclosure.Button>
 										{open ? (
-											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 dark:hover:bg-zinc-800 border-zinc-300 dark:border-zinc-600 sm:hidden">
-												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700 dark:text-zinc-300" />
-												<span className="text-tiny hidden sm:block text-zinc-700 dark:text-zinc-300 select-none">
+											<div className="flex items-center space-x-1.5 px-1.5 sm:pl-2.5 py-1.5 sm:pr-3.5 sm:py-[3px] rounded-full border hover:bg-zinc-50 border-zinc-300 sm:hidden">
+												<ChevronUpIcon className="h-4 w-4 stroke-2 text-zinc-700" />
+												<span className="text-tiny hidden sm:block text-zinc-700 select-none">
 													Show Less
 												</span>
 											</div>
@@ -147,7 +147,7 @@ export default function HomeSectionWrapper({
 							{/* body */}
 							<Disclosure.Panel>
 								<div className="mb-16">
-									<div className="mt-4 mb-6 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">
+									<div className="mt-4 mb-6 text-lg sm:text-xl text-zinc-800 select-none">
 										{explanation}
 									</div>
 									<div className={className}>{children}</div>
@@ -163,7 +163,7 @@ export default function HomeSectionWrapper({
 						<div className="flex items-center space-x-2">
 							<Link
 								href={`/#${id}`}
-								className=" text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200"
+								className=" text-2xl sm:text-3xl font-bold text-zinc-800"
 							>
 								{topic}
 							</Link>
@@ -174,7 +174,7 @@ export default function HomeSectionWrapper({
 					</section>
 					{/* body */}
 					<div className="mb-16">
-						<div className="mb-4 text-lg sm:text-xl text-zinc-800 dark:text-zinc-300 select-none">
+						<div className="mb-4 text-lg sm:text-xl text-zinc-800 select-none">
 							{explanation}
 						</div>
 						<div className={className}>{children}</div>

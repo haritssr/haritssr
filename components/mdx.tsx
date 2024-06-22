@@ -23,7 +23,7 @@ const CustomLink = (props) => {
 		<a
 			target="_blank"
 			rel="noopener noreferrer"
-			className="text-zinc-800 dark:text-zinc-300"
+			className="text-zinc-800"
 			{...props}
 		/>
 	);
