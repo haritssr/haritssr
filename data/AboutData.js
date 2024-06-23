@@ -34,6 +34,11 @@ export const AboutData = [
 			"https://www.raycast.com",
 		],
 	},
+	{
+		section: "My Philosophy",
+		description: "Point of view of the world.",
+		points: ["Optimistic Nihilism", "Effective Accelerationism (e/acc)"],
+	},
 ];
 
 export const ContactData = {
