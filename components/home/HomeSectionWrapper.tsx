@@ -25,16 +25,11 @@ export default function HomeSectionWrapper({
 				<Disclosure as="div" defaultOpen>
 					{({ open }) => (
 						<>
+							{/* header */}
 							<div className="flex items-center justify-between w-full">
-								<div className="flex items-center space-x-2">
-									<Link
-										href={`/#${id}`}
-										className=" text-2xl sm:text-3xl font-bold text-zinc-800"
-									>
-										{topic}
-									</Link>
+								<div className="select-none text-2xl sm:text-3xl font-bold text-zinc-800">
+									{topic}
 								</div>
-
 								<div className="flex items-center space-x-2 sm:space-x-0">
 									<Link
 										href={`/${id}`}
@@ -77,13 +72,8 @@ export default function HomeSectionWrapper({
 				<>
 					{/* header */}
 					<section className="flex items-center justify-between">
-						<div className="flex items-center space-x-2">
-							<Link
-								href={`/#${id}`}
-								className=" text-2xl sm:text-3xl font-bold text-zinc-800"
-							>
-								{topic}
-							</Link>
+						<div className="select-none text-2xl sm:text-3xl font-bold text-zinc-800">
+							{topic}
 						</div>
 					</section>
 					{/* body */}
