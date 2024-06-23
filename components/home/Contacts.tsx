@@ -5,33 +5,26 @@ import ContactList from "../ContactList";
 export default function Contacts() {
 	return (
 		<section className="grid grid-cols-1 lg:grid-cols-4 md:items-center gap-8 md:gap-5 pt-5 mb-16">
-			<section className="lg:col-span-2 space-y-5 md:mb-0 rounded-md lg:h-full lg:self-center lg:grid lg:border border-zinc-300">
-				<div className="grid rounded-md">
-					<div className="self-center space-y-2">
-						<div className="justify-center w-full flex ">
-							<section className="flex justify-center select-none">
-								<Image
-									priority
-									src="/images/blur.jpg"
-									height="165"
-									width="165"
-									className="z-10 rounded-full aspect-ratio h-32 w-32"
-									alt="Harits Syah"
-									blurDataURL="/images/blur.jpg"
-									// placeholder='blur'
-								/>
-							</section>
-						</div>
-						<div className="space-y-1">
-							<div className="text-zinc-800 w-full text-center text-lg font-semibold">
-								Harits Syah
-							</div>
-							<ContactList />
-						</div>
+			<section className="lg:col-span-2 md:mb-0 rounded-md lg:h-full lg:border border-zinc-300 grid grid-cols-2">
+				<div className="flex-col flex self-center">
+					<section className="select-none justify-center flex">
+						<Image
+							priority
+							src="/images/blur.jpg"
+							height="165"
+							width="165"
+							className="z-10 rounded-full aspect-ratio h-28 w-28 mb-4"
+							alt="Harits Syah"
+							blurDataURL="/images/blur.jpg"
+							// placeholder='blur'
+						/>
+					</section>
+					<div className="text-zinc-800 font-semibold text-center text-lg">
+						Harits Syah
 					</div>
 				</div>
+				<ContactList />
 			</section>
-			{/* lg:pt-2 lg:px-4 */}
 			<section className="lg:col-span-2 border border-zinc-300 rounded-md">
 				<div className="divide-y divide-zinc-200">
 					<div className="grid grid-cols-3 py-2 pl-3.5">
