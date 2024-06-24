@@ -11,7 +11,7 @@ export default function TitleBack({
 		<div className="py-8">
 			<button
 				type="button"
-				className="group mb-5 flex flex-row items-center sm:-ml-5"
+				className="group mb-5 flex flex-row items-center"
 				onClick={() => history.back()}
 			>
 				<ChevronLeftIcon className="h-5 w-5 text-action" strokeWidth={2} />
