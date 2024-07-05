@@ -5,7 +5,7 @@ import ContactList from "../ContactList";
 export default function Contacts() {
 	return (
 		<section className="grid grid-cols-1 lg:grid-cols-4 md:items-center gap-8 md:gap-5 pt-5 mb-16">
-			<section className="lg:col-span-2 md:mb-0 rounded-md lg:h-full lg:border border-zinc-300 grid grid-cols-2">
+			<section className="lg:col-span-2 md:mb-0 rounded-md lg:h-full lg:border border-zinc-300 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-0">
 				<div className="flex-col flex self-center">
 					<section className="select-none justify-center flex">
 						<Image
@@ -19,7 +19,7 @@ export default function Contacts() {
 							// placeholder='blur'
 						/>
 					</section>
-					<div className="text-zinc-800 font-semibold text-center text-lg">
+					<div className="text-zinc-800 font-semibold text-center text-xl">
 						Harits Syah
 					</div>
 				</div>
@@ -32,7 +32,7 @@ export default function Contacts() {
 							Roles :
 						</span>
 						<span className=" col-span-2 flex items-center space-x-2">
-							<span className="text-zinc-800 text-tiny sm:text-base">
+							<span className="text-zinc-600 text-tiny sm:text-base">
 								Web Product Engineer
 							</span>
 							<a
@@ -62,7 +62,7 @@ export default function Contacts() {
 
 					<div className="grid grid-cols-3 py-2 pl-3.5">
 						<span className="text-white">Role</span>
-						<span className="text-zinc-800 col-span-2 text-tiny sm:text-base">
+						<span className="text-zinc-600 col-span-2 text-tiny sm:text-base">
 							Math Physics Teacher
 						</span>
 					</div>
@@ -77,7 +77,7 @@ export default function Contacts() {
 									href="https://www.harislab.com"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="group inline-block w-fit cursor-pointer items-center text-zinc-800 hover:underline group-hover:text-zinc-800"
+									className="group inline-block w-fit cursor-pointer items-center text-zinc-600 hover:underline group-hover:text-zinc-800"
 								>
 									<span className="flex items-center">
 										<span className="text-tiny sm:text-base ">Haris Lab</span>
@@ -108,7 +108,7 @@ export default function Contacts() {
 						<a
 							title="Send me an email"
 							href="mailto:haritssr@gmail.com"
-							className="text-zinc-800 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
+							className="text-zinc-600 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
 						>
 							haritssr@gmail.com
 						</a>
@@ -122,7 +122,7 @@ export default function Contacts() {
 							rel="noopener noreferrer"
 							title="See South Tangerang at Google Maps"
 							href="https://www.google.com/maps/place/Tangerang+Selatan,+Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x8706481c2c4aafe4?sa=X&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgPEAA&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgQEAI"
-							className="text-zinc-800 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
+							className="text-zinc-600 col-span-2 hover:underline hover:text-zinc-800 text-tiny sm:text-base"
 						>
 							South Tangerang, Indonesia
 						</a>
