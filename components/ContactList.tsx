@@ -16,7 +16,7 @@ export default function ContactList() {
 								target="_blank"
 								rel="noreferrer noopener"
 								href={each.link}
-								className="flex items-center space-x-2 px-2 py-1 rounded sm:bg-zinc-100/50 sm:hover:bg-zinc-200/50 sm:mr-1.5 border border-zinc-300"
+								className="flex items-center space-x-2 px-2 py-1 rounded sm:hover:bg-zinc-100 sm:mr-1.5 border border-zinc-300"
 							>
 								<Image
 									alt={each.link}
@@ -27,12 +27,12 @@ export default function ContactList() {
 									title={each.link}
 								/>
 
-								<span>{each.name}</span>
+								<span className="text-zinc-700">{each.link.substring(12)}</span>
 							</a>
 						) : each.link.includes("@") ? (
 							<a
 								href={`mailto:${each.link}`}
-								className="flex items-center space-x-2 px-2 py-1 rounded sm:bg-zinc-100/50 sm:hover:bg-zinc-200/50 sm:mr-1.5 border border-zinc-300"
+								className="flex items-center space-x-2 px-2 py-1 rounded sm:hover:bg-zinc-100 sm:mr-1.5 border border-zinc-300"
 							>
 								<Image
 									alt={each.link}
@@ -42,7 +42,7 @@ export default function ContactList() {
 									className="h-4 w-4"
 									title={each.link}
 								/>
-								<span>{each.name}</span>
+								<span className="text-zinc-700">{each.link}</span>
 							</a>
 						) : null}
 					</li>
