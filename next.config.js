@@ -1,7 +1,6 @@
 const { withContentlayer } = require("next-contentlayer");
 
 const nextConfig = {
-	transpilePackages: ["geist"],
 	reactStrictMode: false,
 	images: {
 		formats: ["image/avif", "image/webp"],
