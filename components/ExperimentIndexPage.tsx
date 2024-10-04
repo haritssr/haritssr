@@ -97,11 +97,11 @@ const BackToExperiments = ({ inView }: { inView: unknown }) => {
 			<span className=" inline-block w-full">
 				<span className="group flex items-center">
 					<ChevronLeftIcon
-						className=" text-action sm:group-hover:text-[#2563eb]/90 h-5 w-5"
+						className=" text-blue-500 sm:group-hover:text-[#2563eb]/90 h-5 w-5"
 						strokeWidth={2}
 					/>
 					<span
-						className={`-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base ${
+						className={`-ml-0.5 truncate text-blue-500 sm:group-hover:underline sm:group-hover:text-[#2563eb]/90 text-base ${
 							inView ? "block" : "hidden"
 						}`}
 					>
@@ -145,12 +145,12 @@ const PageSource = ({ href, inView }: { href: string; inView: unknown }) => {
 					href={href}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="flex w-fit cursor-pointer items-center text-action hover:text-[#2563eb]/90"
+					className="flex w-fit cursor-pointer items-center text-blue-500 hover:text-[#2563eb]/90"
 				>
-					<span className="mr-2 hidden sm:inline-block text-action group-hover:text-[#2563eb]/90">
+					<span className="mr-2 hidden sm:inline-block text-blue-500 group-hover:text-[#2563eb]/90">
 						Source
 					</span>{" "}
-					<GitHubIcon className="h-5 w-5 cursor-pointer text-action group-hover:text-[#2563eb]/90" />
+					<GitHubIcon className="h-5 w-5 cursor-pointer text-blue-500 group-hover:text-[#2563eb]/90" />
 				</a>
 			</cite>
 		</div>

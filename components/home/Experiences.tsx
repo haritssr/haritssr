@@ -9,7 +9,6 @@ export default function Experiences() {
 			topic="Experiences"
 			className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0"
 			explanation="Detail informations on how projects I belong to being handled."
-			collapsible
 		>
 			{ExperiencesData.map((d) => (
 				<ExperienceCard

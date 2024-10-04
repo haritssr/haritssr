@@ -84,7 +84,7 @@ const DialogExample1 = () => {
 					<div className="flex w-full justify-end">
 						<button
 							type="button"
-							className="rounded-md px-2 py-1 text-blue-500 hover:bg-zinc-100 hover:text-action"
+							className="rounded-md px-2 py-1 text-blue-500 hover:bg-zinc-100 hover:text-blue-500"
 							onClick={() => setIsOpen(false)}
 						>
 							Close
@@ -136,7 +136,7 @@ const DialogExample2 = () => {
 						<div className="flex w-full justify-end">
 							<button
 								type="button"
-								className="rounded-md px-2 py-1 text-blue-500 hover:bg-zinc-100 hover:text-action"
+								className="rounded-md px-2 py-1 text-blue-500 hover:bg-zinc-100 hover:text-blue-500"
 								onClick={() => setIsOpen(false)}
 							>
 								Close

@@ -21,7 +21,7 @@ export default function ExperienceCard({
 	industry,
 }: ExperienceCardTypes) {
 	return (
-		<div className="flex w-full flex-col justify-between overflow-hidden rounded-lg border border-zinc-300 selection:mx-auto group">
+		<div className="flex w-full flex-col justify-between overflow-hidden rounded-xl border border-zinc-300 selection:mx-auto group">
 			{/* Header + Title + Explanation */}
 			<section className=" flex flex-col justify-between p-3 space-y-2">
 				<div className="flex justify-between items-start">
@@ -58,15 +58,15 @@ export default function ExperienceCard({
 						</svg>
 					</a>
 				</div>
-				<div className="truncate font-semibold text-zinc-800 text-lg">
+				<div className="truncate font-medium text-zinc-800 text-lg">
 					{title}
 				</div>
 
-				<div className="text-zinc-800">{description}</div>
+				<div className="text-zinc-600">{description}</div>
 
 				{/* Site Link (Text Only) */}
 				<cite className="group not-italic">
-					<span className="text-base text-zinc-500/60">
+					<span className="text-base text-zinc-400 font-light">
 						{href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
 					</span>
 				</cite>

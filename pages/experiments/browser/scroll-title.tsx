@@ -8,7 +8,7 @@ export default function ScrollTitle() {
 		<LayoutToExperiments domain="Browser" title="Scroll Title">
 			<SubTitle>Scroll Title iOS</SubTitle>
 			<nav className="sticky top-[90px] flex justify-between bg-blue-100/80 p-2 saturate-150 backdrop-blur">
-				<div className="flex w-1/3 items-center space-x-1 text-action">
+				<div className="flex w-1/3 items-center space-x-1 text-blue-500">
 					<Left />
 					Kembali
 				</div>
@@ -19,7 +19,7 @@ export default function ScrollTitle() {
 				>
 					Title
 				</div>
-				<div className="flex w-1/3 justify-end text-action">
+				<div className="flex w-1/3 justify-end text-blue-500">
 					<GlobalTools />
 				</div>
 			</nav>

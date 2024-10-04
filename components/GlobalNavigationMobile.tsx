@@ -28,11 +28,11 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 
 	let color: string;
 	if (pathname === to) {
-		color = "text-action";
+		color = "text-blue-500";
 	} else if (pathname === "/" && to === "/home") {
-		color = "text-action";
+		color = "text-blue-500";
 	} else if (CurrentPageBaseRoute === to.substring(1)) {
-		color = "text-action";
+		color = "text-blue-500";
 	} else {
 		color = "text-zinc-600";
 	}
