@@ -2,6 +2,9 @@ const { withContentlayer } = require("next-contentlayer");
 
 const nextConfig = {
 	reactStrictMode: false,
+	experimental: {
+		reactCompiler: true,
+	},
 	images: {
 		formats: ["image/avif", "image/webp"],
 		remotePatterns: [

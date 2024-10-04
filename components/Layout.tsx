@@ -17,6 +17,7 @@ export default function Layout({
 	browserTitle,
 	description,
 }: LayoutType) {
+	// const pathname = usePathname();
 	const pathname = usePathname();
 	const image = "/images/hero.jpg";
 	const type = "website";

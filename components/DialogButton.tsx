@@ -20,7 +20,7 @@ export default function DialogButton({
 			<button
 				type="button"
 				onClick={() => setIsOpen(true)}
-				className={`flex items-center space-x-1 rounded-md border border-blue-500 bg-white py-2 px-3  text-action duration-200 hover:bg-zinc-50 ${
+				className={`flex items-center space-x-1 rounded-md border border-blue-500 bg-white py-2 px-3  text-blue-500 duration-200 hover:bg-zinc-50 ${
 					isOpen ? "ring-2 ring-blue-600" : ""
 				}`}
 			>

@@ -1,10 +1,8 @@
-import Technology from "@/components/home/Technology";
 import Experiences from "@/components/home/Experiences";
-import About from "@/components/home/About";
 import Contacts from "@/components/home/Contacts";
 import Blog from "@/components/home/Blog";
-import DesignSystem from "@/components/home/DesignSystem";
 import Experiments from "@/components/home/Experiments";
+import Others from "@/components/home/Others";
 import "../styles/globals.css";
 
 export default function Home() {
@@ -15,9 +13,7 @@ export default function Home() {
 				<Experiences />
 				<Experiments />
 				<Blog />
-				<Technology />
-				<DesignSystem />
-				<About />
+				<Others />
 			</div>
 		</section>
 	);

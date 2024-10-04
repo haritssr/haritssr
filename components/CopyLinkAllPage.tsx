@@ -62,7 +62,7 @@ const CopyLinkAllPage = () => {
 						<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">{`haritssr.com${pathname}`}</div>
 					</Toast.Description>
 				</div>
-				<Toast.Close className="text-action hover:text-[#2563eb]/90 h-12 w-12">
+				<Toast.Close className="text-blue-500 hover:text-[#2563eb]/90 h-12 w-12">
 					OK
 				</Toast.Close>
 			</Toast.Root>

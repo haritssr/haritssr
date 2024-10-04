@@ -11,7 +11,7 @@ export default function ExperimentCard({
 			passHref
 			href={`/experiments/${experiment.title.toLowerCase().replace(" ", "-")}`}
 			key={experiment.id}
-			className="space-y-1 px-3 py-2.5 hover:bg-zinc-50 border border-zinc-300 rounded-lg group"
+			className="space-y-1 px-3 py-2.5 hover:bg-zinc-50 border border-zinc-300 rounded-xl group"
 		>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center space-x-2">
@@ -23,17 +23,18 @@ export default function ExperimentCard({
 							alt={experiment.title}
 						/>
 					</div>
-					<div className="sm:text-lg text-zinc-800 font-semibold">
+					<div className="sm:text-lg text-zinc-800 font-medium">
 						{experiment.title}
 					</div>
 				</div>
-				<ChevronRightIcon
-					width={2}
-					className="w-4 h-4 text-zinc-400 group-hover:text-zinc-800"
-				/>
+				<div className="flex items-center space-x-1">
+					<div className="text-zinc-400 font-light text-sm">
+						{experiment.links.length}
+					</div>
+					<ChevronRightIcon width={2.5} className="w-4 h-4 text-zinc-400" />
+				</div>
 			</div>
-			<div className="text-zinc-700">{experiment.description}</div>
-			<div className="text-zinc-400">{experiment.links.length} experiments</div>
+			<div className="text-zinc-400 font-light">{experiment.description}</div>
 		</Link>
 	);
 }

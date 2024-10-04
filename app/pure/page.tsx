@@ -329,7 +329,7 @@ export default function DesignSystem() {
 									</div>
 								</Toast.Description>
 							</div>
-							<Toast.Close className="text-action hover:text-[#2563eb]/90">
+							<Toast.Close className="text-blue-500 hover:text-[#2563eb]/90">
 								OK
 							</Toast.Close>
 						</Toast.Root>
@@ -585,7 +585,7 @@ export default function DesignSystem() {
 							setPressed(!pressed);
 						}}
 						pressed={pressed}
-						className=" rounded-md bg-white px-3 py-1 text-zinc-800 hover:bg-zinc-50 data-[state=on]:text-action select-none ring-1 data-[state=on]:ring-blue-300 data-[state=off]:ring-zinc-950/20 focus:outline-none focus:ring-action shadow data-[state=on]:shadow-blue-100"
+						className=" rounded-md bg-white px-3 py-1 text-zinc-800 hover:bg-zinc-50 data-[state=on]:text-blue-500 select-none ring-1 data-[state=on]:ring-blue-300 data-[state=off]:ring-zinc-950/20 focus:outline-none focus:ring-action shadow data-[state=on]:shadow-blue-100"
 					>
 						{pressed ? "State : ON" : "State : OFF"}
 					</Toggle.Root>

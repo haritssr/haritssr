@@ -93,13 +93,13 @@ export default function About() {
 				{AboutData.map((section) => {
 					return (
 						<div key={section.section}>
-							<div className="text-zinc-800 text-xl font-semibold mb-2">
+							<div className="text-zinc-800 text-xl font-medium mb-2">
 								{section.section}
 							</div>
-							<div className="mb-2 text-zinc-700">{section.description}</div>
+							<div className="mb-2 text-zinc-600">{section.description}</div>
 							<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
 								{section.points.map((point) => (
-									<li key={point} className="text-zinc-500 py-2">
+									<li key={point} className="text-zinc-400 py-2">
 										{point.startsWith("https://www.") ? (
 											<a
 												title={point}
