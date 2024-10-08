@@ -38,24 +38,9 @@ export default function ExperienceCard({
 						href={href}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center space-x-1.5 px-2.5 py-[3px] rounded-md  text-zinc-600 hover:text-zinc-700 hover:bg-zinc-50 cursor-pointer border border-zinc-300 justify-center"
+						className="flex items-center space-x-1.5 px-3 py-1 rounded-full  text-zinc-600 hover:text-zinc-700 hover:bg-zinc-50 cursor-pointer border border-zinc-300 justify-center"
 					>
 						<p className="text-sm">Visit</p>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-4 w-4 ml-1 "
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							strokeWidth={1.7}
-						>
-							<title>External Link Icon</title>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-							/>
-						</svg>
 					</a>
 				</div>
 				<div className="truncate font-medium text-zinc-800 text-lg">
