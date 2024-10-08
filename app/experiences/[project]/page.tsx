@@ -59,7 +59,7 @@ export default function ExperiencesPage({ params }) {
 							{project.project_name}
 						</div>
 						<div className="text-zinc-500 text-lg">
-							{project.about_client.website}
+							{project.about_client.website.slice(8)}
 						</div>
 					</div>
 					<Image
