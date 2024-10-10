@@ -61,7 +61,7 @@ export default function ExperienceCard({
 				<Link
 					passHref
 					href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-					className="py-1.5 text-zinc-800 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-300 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center font-medium"
+					className="py-1 text-zinc-100 bg-zinc-800 hover:bg-zinc-700 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center"
 				>
 					<p>Read Case Study</p>
 				</Link>
