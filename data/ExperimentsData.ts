@@ -104,7 +104,6 @@ export const ExperimentsData = [
 		description: "Data visualization using React.js",
 		links: ["Bar Chart", "Pie Chart"],
 	},
-
 	{
 		id: 6,
 		title: "Framer Motion",
@@ -164,43 +163,37 @@ export const ExperimentsData = [
 			"Tabs",
 		],
 	},
+
 	{
 		id: 10,
-		title: "Notion API",
-		logoSrc: "/Icons/notion.jpg",
-		description: "Notion as a free CMS via Notion API",
-		links: ["Table"],
-	},
-	{
-		id: 11,
 		title: "UI Explorations",
 		logoSrc: "/Icons/radixui.jpg",
 		description: "Random user interfaces explorations",
 		links: ["Notion NavBar"],
 	},
 	{
-		id: 12,
+		id: 11,
 		title: "Haris Lab",
 		logoSrc: "/Icons/harislab.svg",
 		description: "Haris Lab user interfaces design systems",
 		links: ["Global Modal", "Context Modal", "Side Bar", "Sidebar Hierarchy"],
 	},
 	{
-		id: 13,
+		id: 12,
 		title: "React Aria",
 		logoSrc: "/Icons/react-aria.jpg",
 		description: "A library of React Hooks, UI primitives, and more",
 		links: ["Calendar", "Range Calendar"],
 	},
 	{
-		id: 14,
+		id: 13,
 		title: "KaTeX",
 		logoSrc: "/Icons/KaTeX.jpg",
 		description: "The math typesetting library for the web",
 		links: ["Basic"],
 	},
 	{
-		id: 15,
+		id: 14,
 		title: "React Table",
 		logoSrc: "/Icons/tanstack.jpg",
 		description: "Headless UI for building tables & datagrids",
@@ -214,7 +207,7 @@ export const ExperimentsData = [
 		],
 	},
 	{
-		id: 16,
+		id: 15,
 		title: "React Query",
 		logoSrc: "/Icons/tanstack.jpg",
 		description: "Asynchronous state management for TS/JS",
@@ -235,10 +228,9 @@ export const FramerMotionData = ExperimentsData[5];
 export const MantineData = ExperimentsData[6];
 export const HeadlessUIData = ExperimentsData[7];
 export const RadixUIData = ExperimentsData[8];
-export const NotionAPIData = ExperimentsData[9];
-export const UIExplorationData = ExperimentsData[10];
-export const HarisLabData = ExperimentsData[11];
-export const ReactAriaData = ExperimentsData[12];
-export const KaTeXData = ExperimentsData[13];
-export const ReactTableData = ExperimentsData[14];
-export const ReactQueryData = ExperimentsData[15];
+export const UIExplorationData = ExperimentsData[9];
+export const HarisLabData = ExperimentsData[10];
+export const ReactAriaData = ExperimentsData[11];
+export const KaTeXData = ExperimentsData[12];
+export const ReactTableData = ExperimentsData[13];
+export const ReactQueryData = ExperimentsData[14];
