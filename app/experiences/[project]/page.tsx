@@ -93,7 +93,7 @@ export default function ExperiencesPage({ params }) {
 						<div className="mt-5 text-zinc-800 font-medium">Website</div>
 						<ExternalLink
 							href={project.about_client.website}
-							name={project.about_client.website}
+							name={project.about_client.website.slice(8)}
 						/>
 						<div className="mt-5 text-zinc-800 font-medium">
 							Office Location
