@@ -183,7 +183,7 @@ export const ExperimentsData = [
 		title: "React Aria",
 		logoSrc: "/Icons/react-aria.jpg",
 		description: "A library of React Hooks, UI primitives, and more",
-		links: ["Calendar", "Range Calendar"],
+		links: ["Calendar"],
 	},
 	{
 		id: 13,
