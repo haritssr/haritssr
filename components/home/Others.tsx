@@ -1,4 +1,4 @@
-import Link from "next/link";
+import InternalLinkWithoutArrow from "../InternalLinkWithoutArrow";
 
 export default function Others() {
 	return (
@@ -6,16 +6,12 @@ export default function Others() {
 			<div className=" mb-3 select-none text-2xl font-semibold text-zinc-800">
 				Others
 			</div>
-			<ul className="list-inside list-disc">
+			<ul className="list-inside space-y-1">
 				<li>
-					<Link className="text-zinc-500 hover:underline" href="/technology">
-						Technology
-					</Link>
+					<InternalLinkWithoutArrow href="/technology" name="Technology" />
 				</li>
 				<li>
-					<Link className="text-zinc-500 hover:underline" href="/pure">
-						Pure Design System
-					</Link>
+					<InternalLinkWithoutArrow href="/pure" name="Pure Design System" />
 				</li>
 			</ul>
 		</section>
