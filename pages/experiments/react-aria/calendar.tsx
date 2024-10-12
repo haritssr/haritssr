@@ -2,6 +2,7 @@ import SubTitle from "@/components/SubTitle";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Calendar from "../../../utils/react-aria/Calendar.js";
 import { today, getLocalTimeZone } from "@internationalized/date";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function CalendarC() {
 	return (
@@ -17,24 +18,12 @@ export default function CalendarC() {
 						<code>RangeCalendar</code>
 					</strong>{" "}
 					components built with{" "}
-					<a
+					<ExternalLink
 						href="https://react-spectrum.adobe.com/react-aria/"
-						rel="noreferrer"
-						target="_blank"
-						className="text-blue-700 underline"
-					>
-						React Aria
-					</a>{" "}
-					and{" "}
-					<a
-						href="http://tailwindcss.com/"
-						rel="noreferrer"
-						target="_blank"
-						className="text-blue-700 underline"
-					>
-						Tailwind CSS
-					</a>
-					.
+						name="React Aria"
+					/>
+					. and{" "}
+					<ExternalLink href="https://tailwindcss.com/" name="Tailwind CSS" />
 				</p>
 			</SubTitle>
 			<div className="flex max-w-xl flex-col items-center">
