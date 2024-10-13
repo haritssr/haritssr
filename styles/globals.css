@@ -20,7 +20,7 @@ input[type="month"],
 select {
 	@apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
 }
-
+	
 input[type="reset"],
 input[type="submit"],
 input[type="button"],
