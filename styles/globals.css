@@ -28,10 +28,6 @@ button[type="submit"] {
 	@apply w-full cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90 sm:w-fit;
 }
 
-buttonASd {
-	@apply cursor-pointer rounded-md bg-blue-600 px-3 py-1 text-center text-white hover:bg-blue-600/90;
-}
-
 /* mobile */
 /* html { scroll-padding-top: 90px;} */
 
