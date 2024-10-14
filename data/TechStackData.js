@@ -1,20 +1,5 @@
 export const TechStackData = [
 	{
-		domain: "Data",
-		links: [
-			{
-				href: "https://katex.org/",
-				imgSrc: "/Icons/KaTeX.jpg",
-				name: "KaTeX",
-			},
-			{
-				href: "https://developers.notion.com/",
-				imgSrc: "/Icons/notion.jpg",
-				name: "Notion API",
-			},
-		],
-	},
-	{
 		domain: "Backend",
 		links: [
 			{
