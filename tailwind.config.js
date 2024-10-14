@@ -17,14 +17,6 @@ module.exports = {
 		"./content/**/*.mdx",
 	],
 	theme: {
-		textIndent: (theme, { negative }) => ({
-			...{
-				no: "0rem",
-				sm: "2rem",
-				md: "3rem",
-				lg: "4rem",
-			},
-		}),
 		screens: {
 			xs: "450px",
 			sm: "640px",
@@ -60,7 +52,6 @@ module.exports = {
 		require("tailwindcss-radix")({
 			variantPrefix: "rdx",
 		}),
-		require("tailwindcss-text-indent")(),
 		require("@tailwindcss/forms")({
 			strategy: "classop",
 		}),
