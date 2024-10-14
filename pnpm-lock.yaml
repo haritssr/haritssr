@@ -239,9 +239,6 @@ importers:
       tailwindcss-radix:
         specifier: ^2.6.2
         version: 2.6.2
-      tailwindcss-text-indent:
-        specifier: ^1.0.2
-        version: 1.0.2
       tslib:
         specifier: ^2.4.1
         version: 2.4.1
@@ -2478,10 +2475,6 @@ packages:
   find-root@1.1.0:
     resolution: {integrity: sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==}
 
-  flat@4.1.1:
-    resolution: {integrity: sha512-FmTtBsHskrU6FJ2VxCnsDb84wu9zhmO3cUX2kGFb5tuwhfXxGciiT0oRY+cck35QmG+NmGh5eLz6lLCpWTqwpA==}
-    hasBin: true
-
   format@0.2.2:
     resolution: {integrity: sha512-wzsgA6WOq+09wrU1tsJ09udeR/YZRaeArL9e1wPbFg3GG2yDnC2ldKpxs4xunpFF9DgqCqOIra3bc1HWrJ37Ww==}
     engines: {node: '>=0.4.x'}
@@ -3640,9 +3633,6 @@ packages:
 
   tailwindcss-radix@2.6.2:
     resolution: {integrity: sha512-+pqIyqY9mjMXtJHyDlkiJYMfpa8+Gkt2UE6VrmbYjbLAqva7Lg4q2Rffe9JFNv9dBFfoDTVML7gQd4BDJXOrCg==}
-
-  tailwindcss-text-indent@1.0.2:
-    resolution: {integrity: sha512-jgGC3SqaJTh2ZUY4noElAclbfb7LN2ll2rkKTla57FiY7qm/0OgGTJ5gWTeJOtfnl7+Ei0sjpAB1wB2kQmodgw==}
 
   tailwindcss@3.4.13:
     resolution: {integrity: sha512-KqjHOJKogOUt5Bs752ykCeiwvi0fKVkr5oqsFNt/8px/tA8scFPIlkygsf6jXrfCqGHz7VflA6+yytWuM+XhFw==}
@@ -6442,10 +6432,6 @@ snapshots:
 
   find-root@1.1.0: {}
 
-  flat@4.1.1:
-    dependencies:
-      is-buffer: 2.0.5
-
   format@0.2.2: {}
 
   formdata-polyfill@4.0.10:
@@ -7933,11 +7919,6 @@ snapshots:
       react: 19.0.0-rc-206df66e-20240912
 
   tailwindcss-radix@2.6.2: {}
-
-  tailwindcss-text-indent@1.0.2:
-    dependencies:
-      flat: 4.1.1
-      lodash: 4.17.21
 
   tailwindcss@3.4.13(ts-node@10.9.2(@types/node@18.7.17)(typescript@4.9.4)):
     dependencies:
