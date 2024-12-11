@@ -285,7 +285,7 @@ export default function About() {
 					download="cv.pdf"
 					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20  focus:outline-none focus:ring-zinc-800 shadow"
 				>
-					Download Curriculum Vitae
+					Download CV
 				</SecondaryButton>
 			</div>
 		</div>
