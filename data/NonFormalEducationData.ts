@@ -6,11 +6,4 @@ export const NonFormalEducationData = [
 		level: "JavaScript Data Structure & Algorithm",
 		status: "Finish",
 	},
-	{
-		logo: "/Icons/fso.png",
-		school: "The University of Helsinki, Finland.",
-		period: "Sept 2023",
-		level: "Deep Dive Into Modern Web Development",
-		status: "Ongoing",
-	},
 ];

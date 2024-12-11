@@ -221,7 +221,7 @@ export default function About() {
 						</div>
 						<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
 							<div>Lia Privat</div>
-							<div> June 2018 - Now (5 years)</div>
+							<div> June 2018 - Now (6.5 years)</div>
 							<div>
 								Teaching math and physics for junior and senior highschool
 								students at home
