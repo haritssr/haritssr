@@ -221,7 +221,7 @@ export default function About() {
 						</div>
 						<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
 							<div>Lia Privat</div>
-							<div> June 2018 - Now (5 years)</div>
+							<div> June 2018 - Now (6.5 years)</div>
 							<div>
 								Teaching math and physics for junior and senior highschool
 								students at home
@@ -281,11 +281,11 @@ export default function About() {
 
 			<div className="flex justify-end">
 				<SecondaryButton
-					href="/cv.pdf"
-					download="cv.pdf"
+					href="/cv-dec-2024.pdf"
+					download="cv-dec-2024.pdf"
 					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20  focus:outline-none focus:ring-zinc-800 shadow"
 				>
-					Download Curriculum Vitae
+					Download CV
 				</SecondaryButton>
 			</div>
 		</div>
