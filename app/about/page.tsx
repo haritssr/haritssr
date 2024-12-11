@@ -281,8 +281,8 @@ export default function About() {
 
 			<div className="flex justify-end">
 				<SecondaryButton
-					href="/cv.pdf"
-					download="cv.pdf"
+					href="/cv-dec-2024.pdf"
+					download="cv-dec-2024.pdf"
 					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20  focus:outline-none focus:ring-zinc-800 shadow"
 				>
 					Download CV
