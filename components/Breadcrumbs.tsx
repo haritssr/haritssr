@@ -26,7 +26,6 @@ export default function Breadcrumbs() {
 			</Link>
 			{routes?.map((route, i, array) => {
 				// if the i is the last element of an array or the last route or the current route/page
-				// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
 				return i === array.length - 1 ? (
 					// this is the current route/page
 					<span key={route} className="text-zinc-800">
