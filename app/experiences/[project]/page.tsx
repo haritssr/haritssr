@@ -3,9 +3,13 @@ import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import { ExperiencesData } from "data/ExperiencesData";
 import Image from "next/image";
-import Head from "next/head";
 import LoadingFigma from "./LoadingFigma";
-import Title from "./Title";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Experience",
+	description: "something",
+};
 
 export async function generateStaticParams() {
 	return ExperiencesData.map(({ project_name }) => {
@@ -21,33 +25,8 @@ export default function ExperiencesPage({ params }) {
 			p.project_name.toLowerCase().split(" ").join("-") === params?.project,
 	)[0];
 
-	const image = "/images/hero.jpg";
-	const type = "website";
-
-	const browserTitle = "Experiences";
-	const description = "Lists of experience or project";
-
 	return (
 		<div className="bg-white">
-			<Head>
-				<Title browserTitle={browserTitle} />
-				<link rel="icon" href="/Icons/haritssr.svg" />
-				<meta name="theme-color" content="#27272a" />
-				<meta name="robots" content="follow, index" />
-				<meta name="description" content={description} />
-				<meta property="og:type" content={type} />
-				<meta property="og:site_name" content="HarisLab" />
-				<meta property="og:description" content={description} />
-				<meta property="og:title" content={browserTitle} />
-				<meta property="og:image" content={image} />
-				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:site" content="@haritssr" />
-				<meta name="twitter:title" content={browserTitle} />
-				<meta name="twitter:description" content={description} />
-				<meta name="twitter:image" content={image} />
-				<link rel="manifest" href="/static/favicons/site.webmanifest" />
-			</Head>
-
 			<main className="mx-auto min-h-screen w-full max-w-3xl">
 				<div className="pt-10 sm:pt-20">
 					<BackButton href="/experiences" name="All Experiences" />
