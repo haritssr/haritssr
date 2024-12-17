@@ -1,15 +1,18 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
+import type * as React from "react";
+import Link, { type LinkProps } from "next/link";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
-const CustomLink = (props) => {
-	const href = props.href;
+type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+	LinkProps & { href: string };
+
+const CustomLink: React.FC<CustomLinkProps> = (props) => {
+	const { href, children, ...rest } = props;
 
 	if (href.startsWith("/")) {
 		return (
-			<Link href={href} {...props}>
+			<Link href={href} {...rest}>
 				{props.children}
 			</Link>
 		);
