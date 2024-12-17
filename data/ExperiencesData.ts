@@ -1,4 +1,29 @@
-export const ExperiencesData = [
+export type ExperiencesDataType = {
+	project_name: string;
+	about_client: {
+		logo_src: string;
+		brand_name: string;
+		short_about: string;
+		long_about: string;
+		company_name: string;
+		phone_number: string;
+		website: string;
+		office_location: string;
+		industry: string;
+	};
+	about_project: {
+		client: string;
+		my_role: string[];
+		working_period: string;
+		website_status: string[];
+		routes: string[];
+		features: string[];
+	};
+	figma: string[];
+	skills: string;
+};
+
+export const ExperiencesData: ExperiencesDataType[] = [
 	{
 		project_name: "Haris Lab",
 		about_client: {

@@ -5,6 +5,7 @@ import { ExperiencesData } from "data/ExperiencesData";
 import Image from "next/image";
 import LoadingFigma from "./LoadingFigma";
 import type { Metadata } from "next";
+import type { ExperiencesDataType } from "data/ExperiencesData";
 
 export const metadata: Metadata = {
 	title: "Experience",
@@ -20,7 +21,7 @@ export async function generateStaticParams() {
 }
 
 export default function ExperiencesPage({ params }) {
-	const project = ExperiencesData.filter(
+	const project: ExperiencesDataType = ExperiencesData.filter(
 		(p) =>
 			p.project_name.toLowerCase().split(" ").join("-") === params?.project,
 	)[0];
