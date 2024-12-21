@@ -37,6 +37,7 @@ export async function submitAddress(
 				success: false,
 				message: "Please fix the errors in the form",
 				errors: validatedData.error.flatten().fieldErrors,
+				inputs: rawData,
 			};
 		}
 

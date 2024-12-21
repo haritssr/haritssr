@@ -13,4 +13,5 @@ export interface ActionResponse {
 	errors?: {
 		[K in keyof AddressFormData]?: string[];
 	};
+	inputs?: AddressFormData;
 }
