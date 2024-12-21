@@ -74,7 +74,7 @@
 		"immer": "^9.0.17",
 		"katex": "^0.16.4",
 		"lucide-react": "^0.469.0",
-		"next": "15.1.0",
+		"next": "15.1.2",
 		"next-contentlayer": "^0.3.4",
 		"react": "19.0.0",
 		"react-confetti": "^6.1.0",
