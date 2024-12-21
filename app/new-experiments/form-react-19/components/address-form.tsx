@@ -45,9 +45,10 @@ export default function AddressForm() {
 								id="streetAddress"
 								name="streetAddress"
 								placeholder="123 Main St"
-								required
-								minLength={5}
-								maxLength={100}
+								// client-side validation is turnoff on purpose to trigger server-side validation
+								// required
+								// minLength={5}
+								// maxLength={100}
 								autoComplete="street-address"
 								aria-describedby="streetAddress-error"
 								className={state?.errors?.streetAddress ? "border-red-500" : ""}
@@ -75,6 +76,7 @@ export default function AddressForm() {
 							<div className="space-y-2">
 								<Label htmlFor="city">City</Label>
 								<Input
+									defaultValue={state?.inputs?.city}
 									id="city"
 									name="city"
 									placeholder="New York"
@@ -95,6 +97,7 @@ export default function AddressForm() {
 							<div className="space-y-2">
 								<Label htmlFor="state">State</Label>
 								<Input
+									defaultValue={state?.inputs?.state}
 									id="state"
 									name="state"
 									placeholder="NY"
@@ -117,6 +120,7 @@ export default function AddressForm() {
 							<div className="space-y-2">
 								<Label htmlFor="zipCode">ZIP Code</Label>
 								<Input
+									defaultValue={state?.inputs?.zipCode}
 									id="zipCode"
 									name="zipCode"
 									placeholder="10001"
@@ -137,6 +141,7 @@ export default function AddressForm() {
 							<div className="space-y-2">
 								<Label htmlFor="country">Country</Label>
 								<Input
+									defaultValue={state?.inputs?.country}
 									id="country"
 									name="country"
 									placeholder="United States"
