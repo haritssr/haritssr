@@ -2,10 +2,10 @@ import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import { ExperiencesData } from "data/ExperiencesData";
+import type { ExperiencesDataType } from "data/ExperiencesData";
 import Image from "next/image";
 import LoadingFigma from "./LoadingFigma";
 import type { Metadata } from "next";
-import type { ExperiencesDataType } from "data/ExperiencesData";
 
 export const metadata: Metadata = {
 	title: "Experience",
@@ -20,10 +20,12 @@ export async function generateStaticParams() {
 	});
 }
 
-export default function ExperiencesPage({ params }) {
-	const project: ExperiencesDataType = ExperiencesData.filter(
-		(p) =>
-			p.project_name.toLowerCase().split(" ").join("-") === params?.project,
+export default async function ExperiencesPage({ params }) {
+	const { project } = await params;
+	const experience: ExperiencesDataType = ExperiencesData.filter(
+		(each_experience) =>
+			each_experience.project_name.toLowerCase().split(" ").join("-") ===
+			project,
 	)[0];
 
 	return (
@@ -36,19 +38,19 @@ export default function ExperiencesPage({ params }) {
 				<section className="my-8 sm:my-10 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
 					<div className="">
 						<div className="text-2xl sm:text-3xl break-words font-bold ">
-							{project.project_name}
+							{experience.project_name}
 						</div>
 						<div className="text-zinc-500 text-lg">
-							{project.about_client.website.slice(8)}
+							{experience.about_client.website.slice(8)}
 						</div>
 					</div>
 					<Image
-						src={project.about_client.logo_src}
-						alt={project.project_name}
+						src={experience.about_client.logo_src}
+						alt={experience.project_name}
 						height="40"
 						width="40"
 						className="h-12 w-12"
-						blurDataURL={project.about_client.logo_src}
+						blurDataURL={experience.about_client.logo_src}
 						// placeholder='blur'
 					/>
 				</section>
@@ -59,27 +61,35 @@ export default function ExperiencesPage({ params }) {
 							About The Client
 						</h2>
 						<div className="mt-5 text-zinc-800 font-medium">Company Name</div>
-						<p className="text-zinc-500">{project.about_client.company_name}</p>
+						<p className="text-zinc-500">
+							{experience.about_client.company_name}
+						</p>
 
 						<div className="mt-5 text-zinc-800 font-medium">Brand Name</div>
-						<p className="text-zinc-500">{project.about_client.brand_name}</p>
+						<p className="text-zinc-500">
+							{experience.about_client.brand_name}
+						</p>
 
 						<div className="mt-5 text-zinc-800 font-medium">About</div>
-						<p className="text-zinc-500">{project.about_client.long_about}</p>
+						<p className="text-zinc-500">
+							{experience.about_client.long_about}
+						</p>
 
 						<div className="mt-5 text-zinc-800 font-medium">Phone Number</div>
-						<p className="text-zinc-500">{project.about_client.phone_number}</p>
+						<p className="text-zinc-500">
+							{experience.about_client.phone_number}
+						</p>
 
 						<div className="mt-5 text-zinc-800 font-medium">Website</div>
 						<ExternalLink
-							href={project.about_client.website}
-							name={project.about_client.website.slice(8)}
+							href={experience.about_client.website}
+							name={experience.about_client.website.slice(8)}
 						/>
 						<div className="mt-5 text-zinc-800 font-medium">
 							Office Location
 						</div>
 						<p className="text-zinc-500">
-							{project.about_client.office_location}
+							{experience.about_client.office_location}
 						</p>
 					</section>
 
@@ -91,7 +101,7 @@ export default function ExperiencesPage({ params }) {
 
 						<div className="mt-5 text-zinc-800 font-medium">My Role</div>
 						<ExplanationList>
-							{project.about_project.my_role.map((a: string) => (
+							{experience.about_project.my_role.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
 									{a}
 								</li>
@@ -100,12 +110,12 @@ export default function ExperiencesPage({ params }) {
 
 						<div className="mt-5 text-zinc-800 font-medium">Working Period</div>
 						<p className="text-zinc-500">
-							{project.about_project.working_period}
+							{experience.about_project.working_period}
 						</p>
 
 						<div className="mt-5 text-zinc-800 font-medium">Website Status</div>
 						<ExplanationList>
-							{project.about_project.website_status.map((a: string) => (
+							{experience.about_project.website_status.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
 									{a}
 								</li>
@@ -114,7 +124,7 @@ export default function ExperiencesPage({ params }) {
 
 						<div className="mt-5 text-zinc-800 font-medium">Website Routes</div>
 						<ExplanationList>
-							{project.about_project.routes.map((a: string) => (
+							{experience.about_project.routes.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
 									{a}
 								</li>
@@ -125,7 +135,7 @@ export default function ExperiencesPage({ params }) {
 							Website Features
 						</div>
 						<ExplanationList>
-							{project.about_project.features.map((a: string) => (
+							{experience.about_project.features.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
 									{a}
 								</li>
@@ -139,7 +149,7 @@ export default function ExperiencesPage({ params }) {
 					<h2 className="mb-5 text-xl font-semibold text-zinc-800">
 						Design (at Figma)
 					</h2>
-					<LoadingFigma project={project} />
+					<LoadingFigma project={experience} />
 				</section>
 			</main>
 		</div>
