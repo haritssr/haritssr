@@ -49,8 +49,6 @@
 		"**/*.tsx",
 		"**/**/*.tsx",
 		"tailwind.config.js",
-		"pages/showcase/framer-motion",
-		"pages/experiments/framer-motion/api",
 		"data/ExperimentsData.ts",
 		"pages/experiments/react/calculator.jsx",
 		"pages/experiments/radix-ui/navigation-menu.tsx",
