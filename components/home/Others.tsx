@@ -13,6 +13,9 @@ export default function Others() {
 				<li>
 					<InternalLinkWithoutArrow href="/pure" name="Pure Design System" />
 				</li>
+				<li>
+					<InternalLinkWithoutArrow href="/times-table" name="Times Table" />
+				</li>
 			</ul>
 		</section>
 	);
