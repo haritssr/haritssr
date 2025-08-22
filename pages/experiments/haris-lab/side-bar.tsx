@@ -30,7 +30,7 @@ function App() {
 							<AccordionC
 								isOpen={openAll}
 								key={chapter?.chapter_name}
-								title={chapter?.chapter_name}
+								title={chapter?.chapter_name ?? " "}
 							>
 								{chapter?.topics.map((topic) => (
 									// Topic
@@ -49,15 +49,23 @@ function App() {
 
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import * as Accordion from "@radix-ui/react-accordion";
+import type React from "react";
 import { useRef, useState } from "react";
 
-function AccordionC({ title, children, isOpen }, props) {
+function AccordionC({
+	title,
+	children,
+	isOpen,
+}: {
+	title: string;
+	children: React.ReactNode;
+	isOpen: boolean;
+}) {
 	const ref = useRef<HTMLDivElement>(null);
 	return (
 		<Accordion.Root
 			type="multiple"
 			className="w-full rounded-md px-2 hover:bg-zinc-100 sm:w-1/3"
-			{...props}
 		>
 			<Accordion.Item value="item-1">
 				<Accordion.Header className="group">

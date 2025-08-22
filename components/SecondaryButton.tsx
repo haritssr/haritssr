@@ -4,7 +4,7 @@ export default function SecondaryButton({
 	children,
 	href,
 	...props
-}: { children: React.ReactChild; href?: string; [key: string]: unknown }) {
+}: { children: React.ReactNode; href?: string; [key: string]: unknown }) {
 	if (href) {
 		return (
 			<a href={href} {...props}>

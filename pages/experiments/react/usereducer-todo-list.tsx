@@ -1,7 +1,15 @@
 import SubTitle from "@/components/SubTitle";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { useReducer, useState } from "react";
+import {
+	type JSX,
+	type JSXElementConstructor,
+	type ReactElement,
+	type ReactNode,
+	type ReactPortal,
+	useReducer,
+	useState,
+} from "react";
 
 let nextId = 3;
 const initialTask = [
@@ -146,8 +154,27 @@ function TaskList({ tasks, onChangeTask, onDeleteTask }) {
 function IndividualTask({ task, onChange, onDelete }) {
 	const [isEditing, setIsEditing] = useState(false);
 	// after checkbox
-	// biome-ignore lint/complexity/noBannedTypes: <explanation>
-	let taskContent: {} | null | undefined;
+	let taskContent:
+		| string
+		| number
+		| bigint
+		| boolean
+		| JSX.Element
+		| Iterable<ReactNode>
+		| Promise<
+				| string
+				| number
+				| bigint
+				| boolean
+				| ReactPortal
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				| ReactElement<unknown, string | JSXElementConstructor<any>>
+				| Iterable<ReactNode>
+				| null
+				| undefined
+		  >
+		| null
+		| undefined;
 	if (isEditing) {
 		taskContent = (
 			<>
@@ -163,20 +190,18 @@ function IndividualTask({ task, onChange, onDelete }) {
 		);
 	} else {
 		taskContent = (
-			<>
-				<div className="flex items-center space-x-2">
-					<div
-						className={`${
-							task.done ? "text-red-500 line-through" : "text-blue-500"
-						}  `}
-					>
-						{task.text}
-					</div>
-					<button type="button" onClick={() => setIsEditing(true)}>
-						Edit
-					</button>
+			<div className="flex items-center space-x-2">
+				<div
+					className={`${
+						task.done ? "text-red-500 line-through" : "text-blue-500"
+					}  `}
+				>
+					{task.text}
 				</div>
-			</>
+				<button type="button" onClick={() => setIsEditing(true)}>
+					Edit
+				</button>
+			</div>
 		);
 	}
 	return (
