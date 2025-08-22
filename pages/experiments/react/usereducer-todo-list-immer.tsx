@@ -150,8 +150,7 @@ function TaskList({ tasks, onChangeTask, onDeleteTask }) {
 function IndividualTask({ task, onChange, onDelete }) {
 	const [isEditing, setIsEditing] = useState(false);
 	// after checkbox
-	// biome-ignore lint/complexity/noBannedTypes: <explanation>
-	let taskContent: {} | null | undefined;
+	let taskContent: React.ReactNode;
 	if (isEditing) {
 		taskContent = (
 			<>
@@ -167,20 +166,18 @@ function IndividualTask({ task, onChange, onDelete }) {
 		);
 	} else {
 		taskContent = (
-			<>
-				<div className="flex items-center space-x-2">
-					<div
-						className={`${
-							task.done ? "text-red-500 line-through" : "text-blue-500"
-						}  `}
-					>
-						{task.text}
-					</div>
-					<button type="button" onClick={() => setIsEditing(true)}>
-						Edit
-					</button>
+			<div className="flex items-center space-x-2">
+				<div
+					className={`${
+						task.done ? "text-red-500 line-through" : "text-blue-500"
+					}  `}
+				>
+					{task.text}
 				</div>
-			</>
+				<button type="button" onClick={() => setIsEditing(true)}>
+					Edit
+				</button>
+			</div>
 		);
 	}
 	return (

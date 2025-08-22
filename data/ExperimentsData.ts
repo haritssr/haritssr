@@ -105,13 +105,6 @@ export const ExperimentsData = [
 		links: ["Bar Chart", "Pie Chart"],
 	},
 	{
-		id: 6,
-		title: "Framer Motion",
-		logoSrc: "/Icons/framermotion.jpg",
-		description: "Animation library for React.js by Framer Team",
-		links: ["Random"],
-	},
-	{
 		id: 7,
 		title: "Mantine",
 		logoSrc: "/Icons/mantine.jpg",

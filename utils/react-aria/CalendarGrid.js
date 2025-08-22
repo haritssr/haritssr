@@ -30,19 +30,20 @@ export function CalendarGrid({ state, offset = {} }) {
 			<tbody>
 				{[...new Array(weeksInMonth).keys()].map((weekIndex) => (
 					<tr key={weekIndex}>
-						{state.getDatesInWeek(weekIndex, startDate).map((date) =>
-							// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
-							date ? (
-								<CalendarCell
-									key={date}
-									state={state}
-									date={date}
-									currentMonth={startDate}
-								/>
-							) : (
-								<td key={date} />
-							),
-						)}
+						{state
+							.getDatesInWeek(weekIndex, startDate)
+							.map((date) =>
+								date ? (
+									<CalendarCell
+										key={date}
+										state={state}
+										date={date}
+										currentMonth={startDate}
+									/>
+								) : (
+									<td key={date} />
+								),
+							)}
 					</tr>
 				))}
 			</tbody>

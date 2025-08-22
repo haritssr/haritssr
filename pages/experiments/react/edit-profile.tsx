@@ -28,7 +28,7 @@ export default function EditProfile() {
 				}}
 			>
 				<div className="flex w-fit flex-col space-y-2">
-					<label className="flex items-center space-x-2 ">
+					<div className="flex items-center space-x-2 ">
 						<div>FirstName :</div>
 						{isEditing ? (
 							<input
@@ -39,8 +39,8 @@ export default function EditProfile() {
 						) : (
 							<b>{firstName}</b>
 						)}
-					</label>
-					<label className="flex items-center space-x-2 ">
+					</div>
+					<div className="flex items-center space-x-2 ">
 						<div className="">LastName :</div>
 						{isEditing ? (
 							<input
@@ -51,7 +51,7 @@ export default function EditProfile() {
 						) : (
 							<b>{lastName}</b>
 						)}
-					</label>
+					</div>
 					<button className="w-fit" type="submit">
 						{isEditing ? "Save" : "Edit"} Profile
 					</button>

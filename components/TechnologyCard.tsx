@@ -1,18 +1,15 @@
 import Image from "next/image";
-import type { ClassAttributes, HTMLAttributes } from "react";
 
-export const TechnologyCard = (
-	{
-		domain,
-		links,
-	}: {
-		domain?: string;
-		links?: Array<{ href: string; imgSrc: string; name: string }>;
-	},
-	props: JSX.IntrinsicAttributes &
-		ClassAttributes<HTMLDivElement> &
-		HTMLAttributes<HTMLDivElement>,
-) => {
+export const TechnologyCard = ({
+	domain,
+	links,
+	props,
+}: {
+	domain?: string;
+	links?: Array<{ href: string; imgSrc: string; name: string }>;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	props?: any;
+}) => {
 	return (
 		<div
 			{...props}
@@ -21,7 +18,7 @@ export const TechnologyCard = (
 			<div className="truncate px-3 py-1.5 bg-zinc-50 text-tiny font-medium text-zinc-700 sm:text-base border-b border-zinc-300">
 				{domain}
 			</div>
-			<div className="">
+			<div>
 				{links?.map(({ href, imgSrc, name }) => {
 					return (
 						<a
