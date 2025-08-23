@@ -16,6 +16,12 @@ export default function Others() {
 				<li>
 					<InternalLinkWithoutArrow href="/times-table" name="Times Table" />
 				</li>
+				<li>
+					<InternalLinkWithoutArrow
+						href="/new-experiments"
+						name="New Experiments"
+					/>
+				</li>
 			</ul>
 		</section>
 	);
