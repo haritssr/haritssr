@@ -1,10 +1,9 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import type React from "react";
-import { useRef, useState } from "react";
-import data from "../../../data/Search2Data.json";
-import { Combobox } from "@headlessui/react";
 import ExplanationList from "@/components/ExplanationList";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
+import type { ReactElement } from "react";
+import { useEffect, useRef, useState } from "react";
+import data from "../../../data/Search2Data.json";
 
 interface DataType {
 	author: string;
@@ -17,31 +16,27 @@ interface DataType {
 	year: number;
 }
 
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
-const Search2: React.FC<{}> = (): JSX.Element => {
+function Search2(): ReactElement {
 	const [filteredData, setFilteredData] = useState<DataType[]>([]);
 	const [wordEntered, setWordEntered] = useState<string>("");
 
-	const inputRef: React.RefObject<HTMLInputElement> =
-		useRef<HTMLInputElement>(null);
-	if (typeof window !== "undefined") {
-		window.addEventListener("load", () => inputRef.current?.focus());
-	}
+	const inputRef = useRef<HTMLInputElement | null>(null);
+	useEffect(() => {
+		inputRef.current?.focus();
+	}, []);
 
-	const handleFilter = ({
-		target,
-	}: React.ChangeEvent<HTMLInputElement>):
-		| unknown
-		| React.SetStateAction<DataType[]>
-		| undefined => {
-		const searchWord: string = target.value.toLowerCase();
+	const handleFilter = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		const searchWord = event.target.value.toLowerCase();
 		setWordEntered(searchWord);
 
 		const newFilter: DataType[] = data.filter(({ title }): boolean =>
 			title.toLowerCase().includes(searchWord),
 		);
 
-		if (!searchWord) return setFilteredData([]);
+		if (!searchWord) {
+			setFilteredData([]);
+			return;
+		}
 		setFilteredData(newFilter);
 	};
 
@@ -60,44 +55,38 @@ const Search2: React.FC<{}> = (): JSX.Element => {
 					<li>Not include: space sensitive.</li>
 				</ExplanationList>
 			</SubTitle>
-			<Combobox value={data[0].title} as="div" onChange={() => null}>
-				<div className="group mx-auto flex items-center  sm:w-1/3">
-					<Combobox.Input
-						type="search"
-						className="w-full"
-						placeholder="Enter a book"
-						value={wordEntered}
-						onChange={handleFilter}
-						ref={inputRef}
-					/>
-				</div>
+			<div className="group mx-auto flex items-center sm:w-1/3">
+				<input
+					type="search"
+					className="w-full"
+					placeholder="Enter a book"
+					value={wordEntered}
+					onChange={handleFilter}
+					ref={inputRef}
+				/>
+			</div>
 
-				{filteredData.length !== 0 && (
-					<Combobox.Options className="mx-auto mt-2 overflow-hidden rounded border border-zinc-600 sm:w-1/3">
-						<div className="max-h-52 min-h-fit space-y-1 overflow-y-auto py-2">
-							{filteredData.map(({ link, title }, key) => (
-								<Combobox.Option key={title} value={data}>
-									{({ active }) => (
-										<a
-											href={link}
-											target="_blank"
-											rel="noopener noreferrer"
-											className={`flex px-2 py-1 hover:bg-[#2563eb]/90 hover:text-white ${
-												active ? "bg-blue-500 text-white" : ""
-											}`}
-										>
-											{title}
-										</a>
-									)}
-								</Combobox.Option>
-							))}
-						</div>
-					</Combobox.Options>
-				)}
-			</Combobox>
+			{filteredData.length !== 0 && (
+				<div className="mx-auto mt-2 max-h-52 min-h-fit overflow-hidden rounded border border-zinc-600 sm:w-1/3">
+					<ul className="space-y-1 overflow-y-auto py-2">
+						{filteredData.map(({ link, title }) => (
+							<li key={title}>
+								<a
+									href={link}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex px-2 py-1 hover:bg-[#2563eb]/90 hover:text-white"
+								>
+									{title}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
 		</LayoutToExperiments>
 	);
-};
+}
 
 export default Search2;
 
