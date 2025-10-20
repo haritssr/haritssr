@@ -3,7 +3,6 @@
 @tailwind utilities;
 @tailwind base;
 
-input[type="text"],
 input[type="search"],
 input[type="url"],
 input[type="email"],
@@ -12,6 +11,7 @@ input[type="number"],
 input[type="tel"] {
 	@apply rounded-md ring-1 ring-zinc-950/20 px-2.5 py-1 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow;
 }
+
 
 input[type="time"],
 input[type="date"],
