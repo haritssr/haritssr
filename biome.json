@@ -28,5 +28,13 @@
 			"!**/.contentlayer/**/*",
 			"!**/.vscode/**/*"
 		]
+	},
+	"html": {
+		"experimentalFullSupport": true
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
 	}
 }
