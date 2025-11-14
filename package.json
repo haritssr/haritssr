@@ -108,9 +108,7 @@
 		"@types/katex": "^0.14.0",
 		"@types/node": "^18.7.17",
 		"@types/react": "^19.0.2",
-		"autoprefixer": "^10.4.15",
 		"knip": "^5.33.3",
-		"postcss": "^8.4.28",
 		"tailwindcss": "^4.1.17",
 		"typescript": "^4.9.4"
 	}
