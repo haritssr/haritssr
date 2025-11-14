@@ -3,7 +3,6 @@ import Contacts from "@/components/home/Contacts";
 import Experiments from "@/components/home/Experiments";
 import Experiences from "@/components/home/Experiences";
 import Others from "@/components/home/Others";
-import "../styles/globals.css";
 
 export default function Home() {
 	return (
