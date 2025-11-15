@@ -7,15 +7,6 @@ module.exports = {
 		hoverOnlyWhenSupported: true,
 	},
 	important: false,
-	content: [
-		"./pages/*.tsx",
-		"./pages/**/*.tsx",
-		"./pages/**/**/*.tsx",
-		"./components/*.tsx",
-		"./components/**/*.tsx",
-		"./app/**/*.{ts,tsx}",
-		"./content/**/*.mdx",
-	],
 	theme: {
     	screens: {
     		xs: '450px',
