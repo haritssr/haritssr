@@ -180,7 +180,6 @@ export default function About() {
 									</div>
 								</div>
 								<Link
-									passHref
 									href={`/experiences/${project.project_name
 										.toLowerCase()
 										.split(" ")

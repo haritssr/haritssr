@@ -158,7 +158,6 @@ const BackToExperiments = ({
 }: { inView: unknown; domain: string }) => {
 	return (
 		<Link
-			passHref
 			href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
 			className={`-ml-1 flex cursor-pointer items-center sm:w-1/4 ${
 				inView ? "w-1/2" : "w-1/4"

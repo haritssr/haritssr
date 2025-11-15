@@ -59,7 +59,6 @@ export default function ExperimentIndexPage({
 					{experiment.links?.map((link) => (
 						<li key={link}>
 							<Link
-								passHref
 								key={link}
 								href={`/experiments/${experiment.title
 									.toLowerCase()
@@ -88,7 +87,6 @@ export default function ExperimentIndexPage({
 const BackToExperiments = ({ inView }: { inView: unknown }) => {
 	return (
 		<Link
-			passHref
 			href="/experiments"
 			className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${
 				inView ? "w-1/2 sm:-ml-5" : "w-1/4"

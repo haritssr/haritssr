@@ -60,7 +60,6 @@ export default function NumberGame() {
 				</div>
 
 				<Link
-					passHref
 					href="/experiments/browser/number-game"
 					className="mt-5 flex justify-center"
 				>

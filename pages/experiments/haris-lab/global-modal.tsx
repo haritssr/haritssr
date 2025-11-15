@@ -56,7 +56,6 @@ function App() {
 						<div className="space-y-1 overflow-y-auto">
 							{quickLinks.map(({ icon, name }) => (
 								<Link
-									passHref
 									href="/"
 									key={name}
 									className="flex items-center space-x-1 rounded-md px-2 py-1 text-zinc-800 hover:bg-zinc-100"
