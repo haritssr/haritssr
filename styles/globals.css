@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+@theme {
+	--color-action: '#2563eb',
+}
+
 input[type="search"],
 input[type="url"],
 input[type="email"],
