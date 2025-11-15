@@ -49,7 +49,7 @@ function App() {
 								name=""
 								id=""
 								placeholder="Cari Variabel, Bab, Rumus..."
-								className="w-full border-[0px] bg-zinc-100 py-0 pl-1 caret-blue-600 outline-none ring-inset placeholder:text-zinc-500 focus:outline-none focus:ring-apple-gray6 focus:placeholder:text-zinc-700"
+								className="w-full border-0 bg-zinc-100 py-0 pl-1 caret-blue-600 outline-hidden ring-inset placeholder:text-zinc-500 focus:outline-hidden focus:ring-apple-gray6 focus:placeholder:text-zinc-700"
 							/>
 						</div>
 						<div className="mt-5 mb-1 pl-2 text-zinc-500">LINK CEPAT</div>

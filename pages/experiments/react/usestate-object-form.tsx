@@ -20,7 +20,7 @@ export default function UseStateObjectForm() {
 	}
 
 	const inputStyle =
-		"focus:outline-none focus:ring-2 border border-zinc-400 focus:border-blue-500 focus:ring-blue-200 px-2 py-0.5 rounded text-base";
+		"focus:outline-hidden focus:ring-2 border border-zinc-400 focus:border-blue-500 focus:ring-blue-200 px-2 py-0.5 rounded text-base";
 	const labelStyle = "flex flex-col space-y-0.5 w-full sm:w-fit text-sm";
 	return (
 		<LayoutToExperiments domain="React" title="useState Object Form">

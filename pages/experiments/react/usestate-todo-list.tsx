@@ -60,7 +60,7 @@ function AddTodo({ onAddTodo }) {
 				placeholder="Write todo"
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
-				className="w-full rounded border border-zinc-700 px-2 py-0.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 sm:w-fit"
+				className="w-full rounded border border-zinc-700 px-2 py-0.5 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-300 sm:w-fit"
 			/>
 			<button
 				type="button"
@@ -69,7 +69,7 @@ function AddTodo({ onAddTodo }) {
 					onAddTodo(title);
 					//handleChangeTodo(nextTodo)
 				}}
-				className="w-full rounded border border-blue-500 bg-blue-500 px-2 py-0.5 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 sm:w-fit"
+				className="w-full rounded border border-blue-500 bg-blue-500 px-2 py-0.5 text-white hover:bg-blue-600 focus:outline-hidden focus:ring-2 focus:ring-blue-300 sm:w-fit"
 			>
 				Add
 			</button>
@@ -101,12 +101,12 @@ function Task({ todo, onChange, onDelete }) {
 					onChange={(e) => {
 						onChange({ ...todo, title: e.target.value });
 					}}
-					className="rounded border border-zinc-700 px-1 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+					className="rounded border border-zinc-700 px-1 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-300"
 				/>
 				<button
 					type="button"
 					onClick={() => setIsEditing(false)}
-					className="ml-2 rounded border border-green-500 bg-green-500 px-2 text-sm text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+					className="ml-2 rounded border border-green-500 bg-green-500 px-2 text-sm text-white hover:bg-green-600 focus:outline-hidden focus:ring-2 focus:ring-green-300"
 				>
 					Save
 				</button>
@@ -119,7 +119,7 @@ function Task({ todo, onChange, onDelete }) {
 				<button
 					type="button"
 					onClick={() => setIsEditing(true)}
-					className="ml-2 rounded border border-yellow-500 bg-yellow-500 px-2 text-sm text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+					className="ml-2 rounded border border-yellow-500 bg-yellow-500 px-2 text-sm text-white hover:bg-yellow-600 focus:outline-hidden focus:ring-2 focus:ring-yellow-300"
 				>
 					Edit
 				</button>
@@ -141,7 +141,7 @@ function Task({ todo, onChange, onDelete }) {
 			<button
 				type="button"
 				onClick={() => onDelete(todo.id)}
-				className="ml-2 rounded border border-rose-500 bg-rose-500 px-2 text-sm text-white hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-300"
+				className="ml-2 rounded border border-rose-500 bg-rose-500 px-2 text-sm text-white hover:bg-rose-600 focus:outline-hidden focus:ring-2 focus:ring-rose-300"
 			>
 				Delete
 			</button>

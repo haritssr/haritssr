@@ -44,7 +44,7 @@ const SelectExample1 = () => {
 	return (
 		<Listbox value={selectedPerson} onChange={setSelectedPerson} as="div">
 			{/* button global css applied here, hover:bg-white used to override, but thats bad, because button global style still applied here */}
-			<Listbox.Button className="flex  w-full items-center justify-between rounded-md border border-zinc-500 px-2 py-1 placeholder:text-zinc-500 hover:border-blue-500 hover:bg-white focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 sm:w-1/3 ">
+			<Listbox.Button className="flex  w-full items-center justify-between rounded-md border border-zinc-500 px-2 py-1 placeholder:text-zinc-500 hover:border-blue-500 hover:bg-white focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-200 sm:w-1/3 ">
 				{selectedPerson.name}
 				<ChevronDownIcon className="h-5 w-5" />
 			</Listbox.Button>

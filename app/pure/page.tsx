@@ -263,20 +263,20 @@ export default function DesignSystem() {
 							aria-label="Manage your account"
 						>
 							<Tabs.Trigger
-								className="bg-white py-1 flex-1 flex items-center justify-center select-none data-[state=active]:text-zinc-800 data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-none cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500  border data-[state=active]:border-zinc-300 hover:border-zinc-300 border-transparent"
+								className="bg-white py-1 flex-1 flex items-center justify-center select-none data-[state=active]:text-zinc-800 data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500  border data-[state=active]:border-zinc-300 hover:border-zinc-300 border-transparent"
 								value="tab1"
 							>
 								Account
 							</Tabs.Trigger>
 							<Tabs.Trigger
-								className="bg-white py-1 flex-1 flex items-center justify-center select-none  data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-none cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500 data-[state=active]:text-zinc-800 border data-[state=active]:border-zinc-300 hover:border-zinc-300 border-transparent"
+								className="bg-white py-1 flex-1 flex items-center justify-center select-none  data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500 data-[state=active]:text-zinc-800 border data-[state=active]:border-zinc-300 hover:border-zinc-300 border-transparent"
 								value="tab2"
 							>
 								Password
 							</Tabs.Trigger>
 						</Tabs.List>
 						<Tabs.Content
-							className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
+							className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
 							value="tab1"
 						>
 							<div className="">
@@ -286,7 +286,7 @@ export default function DesignSystem() {
 							</div>
 						</Tabs.Content>
 						<Tabs.Content
-							className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
+							className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
 							value="tab2"
 						>
 							<div className="">
@@ -333,7 +333,7 @@ export default function DesignSystem() {
 								OK
 							</Toast.Close>
 						</Toast.Root>
-						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
+						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-hidden" />
 					</Toast.Provider>
 				</Box>
 				<Box title="Internal Link">
@@ -390,7 +390,7 @@ export default function DesignSystem() {
 				<Box title="Button: Secondary">
 					<button
 						type="button"
-						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
+						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow"
 					>
 						Button
 					</button>
@@ -398,7 +398,7 @@ export default function DesignSystem() {
 				<Box title="Button: With Icon">
 					<button
 						type="button"
-						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow flex items-center space-x-1"
+						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow flex items-center space-x-1"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -421,7 +421,7 @@ export default function DesignSystem() {
 				<Box title="Button: Only Icon">
 					<button
 						type="button"
-						className="p-1.5 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow flex items-center space-x-1"
+						className="p-1.5 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow flex items-center space-x-1"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -443,7 +443,7 @@ export default function DesignSystem() {
 				<Box title="Button: Danger">
 					<button
 						type="button"
-						className="px-3 py-1 text-red-600 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-red-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-600 shadow"
+						className="px-3 py-1 text-red-600 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-red-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-600 shadow"
 					>
 						Button
 					</button>
@@ -576,7 +576,7 @@ export default function DesignSystem() {
 				<Box title="Text Area">
 					<textarea
 						placeholder="Write something here..."
-						className="w-[200px] sm:w-[300px] rounded-md ring-1 ring-zinc-950/20 p-2 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow"
+						className="w-[200px] sm:w-[300px] rounded-md ring-1 ring-zinc-950/20 p-2 focus:outline-hidden focus:ring-zinc-800 placeholder:text-zinc-400 shadow"
 					/>
 				</Box>
 				<Box title="Toggle">
@@ -585,7 +585,7 @@ export default function DesignSystem() {
 							setPressed(!pressed);
 						}}
 						pressed={pressed}
-						className=" rounded-md bg-white px-3 py-1 text-zinc-800 hover:bg-zinc-50 data-[state=on]:text-blue-500 select-none ring-1 data-[state=on]:ring-blue-300 data-[state=off]:ring-zinc-950/20 focus:outline-none focus:ring-action shadow data-[state=on]:shadow-blue-100"
+						className=" rounded-md bg-white px-3 py-1 text-zinc-800 hover:bg-zinc-50 data-[state=on]:text-blue-500 select-none ring-1 data-[state=on]:ring-blue-300 data-[state=off]:ring-zinc-950/20 focus:outline-hidden focus:ring-action shadow data-[state=on]:shadow-blue-100"
 					>
 						{pressed ? "State : ON" : "State : OFF"}
 					</Toggle.Root>
@@ -675,14 +675,14 @@ export default function DesignSystem() {
 						<Dialog.Trigger asChild>
 							<button
 								type="button"
-								className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-none focus:ring-zinc-800 shadow"
+								className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow"
 							>
 								Open Modal
 							</button>
 						</Dialog.Trigger>
 						<Dialog.Portal>
 							<Dialog.Overlay className="bg-blackA9 fixed inset-0" />
-							<Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-[25px] shadow-lg border border-zinc-300 focus:outline-none">
+							<Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-[25px] shadow-lg border border-zinc-300 focus:outline-hidden">
 								<Dialog.Title className="text-zinc-800 text-base font-medium">
 									Title
 								</Dialog.Title>
@@ -713,7 +713,7 @@ export default function DesignSystem() {
 								<Dialog.Close asChild>
 									<button
 										type="button"
-										className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+										className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-hidden"
 										aria-label="Close"
 									>
 										<Cross2Icon />

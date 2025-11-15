@@ -55,7 +55,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 					{path}
 				</svg>
 
-				<div className={`text-[11px] leading-[15px] -mt-[1px] ${color}`}>
+				<div className={`text-[11px] leading-[15px] -mt-px ${color}`}>
 					{capitalizeFirstLetter(to)}
 				</div>
 			</div>

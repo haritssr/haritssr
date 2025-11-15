@@ -89,7 +89,7 @@ export default function NumberGame() {
 					{state.num1}+{state.num2}
 				</div>
 				<input
-					className="focus:ring-harislab rounded-md border border-gray-500 py-1 pl-2 focus:outline-none focus:ring-1"
+					className="focus:ring-harislab rounded-md border border-gray-500 py-1 pl-2 focus:outline-hidden focus:ring-1"
 					value={state.response}
 					onChange={updateResponse}
 					onKeyDown={inputKeyPress}

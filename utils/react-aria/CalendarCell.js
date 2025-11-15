@@ -46,7 +46,7 @@ export function CalendarCell({ state, date, currentMonth }) {
 				{...mergeProps(buttonProps, focusProps)}
 				ref={ref}
 				hidden={isOutsideMonth}
-				className={`group h-10 w-10 outline-none ${
+				className={`group h-10 w-10 outline-hidden ${
 					isRoundedLeft ? "rounded-l-full" : ""
 				} ${isRoundedRight ? "rounded-r-full" : ""} ${
 					isSelected ? "bg-violet-300" : ""

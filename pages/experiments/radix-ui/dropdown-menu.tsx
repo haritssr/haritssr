@@ -29,7 +29,7 @@ export default function ExportedDropdownMenu() {
 			</SubTitle>
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger>
-					<div className="rounded-md border border-zinc-400 py-1 hover:bg-zinc-100 font-medium px-3 text-zinc-800  focus:outline-none">
+					<div className="rounded-md border border-zinc-400 py-1 hover:bg-zinc-100 font-medium px-3 text-zinc-800  focus:outline-hidden">
 						Option
 					</div>
 				</DropdownMenu.Trigger>
