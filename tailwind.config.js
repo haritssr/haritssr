@@ -18,7 +18,6 @@ module.exports = {
     	},
     	extend: {
     		colors: {
-    			action: '#2563eb',
     			background: 'hsl(var(--background))',
     			foreground: 'hsl(var(--foreground))',
     			card: {
