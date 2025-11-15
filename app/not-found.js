@@ -9,7 +9,6 @@ export default function NotFound() {
 				</div>
 				<div className="items-center justify-center flex">
 					<Link
-						passHref
 						href="/"
 						className="cursor-pointer items-center rounded-lg bg-action py-2 px-4 text-white hover:bg-blue-500"
 					>

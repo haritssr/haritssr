@@ -6,7 +6,7 @@ export default function BackButton({
 	href,
 }: { name: string; href: string }) {
 	return (
-		<Link passHref href={href} className="block">
+		<Link href={href} className="block">
 			<span className=" inline-block w-full">
 				<span className="group flex items-center">
 					<ChevronLeftIcon

@@ -8,7 +8,6 @@ export default function InternalLink({
 }: { children: string; href: string; lg?: boolean }) {
 	return (
 		<Link
-			passHref
 			href={href}
 			className={`group inline-flex w-fit cursor-pointer items-center justify-start py-0.5 text-blue-500 hover:text-blue-400 ${
 				lg ? "text-lg" : "text-normal"

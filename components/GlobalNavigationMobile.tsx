@@ -39,7 +39,6 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 
 	return (
 		<Link
-			passHref
 			href={`${to === "/home" ? "/" : to}`}
 			className="block w-1/5 active:scale-95"
 		>
