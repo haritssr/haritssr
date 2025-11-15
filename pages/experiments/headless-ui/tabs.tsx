@@ -97,7 +97,7 @@ function Example1() {
 						className={({ selected }) =>
 							classNames(
 								"w-full rounded-md py-1.5 leading-5 text-zinc-800",
-								"focus:outline-none text-center cursor-pointer ",
+								"focus:outline-hidden text-center cursor-pointer ",
 								selected
 									? "bg-white border-zinc-300 border"
 									: "border border-zinc-100 hover:border-zinc-300",
@@ -117,7 +117,7 @@ function Example1() {
 						key={idx}
 						className={classNames(
 							"rounded-xl bg-white  p-1.5",
-							"ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+							"ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-hidden focus:ring-2",
 						)}
 					>
 						<ul>
@@ -141,7 +141,7 @@ function Example1() {
 									<span
 										className={classNames(
 											"absolute inset-0 rounded-md",
-											"ring-blue-400 focus:z-10 focus:outline-none focus:ring-2",
+											"ring-blue-400 focus:z-10 focus:outline-hidden focus:ring-2",
 										)}
 									/>
 								</li>

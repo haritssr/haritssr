@@ -96,7 +96,7 @@ function Section({ title }: { title: string }) {
 				</Accordion.Header>
 				<Accordion.Content className=" border border-zinc-400 rounded-b-md duration-100">
 					<textarea
-						className="w-full px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-600 h-auto"
+						className="w-full px-2 py-1 focus:outline-hidden focus:ring-2 focus:ring-blue-600 h-auto"
 						rows={1}
 						placeholder="Empty"
 					/>

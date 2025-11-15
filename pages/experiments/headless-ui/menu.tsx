@@ -40,7 +40,7 @@ const MenuExample1 = () => {
 				{({ open }) => (
 					<>
 						<div>
-							<Menu.Button className="inline-flex w-full justify-center items-center rounded-md bg-zinc-800 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-100 border border-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+							<Menu.Button className="inline-flex w-full justify-center items-center rounded-md bg-zinc-800 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-100 border border-zinc-500 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
 								Options
 								<ChevronDownIcon
 									className={`ml-2 -mr-1 h-5 w-5 text-zinc-800 ${
@@ -59,7 +59,7 @@ const MenuExample1 = () => {
 							leaveFrom="transform opacity-100 scale-100"
 							leaveTo="transform opacity-0 scale-95"
 						>
-							<Menu.Items className="absolute left-0 mt-2 w-52 origin-top-left space-y-1 rounded-md border border-zinc-500 p-2 focus:outline-none">
+							<Menu.Items className="absolute left-0 mt-2 w-52 origin-top-left space-y-1 rounded-md border border-zinc-500 p-2 focus:outline-hidden">
 								<Menu.Item>
 									{({ active }) => (
 										<button

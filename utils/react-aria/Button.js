@@ -14,7 +14,7 @@ export function Button(props) {
 			ref={ref}
 			className={`p-2 rounded-full ${props.isDisabled ? "text-gray-400" : ""} ${
 				!props.isDisabled ? "hover:bg-violet-100 active:bg-violet-200" : ""
-			} outline-none ${
+			} outline-hidden ${
 				isFocusVisible ? "ring-2 ring-offset-2 ring-purple-600" : ""
 			}`}
 		>

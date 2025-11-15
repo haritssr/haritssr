@@ -8,7 +8,7 @@ const defaultFormData = {
 	body: "",
 };
 const inputStyle =
-	"focus:outline-none focus:border focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-md px-2 py-0.5 border border-zinc-400";
+	"focus:outline-hidden focus:border focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-md px-2 py-0.5 border border-zinc-400";
 const wrapperStyle = "flex flex-col";
 const buttonStyle =
 	"w-full rounded-md bg-blue-600 px-2 py-1.5 text-white hover:bg-[#2563eb]/90";

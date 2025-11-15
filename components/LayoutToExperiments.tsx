@@ -57,7 +57,7 @@ export default function LayoutToExperiments({
 
 			<GlobalNavigation />
 
-			<main className="mx-auto flex max-w-5xl sm:-mt-[1px] sm:gap-10 sm:px-5 xl:px-0">
+			<main className="mx-auto flex max-w-5xl sm:-mt-px sm:gap-10 sm:px-5 xl:px-0">
 				<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
 					<SideBar domain={domain} />
 
@@ -84,7 +84,7 @@ export default function LayoutToExperiments({
 								<Breadcrumbs />
 								<h1
 									ref={ref}
-									className="z-40 mx-auto mb-2 block h-auto w-full break-words text-left font-bold text-zinc-800 text-3xl mt-10"
+									className="z-40 mx-auto mb-2 block h-auto w-full wrap-break-word text-left font-bold text-zinc-800 text-3xl mt-10"
 								>
 									{title}
 								</h1>
