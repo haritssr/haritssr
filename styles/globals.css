@@ -78,6 +78,7 @@ s ::-webkit-scrollbar {
 ::-webkit-scrollbar-thumb:hover {
 	background: #71717a;
 }
+
 @layer base {
   :root {
 		--background: 0 0% 100%;
@@ -133,6 +134,7 @@ s ::-webkit-scrollbar {
 		--chart-5: 340 75% 55%;
 	}
 }
+
 @layer base {
   * {
     @apply border-border;
