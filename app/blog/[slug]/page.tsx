@@ -8,48 +8,54 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SidebarBlog from "./SidebarBlog";
 import TableOfContents from "./TableOfContent";
 
-export async function generateMetadata({
-	params,
-}): Promise<Metadata | undefined> {
-	const post = allBlogs.find((post) => post.slug === params.slug);
-	if (!post) {
-		return;
-	}
 
-	const {
-		title,
-		publishedAt: publishedTime,
-		summary: description,
-		image,
-		slug,
-	} = post;
-	const ogImage = image
-		? `https://haritssr.com${image}`
-		: `https://haritssr.com/og?title=${title}`;
+// export async function generateMetadata({
+// 	params,
+// }: {
+// 	params: Promise<{ slug: string }>;
+// }): Promise<Metadata | undefined> {
+// 	const { slug } = await params;
+// 	const blog = allBlogs.find((blog) => blog.slug === slug);
 
-	return {
-		title,
-		description,
-		openGraph: {
-			title,
-			description,
-			type: "article",
-			publishedTime,
-			url: `https://haritssr.com/blog/${slug}`,
-			images: [
-				{
-					url: ogImage,
-				},
-			],
-		},
-		twitter: {
-			card: "summary_large_image",
-			title,
-			description,
-			images: [ogImage],
-		},
-	};
-}
+// 	if (!blog) {
+// 		return;
+// 	}
+
+// 	const {
+// 		title,
+// 		publishedAt: publishedTime,
+// 		summary: description,
+// 		image,
+// 		slug: blogSlug,
+// 	} = blog;
+
+// 	const ogImage = image
+// 		? `https://haritssr.com${image}`
+// 		: `https://haritssr.com/og?title=${title}`;
+
+// 	return {
+// 		title,
+// 		description,
+// 		openGraph: {
+// 			title,
+// 			description,
+// 			type: "article",
+// 			publishedTime,
+// 			url: `https://haritssr.com/blog/${blogSlug}`,
+// 			images: [
+// 				{
+// 					url: ogImage,
+// 				},
+// 			],
+// 		},
+// 		twitter: {
+// 			card: "summary_large_image",
+// 			title,
+// 			description,
+// 			images: [ogImage],
+// 		},
+// 	};
+// }
 
 function formatDate(date: string) {
 	const currentDate = new Date();
@@ -80,10 +86,15 @@ function formatDate(date: string) {
 	return `${fullDate} (${formattedDate})`;
 }
 
-export default function Blog({ params }) {
-	const post = allBlogs.find((post) => post.slug === params.slug);
+export default async function Blog({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}) {
+	const { slug } = await params;
+	const blog = allBlogs.find((blog) => blog.slug === slug);
 
-	if (!post) {
+	if (!blog) {
 		notFound();
 	}
 
@@ -98,23 +109,23 @@ export default function Blog({ params }) {
 					<BackButton href="/blog" name="All Articles" />
 				</div>
 				<script type="application/ld+json" suppressHydrationWarning>
-					{JSON.stringify(post.structuredData)}
+					{JSON.stringify(blog.structuredData)}
 				</script>
 				<h1 className="font-bold text-2xl tracking-tighter">
-					<Balancer>{post.title}</Balancer>
+					<Balancer>{blog.title}</Balancer>
 				</h1>
 				<div className="flex items-center mt-2 mb-8 text-sm">
-					<p>{formatDate(post.publishedAt)}</p>
+					<p>{formatDate(blog.publishedAt)}</p>
 					&nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
-					<p>{post.structuredData.wordCount} Words</p>
+					<p>{blog.structuredData.wordCount} Words</p>
 					&nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
-					<p>{Math.ceil(post.structuredData.wordCount / 200)} Min Read</p>
+					<p>{Math.ceil(blog.structuredData.wordCount / 200)} Min Read</p>
 				</div>
-				<Mdx code={post.body.code} />
+				<Mdx code={blog.body.code} />
 			</div>
 			{/* Table of Content */}
 			<TableOfContents
-				title={post.title.toLocaleLowerCase().split(" ").join("-")}
+				title={blog.title.toLocaleLowerCase().split(" ").join("-")}
 			/>
 		</div>
 	);
