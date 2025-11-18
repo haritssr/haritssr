@@ -2,7 +2,6 @@ import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 import type React from "react";
 import * as Select from "@radix-ui/react-select";
-import classnames from "classnames";
 import {
 	CheckIcon,
 	ChevronDownIcon,
@@ -24,7 +23,7 @@ export default function ExportedSelect() {
 const SelectDemo = () => (
 	<Select.Root>
 		<Select.Trigger
-			className="inline-flex items-center justify-center rounded px-[15px] text-[13px] leading-none h-[35px] gap-[5px] bg-white text-violet11 shadow-[0_2px_10px] shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-violet9 outline-hidden"
+			className="inline-flex items-center justify-center rounded px-[15px] text-[13px] leading-none h-[35px] gap-[5px] bg-white text-violet11 shadow-[0_2px_10px] shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-placeholder:text-violet9 outline-hidden"
 			aria-label="Food"
 		>
 			<Select.Value placeholder="Select a fruit…" />
@@ -33,7 +32,7 @@ const SelectDemo = () => (
 			</Select.Icon>
 		</Select.Trigger>
 		<Select.Portal>
-			<Select.Content className="overflow-hidden bg-white rounded-md shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
+			<Select.Content className="overflow-hidden bg-white rounded-md shadow-[0px_10px_38px_-10px_rgba(22,23,24,0.35),0px_10px_20px_-15px_rgba(22,23,24,0.2)]">
 				<Select.ScrollUpButton className="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default">
 					<ChevronUpIcon />
 				</Select.ScrollUpButton>
@@ -49,7 +48,7 @@ const SelectDemo = () => (
 						<SelectItem value="pineapple">Pineapple</SelectItem>
 					</Select.Group>
 
-					<Select.Separator className="h-[1px] bg-violet6 m-[5px]" />
+					<Select.Separator className="h-px bg-violet6 m-[5px]" />
 
 					<Select.Group>
 						<Select.Label className="px-[25px] text-xs leading-[25px] text-mauve11">
@@ -62,7 +61,7 @@ const SelectDemo = () => (
 						<SelectItem value="leek">Leek</SelectItem>
 					</Select.Group>
 
-					<Select.Separator className="h-[1px] bg-violet6 m-[5px]" />
+					<Select.Separator className="h-px bg-violet6 m-[5px]" />
 
 					<Select.Group>
 						<Select.Label className="px-[25px] text-xs leading-[25px] text-mauve11">
@@ -96,7 +95,7 @@ function SelectItem({
 			value={value}
 			{...props}
 			className={
-				"text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-hidden data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+				"text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-disabled:text-mauve8 data-disabled:pointer-events-none data-highlighted:outline-hidden data-highlighted:bg-violet9 data-highlighted:text-violet1"
 			}
 		>
 			<Select.ItemText>{children}</Select.ItemText>
