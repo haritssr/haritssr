@@ -47,7 +47,7 @@ export default function Halaman({ posts }) {
 	return (
 		<Layout browserTitle={posts.title} description={posts.title}>
 			<TitleBack href="Articles" name={posts.title} />
-			<div className="text-blue-500 ">Article {posts.id}</div>
+			<div className="text-action ">Article {posts.id}</div>
 			<div>{posts.body}</div>
 		</Layout>
 	);

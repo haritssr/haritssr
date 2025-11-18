@@ -30,7 +30,7 @@ export default function ExportedCheckbox() {
 						// defaultChecked
 						id="c1"
 					>
-						<CheckboxPrimitive.Indicator className="text-blue-500">
+						<CheckboxPrimitive.Indicator className="text-action">
 							<CheckIcon className="h-5 w-5" />
 						</CheckboxPrimitive.Indicator>
 					</CheckboxPrimitive.Root>

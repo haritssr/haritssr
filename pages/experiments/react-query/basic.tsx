@@ -42,7 +42,7 @@ const NameCard = ({ name, age, city }) => {
 		<div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
 			<div className="text-xl font-semibold text-gray-700">{name}</div>
 			<div className="text-gray-500">{age}</div>
-			<div className="text-blue-500">{city}</div>
+			<div className="text-action">{city}</div>
 		</div>
 	);
 };

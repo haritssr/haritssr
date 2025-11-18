@@ -42,12 +42,12 @@ export default function Contacts() {
 										className="group inline-block w-fit cursor-pointer items-center text-zinc-500 "
 									>
 										<span className="flex items-center">
-											<span className="text-tiny sm:text-base group-hover:text-blue-500">
+											<span className="text-tiny sm:text-base group-hover:text-action">
 												Web Product Engineer
 											</span>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
-												className="h-4 w-4 ml-1  text-zinc-500 group-hover:text-blue-500 mt-0.5"
+												className="h-4 w-4 ml-1  text-zinc-500 group-hover:text-action mt-0.5"
 												fill="none"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
@@ -85,12 +85,12 @@ export default function Contacts() {
 									className="group inline-block w-fit cursor-pointer items-center text-zinc-500 "
 								>
 									<span className="flex items-center">
-										<span className="text-tiny sm:text-base group-hover:text-blue-500">
+										<span className="text-tiny sm:text-base group-hover:text-action">
 											Haris Lab
 										</span>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
-											className="h-4 w-4 ml-1  text-zinc-500 group-hover:text-blue-500 mt-0.5"
+											className="h-4 w-4 ml-1  text-zinc-500 group-hover:text-action mt-0.5"
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke="currentColor"
@@ -115,7 +115,7 @@ export default function Contacts() {
 						<a
 							title="Send me an email"
 							href="mailto:haritssr@gmail.com"
-							className="text-zinc-500 col-span-2 hover:text-blue-500 text-tiny sm:text-base"
+							className="text-zinc-500 col-span-2 hover:text-action text-tiny sm:text-base"
 						>
 							haritssr@gmail.com
 						</a>
@@ -129,7 +129,7 @@ export default function Contacts() {
 							rel="noopener noreferrer"
 							title="See South Tangerang at Google Maps"
 							href="https://www.google.com/maps/place/Tangerang+Selatan,+Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x8706481c2c4aafe4?sa=X&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgPEAA&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgQEAI"
-							className="text-zinc-500 col-span-2 hover:text-blue-500 text-tiny sm:text-base"
+							className="text-zinc-500 col-span-2 hover:text-action text-tiny sm:text-base"
 						>
 							South Tangerang, Indonesia
 						</a>
