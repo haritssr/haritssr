@@ -2,14 +2,18 @@ const { withContentlayer } = require("next-contentlayer");
 import type { NextConfig } from 'next'
 
 
-const nextConfig: NextConfig = {
-	turbopack: {
-    // ...
-  },
+type ExtendedNextConfig = NextConfig & {
+	experimental?: NextConfig["experimental"] & {
+		turbopackFileSystemCacheForDev?: boolean;
+	};
+};
+
+const nextConfig: ExtendedNextConfig = {
+	turbopack: {},
 	reactStrictMode: false,
 	experimental: {
-		// reactCompiler: true,
-	},
+    turbopackFileSystemCacheForDev: true,
+  },
 	images: {
 		formats: ["image/avif", "image/webp"],
 		remotePatterns: [
