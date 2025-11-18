@@ -37,7 +37,7 @@ export default function Counter() {
 			<div
 				onClick={onToggle}
 				onKeyDown={onToggle}
-				className="cursor-pointer select-none hover:text-blue-500"
+				className="cursor-pointer select-none hover:text-action"
 			>
 				{play
 					? "Stop"
@@ -48,7 +48,7 @@ export default function Counter() {
 			<div
 				onClick={onReset}
 				onKeyDown={onReset}
-				className="cursor-pointer select-none hover:text-blue-500"
+				className="cursor-pointer select-none hover:text-action"
 			>
 				Reset
 			</div>

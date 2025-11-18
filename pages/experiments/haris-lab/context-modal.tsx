@@ -36,7 +36,7 @@ function App() {
 						</div>
 					</section>
 					<section className="space-y-1 p-5">
-						<div className="cursor-pointer rounded-md bg-zinc-100 px-3 py-1 text-blue-500">
+						<div className="cursor-pointer rounded-md bg-zinc-100 px-3 py-1 text-action">
 							Section
 						</div>
 						<div className="ml-5 cursor-pointer rounded-md px-3 py-1 hover:bg-zinc-100">

@@ -51,7 +51,7 @@ export default function Articles({ posts }) {
 							key={post.id}
 							className="rounded-md border border-zinc-300 bg-zinc-50 p-4 duration-200 ease-out hover:cursor-pointer hover:bg-white "
 						>
-							<div className="text-blue-500 ">Article {post.id}</div>
+							<div className="text-action ">Article {post.id}</div>
 							<div className="text-xl font-semibold text-gray-800">
 								{post.title}
 							</div>

@@ -12,11 +12,11 @@ export default function Destination({ link }: { link: string }) {
 	let color: string;
 
 	if (pathname === `/${link}`) {
-		color = "text-blue-500";
+		color = "text-action";
 	} else if (CurrentPageBaseRoute === link) {
-		color = "text-blue-500";
+		color = "text-action";
 	} else {
-		color = "text-zinc-700 hover:text-blue-500";
+		color = "text-zinc-700 hover:text-action";
 	}
 
 	return (

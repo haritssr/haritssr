@@ -315,25 +315,25 @@ export default function DesignSystem() {
 						</button>
 
 						<Toast.Root
-							className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-3 pl-4 pr-6 grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"
+							className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-3 pl-4 pr-6 grid [grid-template-areas:'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"
 							open={open}
 							onOpenChange={setOpen}
 						>
 							<div className="">
-								<Toast.Title className="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">
+								<Toast.Title className="[grid-area:title] mb-[5px] font-medium text-slate12 text-[15px]">
 									Hai, I am Toast!
 								</Toast.Title>
 								<Toast.Description asChild>
-									<div className="[grid-area:_description] m-0 text-zinc-500 text-[13px] leading-[1.3]">
+									<div className="[grid-area:description] m-0 text-zinc-500 text-[13px] leading-[1.3]">
 										Thanks for clicking me!
 									</div>
 								</Toast.Description>
 							</div>
-							<Toast.Close className="text-blue-500 hover:text-[#2563eb]/90">
+							<Toast.Close className="text-action hover:text-[#2563eb]/90">
 								OK
 							</Toast.Close>
 						</Toast.Root>
-						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-hidden" />
+						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-2147483647 outline-hidden" />
 					</Toast.Provider>
 				</Box>
 				<Box title="Internal Link">
@@ -585,7 +585,7 @@ export default function DesignSystem() {
 							setPressed(!pressed);
 						}}
 						pressed={pressed}
-						className=" rounded-md bg-white px-3 py-1 text-zinc-800 hover:bg-zinc-50 data-[state=on]:text-blue-500 select-none ring-1 data-[state=on]:ring-blue-300 data-[state=off]:ring-zinc-950/20 focus:outline-hidden focus:ring-action shadow data-[state=on]:shadow-blue-100"
+						className=" rounded-md bg-white px-3 py-1 text-zinc-800 hover:bg-zinc-50 data-[state=on]:text-action select-none ring-1 data-[state=on]:ring-blue-300 data-[state=off]:ring-zinc-950/20 focus:outline-hidden focus:ring-action shadow data-[state=on]:shadow-blue-100"
 					>
 						{pressed ? "State : ON" : "State : OFF"}
 					</Toggle.Root>

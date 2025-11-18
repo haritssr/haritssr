@@ -169,7 +169,7 @@ function IndividualTask({ task, onChange, onDelete }) {
 			<div className="flex items-center space-x-2">
 				<div
 					className={`${
-						task.done ? "text-red-500 line-through" : "text-blue-500"
+						task.done ? "text-red-500 line-through" : "text-action"
 					}  `}
 				>
 					{task.text}

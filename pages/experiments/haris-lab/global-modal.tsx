@@ -33,7 +33,7 @@ function App() {
 							Pencarian{" "}
 						</Dialog.Title>
 						<div className="flex w-1/3 justify-end">
-							<Dialog.Close className="text-end text-blue-500 hover:text-blue-700">
+							<Dialog.Close className="text-end text-action hover:text-blue-700">
 								Selesai
 							</Dialog.Close>
 						</div>

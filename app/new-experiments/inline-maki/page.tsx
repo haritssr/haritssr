@@ -29,7 +29,7 @@ function InlineMAKI({ value }: { value: string }) {
 					<Accordion.Trigger className="w-full">
 						<div className="w-full flex items-center justify-between rounded-md bg-zinc-50/50 border border-zinc-200 px-3 py-1 group-rdx-state-open:rounded-b-0 group-rdx-state-open:border-b-0 text-tiny">
 							<div className="text-zinc-400">Nomor Soal</div>
-							<div className="text-blue-500">Kerjakan</div>
+							<div className="text-action">Kerjakan</div>
 						</div>
 					</Accordion.Trigger>
 				</Accordion.Header>
@@ -114,7 +114,7 @@ function Section({ title }: { title: string }) {
 function ActionButton() {
 	return (
 		<button
-			className="flex items-center text-zinc-700 space-x-1 rounded pl-1 pr-2 py-0.5 border  hover:bg-zinc-50 border-zinc-400 shadow-sm active:translate-y-[1px] duration-100 shadow-zinc-200"
+			className="flex items-center text-zinc-700 space-x-1 rounded pl-1 pr-2 py-0.5 border  hover:bg-zinc-50 border-zinc-400 shadow-sm active:translate-y-px duration-100 shadow-zinc-200"
 			type="button"
 		>
 			<PlusIcon className="h-3 w-3 stroke-2" />
