@@ -2,7 +2,7 @@
 @config "../tailwind.config.js";
 
 @theme {
-	--color-action: '#2563eb',
+	--color-action: oklch(62.3% 0.214 259.815);
 }
 
 input[type="search"],
@@ -51,9 +51,6 @@ body {
 	/* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
-a {
-	text-decoration: none;
-}
 
 * {
 	box-sizing: border-box;
