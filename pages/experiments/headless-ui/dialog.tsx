@@ -4,8 +4,18 @@ import ExternalLink from "@/components/ExternalLink";
 
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import type { ComponentType } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import Section from "@/components/Section";
+
+const HeadlessDialog = Dialog as unknown as ComponentType<any> & {
+	Title: ComponentType<any>;
+	Description: ComponentType<any>;
+	Overlay: ComponentType<any>;
+};
+
+const TransitionRoot = Transition.Root as unknown as ComponentType<any>;
+const TransitionChild = Transition.Child as unknown as ComponentType<any>;
 
 export default function ExportedDialog() {
 	return (
@@ -67,31 +77,33 @@ const DialogExample1 = () => {
 				Open dialog
 			</button>
 
-			<Dialog
+			<HeadlessDialog
 				open={isOpen}
 				onClose={() => setIsOpen(false)}
 				className="fixed inset-x-0 top-[25vh] z-40 mx-auto h-fit w-2/3 sm:w-1/2"
 			>
-				<Dialog.Overlay className="fixed inset-0 bg-zinc-800/80" />
+				<HeadlessDialog.Overlay className="fixed inset-0 bg-zinc-800/80" />
 
 				<div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-					<Dialog.Title className="text-xl font-semibold">Title</Dialog.Title>
-					<Dialog.Description className="text-zinc-600">
+					<HeadlessDialog.Title className="text-xl font-semibold">
+						Title
+					</HeadlessDialog.Title>
+					<HeadlessDialog.Description className="text-zinc-600">
 						Lorem ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry&apos;s standard dummy
 						text ever since the 1500s.
-					</Dialog.Description>
+					</HeadlessDialog.Description>
 					<div className="flex w-full justify-end">
 						<button
 							type="button"
-							className="rounded-md px-2 py-1 text-blue-500 hover:bg-zinc-100 hover:text-blue-500"
+							className="rounded-md px-2 py-1 text-action hover:bg-zinc-100 hover:text-action"
 							onClick={() => setIsOpen(false)}
 						>
 							Close
 						</button>
 					</div>
 				</div>
-			</Dialog>
+			</HeadlessDialog>
 		</div>
 	);
 };
@@ -109,13 +121,13 @@ const DialogExample2 = () => {
 			>
 				Open dialog
 			</button>
-			<Transition.Root show={isOpen} as={Fragment}>
-				<Dialog
+			<TransitionRoot show={isOpen} as={Fragment}>
+				<HeadlessDialog
 					open={isOpen}
 					onClose={() => setIsOpen(false)}
 					className="fixed inset-x-0 top-[25vh] z-40 mx-auto h-fit w-2/3 sm:w-1/2"
 				>
-					<Transition.Child
+					<TransitionChild
 						enter="duration-300 ease-out"
 						enterFrom="opacity-0"
 						enterTo="opacity-100"
@@ -123,28 +135,30 @@ const DialogExample2 = () => {
 						leaveFrom="opacity-100"
 						leaveTo="opacity-0"
 					>
-						<Dialog.Overlay className="fixed inset-0 bg-zinc-800/80" />
-					</Transition.Child>
+						<HeadlessDialog.Overlay className="fixed inset-0 bg-zinc-800/80" />
+					</TransitionChild>
 
 					<div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-						<Dialog.Title className="text-xl font-semibold">Title</Dialog.Title>
-						<Dialog.Description className="text-zinc-600">
+						<HeadlessDialog.Title className="text-xl font-semibold">
+							Title
+						</HeadlessDialog.Title>
+						<HeadlessDialog.Description className="text-zinc-600">
 							Lorem ipsum is simply dummy text of the printing and typesetting
 							industry. Lorem Ipsum has been the industry&apos;s standard dummy
 							text ever since the 1500s.
-						</Dialog.Description>
+						</HeadlessDialog.Description>
 						<div className="flex w-full justify-end">
 							<button
 								type="button"
-								className="rounded-md px-2 py-1 text-blue-500 hover:bg-zinc-100 hover:text-blue-500"
+								className="rounded-md px-2 py-1 text-action hover:bg-zinc-100 hover:text-action"
 								onClick={() => setIsOpen(false)}
 							>
 								Close
 							</button>
 						</div>
 					</div>
-				</Dialog>
-			</Transition.Root>
+				</HeadlessDialog>
+			</TransitionRoot>
 		</div>
 	);
 };
