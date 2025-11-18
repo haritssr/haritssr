@@ -1,7 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind base;
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+	--color-action: '#2563eb',
+}
 
 input[type="search"],
 input[type="url"],
@@ -9,7 +11,7 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 input[type="tel"] {
-	@apply rounded-md ring-1 ring-zinc-950/20 px-2.5 py-1 focus:outline-none focus:ring-zinc-800 placeholder:text-zinc-400 shadow;
+	@apply rounded-md ring-1 ring-zinc-950/20 px-2.5 py-1 focus:outline-hidden focus:ring-zinc-800 placeholder:text-zinc-400 shadow;
 }
 
 
@@ -18,7 +20,7 @@ input[type="date"],
 input[type="week"],
 input[type="month"],
 select {
-	@apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
+	@apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-200;
 }
 	
 input[type="reset"],
@@ -50,7 +52,6 @@ body {
 }
 
 a {
-	color: inherit;
 	text-decoration: none;
 }
 
@@ -81,6 +82,7 @@ s ::-webkit-scrollbar {
 ::-webkit-scrollbar-thumb:hover {
 	background: #71717a;
 }
+
 @layer base {
   :root {
 		--background: 0 0% 100%;
@@ -136,6 +138,7 @@ s ::-webkit-scrollbar {
 		--chart-5: 340 75% 55%;
 	}
 }
+
 @layer base {
   * {
     @apply border-border;

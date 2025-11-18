@@ -20,7 +20,6 @@ export default function Posts({ allPostsData }) {
 				{allPostsData.map(({ id, date, title }) => (
 					<li key={id}>
 						<Link
-							passHref
 							href={`/experiments/nextjs/posts/${id}`}
 							className="block"
 						>

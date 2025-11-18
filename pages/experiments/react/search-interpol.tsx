@@ -90,7 +90,7 @@ export default function SearchInterpol() {
 
 			<input
 				type="search"
-				className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-200"
+				className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:outline-hidden focus:ring-2 focus:ring-zinc-200"
 				placeholder="search"
 				onChange={(e) => setSearch(e.target.value)}
 			/>

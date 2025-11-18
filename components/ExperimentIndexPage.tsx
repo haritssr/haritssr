@@ -24,7 +24,7 @@ export default function ExperimentIndexPage({
 		>
 			{/* SubNavigation */}
 			<section
-				className={`sticky -top-0 sm:top-[44.5px] border-b -mx-5 sm:max-w-5xl sm:mx-auto sm:mt-10 ${
+				className={`sticky top-0 sm:top-[44.5px] border-b -mx-5 sm:max-w-5xl sm:mx-auto sm:mt-10 ${
 					inView
 						? "border-zinc-200"
 						: "border-b bg-white/70 saturate-150 backdrop-blur-lg"
@@ -59,7 +59,6 @@ export default function ExperimentIndexPage({
 					{experiment.links?.map((link) => (
 						<li key={link}>
 							<Link
-								passHref
 								key={link}
 								href={`/experiments/${experiment.title
 									.toLowerCase()
@@ -88,7 +87,6 @@ export default function ExperimentIndexPage({
 const BackToExperiments = ({ inView }: { inView: unknown }) => {
 	return (
 		<Link
-			passHref
 			href="/experiments"
 			className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${
 				inView ? "w-1/2 sm:-ml-5" : "w-1/4"

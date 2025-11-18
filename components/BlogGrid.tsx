@@ -9,10 +9,9 @@ export default function BlogGrid() {
 		<div className="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-2 md:grid-cols-3">
 			{allBlogs.map((post) => (
 				<Link
-					passHref
 					key={post.slug}
 					href={`/blog/${post.slug}`}
-					className="rounded-lg border border-zinc-300 px-3 py-2 hover:bg-zinc-50 flex bg-white items-start justify-between  group"
+					className="rounded-lg border border-zinc-300 px-3 py-2 hover:bg-zinc-100 bg-zinc-50 flex  items-start justify-between  group"
 				>
 					<>
 						<div className="w-full text-zinc-500">

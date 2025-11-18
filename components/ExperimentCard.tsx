@@ -8,10 +8,9 @@ export default function ExperimentCard({
 }: { experiment: ExperimentsData }) {
 	return (
 		<Link
-			passHref
 			href={`/experiments/${experiment.title.toLowerCase().replace(" ", "-")}`}
 			key={experiment.id}
-			className="space-y-1 px-3 py-2.5 hover:bg-zinc-50 border border-zinc-300 rounded-xl group"
+			className="space-y-1 px-3 py-2.5 hover:bg-zinc-100 bg-zinc-50 border border-zinc-300 rounded-xl group"
 		>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center space-x-2">

@@ -39,7 +39,6 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 
 	return (
 		<Link
-			passHref
 			href={`${to === "/home" ? "/" : to}`}
 			className="block w-1/5 active:scale-95"
 		>
@@ -56,7 +55,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 					{path}
 				</svg>
 
-				<div className={`text-[11px] leading-[15px] -mt-[1px] ${color}`}>
+				<div className={`text-[11px] leading-[15px] -mt-px ${color}`}>
 					{capitalizeFirstLetter(to)}
 				</div>
 			</div>

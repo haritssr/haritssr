@@ -2,7 +2,7 @@ import SubTitle from "@/components/SubTitle";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Link from "next/link";
-import type { ReactChild, ReactFragment, ReactPortal } from "react";
+import type { ReactPortal } from "react";
 
 //This pages includes : the list of the available pages to be visited
 
@@ -43,11 +43,10 @@ export default function Articles({ posts }) {
 				{posts.map(
 					(post: {
 						id: number;
-						title: boolean | ReactChild | ReactFragment | ReactPortal;
-						body: boolean | ReactChild | ReactFragment | ReactPortal;
+						title: boolean | ReactPortal;
+						body: boolean | ReactPortal;
 					}) => (
 						<Link
-							passHref
 							href={`/experiments/nextjs/articles/${post.id}`}
 							key={post.id}
 							className="rounded-md border border-zinc-300 bg-zinc-50 p-4 duration-200 ease-out hover:cursor-pointer hover:bg-white "

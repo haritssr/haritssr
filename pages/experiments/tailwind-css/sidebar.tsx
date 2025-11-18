@@ -64,7 +64,7 @@ export default function Sidebar() {
 								strokeWidth="1.5"
 								viewBox="0 0 24 24"
 								width="24"
-								className="hover:text-zinc-400 outline-none"
+								className="hover:text-zinc-400 outline-hidden"
 							>
 								<title>Content Icon</title>
 								<rect x="3" y="3" width="18" height="18" rx="2" ry="2" />

@@ -12,7 +12,7 @@ export default function Footer() {
 						2021–{new Date().getFullYear()}
 					</span>{" "}
 					by{" "}
-					<Link passHref href="/about" className=" hover:text-zinc-800">
+					<Link href="/about" className=" hover:text-zinc-800">
 						Harits Syah
 					</Link>
 				</div>

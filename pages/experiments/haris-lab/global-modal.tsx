@@ -49,14 +49,13 @@ function App() {
 								name=""
 								id=""
 								placeholder="Cari Variabel, Bab, Rumus..."
-								className="w-full border-[0px] bg-zinc-100 py-0 pl-1 caret-blue-600 outline-none ring-inset placeholder:text-zinc-500 focus:outline-none focus:ring-apple-gray6 focus:placeholder:text-zinc-700"
+								className="w-full border-0 bg-zinc-100 py-0 pl-1 caret-blue-600 outline-hidden ring-inset placeholder:text-zinc-500 focus:outline-hidden focus:ring-apple-gray6 focus:placeholder:text-zinc-700"
 							/>
 						</div>
 						<div className="mt-5 mb-1 pl-2 text-zinc-500">LINK CEPAT</div>
 						<div className="space-y-1 overflow-y-auto">
 							{quickLinks.map(({ icon, name }) => (
 								<Link
-									passHref
 									href="/"
 									key={name}
 									className="flex items-center space-x-1 rounded-md px-2 py-1 text-zinc-800 hover:bg-zinc-100"

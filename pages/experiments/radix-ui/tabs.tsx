@@ -32,20 +32,20 @@ export const TabsDemo = () => (
 			aria-label="Manage your account"
 		>
 			<Tabs.Trigger
-				className="bg-white py-1.5 flex-1 flex items-center justify-center select-none data-[state=active]:text-zinc-800 data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-none cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500  border data-[state=active]:border-zinc-300 border-transparent"
+				className="bg-white py-1.5 flex-1 flex items-center justify-center select-none data-[state=active]:text-zinc-800 data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500  border data-[state=active]:border-zinc-300 border-transparent"
 				value="tab1"
 			>
 				Account
 			</Tabs.Trigger>
 			<Tabs.Trigger
-				className="bg-white py-1.5 flex-1 flex items-center justify-center select-none  data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-none cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500 data-[state=active]:text-zinc-800 border data-[state=active]:border-zinc-300 border-transparent"
+				className="bg-white py-1.5 flex-1 flex items-center justify-center select-none  data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500 data-[state=active]:text-zinc-800 border data-[state=active]:border-zinc-300 border-transparent"
 				value="tab2"
 			>
 				Password
 			</Tabs.Trigger>
 		</Tabs.List>
 		<Tabs.Content
-			className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
+			className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
 			value="tab1"
 		>
 			<div className="">
@@ -55,7 +55,7 @@ export const TabsDemo = () => (
 			</div>
 		</Tabs.Content>
 		<Tabs.Content
-			className="grow p-5 mt-2 bg-white rounded-md outline-none border border-zinc-200"
+			className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
 			value="tab2"
 		>
 			<div className="">

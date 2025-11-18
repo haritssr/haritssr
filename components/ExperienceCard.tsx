@@ -59,11 +59,10 @@ export default function ExperienceCard({
 
 			<section className="px-3 pb-3">
 				<Link
-					passHref
 					href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-					className="py-1 text-zinc-100 bg-zinc-600 hover:bg-zinc-700 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center"
+					className="py-1.5 text-zinc-100 bg-zinc-600 hover:bg-zinc-700 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center"
 				>
-					<p>Read Case Study</p>
+					<p>Case Study</p>
 				</Link>
 			</section>
 		</div>
