@@ -1,6 +1,11 @@
 const { withContentlayer } = require("next-contentlayer");
+import type { NextConfig } from 'next'
 
-const nextConfig = {
+
+const nextConfig: NextConfig = {
+	turbopack: {
+    // ...
+  },
 	reactStrictMode: false,
 	experimental: {
 		// reactCompiler: true,
