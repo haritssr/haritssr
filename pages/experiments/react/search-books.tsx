@@ -1,8 +1,8 @@
+import type { ReactElement } from "react";
+import { useEffect, useRef, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import type { ReactElement } from "react";
-import { useEffect, useRef, useState } from "react";
 import data from "../../../data/Search2Data.json";
 
 interface DataType {

@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { GitHubIcon } from "./Icons";
-import Image from "next/image";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import Link from "next/link";
 import Destination from "@/components/Destination";
+import { GitHubIcon } from "./Icons";
 
 export default function GlobalNavigation() {
 	return (

@@ -1,9 +1,8 @@
-import Section from "@/components/Section";
-import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
-
 import { useRouter } from "next/router";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
+import Section from "@/components/Section";
+import SubTitle from "@/components/SubTitle";
 
 export default function Router() {
 	const router = useRouter();

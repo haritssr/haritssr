@@ -1,7 +1,7 @@
+import { ExperimentsData } from "data/ExperimentsData";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import Layout from "@/components/Layout";
 import { PageTitle } from "@/components/SubTitle";
-import { ExperimentsData } from "data/ExperimentsData";
 
 export default function ExperimentsPage() {
 	let totalExperiment = 0;

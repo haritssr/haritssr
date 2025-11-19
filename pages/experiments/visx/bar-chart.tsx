@@ -1,23 +1,22 @@
 //still confuse what it is actually, it has so many possible props
-import { Bar } from "@visx/shape";
-// <g/>
-import { Group } from "@visx/group";
+
+import { AxisBottom, AxisLeft } from "@visx/axis";
 //
 import { localPoint } from "@visx/event";
-import { AxisLeft, AxisBottom } from "@visx/axis";
-import { scaleBand, scaleLinear } from "@visx/scale";
-import { defaultStyles, useTooltip, TooltipWithBounds } from "@visx/tooltip";
+// <g/>
+import { Group } from "@visx/group";
 import appleStock, {
 	type AppleStock,
 } from "@visx/mock-data/lib/mocks/appleStock";
-
-import useMeasure from "react-use-measure";
+import { scaleBand, scaleLinear } from "@visx/scale";
+import { Bar } from "@visx/shape";
+import { defaultStyles, TooltipWithBounds, useTooltip } from "@visx/tooltip";
 import { timeFormat } from "d3-time-format";
-import type { TouchEvent, MouseEvent } from "react";
-
-import SubTitle from "@/components/SubTitle";
+import type { MouseEvent, TouchEvent } from "react";
+import useMeasure from "react-use-measure";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 const data = appleStock.slice(0, 20);
 const margin = 32;

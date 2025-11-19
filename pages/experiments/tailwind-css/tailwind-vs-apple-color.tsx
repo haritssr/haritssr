@@ -1,7 +1,6 @@
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Section from "@/components/Section";
 import SubTitle from "@/components/SubTitle";
-
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function TailwindColorVSAppleColor() {
 	return (

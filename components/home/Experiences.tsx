@@ -1,6 +1,6 @@
 import { ExperiencesData } from "data/ExperiencesData";
-import HomeSectionWrapper from "./HomeSectionWrapper";
 import ExperienceCard from "@/components/ExperienceCard";
+import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Experiences() {
 	return (

@@ -1,7 +1,6 @@
+import type { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "@/components/Layout";
 import TitleBack from "@/components/TitleBack";
-
-import type { GetStaticPaths, GetStaticProps } from "next";
 
 export default function DynamicPage({ person }) {
 	return (

@@ -1,9 +1,9 @@
 "use client";
 
 import Head from "next/head";
-import GlobalNavigation from "./GlobalNavigation";
 import { usePathname } from "next/navigation";
 import Footer from "./Footer";
+import GlobalNavigation from "./GlobalNavigation";
 import GlobalNavigationMobile from "./GlobalNavigationMobile";
 
 interface LayoutType {

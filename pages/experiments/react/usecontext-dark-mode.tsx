@@ -1,7 +1,7 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/outline";
-import { useContext, createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 const ThemeContext = createContext("light");
 

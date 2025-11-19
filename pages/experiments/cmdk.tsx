@@ -1,7 +1,7 @@
 import { Command } from "cmdk";
+import { useEffect, useState } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import { useEffect, useState } from "react";
 
 export default function CommandMenu() {
 	const [open, setOpen] = useState(false);

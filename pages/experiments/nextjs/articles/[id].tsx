@@ -1,7 +1,6 @@
-import TitleBack from "@/components/TitleBack";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "@/components/Layout";
-import type { GetStaticPaths } from "next";
-import type { GetStaticProps } from "next";
+import TitleBack from "@/components/TitleBack";
 
 //getStaticPaths in [id].tsx used to take dynamic-route-endpoint only, to ocntinue to getStaticProps
 //Alternative wihtout TypeScript -> export async function getStaticPaths() {...}

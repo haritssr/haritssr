@@ -1,7 +1,7 @@
 "use client";
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function Sidebar() {
 	const [open, setOpen] = useState(true);

@@ -8,11 +8,10 @@ import {
 	useReactTable,
 	type VisibilityState,
 } from "@tanstack/react-table";
-import { makeData, type Person } from "../../../utils/react-table/makeData";
-
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
+import { makeData, type Person } from "../../../utils/react-table/makeData";
 
 export default function ColumnOrdering() {
 	return (

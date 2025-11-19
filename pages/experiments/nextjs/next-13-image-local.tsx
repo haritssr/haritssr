@@ -1,11 +1,9 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-
-import LenovoWallpaper from "../../../public/images/LenovoWallPaper.jpg";
-
 import Image from "next/image";
-import SubTitle from "@/components/SubTitle";
 import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Section from "@/components/Section";
+import SubTitle from "@/components/SubTitle";
+import LenovoWallpaper from "../../../public/images/LenovoWallPaper.jpg";
 
 export default function Next13Image() {
 	return (

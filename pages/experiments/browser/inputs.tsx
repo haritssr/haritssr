@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import Section from "@/components/Section";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import type React from "react";
 import { useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import Section from "@/components/Section";
+import SubTitle from "@/components/SubTitle";
 
 export default function Inputs() {
 	return (

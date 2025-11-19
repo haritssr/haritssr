@@ -1,6 +1,6 @@
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Section from "@/components/Section";
 import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import style from "../../../styles/different.module.css";
 
 export default function CustomScroll() {

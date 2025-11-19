@@ -1,6 +1,6 @@
+import { ExperimentsData } from "data/ExperimentsData";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import HomeSectionWrapper from "./HomeSectionWrapper";
-import { ExperimentsData } from "data/ExperimentsData";
 
 export default function Experiments() {
 	let totalExperiment = 0;

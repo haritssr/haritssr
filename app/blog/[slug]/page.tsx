@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
-import { Mdx } from "@/components/mdx";
 import { allBlogs } from ".contentlayer/generated";
+import { notFound } from "next/navigation";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { Mdx } from "@/components/mdx";
 import SidebarBlog from "./SidebarBlog";
 import TableOfContents from "./TableOfContent";
 

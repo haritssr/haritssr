@@ -1,7 +1,7 @@
+import type { GetStaticProps } from "next";
+import InternalLink from "@/components/InternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import InternalLink from "@/components/InternalLink";
-import type { GetStaticProps } from "next";
 
 export default function Students({ students }) {
 	return (

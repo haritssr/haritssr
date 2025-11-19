@@ -1,7 +1,6 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-
-import SubTitle from "@/components/SubTitle";
 import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function Next13ImageRemote() {
 	return (

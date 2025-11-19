@@ -1,11 +1,11 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { Disclosure, Transition } from "@headlessui/react";
 import type React from "react";
+
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Section from "@/components/Section";
+import SubTitle from "@/components/SubTitle";
 
 const Data = [
 	{
