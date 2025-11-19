@@ -6,7 +6,7 @@ export default function YoutubeThumbnail() {
 		<LayoutToExperiments title="YouTube thumbnail" domain="Tailwind CSS">
 			<SubTitle>Youtube Thumbnail example</SubTitle>
 
-			<div className="relative h-[360px] w-full overflow-hidden  rounded-md border border-purple-300 bg-gradient-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">
+			<div className="relative h-[360px] w-full overflow-hidden  rounded-md border border-purple-300 bg-linear-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">
 				<div>
 					<Play />
 				</div>

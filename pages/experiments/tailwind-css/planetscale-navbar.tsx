@@ -12,7 +12,7 @@ export default function PlanetScaleNavBar() {
 			<div className="flex h-auto w-full flex-col items-start justify-between space-y-5 rounded-md bg-[#1a1b21] py-6 px-6 text-tiny md:flex-row md:items-center md:space-y-0 md:py-4 md:pr-4">
 				<div className="flex w-full items-center space-x-2 md:w-1/3">
 					<svg
-						className="block flex-shrink-0 text-zinc-100"
+						className="block shrink-0 text-zinc-100"
 						width="30"
 						height="30"
 						viewBox="0 0 44 44"
