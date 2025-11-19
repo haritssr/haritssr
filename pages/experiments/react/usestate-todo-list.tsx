@@ -1,4 +1,11 @@
-import { type Key, useState } from "react";
+import {
+	type Key,
+	type ReactElement,
+	type ReactNode,
+	type ReactPortal,
+	useState,
+} from "react";
+import type { JSX } from "react/jsx-runtime";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
@@ -90,8 +97,27 @@ function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
 
 function Task({ todo, onChange, onDelete }) {
 	const [isEditing, setIsEditing] = useState(false);
-	// biome-ignore lint/complexity/noBannedTypes: dynamic content type that can be string or JSX
-	let todoContent: {};
+
+	let todoContent:
+		| string
+		| number
+		| bigint
+		| boolean
+		| JSX.Element
+		| Iterable<ReactNode>
+		| Promise<
+				| string
+				| number
+				| bigint
+				| boolean
+				| ReactPortal
+				| ReactElement<unknown, string>
+				| Iterable<ReactNode>
+				| null
+				| undefined
+		  >
+		| null
+		| undefined;
 	if (isEditing) {
 		todoContent = (
 			<>
