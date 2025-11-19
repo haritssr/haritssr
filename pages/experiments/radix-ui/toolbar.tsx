@@ -1,17 +1,16 @@
-import * as ToolbarPrimitive from "@radix-ui/react-toolbar";
-import SubTitle from "@/components/SubTitle";
-import { styled } from "@stitches/react";
-import { violet, blackA, mauve } from "@radix-ui/colors";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-
+import { blackA, mauve, violet } from "@radix-ui/colors";
 import {
-	StrikethroughIcon,
-	TextAlignLeftIcon,
-	TextAlignCenterIcon,
-	TextAlignRightIcon,
 	FontBoldIcon,
 	FontItalicIcon,
+	StrikethroughIcon,
+	TextAlignCenterIcon,
+	TextAlignLeftIcon,
+	TextAlignRightIcon,
 } from "@radix-ui/react-icons";
+import { styled } from "@stitches/react";
+import { Toolbar as ToolbarPrimitive } from "radix-ui";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 const StyledToolbar = styled(ToolbarPrimitive.Root, {
 	display: "flex",

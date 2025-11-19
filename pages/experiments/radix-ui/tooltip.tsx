@@ -1,9 +1,9 @@
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { Tooltip } from "radix-ui";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import * as Tooltip from "@radix-ui/react-tooltip";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import ExplanationList from "@/components/ExplanationList";
 
 export default function ExportedTooltip() {
 	return (

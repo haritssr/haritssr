@@ -1,6 +1,6 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { QueueListIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import * as Dialog from "@radix-ui/react-dialog";
+import { Dialog } from "radix-ui";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function ContextModal() {
 	return (

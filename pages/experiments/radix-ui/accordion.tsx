@@ -1,11 +1,11 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { Accordion } from "radix-ui";
 
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import * as Accordion from "@radix-ui/react-accordion";
 import Section from "@/components/Section";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedAccordion() {
 	return (

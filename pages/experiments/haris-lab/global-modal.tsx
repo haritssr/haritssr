@@ -1,4 +1,3 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import {
 	AcademicCapIcon,
 	BookOpenIcon,
@@ -7,8 +6,9 @@ import {
 	MagnifyingGlassIcon,
 	ScaleIcon,
 } from "@heroicons/react/24/outline";
-import * as Dialog from "@radix-ui/react-dialog";
 import Link from "next/link";
+import { Dialog } from "radix-ui";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function GlobalModal() {
 	return (

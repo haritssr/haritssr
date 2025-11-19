@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
+import { Popover } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import * as Popover from "@radix-ui/react-popover";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedPopover() {
 	return (

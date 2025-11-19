@@ -1,9 +1,9 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import * as Toggle from "@radix-ui/react-toggle";
+import { Toggle } from "radix-ui";
 import { useState } from "react";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedToggle() {
 	const [pressed, setPressed] = useState(false);

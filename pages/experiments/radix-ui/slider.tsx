@@ -1,4 +1,4 @@
-import * as Slider from "@radix-ui/react-slider";
+import { Slider } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";

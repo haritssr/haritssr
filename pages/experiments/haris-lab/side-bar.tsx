@@ -48,7 +48,7 @@ function App() {
 }
 
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import * as Accordion from "@radix-ui/react-accordion";
+import { Accordion } from "radix-ui";
 import type React from "react";
 import { useRef, useState } from "react";
 

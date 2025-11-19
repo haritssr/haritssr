@@ -1,4 +1,4 @@
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import { ToggleGroup } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
