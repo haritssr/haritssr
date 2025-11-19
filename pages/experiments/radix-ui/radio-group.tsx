@@ -1,6 +1,6 @@
-import SubTitle from "@/components/SubTitle";
+import { RadioGroup } from "radix-ui";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import * as RadioGroup from "@radix-ui/react-radio-group";
+import SubTitle from "@/components/SubTitle";
 
 export default function RadioGroupDemo() {
 	return (

@@ -1,14 +1,14 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import {
-	ChevronDownIcon,
 	ArrowDownCircleIcon,
 	BuildingOffice2Icon,
+	ChevronDownIcon,
 } from "@heroicons/react/24/outline";
-import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Image from "next/image";
+import { NavigationMenu } from "radix-ui";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function NotionNavBar() {
 	return (

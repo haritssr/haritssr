@@ -1,12 +1,12 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import SubTitle from "@/components/SubTitle";
-import type React from "react";
-import * as Select from "@radix-ui/react-select";
 import {
 	CheckIcon,
 	ChevronDownIcon,
 	ChevronUpIcon,
 } from "@radix-ui/react-icons";
+import { Select } from "radix-ui";
+import type React from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedSelect() {
 	return (

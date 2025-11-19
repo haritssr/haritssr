@@ -1,4 +1,4 @@
-import * as Tabs from "@radix-ui/react-tabs";
+import { Tabs } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";

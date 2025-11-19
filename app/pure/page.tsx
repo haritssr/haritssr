@@ -1,28 +1,30 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
-import React, { Suspense } from "react";
-import { PageTitle } from "@/components/SubTitle";
-import * as Toggle from "@radix-ui/react-toggle";
-import { useState } from "react";
-import * as Switch from "@radix-ui/react-switch";
-import * as Accordion from "@radix-ui/react-accordion";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { CheckIcon } from "@radix-ui/react-icons";
-import * as Popover from "@radix-ui/react-popover";
-import * as Tabs from "@radix-ui/react-tabs";
-import * as Toast from "@radix-ui/react-toast";
-import Section from "@/components/Section";
-import InternalLink from "@/components/InternalLink";
-import * as Tooltip from "@radix-ui/react-tooltip";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import ExplanationList from "@/components/ExplanationList";
-import BackButton from "@/components/BackButton";
-import * as Dialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
-import Box from "@/components/Box";
+import {
+	ChevronDownIcon,
+	ExclamationCircleIcon,
+} from "@heroicons/react/24/outline";
+import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import {
+	Accordion,
+	Checkbox,
+	Dialog,
+	Popover,
+	Switch,
+	Tabs,
+	Toast,
+	Toggle,
+	Tooltip,
+} from "radix-ui";
+import React, { Suspense, useState } from "react";
+import BackButton from "@/components/BackButton";
+import Box from "@/components/Box";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import InternalLink from "@/components/InternalLink";
+import Section from "@/components/Section";
+import { PageTitle } from "@/components/SubTitle";
 
 // import { Metadata } from "next";
 // can't do this, since metadata only possible on server, and this /pure is client, see "use client"
@@ -194,15 +196,15 @@ export default function DesignSystem() {
 				</Box>
 				<Box title="Checkbox">
 					<div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:items-center">
-						<CheckboxPrimitive.Root
+						<Checkbox.Root
 							className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-400 bg-white hover:bg-zinc-100 rdx-state-checked:bg-action rdx-state-checked:border-action rdx-state-checked:shadow-blue-300 shadow hover:border-zinc-500"
 							// defaultChecked
 							id="c1"
 						>
-							<CheckboxPrimitive.Indicator className="text-white">
+							<Checkbox.Indicator className="text-white">
 								<CheckIcon className="h-5 w-5" />
-							</CheckboxPrimitive.Indicator>
-						</CheckboxPrimitive.Root>
+							</Checkbox.Indicator>
+						</Checkbox.Root>
 						<label className="select-none text-zinc-800" htmlFor="c1">
 							Accept terms and conditions.
 						</label>

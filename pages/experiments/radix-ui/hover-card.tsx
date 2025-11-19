@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
+import { HoverCard } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import * as HoverCard from "@radix-ui/react-hover-card";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedHoverCard() {
 	return (
@@ -46,7 +46,7 @@ export default function ExportedHoverCard() {
 						<div className="text-zinc-600">22</div>
 						<div className="text-zinc-700">South Tangerang</div>
 					</div>
-					<HoverCard.Arrow offset={20} className="fill-[#fff]" />
+					<HoverCard.Arrow offset={20} className="fill-#fff" />
 				</HoverCard.Content>
 			</HoverCard.Root>
 		</LayoutToExperiments>

@@ -1,13 +1,11 @@
 "use client";
 
-import * as Accordion from "@radix-ui/react-accordion";
-import * as Tooltip from "@radix-ui/react-tooltip";
-import * as Switch from "@radix-ui/react-switch";
 import {
 	ChevronDownIcon,
 	PlusIcon,
 	QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Accordion, Switch, Tooltip } from "radix-ui";
 
 export default function InlineMakiPage() {
 	return (

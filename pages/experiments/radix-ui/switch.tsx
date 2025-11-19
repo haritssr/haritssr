@@ -1,4 +1,4 @@
-import * as Switch from "@radix-ui/react-switch";
+import { Switch } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";

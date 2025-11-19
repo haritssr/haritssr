@@ -1,7 +1,7 @@
 "use client";
 
-import * as Toast from "@radix-ui/react-toast";
 import { usePathname } from "next/navigation";
+import { Toast } from "radix-ui";
 import React from "react";
 
 const CopyLinkAllPage = () => {

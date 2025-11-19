@@ -1,12 +1,11 @@
-import * as Collapsible from "@radix-ui/react-collapsible";
-import Section from "@/components/Section";
-import InternalLink from "@/components/InternalLink";
-import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
-
+import { Collapsible } from "radix-ui";
 import { useState } from "react";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import InternalLink from "@/components/InternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import Section from "@/components/Section";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedCollapsible() {
 	const [open, setOpen] = useState(false);

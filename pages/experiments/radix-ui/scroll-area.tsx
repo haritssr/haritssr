@@ -1,4 +1,4 @@
-import * as ScrollArea from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";

@@ -1,9 +1,9 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { DropdownMenu } from "radix-ui";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedDropdownMenu() {
 	const item =
@@ -34,7 +34,7 @@ export default function ExportedDropdownMenu() {
 					</div>
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content className="w-full border border-gray-500 bg-white rounded-md overflow-hidden py-3 origin-top-left">
-					<DropdownMenu.Arrow className="fill-zinc-800 stroke-zinc-800 -mt-[1px]" />
+					<DropdownMenu.Arrow className="fill-zinc-800 stroke-zinc-800 -mt-px" />
 					<div className="space-y-3">
 						<DropdownMenu.Group className={group}>
 							<DropdownMenu.Item className={item}>New File</DropdownMenu.Item>{" "}
