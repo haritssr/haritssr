@@ -8,12 +8,11 @@
 		"start": "next start",
 		"type-coverage": "type-coverage",
 		"ts-coverage": "typescript-coverage-report",
-		"lint": "biome check",
-		"format": "biome format --write"
+		"lint": "biome check"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^6.3.1",
-		"@headlessui/react": "^1.7.7",
+		"@headlessui/react": "^2.2.9",
 		"@heroicons/react": "^2.0.13",
 		"@internationalized/date": "^3.0.2",
 		"@mantine/carousel": "^5.10.0",
