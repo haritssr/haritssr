@@ -1,7 +1,5 @@
 import { useRef } from "react";
-import { useButton } from "@react-aria/button";
-import { useFocusRing } from "@react-aria/focus";
-import { mergeProps } from "@react-aria/utils";
+import { mergeProps, useButton, useFocusRing } from "react-aria";
 
 export function Button(props) {
 	const ref = useRef();

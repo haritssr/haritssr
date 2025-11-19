@@ -1,6 +1,5 @@
-import { useCalendarGrid } from "@react-aria/calendar";
-import { getWeeksInMonth, endOfMonth } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
+import { endOfMonth, getWeeksInMonth } from "@internationalized/date";
+import { useCalendarGrid, useLocale } from "react-aria";
 import { CalendarCell } from "./CalendarCell";
 
 export function CalendarGrid({ state, offset = {} }) {
