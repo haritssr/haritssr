@@ -1,5 +1,5 @@
 import { RadioGroup } from "@headlessui/react";
-import { type SVGProps, useState } from "react";
+import { type JSX, type SVGProps, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
@@ -72,7 +72,7 @@ function Example1() {
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-hidden`
 								}
 							>
-								{({ _active, checked }) => (
+								{({ checked }) => (
 									<>
 										<div className="flex w-full items-center justify-between">
 											<div className="flex items-center">
