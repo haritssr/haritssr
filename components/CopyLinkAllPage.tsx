@@ -41,13 +41,14 @@ const CopyLinkAllPage = () => {
 
 	return (
 		<Toast.Provider swipeDirection="right">
-			<div
+			<button
+				type="button"
 				className="text-zinc-400 hover:text-zinc-800 cursor-pointer select-none"
 				onClick={ButtonHandler}
 				onKeyDown={ButtonHandler}
 			>
 				Share This Page
-			</div>
+			</button>
 
 			<Toast.Root
 				className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-2 pl-4 pr-4 grid [grid-template-areas:'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"

@@ -1,7 +1,7 @@
-import SubTitle from "@/components/SubTitle";
+import { useState } from "react";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { useState } from "react";
+import SubTitle from "@/components/SubTitle";
 
 const initialPosition = {
 	x: 0,
@@ -82,7 +82,7 @@ function Box({ children, color, position, onMove }) {
 		}
 	}
 
-	function handlePointerUp(e) {
+	function handlePointerUp(_e) {
 		setLastCoordinates(null);
 	}
 

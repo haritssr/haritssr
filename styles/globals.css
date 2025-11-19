@@ -14,7 +14,6 @@ input[type="tel"] {
 	@apply rounded-md ring-1 ring-zinc-950/20 px-2.5 py-1 focus:outline-hidden focus:ring-zinc-800 placeholder:text-zinc-400 shadow;
 }
 
-
 input[type="time"],
 input[type="date"],
 input[type="week"],
@@ -22,7 +21,7 @@ input[type="month"],
 select {
 	@apply rounded-md border-[1.4px] border-zinc-500 px-2 py-1 placeholder:text-zinc-500 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-200;
 }
-	
+
 input[type="reset"],
 input[type="submit"],
 input[type="button"],
@@ -50,7 +49,6 @@ body {
 	margin: 0;
 	/* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
-
 
 * {
 	box-sizing: border-box;
@@ -81,7 +79,7 @@ s ::-webkit-scrollbar {
 }
 
 @layer base {
-  :root {
+	:root {
 		--background: 0 0% 100%;
 		--foreground: 240 10% 3.9%;
 		--card: 0 0% 100%;
@@ -108,7 +106,7 @@ s ::-webkit-scrollbar {
 		--chart-5: 27 87% 67%;
 		--radius: 0.5rem;
 	}
-  .dark {
+	.dark {
 		--background: 240 10% 3.9%;
 		--foreground: 0 0% 98%;
 		--card: 240 10% 3.9%;
@@ -137,10 +135,10 @@ s ::-webkit-scrollbar {
 }
 
 @layer base {
-  * {
-    @apply border-border;
+	* {
+		@apply border-border;
 	}
-  body {
-    @apply bg-background text-foreground;
+	body {
+		@apply bg-background text-foreground;
 	}
 }

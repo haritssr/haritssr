@@ -2,7 +2,11 @@ export default function ExternalLink({
 	name,
 	href,
 	big,
-}: { name: string; href: string; big?: boolean }) {
+}: {
+	name: string;
+	href: string;
+	big?: boolean;
+}) {
 	return (
 		<cite className="group not-italic">
 			{" "}

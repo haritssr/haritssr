@@ -4,7 +4,10 @@ import Link from "next/link";
 export default function BackButton({
 	name,
 	href,
-}: { name: string; href: string }) {
+}: {
+	name: string;
+	href: string;
+}) {
 	return (
 		<Link href={href} className="block">
 			<span className=" inline-block w-full">

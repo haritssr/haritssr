@@ -1,12 +1,14 @@
 "use client";
 
 import type { ExperiencesDataType } from "data/ExperiencesData";
-
 import { Suspense, useState } from "react";
+
 export default function LoadingFigma({
 	project,
-}: { project: ExperiencesDataType }) {
-	const [loading, setLoading] = useState(true);
+}: {
+	project: ExperiencesDataType;
+}) {
+	const [, setLoading] = useState(true);
 	function hideLoading() {
 		setLoading(false);
 	}

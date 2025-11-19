@@ -1,6 +1,6 @@
+import { useCallback, useEffect, useState } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import { useCallback, useEffect, useState } from "react";
 
 function formatTime(second: number) {
 	const minute = Math.floor(second / 60);
@@ -34,7 +34,9 @@ export default function Counter() {
 			<SubTitle>Counter</SubTitle>
 			<div>{formatTime(second)}</div>
 			<div>{second}</div>
-			<div
+			<button
+				type="button"
+				tabIndex={0}
 				onClick={onToggle}
 				onKeyDown={onToggle}
 				className="cursor-pointer select-none hover:text-action"
@@ -44,14 +46,15 @@ export default function Counter() {
 					: play === false && second > 0
 						? "Continue"
 						: play === false && second === 0 && "Start"}
-			</div>
-			<div
+			</button>
+			<button
+				type="button"
 				onClick={onReset}
 				onKeyDown={onReset}
 				className="cursor-pointer select-none hover:text-action"
 			>
 				Reset
-			</div>
+			</button>
 		</LayoutToExperiments>
 	);
 }

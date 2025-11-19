@@ -15,10 +15,7 @@ export default function ExperienceCard({
 	href,
 	title,
 	description,
-	period,
-	status,
 	imgSrc,
-	industry,
 }: ExperienceCardTypes) {
 	return (
 		<div className="flex w-full flex-col justify-between overflow-hidden rounded-xl border border-zinc-300 selection:mx-auto group">

@@ -1,6 +1,3 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import {
 	type JSX,
 	type JSXElementConstructor,
@@ -10,6 +7,9 @@ import {
 	useReducer,
 	useState,
 } from "react";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 let nextId = 3;
 const initialTask = [
@@ -95,11 +95,7 @@ function tasksReducer(tasks: taskType[], action) {
 			];
 		}
 		case "changed": {
-			return tasks.map((t: taskType) => {
-				if (t.id === action.task.id) {
-					return action.task;
-				}
-			});
+			return tasks.map((t) => (t.id === action.task.id ? action.task : t));
 		}
 		case "deleted": {
 			return tasks.filter((t) => t.id !== action.id);
@@ -167,7 +163,7 @@ function IndividualTask({ task, onChange, onDelete }) {
 				| bigint
 				| boolean
 				| ReactPortal
-				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				// biome-ignore lint/suspicious/noExplicitAny: ReactElement requires any for JSXElementConstructor
 				| ReactElement<unknown, string | JSXElementConstructor<any>>
 				| Iterable<ReactNode>
 				| null

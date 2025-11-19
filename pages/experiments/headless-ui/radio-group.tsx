@@ -1,10 +1,9 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { type SVGProps, useState } from "react";
 import { RadioGroup } from "@headlessui/react";
+import { type SVGProps, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 const plans = [
 	{
@@ -73,7 +72,7 @@ function Example1() {
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-hidden`
 								}
 							>
-								{({ active, checked }) => (
+								{({ _active, checked }) => (
 									<>
 										<div className="flex w-full items-center justify-between">
 											<div className="flex items-center">
@@ -101,7 +100,7 @@ function Example1() {
 												</div>
 											</div>
 											{checked && (
-												<div className="flex-shrink-0 text-white">
+												<div className="shrink-0 text-white">
 													<CheckIcon className="h-6 w-6" />
 												</div>
 											)}

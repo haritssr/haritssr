@@ -155,7 +155,10 @@ const SideBar = ({ domain }: { domain: string }) => {
 const BackToExperiments = ({
 	inView,
 	domain,
-}: { inView: unknown; domain: string }) => {
+}: {
+	inView: unknown;
+	domain: string;
+}) => {
 	return (
 		<Link
 			href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
@@ -181,7 +184,10 @@ const BackToExperiments = ({
 const PageTitleCenter = ({
 	title,
 	inView,
-}: { title: string; inView: unknown }) => {
+}: {
+	title: string;
+	inView: unknown;
+}) => {
 	return (
 		<div className={`sm:1/2 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
 			<div className="flex justify-center py-0.5 sm:py-0">

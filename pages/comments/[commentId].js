@@ -27,7 +27,7 @@ export async function getStaticProps(context) {
 	 * - you should not call an api route for pre-rendering
 	 */
 	const comment = comments.find(
-		(comment) => comment.id === Number.parseInt(commentId),
+		(comment) => comment.id === Number.parseInt(commentId, 10),
 	);
 	return { props: { comment } };
 }

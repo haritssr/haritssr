@@ -5,7 +5,11 @@ export default function InternalLink({
 	children,
 	href,
 	lg,
-}: { children: string; href: string; lg?: boolean }) {
+}: {
+	children: string;
+	href: string;
+	lg?: boolean;
+}) {
 	return (
 		<Link
 			href={href}

@@ -1,9 +1,8 @@
-import React from "react";
-import SubTitle from "@/components/SubTitle";
+import * as Switch from "@radix-ui/react-switch";
+import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import ExplanationList from "@/components/ExplanationList";
-import * as Switch from "@radix-ui/react-switch";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedSwitch() {
 	return (

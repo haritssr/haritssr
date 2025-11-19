@@ -1,9 +1,8 @@
-import React from "react";
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import * as Slider from "@radix-ui/react-slider";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedSlider() {
 	return (

@@ -6,7 +6,7 @@
 
 //this api used in /pages/experiments/nextjs/swr
 
-export default function handler(req, res) {
+export default function handler(_req, res) {
 	res.status(200).json([
 		{
 			id: "1",

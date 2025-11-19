@@ -1,11 +1,9 @@
 "use client";
 
-import React from "react";
+import { CheckCircle2 } from "lucide-react";
 import { useActionState } from "react";
-import { submitAddress } from "../actions/address";
+import { Alert, AlertDescription } from "@/components/components/ui/alert";
 import { Button } from "@/components/components/ui/button";
-import { Input } from "@/components/components/ui/input";
-import { Label } from "@/components/components/ui/label";
 import {
 	Card,
 	CardContent,
@@ -13,9 +11,10 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/components/ui/card";
-import { Alert, AlertDescription } from "@/components/components/ui/alert";
+import { Input } from "@/components/components/ui/input";
+import { Label } from "@/components/components/ui/label";
+import { submitAddress } from "../actions/address";
 import type { ActionResponse } from "../types/address";
-import { CheckCircle2 } from "lucide-react";
 
 const initialState: ActionResponse = {
 	success: false,

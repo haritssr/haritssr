@@ -70,7 +70,7 @@ function GreetingSelector({ value, onChange }) {
 				<input
 					type="radio"
 					value={value}
-					onChange={(e) => onChange("Hello")}
+					onChange={(_e) => onChange("Hello")}
 					checked={value === "Hello"}
 				/>
 				Regular greeting
@@ -79,7 +79,7 @@ function GreetingSelector({ value, onChange }) {
 				<input
 					type="radio"
 					value={value}
-					onChange={(e) => onChange("Hello and welcome")}
+					onChange={(_e) => onChange("Hello and welcome")}
 					checked={value === "Hello and welcome"}
 				/>
 				Enthutiastic greeting

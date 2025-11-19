@@ -1,13 +1,13 @@
-import Image from "next/image";
-import { AboutData, ContactData } from "data/AboutData";
-import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import ExternalLink from "@/components/ExternalLink";
+import { AboutData, ContactData } from "data/AboutData";
 import { EducationData } from "data/EducationData";
 import { ExperiencesData } from "data/ExperiencesData";
 import { NonFormalEducationData } from "data/NonFormalEducationData";
-import SecondaryButton from "@/components/SecondaryButton";
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import ExternalLink from "@/components/ExternalLink";
+import SecondaryButton from "@/components/SecondaryButton";
 
 export const metadata: Metadata = {
 	title: "About",
@@ -294,7 +294,10 @@ export default function About() {
 function Box({
 	title,
 	children,
-}: { title: string; children: React.ReactNode }) {
+}: {
+	title: string;
+	children: React.ReactNode;
+}) {
 	return (
 		<div className="border border-zinc-400/50 rounded overflow-hidden">
 			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">

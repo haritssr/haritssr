@@ -1,8 +1,8 @@
 "use client";
 
-import { PageTitle } from "@/components/SubTitle";
 import type React from "react";
 import { useState } from "react";
+import { PageTitle } from "@/components/SubTitle";
 
 interface MainData {
 	index: string;
@@ -24,7 +24,9 @@ export default function TimesTable() {
 				title="Times Table"
 				description="Self-corrected 10x10 times table with statistics."
 			/>
-			<div className="text-red-500 mb-5">Attention: This app is not finished yet!</div>
+			<div className="text-red-500 mb-5">
+				Attention: This app is not finished yet!
+			</div>
 			<div className="flex space-x-2">
 				{/* Row Head */}
 				<section className="grid w-fit grid-cols-1 gap-2 ">
@@ -34,7 +36,7 @@ export default function TimesTable() {
 							defaultValue={index}
 							type="text"
 							disabled
-							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+							// biome-ignore lint/suspicious/noArrayIndexKey: static array, index is stable
 							key={index}
 						/>
 					))}
@@ -48,7 +50,7 @@ export default function TimesTable() {
 								defaultValue={index + 1}
 								type="text"
 								disabled
-								// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+								// biome-ignore lint/suspicious/noArrayIndexKey: static array, index is stable
 								key={index}
 							/>
 						))}
@@ -60,7 +62,7 @@ export default function TimesTable() {
 							return (
 								<InputElement
 									index={index + 1}
-									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									// biome-ignore lint/suspicious/noArrayIndexKey: static array, index is stable
 									key={index}
 									row={row}
 									col={col}
@@ -123,7 +125,7 @@ function InputElement({
 				const value = e.target.value;
 				handleOnchange({ index: index.toString(), value, row: row, col: col });
 			}}
-			onClick={(e) =>
+			onClick={(_e) =>
 				handleOnClick((prev) => ({
 					...prev,
 					row,

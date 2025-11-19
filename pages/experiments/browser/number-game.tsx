@@ -1,7 +1,7 @@
-import { useState } from "react";
 import Link from "next/link";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
 export default function NumberGame() {
@@ -17,7 +17,7 @@ export default function NumberGame() {
 
 	function inputKeyPress(event: { key: string }) {
 		if (event.key === "Enter") {
-			const answer = Number.parseInt(state.response);
+			const answer = Number.parseInt(state.response, 10);
 			if (state.num1 + state.num2 === answer) {
 				setState({
 					...state,

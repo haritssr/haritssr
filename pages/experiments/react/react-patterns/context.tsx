@@ -1,11 +1,5 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import Confetti from "react-confetti";
-import useWindowSize from "react-use/lib/useWindowSize";
-import type React from "react";
 import { createContext, useContext, useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function Context() {
 	return (
@@ -24,7 +18,9 @@ const HidableCardContext = createContext<HidableCardContextType | null>(null);
 
 function HidableCardContextProvider({
 	children,
-}: { children: React.ReactNode }) {
+}: {
+	children: React.ReactNode;
+}) {
 	const [hidden, setHidden] = useState(false);
 	function toggle() {
 		setHidden((prev) => !prev);

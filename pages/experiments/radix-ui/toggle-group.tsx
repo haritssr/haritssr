@@ -1,12 +1,10 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { useState } from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function ExportedToggle() {
-	const [pressed, setPressed] = useState(false);
 	return (
 		<LayoutToExperiments title="Toggle" domain="Radix UI">
 			<SubTitle>

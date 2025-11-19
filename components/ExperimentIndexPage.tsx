@@ -1,18 +1,18 @@
-import Image from "next/image";
-import type { ExperimentsData } from "../data/ExperimentsData";
-import Layout from "./Layout";
-import Link from "next/link";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
-import { useInView } from "react-intersection-observer";
-
-import { useRouter } from "next/router";
-import React from "react";
-import { GitHubIcon } from "./Icons";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useInView } from "react-intersection-observer";
+import type { ExperimentsData } from "../data/ExperimentsData";
+import { GitHubIcon } from "./Icons";
+import Layout from "./Layout";
 
 export default function ExperimentIndexPage({
 	experiment,
-}: { experiment: ExperimentsData }) {
+}: {
+	experiment: ExperimentsData;
+}) {
 	const lastThreeSegmentRoute = useRouter().asPath;
 	const githubRoute = `https://github.com/haritssr/haritssr/blob/main/pages${lastThreeSegmentRoute}.tsx`;
 	const { ref, inView } = useInView({ rootMargin: "-90px" });
@@ -68,13 +68,11 @@ export default function ExperimentIndexPage({
 									.replace(/\s/g, "-")}`}
 								className="rounded-md border border-zinc-300 pl-3 pr-3.5 py-2 hover:bg-zinc-50 flex items-center justify-between  group"
 							>
-								<>
-									<div className="text-zinc-700">{link}</div>
-									<ChevronRightIcon
-										width={2}
-										className="w-5 h-5 text-zinc-500 group-hover:text-zinc-800"
-									/>
-								</>
+								<div className="text-zinc-700">{link}</div>
+								<ChevronRightIcon
+									width={2}
+									className="w-5 h-5 text-zinc-500 group-hover:text-zinc-800"
+								/>
 							</Link>
 						</li>
 					))}
@@ -114,7 +112,10 @@ const BackToExperiments = ({ inView }: { inView: unknown }) => {
 const PageTitleCenter = ({
 	title,
 	inView,
-}: { title: string; inView: unknown }) => {
+}: {
+	title: string;
+	inView: unknown;
+}) => {
 	return (
 		<div className={`sm:2/4 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
 			<div className="flex justify-center py-0.5">
