@@ -1,12 +1,12 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-
+/** biome-ignore-all lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting */
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
 import type { ComponentType } from "react";
+import { Fragment, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Section from "@/components/Section";
+import SubTitle from "@/components/SubTitle";
 
 const HeadlessDialog = Dialog as unknown as ComponentType<any> & {
 	Title: ComponentType<any>;
@@ -54,7 +54,10 @@ export default function ExportedDialog() {
 const Wrapper = ({
 	title,
 	children,
-}: { title: string; children: React.ReactNode }) => {
+}: {
+	title: string;
+	children: React.ReactNode;
+}) => {
 	return (
 		<div>
 			<Section name={title} />

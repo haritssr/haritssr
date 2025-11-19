@@ -1,6 +1,6 @@
-import SubTitle from "@/components/SubTitle";
+import { useState } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { useEffect, useState } from "react";
+import SubTitle from "@/components/SubTitle";
 
 export default function useStateForm() {
 	const [formData, setFormData] = useState({

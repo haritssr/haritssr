@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
+import { type Dispatch, type JSX, type SetStateAction, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import React, { type Dispatch, type SetStateAction, useState } from "react";
+import SubTitle from "@/components/SubTitle";
 
 interface productDataType {
 	category: string;
@@ -75,7 +75,6 @@ const ProductTable = ({
 	let lastCategory: string | null = null;
 
 	// for (const product of products) {
-	// biome-ignore lint/complexity/noForEach: <explanation>
 	products.forEach((product: productDataType) => {
 		//couldn't destructure product in as a '({caterogry, name, stocked} : productDataType)' in forEach callback parameter because <ProductRow/> below need 'product' variabel
 		const { category, name, stocked } = product;

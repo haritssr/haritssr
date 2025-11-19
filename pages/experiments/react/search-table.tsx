@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useEffect, useState } from "react";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 function useDebounce(value: string, delay: number) {
 	const [debouncedValue, setDebouncedValue] = useState(value);
@@ -21,7 +21,7 @@ function useDebounce(value: string, delay: number) {
 
 export default function SearchTable() {
 	const [query, setQuery] = useState<string>("");
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: API response type is unknown
 	const [users, setUsers] = useState<Array<any>>([]);
 
 	const debouncedSearch = useDebounce(query, 1000);

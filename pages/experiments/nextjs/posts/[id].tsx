@@ -22,7 +22,7 @@ export default function Post({ postData }) {
 				</div>
 				<div
 					className="col-span-3 rounded-md border border-zinc-300 p-2 sm:p-4"
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: needed to render HTML from markdown
 					dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
 				/>
 			</div>

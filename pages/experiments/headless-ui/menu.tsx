@@ -1,12 +1,11 @@
+import { Menu, Transition } from "@headlessui/react";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { Fragment } from "react";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-
-import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import { ChevronDownIcon, FireIcon } from "@heroicons/react/24/solid";
-import ExplanationList from "@/components/ExplanationList";
-import { BookOpenIcon } from "@heroicons/react/24/outline";
 
 export default function ExportedMenu() {
 	return (

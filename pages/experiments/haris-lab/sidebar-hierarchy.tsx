@@ -1,6 +1,6 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { PhysicsHierarchyData } from "data/PhysicsHierarchyData";
 import Link from "next/link";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function SidebarHierarchy() {
 	return (
@@ -18,7 +18,7 @@ export default function SidebarHierarchy() {
 						>
 							{domain.domain_title}
 						</summary>
-						<div
+						<section
 							aria-label="chapter-area"
 							className="bg-yellow-100 p-1 space-y-2"
 						>
@@ -37,7 +37,7 @@ export default function SidebarHierarchy() {
 											{chapter.chapter_title}
 										</Link>
 									</summary>
-									<div className="bg-blue-100 p-1" aria-label="materi-area">
+									<section className="bg-blue-100 p-1" aria-label="materi-area">
 										{chapter.material.map((materi) => (
 											<Link
 												key={materi}
@@ -47,10 +47,10 @@ export default function SidebarHierarchy() {
 												{materi}
 											</Link>
 										))}
-									</div>
+									</section>
 								</details>
 							))}
-						</div>
+						</section>
 					</details>
 				))}
 			</div>

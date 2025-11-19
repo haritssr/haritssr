@@ -1,5 +1,3 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import {
 	createColumnHelper,
 	flexRender,
@@ -7,6 +5,8 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import { useReducer, useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function Basic() {
 	return (
@@ -129,7 +129,7 @@ function Table() {
 										: flexRender(
 												header.column.columnDef.header,
 												header.getContext(),
-										  )}
+											)}
 								</th>
 							))}
 						</tr>
@@ -163,7 +163,7 @@ function Table() {
 										: flexRender(
 												header.column.columnDef.footer,
 												header.getContext(),
-										  )}
+											)}
 								</th>
 							))}
 						</tr>

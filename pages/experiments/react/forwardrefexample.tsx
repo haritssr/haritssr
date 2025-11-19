@@ -1,5 +1,3 @@
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import SubTitle from "@/components/SubTitle";
 import {
 	type Dispatch,
 	forwardRef,
@@ -7,6 +5,8 @@ import {
 	useRef,
 	useState,
 } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 interface propsType {
 	label: string;
@@ -18,7 +18,7 @@ interface propsType {
 const buttonStyle =
 	"rounded-lg border border-zinc-400 bg-zinc-200 px-3 py-1 hover:bg-zinc-300 active:bg-zinc-200";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
 const MyInput = forwardRef(function MyInput(props: propsType, ref: any) {
 	const { label, data, onDataChange, ...otherProps } = props;
 
@@ -87,7 +87,7 @@ const VideoPlayer = forwardRef(function VideoPlayer(
 function MyVideoPlayer() {
 	const ref = useRef<HTMLVideoElement>(null);
 
-	function handlePlay() {
+	function _handlePlay() {
 		if (ref.current) ref.current.play();
 	}
 	function handlePause() {

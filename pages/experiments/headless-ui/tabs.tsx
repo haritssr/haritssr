@@ -113,7 +113,7 @@ function Example1() {
 				{/* Here's we looping the keys of the object 'categories' */}
 				{Object.values(categories).map((posts, idx) => (
 					<Tab.Panel
-						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						// biome-ignore lint/suspicious/noArrayIndexKey: static array from Object.values, index is stable
 						key={idx}
 						className={classNames(
 							"rounded-xl bg-white  p-1.5",

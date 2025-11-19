@@ -1,11 +1,13 @@
-import Image from "next/image";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import type { ExperimentsData } from "../data/ExperimentsData";
+import Image from "next/image";
 import Link from "next/link";
+import type { ExperimentsData } from "../data/ExperimentsData";
 
 export default function ExperimentCard({
 	experiment,
-}: { experiment: ExperimentsData }) {
+}: {
+	experiment: ExperimentsData;
+}) {
 	return (
 		<Link
 			href={`/experiments/${experiment.title.toLowerCase().replace(" ", "-")}`}

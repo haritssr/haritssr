@@ -1,6 +1,6 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { type Key, useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 let nextId = 3;
 const initialTodos = [
@@ -27,6 +27,7 @@ export default function UseStateTodoList() {
 				if (t.id === nextTodo.id) {
 					return nextTodo;
 				}
+				return t;
 			}),
 		);
 	}
@@ -35,20 +36,18 @@ export default function UseStateTodoList() {
 	}
 
 	return (
-		<>
-			<LayoutToExperiments title="useState Todo List" domain="React">
-				<SubTitle>Todo list with useState</SubTitle>
-				<AddTodo onAddTodo={handleAddTodo} />
-				<TaskList
-					todos={todos}
-					onChangeTodo={handleChangeTodo}
-					onDeleteTodo={handleDeleteTodo}
-				/>
-				<button type="button" onClick={() => console.log(todos)}>
-					Console Todos
-				</button>
-			</LayoutToExperiments>
-		</>
+		<LayoutToExperiments title="useState Todo List" domain="React">
+			<SubTitle>Todo list with useState</SubTitle>
+			<AddTodo onAddTodo={handleAddTodo} />
+			<TaskList
+				todos={todos}
+				onChangeTodo={handleChangeTodo}
+				onDeleteTodo={handleDeleteTodo}
+			/>
+			<button type="button" onClick={() => console.log(todos)}>
+				Console Todos
+			</button>
+		</LayoutToExperiments>
 	);
 }
 
@@ -91,7 +90,7 @@ function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
 
 function Task({ todo, onChange, onDelete }) {
 	const [isEditing, setIsEditing] = useState(false);
-	// biome-ignore lint/complexity/noBannedTypes: <explanation>
+	// biome-ignore lint/complexity/noBannedTypes: dynamic content type that can be string or JSX
 	let todoContent: {};
 	if (isEditing) {
 		todoContent = (

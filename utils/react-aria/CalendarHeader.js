@@ -28,7 +28,7 @@ export function CalendarHeader({
 			<Button {...prevButtonProps}>
 				<ChevronLeftIcon className="h-6 w-6" />
 			</Button>
-			{/* biome-ignore lint/a11y/useHeadingContent: <explanation> */}
+			{/* biome-ignore lint/a11y/useHeadingContent: heading is aria-hidden, visual only */}
 			<h2
 				// We have a visually hidden heading describing the entire visible range,
 				// and the calendar itself describes the individual month
@@ -40,7 +40,7 @@ export function CalendarHeader({
 					state.visibleRange.start.toDate(state.timeZone),
 				)}
 			</h2>
-			{/* biome-ignore lint/a11y/useHeadingContent: <explanation> */}
+			{/* biome-ignore lint/a11y/useHeadingContent: heading is aria-hidden, visual only */}
 			<h2
 				aria-hidden
 				className="align-center flex-1 text-center text-xl font-bold"

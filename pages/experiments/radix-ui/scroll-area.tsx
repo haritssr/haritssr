@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function ScrollAreaDemo() {
 	return (
@@ -44,4 +44,4 @@ export default function ScrollAreaDemo() {
 	);
 }
 
-const TAGS = Array.from({ length: 50 }).map((_, i, a) => `${i}`);
+const TAGS = Array.from({ length: 50 }).map((_, i) => `${i}`);

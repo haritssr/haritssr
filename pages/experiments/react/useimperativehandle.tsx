@@ -1,25 +1,21 @@
-import SubTitle from "@/components/SubTitle";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { useRef, useImperativeHandle, forwardRef } from "react";
+import SubTitle from "@/components/SubTitle";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
 const MyInput = forwardRef(function MyInput(props, ref: any) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	useImperativeHandle(
-		ref,
-		() => {
-			return {
-				focus() {
-					inputRef.current?.focus();
-				},
-				scrollIntoView() {
-					inputRef.current?.scrollIntoView();
-				},
-			};
-		},
-		[],
-	);
+	useImperativeHandle(ref, () => {
+		return {
+			focus() {
+				inputRef.current?.focus();
+			},
+			scrollIntoView() {
+				inputRef.current?.scrollIntoView();
+			},
+		};
+	}, []);
 
 	return <input {...props} ref={inputRef} type="text" />;
 });
@@ -43,28 +39,24 @@ function SomeApp() {
 	);
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const AddComments = forwardRef(function AddComents(props, ref: any) {
+// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
+const AddComments = forwardRef(function AddComents(ref: any) {
 	return <input type="text" placeholder="yada yada" ref={ref} />;
 });
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const CommentsList = forwardRef(function CommentList(props, ref: any) {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
+const CommentsList = forwardRef(function CommentList(ref: any) {
+	// biome-ignore lint/suspicious/noExplicitAny: ref type needs to be flexible for imperative handle
 	const divRef = useRef<any>(null);
 
-	useImperativeHandle(
-		ref,
-		() => {
-			return {
-				scrollToBottom() {
-					const node = divRef.current;
-					node.scrollTop = node.scrollHeight;
-				},
-			};
-		},
-		[],
-	);
+	useImperativeHandle(ref, () => {
+		return {
+			scrollToBottom() {
+				const node = divRef.current;
+				node.scrollTop = node.scrollHeight;
+			},
+		};
+	}, []);
 
 	const comments: React.ReactNode[] = [];
 	for (let i = 0; i < 50; i++) {
@@ -78,22 +70,18 @@ const CommentsList = forwardRef(function CommentList(props, ref: any) {
 	);
 });
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
 const Post = forwardRef(function Post(props, ref: any) {
 	const commentListRef = useRef<unknown>(null);
 	const addCommentRef = useRef<HTMLInputElement>(null);
-	useImperativeHandle(
-		ref,
-		() => {
-			return {
-				scrollAndFocusAddComment() {
-					// commentListRef.current?.scrollToBottom();
-					addCommentRef.current?.focus();
-				},
-			};
-		},
-		[],
-	);
+	useImperativeHandle(ref, () => {
+		return {
+			scrollAndFocusAddComment() {
+				// commentListRef.current?.scrollToBottom();
+				addCommentRef.current?.focus();
+			},
+		};
+	}, []);
 	return (
 		<div className="" {...props}>
 			<div>Welcome lol</div>
@@ -104,7 +92,7 @@ const Post = forwardRef(function Post(props, ref: any) {
 });
 
 function Yada() {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: ref type needs to be flexible for imperative handle
 	const buttonRef = useRef<any>(null);
 	function handleClick() {
 		buttonRef.current?.scrollAndFocusAddComment();

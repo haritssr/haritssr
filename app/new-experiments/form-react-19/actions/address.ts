@@ -13,7 +13,6 @@ const addressSchema = z.object({
 });
 
 export async function submitAddress(
-	prevState: ActionResponse | null,
 	formData: FormData,
 ): Promise<ActionResponse> {
 	// Simulate network delay
@@ -48,7 +47,7 @@ export async function submitAddress(
 			success: true,
 			message: "Address saved successfully!",
 		};
-	} catch (error) {
+	} catch (_error) {
 		return {
 			success: false,
 			message: "An unexpected error occurred",

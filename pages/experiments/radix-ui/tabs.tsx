@@ -1,9 +1,8 @@
-import React from "react";
-import SubTitle from "@/components/SubTitle";
+import * as Tabs from "@radix-ui/react-tabs";
+import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import ExplanationList from "@/components/ExplanationList";
-import * as Tabs from "@radix-ui/react-tabs";
+import SubTitle from "@/components/SubTitle";
 
 export default function TabsPage() {
 	return (

@@ -63,7 +63,7 @@ const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
 				className="w-[50%]"
 				type="range"
 			/>
-			<button type="button" onClick={(e) => setFader(0)}>
+			<button type="button" onClick={(_e) => setFader(0)}>
 				Reset
 			</button>
 		</section>

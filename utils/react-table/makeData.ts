@@ -25,7 +25,7 @@ const newPerson = (): Person => {
 		age: faker.datatype.number(40),
 		visits: faker.datatype.number(1000),
 		progress: faker.datatype.number(100),
-		// biome-ignore lint/style/noNonNullAssertion: <explanation>
+		// biome-ignore lint/style/noNonNullAssertion: shuffle always returns a non-empty array
 		status: faker.helpers.shuffle<Person["status"]>([
 			"relationship",
 			"complicated",
@@ -36,9 +36,9 @@ const newPerson = (): Person => {
 
 export function makeData(...lens: number[]) {
 	const makeDataLevel = (depth = 0): Person[] => {
-		// biome-ignore lint/style/noNonNullAssertion: <explanation>
+		// biome-ignore lint/style/noNonNullAssertion: depth is always within valid range
 		const len = lens[depth]!;
-		return range(len).map((d): Person => {
+		return range(len).map((_d): Person => {
 			return {
 				...newPerson(),
 				subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,

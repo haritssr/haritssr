@@ -1,11 +1,10 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-
-import LayoutToExperiments from "@/components/LayoutToExperiments";
-import { useState } from "react";
-import { Pie } from "@visx/shape";
 import { Group } from "@visx/group";
+import { Pie } from "@visx/shape";
 import { Text } from "@visx/text";
+import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 const coins = [
 	{ symbol: "ADA", amount: 200, color: "#2563EB", inUSD: 1.48 },
@@ -55,10 +54,16 @@ export default function PieChart() {
 						{(pie) => {
 							return pie.arcs.map((arc) => {
 								return (
+									// biome-ignore lint/a11y/useSemanticElements: SVG group cannot be replaced with button element
 									<g
 										key={arc.data.symbol}
+										role="button"
+										tabIndex={0}
+										aria-label={`${arc.data.symbol} segment`}
 										onMouseEnter={() => setActive(arc.data)}
 										onMouseLeave={() => setActive(null)}
+										onFocus={() => setActive(arc.data)}
+										onBlur={() => setActive(null)}
 									>
 										<path d={pie.path(arc) as string} fill={arc.data.color} />
 									</g>

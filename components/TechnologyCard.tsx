@@ -7,7 +7,7 @@ export const TechnologyCard = ({
 }: {
 	domain?: string;
 	links?: Array<{ href: string; imgSrc: string; name: string }>;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: props need to be spreadable with unknown structure
 	props?: any;
 }) => {
 	return (
