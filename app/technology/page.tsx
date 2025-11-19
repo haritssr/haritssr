@@ -1,5 +1,5 @@
-import { PageTitle } from "@/components/SubTitle";
 import { TechStackData } from "data/TechStackData";
+import { PageTitle } from "@/components/SubTitle";
 import { TechnologyCard } from "@/components/TechnologyCard";
 
 export default function TechStackPage() {

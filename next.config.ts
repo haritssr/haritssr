@@ -1,4 +1,5 @@
 const { withContentlayer } = require("next-contentlayer");
+
 import type { NextConfig } from "next";
 
 type ExtendedNextConfig = NextConfig & {

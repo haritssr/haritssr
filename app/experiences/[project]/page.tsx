@@ -1,11 +1,11 @@
+import type { ExperiencesDataType } from "data/ExperiencesData";
+import { ExperiencesData } from "data/ExperiencesData";
+import type { Metadata } from "next";
+import Image from "next/image";
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import { ExperiencesData } from "data/ExperiencesData";
-import type { ExperiencesDataType } from "data/ExperiencesData";
-import Image from "next/image";
 import LoadingFigma from "./LoadingFigma";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Experience",
@@ -37,7 +37,7 @@ export default async function ExperiencesPage({ params }) {
 				{/* Title */}
 				<section className="my-8 sm:my-10 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
 					<div className="">
-						<div className="text-2xl sm:text-3xl break-words font-bold ">
+						<div className="text-2xl sm:text-3xl wrap-break-words font-bold ">
 							{experience.project_name}
 						</div>
 						<div className="text-zinc-500 text-lg">

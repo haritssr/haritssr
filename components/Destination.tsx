@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 export default function Destination({ link }: { link: string }) {

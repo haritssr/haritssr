@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { Switch } from "@headlessui/react";
+import { useState } from "react";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-
-import ExplanationList from "@/components/ExplanationList";
 
 export default function ExportedSwitch() {
 	return (

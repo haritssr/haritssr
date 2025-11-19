@@ -1,9 +1,9 @@
 import GlobalNavigation from "@/components/GlobalNavigation";
 import "../styles/globals.css";
-import Footer from "@/components/Footer";
-import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Footer from "@/components/Footer";
+import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 
 const inter = Inter({ subsets: ["latin"] });
 

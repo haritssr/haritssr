@@ -1,7 +1,7 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
+import { format, parseISO } from "date-fns";
 import { getAllPostIds, getPostData } from "utils/posts";
-import { parseISO, format } from "date-fns";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function Post({ postData }) {
 	return (

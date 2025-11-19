@@ -1,7 +1,7 @@
 import { ExperiencesData } from "data/ExperiencesData";
-import { PageTitle } from "@/components/SubTitle";
-import ExperienceCard from "@/components/ExperienceCard";
 import type { Metadata } from "next";
+import ExperienceCard from "@/components/ExperienceCard";
+import { PageTitle } from "@/components/SubTitle";
 
 export const metadata: Metadata = {
 	title: "Experiences",

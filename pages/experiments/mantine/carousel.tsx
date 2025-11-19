@@ -1,9 +1,8 @@
-import { Image } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
-import SubTitle from "@/components/SubTitle";
+import { Image } from "@mantine/core";
 import ExternalLink from "@/components/ExternalLink";
-
 import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 export default function ExportedCarousel() {
 	return (
 		<LayoutToExperiments title="Carousel" domain="Mantine">

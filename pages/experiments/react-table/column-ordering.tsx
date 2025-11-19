@@ -1,8 +1,4 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import faker from "@faker-js/faker";
-import { useState } from "react";
-
 import {
 	type ColumnDef,
 	type ColumnOrderState,
@@ -10,6 +6,9 @@ import {
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
+import { useState } from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 import { makeData, type Person } from "../../../utils/react-table/makeData";
 
 export default function ColumnOrdering() {

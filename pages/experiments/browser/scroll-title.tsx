@@ -1,6 +1,6 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useInView } from "react-intersection-observer";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function ScrollTitle() {
 	const { ref, inView } = useInView();

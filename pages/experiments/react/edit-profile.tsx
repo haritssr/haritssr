@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useState } from "react";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function EditProfile() {
 	const [firstName, setFirstName] = useState("Harits");

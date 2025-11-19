@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PageTitle } from "@/components/SubTitle";
 import BlogGrid from "@/components/BlogGrid";
+import { PageTitle } from "@/components/SubTitle";
 
 export const metadata: Metadata = {
 	title: "Blog",

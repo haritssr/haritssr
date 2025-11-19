@@ -1,6 +1,6 @@
+import { useRef } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import { useRef } from "react";
 
 export default function TextEditing() {
 	const elementSelected = useRef(null);

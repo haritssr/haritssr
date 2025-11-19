@@ -1,8 +1,8 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Link from "next/link";
 import type { ReactPortal } from "react";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 //This pages includes : the list of the available pages to be visited
 

@@ -1,5 +1,5 @@
-import HomeSectionWrapper from "./HomeSectionWrapper";
 import BlogGrid from "@/components/BlogGrid";
+import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Blog() {
 	return (

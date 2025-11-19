@@ -1,6 +1,6 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import type React from "react";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function CenteringDiv() {
 	return (

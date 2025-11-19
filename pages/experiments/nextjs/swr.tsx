@@ -1,7 +1,7 @@
-import SubTitle from "@/components/SubTitle";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import type { Key } from "react";
 import useSWR from "swr";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 

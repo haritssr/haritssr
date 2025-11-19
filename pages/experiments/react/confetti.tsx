@@ -1,9 +1,9 @@
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-import ExplanationList from "@/components/ExplanationList";
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
+import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 export default function EditProfile() {
 	const { width, height } = useWindowSize();

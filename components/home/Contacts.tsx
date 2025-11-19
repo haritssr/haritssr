@@ -1,5 +1,5 @@
-import InternalLink from "@/components/InternalLink";
 import Image from "next/image";
+import InternalLink from "@/components/InternalLink";
 import ContactList from "../ContactList";
 
 export default function Contacts() {

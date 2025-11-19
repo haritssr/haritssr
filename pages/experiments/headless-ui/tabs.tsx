@@ -1,10 +1,9 @@
 import { Tab } from "@headlessui/react";
-import SubTitle from "@/components/SubTitle";
-import ExternalLink from "@/components/ExternalLink";
-
-import LayoutToExperiments from "@/components/LayoutToExperiments";
 import { useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
+import LayoutToExperiments from "@/components/LayoutToExperiments";
+import SubTitle from "@/components/SubTitle";
 
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(" ");

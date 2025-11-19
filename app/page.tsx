@@ -1,7 +1,7 @@
 import Blog from "@/components/home/Blog";
 import Contacts from "@/components/home/Contacts";
-import Experiments from "@/components/home/Experiments";
 import Experiences from "@/components/home/Experiences";
+import Experiments from "@/components/home/Experiments";
 import Others from "@/components/home/Others";
 
 export default function Home() {

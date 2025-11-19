@@ -1,6 +1,6 @@
+import Balancer from "react-wrap-balancer";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
-import Balancer from "react-wrap-balancer";
 
 export default function ReactWrapBalancer() {
 	return (

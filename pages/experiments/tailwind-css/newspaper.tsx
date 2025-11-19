@@ -1,7 +1,7 @@
-import SubTitle from "@/components/SubTitle";
+import Image from "next/image";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
-import Image from "next/image";
+import SubTitle from "@/components/SubTitle";
 
 export default function Newspaper() {
 	return (
