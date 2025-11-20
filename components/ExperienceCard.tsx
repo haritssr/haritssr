@@ -18,7 +18,7 @@ export default function ExperienceCard({
 	imgSrc,
 }: ExperienceCardTypes) {
 	return (
-		<div className="flex w-full flex-col justify-between overflow-hidden rounded-xl border border-zinc-300 selection:mx-auto group">
+		<div className="flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-300 selection:mx-auto group corner-squircle">
 			{/* Header + Title + Explanation */}
 			<section className=" flex flex-col justify-between p-3 space-y-2">
 				<div className="flex justify-between items-start">
@@ -57,7 +57,7 @@ export default function ExperienceCard({
 			<section className="px-3 pb-3">
 				<Link
 					href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-					className="py-1.5 text-zinc-100 bg-zinc-600 hover:bg-zinc-700 rounded-md select-none w-full text-tiny text-center flex items-center space-x-2 justify-center"
+					className="py-1.5 text-zinc-100 bg-zinc-600 hover:bg-zinc-700 rounded-xl select-none w-full text-tiny text-center flex items-center space-x-2 justify-center corner-squircle"
 				>
 					<p>Case Study</p>
 				</Link>
