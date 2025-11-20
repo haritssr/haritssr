@@ -16,7 +16,7 @@ export default function ContactList() {
 								target="_blank"
 								rel="noreferrer noopener"
 								href={each.link}
-								className="flex items-center space-x-2 px-2 py-1.5 sm:py-1 rounded-md sm:hover:bg-zinc-100 sm:mr-1.5 border border-zinc-300"
+								className="flex items-center space-x-2 px-2 py-1.5 sm:py-1 rounded-xl corner-squircle sm:hover:bg-zinc-100 sm:mr-1.5 border border-zinc-300"
 							>
 								<Image
 									alt={each.link}

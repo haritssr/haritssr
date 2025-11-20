@@ -5,7 +5,7 @@ import ContactList from "../ContactList";
 export default function Contacts() {
 	return (
 		<section className="grid grid-cols-1 lg:grid-cols-4 md:items-center gap-8 md:gap-5 pt-5 mb-16">
-			<section className="lg:col-span-2 md:mb-0 rounded-xl lg:h-full lg:border border-zinc-300 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-0">
+			<section className="lg:col-span-2 md:mb-0 rounded-2xl corner-squircle lg:h-full lg:border border-zinc-300 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-0">
 				<div className="flex-col flex self-center">
 					<section className="select-none justify-center flex">
 						<Image
@@ -25,7 +25,7 @@ export default function Contacts() {
 				</div>
 				<ContactList />
 			</section>
-			<section className="lg:col-span-2 border border-zinc-300 rounded-xl">
+			<section className="lg:col-span-2 border border-zinc-300 rounded-2xl corner-squircle">
 				<div className="divide-y divide-zinc-200">
 					<div className="grid grid-cols-3 py-2 pl-3.5">
 						<span className="text-zinc-500 text-tiny sm:text-base">

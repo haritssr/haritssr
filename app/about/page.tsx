@@ -99,7 +99,7 @@ export default function About() {
 							<div className="mb-2 text-zinc-600">{section.description}</div>
 							<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
 								{section.points.map((point) => (
-									<li key={point} className="text-zinc-400 py-2">
+									<li key={point} className="text-zinc-500 py-2">
 										{point.startsWith("https://www.") ? (
 											<a
 												title={point}
@@ -282,7 +282,7 @@ export default function About() {
 				<SecondaryButton
 					href="/cv-dec-2024.pdf"
 					download="cv-dec-2024.pdf"
-					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20  focus:outline-hidden focus:ring-zinc-800 shadow"
+					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-xl corner-squircle ring-1 ring-zinc-950/20  focus:outline-hidden focus:ring-zinc-800 shadow"
 				>
 					Download CV
 				</SecondaryButton>
@@ -299,7 +299,7 @@ function Box({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="border border-zinc-400/50 rounded overflow-hidden">
+		<div className="border border-zinc-400/50 rounded-xl corner-squircle overflow-hidden">
 			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
 				{title}
 			</div>

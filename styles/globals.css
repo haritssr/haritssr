@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
+@plugin "@toolwind/corner-shape";
 
 @theme {
 	--color-action: oklch(62.3% 0.214 259.815);
