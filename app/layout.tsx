@@ -2,6 +2,7 @@ import GlobalNavigation from "@/components/GlobalNavigation";
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Footer from "@/components/Footer";
 import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 
@@ -47,12 +48,14 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={inter.className}>
 			<body>
-				<GlobalNavigation />
-				<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0 ">
-					{children}
-				</main>
-				<Footer />
-				<GlobalNavigationMobile />
+				<NuqsAdapter>
+					<GlobalNavigation />
+					<main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0 ">
+						{children}
+					</main>
+					<Footer />
+					<GlobalNavigationMobile />
+				</NuqsAdapter>
 			</body>
 		</html>
 	);
