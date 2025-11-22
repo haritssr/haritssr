@@ -1,5 +1,6 @@
 "use client";
 
+import { parseAsInteger, useQueryState } from "nuqs";
 import type React from "react";
 import { useState } from "react";
 import { PageTitle } from "@/components/SubTitle";
@@ -18,15 +19,30 @@ export default function TimesTable() {
 		row: 1,
 		col: 1,
 	});
+
+	const [search, setSearch] = useQueryState("search", { defaultValue: " " });
+
 	return (
 		<>
 			<PageTitle
 				title="Times Table"
 				description="Self-corrected 10x10 times table with statistics."
 			/>
-			<div className="text-red-500 mb-5">
+
+			{/* nuqs button */}
+			<IncrementButton />
+
+			{/* input using nuqs */}
+			<input
+				type="search"
+				value={search}
+				onChange={(e) => setSearch(e.target.value)}
+			/>
+
+			<div className="text-red-500 my-5">
 				Attention: This app is not finished yet!
 			</div>
+
 			<div className="flex space-x-2">
 				{/* Row Head */}
 				<section className="grid w-fit grid-cols-1 gap-2 ">
@@ -133,5 +149,21 @@ function InputElement({
 				}))
 			}
 		/>
+	);
+}
+
+function IncrementButton() {
+	const [count, setCount] = useQueryState(
+		"count",
+		parseAsInteger.withDefault(0),
+	);
+	return (
+		<button
+			className="block my-5 border rounded-2xl corner-squircle px-4 py-1.5 hover:bg-zinc-50 active:bg-zinc-100 border-zinc-300 cursor-pointer active:border-zinc-400 active:translate-y-0.5 text-zinc-700 select-none"
+			type="button"
+			onClick={() => setCount((c) => c + 1)}
+		>
+			Count: {count}
+		</button>
 	);
 }
