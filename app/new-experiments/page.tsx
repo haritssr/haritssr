@@ -1,7 +1,7 @@
 import InternalLink from "@/components/InternalLink";
 import { PageTitle } from "@/components/SubTitle";
 
-const newExperimentsPages = ["inline maki", "countdown mabes", "form react 19"];
+const newExperimentsPages = ["inline maki"];
 
 export default function NewExperimentsPage() {
 	return (
