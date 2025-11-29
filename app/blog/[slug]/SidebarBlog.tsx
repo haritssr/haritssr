@@ -35,7 +35,7 @@ export default function SidebarBlog() {
 								className={`${
 									lastSegment === article.slug
 										? "text-action"
-										: "text-zinc-800 hover:bg-zinc-200/70 hover:text-action"
+										: "text-zinc-800 hover:text-action"
 								}  px-2 py-1 rounded-md text-sm`}
 							>
 								{article.slug

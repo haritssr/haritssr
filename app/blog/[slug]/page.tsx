@@ -1,5 +1,6 @@
 import { allBlogs } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
+import type React from "react";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -7,53 +8,50 @@ import { Mdx } from "@/components/mdx";
 import SidebarBlog from "./SidebarBlog";
 import TableOfContents from "./TableOfContent";
 
-// export async function generateMetadata({
-// 	params,
-// }: {
-// 	params: Promise<{ slug: string }>;
-// }): Promise<Metadata | undefined> {
-// 	const { slug } = await params;
-// 	const blog = allBlogs.find((blog) => blog.slug === slug);
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}) {
+	const { slug } = await params;
+	const blog = allBlogs.find((blog) => blog.slug === slug);
 
-// 	if (!blog) {
-// 		return;
-// 	}
+	if (!blog) return;
 
-// 	const {
-// 		title,
-// 		publishedAt: publishedTime,
-// 		summary: description,
-// 		image,
-// 		slug: blogSlug,
-// 	} = blog;
+	const {
+		title,
+		publishedAt: publishedTime,
+		summary: description,
+		// image,
+		slug: blogSlug,
+	} = blog;
 
-// 	const ogImage = image
-// 		? `https://haritssr.com${image}`
-// 		: `https://haritssr.com/og?title=${title}`;
+	const image = "/images/openGraphImage.png";
 
-// 	return {
-// 		title,
-// 		description,
-// 		openGraph: {
-// 			title,
-// 			description,
-// 			type: "article",
-// 			publishedTime,
-// 			url: `https://haritssr.com/blog/${blogSlug}`,
-// 			images: [
-// 				{
-// 					url: ogImage,
-// 				},
-// 			],
-// 		},
-// 		twitter: {
-// 			card: "summary_large_image",
-// 			title,
-// 			description,
-// 			images: [ogImage],
-// 		},
-// 	};
-// }
+	return {
+		title,
+		description,
+		openGraph: {
+			title,
+			description,
+			type: "article",
+			publishedTime,
+			siteName: "Harits Syah Blog",
+			url: `https://haritssr.com/blog/${blogSlug}`,
+			images: [
+				{
+					url: image,
+				},
+			],
+		},
+		twitter: {
+			card: "X",
+			title,
+			description,
+			images: [image],
+		},
+	};
+}
 
 function formatDate(date: string) {
 	const currentDate = new Date();
@@ -92,16 +90,12 @@ export default async function Blog({
 	const { slug } = await params;
 	const blog = allBlogs.find((blog) => blog.slug === slug);
 
-	if (!blog) {
-		notFound();
-	}
+	if (!blog) notFound();
 
 	return (
-		// <section className="max-w-2xl mx-auto py-5 sm:py-10">
 		<div className="grid grid-cols-1 sm:grid-cols-5 min-h-screen w-full">
 			<SidebarBlog />
-			{/* Content */}
-			<div className="sm:col-span-3 sm:border-b sm:border-r pb-5 sm:px-5 ">
+			<Content>
 				<Breadcrumbs />
 				<div className="my-5">
 					<BackButton href="/blog" name="All Articles" />
@@ -120,11 +114,18 @@ export default async function Blog({
 					<p>{Math.ceil(blog.structuredData.wordCount / 200)} Min Read</p>
 				</div>
 				<Mdx code={blog.body.code} />
-			</div>
-			{/* Table of Content */}
+			</Content>
 			<TableOfContents
 				title={blog.title.toLocaleLowerCase().split(" ").join("-")}
 			/>
 		</div>
+	);
+}
+
+function Content({ children }: { children: React.ReactNode }) {
+	return (
+		<section className="sm:col-span-3 sm:border-b border-zinc-200 sm:border-r pb-5 sm:px-5 ">
+			{children}
+		</section>
 	);
 }
