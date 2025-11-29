@@ -6,7 +6,7 @@ import { GitHubIcon } from "./Icons";
 
 export default function GlobalNavigation() {
 	return (
-		<nav className="sticky top-0 z-30 border-b border-zinc-100 bg-white/90 saturate-150 backdrop-blur-lg">
+		<nav className="sticky top-0 z-30 border-b border-zinc-200 bg-white/90 saturate-150 backdrop-blur-lg">
 			<div className="mx-auto flex max-w-5xl justify-between items-center px-3 py-2.5 lg:px-0">
 				{/* Harits Syah */}
 				<div className="flex items-center space-x-2 group">

@@ -19,7 +19,7 @@ export default function Breadcrumbs() {
 	return (
 		<div className="sm:px-5 py-2 bg-white sm:border-b sticky top-[45px] sm:-mx-5">
 			<Link
-				className="hover:underline text-zinc-400 hover:text-zinc-800"
+				className="hover:underline text-zinc-500 hover:text-zinc-800"
 				href="/"
 			>
 				home
@@ -34,7 +34,7 @@ export default function Breadcrumbs() {
 				) : (
 					<span key={route}>
 						<Link
-							className="hover:underline text-zinc-400 hover:text-zinc-800"
+							className="hover:underline text-zinc-500 hover:text-zinc-800"
 							href={`${getLinkFromRoutesUpToRoute(routes, route)}`}
 						>
 							{route}

@@ -8,8 +8,8 @@ export default function TableOfContents({ title }: { title: string }) {
 	return (
 		<section className="sm:col-span-1 sm:border-r sm:border-b hidden sm:block">
 			<div className="sticky top-[45px]">
-				<div className="py-2 text-zinc-400 bg-white border-b px-5">
-					In This Page
+				<div className="py-2 text-zinc-500 bg-white border-b px-5">
+					In this page
 				</div>
 
 				<div className="space-y-2 sm:p-5 overflow-y-auto">
@@ -24,7 +24,7 @@ export default function TableOfContents({ title }: { title: string }) {
 							<Link
 								key={heading}
 								href={`#${slug}`}
-								className="block text-zinc-400 hover:text-zinc-700 text-sm"
+								className="block text-zinc-500 hover:text-zinc-700 text-sm"
 							>
 								{capitalizeFirstLetter(heading)}
 							</Link>
