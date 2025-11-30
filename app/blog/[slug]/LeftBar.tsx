@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
-export default function SidebarBlog() {
+export default function LeftBar() {
 	const pathname = usePathname();
 	const segments = pathname?.split("/") as string[];
 	const lastSegment = segments[segments.length - 1];
