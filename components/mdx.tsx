@@ -32,19 +32,12 @@ const CustomLink: React.FC<CustomLinkProps> = (props) => {
 	);
 };
 
-const components = {
-	a: CustomLink,
-};
-
-interface MdxProps {
-	code: string;
-}
-export function Mdx({ code }: MdxProps) {
+export function Mdx({ code }: { code: string }) {
 	const Component = useMDXComponent(code);
 
 	return (
 		<article className="prose prose-zinc max-w-none">
-			<Component components={{ ...components }} />
+			<Component components={{ a: CustomLink }} />
 		</article>
 	);
 }
