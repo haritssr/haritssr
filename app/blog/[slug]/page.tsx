@@ -1,22 +1,23 @@
 import { allBlogs } from ".contentlayer/generated";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Mdx } from "@/components/mdx";
-import SidebarBlog from "./SidebarBlog";
+import LeftBar from "./LeftBar";
 import TableOfContents from "./TableOfContent";
 
 export async function generateMetadata({
 	params,
 }: {
 	params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
 	const { slug } = await params;
 	const blog = allBlogs.find((blog) => blog.slug === slug);
 
-	if (!blog) return;
+	if (!blog) return {};
 
 	const {
 		title,
@@ -31,24 +32,37 @@ export async function generateMetadata({
 	return {
 		title,
 		description,
+		metadataBase: new URL("https://haritssr.vercel.app"),
 		openGraph: {
 			title,
 			description,
-			type: "article",
 			publishedTime,
 			siteName: "Harits Syah Blog",
-			url: `https://haritssr.com/blog/${blogSlug}`,
+			url: `https://haritssr.vercel.app/blog/${blogSlug}`,
 			images: [
 				{
 					url: image,
 				},
 			],
+			locale: "en-US",
+			type: "article",
 		},
 		twitter: {
-			card: "X",
+			card: "summary_large_image",
 			title,
 			description,
 			images: [image],
+		},
+		robots: {
+			index: true,
+			follow: true,
+			googleBot: {
+				index: true,
+				follow: true,
+				"max-video-preview": -1,
+				"max-image-preview": "large",
+				"max-snippet": -1,
+			},
 		},
 	};
 }
@@ -94,7 +108,7 @@ export default async function Blog({
 
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-5 min-h-screen w-full">
-			<SidebarBlog />
+			<LeftBar />
 			<Content>
 				<Breadcrumbs />
 				<div className="my-5">
