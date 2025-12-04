@@ -46,7 +46,7 @@
 		"immer": "^9.0.17",
 		"katex": "^0.16.4",
 		"lucide-react": "^0.469.0",
-		"next": "16.0.3",
+		"next": "16.0.7",
 		"next-contentlayer": "^0.3.4",
 		"nuqs": "^2.8.1",
 		"radix-ui": "^1.4.3",
