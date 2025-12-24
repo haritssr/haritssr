@@ -19,7 +19,7 @@ export default function Contacts() {
 							// placeholder='blur'
 						/>
 					</section>
-					<div className="text-zinc-500 font-semibold text-center text-xl">
+					<div className="text-zinc-800 font-semibold text-center text-xl">
 						Harits Syah
 					</div>
 				</div>
