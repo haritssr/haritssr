@@ -190,14 +190,4 @@ export const TechStackData = [
 			},
 		],
 	},
-	{
-		domain: "Animation",
-		links: [
-			{
-				href: "https://www.framer.com/motion",
-				imgSrc: "/Icons/framermotion.jpg",
-				name: "Framer Motion",
-			},
-		],
-	},
 ];
