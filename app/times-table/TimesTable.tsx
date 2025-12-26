@@ -1,3 +1,5 @@
+"use client";
+
 import type React from "react";
 import { useState } from "react";
 
@@ -8,7 +10,7 @@ interface MainData {
 	col: number;
 }
 
-export default function TimesTable() {
+export default function TimesTableComponent() {
 	const [currentInput, setCurrentInput] = useState<MainData>({
 		index: "NOT SELECTED",
 		value: "NOT SELECTED",

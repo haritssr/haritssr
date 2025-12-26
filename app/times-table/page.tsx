@@ -1,5 +1,6 @@
 import { PageTitle } from "@/components/SubTitle";
 import { IncrementButton } from "./IncrementButton";
+import TimesTableComponent from "./TimesTable";
 
 export default function TimesTable() {
 	return (
@@ -10,7 +11,7 @@ export default function TimesTable() {
 			/>
 
 			<IncrementButton />
-			<TimesTable />
+			<TimesTableComponent />
 		</div>
 	);
 }
