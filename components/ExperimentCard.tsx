@@ -12,7 +12,7 @@ export default function ExperimentCard({
 		<Link
 			href={`/experiments/${experiment.title.toLowerCase().replace(" ", "-")}`}
 			key={experiment.id}
-			className="space-y-1 px-3 py-2.5 hover:bg-zinc-100 bg-zinc-50 border border-zinc-300 rounded-2xl group corner-squircle"
+			className="space-y-1 px-3 py-2.5 hover:bg-zinc-50 border border-zinc-300 rounded-2xl group corner-squircle"
 		>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center space-x-2">
