@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { PageTitle } from "@/components/SubTitle";
 import { IncrementButton } from "./IncrementButton";
 import TimesTableComponent from "./TimesTable";
@@ -10,7 +11,9 @@ export default function TimesTable() {
 				description="Self-corrected 10x10 times table with statistics."
 			/>
 
-			<IncrementButton />
+			<Suspense fallback="..loading">
+				<IncrementButton />
+			</Suspense>
 			<TimesTableComponent />
 		</div>
 	);

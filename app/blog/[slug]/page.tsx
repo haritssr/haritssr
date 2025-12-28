@@ -1,4 +1,4 @@
-import { allBlogs } from ".contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";

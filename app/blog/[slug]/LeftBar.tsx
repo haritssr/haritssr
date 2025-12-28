@@ -9,7 +9,7 @@ export default function LeftBar() {
 	const pathname = usePathname();
 	const segments = pathname?.split("/") as string[];
 	const lastSegment = segments[segments.length - 1];
-
+	// console.log(allBlogs);
 	return (
 		<div className="hidden sm:block sm:col-span-1 border-r border-b border-l">
 			<Link
