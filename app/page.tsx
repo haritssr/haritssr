@@ -2,7 +2,7 @@ import Blog from "@/components/home/Blog";
 import Contacts from "@/components/home/Contacts";
 import Experiences from "@/components/home/Experiences";
 import Experiments from "@/components/home/Experiments";
-import Others from "@/components/home/Others";
+import OtherLinks from "@/components/home/OtherLinks";
 
 export default function Home() {
 	return (
@@ -12,7 +12,7 @@ export default function Home() {
 				<Experiences />
 				<Experiments />
 				<Blog />
-				<Others />
+				<OtherLinks />
 			</div>
 		</section>
 	);
