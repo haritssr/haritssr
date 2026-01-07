@@ -7,8 +7,8 @@ import type React from "react";
 
 export default function GlobalNavigationMobile() {
 	return (
-		<div className="sticky bottom-0 block  w-full border-t border-zinc-200 bg-white/90 saturate-150 backdrop-blur-lg sm:hidden">
-			<div className="flex w-full items-center ">
+		<div className="sticky bottom-0 block w-full border-zinc-200 border-t bg-white/90 saturate-150 backdrop-blur-lg sm:hidden">
+			<div className="flex w-full items-center">
 				{TitleAndPathData.map(({ title, path }) => (
 					<IconWrapper key={title} to={`/${title}`} path={path} />
 				))}
@@ -55,7 +55,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
 					{path}
 				</svg>
 
-				<div className={`text-[11px] leading-[15px] -mt-px ${color}`}>
+				<div className={`-mt-px text-[11px] leading-[15px] ${color}`}>
 					{capitalizeFirstLetter(to)}
 				</div>
 			</div>

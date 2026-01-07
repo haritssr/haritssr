@@ -22,7 +22,7 @@ export default function Figure() {
 						alt="Mountain with beautiful panoramic sky wadadaw"
 						placeholder="blur"
 					/>
-					<figcaption className="text-center italic text-zinc-500">
+					<figcaption className="text-center text-zinc-500 italic">
 						Image 1. Mountain with beautiful panoramic sky wadadaw
 					</figcaption>
 				</figure>

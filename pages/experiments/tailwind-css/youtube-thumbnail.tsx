@@ -6,20 +6,20 @@ export default function YoutubeThumbnail() {
 		<LayoutToExperiments title="YouTube thumbnail" domain="Tailwind CSS">
 			<SubTitle>Youtube Thumbnail example</SubTitle>
 
-			<div className="relative h-[360px] w-full overflow-hidden  rounded-md border border-purple-300 bg-linear-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">
+			<div className="relative h-[360px] w-full overflow-hidden rounded-md border border-purple-300 bg-linear-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">
 				<div>
 					<Play />
 				</div>
 				<div
 					aria-hidden="true"
-					className="w-[512px]h-[512px] absolute bg-purple-400"
+					className="absolute w-[512px]h-[512px] bg-purple-400"
 				/>
 
 				<div className="relative flex h-full flex-col justify-end space-y-4 p-8">
-					<p className="text-xs font-semibold uppercase text-purple-600">
+					<p className="font-semibold text-purple-600 text-xs uppercase">
 						How we&apos;d build it
 					</p>
-					<h1 className="text-gray 900 text-4xl font-semibold">
+					<h1 className="900 font-semibold text-4xl text-gray">
 						Youtube Thumbail with Tailwind CSS
 					</h1>
 					<TailwindSVG />
@@ -33,7 +33,7 @@ const Play = () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			className="absolute -top-14 -left-14 h-[200px] w-[200px] text-purple-400"
+			className="-top-14 -left-14 absolute h-[200px] w-[200px] text-purple-400"
 			viewBox="0 0 20 20"
 			fill="currentColor"
 		>

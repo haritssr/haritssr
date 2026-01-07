@@ -16,7 +16,7 @@ export default function LoadingFigma({
 	return (
 		<Suspense
 			fallback={
-				<div className="w-full border border-zinc-300 flex items-center justify-center py-10">
+				<div className="flex w-full items-center justify-center border border-zinc-300 py-10">
 					Loading...
 				</div>
 			}
@@ -27,13 +27,13 @@ export default function LoadingFigma({
 						title="figma"
 						key={a}
 						onLoad={hideLoading}
-						className="w-full h-[600px]"
+						className="h-[600px] w-full"
 						src={a}
 						allowFullScreen
 					/>
 				))
 			) : (
-				<p className="text-zinc-800 ">No design</p>
+				<p className="text-zinc-800">No design</p>
 			)}
 		</Suspense>
 	);

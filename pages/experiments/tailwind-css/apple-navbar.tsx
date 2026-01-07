@@ -13,10 +13,10 @@ export default function AppleNavbar() {
 			<div>
 				<div className="border border-zinc-300">
 					<div className="sticky top-[88px] flex items-center justify-between border-b border-b-gray-300 bg-white/70 p-2 py-2 backdrop-blur-md">
-						<div className="cursor-pointer text-xl font-semibold">
+						<div className="cursor-pointer font-semibold text-xl">
 							iPhone 13 Pro
 						</div>
-						<div className=" flex items-center justify-between space-x-5 text-[12px] text-gray-900">
+						<div className="flex items-center justify-between space-x-5 text-[12px] text-gray-900">
 							<div className="hidden space-x-5 sm:flex">
 								<div className="cursor-pointer hover:text-[#2563eb]/90">
 									Overview
@@ -28,7 +28,7 @@ export default function AppleNavbar() {
 									Tech Specs
 								</div>
 							</div>
-							<div className="px-s cursor-pointer rounded-full bg-blue-500 px-3 py-1 text-[12px] text-white">
+							<div className="cursor-pointer rounded-full bg-blue-500 px-3 px-s py-1 text-[12px] text-white">
 								Buy
 							</div>
 						</div>

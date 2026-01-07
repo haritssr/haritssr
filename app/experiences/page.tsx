@@ -15,7 +15,7 @@ export default function ExperiencesPage() {
 				title="Experiences"
 				description="Detail informations on how projects I belong to being handled."
 			/>
-			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0">
+			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4">
 				{ExperiencesData.map((d) => (
 					<ExperienceCard
 						key={d.project_name}

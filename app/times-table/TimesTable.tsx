@@ -20,13 +20,13 @@ export default function TimesTableComponent() {
 
 	return (
 		<>
-			<div className="text-red-500 my-5">
+			<div className="my-5 text-red-500">
 				Attention: This app is not finished yet!
 			</div>
 
 			<div className="flex space-x-2">
 				{/* Row Head */}
-				<section className="grid w-fit grid-cols-1 gap-2 ">
+				<section className="grid w-fit grid-cols-1 gap-2">
 					{Array.from({ length: 11 }, (_, index) => (
 						<input
 							className="h-10 w-10 select-none rounded border border-zinc-400 bg-zinc-50 p-1 text-center"
@@ -40,7 +40,7 @@ export default function TimesTableComponent() {
 				</section>
 				<div>
 					{/* Col Head */}
-					<section className=" mb-2 grid w-fit grid-cols-10 gap-2">
+					<section className="mb-2 grid w-fit grid-cols-10 gap-2">
 						{Array.from({ length: 10 }, (_, index) => (
 							<input
 								className="h-10 w-10 select-none rounded border border-zinc-400 bg-zinc-50 p-1 text-center"
@@ -120,7 +120,7 @@ function InputElement({
 			maxLength={3}
 			onChange={(e) => {
 				const value = e.target.value;
-				handleOnchange({ index: index.toString(), value, row: row, col: col });
+				handleOnchange({ index: index.toString(), value, row, col });
 			}}
 			onClick={(_e) =>
 				handleOnClick((prev) => ({

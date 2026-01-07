@@ -13,14 +13,14 @@ export default function Newspaper() {
 					href="https://tailwindcss.com/docs/columns"
 				/>
 			</SubTitle>
-			<div className="my-10 border border-zinc-400 p-5 tracking-wide ">
-				<h1 className="my-2 text-4xl font-bold text-zinc-800">Amazing Title</h1>
-				<h2 className="font-mw mb-5 text-lg italic text-zinc-600">
+			<div className="my-10 border border-zinc-400 p-5 tracking-wide">
+				<h1 className="my-2 font-bold text-4xl text-zinc-800">Amazing Title</h1>
+				<h2 className="mb-5 font-mw text-lg text-zinc-600 italic">
 					This is beautiful subtitle
 				</h2>
 
 				<p className="columns-1 text-zinc-700 sm:columns-2 lg:columns-3">
-					<span className="float-none p-2 block">
+					<span className="float-none block p-2">
 						<Image
 							className="rounded shadow-md"
 							alt=""

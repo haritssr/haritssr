@@ -16,37 +16,37 @@ export const metadata: Metadata = {
 
 export default function About() {
 	return (
-		<div className="max-w-3xl mx-auto">
-			<section className="my-8 sm:my-20 space-y-3">
-				<div className="justify-center w-full flex ">
+		<div className="mx-auto max-w-3xl">
+			<section className="my-8 space-y-3 sm:my-20">
+				<div className="flex w-full justify-center">
 					<section className="flex justify-center">
 						<Image
 							priority
 							src="/images/blur.jpg"
 							height="165"
 							width="165"
-							className="z-10 rounded-full aspect-ratio h-32 w-32"
+							className="z-10 aspect-ratio h-32 w-32 rounded-full"
 							alt="Harits Syah"
 							blurDataURL="/images/blur.jpg"
 						/>
 					</section>
 				</div>
-				<div className="text-zinc-800 w-full text-center text-lg sm:text-xl font-medium">
+				<div className="w-full text-center font-medium text-lg text-zinc-800 sm:text-xl">
 					Harits Syah
 				</div>
 			</section>
 
 			{/* Contacts */}
 			<div className="mb-14">
-				<div className="text-zinc-800 text-xl font-semibold mb-2">
+				<div className="mb-2 font-semibold text-xl text-zinc-800">
 					{ContactData.section}
 				</div>
 				<div className="mb-2 text-zinc-700">{ContactData.description}</div>
-				<ul className="block divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
+				<ul className="block divide-y divide-zinc-200/70 border-zinc-200/70 border-t border-b">
 					{ContactData.points.map((each) => (
 						<li
 							key={each.link}
-							className="text-zinc-500 py-2 flex space-x-3 items-center"
+							className="flex items-center space-x-3 py-2 text-zinc-500"
 						>
 							<Image
 								alt={each.link}
@@ -58,7 +58,7 @@ export default function About() {
 							{each.link.startsWith("https://www.") ? (
 								<a
 									title={each.link}
-									className="hover:underline hover:text-zinc-800"
+									className="hover:text-zinc-800 hover:underline"
 									target="_blank"
 									rel="noreferrer noopener"
 									href={each.link}
@@ -68,7 +68,7 @@ export default function About() {
 							) : each.link.startsWith("https://") ? (
 								<a
 									title={each.link}
-									className="hover:underline hover:text-zinc-800"
+									className="hover:text-zinc-800 hover:underline"
 									target="_blank"
 									rel="noreferrer noopener"
 									href={each.link}
@@ -77,7 +77,7 @@ export default function About() {
 								</a>
 							) : each.link.includes("@") ? (
 								<a
-									className="hover:underline hover:text-zinc-800"
+									className="hover:text-zinc-800 hover:underline"
 									href={`mailto:${each.link}`}
 								>
 									{each.link}
@@ -89,21 +89,21 @@ export default function About() {
 					))}
 				</ul>
 			</div>
-			<div className="space-y-14 mb-14">
+			<div className="mb-14 space-y-14">
 				{AboutData.map((section) => {
 					return (
 						<div key={section.section}>
-							<div className="text-zinc-800 text-xl font-medium mb-2">
+							<div className="mb-2 font-medium text-xl text-zinc-800">
 								{section.section}
 							</div>
 							<div className="mb-2 text-zinc-600">{section.description}</div>
-							<ul className="block sm:list-disc list-inside divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
+							<ul className="block list-inside divide-y divide-zinc-200/70 border-zinc-200/70 border-t border-b sm:list-disc">
 								{section.points.map((point) => (
-									<li key={point} className="text-zinc-500 py-2">
+									<li key={point} className="py-2 text-zinc-500">
 										{point.startsWith("https://www.") ? (
 											<a
 												title={point}
-												className="hover:underline hover:text-zinc-800"
+												className="hover:text-zinc-800 hover:underline"
 												target="_blank"
 												rel="noreferrer noopener"
 												href={point}
@@ -113,7 +113,7 @@ export default function About() {
 										) : point.startsWith("https://") ? (
 											<a
 												title={point}
-												className="hover:underline hover:text-zinc-800"
+												className="hover:text-zinc-800 hover:underline"
 												target="_blank"
 												rel="noreferrer noopener"
 												href={point}
@@ -122,7 +122,7 @@ export default function About() {
 											</a>
 										) : point.includes("@") ? (
 											<a
-												className="hover:underline hover:text-zinc-800"
+												className="hover:text-zinc-800 hover:underline"
 												href={`mailto:${point}`}
 											>
 												{point}
@@ -138,7 +138,7 @@ export default function About() {
 				})}
 			</div>
 
-			<div className="space-y-6 mb-6">
+			<div className="mb-6 space-y-6">
 				<Box title="Core Skills">
 					<div className="pt-5">
 						<div className="font-semibold">Web Software Engineering</div>
@@ -186,11 +186,11 @@ export default function About() {
 										.join("-")}`}
 									className="flex items-center justify-end text-zinc-400 hover:underline"
 								>
-									<div className="text-tiny ">Details</div>
-									<ChevronRightIcon className="h-4 w-4 pt-[2px] stroke-2" />
+									<div className="text-tiny">Details</div>
+									<ChevronRightIcon className="h-4 w-4 stroke-2 pt-[2px]" />
 								</Link>
 							</div>
-							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+							<div className="mt-1.5 space-y-1.5 pl-7 text-zinc-500">
 								<div>{project.about_client.company_name}</div>
 								<div>{project.about_project.working_period}</div>
 								<div>{project.skills}</div>
@@ -218,7 +218,7 @@ export default function About() {
 							/>
 							<div className="font-semibold text-lg">Privat Teacher</div>
 						</div>
-						<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+						<div className="mt-1.5 space-y-1.5 pl-7 text-zinc-500">
 							<div>Lia Privat</div>
 							<div> June 2018 - Now (6.5 years)</div>
 							<div>
@@ -244,7 +244,7 @@ export default function About() {
 								/>
 								<div className="font-semibold text-lg">{school.level}</div>
 							</div>
-							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+							<div className="mt-1.5 space-y-1.5 pl-7 text-zinc-500">
 								<div>{school.school}</div>
 								<div>{school.period}</div>
 								<div>{school.status}</div>
@@ -268,7 +268,7 @@ export default function About() {
 								/>
 								<div className="font-semibold text-lg">{school.level}</div>
 							</div>
-							<div className="pl-7 text-zinc-500 space-y-1.5 mt-1.5">
+							<div className="mt-1.5 space-y-1.5 pl-7 text-zinc-500">
 								<div>{school.school}</div>
 								<div>{school.period}</div>
 								<div>Status: {school.status}</div>
@@ -282,7 +282,7 @@ export default function About() {
 				<SecondaryButton
 					href="/cv-dec-2024.pdf"
 					download="cv-dec-2024.pdf"
-					className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-xl corner-squircle ring-1 ring-zinc-950/20  focus:outline-hidden focus:ring-zinc-800 shadow"
+					className="corner-squircle select-none rounded-xl px-3 py-1 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden focus:ring-zinc-800 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
 				>
 					Download CV
 				</SecondaryButton>
@@ -299,11 +299,11 @@ function Box({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="border border-zinc-400/50 rounded-xl corner-squircle overflow-hidden">
-			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
+		<div className="corner-squircle overflow-hidden rounded-xl border border-zinc-400/50">
+			<div className="select-none border-zinc-400/50 border-b bg-zinc-50 px-3 py-2 font-medium text-zinc-800">
 				{title}
 			</div>
-			<div className="px-5 pb-5 space-y-5 divide-y">{children}</div>
+			<div className="space-y-5 divide-y px-5 pb-5">{children}</div>
 		</div>
 	);
 }

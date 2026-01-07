@@ -10,17 +10,17 @@ export default function SidebarHierarchy() {
 					<details
 						key={domain.domain_title}
 						aria-label="domain-area"
-						className="bg-red-100 p-1 "
+						className="bg-red-100 p-1"
 					>
 						<summary
-							className="font-semibold cursor-pointer select-none"
+							className="cursor-pointer select-none font-semibold"
 							aria-label="domain-title"
 						>
 							{domain.domain_title}
 						</summary>
 						<section
 							aria-label="chapter-area"
-							className="bg-yellow-100 p-1 space-y-2"
+							className="space-y-2 bg-yellow-100 p-1"
 						>
 							{domain.chapters.map((chapter) => (
 								<details
@@ -42,7 +42,7 @@ export default function SidebarHierarchy() {
 											<Link
 												key={materi}
 												href={materi}
-												className="bg-blue-100 ml-2 p-1 block hover:underline"
+												className="ml-2 block bg-blue-100 p-1 hover:underline"
 											>
 												{materi}
 											</Link>

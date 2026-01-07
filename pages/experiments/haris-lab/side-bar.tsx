@@ -18,7 +18,7 @@ function App() {
 			{fisika.map((domain) => (
 				<div key={domain.domain_name}>
 					<div>
-						<div className="pl-2 text-lg font-medium">{domain.domain_name}</div>
+						<div className="pl-2 font-medium text-lg">{domain.domain_name}</div>
 						<button type="button" onClick={() => setOpenAll(!openAll)}>
 							Open All
 						</button>

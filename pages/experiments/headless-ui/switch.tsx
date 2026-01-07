@@ -42,9 +42,9 @@ const SwitchExample1 = () => {
 				onChange={setEnabled}
 				className={`${
 					enabled
-						? "bg-green-500 border-green-600 hover:border-green-800"
-						: "bg-zinc-200 border-zinc-300 hover:border-zinc-500"
-				} relative inline-flex w-[58px] cursor-pointer items-center border  rounded-full p-1 transition duration-100 ease-out `}
+						? "border-green-600 bg-green-500 hover:border-green-800"
+						: "border-zinc-300 bg-zinc-200 hover:border-zinc-500"
+				} relative inline-flex w-[58px] cursor-pointer items-center rounded-full border p-1 transition duration-100 ease-out`}
 			>
 				<div
 					className={`${

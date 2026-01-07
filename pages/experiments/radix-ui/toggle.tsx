@@ -24,7 +24,7 @@ export default function ExportedToggle() {
 					setPressed(!pressed);
 				}}
 				pressed={pressed}
-				className=" rounded-md border border-zinc-400 bg-white px-3 py-1.5  hover:bg-zinc-50 font-medium rdx-state-on:ring-blue-600 rdx-state-on:text-action rdx-state-on:ring-2"
+				className="rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium rdx-state-on:text-action rdx-state-on:ring-2 rdx-state-on:ring-blue-600 hover:bg-zinc-50"
 			>
 				Show alert
 			</Toggle.Root>

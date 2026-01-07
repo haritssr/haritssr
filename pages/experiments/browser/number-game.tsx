@@ -55,7 +55,7 @@ export default function NumberGame() {
 					<br />
 					Every wrong answer decrease one score.
 				</SubTitle>
-				<div className="pt-24 text-center text-4xl font-bold text-green-500">
+				<div className="pt-24 text-center font-bold text-4xl text-green-500">
 					You win!
 				</div>
 
@@ -66,7 +66,7 @@ export default function NumberGame() {
 					<button
 						type="button"
 						onClick={() => router.reload()}
-						className="border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50"
+						className="mx-auto inline-block rounded-md border border-harislab px-4 py-2 text-center text-harislab hover:border-zinc-700 hover:bg-zinc-50"
 					>
 						Play Again
 					</button>
@@ -89,7 +89,7 @@ export default function NumberGame() {
 					{state.num1}+{state.num2}
 				</div>
 				<input
-					className="focus:ring-harislab rounded-md border border-gray-500 py-1 pl-2 focus:outline-hidden focus:ring-1"
+					className="rounded-md border border-gray-500 py-1 pl-2 focus:outline-hidden focus:ring-1 focus:ring-harislab"
 					value={state.response}
 					onChange={updateResponse}
 					onKeyDown={inputKeyPress}

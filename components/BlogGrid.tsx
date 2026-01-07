@@ -5,27 +5,27 @@ import Link from "next/link";
 
 export default function BlogGrid() {
 	return (
-		<div className="grid lg:grid-cols-2 gap-5">
+		<div className="grid gap-5 lg:grid-cols-2">
 			{allBlogs.map((post) => (
 				<Link
 					key={post.slug}
 					href={`/blog/${post.slug}`}
-					className="rounded-xl corner-squircle border border-zinc-300 px-3 py-2 hover:bg-zinc-50 flex items-start justify-between group"
+					className="corner-squircle group flex items-start justify-between rounded-xl border border-zinc-300 px-3 py-2 hover:bg-zinc-50"
 				>
 					<div className="w-full text-zinc-500 lg:flex lg:justify-between">
 						<div>
 							<p className="text-zinc-800">{post.title}</p>
 						</div>
 						<div>
-							<p className="inline text-[14px] font-light">
+							<p className="inline font-light text-[14px]">
 								{post.publishedAt}
 							</p>
 							.&nbsp;
-							<p className="inline text-[14px] font-light">
+							<p className="inline font-light text-[14px]">
 								{post.structuredData.wordCount} Words
 							</p>
 							, &nbsp;
-							<p className="inline text-[14px] font-light">
+							<p className="inline font-light text-[14px]">
 								{Math.ceil(post.structuredData.wordCount / 200)} min read.
 							</p>
 						</div>

@@ -19,11 +19,11 @@ export default function SWR() {
 		<LayoutToExperiments title="SWR" domain="Nextjs">
 			<SubTitle>
 				Using SWR to fetch data from{" "}
-				<code className="rounded-md border border-green-200 bg-green-50 px-2 py-1 font-mono text-sm text-green-500">
+				<code className="rounded-md border border-green-200 bg-green-50 px-2 py-1 font-mono text-green-500 text-sm">
 					/api/hello
 				</code>{" "}
 				and populate the data to{" "}
-				<code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-sm text-rose-500">
+				<code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-rose-500 text-sm">
 					{"<NameCard/>"}
 				</code>{" "}
 				component
@@ -40,7 +40,7 @@ export default function SWR() {
 const NameCard = ({ name, age, city }) => {
 	return (
 		<div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
-			<div className="text-xl font-semibold text-gray-700">{name}</div>
+			<div className="font-semibold text-gray-700 text-xl">{name}</div>
 			<div className="text-gray-500">{age}</div>
 			<div className="text-action">{city}</div>
 		</div>

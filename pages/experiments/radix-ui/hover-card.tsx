@@ -22,7 +22,7 @@ export default function ExportedHoverCard() {
 			</SubTitle>
 			<HoverCard.Root>
 				<HoverCard.Trigger
-					className="rounded-md bg-white px-3 py-1.5 font-medium text-zinc-800 border border-zinc-400 hover:cursor-pointer hover:bg-zinc-100"
+					className="rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium text-zinc-800 hover:cursor-pointer hover:bg-zinc-100"
 					target="_blank"
 					rel="noopener noreferrer"
 					href="https://twitter.com/haritssr"
@@ -30,8 +30,8 @@ export default function ExportedHoverCard() {
 					@haritssr
 				</HoverCard.Trigger>
 				<HoverCard.Content>
-					<div className="w-auto rounded-md bg-white p-3 text-white shadow-xl border border-zinc-400">
-						<div className="font-semibold text-zinc-800 mb-2">Harits Syah</div>
+					<div className="w-auto rounded-md border border-zinc-400 bg-white p-3 text-white shadow-xl">
+						<div className="mb-2 font-semibold text-zinc-800">Harits Syah</div>
 
 						<div className="flex flex-col">
 							<ExternalLink

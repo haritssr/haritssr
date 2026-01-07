@@ -6,10 +6,10 @@ import { GitHubIcon } from "./Icons";
 
 export default function GlobalNavigation() {
 	return (
-		<nav className="sticky top-0 z-30 border-b border-zinc-200 bg-white/90 saturate-150 backdrop-blur-lg">
-			<div className="mx-auto flex max-w-5xl justify-between items-center px-3 py-2.5 lg:px-0">
+		<nav className="sticky top-0 z-30 border-zinc-200 border-b bg-white/90 saturate-150 backdrop-blur-lg">
+			<div className="mx-auto flex max-w-5xl items-center justify-between px-3 py-2.5 lg:px-0">
 				{/* Harits Syah */}
-				<div className="flex items-center space-x-2 group">
+				<div className="group flex items-center space-x-2">
 					<Image
 						alt="Harits Syah"
 						src="/Icons/haritssr.svg"
@@ -18,7 +18,7 @@ export default function GlobalNavigation() {
 						priority
 						className="h-5 w-5"
 					/>
-					<Link href="/" className=" text-zinc-800" aria-label="site logo">
+					<Link href="/" className="text-zinc-800" aria-label="site logo">
 						Harits Syah
 					</Link>
 				</div>
@@ -34,11 +34,11 @@ export default function GlobalNavigation() {
 
 				<div className="flex items-center space-x-3">
 					<div title="Search: Coming soon">
-						<MagnifyingGlassIcon className="h-5 w-5 text-zinc-800 hover:text-zinc-400 cursor-pointer" />
+						<MagnifyingGlassIcon className="h-5 w-5 cursor-pointer text-zinc-800 hover:text-zinc-400" />
 					</div>
 					{/* Source to GitHub */}
 					<a
-						className="flex items-center space-x-2 group"
+						className="group flex items-center space-x-2"
 						title="Whole Site Source Code"
 						href="https://www.github.com/haritssr/haritssr"
 						target="_blank"

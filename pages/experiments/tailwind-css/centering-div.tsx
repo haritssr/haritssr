@@ -14,7 +14,7 @@ export default function CenteringDiv() {
 					child="h-20 w-20 "
 					parent="flex  aspect-square items-center justify-center"
 				>
-					<div className="flex  aspect-square w-full items-center justify-center bg-purple-500">
+					<div className="flex aspect-square w-full items-center justify-center bg-purple-500">
 						<div className="h-20 w-20 bg-orange-400" />
 					</div>
 				</Wrapper>
@@ -42,7 +42,7 @@ const Wrapper = ({
 			<div>
 				<span className="font-semibold text-zinc-800">Parent</span> : {parent}
 			</div>
-			<div className="mb-2 ">
+			<div className="mb-2">
 				<span className="font-semibold text-zinc-800">Child</span> : {child}
 			</div>
 			{children}

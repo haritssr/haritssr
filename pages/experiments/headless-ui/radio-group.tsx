@@ -68,8 +68,7 @@ function Example1() {
 									}
                   ${
 										checked ? "bg-sky-900 bg-opacity-75 text-white" : "bg-white"
-									}
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-hidden`
+									}relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-hidden`
 								}
 							>
 								{({ checked }) => (
@@ -79,7 +78,7 @@ function Example1() {
 												<div className="text-sm">
 													<RadioGroup.Label
 														as="p"
-														className={`font-medium  ${
+														className={`font-medium ${
 															checked ? "text-white" : "text-gray-900"
 														}`}
 													>

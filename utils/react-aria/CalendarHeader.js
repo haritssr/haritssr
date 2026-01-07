@@ -33,7 +33,7 @@ export function CalendarHeader({
 				// and the calendar itself describes the individual month
 				// so we don't need to repeat that here for screen reader users.
 				aria-hidden
-				className="align-center flex-1 text-center text-xl font-bold"
+				className="flex-1 text-center align-center font-bold text-xl"
 			>
 				{monthDateFormatter.format(
 					state.visibleRange.start.toDate(state.timeZone),
@@ -42,7 +42,7 @@ export function CalendarHeader({
 			{/* biome-ignore lint/a11y/useHeadingContent: heading is aria-hidden, visual only */}
 			<h2
 				aria-hidden
-				className="align-center flex-1 text-center text-xl font-bold"
+				className="flex-1 text-center align-center font-bold text-xl"
 			>
 				{monthDateFormatter.format(
 					state.visibleRange.start.add({ months: 1 }).toDate(state.timeZone),

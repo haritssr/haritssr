@@ -37,7 +37,7 @@ export default function Position() {
 				<Wrapper title="sticky">
 					<div className="h-52 overflow-y-auto bg-blue-500">
 						<div className="">
-							<div className="sticky top-0 bg-purple-600 py-1 px-2 text-zinc-300">
+							<div className="sticky top-0 bg-purple-600 px-2 py-1 text-zinc-300">
 								A
 							</div>
 							<div className="p-2">
@@ -57,7 +57,7 @@ export default function Position() {
 							</div>
 						</div>
 						<div className="">
-							<div className="sticky top-0 bg-purple-600 py-1 px-2 text-zinc-300">
+							<div className="sticky top-0 bg-purple-600 px-2 py-1 text-zinc-300">
 								B
 							</div>
 							<div className="p-2">
@@ -90,7 +90,7 @@ export default function Position() {
 
 						<div className="absolute inset-0 bg-zinc-800/80 text-zinc-200">
 							<div className="p-5">
-								<h1 className="text-4xl font-semibold">Title</h1>
+								<h1 className="font-semibold text-4xl">Title</h1>
 								Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 								Eveniet quae eum mollitia eaque, reprehenderit obcaecati dolore
 								incidunt voluptas unde blanditiis atque similique deserunt

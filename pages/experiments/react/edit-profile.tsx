@@ -28,7 +28,7 @@ export default function EditProfile() {
 				}}
 			>
 				<div className="flex w-fit flex-col space-y-2">
-					<div className="flex items-center space-x-2 ">
+					<div className="flex items-center space-x-2">
 						<div>FirstName :</div>
 						{isEditing ? (
 							<input
@@ -40,7 +40,7 @@ export default function EditProfile() {
 							<b>{firstName}</b>
 						)}
 					</div>
-					<div className="flex items-center space-x-2 ">
+					<div className="flex items-center space-x-2">
 						<div className="">LastName :</div>
 						{isEditing ? (
 							<input

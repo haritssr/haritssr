@@ -24,7 +24,7 @@ export default function ExperimentIndexPage({
 		>
 			{/* SubNavigation */}
 			<section
-				className={`sticky top-0 sm:top-[44.5px] border-b -mx-5 sm:max-w-5xl sm:mx-auto sm:mt-10 ${
+				className={`-mx-5 sticky top-0 border-b sm:top-[44.5px] sm:mx-auto sm:mt-10 sm:max-w-5xl ${
 					inView
 						? "border-zinc-200"
 						: "border-b bg-white/70 saturate-150 backdrop-blur-lg"
@@ -37,7 +37,7 @@ export default function ExperimentIndexPage({
 				</div>
 			</section>
 			{/* mx-auto min-h-screen w-full max-w-5xl px-6 xl:px-0 */}
-			<div className="mt-10 mx-auto min-h-screen w-full sm:px-0">
+			<div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
 				<div className="mb-10 space-y-2">
 					<div className="flex items-center space-x-2">
 						<Image
@@ -47,15 +47,15 @@ export default function ExperimentIndexPage({
 							alt={experiment.title}
 						/>
 					</div>
-					<div ref={ref} className="text-2xl sm:text-3xl font-semibold">
+					<div ref={ref} className="font-semibold text-2xl sm:text-3xl">
 						{experiment.title}
 					</div>
-					<div className="text-zinc-800 text-lg">{experiment.description}</div>
-					<div className="text-zinc-400 text-lg">
+					<div className="text-lg text-zinc-800">{experiment.description}</div>
+					<div className="text-lg text-zinc-400">
 						{experiment.links.length} experiments
 					</div>
 				</div>
-				<ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-3.5 py-2 -ml-[14px]">
+				<ol className="-ml-[14px] grid grid-cols-1 gap-3 px-3.5 py-2 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
 					{experiment.links?.map((link) => (
 						<li key={link}>
 							<Link
@@ -66,12 +66,12 @@ export default function ExperimentIndexPage({
 									.toLowerCase()
 									// /\s/g regex -> search all (g = global) whitespace, and replace them with '-'
 									.replace(/\s/g, "-")}`}
-								className="rounded-md border border-zinc-300 pl-3 pr-3.5 py-2 hover:bg-zinc-50 flex items-center justify-between  group"
+								className="group flex items-center justify-between rounded-md border border-zinc-300 py-2 pr-3.5 pl-3 hover:bg-zinc-50"
 							>
 								<div className="text-zinc-700">{link}</div>
 								<ChevronRightIcon
 									width={2}
-									className="w-5 h-5 text-zinc-500 group-hover:text-zinc-800"
+									className="h-5 w-5 text-zinc-500 group-hover:text-zinc-800"
 								/>
 							</Link>
 						</li>
@@ -87,17 +87,17 @@ const BackToExperiments = ({ inView }: { inView: unknown }) => {
 		<Link
 			href="/experiments"
 			className={`-ml-1 flex w-1/3 cursor-pointer items-center sm:w-1/6 ${
-				inView ? "w-1/2 sm:-ml-5" : "w-1/4"
+				inView ? "sm:-ml-5 w-1/2" : "w-1/4"
 			}`}
 		>
-			<span className=" inline-block w-full">
+			<span className="inline-block w-full">
 				<span className="group flex items-center">
 					<ChevronLeftIcon
-						className=" text-action sm:group-hover:text-action/90 h-5 w-5"
+						className="h-5 w-5 text-action sm:group-hover:text-action/90"
 						strokeWidth={2}
 					/>
 					<span
-						className={`-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-action/90 text-base ${
+						className={`-ml-0.5 truncate text-action text-base sm:group-hover:text-action/90 sm:group-hover:underline ${
 							inView ? "block" : "hidden"
 						}`}
 					>
@@ -121,7 +121,7 @@ const PageTitleCenter = ({
 			<div className="flex justify-center py-0.5">
 				<div
 					className={`truncate text-center font-semibold ${
-						inView ? "text-transparent hidden" : "text-zinc-800 block"
+						inView ? "hidden text-transparent" : "block text-zinc-800"
 					}`}
 				>
 					{title}
@@ -135,10 +135,10 @@ const PageSource = ({ href, inView }: { href: string; inView: unknown }) => {
 	return (
 		<div
 			className={`flex justify-end sm:w-1/6 ${
-				inView ? "w-1/2 sm:-mr-3.5" : "w-1/4"
+				inView ? "sm:-mr-3.5 w-1/2" : "w-1/4"
 			}`}
 		>
-			<cite className="not-italic group">
+			<cite className="group not-italic">
 				<a
 					title="This page source code"
 					href={href}
@@ -146,7 +146,7 @@ const PageSource = ({ href, inView }: { href: string; inView: unknown }) => {
 					rel="noopener noreferrer"
 					className="flex w-fit cursor-pointer items-center text-action hover:text-[#2563eb]/90"
 				>
-					<span className="mr-2 hidden sm:inline-block text-action group-hover:text-action/90">
+					<span className="mr-2 hidden text-action group-hover:text-action/90 sm:inline-block">
 						Source
 					</span>{" "}
 					<GitHubIcon className="h-5 w-5 cursor-pointer text-action group-hover:text-action/90" />

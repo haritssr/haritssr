@@ -3,7 +3,7 @@ import InternalLinkWithoutArrow from "../InternalLinkWithoutArrow";
 export default function OtherLinks() {
 	return (
 		<section>
-			<div className=" mb-3 select-none text-2xl font-semibold text-zinc-800">
+			<div className="mb-3 select-none font-semibold text-2xl text-zinc-800">
 				Others
 			</div>
 			<ul className="list-inside space-y-1">

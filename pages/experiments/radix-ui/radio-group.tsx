@@ -13,23 +13,23 @@ export default function RadioGroupDemo() {
 				<RadioGroup.Item
 					value="default"
 					id="item-1"
-					className="flex h-5 w-5 items-center justify-center rounded-full bg-white hover:bg-blue-50  border border-zinc-400 rdx-state-checked:border-blue-600"
+					className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 rdx-state-checked:border-blue-600 bg-white hover:bg-blue-50"
 				>
-					<RadioGroup.Indicator className="h-3 w-3 rounded-full bg-zinc-800 rdx-state-checked:border-blue-600 rdx-state-checked:bg-blue-600" />
+					<RadioGroup.Indicator className="h-3 w-3 rounded-full rdx-state-checked:border-blue-600 bg-zinc-800 rdx-state-checked:bg-blue-600" />
 				</RadioGroup.Item>
 				<RadioGroup.Item
 					value="value-2"
 					id="item-2"
-					className="flex h-5 w-5 items-center justify-center rounded-full bg-white hover:bg-blue-50  border border-zinc-400 rdx-state-checked:border-blue-600"
+					className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 rdx-state-checked:border-blue-600 bg-white hover:bg-blue-50"
 				>
-					<RadioGroup.Indicator className="h-3 w-3 rounded-full bg-zinc-800 rdx-state-checked:border-blue-600 rdx-state-checked:bg-blue-600" />
+					<RadioGroup.Indicator className="h-3 w-3 rounded-full rdx-state-checked:border-blue-600 bg-zinc-800 rdx-state-checked:bg-blue-600" />
 				</RadioGroup.Item>
 				<RadioGroup.Item
 					value="value-3"
 					id="item-3"
-					className="flex h-5 w-5 items-center justify-center rounded-full bg-white hover:bg-blue-50  border border-zinc-400 rdx-state-checked:border-blue-600"
+					className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 rdx-state-checked:border-blue-600 bg-white hover:bg-blue-50"
 				>
-					<RadioGroup.Indicator className="h-3 w-3 rounded-full bg-zinc-800 rdx-state-checked:border-blue-600 rdx-state-checked:bg-blue-600" />
+					<RadioGroup.Indicator className="h-3 w-3 rounded-full rdx-state-checked:border-blue-600 bg-zinc-800 rdx-state-checked:bg-blue-600" />
 				</RadioGroup.Item>
 			</RadioGroup.Root>
 		</LayoutToExperiments>

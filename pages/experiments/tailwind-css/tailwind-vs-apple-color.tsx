@@ -38,7 +38,7 @@ function Box({ name, color }) {
 	return (
 		<div className="space-y-1">
 			<div style={{ backgroundColor: color }} className="h-20 w-20 rounded" />
-			<div className="text-tiny font-medium text-zinc-700">{name}</div>
+			<div className="font-medium text-tiny text-zinc-700">{name}</div>
 			<div className="text-tiny text-zinc-400">{color}</div>
 		</div>
 	);

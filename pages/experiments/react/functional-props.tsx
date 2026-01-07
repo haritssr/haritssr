@@ -34,7 +34,7 @@ function TextWithNumber({
 	const [state, setState] = useState<number>(1);
 	return (
 		<div>
-			<div className="text-xl font-semibold">{header(state)}</div>
+			<div className="font-semibold text-xl">{header(state)}</div>
 			<div>{children(state)}</div>
 			<button
 				type="button"
