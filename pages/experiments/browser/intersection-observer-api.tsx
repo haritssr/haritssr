@@ -10,10 +10,10 @@ import styles from "@/styles/rocket.module.css";
 import { useInView } from "react-intersection-observer";
 
 export default function IntersectionObserverAPI() {
-	return (
-		// <IntersectionObserverAPINative />
-		<IntersectionObserverAPIHooks />
-	);
+  return (
+    // <IntersectionObserverAPINative />
+    <IntersectionObserverAPIHooks />
+  );
 }
 
 // function IntersectionObserverAPINative() {
@@ -63,54 +63,54 @@ export default function IntersectionObserverAPI() {
 // }
 
 function IntersectionObserverAPIHooks() {
-	const { ref: myRef, inView: isMyElementVisible } = useInView();
-	const { ref: rocketRef, inView: isRocketVisible } = useInView();
-	// useEffect(() => {
-	// 	console.log(isRocketVisible);
-	// }, [isRocketVisible]);
-	return (
-		<LayoutToExperiments domain="Browser" title="Intersection Observer API">
-			<SubTitle>
-				<ExternalLink
-					href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API"
-					name="Intersection Observer API"
-				/>
-				<br />
-				Inspired by
-				<ExternalLink
-					href="https://www.youtube.com/watch?v=r1auJEf9ISo"
-					name="Colby Fayock"
-				/>
-				<br />
-				Scroll to the bottom to see the effect, the rocket launches.🚀.
-			</SubTitle>
-			<div className="mt-96 rounded-md bg-zinc-100 p-10">
-				<h2 ref={myRef} className="mb-2 font-semibold text-2xl">
-					{isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}
-				</h2>
-				<p ref={rocketRef}>
-					<span
-						className={`${styles.rocket} ${
-							isRocketVisible ? styles.animateRocket : ""
-						}`}
-					>
-						🚀
-					</span>
-				</p>
-				<p className="text-zinc-600">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error
-					voluptas maiores possimus distinctio. Dolores, veritatis hic magni
-					numquam fugiat totam enim, temporibus, nostrum est ad accusantium?
-					Saepe ducimus accusamus eaque est obcaecati? Laboriosam, dolor illo.
-					Maxime id obcaecati omnis laudantium corporis aliquid illum qui quis
-					voluptatum, nihil vero a culpa maiores at fuga exercitationem rem quo
-					placeat sint nostrum vitae! Nulla repudiandae, sunt corporis quasi
-					temporibus quibusdam dolorem, minus omnis quod aliquam eum quis!
-					Temporibus aspernatur, ipsa fugit autem libero magni molestias odio
-					enim consequuntur! At vel asperiores sit veritatis quia nam nemo nobis
-					dolores, rerum, tenetur ipsa, autem consequatur?
-				</p>
-			</div>
-		</LayoutToExperiments>
-	);
+  const { ref: myRef, inView: isMyElementVisible } = useInView();
+  const { ref: rocketRef, inView: isRocketVisible } = useInView();
+  // useEffect(() => {
+  // 	console.log(isRocketVisible);
+  // }, [isRocketVisible]);
+  return (
+    <LayoutToExperiments domain="Browser" title="Intersection Observer API">
+      <SubTitle>
+        <ExternalLink
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API"
+          name="Intersection Observer API"
+        />
+        <br />
+        Inspired by
+        <ExternalLink
+          href="https://www.youtube.com/watch?v=r1auJEf9ISo"
+          name="Colby Fayock"
+        />
+        <br />
+        Scroll to the bottom to see the effect, the rocket launches.🚀.
+      </SubTitle>
+      <div className="mt-96 rounded-md bg-zinc-100 p-10">
+        <h2 className="mb-2 font-semibold text-2xl" ref={myRef}>
+          {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}
+        </h2>
+        <p ref={rocketRef}>
+          <span
+            className={`${styles.rocket} ${
+              isRocketVisible ? styles.animateRocket : ""
+            }`}
+          >
+            🚀
+          </span>
+        </p>
+        <p className="text-zinc-600">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error
+          voluptas maiores possimus distinctio. Dolores, veritatis hic magni
+          numquam fugiat totam enim, temporibus, nostrum est ad accusantium?
+          Saepe ducimus accusamus eaque est obcaecati? Laboriosam, dolor illo.
+          Maxime id obcaecati omnis laudantium corporis aliquid illum qui quis
+          voluptatum, nihil vero a culpa maiores at fuga exercitationem rem quo
+          placeat sint nostrum vitae! Nulla repudiandae, sunt corporis quasi
+          temporibus quibusdam dolorem, minus omnis quod aliquam eum quis!
+          Temporibus aspernatur, ipsa fugit autem libero magni molestias odio
+          enim consequuntur! At vel asperiores sit veritatis quia nam nemo nobis
+          dolores, rerum, tenetur ipsa, autem consequatur?
+        </p>
+      </div>
+    </LayoutToExperiments>
+  );
 }

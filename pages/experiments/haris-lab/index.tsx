@@ -2,5 +2,5 @@ import { HarisLabData } from "data/ExperimentsData";
 import ExperimentIndexPage from "@/components/ExperimentIndexPage";
 
 export default function IndexPage() {
-	return <ExperimentIndexPage experiment={HarisLabData} />;
+  return <ExperimentIndexPage experiment={HarisLabData} />;
 }

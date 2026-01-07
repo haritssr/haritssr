@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "d": "NODE_OPTIONS=\"--max-old-space-size=12288\" next dev",
+=======
+    "dev": " next dev ",
+>>>>>>> 23394ff (chore: Bunx biome check --write)
     "build": "next build",
     "start": "next start",
     "type-coverage": "type-coverage",
@@ -76,7 +80,14 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@biomejs/biome": "^2.3.6",
+=======
+    "@biomejs/biome": "2.3.10",
+    "@content-collections/core": "^0.13.0",
+    "@content-collections/mdx": "^0.2.2",
+    "@content-collections/next": "^0.2.10",
+>>>>>>> 23394ff (chore: Bunx biome check --write)
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/typography": "^0.5.8",
@@ -86,6 +97,11 @@
     "baseline-browser-mapping": "^2.8.32",
     "knip": "^5.33.3",
     "tailwindcss": "^4.1.17",
+<<<<<<< HEAD
     "typescript": "^5.9.3"
+=======
+    "typescript": "^5.9.3",
+    "ultracite": "7.0.5"
+>>>>>>> 23394ff (chore: Bunx biome check --write)
   }
 }

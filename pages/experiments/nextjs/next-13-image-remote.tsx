@@ -3,18 +3,18 @@ import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
 export default function Next13ImageRemote() {
-	return (
-		<LayoutToExperiments domain="Nextjs" title="Next 13 Image Remote">
-			<SubTitle>
-				<ExternalLink
-					href="https://beta.nextjs.org/docs/optimizing/images"
-					name="Nextjs 13 Image"
-				/>
-			</SubTitle>
+  return (
+    <LayoutToExperiments domain="Nextjs" title="Next 13 Image Remote">
+      <SubTitle>
+        <ExternalLink
+          href="https://beta.nextjs.org/docs/optimizing/images"
+          name="Nextjs 13 Image"
+        />
+      </SubTitle>
 
-			<section className="space-y-5">
-				{/* FAIL */}
-				{/* <Section name='Bare minimum' />
+      <section className="space-y-5">
+        {/* FAIL */}
+        {/* <Section name='Bare minimum' />
 				<Image
 					src='https://unsplash.com/photos/FouyeA9HH5U'
 					width='600'
@@ -34,7 +34,7 @@ export default function Next13ImageRemote() {
 						height: 'auto',
 					}}
 				/> */}
-			</section>
-		</LayoutToExperiments>
-	);
+      </section>
+    </LayoutToExperiments>
+  );
 }

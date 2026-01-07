@@ -1,3 +1,3 @@
 export default function segmentA() {
-	return <div>segmentA</div>;
+  return <div>segmentA</div>;
 }

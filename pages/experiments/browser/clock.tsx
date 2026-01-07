@@ -3,14 +3,14 @@ import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
 export default function ClockDemo() {
-	return (
-		<LayoutToExperiments title="Clock" domain="Browser">
-			<SubTitle>
-				Clock using new Date(), useEffect(), useInterval(), cleanInterval()
-			</SubTitle>
-			<Clock />
-		</LayoutToExperiments>
-	);
+  return (
+    <LayoutToExperiments domain="Browser" title="Clock">
+      <SubTitle>
+        Clock using new Date(), useEffect(), useInterval(), cleanInterval()
+      </SubTitle>
+      <Clock />
+    </LayoutToExperiments>
+  );
 }
 
 //this component just displays the time when it is rendered on screen. After that nothing happens. The time is not updated.
@@ -20,20 +20,20 @@ What does it mean to update the time ?
 In modern frameworks updating text on the screen means changing the associated state data.
 */
 function Clock() {
-	const [date, setData] = useState(new Date());
+  const [date, setData] = useState(new Date());
 
-	useEffect(() => {
-		const timerId = setInterval(() => setData(new Date()), 1000);
-		return function cleanup() {
-			clearInterval(timerId);
-		};
-	}, []);
+  useEffect(() => {
+    const timerId = setInterval(() => setData(new Date()), 1000);
+    return function cleanup() {
+      clearInterval(timerId);
+    };
+  }, []);
 
-	return (
-		<div className="w-full rounded-md border border-zinc-500 px-4 py-2 text-center text-4xl sm:w-1/3">
-			{date.toLocaleTimeString()}
-		</div>
-	);
+  return (
+    <div className="w-full rounded-md border border-zinc-500 px-4 py-2 text-center text-4xl sm:w-1/3">
+      {date.toLocaleTimeString()}
+    </div>
+  );
 }
 
 /*

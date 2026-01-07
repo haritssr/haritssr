@@ -2,102 +2,102 @@ import { createContext, useContext, useState } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 
 export default function Context() {
-	return (
-		<LayoutToExperiments domain="React" title="HOC">
-			<ContextCard />
-		</LayoutToExperiments>
-	);
+  return (
+    <LayoutToExperiments domain="React" title="HOC">
+      <ContextCard />
+    </LayoutToExperiments>
+  );
 }
 
 type HidableCardContextType = {
-	hidden: boolean;
-	toggle: () => void;
+  hidden: boolean;
+  toggle: () => void;
 };
 
 const HidableCardContext = createContext<HidableCardContextType | null>(null);
 
 function HidableCardContextProvider({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	const [hidden, setHidden] = useState(false);
-	function toggle() {
-		setHidden((prev) => !prev);
-	}
-	return (
-		<HidableCardContext.Provider value={{ hidden, toggle }}>
-			{children}
-		</HidableCardContext.Provider>
-	);
+  const [hidden, setHidden] = useState(false);
+  function toggle() {
+    setHidden((prev) => !prev);
+  }
+  return (
+    <HidableCardContext.Provider value={{ hidden, toggle }}>
+      {children}
+    </HidableCardContext.Provider>
+  );
 }
 
 const useHidableContext = () => {
-	const context = useContext(HidableCardContext);
+  const context = useContext(HidableCardContext);
 
-	if (!context) {
-		throw new Error("User inside the provider lol");
-	}
+  if (!context) {
+    throw new Error("User inside the provider lol");
+  }
 
-	return context;
+  return context;
 };
 
 //HidableCard
 function HidableCard({
-	className,
-	...rest
+  className,
+  ...rest
 }: Pick<React.ComponentPropsWithoutRef<"div">, "className" | "children">) {
-	return (
-		<HidableCardContextProvider>
-			<div className={className} {...rest} />
-		</HidableCardContextProvider>
-	);
+  return (
+    <HidableCardContextProvider>
+      <div className={className} {...rest} />
+    </HidableCardContextProvider>
+  );
 }
 
 //HidableCardTitle
 function HidableCardTitle({
-	className,
-	children,
+  className,
+  children,
 }: Pick<React.ComponentPropsWithoutRef<"h3">, "className" | "children">) {
-	const { hidden } = useHidableContext();
-	return (
-		<h3 className={className}>{hidden ? <span>------</span> : children}</h3>
-	);
+  const { hidden } = useHidableContext();
+  return (
+    <h3 className={className}>{hidden ? <span>------</span> : children}</h3>
+  );
 }
 
 //HidableCardSubTitle
 function HidableCardSubTitle({
-	className,
-	children,
+  className,
+  children,
 }: Pick<React.ComponentPropsWithoutRef<"p">, "className" | "children">) {
-	const { hidden } = useHidableContext();
-	return <p className={className}>{hidden ? <span>------</span> : children}</p>;
+  const { hidden } = useHidableContext();
+  return <p className={className}>{hidden ? <span>------</span> : children}</p>;
 }
 
 //HidableCardHideButton
 function HidableCardHideButton({ className }: { className?: string }) {
-	const { hidden, toggle } = useHidableContext();
-	return (
-		<button
-			type="button"
-			className={className}
-			disabled={hidden}
-			onClick={toggle}
-		>
-			Button
-		</button>
-	);
+  const { hidden, toggle } = useHidableContext();
+  return (
+    <button
+      className={className}
+      disabled={hidden}
+      onClick={toggle}
+      type="button"
+    >
+      Button
+    </button>
+  );
 }
 
 //Compose them all together
 function ContextCard() {
-	return (
-		<HidableCard className="flex items-start justify-between">
-			<div className="space-y-1">
-				<HidableCardTitle>Title</HidableCardTitle>
-				<HidableCardSubTitle>SubTitle</HidableCardSubTitle>
-			</div>
-			<HidableCardHideButton />
-		</HidableCard>
-	);
+  return (
+    <HidableCard className="flex items-start justify-between">
+      <div className="space-y-1">
+        <HidableCardTitle>Title</HidableCardTitle>
+        <HidableCardSubTitle>SubTitle</HidableCardSubTitle>
+      </div>
+      <HidableCardHideButton />
+    </HidableCard>
+  );
 }

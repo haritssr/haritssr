@@ -4,18 +4,18 @@ import Layout from "@/components/Layout";
 import { PageTitle } from "@/components/SubTitle";
 
 export default function ExperimentsPage() {
-	let totalExperiment = 0;
-	for (let i = 0; i < ExperimentsData.length; i++) {
-		totalExperiment += ExperimentsData[i].links.length;
-	}
+  let totalExperiment = 0;
+  for (let i = 0; i < ExperimentsData.length; i++) {
+    totalExperiment += ExperimentsData[i].links.length;
+  }
 
-	return (
-		<Layout browserTitle="Experiments" description="Home">
-			<PageTitle
-				title="Experiments"
-				description={`${totalExperiment} unique individual (per page) experiments across Javascript-React ecosystem stack`}
-			/>
-			<ExperimentsGrid />
-		</Layout>
-	);
+  return (
+    <Layout browserTitle="Experiments" description="Home">
+      <PageTitle
+        description={`${totalExperiment} unique individual (per page) experiments across Javascript-React ecosystem stack`}
+        title="Experiments"
+      />
+      <ExperimentsGrid />
+    </Layout>
+  );
 }
