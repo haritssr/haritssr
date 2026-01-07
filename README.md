@@ -1,10 +1,9 @@
 ### About This Repo
 
-This repo is Harits Syah's personal site. Includes _Experiences_, _Experiments_, _Design System_, _Technology_, and _Blog_.
+This repo is Harits Syah's personal site. Includes _Experiences_, _Experiments_, _Design System_, and _Blog_.
 - Experiences: All of my projects with use cases and details.
 - Experiments: Experiments across TypeScript-React ecosystem stack and collection of common user interfaces on mobile and desktop web.
 - Blog: Selected notes that I want to share to the world.
-- Technology: My choosen library and framework to build web application.
 - Pure (Design System): User interface component library, design principles, and guidelines.
 
 ### Site Structure
@@ -15,7 +14,6 @@ graph TD
   haritssr --> experiences["experiences"]
   haritssr --> experiments["experiments"]
   haritssr --> blog["blog"]
-  haritssr --> technology["technology"]
   haritssr --> pure["pure(design system)"]
   haritssr --> about["about"]
 ```
