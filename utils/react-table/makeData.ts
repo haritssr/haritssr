@@ -1,14 +1,14 @@
 import faker from "@faker-js/faker";
 
-export type Person = {
-	firstName: string;
-	lastName: string;
-	age: number;
-	visits: number;
-	progress: number;
-	status: "relationship" | "complicated" | "single";
-	subRows?: Person[];
-};
+export interface Person {
+  firstName: string;
+  lastName: string;
+  age: number;
+  visits: number;
+  progress: number;
+  status: "relationship" | "complicated" | "single";
+  subRows?: Person[];
+}
 
 const range = (len: number) => {
 	const arr: number[] = [];
