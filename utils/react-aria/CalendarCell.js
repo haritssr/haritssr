@@ -60,7 +60,7 @@ export function CalendarCell({ state, date, currentMonth }) {
 					} ${
 						// Focus ring, visible while the cell has keyboard focus.
 						isFocusVisible
-							? "group-focus:z-2 ring-2 ring-violet-600 ring-offset-2"
+							? "ring-2 ring-violet-600 ring-offset-2 group-focus:z-2"
 							: ""
 					} ${
 						// Darker selection background for the start and end.
@@ -74,7 +74,7 @@ export function CalendarCell({ state, date, currentMonth }) {
 							: ""
 					} ${
 						// Hover state for non-selected cells.
-						!isSelected && !isDisabled ? "hover:bg-violet-100" : ""
+						(isSelected || isDisabled ) ? "" : "hover:bg-violet-100"
 					} cursor-default`}
 				>
 					{formattedDate}

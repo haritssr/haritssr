@@ -23,7 +23,7 @@ export default function ScrollTitle() {
 					<GlobalTools />
 				</div>
 			</nav>
-			<h1 ref={ref} className="mt-20 text-3xl font-bold">
+			<h1 ref={ref} className="mt-20 font-bold text-3xl">
 				Title
 			</h1>
 			<p className="text-zinc-600">

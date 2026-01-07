@@ -37,14 +37,14 @@ export default function UseReducerTodoList() {
 		dispatch({
 			type: "added",
 			id: nextId++,
-			text: text,
+			text,
 		});
 	}
 
 	function handleChangeTask(task) {
 		dispatch({
 			type: "changed",
-			task: task,
+			task,
 		});
 	}
 

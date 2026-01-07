@@ -35,12 +35,12 @@ export default async function ExperiencesPage({ params }) {
 					<BackButton href="/experiences" name="All Experiences" />
 				</div>
 				{/* Title */}
-				<section className="my-8 sm:my-10 flex items-center justify-between px-3 py-2 sm:px-5 sm:py-4 rounded-md bg-zinc-50 border border-zinc-300">
+				<section className="my-8 flex items-center justify-between rounded-md border border-zinc-300 bg-zinc-50 px-3 py-2 sm:my-10 sm:px-5 sm:py-4">
 					<div className="">
-						<div className="text-2xl sm:text-3xl wrap-break-words font-bold ">
+						<div className="wrap-break-words font-bold text-2xl sm:text-3xl">
 							{experience.project_name}
 						</div>
-						<div className="text-zinc-500 text-lg">
+						<div className="text-lg text-zinc-500">
 							{experience.about_client.website.slice(8)}
 						</div>
 					</div>
@@ -54,38 +54,38 @@ export default async function ExperiencesPage({ params }) {
 						// placeholder='blur'
 					/>
 				</section>
-				<section className="grid grid-cols-1 sm:grid-cols-2 sm:gap-16 gap-10">
+				<section className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-16">
 					{/* About The Client */}
 					<section>
-						<h2 className="mb-5 text-xl text-zinc-800 border-b pb-4 border-zinc-300 font-semibold">
+						<h2 className="mb-5 border-zinc-300 border-b pb-4 font-semibold text-xl text-zinc-800">
 							About The Client
 						</h2>
-						<div className="mt-5 text-zinc-800 font-medium">Company Name</div>
+						<div className="mt-5 font-medium text-zinc-800">Company Name</div>
 						<p className="text-zinc-500">
 							{experience.about_client.company_name}
 						</p>
 
-						<div className="mt-5 text-zinc-800 font-medium">Brand Name</div>
+						<div className="mt-5 font-medium text-zinc-800">Brand Name</div>
 						<p className="text-zinc-500">
 							{experience.about_client.brand_name}
 						</p>
 
-						<div className="mt-5 text-zinc-800 font-medium">About</div>
+						<div className="mt-5 font-medium text-zinc-800">About</div>
 						<p className="text-zinc-500">
 							{experience.about_client.long_about}
 						</p>
 
-						<div className="mt-5 text-zinc-800 font-medium">Phone Number</div>
+						<div className="mt-5 font-medium text-zinc-800">Phone Number</div>
 						<p className="text-zinc-500">
 							{experience.about_client.phone_number}
 						</p>
 
-						<div className="mt-5 text-zinc-800 font-medium">Website</div>
+						<div className="mt-5 font-medium text-zinc-800">Website</div>
 						<ExternalLink
 							href={experience.about_client.website}
 							name={experience.about_client.website.slice(8)}
 						/>
-						<div className="mt-5 text-zinc-800 font-medium">
+						<div className="mt-5 font-medium text-zinc-800">
 							Office Location
 						</div>
 						<p className="text-zinc-500">
@@ -95,11 +95,11 @@ export default async function ExperiencesPage({ params }) {
 
 					{/* About The Project */}
 					<section>
-						<h2 className="mb-5 text-xl font-semibold text-zinc-800 border-b pb-4 border-zinc-300">
+						<h2 className="mb-5 border-zinc-300 border-b pb-4 font-semibold text-xl text-zinc-800">
 							About The Project
 						</h2>
 
-						<div className="mt-5 text-zinc-800 font-medium">My Role</div>
+						<div className="mt-5 font-medium text-zinc-800">My Role</div>
 						<ExplanationList>
 							{experience.about_project.my_role.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
@@ -108,12 +108,12 @@ export default async function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 font-medium">Working Period</div>
+						<div className="mt-5 font-medium text-zinc-800">Working Period</div>
 						<p className="text-zinc-500">
 							{experience.about_project.working_period}
 						</p>
 
-						<div className="mt-5 text-zinc-800 font-medium">Website Status</div>
+						<div className="mt-5 font-medium text-zinc-800">Website Status</div>
 						<ExplanationList>
 							{experience.about_project.website_status.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
@@ -122,7 +122,7 @@ export default async function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 font-medium">Website Routes</div>
+						<div className="mt-5 font-medium text-zinc-800">Website Routes</div>
 						<ExplanationList>
 							{experience.about_project.routes.map((a: string) => (
 								<li className="text-zinc-500" key={a}>
@@ -131,7 +131,7 @@ export default async function ExperiencesPage({ params }) {
 							))}
 						</ExplanationList>
 
-						<div className="mt-5 text-zinc-800 font-medium">
+						<div className="mt-5 font-medium text-zinc-800">
 							Website Features
 						</div>
 						<ExplanationList>
@@ -146,7 +146,7 @@ export default async function ExperiencesPage({ params }) {
 
 				{/* Design */}
 				<section className="mt-10">
-					<h2 className="mb-5 text-xl font-semibold text-zinc-800">
+					<h2 className="mb-5 font-semibold text-xl text-zinc-800">
 						Design (at Figma)
 					</h2>
 					<LoadingFigma project={experience} />

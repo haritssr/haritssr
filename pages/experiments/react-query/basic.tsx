@@ -40,7 +40,7 @@ function Example() {
 const NameCard = ({ name, age, city }) => {
 	return (
 		<div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
-			<div className="text-xl font-semibold text-gray-700">{name}</div>
+			<div className="font-semibold text-gray-700 text-xl">{name}</div>
 			<div className="text-gray-500">{age}</div>
 			<div className="text-action">{city}</div>
 		</div>

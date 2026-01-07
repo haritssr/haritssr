@@ -23,7 +23,7 @@ export default function UseStateTodoList() {
 			...todos,
 			{
 				id: nextId++,
-				title: title,
+				title,
 				done: false,
 			},
 		]);
@@ -61,7 +61,7 @@ export default function UseStateTodoList() {
 function AddTodo({ onAddTodo }) {
 	const [title, setTitle] = useState("");
 	return (
-		<div className="mb-5 space-y-2 sm:space-y-0 sm:space-x-2">
+		<div className="mb-5 space-y-2 sm:space-x-2 sm:space-y-0">
 			<input
 				placeholder="Write todo"
 				value={title}

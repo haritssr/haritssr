@@ -107,7 +107,7 @@ export default async function Blog({
 	if (!blog) notFound();
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-5 min-h-screen w-full">
+		<div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
 			<LeftBar />
 			<Content>
 				<Breadcrumbs />
@@ -120,7 +120,7 @@ export default async function Blog({
 				<h1 className="font-bold text-2xl tracking-tighter">
 					<Balancer>{blog.title}</Balancer>
 				</h1>
-				<div className="flex items-center mt-2 mb-8 text-sm">
+				<div className="mt-2 mb-8 flex items-center text-sm">
 					<p>{formatDate(blog.publishedAt)}</p>
 					&nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
 					<p>{blog.structuredData.wordCount} Words</p>
@@ -138,7 +138,7 @@ export default async function Blog({
 
 function Content({ children }: { children: React.ReactNode }) {
 	return (
-		<section className="sm:col-span-3 sm:border-b border-zinc-200 sm:border-r pb-5 sm:px-5 ">
+		<section className="border-zinc-200 pb-5 sm:col-span-3 sm:border-r sm:border-b sm:px-5">
 			{children}
 		</section>
 	);

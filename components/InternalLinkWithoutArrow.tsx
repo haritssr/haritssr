@@ -16,7 +16,7 @@ export default function InternalLinkWithoutArrow({
 				block ? "block" : "inline"
 			}`}
 		>
-			<p className="truncate inline">{name}</p>
+			<p className="inline truncate">{name}</p>
 		</Link>
 	);
 }

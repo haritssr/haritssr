@@ -122,7 +122,7 @@ function Table() {
 								<th
 									key={header.id}
 									colSpan={header.colSpan}
-									className="whitespace-nowrap border-b border-r border-zinc-500 bg-green-100 py-1 px-2 font-bold"
+									className="whitespace-nowrap border-zinc-500 border-r border-b bg-green-100 px-2 py-1 font-bold"
 								>
 									{header.isPlaceholder
 										? null
@@ -140,7 +140,7 @@ function Table() {
 						<tr key={row.id}>
 							{row.getVisibleCells().map((cell) => (
 								<td
-									className="whitespace-nowrap border-b border-r border-zinc-500 py-1 px-2"
+									className="whitespace-nowrap border-zinc-500 border-r border-b px-2 py-1"
 									key={cell.id}
 								>
 									{flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -156,7 +156,7 @@ function Table() {
 								<th
 									key={header.id}
 									colSpan={header.colSpan}
-									className="whitespace-nowrap border-r border-b border-zinc-500 bg-blue-50 font-normal text-zinc-500"
+									className="whitespace-nowrap border-zinc-500 border-r border-b bg-blue-50 font-normal text-zinc-500"
 								>
 									{header.isPlaceholder
 										? null

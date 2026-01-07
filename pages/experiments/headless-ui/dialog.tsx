@@ -73,7 +73,7 @@ const DialogExample1 = () => {
 			<button
 				type="button"
 				onClick={() => setIsOpen(true)}
-				className={`rounded-full px-4 py-2 text-sm font-medium bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-orange-500 ${
+				className={`rounded-full bg-blue-600 px-4 py-2 font-medium text-sm text-white hover:bg-[#2563eb]/90 active:ring-orange-500 ${
 					isOpen ? "ring-2 ring-orange-500" : ""
 				}`}
 			>
@@ -88,7 +88,7 @@ const DialogExample1 = () => {
 				<HeadlessDialog.Overlay className="fixed inset-0 bg-zinc-800/80" />
 
 				<div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-					<HeadlessDialog.Title className="text-xl font-semibold">
+					<HeadlessDialog.Title className="font-semibold text-xl">
 						Title
 					</HeadlessDialog.Title>
 					<HeadlessDialog.Description className="text-zinc-600">
@@ -118,7 +118,7 @@ const DialogExample2 = () => {
 			<button
 				type="button"
 				onClick={() => setIsOpen(true)}
-				className={`rounded-full bg-blue-600 hover:bg-[#2563eb]/90 px-4 py-2 text-sm font-medium text-white active:ring-orange-500 ${
+				className={`rounded-full bg-blue-600 px-4 py-2 font-medium text-sm text-white hover:bg-[#2563eb]/90 active:ring-orange-500 ${
 					isOpen ? "ring-2 ring-orange-500" : ""
 				}`}
 			>
@@ -142,7 +142,7 @@ const DialogExample2 = () => {
 					</TransitionChild>
 
 					<div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-						<HeadlessDialog.Title className="text-xl font-semibold">
+						<HeadlessDialog.Title className="font-semibold text-xl">
 							Title
 						</HeadlessDialog.Title>
 						<HeadlessDialog.Description className="text-zinc-600">

@@ -18,13 +18,13 @@ export default function ExportedPopover() {
 				</ExplanationList>
 			</SubTitle>
 			<Popover.Root>
-				<Popover.Trigger className="w-auto rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1 hover:bg-zinc-100 text-zinc-800 font-medium rdx-state-open:ring-2 rdx-state-open:ring-blue-600">
+				<Popover.Trigger className="w-auto rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1 font-medium text-zinc-800 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-100">
 					Open
 				</Popover.Trigger>
 
 				{/* <Popover.Anchor /> */}
 				<Popover.Content
-					className="rounded-md border border-zinc-400 bg-white w-[80vw] shadow-xl max-w-sm text-zinc-800 p-4"
+					className="w-[80vw] max-w-sm rounded-md border border-zinc-400 bg-white p-4 text-zinc-800 shadow-xl"
 					sideOffset={10}
 					side="bottom"
 				>

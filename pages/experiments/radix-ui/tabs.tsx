@@ -25,26 +25,26 @@ export default function TabsPage() {
 }
 
 export const TabsDemo = () => (
-	<Tabs.Root className="flex flex-col w-[300px]" defaultValue="tab1">
+	<Tabs.Root className="flex w-[300px] flex-col" defaultValue="tab1">
 		<Tabs.List
-			className="shrink-0 flex bg-zinc-100 rounded-lg p-1 space-x-1"
+			className="flex shrink-0 space-x-1 rounded-lg bg-zinc-100 p-1"
 			aria-label="Manage your account"
 		>
 			<Tabs.Trigger
-				className="bg-white py-1.5 flex-1 flex items-center justify-center select-none data-[state=active]:text-zinc-800 data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500  border data-[state=active]:border-zinc-300 border-transparent"
+				className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-white py-1.5 font-medium text-zinc-500 outline-hidden hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
 				value="tab1"
 			>
 				Account
 			</Tabs.Trigger>
 			<Tabs.Trigger
-				className="bg-white py-1.5 flex-1 flex items-center justify-center select-none  data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500 data-[state=active]:text-zinc-800 border data-[state=active]:border-zinc-300 border-transparent"
+				className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-white py-1.5 font-medium text-zinc-500 outline-hidden hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
 				value="tab2"
 			>
 				Password
 			</Tabs.Trigger>
 		</Tabs.List>
 		<Tabs.Content
-			className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
+			className="mt-2 grow rounded-md border border-zinc-200 bg-white p-5 outline-hidden"
 			value="tab1"
 		>
 			<div className="">
@@ -54,7 +54,7 @@ export const TabsDemo = () => (
 			</div>
 		</Tabs.Content>
 		<Tabs.Content
-			className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
+			className="mt-2 grow rounded-md border border-zinc-200 bg-white p-5 outline-hidden"
 			value="tab2"
 		>
 			<div className="">

@@ -22,7 +22,7 @@ export default function InternalLink({
 				<ChevronRightIcon
 					className={`${
 						lg ? "h-[18px] w-[18px]" : "h-4 w-4"
-					} text-action -mb-[1.5px]  group-hover:text-blue-400`}
+					} -mb-[1.5px] text-action group-hover:text-blue-400`}
 					strokeWidth={2.25}
 				/>
 			</p>

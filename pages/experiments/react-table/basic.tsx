@@ -112,7 +112,7 @@ function Table() {
 							{headerGroup.headers.map((header) => (
 								<th
 									key={header.id}
-									className="whitespace-nowrap border-b border-r border-zinc-500 bg-green-100 py-1 px-2 font-bold"
+									className="whitespace-nowrap border-zinc-500 border-r border-b bg-green-100 px-2 py-1 font-bold"
 								>
 									{header.isPlaceholder
 										? null
@@ -131,7 +131,7 @@ function Table() {
 							{row.getVisibleCells().map((cell) => (
 								<td
 									key={cell.id}
-									className="whitespace-nowrap border-b border-r border-zinc-500 py-1 px-2"
+									className="whitespace-nowrap border-zinc-500 border-r border-b px-2 py-1"
 								>
 									{flexRender(cell.column.columnDef.cell, cell.getContext())}
 								</td>
@@ -145,7 +145,7 @@ function Table() {
 							{footerGroup.headers.map((header) => (
 								<th
 									key={header.id}
-									className="border-r border-zinc-500 bg-blue-50 font-normal text-zinc-500"
+									className="border-zinc-500 border-r bg-blue-50 font-normal text-zinc-500"
 								>
 									{header.isPlaceholder
 										? null

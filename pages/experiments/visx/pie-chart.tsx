@@ -9,7 +9,7 @@ import SubTitle from "@/components/SubTitle";
 const coins = [
 	{ symbol: "ADA", amount: 200, color: "#2563EB", inUSD: 1.48 },
 	{ symbol: "SOL", amount: 5, color: "#10B981", inUSD: 37.6 },
-	{ symbol: "BTC", amount: 0.005, color: "#F59E0B", inUSD: 37363 },
+	{ symbol: "BTC", amount: 0.005, color: "#F59E0B", inUSD: 37_363 },
 ];
 
 interface yes {

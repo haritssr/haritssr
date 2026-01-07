@@ -12,7 +12,7 @@ export default function ExperimentCard({
 		<Link
 			href={`/experiments/${experiment.title.toLowerCase().replace(" ", "-")}`}
 			key={experiment.id}
-			className="space-y-1 px-3 py-2.5 hover:bg-zinc-50 border border-zinc-300 rounded-2xl group corner-squircle"
+			className="group corner-squircle space-y-1 rounded-2xl border border-zinc-300 px-3 py-2.5 hover:bg-zinc-50"
 		>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center space-x-2">
@@ -24,18 +24,18 @@ export default function ExperimentCard({
 							alt={experiment.title}
 						/>
 					</div>
-					<div className="sm:text-lg text-zinc-800 font-medium">
+					<div className="font-medium text-zinc-800 sm:text-lg">
 						{experiment.title}
 					</div>
 				</div>
 				<div className="flex items-center space-x-1">
-					<div className="text-zinc-400 font-light text-sm">
+					<div className="font-light text-sm text-zinc-400">
 						{experiment.links.length}
 					</div>
-					<ChevronRightIcon width={2.5} className="w-4 h-4 text-zinc-400" />
+					<ChevronRightIcon width={2.5} className="h-4 w-4 text-zinc-400" />
 				</div>
 			</div>
-			<div className="text-zinc-500 font-light">{experiment.description}</div>
+			<div className="font-light text-zinc-500">{experiment.description}</div>
 		</Link>
 	);
 }

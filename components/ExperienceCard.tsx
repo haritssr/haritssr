@@ -18,10 +18,10 @@ export default function ExperienceCard({
 	imgSrc,
 }: ExperienceCardTypes) {
 	return (
-		<div className="flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-300 selection:mx-auto group corner-squircle">
+		<div className="group corner-squircle flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-300 selection:mx-auto">
 			{/* Header + Title + Explanation */}
-			<section className=" flex flex-col justify-between p-3 space-y-2">
-				<div className="flex justify-between items-start">
+			<section className="flex flex-col justify-between space-y-2 p-3">
+				<div className="flex items-start justify-between">
 					<Image
 						src={imgSrc}
 						alt={title}
@@ -33,12 +33,12 @@ export default function ExperienceCard({
 
 					<Link
 						href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
-						className="flex items-center space-x-1.5 px-3 py-1 rounded-full  text-zinc-600 hover:text-zinc-700 hover:bg-zinc-50 cursor-pointer border border-zinc-300 justify-center hover:border-zinc-400"
+						className="flex cursor-pointer items-center justify-center space-x-1.5 rounded-full border border-zinc-300 px-3 py-1 text-zinc-600 hover:border-zinc-400 hover:bg-zinc-50 hover:text-zinc-700"
 					>
 						<p className="text-sm">Case Study</p>
 					</Link>
 				</div>
-				<div className="truncate font-medium text-zinc-800 text-lg">
+				<div className="truncate font-medium text-lg text-zinc-800">
 					{title}
 				</div>
 
@@ -46,7 +46,7 @@ export default function ExperienceCard({
 
 				{/* Site Link (Text Only) */}
 				<cite className="group not-italic">
-					<span className="text-base text-zinc-400 font-light">
+					<span className="font-light text-base text-zinc-400">
 						{href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
 					</span>
 				</cite>
@@ -57,7 +57,7 @@ export default function ExperienceCard({
 					href={href}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="py-1.5 text-zinc-100 bg-zinc-700 hover:bg-zinc-600 rounded-xl select-none w-full text-tiny text-center flex items-center space-x-2 justify-center corner-squircle"
+					className="corner-squircle flex w-full select-none items-center justify-center space-x-2 rounded-xl bg-zinc-700 py-1.5 text-center text-tiny text-zinc-100 hover:bg-zinc-600"
 				>
 					<p>Visit Site</p>
 				</a>

@@ -23,7 +23,7 @@ export default function ExportedSelect() {
 const SelectDemo = () => (
 	<Select.Root>
 		<Select.Trigger
-			className="inline-flex items-center justify-center rounded px-[15px] text-[13px] leading-none h-[35px] gap-[5px] bg-white text-violet11 shadow-[0_2px_10px] shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-placeholder:text-violet9 outline-hidden"
+			className="inline-flex h-[35px] items-center justify-center gap-[5px] rounded bg-white px-[15px] text-[13px] text-violet11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-hidden hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-placeholder:text-violet9"
 			aria-label="Food"
 		>
 			<Select.Value placeholder="Select a fruit…" />
@@ -32,13 +32,13 @@ const SelectDemo = () => (
 			</Select.Icon>
 		</Select.Trigger>
 		<Select.Portal>
-			<Select.Content className="overflow-hidden bg-white rounded-md shadow-[0px_10px_38px_-10px_rgba(22,23,24,0.35),0px_10px_20px_-15px_rgba(22,23,24,0.2)]">
-				<Select.ScrollUpButton className="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default">
+			<Select.Content className="overflow-hidden rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,23,24,0.35),0px_10px_20px_-15px_rgba(22,23,24,0.2)]">
+				<Select.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white text-violet11">
 					<ChevronUpIcon />
 				</Select.ScrollUpButton>
 				<Select.Viewport className="p-[5px]">
 					<Select.Group>
-						<Select.Label className="px-[25px] text-xs leading-[25px] text-mauve11">
+						<Select.Label className="px-[25px] text-mauve11 text-xs leading-[25px]">
 							Fruits
 						</Select.Label>
 						<SelectItem value="apple">Apple</SelectItem>
@@ -48,10 +48,10 @@ const SelectDemo = () => (
 						<SelectItem value="pineapple">Pineapple</SelectItem>
 					</Select.Group>
 
-					<Select.Separator className="h-px bg-violet6 m-[5px]" />
+					<Select.Separator className="m-[5px] h-px bg-violet6" />
 
 					<Select.Group>
-						<Select.Label className="px-[25px] text-xs leading-[25px] text-mauve11">
+						<Select.Label className="px-[25px] text-mauve11 text-xs leading-[25px]">
 							Vegetables
 						</Select.Label>
 						<SelectItem value="aubergine">Aubergine</SelectItem>
@@ -61,10 +61,10 @@ const SelectDemo = () => (
 						<SelectItem value="leek">Leek</SelectItem>
 					</Select.Group>
 
-					<Select.Separator className="h-px bg-violet6 m-[5px]" />
+					<Select.Separator className="m-[5px] h-px bg-violet6" />
 
 					<Select.Group>
-						<Select.Label className="px-[25px] text-xs leading-[25px] text-mauve11">
+						<Select.Label className="px-[25px] text-mauve11 text-xs leading-[25px]">
 							Meat
 						</Select.Label>
 						<SelectItem value="beef">Beef</SelectItem>
@@ -73,7 +73,7 @@ const SelectDemo = () => (
 						<SelectItem value="pork">Pork</SelectItem>
 					</Select.Group>
 				</Select.Viewport>
-				<Select.ScrollDownButton className="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default">
+				<Select.ScrollDownButton className="flex h-[25px] cursor-default items-center justify-center bg-white text-violet11">
 					<ChevronDownIcon />
 				</Select.ScrollDownButton>
 			</Select.Content>
@@ -95,11 +95,11 @@ function SelectItem({
 			value={value}
 			{...props}
 			className={
-				"text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-disabled:text-mauve8 data-disabled:pointer-events-none data-highlighted:outline-hidden data-highlighted:bg-violet9 data-highlighted:text-violet1"
+				"relative flex h-[25px] select-none items-center rounded-[3px] pr-[35px] pl-[25px] text-[13px] text-violet11 leading-none data-disabled:pointer-events-none data-highlighted:bg-violet9 data-disabled:text-mauve8 data-highlighted:text-violet1 data-highlighted:outline-hidden"
 			}
 		>
 			<Select.ItemText>{children}</Select.ItemText>
-			<Select.ItemIndicator className="absolute left-0 w-[25px] inline-flex items-center justify-center">
+			<Select.ItemIndicator className="absolute left-0 inline-flex w-[25px] items-center justify-center">
 				<CheckIcon />
 			</Select.ItemIndicator>
 		</Select.Item>

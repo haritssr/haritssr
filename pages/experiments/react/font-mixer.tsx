@@ -31,7 +31,7 @@ const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
 
 	return (
 		<section className="flex flex-col items-center gap-6">
-			<section className="relative flex h-[320px] w-full gap-6  border border-gray-200 bg-red-100/50 leading-6">
+			<section className="relative flex h-[320px] w-full gap-6 border border-gray-200 bg-red-100/50 leading-6">
 				<article
 					className="absolute h-[320px] overflow-hidden overflow-y-auto text-ellipsis bg-yellow-100/50 p-4 text-action"
 					style={{

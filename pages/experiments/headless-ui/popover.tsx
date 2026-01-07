@@ -52,19 +52,19 @@ const Wrapper = ({
 const PopoverExample1 = () => {
 	return (
 		<Popover className="relative">
-			<Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-50">
+			<Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 font-medium text-sm text-zinc-800 hover:bg-zinc-50">
 				Navigation
 			</Popover.Button>
-			<Popover.Panel className="absolute w-fit mt-2 shadow-lg">
-				<div className="divide-y divide-zinc-200 rounded-md overflow-hidden text-zinc-800 bg-white border border-zinc-400">
-					<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">
+			<Popover.Panel className="absolute mt-2 w-fit shadow-lg">
+				<div className="divide-y divide-zinc-200 overflow-hidden rounded-md border border-zinc-400 bg-white text-zinc-800">
+					<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
 						Experiments
 					</div>
-					<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">Blog</div>
-					<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">
+					<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Blog</div>
+					<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
 						Articles
 					</div>
-					<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">
+					<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
 						Experiences
 					</div>
 				</div>
@@ -76,7 +76,7 @@ const PopoverExample1 = () => {
 const PopoverExample2 = () => {
 	return (
 		<Popover className="relative">
-			<Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-50">
+			<Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 font-medium text-sm text-zinc-800 hover:bg-zinc-50">
 				Navigation
 			</Popover.Button>
 			<Transition
@@ -87,18 +87,18 @@ const PopoverExample2 = () => {
 				leaveFrom="opacity-100"
 				leaveTo="opacity-0"
 			>
-				<Popover.Panel className="absolute w-fit mt-2 shadow-lg">
-					<div className="divide-y divide-zinc-200 rounded-md overflow-hidden text-zinc-800 bg-white border border-zinc-400">
-						<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">
+				<Popover.Panel className="absolute mt-2 w-fit shadow-lg">
+					<div className="divide-y divide-zinc-200 overflow-hidden rounded-md border border-zinc-400 bg-white text-zinc-800">
+						<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
 							Experiments
 						</div>
-						<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">
+						<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
 							Blog
 						</div>
-						<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">
+						<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
 							Articles
 						</div>
-						<div className="px-3 py-2 hover:bg-zinc-50 cursor-pointer">
+						<div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
 							Experiences
 						</div>
 					</div>

@@ -22,21 +22,21 @@ export default function ExportedToggle() {
 				<ToggleGroup.Item
 					value="left"
 					aria-label="left"
-					className="rdx-state-on:border-blue-600 rdx-state-on:bg-blue-600 hover:border-blue-600 hover:text-action  rdx-state-on:text-white text-zinc-800 rounded-full px-4 py-1.5 sm:py-1 border border-zinc-500"
+					className="rounded-full border border-zinc-500 rdx-state-on:border-blue-600 rdx-state-on:bg-blue-600 px-4 py-1.5 rdx-state-on:text-white text-zinc-800 hover:border-blue-600 hover:text-action sm:py-1"
 				>
 					Button
 				</ToggleGroup.Item>
 				<ToggleGroup.Item
 					value="center"
 					aria-label="center"
-					className="rdx-state-on:border-blue-600 rdx-state-on:bg-blue-600 hover:border-blue-600 hover:text-action  rdx-state-on:text-white text-zinc-800 rounded-full px-4 py-1.5 sm:py-1 border border-zinc-500"
+					className="rounded-full border border-zinc-500 rdx-state-on:border-blue-600 rdx-state-on:bg-blue-600 px-4 py-1.5 rdx-state-on:text-white text-zinc-800 hover:border-blue-600 hover:text-action sm:py-1"
 				>
 					Button
 				</ToggleGroup.Item>
 				<ToggleGroup.Item
 					value="right"
 					aria-label="right"
-					className="rdx-state-on:border-blue-600 rdx-state-on:bg-blue-600 hover:border-blue-600 hover:text-action  rdx-state-on:text-white text-zinc-800 rounded-full px-4 py-1.5 sm:py-1 border border-zinc-500"
+					className="rounded-full border border-zinc-500 rdx-state-on:border-blue-600 rdx-state-on:bg-blue-600 px-4 py-1.5 rdx-state-on:text-white text-zinc-800 hover:border-blue-600 hover:text-action sm:py-1"
 				>
 					Button
 				</ToggleGroup.Item>

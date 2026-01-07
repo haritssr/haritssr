@@ -14,7 +14,7 @@ export default function TextEditing() {
 				<del>del</del>
 				<s>s</s>
 				<mark>mark</mark>
-				<blockquote className="border-l-2 border-zinc-400 bg-zinc-100 py-1 pl-3 text-zinc-600">
+				<blockquote className="border-zinc-400 border-l-2 bg-zinc-100 py-1 pl-3 text-zinc-600">
 					blockquote blockquote blockquote blockquote blockquote blockquote
 					blockquote blockquote blockquote blockquote blockquote blockquote
 					blockquote blockquote blockquote blockquote blockquote blockquote

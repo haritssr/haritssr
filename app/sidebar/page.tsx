@@ -2,7 +2,7 @@ import { RadixUIData } from "data/ExperimentsData";
 
 export default function Sidebar() {
 	return (
-		<div className="grid grid-cols-4 min-h-screen">
+		<div className="grid min-h-screen grid-cols-4">
 			<div className="col-span-1 bg-purple-400 p-5">
 				<div className="text-2xl">Radix UI</div>
 				<div className="">

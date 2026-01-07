@@ -6,11 +6,11 @@ export default function Box({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="border border-zinc-400/50 rounded-md overflow-hidden">
-			<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
+		<div className="overflow-hidden rounded-md border border-zinc-400/50">
+			<div className="select-none border-zinc-400/50 border-b bg-zinc-50 px-3 py-2 font-medium text-zinc-800">
 				{title}
 			</div>
-			<div className="h-72 p-5 flex items-center justify-center">
+			<div className="flex h-72 items-center justify-center p-5">
 				<div>{children}</div>
 			</div>
 		</div>

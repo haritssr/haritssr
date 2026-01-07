@@ -53,16 +53,16 @@ export default function LayoutToExperiments({
 
 			<GlobalNavigation />
 
-			<main className="mx-auto flex max-w-5xl sm:-mt-px sm:gap-10 sm:px-5 xl:px-0">
-				<div className="grid grid-cols-1 sm:grid-cols-4 min-h-screen max-w-5xl w-full">
+			<main className="sm:-mt-px mx-auto flex max-w-5xl sm:gap-10 sm:px-5 xl:px-0">
+				<div className="grid min-h-screen w-full max-w-5xl grid-cols-1 sm:grid-cols-4">
 					<SideBar domain={domain} />
 
 					{/* Content */}
-					<div className="sm:col-span-3 sm:border-t border-r border-b">
+					<div className="border-r border-b sm:col-span-3 sm:border-t">
 						<article className="sm:px-0">
 							{/* SubNavigation */}
 							<section
-								className={`sticky top-0 sm:top-[44.5px] border-b ${
+								className={`sticky top-0 border-b sm:top-[44.5px] ${
 									inView
 										? "border-zinc-200"
 										: "border-b bg-white/70 saturate-150 backdrop-blur-lg"
@@ -80,7 +80,7 @@ export default function LayoutToExperiments({
 								<Breadcrumbs />
 								<h1
 									ref={ref}
-									className="z-40 mx-auto mb-2 block h-auto w-full wrap-break-word text-left font-bold text-zinc-800 text-3xl mt-10"
+									className="wrap-break-word z-40 mx-auto mt-10 mb-2 block h-auto w-full text-left font-bold text-3xl text-zinc-800"
 								>
 									{title}
 								</h1>
@@ -111,14 +111,14 @@ const SideBar = ({ domain }: { domain: string }) => {
 	const lastSegment = segments[segments.length - 1];
 
 	return (
-		<div className="hidden sm:block sm:col-span-1 border  ">
+		<div className="hidden border sm:col-span-1 sm:block">
 			<Link
-				className="block font-medium px-5 py-2 sticky top-[45px] bg-white border-b"
+				className="sticky top-[45px] block border-b bg-white px-5 py-2 font-medium"
 				href={`/experiments/${domain.toLowerCase().replace(" ", "-")}`}
 			>
 				{domain}
 			</Link>
-			<div className="flex flex-col space-y-1 py-5 px-3 sm:max-h-screen sm:overflow-auto">
+			<div className="flex flex-col space-y-1 px-3 py-5 sm:max-h-screen sm:overflow-auto">
 				{links.map((experimentPage) => {
 					// experimentPage = string; e.g. Apple Navbar, Floating Labels
 					// experimentPageEdited = a lowercased with "-"; e.g. apple-navbar, floating-labels
@@ -135,9 +135,9 @@ const SideBar = ({ domain }: { domain: string }) => {
 							key={experimentPage}
 							className={`${
 								lastSegment === experimentPageEdited
-									? "text-white bg-action"
+									? "bg-action text-white"
 									: "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
-							}  px-2 py-1 rounded-md`}
+							} rounded-md px-2 py-1`}
 						>
 							{experimentPage}
 						</Link>
@@ -162,13 +162,13 @@ const BackToExperiments = ({
 				inView ? "w-1/2" : "w-1/4"
 			}`}
 		>
-			<span className=" inline-block w-full">
+			<span className="inline-block w-full">
 				<span className="group flex items-center">
 					<ChevronLeftIcon
-						className=" text-action sm:group-hover:text-action/90 h-5 w-5"
+						className="h-5 w-5 text-action sm:group-hover:text-action/90"
 						strokeWidth={2}
 					/>
-					<span className="-ml-0.5 truncate text-action sm:group-hover:underline sm:group-hover:text-action/90 text-base">
+					<span className="-ml-0.5 truncate text-action text-base sm:group-hover:text-action/90 sm:group-hover:underline">
 						{inView ? domain : "Back"}
 					</span>
 				</span>
@@ -189,7 +189,7 @@ const PageTitleCenter = ({
 			<div className="flex justify-center py-0.5 sm:py-0">
 				<div
 					className={`truncate text-center font-semibold ${
-						inView ? "text-transparent hidden" : "text-zinc-800 block"
+						inView ? "hidden text-transparent" : "block text-zinc-800"
 					}`}
 				>
 					{title}
@@ -202,7 +202,7 @@ const PageTitleCenter = ({
 const PageSource = ({ href, inView }: { href: string; inView: unknown }) => {
 	return (
 		<div className={`flex justify-end sm:w-1/4 ${inView ? "w-1/2" : "w-1/4"}`}>
-			<cite className="not-italic group">
+			<cite className="group not-italic">
 				<a
 					title="This page source code"
 					href={href}
@@ -210,7 +210,7 @@ const PageSource = ({ href, inView }: { href: string; inView: unknown }) => {
 					rel="noopener noreferrer"
 					className="flex w-fit cursor-pointer items-center text-action hover:text-[#2563eb]/90"
 				>
-					<span className="mr-2 hidden sm:inline-block text-action group-hover:text-action/90">
+					<span className="mr-2 hidden text-action group-hover:text-action/90 sm:inline-block">
 						Source
 					</span>{" "}
 					<GitHubIcon className="h-5 w-5 cursor-pointer text-action group-hover:text-action/90" />

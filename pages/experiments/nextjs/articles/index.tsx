@@ -39,7 +39,7 @@ export default function Articles({ posts }) {
 				/>
 			</SubTitle>
 
-			<div className="mt-5 grid grid-cols-1 gap-5 xs:grid-cols-2 sm:grid-cols-3">
+			<div className="mt-5 grid grid-cols-1 xs:grid-cols-2 gap-5 sm:grid-cols-3">
 				{posts.map(
 					(post: {
 						id: number;
@@ -49,10 +49,10 @@ export default function Articles({ posts }) {
 						<Link
 							href={`/experiments/nextjs/articles/${post.id}`}
 							key={post.id}
-							className="rounded-md border border-zinc-300 bg-zinc-50 p-4 duration-200 ease-out hover:cursor-pointer hover:bg-white "
+							className="rounded-md border border-zinc-300 bg-zinc-50 p-4 duration-200 ease-out hover:cursor-pointer hover:bg-white"
 						>
-							<div className="text-action ">Article {post.id}</div>
-							<div className="text-xl font-semibold text-gray-800">
+							<div className="text-action">Article {post.id}</div>
+							<div className="font-semibold text-gray-800 text-xl">
 								{post.title}
 							</div>
 							{/* <p className="text-gray-600 text-ellipsis">{post.body}</p> */}

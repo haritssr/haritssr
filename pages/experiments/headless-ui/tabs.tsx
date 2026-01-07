@@ -87,18 +87,18 @@ function Example1() {
 	});
 
 	return (
-		<Tab.Group as="div" className="w-full max-w-md px-2 py-16 sm:px-0 ">
-			<Tab.List className="flex space-x-1 rounded-md p-1 bg-zinc-100 border border-zinc-300">
+		<Tab.Group as="div" className="w-full max-w-md px-2 py-16 sm:px-0">
+			<Tab.List className="flex space-x-1 rounded-md border border-zinc-300 bg-zinc-100 p-1">
 				{Object.keys(categories).map((category) => (
 					<Tab
 						as="div"
 						key={category}
 						className={({ selected }) =>
 							classNames(
-								"w-full rounded-md py-1.5 leading-5 text-zinc-800",
-								"focus:outline-hidden text-center cursor-pointer ",
+								"w-full rounded-md py-1.5 text-zinc-800 leading-5",
+								"cursor-pointer text-center focus:outline-hidden",
 								selected
-									? "bg-white border-zinc-300 border"
+									? "border border-zinc-300 bg-white"
 									: "border border-zinc-100 hover:border-zinc-300",
 							)
 						}
@@ -107,7 +107,7 @@ function Example1() {
 					</Tab>
 				))}
 			</Tab.List>
-			<Tab.Panels className="mt-2 border border-zinc-300 rounded-md">
+			<Tab.Panels className="mt-2 rounded-md border border-zinc-300">
 				{/* Object.values(object) returns an 'array of string' from the keys of the object */}
 				{/* Here's we looping the keys of the object 'categories' */}
 				{Object.values(categories).map((posts, idx) => (
@@ -115,7 +115,7 @@ function Example1() {
 						// biome-ignore lint/suspicious/noArrayIndexKey: static array from Object.values, index is stable
 						key={idx}
 						className={classNames(
-							"rounded-xl bg-white  p-1.5",
+							"rounded-xl bg-white p-1.5",
 							"ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-hidden focus:ring-2",
 						)}
 					>
@@ -123,13 +123,13 @@ function Example1() {
 							{posts.map((post) => (
 								<li
 									key={post.id}
-									className="hover:bg-zinc-100 relative rounded-md p-3"
+									className="relative rounded-md p-3 hover:bg-zinc-100"
 								>
-									<h3 className="text-sm font-medium leading-5">
+									<h3 className="font-medium text-sm leading-5">
 										{post.title}
 									</h3>
 
-									<ul className="text-coolGray-500 mt-1 flex space-x-1 text-xs font-normal leading-4">
+									<ul className="mt-1 flex space-x-1 font-normal text-coolGray-500 text-xs leading-4">
 										<li>{post.date}</li>
 										<li>&middot;</li>
 										<li>{post.commentCount} comments</li>

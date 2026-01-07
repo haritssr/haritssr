@@ -24,9 +24,9 @@ export default function ExportedSwitch() {
 				<Switch.Root
 					defaultChecked
 					id="s1"
-					className="block w-11 p-1 border border-zinc-300 rounded-full hover:bg-zinc-50 rdx-state-checked:bg-green-600 rdx-state-checked:border-green-700"
+					className="block w-11 rounded-full border border-zinc-300 rdx-state-checked:border-green-700 rdx-state-checked:bg-green-600 p-1 hover:bg-zinc-50"
 				>
-					<Switch.Thumb className="block h-4 w-4 rounded-full bg-zinc-800 will-change-transform rdx-state-checked:translate-x-[18px] shadow border border-zinc-400 rdx-state-checked:bg-white duration-100" />
+					<Switch.Thumb className="block h-4 w-4 rdx-state-checked:translate-x-[18px] rounded-full border border-zinc-400 bg-zinc-800 rdx-state-checked:bg-white shadow duration-100 will-change-transform" />
 				</Switch.Root>
 			</form>
 		</LayoutToExperiments>

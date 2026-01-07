@@ -62,8 +62,8 @@ export default function Next13Image() {
 						alt="Lenovo Wallpaper"
 						placeholder="blur"
 					/>
-					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-zinc-700/40 w-full h-full flex items-center justify-center">
-						<p className="text-sm overscroll-y-auto text-ellipsis sm:text-xl text-white p-2 sm:p-20">
+					<div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 flex h-full w-full items-center justify-center bg-zinc-700/40">
+						<p className="overscroll-y-auto text-ellipsis p-2 text-sm text-white sm:p-20 sm:text-xl">
 							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
 							hic molestiae rerum dolorem et labore laborum nobis est ipsam vel
 							mollitia, debitis aliquid dolore? Culpa ipsa molestiae ipsam?

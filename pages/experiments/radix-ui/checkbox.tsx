@@ -22,9 +22,9 @@ export default function ExportedCheckbox() {
 				</ExplanationList>
 			</SubTitle>
 			<form>
-				<div className="align-center flex">
+				<div className="flex align-center">
 					<Checkbox.Root
-						className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-300 bg-white hover:bg-blue-50 rdx-state-checked:border-blue-600"
+						className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-300 rdx-state-checked:border-blue-600 bg-white hover:bg-blue-50"
 						// defaultChecked
 						id="c1"
 					>

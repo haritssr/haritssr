@@ -7,7 +7,7 @@ export default function Students({ students }) {
 	return (
 		<LayoutToExperiments title="Students" domain="Nextjs">
 			<SubTitle>A list of students come from JSONPlaceholder API</SubTitle>
-			<div className="space-y-3 flex flex-col">
+			<div className="flex flex-col space-y-3">
 				{students.map((a) => (
 					<InternalLink
 						key={a.id}

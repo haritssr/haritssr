@@ -78,10 +78,10 @@ const DisclosureChevronTransitions = () => {
 					{({ open }) => (
 						<>
 							<Disclosure.Button
-								className={`flex w-full items-center justify-between  border hover:bg-zinc-50 px-3 py-2 ${
+								className={`flex w-full items-center justify-between border px-3 py-2 hover:bg-zinc-50 ${
 									open
 										? "rounded-t-md border-zinc-500"
-										: "rounded-md  border-zinc-300"
+										: "rounded-md border-zinc-300"
 								}`}
 							>
 								<div className="truncate text-gray-700">{title}</div>
@@ -114,7 +114,7 @@ const DisclosureChevronTransitions = () => {
 								<Disclosure.Panel
 									className={`text-zinc-600 ${
 										open ? "border-zinc-500" : "border-zinc-300"
-									} rounded-b-md border-r border-l border-b  px-3 py-2`}
+									} rounded-b-md border-r border-b border-l px-3 py-2`}
 								>
 									{description}
 								</Disclosure.Panel>
@@ -134,10 +134,10 @@ const DisclosureChevronNaked = () => {
 				<Disclosure className="w-full" as="div" key={title}>
 					{({ open }) => (
 						<>
-							<Disclosure.Button className="flex w-full items-center justify-between border-t  pr-3 pt-2">
+							<Disclosure.Button className="flex w-full items-center justify-between border-t pt-2 pr-3">
 								<div
 									className={`truncate hover:text-zinc-700 ${
-										open ? "font-medium text-zinc-700" : " text-zinc-500"
+										open ? "font-medium text-zinc-700" : "text-zinc-500"
 									}`}
 								>
 									{title}
@@ -171,7 +171,7 @@ const DisclosureChevronNaked = () => {
 								leaveTo="transform scale-95 opacity-0"
 							>
 								<Disclosure.Panel
-									className={` text-zinc-600 ${
+									className={`text-zinc-600 ${
 										open ? "border-zinc-500" : "border-zinc-300"
 									} py-2 pl-7 text-sm`}
 								>
@@ -194,7 +194,7 @@ const DisclosurePlus = () => {
 					{({ open }) => (
 						<>
 							<Disclosure.Button
-								className={`flex w-full items-center justify-between border hover:bg-zinc-50 px-3 py-2 ${
+								className={`flex w-full items-center justify-between border px-3 py-2 hover:bg-zinc-50 ${
 									open
 										? "rounded-t-md border-zinc-500"
 										: "rounded-md border-zinc-300"
@@ -221,9 +221,9 @@ const DisclosurePlus = () => {
 								</svg>
 							</Disclosure.Button>
 							<Disclosure.Panel
-								className={` text-zinc-600 ${
+								className={`text-zinc-600 ${
 									open ? "border-zinc-500" : "border-zinc-300"
-								} rounded-b-md border-r border-l border-b  px-3 py-2`}
+								} rounded-b-md border-r border-b border-l px-3 py-2`}
 							>
 								{description}
 							</Disclosure.Panel>
@@ -242,10 +242,10 @@ const DisclosurePlusNaked = () => {
 				<Disclosure className="w-full" as="div" key={title}>
 					{({ open }) => (
 						<>
-							<Disclosure.Button className="flex w-full items-center justify-between  border-t  pr-3 pt-2">
+							<Disclosure.Button className="flex w-full items-center justify-between border-t pt-2 pr-3">
 								<div
 									className={`truncate hover:underline ${
-										open ? "font-medium text-zinc-800" : " text-zinc-500"
+										open ? "font-medium text-zinc-800" : "text-zinc-500"
 									}`}
 								>
 									{title}
@@ -271,7 +271,7 @@ const DisclosurePlusNaked = () => {
 								</svg>
 							</Disclosure.Button>
 							<Disclosure.Panel
-								className={` text-zinc-600 ${
+								className={`text-zinc-600 ${
 									open ? "border-zinc-500" : "border-zinc-300"
 								} py-2 pl-5 text-sm`}
 							>

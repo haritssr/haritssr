@@ -9,7 +9,7 @@ export default function PlanetScaleNavBar() {
 				Responsive PlanetScale navigation bar.{" "}
 				<ExternalLink name="Source" href="https://www.planetscale.com" />
 			</SubTitle>
-			<div className="flex h-auto w-full flex-col items-start justify-between space-y-5 rounded-md bg-[#1a1b21] py-6 px-6 text-tiny md:flex-row md:items-center md:space-y-0 md:py-4 md:pr-4">
+			<div className="flex h-auto w-full flex-col items-start justify-between space-y-5 rounded-md bg-[#1a1b21] px-6 py-6 text-tiny md:flex-row md:items-center md:space-y-0 md:py-4 md:pr-4">
 				<div className="flex w-full items-center space-x-2 md:w-1/3">
 					<svg
 						className="block shrink-0 text-zinc-100"
@@ -25,7 +25,7 @@ export default function PlanetScaleNavBar() {
 					</svg>
 					<div className="font-medium text-white">Documentation</div>
 				</div>
-				<div className="justify-left flex flex-col-reverse md:w-2/3 md:flex-row md:justify-between md:space-y-0 ">
+				<div className="justify-left flex flex-col-reverse md:w-2/3 md:flex-row md:justify-between md:space-y-0">
 					<input
 						type="text"
 						className="mt-4 rounded-md border border-gray-400 bg-[#30313a] px-3 py-1.5 text-gray-300 placeholder-gray-400 caret-white md:mt-0"
@@ -34,13 +34,13 @@ export default function PlanetScaleNavBar() {
 					<div className="flex items-center space-x-3">
 						<button
 							type="button"
-							className="rounded-md border border-gray-400 px-3 py-1.5 font-medium text-white duration-100 hover:bg-[#30313a] "
+							className="rounded-md border border-gray-400 px-3 py-1.5 font-medium text-white duration-100 hover:bg-[#30313a]"
 						>
 							Get started
 						</button>
 						<button
 							type="button"
-							className="rounded-md border border-gray-400 px-3 py-1.5 font-medium text-white duration-100 hover:bg-[#30313a] "
+							className="rounded-md border border-gray-400 px-3 py-1.5 font-medium text-white duration-100 hover:bg-[#30313a]"
 						>
 							Sign in
 						</button>

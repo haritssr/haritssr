@@ -6,7 +6,7 @@ export default function Blog() {
 		<HomeSectionWrapper
 			id="blog"
 			topic="Blog"
-			className="space-y-3 grid grid-cols-1"
+			className="grid grid-cols-1 space-y-3"
 			explanation="Selected notes that I want to share to the world."
 		>
 			<BlogGrid />

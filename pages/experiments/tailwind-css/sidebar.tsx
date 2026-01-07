@@ -10,8 +10,8 @@ export default function Sidebar() {
 			<SubTitle>Sidebar example</SubTitle>
 			<div className="flex flex-row overflow-hidden rounded border border-zinc-400">
 				{/* Side Bar */}
-				<div className={`w-1/4 bg-zinc-200  ${open ? "block" : "hidden"}`}>
-					<div className="flex items-center justify-between border-b border-zinc-400 px-4 py-2">
+				<div className={`w-1/4 bg-zinc-200 ${open ? "block" : "hidden"}`}>
+					<div className="flex items-center justify-between border-zinc-400 border-b px-4 py-2">
 						<div className="font-semibold text-zinc-800">Trigonometri</div>
 					</div>
 					<ul className="space-y-1 p-4">
@@ -47,8 +47,8 @@ export default function Sidebar() {
 						</li>
 					</ul>
 				</div>
-				<div className={` bg-zinc-100  ${open ? "w-3/4" : "w-full"}`}>
-					<div className="flex justify-between items-center border-b border-zinc-400 px-2 py-2">
+				<div className={`bg-zinc-100 ${open ? "w-3/4" : "w-full"}`}>
+					<div className="flex items-center justify-between border-zinc-400 border-b px-2 py-2">
 						<button
 							type="button"
 							onClick={() => setOpen(!open)}
@@ -64,7 +64,7 @@ export default function Sidebar() {
 								strokeWidth="1.5"
 								viewBox="0 0 24 24"
 								width="24"
-								className="hover:text-zinc-400 outline-hidden"
+								className="outline-hidden hover:text-zinc-400"
 							>
 								<title>Content Icon</title>
 								<rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -74,7 +74,7 @@ export default function Sidebar() {
 						<input type="search" placeholder="Search" />
 					</div>
 					<div className="px-4 py-2">
-						<div className="my-4 text-xl font-semibold">JavaScript</div>
+						<div className="my-4 font-semibold text-xl">JavaScript</div>
 						<p>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum,
 							adipisci, ducimus eligendi ab aperiam velit, cum quo sit facilis

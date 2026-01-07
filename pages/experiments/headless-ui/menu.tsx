@@ -39,10 +39,10 @@ const MenuExample1 = () => {
 				{({ open }) => (
 					<>
 						<div>
-							<Menu.Button className="inline-flex w-full justify-center items-center rounded-md bg-zinc-800 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-100 border border-zinc-500 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+							<Menu.Button className="inline-flex w-full items-center justify-center rounded-md border border-zinc-500 bg-zinc-800 px-3 py-1.5 font-medium text-sm text-zinc-800 hover:bg-zinc-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
 								Options
 								<ChevronDownIcon
-									className={`ml-2 -mr-1 h-5 w-5 text-zinc-800 ${
+									className={`-mr-1 ml-2 h-5 w-5 text-zinc-800 ${
 										open ? "rotate-180" : ""
 									}`}
 									aria-hidden="true"
@@ -63,7 +63,7 @@ const MenuExample1 = () => {
 									{({ active }) => (
 										<button
 											type="button"
-											className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
+											className={`flex w-full items-center justify-between rounded-md px-3 py-1.5 ${
 												active ? "bg-blue-600 text-white" : "text-zinc-700"
 											}`}
 										>
@@ -77,7 +77,7 @@ const MenuExample1 = () => {
 									{({ active }) => (
 										<button
 											type="button"
-											className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
+											className={`flex w-full items-center justify-between rounded-md px-3 py-1.5 ${
 												active ? "bg-blue-600 text-white" : "text-zinc-700"
 											}`}
 										>
@@ -91,7 +91,7 @@ const MenuExample1 = () => {
 									{({ disabled }) => (
 										<button
 											type="button"
-											className={`flex w-full items-center justify-between rounded-md py-1.5 px-3 ${
+											className={`flex w-full items-center justify-between rounded-md px-3 py-1.5 ${
 												disabled ? "text-zinc-400" : ""
 											}`}
 										>

@@ -82,7 +82,7 @@ export default function GenericSelect() {
 					<li>The option you choose will immedietly appear in Results.</li>
 				</ExplanationList>
 			</SubTitle>
-			<div className="text-xl font-semibold">
+			<div className="font-semibold text-xl">
 				Please choose your subject and teacher
 			</div>
 			<div className="flex space-x-5">
@@ -98,8 +98,8 @@ export default function GenericSelect() {
 				/>
 			</div>
 
-			<div className="my-5 w-fit space-y-1 ">
-				<div className="text-xl font-semibold">Results</div>
+			<div className="my-5 w-fit space-y-1">
+				<div className="font-semibold text-xl">Results</div>
 				<div>
 					<span className="text-zinc-500">Pelajaran yang dipilih :</span>{" "}
 					{subject.title}

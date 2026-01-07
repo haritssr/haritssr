@@ -46,13 +46,13 @@ function AccordionComponents({ title, children }) {
 		<Accordion.Root type="multiple" className="w-full sm:w-1/3">
 			<Accordion.Item value="item-1">
 				<Accordion.Header className="group">
-					<Accordion.Trigger className="flex w-full items-center justify-between rounded-t-md rounded-b-md border border-zinc-400 bg-zinc-200 px-2.5  py-2 text-left text-tiny font-medium text-zinc-800 hover:bg-zinc-100 group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-100">
+					<Accordion.Trigger className="flex w-full items-center justify-between rounded-t-md rounded-b-md border border-zinc-400 bg-zinc-200 px-2.5 py-2 text-left font-medium text-tiny text-zinc-800 hover:bg-zinc-100 group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-100">
 						<div>{title}</div>
-						<ChevronDownIcon className="h-5 w-5 text-zinc-800 group-rdx-state-open:rotate-180 duration-200" />
+						<ChevronDownIcon className="h-5 w-5 text-zinc-800 duration-200 group-rdx-state-open:rotate-180" />
 					</Accordion.Trigger>
 				</Accordion.Header>
 
-				<Accordion.Content className="duration-300 rounded-b-md border-b border-l border-r border-zinc-400 bg-white p-2.5 text-tiny text-zinc-800">
+				<Accordion.Content className="rounded-b-md border-zinc-400 border-r border-b border-l bg-white p-2.5 text-tiny text-zinc-800 duration-300">
 					{children}
 				</Accordion.Content>
 			</Accordion.Item>

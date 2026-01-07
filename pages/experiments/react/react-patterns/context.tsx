@@ -92,7 +92,7 @@ function HidableCardHideButton({ className }: { className?: string }) {
 //Compose them all together
 function ContextCard() {
 	return (
-		<HidableCard className="flex justify-between items-start">
+		<HidableCard className="flex items-start justify-between">
 			<div className="space-y-1">
 				<HidableCardTitle>Title</HidableCardTitle>
 				<HidableCardSubTitle>SubTitle</HidableCardSubTitle>

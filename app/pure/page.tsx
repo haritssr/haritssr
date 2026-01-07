@@ -172,22 +172,22 @@ export default function DesignSystem() {
 					<Switch.Root
 						defaultChecked
 						id="s1"
-						className="block w-[43px] p-1 rounded-full rdx-state-unchecked:bg-zinc-600 rdx-state-checked:bg-blue-600"
+						className="block w-[43px] rounded-full rdx-state-checked:bg-blue-600 rdx-state-unchecked:bg-zinc-600 p-1"
 					>
-						<Switch.Thumb className="block h-4 w-4 rounded-full will-change-transform rdx-state-checked:translate-x-[18px] shadow bg-white duration-100" />
+						<Switch.Thumb className="block h-4 w-4 rdx-state-checked:translate-x-[18px] rounded-full bg-white shadow duration-100 will-change-transform" />
 					</Switch.Root>
 				</Box>
 				<Box title="Accordion">
 					<Accordion.Root type="multiple" className="w-[200px]">
 						<Accordion.Item value="item-1">
 							<Accordion.Header className="group">
-								<Accordion.Trigger className="flex w-full items-center justify-between rounded-t-md rounded-b-md border border-zinc-400 bg-zinc-200 px-2.5  py-2 text-left text-tiny font-medium text-zinc-800 hover:bg-zinc-100 group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-100">
+								<Accordion.Trigger className="flex w-full items-center justify-between rounded-t-md rounded-b-md border border-zinc-400 bg-zinc-200 px-2.5 py-2 text-left font-medium text-tiny text-zinc-800 hover:bg-zinc-100 group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-100">
 									<div>Title</div>
-									<ChevronDownIcon className="h-5 w-5 text-zinc-800 group-rdx-state-open:rotate-180 duration-200" />
+									<ChevronDownIcon className="h-5 w-5 text-zinc-800 duration-200 group-rdx-state-open:rotate-180" />
 								</Accordion.Trigger>
 							</Accordion.Header>
 
-							<Accordion.Content className="duration-300 rounded-b-md border-b border-l border-r border-zinc-400 bg-white p-2.5 text-tiny text-zinc-800 w-[200px]">
+							<Accordion.Content className="w-[200px] rounded-b-md border-zinc-400 border-r border-b border-l bg-white p-2.5 text-tiny text-zinc-800 duration-300">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
 								reiciendis animi, error in rerum modi.
 							</Accordion.Content>
@@ -195,9 +195,9 @@ export default function DesignSystem() {
 					</Accordion.Root>
 				</Box>
 				<Box title="Checkbox">
-					<div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:items-center">
+					<div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-x-2 sm:space-y-0">
 						<Checkbox.Root
-							className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-400 bg-white hover:bg-zinc-100 rdx-state-checked:bg-action rdx-state-checked:border-action rdx-state-checked:shadow-blue-300 shadow hover:border-zinc-500"
+							className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-400 rdx-state-checked:border-action bg-white rdx-state-checked:bg-action shadow rdx-state-checked:shadow-blue-300 hover:border-zinc-500 hover:bg-zinc-100"
 							// defaultChecked
 							id="c1"
 						>
@@ -213,14 +213,14 @@ export default function DesignSystem() {
 				<Box title="Popover">
 					<Popover.Root>
 						<Popover.Trigger>
-							<div className="w-auto rounded-md px-3 py-1 bg-blue-600 hover:bg-[#2563eb]/90 text-white active:ring-offset-1 active:ring-1 active:ring-blue-400 ring-1 ring-action">
+							<div className="w-auto rounded-md bg-blue-600 px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1">
 								Show Popover
 							</div>
 						</Popover.Trigger>
 
 						{/* <Popover.Anchor /> */}
 						<Popover.Content
-							className="rounded-md border border-zinc-300 bg-white w-[80vw] shadow-xl max-w-sm text-zinc-800 p-4"
+							className="w-[80vw] max-w-sm rounded-md border border-zinc-300 bg-white p-4 text-zinc-800 shadow-xl"
 							sideOffset={10}
 							side="bottom"
 						>
@@ -233,21 +233,21 @@ export default function DesignSystem() {
 					</Popover.Root>
 				</Box>
 				<Box title="Table">
-					<table className="w-[200px] sm:w-[300px] border border-zinc-300 divide-y divide-zinc-300 text-zinc-800">
+					<table className="w-[200px] divide-y divide-zinc-300 border border-zinc-300 text-zinc-800 sm:w-[300px]">
 						<thead>
-							<tr className="bg-zinc-50 border border-zinc-300 divide-x divide-zinc-300">
+							<tr className="divide-x divide-zinc-300 border border-zinc-300 bg-zinc-50">
 								<th className="font-medium">Title</th>
 								<th className="font-medium">Title</th>
 								<th className="font-medium">Title</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="divide-x divide-zinc-300 border-b border">
+							<tr className="divide-x divide-zinc-300 border border-b">
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
 							</tr>
-							<tr className="divide-x divide-zinc-300 border-b border">
+							<tr className="divide-x divide-zinc-300 border border-b">
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
 								<td className="text-center">Data</td>
@@ -257,28 +257,28 @@ export default function DesignSystem() {
 				</Box>
 				<Box title="Tabs">
 					<Tabs.Root
-						className="flex flex-col w-full max-w-[300px]"
+						className="flex w-full max-w-[300px] flex-col"
 						defaultValue="tab1"
 					>
 						<Tabs.List
-							className="shrink-0 flex bg-zinc-100 rounded-lg p-1 space-x-1"
+							className="flex shrink-0 space-x-1 rounded-lg bg-zinc-100 p-1"
 							aria-label="Manage your account"
 						>
 							<Tabs.Trigger
-								className="bg-white py-1 flex-1 flex items-center justify-center select-none data-[state=active]:text-zinc-800 data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500  border data-[state=active]:border-zinc-300 hover:border-zinc-300 border-transparent"
+								className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-white py-1 font-medium text-zinc-500 outline-hidden hover:border-zinc-300 hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
 								value="tab1"
 							>
 								Account
 							</Tabs.Trigger>
 							<Tabs.Trigger
-								className="bg-white py-1 flex-1 flex items-center justify-center select-none  data-[state=active]:bg-white data-[state=active]:focus:relative data-[state=active]:shadow outline-hidden cursor-pointer rounded-md hover:bg-zinc-200/80 font-medium text-zinc-500 data-[state=active]:text-zinc-800 border data-[state=active]:border-zinc-300 hover:border-zinc-300 border-transparent"
+								className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-white py-1 font-medium text-zinc-500 outline-hidden hover:border-zinc-300 hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
 								value="tab2"
 							>
 								Password
 							</Tabs.Trigger>
 						</Tabs.List>
 						<Tabs.Content
-							className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
+							className="mt-2 grow rounded-md border border-zinc-200 bg-white p-5 outline-hidden"
 							value="tab1"
 						>
 							<div className="">
@@ -288,7 +288,7 @@ export default function DesignSystem() {
 							</div>
 						</Tabs.Content>
 						<Tabs.Content
-							className="grow p-5 mt-2 bg-white rounded-md outline-hidden border border-zinc-200"
+							className="mt-2 grow rounded-md border border-zinc-200 bg-white p-5 outline-hidden"
 							value="tab2"
 						>
 							<div className="">
@@ -303,7 +303,7 @@ export default function DesignSystem() {
 					<Toast.Provider swipeDirection="right">
 						<button
 							type="button"
-							className="text-white bg-action rounded-md px-3 py-1 hover:bg-[#2563eb]/90 active:ring-offset-1 active:ring-1 active:ring-blue-400 ring-1 ring-action"
+							className="rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
 							onClick={() => {
 								setOpen(false);
 								window.clearTimeout(timerRef.current);
@@ -317,16 +317,16 @@ export default function DesignSystem() {
 						</button>
 
 						<Toast.Root
-							className="border border-zinc-300 bg-white/70 saturate-150 backdrop-blur-md rounded-lg py-3 pl-4 pr-6 grid [grid-template-areas:'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut shadow-xl"
+							className="grid grid-cols-[auto_max-content] items-center gap-x-[15px] rounded-lg border border-zinc-300 bg-white/70 py-3 pr-6 pl-4 shadow-xl saturate-150 backdrop-blur-md [grid-template-areas:'title_action'_'description_action'] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[state=closed]:animate-hide data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
 							open={open}
 							onOpenChange={setOpen}
 						>
 							<div className="">
-								<Toast.Title className="[grid-area:title] mb-[5px] font-medium text-slate12 text-[15px]">
+								<Toast.Title className="mb-[5px] font-medium text-[15px] text-slate12 [grid-area:title]">
 									Hai, I am Toast!
 								</Toast.Title>
 								<Toast.Description asChild>
-									<div className="[grid-area:description] m-0 text-zinc-500 text-[13px] leading-[1.3]">
+									<div className="m-0 text-[13px] text-zinc-500 leading-[1.3] [grid-area:description]">
 										Thanks for clicking me!
 									</div>
 								</Toast.Description>
@@ -335,7 +335,7 @@ export default function DesignSystem() {
 								OK
 							</Toast.Close>
 						</Toast.Root>
-						<Toast.Viewport className="p-3 sm:p-6 fixed bottom-0 right-0 flex flex-col gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-2147483647 outline-hidden" />
+						<Toast.Viewport className="fixed right-0 bottom-0 z-2147483647 m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-[10px] p-3 outline-hidden sm:p-6" />
 					</Toast.Provider>
 				</Box>
 				<Box title="Internal Link">
@@ -375,7 +375,7 @@ export default function DesignSystem() {
 				<Box title="Button: Primary">
 					<button
 						type="button"
-						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action"
+						className="select-none rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
 					>
 						Button
 					</button>
@@ -383,7 +383,7 @@ export default function DesignSystem() {
 				<Box title="Button: Loading">
 					<button
 						type="button"
-						className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded-md active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none ring-1 ring-action"
+						className="select-none rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
 						onClick={handleClick}
 					>
 						{loading === true ? "Loading..." : "Button"}
@@ -392,7 +392,7 @@ export default function DesignSystem() {
 				<Box title="Button: Secondary">
 					<button
 						type="button"
-						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow"
+						className="select-none rounded-md px-3 py-1 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden focus:ring-zinc-800 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
 					>
 						Button
 					</button>
@@ -400,7 +400,7 @@ export default function DesignSystem() {
 				<Box title="Button: With Icon">
 					<button
 						type="button"
-						className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow flex items-center space-x-1"
+						className="flex select-none items-center space-x-1 rounded-md px-3 py-1 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden focus:ring-zinc-800 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -408,7 +408,7 @@ export default function DesignSystem() {
 							viewBox="0 0 24 24"
 							strokeWidth={2}
 							stroke="currentColor"
-							className="w-[18px] h-[18px] text-zinc-800"
+							className="h-[18px] w-[18px] text-zinc-800"
 						>
 							<title>IDK</title>
 							<path
@@ -423,7 +423,7 @@ export default function DesignSystem() {
 				<Box title="Button: Only Icon">
 					<button
 						type="button"
-						className="p-1.5 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow flex items-center space-x-1"
+						className="flex select-none items-center space-x-1 rounded-md p-1.5 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden focus:ring-zinc-800 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -431,7 +431,7 @@ export default function DesignSystem() {
 							viewBox="0 0 24 24"
 							strokeWidth={2}
 							stroke="currentColor"
-							className="w-5 h-5 text-zinc-800"
+							className="h-5 w-5 text-zinc-800"
 						>
 							<title>IDK</title>
 							<path
@@ -445,7 +445,7 @@ export default function DesignSystem() {
 				<Box title="Button: Danger">
 					<button
 						type="button"
-						className="px-3 py-1 text-red-600 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-red-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-600 shadow"
+						className="select-none rounded-md px-3 py-1 font-medium text-red-600 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden focus:ring-zinc-600 active:ring-1 active:ring-red-500 active:ring-offset-1"
 					>
 						Button
 					</button>
@@ -453,106 +453,106 @@ export default function DesignSystem() {
 				<Box title="Button: Disabled">
 					<button
 						type="button"
-						className="px-3 py-1 bg-zinc-100 text-zinc-400 font-medium rounded-md cursor-not-allowed select-none"
+						className="cursor-not-allowed select-none rounded-md bg-zinc-100 px-3 py-1 font-medium text-zinc-400"
 					>
 						Button
 					</button>
 				</Box>
 				<Box title="Main Colors">
-					<div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
+					<div className="grid grid-cols-3 gap-5 sm:grid-cols-4">
 						<div>
 							<div className="h-12 w-12 rounded bg-green-500" />
-							<div className="text-zinc-400 text-[13px]">Success</div>
-							<div className="text-zinc-400 text-[13px]">#34c759</div>
+							<div className="text-[13px] text-zinc-400">Success</div>
+							<div className="text-[13px] text-zinc-400">#34c759</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-yellow-500" />
-							<div className="text-zinc-400 text-[13px]">Attention</div>
-							<div className="text-zinc-400 text-[13px]">#eab308</div>
+							<div className="text-[13px] text-zinc-400">Attention</div>
+							<div className="text-[13px] text-zinc-400">#eab308</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-red-500" />
-							<div className="text-zinc-400 text-[13px]">Danger</div>
-							<div className="text-zinc-400 text-[13px]">#ef4444</div>
+							<div className="text-[13px] text-zinc-400">Danger</div>
+							<div className="text-[13px] text-zinc-400">#ef4444</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-action" />
-							<div className="text-zinc-400 text-[13px]">Action</div>
-							<div className="text-zinc-400 text-[13px]">#2563eb</div>
+							<div className="text-[13px] text-zinc-400">Action</div>
+							<div className="text-[13px] text-zinc-400">#2563eb</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-800" />
-							<div className="text-zinc-400 text-[13px]">Black</div>
-							<div className="text-zinc-400 text-[13px]">#27272a</div>
+							<div className="text-[13px] text-zinc-400">Black</div>
+							<div className="text-[13px] text-zinc-400">#27272a</div>
 						</div>
 						<div>
-							<div className="h-12 w-12 rounded bg-white border" />
-							<div className="text-zinc-400 text-[13px]">Background</div>
-							<div className="text-zinc-400 text-[13px]">#fff</div>
+							<div className="h-12 w-12 rounded border bg-white" />
+							<div className="text-[13px] text-zinc-400">Background</div>
+							<div className="text-[13px] text-zinc-400">#fff</div>
 						</div>
 					</div>
 				</Box>
 				<Box title="Hierachical Colors">
-					<div className="grid grid-cols-4 sm:grid-cols-6 gap-x-5 gap-y-1 sm:gap-y-5">
+					<div className="grid grid-cols-4 gap-x-5 gap-y-1 sm:grid-cols-6 sm:gap-y-5">
 						<div>
-							<div className="h-12 w-12 rounded bg-white border" />
-							<div className="text-zinc-400 text-[13px]">white</div>
-							<div className="text-zinc-400 text-[13px]">#fff</div>
+							<div className="h-12 w-12 rounded border bg-white" />
+							<div className="text-[13px] text-zinc-400">white</div>
+							<div className="text-[13px] text-zinc-400">#fff</div>
 						</div>
 						<div>
-							<div className="h-12 w-12 rounded bg-zinc-50 border" />
-							<div className="text-zinc-400 text-[13px]">zinc-50</div>
-							<div className="text-zinc-400 text-[13px]">#fafafa</div>
+							<div className="h-12 w-12 rounded border bg-zinc-50" />
+							<div className="text-[13px] text-zinc-400">zinc-50</div>
+							<div className="text-[13px] text-zinc-400">#fafafa</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-100" />
-							<div className="text-zinc-400 text-[13px]">zinc-100</div>
-							<div className="text-zinc-400 text-[13px]">#f4f4f5</div>
+							<div className="text-[13px] text-zinc-400">zinc-100</div>
+							<div className="text-[13px] text-zinc-400">#f4f4f5</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-200" />
-							<div className="text-zinc-400 text-[13px]">zinc-200</div>
-							<div className="text-zinc-400 text-[13px]">#e4e4e7</div>
+							<div className="text-[13px] text-zinc-400">zinc-200</div>
+							<div className="text-[13px] text-zinc-400">#e4e4e7</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-300" />
-							<div className="text-zinc-400 text-[13px]">zinc-300</div>
-							<div className="text-zinc-400 text-[13px]">#d4d4d8</div>
+							<div className="text-[13px] text-zinc-400">zinc-300</div>
+							<div className="text-[13px] text-zinc-400">#d4d4d8</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-400" />
-							<div className="text-zinc-400 text-[13px]">zinc-400</div>
-							<div className="text-zinc-400 text-[13px]">#a1a1aa</div>
+							<div className="text-[13px] text-zinc-400">zinc-400</div>
+							<div className="text-[13px] text-zinc-400">#a1a1aa</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-500" />
-							<div className="text-zinc-400 text-[13px]">zinc-500</div>
-							<div className="text-zinc-400 text-[13px]">#6b7280</div>
+							<div className="text-[13px] text-zinc-400">zinc-500</div>
+							<div className="text-[13px] text-zinc-400">#6b7280</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-600" />
-							<div className="text-zinc-400 text-[13px]">zinc-600</div>
-							<div className="text-zinc-400 text-[13px]">#52525b</div>
+							<div className="text-[13px] text-zinc-400">zinc-600</div>
+							<div className="text-[13px] text-zinc-400">#52525b</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-700" />
-							<div className="text-zinc-400 text-[13px]">zinc-700</div>
-							<div className="text-zinc-400 text-[13px]">#3f3f46</div>
+							<div className="text-[13px] text-zinc-400">zinc-700</div>
+							<div className="text-[13px] text-zinc-400">#3f3f46</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-800" />
-							<div className="text-zinc-400 text-[13px]">zinc-800</div>
-							<div className="text-zinc-400 text-[13px]">#27272a</div>
+							<div className="text-[13px] text-zinc-400">zinc-800</div>
+							<div className="text-[13px] text-zinc-400">#27272a</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-zinc-900" />
-							<div className="text-zinc-400 text-[13px]">zinc-900</div>
-							<div className="text-zinc-400 text-[13px]">#18181b</div>
+							<div className="text-[13px] text-zinc-400">zinc-900</div>
+							<div className="text-[13px] text-zinc-400">#18181b</div>
 						</div>
 						<div>
 							<div className="h-12 w-12 rounded bg-black" />
-							<div className="text-zinc-400 text-[13px]">black</div>
-							<div className="text-zinc-400 text-[13px]">#000</div>
+							<div className="text-[13px] text-zinc-400">black</div>
+							<div className="text-[13px] text-zinc-400">#000</div>
 						</div>
 					</div>
 				</Box>
@@ -566,11 +566,11 @@ export default function DesignSystem() {
 					<input type="number" placeholder="0" />
 				</Box>
 				<Box title="Box">
-					<div className="border border-zinc-400/50 rounded-md overflow-hidden w-[200px] sm:w-[300px]">
-						<div className="bg-zinc-50 px-3 py-2 border-b border-zinc-400/50 text-zinc-800 select-none font-medium">
+					<div className="w-[200px] overflow-hidden rounded-md border border-zinc-400/50 sm:w-[300px]">
+						<div className="select-none border-zinc-400/50 border-b bg-zinc-50 px-3 py-2 font-medium text-zinc-800">
 							Title
 						</div>
-						<div className="h-32 p-5 flex items-center justify-center">
+						<div className="flex h-32 items-center justify-center p-5">
 							Content
 						</div>
 					</div>
@@ -578,7 +578,7 @@ export default function DesignSystem() {
 				<Box title="Text Area">
 					<textarea
 						placeholder="Write something here..."
-						className="w-[200px] sm:w-[300px] rounded-md ring-1 ring-zinc-950/20 p-2 focus:outline-hidden focus:ring-zinc-800 placeholder:text-zinc-400 shadow"
+						className="w-[200px] rounded-md p-2 shadow ring-1 ring-zinc-950/20 placeholder:text-zinc-400 focus:outline-hidden focus:ring-zinc-800 sm:w-[300px]"
 					/>
 				</Box>
 				<Box title="Toggle">
@@ -587,7 +587,7 @@ export default function DesignSystem() {
 							setPressed(!pressed);
 						}}
 						pressed={pressed}
-						className=" rounded-md bg-white px-3 py-1 text-zinc-800 hover:bg-zinc-50 data-[state=on]:text-action select-none ring-1 data-[state=on]:ring-blue-300 data-[state=off]:ring-zinc-950/20 focus:outline-hidden focus:ring-action shadow data-[state=on]:shadow-blue-100"
+						className="select-none rounded-md bg-white px-3 py-1 text-zinc-800 shadow ring-1 hover:bg-zinc-50 focus:outline-hidden focus:ring-action data-[state=on]:text-action data-[state=on]:shadow-blue-100 data-[state=off]:ring-zinc-950/20 data-[state=on]:ring-blue-300"
 					>
 						{pressed ? "State : ON" : "State : OFF"}
 					</Toggle.Root>
@@ -597,19 +597,19 @@ export default function DesignSystem() {
 				</Box>
 				<Box title="Badges">
 					<div className="grid grid-cols-1 gap-5">
-						<div className="text-zinc-600 rounded-full px-2.5 py-0.5 border border-zinc-300 text-sm select-none hover:shadow-zinc-50 font-medium text-center w-fit">
+						<div className="w-fit select-none rounded-full border border-zinc-300 px-2.5 py-0.5 text-center font-medium text-sm text-zinc-600 hover:shadow-zinc-50">
 							General
 						</div>
-						<div className="text-green-600 rounded-full px-2.5 py-0.5 border border-green-300 text-sm select-none hover:shadow-green-50 font-medium text-center w-fit">
+						<div className="w-fit select-none rounded-full border border-green-300 px-2.5 py-0.5 text-center font-medium text-green-600 text-sm hover:shadow-green-50">
 							Success
 						</div>
-						<div className="text-red-600 rounded-full px-2.5 py-0.5 border border-red-300 text-sm select-none hover:shadow-red-50 font-medium text-center w-fit">
+						<div className="w-fit select-none rounded-full border border-red-300 px-2.5 py-0.5 text-center font-medium text-red-600 text-sm hover:shadow-red-50">
 							Danger
 						</div>
-						<div className="text-yellow-600 rounded-full px-2.5 py-0.5 border border-yellow-300 text-sm select-none hover:shadow-yellow-50 font-medium text-center w-fit">
+						<div className="w-fit select-none rounded-full border border-yellow-300 px-2.5 py-0.5 text-center font-medium text-sm text-yellow-600 hover:shadow-yellow-50">
 							Attention
 						</div>
-						<div className="text-purple-600 rounded-full px-2.5 py-0.5 border border-purple-300 text-sm select-none hover:shadow-purple-50 font-medium text-center w-fit">
+						<div className="w-fit select-none rounded-full border border-purple-300 px-2.5 py-0.5 text-center font-medium text-purple-600 text-sm hover:shadow-purple-50">
 							Information
 						</div>
 					</div>
@@ -618,20 +618,20 @@ export default function DesignSystem() {
 					<BackButton href="/" name="Previous Page" />
 				</Box>
 				<Box title="Logo">
-					<div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
+					<div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
 						<div className="space-y-2">
 							<Image
 								alt="haritssr.com image"
 								src="/Icons/haritssr.svg"
 								width={10}
 								height={10}
-								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
+								className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
 							/>
 							<div className="flex flex-col">
-								<span className="text-sm sm:text-base text-gray-800 justify-self-center">
+								<span className="justify-self-center text-gray-800 text-sm sm:text-base">
 									Harits Syah
 								</span>
-								<span className="text-sm sm:text-base text-gray-400 justify-self-center">
+								<span className="justify-self-center text-gray-400 text-sm sm:text-base">
 									haritssr.com
 								</span>
 							</div>
@@ -642,13 +642,13 @@ export default function DesignSystem() {
 								src="/Icons/harislab.svg"
 								width={10}
 								height={10}
-								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
+								className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
 							/>
 							<div className="flex flex-col">
-								<span className="text-sm sm:text-base text-gray-800 justify-self-center">
+								<span className="justify-self-center text-gray-800 text-sm sm:text-base">
 									Haris Lab
 								</span>
-								<span className="text-sm sm:text-base text-gray-400 justify-self-center">
+								<span className="justify-self-center text-gray-400 text-sm sm:text-base">
 									harislab.com
 								</span>
 							</div>
@@ -659,13 +659,13 @@ export default function DesignSystem() {
 								src="/Icons/harisstudio.svg"
 								width={10}
 								height={10}
-								className="w-7 h-7 sm:w-7 sm:h-10 justify-self-center"
+								className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
 							/>
 							<div className="flex flex-col">
-								<span className="text-sm sm:text-base text-gray-800 justify-self-center">
+								<span className="justify-self-center text-gray-800 text-sm sm:text-base">
 									Haris Studio
 								</span>
-								<span className="text-sm sm:text-base text-gray-400 justify-self-center">
+								<span className="justify-self-center text-gray-400 text-sm sm:text-base">
 									harisstudio.com
 								</span>
 							</div>
@@ -677,28 +677,28 @@ export default function DesignSystem() {
 						<Dialog.Trigger asChild>
 							<button
 								type="button"
-								className="px-3 py-1 text-zinc-800 font-medium hover:bg-zinc-50 active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none rounded-md ring-1 ring-zinc-950/20 focus:outline-hidden focus:ring-zinc-800 shadow"
+								className="select-none rounded-md px-3 py-1 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden focus:ring-zinc-800 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
 							>
 								Open Modal
 							</button>
 						</Dialog.Trigger>
 						<Dialog.Portal>
-							<Dialog.Overlay className="bg-blackA9 fixed inset-0" />
-							<Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-[25px] shadow-lg border border-zinc-300 focus:outline-hidden">
-								<Dialog.Title className="text-zinc-800 text-base font-medium">
+							<Dialog.Overlay className="fixed inset-0 bg-blackA9" />
+							<Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md border border-zinc-300 bg-white p-[25px] shadow-lg focus:outline-hidden">
+								<Dialog.Title className="font-medium text-base text-zinc-800">
 									Title
 								</Dialog.Title>
-								<Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
+								<Dialog.Description className="mt-[10px] mb-5 text-[15px] text-mauve11 leading-normal">
 									Description
 								</Dialog.Description>
-								<div className="h-24 flex items-center justify-center">
+								<div className="flex h-24 items-center justify-center">
 									Some content
 								</div>
-								<div className="mt-[25px] flex justify-end space-x-2	">
+								<div className="mt-[25px] flex justify-end space-x-2">
 									<Dialog.Close asChild>
 										<button
 											type="button"
-											className="px-3 py-1 bg-zinc-100 border border-zinc-300 text-zinc-800 font-medium hover:bg-zinc-200/70 rounded active:ring-1 active:ring-offset-1 active:ring-zinc-500 select-none"
+											className="select-none rounded border border-zinc-300 bg-zinc-100 px-3 py-1 font-medium text-zinc-800 hover:bg-zinc-200/70 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
 										>
 											Action
 										</button>
@@ -706,7 +706,7 @@ export default function DesignSystem() {
 									<Dialog.Close asChild>
 										<button
 											type="button"
-											className="px-3 py-1 bg-action text-white hover:bg-[#2563eb]/90 rounded active:ring-1 active:ring-offset-1 active:ring-blue-400 select-none"
+											className="select-none rounded bg-action px-3 py-1 text-white hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
 										>
 											Action
 										</button>
@@ -715,7 +715,7 @@ export default function DesignSystem() {
 								<Dialog.Close asChild>
 									<button
 										type="button"
-										className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-hidden"
+										className="absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full text-violet11 hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 focus:outline-hidden"
 										aria-label="Close"
 									>
 										<Cross2Icon />
@@ -747,7 +747,7 @@ export default function DesignSystem() {
 				<div className="mt-5 space-y-20">
 					<iframe
 						title="idk"
-						className="border w-full min-h-screen"
+						className="min-h-screen w-full border"
 						width="800"
 						height="450"
 						src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3DwxLQxcZHLYNHFvrj-1"
@@ -761,7 +761,7 @@ export default function DesignSystem() {
 
 function ComingSoon() {
 	return (
-		<div className="text-purple-600 rounded-full px-3 py-1 font-semibold border border-purple-300 text-tiny select-none hover:shadow-xl hover:shadow-purple-50">
+		<div className="select-none rounded-full border border-purple-300 px-3 py-1 font-semibold text-purple-600 text-tiny hover:shadow-purple-50 hover:shadow-xl">
 			Coming Soon
 		</div>
 	);

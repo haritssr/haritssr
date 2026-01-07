@@ -27,12 +27,12 @@ function ToggleThemeButton({ theme, setTheme }) {
 			className={`${
 				theme === "light"
 					? "border border-zinc-300 bg-white shadow hover:bg-zinc-50"
-					: "bg-zinc-700 "
-			} rounded-md p-2 `}
+					: "bg-zinc-700"
+			} rounded-md p-2`}
 			onClick={() => setTheme(theme === "light" ? "dark" : "light")}
 		>
 			{theme === "light" ? (
-				<LightBulbIcon className="h-5 w-5 text-zinc-700 " strokeWidth={2} />
+				<LightBulbIcon className="h-5 w-5 text-zinc-700" strokeWidth={2} />
 			) : (
 				<MoonIcon className="h-5 w-5 text-zinc-300" />
 			)}

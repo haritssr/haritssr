@@ -7,7 +7,7 @@ export default function Experiences() {
 		<HomeSectionWrapper
 			id="experiences"
 			topic="Experiences"
-			className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-0"
+			className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4"
 			explanation="Detail informations on how projects I belong to being handled."
 		>
 			{ExperiencesData.map((d) => (

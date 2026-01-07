@@ -29,12 +29,12 @@ export default function ExportedDropdownMenu() {
 			</SubTitle>
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger>
-					<div className="rounded-md border border-zinc-400 py-1 hover:bg-zinc-100 font-medium px-3 text-zinc-800  focus:outline-hidden">
+					<div className="rounded-md border border-zinc-400 px-3 py-1 font-medium text-zinc-800 hover:bg-zinc-100 focus:outline-hidden">
 						Option
 					</div>
 				</DropdownMenu.Trigger>
-				<DropdownMenu.Content className="w-full border border-gray-500 bg-white rounded-md overflow-hidden py-3 origin-top-left">
-					<DropdownMenu.Arrow className="fill-zinc-800 stroke-zinc-800 -mt-px" />
+				<DropdownMenu.Content className="w-full origin-top-left overflow-hidden rounded-md border border-gray-500 bg-white py-3">
+					<DropdownMenu.Arrow className="-mt-px fill-zinc-800 stroke-zinc-800" />
 					<div className="space-y-3">
 						<DropdownMenu.Group className={group}>
 							<DropdownMenu.Item className={item}>New File</DropdownMenu.Item>{" "}
@@ -52,7 +52,7 @@ export default function ExportedDropdownMenu() {
 									<div>Arrage by</div>
 									<ChevronRightIcon className="h-3.5 w-3.5" strokeWidth={2} />
 								</DropdownMenu.Trigger>
-								<DropdownMenu.Content className="divide-y divide-gray-800 border border-zinc-800 rounded-md overflow-hidden">
+								<DropdownMenu.Content className="divide-y divide-gray-800 overflow-hidden rounded-md border border-zinc-800">
 									<DropdownMenu.Item className={item}>
 										List view
 									</DropdownMenu.Item>

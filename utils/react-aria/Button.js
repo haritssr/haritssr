@@ -10,10 +10,10 @@ export function Button(props) {
 			type="button"
 			{...mergeProps(buttonProps, focusProps)}
 			ref={ref}
-			className={`p-2 rounded-full ${props.isDisabled ? "text-gray-400" : ""} ${
-				!props.isDisabled ? "hover:bg-violet-100 active:bg-violet-200" : ""
+			className={`rounded-full p-2 ${props.isDisabled ? "text-gray-400" : ""} ${
+				props.isDisabled ? "" : "hover:bg-violet-100 active:bg-violet-200"
 			} outline-hidden ${
-				isFocusVisible ? "ring-2 ring-offset-2 ring-purple-600" : ""
+				isFocusVisible ? "ring-2 ring-purple-600 ring-offset-2" : ""
 			}`}
 		>
 			{props.children}

@@ -111,7 +111,7 @@ function Table() {
 	return (
 		<div className="p-2">
 			<div className="inline-block rounded border border-black shadow">
-				<div className="border-b border-black px-1">
+				<div className="border-black border-b px-1">
 					<label>
 						<input
 							{...{
@@ -176,7 +176,7 @@ function Table() {
 										<th
 											key={header.id}
 											colSpan={header.colSpan}
-											className="whitespace-nowrap border-b border-r border-zinc-500 bg-green-100 py-1 px-2 font-bold"
+											className="whitespace-nowrap border-zinc-500 border-r border-b bg-green-100 px-2 py-1 font-bold"
 										>
 											<div className="whitespace-nowrap">
 												{header.isPlaceholder
@@ -262,7 +262,7 @@ function Table() {
 									<th
 										key={header.id}
 										colSpan={header.colSpan}
-										className="whitespace-nowrap border-b border-r border-zinc-500 bg-green-100 py-1 px-2 font-bold"
+										className="whitespace-nowrap border-zinc-500 border-r border-b bg-green-100 px-2 py-1 font-bold"
 									>
 										<div className="whitespace-nowrap">
 											{header.isPlaceholder
@@ -348,7 +348,7 @@ function Table() {
 										<th
 											key={header.id}
 											colSpan={header.colSpan}
-											className="whitespace-nowrap border-b border-r border-zinc-500 bg-green-100 py-1 px-2 font-bold"
+											className="whitespace-nowrap border-zinc-500 border-r border-b bg-green-100 px-2 py-1 font-bold"
 										>
 											<div className="whitespace-nowrap">
 												{header.isPlaceholder
