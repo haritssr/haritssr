@@ -4,17 +4,17 @@ import { IncrementButton } from "./IncrementButton";
 import TimesTableComponent from "./TimesTable";
 
 export default function TimesTable() {
-	return (
-		<div>
-			<PageTitle
-				title="Times Table"
-				description="Self-corrected 10x10 times table with statistics."
-			/>
+  return (
+    <div>
+      <PageTitle
+        description="Self-corrected 10x10 times table with statistics."
+        title="Times Table"
+      />
 
-			<Suspense fallback="..loading">
-				<IncrementButton />
-			</Suspense>
-			<TimesTableComponent />
-		</div>
-	);
+      <Suspense fallback="..loading">
+        <IncrementButton />
+      </Suspense>
+      <TimesTableComponent />
+    </div>
+  );
 }

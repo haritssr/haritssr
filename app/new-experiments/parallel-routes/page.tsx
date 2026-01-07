@@ -1,3 +1,3 @@
 export default function Page() {
-	return <div>Parallel routes</div>;
+  return <div>Parallel routes</div>;
 }

@@ -11,6 +11,6 @@
 // if there is no /api/index.js, it will throw 404.js
 
 export default function handler(req, res) {
-	const { params } = req.query;
-	res.status(200).json(params);
+  const { params } = req.query;
+  res.status(200).json(params);
 }

@@ -5,28 +5,28 @@ import { usePathname } from "next/navigation";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 export default function Destination({ link }: { link: string }) {
-	const pathname = usePathname();
+  const pathname = usePathname();
 
-	const CurrentPageBaseRoute = pathname?.split("/")[1];
+  const CurrentPageBaseRoute = pathname?.split("/")[1];
 
-	let color: string;
+  let color: string;
 
-	if (pathname === `/${link}`) {
-		color = "text-action";
-	} else if (CurrentPageBaseRoute === link) {
-		color = "text-action";
-	} else {
-		color = "text-zinc-800 hover:text-action";
-	}
+  if (pathname === `/${link}`) {
+    color = "text-action";
+  } else if (CurrentPageBaseRoute === link) {
+    color = "text-action";
+  } else {
+    color = "text-zinc-800 hover:text-action";
+  }
 
-	return (
-		<li>
-			<Link
-				className={`${color}`}
-				href={`${link === "pure" ? "/pure" : `/${link}`}`}
-			>
-				{capitalizeFirstLetter(link)}
-			</Link>
-		</li>
-	);
+  return (
+    <li>
+      <Link
+        className={`${color}`}
+        href={`${link === "pure" ? "/pure" : `/${link}`}`}
+      >
+        {capitalizeFirstLetter(link)}
+      </Link>
+    </li>
+  );
 }
