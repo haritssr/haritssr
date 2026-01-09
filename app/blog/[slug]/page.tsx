@@ -9,7 +9,11 @@ import { Mdx } from "@/components/mdx";
 import LeftBar from "./LeftBar";
 import TableOfContents from "./TableOfContent";
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const blog = allBlogs.find((blog) => blog.slug === slug);
 
@@ -94,7 +98,11 @@ function formatDate(date: string) {
   return `${fullDate} (${formattedDate})`;
 }
 
-export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Blog({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const blog = allBlogs.find((blog) => blog.slug === slug);
 
@@ -125,11 +133,17 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
         </div>
         <Mdx code={blog.body.code} />
       </Content>
-      <TableOfContents title={blog.title.toLocaleLowerCase().split(" ").join("-")} />
+      <TableOfContents
+        title={blog.title.toLocaleLowerCase().split(" ").join("-")}
+      />
     </div>
   );
 }
 
 function Content({ children }: { children: React.ReactNode }) {
-  return <section className="border-zinc-200 pb-5 sm:col-span-3 sm:border-r sm:border-b sm:px-5">{children}</section>;
+  return (
+    <section className="border-zinc-200 pb-5 sm:col-span-3 sm:border-r sm:border-b sm:px-5">
+      {children}
+    </section>
+  );
 }

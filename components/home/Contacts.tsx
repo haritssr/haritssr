@@ -16,7 +16,6 @@ export default function Contacts() {
               priority
               src="/images/blur.jpg"
               width="165"
-              // placeholder='blur'
             />
           </section>
           <div className="text-center font-semibold text-xl text-zinc-800">
