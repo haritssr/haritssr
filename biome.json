@@ -14,6 +14,9 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "nursery": {
+        "useSortedClasses": "off"
+      },
       "performance": {
         "useTopLevelRegex": "off"
       },

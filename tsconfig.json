@@ -22,14 +22,14 @@
       "@/components/*": ["components/*"],
       "@/Icons": ["components/Icons"],
       "@/styles/*": ["styles/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "incremental": true,
     "plugins": [
       {
-        "name": "next",
-      },
-    ],
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -52,7 +52,7 @@
     ".contentlayer/generated",
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
-    ".next/dev/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }

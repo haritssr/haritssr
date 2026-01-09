@@ -11,7 +11,10 @@ export default function LeftBar() {
   const lastSegment = segments.at(-1);
   return (
     <div className="hidden border-r border-b border-l sm:col-span-1 sm:block">
-      <Link className="sticky top-[45px] block border-b bg-white px-4 py-2 font-medium" href="/blog">
+      <Link
+        className="sticky top-[45px] block border-b bg-white px-4 py-2 font-medium"
+        href="/blog"
+      >
         Blog
       </Link>
 
@@ -27,7 +30,9 @@ export default function LeftBar() {
             return (
               <Link
                 className={`${
-                  lastSegment === article.slug ? "text-action" : "text-zinc-800 hover:text-action"
+                  lastSegment === article.slug
+                    ? "text-action"
+                    : "text-zinc-800 hover:text-action"
                 } rounded-md px-2 py-1 text-sm`}
                 href={`/blog/${article.slug}`}
                 key={article.slug}

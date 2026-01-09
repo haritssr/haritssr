@@ -1,4 +1,4 @@
-export type ExperiencesDataType = {
+export interface ExperiencesDataType {
   project_name: string;
   about_client: {
     logo_src: string;
@@ -21,7 +21,7 @@ export type ExperiencesDataType = {
   };
   figma: string[];
   skills: string;
-};
+}
 
 export const ExperiencesData: ExperiencesDataType[] = [
   {

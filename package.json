@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "d": "NODE_OPTIONS=\"--max-old-space-size=12288\" next dev",
     "build": "next build",
     "start": "next start",
     "type-coverage": "type-coverage",

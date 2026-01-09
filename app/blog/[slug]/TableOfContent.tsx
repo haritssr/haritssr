@@ -8,7 +8,9 @@ export default function TableOfContents({ title }: { title: string }) {
   return (
     <section className="hidden sm:col-span-1 sm:block sm:border-r sm:border-b">
       <div className="sticky top-[45px]">
-        <div className="border-b bg-white px-5 py-2 text-zinc-500">In this page</div>
+        <div className="border-b bg-white px-5 py-2 text-zinc-500">
+          In this page
+        </div>
 
         <div className="space-y-2 overflow-y-auto sm:p-5">
           {articleTOC.map((heading) => {
@@ -19,7 +21,11 @@ export default function TableOfContents({ title }: { title: string }) {
               .join("-");
 
             return (
-              <Link className="block text-sm text-zinc-500 hover:text-zinc-700" href={`#${slug}`} key={heading}>
+              <Link
+                className="block text-sm text-zinc-500 hover:text-zinc-700"
+                href={`#${slug}`}
+                key={heading}
+              >
                 {capitalizeFirstLetter(heading)}
               </Link>
             );
