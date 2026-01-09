@@ -3,6 +3,22 @@
 import { ContactData } from "data/AboutData";
 import Image from "next/image";
 
+function boldUsername(text: string, username = "haritssr") {
+  const parts = text.split(username);
+
+  return (
+    <>
+      {parts.map((part, i) => (
+        <span key={part}>
+          {part}
+          {i < parts.length - 1 && <span className="text-zinc-800">{username}</span>}
+        </span>
+      ))}
+    </>
+  );
+}
+
+
 export default function ContactList() {
   return (
     <div className="justify-center self-center">
@@ -10,7 +26,7 @@ export default function ContactList() {
         {ContactData.points.map((each) => (
           <li className="cursor-pointer" key={each.link}>
             {each.link.startsWith("https://www.") ||
-            each.link.startsWith("https://www.") ? (
+              each.link.startsWith("https://www.") ? (
               <a
                 className="corner-squircle flex items-center space-x-2 rounded-xl border border-zinc-300 px-2 py-1.5 sm:mr-1.5 sm:py-1 sm:hover:bg-zinc-100"
                 href={each.link}
@@ -27,7 +43,7 @@ export default function ContactList() {
                   width={20}
                 />
 
-                <span className="text-zinc-500">{each.link.substring(12)}</span>
+                <span className="text-zinc-500">{boldUsername(each.link.substring(12))}</span>
               </a>
             ) : each.link.includes("@") ? (
               <a
@@ -42,7 +58,7 @@ export default function ContactList() {
                   title={each.link}
                   width={20}
                 />
-                <span className="text-zinc-500">{each.link}</span>
+                <span className="text-zinc-500">{boldUsername(each.link)}</span>
               </a>
             ) : null}
           </li>
