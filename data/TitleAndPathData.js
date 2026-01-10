@@ -1,7 +1,6 @@
-// title cannot be capital
 export const TitleAndPathData = [
   {
-    title: "home",
+    title: "Home",
     path: (
       <>
         <path
@@ -14,7 +13,7 @@ export const TitleAndPathData = [
   },
 
   {
-    title: "experiences",
+    title: "Experiences",
     path: (
       <>
         <path
@@ -27,7 +26,7 @@ export const TitleAndPathData = [
   },
 
   {
-    title: "blog",
+    title: "Blog",
     path: (
       <>
         <path
@@ -40,7 +39,7 @@ export const TitleAndPathData = [
   },
 
   {
-    title: "experiments",
+    title: "Experiments",
     path: (
       <>
         <path
@@ -53,7 +52,7 @@ export const TitleAndPathData = [
   },
 
   {
-    title: "pure",
+    title: "Pure",
     path: (
       <>
         <path
