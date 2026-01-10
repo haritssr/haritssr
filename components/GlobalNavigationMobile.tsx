@@ -10,16 +10,11 @@ export default function GlobalNavigationMobile() {
     <div className="sticky bottom-0 block w-full border-zinc-200 border-t bg-white/90 saturate-150 backdrop-blur-lg sm:hidden">
       <div className="flex w-full items-center">
         {TitleAndPathData.map(({ title, path }) => (
-          <IconWrapper key={title} path={path} to={`/${title}`} />
+          <IconWrapper key={title} path={path} to={title} />
         ))}
       </div>
     </div>
   );
-}
-
-function capitalizeFirstLetter(to: string): string {
-  const capitalize = to.substring(1).charAt(0).toUpperCase() + to.slice(2);
-  return capitalize;
 }
 
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
@@ -27,9 +22,9 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const CurrentPageBaseRoute = pathname?.split("/")[1];
 
   let color: string;
-  if (pathname === to) {
+  if (pathname === `/${to.charAt(0).toLowerCase()}${to.slice(1)}`) {
     color = "text-action";
-  } else if (pathname === "/" && to === "/home") {
+  } else if (pathname === "/" && to === "Home") {
     color = "text-action";
   } else if (CurrentPageBaseRoute === to.substring(1)) {
     color = "text-action";
@@ -40,7 +35,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   return (
     <Link
       className="block w-1/5 active:scale-95"
-      href={`${to === "/home" ? "/" : to}`}
+      href={`${to === "Home" ? "/" : `/${to.charAt(0).toLowerCase()}${to.slice(1)}`}`}
     >
       <div className="flex flex-col items-center justify-center py-[5px]">
         <svg
@@ -55,10 +50,9 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
           {path}
         </svg>
 
-        <div className={`-mt-px text-[11px] leading-[15px] ${color}`}>
-          {capitalizeFirstLetter(to)}
+        <div className={`-mt-px text-[11px] leading-[15px] ${color}`}>{to}
         </div>
       </div>
-    </Link>
+    </Link >
   );
 };
