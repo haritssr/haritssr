@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import type React from "react";
 import { useInView } from "react-intersection-observer";
+import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 import Footer from "./Footer";
 import GlobalNavigation from "./GlobalNavigation";
 import { GitHubIcon } from "./Icons";
@@ -92,7 +92,7 @@ export default function LayoutToExperiments({
       </main>
 
       <Footer />
-      <GlobalNavigationMobile />
+      <BottomBar />
     </>
   );
 }
