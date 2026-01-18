@@ -1,6 +1,6 @@
 type fisikaType = Array<{
   domain_name: string;
-  chapters: Array<{ chapter_name: string; topics: Array<string> } | undefined>;
+  chapters: Array<{ chapter_name: string; topics: string[] } | undefined>;
   // chapters: { chapter_name: string; topics: string[] }[] | undefined[];
 }>;
 
