@@ -2,9 +2,9 @@
 
 import Head from "next/head";
 import { usePathname } from "next/navigation";
+import BottomBar from "./BottomBar";
 import Footer from "./Footer";
 import GlobalNavigation from "./GlobalNavigation";
-import GlobalNavigationMobile from "./GlobalNavigationMobile";
 
 interface LayoutType {
   children: React.ReactNode;
@@ -50,7 +50,7 @@ export default function Layout({
       </main>
 
       <Footer />
-      <GlobalNavigationMobile />
+      <BottomBar />
     </>
   );
 }

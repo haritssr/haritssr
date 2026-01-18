@@ -3,8 +3,8 @@ import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import BottomBar from "@/components/BottomBar";
 import Footer from "@/components/Footer";
-import GlobalNavigationMobile from "@/components/GlobalNavigationMobile";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,7 +54,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <GlobalNavigationMobile />
+          <BottomBar />
         </NuqsAdapter>
       </body>
     </html>

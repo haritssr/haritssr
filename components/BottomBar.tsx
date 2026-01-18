@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type React from "react";
 
-export default function GlobalNavigationMobile() {
+export default function BottomBar() {
   return (
     <div className="sticky bottom-0 block w-full border-zinc-200 border-t bg-white/90 saturate-150 backdrop-blur-lg sm:hidden">
       <div className="flex w-full items-center">
