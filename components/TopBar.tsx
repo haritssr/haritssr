@@ -4,7 +4,7 @@ import Link from "next/link";
 import Destination from "@/components/Destination";
 import { GitHubIcon } from "./Icons";
 
-export default function GlobalNavigation() {
+export default function TopBar() {
   return (
     <nav className="sticky top-0 z-30 border-zinc-200 border-b bg-white/90 saturate-150 backdrop-blur-lg">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-3 py-2.5 lg:px-0">

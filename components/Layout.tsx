@@ -4,7 +4,7 @@ import Head from "next/head";
 import { usePathname } from "next/navigation";
 import BottomBar from "./BottomBar";
 import Footer from "./Footer";
-import GlobalNavigation from "./GlobalNavigation";
+import TopBar from "./TopBar";
 
 interface LayoutType {
   children: React.ReactNode;
@@ -43,7 +43,7 @@ export default function Layout({
         <link href="/static/favicons/site.webmanifest" rel="manifest" />
       </Head>
 
-      <GlobalNavigation />
+      <TopBar />
 
       <main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
         {children}

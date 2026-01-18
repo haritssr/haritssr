@@ -10,8 +10,8 @@ import { useInView } from "react-intersection-observer";
 import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "./Footer";
-import GlobalNavigation from "./GlobalNavigation";
 import { GitHubIcon } from "./Icons";
+import TopBar from "./TopBar";
 
 interface LayoutToExperimentsType {
   children: React.ReactNode;
@@ -51,7 +51,7 @@ export default function LayoutToExperiments({
         <link href="/static/favicons/site.webmanifest" rel="manifest" />
       </Head>
 
-      <GlobalNavigation />
+      <TopBar />
 
       <main className="mx-auto flex max-w-5xl sm:-mt-px sm:gap-10 sm:px-5 xl:px-0">
         <div className="grid min-h-screen w-full max-w-5xl grid-cols-1 sm:grid-cols-4">

@@ -1,4 +1,4 @@
-import GlobalNavigation from "@/components/GlobalNavigation";
+import TopBar from "@/components/TopBar";
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -49,7 +49,7 @@ export default function RootLayout({
     <html className={inter.className} lang="en">
       <body>
         <NuqsAdapter>
-          <GlobalNavigation />
+          <TopBar />
           <main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
             {children}
           </main>
