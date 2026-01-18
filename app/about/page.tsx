@@ -187,7 +187,7 @@ export default function About() {
                     .join("-")}`}
                 >
                   <div className="text-tiny">Details</div>
-                  <ChevronRightIcon className="h-4 w-4 stroke-2 pt-[2px]" />
+                  <ChevronRightIcon className="h-4 w-4 stroke-2 pt-0.5" />
                 </Link>
               </div>
               <div className="mt-1.5 space-y-1.5 pl-7 text-zinc-500">
