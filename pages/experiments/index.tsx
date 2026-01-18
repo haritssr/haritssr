@@ -5,8 +5,9 @@ import { PageTitle } from "@/components/SubTitle";
 
 export default function ExperimentsPage() {
   let totalExperiment = 0;
-  for (let i = 0; i < ExperimentsData.length; i++) {
-    totalExperiment += ExperimentsData[i].links.length;
+
+  for (const experiment of ExperimentsData) {
+    totalExperiment += experiment.links.length;
   }
 
   return (
