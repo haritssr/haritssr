@@ -50,9 +50,8 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
           {path}
         </svg>
 
-        <div className={`-mt-px text-[11px] leading-[15px] ${color}`}>{to}
-        </div>
+        <div className={`-mt-px text-[11px] leading-[15px] ${color}`}>{to}</div>
       </div>
-    </Link >
+    </Link>
   );
 };
