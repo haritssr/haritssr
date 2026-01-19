@@ -5,7 +5,6 @@ import { ExperiencesData } from "data/ExperiencesData";
 import { NonFormalEducationData } from "data/NonFormalEducationData";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import ExternalLink from "@/components/ExternalLink";
 import SecondaryButton from "@/components/SecondaryButton";
 
@@ -13,6 +12,55 @@ export const metadata: Metadata = {
   title: "About",
   description: "About Harits Syah",
 };
+
+import Link from "next/link";
+
+interface Props {
+  value: string;
+}
+
+export function SmartLink({ value }: Props) {
+  if (value.startsWith("https://www.")) {
+    return (
+      <a
+        className="hover:text-zinc-800 hover:underline"
+        href={value}
+        rel="noreferrer noopener"
+        target="_blank"
+        title={value}
+      >
+        {value.slice(12)}
+      </a>
+    );
+  }
+
+  if (value.startsWith("https://")) {
+    return (
+      <a
+        className="hover:text-zinc-800 hover:underline"
+        href={value}
+        rel="noreferrer noopener"
+        target="_blank"
+        title={value}
+      >
+        {value.slice(8)}
+      </a>
+    );
+  }
+
+  if (value.includes("@")) {
+    return (
+      <a
+        className="hover:text-zinc-800 hover:underline"
+        href={`mailto:${value}`}
+      >
+        {value}
+      </a>
+    );
+  }
+
+  return <span>{value}</span>;
+}
 
 export default function About() {
   return (
@@ -55,36 +103,7 @@ export default function About() {
                 src={each.icon}
                 width={20}
               />
-              {each.link.startsWith("https://www.") ? (
-                <a
-                  className="hover:text-zinc-800 hover:underline"
-                  href={each.link}
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  title={each.link}
-                >
-                  {each.link.slice(12)}
-                </a>
-              ) : each.link.startsWith("https://") ? (
-                <a
-                  className="hover:text-zinc-800 hover:underline"
-                  href={each.link}
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  title={each.link}
-                >
-                  {each.link.slice(8)}
-                </a>
-              ) : each.link.includes("@") ? (
-                <a
-                  className="hover:text-zinc-800 hover:underline"
-                  href={`mailto:${each.link}`}
-                >
-                  {each.link}
-                </a>
-              ) : (
-                each.link
-              )}
+              <SmartLink value={each.link} />
             </li>
           ))}
         </ul>
@@ -100,36 +119,7 @@ export default function About() {
               <ul className="block list-inside divide-y divide-zinc-200/70 border-zinc-200/70 border-t border-b sm:list-disc">
                 {section.points.map((point) => (
                   <li className="py-2 text-zinc-500" key={point}>
-                    {point.startsWith("https://www.") ? (
-                      <a
-                        className="hover:text-zinc-800 hover:underline"
-                        href={point}
-                        rel="noreferrer noopener"
-                        target="_blank"
-                        title={point}
-                      >
-                        {point.slice(12)}
-                      </a>
-                    ) : point.startsWith("https://") ? (
-                      <a
-                        className="hover:text-zinc-800 hover:underline"
-                        href={point}
-                        rel="noreferrer noopener"
-                        target="_blank"
-                        title={point}
-                      >
-                        {point.slice(8)}
-                      </a>
-                    ) : point.includes("@") ? (
-                      <a
-                        className="hover:text-zinc-800 hover:underline"
-                        href={`mailto:${point}`}
-                      >
-                        {point}
-                      </a>
-                    ) : (
-                      point
-                    )}
+                    <SmartLink value={point} />
                   </li>
                 ))}
               </ul>

@@ -4,28 +4,28 @@ import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
-type Base = {
+interface Base {
   id: string;
   title: string;
-};
+}
 
-type GenericTypeSelect<TValue> = {
+interface GenericTypeSelect<TValue> {
   values: TValue[];
   onChange: (value: TValue) => void;
   selectType: string;
-};
+}
 
-type Subject = {
+interface Subject {
   id: string;
   title: string;
   author: string;
-};
+}
 
-type Teacher = {
+interface Teacher {
   id: string;
   title: string;
   region: string;
-};
+}
 
 const subjects: Subject[] = [
   { id: "1", title: "Math", author: "Haris Lab" },
@@ -46,7 +46,9 @@ function GenericSelectComponent<TValue extends Base>({
   //will fire if the option choosed (after click)
   const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const val = values.find((value) => value.id === event.target.value);
-    if (val) onChange(val);
+    if (val) {
+      onChange(val);
+    }
   };
 
   return (

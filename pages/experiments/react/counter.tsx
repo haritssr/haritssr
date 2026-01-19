@@ -12,7 +12,9 @@ export default function Counter() {
   const [second, setSecond] = useState(0);
   const [play, setPlay] = useState(false);
   useEffect(() => {
-    if (!play) return;
+    if (!play) {
+      return;
+    }
     const interval = setInterval(() => {
       setSecond((prev) => prev + 1);
     }, 100);
@@ -29,6 +31,16 @@ export default function Counter() {
     setPlay(false);
   }, []);
 
+  let label: string;
+
+  if (play) {
+    label = "Stop";
+  } else if (second > 0) {
+    label = "Continue";
+  } else {
+    label = "Start";
+  }
+
   return (
     <LayoutToExperiments domain="React" title="Counter">
       <SubTitle>Counter</SubTitle>
@@ -41,11 +53,7 @@ export default function Counter() {
         tabIndex={0}
         type="button"
       >
-        {play
-          ? "Stop"
-          : play === false && second > 0
-            ? "Continue"
-            : play === false && second === 0 && "Start"}
+        {label}
       </button>
       <button
         className="cursor-pointer select-none hover:text-action"

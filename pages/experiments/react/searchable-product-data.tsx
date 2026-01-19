@@ -71,7 +71,7 @@ const ProductTable = ({
   filterText: string;
   inStockOnly: boolean;
 }) => {
-  const rows: Array<JSX.Element> = [];
+  const rows: JSX.Element[] = [];
   let lastCategory: string | null = null;
 
   // for (const product of products) {
@@ -79,9 +79,13 @@ const ProductTable = ({
     //couldn't destructure product in as a '({caterogry, name, stocked} : productDataType)' in forEach callback parameter because <ProductRow/> below need 'product' variabel
     const { category, name, stocked } = product;
 
-    if (name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) return;
+    if (name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
+      return;
+    }
 
-    if (inStockOnly && !stocked) return;
+    if (inStockOnly && !stocked) {
+      return;
+    }
 
     if (category !== lastCategory) {
       rows.push(<ProductCategoryRow category={category} key={category} />);

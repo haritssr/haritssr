@@ -1,12 +1,4 @@
-import {
-  type JSX,
-  type JSXElementConstructor,
-  type ReactElement,
-  type ReactNode,
-  type ReactPortal,
-  useReducer,
-  useState,
-} from "react";
+import { useReducer, useState } from "react";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
@@ -19,36 +11,35 @@ const initialTask = [
 ];
 
 //NOTES
-/* 
-  - Jika id dimulai dari 1 maka akan error, karena ada 2 key yang sama yaitu key 3
-*/
+/*
+    - Jika id dimulai dari 1 maka akan error, karena ada 2 key yang sama yaitu key 3
+  */
 
 // MASALAH
 /*
-  - GIMANA CARANYA SUPAYA TASK YANG DITAMBAHKAN TIDAK BISA EMPTY STRING??
-  - Ketika tombol edit ditekan, checklist otomatis true, padahal bukan itu maunya
-  - Ketika tombol edit ditekan, checklist otomasis true, tapi sebenarnya checklist false, dan ketika checklist itu diklik maka checklist keliatannya false, tapi setelah menekan tombol save checklist sebenarnya true
-  - Ketikda klik dua kali secara cepat pada sebuah kata, malah men-select kata nya, dan tiga kali secara cepat malah menyelek kalimat, padahal mengklik pada kata di task berguna untuk menchecklist (karena pakai <label/>)
-*/
+    - GIMANA CARANYA SUPAYA TASK YANG DITAMBAHKAN TIDAK BISA EMPTY STRING??
+    - Ketika tombol edit ditekan, checklist otomatis true, padahal bukan itu maunya
+    - Ketika tombol edit ditekan, checklist otomasis true, tapi sebenarnya checklist false, dan ketika checklist itu diklik maka checklist keliatannya false, tapi setelah menekan tombol save checklist sebenarnya true
+    - Ketikda klik dua kali secara cepat pada sebuah kata, malah men-select kata nya, dan tiga kali secara cepat malah menyelek kalimat, padahal mengklik pada kata di task berguna untuk menchecklist (karena pakai <label/>)
+  */
 
 export default function UseReducerTodoList() {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTask);
-  function handleAddTask(text) {
-    dispatch({
-      type: "added",
-      id: nextId++,
-      text,
-    });
+  function handleAddTask(text: string) {
+    if (!text.trim()) {
+      return;
+    }
+    dispatch({ type: "added", id: nextId++, text });
   }
 
-  function handleChangeTask(task) {
+  function handleChangeTask(task: Task) {
     dispatch({
       type: "changed",
       task,
     });
   }
 
-  function handleDeleteTask(taskId) {
+  function handleDeleteTask(taskId: number) {
     dispatch({
       type: "deleted",
       id: taskId,
@@ -76,13 +67,18 @@ export default function UseReducerTodoList() {
   );
 }
 
-interface taskType {
+interface Task {
   id: number;
   text: string;
   done: boolean;
 }
 
-function tasksReducer(tasks: taskType[], action) {
+type TaskAction =
+  | { type: "added"; id: number; text: string }
+  | { type: "changed"; task: Task }
+  | { type: "deleted"; id: number };
+
+function tasksReducer(tasks: Task[], action: TaskAction): Task[] {
   switch (action.type) {
     case "added": {
       return [
@@ -101,7 +97,8 @@ function tasksReducer(tasks: taskType[], action) {
       return tasks.filter((t) => t.id !== action.id);
     }
     default: {
-      throw Error(`Unknown action:${action.type}`);
+      const _exhaustive: never = action;
+      throw new Error(`Unhandled action: ${_exhaustive}`);
     }
   }
 }
@@ -133,7 +130,7 @@ function AddTask({ onAddTask }) {
 function TaskList({ tasks, onChangeTask, onDeleteTask }) {
   return (
     <ul>
-      {tasks.map((task) => (
+      {tasks.map((task: Task) => (
         <li key={task.id}>
           <IndividualTask
             onChange={onChangeTask}
@@ -150,27 +147,8 @@ function TaskList({ tasks, onChangeTask, onDeleteTask }) {
 function IndividualTask({ task, onChange, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   // after checkbox
-  let taskContent:
-    | string
-    | number
-    | bigint
-    | boolean
-    | JSX.Element
-    | Iterable<ReactNode>
-    | Promise<
-        | string
-        | number
-        | bigint
-        | boolean
-        | ReactPortal
-        // biome-ignore lint/suspicious/noExplicitAny: ReactElement requires any for JSXElementConstructor
-        | ReactElement<unknown, string | JSXElementConstructor<any>>
-        | Iterable<ReactNode>
-        | null
-        | undefined
-      >
-    | null
-    | undefined;
+  let taskContent: React.ReactNode;
+
   if (isEditing) {
     taskContent = (
       <>

@@ -17,14 +17,14 @@ export default function Basic() {
   );
 }
 
-type Person = {
+interface Person {
   firstName: string;
   lastName: string;
   age: number;
   visits: number;
   status: string;
   progress: number;
-};
+}
 
 const defaultData: Person[] = [
   {

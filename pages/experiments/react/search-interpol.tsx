@@ -60,7 +60,9 @@ export default function SearchInterpol() {
       setNotices(data._embedded.notices);
       setLoading(false);
     }
-    if (debouncedSearch) fetchData();
+    if (debouncedSearch) {
+      fetchData();
+    }
   }, [debouncedSearch]);
 
   return (

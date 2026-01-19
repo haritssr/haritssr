@@ -22,7 +22,7 @@ function useDebounce(value: string, delay: number) {
 export default function SearchTable() {
   const [query, setQuery] = useState<string>("");
   // biome-ignore lint/suspicious/noExplicitAny: API response type is unknown
-  const [users, setUsers] = useState<Array<any>>([]);
+  const [users, setUsers] = useState<any[]>([]);
 
   const debouncedSearch = useDebounce(query, 1000);
 

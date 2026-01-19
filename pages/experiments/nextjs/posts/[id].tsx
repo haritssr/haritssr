@@ -31,7 +31,7 @@ export default function Post({ postData }) {
 }
 
 //Return an array of possible value for id
-export async function getStaticPaths() {
+export function getStaticPaths() {
   const paths = getAllPostIds();
   return {
     paths,

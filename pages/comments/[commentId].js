@@ -1,6 +1,6 @@
 import { comments } from "../../data/comments";
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   //    this is possible but unnecessary, since the data already in app
   //   const res = await fetch('/api/comment');
   //   const data = await res.json();
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
+export function getStaticProps(context) {
   const { commentId } = context.params;
 
   /**

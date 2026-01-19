@@ -3,7 +3,7 @@ import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 import { getSortedPostsData } from "../../../../utils/posts";
 
-export async function getStaticProps() {
+export function getStaticProps() {
   const allPostsData = getSortedPostsData();
   return {
     props: {

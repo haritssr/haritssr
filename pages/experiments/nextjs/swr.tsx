@@ -7,13 +7,16 @@ const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
 export default function SWR() {
   const { data, error } = useSWR("/api/hello", fetcher);
-  if (error) return "An error has occurred.";
-  if (!data)
+  if (error) {
+    return "An error has occurred.";
+  }
+  if (!data) {
     return (
       <LayoutToExperiments domain="Nextjs" title="Loading...">
         <div>No Data</div>
       </LayoutToExperiments>
     );
+  }
 
   return (
     <LayoutToExperiments domain="Nextjs" title="SWR">
