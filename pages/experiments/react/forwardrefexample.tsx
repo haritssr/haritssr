@@ -88,10 +88,14 @@ function MyVideoPlayer() {
   const ref = useRef<HTMLVideoElement>(null);
 
   function _handlePlay() {
-    if (ref.current) ref.current.play();
+    if (ref.current) {
+      ref.current.play();
+    }
   }
   function handlePause() {
-    if (ref.current) ref.current.pause();
+    if (ref.current) {
+      ref.current.pause();
+    }
   }
   return (
     <>

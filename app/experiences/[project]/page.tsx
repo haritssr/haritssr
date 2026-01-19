@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "something",
 };
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return ExperiencesData.map(({ project_name }) => {
     return {
       params: { project: project_name.toLowerCase().split(" ").join("-") },

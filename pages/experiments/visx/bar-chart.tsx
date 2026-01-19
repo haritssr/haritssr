@@ -95,7 +95,9 @@ export default function BarChart() {
                   event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>
                 ) => {
                   const point = localPoint(event);
-                  if (!point) return;
+                  if (!point) {
+                    return;
+                  }
                   showTooltip({
                     tooltipData: datum,
                     tooltipLeft: point.x,

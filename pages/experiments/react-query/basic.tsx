@@ -16,8 +16,12 @@ function Example() {
   const { isLoading, error, data, isFetching } = useQuery(["repoData"], () =>
     fetch("/api/react-query-basic").then((res) => res.json())
   );
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>An error has occurred</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>An error has occurred</div>;
+  }
   return (
     <div>
       <p>{isFetching ? "Updating..." : ""}</p>

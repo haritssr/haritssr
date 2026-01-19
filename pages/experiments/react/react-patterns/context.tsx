@@ -9,10 +9,10 @@ export default function Context() {
   );
 }
 
-type HidableCardContextType = {
+interface HidableCardContextType {
   hidden: boolean;
   toggle: () => void;
-};
+}
 
 const HidableCardContext = createContext<HidableCardContextType | null>(null);
 

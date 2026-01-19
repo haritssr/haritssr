@@ -12,7 +12,7 @@ const initialTask = [
 ];
 
 //NOTES
-/* 
+/*
   - Jika id dimulai dari 1 maka akan error, karena ada 2 key yang sama yaitu key 3
 */
 
@@ -101,7 +101,7 @@ function tasksReducer(draft: taskType[], action) {
       return draft.filter((t) => t.id !== action.id);
     }
     default: {
-      throw Error(`Unknown action:${action.type}`);
+      throw new Error(`Unknown action:${action.type}`);
     }
   }
 }
