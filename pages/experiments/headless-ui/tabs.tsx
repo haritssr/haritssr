@@ -1,4 +1,4 @@
-import { Tab } from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
@@ -87,8 +87,8 @@ function Example1() {
   });
 
   return (
-    <Tab.Group as="div" className="w-full max-w-md px-2 py-16 sm:px-0">
-      <Tab.List className="flex space-x-1 rounded-md border border-zinc-300 bg-zinc-100 p-1">
+    <TabGroup as="div" className="w-full max-w-md px-2 py-16 sm:px-0">
+      <TabList className="flex space-x-1 rounded-md border border-zinc-300 bg-zinc-100 p-1">
         {Object.keys(categories).map((category) => (
           <Tab
             as="div"
@@ -106,18 +106,17 @@ function Example1() {
             {category}
           </Tab>
         ))}
-      </Tab.List>
-      <Tab.Panels className="mt-2 rounded-md border border-zinc-300">
+      </TabList>
+      <TabPanels className="mt-2 rounded-md border border-zinc-300">
         {/* Object.values(object) returns an 'array of string' from the keys of the object */}
         {/* Here's we looping the keys of the object 'categories' */}
-        {Object.values(categories).map((posts, idx) => (
-          <Tab.Panel
-            // biome-ignore lint/suspicious/noArrayIndexKey: static array from Object.values, index is stable
+        {Object.entries(categories).map(([category, posts]) => (
+          <TabPanel
             className={classNames(
               "rounded-xl bg-white p-1.5",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-hidden focus:ring-2"
             )}
-            key={idx}
+            key={category}
           >
             <ul>
               {posts.map((post) => (
@@ -129,26 +128,19 @@ function Example1() {
                     {post.title}
                   </h3>
 
-                  <ul className="mt-1 flex space-x-1 font-normal text-coolGray-500 text-xs leading-4">
+                  <ul className="mt-1 flex space-x-1 text-xs text-coolGray-500">
                     <li>{post.date}</li>
                     <li>&middot;</li>
                     <li>{post.commentCount} comments</li>
                     <li>&middot;</li>
                     <li>{post.shareCount} shares</li>
                   </ul>
-
-                  <span
-                    className={classNames(
-                      "absolute inset-0 rounded-md",
-                      "ring-blue-400 focus:z-10 focus:outline-hidden focus:ring-2"
-                    )}
-                  />
                 </li>
               ))}
             </ul>
-          </Tab.Panel>
+          </TabPanel>
         ))}
-      </Tab.Panels>
-    </Tab.Group>
+      </TabPanels>
+    </TabGroup>
   );
 }
