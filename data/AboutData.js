@@ -32,6 +32,7 @@ export const AboutData = [
       "https://www.vercel.com",
       "https://www.notion.so",
       "https://www.raycast.com",
+      "https://dub.co",
     ],
   },
   {
