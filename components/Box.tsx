@@ -10,9 +10,7 @@ export default function Box({
       <div className="select-none border-zinc-400/50 border-b bg-zinc-50 px-3 py-2 font-medium text-zinc-800">
         {title}
       </div>
-      <div className="flex h-72 items-center justify-center p-5">
-        <div>{children}</div>
-      </div>
+      <div className="p-5 space-y-5">{children}</div>
     </div>
   );
 }

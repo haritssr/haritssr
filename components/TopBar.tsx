@@ -52,4 +52,4 @@ export default function TopBar() {
   );
 }
 
-const links = ["experiences", "experiments", "blog", "pure", "about"];
+const links = ["experiences", "experiments", "blog", "pure"];
