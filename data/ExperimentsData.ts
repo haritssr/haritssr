@@ -39,7 +39,6 @@ export const ExperimentsData = [
       "useState Draggable Box",
       "useState Reacting To Input",
       "useEffect Title",
-      "useContext 1",
       "useContext Dark Mode",
       "useMemo 1",
       "useImperativeHandle",
@@ -125,8 +124,6 @@ export const ExperimentsData = [
       "Popover",
       "Radio Group",
       "Tabs",
-      "Combobox ExperimentsData",
-      "Combobox HeadlessUIData",
     ],
   },
   {
@@ -190,14 +187,7 @@ export const ExperimentsData = [
     title: "React Table",
     logoSrc: "/Icons/tanstack.jpg",
     description: "Headless UI for building tables & datagrids",
-    links: [
-      "Basic",
-      "Column Group",
-      "Column Ordering",
-      "Column Ordering DnD",
-      "Column Pinning",
-      "Column Visibility",
-    ],
+    links: ["Basic", "Column Group", "Column Ordering", "Column Pinning"],
   },
   {
     id: 15,

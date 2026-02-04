@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // Import all experiment components
@@ -112,6 +113,32 @@ import NotionNavbarDemo from "@/components/experiments/ui-explorations/NotionNav
 
 import VisxBarChartDemo from "@/components/experiments/visx/VisxBarChartDemo";
 import VisxPieChartDemo from "@/components/experiments/visx/VisxPieChartDemo";
+
+// Generate metadata for each experiment page
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ domain: string; experiment: string }>;
+}): Promise<Metadata> {
+  const { domain, experiment } = await params;
+
+  // Convert slug to title (e.g., "custom-scroll" -> "Custom Scroll")
+  const title = experiment
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  // Convert domain slug to display name (e.g., "tailwind-css" -> "Tailwind Css")
+  const domainDisplayName = domain
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return {
+    title: `${title} | ${domainDisplayName} Experiments`,
+    description: `${title} experiment in ${domainDisplayName}`,
+  };
+}
 
 // Experiment component mapping
 const experimentComponents: Record<
