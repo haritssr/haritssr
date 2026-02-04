@@ -1,13 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-// export default function handler(req, res) {
-//   res.status(200).json({ name: 'John Doe' })
-// }
-
-//this api used in /pages/experiments/nextjs/swr
-
-export default function handler(_req, res) {
-  res.status(200).json([
+// biome-ignore lint/suspicious/useAwait: Response.json() returns a Promise
+export async function GET() {
+  return Response.json([
     {
       id: "1",
       name: "Harits Syah",
