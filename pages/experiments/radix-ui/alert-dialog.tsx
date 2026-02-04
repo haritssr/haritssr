@@ -1,8 +1,16 @@
 import { AlertDialog } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
+
+interface AlertDialogDemoProps {
+  buttonTitle: string;
+  contentTitle: string;
+  contentDesc: string;
+  actionDesc: string;
+}
 
 export default function ExportedAlertDialog() {
   return (
@@ -38,7 +46,7 @@ function AlertDialogDemo({
   contentTitle,
   contentDesc,
   actionDesc,
-}) {
+}: AlertDialogDemoProps) {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger className="rounded-full border border-red-600 bg-white px-4 py-1 text-red-600 duration-100 hover:bg-red-50">

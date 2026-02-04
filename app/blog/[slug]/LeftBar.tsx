@@ -1,6 +1,6 @@
 "use client";
 
-import { allBlogs } from "contentlayer/generated";
+import { allBlogs } from "@content-collections";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
@@ -9,6 +9,7 @@ export default function LeftBar() {
   const pathname = usePathname();
   const segments = pathname?.split("/") as string[];
   const lastSegment = segments.at(-1);
+
   return (
     <div className="hidden border-r border-b border-l sm:col-span-1 sm:block">
       <Link
@@ -26,24 +27,22 @@ export default function LeftBar() {
             }
             return 1;
           })
-          .map((article) => {
-            return (
-              <Link
-                className={`${
-                  lastSegment === article.slug
-                    ? "text-action"
-                    : "text-zinc-800 hover:text-action"
-                } rounded-md px-2 py-1 text-sm`}
-                href={`/blog/${article.slug}`}
-                key={article.slug}
-              >
-                {article.slug
-                  .split("-")
-                  .map((a) => capitalizeFirstLetter(a))
-                  .join(" ")}
-              </Link>
-            );
-          })}
+          .map((article) => (
+            <Link
+              className={`${
+                lastSegment === article.slug
+                  ? "text-action"
+                  : "text-zinc-800 hover:text-action"
+              } rounded-md px-2 py-1 text-sm`}
+              href={`/blog/${article.slug}`}
+              key={article.slug}
+            >
+              {article.slug
+                .split("-")
+                .map((a) => capitalizeFirstLetter(a))
+                .join(" ")}
+            </Link>
+          ))}
       </div>
     </div>
   );

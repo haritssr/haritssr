@@ -20,7 +20,11 @@ export function generateStaticParams() {
   });
 }
 
-export default async function ExperiencesPage({ params }) {
+export default async function ExperiencesPage({
+  params,
+}: {
+  params: { project: string };
+}) {
   const { project } = await params;
   const experience: ExperiencesDataType = ExperiencesData.filter(
     (each_experience) =>

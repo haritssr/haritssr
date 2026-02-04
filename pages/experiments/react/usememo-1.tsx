@@ -1,12 +1,24 @@
 import {
+  type ChangeEvent,
   createContext,
   memo,
-  type SetStateAction,
   useContext,
   useState,
 } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
+
+interface NameInputAddressProps {
+  name: string;
+  address: string;
+  onChangeName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAddress: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+interface GreetingSelectorProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
 export default function UseMemo1() {
   const [name, setName] = useState("");
@@ -21,10 +33,10 @@ export default function UseMemo1() {
       <NameInputAddress
         address={address}
         name={name}
-        onChangeAddress={(e: { target: { value: SetStateAction<string> } }) =>
+        onChangeAddress={(e: ChangeEvent<HTMLInputElement>) =>
           setAddress(e.target.value)
         }
-        onChangeName={(e: { target: { value: SetStateAction<string> } }) =>
+        onChangeName={(e: ChangeEvent<HTMLInputElement>) =>
           setName(e.target.value)
         }
       />
@@ -34,7 +46,12 @@ export default function UseMemo1() {
   );
 }
 
-function NameInputAddress({ name, address, onChangeName, onChangeAddress }) {
+function NameInputAddress({
+  name,
+  address,
+  onChangeName,
+  onChangeAddress,
+}: NameInputAddressProps) {
   return (
     <div className="border p-2">
       <div className="">
@@ -63,7 +80,7 @@ const Greeting = memo(function Greeting({ name }: { name: string }) {
   );
 });
 
-function GreetingSelector({ value, onChange }) {
+function GreetingSelector({ value, onChange }: GreetingSelectorProps) {
   return (
     <div className="flex flex-col border p-2">
       <label>

@@ -3,12 +3,17 @@ import InternalLink from "@/components/InternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
-export default function Students({ students }) {
+interface Student {
+  id: number;
+  name: string;
+}
+
+export default function Students({ students }: { students: Student[] }) {
   return (
     <LayoutToExperiments domain="Nextjs" title="Students">
       <SubTitle>A list of students come from JSONPlaceholder API</SubTitle>
       <div className="flex flex-col space-y-3">
-        {students.map((a) => (
+        {students.map((a: Student) => (
           <InternalLink
             href={`/experiments/nextjs/students/${a.id}`}
             key={a.id}

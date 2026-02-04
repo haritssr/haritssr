@@ -2,7 +2,18 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "@/components/Layout";
 import TitleBack from "@/components/TitleBack";
 
-export default function DynamicPage({ person }) {
+interface Address {
+  city: string;
+}
+
+interface Person {
+  name: string;
+  email: string;
+  website: string;
+  address: Address;
+}
+
+export default function DynamicPage({ person }: { person: Person }) {
   return (
     <Layout browserTitle="Student Details" description="Student Details">
       <TitleBack href="All student" name="Student Details" />

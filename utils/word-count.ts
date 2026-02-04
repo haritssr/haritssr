@@ -12,7 +12,7 @@ export default function countWords(title: string): number {
       .filter((word) => word.length > 0).length;
     return wordCount;
   } catch (error) {
-    console.error(`Error reading the file: ${error.message}`);
+    console.error(`Error reading the file: ${(error as Error).message}`);
     return -1;
   }
 }

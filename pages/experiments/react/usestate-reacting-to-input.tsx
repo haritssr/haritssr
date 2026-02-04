@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { type SetStateAction, useState } from "react";
+import { type FormEvent, type SetStateAction, useState } from "react";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
@@ -22,7 +22,7 @@ export default function UseStateReactingToInput() {
 const Example = () => {
   const [answer, setAnswer] = useState("");
   //perubahan state error dari null ke string, sedangkan kita harus detect whether is null or not to display the error message from try catch async await block in handleSubmit, can i use trus/false instead of null/string ?
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState("typing");
   const router = useRouter();
   const Button = () => {
@@ -48,7 +48,7 @@ const Example = () => {
     );
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
     try {
@@ -56,7 +56,7 @@ const Example = () => {
       setStatus("success");
     } catch (err) {
       setStatus("typing");
-      setError(err.message);
+      setError((err as Error).message);
     }
   }
 

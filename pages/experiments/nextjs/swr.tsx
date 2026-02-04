@@ -32,7 +32,7 @@ export default function SWR() {
         component
       </SubTitle>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {data.map((d: { id: Key; name: string; age: number; city: string }) => (
+        {data.map((d: { id: Key; name: string; age: string; city: string }) => (
           <NameCard age={d.age} city={d.city} key={d.id} name={d.name} />
         ))}
       </div>
@@ -40,7 +40,13 @@ export default function SWR() {
   );
 }
 
-const NameCard = ({ name, age, city }) => {
+interface NameCardProps {
+  name: string;
+  age: string;
+  city: string;
+}
+
+const NameCard = ({ name, age, city }: NameCardProps) => {
   return (
     <div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
       <div className="font-semibold text-gray-700 text-xl">{name}</div>

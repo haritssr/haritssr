@@ -1,43 +1,12 @@
 "use client";
 
-import Link, { type LinkProps } from "next/link";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import type * as React from "react";
-
-type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
-  LinkProps & { href: string };
-
-const CustomLink: React.FC<CustomLinkProps> = (props) => {
-  const { href, children, ...rest } = props;
-
-  if (href.startsWith("/")) {
-    return (
-      <Link href={href} {...rest}>
-        {children}
-      </Link>
-    );
-  }
-
-  if (href.startsWith("#")) {
-    return <a {...props} />;
-  }
-
+// Content Collections compiles MDX to HTML
+export function Mdx({ html }: { html: string }) {
   return (
-    <a
-      className="text-zinc-800"
-      rel="noopener noreferrer"
-      target="_blank"
-      {...props}
+    <article
+      className="prose prose-zinc max-w-none"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: MDX is compiled safely by Content Collections
+      dangerouslySetInnerHTML={{ __html: html }}
     />
-  );
-};
-
-export function Mdx({ code }: { code: string }) {
-  const Component = useMDXComponent(code);
-
-  return (
-    <article className="prose prose-zinc max-w-none">
-      <Component components={{ a: CustomLink }} />
-    </article>
   );
 }

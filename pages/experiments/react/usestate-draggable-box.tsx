@@ -1,20 +1,46 @@
-import { useState } from "react";
+import {
+  type ChangeEvent,
+  type PointerEvent,
+  type ReactNode,
+  useState,
+} from "react";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
-const initialPosition = {
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface Shape {
+  color: string;
+  position: Position;
+}
+
+interface BoxProps {
+  children: ReactNode;
+  color: string;
+  position: Position;
+  onMove: (dx: number, dy: number) => void;
+}
+
+interface BackgroundProps {
+  position: Position;
+}
+
+const initialPosition: Position = {
   x: 0,
   y: 0,
 };
 
 export default function UseStateDraggableBox() {
-  const [shape, setShape] = useState({
+  const [shape, setShape] = useState<Shape>({
     color: "orange",
     position: initialPosition,
   });
 
-  function handleMove(dx, dy) {
+  function handleMove(dx: number, dy: number) {
     setShape({
       ...shape,
       position: {
@@ -24,7 +50,7 @@ export default function UseStateDraggableBox() {
     });
   }
 
-  function handleColorChange(e) {
+  function handleColorChange(e: ChangeEvent<HTMLSelectElement>) {
     setShape({
       ...shape,
       color: e.target.value,
@@ -56,21 +82,21 @@ export default function UseStateDraggableBox() {
 }
 
 // initial value of useState should be null, can't {x: 0, y: 0}, or it will buggy like shit
-function Box({ children, color, position, onMove }) {
+function Box({ children, color, position, onMove }: BoxProps) {
   const [lastCoordinates, setLastCoordinates] = useState<{
     x: number;
     y: number;
   } | null>(null);
 
-  function handlePointerDown(e) {
-    e.target.setPointerCapture(e.pointerId);
+  function handlePointerDown(e: PointerEvent<HTMLDivElement>) {
+    (e.target as HTMLDivElement).setPointerCapture(e.pointerId);
     setLastCoordinates({
       x: e.clientX,
       y: e.clientY,
     });
   }
 
-  function handlePointerMove(e) {
+  function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
     if (lastCoordinates) {
       setLastCoordinates({
         x: e.clientX,
@@ -82,7 +108,7 @@ function Box({ children, color, position, onMove }) {
     }
   }
 
-  function handlePointerUp(_e) {
+  function handlePointerUp(_e: PointerEvent<HTMLDivElement>) {
     setLastCoordinates(null);
   }
 
@@ -109,7 +135,7 @@ function Box({ children, color, position, onMove }) {
   );
 }
 
-function Background({ position }) {
+function Background({ position }: BackgroundProps) {
   return (
     <div
       style={{

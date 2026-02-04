@@ -1,5 +1,4 @@
 import {
-  type Key,
   type ReactElement,
   type ReactNode,
   type ReactPortal,
@@ -9,6 +8,28 @@ import type { JSX } from "react/jsx-runtime";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
+interface Todo {
+  id: number;
+  title: string;
+  done: boolean;
+}
+
+interface AddTodoProps {
+  onAddTodo: (title: string) => void;
+}
+
+interface TaskListProps {
+  todos: Todo[];
+  onChangeTodo: (nextTodo: Todo) => void;
+  onDeleteTodo: (todoId: number) => void;
+}
+
+interface TaskProps {
+  todo: Todo;
+  onChange: (nextTodo: Todo) => void;
+  onDelete: (todoId: number) => void;
+}
+
 let nextId = 3;
 const initialTodos = [
   { id: 0, title: "Buy milk", done: true },
@@ -17,7 +38,7 @@ const initialTodos = [
 ];
 
 export default function UseStateTodoList() {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
   function handleAddTodo(title: string) {
     setTodos([
       ...todos,
@@ -28,7 +49,7 @@ export default function UseStateTodoList() {
       },
     ]);
   }
-  function handleChangeTodo(nextTodo) {
+  function handleChangeTodo(nextTodo: Todo) {
     setTodos(
       todos.map((t) => {
         if (t.id === nextTodo.id) {
@@ -58,7 +79,7 @@ export default function UseStateTodoList() {
   );
 }
 
-function AddTodo({ onAddTodo }) {
+function AddTodo({ onAddTodo }: AddTodoProps) {
   const [title, setTitle] = useState("");
   return (
     <div className="mb-5 space-y-2 sm:space-x-2 sm:space-y-0">
@@ -83,10 +104,10 @@ function AddTodo({ onAddTodo }) {
   );
 }
 
-function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
+function TaskList({ todos, onChangeTodo, onDeleteTodo }: TaskListProps) {
   return (
     <ul className="space-y-2">
-      {todos.map((todo: { id: Key }) => (
+      {todos.map((todo) => (
         <li key={todo.id}>
           <Task onChange={onChangeTodo} onDelete={onDeleteTodo} todo={todo} />
         </li>
@@ -95,7 +116,7 @@ function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
   );
 }
 
-function Task({ todo, onChange, onDelete }) {
+function Task({ todo, onChange, onDelete }: TaskProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   let todoContent:

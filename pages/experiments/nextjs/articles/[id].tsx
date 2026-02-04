@@ -2,17 +2,23 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "@/components/Layout";
 import TitleBack from "@/components/TitleBack";
 
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+
 //getStaticPaths in [id].tsx used to take dynamic-route-endpoint only, to ocntinue to getStaticProps
 //Alternative wihtout TypeScript -> export async function getStaticPaths() {...}
 export const getStaticPaths: GetStaticPaths = async () => {
   //fetch 20 of 100 data
   //https://stackoverflow.com/questions/52842039 how-to-limit-the-amount-of-data-returned-from-a-json-file-using-fetch
-  const posts = await fetch(
+  const posts: Post[] = await fetch(
     "https://jsonplaceholder.typicode.com/posts/?_limit=20"
   ).then((post) => post.json());
 
   // Mapping the posts array to new paths array with structure [{ params: { id: '1' }, { params: { id: '2' }]
-  const paths = posts.map((post: { id: { toString: () => unknown } }) => ({
+  const paths = posts.map((post) => ({
     params: {
       // Where from all of the retrived data, only the data.id is needed to dynamic route.
       // post.id is in json, change to string
@@ -31,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // context.params
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   //fetch specific data based on the id from the API endpoint for every page inside the next.js dynamic route
-  const posts = await fetch(
+  const posts: Post = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params?.id}`
   ).then((post) => post.json());
   return {
@@ -42,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 //Each dynamic pages
-export default function Halaman({ posts }) {
+export default function Halaman({ posts }: { posts: Post }) {
   return (
     <Layout browserTitle={posts.title} description={posts.title}>
       <TitleBack href="Articles" name={posts.title} />

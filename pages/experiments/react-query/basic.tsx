@@ -3,6 +3,19 @@ import type { Key } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
+interface PersonData {
+  id: number;
+  name: string;
+  age: number;
+  city: string;
+}
+
+interface NameCardProps {
+  name: string;
+  age: number;
+  city: string;
+}
+
 export default function UseQueryExample() {
   return (
     <LayoutToExperiments domain="React Query" title="Basic">
@@ -13,8 +26,9 @@ export default function UseQueryExample() {
 }
 
 function Example() {
-  const { isLoading, error, data, isFetching } = useQuery(["repoData"], () =>
-    fetch("/api/react-query-basic").then((res) => res.json())
+  const { isLoading, error, data, isFetching } = useQuery<PersonData[]>(
+    ["repoData"],
+    () => fetch("/api/react-query-basic").then((res) => res.json())
   );
   if (isLoading) {
     return <div>Loading...</div>;
@@ -26,12 +40,12 @@ function Example() {
     <div>
       <p>{isFetching ? "Updating..." : ""}</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {data.map(
+        {data?.map(
           (d: {
             id: Key | null | undefined;
-            name: unknown;
-            age: unknown;
-            city: unknown;
+            name: string;
+            age: number;
+            city: string;
           }) => (
             <NameCard age={d.age} city={d.city} key={d.id} name={d.name} />
           )
@@ -41,7 +55,7 @@ function Example() {
   );
 }
 
-const NameCard = ({ name, age, city }) => {
+const NameCard = ({ name, age, city }: NameCardProps) => {
   return (
     <div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
       <div className="font-semibold text-gray-700 text-xl">{name}</div>

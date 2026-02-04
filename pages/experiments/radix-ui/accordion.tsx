@@ -1,11 +1,17 @@
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Accordion } from "radix-ui";
+import type { ReactNode } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Section from "@/components/Section";
 import SubTitle from "@/components/SubTitle";
+
+interface AccordionComponentsProps {
+  title: string;
+  children: ReactNode;
+}
 
 export default function ExportedAccordion() {
   return (
@@ -41,7 +47,7 @@ export default function ExportedAccordion() {
   );
 }
 
-function AccordionComponents({ title, children }) {
+function AccordionComponents({ title, children }: AccordionComponentsProps) {
   return (
     <Accordion.Root className="w-full sm:w-1/3" type="multiple">
       <Accordion.Item value="item-1">

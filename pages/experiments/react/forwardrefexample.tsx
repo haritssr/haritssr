@@ -8,6 +8,11 @@ import {
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
+interface FormProps {
+  data: string;
+  onDataChange: Dispatch<SetStateAction<string>>;
+}
+
 interface propsType {
   label: string;
   otherProps?: unknown;
@@ -36,7 +41,7 @@ const MyInput = forwardRef(function MyInput(props: propsType, ref: any) {
   );
 });
 
-function Form({ data, onDataChange }) {
+function Form({ data, onDataChange }: FormProps) {
   const ref = useRef<HTMLInputElement>(null);
   function handleClick() {
     if (ref.current !== null) {

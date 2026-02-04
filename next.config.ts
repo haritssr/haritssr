@@ -1,5 +1,4 @@
-const { withContentlayer } = require("next-contentlayer");
-
+import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
 
 type ExtendedNextConfig = NextConfig & {
@@ -57,4 +56,4 @@ const nextConfig: ExtendedNextConfig = {
   },
 };
 
-module.exports = withContentlayer(nextConfig);
+export default withContentCollections(nextConfig);

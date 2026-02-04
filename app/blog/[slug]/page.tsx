@@ -1,4 +1,4 @@
-import { allBlogs } from "contentlayer/generated";
+import { allBlogs } from "@content-collections";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
@@ -8,6 +8,12 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Mdx } from "@/components/mdx";
 import LeftBar from "./LeftBar";
 import TableOfContents from "./TableOfContent";
+
+export function generateStaticParams() {
+  return allBlogs.map((blog) => ({
+    slug: blog.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
@@ -25,7 +31,6 @@ export async function generateMetadata({
     title,
     publishedAt: publishedTime,
     summary: description,
-    // image,
     slug: blogSlug,
   } = blog;
 
@@ -41,11 +46,7 @@ export async function generateMetadata({
       publishedTime,
       siteName: "Harits Syah Blog",
       url: `https://haritssr.vercel.app/blog/${blogSlug}`,
-      images: [
-        {
-          url: image,
-        },
-      ],
+      images: [{ url: image }],
       locale: "en-US",
       type: "article",
     },
@@ -58,13 +59,6 @@ export async function generateMetadata({
     robots: {
       index: true,
       follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
     },
   };
 }
@@ -98,6 +92,62 @@ function formatDate(date: string) {
   return `${fullDate} (${formattedDate})`;
 }
 
+// Process markdown to HTML
+async function markdownToHtml(content: string) {
+  const { unified } = await import("unified");
+  const remarkParse = await import("remark-parse");
+  const remarkGfm = await import("remark-gfm");
+  const remarkRehype = await import("remark-rehype");
+  const rehypeStringify = await import("rehype-stringify");
+
+  // Create processor with basic plugins
+  const processor = unified()
+    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
+    .use(remarkParse.default as any)
+    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
+    .use(remarkGfm.default as any)
+    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
+    .use(remarkRehype.default as any);
+
+  // Add optional plugins with error handling
+  try {
+    const rehypeSlug = await import("rehype-slug");
+    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
+    processor.use(rehypeSlug.default as any);
+  } catch {
+    // Skip if plugin fails
+  }
+
+  try {
+    const rehypeAutolinkHeadings = await import("rehype-autolink-headings");
+    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
+    processor.use(rehypeAutolinkHeadings.default as any, {
+      properties: {
+        className: ["anchor"],
+      },
+    });
+  } catch {
+    // Skip if plugin fails
+  }
+
+  try {
+    const rehypePrettyCode = await import("rehype-pretty-code");
+    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
+    processor.use(rehypePrettyCode.default as any, {
+      theme: "one-dark-pro",
+    });
+  } catch {
+    // Skip if plugin fails
+  }
+
+  // Add stringify at the end
+  // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
+  processor.use(rehypeStringify.default as any);
+
+  const result = await processor.process(content);
+  return result.toString();
+}
+
 export default async function Blog({
   params,
 }: {
@@ -109,6 +159,8 @@ export default async function Blog({
   if (!blog) {
     notFound();
   }
+
+  const html = await markdownToHtml(blog.content);
 
   return (
     <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
@@ -127,11 +179,11 @@ export default async function Blog({
         <div className="mt-2 mb-8 flex items-center text-sm">
           <p>{formatDate(blog.publishedAt)}</p>
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
-          <p>{blog.structuredData.wordCount} Words</p>
+          <p>{blog.wordCount} Words</p>
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
-          <p>{Math.ceil(blog.structuredData.wordCount / 200)} Min Read</p>
+          <p>{Math.ceil(blog.wordCount / 200)} Min Read</p>
         </div>
-        <Mdx code={blog.body.code} />
+        <Mdx html={html} />
       </Content>
       <TableOfContents
         title={blog.title.toLocaleLowerCase().split(" ").join("-")}

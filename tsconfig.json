@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "strictNullChecks": true,
     // "noUnusedLocals":true,
     "target": "es5",
@@ -8,7 +8,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -22,7 +22,7 @@
       "@/components/*": ["components/*"],
       "@/Icons": ["components/Icons"],
       "@/styles/*": ["styles/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "@content-collections": ["./.content-collections/generated"]
     },
     "incremental": true,
     "plugins": [
@@ -49,7 +49,7 @@
     "styles/*.css",
     "styles/*.module.css",
     ".next/types/**/*.ts",
-    ".contentlayer/generated",
+    ".content-collections/generated",
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts"

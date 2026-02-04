@@ -2,6 +2,11 @@ import LayoutToExperiments from "@/components/LayoutToExperiments";
 import Section from "@/components/Section";
 import SubTitle from "@/components/SubTitle";
 
+interface BoxProps {
+  name: string;
+  color: string;
+}
+
 export default function TailwindColorVSAppleColor() {
   return (
     <LayoutToExperiments
@@ -34,7 +39,7 @@ export default function TailwindColorVSAppleColor() {
   );
 }
 
-function Box({ name, color }) {
+function Box({ name, color }: BoxProps) {
   return (
     <div className="space-y-1">
       <div className="h-20 w-20 rounded" style={{ backgroundColor: color }} />

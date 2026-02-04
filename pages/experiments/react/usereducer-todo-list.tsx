@@ -23,6 +23,33 @@ const initialTask = [
     - Ketikda klik dua kali secara cepat pada sebuah kata, malah men-select kata nya, dan tiga kali secara cepat malah menyelek kalimat, padahal mengklik pada kata di task berguna untuk menchecklist (karena pakai <label/>)
   */
 
+interface Task {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+type TaskAction =
+  | { type: "added"; id: number; text: string }
+  | { type: "changed"; task: Task }
+  | { type: "deleted"; id: number };
+
+interface AddTaskProps {
+  onAddTask: (text: string) => void;
+}
+
+interface TaskListProps {
+  tasks: Task[];
+  onChangeTask: (task: Task) => void;
+  onDeleteTask: (taskId: number) => void;
+}
+
+interface IndividualTaskProps {
+  task: Task;
+  onChange: (task: Task) => void;
+  onDelete: (taskId: number) => void;
+}
+
 export default function UseReducerTodoList() {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTask);
   function handleAddTask(text: string) {
@@ -67,17 +94,6 @@ export default function UseReducerTodoList() {
   );
 }
 
-interface Task {
-  id: number;
-  text: string;
-  done: boolean;
-}
-
-type TaskAction =
-  | { type: "added"; id: number; text: string }
-  | { type: "changed"; task: Task }
-  | { type: "deleted"; id: number };
-
 function tasksReducer(tasks: Task[], action: TaskAction): Task[] {
   switch (action.type) {
     case "added": {
@@ -103,7 +119,7 @@ function tasksReducer(tasks: Task[], action: TaskAction): Task[] {
   }
 }
 
-function AddTask({ onAddTask }) {
+function AddTask({ onAddTask }: AddTaskProps) {
   const [text, setText] = useState("");
   return (
     <>
@@ -127,7 +143,7 @@ function AddTask({ onAddTask }) {
 }
 
 // a list of task
-function TaskList({ tasks, onChangeTask, onDeleteTask }) {
+function TaskList({ tasks, onChangeTask, onDeleteTask }: TaskListProps) {
   return (
     <ul>
       {tasks.map((task: Task) => (
@@ -144,7 +160,7 @@ function TaskList({ tasks, onChangeTask, onDeleteTask }) {
 }
 
 //every task
-function IndividualTask({ task, onChange, onDelete }) {
+function IndividualTask({ task, onChange, onDelete }: IndividualTaskProps) {
   const [isEditing, setIsEditing] = useState(false);
   // after checkbox
   let taskContent: React.ReactNode;

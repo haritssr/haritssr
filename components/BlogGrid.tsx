@@ -1,6 +1,6 @@
 "use client";
 
-import { allBlogs } from ".contentlayer/generated";
+import { allBlogs } from "@content-collections";
 import InternalLink from "./InternalLink";
 
 export default function BlogGrid() {

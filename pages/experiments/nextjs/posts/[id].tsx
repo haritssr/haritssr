@@ -3,7 +3,14 @@ import { getAllPostIds, getPostData } from "utils/posts";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
-export default function Post({ postData }) {
+interface PostData {
+  id: string;
+  title: string;
+  date: string;
+  contentHtml: string;
+}
+
+export default function Post({ postData }: { postData: PostData }) {
   return (
     <LayoutToExperiments domain="Nextjs" title={postData.title}>
       <SubTitle>
@@ -40,7 +47,7 @@ export function getStaticPaths() {
 }
 
 //Fetches neccesary data for the post with id
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: { params: { id: string } }) {
   const postData = await getPostData(params.id);
   return {
     props: { postData },

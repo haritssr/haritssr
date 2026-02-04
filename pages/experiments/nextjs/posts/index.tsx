@@ -3,6 +3,12 @@ import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 import { getSortedPostsData } from "../../../../utils/posts";
 
+interface Post {
+  id: string;
+  date: string;
+  title: string;
+}
+
 export function getStaticProps() {
   const allPostsData = getSortedPostsData();
   return {
@@ -12,12 +18,12 @@ export function getStaticProps() {
   };
 }
 
-export default function Posts({ allPostsData }) {
+export default function Posts({ allPostsData }: { allPostsData: Post[] }) {
   return (
     <LayoutToExperiments domain="Nextjs" title="Posts">
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
       <ul className="space-y-5">
-        {allPostsData.map(({ id, date, title }) => (
+        {allPostsData.map(({ id, date, title }: Post) => (
           <li key={id}>
             <Link className="block" href={`/experiments/nextjs/posts/${id}`}>
               <div className="font-medium text-zinc-700 hover:text-zinc-800">

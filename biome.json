@@ -45,6 +45,7 @@
       "!**/node_modules/**/*",
       "!**/.swc/**/*",
       "!**/.contentlayer/**/*",
+      "!**/.content-collections/**/*",
       "!**/.vscode/**/*"
     ]
   },

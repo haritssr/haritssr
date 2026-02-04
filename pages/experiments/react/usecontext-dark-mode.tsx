@@ -1,12 +1,28 @@
 import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/outline";
-import { createContext, useContext, useState } from "react";
+import { createContext, type ReactNode, useContext, useState } from "react";
 import LayoutToExperiments from "@/components/LayoutToExperiments";
 import SubTitle from "@/components/SubTitle";
 
-const ThemeContext = createContext("light");
+type Theme = "light" | "dark";
+
+const ThemeContext = createContext<Theme>("light");
+
+interface ToggleThemeButtonProps {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+}
+
+interface PanelProps {
+  title: string;
+  children: ReactNode;
+}
+
+interface ButtonProps {
+  children: ReactNode;
+}
 
 export default function UseContextDarkMode() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<Theme>("light");
   return (
     <LayoutToExperiments domain="React" title="useContext Dark Mode">
       <SubTitle>Yeah</SubTitle>
@@ -20,7 +36,7 @@ export default function UseContextDarkMode() {
   );
 }
 
-function ToggleThemeButton({ theme, setTheme }) {
+function ToggleThemeButton({ theme, setTheme }: ToggleThemeButtonProps) {
   return (
     <button
       className={`${
@@ -51,7 +67,7 @@ function Form() {
   );
 }
 
-function Panel({ title, children }) {
+function Panel({ title, children }: PanelProps) {
   const theme = useContext(ThemeContext);
   const className = `panel-${theme}`;
   return (
@@ -62,7 +78,7 @@ function Panel({ title, children }) {
   );
 }
 
-function Button({ children }) {
+function Button({ children }: ButtonProps) {
   const theme = useContext(ThemeContext);
   const className = `button-${theme}`;
   return (
