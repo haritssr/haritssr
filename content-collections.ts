@@ -16,6 +16,7 @@ const blogs = defineCollection({
     publishedAt: z.string(),
     summary: z.string(),
     topic: z.string(),
+    notionPageId: z.string(),
     image: z.string().optional(),
     content: z.string(),
   }),
