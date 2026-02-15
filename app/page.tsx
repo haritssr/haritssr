@@ -1,3 +1,4 @@
+import AIWorkflow from "@/components/home/AIWorkflow";
 import Blog from "@/components/home/Blog";
 import Contacts from "@/components/home/Contacts";
 import CV from "@/components/home/CV";
@@ -13,6 +14,7 @@ export default function Home() {
         <Experiences />
         <Experiments />
         <Blog />
+        <AIWorkflow />
         <CV />
         <OtherLinks />
       </div>

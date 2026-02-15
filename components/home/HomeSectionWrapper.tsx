@@ -26,9 +26,7 @@ export default function HomeSectionWrapper({
         </Link>
       </section>
       <div className="mb-16">
-        <div className="mt-3 mb-5 select-none text-lg text-zinc-500">
-          {explanation}
-        </div>
+        <div className="mt-3 mb-5 select-none text-lg text-zinc-500">{explanation}</div>
         <div className={className}>{children}</div>
       </div>
     </div>

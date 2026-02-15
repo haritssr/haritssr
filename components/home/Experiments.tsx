@@ -11,7 +11,7 @@ export default function Experiments() {
 
   return (
     <HomeSectionWrapper
-      explanation={`${totalExperiment} unique individual (per page) experiments across TypeScript-React ecosystem stack and collection of common user interfaces on the mobile and desktop web.`}
+      explanation={`${totalExperiment} experiments across the TypeScript and React ecosystem.`}
       id="experiments"
       topic="Experiments"
     >
