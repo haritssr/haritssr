@@ -8,11 +8,6 @@ export const ContactData = {
       name: "LinkedIn",
     },
     { icon: "/Icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
-    {
-      icon: "/Icons/outlook.jpg",
-      link: "haritssr@outlook.co.id",
-      name: "Outlook",
-    },
     { icon: "/Icons/x.png", link: "https://www.x.com/haritssr", name: "X" },
     {
       icon: "/Icons/github.jpg",
