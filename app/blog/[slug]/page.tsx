@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import type React from "react";
 import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { Mdx } from "@/components/mdx";
 import LeftBar from "./LeftBar";
 import TableOfContents from "./TableOfContent";
@@ -166,7 +165,6 @@ export default async function Blog({
     <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
       <LeftBar />
       <Content>
-        <Breadcrumbs />
         <div className="my-5">
           <BackButton href="/blog" name="All Articles" />
         </div>

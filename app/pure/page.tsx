@@ -23,8 +23,8 @@ import Box from "@/components/Box";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
+import { PageTitle } from "@/components/PageTitle";
 import Section from "@/components/Section";
-import { PageTitle } from "@/components/SubTitle";
 
 // import { Metadata } from "next";
 // can't do this, since metadata only possible on server, and this /pure is client, see "use client"

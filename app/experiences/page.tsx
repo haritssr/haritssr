@@ -1,20 +1,18 @@
 import { ExperiencesData } from "data/ExperiencesData";
+import { EXPERIENCES_DESCRIPTION } from "data/PageDescriptions";
 import type { Metadata } from "next";
 import ExperienceCard from "@/components/ExperienceCard";
-import { PageTitle } from "@/components/SubTitle";
+import { PageTitle } from "@/components/PageTitle";
 
 export const metadata: Metadata = {
   title: "Experiences",
-  description: "Detail informations on how projects I belong to being handled.",
+  description: EXPERIENCES_DESCRIPTION,
 };
 
 export default function ExperiencesPage() {
   return (
     <>
-      <PageTitle
-        description="Detail informations on how projects I belong to being handled."
-        title="Experiences"
-      />
+      <PageTitle description={EXPERIENCES_DESCRIPTION} title="Experiences" />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4">
         {ExperiencesData.map((d) => (
           <ExperienceCard

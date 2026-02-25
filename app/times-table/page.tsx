@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { PageTitle } from "@/components/SubTitle";
+import { PageTitle } from "@/components/PageTitle";
 import { IncrementButton } from "./IncrementButton";
 import TimesTableComponent from "./TimesTable";
 

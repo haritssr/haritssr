@@ -1,19 +1,17 @@
+import { BLOG_DESCRIPTION } from "data/PageDescriptions";
 import type { Metadata } from "next";
 import BlogGrid from "@/components/BlogGrid";
-import { PageTitle } from "@/components/SubTitle";
+import { PageTitle } from "@/components/PageTitle";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Read my thoughts on software development, design, and more.",
+  description: BLOG_DESCRIPTION,
 };
 
 export default function BlogPage() {
   return (
     <>
-      <PageTitle
-        description="Selected notes that I want to share to the world."
-        title="Blog"
-      />
+      <PageTitle description={BLOG_DESCRIPTION} title="Blog" />
       <BlogGrid />
     </>
   );
