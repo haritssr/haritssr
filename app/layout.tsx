@@ -1,10 +1,12 @@
-import TopBar from "@/components/TopBar";
-import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import BottomBar from "@/components/BottomBar";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
+import FooterSpacing from "@/components/FooterSpacing";
+import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
+import "../styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,11 +51,14 @@ export default function RootLayout({
     <html className={inter.className} lang="en">
       <body>
         <NuqsAdapter>
-          <TopBar />
+          <TopBarBorderOnScroll />
           <main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
             {children}
           </main>
-          <Footer />
+          <Breadcrumbs />
+          <FooterSpacing>
+            <Footer />
+          </FooterSpacing>
           <BottomBar />
         </NuqsAdapter>
       </body>

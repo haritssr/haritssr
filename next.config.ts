@@ -13,6 +13,15 @@ const nextConfig: ExtendedNextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
+  redirects() {
+    return [
+      {
+        source: "/experiments/ui-explorations/task",
+        destination: "/task",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
