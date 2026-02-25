@@ -1,48 +1,68 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Breadcrumbs() {
-  // e.g /experiments/react/usestate-form
-  const pathname = usePathname();
-  // ['experiments','react','usestate-form']
-  const routes = pathname?.split("/");
+const WHITESPACE_SPLIT_REGEX = /\s+/;
 
-  function getLinkFromRoutesUpToRoute(routes: string[], route: string) {
-    // route = 'react', so the value is 1
-    const indexOfCurrentRoute = routes?.indexOf(route);
-    // /experiments/react
-    const goto = routes.slice(0, indexOfCurrentRoute + 1).join("/");
-    return goto;
+export default function Breadcrumbs() {
+  const pathname = usePathname();
+
+  if (pathname === "/") {
+    return null;
   }
 
+  const segments = pathname.split("/").filter(Boolean);
+
   return (
-    <div className="sticky top-[45px] bg-white py-2 sm:-mx-5 sm:border-b sm:px-5">
-      <Link
-        className="text-zinc-500 hover:text-zinc-800 hover:underline"
-        href="/"
-      >
-        home
-      </Link>
-      {routes?.map((route, i, array) => {
-        // if the i is the last element of an array or the last route or the current route/page
-        return i === array.length - 1 ? (
-          // this is the current route/page
-          <span className="text-zinc-800" key={route}>
-            {route}
-          </span>
-        ) : (
-          <span key={route}>
-            <Link
-              className="text-zinc-500 hover:text-zinc-800 hover:underline"
-              href={`${getLinkFromRoutesUpToRoute(routes, route)}`}
-            >
-              {route}
-            </Link>
-            &nbsp;&nbsp;<span className="text-zinc-400">/</span>&nbsp;&nbsp;
-          </span>
-        );
-      })}
-    </div>
+    <nav className="mt-52">
+      <div className="xl-px-0 mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
+        <div className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
+          <Link className="text-zinc-400 hover:text-zinc-800" href="/">
+            Home
+          </Link>
+
+          {segments.length > 0 && <Separator />}
+
+          {segments.map((segment, index) => {
+            const href = `/${segments.slice(0, index + 1).join("/")}`;
+            const label = formatSegmentLabel(segment);
+            const isLast = index === segments.length - 1;
+
+            return (
+              <span
+                className="flex items-center"
+                // biome-ignore lint/suspicious/noArrayIndexKey: segments can have duplicates like /a/b/a
+                key={`${segment}-${index}`}
+              >
+                {isLast ? (
+                  <span className="select-none whitespace-nowrap text-zinc-800">{label}</span>
+                ) : (
+                  <>
+                    <Link className="whitespace-nowrap text-zinc-500 hover:text-zinc-700 hover:underline" href={href}>
+                      {label}
+                    </Link>
+                    <Separator />
+                  </>
+                )}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    </nav>
   );
+}
+
+function Separator() {
+  return <span className="ml-1 text-zinc-300">/</span>;
+}
+
+function formatSegmentLabel(segment: string) {
+  return decodeURIComponent(segment)
+    .replace(/[-_]+/g, " ")
+    .split(WHITESPACE_SPLIT_REGEX)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 }
