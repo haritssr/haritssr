@@ -47,7 +47,7 @@ const CopyLinkAllPage = () => {
         onKeyDown={ButtonHandler}
         type="button"
       >
-        Share This Page
+        Share
       </button>
 
       <Toast.Root
@@ -63,9 +63,7 @@ const CopyLinkAllPage = () => {
             <div className="m-0 text-[13px] text-zinc-500 leading-[1.3] [grid-area:description]">{`haritssr.com${pathname}`}</div>
           </Toast.Description>
         </div>
-        <Toast.Close className="h-12 w-12 text-action hover:text-[#2563eb]/90">
-          OK
-        </Toast.Close>
+        <Toast.Close className="h-12 w-12 text-action hover:text-[#2563eb]/90">OK</Toast.Close>
       </Toast.Root>
       <Toast.Viewport className="fixed right-0 bottom-0 z-2147483647 m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-2.5 p-3 outline-hidden sm:p-6" />
     </Toast.Provider>
