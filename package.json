@@ -11,6 +11,7 @@
     "lint": "biome check"
   },
   "dependencies": {
+    "@base-ui/react": "^1.2.0",
     "@faker-js/faker": "^6.3.1",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.0.13",
@@ -25,6 +26,7 @@
     "@tanstack/react-query": "^4.20.9",
     "@tanstack/react-table": "^8.7.4",
     "@toolwind/corner-shape": "0.0.8-3",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/d3-time-format": "^4.0.0",
     "@visx/axis": "^2.18.0",
     "@visx/event": "^2.17.0",
@@ -34,6 +36,7 @@
     "@visx/shape": "^2.18.0",
     "@visx/text": "^2.17.0",
     "@visx/tooltip": "^2.17.0",
+    "better-sqlite3": "^12.6.2",
     "cmdk": "^0.2.0",
     "d3-time-format": "^4.1.0",
     "date-fns": "^2.29.3",
@@ -41,6 +44,7 @@
     "gray-matter": "^4.0.3",
     "immer": "^9.0.17",
     "katex": "^0.16.4",
+    "mermaid": "^11.12.3",
     "next": "16.1.0",
     "nuqs": "^2.8.1",
     "radix-ui": "^1.4.3",
