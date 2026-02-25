@@ -41,12 +41,12 @@ function SomeApp() {
 }
 
 // biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
-const AddComments = forwardRef(function AddComents(ref: any) {
+const AddComments = forwardRef(function AddComents(_props, ref: any) {
   return <input placeholder="yada yada" ref={ref} type="text" />;
 });
 
 // biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
-const CommentsList = forwardRef(function CommentList(ref: any) {
+const CommentsList = forwardRef(function CommentList(_props, ref: any) {
   // biome-ignore lint/suspicious/noExplicitAny: ref type needs to be flexible for imperative handle
   const divRef = useRef<any>(null);
 
