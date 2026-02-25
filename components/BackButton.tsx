@@ -9,7 +9,7 @@ export default function BackButton({
   href: string;
 }) {
   return (
-    <Link className="block" href={href}>
+    <Link className="block" href={href} prefetch={false}>
       <span className="inline-block w-full">
         <span className="group flex items-center">
           <ChevronLeftIcon
