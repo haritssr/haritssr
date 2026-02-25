@@ -65,15 +65,7 @@ export const ExperimentsData = [
     title: "Nextjs",
     logoSrc: "/Icons/nextjs.jpg",
     description: "The React framework for the web",
-    links: [
-      "Router",
-      "SWR",
-      "Articles",
-      "Students",
-      "Posts",
-      "Next 13 Image Local",
-      "Next 13 Image Remote",
-    ],
+    links: ["Router", "SWR", "Articles", "Students", "Posts", "Next 13 Image Local", "Next 13 Image Remote"],
   },
   {
     id: 4,
@@ -115,16 +107,7 @@ export const ExperimentsData = [
     title: "Headless UI",
     logoSrc: "/Icons/headlessui.jpg",
     description: "Headless UI components by Tailwind CSS Team",
-    links: [
-      "Menu",
-      "Listbox",
-      "Switch",
-      "Disclosure",
-      "Dialog",
-      "Popover",
-      "Radio Group",
-      "Tabs",
-    ],
+    links: ["Menu", "Listbox", "Switch", "Disclosure", "Dialog", "Popover", "Radio Group", "Tabs"],
   },
   {
     id: 9,
@@ -159,7 +142,7 @@ export const ExperimentsData = [
     title: "UI Explorations",
     logoSrc: "/Icons/radixui.jpg",
     description: "Random user interfaces explorations",
-    links: ["Notion NavBar"],
+    links: ["Notion NavBar", "Pure", "Times Table", "Inline Maki", "Task"],
   },
   {
     id: 11,

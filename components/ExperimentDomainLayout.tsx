@@ -5,7 +5,6 @@ import { ExperimentsData } from "data/ExperimentsData";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useInView } from "react-intersection-observer";
-import Breadcrumbs from "./Breadcrumbs";
 import { GitHubIcon } from "./Icons";
 
 // Mapping of experiment slugs to their component file paths
@@ -14,15 +13,12 @@ const experimentComponentPaths: Record<string, Record<string, string>> = {
   browser: {
     clock: "components/experiments/browser/ClockDemo.tsx",
     "custom-scroll": "components/experiments/browser/CustomScrollDemo.tsx",
-    "description-list":
-      "components/experiments/browser/DescriptionListDemo.tsx",
+    "description-list": "components/experiments/browser/DescriptionListDemo.tsx",
     details: "components/experiments/browser/DetailsDemo.tsx",
-    "different-css-styling":
-      "components/experiments/browser/DifferentCssStylingDemo.tsx",
+    "different-css-styling": "components/experiments/browser/DifferentCssStylingDemo.tsx",
     figure: "components/experiments/browser/FigureDemo.tsx",
     inputs: "components/experiments/browser/InputsDemo.tsx",
-    "intersection-observer-api":
-      "components/experiments/browser/IntersectionObserverDemo.tsx",
+    "intersection-observer-api": "components/experiments/browser/IntersectionObserverDemo.tsx",
     "number-game": "components/experiments/browser/NumberGameDemo.tsx",
     "scroll-title": "components/experiments/browser/ScrollTitleDemo.tsx",
     select: "components/experiments/browser/SelectDemo.tsx",
@@ -33,8 +29,7 @@ const experimentComponentPaths: Record<string, Record<string, string>> = {
     "context-modal": "components/experiments/haris-lab/ContextModalDemo.tsx",
     "global-modal": "components/experiments/haris-lab/GlobalModalDemo.tsx",
     "side-bar": "components/experiments/haris-lab/SideBarDemo.tsx",
-    "sidebar-hierarchy":
-      "components/experiments/haris-lab/SidebarHierarchyDemo.tsx",
+    "sidebar-hierarchy": "components/experiments/haris-lab/SidebarHierarchyDemo.tsx",
   },
   "headless-ui": {
     dialog: "components/experiments/headless-ui/HeadlessDialogDemo.tsx",
@@ -42,8 +37,7 @@ const experimentComponentPaths: Record<string, Record<string, string>> = {
     listbox: "components/experiments/headless-ui/HeadlessListboxDemo.tsx",
     menu: "components/experiments/headless-ui/HeadlessMenuDemo.tsx",
     popover: "components/experiments/headless-ui/HeadlessPopoverDemo.tsx",
-    "radio-group":
-      "components/experiments/headless-ui/HeadlessRadioGroupDemo.tsx",
+    "radio-group": "components/experiments/headless-ui/HeadlessRadioGroupDemo.tsx",
     switch: "components/experiments/headless-ui/HeadlessSwitchDemo.tsx",
     tabs: "components/experiments/headless-ui/HeadlessTabsDemo.tsx",
   },
@@ -55,10 +49,8 @@ const experimentComponentPaths: Record<string, Record<string, string>> = {
   },
   // nextjs experiments have their own routes - handled separately
   nextjs: {
-    "next-13-image-local":
-      "components/experiments/nextjs/NextjsImageLocalDemo.tsx",
-    "next-13-image-remote":
-      "components/experiments/nextjs/NextjsImageRemoteDemo.tsx",
+    "next-13-image-local": "components/experiments/nextjs/NextjsImageLocalDemo.tsx",
+    "next-13-image-remote": "components/experiments/nextjs/NextjsImageRemoteDemo.tsx",
     router: "components/experiments/nextjs/NextjsRouterDemo.tsx",
     swr: "components/experiments/nextjs/NextjsSWRDemo.tsx",
   },
@@ -68,8 +60,7 @@ const experimentComponentPaths: Record<string, Record<string, string>> = {
     checkbox: "components/experiments/radix-ui/RadixCheckboxDemo.tsx",
     collapsible: "components/experiments/radix-ui/RadixCollapsibleDemo.tsx",
     dialog: "components/experiments/radix-ui/RadixDialogDemo.tsx",
-    "dropdown-menu":
-      "components/experiments/radix-ui/RadixDropdownMenuDemo.tsx",
+    "dropdown-menu": "components/experiments/radix-ui/RadixDropdownMenuDemo.tsx",
     "hover-card": "components/experiments/radix-ui/RadixHoverCardDemo.tsx",
     popover: "components/experiments/radix-ui/RadixPopoverDemo.tsx",
     "radio-group": "components/experiments/radix-ui/RadixRadioGroupDemo.tsx",
@@ -91,40 +82,28 @@ const experimentComponentPaths: Record<string, Record<string, string>> = {
     "edit-profile": "components/experiments/react/ReactEditProfileDemo.tsx",
     "font-mixer": "components/experiments/react/ReactFontMixerDemo.tsx",
     forwardrefexample: "components/experiments/react/ReactForwardRefDemo.tsx",
-    "functional-props":
-      "components/experiments/react/ReactFunctionalPropsDemo.tsx",
+    "functional-props": "components/experiments/react/ReactFunctionalPropsDemo.tsx",
     "generic-select": "components/experiments/react/ReactGenericSelectDemo.tsx",
-    "modal-inside-modal":
-      "components/experiments/react/ReactModalInsideModalDemo.tsx",
+    "modal-inside-modal": "components/experiments/react/ReactModalInsideModalDemo.tsx",
     "search-books": "components/experiments/react/ReactSearchBooksDemo.tsx",
-    "search-interpol":
-      "components/experiments/react/ReactSearchInterpolDemo.tsx",
+    "search-interpol": "components/experiments/react/ReactSearchInterpolDemo.tsx",
     "search-table": "components/experiments/react/ReactSearchTableDemo.tsx",
-    "searchable-product-data":
-      "components/experiments/react/ReactSearchableProductDataDemo.tsx",
+    "searchable-product-data": "components/experiments/react/ReactSearchableProductDataDemo.tsx",
     "submit-form": "components/experiments/react/ReactSubmitFormDemo.tsx",
-    "usecontext-dark-mode":
-      "components/experiments/react/ReactUseContextDarkModeDemo.tsx",
-    "useeffect-title":
-      "components/experiments/react/ReactUseEffectTitleDemo.tsx",
-    useimperativehandle:
-      "components/experiments/react/ReactUseImperativeHandleDemo.tsx",
+    "usecontext-dark-mode": "components/experiments/react/ReactUseContextDarkModeDemo.tsx",
+    "useeffect-title": "components/experiments/react/ReactUseEffectTitleDemo.tsx",
+    useimperativehandle: "components/experiments/react/ReactUseImperativeHandleDemo.tsx",
     "usememo-1": "components/experiments/react/ReactUseMemo1Demo.tsx",
-    "usereducer-todo-list":
-      "components/experiments/react/ReactUseReducerTodoListDemo.tsx",
+    "usereducer-todo-list": "components/experiments/react/ReactUseReducerTodoListDemo.tsx",
     "usereducer-todo-list-immer":
       "components/experiments/react/ReactUseReducerTodoListImmerDemo.tsx",
-    "usestate-draggable-box":
-      "components/experiments/react/ReactUseStateDraggableBoxDemo.tsx",
+    "usestate-draggable-box": "components/experiments/react/ReactUseStateDraggableBoxDemo.tsx",
     "usestate-form": "components/experiments/react/ReactUseStateFormDemo.tsx",
-    "usestate-object-form":
-      "components/experiments/react/ReactUseStateObjectFormDemo.tsx",
+    "usestate-object-form": "components/experiments/react/ReactUseStateObjectFormDemo.tsx",
     "usestate-reacting-to-input":
       "components/experiments/react/ReactUseStateReactingToInputDemo.tsx",
-    "usestate-todo-list":
-      "components/experiments/react/ReactUseStateTodoListDemo.tsx",
-    "react-wrap-balancer":
-      "components/experiments/react/ReactWrapBalancerDemo.tsx",
+    "usestate-todo-list": "components/experiments/react/ReactUseStateTodoListDemo.tsx",
+    "react-wrap-balancer": "components/experiments/react/ReactWrapBalancerDemo.tsx",
   },
   "react-aria": {
     calendar: "components/experiments/react-aria/ReactAriaCalendarDemo.tsx",
@@ -134,39 +113,31 @@ const experimentComponentPaths: Record<string, Record<string, string>> = {
   },
   "react-table": {
     basic: "components/experiments/react-table/ReactTableBasicDemo.tsx",
-    "column-group":
-      "components/experiments/react-table/ReactTableColumnGroupDemo.tsx",
-    "column-ordering":
-      "components/experiments/react-table/ReactTableColumnOrderingDemo.tsx",
-    "column-pinning":
-      "components/experiments/react-table/ReactTableColumnPinningDemo.tsx",
+    "column-group": "components/experiments/react-table/ReactTableColumnGroupDemo.tsx",
+    "column-ordering": "components/experiments/react-table/ReactTableColumnOrderingDemo.tsx",
+    "column-pinning": "components/experiments/react-table/ReactTableColumnPinningDemo.tsx",
   },
   "tailwind-css": {
-    "apple-navbar":
-      "components/experiments/tailwind-css/TailwindAppleNavbarDemo.tsx",
+    "apple-navbar": "components/experiments/tailwind-css/TailwindAppleNavbarDemo.tsx",
     blurry: "components/experiments/tailwind-css/TailwindBlurryDemo.tsx",
-    "centering-div":
-      "components/experiments/tailwind-css/TailwindCenteringDivDemo.tsx",
+    "centering-div": "components/experiments/tailwind-css/TailwindCenteringDivDemo.tsx",
     columns: "components/experiments/tailwind-css/TailwindColumnsDemo.tsx",
     feedback: "components/experiments/tailwind-css/TailwindFeedbackDemo.tsx",
-    "floating-labels":
-      "components/experiments/tailwind-css/TailwindFloatingLabelsDemo.tsx",
-    "glowing-background":
-      "components/experiments/tailwind-css/TailwindGlowingBackgroundDemo.tsx",
+    "floating-labels": "components/experiments/tailwind-css/TailwindFloatingLabelsDemo.tsx",
+    "glowing-background": "components/experiments/tailwind-css/TailwindGlowingBackgroundDemo.tsx",
     grid: "components/experiments/tailwind-css/TailwindGridDemo.tsx",
     newspaper: "components/experiments/tailwind-css/TailwindNewspaperDemo.tsx",
-    "planetscale-navbar":
-      "components/experiments/tailwind-css/TailwindPlanetscaleNavbarDemo.tsx",
+    "planetscale-navbar": "components/experiments/tailwind-css/TailwindPlanetscaleNavbarDemo.tsx",
     position: "components/experiments/tailwind-css/TailwindPositionDemo.tsx",
     sidebar: "components/experiments/tailwind-css/TailwindSidebarDemo.tsx",
-    "tailwind-vs-apple-color":
-      "components/experiments/tailwind-css/TailwindVsAppleColorDemo.tsx",
-    "youtube-thumbnail":
-      "components/experiments/tailwind-css/TailwindYoutubeThumbnailDemo.tsx",
+    "tailwind-vs-apple-color": "components/experiments/tailwind-css/TailwindVsAppleColorDemo.tsx",
+    "youtube-thumbnail": "components/experiments/tailwind-css/TailwindYoutubeThumbnailDemo.tsx",
   },
   "ui-explorations": {
-    "notion-navbar":
-      "components/experiments/ui-explorations/NotionNavbarDemo.tsx",
+    "notion-navbar": "components/experiments/ui-explorations/NotionNavbarDemo.tsx",
+    pure: "components/experiments/ui-explorations/PureDemo.tsx",
+    "times-table": "components/experiments/ui-explorations/TimesTableDemo.tsx",
+    "inline-maki": "components/experiments/ui-explorations/InlineMakiDemo.tsx",
   },
   visx: {
     "bar-chart": "components/experiments/visx/VisxBarChartDemo.tsx",
@@ -179,10 +150,7 @@ interface ExperimentDomainLayoutProps {
   domain: string;
 }
 
-export default function ExperimentDomainLayout({
-  children,
-  domain,
-}: ExperimentDomainLayoutProps) {
+export default function ExperimentDomainLayout({ children, domain }: ExperimentDomainLayoutProps) {
   const pathname = usePathname();
   const { ref, inView } = useInView({ rootMargin: "-90px" });
 
@@ -207,7 +175,7 @@ export default function ExperimentDomainLayout({
 
   // Get array of links for this domain
   const domainData = ExperimentsData.find(
-    (exp) => exp.title.toLowerCase().replace(/\s+/g, "-") === domain
+    (exp) => exp.title.toLowerCase().replace(/\s+/g, "-") === domain,
   );
   const links = domainData?.links || [];
 
@@ -234,42 +202,37 @@ export default function ExperimentDomainLayout({
   }
 
   return (
-    <div className="mx-auto flex max-w-5xl sm:-mt-px sm:gap-10 sm:px-5 xl:px-0">
-      <div className="grid min-h-screen w-full max-w-5xl grid-cols-1 sm:grid-cols-4">
-        {/* Sidebar */}
-        <SideBar domain={domain} links={links} />
-
+    <div className="min-h-screen w-full sm:-mt-px">
+      <div className="w-full sm:border-t">
         {/* Content */}
-        <div className="border-r border-b sm:col-span-3 sm:border-t">
+        <div>
           <article className="sm:px-0">
             {/* SubNavigation */}
             <section
-              className={`sticky top-0 border-b sm:top-[44.5px] ${
-                inView
-                  ? "border-zinc-200"
-                  : "border-b bg-white/70 saturate-150 backdrop-blur-lg"
+              className={`sticky border-b top-[44.5px] ${
+                inView ? "border-zinc-200" : "border-b bg-white/70 saturate-150 backdrop-blur-lg"
               } z-40 bg-white py-2`}
             >
-              <div className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-3.5">
+              <div className="flex items-center justify-between">
                 <BackToExperiments
                   domain={domainDisplayName}
                   inView={inView}
                   isIndexPage={isIndexPage}
                 />
-                <PageTitleCenter inView={inView} title={title} />
                 <PageSource href={githubRoute} inView={inView} />
               </div>
             </section>
 
             {/* Header */}
-            <div className="px-5">
-              <Breadcrumbs />
-              <h1
-                className="wrap-break-word z-40 mx-auto mt-10 mb-2 block h-auto w-full text-left font-bold text-3xl text-zinc-800"
-                ref={ref}
-              >
-                {title}
-              </h1>
+            <div className="">
+              {!isIndexPage && (
+                <h1
+                  className="wrap-break-word z-40 mx-auto mt-10 mb-2 block h-auto w-full text-left font-bold text-3xl text-zinc-800"
+                  ref={ref}
+                >
+                  {title}
+                </h1>
+              )}
               {children}
             </div>
           </article>
@@ -279,52 +242,7 @@ export default function ExperimentDomainLayout({
   );
 }
 
-const SideBar = ({ domain, links }: { domain: string; links: string[] }) => {
-  const pathname = usePathname();
-  const segments = pathname?.split("/") || [];
-  const lastSegment = segments.at(-1);
-
-  return (
-    <div className="hidden border sm:col-span-1 sm:block">
-      <Link
-        className="sticky top-[45px] block border-b bg-white px-5 py-2 font-medium"
-        href={`/experiments/${domain}`}
-      >
-        {domain
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}
-      </Link>
-      <div className="flex flex-col space-y-1 px-3 py-5 sm:max-h-screen sm:overflow-auto">
-        {links.map((experimentPage) => {
-          const experimentPageEdited = experimentPage
-            .toLowerCase()
-            .split(" ")
-            .join("-");
-          return (
-            <Link
-              className={`${
-                lastSegment === experimentPageEdited
-                  ? "bg-action text-white"
-                  : "text-zinc-800 hover:bg-zinc-200/70 hover:text-zinc-950"
-              } rounded-md px-2 py-1`}
-              href={`/experiments/${domain}/${experimentPageEdited}`}
-              key={experimentPage}
-            >
-              {experimentPage}
-            </Link>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-function getBackButtonText(
-  inView: boolean,
-  isIndexPage: boolean,
-  domain: string
-): string {
+function getBackButtonText(inView: boolean, isIndexPage: boolean, domain: string): string {
   if (!inView) {
     return "Back";
   }
@@ -347,9 +265,7 @@ const BackToExperiments = ({
     <Link
       className={`-ml-1 flex cursor-pointer items-center sm:w-1/4 ${inView ? "w-1/2" : "w-1/4"}`}
       href={
-        isIndexPage
-          ? "/experiments"
-          : `/experiments/${domain.toLowerCase().replace(/\s+/g, "-")}`
+        isIndexPage ? "/experiments" : `/experiments/${domain.toLowerCase().replace(/\s+/g, "-")}`
       }
     >
       <span className="inline-block w-full">
@@ -367,26 +283,6 @@ const BackToExperiments = ({
   );
 };
 
-const PageTitleCenter = ({
-  title,
-  inView,
-}: {
-  title: string;
-  inView: boolean;
-}) => {
-  return (
-    <div className={`sm:1/2 -mr-2 inline ${inView ? "w-0" : "w-1/2"}`}>
-      <div className="flex justify-center py-0.5 sm:py-0">
-        <div
-          className={`truncate text-center font-semibold ${inView ? "hidden text-transparent" : "block text-zinc-800"}`}
-        >
-          {title}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const PageSource = ({ href, inView }: { href: string; inView: boolean }) => {
   return (
     <div className={`flex justify-end sm:w-1/4 ${inView ? "w-1/4" : "w-1/4"}`}>
@@ -400,8 +296,7 @@ const PageSource = ({ href, inView }: { href: string; inView: boolean }) => {
         >
           <span className="mr-2 hidden text-action group-hover:text-action/90 sm:inline-block">
             Source
-          </span>{" "}
-          <GitHubIcon className="h-5 w-5 cursor-pointer text-action group-hover:text-action/90" />
+          </span>
         </a>
       </cite>
     </div>
