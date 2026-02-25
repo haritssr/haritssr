@@ -1,4 +1,5 @@
 import { ExperiencesData } from "data/ExperiencesData";
+import { EXPERIENCES_DESCRIPTION } from "data/PageDescriptions";
 import ExperienceCard from "@/components/ExperienceCard";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
@@ -6,7 +7,7 @@ export default function Experiences() {
   return (
     <HomeSectionWrapper
       className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4"
-      explanation="Detail informations on how projects I belong to being handled."
+      explanation={EXPERIENCES_DESCRIPTION}
       id="experiences"
       topic="Experiences"
     >

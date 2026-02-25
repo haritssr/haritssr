@@ -1,10 +1,9 @@
-import AIWorkflow from "@/components/home/AIWorkflow";
+import AI from "@/components/home/AI";
 import Blog from "@/components/home/Blog";
 import Contacts from "@/components/home/Contacts";
 import CV from "@/components/home/CV";
 import Experiences from "@/components/home/Experiences";
 import Experiments from "@/components/home/Experiments";
-import OtherLinks from "@/components/home/OtherLinks";
 
 export default function Home() {
   return (
@@ -14,9 +13,8 @@ export default function Home() {
         <Experiences />
         <Experiments />
         <Blog />
-        <AIWorkflow />
+        <AI />
         <CV />
-        <OtherLinks />
       </div>
     </section>
   );

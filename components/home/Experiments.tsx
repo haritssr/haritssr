@@ -1,17 +1,11 @@
-import { ExperimentsData } from "data/ExperimentsData";
+import { getExperimentsHomeDescription } from "data/PageDescriptions";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Experiments() {
-  let totalExperiment = 0;
-
-  for (const experiment of ExperimentsData) {
-    totalExperiment += experiment.links.length;
-  }
-
   return (
     <HomeSectionWrapper
-      explanation={`${totalExperiment} experiments across the TypeScript and React ecosystem.`}
+      explanation={getExperimentsHomeDescription()}
       id="experiments"
       topic="Experiments"
     >

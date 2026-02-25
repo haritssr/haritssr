@@ -1,5 +1,4 @@
 import Image from "next/image";
-import InternalLink from "@/components/InternalLink";
 import ContactList from "../ContactList";
 
 export default function Contacts() {
@@ -11,25 +10,21 @@ export default function Contacts() {
             <Image
               alt="Harits Syah"
               blurDataURL="/images/blur.jpg"
-              className="z-10 mb-4 aspect-ratio h-32 w-32 rounded-full"
-              height="165"
+              className="z-10 mb-4 aspect-ratio h-24 w-24 rounded-full"
+              height="100"
               priority
               src="/images/blur.jpg"
-              width="165"
+              width="100"
             />
           </section>
-          <div className="text-center font-semibold text-xl text-zinc-800">
-            Harits Syah
-          </div>
+          <div className="text-center font-semibold text-lg text-zinc-800">Harits Syah</div>
         </div>
         <ContactList />
       </section>
       <section className="corner-squircle rounded-2xl border border-zinc-300 lg:col-span-2">
         <div className="divide-y divide-zinc-200">
           <div className="grid grid-cols-3 py-2 pl-3.5">
-            <span className="text-tiny text-zinc-500 sm:text-base">
-              Roles :
-            </span>
+            <span className="text-tiny text-zinc-500 sm:text-base">Roles :</span>
             <span className="col-span-2 flex items-center space-x-2">
               <span className="col-span-2 text-zinc-500">
                 <cite className="group not-italic">
@@ -108,9 +103,7 @@ export default function Contacts() {
             </span>
           </div>
           <div className="grid grid-cols-3 py-2 pl-3.5">
-            <span className="text-tiny text-zinc-500 sm:text-base">
-              Email :
-            </span>
+            <span className="text-tiny text-zinc-500 sm:text-base">Email :</span>
             <a
               className="col-span-2 text-tiny text-zinc-500 hover:text-action sm:text-base"
               href="mailto:haritssr@gmail.com"
@@ -120,9 +113,7 @@ export default function Contacts() {
             </a>
           </div>
           <div className="grid grid-cols-3 py-2 pl-3.5">
-            <span className="text-tiny text-zinc-500 sm:text-base">
-              Location :
-            </span>
+            <span className="text-tiny text-zinc-500 sm:text-base">Location :</span>
             <a
               className="col-span-2 text-tiny text-zinc-500 hover:text-action sm:text-base"
               href="https://www.google.com/maps/place/Tangerang+Selatan,+Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x8706481c2c4aafe4?sa=X&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgPEAA&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgQEAI"
@@ -132,9 +123,6 @@ export default function Contacts() {
             >
               South Tangerang, Indonesia
             </a>
-          </div>
-          <div className="grid grid-cols-3 py-2 pl-3.5">
-            <InternalLink href="/about">More</InternalLink>
           </div>
         </div>
       </section>
