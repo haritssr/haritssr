@@ -1,0 +1,6 @@
+{
+  "code_actions_on_format": {
+    "source.action.useSortedAttributes.biome": true,
+    "source.fixAll.biome": true
+  }
+}
