@@ -23,19 +23,19 @@
   --color-border: hsl(240 5.9% 90%);
   --color-input: hsl(240 5.9% 90%);
   --color-ring: hsl(240 10% 3.9%);
-  
+
   /* Chart colors */
   --color-chart-1: hsl(12 76% 61%);
   --color-chart-2: hsl(173 58% 39%);
   --color-chart-3: hsl(197 37% 24%);
   --color-chart-4: hsl(43 74% 66%);
   --color-chart-5: hsl(27 87% 67%);
-  
+
   /* Radius */
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
   --radius-sm: calc(0.5rem - 4px);
-  
+
   /* Font family */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
@@ -46,14 +46,14 @@
     scroll-behavior: auto;
     scroll-padding-top: 100px;
   }
-  
+
   body {
     padding: 0;
     margin: 0;
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
-  
+
   * {
     box-sizing: border-box;
     border-color: var(--color-border);
@@ -80,10 +80,12 @@ input[type="tel"]:focus {
   outline: none;
   --tw-ring-color: rgb(39 39 42);
   --tw-ring-shadow: 0 0 0 1px var(--tw-ring-color);
-  box-shadow: var(--tw-ring-shadow), 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  box-shadow:
+    var(--tw-ring-shadow),
+    0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
 
-input[type="time"],
+/*input[type="time"],
 input[type="date"],
 input[type="week"],
 input[type="month"],
@@ -92,6 +94,7 @@ select {
   border: 1.4px solid rgb(113 113 122);
   padding: 0.25rem 0.5rem;
 }
+
 input[type="time"]:focus,
 input[type="date"]:focus,
 input[type="week"]:focus,
@@ -119,7 +122,8 @@ input[type="submit"]:hover,
 input[type="button"]:hover,
 button[type="submit"]:hover {
   background-color: rgb(37 99 235 / 0.9);
-}
+}*/
+
 @media (min-width: 640px) {
   input[type="reset"],
   input[type="submit"],
@@ -142,6 +146,16 @@ button[type="submit"]:hover {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #71717a;
+}
+
+/* Hide scrollbar for scrollable elements */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Dark mode - class based only (add .dark to <html> or <body> to enable) */
