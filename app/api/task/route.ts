@@ -16,7 +16,6 @@ function isTask(candidate: unknown): candidate is Task {
   const task = candidate as {
     duration?: unknown;
     progress?: unknown;
-    status?: unknown;
     title?: unknown;
     type?: unknown;
   };
@@ -27,8 +26,7 @@ function isTask(candidate: unknown): candidate is Task {
     Number.isFinite(task.duration) &&
     typeof task.progress === "number" &&
     Number.isFinite(task.progress) &&
-    (task.status === "Todo" || task.status === "Done") &&
-    (task.type === "Now" || task.type === "Other")
+    (task.type === "Now" || task.type === "Other" || task.type === "Done")
   );
 }
 

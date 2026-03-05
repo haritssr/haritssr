@@ -1,7 +1,7 @@
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { unstable_noStore } from "next/cache";
-import { PageTitle } from "@/components/PageTitle";
+import BackButton from "@/components/BackButton";
+import PageDescription from "@/components/PageDescription";
+import PageTitle from "@/components/PageTitle";
 import type { TaskHistoryEntry } from "../db";
 import { getTaskHistory, getTasksForDate, getTodayTaskDate } from "../db";
 
@@ -95,7 +95,7 @@ export default function TaskStatisticsPage() {
   const doneCountByTaskTitle = new Map<string, number>();
   recent30Days.forEach((day) => {
     day.tasks.forEach((task) => {
-      if (task.status !== "Done" && task.progress < 100) {
+      if (task.type !== "Done" && task.progress < 100) {
         return;
       }
 
@@ -124,11 +124,9 @@ export default function TaskStatisticsPage() {
 
   return (
     <div className="pb-8">
-      <Link className="w-fit flex items-center text-blue-500 hover:text-blue-400 -mb-10 mt-10" href="/task">
-        <ChevronLeftIcon className="stroke-2 h-5 w-5" />
-        Task
-      </Link>
-      <PageTitle description="About the daily task." title="Statistic" />
+      <BackButton href="/task" name="Task" />
+      <PageTitle title="Statistic" />
+      <PageDescription description="About the daily task." />
 
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
         Ideas shown here: daily completion rate, 7-day completion rate, completed minutes, full-completion streak, top completed task, and a 7-day trend.
@@ -171,7 +169,7 @@ export default function TaskStatisticsPage() {
 
       <section className="mt-4 rounded-xl border border-zinc-200 p-3">
         <h2 className="font-medium text-zinc-800">Database table: daily_tasks</h2>
-        <p className="mt-1 text-xs text-zinc-500">Uses the task shape from app/task/data.ts: title, duration, progress, status, and type.</p>
+        <p className="mt-1 text-xs text-zinc-500">Uses the task shape from app/task/data.ts: title, duration, progress, and type.</p>
         {visibleDatabaseTaskRows.length === 0 ? (
           <div className="mt-2 text-sm text-zinc-500">No database rows yet.</div>
         ) : (
@@ -183,7 +181,6 @@ export default function TaskStatisticsPage() {
                   <th className="px-2 py-1.5">title</th>
                   <th className="px-2 py-1.5">duration</th>
                   <th className="px-2 py-1.5">progress</th>
-                  <th className="px-2 py-1.5">status</th>
                   <th className="px-2 py-1.5">type</th>
                   <th className="px-2 py-1.5">position</th>
                 </tr>
@@ -195,7 +192,6 @@ export default function TaskStatisticsPage() {
                     <td className="px-2 py-1.5">{row.title}</td>
                     <td className="px-2 py-1.5">{row.duration}</td>
                     <td className="px-2 py-1.5">{row.progress.toFixed(1)}%</td>
-                    <td className="px-2 py-1.5">{row.status}</td>
                     <td className="px-2 py-1.5">{row.type}</td>
                     <td className="px-2 py-1.5">{row.position}</td>
                   </tr>

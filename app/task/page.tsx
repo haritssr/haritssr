@@ -3,7 +3,8 @@
 import { NumberField } from "@base-ui/react/number-field";
 import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import InternalLink from "@/components/InternalLink";
-import { PageTitle } from "@/components/PageTitle";
+import PageDescription from "@/components/PageDescription";
+import PageTitle from "@/components/PageTitle";
 import { NEW_TASK_DURATION_PRESETS, sanitizeTasks } from "./data";
 import Section from "./Section";
 import TaskItem from "./TaskItem";
@@ -30,11 +31,11 @@ export default function TaskPage() {
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Active Now-section tasks only.
-  const nowTasks = tasks.filter((task) => task.type === "Now" && task.status !== "Done");
+  const nowTasks = tasks.filter((task) => task.type === "Now");
   // Active Other-section tasks sorted by progress desc.
-  const otherTasks = tasks.filter((task) => task.type === "Other" && task.status !== "Done").sort((firstTask, secondTask) => secondTask.progress - firstTask.progress);
+  const otherTasks = tasks.filter((task) => task.type === "Other").sort((firstTask, secondTask) => secondTask.progress - firstTask.progress);
   // Completed tasks for Done section.
-  const doneTasks = tasks.filter((task) => task.status === "Done");
+  const doneTasks = tasks.filter((task) => task.type === "Done");
   // Title value trimmed for validation and save.
   const normalizedNewOtherTaskTitle = newOtherTaskTitle.trim();
   // Duration parsed as number for validation and persistence.
@@ -74,7 +75,7 @@ export default function TaskPage() {
           ? {
               ...task,
               progress: normalizedProgress,
-              status: normalizedProgress >= 100 ? "Done" : task.status,
+              type: normalizedProgress >= 100 ? "Done" : task.type,
             }
           : task,
       ),
@@ -84,7 +85,7 @@ export default function TaskPage() {
   const handleMarkDone = useCallback(
     (title: string) => {
       // Mark targeted task as Done in a single immutable update.
-      const nextTasks = tasks.map((task) => (task.title === title ? { ...task, status: "Done" as const } : task));
+      const nextTasks = tasks.map((task) => (task.title === title ? { ...task, type: "Done" as const } : task));
       setTasks(nextTasks);
       saveImmediately(nextTasks);
     },
@@ -105,14 +106,14 @@ export default function TaskPage() {
     (title: string) => {
       // Task being promoted into the Now section.
       const targetTask = tasks.find((task) => task.title === title);
-      if (!targetTask || targetTask.status === "Done") {
+      if (!targetTask || targetTask.type === "Done") {
         return;
       }
 
       // Remaining tasks after extracting promoted task.
       const remainingTasks = tasks.filter((task) => task.title !== title);
       // Demote any existing active Now task back to Other.
-      const nextTasks: Task[] = remainingTasks.map((task) => (task.type === "Now" && task.status !== "Done" ? { ...task, type: "Other" as const } : task));
+      const nextTasks: Task[] = remainingTasks.map((task) => (task.type === "Now" ? { ...task, type: "Other" as const } : task));
       nextTasks.push({ ...targetTask, type: "Now" });
 
       setTasks(nextTasks);
@@ -125,7 +126,7 @@ export default function TaskPage() {
     (title: string, nextType: Extract<Task["type"], "Other">) => {
       // Task being moved out of Now into Other.
       const targetTask = tasks.find((task) => task.title === title);
-      if (!targetTask || targetTask.status === "Done") {
+      if (!targetTask || targetTask.type === "Done") {
         return;
       }
 
@@ -151,7 +152,6 @@ export default function TaskPage() {
         title: normalizedNewOtherTaskTitle,
         duration: parsedNewOtherTaskDuration,
         progress: 0,
-        status: "Todo",
         type: "Other",
       };
       // Next list with appended new task.
@@ -321,7 +321,8 @@ export default function TaskPage() {
 
   return (
     <>
-      <PageTitle description="Realistic Daily Time Budget." title="Task" />
+      <PageTitle title="Task" />
+      <PageDescription description="Realistic Daily Time Budget." />
       <section className="mt-2 flex items-center space-x-5">
         <InternalLink href="/task/history">History</InternalLink>
         <InternalLink href="/task/statistics">Statistics</InternalLink>
@@ -410,7 +411,7 @@ export default function TaskPage() {
         ))}
       </Section>
 
-      <Section title="Other">
+      <Section title="Tasks">
         {otherTasks.length === 0 && <div className="text-sm text-zinc-400">Empty</div>}
         {otherTasks.map((task) => (
           <TaskItem key={task.title} onDelete={handleDeleteTask} onDoNow={handleDoNow} onMarkDone={handleMarkDone} onProgressChange={handleProgressChange} onResumeNow={handleResumeNow} {...task} />
@@ -419,49 +420,21 @@ export default function TaskPage() {
 
       {normalizedNewOtherTaskTitle.length > 0 && newOtherTaskTitleExists && <div className="mb-3 text-xs text-rose-500">Task title already exists.</div>}
 
-      <Section title="Done">
+      <Section accordion={{ defaultOpen: false }} title="Done">
         {doneTasks.length === 0 && <div className="text-sm text-zinc-500">Nothing is done today.</div>}
         {doneTasks.map((task) => (
-          <TaskItem forceDonutProgress key={task.title} onDelete={handleDeleteTask} onMarkDone={handleMarkDone} onProgressChange={handleProgressChange} visualVariant="doneSection" {...task} />
+          <TaskItem
+            forceDonutProgress
+            key={task.title}
+            onDelete={handleDeleteTask}
+            onMarkDone={handleMarkDone}
+            onProgressChange={handleProgressChange}
+            readOnly
+            visualVariant="doneSection"
+            {...task}
+          />
         ))}
       </Section>
-
-      <h2 className="mt-20 text-xl font-semibold text-zinc-800">Task Logic</h2>
-      <div className="mt-2 space-y-4 text-zinc-500">
-        <div>
-          <div className="font-medium text-zinc-600">Now</div>
-          <ul className="list-disc pl-7">
-            <li>Shows tasks with type Now and status not Done.</li>
-            <li>Only one Now task is allowed at a time.</li>
-          </ul>
-        </div>
-        <div>
-          <div className="font-medium text-zinc-600">Other</div>
-          <ul className="list-disc pl-7">
-            <li>Shows tasks with type Other and status not Done.</li>
-            <li>Sorted by highest progress first.</li>
-            <li>Do Now moves Other to Now and demotes any existing Now to Other.</li>
-            <li>Resume appears when progress is bigger than 0.</li>
-          </ul>
-        </div>
-        <div>
-          <div className="font-medium text-zinc-600">Done</div>
-          <ul className="list-disc pl-7">
-            <li>Shows tasks with status Done.</li>
-            <li>Tasks become Done when progress reaches 100 or when manually marked done.</li>
-          </ul>
-        </div>
-        <div>
-          <div className="font-medium text-zinc-600">Task schema</div>
-          <ul className="list-disc pl-7">
-            <li>title is a string.</li>
-            <li>duration is a finite number.</li>
-            <li>progress is a finite number.</li>
-            <li>status is Todo or Done.</li>
-            <li>type is Now or Other.</li>
-          </ul>
-        </div>
-      </div>
     </>
   );
 }

@@ -8,7 +8,6 @@ export function isTask(candidate: unknown): candidate is TaskLike {
   const task = candidate as {
     duration?: unknown;
     progress?: unknown;
-    status?: unknown;
     title?: unknown;
     type?: unknown;
   };
@@ -19,8 +18,7 @@ export function isTask(candidate: unknown): candidate is TaskLike {
     Number.isFinite(task.duration) &&
     typeof task.progress === "number" &&
     Number.isFinite(task.progress) &&
-    (task.status === "Todo" || task.status === "Done") &&
-    (task.type === "Now" || task.type === "Other" || task.type === "Queue")
+    (task.type === "Now" || task.type === "Other" || task.type === "Done" || task.type === "Queue")
   );
 }
 

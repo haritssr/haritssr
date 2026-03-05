@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { getTaskActionButtonClassName } from "./data";
 import type { NowPrimaryAction, Task, TaskActionsProps, TaskItemProps } from "./type";
 
-function getNowPrimaryAction(type: Task["type"], status: Task["status"], progress: number, isRunning: boolean, setIsRunning: (running: boolean) => void): NowPrimaryAction {
+function getNowPrimaryAction(type: Task["type"], progress: number, isRunning: boolean, setIsRunning: (running: boolean) => void): NowPrimaryAction {
   if (type !== "Now") {
     return { className: "", label: "" };
   }
 
-  if (status === "Done" || progress >= 100) {
+  if (progress >= 100) {
     return { className: "text-green-600", label: "Done" };
   }
 
@@ -40,7 +40,7 @@ function TaskActions(props: TaskActionsProps) {
   return (
     <>
       {props.canDeleteTask && (
-        <button className={getTaskActionButtonClassName("rose")} onClick={props.onDelete} type="button">
+        <button className={getTaskActionButtonClassName("secondary")} onClick={props.onDelete} type="button">
           Del
         </button>
       )}
@@ -98,8 +98,8 @@ function DonutProgress({ progress, isRunning }: { progress: number; isRunning: b
 export default function TaskItem(props: TaskItemProps) {
   // Clamp progress so UI and timer logic always use a safe 0..100 value.
   const progress = Math.max(0, Math.min(100, props.progress));
-  // Treat a task as done if either status is done or progress reached 100.
-  const taskIsDone = props.status === "Done" || progress >= 100;
+  // Treat a task as done if type is Done or progress reached 100.
+  const taskIsDone = props.type === "Done" || progress >= 100;
   // Local running flag for the Now-task interval timer.
   const [isRunning, setIsRunning] = useState(false);
   // Allow "Now" action only for non-done Other tasks at 0% progress.
@@ -115,7 +115,7 @@ export default function TaskItem(props: TaskItemProps) {
   // Allow quick "Done" while a Now task is actively running.
   const canMarkNowTaskDone = props.type === "Now" && isRunning && !taskIsDone;
   // Compute primary Now action label/style/callback based on task state.
-  const primaryNowAction = getNowPrimaryAction(props.type, props.status, progress, isRunning, setIsRunning);
+  const primaryNowAction = getNowPrimaryAction(props.type, progress, isRunning, setIsRunning);
 
   const handleMoveToOther = () => {
     setIsRunning(false);
@@ -162,7 +162,7 @@ export default function TaskItem(props: TaskItemProps) {
 
   // Tick progress every second for running Now tasks.
   useEffect(() => {
-    if (props.readOnly || props.type !== "Now" || props.status === "Done" || !isRunning || progress >= 100) {
+    if (props.readOnly || props.type !== "Now" || taskIsDone || !isRunning || progress >= 100) {
       return;
     }
 
@@ -179,14 +179,14 @@ export default function TaskItem(props: TaskItemProps) {
     }, 1000);
 
     return () => window.clearInterval(timer);
-  }, [isRunning, progress, props.duration, props.onProgressChange, props.readOnly, props.status, props.title, props.type]);
+  }, [isRunning, progress, props.duration, props.onProgressChange, props.readOnly, props.title, props.type, taskIsDone]);
 
-  // Stop timer if external status/progress changes make task completed.
+  // Stop timer if external type/progress changes make task completed.
   useEffect(() => {
-    if ((progress >= 100 || props.status === "Done") && isRunning) {
+    if (taskIsDone && isRunning) {
       setIsRunning(false);
     }
-  }, [isRunning, progress, props.status]);
+  }, [isRunning, taskIsDone]);
 
   return (
     <div className={"border border-zinc-300 rounded-xl corner-squircle pl-2.5 pr-2.5 h-10"}>

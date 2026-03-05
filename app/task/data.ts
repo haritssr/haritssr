@@ -48,6 +48,6 @@ export function createDailyTaskTemplate(): Task[] {
   return DAILY_TASK_TEMPLATE.map((task) => ({
     ...task,
     progress: 0,
-    status: "Todo",
+    type: task.type === "Done" ? "Done" : task.type,
   }));
 }
