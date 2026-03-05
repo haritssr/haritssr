@@ -1,7 +1,8 @@
 import { getExperimentsHomeDescription } from "data/PageDescriptions";
 import type { Metadata } from "next";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
-import { PageTitle } from "@/components/PageTitle";
+import PageDescription from "@/components/PageDescription";
+import PageTitle from "@/components/PageTitle";
 
 export const metadata: Metadata = {
   title: "Experiments",
@@ -11,10 +12,8 @@ export const metadata: Metadata = {
 export default function ExperimentsPage() {
   return (
     <>
-      <PageTitle
-        description={getExperimentsHomeDescription()}
-        title="Experiments"
-      />
+      <PageTitle title="Experiments" />
+      <PageDescription description={getExperimentsHomeDescription()} />
       <ExperimentsGrid />
     </>
   );

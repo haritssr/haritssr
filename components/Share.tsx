@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { Toast } from "radix-ui";
 import React from "react";
 
-const Share = () => {
+export default function Share() {
   const [open, setOpen] = React.useState(false);
   const eventDateRef = React.useRef(new Date());
   const timerRef = React.useRef(0);
@@ -62,6 +62,4 @@ const Share = () => {
       </div>
     </Toast.Provider>
   );
-};
-
-export default Share;
+}

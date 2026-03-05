@@ -1,20 +1,11 @@
-import type React from "react";
+import type { Ref } from "react";
 
-export function PageTitle({
-  title,
-  description,
-}: {
-  title: string;
-  description: string | React.ReactNode;
-}) {
+export default function PageTitle({ title, ref }: { title: string; ref?: Ref<HTMLHeadingElement> }) {
   return (
     <div>
-      <h1 className="mt-10 font-bold text-3xl text-zinc-800 sm:mt-16 sm:text-4xl">
+      <h1 className="mt-10 mb-4 font-bold text-3xl text-zinc-800 sm:mt-16 sm:text-4xl" ref={ref}>
         {title}
       </h1>
-      <div className="wrap-break-words mt-4 mb-10 text-lg text-zinc-500 sm:text-xl">
-        {description}
-      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 // Content Collections compiles MDX to HTML
-export function Mdx({ html }: { html: string }) {
+export default function MDX({ html }: { html: string }) {
   return (
     <article
       className="prose prose-zinc max-w-none"
