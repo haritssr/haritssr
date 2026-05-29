@@ -7,5 +7,6 @@ export async function GET(
   { params }: { params: Promise<{ params: string[] }> }
 ) {
   const { params: routeParams } = await params;
+
   return Response.json(routeParams);
 }

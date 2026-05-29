@@ -5,8 +5,10 @@ import "server-only";
 import { createDailyTaskTemplate, sanitizeTasks } from "./data";
 import type { Task } from "./type";
 
-// Resolve the SQLite storage location inside the app's local data directory.
-const DATABASE_DIRECTORY = path.join(process.cwd(), ".data");
+const DEFAULT_DATABASE_DIRECTORY = "/Users/haritssyah/developer/.data-haritssr";
+// Absolute folder path for task SQLite storage (override via TASK_DB_DIR).
+const DATABASE_DIRECTORY = process.env.TASK_DB_DIR ?? DEFAULT_DATABASE_DIRECTORY;
+// Absolute SQLite file path used by better-sqlite3.
 const DATABASE_PATH = path.join(DATABASE_DIRECTORY, "task.db");
 
 // Ensure the database directory exists before creating/opening the file.

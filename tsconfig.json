@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["bun-types"],
     "noImplicitAny": true,
     "strictNullChecks": true,
     // "noUnusedLocals":true,
@@ -23,14 +24,14 @@
       "@/Icons": ["components/Icons"],
       "@/styles/*": ["styles/*"],
       "@/utils/*": ["utils/*"],
-      "@content-collections": ["./.content-collections/generated"]
+      "@content-collections": ["./.content-collections/generated"],
     },
     "incremental": true,
     "plugins": [
       {
-        "name": "next"
-      }
-    ]
+        "name": "next",
+      },
+    ],
   },
   "include": [
     "next-env.d.ts",
@@ -53,7 +54,9 @@
     ".content-collections/generated",
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "app/tools/db.bun.ts",
+    "app/tools/db.test.js",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

@@ -26,7 +26,7 @@ flowchart TD
     subgraph DB["🗄️ Database (better-sqlite3)"]
         D1["db.ts: normalizeTask + sanitizeTasks"]
         D2["Table: daily_tasks"]
-        D3[".data/task.db (WAL)"]
+        D3["/Users/haritssyah/developer/.data-haritssr/task.db (WAL)"]
         D4["Replace strategy: DELETE → INSERT"]
     end
 
@@ -42,7 +42,7 @@ flowchart TD
 const taskStateChart = `
 flowchart LR
     Other["📋 Other<br/>Backlog tasks"] -->|Do Now / Resume| Now
-    Now["▶️ Now<br/>Active task"] -->|Done button OR progress >= 100| Done
+    Now["▶️ Now<br/>Active task"] -->|Done button OR data >= 100| Done
     Now -->|Do Now another task demotes current| Other
 
     style Other fill:#dbeafe,stroke:#3b82f6
@@ -119,7 +119,7 @@ flowchart TB
 
     subgraph External["External"]
         api["API: /api/task"]
-        db["SQLite: .data/task.db"]
+        db["SQLite: /Users/haritssyah/developer/.data-haritssr/task.db"]
     end
 
     tasks --> Derived
@@ -196,7 +196,7 @@ flowchart TB
         route["route.ts<br/>GET, POST, PUT"]
     end
 
-    subgraph Data[".data/"]
+    subgraph Data["/Users/haritssyah/developer/.data-haritssr/"]
         taskdb["task.db<br/>SQLite database"]
     end
 
@@ -466,7 +466,8 @@ export default function TaskArchitecturePage() {
             No authentication or access control on <code className="px-1">/api/task</code>.
           </li>
           <li>
-            SQLite DB lives in <code className="px-1">.data/</code> and is currently committed; production needs managed storage + backups.
+            SQLite DB lives in <code className="px-1">/Users/haritssyah/developer/.data-haritssr/</code> (or <code className="px-1">TASK_DB_DIR</code>) and is not committed; production needs managed
+            storage + backups.
           </li>
           <li>No schema migrations or versioning for the DB.</li>
           <li>No tests covering task logic, sanitization, or API handlers.</li>

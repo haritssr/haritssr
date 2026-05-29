@@ -1,7 +1,7 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import Destination from "@/components/Destination";
+import TopBarSearch from "@/components/TopBarSearch";
 import { GitHubIcon } from "./Icons";
 
 export default function TopBar() {
@@ -26,9 +26,7 @@ export default function TopBar() {
         </div>
 
         <div className="flex items-center space-x-3">
-          <div title="Search: Coming soon">
-            <MagnifyingGlassIcon className="h-5 w-5 cursor-pointer text-zinc-800 hover:text-zinc-400" />
-          </div>
+          <TopBarSearch />
           {/* Source to GitHub */}
           <a className="group flex items-center space-x-2" href="https://www.github.com/haritssr/haritssr" rel="noopener noreferrer" target="_blank" title="Whole Site Source Code">
             <GitHubIcon className="h-5 w-5 cursor-pointer text-zinc-800 group-hover:text-zinc-400" />

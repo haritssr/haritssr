@@ -56,7 +56,7 @@ export default function DesignSystem() {
           <>
             Design system used in <ExternalLink big href="https://www.haritssr.com" name="haritssr.com" />
             ,
-            <ExternalLink big href="https://harisstudio.vercel.app" name="Haris Studio" /> and <ExternalLink big href="https://www.harislab.com" name="Haris Lab" />.
+            <ExternalLink big href="https://harisstudio.vercel.app" name="Haris Studio" /> and <ExternalLink big href="https://www.harislab.com" name="Haris Lab" />. (No longer maintained).
           </>
         }
       />

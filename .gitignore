@@ -2,22 +2,12 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-
-#typescript-coverage
-/coverage-ts
-/coverage
 
 # testing
 /coverage
 
 # next.js
 /.next/
-/out/
-
-# production
-/build
 
 # misc
 .DS_Store
@@ -34,9 +24,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# vercel
-.vercel
-
 # contentlayer & content-collections
-.contentlayer
 .content-collections
+
+# local sqlite storage
+.data/
+.data-haritssr/

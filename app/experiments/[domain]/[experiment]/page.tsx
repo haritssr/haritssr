@@ -126,17 +126,14 @@ import InlineMaki from "@/components/experiments/ui-explorations/InlineMakiDemo"
 import NotionNavbar from "@/components/experiments/ui-explorations/NotionNavbarDemo";
 import Pure from "@/components/experiments/ui-explorations/PureDemo";
 import TimesTable from "@/components/experiments/ui-explorations/TimesTableDemo";
+import YearlyInterest from "@/components/experiments/ui-explorations/YearlyInterest";
 
 // Visx
 import VisxBarChart from "@/components/experiments/visx/VisxBarChartDemo";
 import VisxPieChart from "@/components/experiments/visx/VisxPieChartDemo";
 
 // Generate metadata for each experiment page
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ domain: string; experiment: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ domain: string; experiment: string }> }): Promise<Metadata> {
   const { domain, experiment } = await params;
 
   const title = experiment
@@ -156,10 +153,7 @@ export async function generateMetadata({
 }
 
 // Experiment component mapping
-const experimentComponents: Record<
-  string,
-  Record<string, React.ComponentType>
-> = {
+const experimentComponents: Record<string, Record<string, React.ComponentType>> = {
   browser: {
     clock: Clock,
     "custom-scroll": CustomScroll,
@@ -285,6 +279,7 @@ const experimentComponents: Record<
     pure: Pure,
     "times-table": TimesTable,
     "inline-maki": InlineMaki,
+    "yearly-interest": YearlyInterest,
   },
   visx: {
     "bar-chart": VisxBarChart,
@@ -292,11 +287,7 @@ const experimentComponents: Record<
   },
 };
 
-export default async function ExperimentPage({
-  params,
-}: {
-  params: Promise<{ domain: string; experiment: string }>;
-}) {
+export default async function ExperimentPage({ params }: { params: Promise<{ domain: string; experiment: string }> }) {
   const { domain, experiment } = await params;
 
   const domainExperiments = experimentComponents[domain];

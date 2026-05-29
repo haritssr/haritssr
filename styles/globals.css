@@ -61,7 +61,7 @@
 }
 
 /* Form elements - native CSS instead of @apply */
-input[type="search"],
+/*input[type="search"],
 input[type="url"],
 input[type="email"],
 input[type="password"],
@@ -70,7 +70,7 @@ input[type="tel"] {
   border-radius: var(--radius-sm);
   padding: 0.25rem 0.625rem;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-}
+}*/
 input[type="search"]:focus,
 input[type="url"]:focus,
 input[type="email"]:focus,

@@ -7,15 +7,7 @@ export default function Contacts() {
       <section className="corner-squircle grid grid-cols-1 gap-5 rounded-2xl border-zinc-300 sm:grid-cols-2 sm:gap-0 md:mb-0 lg:col-span-2 lg:h-full lg:border">
         <div className="flex flex-col self-center">
           <section className="flex select-none justify-center">
-            <Image
-              alt="Harits Syah"
-              blurDataURL="/images/blur.jpg"
-              className="z-10 mb-4 aspect-ratio h-24 w-24 rounded-full"
-              height="100"
-              priority
-              src="/images/blur.jpg"
-              width="100"
-            />
+            <Image alt="Harits Syah" blurDataURL="/images/blur.jpg" className="z-10 mb-4 aspect-ratio h-24 w-24 rounded-full" height="100" priority src="/images/blur.jpg" width="100" />
           </section>
           <div className="text-center font-semibold text-lg text-zinc-800">Harits Syah</div>
         </div>
@@ -36,9 +28,7 @@ export default function Contacts() {
                     title="harislab.com | Haris Lab : Reference, analyze, and test math-physics for high school students"
                   >
                     <span className="flex items-center">
-                      <span className="text-tiny group-hover:text-action sm:text-base">
-                        Web Product Engineer
-                      </span>
+                      <span className="text-tiny group-hover:text-action sm:text-base">Web Product Engineer</span>
                       <svg
                         className="mt-0.5 ml-1 h-4 w-4 text-zinc-500 group-hover:text-action"
                         fill="none"
@@ -48,11 +38,7 @@ export default function Contacts() {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <title>External Link Icon</title>
-                        <path
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
+                        <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                   </a>
@@ -63,9 +49,7 @@ export default function Contacts() {
 
           <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-white">Role</span>
-            <span className="col-span-2 text-tiny text-zinc-500 sm:text-base">
-              Math Physics Teacher
-            </span>
+            <span className="col-span-2 text-tiny text-zinc-500 sm:text-base">Math Physics Teacher</span>
           </div>
           <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-tiny text-zinc-500 sm:text-base">At :</span>
@@ -79,9 +63,7 @@ export default function Contacts() {
                   title="harislab.com | Haris Lab : Reference, analyze, and test math-physics for high school students"
                 >
                   <span className="flex items-center">
-                    <span className="text-tiny group-hover:text-action sm:text-base">
-                      Haris Lab
-                    </span>
+                    <span className="text-tiny group-hover:text-action sm:text-base">Haris Lab</span>
                     <svg
                       className="mt-0.5 ml-1 h-4 w-4 text-zinc-500 group-hover:text-action"
                       fill="none"
@@ -91,11 +73,7 @@ export default function Contacts() {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <title>External Link Icon</title>
-                      <path
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
+                      <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
                 </a>
@@ -104,11 +82,7 @@ export default function Contacts() {
           </div>
           <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-tiny text-zinc-500 sm:text-base">Email :</span>
-            <a
-              className="col-span-2 text-tiny text-zinc-500 hover:text-action sm:text-base"
-              href="mailto:haritssr@gmail.com"
-              title="Send me an email"
-            >
+            <a className="col-span-2 text-tiny text-zinc-500 hover:text-action sm:text-base" href="mailto:haritssr@gmail.com" title="Send me an email">
               haritssr@gmail.com
             </a>
           </div>
