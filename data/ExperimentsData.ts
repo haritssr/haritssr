@@ -142,7 +142,7 @@ export const ExperimentsData = [
     title: "UI Explorations",
     logoSrc: "/Icons/radixui.jpg",
     description: "Random user interfaces explorations",
-    links: ["Notion NavBar", "Pure", "Times Table", "Inline Maki", "Task", "Yearly Interest"],
+    links: ["Notion NavBar", "Pure", "Times Table", "Inline Maki", "Task", "Yearly Interest", "Input List"],
   },
   {
     id: 11,

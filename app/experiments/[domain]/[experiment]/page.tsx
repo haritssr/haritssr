@@ -123,6 +123,7 @@ import TailwindYoutubeThumbnail from "@/components/experiments/tailwind-css/Tail
 
 // UI Explorations
 import InlineMaki from "@/components/experiments/ui-explorations/InlineMakiDemo";
+import InputList from "@/components/experiments/ui-explorations/InputList";
 import NotionNavbar from "@/components/experiments/ui-explorations/NotionNavbarDemo";
 import Pure from "@/components/experiments/ui-explorations/PureDemo";
 import TimesTable from "@/components/experiments/ui-explorations/TimesTableDemo";
@@ -133,7 +134,11 @@ import VisxBarChart from "@/components/experiments/visx/VisxBarChartDemo";
 import VisxPieChart from "@/components/experiments/visx/VisxPieChartDemo";
 
 // Generate metadata for each experiment page
-export async function generateMetadata({ params }: { params: Promise<{ domain: string; experiment: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ domain: string; experiment: string }>;
+}): Promise<Metadata> {
   const { domain, experiment } = await params;
 
   const title = experiment
@@ -280,6 +285,7 @@ const experimentComponents: Record<string, Record<string, React.ComponentType>> 
     "times-table": TimesTable,
     "inline-maki": InlineMaki,
     "yearly-interest": YearlyInterest,
+    "input-list": InputList,
   },
   visx: {
     "bar-chart": VisxBarChart,
