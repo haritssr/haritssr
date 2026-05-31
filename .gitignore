@@ -30,3 +30,5 @@ yarn-error.log*
 # local sqlite storage
 .data/
 .data-haritssr/
+
+*.tsbuildinfo
