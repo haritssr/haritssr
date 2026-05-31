@@ -2,5 +2,17 @@
   "code_actions_on_format": {
     "source.action.useSortedAttributes.biome": true,
     "source.fixAll.biome": true
-  }
+  },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/repos/**"
+  ]
 }
