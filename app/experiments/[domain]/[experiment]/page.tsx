@@ -37,7 +37,7 @@ import KaTeXBasic from "@/components/experiments/katex/KaTeXBasicDemo";
 
 // Mantine
 import MantineCarousel from "@/components/experiments/mantine/MantineCarouselDemo";
-
+import LearnAPIRoute from "@/components/experiments/nextjs/LearnAPIRoute";
 // Next.js
 import NextjsImageLocal from "@/components/experiments/nextjs/NextjsImageLocalDemo";
 import NextjsImageRemote from "@/components/experiments/nextjs/NextjsImageRemoteDemo";
@@ -201,6 +201,7 @@ const experimentComponents: Record<string, Record<string, React.ComponentType>> 
     "next-13-image-remote": NextjsImageRemote,
     router: NextjsRouter,
     swr: NextjsSWR,
+    "learn-api-route": LearnAPIRoute,
   },
   "radix-ui": {
     accordion: RadixAccordion,

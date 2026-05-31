@@ -65,7 +65,16 @@ export const ExperimentsData = [
     title: "Nextjs",
     logoSrc: "/Icons/nextjs.jpg",
     description: "The React framework for the web",
-    links: ["Router", "SWR", "Articles", "Students", "Posts", "Next 13 Image Local", "Next 13 Image Remote"],
+    links: [
+      "Router",
+      "SWR",
+      "Articles",
+      "Students",
+      "Posts",
+      "Next 13 Image Local",
+      "Next 13 Image Remote",
+      "Learn API Route",
+    ],
   },
   {
     id: 4,

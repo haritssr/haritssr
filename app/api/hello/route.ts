@@ -5,7 +5,7 @@ export async function GET() {
       id: "1",
       name: "Harits Syah",
       age: "22",
-      city: "San Francisco, California",
+      city: "South Tangerang, Indonesia",
     },
     {
       id: "2",
