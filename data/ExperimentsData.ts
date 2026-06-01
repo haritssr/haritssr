@@ -8,7 +8,7 @@ export const ExperimentsData = [
   {
     id: 1,
     title: "Tailwind CSS",
-    logoSrc: "/Icons/tailwindcss.jpg",
+    logoSrc: "/icons/tailwindcss.jpg",
     description: "CSS library for styling websites",
     links: [
       "Position",
@@ -30,7 +30,7 @@ export const ExperimentsData = [
   {
     id: 2,
     title: "React",
-    logoSrc: "/Icons/react.jpg",
+    logoSrc: "/icons/react.jpg",
     description: "JavaScript library for building user interfaces",
     links: [
       "useState Todo List",
@@ -63,7 +63,7 @@ export const ExperimentsData = [
   {
     id: 3,
     title: "Nextjs",
-    logoSrc: "/Icons/nextjs.jpg",
+    logoSrc: "/icons/nextjs.jpg",
     description: "The React framework for the web",
     links: [
       "Router",
@@ -79,7 +79,7 @@ export const ExperimentsData = [
   {
     id: 4,
     title: "Browser",
-    logoSrc: "/Icons/chrome.jpg",
+    logoSrc: "/icons/chrome.jpg",
     description: "Native built-in browser API utilities exploration",
     links: [
       "Clock",
@@ -100,28 +100,28 @@ export const ExperimentsData = [
   {
     id: 5,
     title: "VisX",
-    logoSrc: "/Icons/VisX.jpg",
+    logoSrc: "/icons/VisX.jpg",
     description: "Data visualization using React.js",
     links: ["Bar Chart", "Pie Chart"],
   },
   {
     id: 7,
     title: "Mantine",
-    logoSrc: "/Icons/mantine.jpg",
+    logoSrc: "/icons/mantine.jpg",
     description: "A fully featured React component libray",
     links: ["Carousel"],
   },
   {
     id: 8,
     title: "Headless UI",
-    logoSrc: "/Icons/headlessui.jpg",
+    logoSrc: "/icons/headlessui.jpg",
     description: "Headless UI components by Tailwind CSS Team",
     links: ["Menu", "Listbox", "Switch", "Disclosure", "Dialog", "Popover", "Radio Group", "Tabs"],
   },
   {
     id: 9,
     title: "Radix UI",
-    logoSrc: "/Icons/radixui.jpg",
+    logoSrc: "/icons/radixui.jpg",
     description: "Headless UI for design system in React.js",
     links: [
       "Accordion",
@@ -149,42 +149,42 @@ export const ExperimentsData = [
   {
     id: 10,
     title: "UI Explorations",
-    logoSrc: "/Icons/radixui.jpg",
+    logoSrc: "/icons/radixui.jpg",
     description: "Random user interfaces explorations",
     links: ["Notion NavBar", "Pure", "Times Table", "Inline Maki", "Task", "Yearly Interest", "Input List"],
   },
   {
     id: 11,
     title: "Haris Lab",
-    logoSrc: "/Icons/harislab.svg",
+    logoSrc: "/icons/harislab.svg",
     description: "Haris Lab user interfaces design systems",
     links: ["Global Modal", "Context Modal", "Side Bar", "Sidebar Hierarchy"],
   },
   {
     id: 12,
     title: "React Aria",
-    logoSrc: "/Icons/react-aria.jpg",
+    logoSrc: "/icons/react-aria.jpg",
     description: "A library of React Hooks, UI primitives, and more",
     links: ["Calendar"],
   },
   {
     id: 13,
     title: "KaTeX",
-    logoSrc: "/Icons/KaTeX.jpg",
+    logoSrc: "/icons/KaTeX.jpg",
     description: "The math typesetting library for the web",
     links: ["Basic"],
   },
   {
     id: 14,
     title: "React Table",
-    logoSrc: "/Icons/tanstack.jpg",
+    logoSrc: "/icons/tanstack.jpg",
     description: "Headless UI for building tables & datagrids",
     links: ["Basic", "Column Group", "Column Ordering", "Column Pinning"],
   },
   {
     id: 15,
     title: "React Query",
-    logoSrc: "/Icons/tanstack.jpg",
+    logoSrc: "/icons/tanstack.jpg",
     description: "Asynchronous state management for TS/JS",
     links: ["Basic"],
   },

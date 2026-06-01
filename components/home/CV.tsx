@@ -18,10 +18,10 @@ export default function CV() {
         <div className="flex items-center space-x-2">
           <Image
             alt="logo"
-            blurDataURL="/Icons/sman5.jpg"
+            blurDataURL="/icons/sman5.jpg"
             className="aspect-auto h-5 w-5"
             height={20}
-            src="/Icons/sman5.jpg"
+            src="/icons/sman5.jpg"
             width={20}
           />
           <div className="font-semibold text-lg">Privat Teacher</div>
@@ -29,10 +29,7 @@ export default function CV() {
         <div className="mt-1.5 space-y-1.5 pl-7 text-zinc-500">
           <div>Lia Privat & personal</div>
           <div> June 2018 - Now (7 years)</div>
-          <div>
-            Teaching math and physics for junior and senior highschool students
-            at home
-          </div>
+          <div>Teaching math and physics for junior and senior highschool students at home</div>
         </div>
       </Box>
 
@@ -88,8 +85,7 @@ export default function CV() {
         <div className="">
           <div className="font-semibold">Web Software Engineering</div>
           <p className="text-zinc-500">
-            JavaScript, TypeScript, React.js, Next.js, Web platform, PWA,
-            Node.js ecosystem.
+            JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js ecosystem.
           </p>
         </div>
         <div className="">
@@ -98,9 +94,7 @@ export default function CV() {
         </div>
         <div className="">
           <div className="font-semibold">UI Design (with Figma)</div>
-          <p className="text-zinc-500">
-            Experiments, mockup, prototyping UI for mobile/desktop web.
-          </p>
+          <p className="text-zinc-500">Experiments, mockup, prototyping UI for mobile/desktop web.</p>
         </div>
       </Box>
       <div className="flex justify-end sm:justify-start">

@@ -3,19 +3,19 @@ export const ContactData = {
   description: "My preferable communication channels.",
   points: [
     {
-      icon: "/Icons/linkedin.jpg",
+      icon: "/icons/linkedin.jpg",
       link: "https://www.linkedin.com/in/haritssr",
       name: "LinkedIn",
     },
-    { icon: "/Icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
-    { icon: "/Icons/x.png", link: "https://www.x.com/haritssr", name: "X" },
+    { icon: "/icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
+    { icon: "/icons/x.png", link: "https://www.x.com/haritssr", name: "X" },
     {
-      icon: "/Icons/github.jpg",
+      icon: "/icons/github.jpg",
       link: "https://www.github.com/haritssr",
       name: "GitHub",
     },
     {
-      icon: "/Icons/haritssr.svg",
+      icon: "/icons/haritssr.svg",
       link: "https://www.haritssr.com",
       name: "Website",
     },

@@ -27,10 +27,9 @@ export const ExperiencesData: ExperiencesDataType[] = [
   {
     project_name: "Haris Lab",
     about_client: {
-      logo_src: "/Icons/harislab.svg",
+      logo_src: "/icons/harislab.svg",
       brand_name: "Haris Lab",
-      short_about:
-        "Reference, analyze, practice, assesment, tutoring Math and Physics.",
+      short_about: "Reference, analyze, practice, assesment, tutoring Math and Physics.",
       long_about:
         "Provide online platform for reference, analyze, practice, assesment, and offline tutoring math and physics high school and early college level.",
       company_name: "PT Haris Laboratorium Indonesia",
@@ -65,10 +64,9 @@ export const ExperiencesData: ExperiencesDataType[] = [
   {
     project_name: "AKA Trading Indonesia",
     about_client: {
-      logo_src: "/Icons/aka-tradingindo.PNG",
+      logo_src: "/icons/aka-tradingindo.PNG",
       brand_name: "AKA Trading Indonesia",
-      short_about:
-        "Provide agricultural product for all your need. From coffee to spices.",
+      short_about: "Provide agricultural product for all your need. From coffee to spices.",
       long_about:
         "Cooperating and collaborating with various stakeholders to produce and distribute agricultural products that meet your qualifications.",
       company_name: "PT AKA Trading Indonesia",
@@ -88,10 +86,7 @@ export const ExperiencesData: ExperiencesDataType[] = [
         "Updating the website according to the owner's request",
       ],
       working_period: "Jun 2021 - Des 2021",
-      website_status: [
-        "Production",
-        "Change management (site manage by AKA Trading team, not by me anymore)",
-      ],
+      website_status: ["Production", "Change management (site manage by AKA Trading team, not by me anymore)"],
       routes: ["Home", "About us", "Products", "Contact"],
       features: ["Form Email", "Map", "Global Navigation"],
     },
@@ -103,10 +98,9 @@ export const ExperiencesData: ExperiencesDataType[] = [
   {
     project_name: "Haris Studio",
     about_client: {
-      logo_src: "/Icons/harisstudio.svg",
+      logo_src: "/icons/harisstudio.svg",
       brand_name: "Haris Studio",
-      short_about:
-        "Provide web design, web creation, and web user experience services.",
+      short_about: "Provide web design, web creation, and web user experience services.",
       long_about: "-",
       company_name: "PT Haris Studio Indonesia",
       phone_number: "+62-8953-3110-3401",
@@ -130,10 +124,9 @@ export const ExperiencesData: ExperiencesDataType[] = [
   {
     project_name: "Mixa Perkasa",
     about_client: {
-      logo_src: "/Icons/mixa-perkasa.jpg",
+      logo_src: "/icons/mixa-perkasa.jpg",
       brand_name: "Mixa Perkasa",
-      short_about:
-        "Renovation contractor, new building, interior design, landscape work, etc.",
+      short_about: "Renovation contractor, new building, interior design, landscape work, etc.",
       long_about:
         "Starting from a small business with experience in the field of construction and land, now it has grown into a company engaged in Renovation Contractors, New Buildings, Interior Design and Landscape Works.",
       company_name: "PT Mixa Perkasa Indonesia",
@@ -157,10 +150,9 @@ export const ExperiencesData: ExperiencesDataType[] = [
   {
     project_name: "Arsya Wyata Mandiri",
     about_client: {
-      logo_src: "/Icons/awm.jpg",
+      logo_src: "/icons/awm.jpg",
       brand_name: "Arsya, Nice Time",
-      short_about:
-        "Providing good food, drinks, and good place for our loved customers.",
+      short_about: "Providing good food, drinks, and good place for our loved customers.",
       long_about: "-",
       company_name: "CV Asriyasa Wyata Mandiri",
       phone_number: "(021)-222-10-200",
@@ -186,12 +178,10 @@ export const ExperiencesData: ExperiencesDataType[] = [
   {
     project_name: "Harits Syah",
     about_client: {
-      logo_src: "/Icons/haritssr.svg",
+      logo_src: "/icons/haritssr.svg",
       brand_name: "Harits Syah Personal Site",
-      short_about:
-        "Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
-      long_about:
-        "Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
+      short_about: "Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
+      long_about: "Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",
       company_name: "Personal Site",
       phone_number: "+62-8953-3110-3401",
       website: "https://www.haritssr.com",

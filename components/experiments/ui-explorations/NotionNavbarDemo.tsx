@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ArrowDownCircleIcon,
-  BuildingOffice2Icon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowDownCircleIcon, BuildingOffice2Icon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { NavigationMenu } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
@@ -36,13 +32,7 @@ export default function NotionNavbarDemo() {
 function Logo() {
   return (
     <div className="mr-2 flex items-center space-x-2">
-      <Image
-        alt=""
-        blurDataURL="/Icons/notion.jpg"
-        height="30"
-        src="/Icons/notion.jpg"
-        width="30"
-      />
+      <Image alt="" blurDataURL="/icons/notion.jpg" height="30" src="/icons/notion.jpg" width="30" />
       <div className="font-semibold text-black text-lg">Notion</div>
     </div>
   );
@@ -54,10 +44,7 @@ function Yes() {
         <NavigationMenu.Item className="rounded px-2 py-1 hover:bg-zinc-100">
           <NavigationMenu.Trigger className="group flex items-center space-x-1">
             <div className="font-semibold text-black text-sm">Product</div>
-            <ChevronDownIcon
-              className="h-3 w-3 group-rdx-state-open:rotate-180"
-              strokeWidth={3}
-            />
+            <ChevronDownIcon className="h-3 w-3 group-rdx-state-open:rotate-180" strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 drop-shadow-lg">
             <div className="cursor-pointer rounded px-2 py-1 text-sm hover:bg-zinc-50">
@@ -69,82 +56,49 @@ function Yes() {
                 <ArrowDownCircleIcon className="h-4 w-4" strokeWidth={1} />
                 <div className="font-medium text-sm">Download Notion</div>
               </div>
-              <div className="mt-1 font-light text-sm text-zinc-400">
-                Mac, Windows, iOS, & Android
-              </div>
+              <div className="mt-1 font-light text-sm text-zinc-400">Mac, Windows, iOS, & Android</div>
             </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item className="rounded px-2 py-1 hover:bg-zinc-100">
           <NavigationMenu.Trigger className="group flex items-center space-x-1">
             <div className="font-semibold text-black text-sm">Download</div>
-            <ChevronDownIcon
-              className="h-3 w-3 group-rdx-state-open:rotate-180"
-              strokeWidth={3}
-            />
+            <ChevronDownIcon className="h-3 w-3 group-rdx-state-open:rotate-180" strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium text-sm drop-shadow-lg">
             <div className="space-y-1">
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                iOS & Android
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                macOS & Windows
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                Web Clipper
-              </div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">iOS & Android</div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">macOS & Windows</div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">Web Clipper</div>
             </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item className="rounded px-2 py-1 hover:bg-zinc-100">
           <NavigationMenu.Trigger className="group flex items-center space-x-1">
             <div className="font-semibold text-black text-sm">Solutions</div>
-            <ChevronDownIcon
-              className="h-3 w-3 group-rdx-state-open:rotate-180"
-              strokeWidth={3}
-            />
+            <ChevronDownIcon className="h-3 w-3 group-rdx-state-open:rotate-180" strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium drop-shadow-lg">
             <div className="flex divide-x divide-zinc-300">
               <article className="p-1">
-                <div className="mb-2 text-[10px] text-zinc-400">
-                  BY TEAM SIZE
-                </div>
+                <div className="mb-2 text-[10px] text-zinc-400">BY TEAM SIZE</div>
                 <div className="space-y-1">
                   <section className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50">
-                    <BuildingOffice2Icon
-                      className="h-8 w-8 fill-zinc-200 text-zinc-700"
-                      strokeWidth={1.5}
-                    />
+                    <BuildingOffice2Icon className="h-8 w-8 fill-zinc-200 text-zinc-700" strokeWidth={1.5} />
                     <div className="flex flex-col justify-center text-[12px]">
-                      <div className="font-medium text-zinc-800">
-                        Enterprise
-                      </div>
-                      <div className="text-zinc-400">
-                        Advance features for your org
-                      </div>
+                      <div className="font-medium text-zinc-800">Enterprise</div>
+                      <div className="text-zinc-400">Advance features for your org</div>
                     </div>
                   </section>
                   <section className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50">
-                    <BuildingOffice2Icon
-                      className="h-8 w-8 fill-zinc-200 text-zinc-700"
-                      strokeWidth={1.5}
-                    />
+                    <BuildingOffice2Icon className="h-8 w-8 fill-zinc-200 text-zinc-700" strokeWidth={1.5} />
                     <div className="flex flex-col justify-center text-[12px]">
-                      <div className="font-medium text-zinc-800">
-                        Small bussiness{" "}
-                      </div>
-                      <div className="text-zinc-400">
-                        Run your team on one tool
-                      </div>
+                      <div className="font-medium text-zinc-800">Small bussiness </div>
+                      <div className="text-zinc-400">Run your team on one tool</div>
                     </div>
                   </section>
                   <section className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50">
-                    <BuildingOffice2Icon
-                      className="h-8 w-8 fill-zinc-200 text-zinc-700"
-                      strokeWidth={1.5}
-                    />
+                    <BuildingOffice2Icon className="h-8 w-8 fill-zinc-200 text-zinc-700" strokeWidth={1.5} />
                     <div className="flex flex-col justify-center text-[12px]">
                       <div className="font-medium text-zinc-800">Personal</div>
                       <div className="text-zinc-400">Free for individual</div>
@@ -153,32 +107,20 @@ function Yes() {
                 </div>
               </article>
               <article className="p-1">
-                <div className="mb-2 px-1 text-[10px] text-zinc-400">
-                  BY TEAM SIZE
-                </div>
+                <div className="mb-2 px-1 text-[10px] text-zinc-400">BY TEAM SIZE</div>
                 <div className="space-y-1 text-sm">
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                    Design
-                  </div>
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                    Engineering
-                  </div>
+                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">Design</div>
+                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">Engineering</div>
                   <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
                     Product Manager
                   </div>
                 </div>
               </article>
               <article className="p-1">
-                <div className="mb-2 px-1 text-[10px] text-zinc-400">
-                  BY TEAM SIZE
-                </div>
+                <div className="mb-2 px-1 text-[10px] text-zinc-400">BY TEAM SIZE</div>
                 <div className="space-y-1 text-sm">
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                    Design
-                  </div>
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                    Engineering
-                  </div>
+                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">Design</div>
+                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">Engineering</div>
                   <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
                     Product Manager
                   </div>
@@ -190,31 +132,16 @@ function Yes() {
         <NavigationMenu.Item className="rounded px-2 py-1 hover:bg-zinc-100">
           <NavigationMenu.Trigger className="group flex items-center space-x-1">
             <div className="font-semibold text-black text-sm">Resources</div>
-            <ChevronDownIcon
-              className="h-3 w-3 group-rdx-state-open:rotate-180"
-              strokeWidth={3}
-            />
+            <ChevronDownIcon className="h-3 w-3 group-rdx-state-open:rotate-180" strokeWidth={3} />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium text-sm drop-shadow-lg">
             <div className="space-y-1">
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                Blog
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                Guide & Tutorials
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                Webinar
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                Help center
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                API Docs
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                Community
-              </div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">Blog</div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">Guide & Tutorials</div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">Webinar</div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">Help center</div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">API Docs</div>
+              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">Community</div>
             </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
