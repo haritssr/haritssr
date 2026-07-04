@@ -16,7 +16,7 @@ function boldUsername(text: string, username = "haritssr") {
             </span>
           ) : (
             chunk
-          )
+          ),
         )}
     </>
   );
@@ -35,17 +35,8 @@ function renderContact(each: { link: string; icon: string }) {
         target="_blank"
         title={each.link}
       >
-        <Image
-          alt={each.link}
-          className="h-4 w-4"
-          height={20}
-          src={each.icon}
-          title={each.link}
-          width={20}
-        />
-        <span className="text-zinc-500">
-          {boldUsername(each.link.replace(/^https?:\/\/(www\.)?/, ""))}
-        </span>
+        <Image alt={each.link} className="h-4 w-4" height={20} src={each.icon} title={each.link} width={20} />
+        <span className="text-zinc-500">{boldUsername(each.link.replace(/^https?:\/\/(www\.)?/, ""))}</span>
       </a>
     );
   }
@@ -57,14 +48,7 @@ function renderContact(each: { link: string; icon: string }) {
         href={`mailto:${each.link}`}
         title={each.link}
       >
-        <Image
-          alt={each.link}
-          className="h-4 w-4"
-          height={20}
-          src={each.icon}
-          title={each.link}
-          width={20}
-        />
+        <Image alt={each.link} className="h-4 w-4" height={20} src={each.icon} title={each.link} width={20} />
         <span className="text-zinc-500">{boldUsername(each.link)}</span>
       </a>
     );

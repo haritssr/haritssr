@@ -11,36 +11,22 @@ interface ExperienceCardTypes {
   industry: string;
 }
 
-export default function ExperienceCard({
-  href,
-  title,
-  description,
-  imgSrc,
-}: ExperienceCardTypes) {
+export default function ExperienceCard({ href, title, description, imgSrc }: ExperienceCardTypes) {
   return (
     <div className="group corner-squircle flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-300 selection:mx-auto">
       {/* Header + Title + Explanation */}
       <section className="flex flex-col justify-between space-y-2 p-3">
         <div className="flex items-start justify-between">
-          <Image
-            alt={title}
-            blurDataURL={imgSrc}
-            className="mb-1.5 h-7 w-7"
-            height={30}
-            src={imgSrc}
-            width={30}
-          />
+          <Image alt={title} blurDataURL={imgSrc} className="mb-1.5 h-7 w-7" height={30} src={imgSrc} width={30} />
 
           <Link
-            className="flex cursor-pointer items-center justify-center space-x-1.5 rounded-full border border-zinc-300 px-3 py-1 text-zinc-600 hover:border-zinc-400 hover:bg-zinc-50 hover:text-zinc-700"
+            className="flex cursor-pointer items-center justify-center space-x-1.5 rounded-xl corner-squircle border border-zinc-300 px-3 py-1 text-zinc-600 hover:border-zinc-400 hover:text-zinc-700"
             href={`/experiences/${title.toLowerCase().split(" ").join("-")}`}
           >
             <p className="text-sm">Case Study</p>
           </Link>
         </div>
-        <div className="truncate font-medium text-lg text-zinc-800">
-          {title}
-        </div>
+        <div className="truncate font-medium text-lg text-zinc-800">{title}</div>
 
         <div className="text-zinc-600">{description}</div>
 
