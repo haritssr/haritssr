@@ -2,6 +2,7 @@
 
 import { NumberField } from "@base-ui/react/number-field";
 import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import ExperimentPageBadge from "@/components/ExperimentPageBadge";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
@@ -33,7 +34,9 @@ export default function TaskPage() {
   // Active Now-section tasks only.
   const nowTasks = tasks.filter((task) => task.type === "Now");
   // Active Other-section tasks sorted by progress desc.
-  const otherTasks = tasks.filter((task) => task.type === "Other").sort((firstTask, secondTask) => secondTask.progress - firstTask.progress);
+  const otherTasks = tasks
+    .filter((task) => task.type === "Other")
+    .sort((firstTask, secondTask) => secondTask.progress - firstTask.progress);
   // Completed tasks for Done section.
   const doneTasks = tasks.filter((task) => task.type === "Done");
   // Title value trimmed for validation and save.
@@ -41,9 +44,15 @@ export default function TaskPage() {
   // Duration parsed as number for validation and persistence.
   const parsedNewOtherTaskDuration = Number(newOtherTaskDuration);
   // Duplicate title guard to keep title unique.
-  const newOtherTaskTitleExists = tasks.some((task) => task.title.toLowerCase() === normalizedNewOtherTaskTitle.toLowerCase());
+  const newOtherTaskTitleExists = tasks.some(
+    (task) => task.title.toLowerCase() === normalizedNewOtherTaskTitle.toLowerCase(),
+  );
   // Enables Add button only when title/duration/uniqueness are valid.
-  const canAddNewOtherTask = normalizedNewOtherTaskTitle.length > 0 && Number.isFinite(parsedNewOtherTaskDuration) && parsedNewOtherTaskDuration > 0 && !newOtherTaskTitleExists;
+  const canAddNewOtherTask =
+    normalizedNewOtherTaskTitle.length > 0 &&
+    Number.isFinite(parsedNewOtherTaskDuration) &&
+    parsedNewOtherTaskDuration > 0 &&
+    !newOtherTaskTitleExists;
 
   // Immediate save for critical actions (skip debounce)
   const saveImmediately = useCallback(
@@ -113,7 +122,9 @@ export default function TaskPage() {
       // Remaining tasks after extracting promoted task.
       const remainingTasks = tasks.filter((task) => task.title !== title);
       // Demote any existing active Now task back to Other.
-      const nextTasks: Task[] = remainingTasks.map((task) => (task.type === "Now" ? { ...task, type: "Other" as const } : task));
+      const nextTasks: Task[] = remainingTasks.map((task) =>
+        task.type === "Now" ? { ...task, type: "Other" as const } : task,
+      );
       nextTasks.push({ ...targetTask, type: "Now" });
 
       setTasks(nextTasks);
@@ -323,6 +334,7 @@ export default function TaskPage() {
     <>
       <PageTitle title="Task" />
       <PageDescription description="Realistic Daily Time Budget." />
+      <ExperimentPageBadge />
       <section className="mt-2 flex items-center space-x-5">
         <InternalLink href="/task/history">History</InternalLink>
         <InternalLink href="/task/statistics">Statistics</InternalLink>
@@ -361,7 +373,9 @@ export default function TaskPage() {
             // Highlights the selected quick-duration preset.
             const isSelected = parsedNewOtherTaskDuration === preset.minutes;
             // Computes visual variant for selected/unselected preset buttons.
-            const presetClassName = isSelected ? "border-zinc-700 text-zinc-700" : "border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100";
+            const presetClassName = isSelected
+              ? "border-zinc-700 text-zinc-700"
+              : "border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100";
 
             return (
               <button
@@ -414,11 +428,21 @@ export default function TaskPage() {
       <Section title="Tasks">
         {otherTasks.length === 0 && <div className="text-sm text-zinc-400">Empty</div>}
         {otherTasks.map((task) => (
-          <TaskItem key={task.title} onDelete={handleDeleteTask} onDoNow={handleDoNow} onMarkDone={handleMarkDone} onProgressChange={handleProgressChange} onResumeNow={handleResumeNow} {...task} />
+          <TaskItem
+            key={task.title}
+            onDelete={handleDeleteTask}
+            onDoNow={handleDoNow}
+            onMarkDone={handleMarkDone}
+            onProgressChange={handleProgressChange}
+            onResumeNow={handleResumeNow}
+            {...task}
+          />
         ))}
       </Section>
 
-      {normalizedNewOtherTaskTitle.length > 0 && newOtherTaskTitleExists && <div className="mb-3 text-xs text-rose-500">Task title already exists.</div>}
+      {normalizedNewOtherTaskTitle.length > 0 && newOtherTaskTitleExists && (
+        <div className="mb-3 text-xs text-rose-500">Task title already exists.</div>
+      )}
 
       <Section accordion={{ defaultOpen: false }} title="Done">
         {doneTasks.length === 0 && <div className="text-sm text-zinc-500">Nothing is done today.</div>}
