@@ -1,5 +1,3 @@
-import { EducationData } from "data/EducationData";
-import { NonFormalEducationData } from "data/NonFormalEducationData";
 import Image from "next/image";
 import Box from "../Box";
 import SecondaryButton from "../SecondaryButton";
@@ -14,7 +12,7 @@ export default function CV() {
       isTitleLink={false}
       topic="CV"
     >
-      <Box title="Formal Working Experiences">
+      <Box title="Formal Working Projects">
         <div className="flex items-center space-x-2">
           <Image
             alt="logo"
@@ -99,7 +97,7 @@ export default function CV() {
       </Box>
       <div className="flex justify-end sm:justify-start">
         <SecondaryButton
-          className="corner-squircle select-none rounded-xl px-3 py-1 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden focus:ring-zinc-800 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
+          className="corner-squircle select-none rounded-xl px-3 py-1 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden active:ring-offset-1"
           download="cv-dec-2024.pdf"
           href="/cv-dec-2024.pdf"
         >
@@ -109,3 +107,30 @@ export default function CV() {
     </HomeSectionWrapper>
   );
 }
+
+const NonFormalEducationData = [
+  {
+    logo: "/icons/fcc.jpg",
+    school: "FreeCodeCamp.com",
+    period: "Des 2022 - Jun 2023",
+    level: "JavaScript Data Structure & Algorithm",
+    status: "Finish",
+  },
+];
+
+const EducationData = [
+  {
+    logo: "/icons/uinjkt.jpg",
+    school: "UIN Syarif Hidayatullah Jakarta, Banten, Indonesia",
+    period: "Jun 2017 - Jun 2024 ( 7 years )",
+    level: "Bachelor of (Physics) Science",
+    status: "Status: Resign",
+  },
+  {
+    logo: "/icons/sman5.jpg",
+    school: "SMAN 5 South Tangerang, Banten, Indonesia",
+    period: "Jun 2014 - Jun 2017 (3 years)",
+    level: "High School",
+    status: "Status: Graduated",
+  },
+];
