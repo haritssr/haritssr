@@ -10,15 +10,11 @@ export default function HeadlessPopoverDemo() {
   return (
     <>
       <SubTitle>
-        <ExternalLink
-          href="https://headlessui.dev/react/popover"
-          name="Headless UI Popover"
-        />
+        <ExternalLink href="https://headlessui.dev/react/popover" name="Headless UI Popover" />
         <ExplanationList>
           <li>
-            A fully-managed, renderless dialog component jam-packed with
-            accessibility and keyboard features, perfect for building completely
-            custom modal and dialog windows for your next application.
+            A fully-managed, renderless dialog component jam-packed with accessibility and keyboard features, perfect
+            for building completely custom modal and dialog windows for your next application.
           </li>
           <li>Click the popover to see what inside them.</li>
         </ExplanationList>
@@ -35,13 +31,7 @@ export default function HeadlessPopoverDemo() {
   );
 }
 
-const Wrapper = ({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) => {
+const Wrapper = ({ title, children }: { title: string; children: React.ReactNode }) => {
   return (
     <div>
       <Section name={title} />
@@ -58,16 +48,10 @@ const PopoverExample1 = () => {
       </Popover.Button>
       <Popover.Panel className="absolute mt-2 w-fit shadow-lg">
         <div className="divide-y divide-zinc-200 overflow-hidden rounded-md border border-zinc-400 bg-white text-zinc-800">
-          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
-            Experiments
-          </div>
+          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Experiments</div>
           <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Blog</div>
-          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
-            Articles
-          </div>
-          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
-            Experiences
-          </div>
+          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Articles</div>
+          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Projects</div>
         </div>
       </Popover.Panel>
     </Popover>
@@ -90,18 +74,10 @@ const PopoverExample2 = () => {
       >
         <Popover.Panel className="absolute mt-2 w-fit shadow-lg">
           <div className="divide-y divide-zinc-200 overflow-hidden rounded-md border border-zinc-400 bg-white text-zinc-800">
-            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
-              Experiments
-            </div>
-            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
-              Blog
-            </div>
-            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
-              Articles
-            </div>
-            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
-              Experiences
-            </div>
+            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Experiments</div>
+            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Blog</div>
+            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Articles</div>
+            <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Projects</div>
           </div>
         </Popover.Panel>
       </Transition>
