@@ -1,10 +1,8 @@
 import { ExperimentsData } from "./ExperimentsData";
 
-export const BLOG_DESCRIPTION =
-  "Selected notes that I want to share to the world.";
+export const BLOG_DESCRIPTION = "Selected notes that I want to share to the world.";
 
-export const EXPERIENCES_DESCRIPTION =
-  "Detail informations on how projects I belong to being handled.";
+export const PROJECTS_DESCRIPTION = "Detail informations on how projects I belong to being handled.";
 
 export function getExperimentsHomeDescription(): string {
   let totalExperiment = 0;

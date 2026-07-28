@@ -32,14 +32,24 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   }
 
   return (
-    <Link className="block w-1/5 active:scale-95" href={`${to === "Home" ? "/" : `/${to.charAt(0).toLowerCase()}${to.slice(1)}`}`}>
-      <div className="flex flex-col items-center justify-center py-[5px]">
-        <svg className={`h-6 w-6 ${color}`} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <Link
+      className="block w-1/5 active:scale-95"
+      href={`${to === "Home" ? "/" : `/${to.charAt(0).toLowerCase()}${to.slice(1)}`}`}
+    >
+      <div className="flex flex-col items-center justify-center py-1.25">
+        <svg
+          className={`h-6 w-6 ${color}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.5}
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <title>{to}</title>
           {path}
         </svg>
 
-        <div className={`-mt-px text-[11px] leading-[15px] ${color}`}>{to}</div>
+        <div className={`-mt-px text-[11px] leading-3.75 ${color}`}>{to}</div>
       </div>
     </Link>
   );
@@ -60,7 +70,7 @@ const TitleAndPathData = [
   },
 
   {
-    title: "Experiences",
+    title: "Projects",
     path: (
       <>
         <path
