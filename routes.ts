@@ -3,7 +3,7 @@ export const pageRoutes = [
   "/",
   "/blog",
   "/input-list",
-  "/experiences",
+  "/projects",
   "/experiments",
   "/experiments/nextjs/articles",
   "/experiments/nextjs/posts",
@@ -156,9 +156,7 @@ export const experimentRoutes = [
 ];
 
 // Combined unique route list used as the source corpus for search.
-export const allRoutes = Array.from(
-  new Set([...pageRoutes, ...experimentDomainRoutes, ...experimentRoutes])
-);
+export const allRoutes = Array.from(new Set([...pageRoutes, ...experimentDomainRoutes, ...experimentRoutes]));
 
 // Human-friendly title overrides for routes that need custom labels.
 const routeTitleOverrides: Record<string, string> = {
@@ -224,20 +222,17 @@ export const routeDocs: RouteDoc[] = allRoutes.map((route) => {
 });
 
 // Inverted index mapping each token to matching route IDs.
-export const routeTokenIndex = routeDocs.reduce<Record<string, string[]>>(
-  (acc, doc) => {
-    for (const token of doc.tokens) {
-      if (!acc[token]) {
-        acc[token] = [];
-      }
-
-      acc[token].push(doc.id);
+export const routeTokenIndex = routeDocs.reduce<Record<string, string[]>>((acc, doc) => {
+  for (const token of doc.tokens) {
+    if (!acc[token]) {
+      acc[token] = [];
     }
 
-    return acc;
-  },
-  {}
-);
+    acc[token].push(doc.id);
+  }
+
+  return acc;
+}, {});
 
 // Searches routes by query tokens and returns ranked route documents.
 export function searchRoutes(query: string, limit = 20): RouteDoc[] {
