@@ -84,6 +84,7 @@ import ReactUseContextDarkMode from "@/components/experiments/react/ReactUseCont
 import ReactUseEffectTitle from "@/components/experiments/react/ReactUseEffectTitleDemo";
 import ReactUseImperativeHandle from "@/components/experiments/react/ReactUseImperativeHandleDemo";
 import ReactUseMemo1 from "@/components/experiments/react/ReactUseMemo1Demo";
+import ReactUseReducerJuly2026 from "@/components/experiments/react/ReactUseReducerJuly2026";
 import ReactUseReducerTodoList from "@/components/experiments/react/ReactUseReducerTodoListDemo";
 import ReactUseReducerTodoListImmer from "@/components/experiments/react/ReactUseReducerTodoListImmerDemo";
 import ReactUseStateDraggableBox from "@/components/experiments/react/ReactUseStateDraggableBoxDemo";
@@ -250,6 +251,7 @@ const experimentComponents: Record<string, Record<string, React.ComponentType>> 
     "usestate-reacting-to-input": ReactUseStateReactingToInput,
     "usestate-todo-list": ReactUseStateTodoList,
     "react-wrap-balancer": ReactWrapBalancer,
+    "react-use-reducer-july-2026": ReactUseReducerJuly2026,
     cmdk: ReactCmdk,
   },
   "react-aria": {
