@@ -6,8 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "type-coverage": "type-coverage",
-    "ts-coverage": "typescript-coverage-report",
     "lint": "biome check",
     "test": "bun test"
   },
