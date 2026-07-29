@@ -5,9 +5,13 @@ import { StatusActionLink, StatusPage } from "@/components/StatusPage";
 
 export default async function DomainIndexPage({ params }: { params: Promise<{ domain: string }> }) {
   const { domain } = await params;
+  const WHITESPACE_COLLAPSE = /\s+/g;
+  const WHITESPACE_EACH = /\s/g;
 
   // Find the experiment data for this domain
-  const experiment = ExperimentsData.find((exp) => exp.title.toLowerCase().replace(/\s+/g, "-") === domain);
+  const experiment = ExperimentsData.find(
+    (exp) => exp.title.toLowerCase().replace(WHITESPACE_COLLAPSE, "-") === domain,
+  );
 
   if (!experiment) {
     return (
@@ -37,7 +41,7 @@ export default async function DomainIndexPage({ params }: { params: Promise<{ do
       <ol className="space-y-3">
         {experiment.links?.map((link) => (
           <li key={link}>
-            <InternalLink href={`/experiments/${domain}/${link.toLowerCase().replace(/\s/g, "-")}`}>
+            <InternalLink href={`/experiments/${domain}/${link.toLowerCase().replace(WHITESPACE_EACH, "-")}`}>
               {link}
             </InternalLink>
           </li>
