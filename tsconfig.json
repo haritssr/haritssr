@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
-    "types": ["bun-types"],
+    "types": [
+      "bun-types"
+    ],
     "noImplicitAny": true,
     "strictNullChecks": true,
     // "noUnusedLocals":true,
     "target": "es5",
     "importHelpers": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,24 +20,34 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/icons": ["components/icons"],
-      "@/styles/*": ["styles/*"],
-      "@/utils/*": ["utils/*"],
-      "@content-collections": ["./.content-collections/generated"],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/icons": [
+        "components/icons"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@content-collections": [
+        "./.content-collections/generated"
+      ]
     },
     "incremental": true,
     "plugins": [
       {
-        "name": "next",
-      },
-    ],
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -56,7 +72,9 @@
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",
     "app/tools/db.bun.ts",
-    "app/tools/db.test.js",
+    "app/tools/db.test.js"
   ],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ]
 }
