@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const WHITESPACE_SPLIT_REGEX = /\s+/;
-
 export default function Breadcrumbs() {
   const pathname = usePathname();
 
@@ -30,17 +28,13 @@ export default function Breadcrumbs() {
             const isLast = index === segments.length - 1;
 
             return (
-              <span
-                className="flex items-center"
-                // biome-ignore lint/suspicious/noArrayIndexKey: segments can have duplicates like /a/b/a
-                key={`${segment}-${index}`}
-              >
+              <span className="flex items-center" key={`${segment}-${index}`}>
                 {isLast ? (
-                  <span className="select-none whitespace-nowrap text-zinc-800">{label}</span>
+                  <span className="select-none whitespace-nowrap text-zinc-800">{label.toLocaleLowerCase()}</span>
                 ) : (
                   <>
-                    <Link className="whitespace-nowrap text-zinc-500 hover:text-zinc-700 hover:underline" href={href}>
-                      {label}
+                    <Link className="whitespace-nowrap text-zinc-400 hover:text-zinc-700" href={href}>
+                      {label.toLocaleLowerCase()}
                     </Link>
                     <Separator />
                   </>
@@ -59,6 +53,7 @@ function Separator() {
 }
 
 function formatSegmentLabel(segment: string) {
+  const WHITESPACE_SPLIT_REGEX = /\s+/;
   return decodeURIComponent(segment)
     .replace(/[-_]+/g, " ")
     .split(WHITESPACE_SPLIT_REGEX)
