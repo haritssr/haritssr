@@ -1,5 +1,7 @@
 "use client";
 
+// link to /experiments/ui-explorations/task redirected to /task, see next.config.ts redirect()
+
 import { NumberField } from "@base-ui/react/number-field";
 import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import ExperimentPageBadge from "@/components/ExperimentPageBadge";
