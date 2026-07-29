@@ -6,8 +6,6 @@ This repo is Harits Syah's personal site built with Next.js (App Router).
 - `experiments`: Frontend experiments across frameworks/libraries.
 - `blog`: Writing and notes.
 - `pure`: Design system reference.
-- `task`: Daily task manager with SQLite persistence.
-- `times-table`: Math practice page.
 
 ### Site Structure
 
@@ -20,8 +18,6 @@ graph TD
   haritssr --> experiments["/experiments"]
   haritssr --> blog["/blog"]
   haritssr --> pure["/pure"]
-  haritssr --> task["/task"]
-  haritssr --> timestable["/times-table"]
 ```
 
 ### Site Search
