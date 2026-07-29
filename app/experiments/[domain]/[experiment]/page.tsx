@@ -127,6 +127,7 @@ import InlineMaki from "@/components/experiments/ui-explorations/InlineMakiDemo"
 import InputList from "@/components/experiments/ui-explorations/InputList";
 import NotionNavbar from "@/components/experiments/ui-explorations/NotionNavbarDemo";
 import Pure from "@/components/experiments/ui-explorations/PureDemo";
+import Stopwatch from "@/components/experiments/ui-explorations/Stopwatch";
 import TimesTable from "@/components/experiments/ui-explorations/TimesTableDemo";
 import YearlyInterest from "@/components/experiments/ui-explorations/YearlyInterest";
 
@@ -289,6 +290,7 @@ const experimentComponents: Record<string, Record<string, React.ComponentType>> 
     "inline-maki": InlineMaki,
     "yearly-interest": YearlyInterest,
     "input-list": InputList,
+    stopwatch: Stopwatch,
   },
   visx: {
     "bar-chart": VisxBarChart,
