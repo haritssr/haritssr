@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -7,8 +6,11 @@ import Footer from "@/components/Footer";
 import FooterSpacing from "@/components/FooterSpacing";
 import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
 import "../styles/globals.css";
+import localFont from "next/font/local";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = localFont({
+  src: "../public/fonts/InterVariable.woff2",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.haritssr.com"),
