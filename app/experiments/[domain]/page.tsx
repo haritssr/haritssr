@@ -3,17 +3,11 @@ import Image from "next/image";
 import InternalLink from "@/components/InternalLink";
 import { StatusActionLink, StatusPage } from "@/components/StatusPage";
 
-export default async function DomainIndexPage({
-  params,
-}: {
-  params: Promise<{ domain: string }>;
-}) {
+export default async function DomainIndexPage({ params }: { params: Promise<{ domain: string }> }) {
   const { domain } = await params;
 
   // Find the experiment data for this domain
-  const experiment = ExperimentsData.find(
-    (exp) => exp.title.toLowerCase().replace(/\s+/g, "-") === domain
-  );
+  const experiment = ExperimentsData.find((exp) => exp.title.toLowerCase().replace(/\s+/g, "-") === domain);
 
   if (!experiment) {
     return (
@@ -34,27 +28,16 @@ export default async function DomainIndexPage({
     <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
       <div className="mb-10 space-y-2">
         <div className="flex items-center space-x-2">
-          <Image
-            alt={experiment.title}
-            height={36}
-            src={experiment.logoSrc}
-            width={36}
-          />
+          <Image alt={experiment.title} height={36} src={experiment.logoSrc} width={36} />
         </div>
-        <div className="font-semibold text-2xl sm:text-3xl">
-          {experiment.title}
-        </div>
+        <div className="font-semibold text-2xl sm:text-3xl">{experiment.title}</div>
         <div className="text-lg text-zinc-800">{experiment.description}</div>
-        <div className="text-lg text-zinc-400">
-          {experiment.links.length} experiments
-        </div>
+        <div className="text-lg font-light text-zinc-400">{experiment.links.length} experiments</div>
       </div>
-      <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-2 xl:grid-cols-3">
+      <ol className="space-y-3">
         {experiment.links?.map((link) => (
           <li key={link}>
-            <InternalLink
-              href={`/experiments/${domain}/${link.toLowerCase().replace(/\s/g, "-")}`}
-            >
+            <InternalLink href={`/experiments/${domain}/${link.toLowerCase().replace(/\s/g, "-")}`}>
               {link}
             </InternalLink>
           </li>
