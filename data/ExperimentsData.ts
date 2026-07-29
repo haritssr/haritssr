@@ -188,7 +188,7 @@ export const ExperimentsData = [
     title: "React Table",
     logoSrc: "/icons/tanstack.jpg",
     description: "Headless UI for building tables & datagrids",
-    links: ["Basic", "Column Group", "Column Ordering", "Column Pinning"],
+    links: ["Basic", "Column Group"],
   },
   {
     id: 15,

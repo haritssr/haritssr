@@ -124,8 +124,6 @@ export const experimentRoutes = [
 
   "/experiments/react-table/basic",
   "/experiments/react-table/column-group",
-  "/experiments/react-table/column-ordering",
-  "/experiments/react-table/column-pinning",
 
   "/experiments/tailwind-css/apple-navbar",
   "/experiments/tailwind-css/blurry",

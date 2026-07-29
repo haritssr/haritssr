@@ -103,8 +103,6 @@ import ReactQueryBasic from "@/components/experiments/react-query/ReactQueryBasi
 // React Table
 import ReactTableBasic from "@/components/experiments/react-table/ReactTableBasicDemo";
 import ReactTableColumnGroup from "@/components/experiments/react-table/ReactTableColumnGroupDemo";
-import ReactTableColumnOrdering from "@/components/experiments/react-table/ReactTableColumnOrderingDemo";
-import ReactTableColumnPinning from "@/components/experiments/react-table/ReactTableColumnPinningDemo";
 
 // Tailwind CSS
 import TailwindAppleNavbar from "@/components/experiments/tailwind-css/TailwindAppleNavbarDemo";
@@ -264,8 +262,8 @@ const experimentComponents: Record<string, Record<string, React.ComponentType>> 
   "react-table": {
     basic: ReactTableBasic,
     "column-group": ReactTableColumnGroup,
-    "column-ordering": ReactTableColumnOrdering,
-    "column-pinning": ReactTableColumnPinning,
+    // "column-ordering": ReactTableColumnOrdering,
+    // "column-pinning": ReactTableColumnPinning,
   },
   "tailwind-css": {
     "apple-navbar": TailwindAppleNavbar,
