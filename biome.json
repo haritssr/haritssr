@@ -11,34 +11,6 @@
   "formatter": {
     "enabled": true
   },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "nursery": {
-        "useSortedClasses": "off"
-      },
-      "performance": {
-        "useTopLevelRegex": "off"
-      },
-      "complexity": {
-        "noForEach": "off"
-      },
-      "recommended": true,
-      "style": {
-        "noParameterAssign": "error",
-        "useAsConstAssertion": "error",
-        "useDefaultParameterLast": "error",
-        "useEnumInitializers": "error",
-        "useSelfClosingElements": "error",
-        "useSingleVarDeclarator": "error",
-        "noUnusedTemplateLiteral": "error",
-        "useNumberNamespace": "error",
-        "noInferrableTypes": "error",
-        "noUselessElse": "error",
-        "useFilenamingConvention": "off"
-      }
-    }
-  },
   "files": {
     "includes": [
       "!**/.next/**/*",
@@ -54,5 +26,5 @@
       "tailwindDirectives": true
     }
   },
-  "extends": ["ultracite/biome/core"]
+  "extends": ["ultracite/biome/core", "ultracite/biome/react", "ultracite/biome/next"]
 }
