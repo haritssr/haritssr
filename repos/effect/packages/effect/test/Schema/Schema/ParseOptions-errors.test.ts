@@ -1,12 +1,12 @@
-import { describe, it } from "@effect/vitest"
-import * as S from "effect/Schema"
-import * as Util from "../TestUtils.js"
+import { describe, it } from "@effect/vitest";
+import * as S from "effect/Schema";
+import * as Util from "../TestUtils.js";
 
 describe("`errors` option", () => {
   describe("decoding", () => {
     describe("tuple", () => {
       it("e r e", async () => {
-        const schema = S.Tuple([S.String], S.Number, S.Boolean)
+        const schema = S.Tuple([S.String], S.Number, S.Boolean);
         await Util.assertions.decoding.fail(
           schema,
           [true],
@@ -16,11 +16,11 @@ describe("`errors` option", () => {
 └─ [0]
    └─ Expected string, actual true`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("missing element", async () => {
-        const schema = S.Tuple(S.String, S.Number)
+        const schema = S.Tuple(S.String, S.Number);
         await Util.assertions.decoding.fail(
           schema,
           [],
@@ -30,11 +30,11 @@ describe("`errors` option", () => {
 └─ [1]
    └─ is missing`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("unexpected indexes", async () => {
-        const schema = S.Tuple()
+        const schema = S.Tuple();
         await Util.assertions.decoding.fail(
           schema,
           ["a", "b"],
@@ -44,11 +44,11 @@ describe("`errors` option", () => {
 └─ [1]
    └─ is unexpected, expected: never`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("wrong type for elements", async () => {
-        const schema = S.Tuple(S.String, S.Number)
+        const schema = S.Tuple(S.String, S.Number);
         await Util.assertions.decoding.fail(
           schema,
           [1, "b"],
@@ -58,11 +58,11 @@ describe("`errors` option", () => {
 └─ [1]
    └─ Expected number, actual "b"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("wrong type for rest", async () => {
-        const schema = S.Tuple([S.String], S.Number)
+        const schema = S.Tuple([S.String], S.Number);
         await Util.assertions.decoding.fail(
           schema,
           ["a", "b", "c"],
@@ -72,11 +72,11 @@ describe("`errors` option", () => {
 └─ [2]
    └─ Expected number, actual "c"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("wrong type for post rest elements", async () => {
-        const schema = S.Tuple([], S.Boolean, S.Number, S.Number)
+        const schema = S.Tuple([], S.Boolean, S.Number, S.Number);
         await Util.assertions.decoding.fail(
           schema,
           ["a", "b"],
@@ -86,13 +86,13 @@ describe("`errors` option", () => {
 └─ [1]
    └─ Expected number, actual "b"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
-    })
+        );
+      });
+    });
 
     describe("struct", () => {
       it("missing keys", async () => {
-        const schema = S.Struct({ a: S.String, b: S.Number })
+        const schema = S.Struct({ a: S.String, b: S.Number });
         await Util.assertions.decoding.fail(
           schema,
           {},
@@ -102,11 +102,11 @@ describe("`errors` option", () => {
 └─ ["b"]
    └─ is missing`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("wrong type for values", async () => {
-        const schema = S.Struct({ a: S.String, b: S.Number })
+        const schema = S.Struct({ a: S.String, b: S.Number });
         await Util.assertions.decoding.fail(
           schema,
           { a: 1, b: "b" },
@@ -116,11 +116,11 @@ describe("`errors` option", () => {
 └─ ["b"]
    └─ Expected number, actual "b"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("unexpected keys", async () => {
-        const schema = S.Struct({ a: S.Number })
+        const schema = S.Struct({ a: S.Number });
         await Util.assertions.decoding.fail(
           schema,
           { a: 1, b: "b", c: "c" },
@@ -130,13 +130,16 @@ describe("`errors` option", () => {
 └─ ["c"]
    └─ is unexpected, expected: "a"`,
           { parseOptions: { ...Util.ErrorsAll, ...Util.onExcessPropertyError } }
-        )
-      })
-    })
+        );
+      });
+    });
 
     describe("record", () => {
       it("all key errors", async () => {
-        const schema = S.Record({ key: S.String.pipe(S.minLength(2)), value: S.Number })
+        const schema = S.Record({
+          key: S.String.pipe(S.minLength(2)),
+          value: S.Number,
+        });
         await Util.assertions.decoding.fail(
           schema,
           { a: 1, b: 2 },
@@ -146,11 +149,11 @@ describe("`errors` option", () => {
 └─ ["b"]
    └─ is unexpected, expected: minLength(2)`,
           { parseOptions: { ...Util.ErrorsAll, ...Util.onExcessPropertyError } }
-        )
-      })
+        );
+      });
 
       it("all value errors", async () => {
-        const schema = S.Record({ key: S.String, value: S.Number })
+        const schema = S.Record({ key: S.String, value: S.Number });
         await Util.assertions.decoding.fail(
           schema,
           { a: "a", b: "b" },
@@ -160,15 +163,15 @@ describe("`errors` option", () => {
 └─ ["b"]
    └─ Expected number, actual "b"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
-    })
-  })
+        );
+      });
+    });
+  });
 
   describe("encoding", () => {
     describe("tuple", () => {
       it("unexpected indexes", async () => {
-        const schema = S.Tuple()
+        const schema = S.Tuple();
         await Util.assertions.encoding.fail(
           schema,
           [1, 1] as any,
@@ -178,11 +181,11 @@ describe("`errors` option", () => {
 └─ [1]
    └─ is unexpected, expected: never`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("wrong type for elements", async () => {
-        const schema = S.Tuple(Util.NumberFromChar, Util.NumberFromChar)
+        const schema = S.Tuple(Util.NumberFromChar, Util.NumberFromChar);
         await Util.assertions.encoding.fail(
           schema,
           [10, 10],
@@ -200,11 +203,11 @@ describe("`errors` option", () => {
             └─ Predicate refinement failure
                └─ Expected a single character, actual "10"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("wrong type for rest", async () => {
-        const schema = S.Array(Util.NumberFromChar)
+        const schema = S.Array(Util.NumberFromChar);
         await Util.assertions.encoding.fail(
           schema,
           [10, 10],
@@ -222,11 +225,16 @@ describe("`errors` option", () => {
             └─ Predicate refinement failure
                └─ Expected a single character, actual "10"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
+        );
+      });
 
       it("wrong type for values post rest elements", async () => {
-        const schema = S.Tuple([], S.String, Util.NumberFromChar, Util.NumberFromChar)
+        const schema = S.Tuple(
+          [],
+          S.String,
+          Util.NumberFromChar,
+          Util.NumberFromChar
+        );
         await Util.assertions.encoding.fail(
           schema,
           [10, 10],
@@ -244,13 +252,16 @@ describe("`errors` option", () => {
             └─ Predicate refinement failure
                └─ Expected a single character, actual "10"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
-    })
+        );
+      });
+    });
 
     describe("struct", () => {
       it("wrong type for values", async () => {
-        const schema = S.Struct({ a: Util.NumberFromChar, b: Util.NumberFromChar })
+        const schema = S.Struct({
+          a: Util.NumberFromChar,
+          b: Util.NumberFromChar,
+        });
         await Util.assertions.encoding.fail(
           schema,
           { a: 10, b: 10 },
@@ -268,13 +279,13 @@ describe("`errors` option", () => {
             └─ Predicate refinement failure
                └─ Expected a single character, actual "10"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
-    })
+        );
+      });
+    });
 
     describe("record", () => {
       it("all key errors", async () => {
-        const schema = S.Record({ key: S.Char, value: S.String })
+        const schema = S.Record({ key: S.Char, value: S.String });
         await Util.assertions.encoding.fail(
           schema,
           { aa: "a", bb: "bb" },
@@ -284,11 +295,11 @@ describe("`errors` option", () => {
 └─ ["bb"]
    └─ is unexpected, expected: Char`,
           { parseOptions: { ...Util.ErrorsAll, ...Util.onExcessPropertyError } }
-        )
-      })
+        );
+      });
 
       it("all value errors", async () => {
-        const schema = S.Record({ key: S.String, value: S.Char })
+        const schema = S.Record({ key: S.String, value: S.Char });
         await Util.assertions.encoding.fail(
           schema,
           { a: "aa", b: "bb" },
@@ -302,8 +313,8 @@ describe("`errors` option", () => {
       └─ Predicate refinement failure
          └─ Expected a single character, actual "bb"`,
           { parseOptions: Util.ErrorsAll }
-        )
-      })
-    })
-  })
-})
+        );
+      });
+    });
+  });
+});

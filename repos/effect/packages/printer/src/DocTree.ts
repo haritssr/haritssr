@@ -1,14 +1,14 @@
 /**
  * @since 1.0.0
  */
-import type * as covariant from "@effect/typeclass/Covariant"
-import type * as invariant from "@effect/typeclass/Invariant"
-import type * as monoid from "@effect/typeclass/Monoid"
-import type * as semigroup from "@effect/typeclass/Semigroup"
-import type { Equal } from "effect/Equal"
-import type { TypeLambda } from "effect/HKT"
-import type * as DocStream from "./DocStream.js"
-import * as internal from "./internal/docTree.js"
+import type * as covariant from "@effect/typeclass/Covariant";
+import type * as invariant from "@effect/typeclass/Invariant";
+import type * as monoid from "@effect/typeclass/Monoid";
+import type * as semigroup from "@effect/typeclass/Semigroup";
+import type { Equal } from "effect/Equal";
+import type { TypeLambda } from "effect/HKT";
+import type * as DocStream from "./DocStream.js";
+import * as internal from "./internal/docTree.js";
 
 // -----------------------------------------------------------------------------
 // Models
@@ -18,13 +18,14 @@ import * as internal from "./internal/docTree.js"
  * @since 1.0.0
  * @category symbol
  */
-export const DocTreeTypeId: unique symbol = internal.DocTreeTypeId as DocTreeTypeId
+export const DocTreeTypeId: unique symbol =
+  internal.DocTreeTypeId as DocTreeTypeId;
 
 /**
  * @since 1.0.0
  * @category symbol
  */
-export type DocTreeTypeId = typeof DocTreeTypeId
+export type DocTreeTypeId = typeof DocTreeTypeId;
 
 /**
  * Represents a document that has been laid out into a tree-like structure.
@@ -47,7 +48,7 @@ export type DocTree<A> =
   | TextTree<A>
   | LineTree<A>
   | AnnotationTree<A>
-  | ConcatTree<A>
+  | ConcatTree<A>;
 
 /**
  * @since 1.0.0
@@ -58,14 +59,14 @@ export declare namespace DocTree {
    */
   export interface Variance<A> extends Equal {
     readonly [DocTreeTypeId]: {
-      readonly _A: (_: never) => A
-    }
+      readonly _A: (_: never) => A;
+    };
   }
 
   /**
    * @since 1.0.0
    */
-  export type TypeLambda = DocTreeTypeLambda
+  export type TypeLambda = DocTreeTypeLambda;
 }
 
 /**
@@ -73,7 +74,7 @@ export declare namespace DocTree {
  * @category model
  */
 export interface DocTreeTypeLambda extends TypeLambda {
-  readonly type: DocTree<this["Target"]>
+  readonly type: DocTree<this["Target"]>;
 }
 
 /**
@@ -81,7 +82,7 @@ export interface DocTreeTypeLambda extends TypeLambda {
  * @category model
  */
 export interface EmptyTree<A> extends DocTree.Variance<A> {
-  readonly _tag: "EmptyTree"
+  readonly _tag: "EmptyTree";
 }
 
 /**
@@ -89,8 +90,8 @@ export interface EmptyTree<A> extends DocTree.Variance<A> {
  * @category model
  */
 export interface CharTree<A> extends DocTree.Variance<A> {
-  readonly _tag: "CharTree"
-  readonly char: string
+  readonly _tag: "CharTree";
+  readonly char: string;
 }
 
 /**
@@ -98,8 +99,8 @@ export interface CharTree<A> extends DocTree.Variance<A> {
  * @category model
  */
 export interface TextTree<A> extends DocTree.Variance<A> {
-  readonly _tag: "TextTree"
-  readonly text: string
+  readonly _tag: "TextTree";
+  readonly text: string;
 }
 
 /**
@@ -107,8 +108,8 @@ export interface TextTree<A> extends DocTree.Variance<A> {
  * @category model
  */
 export interface LineTree<A> extends DocTree.Variance<A> {
-  readonly _tag: "LineTree"
-  readonly indentation: number
+  readonly _tag: "LineTree";
+  readonly indentation: number;
 }
 
 /**
@@ -116,9 +117,9 @@ export interface LineTree<A> extends DocTree.Variance<A> {
  * @category model
  */
 export interface AnnotationTree<A> extends DocTree.Variance<A> {
-  readonly _tag: "AnnotationTree"
-  readonly annotation: A
-  readonly tree: DocTree<A>
+  readonly _tag: "AnnotationTree";
+  readonly annotation: A;
+  readonly tree: DocTree<A>;
 }
 
 /**
@@ -126,8 +127,8 @@ export interface AnnotationTree<A> extends DocTree.Variance<A> {
  * @category model
  */
 export interface ConcatTree<A> extends DocTree.Variance<A> {
-  readonly _tag: "ConcatTree"
-  readonly trees: ReadonlyArray<DocTree<A>>
+  readonly _tag: "ConcatTree";
+  readonly trees: ReadonlyArray<DocTree<A>>;
 }
 
 // -----------------------------------------------------------------------------
@@ -140,7 +141,8 @@ export interface ConcatTree<A> extends DocTree.Variance<A> {
  * @since 1.0.0
  * @category refinements
  */
-export const isDocTree: (u: unknown) => u is DocTree<unknown> = internal.isDocTree
+export const isDocTree: (u: unknown) => u is DocTree<unknown> =
+  internal.isDocTree;
 
 /**
  * Returns `true` if the specified `DocTree` is an `EmptyTree`, `false` otherwise.
@@ -148,7 +150,8 @@ export const isDocTree: (u: unknown) => u is DocTree<unknown> = internal.isDocTr
  * @since 1.0.0
  * @category refinements
  */
-export const isEmptyTree: <A>(self: DocTree<A>) => self is EmptyTree<A> = internal.isEmptyTree
+export const isEmptyTree: <A>(self: DocTree<A>) => self is EmptyTree<A> =
+  internal.isEmptyTree;
 
 /**
  * Returns `true` if the specified `DocTree` is an `CharTree`, `false` otherwise.
@@ -156,7 +159,8 @@ export const isEmptyTree: <A>(self: DocTree<A>) => self is EmptyTree<A> = intern
  * @since 1.0.0
  * @category refinements
  */
-export const isCharTree: <A>(self: DocTree<A>) => self is CharTree<A> = internal.isCharTree
+export const isCharTree: <A>(self: DocTree<A>) => self is CharTree<A> =
+  internal.isCharTree;
 
 /**
  * Returns `true` if the specified `DocTree` is an `TextTree`, `false` otherwise.
@@ -164,7 +168,8 @@ export const isCharTree: <A>(self: DocTree<A>) => self is CharTree<A> = internal
  * @since 1.0.0
  * @category refinements
  */
-export const isTextTree: <A>(self: DocTree<A>) => self is TextTree<A> = internal.isTextTree
+export const isTextTree: <A>(self: DocTree<A>) => self is TextTree<A> =
+  internal.isTextTree;
 
 /**
  * Returns `true` if the specified `DocTree` is an `LineTree`, `false` otherwise.
@@ -172,7 +177,8 @@ export const isTextTree: <A>(self: DocTree<A>) => self is TextTree<A> = internal
  * @since 1.0.0
  * @category refinements
  */
-export const isLineTree: <A>(self: DocTree<A>) => self is LineTree<A> = internal.isLineTree
+export const isLineTree: <A>(self: DocTree<A>) => self is LineTree<A> =
+  internal.isLineTree;
 
 /**
  * Returns `true` if the specified `DocTree` is an `AnnotationTree`, `false` otherwise.
@@ -180,7 +186,9 @@ export const isLineTree: <A>(self: DocTree<A>) => self is LineTree<A> = internal
  * @since 1.0.0
  * @category refinements
  */
-export const isAnnotationTree: <A>(self: DocTree<A>) => self is AnnotationTree<A> = internal.isAnnotationTree
+export const isAnnotationTree: <A>(
+  self: DocTree<A>
+) => self is AnnotationTree<A> = internal.isAnnotationTree;
 
 /**
  * Returns `true` if the specified `DocTree` is an `ConcatTree`, `false` otherwise.
@@ -188,7 +196,8 @@ export const isAnnotationTree: <A>(self: DocTree<A>) => self is AnnotationTree<A
  * @since 1.0.0
  * @category refinements
  */
-export const isConcatTree: <A>(self: DocTree<A>) => self is ConcatTree<A> = internal.isConcatTree
+export const isConcatTree: <A>(self: DocTree<A>) => self is ConcatTree<A> =
+  internal.isConcatTree;
 
 // -----------------------------------------------------------------------------
 // Constructors
@@ -198,25 +207,25 @@ export const isConcatTree: <A>(self: DocTree<A>) => self is ConcatTree<A> = inte
  * @since 1.0.0
  * @category constructors
  */
-export const empty: DocTree<never> = internal.empty
+export const empty: DocTree<never> = internal.empty;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const char: <A>(char: string) => DocTree<A> = internal.char
+export const char: <A>(char: string) => DocTree<A> = internal.char;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const text: <A>(text: string) => DocTree<A> = internal.text
+export const text: <A>(text: string) => DocTree<A> = internal.text;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const line: <A>(indentation: number) => DocTree<A> = internal.line
+export const line: <A>(indentation: number) => DocTree<A> = internal.line;
 
 /**
  * Annotate the specified `DocTree` with an annotation of type `A`.
@@ -225,9 +234,9 @@ export const line: <A>(indentation: number) => DocTree<A> = internal.line
  * @category constructors
  */
 export const annotation: {
-  <A>(annotation: A): <B>(self: DocTree<B>) => DocTree<A | B>
-  <A, B>(self: DocTree<A>, annotation: B): DocTree<A | B>
-} = internal.annotation
+  <A>(annotation: A): <B>(self: DocTree<B>) => DocTree<A | B>;
+  <A, B>(self: DocTree<A>, annotation: B): DocTree<A | B>;
+} = internal.annotation;
 
 /**
  * Horizontally concatenates multiple `DocTree`s.
@@ -235,7 +244,8 @@ export const annotation: {
  * @since 1.0.0
  * @category constructors
  */
-export const concat: <A>(trees: ReadonlyArray<DocTree<A>>) => DocTree<A> = internal.concat
+export const concat: <A>(trees: ReadonlyArray<DocTree<A>>) => DocTree<A> =
+  internal.concat;
 
 // -----------------------------------------------------------------------------
 // Annotations
@@ -249,9 +259,9 @@ export const concat: <A>(trees: ReadonlyArray<DocTree<A>>) => DocTree<A> = inter
  * @category annotations
  */
 export const alterAnnotations: {
-  <A, B>(f: (a: A) => Iterable<B>): (self: DocTree<A>) => DocTree<B>
-  <A, B>(self: DocTree<A>, f: (a: A) => Iterable<B>): DocTree<B>
-} = internal.alterAnnotations
+  <A, B>(f: (a: A) => Iterable<B>): (self: DocTree<A>) => DocTree<B>;
+  <A, B>(self: DocTree<A>, f: (a: A) => Iterable<B>): DocTree<B>;
+} = internal.alterAnnotations;
 
 /**
  * Change the annotation of a `DocTree`.
@@ -260,9 +270,9 @@ export const alterAnnotations: {
  * @category annotations
  */
 export const reAnnotate: {
-  <A, B>(f: (a: A) => B): (self: DocTree<A>) => DocTree<B>
-  <A, B>(self: DocTree<A>, f: (a: A) => B): DocTree<B>
-} = internal.reAnnotate
+  <A, B>(f: (a: A) => B): (self: DocTree<A>) => DocTree<B>;
+  <A, B>(self: DocTree<A>, f: (a: A) => B): DocTree<B>;
+} = internal.reAnnotate;
 
 /**
  * Remove all annotations from a `DocTree`.
@@ -270,7 +280,8 @@ export const reAnnotate: {
  * @since 1.0.0
  * @category annotations
  */
-export const unAnnotate: <A>(self: DocTree<A>) => DocTree<never> = internal.unAnnotate
+export const unAnnotate: <A>(self: DocTree<A>) => DocTree<never> =
+  internal.unAnnotate;
 
 // -----------------------------------------------------------------------------
 // Folding
@@ -281,9 +292,9 @@ export const unAnnotate: <A>(self: DocTree<A>) => DocTree<never> = internal.unAn
  * @category folding
  */
 export const foldMap: {
-  <A, M>(M: monoid.Monoid<M>, f: (a: A) => M): (self: DocTree<A>) => M
-  <A, M>(self: DocTree<A>, M: monoid.Monoid<M>, f: (a: A) => M): M
-} = internal.foldMap
+  <A, M>(M: monoid.Monoid<M>, f: (a: A) => M): (self: DocTree<A>) => M;
+  <A, M>(self: DocTree<A>, M: monoid.Monoid<M>, f: (a: A) => M): M;
+} = internal.foldMap;
 
 // -----------------------------------------------------------------------------
 // Instances
@@ -334,14 +345,14 @@ export const renderSimplyDecorated: {
     M: monoid.Monoid<M>,
     renderText: (text: string) => M,
     renderAnnotation: (annotation: A, out: M) => M
-  ): (self: DocTree<A>) => M
+  ): (self: DocTree<A>) => M;
   <A, M>(
     self: DocTree<A>,
     M: monoid.Monoid<M>,
     renderText: (text: string) => M,
     renderAnnotation: (annotation: A, out: M) => M
-  ): M
-} = internal.renderSimplyDecorated
+  ): M;
+} = internal.renderSimplyDecorated;
 
 // -----------------------------------------------------------------------------
 // Conversions
@@ -353,7 +364,8 @@ export const renderSimplyDecorated: {
  * @since 1.0.0
  * @category conversions
  */
-export const treeForm: <A>(stream: DocStream.DocStream<A>) => DocTree<A> = internal.treeForm
+export const treeForm: <A>(stream: DocStream.DocStream<A>) => DocTree<A> =
+  internal.treeForm;
 
 // -----------------------------------------------------------------------------
 // Instances
@@ -363,22 +375,26 @@ export const treeForm: <A>(stream: DocStream.DocStream<A>) => DocTree<A> = inter
  * @since 1.0.0
  * @category instances
  */
-export const getSemigroup: <A>(_: void) => semigroup.Semigroup<DocTree<A>> = internal.getSemigroup
+export const getSemigroup: <A>(_: void) => semigroup.Semigroup<DocTree<A>> =
+  internal.getSemigroup;
 
 /**
  * @since 1.0.0
  * @category instances
  */
-export const getMonoid: <A>(_: void) => monoid.Monoid<DocTree<A>> = internal.getMonoid
+export const getMonoid: <A>(_: void) => monoid.Monoid<DocTree<A>> =
+  internal.getMonoid;
 
 /**
  * @since 1.0.0
  * @category instances
  */
-export const Covariant: covariant.Covariant<DocTree.TypeLambda> = internal.Covariant
+export const Covariant: covariant.Covariant<DocTree.TypeLambda> =
+  internal.Covariant;
 
 /**
  * @since 1.0.0
  * @category instances
  */
-export const Invariant: invariant.Invariant<DocTree.TypeLambda> = internal.Invariant
+export const Invariant: invariant.Invariant<DocTree.TypeLambda> =
+  internal.Invariant;

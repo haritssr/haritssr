@@ -252,20 +252,20 @@
  * @since 2.0.0
  */
 
-import type { Equal } from "./Equal.js"
-import type { Inspectable } from "./Inspectable.js"
-import * as HS from "./internal/hashSet.js"
-import type { Pipeable } from "./Pipeable.js"
-import type { Predicate, Refinement } from "./Predicate.js"
-import type { NoInfer } from "./Types.js"
+import type { Equal } from "./Equal.js";
+import type { Inspectable } from "./Inspectable.js";
+import * as HS from "./internal/hashSet.js";
+import type { Pipeable } from "./Pipeable.js";
+import type { Predicate, Refinement } from "./Predicate.js";
+import type { NoInfer } from "./Types.js";
 
-const TypeId: unique symbol = HS.HashSetTypeId as TypeId
+const TypeId: unique symbol = HS.HashSetTypeId as TypeId;
 
 /**
  * @since 2.0.0
  * @category symbol
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * @memberof HashSet
@@ -282,8 +282,12 @@ export type TypeId = typeof TypeId
  *
  * @interface
  */
-export interface HashSet<out A> extends Iterable<A>, Equal, Pipeable, Inspectable {
-  readonly [TypeId]: TypeId
+export interface HashSet<out A>
+  extends Iterable<A>,
+    Equal,
+    Pipeable,
+    Inspectable {
+  readonly [TypeId]: TypeId;
 }
 
 /**
@@ -315,7 +319,7 @@ export const isHashSet: {
    * @param u - The iterable input to be checked.
    * @returns A boolean indicating whether the provided iterable is a `HashSet`.
    */
-  <A>(u: Iterable<A>): u is HashSet<A>
+  <A>(u: Iterable<A>): u is HashSet<A>;
 
   /**
    * Type guard function that checks if the provided value is a `HashSet` of
@@ -342,8 +346,8 @@ export const isHashSet: {
    * @param u - The value to check.
    * @returns A boolean indicating whether the value is a `HashSet<unknown>`.
    */
-  (u: unknown): u is HashSet<unknown>
-} = HS.isHashSet
+  (u: unknown): u is HashSet<unknown>;
+} = HS.isHashSet;
 
 /**
  * Creates an empty `HashSet`.
@@ -372,7 +376,7 @@ export const isHashSet: {
  *
  * @see Other `HashSet` constructors are {@link module:HashSet.make} {@link module:HashSet.fromIterable}
  */
-export const empty: <A = never>() => HashSet<A> = HS.empty
+export const empty: <A = never>() => HashSet<A> = HS.empty;
 
 /**
  * Creates a new `HashSet` from an iterable collection of values.
@@ -467,7 +471,8 @@ export const empty: <A = never>() => HashSet<A> = HS.empty
  *
  * @see Other `HashSet` constructors are {@link module:HashSet.empty} {@link module:HashSet.make}
  */
-export const fromIterable: <A>(elements: Iterable<A>) => HashSet<A> = HS.fromIterable
+export const fromIterable: <A>(elements: Iterable<A>) => HashSet<A> =
+  HS.fromIterable;
 
 /**
  * Construct a new `HashSet` from a variable number of values.
@@ -556,7 +561,9 @@ export const fromIterable: <A>(elements: Iterable<A>) => HashSet<A> = HS.fromIte
  *
  * @see Other `HashSet` constructors are {@link module:HashSet.fromIterable} {@link module:HashSet.empty}
  */
-export const make: <As extends ReadonlyArray<any>>(...elements: As) => HashSet<As[number]> = HS.make
+export const make: <As extends ReadonlyArray<any>>(
+  ...elements: As
+) => HashSet<As[number]> = HS.make;
 
 /**
  * Checks if the specified value exists in the `HashSet`.
@@ -602,7 +609,7 @@ export const has: {
    * assert.equal(pipe(set, HashSet.has(3)), false)
    * ```
    */
-  <A>(value: A): (self: HashSet<A>) => boolean
+  <A>(value: A): (self: HashSet<A>) => boolean;
 
   /**
    * @example
@@ -620,8 +627,8 @@ export const has: {
    * assert.equal(HashSet.has(set, 3), false)
    * ```
    */
-  <A>(self: HashSet<A>, value: A): boolean
-} = HS.has
+  <A>(self: HashSet<A>, value: A): boolean;
+} = HS.has;
 
 /**
  * Check if a predicate holds true for some `HashSet` element.
@@ -682,7 +689,7 @@ export const some: {
    * )
    * ```
    */
-  <A>(f: Predicate<A>): (self: HashSet<A>) => boolean
+  <A>(f: Predicate<A>): (self: HashSet<A>) => boolean;
 
   /**
    * @example
@@ -705,8 +712,8 @@ export const some: {
    * )
    * ```
    */
-  <A>(self: HashSet<A>, f: Predicate<A>): boolean
-} = HS.some
+  <A>(self: HashSet<A>, f: Predicate<A>): boolean;
+} = HS.some;
 
 /**
  * Check if a predicate holds true for every `HashSet` element.
@@ -793,7 +800,7 @@ export const every: {
    */
   <A, B extends A>(
     refinement: Refinement<NoInfer<A>, B>
-  ): (self: HashSet<A>) => self is HashSet<B>
+  ): (self: HashSet<A>) => self is HashSet<B>;
 
   /**
    * @example
@@ -813,7 +820,7 @@ export const every: {
    * )
    * ```
    */
-  <A>(predicate: Predicate<A>): (self: HashSet<A>) => boolean
+  <A>(predicate: Predicate<A>): (self: HashSet<A>) => boolean;
 
   /**
    * @example
@@ -841,7 +848,7 @@ export const every: {
   <A, B extends A>(
     self: HashSet<A>,
     refinement: Refinement<A, B>
-  ): self is HashSet<B>
+  ): self is HashSet<B>;
 
   /**
    * @example
@@ -858,8 +865,8 @@ export const every: {
    * )
    * ```
    */
-  <A>(self: HashSet<A>, predicate: Predicate<A>): boolean
-} = HS.every
+  <A>(self: HashSet<A>, predicate: Predicate<A>): boolean;
+} = HS.every;
 
 /**
  * Returns `true` if and only if every element in the this `HashSet` is an
@@ -922,7 +929,7 @@ export const isSubset: {
    * )
    * ```
    */
-  <A>(that: HashSet<A>): (self: HashSet<A>) => boolean
+  <A>(that: HashSet<A>): (self: HashSet<A>) => boolean;
 
   /**
    * @example
@@ -936,8 +943,8 @@ export const isSubset: {
    * assert.equal(HashSet.isSubset(set1, set3), true)
    * ```
    */
-  <A>(self: HashSet<A>, that: HashSet<A>): boolean
-} = HS.isSubset
+  <A>(self: HashSet<A>, that: HashSet<A>): boolean;
+} = HS.isSubset;
 
 /**
  * Returns an `IterableIterator` of the values in the `HashSet`.
@@ -964,7 +971,7 @@ export const isSubset: {
  *
  * @see Other `HashSet` getters are {@link module:HashSet.toValues} {@link module:HashSet.size}
  */
-export const values: <A>(self: HashSet<A>) => IterableIterator<A> = HS.values
+export const values: <A>(self: HashSet<A>) => IterableIterator<A> = HS.values;
 
 /**
  * Returns an `Array` of the values within the `HashSet`.
@@ -991,7 +998,8 @@ export const values: <A>(self: HashSet<A>) => IterableIterator<A> = HS.values
  *
  * @see Other `HashSet` getters are {@link module:HashSet.values} {@link module:HashSet.size}
  */
-export const toValues = <A>(self: HashSet<A>): Array<A> => Array.from(values(self))
+export const toValues = <A>(self: HashSet<A>): Array<A> =>
+  Array.from(values(self));
 
 /**
  * Calculates the number of values in the `HashSet`.
@@ -1017,7 +1025,7 @@ export const toValues = <A>(self: HashSet<A>): Array<A> => Array.from(values(sel
  *
  * @see Other `HashSet` getters are {@link module:HashSet.values} {@link module:HashSet.toValues}
  */
-export const size: <A>(self: HashSet<A>) => number = HS.size
+export const size: <A>(self: HashSet<A>) => number = HS.size;
 
 /**
  * Creates a new mutable version of the `HashSet`
@@ -1065,7 +1073,8 @@ export const size: <A>(self: HashSet<A>) => number = HS.size
  *
  * @see Other `HashSet` mutations are {@link module:HashSet.add} {@link module:HashSet.remove} {@link module:HashSet.toggle} {@link module:HashSet.endMutation} {@link module:HashSet.mutate}
  */
-export const beginMutation: <A>(self: HashSet<A>) => HashSet<A> = HS.beginMutation
+export const beginMutation: <A>(self: HashSet<A>) => HashSet<A> =
+  HS.beginMutation;
 
 /**
  * Makes the `HashSet` immutable again.
@@ -1113,7 +1122,7 @@ export const beginMutation: <A>(self: HashSet<A>) => HashSet<A> = HS.beginMutati
  *
  * @see Other `HashSet` mutations are {@link module:HashSet.add} {@link module:HashSet.remove} {@link module:HashSet.toggle} {@link module:HashSet.beginMutation} {@link module:HashSet.mutate}
  */
-export const endMutation: <A>(self: HashSet<A>) => HashSet<A> = HS.endMutation
+export const endMutation: <A>(self: HashSet<A>) => HashSet<A> = HS.endMutation;
 
 /**
  * Mutates the `HashSet` within the context of the provided function.
@@ -1192,7 +1201,7 @@ export const mutate: {
    * assert.deepStrictEqual(HashSet.toValues(result).sort(), [2, 3, 4])
    * ```
    */
-  <A>(f: (set: HashSet<A>) => void): (self: HashSet<A>) => HashSet<A>
+  <A>(f: (set: HashSet<A>) => void): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -1223,8 +1232,8 @@ export const mutate: {
    * assert.deepStrictEqual(HashSet.toValues(result).sort(), [2, 3, 4])
    * ```
    */
-  <A>(self: HashSet<A>, f: (set: HashSet<A>) => void): HashSet<A>
-} = HS.mutate
+  <A>(self: HashSet<A>, f: (set: HashSet<A>) => void): HashSet<A>;
+} = HS.mutate;
 
 /**
  * Adds a value to the `HashSet`.
@@ -1280,7 +1289,7 @@ export const add: {
    * )
    * ```
    */
-  <A>(value: A): (self: HashSet<A>) => HashSet<A>
+  <A>(value: A): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -1299,8 +1308,8 @@ export const add: {
    * assert.deepStrictEqual(HashSet.toValues(withTwoTwo), Array.of(0, 1, 2))
    * ```
    */
-  <A>(self: HashSet<A>, value: A): HashSet<A>
-} = HS.add
+  <A>(self: HashSet<A>, value: A): HashSet<A>;
+} = HS.add;
 
 /**
  * Removes a value from the `HashSet`.
@@ -1345,7 +1354,7 @@ export const remove: {
    * assert.equal(pipe(result, HashSet.has(2)), true)
    * ```
    */
-  <A>(value: A): (self: HashSet<A>) => HashSet<A>
+  <A>(value: A): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -1364,8 +1373,8 @@ export const remove: {
    * assert.equal(HashSet.has(result, 2), true)
    * ```
    */
-  <A>(self: HashSet<A>, value: A): HashSet<A>
-} = HS.remove
+  <A>(self: HashSet<A>, value: A): HashSet<A>;
+} = HS.remove;
 
 /**
  * Computes the set difference `(A - B)` between this `HashSet` and the
@@ -1429,7 +1438,7 @@ export const difference: {
    * assert.deepStrictEqual(HashSet.toValues(diffWithArray).sort(), [1, 2])
    * ```
    */
-  <A>(that: Iterable<A>): (self: HashSet<A>) => HashSet<A>
+  <A>(that: Iterable<A>): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -1461,8 +1470,8 @@ export const difference: {
    * assert.deepStrictEqual(HashSet.toValues(reverseResult).sort(), [4, 5])
    * ```
    */
-  <A>(self: HashSet<A>, that: Iterable<A>): HashSet<A>
-} = HS.difference
+  <A>(self: HashSet<A>, that: Iterable<A>): HashSet<A>;
+} = HS.difference;
 
 /**
  * Returns a `HashSet` of values which are present in both this set and that
@@ -1525,7 +1534,7 @@ export const intersection: {
    * )
    * ```
    */
-  <A>(that: Iterable<A>): (self: HashSet<A>) => HashSet<A>
+  <A>(that: Iterable<A>): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -1557,8 +1566,8 @@ export const intersection: {
    * )
    * ```
    */
-  <A>(self: HashSet<A>, that: Iterable<A>): HashSet<A>
-} = HS.intersection
+  <A>(self: HashSet<A>, that: Iterable<A>): HashSet<A>;
+} = HS.intersection;
 
 /**
  * Computes the set union `( self ∪ that )` between this `HashSet` and the
@@ -1626,7 +1635,7 @@ export const union: {
    * )
    * ```
    */
-  <A>(that: Iterable<A>): (self: HashSet<A>) => HashSet<A>
+  <A>(that: Iterable<A>): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -1664,8 +1673,8 @@ export const union: {
    * )
    * ```
    */
-  <A>(self: HashSet<A>, that: Iterable<A>): HashSet<A>
-} = HS.union
+  <A>(self: HashSet<A>, that: Iterable<A>): HashSet<A>;
+} = HS.union;
 
 /**
  * Checks if a value is present in the `HashSet`. If it is present, the value
@@ -1724,7 +1733,7 @@ export const toggle: {
    * assert.equal(pipe(set, HashSet.has(0)), true)
    * ```
    */
-  <A>(value: A): (self: HashSet<A>) => HashSet<A>
+  <A>(value: A): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -1753,8 +1762,8 @@ export const toggle: {
    * assert.equal(HashSet.has(set, 0), true)
    * ```
    */
-  <A>(self: HashSet<A>, value: A): HashSet<A>
-} = HS.toggle
+  <A>(self: HashSet<A>, value: A): HashSet<A>;
+} = HS.toggle;
 
 /**
  * Maps over the values of the `HashSet` using the specified function.
@@ -1800,7 +1809,7 @@ export const map: {
    * )
    * ```
    */
-  <A, B>(f: (a: A) => B): (self: HashSet<A>) => HashSet<B>
+  <A, B>(f: (a: A) => B): (self: HashSet<A>) => HashSet<B>;
 
   /**
    * @example
@@ -1818,8 +1827,8 @@ export const map: {
    * )
    * ```
    */
-  <A, B>(self: HashSet<A>, f: (a: A) => B): HashSet<B>
-} = HS.map
+  <A, B>(self: HashSet<A>, f: (a: A) => B): HashSet<B>;
+} = HS.map;
 
 /**
  * Chains over the values of the `HashSet` using the specified function.
@@ -1868,7 +1877,7 @@ export const flatMap: {
    * )
    * ```
    */
-  <A, B>(f: (a: A) => Iterable<B>): (self: HashSet<A>) => HashSet<B>
+  <A, B>(f: (a: A) => Iterable<B>): (self: HashSet<A>) => HashSet<B>;
 
   /**
    * @example
@@ -1885,8 +1894,8 @@ export const flatMap: {
    * )
    * ```
    */
-  <A, B>(self: HashSet<A>, f: (a: A) => Iterable<B>): HashSet<B>
-} = HS.flatMap
+  <A, B>(self: HashSet<A>, f: (a: A) => Iterable<B>): HashSet<B>;
+} = HS.flatMap;
 
 /**
  * Applies the specified function to the values of the `HashSet`.
@@ -1932,7 +1941,7 @@ export const forEach: {
    * assert.deepStrictEqual(result, [0, 1, 2])
    * ```
    */
-  <A>(f: (value: A) => void): (self: HashSet<A>) => void
+  <A>(f: (value: A) => void): (self: HashSet<A>) => void;
 
   /**
    * @example
@@ -1950,8 +1959,8 @@ export const forEach: {
    * assert.deepStrictEqual(result, [0, 1, 2])
    * ```
    */
-  <A>(self: HashSet<A>, f: (value: A) => void): void
-} = HS.forEach
+  <A>(self: HashSet<A>, f: (value: A) => void): void;
+} = HS.forEach;
 
 /**
  * Reduces the specified state over the values of the `HashSet`.
@@ -1996,7 +2005,7 @@ export const reduce: {
    * )
    * ```
    */
-  <A, Z>(zero: Z, f: (accumulator: Z, value: A) => Z): (self: HashSet<A>) => Z
+  <A, Z>(zero: Z, f: (accumulator: Z, value: A) => Z): (self: HashSet<A>) => Z;
 
   /**
    * @example
@@ -2015,8 +2024,8 @@ export const reduce: {
    * )
    * ```
    */
-  <A, Z>(self: HashSet<A>, zero: Z, f: (accumulator: Z, value: A) => Z): Z
-} = HS.reduce
+  <A, Z>(self: HashSet<A>, zero: Z, f: (accumulator: Z, value: A) => Z): Z;
+} = HS.reduce;
 
 /**
  * Filters values out of a `HashSet` using the specified predicate.
@@ -2102,7 +2111,7 @@ export const filter: {
    */
   <A, B extends A>(
     refinement: Refinement<NoInfer<A>, B>
-  ): (self: HashSet<A>) => HashSet<B>
+  ): (self: HashSet<A>) => HashSet<B>;
 
   /**
    * @example
@@ -2122,7 +2131,7 @@ export const filter: {
    * )
    * ```
    */
-  <A>(predicate: Predicate<NoInfer<A>>): (self: HashSet<A>) => HashSet<A>
+  <A>(predicate: Predicate<NoInfer<A>>): (self: HashSet<A>) => HashSet<A>;
 
   /**
    * @example
@@ -2147,10 +2156,7 @@ export const filter: {
    * assert.equal(HashSet.every(stringHashSet, Predicate.isString), true)
    * ```
    */
-  <A, B extends A>(
-    self: HashSet<A>,
-    refinement: Refinement<A, B>
-  ): HashSet<B>
+  <A, B extends A>(self: HashSet<A>, refinement: Refinement<A, B>): HashSet<B>;
 
   /**
    * @example
@@ -2167,8 +2173,8 @@ export const filter: {
    * )
    * ```
    */
-  <A>(self: HashSet<A>, predicate: Predicate<A>): HashSet<A>
-} = HS.filter
+  <A>(self: HashSet<A>, predicate: Predicate<A>): HashSet<A>;
+} = HS.filter;
 
 /**
  * Partition the values of a `HashSet` using the specified predicate.
@@ -2266,7 +2272,7 @@ export const partition: {
     refinement: Refinement<NoInfer<A>, B>
   ): (
     self: HashSet<A>
-  ) => [excluded: HashSet<Exclude<A, B>>, satisfying: HashSet<B>]
+  ) => [excluded: HashSet<Exclude<A, B>>, satisfying: HashSet<B>];
 
   /**
    * @example
@@ -2286,7 +2292,7 @@ export const partition: {
    */
   <A>(
     predicate: Predicate<NoInfer<A>>
-  ): (self: HashSet<A>) => [excluded: HashSet<A>, satisfying: HashSet<A>]
+  ): (self: HashSet<A>) => [excluded: HashSet<A>, satisfying: HashSet<A>];
 
   /**
    * @example
@@ -2321,7 +2327,7 @@ export const partition: {
   <A, B extends A>(
     self: HashSet<A>,
     refinement: Refinement<A, B>
-  ): [excluded: HashSet<Exclude<A, B>>, satisfying: HashSet<B>]
+  ): [excluded: HashSet<Exclude<A, B>>, satisfying: HashSet<B>];
 
   /**
    * @example
@@ -2342,5 +2348,5 @@ export const partition: {
   <A>(
     self: HashSet<A>,
     predicate: Predicate<A>
-  ): [excluded: HashSet<A>, satisfying: HashSet<A>]
-} = HS.partition
+  ): [excluded: HashSet<A>, satisfying: HashSet<A>];
+} = HS.partition;

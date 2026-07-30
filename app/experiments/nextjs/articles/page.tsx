@@ -11,7 +11,9 @@ interface Post {
 export default async function ArticlesPage() {
   const posts: Post[] = await fetch(
     "https://jsonplaceholder.typicode.com/posts/?_limit=20",
-    { cache: "force-cache" }
+    {
+      cache: "force-cache",
+    }
   ).then((post) => post.json());
 
   return (
@@ -34,7 +36,7 @@ export default async function ArticlesPage() {
         />
       </SubTitle>
 
-      <div className="mt-5 grid grid-cols-1 gap-5 xs:grid-cols-2 sm:grid-cols-3">
+      <div className="mt-5 grid grid-cols-1 xs:grid-cols-2 gap-5 sm:grid-cols-3">
         {posts.map((post) => (
           <Link
             className="rounded-md border border-zinc-300 bg-zinc-50 p-4 duration-200 ease-out hover:cursor-pointer hover:bg-white"

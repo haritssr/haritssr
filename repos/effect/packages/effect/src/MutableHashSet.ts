@@ -92,61 +92,70 @@
  * @module MutableHashSet
  * @since 2.0.0
  */
-import * as Dual from "./Function.js"
-import { format, type Inspectable, NodeInspectSymbol, toJSON } from "./Inspectable.js"
-import * as MutableHashMap from "./MutableHashMap.js"
-import type { Pipeable } from "./Pipeable.js"
-import { pipeArguments } from "./Pipeable.js"
+import * as Dual from "./Function.js";
+import {
+  format,
+  type Inspectable,
+  NodeInspectSymbol,
+  toJSON,
+} from "./Inspectable.js";
+import * as MutableHashMap from "./MutableHashMap.js";
+import type { Pipeable } from "./Pipeable.js";
+import { pipeArguments } from "./Pipeable.js";
 
-const TypeId: unique symbol = Symbol.for("effect/MutableHashSet") as TypeId
+const TypeId: unique symbol = Symbol.for("effect/MutableHashSet") as TypeId;
 
 /**
  * @since 2.0.0
  * @category symbol
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * @since 2.0.0
  * @category models
  */
-export interface MutableHashSet<out V> extends Iterable<V>, Pipeable, Inspectable {
-  readonly [TypeId]: TypeId
+export interface MutableHashSet<out V>
+  extends Iterable<V>,
+    Pipeable,
+    Inspectable {
+  readonly [TypeId]: TypeId;
 
   /** @internal */
-  readonly keyMap: MutableHashMap.MutableHashMap<V, boolean>
+  readonly keyMap: MutableHashMap.MutableHashMap<V, boolean>;
 }
 
 const MutableHashSetProto: Omit<MutableHashSet<unknown>, "keyMap"> = {
   [TypeId]: TypeId,
   [Symbol.iterator](this: MutableHashSet<unknown>): Iterator<unknown> {
     return Array.from(this.keyMap)
-      .map(([_]) => _)[Symbol.iterator]()
+      .map(([_]) => _)
+      [Symbol.iterator]();
   },
   toString() {
-    return format(this.toJSON())
+    return format(this.toJSON());
   },
   toJSON() {
     return {
       _id: "MutableHashSet",
-      values: Array.from(this).map(toJSON)
-    }
+      values: Array.from(this).map(toJSON),
+    };
   },
   [NodeInspectSymbol]() {
-    return this.toJSON()
+    return this.toJSON();
   },
   pipe() {
-    return pipeArguments(this, arguments)
-  }
-}
+    return pipeArguments(this, arguments);
+  },
+};
 
 const fromHashMap = <V>(
   keyMap: MutableHashMap.MutableHashMap<V, boolean>
 ): MutableHashSet<V> => {
-  const set = Object.create(MutableHashSetProto)
-  set.keyMap = keyMap
-  return set
-}
+  const set = Object.create(MutableHashSetProto);
+  set.keyMap = keyMap;
+  return set;
+};
 
 /**
  * Creates an empty mutable hash set.
@@ -176,7 +185,8 @@ const fromHashMap = <V>(
  *   for the specified type `K`.
  * @see Other `MutableHashSet` constructors are {@link module:MutableHashSet.make} {@link module:MutableHashSet.fromIterable}
  */
-export const empty = <K = never>(): MutableHashSet<K> => fromHashMap(MutableHashMap.empty())
+export const empty = <K = never>(): MutableHashSet<K> =>
+  fromHashMap(MutableHashMap.empty());
 
 /**
  * Creates a new `MutableHashSet` from an iterable collection of values.
@@ -294,7 +304,7 @@ export const empty = <K = never>(): MutableHashSet<K> => fromHashMap(MutableHash
 export const fromIterable = <K = never>(keys: Iterable<K>): MutableHashSet<K> =>
   fromHashMap(
     MutableHashMap.fromIterable(Array.from(keys).map((k) => [k, true]))
-  )
+  );
 
 /**
  * Construct a new `MutableHashSet` from a variable number of values.
@@ -367,7 +377,7 @@ export const fromIterable = <K = never>(keys: Iterable<K>): MutableHashSet<K> =>
  */
 export const make = <Keys extends ReadonlyArray<unknown>>(
   ...keys: Keys
-): MutableHashSet<Keys[number]> => fromIterable(keys)
+): MutableHashSet<Keys[number]> => fromIterable(keys);
 
 /**
  * **Checks** whether the `MutableHashSet` contains the given element, and
@@ -427,7 +437,7 @@ export const add: {
    * @returns A function that accepts a `MutableHashSet` and returns the
    *   reference of the updated `MutableHashSet` including the key.
    */
-  <V>(key: V): (self: MutableHashSet<V>) => MutableHashSet<V>
+  <V>(key: V): (self: MutableHashSet<V>) => MutableHashSet<V>;
 
   /**
    * `data-first` API
@@ -457,11 +467,11 @@ export const add: {
    *   present.
    * @returns The reference of the updated `MutableHashSet` including the key.
    */
-  <V>(self: MutableHashSet<V>, key: V): MutableHashSet<V>
+  <V>(self: MutableHashSet<V>, key: V): MutableHashSet<V>;
 } = Dual.dual<
   <V>(key: V) => (self: MutableHashSet<V>) => MutableHashSet<V>,
   <V>(self: MutableHashSet<V>, key: V) => MutableHashSet<V>
->(2, (self, key) => (MutableHashMap.set(self.keyMap, key, true), self))
+>(2, (self, key) => (MutableHashMap.set(self.keyMap, key, true), self));
 
 /**
  * Checks if the specified value exists in the `MutableHashSet`.
@@ -514,7 +524,7 @@ export const has: {
    * assert.equal(pipe(set, MutableHashSet.has(3)), false)
    * ```
    */
-  <V>(key: V): (self: MutableHashSet<V>) => boolean
+  <V>(key: V): (self: MutableHashSet<V>) => boolean;
 
   /**
    * `data-first` API
@@ -531,11 +541,11 @@ export const has: {
    * assert.equal(MutableHashSet.has(set, 3), false)
    * ```
    */
-  <V>(self: MutableHashSet<V>, key: V): boolean
+  <V>(self: MutableHashSet<V>, key: V): boolean;
 } = Dual.dual<
   <V>(key: V) => (self: MutableHashSet<V>) => boolean,
   <V>(self: MutableHashSet<V>, key: V) => boolean
->(2, (self, key) => MutableHashMap.has(self.keyMap, key))
+>(2, (self, key) => MutableHashMap.has(self.keyMap, key));
 
 /**
  * Removes a value from the `MutableHashSet`.
@@ -611,7 +621,7 @@ export const remove: {
    * @returns A function that takes a `MutableHashSet` as input and returns the
    *   reference to the same `MutableHashSet` with the specified key removed.
    */
-  <V>(key: V): (self: MutableHashSet<V>) => MutableHashSet<V>
+  <V>(key: V): (self: MutableHashSet<V>) => MutableHashSet<V>;
 
   /**
    * `data-first` API
@@ -635,11 +645,11 @@ export const remove: {
    * @param key - The value to be removed from the `MutableHashSet` if present.
    * @returns The reference to the updated `MutableHashSet`.
    */
-  <V>(self: MutableHashSet<V>, key: V): MutableHashSet<V>
+  <V>(self: MutableHashSet<V>, key: V): MutableHashSet<V>;
 } = Dual.dual<
   <V>(key: V) => (self: MutableHashSet<V>) => MutableHashSet<V>,
   <V>(self: MutableHashSet<V>, key: V) => MutableHashSet<V>
->(2, (self, key) => (MutableHashMap.remove(self.keyMap, key), self))
+>(2, (self, key) => (MutableHashMap.remove(self.keyMap, key), self));
 
 /**
  * Calculates the number of values in the `HashSet`.
@@ -669,7 +679,8 @@ export const remove: {
  * @returns The total number of elements within the `MutableHashSet`.
  * @see Other `MutableHashSet` elements are {@link module:MutableHashSet.add} {@link module:MutableHashSet.has} {@link module:MutableHashSet.remove} {@link module:MutableHashSet.clear}
  */
-export const size = <V>(self: MutableHashSet<V>): number => MutableHashMap.size(self.keyMap)
+export const size = <V>(self: MutableHashSet<V>): number =>
+  MutableHashMap.size(self.keyMap);
 
 /**
  * Removes all values from the `MutableHashSet`.
@@ -703,4 +714,4 @@ export const size = <V>(self: MutableHashSet<V>): number => MutableHashMap.size(
  */
 export const clear = <V>(self: MutableHashSet<V>): MutableHashSet<V> => (
   MutableHashMap.clear(self.keyMap), self
-)
+);

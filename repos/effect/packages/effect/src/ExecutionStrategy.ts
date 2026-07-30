@@ -1,8 +1,8 @@
 /**
  * @since 2.0.0
  */
-import type { LazyArg } from "./Function.js"
-import * as internal from "./internal/executionStrategy.js"
+import type { LazyArg } from "./Function.js";
+import * as internal from "./internal/executionStrategy.js";
 
 /**
  * Describes a strategy for evaluating multiple effects, potentially in
@@ -14,7 +14,7 @@ import * as internal from "./internal/executionStrategy.js"
  * @since 2.0.0
  * @category models
  */
-export type ExecutionStrategy = Sequential | Parallel | ParallelN
+export type ExecutionStrategy = Sequential | Parallel | ParallelN;
 
 /**
  * Execute effects sequentially.
@@ -23,7 +23,7 @@ export type ExecutionStrategy = Sequential | Parallel | ParallelN
  * @category models
  */
 export interface Sequential {
-  readonly _tag: "Sequential"
+  readonly _tag: "Sequential";
 }
 
 /**
@@ -33,7 +33,7 @@ export interface Sequential {
  * @category models
  */
 export interface Parallel {
-  readonly _tag: "Parallel"
+  readonly _tag: "Parallel";
 }
 
 /**
@@ -43,8 +43,8 @@ export interface Parallel {
  * @category models
  */
 export interface ParallelN {
-  readonly _tag: "ParallelN"
-  readonly parallelism: number
+  readonly _tag: "ParallelN";
+  readonly parallelism: number;
 }
 
 /**
@@ -53,7 +53,7 @@ export interface ParallelN {
  * @since 2.0.0
  * @category constructors
  */
-export const sequential: ExecutionStrategy = internal.sequential
+export const sequential: ExecutionStrategy = internal.sequential;
 
 /**
  * Execute effects in parallel.
@@ -61,7 +61,7 @@ export const sequential: ExecutionStrategy = internal.sequential
  * @since 2.0.0
  * @category constructors
  */
-export const parallel: ExecutionStrategy = internal.parallel
+export const parallel: ExecutionStrategy = internal.parallel;
 
 /**
  * Execute effects in parallel, up to the specified number of concurrent fibers.
@@ -69,7 +69,8 @@ export const parallel: ExecutionStrategy = internal.parallel
  * @since 2.0.0
  * @category constructors
  */
-export const parallelN: (parallelism: number) => ExecutionStrategy = internal.parallelN
+export const parallelN: (parallelism: number) => ExecutionStrategy =
+  internal.parallelN;
 
 /**
  * Returns `true` if the specified `ExecutionStrategy` is an instance of
@@ -78,7 +79,8 @@ export const parallelN: (parallelism: number) => ExecutionStrategy = internal.pa
  * @since 2.0.0
  * @category refinements
  */
-export const isSequential: (self: ExecutionStrategy) => self is Sequential = internal.isSequential
+export const isSequential: (self: ExecutionStrategy) => self is Sequential =
+  internal.isSequential;
 
 /**
  * Returns `true` if the specified `ExecutionStrategy` is an instance of
@@ -87,7 +89,8 @@ export const isSequential: (self: ExecutionStrategy) => self is Sequential = int
  * @since 2.0.0
  * @category refinements
  */
-export const isParallel: (self: ExecutionStrategy) => self is Parallel = internal.isParallel
+export const isParallel: (self: ExecutionStrategy) => self is Parallel =
+  internal.isParallel;
 
 /**
  * Returns `true` if the specified `ExecutionStrategy` is an instance of
@@ -96,7 +99,8 @@ export const isParallel: (self: ExecutionStrategy) => self is Parallel = interna
  * @since 2.0.0
  * @category refinements
  */
-export const isParallelN: (self: ExecutionStrategy) => self is ParallelN = internal.isParallelN
+export const isParallelN: (self: ExecutionStrategy) => self is ParallelN =
+  internal.isParallelN;
 
 /**
  * Folds over the specified `ExecutionStrategy` using the provided case
@@ -107,13 +111,16 @@ export const isParallelN: (self: ExecutionStrategy) => self is ParallelN = inter
  */
 export const match: {
   <A>(options: {
-    readonly onSequential: LazyArg<A>
-    readonly onParallel: LazyArg<A>
-    readonly onParallelN: (n: number) => A
-  }): (self: ExecutionStrategy) => A
-  <A>(self: ExecutionStrategy, options: {
-    readonly onSequential: LazyArg<A>
-    readonly onParallel: LazyArg<A>
-    readonly onParallelN: (n: number) => A
-  }): A
-} = internal.match
+    readonly onSequential: LazyArg<A>;
+    readonly onParallel: LazyArg<A>;
+    readonly onParallelN: (n: number) => A;
+  }): (self: ExecutionStrategy) => A;
+  <A>(
+    self: ExecutionStrategy,
+    options: {
+      readonly onSequential: LazyArg<A>;
+      readonly onParallel: LazyArg<A>;
+      readonly onParallelN: (n: number) => A;
+    }
+  ): A;
+} = internal.match;

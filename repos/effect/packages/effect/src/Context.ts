@@ -7,99 +7,107 @@
  *
  * @since 2.0.0
  */
-import type * as Effect from "./Effect.js"
-import type { Equal } from "./Equal.js"
-import type { LazyArg } from "./Function.js"
-import type { Inspectable } from "./Inspectable.js"
-import * as internal from "./internal/context.js"
-import type { Option } from "./Option.js"
-import type { Pipeable } from "./Pipeable.js"
-import type * as Types from "./Types.js"
-import type * as Unify from "./Unify.js"
+import type * as Effect from "./Effect.js";
+import type { Equal } from "./Equal.js";
+import type { LazyArg } from "./Function.js";
+import type { Inspectable } from "./Inspectable.js";
+import * as internal from "./internal/context.js";
+import type { Option } from "./Option.js";
+import type { Pipeable } from "./Pipeable.js";
+import type * as Types from "./Types.js";
+import type * as Unify from "./Unify.js";
 
 /**
  * @since 2.0.0
  * @category symbol
  */
-export const TagTypeId: unique symbol = internal.TagTypeId
+export const TagTypeId: unique symbol = internal.TagTypeId;
 
 /**
  * @since 2.0.0
  * @category symbol
  */
-export type TagTypeId = typeof TagTypeId
+export type TagTypeId = typeof TagTypeId;
 
 /**
  * @since 3.5.9
  * @category models
  */
-export interface Tag<in out Id, in out Value> extends Pipeable, Inspectable, ReadonlyTag<Id, Value> {
-  readonly _op: "Tag"
-  readonly Service: Value
-  readonly Identifier: Id
+export interface Tag<in out Id, in out Value>
+  extends Pipeable,
+    Inspectable,
+    ReadonlyTag<Id, Value> {
+  readonly _op: "Tag";
+  readonly Service: Value;
+  readonly Identifier: Id;
   readonly [TagTypeId]: {
-    readonly _Service: Types.Invariant<Value>
-    readonly _Identifier: Types.Invariant<Id>
-  }
-  of(self: Value): Value
-  context(self: Value): Context<Id>
-  readonly stack?: string | undefined
-  readonly key: string
-  [Unify.typeSymbol]?: unknown
-  [Unify.unifySymbol]?: TagUnify<this>
-  [Unify.ignoreSymbol]?: TagUnifyIgnore
+    readonly _Service: Types.Invariant<Value>;
+    readonly _Identifier: Types.Invariant<Id>;
+  };
+  of(self: Value): Value;
+  context(self: Value): Context<Id>;
+  readonly stack?: string | undefined;
+  readonly key: string;
+  [Unify.typeSymbol]?: unknown;
+  [Unify.unifySymbol]?: TagUnify<this>;
+  [Unify.ignoreSymbol]?: TagUnifyIgnore;
 }
 
 /**
  * @since 3.5.9
  * @category models
  */
-export interface ReadonlyTag<in out Id, out Value> extends Pipeable, Inspectable, Effect.Effect<Value, never, Id> {
-  readonly _op: "Tag"
-  readonly Service: Value
-  readonly Identifier: Id
+export interface ReadonlyTag<in out Id, out Value>
+  extends Pipeable,
+    Inspectable,
+    Effect.Effect<Value, never, Id> {
+  readonly _op: "Tag";
+  readonly Service: Value;
+  readonly Identifier: Id;
   readonly [TagTypeId]: {
-    readonly _Service: Types.Covariant<Value>
-    readonly _Identifier: Types.Invariant<Id>
-  }
-  readonly stack?: string | undefined
-  readonly key: string
+    readonly _Service: Types.Covariant<Value>;
+    readonly _Identifier: Types.Invariant<Id>;
+  };
+  readonly stack?: string | undefined;
+  readonly key: string;
 }
 
 /**
  * @since 3.11.0
  * @category symbol
  */
-export const ReferenceTypeId: unique symbol = internal.ReferenceTypeId
+export const ReferenceTypeId: unique symbol = internal.ReferenceTypeId;
 
 /**
  * @since 3.11.0
  * @category symbol
  */
-export type ReferenceTypeId = typeof ReferenceTypeId
+export type ReferenceTypeId = typeof ReferenceTypeId;
 
 /**
  * @since 3.11.0
  * @category models
  */
-export interface Reference<in out Id, in out Value> extends Pipeable, Inspectable {
-  readonly [ReferenceTypeId]: ReferenceTypeId
-  readonly defaultValue: () => Value
+export interface Reference<in out Id, in out Value>
+  extends Pipeable,
+    Inspectable {
+  readonly [ReferenceTypeId]: ReferenceTypeId;
+  readonly defaultValue: () => Value;
 
-  readonly _op: "Tag"
-  readonly Service: Value
-  readonly Identifier: Id
+  readonly _op: "Tag";
+  readonly Service: Value;
+  readonly Identifier: Id;
   readonly [TagTypeId]: {
-    readonly _Service: Types.Invariant<Value>
-    readonly _Identifier: Types.Invariant<Id>
-  }
-  of(self: Value): Value
-  context(self: Value): Context<Id>
-  readonly stack?: string | undefined
-  readonly key: string
-  [Unify.typeSymbol]?: unknown
-  [Unify.unifySymbol]?: TagUnify<this>
-  [Unify.ignoreSymbol]?: TagUnifyIgnore
+    readonly _Service: Types.Invariant<Value>;
+    readonly _Identifier: Types.Invariant<Id>;
+  };
+  of(self: Value): Value;
+  context(self: Value): Context<Id>;
+  readonly stack?: string | undefined;
+  readonly key: string;
+  [Unify.typeSymbol]?: unknown;
+  [Unify.unifySymbol]?: TagUnify<this>;
+  [Unify.ignoreSymbol]?: TagUnifyIgnore;
 }
 
 /**
@@ -107,9 +115,9 @@ export interface Reference<in out Id, in out Value> extends Pipeable, Inspectabl
  * @category models
  */
 export interface TagClassShape<Id, Shape> {
-  readonly [TagTypeId]: TagTypeId
-  readonly Type: Shape
-  readonly Id: Id
+  readonly [TagTypeId]: TagTypeId;
+  readonly Type: Shape;
+  readonly Id: Id;
 }
 
 // TODO(4.0): move key narrowing to the Tag interface
@@ -117,9 +125,10 @@ export interface TagClassShape<Id, Shape> {
  * @since 2.0.0
  * @category models
  */
-export interface TagClass<Self, Id extends string, Type> extends Tag<Self, Type> {
-  new(_: never): TagClassShape<Id, Type>
-  readonly key: Id
+export interface TagClass<Self, Id extends string, Type>
+  extends Tag<Self, Type> {
+  new (_: never): TagClassShape<Id, Type>;
+  readonly key: Id;
 }
 
 // TODO(4.0): move key narrowing to the Reference interface
@@ -127,9 +136,10 @@ export interface TagClass<Self, Id extends string, Type> extends Tag<Self, Type>
  * @since 3.11.0
  * @category models
  */
-export interface ReferenceClass<Self, Id extends string, Type> extends Reference<Self, Type> {
-  new(_: never): TagClassShape<Id, Type>
-  readonly key: Id
+export interface ReferenceClass<Self, Id extends string, Type>
+  extends Reference<Self, Type> {
+  new (_: never): TagClassShape<Id, Type>;
+  readonly key: Id;
 }
 
 /**
@@ -137,14 +147,14 @@ export interface ReferenceClass<Self, Id extends string, Type> extends Reference
  * @since 2.0.0
  */
 export interface TagUnify<A extends { [Unify.typeSymbol]?: any }> {
-  Tag?: () => Extract<A[Unify.typeSymbol], Tag<any, any>>
+  Tag?: () => Extract<A[Unify.typeSymbol], Tag<any, any>>;
 }
 
 /**
  * @category models
  * @since 2.0.0
  */
-export interface TagUnifyIgnore {}
+export type TagUnifyIgnore = {};
 
 /**
  * @since 2.0.0
@@ -153,15 +163,21 @@ export declare namespace Tag {
   /**
    * @since 2.0.0
    */
-  export type Service<T extends Tag<any, any> | TagClassShape<any, any>> = T extends Tag<any, any> ? T["Service"]
-    : T extends TagClassShape<any, infer A> ? A
-    : never
+  export type Service<T extends Tag<any, any> | TagClassShape<any, any>> =
+    T extends Tag<any, any>
+      ? T["Service"]
+      : T extends TagClassShape<any, infer A>
+        ? A
+        : never;
   /**
    * @since 2.0.0
    */
-  export type Identifier<T extends Tag<any, any> | TagClassShape<any, any>> = T extends Tag<any, any> ? T["Identifier"]
-    : T extends TagClassShape<any, any> ? T
-    : never
+  export type Identifier<T extends Tag<any, any> | TagClassShape<any, any>> =
+    T extends Tag<any, any>
+      ? T["Identifier"]
+      : T extends TagClassShape<any, any>
+        ? T
+        : never;
 }
 
 /**
@@ -178,22 +194,23 @@ export declare namespace Tag {
  * @since 2.0.0
  * @category constructors
  */
-export const GenericTag: <Identifier, Service = Identifier>(key: string) => Tag<Identifier, Service> =
-  internal.makeGenericTag
+export const GenericTag: <Identifier, Service = Identifier>(
+  key: string
+) => Tag<Identifier, Service> = internal.makeGenericTag;
 
-const TypeId: unique symbol = internal.TypeId as TypeId
+const TypeId: unique symbol = internal.TypeId as TypeId;
 
 /**
  * @since 2.0.0
  * @category symbol
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * @since 2.0.0
  * @category models
  */
-export type ValidTagsById<R> = R extends infer S ? Tag<S, any> : never
+export type ValidTagsById<R> = R extends infer S ? Tag<S, any> : never;
 
 /**
  * @since 2.0.0
@@ -201,16 +218,18 @@ export type ValidTagsById<R> = R extends infer S ? Tag<S, any> : never
  */
 export interface Context<in Services> extends Equal, Pipeable, Inspectable {
   readonly [TypeId]: {
-    readonly _Services: Types.Contravariant<Services>
-  }
-  readonly unsafeMap: Map<string, any>
+    readonly _Services: Types.Contravariant<Services>;
+  };
+  readonly unsafeMap: Map<string, any>;
 }
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const unsafeMake: <Services>(unsafeMap: Map<string, any>) => Context<Services> = internal.makeContext
+export const unsafeMake: <Services>(
+  unsafeMap: Map<string, any>
+) => Context<Services> = internal.makeContext;
 
 /**
  * Checks if the provided argument is a `Context`.
@@ -226,7 +245,8 @@ export const unsafeMake: <Services>(unsafeMap: Map<string, any>) => Context<Serv
  * @since 2.0.0
  * @category guards
  */
-export const isContext: (input: unknown) => input is Context<never> = internal.isContext
+export const isContext: (input: unknown) => input is Context<never> =
+  internal.isContext;
 
 /**
  * Checks if the provided argument is a `Tag`.
@@ -242,7 +262,7 @@ export const isContext: (input: unknown) => input is Context<never> = internal.i
  * @since 2.0.0
  * @category guards
  */
-export const isTag: (input: unknown) => input is Tag<any, any> = internal.isTag
+export const isTag: (input: unknown) => input is Tag<any, any> = internal.isTag;
 
 /**
  * Checks if the provided argument is a `Reference`.
@@ -251,7 +271,8 @@ export const isTag: (input: unknown) => input is Tag<any, any> = internal.isTag
  * @category guards
  * @experimental
  */
-export const isReference: (u: unknown) => u is Reference<any, any> = internal.isReference
+export const isReference: (u: unknown) => u is Reference<any, any> =
+  internal.isReference;
 
 /**
  * Returns an empty `Context`.
@@ -267,7 +288,7 @@ export const isReference: (u: unknown) => u is Reference<any, any> = internal.is
  * @since 2.0.0
  * @category constructors
  */
-export const empty: () => Context<never> = internal.empty
+export const empty: () => Context<never> = internal.empty;
 
 /**
  * Creates a new `Context` with a single service associated to the tag.
@@ -287,7 +308,10 @@ export const empty: () => Context<never> = internal.empty
  * @since 2.0.0
  * @category constructors
  */
-export const make: <I, S>(tag: Tag<I, S>, service: Types.NoInfer<S>) => Context<I> = internal.make
+export const make: <I, S>(
+  tag: Tag<I, S>,
+  service: Types.NoInfer<S>
+) => Context<I> = internal.make;
 
 /**
  * Adds a service to a given `Context`.
@@ -314,9 +338,16 @@ export const make: <I, S>(tag: Tag<I, S>, service: Types.NoInfer<S>) => Context<
  * @since 2.0.0
  */
 export const add: {
-  <I, S>(tag: Tag<I, S>, service: Types.NoInfer<S>): <Services>(self: Context<Services>) => Context<Services | I>
-  <Services, I, S>(self: Context<Services>, tag: Tag<I, S>, service: Types.NoInfer<S>): Context<Services | I>
-} = internal.add
+  <I, S>(
+    tag: Tag<I, S>,
+    service: Types.NoInfer<S>
+  ): <Services>(self: Context<Services>) => Context<Services | I>;
+  <Services, I, S>(
+    self: Context<Services>,
+    tag: Tag<I, S>,
+    service: Types.NoInfer<S>
+  ): Context<Services | I>;
+} = internal.add;
 
 /**
  * Get a service from the context that corresponds to the given tag.
@@ -341,11 +372,13 @@ export const add: {
  * @category getters
  */
 export const get: {
-  <I, S>(tag: Reference<I, S>): <Services>(self: Context<Services>) => S
-  <Services, I extends Services, S>(tag: Tag<I, S>): (self: Context<Services>) => S
-  <Services, I, S>(self: Context<Services>, tag: Reference<I, S>): S
-  <Services, I extends Services, S>(self: Context<Services>, tag: Tag<I, S>): S
-} = internal.get
+  <I, S>(tag: Reference<I, S>): <Services>(self: Context<Services>) => S;
+  <Services, I extends Services, S>(
+    tag: Tag<I, S>
+  ): (self: Context<Services>) => S;
+  <Services, I, S>(self: Context<Services>, tag: Reference<I, S>): S;
+  <Services, I extends Services, S>(self: Context<Services>, tag: Tag<I, S>): S;
+} = internal.get;
 
 /**
  * Get a service from the context that corresponds to the given tag, or
@@ -355,9 +388,16 @@ export const get: {
  * @category getters
  */
 export const getOrElse: {
-  <S, I, B>(tag: Tag<I, S>, orElse: LazyArg<B>): <Services>(self: Context<Services>) => S | B
-  <Services, S, I, B>(self: Context<Services>, tag: Tag<I, S>, orElse: LazyArg<B>): S | B
-} = internal.getOrElse
+  <S, I, B>(
+    tag: Tag<I, S>,
+    orElse: LazyArg<B>
+  ): <Services>(self: Context<Services>) => S | B;
+  <Services, S, I, B>(
+    self: Context<Services>,
+    tag: Tag<I, S>,
+    orElse: LazyArg<B>
+  ): S | B;
+} = internal.getOrElse;
 
 /**
  * Get a service from the context that corresponds to the given tag.
@@ -383,9 +423,9 @@ export const getOrElse: {
  * @category unsafe
  */
 export const unsafeGet: {
-  <S, I>(tag: Tag<I, S>): <Services>(self: Context<Services>) => S
-  <Services, S, I>(self: Context<Services>, tag: Tag<I, S>): S
-} = internal.unsafeGet
+  <S, I>(tag: Tag<I, S>): <Services>(self: Context<Services>) => S;
+  <Services, S, I>(self: Context<Services>, tag: Tag<I, S>): S;
+} = internal.unsafeGet;
 
 /**
  * Get the value associated with the specified tag from the context wrapped in an `Option` object. If the tag is not
@@ -409,9 +449,9 @@ export const unsafeGet: {
  * @category getters
  */
 export const getOption: {
-  <S, I>(tag: Tag<I, S>): <Services>(self: Context<Services>) => Option<S>
-  <Services, S, I>(self: Context<Services>, tag: Tag<I, S>): Option<S>
-} = internal.getOption
+  <S, I>(tag: Tag<I, S>): <Services>(self: Context<Services>) => Option<S>;
+  <Services, S, I>(self: Context<Services>, tag: Tag<I, S>): Option<S>;
+} = internal.getOption;
 
 /**
  * Merges two `Context`s, returning a new `Context` containing the services of both.
@@ -436,9 +476,14 @@ export const getOption: {
  * @since 2.0.0
  */
 export const merge: {
-  <R1>(that: Context<R1>): <Services>(self: Context<Services>) => Context<R1 | Services>
-  <Services, R1>(self: Context<Services>, that: Context<R1>): Context<Services | R1>
-} = internal.merge
+  <R1>(
+    that: Context<R1>
+  ): <Services>(self: Context<Services>) => Context<R1 | Services>;
+  <Services, R1>(
+    self: Context<Services>,
+    that: Context<R1>
+  ): Context<Services | R1>;
+} = internal.merge;
 
 /**
  * Merges any number of `Context`s, returning a new `Context` containing the services of all.
@@ -467,7 +512,7 @@ export const merge: {
  */
 export const mergeAll: <T extends Array<unknown>>(
   ...ctxs: [...{ [K in keyof T]: Context<T[K]> }]
-) => Context<T[number]> = internal.mergeAll
+) => Context<T[number]> = internal.mergeAll;
 
 /**
  * Returns a new `Context` that contains only the specified services.
@@ -495,14 +540,18 @@ export const mergeAll: <T extends Array<unknown>>(
  */
 export const pick: <Tags extends ReadonlyArray<Tag<any, any>>>(
   ...tags: Tags
-) => <Services>(self: Context<Services>) => Context<Services & Tag.Identifier<Tags[number]>> = internal.pick
+) => <Services>(
+  self: Context<Services>
+) => Context<Services & Tag.Identifier<Tags[number]>> = internal.pick;
 
 /**
  * @since 2.0.0
  */
 export const omit: <Tags extends ReadonlyArray<Tag<any, any>>>(
   ...tags: Tags
-) => <Services>(self: Context<Services>) => Context<Exclude<Services, Tag.Identifier<Tags[number]>>> = internal.omit
+) => <Services>(
+  self: Context<Services>
+) => Context<Exclude<Services, Tag.Identifier<Tags[number]>>> = internal.omit;
 
 /**
  * @example
@@ -521,7 +570,9 @@ export const omit: <Tags extends ReadonlyArray<Tag<any, any>>>(
  * @since 2.0.0
  * @category constructors
  */
-export const Tag: <const Id extends string>(id: Id) => <Self, Shape>() => TagClass<Self, Id, Shape> = internal.Tag
+export const Tag: <const Id extends string>(
+  id: Id
+) => <Self, Shape>() => TagClass<Self, Id, Shape> = internal.Tag;
 
 /**
  * Creates a context tag with a default value.
@@ -582,4 +633,4 @@ export const Tag: <const Id extends string>(id: Id) => <Self, Shape>() => TagCla
 export const Reference: <Self>() => <const Id extends string, Service>(
   id: Id,
   options: { readonly defaultValue: () => Service }
-) => ReferenceClass<Self, Id, Service> = internal.Reference
+) => ReferenceClass<Self, Id, Service> = internal.Reference;

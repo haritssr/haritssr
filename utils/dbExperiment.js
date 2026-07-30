@@ -1,9 +1,11 @@
 import Database from "bun:sqlite";
 
-const db = new Database("/Users/haritssyah/developer/.data-haritssr/experiment.db");
+const db = new Database(
+  "/Users/haritssyah/developer/.data-haritssr/experiment.db"
+);
 
 db.exec(
-  "CREATE TABLE IF NOT EXISTS tools (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, price NOT NULL, amount INTEGER NOT NULL)",
+  "CREATE TABLE IF NOT EXISTS tools (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, price NOT NULL, amount INTEGER NOT NULL)"
 );
 
 // const insert = db.prepare("INSERT INTO tools (name, price, amount) VALUES (?, ?, ?)");

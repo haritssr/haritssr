@@ -1,10 +1,10 @@
 /**
  * @since 2.0.0
  */
-import type * as FiberId from "./FiberId.js"
-import type * as FiberRef from "./FiberRef.js"
-import type * as FiberRefs from "./FiberRefs.js"
-import * as internal from "./internal/fiberRefs/patch.js"
+import type * as FiberId from "./FiberId.js";
+import type * as FiberRef from "./FiberRef.js";
+import type * as FiberRefs from "./FiberRefs.js";
+import * as internal from "./internal/fiberRefs/patch.js";
 
 /**
  * A `FiberRefsPatch` captures the changes in `FiberRef` values made by a single
@@ -15,14 +15,14 @@ import * as internal from "./internal/fiberRefs/patch.js"
  * @since 2.0.0
  * @category models
  */
-export type FiberRefsPatch = Empty | Add | Remove | Update | AndThen
+export type FiberRefsPatch = Empty | Add | Remove | Update | AndThen;
 
 /**
  * @since 2.0.0
  * @category models
  */
 export interface Empty {
-  readonly _tag: "Empty"
+  readonly _tag: "Empty";
 }
 
 /**
@@ -30,9 +30,9 @@ export interface Empty {
  * @category models
  */
 export interface Add {
-  readonly _tag: "Add"
-  readonly fiberRef: FiberRef.FiberRef<unknown>
-  readonly value: unknown
+  readonly _tag: "Add";
+  readonly fiberRef: FiberRef.FiberRef<unknown>;
+  readonly value: unknown;
 }
 
 /**
@@ -40,8 +40,8 @@ export interface Add {
  * @category models
  */
 export interface Remove {
-  readonly _tag: "Remove"
-  readonly fiberRef: FiberRef.FiberRef<unknown>
+  readonly _tag: "Remove";
+  readonly fiberRef: FiberRef.FiberRef<unknown>;
 }
 
 /**
@@ -49,9 +49,9 @@ export interface Remove {
  * @category models
  */
 export interface Update {
-  readonly _tag: "Update"
-  readonly fiberRef: FiberRef.FiberRef<unknown>
-  readonly patch: unknown
+  readonly _tag: "Update";
+  readonly fiberRef: FiberRef.FiberRef<unknown>;
+  readonly patch: unknown;
 }
 
 /**
@@ -59,16 +59,16 @@ export interface Update {
  * @category models
  */
 export interface AndThen {
-  readonly _tag: "AndThen"
-  readonly first: FiberRefsPatch
-  readonly second: FiberRefsPatch
+  readonly _tag: "AndThen";
+  readonly first: FiberRefsPatch;
+  readonly second: FiberRefsPatch;
 }
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const empty: FiberRefsPatch = internal.empty
+export const empty: FiberRefsPatch = internal.empty;
 
 /**
  * Constructs a patch that describes the changes between the specified
@@ -77,7 +77,10 @@ export const empty: FiberRefsPatch = internal.empty
  * @since 2.0.0
  * @category constructors
  */
-export const diff: (oldValue: FiberRefs.FiberRefs, newValue: FiberRefs.FiberRefs) => FiberRefsPatch = internal.diff
+export const diff: (
+  oldValue: FiberRefs.FiberRefs,
+  newValue: FiberRefs.FiberRefs
+) => FiberRefsPatch = internal.diff;
 
 /**
  * Combines this patch and the specified patch to create a new patch that
@@ -88,9 +91,9 @@ export const diff: (oldValue: FiberRefs.FiberRefs, newValue: FiberRefs.FiberRefs
  * @category constructors
  */
 export const combine: {
-  (that: FiberRefsPatch): (self: FiberRefsPatch) => FiberRefsPatch
-  (self: FiberRefsPatch, that: FiberRefsPatch): FiberRefsPatch
-} = internal.combine
+  (that: FiberRefsPatch): (self: FiberRefsPatch) => FiberRefsPatch;
+  (self: FiberRefsPatch, that: FiberRefsPatch): FiberRefsPatch;
+} = internal.combine;
 
 /**
  * Applies the changes described by this patch to the specified collection
@@ -100,6 +103,13 @@ export const combine: {
  * @category destructors
  */
 export const patch: {
-  (fiberId: FiberId.Runtime, oldValue: FiberRefs.FiberRefs): (self: FiberRefsPatch) => FiberRefs.FiberRefs
-  (self: FiberRefsPatch, fiberId: FiberId.Runtime, oldValue: FiberRefs.FiberRefs): FiberRefs.FiberRefs
-} = internal.patch
+  (
+    fiberId: FiberId.Runtime,
+    oldValue: FiberRefs.FiberRefs
+  ): (self: FiberRefsPatch) => FiberRefs.FiberRefs;
+  (
+    self: FiberRefsPatch,
+    fiberId: FiberId.Runtime,
+    oldValue: FiberRefs.FiberRefs
+  ): FiberRefs.FiberRefs;
+} = internal.patch;

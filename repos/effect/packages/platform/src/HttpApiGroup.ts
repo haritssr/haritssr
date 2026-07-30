@@ -1,33 +1,36 @@
 /**
  * @since 1.0.0
  */
-import * as Context from "effect/Context"
-import { type Pipeable, pipeArguments } from "effect/Pipeable"
-import * as Predicate from "effect/Predicate"
-import * as Record from "effect/Record"
-import * as Schema from "effect/Schema"
-import type * as HttpApiEndpoint from "./HttpApiEndpoint.js"
-import type { HttpApiDecodeError } from "./HttpApiError.js"
-import type * as HttpApiMiddleware from "./HttpApiMiddleware.js"
-import * as HttpApiSchema from "./HttpApiSchema.js"
+import * as Context from "effect/Context";
+import { type Pipeable, pipeArguments } from "effect/Pipeable";
+import * as Predicate from "effect/Predicate";
+import * as Record from "effect/Record";
+import * as Schema from "effect/Schema";
+import type * as HttpApiEndpoint from "./HttpApiEndpoint.js";
+import type { HttpApiDecodeError } from "./HttpApiError.js";
+import type * as HttpApiMiddleware from "./HttpApiMiddleware.js";
+import * as HttpApiSchema from "./HttpApiSchema.js";
 
 /**
  * @since 1.0.0
  * @category type ids
  */
-export const TypeId: unique symbol = Symbol.for("@effect/platform/HttpApiGroup")
+export const TypeId: unique symbol = Symbol.for(
+  "@effect/platform/HttpApiGroup"
+);
 
 /**
  * @since 1.0.0
  * @category type ids
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * @since 1.0.0
  * @category guards
  */
-export const isHttpApiGroup = (u: unknown): u is HttpApiGroup.Any => Predicate.hasProperty(u, TypeId)
+export const isHttpApiGroup = (u: unknown): u is HttpApiGroup.Any =>
+  Predicate.hasProperty(u, TypeId);
 
 /**
  * An `HttpApiGroup` is a collection of `HttpApiEndpoint`s. You can use an `HttpApiGroup` to
@@ -43,23 +46,23 @@ export interface HttpApiGroup<
   out Endpoints extends HttpApiEndpoint.HttpApiEndpoint.Any = never,
   in out Error = HttpApiDecodeError,
   out R = never,
-  out TopLevel extends (true | false) = false
+  out TopLevel extends true | false = false,
 > extends Pipeable {
-  new(_: never): {}
-  readonly [TypeId]: TypeId
-  readonly identifier: Id
-  readonly topLevel: TopLevel
-  readonly endpoints: Record.ReadonlyRecord<string, Endpoints>
-  readonly errorSchema: Schema.Schema<Error, unknown, R>
-  readonly annotations: Context.Context<never>
-  readonly middlewares: ReadonlySet<HttpApiMiddleware.TagClassAny>
+  new (_: never): {};
+  readonly [TypeId]: TypeId;
+  readonly identifier: Id;
+  readonly topLevel: TopLevel;
+  readonly endpoints: Record.ReadonlyRecord<string, Endpoints>;
+  readonly errorSchema: Schema.Schema<Error, unknown, R>;
+  readonly annotations: Context.Context<never>;
+  readonly middlewares: ReadonlySet<HttpApiMiddleware.TagClassAny>;
 
   /**
    * Add an `HttpApiEndpoint` to an `HttpApiGroup`.
    */
   add<A extends HttpApiEndpoint.HttpApiEndpoint.Any>(
     endpoint: A
-  ): HttpApiGroup<Id, Endpoints | A, Error, R, TopLevel>
+  ): HttpApiGroup<Id, Endpoints | A, Error, R, TopLevel>;
 
   /**
    * Add an error schema to an `HttpApiGroup`, which is shared by all endpoints in the
@@ -68,28 +71,32 @@ export interface HttpApiGroup<
   addError<A, I, RX>(
     schema: Schema.Schema<A, I, RX>,
     annotations?: {
-      readonly status?: number | undefined
+      readonly status?: number | undefined;
     }
-  ): HttpApiGroup<Id, Endpoints, Error | A, R | RX, TopLevel>
+  ): HttpApiGroup<Id, Endpoints, Error | A, R | RX, TopLevel>;
 
   /**
    * Add a path prefix to all endpoints in an `HttpApiGroup`. Note that this will only
    * add the prefix to the endpoints before this api is called.
    */
-  prefix(prefix: HttpApiEndpoint.PathSegment): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>
+  prefix(
+    prefix: HttpApiEndpoint.PathSegment
+  ): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>;
 
   /**
    * Add an `HttpApiMiddleware` to the `HttpApiGroup`.
    *
    * It will be applied to all endpoints in the group.
    */
-  middleware<I extends HttpApiMiddleware.HttpApiMiddleware.AnyId, S>(middleware: Context.Tag<I, S>): HttpApiGroup<
+  middleware<I extends HttpApiMiddleware.HttpApiMiddleware.AnyId, S>(
+    middleware: Context.Tag<I, S>
+  ): HttpApiGroup<
     Id,
     Endpoints,
     Error | HttpApiMiddleware.HttpApiMiddleware.Error<I>,
     R | I | HttpApiMiddleware.HttpApiMiddleware.ErrorContext<I>,
     TopLevel
-  >
+  >;
 
   /**
    * Add an `HttpApiMiddleware` to each endpoint in the `HttpApiGroup`.
@@ -105,17 +112,22 @@ export interface HttpApiGroup<
     Error,
     R,
     TopLevel
-  >
+  >;
 
   /**
    * Merge the annotations of an `HttpApiGroup` with a new context.
    */
-  annotateContext<I>(context: Context.Context<I>): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>
+  annotateContext<I>(
+    context: Context.Context<I>
+  ): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>;
 
   /**
    * Add an annotation to an `HttpApiGroup`.
    */
-  annotate<I, S>(tag: Context.Tag<I, S>, value: S): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>
+  annotate<I, S>(
+    tag: Context.Tag<I, S>,
+    value: S
+  ): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>;
 
   /**
    * For each endpoint in an `HttpApiGroup`, update the annotations with a new
@@ -123,7 +135,9 @@ export interface HttpApiGroup<
    *
    * Note that this will only update the annotations before this api is called.
    */
-  annotateEndpointsContext<I>(context: Context.Context<I>): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>
+  annotateEndpointsContext<I>(
+    context: Context.Context<I>
+  ): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>;
 
   /**
    * For each endpoint in an `HttpApiGroup`, add an annotation.
@@ -131,7 +145,10 @@ export interface HttpApiGroup<
    * Note that this will only add the annotation to the endpoints before this api
    * is called.
    */
-  annotateEndpoints<I, S>(tag: Context.Tag<I, S>, value: S): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>
+  annotateEndpoints<I, S>(
+    tag: Context.Tag<I, S>,
+    value: S
+  ): HttpApiGroup<Id, Endpoints, Error, R, TopLevel>;
 }
 
 /**
@@ -139,9 +156,9 @@ export interface HttpApiGroup<
  * @category models
  */
 export interface ApiGroup<ApiId extends string, Name extends string> {
-  readonly _: unique symbol
-  readonly apiId: ApiId
-  readonly name: Name
+  readonly _: unique symbol;
+  readonly apiId: ApiId;
+  readonly name: Name;
 }
 
 /**
@@ -154,148 +171,223 @@ export declare namespace HttpApiGroup {
    * @category models
    */
   export interface Any {
-    readonly [TypeId]: TypeId
-    readonly identifier: string
+    readonly [TypeId]: TypeId;
+    readonly identifier: string;
   }
 
   /**
    * @since 1.0.0
    * @category models
    */
-  export type AnyWithProps = HttpApiGroup<string, HttpApiEndpoint.HttpApiEndpoint.AnyWithProps, any, any, boolean>
+  export type AnyWithProps = HttpApiGroup<
+    string,
+    HttpApiEndpoint.HttpApiEndpoint.AnyWithProps,
+    any,
+    any,
+    boolean
+  >;
 
   /**
    * @since 1.0.0
    * @category models
    */
-  export type ToService<ApiId extends string, A> = A extends
-    HttpApiGroup<infer Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ? ApiGroup<ApiId, Name>
-    : never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type WithName<Group, Name extends string> = Extract<Group, { readonly identifier: Name }>
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type Name<Group> = Group extends
-    HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ? _Name
-    : never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type Endpoints<Group> = Group extends
-    HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ? _Endpoints
-    : never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type EndpointsWithName<Group extends Any, Name extends string> = Endpoints<WithName<Group, Name>>
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type Error<Group> = Group extends
-    HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ? _Error
-    : never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type AddContext<Group, R> = [R] extends [never] ? Group :
-    Group extends HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ?
-      HttpApiGroup<_Name, _Endpoints, _Error, _R | R, _TopLevel>
-    : never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type Provides<Group extends Any> = HttpApiMiddleware.HttpApiMiddleware.ExtractProvides<Middleware<Group>>
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type ErrorWithName<Group extends Any, Name extends string> = Error<WithName<Group, Name>>
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type Context<Group> = Group extends
-    HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ?
-    HttpApiMiddleware.HttpApiMiddleware.Without<_R> :
-    never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type Middleware<Group> = Group extends
-    HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ?
-    HttpApiMiddleware.HttpApiMiddleware.Only<_R> :
-    never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type ClientContext<Group> = Group extends
-    HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel> ?
-      | _R
-      | HttpApiEndpoint.HttpApiEndpoint.Context<_Endpoints>
-      | HttpApiEndpoint.HttpApiEndpoint.ErrorContext<_Endpoints>
-    : never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type ErrorContext<Group> = Group extends
-    HttpApiGroup<infer _Name, infer _Endpoints, infer _Error, infer _R, infer _TopLevel>
-    ? HttpApiMiddleware.HttpApiMiddleware.Without<_R> | HttpApiEndpoint.HttpApiEndpoint.ErrorContext<_Endpoints>
-    : never
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type ContextWithName<Group extends Any, Name extends string> = Context<WithName<Group, Name>>
-
-  /**
-   * @since 1.0.0
-   * @category models
-   */
-  export type MiddlewareWithName<Group extends Any, Name extends string> = Middleware<
-    WithName<Group, Name>
+  export type ToService<ApiId extends string, A> = A extends HttpApiGroup<
+    infer Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
   >
+    ? ApiGroup<ApiId, Name>
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type WithName<Group, Name extends string> = Extract<
+    Group,
+    { readonly identifier: Name }
+  >;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type Name<Group> = Group extends HttpApiGroup<
+    infer _Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
+  >
+    ? _Name
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type Endpoints<Group> = Group extends HttpApiGroup<
+    infer _Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
+  >
+    ? _Endpoints
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type EndpointsWithName<
+    Group extends Any,
+    Name extends string,
+  > = Endpoints<WithName<Group, Name>>;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type Error<Group> = Group extends HttpApiGroup<
+    infer _Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
+  >
+    ? _Error
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type AddContext<Group, R> = [R] extends [never]
+    ? Group
+    : Group extends HttpApiGroup<
+          infer _Name,
+          infer _Endpoints,
+          infer _Error,
+          infer _R,
+          infer _TopLevel
+        >
+      ? HttpApiGroup<_Name, _Endpoints, _Error, _R | R, _TopLevel>
+      : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type Provides<Group extends Any> =
+    HttpApiMiddleware.HttpApiMiddleware.ExtractProvides<Middleware<Group>>;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type ErrorWithName<Group extends Any, Name extends string> = Error<
+    WithName<Group, Name>
+  >;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type Context<Group> = Group extends HttpApiGroup<
+    infer _Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
+  >
+    ? HttpApiMiddleware.HttpApiMiddleware.Without<_R>
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type Middleware<Group> = Group extends HttpApiGroup<
+    infer _Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
+  >
+    ? HttpApiMiddleware.HttpApiMiddleware.Only<_R>
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type ClientContext<Group> = Group extends HttpApiGroup<
+    infer _Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
+  >
+    ?
+        | _R
+        | HttpApiEndpoint.HttpApiEndpoint.Context<_Endpoints>
+        | HttpApiEndpoint.HttpApiEndpoint.ErrorContext<_Endpoints>
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type ErrorContext<Group> = Group extends HttpApiGroup<
+    infer _Name,
+    infer _Endpoints,
+    infer _Error,
+    infer _R,
+    infer _TopLevel
+  >
+    ?
+        | HttpApiMiddleware.HttpApiMiddleware.Without<_R>
+        | HttpApiEndpoint.HttpApiEndpoint.ErrorContext<_Endpoints>
+    : never;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type ContextWithName<Group extends Any, Name extends string> = Context<
+    WithName<Group, Name>
+  >;
+
+  /**
+   * @since 1.0.0
+   * @category models
+   */
+  export type MiddlewareWithName<
+    Group extends Any,
+    Name extends string,
+  > = Middleware<WithName<Group, Name>>;
 }
 
 const Proto = {
   [TypeId]: TypeId,
-  add<A extends HttpApiEndpoint.HttpApiEndpoint.AnyWithProps>(this: HttpApiGroup.AnyWithProps, endpoint: A) {
+  add<A extends HttpApiEndpoint.HttpApiEndpoint.AnyWithProps>(
+    this: HttpApiGroup.AnyWithProps,
+    endpoint: A
+  ) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
       endpoints: {
         ...this.endpoints,
-        [endpoint.name]: endpoint
+        [endpoint.name]: endpoint,
       },
       errorSchema: this.errorSchema,
       annotations: this.annotations,
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
   addError<A, I, R>(
     this: HttpApiGroup.AnyWithProps,
@@ -308,105 +400,140 @@ const Proto = {
       endpoints: this.endpoints,
       errorSchema: HttpApiSchema.UnionUnify(
         this.errorSchema,
-        annotations?.status ? schema.annotations(HttpApiSchema.annotations({ status: annotations.status })) : schema
+        annotations?.status
+          ? schema.annotations(
+              HttpApiSchema.annotations({ status: annotations.status })
+            )
+          : schema
       ),
       annotations: this.annotations,
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
   prefix(this: HttpApiGroup.AnyWithProps, prefix: HttpApiEndpoint.PathSegment) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
-      endpoints: Record.map(this.endpoints, (endpoint) => endpoint.prefix(prefix)),
+      endpoints: Record.map(this.endpoints, (endpoint) =>
+        endpoint.prefix(prefix)
+      ),
       errorSchema: this.errorSchema,
       annotations: this.annotations,
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
-  middleware(this: HttpApiGroup.AnyWithProps, middleware: HttpApiMiddleware.TagClassAny) {
+  middleware(
+    this: HttpApiGroup.AnyWithProps,
+    middleware: HttpApiMiddleware.TagClassAny
+  ) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
       endpoints: this.endpoints,
-      errorSchema: HttpApiSchema.UnionUnify(this.errorSchema, middleware.failure),
+      errorSchema: HttpApiSchema.UnionUnify(
+        this.errorSchema,
+        middleware.failure
+      ),
       annotations: this.annotations,
-      middlewares: new Set([...this.middlewares, middleware])
-    })
+      middlewares: new Set([...this.middlewares, middleware]),
+    });
   },
-  middlewareEndpoints(this: HttpApiGroup.AnyWithProps, middleware: HttpApiMiddleware.TagClassAny) {
+  middlewareEndpoints(
+    this: HttpApiGroup.AnyWithProps,
+    middleware: HttpApiMiddleware.TagClassAny
+  ) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
-      endpoints: Record.map(this.endpoints, (endpoint) => endpoint.middleware(middleware)),
+      endpoints: Record.map(this.endpoints, (endpoint) =>
+        endpoint.middleware(middleware)
+      ),
       errorSchema: this.errorSchema,
       annotations: this.annotations,
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
-  annotateContext<I>(this: HttpApiGroup.AnyWithProps, context: Context.Context<I>) {
+  annotateContext<I>(
+    this: HttpApiGroup.AnyWithProps,
+    context: Context.Context<I>
+  ) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
       endpoints: this.endpoints,
       errorSchema: this.errorSchema,
       annotations: Context.merge(this.annotations, context),
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
-  annotate<I, S>(this: HttpApiGroup.AnyWithProps, tag: Context.Tag<I, S>, value: S) {
+  annotate<I, S>(
+    this: HttpApiGroup.AnyWithProps,
+    tag: Context.Tag<I, S>,
+    value: S
+  ) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
       endpoints: this.endpoints,
       errorSchema: this.errorSchema,
       annotations: Context.add(this.annotations, tag, value),
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
-  annotateEndpointsContext<I>(this: HttpApiGroup.AnyWithProps, context: Context.Context<I>) {
+  annotateEndpointsContext<I>(
+    this: HttpApiGroup.AnyWithProps,
+    context: Context.Context<I>
+  ) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
-      endpoints: Record.map(this.endpoints, (endpoint) => endpoint.annotateContext(context)),
+      endpoints: Record.map(this.endpoints, (endpoint) =>
+        endpoint.annotateContext(context)
+      ),
       errorSchema: this.errorSchema,
       annotations: this.annotations,
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
-  annotateEndpoints<I, S>(this: HttpApiGroup.AnyWithProps, tag: Context.Tag<I, S>, value: S) {
+  annotateEndpoints<I, S>(
+    this: HttpApiGroup.AnyWithProps,
+    tag: Context.Tag<I, S>,
+    value: S
+  ) {
     return makeProto({
       identifier: this.identifier,
       topLevel: this.topLevel,
-      endpoints: Record.map(this.endpoints, (endpoint) => endpoint.annotate(tag, value)),
+      endpoints: Record.map(this.endpoints, (endpoint) =>
+        endpoint.annotate(tag, value)
+      ),
       errorSchema: this.errorSchema,
       annotations: this.annotations,
-      middlewares: this.middlewares
-    })
+      middlewares: this.middlewares,
+    });
   },
   pipe() {
-    return pipeArguments(this, arguments)
-  }
-}
+    return pipeArguments(this, arguments);
+  },
+};
 
 const makeProto = <
   Id extends string,
   Endpoints extends HttpApiEndpoint.HttpApiEndpoint.Any,
   Error,
   R,
-  TopLevel extends (true | false)
+  TopLevel extends true | false,
 >(options: {
-  readonly identifier: Id
-  readonly topLevel: TopLevel
-  readonly endpoints: Record.ReadonlyRecord<string, Endpoints>
-  readonly errorSchema: Schema.Schema<Error, unknown, R>
-  readonly annotations: Context.Context<never>
-  readonly middlewares: ReadonlySet<HttpApiMiddleware.TagClassAny>
+  readonly identifier: Id;
+  readonly topLevel: TopLevel;
+  readonly endpoints: Record.ReadonlyRecord<string, Endpoints>;
+  readonly errorSchema: Schema.Schema<Error, unknown, R>;
+  readonly annotations: Context.Context<never>;
+  readonly middlewares: ReadonlySet<HttpApiMiddleware.TagClassAny>;
 }): HttpApiGroup<Id, Endpoints, Error, R, TopLevel> => {
   function HttpApiGroup() {}
-  Object.setPrototypeOf(HttpApiGroup, Proto)
-  return Object.assign(HttpApiGroup, options) as any
-}
+  Object.setPrototypeOf(HttpApiGroup, Proto);
+  return Object.assign(HttpApiGroup, options) as any;
+};
 
 /**
  * An `HttpApiGroup` is a collection of `HttpApiEndpoint`s. You can use an `HttpApiGroup` to
@@ -417,14 +544,20 @@ const makeProto = <
  * @since 1.0.0
  * @category constructors
  */
-export const make = <const Id extends string, const TopLevel extends (true | false) = false>(identifier: Id, options?: {
-  readonly topLevel?: TopLevel | undefined
-}): HttpApiGroup<Id, never, never, never, TopLevel> =>
+export const make = <
+  const Id extends string,
+  const TopLevel extends true | false = false,
+>(
+  identifier: Id,
+  options?: {
+    readonly topLevel?: TopLevel | undefined;
+  }
+): HttpApiGroup<Id, never, never, never, TopLevel> =>
   makeProto({
     identifier,
-    topLevel: options?.topLevel ?? false as any,
+    topLevel: options?.topLevel ?? (false as any),
     endpoints: Record.empty(),
     errorSchema: Schema.Never as any,
     annotations: Context.empty(),
-    middlewares: new Set()
-  })
+    middlewares: new Set(),
+  });

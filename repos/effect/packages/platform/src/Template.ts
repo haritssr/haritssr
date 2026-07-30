@@ -1,22 +1,28 @@
 /**
  * @since 1.0.0
  */
-import * as Effect from "effect/Effect"
-import * as Option from "effect/Option"
-import * as Predicate from "effect/Predicate"
-import * as Stream from "effect/Stream"
+import * as Effect from "effect/Effect";
+import * as Option from "effect/Option";
+import * as Predicate from "effect/Predicate";
+import * as Stream from "effect/Stream";
 
 /**
  * @category models
  * @since 1.0.0
  */
-export type PrimitiveValue = string | number | bigint | boolean | null | undefined
+export type PrimitiveValue =
+  | string
+  | number
+  | bigint
+  | boolean
+  | null
+  | undefined;
 
 /**
  * @category models
  * @since 1.0.0
  */
-export type Primitive = PrimitiveValue | ReadonlyArray<PrimitiveValue>
+export type Primitive = PrimitiveValue | ReadonlyArray<PrimitiveValue>;
 
 /**
  * @category models
@@ -25,13 +31,15 @@ export type Primitive = PrimitiveValue | ReadonlyArray<PrimitiveValue>
 export type Interpolated =
   | Primitive
   | Option.Option<Primitive>
-  | Effect.Effect<Primitive, any, any>
+  | Effect.Effect<Primitive, any, any>;
 
 /**
  * @category models
  * @since 1.0.0
  */
-export type InterpolatedWithStream = Interpolated | Stream.Stream<Primitive, any, any>
+export type InterpolatedWithStream =
+  | Interpolated
+  | Stream.Stream<Primitive, any, any>;
 
 /**
  * @category models
@@ -42,19 +50,25 @@ export declare namespace Interpolated {
    * @category models
    * @since 1.0.0
    */
-  export type Context<A> = A extends infer T ? T extends Option.Option<infer _> ? never
-    : T extends Stream.Stream<infer _A, infer _E, infer R> ? R
-    : never
-    : never
+  export type Context<A> = A extends infer T
+    ? T extends Option.Option<infer _>
+      ? never
+      : T extends Stream.Stream<infer _A, infer _E, infer R>
+        ? R
+        : never
+    : never;
 
   /**
    * @category models
    * @since 1.0.0
    */
-  export type Error<A> = A extends infer T ? T extends Option.Option<infer _> ? never
-    : T extends Stream.Stream<infer _A, infer E, infer _R> ? E
-    : never
-    : never
+  export type Error<A> = A extends infer T
+    ? T extends Option.Option<infer _>
+      ? never
+      : T extends Stream.Stream<infer _A, infer E, infer _R>
+        ? E
+        : never
+    : never;
 }
 
 /**
@@ -69,28 +83,28 @@ export function make<A extends ReadonlyArray<Interpolated>>(
   Interpolated.Error<A[number]>,
   Interpolated.Context<A[number]>
 > {
-  const argsLength = args.length
-  const values = new Array<string>(argsLength)
+  const argsLength = args.length;
+  const values = new Array<string>(argsLength);
   const effects: Array<
     [index: number, effect: Effect.Effect<Primitive, any, any>]
-  > = []
+  > = [];
 
   for (let i = 0; i < argsLength; i++) {
-    const arg = args[i]
+    const arg = args[i];
 
     if (Option.isOption(arg)) {
-      values[i] = arg._tag === "Some" ? primitiveToString(arg.value) : ""
+      values[i] = arg._tag === "Some" ? primitiveToString(arg.value) : "";
     } else if (isSuccess(arg)) {
-      values[i] = primitiveToString((arg as any).effect_instruction_i0)
+      values[i] = primitiveToString((arg as any).effect_instruction_i0);
     } else if (Effect.isEffect(arg)) {
-      effects.push([i, arg])
+      effects.push([i, arg]);
     } else {
-      values[i] = primitiveToString(arg)
+      values[i] = primitiveToString(arg);
     }
   }
 
   if (effects.length === 0) {
-    return Effect.succeed(consolidate(strings, values))
+    return Effect.succeed(consolidate(strings, values));
   }
 
   return Effect.map(
@@ -98,15 +112,15 @@ export function make<A extends ReadonlyArray<Interpolated>>(
       effects,
       ([index, effect]) =>
         Effect.tap(effect, (value) => {
-          values[index] = primitiveToString(value)
+          values[index] = primitiveToString(value);
         }),
       {
         concurrency: "inherit",
-        discard: true
+        discard: true,
       }
     ),
     (_) => consolidate(strings, values)
-  )
+  );
 }
 
 /**
@@ -121,62 +135,62 @@ export function stream<A extends ReadonlyArray<InterpolatedWithStream>>(
   Interpolated.Error<A[number]>,
   Interpolated.Context<A[number]>
 > {
-  const chunks: Array<string | Stream.Stream<string, any, any>> = []
-  let buffer = ""
+  const chunks: Array<string | Stream.Stream<string, any, any>> = [];
+  let buffer = "";
 
   for (let i = 0, len = args.length; i < len; i++) {
-    buffer += strings[i]
-    const arg = args[i]
+    buffer += strings[i];
+    const arg = args[i];
     if (Option.isOption(arg)) {
-      buffer += arg._tag === "Some" ? primitiveToString(arg.value) : ""
+      buffer += arg._tag === "Some" ? primitiveToString(arg.value) : "";
     } else if (isSuccess(arg)) {
-      buffer += primitiveToString((arg as any).effect_instruction_i0)
+      buffer += primitiveToString((arg as any).effect_instruction_i0);
     } else if (Predicate.hasProperty(arg, Stream.StreamTypeId)) {
       if (buffer.length > 0) {
-        chunks.push(buffer)
-        buffer = ""
+        chunks.push(buffer);
+        buffer = "";
       }
       if (Effect.isEffect(arg)) {
-        chunks.push(Effect.map(arg, primitiveToString))
+        chunks.push(Effect.map(arg, primitiveToString));
       } else {
-        chunks.push(Stream.map(arg, primitiveToString))
+        chunks.push(Stream.map(arg, primitiveToString));
       }
     } else {
-      buffer += primitiveToString(arg)
+      buffer += primitiveToString(arg);
     }
   }
 
-  buffer += strings[strings.length - 1]
+  buffer += strings[strings.length - 1];
   if (buffer.length > 0) {
-    chunks.push(buffer)
-    buffer = ""
+    chunks.push(buffer);
+    buffer = "";
   }
 
   return Stream.flatMap(
     Stream.fromIterable(chunks),
-    (chunk) => typeof chunk === "string" ? Stream.succeed(chunk) : chunk,
+    (chunk) => (typeof chunk === "string" ? Stream.succeed(chunk) : chunk),
     { concurrency: "unbounded" }
-  )
+  );
 }
 
 function primitiveToString(value: Primitive): string {
   if (Array.isArray(value)) {
-    return value.map(primitiveToString).join("")
+    return value.map(primitiveToString).join("");
   }
 
   switch (typeof value) {
     case "string": {
-      return value
+      return value;
     }
     case "number":
     case "bigint": {
-      return value.toString()
+      return value.toString();
     }
     case "boolean": {
-      return value ? "true" : "false"
+      return value ? "true" : "false";
     }
     default: {
-      return ""
+      return "";
     }
   }
 }
@@ -185,14 +199,14 @@ function consolidate(
   strings: ReadonlyArray<string>,
   values: ReadonlyArray<string>
 ): string {
-  let out = ""
+  let out = "";
   for (let i = 0, len = values.length; i < len; i++) {
-    out += strings[i]
-    out += values[i]
+    out += strings[i];
+    out += values[i];
   }
-  return out + strings[strings.length - 1]
+  return out + strings[strings.length - 1];
 }
 
 function isSuccess(u: unknown) {
-  return Effect.isEffect(u) && (u as any)._op === "Success"
+  return Effect.isEffect(u) && (u as any)._op === "Success";
 }

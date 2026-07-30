@@ -3,8 +3,8 @@ import ContactList from "../ContactList";
 
 export default function Contacts() {
   return (
-    <section className="mb-16 grid grid-cols-1 pt-5 md:items-center gap-5 lg:grid-cols-4">
-      <section className="corner-squircle grid grid-cols-1 gap-3 md:gap-5 rounded-2xl border-zinc-300 sm:grid-cols-2 sm:gap-0 md:mb-0 lg:col-span-2 lg:h-full lg:border">
+    <section className="mb-16 grid grid-cols-1 gap-5 pt-5 md:items-center lg:grid-cols-4">
+      <section className="corner-squircle grid grid-cols-1 gap-3 rounded-2xl border-zinc-300 sm:grid-cols-2 sm:gap-0 md:mb-0 md:gap-5 lg:col-span-2 lg:h-full lg:border">
         <div className="flex flex-col self-center">
           <section className="flex select-none justify-center">
             <Image
@@ -17,14 +17,18 @@ export default function Contacts() {
               width="100"
             />
           </section>
-          <div className="text-center font-semibold text-lg text-zinc-800">Harits Syah</div>
+          <div className="text-center font-semibold text-lg text-zinc-800">
+            Harits Syah
+          </div>
         </div>
         <ContactList />
       </section>
       <section className="corner-squircle rounded-2xl border border-zinc-300 lg:col-span-2">
         <div className="divide-y divide-zinc-200">
           <div className="grid grid-cols-3 py-2 pl-3.5">
-            <span className="text-tiny text-zinc-500 sm:text-base">Roles :</span>
+            <span className="text-tiny text-zinc-500 sm:text-base">
+              Roles :
+            </span>
             <span className="col-span-2 flex items-center space-x-2">
               <span className="col-span-2 text-zinc-500">
                 <cite className="group not-italic">
@@ -36,7 +40,9 @@ export default function Contacts() {
                     title="harislab.com | Haris Lab : Reference, analyze, and test math-physics for high school students"
                   >
                     <span className="flex items-center">
-                      <span className="text-tiny group-hover:text-action sm:text-base">Web Product Engineer</span>
+                      <span className="text-tiny group-hover:text-action sm:text-base">
+                        Web Product Engineer
+                      </span>
                       <svg
                         className="mt-0.5 ml-1 h-4 w-4 text-zinc-500 group-hover:text-action"
                         fill="none"
@@ -61,7 +67,9 @@ export default function Contacts() {
 
           <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-white">Role</span>
-            <span className="col-span-2 text-tiny text-zinc-500 sm:text-base">Math Physics Teacher</span>
+            <span className="col-span-2 text-tiny text-zinc-500 sm:text-base">
+              Math Physics Teacher
+            </span>
           </div>
           <div className="grid grid-cols-3 py-2 pl-3.5">
             <span className="text-tiny text-zinc-500 sm:text-base">At :</span>
@@ -75,7 +83,9 @@ export default function Contacts() {
                   title="harislab.com | Haris Lab : Reference, analyze, and test math-physics for high school students"
                 >
                   <span className="flex items-center">
-                    <span className="text-tiny group-hover:text-action sm:text-base">Haris Lab</span>
+                    <span className="text-tiny group-hover:text-action sm:text-base">
+                      Haris Lab
+                    </span>
                     <svg
                       className="mt-0.5 ml-1 h-4 w-4 text-zinc-500 group-hover:text-action"
                       fill="none"
@@ -97,7 +107,9 @@ export default function Contacts() {
             </span>
           </div>
           <div className="grid grid-cols-3 py-2 pl-3.5">
-            <span className="text-tiny text-zinc-500 sm:text-base">Email :</span>
+            <span className="text-tiny text-zinc-500 sm:text-base">
+              Email :
+            </span>
             <a
               className="col-span-2 text-tiny text-zinc-500 hover:text-action sm:text-base"
               href="mailto:haritssr@gmail.com"
@@ -107,7 +119,9 @@ export default function Contacts() {
             </a>
           </div>
           <div className="grid grid-cols-3 py-2 pl-3.5">
-            <span className="text-tiny text-zinc-500 sm:text-base">Location :</span>
+            <span className="text-tiny text-zinc-500 sm:text-base">
+              Location :
+            </span>
             <a
               className="col-span-2 text-tiny text-zinc-500 hover:text-action sm:text-base"
               href="https://www.google.com/maps/place/Tangerang+Selatan,+Kota+Tangerang+Selatan,+Banten/data=!4m2!3m1!1s0x2e69fab10419c095:0x8706481c2c4aafe4?sa=X&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgPEAA&ved=2ahUKEwjHuNjfgMKAAxXIw6ACHUSwDMwQ8gF6BAgQEAI"

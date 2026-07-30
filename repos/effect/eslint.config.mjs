@@ -1,22 +1,22 @@
-import * as effectEslint from "@effect/eslint-plugin"
-import { fixupPluginRules } from "@eslint/compat"
-import { FlatCompat } from "@eslint/eslintrc"
-import js from "@eslint/js"
-import tsParser from "@typescript-eslint/parser"
-import codegen from "eslint-plugin-codegen"
-import _import from "eslint-plugin-import"
-import simpleImportSort from "eslint-plugin-simple-import-sort"
-import sortDestructureKeys from "eslint-plugin-sort-destructure-keys"
-import path from "node:path"
-import { fileURLToPath } from "node:url"
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import * as effectEslint from "@effect/eslint-plugin";
+import { fixupPluginRules } from "@eslint/compat";
+import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import tsParser from "@typescript-eslint/parser";
+import codegen from "eslint-plugin-codegen";
+import _import from "eslint-plugin-import";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import sortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all
-})
+  allConfig: js.configs.all,
+});
 
 export default [
   {
@@ -26,8 +26,8 @@ export default [
       "**/docs",
       "**/.repos/**",
       "**/.lalph/**",
-      "**/*.md"
-    ]
+      "**/*.md",
+    ],
   },
   ...compat.extends(
     "eslint:recommended",
@@ -40,25 +40,25 @@ export default [
       import: fixupPluginRules(_import),
       "sort-destructure-keys": sortDestructureKeys,
       "simple-import-sort": simpleImportSort,
-      codegen
+      codegen,
     },
 
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2018,
-      sourceType: "module"
+      sourceType: "module",
     },
 
     settings: {
       "import/parsers": {
-        "@typescript-eslint/parser": [".ts", ".tsx"]
+        "@typescript-eslint/parser": [".ts", ".tsx"],
       },
 
       "import/resolver": {
         typescript: {
-          alwaysTryTypes: true
-        }
-      }
+          alwaysTryTypes: true,
+        },
+      },
     },
 
     rules: {
@@ -74,8 +74,8 @@ export default [
         {
           selector:
             "CallExpression[callee.property.name='push'] > SpreadElement.arguments",
-          message: "Do not use spread arguments in Array.push"
-        }
+          message: "Do not use spread arguments in Array.push",
+        },
       ],
 
       "no-unused-vars": "off",
@@ -95,8 +95,8 @@ export default [
         "warn",
         {
           default: "generic",
-          readonly: "generic"
-        }
+          readonly: "generic",
+        },
       ],
 
       "@typescript-eslint/member-delimiter-style": 0,
@@ -112,8 +112,8 @@ export default [
         "error",
         {
           argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_"
-        }
+          varsIgnorePattern: "^_",
+        },
       ],
 
       "@typescript-eslint/ban-ts-comment": "off",
@@ -135,17 +135,17 @@ export default [
             quoteStyle: "alwaysDouble",
             trailingCommas: "never",
             operatorPosition: "maintain",
-            "arrowFunction.useParentheses": "force"
-          }
-        }
-      ]
-    }
+            "arrowFunction.useParentheses": "force",
+          },
+        },
+      ],
+    },
   },
   {
     files: ["packages/*/src/**/*", "packages/*/test/**/*"],
     rules: {
-      "no-console": "error"
-    }
+      "no-console": "error",
+    },
   },
   {
     files: ["packages/*/src/**/*"],
@@ -153,9 +153,9 @@ export default [
       "@effect/no-import-from-barrel-package": [
         "error",
         {
-          packageNames: ["effect", "@effect/platform", "@effect/sql"]
-        }
-      ]
-    }
-  }
-]
+          packageNames: ["effect", "@effect/platform", "@effect/sql"],
+        },
+      ],
+    },
+  },
+];

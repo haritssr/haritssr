@@ -1,9 +1,9 @@
 /**
  * @since 1.0.0
  */
-import * as Data from "effect/Data"
-import type { Entity } from "./Entity.js"
-import type { SingletonAddress } from "./SingletonAddress.js"
+import * as Data from "effect/Data";
+import type { Entity } from "./Entity.js";
+import type { SingletonAddress } from "./SingletonAddress.js";
 
 /**
  * Represents events that can occur when a runner registers entities or singletons.
@@ -11,9 +11,7 @@ import type { SingletonAddress } from "./SingletonAddress.js"
  * @since 1.0.0
  * @category models
  */
-export type ShardingRegistrationEvent =
-  | EntityRegistered
-  | SingletonRegistered
+export type ShardingRegistrationEvent = EntityRegistered | SingletonRegistered;
 
 /**
  * Represents an event that occurs when a new entity is registered with a runner.
@@ -22,8 +20,8 @@ export type ShardingRegistrationEvent =
  * @category models
  */
 export interface EntityRegistered {
-  readonly _tag: "EntityRegistered"
-  readonly entity: Entity<any, any>
+  readonly _tag: "EntityRegistered";
+  readonly entity: Entity<any, any>;
 }
 
 /**
@@ -34,8 +32,8 @@ export interface EntityRegistered {
  * @category models
  */
 export interface SingletonRegistered {
-  readonly _tag: "SingletonRegistered"
-  readonly address: SingletonAddress
+  readonly _tag: "SingletonRegistered";
+  readonly address: SingletonAddress;
 }
 
 /**
@@ -57,5 +55,5 @@ export const {
    * @since 1.0.0
    * @category constructors
    */
-  SingletonRegistered
-} = Data.taggedEnum<ShardingRegistrationEvent>()
+  SingletonRegistered,
+} = Data.taggedEnum<ShardingRegistrationEvent>();

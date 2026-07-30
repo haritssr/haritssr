@@ -1,20 +1,20 @@
-import * as Chunk from "../Chunk.js"
-import type * as Deferred from "../Deferred.js"
-import * as Either from "../Either.js"
-import * as Equal from "../Equal.js"
-import type { FiberId } from "../FiberId.js"
-import * as HashMap from "../HashMap.js"
-import * as List from "../List.js"
-import * as Option from "../Option.js"
-import { hasProperty } from "../Predicate.js"
-import type * as Request from "../Request.js"
-import type * as RequestBlock from "../RequestBlock.js"
-import type * as RequestResolver from "../RequestResolver.js"
+import * as Chunk from "../Chunk.js";
+import type * as Deferred from "../Deferred.js";
+import * as Either from "../Either.js";
+import * as Equal from "../Equal.js";
+import type { FiberId } from "../FiberId.js";
+import * as HashMap from "../HashMap.js";
+import * as List from "../List.js";
+import * as Option from "../Option.js";
+import { hasProperty } from "../Predicate.js";
+import type * as Request from "../Request.js";
+import type * as RequestBlock from "../RequestBlock.js";
+import type * as RequestResolver from "../RequestResolver.js";
 
 /** @internal */
 export const empty: RequestBlock.RequestBlock = {
-  _tag: "Empty"
-}
+  _tag: "Empty",
+};
 
 /**
  * Combines this collection of blocked requests with the specified collection
@@ -28,8 +28,8 @@ export const par = (
 ): RequestBlock.RequestBlock => ({
   _tag: "Par",
   left: self,
-  right: that
-})
+  right: that,
+});
 
 /**
  * Combines this collection of blocked requests with the specified collection
@@ -43,8 +43,8 @@ export const seq = (
 ): RequestBlock.RequestBlock => ({
   _tag: "Seq",
   left: self,
-  right: that
-})
+  right: that,
+});
 
 /**
  * Constructs a collection of blocked requests from the specified blocked
@@ -58,27 +58,30 @@ export const single = <A>(
 ): RequestBlock.RequestBlock => ({
   _tag: "Single",
   dataSource: dataSource as any,
-  blockedRequest
-})
+  blockedRequest,
+});
 
 /** @internal */
 export const MapRequestResolversReducer = <A>(
-  f: (dataSource: RequestResolver.RequestResolver<A>) => RequestResolver.RequestResolver<A>
+  f: (
+    dataSource: RequestResolver.RequestResolver<A>
+  ) => RequestResolver.RequestResolver<A>
 ): RequestBlock.RequestBlock.Reducer<RequestBlock.RequestBlock> => ({
   emptyCase: () => empty,
   parCase: (left, right) => par(left, right),
   seqCase: (left, right) => seq(left, right),
-  singleCase: (dataSource, blockedRequest) => single(f(dataSource), blockedRequest as any)
-})
+  singleCase: (dataSource, blockedRequest) =>
+    single(f(dataSource), blockedRequest as any),
+});
 
-type BlockedRequestsCase = ParCase | SeqCase
+type BlockedRequestsCase = ParCase | SeqCase;
 
 interface ParCase {
-  readonly _tag: "ParCase"
+  readonly _tag: "ParCase";
 }
 
 interface SeqCase {
-  readonly _tag: "SeqCase"
+  readonly _tag: "SeqCase";
 }
 
 /**
@@ -90,8 +93,10 @@ interface SeqCase {
  */
 export const mapRequestResolvers = <A>(
   self: RequestBlock.RequestBlock,
-  f: (dataSource: RequestResolver.RequestResolver<A>) => RequestResolver.RequestResolver<A>
-): RequestBlock.RequestBlock => reduce(self, MapRequestResolversReducer(f))
+  f: (
+    dataSource: RequestResolver.RequestResolver<A>
+  ) => RequestResolver.RequestResolver<A>
+): RequestBlock.RequestBlock => reduce(self, MapRequestResolversReducer(f));
 
 /**
  * Folds over the cases of this collection of blocked requests with the
@@ -103,61 +108,64 @@ export const reduce = <Z>(
   self: RequestBlock.RequestBlock,
   reducer: RequestBlock.RequestBlock.Reducer<Z>
 ): Z => {
-  let input: List.List<RequestBlock.RequestBlock> = List.of(self)
-  let output = List.empty<Either.Either<Z, BlockedRequestsCase>>()
+  let input: List.List<RequestBlock.RequestBlock> = List.of(self);
+  let output = List.empty<Either.Either<Z, BlockedRequestsCase>>();
   while (List.isCons(input)) {
-    const current: RequestBlock.RequestBlock = input.head
+    const current: RequestBlock.RequestBlock = input.head;
     switch (current._tag) {
       case "Empty": {
-        output = List.cons(Either.right(reducer.emptyCase()), output)
-        input = input.tail
-        break
+        output = List.cons(Either.right(reducer.emptyCase()), output);
+        input = input.tail;
+        break;
       }
       case "Par": {
-        output = List.cons(Either.left({ _tag: "ParCase" }), output)
-        input = List.cons(current.left, List.cons(current.right, input.tail))
-        break
+        output = List.cons(Either.left({ _tag: "ParCase" }), output);
+        input = List.cons(current.left, List.cons(current.right, input.tail));
+        break;
       }
       case "Seq": {
-        output = List.cons(Either.left({ _tag: "SeqCase" }), output)
-        input = List.cons(current.left, List.cons(current.right, input.tail))
-        break
+        output = List.cons(Either.left({ _tag: "SeqCase" }), output);
+        input = List.cons(current.left, List.cons(current.right, input.tail));
+        break;
       }
       case "Single": {
-        const result = reducer.singleCase(current.dataSource, current.blockedRequest)
-        output = List.cons(Either.right(result), output)
-        input = input.tail
-        break
+        const result = reducer.singleCase(
+          current.dataSource,
+          current.blockedRequest
+        );
+        output = List.cons(Either.right(result), output);
+        input = input.tail;
+        break;
       }
     }
   }
   const result = List.reduce(output, List.empty<Z>(), (acc, current) => {
     switch (current._tag) {
       case "Left": {
-        const left = List.unsafeHead(acc)
-        const right = List.unsafeHead(List.unsafeTail(acc))
-        const tail = List.unsafeTail(List.unsafeTail(acc))
+        const left = List.unsafeHead(acc);
+        const right = List.unsafeHead(List.unsafeTail(acc));
+        const tail = List.unsafeTail(List.unsafeTail(acc));
         switch (current.left._tag) {
           case "ParCase": {
-            return List.cons(reducer.parCase(left, right), tail)
+            return List.cons(reducer.parCase(left, right), tail);
           }
           case "SeqCase": {
-            return List.cons(reducer.seqCase(left, right), tail)
+            return List.cons(reducer.seqCase(left, right), tail);
           }
         }
       }
       case "Right": {
-        return List.cons(current.right, acc)
+        return List.cons(current.right, acc);
       }
     }
-  })
+  });
   if (List.isNil(result)) {
     throw new Error(
       "BUG: BlockedRequests.reduce - please report an issue at https://github.com/Effect-TS/effect/issues"
-    )
+    );
   }
-  return result.head
-}
+  return result.head;
+};
 
 /**
  * Flattens a collection of blocked requests into a collection of pipelined
@@ -168,31 +176,34 @@ export const reduce = <Z>(
 export const flatten = (
   self: RequestBlock.RequestBlock
 ): List.List<SequentialCollection> => {
-  let current = List.of(self)
-  let updated = List.empty<SequentialCollection>()
+  let current = List.of(self);
+  let updated = List.empty<SequentialCollection>();
   // eslint-disable-next-line no-constant-condition
   while (1) {
     const [parallel, sequential] = List.reduce(
       current,
-      [parallelCollectionEmpty(), List.empty<RequestBlock.RequestBlock>()] as const,
+      [
+        parallelCollectionEmpty(),
+        List.empty<RequestBlock.RequestBlock>(),
+      ] as const,
       ([parallel, sequential], blockedRequest) => {
-        const [par, seq] = step(blockedRequest)
+        const [par, seq] = step(blockedRequest);
         return [
           parallelCollectionCombine(parallel, par),
-          List.appendAll(sequential, seq)
-        ]
+          List.appendAll(sequential, seq),
+        ];
       }
-    )
-    updated = merge(updated, parallel)
+    );
+    updated = merge(updated, parallel);
     if (List.isNil(sequential)) {
-      return List.reverse(updated)
+      return List.reverse(updated);
     }
-    current = sequential
+    current = sequential;
   }
   throw new Error(
     "BUG: BlockedRequests.flatten - please report an issue at https://github.com/Effect-TS/effect/issues"
-  )
-}
+  );
+};
 
 /**
  * Takes one step in evaluating a collection of blocked requests, returning a
@@ -203,72 +214,69 @@ export const flatten = (
 const step = (
   requests: RequestBlock.RequestBlock
 ): [ParallelCollection, List.List<RequestBlock.RequestBlock>] => {
-  let current: RequestBlock.RequestBlock = requests
-  let parallel = parallelCollectionEmpty()
-  let stack = List.empty<RequestBlock.RequestBlock>()
-  let sequential = List.empty<RequestBlock.RequestBlock>()
+  let current: RequestBlock.RequestBlock = requests;
+  let parallel = parallelCollectionEmpty();
+  let stack = List.empty<RequestBlock.RequestBlock>();
+  let sequential = List.empty<RequestBlock.RequestBlock>();
   // eslint-disable-next-line no-constant-condition
   while (1) {
     switch (current._tag) {
       case "Empty": {
         if (List.isNil(stack)) {
-          return [parallel, sequential]
+          return [parallel, sequential];
         }
-        current = stack.head
-        stack = stack.tail
-        break
+        current = stack.head;
+        stack = stack.tail;
+        break;
       }
       case "Par": {
-        stack = List.cons(current.right, stack)
-        current = current.left
-        break
+        stack = List.cons(current.right, stack);
+        current = current.left;
+        break;
       }
       case "Seq": {
-        const left = current.left
-        const right = current.right
+        const left = current.left;
+        const right = current.right;
         switch (left._tag) {
           case "Empty": {
-            current = right
-            break
+            current = right;
+            break;
           }
           case "Par": {
-            const l = left.left
-            const r = left.right
-            current = par(seq(l, right), seq(r, right))
-            break
+            const l = left.left;
+            const r = left.right;
+            current = par(seq(l, right), seq(r, right));
+            break;
           }
           case "Seq": {
-            const l = left.left
-            const r = left.right
-            current = seq(l, seq(r, right))
-            break
+            const l = left.left;
+            const r = left.right;
+            current = seq(l, seq(r, right));
+            break;
           }
           case "Single": {
-            current = left
-            sequential = List.cons(right, sequential)
-            break
+            current = left;
+            sequential = List.cons(right, sequential);
+            break;
           }
         }
-        break
+        break;
       }
       case "Single": {
-        parallel = parallelCollectionAdd(
-          parallel,
-          current
-        )
+        parallel = parallelCollectionAdd(parallel, current);
         if (List.isNil(stack)) {
-          return [parallel, sequential]
+          return [parallel, sequential];
         }
-        current = stack.head
-        stack = stack.tail
-        break
+        current = stack.head;
+        stack = stack.tail;
+        break;
       }
     }
   }
   throw new Error(
     "BUG: BlockedRequests.step - please report an issue at https://github.com/Effect-TS/effect/issues"
-  )
-}
+  );
+};
 
 /**
  * Merges a collection of requests that must be executed sequentially with a
@@ -281,13 +289,13 @@ const merge = (
   parallel: ParallelCollection
 ): List.List<SequentialCollection> => {
   if (List.isNil(sequential)) {
-    return List.of(parallelCollectionToSequentialCollection(parallel))
+    return List.of(parallelCollectionToSequentialCollection(parallel));
   }
   if (parallelCollectionIsEmpty(parallel)) {
-    return sequential
+    return sequential;
   }
-  const seqHeadKeys = sequentialCollectionKeys(sequential.head)
-  const parKeys = parallelCollectionKeys(parallel)
+  const seqHeadKeys = sequentialCollectionKeys(sequential.head);
+  const parKeys = parallelCollectionKeys(parallel);
   if (
     seqHeadKeys.length === 1 &&
     parKeys.length === 1 &&
@@ -299,10 +307,13 @@ const merge = (
         parallelCollectionToSequentialCollection(parallel)
       ),
       sequential.tail
-    )
+    );
   }
-  return List.cons(parallelCollectionToSequentialCollection(parallel), sequential)
-}
+  return List.cons(
+    parallelCollectionToSequentialCollection(parallel),
+    sequential
+  );
+};
 
 //
 // circular
@@ -311,53 +322,67 @@ const merge = (
 /** @internal */
 export const EntryTypeId: Request.EntryTypeId = Symbol.for(
   "effect/RequestBlock/Entry"
-) as Request.EntryTypeId
+) as Request.EntryTypeId;
 
 /** @internal */
-class EntryImpl<A extends Request.Request<any, any>> implements Request.Entry<A> {
-  readonly [EntryTypeId] = blockedRequestVariance
+class EntryImpl<A extends Request.Request<any, any>>
+  implements Request.Entry<A>
+{
+  readonly [EntryTypeId] = blockedRequestVariance;
   constructor(
     readonly request: A,
-    readonly result: Deferred.Deferred<Request.Request.Success<A>, Request.Request.Error<A>>,
+    readonly result: Deferred.Deferred<
+      Request.Request.Success<A>,
+      Request.Request.Error<A>
+    >,
     readonly listeners: Request.Listeners,
     readonly ownerId: FiberId,
     readonly state: {
-      completed: boolean
+      completed: boolean;
     }
   ) {}
 }
 
 const blockedRequestVariance = {
   /* c8 ignore next */
-  _R: (_: never) => _
-}
+  _R: (_: never) => _,
+};
 
 /** @internal */
-export const isEntry = (u: unknown): u is Request.Entry<unknown> => hasProperty(u, EntryTypeId)
+export const isEntry = (u: unknown): u is Request.Entry<unknown> =>
+  hasProperty(u, EntryTypeId);
 
 /** @internal */
-export const makeEntry = <A extends Request.Request<any, any>>(
-  options: {
-    readonly request: A
-    readonly result: Deferred.Deferred<Request.Request.Success<A>, Request.Request.Error<A>>
-    readonly listeners: Request.Listeners
-    readonly ownerId: FiberId
-    readonly state: { completed: boolean }
-  }
-): Request.Entry<A> => new EntryImpl(options.request, options.result, options.listeners, options.ownerId, options.state)
+export const makeEntry = <A extends Request.Request<any, any>>(options: {
+  readonly request: A;
+  readonly result: Deferred.Deferred<
+    Request.Request.Success<A>,
+    Request.Request.Error<A>
+  >;
+  readonly listeners: Request.Listeners;
+  readonly ownerId: FiberId;
+  readonly state: { completed: boolean };
+}): Request.Entry<A> =>
+  new EntryImpl(
+    options.request,
+    options.result,
+    options.listeners,
+    options.ownerId,
+    options.state
+  );
 
 /** @internal */
 export const RequestBlockParallelTypeId = Symbol.for(
   "effect/RequestBlock/RequestBlockParallel"
-)
+);
 
 const parallelVariance = {
   /* c8 ignore next */
-  _R: (_: never) => _
-}
+  _R: (_: never) => _,
+};
 
 class ParallelImpl implements ParallelCollection {
-  readonly [RequestBlockParallelTypeId] = parallelVariance
+  readonly [RequestBlockParallelTypeId] = parallelVariance;
   constructor(
     readonly map: HashMap.HashMap<
       RequestResolver.RequestResolver<unknown, unknown>,
@@ -367,56 +392,63 @@ class ParallelImpl implements ParallelCollection {
 }
 
 /** @internal */
-export const parallelCollectionEmpty = (): ParallelCollection => new ParallelImpl(HashMap.empty())
+export const parallelCollectionEmpty = (): ParallelCollection =>
+  new ParallelImpl(HashMap.empty());
 
 /** @internal */
 export const parallelCollectionMake = <A>(
   dataSource: RequestResolver.RequestResolver<A>,
   blockedRequest: Request.Entry<A>
-): ParallelCollection => new ParallelImpl(HashMap.make([dataSource, Chunk.of(blockedRequest)]) as any)
+): ParallelCollection =>
+  new ParallelImpl(HashMap.make([dataSource, Chunk.of(blockedRequest)]) as any);
 
 /** @internal */
 export const parallelCollectionAdd = (
   self: ParallelCollection,
   blockedRequest: RequestBlock.Single
 ): ParallelCollection =>
-  new ParallelImpl(HashMap.modifyAt(
-    self.map,
-    blockedRequest.dataSource,
-    (_) =>
+  new ParallelImpl(
+    HashMap.modifyAt(self.map, blockedRequest.dataSource, (_) =>
       Option.orElseSome(
         Option.map(_, Chunk.append(blockedRequest.blockedRequest)),
         () => Chunk.of(blockedRequest.blockedRequest)
       )
-  ))
+    )
+  );
 
 /** @internal */
 export const parallelCollectionCombine = (
   self: ParallelCollection,
   that: ParallelCollection
 ): ParallelCollection =>
-  new ParallelImpl(HashMap.reduce(self.map, that.map, (map, value, key) =>
-    HashMap.set(
-      map,
-      key,
-      Option.match(HashMap.get(map, key), {
-        onNone: () => value,
-        onSome: (other) => Chunk.appendAll(value, other)
-      })
-    )))
+  new ParallelImpl(
+    HashMap.reduce(self.map, that.map, (map, value, key) =>
+      HashMap.set(
+        map,
+        key,
+        Option.match(HashMap.get(map, key), {
+          onNone: () => value,
+          onSome: (other) => Chunk.appendAll(value, other),
+        })
+      )
+    )
+  );
 
 /** @internal */
-export const parallelCollectionIsEmpty = (self: ParallelCollection): boolean => HashMap.isEmpty(self.map)
+export const parallelCollectionIsEmpty = (self: ParallelCollection): boolean =>
+  HashMap.isEmpty(self.map);
 
 /** @internal */
 export const parallelCollectionKeys = (
   self: ParallelCollection
-): Array<RequestResolver.RequestResolver<unknown>> => Array.from(HashMap.keys(self.map)) as any
+): Array<RequestResolver.RequestResolver<unknown>> =>
+  Array.from(HashMap.keys(self.map)) as any;
 
 /** @internal */
 export const parallelCollectionToSequentialCollection = (
   self: ParallelCollection
-): SequentialCollection => sequentialCollectionMake(HashMap.map(self.map, (x) => Chunk.of(x)) as any)
+): SequentialCollection =>
+  sequentialCollectionMake(HashMap.map(self.map, (x) => Chunk.of(x)) as any);
 
 // TODO
 // /** @internal */
@@ -427,15 +459,15 @@ export const parallelCollectionToSequentialCollection = (
 /** @internal */
 export const SequentialCollectionTypeId = Symbol.for(
   "effect/RequestBlock/RequestBlockSequential"
-)
+);
 
 const sequentialVariance = {
   /* c8 ignore next */
-  _R: (_: never) => _
-}
+  _R: (_: never) => _,
+};
 
 class SequentialImpl implements SequentialCollection {
-  readonly [SequentialCollectionTypeId] = sequentialVariance
+  readonly [SequentialCollectionTypeId] = sequentialVariance;
   constructor(
     readonly map: HashMap.HashMap<
       RequestResolver.RequestResolver<unknown, unknown>,
@@ -450,71 +482,81 @@ export const sequentialCollectionMake = <A, R>(
     RequestResolver.RequestResolver<A, R>,
     Chunk.Chunk<Chunk.Chunk<Request.Entry<A>>>
   >
-): SequentialCollection => new SequentialImpl(map as any)
+): SequentialCollection => new SequentialImpl(map as any);
 
 /** @internal */
 export const sequentialCollectionCombine = (
   self: SequentialCollection,
   that: SequentialCollection
 ): SequentialCollection =>
-  new SequentialImpl(HashMap.reduce(that.map, self.map, (map, value, key) =>
-    HashMap.set(
-      map,
-      key,
-      Option.match(HashMap.get(map, key), {
-        onNone: () => Chunk.empty(),
-        onSome: (a) => Chunk.appendAll(a, value)
-      })
-    )))
+  new SequentialImpl(
+    HashMap.reduce(that.map, self.map, (map, value, key) =>
+      HashMap.set(
+        map,
+        key,
+        Option.match(HashMap.get(map, key), {
+          onNone: () => Chunk.empty(),
+          onSome: (a) => Chunk.appendAll(a, value),
+        })
+      )
+    )
+  );
 
 /** @internal */
-export const sequentialCollectionIsEmpty = (self: SequentialCollection): boolean => HashMap.isEmpty(self.map)
+export const sequentialCollectionIsEmpty = (
+  self: SequentialCollection
+): boolean => HashMap.isEmpty(self.map);
 
 /** @internal */
 export const sequentialCollectionKeys = (
   self: SequentialCollection
-): Array<RequestResolver.RequestResolver<unknown>> => Array.from(HashMap.keys(self.map)) as any
+): Array<RequestResolver.RequestResolver<unknown>> =>
+  Array.from(HashMap.keys(self.map)) as any;
 
 /** @internal */
 export const sequentialCollectionToChunk = (
   self: SequentialCollection
-): Array<[RequestResolver.RequestResolver<unknown>, Chunk.Chunk<Chunk.Chunk<Request.Entry<unknown>>>]> =>
-  Array.from(self.map) as any
+): Array<
+  [
+    RequestResolver.RequestResolver<unknown>,
+    Chunk.Chunk<Chunk.Chunk<Request.Entry<unknown>>>,
+  ]
+> => Array.from(self.map) as any;
 
 /** @internal */
-export type RequestBlockParallelTypeId = typeof RequestBlockParallelTypeId
+export type RequestBlockParallelTypeId = typeof RequestBlockParallelTypeId;
 
 /** @internal */
 export interface ParallelCollection extends ParallelCollection.Variance {
   readonly map: HashMap.HashMap<
     RequestResolver.RequestResolver<unknown, unknown>,
     Chunk.Chunk<Request.Entry<unknown>>
-  >
+  >;
 }
 
 /** @internal */
 export declare namespace ParallelCollection {
   /** @internal */
   export interface Variance {
-    readonly [RequestBlockParallelTypeId]: {}
+    readonly [RequestBlockParallelTypeId]: {};
   }
 }
 
 /** @internal */
-export type SequentialCollectionTypeId = typeof SequentialCollectionTypeId
+export type SequentialCollectionTypeId = typeof SequentialCollectionTypeId;
 
 /** @internal */
 export interface SequentialCollection extends SequentialCollection.Variance {
   readonly map: HashMap.HashMap<
     RequestResolver.RequestResolver<unknown, unknown>,
     Chunk.Chunk<Chunk.Chunk<Request.Entry<unknown>>>
-  >
+  >;
 }
 
 /** @internal */
 export declare namespace SequentialCollection {
   /** @internal */
   export interface Variance {
-    readonly [SequentialCollectionTypeId]: {}
+    readonly [SequentialCollectionTypeId]: {};
   }
 }

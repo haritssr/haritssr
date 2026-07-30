@@ -1,7 +1,7 @@
 /**
  * @since 1.0.0
  */
-import * as Schema from "effect/Schema"
+import * as Schema from "effect/Schema";
 
 /**
  * @since 1.0.0
@@ -10,18 +10,18 @@ import * as Schema from "effect/Schema"
 export const MachineId = Schema.Int.pipe(
   Schema.brand("MachineId"),
   Schema.annotations({
-    pretty: () => (machineId) => `MachineId(${machineId})`
+    pretty: () => (machineId) => `MachineId(${machineId})`,
   })
-)
+);
 
 /**
  * @since 1.0.0
  * @category models
  */
-export type MachineId = typeof MachineId.Type
+export type MachineId = typeof MachineId.Type;
 
 /**
  * @since 1.0.0
  * @category Constructors
  */
-export const make = (shardId: number): MachineId => MachineId.make(shardId)
+export const make = (shardId: number): MachineId => MachineId.make(shardId);

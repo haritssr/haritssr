@@ -1,37 +1,37 @@
-import type * as Effect from "../Effect.js"
-import { identity, pipe } from "../Function.js"
-import type * as Resource from "../Resource.js"
-import type * as Schedule from "../Schedule.js"
-import type * as Scope from "../Scope.js"
-import * as core from "./core.js"
-import * as effectable from "./effectable.js"
-import * as fiberRuntime from "./fiberRuntime.js"
-import * as schedule_ from "./schedule.js"
-import * as scopedRef from "./scopedRef.js"
+import type * as Effect from "../Effect.js";
+import { identity, pipe } from "../Function.js";
+import type * as Resource from "../Resource.js";
+import type * as Schedule from "../Schedule.js";
+import type * as Scope from "../Scope.js";
+import * as core from "./core.js";
+import * as effectable from "./effectable.js";
+import * as fiberRuntime from "./fiberRuntime.js";
+import * as schedule_ from "./schedule.js";
+import * as scopedRef from "./scopedRef.js";
 
 /** @internal */
-const ResourceSymbolKey = "effect/Resource"
+const ResourceSymbolKey = "effect/Resource";
 
 /** @internal */
 export const ResourceTypeId: Resource.ResourceTypeId = Symbol.for(
   ResourceSymbolKey
-) as Resource.ResourceTypeId
+) as Resource.ResourceTypeId;
 
 const resourceVariance = {
   /* c8 ignore next */
   _E: (_: any) => _,
   /* c8 ignore next */
-  _A: (_: any) => _
-}
+  _A: (_: any) => _,
+};
 
 /** @internal  */
 const proto: ThisType<Resource.Resource<any, any>> = {
   ...effectable.CommitPrototype,
   commit() {
-    return get(this)
+    return get(this);
   },
-  [ResourceTypeId]: resourceVariance
-}
+  [ResourceTypeId]: resourceVariance,
+};
 
 /** @internal */
 export const auto = <A, E, R, Out, R2>(
@@ -47,7 +47,8 @@ export const auto = <A, E, R, Out, R2>(
         fiberRuntime.forkDaemon
       ),
       core.interruptFiber
-    ))
+    )
+  );
 
 /** @internal */
 export const manual = <A, E, R>(
@@ -57,20 +58,20 @@ export const manual = <A, E, R>(
     pipe(
       scopedRef.fromAcquire(core.exit(acquire)),
       core.map((ref) => {
-        const resource = Object.create(proto)
-        resource.scopedRef = ref
-        resource.acquire = core.provideContext(acquire, env)
-        return resource
+        const resource = Object.create(proto);
+        resource.scopedRef = ref;
+        resource.acquire = core.provideContext(acquire, env);
+        return resource;
       })
-    ))
+    )
+  );
 
 /** @internal */
 export const get = <A, E>(self: Resource.Resource<A, E>): Effect.Effect<A, E> =>
-  core.flatMap(scopedRef.get(self.scopedRef), identity)
+  core.flatMap(scopedRef.get(self.scopedRef), identity);
 
 /** @internal */
-export const refresh = <A, E>(self: Resource.Resource<A, E>): Effect.Effect<void, E> =>
-  scopedRef.set(
-    self.scopedRef,
-    core.map(self.acquire, core.exitSucceed)
-  )
+export const refresh = <A, E>(
+  self: Resource.Resource<A, E>
+): Effect.Effect<void, E> =>
+  scopedRef.set(self.scopedRef, core.map(self.acquire, core.exitSucceed));

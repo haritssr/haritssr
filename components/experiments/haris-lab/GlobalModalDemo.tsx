@@ -19,7 +19,7 @@ export default function GlobalModalDemo() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-gray-900/70" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md bg-white sm:w-[400px]">
+        <Dialog.Content className="-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 overflow-hidden rounded-md bg-white sm:w-[400px]">
           <section className="flex items-center border-apple-gray4 border-b bg-zinc-100 px-4 py-2">
             <div className="w-1/3 text-apple-gray6">asdf</div>
             <Dialog.Title className="w-1/3 text-center font-semibold text-gray-700 text-lg">

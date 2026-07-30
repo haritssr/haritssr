@@ -3,7 +3,7 @@
  *
  * @since 2.0.0
  */
-import * as predicate from "./Predicate.js"
+import * as predicate from "./Predicate.js";
 
 /**
  * Tests if a value is a `RegExp`.
@@ -20,7 +20,7 @@ import * as predicate from "./Predicate.js"
  * @category guards
  * @since 3.9.0
  */
-export const isRegExp: (input: unknown) => input is RegExp = predicate.isRegExp
+export const isRegExp: (input: unknown) => input is RegExp = predicate.isRegExp;
 
 /**
  * Escapes special characters in a regular expression pattern.
@@ -35,4 +35,5 @@ export const isRegExp: (input: unknown) => input is RegExp = predicate.isRegExp
  *
  * @since 2.0.0
  */
-export const escape = (string: string): string => string.replace(/[/\\^$*+?.()|[\]{}]/g, "\\$&")
+export const escape = (string: string): string =>
+  string.replace(/[/\\^$*+?.()|[\]{}]/g, "\\$&");

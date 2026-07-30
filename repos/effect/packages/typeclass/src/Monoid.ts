@@ -1,29 +1,32 @@
 /**
  * @since 0.24.0
  */
-import type { Bounded } from "./Bounded.js"
-import type { Semigroup } from "./Semigroup.js"
-import * as semigroup from "./Semigroup.js"
+import type { Bounded } from "./Bounded.js";
+import type { Semigroup } from "./Semigroup.js";
+import * as semigroup from "./Semigroup.js";
 
 /**
  * @category type class
  * @since 0.24.0
  */
 export interface Monoid<A> extends Semigroup<A> {
-  readonly empty: A
-  readonly combineAll: (collection: Iterable<A>) => A
+  readonly empty: A;
+  readonly combineAll: (collection: Iterable<A>) => A;
 }
 
 /**
  * @category constructors
  * @since 0.24.0
  */
-export const fromSemigroup = <A>(S: Semigroup<A>, empty: Monoid<A>["empty"]): Monoid<A> => ({
+export const fromSemigroup = <A>(
+  S: Semigroup<A>,
+  empty: Monoid<A>["empty"]
+): Monoid<A> => ({
   combine: S.combine,
   combineMany: S.combineMany,
   empty,
-  combineAll: (collection) => S.combineMany(empty, collection)
-})
+  combineAll: (collection) => S.combineMany(empty, collection),
+});
 
 /**
  * Get a monoid where `combine` will return the minimum, based on the provided bounded order.
@@ -33,7 +36,8 @@ export const fromSemigroup = <A>(S: Semigroup<A>, empty: Monoid<A>["empty"]): Mo
  * @category constructors
  * @since 0.24.0
  */
-export const min = <A>(B: Bounded<A>): Monoid<A> => fromSemigroup(semigroup.min(B.compare), B.maxBound)
+export const min = <A>(B: Bounded<A>): Monoid<A> =>
+  fromSemigroup(semigroup.min(B.compare), B.maxBound);
 
 /**
  * Get a monoid where `combine` will return the maximum, based on the provided bounded order.
@@ -43,7 +47,8 @@ export const min = <A>(B: Bounded<A>): Monoid<A> => fromSemigroup(semigroup.min(
  * @category constructors
  * @since 0.24.0
  */
-export const max = <A>(B: Bounded<A>): Monoid<A> => fromSemigroup(semigroup.max(B.compare), B.minBound)
+export const max = <A>(B: Bounded<A>): Monoid<A> =>
+  fromSemigroup(semigroup.max(B.compare), B.minBound);
 
 /**
  * The dual of a `Monoid`, obtained by swapping the arguments of `combine`.
@@ -51,7 +56,8 @@ export const max = <A>(B: Bounded<A>): Monoid<A> => fromSemigroup(semigroup.max(
  * @category combinators
  * @since 0.24.0
  */
-export const reverse = <A>(M: Monoid<A>): Monoid<A> => fromSemigroup(semigroup.reverse(M), M.empty)
+export const reverse = <A>(M: Monoid<A>): Monoid<A> =>
+  fromSemigroup(semigroup.reverse(M), M.empty);
 
 /**
  * Similar to `Promise.all` but operates on `Monoid`s.
@@ -72,10 +78,12 @@ export const reverse = <A>(M: Monoid<A>): Monoid<A> => fromSemigroup(semigroup.r
  */
 export const tuple = <T extends ReadonlyArray<Monoid<any>>>(
   ...elements: T
-): Monoid<{ readonly [I in keyof T]: [T[I]] extends [Monoid<infer A>] ? A : never }> => {
-  const empty = elements.map((m) => m.empty) as any
-  return fromSemigroup(semigroup.tuple(...elements), empty)
-}
+): Monoid<{
+  readonly [I in keyof T]: [T[I]] extends [Monoid<infer A>] ? A : never;
+}> => {
+  const empty = elements.map((m) => m.empty) as any;
+  return fromSemigroup(semigroup.tuple(...elements), empty);
+};
 
 /**
  * Given a type `A`, this function creates and returns a `Semigroup` for `ReadonlyArray<A>`.
@@ -85,7 +93,8 @@ export const tuple = <T extends ReadonlyArray<Monoid<any>>>(
  * @category combinators
  * @since 0.24.0
  */
-export const array = <A>(): Monoid<ReadonlyArray<A>> => fromSemigroup(semigroup.array<A>(), [])
+export const array = <A>(): Monoid<ReadonlyArray<A>> =>
+  fromSemigroup(semigroup.array<A>(), []);
 
 /**
  * This function creates and returns a new `Monoid` for a struct of values based on the given `Monoid`s for each property in the struct.
@@ -100,12 +109,14 @@ export const array = <A>(): Monoid<ReadonlyArray<A>> => fromSemigroup(semigroup.
  */
 export const struct = <R extends { readonly [x: string]: Monoid<any> }>(
   fields: R
-): Monoid<{ readonly [K in keyof R]: [R[K]] extends [Monoid<infer A>] ? A : never }> => {
-  const empty = {} as any
+): Monoid<{
+  readonly [K in keyof R]: [R[K]] extends [Monoid<infer A>] ? A : never;
+}> => {
+  const empty = {} as any;
   for (const k in fields) {
-    if (Object.prototype.hasOwnProperty.call(fields, k)) {
-      empty[k] = fields[k].empty
+    if (Object.hasOwn(fields, k)) {
+      empty[k] = fields[k].empty;
     }
   }
-  return fromSemigroup(semigroup.struct(fields), empty)
-}
+  return fromSemigroup(semigroup.struct(fields), empty);
+};

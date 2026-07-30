@@ -1,6 +1,6 @@
-import { assert, describe, it } from "@effect/vitest"
-import { Effect, Schema } from "effect"
-import * as K8sHttpClient from "../src/K8sHttpClient.js"
+import { assert, describe, it } from "@effect/vitest";
+import { Effect, Schema } from "effect";
+import * as K8sHttpClient from "../src/K8sHttpClient.js";
 
 describe("K8sHttpClient", () => {
   describe("Pod", () => {
@@ -13,22 +13,23 @@ describe("K8sHttpClient", () => {
               {
                 type: "Initialized",
                 status: "True",
-                lastTransitionTime: null
+                lastTransitionTime: null,
               },
               {
                 type: "Ready",
                 status: "False",
-                lastTransitionTime: null
-              }
+                lastTransitionTime: null,
+              },
             ],
             podIP: "10.0.0.1",
-            hostIP: "10.0.0.2"
-          }
-        })
+            hostIP: "10.0.0.2",
+          },
+        });
 
-        assert.strictEqual(pod.status.conditions[0]?.lastTransitionTime, null)
-        assert.isFalse(pod.isReady)
-        assert.isTrue(pod.isReadyOrInitializing)
-      }))
-  })
-})
+        assert.strictEqual(pod.status.conditions[0]?.lastTransitionTime, null);
+        assert.isFalse(pod.isReady);
+        assert.isTrue(pod.isReadyOrInitializing);
+      })
+    );
+  });
+});

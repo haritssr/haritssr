@@ -12,9 +12,9 @@
  *
  * @since 2.0.0
  */
-const globalStoreId = `effect/GlobalValue`
+const globalStoreId = "effect/GlobalValue";
 
-let globalStore: Map<unknown, any>
+let globalStore: Map<unknown, any>;
 
 /**
  * Retrieves or computes a global value associated with the given `id`. If the value for this `id`
@@ -42,12 +42,12 @@ let globalStore: Map<unknown, any>
 export const globalValue = <A>(id: unknown, compute: () => A): A => {
   if (!globalStore) {
     // @ts-expect-error
-    globalThis[globalStoreId] ??= new Map()
+    globalThis[globalStoreId] ??= new Map();
     // @ts-expect-error
-    globalStore = globalThis[globalStoreId] as Map<unknown, any>
+    globalStore = globalThis[globalStoreId] as Map<unknown, any>;
   }
   if (!globalStore.has(id)) {
-    globalStore.set(id, compute())
+    globalStore.set(id, compute());
   }
-  return globalStore.get(id)!
-}
+  return globalStore.get(id)!;
+};

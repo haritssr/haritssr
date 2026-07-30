@@ -1,21 +1,21 @@
 /**
  * @since 2.0.0
  */
-import type * as Check from "./Chunk.js"
-import * as internal from "./internal/schedule/intervals.js"
-import type * as Interval from "./ScheduleInterval.js"
+import type * as Check from "./Chunk.js";
+import * as internal from "./internal/schedule/intervals.js";
+import type * as Interval from "./ScheduleInterval.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const IntervalsTypeId: unique symbol = internal.IntervalsTypeId
+export const IntervalsTypeId: unique symbol = internal.IntervalsTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type IntervalsTypeId = typeof IntervalsTypeId
+export type IntervalsTypeId = typeof IntervalsTypeId;
 
 /**
  * An `Intervals` represents a list of several `Interval`s.
@@ -24,8 +24,8 @@ export type IntervalsTypeId = typeof IntervalsTypeId
  * @category models
  */
 export interface Intervals {
-  readonly [IntervalsTypeId]: IntervalsTypeId
-  readonly intervals: Check.Chunk<Interval.Interval>
+  readonly [IntervalsTypeId]: IntervalsTypeId;
+  readonly intervals: Check.Chunk<Interval.Interval>;
 }
 
 /**
@@ -34,7 +34,8 @@ export interface Intervals {
  * @since 2.0.0
  * @category constructors
  */
-export const make: (intervals: Check.Chunk<Interval.Interval>) => Intervals = internal.make
+export const make: (intervals: Check.Chunk<Interval.Interval>) => Intervals =
+  internal.make;
 
 /**
  * Constructs an empty list of `Interval`s.
@@ -42,7 +43,7 @@ export const make: (intervals: Check.Chunk<Interval.Interval>) => Intervals = in
  * @since 2.0.0
  * @category constructors
  */
-export const empty: Intervals = internal.empty
+export const empty: Intervals = internal.empty;
 
 /**
  * Creates `Intervals` from the specified `Iterable<Interval>`.
@@ -50,7 +51,9 @@ export const empty: Intervals = internal.empty
  * @since 2.0.0
  * @category constructors
  */
-export const fromIterable: (intervals: Iterable<Interval.Interval>) => Intervals = internal.fromIterable
+export const fromIterable: (
+  intervals: Iterable<Interval.Interval>
+) => Intervals = internal.fromIterable;
 
 /**
  * Computes the union of this `Intervals` and  that `Intervals`
@@ -59,9 +62,9 @@ export const fromIterable: (intervals: Iterable<Interval.Interval>) => Intervals
  * @category utils
  */
 export const union: {
-  (that: Intervals): (self: Intervals) => Intervals
-  (self: Intervals, that: Intervals): Intervals
-} = internal.union
+  (that: Intervals): (self: Intervals) => Intervals;
+  (self: Intervals, that: Intervals): Intervals;
+} = internal.union;
 
 /**
  * Produces the intersection of this `Intervals` and that `Intervals`.
@@ -70,9 +73,9 @@ export const union: {
  * @category utils
  */
 export const intersect: {
-  (that: Intervals): (self: Intervals) => Intervals
-  (self: Intervals, that: Intervals): Intervals
-} = internal.intersect
+  (that: Intervals): (self: Intervals) => Intervals;
+  (self: Intervals, that: Intervals): Intervals;
+} = internal.intersect;
 
 /**
  * The start of the earliest interval in the specified `Intervals`.
@@ -80,7 +83,7 @@ export const intersect: {
  * @since 2.0.0
  * @category getters
  */
-export const start: (self: Intervals) => number = internal.start
+export const start: (self: Intervals) => number = internal.start;
 
 /**
  * The end of the latest interval in the specified `Intervals`.
@@ -88,7 +91,7 @@ export const start: (self: Intervals) => number = internal.start
  * @since 2.0.0
  * @category getters
  */
-export const end: (self: Intervals) => number = internal.end
+export const end: (self: Intervals) => number = internal.end;
 
 /**
  * Returns `true` if the start of this `Intervals` is before the start of that
@@ -98,9 +101,9 @@ export const end: (self: Intervals) => number = internal.end
  * @category ordering
  */
 export const lessThan: {
-  (that: Intervals): (self: Intervals) => boolean
-  (self: Intervals, that: Intervals): boolean
-} = internal.lessThan
+  (that: Intervals): (self: Intervals) => boolean;
+  (self: Intervals, that: Intervals): boolean;
+} = internal.lessThan;
 
 /**
  * Returns `true` if this `Intervals` is non-empty, `false` otherwise.
@@ -108,7 +111,7 @@ export const lessThan: {
  * @since 2.0.0
  * @category getters
  */
-export const isNonEmpty: (self: Intervals) => boolean = internal.isNonEmpty
+export const isNonEmpty: (self: Intervals) => boolean = internal.isNonEmpty;
 
 /**
  * Returns the maximum of the two `Intervals` (i.e. which has the latest start).
@@ -117,6 +120,6 @@ export const isNonEmpty: (self: Intervals) => boolean = internal.isNonEmpty
  * @category ordering
  */
 export const max: {
-  (that: Intervals): (self: Intervals) => Intervals
-  (self: Intervals, that: Intervals): Intervals
-} = internal.max
+  (that: Intervals): (self: Intervals) => Intervals;
+  (self: Intervals, that: Intervals): Intervals;
+} = internal.max;

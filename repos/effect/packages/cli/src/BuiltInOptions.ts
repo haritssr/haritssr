@@ -2,13 +2,13 @@
  * @since 1.0.0
  */
 
-import type { LogLevel } from "effect/LogLevel"
-import type { Option } from "effect/Option"
-import type { Command } from "./CommandDescriptor.js"
-import type { HelpDoc } from "./HelpDoc.js"
-import * as InternalBuiltInOptions from "./internal/builtInOptions.js"
-import type { Options } from "./Options.js"
-import type { Usage } from "./Usage.js"
+import type { LogLevel } from "effect/LogLevel";
+import type { Option } from "effect/Option";
+import type { Command } from "./CommandDescriptor.js";
+import type { HelpDoc } from "./HelpDoc.js";
+import * as InternalBuiltInOptions from "./internal/builtInOptions.js";
+import type { Options } from "./Options.js";
+import type { Usage } from "./Usage.js";
 
 /**
  * @since 1.0.0
@@ -19,15 +19,15 @@ export type BuiltInOptions =
   | ShowHelp
   | ShowCompletions
   | ShowWizard
-  | ShowVersion
+  | ShowVersion;
 
 /**
  * @since 1.0.0
  * @category models
  */
 export interface SetLogLevel {
-  readonly _tag: "SetLogLevel"
-  readonly level: LogLevel
+  readonly _tag: "SetLogLevel";
+  readonly level: LogLevel;
 }
 
 /**
@@ -35,9 +35,9 @@ export interface SetLogLevel {
  * @category models
  */
 export interface ShowHelp {
-  readonly _tag: "ShowHelp"
-  readonly usage: Usage
-  readonly helpDoc: HelpDoc
+  readonly _tag: "ShowHelp";
+  readonly usage: Usage;
+  readonly helpDoc: HelpDoc;
 }
 
 /**
@@ -45,8 +45,8 @@ export interface ShowHelp {
  * @category models
  */
 export interface ShowCompletions {
-  readonly _tag: "ShowCompletions"
-  readonly shellType: BuiltInOptions.ShellType
+  readonly _tag: "ShowCompletions";
+  readonly shellType: BuiltInOptions.ShellType;
 }
 
 /**
@@ -54,8 +54,8 @@ export interface ShowCompletions {
  * @category models
  */
 export interface ShowWizard {
-  readonly _tag: "ShowWizard"
-  readonly command: Command<unknown>
+  readonly _tag: "ShowWizard";
+  readonly command: Command<unknown>;
 }
 
 /**
@@ -63,7 +63,7 @@ export interface ShowWizard {
  * @category models
  */
 export interface ShowVersion {
-  readonly _tag: "ShowVersion"
+  readonly _tag: "ShowVersion";
 }
 
 /**
@@ -74,7 +74,7 @@ export declare namespace BuiltInOptions {
    * @since 1.0.0
    * @category models
    */
-  export type ShellType = "bash" | "fish" | "zsh"
+  export type ShellType = "bash" | "fish" | "zsh";
 }
 
 /**
@@ -85,54 +85,61 @@ export const builtInOptions: <A>(
   command: Command<A>,
   usage: Usage,
   helpDoc: HelpDoc
-) => Options<Option<BuiltInOptions>> = InternalBuiltInOptions.builtInOptions
+) => Options<Option<BuiltInOptions>> = InternalBuiltInOptions.builtInOptions;
 
 /**
  * @since 1.0.0
  * @category refinements
  */
-export const isShowCompletions: (self: BuiltInOptions) => self is ShowCompletions =
-  InternalBuiltInOptions.isShowCompletions
+export const isShowCompletions: (
+  self: BuiltInOptions
+) => self is ShowCompletions = InternalBuiltInOptions.isShowCompletions;
 
 /**
  * @since 1.0.0
  * @category refinements
  */
-export const isShowHelp: (self: BuiltInOptions) => self is ShowHelp = InternalBuiltInOptions.isShowHelp
+export const isShowHelp: (self: BuiltInOptions) => self is ShowHelp =
+  InternalBuiltInOptions.isShowHelp;
 
 /**
  * @since 1.0.0
  * @category refinements
  */
-export const isShowWizard: (self: BuiltInOptions) => self is ShowWizard = InternalBuiltInOptions.isShowWizard
+export const isShowWizard: (self: BuiltInOptions) => self is ShowWizard =
+  InternalBuiltInOptions.isShowWizard;
 
 /**
  * @since 1.0.0
  * @category refinements
  */
-export const isShowVersion: (self: BuiltInOptions) => self is ShowVersion = InternalBuiltInOptions.isShowVersion
+export const isShowVersion: (self: BuiltInOptions) => self is ShowVersion =
+  InternalBuiltInOptions.isShowVersion;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const showCompletions: (shellType: BuiltInOptions.ShellType) => BuiltInOptions =
-  InternalBuiltInOptions.showCompletions
+export const showCompletions: (
+  shellType: BuiltInOptions.ShellType
+) => BuiltInOptions = InternalBuiltInOptions.showCompletions;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const showHelp: (usage: Usage, helpDoc: HelpDoc) => BuiltInOptions = InternalBuiltInOptions.showHelp
+export const showHelp: (usage: Usage, helpDoc: HelpDoc) => BuiltInOptions =
+  InternalBuiltInOptions.showHelp;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const showWizard: (command: Command<unknown>) => BuiltInOptions = InternalBuiltInOptions.showWizard
+export const showWizard: (command: Command<unknown>) => BuiltInOptions =
+  InternalBuiltInOptions.showWizard;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const showVersion: BuiltInOptions = InternalBuiltInOptions.showVersion
+export const showVersion: BuiltInOptions = InternalBuiltInOptions.showVersion;

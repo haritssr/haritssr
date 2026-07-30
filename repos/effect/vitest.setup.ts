@@ -1,21 +1,21 @@
-import { addEqualityTesters } from "@effect/vitest"
+import { addEqualityTesters } from "@effect/vitest";
 
-addEqualityTesters()
+addEqualityTesters();
 
 // Ignore warnings from usage of experimental features to declutter test output.
-const ignore = ["ExperimentalWarning"]
-const emitWarning = process.emitWarning
+const ignore = ["ExperimentalWarning"];
+const emitWarning = process.emitWarning;
 process.emitWarning = (warning, ...args) => {
-  const [head] = args
+  const [head] = args;
   if (head != null) {
     if (typeof head === "string" && ignore.includes(head)) {
-      return
+      return;
     }
 
     if (typeof head === "object" && ignore.includes(head.type)) {
-      return
+      return;
     }
   }
 
-  return emitWarning(warning, ...args)
-}
+  return emitWarning(warning, ...args);
+};

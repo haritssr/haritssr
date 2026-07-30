@@ -31,7 +31,7 @@ export default function RadixDialogDemo() {
           Show dialog
         </Dialog.Trigger>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-zinc-900/70" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 z-50 w-3/4 max-w-screen-xs -translate-x-1/2 -translate-y-1/2 rounded-md bg-white px-5 py-4">
+        <Dialog.Content className="-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 w-3/4 max-w-screen-xs rounded-md bg-white px-5 py-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <Dialog.Title className="font-bold text-lg text-zinc-800 sm:text-xl">

@@ -5,8 +5,8 @@ export async function GET(request: Request) {
 
   const data = Users.filter((item) =>
     ["firstName", "lastName", "maidenName"].some((key) =>
-      item[key as keyof typeof item]?.toString().toLowerCase().includes(q),
-    ),
+      item[key as keyof typeof item]?.toString().toLowerCase().includes(q)
+    )
   );
 
   return Response.json(data.slice(0, 10));

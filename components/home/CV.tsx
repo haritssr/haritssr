@@ -6,7 +6,7 @@ import HomeSectionWrapper from "./HomeSectionWrapper";
 export default function CV() {
   return (
     <HomeSectionWrapper
-      className="space-y-5 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-5"
+      className="space-y-5 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0"
       explanation="Formal working experience, education history, and core skills."
       id="cv-dec-2024.pdf"
       isTitleLink={false}
@@ -27,7 +27,10 @@ export default function CV() {
         <div className="mt-1.5 space-y-1.5 pl-7 text-zinc-500">
           <div>Lia Privat & personal</div>
           <div> June 2018 - Now (7 years)</div>
-          <div>Teaching math and physics for junior and senior highschool students at home</div>
+          <div>
+            Teaching math and physics for junior and senior highschool students
+            at home
+          </div>
         </div>
       </Box>
 
@@ -83,7 +86,8 @@ export default function CV() {
         <div className="">
           <div className="font-semibold">Web Software Engineering</div>
           <p className="text-zinc-500">
-            JavaScript, TypeScript, React.js, Next.js, Web platform, PWA, Node.js ecosystem.
+            JavaScript, TypeScript, React.js, Next.js, Web platform, PWA,
+            Node.js ecosystem.
           </p>
         </div>
         <div className="">
@@ -92,7 +96,9 @@ export default function CV() {
         </div>
         <div className="">
           <div className="font-semibold">UI Design (with Figma)</div>
-          <p className="text-zinc-500">Experiments, mockup, prototyping UI for mobile/desktop web.</p>
+          <p className="text-zinc-500">
+            Experiments, mockup, prototyping UI for mobile/desktop web.
+          </p>
         </div>
       </Box>
       <div className="flex justify-end sm:justify-start">

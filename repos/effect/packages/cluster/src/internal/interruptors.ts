@@ -1,4 +1,4 @@
-import type { FiberId } from "effect/FiberId"
+import type { FiberId } from "effect/FiberId";
 
 /** @internal */
-export const internalInterruptors = new WeakSet<FiberId>()
+export const internalInterruptors = new WeakSet<FiberId>();

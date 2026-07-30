@@ -1,4 +1,4 @@
-import type * as Fiber from "../../Fiber.js"
+import type * as Fiber from "../../Fiber.js";
 
 /**
  * `WarningData` describes the state of the warning message that is displayed
@@ -9,40 +9,40 @@ import type * as Fiber from "../../Fiber.js"
  *
  * @internal
  */
-export type WarningData = Start | Pending | Done
+export type WarningData = Start | Pending | Done;
 
 /** @internal */
-export const OP_WARNING_DATA_START = "Start" as const
+export const OP_WARNING_DATA_START = "Start" as const;
 
 /** @internal */
-export type OP_WARNING_DATA_START = typeof OP_WARNING_DATA_START
+export type OP_WARNING_DATA_START = typeof OP_WARNING_DATA_START;
 
 /** @internal */
-export const OP_WARNING_DATA_PENDING = "Pending" as const
+export const OP_WARNING_DATA_PENDING = "Pending" as const;
 
 /** @internal */
-export type OP_WARNING_DATA_PENDING = typeof OP_WARNING_DATA_PENDING
+export type OP_WARNING_DATA_PENDING = typeof OP_WARNING_DATA_PENDING;
 
 /** @internal */
-export const OP_WARNING_DATA_DONE = "Done" as const
+export const OP_WARNING_DATA_DONE = "Done" as const;
 
 /** @internal */
-export type OP_WARNING_DATA_DONE = typeof OP_WARNING_DATA_DONE
+export type OP_WARNING_DATA_DONE = typeof OP_WARNING_DATA_DONE;
 
 /** @internal */
 export interface Start {
-  readonly _tag: OP_WARNING_DATA_START
+  readonly _tag: OP_WARNING_DATA_START;
 }
 
 /** @internal */
 export interface Pending {
-  readonly _tag: OP_WARNING_DATA_PENDING
-  readonly fiber: Fiber.Fiber<void, Error>
+  readonly _tag: OP_WARNING_DATA_PENDING;
+  readonly fiber: Fiber.Fiber<void, Error>;
 }
 
 /** @internal */
 export interface Done {
-  readonly _tag: OP_WARNING_DATA_DONE
+  readonly _tag: OP_WARNING_DATA_DONE;
 }
 
 /**
@@ -51,8 +51,8 @@ export interface Done {
  * @internal
  */
 export const start: WarningData = {
-  _tag: OP_WARNING_DATA_START
-}
+  _tag: OP_WARNING_DATA_START,
+};
 
 /**
  * State indicating that a test has used time but has not adjusted the
@@ -64,9 +64,9 @@ export const start: WarningData = {
 export const pending = (fiber: Fiber.Fiber<void, Error>): WarningData => {
   return {
     _tag: OP_WARNING_DATA_PENDING,
-    fiber
-  }
-}
+    fiber,
+  };
+};
 
 /**
  * State indicating that a test has used time or the warning message has
@@ -75,20 +75,20 @@ export const pending = (fiber: Fiber.Fiber<void, Error>): WarningData => {
  * @internal
  */
 export const done: WarningData = {
-  _tag: OP_WARNING_DATA_DONE
-}
+  _tag: OP_WARNING_DATA_DONE,
+};
 
 /** @internal */
 export const isStart = (self: WarningData): self is Start => {
-  return self._tag === OP_WARNING_DATA_START
-}
+  return self._tag === OP_WARNING_DATA_START;
+};
 
 /** @internal */
 export const isPending = (self: WarningData): self is Pending => {
-  return self._tag === OP_WARNING_DATA_PENDING
-}
+  return self._tag === OP_WARNING_DATA_PENDING;
+};
 
 /** @internal */
 export const isDone = (self: WarningData): self is Done => {
-  return self._tag === OP_WARNING_DATA_DONE
-}
+  return self._tag === OP_WARNING_DATA_DONE;
+};

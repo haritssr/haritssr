@@ -1,27 +1,29 @@
 /**
  * @since 1.0.0
  */
-import * as Tool from "@effect/ai/Tool"
-import * as Schema from "effect/Schema"
-import * as Struct from "effect/Struct"
-import * as Generated from "./Generated.js"
+import * as Tool from "@effect/ai/Tool";
+import * as Schema from "effect/Schema";
+import * as Struct from "effect/Struct";
+import * as Generated from "./Generated.js";
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export const ProviderDefinedTools: Schema.Union<[
-  typeof Generated.BetaBashTool20241022,
-  typeof Generated.BetaBashTool20250124,
-  typeof Generated.BetaCodeExecutionTool20250522,
-  typeof Generated.BetaComputerUseTool20241022,
-  typeof Generated.BetaComputerUseTool20250124,
-  typeof Generated.BetaTextEditor20241022,
-  typeof Generated.BetaTextEditor20250124,
-  typeof Generated.BetaTextEditor20250429,
-  typeof Generated.BetaTextEditor20250728,
-  typeof Generated.BetaWebSearchTool20250305
-]> = Schema.Union(
+export const ProviderDefinedTools: Schema.Union<
+  [
+    typeof Generated.BetaBashTool20241022,
+    typeof Generated.BetaBashTool20250124,
+    typeof Generated.BetaCodeExecutionTool20250522,
+    typeof Generated.BetaComputerUseTool20241022,
+    typeof Generated.BetaComputerUseTool20250124,
+    typeof Generated.BetaTextEditor20241022,
+    typeof Generated.BetaTextEditor20250124,
+    typeof Generated.BetaTextEditor20250429,
+    typeof Generated.BetaTextEditor20250728,
+    typeof Generated.BetaWebSearchTool20250305,
+  ]
+> = Schema.Union(
   Generated.BetaBashTool20241022,
   Generated.BetaBashTool20250124,
   Generated.BetaCodeExecutionTool20250522,
@@ -32,13 +34,13 @@ export const ProviderDefinedTools: Schema.Union<[
   Generated.BetaTextEditor20250429,
   Generated.BetaTextEditor20250728,
   Generated.BetaWebSearchTool20250305
-)
+);
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export type ProviderDefinedTools = typeof ProviderDefinedTools.Type
+export type ProviderDefinedTools = typeof ProviderDefinedTools.Type;
 
 /**
  * @since 1.0.0
@@ -59,9 +61,9 @@ export const Bash_20241022 = Tool.providerDefined({
     /**
      * If `true`, restart the Bash session.
      */
-    restart: Schema.optional(Schema.Boolean)
-  }
-})
+    restart: Schema.optional(Schema.Boolean),
+  },
+});
 
 /**
  * @since 1.0.0
@@ -82,9 +84,9 @@ export const Bash_20250124 = Tool.providerDefined({
     /**
      * If `true`, restart the Bash session.
      */
-    restart: Schema.optional(Schema.Boolean)
-  }
-})
+    restart: Schema.optional(Schema.Boolean),
+  },
+});
 
 /**
  * @since 1.0.0
@@ -94,10 +96,14 @@ export const CodeExecution_20250522 = Tool.providerDefined({
   id: "anthropic.code_execution_20250522",
   toolkitName: "AnthropicCodeExecution",
   providerName: "code_execution",
-  args: Struct.omit(Generated.BetaCodeExecutionTool20250522.fields, "name", "type"),
+  args: Struct.omit(
+    Generated.BetaCodeExecutionTool20250522.fields,
+    "name",
+    "type"
+  ),
   success: Generated.BetaResponseCodeExecutionResultBlock,
-  failure: Generated.BetaResponseCodeExecutionToolResultError
-})
+  failure: Generated.BetaResponseCodeExecutionToolResultError,
+});
 
 /**
  * @since 1.0.0
@@ -107,7 +113,11 @@ export const CodeExecution_20250825 = Tool.providerDefined({
   id: "anthropic.code_execution_20250825",
   toolkitName: "AnthropicCodeExecution",
   providerName: "code_execution",
-  args: Struct.omit(Generated.BetaCodeExecutionTool20250825.fields, "name", "type"),
+  args: Struct.omit(
+    Generated.BetaCodeExecutionTool20250825.fields,
+    "name",
+    "type"
+  ),
   success: Schema.Union(
     Generated.BetaResponseBashCodeExecutionResultBlock,
     Generated.BetaResponseTextEditorCodeExecutionViewResultBlock,
@@ -117,14 +127,14 @@ export const CodeExecution_20250825 = Tool.providerDefined({
   failure: Schema.Union(
     Generated.BetaResponseCodeExecutionToolResultError,
     Generated.BetaResponseTextEditorCodeExecutionToolResultError
-  )
-})
+  ),
+});
 
 /**
  * @since 1.0.0
  * @category Models
  */
-export const Coordinate = Schema.Tuple(Schema.Number, Schema.Number)
+export const Coordinate = Schema.Tuple(Schema.Number, Schema.Number);
 
 /**
  * Allow Claude to interact with computer environments through the computer use
@@ -138,7 +148,11 @@ export const ComputerUse_20241022 = Tool.providerDefined({
   id: "anthropic.computer_use_20241022",
   toolkitName: "AnthropicComputerUse",
   providerName: "computer",
-  args: Struct.omit(Generated.BetaComputerUseTool20241022.fields, "name", "type"),
+  args: Struct.omit(
+    Generated.BetaComputerUseTool20241022.fields,
+    "name",
+    "type"
+  ),
   requiresHandler: true,
   success: Schema.String,
   parameters: {
@@ -171,9 +185,9 @@ export const ComputerUse_20241022 = Tool.providerDefined({
     /**
      * Required only by `action=type` and `action=key`.
      */
-    text: Schema.optional(Schema.String)
-  }
-})
+    text: Schema.optional(Schema.String),
+  },
+});
 
 /**
  * Allow Claude to interact with computer environments through the computer use
@@ -187,7 +201,11 @@ export const ComputerUse_20250124 = Tool.providerDefined({
   id: "anthropic.computer_use_20250124",
   toolkitName: "AnthropicComputerUse",
   providerName: "computer",
-  args: Struct.omit(Generated.BetaComputerUseTool20241022.fields, "name", "type"),
+  args: Struct.omit(
+    Generated.BetaComputerUseTool20241022.fields,
+    "name",
+    "type"
+  ),
   requiresHandler: true,
   success: Schema.String,
   parameters: {
@@ -261,7 +279,9 @@ export const ComputerUse_20250124 = Tool.providerDefined({
     /**
      * The direction to scroll the screen. Required only by `action=scroll`.
      */
-    scroll_direction: Schema.optional(Schema.Literal("up", "down", "left", "right")),
+    scroll_direction: Schema.optional(
+      Schema.Literal("up", "down", "left", "right")
+    ),
     /**
      * The number of "clicks" of the scroll wheel to scroll. Required only by
      * `action=scroll`.
@@ -271,9 +291,9 @@ export const ComputerUse_20250124 = Tool.providerDefined({
      * The duration to hold the key down for. Required only by `action=hold_key`
      * and `action=wait`.
      */
-    duration: Schema.optional(Schema.Number)
-  }
-})
+    duration: Schema.optional(Schema.Number),
+  },
+});
 
 /**
  * Allow Claude to directly interact with your files, providing hands-on
@@ -331,9 +351,9 @@ export const TextEditor_20241022 = Tool.providerDefined({
      * 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all
      * lines from `start_line` to the end of the file.
      */
-    view_range: Schema.optional(Schema.Array(Schema.Number))
-  }
-})
+    view_range: Schema.optional(Schema.Array(Schema.Number)),
+  },
+});
 
 /**
  * Allow Claude to directly interact with your files, providing hands-on
@@ -391,9 +411,9 @@ export const TextEditor_20250124 = Tool.providerDefined({
      * 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all
      * lines from `start_line` to the end of the file.
      */
-    view_range: Schema.optional(Schema.Array(Schema.Number))
-  }
-})
+    view_range: Schema.optional(Schema.Array(Schema.Number)),
+  },
+});
 
 /**
  * Allow Claude to directly interact with your files, providing hands-on
@@ -412,12 +432,7 @@ export const TextEditor_20250429 = Tool.providerDefined({
     /**
      * The command to run.
      */
-    command: Schema.Literal(
-      "view",
-      "create",
-      "str_replace",
-      "insert"
-    ),
+    command: Schema.Literal("view", "create", "str_replace", "insert"),
     /**
      * Absolute path to file or directory, e.g. `/repo/file.py` or `/repo`.
      */
@@ -450,9 +465,9 @@ export const TextEditor_20250429 = Tool.providerDefined({
      * 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all
      * lines from `start_line` to the end of the file.
      */
-    view_range: Schema.optional(Schema.Array(Schema.Number))
-  }
-})
+    view_range: Schema.optional(Schema.Array(Schema.Number)),
+  },
+});
 
 /**
  * Allow Claude to directly interact with your files, providing hands-on
@@ -471,12 +486,7 @@ export const TextEditor_20250728 = Tool.providerDefined({
     /**
      * The command to run.
      */
-    command: Schema.Literal(
-      "view",
-      "create",
-      "str_replace",
-      "insert"
-    ),
+    command: Schema.Literal("view", "create", "str_replace", "insert"),
     /**
      * Absolute path to file or directory, e.g. `/repo/file.py` or `/repo`.
      */
@@ -509,9 +519,9 @@ export const TextEditor_20250728 = Tool.providerDefined({
      * 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all
      * lines from `start_line` to the end of the file.
      */
-    view_range: Schema.optional(Schema.Array(Schema.Number))
-  }
-})
+    view_range: Schema.optional(Schema.Array(Schema.Number)),
+  },
+});
 
 /**
  * @since 1.0.0
@@ -523,17 +533,20 @@ export const WebSearch_20250305 = Tool.providerDefined({
   providerName: "web_search",
   args: Struct.omit(Generated.WebSearchTool20250305.fields, "name", "type"),
   success: Schema.Array(Generated.RequestWebSearchResultBlock),
-  failure: Generated.ResponseWebSearchToolResultError
-})
+  failure: Generated.ResponseWebSearchToolResultError,
+});
 
-const ProviderToolNamesMap: Map<ProviderDefinedTools["name"] | (string & {}), string> = new Map([
+const ProviderToolNamesMap: Map<
+  ProviderDefinedTools["name"] | (string & {}),
+  string
+> = new Map([
   ["bash", "AnthropicBash"],
   ["code_execution", "AnthropicCodeExecution"],
   ["computer", "AnthropicComputerUse"],
   ["str_replace_based_edit_tool", "AnthropicTextEditor"],
   ["str_replace_editor", "AnthropicTextEditor"],
-  ["web_search", "AnthropicWebSearch"]
-])
+  ["web_search", "AnthropicWebSearch"],
+]);
 
 /**
  * A helper method which takes in the name of a tool as returned in the response
@@ -550,4 +563,5 @@ const ProviderToolNamesMap: Map<ProviderDefinedTools["name"] | (string & {}), st
  * @since 1.0.0
  * @category Tool Calling
  */
-export const getProviderDefinedToolName = (name: string): string | undefined => ProviderToolNamesMap.get(name)
+export const getProviderDefinedToolName = (name: string): string | undefined =>
+  ProviderToolNamesMap.get(name);

@@ -1,26 +1,26 @@
 /**
  * @since 2.0.0
  */
-import type * as Effect from "./Effect.js"
-import type { LazyArg } from "./Function.js"
-import * as internal from "./internal/scopedRef.js"
-import type { Pipeable } from "./Pipeable.js"
-import type * as Scope from "./Scope.js"
-import type * as Synchronized from "./SynchronizedRef.js"
-import type * as Types from "./Types.js"
-import type * as Unify from "./Unify.js"
+import type * as Effect from "./Effect.js";
+import type { LazyArg } from "./Function.js";
+import * as internal from "./internal/scopedRef.js";
+import type { Pipeable } from "./Pipeable.js";
+import type * as Scope from "./Scope.js";
+import type * as Synchronized from "./SynchronizedRef.js";
+import type * as Types from "./Types.js";
+import type * as Unify from "./Unify.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const ScopedRefTypeId: unique symbol = internal.ScopedRefTypeId
+export const ScopedRefTypeId: unique symbol = internal.ScopedRefTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type ScopedRefTypeId = typeof ScopedRefTypeId
+export type ScopedRefTypeId = typeof ScopedRefTypeId;
 
 /**
  * A `ScopedRef` is a reference whose value is associated with resources,
@@ -32,21 +32,27 @@ export type ScopedRefTypeId = typeof ScopedRefTypeId
  * @since 2.0.0
  * @category models
  */
-export interface ScopedRef<in out A> extends Effect.Effect<A>, ScopedRef.Variance<A>, Pipeable {
+export interface ScopedRef<in out A>
+  extends Effect.Effect<A>,
+    ScopedRef.Variance<A>,
+    Pipeable {
   /** @internal */
-  readonly ref: Synchronized.SynchronizedRef<readonly [Scope.Scope.Closeable, A]>
+  readonly ref: Synchronized.SynchronizedRef<
+    readonly [Scope.Scope.Closeable, A]
+  >;
 
-  readonly [Unify.typeSymbol]?: unknown
-  readonly [Unify.unifySymbol]?: ScopedRefUnify<this>
-  readonly [Unify.ignoreSymbol]?: ScopedRefUnifyIgnore
+  readonly [Unify.typeSymbol]?: unknown;
+  readonly [Unify.unifySymbol]?: ScopedRefUnify<this>;
+  readonly [Unify.ignoreSymbol]?: ScopedRefUnifyIgnore;
 }
 
 /**
  * @category models
  * @since 3.9.0
  */
-export interface ScopedRefUnify<A extends { [Unify.typeSymbol]?: any }> extends Effect.EffectUnify<A> {
-  ScopedRef?: () => Extract<A[Unify.typeSymbol], ScopedRef<any>>
+export interface ScopedRefUnify<A extends { [Unify.typeSymbol]?: any }>
+  extends Effect.EffectUnify<A> {
+  ScopedRef?: () => Extract<A[Unify.typeSymbol], ScopedRef<any>>;
 }
 
 /**
@@ -54,7 +60,7 @@ export interface ScopedRefUnify<A extends { [Unify.typeSymbol]?: any }> extends 
  * @since 3.9.0
  */
 export interface ScopedRefUnifyIgnore extends Effect.EffectUnifyIgnore {
-  Effect?: true
+  Effect?: true;
 }
 
 /**
@@ -67,8 +73,8 @@ export declare namespace ScopedRef {
    */
   export interface Variance<in out A> {
     readonly [ScopedRefTypeId]: {
-      readonly _A: Types.Invariant<A>
-    }
+      readonly _A: Types.Invariant<A>;
+    };
   }
 }
 
@@ -81,7 +87,7 @@ export declare namespace ScopedRef {
  */
 export const fromAcquire: <A, E, R>(
   acquire: Effect.Effect<A, E, R>
-) => Effect.Effect<ScopedRef<A>, E, Scope.Scope | R> = internal.fromAcquire
+) => Effect.Effect<ScopedRef<A>, E, Scope.Scope | R> = internal.fromAcquire;
 
 /**
  * Retrieves the current value of the scoped reference.
@@ -89,7 +95,7 @@ export const fromAcquire: <A, E, R>(
  * @since 2.0.0
  * @category getters
  */
-export const get: <A>(self: ScopedRef<A>) => Effect.Effect<A> = internal.get
+export const get: <A>(self: ScopedRef<A>) => Effect.Effect<A> = internal.get;
 
 /**
  * Creates a new `ScopedRef` from the specified value. This method should
@@ -98,7 +104,9 @@ export const get: <A>(self: ScopedRef<A>) => Effect.Effect<A> = internal.get
  * @since 2.0.0
  * @category constructors
  */
-export const make: <A>(evaluate: LazyArg<A>) => Effect.Effect<ScopedRef<A>, never, Scope.Scope> = internal.make
+export const make: <A>(
+  evaluate: LazyArg<A>
+) => Effect.Effect<ScopedRef<A>, never, Scope.Scope> = internal.make;
 
 /**
  * Sets the value of this reference to the specified resourcefully-created
@@ -112,6 +120,11 @@ export const make: <A>(evaluate: LazyArg<A>) => Effect.Effect<ScopedRef<A>, neve
  * @category getters
  */
 export const set: {
-  <A, R, E>(acquire: Effect.Effect<A, E, R>): (self: ScopedRef<A>) => Effect.Effect<void, E, Exclude<R, Scope.Scope>>
-  <A, R, E>(self: ScopedRef<A>, acquire: Effect.Effect<A, E, R>): Effect.Effect<void, E, Exclude<R, Scope.Scope>>
-} = internal.set
+  <A, R, E>(
+    acquire: Effect.Effect<A, E, R>
+  ): (self: ScopedRef<A>) => Effect.Effect<void, E, Exclude<R, Scope.Scope>>;
+  <A, R, E>(
+    self: ScopedRef<A>,
+    acquire: Effect.Effect<A, E, R>
+  ): Effect.Effect<void, E, Exclude<R, Scope.Scope>>;
+} = internal.set;

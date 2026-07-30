@@ -5,12 +5,12 @@ import { StatusActionLink, StatusPage } from "@/components/StatusPage";
 
 export default async function DomainIndexPage({ params }: { params: Promise<{ domain: string }> }) {
   const { domain } = await params;
-  const WHITESPACE_COLLAPSE = /\s+/g;
-  const WHITESPACE_EACH = /\s/g;
+  const REGEX_WHITESPACE_COLLAPSE = /\s+/g;
+  const REGEX_WHITESPACE_EACH = /\s/g;
 
   // Find the experiment data for this domain
   const experiment = ExperimentsData.find(
-    (exp) => exp.title.toLowerCase().replace(WHITESPACE_COLLAPSE, "-") === domain,
+    (exp) => exp.title.toLowerCase().replace(REGEX_WHITESPACE_COLLAPSE, "-") === domain,
   );
 
   if (!experiment) {
@@ -36,12 +36,12 @@ export default async function DomainIndexPage({ params }: { params: Promise<{ do
         </div>
         <div className="font-semibold text-2xl sm:text-3xl">{experiment.title}</div>
         <div className="text-lg text-zinc-800">{experiment.description}</div>
-        <div className="text-lg font-light text-zinc-400">{experiment.links.length} experiments</div>
+        <div className="font-light text-lg text-zinc-400">{experiment.links.length} experiments</div>
       </div>
       <ol className="space-y-3">
         {experiment.links?.map((link) => (
           <li key={link}>
-            <InternalLink href={`/experiments/${domain}/${link.toLowerCase().replace(WHITESPACE_EACH, "-")}`}>
+            <InternalLink href={`/experiments/${domain}/${link.toLowerCase().replace(REGEX_WHITESPACE_EACH, "-")}`}>
               {link}
             </InternalLink>
           </li>

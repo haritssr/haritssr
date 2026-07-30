@@ -77,13 +77,13 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
       <PageDescription description="Manage tools in experiment database." />
 
       {error && (
-        <div className="mt-4 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mt-4 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-red-700 text-sm">
           Error: {error}
         </div>
       )}
 
       <section className="mt-6 rounded-lg border border-neutral-200 p-4">
-        <h2 className="text-lg font-semibold">Manage Tools</h2>
+        <h2 className="font-semibold text-lg">Manage Tools</h2>
         <form
           action={createToolAction}
           className="mt-3 grid gap-3 sm:grid-cols-4"
@@ -126,15 +126,15 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
       </section>
 
       <section className="mt-6 rounded-lg border border-neutral-200 p-4">
-        <h2 className="text-lg font-semibold">Current Tools</h2>
+        <h2 className="font-semibold text-lg">Current Tools</h2>
 
         {tools.length === 0 ? (
-          <p className="mt-3 text-sm text-neutral-500">No tools yet.</p>
+          <p className="mt-3 text-neutral-500 text-sm">No tools yet.</p>
         ) : (
           <div className="mt-4 overflow-x-auto">
             <table className="w-full border-collapse text-sm">
               <thead>
-                <tr className="border-b border-neutral-200 text-left">
+                <tr className="border-neutral-200 border-b text-left">
                   <th className="py-2 pr-4">Name</th>
                   <th className="py-2 pr-4">Price</th>
                   <th className="py-2 pr-4">Amount</th>
@@ -142,7 +142,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
               </thead>
               <tbody>
                 {tools.map((tool) => (
-                  <tr className="border-b border-neutral-100" key={tool.id}>
+                  <tr className="border-neutral-100 border-b" key={tool.id}>
                     <td className="py-2 pr-4">{tool.name}</td>
                     <td className="py-2 pr-4">
                       {currencyFormatter.format(tool.price)}

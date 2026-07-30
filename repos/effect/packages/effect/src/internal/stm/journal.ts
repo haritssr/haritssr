@@ -1,40 +1,43 @@
-import type * as TRef from "../../TRef.js"
-import * as Entry from "./entry.js"
-import type * as TxnId from "./txnId.js"
+import type * as TRef from "../../TRef.js";
+import * as Entry from "./entry.js";
+import type * as TxnId from "./txnId.js";
 
 /** @internal */
-export type Journal = Map<TRef.TRef<any>, Entry.Entry>
+export type Journal = Map<TRef.TRef<any>, Entry.Entry>;
 
 /** @internal */
-export type Todo = () => unknown
+export type Todo = () => unknown;
 
 /** @internal */
-export type JournalAnalysis = JournalAnalysisInvalid | JournalAnalysisReadWrite | JournalAnalysisReadOnly
+export type JournalAnalysis =
+  | JournalAnalysisInvalid
+  | JournalAnalysisReadWrite
+  | JournalAnalysisReadOnly;
 
 /** @internal */
-export const JournalAnalysisInvalid = "Invalid" as const
+export const JournalAnalysisInvalid = "Invalid" as const;
 
 /** @internal */
-export type JournalAnalysisInvalid = typeof JournalAnalysisInvalid
+export type JournalAnalysisInvalid = typeof JournalAnalysisInvalid;
 
 /** @internal */
-export const JournalAnalysisReadWrite = "ReadWrite" as const
+export const JournalAnalysisReadWrite = "ReadWrite" as const;
 
 /** @internal */
-export type JournalAnalysisReadWrite = typeof JournalAnalysisReadWrite
+export type JournalAnalysisReadWrite = typeof JournalAnalysisReadWrite;
 
 /** @internal */
-export const JournalAnalysisReadOnly = "ReadOnly" as const
+export const JournalAnalysisReadOnly = "ReadOnly" as const;
 
 /** @internal */
-export type JournalAnalysisReadOnly = typeof JournalAnalysisReadOnly
+export type JournalAnalysisReadOnly = typeof JournalAnalysisReadOnly;
 
 /** @internal */
 export const commitJournal = (journal: Journal) => {
   for (const entry of journal) {
-    Entry.commit(entry[1])
+    Entry.commit(entry[1]);
   }
-}
+};
 
 /**
  * Analyzes the journal, determining whether it is valid and whether it is
@@ -45,49 +48,53 @@ export const commitJournal = (journal: Journal) => {
  * @internal
  */
 export const analyzeJournal = (journal: Journal): JournalAnalysis => {
-  let val: JournalAnalysis = JournalAnalysisReadOnly
+  let val: JournalAnalysis = JournalAnalysisReadOnly;
   for (const [, entry] of journal) {
-    val = Entry.isInvalid(entry) ? JournalAnalysisInvalid : Entry.isChanged(entry) ? JournalAnalysisReadWrite : val
+    val = Entry.isInvalid(entry)
+      ? JournalAnalysisInvalid
+      : Entry.isChanged(entry)
+        ? JournalAnalysisReadWrite
+        : val;
     if (val === JournalAnalysisInvalid) {
-      return val
+      return val;
     }
   }
-  return val
-}
+  return val;
+};
 
 /** @internal */
-export const prepareResetJournal = (journal: Journal): () => void => {
-  const saved: Journal = new Map<TRef.TRef<unknown>, Entry.Entry>()
+export const prepareResetJournal = (journal: Journal): (() => void) => {
+  const saved: Journal = new Map<TRef.TRef<unknown>, Entry.Entry>();
   for (const entry of journal) {
-    saved.set(entry[0], Entry.copy(entry[1]))
+    saved.set(entry[0], Entry.copy(entry[1]));
   }
   return () => {
-    journal.clear()
+    journal.clear();
     for (const entry of saved) {
-      journal.set(entry[0], entry[1])
+      journal.set(entry[0], entry[1]);
     }
-  }
-}
+  };
+};
 
 /** @internal */
 export const collectTodos = (journal: Journal): Map<TxnId.TxnId, Todo> => {
-  const allTodos: Map<TxnId.TxnId, Todo> = new Map()
+  const allTodos: Map<TxnId.TxnId, Todo> = new Map();
   for (const [, entry] of journal) {
     for (const todo of entry.ref.todos) {
-      allTodos.set(todo[0], todo[1])
+      allTodos.set(todo[0], todo[1]);
     }
-    entry.ref.todos = new Map()
+    entry.ref.todos = new Map();
   }
-  return allTodos
-}
+  return allTodos;
+};
 
 /** @internal */
 export const execTodos = (todos: Map<TxnId.TxnId, Todo>) => {
-  const todosSorted = Array.from(todos.entries()).sort((x, y) => x[0] - y[0])
+  const todosSorted = Array.from(todos.entries()).sort((x, y) => x[0] - y[0]);
   for (const [_, todo] of todosSorted) {
-    todo()
+    todo();
   }
-}
+};
 
 /** @internal */
 export const addTodo = (
@@ -95,29 +102,29 @@ export const addTodo = (
   journal: Journal,
   todoEffect: Todo
 ): boolean => {
-  let added = false
+  let added = false;
   for (const [, entry] of journal) {
     if (!entry.ref.todos.has(txnId)) {
-      entry.ref.todos.set(txnId, todoEffect)
-      added = true
+      entry.ref.todos.set(txnId, todoEffect);
+      added = true;
     }
   }
-  return added
-}
+  return added;
+};
 
 /** @internal */
 export const isValid = (journal: Journal): boolean => {
-  let valid = true
+  let valid = true;
   for (const [, entry] of journal) {
-    valid = Entry.isValid(entry)
+    valid = Entry.isValid(entry);
     if (!valid) {
-      return valid
+      return valid;
     }
   }
-  return valid
-}
+  return valid;
+};
 
 /** @internal */
 export const isInvalid = (journal: Journal): boolean => {
-  return !isValid(journal)
-}
+  return !isValid(journal);
+};

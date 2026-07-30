@@ -2,8 +2,8 @@
  * @since 1.0.0
  */
 
-import type { Doc } from "./Doc.js"
-import * as internal from "./internal/optimize.js"
+import type { Doc } from "./Doc.js";
+import * as internal from "./internal/optimize.js";
 
 // -----------------------------------------------------------------------------
 // Models
@@ -16,9 +16,7 @@ import * as internal from "./internal/optimize.js"
  * @since 1.0.0
  * @category model
  */
-export interface Optimize<A> {
-  (depth: Optimize.Depth): Doc<A>
-}
+export type Optimize<A> = (depth: Optimize.Depth) => Doc<A>;
 
 /**
  * @since 1.0.0
@@ -27,7 +25,7 @@ export declare namespace Optimize {
   /**
    * @since 1.0.0
    */
-  export type Depth = FusionDepth
+  export type Depth = FusionDepth;
 }
 
 /**
@@ -37,7 +35,7 @@ export declare namespace Optimize {
  * @since 1.0.0
  * @category model
  */
-export type FusionDepth = Shallow | Deep
+export type FusionDepth = Shallow | Deep;
 
 /**
  * Instructs the document fusion optimizer to avoid diving deeply into nested
@@ -47,7 +45,7 @@ export type FusionDepth = Shallow | Deep
  * @category model
  */
 export interface Shallow {
-  readonly _tag: "Shallow"
+  readonly _tag: "Shallow";
 }
 
 /**
@@ -66,7 +64,7 @@ export interface Shallow {
  * @category model
  */
 export interface Deep {
-  readonly _tag: "Deep"
+  readonly _tag: "Deep";
 }
 
 /**
@@ -74,16 +72,16 @@ export interface Deep {
  * @category instances
  */
 export const Shallow: FusionDepth = {
-  _tag: "Shallow"
-}
+  _tag: "Shallow",
+};
 
 /**
  * @since 1.0.0
  * @category instances
  */
 export const Deep: FusionDepth = {
-  _tag: "Deep"
-}
+  _tag: "Deep",
+};
 
 // -----------------------------------------------------------------------------
 // Optimization
@@ -127,6 +125,6 @@ export const Deep: FusionDepth = {
  * @category optimization
  */
 export const optimize: {
-  (depth: FusionDepth): <A>(self: Doc<A>) => Doc<A>
-  <A>(self: Doc<A>, depth: FusionDepth): Doc<A>
-} = internal.optimize
+  (depth: FusionDepth): <A>(self: Doc<A>) => Doc<A>;
+  <A>(self: Doc<A>, depth: FusionDepth): Doc<A>;
+} = internal.optimize;

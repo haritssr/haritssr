@@ -1,29 +1,29 @@
 /**
  * @since 1.0.0
  */
-export * as AmazonBedrockClient from "./AmazonBedrockClient.js"
+export * as AmazonBedrockClient from "./AmazonBedrockClient.js";
 
 /**
  * @since 1.0.0
  */
-export * as AmazonBedrockConfig from "./AmazonBedrockConfig.js"
+export * as AmazonBedrockConfig from "./AmazonBedrockConfig.js";
 
 /**
  * @since 1.0.0
  */
-export * as AmazonBedrockLanguageModel from "./AmazonBedrockLanguageModel.js"
+export * as AmazonBedrockLanguageModel from "./AmazonBedrockLanguageModel.js";
 
 /**
  * @since 1.0.0
  */
-export * as AmazonBedrockSchema from "./AmazonBedrockSchema.js"
+export * as AmazonBedrockSchema from "./AmazonBedrockSchema.js";
 
 /**
  * @since 1.0.0
  */
-export * as AmazonBedrockTool from "./AmazonBedrockTool.js"
+export * as AmazonBedrockTool from "./AmazonBedrockTool.js";
 
 /**
  * @since 1.0.0
  */
-export * as EventStreamEncoding from "./EventStreamEncoding.js"
+export * as EventStreamEncoding from "./EventStreamEncoding.js";

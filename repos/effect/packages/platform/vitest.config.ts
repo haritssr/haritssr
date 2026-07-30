@@ -1,5 +1,5 @@
-import { mergeConfig, type ViteUserConfig } from "vitest/config"
-import shared from "../../vitest.shared.js"
+import { mergeConfig, type ViteUserConfig } from "vitest/config";
+import shared from "../../vitest.shared.js";
 
 const config: ViteUserConfig = {
   // test: {
@@ -8,6 +8,6 @@ const config: ViteUserConfig = {
   //     include: ["src/OpenApi.ts", "src/Multipart.ts", "src/HttpApi*.ts"]
   //   }
   // }
-}
+};
 
-export default mergeConfig(shared, config)
+export default mergeConfig(shared, config);

@@ -33,7 +33,7 @@ export default function TailwindYoutubeThumbnailDemo() {
 const Play = () => {
   return (
     <svg
-      className="absolute -top-14 -left-14 h-[200px] w-[200px] text-purple-400"
+      className="-top-14 -left-14 absolute h-[200px] w-[200px] text-purple-400"
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"

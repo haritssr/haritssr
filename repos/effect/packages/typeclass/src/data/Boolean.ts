@@ -1,8 +1,8 @@
 /**
  * @since 0.24.0
  */
-import * as monoid from "../Monoid.js"
-import * as semigroup from "../Semigroup.js"
+import * as monoid from "../Monoid.js";
+import * as semigroup from "../Semigroup.js";
 
 /**
  * `boolean` semigroup under conjunction.
@@ -29,16 +29,16 @@ export const SemigroupEvery: semigroup.Semigroup<boolean> = semigroup.make(
   (self, that) => self && that,
   (self, collection) => {
     if (self === false) {
-      return false
+      return false;
     }
     for (const b of collection) {
       if (b === false) {
-        return false
+        return false;
       }
     }
-    return true
+    return true;
   }
-)
+);
 
 /**
  * `boolean` semigroup under disjunction.
@@ -65,16 +65,16 @@ export const SemigroupSome: semigroup.Semigroup<boolean> = semigroup.make(
   (self, that) => self || that,
   (self, collection) => {
     if (self === true) {
-      return true
+      return true;
     }
     for (const b of collection) {
       if (b === true) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
-)
+);
 
 /**
  * `boolean` semigroup under exclusive disjunction.
@@ -97,7 +97,9 @@ export const SemigroupSome: semigroup.Semigroup<boolean> = semigroup.make(
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupXor: semigroup.Semigroup<boolean> = semigroup.make((self, that) => self !== that)
+export const SemigroupXor: semigroup.Semigroup<boolean> = semigroup.make(
+  (self, that) => self !== that
+);
 
 /**
  * `boolean` semigroup under equivalence.
@@ -120,7 +122,9 @@ export const SemigroupXor: semigroup.Semigroup<boolean> = semigroup.make((self, 
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupEqv: semigroup.Semigroup<boolean> = semigroup.make((self, that) => self === that)
+export const SemigroupEqv: semigroup.Semigroup<boolean> = semigroup.make(
+  (self, that) => self === that
+);
 
 /**
  * `boolean` monoid under conjunction, see also {@link SemigroupEvery}.
@@ -130,7 +134,10 @@ export const SemigroupEqv: semigroup.Semigroup<boolean> = semigroup.make((self, 
  * @category instances
  * @since 0.24.0
  */
-export const MonoidEvery: monoid.Monoid<boolean> = monoid.fromSemigroup(SemigroupEvery, true)
+export const MonoidEvery: monoid.Monoid<boolean> = monoid.fromSemigroup(
+  SemigroupEvery,
+  true
+);
 
 /**
  * `boolean` monoid under disjunction, see also {@link SemigroupSome}.
@@ -140,7 +147,10 @@ export const MonoidEvery: monoid.Monoid<boolean> = monoid.fromSemigroup(Semigrou
  * @category instances
  * @since 0.24.0
  */
-export const MonoidSome: monoid.Monoid<boolean> = monoid.fromSemigroup(SemigroupSome, false)
+export const MonoidSome: monoid.Monoid<boolean> = monoid.fromSemigroup(
+  SemigroupSome,
+  false
+);
 
 /**
  * `boolean` monoid under exclusive disjunction, see also {@link SemigroupXor}.
@@ -150,7 +160,10 @@ export const MonoidSome: monoid.Monoid<boolean> = monoid.fromSemigroup(Semigroup
  * @category instances
  * @since 0.24.0
  */
-export const MonoidXor: monoid.Monoid<boolean> = monoid.fromSemigroup(SemigroupXor, false)
+export const MonoidXor: monoid.Monoid<boolean> = monoid.fromSemigroup(
+  SemigroupXor,
+  false
+);
 
 /**
  * `boolean` monoid under equivalence.
@@ -160,4 +173,7 @@ export const MonoidXor: monoid.Monoid<boolean> = monoid.fromSemigroup(SemigroupX
  * @category instances
  * @since 0.24.0
  */
-export const MonoidEqv: monoid.Monoid<boolean> = monoid.fromSemigroup(SemigroupEqv, true)
+export const MonoidEqv: monoid.Monoid<boolean> = monoid.fromSemigroup(
+  SemigroupEqv,
+  true
+);

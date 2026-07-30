@@ -13,7 +13,7 @@ function boldharitssr(strippedURL: string, haritssr = "haritssr") {
         </span>
       ) : (
         chunk
-      ),
+      )
     );
 }
 
@@ -36,8 +36,17 @@ function renderContact(each: { link: string; icon: string }) {
         target="_blank"
         title={each.link}
       >
-        <Image alt={each.link} className="h-4 w-4" height={20} src={each.icon} title={each.link} width={20} />
-        <span className="text-zinc-500">{boldharitssr(each.link.replace(URL_REGEX, ""))}</span>
+        <Image
+          alt={each.link}
+          className="h-4 w-4"
+          height={20}
+          src={each.icon}
+          title={each.link}
+          width={20}
+        />
+        <span className="text-zinc-500">
+          {boldharitssr(each.link.replace(URL_REGEX, ""))}
+        </span>
       </a>
     );
   }
@@ -49,7 +58,14 @@ function renderContact(each: { link: string; icon: string }) {
         href={`mailto:${each.link}`}
         title={each.link}
       >
-        <Image alt={each.link} className="h-4 w-4" height={20} src={each.icon} title={each.link} width={20} />
+        <Image
+          alt={each.link}
+          className="h-4 w-4"
+          height={20}
+          src={each.icon}
+          title={each.link}
+          width={20}
+        />
         <span className="text-zinc-500">{boldharitssr(each.link)}</span>
       </a>
     );

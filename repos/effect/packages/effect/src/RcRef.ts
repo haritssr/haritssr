@@ -1,46 +1,48 @@
 /**
  * @since 3.5.0
  */
-import type * as Duration from "./Duration.js"
-import type * as Effect from "./Effect.js"
-import * as internal from "./internal/rcRef.js"
-import type * as Readable from "./Readable.js"
-import type * as Scope from "./Scope.js"
-import type * as Types from "./Types.js"
-import type * as Unify from "./Unify.js"
+import type * as Duration from "./Duration.js";
+import type * as Effect from "./Effect.js";
+import * as internal from "./internal/rcRef.js";
+import type * as Readable from "./Readable.js";
+import type * as Scope from "./Scope.js";
+import type * as Types from "./Types.js";
+import type * as Unify from "./Unify.js";
 
 /**
  * @since 3.5.0
  * @category type ids
  */
-export const TypeId: unique symbol = internal.TypeId
+export const TypeId: unique symbol = internal.TypeId;
 
 /**
  * @since 3.5.0
  * @category type ids
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * @since 3.5.0
  * @category models
  */
 export interface RcRef<out A, out E = never>
-  extends Effect.Effect<A, E, Scope.Scope>, Readable.Readable<A, E, Scope.Scope>
-{
-  readonly [TypeId]: RcRef.Variance<A, E>
-  readonly [Unify.typeSymbol]?: unknown
-  readonly [Unify.unifySymbol]?: RcRefUnify<this>
-  readonly [Unify.ignoreSymbol]?: RcRefUnifyIgnore
+  extends Effect.Effect<A, E, Scope.Scope>,
+    Readable.Readable<A, E, Scope.Scope> {
+  readonly [TypeId]: RcRef.Variance<A, E>;
+  readonly [Unify.typeSymbol]?: unknown;
+  readonly [Unify.unifySymbol]?: RcRefUnify<this>;
+  readonly [Unify.ignoreSymbol]?: RcRefUnifyIgnore;
 }
 
 /**
  * @category models
  * @since 3.8.0
  */
-export interface RcRefUnify<A extends { [Unify.typeSymbol]?: any }> extends Effect.EffectUnify<A> {
-  RcRef?: () => A[Unify.typeSymbol] extends RcRef<infer A0, infer E0> | infer _ ? RcRef<A0, E0>
-    : never
+export interface RcRefUnify<A extends { [Unify.typeSymbol]?: any }>
+  extends Effect.EffectUnify<A> {
+  RcRef?: () => A[Unify.typeSymbol] extends RcRef<infer A0, infer E0> | infer _
+    ? RcRef<A0, E0>
+    : never;
 }
 
 /**
@@ -48,7 +50,7 @@ export interface RcRefUnify<A extends { [Unify.typeSymbol]?: any }> extends Effe
  * @since 3.8.0
  */
 export interface RcRefUnifyIgnore extends Effect.EffectUnifyIgnore {
-  Effect?: true
+  Effect?: true;
 }
 /**
  * @since 3.5.0
@@ -60,8 +62,8 @@ export declare namespace RcRef {
    * @category models
    */
   export interface Variance<A, E> {
-    readonly _A: Types.Covariant<A>
-    readonly _E: Types.Covariant<E>
+    readonly _A: Types.Covariant<A>;
+    readonly _E: Types.Covariant<E>;
   }
 }
 
@@ -97,26 +99,27 @@ export declare namespace RcRef {
  * })
  * ```
  */
-export const make: <A, E, R>(
-  options: {
-    readonly acquire: Effect.Effect<A, E, R>
-    /**
-     * When the reference count reaches zero, the resource will be released
-     * after this duration.
-     */
-    readonly idleTimeToLive?: Duration.DurationInput | undefined
-  }
-) => Effect.Effect<RcRef<A, E>, never, R | Scope.Scope> = internal.make
+export const make: <A, E, R>(options: {
+  readonly acquire: Effect.Effect<A, E, R>;
+  /**
+   * When the reference count reaches zero, the resource will be released
+   * after this duration.
+   */
+  readonly idleTimeToLive?: Duration.DurationInput | undefined;
+}) => Effect.Effect<RcRef<A, E>, never, R | Scope.Scope> = internal.make;
 
 /**
  * @since 3.5.0
  * @category combinators
  */
-export const get: <A, E>(self: RcRef<A, E>) => Effect.Effect<A, E, Scope.Scope> = internal.get
+export const get: <A, E>(
+  self: RcRef<A, E>
+) => Effect.Effect<A, E, Scope.Scope> = internal.get;
 
 /**
  * @since 3.19.6
  * @category combinators
  * @experimental
  */
-export const invalidate: <A, E>(self: RcRef<A, E>) => Effect.Effect<void> = internal.invalidate
+export const invalidate: <A, E>(self: RcRef<A, E>) => Effect.Effect<void> =
+  internal.invalidate;

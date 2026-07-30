@@ -69,12 +69,12 @@
  *
  * @since 1.0.0
  */
-import type * as HttpClientError from "@effect/platform/HttpClientError"
-import * as Effect from "effect/Effect"
-import * as Inspectable from "effect/Inspectable"
-import type { ParseError } from "effect/ParseResult"
-import * as Predicate from "effect/Predicate"
-import * as Schema from "effect/Schema"
+import type * as HttpClientError from "@effect/platform/HttpClientError";
+import * as Effect from "effect/Effect";
+import * as Inspectable from "effect/Inspectable";
+import type { ParseError } from "effect/ParseResult";
+import * as Predicate from "effect/Predicate";
+import * as Schema from "effect/Schema";
 
 /**
  * Unique identifier for AI errors.
@@ -82,7 +82,7 @@ import * as Schema from "effect/Schema"
  * @since 1.0.0
  * @category Type Ids
  */
-export const TypeId = "~@effect/ai/AiError"
+export const TypeId = "~@effect/ai/AiError";
 
 /**
  * Type-level representation of the AI error identifier.
@@ -90,7 +90,7 @@ export const TypeId = "~@effect/ai/AiError"
  * @since 1.0.0
  * @category Type Ids
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * Type guard to check if a value is an AI error.
@@ -115,7 +115,8 @@ export type TypeId = typeof TypeId
  * @since 1.0.0
  * @category Guards
  */
-export const isAiError = (u: unknown): u is AiError => Predicate.hasProperty(u, TypeId)
+export const isAiError = (u: unknown): u is AiError =>
+  Predicate.hasProperty(u, TypeId);
 
 // =============================================================================
 // Http Request Error
@@ -145,12 +146,20 @@ export const isAiError = (u: unknown): u is AiError => Predicate.hasProperty(u, 
  * @category Schemas
  */
 export const HttpRequestDetails = Schema.Struct({
-  method: Schema.Literal("GET", "POST", "PATCH", "PUT", "DELETE", "HEAD", "OPTIONS"),
+  method: Schema.Literal(
+    "GET",
+    "POST",
+    "PATCH",
+    "PUT",
+    "DELETE",
+    "HEAD",
+    "OPTIONS"
+  ),
   url: Schema.String,
   urlParams: Schema.Array(Schema.Tuple(Schema.String, Schema.String)),
   hash: Schema.Option(Schema.String),
-  headers: Schema.Record({ key: Schema.String, value: Schema.String })
-}).annotations({ identifier: "HttpRequestDetails" })
+  headers: Schema.Record({ key: Schema.String, value: Schema.String }),
+}).annotations({ identifier: "HttpRequestDetails" });
 
 /**
  * Error that occurs during HTTP request processing.
@@ -196,12 +205,12 @@ export class HttpRequestError extends Schema.TaggedError<HttpRequestError>(
   reason: Schema.Literal("Transport", "Encode", "InvalidUrl"),
   request: HttpRequestDetails,
   description: Schema.optional(Schema.String),
-  cause: Schema.optional(Schema.Defect)
+  cause: Schema.optional(Schema.Defect),
 }) {
   /**
    * @since 1.0.0
    */
-  readonly [TypeId]: TypeId = TypeId
+  readonly [TypeId]: TypeId = TypeId;
 
   /**
    * Creates an HttpRequestError from a platform HttpClientError.RequestError.
@@ -224,57 +233,67 @@ export class HttpRequestError extends Schema.TaggedError<HttpRequestError>(
    * @since 1.0.0
    * @category Constructors
    */
-  static fromRequestError({ error, ...params }: {
-    readonly module: string
-    readonly method: string
-    readonly error: HttpClientError.RequestError
+  static fromRequestError({
+    error,
+    ...params
+  }: {
+    readonly module: string;
+    readonly method: string;
+    readonly error: HttpClientError.RequestError;
   }): HttpRequestError {
-    return new HttpRequestError({
-      ...params,
-      cause: error,
-      description: error.description,
-      reason: error.reason,
-      request: {
-        hash: error.request.hash,
-        headers: Inspectable.redact(error.request.headers) as any,
-        method: error.request.method,
-        url: error.request.url,
-        urlParams: error.request.urlParams
-      }
-    }, { disableValidation: true })
+    return new HttpRequestError(
+      {
+        ...params,
+        cause: error,
+        description: error.description,
+        reason: error.reason,
+        request: {
+          hash: error.request.hash,
+          headers: Inspectable.redact(error.request.headers) as any,
+          method: error.request.method,
+          url: error.request.url,
+          urlParams: error.request.urlParams,
+        },
+      },
+      { disableValidation: true }
+    );
   }
 
   get message(): string {
-    const methodAndUrl = `${this.request.method} ${this.request.url}`
+    const methodAndUrl = `${this.request.method} ${this.request.url}`;
 
     let baseMessage = this.description
       ? `${this.reason}: ${this.description}`
-      : `${this.reason}: An HTTP request error occurred.`
+      : `${this.reason}: An HTTP request error occurred.`;
 
-    baseMessage += ` (${methodAndUrl})`
+    baseMessage += ` (${methodAndUrl})`;
 
-    let suggestion = ""
+    let suggestion = "";
     switch (this.reason) {
       case "Encode": {
-        suggestion += "Check that the request body data is properly formatted and matches the expected content type."
-        break
+        suggestion +=
+          "Check that the request body data is properly formatted and matches the expected content type.";
+        break;
       }
 
       case "InvalidUrl": {
-        suggestion += "Verify that the URL format is correct and that all required parameters have been provided."
-        suggestion += " Check for any special characters that may need encoding."
-        break
+        suggestion +=
+          "Verify that the URL format is correct and that all required parameters have been provided.";
+        suggestion +=
+          " Check for any special characters that may need encoding.";
+        break;
       }
 
       case "Transport": {
-        suggestion += "Check your network connection and verify that the requested URL is accessible."
-        break
+        suggestion +=
+          "Check your network connection and verify that the requested URL is accessible.";
+        break;
       }
     }
 
-    baseMessage += `\n\nSuggestion: ${suggestion}`
+    baseMessage += `\n\nSuggestion: ${suggestion}`;
 
-    return baseMessage
+    return baseMessage;
   }
 }
 
@@ -307,8 +326,8 @@ export class HttpRequestError extends Schema.TaggedError<HttpRequestError>(
  */
 export const HttpResponseDetails = Schema.Struct({
   status: Schema.Number,
-  headers: Schema.Record({ key: Schema.String, value: Schema.String })
-}).annotations({ identifier: "HttpResponseDetails" })
+  headers: Schema.Record({ key: Schema.String, value: Schema.String }),
+}).annotations({ identifier: "HttpResponseDetails" });
 
 /**
  * Error that occurs during HTTP response processing.
@@ -356,12 +375,12 @@ export class HttpResponseError extends Schema.TaggedError<HttpResponseError>(
   response: HttpResponseDetails,
   body: Schema.optional(Schema.String),
   reason: Schema.Literal("StatusCode", "Decode", "EmptyBody"),
-  description: Schema.optional(Schema.String)
+  description: Schema.optional(Schema.String),
 }) {
   /**
    * @since 1.0.0
    */
-  readonly [TypeId]: TypeId = TypeId
+  readonly [TypeId]: TypeId = TypeId;
 
   /**
    * Creates an HttpResponseError from a platform HttpClientError.ResponseError.
@@ -384,73 +403,88 @@ export class HttpResponseError extends Schema.TaggedError<HttpResponseError>(
    * @since 1.0.0
    * @category Constructors
    */
-  static fromResponseError({ error, ...params }: {
-    readonly module: string
-    readonly method: string
-    readonly error: HttpClientError.ResponseError
+  static fromResponseError({
+    error,
+    ...params
+  }: {
+    readonly module: string;
+    readonly method: string;
+    readonly error: HttpClientError.ResponseError;
   }): Effect.Effect<never, HttpResponseError> {
-    let body: Effect.Effect<unknown, HttpClientError.ResponseError> = Effect.void
-    const contentType = error.response.headers["content-type"] ?? ""
+    let body: Effect.Effect<unknown, HttpClientError.ResponseError> =
+      Effect.void;
+    const contentType = error.response.headers["content-type"] ?? "";
     if (contentType.includes("application/json")) {
-      body = error.response.json
-    } else if (contentType.includes("text/") || contentType.includes("urlencoded")) {
-      body = error.response.text
+      body = error.response.json;
+    } else if (
+      contentType.includes("text/") ||
+      contentType.includes("urlencoded")
+    ) {
+      body = error.response.text;
     }
-    return Effect.flatMap(Effect.merge(body), (body) =>
-      new HttpResponseError({
-        ...params,
-        description: error.description,
-        reason: error.reason,
-        request: {
-          hash: error.request.hash,
-          headers: Inspectable.redact(error.request.headers) as any,
-          method: error.request.method,
-          url: error.request.url,
-          urlParams: error.request.urlParams
-        },
-        response: {
-          headers: Inspectable.redact(error.response.headers) as any,
-          status: error.response.status
-        },
-        body: Inspectable.format(body)
-      }, { disableValidation: true }))
+    return Effect.flatMap(
+      Effect.merge(body),
+      (body) =>
+        new HttpResponseError(
+          {
+            ...params,
+            description: error.description,
+            reason: error.reason,
+            request: {
+              hash: error.request.hash,
+              headers: Inspectable.redact(error.request.headers) as any,
+              method: error.request.method,
+              url: error.request.url,
+              urlParams: error.request.urlParams,
+            },
+            response: {
+              headers: Inspectable.redact(error.response.headers) as any,
+              status: error.response.status,
+            },
+            body: Inspectable.format(body),
+          },
+          { disableValidation: true }
+        )
+    );
   }
 
   get message(): string {
-    const methodUrlStatus = `${this.response.status} ${this.request.method} ${this.request.url}`
+    const methodUrlStatus = `${this.response.status} ${this.request.method} ${this.request.url}`;
 
     let baseMessage = this.description
       ? `${this.reason}: ${this.description}`
-      : `${this.reason}: An HTTP response error occurred.`
+      : `${this.reason}: An HTTP response error occurred.`;
 
-    baseMessage += ` (${methodUrlStatus})`
+    baseMessage += ` (${methodUrlStatus})`;
 
-    let suggestion = ""
+    let suggestion = "";
     switch (this.reason) {
       case "Decode": {
-        suggestion += "The response format does not match what is expected. " +
+        suggestion +=
+          "The response format does not match what is expected. " +
           "Verify API version compatibility, check response content-type, " +
-          "and/or examine if the endpoint schema has changed."
-        break
+          "and/or examine if the endpoint schema has changed.";
+        break;
       }
       case "EmptyBody": {
-        suggestion += "The response body was empty. This may indicate a server " +
-          "issue, API version mismatch, or the endpoint may have changed its response format."
-        break
+        suggestion +=
+          "The response body was empty. This may indicate a server " +
+          "issue, API version mismatch, or the endpoint may have changed its response format.";
+        break;
       }
       case "StatusCode": {
-        suggestion += getStatusCodeSuggestion(this.response.status)
-        break
+        suggestion += getStatusCodeSuggestion(this.response.status);
+        break;
       }
     }
 
-    baseMessage += `\n\n${suggestion}`
+    baseMessage += `\n\n${suggestion}`;
 
     if (Predicate.isNotUndefined(this.body)) {
-      baseMessage += `\n\nResponse Body: ${this.body}`
+      baseMessage += `\n\nResponse Body: ${this.body}`;
     }
 
-    return baseMessage
+    return baseMessage;
   }
 }
 
@@ -495,12 +529,12 @@ export class MalformedInput extends Schema.TaggedError<MalformedInput>(
   module: Schema.String,
   method: Schema.String,
   description: Schema.optional(Schema.String),
-  cause: Schema.optional(Schema.Defect)
+  cause: Schema.optional(Schema.Defect),
 }) {
   /**
    * @since 1.0.0
    */
-  readonly [TypeId]: TypeId = TypeId
+  readonly [TypeId]: TypeId = TypeId;
 }
 
 // =============================================================================
@@ -552,12 +586,12 @@ export class MalformedOutput extends Schema.TaggedError<MalformedOutput>(
   module: Schema.String,
   method: Schema.String,
   description: Schema.optional(Schema.String),
-  cause: Schema.optional(Schema.Defect)
+  cause: Schema.optional(Schema.Defect),
 }) {
   /**
    * @since 1.0.0
    */
-  readonly [TypeId]: TypeId = TypeId
+  readonly [TypeId]: TypeId = TypeId;
 
   /**
    * Creates a MalformedOutput error from a Schema ParseError.
@@ -587,17 +621,20 @@ export class MalformedOutput extends Schema.TaggedError<MalformedOutput>(
    * @since 1.0.0
    * @category Constructors
    */
-  static fromParseError({ error, ...params }: {
-    readonly module: string
-    readonly method: string
-    readonly description?: string
-    readonly error: ParseError
+  static fromParseError({
+    error,
+    ...params
+  }: {
+    readonly module: string;
+    readonly method: string;
+    readonly description?: string;
+    readonly error: ParseError;
   }): MalformedOutput {
     // TODO(Max): enhance
     return new MalformedOutput({
       ...params,
-      cause: error
-    })
+      cause: error,
+    });
   }
 }
 
@@ -649,21 +686,21 @@ export class UnknownError extends Schema.TaggedError<UnknownError>(
   module: Schema.String,
   method: Schema.String,
   description: Schema.optional(Schema.String),
-  cause: Schema.optional(Schema.Defect)
+  cause: Schema.optional(Schema.Defect),
 }) {
   /**
    * @since 1.0.0
    */
-  readonly [TypeId]: TypeId = TypeId
+  readonly [TypeId]: TypeId = TypeId;
 
   /**
    * @since 1.0.0
    */
   get message(): string {
-    const moduleMethod = `${this.module}.${this.method}`
+    const moduleMethod = `${this.module}.${this.method}`;
     return Predicate.isUndefined(this.description)
       ? `${moduleMethod}: An error occurred`
-      : `${moduleMethod}: ${this.description}`
+      : `${moduleMethod}: ${this.description}`;
   }
 }
 
@@ -709,7 +746,7 @@ export type AiError =
   | HttpResponseError
   | MalformedInput
   | MalformedOutput
-  | UnknownError
+  | UnknownError;
 
 /**
  * Schema for validating and parsing AI errors.
@@ -742,19 +779,21 @@ export type AiError =
  * @since 1.0.0
  * @category Schemas
  */
-export const AiError: Schema.Union<[
-  typeof HttpRequestError,
-  typeof HttpResponseError,
-  typeof MalformedInput,
-  typeof MalformedOutput,
-  typeof UnknownError
-]> = Schema.Union(
+export const AiError: Schema.Union<
+  [
+    typeof HttpRequestError,
+    typeof HttpResponseError,
+    typeof MalformedInput,
+    typeof MalformedOutput,
+    typeof UnknownError,
+  ]
+> = Schema.Union(
   HttpRequestError,
   HttpResponseError,
   MalformedInput,
   MalformedOutput,
   UnknownError
-)
+);
 
 // =============================================================================
 // Utilities
@@ -764,25 +803,25 @@ const getStatusCodeSuggestion = (statusCode: number): string => {
   if (statusCode >= 400 && statusCode < 500) {
     switch (statusCode) {
       case 400:
-        return "Bad Request - Check request parameters, headers, and body format against API documentation."
+        return "Bad Request - Check request parameters, headers, and body format against API documentation.";
       case 401:
-        return "Unauthorized - Verify API key, authentication credentials, or token expiration."
+        return "Unauthorized - Verify API key, authentication credentials, or token expiration.";
       case 403:
-        return "Forbidden - Check API permissions, usage limits, or resource access rights."
+        return "Forbidden - Check API permissions, usage limits, or resource access rights.";
       case 404:
-        return "Not Found - Verify the endpoint URL, API version, and resource identifiers."
+        return "Not Found - Verify the endpoint URL, API version, and resource identifiers.";
       case 408:
-        return "Request Timeout - Consider increasing timeout duration or implementing retry logic."
+        return "Request Timeout - Consider increasing timeout duration or implementing retry logic.";
       case 422:
-        return "Unprocessable Entity - Check request data validation, required fields, and data formats."
+        return "Unprocessable Entity - Check request data validation, required fields, and data formats.";
       case 429:
-        return "Rate Limited - Implement exponential backoff or reduce request frequency."
+        return "Rate Limited - Implement exponential backoff or reduce request frequency.";
       default:
-        return "Client error - Review request format, parameters, and API documentation."
+        return "Client error - Review request format, parameters, and API documentation.";
     }
-  } else if (statusCode >= 500) {
-    return "Server error - This is likely temporary. Implement retry logic with exponential backoff."
-  } else {
-    return "Check API documentation for this status code."
   }
-}
+  if (statusCode >= 500) {
+    return "Server error - This is likely temporary. Implement retry logic with exponential backoff.";
+  }
+  return "Check API documentation for this status code.";
+};

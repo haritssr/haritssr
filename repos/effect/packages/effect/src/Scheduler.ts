@@ -2,26 +2,30 @@
  * @since 2.0.0
  */
 
-import type { Effect } from "./Effect.js"
-import type { RuntimeFiber } from "./Fiber.js"
-import type { FiberRef } from "./FiberRef.js"
-import { dual } from "./Function.js"
-import { globalValue } from "./GlobalValue.js"
-import * as core from "./internal/core.js"
+import type { Effect } from "./Effect.js";
+import type { RuntimeFiber } from "./Fiber.js";
+import type { FiberRef } from "./FiberRef.js";
+import { dual } from "./Function.js";
+import { globalValue } from "./GlobalValue.js";
+import * as core from "./internal/core.js";
 
 /**
  * @since 2.0.0
  * @category models
  */
-export type Task = () => void
+export type Task = () => void;
 
 /**
  * @since 2.0.0
  * @category models
  */
 export interface Scheduler {
-  shouldYield(fiber: RuntimeFiber<unknown, unknown>): number | false
-  scheduleTask(task: Task, priority: number, fiber?: RuntimeFiber<unknown, unknown>): void
+  shouldYield(fiber: RuntimeFiber<unknown, unknown>): number | false;
+  scheduleTask(
+    task: Task,
+    priority: number,
+    fiber?: RuntimeFiber<unknown, unknown>
+  ): void;
 }
 
 /**
@@ -29,37 +33,40 @@ export interface Scheduler {
  * @category models
  */
 export class SchedulerRunner {
-  running = false
-  tasks = new PriorityBuckets()
+  running = false;
+  tasks = new PriorityBuckets();
 
   constructor(
-    readonly scheduleDrain: (depth: number, drain: (depth: number) => void) => void
+    readonly scheduleDrain: (
+      depth: number,
+      drain: (depth: number) => void
+    ) => void
   ) {}
 
   private starveInternal = (depth: number) => {
-    const tasks = this.tasks.buckets
-    this.tasks.buckets = []
+    const tasks = this.tasks.buckets;
+    this.tasks.buckets = [];
     for (const [_, toRun] of tasks) {
       for (let i = 0; i < toRun.length; i++) {
-        toRun[i]()
+        toRun[i]();
       }
     }
     if (this.tasks.buckets.length === 0) {
-      this.running = false
+      this.running = false;
     } else {
-      this.starve(depth)
+      this.starve(depth);
     }
-  }
+  };
 
   private starve(depth = 0) {
-    this.scheduleDrain(depth, this.starveInternal)
+    this.scheduleDrain(depth, this.starveInternal);
   }
 
   scheduleTask(task: Task, priority: number) {
-    this.tasks.scheduleTask(task, priority)
+    this.tasks.scheduleTask(task, priority);
     if (!this.running) {
-      this.running = true
-      this.starve()
+      this.running = true;
+      this.starve();
     }
   }
   /**
@@ -69,20 +76,23 @@ export class SchedulerRunner {
   static cached(
     scheduleDrain: (depth: number, drain: (depth: number) => void) => void
   ) {
-    const fallback = new SchedulerRunner(scheduleDrain)
-    const runners = new WeakMap<RuntimeFiber<unknown, unknown>, SchedulerRunner>()
+    const fallback = new SchedulerRunner(scheduleDrain);
+    const runners = new WeakMap<
+      RuntimeFiber<unknown, unknown>,
+      SchedulerRunner
+    >();
 
     return (fiber?: RuntimeFiber<unknown, unknown>) => {
       if (fiber === undefined) {
-        return fallback
+        return fallback;
       }
-      let runner = runners.get(fiber)
+      let runner = runners.get(fiber);
       if (runner === undefined) {
-        runner = new SchedulerRunner(scheduleDrain)
-        runners.set(fiber, runner)
+        runner = new SchedulerRunner(scheduleDrain);
+        runners.set(fiber, runner);
       }
-      return runner
-    }
+      return runner;
+    };
   }
 }
 
@@ -94,27 +104,27 @@ export class PriorityBuckets<in out T = Task> {
   /**
    * @since 2.0.0
    */
-  public buckets: Array<[number, Array<T>]> = []
+  public buckets: Array<[number, Array<T>]> = [];
   /**
    * @since 2.0.0
    */
   scheduleTask(task: T, priority: number) {
-    const length = this.buckets.length
-    let bucket: [number, Array<T>] | undefined = undefined
-    let index = 0
+    const length = this.buckets.length;
+    let bucket: [number, Array<T>] | undefined;
+    let index = 0;
     for (; index < length; index++) {
       if (this.buckets[index][0] <= priority) {
-        bucket = this.buckets[index]
+        bucket = this.buckets[index];
       } else {
-        break
+        break;
       }
     }
     if (bucket && bucket[0] === priority) {
-      bucket[1].push(task)
+      bucket[1].push(task);
     } else if (index === length) {
-      this.buckets.push([priority, [task]])
+      this.buckets.push([priority, [task]]);
     } else {
-      this.buckets.splice(index, 0, [priority, [task]])
+      this.buckets.splice(index, 0, [priority, [task]]);
     }
   }
 }
@@ -126,11 +136,11 @@ export class PriorityBuckets<in out T = Task> {
 export class MixedScheduler implements Scheduler {
   private readonly getRunner = SchedulerRunner.cached((depth, drain) => {
     if (depth >= this.maxNextTickBeforeTimer) {
-      setTimeout(() => drain(0), 0)
+      setTimeout(() => drain(0), 0);
     } else {
-      Promise.resolve(void 0).then(() => drain(depth + 1))
+      Promise.resolve(void 0).then(() => drain(depth + 1));
     }
-  })
+  });
 
   constructor(
     /**
@@ -143,16 +153,21 @@ export class MixedScheduler implements Scheduler {
    * @since 2.0.0
    */
   shouldYield(fiber: RuntimeFiber<unknown, unknown>): number | false {
-    return fiber.currentOpCount > fiber.getFiberRef(core.currentMaxOpsBeforeYield)
+    return fiber.currentOpCount >
+      fiber.getFiberRef(core.currentMaxOpsBeforeYield)
       ? fiber.getFiberRef(core.currentSchedulingPriority)
-      : false
+      : false;
   }
 
   /**
    * @since 2.0.0
    */
-  scheduleTask(task: Task, priority: number, fiber?: RuntimeFiber<unknown, unknown>) {
-    this.getRunner(fiber).scheduleTask(task, priority)
+  scheduleTask(
+    task: Task,
+    priority: number,
+    fiber?: RuntimeFiber<unknown, unknown>
+  ) {
+    this.getRunner(fiber).scheduleTask(task, priority);
   }
 }
 
@@ -163,7 +178,7 @@ export class MixedScheduler implements Scheduler {
 export const defaultScheduler: Scheduler = globalValue(
   Symbol.for("effect/Scheduler/defaultScheduler"),
   () => new MixedScheduler(2048)
-)
+);
 
 /**
  * @since 2.0.0
@@ -173,21 +188,25 @@ export class SyncScheduler implements Scheduler {
   /**
    * @since 2.0.0
    */
-  tasks = new PriorityBuckets()
+  tasks = new PriorityBuckets();
 
   /**
    * @since 2.0.0
    */
-  deferred = false
+  deferred = false;
 
   /**
    * @since 2.0.0
    */
-  scheduleTask(task: Task, priority: number, fiber?: RuntimeFiber<unknown, unknown>) {
+  scheduleTask(
+    task: Task,
+    priority: number,
+    fiber?: RuntimeFiber<unknown, unknown>
+  ) {
     if (this.deferred) {
-      defaultScheduler.scheduleTask(task, priority, fiber)
+      defaultScheduler.scheduleTask(task, priority, fiber);
     } else {
-      this.tasks.scheduleTask(task, priority)
+      this.tasks.scheduleTask(task, priority);
     }
   }
 
@@ -195,9 +214,10 @@ export class SyncScheduler implements Scheduler {
    * @since 2.0.0
    */
   shouldYield(fiber: RuntimeFiber<unknown, unknown>): number | false {
-    return fiber.currentOpCount > fiber.getFiberRef(core.currentMaxOpsBeforeYield)
+    return fiber.currentOpCount >
+      fiber.getFiberRef(core.currentMaxOpsBeforeYield)
       ? fiber.getFiberRef(core.currentSchedulingPriority)
-      : false
+      : false;
   }
 
   /**
@@ -205,15 +225,15 @@ export class SyncScheduler implements Scheduler {
    */
   flush() {
     while (this.tasks.buckets.length > 0) {
-      const tasks = this.tasks.buckets
-      this.tasks.buckets = []
+      const tasks = this.tasks.buckets;
+      this.tasks.buckets = [];
       for (const [_, toRun] of tasks) {
         for (let i = 0; i < toRun.length; i++) {
-          toRun[i]()
+          toRun[i]();
         }
       }
     }
-    this.deferred = true
+    this.deferred = true;
   }
 }
 
@@ -225,21 +245,25 @@ export class ControlledScheduler implements Scheduler {
   /**
    * @since 2.0.0
    */
-  tasks = new PriorityBuckets()
+  tasks = new PriorityBuckets();
 
   /**
    * @since 2.0.0
    */
-  deferred = false
+  deferred = false;
 
   /**
    * @since 2.0.0
    */
-  scheduleTask(task: Task, priority: number, fiber?: RuntimeFiber<unknown, unknown>) {
+  scheduleTask(
+    task: Task,
+    priority: number,
+    fiber?: RuntimeFiber<unknown, unknown>
+  ) {
     if (this.deferred) {
-      defaultScheduler.scheduleTask(task, priority, fiber)
+      defaultScheduler.scheduleTask(task, priority, fiber);
     } else {
-      this.tasks.scheduleTask(task, priority)
+      this.tasks.scheduleTask(task, priority);
     }
   }
 
@@ -247,20 +271,21 @@ export class ControlledScheduler implements Scheduler {
    * @since 2.0.0
    */
   shouldYield(fiber: RuntimeFiber<unknown, unknown>): number | false {
-    return fiber.currentOpCount > fiber.getFiberRef(core.currentMaxOpsBeforeYield)
+    return fiber.currentOpCount >
+      fiber.getFiberRef(core.currentMaxOpsBeforeYield)
       ? fiber.getFiberRef(core.currentSchedulingPriority)
-      : false
+      : false;
   }
 
   /**
    * @since 2.0.0
    */
   step() {
-    const tasks = this.tasks.buckets
-    this.tasks.buckets = []
+    const tasks = this.tasks.buckets;
+    this.tasks.buckets = [];
     for (const [_, toRun] of tasks) {
       for (let i = 0; i < toRun.length; i++) {
-        toRun[i]()
+        toRun[i]();
       }
     }
   }
@@ -270,31 +295,41 @@ export class ControlledScheduler implements Scheduler {
  * @since 2.0.0
  * @category constructors
  */
-export const makeMatrix = (...record: Array<[number, Scheduler]>): Scheduler => {
-  const index = record.sort(([p0], [p1]) => p0 < p1 ? -1 : p0 > p1 ? 1 : 0)
+export const makeMatrix = (
+  ...record: Array<[number, Scheduler]>
+): Scheduler => {
+  const index = record.sort(([p0], [p1]) => (p0 < p1 ? -1 : p0 > p1 ? 1 : 0));
   return {
     shouldYield(fiber) {
       for (const scheduler of record) {
-        const priority = scheduler[1].shouldYield(fiber)
+        const priority = scheduler[1].shouldYield(fiber);
         if (priority !== false) {
-          return priority
+          return priority;
         }
       }
-      return false
+      return false;
     },
     scheduleTask(task, priority, fiber) {
-      let scheduler: Scheduler | undefined = undefined
+      let scheduler: Scheduler | undefined;
       for (const i of index) {
         if (priority >= i[0]) {
-          scheduler = i[1]
+          scheduler = i[1];
         } else {
-          return (scheduler ?? defaultScheduler).scheduleTask(task, priority, fiber)
+          return (scheduler ?? defaultScheduler).scheduleTask(
+            task,
+            priority,
+            fiber
+          );
         }
       }
-      return (scheduler ?? defaultScheduler).scheduleTask(task, priority, fiber)
-    }
-  }
-}
+      return (scheduler ?? defaultScheduler).scheduleTask(
+        task,
+        priority,
+        fiber
+      );
+    },
+  };
+};
 
 /**
  * @since 2.0.0
@@ -303,8 +338,8 @@ export const makeMatrix = (...record: Array<[number, Scheduler]>): Scheduler => 
 export const defaultShouldYield: Scheduler["shouldYield"] = (fiber) => {
   return fiber.currentOpCount > fiber.getFiberRef(core.currentMaxOpsBeforeYield)
     ? fiber.getFiberRef(core.currentSchedulingPriority)
-    : false
-}
+    : false;
+};
 
 /**
  * @since 2.0.0
@@ -315,8 +350,8 @@ export const make = (
   shouldYield: Scheduler["shouldYield"] = defaultShouldYield
 ): Scheduler => ({
   scheduleTask,
-  shouldYield
-})
+  shouldYield,
+});
 
 /**
  * @since 2.0.0
@@ -327,36 +362,42 @@ export const makeBatched = (
   shouldYield: Scheduler["shouldYield"] = defaultShouldYield
 ) => {
   const getRunner = SchedulerRunner.cached((_, drain) => {
-    callback(() => drain(0))
-  })
+    callback(() => drain(0));
+  });
 
   return make((task, priority, fiber) => {
-    getRunner(fiber).scheduleTask(task, priority)
-  }, shouldYield)
-}
+    getRunner(fiber).scheduleTask(task, priority);
+  }, shouldYield);
+};
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const timer = (ms: number, shouldYield: Scheduler["shouldYield"] = defaultShouldYield) =>
-  make((task) => setTimeout(task, ms), shouldYield)
+export const timer = (
+  ms: number,
+  shouldYield: Scheduler["shouldYield"] = defaultShouldYield
+) => make((task) => setTimeout(task, ms), shouldYield);
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const timerBatched = (ms: number, shouldYield: Scheduler["shouldYield"] = defaultShouldYield) =>
-  makeBatched((task) => setTimeout(task, ms), shouldYield)
+export const timerBatched = (
+  ms: number,
+  shouldYield: Scheduler["shouldYield"] = defaultShouldYield
+) => makeBatched((task) => setTimeout(task, ms), shouldYield);
 
 /** @internal */
 export const currentScheduler: FiberRef<Scheduler> = globalValue(
   Symbol.for("effect/FiberRef/currentScheduler"),
   () => core.fiberRefUnsafeMake(defaultScheduler)
-)
+);
 
 /** @internal */
 export const withScheduler = dual<
   (scheduler: Scheduler) => <A, E, R>(self: Effect<A, E, R>) => Effect<A, E, R>,
   <A, E, R>(self: Effect<A, E, R>, scheduler: Scheduler) => Effect<A, E, R>
->(2, (self, scheduler) => core.fiberRefLocally(self, currentScheduler, scheduler))
+>(2, (self, scheduler) =>
+  core.fiberRefLocally(self, currentScheduler, scheduler)
+);

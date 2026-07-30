@@ -4,17 +4,17 @@
  * @since 2.0.0
  */
 
-import type { NonEmptyArray } from "./Array.js"
-import type { Either } from "./Either.js"
-import * as E from "./Either.js"
-import * as Equal from "./Equal.js"
-import { dual, identity } from "./Function.js"
-import type { Option } from "./Option.js"
-import * as O from "./Option.js"
-import { isBoolean } from "./Predicate.js"
-import type * as Record from "./Record.js"
-import * as Tuple from "./Tuple.js"
-import type { NoInfer } from "./Types.js"
+import type { NonEmptyArray } from "./Array.js";
+import type { Either } from "./Either.js";
+import * as E from "./Either.js";
+import * as Equal from "./Equal.js";
+import { dual, identity } from "./Function.js";
+import type { Option } from "./Option.js";
+import * as O from "./Option.js";
+import { isBoolean } from "./Predicate.js";
+import type * as Record from "./Record.js";
+import * as Tuple from "./Tuple.js";
+import type { NoInfer } from "./Types.js";
 
 /**
  * Return a `Iterable` with element `i` initialized with `f(i)`.
@@ -34,24 +34,30 @@ import type { NoInfer } from "./Types.js"
  * @category constructors
  * @since 2.0.0
  */
-export const makeBy = <A>(f: (i: number) => A, options?: {
-  readonly length?: number
-}): Iterable<A> => {
-  const max = options?.length !== undefined ? Math.max(1, Math.floor(options.length)) : Infinity
+export const makeBy = <A>(
+  f: (i: number) => A,
+  options?: {
+    readonly length?: number;
+  }
+): Iterable<A> => {
+  const max =
+    options?.length !== undefined
+      ? Math.max(1, Math.floor(options.length))
+      : Number.POSITIVE_INFINITY;
   return {
     [Symbol.iterator]() {
-      let i = 0
+      let i = 0;
       return {
         next(): IteratorResult<A> {
           if (i < max) {
-            return { value: f(i++), done: false }
+            return { value: f(i++), done: false };
           }
-          return { done: true, value: undefined }
-        }
-      }
-    }
-  }
-}
+          return { done: true, value: undefined };
+        },
+      };
+    },
+  };
+};
 
 /**
  * Return a `Iterable` containing a range of integers, including both endpoints.
@@ -71,12 +77,12 @@ export const makeBy = <A>(f: (i: number) => A, options?: {
  */
 export const range = (start: number, end?: number): Iterable<number> => {
   if (end === undefined) {
-    return makeBy((i) => start + i)
+    return makeBy((i) => start + i);
   }
   return makeBy((i) => start + i, {
-    length: start <= end ? end - start + 1 : 1
-  })
-}
+    length: start <= end ? end - start + 1 : 1,
+  });
+};
 
 /**
  * Return a `Iterable` containing a value repeated the specified number of times.
@@ -95,9 +101,12 @@ export const range = (start: number, end?: number): Iterable<number> => {
  * @since 2.0.0
  */
 export const replicate: {
-  (n: number): <A>(a: A) => Iterable<A>
-  <A>(a: A, n: number): Iterable<A>
-} = dual(2, <A>(a: A, n: number): Iterable<A> => makeBy(() => a, { length: n }))
+  (n: number): <A>(a: A) => Iterable<A>;
+  <A>(a: A, n: number): Iterable<A>;
+} = dual(
+  2,
+  <A>(a: A, n: number): Iterable<A> => makeBy(() => a, { length: n })
+);
 
 /**
  * Takes a record and returns an Iterable of tuples containing its keys and values.
@@ -114,15 +123,17 @@ export const replicate: {
  * @category conversions
  * @since 2.0.0
  */
-export const fromRecord = <K extends string, A>(self: Readonly<Record<K, A>>): Iterable<[K, A]> => ({
+export const fromRecord = <K extends string, A>(
+  self: Readonly<Record<K, A>>
+): Iterable<[K, A]> => ({
   *[Symbol.iterator]() {
     for (const key in self) {
-      if (Object.prototype.hasOwnProperty.call(self, key)) {
-        yield [key, self[key]]
+      if (Object.hasOwn(self, key)) {
+        yield [key, self[key]];
       }
     }
-  }
-})
+  },
+});
 
 /**
  * Prepend an element to the front of an `Iterable`, creating a new `Iterable`.
@@ -131,9 +142,13 @@ export const fromRecord = <K extends string, A>(self: Readonly<Record<K, A>>): I
  * @since 2.0.0
  */
 export const prepend: {
-  <B>(head: B): <A>(self: Iterable<A>) => Iterable<A | B>
-  <A, B>(self: Iterable<A>, head: B): Iterable<A | B>
-} = dual(2, <A, B>(self: Iterable<A>, head: B): Iterable<A | B> => prependAll(self, [head]))
+  <B>(head: B): <A>(self: Iterable<A>) => Iterable<A | B>;
+  <A, B>(self: Iterable<A>, head: B): Iterable<A | B>;
+} = dual(
+  2,
+  <A, B>(self: Iterable<A>, head: B): Iterable<A | B> =>
+    prependAll(self, [head])
+);
 
 /**
  * Prepends the specified prefix iterable to the beginning of the specified iterable.
@@ -153,12 +168,13 @@ export const prepend: {
  * @since 2.0.0
  */
 export const prependAll: {
-  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<A | B>
-  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B>
+  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<A | B>;
+  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B>;
 } = dual(
   2,
-  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B> => appendAll(that, self)
-)
+  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B> =>
+    appendAll(that, self)
+);
 
 /**
  * Append an element to the end of an `Iterable`, creating a new `Iterable`.
@@ -167,9 +183,12 @@ export const prependAll: {
  * @since 2.0.0
  */
 export const append: {
-  <B>(last: B): <A>(self: Iterable<A>) => Iterable<A | B>
-  <A, B>(self: Iterable<A>, last: B): Iterable<A | B>
-} = dual(2, <A, B>(self: Iterable<A>, last: B): Iterable<A | B> => appendAll(self, [last]))
+  <B>(last: B): <A>(self: Iterable<A>) => Iterable<A | B>;
+  <A, B>(self: Iterable<A>, last: B): Iterable<A | B>;
+} = dual(
+  2,
+  <A, B>(self: Iterable<A>, last: B): Iterable<A | B> => appendAll(self, [last])
+);
 
 /**
  * Concatenates two iterables, combining their elements.
@@ -178,32 +197,32 @@ export const append: {
  * @since 2.0.0
  */
 export const appendAll: {
-  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<A | B>
-  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B>
+  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<A | B>;
+  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B>;
 } = dual(
   2,
   <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B> => ({
     [Symbol.iterator]() {
-      const iterA = self[Symbol.iterator]()
-      let doneA = false
-      let iterB: Iterator<B>
+      const iterA = self[Symbol.iterator]();
+      let doneA = false;
+      let iterB: Iterator<B>;
       return {
         next() {
           if (!doneA) {
-            const r = iterA.next()
+            const r = iterA.next();
             if (r.done) {
-              doneA = true
-              iterB = that[Symbol.iterator]()
-              return iterB.next()
+              doneA = true;
+              iterB = that[Symbol.iterator]();
+              return iterB.next();
             }
-            return r
+            return r;
           }
-          return iterB.next()
-        }
-      }
-    }
+          return iterB.next();
+        },
+      };
+    },
   })
-)
+);
 
 /**
  * Reduce an `Iterable` from the left, keeping all intermediate results instead of only the final result.
@@ -212,27 +231,30 @@ export const appendAll: {
  * @since 2.0.0
  */
 export const scan: {
-  <B, A>(b: B, f: (b: B, a: A) => B): (self: Iterable<A>) => Iterable<B>
-  <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A) => B): Iterable<B>
-} = dual(3, <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A) => B): Iterable<B> => ({
-  [Symbol.iterator]() {
-    let acc = b
-    let iterator: Iterator<A> | undefined
-    function next() {
-      if (iterator === undefined) {
-        iterator = self[Symbol.iterator]()
-        return { done: false, value: acc }
+  <B, A>(b: B, f: (b: B, a: A) => B): (self: Iterable<A>) => Iterable<B>;
+  <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A) => B): Iterable<B>;
+} = dual(
+  3,
+  <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A) => B): Iterable<B> => ({
+    [Symbol.iterator]() {
+      let acc = b;
+      let iterator: Iterator<A> | undefined;
+      function next() {
+        if (iterator === undefined) {
+          iterator = self[Symbol.iterator]();
+          return { done: false, value: acc };
+        }
+        const result = iterator.next();
+        if (result.done) {
+          return result;
+        }
+        acc = f(acc, result.value);
+        return { done: false, value: acc };
       }
-      const result = iterator.next()
-      if (result.done) {
-        return result
-      }
-      acc = f(acc, result.value)
-      return { done: false, value: acc }
-    }
-    return { next }
-  }
-}))
+      return { next };
+    },
+  })
+);
 
 /**
  * Determine if an `Iterable` is empty
@@ -250,9 +272,9 @@ export const scan: {
  * @since 2.0.0
  */
 export const isEmpty = <A>(self: Iterable<A>): self is Iterable<never> => {
-  const iterator = self[Symbol.iterator]()
-  return iterator.next().done === true
-}
+  const iterator = self[Symbol.iterator]();
+  return iterator.next().done === true;
+};
 
 /**
  * Return the number of elements in a `Iterable`.
@@ -261,13 +283,13 @@ export const isEmpty = <A>(self: Iterable<A>): self is Iterable<never> => {
  * @since 2.0.0
  */
 export const size = <A>(self: Iterable<A>): number => {
-  const iterator = self[Symbol.iterator]()
-  let count = 0
+  const iterator = self[Symbol.iterator]();
+  let count = 0;
   while (!iterator.next().done) {
-    count++
+    count++;
   }
-  return count
-}
+  return count;
+};
 
 /**
  * Get the first element of a `Iterable`, or `None` if the `Iterable` is empty.
@@ -276,10 +298,10 @@ export const size = <A>(self: Iterable<A>): number => {
  * @since 2.0.0
  */
 export const head = <A>(self: Iterable<A>): Option<A> => {
-  const iterator = self[Symbol.iterator]()
-  const result = iterator.next()
-  return result.done ? O.none() : O.some(result.value)
-}
+  const iterator = self[Symbol.iterator]();
+  const result = iterator.next();
+  return result.done ? O.none() : O.some(result.value);
+};
 
 /**
  * Get the first element of a `Iterable`, or throw an error if the `Iterable` is empty.
@@ -288,11 +310,11 @@ export const head = <A>(self: Iterable<A>): Option<A> => {
  * @since 3.3.0
  */
 export const unsafeHead = <A>(self: Iterable<A>): A => {
-  const iterator = self[Symbol.iterator]()
-  const result = iterator.next()
-  if (result.done) throw new Error("unsafeHead: empty iterable")
-  return result.value
-}
+  const iterator = self[Symbol.iterator]();
+  const result = iterator.next();
+  if (result.done) throw new Error("unsafeHead: empty iterable");
+  return result.value;
+};
 
 /**
  * Keep only a max number of elements from the start of an `Iterable`, creating a new `Iterable`.
@@ -303,23 +325,26 @@ export const unsafeHead = <A>(self: Iterable<A>): A => {
  * @since 2.0.0
  */
 export const take: {
-  (n: number): <A>(self: Iterable<A>) => Iterable<A>
-  <A>(self: Iterable<A>, n: number): Iterable<A>
-} = dual(2, <A>(self: Iterable<A>, n: number): Iterable<A> => ({
-  [Symbol.iterator]() {
-    let i = 0
-    const iterator = self[Symbol.iterator]()
-    return {
-      next() {
-        if (i < n) {
-          i++
-          return iterator.next()
-        }
-        return { done: true, value: undefined }
-      }
-    }
-  }
-}))
+  (n: number): <A>(self: Iterable<A>) => Iterable<A>;
+  <A>(self: Iterable<A>, n: number): Iterable<A>;
+} = dual(
+  2,
+  <A>(self: Iterable<A>, n: number): Iterable<A> => ({
+    [Symbol.iterator]() {
+      let i = 0;
+      const iterator = self[Symbol.iterator]();
+      return {
+        next() {
+          if (i < n) {
+            i++;
+            return iterator.next();
+          }
+          return { done: true, value: undefined };
+        },
+      };
+    },
+  })
+);
 
 /**
  * Calculate the longest initial Iterable for which all element satisfy the specified predicate, creating a new `Iterable`.
@@ -328,25 +353,38 @@ export const take: {
  * @since 2.0.0
  */
 export const takeWhile: {
-  <A, B extends A>(refinement: (a: NoInfer<A>, i: number) => a is B): (self: Iterable<A>) => Iterable<B>
-  <A>(predicate: (a: NoInfer<A>, i: number) => boolean): (self: Iterable<A>) => Iterable<A>
-  <A, B extends A>(self: Iterable<A>, refinement: (a: A, i: number) => a is B): Iterable<B>
-  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Iterable<A>
-} = dual(2, <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Iterable<A> => ({
-  [Symbol.iterator]() {
-    const iterator = self[Symbol.iterator]()
-    let i = 0
-    return {
-      next() {
-        const result = iterator.next()
-        if (result.done || !predicate(result.value, i++)) {
-          return { done: true, value: undefined }
-        }
-        return result
-      }
-    }
-  }
-}))
+  <A, B extends A>(
+    refinement: (a: NoInfer<A>, i: number) => a is B
+  ): (self: Iterable<A>) => Iterable<B>;
+  <A>(
+    predicate: (a: NoInfer<A>, i: number) => boolean
+  ): (self: Iterable<A>) => Iterable<A>;
+  <A, B extends A>(
+    self: Iterable<A>,
+    refinement: (a: A, i: number) => a is B
+  ): Iterable<B>;
+  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Iterable<A>;
+} = dual(
+  2,
+  <A>(
+    self: Iterable<A>,
+    predicate: (a: A, i: number) => boolean
+  ): Iterable<A> => ({
+    [Symbol.iterator]() {
+      const iterator = self[Symbol.iterator]();
+      let i = 0;
+      return {
+        next() {
+          const result = iterator.next();
+          if (result.done || !predicate(result.value, i++)) {
+            return { done: true, value: undefined };
+          }
+          return result;
+        },
+      };
+    },
+  })
+);
 
 /**
  * Drop a max number of elements from the start of an `Iterable`
@@ -357,26 +395,29 @@ export const takeWhile: {
  * @since 2.0.0
  */
 export const drop: {
-  (n: number): <A>(self: Iterable<A>) => Iterable<A>
-  <A>(self: Iterable<A>, n: number): Iterable<A>
-} = dual(2, <A>(self: Iterable<A>, n: number): Iterable<A> => ({
-  [Symbol.iterator]() {
-    const iterator = self[Symbol.iterator]()
-    let i = 0
-    return {
-      next() {
-        while (i < n) {
-          const result = iterator.next()
-          if (result.done) {
-            return { done: true, value: undefined }
+  (n: number): <A>(self: Iterable<A>) => Iterable<A>;
+  <A>(self: Iterable<A>, n: number): Iterable<A>;
+} = dual(
+  2,
+  <A>(self: Iterable<A>, n: number): Iterable<A> => ({
+    [Symbol.iterator]() {
+      const iterator = self[Symbol.iterator]();
+      let i = 0;
+      return {
+        next() {
+          while (i < n) {
+            const result = iterator.next();
+            if (result.done) {
+              return { done: true, value: undefined };
+            }
+            i++;
           }
-          i++
-        }
-        return iterator.next()
-      }
-    }
-  }
-}))
+          return iterator.next();
+        },
+      };
+    },
+  })
+);
 
 /**
  * Returns the first element that satisfies the specified
@@ -386,32 +427,42 @@ export const drop: {
  * @since 2.0.0
  */
 export const findFirst: {
-  <A, B>(f: (a: NoInfer<A>, i: number) => Option<B>): (self: Iterable<A>) => Option<B>
-  <A, B extends A>(refinement: (a: NoInfer<A>, i: number) => a is B): (self: Iterable<A>) => Option<B>
-  <A>(predicate: (a: NoInfer<A>, i: number) => boolean): (self: Iterable<A>) => Option<A>
-  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Option<B>
-  <A, B extends A>(self: Iterable<A>, refinement: (a: A, i: number) => a is B): Option<B>
-  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Option<A>
+  <A, B>(
+    f: (a: NoInfer<A>, i: number) => Option<B>
+  ): (self: Iterable<A>) => Option<B>;
+  <A, B extends A>(
+    refinement: (a: NoInfer<A>, i: number) => a is B
+  ): (self: Iterable<A>) => Option<B>;
+  <A>(
+    predicate: (a: NoInfer<A>, i: number) => boolean
+  ): (self: Iterable<A>) => Option<A>;
+  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Option<B>;
+  <A, B extends A>(
+    self: Iterable<A>,
+    refinement: (a: A, i: number) => a is B
+  ): Option<B>;
+  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Option<A>;
 } = dual(
   2,
-  <A>(self: Iterable<A>, f: ((a: A, i: number) => boolean) | ((a: A, i: number) => Option<A>)): Option<A> => {
-    let i = 0
+  <A>(
+    self: Iterable<A>,
+    f: ((a: A, i: number) => boolean) | ((a: A, i: number) => Option<A>)
+  ): Option<A> => {
+    let i = 0;
     for (const a of self) {
-      const o = f(a, i)
+      const o = f(a, i);
       if (isBoolean(o)) {
         if (o) {
-          return O.some(a)
+          return O.some(a);
         }
-      } else {
-        if (O.isSome(o)) {
-          return o
-        }
+      } else if (O.isSome(o)) {
+        return o;
       }
-      i++
+      i++;
     }
-    return O.none()
+    return O.none();
   }
-)
+);
 
 /**
  * Find the last element for which a predicate holds.
@@ -420,33 +471,43 @@ export const findFirst: {
  * @since 2.0.0
  */
 export const findLast: {
-  <A, B>(f: (a: NoInfer<A>, i: number) => Option<B>): (self: Iterable<A>) => Option<B>
-  <A, B extends A>(refinement: (a: NoInfer<A>, i: number) => a is B): (self: Iterable<A>) => Option<B>
-  <A>(predicate: (a: NoInfer<A>, i: number) => boolean): (self: Iterable<A>) => Option<A>
-  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Option<B>
-  <A, B extends A>(self: Iterable<A>, refinement: (a: A, i: number) => a is B): Option<B>
-  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Option<A>
+  <A, B>(
+    f: (a: NoInfer<A>, i: number) => Option<B>
+  ): (self: Iterable<A>) => Option<B>;
+  <A, B extends A>(
+    refinement: (a: NoInfer<A>, i: number) => a is B
+  ): (self: Iterable<A>) => Option<B>;
+  <A>(
+    predicate: (a: NoInfer<A>, i: number) => boolean
+  ): (self: Iterable<A>) => Option<A>;
+  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Option<B>;
+  <A, B extends A>(
+    self: Iterable<A>,
+    refinement: (a: A, i: number) => a is B
+  ): Option<B>;
+  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Option<A>;
 } = dual(
   2,
-  <A>(self: Iterable<A>, f: ((a: A, i: number) => boolean) | ((a: A, i: number) => Option<A>)): Option<A> => {
-    let i = 0
-    let last: Option<A> = O.none()
+  <A>(
+    self: Iterable<A>,
+    f: ((a: A, i: number) => boolean) | ((a: A, i: number) => Option<A>)
+  ): Option<A> => {
+    let i = 0;
+    let last: Option<A> = O.none();
     for (const a of self) {
-      const o = f(a, i)
+      const o = f(a, i);
       if (isBoolean(o)) {
         if (o) {
-          last = O.some(a)
+          last = O.some(a);
         }
-      } else {
-        if (O.isSome(o)) {
-          last = o
-        }
+      } else if (O.isSome(o)) {
+        last = o;
       }
-      i++
+      i++;
     }
-    return last
+    return last;
   }
-)
+);
 
 /**
  * Takes two `Iterable`s and returns an `Iterable` of corresponding pairs.
@@ -455,12 +516,13 @@ export const findLast: {
  * @since 2.0.0
  */
 export const zip: {
-  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<[A, B]>
-  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]>
+  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<[A, B]>;
+  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]>;
 } = dual(
   2,
-  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]> => zipWith(self, that, Tuple.make)
-)
+  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]> =>
+    zipWith(self, that, Tuple.make)
+);
 
 /**
  * Apply a function to pairs of elements at the same index in two `Iterable`s, collecting the results. If one
@@ -470,24 +532,38 @@ export const zip: {
  * @since 2.0.0
  */
 export const zipWith: {
-  <B, A, C>(that: Iterable<B>, f: (a: A, b: B) => C): (self: Iterable<A>) => Iterable<C>
-  <A, B, C>(self: Iterable<A>, that: Iterable<B>, f: (a: A, b: B) => C): Iterable<C>
-} = dual(3, <B, A, C>(self: Iterable<A>, that: Iterable<B>, f: (a: A, b: B) => C): Iterable<C> => ({
-  [Symbol.iterator]() {
-    const selfIterator = self[Symbol.iterator]()
-    const thatIterator = that[Symbol.iterator]()
-    return {
-      next() {
-        const selfResult = selfIterator.next()
-        const thatResult = thatIterator.next()
-        if (selfResult.done || thatResult.done) {
-          return { done: true, value: undefined }
-        }
-        return { done: false, value: f(selfResult.value, thatResult.value) }
-      }
-    }
-  }
-}))
+  <B, A, C>(
+    that: Iterable<B>,
+    f: (a: A, b: B) => C
+  ): (self: Iterable<A>) => Iterable<C>;
+  <A, B, C>(
+    self: Iterable<A>,
+    that: Iterable<B>,
+    f: (a: A, b: B) => C
+  ): Iterable<C>;
+} = dual(
+  3,
+  <B, A, C>(
+    self: Iterable<A>,
+    that: Iterable<B>,
+    f: (a: A, b: B) => C
+  ): Iterable<C> => ({
+    [Symbol.iterator]() {
+      const selfIterator = self[Symbol.iterator]();
+      const thatIterator = that[Symbol.iterator]();
+      return {
+        next() {
+          const selfResult = selfIterator.next();
+          const thatResult = thatIterator.next();
+          if (selfResult.done || thatResult.done) {
+            return { done: true, value: undefined };
+          }
+          return { done: false, value: f(selfResult.value, thatResult.value) };
+        },
+      };
+    },
+  })
+);
 
 /**
  * Places an element in between members of an `Iterable`.
@@ -496,29 +572,33 @@ export const zipWith: {
  * @since 2.0.0
  */
 export const intersperse: {
-  <B>(middle: B): <A>(self: Iterable<A>) => Iterable<A | B>
-  <A, B>(self: Iterable<A>, middle: B): Iterable<A | B>
-} = dual(2, <A, B>(self: Iterable<A>, middle: B): Iterable<A | B> => ({
-  [Symbol.iterator]() {
-    const iterator = self[Symbol.iterator]()
-    let next = iterator.next()
-    let emitted = false
-    return {
-      next() {
-        if (next.done) {
-          return next
-        } else if (emitted) {
-          emitted = false
-          return { done: false, value: middle }
-        }
-        emitted = true
-        const result = next
-        next = iterator.next()
-        return result
-      }
-    }
-  }
-}))
+  <B>(middle: B): <A>(self: Iterable<A>) => Iterable<A | B>;
+  <A, B>(self: Iterable<A>, middle: B): Iterable<A | B>;
+} = dual(
+  2,
+  <A, B>(self: Iterable<A>, middle: B): Iterable<A | B> => ({
+    [Symbol.iterator]() {
+      const iterator = self[Symbol.iterator]();
+      let next = iterator.next();
+      let emitted = false;
+      return {
+        next() {
+          if (next.done) {
+            return next;
+          }
+          if (emitted) {
+            emitted = false;
+            return { done: false, value: middle };
+          }
+          emitted = true;
+          const result = next;
+          next = iterator.next();
+          return result;
+        },
+      };
+    },
+  })
+);
 
 /**
  * Returns a function that checks if an `Iterable` contains a given value using a provided `isEquivalent` function.
@@ -526,20 +606,22 @@ export const intersperse: {
  * @category elements
  * @since 2.0.0
  */
-export const containsWith = <A>(isEquivalent: (self: A, that: A) => boolean): {
-  (a: A): (self: Iterable<A>) => boolean
-  (self: Iterable<A>, a: A): boolean
+export const containsWith = <A>(
+  isEquivalent: (self: A, that: A) => boolean
+): {
+  (a: A): (self: Iterable<A>) => boolean;
+  (self: Iterable<A>, a: A): boolean;
 } =>
   dual(2, (self: Iterable<A>, a: A): boolean => {
     for (const i of self) {
       if (isEquivalent(a, i)) {
-        return true
+        return true;
       }
     }
-    return false
-  })
+    return false;
+  });
 
-const _equivalence = Equal.equivalence()
+const _equivalence = Equal.equivalence();
 
 /**
  * Returns a function that checks if a `Iterable` contains a given value using the default `Equivalence`.
@@ -548,9 +630,9 @@ const _equivalence = Equal.equivalence()
  * @since 2.0.0
  */
 export const contains: {
-  <A>(a: A): (self: Iterable<A>) => boolean
-  <A>(self: Iterable<A>, a: A): boolean
-} = containsWith(_equivalence)
+  <A>(a: A): (self: Iterable<A>) => boolean;
+  <A>(self: Iterable<A>, a: A): boolean;
+} = containsWith(_equivalence);
 
 /**
  * Splits an `Iterable` into length-`n` pieces. The last piece will be shorter if `n` does not evenly divide the length of
@@ -560,35 +642,37 @@ export const contains: {
  * @since 2.0.0
  */
 export const chunksOf: {
-  (n: number): <A>(self: Iterable<A>) => Iterable<Array<A>>
-  <A>(self: Iterable<A>, n: number): Iterable<Array<A>>
+  (n: number): <A>(self: Iterable<A>) => Iterable<Array<A>>;
+  <A>(self: Iterable<A>, n: number): Iterable<Array<A>>;
 } = dual(2, <A>(self: Iterable<A>, n: number): Iterable<Array<A>> => {
-  const safeN = Math.max(1, Math.floor(n))
-  return ({
+  const safeN = Math.max(1, Math.floor(n));
+  return {
     [Symbol.iterator]() {
-      let iterator: Iterator<A> | undefined = self[Symbol.iterator]()
+      let iterator: Iterator<A> | undefined = self[Symbol.iterator]();
       return {
         next() {
           if (iterator === undefined) {
-            return { done: true, value: undefined }
+            return { done: true, value: undefined };
           }
 
-          const chunk: Array<A> = []
+          const chunk: Array<A> = [];
           for (let i = 0; i < safeN; i++) {
-            const result = iterator.next()
+            const result = iterator.next();
             if (result.done) {
-              iterator = undefined
-              return chunk.length === 0 ? { done: true, value: undefined } : { done: false, value: chunk }
+              iterator = undefined;
+              return chunk.length === 0
+                ? { done: true, value: undefined }
+                : { done: false, value: chunk };
             }
-            chunk.push(result.value)
+            chunk.push(result.value);
           }
 
-          return { done: false, value: chunk }
-        }
-      }
-    }
-  })
-})
+          return { done: false, value: chunk };
+        },
+      };
+    },
+  };
+});
 
 /**
  * Group equal, consecutive elements of an `Iterable` into `NonEmptyArray`s using the provided `isEquivalent` function.
@@ -597,44 +681,52 @@ export const chunksOf: {
  * @since 2.0.0
  */
 export const groupWith: {
-  <A>(isEquivalent: (self: A, that: A) => boolean): (self: Iterable<A>) => Iterable<NonEmptyArray<A>>
-  <A>(self: Iterable<A>, isEquivalent: (self: A, that: A) => boolean): Iterable<NonEmptyArray<A>>
+  <A>(
+    isEquivalent: (self: A, that: A) => boolean
+  ): (self: Iterable<A>) => Iterable<NonEmptyArray<A>>;
+  <A>(
+    self: Iterable<A>,
+    isEquivalent: (self: A, that: A) => boolean
+  ): Iterable<NonEmptyArray<A>>;
 } = dual(
   2,
-  <A>(self: Iterable<A>, isEquivalent: (self: A, that: A) => boolean): Iterable<NonEmptyArray<A>> => ({
+  <A>(
+    self: Iterable<A>,
+    isEquivalent: (self: A, that: A) => boolean
+  ): Iterable<NonEmptyArray<A>> => ({
     [Symbol.iterator]() {
-      const iterator = self[Symbol.iterator]()
-      let nextResult: IteratorResult<A> | undefined
+      const iterator = self[Symbol.iterator]();
+      let nextResult: IteratorResult<A> | undefined;
       return {
         next() {
-          let result: IteratorResult<A>
+          let result: IteratorResult<A>;
           if (nextResult !== undefined) {
             if (nextResult.done) {
-              return { done: true, value: undefined }
+              return { done: true, value: undefined };
             }
-            result = nextResult
-            nextResult = undefined
+            result = nextResult;
+            nextResult = undefined;
           } else {
-            result = iterator.next()
+            result = iterator.next();
             if (result.done) {
-              return { done: true, value: undefined }
+              return { done: true, value: undefined };
             }
           }
-          const chunk: NonEmptyArray<A> = [result.value]
+          const chunk: NonEmptyArray<A> = [result.value];
 
           while (true) {
-            const next = iterator.next()
+            const next = iterator.next();
             if (next.done || !isEquivalent(result.value, next.value)) {
-              nextResult = next
-              return { done: false, value: chunk }
+              nextResult = next;
+              return { done: false, value: chunk };
             }
-            chunk.push(next.value)
+            chunk.push(next.value);
           }
-        }
-      }
-    }
+        },
+      };
+    },
   })
-)
+);
 
 /**
  * Group equal, consecutive elements of an `Iterable` into `NonEmptyArray`s.
@@ -642,9 +734,8 @@ export const groupWith: {
  * @category grouping
  * @since 2.0.0
  */
-export const group: <A>(self: Iterable<A>) => Iterable<NonEmptyArray<A>> = groupWith(
-  Equal.equivalence()
-)
+export const group: <A>(self: Iterable<A>) => Iterable<NonEmptyArray<A>> =
+  groupWith(Equal.equivalence());
 
 /**
  * Splits an `Iterable` into sub-non-empty-arrays stored in an object, based on the result of calling a `string`-returning
@@ -656,43 +747,48 @@ export const group: <A>(self: Iterable<A>) => Iterable<NonEmptyArray<A>> = group
 export const groupBy: {
   <A, K extends string | symbol>(
     f: (a: A) => K
-  ): (self: Iterable<A>) => Record<Record.ReadonlyRecord.NonLiteralKey<K>, NonEmptyArray<A>>
+  ): (
+    self: Iterable<A>
+  ) => Record<Record.ReadonlyRecord.NonLiteralKey<K>, NonEmptyArray<A>>;
   <A, K extends string | symbol>(
     self: Iterable<A>,
     f: (a: A) => K
-  ): Record<Record.ReadonlyRecord.NonLiteralKey<K>, NonEmptyArray<A>>
-} = dual(2, <A, K extends string | symbol>(
-  self: Iterable<A>,
-  f: (a: A) => K
-): Record<Record.ReadonlyRecord.NonLiteralKey<K>, NonEmptyArray<A>> => {
-  const out: Record<string | symbol, NonEmptyArray<A>> = {}
-  for (const a of self) {
-    const k = f(a)
-    if (Object.prototype.hasOwnProperty.call(out, k)) {
-      out[k].push(a)
-    } else {
-      out[k] = [a]
+  ): Record<Record.ReadonlyRecord.NonLiteralKey<K>, NonEmptyArray<A>>;
+} = dual(
+  2,
+  <A, K extends string | symbol>(
+    self: Iterable<A>,
+    f: (a: A) => K
+  ): Record<Record.ReadonlyRecord.NonLiteralKey<K>, NonEmptyArray<A>> => {
+    const out: Record<string | symbol, NonEmptyArray<A>> = {};
+    for (const a of self) {
+      const k = f(a);
+      if (Object.hasOwn(out, k)) {
+        out[k].push(a);
+      } else {
+        out[k] = [a];
+      }
     }
+    return out;
   }
-  return out
-})
+);
 
 const constEmpty: Iterable<never> = {
   [Symbol.iterator]() {
-    return constEmptyIterator
-  }
-}
+    return constEmptyIterator;
+  },
+};
 const constEmptyIterator: Iterator<never> = {
   next() {
-    return { done: true, value: undefined }
-  }
-}
+    return { done: true, value: undefined };
+  },
+};
 
 /**
  * @category constructors
  * @since 2.0.0
  */
-export const empty = <A = never>(): Iterable<A> => constEmpty
+export const empty = <A = never>(): Iterable<A> => constEmpty;
 
 /**
  * Constructs a new `Iterable<A>` from the specified value.
@@ -700,7 +796,7 @@ export const empty = <A = never>(): Iterable<A> => constEmpty
  * @category constructors
  * @since 2.0.0
  */
-export const of = <A>(a: A): Iterable<A> => [a]
+export const of = <A>(a: A): Iterable<A> => [a];
 
 /**
  * @category mapping
@@ -709,23 +805,26 @@ export const of = <A>(a: A): Iterable<A> => [a]
 export const map: {
   <A, B>(
     f: (a: NoInfer<A>, i: number) => B
-  ): (self: Iterable<A>) => Iterable<B>
-  <A, B>(self: Iterable<A>, f: (a: NoInfer<A>, i: number) => B): Iterable<B>
-} = dual(2, <A, B>(self: Iterable<A>, f: (a: A, i: number) => B): Iterable<B> => ({
-  [Symbol.iterator]() {
-    const iterator = self[Symbol.iterator]()
-    let i = 0
-    return {
-      next() {
-        const result = iterator.next()
-        if (result.done) {
-          return { done: true, value: undefined }
-        }
-        return { done: false, value: f(result.value, i++) }
-      }
-    }
-  }
-}))
+  ): (self: Iterable<A>) => Iterable<B>;
+  <A, B>(self: Iterable<A>, f: (a: NoInfer<A>, i: number) => B): Iterable<B>;
+} = dual(
+  2,
+  <A, B>(self: Iterable<A>, f: (a: A, i: number) => B): Iterable<B> => ({
+    [Symbol.iterator]() {
+      const iterator = self[Symbol.iterator]();
+      let i = 0;
+      return {
+        next() {
+          const result = iterator.next();
+          if (result.done) {
+            return { done: true, value: undefined };
+          }
+          return { done: false, value: f(result.value, i++) };
+        },
+      };
+    },
+  })
+);
 
 /**
  * Applies a function to each element in an Iterable and returns a new Iterable containing the concatenated mapped elements.
@@ -736,12 +835,16 @@ export const map: {
 export const flatMap: {
   <A, B>(
     f: (a: NoInfer<A>, i: number) => Iterable<B>
-  ): (self: Iterable<A>) => Iterable<B>
-  <A, B>(self: Iterable<A>, f: (a: NoInfer<A>, i: number) => Iterable<B>): Iterable<B>
+  ): (self: Iterable<A>) => Iterable<B>;
+  <A, B>(
+    self: Iterable<A>,
+    f: (a: NoInfer<A>, i: number) => Iterable<B>
+  ): Iterable<B>;
 } = dual(
   2,
-  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Iterable<B>): Iterable<B> => flatten(map(self, f))
-)
+  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Iterable<B>): Iterable<B> =>
+    flatten(map(self, f))
+);
 
 /**
  * Flattens an Iterable of Iterables into a single Iterable
@@ -751,56 +854,59 @@ export const flatMap: {
  */
 export const flatten = <A>(self: Iterable<Iterable<A>>): Iterable<A> => ({
   [Symbol.iterator]() {
-    const outerIterator = self[Symbol.iterator]()
-    let innerIterator: Iterator<A> | undefined
+    const outerIterator = self[Symbol.iterator]();
+    let innerIterator: Iterator<A> | undefined;
     function next() {
       if (innerIterator === undefined) {
-        const next = outerIterator.next()
+        const next = outerIterator.next();
         if (next.done) {
-          return next
+          return next;
         }
-        innerIterator = next.value[Symbol.iterator]()
+        innerIterator = next.value[Symbol.iterator]();
       }
-      const result = innerIterator.next()
+      const result = innerIterator.next();
       if (result.done) {
-        innerIterator = undefined
-        return next()
+        innerIterator = undefined;
+        return next();
       }
-      return result
+      return result;
     }
-    return { next }
-  }
-})
+    return { next };
+  },
+});
 
 /**
  * @category filtering
  * @since 2.0.0
  */
 export const filterMap: {
-  <A, B>(f: (a: A, i: number) => Option<B>): (self: Iterable<A>) => Iterable<B>
-  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Iterable<B>
+  <A, B>(f: (a: A, i: number) => Option<B>): (self: Iterable<A>) => Iterable<B>;
+  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Iterable<B>;
 } = dual(
   2,
-  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Iterable<B> => ({
+  <A, B>(
+    self: Iterable<A>,
+    f: (a: A, i: number) => Option<B>
+  ): Iterable<B> => ({
     [Symbol.iterator]() {
-      const iterator = self[Symbol.iterator]()
-      let i = 0
+      const iterator = self[Symbol.iterator]();
+      let i = 0;
       return {
         next() {
-          let result = iterator.next()
+          let result = iterator.next();
           while (!result.done) {
-            const b = f(result.value, i++)
+            const b = f(result.value, i++);
             if (O.isSome(b)) {
-              return { done: false, value: b.value }
+              return { done: false, value: b.value };
             }
-            result = iterator.next()
+            result = iterator.next();
           }
-          return { done: true, value: undefined }
-        }
-      }
-    }
+          return { done: true, value: undefined };
+        },
+      };
+    },
   })
-)
+);
 
 /**
  * Transforms all elements of the `Iterable` for as long as the specified function returns some value
@@ -809,27 +915,27 @@ export const filterMap: {
  * @since 2.0.0
  */
 export const filterMapWhile: {
-  <A, B>(f: (a: A, i: number) => Option<B>): (self: Iterable<A>) => Iterable<B>
-  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Iterable<B>
+  <A, B>(f: (a: A, i: number) => Option<B>): (self: Iterable<A>) => Iterable<B>;
+  <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>): Iterable<B>;
 } = dual(2, <A, B>(self: Iterable<A>, f: (a: A, i: number) => Option<B>) => ({
   [Symbol.iterator]() {
-    const iterator = self[Symbol.iterator]()
-    let i = 0
+    const iterator = self[Symbol.iterator]();
+    let i = 0;
     return {
       next() {
-        const result = iterator.next()
+        const result = iterator.next();
         if (result.done) {
-          return { done: true, value: undefined }
+          return { done: true, value: undefined };
         }
-        const b = f(result.value, i++)
+        const b = f(result.value, i++);
         if (O.isSome(b)) {
-          return { done: false, value: b.value }
+          return { done: false, value: b.value };
         }
-        return { done: true, value: undefined }
-      }
-    }
-  }
-}))
+        return { done: true, value: undefined };
+      },
+    };
+  },
+}));
 
 /**
  * Retrieves the `Some` values from an `Iterable` of `Option`s.
@@ -848,7 +954,8 @@ export const filterMapWhile: {
  * @category filtering
  * @since 2.0.0
  */
-export const getSomes: <A>(self: Iterable<Option<A>>) => Iterable<A> = filterMap(identity)
+export const getSomes: <A>(self: Iterable<Option<A>>) => Iterable<A> =
+  filterMap(identity);
 
 /**
  * Retrieves the `Left` values from an `Iterable` of `Either`s.
@@ -867,7 +974,8 @@ export const getSomes: <A>(self: Iterable<Option<A>>) => Iterable<A> = filterMap
  * @category filtering
  * @since 2.0.0
  */
-export const getLefts = <R, L>(self: Iterable<Either<R, L>>): Iterable<L> => filterMap(self, E.getLeft)
+export const getLefts = <R, L>(self: Iterable<Either<R, L>>): Iterable<L> =>
+  filterMap(self, E.getLeft);
 
 /**
  * Retrieves the `Right` values from an `Iterable` of `Either`s.
@@ -886,54 +994,73 @@ export const getLefts = <R, L>(self: Iterable<Either<R, L>>): Iterable<L> => fil
  * @category filtering
  * @since 2.0.0
  */
-export const getRights = <R, L>(self: Iterable<Either<R, L>>): Iterable<R> => filterMap(self, E.getRight)
+export const getRights = <R, L>(self: Iterable<Either<R, L>>): Iterable<R> =>
+  filterMap(self, E.getRight);
 
 /**
  * @category filtering
  * @since 2.0.0
  */
 export const filter: {
-  <A, B extends A>(refinement: (a: NoInfer<A>, i: number) => a is B): (self: Iterable<A>) => Iterable<B>
-  <A>(predicate: (a: NoInfer<A>, i: number) => boolean): (self: Iterable<A>) => Iterable<A>
-  <A, B extends A>(self: Iterable<A>, refinement: (a: A, i: number) => a is B): Iterable<B>
-  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Iterable<A>
+  <A, B extends A>(
+    refinement: (a: NoInfer<A>, i: number) => a is B
+  ): (self: Iterable<A>) => Iterable<B>;
+  <A>(
+    predicate: (a: NoInfer<A>, i: number) => boolean
+  ): (self: Iterable<A>) => Iterable<A>;
+  <A, B extends A>(
+    self: Iterable<A>,
+    refinement: (a: A, i: number) => a is B
+  ): Iterable<B>;
+  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Iterable<A>;
 } = dual(
   2,
-  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): Iterable<A> => ({
+  <A>(
+    self: Iterable<A>,
+    predicate: (a: A, i: number) => boolean
+  ): Iterable<A> => ({
     [Symbol.iterator]() {
-      const iterator = self[Symbol.iterator]()
-      let i = 0
+      const iterator = self[Symbol.iterator]();
+      let i = 0;
       return {
         next() {
-          let result = iterator.next()
+          let result = iterator.next();
           while (!result.done) {
             if (predicate(result.value, i++)) {
-              return { done: false, value: result.value }
+              return { done: false, value: result.value };
             }
-            result = iterator.next()
+            result = iterator.next();
           }
-          return { done: true, value: undefined }
-        }
-      }
-    }
+          return { done: true, value: undefined };
+        },
+      };
+    },
   })
-)
+);
 
 /**
  * @category sequencing
  * @since 2.0.0
  */
 export const flatMapNullable: {
-  <A, B>(f: (a: A) => B | null | undefined): (self: Iterable<A>) => Iterable<NonNullable<B>>
-  <A, B>(self: Iterable<A>, f: (a: A) => B | null | undefined): Iterable<NonNullable<B>>
+  <A, B>(
+    f: (a: A) => B | null | undefined
+  ): (self: Iterable<A>) => Iterable<NonNullable<B>>;
+  <A, B>(
+    self: Iterable<A>,
+    f: (a: A) => B | null | undefined
+  ): Iterable<NonNullable<B>>;
 } = dual(
   2,
-  <A, B>(self: Iterable<A>, f: (a: A) => B | null | undefined): Iterable<NonNullable<B>> =>
+  <A, B>(
+    self: Iterable<A>,
+    f: (a: A) => B | null | undefined
+  ): Iterable<NonNullable<B>> =>
     filterMap(self, (a) => {
-      const b = f(a)
-      return b == null ? O.none() : O.some(b)
+      const b = f(a);
+      return b == null ? O.none() : O.some(b);
     })
-)
+);
 
 /**
  * Check if a predicate holds true for some `Iterable` element.
@@ -942,41 +1069,44 @@ export const flatMapNullable: {
  * @since 2.0.0
  */
 export const some: {
-  <A>(predicate: (a: A, i: number) => boolean): (self: Iterable<A>) => boolean
-  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): boolean
+  <A>(predicate: (a: A, i: number) => boolean): (self: Iterable<A>) => boolean;
+  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): boolean;
 } = dual(
   2,
   <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): boolean => {
-    let i = 0
+    let i = 0;
     for (const a of self) {
       if (predicate(a, i++)) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
-)
+);
 
 /**
  * @category constructors
  * @since 2.0.0
  */
-export const unfold = <B, A>(b: B, f: (b: B) => Option<readonly [A, B]>): Iterable<A> => ({
+export const unfold = <B, A>(
+  b: B,
+  f: (b: B) => Option<readonly [A, B]>
+): Iterable<A> => ({
   [Symbol.iterator]() {
-    let next = b
+    let next = b;
     return {
       next() {
-        const o = f(next)
+        const o = f(next);
         if (O.isNone(o)) {
-          return { done: true, value: undefined }
+          return { done: true, value: undefined };
         }
-        const [a, b] = o.value
-        next = b
-        return { done: false, value: a }
-      }
-    }
-  }
-})
+        const [a, b] = o.value;
+        next = b;
+        return { done: false, value: a };
+      },
+    };
+  },
+});
 
 /**
  * Iterate over the `Iterable` applying `f`.
@@ -984,33 +1114,36 @@ export const unfold = <B, A>(b: B, f: (b: B) => Option<readonly [A, B]>): Iterab
  * @since 2.0.0
  */
 export const forEach: {
-  <A>(f: (a: A, i: number) => void): (self: Iterable<A>) => void
-  <A>(self: Iterable<A>, f: (a: A, i: number) => void): void
+  <A>(f: (a: A, i: number) => void): (self: Iterable<A>) => void;
+  <A>(self: Iterable<A>, f: (a: A, i: number) => void): void;
 } = dual(2, <A>(self: Iterable<A>, f: (a: A, i: number) => void): void => {
-  let i = 0
+  let i = 0;
   for (const a of self) {
-    f(a, i++)
+    f(a, i++);
   }
-})
+});
 
 /**
  * @category folding
  * @since 2.0.0
  */
 export const reduce: {
-  <B, A>(b: B, f: (b: B, a: A, i: number) => B): (self: Iterable<A>) => B
-  <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A, i: number) => B): B
-} = dual(3, <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A, i: number) => B): B => {
-  if (Array.isArray(self)) {
-    return self.reduce(f, b)
+  <B, A>(b: B, f: (b: B, a: A, i: number) => B): (self: Iterable<A>) => B;
+  <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A, i: number) => B): B;
+} = dual(
+  3,
+  <A, B>(self: Iterable<A>, b: B, f: (b: B, a: A, i: number) => B): B => {
+    if (Array.isArray(self)) {
+      return self.reduce(f, b);
+    }
+    let i = 0;
+    let result = b;
+    for (const n of self) {
+      result = f(result, n, i++);
+    }
+    return result;
   }
-  let i = 0
-  let result = b
-  for (const n of self) {
-    result = f(result, n, i++)
-  }
-  return result
-})
+);
 
 /**
  * Deduplicates adjacent elements that are identical using the provided `isEquivalent` function.
@@ -1018,40 +1151,52 @@ export const reduce: {
  * @since 2.0.0
  */
 export const dedupeAdjacentWith: {
-  <A>(isEquivalent: (self: A, that: A) => boolean): (self: Iterable<A>) => Iterable<A>
-  <A>(self: Iterable<A>, isEquivalent: (self: A, that: A) => boolean): Iterable<A>
-} = dual(2, <A>(self: Iterable<A>, isEquivalent: (self: A, that: A) => boolean): Iterable<A> => ({
-  [Symbol.iterator]() {
-    const iterator = self[Symbol.iterator]()
-    let first = true
-    let last: A
-    function next(): IteratorResult<A> {
-      const result = iterator.next()
-      if (result.done) {
-        return { done: true, value: undefined }
+  <A>(
+    isEquivalent: (self: A, that: A) => boolean
+  ): (self: Iterable<A>) => Iterable<A>;
+  <A>(
+    self: Iterable<A>,
+    isEquivalent: (self: A, that: A) => boolean
+  ): Iterable<A>;
+} = dual(
+  2,
+  <A>(
+    self: Iterable<A>,
+    isEquivalent: (self: A, that: A) => boolean
+  ): Iterable<A> => ({
+    [Symbol.iterator]() {
+      const iterator = self[Symbol.iterator]();
+      let first = true;
+      let last: A;
+      function next(): IteratorResult<A> {
+        const result = iterator.next();
+        if (result.done) {
+          return { done: true, value: undefined };
+        }
+        if (first) {
+          first = false;
+          last = result.value;
+          return result;
+        }
+        const current = result.value;
+        if (isEquivalent(last, current)) {
+          return next();
+        }
+        last = current;
+        return result;
       }
-      if (first) {
-        first = false
-        last = result.value
-        return result
-      }
-      const current = result.value
-      if (isEquivalent(last, current)) {
-        return next()
-      }
-      last = current
-      return result
-    }
-    return { next }
-  }
-}))
+      return { next };
+    },
+  })
+);
 
 /**
  * Deduplicates adjacent elements that are identical.
  *
  * @since 2.0.0
  */
-export const dedupeAdjacent: <A>(self: Iterable<A>) => Iterable<A> = dedupeAdjacentWith(Equal.equivalence())
+export const dedupeAdjacent: <A>(self: Iterable<A>) => Iterable<A> =
+  dedupeAdjacentWith(Equal.equivalence());
 
 /**
  * Zips this Iterable crosswise with the specified Iterable using the specified combiner.
@@ -1060,13 +1205,23 @@ export const dedupeAdjacent: <A>(self: Iterable<A>) => Iterable<A> = dedupeAdjac
  * @category elements
  */
 export const cartesianWith: {
-  <A, B, C>(that: Iterable<B>, f: (a: A, b: B) => C): (self: Iterable<A>) => Iterable<C>
-  <A, B, C>(self: Iterable<A>, that: Iterable<B>, f: (a: A, b: B) => C): Iterable<C>
+  <A, B, C>(
+    that: Iterable<B>,
+    f: (a: A, b: B) => C
+  ): (self: Iterable<A>) => Iterable<C>;
+  <A, B, C>(
+    self: Iterable<A>,
+    that: Iterable<B>,
+    f: (a: A, b: B) => C
+  ): Iterable<C>;
 } = dual(
   3,
-  <A, B, C>(self: Iterable<A>, that: Iterable<B>, f: (a: A, b: B) => C): Iterable<C> =>
-    flatMap(self, (a) => map(that, (b) => f(a, b)))
-)
+  <A, B, C>(
+    self: Iterable<A>,
+    that: Iterable<B>,
+    f: (a: A, b: B) => C
+  ): Iterable<C> => flatMap(self, (a) => map(that, (b) => f(a, b)))
+);
 
 /**
  * Zips this Iterable crosswise with the specified Iterable.
@@ -1075,12 +1230,13 @@ export const cartesianWith: {
  * @category elements
  */
 export const cartesian: {
-  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<[A, B]>
-  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]>
+  <B>(that: Iterable<B>): <A>(self: Iterable<A>) => Iterable<[A, B]>;
+  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]>;
 } = dual(
   2,
-  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]> => cartesianWith(self, that, (a, b) => [a, b])
-)
+  <A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<[A, B]> =>
+    cartesianWith(self, that, (a, b) => [a, b])
+);
 
 /**
  * Counts all the element of the given iterable that pass the given predicate
@@ -1098,22 +1254,18 @@ export const cartesian: {
  * @since 3.16.0
  */
 export const countBy: {
-  <A>(predicate: (a: NoInfer<A>, i: number) => boolean): (self: Iterable<A>) => number
-  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): number
-} = dual(
-  2,
   <A>(
-    self: Iterable<A>,
-    f: (a: A, i: number) => boolean
-  ): number => {
-    let count = 0
-    let i = 0
-    for (const a of self) {
-      if (f(a, i)) {
-        count++
-      }
-      i++
+    predicate: (a: NoInfer<A>, i: number) => boolean
+  ): (self: Iterable<A>) => number;
+  <A>(self: Iterable<A>, predicate: (a: A, i: number) => boolean): number;
+} = dual(2, <A>(self: Iterable<A>, f: (a: A, i: number) => boolean): number => {
+  let count = 0;
+  let i = 0;
+  for (const a of self) {
+    if (f(a, i)) {
+      count++;
     }
-    return count
+    i++;
   }
-)
+  return count;
+});

@@ -1,64 +1,71 @@
 /**
  * @since 1.0.0
  */
-import type { Headers } from "@effect/platform/Headers"
-import type { NonEmptyReadonlyArray } from "effect/Array"
-import type { Branded } from "effect/Brand"
-import type * as FiberId from "effect/FiberId"
-import * as Schema from "effect/Schema"
-import type * as Rpc from "./Rpc.js"
-import type { RpcClientError } from "./RpcClientError.js"
+import type { Headers } from "@effect/platform/Headers";
+import type { NonEmptyReadonlyArray } from "effect/Array";
+import type { Branded } from "effect/Brand";
+import type * as FiberId from "effect/FiberId";
+import * as Schema from "effect/Schema";
+import type * as Rpc from "./Rpc.js";
+import type { RpcClientError } from "./RpcClientError.js";
 
 /**
  * @since 1.0.0
  * @category request
  */
-export type FromClient<A extends Rpc.Any> = Request<A> | Ack | Interrupt | Eof
+export type FromClient<A extends Rpc.Any> = Request<A> | Ack | Interrupt | Eof;
 
 /**
  * @since 1.0.0
  * @category request
  */
-export type FromClientEncoded = RequestEncoded | AckEncoded | InterruptEncoded | Ping | Eof
+export type FromClientEncoded =
+  | RequestEncoded
+  | AckEncoded
+  | InterruptEncoded
+  | Ping
+  | Eof;
 
 /**
  * @since 1.0.0
  * @category request
  */
-export const RequestIdTypeId: unique symbol = Symbol.for("@effect/rpc/RpcServer/RequestId")
+export const RequestIdTypeId: unique symbol = Symbol.for(
+  "@effect/rpc/RpcServer/RequestId"
+);
 
 /**
  * @since 1.0.0
  * @category request
  */
-export type RequestIdTypeId = typeof RequestIdTypeId
+export type RequestIdTypeId = typeof RequestIdTypeId;
 
 /**
  * @since 1.0.0
  * @category request
  */
-export type RequestId = Branded<bigint, RequestIdTypeId>
+export type RequestId = Branded<bigint, RequestIdTypeId>;
 
 /**
  * @since 1.0.0
  * @category request
  */
 export const RequestId = (id: bigint | string): RequestId =>
-  typeof id === "bigint" ? id as RequestId : BigInt(id) as RequestId
+  typeof id === "bigint" ? (id as RequestId) : (BigInt(id) as RequestId);
 
 /**
  * @since 1.0.0
  * @category request
  */
 export interface RequestEncoded {
-  readonly _tag: "Request"
-  readonly id: string
-  readonly tag: string
-  readonly payload: unknown
-  readonly headers: ReadonlyArray<[string, string]>
-  readonly traceId?: string | undefined
-  readonly spanId?: string | undefined
-  readonly sampled?: boolean | undefined
+  readonly _tag: "Request";
+  readonly id: string;
+  readonly tag: string;
+  readonly payload: unknown;
+  readonly headers: ReadonlyArray<[string, string]>;
+  readonly traceId?: string | undefined;
+  readonly spanId?: string | undefined;
+  readonly sampled?: boolean | undefined;
 }
 
 /**
@@ -66,14 +73,14 @@ export interface RequestEncoded {
  * @category request
  */
 export interface Request<A extends Rpc.Any> {
-  readonly _tag: "Request"
-  readonly id: RequestId
-  readonly tag: Rpc.Tag<A>
-  readonly payload: Rpc.Payload<A>
-  readonly headers: Headers
-  readonly traceId?: string | undefined
-  readonly spanId?: string | undefined
-  readonly sampled?: boolean | undefined
+  readonly _tag: "Request";
+  readonly id: RequestId;
+  readonly tag: Rpc.Tag<A>;
+  readonly payload: Rpc.Payload<A>;
+  readonly headers: Headers;
+  readonly traceId?: string | undefined;
+  readonly spanId?: string | undefined;
+  readonly sampled?: boolean | undefined;
 }
 
 /**
@@ -81,8 +88,8 @@ export interface Request<A extends Rpc.Any> {
  * @category request
  */
 export interface Ack {
-  readonly _tag: "Ack"
-  readonly requestId: RequestId
+  readonly _tag: "Ack";
+  readonly requestId: RequestId;
 }
 
 /**
@@ -90,9 +97,9 @@ export interface Ack {
  * @category request
  */
 export interface Interrupt {
-  readonly _tag: "Interrupt"
-  readonly requestId: RequestId
-  readonly interruptors: ReadonlyArray<FiberId.FiberId>
+  readonly _tag: "Interrupt";
+  readonly requestId: RequestId;
+  readonly interruptors: ReadonlyArray<FiberId.FiberId>;
 }
 
 /**
@@ -100,8 +107,8 @@ export interface Interrupt {
  * @category request
  */
 export interface AckEncoded {
-  readonly _tag: "Ack"
-  readonly requestId: string
+  readonly _tag: "Ack";
+  readonly requestId: string;
 }
 
 /**
@@ -109,8 +116,8 @@ export interface AckEncoded {
  * @category request
  */
 export interface InterruptEncoded {
-  readonly _tag: "Interrupt"
-  readonly requestId: string
+  readonly _tag: "Interrupt";
+  readonly requestId: string;
 }
 
 /**
@@ -118,7 +125,7 @@ export interface InterruptEncoded {
  * @category request
  */
 export interface Eof {
-  readonly _tag: "Eof"
+  readonly _tag: "Eof";
 }
 
 /**
@@ -126,20 +133,20 @@ export interface Eof {
  * @category request
  */
 export interface Ping {
-  readonly _tag: "Ping"
+  readonly _tag: "Ping";
 }
 
 /**
  * @since 1.0.0
  * @category request
  */
-export const constEof: Eof = { _tag: "Eof" }
+export const constEof: Eof = { _tag: "Eof" };
 
 /**
  * @since 1.0.0
  * @category request
  */
-export const constPing: Ping = { _tag: "Ping" }
+export const constPing: Ping = { _tag: "Ping" };
 
 /**
  * @since 1.0.0
@@ -149,7 +156,7 @@ export type FromServer<A extends Rpc.Any> =
   | ResponseChunk<A>
   | ResponseExit<A>
   | ResponseDefect
-  | ClientEnd
+  | ClientEnd;
 
 /**
  * @since 1.0.0
@@ -160,34 +167,36 @@ export type FromServerEncoded =
   | ResponseExitEncoded
   | ResponseDefectEncoded
   | Pong
-  | ClientProtocolError
+  | ClientProtocolError;
 
 /**
  * @since 1.0.0
  * @category response
  */
-export const ResponseIdTypeId: unique symbol = Symbol.for("@effect/rpc/RpcServer/ResponseId")
+export const ResponseIdTypeId: unique symbol = Symbol.for(
+  "@effect/rpc/RpcServer/ResponseId"
+);
 
 /**
  * @since 1.0.0
  * @category response
  */
-export type ResponseIdTypeId = typeof ResponseIdTypeId
+export type ResponseIdTypeId = typeof ResponseIdTypeId;
 
 /**
  * @since 1.0.0
  * @category response
  */
-export type ResponseId = Branded<number, ResponseIdTypeId>
+export type ResponseId = Branded<number, ResponseIdTypeId>;
 
 /**
  * @since 1.0.0
  * @category response
  */
 export interface ResponseChunkEncoded {
-  readonly _tag: "Chunk"
-  readonly requestId: string
-  readonly values: NonEmptyReadonlyArray<unknown>
+  readonly _tag: "Chunk";
+  readonly requestId: string;
+  readonly values: NonEmptyReadonlyArray<unknown>;
 }
 
 /**
@@ -195,10 +204,10 @@ export interface ResponseChunkEncoded {
  * @category response
  */
 export interface ResponseChunk<A extends Rpc.Any> {
-  readonly _tag: "Chunk"
-  readonly clientId: number
-  readonly requestId: RequestId
-  readonly values: NonEmptyReadonlyArray<Rpc.SuccessChunk<A>>
+  readonly _tag: "Chunk";
+  readonly clientId: number;
+  readonly requestId: RequestId;
+  readonly values: NonEmptyReadonlyArray<Rpc.SuccessChunk<A>>;
 }
 
 /**
@@ -206,9 +215,9 @@ export interface ResponseChunk<A extends Rpc.Any> {
  * @category response
  */
 export interface ResponseExitEncoded {
-  readonly _tag: "Exit"
-  readonly requestId: string
-  readonly exit: Schema.ExitEncoded<unknown, unknown, unknown>
+  readonly _tag: "Exit";
+  readonly requestId: string;
+  readonly exit: Schema.ExitEncoded<unknown, unknown, unknown>;
 }
 
 /**
@@ -216,8 +225,8 @@ export interface ResponseExitEncoded {
  * @category response
  */
 export interface ClientProtocolError {
-  readonly _tag: "ClientProtocolError"
-  readonly error: RpcClientError
+  readonly _tag: "ClientProtocolError";
+  readonly error: RpcClientError;
 }
 
 /**
@@ -225,10 +234,10 @@ export interface ClientProtocolError {
  * @category response
  */
 export interface ResponseExit<A extends Rpc.Any> {
-  readonly _tag: "Exit"
-  readonly clientId: number
-  readonly requestId: RequestId
-  readonly exit: Rpc.Exit<A>
+  readonly _tag: "Exit";
+  readonly clientId: number;
+  readonly requestId: RequestId;
+  readonly exit: Rpc.Exit<A>;
 }
 
 /**
@@ -236,29 +245,31 @@ export interface ResponseExit<A extends Rpc.Any> {
  * @category response
  */
 export interface ResponseDefectEncoded {
-  readonly _tag: "Defect"
-  readonly defect: unknown
+  readonly _tag: "Defect";
+  readonly defect: unknown;
 }
 
-const encodeDefect = Schema.encodeSync(Schema.Defect)
+const encodeDefect = Schema.encodeSync(Schema.Defect);
 
 /**
  * @since 1.0.0
  * @category response
  */
-export const ResponseDefectEncoded = (input: unknown): ResponseDefectEncoded => ({
+export const ResponseDefectEncoded = (
+  input: unknown
+): ResponseDefectEncoded => ({
   _tag: "Defect",
-  defect: encodeDefect(input)
-})
+  defect: encodeDefect(input),
+});
 
 /**
  * @since 1.0.0
  * @category response
  */
 export interface ResponseDefect {
-  readonly _tag: "Defect"
-  readonly clientId: number
-  readonly defect: unknown
+  readonly _tag: "Defect";
+  readonly clientId: number;
+  readonly defect: unknown;
 }
 
 /**
@@ -266,8 +277,8 @@ export interface ResponseDefect {
  * @category response
  */
 export interface ClientEnd {
-  readonly _tag: "ClientEnd"
-  readonly clientId: number
+  readonly _tag: "ClientEnd";
+  readonly clientId: number;
 }
 
 /**
@@ -275,11 +286,11 @@ export interface ClientEnd {
  * @category response
  */
 export interface Pong {
-  readonly _tag: "Pong"
+  readonly _tag: "Pong";
 }
 
 /**
  * @since 1.0.0
  * @category response
  */
-export const constPong: Pong = { _tag: "Pong" }
+export const constPong: Pong = { _tag: "Pong" };

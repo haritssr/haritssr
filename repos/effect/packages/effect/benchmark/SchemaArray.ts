@@ -1,7 +1,7 @@
-import * as ParseResult from "effect/ParseResult"
-import * as S from "effect/Schema"
-import type { ParseOptions } from "effect/SchemaAST"
-import { Bench } from "tinybench"
+import * as ParseResult from "effect/ParseResult";
+import * as S from "effect/Schema";
+import type { ParseOptions } from "effect/SchemaAST";
+import { Bench } from "tinybench";
 
 /*
 ┌─────────┬──────────────────────────────────────────┬─────────────┬───────────────────┬──────────┬─────────┐
@@ -14,32 +14,32 @@ import { Bench } from "tinybench"
 └─────────┴──────────────────────────────────────────┴─────────────┴───────────────────┴──────────┴─────────┘
 */
 
-const bench = new Bench({ time: 1000 })
+const bench = new Bench({ time: 1000 });
 
-const schema = S.Array(S.String)
+const schema = S.Array(S.String);
 
-const good = ["a", "b", "c"]
+const good = ["a", "b", "c"];
 
-const bad = ["a", 2, "c"]
+const bad = ["a", 2, "c"];
 
-const schemaDecodeUnknownEither = S.decodeUnknownEither(schema)
-const parseResultDecodeUnknownEither = ParseResult.decodeUnknownEither(schema)
-const options: ParseOptions = { errors: "all" }
+const schemaDecodeUnknownEither = S.decodeUnknownEither(schema);
+const parseResultDecodeUnknownEither = ParseResult.decodeUnknownEither(schema);
+const options: ParseOptions = { errors: "all" };
 
 bench
-  .add("Schema.decodeUnknownEither (good)", function() {
-    schemaDecodeUnknownEither(good, options)
+  .add("Schema.decodeUnknownEither (good)", () => {
+    schemaDecodeUnknownEither(good, options);
   })
-  .add("ParseResult.decodeUnknownEither (good)", function() {
-    parseResultDecodeUnknownEither(good, options)
+  .add("ParseResult.decodeUnknownEither (good)", () => {
+    parseResultDecodeUnknownEither(good, options);
   })
-  .add("Schema.decodeUnknownEither (bad)", function() {
-    schemaDecodeUnknownEither(bad, options)
+  .add("Schema.decodeUnknownEither (bad)", () => {
+    schemaDecodeUnknownEither(bad, options);
   })
-  .add("ParseResult.decodeUnknownEither (bad)", function() {
-    parseResultDecodeUnknownEither(bad, options)
-  })
+  .add("ParseResult.decodeUnknownEither (bad)", () => {
+    parseResultDecodeUnknownEither(bad, options);
+  });
 
-await bench.run()
+await bench.run();
 
-console.table(bench.table())
+console.table(bench.table());

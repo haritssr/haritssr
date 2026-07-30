@@ -1,10 +1,10 @@
 /**
  * @since 1.0.0
  */
-import * as Context from "effect/Context"
-import * as Data from "effect/Data"
-import type * as Effect from "effect/Effect"
-import type * as Socket from "./Socket.js"
+import * as Context from "effect/Context";
+import * as Data from "effect/Data";
+import type * as Effect from "effect/Effect";
+import type * as Socket from "./Socket.js";
 
 /**
  * @since 1.0.0
@@ -13,10 +13,10 @@ import type * as Socket from "./Socket.js"
 export class SocketServer extends Context.Tag("@effect/platform/SocketServer")<
   SocketServer,
   {
-    readonly address: Address
+    readonly address: Address;
     readonly run: <R, E, _>(
       handler: (socket: Socket.Socket) => Effect.Effect<_, E, R>
-    ) => Effect.Effect<never, SocketServerError, R>
+    ) => Effect.Effect<never, SocketServerError, R>;
   }
 >() {}
 
@@ -24,32 +24,34 @@ export class SocketServer extends Context.Tag("@effect/platform/SocketServer")<
  * @since 1.0.0
  * @category errors
  */
-export const ErrorTypeId: unique symbol = Symbol.for("@effect/platform/SocketServer/SocketServerError")
+export const ErrorTypeId: unique symbol = Symbol.for(
+  "@effect/platform/SocketServer/SocketServerError"
+);
 
 /**
  * @since 1.0.0
  * @category errors
  */
-export type ErrorTypeId = typeof ErrorTypeId
+export type ErrorTypeId = typeof ErrorTypeId;
 
 /**
  * @since 1.0.0
  * @category errors
  */
 export class SocketServerError extends Data.TaggedError("SocketServerError")<{
-  readonly reason: "Open" | "Unknown"
-  readonly cause: unknown
+  readonly reason: "Open" | "Unknown";
+  readonly cause: unknown;
 }> {
   /**
    * @since 1.0.0
    */
-  readonly [ErrorTypeId]: ErrorTypeId = ErrorTypeId
+  readonly [ErrorTypeId]: ErrorTypeId = ErrorTypeId;
 
   /**
    * @since 1.0.0
    */
   get message(): string {
-    return this.reason
+    return this.reason;
   }
 }
 
@@ -57,16 +59,16 @@ export class SocketServerError extends Data.TaggedError("SocketServerError")<{
  * @since 1.0.0
  * @category models
  */
-export type Address = UnixAddress | TcpAddress
+export type Address = UnixAddress | TcpAddress;
 
 /**
  * @since 1.0.0
  * @category models
  */
 export interface TcpAddress {
-  readonly _tag: "TcpAddress"
-  readonly hostname: string
-  readonly port: number
+  readonly _tag: "TcpAddress";
+  readonly hostname: string;
+  readonly port: number;
 }
 
 /**
@@ -74,6 +76,6 @@ export interface TcpAddress {
  * @category models
  */
 export interface UnixAddress {
-  readonly _tag: "UnixAddress"
-  readonly path: string
+  readonly _tag: "UnixAddress";
+  readonly path: string;
 }

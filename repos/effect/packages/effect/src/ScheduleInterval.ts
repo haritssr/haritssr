@@ -1,21 +1,21 @@
 /**
  * @since 2.0.0
  */
-import type * as Duration from "./Duration.js"
-import * as internal from "./internal/schedule/interval.js"
-import type * as Option from "./Option.js"
+import type * as Duration from "./Duration.js";
+import * as internal from "./internal/schedule/interval.js";
+import type * as Option from "./Option.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const IntervalTypeId: unique symbol = internal.IntervalTypeId
+export const IntervalTypeId: unique symbol = internal.IntervalTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type IntervalTypeId = typeof IntervalTypeId
+export type IntervalTypeId = typeof IntervalTypeId;
 
 /**
  * An `Interval` represents an interval of time. Intervals can encompass all
@@ -25,9 +25,9 @@ export type IntervalTypeId = typeof IntervalTypeId
  * @category models
  */
 export interface Interval {
-  readonly [IntervalTypeId]: IntervalTypeId
-  readonly startMillis: number
-  readonly endMillis: number
+  readonly [IntervalTypeId]: IntervalTypeId;
+  readonly startMillis: number;
+  readonly endMillis: number;
 }
 
 /**
@@ -38,7 +38,8 @@ export interface Interval {
  * @since 2.0.0
  * @category constructors
  */
-export const make: (startMillis: number, endMillis: number) => Interval = internal.make
+export const make: (startMillis: number, endMillis: number) => Interval =
+  internal.make;
 
 /**
  * An `Interval` of zero-width.
@@ -46,7 +47,7 @@ export const make: (startMillis: number, endMillis: number) => Interval = intern
  * @since 2.0.0
  * @category constructors
  */
-export const empty: Interval = internal.empty
+export const empty: Interval = internal.empty;
 
 /**
  * Returns `true` if this `Interval` is less than `that` interval, `false`
@@ -56,9 +57,9 @@ export const empty: Interval = internal.empty
  * @category ordering
  */
 export const lessThan: {
-  (that: Interval): (self: Interval) => boolean
-  (self: Interval, that: Interval): boolean
-} = internal.lessThan
+  (that: Interval): (self: Interval) => boolean;
+  (self: Interval, that: Interval): boolean;
+} = internal.lessThan;
 
 /**
  * Returns the minimum of two `Interval`s.
@@ -67,9 +68,9 @@ export const lessThan: {
  * @category ordering
  */
 export const min: {
-  (that: Interval): (self: Interval) => Interval
-  (self: Interval, that: Interval): Interval
-} = internal.min
+  (that: Interval): (self: Interval) => Interval;
+  (self: Interval, that: Interval): Interval;
+} = internal.min;
 
 /**
  * Returns the maximum of two `Interval`s.
@@ -78,9 +79,9 @@ export const min: {
  * @category ordering
  */
 export const max: {
-  (that: Interval): (self: Interval) => Interval
-  (self: Interval, that: Interval): Interval
-} = internal.max
+  (that: Interval): (self: Interval) => Interval;
+  (self: Interval, that: Interval): Interval;
+} = internal.max;
 
 /**
  * Returns `true` if the specified `Interval` is empty, `false` otherwise.
@@ -88,7 +89,7 @@ export const max: {
  * @since 2.0.0
  * @category ordering
  */
-export const isEmpty: (self: Interval) => boolean = internal.isEmpty
+export const isEmpty: (self: Interval) => boolean = internal.isEmpty;
 
 /**
  * Returns `true` if the specified `Interval` is non-empty, `false` otherwise.
@@ -96,7 +97,7 @@ export const isEmpty: (self: Interval) => boolean = internal.isEmpty
  * @since 2.0.0
  * @category ordering
  */
-export const isNonEmpty: (self: Interval) => boolean = internal.isNonEmpty
+export const isNonEmpty: (self: Interval) => boolean = internal.isNonEmpty;
 
 /**
  * Computes a new `Interval` which is the intersection of this `Interval` and
@@ -106,9 +107,9 @@ export const isNonEmpty: (self: Interval) => boolean = internal.isNonEmpty
  * @category ordering
  */
 export const intersect: {
-  (that: Interval): (self: Interval) => Interval
-  (self: Interval, that: Interval): Interval
-} = internal.intersect
+  (that: Interval): (self: Interval) => Interval;
+  (self: Interval, that: Interval): Interval;
+} = internal.intersect;
 
 /**
  * Calculates the size of the `Interval` as the `Duration` from the start of the
@@ -117,7 +118,7 @@ export const intersect: {
  * @since 2.0.0
  * @category getters
  */
-export const size: (self: Interval) => Duration.Duration = internal.size
+export const size: (self: Interval) => Duration.Duration = internal.size;
 
 /**
  * Computes a new `Interval` which is the union of this `Interval` and that
@@ -128,9 +129,9 @@ export const size: (self: Interval) => Duration.Duration = internal.size
  * @category utils
  */
 export const union: {
-  (that: Interval): (self: Interval) => Option.Option<Interval>
-  (self: Interval, that: Interval): Option.Option<Interval>
-} = internal.union
+  (that: Interval): (self: Interval) => Option.Option<Interval>;
+  (self: Interval, that: Interval): Option.Option<Interval>;
+} = internal.union;
 
 /**
  * Construct an `Interval` that includes all time equal to and after the
@@ -139,7 +140,7 @@ export const union: {
  * @since 2.0.0
  * @category constructors
  */
-export const after: (startMilliseconds: number) => Interval = internal.after
+export const after: (startMilliseconds: number) => Interval = internal.after;
 
 /**
  * Construct an `Interval` that includes all time equal to and before the
@@ -148,4 +149,4 @@ export const after: (startMilliseconds: number) => Interval = internal.after
  * @category constructors
  * @since 2.0.0
  */
-export const before: (endMilliseconds: number) => Interval = internal.before
+export const before: (endMilliseconds: number) => Interval = internal.before;

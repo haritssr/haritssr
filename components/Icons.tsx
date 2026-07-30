@@ -1,6 +1,11 @@
 export const GitHubIcon = ({ className }: { className: string }) => {
   return (
-    <svg className={className} fill="none" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={className}
+      fill="none"
+      viewBox="0 0 15 15"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <title>GitHub Icon</title>
       <path
         clipRule="evenodd"

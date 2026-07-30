@@ -1,86 +1,92 @@
-import * as RA from "../Array.js"
-import * as Boolean from "../Boolean.js"
-import type * as Cause from "../Cause.js"
-import * as Chunk from "../Chunk.js"
-import type * as Clock from "../Clock.js"
-import type { ConfigProvider } from "../ConfigProvider.js"
-import * as Context from "../Context.js"
-import type { DefaultServices } from "../DefaultServices.js"
-import type * as Duration from "../Duration.js"
-import type * as Effect from "../Effect.js"
-import * as Effectable from "../Effectable.js"
-import type * as Either from "../Either.js"
-import * as ExecutionStrategy from "../ExecutionStrategy.js"
-import type * as Exit from "../Exit.js"
-import type * as Fiber from "../Fiber.js"
-import * as FiberId from "../FiberId.js"
-import type * as FiberRef from "../FiberRef.js"
-import * as FiberRefs from "../FiberRefs.js"
-import * as FiberRefsPatch from "../FiberRefsPatch.js"
-import * as FiberStatus from "../FiberStatus.js"
-import type { LazyArg } from "../Function.js"
-import { dual, identity, pipe } from "../Function.js"
-import { globalValue } from "../GlobalValue.js"
-import * as HashMap from "../HashMap.js"
-import * as HashSet from "../HashSet.js"
-import * as Inspectable from "../Inspectable.js"
-import type { Logger } from "../Logger.js"
-import * as LogLevel from "../LogLevel.js"
-import type * as MetricLabel from "../MetricLabel.js"
-import * as Micro from "../Micro.js"
-import * as MRef from "../MutableRef.js"
-import * as Option from "../Option.js"
-import { pipeArguments } from "../Pipeable.js"
-import * as Predicate from "../Predicate.js"
-import type * as Random from "../Random.js"
-import * as Ref from "../Ref.js"
-import type { Entry, Request } from "../Request.js"
-import type * as RequestBlock from "../RequestBlock.js"
-import type * as RuntimeFlags from "../RuntimeFlags.js"
-import * as RuntimeFlagsPatch from "../RuntimeFlagsPatch.js"
-import { currentScheduler, type Scheduler } from "../Scheduler.js"
-import type * as Scope from "../Scope.js"
-import type * as Supervisor from "../Supervisor.js"
-import type * as Tracer from "../Tracer.js"
-import type { Concurrency, NoExcessProperties, NoInfer } from "../Types.js"
-import { internalCall, yieldWrapGet } from "../Utils.js"
-import * as RequestBlock_ from "./blockedRequests.js"
-import * as internalCause from "./cause.js"
-import * as clock from "./clock.js"
-import { currentRequestMap } from "./completedRequestMap.js"
-import * as concurrency from "./concurrency.js"
-import { configProviderTag } from "./configProvider.js"
-import * as internalEffect from "./core-effect.js"
-import * as core from "./core.js"
-import * as defaultServices from "./defaultServices.js"
-import { consoleTag } from "./defaultServices/console.js"
-import * as executionStrategy from "./executionStrategy.js"
-import * as internalFiber from "./fiber.js"
-import * as FiberMessage from "./fiberMessage.js"
-import * as fiberRefs from "./fiberRefs.js"
-import * as fiberScope from "./fiberScope.js"
-import * as internalLogger from "./logger.js"
-import * as metric from "./metric.js"
-import * as metricBoundaries from "./metric/boundaries.js"
-import * as metricLabel from "./metric/label.js"
-import * as OpCodes from "./opCodes/effect.js"
-import { randomTag } from "./random.js"
-import { complete } from "./request.js"
-import * as runtimeFlags_ from "./runtimeFlags.js"
-import { OpSupervision } from "./runtimeFlags.js"
-import * as supervisor from "./supervisor.js"
-import * as SupervisorPatch from "./supervisor/patch.js"
-import * as tracer from "./tracer.js"
-import * as version from "./version.js"
+import * as RA from "../Array.js";
+import * as Boolean from "../Boolean.js";
+import type * as Cause from "../Cause.js";
+import * as Chunk from "../Chunk.js";
+import type * as Clock from "../Clock.js";
+import type { ConfigProvider } from "../ConfigProvider.js";
+import * as Context from "../Context.js";
+import type { DefaultServices } from "../DefaultServices.js";
+import type * as Duration from "../Duration.js";
+import type * as Effect from "../Effect.js";
+import * as Effectable from "../Effectable.js";
+import type * as Either from "../Either.js";
+import * as ExecutionStrategy from "../ExecutionStrategy.js";
+import type * as Exit from "../Exit.js";
+import type * as Fiber from "../Fiber.js";
+import * as FiberId from "../FiberId.js";
+import type * as FiberRef from "../FiberRef.js";
+import * as FiberRefs from "../FiberRefs.js";
+import * as FiberRefsPatch from "../FiberRefsPatch.js";
+import * as FiberStatus from "../FiberStatus.js";
+import type { LazyArg } from "../Function.js";
+import { dual, identity, pipe } from "../Function.js";
+import { globalValue } from "../GlobalValue.js";
+import * as HashMap from "../HashMap.js";
+import * as HashSet from "../HashSet.js";
+import * as Inspectable from "../Inspectable.js";
+import type { Logger } from "../Logger.js";
+import * as LogLevel from "../LogLevel.js";
+import type * as MetricLabel from "../MetricLabel.js";
+import * as Micro from "../Micro.js";
+import * as MRef from "../MutableRef.js";
+import * as Option from "../Option.js";
+import { pipeArguments } from "../Pipeable.js";
+import * as Predicate from "../Predicate.js";
+import type * as Random from "../Random.js";
+import * as Ref from "../Ref.js";
+import type { Entry, Request } from "../Request.js";
+import type * as RequestBlock from "../RequestBlock.js";
+import type * as RuntimeFlags from "../RuntimeFlags.js";
+import * as RuntimeFlagsPatch from "../RuntimeFlagsPatch.js";
+import { currentScheduler, type Scheduler } from "../Scheduler.js";
+import type * as Scope from "../Scope.js";
+import type * as Supervisor from "../Supervisor.js";
+import type * as Tracer from "../Tracer.js";
+import type { Concurrency, NoExcessProperties, NoInfer } from "../Types.js";
+import { internalCall, yieldWrapGet } from "../Utils.js";
+import * as RequestBlock_ from "./blockedRequests.js";
+import * as internalCause from "./cause.js";
+import * as clock from "./clock.js";
+import { currentRequestMap } from "./completedRequestMap.js";
+import * as concurrency from "./concurrency.js";
+import { configProviderTag } from "./configProvider.js";
+import * as core from "./core.js";
+import * as internalEffect from "./core-effect.js";
+import { consoleTag } from "./defaultServices/console.js";
+import * as defaultServices from "./defaultServices.js";
+import * as executionStrategy from "./executionStrategy.js";
+import * as internalFiber from "./fiber.js";
+import * as FiberMessage from "./fiberMessage.js";
+import * as fiberRefs from "./fiberRefs.js";
+import * as fiberScope from "./fiberScope.js";
+import * as internalLogger from "./logger.js";
+import * as metricBoundaries from "./metric/boundaries.js";
+import * as metricLabel from "./metric/label.js";
+import * as metric from "./metric.js";
+import * as OpCodes from "./opCodes/effect.js";
+import { randomTag } from "./random.js";
+import { complete } from "./request.js";
+import * as runtimeFlags_ from "./runtimeFlags.js";
+import { OpSupervision } from "./runtimeFlags.js";
+import * as SupervisorPatch from "./supervisor/patch.js";
+import * as supervisor from "./supervisor.js";
+import * as tracer from "./tracer.js";
+import * as version from "./version.js";
 
 /** @internal */
-export const fiberStarted = metric.counter("effect_fiber_started", { incremental: true })
+export const fiberStarted = metric.counter("effect_fiber_started", {
+  incremental: true,
+});
 /** @internal */
-export const fiberActive = metric.counter("effect_fiber_active")
+export const fiberActive = metric.counter("effect_fiber_active");
 /** @internal */
-export const fiberSuccesses = metric.counter("effect_fiber_successes", { incremental: true })
+export const fiberSuccesses = metric.counter("effect_fiber_successes", {
+  incremental: true,
+});
 /** @internal */
-export const fiberFailures = metric.counter("effect_fiber_failures", { incremental: true })
+export const fiberFailures = metric.counter("effect_fiber_failures", {
+  incremental: true,
+});
 /** @internal */
 export const fiberLifetimes = metric.tagged(
   metric.histogram(
@@ -88,59 +94,59 @@ export const fiberLifetimes = metric.tagged(
     metricBoundaries.exponential({
       start: 0.5,
       factor: 2,
-      count: 35
+      count: 35,
     })
   ),
   "time_unit",
   "milliseconds"
-)
+);
 
 /** @internal */
 type EvaluationSignal =
   | EvaluationSignalContinue
   | EvaluationSignalDone
-  | EvaluationSignalYieldNow
+  | EvaluationSignalYieldNow;
 
 /** @internal */
-const EvaluationSignalContinue = "Continue" as const
+const EvaluationSignalContinue = "Continue" as const;
 
 /** @internal */
-type EvaluationSignalContinue = typeof EvaluationSignalContinue
+type EvaluationSignalContinue = typeof EvaluationSignalContinue;
 
 /** @internal */
-const EvaluationSignalDone = "Done" as const
+const EvaluationSignalDone = "Done" as const;
 
 /** @internal */
-type EvaluationSignalDone = typeof EvaluationSignalDone
+type EvaluationSignalDone = typeof EvaluationSignalDone;
 
 /** @internal */
-const EvaluationSignalYieldNow = "Yield" as const
+const EvaluationSignalYieldNow = "Yield" as const;
 
 /** @internal */
-type EvaluationSignalYieldNow = typeof EvaluationSignalYieldNow
+type EvaluationSignalYieldNow = typeof EvaluationSignalYieldNow;
 
 const runtimeFiberVariance = {
   /* c8 ignore next */
   _E: (_: never) => _,
   /* c8 ignore next */
-  _A: (_: never) => _
-}
+  _A: (_: never) => _,
+};
 
 const absurd = (_: never): never => {
   throw new Error(
-    `BUG: FiberRuntime - ${
-      Inspectable.toStringUnknown(_)
-    } - please report an issue at https://github.com/Effect-TS/effect/issues`
-  )
-}
+    `BUG: FiberRuntime - ${Inspectable.toStringUnknown(
+      _
+    )} - please report an issue at https://github.com/Effect-TS/effect/issues`
+  );
+};
 
-const YieldedOp = Symbol.for("effect/internal/fiberRuntime/YieldedOp")
-type YieldedOp = typeof YieldedOp
+const YieldedOp = Symbol.for("effect/internal/fiberRuntime/YieldedOp");
+type YieldedOp = typeof YieldedOp;
 const yieldedOpChannel: {
-  currentOp: core.Primitive | null
+  currentOp: core.Primitive | null;
 } = globalValue("effect/internal/fiberRuntime/yieldedOpChannel", () => ({
-  currentOp: null
-}))
+  currentOp: null,
+}));
 
 const contOpSuccess = {
   [OpCodes.OP_ON_SUCCESS]: (
@@ -148,46 +154,47 @@ const contOpSuccess = {
     cont: core.OnSuccess,
     value: unknown
   ) => {
-    return internalCall(() => cont.effect_instruction_i1(value))
+    return internalCall(() => cont.effect_instruction_i1(value));
   },
   ["OnStep"]: (
     _: FiberRuntime<any, any>,
     _cont: core.OnStep,
     value: unknown
   ) => {
-    return core.exitSucceed(core.exitSucceed(value))
+    return core.exitSucceed(core.exitSucceed(value));
   },
   [OpCodes.OP_ON_SUCCESS_AND_FAILURE]: (
     _: FiberRuntime<any, any>,
     cont: core.OnSuccessAndFailure,
     value: unknown
   ) => {
-    return internalCall(() => cont.effect_instruction_i2(value))
+    return internalCall(() => cont.effect_instruction_i2(value));
   },
   [OpCodes.OP_REVERT_FLAGS]: (
     self: FiberRuntime<any, any>,
     cont: core.RevertFlags,
     value: unknown
   ) => {
-    self.patchRuntimeFlags(self.currentRuntimeFlags, cont.patch)
-    if (runtimeFlags_.interruptible(self.currentRuntimeFlags) && self.isInterrupted()) {
-      return core.exitFailCause(self.getInterruptedCause())
-    } else {
-      return core.exitSucceed(value)
+    self.patchRuntimeFlags(self.currentRuntimeFlags, cont.patch);
+    if (
+      runtimeFlags_.interruptible(self.currentRuntimeFlags) &&
+      self.isInterrupted()
+    ) {
+      return core.exitFailCause(self.getInterruptedCause());
     }
+    return core.exitSucceed(value);
   },
   [OpCodes.OP_WHILE]: (
     self: FiberRuntime<any, any>,
     cont: core.While,
     value: unknown
   ) => {
-    internalCall(() => cont.effect_instruction_i2(value))
+    internalCall(() => cont.effect_instruction_i2(value));
     if (internalCall(() => cont.effect_instruction_i0())) {
-      self.pushStack(cont)
-      return internalCall(() => cont.effect_instruction_i1())
-    } else {
-      return core.void
+      self.pushStack(cont);
+      return internalCall(() => cont.effect_instruction_i1());
     }
+    return core.void;
   },
   [OpCodes.OP_ITERATOR]: (
     self: FiberRuntime<any, any>,
@@ -195,31 +202,36 @@ const contOpSuccess = {
     value: unknown
   ) => {
     while (true) {
-      const state = internalCall(() => cont.effect_instruction_i0.next(value))
+      const state = internalCall(() => cont.effect_instruction_i0.next(value));
       if (state.done) {
-        return core.exitSucceed(state.value)
+        return core.exitSucceed(state.value);
       }
-      const primitive = yieldWrapGet(state.value)
+      const primitive = yieldWrapGet(state.value);
       if (!core.exitIsExit(primitive)) {
-        self.pushStack(cont)
-        return primitive
-      } else if (primitive._tag === "Failure") {
-        return primitive
+        self.pushStack(cont);
+        return primitive;
       }
-      value = primitive.value
+      if (primitive._tag === "Failure") {
+        return primitive;
+      }
+      value = primitive.value;
     }
-  }
-}
+  },
+};
 
 const drainQueueWhileRunningTable = {
   [FiberMessage.OP_INTERRUPT_SIGNAL]: (
     self: FiberRuntime<any, any>,
     runtimeFlags: RuntimeFlags.RuntimeFlags,
     cur: Effect.Effect<any, any, any>,
-    message: FiberMessage.FiberMessage & { _tag: FiberMessage.OP_INTERRUPT_SIGNAL }
+    message: FiberMessage.FiberMessage & {
+      _tag: FiberMessage.OP_INTERRUPT_SIGNAL;
+    }
   ) => {
-    self.processNewInterruptSignal(message.cause)
-    return runtimeFlags_.interruptible(runtimeFlags) ? core.exitFailCause(message.cause) : cur
+    self.processNewInterruptSignal(message.cause);
+    return runtimeFlags_.interruptible(runtimeFlags)
+      ? core.exitFailCause(message.cause)
+      : cur;
   },
   [FiberMessage.OP_RESUME]: (
     _self: FiberRuntime<any, any>,
@@ -227,7 +239,9 @@ const drainQueueWhileRunningTable = {
     _cur: Effect.Effect<any, any, any>,
     _message: FiberMessage.FiberMessage
   ) => {
-    throw new Error("It is illegal to have multiple concurrent run loops in a single fiber")
+    throw new Error(
+      "It is illegal to have multiple concurrent run loops in a single fiber"
+    );
   },
   [FiberMessage.OP_STATEFUL]: (
     self: FiberRuntime<any, any>,
@@ -235,8 +249,8 @@ const drainQueueWhileRunningTable = {
     cur: Effect.Effect<any, any, any>,
     message: FiberMessage.FiberMessage & { _tag: FiberMessage.OP_STATEFUL }
   ) => {
-    message.onFiber(self, FiberStatus.running(runtimeFlags))
-    return cur
+    message.onFiber(self, FiberStatus.running(runtimeFlags));
+    return cur;
   },
   [FiberMessage.OP_YIELD_NOW]: (
     _self: FiberRuntime<any, any>,
@@ -244,9 +258,9 @@ const drainQueueWhileRunningTable = {
     cur: Effect.Effect<any, any, any>,
     _message: FiberMessage.FiberMessage & { _tag: FiberMessage.OP_YIELD_NOW }
   ) => {
-    return core.flatMap(core.yieldNow(), () => cur)
-  }
-}
+    return core.flatMap(core.yieldNow(), () => cur);
+  },
+};
 
 /**
  * Executes all requests, submitting requests to each data source in parallel.
@@ -258,91 +272,95 @@ const runBlockedRequests = (self: RequestBlock.RequestBlock) =>
       forEachConcurrentDiscard(
         RequestBlock_.sequentialCollectionToChunk(requestsByRequestResolver),
         ([dataSource, sequential]) => {
-          const map = new Map<Request<any, any>, Entry<any>>()
-          const arr: Array<Array<Entry<any>>> = []
+          const map = new Map<Request<any, any>, Entry<any>>();
+          const arr: Array<Array<Entry<any>>> = [];
           for (const block of sequential) {
-            arr.push(Chunk.toReadonlyArray(block) as any)
+            arr.push(Chunk.toReadonlyArray(block) as any);
             for (const entry of block) {
-              map.set(entry.request as Request<any, any>, entry)
+              map.set(entry.request as Request<any, any>, entry);
             }
           }
-          const flat = arr.flat()
+          const flat = arr.flat();
           return core.fiberRefLocally(
             invokeWithInterrupt(dataSource.runAll(arr), flat, () =>
               flat.forEach((entry) => {
-                entry.listeners.interrupted = true
-              })),
+                entry.listeners.interrupted = true;
+              })
+            ),
             currentRequestMap,
             map
-          )
+          );
         },
         false,
         false
       )
-  )
+  );
 
 /** @internal */
 export interface Snapshot {
-  refs: FiberRefs.FiberRefs
-  flags: RuntimeFlags.RuntimeFlags
+  refs: FiberRefs.FiberRefs;
+  flags: RuntimeFlags.RuntimeFlags;
 }
 
-const _version = version.getCurrentVersion()
+const _version = version.getCurrentVersion();
 
 /** @internal */
-export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A, E>
+export class FiberRuntime<in out A, in out E = never>
+  extends Effectable.Class<A, E>
   implements Fiber.RuntimeFiber<A, E>
 {
-  readonly [internalFiber.FiberTypeId] = internalFiber.fiberVariance
-  readonly [internalFiber.RuntimeFiberTypeId] = runtimeFiberVariance
-  private _fiberRefs: FiberRefs.FiberRefs
-  private _fiberId: FiberId.Runtime
-  private _queue = new Array<FiberMessage.FiberMessage>()
-  private _children: Set<FiberRuntime<any, any>> | null = null
-  private _observers = new Array<(exit: Exit.Exit<A, E>) => void>()
-  private _running = false
-  private _stack: Array<core.Continuation> = []
-  private _asyncInterruptor: ((effect: Effect.Effect<any, any, any>) => any) | null = null
-  private _asyncBlockingOn: FiberId.FiberId | null = null
-  private _exitValue: Exit.Exit<A, E> | null = null
-  private _steps: Array<Snapshot> = []
-  private _isYielding = false
+  readonly [internalFiber.FiberTypeId] = internalFiber.fiberVariance;
+  readonly [internalFiber.RuntimeFiberTypeId] = runtimeFiberVariance;
+  private _fiberRefs: FiberRefs.FiberRefs;
+  private _fiberId: FiberId.Runtime;
+  private _queue = [] as FiberMessage.FiberMessage[];
+  private _children: Set<FiberRuntime<any, any>> | null = null;
+  private _observers = [] as ((exit: Exit.Exit<A, E>) => void)[];
+  private _running = false;
+  private _stack: Array<core.Continuation> = [];
+  private _asyncInterruptor:
+    | ((effect: Effect.Effect<any, any, any>) => any)
+    | null = null;
+  private _asyncBlockingOn: FiberId.FiberId | null = null;
+  private _exitValue: Exit.Exit<A, E> | null = null;
+  private _steps: Array<Snapshot> = [];
+  private _isYielding = false;
 
-  public currentRuntimeFlags: RuntimeFlags.RuntimeFlags
-  public currentOpCount: number = 0
-  public currentSupervisor!: Supervisor.Supervisor<any>
-  public currentScheduler!: Scheduler
-  public currentTracer!: Tracer.Tracer
-  public currentSpan!: Tracer.AnySpan | undefined
-  public currentContext!: Context.Context<never>
-  public currentDefaultServices!: Context.Context<DefaultServices>
+  public currentRuntimeFlags: RuntimeFlags.RuntimeFlags;
+  public currentOpCount = 0;
+  public currentSupervisor!: Supervisor.Supervisor<any>;
+  public currentScheduler!: Scheduler;
+  public currentTracer!: Tracer.Tracer;
+  public currentSpan!: Tracer.AnySpan | undefined;
+  public currentContext!: Context.Context<never>;
+  public currentDefaultServices!: Context.Context<DefaultServices>;
 
   constructor(
     fiberId: FiberId.Runtime,
     fiberRefs0: FiberRefs.FiberRefs,
     runtimeFlags0: RuntimeFlags.RuntimeFlags
   ) {
-    super()
-    this.currentRuntimeFlags = runtimeFlags0
-    this._fiberId = fiberId
-    this._fiberRefs = fiberRefs0
+    super();
+    this.currentRuntimeFlags = runtimeFlags0;
+    this._fiberId = fiberId;
+    this._fiberRefs = fiberRefs0;
     if (runtimeFlags_.runtimeMetrics(runtimeFlags0)) {
-      const tags = this.getFiberRef(core.currentMetricLabels)
-      fiberStarted.unsafeUpdate(1, tags)
-      fiberActive.unsafeUpdate(1, tags)
+      const tags = this.getFiberRef(core.currentMetricLabels);
+      fiberStarted.unsafeUpdate(1, tags);
+      fiberActive.unsafeUpdate(1, tags);
     }
-    this.refreshRefCache()
+    this.refreshRefCache();
   }
 
   commit(): Effect.Effect<A, E, never> {
-    return internalFiber.join(this)
+    return internalFiber.join(this);
   }
 
   /**
    * The identity of the fiber.
    */
   id(): FiberId.Runtime {
-    return this._fiberId
+    return this._fiberId;
   }
 
   /**
@@ -351,14 +369,14 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * it has been created.
    */
   resume<A, E>(effect: Effect.Effect<A, E, any>): void {
-    this.tell(FiberMessage.resume(effect))
+    this.tell(FiberMessage.resume(effect));
   }
 
   /**
    * The status of the fiber.
    */
   get status(): Effect.Effect<FiberStatus.FiberStatus> {
-    return this.ask((_, status) => status)
+    return this.ask((_, status) => status);
   }
 
   /**
@@ -367,24 +385,24 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
   get runtimeFlags(): Effect.Effect<RuntimeFlags.RuntimeFlags> {
     return this.ask((state, status) => {
       if (FiberStatus.isDone(status)) {
-        return state.currentRuntimeFlags
+        return state.currentRuntimeFlags;
       }
-      return status.runtimeFlags
-    })
+      return status.runtimeFlags;
+    });
   }
 
   /**
    * Returns the current `FiberScope` for the fiber.
    */
   scope(): fiberScope.FiberScope {
-    return fiberScope.unsafeMake(this)
+    return fiberScope.unsafeMake(this);
   }
 
   /**
    * Retrieves the immediate children of the fiber.
    */
   get children(): Effect.Effect<Array<Fiber.RuntimeFiber<any, any>>> {
-    return this.ask((fiber) => Array.from(fiber.getChildren()))
+    return this.ask((fiber) => Array.from(fiber.getChildren()));
   }
 
   /**
@@ -392,9 +410,9 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    */
   getChildren(): Set<FiberRuntime<any, any>> {
     if (this._children === null) {
-      this._children = new Set()
+      this._children = new Set();
     }
-    return this._children
+    return this._children;
   }
 
   /**
@@ -406,14 +424,14 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * log annotations and log level) may not be up-to-date.
    */
   getInterruptedCause() {
-    return this.getFiberRef(core.currentInterruptedCause)
+    return this.getFiberRef(core.currentInterruptedCause);
   }
 
   /**
    * Retrieves the whole set of fiber refs.
    */
   fiberRefs(): Effect.Effect<FiberRefs.FiberRefs> {
-    return this.ask((fiber) => fiber.getFiberRefs())
+    return this.ask((fiber) => fiber.getFiberRefs());
   }
 
   /**
@@ -427,74 +445,81 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
     f: (runtime: FiberRuntime<any, any>, status: FiberStatus.FiberStatus) => Z
   ): Effect.Effect<Z> {
     return core.suspend(() => {
-      const deferred = core.deferredUnsafeMake<Z>(this._fiberId)
+      const deferred = core.deferredUnsafeMake<Z>(this._fiberId);
       this.tell(
         FiberMessage.stateful((fiber, status) => {
-          core.deferredUnsafeDone(deferred, core.sync(() => f(fiber, status)))
+          core.deferredUnsafeDone(
+            deferred,
+            core.sync(() => f(fiber, status))
+          );
         })
-      )
-      return core.deferredAwait(deferred)
-    })
+      );
+      return core.deferredAwait(deferred);
+    });
   }
 
   /**
    * Adds a message to be processed by the fiber on the fiber.
    */
   tell(message: FiberMessage.FiberMessage): void {
-    this._queue.push(message)
+    this._queue.push(message);
     if (!this._running) {
-      this._running = true
-      this.drainQueueLaterOnExecutor()
+      this._running = true;
+      this.drainQueueLaterOnExecutor();
     }
   }
 
   get await(): Effect.Effect<Exit.Exit<A, E>> {
     return core.async((resume) => {
-      const cb = (exit: Exit.Exit<A, E>) => resume(core.succeed(exit))
+      const cb = (exit: Exit.Exit<A, E>) => resume(core.succeed(exit));
       if (this._exitValue !== null) {
-        cb(this._exitValue!)
-        return
+        cb(this._exitValue!);
+        return;
       }
       this.tell(
         FiberMessage.stateful((fiber, _) => {
           if (fiber._exitValue !== null) {
-            cb(this._exitValue!)
+            cb(this._exitValue!);
           } else {
-            fiber.addObserver(cb)
+            fiber.addObserver(cb);
           }
         })
-      )
+      );
       return core.sync(() =>
         this.tell(
           FiberMessage.stateful((fiber, _) => {
-            fiber.removeObserver(cb)
+            fiber.removeObserver(cb);
           })
         )
-      )
-    }, this.id())
+      );
+    }, this.id());
   }
 
   get inheritAll(): Effect.Effect<void> {
     return core.withFiberRuntime((parentFiber, parentStatus) => {
-      const parentFiberId = parentFiber.id()
-      const parentFiberRefs = parentFiber.getFiberRefs()
-      const parentRuntimeFlags = parentStatus.runtimeFlags
-      const childFiberRefs = this.getFiberRefs()
-      const updatedFiberRefs = fiberRefs.joinAs(parentFiberRefs, parentFiberId, childFiberRefs)
+      const parentFiberId = parentFiber.id();
+      const parentFiberRefs = parentFiber.getFiberRefs();
+      const parentRuntimeFlags = parentStatus.runtimeFlags;
+      const childFiberRefs = this.getFiberRefs();
+      const updatedFiberRefs = fiberRefs.joinAs(
+        parentFiberRefs,
+        parentFiberId,
+        childFiberRefs
+      );
 
-      parentFiber.setFiberRefs(updatedFiberRefs)
+      parentFiber.setFiberRefs(updatedFiberRefs);
 
-      const updatedRuntimeFlags = parentFiber.getFiberRef(currentRuntimeFlags)
+      const updatedRuntimeFlags = parentFiber.getFiberRef(currentRuntimeFlags);
 
       const patch = pipe(
         runtimeFlags_.diff(parentRuntimeFlags, updatedRuntimeFlags),
         // Do not inherit WindDown or Interruption!
         RuntimeFlagsPatch.exclude(runtimeFlags_.Interruption),
         RuntimeFlagsPatch.exclude(runtimeFlags_.WindDown)
-      )
+      );
 
-      return core.updateRuntimeFlags(patch)
-    })
+      return core.updateRuntimeFlags(patch);
+    });
   }
 
   /**
@@ -502,7 +527,7 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * already done.
    */
   get poll(): Effect.Effect<Option.Option<Exit.Exit<A, E>>> {
-    return core.sync(() => Option.fromNullable(this._exitValue))
+    return core.sync(() => Option.fromNullable(this._exitValue));
   }
 
   /**
@@ -510,21 +535,23 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * already done.
    */
   unsafePoll(): Exit.Exit<A, E> | null {
-    return this._exitValue
+    return this._exitValue;
   }
 
   /**
    * In the background, interrupts the fiber as if interrupted from the specified fiber.
    */
   interruptAsFork(fiberId: FiberId.FiberId): Effect.Effect<void> {
-    return core.sync(() => this.tell(FiberMessage.interruptSignal(internalCause.interrupt(fiberId))))
+    return core.sync(() =>
+      this.tell(FiberMessage.interruptSignal(internalCause.interrupt(fiberId)))
+    );
   }
 
   /**
    * In the background, interrupts the fiber as if interrupted from the specified fiber.
    */
   unsafeInterruptAsFork(fiberId: FiberId.FiberId) {
-    this.tell(FiberMessage.interruptSignal(internalCause.interrupt(fiberId)))
+    this.tell(FiberMessage.interruptSignal(internalCause.interrupt(fiberId)));
   }
 
   /**
@@ -534,9 +561,9 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    */
   addObserver(observer: (exit: Exit.Exit<A, E>) => void): void {
     if (this._exitValue !== null) {
-      observer(this._exitValue!)
+      observer(this._exitValue!);
     } else {
-      this._observers.push(observer)
+      this._observers.push(observer);
     }
   }
 
@@ -547,7 +574,7 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   removeObserver(observer: (exit: Exit.Exit<A, E>) => void): void {
-    this._observers = this._observers.filter((o) => o !== observer)
+    this._observers = this._observers.filter((o) => o !== observer);
   }
   /**
    * Retrieves all fiber refs of the fiber.
@@ -557,8 +584,8 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * log annotations and log level) may not be up-to-date.
    */
   getFiberRefs(): FiberRefs.FiberRefs {
-    this.setFiberRef(currentRuntimeFlags, this.currentRuntimeFlags)
-    return this._fiberRefs
+    this.setFiberRef(currentRuntimeFlags, this.currentRuntimeFlags);
+    return this._fiberRefs;
   }
 
   /**
@@ -567,7 +594,7 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   unsafeDeleteFiberRef<X>(fiberRef: FiberRef.FiberRef<X>): void {
-    this._fiberRefs = fiberRefs.delete_(this._fiberRefs, fiberRef)
+    this._fiberRefs = fiberRefs.delete_(this._fiberRefs, fiberRef);
   }
 
   /**
@@ -579,9 +606,9 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    */
   getFiberRef<X>(fiberRef: FiberRef.FiberRef<X>): X {
     if (this._fiberRefs.locals.has(fiberRef)) {
-      return this._fiberRefs.locals.get(fiberRef)![0][1] as X
+      return this._fiberRefs.locals.get(fiberRef)![0][1] as X;
     }
-    return fiberRef.initial
+    return fiberRef.initial;
   }
 
   /**
@@ -593,18 +620,22 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
     this._fiberRefs = fiberRefs.updateAs(this._fiberRefs, {
       fiberId: this._fiberId,
       fiberRef,
-      value
-    })
-    this.refreshRefCache()
+      value,
+    });
+    this.refreshRefCache();
   }
 
   refreshRefCache() {
-    this.currentDefaultServices = this.getFiberRef(defaultServices.currentServices)
-    this.currentTracer = this.currentDefaultServices.unsafeMap.get(tracer.tracerTag.key)
-    this.currentSupervisor = this.getFiberRef(currentSupervisor)
-    this.currentScheduler = this.getFiberRef(currentScheduler)
-    this.currentContext = this.getFiberRef(core.currentContext)
-    this.currentSpan = this.currentContext.unsafeMap.get(tracer.spanTag.key)
+    this.currentDefaultServices = this.getFiberRef(
+      defaultServices.currentServices
+    );
+    this.currentTracer = this.currentDefaultServices.unsafeMap.get(
+      tracer.tracerTag.key
+    );
+    this.currentSupervisor = this.getFiberRef(currentSupervisor);
+    this.currentScheduler = this.getFiberRef(currentScheduler);
+    this.currentContext = this.getFiberRef(core.currentContext);
+    this.currentSpan = this.currentContext.unsafeMap.get(tracer.spanTag.key);
   }
 
   /**
@@ -613,8 +644,8 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   setFiberRefs(fiberRefs: FiberRefs.FiberRefs): void {
-    this._fiberRefs = fiberRefs
-    this.refreshRefCache()
+    this._fiberRefs = fiberRefs;
+    this.refreshRefCache();
   }
 
   /**
@@ -623,7 +654,7 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   addChild(child: FiberRuntime<any, any>) {
-    this.getChildren().add(child)
+    this.getChildren().add(child);
   }
 
   /**
@@ -632,7 +663,7 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   removeChild(child: FiberRuntime<any, any>) {
-    this.getChildren().delete(child)
+    this.getChildren().delete(child);
   }
 
   /**
@@ -643,14 +674,14 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * evaluated the effects but prior to exiting.
    */
   transferChildren(scope: fiberScope.FiberScope) {
-    const children = this._children
+    const children = this._children;
     // Clear the children of the current fiber
-    this._children = null
+    this._children = null;
     if (children !== null && children.size > 0) {
       for (const child of children) {
         // If the child is still running, add it to the scope
         if (child._exitValue === null) {
-          scope.add(this.currentRuntimeFlags, child)
+          scope.add(this.currentRuntimeFlags, child);
         }
       }
     }
@@ -664,34 +695,37 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   drainQueueOnCurrentThread() {
-    let recurse = true
+    let recurse = true;
     while (recurse) {
-      let evaluationSignal: EvaluationSignal = EvaluationSignalContinue
-      const prev = (globalThis as any)[internalFiber.currentFiberURI]
-      ;(globalThis as any)[internalFiber.currentFiberURI] = this
+      let evaluationSignal: EvaluationSignal = EvaluationSignalContinue;
+      const prev = (globalThis as any)[internalFiber.currentFiberURI];
+      (globalThis as any)[internalFiber.currentFiberURI] = this;
       try {
         while (evaluationSignal === EvaluationSignalContinue) {
-          evaluationSignal = this._queue.length === 0 ?
-            EvaluationSignalDone :
-            this.evaluateMessageWhileSuspended(this._queue.splice(0, 1)[0]!)
+          evaluationSignal =
+            this._queue.length === 0
+              ? EvaluationSignalDone
+              : this.evaluateMessageWhileSuspended(
+                  this._queue.splice(0, 1)[0]!
+                );
         }
       } finally {
-        this._running = false
-        ;(globalThis as any)[internalFiber.currentFiberURI] = prev
+        this._running = false;
+        (globalThis as any)[internalFiber.currentFiberURI] = prev;
       }
       // Maybe someone added something to the queue between us checking, and us
       // giving up the drain. If so, we need to restart the draining, but only
       // if we beat everyone else to the restart:
       if (this._queue.length > 0 && !this._running) {
-        this._running = true
+        this._running = true;
         if (evaluationSignal === EvaluationSignalYieldNow) {
-          this.drainQueueLaterOnExecutor()
-          recurse = false
+          this.drainQueueLaterOnExecutor();
+          recurse = false;
         } else {
-          recurse = true
+          recurse = true;
         }
       } else {
-        recurse = false
+        recurse = false;
       }
     }
   }
@@ -710,7 +744,7 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
       this.run,
       this.getFiberRef(core.currentSchedulingPriority),
       this
-    )
+    );
   }
 
   /**
@@ -724,13 +758,18 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
     runtimeFlags: RuntimeFlags.RuntimeFlags,
     cur0: Effect.Effect<any, any, any>
   ) {
-    let cur = cur0
+    let cur = cur0;
     while (this._queue.length > 0) {
-      const message = this._queue.splice(0, 1)[0]
+      const message = this._queue.splice(0, 1)[0];
       // @ts-expect-error
-      cur = drainQueueWhileRunningTable[message._tag](this, runtimeFlags, cur, message)
+      cur = drainQueueWhileRunningTable[message._tag](
+        this,
+        runtimeFlags,
+        cur,
+        message
+      );
     }
-    return cur
+    return cur;
   }
 
   /**
@@ -741,7 +780,9 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * log annotations and log level) may not be up-to-date.
    */
   isInterrupted(): boolean {
-    return !internalCause.isEmpty(this.getFiberRef(core.currentInterruptedCause))
+    return !internalCause.isEmpty(
+      this.getFiberRef(core.currentInterruptedCause)
+    );
   }
 
   /**
@@ -751,8 +792,11 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   addInterruptedCause(cause: Cause.Cause<never>) {
-    const oldSC = this.getFiberRef(core.currentInterruptedCause)
-    this.setFiberRef(core.currentInterruptedCause, internalCause.sequential(oldSC, cause))
+    const oldSC = this.getFiberRef(core.currentInterruptedCause);
+    this.setFiberRef(
+      core.currentInterruptedCause,
+      internalCause.sequential(oldSC, cause)
+    );
   }
 
   /**
@@ -761,8 +805,8 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   processNewInterruptSignal(cause: Cause.Cause<never>): void {
-    this.addInterruptedCause(cause)
-    this.sendInterruptSignalToAllChildren()
+    this.addInterruptedCause(cause);
+    this.sendInterruptSignalToAllChildren();
   }
 
   /**
@@ -774,14 +818,16 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    */
   sendInterruptSignalToAllChildren(): boolean {
     if (this._children === null || this._children.size === 0) {
-      return false
+      return false;
     }
-    let told = false
+    let told = false;
     for (const child of this._children) {
-      child.tell(FiberMessage.interruptSignal(internalCause.interrupt(this.id())))
-      told = true
+      child.tell(
+        FiberMessage.interruptSignal(internalCause.interrupt(this.id()))
+      );
+      told = true;
     }
-    return told
+    return told;
   }
 
   /**
@@ -793,67 +839,69 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    */
   interruptAllChildren() {
     if (this.sendInterruptSignalToAllChildren()) {
-      const it = this._children!.values()
-      this._children = null
-      let isDone = false
+      const it = this._children!.values();
+      this._children = null;
+      let isDone = false;
       const body = () => {
-        const next = it.next()
-        if (!next.done) {
-          return core.asVoid(next.value.await)
-        } else {
+        const next = it.next();
+        if (next.done) {
           return core.sync(() => {
-            isDone = true
-          })
+            isDone = true;
+          });
         }
-      }
+        return core.asVoid(next.value.await);
+      };
       return core.whileLoop({
         while: () => !isDone,
         body,
         step: () => {
           //
-        }
-      })
+        },
+      });
     }
-    return null
+    return null;
   }
 
   reportExitValue(exit: Exit.Exit<A, E>) {
     if (runtimeFlags_.runtimeMetrics(this.currentRuntimeFlags)) {
-      const tags = this.getFiberRef(core.currentMetricLabels)
-      const startTimeMillis = this.id().startTimeMillis
-      const endTimeMillis = Date.now()
-      fiberLifetimes.unsafeUpdate(endTimeMillis - startTimeMillis, tags)
-      fiberActive.unsafeUpdate(-1, tags)
+      const tags = this.getFiberRef(core.currentMetricLabels);
+      const startTimeMillis = this.id().startTimeMillis;
+      const endTimeMillis = Date.now();
+      fiberLifetimes.unsafeUpdate(endTimeMillis - startTimeMillis, tags);
+      fiberActive.unsafeUpdate(-1, tags);
       switch (exit._tag) {
         case OpCodes.OP_SUCCESS: {
-          fiberSuccesses.unsafeUpdate(1, tags)
-          break
+          fiberSuccesses.unsafeUpdate(1, tags);
+          break;
         }
         case OpCodes.OP_FAILURE: {
-          fiberFailures.unsafeUpdate(1, tags)
-          break
+          fiberFailures.unsafeUpdate(1, tags);
+          break;
         }
       }
     }
     if (exit._tag === "Failure") {
-      const level = this.getFiberRef(core.currentUnhandledErrorLogLevel)
-      if (!internalCause.isInterruptedOnly(exit.cause) && level._tag === "Some") {
-        this.log("Fiber terminated with an unhandled error", exit.cause, level)
+      const level = this.getFiberRef(core.currentUnhandledErrorLogLevel);
+      if (
+        !internalCause.isInterruptedOnly(exit.cause) &&
+        level._tag === "Some"
+      ) {
+        this.log("Fiber terminated with an unhandled error", exit.cause, level);
       }
     }
   }
 
   setExitValue(exit: Exit.Exit<A, E>) {
-    this._exitValue = exit
-    this.reportExitValue(exit)
+    this._exitValue = exit;
+    this.reportExitValue(exit);
     for (let i = this._observers.length - 1; i >= 0; i--) {
-      this._observers[i](exit)
+      this._observers[i](exit);
     }
-    this._observers = []
+    this._observers = [];
   }
 
   getLoggers() {
-    return this.getFiberRef(currentLoggers)
+    return this.getFiberRef(currentLoggers);
   }
 
   log(
@@ -861,20 +909,23 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
     cause: Cause.Cause<any>,
     overrideLogLevel: Option.Option<LogLevel.LogLevel>
   ): void {
-    const logLevel = Option.isSome(overrideLogLevel) ?
-      overrideLogLevel.value :
-      this.getFiberRef(core.currentLogLevel)
-    const minimumLogLevel = this.getFiberRef(currentMinimumLogLevel)
+    const logLevel = Option.isSome(overrideLogLevel)
+      ? overrideLogLevel.value
+      : this.getFiberRef(core.currentLogLevel);
+    const minimumLogLevel = this.getFiberRef(currentMinimumLogLevel);
     if (LogLevel.greaterThan(minimumLogLevel, logLevel)) {
-      return
+      return;
     }
-    const spans = this.getFiberRef(core.currentLogSpan)
-    const annotations = this.getFiberRef(core.currentLogAnnotations)
-    const loggers = this.getLoggers()
-    const contextMap = this.getFiberRefs()
+    const spans = this.getFiberRef(core.currentLogSpan);
+    const annotations = this.getFiberRef(core.currentLogAnnotations);
+    const loggers = this.getLoggers();
+    const contextMap = this.getFiberRefs();
     if (HashSet.size(loggers) > 0) {
-      const clockService = Context.get(this.getFiberRef(defaultServices.currentServices), clock.clockTag)
-      const date = new Date(clockService.unsafeCurrentTimeMillis())
+      const clockService = Context.get(
+        this.getFiberRef(defaultServices.currentServices),
+        clock.clockTag
+      );
+      const date = new Date(clockService.unsafeCurrentTimeMillis());
       Inspectable.withRedactableContext(contextMap, () => {
         for (const logger of loggers) {
           logger.log({
@@ -885,10 +936,10 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
             context: contextMap,
             spans,
             annotations,
-            date
-          })
+            date,
+          });
         }
-      })
+      });
     }
   }
 
@@ -899,36 +950,41 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    *
    * **NOTE**: This method must be invoked by the fiber itself.
    */
-  evaluateMessageWhileSuspended(message: FiberMessage.FiberMessage): EvaluationSignal {
+  evaluateMessageWhileSuspended(
+    message: FiberMessage.FiberMessage
+  ): EvaluationSignal {
     switch (message._tag) {
       case FiberMessage.OP_YIELD_NOW: {
-        return EvaluationSignalYieldNow
+        return EvaluationSignalYieldNow;
       }
       case FiberMessage.OP_INTERRUPT_SIGNAL: {
-        this.processNewInterruptSignal(message.cause)
+        this.processNewInterruptSignal(message.cause);
         if (this._asyncInterruptor !== null) {
-          this._asyncInterruptor(core.exitFailCause(message.cause))
-          this._asyncInterruptor = null
+          this._asyncInterruptor(core.exitFailCause(message.cause));
+          this._asyncInterruptor = null;
         }
-        return EvaluationSignalContinue
+        return EvaluationSignalContinue;
       }
       case FiberMessage.OP_RESUME: {
-        this._asyncInterruptor = null
-        this._asyncBlockingOn = null
-        this.evaluateEffect(message.effect)
-        return EvaluationSignalContinue
+        this._asyncInterruptor = null;
+        this._asyncBlockingOn = null;
+        this.evaluateEffect(message.effect);
+        return EvaluationSignalContinue;
       }
       case FiberMessage.OP_STATEFUL: {
         message.onFiber(
           this,
-          this._exitValue !== null ?
-            FiberStatus.done :
-            FiberStatus.suspended(this.currentRuntimeFlags, this._asyncBlockingOn!)
-        )
-        return EvaluationSignalContinue
+          this._exitValue !== null
+            ? FiberStatus.done
+            : FiberStatus.suspended(
+                this.currentRuntimeFlags,
+                this._asyncBlockingOn!
+              )
+        );
+        return EvaluationSignalContinue;
       }
       default: {
-        return absurd(message)
+        return absurd(message);
       }
     }
   }
@@ -939,51 +995,55 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * **NOTE**: This method must be invoked by the fiber itself.
    */
   evaluateEffect(effect0: Effect.Effect<any, any, any>) {
-    this.currentSupervisor.onResume(this)
+    this.currentSupervisor.onResume(this);
     try {
       let effect: Effect.Effect<any, any, any> | null =
-        runtimeFlags_.interruptible(this.currentRuntimeFlags) && this.isInterrupted() ?
-          core.exitFailCause(this.getInterruptedCause()) :
-          effect0
+        runtimeFlags_.interruptible(this.currentRuntimeFlags) &&
+        this.isInterrupted()
+          ? core.exitFailCause(this.getInterruptedCause())
+          : effect0;
       while (effect !== null) {
-        const eff: Effect.Effect<any, any, any> = effect
-        const exit = this.runLoop(eff)
+        const eff: Effect.Effect<any, any, any> = effect;
+        const exit = this.runLoop(eff);
         if (exit === YieldedOp) {
-          const op = yieldedOpChannel.currentOp!
-          yieldedOpChannel.currentOp = null
+          const op = yieldedOpChannel.currentOp!;
+          yieldedOpChannel.currentOp = null;
           if (op._op === OpCodes.OP_YIELD) {
             if (runtimeFlags_.cooperativeYielding(this.currentRuntimeFlags)) {
-              this.tell(FiberMessage.yieldNow())
-              this.tell(FiberMessage.resume(core.exitVoid))
-              effect = null
+              this.tell(FiberMessage.yieldNow());
+              this.tell(FiberMessage.resume(core.exitVoid));
+              effect = null;
             } else {
-              effect = core.exitVoid
+              effect = core.exitVoid;
             }
           } else if (op._op === OpCodes.OP_ASYNC) {
             // Terminate this evaluation, async resumption will continue evaluation:
-            effect = null
+            effect = null;
           }
         } else {
-          this.currentRuntimeFlags = pipe(this.currentRuntimeFlags, runtimeFlags_.enable(runtimeFlags_.WindDown))
-          const interruption = this.interruptAllChildren()
+          this.currentRuntimeFlags = pipe(
+            this.currentRuntimeFlags,
+            runtimeFlags_.enable(runtimeFlags_.WindDown)
+          );
+          const interruption = this.interruptAllChildren();
           if (interruption !== null) {
-            effect = core.flatMap(interruption, () => exit)
+            effect = core.flatMap(interruption, () => exit);
           } else {
             if (this._queue.length === 0) {
               // No more messages to process, so we will allow the fiber to end life:
-              this.setExitValue(exit)
+              this.setExitValue(exit);
             } else {
               // There are messages, possibly added by the final op executed by
               // the fiber. To be safe, we should execute those now before we
               // allow the fiber to end life:
-              this.tell(FiberMessage.resume(exit))
+              this.tell(FiberMessage.resume(exit));
             }
-            effect = null
+            effect = null;
           }
         }
       }
     } finally {
-      this.currentSupervisor.onSuspend(this)
+      this.currentSupervisor.onSuspend(this);
     }
   }
 
@@ -996,25 +1056,25 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * express goal of executing the fiber is to synchronously produce its exit.
    */
   start<R>(effect: Effect.Effect<A, E, R>): void {
-    if (!this._running) {
-      this._running = true
-      const prev = (globalThis as any)[internalFiber.currentFiberURI]
-      ;(globalThis as any)[internalFiber.currentFiberURI] = this
+    if (this._running) {
+      this.tell(FiberMessage.resume(effect));
+    } else {
+      this._running = true;
+      const prev = (globalThis as any)[internalFiber.currentFiberURI];
+      (globalThis as any)[internalFiber.currentFiberURI] = this;
       try {
-        this.evaluateEffect(effect)
+        this.evaluateEffect(effect);
       } finally {
-        this._running = false
-        ;(globalThis as any)[internalFiber.currentFiberURI] = prev
+        this._running = false;
+        (globalThis as any)[internalFiber.currentFiberURI] = prev;
         // Because we're special casing `start`, we have to be responsible
         // for spinning up the fiber if there were new messages added to
         // the queue between the completion of the effect and the transition
         // to the not running state.
         if (this._queue.length > 0) {
-          this.drainQueueLaterOnExecutor()
+          this.drainQueueLaterOnExecutor();
         }
       }
-    } else {
-      this.tell(FiberMessage.resume(effect))
     }
   }
 
@@ -1025,7 +1085,7 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    * effect can be executed synchronously.
    */
   startFork<R>(effect: Effect.Effect<A, E, R>): void {
-    this.tell(FiberMessage.resume(effect))
+    this.tell(FiberMessage.resume(effect));
   }
 
   /**
@@ -1035,11 +1095,14 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    *
    * **NOTE**: This method must be invoked by the fiber itself.
    */
-  patchRuntimeFlags(oldRuntimeFlags: RuntimeFlags.RuntimeFlags, patch: RuntimeFlagsPatch.RuntimeFlagsPatch) {
-    const newRuntimeFlags = runtimeFlags_.patch(oldRuntimeFlags, patch)
-    ;(globalThis as any)[internalFiber.currentFiberURI] = this
-    this.currentRuntimeFlags = newRuntimeFlags
-    return newRuntimeFlags
+  patchRuntimeFlags(
+    oldRuntimeFlags: RuntimeFlags.RuntimeFlags,
+    patch: RuntimeFlagsPatch.RuntimeFlagsPatch
+  ) {
+    const newRuntimeFlags = runtimeFlags_.patch(oldRuntimeFlags, patch);
+    (globalThis as any)[internalFiber.currentFiberURI] = this;
+    this.currentRuntimeFlags = newRuntimeFlags;
+    return newRuntimeFlags;
   }
 
   /**
@@ -1051,306 +1114,340 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    */
   initiateAsync(
     runtimeFlags: RuntimeFlags.RuntimeFlags,
-    asyncRegister: (resume: (effect: Effect.Effect<any, any, any>) => void) => void
+    asyncRegister: (
+      resume: (effect: Effect.Effect<any, any, any>) => void
+    ) => void
   ) {
-    let alreadyCalled = false
+    let alreadyCalled = false;
     const callback = (effect: Effect.Effect<any, any, any>) => {
       if (!alreadyCalled) {
-        alreadyCalled = true
-        this.tell(FiberMessage.resume(effect))
+        alreadyCalled = true;
+        this.tell(FiberMessage.resume(effect));
       }
-    }
+    };
     if (runtimeFlags_.interruptible(runtimeFlags)) {
-      this._asyncInterruptor = callback
+      this._asyncInterruptor = callback;
     }
     try {
-      asyncRegister(callback)
+      asyncRegister(callback);
     } catch (e) {
-      callback(core.failCause(internalCause.die(e)))
+      callback(core.failCause(internalCause.die(e)));
     }
   }
 
   pushStack(cont: core.Continuation) {
-    this._stack.push(cont)
+    this._stack.push(cont);
     if (cont._op === "OnStep") {
-      this._steps.push({ refs: this.getFiberRefs(), flags: this.currentRuntimeFlags })
+      this._steps.push({
+        refs: this.getFiberRefs(),
+        flags: this.currentRuntimeFlags,
+      });
     }
   }
 
   popStack() {
-    const item = this._stack.pop()
+    const item = this._stack.pop();
     if (item) {
       if (item._op === "OnStep") {
-        this._steps.pop()
+        this._steps.pop();
       }
-      return item
+      return item;
     }
-    return
+    return;
   }
 
   getNextSuccessCont() {
-    let frame = this.popStack()
+    let frame = this.popStack();
     while (frame) {
       if (frame._op !== OpCodes.OP_ON_FAILURE) {
-        return frame
+        return frame;
       }
-      frame = this.popStack()
+      frame = this.popStack();
     }
   }
 
   getNextFailCont() {
-    let frame = this.popStack()
+    let frame = this.popStack();
     while (frame) {
-      if (frame._op !== OpCodes.OP_ON_SUCCESS && frame._op !== OpCodes.OP_WHILE && frame._op !== OpCodes.OP_ITERATOR) {
-        return frame
+      if (
+        frame._op !== OpCodes.OP_ON_SUCCESS &&
+        frame._op !== OpCodes.OP_WHILE &&
+        frame._op !== OpCodes.OP_ITERATOR
+      ) {
+        return frame;
       }
-      frame = this.popStack()
+      frame = this.popStack();
     }
   }
 
   [OpCodes.OP_TAG](op: core.Primitive & { _op: OpCodes.OP_SYNC }) {
-    return core.sync(() => Context.unsafeGet(this.currentContext, op as unknown as Context.Tag<any, any>))
+    return core.sync(() =>
+      Context.unsafeGet(
+        this.currentContext,
+        op as unknown as Context.Tag<any, any>
+      )
+    );
   }
 
   ["Left"](op: core.Primitive & { _op: "Left" }) {
-    return core.fail(op.left)
+    return core.fail(op.left);
   }
 
   ["None"](_: core.Primitive & { _op: "None" }) {
-    return core.fail(new core.NoSuchElementException())
+    return core.fail(new core.NoSuchElementException());
   }
 
   ["Right"](op: core.Primitive & { _op: "Right" }) {
-    return core.exitSucceed(op.right)
+    return core.exitSucceed(op.right);
   }
 
   ["Some"](op: core.Primitive & { _op: "Some" }) {
-    return core.exitSucceed(op.value)
+    return core.exitSucceed(op.value);
   }
 
   ["Micro"](op: Micro.Micro<any, any, never> & { _op: "Micro" }) {
     return core.unsafeAsync<any, any>((microResume) => {
-      let resume = microResume
-      const fiber = Micro.runFork(Micro.provideContext(op, this.currentContext))
+      let resume = microResume;
+      const fiber = Micro.runFork(
+        Micro.provideContext(op, this.currentContext)
+      );
       fiber.addObserver((exit) => {
         if (exit._tag === "Success") {
-          return resume(core.exitSucceed(exit.value))
+          return resume(core.exitSucceed(exit.value));
         }
         switch (exit.cause._tag) {
           case "Interrupt": {
-            return resume(core.exitFailCause(internalCause.interrupt(FiberId.none)))
+            return resume(
+              core.exitFailCause(internalCause.interrupt(FiberId.none))
+            );
           }
           case "Fail": {
-            return resume(core.fail(exit.cause.error))
+            return resume(core.fail(exit.cause.error));
           }
           case "Die": {
-            return resume(core.die(exit.cause.defect))
+            return resume(core.die(exit.cause.defect));
           }
         }
-      })
+      });
       return core.unsafeAsync<void>((abortResume) => {
         resume = (_: any) => {
-          abortResume(core.void)
-        }
-        fiber.unsafeInterrupt()
-      })
-    })
+          abortResume(core.void);
+        };
+        fiber.unsafeInterrupt();
+      });
+    });
   }
 
   [OpCodes.OP_SYNC](op: core.Primitive & { _op: OpCodes.OP_SYNC }) {
-    const value = internalCall(() => op.effect_instruction_i0())
-    const cont = this.getNextSuccessCont()
+    const value = internalCall(() => op.effect_instruction_i0());
+    const cont = this.getNextSuccessCont();
     if (cont !== undefined) {
       if (!(cont._op in contOpSuccess)) {
         // @ts-expect-error
-        absurd(cont)
+        absurd(cont);
       }
       // @ts-expect-error
-      return contOpSuccess[cont._op](this, cont, value)
-    } else {
-      yieldedOpChannel.currentOp = core.exitSucceed(value) as any
-      return YieldedOp
+      return contOpSuccess[cont._op](this, cont, value);
     }
+    yieldedOpChannel.currentOp = core.exitSucceed(value) as any;
+    return YieldedOp;
   }
 
   [OpCodes.OP_SUCCESS](op: core.Primitive & { _op: OpCodes.OP_SUCCESS }) {
-    const oldCur = op
-    const cont = this.getNextSuccessCont()
+    const oldCur = op;
+    const cont = this.getNextSuccessCont();
     if (cont !== undefined) {
       if (!(cont._op in contOpSuccess)) {
         // @ts-expect-error
-        absurd(cont)
+        absurd(cont);
       }
       // @ts-expect-error
-      return contOpSuccess[cont._op](this, cont, oldCur.effect_instruction_i0)
-    } else {
-      yieldedOpChannel.currentOp = oldCur
-      return YieldedOp
+      return contOpSuccess[cont._op](this, cont, oldCur.effect_instruction_i0);
     }
+    yieldedOpChannel.currentOp = oldCur;
+    return YieldedOp;
   }
 
   [OpCodes.OP_FAILURE](op: core.Primitive & { _op: OpCodes.OP_FAILURE }) {
-    const cause = op.effect_instruction_i0
-    const cont = this.getNextFailCont()
+    const cause = op.effect_instruction_i0;
+    const cont = this.getNextFailCont();
     if (cont !== undefined) {
       switch (cont._op) {
         case OpCodes.OP_ON_FAILURE:
         case OpCodes.OP_ON_SUCCESS_AND_FAILURE: {
-          if (!(runtimeFlags_.interruptible(this.currentRuntimeFlags) && this.isInterrupted())) {
-            return internalCall(() => cont.effect_instruction_i1(cause))
-          } else {
-            return core.exitFailCause(internalCause.stripFailures(cause))
+          if (
+            runtimeFlags_.interruptible(this.currentRuntimeFlags) &&
+            this.isInterrupted()
+          ) {
+            return core.exitFailCause(internalCause.stripFailures(cause));
           }
+          return internalCall(() => cont.effect_instruction_i1(cause));
         }
         case "OnStep": {
-          if (!(runtimeFlags_.interruptible(this.currentRuntimeFlags) && this.isInterrupted())) {
-            return core.exitSucceed(core.exitFailCause(cause))
-          } else {
-            return core.exitFailCause(internalCause.stripFailures(cause))
+          if (
+            runtimeFlags_.interruptible(this.currentRuntimeFlags) &&
+            this.isInterrupted()
+          ) {
+            return core.exitFailCause(internalCause.stripFailures(cause));
           }
+          return core.exitSucceed(core.exitFailCause(cause));
         }
         case OpCodes.OP_REVERT_FLAGS: {
-          this.patchRuntimeFlags(this.currentRuntimeFlags, cont.patch)
-          if (runtimeFlags_.interruptible(this.currentRuntimeFlags) && this.isInterrupted()) {
-            return core.exitFailCause(internalCause.sequential(cause, this.getInterruptedCause()))
-          } else {
-            return core.exitFailCause(cause)
+          this.patchRuntimeFlags(this.currentRuntimeFlags, cont.patch);
+          if (
+            runtimeFlags_.interruptible(this.currentRuntimeFlags) &&
+            this.isInterrupted()
+          ) {
+            return core.exitFailCause(
+              internalCause.sequential(cause, this.getInterruptedCause())
+            );
           }
+          return core.exitFailCause(cause);
         }
         default: {
-          absurd(cont)
+          absurd(cont);
         }
       }
     } else {
-      yieldedOpChannel.currentOp = core.exitFailCause(cause) as any
-      return YieldedOp
+      yieldedOpChannel.currentOp = core.exitFailCause(cause) as any;
+      return YieldedOp;
     }
   }
 
-  [OpCodes.OP_WITH_RUNTIME](op: core.Primitive & { _op: OpCodes.OP_WITH_RUNTIME }) {
+  [OpCodes.OP_WITH_RUNTIME](
+    op: core.Primitive & { _op: OpCodes.OP_WITH_RUNTIME }
+  ) {
     return internalCall(() =>
       op.effect_instruction_i0(
         this as FiberRuntime<unknown, unknown>,
         FiberStatus.running(this.currentRuntimeFlags) as FiberStatus.Running
       )
-    )
+    );
   }
 
   ["Blocked"](op: core.Primitive & { _op: "Blocked" }) {
-    const refs = this.getFiberRefs()
-    const flags = this.currentRuntimeFlags
+    const refs = this.getFiberRefs();
+    const flags = this.currentRuntimeFlags;
     if (this._steps.length > 0) {
-      const frames: Array<core.Continuation> = []
-      const snap = this._steps[this._steps.length - 1]
-      let frame = this.popStack()
+      const frames: Array<core.Continuation> = [];
+      const snap = this._steps[this._steps.length - 1];
+      let frame = this.popStack();
       while (frame && frame._op !== "OnStep") {
-        frames.push(frame)
-        frame = this.popStack()
+        frames.push(frame);
+        frame = this.popStack();
       }
-      this.setFiberRefs(snap.refs)
-      this.currentRuntimeFlags = snap.flags
-      const patchRefs = FiberRefsPatch.diff(snap.refs, refs)
-      const patchFlags = runtimeFlags_.diff(snap.flags, flags)
-      return core.exitSucceed(core.blocked(
-        op.effect_instruction_i0,
-        core.withFiberRuntime<unknown, unknown>((newFiber) => {
-          while (frames.length > 0) {
-            newFiber.pushStack(frames.pop()!)
-          }
-          newFiber.setFiberRefs(
-            FiberRefsPatch.patch(newFiber.id(), newFiber.getFiberRefs())(patchRefs)
-          )
-          newFiber.currentRuntimeFlags = runtimeFlags_.patch(patchFlags)(newFiber.currentRuntimeFlags)
-          return op.effect_instruction_i1
-        })
-      ))
+      this.setFiberRefs(snap.refs);
+      this.currentRuntimeFlags = snap.flags;
+      const patchRefs = FiberRefsPatch.diff(snap.refs, refs);
+      const patchFlags = runtimeFlags_.diff(snap.flags, flags);
+      return core.exitSucceed(
+        core.blocked(
+          op.effect_instruction_i0,
+          core.withFiberRuntime<unknown, unknown>((newFiber) => {
+            while (frames.length > 0) {
+              newFiber.pushStack(frames.pop()!);
+            }
+            newFiber.setFiberRefs(
+              FiberRefsPatch.patch(
+                newFiber.id(),
+                newFiber.getFiberRefs()
+              )(patchRefs)
+            );
+            newFiber.currentRuntimeFlags = runtimeFlags_.patch(patchFlags)(
+              newFiber.currentRuntimeFlags
+            );
+            return op.effect_instruction_i1;
+          })
+        )
+      );
     }
     return core.uninterruptibleMask((restore) =>
       core.flatMap(
         forkDaemon(core.runRequestBlock(op.effect_instruction_i0)),
         () => restore(op.effect_instruction_i1)
       )
-    )
+    );
   }
 
   ["RunBlocked"](op: core.Primitive & { _op: "RunBlocked" }) {
-    return runBlockedRequests(op.effect_instruction_i0)
+    return runBlockedRequests(op.effect_instruction_i0);
   }
 
-  [OpCodes.OP_UPDATE_RUNTIME_FLAGS](op: core.Primitive & { _op: OpCodes.OP_UPDATE_RUNTIME_FLAGS }) {
-    const updateFlags = op.effect_instruction_i0
-    const oldRuntimeFlags = this.currentRuntimeFlags
-    const newRuntimeFlags = runtimeFlags_.patch(oldRuntimeFlags, updateFlags)
+  [OpCodes.OP_UPDATE_RUNTIME_FLAGS](
+    op: core.Primitive & { _op: OpCodes.OP_UPDATE_RUNTIME_FLAGS }
+  ) {
+    const updateFlags = op.effect_instruction_i0;
+    const oldRuntimeFlags = this.currentRuntimeFlags;
+    const newRuntimeFlags = runtimeFlags_.patch(oldRuntimeFlags, updateFlags);
     // One more chance to short circuit: if we're immediately going
     // to interrupt. Interruption will cause immediate reversion of
     // the flag, so as long as we "peek ahead", there's no need to
     // set them to begin with.
     if (runtimeFlags_.interruptible(newRuntimeFlags) && this.isInterrupted()) {
-      return core.exitFailCause(this.getInterruptedCause())
-    } else {
-      // Impossible to short circuit, so record the changes
-      this.patchRuntimeFlags(this.currentRuntimeFlags, updateFlags)
-      if (op.effect_instruction_i1) {
-        // Since we updated the flags, we need to revert them
-        const revertFlags = runtimeFlags_.diff(newRuntimeFlags, oldRuntimeFlags)
-        this.pushStack(new core.RevertFlags(revertFlags, op))
-        return internalCall(() => op.effect_instruction_i1!(oldRuntimeFlags))
-      } else {
-        return core.exitVoid
-      }
+      return core.exitFailCause(this.getInterruptedCause());
     }
+    // Impossible to short circuit, so record the changes
+    this.patchRuntimeFlags(this.currentRuntimeFlags, updateFlags);
+    if (op.effect_instruction_i1) {
+      // Since we updated the flags, we need to revert them
+      const revertFlags = runtimeFlags_.diff(newRuntimeFlags, oldRuntimeFlags);
+      this.pushStack(new core.RevertFlags(revertFlags, op));
+      return internalCall(() => op.effect_instruction_i1!(oldRuntimeFlags));
+    }
+    return core.exitVoid;
   }
 
   [OpCodes.OP_ON_SUCCESS](op: core.Primitive & { _op: OpCodes.OP_ON_SUCCESS }) {
-    this.pushStack(op)
-    return op.effect_instruction_i0
+    this.pushStack(op);
+    return op.effect_instruction_i0;
   }
 
   ["OnStep"](op: core.Primitive & { _op: "OnStep" }) {
-    this.pushStack(op)
-    return op.effect_instruction_i0
+    this.pushStack(op);
+    return op.effect_instruction_i0;
   }
 
   [OpCodes.OP_ON_FAILURE](op: core.Primitive & { _op: OpCodes.OP_ON_FAILURE }) {
-    this.pushStack(op)
-    return op.effect_instruction_i0
+    this.pushStack(op);
+    return op.effect_instruction_i0;
   }
 
-  [OpCodes.OP_ON_SUCCESS_AND_FAILURE](op: core.Primitive & { _op: OpCodes.OP_ON_SUCCESS_AND_FAILURE }) {
-    this.pushStack(op)
-    return op.effect_instruction_i0
+  [OpCodes.OP_ON_SUCCESS_AND_FAILURE](
+    op: core.Primitive & { _op: OpCodes.OP_ON_SUCCESS_AND_FAILURE }
+  ) {
+    this.pushStack(op);
+    return op.effect_instruction_i0;
   }
 
   [OpCodes.OP_ASYNC](op: core.Primitive & { _op: OpCodes.OP_ASYNC }) {
-    this._asyncBlockingOn = op.effect_instruction_i1
-    this.initiateAsync(this.currentRuntimeFlags, op.effect_instruction_i0)
-    yieldedOpChannel.currentOp = op
-    return YieldedOp
+    this._asyncBlockingOn = op.effect_instruction_i1;
+    this.initiateAsync(this.currentRuntimeFlags, op.effect_instruction_i0);
+    yieldedOpChannel.currentOp = op;
+    return YieldedOp;
   }
 
   [OpCodes.OP_YIELD](op: core.Primitive & { op: OpCodes.OP_YIELD }) {
-    this._isYielding = false
-    yieldedOpChannel.currentOp = op
-    return YieldedOp
+    this._isYielding = false;
+    yieldedOpChannel.currentOp = op;
+    return YieldedOp;
   }
 
   [OpCodes.OP_WHILE](op: core.Primitive & { _op: OpCodes.OP_WHILE }) {
-    const check = op.effect_instruction_i0
-    const body = op.effect_instruction_i1
+    const check = op.effect_instruction_i0;
+    const body = op.effect_instruction_i1;
     if (check()) {
-      this.pushStack(op)
-      return body()
-    } else {
-      return core.exitVoid
+      this.pushStack(op);
+      return body();
     }
+    return core.exitVoid;
   }
 
   [OpCodes.OP_ITERATOR](op: core.Primitive & { _op: OpCodes.OP_ITERATOR }) {
-    return contOpSuccess[OpCodes.OP_ITERATOR](this, op, undefined)
+    return contOpSuccess[OpCodes.OP_ITERATOR](this, op, undefined);
   }
 
   [OpCodes.OP_COMMIT](op: core.Primitive & { _op: OpCodes.OP_COMMIT }) {
-    return internalCall(() => op.commit())
+    return internalCall(() => op.commit());
   }
 
   /**
@@ -1358,209 +1455,239 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
    *
    * **NOTE**: This method must be invoked by the fiber itself.
    */
-  runLoop(effect0: Effect.Effect<any, any, any>): Exit.Exit<any, any> | YieldedOp {
-    let cur: Effect.Effect<any, any, any> | YieldedOp = effect0
-    this.currentOpCount = 0
+  runLoop(
+    effect0: Effect.Effect<any, any, any>
+  ): Exit.Exit<any, any> | YieldedOp {
+    let cur: Effect.Effect<any, any, any> | YieldedOp = effect0;
+    this.currentOpCount = 0;
 
     while (true) {
       if ((this.currentRuntimeFlags & OpSupervision) !== 0) {
-        this.currentSupervisor.onEffect(this, cur)
+        this.currentSupervisor.onEffect(this, cur);
       }
       if (this._queue.length > 0) {
-        cur = this.drainQueueWhileRunning(this.currentRuntimeFlags, cur)
+        cur = this.drainQueueWhileRunning(this.currentRuntimeFlags, cur);
       }
       if (!this._isYielding) {
-        this.currentOpCount += 1
-        const shouldYield = this.currentScheduler.shouldYield(this)
+        this.currentOpCount += 1;
+        const shouldYield = this.currentScheduler.shouldYield(this);
         if (shouldYield !== false) {
-          this._isYielding = true
-          this.currentOpCount = 0
-          const oldCur = cur
-          cur = core.flatMap(core.yieldNow({ priority: shouldYield }), () => oldCur)
+          this._isYielding = true;
+          this.currentOpCount = 0;
+          const oldCur = cur;
+          cur = core.flatMap(
+            core.yieldNow({ priority: shouldYield }),
+            () => oldCur
+          );
         }
       }
       try {
         // @ts-expect-error
-        cur = this.currentTracer.context(
-          () => {
-            if (_version !== (cur as core.Primitive)[core.EffectTypeId]._V) {
-              const level = this.getFiberRef(core.currentVersionMismatchErrorLogLevel)
-              if (level._tag === "Some") {
-                const effectVersion = (cur as core.Primitive)[core.EffectTypeId]._V
-                this.log(
-                  `Executing an Effect versioned ${effectVersion} with a Runtime of version ${version.getCurrentVersion()}, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service`,
-                  internalCause.empty,
-                  level
-                )
-              }
+        cur = this.currentTracer.context(() => {
+          if (_version !== (cur as core.Primitive)[core.EffectTypeId]._V) {
+            const level = this.getFiberRef(
+              core.currentVersionMismatchErrorLogLevel
+            );
+            if (level._tag === "Some") {
+              const effectVersion = (cur as core.Primitive)[core.EffectTypeId]
+                ._V;
+              this.log(
+                `Executing an Effect versioned ${effectVersion} with a Runtime of version ${version.getCurrentVersion()}, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service`,
+                internalCause.empty,
+                level
+              );
             }
-            // @ts-expect-error
-            return this[(cur as core.Primitive)._op](cur as core.Primitive)
-          },
-          this
-        )
+          }
+          // @ts-expect-error
+          return this[(cur as core.Primitive)._op](cur as core.Primitive);
+        }, this);
 
         if (cur === YieldedOp) {
-          const op = yieldedOpChannel.currentOp!
-          if (
-            op._op === OpCodes.OP_YIELD ||
-            op._op === OpCodes.OP_ASYNC
-          ) {
-            return YieldedOp
+          const op = yieldedOpChannel.currentOp!;
+          if (op._op === OpCodes.OP_YIELD || op._op === OpCodes.OP_ASYNC) {
+            return YieldedOp;
           }
 
-          yieldedOpChannel.currentOp = null
-          return (
-              op._op === OpCodes.OP_SUCCESS ||
-              op._op === OpCodes.OP_FAILURE
-            ) ?
-            op as unknown as Exit.Exit<A, E> :
-            core.exitFailCause(internalCause.die(op))
+          yieldedOpChannel.currentOp = null;
+          return op._op === OpCodes.OP_SUCCESS || op._op === OpCodes.OP_FAILURE
+            ? (op as unknown as Exit.Exit<A, E>)
+            : core.exitFailCause(internalCause.die(op));
         }
       } catch (e) {
-        if (cur !== YieldedOp && !Predicate.hasProperty(cur, "_op") || !((cur as core.Primitive)._op in this)) {
-          cur = core.dieMessage(`Not a valid effect: ${Inspectable.toStringUnknown(cur)}`)
+        if (
+          (cur !== YieldedOp && !Predicate.hasProperty(cur, "_op")) ||
+          !((cur as core.Primitive)._op in this)
+        ) {
+          cur = core.dieMessage(
+            `Not a valid effect: ${Inspectable.toStringUnknown(cur)}`
+          );
         } else if (core.isInterruptedException(e)) {
           cur = core.exitFailCause(
-            internalCause.sequential(internalCause.die(e), internalCause.interrupt(FiberId.none))
-          )
+            internalCause.sequential(
+              internalCause.die(e),
+              internalCause.interrupt(FiberId.none)
+            )
+          );
         } else {
-          cur = core.die(e)
+          cur = core.die(e);
         }
       }
     }
   }
 
   run = () => {
-    this.drainQueueOnCurrentThread()
-  }
+    this.drainQueueOnCurrentThread();
+  };
 }
 
 // circular with Logger
 
 /** @internal */
-export const currentMinimumLogLevel: FiberRef.FiberRef<LogLevel.LogLevel> = globalValue(
-  "effect/FiberRef/currentMinimumLogLevel",
-  () => core.fiberRefUnsafeMake<LogLevel.LogLevel>(LogLevel.fromLiteral("Info"))
-)
+export const currentMinimumLogLevel: FiberRef.FiberRef<LogLevel.LogLevel> =
+  globalValue("effect/FiberRef/currentMinimumLogLevel", () =>
+    core.fiberRefUnsafeMake<LogLevel.LogLevel>(LogLevel.fromLiteral("Info"))
+  );
 
 /** @internal */
-export const loggerWithConsoleLog = <M, O>(self: Logger<M, O>): Logger<M, void> =>
+export const loggerWithConsoleLog = <M, O>(
+  self: Logger<M, O>
+): Logger<M, void> =>
   internalLogger.makeLogger((opts) => {
-    const services = FiberRefs.getOrDefault(opts.context, defaultServices.currentServices)
-    Context.get(services, consoleTag).unsafe.log(self.log(opts))
-  })
+    const services = FiberRefs.getOrDefault(
+      opts.context,
+      defaultServices.currentServices
+    );
+    Context.get(services, consoleTag).unsafe.log(self.log(opts));
+  });
 
 /** @internal */
-export const loggerWithLeveledLog = <M, O>(self: Logger<M, O>): Logger<M, void> =>
+export const loggerWithLeveledLog = <M, O>(
+  self: Logger<M, O>
+): Logger<M, void> =>
   internalLogger.makeLogger((opts) => {
-    const services = FiberRefs.getOrDefault(opts.context, defaultServices.currentServices)
-    const unsafeLogger = Context.get(services, consoleTag).unsafe
+    const services = FiberRefs.getOrDefault(
+      opts.context,
+      defaultServices.currentServices
+    );
+    const unsafeLogger = Context.get(services, consoleTag).unsafe;
     switch (opts.logLevel._tag) {
       case "Debug":
-        return unsafeLogger.debug(self.log(opts))
+        return unsafeLogger.debug(self.log(opts));
       case "Info":
-        return unsafeLogger.info(self.log(opts))
+        return unsafeLogger.info(self.log(opts));
       case "Trace":
-        return unsafeLogger.trace(self.log(opts))
+        return unsafeLogger.trace(self.log(opts));
       case "Warning":
-        return unsafeLogger.warn(self.log(opts))
+        return unsafeLogger.warn(self.log(opts));
       case "Error":
       case "Fatal":
-        return unsafeLogger.error(self.log(opts))
+        return unsafeLogger.error(self.log(opts));
       default:
-        return unsafeLogger.log(self.log(opts))
+        return unsafeLogger.log(self.log(opts));
     }
-  })
+  });
 
 /** @internal */
-export const loggerWithConsoleError = <M, O>(self: Logger<M, O>): Logger<M, void> =>
+export const loggerWithConsoleError = <M, O>(
+  self: Logger<M, O>
+): Logger<M, void> =>
   internalLogger.makeLogger((opts) => {
-    const services = FiberRefs.getOrDefault(opts.context, defaultServices.currentServices)
-    Context.get(services, consoleTag).unsafe.error(self.log(opts))
-  })
+    const services = FiberRefs.getOrDefault(
+      opts.context,
+      defaultServices.currentServices
+    );
+    Context.get(services, consoleTag).unsafe.error(self.log(opts));
+  });
 
 /** @internal */
 export const defaultLogger: Logger<unknown, void> = globalValue(
   Symbol.for("effect/Logger/defaultLogger"),
   () => loggerWithConsoleLog(internalLogger.stringLogger)
-)
+);
 
 /** @internal */
 export const jsonLogger: Logger<unknown, void> = globalValue(
   Symbol.for("effect/Logger/jsonLogger"),
   () => loggerWithConsoleLog(internalLogger.jsonLogger)
-)
+);
 
 /** @internal */
 export const logFmtLogger: Logger<unknown, void> = globalValue(
   Symbol.for("effect/Logger/logFmtLogger"),
   () => loggerWithConsoleLog(internalLogger.logfmtLogger)
-)
+);
 
 /** @internal */
 export const prettyLogger: Logger<unknown, void> = globalValue(
   Symbol.for("effect/Logger/prettyLogger"),
   () => internalLogger.prettyLoggerDefault
-)
+);
 
 /** @internal */
 export const structuredLogger: Logger<unknown, void> = globalValue(
   Symbol.for("effect/Logger/structuredLogger"),
   () => loggerWithConsoleLog(internalLogger.structuredLogger)
-)
+);
 
 /** @internal */
 export const tracerLogger = globalValue(
   Symbol.for("effect/Logger/tracerLogger"),
   () =>
-    internalLogger.makeLogger<unknown, void>(({
-      annotations,
-      cause,
-      context,
-      fiberId,
-      logLevel,
-      message
-    }) => {
-      const span = internalEffect.filterDisablePropagation(Context.getOption(
-        fiberRefs.getOrDefault(context, core.currentContext),
-        tracer.spanTag
-      ))
+    internalLogger.makeLogger<unknown, void>(
+      ({ annotations, cause, context, fiberId, logLevel, message }) => {
+        const span = internalEffect.filterDisablePropagation(
+          Context.getOption(
+            fiberRefs.getOrDefault(context, core.currentContext),
+            tracer.spanTag
+          )
+        );
 
-      if (span._tag === "None" || span.value._tag === "ExternalSpan") {
-        return
+        if (span._tag === "None" || span.value._tag === "ExternalSpan") {
+          return;
+        }
+
+        const clockService = Context.unsafeGet(
+          fiberRefs.getOrDefault(context, defaultServices.currentServices),
+          clock.clockTag
+        );
+
+        const attributes: Record<string, unknown> = {};
+        for (const [key, value] of annotations) {
+          attributes[key] = value;
+        }
+        attributes["effect.fiberId"] = FiberId.threadName(fiberId);
+        attributes["effect.logLevel"] = logLevel.label;
+
+        if (cause !== null && cause._tag !== "Empty") {
+          attributes["effect.cause"] = internalCause.pretty(cause, {
+            renderErrorCause: true,
+          });
+        }
+
+        span.value.event(
+          Inspectable.toStringUnknown(
+            Array.isArray(message) && message.length === 1
+              ? message[0]
+              : message
+          ),
+          clockService.unsafeCurrentTimeNanos(),
+          attributes
+        );
       }
-
-      const clockService = Context.unsafeGet(
-        fiberRefs.getOrDefault(context, defaultServices.currentServices),
-        clock.clockTag
-      )
-
-      const attributes: Record<string, unknown> = {}
-      for (const [key, value] of annotations) {
-        attributes[key] = value
-      }
-      attributes["effect.fiberId"] = FiberId.threadName(fiberId)
-      attributes["effect.logLevel"] = logLevel.label
-
-      if (cause !== null && cause._tag !== "Empty") {
-        attributes["effect.cause"] = internalCause.pretty(cause, { renderErrorCause: true })
-      }
-
-      span.value.event(
-        Inspectable.toStringUnknown(Array.isArray(message) && message.length === 1 ? message[0] : message),
-        clockService.unsafeCurrentTimeNanos(),
-        attributes
-      )
-    })
-)
+    )
+);
 
 /** @internal */
-export const loggerWithSpanAnnotations = <Message, Output>(self: Logger<Message, Output>): Logger<Message, Output> =>
+export const loggerWithSpanAnnotations = <Message, Output>(
+  self: Logger<Message, Output>
+): Logger<Message, Output> =>
   internalLogger.mapInputOptions(self, (options: Logger.Options<Message>) => {
-    const span = Option.flatMap(fiberRefs.get(options.context, core.currentContext), Context.getOption(tracer.spanTag))
+    const span = Option.flatMap(
+      fiberRefs.get(options.context, core.currentContext),
+      Context.getOption(tracer.spanTag)
+    );
     if (span._tag === "None") {
-      return options
+      return options;
     }
     return {
       ...options,
@@ -1568,18 +1695,19 @@ export const loggerWithSpanAnnotations = <Message, Output>(self: Logger<Message,
         options.annotations,
         HashMap.set("effect.traceId", span.value.traceId as unknown),
         HashMap.set("effect.spanId", span.value.spanId as unknown),
-        span.value._tag === "Span" ? HashMap.set("effect.spanName", span.value.name as unknown) : identity
-      )
-    }
-  })
+        span.value._tag === "Span"
+          ? HashMap.set("effect.spanName", span.value.name as unknown)
+          : identity
+      ),
+    };
+  });
 
 /** @internal */
 export const currentLoggers: FiberRef.FiberRef<
   HashSet.HashSet<Logger<unknown, any>>
-> = globalValue(
-  Symbol.for("effect/FiberRef/currentLoggers"),
-  () => core.fiberRefUnsafeMakeHashSet(HashSet.make(defaultLogger, tracerLogger))
-)
+> = globalValue(Symbol.for("effect/FiberRef/currentLoggers"), () =>
+  core.fiberRefUnsafeMakeHashSet(HashSet.make(defaultLogger, tracerLogger))
+);
 
 /** @internal */
 export const batchedLogger = dual<
@@ -1594,236 +1722,303 @@ export const batchedLogger = dual<
     window: Duration.DurationInput,
     f: (messages: Array<NoInfer<Output>>) => Effect.Effect<void, never, R>
   ) => Effect.Effect<Logger<Message, void>, never, Scope.Scope | R>
->(3, <Message, Output, R>(
-  self: Logger<Message, Output>,
-  window: Duration.DurationInput,
-  f: (messages: Array<NoInfer<Output>>) => Effect.Effect<void, never, R>
-): Effect.Effect<Logger<Message, void>, never, Scope.Scope | R> =>
-  core.flatMap(scope, (scope) => {
-    let buffer: Array<Output> = []
-    const flush = core.suspend(() => {
-      if (buffer.length === 0) {
-        return core.void
-      }
-      const arr = buffer
-      buffer = []
-      return f(arr)
-    })
+>(
+  3,
+  <Message, Output, R>(
+    self: Logger<Message, Output>,
+    window: Duration.DurationInput,
+    f: (messages: Array<NoInfer<Output>>) => Effect.Effect<void, never, R>
+  ): Effect.Effect<Logger<Message, void>, never, Scope.Scope | R> =>
+    core.flatMap(scope, (scope) => {
+      let buffer: Array<Output> = [];
+      const flush = core.suspend(() => {
+        if (buffer.length === 0) {
+          return core.void;
+        }
+        const arr = buffer;
+        buffer = [];
+        return f(arr);
+      });
 
-    return core.uninterruptibleMask((restore) =>
-      pipe(
-        internalEffect.sleep(window),
-        core.zipRight(flush),
-        internalEffect.forever,
-        restore,
-        forkDaemon,
-        core.flatMap((fiber) => core.scopeAddFinalizer(scope, core.interruptFiber(fiber))),
-        core.zipRight(addFinalizer(() => flush)),
-        core.as(
-          internalLogger.makeLogger((options) => {
-            buffer.push(self.log(options))
-          })
+      return core.uninterruptibleMask((restore) =>
+        pipe(
+          internalEffect.sleep(window),
+          core.zipRight(flush),
+          internalEffect.forever,
+          restore,
+          forkDaemon,
+          core.flatMap((fiber) =>
+            core.scopeAddFinalizer(scope, core.interruptFiber(fiber))
+          ),
+          core.zipRight(addFinalizer(() => flush)),
+          core.as(
+            internalLogger.makeLogger((options) => {
+              buffer.push(self.log(options));
+            })
+          )
         )
-      )
-    )
-  }))
+      );
+    })
+);
 
 export const annotateLogsScoped: {
-  (key: string, value: unknown): Effect.Effect<void, never, Scope.Scope>
-  (values: Record<string, unknown>): Effect.Effect<void, never, Scope.Scope>
-} = function() {
+  (key: string, value: unknown): Effect.Effect<void, never, Scope.Scope>;
+  (values: Record<string, unknown>): Effect.Effect<void, never, Scope.Scope>;
+} = () => {
   if (typeof arguments[0] === "string") {
     return fiberRefLocallyScopedWith(
       core.currentLogAnnotations,
       HashMap.set(arguments[0], arguments[1])
-    )
+    );
   }
-  const entries = Object.entries(arguments[0])
+  const entries = Object.entries(arguments[0]);
   return fiberRefLocallyScopedWith(
     core.currentLogAnnotations,
     HashMap.mutate((annotations) => {
       for (let i = 0; i < entries.length; i++) {
-        const [key, value] = entries[i]
-        HashMap.set(annotations, key, value)
+        const [key, value] = entries[i];
+        HashMap.set(annotations, key, value);
       }
-      return annotations
+      return annotations;
     })
-  )
-}
+  );
+};
 
 /** @internal */
 export const whenLogLevel = dual<
   (
     level: LogLevel.LogLevel | LogLevel.Literal
-  ) => <A, E, R>(effect: Effect.Effect<A, E, R>) => Effect.Effect<Option.Option<A>, E, R>,
+  ) => <A, E, R>(
+    effect: Effect.Effect<A, E, R>
+  ) => Effect.Effect<Option.Option<A>, E, R>,
   <A, E, R>(
     effect: Effect.Effect<A, E, R>,
     level: LogLevel.LogLevel | LogLevel.Literal
   ) => Effect.Effect<Option.Option<A>, E, R>
 >(2, (effect, level) => {
-  const requiredLogLevel = typeof level === "string" ? LogLevel.fromLiteral(level) : level
+  const requiredLogLevel =
+    typeof level === "string" ? LogLevel.fromLiteral(level) : level;
 
   return core.withFiberRuntime((fiberState) => {
-    const minimumLogLevel = fiberState.getFiberRef(currentMinimumLogLevel)
+    const minimumLogLevel = fiberState.getFiberRef(currentMinimumLogLevel);
 
     // Imitate the behaviour of `FiberRuntime.log`
     if (LogLevel.greaterThan(minimumLogLevel, requiredLogLevel)) {
-      return core.succeed(Option.none())
+      return core.succeed(Option.none());
     }
 
-    return core.map(effect, Option.some)
-  })
-})
+    return core.map(effect, Option.some);
+  });
+});
 
 // circular with Effect
 
 /* @internal */
 export const acquireRelease: {
   <A, X, R2>(
-    release: (a: A, exit: Exit.Exit<unknown, unknown>) => Effect.Effect<X, never, R2>
-  ): <E, R>(acquire: Effect.Effect<A, E, R>) => Effect.Effect<A, E, R2 | R | Scope.Scope>
+    release: (
+      a: A,
+      exit: Exit.Exit<unknown, unknown>
+    ) => Effect.Effect<X, never, R2>
+  ): <E, R>(
+    acquire: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A, E, R2 | R | Scope.Scope>;
   <A, E, R, X, R2>(
     acquire: Effect.Effect<A, E, R>,
-    release: (a: A, exit: Exit.Exit<unknown, unknown>) => Effect.Effect<X, never, R2>
-  ): Effect.Effect<A, E, R2 | R | Scope.Scope>
-} = dual((args) => core.isEffect(args[0]), (acquire, release) =>
-  core.uninterruptible(
-    core.tap(acquire, (a) => addFinalizer((exit) => release(a, exit)))
-  ))
+    release: (
+      a: A,
+      exit: Exit.Exit<unknown, unknown>
+    ) => Effect.Effect<X, never, R2>
+  ): Effect.Effect<A, E, R2 | R | Scope.Scope>;
+} = dual(
+  (args) => core.isEffect(args[0]),
+  (acquire, release) =>
+    core.uninterruptible(
+      core.tap(acquire, (a) => addFinalizer((exit) => release(a, exit)))
+    )
+);
 
 /* @internal */
 export const acquireReleaseInterruptible: {
   <X, R2>(
     release: (exit: Exit.Exit<unknown, unknown>) => Effect.Effect<X, never, R2>
-  ): <A, E, R>(acquire: Effect.Effect<A, E, R>) => Effect.Effect<A, E, Scope.Scope | R2 | R>
+  ): <A, E, R>(
+    acquire: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A, E, Scope.Scope | R2 | R>;
   <A, E, R, X, R2>(
     acquire: Effect.Effect<A, E, R>,
     release: (exit: Exit.Exit<unknown, unknown>) => Effect.Effect<X, never, R2>
-  ): Effect.Effect<A, E, Scope.Scope | R2 | R>
-} = dual((args) => core.isEffect(args[0]), (acquire, release) =>
-  ensuring(
-    acquire,
-    addFinalizer((exit) => release(exit))
-  ))
+  ): Effect.Effect<A, E, Scope.Scope | R2 | R>;
+} = dual(
+  (args) => core.isEffect(args[0]),
+  (acquire, release) =>
+    ensuring(
+      acquire,
+      addFinalizer((exit) => release(exit))
+    )
+);
 
 /* @internal */
 export const addFinalizer = <X, R>(
   finalizer: (exit: Exit.Exit<unknown, unknown>) => Effect.Effect<X, never, R>
 ): Effect.Effect<void, never, R | Scope.Scope> =>
-  core.withFiberRuntime(
-    (runtime) => {
-      const acquireRefs = runtime.getFiberRefs()
-      const acquireFlags = runtimeFlags_.disable(runtime.currentRuntimeFlags, runtimeFlags_.Interruption)
-      return core.flatMap(scope, (scope) =>
-        core.scopeAddFinalizerExit(scope, (exit) =>
-          core.withFiberRuntime((runtimeFinalizer) => {
-            const preRefs = runtimeFinalizer.getFiberRefs()
-            const preFlags = runtimeFinalizer.currentRuntimeFlags
-            const patchRefs = FiberRefsPatch.diff(preRefs, acquireRefs)
-            const patchFlags = runtimeFlags_.diff(preFlags, acquireFlags)
-            const inverseRefs = FiberRefsPatch.diff(acquireRefs, preRefs)
-            runtimeFinalizer.setFiberRefs(
-              FiberRefsPatch.patch(patchRefs, runtimeFinalizer.id(), acquireRefs)
-            )
+  core.withFiberRuntime((runtime) => {
+    const acquireRefs = runtime.getFiberRefs();
+    const acquireFlags = runtimeFlags_.disable(
+      runtime.currentRuntimeFlags,
+      runtimeFlags_.Interruption
+    );
+    return core.flatMap(scope, (scope) =>
+      core.scopeAddFinalizerExit(scope, (exit) =>
+        core.withFiberRuntime((runtimeFinalizer) => {
+          const preRefs = runtimeFinalizer.getFiberRefs();
+          const preFlags = runtimeFinalizer.currentRuntimeFlags;
+          const patchRefs = FiberRefsPatch.diff(preRefs, acquireRefs);
+          const patchFlags = runtimeFlags_.diff(preFlags, acquireFlags);
+          const inverseRefs = FiberRefsPatch.diff(acquireRefs, preRefs);
+          runtimeFinalizer.setFiberRefs(
+            FiberRefsPatch.patch(patchRefs, runtimeFinalizer.id(), acquireRefs)
+          );
 
-            return ensuring(
-              core.withRuntimeFlags(finalizer(exit) as Effect.Effect<X>, patchFlags),
-              core.sync(() => {
-                runtimeFinalizer.setFiberRefs(
-                  FiberRefsPatch.patch(inverseRefs, runtimeFinalizer.id(), runtimeFinalizer.getFiberRefs())
+          return ensuring(
+            core.withRuntimeFlags(
+              finalizer(exit) as Effect.Effect<X>,
+              patchFlags
+            ),
+            core.sync(() => {
+              runtimeFinalizer.setFiberRefs(
+                FiberRefsPatch.patch(
+                  inverseRefs,
+                  runtimeFinalizer.id(),
+                  runtimeFinalizer.getFiberRefs()
                 )
-              })
-            )
-          })))
-    }
-  )
+              );
+            })
+          );
+        })
+      )
+    );
+  });
 
 /* @internal */
-export const daemonChildren = <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> => {
-  const forkScope = core.fiberRefLocally(core.currentForkScopeOverride, Option.some(fiberScope.globalScope))
-  return forkScope(self)
-}
+export const daemonChildren = <A, E, R>(
+  self: Effect.Effect<A, E, R>
+): Effect.Effect<A, E, R> => {
+  const forkScope = core.fiberRefLocally(
+    core.currentForkScopeOverride,
+    Option.some(fiberScope.globalScope)
+  );
+  return forkScope(self);
+};
 
 /** @internal */
-const _existsParFound = Symbol.for("effect/Effect/existsPar/found")
+const _existsParFound = Symbol.for("effect/Effect/existsPar/found");
 
 /* @internal */
 export const exists: {
-  <A, E, R>(predicate: (a: A, i: number) => Effect.Effect<boolean, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }): (elements: Iterable<A>) => Effect.Effect<boolean, E, R>
-  <A, E, R>(elements: Iterable<A>, predicate: (a: A, i: number) => Effect.Effect<boolean, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }): Effect.Effect<boolean, E, R>
+  <A, E, R>(
+    predicate: (a: A, i: number) => Effect.Effect<boolean, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ): (elements: Iterable<A>) => Effect.Effect<boolean, E, R>;
+  <A, E, R>(
+    elements: Iterable<A>,
+    predicate: (a: A, i: number) => Effect.Effect<boolean, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ): Effect.Effect<boolean, E, R>;
 } = dual(
   (args) => Predicate.isIterable(args[0]) && !core.isEffect(args[0]),
-  <A, E, R>(elements: Iterable<A>, predicate: (a: A, i: number) => Effect.Effect<boolean, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-  }) =>
+  <A, E, R>(
+    elements: Iterable<A>,
+    predicate: (a: A, i: number) => Effect.Effect<boolean, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+    }
+  ) =>
     concurrency.matchSimple(
       options?.concurrency,
-      () => core.suspend(() => existsLoop(elements[Symbol.iterator](), 0, predicate)),
+      () =>
+        core.suspend(() =>
+          existsLoop(elements[Symbol.iterator](), 0, predicate)
+        ),
       () =>
         core.matchEffect(
           forEach(
             elements,
-            (a, i) => core.if_(predicate(a, i), { onTrue: () => core.fail(_existsParFound), onFalse: () => core.void }),
+            (a, i) =>
+              core.if_(predicate(a, i), {
+                onTrue: () => core.fail(_existsParFound),
+                onFalse: () => core.void,
+              }),
             options
           ),
           {
-            onFailure: (e) => e === _existsParFound ? core.succeed(true) : core.fail(e),
-            onSuccess: () => core.succeed(false)
+            onFailure: (e) =>
+              e === _existsParFound ? core.succeed(true) : core.fail(e),
+            onSuccess: () => core.succeed(false),
           }
         )
     )
-)
+);
 
 const existsLoop = <A, E, R>(
   iterator: Iterator<A>,
   index: number,
   f: (a: A, i: number) => Effect.Effect<boolean, E, R>
 ): Effect.Effect<boolean, E, R> => {
-  const next = iterator.next()
+  const next = iterator.next();
   if (next.done) {
-    return core.succeed(false)
+    return core.succeed(false);
   }
-  return core.flatMap(
-    f(next.value, index),
-    (b) => b ? core.succeed(b) : existsLoop(iterator, index + 1, f)
-  )
-}
+  return core.flatMap(f(next.value, index), (b) =>
+    b ? core.succeed(b) : existsLoop(iterator, index + 1, f)
+  );
+};
 
 /* @internal */
 export const filter = dual<
   <A, E, R>(
     predicate: (a: NoInfer<A>, i: number) => Effect.Effect<boolean, E, R>,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly negate?: boolean | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly negate?: boolean | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => (elements: Iterable<A>) => Effect.Effect<Array<A>, E, R>,
-  <A, E, R>(elements: Iterable<A>, predicate: (a: NoInfer<A>, i: number) => Effect.Effect<boolean, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly negate?: boolean | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }) => Effect.Effect<Array<A>, E, R>
+  <A, E, R>(
+    elements: Iterable<A>,
+    predicate: (a: NoInfer<A>, i: number) => Effect.Effect<boolean, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly negate?: boolean | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ) => Effect.Effect<Array<A>, E, R>
 >(
   (args) => Predicate.isIterable(args[0]) && !core.isEffect(args[0]),
-  <A, E, R>(elements: Iterable<A>, predicate: (a: NoInfer<A>, i: number) => Effect.Effect<boolean, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly negate?: boolean | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }) => {
-    const predicate_ = options?.negate ? (a: A, i: number) => core.map(predicate(a, i), Boolean.not) : predicate
+  <A, E, R>(
+    elements: Iterable<A>,
+    predicate: (a: NoInfer<A>, i: number) => Effect.Effect<boolean, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly negate?: boolean | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ) => {
+    const predicate_ = options?.negate
+      ? (a: A, i: number) => core.map(predicate(a, i), Boolean.not)
+      : predicate;
     return concurrency.matchSimple(
       options?.concurrency,
       () =>
@@ -1833,111 +2028,124 @@ export const filter = dual<
               core.zipWith(
                 effect,
                 core.suspend(() => predicate_(a, i)),
-                (list, b) => b ? [a, ...list] : list
+                (list, b) => (b ? [a, ...list] : list)
               ),
-            core.sync(() => new Array<A>()) as Effect.Effect<Array<A>, E, R>
+            core.sync(() => [] as A[]) as Effect.Effect<Array<A>, E, R>
           )
         ),
       () =>
         core.map(
           forEach(
             elements,
-            (a, i) => core.map(predicate_(a, i), (b) => (b ? Option.some(a) : Option.none())),
+            (a, i) =>
+              core.map(predicate_(a, i), (b) =>
+                b ? Option.some(a) : Option.none()
+              ),
             options
           ),
           RA.getSomes
         )
-    )
+    );
   }
-)
+);
 
 // === all
 
 const allResolveInput = (
-  input: Iterable<Effect.Effect<any, any, any>> | Record<string, Effect.Effect<any, any, any>>
-): [Iterable<Effect.Effect<any, any, any>>, Option.Option<(as: ReadonlyArray<any>) => any>] => {
+  input:
+    | Iterable<Effect.Effect<any, any, any>>
+    | Record<string, Effect.Effect<any, any, any>>
+): [
+  Iterable<Effect.Effect<any, any, any>>,
+  Option.Option<(as: ReadonlyArray<any>) => any>,
+] => {
   if (Array.isArray(input) || Predicate.isIterable(input)) {
-    return [input, Option.none()]
+    return [input, Option.none()];
   }
-  const keys = Object.keys(input)
-  const size = keys.length
+  const keys = Object.keys(input);
+  const size = keys.length;
   return [
     keys.map((k) => input[k]),
     Option.some((values: ReadonlyArray<any>) => {
-      const res = {}
+      const res = {};
       for (let i = 0; i < size; i++) {
-        ;(res as any)[keys[i]] = values[i]
+        (res as any)[keys[i]] = values[i];
       }
-      return res
-    })
-  ]
-}
+      return res;
+    }),
+  ];
+};
 
 const allValidate = (
   effects: Iterable<Effect.Effect<any, any, any>>,
   reconcile: Option.Option<(as: ReadonlyArray<any>) => any>,
   options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly discard?: boolean | undefined
-    readonly mode?: "default" | "validate" | "either" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
+    readonly concurrency?: Concurrency | undefined;
+    readonly batching?: boolean | "inherit" | undefined;
+    readonly discard?: boolean | undefined;
+    readonly mode?: "default" | "validate" | "either" | undefined;
+    readonly concurrentFinalizers?: boolean | undefined;
   }
 ) => {
-  const eitherEffects: Array<Effect.Effect<Either.Either<unknown, unknown>, never, unknown>> = []
+  const eitherEffects: Array<
+    Effect.Effect<Either.Either<unknown, unknown>, never, unknown>
+  > = [];
   for (const effect of effects) {
-    eitherEffects.push(core.either(effect))
+    eitherEffects.push(core.either(effect));
   }
   return core.flatMap(
     forEach(eitherEffects, identity, {
       concurrency: options?.concurrency,
       batching: options?.batching,
-      concurrentFinalizers: options?.concurrentFinalizers
+      concurrentFinalizers: options?.concurrentFinalizers,
     }),
     (eithers) => {
-      const none = Option.none()
-      const size = eithers.length
-      const errors: Array<unknown> = new Array(size)
-      const successes: Array<unknown> = new Array(size)
-      let errored = false
+      const none = Option.none();
+      const size = eithers.length;
+      const errors: Array<unknown> = new Array(size);
+      const successes: Array<unknown> = new Array(size);
+      let errored = false;
       for (let i = 0; i < size; i++) {
-        const either = eithers[i] as Either.Either<unknown, unknown>
+        const either = eithers[i] as Either.Either<unknown, unknown>;
         if (either._tag === "Left") {
-          errors[i] = Option.some(either.left)
-          errored = true
+          errors[i] = Option.some(either.left);
+          errored = true;
         } else {
-          successes[i] = either.right
-          errors[i] = none
+          successes[i] = either.right;
+          errors[i] = none;
         }
       }
       if (errored) {
-        return reconcile._tag === "Some" ?
-          core.fail(reconcile.value(errors)) :
-          core.fail(errors)
-      } else if (options?.discard) {
-        return core.void
+        return reconcile._tag === "Some"
+          ? core.fail(reconcile.value(errors))
+          : core.fail(errors);
       }
-      return reconcile._tag === "Some" ?
-        core.succeed(reconcile.value(successes)) :
-        core.succeed(successes)
+      if (options?.discard) {
+        return core.void;
+      }
+      return reconcile._tag === "Some"
+        ? core.succeed(reconcile.value(successes))
+        : core.succeed(successes);
     }
-  )
-}
+  );
+};
 
 const allEither = (
   effects: Iterable<Effect.Effect<any, any, any>>,
   reconcile: Option.Option<(as: ReadonlyArray<any>) => any>,
   options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly discard?: boolean | undefined
-    readonly mode?: "default" | "validate" | "either" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
+    readonly concurrency?: Concurrency | undefined;
+    readonly batching?: boolean | "inherit" | undefined;
+    readonly discard?: boolean | undefined;
+    readonly mode?: "default" | "validate" | "either" | undefined;
+    readonly concurrentFinalizers?: boolean | undefined;
   }
 ) => {
-  const eitherEffects: Array<Effect.Effect<Either.Either<unknown, unknown>, never, unknown>> = []
+  const eitherEffects: Array<
+    Effect.Effect<Either.Either<unknown, unknown>, never, unknown>
+  > = [];
   for (const effect of effects) {
-    eitherEffects.push(core.either(effect))
+    eitherEffects.push(core.either(effect));
   }
 
   if (options?.discard) {
@@ -1945,236 +2153,319 @@ const allEither = (
       concurrency: options?.concurrency,
       batching: options?.batching,
       discard: true,
-      concurrentFinalizers: options?.concurrentFinalizers
-    })
+      concurrentFinalizers: options?.concurrentFinalizers,
+    });
   }
 
   return core.map(
     forEach(eitherEffects, identity, {
       concurrency: options?.concurrency,
       batching: options?.batching,
-      concurrentFinalizers: options?.concurrentFinalizers
+      concurrentFinalizers: options?.concurrentFinalizers,
     }),
     (eithers) =>
-      reconcile._tag === "Some" ?
-        reconcile.value(eithers) :
-        eithers
-  )
-}
+      reconcile._tag === "Some" ? reconcile.value(eithers) : eithers
+  );
+};
 
 /* @internal */
 export const all = <
-  const Arg extends Iterable<Effect.Effect<any, any, any>> | Record<string, Effect.Effect<any, any, any>>,
-  O extends NoExcessProperties<{
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly discard?: boolean | undefined
-    readonly mode?: "default" | "validate" | "either" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }, O>
+  const Arg extends
+    | Iterable<Effect.Effect<any, any, any>>
+    | Record<string, Effect.Effect<any, any, any>>,
+  O extends NoExcessProperties<
+    {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard?: boolean | undefined;
+      readonly mode?: "default" | "validate" | "either" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    },
+    O
+  >,
 >(
   arg: Arg,
   options?: O
 ): Effect.All.Return<Arg, O> => {
-  const [effects, reconcile] = allResolveInput(arg)
+  const [effects, reconcile] = allResolveInput(arg);
 
   if (options?.mode === "validate") {
-    return allValidate(effects, reconcile, options) as any
-  } else if (options?.mode === "either") {
-    return allEither(effects, reconcile, options) as any
+    return allValidate(effects, reconcile, options) as any;
+  }
+  if (options?.mode === "either") {
+    return allEither(effects, reconcile, options) as any;
   }
 
   return options?.discard !== true && reconcile._tag === "Some"
-    ? core.map(
-      forEach(effects, identity, options as any),
-      reconcile.value
-    ) as any
-    : forEach(effects, identity, options as any) as any
-}
+    ? (core.map(
+        forEach(effects, identity, options as any),
+        reconcile.value
+      ) as any)
+    : (forEach(effects, identity, options as any) as any);
+};
 
 /* @internal */
-export const allWith = <
-  O extends NoExcessProperties<{
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly discard?: boolean | undefined
-    readonly mode?: "default" | "validate" | "either" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }, O>
->(options?: O) =>
-<const Arg extends Iterable<Effect.Effect<any, any, any>> | Record<string, Effect.Effect<any, any, any>>>(
-  arg: Arg
-): Effect.All.Return<Arg, O> => all(arg, options)
+export const allWith =
+  <
+    O extends NoExcessProperties<
+      {
+        readonly concurrency?: Concurrency | undefined;
+        readonly batching?: boolean | "inherit" | undefined;
+        readonly discard?: boolean | undefined;
+        readonly mode?: "default" | "validate" | "either" | undefined;
+        readonly concurrentFinalizers?: boolean | undefined;
+      },
+      O
+    >,
+  >(
+    options?: O
+  ) =>
+  <
+    const Arg extends
+      | Iterable<Effect.Effect<any, any, any>>
+      | Record<string, Effect.Effect<any, any, any>>,
+  >(
+    arg: Arg
+  ): Effect.All.Return<Arg, O> =>
+    all(arg, options);
 
 /* @internal */
 export const allSuccesses = <Eff extends Effect.Effect<any, any, any>>(
   elements: Iterable<Eff>,
   options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
+    readonly concurrency?: Concurrency | undefined;
+    readonly batching?: boolean | "inherit" | undefined;
+    readonly concurrentFinalizers?: boolean | undefined;
   }
-): Effect.Effect<Array<Effect.Effect.Success<Eff>>, never, Effect.Effect.Context<Eff>> =>
+): Effect.Effect<
+  Array<Effect.Effect.Success<Eff>>,
+  never,
+  Effect.Effect.Context<Eff>
+> =>
   core.map(
     all(RA.fromIterable(elements).map(core.exit), options),
-    RA.filterMap((exit) => core.exitIsSuccess(exit) ? Option.some(exit.effect_instruction_i0) : Option.none())
-  )
+    RA.filterMap((exit) =>
+      core.exitIsSuccess(exit)
+        ? Option.some(exit.effect_instruction_i0)
+        : Option.none()
+    )
+  );
 
 /* @internal */
 export const replicate = dual<
-  (n: number) => <A, E, R>(self: Effect.Effect<A, E, R>) => Array<Effect.Effect<A, E, R>>,
-  <A, E, R>(self: Effect.Effect<A, E, R>, n: number) => Array<Effect.Effect<A, E, R>>
->(2, (self, n) => Array.from({ length: n }, () => self))
+  (
+    n: number
+  ) => <A, E, R>(self: Effect.Effect<A, E, R>) => Array<Effect.Effect<A, E, R>>,
+  <A, E, R>(
+    self: Effect.Effect<A, E, R>,
+    n: number
+  ) => Array<Effect.Effect<A, E, R>>
+>(2, (self, n) => Array.from({ length: n }, () => self));
 
 /* @internal */
 export const replicateEffect: {
   (
     n: number,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard?: false | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard?: false | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<Array<A>, E, R>
+  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<Array<A>, E, R>;
   (
     n: number,
     options: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard: true
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard: true;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<void, E, R>
+  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<void, E, R>;
   <A, E, R>(
     self: Effect.Effect<A, E, R>,
     n: number,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard?: false | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard?: false | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): Effect.Effect<Array<A>, E, R>
+  ): Effect.Effect<Array<A>, E, R>;
   <A, E, R>(
     self: Effect.Effect<A, E, R>,
     n: number,
     options: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard: true
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard: true;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): Effect.Effect<void, E, R>
+  ): Effect.Effect<void, E, R>;
 } = dual(
   (args) => core.isEffect(args[0]),
   (self, n, options) => all(replicate(self, n), options)
-)
+);
 
 /* @internal */
 export const forEach: {
   <B, E, R, S extends Iterable<any>>(
     f: (a: RA.ReadonlyArray.Infer<S>, i: number) => Effect.Effect<B, E, R>,
-    options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard?: false | undefined
-      readonly concurrentFinalizers?: boolean | undefined
-    } | undefined
-  ): (
-    self: S
-  ) => Effect.Effect<RA.ReadonlyArray.With<S, B>, E, R>
+    options?:
+      | {
+          readonly concurrency?: Concurrency | undefined;
+          readonly batching?: boolean | "inherit" | undefined;
+          readonly discard?: false | undefined;
+          readonly concurrentFinalizers?: boolean | undefined;
+        }
+      | undefined
+  ): (self: S) => Effect.Effect<RA.ReadonlyArray.With<S, B>, E, R>;
   <A, B, E, R>(
     f: (a: A, i: number) => Effect.Effect<B, E, R>,
     options: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard: true
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard: true;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): (self: Iterable<A>) => Effect.Effect<void, E, R>
+  ): (self: Iterable<A>) => Effect.Effect<void, E, R>;
   <A, B, E, R>(
     self: RA.NonEmptyReadonlyArray<A>,
     f: (a: A, i: number) => Effect.Effect<B, E, R>,
-    options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard?: false | undefined
-      readonly concurrentFinalizers?: boolean | undefined
-    } | undefined
-  ): Effect.Effect<RA.NonEmptyArray<B>, E, R>
+    options?:
+      | {
+          readonly concurrency?: Concurrency | undefined;
+          readonly batching?: boolean | "inherit" | undefined;
+          readonly discard?: false | undefined;
+          readonly concurrentFinalizers?: boolean | undefined;
+        }
+      | undefined
+  ): Effect.Effect<RA.NonEmptyArray<B>, E, R>;
   <A, B, E, R>(
     self: Iterable<A>,
     f: (a: A, i: number) => Effect.Effect<B, E, R>,
-    options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard?: false | undefined
-      readonly concurrentFinalizers?: boolean | undefined
-    } | undefined
-  ): Effect.Effect<Array<B>, E, R>
+    options?:
+      | {
+          readonly concurrency?: Concurrency | undefined;
+          readonly batching?: boolean | "inherit" | undefined;
+          readonly discard?: false | undefined;
+          readonly concurrentFinalizers?: boolean | undefined;
+        }
+      | undefined
+  ): Effect.Effect<Array<B>, E, R>;
   <A, B, E, R>(
     self: Iterable<A>,
     f: (a: A, i: number) => Effect.Effect<B, E, R>,
     options: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly discard: true
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard: true;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): Effect.Effect<void, E, R>
-} = dual((args) => Predicate.isIterable(args[0]), <A, R, E, B>(
-  self: Iterable<A>,
-  f: (a: A, i: number) => Effect.Effect<B, E, R>,
-  options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly discard?: boolean | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }
-) =>
-  core.withFiberRuntime<A | void, E, R>((r) => {
-    const isRequestBatchingEnabled = options?.batching === true ||
-      (options?.batching === "inherit" && r.getFiberRef(core.currentRequestBatching))
+  ): Effect.Effect<void, E, R>;
+} = dual(
+  (args) => Predicate.isIterable(args[0]),
+  <A, R, E, B>(
+    self: Iterable<A>,
+    f: (a: A, i: number) => Effect.Effect<B, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard?: boolean | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ) =>
+    core.withFiberRuntime<A | void, E, R>((r) => {
+      const isRequestBatchingEnabled =
+        options?.batching === true ||
+        (options?.batching === "inherit" &&
+          r.getFiberRef(core.currentRequestBatching));
 
-    if (options?.discard) {
+      if (options?.discard) {
+        return concurrency.match(
+          options.concurrency,
+          () =>
+            finalizersMaskInternal(
+              ExecutionStrategy.sequential,
+              options?.concurrentFinalizers
+            )((restore) =>
+              isRequestBatchingEnabled
+                ? forEachConcurrentDiscard(
+                    self,
+                    (a, i) => restore(f(a, i)),
+                    true,
+                    false,
+                    1
+                  )
+                : core.forEachSequentialDiscard(self, (a, i) =>
+                    restore(f(a, i))
+                  )
+            ),
+          () =>
+            finalizersMaskInternal(
+              ExecutionStrategy.parallel,
+              options?.concurrentFinalizers
+            )((restore) =>
+              forEachConcurrentDiscard(
+                self,
+                (a, i) => restore(f(a, i)),
+                isRequestBatchingEnabled,
+                false
+              )
+            ),
+          (n) =>
+            finalizersMaskInternal(
+              ExecutionStrategy.parallelN(n),
+              options?.concurrentFinalizers
+            )((restore) =>
+              forEachConcurrentDiscard(
+                self,
+                (a, i) => restore(f(a, i)),
+                isRequestBatchingEnabled,
+                false,
+                n
+              )
+            )
+        );
+      }
+
       return concurrency.match(
-        options.concurrency,
+        options?.concurrency,
         () =>
-          finalizersMaskInternal(ExecutionStrategy.sequential, options?.concurrentFinalizers)((restore) =>
+          finalizersMaskInternal(
+            ExecutionStrategy.sequential,
+            options?.concurrentFinalizers
+          )((restore) =>
             isRequestBatchingEnabled
-              ? forEachConcurrentDiscard(self, (a, i) => restore(f(a, i)), true, false, 1)
-              : core.forEachSequentialDiscard(self, (a, i) => restore(f(a, i)))
+              ? forEachParN(self, 1, (a, i) => restore(f(a, i)), true)
+              : core.forEachSequential(self, (a, i) => restore(f(a, i)))
           ),
         () =>
-          finalizersMaskInternal(ExecutionStrategy.parallel, options?.concurrentFinalizers)((restore) =>
-            forEachConcurrentDiscard(self, (a, i) => restore(f(a, i)), isRequestBatchingEnabled, false)
+          finalizersMaskInternal(
+            ExecutionStrategy.parallel,
+            options?.concurrentFinalizers
+          )((restore) =>
+            forEachParUnbounded(
+              self,
+              (a, i) => restore(f(a, i)),
+              isRequestBatchingEnabled
+            )
           ),
         (n) =>
-          finalizersMaskInternal(ExecutionStrategy.parallelN(n), options?.concurrentFinalizers)((restore) =>
-            forEachConcurrentDiscard(self, (a, i) => restore(f(a, i)), isRequestBatchingEnabled, false, n)
+          finalizersMaskInternal(
+            ExecutionStrategy.parallelN(n),
+            options?.concurrentFinalizers
+          )((restore) =>
+            forEachParN(
+              self,
+              n,
+              (a, i) => restore(f(a, i)),
+              isRequestBatchingEnabled
+            )
           )
-      )
-    }
-
-    return concurrency.match(
-      options?.concurrency,
-      () =>
-        finalizersMaskInternal(ExecutionStrategy.sequential, options?.concurrentFinalizers)((restore) =>
-          isRequestBatchingEnabled
-            ? forEachParN(self, 1, (a, i) => restore(f(a, i)), true)
-            : core.forEachSequential(self, (a, i) => restore(f(a, i)))
-        ),
-      () =>
-        finalizersMaskInternal(ExecutionStrategy.parallel, options?.concurrentFinalizers)((restore) =>
-          forEachParUnbounded(self, (a, i) => restore(f(a, i)), isRequestBatchingEnabled)
-        ),
-      (n) =>
-        finalizersMaskInternal(ExecutionStrategy.parallelN(n), options?.concurrentFinalizers)((restore) =>
-          forEachParN(self, n, (a, i) => restore(f(a, i)), isRequestBatchingEnabled)
-        )
-    )
-  }))
+      );
+    })
+);
 
 /* @internal */
 export const forEachParUnbounded = <A, B, E, R>(
@@ -2183,11 +2474,15 @@ export const forEachParUnbounded = <A, B, E, R>(
   batching: boolean
 ): Effect.Effect<Array<B>, E, R> =>
   core.suspend(() => {
-    const as = RA.fromIterable(self)
-    const array = new Array<B>(as.length)
-    const fn = (a: A, i: number) => core.flatMap(f(a, i), (b) => core.sync(() => array[i] = b))
-    return core.zipRight(forEachConcurrentDiscard(as, fn, batching, false), core.succeed(array))
-  })
+    const as = RA.fromIterable(self);
+    const array = new Array<B>(as.length);
+    const fn = (a: A, i: number) =>
+      core.flatMap(f(a, i), (b) => core.sync(() => (array[i] = b)));
+    return core.zipRight(
+      forEachConcurrentDiscard(as, fn, batching, false),
+      core.succeed(array)
+    );
+  });
 
 /** @internal */
 export const forEachConcurrentDiscard = <A, X, E, R>(
@@ -2200,206 +2495,244 @@ export const forEachConcurrentDiscard = <A, X, E, R>(
   core.uninterruptibleMask((restore) =>
     core.transplant((graft) =>
       core.withFiberRuntime<void, E, R>((parent) => {
-        let todos = Array.from(self).reverse()
-        let target = todos.length
+        let todos = Array.from(self).reverse();
+        let target = todos.length;
         if (target === 0) {
-          return core.void
+          return core.void;
         }
-        let counter = 0
-        let interrupted = false
-        const fibersCount = n ? Math.min(todos.length, n) : todos.length
-        const fibers = new Set<FiberRuntime<Exit.Exit<X, E> | Effect.Blocked<X, E>>>()
-        const results = new Array()
+        let counter = 0;
+        let interrupted = false;
+        const fibersCount = n ? Math.min(todos.length, n) : todos.length;
+        const fibers = new Set<
+          FiberRuntime<Exit.Exit<X, E> | Effect.Blocked<X, E>>
+        >();
+        const results = [];
         const interruptAll = () =>
           fibers.forEach((fiber) => {
             fiber.currentScheduler.scheduleTask(
               () => {
-                fiber.unsafeInterruptAsFork(parent.id())
+                fiber.unsafeInterruptAsFork(parent.id());
               },
               0,
               fiber
-            )
-          })
-        const startOrder = new Array<FiberRuntime<Exit.Exit<X, E> | Effect.Blocked<X, E>>>()
-        const joinOrder = new Array<FiberRuntime<Exit.Exit<X, E> | Effect.Blocked<X, E>>>()
-        const residual = new Array<core.Blocked>()
+            );
+          });
+        const startOrder: FiberRuntime<
+          Exit.Exit<X, E> | Effect.Blocked<X, E>
+        >[] = [];
+        const joinOrder: FiberRuntime<
+          Exit.Exit<X, E> | Effect.Blocked<X, E>
+        >[] = [];
+        const residual: core.Blocked[] = [];
         const collectExits = () => {
           const exits: Array<Exit.Exit<any, E>> = results
             .filter(({ exit }) => exit._tag === "Failure")
-            .sort((a, b) => a.index < b.index ? -1 : a.index === b.index ? 0 : 1)
-            .map(({ exit }) => exit)
+            .sort((a, b) =>
+              a.index < b.index ? -1 : a.index === b.index ? 0 : 1
+            )
+            .map(({ exit }) => exit);
           if (exits.length === 0) {
-            exits.push(core.exitVoid)
+            exits.push(core.exitVoid);
           }
-          return exits
-        }
-        const runFiber = <A, E, R>(eff: Effect.Effect<A, E, R>, interruptImmediately = false) => {
-          const runnable = core.uninterruptible(graft(eff))
+          return exits;
+        };
+        const runFiber = <A, E, R>(
+          eff: Effect.Effect<A, E, R>,
+          interruptImmediately = false
+        ) => {
+          const runnable = core.uninterruptible(graft(eff));
           const fiber = unsafeForkUnstarted(
             runnable,
             parent,
             parent.currentRuntimeFlags,
             fiberScope.globalScope
-          )
+          );
           parent.currentScheduler.scheduleTask(
             () => {
               if (interruptImmediately) {
-                fiber.unsafeInterruptAsFork(parent.id())
+                fiber.unsafeInterruptAsFork(parent.id());
               }
-              fiber.resume(runnable)
+              fiber.resume(runnable);
             },
             0,
             fiber
-          )
-          return fiber
-        }
+          );
+          return fiber;
+        };
         const onInterruptSignal = () => {
           if (!processAll) {
-            target -= todos.length
-            todos = []
+            target -= todos.length;
+            todos = [];
           }
-          interrupted = true
-          interruptAll()
-        }
-        const stepOrExit = batching ? core.step : core.exit
+          interrupted = true;
+          interruptAll();
+        };
+        const stepOrExit = batching ? core.step : core.exit;
         const processingFiber = runFiber(
           core.async<any, any, any>((resume) => {
-            const pushResult = <X, E>(res: Exit.Exit<X, E> | Effect.Blocked<X, E>, index: number) => {
+            const pushResult = <X, E>(
+              res: Exit.Exit<X, E> | Effect.Blocked<X, E>,
+              index: number
+            ) => {
               if (res._op === "Blocked") {
-                residual.push(res as core.Blocked)
+                residual.push(res as core.Blocked);
               } else {
-                results.push({ index, exit: res })
+                results.push({ index, exit: res });
                 if (res._op === "Failure" && !interrupted) {
-                  onInterruptSignal()
+                  onInterruptSignal();
                 }
               }
-            }
+            };
             const next = () => {
               if (todos.length > 0) {
-                const a = todos.pop()!
-                let index = counter++
+                const a = todos.pop()!;
+                let index = counter++;
                 const returnNextElement = () => {
-                  const a = todos.pop()!
-                  index = counter++
+                  const a = todos.pop()!;
+                  index = counter++;
                   return core.flatMap(core.yieldNow(), () =>
-                    core.flatMap(
-                      stepOrExit(restore(f(a, index))),
-                      onRes
-                    ))
-                }
+                    core.flatMap(stepOrExit(restore(f(a, index))), onRes)
+                  );
+                };
                 const onRes = (
                   res: Exit.Exit<X, E> | Effect.Blocked<X, E>
-                ): Effect.Effect<Exit.Exit<X, E> | Effect.Blocked<X, E>, never, R> => {
+                ): Effect.Effect<
+                  Exit.Exit<X, E> | Effect.Blocked<X, E>,
+                  never,
+                  R
+                > => {
                   if (todos.length > 0) {
-                    pushResult(res, index)
+                    pushResult(res, index);
                     if (todos.length > 0) {
-                      return returnNextElement()
+                      return returnNextElement();
                     }
                   }
-                  return core.succeed(res)
-                }
+                  return core.succeed(res);
+                };
                 const todo = core.flatMap(
                   stepOrExit(restore(f(a, index))),
                   onRes
-                )
-                const fiber = runFiber(todo)
-                startOrder.push(fiber)
-                fibers.add(fiber)
+                );
+                const fiber = runFiber(todo);
+                startOrder.push(fiber);
+                fibers.add(fiber);
                 if (interrupted) {
                   fiber.currentScheduler.scheduleTask(
                     () => {
-                      fiber.unsafeInterruptAsFork(parent.id())
+                      fiber.unsafeInterruptAsFork(parent.id());
                     },
                     0,
                     fiber
-                  )
+                  );
                 }
                 fiber.addObserver((wrapped) => {
-                  let exit: Exit.Exit<any, any> | core.Blocked
+                  let exit: Exit.Exit<any, any> | core.Blocked;
                   if (wrapped._op === "Failure") {
-                    exit = wrapped
+                    exit = wrapped;
                   } else {
-                    exit = wrapped.effect_instruction_i0 as any
+                    exit = wrapped.effect_instruction_i0 as any;
                   }
-                  joinOrder.push(fiber)
-                  fibers.delete(fiber)
-                  pushResult(exit, index)
+                  joinOrder.push(fiber);
+                  fibers.delete(fiber);
+                  pushResult(exit, index);
                   if (results.length === target) {
-                    resume(core.succeed(Option.getOrElse(
-                      core.exitCollectAll(collectExits(), { parallel: true }),
-                      () => core.exitVoid
-                    )))
-                  } else if (residual.length + results.length === target) {
-                    const exits = collectExits()
-                    const requests = residual.map((blocked) => blocked.effect_instruction_i0).reduce(RequestBlock_.par)
-                    resume(core.succeed(core.blocked(
-                      requests,
-                      forEachConcurrentDiscard(
-                        [
-                          Option.getOrElse(
-                            core.exitCollectAll(exits, { parallel: true }),
-                            () => core.exitVoid
-                          ),
-                          ...residual.map((blocked) => blocked.effect_instruction_i1)
-                        ],
-                        (i) => i,
-                        batching,
-                        true,
-                        n
+                    resume(
+                      core.succeed(
+                        Option.getOrElse(
+                          core.exitCollectAll(collectExits(), {
+                            parallel: true,
+                          }),
+                          () => core.exitVoid
+                        )
                       )
-                    )))
+                    );
+                  } else if (residual.length + results.length === target) {
+                    const exits = collectExits();
+                    const requests = residual
+                      .map((blocked) => blocked.effect_instruction_i0)
+                      .reduce(RequestBlock_.par);
+                    resume(
+                      core.succeed(
+                        core.blocked(
+                          requests,
+                          forEachConcurrentDiscard(
+                            [
+                              Option.getOrElse(
+                                core.exitCollectAll(exits, { parallel: true }),
+                                () => core.exitVoid
+                              ),
+                              ...residual.map(
+                                (blocked) => blocked.effect_instruction_i1
+                              ),
+                            ],
+                            (i) => i,
+                            batching,
+                            true,
+                            n
+                          )
+                        )
+                      )
+                    );
                   } else {
-                    next()
+                    next();
                   }
-                })
+                });
               }
-            }
+            };
             for (let i = 0; i < fibersCount; i++) {
-              next()
+              next();
             }
           })
-        )
+        );
         return core.asVoid(
           core.onExit(
             core.flatten(restore(internalFiber.join(processingFiber))),
             core.exitMatch({
               onFailure: (cause) => {
-                onInterruptSignal()
-                const target = residual.length + 1
-                const concurrency = Math.min(typeof n === "number" ? n : residual.length, residual.length)
-                const toPop = Array.from(residual)
+                onInterruptSignal();
+                const target = residual.length + 1;
+                const concurrency = Math.min(
+                  typeof n === "number" ? n : residual.length,
+                  residual.length
+                );
+                const toPop = Array.from(residual);
                 return core.async<any, any>((cb) => {
-                  const exits: Array<Exit.Exit<any, any>> = []
-                  let count = 0
-                  let index = 0
-                  const check = (index: number, hitNext: boolean) => (exit: Exit.Exit<any, any>) => {
-                    exits[index] = exit
-                    count++
-                    if (count === target) {
-                      cb(core.exitSucceed(core.exitFailCause(cause)))
-                    }
-                    if (toPop.length > 0 && hitNext) {
-                      next()
-                    }
-                  }
+                  const exits: Array<Exit.Exit<any, any>> = [];
+                  let count = 0;
+                  let index = 0;
+                  const check =
+                    (index: number, hitNext: boolean) =>
+                    (exit: Exit.Exit<any, any>) => {
+                      exits[index] = exit;
+                      count++;
+                      if (count === target) {
+                        cb(core.exitSucceed(core.exitFailCause(cause)));
+                      }
+                      if (toPop.length > 0 && hitNext) {
+                        next();
+                      }
+                    };
                   const next = () => {
-                    runFiber(toPop.pop()!, true).addObserver(check(index, true))
-                    index++
-                  }
-                  processingFiber.addObserver(check(index, false))
-                  index++
+                    runFiber(toPop.pop()!, true).addObserver(
+                      check(index, true)
+                    );
+                    index++;
+                  };
+                  processingFiber.addObserver(check(index, false));
+                  index++;
                   for (let i = 0; i < concurrency; i++) {
-                    next()
+                    next();
                   }
-                }) as any
+                }) as any;
               },
-              onSuccess: () => core.forEachSequential(joinOrder, (f) => f.inheritAll)
+              onSuccess: () =>
+                core.forEachSequential(joinOrder, (f) => f.inheritAll),
             })
           )
-        )
+        );
       })
     )
-  )
+  );
 
 /* @internal */
 export const forEachParN = <A, B, E, R>(
@@ -2409,39 +2742,53 @@ export const forEachParN = <A, B, E, R>(
   batching: boolean
 ): Effect.Effect<Array<B>, E, R> =>
   core.suspend(() => {
-    const as = RA.fromIterable(self)
-    const array = new Array<B>(as.length)
-    const fn = (a: A, i: number) => core.map(f(a, i), (b) => array[i] = b)
-    return core.zipRight(forEachConcurrentDiscard(as, fn, batching, false, n), core.succeed(array))
-  })
+    const as = RA.fromIterable(self);
+    const array = new Array<B>(as.length);
+    const fn = (a: A, i: number) => core.map(f(a, i), (b) => (array[i] = b));
+    return core.zipRight(
+      forEachConcurrentDiscard(as, fn, batching, false, n),
+      core.succeed(array)
+    );
+  });
 
 /* @internal */
-export const fork = <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R> =>
-  core.withFiberRuntime((state, status) => core.succeed(unsafeFork(self, state, status.runtimeFlags)))
+export const fork = <A, E, R>(
+  self: Effect.Effect<A, E, R>
+): Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R> =>
+  core.withFiberRuntime((state, status) =>
+    core.succeed(unsafeFork(self, state, status.runtimeFlags))
+  );
 
 /* @internal */
-export const forkDaemon = <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R> =>
-  forkWithScopeOverride(self, fiberScope.globalScope)
+export const forkDaemon = <A, E, R>(
+  self: Effect.Effect<A, E, R>
+): Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R> =>
+  forkWithScopeOverride(self, fiberScope.globalScope);
 
 /* @internal */
 export const forkWithErrorHandler = dual<
   <E, X>(
     handler: (e: E) => Effect.Effect<X>
-  ) => <A, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R>,
+  ) => <A, R>(
+    self: Effect.Effect<A, E, R>
+  ) => Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R>,
   <A, E, R, X>(
     self: Effect.Effect<A, E, R>,
     handler: (e: E) => Effect.Effect<X>
   ) => Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R>
 >(2, (self, handler) =>
-  fork(core.onError(self, (cause) => {
-    const either = internalCause.failureOrCause(cause)
-    switch (either._tag) {
-      case "Left":
-        return handler(either.left)
-      case "Right":
-        return core.failCause(either.right)
-    }
-  })))
+  fork(
+    core.onError(self, (cause) => {
+      const either = internalCause.failureOrCause(cause);
+      switch (either._tag) {
+        case "Left":
+          return handler(either.left);
+        case "Right":
+          return core.failCause(either.right);
+      }
+    })
+  )
+);
 
 /** @internal */
 export const unsafeFork = <A, E, R, E2, B>(
@@ -2450,10 +2797,15 @@ export const unsafeFork = <A, E, R, E2, B>(
   parentRuntimeFlags: RuntimeFlags.RuntimeFlags,
   overrideScope: fiberScope.FiberScope | null = null
 ): FiberRuntime<A, E> => {
-  const childFiber = unsafeMakeChildFiber(effect, parentFiber, parentRuntimeFlags, overrideScope)
-  childFiber.resume(effect)
-  return childFiber
-}
+  const childFiber = unsafeMakeChildFiber(
+    effect,
+    parentFiber,
+    parentRuntimeFlags,
+    overrideScope
+  );
+  childFiber.resume(effect);
+  return childFiber;
+};
 
 /** @internal */
 export const unsafeForkUnstarted = <A, E, R, E2, B>(
@@ -2462,9 +2814,14 @@ export const unsafeForkUnstarted = <A, E, R, E2, B>(
   parentRuntimeFlags: RuntimeFlags.RuntimeFlags,
   overrideScope: fiberScope.FiberScope | null = null
 ): FiberRuntime<A, E> => {
-  const childFiber = unsafeMakeChildFiber(effect, parentFiber, parentRuntimeFlags, overrideScope)
-  return childFiber
-}
+  const childFiber = unsafeMakeChildFiber(
+    effect,
+    parentFiber,
+    parentRuntimeFlags,
+    overrideScope
+  );
+  return childFiber;
+};
 
 /** @internal */
 export const unsafeMakeChildFiber = <A, E, R, E2, B>(
@@ -2473,34 +2830,41 @@ export const unsafeMakeChildFiber = <A, E, R, E2, B>(
   parentRuntimeFlags: RuntimeFlags.RuntimeFlags,
   overrideScope: fiberScope.FiberScope | null = null
 ): FiberRuntime<A, E> => {
-  const childId = FiberId.unsafeMake()
-  const parentFiberRefs = parentFiber.getFiberRefs()
-  const childFiberRefs = fiberRefs.forkAs(parentFiberRefs, childId)
-  const childFiber = new FiberRuntime<A, E>(childId, childFiberRefs, parentRuntimeFlags)
+  const childId = FiberId.unsafeMake();
+  const parentFiberRefs = parentFiber.getFiberRefs();
+  const childFiberRefs = fiberRefs.forkAs(parentFiberRefs, childId);
+  const childFiber = new FiberRuntime<A, E>(
+    childId,
+    childFiberRefs,
+    parentRuntimeFlags
+  );
   const childContext = fiberRefs.getOrDefault(
     childFiberRefs,
     core.currentContext as unknown as FiberRef.FiberRef<Context.Context<R>>
-  )
-  const supervisor = childFiber.currentSupervisor
+  );
+  const supervisor = childFiber.currentSupervisor;
 
   supervisor.onStart(
     childContext,
     effect,
     Option.some(parentFiber),
     childFiber
-  )
+  );
 
-  childFiber.addObserver((exit) => supervisor.onEnd(exit, childFiber))
+  childFiber.addObserver((exit) => supervisor.onEnd(exit, childFiber));
 
-  const parentScope = overrideScope !== null ? overrideScope : pipe(
-    parentFiber.getFiberRef(core.currentForkScopeOverride),
-    Option.getOrElse(() => parentFiber.scope())
-  )
+  const parentScope =
+    overrideScope !== null
+      ? overrideScope
+      : pipe(
+          parentFiber.getFiberRef(core.currentForkScopeOverride),
+          Option.getOrElse(() => parentFiber.scope())
+        );
 
-  parentScope.add(parentRuntimeFlags, childFiber)
+  parentScope.add(parentRuntimeFlags, childFiber);
 
-  return childFiber
-}
+  return childFiber;
+};
 
 /* @internal */
 const forkWithScopeOverride = <A, E, R>(
@@ -2508,8 +2872,10 @@ const forkWithScopeOverride = <A, E, R>(
   scopeOverride: fiberScope.FiberScope
 ): Effect.Effect<Fiber.RuntimeFiber<A, E>, never, R> =>
   core.withFiberRuntime((parentFiber, parentStatus) =>
-    core.succeed(unsafeFork(self, parentFiber, parentStatus.runtimeFlags, scopeOverride))
-  )
+    core.succeed(
+      unsafeFork(self, parentFiber, parentStatus.runtimeFlags, scopeOverride)
+    )
+  );
 
 /* @internal */
 export const mergeAll = dual<
@@ -2517,28 +2883,35 @@ export const mergeAll = dual<
     zero: Z,
     f: (z: Z, a: Effect.Effect.Success<Eff>, i: number) => Z,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ) => (elements: Iterable<Eff>) => Effect.Effect<Z, Effect.Effect.Error<Eff>, Effect.Effect.Context<Eff>>,
+  ) => (
+    elements: Iterable<Eff>
+  ) => Effect.Effect<Z, Effect.Effect.Error<Eff>, Effect.Effect.Context<Eff>>,
   <Eff extends Effect.Effect<any, any, any>, Z>(
     elements: Iterable<Eff>,
     zero: Z,
     f: (z: Z, a: Effect.Effect.Success<Eff>, i: number) => Z,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => Effect.Effect<Z, Effect.Effect.Error<Eff>, Effect.Effect.Context<Eff>>
 >(
   (args) => Predicate.isFunction(args[2]),
-  <A, E, R, Z>(elements: Iterable<Effect.Effect<A, E, R>>, zero: Z, f: (z: Z, a: A, i: number) => Z, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }) =>
+  <A, E, R, Z>(
+    elements: Iterable<Effect.Effect<A, E, R>>,
+    zero: Z,
+    f: (z: Z, a: A, i: number) => Z,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ) =>
     concurrency.matchSimple(
       options?.concurrency,
       () =>
@@ -2551,38 +2924,45 @@ export const mergeAll = dual<
           core.flatMap(
             forEach(
               elements,
-              (effect, i) => core.flatMap(effect, (a) => Ref.update(acc, (b) => f(b, a, i))),
+              (effect, i) =>
+                core.flatMap(effect, (a) => Ref.update(acc, (b) => f(b, a, i))),
               options
             ),
             () => Ref.get(acc)
-          ))
+          )
+        )
     )
-)
+);
 
 /* @internal */
 export const partition = dual<
   <A, B, E, R>(
     f: (a: A, i: number) => Effect.Effect<B, E, R>,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ) => (elements: Iterable<A>) => Effect.Effect<[excluded: Array<E>, satisfying: Array<B>], never, R>,
+  ) => (
+    elements: Iterable<A>
+  ) => Effect.Effect<[excluded: Array<E>, satisfying: Array<B>], never, R>,
   <A, B, E, R>(
     elements: Iterable<A>,
     f: (a: A, i: number) => Effect.Effect<B, E, R>,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => Effect.Effect<[excluded: Array<E>, satisfying: Array<B>], never, R>
->((args) => Predicate.isIterable(args[0]), (elements, f, options) =>
-  pipe(
-    forEach(elements, (a, i) => core.either(f(a, i)), options),
-    core.map((chunk) => core.partitionMap(chunk, identity))
-  ))
+>(
+  (args) => Predicate.isIterable(args[0]),
+  (elements, f, options) =>
+    pipe(
+      forEach(elements, (a, i) => core.either(f(a, i)), options),
+      core.map((chunk) => core.partitionMap(chunk, identity))
+    )
+);
 
 /* @internal */
 export const validateAll = dual<
@@ -2590,122 +2970,140 @@ export const validateAll = dual<
     <A, B, E, R>(
       f: (a: A, i: number) => Effect.Effect<B, E, R>,
       options?: {
-        readonly concurrency?: Concurrency | undefined
-        readonly batching?: boolean | "inherit" | undefined
-        readonly discard?: false | undefined
-        readonly concurrentFinalizers?: boolean | undefined
+        readonly concurrency?: Concurrency | undefined;
+        readonly batching?: boolean | "inherit" | undefined;
+        readonly discard?: false | undefined;
+        readonly concurrentFinalizers?: boolean | undefined;
       }
-    ): (elements: Iterable<A>) => Effect.Effect<Array<B>, RA.NonEmptyArray<E>, R>
+    ): (
+      elements: Iterable<A>
+    ) => Effect.Effect<Array<B>, RA.NonEmptyArray<E>, R>;
     <A, B, E, R>(
       f: (a: A, i: number) => Effect.Effect<B, E, R>,
       options: {
-        readonly concurrency?: Concurrency | undefined
-        readonly batching?: boolean | "inherit" | undefined
-        readonly discard: true
-        readonly concurrentFinalizers?: boolean | undefined
+        readonly concurrency?: Concurrency | undefined;
+        readonly batching?: boolean | "inherit" | undefined;
+        readonly discard: true;
+        readonly concurrentFinalizers?: boolean | undefined;
       }
-    ): (elements: Iterable<A>) => Effect.Effect<void, RA.NonEmptyArray<E>, R>
+    ): (elements: Iterable<A>) => Effect.Effect<void, RA.NonEmptyArray<E>, R>;
   },
   {
     <A, B, E, R>(
       elements: Iterable<A>,
       f: (a: A, i: number) => Effect.Effect<B, E, R>,
       options?: {
-        readonly concurrency?: Concurrency | undefined
-        readonly batching?: boolean | "inherit" | undefined
-        readonly discard?: false | undefined
-        readonly concurrentFinalizers?: boolean | undefined
+        readonly concurrency?: Concurrency | undefined;
+        readonly batching?: boolean | "inherit" | undefined;
+        readonly discard?: false | undefined;
+        readonly concurrentFinalizers?: boolean | undefined;
       }
-    ): Effect.Effect<Array<B>, RA.NonEmptyArray<E>, R>
+    ): Effect.Effect<Array<B>, RA.NonEmptyArray<E>, R>;
     <A, B, E, R>(
       elements: Iterable<A>,
       f: (a: A, i: number) => Effect.Effect<B, E, R>,
       options: {
-        readonly concurrency?: Concurrency | undefined
-        readonly batching?: boolean | "inherit" | undefined
-        readonly discard: true
-        readonly concurrentFinalizers?: boolean | undefined
+        readonly concurrency?: Concurrency | undefined;
+        readonly batching?: boolean | "inherit" | undefined;
+        readonly discard: true;
+        readonly concurrentFinalizers?: boolean | undefined;
       }
-    ): Effect.Effect<void, RA.NonEmptyArray<E>, R>
+    ): Effect.Effect<void, RA.NonEmptyArray<E>, R>;
   }
 >(
   (args) => Predicate.isIterable(args[0]),
-  <A, B, E, R>(elements: Iterable<A>, f: (a: A, i: number) => Effect.Effect<B, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly discard?: boolean | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }): Effect.Effect<any, RA.NonEmptyArray<E>, R> =>
+  <A, B, E, R>(
+    elements: Iterable<A>,
+    f: (a: A, i: number) => Effect.Effect<B, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly discard?: boolean | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ): Effect.Effect<any, RA.NonEmptyArray<E>, R> =>
     core.flatMap(
       partition(elements, f, {
         concurrency: options?.concurrency,
         batching: options?.batching,
-        concurrentFinalizers: options?.concurrentFinalizers
+        concurrentFinalizers: options?.concurrentFinalizers,
       }),
       ([es, bs]) =>
         RA.isNonEmptyArray(es)
           ? core.fail(es)
           : options?.discard
-          ? core.void
-          : core.succeed(bs)
+            ? core.void
+            : core.succeed(bs)
     )
-)
+);
 
 /* @internal */
 export const raceAll: <Eff extends Effect.Effect<any, any, any>>(
   all: Iterable<Eff>
-) => Effect.Effect<Effect.Effect.Success<Eff>, Effect.Effect.Error<Eff>, Effect.Effect.Context<Eff>> = <
-  A,
-  E,
-  R
->(all: Iterable<Effect.Effect<A, E, R>>): Effect.Effect<A, E, R> =>
+) => Effect.Effect<
+  Effect.Effect.Success<Eff>,
+  Effect.Effect.Error<Eff>,
+  Effect.Effect.Context<Eff>
+> = <A, E, R>(all: Iterable<Effect.Effect<A, E, R>>): Effect.Effect<A, E, R> =>
   core.withFiberRuntime((state, status) =>
     core.async<A, E, R>((resume) => {
-      const fibers = new Set<FiberRuntime<A, E>>()
-      let winner: FiberRuntime<A, E> | undefined
-      let failures: Cause.Cause<E> = internalCause.empty
+      const fibers = new Set<FiberRuntime<A, E>>();
+      let winner: FiberRuntime<A, E> | undefined;
+      let failures: Cause.Cause<E> = internalCause.empty;
       const interruptAll = () => {
         for (const fiber of fibers) {
-          fiber.unsafeInterruptAsFork(state.id())
+          fiber.unsafeInterruptAsFork(state.id());
         }
-      }
-      let latch = false
-      let empty = true
+      };
+      let latch = false;
+      let empty = true;
       for (const self of all) {
-        empty = false
+        empty = false;
         const fiber = unsafeFork(
           core.interruptible(self),
           state,
           status.runtimeFlags
-        )
-        fibers.add(fiber)
+        );
+        fibers.add(fiber);
         fiber.addObserver((exit) => {
-          fibers.delete(fiber)
+          fibers.delete(fiber);
           if (!winner) {
             if (exit._tag === "Success") {
-              latch = true
-              winner = fiber
-              failures = internalCause.empty
-              interruptAll()
+              latch = true;
+              winner = fiber;
+              failures = internalCause.empty;
+              interruptAll();
             } else {
-              failures = internalCause.parallel(exit.cause, failures)
+              failures = internalCause.parallel(exit.cause, failures);
             }
           }
           if (latch && fibers.size === 0) {
             resume(
-              winner ? core.zipRight(internalFiber.inheritAll(winner), winner.unsafePoll()!) : core.failCause(failures)
-            )
+              winner
+                ? core.zipRight(
+                    internalFiber.inheritAll(winner),
+                    winner.unsafePoll()!
+                  )
+                : core.failCause(failures)
+            );
           }
-        })
-        if (winner) break
+        });
+        if (winner) break;
       }
       if (empty) {
-        return resume(core.dieSync(() => new core.IllegalArgumentException(`Received an empty collection of effects`)))
+        return resume(
+          core.dieSync(
+            () =>
+              new core.IllegalArgumentException(
+                "Received an empty collection of effects"
+              )
+          )
+        );
       }
-      latch = true
-      return internalFiber.interruptAllAs(fibers, state.id())
+      latch = true;
+      return internalFiber.interruptAllAs(fibers, state.id());
     })
-  )
+  );
 
 /* @internal */
 export const reduceEffect = dual<
@@ -2713,120 +3111,152 @@ export const reduceEffect = dual<
     zero: Effect.Effect<Z, E, R>,
     f: (z: NoInfer<Z>, a: Effect.Effect.Success<Eff>, i: number) => Z,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ) => (elements: Iterable<Eff>) => Effect.Effect<Z, E | Effect.Effect.Error<Eff>, R | Effect.Effect.Context<Eff>>,
+  ) => (
+    elements: Iterable<Eff>
+  ) => Effect.Effect<
+    Z,
+    E | Effect.Effect.Error<Eff>,
+    R | Effect.Effect.Context<Eff>
+  >,
   <Eff extends Effect.Effect<any, any, any>, Z, E, R>(
     elements: Iterable<Eff>,
     zero: Effect.Effect<Z, E, R>,
     f: (z: NoInfer<Z>, a: Effect.Effect.Success<Eff>, i: number) => Z,
     options?: {
-      readonly concurrency?: Concurrency | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ) => Effect.Effect<Z, E | Effect.Effect.Error<Eff>, R | Effect.Effect.Context<Eff>>
->((args) => Predicate.isIterable(args[0]) && !core.isEffect(args[0]), <A, E, R, Z>(
-  elements: Iterable<Effect.Effect<A, E, R>>,
-  zero: Effect.Effect<Z, E, R>,
-  f: (z: NoInfer<Z>, a: NoInfer<A>, i: number) => Z,
-  options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }
-) =>
-  concurrency.matchSimple(
-    options?.concurrency,
-    () => RA.fromIterable(elements).reduce((acc, a, i) => core.zipWith(acc, a, (acc, a) => f(acc, a, i)), zero),
-    () =>
-      core.suspend(() =>
-        pipe(
-          mergeAll(
-            [zero, ...elements],
-            Option.none<Z>(),
-            (acc, elem, i) => {
-              switch (acc._tag) {
+  ) => Effect.Effect<
+    Z,
+    E | Effect.Effect.Error<Eff>,
+    R | Effect.Effect.Context<Eff>
+  >
+>(
+  (args) => Predicate.isIterable(args[0]) && !core.isEffect(args[0]),
+  <A, E, R, Z>(
+    elements: Iterable<Effect.Effect<A, E, R>>,
+    zero: Effect.Effect<Z, E, R>,
+    f: (z: NoInfer<Z>, a: NoInfer<A>, i: number) => Z,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ) =>
+    concurrency.matchSimple(
+      options?.concurrency,
+      () =>
+        RA.fromIterable(elements).reduce(
+          (acc, a, i) => core.zipWith(acc, a, (acc, a) => f(acc, a, i)),
+          zero
+        ),
+      () =>
+        core.suspend(() =>
+          pipe(
+            mergeAll(
+              [zero, ...elements],
+              Option.none<Z>(),
+              (acc, elem, i) => {
+                switch (acc._tag) {
+                  case "None": {
+                    return Option.some(elem as Z);
+                  }
+                  case "Some": {
+                    return Option.some(f(acc.value, elem as A, i));
+                  }
+                }
+              },
+              options
+            ),
+            core.map((option) => {
+              switch (option._tag) {
                 case "None": {
-                  return Option.some(elem as Z)
+                  throw new Error(
+                    "BUG: Effect.reduceEffect - please report an issue at https://github.com/Effect-TS/effect/issues"
+                  );
                 }
                 case "Some": {
-                  return Option.some(f(acc.value, elem as A, i))
+                  return option.value;
                 }
               }
-            },
-            options
-          ),
-          core.map((option) => {
-            switch (option._tag) {
-              case "None": {
-                throw new Error(
-                  "BUG: Effect.reduceEffect - please report an issue at https://github.com/Effect-TS/effect/issues"
-                )
-              }
-              case "Some": {
-                return option.value
-              }
-            }
-          })
+            })
+          )
         )
-      )
-  ))
+    )
+);
 
 /* @internal */
-export const parallelFinalizers = <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
+export const parallelFinalizers = <A, E, R>(
+  self: Effect.Effect<A, E, R>
+): Effect.Effect<A, E, R> =>
   core.contextWithEffect((context) =>
     Option.match(Context.getOption(context, scopeTag), {
       onNone: () => self,
       onSome: (scope) => {
         switch (scope.strategy._tag) {
           case "Parallel":
-            return self
+            return self;
           case "Sequential":
           case "ParallelN":
             return core.flatMap(
               core.scopeFork(scope, ExecutionStrategy.parallel),
               (inner) => scopeExtend(self, inner)
-            )
+            );
         }
-      }
+      },
     })
-  )
+  );
 
 /* @internal */
 export const parallelNFinalizers =
-  (parallelism: number) => <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
+  (parallelism: number) =>
+  <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
     core.contextWithEffect((context) =>
       Option.match(Context.getOption(context, scopeTag), {
         onNone: () => self,
         onSome: (scope) => {
-          if (scope.strategy._tag === "ParallelN" && scope.strategy.parallelism === parallelism) {
-            return self
+          if (
+            scope.strategy._tag === "ParallelN" &&
+            scope.strategy.parallelism === parallelism
+          ) {
+            return self;
           }
           return core.flatMap(
             core.scopeFork(scope, ExecutionStrategy.parallelN(parallelism)),
             (inner) => scopeExtend(self, inner)
-          )
-        }
+          );
+        },
       })
-    )
+    );
 
 /* @internal */
-export const finalizersMask = (strategy: ExecutionStrategy.ExecutionStrategy) =>
-<A, E, R>(
-  self: (
-    restore: <A1, E1, R1>(self: Effect.Effect<A1, E1, R1>) => Effect.Effect<A1, E1, R1>
-  ) => Effect.Effect<A, E, R>
-): Effect.Effect<A, E, R> => finalizersMaskInternal(strategy, true)(self)
+export const finalizersMask =
+  (strategy: ExecutionStrategy.ExecutionStrategy) =>
+  <A, E, R>(
+    self: (
+      restore: <A1, E1, R1>(
+        self: Effect.Effect<A1, E1, R1>
+      ) => Effect.Effect<A1, E1, R1>
+    ) => Effect.Effect<A, E, R>
+  ): Effect.Effect<A, E, R> =>
+    finalizersMaskInternal(strategy, true)(self);
 
 /* @internal */
 export const finalizersMaskInternal =
-  (strategy: ExecutionStrategy.ExecutionStrategy, concurrentFinalizers?: boolean | undefined) =>
+  (
+    strategy: ExecutionStrategy.ExecutionStrategy,
+    concurrentFinalizers?: boolean | undefined
+  ) =>
   <A, E, R>(
     self: (
-      restore: <A1, E1, R1>(self: Effect.Effect<A1, E1, R1>) => Effect.Effect<A1, E1, R1>
+      restore: <A1, E1, R1>(
+        self: Effect.Effect<A1, E1, R1>
+      ) => Effect.Effect<A1, E1, R1>
     ) => Effect.Effect<A, E, R>
   ): Effect.Effect<A, E, R> =>
     core.contextWithEffect((context) =>
@@ -2834,104 +3264,124 @@ export const finalizersMaskInternal =
         onNone: () => self(identity),
         onSome: (scope) => {
           if (concurrentFinalizers === true) {
-            const patch = strategy._tag === "Parallel"
-              ? parallelFinalizers
-              : strategy._tag === "Sequential"
-              ? sequentialFinalizers
-              : parallelNFinalizers(strategy.parallelism)
+            const patch =
+              strategy._tag === "Parallel"
+                ? parallelFinalizers
+                : strategy._tag === "Sequential"
+                  ? sequentialFinalizers
+                  : parallelNFinalizers(strategy.parallelism);
             switch (scope.strategy._tag) {
               case "Parallel":
-                return patch(self(parallelFinalizers))
+                return patch(self(parallelFinalizers));
               case "Sequential":
-                return patch(self(sequentialFinalizers))
+                return patch(self(sequentialFinalizers));
               case "ParallelN":
-                return patch(self(parallelNFinalizers(scope.strategy.parallelism)))
+                return patch(
+                  self(parallelNFinalizers(scope.strategy.parallelism))
+                );
             }
-          } else {
-            return self(identity)
           }
-        }
+          return self(identity);
+        },
       })
-    )
+    );
 
 /* @internal */
 export const scopeWith = <A, E, R>(
   f: (scope: Scope.Scope) => Effect.Effect<A, E, R>
-): Effect.Effect<A, E, R | Scope.Scope> => core.flatMap(scopeTag, f)
+): Effect.Effect<A, E, R | Scope.Scope> => core.flatMap(scopeTag, f);
 
 /** @internal */
 export const scopedWith = <A, E, R>(
   f: (scope: Scope.Scope) => Effect.Effect<A, E, R>
-): Effect.Effect<A, E, R> => core.flatMap(scopeMake(), (scope) => core.onExit(f(scope), (exit) => scope.close(exit)))
+): Effect.Effect<A, E, R> =>
+  core.flatMap(scopeMake(), (scope) =>
+    core.onExit(f(scope), (exit) => scope.close(exit))
+  );
 
 /* @internal */
-export const scopedEffect = <A, E, R>(effect: Effect.Effect<A, E, R>): Effect.Effect<A, E, Exclude<R, Scope.Scope>> =>
-  core.flatMap(scopeMake(), (scope) => scopeUse(effect, scope))
+export const scopedEffect = <A, E, R>(
+  effect: Effect.Effect<A, E, R>
+): Effect.Effect<A, E, Exclude<R, Scope.Scope>> =>
+  core.flatMap(scopeMake(), (scope) => scopeUse(effect, scope));
 
 /* @internal */
-export const sequentialFinalizers = <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
+export const sequentialFinalizers = <A, E, R>(
+  self: Effect.Effect<A, E, R>
+): Effect.Effect<A, E, R> =>
   core.contextWithEffect((context) =>
     Option.match(Context.getOption(context, scopeTag), {
       onNone: () => self,
       onSome: (scope) => {
         switch (scope.strategy._tag) {
           case "Sequential":
-            return self
+            return self;
           case "Parallel":
           case "ParallelN":
             return core.flatMap(
               core.scopeFork(scope, ExecutionStrategy.sequential),
               (inner) => scopeExtend(self, inner)
-            )
+            );
         }
-      }
+      },
     })
-  )
+  );
 
 /* @internal */
-export const tagMetricsScoped = (key: string, value: string): Effect.Effect<void, never, Scope.Scope> =>
-  labelMetricsScoped([metricLabel.make(key, value)])
+export const tagMetricsScoped = (
+  key: string,
+  value: string
+): Effect.Effect<void, never, Scope.Scope> =>
+  labelMetricsScoped([metricLabel.make(key, value)]);
 
 /* @internal */
 export const labelMetricsScoped = (
   labels: Iterable<MetricLabel.MetricLabel>
 ): Effect.Effect<void, never, Scope.Scope> =>
-  fiberRefLocallyScopedWith(core.currentMetricLabels, (old) => RA.union(old, labels))
+  fiberRefLocallyScopedWith(core.currentMetricLabels, (old) =>
+    RA.union(old, labels)
+  );
 
 /* @internal */
 export const using = dual<
   <A, A2, E2, R2>(
     use: (a: A) => Effect.Effect<A2, E2, R2>
-  ) => <E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<A2, E | E2, Exclude<R, Scope.Scope> | R2>,
+  ) => <E, R>(
+    self: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A2, E | E2, Exclude<R, Scope.Scope> | R2>,
   <A, E, R, A2, E2, R2>(
     self: Effect.Effect<A, E, R>,
     use: (a: A) => Effect.Effect<A2, E2, R2>
   ) => Effect.Effect<A2, E | E2, Exclude<R, Scope.Scope> | R2>
->(2, (self, use) => scopedWith((scope) => core.flatMap(scopeExtend(self, scope), use)))
+>(2, (self, use) =>
+  scopedWith((scope) => core.flatMap(scopeExtend(self, scope), use))
+);
 
 /** @internal */
 export const validate = dual<
   <B, E1, R1>(
     that: Effect.Effect<B, E1, R1>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ) => <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<[A, B], E | E1, R | R1>,
+  ) => <A, E, R>(
+    self: Effect.Effect<A, E, R>
+  ) => Effect.Effect<[A, B], E | E1, R | R1>,
   <A, E, R, B, E1, R1>(
     self: Effect.Effect<A, E, R>,
     that: Effect.Effect<B, E1, R1>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => Effect.Effect<[A, B], E | E1, R | R1>
 >(
   (args) => core.isEffect(args[1]),
   (self, that, options) => validateWith(self, that, (a, b) => [a, b], options)
-)
+);
 
 /** @internal */
 export const validateWith = dual<
@@ -2939,9 +3389,9 @@ export const validateWith = dual<
     that: Effect.Effect<B, E1, R1>,
     f: (a: A, b: B) => C,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => <E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<C, E | E1, R | R1>,
   <A, E, R, B, E1, R1, C>(
@@ -2949,22 +3399,30 @@ export const validateWith = dual<
     that: Effect.Effect<B, E1, R1>,
     f: (a: A, b: B) => C,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => Effect.Effect<C, E | E1, R | R1>
->((args) => core.isEffect(args[1]), (self, that, f, options) =>
-  core.flatten(zipWithOptions(
-    core.exit(self),
-    core.exit(that),
-    (ea, eb) =>
-      core.exitZipWith(ea, eb, {
-        onSuccess: f,
-        onFailure: (ca, cb) => options?.concurrent ? internalCause.parallel(ca, cb) : internalCause.sequential(ca, cb)
-      }),
-    options
-  )))
+>(
+  (args) => core.isEffect(args[1]),
+  (self, that, f, options) =>
+    core.flatten(
+      zipWithOptions(
+        core.exit(self),
+        core.exit(that),
+        (ea, eb) =>
+          core.exitZipWith(ea, eb, {
+            onSuccess: f,
+            onFailure: (ca, cb) =>
+              options?.concurrent
+                ? internalCause.parallel(ca, cb)
+                : internalCause.sequential(ca, cb),
+          }),
+        options
+      )
+    )
+);
 
 /* @internal */
 export const validateAllPar = dual<
@@ -2976,82 +3434,101 @@ export const validateAllPar = dual<
     f: (a: A) => Effect.Effect<B, E, R>
   ) => Effect.Effect<Array<B>, Array<E>, R>
 >(2, (elements, f) =>
-  core.flatMap(
-    partition(elements, f),
-    ([es, bs]) =>
-      es.length === 0
-        ? core.succeed(bs)
-        : core.fail(es)
-  ))
+  core.flatMap(partition(elements, f), ([es, bs]) =>
+    es.length === 0 ? core.succeed(bs) : core.fail(es)
+  )
+);
 
 /* @internal */
 export const validateAllParDiscard = dual<
   <A, B, E, R>(
     f: (a: A) => Effect.Effect<B, E, R>
   ) => (elements: Iterable<A>) => Effect.Effect<void, Array<E>, R>,
-  <A, B, E, R>(elements: Iterable<A>, f: (a: A) => Effect.Effect<B, E, R>) => Effect.Effect<void, Array<E>, R>
+  <A, B, E, R>(
+    elements: Iterable<A>,
+    f: (a: A) => Effect.Effect<B, E, R>
+  ) => Effect.Effect<void, Array<E>, R>
 >(2, (elements, f) =>
-  core.flatMap(
-    partition(elements, f),
-    ([es, _]) =>
-      es.length === 0
-        ? core.void
-        : core.fail(es)
-  ))
+  core.flatMap(partition(elements, f), ([es, _]) =>
+    es.length === 0 ? core.void : core.fail(es)
+  )
+);
 
 /* @internal */
 export const validateFirst = dual<
-  <A, B, E, R>(f: (a: A, i: number) => Effect.Effect<B, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }) => (elements: Iterable<A>) => Effect.Effect<B, Array<E>, R>,
-  <A, B, E, R>(elements: Iterable<A>, f: (a: A, i: number) => Effect.Effect<B, E, R>, options?: {
-    readonly concurrency?: Concurrency | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }) => Effect.Effect<B, Array<E>, R>
+  <A, B, E, R>(
+    f: (a: A, i: number) => Effect.Effect<B, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ) => (elements: Iterable<A>) => Effect.Effect<B, Array<E>, R>,
+  <A, B, E, R>(
+    elements: Iterable<A>,
+    f: (a: A, i: number) => Effect.Effect<B, E, R>,
+    options?: {
+      readonly concurrency?: Concurrency | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ) => Effect.Effect<B, Array<E>, R>
 >(
   (args) => Predicate.isIterable(args[0]),
-  (elements, f, options) => core.flip(forEach(elements, (a, i) => core.flip(f(a, i)), options))
-)
+  (elements, f, options) =>
+    core.flip(forEach(elements, (a, i) => core.flip(f(a, i)), options))
+);
 
 /* @internal */
 export const withClockScoped = <C extends Clock.Clock>(c: C) =>
-  fiberRefLocallyScopedWith(defaultServices.currentServices, Context.add(clock.clockTag, c))
+  fiberRefLocallyScopedWith(
+    defaultServices.currentServices,
+    Context.add(clock.clockTag, c)
+  );
 
 /* @internal */
 export const withRandomScoped = <A extends Random.Random>(value: A) =>
-  fiberRefLocallyScopedWith(defaultServices.currentServices, Context.add(randomTag, value))
+  fiberRefLocallyScopedWith(
+    defaultServices.currentServices,
+    Context.add(randomTag, value)
+  );
 
 /* @internal */
 export const withConfigProviderScoped = (provider: ConfigProvider) =>
-  fiberRefLocallyScopedWith(defaultServices.currentServices, Context.add(configProviderTag, provider))
+  fiberRefLocallyScopedWith(
+    defaultServices.currentServices,
+    Context.add(configProviderTag, provider)
+  );
 
 /* @internal */
 export const withEarlyRelease = <A, E, R>(
   self: Effect.Effect<A, E, R>
 ): Effect.Effect<[Effect.Effect<void>, A], E, R | Scope.Scope> =>
   scopeWith((parent) =>
-    core.flatMap(core.scopeFork(parent, executionStrategy.sequential), (child) =>
-      pipe(
-        self,
-        scopeExtend(child),
-        core.map((value) => [
-          core.fiberIdWith((fiberId) => core.scopeClose(child, core.exitInterrupt(fiberId))),
-          value
-        ])
-      ))
-  )
+    core.flatMap(
+      core.scopeFork(parent, executionStrategy.sequential),
+      (child) =>
+        pipe(
+          self,
+          scopeExtend(child),
+          core.map((value) => [
+            core.fiberIdWith((fiberId) =>
+              core.scopeClose(child, core.exitInterrupt(fiberId))
+            ),
+            value,
+          ])
+        )
+    )
+  );
 
 /** @internal */
 export const zipOptions = dual<
   <A2, E2, R2>(
     that: Effect.Effect<A2, E2, R2>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => <A, E, R>(
     self: Effect.Effect<A, E, R>
@@ -3060,25 +3537,24 @@ export const zipOptions = dual<
     self: Effect.Effect<A, E, R>,
     that: Effect.Effect<A2, E2, R2>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => Effect.Effect<[A, A2], E | E2, R | R2>
->((args) => core.isEffect(args[1]), (
-  self,
-  that,
-  options
-) => zipWithOptions(self, that, (a, b) => [a, b], options))
+>(
+  (args) => core.isEffect(args[1]),
+  (self, that, options) => zipWithOptions(self, that, (a, b) => [a, b], options)
+);
 
 /** @internal */
 export const zipLeftOptions = dual<
   <A2, E2, R2>(
     that: Effect.Effect<A2, E2, R2>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => <A, E, R>(
     self: Effect.Effect<A, E, R>
@@ -3087,54 +3563,65 @@ export const zipLeftOptions = dual<
     self: Effect.Effect<A, E, R>,
     that: Effect.Effect<A2, E2, R2>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
   ) => Effect.Effect<A, E | E2, R | R2>
 >(
   (args) => core.isEffect(args[1]),
   (self, that, options) => {
-    if (options?.concurrent !== true && (options?.batching === undefined || options.batching === false)) {
-      return core.zipLeft(self, that)
+    if (
+      options?.concurrent !== true &&
+      (options?.batching === undefined || options.batching === false)
+    ) {
+      return core.zipLeft(self, that);
     }
-    return zipWithOptions(self, that, (a, _) => a, options)
+    return zipWithOptions(self, that, (a, _) => a, options);
   }
-)
+);
 
 /** @internal */
 export const zipRightOptions: {
   <A2, E2, R2>(
     that: Effect.Effect<A2, E2, R2>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<A2, E2 | E, R2 | R>
+  ): <A, E, R>(
+    self: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A2, E2 | E, R2 | R>;
   <A, E, R, A2, E2, R2>(
     self: Effect.Effect<A, E, R>,
     that: Effect.Effect<A2, E2, R2>,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): Effect.Effect<A2, E2 | E, R2 | R>
-} = dual((args) => core.isEffect(args[1]), <A, E, R, A2, E2, R2>(
-  self: Effect.Effect<A, E, R>,
-  that: Effect.Effect<A2, E2, R2>,
-  options?: {
-    readonly concurrent?: boolean | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
+  ): Effect.Effect<A2, E2 | E, R2 | R>;
+} = dual(
+  (args) => core.isEffect(args[1]),
+  <A, E, R, A2, E2, R2>(
+    self: Effect.Effect<A, E, R>,
+    that: Effect.Effect<A2, E2, R2>,
+    options?: {
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ): Effect.Effect<A2, E2 | E, R2 | R> => {
+    if (
+      options?.concurrent !== true &&
+      (options?.batching === undefined || options.batching === false)
+    ) {
+      return core.zipRight(self, that);
+    }
+    return zipWithOptions(self, that, (_, b) => b, options);
   }
-): Effect.Effect<A2, E2 | E, R2 | R> => {
-  if (options?.concurrent !== true && (options?.batching === undefined || options.batching === false)) {
-    return core.zipRight(self, that)
-  }
-  return zipWithOptions(self, that, (_, b) => b, options)
-})
+);
 
 /** @internal */
 export const zipWithOptions: {
@@ -3142,200 +3629,231 @@ export const zipWithOptions: {
     that: Effect.Effect<A2, E2, R2>,
     f: (a: A, b: A2) => B,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): <E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<B, E2 | E, R2 | R>
+  ): <E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<B, E2 | E, R2 | R>;
   <A, E, R, A2, E2, R2, B>(
     self: Effect.Effect<A, E, R>,
     that: Effect.Effect<A2, E2, R2>,
     f: (a: A, b: A2) => B,
     options?: {
-      readonly concurrent?: boolean | undefined
-      readonly batching?: boolean | "inherit" | undefined
-      readonly concurrentFinalizers?: boolean | undefined
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
     }
-  ): Effect.Effect<B, E2 | E, R2 | R>
-} = dual((args) => core.isEffect(args[1]), <A, E, R, A2, E2, R2, B>(
-  self: Effect.Effect<A, E, R>,
-  that: Effect.Effect<A2, E2, R2>,
-  f: (a: A, b: A2) => B,
-  options?: {
-    readonly concurrent?: boolean | undefined
-    readonly batching?: boolean | "inherit" | undefined
-    readonly concurrentFinalizers?: boolean | undefined
-  }
-): Effect.Effect<B, E2 | E, R2 | R> =>
-  core.map(
-    all([self, that], {
-      concurrency: options?.concurrent ? 2 : 1,
-      batching: options?.batching,
-      concurrentFinalizers: options?.concurrentFinalizers
-    }),
-    ([a, a2]) => f(a, a2)
-  ))
+  ): Effect.Effect<B, E2 | E, R2 | R>;
+} = dual(
+  (args) => core.isEffect(args[1]),
+  <A, E, R, A2, E2, R2, B>(
+    self: Effect.Effect<A, E, R>,
+    that: Effect.Effect<A2, E2, R2>,
+    f: (a: A, b: A2) => B,
+    options?: {
+      readonly concurrent?: boolean | undefined;
+      readonly batching?: boolean | "inherit" | undefined;
+      readonly concurrentFinalizers?: boolean | undefined;
+    }
+  ): Effect.Effect<B, E2 | E, R2 | R> =>
+    core.map(
+      all([self, that], {
+        concurrency: options?.concurrent ? 2 : 1,
+        batching: options?.batching,
+        concurrentFinalizers: options?.concurrentFinalizers,
+      }),
+      ([a, a2]) => f(a, a2)
+    )
+);
 
 /* @internal */
 export const withRuntimeFlagsScoped = (
   update: RuntimeFlagsPatch.RuntimeFlagsPatch
 ): Effect.Effect<void, never, Scope.Scope> => {
   if (update === RuntimeFlagsPatch.empty) {
-    return core.void
+    return core.void;
   }
   return pipe(
     core.runtimeFlags,
     core.flatMap((runtimeFlags) => {
-      const updatedRuntimeFlags = runtimeFlags_.patch(runtimeFlags, update)
-      const revertRuntimeFlags = runtimeFlags_.diff(updatedRuntimeFlags, runtimeFlags)
+      const updatedRuntimeFlags = runtimeFlags_.patch(runtimeFlags, update);
+      const revertRuntimeFlags = runtimeFlags_.diff(
+        updatedRuntimeFlags,
+        runtimeFlags
+      );
       return pipe(
         core.updateRuntimeFlags(update),
-        core.zipRight(addFinalizer(() => core.updateRuntimeFlags(revertRuntimeFlags))),
+        core.zipRight(
+          addFinalizer(() => core.updateRuntimeFlags(revertRuntimeFlags))
+        ),
         core.asVoid
-      )
+      );
     }),
     core.uninterruptible
-  )
-}
+  );
+};
 
 // circular with Scope
 
 /** @internal */
-export const scopeTag = Context.GenericTag<Scope.Scope>("effect/Scope")
+export const scopeTag = Context.GenericTag<Scope.Scope>("effect/Scope");
 
 /* @internal */
-export const scope: Effect.Effect<Scope.Scope, never, Scope.Scope> = scopeTag
+export const scope: Effect.Effect<Scope.Scope, never, Scope.Scope> = scopeTag;
 
 /** @internal */
 export interface ScopeImpl extends Scope.CloseableScope {
-  state: {
-    readonly _tag: "Open"
-    readonly finalizers: Map<{}, Scope.Scope.Finalizer>
-  } | {
-    readonly _tag: "Closed"
-    readonly exit: Exit.Exit<unknown, unknown>
-  }
+  state:
+    | {
+        readonly _tag: "Open";
+        readonly finalizers: Map<{}, Scope.Scope.Finalizer>;
+      }
+    | {
+        readonly _tag: "Closed";
+        readonly exit: Exit.Exit<unknown, unknown>;
+      };
 }
 
-const scopeUnsafeAddFinalizer = (scope: ScopeImpl, fin: Scope.Scope.Finalizer): void => {
+const scopeUnsafeAddFinalizer = (
+  scope: ScopeImpl,
+  fin: Scope.Scope.Finalizer
+): void => {
   if (scope.state._tag === "Open") {
-    scope.state.finalizers.set({}, fin)
+    scope.state.finalizers.set({}, fin);
   }
-}
+};
 
 const ScopeImplProto: Omit<ScopeImpl, "strategy" | "state"> = {
   [core.ScopeTypeId]: core.ScopeTypeId,
   [core.CloseableScopeTypeId]: core.CloseableScopeTypeId,
   pipe() {
-    return pipeArguments(this, arguments)
+    return pipeArguments(this, arguments);
   },
   fork(this: ScopeImpl, strategy) {
     return core.sync(() => {
-      const newScope = scopeUnsafeMake(strategy)
+      const newScope = scopeUnsafeMake(strategy);
       if (this.state._tag === "Closed") {
-        newScope.state = this.state
-        return newScope
+        newScope.state = this.state;
+        return newScope;
       }
-      const key = {}
-      const fin = (exit: Exit.Exit<unknown, unknown>) => newScope.close(exit)
-      this.state.finalizers.set(key, fin)
+      const key = {};
+      const fin = (exit: Exit.Exit<unknown, unknown>) => newScope.close(exit);
+      this.state.finalizers.set(key, fin);
       scopeUnsafeAddFinalizer(newScope, (_) =>
         core.sync(() => {
           if (this.state._tag === "Open") {
-            this.state.finalizers.delete(key)
+            this.state.finalizers.delete(key);
           }
-        }))
-      return newScope
-    })
+        })
+      );
+      return newScope;
+    });
   },
   close(this: ScopeImpl, exit) {
     return core.suspend(() => {
       if (this.state._tag === "Closed") {
-        return core.void
+        return core.void;
       }
-      const finalizers = Array.from(this.state.finalizers.values()).reverse()
-      this.state = { _tag: "Closed", exit }
+      const finalizers = Array.from(this.state.finalizers.values()).reverse();
+      this.state = { _tag: "Closed", exit };
       if (finalizers.length === 0) {
-        return core.void
+        return core.void;
       }
-      return executionStrategy.isSequential(this.strategy) ?
-        pipe(
-          core.forEachSequential(finalizers, (fin) => core.exit(fin(exit))),
-          core.flatMap((results) =>
-            pipe(
-              core.exitCollectAll(results),
-              Option.map(core.exitAsVoid),
-              Option.getOrElse(() => core.exitVoid)
+      return executionStrategy.isSequential(this.strategy)
+        ? pipe(
+            core.forEachSequential(finalizers, (fin) => core.exit(fin(exit))),
+            core.flatMap((results) =>
+              pipe(
+                core.exitCollectAll(results),
+                Option.map(core.exitAsVoid),
+                Option.getOrElse(() => core.exitVoid)
+              )
             )
           )
-        ) :
-        executionStrategy.isParallel(this.strategy) ?
-        pipe(
-          forEachParUnbounded(finalizers, (fin) => core.exit(fin(exit)), false),
-          core.flatMap((results) =>
-            pipe(
-              core.exitCollectAll(results, { parallel: true }),
-              Option.map(core.exitAsVoid),
-              Option.getOrElse(() => core.exitVoid)
+        : executionStrategy.isParallel(this.strategy)
+          ? pipe(
+              forEachParUnbounded(
+                finalizers,
+                (fin) => core.exit(fin(exit)),
+                false
+              ),
+              core.flatMap((results) =>
+                pipe(
+                  core.exitCollectAll(results, { parallel: true }),
+                  Option.map(core.exitAsVoid),
+                  Option.getOrElse(() => core.exitVoid)
+                )
+              )
             )
-          )
-        ) :
-        pipe(
-          forEachParN(finalizers, this.strategy.parallelism, (fin) => core.exit(fin(exit)), false),
-          core.flatMap((results) =>
-            pipe(
-              core.exitCollectAll(results, { parallel: true }),
-              Option.map(core.exitAsVoid),
-              Option.getOrElse(() => core.exitVoid)
-            )
-          )
-        )
-    })
+          : pipe(
+              forEachParN(
+                finalizers,
+                this.strategy.parallelism,
+                (fin) => core.exit(fin(exit)),
+                false
+              ),
+              core.flatMap((results) =>
+                pipe(
+                  core.exitCollectAll(results, { parallel: true }),
+                  Option.map(core.exitAsVoid),
+                  Option.getOrElse(() => core.exitVoid)
+                )
+              )
+            );
+    });
   },
   addFinalizer(this: ScopeImpl, fin) {
     return core.suspend(() => {
       if (this.state._tag === "Closed") {
-        return fin(this.state.exit)
+        return fin(this.state.exit);
       }
-      this.state.finalizers.set({}, fin)
-      return core.void
-    })
-  }
-}
+      this.state.finalizers.set({}, fin);
+      return core.void;
+    });
+  },
+};
 
 const scopeUnsafeMake = (
   strategy: ExecutionStrategy.ExecutionStrategy = executionStrategy.sequential
 ): ScopeImpl => {
-  const scope = Object.create(ScopeImplProto)
-  scope.strategy = strategy
-  scope.state = { _tag: "Open", finalizers: new Map() }
-  return scope
-}
+  const scope = Object.create(ScopeImplProto);
+  scope.strategy = strategy;
+  scope.state = { _tag: "Open", finalizers: new Map() };
+  return scope;
+};
 
 /* @internal */
 export const scopeMake = (
   strategy: ExecutionStrategy.ExecutionStrategy = executionStrategy.sequential
-): Effect.Effect<Scope.Scope.Closeable> => core.sync(() => scopeUnsafeMake(strategy))
+): Effect.Effect<Scope.Scope.Closeable> =>
+  core.sync(() => scopeUnsafeMake(strategy));
 
 /* @internal */
 export const scopeExtend = dual<
-  (scope: Scope.Scope) => <A, E, R>(effect: Effect.Effect<A, E, R>) => Effect.Effect<A, E, Exclude<R, Scope.Scope>>,
-  <A, E, R>(effect: Effect.Effect<A, E, R>, scope: Scope.Scope) => Effect.Effect<A, E, Exclude<R, Scope.Scope>>
->(
-  2,
-  <A, E, R>(effect: Effect.Effect<A, E, R>, scope: Scope.Scope) =>
-    core.mapInputContext<A, E, R, Exclude<R, Scope.Scope>>(
-      effect,
-      // @ts-expect-error
-      Context.merge(Context.make(scopeTag, scope))
-    )
-)
+  (
+    scope: Scope.Scope
+  ) => <A, E, R>(
+    effect: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A, E, Exclude<R, Scope.Scope>>,
+  <A, E, R>(
+    effect: Effect.Effect<A, E, R>,
+    scope: Scope.Scope
+  ) => Effect.Effect<A, E, Exclude<R, Scope.Scope>>
+>(2, <A, E, R>(effect: Effect.Effect<A, E, R>, scope: Scope.Scope) =>
+  core.mapInputContext<A, E, R, Exclude<R, Scope.Scope>>(
+    effect,
+    // @ts-expect-error
+    Context.merge(Context.make(scopeTag, scope))
+  )
+);
 
 /* @internal */
 export const scopeUse = dual<
   (
     scope: Scope.Scope.Closeable
-  ) => <A, E, R>(effect: Effect.Effect<A, E, R>) => Effect.Effect<A, E, Exclude<R, Scope.Scope>>,
+  ) => <A, E, R>(
+    effect: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A, E, Exclude<R, Scope.Scope>>,
   <A, E, R>(
     effect: Effect.Effect<A, E, R>,
     scope: Scope.Scope.Closeable
@@ -3345,7 +3863,8 @@ export const scopeUse = dual<
     effect,
     scopeExtend(scope),
     core.onExit((exit) => scope.close(exit))
-  ))
+  )
+);
 
 // circular with Supervisor
 
@@ -3355,41 +3874,53 @@ export const fiberRefUnsafeMakeSupervisor = (
 ): FiberRef.FiberRef<Supervisor.Supervisor<any>> =>
   core.fiberRefUnsafeMakePatch(initial, {
     differ: SupervisorPatch.differ,
-    fork: SupervisorPatch.empty
-  })
+    fork: SupervisorPatch.empty,
+  });
 
 // circular with FiberRef
 
 /* @internal */
 export const fiberRefLocallyScoped = dual<
-  <A>(value: A) => (self: FiberRef.FiberRef<A>) => Effect.Effect<void, never, Scope.Scope>,
-  <A>(self: FiberRef.FiberRef<A>, value: A) => Effect.Effect<void, never, Scope.Scope>
+  <A>(
+    value: A
+  ) => (self: FiberRef.FiberRef<A>) => Effect.Effect<void, never, Scope.Scope>,
+  <A>(
+    self: FiberRef.FiberRef<A>,
+    value: A
+  ) => Effect.Effect<void, never, Scope.Scope>
 >(2, (self, value) =>
   core.asVoid(
     acquireRelease(
-      core.flatMap(
-        core.fiberRefGet(self),
-        (oldValue) => core.as(core.fiberRefSet(self, value), oldValue)
+      core.flatMap(core.fiberRefGet(self), (oldValue) =>
+        core.as(core.fiberRefSet(self, value), oldValue)
       ),
       (oldValue) => core.fiberRefSet(self, oldValue)
     )
-  ))
+  )
+);
 
 /* @internal */
 export const fiberRefLocallyScopedWith = dual<
-  <A>(f: (a: A) => A) => (self: FiberRef.FiberRef<A>) => Effect.Effect<void, never, Scope.Scope>,
-  <A>(self: FiberRef.FiberRef<A>, f: (a: A) => A) => Effect.Effect<void, never, Scope.Scope>
->(2, (self, f) => core.fiberRefGetWith(self, (a) => fiberRefLocallyScoped(self, f(a))))
+  <A>(
+    f: (a: A) => A
+  ) => (self: FiberRef.FiberRef<A>) => Effect.Effect<void, never, Scope.Scope>,
+  <A>(
+    self: FiberRef.FiberRef<A>,
+    f: (a: A) => A
+  ) => Effect.Effect<void, never, Scope.Scope>
+>(2, (self, f) =>
+  core.fiberRefGetWith(self, (a) => fiberRefLocallyScoped(self, f(a)))
+);
 
 /* @internal */
 export const fiberRefMake = <A>(
   initial: A,
   options?: {
-    readonly fork?: ((a: A) => A) | undefined
-    readonly join?: ((left: A, right: A) => A) | undefined
+    readonly fork?: ((a: A) => A) | undefined;
+    readonly join?: ((left: A, right: A) => A) | undefined;
   }
 ): Effect.Effect<FiberRef.FiberRef<A>, never, Scope.Scope> =>
-  fiberRefMakeWith(() => core.fiberRefUnsafeMake(initial, options))
+  fiberRefMakeWith(() => core.fiberRefUnsafeMake(initial, options));
 
 /* @internal */
 export const fiberRefMakeWith = <Value>(
@@ -3398,29 +3929,30 @@ export const fiberRefMakeWith = <Value>(
   acquireRelease(
     core.tap(core.sync(ref), (ref) => core.fiberRefUpdate(ref, identity)),
     (fiberRef) => core.fiberRefDelete(fiberRef)
-  )
+  );
 
 /* @internal */
 export const fiberRefMakeContext = <A>(
   initial: Context.Context<A>
 ): Effect.Effect<FiberRef.FiberRef<Context.Context<A>>, never, Scope.Scope> =>
-  fiberRefMakeWith(() => core.fiberRefUnsafeMakeContext(initial))
+  fiberRefMakeWith(() => core.fiberRefUnsafeMakeContext(initial));
 
 /* @internal */
 export const fiberRefMakeRuntimeFlags = (
   initial: RuntimeFlags.RuntimeFlags
-): Effect.Effect<FiberRef.FiberRef<RuntimeFlags.RuntimeFlags>, never, Scope.Scope> =>
-  fiberRefMakeWith(() => core.fiberRefUnsafeMakeRuntimeFlags(initial))
+): Effect.Effect<
+  FiberRef.FiberRef<RuntimeFlags.RuntimeFlags>,
+  never,
+  Scope.Scope
+> => fiberRefMakeWith(() => core.fiberRefUnsafeMakeRuntimeFlags(initial));
 
 /** @internal */
-export const currentRuntimeFlags: FiberRef.FiberRef<RuntimeFlags.RuntimeFlags> = core.fiberRefUnsafeMakeRuntimeFlags(
-  runtimeFlags_.none
-)
+export const currentRuntimeFlags: FiberRef.FiberRef<RuntimeFlags.RuntimeFlags> =
+  core.fiberRefUnsafeMakeRuntimeFlags(runtimeFlags_.none);
 
 /** @internal */
-export const currentSupervisor: FiberRef.FiberRef<Supervisor.Supervisor<any>> = fiberRefUnsafeMakeSupervisor(
-  supervisor.none
-)
+export const currentSupervisor: FiberRef.FiberRef<Supervisor.Supervisor<any>> =
+  fiberRefUnsafeMakeSupervisor(supervisor.none);
 
 // circular with Fiber
 
@@ -3429,45 +3961,69 @@ export const fiberAwaitAll = <const T extends Iterable<Fiber.Fiber<any, any>>>(
   fibers: T
 ): Effect.Effect<
   [T] extends [ReadonlyArray<infer U>]
-    ? number extends T["length"] ? Array<U extends Fiber.Fiber<infer A, infer E> ? Exit.Exit<A, E> : never>
-    : { -readonly [K in keyof T]: T[K] extends Fiber.Fiber<infer A, infer E> ? Exit.Exit<A, E> : never }
-    : Array<T extends Iterable<infer U> ? U extends Fiber.Fiber<infer A, infer E> ? Exit.Exit<A, E> : never : never>
-> => forEach(fibers, internalFiber._await) as any
+    ? number extends T["length"]
+      ? Array<U extends Fiber.Fiber<infer A, infer E> ? Exit.Exit<A, E> : never>
+      : {
+          -readonly [K in keyof T]: T[K] extends Fiber.Fiber<infer A, infer E>
+            ? Exit.Exit<A, E>
+            : never;
+        }
+    : Array<
+        T extends Iterable<infer U>
+          ? U extends Fiber.Fiber<infer A, infer E>
+            ? Exit.Exit<A, E>
+            : never
+          : never
+      >
+> => forEach(fibers, internalFiber._await) as any;
 
 /** @internal */
-export const fiberAll = <A, E>(fibers: Iterable<Fiber.Fiber<A, E>>): Fiber.Fiber<Array<A>, E> => {
+export const fiberAll = <A, E>(
+  fibers: Iterable<Fiber.Fiber<A, E>>
+): Fiber.Fiber<Array<A>, E> => {
   const _fiberAll = {
     ...Effectable.CommitPrototype,
     commit() {
-      return internalFiber.join(this)
+      return internalFiber.join(this);
     },
     [internalFiber.FiberTypeId]: internalFiber.fiberVariance,
     id: () =>
-      RA.fromIterable(fibers).reduce((id, fiber) => FiberId.combine(id, fiber.id()), FiberId.none as FiberId.FiberId),
-    await: core.exit(forEachParUnbounded(fibers, (fiber) => core.flatten(fiber.await), false)),
-    children: core.map(forEachParUnbounded(fibers, (fiber) => fiber.children, false), RA.flatten),
-    inheritAll: core.forEachSequentialDiscard(fibers, (fiber) => fiber.inheritAll),
+      RA.fromIterable(fibers).reduce(
+        (id, fiber) => FiberId.combine(id, fiber.id()),
+        FiberId.none as FiberId.FiberId
+      ),
+    await: core.exit(
+      forEachParUnbounded(fibers, (fiber) => core.flatten(fiber.await), false)
+    ),
+    children: core.map(
+      forEachParUnbounded(fibers, (fiber) => fiber.children, false),
+      RA.flatten
+    ),
+    inheritAll: core.forEachSequentialDiscard(
+      fibers,
+      (fiber) => fiber.inheritAll
+    ),
     poll: core.map(
       core.forEachSequential(fibers, (fiber) => fiber.poll),
       RA.reduceRight(
-        Option.some<Exit.Exit<Array<A>, E>>(core.exitSucceed(new Array())),
+        Option.some<Exit.Exit<Array<A>, E>>(core.exitSucceed([])),
         (optionB, optionA) => {
           switch (optionA._tag) {
             case "None": {
-              return Option.none()
+              return Option.none();
             }
             case "Some": {
               switch (optionB._tag) {
                 case "None": {
-                  return Option.none()
+                  return Option.none();
                 }
                 case "Some": {
                   return Option.some(
                     core.exitZipWith(optionA.value, optionB.value, {
                       onSuccess: (a, chunk) => [a, ...chunk],
-                      onFailure: internalCause.parallel
+                      onFailure: internalCause.parallel,
                     })
-                  )
+                  );
                 }
               }
             }
@@ -3476,22 +4032,28 @@ export const fiberAll = <A, E>(fibers: Iterable<Fiber.Fiber<A, E>>): Fiber.Fiber
       )
     ),
     interruptAsFork: (fiberId: FiberId.FiberId) =>
-      core.forEachSequentialDiscard(fibers, (fiber) => fiber.interruptAsFork(fiberId))
-  }
-  return _fiberAll
-}
+      core.forEachSequentialDiscard(fibers, (fiber) =>
+        fiber.interruptAsFork(fiberId)
+      ),
+  };
+  return _fiberAll;
+};
 
 /* @internal */
-export const fiberInterruptFork = <A, E>(self: Fiber.Fiber<A, E>): Effect.Effect<void> =>
-  core.asVoid(forkDaemon(core.interruptFiber(self)))
+export const fiberInterruptFork = <A, E>(
+  self: Fiber.Fiber<A, E>
+): Effect.Effect<void> => core.asVoid(forkDaemon(core.interruptFiber(self)));
 
 /* @internal */
-export const fiberJoinAll = <A, E>(fibers: Iterable<Fiber.Fiber<A, E>>): Effect.Effect<Array<A>, E> =>
-  internalFiber.join(fiberAll(fibers))
+export const fiberJoinAll = <A, E>(
+  fibers: Iterable<Fiber.Fiber<A, E>>
+): Effect.Effect<Array<A>, E> => internalFiber.join(fiberAll(fibers));
 
 /* @internal */
-export const fiberScoped = <A, E>(self: Fiber.Fiber<A, E>): Effect.Effect<Fiber.Fiber<A, E>, never, Scope.Scope> =>
-  acquireRelease(core.succeed(self), core.interruptFiber)
+export const fiberScoped = <A, E>(
+  self: Fiber.Fiber<A, E>
+): Effect.Effect<Fiber.Fiber<A, E>, never, Scope.Scope> =>
+  acquireRelease(core.succeed(self), core.interruptFiber);
 
 //
 // circular race
@@ -3502,16 +4064,30 @@ export const raceWith = dual<
   <A1, E1, R1, E, A, A2, E2, R2, A3, E3, R3>(
     other: Effect.Effect<A1, E1, R1>,
     options: {
-      readonly onSelfDone: (exit: Exit.Exit<A, E>, fiber: Fiber.Fiber<A1, E1>) => Effect.Effect<A2, E2, R2>
-      readonly onOtherDone: (exit: Exit.Exit<A1, E1>, fiber: Fiber.Fiber<A, E>) => Effect.Effect<A3, E3, R3>
+      readonly onSelfDone: (
+        exit: Exit.Exit<A, E>,
+        fiber: Fiber.Fiber<A1, E1>
+      ) => Effect.Effect<A2, E2, R2>;
+      readonly onOtherDone: (
+        exit: Exit.Exit<A1, E1>,
+        fiber: Fiber.Fiber<A, E>
+      ) => Effect.Effect<A3, E3, R3>;
     }
-  ) => <R>(self: Effect.Effect<A, E, R>) => Effect.Effect<A2 | A3, E2 | E3, R | R1 | R2 | R3>,
+  ) => <R>(
+    self: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A2 | A3, E2 | E3, R | R1 | R2 | R3>,
   <A, E, R, A1, E1, R1, A2, E2, R2, A3, E3, R3>(
     self: Effect.Effect<A, E, R>,
     other: Effect.Effect<A1, E1, R1>,
     options: {
-      readonly onSelfDone: (exit: Exit.Exit<A, E>, fiber: Fiber.Fiber<A1, E1>) => Effect.Effect<A2, E2, R2>
-      readonly onOtherDone: (exit: Exit.Exit<A1, E1>, fiber: Fiber.Fiber<A, E>) => Effect.Effect<A3, E3, R3>
+      readonly onSelfDone: (
+        exit: Exit.Exit<A, E>,
+        fiber: Fiber.Fiber<A1, E1>
+      ) => Effect.Effect<A2, E2, R2>;
+      readonly onOtherDone: (
+        exit: Exit.Exit<A1, E1>,
+        fiber: Fiber.Fiber<A, E>
+      ) => Effect.Effect<A3, E3, R3>;
     }
   ) => Effect.Effect<A2 | A3, E2 | E3, R | R1 | R2 | R3>
 >(3, (self, other, options) =>
@@ -3520,13 +4096,12 @@ export const raceWith = dual<
       core.flatMap(winner.await, (exit) => {
         switch (exit._tag) {
           case OpCodes.OP_SUCCESS: {
-            return core.flatMap(
-              winner.inheritAll,
-              () => options.onSelfDone(exit, loser)
-            )
+            return core.flatMap(winner.inheritAll, () =>
+              options.onSelfDone(exit, loser)
+            );
           }
           case OpCodes.OP_FAILURE: {
-            return options.onSelfDone(exit, loser)
+            return options.onSelfDone(exit, loser);
           }
         }
       }),
@@ -3534,29 +4109,34 @@ export const raceWith = dual<
       core.flatMap(winner.await, (exit) => {
         switch (exit._tag) {
           case OpCodes.OP_SUCCESS: {
-            return core.flatMap(
-              winner.inheritAll,
-              () => options.onOtherDone(exit, loser)
-            )
+            return core.flatMap(winner.inheritAll, () =>
+              options.onOtherDone(exit, loser)
+            );
           }
           case OpCodes.OP_FAILURE: {
-            return options.onOtherDone(exit, loser)
+            return options.onOtherDone(exit, loser);
           }
         }
-      })
-  }))
+      }),
+  })
+);
 
 /** @internal */
-export const disconnect = <A, E, R>(self: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
+export const disconnect = <A, E, R>(
+  self: Effect.Effect<A, E, R>
+): Effect.Effect<A, E, R> =>
   core.uninterruptibleMask((restore) =>
     core.fiberIdWith((fiberId) =>
       core.flatMap(forkDaemon(restore(self)), (fiber) =>
         pipe(
           restore(internalFiber.join(fiber)),
-          core.onInterrupt(() => pipe(fiber, internalFiber.interruptAsFork(fiberId)))
-        ))
+          core.onInterrupt(() =>
+            pipe(fiber, internalFiber.interruptAsFork(fiberId))
+          )
+        )
+      )
     )
-  )
+  );
 
 /** @internal */
 export const race = dual<
@@ -3569,42 +4149,36 @@ export const race = dual<
     self: Effect.Effect<A, E, R>,
     that: Effect.Effect<A2, E2, R2>
   ) => Effect.Effect<A | A2, E | E2, R | R2>
->(
-  2,
-  (self, that) =>
-    core.fiberIdWith((parentFiberId) =>
-      raceWith(self, that, {
-        onSelfDone: (exit, right) =>
-          core.exitMatchEffect(exit, {
-            onFailure: (cause) =>
-              pipe(
-                internalFiber.join(right),
-                internalEffect.mapErrorCause((cause2) => internalCause.parallel(cause, cause2))
-              ),
-            onSuccess: (value) =>
-              pipe(
-                right,
-                core.interruptAsFiber(parentFiberId),
-                core.as(value)
+>(2, (self, that) =>
+  core.fiberIdWith((parentFiberId) =>
+    raceWith(self, that, {
+      onSelfDone: (exit, right) =>
+        core.exitMatchEffect(exit, {
+          onFailure: (cause) =>
+            pipe(
+              internalFiber.join(right),
+              internalEffect.mapErrorCause((cause2) =>
+                internalCause.parallel(cause, cause2)
               )
-          }),
-        onOtherDone: (exit, left) =>
-          core.exitMatchEffect(exit, {
-            onFailure: (cause) =>
-              pipe(
-                internalFiber.join(left),
-                internalEffect.mapErrorCause((cause2) => internalCause.parallel(cause2, cause))
-              ),
-            onSuccess: (value) =>
-              pipe(
-                left,
-                core.interruptAsFiber(parentFiberId),
-                core.as(value)
+            ),
+          onSuccess: (value) =>
+            pipe(right, core.interruptAsFiber(parentFiberId), core.as(value)),
+        }),
+      onOtherDone: (exit, left) =>
+        core.exitMatchEffect(exit, {
+          onFailure: (cause) =>
+            pipe(
+              internalFiber.join(left),
+              internalEffect.mapErrorCause((cause2) =>
+                internalCause.parallel(cause2, cause)
               )
-          })
-      })
-    )
-)
+            ),
+          onSuccess: (value) =>
+            pipe(left, core.interruptAsFiber(parentFiberId), core.as(value)),
+        }),
+    })
+  )
+);
 
 /** @internal */
 export const raceFibersWith = dual<
@@ -3614,15 +4188,17 @@ export const raceFibersWith = dual<
       readonly onSelfWin: (
         winner: Fiber.RuntimeFiber<A, E>,
         loser: Fiber.RuntimeFiber<A1, E1>
-      ) => Effect.Effect<A2, E2, R2>
+      ) => Effect.Effect<A2, E2, R2>;
       readonly onOtherWin: (
         winner: Fiber.RuntimeFiber<A1, E1>,
         loser: Fiber.RuntimeFiber<A, E>
-      ) => Effect.Effect<A3, E3, R3>
-      readonly selfScope?: fiberScope.FiberScope | undefined
-      readonly otherScope?: fiberScope.FiberScope | undefined
+      ) => Effect.Effect<A3, E3, R3>;
+      readonly selfScope?: fiberScope.FiberScope | undefined;
+      readonly otherScope?: fiberScope.FiberScope | undefined;
     }
-  ) => <R>(self: Effect.Effect<A, E, R>) => Effect.Effect<A2 | A3, E2 | E3, R | R1 | R2 | R3>,
+  ) => <R>(
+    self: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A2 | A3, E2 | E3, R | R1 | R2 | R3>,
   <A, E, R, A1, E1, R1, A2, E2, R2, A3, E3, R3>(
     self: Effect.Effect<A, E, R>,
     other: Effect.Effect<A1, E1, R1>,
@@ -3630,86 +4206,118 @@ export const raceFibersWith = dual<
       readonly onSelfWin: (
         winner: Fiber.RuntimeFiber<A, E>,
         loser: Fiber.RuntimeFiber<A1, E1>
-      ) => Effect.Effect<A2, E2, R2>
+      ) => Effect.Effect<A2, E2, R2>;
       readonly onOtherWin: (
         winner: Fiber.RuntimeFiber<A1, E1>,
         loser: Fiber.RuntimeFiber<A, E>
-      ) => Effect.Effect<A3, E3, R3>
-      readonly selfScope?: fiberScope.FiberScope | undefined
-      readonly otherScope?: fiberScope.FiberScope | undefined
+      ) => Effect.Effect<A3, E3, R3>;
+      readonly selfScope?: fiberScope.FiberScope | undefined;
+      readonly otherScope?: fiberScope.FiberScope | undefined;
     }
   ) => Effect.Effect<A2 | A3, E2 | E3, R | R1 | R2 | R3>
->(3, <A, E, R, A1, E1, R1, A2, E2, R2, A3, E3, R3>(
-  self: Effect.Effect<A, E, R>,
-  other: Effect.Effect<A1, E1, R1>,
-  options: {
-    readonly onSelfWin: (
-      winner: Fiber.RuntimeFiber<A, E>,
-      loser: Fiber.RuntimeFiber<A1, E1>
-    ) => Effect.Effect<A2, E2, R2>
-    readonly onOtherWin: (
-      winner: Fiber.RuntimeFiber<A1, E1>,
-      loser: Fiber.RuntimeFiber<A, E>
-    ) => Effect.Effect<A3, E3, R3>
-    readonly selfScope?: fiberScope.FiberScope | undefined
-    readonly otherScope?: fiberScope.FiberScope | undefined
-  }
-) =>
-  core.withFiberRuntime((parentFiber, parentStatus) => {
-    const parentRuntimeFlags = parentStatus.runtimeFlags
-    const raceIndicator = MRef.make(true)
-    const leftFiber: FiberRuntime<A, E> = unsafeMakeChildFiber(
-      self,
-      parentFiber,
-      parentRuntimeFlags,
-      options.selfScope
-    )
-    const rightFiber: FiberRuntime<A1, E1> = unsafeMakeChildFiber(
-      other,
-      parentFiber,
-      parentRuntimeFlags,
-      options.otherScope
-    )
-    return core.async((cb) => {
-      leftFiber.addObserver(() => completeRace(leftFiber, rightFiber, options.onSelfWin, raceIndicator, cb))
-      rightFiber.addObserver(() => completeRace(rightFiber, leftFiber, options.onOtherWin, raceIndicator, cb))
-      leftFiber.startFork(self)
-      rightFiber.startFork(other)
-    }, FiberId.combine(leftFiber.id(), rightFiber.id()))
-  }))
+>(
+  3,
+  <A, E, R, A1, E1, R1, A2, E2, R2, A3, E3, R3>(
+    self: Effect.Effect<A, E, R>,
+    other: Effect.Effect<A1, E1, R1>,
+    options: {
+      readonly onSelfWin: (
+        winner: Fiber.RuntimeFiber<A, E>,
+        loser: Fiber.RuntimeFiber<A1, E1>
+      ) => Effect.Effect<A2, E2, R2>;
+      readonly onOtherWin: (
+        winner: Fiber.RuntimeFiber<A1, E1>,
+        loser: Fiber.RuntimeFiber<A, E>
+      ) => Effect.Effect<A3, E3, R3>;
+      readonly selfScope?: fiberScope.FiberScope | undefined;
+      readonly otherScope?: fiberScope.FiberScope | undefined;
+    }
+  ) =>
+    core.withFiberRuntime((parentFiber, parentStatus) => {
+      const parentRuntimeFlags = parentStatus.runtimeFlags;
+      const raceIndicator = MRef.make(true);
+      const leftFiber: FiberRuntime<A, E> = unsafeMakeChildFiber(
+        self,
+        parentFiber,
+        parentRuntimeFlags,
+        options.selfScope
+      );
+      const rightFiber: FiberRuntime<A1, E1> = unsafeMakeChildFiber(
+        other,
+        parentFiber,
+        parentRuntimeFlags,
+        options.otherScope
+      );
+      return core.async(
+        (cb) => {
+          leftFiber.addObserver(() =>
+            completeRace(
+              leftFiber,
+              rightFiber,
+              options.onSelfWin,
+              raceIndicator,
+              cb
+            )
+          );
+          rightFiber.addObserver(() =>
+            completeRace(
+              rightFiber,
+              leftFiber,
+              options.onOtherWin,
+              raceIndicator,
+              cb
+            )
+          );
+          leftFiber.startFork(self);
+          rightFiber.startFork(other);
+        },
+        FiberId.combine(leftFiber.id(), rightFiber.id())
+      );
+    })
+);
 
 const completeRace = <A2, A3, E2, E3, R, R1, R2, R3>(
   winner: Fiber.RuntimeFiber<any, any>,
   loser: Fiber.RuntimeFiber<any, any>,
-  cont: (winner: Fiber.RuntimeFiber<any, any>, loser: Fiber.RuntimeFiber<any, any>) => Effect.Effect<any, any, any>,
+  cont: (
+    winner: Fiber.RuntimeFiber<any, any>,
+    loser: Fiber.RuntimeFiber<any, any>
+  ) => Effect.Effect<any, any, any>,
   ab: MRef.MutableRef<boolean>,
   cb: (_: Effect.Effect<A2 | A3, E2 | E3, R | R1 | R2 | R3>) => void
 ): void => {
   if (MRef.compareAndSet(true, false)(ab)) {
-    cb(cont(winner, loser))
+    cb(cont(winner, loser));
   }
-}
+};
 
 /** @internal */
 export const ensuring: {
   <X, R1>(
     finalizer: Effect.Effect<X, never, R1>
-  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<A, E, R1 | R>
-  <A, E, R, X, R1>(self: Effect.Effect<A, E, R>, finalizer: Effect.Effect<X, never, R1>): Effect.Effect<A, E, R1 | R>
+  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<A, E, R1 | R>;
+  <A, E, R, X, R1>(
+    self: Effect.Effect<A, E, R>,
+    finalizer: Effect.Effect<X, never, R1>
+  ): Effect.Effect<A, E, R1 | R>;
 } = dual(
   2,
-  <A, E, R, X, R1>(self: Effect.Effect<A, E, R>, finalizer: Effect.Effect<X, never, R1>): Effect.Effect<A, E, R1 | R> =>
+  <A, E, R, X, R1>(
+    self: Effect.Effect<A, E, R>,
+    finalizer: Effect.Effect<X, never, R1>
+  ): Effect.Effect<A, E, R1 | R> =>
     core.uninterruptibleMask((restore) =>
       core.matchCauseEffect(restore(self), {
         onFailure: (cause1) =>
           core.matchCauseEffect(finalizer, {
-            onFailure: (cause2) => core.failCause(internalCause.sequential(cause1, cause2)),
-            onSuccess: () => core.failCause(cause1)
+            onFailure: (cause2) =>
+              core.failCause(internalCause.sequential(cause1, cause2)),
+            onSuccess: () => core.failCause(cause1),
           }),
-        onSuccess: (a) => core.as(finalizer, a)
+        onSuccess: (a) => core.as(finalizer, a),
       })
     )
-)
+);
 
 /** @internal */
 export const invokeWithInterrupt: <A, E, R>(
@@ -3723,86 +4331,85 @@ export const invokeWithInterrupt: <A, E, R>(
 ) =>
   core.fiberIdWith((id) =>
     ensuring(
-      core.flatMap(
-        forkDaemon(core.interruptible(self)),
-        (processing) =>
-          core.async<void, E>((cb) => {
-            const counts = entries.map((_) => _.listeners.count)
-            const checkDone = () => {
-              if (counts.every((count) => count === 0)) {
-                if (
-                  entries.every((_) => {
-                    if (_.result.state.current._tag === "Pending") {
-                      return true
-                    } else if (
-                      _.result.state.current._tag === "Done" &&
-                      core.exitIsExit(_.result.state.current.effect) &&
-                      _.result.state.current.effect._tag === "Failure" &&
-                      internalCause.isInterrupted(_.result.state.current.effect.cause)
-                    ) {
-                      return true
-                    } else {
-                      return false
-                    }
-                  })
-                ) {
-                  cleanup.forEach((f) => f())
-                  onInterrupt?.()
-                  cb(core.interruptFiber(processing))
+      core.flatMap(forkDaemon(core.interruptible(self)), (processing) =>
+        core.async<void, E>((cb) => {
+          const counts = entries.map((_) => _.listeners.count);
+          const checkDone = () => {
+            if (
+              counts.every((count) => count === 0) &&
+              entries.every((_) => {
+                if (_.result.state.current._tag === "Pending") {
+                  return true;
                 }
-              }
+                if (
+                  _.result.state.current._tag === "Done" &&
+                  core.exitIsExit(_.result.state.current.effect) &&
+                  _.result.state.current.effect._tag === "Failure" &&
+                  internalCause.isInterrupted(
+                    _.result.state.current.effect.cause
+                  )
+                ) {
+                  return true;
+                }
+                return false;
+              })
+            ) {
+              cleanup.forEach((f) => f());
+              onInterrupt?.();
+              cb(core.interruptFiber(processing));
             }
-            processing.addObserver((exit) => {
-              cleanup.forEach((f) => f())
-              cb(exit)
-            })
-            const cleanup = entries.map((r, i) => {
-              const observer = (count: number) => {
-                counts[i] = count
-                checkDone()
-              }
-              r.listeners.addObserver(observer)
-              return () => r.listeners.removeObserver(observer)
-            })
-            checkDone()
-            return core.sync(() => {
-              cleanup.forEach((f) => f())
-            })
-          })
+          };
+          processing.addObserver((exit) => {
+            cleanup.forEach((f) => f());
+            cb(exit);
+          });
+          const cleanup = entries.map((r, i) => {
+            const observer = (count: number) => {
+              counts[i] = count;
+              checkDone();
+            };
+            r.listeners.addObserver(observer);
+            return () => r.listeners.removeObserver(observer);
+          });
+          checkDone();
+          return core.sync(() => {
+            cleanup.forEach((f) => f());
+          });
+        })
       ),
       core.suspend(() => {
         const residual = entries.flatMap((entry) => {
           if (!entry.state.completed) {
-            return [entry]
+            return [entry];
           }
-          return []
-        })
-        return core.forEachSequentialDiscard(
-          residual,
-          (entry) => complete(entry.request as any, core.exitInterrupt(id))
-        )
+          return [];
+        });
+        return core.forEachSequentialDiscard(residual, (entry) =>
+          complete(entry.request as any, core.exitInterrupt(id))
+        );
       })
     )
-  )
+  );
 
 /** @internal */
 export const interruptWhenPossible = dual<
-  (all: Iterable<Request<any, any>>) => <A, E, R>(
-    self: Effect.Effect<A, E, R>
-  ) => Effect.Effect<void, E, R>,
+  (
+    all: Iterable<Request<any, any>>
+  ) => <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<void, E, R>,
   <A, E, R>(
     self: Effect.Effect<A, E, R>,
     all: Iterable<Request<any, any>>
   ) => Effect.Effect<void, E, R>
 >(2, (self, all) =>
-  core.fiberRefGetWith(
-    currentRequestMap,
-    (map) =>
-      core.suspend(() => {
-        const entries = RA.fromIterable(all).flatMap((_) => map.has(_) ? [map.get(_)!] : [])
-        return invokeWithInterrupt(self, entries)
-      })
-  ))
+  core.fiberRefGetWith(currentRequestMap, (map) =>
+    core.suspend(() => {
+      const entries = RA.fromIterable(all).flatMap((_) =>
+        map.has(_) ? [map.get(_)!] : []
+      );
+      return invokeWithInterrupt(self, entries);
+    })
+  )
+);
 
 // circular Tracer
 
@@ -3811,50 +4418,67 @@ export const makeSpanScoped = (
   name: string,
   options?: Tracer.SpanOptions | undefined
 ): Effect.Effect<Tracer.Span, never, Scope.Scope> => {
-  options = tracer.addSpanStackTrace(options)
+  options = tracer.addSpanStackTrace(options);
   return core.uninterruptible(
     core.withFiberRuntime((fiber) => {
-      const scope = Context.unsafeGet(fiber.getFiberRef(core.currentContext), scopeTag)
-      const span = internalEffect.unsafeMakeSpan(fiber, name, options)
-      const timingEnabled = fiber.getFiberRef(core.currentTracerTimingEnabled)
-      const clock_ = Context.get(fiber.getFiberRef(defaultServices.currentServices), clock.clockTag)
+      const scope = Context.unsafeGet(
+        fiber.getFiberRef(core.currentContext),
+        scopeTag
+      );
+      const span = internalEffect.unsafeMakeSpan(fiber, name, options);
+      const timingEnabled = fiber.getFiberRef(core.currentTracerTimingEnabled);
+      const clock_ = Context.get(
+        fiber.getFiberRef(defaultServices.currentServices),
+        clock.clockTag
+      );
       return core.as(
-        core.scopeAddFinalizerExit(scope, (exit) => internalEffect.endSpan(span, exit, clock_, timingEnabled)),
+        core.scopeAddFinalizerExit(scope, (exit) =>
+          internalEffect.endSpan(span, exit, clock_, timingEnabled)
+        ),
         span
-      )
+      );
     })
-  )
-}
+  );
+};
 
 /* @internal */
-export const withTracerScoped = (value: Tracer.Tracer): Effect.Effect<void, never, Scope.Scope> =>
-  fiberRefLocallyScopedWith(defaultServices.currentServices, Context.add(tracer.tracerTag, value))
+export const withTracerScoped = (
+  value: Tracer.Tracer
+): Effect.Effect<void, never, Scope.Scope> =>
+  fiberRefLocallyScopedWith(
+    defaultServices.currentServices,
+    Context.add(tracer.tracerTag, value)
+  );
 
 /** @internal */
 export const withSpanScoped: {
   (
     name: string,
     options?: Tracer.SpanOptions
-  ): <A, E, R>(self: Effect.Effect<A, E, R>) => Effect.Effect<A, E, Scope.Scope | Exclude<R, Tracer.ParentSpan>>
+  ): <A, E, R>(
+    self: Effect.Effect<A, E, R>
+  ) => Effect.Effect<A, E, Scope.Scope | Exclude<R, Tracer.ParentSpan>>;
   <A, E, R>(
     self: Effect.Effect<A, E, R>,
     name: string,
     options?: Tracer.SpanOptions
-  ): Effect.Effect<A, E, Scope.Scope | Exclude<R, Tracer.ParentSpan>>
-} = function() {
-  const dataFirst = typeof arguments[0] !== "string"
-  const name = dataFirst ? arguments[1] : arguments[0]
-  const options = tracer.addSpanStackTrace(dataFirst ? arguments[2] : arguments[1])
+  ): Effect.Effect<A, E, Scope.Scope | Exclude<R, Tracer.ParentSpan>>;
+} = (() => {
+  const dataFirst = typeof arguments[0] !== "string";
+  const name = dataFirst ? arguments[1] : arguments[0];
+  const options = tracer.addSpanStackTrace(
+    dataFirst ? arguments[2] : arguments[1]
+  );
   if (dataFirst) {
-    const self = arguments[0]
+    const self = arguments[0];
     return core.flatMap(
       makeSpanScoped(name, tracer.addSpanStackTrace(options)),
       (span) => internalEffect.provideService(self, tracer.spanTag, span)
-    )
+    );
   }
   return (self: Effect.Effect<any, any, any>) =>
     core.flatMap(
       makeSpanScoped(name, tracer.addSpanStackTrace(options)),
       (span) => internalEffect.provideService(self, tracer.spanTag, span)
-    )
-} as any
+    );
+}) as any;

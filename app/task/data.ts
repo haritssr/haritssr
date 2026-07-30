@@ -1,6 +1,7 @@
 import type { Task } from "./type";
 
-const TASK_ACTION_BUTTON_BASE_CLASS = "cursor-pointer text-xs px-1.5 py-1 rounded-lg corner-squircle";
+const TASK_ACTION_BUTTON_BASE_CLASS =
+  "cursor-pointer text-xs px-1.5 py-1 rounded-lg corner-squircle";
 
 const TASK_ACTION_BUTTON_COLOR_CLASS = {
   blue: "bg-blue-600 hover:bg-blue-500 text-blue-50",
@@ -10,7 +11,9 @@ const TASK_ACTION_BUTTON_COLOR_CLASS = {
   zinc: "bg-zinc-600 hover:bg-zinc-500 text-zinc-50",
 } as const;
 
-export function getTaskActionButtonClassName(color: keyof typeof TASK_ACTION_BUTTON_COLOR_CLASS) {
+export function getTaskActionButtonClassName(
+  color: keyof typeof TASK_ACTION_BUTTON_COLOR_CLASS
+) {
   return `${TASK_ACTION_BUTTON_BASE_CLASS} ${TASK_ACTION_BUTTON_COLOR_CLASS[color]}`;
 }
 

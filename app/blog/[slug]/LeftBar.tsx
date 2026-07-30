@@ -13,7 +13,7 @@ export default function LeftBar() {
   return (
     <div className="hidden border-r border-b border-l sm:col-span-1 sm:block">
       <Link
-        className="sticky top-[45px] block border-b bg-white px-4 py-2 font-medium"
+        className="sticky top-11.25 block border-b bg-white px-4 py-2 font-medium"
         href="/blog"
       >
         Blog

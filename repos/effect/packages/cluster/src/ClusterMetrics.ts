@@ -1,44 +1,44 @@
 /**
  * @since 1.0.0
  */
-import * as Metric from "effect/Metric"
+import * as Metric from "effect/Metric";
 
 /**
  * @since 1.0.0
  * @category metrics
  */
 export const entities = Metric.gauge("effect_cluster_entities", {
-  bigint: true
-})
+  bigint: true,
+});
 
 /**
  * @since 1.0.0
  * @category metrics
  */
 export const singletons = Metric.gauge("effect_cluster_singletons", {
-  bigint: true
-})
+  bigint: true,
+});
 
 /**
  * @since 1.0.0
  * @category metrics
  */
 export const runners = Metric.gauge("effect_cluster_runners", {
-  bigint: true
-})
+  bigint: true,
+});
 
 /**
  * @since 1.0.0
  * @category metrics
  */
 export const runnersHealthy = Metric.gauge("effect_cluster_runners_healthy", {
-  bigint: true
-})
+  bigint: true,
+});
 
 /**
  * @since 1.0.0
  * @category metrics
  */
 export const shards = Metric.gauge("effect_cluster_shards", {
-  bigint: true
-})
+  bigint: true,
+});

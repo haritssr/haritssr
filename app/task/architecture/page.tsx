@@ -335,7 +335,13 @@ const charts = [
   { id: "typeschema", title: "Task Type Schema", definition: typeSchemaChart },
 ];
 
-function MermaidDiagram({ definition, id }: { definition: string; id: string }) {
+function MermaidDiagram({
+  definition,
+  id,
+}: {
+  definition: string;
+  id: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -356,7 +362,10 @@ function MermaidDiagram({ definition, id }: { definition: string; id: string }) 
           },
         });
 
-        const { svg: renderedSvg } = await mermaid.render(`mermaid-${id}`, definition);
+        const { svg: renderedSvg } = await mermaid.render(
+          `mermaid-${id}`,
+          definition
+        );
 
         if (!cancelled) {
           setSvg(renderedSvg);
@@ -364,7 +373,9 @@ function MermaidDiagram({ definition, id }: { definition: string; id: string }) 
         }
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Failed to render diagram");
+          setError(
+            err instanceof Error ? err.message : "Failed to render diagram"
+          );
         }
       }
     };
@@ -377,7 +388,11 @@ function MermaidDiagram({ definition, id }: { definition: string; id: string }) 
   }, [definition, id]);
 
   if (error) {
-    return <div className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-600">Failed to render diagram: {error}</div>;
+    return (
+      <div className="rounded border border-red-200 bg-red-50 p-4 text-red-600 text-sm">
+        Failed to render diagram: {error}
+      </div>
+    );
   }
 
   if (!svg) {
@@ -401,7 +416,10 @@ function MermaidDiagram({ definition, id }: { definition: string; id: string }) 
 export default function TaskArchitecturePage() {
   return (
     <div className="pb-8">
-      <Link className="-mb-10 mt-10 flex w-fit items-center text-blue-500 hover:text-blue-400" href="/task">
+      <Link
+        className="-mb-10 mt-10 flex w-fit items-center text-blue-500 hover:text-blue-400"
+        href="/task"
+      >
         <ChevronLeftIcon className="h-5 w-5 stroke-2" />
         Task
       </Link>
@@ -412,9 +430,13 @@ export default function TaskArchitecturePage() {
       <div className="mb-8 rounded-xl border border-zinc-200 p-4">
         <h2 className="mb-2 font-semibold text-zinc-800">Overview</h2>
         <p className="text-sm text-zinc-600">
-          A React-based task manager with SQLite persistence. The UI enforces a single active Now task by sanitizing task lists, hydrates from
-          <code className="px-1">GET /api/task</code>, and saves via a mixed strategy: debounced <code className="px-1">PUT /api/task</code> for regular updates plus immediate{" "}
-          <code className="px-1">sendBeacon POST /api/task</code> for critical and unload-safe persistence.
+          A React-based task manager with SQLite persistence. The UI enforces a
+          single active Now task by sanitizing task lists, hydrates from
+          <code className="px-1">GET /api/task</code>, and saves via a mixed
+          strategy: debounced <code className="px-1">PUT /api/task</code> for
+          regular updates plus immediate{" "}
+          <code className="px-1">sendBeacon POST /api/task</code> for critical
+          and unload-safe persistence.
         </p>
       </div>
 
@@ -434,7 +456,9 @@ export default function TaskArchitecturePage() {
             <ul className="list-disc pl-5">
               <li>Shows tasks with type Other.</li>
               <li>Sorted by highest progress first.</li>
-              <li>Do Now moves Other to Now and demotes any existing Now to Other.</li>
+              <li>
+                Do Now moves Other to Now and demotes any existing Now to Other.
+              </li>
               <li>Resume appears when progress is greater than 0.</li>
             </ul>
           </div>
@@ -442,7 +466,10 @@ export default function TaskArchitecturePage() {
             <div className="font-medium text-zinc-700">Done</div>
             <ul className="list-disc pl-5">
               <li>Shows tasks with type Done.</li>
-              <li>Tasks become Done when progress reaches 100 or when manually marked done.</li>
+              <li>
+                Tasks become Done when progress reaches 100 or when manually
+                marked done.
+              </li>
             </ul>
           </div>
           <div>
@@ -459,15 +486,25 @@ export default function TaskArchitecturePage() {
 
       {/* Production Readiness Notes */}
       <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
-        <h2 className="mb-2 font-semibold text-amber-900">Production Readiness Notes</h2>
-        <p className="text-sm text-zinc-700">The current implementation is functional but not production-ready without hardening in these areas:</p>
+        <h2 className="mb-2 font-semibold text-amber-900">
+          Production Readiness Notes
+        </h2>
+        <p className="text-sm text-zinc-700">
+          The current implementation is functional but not production-ready
+          without hardening in these areas:
+        </p>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-700">
           <li>
-            No authentication or access control on <code className="px-1">/api/task</code>.
+            No authentication or access control on{" "}
+            <code className="px-1">/api/task</code>.
           </li>
           <li>
-            SQLite DB lives in <code className="px-1">/Users/haritssyah/developer/.data-haritssr/</code> (or <code className="px-1">TASK_DB_DIR</code>) and is not committed; production needs managed
-            storage + backups.
+            SQLite DB lives in{" "}
+            <code className="px-1">
+              /Users/haritssyah/developer/.data-haritssr/
+            </code>{" "}
+            (or <code className="px-1">TASK_DB_DIR</code>) and is not committed;
+            production needs managed storage + backups.
           </li>
           <li>No schema migrations or versioning for the DB.</li>
           <li>No tests covering task logic, sanitization, or API handlers.</li>
@@ -487,47 +524,86 @@ export default function TaskArchitecturePage() {
       </div>
 
       {/* Source State Reference */}
-      <h2 className="mb-3 mt-8 font-semibold text-zinc-800">State Reference</h2>
+      <h2 className="mt-8 mb-3 font-semibold text-zinc-800">State Reference</h2>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <div className="rounded border border-blue-200 bg-blue-50 p-3">
-          <code className="font-mono text-sm font-semibold text-blue-800">tasks: Task[]</code>
-          <p className="mt-1 text-xs text-zinc-600">Main source of truth. Updated by hydration, add, move, mark done, and progress updates.</p>
+          <code className="font-mono font-semibold text-blue-800 text-sm">
+            tasks: Task[]
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Main source of truth. Updated by hydration, add, move, mark done,
+            and progress updates.
+          </p>
         </div>
 
         <div className="rounded border border-amber-200 bg-amber-50 p-3">
-          <code className="font-mono text-sm font-semibold text-amber-800">isHydratedFromDb</code>
-          <p className="mt-1 text-xs text-zinc-600">Save gate. Debounced and emergency saves are enabled only after initial hydration completes.</p>
+          <code className="font-mono font-semibold text-amber-800 text-sm">
+            isHydratedFromDb
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Save gate. Debounced and emergency saves are enabled only after
+            initial hydration completes.
+          </p>
         </div>
 
         <div className="rounded border border-emerald-200 bg-emerald-50 p-3">
-          <code className="font-mono text-sm font-semibold text-emerald-800">droppedNowCount</code>
-          <p className="mt-1 text-xs text-zinc-600">Hydration feedback count when multiple Now tasks are sanitized and extras are demoted to Other.</p>
+          <code className="font-mono font-semibold text-emerald-800 text-sm">
+            droppedNowCount
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Hydration feedback count when multiple Now tasks are sanitized and
+            extras are demoted to Other.
+          </p>
         </div>
 
         <div className="rounded border border-cyan-200 bg-cyan-50 p-3">
-          <code className="font-mono text-sm font-semibold text-cyan-800">autoStartTitle</code>
-          <p className="mt-1 text-xs text-zinc-600">Coordinates Resume action from Other to Now so the promoted task timer starts automatically.</p>
+          <code className="font-mono font-semibold text-cyan-800 text-sm">
+            autoStartTitle
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Coordinates Resume action from Other to Now so the promoted task
+            timer starts automatically.
+          </p>
         </div>
 
         <div className="rounded border border-violet-200 bg-violet-50 p-3">
-          <code className="font-mono text-sm font-semibold text-violet-800">newOtherTaskTitle</code>
-          <p className="mt-1 text-xs text-zinc-600">Controlled input value for new Other task title.</p>
+          <code className="font-mono font-semibold text-sm text-violet-800">
+            newOtherTaskTitle
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Controlled input value for new Other task title.
+          </p>
         </div>
 
         <div className="rounded border border-orange-200 bg-orange-50 p-3">
-          <code className="font-mono text-sm font-semibold text-orange-800">newOtherTaskDuration</code>
-          <p className="mt-1 text-xs text-zinc-600">Controlled input value for new task duration used with presets and number field.</p>
+          <code className="font-mono font-semibold text-orange-800 text-sm">
+            newOtherTaskDuration
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Controlled input value for new task duration used with presets and
+            number field.
+          </p>
         </div>
 
         <div className="rounded border border-slate-200 bg-slate-50 p-3">
-          <code className="font-mono text-sm font-semibold text-slate-800">saveTimeoutRef</code>
-          <p className="mt-1 text-xs text-zinc-600">Tracks the pending debounce timer so critical and unload flows can cancel and flush safely.</p>
+          <code className="font-mono font-semibold text-slate-800 text-sm">
+            saveTimeoutRef
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Tracks the pending debounce timer so critical and unload flows can
+            cancel and flush safely.
+          </p>
         </div>
 
         <div className="rounded border border-rose-200 bg-rose-50 p-3">
-          <code className="font-mono text-sm font-semibold text-rose-800">isRunning</code>
-          <p className="mt-1 text-xs text-zinc-600">Local state inside TaskItem. Controls per-task interval ticks and start/stop behavior for Now tasks.</p>
+          <code className="font-mono font-semibold text-rose-800 text-sm">
+            isRunning
+          </code>
+          <p className="mt-1 text-xs text-zinc-600">
+            Local state inside TaskItem. Controls per-task interval ticks and
+            start/stop behavior for Now tasks.
+          </p>
         </div>
       </div>
     </div>

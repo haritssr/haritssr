@@ -2,6 +2,8 @@ import Link from "next/link";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 import generateTOC from "utils/generateTOC";
 
+const REGEX = /\s+/;
+
 export default function TableOfContents({ title }: { title: string }) {
   const articleTOC = generateTOC(`../haritssr/content/${title}.mdx`);
 
@@ -17,7 +19,7 @@ export default function TableOfContents({ title }: { title: string }) {
             const slug = heading
               .replace(/[^a-zA-Z0-9\s-]/g, "") // strip everything except letters, numbers, spaces, and hyphens
               .trim()
-              .split(/\s+/) // collapse consecutive spaces before joining
+              .split(REGEX) // collapse consecutive spaces before joining
               .join("-");
 
             return (

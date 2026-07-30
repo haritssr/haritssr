@@ -21,23 +21,23 @@
  *
  * @since 2.0.0
  */
-import type * as Channel from "./Channel.js"
-import type * as Chunk from "./Chunk.js"
-import type * as Effect from "./Effect.js"
-import type * as Either from "./Either.js"
-import type * as Equal from "./Equal.js"
-import type * as FiberId from "./FiberId.js"
-import type * as HashSet from "./HashSet.js"
-import type { Inspectable } from "./Inspectable.js"
-import * as internal from "./internal/cause.js"
-import * as core from "./internal/core.js"
-import type * as Option from "./Option.js"
-import type { Pipeable } from "./Pipeable.js"
-import type { Predicate, Refinement } from "./Predicate.js"
-import type * as Sink from "./Sink.js"
-import type * as Stream from "./Stream.js"
-import type { Span } from "./Tracer.js"
-import type { Covariant, NoInfer } from "./Types.js"
+import type * as Channel from "./Channel.js";
+import type * as Chunk from "./Chunk.js";
+import type * as Effect from "./Effect.js";
+import type * as Either from "./Either.js";
+import type * as Equal from "./Equal.js";
+import type * as FiberId from "./FiberId.js";
+import type * as HashSet from "./HashSet.js";
+import type { Inspectable } from "./Inspectable.js";
+import * as internal from "./internal/cause.js";
+import * as core from "./internal/core.js";
+import type * as Option from "./Option.js";
+import type { Pipeable } from "./Pipeable.js";
+import type { Predicate, Refinement } from "./Predicate.js";
+import type * as Sink from "./Sink.js";
+import type * as Stream from "./Stream.js";
+import type { Span } from "./Tracer.js";
+import type { Covariant, NoInfer } from "./Types.js";
 
 /**
  * A unique symbol identifying the `Cause` type.
@@ -53,13 +53,13 @@ import type { Covariant, NoInfer } from "./Types.js"
  * @since 2.0.0
  * @category Symbols
  */
-export const CauseTypeId: unique symbol = internal.CauseTypeId
+export const CauseTypeId: unique symbol = internal.CauseTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type CauseTypeId = typeof CauseTypeId
+export type CauseTypeId = typeof CauseTypeId;
 
 /**
  * A unique symbol identifying the `RuntimeException` type.
@@ -75,13 +75,14 @@ export type CauseTypeId = typeof CauseTypeId
  * @since 2.0.0
  * @category Symbols
  */
-export const RuntimeExceptionTypeId: unique symbol = core.RuntimeExceptionTypeId
+export const RuntimeExceptionTypeId: unique symbol =
+  core.RuntimeExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type RuntimeExceptionTypeId = typeof RuntimeExceptionTypeId
+export type RuntimeExceptionTypeId = typeof RuntimeExceptionTypeId;
 
 /**
  * A unique symbol identifying the `InterruptedException` type.
@@ -97,13 +98,14 @@ export type RuntimeExceptionTypeId = typeof RuntimeExceptionTypeId
  * @since 2.0.0
  * @category Symbols
  */
-export const InterruptedExceptionTypeId: unique symbol = core.InterruptedExceptionTypeId
+export const InterruptedExceptionTypeId: unique symbol =
+  core.InterruptedExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type InterruptedExceptionTypeId = typeof InterruptedExceptionTypeId
+export type InterruptedExceptionTypeId = typeof InterruptedExceptionTypeId;
 
 /**
  * A unique symbol identifying the `IllegalArgumentException` type.
@@ -119,13 +121,15 @@ export type InterruptedExceptionTypeId = typeof InterruptedExceptionTypeId
  * @since 2.0.0
  * @category Symbols
  */
-export const IllegalArgumentExceptionTypeId: unique symbol = core.IllegalArgumentExceptionTypeId
+export const IllegalArgumentExceptionTypeId: unique symbol =
+  core.IllegalArgumentExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type IllegalArgumentExceptionTypeId = typeof IllegalArgumentExceptionTypeId
+export type IllegalArgumentExceptionTypeId =
+  typeof IllegalArgumentExceptionTypeId;
 
 /**
  * A unique symbol identifying the `NoSuchElementException` type.
@@ -141,13 +145,14 @@ export type IllegalArgumentExceptionTypeId = typeof IllegalArgumentExceptionType
  * @since 2.0.0
  * @category Symbols
  */
-export const NoSuchElementExceptionTypeId: unique symbol = core.NoSuchElementExceptionTypeId
+export const NoSuchElementExceptionTypeId: unique symbol =
+  core.NoSuchElementExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type NoSuchElementExceptionTypeId = typeof NoSuchElementExceptionTypeId
+export type NoSuchElementExceptionTypeId = typeof NoSuchElementExceptionTypeId;
 
 /**
  * A unique symbol identifying the `InvalidPubSubCapacityException` type.
@@ -163,13 +168,15 @@ export type NoSuchElementExceptionTypeId = typeof NoSuchElementExceptionTypeId
  * @since 2.0.0
  * @category Symbols
  */
-export const InvalidPubSubCapacityExceptionTypeId: unique symbol = core.InvalidPubSubCapacityExceptionTypeId
+export const InvalidPubSubCapacityExceptionTypeId: unique symbol =
+  core.InvalidPubSubCapacityExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type InvalidPubSubCapacityExceptionTypeId = typeof InvalidPubSubCapacityExceptionTypeId
+export type InvalidPubSubCapacityExceptionTypeId =
+  typeof InvalidPubSubCapacityExceptionTypeId;
 
 /**
  * A unique symbol identifying the `ExceededCapacityException` type.
@@ -185,13 +192,15 @@ export type InvalidPubSubCapacityExceptionTypeId = typeof InvalidPubSubCapacityE
  * @since 3.5.0
  * @category Symbols
  */
-export const ExceededCapacityExceptionTypeId: unique symbol = core.ExceededCapacityExceptionTypeId
+export const ExceededCapacityExceptionTypeId: unique symbol =
+  core.ExceededCapacityExceptionTypeId;
 
 /**
  * @since 3.5.0
  * @category Symbols
  */
-export type ExceededCapacityExceptionTypeId = typeof ExceededCapacityExceptionTypeId
+export type ExceededCapacityExceptionTypeId =
+  typeof ExceededCapacityExceptionTypeId;
 
 /**
  * A unique symbol identifying the `TimeoutException` type.
@@ -207,13 +216,14 @@ export type ExceededCapacityExceptionTypeId = typeof ExceededCapacityExceptionTy
  * @since 2.0.0
  * @category Symbols
  */
-export const TimeoutExceptionTypeId: unique symbol = core.TimeoutExceptionTypeId
+export const TimeoutExceptionTypeId: unique symbol =
+  core.TimeoutExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type TimeoutExceptionTypeId = typeof TimeoutExceptionTypeId
+export type TimeoutExceptionTypeId = typeof TimeoutExceptionTypeId;
 
 /**
  * A unique symbol identifying the `UnknownException` type.
@@ -229,13 +239,14 @@ export type TimeoutExceptionTypeId = typeof TimeoutExceptionTypeId
  * @since 2.0.0
  * @category Symbols
  */
-export const UnknownExceptionTypeId: unique symbol = core.UnknownExceptionTypeId
+export const UnknownExceptionTypeId: unique symbol =
+  core.UnknownExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category Symbols
  */
-export type UnknownExceptionTypeId = typeof UnknownExceptionTypeId
+export type UnknownExceptionTypeId = typeof UnknownExceptionTypeId;
 
 /**
  * Represents the full history of a failure within an `Effect`.
@@ -257,7 +268,7 @@ export type Cause<E> =
   | Die
   | Interrupt
   | Sequential<E>
-  | Parallel<E>
+  | Parallel<E>;
 
 /**
  * @since 2.0.0
@@ -271,8 +282,8 @@ export declare namespace Cause {
    */
   export interface Variance<out E> {
     readonly [CauseTypeId]: {
-      readonly _E: Covariant<E>
-    }
+      readonly _E: Covariant<E>;
+    };
   }
 }
 
@@ -294,12 +305,12 @@ export declare namespace Cause {
  * @category Models
  */
 export interface CauseReducer<in C, in E, in out Z> {
-  emptyCase(context: C): Z
-  failCase(context: C, error: E): Z
-  dieCase(context: C, defect: unknown): Z
-  interruptCase(context: C, fiberId: FiberId.FiberId): Z
-  sequentialCase(context: C, left: Z, right: Z): Z
-  parallelCase(context: C, left: Z, right: Z): Z
+  emptyCase(context: C): Z;
+  failCase(context: C, error: E): Z;
+  dieCase(context: C, defect: unknown): Z;
+  interruptCase(context: C, fiberId: FiberId.FiberId): Z;
+  sequentialCase(context: C, left: Z, right: Z): Z;
+  parallelCase(context: C, left: Z, right: Z): Z;
 }
 
 /**
@@ -309,11 +320,35 @@ export interface CauseReducer<in C, in E, in out Z> {
  * @category Models
  */
 export interface YieldableError extends Pipeable, Inspectable, Error {
-  readonly [Effect.EffectTypeId]: Effect.Effect.VarianceStruct<never, this, never>
-  readonly [Stream.StreamTypeId]: Stream.Stream.VarianceStruct<never, this, never>
-  readonly [Sink.SinkTypeId]: Sink.Sink.VarianceStruct<never, unknown, never, this, never>
-  readonly [Channel.ChannelTypeId]: Channel.Channel.VarianceStruct<never, unknown, this, unknown, never, unknown, never>
-  [Symbol.iterator](): Effect.EffectGenerator<Effect.Effect<never, this, never>>
+  readonly [Effect.EffectTypeId]: Effect.Effect.VarianceStruct<
+    never,
+    this,
+    never
+  >;
+  readonly [Stream.StreamTypeId]: Stream.Stream.VarianceStruct<
+    never,
+    this,
+    never
+  >;
+  readonly [Sink.SinkTypeId]: Sink.Sink.VarianceStruct<
+    never,
+    unknown,
+    never,
+    this,
+    never
+  >;
+  readonly [Channel.ChannelTypeId]: Channel.Channel.VarianceStruct<
+    never,
+    unknown,
+    this,
+    unknown,
+    never,
+    unknown,
+    never
+  >;
+  [Symbol.iterator](): Effect.EffectGenerator<
+    Effect.Effect<never, this, never>
+  >;
 }
 
 /**
@@ -323,7 +358,9 @@ export interface YieldableError extends Pipeable, Inspectable, Error {
  * @since 2.0.0
  * @category Errors
  */
-export const YieldableError: new(message?: string | undefined) => YieldableError = core.YieldableError
+export const YieldableError: new (
+  message?: string | undefined
+) => YieldableError = core.YieldableError;
 
 /**
  * An error representing a runtime error.
@@ -337,8 +374,8 @@ export const YieldableError: new(message?: string | undefined) => YieldableError
  * @category Models
  */
 export interface RuntimeException extends YieldableError {
-  readonly _tag: "RuntimeException"
-  readonly [RuntimeExceptionTypeId]: RuntimeExceptionTypeId
+  readonly _tag: "RuntimeException";
+  readonly [RuntimeExceptionTypeId]: RuntimeExceptionTypeId;
 }
 
 /**
@@ -355,8 +392,8 @@ export interface RuntimeException extends YieldableError {
  * @category Models
  */
 export interface InterruptedException extends YieldableError {
-  readonly _tag: "InterruptedException"
-  readonly [InterruptedExceptionTypeId]: InterruptedExceptionTypeId
+  readonly _tag: "InterruptedException";
+  readonly [InterruptedExceptionTypeId]: InterruptedExceptionTypeId;
 }
 
 /**
@@ -371,8 +408,8 @@ export interface InterruptedException extends YieldableError {
  * @category Models
  */
 export interface IllegalArgumentException extends YieldableError {
-  readonly _tag: "IllegalArgumentException"
-  readonly [IllegalArgumentExceptionTypeId]: IllegalArgumentExceptionTypeId
+  readonly _tag: "IllegalArgumentException";
+  readonly [IllegalArgumentExceptionTypeId]: IllegalArgumentExceptionTypeId;
 }
 
 /**
@@ -388,8 +425,8 @@ export interface IllegalArgumentException extends YieldableError {
  * @category Models
  */
 export interface NoSuchElementException extends YieldableError {
-  readonly _tag: "NoSuchElementException"
-  readonly [NoSuchElementExceptionTypeId]: NoSuchElementExceptionTypeId
+  readonly _tag: "NoSuchElementException";
+  readonly [NoSuchElementExceptionTypeId]: NoSuchElementExceptionTypeId;
 }
 
 /**
@@ -399,8 +436,8 @@ export interface NoSuchElementException extends YieldableError {
  * @category Models
  */
 export interface InvalidPubSubCapacityException extends YieldableError {
-  readonly _tag: "InvalidPubSubCapacityException"
-  readonly [InvalidPubSubCapacityExceptionTypeId]: InvalidPubSubCapacityExceptionTypeId
+  readonly _tag: "InvalidPubSubCapacityException";
+  readonly [InvalidPubSubCapacityExceptionTypeId]: InvalidPubSubCapacityExceptionTypeId;
 }
 
 /**
@@ -410,8 +447,8 @@ export interface InvalidPubSubCapacityException extends YieldableError {
  * @category Models
  */
 export interface ExceededCapacityException extends YieldableError {
-  readonly _tag: "ExceededCapacityException"
-  readonly [ExceededCapacityExceptionTypeId]: ExceededCapacityExceptionTypeId
+  readonly _tag: "ExceededCapacityException";
+  readonly [ExceededCapacityExceptionTypeId]: ExceededCapacityExceptionTypeId;
 }
 
 /**
@@ -421,8 +458,8 @@ export interface ExceededCapacityException extends YieldableError {
  * @category Models
  */
 export interface TimeoutException extends YieldableError {
-  readonly _tag: "TimeoutException"
-  readonly [TimeoutExceptionTypeId]: TimeoutExceptionTypeId
+  readonly _tag: "TimeoutException";
+  readonly [TimeoutExceptionTypeId]: TimeoutExceptionTypeId;
 }
 
 /**
@@ -438,9 +475,9 @@ export interface TimeoutException extends YieldableError {
  * @category Models
  */
 export interface UnknownException extends YieldableError {
-  readonly _tag: "UnknownException"
-  readonly [UnknownExceptionTypeId]: UnknownExceptionTypeId
-  readonly error: unknown
+  readonly _tag: "UnknownException";
+  readonly [UnknownExceptionTypeId]: UnknownExceptionTypeId;
+  readonly error: unknown;
 }
 
 /**
@@ -452,8 +489,12 @@ export interface UnknownException extends YieldableError {
  * @since 2.0.0
  * @category Models
  */
-export interface Empty extends Cause.Variance<never>, Equal.Equal, Pipeable, Inspectable {
-  readonly _tag: "Empty"
+export interface Empty
+  extends Cause.Variance<never>,
+    Equal.Equal,
+    Pipeable,
+    Inspectable {
+  readonly _tag: "Empty";
 }
 
 /**
@@ -471,9 +512,13 @@ export interface Empty extends Cause.Variance<never>, Equal.Equal, Pipeable, Ins
  * @since 2.0.0
  * @category Models
  */
-export interface Fail<out E> extends Cause.Variance<E>, Equal.Equal, Pipeable, Inspectable {
-  readonly _tag: "Fail"
-  readonly error: E
+export interface Fail<out E>
+  extends Cause.Variance<E>,
+    Equal.Equal,
+    Pipeable,
+    Inspectable {
+  readonly _tag: "Fail";
+  readonly error: E;
 }
 
 /**
@@ -491,9 +536,13 @@ export interface Fail<out E> extends Cause.Variance<E>, Equal.Equal, Pipeable, I
  * @since 2.0.0
  * @category Models
  */
-export interface Die extends Cause.Variance<never>, Equal.Equal, Pipeable, Inspectable {
-  readonly _tag: "Die"
-  readonly defect: unknown
+export interface Die
+  extends Cause.Variance<never>,
+    Equal.Equal,
+    Pipeable,
+    Inspectable {
+  readonly _tag: "Die";
+  readonly defect: unknown;
 }
 
 /**
@@ -512,9 +561,13 @@ export interface Die extends Cause.Variance<never>, Equal.Equal, Pipeable, Inspe
  * @since 2.0.0
  * @category Models
  */
-export interface Interrupt extends Cause.Variance<never>, Equal.Equal, Pipeable, Inspectable {
-  readonly _tag: "Interrupt"
-  readonly fiberId: FiberId.FiberId
+export interface Interrupt
+  extends Cause.Variance<never>,
+    Equal.Equal,
+    Pipeable,
+    Inspectable {
+  readonly _tag: "Interrupt";
+  readonly fiberId: FiberId.FiberId;
 }
 
 /**
@@ -532,10 +585,14 @@ export interface Interrupt extends Cause.Variance<never>, Equal.Equal, Pipeable,
  * @since 2.0.0
  * @category Models
  */
-export interface Parallel<out E> extends Cause.Variance<E>, Equal.Equal, Pipeable, Inspectable {
-  readonly _tag: "Parallel"
-  readonly left: Cause<E>
-  readonly right: Cause<E>
+export interface Parallel<out E>
+  extends Cause.Variance<E>,
+    Equal.Equal,
+    Pipeable,
+    Inspectable {
+  readonly _tag: "Parallel";
+  readonly left: Cause<E>;
+  readonly right: Cause<E>;
 }
 
 /**
@@ -553,10 +610,14 @@ export interface Parallel<out E> extends Cause.Variance<E>, Equal.Equal, Pipeabl
  * @since 2.0.0
  * @category Models
  */
-export interface Sequential<out E> extends Cause.Variance<E>, Equal.Equal, Pipeable, Inspectable {
-  readonly _tag: "Sequential"
-  readonly left: Cause<E>
-  readonly right: Cause<E>
+export interface Sequential<out E>
+  extends Cause.Variance<E>,
+    Equal.Equal,
+    Pipeable,
+    Inspectable {
+  readonly _tag: "Sequential";
+  readonly left: Cause<E>;
+  readonly right: Cause<E>;
 }
 
 /**
@@ -572,7 +633,7 @@ export interface Sequential<out E> extends Cause.Variance<E>, Equal.Equal, Pipea
  * @since 2.0.0
  * @category Constructors
  */
-export const empty: Cause<never> = internal.empty
+export const empty: Cause<never> = internal.empty;
 
 /**
  * Creates a `Fail` cause from an expected error.
@@ -588,7 +649,7 @@ export const empty: Cause<never> = internal.empty
  * @since 2.0.0
  * @category Constructors
  */
-export const fail: <E>(error: E) => Cause<E> = internal.fail
+export const fail: <E>(error: E) => Cause<E> = internal.fail;
 
 /**
  * Creates a `Die` cause from an unexpected error.
@@ -604,7 +665,7 @@ export const fail: <E>(error: E) => Cause<E> = internal.fail
  * @since 2.0.0
  * @category Constructors
  */
-export const die: (defect: unknown) => Cause<never> = internal.die
+export const die: (defect: unknown) => Cause<never> = internal.die;
 
 /**
  * Creates an `Interrupt` cause from a `FiberId`.
@@ -620,7 +681,8 @@ export const die: (defect: unknown) => Cause<never> = internal.die
  * @since 2.0.0
  * @category Constructors
  */
-export const interrupt: (fiberId: FiberId.FiberId) => Cause<never> = internal.interrupt
+export const interrupt: (fiberId: FiberId.FiberId) => Cause<never> =
+  internal.interrupt;
 
 /**
  * Combines two `Cause`s in parallel.
@@ -636,7 +698,10 @@ export const interrupt: (fiberId: FiberId.FiberId) => Cause<never> = internal.in
  * @since 2.0.0
  * @category Constructors
  */
-export const parallel: <E, E2>(left: Cause<E>, right: Cause<E2>) => Cause<E | E2> = internal.parallel
+export const parallel: <E, E2>(
+  left: Cause<E>,
+  right: Cause<E2>
+) => Cause<E | E2> = internal.parallel;
 
 /**
  * Combines two `Cause`s sequentially.
@@ -652,7 +717,10 @@ export const parallel: <E, E2>(left: Cause<E>, right: Cause<E2>) => Cause<E | E2
  * @since 2.0.0
  * @category Constructors
  */
-export const sequential: <E, E2>(left: Cause<E>, right: Cause<E2>) => Cause<E | E2> = internal.sequential
+export const sequential: <E, E2>(
+  left: Cause<E>,
+  right: Cause<E2>
+) => Cause<E | E2> = internal.sequential;
 
 /**
  * Checks if a value is a `Cause`.
@@ -660,7 +728,7 @@ export const sequential: <E, E2>(left: Cause<E>, right: Cause<E2>) => Cause<E | 
  * @since 2.0.0
  * @category Guards
  */
-export const isCause: (u: unknown) => u is Cause<unknown> = internal.isCause
+export const isCause: (u: unknown) => u is Cause<unknown> = internal.isCause;
 
 /**
  * Checks if a `Cause` is an `Empty` type.
@@ -670,7 +738,8 @@ export const isCause: (u: unknown) => u is Cause<unknown> = internal.isCause
  * @since 2.0.0
  * @category Guards
  */
-export const isEmptyType: <E>(self: Cause<E>) => self is Empty = internal.isEmptyType
+export const isEmptyType: <E>(self: Cause<E>) => self is Empty =
+  internal.isEmptyType;
 
 /**
  * Checks if a `Cause` is a `Fail` type.
@@ -680,7 +749,8 @@ export const isEmptyType: <E>(self: Cause<E>) => self is Empty = internal.isEmpt
  * @since 2.0.0
  * @category Guards
  */
-export const isFailType: <E>(self: Cause<E>) => self is Fail<E> = internal.isFailType
+export const isFailType: <E>(self: Cause<E>) => self is Fail<E> =
+  internal.isFailType;
 
 /**
  * Checks if a `Cause` is a `Die` type.
@@ -690,7 +760,7 @@ export const isFailType: <E>(self: Cause<E>) => self is Fail<E> = internal.isFai
  * @since 2.0.0
  * @category Guards
  */
-export const isDieType: <E>(self: Cause<E>) => self is Die = internal.isDieType
+export const isDieType: <E>(self: Cause<E>) => self is Die = internal.isDieType;
 
 /**
  * Checks if a `Cause` is an `Interrupt` type.
@@ -700,7 +770,8 @@ export const isDieType: <E>(self: Cause<E>) => self is Die = internal.isDieType
  * @since 2.0.0
  * @category Guards
  */
-export const isInterruptType: <E>(self: Cause<E>) => self is Interrupt = internal.isInterruptType
+export const isInterruptType: <E>(self: Cause<E>) => self is Interrupt =
+  internal.isInterruptType;
 
 /**
  * Checks if a `Cause` is a `Sequential` type.
@@ -710,7 +781,8 @@ export const isInterruptType: <E>(self: Cause<E>) => self is Interrupt = interna
  * @since 2.0.0
  * @category Guards
  */
-export const isSequentialType: <E>(self: Cause<E>) => self is Sequential<E> = internal.isSequentialType
+export const isSequentialType: <E>(self: Cause<E>) => self is Sequential<E> =
+  internal.isSequentialType;
 
 /**
  * Checks if a `Cause` is a `Parallel` type.
@@ -720,7 +792,8 @@ export const isSequentialType: <E>(self: Cause<E>) => self is Sequential<E> = in
  * @since 2.0.0
  * @category Guards
  */
-export const isParallelType: <E>(self: Cause<E>) => self is Parallel<E> = internal.isParallelType
+export const isParallelType: <E>(self: Cause<E>) => self is Parallel<E> =
+  internal.isParallelType;
 
 /**
  * Calculates the size of a `Cause`.
@@ -733,7 +806,7 @@ export const isParallelType: <E>(self: Cause<E>) => self is Parallel<E> = intern
  * @since 2.0.0
  * @category Getters
  */
-export const size: <E>(self: Cause<E>) => number = internal.size
+export const size: <E>(self: Cause<E>) => number = internal.size;
 
 /**
  * Checks if a `Cause` is entirely empty.
@@ -747,7 +820,7 @@ export const size: <E>(self: Cause<E>) => number = internal.size
  * @since 2.0.0
  * @category Getters
  */
-export const isEmpty: <E>(self: Cause<E>) => boolean = internal.isEmpty
+export const isEmpty: <E>(self: Cause<E>) => boolean = internal.isEmpty;
 
 /**
  * Checks if a `Cause` contains a failure.
@@ -761,7 +834,7 @@ export const isEmpty: <E>(self: Cause<E>) => boolean = internal.isEmpty
  * @since 2.0.0
  * @category Getters
  */
-export const isFailure: <E>(self: Cause<E>) => boolean = internal.isFailure
+export const isFailure: <E>(self: Cause<E>) => boolean = internal.isFailure;
 
 /**
  * Checks if a `Cause` contains a defect.
@@ -775,7 +848,7 @@ export const isFailure: <E>(self: Cause<E>) => boolean = internal.isFailure
  * @since 2.0.0
  * @category Getters
  */
-export const isDie: <E>(self: Cause<E>) => boolean = internal.isDie
+export const isDie: <E>(self: Cause<E>) => boolean = internal.isDie;
 
 /**
  * Checks if a `Cause` contains an interruption.
@@ -787,7 +860,8 @@ export const isDie: <E>(self: Cause<E>) => boolean = internal.isDie
  * @since 2.0.0
  * @category Getters
  */
-export const isInterrupted: <E>(self: Cause<E>) => boolean = internal.isInterrupted
+export const isInterrupted: <E>(self: Cause<E>) => boolean =
+  internal.isInterrupted;
 
 /**
  * Checks if a `Cause` contains only interruptions.
@@ -801,7 +875,8 @@ export const isInterrupted: <E>(self: Cause<E>) => boolean = internal.isInterrup
  * @since 2.0.0
  * @category Getters
  */
-export const isInterruptedOnly: <E>(self: Cause<E>) => boolean = internal.isInterruptedOnly
+export const isInterruptedOnly: <E>(self: Cause<E>) => boolean =
+  internal.isInterruptedOnly;
 
 /**
  * Extracts all recoverable errors of type `E` from a `Cause`.
@@ -815,7 +890,8 @@ export const isInterruptedOnly: <E>(self: Cause<E>) => boolean = internal.isInte
  * @since 2.0.0
  * @category Getters
  */
-export const failures: <E>(self: Cause<E>) => Chunk.Chunk<E> = internal.failures
+export const failures: <E>(self: Cause<E>) => Chunk.Chunk<E> =
+  internal.failures;
 
 /**
  * Extracts all unrecoverable defects from a `Cause`.
@@ -829,7 +905,8 @@ export const failures: <E>(self: Cause<E>) => Chunk.Chunk<E> = internal.failures
  * @since 2.0.0
  * @category Getters
  */
-export const defects: <E>(self: Cause<E>) => Chunk.Chunk<unknown> = internal.defects
+export const defects: <E>(self: Cause<E>) => Chunk.Chunk<unknown> =
+  internal.defects;
 
 /**
  * Collects all `FiberId`s responsible for interrupting a fiber.
@@ -843,7 +920,9 @@ export const defects: <E>(self: Cause<E>) => Chunk.Chunk<unknown> = internal.def
  * @since 2.0.0
  * @category Getters
  */
-export const interruptors: <E>(self: Cause<E>) => HashSet.HashSet<FiberId.FiberId> = internal.interruptors
+export const interruptors: <E>(
+  self: Cause<E>
+) => HashSet.HashSet<FiberId.FiberId> = internal.interruptors;
 
 /**
  * Retrieves the first `Fail` error in a `Cause`, if present.
@@ -857,7 +936,8 @@ export const interruptors: <E>(self: Cause<E>) => HashSet.HashSet<FiberId.FiberI
  * @since 2.0.0
  * @category Getters
  */
-export const failureOption: <E>(self: Cause<E>) => Option.Option<E> = internal.failureOption
+export const failureOption: <E>(self: Cause<E>) => Option.Option<E> =
+  internal.failureOption;
 
 /**
  * Splits a `Cause` into either its first `Fail` error or the rest of the cause
@@ -872,7 +952,9 @@ export const failureOption: <E>(self: Cause<E>) => Option.Option<E> = internal.f
  * @since 2.0.0
  * @category Getters
  */
-export const failureOrCause: <E>(self: Cause<E>) => Either.Either<Cause<never>, E> = internal.failureOrCause
+export const failureOrCause: <E>(
+  self: Cause<E>
+) => Either.Either<Cause<never>, E> = internal.failureOrCause;
 
 /**
  * Strips out failures with an error of `None` from a `Cause<Option<E>>`.
@@ -887,7 +969,9 @@ export const failureOrCause: <E>(self: Cause<E>) => Either.Either<Cause<never>, 
  * @since 2.0.0
  * @category Getters
  */
-export const flipCauseOption: <E>(self: Cause<Option.Option<E>>) => Option.Option<Cause<E>> = internal.flipCauseOption
+export const flipCauseOption: <E>(
+  self: Cause<Option.Option<E>>
+) => Option.Option<Cause<E>> = internal.flipCauseOption;
 
 /**
  * Retrieves the first `Die` defect in a `Cause`, if present.
@@ -901,7 +985,8 @@ export const flipCauseOption: <E>(self: Cause<Option.Option<E>>) => Option.Optio
  * @since 2.0.0
  * @category Getters
  */
-export const dieOption: <E>(self: Cause<E>) => Option.Option<unknown> = internal.dieOption
+export const dieOption: <E>(self: Cause<E>) => Option.Option<unknown> =
+  internal.dieOption;
 
 /**
  * Retrieves the first `Interrupt` in a `Cause`, if present.
@@ -915,7 +1000,9 @@ export const dieOption: <E>(self: Cause<E>) => Option.Option<unknown> = internal
  * @since 2.0.0
  * @category Getters
  */
-export const interruptOption: <E>(self: Cause<E>) => Option.Option<FiberId.FiberId> = internal.interruptOption
+export const interruptOption: <E>(
+  self: Cause<E>
+) => Option.Option<FiberId.FiberId> = internal.interruptOption;
 
 /**
  * Removes all `Fail` and `Interrupt` nodes, keeping only defects (`Die`) in a
@@ -931,7 +1018,8 @@ export const interruptOption: <E>(self: Cause<E>) => Option.Option<FiberId.Fiber
  * @since 2.0.0
  * @category Getters
  */
-export const keepDefects: <E>(self: Cause<E>) => Option.Option<Cause<never>> = internal.keepDefects
+export const keepDefects: <E>(self: Cause<E>) => Option.Option<Cause<never>> =
+  internal.keepDefects;
 
 // TODO(4.0): remove? what's the point of this API?
 /**
@@ -946,7 +1034,8 @@ export const keepDefects: <E>(self: Cause<E>) => Option.Option<Cause<never>> = i
  * @since 2.0.0
  * @category Getters
  */
-export const linearize: <E>(self: Cause<E>) => HashSet.HashSet<Cause<E>> = internal.linearize
+export const linearize: <E>(self: Cause<E>) => HashSet.HashSet<Cause<E>> =
+  internal.linearize;
 
 /**
  * Removes `Fail` and `Interrupt` nodes from a `Cause`, keeping only defects
@@ -961,7 +1050,8 @@ export const linearize: <E>(self: Cause<E>) => HashSet.HashSet<Cause<E>> = inter
  * @since 2.0.0
  * @category Getters
  */
-export const stripFailures: <E>(self: Cause<E>) => Cause<never> = internal.stripFailures
+export const stripFailures: <E>(self: Cause<E>) => Cause<never> =
+  internal.stripFailures;
 
 /**
  * Removes matching defects from a `Cause` using a partial function, returning
@@ -978,9 +1068,14 @@ export const stripFailures: <E>(self: Cause<E>) => Cause<never> = internal.strip
  * @category Getters
  */
 export const stripSomeDefects: {
-  (pf: (defect: unknown) => Option.Option<unknown>): <E>(self: Cause<E>) => Option.Option<Cause<E>>
-  <E>(self: Cause<E>, pf: (defect: unknown) => Option.Option<unknown>): Option.Option<Cause<E>>
-} = internal.stripSomeDefects
+  (
+    pf: (defect: unknown) => Option.Option<unknown>
+  ): <E>(self: Cause<E>) => Option.Option<Cause<E>>;
+  <E>(
+    self: Cause<E>,
+    pf: (defect: unknown) => Option.Option<unknown>
+  ): Option.Option<Cause<E>>;
+} = internal.stripSomeDefects;
 
 /**
  * Replaces any errors in a `Cause` with a provided constant error.
@@ -997,9 +1092,9 @@ export const stripSomeDefects: {
  * @category Mapping
  */
 export const as: {
-  <E2>(error: E2): <E>(self: Cause<E>) => Cause<E2>
-  <E, E2>(self: Cause<E>, error: E2): Cause<E2>
-} = internal.as
+  <E2>(error: E2): <E>(self: Cause<E>) => Cause<E2>;
+  <E, E2>(self: Cause<E>, error: E2): Cause<E2>;
+} = internal.as;
 
 /**
  * Transforms the errors in a `Cause` using a user-provided function.
@@ -1016,9 +1111,9 @@ export const as: {
  * @category Mapping
  */
 export const map: {
-  <E, E2>(f: (e: E) => E2): (self: Cause<E>) => Cause<E2>
-  <E, E2>(self: Cause<E>, f: (e: E) => E2): Cause<E2>
-} = internal.map
+  <E, E2>(f: (e: E) => E2): (self: Cause<E>) => Cause<E2>;
+  <E, E2>(self: Cause<E>, f: (e: E) => E2): Cause<E2>;
+} = internal.map;
 
 /**
  * Transforms errors in a `Cause` into new causes.
@@ -1035,9 +1130,9 @@ export const map: {
  * @category Sequencing
  */
 export const flatMap: {
-  <E, E2>(f: (e: E) => Cause<E2>): (self: Cause<E>) => Cause<E2>
-  <E, E2>(self: Cause<E>, f: (e: E) => Cause<E2>): Cause<E2>
-} = internal.flatMap
+  <E, E2>(f: (e: E) => Cause<E2>): (self: Cause<E>) => Cause<E2>;
+  <E, E2>(self: Cause<E>, f: (e: E) => Cause<E2>): Cause<E2>;
+} = internal.flatMap;
 
 /**
  * Sequences two `Cause`s. The second `Cause` can be dependent on the result of
@@ -1047,11 +1142,11 @@ export const flatMap: {
  * @category Sequencing
  */
 export const andThen: {
-  <E, E2>(f: (e: E) => Cause<E2>): (self: Cause<E>) => Cause<E2>
-  <E2>(f: Cause<E2>): <E>(self: Cause<E>) => Cause<E2>
-  <E, E2>(self: Cause<E>, f: (e: E) => Cause<E2>): Cause<E2>
-  <E, E2>(self: Cause<E>, f: Cause<E2>): Cause<E2>
-} = internal.andThen
+  <E, E2>(f: (e: E) => Cause<E2>): (self: Cause<E>) => Cause<E2>;
+  <E2>(f: Cause<E2>): <E>(self: Cause<E>) => Cause<E2>;
+  <E, E2>(self: Cause<E>, f: (e: E) => Cause<E2>): Cause<E2>;
+  <E, E2>(self: Cause<E>, f: Cause<E2>): Cause<E2>;
+} = internal.andThen;
 
 /**
  * Flattens a nested `Cause` structure.
@@ -1067,7 +1162,7 @@ export const andThen: {
  * @since 2.0.0
  * @category Sequencing
  */
-export const flatten: <E>(self: Cause<Cause<E>>) => Cause<E> = internal.flatten
+export const flatten: <E>(self: Cause<Cause<E>>) => Cause<E> = internal.flatten;
 
 /**
  * Checks if the current `Cause` contains or is equal to another `Cause`.
@@ -1082,9 +1177,9 @@ export const flatten: <E>(self: Cause<Cause<E>>) => Cause<E> = internal.flatten
  * @category Elements
  */
 export const contains: {
-  <E2>(that: Cause<E2>): <E>(self: Cause<E>) => boolean
-  <E, E2>(self: Cause<E>, that: Cause<E2>): boolean
-} = internal.contains
+  <E2>(that: Cause<E2>): <E>(self: Cause<E>) => boolean;
+  <E, E2>(self: Cause<E>, that: Cause<E2>): boolean;
+} = internal.contains;
 
 /**
  * Extracts the most "important" defect from a `Cause`.
@@ -1116,7 +1211,7 @@ export const contains: {
  * @since 2.0.0
  * @category Destructors
  */
-export const squash: <E>(self: Cause<E>) => unknown = core.causeSquash
+export const squash: <E>(self: Cause<E>) => unknown = core.causeSquash;
 
 /**
  * Extracts the most "important" defect from a `Cause`, transforming failures
@@ -1144,9 +1239,9 @@ export const squash: <E>(self: Cause<E>) => unknown = core.causeSquash
  * @category Destructors
  */
 export const squashWith: {
-  <E>(f: (error: E) => unknown): (self: Cause<E>) => unknown
-  <E>(self: Cause<E>, f: (error: E) => unknown): unknown
-} = core.causeSquashWith
+  <E>(f: (error: E) => unknown): (self: Cause<E>) => unknown;
+  <E>(self: Cause<E>, f: (error: E) => unknown): unknown;
+} = core.causeSquashWith;
 
 /**
  * Searches a `Cause` using a partial function to extract information.
@@ -1170,9 +1265,14 @@ export const squashWith: {
  * @category Elements
  */
 export const find: {
-  <E, Z>(pf: (cause: Cause<E>) => Option.Option<Z>): (self: Cause<E>) => Option.Option<Z>
-  <E, Z>(self: Cause<E>, pf: (cause: Cause<E>) => Option.Option<Z>): Option.Option<Z>
-} = internal.find
+  <E, Z>(
+    pf: (cause: Cause<E>) => Option.Option<Z>
+  ): (self: Cause<E>) => Option.Option<Z>;
+  <E, Z>(
+    self: Cause<E>,
+    pf: (cause: Cause<E>) => Option.Option<Z>
+  ): Option.Option<Z>;
+} = internal.find;
 
 /**
  * Preserves parts of a `Cause` that match a given predicate.
@@ -1196,11 +1296,16 @@ export const find: {
  * @category Filtering
  */
 export const filter: {
-  <E, EB extends E>(refinement: Refinement<Cause<NoInfer<E>>, Cause<EB>>): (self: Cause<E>) => Cause<EB>
-  <E>(predicate: Predicate<Cause<NoInfer<E>>>): (self: Cause<E>) => Cause<E>
-  <E, EB extends E>(self: Cause<E>, refinement: Refinement<Cause<E>, Cause<EB>>): Cause<EB>
-  <E>(self: Cause<E>, predicate: Predicate<Cause<E>>): Cause<E>
-} = internal.filter
+  <E, EB extends E>(
+    refinement: Refinement<Cause<NoInfer<E>>, Cause<EB>>
+  ): (self: Cause<E>) => Cause<EB>;
+  <E>(predicate: Predicate<Cause<NoInfer<E>>>): (self: Cause<E>) => Cause<E>;
+  <E, EB extends E>(
+    self: Cause<E>,
+    refinement: Refinement<Cause<E>, Cause<EB>>
+  ): Cause<EB>;
+  <E>(self: Cause<E>, predicate: Predicate<Cause<E>>): Cause<E>;
+} = internal.filter;
 
 /**
  * Transforms a `Cause` into a single value using custom handlers for each
@@ -1230,28 +1335,26 @@ export const filter: {
  * @category Matching
  */
 export const match: {
-  <Z, E>(
-    options: {
-      readonly onEmpty: Z
-      readonly onFail: (error: E) => Z
-      readonly onDie: (defect: unknown) => Z
-      readonly onInterrupt: (fiberId: FiberId.FiberId) => Z
-      readonly onSequential: (left: Z, right: Z) => Z
-      readonly onParallel: (left: Z, right: Z) => Z
-    }
-  ): (self: Cause<E>) => Z
+  <Z, E>(options: {
+    readonly onEmpty: Z;
+    readonly onFail: (error: E) => Z;
+    readonly onDie: (defect: unknown) => Z;
+    readonly onInterrupt: (fiberId: FiberId.FiberId) => Z;
+    readonly onSequential: (left: Z, right: Z) => Z;
+    readonly onParallel: (left: Z, right: Z) => Z;
+  }): (self: Cause<E>) => Z;
   <Z, E>(
     self: Cause<E>,
     options: {
-      readonly onEmpty: Z
-      readonly onFail: (error: E) => Z
-      readonly onDie: (defect: unknown) => Z
-      readonly onInterrupt: (fiberId: FiberId.FiberId) => Z
-      readonly onSequential: (left: Z, right: Z) => Z
-      readonly onParallel: (left: Z, right: Z) => Z
+      readonly onEmpty: Z;
+      readonly onFail: (error: E) => Z;
+      readonly onDie: (defect: unknown) => Z;
+      readonly onInterrupt: (fiberId: FiberId.FiberId) => Z;
+      readonly onSequential: (left: Z, right: Z) => Z;
+      readonly onParallel: (left: Z, right: Z) => Z;
     }
-  ): Z
-} = internal.match
+  ): Z;
+} = internal.match;
 
 /**
  * Combines all parts of a `Cause` into a single value by starting with an
@@ -1279,9 +1382,16 @@ export const match: {
  * @category Reducing
  */
 export const reduce: {
-  <Z, E>(zero: Z, pf: (accumulator: Z, cause: Cause<E>) => Option.Option<Z>): (self: Cause<E>) => Z
-  <Z, E>(self: Cause<E>, zero: Z, pf: (accumulator: Z, cause: Cause<E>) => Option.Option<Z>): Z
-} = internal.reduce
+  <Z, E>(
+    zero: Z,
+    pf: (accumulator: Z, cause: Cause<E>) => Option.Option<Z>
+  ): (self: Cause<E>) => Z;
+  <Z, E>(
+    self: Cause<E>,
+    zero: Z,
+    pf: (accumulator: Z, cause: Cause<E>) => Option.Option<Z>
+  ): Z;
+} = internal.reduce;
 
 /**
  * Combines all parts of a `Cause` into a single value using a custom reducer
@@ -1307,9 +1417,9 @@ export const reduce: {
  * @category Reducing
  */
 export const reduceWithContext: {
-  <C, E, Z>(context: C, reducer: CauseReducer<C, E, Z>): (self: Cause<E>) => Z
-  <C, E, Z>(self: Cause<E>, context: C, reducer: CauseReducer<C, E, Z>): Z
-} = internal.reduceWithContext
+  <C, E, Z>(context: C, reducer: CauseReducer<C, E, Z>): (self: Cause<E>) => Z;
+  <C, E, Z>(self: Cause<E>, context: C, reducer: CauseReducer<C, E, Z>): Z;
+} = internal.reduceWithContext;
 
 /**
  * Creates an error that indicates a `Fiber` was interrupted.
@@ -1325,7 +1435,9 @@ export const reduceWithContext: {
  * @since 2.0.0
  * @category Errors
  */
-export const InterruptedException: new(message?: string | undefined) => InterruptedException = core.InterruptedException
+export const InterruptedException: new (
+  message?: string | undefined
+) => InterruptedException = core.InterruptedException;
 
 /**
  * Checks if a given unknown value is an `InterruptedException`.
@@ -1333,7 +1445,8 @@ export const InterruptedException: new(message?: string | undefined) => Interrup
  * @since 2.0.0
  * @category Guards
  */
-export const isInterruptedException: (u: unknown) => u is InterruptedException = core.isInterruptedException
+export const isInterruptedException: (u: unknown) => u is InterruptedException =
+  core.isInterruptedException;
 
 /**
  * Creates an error indicating an invalid method argument.
@@ -1347,8 +1460,9 @@ export const isInterruptedException: (u: unknown) => u is InterruptedException =
  * @since 2.0.0
  * @category Errors
  */
-export const IllegalArgumentException: new(message?: string | undefined) => IllegalArgumentException =
-  core.IllegalArgumentException
+export const IllegalArgumentException: new (
+  message?: string | undefined
+) => IllegalArgumentException = core.IllegalArgumentException;
 
 /**
  * Checks if a given unknown value is an `IllegalArgumentException`.
@@ -1356,7 +1470,9 @@ export const IllegalArgumentException: new(message?: string | undefined) => Ille
  * @since 2.0.0
  * @category Guards
  */
-export const isIllegalArgumentException: (u: unknown) => u is IllegalArgumentException = core.isIllegalArgumentException
+export const isIllegalArgumentException: (
+  u: unknown
+) => u is IllegalArgumentException = core.isIllegalArgumentException;
 
 /**
  * Creates an error indicating a missing element.
@@ -1369,8 +1485,9 @@ export const isIllegalArgumentException: (u: unknown) => u is IllegalArgumentExc
  * @since 2.0.0
  * @category Errors
  */
-export const NoSuchElementException: new(message?: string | undefined) => NoSuchElementException =
-  core.NoSuchElementException
+export const NoSuchElementException: new (
+  message?: string | undefined
+) => NoSuchElementException = core.NoSuchElementException;
 
 /**
  * Checks if a given unknown value is a `NoSuchElementException`.
@@ -1378,7 +1495,9 @@ export const NoSuchElementException: new(message?: string | undefined) => NoSuch
  * @since 2.0.0
  * @category Guards
  */
-export const isNoSuchElementException: (u: unknown) => u is NoSuchElementException = core.isNoSuchElementException
+export const isNoSuchElementException: (
+  u: unknown
+) => u is NoSuchElementException = core.isNoSuchElementException;
 
 /**
  * Creates an error for general runtime errors.
@@ -1393,7 +1512,9 @@ export const isNoSuchElementException: (u: unknown) => u is NoSuchElementExcepti
  * @since 2.0.0
  * @category Errors
  */
-export const RuntimeException: new(message?: string | undefined) => RuntimeException = core.RuntimeException
+export const RuntimeException: new (
+  message?: string | undefined
+) => RuntimeException = core.RuntimeException;
 
 /**
  * Checks if a given unknown value is a `RuntimeException`.
@@ -1401,7 +1522,8 @@ export const RuntimeException: new(message?: string | undefined) => RuntimeExcep
  * @since 2.0.0
  * @category Guards
  */
-export const isRuntimeException: (u: unknown) => u is RuntimeException = core.isRuntimeException
+export const isRuntimeException: (u: unknown) => u is RuntimeException =
+  core.isRuntimeException;
 
 /**
  * Creates an error for operations that exceed their expected time.
@@ -1415,7 +1537,9 @@ export const isRuntimeException: (u: unknown) => u is RuntimeException = core.is
  * @since 2.0.0
  * @category Errors
  */
-export const TimeoutException: new(message?: string | undefined) => TimeoutException = core.TimeoutException
+export const TimeoutException: new (
+  message?: string | undefined
+) => TimeoutException = core.TimeoutException;
 
 /**
  * Checks if a given unknown value is a `TimeoutException`.
@@ -1423,7 +1547,8 @@ export const TimeoutException: new(message?: string | undefined) => TimeoutExcep
  * @since 3.15.0
  * @category Guards
  */
-export const isTimeoutException: (u: unknown) => u is TimeoutException = core.isTimeoutException
+export const isTimeoutException: (u: unknown) => u is TimeoutException =
+  core.isTimeoutException;
 
 /**
  * Creates an instance of `UnknownException`, an error object used to handle
@@ -1456,8 +1581,10 @@ export const isTimeoutException: (u: unknown) => u is TimeoutException = core.is
  * @since 2.0.0
  * @category Errors
  */
-export const UnknownException: new(error: unknown, message?: string | undefined) => UnknownException =
-  core.UnknownException
+export const UnknownException: new (
+  error: unknown,
+  message?: string | undefined
+) => UnknownException = core.UnknownException;
 
 /**
  * Checks if a given unknown value is an `UnknownException`.
@@ -1465,7 +1592,8 @@ export const UnknownException: new(error: unknown, message?: string | undefined)
  * @since 2.0.0
  * @category Guards
  */
-export const isUnknownException: (u: unknown) => u is UnknownException = core.isUnknownException
+export const isUnknownException: (u: unknown) => u is UnknownException =
+  core.isUnknownException;
 
 /**
  * Creates an error indicating resource capacity has been exceeded.
@@ -1480,8 +1608,9 @@ export const isUnknownException: (u: unknown) => u is UnknownException = core.is
  * @since 3.5.0
  * @category Errors
  */
-export const ExceededCapacityException: new(message?: string | undefined) => ExceededCapacityException =
-  core.ExceededCapacityException
+export const ExceededCapacityException: new (
+  message?: string | undefined
+) => ExceededCapacityException = core.ExceededCapacityException;
 
 /**
  * Checks if a given unknown value is an `ExceededCapacityException`.
@@ -1489,8 +1618,9 @@ export const ExceededCapacityException: new(message?: string | undefined) => Exc
  * @since 3.5.0
  * @category Guards
  */
-export const isExceededCapacityException: (u: unknown) => u is ExceededCapacityException =
-  core.isExceededCapacityException
+export const isExceededCapacityException: (
+  u: unknown
+) => u is ExceededCapacityException = core.isExceededCapacityException;
 
 /**
  * Converts a `Cause` into a human-readable string.
@@ -1510,9 +1640,12 @@ export const isExceededCapacityException: (u: unknown) => u is ExceededCapacityE
  * @since 2.0.0
  * @category Formatting
  */
-export const pretty: <E>(cause: Cause<E>, options?: {
-  readonly renderErrorCause?: boolean | undefined
-}) => string = internal.pretty
+export const pretty: <E>(
+  cause: Cause<E>,
+  options?: {
+    readonly renderErrorCause?: boolean | undefined;
+  }
+) => string = internal.pretty;
 
 /**
  * A shape for prettified errors, optionally including a source span.
@@ -1521,7 +1654,7 @@ export const pretty: <E>(cause: Cause<E>, options?: {
  * @category Models
  */
 export interface PrettyError extends Error {
-  readonly span: Span | undefined
+  readonly span: Span | undefined;
 }
 
 /**
@@ -1536,7 +1669,8 @@ export interface PrettyError extends Error {
  * @since 3.2.0
  * @category Formatting
  */
-export const prettyErrors: <E>(cause: Cause<E>) => Array<PrettyError> = internal.prettyErrors
+export const prettyErrors: <E>(cause: Cause<E>) => Array<PrettyError> =
+  internal.prettyErrors;
 
 /**
  * Retrieves the original, unproxied error instance from an error object.
@@ -1552,4 +1686,4 @@ export const prettyErrors: <E>(cause: Cause<E>) => Array<PrettyError> = internal
  * @since 2.0.0
  * @category Errors
  */
-export const originalError: <E>(obj: E) => E = core.originalInstance
+export const originalError: <E>(obj: E) => E = core.originalInstance;

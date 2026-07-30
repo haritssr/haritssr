@@ -4,4 +4,4 @@
 
 /** @internal */
 export const getBugErrorMessage = (message: string) =>
-  `BUG: ${message} - please report an issue at https://github.com/Effect-TS/effect/issues`
+  `BUG: ${message} - please report an issue at https://github.com/Effect-TS/effect/issues`;

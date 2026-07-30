@@ -1,7 +1,9 @@
-import * as KeyValueStore from "@effect/platform/KeyValueStore"
+import * as KeyValueStore from "@effect/platform/KeyValueStore";
 
 /** @internal  */
-export const layerSessionStorage = KeyValueStore.layerStorage(() => sessionStorage)
+export const layerSessionStorage = KeyValueStore.layerStorage(
+  () => sessionStorage
+);
 
 /** @internal  */
-export const layerLocalStorage = KeyValueStore.layerStorage(() => localStorage)
+export const layerLocalStorage = KeyValueStore.layerStorage(() => localStorage);

@@ -158,7 +158,10 @@ export async function generateMetadata({
 }
 
 // Experiment component mapping
-const experimentComponents: Record<string, Record<string, React.ComponentType>> = {
+const experimentComponents: Record<
+  string,
+  Record<string, React.ComponentType>
+> = {
   browser: {
     clock: Clock,
     "custom-scroll": CustomScroll,
@@ -296,7 +299,11 @@ const experimentComponents: Record<string, Record<string, React.ComponentType>> 
   },
 };
 
-export default async function ExperimentPage({ params }: { params: Promise<{ domain: string; experiment: string }> }) {
+export default async function ExperimentPage({
+  params,
+}: {
+  params: Promise<{ domain: string; experiment: string }>;
+}) {
   const { domain, experiment } = await params;
 
   const domainExperiments = experimentComponents[domain];

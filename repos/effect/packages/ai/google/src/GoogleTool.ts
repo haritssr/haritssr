@@ -1,8 +1,8 @@
 /**
  * @since 1.0.0
  */
-import * as Tool from "@effect/ai/Tool"
-import * as Generated from "./Generated.js"
+import * as Tool from "@effect/ai/Tool";
+import * as Generated from "./Generated.js";
 
 /**
  * @since 1.0.0
@@ -14,8 +14,8 @@ export const CodeExecution = Tool.providerDefined({
   providerName: "code_execution",
   args: {},
   parameters: Generated.ExecutableCode.fields,
-  success: Generated.CodeExecutionResult
-})
+  success: Generated.CodeExecutionResult,
+});
 
 /**
  * @since 1.0.0
@@ -25,8 +25,8 @@ export const GoogleSearch = Tool.providerDefined({
   id: "google.google_search",
   toolkitName: "GoogleSearch",
   providerName: "google_search",
-  args: {}
-})
+  args: {},
+});
 
 /**
  * Gemini 1.5 support a legacy tool named `google_search_retrieval`. This tool
@@ -45,8 +45,8 @@ export const GoogleSearchRetrieval = Tool.providerDefined({
   id: "google.google_search_retrieval",
   toolkitName: "GoogleSearchRetrieval",
   providerName: "google_search_retrieval",
-  args: Generated.DynamicRetrievalConfig.fields
-})
+  args: Generated.DynamicRetrievalConfig.fields,
+});
 
 /**
  * @since 1.0.0
@@ -56,5 +56,5 @@ export const UrlContext = Tool.providerDefined({
   id: "google.url_context",
   toolkitName: "GoogleUrlContext",
   providerName: "url_context",
-  args: {}
-})
+  args: {},
+});

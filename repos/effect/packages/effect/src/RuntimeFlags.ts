@@ -2,11 +2,11 @@
  * @since 2.0.0
  */
 
-import type * as Differ from "./Differ.js"
-import * as circular from "./internal/layer/circular.js"
-import * as internal from "./internal/runtimeFlags.js"
-import type * as Layer from "./Layer.js"
-import type * as RuntimeFlagsPatch from "./RuntimeFlagsPatch.js"
+import type * as Differ from "./Differ.js";
+import * as circular from "./internal/layer/circular.js";
+import * as internal from "./internal/runtimeFlags.js";
+import type * as Layer from "./Layer.js";
+import type * as RuntimeFlagsPatch from "./RuntimeFlagsPatch.js";
 
 /**
  * Represents a set of `RuntimeFlag`s. `RuntimeFlag`s affect the operation of
@@ -17,8 +17,8 @@ import type * as RuntimeFlagsPatch from "./RuntimeFlagsPatch.js"
  * @category models
  */
 export type RuntimeFlags = number & {
-  readonly RuntimeFlags: unique symbol
-}
+  readonly RuntimeFlags: unique symbol;
+};
 
 /**
  * Represents a flag that can be set to enable or disable a particular feature
@@ -28,8 +28,8 @@ export type RuntimeFlags = number & {
  * @category models
  */
 export type RuntimeFlag = number & {
-  readonly RuntimeFlag: unique symbol
-}
+  readonly RuntimeFlag: unique symbol;
+};
 
 /**
  * No runtime flags.
@@ -37,7 +37,7 @@ export type RuntimeFlag = number & {
  * @since 2.0.0
  * @category constructors
  */
-export const None: RuntimeFlag = internal.None
+export const None: RuntimeFlag = internal.None;
 
 /**
  * The interruption flag determines whether or not the Effect runtime system will
@@ -46,7 +46,7 @@ export const None: RuntimeFlag = internal.None
  * @since 2.0.0
  * @category constructors
  */
-export const Interruption: RuntimeFlag = internal.Interruption
+export const Interruption: RuntimeFlag = internal.Interruption;
 
 /**
  * The op supervision flag determines whether or not the Effect runtime system
@@ -57,7 +57,7 @@ export const Interruption: RuntimeFlag = internal.Interruption
  * @since 2.0.0
  * @category constructors
  */
-export const OpSupervision: RuntimeFlag = internal.OpSupervision
+export const OpSupervision: RuntimeFlag = internal.OpSupervision;
 
 /**
  * The runtime metrics flag determines whether or not the Effect runtime system
@@ -69,7 +69,7 @@ export const OpSupervision: RuntimeFlag = internal.OpSupervision
  * @since 2.0.0
  * @category constructors
  */
-export const RuntimeMetrics: RuntimeFlag = internal.RuntimeMetrics
+export const RuntimeMetrics: RuntimeFlag = internal.RuntimeMetrics;
 
 /**
  * The wind down flag determines whether the Effect runtime system will execute
@@ -80,7 +80,7 @@ export const RuntimeMetrics: RuntimeFlag = internal.RuntimeMetrics
  * @since 2.0.0
  * @category constructors
  */
-export const WindDown: RuntimeFlag = internal.WindDown
+export const WindDown: RuntimeFlag = internal.WindDown;
 
 /**
  * The cooperative yielding flag determines whether the Effect runtime will
@@ -89,7 +89,7 @@ export const WindDown: RuntimeFlag = internal.WindDown
  * @since 2.0.0
  * @category constructors
  */
-export const CooperativeYielding: RuntimeFlag = internal.CooperativeYielding
+export const CooperativeYielding: RuntimeFlag = internal.CooperativeYielding;
 
 /**
  * Returns `true` if the `CooperativeYielding` `RuntimeFlag` is enabled, `false`
@@ -98,7 +98,8 @@ export const CooperativeYielding: RuntimeFlag = internal.CooperativeYielding
  * @since 2.0.0
  * @category getters
  */
-export const cooperativeYielding: (self: RuntimeFlags) => boolean = internal.cooperativeYielding
+export const cooperativeYielding: (self: RuntimeFlags) => boolean =
+  internal.cooperativeYielding;
 
 /**
  * Creates a `RuntimeFlagsPatch` which describes the difference between `self`
@@ -108,9 +109,11 @@ export const cooperativeYielding: (self: RuntimeFlags) => boolean = internal.coo
  * @category diffing
  */
 export const diff: {
-  (that: RuntimeFlags): (self: RuntimeFlags) => RuntimeFlagsPatch.RuntimeFlagsPatch
-  (self: RuntimeFlags, that: RuntimeFlags): RuntimeFlagsPatch.RuntimeFlagsPatch
-} = internal.diff
+  (
+    that: RuntimeFlags
+  ): (self: RuntimeFlags) => RuntimeFlagsPatch.RuntimeFlagsPatch;
+  (self: RuntimeFlags, that: RuntimeFlags): RuntimeFlagsPatch.RuntimeFlagsPatch;
+} = internal.diff;
 
 /**
  * Constructs a differ that knows how to diff `RuntimeFlags` values.
@@ -118,7 +121,10 @@ export const diff: {
  * @since 2.0.0
  * @category utils
  */
-export const differ: Differ.Differ<RuntimeFlags, RuntimeFlagsPatch.RuntimeFlagsPatch> = internal.differ
+export const differ: Differ.Differ<
+  RuntimeFlags,
+  RuntimeFlagsPatch.RuntimeFlagsPatch
+> = internal.differ;
 
 /**
  * Disables the specified `RuntimeFlag`.
@@ -127,9 +133,9 @@ export const differ: Differ.Differ<RuntimeFlags, RuntimeFlagsPatch.RuntimeFlagsP
  * @category utils
  */
 export const disable: {
-  (flag: RuntimeFlag): (self: RuntimeFlags) => RuntimeFlags
-  (self: RuntimeFlags, flag: RuntimeFlag): RuntimeFlags
-} = internal.disable
+  (flag: RuntimeFlag): (self: RuntimeFlags) => RuntimeFlags;
+  (self: RuntimeFlags, flag: RuntimeFlag): RuntimeFlags;
+} = internal.disable;
 
 /**
  * Disables all of the `RuntimeFlag`s in the specified set of `RuntimeFlags`.
@@ -138,39 +144,43 @@ export const disable: {
  * @category utils
  */
 export const disableAll: {
-  (flags: RuntimeFlags): (self: RuntimeFlags) => RuntimeFlags
-  (self: RuntimeFlags, flags: RuntimeFlags): RuntimeFlags
-} = internal.disableAll
+  (flags: RuntimeFlags): (self: RuntimeFlags) => RuntimeFlags;
+  (self: RuntimeFlags, flags: RuntimeFlags): RuntimeFlags;
+} = internal.disableAll;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const disableCooperativeYielding: Layer.Layer<never> = circular.disableCooperativeYielding
+export const disableCooperativeYielding: Layer.Layer<never> =
+  circular.disableCooperativeYielding;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const disableInterruption: Layer.Layer<never> = circular.disableInterruption
+export const disableInterruption: Layer.Layer<never> =
+  circular.disableInterruption;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const disableOpSupervision: Layer.Layer<never> = circular.disableOpSupervision
+export const disableOpSupervision: Layer.Layer<never> =
+  circular.disableOpSupervision;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const disableRuntimeMetrics: Layer.Layer<never> = circular.disableRuntimeMetrics
+export const disableRuntimeMetrics: Layer.Layer<never> =
+  circular.disableRuntimeMetrics;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const disableWindDown: Layer.Layer<never> = circular.disableWindDown
+export const disableWindDown: Layer.Layer<never> = circular.disableWindDown;
 
 /**
  * Enables the specified `RuntimeFlag`.
@@ -179,9 +189,9 @@ export const disableWindDown: Layer.Layer<never> = circular.disableWindDown
  * @category utils
  */
 export const enable: {
-  (flag: RuntimeFlag): (self: RuntimeFlags) => RuntimeFlags
-  (self: RuntimeFlags, flag: RuntimeFlag): RuntimeFlags
-} = internal.enable
+  (flag: RuntimeFlag): (self: RuntimeFlags) => RuntimeFlags;
+  (self: RuntimeFlags, flag: RuntimeFlag): RuntimeFlags;
+} = internal.enable;
 
 /**
  * Enables all of the `RuntimeFlag`s in the specified set of `RuntimeFlags`.
@@ -190,39 +200,43 @@ export const enable: {
  * @category utils
  */
 export const enableAll: {
-  (flags: RuntimeFlags): (self: RuntimeFlags) => RuntimeFlags
-  (self: RuntimeFlags, flags: RuntimeFlags): RuntimeFlags
-} = internal.enableAll
+  (flags: RuntimeFlags): (self: RuntimeFlags) => RuntimeFlags;
+  (self: RuntimeFlags, flags: RuntimeFlags): RuntimeFlags;
+} = internal.enableAll;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const enableCooperativeYielding: Layer.Layer<never> = circular.enableCooperativeYielding
+export const enableCooperativeYielding: Layer.Layer<never> =
+  circular.enableCooperativeYielding;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const enableInterruption: Layer.Layer<never> = circular.enableInterruption
+export const enableInterruption: Layer.Layer<never> =
+  circular.enableInterruption;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const enableOpSupervision: Layer.Layer<never> = circular.enableOpSupervision
+export const enableOpSupervision: Layer.Layer<never> =
+  circular.enableOpSupervision;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const enableRuntimeMetrics: Layer.Layer<never> = circular.enableRuntimeMetrics
+export const enableRuntimeMetrics: Layer.Layer<never> =
+  circular.enableRuntimeMetrics;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const enableWindDown: Layer.Layer<never> = circular.enableWindDown
+export const enableWindDown: Layer.Layer<never> = circular.enableWindDown;
 
 /**
  * Returns true only if the `Interruption` flag is **enabled** and the
@@ -235,7 +249,8 @@ export const enableWindDown: Layer.Layer<never> = circular.enableWindDown
  * @since 2.0.0
  * @category getters
  */
-export const interruptible: (self: RuntimeFlags) => boolean = internal.interruptible
+export const interruptible: (self: RuntimeFlags) => boolean =
+  internal.interruptible;
 
 /**
  * Returns `true` if the `Interruption` `RuntimeFlag` is enabled, `false`
@@ -244,7 +259,8 @@ export const interruptible: (self: RuntimeFlags) => boolean = internal.interrupt
  * @since 2.0.0
  * @category getters
  */
-export const interruption: (self: RuntimeFlags) => boolean = internal.interruption
+export const interruption: (self: RuntimeFlags) => boolean =
+  internal.interruption;
 
 /**
  * Returns `true` if the specified `RuntimeFlag` is enabled, `false` otherwise.
@@ -253,9 +269,9 @@ export const interruption: (self: RuntimeFlags) => boolean = internal.interrupti
  * @category elements
  */
 export const isEnabled: {
-  (flag: RuntimeFlag): (self: RuntimeFlags) => boolean
-  (self: RuntimeFlags, flag: RuntimeFlag): boolean
-} = internal.isEnabled
+  (flag: RuntimeFlag): (self: RuntimeFlags) => boolean;
+  (self: RuntimeFlags, flag: RuntimeFlag): boolean;
+} = internal.isEnabled;
 
 /**
  * Returns `true` if the specified `RuntimeFlag` is disabled, `false` otherwise.
@@ -264,21 +280,22 @@ export const isEnabled: {
  * @category elements
  */
 export const isDisabled: {
-  (flag: RuntimeFlag): (self: RuntimeFlags) => boolean
-  (self: RuntimeFlags, flag: RuntimeFlag): boolean
-} = internal.isDisabled
+  (flag: RuntimeFlag): (self: RuntimeFlags) => boolean;
+  (self: RuntimeFlags, flag: RuntimeFlag): boolean;
+} = internal.isDisabled;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const make: (...flags: ReadonlyArray<RuntimeFlag>) => RuntimeFlags = internal.make
+export const make: (...flags: ReadonlyArray<RuntimeFlag>) => RuntimeFlags =
+  internal.make;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const none: RuntimeFlags = internal.none
+export const none: RuntimeFlags = internal.none;
 
 /**
  * Returns `true` if the `OpSupervision` `RuntimeFlag` is enabled, `false`
@@ -287,7 +304,8 @@ export const none: RuntimeFlags = internal.none
  * @since 2.0.0
  * @category getters
  */
-export const opSupervision: (self: RuntimeFlags) => boolean = internal.opSupervision
+export const opSupervision: (self: RuntimeFlags) => boolean =
+  internal.opSupervision;
 
 /**
  * Patches a set of `RuntimeFlag`s with a `RuntimeFlagsPatch`, returning the
@@ -297,9 +315,14 @@ export const opSupervision: (self: RuntimeFlags) => boolean = internal.opSupervi
  * @category utils
  */
 export const patch: {
-  (patch: RuntimeFlagsPatch.RuntimeFlagsPatch): (self: RuntimeFlags) => RuntimeFlags
-  (self: RuntimeFlags, patch: RuntimeFlagsPatch.RuntimeFlagsPatch): RuntimeFlags
-} = internal.patch
+  (
+    patch: RuntimeFlagsPatch.RuntimeFlagsPatch
+  ): (self: RuntimeFlags) => RuntimeFlags;
+  (
+    self: RuntimeFlags,
+    patch: RuntimeFlagsPatch.RuntimeFlagsPatch
+  ): RuntimeFlags;
+} = internal.patch;
 
 /**
  * Converts the provided `RuntimeFlags` into a `string`.
@@ -307,7 +330,7 @@ export const patch: {
  * @category conversions
  * @since 2.0.0
  */
-export const render: (self: RuntimeFlags) => string = internal.render
+export const render: (self: RuntimeFlags) => string = internal.render;
 
 /**
  * Returns `true` if the `RuntimeMetrics` `RuntimeFlag` is enabled, `false`
@@ -316,7 +339,8 @@ export const render: (self: RuntimeFlags) => string = internal.render
  * @since 2.0.0
  * @category getters
  */
-export const runtimeMetrics: (self: RuntimeFlags) => boolean = internal.runtimeMetrics
+export const runtimeMetrics: (self: RuntimeFlags) => boolean =
+  internal.runtimeMetrics;
 
 /**
  * Converts the provided `RuntimeFlags` into a `ReadonlySet<number>`.
@@ -324,7 +348,8 @@ export const runtimeMetrics: (self: RuntimeFlags) => boolean = internal.runtimeM
  * @category conversions
  * @since 2.0.0
  */
-export const toSet: (self: RuntimeFlags) => ReadonlySet<RuntimeFlag> = internal.toSet
+export const toSet: (self: RuntimeFlags) => ReadonlySet<RuntimeFlag> =
+  internal.toSet;
 
 /**
  * Returns `true` if the `WindDown` `RuntimeFlag` is enabled, `false`
@@ -333,4 +358,4 @@ export const toSet: (self: RuntimeFlags) => ReadonlySet<RuntimeFlag> = internal.
  * @since 2.0.0
  * @category getters
  */
-export const windDown: (self: RuntimeFlags) => boolean = internal.windDown
+export const windDown: (self: RuntimeFlags) => boolean = internal.windDown;

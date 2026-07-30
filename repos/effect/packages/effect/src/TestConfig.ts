@@ -1,7 +1,7 @@
 /**
  * @since 2.0.0
  */
-import * as Context from "./Context.js"
+import * as Context from "./Context.js";
 
 /**
  * The `TestConfig` service provides access to default configuration settings
@@ -16,32 +16,33 @@ export interface TestConfig {
   /**
    * The number of times to repeat tests to ensure they are stable.
    */
-  readonly repeats: number
+  readonly repeats: number;
   /**
    * The number of times to retry flaky tests.
    */
-  readonly retries: number
+  readonly retries: number;
   /**
    * The number of sufficient samples to check for a random variable.
    */
-  readonly samples: number
+  readonly samples: number;
   /**
    * The maximum number of shrinkings to minimize large failures
    */
-  readonly shrinks: number
+  readonly shrinks: number;
 }
 
 /**
  * @since 2.0.0
  */
-export const TestConfig: Context.Tag<TestConfig, TestConfig> = Context.GenericTag<TestConfig>("effect/TestConfig")
+export const TestConfig: Context.Tag<TestConfig, TestConfig> =
+  Context.GenericTag<TestConfig>("effect/TestConfig");
 
 /**
  * @since 2.0.0
  */
 export const make = (params: {
-  readonly repeats: number
-  readonly retries: number
-  readonly samples: number
-  readonly shrinks: number
-}): TestConfig => params
+  readonly repeats: number;
+  readonly retries: number;
+  readonly samples: number;
+  readonly shrinks: number;
+}): TestConfig => params;

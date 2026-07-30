@@ -1,11 +1,11 @@
-import { describe, it } from "@effect/vitest"
-import * as S from "effect/Schema"
-import * as Util from "../TestUtils.js"
+import { describe, it } from "@effect/vitest";
+import * as S from "effect/Schema";
+import * as Util from "../TestUtils.js";
 
 describe("NonEmptyArrayEnsure", () => {
   it("decode non-array", async () => {
-    const schema = S.NonEmptyArrayEnsure(S.NumberFromString)
-    await Util.assertions.decoding.succeed(schema, "123", [123])
+    const schema = S.NonEmptyArrayEnsure(S.NumberFromString);
+    await Util.assertions.decoding.succeed(schema, "123", [123]);
     await Util.assertions.decoding.fail(
       schema,
       null,
@@ -16,11 +16,11 @@ describe("NonEmptyArrayEnsure", () => {
       │  └─ Encoded side transformation failure
       │     └─ Expected string, actual null
       └─ Expected readonly [NumberFromString, ...NumberFromString[]], actual null`
-    )
-  })
+    );
+  });
 
   it("decode empty array", async () => {
-    const schema = S.NonEmptyArrayEnsure(S.NumberFromString)
+    const schema = S.NonEmptyArrayEnsure(S.NumberFromString);
     await Util.assertions.decoding.fail(
       schema,
       [],
@@ -33,12 +33,12 @@ describe("NonEmptyArrayEnsure", () => {
       └─ readonly [NumberFromString, ...NumberFromString[]]
          └─ [0]
             └─ is missing`
-    )
-  })
+    );
+  });
 
   it("decode array", async () => {
-    const schema = S.NonEmptyArrayEnsure(S.NumberFromString)
-    await Util.assertions.decoding.succeed(schema, ["123"], [123])
+    const schema = S.NonEmptyArrayEnsure(S.NumberFromString);
+    await Util.assertions.decoding.succeed(schema, ["123"], [123]);
     await Util.assertions.decoding.fail(
       schema,
       [null],
@@ -53,12 +53,12 @@ describe("NonEmptyArrayEnsure", () => {
             └─ NumberFromString
                └─ Encoded side transformation failure
                   └─ Expected string, actual null`
-    )
-  })
+    );
+  });
 
   it("encode", async () => {
-    const schema = S.NonEmptyArrayEnsure(S.NumberFromString)
-    await Util.assertions.encoding.succeed(schema, [123], "123")
-    await Util.assertions.encoding.succeed(schema, [1, 2, 3], ["1", "2", "3"])
-  })
-})
+    const schema = S.NonEmptyArrayEnsure(S.NumberFromString);
+    await Util.assertions.encoding.succeed(schema, [123], "123");
+    await Util.assertions.encoding.succeed(schema, [1, 2, 3], ["1", "2", "3"]);
+  });
+});

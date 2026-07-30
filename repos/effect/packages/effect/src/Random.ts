@@ -1,59 +1,59 @@
 /**
  * @since 2.0.0
  */
-import type * as Array from "./Array.js"
-import type * as Cause from "./Cause.js"
-import type * as Chunk from "./Chunk.js"
-import type * as Context from "./Context.js"
-import type * as Effect from "./Effect.js"
-import * as defaultServices from "./internal/defaultServices.js"
-import * as internal from "./internal/random.js"
-import type * as NonEmptyIterable from "./NonEmptyIterable.js"
+import type * as Array from "./Array.js";
+import type * as Cause from "./Cause.js";
+import type * as Chunk from "./Chunk.js";
+import type * as Context from "./Context.js";
+import type * as Effect from "./Effect.js";
+import * as defaultServices from "./internal/defaultServices.js";
+import * as internal from "./internal/random.js";
+import type * as NonEmptyIterable from "./NonEmptyIterable.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const RandomTypeId: unique symbol = internal.RandomTypeId
+export const RandomTypeId: unique symbol = internal.RandomTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type RandomTypeId = typeof RandomTypeId
+export type RandomTypeId = typeof RandomTypeId;
 
 /**
  * @since 2.0.0
  * @category models
  */
 export interface Random {
-  readonly [RandomTypeId]: RandomTypeId
+  readonly [RandomTypeId]: RandomTypeId;
   /**
    * Returns the next numeric value from the pseudo-random number generator.
    */
-  readonly next: Effect.Effect<number>
+  readonly next: Effect.Effect<number>;
   /**
    * Returns the next boolean value from the pseudo-random number generator.
    */
-  readonly nextBoolean: Effect.Effect<boolean>
+  readonly nextBoolean: Effect.Effect<boolean>;
   /**
    * Returns the next integer value from the pseudo-random number generator.
    */
-  readonly nextInt: Effect.Effect<number>
+  readonly nextInt: Effect.Effect<number>;
   /**
    * Returns the next numeric value in the specified range from the
    * pseudo-random number generator.
    */
-  nextRange(min: number, max: number): Effect.Effect<number>
+  nextRange(min: number, max: number): Effect.Effect<number>;
   /**
    * Returns the next integer value in the specified range from the
    * pseudo-random number generator.
    */
-  nextIntBetween(min: number, max: number): Effect.Effect<number>
+  nextIntBetween(min: number, max: number): Effect.Effect<number>;
   /**
    * Uses the pseudo-random number generator to shuffle the specified iterable.
    */
-  shuffle<A>(elements: Iterable<A>): Effect.Effect<Chunk.Chunk<A>>
+  shuffle<A>(elements: Iterable<A>): Effect.Effect<Chunk.Chunk<A>>;
 }
 
 /**
@@ -62,7 +62,7 @@ export interface Random {
  * @since 2.0.0
  * @category constructors
  */
-export const next: Effect.Effect<number> = defaultServices.next
+export const next: Effect.Effect<number> = defaultServices.next;
 
 /**
  * Returns the next integer value from the pseudo-random number generator.
@@ -70,7 +70,7 @@ export const next: Effect.Effect<number> = defaultServices.next
  * @since 2.0.0
  * @category constructors
  */
-export const nextInt: Effect.Effect<number> = defaultServices.nextInt
+export const nextInt: Effect.Effect<number> = defaultServices.nextInt;
 
 /**
  * Returns the next boolean value from the pseudo-random number generator.
@@ -78,7 +78,7 @@ export const nextInt: Effect.Effect<number> = defaultServices.nextInt
  * @since 2.0.0
  * @category constructors
  */
-export const nextBoolean: Effect.Effect<boolean> = defaultServices.nextBoolean
+export const nextBoolean: Effect.Effect<boolean> = defaultServices.nextBoolean;
 
 /**
  * Returns the next numeric value in the specified range from the
@@ -87,7 +87,8 @@ export const nextBoolean: Effect.Effect<boolean> = defaultServices.nextBoolean
  * @since 2.0.0
  * @category constructors
  */
-export const nextRange: (min: number, max: number) => Effect.Effect<number> = defaultServices.nextRange
+export const nextRange: (min: number, max: number) => Effect.Effect<number> =
+  defaultServices.nextRange;
 
 /**
  * Returns the next integer value in the specified range from the
@@ -96,7 +97,10 @@ export const nextRange: (min: number, max: number) => Effect.Effect<number> = de
  * @since 2.0.0
  * @category constructors
  */
-export const nextIntBetween: (min: number, max: number) => Effect.Effect<number> = defaultServices.nextIntBetween
+export const nextIntBetween: (
+  min: number,
+  max: number
+) => Effect.Effect<number> = defaultServices.nextIntBetween;
 
 /**
  * Uses the pseudo-random number generator to shuffle the specified iterable.
@@ -104,7 +108,9 @@ export const nextIntBetween: (min: number, max: number) => Effect.Effect<number>
  * @since 2.0.0
  * @category constructors
  */
-export const shuffle: <A>(elements: Iterable<A>) => Effect.Effect<Chunk.Chunk<A>> = defaultServices.shuffle
+export const shuffle: <A>(
+  elements: Iterable<A>
+) => Effect.Effect<Chunk.Chunk<A>> = defaultServices.shuffle;
 
 /**
  * Get a random element from an iterable.
@@ -124,10 +130,13 @@ export const shuffle: <A>(elements: Iterable<A>) => Effect.Effect<Chunk.Chunk<A>
  */
 export const choice: <Self extends Iterable<unknown>>(
   elements: Self
-) => Self extends NonEmptyIterable.NonEmptyIterable<infer A> ? Effect.Effect<A>
-  : Self extends Array.NonEmptyReadonlyArray<infer A> ? Effect.Effect<A>
-  : Self extends Iterable<infer A> ? Effect.Effect<A, Cause.NoSuchElementException>
-  : never = defaultServices.choice
+) => Self extends NonEmptyIterable.NonEmptyIterable<infer A>
+  ? Effect.Effect<A>
+  : Self extends Array.NonEmptyReadonlyArray<infer A>
+    ? Effect.Effect<A>
+    : Self extends Iterable<infer A>
+      ? Effect.Effect<A, Cause.NoSuchElementException>
+      : never = defaultServices.choice;
 
 /**
  * Retreives the `Random` service from the context and uses it to run the
@@ -136,14 +145,15 @@ export const choice: <Self extends Iterable<unknown>>(
  * @since 2.0.0
  * @category constructors
  */
-export const randomWith: <A, E, R>(f: (random: Random) => Effect.Effect<A, E, R>) => Effect.Effect<A, E, R> =
-  defaultServices.randomWith
+export const randomWith: <A, E, R>(
+  f: (random: Random) => Effect.Effect<A, E, R>
+) => Effect.Effect<A, E, R> = defaultServices.randomWith;
 
 /**
  * @since 2.0.0
  * @category context
  */
-export const Random: Context.Tag<Random, Random> = internal.randomTag
+export const Random: Context.Tag<Random, Random> = internal.randomTag;
 
 /**
  * Constructs the `Random` service, seeding the pseudo-random number generator
@@ -168,7 +178,7 @@ export const Random: Context.Tag<Random, Random> = internal.randomTag
  * @since 3.5.0
  * @category constructors
  */
-export const make: <A>(seed: A) => Random = internal.make
+export const make: <A>(seed: A) => Random = internal.make;
 
 /**
  * Constructs the `Random` service from an array of literal values.
@@ -201,4 +211,6 @@ export const make: <A>(seed: A) => Random = internal.make
  * @since 3.11.0
  * @category constructors
  */
-export const fixed: <const T extends Array.NonEmptyArray<any>>(values: T) => Random = internal.fixed
+export const fixed: <const T extends Array.NonEmptyArray<any>>(
+  values: T
+) => Random = internal.fixed;

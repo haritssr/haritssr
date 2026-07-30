@@ -1,6 +1,6 @@
-import * as ParseResult from "effect/ParseResult"
-import * as S from "effect/Schema"
-import { Bench } from "tinybench"
+import * as ParseResult from "effect/ParseResult";
+import * as S from "effect/Schema";
+import { Bench } from "tinybench";
 
 /*
 ┌─────────┬──────────────────────────────────────────┬──────────────┬───────────────────┬──────────┬──────────┐
@@ -11,33 +11,33 @@ import { Bench } from "tinybench"
 └─────────┴──────────────────────────────────────────┴──────────────┴───────────────────┴──────────┴──────────┘
 */
 
-const bench = new Bench({ time: 1000 })
+const bench = new Bench({ time: 1000 });
 
 const schema = S.Struct({
   a: S.Literal("a"),
   b: S.Array(S.String),
   c: S.Record({ key: S.String, value: S.Number }),
   d: S.NumberFromString,
-  e: S.Boolean
-})
+  e: S.Boolean,
+});
 
-const good = { a: "a", b: ["b"], c: { c: 1 }, d: "1", e: true }
+const good = { a: "a", b: ["b"], c: { c: 1 }, d: "1", e: true };
 
-const bad = { b: ["b"], c: { c: 1 }, d: "1", e: true, a: null }
+const bad = { b: ["b"], c: { c: 1 }, d: "1", e: true, a: null };
 
-const decodeUnknownEither = ParseResult.decodeUnknownEither(schema)
+const decodeUnknownEither = ParseResult.decodeUnknownEither(schema);
 
 // console.log(decodeUnknownEither(good))
 // console.log(decodeUnknownEither(bad))
 
 bench
-  .add("ParseResult.decodeUnknownEither (good)", function() {
-    decodeUnknownEither(good)
+  .add("ParseResult.decodeUnknownEither (good)", () => {
+    decodeUnknownEither(good);
   })
-  .add("ParseResult.decodeUnknownEither (bad)", function() {
-    decodeUnknownEither(bad)
-  })
+  .add("ParseResult.decodeUnknownEither (bad)", () => {
+    decodeUnknownEither(bad);
+  });
 
-await bench.run()
+await bench.run();
 
-console.table(bench.table())
+console.table(bench.table());

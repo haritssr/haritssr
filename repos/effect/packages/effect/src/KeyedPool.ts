@@ -1,24 +1,24 @@
 /**
  * @since 2.0.0
  */
-import type * as Duration from "./Duration.js"
-import type * as Effect from "./Effect.js"
-import * as internal from "./internal/keyedPool.js"
-import type { Pipeable } from "./Pipeable.js"
-import type * as Scope from "./Scope.js"
-import type * as Types from "./Types.js"
+import type * as Duration from "./Duration.js";
+import type * as Effect from "./Effect.js";
+import * as internal from "./internal/keyedPool.js";
+import type { Pipeable } from "./Pipeable.js";
+import type * as Scope from "./Scope.js";
+import type * as Types from "./Types.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const KeyedPoolTypeId: unique symbol = internal.KeyedPoolTypeId
+export const KeyedPoolTypeId: unique symbol = internal.KeyedPoolTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type KeyedPoolTypeId = typeof KeyedPoolTypeId
+export type KeyedPoolTypeId = typeof KeyedPoolTypeId;
 
 /**
  * A `KeyedPool<K, A, E>` is a pool of `Pool`s of items of type `A`. Each pool
@@ -27,21 +27,23 @@ export type KeyedPoolTypeId = typeof KeyedPoolTypeId
  * @since 2.0.0
  * @category models
  */
-export interface KeyedPool<in K, in out A, out E = never> extends KeyedPool.Variance<K, A, E>, Pipeable {
+export interface KeyedPool<in K, in out A, out E = never>
+  extends KeyedPool.Variance<K, A, E>,
+    Pipeable {
   /**
    * Retrieves an item from the pool belonging to the given key in a scoped
    * effect. Note that if acquisition fails, then the returned effect will fail
    * for that same reason. Retrying a failed acquisition attempt will repeat the
    * acquisition attempt.
    */
-  get(key: K): Effect.Effect<A, E, Scope.Scope>
+  get(key: K): Effect.Effect<A, E, Scope.Scope>;
 
   /**
    * Invalidates the specified item. This will cause the pool to eventually
    * reallocate the item, although this reallocation may occur lazily rather
    * than eagerly.
    */
-  invalidate(item: A): Effect.Effect<void>
+  invalidate(item: A): Effect.Effect<void>;
 }
 
 /**
@@ -54,10 +56,10 @@ export declare namespace KeyedPool {
    */
   export interface Variance<in K, in out A, out E> {
     readonly [KeyedPoolTypeId]: {
-      readonly _K: Types.Contravariant<K>
-      readonly _A: Types.Invariant<A>
-      readonly _E: Types.Covariant<E>
-    }
+      readonly _K: Types.Contravariant<K>;
+      readonly _A: Types.Invariant<A>;
+      readonly _E: Types.Covariant<E>;
+    };
   }
 }
 
@@ -70,12 +72,10 @@ export declare namespace KeyedPool {
  * @since 2.0.0
  * @category constructors
  */
-export const make: <K, A, E, R>(
-  options: {
-    readonly acquire: (key: K) => Effect.Effect<A, E, R>
-    readonly size: number
-  }
-) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> = internal.make
+export const make: <K, A, E, R>(options: {
+  readonly acquire: (key: K) => Effect.Effect<A, E, R>;
+  readonly size: number;
+}) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> = internal.make;
 
 /**
  * Makes a new pool of the specified fixed size. The pool is returned in a
@@ -88,12 +88,11 @@ export const make: <K, A, E, R>(
  * @since 2.0.0
  * @category constructors
  */
-export const makeWith: <K, A, E, R>(
-  options: {
-    readonly acquire: (key: K) => Effect.Effect<A, E, R>
-    readonly size: (key: K) => number
-  }
-) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> = internal.makeWith
+export const makeWith: <K, A, E, R>(options: {
+  readonly acquire: (key: K) => Effect.Effect<A, E, R>;
+  readonly size: (key: K) => number;
+}) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> =
+  internal.makeWith;
 
 /**
  * Makes a new pool with the specified minimum and maximum sizes and time to
@@ -108,14 +107,13 @@ export const makeWith: <K, A, E, R>(
  * @since 2.0.0
  * @category constructors
  */
-export const makeWithTTL: <K, A, E, R>(
-  options: {
-    readonly acquire: (key: K) => Effect.Effect<A, E, R>
-    readonly min: (key: K) => number
-    readonly max: (key: K) => number
-    readonly timeToLive: Duration.DurationInput
-  }
-) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> = internal.makeWithTTL
+export const makeWithTTL: <K, A, E, R>(options: {
+  readonly acquire: (key: K) => Effect.Effect<A, E, R>;
+  readonly min: (key: K) => number;
+  readonly max: (key: K) => number;
+  readonly timeToLive: Duration.DurationInput;
+}) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> =
+  internal.makeWithTTL;
 
 /**
  * Makes a new pool with the specified minimum and maximum sizes and time to
@@ -130,14 +128,13 @@ export const makeWithTTL: <K, A, E, R>(
  * @since 2.0.0
  * @category constructors
  */
-export const makeWithTTLBy: <K, A, E, R>(
-  options: {
-    readonly acquire: (key: K) => Effect.Effect<A, E, R>
-    readonly min: (key: K) => number
-    readonly max: (key: K) => number
-    readonly timeToLive: (key: K) => Duration.DurationInput
-  }
-) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> = internal.makeWithTTLBy
+export const makeWithTTLBy: <K, A, E, R>(options: {
+  readonly acquire: (key: K) => Effect.Effect<A, E, R>;
+  readonly min: (key: K) => number;
+  readonly max: (key: K) => number;
+  readonly timeToLive: (key: K) => Duration.DurationInput;
+}) => Effect.Effect<KeyedPool<K, A, E>, never, Scope.Scope | R> =
+  internal.makeWithTTLBy;
 
 /**
  * Retrieves an item from the pool belonging to the given key in a scoped
@@ -149,9 +146,11 @@ export const makeWithTTLBy: <K, A, E, R>(
  * @category combinators
  */
 export const get: {
-  <K>(key: K): <A, E>(self: KeyedPool<K, A, E>) => Effect.Effect<A, E, Scope.Scope>
-  <K, A, E>(self: KeyedPool<K, A, E>, key: K): Effect.Effect<A, E, Scope.Scope>
-} = internal.get
+  <K>(
+    key: K
+  ): <A, E>(self: KeyedPool<K, A, E>) => Effect.Effect<A, E, Scope.Scope>;
+  <K, A, E>(self: KeyedPool<K, A, E>, key: K): Effect.Effect<A, E, Scope.Scope>;
+} = internal.get;
 
 /**
  * Invalidates the specified item. This will cause the pool to eventually
@@ -162,6 +161,6 @@ export const get: {
  * @category combinators
  */
 export const invalidate: {
-  <A>(item: A): <K, E>(self: KeyedPool<K, A, E>) => Effect.Effect<void>
-  <K, A, E>(self: KeyedPool<K, A, E>, item: A): Effect.Effect<void>
-} = internal.invalidate
+  <A>(item: A): <K, E>(self: KeyedPool<K, A, E>) => Effect.Effect<void>;
+  <K, A, E>(self: KeyedPool<K, A, E>, item: A): Effect.Effect<void>;
+} = internal.invalidate;

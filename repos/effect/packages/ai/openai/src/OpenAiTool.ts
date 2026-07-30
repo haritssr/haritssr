@@ -1,10 +1,10 @@
 /**
  * @since 1.0.0
  */
-import * as Tool from "@effect/ai/Tool"
-import * as Schema from "effect/Schema"
-import * as Struct from "effect/Struct"
-import * as Generated from "./Generated.js"
+import * as Tool from "@effect/ai/Tool";
+import * as Schema from "effect/Schema";
+import * as Struct from "effect/Struct";
+import * as Generated from "./Generated.js";
 
 /**
  * @since 1.0.0
@@ -29,19 +29,23 @@ export const CodeInterpreter = Tool.providerDefined({
         /**
          * An optional list of uploaded files to make available to your code.
          */
-        file_ids: Schema.optional(Schema.Array(Schema.String))
+        file_ids: Schema.optional(Schema.Array(Schema.String)),
       })
-    )
+    ),
   },
   parameters: {
     code: Schema.NullOr(Schema.String),
-    container_id: Schema.String
+    container_id: Schema.String,
   },
-  success: Schema.NullOr(Schema.Array(Schema.Union(
-    Generated.CodeInterpreterOutputLogs,
-    Generated.CodeInterpreterOutputImage
-  )))
-})
+  success: Schema.NullOr(
+    Schema.Array(
+      Schema.Union(
+        Generated.CodeInterpreterOutputLogs,
+        Generated.CodeInterpreterOutputImage
+      )
+    )
+  ),
+});
 
 /**
  * @since 1.0.0
@@ -52,8 +56,8 @@ export const FileSearch = Tool.providerDefined({
   toolkitName: "OpenAiFileSearch",
   providerName: "file_search",
   args: Struct.omit(Generated.FileSearchTool.fields, "type"),
-  success: Generated.FileSearchToolCall.pipe(Schema.omit("id", "type"))
-})
+  success: Generated.FileSearchToolCall.pipe(Schema.omit("id", "type")),
+});
 
 /**
  * @since 1.0.0
@@ -69,12 +73,12 @@ export const WebSearch = Tool.providerDefined({
       Generated.WebSearchActionSearch,
       Generated.WebSearchActionOpenPage,
       Generated.WebSearchActionFind
-    )
+    ),
   },
   success: Schema.Struct({
-    status: Generated.WebSearchToolCallStatus
-  })
-})
+    status: Generated.WebSearchToolCallStatus,
+  }),
+});
 
 /**
  * @since 1.0.0
@@ -90,21 +94,27 @@ export const WebSearchPreview = Tool.providerDefined({
       Generated.WebSearchActionSearch,
       Generated.WebSearchActionOpenPage,
       Generated.WebSearchActionFind
-    )
+    ),
   },
   success: Schema.Struct({
-    status: Generated.WebSearchToolCallStatus
-  })
-})
+    status: Generated.WebSearchToolCallStatus,
+  }),
+});
 
-type ProviderToolNames = "code_interpreter" | "file_search" | "web_search" | "web_search_preview"
+type ProviderToolNames =
+  | "code_interpreter"
+  | "file_search"
+  | "web_search"
+  | "web_search_preview";
 
-const ProviderToolNamesMap: Map<ProviderToolNames | (string & {}), string> = new Map([
-  ["code_interpreter", "OpenAiCodeInterpreter"],
-  ["file_search", "OpenAiFileSearch"],
-  ["web_search", "OpenAiWebSearch"],
-  ["web_search_preview", "OpenAiWebSearchPreview"]
-])
+const ProviderToolNamesMap: Map<ProviderToolNames | (string & {}), string> =
+  new Map([
+    ["code_interpreter", "OpenAiCodeInterpreter"],
+    ["file_search", "OpenAiFileSearch"],
+    ["web_search", "OpenAiWebSearch"],
+    ["web_search_preview", "OpenAiWebSearchPreview"],
+  ]);
 
 /** @internal */
-export const getProviderDefinedToolName = (name: string): string | undefined => ProviderToolNamesMap.get(name)
+export const getProviderDefinedToolName = (name: string): string | undefined =>
+  ProviderToolNamesMap.get(name);

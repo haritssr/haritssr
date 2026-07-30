@@ -2,26 +2,26 @@
  * @since 2.0.0
  */
 
-import type * as Journal from "./internal/stm/journal.js"
-import * as internal from "./internal/stm/tRef.js"
-import type * as TxnId from "./internal/stm/txnId.js"
-import type * as Versioned from "./internal/stm/versioned.js"
-import type * as Option from "./Option.js"
-import type { Pipeable } from "./Pipeable.js"
-import type * as STM from "./STM.js"
-import type * as Types from "./Types.js"
+import type * as Journal from "./internal/stm/journal.js";
+import * as internal from "./internal/stm/tRef.js";
+import type * as TxnId from "./internal/stm/txnId.js";
+import type * as Versioned from "./internal/stm/versioned.js";
+import type * as Option from "./Option.js";
+import type { Pipeable } from "./Pipeable.js";
+import type * as STM from "./STM.js";
+import type * as Types from "./Types.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const TRefTypeId: unique symbol = internal.TRefTypeId
+export const TRefTypeId: unique symbol = internal.TRefTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type TRefTypeId = typeof TRefTypeId
+export type TRefTypeId = typeof TRefTypeId;
 
 /**
  * A `TRef<A>` is a purely functional description of a mutable reference that can
@@ -39,7 +39,7 @@ export interface TRef<in out A> extends TRef.Variance<A>, Pipeable {
   /**
    * Note: the method is unbound, exposed only for potential extensions.
    */
-  modify<B>(f: (a: A) => readonly [B, A]): STM.STM<B>
+  modify<B>(f: (a: A) => readonly [B, A]): STM.STM<B>;
 }
 /**
  * @internal
@@ -47,9 +47,9 @@ export interface TRef<in out A> extends TRef.Variance<A>, Pipeable {
  */
 export interface TRef<in out A> {
   /** @internal */
-  todos: Map<TxnId.TxnId, Journal.Todo>
+  todos: Map<TxnId.TxnId, Journal.Todo>;
   /** @internal */
-  versioned: Versioned.Versioned<A>
+  versioned: Versioned.Versioned<A>;
 }
 
 /**
@@ -61,8 +61,8 @@ export declare namespace TRef {
    */
   export interface Variance<in out A> {
     readonly [TRefTypeId]: {
-      readonly _A: Types.Invariant<A>
-    }
+      readonly _A: Types.Invariant<A>;
+    };
   }
 }
 
@@ -70,109 +70,116 @@ export declare namespace TRef {
  * @since 2.0.0
  * @category mutations
  */
-export const get: <A>(self: TRef<A>) => STM.STM<A> = internal.get
+export const get: <A>(self: TRef<A>) => STM.STM<A> = internal.get;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const getAndSet: {
-  <A>(value: A): (self: TRef<A>) => STM.STM<A>
-  <A>(self: TRef<A>, value: A): STM.STM<A>
-} = internal.getAndSet
+  <A>(value: A): (self: TRef<A>) => STM.STM<A>;
+  <A>(self: TRef<A>, value: A): STM.STM<A>;
+} = internal.getAndSet;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const getAndUpdate: {
-  <A>(f: (a: A) => A): (self: TRef<A>) => STM.STM<A>
-  <A>(self: TRef<A>, f: (a: A) => A): STM.STM<A>
-} = internal.getAndUpdate
+  <A>(f: (a: A) => A): (self: TRef<A>) => STM.STM<A>;
+  <A>(self: TRef<A>, f: (a: A) => A): STM.STM<A>;
+} = internal.getAndUpdate;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const getAndUpdateSome: {
-  <A>(f: (a: A) => Option.Option<A>): (self: TRef<A>) => STM.STM<A>
-  <A>(self: TRef<A>, f: (a: A) => Option.Option<A>): STM.STM<A>
-} = internal.getAndUpdateSome
+  <A>(f: (a: A) => Option.Option<A>): (self: TRef<A>) => STM.STM<A>;
+  <A>(self: TRef<A>, f: (a: A) => Option.Option<A>): STM.STM<A>;
+} = internal.getAndUpdateSome;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const make: <A>(value: A) => STM.STM<TRef<A>> = internal.make
+export const make: <A>(value: A) => STM.STM<TRef<A>> = internal.make;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const modify: {
-  <A, B>(f: (a: A) => readonly [B, A]): (self: TRef<A>) => STM.STM<B>
-  <A, B>(self: TRef<A>, f: (a: A) => readonly [B, A]): STM.STM<B>
-} = internal.modify
+  <A, B>(f: (a: A) => readonly [B, A]): (self: TRef<A>) => STM.STM<B>;
+  <A, B>(self: TRef<A>, f: (a: A) => readonly [B, A]): STM.STM<B>;
+} = internal.modify;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const modifySome: {
-  <A, B>(fallback: B, f: (a: A) => Option.Option<readonly [B, A]>): (self: TRef<A>) => STM.STM<B>
-  <A, B>(self: TRef<A>, fallback: B, f: (a: A) => Option.Option<readonly [B, A]>): STM.STM<B>
-} = internal.modifySome
+  <A, B>(
+    fallback: B,
+    f: (a: A) => Option.Option<readonly [B, A]>
+  ): (self: TRef<A>) => STM.STM<B>;
+  <A, B>(
+    self: TRef<A>,
+    fallback: B,
+    f: (a: A) => Option.Option<readonly [B, A]>
+  ): STM.STM<B>;
+} = internal.modifySome;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const set: {
-  <A>(value: A): (self: TRef<A>) => STM.STM<void>
-  <A>(self: TRef<A>, value: A): STM.STM<void>
-} = internal.set
+  <A>(value: A): (self: TRef<A>) => STM.STM<void>;
+  <A>(self: TRef<A>, value: A): STM.STM<void>;
+} = internal.set;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const setAndGet: {
-  <A>(value: A): (self: TRef<A>) => STM.STM<A>
-  <A>(self: TRef<A>, value: A): STM.STM<A>
-} = internal.setAndGet
+  <A>(value: A): (self: TRef<A>) => STM.STM<A>;
+  <A>(self: TRef<A>, value: A): STM.STM<A>;
+} = internal.setAndGet;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const update: {
-  <A>(f: (a: A) => A): (self: TRef<A>) => STM.STM<void>
-  <A>(self: TRef<A>, f: (a: A) => A): STM.STM<void>
-} = internal.update
+  <A>(f: (a: A) => A): (self: TRef<A>) => STM.STM<void>;
+  <A>(self: TRef<A>, f: (a: A) => A): STM.STM<void>;
+} = internal.update;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const updateAndGet: {
-  <A>(f: (a: A) => A): (self: TRef<A>) => STM.STM<A>
-  <A>(self: TRef<A>, f: (a: A) => A): STM.STM<A>
-} = internal.updateAndGet
+  <A>(f: (a: A) => A): (self: TRef<A>) => STM.STM<A>;
+  <A>(self: TRef<A>, f: (a: A) => A): STM.STM<A>;
+} = internal.updateAndGet;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const updateSome: {
-  <A>(f: (a: A) => Option.Option<A>): (self: TRef<A>) => STM.STM<void>
-  <A>(self: TRef<A>, f: (a: A) => Option.Option<A>): STM.STM<void>
-} = internal.updateSome
+  <A>(f: (a: A) => Option.Option<A>): (self: TRef<A>) => STM.STM<void>;
+  <A>(self: TRef<A>, f: (a: A) => Option.Option<A>): STM.STM<void>;
+} = internal.updateSome;
 
 /**
  * @since 2.0.0
  * @category mutations
  */
 export const updateSomeAndGet: {
-  <A>(f: (a: A) => Option.Option<A>): (self: TRef<A>) => STM.STM<A>
-  <A>(self: TRef<A>, f: (a: A) => Option.Option<A>): STM.STM<A>
-} = internal.updateSomeAndGet
+  <A>(f: (a: A) => Option.Option<A>): (self: TRef<A>) => STM.STM<A>;
+  <A>(self: TRef<A>, f: (a: A) => Option.Option<A>): STM.STM<A>;
+} = internal.updateSomeAndGet;

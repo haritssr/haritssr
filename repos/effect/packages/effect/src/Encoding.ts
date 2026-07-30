@@ -7,11 +7,11 @@
  *
  * @since 2.0.0
  */
-import * as Either from "./Either.js"
-import * as Base64 from "./internal/encoding/base64.js"
-import * as Base64Url from "./internal/encoding/base64Url.js"
-import * as Common from "./internal/encoding/common.js"
-import * as Hex from "./internal/encoding/hex.js"
+import * as Either from "./Either.js";
+import * as Base64 from "./internal/encoding/base64.js";
+import * as Base64Url from "./internal/encoding/base64Url.js";
+import * as Common from "./internal/encoding/common.js";
+import * as Hex from "./internal/encoding/hex.js";
 
 /**
  * Encodes the given value into a base64 (RFC4648) `string`.
@@ -20,7 +20,9 @@ import * as Hex from "./internal/encoding/hex.js"
  * @since 2.0.0
  */
 export const encodeBase64: (input: Uint8Array | string) => string = (input) =>
-  typeof input === "string" ? Base64.encode(Common.encoder.encode(input)) : Base64.encode(input)
+  typeof input === "string"
+    ? Base64.encode(Common.encoder.encode(input))
+    : Base64.encode(input);
 
 /**
  * Decodes a base64 (RFC4648) encoded `string` into a `Uint8Array`.
@@ -28,7 +30,9 @@ export const encodeBase64: (input: Uint8Array | string) => string = (input) =>
  * @category decoding
  * @since 2.0.0
  */
-export const decodeBase64 = (str: string): Either.Either<Uint8Array, DecodeException> => Base64.decode(str)
+export const decodeBase64 = (
+  str: string
+): Either.Either<Uint8Array, DecodeException> => Base64.decode(str);
 
 /**
  * Decodes a base64 (RFC4648) encoded `string` into a UTF-8 `string`.
@@ -36,7 +40,8 @@ export const decodeBase64 = (str: string): Either.Either<Uint8Array, DecodeExcep
  * @category decoding
  * @since 2.0.0
  */
-export const decodeBase64String = (str: string) => Either.map(decodeBase64(str), (_) => Common.decoder.decode(_))
+export const decodeBase64String = (str: string) =>
+  Either.map(decodeBase64(str), (_) => Common.decoder.decode(_));
 
 /**
  * Encodes the given value into a base64 (URL) `string`.
@@ -44,8 +49,12 @@ export const decodeBase64String = (str: string) => Either.map(decodeBase64(str),
  * @category encoding
  * @since 2.0.0
  */
-export const encodeBase64Url: (input: Uint8Array | string) => string = (input) =>
-  typeof input === "string" ? Base64Url.encode(Common.encoder.encode(input)) : Base64Url.encode(input)
+export const encodeBase64Url: (input: Uint8Array | string) => string = (
+  input
+) =>
+  typeof input === "string"
+    ? Base64Url.encode(Common.encoder.encode(input))
+    : Base64Url.encode(input);
 
 /**
  * Decodes a base64 (URL) encoded `string` into a `Uint8Array`.
@@ -53,7 +62,9 @@ export const encodeBase64Url: (input: Uint8Array | string) => string = (input) =
  * @category decoding
  * @since 2.0.0
  */
-export const decodeBase64Url = (str: string): Either.Either<Uint8Array, DecodeException> => Base64Url.decode(str)
+export const decodeBase64Url = (
+  str: string
+): Either.Either<Uint8Array, DecodeException> => Base64Url.decode(str);
 
 /**
  * Decodes a base64 (URL) encoded `string` into a UTF-8 `string`.
@@ -61,7 +72,8 @@ export const decodeBase64Url = (str: string): Either.Either<Uint8Array, DecodeEx
  * @category decoding
  * @since 2.0.0
  */
-export const decodeBase64UrlString = (str: string) => Either.map(decodeBase64Url(str), (_) => Common.decoder.decode(_))
+export const decodeBase64UrlString = (str: string) =>
+  Either.map(decodeBase64Url(str), (_) => Common.decoder.decode(_));
 
 /**
  * Encodes the given value into a hex `string`.
@@ -70,7 +82,9 @@ export const decodeBase64UrlString = (str: string) => Either.map(decodeBase64Url
  * @since 2.0.0
  */
 export const encodeHex: (input: Uint8Array | string) => string = (input) =>
-  typeof input === "string" ? Hex.encode(Common.encoder.encode(input)) : Hex.encode(input)
+  typeof input === "string"
+    ? Hex.encode(Common.encoder.encode(input))
+    : Hex.encode(input);
 
 /**
  * Decodes a hex encoded `string` into a `Uint8Array`.
@@ -78,7 +92,9 @@ export const encodeHex: (input: Uint8Array | string) => string = (input) =>
  * @category decoding
  * @since 2.0.0
  */
-export const decodeHex = (str: string): Either.Either<Uint8Array, DecodeException> => Hex.decode(str)
+export const decodeHex = (
+  str: string
+): Either.Either<Uint8Array, DecodeException> => Hex.decode(str);
 
 /**
  * Decodes a hex encoded `string` into a UTF-8 `string`.
@@ -86,7 +102,8 @@ export const decodeHex = (str: string): Either.Either<Uint8Array, DecodeExceptio
  * @category decoding
  * @since 2.0.0
  */
-export const decodeHexString = (str: string) => Either.map(decodeHex(str), (_) => Common.decoder.decode(_))
+export const decodeHexString = (str: string) =>
+  Either.map(decodeHex(str), (_) => Common.decoder.decode(_));
 
 /**
  * Encodes a UTF-8 `string` into a URI component `string`.
@@ -94,11 +111,14 @@ export const decodeHexString = (str: string) => Either.map(decodeHex(str), (_) =
  * @category encoding
  * @since 3.12.0
  */
-export const encodeUriComponent = (str: string): Either.Either<string, EncodeException> =>
+export const encodeUriComponent = (
+  str: string
+): Either.Either<string, EncodeException> =>
   Either.try({
     try: () => encodeURIComponent(str),
-    catch: (e) => EncodeException(str, e instanceof Error ? e.message : "Invalid input")
-  })
+    catch: (e) =>
+      EncodeException(str, e instanceof Error ? e.message : "Invalid input"),
+  });
 
 /**
  * Decodes a URI component `string` into a UTF-8 `string`.
@@ -106,23 +126,27 @@ export const encodeUriComponent = (str: string): Either.Either<string, EncodeExc
  * @category decoding
  * @since 3.12.0
  */
-export const decodeUriComponent = (str: string): Either.Either<string, DecodeException> =>
+export const decodeUriComponent = (
+  str: string
+): Either.Either<string, DecodeException> =>
   Either.try({
     try: () => decodeURIComponent(str),
-    catch: (e) => DecodeException(str, e instanceof Error ? e.message : "Invalid input")
-  })
+    catch: (e) =>
+      DecodeException(str, e instanceof Error ? e.message : "Invalid input"),
+  });
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const DecodeExceptionTypeId: unique symbol = Common.DecodeExceptionTypeId
+export const DecodeExceptionTypeId: unique symbol =
+  Common.DecodeExceptionTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type DecodeExceptionTypeId = typeof DecodeExceptionTypeId
+export type DecodeExceptionTypeId = typeof DecodeExceptionTypeId;
 
 /**
  * Represents a checked exception which occurs when decoding fails.
@@ -131,10 +155,10 @@ export type DecodeExceptionTypeId = typeof DecodeExceptionTypeId
  * @category models
  */
 export interface DecodeException {
-  readonly _tag: "DecodeException"
-  readonly [DecodeExceptionTypeId]: DecodeExceptionTypeId
-  readonly input: string
-  readonly message?: string
+  readonly _tag: "DecodeException";
+  readonly [DecodeExceptionTypeId]: DecodeExceptionTypeId;
+  readonly input: string;
+  readonly message?: string;
 }
 
 /**
@@ -143,7 +167,10 @@ export interface DecodeException {
  * @since 2.0.0
  * @category errors
  */
-export const DecodeException: (input: string, message?: string) => DecodeException = Common.DecodeException
+export const DecodeException: (
+  input: string,
+  message?: string
+) => DecodeException = Common.DecodeException;
 
 /**
  * Returns `true` if the specified value is an `DecodeException`, `false` otherwise.
@@ -151,19 +178,21 @@ export const DecodeException: (input: string, message?: string) => DecodeExcepti
  * @since 2.0.0
  * @category refinements
  */
-export const isDecodeException: (u: unknown) => u is DecodeException = Common.isDecodeException
+export const isDecodeException: (u: unknown) => u is DecodeException =
+  Common.isDecodeException;
 
 /**
  * @since 3.12.0
  * @category symbols
  */
-export const EncodeExceptionTypeId: unique symbol = Common.EncodeExceptionTypeId
+export const EncodeExceptionTypeId: unique symbol =
+  Common.EncodeExceptionTypeId;
 
 /**
  * @since 3.12.0
  * @category symbols
  */
-export type EncodeExceptionTypeId = typeof EncodeExceptionTypeId
+export type EncodeExceptionTypeId = typeof EncodeExceptionTypeId;
 
 /**
  * Represents a checked exception which occurs when encoding fails.
@@ -172,10 +201,10 @@ export type EncodeExceptionTypeId = typeof EncodeExceptionTypeId
  * @category models
  */
 export interface EncodeException {
-  readonly _tag: "EncodeException"
-  readonly [EncodeExceptionTypeId]: EncodeExceptionTypeId
-  readonly input: string
-  readonly message?: string
+  readonly _tag: "EncodeException";
+  readonly [EncodeExceptionTypeId]: EncodeExceptionTypeId;
+  readonly input: string;
+  readonly message?: string;
 }
 
 /**
@@ -184,7 +213,10 @@ export interface EncodeException {
  * @since 3.12.0
  * @category errors
  */
-export const EncodeException: (input: string, message?: string) => EncodeException = Common.EncodeException
+export const EncodeException: (
+  input: string,
+  message?: string
+) => EncodeException = Common.EncodeException;
 
 /**
  * Returns `true` if the specified value is an `EncodeException`, `false` otherwise.
@@ -192,4 +224,5 @@ export const EncodeException: (input: string, message?: string) => EncodeExcepti
  * @since 3.12.0
  * @category refinements
  */
-export const isEncodeException: (u: unknown) => u is EncodeException = Common.isEncodeException
+export const isEncodeException: (u: unknown) => u is EncodeException =
+  Common.isEncodeException;

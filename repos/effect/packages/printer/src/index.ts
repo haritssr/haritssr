@@ -16,34 +16,34 @@
  *
  * @since 1.0.0
  */
-export * as Doc from "./Doc.js"
+export * as Doc from "./Doc.js";
 
 /**
  * @since 1.0.0
  */
-export * as DocStream from "./DocStream.js"
+export * as DocStream from "./DocStream.js";
 
 /**
  * @since 1.0.0
  */
-export * as DocTree from "./DocTree.js"
+export * as DocTree from "./DocTree.js";
 
 /**
  * @since 1.0.0
  */
-export * as Flatten from "./Flatten.js"
+export * as Flatten from "./Flatten.js";
 
 /**
  * @since 1.0.0
  */
-export * as Layout from "./Layout.js"
+export * as Layout from "./Layout.js";
 
 /**
  * @since 1.0.0
  */
-export * as Optimize from "./Optimize.js"
+export * as Optimize from "./Optimize.js";
 
 /**
  * @since 1.0.0
  */
-export * as PageWidth from "./PageWidth.js"
+export * as PageWidth from "./PageWidth.js";

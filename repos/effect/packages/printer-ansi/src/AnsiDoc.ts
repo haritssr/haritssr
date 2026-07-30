@@ -1,11 +1,11 @@
 /**
  * @since 1.0.0
  */
-import type { Doc } from "@effect/printer/Doc"
-import type { AvailablePerLine } from "@effect/printer/PageWidth"
-import type { Ansi } from "./Ansi.js"
-import * as InternalAnsiDoc from "./internal/ansiDoc.js"
-import * as InternalAnsiRender from "./internal/ansiRender.js"
+import type { Doc } from "@effect/printer/Doc";
+import type { AvailablePerLine } from "@effect/printer/PageWidth";
+import type { Ansi } from "./Ansi.js";
+import * as InternalAnsiDoc from "./internal/ansiDoc.js";
+import * as InternalAnsiRender from "./internal/ansiRender.js";
 
 // -----------------------------------------------------------------------------
 // Models
@@ -15,7 +15,7 @@ import * as InternalAnsiRender from "./internal/ansiRender.js"
  * @since 1.0.0
  * @category model
  */
-export type AnsiDoc = Doc<Ansi>
+export type AnsiDoc = Doc<Ansi>;
 
 /**
  * @since 1.0.0
@@ -25,14 +25,14 @@ export declare namespace AnsiDoc {
    * @since 1.0.0
    * @category model
    */
-  export type RenderConfig = Compact | Pretty | Smart
+  export type RenderConfig = Compact | Pretty | Smart;
 
   /**
    * @since 1.0.0
    * @category model
    */
   export interface Compact {
-    readonly style: "compact"
+    readonly style: "compact";
   }
 
   /**
@@ -40,8 +40,8 @@ export declare namespace AnsiDoc {
    * @category model
    */
   export interface Pretty {
-    readonly style: "pretty"
-    readonly options?: Partial<Omit<AvailablePerLine, "_tag">>
+    readonly style: "pretty";
+    readonly options?: Partial<Omit<AvailablePerLine, "_tag">>;
   }
 
   /**
@@ -49,8 +49,8 @@ export declare namespace AnsiDoc {
    * @category model
    */
   export interface Smart {
-    readonly style: "smart"
-    readonly options?: Partial<Omit<AvailablePerLine, "_tag">>
+    readonly style: "smart";
+    readonly options?: Partial<Omit<AvailablePerLine, "_tag">>;
   }
 }
 
@@ -64,7 +64,7 @@ export declare namespace AnsiDoc {
  * @since 1.0.0
  * @category constructors
  */
-export const beep: AnsiDoc = InternalAnsiDoc.beep
+export const beep: AnsiDoc = InternalAnsiDoc.beep;
 
 /**
  * Moves the cursor to the specified `row` and `column`.
@@ -76,7 +76,8 @@ export const beep: AnsiDoc = InternalAnsiDoc.beep
  * @since 1.0.0
  * @category constructors
  */
-export const cursorTo: (column: number, row?: number) => AnsiDoc = InternalAnsiDoc.cursorTo
+export const cursorTo: (column: number, row?: number) => AnsiDoc =
+  InternalAnsiDoc.cursorTo;
 
 /**
  * Move the cursor position the specified number of `rows` and `columns`
@@ -88,7 +89,8 @@ export const cursorTo: (column: number, row?: number) => AnsiDoc = InternalAnsiD
  * @since 1.0.0
  * @category constructors
  */
-export const cursorMove: (column: number, row?: number) => AnsiDoc = InternalAnsiDoc.cursorMove
+export const cursorMove: (column: number, row?: number) => AnsiDoc =
+  InternalAnsiDoc.cursorMove;
 
 /**
  * Moves the cursor up by the specified number of `lines` (default `1`) relative
@@ -99,7 +101,7 @@ export const cursorMove: (column: number, row?: number) => AnsiDoc = InternalAns
  * @since 1.0.0
  * @category commands
  */
-export const cursorUp: (lines?: number) => AnsiDoc = InternalAnsiDoc.cursorUp
+export const cursorUp: (lines?: number) => AnsiDoc = InternalAnsiDoc.cursorUp;
 
 /**
  * Moves the cursor down by the specified number of `lines` (default `1`)
@@ -110,7 +112,8 @@ export const cursorUp: (lines?: number) => AnsiDoc = InternalAnsiDoc.cursorUp
  * @since 1.0.0
  * @category commands
  */
-export const cursorDown: (lines?: number) => AnsiDoc = InternalAnsiDoc.cursorDown
+export const cursorDown: (lines?: number) => AnsiDoc =
+  InternalAnsiDoc.cursorDown;
 
 /**
  * Moves the cursor forward by the specified number of `columns` (default `1`)
@@ -121,7 +124,8 @@ export const cursorDown: (lines?: number) => AnsiDoc = InternalAnsiDoc.cursorDow
  * @since 1.0.0
  * @category commands
  */
-export const cursorForward: (columns?: number) => AnsiDoc = InternalAnsiDoc.cursorForward
+export const cursorForward: (columns?: number) => AnsiDoc =
+  InternalAnsiDoc.cursorForward;
 
 /**
  * Moves the cursor backward by the specified number of `columns` (default `1`)
@@ -132,7 +136,8 @@ export const cursorForward: (columns?: number) => AnsiDoc = InternalAnsiDoc.curs
  * @since 1.0.0
  * @category commands
  */
-export const cursorBackward: (columns?: number) => AnsiDoc = InternalAnsiDoc.cursorBackward
+export const cursorBackward: (columns?: number) => AnsiDoc =
+  InternalAnsiDoc.cursorBackward;
 
 /**
  * Moves the cursor to the first column of the current row.
@@ -140,7 +145,7 @@ export const cursorBackward: (columns?: number) => AnsiDoc = InternalAnsiDoc.cur
  * @since 1.0.0
  * @category commands
  */
-export const cursorLeft: AnsiDoc = InternalAnsiDoc.cursorLeft
+export const cursorLeft: AnsiDoc = InternalAnsiDoc.cursorLeft;
 
 /**
  * Saves the cursor position, encoding shift state and formatting attributes.
@@ -148,7 +153,7 @@ export const cursorLeft: AnsiDoc = InternalAnsiDoc.cursorLeft
  * @since 1.0.0
  * @category commands
  */
-export const cursorSavePosition: AnsiDoc = InternalAnsiDoc.cursorSavePosition
+export const cursorSavePosition: AnsiDoc = InternalAnsiDoc.cursorSavePosition;
 
 /**
  * Restores the cursor position, encoding shift state and formatting attributes
@@ -157,7 +162,8 @@ export const cursorSavePosition: AnsiDoc = InternalAnsiDoc.cursorSavePosition
  * @since 1.0.0
  * @category commands
  */
-export const cursorRestorePosition: AnsiDoc = InternalAnsiDoc.cursorRestorePosition
+export const cursorRestorePosition: AnsiDoc =
+  InternalAnsiDoc.cursorRestorePosition;
 
 /**
  * Moves cursor to beginning of the line the specified number of rows down
@@ -166,7 +172,8 @@ export const cursorRestorePosition: AnsiDoc = InternalAnsiDoc.cursorRestorePosit
  * @since 1.0.0
  * @category commands
  */
-export const cursorNextLine: (rows?: number) => AnsiDoc = InternalAnsiDoc.cursorNextLine
+export const cursorNextLine: (rows?: number) => AnsiDoc =
+  InternalAnsiDoc.cursorNextLine;
 
 /**
  * Moves cursor to beginning of the line the specified number of rows up
@@ -175,7 +182,8 @@ export const cursorNextLine: (rows?: number) => AnsiDoc = InternalAnsiDoc.cursor
  * @since 1.0.0
  * @category commands
  */
-export const cursorPrevLine: (rows?: number) => AnsiDoc = InternalAnsiDoc.cursorPrevLine
+export const cursorPrevLine: (rows?: number) => AnsiDoc =
+  InternalAnsiDoc.cursorPrevLine;
 
 /**
  * Hides the cursor.
@@ -183,7 +191,7 @@ export const cursorPrevLine: (rows?: number) => AnsiDoc = InternalAnsiDoc.cursor
  * @since 1.0.0
  * @category commands
  */
-export const cursorHide: AnsiDoc = InternalAnsiDoc.cursorHide
+export const cursorHide: AnsiDoc = InternalAnsiDoc.cursorHide;
 
 /**
  * Shows the cursor.
@@ -191,7 +199,7 @@ export const cursorHide: AnsiDoc = InternalAnsiDoc.cursorHide
  * @since 1.0.0
  * @category commands
  */
-export const cursorShow: AnsiDoc = InternalAnsiDoc.cursorShow
+export const cursorShow: AnsiDoc = InternalAnsiDoc.cursorShow;
 
 /**
  * Erase from the current cursor position up the specified amount of rows.
@@ -199,7 +207,7 @@ export const cursorShow: AnsiDoc = InternalAnsiDoc.cursorShow
  * @since 1.0.0
  * @category commands
  */
-export const eraseLines: (rows: number) => AnsiDoc = InternalAnsiDoc.eraseLines
+export const eraseLines: (rows: number) => AnsiDoc = InternalAnsiDoc.eraseLines;
 
 /**
  * Clears from the current cursor position to the end of the current line.
@@ -209,7 +217,7 @@ export const eraseLines: (rows: number) => AnsiDoc = InternalAnsiDoc.eraseLines
  * @since 1.0.0
  * @category commands
  */
-export const eraseEndLine: AnsiDoc = InternalAnsiDoc.eraseEndLine
+export const eraseEndLine: AnsiDoc = InternalAnsiDoc.eraseEndLine;
 
 /**
  * Clears from the current cursor position to the start of the current line.
@@ -219,7 +227,7 @@ export const eraseEndLine: AnsiDoc = InternalAnsiDoc.eraseEndLine
  * @since 1.0.0
  * @category commands
  */
-export const eraseStartLine: AnsiDoc = InternalAnsiDoc.eraseStartLine
+export const eraseStartLine: AnsiDoc = InternalAnsiDoc.eraseStartLine;
 
 /**
  * Clears the current line.
@@ -229,7 +237,7 @@ export const eraseStartLine: AnsiDoc = InternalAnsiDoc.eraseStartLine
  * @since 1.0.0
  * @category commands
  */
-export const eraseLine: AnsiDoc = InternalAnsiDoc.eraseLine
+export const eraseLine: AnsiDoc = InternalAnsiDoc.eraseLine;
 
 /**
  * Clears from the current cursor position to the end of the screen.
@@ -239,7 +247,7 @@ export const eraseLine: AnsiDoc = InternalAnsiDoc.eraseLine
  * @since 1.0.0
  * @category commands
  */
-export const eraseDown: AnsiDoc = InternalAnsiDoc.eraseDown
+export const eraseDown: AnsiDoc = InternalAnsiDoc.eraseDown;
 
 /**
  * Clears from the current cursor position to the beginning of the screen.
@@ -249,7 +257,7 @@ export const eraseDown: AnsiDoc = InternalAnsiDoc.eraseDown
  * @since 1.0.0
  * @category commands
  */
-export const eraseUp: AnsiDoc = InternalAnsiDoc.eraseUp
+export const eraseUp: AnsiDoc = InternalAnsiDoc.eraseUp;
 
 /**
  * Clears the entire screen and move the cursor to the upper left.
@@ -257,7 +265,7 @@ export const eraseUp: AnsiDoc = InternalAnsiDoc.eraseUp
  * @since 1.0.0
  * @category commands
  */
-export const eraseScreen: AnsiDoc = InternalAnsiDoc.eraseScreen
+export const eraseScreen: AnsiDoc = InternalAnsiDoc.eraseScreen;
 
 // -----------------------------------------------------------------------------
 // Destructors
@@ -268,9 +276,9 @@ export const eraseScreen: AnsiDoc = InternalAnsiDoc.eraseScreen
  * @category destructors
  */
 export const render: {
-  (config: AnsiDoc.RenderConfig): (self: AnsiDoc) => string
-  (self: AnsiDoc, config: AnsiDoc.RenderConfig): string
-} = InternalAnsiRender.render
+  (config: AnsiDoc.RenderConfig): (self: AnsiDoc) => string;
+  (self: AnsiDoc, config: AnsiDoc.RenderConfig): string;
+} = InternalAnsiRender.render;
 
 // -----------------------------------------------------------------------------
 // Re-Exports
@@ -361,32 +369,8 @@ export type {
    * @since 1.0.0
    * @category model
    */
-  WithPageWidth
-} from "@effect/printer/Doc"
-
-export type {
-  /**
-   * @since 1.0.0
-   * @category model
-   */
-  AlreadyFlat,
-  /**
-   * @since 1.0.0
-   * @category model
-   */
-  Flatten,
-  /**
-   * @since 1.0.0
-   * @category model
-   */
-  Flattened,
-  /**
-   * @since 1.0.0
-   * @category model
-   */
-  NeverFlat
-} from "@effect/printer/Flatten"
-
+  WithPageWidth,
+} from "@effect/printer/Doc";
 export {
   /**
    * @since 1.0.0
@@ -575,14 +559,14 @@ export {
   hsep,
   /**
    * @since 1.0.0
-   * @category alignment
-   */
-  indent,
-  /**
-   * @since 1.0.0
    * @category instances
    */
   Invariant,
+  /**
+   * @since 1.0.0
+   * @category alignment
+   */
+  indent,
   /**
    * @since 1.0.0
    * @category refinements
@@ -862,5 +846,27 @@ export {
    * @since 1.0.0
    * @category utilities
    */
-  words
-} from "@effect/printer/Doc"
+  words,
+} from "@effect/printer/Doc";
+export type {
+  /**
+   * @since 1.0.0
+   * @category model
+   */
+  AlreadyFlat,
+  /**
+   * @since 1.0.0
+   * @category model
+   */
+  Flatten,
+  /**
+   * @since 1.0.0
+   * @category model
+   */
+  Flattened,
+  /**
+   * @since 1.0.0
+   * @category model
+   */
+  NeverFlat,
+} from "@effect/printer/Flatten";

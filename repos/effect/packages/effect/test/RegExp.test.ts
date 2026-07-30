@@ -1,13 +1,13 @@
-import { describe, it } from "@effect/vitest"
-import { assertFalse, assertTrue, strictEqual } from "@effect/vitest/utils"
-import { RegExp } from "effect"
+import { describe, it } from "@effect/vitest";
+import { assertFalse, assertTrue, strictEqual } from "@effect/vitest/utils";
+import { RegExp } from "effect";
 
 describe("RegExp", () => {
   it("isRegExp", () => {
-    assertTrue(RegExp.isRegExp(/a/))
-    assertFalse(RegExp.isRegExp(null))
-    assertFalse(RegExp.isRegExp("a"))
-  })
+    assertTrue(RegExp.isRegExp(/a/));
+    assertFalse(RegExp.isRegExp(null));
+    assertFalse(RegExp.isRegExp("a"));
+  });
 
   describe("escape", () => {
     it("should escape special characters correctly", () => {
@@ -27,13 +27,13 @@ describe("RegExp", () => {
         ["a^b", "a\\^b"],
         ["a$b", "a\\$b"],
         ["a\\b", "a\\\\b"],
-        ["a/b", "a\\/b"]
-      ]
+        ["a/b", "a\\/b"],
+      ];
 
       testCases.forEach(([input, expected]) => {
-        const result = RegExp.escape(input)
-        strictEqual(result, expected)
-      })
-    })
-  })
-})
+        const result = RegExp.escape(input);
+        strictEqual(result, expected);
+      });
+    });
+  });
+});

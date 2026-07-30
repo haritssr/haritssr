@@ -41,7 +41,12 @@ export default function Share() {
 
   return (
     <Toast.Provider swipeDirection="right">
-      <button className="cursor-pointer select-none text-zinc-400 hover:text-zinc-800" onClick={ButtonHandler} onKeyDown={ButtonHandler} type="button">
+      <button
+        className="cursor-pointer select-none text-zinc-400 hover:text-zinc-800"
+        onClick={ButtonHandler}
+        onKeyDown={ButtonHandler}
+        type="button"
+      >
         Share
       </button>
       <div className="fixed right-0 bottom-0 z-2147483647">
@@ -51,12 +56,16 @@ export default function Share() {
           open={open}
         >
           <div className="">
-            <Toast.Title className="mb-[5px] font-medium text-[15px] text-slate12 [grid-area:title]">Link copied to clipboard</Toast.Title>
+            <Toast.Title className="mb-[5px] font-medium text-[15px] text-slate12 [grid-area:title]">
+              Link copied to clipboard
+            </Toast.Title>
             <Toast.Description asChild>
               <div className="m-0 text-[13px] text-zinc-500 leading-[1.3] [grid-area:description]">{`haritssr.com${pathname}`}</div>
             </Toast.Description>
           </div>
-          <Toast.Close className="h-12 w-12 text-action hover:text-[#2563eb]/90">OK</Toast.Close>
+          <Toast.Close className="h-12 w-12 text-action hover:text-[#2563eb]/90">
+            OK
+          </Toast.Close>
         </Toast.Root>
         <Toast.Viewport className="m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-2.5 p-3 outline-hidden sm:p-6" />
       </div>

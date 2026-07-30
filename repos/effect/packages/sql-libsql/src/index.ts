@@ -1,9 +1,9 @@
 /**
  * @since 1.0.0
  */
-export * as LibsqlClient from "./LibsqlClient.js"
+export * as LibsqlClient from "./LibsqlClient.js";
 
 /**
  * @since 1.0.0
  */
-export * as LibsqlMigrator from "./LibsqlMigrator.js"
+export * as LibsqlMigrator from "./LibsqlMigrator.js";

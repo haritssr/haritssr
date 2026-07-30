@@ -1,10 +1,10 @@
-import type { D1Database } from "@cloudflare/workers-types"
-import { D1Client } from "@effect/sql-d1"
-import { Context, Data, Effect, Layer } from "effect"
-import { Miniflare } from "miniflare"
+import type { D1Database } from "@cloudflare/workers-types";
+import { D1Client } from "@effect/sql-d1";
+import { Context, Data, Effect, Layer } from "effect";
+import { Miniflare } from "miniflare";
 
 export class MiniflareError extends Data.TaggedError("MiniflareError")<{
-  cause: unknown
+  cause: unknown;
 }> {}
 
 export class D1Miniflare extends Context.Tag("test/D1Miniflare")<
@@ -19,21 +19,23 @@ export class D1Miniflare extends Context.Tag("test/D1Miniflare")<
           new Miniflare({
             modules: true,
             d1Databases: {
-              DB: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+              DB: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
-            script: ""
+            script: "",
           }),
-        catch: (cause) => new MiniflareError({ cause })
+        catch: (cause) => new MiniflareError({ cause }),
       }),
       (miniflare) => Effect.promise(() => miniflare.dispose())
     )
-  )
+  );
 
   static ClientLive = Layer.unwrapEffect(
-    Effect.gen(function*() {
-      const miniflare = yield* D1Miniflare
-      const db: D1Database = yield* Effect.tryPromise(() => miniflare.getD1Database("DB"))
-      return D1Client.layer({ db })
+    Effect.gen(function* () {
+      const miniflare = yield* D1Miniflare;
+      const db: D1Database = yield* Effect.tryPromise(() =>
+        miniflare.getD1Database("DB")
+      );
+      return D1Client.layer({ db });
     })
-  ).pipe(Layer.provide(this.Live))
+  ).pipe(Layer.provide(this.Live));
 }

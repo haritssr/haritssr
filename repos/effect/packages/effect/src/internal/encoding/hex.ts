@@ -1,38 +1,47 @@
-import * as Either from "../../Either.js"
-import type * as Encoding from "../../Encoding.js"
-import { DecodeException } from "./common.js"
+import * as Either from "../../Either.js";
+import type * as Encoding from "../../Encoding.js";
+import { DecodeException } from "./common.js";
 
 /** @internal */
 export const encode = (bytes: Uint8Array) => {
-  let result = ""
+  let result = "";
   for (let i = 0; i < bytes.length; ++i) {
-    result += bytesToHex[bytes[i]]
+    result += bytesToHex[bytes[i]];
   }
 
-  return result
-}
+  return result;
+};
 
 /** @internal */
-export const decode = (str: string): Either.Either<Uint8Array, Encoding.DecodeException> => {
-  const bytes = new TextEncoder().encode(str)
+export const decode = (
+  str: string
+): Either.Either<Uint8Array, Encoding.DecodeException> => {
+  const bytes = new TextEncoder().encode(str);
   if (bytes.length % 2 !== 0) {
-    return Either.left(DecodeException(str, `Length must be a multiple of 2, but is ${bytes.length}`))
+    return Either.left(
+      DecodeException(
+        str,
+        `Length must be a multiple of 2, but is ${bytes.length}`
+      )
+    );
   }
 
   try {
-    const length = bytes.length / 2
-    const result = new Uint8Array(length)
+    const length = bytes.length / 2;
+    const result = new Uint8Array(length);
     for (let i = 0; i < length; i++) {
-      const a = fromHexChar(bytes[i * 2])
-      const b = fromHexChar(bytes[i * 2 + 1])
-      result[i] = (a << 4) | b
+      const a = fromHexChar(bytes[i * 2]);
+      const b = fromHexChar(bytes[i * 2 + 1]);
+      result[i] = (a << 4) | b;
     }
 
-    return Either.right(result)
+    return Either.right(result);
   } catch (e) {
-    return Either.left(DecodeException(str, e instanceof Error ? e.message : "Invalid input"))
+    return Either.left(
+      DecodeException(str, e instanceof Error ? e.message : "Invalid input")
+    );
   }
-}
+};
 
 /** @internal */
 const bytesToHex = [
@@ -291,25 +300,25 @@ const bytesToHex = [
   "fc",
   "fd",
   "fe",
-  "ff"
-]
+  "ff",
+];
 
 /** @internal */
 const fromHexChar = (byte: number) => {
   // '0' <= byte && byte <= '9'
   if (48 <= byte && byte <= 57) {
-    return byte - 48
+    return byte - 48;
   }
 
   // 'a' <= byte && byte <= 'f'
   if (97 <= byte && byte <= 102) {
-    return byte - 97 + 10
+    return byte - 97 + 10;
   }
 
   // 'A' <= byte && byte <= 'F'
   if (65 <= byte && byte <= 70) {
-    return byte - 65 + 10
+    return byte - 65 + 10;
   }
 
-  throw new TypeError("Invalid input")
-}
+  throw new TypeError("Invalid input");
+};

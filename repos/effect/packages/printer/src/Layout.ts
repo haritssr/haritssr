@@ -2,12 +2,12 @@
  * @since 1.0.0
  */
 
-import type { LazyArg } from "effect/Function"
-import type { Doc } from "./Doc.js"
-import type { DocStream } from "./DocStream.js"
-import * as internal from "./internal/layout.js"
-import { defaultPageWidth } from "./PageWidth.js"
-import type { PageWidth } from "./PageWidth.js"
+import type { LazyArg } from "effect/Function";
+import type { Doc } from "./Doc.js";
+import type { DocStream } from "./DocStream.js";
+import * as internal from "./internal/layout.js";
+import type { PageWidth } from "./PageWidth.js";
+import { defaultPageWidth } from "./PageWidth.js";
 
 // -----------------------------------------------------------------------------
 // Models
@@ -17,9 +17,7 @@ import type { PageWidth } from "./PageWidth.js"
  * @since 1.0.0
  * @category model
  */
-export interface Layout<A> {
-  (options: Layout.Options): DocStream<A>
-}
+export type Layout<A> = (options: Layout.Options) => DocStream<A>;
 
 /**
  * @since 1.0.0
@@ -32,7 +30,7 @@ export declare namespace Layout {
    * @category model
    */
   export interface Options {
-    readonly pageWidth: PageWidth
+    readonly pageWidth: PageWidth;
   }
 
   /**
@@ -45,21 +43,20 @@ export declare namespace Layout {
    * @since 1.0.0
    * @category model
    */
-  export interface FittingPredicate<A> {
-    (
-      stream: DocStream<A>,
-      indentation: number,
-      currentColumn: number,
-      comparator: LazyArg<DocStream<A>>
-    ): boolean
-  }
+  export type FittingPredicate<A> = (
+    stream: DocStream<A>,
+    indentation: number,
+    currentColumn: number,
+    comparator: LazyArg<DocStream<A>>
+  ) => boolean;
 }
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const options: (pageWidth: PageWidth) => Layout.Options = internal.options
+export const options: (pageWidth: PageWidth) => Layout.Options =
+  internal.options;
 
 /**
  * The default layout options, which are suitable when you want to obtain output
@@ -68,7 +65,7 @@ export const options: (pageWidth: PageWidth) => Layout.Options = internal.option
  * @since 1.0.0
  * @category constructors
  */
-export const defaultOptions: Layout.Options = options(defaultPageWidth)
+export const defaultOptions: Layout.Options = options(defaultPageWidth);
 
 // -----------------------------------------------------------------------------
 // Layout Algorithms
@@ -79,9 +76,16 @@ export const defaultOptions: Layout.Options = options(defaultPageWidth)
  * @category layout algorithms
  */
 export const wadlerLeijen: {
-  <A>(fits: Layout.FittingPredicate<A>, options: Layout.Options): (self: Doc<A>) => DocStream<A>
-  <A>(self: Doc<A>, fits: Layout.FittingPredicate<A>, options: Layout.Options): DocStream<A>
-} = internal.wadlerLeijen
+  <A>(
+    fits: Layout.FittingPredicate<A>,
+    options: Layout.Options
+  ): (self: Doc<A>) => DocStream<A>;
+  <A>(
+    self: Doc<A>,
+    fits: Layout.FittingPredicate<A>,
+    options: Layout.Options
+  ): DocStream<A>;
+} = internal.wadlerLeijen;
 
 /**
  * A layout algorithm which will lay out a document without adding any
@@ -134,7 +138,7 @@ export const wadlerLeijen: {
  * @since 1.0.0
  * @category layout algorithms
  */
-export const compact: <A>(self: Doc<A>) => DocStream<A> = internal.compact
+export const compact: <A>(self: Doc<A>) => DocStream<A> = internal.compact;
 
 /**
  * The `pretty` layout algorithm is the default algorithm for rendering
@@ -152,9 +156,9 @@ export const compact: <A>(self: Doc<A>) => DocStream<A> = internal.compact
  * @category layout algorithms
  */
 export const pretty: {
-  (options: Layout.Options): <A>(self: Doc<A>) => DocStream<A>
-  <A>(self: Doc<A>, options: Layout.Options): DocStream<A>
-} = internal.pretty
+  (options: Layout.Options): <A>(self: Doc<A>) => DocStream<A>;
+  <A>(self: Doc<A>, options: Layout.Options): DocStream<A>;
+} = internal.pretty;
 
 /**
  * A layout algorithm with more look ahead than `pretty`, which will introduce
@@ -253,9 +257,9 @@ export const pretty: {
  * @category layout algorithms
  */
 export const smart: {
-  (options: Layout.Options): <A>(self: Doc<A>) => DocStream<A>
-  <A>(self: Doc<A>, options: Layout.Options): DocStream<A>
-} = internal.smart
+  (options: Layout.Options): <A>(self: Doc<A>) => DocStream<A>;
+  <A>(self: Doc<A>, options: Layout.Options): DocStream<A>;
+} = internal.smart;
 
 /**
  * The `unbounded` layout algorithm will lay out a document an `Unbounded`
@@ -264,4 +268,4 @@ export const smart: {
  * @since 1.0.0
  * @category layout algorithms
  */
-export const unbounded: <A>(self: Doc<A>) => DocStream<A> = internal.unbounded
+export const unbounded: <A>(self: Doc<A>) => DocStream<A> = internal.unbounded;

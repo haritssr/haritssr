@@ -1,27 +1,30 @@
 /**
  * @since 2.0.0
  */
-import * as internal from "./internal/channel/upstreamPullStrategy.js"
-import type * as Option from "./Option.js"
-import type * as Types from "./Types.js"
+import * as internal from "./internal/channel/upstreamPullStrategy.js";
+import type * as Option from "./Option.js";
+import type * as Types from "./Types.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const UpstreamPullStrategyTypeId: unique symbol = internal.UpstreamPullStrategyTypeId
+export const UpstreamPullStrategyTypeId: unique symbol =
+  internal.UpstreamPullStrategyTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type UpstreamPullStrategyTypeId = typeof UpstreamPullStrategyTypeId
+export type UpstreamPullStrategyTypeId = typeof UpstreamPullStrategyTypeId;
 
 /**
  * @since 2.0.0
  * @category models
  */
-export type UpstreamPullStrategy<A> = PullAfterNext<A> | PullAfterAllEnqueued<A>
+export type UpstreamPullStrategy<A> =
+  | PullAfterNext<A>
+  | PullAfterAllEnqueued<A>;
 
 /**
  * @since 2.0.0
@@ -33,8 +36,8 @@ export declare namespace UpstreamPullStrategy {
    */
   export interface Variance<out A> {
     readonly [UpstreamPullStrategyTypeId]: {
-      readonly _A: Types.Covariant<A>
-    }
+      readonly _A: Types.Covariant<A>;
+    };
   }
 }
 
@@ -43,31 +46,35 @@ export declare namespace UpstreamPullStrategy {
  * @category models
  */
 export interface PullAfterNext<out A> extends UpstreamPullStrategy.Variance<A> {
-  readonly _tag: "PullAfterNext"
-  readonly emitSeparator: Option.Option<A>
+  readonly _tag: "PullAfterNext";
+  readonly emitSeparator: Option.Option<A>;
 }
 
 /**
  * @since 2.0.0
  * @category models
  */
-export interface PullAfterAllEnqueued<out A> extends UpstreamPullStrategy.Variance<A> {
-  readonly _tag: "PullAfterAllEnqueued"
-  readonly emitSeparator: Option.Option<A>
+export interface PullAfterAllEnqueued<out A>
+  extends UpstreamPullStrategy.Variance<A> {
+  readonly _tag: "PullAfterAllEnqueued";
+  readonly emitSeparator: Option.Option<A>;
 }
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const PullAfterNext: <A>(emitSeparator: Option.Option<A>) => UpstreamPullStrategy<A> = internal.PullAfterNext
+export const PullAfterNext: <A>(
+  emitSeparator: Option.Option<A>
+) => UpstreamPullStrategy<A> = internal.PullAfterNext;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const PullAfterAllEnqueued: <A>(emitSeparator: Option.Option<A>) => UpstreamPullStrategy<A> =
-  internal.PullAfterAllEnqueued
+export const PullAfterAllEnqueued: <A>(
+  emitSeparator: Option.Option<A>
+) => UpstreamPullStrategy<A> = internal.PullAfterAllEnqueued;
 
 /**
  * Returns `true` if the specified value is an `UpstreamPullStrategy`, `false`
@@ -76,8 +83,9 @@ export const PullAfterAllEnqueued: <A>(emitSeparator: Option.Option<A>) => Upstr
  * @since 2.0.0
  * @category refinements
  */
-export const isUpstreamPullStrategy: (u: unknown) => u is UpstreamPullStrategy<unknown> =
-  internal.isUpstreamPullStrategy
+export const isUpstreamPullStrategy: (
+  u: unknown
+) => u is UpstreamPullStrategy<unknown> = internal.isUpstreamPullStrategy;
 
 /**
  * Returns `true` if the specified `UpstreamPullStrategy` is a `PullAfterNext`,
@@ -86,7 +94,9 @@ export const isUpstreamPullStrategy: (u: unknown) => u is UpstreamPullStrategy<u
  * @since 2.0.0
  * @category refinements
  */
-export const isPullAfterNext: <A>(self: UpstreamPullStrategy<A>) => self is PullAfterNext<A> = internal.isPullAfterNext
+export const isPullAfterNext: <A>(
+  self: UpstreamPullStrategy<A>
+) => self is PullAfterNext<A> = internal.isPullAfterNext;
 
 /**
  * Returns `true` if the specified `UpstreamPullStrategy` is a
@@ -95,8 +105,9 @@ export const isPullAfterNext: <A>(self: UpstreamPullStrategy<A>) => self is Pull
  * @since 2.0.0
  * @category refinements
  */
-export const isPullAfterAllEnqueued: <A>(self: UpstreamPullStrategy<A>) => self is PullAfterAllEnqueued<A> =
-  internal.isPullAfterAllEnqueued
+export const isPullAfterAllEnqueued: <A>(
+  self: UpstreamPullStrategy<A>
+) => self is PullAfterAllEnqueued<A> = internal.isPullAfterAllEnqueued;
 
 /**
  * Folds an `UpstreamPullStrategy<A>` into a value of type `Z`.
@@ -105,17 +116,15 @@ export const isPullAfterAllEnqueued: <A>(self: UpstreamPullStrategy<A>) => self 
  * @category folding
  */
 export const match: {
-  <A, Z>(
-    options: {
-      readonly onNext: (emitSeparator: Option.Option<A>) => Z
-      readonly onAllEnqueued: (emitSeparator: Option.Option<A>) => Z
-    }
-  ): (self: UpstreamPullStrategy<A>) => Z
+  <A, Z>(options: {
+    readonly onNext: (emitSeparator: Option.Option<A>) => Z;
+    readonly onAllEnqueued: (emitSeparator: Option.Option<A>) => Z;
+  }): (self: UpstreamPullStrategy<A>) => Z;
   <A, Z>(
     self: UpstreamPullStrategy<A>,
     options: {
-      readonly onNext: (emitSeparator: Option.Option<A>) => Z
-      readonly onAllEnqueued: (emitSeparator: Option.Option<A>) => Z
+      readonly onNext: (emitSeparator: Option.Option<A>) => Z;
+      readonly onAllEnqueued: (emitSeparator: Option.Option<A>) => Z;
     }
-  ): Z
-} = internal.match
+  ): Z;
+} = internal.match;

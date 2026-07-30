@@ -15,9 +15,18 @@ export default function InputList() {
 
   return (
     <div>
-      <input className="border px-2 py-1" onChange={(e) => setInput(e.target.value)} type="text" value={input} />
+      <input
+        className="border px-2 py-1"
+        onChange={(e) => setInput(e.target.value)}
+        type="text"
+        value={input}
+      />
 
-      <button className="text-white bg-blue-500 rounded px-2 py-1" onClick={handleAdd} type="button">
+      <button
+        className="rounded bg-blue-500 px-2 py-1 text-white"
+        onClick={handleAdd}
+        type="button"
+      >
         Add
       </button>
 

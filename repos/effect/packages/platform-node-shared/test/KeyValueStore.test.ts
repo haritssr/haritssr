@@ -1,8 +1,10 @@
-import * as KvN from "@effect/platform-node-shared/NodeKeyValueStore"
-import { describe } from "@effect/vitest"
-// @ts-ignore
-import { testLayer } from "../../platform/test/KeyValueStore.test.js"
+import * as KvN from "@effect/platform-node-shared/NodeKeyValueStore";
+import { describe } from "@effect/vitest";
+// @ts-expect-error
+import { testLayer } from "../../platform/test/KeyValueStore.test.js";
 
-const KeyValueLive = KvN.layerFileSystem(`${__dirname}/fixtures/kv`)
+const KeyValueLive = KvN.layerFileSystem(`${__dirname}/fixtures/kv`);
 
-describe.sequential("KeyValueStore / layerFileSystem", () => testLayer(KeyValueLive))
+describe.sequential("KeyValueStore / layerFileSystem", () =>
+  testLayer(KeyValueLive)
+);

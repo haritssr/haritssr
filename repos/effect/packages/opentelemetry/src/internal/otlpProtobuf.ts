@@ -7,8 +7,8 @@
  * @internal
  */
 
-import type { AnyValue, KeyValue, Resource } from "../OtlpResource.js"
-import * as Proto from "./protobuf.js"
+import type { AnyValue, KeyValue, Resource } from "../OtlpResource.js";
+import * as Proto from "./protobuf.js";
 
 // Common types (opentelemetry.proto.common.v1)
 
@@ -29,28 +29,28 @@ import * as Proto from "./protobuf.js"
  */
 export const encodeAnyValue = (value: AnyValue): Uint8Array => {
   if (value.stringValue !== undefined && value.stringValue !== null) {
-    return Proto.stringField(1, value.stringValue)
+    return Proto.stringField(1, value.stringValue);
   }
   if (value.boolValue !== undefined && value.boolValue !== null) {
-    return Proto.boolField(2, value.boolValue)
+    return Proto.boolField(2, value.boolValue);
   }
   if (value.intValue !== undefined && value.intValue !== null) {
-    return Proto.varintField(3, BigInt(value.intValue))
+    return Proto.varintField(3, BigInt(value.intValue));
   }
   if (value.doubleValue !== undefined && value.doubleValue !== null) {
-    return Proto.doubleField(4, value.doubleValue)
+    return Proto.doubleField(4, value.doubleValue);
   }
   if (value.arrayValue !== undefined) {
-    return Proto.messageField(5, encodeArrayValue(value.arrayValue))
+    return Proto.messageField(5, encodeArrayValue(value.arrayValue));
   }
   if (value.kvlistValue !== undefined) {
-    return Proto.messageField(6, encodeKeyValueList(value.kvlistValue))
+    return Proto.messageField(6, encodeKeyValueList(value.kvlistValue));
   }
   if (value.bytesValue !== undefined) {
-    return Proto.lengthDelimitedField(7, value.bytesValue)
+    return Proto.lengthDelimitedField(7, value.bytesValue);
   }
-  return new Uint8Array(0)
-}
+  return new Uint8Array(0);
+};
 
 /**
  * Encodes an ArrayValue message.
@@ -59,8 +59,9 @@ export const encodeAnyValue = (value: AnyValue): Uint8Array => {
  *   repeated AnyValue values = 1;
  * }
  */
-export const encodeArrayValue = (value: { values: ReadonlyArray<AnyValue> }): Uint8Array =>
-  Proto.repeatedField(1, value.values, encodeAnyValue)
+export const encodeArrayValue = (value: {
+  values: ReadonlyArray<AnyValue>;
+}): Uint8Array => Proto.repeatedField(1, value.values, encodeAnyValue);
 
 /**
  * Encodes a KeyValueList message.
@@ -69,8 +70,9 @@ export const encodeArrayValue = (value: { values: ReadonlyArray<AnyValue> }): Ui
  *   repeated KeyValue values = 1;
  * }
  */
-export const encodeKeyValueList = (value: { values: ReadonlyArray<KeyValue> }): Uint8Array =>
-  Proto.repeatedField(1, value.values, encodeKeyValue)
+export const encodeKeyValueList = (value: {
+  values: ReadonlyArray<KeyValue>;
+}): Uint8Array => Proto.repeatedField(1, value.values, encodeKeyValue);
 
 /**
  * Encodes a KeyValue message.
@@ -84,7 +86,7 @@ export const encodeKeyValue = (kv: KeyValue): Uint8Array =>
   Proto.concat(
     Proto.stringField(1, kv.key),
     Proto.messageField(2, encodeAnyValue(kv.value))
-  )
+  );
 
 /**
  * Encodes an InstrumentationScope message.
@@ -97,17 +99,21 @@ export const encodeKeyValue = (kv: KeyValue): Uint8Array =>
  * }
  */
 export const encodeInstrumentationScope = (scope: {
-  readonly name: string
-  readonly version?: string
-  readonly attributes?: ReadonlyArray<KeyValue>
-  readonly droppedAttributesCount?: number
+  readonly name: string;
+  readonly version?: string;
+  readonly attributes?: ReadonlyArray<KeyValue>;
+  readonly droppedAttributesCount?: number;
 }): Uint8Array =>
   Proto.concat(
     Proto.stringField(1, scope.name),
     Proto.optionalStringField(2, scope.version),
-    scope.attributes ? Proto.repeatedField(3, scope.attributes, encodeKeyValue) : new Uint8Array(0),
-    scope.droppedAttributesCount ? Proto.varintField(4, scope.droppedAttributesCount) : new Uint8Array(0)
-  )
+    scope.attributes
+      ? Proto.repeatedField(3, scope.attributes, encodeKeyValue)
+      : new Uint8Array(0),
+    scope.droppedAttributesCount
+      ? Proto.varintField(4, scope.droppedAttributesCount)
+      : new Uint8Array(0)
+  );
 
 // Resource types (opentelemetry.proto.resource.v1)
 
@@ -125,7 +131,7 @@ export const encodeResource = (resource: Resource): Uint8Array =>
     resource.droppedAttributesCount > 0
       ? Proto.varintField(2, resource.droppedAttributesCount)
       : new Uint8Array(0)
-  )
+  );
 
 // Trace types (opentelemetry.proto.trace.v1)
 
@@ -135,8 +141,8 @@ export const encodeResource = (resource: Resource): Uint8Array =>
 export const StatusCode = {
   Unset: 0,
   Ok: 1,
-  Error: 2
-} as const
+  Error: 2,
+} as const;
 
 /**
  * SpanKind enum
@@ -147,8 +153,8 @@ export const SpanKind = {
   Server: 2,
   Client: 3,
   Producer: 4,
-  Consumer: 5
-} as const
+  Consumer: 5,
+} as const;
 
 /**
  * Encodes a Status message.
@@ -159,13 +165,13 @@ export const SpanKind = {
  * }
  */
 export const encodeStatus = (status: {
-  readonly code: number
-  readonly message?: string
+  readonly code: number;
+  readonly message?: string;
 }): Uint8Array =>
   Proto.concat(
     Proto.optionalStringField(2, status.message),
     Proto.varintField(3, status.code)
-  )
+  );
 
 /**
  * Encodes an Event message.
@@ -178,10 +184,10 @@ export const encodeStatus = (status: {
  * }
  */
 export const encodeEvent = (event: {
-  readonly timeUnixNano: string
-  readonly name: string
-  readonly attributes: ReadonlyArray<KeyValue>
-  readonly droppedAttributesCount: number
+  readonly timeUnixNano: string;
+  readonly name: string;
+  readonly attributes: ReadonlyArray<KeyValue>;
+  readonly droppedAttributesCount: number;
 }): Uint8Array =>
   Proto.concat(
     Proto.fixed64Field(1, BigInt(event.timeUnixNano)),
@@ -190,7 +196,7 @@ export const encodeEvent = (event: {
     event.droppedAttributesCount > 0
       ? Proto.varintField(4, event.droppedAttributesCount)
       : new Uint8Array(0)
-  )
+  );
 
 /**
  * Encodes a Link message.
@@ -205,12 +211,12 @@ export const encodeEvent = (event: {
  * }
  */
 export const encodeLink = (link: {
-  readonly traceId: string
-  readonly spanId: string
-  readonly traceState?: string
-  readonly attributes: ReadonlyArray<KeyValue>
-  readonly droppedAttributesCount: number
-  readonly flags?: number
+  readonly traceId: string;
+  readonly spanId: string;
+  readonly traceState?: string;
+  readonly attributes: ReadonlyArray<KeyValue>;
+  readonly droppedAttributesCount: number;
+  readonly flags?: number;
 }): Uint8Array =>
   Proto.concat(
     Proto.bytesFieldFromHex(1, link.traceId),
@@ -220,8 +226,10 @@ export const encodeLink = (link: {
     link.droppedAttributesCount > 0
       ? Proto.varintField(5, link.droppedAttributesCount)
       : new Uint8Array(0),
-    link.flags !== undefined ? Proto.fixed32Field(6, link.flags) : new Uint8Array(0)
-  )
+    link.flags !== undefined
+      ? Proto.fixed32Field(6, link.flags)
+      : new Uint8Array(0)
+  );
 
 /**
  * Encodes a Span message.
@@ -246,37 +254,37 @@ export const encodeLink = (link: {
  * }
  */
 export const encodeSpan = (span: {
-  readonly traceId: string
-  readonly spanId: string
-  readonly traceState?: string
-  readonly parentSpanId?: string
-  readonly name: string
-  readonly kind: number
-  readonly startTimeUnixNano: string
-  readonly endTimeUnixNano: string
-  readonly attributes: ReadonlyArray<KeyValue>
-  readonly droppedAttributesCount: number
+  readonly traceId: string;
+  readonly spanId: string;
+  readonly traceState?: string;
+  readonly parentSpanId?: string;
+  readonly name: string;
+  readonly kind: number;
+  readonly startTimeUnixNano: string;
+  readonly endTimeUnixNano: string;
+  readonly attributes: ReadonlyArray<KeyValue>;
+  readonly droppedAttributesCount: number;
   readonly events: ReadonlyArray<{
-    readonly timeUnixNano: string
-    readonly name: string
-    readonly attributes: ReadonlyArray<KeyValue>
-    readonly droppedAttributesCount: number
-  }>
-  readonly droppedEventsCount: number
+    readonly timeUnixNano: string;
+    readonly name: string;
+    readonly attributes: ReadonlyArray<KeyValue>;
+    readonly droppedAttributesCount: number;
+  }>;
+  readonly droppedEventsCount: number;
   readonly links: ReadonlyArray<{
-    readonly traceId: string
-    readonly spanId: string
-    readonly traceState?: string
-    readonly attributes: ReadonlyArray<KeyValue>
-    readonly droppedAttributesCount: number
-    readonly flags?: number
-  }>
-  readonly droppedLinksCount: number
+    readonly traceId: string;
+    readonly spanId: string;
+    readonly traceState?: string;
+    readonly attributes: ReadonlyArray<KeyValue>;
+    readonly droppedAttributesCount: number;
+    readonly flags?: number;
+  }>;
+  readonly droppedLinksCount: number;
   readonly status: {
-    readonly code: number
-    readonly message?: string
-  }
-  readonly flags?: number
+    readonly code: number;
+    readonly message?: string;
+  };
+  readonly flags?: number;
 }): Uint8Array =>
   Proto.concat(
     Proto.bytesFieldFromHex(1, span.traceId),
@@ -302,8 +310,10 @@ export const encodeSpan = (span: {
       ? Proto.varintField(14, span.droppedLinksCount)
       : new Uint8Array(0),
     Proto.messageField(15, encodeStatus(span.status)),
-    span.flags !== undefined ? Proto.fixed32Field(16, span.flags) : new Uint8Array(0)
-  )
+    span.flags !== undefined
+      ? Proto.fixed32Field(16, span.flags)
+      : new Uint8Array(0)
+  );
 
 /**
  * Encodes a ScopeSpans message.
@@ -315,15 +325,15 @@ export const encodeSpan = (span: {
  * }
  */
 export const encodeScopeSpans = (scopeSpans: {
-  readonly scope: { readonly name: string; readonly version?: string }
-  readonly spans: ReadonlyArray<Parameters<typeof encodeSpan>[0]>
-  readonly schemaUrl?: string
+  readonly scope: { readonly name: string; readonly version?: string };
+  readonly spans: ReadonlyArray<Parameters<typeof encodeSpan>[0]>;
+  readonly schemaUrl?: string;
 }): Uint8Array =>
   Proto.concat(
     Proto.messageField(1, encodeInstrumentationScope(scopeSpans.scope)),
     Proto.repeatedField(2, scopeSpans.spans, encodeSpan),
     Proto.optionalStringField(3, scopeSpans.schemaUrl)
-  )
+  );
 
 /**
  * Encodes a ResourceSpans message.
@@ -335,15 +345,15 @@ export const encodeScopeSpans = (scopeSpans: {
  * }
  */
 export const encodeResourceSpans = (resourceSpans: {
-  readonly resource: Resource
-  readonly scopeSpans: ReadonlyArray<Parameters<typeof encodeScopeSpans>[0]>
-  readonly schemaUrl?: string
+  readonly resource: Resource;
+  readonly scopeSpans: ReadonlyArray<Parameters<typeof encodeScopeSpans>[0]>;
+  readonly schemaUrl?: string;
 }): Uint8Array =>
   Proto.concat(
     Proto.messageField(1, encodeResource(resourceSpans.resource)),
     Proto.repeatedField(2, resourceSpans.scopeSpans, encodeScopeSpans),
     Proto.optionalStringField(3, resourceSpans.schemaUrl)
-  )
+  );
 
 /**
  * Encodes a TracesData message (top-level export request).
@@ -353,8 +363,11 @@ export const encodeResourceSpans = (resourceSpans: {
  * }
  */
 export const encodeTracesData = (tracesData: {
-  readonly resourceSpans: ReadonlyArray<Parameters<typeof encodeResourceSpans>[0]>
-}): Uint8Array => Proto.repeatedField(1, tracesData.resourceSpans, encodeResourceSpans)
+  readonly resourceSpans: ReadonlyArray<
+    Parameters<typeof encodeResourceSpans>[0]
+  >;
+}): Uint8Array =>
+  Proto.repeatedField(1, tracesData.resourceSpans, encodeResourceSpans);
 
 // Metrics types (opentelemetry.proto.metrics.v1)
 
@@ -364,8 +377,8 @@ export const encodeTracesData = (tracesData: {
 export const AggregationTemporality = {
   Unspecified: 0,
   Delta: 1,
-  Cumulative: 2
-} as const
+  Cumulative: 2,
+} as const;
 
 /**
  * Encodes a NumberDataPoint message.
@@ -383,12 +396,12 @@ export const AggregationTemporality = {
  * }
  */
 export const encodeNumberDataPoint = (point: {
-  readonly attributes: ReadonlyArray<KeyValue>
-  readonly startTimeUnixNano: string
-  readonly timeUnixNano: string
-  readonly asDouble?: number | undefined
-  readonly asInt?: string | number | bigint | undefined
-  readonly flags?: number | undefined
+  readonly attributes: ReadonlyArray<KeyValue>;
+  readonly startTimeUnixNano: string;
+  readonly timeUnixNano: string;
+  readonly asDouble?: number | undefined;
+  readonly asInt?: string | number | bigint | undefined;
+  readonly flags?: number | undefined;
 }): Uint8Array =>
   Proto.concat(
     Proto.fixed64Field(2, BigInt(point.startTimeUnixNano)),
@@ -400,8 +413,10 @@ export const encodeNumberDataPoint = (point: {
       ? Proto.fixed64Field(6, BigInt(point.asInt))
       : new Uint8Array(0),
     Proto.repeatedField(7, point.attributes, encodeKeyValue),
-    point.flags !== undefined ? Proto.varintField(8, point.flags) : new Uint8Array(0)
-  )
+    point.flags !== undefined
+      ? Proto.varintField(8, point.flags)
+      : new Uint8Array(0)
+  );
 
 /**
  * Encodes a HistogramDataPoint message.
@@ -420,38 +435,46 @@ export const encodeNumberDataPoint = (point: {
  * }
  */
 export const encodeHistogramDataPoint = (point: {
-  readonly attributes: ReadonlyArray<KeyValue>
-  readonly startTimeUnixNano: string
-  readonly timeUnixNano: string
-  readonly count: string | number | bigint
-  readonly sum?: number | undefined
-  readonly bucketCounts: ReadonlyArray<string | number | bigint>
-  readonly explicitBounds: ReadonlyArray<number>
-  readonly min?: number | undefined
-  readonly max?: number | undefined
-  readonly flags?: number | undefined
+  readonly attributes: ReadonlyArray<KeyValue>;
+  readonly startTimeUnixNano: string;
+  readonly timeUnixNano: string;
+  readonly count: string | number | bigint;
+  readonly sum?: number | undefined;
+  readonly bucketCounts: ReadonlyArray<string | number | bigint>;
+  readonly explicitBounds: ReadonlyArray<number>;
+  readonly min?: number | undefined;
+  readonly max?: number | undefined;
+  readonly flags?: number | undefined;
 }): Uint8Array => {
   // Pack bucket counts as repeated fixed64
   const bucketCountsEncoded = Proto.concat(
     ...point.bucketCounts.map((count) => Proto.fixed64Field(6, BigInt(count)))
-  )
+  );
   // Pack explicit bounds as repeated double
   const explicitBoundsEncoded = Proto.concat(
     ...point.explicitBounds.map((bound) => Proto.doubleField(7, bound))
-  )
+  );
   return Proto.concat(
     Proto.fixed64Field(2, BigInt(point.startTimeUnixNano)),
     Proto.fixed64Field(3, BigInt(point.timeUnixNano)),
     Proto.fixed64Field(4, BigInt(point.count)),
-    point.sum !== undefined ? Proto.doubleField(5, point.sum) : new Uint8Array(0),
+    point.sum !== undefined
+      ? Proto.doubleField(5, point.sum)
+      : new Uint8Array(0),
     bucketCountsEncoded,
     explicitBoundsEncoded,
     Proto.repeatedField(9, point.attributes, encodeKeyValue),
-    point.flags !== undefined ? Proto.varintField(10, point.flags) : new Uint8Array(0),
-    point.min !== undefined ? Proto.doubleField(11, point.min) : new Uint8Array(0),
-    point.max !== undefined ? Proto.doubleField(12, point.max) : new Uint8Array(0)
-  )
-}
+    point.flags !== undefined
+      ? Proto.varintField(10, point.flags)
+      : new Uint8Array(0),
+    point.min !== undefined
+      ? Proto.doubleField(11, point.min)
+      : new Uint8Array(0),
+    point.max !== undefined
+      ? Proto.doubleField(12, point.max)
+      : new Uint8Array(0)
+  );
+};
 
 /**
  * Encodes a Gauge message.
@@ -461,8 +484,11 @@ export const encodeHistogramDataPoint = (point: {
  * }
  */
 export const encodeGauge = (gauge: {
-  readonly dataPoints: ReadonlyArray<Parameters<typeof encodeNumberDataPoint>[0]>
-}): Uint8Array => Proto.repeatedField(1, gauge.dataPoints, encodeNumberDataPoint)
+  readonly dataPoints: ReadonlyArray<
+    Parameters<typeof encodeNumberDataPoint>[0]
+  >;
+}): Uint8Array =>
+  Proto.repeatedField(1, gauge.dataPoints, encodeNumberDataPoint);
 
 /**
  * Encodes a Sum message.
@@ -474,15 +500,17 @@ export const encodeGauge = (gauge: {
  * }
  */
 export const encodeSum = (sum: {
-  readonly dataPoints: ReadonlyArray<Parameters<typeof encodeNumberDataPoint>[0]>
-  readonly aggregationTemporality: number
-  readonly isMonotonic: boolean
+  readonly dataPoints: ReadonlyArray<
+    Parameters<typeof encodeNumberDataPoint>[0]
+  >;
+  readonly aggregationTemporality: number;
+  readonly isMonotonic: boolean;
 }): Uint8Array =>
   Proto.concat(
     Proto.repeatedField(1, sum.dataPoints, encodeNumberDataPoint),
     Proto.varintField(2, sum.aggregationTemporality),
     Proto.boolField(3, sum.isMonotonic)
-  )
+  );
 
 /**
  * Encodes a Histogram message.
@@ -493,13 +521,15 @@ export const encodeSum = (sum: {
  * }
  */
 export const encodeHistogram = (histogram: {
-  readonly dataPoints: ReadonlyArray<Parameters<typeof encodeHistogramDataPoint>[0]>
-  readonly aggregationTemporality: number
+  readonly dataPoints: ReadonlyArray<
+    Parameters<typeof encodeHistogramDataPoint>[0]
+  >;
+  readonly aggregationTemporality: number;
 }): Uint8Array =>
   Proto.concat(
     Proto.repeatedField(1, histogram.dataPoints, encodeHistogramDataPoint),
     Proto.varintField(2, histogram.aggregationTemporality)
-  )
+  );
 
 /**
  * Encodes a Metric message.
@@ -518,12 +548,12 @@ export const encodeHistogram = (histogram: {
  * }
  */
 export const encodeMetric = (metric: {
-  readonly name: string
-  readonly description?: string | undefined
-  readonly unit?: string | undefined
-  readonly gauge?: Parameters<typeof encodeGauge>[0] | undefined
-  readonly sum?: Parameters<typeof encodeSum>[0] | undefined
-  readonly histogram?: Parameters<typeof encodeHistogram>[0] | undefined
+  readonly name: string;
+  readonly description?: string | undefined;
+  readonly unit?: string | undefined;
+  readonly gauge?: Parameters<typeof encodeGauge>[0] | undefined;
+  readonly sum?: Parameters<typeof encodeSum>[0] | undefined;
+  readonly histogram?: Parameters<typeof encodeHistogram>[0] | undefined;
 }): Uint8Array =>
   Proto.concat(
     Proto.stringField(1, metric.name),
@@ -538,7 +568,7 @@ export const encodeMetric = (metric: {
     metric.histogram !== undefined
       ? Proto.messageField(9, encodeHistogram(metric.histogram))
       : new Uint8Array(0)
-  )
+  );
 
 /**
  * Encodes a ScopeMetrics message.
@@ -550,15 +580,15 @@ export const encodeMetric = (metric: {
  * }
  */
 export const encodeScopeMetrics = (scopeMetrics: {
-  readonly scope: { readonly name: string; readonly version?: string }
-  readonly metrics: ReadonlyArray<Parameters<typeof encodeMetric>[0]>
-  readonly schemaUrl?: string
+  readonly scope: { readonly name: string; readonly version?: string };
+  readonly metrics: ReadonlyArray<Parameters<typeof encodeMetric>[0]>;
+  readonly schemaUrl?: string;
 }): Uint8Array =>
   Proto.concat(
     Proto.messageField(1, encodeInstrumentationScope(scopeMetrics.scope)),
     Proto.repeatedField(2, scopeMetrics.metrics, encodeMetric),
     Proto.optionalStringField(3, scopeMetrics.schemaUrl)
-  )
+  );
 
 /**
  * Encodes a ResourceMetrics message.
@@ -570,15 +600,17 @@ export const encodeScopeMetrics = (scopeMetrics: {
  * }
  */
 export const encodeResourceMetrics = (resourceMetrics: {
-  readonly resource: Resource
-  readonly scopeMetrics: ReadonlyArray<Parameters<typeof encodeScopeMetrics>[0]>
-  readonly schemaUrl?: string
+  readonly resource: Resource;
+  readonly scopeMetrics: ReadonlyArray<
+    Parameters<typeof encodeScopeMetrics>[0]
+  >;
+  readonly schemaUrl?: string;
 }): Uint8Array =>
   Proto.concat(
     Proto.messageField(1, encodeResource(resourceMetrics.resource)),
     Proto.repeatedField(2, resourceMetrics.scopeMetrics, encodeScopeMetrics),
     Proto.optionalStringField(3, resourceMetrics.schemaUrl)
-  )
+  );
 
 /**
  * Encodes a MetricsData message (top-level export request).
@@ -588,8 +620,11 @@ export const encodeResourceMetrics = (resourceMetrics: {
  * }
  */
 export const encodeMetricsData = (metricsData: {
-  readonly resourceMetrics: ReadonlyArray<Parameters<typeof encodeResourceMetrics>[0]>
-}): Uint8Array => Proto.repeatedField(1, metricsData.resourceMetrics, encodeResourceMetrics)
+  readonly resourceMetrics: ReadonlyArray<
+    Parameters<typeof encodeResourceMetrics>[0]
+  >;
+}): Uint8Array =>
+  Proto.repeatedField(1, metricsData.resourceMetrics, encodeResourceMetrics);
 
 // Logs types (opentelemetry.proto.logs.v1)
 
@@ -621,8 +656,8 @@ export const SeverityNumber = {
   Fatal: 21,
   Fatal2: 22,
   Fatal3: 23,
-  Fatal4: 24
-} as const
+  Fatal4: 24,
+} as const;
 
 /**
  * Encodes a LogRecord message.
@@ -641,16 +676,16 @@ export const SeverityNumber = {
  * }
  */
 export const encodeLogRecord = (record: {
-  readonly timeUnixNano: string
-  readonly observedTimeUnixNano?: string | undefined
-  readonly severityNumber?: number | undefined
-  readonly severityText?: string | undefined
-  readonly body?: AnyValue | undefined
-  readonly attributes: ReadonlyArray<KeyValue>
-  readonly droppedAttributesCount?: number | undefined
-  readonly flags?: number | undefined
-  readonly traceId?: string | undefined
-  readonly spanId?: string | undefined
+  readonly timeUnixNano: string;
+  readonly observedTimeUnixNano?: string | undefined;
+  readonly severityNumber?: number | undefined;
+  readonly severityText?: string | undefined;
+  readonly body?: AnyValue | undefined;
+  readonly attributes: ReadonlyArray<KeyValue>;
+  readonly droppedAttributesCount?: number | undefined;
+  readonly flags?: number | undefined;
+  readonly traceId?: string | undefined;
+  readonly spanId?: string | undefined;
 }): Uint8Array =>
   Proto.concat(
     Proto.fixed64Field(1, BigInt(record.timeUnixNano)),
@@ -662,10 +697,13 @@ export const encodeLogRecord = (record: {
       ? Proto.messageField(5, encodeAnyValue(record.body))
       : new Uint8Array(0),
     Proto.repeatedField(6, record.attributes, encodeKeyValue),
-    record.droppedAttributesCount !== undefined && record.droppedAttributesCount > 0
+    record.droppedAttributesCount !== undefined &&
+      record.droppedAttributesCount > 0
       ? Proto.varintField(7, record.droppedAttributesCount)
       : new Uint8Array(0),
-    record.flags !== undefined ? Proto.fixed32Field(8, record.flags) : new Uint8Array(0),
+    record.flags !== undefined
+      ? Proto.fixed32Field(8, record.flags)
+      : new Uint8Array(0),
     record.traceId !== undefined && record.traceId !== ""
       ? Proto.bytesFieldFromHex(9, record.traceId)
       : new Uint8Array(0),
@@ -675,7 +713,7 @@ export const encodeLogRecord = (record: {
     record.observedTimeUnixNano !== undefined
       ? Proto.fixed64Field(11, BigInt(record.observedTimeUnixNano))
       : new Uint8Array(0)
-  )
+  );
 
 /**
  * Encodes a ScopeLogs message.
@@ -687,15 +725,15 @@ export const encodeLogRecord = (record: {
  * }
  */
 export const encodeScopeLogs = (scopeLogs: {
-  readonly scope: { readonly name: string; readonly version?: string }
-  readonly logRecords: ReadonlyArray<Parameters<typeof encodeLogRecord>[0]>
-  readonly schemaUrl?: string
+  readonly scope: { readonly name: string; readonly version?: string };
+  readonly logRecords: ReadonlyArray<Parameters<typeof encodeLogRecord>[0]>;
+  readonly schemaUrl?: string;
 }): Uint8Array =>
   Proto.concat(
     Proto.messageField(1, encodeInstrumentationScope(scopeLogs.scope)),
     Proto.repeatedField(2, scopeLogs.logRecords, encodeLogRecord),
     Proto.optionalStringField(3, scopeLogs.schemaUrl)
-  )
+  );
 
 /**
  * Encodes a ResourceLogs message.
@@ -707,15 +745,15 @@ export const encodeScopeLogs = (scopeLogs: {
  * }
  */
 export const encodeResourceLogs = (resourceLogs: {
-  readonly resource: Resource
-  readonly scopeLogs: ReadonlyArray<Parameters<typeof encodeScopeLogs>[0]>
-  readonly schemaUrl?: string
+  readonly resource: Resource;
+  readonly scopeLogs: ReadonlyArray<Parameters<typeof encodeScopeLogs>[0]>;
+  readonly schemaUrl?: string;
 }): Uint8Array =>
   Proto.concat(
     Proto.messageField(1, encodeResource(resourceLogs.resource)),
     Proto.repeatedField(2, resourceLogs.scopeLogs, encodeScopeLogs),
     Proto.optionalStringField(3, resourceLogs.schemaUrl)
-  )
+  );
 
 /**
  * Encodes a LogsData message (top-level export request).
@@ -725,5 +763,8 @@ export const encodeResourceLogs = (resourceLogs: {
  * }
  */
 export const encodeLogsData = (logsData: {
-  readonly resourceLogs: ReadonlyArray<Parameters<typeof encodeResourceLogs>[0]>
-}): Uint8Array => Proto.repeatedField(1, logsData.resourceLogs, encodeResourceLogs)
+  readonly resourceLogs: ReadonlyArray<
+    Parameters<typeof encodeResourceLogs>[0]
+  >;
+}): Uint8Array =>
+  Proto.repeatedField(1, logsData.resourceLogs, encodeResourceLogs);

@@ -76,7 +76,7 @@ export default function TopBarSearch() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-8 z-50 w-72 rounded-md border border-zinc-200 bg-white p-2 shadow-lg">
+        <div className="absolute top-8 right-0 z-50 w-72 rounded-md border border-zinc-200 bg-white p-2 shadow-lg">
           <form onSubmit={handleSubmit}>
             <input
               className="w-full rounded-md border border-zinc-300 px-2 py-1.5 text-sm outline-none focus:border-zinc-500"

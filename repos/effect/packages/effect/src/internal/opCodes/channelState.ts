@@ -1,23 +1,23 @@
 /** @internal */
-export const OP_DONE = "Done" as const
+export const OP_DONE = "Done" as const;
 
 /** @internal */
-export type OP_DONE = typeof OP_DONE
+export type OP_DONE = typeof OP_DONE;
 
 /** @internal */
-export const OP_EMIT = "Emit" as const
+export const OP_EMIT = "Emit" as const;
 
 /** @internal */
-export type OP_EMIT = typeof OP_EMIT
+export type OP_EMIT = typeof OP_EMIT;
 
 /** @internal */
-export const OP_FROM_EFFECT = "FromEffect" as const
+export const OP_FROM_EFFECT = "FromEffect" as const;
 
 /** @internal */
-export type OP_FROM_EFFECT = typeof OP_FROM_EFFECT
+export type OP_FROM_EFFECT = typeof OP_FROM_EFFECT;
 
 /** @internal */
-export const OP_READ = "Read" as const
+export const OP_READ = "Read" as const;
 
 /** @internal */
-export type OP_READ = typeof OP_READ
+export type OP_READ = typeof OP_READ;

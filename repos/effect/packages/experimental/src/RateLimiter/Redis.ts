@@ -1,16 +1,21 @@
 /**
  * @since 1.0.0
  */
-import * as Config from "effect/Config"
-import * as Duration from "effect/Duration"
-import * as Effect from "effect/Effect"
-import * as Layer from "effect/Layer"
-import type { RedisOptions } from "ioredis"
-import { Redis } from "ioredis"
-import * as RateLimiter from "../RateLimiter.js"
+import * as Config from "effect/Config";
+import * as Duration from "effect/Duration";
+import * as Effect from "effect/Effect";
+import * as Layer from "effect/Layer";
+import type { RedisOptions } from "ioredis";
+import { Redis } from "ioredis";
+import * as RateLimiter from "../RateLimiter.js";
 
 interface RedisWithRateLimiting extends Redis {
-  fixedWindow(key: string, tokens: number, refillMillis: number, limit?: number): Promise<[number, number]>
+  fixedWindow(
+    key: string,
+    tokens: number,
+    refillMillis: number,
+    limit?: number
+  ): Promise<[number, number]>;
   tokenBucket(
     key: string,
     tokens: number,
@@ -18,23 +23,23 @@ interface RedisWithRateLimiting extends Redis {
     limit: number,
     now: number,
     overflow: 0 | 1
-  ): Promise<number>
+  ): Promise<number>;
 }
 
 /**
  * @since 1.0.0
  * @category Constructors
  */
-export const make = Effect.fnUntraced(function*(
+export const make = Effect.fnUntraced(function* (
   options: RedisOptions & {
-    readonly prefix?: string | undefined
+    readonly prefix?: string | undefined;
   }
 ) {
-  const prefix = options.prefix ?? "ratelimiter:"
+  const prefix = options.prefix ?? "ratelimiter:";
   const redis = yield* Effect.acquireRelease(
     Effect.sync(() => new Redis(options) as RedisWithRateLimiting),
     (redis) => Effect.promise(() => redis.quit())
-  )
+  );
 
   redis.defineCommand("fixedWindow", {
     lua: `
@@ -61,8 +66,8 @@ redis.call("SET", key, next, "PX", nextpttl)
 return { next, nextpttl }
 `,
     numberOfKeys: 1,
-    readOnly: false
-  })
+    readOnly: false,
+  });
 
   redis.defineCommand("tokenBucket", {
     lua: `
@@ -101,25 +106,26 @@ redis.call("SET", key, next)
 return next
 `,
     numberOfKeys: 1,
-    readOnly: false
-  })
+    readOnly: false,
+  });
 
   return RateLimiter.RateLimiterStore.of({
     fixedWindow(options) {
-      const key = `${prefix}${options.key}`
-      const refillMillis = Duration.toMillis(options.refillRate)
+      const key = `${prefix}${options.key}`;
+      const refillMillis = Duration.toMillis(options.refillRate);
       return Effect.tryPromise({
-        try: () => redis.fixedWindow(key, options.tokens, refillMillis, options.limit),
+        try: () =>
+          redis.fixedWindow(key, options.tokens, refillMillis, options.limit),
         catch: (cause) =>
           new RateLimiter.RateLimitStoreError({
-            message: `Failed to execute fixedWindow rate limiting command`,
-            cause
-          })
-      })
+            message: "Failed to execute fixedWindow rate limiting command",
+            cause,
+          }),
+      });
     },
     tokenBucket(options) {
-      const key = `${prefix}${options.key}`
-      const refillMillis = Duration.toMillis(options.refillRate)
+      const key = `${prefix}${options.key}`;
+      const refillMillis = Duration.toMillis(options.refillRate);
       return Effect.clockWith((clock) =>
         Effect.tryPromise({
           try: () =>
@@ -133,26 +139,33 @@ return next
             ),
           catch: (cause) =>
             new RateLimiter.RateLimitStoreError({
-              message: `Failed to execute tokenBucket rate limiting command`,
-              cause
-            })
+              message: "Failed to execute tokenBucket rate limiting command",
+              cause,
+            }),
         })
-      )
-    }
-  })
-})
+      );
+    },
+  });
+});
 
 /**
  * @since 1.0.0
  * @category Layers
  */
-export const layerStore = (options: RedisOptions & { readonly prefix?: string | undefined }) =>
-  Layer.scoped(RateLimiter.RateLimiterStore, make(options))
+export const layerStore = (
+  options: RedisOptions & { readonly prefix?: string | undefined }
+) => Layer.scoped(RateLimiter.RateLimiterStore, make(options));
 
 /**
  * @since 1.0.0
  * @category Layers
  */
 export const layerStoreConfig = (
-  options: Config.Config.Wrap<RedisOptions & { readonly prefix?: string | undefined }>
-) => Layer.scoped(RateLimiter.RateLimiterStore, Effect.flatMap(Config.unwrap(options), make))
+  options: Config.Config.Wrap<
+    RedisOptions & { readonly prefix?: string | undefined }
+  >
+) =>
+  Layer.scoped(
+    RateLimiter.RateLimiterStore,
+    Effect.flatMap(Config.unwrap(options), make)
+  );

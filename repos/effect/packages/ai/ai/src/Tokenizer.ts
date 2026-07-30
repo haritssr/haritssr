@@ -35,11 +35,11 @@
  *
  * @since 1.0.0
  */
-import * as Context from "effect/Context"
-import * as Effect from "effect/Effect"
-import * as Predicate from "effect/Predicate"
-import type * as AiError from "./AiError.js"
-import * as Prompt from "./Prompt.js"
+import * as Context from "effect/Context";
+import * as Effect from "effect/Effect";
+import * as Predicate from "effect/Predicate";
+import type * as AiError from "./AiError.js";
+import * as Prompt from "./Prompt.js";
 
 /**
  * The `Tokenizer` service tag for dependency injection.
@@ -99,7 +99,7 @@ export interface Service {
      * The text input to tokenize.
      */
     input: Prompt.RawInput
-  ) => Effect.Effect<Array<number>, AiError.AiError>
+  ) => Effect.Effect<Array<number>, AiError.AiError>;
   /**
    * Truncates text input to fit within the specified token limit.
    */
@@ -112,7 +112,7 @@ export interface Service {
      * Maximum number of tokens to retain.
      */
     tokens: number
-  ) => Effect.Effect<Prompt.Prompt, AiError.AiError>
+  ) => Effect.Effect<Prompt.Prompt, AiError.AiError>;
 }
 
 /**
@@ -156,40 +156,47 @@ export const make = (options: {
      * The prompt to tokenize.
      */
     content: Prompt.Prompt
-  ) => Effect.Effect<Array<number>, AiError.AiError>
+  ) => Effect.Effect<Array<number>, AiError.AiError>;
 }): Service =>
   Tokenizer.of({
     tokenize(input) {
-      return options.tokenize(Prompt.make(input))
+      return options.tokenize(Prompt.make(input));
     },
     truncate(input, tokens) {
-      return truncate(Prompt.make(input), options.tokenize, tokens)
-    }
-  })
+      return truncate(Prompt.make(input), options.tokenize, tokens);
+    },
+  });
 
 const truncate = (
   self: Prompt.Prompt,
-  tokenize: (input: Prompt.Prompt) => Effect.Effect<Array<number>, AiError.AiError>,
+  tokenize: (
+    input: Prompt.Prompt
+  ) => Effect.Effect<Array<number>, AiError.AiError>,
   maxTokens: number
 ): Effect.Effect<Prompt.Prompt, AiError.AiError> =>
   Effect.suspend(() => {
-    let count = 0
-    let inputMessages = self.content
-    let outputMessages: Array<Prompt.Message> = []
-    const loop: Effect.Effect<Prompt.Prompt, AiError.AiError> = Effect.suspend(() => {
-      const message = inputMessages[inputMessages.length - 1]
-      if (Predicate.isUndefined(message)) {
-        return Effect.succeed(Prompt.fromMessages(outputMessages))
-      }
-      inputMessages = inputMessages.slice(0, inputMessages.length - 1)
-      return Effect.flatMap(tokenize(Prompt.fromMessages([message])), (tokens) => {
-        count += tokens.length
-        if (count > maxTokens) {
-          return Effect.succeed(Prompt.fromMessages(outputMessages))
+    let count = 0;
+    let inputMessages = self.content;
+    let outputMessages: Array<Prompt.Message> = [];
+    const loop: Effect.Effect<Prompt.Prompt, AiError.AiError> = Effect.suspend(
+      () => {
+        const message = inputMessages[inputMessages.length - 1];
+        if (Predicate.isUndefined(message)) {
+          return Effect.succeed(Prompt.fromMessages(outputMessages));
         }
-        outputMessages = [message, ...outputMessages]
-        return loop
-      })
-    })
-    return loop
-  })
+        inputMessages = inputMessages.slice(0, inputMessages.length - 1);
+        return Effect.flatMap(
+          tokenize(Prompt.fromMessages([message])),
+          (tokens) => {
+            count += tokens.length;
+            if (count > maxTokens) {
+              return Effect.succeed(Prompt.fromMessages(outputMessages));
+            }
+            outputMessages = [message, ...outputMessages];
+            return loop;
+          }
+        );
+      }
+    );
+    return loop;
+  });

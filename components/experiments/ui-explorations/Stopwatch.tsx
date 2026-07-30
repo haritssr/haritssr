@@ -25,10 +25,18 @@ export default function Stopwatch() {
     <>
       <div>{time}</div>
       <div className="space-x-3">
-        <button className={buttonStyle} onClick={() => setRunning(true)} type="button">
+        <button
+          className={buttonStyle}
+          onClick={() => setRunning(true)}
+          type="button"
+        >
           Start
         </button>
-        <button className={buttonStyle} onClick={() => setRunning(false)} type="button">
+        <button
+          className={buttonStyle}
+          onClick={() => setRunning(false)}
+          type="button"
+        >
           Stop
         </button>
         <button

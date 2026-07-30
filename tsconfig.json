@@ -23,14 +23,14 @@
       "@/icons": ["components/icons"],
       "@/styles/*": ["styles/*"],
       "@/utils/*": ["utils/*"],
-      "@content-collections": ["./.content-collections/generated"],
+      "@content-collections": ["./.content-collections/generated"]
     },
     "incremental": true,
     "plugins": [
       {
-        "name": "next",
-      },
-    ],
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -55,7 +55,7 @@
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",
     "app/tools/db.bun.ts",
-    "app/tools/db.test.js",
+    "app/tools/db.test.js"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }

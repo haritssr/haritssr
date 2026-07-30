@@ -1,25 +1,25 @@
 /**
  * @since 2.0.0
  */
-import type * as Effect from "./Effect.js"
-import type * as Fiber from "./Fiber.js"
-import * as internal from "./internal/metric/polling.js"
-import type * as Metric from "./Metric.js"
-import type { Pipeable } from "./Pipeable.js"
-import type * as Schedule from "./Schedule.js"
-import type * as Scope from "./Scope.js"
+import type * as Effect from "./Effect.js";
+import type * as Fiber from "./Fiber.js";
+import * as internal from "./internal/metric/polling.js";
+import type * as Metric from "./Metric.js";
+import type { Pipeable } from "./Pipeable.js";
+import type * as Schedule from "./Schedule.js";
+import type * as Scope from "./Scope.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const MetricPollingTypeId: unique symbol = internal.MetricPollingTypeId
+export const MetricPollingTypeId: unique symbol = internal.MetricPollingTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type MetricPollingTypeId = typeof MetricPollingTypeId
+export type MetricPollingTypeId = typeof MetricPollingTypeId;
 
 /**
  * A `MetricPolling` is a combination of a metric and an effect that polls for
@@ -28,16 +28,17 @@ export type MetricPollingTypeId = typeof MetricPollingTypeId
  * @since 2.0.0
  * @category models
  */
-export interface MetricPolling<in out Type, in out In, out R, out E, out Out> extends Pipeable {
-  readonly [MetricPollingTypeId]: MetricPollingTypeId
+export interface MetricPolling<in out Type, in out In, out R, out E, out Out>
+  extends Pipeable {
+  readonly [MetricPollingTypeId]: MetricPollingTypeId;
   /**
    * The metric that this `MetricPolling` polls to update.
    */
-  readonly metric: Metric.Metric<Type, In, Out>
+  readonly metric: Metric.Metric<Type, In, Out>;
   /**
    * An effect that polls a value that may be fed to the metric.
    */
-  readonly poll: Effect.Effect<In, E, R>
+  readonly poll: Effect.Effect<In, E, R>;
 }
 
 /**
@@ -49,7 +50,7 @@ export interface MetricPolling<in out Type, in out In, out R, out E, out Out> ex
 export const make: <Type, In, Out, R, E>(
   metric: Metric.Metric<Type, In, Out>,
   poll: Effect.Effect<In, E, R>
-) => MetricPolling<Type, In, R, E, Out> = internal.make
+) => MetricPolling<Type, In, R, E, Out> = internal.make;
 
 /**
  * Collects all of the polling metrics into a single polling metric, which
@@ -60,7 +61,8 @@ export const make: <Type, In, Out, R, E>(
  */
 export const collectAll: <R, E, Out>(
   iterable: Iterable<MetricPolling<any, any, R, E, Out>>
-) => MetricPolling<Array<any>, Array<any>, R, E, Array<Out>> = internal.collectAll
+) => MetricPolling<Array<any>, Array<any>, R, E, Array<Out>> =
+  internal.collectAll;
 
 /**
  * Returns an effect that will launch the polling metric in a background
@@ -74,12 +76,12 @@ export const launch: {
     schedule: Schedule.Schedule<A2, unknown, R2>
   ): <Type, In, R, E, Out>(
     self: MetricPolling<Type, In, R, E, Out>
-  ) => Effect.Effect<Fiber.Fiber<A2, E>, never, R2 | R | Scope.Scope>
+  ) => Effect.Effect<Fiber.Fiber<A2, E>, never, R2 | R | Scope.Scope>;
   <Type, In, R, E, Out, A2, R2>(
     self: MetricPolling<Type, In, R, E, Out>,
     schedule: Schedule.Schedule<A2, unknown, R2>
-  ): Effect.Effect<Fiber.Fiber<A2, E>, never, Scope.Scope | R | R2>
-} = internal.launch
+  ): Effect.Effect<Fiber.Fiber<A2, E>, never, Scope.Scope | R | R2>;
+} = internal.launch;
 
 /**
  * An effect that polls a value that may be fed to the metric.
@@ -87,8 +89,9 @@ export const launch: {
  * @since 2.0.0
  * @category utils
  */
-export const poll: <Type, In, R, E, Out>(self: MetricPolling<Type, In, R, E, Out>) => Effect.Effect<In, E, R> =
-  internal.poll
+export const poll: <Type, In, R, E, Out>(
+  self: MetricPolling<Type, In, R, E, Out>
+) => Effect.Effect<In, E, R> = internal.poll;
 
 /**
  * An effect that polls for a value and uses the value to update the metric.
@@ -98,7 +101,7 @@ export const poll: <Type, In, R, E, Out>(self: MetricPolling<Type, In, R, E, Out
  */
 export const pollAndUpdate: <Type, In, R, E, Out>(
   self: MetricPolling<Type, In, R, E, Out>
-) => Effect.Effect<void, E, R> = internal.pollAndUpdate
+) => Effect.Effect<void, E, R> = internal.pollAndUpdate;
 
 /**
  * Returns a new polling metric whose poll function will be retried with the
@@ -110,12 +113,14 @@ export const pollAndUpdate: <Type, In, R, E, Out>(
 export const retry: {
   <X, E, R2>(
     policy: Schedule.Schedule<X, NoInfer<E>, R2>
-  ): <Type, In, R, Out>(self: MetricPolling<Type, In, R, E, Out>) => MetricPolling<Type, In, R2 | R, E, Out>
+  ): <Type, In, R, Out>(
+    self: MetricPolling<Type, In, R, E, Out>
+  ) => MetricPolling<Type, In, R2 | R, E, Out>;
   <Type, In, R, E, Out, X, R2>(
     self: MetricPolling<Type, In, R, E, Out>,
     policy: Schedule.Schedule<X, E, R2>
-  ): MetricPolling<Type, In, R | R2, E, Out>
-} = internal.retry
+  ): MetricPolling<Type, In, R | R2, E, Out>;
+} = internal.retry;
 
 /**
  * Zips this polling metric with the specified polling metric.
@@ -134,7 +139,7 @@ export const zip: {
     R2 | R,
     E2 | E,
     [Out, Out2]
-  >
+  >;
   <Type, In, R, E, Out, Type2, In2, R2, E2, Out2>(
     self: MetricPolling<Type, In, R, E, Out>,
     that: MetricPolling<Type2, In2, R2, E2, Out2>
@@ -144,5 +149,5 @@ export const zip: {
     R | R2,
     E | E2,
     [Out, Out2]
-  >
-} = internal.zip
+  >;
+} = internal.zip;

@@ -26,17 +26,17 @@
  *
  * @since 1.0.0
  */
-import type * as DateTime from "effect/DateTime"
-import * as Effect from "effect/Effect"
-import { constFalse } from "effect/Function"
-import type * as Option from "effect/Option"
-import * as ParseResult from "effect/ParseResult"
-import * as Predicate from "effect/Predicate"
-import * as Schema from "effect/Schema"
-import type * as Tool from "./Tool.js"
-import type * as Toolkit from "./Toolkit.js"
+import type * as DateTime from "effect/DateTime";
+import * as Effect from "effect/Effect";
+import { constFalse } from "effect/Function";
+import type * as Option from "effect/Option";
+import * as ParseResult from "effect/ParseResult";
+import * as Predicate from "effect/Predicate";
+import * as Schema from "effect/Schema";
+import type * as Tool from "./Tool.js";
+import type * as Toolkit from "./Toolkit.js";
 
-const constEmptyObject = () => ({})
+const constEmptyObject = () => ({});
 
 // =============================================================================
 // All Parts
@@ -48,7 +48,7 @@ const constEmptyObject = () => ({})
  * @since 1.0.0
  * @category Type Ids
  */
-export const PartTypeId = "~effect/ai/Content/Part"
+export const PartTypeId = "~effect/ai/Content/Part";
 
 /**
  * Type-level representation of the Response Part identifier.
@@ -56,7 +56,7 @@ export const PartTypeId = "~effect/ai/Content/Part"
  * @since 1.0.0
  * @category Type Ids
  */
-export type PartTypeId = typeof PartTypeId
+export type PartTypeId = typeof PartTypeId;
 
 /**
  * Type guard to check if a value is a Response Part.
@@ -64,7 +64,8 @@ export type PartTypeId = typeof PartTypeId
  * @since 1.0.0
  * @category Guards
  */
-export const isPart = (u: unknown): u is AnyPart => Predicate.hasProperty(u, PartTypeId)
+export const isPart = (u: unknown): u is AnyPart =>
+  Predicate.hasProperty(u, PartTypeId);
 
 /**
  * Union type representing all possible response content parts.
@@ -91,7 +92,7 @@ export type AnyPart =
   | UrlSourcePart
   | ResponseMetadataPart
   | FinishPart
-  | ErrorPart
+  | ErrorPart;
 
 /**
  * Encoded representation of all possible response content parts for serialization.
@@ -118,7 +119,7 @@ export type AnyPartEncoded =
   | UrlSourcePartEncoded
   | ResponseMetadataPartEncoded
   | FinishPartEncoded
-  | ErrorPartEncoded
+  | ErrorPartEncoded;
 
 /**
  * Union type for all response parts with tool-specific typing.
@@ -145,7 +146,7 @@ export type AllParts<Tools extends Record<string, Tool.Any>> =
   | UrlSourcePart
   | ResponseMetadataPart
   | FinishPart
-  | ErrorPart
+  | ErrorPart;
 
 /**
  * Encoded representation of all response parts for serialization.
@@ -172,7 +173,7 @@ export type AllPartsEncoded =
   | UrlSourcePartEncoded
   | ResponseMetadataPartEncoded
   | FinishPartEncoded
-  | ErrorPartEncoded
+  | ErrorPartEncoded;
 
 /**
  * Creates a Schema for all response parts based on a toolkit.
@@ -200,12 +201,23 @@ export type AllPartsEncoded =
  */
 export const AllParts = <T extends Toolkit.Any | Toolkit.WithHandler<any>>(
   toolkit: T
-): Schema.Schema<AllParts<T extends Toolkit.Any ? Toolkit.Tools<T> : Toolkit.WithHandlerTools<T>>, AllPartsEncoded> => {
-  const toolCalls: Array<Schema.Schema<ToolCallPart<string, any>, ToolCallPartEncoded>> = []
-  const toolCallResults: Array<Schema.Schema<ToolResultPart<string, any, any>, ToolResultPartEncoded>> = []
+): Schema.Schema<
+  AllParts<
+    T extends Toolkit.Any ? Toolkit.Tools<T> : Toolkit.WithHandlerTools<T>
+  >,
+  AllPartsEncoded
+> => {
+  const toolCalls: Array<
+    Schema.Schema<ToolCallPart<string, any>, ToolCallPartEncoded>
+  > = [];
+  const toolCallResults: Array<
+    Schema.Schema<ToolResultPart<string, any, any>, ToolResultPartEncoded>
+  > = [];
   for (const tool of Object.values(toolkit.tools as Record<string, Tool.Any>)) {
-    toolCalls.push(ToolCallPart(tool.name, tool.parametersSchema as any))
-    toolCallResults.push(ToolResultPart(tool.name, tool.successSchema, tool.failureSchema))
+    toolCalls.push(ToolCallPart(tool.name, tool.parametersSchema as any));
+    toolCallResults.push(
+      ToolResultPart(tool.name, tool.successSchema, tool.failureSchema)
+    );
   }
   return Schema.Union(
     TextPart,
@@ -227,8 +239,8 @@ export const AllParts = <T extends Toolkit.Any | Toolkit.WithHandler<any>>(
     ErrorPart,
     ...toolCalls,
     ...toolCallResults
-  ) as any
-}
+  ) as any;
+};
 
 // =============================================================================
 // Generate Parts
@@ -252,7 +264,7 @@ export type Part<Tools extends Record<string, Tool.Any>> =
   | DocumentSourcePart
   | UrlSourcePart
   | ResponseMetadataPart
-  | FinishPart
+  | FinishPart;
 
 /**
  * Encoded representation of non-streaming response parts for serialization.
@@ -271,7 +283,7 @@ export type PartEncoded =
   | DocumentSourcePartEncoded
   | UrlSourcePartEncoded
   | ResponseMetadataPartEncoded
-  | FinishPartEncoded
+  | FinishPartEncoded;
 
 /**
  * Creates a Schema for non-streaming response parts based on a toolkit.
@@ -281,12 +293,21 @@ export type PartEncoded =
  */
 export const Part = <T extends Toolkit.Any | Toolkit.WithHandler<any>>(
   toolkit: T
-): Schema.Schema<Part<T extends Toolkit.Any ? Toolkit.Tools<T> : Toolkit.WithHandlerTools<T>>, PartEncoded> => {
-  const toolCalls: Array<Schema.Schema<ToolCallPart<string, any>, ToolCallPartEncoded>> = []
-  const toolCallResults: Array<Schema.Schema<ToolResultPart<string, any, any>, ToolResultPartEncoded>> = []
+): Schema.Schema<
+  Part<T extends Toolkit.Any ? Toolkit.Tools<T> : Toolkit.WithHandlerTools<T>>,
+  PartEncoded
+> => {
+  const toolCalls: Array<
+    Schema.Schema<ToolCallPart<string, any>, ToolCallPartEncoded>
+  > = [];
+  const toolCallResults: Array<
+    Schema.Schema<ToolResultPart<string, any, any>, ToolResultPartEncoded>
+  > = [];
   for (const tool of Object.values(toolkit.tools as Record<string, Tool.Any>)) {
-    toolCalls.push(ToolCallPart(tool.name, tool.parametersSchema as any))
-    toolCallResults.push(ToolResultPart(tool.name, tool.successSchema, tool.failureSchema))
+    toolCalls.push(ToolCallPart(tool.name, tool.parametersSchema as any));
+    toolCallResults.push(
+      ToolResultPart(tool.name, tool.successSchema, tool.failureSchema)
+    );
   }
   return Schema.Union(
     TextPart,
@@ -298,8 +319,8 @@ export const Part = <T extends Toolkit.Any | Toolkit.WithHandler<any>>(
     FinishPart,
     ...toolCalls,
     ...toolCallResults
-  ) as any
-}
+  ) as any;
+};
 
 // =============================================================================
 // Stream Parts
@@ -330,7 +351,7 @@ export type StreamPart<Tools extends Record<string, Tool.Any>> =
   | UrlSourcePart
   | ResponseMetadataPart
   | FinishPart
-  | ErrorPart
+  | ErrorPart;
 
 /**
  * Encoded representation of streaming response parts for serialization.
@@ -355,7 +376,7 @@ export type StreamPartEncoded =
   | UrlSourcePartEncoded
   | ResponseMetadataPartEncoded
   | FinishPartEncoded
-  | ErrorPartEncoded
+  | ErrorPartEncoded;
 
 /**
  * Creates a Schema for streaming response parts based on a toolkit.
@@ -371,11 +392,17 @@ export const StreamPart = <T extends Toolkit.Any | Toolkit.WithHandler<any>>(
   >,
   StreamPartEncoded
 > => {
-  const toolCalls: Array<Schema.Schema<ToolCallPart<string, any>, ToolCallPartEncoded>> = []
-  const toolCallResults: Array<Schema.Schema<ToolResultPart<string, any, any>, ToolResultPartEncoded>> = []
+  const toolCalls: Array<
+    Schema.Schema<ToolCallPart<string, any>, ToolCallPartEncoded>
+  > = [];
+  const toolCallResults: Array<
+    Schema.Schema<ToolResultPart<string, any, any>, ToolResultPartEncoded>
+  > = [];
   for (const tool of Object.values(toolkit.tools as Record<string, Tool.Any>)) {
-    toolCalls.push(ToolCallPart(tool.name, tool.parametersSchema as any))
-    toolCallResults.push(ToolResultPart(tool.name, tool.successSchema, tool.failureSchema))
+    toolCalls.push(ToolCallPart(tool.name, tool.parametersSchema as any));
+    toolCallResults.push(
+      ToolResultPart(tool.name, tool.successSchema, tool.failureSchema)
+    );
   }
   return Schema.Union(
     TextStartPart,
@@ -395,8 +422,8 @@ export const StreamPart = <T extends Toolkit.Any | Toolkit.WithHandler<any>>(
     ErrorPart,
     ...toolCalls,
     ...toolCallResults
-  ) as any
-}
+  ) as any;
+};
 
 // =============================================================================
 // Utility Types
@@ -411,10 +438,13 @@ export const StreamPart = <T extends Toolkit.Any | Toolkit.WithHandler<any>>(
  * @category Utility Types
  */
 export type ToolCallParts<Tools extends Record<string, Tool.Any>> = {
-  [Name in keyof Tools]: Name extends string ?
-    ToolCallPart<Name, Schema.Struct.Type<Tool.ParametersSchema<Tools[Name]>["fields"]>>
-    : never
-}[keyof Tools]
+  [Name in keyof Tools]: Name extends string
+    ? ToolCallPart<
+        Name,
+        Schema.Struct.Type<Tool.ParametersSchema<Tools[Name]>["fields"]>
+      >
+    : never;
+}[keyof Tools];
 
 /**
  * Utility type that extracts tool result parts from a set of tools.
@@ -425,13 +455,10 @@ export type ToolCallParts<Tools extends Record<string, Tool.Any>> = {
  * @category Utility Types
  */
 export type ToolResultParts<Tools extends Record<string, Tool.Any>> = {
-  [Name in keyof Tools]: Name extends string ? ToolResultPart<
-      Name,
-      Tool.Success<Tools[Name]>,
-      Tool.Failure<Tools[Name]>
-    >
-    : never
-}[keyof Tools]
+  [Name in keyof Tools]: Name extends string
+    ? ToolResultPart<Name, Tool.Success<Tools[Name]>, Tool.Failure<Tools[Name]>>
+    : never;
+}[keyof Tools];
 
 // =============================================================================
 // Base Part
@@ -455,17 +482,19 @@ export type ToolResultParts<Tools extends Record<string, Tool.Any>> = {
  */
 export const ProviderMetadata = Schema.Record({
   key: Schema.String,
-  value: Schema.UndefinedOr(Schema.Record({
-    key: Schema.String,
-    value: Schema.Unknown
-  }))
-})
+  value: Schema.UndefinedOr(
+    Schema.Record({
+      key: Schema.String,
+      value: Schema.Unknown,
+    })
+  ),
+});
 
 /**
  * @since 1.0.0
  * @category Models
  */
-export type ProviderMetadata = typeof ProviderMetadata.Type
+export type ProviderMetadata = typeof ProviderMetadata.Type;
 
 /**
  * Base interface for all response content parts.
@@ -477,16 +506,19 @@ export type ProviderMetadata = typeof ProviderMetadata.Type
  * @since 1.0.0
  * @category Models
  */
-export interface BasePart<Type extends string, Metadata extends ProviderMetadata> {
-  readonly [PartTypeId]: PartTypeId
+export interface BasePart<
+  Type extends string,
+  Metadata extends ProviderMetadata,
+> {
+  readonly [PartTypeId]: PartTypeId;
   /**
    * The type of this response part.
    */
-  readonly type: Type
+  readonly type: Type;
   /**
    * Optional provider-specific metadata for this part.
    */
-  readonly metadata: Metadata
+  readonly metadata: Metadata;
 }
 
 /**
@@ -497,15 +529,18 @@ export interface BasePart<Type extends string, Metadata extends ProviderMetadata
  * @since 1.0.0
  * @category Models
  */
-export interface BasePartEncoded<Type extends string, Metadata extends ProviderMetadata> {
+export interface BasePartEncoded<
+  Type extends string,
+  Metadata extends ProviderMetadata,
+> {
   /**
    * The type of this response part.
    */
-  readonly type: Type
+  readonly type: Type;
   /**
    * Optional provider-specific metadata for this part.
    */
-  readonly metadata?: Metadata | undefined
+  readonly metadata?: Metadata | undefined;
 }
 
 /**
@@ -538,19 +573,24 @@ export const makePart = <const Type extends AnyPart["type"]>(
   /**
    * Parameters specific to the part type being created.
    */
-  params: Omit<Extract<AnyPart, { type: Type }>, PartTypeId | "type" | "metadata"> & {
+  params: Omit<
+    Extract<AnyPart, { type: Type }>,
+    PartTypeId | "type" | "metadata"
+  > & {
     /**
      * Optional provider-specific metadata for this part.
      */
-    readonly metadata?: Extract<AnyPart, { type: Type }>["metadata"] | undefined
+    readonly metadata?:
+      | Extract<AnyPart, { type: Type }>["metadata"]
+      | undefined;
   }
 ): Extract<AnyPart, { type: Type }> =>
   ({
     ...params,
     [PartTypeId]: PartTypeId,
     type,
-    metadata: params.metadata ?? {}
-  }) as any
+    metadata: params.metadata ?? {},
+  }) as any;
 
 /**
  * A utility type for specifying the parameters required to construct a
@@ -559,12 +599,15 @@ export const makePart = <const Type extends AnyPart["type"]>(
  * @since 1.0.0
  * @category Utility Types
  */
-export type ConstructorParams<Part extends AnyPart> = Omit<Part, PartTypeId | "type" | "sourceType" | "metadata"> & {
+export type ConstructorParams<Part extends AnyPart> = Omit<
+  Part,
+  PartTypeId | "type" | "sourceType" | "metadata"
+> & {
   /**
    * Optional provider-specific metadata for this part.
    */
-  readonly metadata?: Part["metadata"] | undefined
-}
+  readonly metadata?: Part["metadata"] | undefined;
+};
 
 // =============================================================================
 // Text Part
@@ -589,7 +632,7 @@ export interface TextPart extends BasePart<"text", TextPartMetadata> {
   /**
    * The text content.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -598,11 +641,12 @@ export interface TextPart extends BasePart<"text", TextPartMetadata> {
  * @since 1.0.0
  * @category Models
  */
-export interface TextPartEncoded extends BasePartEncoded<"text", TextPartMetadata> {
+export interface TextPartEncoded
+  extends BasePartEncoded<"text", TextPartMetadata> {
   /**
    * The text content.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -620,14 +664,18 @@ export interface TextPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const TextPart: Schema.Schema<TextPart, TextPartEncoded> = Schema.Struct({
-  type: Schema.Literal("text"),
-  text: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
+export const TextPart: Schema.Schema<TextPart, TextPartEncoded> = Schema.Struct(
+  {
+    type: Schema.Literal("text"),
+    text: Schema.String,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }
+).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "TextPart" })
-)
+);
 
 /**
  * Constructs a new text part.
@@ -635,7 +683,8 @@ export const TextPart: Schema.Schema<TextPart, TextPartEncoded> = Schema.Struct(
  * @since 1.0.0
  * @category Constructors
  */
-export const textPart = (params: ConstructorParams<TextPart>): TextPart => makePart("text", params)
+export const textPart = (params: ConstructorParams<TextPart>): TextPart =>
+  makePart("text", params);
 
 // =============================================================================
 // Text Start Part
@@ -649,11 +698,12 @@ export const textPart = (params: ConstructorParams<TextPart>): TextPart => makeP
  * @since 1.0.0
  * @category Models
  */
-export interface TextStartPart extends BasePart<"text-start", TextStartPartMetadata> {
+export interface TextStartPart
+  extends BasePart<"text-start", TextStartPartMetadata> {
   /**
    * Unique identifier for this text chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -662,11 +712,12 @@ export interface TextStartPart extends BasePart<"text-start", TextStartPartMetad
  * @since 1.0.0
  * @category Models
  */
-export interface TextStartPartEncoded extends BasePartEncoded<"text-start", TextStartPartMetadata> {
+export interface TextStartPartEncoded
+  extends BasePartEncoded<"text-start", TextStartPartMetadata> {
   /**
    * Unique identifier for this text chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -684,14 +735,17 @@ export interface TextStartPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const TextStartPart: Schema.Schema<TextStartPart, TextStartPartEncoded> = Schema.Struct({
-  type: Schema.Literal("text-start"),
-  id: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "TextStartPart" })
-)
+export const TextStartPart: Schema.Schema<TextStartPart, TextStartPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("text-start"),
+    id: Schema.String,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "TextStartPart" })
+  );
 
 /**
  * Constructs a new text start part.
@@ -699,7 +753,9 @@ export const TextStartPart: Schema.Schema<TextStartPart, TextStartPartEncoded> =
  * @since 1.0.0
  * @category Constructors
  */
-export const textStartPart = (params: ConstructorParams<TextStartPart>): TextStartPart => makePart("text-start", params)
+export const textStartPart = (
+  params: ConstructorParams<TextStartPart>
+): TextStartPart => makePart("text-start", params);
 
 // =============================================================================
 // Text Delta Part
@@ -712,15 +768,16 @@ export const textStartPart = (params: ConstructorParams<TextStartPart>): TextSta
  * @since 1.0.0
  * @category Models
  */
-export interface TextDeltaPart extends BasePart<"text-delta", TextDeltaPartMetadata> {
+export interface TextDeltaPart
+  extends BasePart<"text-delta", TextDeltaPartMetadata> {
   /**
    * Unique identifier matching the corresponding text chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The incremental text content to add.
    */
-  readonly delta: string
+  readonly delta: string;
 }
 
 /**
@@ -729,15 +786,16 @@ export interface TextDeltaPart extends BasePart<"text-delta", TextDeltaPartMetad
  * @since 1.0.0
  * @category Models
  */
-export interface TextDeltaPartEncoded extends BasePartEncoded<"text-delta", TextDeltaPartMetadata> {
+export interface TextDeltaPartEncoded
+  extends BasePartEncoded<"text-delta", TextDeltaPartMetadata> {
   /**
    * Unique identifier matching the corresponding text chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The incremental text content to add.
    */
-  readonly delta: string
+  readonly delta: string;
 }
 
 /**
@@ -755,15 +813,18 @@ export interface TextDeltaPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const TextDeltaPart: Schema.Schema<TextDeltaPart, TextDeltaPartEncoded> = Schema.Struct({
-  type: Schema.Literal("text-delta"),
-  id: Schema.String,
-  delta: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "TextDeltaPart" })
-)
+export const TextDeltaPart: Schema.Schema<TextDeltaPart, TextDeltaPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("text-delta"),
+    id: Schema.String,
+    delta: Schema.String,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "TextDeltaPart" })
+  );
 
 /**
  * Constructs a new text delta part.
@@ -771,7 +832,9 @@ export const TextDeltaPart: Schema.Schema<TextDeltaPart, TextDeltaPartEncoded> =
  * @since 1.0.0
  * @category Constructors
  */
-export const textDeltaPart = (params: ConstructorParams<TextDeltaPart>): TextDeltaPart => makePart("text-delta", params)
+export const textDeltaPart = (
+  params: ConstructorParams<TextDeltaPart>
+): TextDeltaPart => makePart("text-delta", params);
 
 // =============================================================================
 // Text End Part
@@ -789,7 +852,7 @@ export interface TextEndPart extends BasePart<"text-end", TextEndPartMetadata> {
   /**
    * Unique identifier matching the corresponding text chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -798,11 +861,12 @@ export interface TextEndPart extends BasePart<"text-end", TextEndPartMetadata> {
  * @since 1.0.0
  * @category Models
  */
-export interface TextEndPartEncoded extends BasePartEncoded<"text-end", TextEndPartMetadata> {
+export interface TextEndPartEncoded
+  extends BasePartEncoded<"text-end", TextEndPartMetadata> {
   /**
    * Unique identifier matching the corresponding text chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -820,14 +884,17 @@ export interface TextEndPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const TextEndPart: Schema.Schema<TextEndPart, TextEndPartEncoded> = Schema.Struct({
-  type: Schema.Literal("text-end"),
-  id: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "TextEndPart" })
-)
+export const TextEndPart: Schema.Schema<TextEndPart, TextEndPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("text-end"),
+    id: Schema.String,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "TextEndPart" })
+  );
 
 /**
  * Constructs a new text end part.
@@ -835,7 +902,9 @@ export const TextEndPart: Schema.Schema<TextEndPart, TextEndPartEncoded> = Schem
  * @since 1.0.0
  * @category Constructors
  */
-export const textEndPart = (params: ConstructorParams<TextEndPart>): TextEndPart => makePart("text-end", params)
+export const textEndPart = (
+  params: ConstructorParams<TextEndPart>
+): TextEndPart => makePart("text-end", params);
 
 // =============================================================================
 // Reasoning Part
@@ -859,11 +928,12 @@ export const textEndPart = (params: ConstructorParams<TextEndPart>): TextEndPart
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningPart extends BasePart<"reasoning", ReasoningPartMetadata> {
+export interface ReasoningPart
+  extends BasePart<"reasoning", ReasoningPartMetadata> {
   /**
    * The reasoning or thought process text.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -872,11 +942,12 @@ export interface ReasoningPart extends BasePart<"reasoning", ReasoningPartMetada
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningPartEncoded extends BasePartEncoded<"reasoning", ReasoningPartMetadata> {
+export interface ReasoningPartEncoded
+  extends BasePartEncoded<"reasoning", ReasoningPartMetadata> {
   /**
    * The reasoning or thought process text.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -894,14 +965,17 @@ export interface ReasoningPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ReasoningPart: Schema.Schema<ReasoningPart, ReasoningPartEncoded> = Schema.Struct({
-  type: Schema.Literal("reasoning"),
-  text: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "ReasoningPart" })
-)
+export const ReasoningPart: Schema.Schema<ReasoningPart, ReasoningPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("reasoning"),
+    text: Schema.String,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "ReasoningPart" })
+  );
 
 /**
  * Constructs a new reasoning part.
@@ -909,7 +983,9 @@ export const ReasoningPart: Schema.Schema<ReasoningPart, ReasoningPartEncoded> =
  * @since 1.0.0
  * @category Constructors
  */
-export const reasoningPart = (params: ConstructorParams<ReasoningPart>): ReasoningPart => makePart("reasoning", params)
+export const reasoningPart = (
+  params: ConstructorParams<ReasoningPart>
+): ReasoningPart => makePart("reasoning", params);
 
 // =============================================================================
 // Reasoning Start Part
@@ -923,11 +999,12 @@ export const reasoningPart = (params: ConstructorParams<ReasoningPart>): Reasoni
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningStartPart extends BasePart<"reasoning-start", ReasoningStartPartMetadata> {
+export interface ReasoningStartPart
+  extends BasePart<"reasoning-start", ReasoningStartPartMetadata> {
   /**
    * Unique identifier for this reasoning chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -936,11 +1013,12 @@ export interface ReasoningStartPart extends BasePart<"reasoning-start", Reasonin
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningStartPartEncoded extends BasePartEncoded<"reasoning-start", ReasoningStartPartMetadata> {
+export interface ReasoningStartPartEncoded
+  extends BasePartEncoded<"reasoning-start", ReasoningStartPartMetadata> {
   /**
    * Unique identifier for this reasoning stream.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -958,14 +1036,19 @@ export interface ReasoningStartPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ReasoningStartPart: Schema.Schema<ReasoningStartPart, ReasoningStartPartEncoded> = Schema.Struct({
+export const ReasoningStartPart: Schema.Schema<
+  ReasoningStartPart,
+  ReasoningStartPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("reasoning-start"),
   id: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ReasoningStartPart" })
-)
+);
 
 /**
  * Constructs a new reasoning start part.
@@ -973,8 +1056,9 @@ export const ReasoningStartPart: Schema.Schema<ReasoningStartPart, ReasoningStar
  * @since 1.0.0
  * @category Constructors
  */
-export const reasoningStartPart = (params: ConstructorParams<ReasoningStartPart>): ReasoningStartPart =>
-  makePart("reasoning-start", params)
+export const reasoningStartPart = (
+  params: ConstructorParams<ReasoningStartPart>
+): ReasoningStartPart => makePart("reasoning-start", params);
 
 // =============================================================================
 // Reasoning Delta Part
@@ -987,15 +1071,16 @@ export const reasoningStartPart = (params: ConstructorParams<ReasoningStartPart>
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningDeltaPart extends BasePart<"reasoning-delta", ReasoningDeltaPartMetadata> {
+export interface ReasoningDeltaPart
+  extends BasePart<"reasoning-delta", ReasoningDeltaPartMetadata> {
   /**
    * Unique identifier matching the corresponding reasoning chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The incremental reasoning content to add.
    */
-  readonly delta: string
+  readonly delta: string;
 }
 
 /**
@@ -1004,15 +1089,16 @@ export interface ReasoningDeltaPart extends BasePart<"reasoning-delta", Reasonin
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningDeltaPartEncoded extends BasePartEncoded<"reasoning-delta", ReasoningDeltaPartMetadata> {
+export interface ReasoningDeltaPartEncoded
+  extends BasePartEncoded<"reasoning-delta", ReasoningDeltaPartMetadata> {
   /**
    * Unique identifier matching the corresponding reasoning chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The incremental reasoning content to add.
    */
-  readonly delta: string
+  readonly delta: string;
 }
 
 /**
@@ -1030,15 +1116,20 @@ export interface ReasoningDeltaPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ReasoningDeltaPart: Schema.Schema<ReasoningDeltaPart, ReasoningDeltaPartEncoded> = Schema.Struct({
+export const ReasoningDeltaPart: Schema.Schema<
+  ReasoningDeltaPart,
+  ReasoningDeltaPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("reasoning-delta"),
   id: Schema.String,
   delta: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ReasoningDeltaPart" })
-)
+);
 
 /**
  * Constructs a new reasoning delta part.
@@ -1046,8 +1137,9 @@ export const ReasoningDeltaPart: Schema.Schema<ReasoningDeltaPart, ReasoningDelt
  * @since 1.0.0
  * @category Constructors
  */
-export const reasoningDeltaPart = (params: ConstructorParams<ReasoningDeltaPart>): ReasoningDeltaPart =>
-  makePart("reasoning-delta", params)
+export const reasoningDeltaPart = (
+  params: ConstructorParams<ReasoningDeltaPart>
+): ReasoningDeltaPart => makePart("reasoning-delta", params);
 
 // =============================================================================
 // Reasoning End Part
@@ -1061,11 +1153,12 @@ export const reasoningDeltaPart = (params: ConstructorParams<ReasoningDeltaPart>
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningEndPart extends BasePart<"reasoning-end", ReasoningEndPartMetadata> {
+export interface ReasoningEndPart
+  extends BasePart<"reasoning-end", ReasoningEndPartMetadata> {
   /**
    * Unique identifier matching the corresponding reasoning chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -1074,11 +1167,12 @@ export interface ReasoningEndPart extends BasePart<"reasoning-end", ReasoningEnd
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningEndPartEncoded extends BasePartEncoded<"reasoning-end", ReasoningEndPartMetadata> {
+export interface ReasoningEndPartEncoded
+  extends BasePartEncoded<"reasoning-end", ReasoningEndPartMetadata> {
   /**
    * Unique identifier matching the corresponding reasoning chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -1096,14 +1190,19 @@ export interface ReasoningEndPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ReasoningEndPart: Schema.Schema<ReasoningEndPart, ReasoningEndPartEncoded> = Schema.Struct({
+export const ReasoningEndPart: Schema.Schema<
+  ReasoningEndPart,
+  ReasoningEndPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("reasoning-end"),
   id: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ReasoningEndPart" })
-)
+);
 
 /**
  * Constructs a new reasoning end part.
@@ -1111,8 +1210,9 @@ export const ReasoningEndPart: Schema.Schema<ReasoningEndPart, ReasoningEndPartE
  * @since 1.0.0
  * @category Constructors
  */
-export const reasoningEndPart = (params: ConstructorParams<ReasoningEndPart>): ReasoningEndPart =>
-  makePart("reasoning-end", params)
+export const reasoningEndPart = (
+  params: ConstructorParams<ReasoningEndPart>
+): ReasoningEndPart => makePart("reasoning-end", params);
 
 // =============================================================================
 // Tool Params Start Part
@@ -1127,16 +1227,17 @@ export const reasoningEndPart = (params: ConstructorParams<ReasoningEndPart>): R
  * @since 1.0.0
  * @category Models
  */
-export interface ToolParamsStartPart extends BasePart<"tool-params-start", ToolParamsStartPartMetadata> {
+export interface ToolParamsStartPart
+  extends BasePart<"tool-params-start", ToolParamsStartPartMetadata> {
   /**
    * Unique identifier for this tool parameter chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool being called, which corresponds to the name of the tool
    * in the `Toolkit` included with the request.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * Optional provider-specific name for the tool, which can be useful when the
    * name of the tool in the `Toolkit` and the name of the tool used by the
@@ -1145,11 +1246,11 @@ export interface ToolParamsStartPart extends BasePart<"tool-params-start", ToolP
    * This is usually happens only with provider-defined tools which require a
    * user-space handler.
    */
-  readonly providerName?: string | undefined
+  readonly providerName?: string | undefined;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted: boolean
+  readonly providerExecuted: boolean;
 }
 
 /**
@@ -1158,16 +1259,17 @@ export interface ToolParamsStartPart extends BasePart<"tool-params-start", ToolP
  * @since 1.0.0
  * @category Models
  */
-export interface ToolParamsStartPartEncoded extends BasePartEncoded<"tool-params-start", ToolParamsStartPartMetadata> {
+export interface ToolParamsStartPartEncoded
+  extends BasePartEncoded<"tool-params-start", ToolParamsStartPartMetadata> {
   /**
    * Unique identifier for this tool parameter chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool being called, which corresponds to the name of the tool
    * in the `Toolkit` included with the request.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * Optional provider-specific name for the tool, which can be useful when the
    * name of the tool in the `Toolkit` and the name of the tool used by the
@@ -1176,11 +1278,11 @@ export interface ToolParamsStartPartEncoded extends BasePartEncoded<"tool-params
    * This is usually happens only with provider-defined tools which require a
    * user-space handler.
    */
-  readonly providerName?: string | undefined
+  readonly providerName?: string | undefined;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted?: boolean
+  readonly providerExecuted?: boolean;
 }
 
 /**
@@ -1198,17 +1300,24 @@ export interface ToolParamsStartPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ToolParamsStartPart: Schema.Schema<ToolParamsStartPart, ToolParamsStartPartEncoded> = Schema.Struct({
+export const ToolParamsStartPart: Schema.Schema<
+  ToolParamsStartPart,
+  ToolParamsStartPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("tool-params-start"),
   id: Schema.String,
   name: Schema.String,
   providerName: Schema.optional(Schema.String),
-  providerExecuted: Schema.optionalWith(Schema.Boolean, { default: constFalse }),
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  providerExecuted: Schema.optionalWith(Schema.Boolean, {
+    default: constFalse,
+  }),
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ToolParamsStartPart" })
-)
+);
 
 /**
  * Constructs a new tool params start part.
@@ -1216,8 +1325,9 @@ export const ToolParamsStartPart: Schema.Schema<ToolParamsStartPart, ToolParamsS
  * @since 1.0.0
  * @category Constructors
  */
-export const toolParamsStartPart = (params: ConstructorParams<ToolParamsStartPart>): ToolParamsStartPart =>
-  makePart("tool-params-start", params)
+export const toolParamsStartPart = (
+  params: ConstructorParams<ToolParamsStartPart>
+): ToolParamsStartPart => makePart("tool-params-start", params);
 
 // =============================================================================
 // Tool Params Delta Part
@@ -1232,15 +1342,16 @@ export const toolParamsStartPart = (params: ConstructorParams<ToolParamsStartPar
  * @since 1.0.0
  * @category Models
  */
-export interface ToolParamsDeltaPart extends BasePart<"tool-params-delta", ToolParamsDeltaPartMetadata> {
+export interface ToolParamsDeltaPart
+  extends BasePart<"tool-params-delta", ToolParamsDeltaPartMetadata> {
   /**
    * Unique identifier matching the corresponding tool parameter chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The incremental parameter content (typically JSON fragment) to add.
    */
-  readonly delta: string
+  readonly delta: string;
 }
 
 /**
@@ -1249,15 +1360,16 @@ export interface ToolParamsDeltaPart extends BasePart<"tool-params-delta", ToolP
  * @since 1.0.0
  * @category Models
  */
-export interface ToolParamsDeltaPartEncoded extends BasePartEncoded<"tool-params-delta", ToolParamsDeltaPartMetadata> {
+export interface ToolParamsDeltaPartEncoded
+  extends BasePartEncoded<"tool-params-delta", ToolParamsDeltaPartMetadata> {
   /**
    * Unique identifier matching the corresponding tool parameter chunk.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The incremental parameter content (typically JSON fragment) to add.
    */
-  readonly delta: string
+  readonly delta: string;
 }
 
 /**
@@ -1275,15 +1387,20 @@ export interface ToolParamsDeltaPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ToolParamsDeltaPart: Schema.Schema<ToolParamsDeltaPart, ToolParamsDeltaPartEncoded> = Schema.Struct({
+export const ToolParamsDeltaPart: Schema.Schema<
+  ToolParamsDeltaPart,
+  ToolParamsDeltaPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("tool-params-delta"),
   id: Schema.String,
   delta: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ToolParamsDeltaPart" })
-)
+);
 
 /**
  * Constructs a new tool params delta part.
@@ -1291,8 +1408,9 @@ export const ToolParamsDeltaPart: Schema.Schema<ToolParamsDeltaPart, ToolParamsD
  * @since 1.0.0
  * @category Constructors
  */
-export const toolParamsDeltaPart = (params: ConstructorParams<ToolParamsDeltaPart>): ToolParamsDeltaPart =>
-  makePart("tool-params-delta", params)
+export const toolParamsDeltaPart = (
+  params: ConstructorParams<ToolParamsDeltaPart>
+): ToolParamsDeltaPart => makePart("tool-params-delta", params);
 
 // =============================================================================
 // Tool Params End Part
@@ -1307,11 +1425,12 @@ export const toolParamsDeltaPart = (params: ConstructorParams<ToolParamsDeltaPar
  * @since 1.0.0
  * @category Models
  */
-export interface ToolParamsEndPart extends BasePart<"tool-params-end", ToolParamsEndPartMetadata> {
+export interface ToolParamsEndPart
+  extends BasePart<"tool-params-end", ToolParamsEndPartMetadata> {
   /**
    * Unique identifier matching the corresponding tool parameter chunk.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -1320,11 +1439,12 @@ export interface ToolParamsEndPart extends BasePart<"tool-params-end", ToolParam
  * @since 1.0.0
  * @category Models
  */
-export interface ToolParamsEndPartEncoded extends BasePartEncoded<"tool-params-end", ToolParamsEndPartMetadata> {
+export interface ToolParamsEndPartEncoded
+  extends BasePartEncoded<"tool-params-end", ToolParamsEndPartMetadata> {
   /**
    * Unique identifier matching the corresponding tool parameter stream.
    */
-  readonly id: string
+  readonly id: string;
 }
 
 /**
@@ -1342,14 +1462,19 @@ export interface ToolParamsEndPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ToolParamsEndPart: Schema.Schema<ToolParamsEndPart, ToolParamsEndPartEncoded> = Schema.Struct({
+export const ToolParamsEndPart: Schema.Schema<
+  ToolParamsEndPart,
+  ToolParamsEndPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("tool-params-end"),
   id: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ToolParamsEndPart" })
-)
+);
 
 /**
  * Constructs a new tool params end part.
@@ -1357,8 +1482,9 @@ export const ToolParamsEndPart: Schema.Schema<ToolParamsEndPart, ToolParamsEndPa
  * @since 1.0.0
  * @category Constructors
  */
-export const toolParamsEndPart = (params: ConstructorParams<ToolParamsEndPart>): ToolParamsEndPart =>
-  makePart("tool-params-end", params)
+export const toolParamsEndPart = (
+  params: ConstructorParams<ToolParamsEndPart>
+): ToolParamsEndPart => makePart("tool-params-end", params);
 
 // =============================================================================
 // Tool Call Part
@@ -1394,20 +1520,21 @@ export const toolParamsEndPart = (params: ConstructorParams<ToolParamsEndPart>):
  * @since 1.0.0
  * @category Models
  */
-export interface ToolCallPart<Name extends string, Params> extends BasePart<"tool-call", ToolCallPartMetadata> {
+export interface ToolCallPart<Name extends string, Params>
+  extends BasePart<"tool-call", ToolCallPartMetadata> {
   /**
    * Unique identifier for this tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool being called, which corresponds to the name of the tool
    * in the `Toolkit` included with the request.
    */
-  readonly name: Name
+  readonly name: Name;
   /**
    * Parameters to pass to the tool.
    */
-  readonly params: Params
+  readonly params: Params;
   /**
    * Optional provider-specific name for the tool, which can be useful when the
    * name of the tool in the `Toolkit` and the name of the tool used by the
@@ -1416,11 +1543,11 @@ export interface ToolCallPart<Name extends string, Params> extends BasePart<"too
    * This is usually happens only with provider-defined tools which require a
    * user-space handler.
    */
-  readonly providerName?: string | undefined
+  readonly providerName?: string | undefined;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted: boolean
+  readonly providerExecuted: boolean;
 }
 
 /**
@@ -1429,20 +1556,21 @@ export interface ToolCallPart<Name extends string, Params> extends BasePart<"too
  * @since 1.0.0
  * @category Models
  */
-export interface ToolCallPartEncoded extends BasePartEncoded<"tool-call", ToolCallPartMetadata> {
+export interface ToolCallPartEncoded
+  extends BasePartEncoded<"tool-call", ToolCallPartMetadata> {
   /**
    * Unique identifier for this tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool being called, which corresponds to the name of the tool
    * in the `Toolkit` included with the request.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * Parameters to pass to the tool.
    */
-  readonly params: unknown
+  readonly params: unknown;
   /**
    * Optional provider-specific name for the tool, which can be useful when the
    * name of the tool in the `Toolkit` and the name of the tool used by the
@@ -1451,11 +1579,11 @@ export interface ToolCallPartEncoded extends BasePartEncoded<"tool-call", ToolCa
    * This is usually happens only with provider-defined tools which require a
    * user-space handler.
    */
-  readonly providerName?: string | undefined
+  readonly providerName?: string | undefined;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted?: boolean | undefined
+  readonly providerExecuted?: boolean | undefined;
 }
 
 /**
@@ -1473,7 +1601,10 @@ export interface ToolCallPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ToolCallPart = <const Name extends string, Params extends Schema.Struct.Fields>(
+export const ToolCallPart = <
+  const Name extends string,
+  Params extends Schema.Struct.Fields,
+>(
   /**
    * Name of the tool.
    */
@@ -1489,12 +1620,16 @@ export const ToolCallPart = <const Name extends string, Params extends Schema.St
     name: Schema.Literal(name),
     params,
     providerName: Schema.optional(Schema.String),
-    providerExecuted: Schema.optionalWith(Schema.Boolean, { default: constFalse }),
-    metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+    providerExecuted: Schema.optionalWith(Schema.Boolean, {
+      default: constFalse,
+    }),
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
   }).pipe(
     Schema.attachPropertySignature(PartTypeId, PartTypeId),
     Schema.annotations({ identifier: "ToolCallPart" })
-  ) as any
+  ) as any;
 
 /**
  * Constructs a new tool call part.
@@ -1504,7 +1639,7 @@ export const ToolCallPart = <const Name extends string, Params extends Schema.St
  */
 export const toolCallPart = <const Name extends string, Params>(
   params: ConstructorParams<ToolCallPart<Name, Params>>
-): ToolCallPart<Name, Params> => makePart("tool-call", params)
+): ToolCallPart<Name, Params> => makePart("tool-call", params);
 
 // =============================================================================
 // Tool Call Result Part
@@ -1516,20 +1651,21 @@ export const toolCallPart = <const Name extends string, Params>(
  * @since 1.0.0
  * @category Models
  */
-export interface BaseToolResult<Name extends string> extends BasePart<"tool-result", ToolResultPartMetadata> {
+export interface BaseToolResult<Name extends string>
+  extends BasePart<"tool-result", ToolResultPartMetadata> {
   /**
    * Unique identifier matching the original tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool being called, which corresponds to the name of the tool
    * in the `Toolkit` included with the request.
    */
-  readonly name: Name
+  readonly name: Name;
   /**
    * The encoded result for serialization purposes.
    */
-  readonly encodedResult: unknown
+  readonly encodedResult: unknown;
   /**
    * Optional provider-specific name for the tool, which can be useful when the
    * name of the tool in the `Toolkit` and the name of the tool used by the
@@ -1538,11 +1674,11 @@ export interface BaseToolResult<Name extends string> extends BasePart<"tool-resu
    * This is usually happens only with provider-defined tools which require a
    * user-space handler.
    */
-  readonly providerName?: string | undefined
+  readonly providerName?: string | undefined;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted: boolean
+  readonly providerExecuted: boolean;
 }
 
 /**
@@ -1551,15 +1687,16 @@ export interface BaseToolResult<Name extends string> extends BasePart<"tool-resu
  * @since 1.0.0
  * @category Models
  */
-export interface ToolResultSuccess<Name extends string, Success> extends BaseToolResult<Name> {
+export interface ToolResultSuccess<Name extends string, Success>
+  extends BaseToolResult<Name> {
   /**
    * The decoded success returned by the tool execution.
    */
-  readonly result: Success
+  readonly result: Success;
   /**
    * Whether or not the result of executing the tool call handler was an error.
    */
-  readonly isFailure: false
+  readonly isFailure: false;
 }
 
 /**
@@ -1568,15 +1705,16 @@ export interface ToolResultSuccess<Name extends string, Success> extends BaseToo
  * @since 1.0.0
  * @category Models
  */
-export interface ToolResultFailure<Name extends string, Failure> extends BaseToolResult<Name> {
+export interface ToolResultFailure<Name extends string, Failure>
+  extends BaseToolResult<Name> {
   /**
    * The decoded failure returned by the tool execution.
    */
-  readonly result: Failure
+  readonly result: Failure;
   /**
    * Whether or not the result of executing the tool call handler was an error.
    */
-  readonly isFailure: true
+  readonly isFailure: true;
 }
 
 /**
@@ -1620,7 +1758,7 @@ export interface ToolResultFailure<Name extends string, Failure> extends BaseToo
  */
 export type ToolResultPart<Name extends string, Success, Failure> =
   | ToolResultSuccess<Name, Success>
-  | ToolResultFailure<Name, Failure>
+  | ToolResultFailure<Name, Failure>;
 
 /**
  * Encoded representation of tool result parts for serialization.
@@ -1628,24 +1766,25 @@ export type ToolResultPart<Name extends string, Success, Failure> =
  * @since 1.0.0
  * @category Models
  */
-export interface ToolResultPartEncoded extends BasePartEncoded<"tool-result", ToolResultPartMetadata> {
+export interface ToolResultPartEncoded
+  extends BasePartEncoded<"tool-result", ToolResultPartMetadata> {
   /**
    * Unique identifier matching the original tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool being called, which corresponds to the name of the tool
    * in the `Toolkit` included with the request.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * The result returned by the tool execution.
    */
-  readonly result: unknown
+  readonly result: unknown;
   /**
    * Whether or not the result of executing the tool call handler was an error.
    */
-  readonly isFailure: boolean
+  readonly isFailure: boolean;
   /**
    * Optional provider-specific name for the tool, which can be useful when the
    * name of the tool in the `Toolkit` and the name of the tool used by the
@@ -1654,11 +1793,11 @@ export interface ToolResultPartEncoded extends BasePartEncoded<"tool-result", To
    * This is usually happens only with provider-defined tools which require a
    * user-space handler.
    */
-  readonly providerName?: string | undefined
+  readonly providerName?: string | undefined;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted?: boolean | undefined
+  readonly providerExecuted?: boolean | undefined;
 }
 
 /**
@@ -1679,29 +1818,33 @@ export interface ToolResultPartMetadata extends ProviderMetadata {}
 export const ToolResultPart = <
   const Name extends string,
   Success extends Schema.Schema.Any,
-  Failure extends Schema.Schema.All
+  Failure extends Schema.Schema.All,
 >(
   name: Name,
   success: Success,
   failure: Failure
 ): Schema.Schema<
-  ToolResultPart<Name, Schema.Schema.Type<Success>, Schema.Schema.Type<Failure>>,
+  ToolResultPart<
+    Name,
+    Schema.Schema.Type<Success>,
+    Schema.Schema.Type<Failure>
+  >,
   ToolResultPartEncoded
 > => {
   const Base = Schema.Struct({
     id: Schema.String,
     type: Schema.Literal("tool-result"),
     providerName: Schema.optional(Schema.String),
-    isFailure: Schema.Boolean
-  })
-  const ResultSchema = Schema.Union(success, failure)
+    isFailure: Schema.Boolean,
+  });
+  const ResultSchema = Schema.Union(success, failure);
   const Encoded = Schema.Struct({
     ...Base.fields,
     name: Schema.String,
     result: Schema.encodedSchema(ResultSchema),
     providerExecuted: Schema.optional(Schema.Boolean),
-    metadata: Schema.optional(ProviderMetadata)
-  })
+    metadata: Schema.optional(ProviderMetadata),
+  });
   const Decoded = Schema.Struct({
     ...Base.fields,
     [PartTypeId]: Schema.Literal(PartTypeId),
@@ -1709,41 +1852,37 @@ export const ToolResultPart = <
     result: Schema.typeSchema(ResultSchema),
     encodedResult: Schema.encodedSchema(ResultSchema),
     providerExecuted: Schema.Boolean,
-    metadata: ProviderMetadata
-  })
-  const decodeResult = ParseResult.decode<any, any, never>(ResultSchema as any)
-  const encodeResult = ParseResult.encode<any, any, never>(ResultSchema as any)
-  return Schema.transformOrFail(
-    Encoded,
-    Decoded,
-    {
-      strict: true,
-      decode: Effect.fnUntraced(function*(encoded) {
-        const decoded = yield* decodeResult(encoded.result)
-        const providerExecuted = encoded.providerExecuted ?? false
-        return {
-          ...encoded,
-          [PartTypeId]: PartTypeId,
-          name: encoded.name as Name,
-          result: decoded,
-          encodedResult: encoded.result as any,
-          metadata: encoded.metadata ?? {},
-          providerExecuted
-        } as const
-      }),
-      encode: Effect.fnUntraced(function*(decoded) {
-        const encoded = yield* encodeResult(decoded.result)
-        return {
-          ...decoded,
-          result: encoded,
-          ...(decoded.metadata ?? {}),
-          ...(decoded.providerName ? { providerName: decoded.providerName } : {}),
-          ...(decoded.providerExecuted ? { providerExecuted: true } : {})
-        }
-      })
-    }
-  ).annotations({ identifier: `ToolResultPart(${name})` }) as any
-}
+    metadata: ProviderMetadata,
+  });
+  const decodeResult = ParseResult.decode<any, any, never>(ResultSchema as any);
+  const encodeResult = ParseResult.encode<any, any, never>(ResultSchema as any);
+  return Schema.transformOrFail(Encoded, Decoded, {
+    strict: true,
+    decode: Effect.fnUntraced(function* (encoded) {
+      const decoded = yield* decodeResult(encoded.result);
+      const providerExecuted = encoded.providerExecuted ?? false;
+      return {
+        ...encoded,
+        [PartTypeId]: PartTypeId,
+        name: encoded.name as Name,
+        result: decoded,
+        encodedResult: encoded.result as any,
+        metadata: encoded.metadata ?? {},
+        providerExecuted,
+      } as const;
+    }),
+    encode: Effect.fnUntraced(function* (decoded) {
+      const encoded = yield* encodeResult(decoded.result);
+      return {
+        ...decoded,
+        result: encoded,
+        ...(decoded.metadata ?? {}),
+        ...(decoded.providerName ? { providerName: decoded.providerName } : {}),
+        ...(decoded.providerExecuted ? { providerExecuted: true } : {}),
+      };
+    }),
+  }).annotations({ identifier: `ToolResultPart(${name})` }) as any;
+};
 
 /**
  * Constructs a new tool result part.
@@ -1752,20 +1891,22 @@ export const ToolResultPart = <
  * @category Constructors
  */
 export const toolResultPart = <
-  const Params extends ConstructorParams<ToolResultPart<string, any, any>>
+  const Params extends ConstructorParams<ToolResultPart<string, any, any>>,
 >(
   params: Params
 ): Params extends {
-  readonly name: infer Name extends string
-  readonly isFailure: false
-  readonly result: infer Success
-} ? ToolResultPart<Name, Success, never>
+  readonly name: infer Name extends string;
+  readonly isFailure: false;
+  readonly result: infer Success;
+}
+  ? ToolResultPart<Name, Success, never>
   : Params extends {
-    readonly name: infer Name extends string
-    readonly isFailure: true
-    readonly result: infer Failure
-  } ? ToolResultPart<Name, never, Failure>
-  : never => makePart("tool-result", params) as any
+        readonly name: infer Name extends string;
+        readonly isFailure: true;
+        readonly result: infer Failure;
+      }
+    ? ToolResultPart<Name, never, Failure>
+    : never => makePart("tool-result", params) as any;
 
 // =============================================================================
 // File Part
@@ -1793,11 +1934,11 @@ export interface FilePart extends BasePart<"file", FilePartMetadata> {
   /**
    * MIME type of the file (e.g., "image/jpeg", "application/pdf").
    */
-  readonly mediaType: string
+  readonly mediaType: string;
   /**
    * File data as a byte array.
    */
-  readonly data: Uint8Array
+  readonly data: Uint8Array;
 }
 
 /**
@@ -1806,15 +1947,16 @@ export interface FilePart extends BasePart<"file", FilePartMetadata> {
  * @since 1.0.0
  * @category Models
  */
-export interface FilePartEncoded extends BasePartEncoded<"file", FilePartMetadata> {
+export interface FilePartEncoded
+  extends BasePartEncoded<"file", FilePartMetadata> {
   /**
    * MIME type of the file (e.g., "image/jpeg", "application/pdf").
    */
-  readonly mediaType: string
+  readonly mediaType: string;
   /**
    * File data as a base64 string.
    */
-  readonly data: string
+  readonly data: string;
 }
 
 /**
@@ -1832,15 +1974,19 @@ export interface FilePartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const FilePart: Schema.Schema<FilePart, FilePartEncoded> = Schema.Struct({
-  type: Schema.Literal("file"),
-  mediaType: Schema.String,
-  data: Schema.Uint8ArrayFromBase64,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
+export const FilePart: Schema.Schema<FilePart, FilePartEncoded> = Schema.Struct(
+  {
+    type: Schema.Literal("file"),
+    mediaType: Schema.String,
+    data: Schema.Uint8ArrayFromBase64,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }
+).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "FilePart" })
-)
+);
 
 /**
  * Constructs a new file part.
@@ -1848,7 +1994,8 @@ export const FilePart: Schema.Schema<FilePart, FilePartEncoded> = Schema.Struct(
  * @since 1.0.0
  * @category Constructors
  */
-export const filePart = (params: ConstructorParams<FilePart>): FilePart => makePart("file", params)
+export const filePart = (params: ConstructorParams<FilePart>): FilePart =>
+  makePart("file", params);
 
 // =============================================================================
 // Document Source Part
@@ -1862,27 +2009,28 @@ export const filePart = (params: ConstructorParams<FilePart>): FilePart => makeP
  * @since 1.0.0
  * @category Models
  */
-export interface DocumentSourcePart extends BasePart<"source", DocumentSourcePartMetadata> {
+export interface DocumentSourcePart
+  extends BasePart<"source", DocumentSourcePartMetadata> {
   /**
    * Type discriminator for document sources.
    */
-  readonly sourceType: "document"
+  readonly sourceType: "document";
   /**
    * Unique identifier for the document.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * MIME type of the document.
    */
-  readonly mediaType: string
+  readonly mediaType: string;
   /**
    * Display title of the document.
    */
-  readonly title: string
+  readonly title: string;
   /**
    * Optional filename of the document.
    */
-  readonly fileName?: string
+  readonly fileName?: string;
 }
 
 /**
@@ -1891,27 +2039,28 @@ export interface DocumentSourcePart extends BasePart<"source", DocumentSourcePar
  * @since 1.0.0
  * @category Models
  */
-export interface DocumentSourcePartEncoded extends BasePartEncoded<"source", DocumentSourcePartMetadata> {
+export interface DocumentSourcePartEncoded
+  extends BasePartEncoded<"source", DocumentSourcePartMetadata> {
   /**
    * Type discriminator for document sources.
    */
-  readonly sourceType: "document"
+  readonly sourceType: "document";
   /**
    * Unique identifier for the document.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * MIME type of the document.
    */
-  readonly mediaType: string
+  readonly mediaType: string;
   /**
    * Display title of the document.
    */
-  readonly title: string
+  readonly title: string;
   /**
    * Optional filename of the document.
    */
-  readonly fileName?: string
+  readonly fileName?: string;
 }
 
 /**
@@ -1929,18 +2078,23 @@ export interface DocumentSourcePartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const DocumentSourcePart: Schema.Schema<DocumentSourcePart, DocumentSourcePartEncoded> = Schema.Struct({
+export const DocumentSourcePart: Schema.Schema<
+  DocumentSourcePart,
+  DocumentSourcePartEncoded
+> = Schema.Struct({
   type: Schema.Literal("source"),
   sourceType: Schema.Literal("document"),
   id: Schema.String,
   mediaType: Schema.String,
   title: Schema.String,
   fileName: Schema.optional(Schema.String),
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "DocumentSourcePart" })
-)
+);
 
 /**
  * Constructs a new document source part.
@@ -1948,8 +2102,10 @@ export const DocumentSourcePart: Schema.Schema<DocumentSourcePart, DocumentSourc
  * @since 1.0.0
  * @category Constructors
  */
-export const documentSourcePart = (params: ConstructorParams<DocumentSourcePart>): DocumentSourcePart =>
-  makePart("source", { ...params, sourceType: "document" }) as any
+export const documentSourcePart = (
+  params: ConstructorParams<DocumentSourcePart>
+): DocumentSourcePart =>
+  makePart("source", { ...params, sourceType: "document" }) as any;
 
 // =============================================================================
 // Url Source Part
@@ -1963,23 +2119,24 @@ export const documentSourcePart = (params: ConstructorParams<DocumentSourcePart>
  * @since 1.0.0
  * @category Models
  */
-export interface UrlSourcePart extends BasePart<"source", UrlSourcePartMetadata> {
+export interface UrlSourcePart
+  extends BasePart<"source", UrlSourcePartMetadata> {
   /**
    * Type discriminator for URL sources.
    */
-  readonly sourceType: "url"
+  readonly sourceType: "url";
   /**
    * Unique identifier for the URL.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The URL that was referenced.
    */
-  readonly url: URL
+  readonly url: URL;
   /**
    * Display title of the URL content.
    */
-  readonly title: string
+  readonly title: string;
 }
 
 /**
@@ -1988,23 +2145,24 @@ export interface UrlSourcePart extends BasePart<"source", UrlSourcePartMetadata>
  * @since 1.0.0
  * @category Models
  */
-export interface UrlSourcePartEncoded extends BasePartEncoded<"source", UrlSourcePartMetadata> {
+export interface UrlSourcePartEncoded
+  extends BasePartEncoded<"source", UrlSourcePartMetadata> {
   /**
    * Type discriminator for URL sources.
    */
-  readonly sourceType: "url"
+  readonly sourceType: "url";
   /**
    * Unique identifier for the URL.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * The URL that was referenced as a string.
    */
-  readonly url: string
+  readonly url: string;
   /**
    * Display title of the URL content.
    */
-  readonly title: string
+  readonly title: string;
 }
 
 /**
@@ -2022,17 +2180,20 @@ export interface UrlSourcePartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const UrlSourcePart: Schema.Schema<UrlSourcePart, UrlSourcePartEncoded> = Schema.Struct({
-  type: Schema.Literal("source"),
-  sourceType: Schema.Literal("url"),
-  id: Schema.String,
-  url: Schema.URL,
-  title: Schema.String,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "UrlSourcePart" })
-)
+export const UrlSourcePart: Schema.Schema<UrlSourcePart, UrlSourcePartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("source"),
+    sourceType: Schema.Literal("url"),
+    id: Schema.String,
+    url: Schema.URL,
+    title: Schema.String,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "UrlSourcePart" })
+  );
 
 /**
  * Constructs a new URL source part.
@@ -2040,8 +2201,9 @@ export const UrlSourcePart: Schema.Schema<UrlSourcePart, UrlSourcePartEncoded> =
  * @since 1.0.0
  * @category Constructors
  */
-export const urlSourcePart = (params: ConstructorParams<UrlSourcePart>): UrlSourcePart =>
-  makePart("source", { ...params, sourceType: "url" }) as any
+export const urlSourcePart = (
+  params: ConstructorParams<UrlSourcePart>
+): UrlSourcePart => makePart("source", { ...params, sourceType: "url" }) as any;
 
 // =============================================================================
 // Response Metadata Part
@@ -2065,19 +2227,20 @@ export const urlSourcePart = (params: ConstructorParams<UrlSourcePart>): UrlSour
  * @since 1.0.0
  * @category Models
  */
-export interface ResponseMetadataPart extends BasePart<"response-metadata", ResponseMetadataPartMetadata> {
+export interface ResponseMetadataPart
+  extends BasePart<"response-metadata", ResponseMetadataPartMetadata> {
   /**
    * Optional unique identifier for this specific response.
    */
-  readonly id: Option.Option<string>
+  readonly id: Option.Option<string>;
   /**
    * Optional identifier of the AI model that generated the response.
    */
-  readonly modelId: Option.Option<string>
+  readonly modelId: Option.Option<string>;
   /**
    * Optional timestamp when the response was generated.
    */
-  readonly timestamp: Option.Option<DateTime.Utc>
+  readonly timestamp: Option.Option<DateTime.Utc>;
 }
 
 /**
@@ -2087,20 +2250,19 @@ export interface ResponseMetadataPart extends BasePart<"response-metadata", Resp
  * @category Models
  */
 export interface ResponseMetadataPartEncoded
-  extends BasePartEncoded<"response-metadata", ResponseMetadataPartMetadata>
-{
+  extends BasePartEncoded<"response-metadata", ResponseMetadataPartMetadata> {
   /**
    * Optional unique identifier for this specific response.
    */
-  readonly id?: string | undefined
+  readonly id?: string | undefined;
   /**
    * Optional identifier of the AI model that generated the response.
    */
-  readonly modelId?: string | undefined
+  readonly modelId?: string | undefined;
   /**
    * Optional timestamp when the response was generated.
    */
-  readonly timestamp?: string | undefined
+  readonly timestamp?: string | undefined;
 }
 
 /**
@@ -2118,16 +2280,21 @@ export interface ResponseMetadataPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ResponseMetadataPart: Schema.Schema<ResponseMetadataPart, ResponseMetadataPartEncoded> = Schema.Struct({
+export const ResponseMetadataPart: Schema.Schema<
+  ResponseMetadataPart,
+  ResponseMetadataPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("response-metadata"),
   id: Schema.optionalWith(Schema.String, { as: "Option" }),
   modelId: Schema.optionalWith(Schema.String, { as: "Option" }),
   timestamp: Schema.optionalWith(Schema.DateTimeUtc, { as: "Option" }),
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
+  metadata: Schema.optionalWith(ProviderMetadata, {
+    default: constEmptyObject,
+  }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ResponseMetadataPart" })
-)
+);
 
 /**
  * Constructs a new response metadata part.
@@ -2135,8 +2302,9 @@ export const ResponseMetadataPart: Schema.Schema<ResponseMetadataPart, ResponseM
  * @since 1.0.0
  * @category Constructors
  */
-export const responseMetadataPart = (params: ConstructorParams<ResponseMetadataPart>): ResponseMetadataPart =>
-  makePart("response-metadata", params)
+export const responseMetadataPart = (
+  params: ConstructorParams<ResponseMetadataPart>
+): ResponseMetadataPart => makePart("response-metadata", params);
 
 // =============================================================================
 // Finish Part
@@ -2158,7 +2326,18 @@ export const responseMetadataPart = (params: ConstructorParams<ResponseMetadataP
  * @since 1.0.0
  * @category Models
  */
-export const FinishReason: Schema.Literal<[
+export const FinishReason: Schema.Literal<
+  [
+    "stop",
+    "length",
+    "content-filter",
+    "tool-calls",
+    "error",
+    "pause",
+    "other",
+    "unknown",
+  ]
+> = Schema.Literal(
   "stop",
   "length",
   "content-filter",
@@ -2167,22 +2346,13 @@ export const FinishReason: Schema.Literal<[
   "pause",
   "other",
   "unknown"
-]> = Schema.Literal(
-  "stop",
-  "length",
-  "content-filter",
-  "tool-calls",
-  "error",
-  "pause",
-  "other",
-  "unknown"
-)
+);
 
 /**
  * @since 1.0.0
  * @category Models
  */
-export type FinishReason = typeof FinishReason.Type
+export type FinishReason = typeof FinishReason.Type;
 
 /**
  * Represents usage information for a request to a large language model provider.
@@ -2220,7 +2390,7 @@ export class Usage extends Schema.Class<Usage>("@effect/ai/AiResponse/Usage")({
   /**
    * The number of input tokens read from the prompt cache for the request.
    */
-  cachedInputTokens: Schema.optional(Schema.Number)
+  cachedInputTokens: Schema.optional(Schema.Number),
 }) {}
 
 /**
@@ -2247,11 +2417,11 @@ export interface FinishPart extends BasePart<"finish", FinishPartMetadata> {
   /**
    * The reason why the model finished generating the response.
    */
-  readonly reason: FinishReason
+  readonly reason: FinishReason;
   /**
    * Token usage statistics for the request.
    */
-  readonly usage: Usage
+  readonly usage: Usage;
 }
 
 /**
@@ -2260,15 +2430,16 @@ export interface FinishPart extends BasePart<"finish", FinishPartMetadata> {
  * @since 1.0.0
  * @category Models
  */
-export interface FinishPartEncoded extends BasePartEncoded<"finish", FinishPartMetadata> {
+export interface FinishPartEncoded
+  extends BasePartEncoded<"finish", FinishPartMetadata> {
   /**
    * The reason why the model finished generating the response.
    */
-  readonly reason: typeof FinishReason.Encoded
+  readonly reason: typeof FinishReason.Encoded;
   /**
    * Token usage statistics for the request.
    */
-  readonly usage: typeof Usage.Encoded
+  readonly usage: typeof Usage.Encoded;
 }
 
 /**
@@ -2286,15 +2457,18 @@ export interface FinishPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const FinishPart: Schema.Schema<FinishPart, FinishPartEncoded> = Schema.Struct({
-  type: Schema.Literal("finish"),
-  reason: FinishReason,
-  usage: Usage,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "FinishPart" })
-)
+export const FinishPart: Schema.Schema<FinishPart, FinishPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("finish"),
+    reason: FinishReason,
+    usage: Usage,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "FinishPart" })
+  );
 
 /**
  * Constructs a new finish part.
@@ -2302,7 +2476,8 @@ export const FinishPart: Schema.Schema<FinishPart, FinishPartEncoded> = Schema.S
  * @since 1.0.0
  * @category Constructors
  */
-export const finishPart = (params: ConstructorParams<FinishPart>): FinishPart => makePart("finish", params)
+export const finishPart = (params: ConstructorParams<FinishPart>): FinishPart =>
+  makePart("finish", params);
 
 // =============================================================================
 // Error Part
@@ -2324,7 +2499,7 @@ export const finishPart = (params: ConstructorParams<FinishPart>): FinishPart =>
  * @category Models
  */
 export interface ErrorPart extends BasePart<"error", ErrorPartMetadata> {
-  readonly error: unknown
+  readonly error: unknown;
 }
 
 /**
@@ -2333,8 +2508,9 @@ export interface ErrorPart extends BasePart<"error", ErrorPartMetadata> {
  * @since 1.0.0
  * @category Models
  */
-export interface ErrorPartEncoded extends BasePartEncoded<"error", ErrorPartMetadata> {
-  readonly error: unknown
+export interface ErrorPartEncoded
+  extends BasePartEncoded<"error", ErrorPartMetadata> {
+  readonly error: unknown;
 }
 
 /**
@@ -2352,14 +2528,17 @@ export interface ErrorPartMetadata extends ProviderMetadata {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ErrorPart: Schema.Schema<ErrorPart, ErrorPartEncoded> = Schema.Struct({
-  type: Schema.Literal("error"),
-  error: Schema.Unknown,
-  metadata: Schema.optionalWith(ProviderMetadata, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "ErrorPart" })
-)
+export const ErrorPart: Schema.Schema<ErrorPart, ErrorPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("error"),
+    error: Schema.Unknown,
+    metadata: Schema.optionalWith(ProviderMetadata, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "ErrorPart" })
+  );
 
 /**
  * Constructs a new error part.
@@ -2367,4 +2546,5 @@ export const ErrorPart: Schema.Schema<ErrorPart, ErrorPartEncoded> = Schema.Stru
  * @since 1.0.0
  * @category Constructors
  */
-export const errorPart = (params: ConstructorParams<ErrorPart>): ErrorPart => makePart("error", params)
+export const errorPart = (params: ConstructorParams<ErrorPart>): ErrorPart =>
+  makePart("error", params);

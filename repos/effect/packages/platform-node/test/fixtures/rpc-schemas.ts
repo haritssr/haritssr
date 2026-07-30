@@ -1,96 +1,116 @@
-import { Headers } from "@effect/platform"
-import { RpcTest } from "@effect/rpc"
-import * as Rpc from "@effect/rpc/Rpc"
-import * as RpcClient from "@effect/rpc/RpcClient"
-import type { RpcClientError } from "@effect/rpc/RpcClientError"
-import * as RpcGroup from "@effect/rpc/RpcGroup"
-import * as RpcMiddleware from "@effect/rpc/RpcMiddleware"
-import * as RpcSchema from "@effect/rpc/RpcSchema"
-import * as RpcServer from "@effect/rpc/RpcServer"
-import { Context, Effect, Layer, Mailbox, Metric, Option, Schema } from "effect"
+import { Headers } from "@effect/platform";
+import { RpcTest } from "@effect/rpc";
+import * as Rpc from "@effect/rpc/Rpc";
+import * as RpcClient from "@effect/rpc/RpcClient";
+import type { RpcClientError } from "@effect/rpc/RpcClientError";
+import * as RpcGroup from "@effect/rpc/RpcGroup";
+import * as RpcMiddleware from "@effect/rpc/RpcMiddleware";
+import * as RpcSchema from "@effect/rpc/RpcSchema";
+import * as RpcServer from "@effect/rpc/RpcServer";
+import {
+  Context,
+  Effect,
+  Layer,
+  Mailbox,
+  Metric,
+  Option,
+  Schema,
+} from "effect";
 
 export class User extends Schema.Class<User>("User")({
   id: Schema.String,
-  name: Schema.String
+  name: Schema.String,
 }) {}
 
 class StreamUsers extends Schema.TaggedRequest<StreamUsers>()("StreamUsers", {
   success: RpcSchema.Stream({
     success: User,
-    failure: Schema.Never
+    failure: Schema.Never,
   }),
   failure: Schema.Never,
   payload: {
-    id: Schema.String
-  }
+    id: Schema.String,
+  },
 }) {}
 
 class CurrentUser extends Context.Tag("CurrentUser")<CurrentUser, User>() {}
 
-class Unauthorized extends Schema.TaggedError<Unauthorized>("Unauthorized")("Unauthorized", {}) {}
+class Unauthorized extends Schema.TaggedError<Unauthorized>("Unauthorized")(
+  "Unauthorized",
+  {}
+) {}
 
-class AuthMiddleware extends RpcMiddleware.Tag<AuthMiddleware>()("AuthMiddleware", {
-  provides: CurrentUser,
-  failure: Unauthorized,
-  requiredForClient: true
-}) {}
+class AuthMiddleware extends RpcMiddleware.Tag<AuthMiddleware>()(
+  "AuthMiddleware",
+  {
+    provides: CurrentUser,
+    failure: Unauthorized,
+    requiredForClient: true,
+  }
+) {}
 
-class TimingMiddleware extends RpcMiddleware.Tag<TimingMiddleware>()("TimingMiddleware", {
-  wrap: true
-}) {}
+class TimingMiddleware extends RpcMiddleware.Tag<TimingMiddleware>()(
+  "TimingMiddleware",
+  {
+    wrap: true,
+  }
+) {}
 
 class GetUser extends Rpc.make("GetUser", {
   success: User,
-  payload: { id: Schema.String }
+  payload: { id: Schema.String },
 }) {}
 
 export const UserRpcs = RpcGroup.make(
   GetUser,
   Rpc.make("GetUserOption", {
     success: Schema.Option(User),
-    payload: { id: Schema.String }
+    payload: { id: Schema.String },
   }),
   Rpc.fromTaggedRequest(StreamUsers),
   Rpc.make("GetInterrupts", {
-    success: Schema.Number
+    success: Schema.Number,
   }),
   Rpc.make("GetEmits", {
-    success: Schema.Number
+    success: Schema.Number,
   }),
   Rpc.make("ProduceDefect"),
   Rpc.make("ProduceErrorDefect"),
   Rpc.make("ProduceDefectCustom", {
-    defect: Schema.Unknown
+    defect: Schema.Unknown,
   }),
   Rpc.make("Never"),
   Rpc.make("nested.test"),
   Rpc.make("TimedMethod", {
     payload: {
-      shouldFail: Schema.Boolean
+      shouldFail: Schema.Boolean,
     },
-    success: Schema.Number
+    success: Schema.Number,
   }).middleware(TimingMiddleware),
   Rpc.make("GetTimingMiddlewareMetrics", {
     success: Schema.Struct({
       success: Schema.Number,
       defect: Schema.Number,
-      count: Schema.Number
-    })
+      count: Schema.Number,
+    }),
   })
-).middleware(AuthMiddleware)
+).middleware(AuthMiddleware);
 
 const AuthLive = Layer.succeed(
   AuthMiddleware,
   AuthMiddleware.of((options) =>
     Effect.succeed(
-      new User({ id: options.headers.userid ?? "1", name: options.headers.name ?? "Fallback name" })
+      new User({
+        id: options.headers.userid ?? "1",
+        name: options.headers.name ?? "Fallback name",
+      })
     )
   )
-)
+);
 
-const rpcSuccesses = Metric.counter("rpc_middleware_success")
-const rpcDefects = Metric.counter("rpc_middleware_defects")
-const rpcCount = Metric.counter("rpc_middleware_count")
+const rpcSuccesses = Metric.counter("rpc_middleware_success");
+const rpcDefects = Metric.counter("rpc_middleware_defects");
+const rpcCount = Metric.counter("rpc_middleware_count");
 const TimingLive = Layer.succeed(
   TimingMiddleware,
   TimingMiddleware.of((options) =>
@@ -100,78 +120,78 @@ const TimingLive = Layer.succeed(
       Effect.ensuring(Metric.increment(rpcCount))
     )
   )
-)
+);
 
-const UsersLive = UserRpcs.toLayer(Effect.gen(function*() {
-  let interrupts = 0
-  let emits = 0
-  return UserRpcs.of({
-    GetUser: (_) =>
-      CurrentUser.pipe(
-        Rpc.fork
-      ),
-    GetUserOption: Effect.fnUntraced(function*(req) {
-      return Option.some(new User({ id: req.id, name: "John" }))
-    }),
-    StreamUsers: Effect.fnUntraced(function*(req, _) {
-      const mailbox = yield* Mailbox.make<User>(0)
+const UsersLive = UserRpcs.toLayer(
+  Effect.gen(function* () {
+    let interrupts = 0;
+    let emits = 0;
+    return UserRpcs.of({
+      GetUser: (_) => CurrentUser.pipe(Rpc.fork),
+      GetUserOption: Effect.fnUntraced(function* (req) {
+        return Option.some(new User({ id: req.id, name: "John" }));
+      }),
+      StreamUsers: Effect.fnUntraced(function* (req, _) {
+        const mailbox = yield* Mailbox.make<User>(0);
 
-      yield* Effect.addFinalizer(() =>
-        Effect.sync(() => {
-          interrupts++
-        })
-      )
+        yield* Effect.addFinalizer(() =>
+          Effect.sync(() => {
+            interrupts++;
+          })
+        );
 
-      yield* mailbox.offer(new User({ id: req.id, name: "John" })).pipe(
-        Effect.tap(() => {
-          emits++
+        yield* mailbox.offer(new User({ id: req.id, name: "John" })).pipe(
+          Effect.tap(() => {
+            emits++;
+          }),
+          Effect.delay(100),
+          Effect.forever,
+          Effect.forkScoped
+        );
+
+        return mailbox;
+      }),
+      GetInterrupts: () => Effect.sync(() => interrupts),
+      GetEmits: () => Effect.sync(() => emits),
+      ProduceDefect: () => Effect.die("boom"),
+      ProduceErrorDefect: () => Effect.die(new Error("error defect message")),
+      ProduceDefectCustom: () =>
+        Effect.die({
+          message: "detailed error",
+          stack: "Error: detailed error\n  at handler.ts:1",
+          code: 42,
         }),
-        Effect.delay(100),
-        Effect.forever,
-        Effect.forkScoped
-      )
-
-      return mailbox
-    }),
-    GetInterrupts: () => Effect.sync(() => interrupts),
-    GetEmits: () => Effect.sync(() => emits),
-    ProduceDefect: () => Effect.die("boom"),
-    ProduceErrorDefect: () => Effect.die(new Error("error defect message")),
-    ProduceDefectCustom: () =>
-      Effect.die({ message: "detailed error", stack: "Error: detailed error\n  at handler.ts:1", code: 42 }),
-    Never: () => Effect.never.pipe(Effect.onInterrupt(() => Effect.sync(() => interrupts++))),
-    "nested.test": () => Effect.void,
-    TimedMethod: (_) => _.shouldFail ? Effect.die("boom") : Effect.succeed(1),
-    GetTimingMiddlewareMetrics: () =>
-      Effect.all({
-        defect: Metric.value(rpcDefects).pipe(Effect.map((_) => _.count)),
-        success: Metric.value(rpcSuccesses).pipe(Effect.map((_) => _.count)),
-        count: Metric.value(rpcCount).pipe(Effect.map((_) => _.count))
-      })
+      Never: () =>
+        Effect.never.pipe(
+          Effect.onInterrupt(() => Effect.sync(() => interrupts++))
+        ),
+      "nested.test": () => Effect.void,
+      TimedMethod: (_) =>
+        _.shouldFail ? Effect.die("boom") : Effect.succeed(1),
+      GetTimingMiddlewareMetrics: () =>
+        Effect.all({
+          defect: Metric.value(rpcDefects).pipe(Effect.map((_) => _.count)),
+          success: Metric.value(rpcSuccesses).pipe(Effect.map((_) => _.count)),
+          count: Metric.value(rpcCount).pipe(Effect.map((_) => _.count)),
+        }),
+    });
   })
-}))
+);
 
 export const RpcLive = RpcServer.layer(UserRpcs).pipe(
-  Layer.provide([
-    UsersLive,
-    AuthLive,
-    TimingLive
-  ])
-)
+  Layer.provide([UsersLive, AuthLive, TimingLive])
+);
 
-export const RpcLiveDisableFatalDefects = RpcServer.layer(UserRpcs, { disableFatalDefects: true }).pipe(
-  Layer.provide([
-    UsersLive,
-    AuthLive,
-    TimingLive
-  ])
-)
+export const RpcLiveDisableFatalDefects = RpcServer.layer(UserRpcs, {
+  disableFatalDefects: true,
+}).pipe(Layer.provide([UsersLive, AuthLive, TimingLive]));
 
 const AuthClient = RpcMiddleware.layerClient(AuthMiddleware, ({ request }) =>
   Effect.succeed({
     ...request,
-    headers: Headers.set(request.headers, "name", "Logged in user")
-  }))
+    headers: Headers.set(request.headers, "name", "Logged in user"),
+  })
+);
 
 export class UsersClient extends Context.Tag("UsersClient")<
   UsersClient,
@@ -179,8 +199,9 @@ export class UsersClient extends Context.Tag("UsersClient")<
 >() {
   static layer = Layer.scoped(UsersClient, RpcClient.make(UserRpcs)).pipe(
     Layer.provide(AuthClient)
-  )
-  static layerTest = Layer.scoped(UsersClient, RpcTest.makeClient(UserRpcs)).pipe(
-    Layer.provide([UsersLive, AuthLive, TimingLive, AuthClient])
-  )
+  );
+  static layerTest = Layer.scoped(
+    UsersClient,
+    RpcTest.makeClient(UserRpcs)
+  ).pipe(Layer.provide([UsersLive, AuthLive, TimingLive, AuthClient]));
 }

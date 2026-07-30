@@ -69,7 +69,7 @@
  *
  * @since 1.0.0
  */
-export * as AiError from "./AiError.js"
+export * as AiError from "./AiError.js";
 
 /**
  * The `Chat` module provides a stateful conversation interface for AI language
@@ -119,7 +119,7 @@ export * as AiError from "./AiError.js"
  *
  * @since 1.0.0
  */
-export * as Chat from "./Chat.js"
+export * as Chat from "./Chat.js";
 
 /**
  * The `EmbeddingModel` module provides vector embeddings for text using AI
@@ -171,7 +171,7 @@ export * as Chat from "./Chat.js"
  *
  * @since 1.0.0
  */
-export * as EmbeddingModel from "./EmbeddingModel.js"
+export * as EmbeddingModel from "./EmbeddingModel.js";
 
 /**
  * The `IdGenerator` module provides a pluggable system for generating unique identifiers
@@ -224,7 +224,7 @@ export * as EmbeddingModel from "./EmbeddingModel.js"
  *
  * @since 1.0.0
  */
-export * as IdGenerator from "./IdGenerator.js"
+export * as IdGenerator from "./IdGenerator.js";
 
 /**
  * The `LanguageModel` module provides AI text generation capabilities with tool
@@ -276,17 +276,17 @@ export * as IdGenerator from "./IdGenerator.js"
  *
  * @since 1.0.0
  */
-export * as LanguageModel from "./LanguageModel.js"
+export * as LanguageModel from "./LanguageModel.js";
 
 /**
  * @since 1.0.0
  */
-export * as McpSchema from "./McpSchema.js"
+export * as McpSchema from "./McpSchema.js";
 
 /**
  * @since 1.0.0
  */
-export * as McpServer from "./McpServer.js"
+export * as McpServer from "./McpServer.js";
 
 /**
  * The `Model` module provides a unified interface for AI service providers.
@@ -317,7 +317,7 @@ export * as McpServer from "./McpServer.js"
  *
  * @since 1.0.0
  */
-export * as Model from "./Model.js"
+export * as Model from "./Model.js";
 
 /**
  * The `Prompt` module provides several data structures to simplify creating and
@@ -372,7 +372,7 @@ export * as Model from "./Model.js"
  *
  * @since 1.0.0
  */
-export * as Prompt from "./Prompt.js"
+export * as Prompt from "./Prompt.js";
 
 /**
  * The `Response` module provides data structures to represent responses from
@@ -402,7 +402,7 @@ export * as Prompt from "./Prompt.js"
  *
  * @since 1.0.0
  */
-export * as Response from "./Response.js"
+export * as Response from "./Response.js";
 
 /**
  * The `Telemetry` module provides OpenTelemetry integration for operations
@@ -437,7 +437,7 @@ export * as Response from "./Response.js"
  *
  * @since 1.0.0
  */
-export * as Telemetry from "./Telemetry.js"
+export * as Telemetry from "./Telemetry.js";
 
 /**
  * The `Tokenizer` module provides tokenization and text truncation capabilities
@@ -476,7 +476,7 @@ export * as Telemetry from "./Telemetry.js"
  *
  * @since 1.0.0
  */
-export * as Tokenizer from "./Tokenizer.js"
+export * as Tokenizer from "./Tokenizer.js";
 
 /**
  * The `Tool` module provides functionality for defining and managing tools
@@ -506,7 +506,7 @@ export * as Tokenizer from "./Tokenizer.js"
  *
  * @since 1.0.0
  */
-export * as Tool from "./Tool.js"
+export * as Tool from "./Tool.js";
 
 /**
  * The `Toolkit` module allows for creating and implementing a collection of
@@ -547,4 +547,4 @@ export * as Tool from "./Tool.js"
  *
  * @since 1.0.0
  */
-export * as Toolkit from "./Toolkit.js"
+export * as Toolkit from "./Toolkit.js";

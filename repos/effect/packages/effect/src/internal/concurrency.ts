@@ -1,6 +1,6 @@
-import type { Effect } from "../Effect.js"
-import type { Concurrency } from "../Types.js"
-import * as core from "./core.js"
+import type { Effect } from "../Effect.js";
+import type { Concurrency } from "../Types.js";
+import * as core from "./core.js";
 
 /** @internal */
 export const match = <A, E, R>(
@@ -11,23 +11,21 @@ export const match = <A, E, R>(
 ): Effect<A, E, R> => {
   switch (concurrency) {
     case undefined:
-      return sequential()
+      return sequential();
     case "unbounded":
-      return unbounded()
+      return unbounded();
     case "inherit":
-      return core.fiberRefGetWith(
-        core.currentConcurrency,
-        (concurrency) =>
-          concurrency === "unbounded" ?
-            unbounded() :
-            concurrency > 1 ?
-            bounded(concurrency) :
-            sequential()
-      )
+      return core.fiberRefGetWith(core.currentConcurrency, (concurrency) =>
+        concurrency === "unbounded"
+          ? unbounded()
+          : concurrency > 1
+            ? bounded(concurrency)
+            : sequential()
+      );
     default:
-      return concurrency > 1 ? bounded(concurrency) : sequential()
+      return concurrency > 1 ? bounded(concurrency) : sequential();
   }
-}
+};
 
 /** @internal */
 export const matchSimple = <A, E, R>(
@@ -37,18 +35,16 @@ export const matchSimple = <A, E, R>(
 ): Effect<A, E, R> => {
   switch (concurrency) {
     case undefined:
-      return sequential()
+      return sequential();
     case "unbounded":
-      return concurrent()
+      return concurrent();
     case "inherit":
-      return core.fiberRefGetWith(
-        core.currentConcurrency,
-        (concurrency) =>
-          concurrency === "unbounded" || concurrency > 1 ?
-            concurrent() :
-            sequential()
-      )
+      return core.fiberRefGetWith(core.currentConcurrency, (concurrency) =>
+        concurrency === "unbounded" || concurrency > 1
+          ? concurrent()
+          : sequential()
+      );
     default:
-      return concurrency > 1 ? concurrent() : sequential()
+      return concurrency > 1 ? concurrent() : sequential();
   }
-}
+};

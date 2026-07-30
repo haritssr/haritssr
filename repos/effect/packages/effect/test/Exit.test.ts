@@ -1,6 +1,6 @@
-import { describe, it } from "@effect/vitest"
-import { deepStrictEqual } from "@effect/vitest/utils"
-import { Exit } from "effect"
+import { describe, it } from "@effect/vitest";
+import { deepStrictEqual } from "@effect/vitest/utils";
+import { Exit } from "effect";
 
 describe("Exit", () => {
   describe("toJSON", () => {
@@ -8,9 +8,9 @@ describe("Exit", () => {
       deepStrictEqual(Exit.succeed(1).toJSON(), {
         _id: "Exit",
         _tag: "Success",
-        value: 1
-      })
-    })
+        value: 1,
+      });
+    });
 
     it("fail", () => {
       deepStrictEqual(Exit.fail("failure").toJSON(), {
@@ -19,11 +19,11 @@ describe("Exit", () => {
         cause: {
           _id: "Cause",
           _tag: "Fail",
-          failure: "failure"
-        }
-      })
+          failure: "failure",
+        },
+      });
       class MyError {
-        readonly _tag = "MyError"
+        readonly _tag = "MyError";
       }
       deepStrictEqual(Exit.fail(new MyError()).toJSON(), {
         _id: "Exit",
@@ -31,11 +31,11 @@ describe("Exit", () => {
         cause: {
           _id: "Cause",
           _tag: "Fail",
-          failure: new MyError()
-        }
-      })
-    })
-  })
+          failure: new MyError(),
+        },
+      });
+    });
+  });
 
   describe("toString", () => {
     it("succeed", () => {
@@ -46,8 +46,8 @@ describe("Exit", () => {
   "_tag": "Success",
   "value": 1
 }`
-      )
-    })
+      );
+    });
 
     it("fail", () => {
       deepStrictEqual(
@@ -61,9 +61,9 @@ describe("Exit", () => {
     "failure": "failure"
   }
 }`
-      )
+      );
       class Error1 {
-        readonly _tag = "WithTag"
+        readonly _tag = "WithTag";
       }
       deepStrictEqual(
         String(Exit.fail(new Error1())),
@@ -78,7 +78,7 @@ describe("Exit", () => {
     }
   }
 }`
-      )
-    })
-  })
-})
+      );
+    });
+  });
+});

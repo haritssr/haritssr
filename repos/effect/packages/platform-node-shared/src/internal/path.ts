@@ -1,9 +1,9 @@
-import { BadArgument } from "@effect/platform/Error"
-import { Path, TypeId } from "@effect/platform/Path"
-import * as Effect from "effect/Effect"
-import * as Layer from "effect/Layer"
-import * as NodePath from "node:path"
-import * as NodeUrl from "node:url"
+import * as NodePath from "node:path";
+import * as NodeUrl from "node:url";
+import { BadArgument } from "@effect/platform/Error";
+import { Path, TypeId } from "@effect/platform/Path";
+import * as Effect from "effect/Effect";
+import * as Layer from "effect/Layer";
 
 const fromFileUrl = (url: URL): Effect.Effect<string, BadArgument> =>
   Effect.try({
@@ -13,9 +13,9 @@ const fromFileUrl = (url: URL): Effect.Effect<string, BadArgument> =>
         module: "Path",
         method: "fromFileUrl",
         description: `Invalid file URL: ${url}`,
-        cause: error
-      })
-  })
+        cause: error,
+      }),
+  });
 
 const toFileUrl = (path: string): Effect.Effect<URL, BadArgument> =>
   Effect.try({
@@ -25,9 +25,9 @@ const toFileUrl = (path: string): Effect.Effect<URL, BadArgument> =>
         module: "Path",
         method: "toFileUrl",
         description: `Invalid path: ${path}`,
-        cause: error
-      })
-  })
+        cause: error,
+      }),
+  });
 
 /** @internal */
 export const layerPosix = Layer.succeed(
@@ -36,9 +36,9 @@ export const layerPosix = Layer.succeed(
     [TypeId]: TypeId,
     ...NodePath.posix,
     fromFileUrl,
-    toFileUrl
+    toFileUrl,
   })
-)
+);
 
 /** @internal */
 export const layerWin32 = Layer.succeed(
@@ -47,9 +47,9 @@ export const layerWin32 = Layer.succeed(
     [TypeId]: TypeId,
     ...NodePath.win32,
     fromFileUrl,
-    toFileUrl
+    toFileUrl,
   })
-)
+);
 
 /** @internal */
 export const layer = Layer.succeed(
@@ -58,6 +58,6 @@ export const layer = Layer.succeed(
     [TypeId]: TypeId,
     ...NodePath,
     fromFileUrl,
-    toFileUrl
+    toFileUrl,
   })
-)
+);

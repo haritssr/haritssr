@@ -1,26 +1,27 @@
 /**
  * @since 2.0.0
  */
-import * as internal from "./internal/channel/upstreamPullRequest.js"
-import type * as Types from "./Types.js"
+import * as internal from "./internal/channel/upstreamPullRequest.js";
+import type * as Types from "./Types.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const UpstreamPullRequestTypeId: unique symbol = internal.UpstreamPullRequestTypeId
+export const UpstreamPullRequestTypeId: unique symbol =
+  internal.UpstreamPullRequestTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type UpstreamPullRequestTypeId = typeof UpstreamPullRequestTypeId
+export type UpstreamPullRequestTypeId = typeof UpstreamPullRequestTypeId;
 
 /**
  * @since 2.0.0
  * @category models
  */
-export type UpstreamPullRequest<A> = Pulled<A> | NoUpstream
+export type UpstreamPullRequest<A> = Pulled<A> | NoUpstream;
 
 /**
  * @since 2.0.0
@@ -32,8 +33,8 @@ export declare namespace UpstreamPullRequest {
    */
   export interface Variance<out A> {
     readonly [UpstreamPullRequestTypeId]: {
-      readonly _A: Types.Covariant<A>
-    }
+      readonly _A: Types.Covariant<A>;
+    };
   }
 }
 
@@ -42,8 +43,8 @@ export declare namespace UpstreamPullRequest {
  * @category models
  */
 export interface Pulled<out A> extends UpstreamPullRequest.Variance<A> {
-  readonly _tag: "Pulled"
-  readonly value: A
+  readonly _tag: "Pulled";
+  readonly value: A;
 }
 
 /**
@@ -51,21 +52,23 @@ export interface Pulled<out A> extends UpstreamPullRequest.Variance<A> {
  * @category models
  */
 export interface NoUpstream extends UpstreamPullRequest.Variance<never> {
-  readonly _tag: "NoUpstream"
-  readonly activeDownstreamCount: number
+  readonly _tag: "NoUpstream";
+  readonly activeDownstreamCount: number;
 }
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const Pulled: <A>(value: A) => UpstreamPullRequest<A> = internal.Pulled
+export const Pulled: <A>(value: A) => UpstreamPullRequest<A> = internal.Pulled;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const NoUpstream: (activeDownstreamCount: number) => UpstreamPullRequest<never> = internal.NoUpstream
+export const NoUpstream: (
+  activeDownstreamCount: number
+) => UpstreamPullRequest<never> = internal.NoUpstream;
 
 /**
  * Returns `true` if the specified value is an `UpstreamPullRequest`, `false`
@@ -74,7 +77,9 @@ export const NoUpstream: (activeDownstreamCount: number) => UpstreamPullRequest<
  * @since 2.0.0
  * @category refinements
  */
-export const isUpstreamPullRequest: (u: unknown) => u is UpstreamPullRequest<unknown> = internal.isUpstreamPullRequest
+export const isUpstreamPullRequest: (
+  u: unknown
+) => u is UpstreamPullRequest<unknown> = internal.isUpstreamPullRequest;
 
 /**
  * Returns `true` if the specified `UpstreamPullRequest` is a `Pulled`, `false`
@@ -83,7 +88,8 @@ export const isUpstreamPullRequest: (u: unknown) => u is UpstreamPullRequest<unk
  * @since 2.0.0
  * @category refinements
  */
-export const isPulled: <A>(self: UpstreamPullRequest<A>) => self is Pulled<A> = internal.isPulled
+export const isPulled: <A>(self: UpstreamPullRequest<A>) => self is Pulled<A> =
+  internal.isPulled;
 
 /**
  * Returns `true` if the specified `UpstreamPullRequest` is a `NoUpstream`,
@@ -92,7 +98,9 @@ export const isPulled: <A>(self: UpstreamPullRequest<A>) => self is Pulled<A> = 
  * @since 2.0.0
  * @category refinements
  */
-export const isNoUpstream: <A>(self: UpstreamPullRequest<A>) => self is NoUpstream = internal.isNoUpstream
+export const isNoUpstream: <A>(
+  self: UpstreamPullRequest<A>
+) => self is NoUpstream = internal.isNoUpstream;
 
 /**
  * Folds an `UpstreamPullRequest<A>` into a value of type `Z`.
@@ -101,17 +109,15 @@ export const isNoUpstream: <A>(self: UpstreamPullRequest<A>) => self is NoUpstre
  * @category folding
  */
 export const match: {
-  <A, Z>(
-    options: {
-      readonly onPulled: (value: A) => Z
-      readonly onNoUpstream: (activeDownstreamCount: number) => Z
-    }
-  ): (self: UpstreamPullRequest<A>) => Z
+  <A, Z>(options: {
+    readonly onPulled: (value: A) => Z;
+    readonly onNoUpstream: (activeDownstreamCount: number) => Z;
+  }): (self: UpstreamPullRequest<A>) => Z;
   <A, Z>(
     self: UpstreamPullRequest<A>,
     options: {
-      readonly onPulled: (value: A) => Z
-      readonly onNoUpstream: (activeDownstreamCount: number) => Z
+      readonly onPulled: (value: A) => Z;
+      readonly onNoUpstream: (activeDownstreamCount: number) => Z;
     }
-  ): Z
-} = internal.match
+  ): Z;
+} = internal.match;

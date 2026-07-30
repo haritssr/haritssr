@@ -1,27 +1,27 @@
-import * as LogLevel from "effect/LogLevel"
-import * as Option from "effect/Option"
-import type * as BuiltInOptions from "../BuiltInOptions.js"
-import type * as Command from "../CommandDescriptor.js"
-import type * as HelpDoc from "../HelpDoc.js"
-import type * as Options from "../Options.js"
-import type * as Usage from "../Usage.js"
-import * as InternalOptions from "./options.js"
+import * as LogLevel from "effect/LogLevel";
+import * as Option from "effect/Option";
+import type * as BuiltInOptions from "../BuiltInOptions.js";
+import type * as Command from "../CommandDescriptor.js";
+import type * as HelpDoc from "../HelpDoc.js";
+import type * as Options from "../Options.js";
+import type * as Usage from "../Usage.js";
+import * as InternalOptions from "./options.js";
 
 /** @internal */
 export const setLogLevel = (
   level: LogLevel.LogLevel
 ): BuiltInOptions.BuiltInOptions => ({
   _tag: "SetLogLevel",
-  level
-})
+  level,
+});
 
 /** @internal */
 export const showCompletions = (
   shellType: BuiltInOptions.BuiltInOptions.ShellType
 ): BuiltInOptions.BuiltInOptions => ({
   _tag: "ShowCompletions",
-  shellType
-})
+  shellType,
+});
 
 /** @internal */
 export const showHelp = (
@@ -30,38 +30,41 @@ export const showHelp = (
 ): BuiltInOptions.BuiltInOptions => ({
   _tag: "ShowHelp",
   usage,
-  helpDoc
-})
+  helpDoc,
+});
 
 /** @internal */
-export const showWizard = (command: Command.Command<unknown>): BuiltInOptions.BuiltInOptions => ({
+export const showWizard = (
+  command: Command.Command<unknown>
+): BuiltInOptions.BuiltInOptions => ({
   _tag: "ShowWizard",
-  command
-})
+  command,
+});
 
 /** @internal */
 export const showVersion: BuiltInOptions.BuiltInOptions = {
-  _tag: "ShowVersion"
-}
+  _tag: "ShowVersion",
+};
 
 /** @internal */
 export const isShowCompletions = (
   self: BuiltInOptions.BuiltInOptions
-): self is BuiltInOptions.ShowCompletions => self._tag === "ShowCompletions"
+): self is BuiltInOptions.ShowCompletions => self._tag === "ShowCompletions";
 
 /** @internal */
-export const isShowHelp = (self: BuiltInOptions.BuiltInOptions): self is BuiltInOptions.ShowHelp =>
-  self._tag === "ShowHelp"
+export const isShowHelp = (
+  self: BuiltInOptions.BuiltInOptions
+): self is BuiltInOptions.ShowHelp => self._tag === "ShowHelp";
 
 /** @internal */
 export const isShowWizard = (
   self: BuiltInOptions.BuiltInOptions
-): self is BuiltInOptions.ShowWizard => self._tag === "ShowWizard"
+): self is BuiltInOptions.ShowWizard => self._tag === "ShowWizard";
 
 /** @internal */
 export const isShowVersion = (
   self: BuiltInOptions.BuiltInOptions
-): self is BuiltInOptions.ShowVersion => self._tag === "ShowVersion"
+): self is BuiltInOptions.ShowVersion => self._tag === "ShowVersion";
 
 /** @internal */
 export const completionsOptions: Options.Options<
@@ -70,11 +73,13 @@ export const completionsOptions: Options.Options<
   ["sh", "bash" as const],
   ["bash", "bash" as const],
   ["fish", "fish" as const],
-  ["zsh", "zsh" as const]
+  ["zsh", "zsh" as const],
 ]).pipe(
   InternalOptions.optional,
-  InternalOptions.withDescription("Generate a completion script for a specific shell.")
-)
+  InternalOptions.withDescription(
+    "Generate a completion script for a specific shell."
+  )
+);
 
 /** @internal */
 export const logLevelOptions: Options.Options<
@@ -85,23 +90,25 @@ export const logLevelOptions: Options.Options<
 ).pipe(
   InternalOptions.optional,
   InternalOptions.withDescription("Sets the minimum log level for a command.")
-)
+);
 
 /** @internal */
-export const helpOptions: Options.Options<boolean> = InternalOptions.boolean("help").pipe(
+export const helpOptions: Options.Options<boolean> = InternalOptions.boolean(
+  "help"
+).pipe(
   InternalOptions.withAlias("h"),
   InternalOptions.withDescription("Show the help documentation for a command.")
-)
+);
 
 /** @internal */
-export const versionOptions: Options.Options<boolean> = InternalOptions.boolean("version").pipe(
-  InternalOptions.withDescription("Show the version of the application.")
-)
+export const versionOptions: Options.Options<boolean> = InternalOptions.boolean(
+  "version"
+).pipe(InternalOptions.withDescription("Show the version of the application."));
 
 /** @internal */
-export const wizardOptions: Options.Options<boolean> = InternalOptions.boolean("wizard").pipe(
-  InternalOptions.withDescription("Start wizard mode for a command.")
-)
+export const wizardOptions: Options.Options<boolean> = InternalOptions.boolean(
+  "wizard"
+).pipe(InternalOptions.withDescription("Start wizard mode for a command."));
 
 /** @internal */
 export const builtIns = InternalOptions.all({
@@ -109,8 +116,8 @@ export const builtIns = InternalOptions.all({
   logLevel: logLevelOptions,
   help: helpOptions,
   wizard: wizardOptions,
-  version: versionOptions
-})
+  version: versionOptions,
+});
 
 /** @internal */
 export const builtInOptions = <A>(
@@ -120,19 +127,19 @@ export const builtInOptions = <A>(
 ): Options.Options<Option.Option<BuiltInOptions.BuiltInOptions>> =>
   InternalOptions.map(builtIns, (builtIn) => {
     if (Option.isSome(builtIn.completions)) {
-      return Option.some(showCompletions(builtIn.completions.value))
+      return Option.some(showCompletions(builtIn.completions.value));
     }
     if (Option.isSome(builtIn.logLevel)) {
-      return Option.some(setLogLevel(builtIn.logLevel.value))
+      return Option.some(setLogLevel(builtIn.logLevel.value));
     }
     if (builtIn.help) {
-      return Option.some(showHelp(usage, helpDoc))
+      return Option.some(showHelp(usage, helpDoc));
     }
     if (builtIn.wizard) {
-      return Option.some(showWizard(command))
+      return Option.some(showWizard(command));
     }
     if (builtIn.version) {
-      return Option.some(showVersion)
+      return Option.some(showVersion);
     }
-    return Option.none()
-  })
+    return Option.none();
+  });

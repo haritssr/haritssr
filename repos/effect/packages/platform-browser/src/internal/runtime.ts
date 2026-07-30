@@ -1,8 +1,8 @@
-import { makeRunMain } from "@effect/platform/Runtime"
+import { makeRunMain } from "@effect/platform/Runtime";
 
 /** @internal */
 export const runMain = makeRunMain(({ fiber }) => {
   addEventListener("beforeunload", () => {
-    fiber.unsafeInterruptAsFork(fiber.id())
-  })
-})
+    fiber.unsafeInterruptAsFork(fiber.id());
+  });
+});

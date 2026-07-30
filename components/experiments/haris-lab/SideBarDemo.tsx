@@ -23,7 +23,11 @@ export default function SideBarDemo() {
           <div>
             {/* Chapters */}
             {domain.chapters.map((chapter) => (
-              <AccordionC isOpen={openAll} key={chapter?.title} title={chapter?.title ?? " "}>
+              <AccordionC
+                isOpen={openAll}
+                key={chapter?.title}
+                title={chapter?.title ?? " "}
+              >
                 {chapter?.topics.map((topic) => (
                   // Topic
                   <div className="cursor-pointer hover:bg-zinc-200" key={topic}>
@@ -39,10 +43,21 @@ export default function SideBarDemo() {
   );
 }
 
-function AccordionC({ title, children, isOpen }: { title: string; children: React.ReactNode; isOpen: boolean }) {
+function AccordionC({
+  title,
+  children,
+  isOpen,
+}: {
+  title: string;
+  children: React.ReactNode;
+  isOpen: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   return (
-    <Accordion.Root className="w-full rounded-md px-2 hover:bg-zinc-100 sm:w-1/3" type="multiple">
+    <Accordion.Root
+      className="w-full rounded-md px-2 hover:bg-zinc-100 sm:w-1/3"
+      type="multiple"
+    >
       <Accordion.Item value="item-1">
         <Accordion.Header className="group">
           <Accordion.Trigger

@@ -1,8 +1,9 @@
 /**
  * @since 1.0.0
  */
-import * as Client from "@effect/sql/SqlClient"
-import * as Effect from "effect/Effect"
+import * as Client from "@effect/sql/SqlClient";
+import * as Effect from "effect/Effect";
+import type { KyselyConfig } from "kysely";
 import {
   AlterTableColumnAlteringBuilder,
   CreateIndexBuilder,
@@ -19,11 +20,10 @@ import {
   InsertQueryBuilder,
   Kysely,
   UpdateQueryBuilder,
-  WheneableMergeQueryBuilder
-} from "kysely"
-import type { KyselyConfig } from "kysely"
-import type { EffectKysely } from "../patch.types.js"
-import { effectifyWithExecute, effectifyWithSql, patch } from "./patch.js"
+  WheneableMergeQueryBuilder,
+} from "kysely";
+import type { EffectKysely } from "../patch.types.js";
+import { effectifyWithExecute, effectifyWithSql, patch } from "./patch.js";
 
 /**
  * @internal
@@ -31,21 +31,21 @@ import { effectifyWithExecute, effectifyWithSql, patch } from "./patch.js"
  *
  * @warning side effect
  */
-patch(AlterTableColumnAlteringBuilder.prototype)
-patch(CreateIndexBuilder.prototype)
-patch(CreateSchemaBuilder.prototype)
-patch(CreateTableBuilder.prototype)
-patch(CreateTypeBuilder.prototype)
-patch(CreateViewBuilder.prototype)
-patch(DropIndexBuilder.prototype)
-patch(DropSchemaBuilder.prototype)
-patch(DropTableBuilder.prototype)
-patch(DropTypeBuilder.prototype)
-patch(DropViewBuilder.prototype)
-patch(InsertQueryBuilder.prototype)
-patch(UpdateQueryBuilder.prototype)
-patch(DeleteQueryBuilder.prototype)
-patch(WheneableMergeQueryBuilder.prototype)
+patch(AlterTableColumnAlteringBuilder.prototype);
+patch(CreateIndexBuilder.prototype);
+patch(CreateSchemaBuilder.prototype);
+patch(CreateTableBuilder.prototype);
+patch(CreateTypeBuilder.prototype);
+patch(CreateViewBuilder.prototype);
+patch(DropIndexBuilder.prototype);
+patch(DropSchemaBuilder.prototype);
+patch(DropTableBuilder.prototype);
+patch(DropTypeBuilder.prototype);
+patch(DropViewBuilder.prototype);
+patch(InsertQueryBuilder.prototype);
+patch(UpdateQueryBuilder.prototype);
+patch(DeleteQueryBuilder.prototype);
+patch(WheneableMergeQueryBuilder.prototype);
 
 /**
  * @internal
@@ -53,18 +53,18 @@ patch(WheneableMergeQueryBuilder.prototype)
  * and using an effect/sql client backend
  */
 export const makeWithSql = <DB>(config: KyselyConfig) =>
-  Effect.gen(function*() {
-    const client = yield* Client.SqlClient
+  Effect.gen(function* () {
+    const client = yield* Client.SqlClient;
 
-    const db = new Kysely<DB>(config) as unknown as EffectKysely<DB>
-    db.withTransaction = client.withTransaction
+    const db = new Kysely<DB>(config) as unknown as EffectKysely<DB>;
+    db.withTransaction = client.withTransaction;
 
     // SelectQueryBuilder is not exported from "kysely" so we patch the prototype from it's instance
-    const selectPrototype = Object.getPrototypeOf(db.selectFrom("" as any))
-    patch(selectPrototype)
+    const selectPrototype = Object.getPrototypeOf(db.selectFrom("" as any));
+    patch(selectPrototype);
 
-    return effectifyWithSql(db, client, ["withTransaction", "compile"])
-  })
+    return effectifyWithSql(db, client, ["withTransaction", "compile"]);
+  });
 
 /**
  * @internal
@@ -72,9 +72,9 @@ export const makeWithSql = <DB>(config: KyselyConfig) =>
  * and using the native kysely driver
  */
 export const makeWithExecute = <DB>(config: KyselyConfig) => {
-  const db = new Kysely<DB>(config)
+  const db = new Kysely<DB>(config);
   // SelectQueryBuilder is not exported from "kysely" so we patch the prototype from it's instance
-  const selectPrototype = Object.getPrototypeOf(db.selectFrom("" as any))
-  patch(selectPrototype)
-  return effectifyWithExecute(db)
-}
+  const selectPrototype = Object.getPrototypeOf(db.selectFrom("" as any));
+  patch(selectPrototype);
+  return effectifyWithExecute(db);
+};

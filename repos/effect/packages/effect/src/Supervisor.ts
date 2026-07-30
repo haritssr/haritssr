@@ -4,30 +4,30 @@
  *
  * @since 2.0.0
  */
-import type * as Context from "./Context.js"
-import type * as Effect from "./Effect.js"
-import type * as Exit from "./Exit.js"
-import type * as Fiber from "./Fiber.js"
-import * as core from "./internal/core.js"
-import * as circular from "./internal/layer/circular.js"
-import * as internal from "./internal/supervisor.js"
-import type * as Layer from "./Layer.js"
-import type * as MutableRef from "./MutableRef.js"
-import type * as Option from "./Option.js"
-import type * as SortedSet from "./SortedSet.js"
-import type * as Types from "./Types.js"
+import type * as Context from "./Context.js";
+import type * as Effect from "./Effect.js";
+import type * as Exit from "./Exit.js";
+import type * as Fiber from "./Fiber.js";
+import * as core from "./internal/core.js";
+import * as circular from "./internal/layer/circular.js";
+import * as internal from "./internal/supervisor.js";
+import type * as Layer from "./Layer.js";
+import type * as MutableRef from "./MutableRef.js";
+import type * as Option from "./Option.js";
+import type * as SortedSet from "./SortedSet.js";
+import type * as Types from "./Types.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const SupervisorTypeId: unique symbol = internal.SupervisorTypeId
+export const SupervisorTypeId: unique symbol = internal.SupervisorTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type SupervisorTypeId = typeof SupervisorTypeId
+export type SupervisorTypeId = typeof SupervisorTypeId;
 
 /**
  * @since 2.0.0
@@ -39,7 +39,7 @@ export interface Supervisor<out T> extends Supervisor.Variance<T> {
    * supervisor. This value may change over time, reflecting what the supervisor
    * produces as it supervises fibers.
    */
-  readonly value: Effect.Effect<T>
+  readonly value: Effect.Effect<T>;
 
   /**
    * Supervises the start of a `Fiber`.
@@ -49,40 +49,43 @@ export interface Supervisor<out T> extends Supervisor.Variance<T> {
     effect: Effect.Effect<A, E, R>,
     parent: Option.Option<Fiber.RuntimeFiber<any, any>>,
     fiber: Fiber.RuntimeFiber<A, E>
-  ): void
+  ): void;
 
   /**
    * Supervises the end of a `Fiber`.
    */
-  onEnd<A, E>(value: Exit.Exit<A, E>, fiber: Fiber.RuntimeFiber<A, E>): void
+  onEnd<A, E>(value: Exit.Exit<A, E>, fiber: Fiber.RuntimeFiber<A, E>): void;
 
   /**
    * Supervises the execution of an `Effect` by a `Fiber`.
    */
-  onEffect<A, E>(fiber: Fiber.RuntimeFiber<A, E>, effect: Effect.Effect<any, any, any>): void
+  onEffect<A, E>(
+    fiber: Fiber.RuntimeFiber<A, E>,
+    effect: Effect.Effect<any, any, any>
+  ): void;
 
   /**
    * Supervises the suspension of a computation running within a `Fiber`.
    */
-  onSuspend<A, E>(fiber: Fiber.RuntimeFiber<A, E>): void
+  onSuspend<A, E>(fiber: Fiber.RuntimeFiber<A, E>): void;
 
   /**
    * Supervises the resumption of a computation running within a `Fiber`.
    */
-  onResume<A, E>(fiber: Fiber.RuntimeFiber<A, E>): void
+  onResume<A, E>(fiber: Fiber.RuntimeFiber<A, E>): void;
 
   /**
    * Maps this supervisor to another one, which has the same effect, but whose
    * value has been transformed by the specified function.
    */
-  map<B>(f: (a: T) => B): Supervisor<B>
+  map<B>(f: (a: T) => B): Supervisor<B>;
 
   /**
    * Returns a new supervisor that performs the function of this supervisor, and
    * the function of the specified supervisor, producing a tuple of the outputs
    * produced by both supervisors.
    */
-  zip<A>(right: Supervisor<A>): Supervisor<[T, A]>
+  zip<A>(right: Supervisor<A>): Supervisor<[T, A]>;
 }
 
 /**
@@ -95,8 +98,8 @@ export declare namespace Supervisor {
    */
   export interface Variance<out T> {
     readonly [SupervisorTypeId]: {
-      readonly _T: Types.Covariant<T>
-    }
+      readonly _T: Types.Covariant<T>;
+    };
   }
 }
 
@@ -104,7 +107,9 @@ export declare namespace Supervisor {
  * @since 2.0.0
  * @category context
  */
-export const addSupervisor: <A>(supervisor: Supervisor<A>) => Layer.Layer<never> = circular.addSupervisor
+export const addSupervisor: <A>(
+  supervisor: Supervisor<A>
+) => Layer.Layer<never> = circular.addSupervisor;
 
 /**
  * Creates a new supervisor that tracks children in a set.
@@ -114,7 +119,9 @@ export const addSupervisor: <A>(supervisor: Supervisor<A>) => Layer.Layer<never>
  */
 export const fibersIn: (
   ref: MutableRef.MutableRef<SortedSet.SortedSet<Fiber.RuntimeFiber<any, any>>>
-) => Effect.Effect<Supervisor<SortedSet.SortedSet<Fiber.RuntimeFiber<any, any>>>> = internal.fibersIn
+) => Effect.Effect<
+  Supervisor<SortedSet.SortedSet<Fiber.RuntimeFiber<any, any>>>
+> = internal.fibersIn;
 
 /**
  * Creates a new supervisor that constantly yields effect when polled
@@ -122,7 +129,8 @@ export const fibersIn: (
  * @since 2.0.0
  * @category constructors
  */
-export const fromEffect: <A>(effect: Effect.Effect<A>) => Supervisor<A> = internal.fromEffect
+export const fromEffect: <A>(effect: Effect.Effect<A>) => Supervisor<A> =
+  internal.fromEffect;
 
 /**
  * A supervisor that doesn't do anything in response to supervision events.
@@ -130,7 +138,7 @@ export const fromEffect: <A>(effect: Effect.Effect<A>) => Supervisor<A> = intern
  * @since 2.0.0
  * @category constructors
  */
-export const none: Supervisor<void> = internal.none
+export const none: Supervisor<void> = internal.none;
 
 /**
  * Creates a new supervisor that tracks children in a set.
@@ -138,7 +146,9 @@ export const none: Supervisor<void> = internal.none
  * @since 2.0.0
  * @category constructors
  */
-export const track: Effect.Effect<Supervisor<Array<Fiber.RuntimeFiber<any, any>>>> = internal.track
+export const track: Effect.Effect<
+  Supervisor<Array<Fiber.RuntimeFiber<any, any>>>
+> = internal.track;
 
 /**
  * Unsafely creates a new supervisor that tracks children in a set.
@@ -146,7 +156,9 @@ export const track: Effect.Effect<Supervisor<Array<Fiber.RuntimeFiber<any, any>>
  * @since 2.0.0
  * @category unsafe
  */
-export const unsafeTrack: () => Supervisor<Array<Fiber.RuntimeFiber<any, any>>> = internal.unsafeTrack
+export const unsafeTrack: () => Supervisor<
+  Array<Fiber.RuntimeFiber<any, any>>
+> = internal.unsafeTrack;
 
 /**
  * @since 2.0.0
@@ -156,7 +168,7 @@ export abstract class AbstractSupervisor<T> implements Supervisor<T> {
   /**
    * @since 2.0.0
    */
-  abstract value: Effect.Effect<T>
+  abstract value: Effect.Effect<T>;
 
   /**
    * @since 2.0.0
@@ -173,10 +185,7 @@ export abstract class AbstractSupervisor<T> implements Supervisor<T> {
   /**
    * @since 2.0.0
    */
-  onEnd<A, E>(
-    _value: Exit.Exit<A, E>,
-    _fiber: Fiber.RuntimeFiber<A, E>
-  ): void {
+  onEnd<A, E>(_value: Exit.Exit<A, E>, _fiber: Fiber.RuntimeFiber<A, E>): void {
     //
   }
 
@@ -193,18 +202,14 @@ export abstract class AbstractSupervisor<T> implements Supervisor<T> {
   /**
    * @since 2.0.0
    */
-  onSuspend<A, E>(
-    _fiber: Fiber.RuntimeFiber<A, E>
-  ): void {
+  onSuspend<A, E>(_fiber: Fiber.RuntimeFiber<A, E>): void {
     //
   }
 
   /**
    * @since 2.0.0
    */
-  onResume<A, E>(
-    _fiber: Fiber.RuntimeFiber<A, E>
-  ): void {
+  onResume<A, E>(_fiber: Fiber.RuntimeFiber<A, E>): void {
     //
   }
 
@@ -212,29 +217,27 @@ export abstract class AbstractSupervisor<T> implements Supervisor<T> {
    * @since 2.0.0
    */
   map<B>(f: (a: T) => B): Supervisor<B> {
-    return new internal.ProxySupervisor(this, core.map(this.value, f))
+    return new internal.ProxySupervisor(this, core.map(this.value, f));
   }
 
   /**
    * @since 2.0.0
    */
-  zip<A>(
-    right: Supervisor<A>
-  ): Supervisor<[T, A]> {
-    return new internal.Zip(this, right)
+  zip<A>(right: Supervisor<A>): Supervisor<[T, A]> {
+    return new internal.Zip(this, right);
   }
 
   /**
    * @since 2.0.0
    */
   onRun<E, A, X>(execution: () => X, _fiber: Fiber.RuntimeFiber<A, E>): X {
-    return execution()
+    return execution();
   }
 
   /**
    * @since 2.0.0
    */
   readonly [SupervisorTypeId]: {
-    _T: (_: never) => never
-  } = internal.supervisorVariance
+    _T: (_: never) => never;
+  } = internal.supervisorVariance;
 }

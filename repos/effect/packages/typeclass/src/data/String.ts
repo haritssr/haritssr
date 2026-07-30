@@ -1,8 +1,8 @@
 /**
  * @since 0.24.0
  */
-import * as monoid from "../Monoid.js"
-import * as semigroup from "../Semigroup.js"
+import * as monoid from "../Monoid.js";
+import * as semigroup from "../Semigroup.js";
 
 /**
  * `string` semigroup under concatenation.
@@ -10,7 +10,9 @@ import * as semigroup from "../Semigroup.js"
  * @category instances
  * @since 0.24.0
  */
-export const Semigroup: semigroup.Semigroup<string> = semigroup.make((self, that) => self + that)
+export const Semigroup: semigroup.Semigroup<string> = semigroup.make(
+  (self, that) => self + that
+);
 
 /**
  * `string` monoid under concatenation.
@@ -20,4 +22,7 @@ export const Semigroup: semigroup.Semigroup<string> = semigroup.make((self, that
  * @category instances
  * @since 0.24.0
  */
-export const Monoid: monoid.Monoid<string> = monoid.fromSemigroup(Semigroup, "")
+export const Monoid: monoid.Monoid<string> = monoid.fromSemigroup(
+  Semigroup,
+  ""
+);

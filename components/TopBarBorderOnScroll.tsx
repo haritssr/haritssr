@@ -24,7 +24,9 @@ export default function TopBarBorderOnScroll() {
   const isNotAtTop = useIsNotAtTop();
 
   return (
-    <div className={`sticky top-0 z-30 ${isNotAtTop ? "" : "lg:[&>nav]:border-b-0"}`}>
+    <div
+      className={`sticky top-0 z-30 ${isNotAtTop ? "" : "lg:[&>nav]:border-b-0"}`}
+    >
       <TopBar />
     </div>
   );

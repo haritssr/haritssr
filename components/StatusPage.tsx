@@ -77,7 +77,7 @@ export function StatusPage({
   return (
     <div className={wrapperClassName}>
       <section
-        className={`w-full max-w-xl rounded-xl corner-squircle border px-5 py-6 text-center ${cardClassName}`}
+        className={`corner-squircle w-full max-w-xl rounded-xl border px-5 py-6 text-center ${cardClassName}`}
       >
         <div className={`font-medium text-xs uppercase ${badgeClassName}`}>
           {tone === "error" ? "Error" : "Status"}

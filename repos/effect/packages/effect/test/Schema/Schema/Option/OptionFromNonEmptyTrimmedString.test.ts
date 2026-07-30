@@ -1,19 +1,19 @@
-import { describe, it } from "@effect/vitest"
-import * as O from "effect/Option"
-import * as S from "effect/Schema"
-import * as Util from "../../TestUtils.js"
+import { describe, it } from "@effect/vitest";
+import * as O from "effect/Option";
+import * as S from "effect/Schema";
+import * as Util from "../../TestUtils.js";
 
 describe("OptionFromNonEmptyTrimmedString", () => {
   it("test roundtrip consistency", () => {
-    Util.assertions.testRoundtripConsistency(S.OptionFromNonEmptyTrimmedString)
-  })
+    Util.assertions.testRoundtripConsistency(S.OptionFromNonEmptyTrimmedString);
+  });
 
   it("decoding", async () => {
-    const schema = S.OptionFromNonEmptyTrimmedString
-    await Util.assertions.decoding.succeed(schema, "", O.none())
-    await Util.assertions.decoding.succeed(schema, "a", O.some("a"))
-    await Util.assertions.decoding.succeed(schema, " ", O.none())
-    await Util.assertions.decoding.succeed(schema, " a ", O.some("a"))
+    const schema = S.OptionFromNonEmptyTrimmedString;
+    await Util.assertions.decoding.succeed(schema, "", O.none());
+    await Util.assertions.decoding.succeed(schema, "a", O.some("a"));
+    await Util.assertions.decoding.succeed(schema, " ", O.none());
+    await Util.assertions.decoding.succeed(schema, " a ", O.some("a"));
 
     await Util.assertions.decoding.fail(
       schema,
@@ -21,13 +21,13 @@ describe("OptionFromNonEmptyTrimmedString", () => {
       `(string <-> Option<NonEmptyTrimmedString>)
 └─ Encoded side transformation failure
    └─ Expected string, actual null`
-    )
-  })
+    );
+  });
 
   it("encoding", async () => {
-    const schema = S.OptionFromNonEmptyTrimmedString
-    await Util.assertions.encoding.succeed(schema, O.none(), "")
-    await Util.assertions.encoding.succeed(schema, O.some("a"), "a")
+    const schema = S.OptionFromNonEmptyTrimmedString;
+    await Util.assertions.encoding.succeed(schema, O.none(), "");
+    await Util.assertions.encoding.succeed(schema, O.some("a"), "a");
 
     await Util.assertions.encoding.fail(
       schema,
@@ -38,6 +38,6 @@ describe("OptionFromNonEmptyTrimmedString", () => {
       └─ NonEmptyTrimmedString
          └─ Predicate refinement failure
             └─ Expected a non empty string, actual ""`
-    )
-  })
-})
+    );
+  });
+});

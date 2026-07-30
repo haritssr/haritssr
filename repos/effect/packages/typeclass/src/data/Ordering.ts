@@ -1,9 +1,9 @@
 /**
  * @since 0.24.0
  */
-import type { Ordering } from "effect/Ordering"
-import * as monoid from "../Monoid.js"
-import * as semigroup from "../Semigroup.js"
+import type { Ordering } from "effect/Ordering";
+import * as monoid from "../Monoid.js";
+import * as semigroup from "../Semigroup.js";
 
 /**
  * `Semigroup` instance for `Ordering`, returns the left-most non-zero `Ordering`.
@@ -25,20 +25,20 @@ import * as semigroup from "../Semigroup.js"
  * @since 0.24.0
  */
 export const Semigroup: semigroup.Semigroup<Ordering> = semigroup.make(
-  (self, that) => self !== 0 ? self : that,
+  (self, that) => (self !== 0 ? self : that),
   (self, collection) => {
-    let ordering = self
+    let ordering = self;
     if (ordering !== 0) {
-      return ordering
+      return ordering;
     }
     for (ordering of collection) {
       if (ordering !== 0) {
-        return ordering
+        return ordering;
       }
     }
-    return ordering
+    return ordering;
   }
-)
+);
 
 /**
  * `Monoid` instance for `Ordering`, returns the left-most non-zero `Ordering`.
@@ -61,4 +61,7 @@ export const Semigroup: semigroup.Semigroup<Ordering> = semigroup.make(
  * @category instances
  * @since 0.24.0
  */
-export const Monoid: monoid.Monoid<Ordering> = monoid.fromSemigroup(Semigroup, 0)
+export const Monoid: monoid.Monoid<Ordering> = monoid.fromSemigroup(
+  Semigroup,
+  0
+);

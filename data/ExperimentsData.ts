@@ -116,7 +116,16 @@ export const ExperimentsData = [
     title: "Headless UI",
     logoSrc: "/icons/headlessui.jpg",
     description: "Headless UI components by Tailwind CSS Team",
-    links: ["Menu", "Listbox", "Switch", "Disclosure", "Dialog", "Popover", "Radio Group", "Tabs"],
+    links: [
+      "Menu",
+      "Listbox",
+      "Switch",
+      "Disclosure",
+      "Dialog",
+      "Popover",
+      "Radio Group",
+      "Tabs",
+    ],
   },
   {
     id: 9,

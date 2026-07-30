@@ -31,7 +31,10 @@ function getDateWithOffset(dateString: string, offsetDays: number) {
   return `${nextYear}-${nextMonth}-${nextDay}`;
 }
 
-function getCurrentFullCompletionStreak(history: TaskHistoryEntry[], todayDate: string) {
+function getCurrentFullCompletionStreak(
+  history: TaskHistoryEntry[],
+  todayDate: string
+) {
   const historyByDate = new Map(history.map((entry) => [entry.date, entry]));
   let streak = 0;
   let cursorDate = todayDate;
@@ -53,7 +56,9 @@ function MetricCard(props: { label: string; subtitle: string; value: string }) {
   return (
     <div className="rounded-xl border border-zinc-200 p-3">
       <div className="text-sm text-zinc-500">{props.label}</div>
-      <div className="mt-1 font-semibold text-2xl text-zinc-800">{props.value}</div>
+      <div className="mt-1 font-semibold text-2xl text-zinc-800">
+        {props.value}
+      </div>
       <div className="mt-1 text-xs text-zinc-500">{props.subtitle}</div>
     </div>
   );
@@ -82,15 +87,36 @@ export default function TaskStatisticsPage() {
 
   const todayDoneCount = todayHistory?.doneCount ?? 0;
   const todayTotalCount = todayHistory?.totalCount ?? 0;
-  const todayCompletionRate = getCompletionRate(todayDoneCount, todayTotalCount);
+  const todayCompletionRate = getCompletionRate(
+    todayDoneCount,
+    todayTotalCount
+  );
 
-  const weekDoneCount = recent7Days.reduce((total, day) => total + day.doneCount, 0);
-  const weekTotalCount = recent7Days.reduce((total, day) => total + day.totalCount, 0);
+  const weekDoneCount = recent7Days.reduce(
+    (total, day) => total + day.doneCount,
+    0
+  );
+  const weekTotalCount = recent7Days.reduce(
+    (total, day) => total + day.totalCount,
+    0
+  );
   const weekCompletionRate = getCompletionRate(weekDoneCount, weekTotalCount);
 
-  const weekCompletedMinutes = recent7Days.reduce((minutes, day) => minutes + day.tasks.reduce((taskMinutes, task) => taskMinutes + (task.duration * task.progress) / 100, 0), 0);
+  const weekCompletedMinutes = recent7Days.reduce(
+    (minutes, day) =>
+      minutes +
+      day.tasks.reduce(
+        (taskMinutes, task) =>
+          taskMinutes + (task.duration * task.progress) / 100,
+        0
+      ),
+    0
+  );
 
-  const fullCompletionStreak = getCurrentFullCompletionStreak(history, todayDate);
+  const fullCompletionStreak = getCurrentFullCompletionStreak(
+    history,
+    todayDate
+  );
 
   const doneCountByTaskTitle = new Map<string, number>();
   recent30Days.forEach((day) => {
@@ -104,7 +130,9 @@ export default function TaskStatisticsPage() {
     });
   });
 
-  const mostCompletedTaskEntry = Array.from(doneCountByTaskTitle.entries()).sort((firstTask, secondTask) => secondTask[1] - firstTask[1])[0];
+  const mostCompletedTaskEntry = Array.from(
+    doneCountByTaskTitle.entries()
+  ).sort((firstTask, secondTask) => secondTask[1] - firstTask[1])[0];
 
   const recent7DaysTrend = [...recent7Days].reverse().map((day) => ({
     completionRate: getCompletionRate(day.doneCount, day.totalCount),
@@ -116,11 +144,15 @@ export default function TaskStatisticsPage() {
       ...task,
       position: index,
       taskDate: day.date,
-    })),
+    }))
   );
   const MAX_DATABASE_TABLE_ROWS = 200;
-  const visibleDatabaseTaskRows = databaseTaskRows.slice(0, MAX_DATABASE_TABLE_ROWS);
-  const hasHiddenDatabaseTaskRows = databaseTaskRows.length > visibleDatabaseTaskRows.length;
+  const visibleDatabaseTaskRows = databaseTaskRows.slice(
+    0,
+    MAX_DATABASE_TABLE_ROWS
+  );
+  const hasHiddenDatabaseTaskRows =
+    databaseTaskRows.length > visibleDatabaseTaskRows.length;
 
   return (
     <div className="pb-8">
@@ -128,18 +160,40 @@ export default function TaskStatisticsPage() {
       <PageTitle title="Statistic" />
       <PageDescription description="About the daily task." />
 
-      <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
-        Ideas shown here: daily completion rate, 7-day completion rate, completed minutes, full-completion streak, top completed task, and a 7-day trend.
+      <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-blue-700 text-sm">
+        Ideas shown here: daily completion rate, 7-day completion rate,
+        completed minutes, full-completion streak, top completed task, and a
+        7-day trend.
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <MetricCard label="Today completion" subtitle={`${todayDoneCount}/${todayTotalCount} tasks done`} value={`${todayCompletionRate.toFixed(1)}%`} />
-        <MetricCard label="7-day completion" subtitle={`${weekDoneCount}/${weekTotalCount} tasks done`} value={`${weekCompletionRate.toFixed(1)}%`} />
-        <MetricCard label="7-day completed minutes" subtitle="Sum of duration × progress" value={`${weekCompletedMinutes.toFixed(1)}m`} />
-        <MetricCard label="Full-completion streak" subtitle="Consecutive calendar days at 100%" value={`${fullCompletionStreak} day${fullCompletionStreak === 1 ? "" : "s"}`} />
+        <MetricCard
+          label="Today completion"
+          subtitle={`${todayDoneCount}/${todayTotalCount} tasks done`}
+          value={`${todayCompletionRate.toFixed(1)}%`}
+        />
+        <MetricCard
+          label="7-day completion"
+          subtitle={`${weekDoneCount}/${weekTotalCount} tasks done`}
+          value={`${weekCompletionRate.toFixed(1)}%`}
+        />
+        <MetricCard
+          label="7-day completed minutes"
+          subtitle="Sum of duration × progress"
+          value={`${weekCompletedMinutes.toFixed(1)}m`}
+        />
+        <MetricCard
+          label="Full-completion streak"
+          subtitle="Consecutive calendar days at 100%"
+          value={`${fullCompletionStreak} day${fullCompletionStreak === 1 ? "" : "s"}`}
+        />
         <MetricCard
           label="Top completed task (30 days)"
-          subtitle={mostCompletedTaskEntry ? `${mostCompletedTaskEntry[1]} completions` : "No completed tasks yet"}
+          subtitle={
+            mostCompletedTaskEntry
+              ? `${mostCompletedTaskEntry[1]} completions`
+              : "No completed tasks yet"
+          }
           value={mostCompletedTaskEntry ? mostCompletedTaskEntry[0] : "-"}
         />
       </div>
@@ -151,15 +205,26 @@ export default function TaskStatisticsPage() {
         ) : (
           <div className="mt-3 grid grid-cols-7 gap-2">
             {recent7DaysTrend.map((day) => {
-              const barHeight = day.completionRate <= 0 ? 0 : Math.max(day.completionRate, 4);
+              const barHeight =
+                day.completionRate <= 0 ? 0 : Math.max(day.completionRate, 4);
 
               return (
-                <div className="flex flex-col items-center gap-1" key={day.date}>
+                <div
+                  className="flex flex-col items-center gap-1"
+                  key={day.date}
+                >
                   <div className="relative h-24 w-6 rounded-full bg-zinc-100">
-                    <div className="absolute bottom-0 w-full rounded-full bg-blue-500" style={{ height: `${barHeight}%` }} />
+                    <div
+                      className="absolute bottom-0 w-full rounded-full bg-blue-500"
+                      style={{ height: `${barHeight}%` }}
+                    />
                   </div>
-                  <span className="text-[11px] text-zinc-500">{day.date.slice(5)}</span>
-                  <span className="text-[11px] text-zinc-600">{day.completionRate.toFixed(0)}%</span>
+                  <span className="text-[11px] text-zinc-500">
+                    {day.date.slice(5)}
+                  </span>
+                  <span className="text-[11px] text-zinc-600">
+                    {day.completionRate.toFixed(0)}%
+                  </span>
                 </div>
               );
             })}
@@ -168,14 +233,21 @@ export default function TaskStatisticsPage() {
       </section>
 
       <section className="mt-4 rounded-xl border border-zinc-200 p-3">
-        <h2 className="font-medium text-zinc-800">Database table: daily_tasks</h2>
-        <p className="mt-1 text-xs text-zinc-500">Uses the task shape from app/task/data.ts: title, duration, progress, and type.</p>
+        <h2 className="font-medium text-zinc-800">
+          Database table: daily_tasks
+        </h2>
+        <p className="mt-1 text-xs text-zinc-500">
+          Uses the task shape from app/task/data.ts: title, duration, progress,
+          and type.
+        </p>
         {visibleDatabaseTaskRows.length === 0 ? (
-          <div className="mt-2 text-sm text-zinc-500">No database rows yet.</div>
+          <div className="mt-2 text-sm text-zinc-500">
+            No database rows yet.
+          </div>
         ) : (
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-200 text-left text-sm text-zinc-700">
-              <thead className="bg-zinc-50 text-xs uppercase text-zinc-500">
+              <thead className="bg-zinc-50 text-xs text-zinc-500 uppercase">
                 <tr>
                   <th className="px-2 py-1.5">task_date</th>
                   <th className="px-2 py-1.5">title</th>
@@ -202,7 +274,8 @@ export default function TaskStatisticsPage() {
         )}
         {hasHiddenDatabaseTaskRows ? (
           <div className="mt-2 text-xs text-zinc-500">
-            Showing first {MAX_DATABASE_TABLE_ROWS} of {databaseTaskRows.length} rows.
+            Showing first {MAX_DATABASE_TABLE_ROWS} of {databaseTaskRows.length}{" "}
+            rows.
           </div>
         ) : null}
       </section>

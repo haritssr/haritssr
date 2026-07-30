@@ -1,42 +1,49 @@
 /**
  * @since 1.0.0
  */
-import type { FileSystem } from "@effect/platform/FileSystem"
-import type { Path } from "@effect/platform/Path"
-import type { QuitException, Terminal, UserInput } from "@effect/platform/Terminal"
-import type { TaggedEnum } from "effect/Data"
-import type { Effect } from "effect/Effect"
-import type { Pipeable } from "effect/Pipeable"
-import type { Redacted } from "effect/Redacted"
-import * as InternalPrompt from "./internal/prompt.js"
-import * as InternalConfirmPrompt from "./internal/prompt/confirm.js"
-import * as InternalDatePrompt from "./internal/prompt/date.js"
-import * as InternalFilePrompt from "./internal/prompt/file.js"
-import * as InternalListPrompt from "./internal/prompt/list.js"
-import * as InternalMultiSelectPrompt from "./internal/prompt/multi-select.js"
-import * as InternalNumberPrompt from "./internal/prompt/number.js"
-import * as InternalSelectPrompt from "./internal/prompt/select.js"
-import * as InternalTextPrompt from "./internal/prompt/text.js"
-import * as InternalTogglePrompt from "./internal/prompt/toggle.js"
-import type { Primitive } from "./Primitive.js"
+import type { FileSystem } from "@effect/platform/FileSystem";
+import type { Path } from "@effect/platform/Path";
+import type {
+  QuitException,
+  Terminal,
+  UserInput,
+} from "@effect/platform/Terminal";
+import type { TaggedEnum } from "effect/Data";
+import type { Effect } from "effect/Effect";
+import type { Pipeable } from "effect/Pipeable";
+import type { Redacted } from "effect/Redacted";
+import * as InternalConfirmPrompt from "./internal/prompt/confirm.js";
+import * as InternalDatePrompt from "./internal/prompt/date.js";
+import * as InternalFilePrompt from "./internal/prompt/file.js";
+import * as InternalListPrompt from "./internal/prompt/list.js";
+import * as InternalMultiSelectPrompt from "./internal/prompt/multi-select.js";
+import * as InternalNumberPrompt from "./internal/prompt/number.js";
+import * as InternalSelectPrompt from "./internal/prompt/select.js";
+import * as InternalTextPrompt from "./internal/prompt/text.js";
+import * as InternalTogglePrompt from "./internal/prompt/toggle.js";
+import * as InternalPrompt from "./internal/prompt.js";
+import type { Primitive } from "./Primitive.js";
 
 /**
  * @since 1.0.0
  * @category symbols
  */
-export const PromptTypeId: unique symbol = InternalPrompt.PromptTypeId
+export const PromptTypeId: unique symbol = InternalPrompt.PromptTypeId;
 
 /**
  * @since 1.0.0
  * @category symbols
  */
-export type PromptTypeId = typeof PromptTypeId
+export type PromptTypeId = typeof PromptTypeId;
 
 /**
  * @since 1.0.0
  * @category models
  */
-export interface Prompt<Output> extends Prompt.Variance<Output>, Pipeable, Effect<Output, QuitException, Terminal> {}
+export interface Prompt<Output>
+  extends Prompt.Variance<Output>,
+    Pipeable,
+    Effect<Output, QuitException, Terminal> {}
 
 /**
  * @since 1.0.0
@@ -47,7 +54,7 @@ export declare namespace Prompt {
    * @category models
    */
   export interface Variance<Output> {
-    readonly [PromptTypeId]: Prompt.VarianceStruct<Output>
+    readonly [PromptTypeId]: Prompt.VarianceStruct<Output>;
   }
 
   /**
@@ -55,7 +62,7 @@ export declare namespace Prompt {
    * @category models
    */
   export interface VarianceStruct<Output> {
-    readonly _Output: (_: never) => Output
+    readonly _Output: (_: never) => Output;
   }
 
   /**
@@ -64,7 +71,7 @@ export declare namespace Prompt {
    * @since 1.0.0
    * @category models
    */
-  export type Environment = FileSystem | Path | Terminal
+  export type Environment = FileSystem | Path | Terminal;
 
   /**
    * Represents the action that should be taken by a `Prompt` based upon the
@@ -74,10 +81,10 @@ export declare namespace Prompt {
    * @category models
    */
   export type Action<State, Output> = TaggedEnum<{
-    readonly Beep: {}
-    readonly NextFrame: { readonly state: State }
-    readonly Submit: { readonly value: Output }
-  }>
+    readonly Beep: {};
+    readonly NextFrame: { readonly state: State };
+    readonly Submit: { readonly value: Output };
+  }>;
 
   /**
    * Represents the definition of an `Action`.
@@ -88,7 +95,7 @@ export declare namespace Prompt {
    * @category models
    */
   export interface ActionDefinition extends TaggedEnum.WithGenerics<2> {
-    readonly taggedEnum: Action<this["A"], this["B"]>
+    readonly taggedEnum: Action<this["A"], this["B"]>;
   }
 
   /**
@@ -112,7 +119,7 @@ export declare namespace Prompt {
     readonly render: (
       state: State,
       action: Action<State, Output>
-    ) => Effect<string, never, Environment>
+    ) => Effect<string, never, Environment>;
     /**
      * A function that is called to process user input and determine the next
      * `Prompt.Action` that should be taken.
@@ -124,7 +131,7 @@ export declare namespace Prompt {
     readonly process: (
       input: UserInput,
       state: State
-    ) => Effect<Action<State, Output>, never, Environment>
+    ) => Effect<Action<State, Output>, never, Environment>;
     /**
      * A function that is called to clear the terminal screen before rendering
      * the next frame of the `Prompt`.
@@ -136,7 +143,7 @@ export declare namespace Prompt {
     readonly clear: (
       state: State,
       action: Action<State, Output>
-    ) => Effect<string, never, Environment>
+    ) => Effect<string, never, Environment>;
   }
 
   /**
@@ -147,11 +154,11 @@ export declare namespace Prompt {
     /**
      * The message to display in the prompt.
      */
-    readonly message: string
+    readonly message: string;
     /**
      * The intitial value of the confirm prompt (defaults to `false`).
      */
-    readonly initial?: boolean
+    readonly initial?: boolean;
     /**
      * The label to display after a user has responded to the prompt.
      */
@@ -159,12 +166,12 @@ export declare namespace Prompt {
       /**
        * The label used if the prompt is confirmed (defaults to `"yes"`).
        */
-      readonly confirm: string
+      readonly confirm: string;
       /**
        * The label used if the prompt is not confirmed (defaults to `"no"`).
        */
-      readonly deny: string
-    }
+      readonly deny: string;
+    };
     /**
      * The placeholder to display when a user is responding to the prompt.
      */
@@ -173,13 +180,13 @@ export declare namespace Prompt {
        * The placeholder to use if the `initial` value of the prompt is `true`
        * (defaults to `"(Y/n)"`).
        */
-      readonly defaultConfirm?: string
+      readonly defaultConfirm?: string;
       /**
        * The placeholder to use if the `initial` value of the prompt is `false`
        * (defaults to `"(y/N)"`).
        */
-      readonly defaultDeny?: string
-    }
+      readonly defaultDeny?: string;
+    };
   }
 
   /**
@@ -190,21 +197,23 @@ export declare namespace Prompt {
     /**
      * The message to display in the prompt.
      */
-    readonly message: string
+    readonly message: string;
     /**
      * The initial date value to display in the prompt (defaults to the current
      * date).
      */
-    readonly initial?: globalThis.Date
+    readonly initial?: globalThis.Date;
     /**
      * The format mask of the date (defaults to `YYYY-MM-DD HH:mm:ss`).
      */
-    readonly dateMask?: string
+    readonly dateMask?: string;
     /**
      * An effectful function that can be used to validate the value entered into
      * the prompt before final submission.
      */
-    readonly validate?: (value: globalThis.Date) => Effect<globalThis.Date, string>
+    readonly validate?: (
+      value: globalThis.Date
+    ) => Effect<globalThis.Date, string>;
     /**
      * Custom locales that can be used in place of the defaults.
      */
@@ -224,8 +233,8 @@ export declare namespace Prompt {
         string,
         string,
         string,
-        string
-      ]
+        string,
+      ];
       /**
        * The short names of each month of the year.
        */
@@ -241,17 +250,33 @@ export declare namespace Prompt {
         string,
         string,
         string,
-        string
-      ]
+        string,
+      ];
       /**
        * The full names of each day of the week.
        */
-      readonly weekdays: [string, string, string, string, string, string, string]
+      readonly weekdays: [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+      ];
       /**
        * The short names of each day of the week.
        */
-      readonly weekdaysShort: [string, string, string, string, string, string, string]
-    }
+      readonly weekdaysShort: [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+      ];
+    };
   }
 
   /**
@@ -262,30 +287,30 @@ export declare namespace Prompt {
     /**
      * The message to display in the prompt.
      */
-    readonly message: string
+    readonly message: string;
     /**
      * The minimum value that can be entered by the user (defaults to `-Infinity`).
      */
-    readonly min?: number
+    readonly min?: number;
     /**
      * The maximum value that can be entered by the user (defaults to `Infinity`).
      */
-    readonly max?: number
+    readonly max?: number;
     /**
      * The value that will be used to increment the prompt value when using the
      * up arrow key (defaults to `1`).
      */
-    readonly incrementBy?: number
+    readonly incrementBy?: number;
     /**
      * The value that will be used to decrement the prompt value when using the
      * down arrow key (defaults to `1`).
      */
-    readonly decrementBy?: number
+    readonly decrementBy?: number;
     /**
      * An effectful function that can be used to validate the value entered into
      * the prompt before final submission.
      */
-    readonly validate?: (value: number) => Effect<number, string>
+    readonly validate?: (value: number) => Effect<number, string>;
   }
 
   /**
@@ -296,7 +321,7 @@ export declare namespace Prompt {
     /**
      * The precision to use for the floating point value (defaults to `2`).
      */
-    readonly precision?: number
+    readonly precision?: number;
   }
 
   /**
@@ -307,7 +332,7 @@ export declare namespace Prompt {
     /**
      * The delimiter that separates list entries.
      */
-    readonly delimiter?: string
+    readonly delimiter?: string;
   }
 
   /**
@@ -320,32 +345,34 @@ export declare namespace Prompt {
      *
      * Defaults to `"file"`.
      */
-    readonly type?: Primitive.PathType
+    readonly type?: Primitive.PathType;
     /**
      * The message to display in the prompt.
      *
      * Defaults to `"Choose a file"`.
      */
-    readonly message?: string
+    readonly message?: string;
     /**
      * Where the user will initially be prompted to select files from.
      *
      * Defaults to the current working directory.
      */
-    readonly startingPath?: string
+    readonly startingPath?: string;
     /**
      * The number of choices to display at one time
      *
      * Defaults to `10`.
      */
-    readonly maxPerPage?: number
+    readonly maxPerPage?: number;
     /**
      * A function which removes any file from the prompt display where the
      * specified predicate returns `true`.
      *
      * Defaults to returning all files.
      */
-    readonly filter?: (file: string) => boolean | Effect<boolean, never, Environment>
+    readonly filter?: (
+      file: string
+    ) => boolean | Effect<boolean, never, Environment>;
   }
 
   /**
@@ -356,15 +383,15 @@ export declare namespace Prompt {
     /**
      * The message to display in the prompt.
      */
-    readonly message: string
+    readonly message: string;
     /**
      * The choices to display to the user.
      */
-    readonly choices: ReadonlyArray<SelectChoice<A>>
+    readonly choices: ReadonlyArray<SelectChoice<A>>;
     /**
      * The number of choices to display at one time (defaults to `10`).
      */
-    readonly maxPerPage?: number
+    readonly maxPerPage?: number;
   }
 
   /**
@@ -375,23 +402,23 @@ export declare namespace Prompt {
     /**
      * Text for the "Select All" option (defaults to "Select All").
      */
-    readonly selectAll?: string
+    readonly selectAll?: string;
     /**
      * Text for the "Select None" option (defaults to "Select None").
      */
-    readonly selectNone?: string
+    readonly selectNone?: string;
     /**
      * Text for the "Inverse Selection" option (defaults to "Inverse Selection").
      */
-    readonly inverseSelection?: string
+    readonly inverseSelection?: string;
     /**
      * The minimum number of choices that must be selected.
      */
-    readonly min?: number
+    readonly min?: number;
     /**
      * The maximum number of choices that can be selected.
      */
-    readonly max?: number
+    readonly max?: number;
   }
 
   /**
@@ -402,24 +429,24 @@ export declare namespace Prompt {
     /**
      * The name of the select option that is displayed to the user.
      */
-    readonly title: string
+    readonly title: string;
     /**
      * The underlying value of the select option.
      */
-    readonly value: A
+    readonly value: A;
     /**
      * An optional description for the select option which will be displayed
      * to the user.
      */
-    readonly description?: string
+    readonly description?: string;
     /**
      * Whether or not this select option is disabled.
      */
-    readonly disabled?: boolean
+    readonly disabled?: boolean;
     /**
      * Whether this option should be selected by default (only used by MultiSelect).
      */
-    readonly selected?: boolean
+    readonly selected?: boolean;
   }
 
   /**
@@ -430,16 +457,16 @@ export declare namespace Prompt {
     /**
      * The message to display in the prompt.
      */
-    readonly message: string
+    readonly message: string;
     /**
      * The default value of the text option.
      */
-    readonly default?: string
+    readonly default?: string;
     /**
      * An effectful function that can be used to validate the value entered into
      * the prompt before final submission.
      */
-    readonly validate?: (value: string) => Effect<string, string>
+    readonly validate?: (value: string) => Effect<string, string>;
   }
 
   /**
@@ -450,21 +477,21 @@ export declare namespace Prompt {
     /**
      * The message to display in the prompt.
      */
-    readonly message: string
+    readonly message: string;
     /**
      * The intitial value of the toggle prompt (defaults to `false`).
      */
-    readonly initial?: boolean
+    readonly initial?: boolean;
     /**
      * The text to display when the toggle is in the active state (defaults to
      * `on`).
      */
-    readonly active?: string
+    readonly active?: string;
     /**
      * The text to display when the toggle is in the inactive state (defaults to
      * `off`).
      */
-    readonly inactive?: string
+    readonly inactive?: string;
   }
 }
 
@@ -475,42 +502,55 @@ export declare namespace All {
   /**
    * @since 1.0.0
    */
-  export type PromptAny = Prompt<any>
+  export type PromptAny = Prompt<any>;
 
   /**
    * @since 1.0.0
    */
-  export type ReturnIterable<T extends Iterable<PromptAny>> = [T] extends [Iterable<Prompt.Variance<infer A>>] ?
-    Prompt<Array<A>>
-    : never
+  export type ReturnIterable<T extends Iterable<PromptAny>> = [T] extends [
+    Iterable<Prompt.Variance<infer A>>,
+  ]
+    ? Prompt<Array<A>>
+    : never;
 
   /**
    * @since 1.0.0
    */
   export type ReturnTuple<T extends ReadonlyArray<unknown>> = Prompt<
-    T[number] extends never ? []
-      : { -readonly [K in keyof T]: [T[K]] extends [Prompt.Variance<infer _A>] ? _A : never }
-  > extends infer X ? X : never
+    T[number] extends never
+      ? []
+      : {
+          -readonly [K in keyof T]: [T[K]] extends [Prompt.Variance<infer _A>]
+            ? _A
+            : never;
+        }
+  > extends infer X
+    ? X
+    : never;
 
   /**
    * @since 1.0.0
    */
-  export type ReturnObject<T> = [T] extends [{ [K: string]: PromptAny }] ? Prompt<
-      {
-        -readonly [K in keyof T]: [T[K]] extends [Prompt.Variance<infer _A>] ? _A : never
-      }
-    >
-    : never
+  export type ReturnObject<T> = [T] extends [{ [K: string]: PromptAny }]
+    ? Prompt<{
+        -readonly [K in keyof T]: [T[K]] extends [Prompt.Variance<infer _A>]
+          ? _A
+          : never;
+      }>
+    : never;
 
   /**
    * @since 1.0.0
    */
   export type Return<
-    Arg extends Iterable<PromptAny> | Record<string, PromptAny>
-  > = [Arg] extends [ReadonlyArray<PromptAny>] ? ReturnTuple<Arg>
-    : [Arg] extends [Iterable<PromptAny>] ? ReturnIterable<Arg>
-    : [Arg] extends [Record<string, PromptAny>] ? ReturnObject<Arg>
-    : never
+    Arg extends Iterable<PromptAny> | Record<string, PromptAny>,
+  > = [Arg] extends [ReadonlyArray<PromptAny>]
+    ? ReturnTuple<Arg>
+    : [Arg] extends [Iterable<PromptAny>]
+      ? ReturnIterable<Arg>
+      : [Arg] extends [Record<string, PromptAny>]
+        ? ReturnObject<Arg>
+        : never;
 }
 
 /**
@@ -546,14 +586,18 @@ export declare namespace All {
  * @since 1.0.0
  * @category collecting & elements
  */
-export const all: <const Arg extends Iterable<Prompt<any>> | Record<string, Prompt<any>>>(arg: Arg) => All.Return<Arg> =
-  InternalPrompt.all
+export const all: <
+  const Arg extends Iterable<Prompt<any>> | Record<string, Prompt<any>>,
+>(
+  arg: Arg
+) => All.Return<Arg> = InternalPrompt.all;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const confirm: (options: Prompt.ConfirmOptions) => Prompt<boolean> = InternalConfirmPrompt.confirm
+export const confirm: (options: Prompt.ConfirmOptions) => Prompt<boolean> =
+  InternalConfirmPrompt.confirm;
 
 /**
  * Creates a custom `Prompt` from the specified initial state and handlers.
@@ -585,19 +629,21 @@ export const confirm: (options: Prompt.ConfirmOptions) => Prompt<boolean> = Inte
 export const custom: <State, Output>(
   initialState: State | Effect<State, never, Prompt.Environment>,
   handlers: Prompt.Handlers<State, Output>
-) => Prompt<Output> = InternalPrompt.custom
+) => Prompt<Output> = InternalPrompt.custom;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const date: (options: Prompt.DateOptions) => Prompt<Date> = InternalDatePrompt.date
+export const date: (options: Prompt.DateOptions) => Prompt<Date> =
+  InternalDatePrompt.date;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const file: (options?: Prompt.FileOptions) => Prompt<string> = InternalFilePrompt.file
+export const file: (options?: Prompt.FileOptions) => Prompt<string> =
+  InternalFilePrompt.file;
 
 /**
  * @since 1.0.0
@@ -606,48 +652,61 @@ export const file: (options?: Prompt.FileOptions) => Prompt<string> = InternalFi
 export const flatMap: {
   <Output, Output2>(
     f: (output: Output) => Prompt<Output2>
-  ): (self: Prompt<Output>) => Prompt<Output2>
-  <Output, Output2>(self: Prompt<Output>, f: (output: Output) => Prompt<Output2>): Prompt<Output2>
-} = InternalPrompt.flatMap
+  ): (self: Prompt<Output>) => Prompt<Output2>;
+  <Output, Output2>(
+    self: Prompt<Output>,
+    f: (output: Output) => Prompt<Output2>
+  ): Prompt<Output2>;
+} = InternalPrompt.flatMap;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const float: (options: Prompt.FloatOptions) => Prompt<number> = InternalNumberPrompt.float
+export const float: (options: Prompt.FloatOptions) => Prompt<number> =
+  InternalNumberPrompt.float;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const hidden: (options: Prompt.TextOptions) => Prompt<Redacted> = InternalTextPrompt.hidden
+export const hidden: (options: Prompt.TextOptions) => Prompt<Redacted> =
+  InternalTextPrompt.hidden;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const integer: (options: Prompt.IntegerOptions) => Prompt<number> = InternalNumberPrompt.integer
+export const integer: (options: Prompt.IntegerOptions) => Prompt<number> =
+  InternalNumberPrompt.integer;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const list: (options: Prompt.ListOptions) => Prompt<Array<string>> = InternalListPrompt.list
+export const list: (options: Prompt.ListOptions) => Prompt<Array<string>> =
+  InternalListPrompt.list;
 
 /**
  * @since 1.0.0
  * @category combinators
  */
 export const map: {
-  <Output, Output2>(f: (output: Output) => Output2): (self: Prompt<Output>) => Prompt<Output2>
-  <Output, Output2>(self: Prompt<Output>, f: (output: Output) => Output2): Prompt<Output2>
-} = InternalPrompt.map
+  <Output, Output2>(
+    f: (output: Output) => Output2
+  ): (self: Prompt<Output>) => Prompt<Output2>;
+  <Output, Output2>(
+    self: Prompt<Output>,
+    f: (output: Output) => Output2
+  ): Prompt<Output2>;
+} = InternalPrompt.map;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const password: (options: Prompt.TextOptions) => Prompt<Redacted> = InternalTextPrompt.password
+export const password: (options: Prompt.TextOptions) => Prompt<Redacted> =
+  InternalTextPrompt.password;
 
 /**
  * Executes the specified `Prompt`.
@@ -655,21 +714,24 @@ export const password: (options: Prompt.TextOptions) => Prompt<Redacted> = Inter
  * @since 1.0.0
  * @category execution
  */
-export const run: <Output>(self: Prompt<Output>) => Effect<Output, QuitException, Prompt.Environment> =
-  InternalPrompt.run
+export const run: <Output>(
+  self: Prompt<Output>
+) => Effect<Output, QuitException, Prompt.Environment> = InternalPrompt.run;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const select: <const A>(options: Prompt.SelectOptions<A>) => Prompt<A> = InternalSelectPrompt.select
+export const select: <const A>(options: Prompt.SelectOptions<A>) => Prompt<A> =
+  InternalSelectPrompt.select;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const multiSelect: <const A>(options: Prompt.SelectOptions<A> & Prompt.MultiSelectOptions) => Prompt<Array<A>> =
-  InternalMultiSelectPrompt.multiSelect
+export const multiSelect: <const A>(
+  options: Prompt.SelectOptions<A> & Prompt.MultiSelectOptions
+) => Prompt<Array<A>> = InternalMultiSelectPrompt.multiSelect;
 
 /**
  * Creates a `Prompt` which immediately succeeds with the specified value.
@@ -680,16 +742,18 @@ export const multiSelect: <const A>(options: Prompt.SelectOptions<A> & Prompt.Mu
  * @since 1.0.0
  * @category constructors
  */
-export const succeed: <A>(value: A) => Prompt<A> = InternalPrompt.succeed
+export const succeed: <A>(value: A) => Prompt<A> = InternalPrompt.succeed;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const text: (options: Prompt.TextOptions) => Prompt<string> = InternalTextPrompt.text
+export const text: (options: Prompt.TextOptions) => Prompt<string> =
+  InternalTextPrompt.text;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const toggle: (options: Prompt.ToggleOptions) => Prompt<boolean> = InternalTogglePrompt.toggle
+export const toggle: (options: Prompt.ToggleOptions) => Prompt<boolean> =
+  InternalTogglePrompt.toggle;

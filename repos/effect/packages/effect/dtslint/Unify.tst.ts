@@ -17,27 +17,30 @@ import type {
   STM,
   Stream,
   SubscriptionRef,
-  SynchronizedRef
-} from "effect"
-import { Either, Unify } from "effect"
-import { describe, expect, it } from "tstyche"
+  SynchronizedRef,
+} from "effect";
+import { Either, Unify } from "effect";
+import { describe, expect, it } from "tstyche";
 
 describe("Unify", () => {
   describe("Unify", () => {
     it("should unify Context types", () => {
-      expect<Unify.Unify<Context.Tag<0, 1> | Context.Tag<"a", "b">>>()
-        .type.toBe<Context.Tag<0, 1> | Context.Tag<"a", "b">>()
-    })
+      expect<
+        Unify.Unify<Context.Tag<0, 1> | Context.Tag<"a", "b">>
+      >().type.toBe<Context.Tag<0, 1> | Context.Tag<"a", "b">>();
+    });
 
     it("should unify Option types", () => {
-      expect<Unify.Unify<Option.Option<number> | Option.Option<string>>>()
-        .type.toBe<Option.Option<string | number>>()
-    })
+      expect<
+        Unify.Unify<Option.Option<number> | Option.Option<string>>
+      >().type.toBe<Option.Option<string | number>>();
+    });
 
     it("should unify Either types", () => {
-      expect<Unify.Unify<Either.Either<"RA", "LA"> | Either.Either<"RB", "LB">>>()
-        .type.toBe<Either.Either<"RA" | "RB", "LA" | "LB">>()
-    })
+      expect<
+        Unify.Unify<Either.Either<"RA", "LA"> | Either.Either<"RB", "LB">>
+      >().type.toBe<Either.Either<"RA" | "RB", "LA" | "LB">>();
+    });
 
     it("should unify a mixed union of Either, Option, and primitive value", () => {
       expect<
@@ -48,51 +51,54 @@ describe("Unify", () => {
           | Option.Option<string>
           | 0
         >
-      >().type.toBe<0 | Option.Option<string | number> | Either.Either<"RA" | "RB", "LA" | "LB">>()
-    })
+      >().type.toBe<
+        | 0
+        | Option.Option<string | number>
+        | Either.Either<"RA" | "RB", "LA" | "LB">
+      >();
+    });
 
     it("should unify a record type", () => {
-      expect<Unify.Unify<{ [k: string]: string }>>()
-        .type.toBe<{ [k: string]: string }>()
-    })
+      expect<Unify.Unify<{ [k: string]: string }>>().type.toBe<{
+        [k: string]: string;
+      }>();
+    });
 
     it("should unify Stream types", () => {
-      expect<Unify.Unify<Stream.Stream<0, 1, 2> | Stream.Stream<"a", "b", "c">>>()
-        .type.toBe<Stream.Stream<0 | "a", "b" | 1, "c" | 2>>()
-    })
+      expect<
+        Unify.Unify<Stream.Stream<0, 1, 2> | Stream.Stream<"a", "b", "c">>
+      >().type.toBe<Stream.Stream<0 | "a", "b" | 1, "c" | 2>>();
+    });
 
     it("should unify Micro types", () => {
-      expect<Unify.Unify<Micro.Micro<0, 1, 2> | Micro.Micro<"a", "b", "c">>>()
-        .type.toBe<Micro.Micro<0 | "a", "b" | 1, "c" | 2>>()
-    })
+      expect<
+        Unify.Unify<Micro.Micro<0, 1, 2> | Micro.Micro<"a", "b", "c">>
+      >().type.toBe<Micro.Micro<0 | "a", "b" | 1, "c" | 2>>();
+    });
 
     it("should unify Effect types", () => {
       expect<
-        Unify.Unify<
-          | Effect.Effect<0, 1, 2>
-          | Effect.Effect<"a", "b", "c">
-        >
-      >().type.toBe<Effect.Effect<0 | "a", "b" | 1, "c" | 2>>()
-    })
+        Unify.Unify<Effect.Effect<0, 1, 2> | Effect.Effect<"a", "b", "c">>
+      >().type.toBe<Effect.Effect<0 | "a", "b" | 1, "c" | 2>>();
+    });
 
     it("should unify STM types", () => {
       expect<
-        Unify.Unify<
-          | STM.STM<0, 1, 2>
-          | STM.STM<"a", "b", "c">
-        >
-      >().type.toBe<STM.STM<0 | "a", "b" | 1, "c" | 2>>()
-    })
+        Unify.Unify<STM.STM<0, 1, 2> | STM.STM<"a", "b", "c">>
+      >().type.toBe<STM.STM<0 | "a", "b" | 1, "c" | 2>>();
+    });
 
     it("should unify Exit types", () => {
-      expect<Unify.Unify<Exit.Exit<0, 1> | Exit.Exit<"a", "b">>>()
-        .type.toBe<Exit.Exit<0 | "a", "b" | 1>>()
-    })
+      expect<Unify.Unify<Exit.Exit<0, 1> | Exit.Exit<"a", "b">>>().type.toBe<
+        Exit.Exit<0 | "a", "b" | 1>
+      >();
+    });
 
     it("should unify Ref types", () => {
-      expect<Unify.Unify<Ref.Ref<1> | Ref.Ref<"a">>>()
-        .type.toBe<Ref.Ref<1> | Ref.Ref<"a">>()
-    })
+      expect<Unify.Unify<Ref.Ref<1> | Ref.Ref<"a">>>().type.toBe<
+        Ref.Ref<1> | Ref.Ref<"a">
+      >();
+    });
 
     it("should unify SynchronizedRef types", () => {
       expect<
@@ -100,9 +106,11 @@ describe("Unify", () => {
           | SynchronizedRef.SynchronizedRef<1>
           | SynchronizedRef.SynchronizedRef<"a">
         >
-      >()
-        .type.toBe<SynchronizedRef.SynchronizedRef<1> | SynchronizedRef.SynchronizedRef<"a">>()
-    })
+      >().type.toBe<
+        | SynchronizedRef.SynchronizedRef<1>
+        | SynchronizedRef.SynchronizedRef<"a">
+      >();
+    });
 
     it("should unify SubscriptionRef types", () => {
       expect<
@@ -110,34 +118,41 @@ describe("Unify", () => {
           | SubscriptionRef.SubscriptionRef<1>
           | SubscriptionRef.SubscriptionRef<"a">
         >
-      >()
-        .type.toBe<SubscriptionRef.SubscriptionRef<1> | SubscriptionRef.SubscriptionRef<"a">>()
-    })
+      >().type.toBe<
+        | SubscriptionRef.SubscriptionRef<1>
+        | SubscriptionRef.SubscriptionRef<"a">
+      >();
+    });
 
     it("should unify RcRef types", () => {
-      expect<Unify.Unify<RcRef.RcRef<1, 2> | RcRef.RcRef<"a", "b">>>()
-        .type.toBe<RcRef.RcRef<"a" | 1, "b" | 2>>()
-    })
+      expect<
+        Unify.Unify<RcRef.RcRef<1, 2> | RcRef.RcRef<"a", "b">>
+      >().type.toBe<RcRef.RcRef<"a" | 1, "b" | 2>>();
+    });
 
     it("should unify Deferred types", () => {
-      expect<Unify.Unify<Deferred.Deferred<1, 2> | Deferred.Deferred<"a", "b">>>()
-        .type.toBe<Deferred.Deferred<1, 2> | Deferred.Deferred<"a", "b">>()
-    })
+      expect<
+        Unify.Unify<Deferred.Deferred<1, 2> | Deferred.Deferred<"a", "b">>
+      >().type.toBe<Deferred.Deferred<1, 2> | Deferred.Deferred<"a", "b">>();
+    });
 
     it("should unify FiberRef types", () => {
-      expect<Unify.Unify<FiberRef.FiberRef<1> | FiberRef.FiberRef<"a">>>()
-        .type.toBe<FiberRef.FiberRef<1> | FiberRef.FiberRef<"a">>()
-    })
+      expect<
+        Unify.Unify<FiberRef.FiberRef<1> | FiberRef.FiberRef<"a">>
+      >().type.toBe<FiberRef.FiberRef<1> | FiberRef.FiberRef<"a">>();
+    });
 
     it("should unify Fiber types", () => {
-      expect<Unify.Unify<Fiber.Fiber<1, 2> | Fiber.Fiber<"a", "b">>>()
-        .type.toBe<Fiber.Fiber<"a" | 1, "b" | 2>>()
-    })
+      expect<
+        Unify.Unify<Fiber.Fiber<1, 2> | Fiber.Fiber<"a", "b">>
+      >().type.toBe<Fiber.Fiber<"a" | 1, "b" | 2>>();
+    });
 
     it("should unify RuntimeFiber types", () => {
-      expect<Unify.Unify<Fiber.RuntimeFiber<1, 2> | Fiber.RuntimeFiber<"a", "b">>>()
-        .type.toBe<Fiber.RuntimeFiber<"a" | 1, "b" | 2>>()
-    })
+      expect<
+        Unify.Unify<Fiber.RuntimeFiber<1, 2> | Fiber.RuntimeFiber<"a", "b">>
+      >().type.toBe<Fiber.RuntimeFiber<"a" | 1, "b" | 2>>();
+    });
 
     it("should unify ManagedRuntime types", () => {
       expect<
@@ -145,34 +160,35 @@ describe("Unify", () => {
           | ManagedRuntime.ManagedRuntime<1, 2>
           | ManagedRuntime.ManagedRuntime<"a", "b">
         >
-      >().type.toBe<ManagedRuntime.ManagedRuntime<1, 2> | ManagedRuntime.ManagedRuntime<"a", "b">>()
-    })
+      >().type.toBe<
+        | ManagedRuntime.ManagedRuntime<1, 2>
+        | ManagedRuntime.ManagedRuntime<"a", "b">
+      >();
+    });
 
     it("should unify Queue types", () => {
-      expect<Unify.Unify<Queue.Queue<1> | Queue.Queue<"a">>>()
-        .type.toBe<Queue.Queue<1> | Queue.Queue<"a">>()
-    })
+      expect<Unify.Unify<Queue.Queue<1> | Queue.Queue<"a">>>().type.toBe<
+        Queue.Queue<1> | Queue.Queue<"a">
+      >();
+    });
 
     it("should unify Dequeue types", () => {
-      expect<Unify.Unify<Queue.Dequeue<1> | Queue.Dequeue<"a">>>()
-        .type.toBe<Queue.Dequeue<"a" | 1>>()
-    })
+      expect<Unify.Unify<Queue.Dequeue<1> | Queue.Dequeue<"a">>>().type.toBe<
+        Queue.Dequeue<"a" | 1>
+      >();
+    });
 
     it("should unify Pool types", () => {
       expect<
-        Unify.Unify<
-          | Pool.Pool<1, 2>
-          | Pool.Pool<"a", "b">
-          | Pool.Pool<"a", "c">
-        >
-      >()
-        .type.toBe<Pool.Pool<1, 2> | Pool.Pool<"a", "b" | "c">>()
-    })
+        Unify.Unify<Pool.Pool<1, 2> | Pool.Pool<"a", "b"> | Pool.Pool<"a", "c">>
+      >().type.toBe<Pool.Pool<1, 2> | Pool.Pool<"a", "b" | "c">>();
+    });
 
     it("should unify ScopedRef types", () => {
-      expect<Unify.Unify<ScopedRef.ScopedRef<1> | ScopedRef.ScopedRef<"a">>>()
-        .type.toBe<ScopedRef.ScopedRef<1> | ScopedRef.ScopedRef<"a">>()
-    })
+      expect<
+        Unify.Unify<ScopedRef.ScopedRef<1> | ScopedRef.ScopedRef<"a">>
+      >().type.toBe<ScopedRef.ScopedRef<1> | ScopedRef.ScopedRef<"a">>();
+    });
 
     it("should unify Resource types", () => {
       expect<
@@ -183,15 +199,14 @@ describe("Unify", () => {
           | Resource.Resource<"a", "b">
           | Resource.Resource<any, any>
         >
-      >()
-        .type.toBe<
+      >().type.toBe<
         | Resource.Resource<1, never>
         | Resource.Resource<never, 2>
         | Resource.Resource<1, 2>
         | Resource.Resource<"a", "b">
         | Resource.Resource<any, any>
-      >()
-    })
+      >();
+    });
 
     it("should unify a huge union", () => {
       expect<
@@ -238,8 +253,7 @@ describe("Unify", () => {
           | ManagedRuntime.ManagedRuntime<"a", "b">
           | 0
         >
-      >()
-        .type.toBe<
+      >().type.toBe<
         | Context.Tag<0, 1>
         | Context.Tag<"a", "b">
         | 0
@@ -272,24 +286,23 @@ describe("Unify", () => {
         | Fiber.RuntimeFiber<"a" | 1, 0 | "b">
         | Either.Either<"a" | 1, 0 | "b">
         | Effect.Effect<"a" | 1, 0 | "b", "R" | "R1">
-      >()
-    })
-  })
+      >();
+    });
+  });
 
   describe("unify", () => {
     it("should infer the type of Unify.unify for a function", () => {
       function f<N>(n: N) {
-        return Math.random() > 0 ? Either.right(n) : Either.left("ok")
+        return Math.random() > 0 ? Either.right(n) : Either.left("ok");
       }
-      type Expected = <N>(n: N) => Either.Either<N, string>
-      expect(Unify.unify(f))
-        .type.toBe<Expected>()
-    })
+      type Expected = <N>(n: N) => Either.Either<N, string>;
+      expect(Unify.unify(f)).type.toBe<Expected>();
+    });
 
     it("should unify a value using Unify.unify", () => {
       expect(
         Unify.unify(Math.random() > 0 ? Either.right(10) : Either.left("ok"))
-      ).type.toBe<Either.Either<number, string>>()
-    })
-  })
-})
+      ).type.toBe<Either.Either<number, string>>();
+    });
+  });
+});

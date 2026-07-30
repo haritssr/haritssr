@@ -2,8 +2,8 @@
  * @since 1.0.0
  */
 
-import type { Equal } from "effect/Equal"
-import * as internal from "./internal/pageWidth.js"
+import type { Equal } from "effect/Equal";
+import * as internal from "./internal/pageWidth.js";
 
 // -----------------------------------------------------------------------------
 // Models
@@ -13,13 +13,14 @@ import * as internal from "./internal/pageWidth.js"
  * @since 1.0.0
  * @category symbol
  */
-export const PageWidthTypeId: unique symbol = internal.PageWidthTypeId as PageWidthTypeId
+export const PageWidthTypeId: unique symbol =
+  internal.PageWidthTypeId as PageWidthTypeId;
 
 /**
  * @since 1.0.0
  * @category symbol
  */
-export type PageWidthTypeId = typeof PageWidthTypeId
+export type PageWidthTypeId = typeof PageWidthTypeId;
 
 /**
  * Represents the maximum number of characters that fit onto a single line in a
@@ -29,7 +30,7 @@ export type PageWidthTypeId = typeof PageWidthTypeId
  * @since 1.0.0
  * @category model
  */
-export type PageWidth = AvailablePerLine | Unbounded
+export type PageWidth = AvailablePerLine | Unbounded;
 
 /**
  * @since 1.0.0
@@ -40,7 +41,7 @@ export declare namespace PageWidth {
    * @category model
    */
   export interface Proto extends Equal {
-    readonly [PageWidthTypeId]: PageWidthTypeId
+    readonly [PageWidthTypeId]: PageWidthTypeId;
   }
 }
 
@@ -52,18 +53,18 @@ export declare namespace PageWidth {
  * @category model
  */
 export interface AvailablePerLine extends PageWidth.Proto {
-  readonly _tag: "AvailablePerLine"
+  readonly _tag: "AvailablePerLine";
   /**
    * The number of characters, including whitespace, that can fit on a single
    * line.
    */
-  readonly lineWidth: number
+  readonly lineWidth: number;
   /**
    * The fraction of the total page width that can be printed on. This allows
    * limiting the length of printable text per line. Values must be between
    * `0` and `1` (`0.4` to `1` is typical).
    */
-  readonly ribbonFraction: number
+  readonly ribbonFraction: number;
 }
 
 /**
@@ -74,7 +75,7 @@ export interface AvailablePerLine extends PageWidth.Proto {
  * @category model
  */
 export interface Unbounded extends PageWidth.Proto {
-  readonly _tag: "Unbounded"
+  readonly _tag: "Unbounded";
 }
 
 // -----------------------------------------------------------------------------
@@ -87,7 +88,7 @@ export interface Unbounded extends PageWidth.Proto {
  * @since 1.0.0
  * @category refinements
  */
-export const isPageWidth: (u: unknown) => u is PageWidth = internal.isPageWidth
+export const isPageWidth: (u: unknown) => u is PageWidth = internal.isPageWidth;
 
 /**
  * Returns `true` if the specified `PageWidth` is an `AvailablePerLine`, `false`
@@ -96,7 +97,8 @@ export const isPageWidth: (u: unknown) => u is PageWidth = internal.isPageWidth
  * @since 1.0.0
  * @category refinements
  */
-export const isAvailablePerLine: (self: PageWidth) => self is AvailablePerLine = internal.isAvailablePerLine
+export const isAvailablePerLine: (self: PageWidth) => self is AvailablePerLine =
+  internal.isAvailablePerLine;
 
 /**
  * Returns `true` if the specified `PageWidth` is an `Unbounded`, `false`
@@ -105,7 +107,8 @@ export const isAvailablePerLine: (self: PageWidth) => self is AvailablePerLine =
  * @since 1.0.0
  * @category refinements
  */
-export const isUnbounded: (self: PageWidth) => self is Unbounded = internal.isUnbounded
+export const isUnbounded: (self: PageWidth) => self is Unbounded =
+  internal.isUnbounded;
 
 // -----------------------------------------------------------------------------
 // Constructors
@@ -115,19 +118,22 @@ export const isUnbounded: (self: PageWidth) => self is Unbounded = internal.isUn
  * @since 1.0.0
  * @category constructors
  */
-export const availablePerLine: (lineWidth: number, ribbonFraction: number) => PageWidth = internal.availablePerLine
+export const availablePerLine: (
+  lineWidth: number,
+  ribbonFraction: number
+) => PageWidth = internal.availablePerLine;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const unbounded: PageWidth = internal.unbounded
+export const unbounded: PageWidth = internal.unbounded;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const defaultPageWidth: PageWidth = internal.defaultPageWidth
+export const defaultPageWidth: PageWidth = internal.defaultPageWidth;
 
 // -----------------------------------------------------------------------------
 // Utilities
@@ -144,4 +150,4 @@ export const remainingWidth: (
   ribbonFraction: number,
   lineIndent: number,
   currentColumn: number
-) => number = internal.remainingWidth
+) => number = internal.remainingWidth;

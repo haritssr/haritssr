@@ -5,11 +5,11 @@
  *
  * @since 2.0.0
  */
-import * as equivalence from "./Equivalence.js"
-import type { LazyArg } from "./Function.js"
-import { dual } from "./Function.js"
-import * as order from "./Order.js"
-import * as predicate from "./Predicate.js"
+import * as equivalence from "./Equivalence.js";
+import type { LazyArg } from "./Function.js";
+import { dual } from "./Function.js";
+import * as order from "./Order.js";
+import * as predicate from "./Predicate.js";
 
 /**
  * Tests if a value is a `boolean`.
@@ -26,7 +26,8 @@ import * as predicate from "./Predicate.js"
  * @category guards
  * @since 2.0.0
  */
-export const isBoolean: (input: unknown) => input is boolean = predicate.isBoolean
+export const isBoolean: (input: unknown) => input is boolean =
+  predicate.isBoolean;
 
 /**
  * This function returns the result of either of the given functions depending on the value of the boolean parameter.
@@ -45,29 +46,39 @@ export const isBoolean: (input: unknown) => input is boolean = predicate.isBoole
  */
 export const match: {
   <A, B = A>(options: {
-    readonly onFalse: LazyArg<A>
-    readonly onTrue: LazyArg<B>
-  }): (value: boolean) => A | B
-  <A, B>(value: boolean, options: {
-    readonly onFalse: LazyArg<A>
-    readonly onTrue: LazyArg<B>
-  }): A | B
-} = dual(2, <A, B>(value: boolean, options: {
-  readonly onFalse: LazyArg<A>
-  readonly onTrue: LazyArg<B>
-}): A | B => value ? options.onTrue() : options.onFalse())
+    readonly onFalse: LazyArg<A>;
+    readonly onTrue: LazyArg<B>;
+  }): (value: boolean) => A | B;
+  <A, B>(
+    value: boolean,
+    options: {
+      readonly onFalse: LazyArg<A>;
+      readonly onTrue: LazyArg<B>;
+    }
+  ): A | B;
+} = dual(
+  2,
+  <A, B>(
+    value: boolean,
+    options: {
+      readonly onFalse: LazyArg<A>;
+      readonly onTrue: LazyArg<B>;
+    }
+  ): A | B => (value ? options.onTrue() : options.onFalse())
+);
 
 /**
  * @category instances
  * @since 2.0.0
  */
-export const Equivalence: equivalence.Equivalence<boolean> = equivalence.boolean
+export const Equivalence: equivalence.Equivalence<boolean> =
+  equivalence.boolean;
 
 /**
  * @category instances
  * @since 2.0.0
  */
-export const Order: order.Order<boolean> = order.boolean
+export const Order: order.Order<boolean> = order.boolean;
 
 /**
  * Negates the given boolean: `!self`
@@ -84,7 +95,7 @@ export const Order: order.Order<boolean> = order.boolean
  * @category combinators
  * @since 2.0.0
  */
-export const not = (self: boolean): boolean => !self
+export const not = (self: boolean): boolean => !self;
 
 /**
  * Combines two boolean using AND: `self && that`.
@@ -104,9 +115,9 @@ export const not = (self: boolean): boolean => !self
  * @since 2.0.0
  */
 export const and: {
-  (that: boolean): (self: boolean) => boolean
-  (self: boolean, that: boolean): boolean
-} = dual(2, (self: boolean, that: boolean): boolean => self && that)
+  (that: boolean): (self: boolean) => boolean;
+  (self: boolean, that: boolean): boolean;
+} = dual(2, (self: boolean, that: boolean): boolean => self && that);
 
 /**
  * Combines two boolean using NAND: `!(self && that)`.
@@ -126,9 +137,9 @@ export const and: {
  * @since 2.0.0
  */
 export const nand: {
-  (that: boolean): (self: boolean) => boolean
-  (self: boolean, that: boolean): boolean
-} = dual(2, (self: boolean, that: boolean): boolean => !(self && that))
+  (that: boolean): (self: boolean) => boolean;
+  (self: boolean, that: boolean): boolean;
+} = dual(2, (self: boolean, that: boolean): boolean => !(self && that));
 
 /**
  * Combines two boolean using OR: `self || that`.
@@ -148,9 +159,9 @@ export const nand: {
  * @since 2.0.0
  */
 export const or: {
-  (that: boolean): (self: boolean) => boolean
-  (self: boolean, that: boolean): boolean
-} = dual(2, (self: boolean, that: boolean): boolean => self || that)
+  (that: boolean): (self: boolean) => boolean;
+  (self: boolean, that: boolean): boolean;
+} = dual(2, (self: boolean, that: boolean): boolean => self || that);
 
 /**
  * Combines two booleans using NOR: `!(self || that)`.
@@ -170,9 +181,9 @@ export const or: {
  * @since 2.0.0
  */
 export const nor: {
-  (that: boolean): (self: boolean) => boolean
-  (self: boolean, that: boolean): boolean
-} = dual(2, (self: boolean, that: boolean): boolean => !(self || that))
+  (that: boolean): (self: boolean) => boolean;
+  (self: boolean, that: boolean): boolean;
+} = dual(2, (self: boolean, that: boolean): boolean => !(self || that));
 
 /**
  * Combines two booleans using XOR: `(!self && that) || (self && !that)`.
@@ -192,9 +203,12 @@ export const nor: {
  * @since 2.0.0
  */
 export const xor: {
-  (that: boolean): (self: boolean) => boolean
-  (self: boolean, that: boolean): boolean
-} = dual(2, (self: boolean, that: boolean): boolean => (!self && that) || (self && !that))
+  (that: boolean): (self: boolean) => boolean;
+  (self: boolean, that: boolean): boolean;
+} = dual(
+  2,
+  (self: boolean, that: boolean): boolean => (!self && that) || (self && !that)
+);
 
 /**
  * Combines two booleans using EQV (aka XNOR): `!xor(self, that)`.
@@ -214,9 +228,9 @@ export const xor: {
  * @since 2.0.0
  */
 export const eqv: {
-  (that: boolean): (self: boolean) => boolean
-  (self: boolean, that: boolean): boolean
-} = dual(2, (self: boolean, that: boolean): boolean => !xor(self, that))
+  (that: boolean): (self: boolean) => boolean;
+  (self: boolean, that: boolean): boolean;
+} = dual(2, (self: boolean, that: boolean): boolean => !xor(self, that));
 
 /**
  * Combines two booleans using an implication: `(!self || that)`.
@@ -236,9 +250,9 @@ export const eqv: {
  * @since 2.0.0
  */
 export const implies: {
-  (that: boolean): (self: boolean) => boolean
-  (self: boolean, that: boolean): boolean
-} = dual(2, (self, that) => self ? that : true)
+  (that: boolean): (self: boolean) => boolean;
+  (self: boolean, that: boolean): boolean;
+} = dual(2, (self, that) => (self ? that : true));
 
 /**
  * This utility function is used to check if all the elements in a collection of boolean values are `true`.
@@ -257,11 +271,11 @@ export const implies: {
 export const every = (collection: Iterable<boolean>): boolean => {
   for (const b of collection) {
     if (!b) {
-      return false
+      return false;
     }
   }
-  return true
-}
+  return true;
+};
 
 /**
  * This utility function is used to check if at least one of the elements in a collection of boolean values is `true`.
@@ -280,8 +294,8 @@ export const every = (collection: Iterable<boolean>): boolean => {
 export const some = (collection: Iterable<boolean>): boolean => {
   for (const b of collection) {
     if (b) {
-      return true
+      return true;
     }
   }
-  return false
-}
+  return false;
+};

@@ -1,8 +1,8 @@
-import * as ParseResult from "effect/ParseResult"
-import * as S from "effect/Schema"
-import type { ParseOptions } from "effect/SchemaAST"
-import { Bench } from "tinybench"
-import { z } from "zod"
+import * as ParseResult from "effect/ParseResult";
+import * as S from "effect/Schema";
+import type { ParseOptions } from "effect/SchemaAST";
+import { Bench } from "tinybench";
+import { z } from "zod";
 
 /*
 ┌─────────┬──────────────────────────────────────────┬─────────────┬────────────────────┬──────────┬─────────┐
@@ -17,7 +17,7 @@ import { z } from "zod"
 └─────────┴──────────────────────────────────────────┴─────────────┴────────────────────┴──────────┴─────────┘
 */
 
-const bench = new Bench({ time: 1000 })
+const bench = new Bench({ time: 1000 });
 
 const UserZod = z.object({
   name: z.string().min(3).max(20),
@@ -27,9 +27,9 @@ const UserZod = z.object({
     number: z.number().min(0).max(120),
     city: z.string().min(3).max(200),
     country: z.string().min(3).max(200),
-    zip: z.string().min(3).max(200)
-  })
-})
+    zip: z.string().min(3).max(200),
+  }),
+});
 
 const schema = S.Struct({
   name: S.String.pipe(S.minLength(3), S.maxLength(20)),
@@ -39,9 +39,9 @@ const schema = S.Struct({
     number: S.Number.pipe(S.greaterThanOrEqualTo(0), S.lessThanOrEqualTo(120)),
     city: S.String.pipe(S.minLength(3), S.maxLength(200)),
     country: S.String.pipe(S.minLength(3), S.maxLength(200)),
-    zip: S.String.pipe(S.minLength(3), S.maxLength(200))
-  })
-})
+    zip: S.String.pipe(S.minLength(3), S.maxLength(200)),
+  }),
+});
 
 const good = {
   name: "Joe",
@@ -51,9 +51,9 @@ const good = {
     number: 12,
     city: "New York",
     country: "USA",
-    zip: "12345"
-  }
-}
+    zip: "12345",
+  },
+};
 
 const bad = {
   name: "Jo",
@@ -63,34 +63,34 @@ const bad = {
     number: 12,
     city: "New York",
     country: "USA",
-    zip: "12345"
-  }
-}
+    zip: "12345",
+  },
+};
 
-const schemaDecodeUnknownEither = S.decodeUnknownEither(schema)
-const parseResultDecodeUnknownEither = ParseResult.decodeUnknownEither(schema)
-const options: ParseOptions = { errors: "all" }
+const schemaDecodeUnknownEither = S.decodeUnknownEither(schema);
+const parseResultDecodeUnknownEither = ParseResult.decodeUnknownEither(schema);
+const options: ParseOptions = { errors: "all" };
 
 bench
-  .add("Schema.decodeUnknownEither (good)", function() {
-    schemaDecodeUnknownEither(good, options)
+  .add("Schema.decodeUnknownEither (good)", () => {
+    schemaDecodeUnknownEither(good, options);
   })
-  .add("ParseResult.decodeUnknownEither (good)", function() {
-    parseResultDecodeUnknownEither(good, options)
+  .add("ParseResult.decodeUnknownEither (good)", () => {
+    parseResultDecodeUnknownEither(good, options);
   })
-  .add("zod (good)", function() {
-    UserZod.safeParse(good)
+  .add("zod (good)", () => {
+    UserZod.safeParse(good);
   })
-  .add("Schema.decodeUnknownEither (bad)", function() {
-    schemaDecodeUnknownEither(bad, options)
+  .add("Schema.decodeUnknownEither (bad)", () => {
+    schemaDecodeUnknownEither(bad, options);
   })
-  .add("ParseResult.decodeUnknownEither (bad)", function() {
-    parseResultDecodeUnknownEither(bad, options)
+  .add("ParseResult.decodeUnknownEither (bad)", () => {
+    parseResultDecodeUnknownEither(bad, options);
   })
-  .add("zod (bad)", function() {
-    UserZod.safeParse(bad)
-  })
+  .add("zod (bad)", () => {
+    UserZod.safeParse(bad);
+  });
 
-await bench.run()
+await bench.run();
 
-console.table(bench.table())
+console.table(bench.table());

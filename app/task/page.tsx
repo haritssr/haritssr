@@ -3,7 +3,13 @@
 // link to /experiments/ui-explorations/task redirected to /task, see next.config.ts redirect()
 
 import { NumberField } from "@base-ui/react/number-field";
-import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import {
+  type FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import ExperimentPageBadge from "@/components/ExperimentPageBadge";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -47,7 +53,8 @@ export default function TaskPage() {
   const parsedNewOtherTaskDuration = Number(newOtherTaskDuration);
   // Duplicate title guard to keep title unique.
   const newOtherTaskTitleExists = tasks.some(
-    (task) => task.title.toLowerCase() === normalizedNewOtherTaskTitle.toLowerCase(),
+    (task) =>
+      task.title.toLowerCase() === normalizedNewOtherTaskTitle.toLowerCase()
   );
   // Enables Add button only when title/duration/uniqueness are valid.
   const canAddNewOtherTask =
@@ -74,33 +81,38 @@ export default function TaskPage() {
       });
       navigator.sendBeacon("/api/task", blob);
     },
-    [isHydratedFromDb],
+    [isHydratedFromDb]
   );
 
-  const handleProgressChange = useCallback((title: string, progress: number) => {
-    // Keep progress bounded for all updates.
-    const normalizedProgress = Math.max(0, Math.min(100, progress));
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.title === title
-          ? {
-              ...task,
-              progress: normalizedProgress,
-              type: normalizedProgress >= 100 ? "Done" : task.type,
-            }
-          : task,
-      ),
-    );
-  }, []);
+  const handleProgressChange = useCallback(
+    (title: string, progress: number) => {
+      // Keep progress bounded for all updates.
+      const normalizedProgress = Math.max(0, Math.min(100, progress));
+      setTasks((prev) =>
+        prev.map((task) =>
+          task.title === title
+            ? {
+                ...task,
+                progress: normalizedProgress,
+                type: normalizedProgress >= 100 ? "Done" : task.type,
+              }
+            : task
+        )
+      );
+    },
+    []
+  );
 
   const handleMarkDone = useCallback(
     (title: string) => {
       // Mark targeted task as Done in a single immutable update.
-      const nextTasks = tasks.map((task) => (task.title === title ? { ...task, type: "Done" as const } : task));
+      const nextTasks = tasks.map((task) =>
+        task.title === title ? { ...task, type: "Done" as const } : task
+      );
       setTasks(nextTasks);
       saveImmediately(nextTasks);
     },
-    [tasks, saveImmediately],
+    [tasks, saveImmediately]
   );
 
   const handleDeleteTask = useCallback(
@@ -110,7 +122,7 @@ export default function TaskPage() {
       setTasks(nextTasks);
       saveImmediately(nextTasks);
     },
-    [tasks, saveImmediately],
+    [tasks, saveImmediately]
   );
 
   const handleDoNow = useCallback(
@@ -125,14 +137,14 @@ export default function TaskPage() {
       const remainingTasks = tasks.filter((task) => task.title !== title);
       // Demote any existing active Now task back to Other.
       const nextTasks: Task[] = remainingTasks.map((task) =>
-        task.type === "Now" ? { ...task, type: "Other" as const } : task,
+        task.type === "Now" ? { ...task, type: "Other" as const } : task
       );
       nextTasks.push({ ...targetTask, type: "Now" });
 
       setTasks(nextTasks);
       saveImmediately(nextTasks);
     },
-    [tasks, saveImmediately],
+    [tasks, saveImmediately]
   );
 
   const handleMoveTask = useCallback(
@@ -150,7 +162,7 @@ export default function TaskPage() {
       setTasks(nextTasks);
       saveImmediately(nextTasks);
     },
-    [tasks, saveImmediately],
+    [tasks, saveImmediately]
   );
 
   const handleAddOtherTask = useCallback(
@@ -175,7 +187,13 @@ export default function TaskPage() {
       // Save immediately to prevent data loss on page reload
       saveImmediately(nextTasks);
     },
-    [canAddNewOtherTask, normalizedNewOtherTaskTitle, parsedNewOtherTaskDuration, tasks, saveImmediately],
+    [
+      canAddNewOtherTask,
+      normalizedNewOtherTaskTitle,
+      parsedNewOtherTaskDuration,
+      tasks,
+      saveImmediately,
+    ]
   );
 
   const handleResumeNow = useCallback(
@@ -184,7 +202,7 @@ export default function TaskPage() {
       setAutoStartTitle(title);
       handleDoNow(title);
     },
-    [handleDoNow],
+    [handleDoNow]
   );
 
   // Hydrates initial tasks from API once on mount.
@@ -220,8 +238,13 @@ export default function TaskPage() {
         }
 
         // Enforces single-Now invariant and captures demotion count.
-        const { demotedNowCount, sanitizedTasks: serverTasks } = sanitizeTasks(parsedTasks);
-        setDroppedNowCount(typeof body.droppedNowCount === "number" ? body.droppedNowCount : demotedNowCount);
+        const { demotedNowCount, sanitizedTasks: serverTasks } =
+          sanitizeTasks(parsedTasks);
+        setDroppedNowCount(
+          typeof body.droppedNowCount === "number"
+            ? body.droppedNowCount
+            : demotedNowCount
+        );
         setTasks(serverTasks.map((task) => ({ ...task })));
       } finally {
         if (!isCancelled) {
@@ -261,7 +284,9 @@ export default function TaskPage() {
           });
           if (!response.ok) {
             // Best-effort parsed API error response.
-            const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
+            const errorData = await response
+              .json()
+              .catch(() => ({ error: "Unknown error" }));
             console.error("Failed to save tasks:", errorData);
           }
         } catch (err) {
@@ -343,9 +368,12 @@ export default function TaskPage() {
         <InternalLink href="/task/architecture">Architecture</InternalLink>
       </section>
 
-      <form className="mt-10 flex flex-wrap items-center gap-2" onSubmit={handleAddOtherTask}>
+      <form
+        className="mt-10 flex flex-wrap items-center gap-2"
+        onSubmit={handleAddOtherTask}
+      >
         <input
-          className="rounded-lg corner-squircle border border-zinc-300 h-8 px-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none w-full sm:w-fit"
+          className="corner-squircle h-8 w-full rounded-lg border border-zinc-300 px-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none sm:w-fit"
           onChange={(event) => setNewOtherTaskTitle(event.currentTarget.value)}
           placeholder="Add new task here"
           type="text"
@@ -355,18 +383,20 @@ export default function TaskPage() {
         <NumberField.Root
           className="flex items-center"
           min={1}
-          onValueChange={(value) => setNewOtherTaskDuration(String(value ?? ""))}
+          onValueChange={(value) =>
+            setNewOtherTaskDuration(String(value ?? ""))
+          }
           step={1}
           value={newOtherTaskDuration ? Number(newOtherTaskDuration) : null}
         >
-          <NumberField.Decrement className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-l border-t border-b border-zinc-300 text-zinc-700 hover:bg-zinc-100">
+          <NumberField.Decrement className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-zinc-300 border-t border-b border-l text-zinc-700 hover:bg-zinc-100">
             −
           </NumberField.Decrement>
           <NumberField.Input
-            className="h-8 w-10 border border-zinc-300 px-2 py-1 text-center text-sm text-zinc-700 focus:text-blue-500 focus:border-blue-500 focus:outline-none"
+            className="h-8 w-10 border border-zinc-300 px-2 py-1 text-center text-sm text-zinc-700 focus:border-blue-500 focus:text-blue-500 focus:outline-none"
             ref={durationInputRef}
           />
-          <NumberField.Increment className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-r border-t border-b border-zinc-300 text-zinc-700 hover:bg-zinc-100">
+          <NumberField.Increment className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-zinc-300 border-t border-r border-b text-zinc-700 hover:bg-zinc-100">
             +
           </NumberField.Increment>
         </NumberField.Root>
@@ -381,7 +411,7 @@ export default function TaskPage() {
 
             return (
               <button
-                className={`cursor-pointer inline-flex items-center justify-center rounded-lg corner-squircle border w-8 h-8 text-sm ${presetClassName}`}
+                className={`corner-squircle inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border text-sm ${presetClassName}`}
                 key={preset.minutes}
                 onClick={() => {
                   setNewOtherTaskDuration(String(preset.minutes));
@@ -395,7 +425,7 @@ export default function TaskPage() {
           })}
         </div>
         <button
-          className="h-8 text-sm bg-zinc-700 px-3 corner-squircle rounded-lg text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-70"
+          className="corner-squircle h-8 rounded-lg bg-zinc-700 px-3 text-sm text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-70"
           disabled={!canAddNewOtherTask}
           type="submit"
         >
@@ -405,18 +435,23 @@ export default function TaskPage() {
 
       <Section title="Now">
         {droppedNowCount > 0 ? (
-          <div className="mb-2 rounded-lg border border-amber-300 bg-amber-50 px-2 py-1 text-sm text-amber-700">
-            Only one Now task is allowed. {droppedNowCount} extra Now task(s) were moved to Other.
+          <div className="mb-2 rounded-lg border border-amber-300 bg-amber-50 px-2 py-1 text-amber-700 text-sm">
+            Only one Now task is allowed. {droppedNowCount} extra Now task(s)
+            were moved to Other.
           </div>
         ) : null}
 
-        {nowTasks.length === 0 && <div className="text-sm text-zinc-400">Empty</div>}
+        {nowTasks.length === 0 && (
+          <div className="text-sm text-zinc-400">Empty</div>
+        )}
 
         {nowTasks.map((task) => (
           <TaskItem
             autoStart={autoStartTitle === task.title}
             key={task.title}
-            onAutoStartConsumed={(title) => setAutoStartTitle((prev) => (prev === title ? null : prev))}
+            onAutoStartConsumed={(title) =>
+              setAutoStartTitle((prev) => (prev === title ? null : prev))
+            }
             onDelete={handleDeleteTask}
             onMarkDone={handleMarkDone}
             onMoveTask={handleMoveTask}
@@ -428,7 +463,9 @@ export default function TaskPage() {
       </Section>
 
       <Section title="Tasks">
-        {otherTasks.length === 0 && <div className="text-sm text-zinc-400">Empty</div>}
+        {otherTasks.length === 0 && (
+          <div className="text-sm text-zinc-400">Empty</div>
+        )}
         {otherTasks.map((task) => (
           <TaskItem
             key={task.title}
@@ -443,11 +480,15 @@ export default function TaskPage() {
       </Section>
 
       {normalizedNewOtherTaskTitle.length > 0 && newOtherTaskTitleExists && (
-        <div className="mb-3 text-xs text-rose-500">Task title already exists.</div>
+        <div className="mb-3 text-rose-500 text-xs">
+          Task title already exists.
+        </div>
       )}
 
       <Section accordion={{ defaultOpen: false }} title="Done">
-        {doneTasks.length === 0 && <div className="text-sm text-zinc-500">Nothing is done today.</div>}
+        {doneTasks.length === 0 && (
+          <div className="text-sm text-zinc-500">Nothing is done today.</div>
+        )}
         {doneTasks.map((task) => (
           <TaskItem
             forceDonutProgress

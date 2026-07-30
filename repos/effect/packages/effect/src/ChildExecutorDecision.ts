@@ -1,25 +1,26 @@
 /**
  * @since 2.0.0
  */
-import * as internal from "./internal/channel/childExecutorDecision.js"
+import * as internal from "./internal/channel/childExecutorDecision.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const ChildExecutorDecisionTypeId: unique symbol = internal.ChildExecutorDecisionTypeId
+export const ChildExecutorDecisionTypeId: unique symbol =
+  internal.ChildExecutorDecisionTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type ChildExecutorDecisionTypeId = typeof ChildExecutorDecisionTypeId
+export type ChildExecutorDecisionTypeId = typeof ChildExecutorDecisionTypeId;
 
 /**
  * @since 2.0.0
  * @category models
  */
-export type ChildExecutorDecision = Continue | Close | Yield
+export type ChildExecutorDecision = Continue | Close | Yield;
 
 /**
  * @since 2.0.0
@@ -30,7 +31,7 @@ export declare namespace ChildExecutorDecision {
    * @category models
    */
   export interface Proto {
-    readonly [ChildExecutorDecisionTypeId]: ChildExecutorDecisionTypeId
+    readonly [ChildExecutorDecisionTypeId]: ChildExecutorDecisionTypeId;
   }
 }
 
@@ -41,7 +42,7 @@ export declare namespace ChildExecutorDecision {
  * @category models
  */
 export interface Continue extends ChildExecutorDecision.Proto {
-  readonly _tag: "Continue"
+  readonly _tag: "Continue";
 }
 
 /**
@@ -52,8 +53,8 @@ export interface Continue extends ChildExecutorDecision.Proto {
  * @category models
  */
 export interface Close extends ChildExecutorDecision.Proto {
-  readonly _tag: "Close"
-  readonly value: unknown
+  readonly _tag: "Close";
+  readonly value: unknown;
 }
 
 /**
@@ -64,26 +65,26 @@ export interface Close extends ChildExecutorDecision.Proto {
  * @category models
  */
 export interface Yield extends ChildExecutorDecision.Proto {
-  readonly _tag: "Yield"
+  readonly _tag: "Yield";
 }
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const Continue: (_: void) => ChildExecutorDecision = internal.Continue
+export const Continue: (_: void) => ChildExecutorDecision = internal.Continue;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const Close: (value: unknown) => ChildExecutorDecision = internal.Close
+export const Close: (value: unknown) => ChildExecutorDecision = internal.Close;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const Yield: (_: void) => ChildExecutorDecision = internal.Yield
+export const Yield: (_: void) => ChildExecutorDecision = internal.Yield;
 
 /**
  * Returns `true` if the specified value is a `ChildExecutorDecision`, `false`
@@ -92,7 +93,9 @@ export const Yield: (_: void) => ChildExecutorDecision = internal.Yield
  * @since 2.0.0
  * @category refinements
  */
-export const isChildExecutorDecision: (u: unknown) => u is ChildExecutorDecision = internal.isChildExecutorDecision
+export const isChildExecutorDecision: (
+  u: unknown
+) => u is ChildExecutorDecision = internal.isChildExecutorDecision;
 
 /**
  * Returns `true` if the specified `ChildExecutorDecision` is a `Continue`,
@@ -101,7 +104,8 @@ export const isChildExecutorDecision: (u: unknown) => u is ChildExecutorDecision
  * @since 2.0.0
  * @category refinements
  */
-export const isContinue: (self: ChildExecutorDecision) => self is Continue = internal.isContinue
+export const isContinue: (self: ChildExecutorDecision) => self is Continue =
+  internal.isContinue;
 
 /**
  * Returns `true` if the specified `ChildExecutorDecision` is a `Close`, `false`
@@ -110,7 +114,8 @@ export const isContinue: (self: ChildExecutorDecision) => self is Continue = int
  * @since 2.0.0
  * @category refinements
  */
-export const isClose: (self: ChildExecutorDecision) => self is Close = internal.isClose
+export const isClose: (self: ChildExecutorDecision) => self is Close =
+  internal.isClose;
 
 /**
  * Returns `true` if the specified `ChildExecutorDecision` is a `Yield`, `false`
@@ -119,7 +124,8 @@ export const isClose: (self: ChildExecutorDecision) => self is Close = internal.
  * @since 2.0.0
  * @category refinements
  */
-export const isYield: (self: ChildExecutorDecision) => self is Yield = internal.isYield
+export const isYield: (self: ChildExecutorDecision) => self is Yield =
+  internal.isYield;
 
 /**
  * Folds over a `ChildExecutorDecision` to produce a value of type `A`.
@@ -128,19 +134,17 @@ export const isYield: (self: ChildExecutorDecision) => self is Yield = internal.
  * @category folding
  */
 export const match: {
-  <A>(
-    options: {
-      readonly onContinue: () => A
-      readonly onClose: (value: unknown) => A
-      readonly onYield: () => A
-    }
-  ): (self: ChildExecutorDecision) => A
+  <A>(options: {
+    readonly onContinue: () => A;
+    readonly onClose: (value: unknown) => A;
+    readonly onYield: () => A;
+  }): (self: ChildExecutorDecision) => A;
   <A>(
     self: ChildExecutorDecision,
     options: {
-      readonly onContinue: () => A
-      readonly onClose: (value: unknown) => A
-      readonly onYield: () => A
+      readonly onContinue: () => A;
+      readonly onClose: (value: unknown) => A;
+      readonly onYield: () => A;
     }
-  ): A
-} = internal.match
+  ): A;
+} = internal.match;

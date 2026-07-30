@@ -15,7 +15,10 @@ export default function TimesTableDemo() {
 }
 
 export function IncrementButton() {
-  const [count, setCount] = useQueryState("count", parseAsInteger.withDefault(0));
+  const [count, setCount] = useQueryState(
+    "count",
+    parseAsInteger.withDefault(0)
+  );
 
   const [search, setSearch] = useQueryState("search", { defaultValue: " " });
   return (
@@ -27,7 +30,11 @@ export function IncrementButton() {
       >
         Count: {count}
       </button>
-      <input onChange={(e) => setSearch(e.target.value)} type="search" value={search} />
+      <input
+        onChange={(e) => setSearch(e.target.value)}
+        type="search"
+        value={search}
+      />
     </>
   );
 }
@@ -51,7 +58,9 @@ function TimesTableComponent() {
 
   return (
     <>
-      <div className="my-5 text-red-500">Attention: This app is not finished yet!</div>
+      <div className="my-5 text-red-500">
+        Attention: This app is not finished yet!
+      </div>
 
       <div className="flex space-x-2">
         {/* Row Head */}
@@ -142,7 +151,9 @@ function InputElement({
     if (Number.isNaN(numeric)) {
       return "";
     }
-    return row * col === numeric ? "bg-green-200 border-green-300" : "bg-red-200 border-red-300";
+    return row * col === numeric
+      ? "bg-green-200 border-green-300"
+      : "bg-red-200 border-red-300";
   }
 
   return (

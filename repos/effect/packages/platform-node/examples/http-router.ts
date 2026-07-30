@@ -1,40 +1,39 @@
+import { createServer } from "node:http";
 import {
   HttpMiddleware,
   HttpRouter,
   HttpServer,
   HttpServerRequest,
   HttpServerResponse,
-  Multipart
-} from "@effect/platform"
-import { NodeHttpServer, NodeRuntime } from "@effect/platform-node"
-import { Effect, Layer, Schedule, Stream } from "effect"
-import * as Schema from "effect/Schema"
-import { createServer } from "node:http"
+  Multipart,
+} from "@effect/platform";
+import { NodeHttpServer, NodeRuntime } from "@effect/platform-node";
+import { Effect, Layer, Schedule, Stream } from "effect";
+import * as Schema from "effect/Schema";
 
-const ServerLive = NodeHttpServer.layer(() => createServer(), { port: 3000 })
+const ServerLive = NodeHttpServer.layer(() => createServer(), { port: 3000 });
 
 const HttpLive = HttpRouter.empty.pipe(
   HttpRouter.get(
     "/",
-    Effect.map(
-      HttpServerRequest.HttpServerRequest,
-      (req) => HttpServerResponse.text(req.url)
+    Effect.map(HttpServerRequest.HttpServerRequest, (req) =>
+      HttpServerResponse.text(req.url)
     )
   ),
   HttpRouter.get(
     "/healthz",
-    HttpServerResponse.text("ok").pipe(
-      HttpMiddleware.withLoggerDisabled
-    )
+    HttpServerResponse.text("ok").pipe(HttpMiddleware.withLoggerDisabled)
   ),
   HttpRouter.post(
     "/upload",
-    Effect.gen(function*() {
-      const data = yield* HttpServerRequest.schemaBodyForm(Schema.Struct({
-        files: Multipart.FilesSchema
-      }))
-      console.log("got files", data.files)
-      return HttpServerResponse.empty()
+    Effect.gen(function* () {
+      const data = yield* HttpServerRequest.schemaBodyForm(
+        Schema.Struct({
+          files: Multipart.FilesSchema,
+        })
+      );
+      console.log("got files", data.files);
+      return HttpServerResponse.empty();
     })
   ),
   HttpRouter.get(
@@ -52,6 +51,6 @@ const HttpLive = HttpRouter.empty.pipe(
   HttpServer.serve(HttpMiddleware.logger),
   HttpServer.withLogAddress,
   Layer.provide(ServerLive)
-)
+);
 
-NodeRuntime.runMain(Layer.launch(HttpLive))
+NodeRuntime.runMain(Layer.launch(HttpLive));

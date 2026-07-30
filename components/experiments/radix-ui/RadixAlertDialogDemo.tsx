@@ -54,7 +54,7 @@ function AlertDialogDemo({
         {buttonTitle}
       </AlertDialog.Trigger>
       <AlertDialog.Overlay className="fixed inset-0 z-50 bg-gray-900/50" />
-      <AlertDialog.Content className="fixed top-1/2 left-1/2 z-90 max-h-[80vh] w-4/5 -translate-x-1/2 -translate-y-1/2 select-none rounded-md bg-white p-5 sm:max-w-screen-xs">
+      <AlertDialog.Content className="-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-90 max-h-[80vh] w-4/5 select-none rounded-md bg-white p-5 sm:max-w-screen-xs">
         <AlertDialog.Title className="text-center font-semibold text-gray-800 text-xl sm:text-left">
           {contentTitle}
         </AlertDialog.Title>

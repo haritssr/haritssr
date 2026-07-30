@@ -1,11 +1,11 @@
 /**
  * @since 1.0.0
  */
-import * as Cause from "effect/Cause"
-import * as Either from "effect/Either"
-import { dual } from "effect/Function"
-import * as Redacted from "effect/Redacted"
-import * as UrlParams from "./UrlParams.js"
+import * as Cause from "effect/Cause";
+import * as Either from "effect/Either";
+import { dual } from "effect/Function";
+import * as Redacted from "effect/Redacted";
+import * as UrlParams from "./UrlParams.js";
 
 /**
  * Parses a URL string into a `URL` object, returning an `Either` type for safe
@@ -57,14 +57,17 @@ import * as UrlParams from "./UrlParams.js"
  * @since 1.0.0
  * @category Constructors
  */
-export const fromString: {
-  (url: string, base?: string | URL | undefined): Either.Either<URL, Cause.IllegalArgumentException>
-} = (url, base) =>
+export const fromString: (
+  url: string,
+  base?: string | URL | undefined
+) => Either.Either<URL, Cause.IllegalArgumentException> = (url, base) =>
   Either.try({
     try: () => new URL(url, base),
     catch: (cause) =>
-      new Cause.IllegalArgumentException(cause instanceof globalThis.Error ? cause.message : "Invalid input")
-  })
+      new Cause.IllegalArgumentException(
+        cause instanceof globalThis.Error ? cause.message : "Invalid input"
+      ),
+  });
 
 /**
  * This function clones the original `URL` object and applies a callback to the
@@ -90,23 +93,26 @@ export const fromString: {
  * @category Modifiers
  */
 export const mutate: {
-  (f: (url: URL) => void): (self: URL) => URL
-  (self: URL, f: (url: URL) => void): URL
+  (f: (url: URL) => void): (self: URL) => URL;
+  (self: URL, f: (url: URL) => void): URL;
 } = dual(2, (self: URL, f: (url: URL) => void) => {
-  const copy = new URL(self)
-  f(copy)
-  return copy
-})
+  const copy = new URL(self);
+  f(copy);
+  return copy;
+});
 
 /** @internal */
-const immutableURLSetter = <P extends keyof URL, A = never>(property: P): {
-  (value: URL[P] | A): (url: URL) => URL
-  (url: URL, value: URL[P] | A): URL
+const immutableURLSetter = <P extends keyof URL, A = never>(
+  property: P
+): {
+  (value: URL[P] | A): (url: URL) => URL;
+  (url: URL, value: URL[P] | A): URL;
 } =>
   dual(2, (url: URL, value: URL[P]) =>
     mutate(url, (url) => {
-      url[property] = value
-    }))
+      url[property] = value;
+    })
+  );
 
 /**
  * Updates the hash fragment of the URL.
@@ -115,9 +121,9 @@ const immutableURLSetter = <P extends keyof URL, A = never>(property: P): {
  * @category Setters
  */
 export const setHash: {
-  (hash: string): (url: URL) => URL
-  (url: URL, hash: string): URL
-} = immutableURLSetter("hash")
+  (hash: string): (url: URL) => URL;
+  (url: URL, hash: string): URL;
+} = immutableURLSetter("hash");
 
 /**
  * Updates the host (domain and port) of the URL.
@@ -126,9 +132,9 @@ export const setHash: {
  * @category Setters
  */
 export const setHost: {
-  (host: string): (url: URL) => URL
-  (url: URL, host: string): URL
-} = immutableURLSetter("host")
+  (host: string): (url: URL) => URL;
+  (url: URL, host: string): URL;
+} = immutableURLSetter("host");
 
 /**
  * Updates the domain of the URL without modifying the port.
@@ -137,9 +143,9 @@ export const setHost: {
  * @category Setters
  */
 export const setHostname: {
-  (hostname: string): (url: URL) => URL
-  (url: URL, hostname: string): URL
-} = immutableURLSetter("hostname")
+  (hostname: string): (url: URL) => URL;
+  (url: URL, hostname: string): URL;
+} = immutableURLSetter("hostname");
 
 /**
  * Replaces the entire URL string.
@@ -148,9 +154,9 @@ export const setHostname: {
  * @category Setters
  */
 export const setHref: {
-  (href: string): (url: URL) => URL
-  (url: URL, href: string): URL
-} = immutableURLSetter("href")
+  (href: string): (url: URL) => URL;
+  (url: URL, href: string): URL;
+} = immutableURLSetter("href");
 
 /**
  * Updates the password used for authentication.
@@ -159,14 +165,14 @@ export const setHref: {
  * @category Setters
  */
 export const setPassword: {
-  (password: string | Redacted.Redacted): (url: URL) => URL
-  (url: URL, password: string | Redacted.Redacted): URL
+  (password: string | Redacted.Redacted): (url: URL) => URL;
+  (url: URL, password: string | Redacted.Redacted): URL;
 } = dual(2, (url: URL, password: string | Redacted.Redacted) =>
   mutate(url, (url) => {
-    url.password = typeof password === "string"
-      ? password :
-      Redacted.value(password)
-  }))
+    url.password =
+      typeof password === "string" ? password : Redacted.value(password);
+  })
+);
 
 /**
  * Updates the path of the URL.
@@ -175,9 +181,9 @@ export const setPassword: {
  * @category Setters
  */
 export const setPathname: {
-  (pathname: string): (url: URL) => URL
-  (url: URL, pathname: string): URL
-} = immutableURLSetter("pathname")
+  (pathname: string): (url: URL) => URL;
+  (url: URL, pathname: string): URL;
+} = immutableURLSetter("pathname");
 
 /**
  * Updates the port of the URL.
@@ -186,9 +192,9 @@ export const setPathname: {
  * @category Setters
  */
 export const setPort: {
-  (port: string | number): (url: URL) => URL
-  (url: URL, port: string | number): URL
-} = immutableURLSetter("port")
+  (port: string | number): (url: URL) => URL;
+  (url: URL, port: string | number): URL;
+} = immutableURLSetter("port");
 
 /**
  * Updates the protocol (e.g., `http`, `https`).
@@ -197,9 +203,9 @@ export const setPort: {
  * @category Setters
  */
 export const setProtocol: {
-  (protocol: string): (url: URL) => URL
-  (url: URL, protocol: string): URL
-} = immutableURLSetter("protocol")
+  (protocol: string): (url: URL) => URL;
+  (url: URL, protocol: string): URL;
+} = immutableURLSetter("protocol");
 
 /**
  * Updates the query string of the URL.
@@ -208,9 +214,9 @@ export const setProtocol: {
  * @category Setters
  */
 export const setSearch: {
-  (search: string): (url: URL) => URL
-  (url: URL, search: string): URL
-} = immutableURLSetter("search")
+  (search: string): (url: URL) => URL;
+  (url: URL, search: string): URL;
+} = immutableURLSetter("search");
 
 /**
  * Updates the username used for authentication.
@@ -219,9 +225,9 @@ export const setSearch: {
  * @category Setters
  */
 export const setUsername: {
-  (username: string): (url: URL) => URL
-  (url: URL, username: string): URL
-} = immutableURLSetter("username")
+  (username: string): (url: URL) => URL;
+  (url: URL, username: string): URL;
+} = immutableURLSetter("username");
 
 /**
  * Updates the query parameters of a URL.
@@ -253,12 +259,13 @@ export const setUsername: {
  * @category Setters
  */
 export const setUrlParams: {
-  (urlParams: UrlParams.UrlParams): (url: URL) => URL
-  (url: URL, urlParams: UrlParams.UrlParams): URL
+  (urlParams: UrlParams.UrlParams): (url: URL) => URL;
+  (url: URL, urlParams: UrlParams.UrlParams): URL;
 } = dual(2, (url: URL, searchParams: UrlParams.UrlParams) =>
   mutate(url, (url) => {
-    url.search = UrlParams.toString(searchParams)
-  }))
+    url.search = UrlParams.toString(searchParams);
+  })
+);
 
 /**
  * Retrieves the query parameters from a URL.
@@ -286,7 +293,8 @@ export const setUrlParams: {
  * @since 1.0.0
  * @category Getters
  */
-export const urlParams = (url: URL): UrlParams.UrlParams => UrlParams.fromInput(url.searchParams)
+export const urlParams = (url: URL): UrlParams.UrlParams =>
+  UrlParams.fromInput(url.searchParams);
 
 /**
  * Reads, modifies, and updates the query parameters of a URL.
@@ -315,10 +323,15 @@ export const urlParams = (url: URL): UrlParams.UrlParams => UrlParams.fromInput(
  * @category Modifiers
  */
 export const modifyUrlParams: {
-  (f: (urlParams: UrlParams.UrlParams) => UrlParams.UrlParams): (url: URL) => URL
-  (url: URL, f: (urlParams: UrlParams.UrlParams) => UrlParams.UrlParams): URL
-} = dual(2, (url: URL, f: (urlParams: UrlParams.UrlParams) => UrlParams.UrlParams) =>
-  mutate(url, (url) => {
-    const params = f(UrlParams.fromInput(url.searchParams))
-    url.search = UrlParams.toString(params)
-  }))
+  (
+    f: (urlParams: UrlParams.UrlParams) => UrlParams.UrlParams
+  ): (url: URL) => URL;
+  (url: URL, f: (urlParams: UrlParams.UrlParams) => UrlParams.UrlParams): URL;
+} = dual(
+  2,
+  (url: URL, f: (urlParams: UrlParams.UrlParams) => UrlParams.UrlParams) =>
+    mutate(url, (url) => {
+      const params = f(UrlParams.fromInput(url.searchParams));
+      url.search = UrlParams.toString(params);
+    })
+);

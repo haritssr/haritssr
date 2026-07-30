@@ -1,26 +1,26 @@
 /**
  * @since 2.0.0
  */
-import type * as Effect from "./Effect.js"
-import type * as Exit from "./Exit.js"
-import type * as Fiber from "./Fiber.js"
-import * as internal from "./internal/managedRuntime.js"
-import * as circular from "./internal/managedRuntime/circular.js"
-import type * as Layer from "./Layer.js"
-import type * as Runtime from "./Runtime.js"
-import type * as Unify from "./Unify.js"
+import type * as Effect from "./Effect.js";
+import type * as Exit from "./Exit.js";
+import type * as Fiber from "./Fiber.js";
+import * as circular from "./internal/managedRuntime/circular.js";
+import * as internal from "./internal/managedRuntime.js";
+import type * as Layer from "./Layer.js";
+import type * as Runtime from "./Runtime.js";
+import type * as Unify from "./Unify.js";
 
 /**
  * @since 3.9.0
  * @category symbol
  */
-export const TypeId: unique symbol = circular.TypeId as TypeId
+export const TypeId: unique symbol = circular.TypeId as TypeId;
 
 /**
  * @since 3.9.0
  * @category symbol
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * Checks if the provided argument is a `ManagedRuntime`.
@@ -28,7 +28,9 @@ export type TypeId = typeof TypeId
  * @since 3.9.0
  * @category guards
  */
-export const isManagedRuntime: (input: unknown) => input is ManagedRuntime<unknown, unknown> = internal.isManagedRuntime
+export const isManagedRuntime: (
+  input: unknown
+) => input is ManagedRuntime<unknown, unknown> = internal.isManagedRuntime;
 
 /**
  * @since 3.4.0
@@ -38,24 +40,32 @@ export declare namespace ManagedRuntime {
    * @category type-level
    * @since 3.4.0
    */
-  export type Context<T extends ManagedRuntime<never, any>> = [T] extends [ManagedRuntime<infer R, infer _E>] ? R
-    : never
+  export type Context<T extends ManagedRuntime<never, any>> = [T] extends [
+    ManagedRuntime<infer R, infer _E>,
+  ]
+    ? R
+    : never;
   /**
    * @category type-level
    * @since 3.4.0
    */
-  export type Error<T extends ManagedRuntime<never, any>> = [T] extends [ManagedRuntime<infer _R, infer E>] ? E : never
+  export type Error<T extends ManagedRuntime<never, any>> = [T] extends [
+    ManagedRuntime<infer _R, infer E>,
+  ]
+    ? E
+    : never;
 }
 
 /**
  * @since 2.0.0
  * @category models
  */
-export interface ManagedRuntime<in R, out ER> extends Effect.Effect<Runtime.Runtime<R>, ER> {
-  readonly [TypeId]: TypeId
-  readonly memoMap: Layer.MemoMap
-  readonly runtimeEffect: Effect.Effect<Runtime.Runtime<R>, ER>
-  readonly runtime: () => Promise<Runtime.Runtime<R>>
+export interface ManagedRuntime<in R, out ER>
+  extends Effect.Effect<Runtime.Runtime<R>, ER> {
+  readonly [TypeId]: TypeId;
+  readonly memoMap: Layer.MemoMap;
+  readonly runtimeEffect: Effect.Effect<Runtime.Runtime<R>, ER>;
+  readonly runtime: () => Promise<Runtime.Runtime<R>>;
 
   /**
    * Executes the effect using the provided Scheduler or using the global
@@ -64,7 +74,7 @@ export interface ManagedRuntime<in R, out ER> extends Effect.Effect<Runtime.Runt
   readonly runFork: <A, E>(
     self: Effect.Effect<A, E, R>,
     options?: Runtime.RunForkOptions
-  ) => Fiber.RuntimeFiber<A, E | ER>
+  ) => Fiber.RuntimeFiber<A, E | ER>;
 
   /**
    * Executes the effect synchronously returning the exit.
@@ -72,7 +82,9 @@ export interface ManagedRuntime<in R, out ER> extends Effect.Effect<Runtime.Runt
    * This method is effectful and should only be invoked at the edges of your
    * program.
    */
-  readonly runSyncExit: <A, E>(effect: Effect.Effect<A, E, R>) => Exit.Exit<A, ER | E>
+  readonly runSyncExit: <A, E>(
+    effect: Effect.Effect<A, E, R>
+  ) => Exit.Exit<A, ER | E>;
 
   /**
    * Executes the effect synchronously throwing in case of errors or async boundaries.
@@ -80,7 +92,7 @@ export interface ManagedRuntime<in R, out ER> extends Effect.Effect<Runtime.Runt
    * This method is effectful and should only be invoked at the edges of your
    * program.
    */
-  readonly runSync: <A, E>(effect: Effect.Effect<A, E, R>) => A
+  readonly runSync: <A, E>(effect: Effect.Effect<A, E, R>) => A;
 
   /**
    * Executes the effect asynchronously, eventually passing the exit value to
@@ -92,7 +104,7 @@ export interface ManagedRuntime<in R, out ER> extends Effect.Effect<Runtime.Runt
   readonly runCallback: <A, E>(
     effect: Effect.Effect<A, E, R>,
     options?: Runtime.RunCallbackOptions<A, E | ER> | undefined
-  ) => Runtime.Cancel<A, E | ER>
+  ) => Runtime.Cancel<A, E | ER>;
 
   /**
    * Runs the `Effect`, returning a JavaScript `Promise` that will be resolved
@@ -102,9 +114,12 @@ export interface ManagedRuntime<in R, out ER> extends Effect.Effect<Runtime.Runt
    * This method is effectful and should only be used at the edges of your
    * program.
    */
-  readonly runPromise: <A, E>(effect: Effect.Effect<A, E, R>, options?: {
-    readonly signal?: AbortSignal | undefined
-  }) => Promise<A>
+  readonly runPromise: <A, E>(
+    effect: Effect.Effect<A, E, R>,
+    options?: {
+      readonly signal?: AbortSignal | undefined;
+    }
+  ) => Promise<A>;
 
   /**
    * Runs the `Effect`, returning a JavaScript `Promise` that will be resolved
@@ -113,31 +128,35 @@ export interface ManagedRuntime<in R, out ER> extends Effect.Effect<Runtime.Runt
    * This method is effectful and should only be used at the edges of your
    * program.
    */
-  readonly runPromiseExit: <A, E>(effect: Effect.Effect<A, E, R>, options?: {
-    readonly signal?: AbortSignal | undefined
-  }) => Promise<Exit.Exit<A, ER | E>>
+  readonly runPromiseExit: <A, E>(
+    effect: Effect.Effect<A, E, R>,
+    options?: {
+      readonly signal?: AbortSignal | undefined;
+    }
+  ) => Promise<Exit.Exit<A, ER | E>>;
 
   /**
    * Dispose of the resources associated with the runtime.
    */
-  readonly dispose: () => Promise<void>
+  readonly dispose: () => Promise<void>;
 
   /**
    * Dispose of the resources associated with the runtime.
    */
-  readonly disposeEffect: Effect.Effect<void, never, never>
+  readonly disposeEffect: Effect.Effect<void, never, never>;
 
-  readonly [Unify.typeSymbol]?: unknown
-  readonly [Unify.unifySymbol]?: ManagedRuntimeUnify<this>
-  readonly [Unify.ignoreSymbol]?: ManagedRuntimeUnifyIgnore
+  readonly [Unify.typeSymbol]?: unknown;
+  readonly [Unify.unifySymbol]?: ManagedRuntimeUnify<this>;
+  readonly [Unify.ignoreSymbol]?: ManagedRuntimeUnifyIgnore;
 }
 
 /**
  * @category models
  * @since 3.9.0
  */
-export interface ManagedRuntimeUnify<A extends { [Unify.typeSymbol]?: any }> extends Effect.EffectUnify<A> {
-  ManagedRuntime?: () => Extract<A[Unify.typeSymbol], ManagedRuntime<any, any>>
+export interface ManagedRuntimeUnify<A extends { [Unify.typeSymbol]?: any }>
+  extends Effect.EffectUnify<A> {
+  ManagedRuntime?: () => Extract<A[Unify.typeSymbol], ManagedRuntime<any, any>>;
 }
 
 /**
@@ -145,7 +164,7 @@ export interface ManagedRuntimeUnify<A extends { [Unify.typeSymbol]?: any }> ext
  * @since 3.9.0
  */
 export interface ManagedRuntimeUnifyIgnore extends Effect.EffectUnifyIgnore {
-  Effect?: true
+  Effect?: true;
 }
 
 /**
@@ -177,4 +196,4 @@ export interface ManagedRuntimeUnifyIgnore extends Effect.EffectUnifyIgnore {
 export const make: <R, E>(
   layer: Layer.Layer<R, E, never>,
   memoMap?: Layer.MemoMap | undefined
-) => ManagedRuntime<R, E> = internal.make
+) => ManagedRuntime<R, E> = internal.make;

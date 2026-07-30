@@ -1,8 +1,8 @@
 /**
  * @since 1.0.0
  */
-import type { Color } from "./Color.js"
-import * as InternalAnsi from "./internal/ansi.js"
+import type { Color } from "./Color.js";
+import * as InternalAnsi from "./internal/ansi.js";
 
 // -----------------------------------------------------------------------------
 // Models
@@ -12,13 +12,13 @@ import * as InternalAnsi from "./internal/ansi.js"
  * @since 1.0.0
  * @category symbol
  */
-export const AnsiTypeId: unique symbol = InternalAnsi.AnsiTypeId as AnsiTypeId
+export const AnsiTypeId: unique symbol = InternalAnsi.AnsiTypeId as AnsiTypeId;
 
 /**
  * @since 1.0.0
  * @category symbol
  */
-export type AnsiTypeId = typeof AnsiTypeId
+export type AnsiTypeId = typeof AnsiTypeId;
 
 /**
  * @since 1.0.0
@@ -35,7 +35,7 @@ export declare namespace Ansi {
    * @category model
    */
   export interface Proto {
-    readonly [AnsiTypeId]: AnsiTypeId
+    readonly [AnsiTypeId]: AnsiTypeId;
   }
 }
 
@@ -47,25 +47,25 @@ export declare namespace Ansi {
  * @since 1.0.0
  * @category constructors
  */
-export const bold: Ansi = InternalAnsi.bold
+export const bold: Ansi = InternalAnsi.bold;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const italicized: Ansi = InternalAnsi.italicized
+export const italicized: Ansi = InternalAnsi.italicized;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const strikethrough: Ansi = InternalAnsi.strikethrough
+export const strikethrough: Ansi = InternalAnsi.strikethrough;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const underlined: Ansi = InternalAnsi.underlined
+export const underlined: Ansi = InternalAnsi.underlined;
 
 // -----------------------------------------------------------------------------
 // Color Constructors
@@ -75,217 +75,217 @@ export const underlined: Ansi = InternalAnsi.underlined
  * @since 1.0.0
  * @category constructors
  */
-export const color: (color: Color) => Ansi = InternalAnsi.color
+export const color: (color: Color) => Ansi = InternalAnsi.color;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const brightColor: (color: Color) => Ansi = InternalAnsi.brightColor
+export const brightColor: (color: Color) => Ansi = InternalAnsi.brightColor;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const bgColor: (color: Color) => Ansi = InternalAnsi.bgColor
+export const bgColor: (color: Color) => Ansi = InternalAnsi.bgColor;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const bgColorBright: (color: Color) => Ansi = InternalAnsi.bgColorBright
+export const bgColorBright: (color: Color) => Ansi = InternalAnsi.bgColorBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const black: Ansi = InternalAnsi.black
+export const black: Ansi = InternalAnsi.black;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const red: Ansi = InternalAnsi.red
+export const red: Ansi = InternalAnsi.red;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const green: Ansi = InternalAnsi.green
+export const green: Ansi = InternalAnsi.green;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const yellow: Ansi = InternalAnsi.yellow
+export const yellow: Ansi = InternalAnsi.yellow;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const blue: Ansi = InternalAnsi.blue
+export const blue: Ansi = InternalAnsi.blue;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const magenta: Ansi = InternalAnsi.magenta
+export const magenta: Ansi = InternalAnsi.magenta;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const cyan: Ansi = InternalAnsi.cyan
+export const cyan: Ansi = InternalAnsi.cyan;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const white: Ansi = InternalAnsi.white
+export const white: Ansi = InternalAnsi.white;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const blackBright: Ansi = InternalAnsi.blackBright
+export const blackBright: Ansi = InternalAnsi.blackBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const redBright: Ansi = InternalAnsi.redBright
+export const redBright: Ansi = InternalAnsi.redBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const greenBright: Ansi = InternalAnsi.greenBright
+export const greenBright: Ansi = InternalAnsi.greenBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const yellowBright: Ansi = InternalAnsi.yellowBright
+export const yellowBright: Ansi = InternalAnsi.yellowBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const blueBright: Ansi = InternalAnsi.blueBright
+export const blueBright: Ansi = InternalAnsi.blueBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const magentaBright: Ansi = InternalAnsi.magentaBright
+export const magentaBright: Ansi = InternalAnsi.magentaBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const cyanBright: Ansi = InternalAnsi.cyanBright
+export const cyanBright: Ansi = InternalAnsi.cyanBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const whiteBright: Ansi = InternalAnsi.whiteBright
+export const whiteBright: Ansi = InternalAnsi.whiteBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgBlack: Ansi = InternalAnsi.bgBlack
+export const bgBlack: Ansi = InternalAnsi.bgBlack;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgRed: Ansi = InternalAnsi.bgRed
+export const bgRed: Ansi = InternalAnsi.bgRed;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgGreen: Ansi = InternalAnsi.bgGreen
+export const bgGreen: Ansi = InternalAnsi.bgGreen;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgYellow: Ansi = InternalAnsi.bgYellow
+export const bgYellow: Ansi = InternalAnsi.bgYellow;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgBlue: Ansi = InternalAnsi.bgBlue
+export const bgBlue: Ansi = InternalAnsi.bgBlue;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgMagenta: Ansi = InternalAnsi.bgMagenta
+export const bgMagenta: Ansi = InternalAnsi.bgMagenta;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgCyan: Ansi = InternalAnsi.bgCyan
+export const bgCyan: Ansi = InternalAnsi.bgCyan;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgWhite: Ansi = InternalAnsi.bgWhite
+export const bgWhite: Ansi = InternalAnsi.bgWhite;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgBlackBright: Ansi = InternalAnsi.bgBlackBright
+export const bgBlackBright: Ansi = InternalAnsi.bgBlackBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgRedBright: Ansi = InternalAnsi.bgRedBright
+export const bgRedBright: Ansi = InternalAnsi.bgRedBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgGreenBright: Ansi = InternalAnsi.bgGreenBright
+export const bgGreenBright: Ansi = InternalAnsi.bgGreenBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgYellowBright: Ansi = InternalAnsi.bgYellowBright
+export const bgYellowBright: Ansi = InternalAnsi.bgYellowBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgBlueBright: Ansi = InternalAnsi.bgBlueBright
+export const bgBlueBright: Ansi = InternalAnsi.bgBlueBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgMagentaBright: Ansi = InternalAnsi.bgMagentaBright
+export const bgMagentaBright: Ansi = InternalAnsi.bgMagentaBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgCyanBright: Ansi = InternalAnsi.bgCyanBright
+export const bgCyanBright: Ansi = InternalAnsi.bgCyanBright;
 
 /**
  * @since 1.0.0
  * @category colors
  */
-export const bgWhiteBright: Ansi = InternalAnsi.bgWhiteBright
+export const bgWhiteBright: Ansi = InternalAnsi.bgWhiteBright;
 
 // -----------------------------------------------------------------------------
 // Command Constructors
@@ -297,7 +297,7 @@ export const bgWhiteBright: Ansi = InternalAnsi.bgWhiteBright
  * @since 1.0.0
  * @category commands
  */
-export const beep: Ansi = InternalAnsi.beep
+export const beep: Ansi = InternalAnsi.beep;
 
 /**
  * Moves the cursor to the specified `row` and `column`.
@@ -309,7 +309,8 @@ export const beep: Ansi = InternalAnsi.beep
  * @since 1.0.0
  * @category commands
  */
-export const cursorTo: (column: number, row?: number) => Ansi = InternalAnsi.cursorTo
+export const cursorTo: (column: number, row?: number) => Ansi =
+  InternalAnsi.cursorTo;
 
 /**
  * Move the cursor position the specified number of `rows` and `columns`
@@ -321,7 +322,8 @@ export const cursorTo: (column: number, row?: number) => Ansi = InternalAnsi.cur
  * @since 1.0.0
  * @category commands
  */
-export const cursorMove: (column: number, row?: number) => Ansi = InternalAnsi.cursorMove
+export const cursorMove: (column: number, row?: number) => Ansi =
+  InternalAnsi.cursorMove;
 
 /**
  * Moves the cursor up by the specified number of `lines` (default `1`) relative
@@ -332,7 +334,7 @@ export const cursorMove: (column: number, row?: number) => Ansi = InternalAnsi.c
  * @since 1.0.0
  * @category commands
  */
-export const cursorUp: (lines?: number) => Ansi = InternalAnsi.cursorUp
+export const cursorUp: (lines?: number) => Ansi = InternalAnsi.cursorUp;
 
 /**
  * Moves the cursor down by the specified number of `lines` (default `1`)
@@ -343,7 +345,7 @@ export const cursorUp: (lines?: number) => Ansi = InternalAnsi.cursorUp
  * @since 1.0.0
  * @category commands
  */
-export const cursorDown: (lines?: number) => Ansi = InternalAnsi.cursorDown
+export const cursorDown: (lines?: number) => Ansi = InternalAnsi.cursorDown;
 
 /**
  * Moves the cursor forward by the specified number of `columns` (default `1`)
@@ -354,7 +356,8 @@ export const cursorDown: (lines?: number) => Ansi = InternalAnsi.cursorDown
  * @since 1.0.0
  * @category commands
  */
-export const cursorForward: (columns?: number) => Ansi = InternalAnsi.cursorForward
+export const cursorForward: (columns?: number) => Ansi =
+  InternalAnsi.cursorForward;
 
 /**
  * Moves the cursor backward by the specified number of `columns` (default `1`)
@@ -365,7 +368,8 @@ export const cursorForward: (columns?: number) => Ansi = InternalAnsi.cursorForw
  * @since 1.0.0
  * @category commands
  */
-export const cursorBackward: (columns?: number) => Ansi = InternalAnsi.cursorBackward
+export const cursorBackward: (columns?: number) => Ansi =
+  InternalAnsi.cursorBackward;
 
 /**
  * Moves the cursor to the first column of the current row.
@@ -373,7 +377,7 @@ export const cursorBackward: (columns?: number) => Ansi = InternalAnsi.cursorBac
  * @since 1.0.0
  * @category commands
  */
-export const cursorLeft: Ansi = InternalAnsi.cursorLeft
+export const cursorLeft: Ansi = InternalAnsi.cursorLeft;
 
 /**
  * Saves the cursor position, encoding shift state and formatting attributes.
@@ -381,7 +385,7 @@ export const cursorLeft: Ansi = InternalAnsi.cursorLeft
  * @since 1.0.0
  * @category commands
  */
-export const cursorSavePosition: Ansi = InternalAnsi.cursorSavePosition
+export const cursorSavePosition: Ansi = InternalAnsi.cursorSavePosition;
 
 /**
  * Restores the cursor position, encoding shift state and formatting attributes
@@ -390,7 +394,7 @@ export const cursorSavePosition: Ansi = InternalAnsi.cursorSavePosition
  * @since 1.0.0
  * @category commands
  */
-export const cursorRestorePosition: Ansi = InternalAnsi.cursorRestorePosition
+export const cursorRestorePosition: Ansi = InternalAnsi.cursorRestorePosition;
 
 /**
  * Moves cursor to beginning of the line the specified number of rows down
@@ -399,7 +403,8 @@ export const cursorRestorePosition: Ansi = InternalAnsi.cursorRestorePosition
  * @since 1.0.0
  * @category commands
  */
-export const cursorNextLine: (rows?: number) => Ansi = InternalAnsi.cursorNextLine
+export const cursorNextLine: (rows?: number) => Ansi =
+  InternalAnsi.cursorNextLine;
 
 /**
  * Moves cursor to beginning of the line the specified number of rows up
@@ -408,7 +413,8 @@ export const cursorNextLine: (rows?: number) => Ansi = InternalAnsi.cursorNextLi
  * @since 1.0.0
  * @category commands
  */
-export const cursorPrevLine: (rows?: number) => Ansi = InternalAnsi.cursorPrevLine
+export const cursorPrevLine: (rows?: number) => Ansi =
+  InternalAnsi.cursorPrevLine;
 
 /**
  * Hides the cursor.
@@ -416,7 +422,7 @@ export const cursorPrevLine: (rows?: number) => Ansi = InternalAnsi.cursorPrevLi
  * @since 1.0.0
  * @category commands
  */
-export const cursorHide: Ansi = InternalAnsi.cursorHide
+export const cursorHide: Ansi = InternalAnsi.cursorHide;
 
 /**
  * Shows the cursor.
@@ -424,7 +430,7 @@ export const cursorHide: Ansi = InternalAnsi.cursorHide
  * @since 1.0.0
  * @category commands
  */
-export const cursorShow: Ansi = InternalAnsi.cursorShow
+export const cursorShow: Ansi = InternalAnsi.cursorShow;
 
 /**
  * Erase from the current cursor position up the specified amount of rows.
@@ -432,7 +438,7 @@ export const cursorShow: Ansi = InternalAnsi.cursorShow
  * @since 1.0.0
  * @category commands
  */
-export const eraseLines: (rows: number) => Ansi = InternalAnsi.eraseLines
+export const eraseLines: (rows: number) => Ansi = InternalAnsi.eraseLines;
 
 /**
  * Clears from the current cursor position to the end of the current line.
@@ -442,7 +448,7 @@ export const eraseLines: (rows: number) => Ansi = InternalAnsi.eraseLines
  * @since 1.0.0
  * @category commands
  */
-export const eraseEndLine: Ansi = InternalAnsi.eraseEndLine
+export const eraseEndLine: Ansi = InternalAnsi.eraseEndLine;
 
 /**
  * Clears from the current cursor position to the start of the current line.
@@ -452,7 +458,7 @@ export const eraseEndLine: Ansi = InternalAnsi.eraseEndLine
  * @since 1.0.0
  * @category commands
  */
-export const eraseStartLine: Ansi = InternalAnsi.eraseStartLine
+export const eraseStartLine: Ansi = InternalAnsi.eraseStartLine;
 
 /**
  * Clears the current line.
@@ -462,7 +468,7 @@ export const eraseStartLine: Ansi = InternalAnsi.eraseStartLine
  * @since 1.0.0
  * @category commands
  */
-export const eraseLine: Ansi = InternalAnsi.eraseLine
+export const eraseLine: Ansi = InternalAnsi.eraseLine;
 
 /**
  * Clears from the current cursor position to the end of the screen.
@@ -472,7 +478,7 @@ export const eraseLine: Ansi = InternalAnsi.eraseLine
  * @since 1.0.0
  * @category commands
  */
-export const eraseDown: Ansi = InternalAnsi.eraseDown
+export const eraseDown: Ansi = InternalAnsi.eraseDown;
 
 /**
  * Clears from the current cursor position to the beginning of the screen.
@@ -482,7 +488,7 @@ export const eraseDown: Ansi = InternalAnsi.eraseDown
  * @since 1.0.0
  * @category commands
  */
-export const eraseUp: Ansi = InternalAnsi.eraseUp
+export const eraseUp: Ansi = InternalAnsi.eraseUp;
 
 /**
  * Clears the entire screen and move the cursor to the upper left.
@@ -490,7 +496,7 @@ export const eraseUp: Ansi = InternalAnsi.eraseUp
  * @since 1.0.0
  * @category commands
  */
-export const eraseScreen: Ansi = InternalAnsi.eraseScreen
+export const eraseScreen: Ansi = InternalAnsi.eraseScreen;
 
 // -----------------------------------------------------------------------------
 // Destructors
@@ -500,7 +506,7 @@ export const eraseScreen: Ansi = InternalAnsi.eraseScreen
  * @since 1.0.0
  * @category destructors
  */
-export const stringify: (self: Ansi) => string = InternalAnsi.stringify
+export const stringify: (self: Ansi) => string = InternalAnsi.stringify;
 
 // -----------------------------------------------------------------------------
 // Instances
@@ -511,6 +517,6 @@ export const stringify: (self: Ansi) => string = InternalAnsi.stringify
  * @categrory combinators
  */
 export const combine: {
-  (that: Ansi): (self: Ansi) => Ansi
-  (self: Ansi, that: Ansi): Ansi
-} = InternalAnsi.combine
+  (that: Ansi): (self: Ansi) => Ansi;
+  (self: Ansi, that: Ansi): Ansi;
+} = InternalAnsi.combine;

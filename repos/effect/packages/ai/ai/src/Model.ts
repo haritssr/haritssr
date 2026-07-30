@@ -27,11 +27,11 @@
  *
  * @since 1.0.0
  */
-import * as Context from "effect/Context"
-import * as Effect from "effect/Effect"
-import { CommitPrototype } from "effect/Effectable"
-import { identity } from "effect/Function"
-import * as Layer from "effect/Layer"
+import * as Context from "effect/Context";
+import * as Effect from "effect/Effect";
+import { CommitPrototype } from "effect/Effectable";
+import { identity } from "effect/Function";
+import * as Layer from "effect/Layer";
 
 /**
  * Unique identifier for Model instances.
@@ -39,7 +39,7 @@ import * as Layer from "effect/Layer"
  * @since 1.0.0
  * @category Type Ids
  */
-export const TypeId = "~@effect/ai/Model"
+export const TypeId = "~@effect/ai/Model";
 
 /**
  * Type-level representation of the Model identifier.
@@ -47,7 +47,7 @@ export const TypeId = "~@effect/ai/Model"
  * @since 1.0.0
  * @category Type Ids
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * A Model represents a provider-specific AI service.
@@ -67,15 +67,13 @@ export type TypeId = typeof TypeId
  * @category Models
  */
 export interface Model<in out Provider, in out Provides, in out Requires>
-  extends
-    Layer.Layer<Provides | ProviderName, never, Requires>,
-    Effect.Effect<Layer.Layer<Provides | ProviderName>, never, Requires>
-{
-  readonly [TypeId]: TypeId
+  extends Layer.Layer<Provides | ProviderName, never, Requires>,
+    Effect.Effect<Layer.Layer<Provides | ProviderName>, never, Requires> {
+  readonly [TypeId]: TypeId;
   /**
    * The provider identifier (e.g., "openai", "anthropic", "amazon-bedrock").
    */
-  readonly provider: Provider
+  readonly provider: Provider;
 }
 
 /**
@@ -99,14 +97,14 @@ const ModelProto = {
   [Layer.LayerTypeId]: {
     _ROut: identity,
     _E: identity,
-    _RIn: identity
+    _RIn: identity,
   },
   commit(this: Model<any, any, any>) {
     return Effect.contextWith((context: Context.Context<never>) => {
-      return Layer.provide(this, Layer.succeedContext(context))
-    })
-  }
-}
+      return Layer.provide(this, Layer.succeedContext(context));
+    });
+  },
+};
 
 /**
  * Creates a Model from a provider name and a Layer that constructs AI services.
@@ -152,4 +150,4 @@ export const make = <const Provider extends string, Provides, Requires>(
     Object.create(ModelProto),
     { provider },
     Layer.merge(Layer.succeed(ProviderName, provider), layer)
-  )
+  );

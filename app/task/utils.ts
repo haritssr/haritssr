@@ -18,7 +18,10 @@ export function isTask(candidate: unknown): candidate is TaskLike {
     Number.isFinite(task.duration) &&
     typeof task.progress === "number" &&
     Number.isFinite(task.progress) &&
-    (task.type === "Now" || task.type === "Other" || task.type === "Done" || task.type === "Queue")
+    (task.type === "Now" ||
+      task.type === "Other" ||
+      task.type === "Done" ||
+      task.type === "Queue")
   );
 }
 

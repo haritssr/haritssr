@@ -1,20 +1,20 @@
 /**
  * @since 2.0.0
  */
-import type * as Cause from "./Cause.js"
-import * as internal from "./internal/configError.js"
+import type * as Cause from "./Cause.js";
+import * as internal from "./internal/configError.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const ConfigErrorTypeId: unique symbol = internal.ConfigErrorTypeId
+export const ConfigErrorTypeId: unique symbol = internal.ConfigErrorTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type ConfigErrorTypeId = typeof ConfigErrorTypeId
+export type ConfigErrorTypeId = typeof ConfigErrorTypeId;
 
 /**
  * The possible ways that loading configuration data may fail.
@@ -28,7 +28,7 @@ export type ConfigError =
   | InvalidData
   | MissingData
   | SourceUnavailable
-  | Unsupported
+  | Unsupported;
 
 /**
  * @since 2.0.0
@@ -39,15 +39,15 @@ export declare namespace ConfigError {
    * @category models
    */
   export interface Proto {
-    readonly _tag: "ConfigError"
-    readonly [ConfigErrorTypeId]: ConfigErrorTypeId
+    readonly _tag: "ConfigError";
+    readonly [ConfigErrorTypeId]: ConfigErrorTypeId;
   }
 
   /**
    * @since 2.0.0
    * @category models
    */
-  export type Reducer<C, Z> = ConfigErrorReducer<C, Z>
+  export type Reducer<C, Z> = ConfigErrorReducer<C, Z>;
 }
 
 /**
@@ -55,17 +55,17 @@ export declare namespace ConfigError {
  * @category models
  */
 export interface ConfigErrorReducer<in C, in out Z> {
-  andCase(context: C, left: Z, right: Z): Z
-  orCase(context: C, left: Z, right: Z): Z
-  invalidDataCase(context: C, path: Array<string>, message: string): Z
-  missingDataCase(context: C, path: Array<string>, message: string): Z
+  andCase(context: C, left: Z, right: Z): Z;
+  orCase(context: C, left: Z, right: Z): Z;
+  invalidDataCase(context: C, path: Array<string>, message: string): Z;
+  missingDataCase(context: C, path: Array<string>, message: string): Z;
   sourceUnavailableCase(
     context: C,
     path: Array<string>,
     message: string,
     cause: Cause.Cause<unknown>
-  ): Z
-  unsupportedCase(context: C, path: Array<string>, message: string): Z
+  ): Z;
+  unsupportedCase(context: C, path: Array<string>, message: string): Z;
 }
 
 /**
@@ -73,10 +73,10 @@ export interface ConfigErrorReducer<in C, in out Z> {
  * @category models
  */
 export interface And extends ConfigError.Proto {
-  readonly _op: "And"
-  readonly left: ConfigError
-  readonly right: ConfigError
-  readonly message: string
+  readonly _op: "And";
+  readonly left: ConfigError;
+  readonly right: ConfigError;
+  readonly message: string;
 }
 
 /**
@@ -84,10 +84,10 @@ export interface And extends ConfigError.Proto {
  * @category models
  */
 export interface Or extends ConfigError.Proto {
-  readonly _op: "Or"
-  readonly left: ConfigError
-  readonly right: ConfigError
-  readonly message: string
+  readonly _op: "Or";
+  readonly left: ConfigError;
+  readonly right: ConfigError;
+  readonly message: string;
 }
 
 /**
@@ -95,9 +95,9 @@ export interface Or extends ConfigError.Proto {
  * @category models
  */
 export interface InvalidData extends ConfigError.Proto {
-  readonly _op: "InvalidData"
-  readonly path: Array<string>
-  readonly message: string
+  readonly _op: "InvalidData";
+  readonly path: Array<string>;
+  readonly message: string;
 }
 
 /**
@@ -105,9 +105,9 @@ export interface InvalidData extends ConfigError.Proto {
  * @category models
  */
 export interface MissingData extends ConfigError.Proto {
-  readonly _op: "MissingData"
-  readonly path: Array<string>
-  readonly message: string
+  readonly _op: "MissingData";
+  readonly path: Array<string>;
+  readonly message: string;
 }
 
 /**
@@ -115,10 +115,10 @@ export interface MissingData extends ConfigError.Proto {
  * @category models
  */
 export interface SourceUnavailable extends ConfigError.Proto {
-  readonly _op: "SourceUnavailable"
-  readonly path: Array<string>
-  readonly message: string
-  readonly cause: Cause.Cause<unknown>
+  readonly _op: "SourceUnavailable";
+  readonly path: Array<string>;
+  readonly message: string;
+  readonly cause: Cause.Cause<unknown>;
 }
 
 /**
@@ -126,9 +126,9 @@ export interface SourceUnavailable extends ConfigError.Proto {
  * @category models
  */
 export interface Unsupported extends ConfigError.Proto {
-  readonly _op: "Unsupported"
-  readonly path: Array<string>
-  readonly message: string
+  readonly _op: "Unsupported";
+  readonly path: Array<string>;
+  readonly message: string;
 }
 
 /**
@@ -136,34 +136,42 @@ export interface Unsupported extends ConfigError.Proto {
  * @category models
  */
 export interface Options {
-  readonly pathDelim: string
+  readonly pathDelim: string;
 }
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const And: (self: ConfigError, that: ConfigError) => ConfigError = internal.And
+export const And: (self: ConfigError, that: ConfigError) => ConfigError =
+  internal.And;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const Or: (self: ConfigError, that: ConfigError) => ConfigError = internal.Or
+export const Or: (self: ConfigError, that: ConfigError) => ConfigError =
+  internal.Or;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const MissingData: (path: Array<string>, message: string, options?: Options) => ConfigError =
-  internal.MissingData
+export const MissingData: (
+  path: Array<string>,
+  message: string,
+  options?: Options
+) => ConfigError = internal.MissingData;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const InvalidData: (path: Array<string>, message: string, options?: Options) => ConfigError =
-  internal.InvalidData
+export const InvalidData: (
+  path: Array<string>,
+  message: string,
+  options?: Options
+) => ConfigError = internal.InvalidData;
 
 /**
  * @since 2.0.0
@@ -174,14 +182,17 @@ export const SourceUnavailable: (
   message: string,
   cause: Cause.Cause<unknown>,
   options?: Options
-) => ConfigError = internal.SourceUnavailable
+) => ConfigError = internal.SourceUnavailable;
 
 /**
  * @since 2.0.0
  * @category constructors
  */
-export const Unsupported: (path: Array<string>, message: string, options?: Options) => ConfigError =
-  internal.Unsupported
+export const Unsupported: (
+  path: Array<string>,
+  message: string,
+  options?: Options
+) => ConfigError = internal.Unsupported;
 
 /**
  * Returns `true` if the specified value is a `ConfigError`, `false` otherwise.
@@ -189,7 +200,8 @@ export const Unsupported: (path: Array<string>, message: string, options?: Optio
  * @since 2.0.0
  * @category refinements
  */
-export const isConfigError: (u: unknown) => u is ConfigError = internal.isConfigError
+export const isConfigError: (u: unknown) => u is ConfigError =
+  internal.isConfigError;
 
 /**
  * Returns `true` if the specified `ConfigError` is an `And`, `false` otherwise.
@@ -197,7 +209,7 @@ export const isConfigError: (u: unknown) => u is ConfigError = internal.isConfig
  * @since 2.0.0
  * @category refinements
  */
-export const isAnd: (self: ConfigError) => self is And = internal.isAnd
+export const isAnd: (self: ConfigError) => self is And = internal.isAnd;
 
 /**
  * Returns `true` if the specified `ConfigError` is an `Or`, `false` otherwise.
@@ -205,7 +217,7 @@ export const isAnd: (self: ConfigError) => self is And = internal.isAnd
  * @since 2.0.0
  * @category refinements
  */
-export const isOr: (self: ConfigError) => self is Or = internal.isOr
+export const isOr: (self: ConfigError) => self is Or = internal.isOr;
 
 /**
  * Returns `true` if the specified `ConfigError` is an `InvalidData`, `false`
@@ -214,7 +226,8 @@ export const isOr: (self: ConfigError) => self is Or = internal.isOr
  * @since 2.0.0
  * @category refinements
  */
-export const isInvalidData: (self: ConfigError) => self is InvalidData = internal.isInvalidData
+export const isInvalidData: (self: ConfigError) => self is InvalidData =
+  internal.isInvalidData;
 
 /**
  * Returns `true` if the specified `ConfigError` is an `MissingData`, `false`
@@ -223,7 +236,8 @@ export const isInvalidData: (self: ConfigError) => self is InvalidData = interna
  * @since 2.0.0
  * @category refinements
  */
-export const isMissingData: (self: ConfigError) => self is MissingData = internal.isMissingData
+export const isMissingData: (self: ConfigError) => self is MissingData =
+  internal.isMissingData;
 
 /**
  * Returns `true` if the specified `ConfigError` contains only `MissingData` errors, `false` otherwise.
@@ -231,7 +245,8 @@ export const isMissingData: (self: ConfigError) => self is MissingData = interna
  * @since 2.0.0
  * @categer getters
  */
-export const isMissingDataOnly: (self: ConfigError) => boolean = internal.isMissingDataOnly
+export const isMissingDataOnly: (self: ConfigError) => boolean =
+  internal.isMissingDataOnly;
 
 /**
  * Returns `true` if the specified `ConfigError` is a `SourceUnavailable`,
@@ -240,7 +255,9 @@ export const isMissingDataOnly: (self: ConfigError) => boolean = internal.isMiss
  * @since 2.0.0
  * @category refinements
  */
-export const isSourceUnavailable: (self: ConfigError) => self is SourceUnavailable = internal.isSourceUnavailable
+export const isSourceUnavailable: (
+  self: ConfigError
+) => self is SourceUnavailable = internal.isSourceUnavailable;
 
 /**
  * Returns `true` if the specified `ConfigError` is an `Unsupported`, `false`
@@ -249,22 +266,26 @@ export const isSourceUnavailable: (self: ConfigError) => self is SourceUnavailab
  * @since 2.0.0
  * @category refinements
  */
-export const isUnsupported: (self: ConfigError) => self is Unsupported = internal.isUnsupported
+export const isUnsupported: (self: ConfigError) => self is Unsupported =
+  internal.isUnsupported;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const prefixed: {
-  (prefix: Array<string>): (self: ConfigError) => ConfigError
-  (self: ConfigError, prefix: Array<string>): ConfigError
-} = internal.prefixed
+  (prefix: Array<string>): (self: ConfigError) => ConfigError;
+  (self: ConfigError, prefix: Array<string>): ConfigError;
+} = internal.prefixed;
 
 /**
  * @since 2.0.0
  * @category folding
  */
 export const reduceWithContext: {
-  <C, Z>(context: C, reducer: ConfigErrorReducer<C, Z>): (self: ConfigError) => Z
-  <C, Z>(self: ConfigError, context: C, reducer: ConfigErrorReducer<C, Z>): Z
-} = internal.reduceWithContext
+  <C, Z>(
+    context: C,
+    reducer: ConfigErrorReducer<C, Z>
+  ): (self: ConfigError) => Z;
+  <C, Z>(self: ConfigError, context: C, reducer: ConfigErrorReducer<C, Z>): Z;
+} = internal.reduceWithContext;

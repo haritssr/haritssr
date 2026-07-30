@@ -1,27 +1,27 @@
 /**
  * @since 1.0.0
  */
-import * as AiError from "@effect/ai/AiError"
-import * as Sse from "@effect/experimental/Sse"
-import * as Headers from "@effect/platform/Headers"
-import * as HttpBody from "@effect/platform/HttpBody"
-import * as HttpClient from "@effect/platform/HttpClient"
-import * as HttpClientError from "@effect/platform/HttpClientError"
-import * as HttpClientRequest from "@effect/platform/HttpClientRequest"
-import * as Arr from "effect/Array"
-import * as Chunk from "effect/Chunk"
-import * as Config from "effect/Config"
-import type { ConfigError } from "effect/ConfigError"
-import * as Context from "effect/Context"
-import * as Effect from "effect/Effect"
-import { identity } from "effect/Function"
-import * as Layer from "effect/Layer"
-import * as Redacted from "effect/Redacted"
-import * as Schema from "effect/Schema"
-import type * as Scope from "effect/Scope"
-import * as Stream from "effect/Stream"
-import { AnthropicConfig } from "./AnthropicConfig.js"
-import * as Generated from "./Generated.js"
+import * as AiError from "@effect/ai/AiError";
+import * as Sse from "@effect/experimental/Sse";
+import * as Headers from "@effect/platform/Headers";
+import * as HttpBody from "@effect/platform/HttpBody";
+import * as HttpClient from "@effect/platform/HttpClient";
+import * as HttpClientError from "@effect/platform/HttpClientError";
+import * as HttpClientRequest from "@effect/platform/HttpClientRequest";
+import * as Arr from "effect/Array";
+import * as Chunk from "effect/Chunk";
+import * as Config from "effect/Config";
+import type { ConfigError } from "effect/ConfigError";
+import * as Context from "effect/Context";
+import * as Effect from "effect/Effect";
+import { identity } from "effect/Function";
+import * as Layer from "effect/Layer";
+import * as Redacted from "effect/Redacted";
+import * as Schema from "effect/Schema";
+import type * as Scope from "effect/Scope";
+import * as Stream from "effect/Stream";
+import { AnthropicConfig } from "./AnthropicConfig.js";
+import * as Generated from "./Generated.js";
 
 /**
  * @since 1.0.0
@@ -59,22 +59,29 @@ export interface Service {
    * The client automatically handles authentication and follows Anthropic's
    * API conventions for request formatting and error handling.
    */
-  readonly client: Generated.Client
+  readonly client: Generated.Client;
 
   readonly streamRequest: <A, I, R>(
     request: HttpClientRequest.HttpClientRequest,
     schema: Schema.Schema<A, I, R>
-  ) => Stream.Stream<A, AiError.AiError, R>
+  ) => Stream.Stream<A, AiError.AiError, R>;
 
   readonly createMessage: (options: {
-    readonly params?: typeof Generated.BetaMessagesPostParams.Encoded | undefined
-    readonly payload: typeof Generated.BetaCreateMessageParams.Encoded
-  }) => Effect.Effect<Generated.BetaMessage, AiError.AiError>
+    readonly params?:
+      | typeof Generated.BetaMessagesPostParams.Encoded
+      | undefined;
+    readonly payload: typeof Generated.BetaCreateMessageParams.Encoded;
+  }) => Effect.Effect<Generated.BetaMessage, AiError.AiError>;
 
   readonly createMessageStream: (options: {
-    readonly params?: typeof Generated.BetaMessagesPostParams.Encoded | undefined
-    readonly payload: Omit<typeof Generated.BetaCreateMessageParams.Encoded, "stream">
-  }) => Stream.Stream<MessageStreamEvent, AiError.AiError>
+    readonly params?:
+      | typeof Generated.BetaMessagesPostParams.Encoded
+      | undefined;
+    readonly payload: Omit<
+      typeof Generated.BetaCreateMessageParams.Encoded,
+      "stream"
+    >;
+  }) => Stream.Stream<MessageStreamEvent, AiError.AiError>;
 }
 
 /**
@@ -96,7 +103,7 @@ export const make: (options: {
    * (e.g., environment-based authentication, proxy authentication, or when
    * using a mock server that doesn't require authentication).
    */
-  readonly apiKey?: Redacted.Redacted | undefined
+  readonly apiKey?: Redacted.Redacted | undefined;
 
   /**
    * The base URL endpoint used to communicate with Anthropic's API.
@@ -115,7 +122,7 @@ export const make: (options: {
    *
    * You may leave this property `undefined` to accept the default value.
    */
-  readonly apiUrl?: string | undefined
+  readonly apiUrl?: string | undefined;
 
   /**
    * The Anthropic API version to use for requests.
@@ -134,7 +141,7 @@ export const make: (options: {
    * Consult Anthropic's API documentation for available versions and their
    * differences.
    */
-  readonly anthropicVersion?: string | undefined
+  readonly anthropicVersion?: string | undefined;
 
   /**
    * The organization ID to associate with API requests.
@@ -151,7 +158,7 @@ export const make: (options: {
    * Leave `undefined` if you're using a personal account or the default
    * organization.
    */
-  readonly organizationId?: Redacted.Redacted | undefined
+  readonly organizationId?: Redacted.Redacted | undefined;
 
   /**
    * The project ID to associate with API requests.
@@ -168,7 +175,7 @@ export const make: (options: {
    * Leave `undefined` to use the default project or when project-level
    * scoping is not needed.
    */
-  readonly projectId?: Redacted.Redacted | undefined
+  readonly projectId?: Redacted.Redacted | undefined;
 
   /**
    * A function to transform the underlying HTTP client before it's used to send
@@ -191,135 +198,157 @@ export const make: (options: {
    * Leave absent or set to `undefined` if no custom HTTP client behavior is
    * needed.
    */
-  readonly transformClient?: ((client: HttpClient.HttpClient) => HttpClient.HttpClient) | undefined
-}) => Effect.Effect<
-  Service,
-  never,
-  HttpClient.HttpClient | Scope.Scope
-> = Effect.fnUntraced(function*(options) {
-  const apiKeyHeader = "x-api-key"
+  readonly transformClient?:
+    | ((client: HttpClient.HttpClient) => HttpClient.HttpClient)
+    | undefined;
+}) => Effect.Effect<Service, never, HttpClient.HttpClient | Scope.Scope> =
+  Effect.fnUntraced(function* (options) {
+    const apiKeyHeader = "x-api-key";
 
-  yield* Effect.locallyScopedWith(Headers.currentRedactedNames, Arr.append(apiKeyHeader))
+    yield* Effect.locallyScopedWith(
+      Headers.currentRedactedNames,
+      Arr.append(apiKeyHeader)
+    );
 
-  const httpClient = (yield* HttpClient.HttpClient).pipe(
-    HttpClient.mapRequest((request) =>
-      request.pipe(
-        HttpClientRequest.prependUrl(options.apiUrl ?? "https://api.anthropic.com"),
-        options.apiKey
-          ? HttpClientRequest.setHeader(apiKeyHeader, Redacted.value(options.apiKey))
-          : identity,
-        HttpClientRequest.setHeader("anthropic-version", options.anthropicVersion ?? "2023-06-01"),
-        HttpClientRequest.acceptJson
-      )
-    ),
-    options.transformClient ? options.transformClient : identity
-  )
+    const httpClient = (yield* HttpClient.HttpClient).pipe(
+      HttpClient.mapRequest((request) =>
+        request.pipe(
+          HttpClientRequest.prependUrl(
+            options.apiUrl ?? "https://api.anthropic.com"
+          ),
+          options.apiKey
+            ? HttpClientRequest.setHeader(
+                apiKeyHeader,
+                Redacted.value(options.apiKey)
+              )
+            : identity,
+          HttpClientRequest.setHeader(
+            "anthropic-version",
+            options.anthropicVersion ?? "2023-06-01"
+          ),
+          HttpClientRequest.acceptJson
+        )
+      ),
+      options.transformClient ? options.transformClient : identity
+    );
 
-  const httpClientOk = HttpClient.filterStatusOk(httpClient)
+    const httpClientOk = HttpClient.filterStatusOk(httpClient);
 
-  const client = Generated.make(httpClient, {
-    transformClient: (client) =>
-      AnthropicConfig.getOrUndefined.pipe(
-        Effect.map((config) => config?.transformClient ? config.transformClient(client) : client)
-      )
-  })
+    const client = Generated.make(httpClient, {
+      transformClient: (client) =>
+        AnthropicConfig.getOrUndefined.pipe(
+          Effect.map((config) =>
+            config?.transformClient ? config.transformClient(client) : client
+          )
+        ),
+    });
 
-  const streamRequest = <A, I, R>(
-    request: HttpClientRequest.HttpClientRequest,
-    schema: Schema.Schema<A, I, R>
-  ): Stream.Stream<A, AiError.AiError, R> => {
-    const decodeEvents = Schema.decode(Schema.ChunkFromSelf(Schema.parseJson(schema)))
-    return httpClientOk.execute(request).pipe(
-      Effect.map((r) => r.stream),
-      Stream.unwrapScoped,
-      Stream.decodeText(),
-      Stream.pipeThroughChannel(Sse.makeChannel()),
-      Stream.mapChunksEffect((chunk) => decodeEvents(Chunk.map(chunk, (event) => event.data))),
-      Stream.catchTags({
-        RequestError: (error) =>
-          AiError.HttpRequestError.fromRequestError({
-            module: "AnthropicClient",
-            method: "streamRequest",
-            error
-          }),
-        ResponseError: (error) =>
-          AiError.HttpResponseError.fromResponseError({
-            module: "AnthropicClient",
-            method: "streamRequest",
-            error
-          }),
-        ParseError: (error) =>
-          AiError.MalformedOutput.fromParseError({
-            module: "AnthropicClient",
-            method: "streamRequest",
-            error
-          })
-      })
-    )
-  }
-
-  const createMessage: (options: {
-    readonly params?: typeof Generated.BetaMessagesPostParams.Encoded | undefined
-    readonly payload: typeof Generated.BetaCreateMessageParams.Encoded
-  }) => Effect.Effect<Generated.BetaMessage, AiError.AiError> = Effect.fnUntraced(
-    function*(options) {
-      return yield* client.betaMessagesPost(options).pipe(
-        Effect.catchTags({
+    const streamRequest = <A, I, R>(
+      request: HttpClientRequest.HttpClientRequest,
+      schema: Schema.Schema<A, I, R>
+    ): Stream.Stream<A, AiError.AiError, R> => {
+      const decodeEvents = Schema.decode(
+        Schema.ChunkFromSelf(Schema.parseJson(schema))
+      );
+      return httpClientOk.execute(request).pipe(
+        Effect.map((r) => r.stream),
+        Stream.unwrapScoped,
+        Stream.decodeText(),
+        Stream.pipeThroughChannel(Sse.makeChannel()),
+        Stream.mapChunksEffect((chunk) =>
+          decodeEvents(Chunk.map(chunk, (event) => event.data))
+        ),
+        Stream.catchTags({
           RequestError: (error) =>
             AiError.HttpRequestError.fromRequestError({
               module: "AnthropicClient",
-              method: "createMessage",
-              error
+              method: "streamRequest",
+              error,
             }),
           ResponseError: (error) =>
             AiError.HttpResponseError.fromResponseError({
               module: "AnthropicClient",
-              method: "createMessage",
-              error
-            }),
-          BetaErrorResponse: (error) =>
-            AiError.HttpResponseError.fromResponseError({
-              module: "AnthropicClient",
-              method: "createMessage",
-              error: new HttpClientError.ResponseError({
-                reason: "StatusCode",
-                request: error.request,
-                response: error.response
-              })
+              method: "streamRequest",
+              error,
             }),
           ParseError: (error) =>
             AiError.MalformedOutput.fromParseError({
               module: "AnthropicClient",
-              method: "createMessage",
-              error
-            })
+              method: "streamRequest",
+              error,
+            }),
         })
-      )
-    }
-  )
+      );
+    };
 
-  const createMessageStream = (options: {
-    readonly params?: typeof Generated.BetaMessagesPostParams.Encoded | undefined
-    readonly payload: Omit<typeof Generated.BetaCreateMessageParams.Encoded, "stream">
-  }): Stream.Stream<MessageStreamEvent, AiError.AiError> => {
-    const request = HttpClientRequest.post("/v1/messages", {
-      headers: Headers.fromInput({
-        "anthropic-beta": options.params?.["anthropic-beta"] ?? undefined
-      }),
-      body: HttpBody.unsafeJson({ ...options.payload, stream: true })
-    })
-    return streamRequest(request, MessageStreamEvent).pipe(
-      Stream.takeUntil((event) => event.type === "message_stop")
-    )
-  }
+    const createMessage: (options: {
+      readonly params?:
+        | typeof Generated.BetaMessagesPostParams.Encoded
+        | undefined;
+      readonly payload: typeof Generated.BetaCreateMessageParams.Encoded;
+    }) => Effect.Effect<Generated.BetaMessage, AiError.AiError> =
+      Effect.fnUntraced(function* (options) {
+        return yield* client.betaMessagesPost(options).pipe(
+          Effect.catchTags({
+            RequestError: (error) =>
+              AiError.HttpRequestError.fromRequestError({
+                module: "AnthropicClient",
+                method: "createMessage",
+                error,
+              }),
+            ResponseError: (error) =>
+              AiError.HttpResponseError.fromResponseError({
+                module: "AnthropicClient",
+                method: "createMessage",
+                error,
+              }),
+            BetaErrorResponse: (error) =>
+              AiError.HttpResponseError.fromResponseError({
+                module: "AnthropicClient",
+                method: "createMessage",
+                error: new HttpClientError.ResponseError({
+                  reason: "StatusCode",
+                  request: error.request,
+                  response: error.response,
+                }),
+              }),
+            ParseError: (error) =>
+              AiError.MalformedOutput.fromParseError({
+                module: "AnthropicClient",
+                method: "createMessage",
+                error,
+              }),
+          })
+        );
+      });
 
-  return AnthropicClient.of({
-    client,
-    streamRequest,
-    createMessage,
-    createMessageStream
-  })
-})
+    const createMessageStream = (options: {
+      readonly params?:
+        | typeof Generated.BetaMessagesPostParams.Encoded
+        | undefined;
+      readonly payload: Omit<
+        typeof Generated.BetaCreateMessageParams.Encoded,
+        "stream"
+      >;
+    }): Stream.Stream<MessageStreamEvent, AiError.AiError> => {
+      const request = HttpClientRequest.post("/v1/messages", {
+        headers: Headers.fromInput({
+          "anthropic-beta": options.params?.["anthropic-beta"] ?? undefined,
+        }),
+        body: HttpBody.unsafeJson({ ...options.payload, stream: true }),
+      });
+      return streamRequest(request, MessageStreamEvent).pipe(
+        Stream.takeUntil((event) => event.type === "message_stop")
+      );
+    };
+
+    return AnthropicClient.of({
+      client,
+      streamRequest,
+      createMessage,
+      createMessageStream,
+    });
+  });
 
 // =============================================================================
 // Message Stream Schema
@@ -332,7 +361,7 @@ export const make: (options: {
 export class PingEvent extends Schema.Class<PingEvent>(
   "@effect/ai-anthropic/PingEvent"
 )({
-  type: Schema.Literal("ping")
+  type: Schema.Literal("ping"),
 }) {}
 
 /**
@@ -354,8 +383,8 @@ export class ErrorEvent extends Schema.Class<ErrorEvent>(
       "api_error",
       "overloaded_error"
     ),
-    message: Schema.String
-  })
+    message: Schema.String,
+  }),
 }) {}
 
 /**
@@ -366,7 +395,7 @@ export class MessageStartEvent extends Schema.Class<MessageStartEvent>(
   "@effect/ai-anthropic/MessageStartEvent"
 )({
   type: Schema.Literal("message_start"),
-  message: Generated.BetaMessage
+  message: Generated.BetaMessage,
 }) {}
 
 /**
@@ -382,7 +411,7 @@ export class ServerToolUsage extends Schema.Class<ServerToolUsage>(
   web_search_requests: Schema.optionalWith(
     Schema.NullOr(Schema.Int.pipe(Schema.greaterThanOrEqualTo(0))),
     { default: () => 0 }
-  )
+  ),
 }) {}
 
 /**
@@ -405,10 +434,9 @@ export class MessageDelta extends Schema.Class<MessageDelta>(
     ),
     { default: () => null }
   ),
-  stop_sequence: Schema.optionalWith(
-    Schema.NullOr(Schema.String),
-    { default: () => null }
-  )
+  stop_sequence: Schema.optionalWith(Schema.NullOr(Schema.String), {
+    default: () => null,
+  }),
 }) {}
 
 /**
@@ -449,10 +477,9 @@ export class MessageDeltaUsage extends Schema.Class<MessageDeltaUsage>(
   /**
    * The number of server tool requests.
    */
-  server_tool_use: Schema.optionalWith(
-    Schema.NullOr(ServerToolUsage),
-    { default: () => null }
-  )
+  server_tool_use: Schema.optionalWith(Schema.NullOr(ServerToolUsage), {
+    default: () => null,
+  }),
 }) {}
 
 /**
@@ -479,7 +506,7 @@ export class MessageDeltaEvent extends Schema.Class<MessageDeltaEvent>(
    * response from Claude.\n\nTotal input tokens in a request is the summation
    * of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
    */
-  usage: MessageDeltaUsage
+  usage: MessageDeltaUsage,
 }) {}
 
 /**
@@ -489,7 +516,7 @@ export class MessageDeltaEvent extends Schema.Class<MessageDeltaEvent>(
 export class MessageStopEvent extends Schema.Class<MessageStopEvent>(
   "@effect/ai-anthropic/MessageStopEvent"
 )({
-  type: Schema.Literal("message_stop")
+  type: Schema.Literal("message_stop"),
 }) {}
 
 /**
@@ -501,7 +528,7 @@ export class ContentBlockStartEvent extends Schema.Class<ContentBlockStartEvent>
 )({
   type: Schema.Literal("content_block_start"),
   index: Schema.Int,
-  content_block: Generated.BetaContentBlock
+  content_block: Generated.BetaContentBlock,
 }) {}
 
 /**
@@ -518,7 +545,7 @@ export class CitationsDelta extends Schema.Class<CitationsDelta>(
     Generated.BetaResponseContentBlockLocationCitation,
     Generated.BetaResponseWebSearchResultLocationCitation,
     Generated.BetaResponseSearchResultLocationCitation
-  )
+  ),
 }) {}
 
 /**
@@ -529,7 +556,7 @@ export class InputJsonContentBlockDelta extends Schema.Class<InputJsonContentBlo
   "@effect/ai-anthropic/InputJsonContentBlockDelta"
 )({
   type: Schema.Literal("input_json_delta"),
-  partial_json: Schema.String
+  partial_json: Schema.String,
 }) {}
 
 /**
@@ -540,7 +567,7 @@ export class SignatureContentBlockDelta extends Schema.Class<SignatureContentBlo
   "@effect/ai-anthropic/SignatureContentBlockDelta"
 )({
   type: Schema.Literal("signature_delta"),
-  signature: Schema.String
+  signature: Schema.String,
 }) {}
 
 /**
@@ -551,7 +578,7 @@ export class TextContentBlockDelta extends Schema.Class<TextContentBlockDelta>(
   "@effect/ai-anthropic/TextContentBlockDelta"
 )({
   type: Schema.Literal("text_delta"),
-  text: Schema.String
+  text: Schema.String,
 }) {}
 
 /**
@@ -562,7 +589,7 @@ export class ThinkingContentBlockDelta extends Schema.Class<ThinkingContentBlock
   "@effect/ai-anthropic/ThinkingContentBlockDelta"
 )({
   type: Schema.Literal("thinking_delta"),
-  thinking: Schema.String
+  thinking: Schema.String,
 }) {}
 
 /**
@@ -580,7 +607,7 @@ export class ContentBlockDeltaEvent extends Schema.Class<ContentBlockDeltaEvent>
     SignatureContentBlockDelta,
     TextContentBlockDelta,
     ThinkingContentBlockDelta
-  )
+  ),
 }) {}
 
 /**
@@ -591,7 +618,7 @@ export class ContentBlockStopEvent extends Schema.Class<ContentBlockStopEvent>(
   "@effect/ai-anthropic/ContentBlockStopEvent"
 )({
   type: Schema.Literal("content_block_stop"),
-  index: Schema.Int
+  index: Schema.Int,
 }) {}
 
 /**
@@ -607,13 +634,13 @@ export const MessageStreamEvent = Schema.Union(
   ContentBlockStartEvent,
   ContentBlockDeltaEvent,
   ContentBlockStopEvent
-)
+);
 
 /**
  * @since 1.0.0
  * @category Models
  */
-export type MessageStreamEvent = typeof MessageStreamEvent.Type
+export type MessageStreamEvent = typeof MessageStreamEvent.Type;
 
 /**
  * @since 1.0.0
@@ -634,7 +661,7 @@ export const layer = (options: {
    * (e.g., environment-based authentication, proxy authentication, or when
    * using a mock server that doesn't require authentication).
    */
-  readonly apiKey?: Redacted.Redacted | undefined
+  readonly apiKey?: Redacted.Redacted | undefined;
   /**
    * The base URL endpoint used to communicate with Anthropic's API.
    *
@@ -652,7 +679,7 @@ export const layer = (options: {
    *
    * You may leave this property `undefined` to accept the default value.
    */
-  readonly apiUrl?: string | undefined
+  readonly apiUrl?: string | undefined;
   /**
    * The Anthropic API version to use for requests.
    *
@@ -670,7 +697,7 @@ export const layer = (options: {
    * Consult Anthropic's API documentation for available versions and their
    * differences.
    */
-  readonly anthropicVersion?: string | undefined
+  readonly anthropicVersion?: string | undefined;
   /**
    * A function to transform the underlying HTTP client before it's used for API requests.
    *
@@ -690,8 +717,11 @@ export const layer = (options: {
    *
    * Leave `undefined` if no custom HTTP client behavior is needed.
    */
-  readonly transformClient?: ((client: HttpClient.HttpClient) => HttpClient.HttpClient) | undefined
-}): Layer.Layer<AnthropicClient, never, HttpClient.HttpClient> => Layer.scoped(AnthropicClient, make(options))
+  readonly transformClient?:
+    | ((client: HttpClient.HttpClient) => HttpClient.HttpClient)
+    | undefined;
+}): Layer.Layer<AnthropicClient, never, HttpClient.HttpClient> =>
+  Layer.scoped(AnthropicClient, make(options));
 
 /**
  * @since 1.0.0
@@ -712,7 +742,7 @@ export const layerConfig = (options: {
    * (e.g., environment-based authentication, proxy authentication, or when
    * using a mock server that doesn't require authentication).
    */
-  readonly apiKey?: Config.Config<Redacted.Redacted | undefined> | undefined
+  readonly apiKey?: Config.Config<Redacted.Redacted | undefined> | undefined;
   /**
    * The base URL endpoint used to communicate with Anthropic's API.
    *
@@ -730,7 +760,7 @@ export const layerConfig = (options: {
    *
    * You may leave this property `undefined` to accept the default value.
    */
-  readonly apiUrl?: Config.Config<string | undefined> | undefined
+  readonly apiUrl?: Config.Config<string | undefined> | undefined;
   /**
    * The Anthropic API version to use for requests.
    *
@@ -748,7 +778,7 @@ export const layerConfig = (options: {
    * Consult Anthropic's API documentation for available versions and their
    * differences.
    */
-  readonly anthropicVersion?: Config.Config<string | undefined> | undefined
+  readonly anthropicVersion?: Config.Config<string | undefined> | undefined;
   /**
    * A function to transform the underlying HTTP client before it's used for API requests.
    *
@@ -768,11 +798,13 @@ export const layerConfig = (options: {
    *
    * Leave `undefined` if no custom HTTP client behavior is needed.
    */
-  readonly transformClient?: ((client: HttpClient.HttpClient) => HttpClient.HttpClient) | undefined
+  readonly transformClient?:
+    | ((client: HttpClient.HttpClient) => HttpClient.HttpClient)
+    | undefined;
 }): Layer.Layer<AnthropicClient, ConfigError, HttpClient.HttpClient> => {
-  const { transformClient, ...configs } = options
+  const { transformClient, ...configs } = options;
   return Config.all(configs).pipe(
     Effect.flatMap((configs) => make({ ...configs, transformClient })),
     Layer.scoped(AnthropicClient)
-  )
-}
+  );
+};

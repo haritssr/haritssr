@@ -1,27 +1,28 @@
 /**
  * @since 1.0.0
  */
-import type { FileSystem } from "@effect/platform/FileSystem"
-import type { Effect } from "effect/Effect"
-import type { Option } from "effect/Option"
-import type { Pipeable } from "effect/Pipeable"
-import type { CliConfig } from "./CliConfig.js"
-import type { HelpDoc } from "./HelpDoc.js"
-import type { Span } from "./HelpDoc/Span.js"
-import * as InternalPrimitive from "./internal/primitive.js"
-import type { Prompt } from "./Prompt.js"
+import type { FileSystem } from "@effect/platform/FileSystem";
+import type { Effect } from "effect/Effect";
+import type { Option } from "effect/Option";
+import type { Pipeable } from "effect/Pipeable";
+import type { CliConfig } from "./CliConfig.js";
+import type { Span } from "./HelpDoc/Span.js";
+import type { HelpDoc } from "./HelpDoc.js";
+import * as InternalPrimitive from "./internal/primitive.js";
+import type { Prompt } from "./Prompt.js";
 
 /**
  * @since 1.0.0
  * @category symbol
  */
-export const PrimitiveTypeId: unique symbol = InternalPrimitive.PrimitiveTypeId as PrimitiveTypeId
+export const PrimitiveTypeId: unique symbol =
+  InternalPrimitive.PrimitiveTypeId as PrimitiveTypeId;
 
 /**
  * @since 1.0.0
  * @category symbol
  */
-export type PrimitiveTypeId = typeof PrimitiveTypeId
+export type PrimitiveTypeId = typeof PrimitiveTypeId;
 
 /**
  * A `Primitive` represents the primitive types supported by Effect CLI.
@@ -43,39 +44,43 @@ export declare namespace Primitive {
    */
   export interface Variance<A> extends Pipeable {
     readonly [PrimitiveTypeId]: {
-      readonly _A: (_: never) => A
-    }
+      readonly _A: (_: never) => A;
+    };
   }
 
   /**
    * @since 1.0.0
    * @category models
    */
-  export type PathExists = "yes" | "no" | "either"
+  export type PathExists = "yes" | "no" | "either";
 
   /**
    * @since 1.0.0
    * @category models
    */
-  export type PathType = "file" | "directory" | "either"
+  export type PathType = "file" | "directory" | "either";
 
   /**
    * @since 1.0.0
    * @category models
    */
-  export type ValueType<P> = [P] extends [{
-    readonly [PrimitiveTypeId]: {
-      readonly _A: (_: never) => infer A
-    }
-  }] ? A
-    : never
+  export type ValueType<P> = [P] extends [
+    {
+      readonly [PrimitiveTypeId]: {
+        readonly _A: (_: never) => infer A;
+      };
+    },
+  ]
+    ? A
+    : never;
 }
 
 /**
  * @since 1.0.0
  * @category Predicates
  */
-export const isBool: <A>(self: Primitive<A>) => boolean = InternalPrimitive.isBool
+export const isBool: <A>(self: Primitive<A>) => boolean =
+  InternalPrimitive.isBool;
 
 /**
  * Represents a boolean value.
@@ -86,13 +91,16 @@ export const isBool: <A>(self: Primitive<A>) => boolean = InternalPrimitive.isBo
  * @since 1.0.0
  * @category constructors
  */
-export const boolean: (defaultValue: Option<boolean>) => Primitive<boolean> = InternalPrimitive.boolean
+export const boolean: (defaultValue: Option<boolean>) => Primitive<boolean> =
+  InternalPrimitive.boolean;
 
 /**
  * @since 1.0.0
  * @category constructors
  */
-export const choice: <A>(alternatives: ReadonlyArray<[string, A]>) => Primitive<A> = InternalPrimitive.choice
+export const choice: <A>(
+  alternatives: ReadonlyArray<[string, A]>
+) => Primitive<A> = InternalPrimitive.choice;
 
 /**
  * Represents a date in ISO-8601 format, such as `2007-12-03T10:15:30`.
@@ -100,7 +108,7 @@ export const choice: <A>(alternatives: ReadonlyArray<[string, A]>) => Primitive<
  * @since 1.0.0
  * @category constructors
  */
-export const date: Primitive<globalThis.Date> = InternalPrimitive.date
+export const date: Primitive<globalThis.Date> = InternalPrimitive.date;
 
 /**
  * Represents a floating point number.
@@ -108,7 +116,7 @@ export const date: Primitive<globalThis.Date> = InternalPrimitive.date
  * @since 1.0.0
  * @category constructors
  */
-export const float: Primitive<number> = InternalPrimitive.float
+export const float: Primitive<number> = InternalPrimitive.float;
 
 /**
  * Returns a text representation of the valid choices for a primitive type, if
@@ -117,7 +125,8 @@ export const float: Primitive<number> = InternalPrimitive.float
  * @since 1.0.0
  * @category combinators
  */
-export const getChoices: <A>(self: Primitive<A>) => Option<string> = InternalPrimitive.getChoices
+export const getChoices: <A>(self: Primitive<A>) => Option<string> =
+  InternalPrimitive.getChoices;
 
 /**
  * Returns help documentation for a primitive type.
@@ -125,7 +134,8 @@ export const getChoices: <A>(self: Primitive<A>) => Option<string> = InternalPri
  * @since 1.0.0
  * @category combinators
  */
-export const getHelp: <A>(self: Primitive<A>) => Span = InternalPrimitive.getHelp
+export const getHelp: <A>(self: Primitive<A>) => Span =
+  InternalPrimitive.getHelp;
 
 /**
  * Returns a string representation of the primitive type.
@@ -133,7 +143,8 @@ export const getHelp: <A>(self: Primitive<A>) => Span = InternalPrimitive.getHel
  * @since 1.0.0
  * @category combinators
  */
-export const getTypeName: <A>(self: Primitive<A>) => string = InternalPrimitive.getTypeName
+export const getTypeName: <A>(self: Primitive<A>) => string =
+  InternalPrimitive.getTypeName;
 
 /**
  * Represents an integer.
@@ -141,7 +152,7 @@ export const getTypeName: <A>(self: Primitive<A>) => string = InternalPrimitive.
  * @since 1.0.0
  * @category constructors
  */
-export const integer: Primitive<number> = InternalPrimitive.integer
+export const integer: Primitive<number> = InternalPrimitive.integer;
 
 /**
  * Represents a user-defined piece of text.
@@ -149,7 +160,7 @@ export const integer: Primitive<number> = InternalPrimitive.integer
  * @since 1.0.0
  * @category constructors
  */
-export const text: Primitive<string> = InternalPrimitive.text
+export const text: Primitive<string> = InternalPrimitive.text;
 
 /**
  * Validates that the specified value, if any, matches the specified primitive
@@ -162,13 +173,13 @@ export const validate: {
   (
     value: Option<string>,
     config: CliConfig
-  ): <A>(self: Primitive<A>) => Effect<A, string, FileSystem>
+  ): <A>(self: Primitive<A>) => Effect<A, string, FileSystem>;
   <A>(
     self: Primitive<A>,
     value: Option<string>,
     config: CliConfig
-  ): Effect<A, string, FileSystem>
-} = InternalPrimitive.validate
+  ): Effect<A, string, FileSystem>;
+} = InternalPrimitive.validate;
 
 /**
  * Runs a wizard that will prompt the user for input matching the specified
@@ -178,6 +189,6 @@ export const validate: {
  * @category combinators
  */
 export const wizard: {
-  (help: HelpDoc): <A>(self: Primitive<A>) => Prompt<A>
-  <A>(self: Primitive<A>, help: HelpDoc): Prompt<A>
-} = InternalPrimitive.wizard
+  (help: HelpDoc): <A>(self: Primitive<A>) => Prompt<A>;
+  <A>(self: Primitive<A>, help: HelpDoc): Prompt<A>;
+} = InternalPrimitive.wizard;

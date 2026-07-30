@@ -64,7 +64,7 @@ export default async function InputListPage() {
   return (
     <div>
       <Section name="People" />
-      <ul className="space-y-3 mb-10">
+      <ul className="mb-10 space-y-3">
         {people.map((p) => (
           <li className="w-fit border p-2" key={p.id}>
             <div>Name: {p.name}</div>

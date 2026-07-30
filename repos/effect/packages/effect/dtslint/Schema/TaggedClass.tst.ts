@@ -1,5 +1,5 @@
-import { Schema } from "effect"
-import { describe, expect, it } from "tstyche"
+import { Schema } from "effect";
+import { describe, expect, it } from "tstyche";
 
 describe("Schema.TaggedClass", () => {
   it("Annotations as tuple", () => {
@@ -9,10 +9,10 @@ describe("Schema.TaggedClass", () => {
       undefined,
       {
         pretty: () => (x) => {
-          expect(x).type.toBe<{ readonly _tag: "A"; readonly id: number }>()
-          return ""
-        }
-      }
+          expect(x).type.toBe<{ readonly _tag: "A"; readonly id: number }>();
+          return "";
+        },
+      },
     ]) {}
-  })
-})
+  });
+});

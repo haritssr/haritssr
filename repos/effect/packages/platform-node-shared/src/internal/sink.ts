@@ -1,26 +1,34 @@
-import * as Channel from "effect/Channel"
-import type * as Chunk from "effect/Chunk"
-import * as Deferred from "effect/Deferred"
-import * as Effect from "effect/Effect"
-import type { LazyArg } from "effect/Function"
-import * as Sink from "effect/Sink"
-import type { Writable } from "node:stream"
-import type { FromWritableOptions } from "../NodeStream.js"
-import { writeInput } from "./stream.js"
+import type { Writable } from "node:stream";
+import * as Channel from "effect/Channel";
+import type * as Chunk from "effect/Chunk";
+import * as Deferred from "effect/Deferred";
+import * as Effect from "effect/Effect";
+import type { LazyArg } from "effect/Function";
+import * as Sink from "effect/Sink";
+import type { FromWritableOptions } from "../NodeStream.js";
+import { writeInput } from "./stream.js";
 
 /** @internal */
 export const fromWritable = <E, A = Uint8Array | string>(
   evaluate: LazyArg<Writable | NodeJS.WritableStream>,
   onError: (error: unknown) => E,
   options?: FromWritableOptions
-): Sink.Sink<void, A, never, E> => Sink.fromChannel(fromWritableChannel(evaluate, onError, options))
+): Sink.Sink<void, A, never, E> =>
+  Sink.fromChannel(fromWritableChannel(evaluate, onError, options));
 
 /** @internal */
 export const fromWritableChannel = <IE, OE, A>(
   writable: LazyArg<Writable | NodeJS.WritableStream>,
   onError: (error: unknown) => OE,
   options?: FromWritableOptions
-): Channel.Channel<Chunk.Chunk<never>, Chunk.Chunk<A>, IE | OE, IE, void, unknown> =>
+): Channel.Channel<
+  Chunk.Chunk<never>,
+  Chunk.Chunk<A>,
+  IE | OE,
+  IE,
+  void,
+  unknown
+> =>
   Channel.flatMap(
     Effect.zip(
       Effect.sync(() => writable()),
@@ -36,7 +44,7 @@ export const fromWritableChannel = <IE, OE, A>(
           Deferred.complete(deferred, Effect.void)
         )
       )
-  )
+  );
 
 const writableOutput = <IE, E>(
   writable: Writable | NodeJS.WritableStream,
@@ -45,13 +53,13 @@ const writableOutput = <IE, E>(
 ) =>
   Effect.suspend(() => {
     function handleError(err: unknown) {
-      Deferred.unsafeDone(deferred, Effect.fail(onError(err)))
+      Deferred.unsafeDone(deferred, Effect.fail(onError(err)));
     }
-    writable.on("error", handleError)
+    writable.on("error", handleError);
     return Effect.ensuring(
       Deferred.await(deferred),
       Effect.sync(() => {
-        writable.removeListener("error", handleError)
+        writable.removeListener("error", handleError);
       })
-    )
-  })
+    );
+  });

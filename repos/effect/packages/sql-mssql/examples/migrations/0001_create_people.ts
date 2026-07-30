@@ -1,5 +1,5 @@
-import { MssqlClient } from "@effect/sql-mssql"
-import { Effect } from "effect"
+import { MssqlClient } from "@effect/sql-mssql";
+import { Effect } from "effect";
 
 export default Effect.flatMap(
   MssqlClient.MssqlClient,
@@ -9,4 +9,4 @@ export default Effect.flatMap(
       name NVARCHAR(255) NOT NULL,
       created_at DATETIME NOT NULL DEFAULT GETDATE()
     )`
-)
+);

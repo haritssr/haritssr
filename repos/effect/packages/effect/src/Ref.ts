@@ -1,42 +1,46 @@
 /**
  * @since 2.0.0
  */
-import type * as Effect from "./Effect.js"
-import * as internal from "./internal/ref.js"
-import type * as Option from "./Option.js"
-import type * as Readable from "./Readable.js"
-import type * as Types from "./Types.js"
-import type * as Unify from "./Unify.js"
+import type * as Effect from "./Effect.js";
+import * as internal from "./internal/ref.js";
+import type * as Option from "./Option.js";
+import type * as Readable from "./Readable.js";
+import type * as Types from "./Types.js";
+import type * as Unify from "./Unify.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const RefTypeId: unique symbol = internal.RefTypeId
+export const RefTypeId: unique symbol = internal.RefTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type RefTypeId = typeof RefTypeId
+export type RefTypeId = typeof RefTypeId;
 
 /**
  * @since 2.0.0
  * @category models
  */
-export interface Ref<in out A> extends Ref.Variance<A>, Effect.Effect<A>, Readable.Readable<A> {
-  modify<B>(f: (a: A) => readonly [B, A]): Effect.Effect<B>
-  readonly [Unify.typeSymbol]?: unknown
-  readonly [Unify.unifySymbol]?: RefUnify<this>
-  readonly [Unify.ignoreSymbol]?: RefUnifyIgnore
+export interface Ref<in out A>
+  extends Ref.Variance<A>,
+    Effect.Effect<A>,
+    Readable.Readable<A> {
+  modify<B>(f: (a: A) => readonly [B, A]): Effect.Effect<B>;
+  readonly [Unify.typeSymbol]?: unknown;
+  readonly [Unify.unifySymbol]?: RefUnify<this>;
+  readonly [Unify.ignoreSymbol]?: RefUnifyIgnore;
 }
 
 /**
  * @category models
  * @since 3.8.0
  */
-export interface RefUnify<A extends { [Unify.typeSymbol]?: any }> extends Effect.EffectUnify<A> {
-  Ref?: () => Extract<A[Unify.typeSymbol], Ref<any>>
+export interface RefUnify<A extends { [Unify.typeSymbol]?: any }>
+  extends Effect.EffectUnify<A> {
+  Ref?: () => Extract<A[Unify.typeSymbol], Ref<any>>;
 }
 
 /**
@@ -44,7 +48,7 @@ export interface RefUnify<A extends { [Unify.typeSymbol]?: any }> extends Effect
  * @since 3.8.0
  */
 export interface RefUnifyIgnore extends Effect.EffectUnifyIgnore {
-  Effect?: true
+  Effect?: true;
 }
 
 /**
@@ -57,8 +61,8 @@ export declare namespace Ref {
    */
   export interface Variance<in out A> {
     readonly [RefTypeId]: {
-      readonly _A: Types.Invariant<A>
-    }
+      readonly _A: Types.Invariant<A>;
+    };
   }
 }
 
@@ -66,115 +70,122 @@ export declare namespace Ref {
  * @since 2.0.0
  * @category constructors
  */
-export const make: <A>(value: A) => Effect.Effect<Ref<A>> = internal.make
+export const make: <A>(value: A) => Effect.Effect<Ref<A>> = internal.make;
 
 /**
  * @since 2.0.0
  * @category getters
  */
-export const get: <A>(self: Ref<A>) => Effect.Effect<A> = internal.get
+export const get: <A>(self: Ref<A>) => Effect.Effect<A> = internal.get;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const getAndSet: {
-  <A>(value: A): (self: Ref<A>) => Effect.Effect<A>
-  <A>(self: Ref<A>, value: A): Effect.Effect<A>
-} = internal.getAndSet
+  <A>(value: A): (self: Ref<A>) => Effect.Effect<A>;
+  <A>(self: Ref<A>, value: A): Effect.Effect<A>;
+} = internal.getAndSet;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const getAndUpdate: {
-  <A>(f: (a: A) => A): (self: Ref<A>) => Effect.Effect<A>
-  <A>(self: Ref<A>, f: (a: A) => A): Effect.Effect<A>
-} = internal.getAndUpdate
+  <A>(f: (a: A) => A): (self: Ref<A>) => Effect.Effect<A>;
+  <A>(self: Ref<A>, f: (a: A) => A): Effect.Effect<A>;
+} = internal.getAndUpdate;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const getAndUpdateSome: {
-  <A>(pf: (a: A) => Option.Option<A>): (self: Ref<A>) => Effect.Effect<A>
-  <A>(self: Ref<A>, pf: (a: A) => Option.Option<A>): Effect.Effect<A>
-} = internal.getAndUpdateSome
+  <A>(pf: (a: A) => Option.Option<A>): (self: Ref<A>) => Effect.Effect<A>;
+  <A>(self: Ref<A>, pf: (a: A) => Option.Option<A>): Effect.Effect<A>;
+} = internal.getAndUpdateSome;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const modify: {
-  <A, B>(f: (a: A) => readonly [B, A]): (self: Ref<A>) => Effect.Effect<B>
-  <A, B>(self: Ref<A>, f: (a: A) => readonly [B, A]): Effect.Effect<B>
-} = internal.modify
+  <A, B>(f: (a: A) => readonly [B, A]): (self: Ref<A>) => Effect.Effect<B>;
+  <A, B>(self: Ref<A>, f: (a: A) => readonly [B, A]): Effect.Effect<B>;
+} = internal.modify;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const modifySome: {
-  <B, A>(fallback: B, pf: (a: A) => Option.Option<readonly [B, A]>): (self: Ref<A>) => Effect.Effect<B>
-  <A, B>(self: Ref<A>, fallback: B, pf: (a: A) => Option.Option<readonly [B, A]>): Effect.Effect<B>
-} = internal.modifySome
+  <B, A>(
+    fallback: B,
+    pf: (a: A) => Option.Option<readonly [B, A]>
+  ): (self: Ref<A>) => Effect.Effect<B>;
+  <A, B>(
+    self: Ref<A>,
+    fallback: B,
+    pf: (a: A) => Option.Option<readonly [B, A]>
+  ): Effect.Effect<B>;
+} = internal.modifySome;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const set: {
-  <A>(value: A): (self: Ref<A>) => Effect.Effect<void>
-  <A>(self: Ref<A>, value: A): Effect.Effect<void>
-} = internal.set
+  <A>(value: A): (self: Ref<A>) => Effect.Effect<void>;
+  <A>(self: Ref<A>, value: A): Effect.Effect<void>;
+} = internal.set;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const setAndGet: {
-  <A>(value: A): (self: Ref<A>) => Effect.Effect<A>
-  <A>(self: Ref<A>, value: A): Effect.Effect<A>
-} = internal.setAndGet
+  <A>(value: A): (self: Ref<A>) => Effect.Effect<A>;
+  <A>(self: Ref<A>, value: A): Effect.Effect<A>;
+} = internal.setAndGet;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const update: {
-  <A>(f: (a: A) => A): (self: Ref<A>) => Effect.Effect<void>
-  <A>(self: Ref<A>, f: (a: A) => A): Effect.Effect<void>
-} = internal.update
+  <A>(f: (a: A) => A): (self: Ref<A>) => Effect.Effect<void>;
+  <A>(self: Ref<A>, f: (a: A) => A): Effect.Effect<void>;
+} = internal.update;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const updateAndGet: {
-  <A>(f: (a: A) => A): (self: Ref<A>) => Effect.Effect<A>
-  <A>(self: Ref<A>, f: (a: A) => A): Effect.Effect<A>
-} = internal.updateAndGet
+  <A>(f: (a: A) => A): (self: Ref<A>) => Effect.Effect<A>;
+  <A>(self: Ref<A>, f: (a: A) => A): Effect.Effect<A>;
+} = internal.updateAndGet;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const updateSome: {
-  <A>(f: (a: A) => Option.Option<A>): (self: Ref<A>) => Effect.Effect<void>
-  <A>(self: Ref<A>, f: (a: A) => Option.Option<A>): Effect.Effect<void>
-} = internal.updateSome
+  <A>(f: (a: A) => Option.Option<A>): (self: Ref<A>) => Effect.Effect<void>;
+  <A>(self: Ref<A>, f: (a: A) => Option.Option<A>): Effect.Effect<void>;
+} = internal.updateSome;
 
 /**
  * @since 2.0.0
  * @category utils
  */
 export const updateSomeAndGet: {
-  <A>(pf: (a: A) => Option.Option<A>): (self: Ref<A>) => Effect.Effect<A>
-  <A>(self: Ref<A>, pf: (a: A) => Option.Option<A>): Effect.Effect<A>
-} = internal.updateSomeAndGet
+  <A>(pf: (a: A) => Option.Option<A>): (self: Ref<A>) => Effect.Effect<A>;
+  <A>(self: Ref<A>, pf: (a: A) => Option.Option<A>): Effect.Effect<A>;
+} = internal.updateSomeAndGet;
 
 /**
  * @since 2.0.0
  * @category unsafe
  */
-export const unsafeMake: <A>(value: A) => Ref<A> = internal.unsafeMake
+export const unsafeMake: <A>(value: A) => Ref<A> = internal.unsafeMake;

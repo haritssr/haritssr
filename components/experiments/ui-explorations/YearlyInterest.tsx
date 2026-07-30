@@ -4,7 +4,9 @@ import { useState } from "react";
 import PageDescription from "@/components/PageDescription";
 
 function Section({ name }: { name: string }) {
-  return <h2 className="mb-4 mt-10 font-semibold text-xl text-zinc-800">{name}</h2>;
+  return (
+    <h2 className="mt-10 mb-4 font-semibold text-xl text-zinc-800">{name}</h2>
+  );
 }
 
 export default function YearlyInterest() {
@@ -42,7 +44,7 @@ export default function YearlyInterest() {
           Initial (Rp)
         </label>
         <input
-          className="border rounded-md px-1.5 py-0.5 mb-4"
+          className="mb-4 rounded-md border px-1.5 py-0.5"
           id="Initial"
           inputMode="numeric"
           onChange={(e) => {
@@ -65,7 +67,7 @@ export default function YearlyInterest() {
           Percent (%)
         </label>
         <input
-          className="border rounded-md px-1.5 py-0.5 mb-4"
+          className="mb-4 rounded-md border px-1.5 py-0.5"
           id="Percent"
           onChange={(e) => setPercent(Number(e.target.value))}
           required={true}
@@ -75,7 +77,7 @@ export default function YearlyInterest() {
           Year
         </label>
         <input
-          className="border rounded-md px-1.5 py-0.5 mb-4"
+          className="mb-4 rounded-md border px-1.5 py-0.5"
           id="Year"
           onChange={(e) => setYear(Number(e.target.value))}
           required={true}

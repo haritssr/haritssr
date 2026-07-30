@@ -15,7 +15,10 @@ export interface TaskItemProps extends Task {
   onResumeNow?: (title: string) => void;
   onDelete?: (title: string) => void;
   onMarkDone?: (title: string) => void;
-  onMoveTask?: (title: string, nextType: Extract<Task["type"], "Other">) => void;
+  onMoveTask?: (
+    title: string,
+    nextType: Extract<Task["type"], "Other">
+  ) => void;
   onProgressChange?: (title: string, progress: number) => void;
   showZeroProgressBar?: boolean;
   autoStart?: boolean;

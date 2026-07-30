@@ -1,20 +1,22 @@
-import { RateLimiter } from "@effect/experimental"
-import * as RedisRateLimiter from "@effect/experimental/RateLimiter/Redis"
-import { NodeRuntime } from "@effect/platform-node"
-import { Effect, Layer } from "effect"
+import { RateLimiter } from "@effect/experimental";
+import * as RedisRateLimiter from "@effect/experimental/RateLimiter/Redis";
+import { NodeRuntime } from "@effect/platform-node";
+import { Effect, Layer } from "effect";
 
 // create a RateLimiter layer using Redis as the backing store.
 //
 // You can also use RateLimiter.layerStoreMemory for an in-memory store.
 const RateLimiterLayer = RateLimiter.layer.pipe(
-  Layer.provide(RedisRateLimiter.layerStore({
-    host: "localhost",
-    port: 6379
-  }))
-)
+  Layer.provide(
+    RedisRateLimiter.layerStore({
+      host: "localhost",
+      port: 6379,
+    })
+  )
+);
 
-Effect.gen(function*() {
-  const limiter = yield* RateLimiter.RateLimiter
+Effect.gen(function* () {
+  const limiter = yield* RateLimiter.RateLimiter;
 
   // the `consume` effect will attempt to consume a token from the rate limiter.
   //
@@ -25,8 +27,8 @@ Effect.gen(function*() {
     onExceeded: "delay",
     window: "10 seconds",
     limit: 5,
-    key: "user-123"
-  })
+    key: "user-123",
+  });
 
   // `consume` returns the metadata about the rate limiting operation.
   //
@@ -38,7 +40,7 @@ Effect.gen(function*() {
   //   resetAfter: { _id: 'Duration', _tag: 'Millis', millis: 2000 }
   // }
   // ```
-  console.log(yield* consume)
+  console.log(yield* consume);
 
   // If `onExceeded` is set to "fail", the effect will fail with a
   // RateLimiter.RateLimitExceeded error when the limit is exceeded.
@@ -47,12 +49,12 @@ Effect.gen(function*() {
     onExceeded: "fail",
     window: "10 seconds",
     limit: 5,
-    key: "user-123"
-  })
+    key: "user-123",
+  });
 
   // You can also use `RateLimiter.makeWithRateLimiter` to access a function
   // that applies rate limiting to an effect.
-  const withRateLimiter = yield* RateLimiter.makeWithRateLimiter
+  const withRateLimiter = yield* RateLimiter.makeWithRateLimiter;
 
   yield* Effect.log("Attempting rate limited operation").pipe(
     withRateLimiter({
@@ -60,10 +62,7 @@ Effect.gen(function*() {
       onExceeded: "delay",
       window: "10 seconds",
       limit: 5,
-      key: "user-123"
+      key: "user-123",
     })
-  )
-}).pipe(
-  Effect.provide(RateLimiterLayer),
-  NodeRuntime.runMain
-)
+  );
+}).pipe(Effect.provide(RateLimiterLayer), NodeRuntime.runMain);

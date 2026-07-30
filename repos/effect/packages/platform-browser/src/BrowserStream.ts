@@ -2,8 +2,8 @@
  * @since 1.0.0
  */
 
-import type * as Stream from "effect/Stream"
-import * as internal from "./internal/stream.js"
+import type * as Stream from "effect/Stream";
+import * as internal from "./internal/stream.js";
 
 /**
  * Creates a `Stream` from window.addEventListener.
@@ -11,13 +11,17 @@ import * as internal from "./internal/stream.js"
  */
 export const fromEventListenerWindow: <K extends keyof WindowEventMap>(
   type: K,
-  options?: boolean | {
-    readonly capture?: boolean
-    readonly passive?: boolean
-    readonly once?: boolean
-    readonly bufferSize?: number | "unbounded" | undefined
-  } | undefined
-) => Stream.Stream<WindowEventMap[K], never, never> = internal.fromEventListenerWindow
+  options?:
+    | boolean
+    | {
+        readonly capture?: boolean;
+        readonly passive?: boolean;
+        readonly once?: boolean;
+        readonly bufferSize?: number | "unbounded" | undefined;
+      }
+    | undefined
+) => Stream.Stream<WindowEventMap[K], never, never> =
+  internal.fromEventListenerWindow;
 
 /**
  * Creates a `Stream` from document.addEventListener.
@@ -25,10 +29,14 @@ export const fromEventListenerWindow: <K extends keyof WindowEventMap>(
  */
 export const fromEventListenerDocument: <K extends keyof DocumentEventMap>(
   type: K,
-  options?: boolean | {
-    readonly capture?: boolean
-    readonly passive?: boolean
-    readonly once?: boolean
-    readonly bufferSize?: number | "unbounded" | undefined
-  } | undefined
-) => Stream.Stream<DocumentEventMap[K], never, never> = internal.fromEventListenerDocument
+  options?:
+    | boolean
+    | {
+        readonly capture?: boolean;
+        readonly passive?: boolean;
+        readonly once?: boolean;
+        readonly bufferSize?: number | "unbounded" | undefined;
+      }
+    | undefined
+) => Stream.Stream<DocumentEventMap[K], never, never> =
+  internal.fromEventListenerDocument;

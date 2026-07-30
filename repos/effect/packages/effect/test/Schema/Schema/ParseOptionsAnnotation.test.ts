@@ -1,21 +1,24 @@
-import { describe, it } from "@effect/vitest"
-import * as S from "effect/Schema"
-import * as Util from "../TestUtils.js"
+import { describe, it } from "@effect/vitest";
+import * as S from "effect/Schema";
+import * as Util from "../TestUtils.js";
 
-const String = S.transform(S.NonEmptyString, S.String, { strict: true, decode: (s) => s, encode: (s) => s })
-  .annotations({
-    identifier: "string"
-  })
+const String = S.transform(S.NonEmptyString, S.String, {
+  strict: true,
+  decode: (s) => s,
+  encode: (s) => s,
+}).annotations({
+  identifier: "string",
+});
 
 describe("ParseOptionsAnnotation", () => {
   it("nested structs", async () => {
     const schema = S.Struct({
       a: S.Struct({
         b: String,
-        c: String
+        c: String,
       }).annotations({ parseOptions: { errors: "first" } }),
-      d: String
-    }).annotations({ parseOptions: { errors: "all" } })
+      d: String,
+    }).annotations({ parseOptions: { errors: "all" } });
     await Util.assertions.decoding.fail(
       schema,
       { a: {} },
@@ -27,7 +30,7 @@ describe("ParseOptionsAnnotation", () => {
 └─ ["d"]
    └─ is missing`,
       { parseOptions: { errors: "first" } }
-    )
+    );
 
     await Util.assertions.encoding.fail(
       schema,
@@ -48,6 +51,6 @@ describe("ParseOptionsAnnotation", () => {
             └─ Predicate refinement failure
                └─ Expected a non empty string, actual ""`,
       { parseOptions: { errors: "first" } }
-    )
-  })
-})
+    );
+  });
+});

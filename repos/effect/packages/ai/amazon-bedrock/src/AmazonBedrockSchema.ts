@@ -1,11 +1,11 @@
 /**
  * @since 1.0.0
  */
-import * as Schema from "effect/Schema"
+import * as Schema from "effect/Schema";
 
-const prefix = "@effect/ai-amazon-bedrock"
+const prefix = "@effect/ai-amazon-bedrock";
 
-const makeIdentifier = (name: string) => `${prefix}/${name}`
+const makeIdentifier = (name: string) => `${prefix}/${name}`;
 
 /**
  * The foundation models supported by Amazon Bedrock.
@@ -116,8 +116,10 @@ export class BedrockFoundationModelId extends Schema.Literal(
  * @since 1.0.0
  * @category Schemas
  */
-export class CachePointBlock extends Schema.Class<CachePointBlock>(makeIdentifier("CachePointBlock"))({
-  type: Schema.Literal("default")
+export class CachePointBlock extends Schema.Class<CachePointBlock>(
+  makeIdentifier("CachePointBlock")
+)({
+  type: Schema.Literal("default"),
 }) {}
 
 /**
@@ -134,18 +136,20 @@ export const DocumentFormat = Schema.Literal(
   "txt",
   "xls",
   "xlsx"
-)
+);
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export type DocumentFormat = typeof DocumentFormat.Type
+export type DocumentFormat = typeof DocumentFormat.Type;
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class DocumentBlock extends Schema.Class<DocumentBlock>(makeIdentifier("DocumentBlock"))({
+export class DocumentBlock extends Schema.Class<DocumentBlock>(
+  makeIdentifier("DocumentBlock")
+)({
   name: Schema.String.pipe(
     Schema.pattern(/^[a-zA-Z0-9()[\]-]+(?: [a-zA-Z0-9()[\]-]+)*$/),
     Schema.minLength(1),
@@ -153,8 +157,8 @@ export class DocumentBlock extends Schema.Class<DocumentBlock>(makeIdentifier("D
   ),
   format: DocumentFormat,
   source: Schema.Struct({
-    bytes: Schema.NonEmptyString
-  })
+    bytes: Schema.NonEmptyString,
+  }),
 }) {}
 
 /**
@@ -166,8 +170,8 @@ export class GuardrailConverseImageBlock extends Schema.Class<GuardrailConverseI
 )({
   format: Schema.Literal("png", "jpg"),
   source: Schema.Struct({
-    bytes: Schema.NonEmptyString
-  })
+    bytes: Schema.NonEmptyString,
+  }),
 }) {}
 
 /**
@@ -178,7 +182,9 @@ export class GuardrailConverseTextBlock extends Schema.Class<GuardrailConverseTe
   makeIdentifier("GuardrailConverseTextBlock")
 )({
   text: Schema.String,
-  qualifiers: Schema.optional(Schema.Array(Schema.Literal("guard_content", "grounding_source", "query")))
+  qualifiers: Schema.optional(
+    Schema.Array(Schema.Literal("guard_content", "grounding_source", "query"))
+  ),
 }) {}
 
 /**
@@ -194,30 +200,34 @@ export class GuardrailConverseContentBlock extends Schema.Union(
  * @since 1.0.0
  * @category Schemas
  */
-export const ImageFormat = Schema.Literal("gif", "jpeg", "png", "webp")
+export const ImageFormat = Schema.Literal("gif", "jpeg", "png", "webp");
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export type ImageFormat = typeof ImageFormat.Type
+export type ImageFormat = typeof ImageFormat.Type;
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ImageBlock extends Schema.Class<ImageBlock>(makeIdentifier("ImageBlock"))({
+export class ImageBlock extends Schema.Class<ImageBlock>(
+  makeIdentifier("ImageBlock")
+)({
   format: ImageFormat,
   source: Schema.Struct({
-    bytes: Schema.NonEmptyString
-  })
+    bytes: Schema.NonEmptyString,
+  }),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class JsonBlock extends Schema.Class<JsonBlock>(makeIdentifier("JsonBlock"))({
-  json: Schema.Unknown
+export class JsonBlock extends Schema.Class<JsonBlock>(
+  makeIdentifier("JsonBlock")
+)({
+  json: Schema.Unknown,
 }) {}
 
 /**
@@ -228,14 +238,14 @@ export class ReasoningContentBlock extends Schema.Union(
   Schema.Struct({
     reasoningText: Schema.Struct({
       text: Schema.String,
-      signature: Schema.optional(Schema.String)
-    })
+      signature: Schema.optional(Schema.String),
+    }),
   }).pipe(
     Schema.attachPropertySignature("type", "reasoning"),
     Schema.annotations({ identifier: "ReasoningTextContentBlock" })
   ),
   Schema.Struct({
-    redactedContent: Schema.String
+    redactedContent: Schema.String,
   }).pipe(
     Schema.attachPropertySignature("type", "redacted-reasoning"),
     Schema.annotations({ identifier: "RedactedReasoningContentBlock" })
@@ -246,11 +256,22 @@ export class ReasoningContentBlock extends Schema.Union(
  * @since 1.0.0
  * @category Schemas
  */
-export class VideoBlock extends Schema.Class<VideoBlock>(makeIdentifier("VideoBlock"))({
-  format: Schema.Literal("flv", "mkv", "mov", "mp4", "mpg", "mpeg", "three_gp", "webm"),
+export class VideoBlock extends Schema.Class<VideoBlock>(
+  makeIdentifier("VideoBlock")
+)({
+  format: Schema.Literal(
+    "flv",
+    "mkv",
+    "mov",
+    "mp4",
+    "mpg",
+    "mpeg",
+    "three_gp",
+    "webm"
+  ),
   source: Schema.Union(
     Schema.Struct({
-      bytes: Schema.NonEmptyString
+      bytes: Schema.NonEmptyString,
     }),
     Schema.Struct({
       s3Location: Schema.Struct({
@@ -262,37 +283,43 @@ export class VideoBlock extends Schema.Class<VideoBlock>(makeIdentifier("VideoBl
         bucketOwner: Schema.String.pipe(
           Schema.pattern(/^[0-9]{12}$/),
           Schema.optional
-        )
-      })
+        ),
+      }),
     })
-  )
+  ),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ToolResultBlock extends Schema.Class<ToolResultBlock>(makeIdentifier("ToolResultBlock"))({
-  content: Schema.Array(Schema.Union(
-    Schema.Struct({ document: DocumentBlock }),
-    Schema.Struct({ image: ImageBlock }),
-    Schema.Struct({ text: Schema.String }),
-    Schema.Struct({ json: JsonBlock }),
-    Schema.Struct({ video: VideoBlock })
-  )),
+export class ToolResultBlock extends Schema.Class<ToolResultBlock>(
+  makeIdentifier("ToolResultBlock")
+)({
+  content: Schema.Array(
+    Schema.Union(
+      Schema.Struct({ document: DocumentBlock }),
+      Schema.Struct({ image: ImageBlock }),
+      Schema.Struct({ text: Schema.String }),
+      Schema.Struct({ json: JsonBlock }),
+      Schema.Struct({ video: VideoBlock })
+    )
+  ),
   toolUseId: Schema.String.pipe(
     Schema.pattern(/^[a-zA-Z0-9_-]+$/),
     Schema.minLength(1),
     Schema.maxLength(64)
   ),
-  status: Schema.optional(Schema.Literal("success", "error"))
+  status: Schema.optional(Schema.Literal("success", "error")),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ToolUseBlock extends Schema.Class<ToolUseBlock>(makeIdentifier("ToolUseBlock"))({
+export class ToolUseBlock extends Schema.Class<ToolUseBlock>(
+  makeIdentifier("ToolUseBlock")
+)({
   name: Schema.String.pipe(
     Schema.pattern(/^[a-zA-Z0-9_-]+$/),
     Schema.minLength(1),
@@ -303,7 +330,7 @@ export class ToolUseBlock extends Schema.Class<ToolUseBlock>(makeIdentifier("Too
     Schema.pattern(/^[a-zA-Z0-9_-]+$/),
     Schema.minLength(1),
     Schema.maxLength(64)
-  )
+  ),
 }) {}
 
 /**
@@ -355,23 +382,27 @@ export class ContentBlock extends Schema.Union(
  */
 export class Message extends Schema.Class<Message>(makeIdentifier("Message"))({
   role: Schema.Literal("user", "assistant"),
-  content: Schema.Array(ContentBlock)
+  content: Schema.Array(ContentBlock),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ConverseOutput extends Schema.Class<ConverseOutput>(makeIdentifier("ConverseOutput"))({
-  message: Message
+export class ConverseOutput extends Schema.Class<ConverseOutput>(
+  makeIdentifier("ConverseOutput")
+)({
+  message: Message,
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ConverseMetrics extends Schema.Class<ConverseMetrics>(makeIdentifier("ConverseMetrics"))({
-  latencyMs: Schema.DurationFromMillis
+export class ConverseMetrics extends Schema.Class<ConverseMetrics>(
+  makeIdentifier("ConverseMetrics")
+)({
+  latencyMs: Schema.DurationFromMillis,
 }) {}
 
 /**
@@ -381,11 +412,20 @@ export class ConverseMetrics extends Schema.Class<ConverseMetrics>(makeIdentifie
 export class GuardrailContentFilter extends Schema.Class<GuardrailContentFilter>(
   makeIdentifier("GuardrailContentFilter")
 )({
-  type: Schema.Literal("HATE", "INSULTS", "MISCONDUCT", "PROMPT_ATTACK", "SEXUAL", "VIOLENCE"),
+  type: Schema.Literal(
+    "HATE",
+    "INSULTS",
+    "MISCONDUCT",
+    "PROMPT_ATTACK",
+    "SEXUAL",
+    "VIOLENCE"
+  ),
   action: Schema.Literal("BLOCKED", "NONE"),
   confidence: Schema.Literal("NONE", "LOW", "MEDIUM", "HIGH"),
   detected: Schema.optional(Schema.Boolean),
-  filterStrength: Schema.optional(Schema.Literal("NONE", "LOW", "MEDIUM", "HIGH"))
+  filterStrength: Schema.optional(
+    Schema.Literal("NONE", "LOW", "MEDIUM", "HIGH")
+  ),
 }) {}
 
 /**
@@ -395,7 +435,7 @@ export class GuardrailContentFilter extends Schema.Class<GuardrailContentFilter>
 export class GuardrailContentPolicyAssessment extends Schema.Class<GuardrailContentPolicyAssessment>(
   makeIdentifier("GuardrailContentPolicyAssessment")
 )({
-  filters: Schema.Array(GuardrailContentFilter)
+  filters: Schema.Array(GuardrailContentFilter),
 }) {}
 
 /**
@@ -409,20 +449,18 @@ export class GuardrailContextualGroundingFilter extends Schema.Class<GuardrailCo
   action: Schema.Literal("BLOCKED", "NONE"),
   score: Schema.Number.pipe(Schema.between(0, 1)),
   threshold: Schema.Number.pipe(Schema.between(0, 1)),
-  detected: Schema.optional(Schema.Boolean)
+  detected: Schema.optional(Schema.Boolean),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class GuardrailContextualGroundingPolicyAssessment
-  extends Schema.Class<GuardrailContextualGroundingPolicyAssessment>(
-    makeIdentifier("GuardrailContextualGroundingPolicyAssessment")
-  )({
-    filters: Schema.optional(Schema.Array(GuardrailContextualGroundingFilter))
-  })
-{}
+export class GuardrailContextualGroundingPolicyAssessment extends Schema.Class<GuardrailContextualGroundingPolicyAssessment>(
+  makeIdentifier("GuardrailContextualGroundingPolicyAssessment")
+)({
+  filters: Schema.optional(Schema.Array(GuardrailContextualGroundingFilter)),
+}) {}
 
 /**
  * @since 1.0.0
@@ -432,7 +470,7 @@ export class GuardrailImageCoverage extends Schema.Class<GuardrailImageCoverage>
   makeIdentifier("GuardrailImageCoverage")
 )({
   guarded: Schema.optional(Schema.Int),
-  total: Schema.optional(Schema.Int)
+  total: Schema.optional(Schema.Int),
 }) {}
 
 /**
@@ -443,30 +481,34 @@ export class GuardrailTextCharactersCoverage extends Schema.Class<GuardrailTextC
   makeIdentifier("GuardrailTextCharactersCoverage")
 )({
   guarded: Schema.optional(Schema.Int),
-  total: Schema.optional(Schema.Int)
+  total: Schema.optional(Schema.Int),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class GuardrailCoverage extends Schema.Class<GuardrailCoverage>(makeIdentifier("GuardrailCoverage"))({
+export class GuardrailCoverage extends Schema.Class<GuardrailCoverage>(
+  makeIdentifier("GuardrailCoverage")
+)({
   images: Schema.optional(GuardrailImageCoverage),
-  textCharacters: Schema.optional(GuardrailTextCharactersCoverage)
+  textCharacters: Schema.optional(GuardrailTextCharactersCoverage),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class GuardrailUsage extends Schema.Class<GuardrailUsage>(makeIdentifier("GuardrailUsage"))({
+export class GuardrailUsage extends Schema.Class<GuardrailUsage>(
+  makeIdentifier("GuardrailUsage")
+)({
   contentPolicyUnits: Schema.Int,
   contextualGroundingPolicyUnits: Schema.Int,
   sensitiveInformationPolicyFreeUnits: Schema.Int,
   sensitiveInformationPolicyUnits: Schema.Int,
   topicPolicyUnits: Schema.Int,
   wordPolicyUnits: Schema.Int,
-  contentPolicyImageUnits: Schema.optional(Schema.Int)
+  contentPolicyImageUnits: Schema.optional(Schema.Int),
 }) {}
 
 /**
@@ -478,7 +520,7 @@ export class GuardrailInvocationMetrics extends Schema.Class<GuardrailInvocation
 )({
   guardrailCoverage: Schema.optional(GuardrailCoverage),
   guardrailProcessingLatency: Schema.optional(Schema.Number),
-  usage: Schema.optional(GuardrailUsage)
+  usage: Schema.optional(GuardrailUsage),
 }) {}
 
 /**
@@ -523,7 +565,7 @@ export class GuardrailPiiEntityFilter extends Schema.Class<GuardrailPiiEntityFil
   ),
   action: Schema.Literal("ANONYMIZED", "BLOCKED", "NONE"),
   match: Schema.String,
-  detected: Schema.optional(Schema.Boolean)
+  detected: Schema.optional(Schema.Boolean),
 }) {}
 
 /**
@@ -537,31 +579,31 @@ export class GuardrailRegexFilter extends Schema.Class<GuardrailRegexFilter>(
   name: Schema.optional(Schema.String),
   match: Schema.optional(Schema.String),
   regex: Schema.optional(Schema.String),
-  detected: Schema.optional(Schema.Boolean)
+  detected: Schema.optional(Schema.Boolean),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class GuardrailSensitiveInformationPolicyAssessment
-  extends Schema.Class<GuardrailSensitiveInformationPolicyAssessment>(
-    makeIdentifier("GuardrailSensitiveInformationPolicyAssessment")
-  )({
-    piiEntities: Schema.Array(GuardrailPiiEntityFilter),
-    regexes: Schema.Array(GuardrailRegexFilter)
-  })
-{}
+export class GuardrailSensitiveInformationPolicyAssessment extends Schema.Class<GuardrailSensitiveInformationPolicyAssessment>(
+  makeIdentifier("GuardrailSensitiveInformationPolicyAssessment")
+)({
+  piiEntities: Schema.Array(GuardrailPiiEntityFilter),
+  regexes: Schema.Array(GuardrailRegexFilter),
+}) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class GuardrailTopic extends Schema.Class<GuardrailTopic>(makeIdentifier("GuardrailTopic"))({
+export class GuardrailTopic extends Schema.Class<GuardrailTopic>(
+  makeIdentifier("GuardrailTopic")
+)({
   action: Schema.Literal("BLOCKED", "NONE"),
   name: Schema.String,
   type: Schema.Literal("DENY"),
-  detected: Schema.optional(Schema.Boolean)
+  detected: Schema.optional(Schema.Boolean),
 }) {}
 
 /**
@@ -571,7 +613,7 @@ export class GuardrailTopic extends Schema.Class<GuardrailTopic>(makeIdentifier(
 export class GuardrailTopicPolicyAssessment extends Schema.Class<GuardrailTopicPolicyAssessment>(
   makeIdentifier("GuardrailTopicPolicyAssessment")
 )({
-  topics: Schema.Array(GuardrailTopic)
+  topics: Schema.Array(GuardrailTopic),
 }) {}
 
 /**
@@ -583,7 +625,7 @@ export class GuardrailCustomWord extends Schema.Class<GuardrailCustomWord>(
 )({
   action: Schema.Literal("BLOCKED", "NONE"),
   match: Schema.String,
-  detected: Schema.optional(Schema.Boolean)
+  detected: Schema.optional(Schema.Boolean),
 }) {}
 
 /**
@@ -596,7 +638,7 @@ export class GuardrailManagedWord extends Schema.Class<GuardrailManagedWord>(
   action: Schema.Literal("BLOCKED", "NONE"),
   match: Schema.String,
   type: Schema.Literal("PROFANITY"),
-  detected: Schema.optional(Schema.Boolean)
+  detected: Schema.optional(Schema.Boolean),
 }) {}
 
 /**
@@ -607,20 +649,26 @@ export class GuardrailWordPolicyAssessment extends Schema.Class<GuardrailWordPol
   makeIdentifier("GuardrailWordPolicyAssessment")
 )({
   customWords: GuardrailCustomWord,
-  managedWordLists: GuardrailManagedWord
+  managedWordLists: GuardrailManagedWord,
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class GuardrailAssessment extends Schema.Class<GuardrailAssessment>(makeIdentifier("GuardrailAssessment"))({
+export class GuardrailAssessment extends Schema.Class<GuardrailAssessment>(
+  makeIdentifier("GuardrailAssessment")
+)({
   contentPolicy: Schema.optional(GuardrailContentPolicyAssessment),
-  contextualGroundingPolicy: Schema.optional(GuardrailContextualGroundingPolicyAssessment),
+  contextualGroundingPolicy: Schema.optional(
+    GuardrailContextualGroundingPolicyAssessment
+  ),
   invocationMetrics: Schema.optional(GuardrailInvocationMetrics),
-  sensitiveInformationPolicy: Schema.optional(GuardrailSensitiveInformationPolicyAssessment),
+  sensitiveInformationPolicy: Schema.optional(
+    GuardrailSensitiveInformationPolicyAssessment
+  ),
   topicPolicy: Schema.optional(GuardrailTopicPolicyAssessment),
-  wordPolicy: Schema.optional(GuardrailWordPolicyAssessment)
+  wordPolicy: Schema.optional(GuardrailWordPolicyAssessment),
 }) {}
 
 /**
@@ -631,55 +679,65 @@ export class GuardrailTraceAssessment extends Schema.Class<GuardrailTraceAssessm
   makeIdentifier("GuardrailTraceAssessment")
 )({
   actionReason: Schema.optional(Schema.String),
-  inputAssessment: Schema.optional(Schema.Record({
-    key: Schema.String,
-    value: GuardrailAssessment
-  })),
+  inputAssessment: Schema.optional(
+    Schema.Record({
+      key: Schema.String,
+      value: GuardrailAssessment,
+    })
+  ),
   modelOutput: Schema.optional(Schema.Array(Schema.String)),
-  outputAssessments: Schema.optional(Schema.Record({
-    key: Schema.String,
-    value: GuardrailAssessment
-  }))
+  outputAssessments: Schema.optional(
+    Schema.Record({
+      key: Schema.String,
+      value: GuardrailAssessment,
+    })
+  ),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class PromptRouterTrace extends Schema.Class<PromptRouterTrace>(makeIdentifier("PromptRouterTrace"))({
+export class PromptRouterTrace extends Schema.Class<PromptRouterTrace>(
+  makeIdentifier("PromptRouterTrace")
+)({
   invokedModelId: Schema.String.pipe(
     Schema.pattern(
       /^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):inference-profile\/[a-zA-Z0-9-:.]+)$/
     ),
     Schema.optional
-  )
+  ),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ConverseTrace extends Schema.Class<ConverseTrace>(makeIdentifier("ConverseTrace"))({
+export class ConverseTrace extends Schema.Class<ConverseTrace>(
+  makeIdentifier("ConverseTrace")
+)({
   guardrail: Schema.optional(GuardrailTraceAssessment),
-  promptRouter: Schema.optional(PromptRouterTrace)
+  promptRouter: Schema.optional(PromptRouterTrace),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export const IntZeroOrGreater = Schema.Int.pipe(Schema.greaterThanOrEqualTo(0))
+export const IntZeroOrGreater = Schema.Int.pipe(Schema.greaterThanOrEqualTo(0));
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class TokenUsage extends Schema.Class<TokenUsage>(makeIdentifier("TokenUsage"))({
+export class TokenUsage extends Schema.Class<TokenUsage>(
+  makeIdentifier("TokenUsage")
+)({
   inputTokens: IntZeroOrGreater,
   outputTokens: IntZeroOrGreater,
   totalTokens: IntZeroOrGreater,
   cacheReadInputTokens: Schema.optional(IntZeroOrGreater),
-  cacheWriteInputTokens: Schema.optional(IntZeroOrGreater)
+  cacheWriteInputTokens: Schema.optional(IntZeroOrGreater),
 }) {}
 
 /**
@@ -702,12 +760,14 @@ export class GuardrailConfiguration extends Schema.Class<GuardrailConfiguration>
   guardrailIdentifier: Schema.String.pipe(
     Schema.minLength(0),
     Schema.maxLength(2048),
-    Schema.pattern(/^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail\/[a-z0-9]+))$/)
+    Schema.pattern(
+      /^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail\/[a-z0-9]+))$/
+    )
   ),
   guardrailVersion: Schema.String.pipe(
     Schema.pattern(/^(([1-9][0-9]{0,7})|(DRAFT))$/)
   ),
-  trace: Schema.optional(Schema.Literal("enabled", "disabled", "enabled_full"))
+  trace: Schema.optional(Schema.Literal("enabled", "disabled", "enabled_full")),
 }) {}
 
 /**
@@ -719,14 +779,12 @@ export class InferenceConfiguration extends Schema.Class<InferenceConfiguration>
 )({
   maxTokens: Schema.optional(Schema.Int.pipe(Schema.greaterThanOrEqualTo(1))),
   stopSequences: Schema.optional(
-    Schema.Array(Schema.String.pipe(
-      Schema.minLength(1)
-    )).pipe(
+    Schema.Array(Schema.String.pipe(Schema.minLength(1))).pipe(
       Schema.maxItems(4)
     )
   ),
   temperature: Schema.optional(Schema.Number.pipe(Schema.between(0, 1))),
-  topP: Schema.optional(Schema.Number.pipe(Schema.between(0, 1)))
+  topP: Schema.optional(Schema.Number.pipe(Schema.between(0, 1))),
 }) {}
 
 /**
@@ -736,7 +794,7 @@ export class InferenceConfiguration extends Schema.Class<InferenceConfiguration>
 export class PerformanceConfiguration extends Schema.Class<PerformanceConfiguration>(
   makeIdentifier("PerformanceConfiguration")
 )({
-  latency: Schema.optional(Schema.Literal("standard", "optimized"))
+  latency: Schema.optional(Schema.Literal("standard", "optimized")),
 }) {}
 
 /**
@@ -754,23 +812,19 @@ export class ToolSpecification extends Schema.Class<ToolSpecification>(
   inputSchema: Schema.Struct({
     json: Schema.Record({
       key: Schema.String,
-      value: Schema.Unknown
-    })
+      value: Schema.Unknown,
+    }),
   }),
-  description: Schema.optional(Schema.String.pipe(
-    Schema.minLength(1)
-  ))
+  description: Schema.optional(Schema.String.pipe(Schema.minLength(1))),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class Tool extends Schema.Class<Tool>(
-  makeIdentifier("Tool")
-)({
+export class Tool extends Schema.Class<Tool>(makeIdentifier("Tool"))({
   cachePoint: Schema.optional(CachePointBlock),
-  toolSpec: Schema.optional(ToolSpecification)
+  toolSpec: Schema.optional(ToolSpecification),
 }) {}
 
 /**
@@ -786,8 +840,8 @@ export class ToolChoice extends Schema.Union(
         Schema.minLength(1),
         Schema.maxLength(64),
         Schema.pattern(/^[a-zA-Z0-9_-]+$/)
-      )
-    })
+      ),
+    }),
   })
 ) {}
 
@@ -799,14 +853,16 @@ export class ToolConfiguration extends Schema.Class<ToolConfiguration>(
   makeIdentifier("ToolConfiguration")
 )({
   tools: Schema.Array(Tool).pipe(Schema.minItems(1)),
-  toolChoice: Schema.optional(ToolChoice)
+  toolChoice: Schema.optional(ToolChoice),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ConverseRequest extends Schema.Class<ConverseRequest>(makeIdentifier("ConverseRequest"))({
+export class ConverseRequest extends Schema.Class<ConverseRequest>(
+  makeIdentifier("ConverseRequest")
+)({
   modelId: Schema.String,
   messages: Schema.Array(Message),
   system: Schema.optional(Schema.Array(SystemContentBlock)),
@@ -814,41 +870,46 @@ export class ConverseRequest extends Schema.Class<ConverseRequest>(makeIdentifie
   guardrailConfig: Schema.optional(GuardrailConfiguration),
   inferenceConfig: Schema.optional(InferenceConfiguration),
   performanceConfig: Schema.optional(PerformanceConfiguration),
-  promptVariables: Schema.optional(Schema.Record({
-    key: Schema.String,
-    value: Schema.Struct({ text: Schema.String })
-  })),
-  requestMetadata: Schema.optional(Schema.Record({
-    key: Schema.String.pipe(
-      Schema.minLength(1),
-      Schema.maxLength(256),
-      Schema.pattern(/^[a-zA-Z0-9\s:_@$#=/+,-.]{1,256}$/)
-    ),
-    value: Schema.String.pipe(
-      Schema.minLength(0),
-      Schema.maxLength(256),
-      Schema.pattern(/^[a-zA-Z0-9\s:_@$#=/+,-.]{0,256}$/)
-    )
-  })),
-  additionalModelRequestFields: Schema.optional(Schema.Record({
-    key: Schema.String,
-    value: Schema.Unknown
-  })),
+  promptVariables: Schema.optional(
+    Schema.Record({
+      key: Schema.String,
+      value: Schema.Struct({ text: Schema.String }),
+    })
+  ),
+  requestMetadata: Schema.optional(
+    Schema.Record({
+      key: Schema.String.pipe(
+        Schema.minLength(1),
+        Schema.maxLength(256),
+        Schema.pattern(/^[a-zA-Z0-9\s:_@$#=/+,-.]{1,256}$/)
+      ),
+      value: Schema.String.pipe(
+        Schema.minLength(0),
+        Schema.maxLength(256),
+        Schema.pattern(/^[a-zA-Z0-9\s:_@$#=/+,-.]{0,256}$/)
+      ),
+    })
+  ),
+  additionalModelRequestFields: Schema.optional(
+    Schema.Record({
+      key: Schema.String,
+      value: Schema.Unknown,
+    })
+  ),
   additionalModelResponseFieldPaths: Schema.optional(
-    Schema.Array(Schema.String.pipe(
-      Schema.minLength(1),
-      Schema.maxLength(256)
-    )).pipe(
-      Schema.maxItems(10)
-    )
-  )
+    Schema.Array(
+      Schema.String.pipe(Schema.minLength(1), Schema.maxLength(256))
+    ).pipe(Schema.maxItems(10))
+  ),
 }) {}
 
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export class ConverseResponse extends Schema.Class<ConverseResponse>(makeIdentifier("ConverseResponse"))({
+export class ConverseResponse extends Schema.Class<ConverseResponse>(
+  makeIdentifier("ConverseResponse")
+)({
   output: ConverseOutput,
   metrics: ConverseMetrics,
   usage: TokenUsage,
@@ -861,13 +922,17 @@ export class ConverseResponse extends Schema.Class<ConverseResponse>(makeIdentif
     "guardrail_intervened"
   ),
   trace: Schema.optional(ConverseTrace),
-  performanceConfig: Schema.optional(Schema.Struct({
-    latency: Schema.Literal("standard", "optimized")
-  })),
-  additionalModelResponseFields: Schema.optional(Schema.Record({
-    key: Schema.String,
-    value: Schema.Unknown
-  }))
+  performanceConfig: Schema.optional(
+    Schema.Struct({
+      latency: Schema.Literal("standard", "optimized"),
+    })
+  ),
+  additionalModelResponseFields: Schema.optional(
+    Schema.Record({
+      key: Schema.String,
+      value: Schema.Unknown,
+    })
+  ),
 }) {}
 
 /**
@@ -896,7 +961,7 @@ export class ToolUseBlockStart extends Schema.Class<ToolUseBlockStart>(
     Schema.minLength(1),
     Schema.maxLength(64),
     Schema.pattern(/^[a-zA-Z0-9_-]+$/)
-  )
+  ),
 }) {}
 
 /**
@@ -906,7 +971,7 @@ export class ToolUseBlockStart extends Schema.Class<ToolUseBlockStart>(
 export class ContentBlockStart extends Schema.Class<ContentBlockStart>(
   makeIdentifier("ContentBlockStart")
 )({
-  toolUse: Schema.optional(ToolUseBlockStart)
+  toolUse: Schema.optional(ToolUseBlockStart),
 }) {}
 
 /**
@@ -917,7 +982,7 @@ export class ContentBlockStartEvent extends Schema.Class<ContentBlockStartEvent>
   makeIdentifier("ContentBlockStartEvent")
 )({
   contentBlockIndex: Schema.Int.pipe(Schema.greaterThanOrEqualTo(0)),
-  start: ContentBlockStart
+  start: ContentBlockStart,
 }) {}
 
 /**
@@ -927,7 +992,7 @@ export class ContentBlockStartEvent extends Schema.Class<ContentBlockStartEvent>
 export class ContentBlockStopEvent extends Schema.Class<ContentBlockStopEvent>(
   makeIdentifier("ContentBlockStopEvent")
 )({
-  contentBlockIndex: Schema.Int.pipe(Schema.greaterThanOrEqualTo(0))
+  contentBlockIndex: Schema.Int.pipe(Schema.greaterThanOrEqualTo(0)),
 }) {}
 
 /**
@@ -937,7 +1002,7 @@ export class ContentBlockStopEvent extends Schema.Class<ContentBlockStopEvent>(
 export class ToolUseBlockDelta extends Schema.Class<ToolUseBlockDelta>(
   makeIdentifier("ToolUseBlockDelta")
 )({
-  input: Schema.String
+  input: Schema.String,
 }) {}
 
 /**
@@ -964,7 +1029,7 @@ export class ContentBlockDeltaEvent extends Schema.Class<ContentBlockDeltaEvent>
   makeIdentifier("ContentBlockDeltaEvent")
 )({
   contentBlockIndex: Schema.Int.pipe(Schema.greaterThanOrEqualTo(0)),
-  delta: ContentBlockDelta
+  delta: ContentBlockDelta,
 }) {}
 
 /**
@@ -974,7 +1039,7 @@ export class ContentBlockDeltaEvent extends Schema.Class<ContentBlockDeltaEvent>
 export class MessageStartEvent extends Schema.Class<MessageStartEvent>(
   makeIdentifier("MessageStartEvent")
 )({
-  role: Schema.Literal("user", "assistant")
+  role: Schema.Literal("user", "assistant"),
 }) {}
 
 /**
@@ -988,12 +1053,12 @@ export const StopReason = Schema.Literal(
   "stop_sequence",
   "guardrail_intervened",
   "content_filtered"
-)
+);
 /**
  * @since 1.0.0
  * @category Schemas
  */
-export type StopReason = typeof StopReason.Type
+export type StopReason = typeof StopReason.Type;
 
 /**
  * @since 1.0.0
@@ -1003,10 +1068,12 @@ export class MessageStopEvent extends Schema.Class<MessageStopEvent>(
   makeIdentifier("MessageStopEvent")
 )({
   stopReason: StopReason,
-  additionalModelResponseFields: Schema.optional(Schema.Record({
-    key: Schema.String,
-    value: Schema.Unknown
-  }))
+  additionalModelResponseFields: Schema.optional(
+    Schema.Record({
+      key: Schema.String,
+      value: Schema.Unknown,
+    })
+  ),
 }) {}
 
 /**
@@ -1016,7 +1083,7 @@ export class MessageStopEvent extends Schema.Class<MessageStopEvent>(
 export class ConverseStreamMetrics extends Schema.Class<ConverseStreamMetrics>(
   makeIdentifier("ConverseStreamMetrics")
 )({
-  latencyMs: Schema.DurationFromMillis
+  latencyMs: Schema.DurationFromMillis,
 }) {}
 
 /**
@@ -1027,7 +1094,7 @@ export class ConverseStreamTrace extends Schema.Class<ConverseStreamTrace>(
   makeIdentifier("ConverseStreamTrace")
 )({
   guardrail: Schema.optional(GuardrailTraceAssessment),
-  promptRouter: Schema.optional(PromptRouterTrace)
+  promptRouter: Schema.optional(PromptRouterTrace),
 }) {}
 
 /**
@@ -1040,7 +1107,7 @@ export class ConverseStreamMetadataEvent extends Schema.Class<ConverseStreamMeta
   metrics: ConverseStreamMetrics,
   usage: TokenUsage,
   performanceConfig: Schema.optional(PerformanceConfiguration),
-  trace: Schema.optional(ConverseStreamTrace)
+  trace: Schema.optional(ConverseStreamTrace),
 }) {}
 
 /**
@@ -1075,8 +1142,8 @@ export const ConverseResponseStreamEvent = Schema.Union(
   Schema.Struct({
     internalServerException: Schema.Record({
       key: Schema.String,
-      value: Schema.Unknown
-    })
+      value: Schema.Unknown,
+    }),
   }).pipe(
     Schema.attachPropertySignature("type", "internalServerException"),
     Schema.annotations({ identifier: "InternalServerException" })
@@ -1084,8 +1151,8 @@ export const ConverseResponseStreamEvent = Schema.Union(
   Schema.Struct({
     modelStreamErrorException: Schema.Record({
       key: Schema.String,
-      value: Schema.Unknown
-    })
+      value: Schema.Unknown,
+    }),
   }).pipe(
     Schema.attachPropertySignature("type", "modelStreamErrorException"),
     Schema.annotations({ identifier: "ModelStreamErrorException" })
@@ -1093,8 +1160,8 @@ export const ConverseResponseStreamEvent = Schema.Union(
   Schema.Struct({
     serviceUnavailableException: Schema.Record({
       key: Schema.String,
-      value: Schema.Unknown
-    })
+      value: Schema.Unknown,
+    }),
   }).pipe(
     Schema.attachPropertySignature("type", "serviceUnavailableException"),
     Schema.annotations({ identifier: "ServiceUnavailableException" })
@@ -1102,8 +1169,8 @@ export const ConverseResponseStreamEvent = Schema.Union(
   Schema.Struct({
     throttlingException: Schema.Record({
       key: Schema.String,
-      value: Schema.Unknown
-    })
+      value: Schema.Unknown,
+    }),
   }).pipe(
     Schema.attachPropertySignature("type", "throttlingException"),
     Schema.annotations({ identifier: "ThrottlingException" })
@@ -1111,16 +1178,19 @@ export const ConverseResponseStreamEvent = Schema.Union(
   Schema.Struct({
     validationException: Schema.Record({
       key: Schema.String,
-      value: Schema.Unknown
-    })
+      value: Schema.Unknown,
+    }),
   }).pipe(
     Schema.attachPropertySignature("type", "validationException"),
     Schema.annotations({ identifier: "ValidationException" })
   )
-).pipe(Schema.asSchema).annotations({ identifier: "ConverseResponseStreamEvent" })
+)
+  .pipe(Schema.asSchema)
+  .annotations({ identifier: "ConverseResponseStreamEvent" });
 
 /**
  * @since 1.0.0
  * @category Models
  */
-export type ConverseResponseStreamEvent = typeof ConverseResponseStreamEvent.Type
+export type ConverseResponseStreamEvent =
+  typeof ConverseResponseStreamEvent.Type;

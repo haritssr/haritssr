@@ -6,16 +6,16 @@
  * @since 2.0.0
  */
 
-import type { NonEmptyArray } from "./Array.js"
-import * as equivalence from "./Equivalence.js"
-import { dual } from "./Function.js"
-import * as readonlyArray from "./internal/array.js"
-import * as number from "./Number.js"
-import * as Option from "./Option.js"
-import * as order from "./Order.js"
-import type * as Ordering from "./Ordering.js"
-import type { Refinement } from "./Predicate.js"
-import * as predicate from "./Predicate.js"
+import type { NonEmptyArray } from "./Array.js";
+import * as equivalence from "./Equivalence.js";
+import { dual } from "./Function.js";
+import * as readonlyArray from "./internal/array.js";
+import * as number from "./Number.js";
+import * as Option from "./Option.js";
+import * as order from "./Order.js";
+import type * as Ordering from "./Ordering.js";
+import type { Refinement } from "./Predicate.js";
+import * as predicate from "./Predicate.js";
 
 /**
  * Tests if a value is a `string`.
@@ -32,33 +32,33 @@ import * as predicate from "./Predicate.js"
  * @category guards
  * @since 2.0.0
  */
-export const isString: Refinement<unknown, string> = predicate.isString
+export const isString: Refinement<unknown, string> = predicate.isString;
 
 /**
  * @category instances
  * @since 2.0.0
  */
-export const Equivalence: equivalence.Equivalence<string> = equivalence.string
+export const Equivalence: equivalence.Equivalence<string> = equivalence.string;
 
 /**
  * @category instances
  * @since 2.0.0
  */
-export const Order: order.Order<string> = order.string
+export const Order: order.Order<string> = order.string;
 
 /**
  * The empty string `""`.
  *
  * @since 2.0.0
  */
-export const empty: "" = "" as const
+export const empty: "" = "" as const;
 
 /**
  * Concatenates two strings at the type level.
  *
  * @since 2.0.0
  */
-export type Concat<A extends string, B extends string> = `${A}${B}`
+export type Concat<A extends string, B extends string> = `${A}${B}`;
 
 /**
  * Concatenates two strings at runtime.
@@ -66,9 +66,9 @@ export type Concat<A extends string, B extends string> = `${A}${B}`
  * @since 2.0.0
  */
 export const concat: {
-  <B extends string>(that: B): <A extends string>(self: A) => Concat<A, B>
-  <A extends string, B extends string>(self: A, that: B): Concat<A, B>
-} = dual(2, (self: string, that: string): string => self + that)
+  <B extends string>(that: B): <A extends string>(self: A) => Concat<A, B>;
+  <A extends string, B extends string>(self: A, that: B): Concat<A, B>;
+} = dual(2, (self: string, that: string): string => self + that);
 
 /**
  * @example
@@ -81,7 +81,8 @@ export const concat: {
  *
  * @since 2.0.0
  */
-export const toUpperCase = <S extends string>(self: S): Uppercase<S> => self.toUpperCase() as Uppercase<S>
+export const toUpperCase = <S extends string>(self: S): Uppercase<S> =>
+  self.toUpperCase() as Uppercase<S>;
 
 /**
  * @example
@@ -94,7 +95,8 @@ export const toUpperCase = <S extends string>(self: S): Uppercase<S> => self.toU
  *
  * @since 2.0.0
  */
-export const toLowerCase = <T extends string>(self: T): Lowercase<T> => self.toLowerCase() as Lowercase<T>
+export const toLowerCase = <T extends string>(self: T): Lowercase<T> =>
+  self.toLowerCase() as Lowercase<T>;
 
 /**
  * @example
@@ -108,10 +110,10 @@ export const toLowerCase = <T extends string>(self: T): Lowercase<T> => self.toL
  * @since 2.0.0
  */
 export const capitalize = <T extends string>(self: T): Capitalize<T> => {
-  if (self.length === 0) return self as Capitalize<T>
+  if (self.length === 0) return self as Capitalize<T>;
 
-  return (toUpperCase(self[0]) + self.slice(1)) as Capitalize<T>
-}
+  return (toUpperCase(self[0]) + self.slice(1)) as Capitalize<T>;
+};
 
 /**
  * @example
@@ -125,10 +127,10 @@ export const capitalize = <T extends string>(self: T): Capitalize<T> => {
  * @since 2.0.0
  */
 export const uncapitalize = <T extends string>(self: T): Uncapitalize<T> => {
-  if (self.length === 0) return self as Uncapitalize<T>
+  if (self.length === 0) return self as Uncapitalize<T>;
 
-  return (toLowerCase(self[0]) + self.slice(1)) as Uncapitalize<T>
-}
+  return (toLowerCase(self[0]) + self.slice(1)) as Uncapitalize<T>;
+};
 
 /**
  * @example
@@ -141,13 +143,15 @@ export const uncapitalize = <T extends string>(self: T): Uncapitalize<T> => {
  *
  * @since 2.0.0
  */
-export const replace = (searchValue: string | RegExp, replaceValue: string) => (self: string): string =>
-  self.replace(searchValue, replaceValue)
+export const replace =
+  (searchValue: string | RegExp, replaceValue: string) =>
+  (self: string): string =>
+    self.replace(searchValue, replaceValue);
 
 /**
  * @since 2.0.0
  */
-export type Trim<A extends string> = TrimEnd<TrimStart<A>>
+export type Trim<A extends string> = TrimEnd<TrimStart<A>>;
 
 /**
  * @example
@@ -160,12 +164,14 @@ export type Trim<A extends string> = TrimEnd<TrimStart<A>>
  *
  * @since 2.0.0
  */
-export const trim = <A extends string>(self: A): Trim<A> => self.trim() as Trim<A>
+export const trim = <A extends string>(self: A): Trim<A> =>
+  self.trim() as Trim<A>;
 
 /**
  * @since 2.0.0
  */
-export type TrimStart<A extends string> = A extends `${" " | "\n" | "\t" | "\r"}${infer B}` ? TrimStart<B> : A
+export type TrimStart<A extends string> =
+  A extends `${" " | "\n" | "\t" | "\r"}${infer B}` ? TrimStart<B> : A;
 
 /**
  * @example
@@ -178,12 +184,14 @@ export type TrimStart<A extends string> = A extends `${" " | "\n" | "\t" | "\r"}
  *
  * @since 2.0.0
  */
-export const trimStart = <A extends string>(self: A): TrimStart<A> => self.trimStart() as TrimStart<A>
+export const trimStart = <A extends string>(self: A): TrimStart<A> =>
+  self.trimStart() as TrimStart<A>;
 
 /**
  * @since 2.0.0
  */
-export type TrimEnd<A extends string> = A extends `${infer B}${" " | "\n" | "\t" | "\r"}` ? TrimEnd<B> : A
+export type TrimEnd<A extends string> =
+  A extends `${infer B}${" " | "\n" | "\t" | "\r"}` ? TrimEnd<B> : A;
 
 /**
  * @example
@@ -196,7 +204,8 @@ export type TrimEnd<A extends string> = A extends `${infer B}${" " | "\n" | "\t"
  *
  * @since 2.0.0
  */
-export const trimEnd = <A extends string>(self: A): TrimEnd<A> => self.trimEnd() as TrimEnd<A>
+export const trimEnd = <A extends string>(self: A): TrimEnd<A> =>
+  self.trimEnd() as TrimEnd<A>;
 
 /**
  * @example
@@ -209,7 +218,10 @@ export const trimEnd = <A extends string>(self: A): TrimEnd<A> => self.trimEnd()
  *
  * @since 2.0.0
  */
-export const slice = (start?: number, end?: number) => (self: string): string => self.slice(start, end)
+export const slice =
+  (start?: number, end?: number) =>
+  (self: string): string =>
+    self.slice(start, end);
 
 /**
  * Test whether a `string` is empty.
@@ -225,14 +237,14 @@ export const slice = (start?: number, end?: number) => (self: string): string =>
  *
  * @since 2.0.0
  */
-export const isEmpty = (self: string): self is "" => self.length === 0
+export const isEmpty = (self: string): self is "" => self.length === 0;
 
 /**
  * Test whether a `string` is non empty.
  *
  * @since 2.0.0
  */
-export const isNonEmpty = (self: string): boolean => self.length > 0
+export const isNonEmpty = (self: string): boolean => self.length > 0;
 
 /**
  * Calculate the number of characters in a `string`.
@@ -247,7 +259,7 @@ export const isNonEmpty = (self: string): boolean => self.length > 0
  *
  * @since 2.0.0
  */
-export const length = (self: string): number => self.length
+export const length = (self: string): number => self.length;
 
 /**
  * @example
@@ -262,12 +274,15 @@ export const length = (self: string): number => self.length
  * @since 2.0.0
  */
 export const split: {
-  (separator: string | RegExp): (self: string) => NonEmptyArray<string>
-  (self: string, separator: string | RegExp): NonEmptyArray<string>
-} = dual(2, (self: string, separator: string | RegExp): NonEmptyArray<string> => {
-  const out = self.split(separator)
-  return readonlyArray.isNonEmptyArray(out) ? out : [self]
-})
+  (separator: string | RegExp): (self: string) => NonEmptyArray<string>;
+  (self: string, separator: string | RegExp): NonEmptyArray<string>;
+} = dual(
+  2,
+  (self: string, separator: string | RegExp): NonEmptyArray<string> => {
+    const out = self.split(separator);
+    return readonlyArray.isNonEmptyArray(out) ? out : [self];
+  }
+);
 
 /**
  * Returns `true` if `searchString` appears as a substring of `self`, at one or more positions that are
@@ -275,20 +290,26 @@ export const split: {
  *
  * @since 2.0.0
  */
-export const includes = (searchString: string, position?: number) => (self: string): boolean =>
-  self.includes(searchString, position)
+export const includes =
+  (searchString: string, position?: number) =>
+  (self: string): boolean =>
+    self.includes(searchString, position);
 
 /**
  * @since 2.0.0
  */
-export const startsWith = (searchString: string, position?: number) => (self: string): boolean =>
-  self.startsWith(searchString, position)
+export const startsWith =
+  (searchString: string, position?: number) =>
+  (self: string): boolean =>
+    self.startsWith(searchString, position);
 
 /**
  * @since 2.0.0
  */
-export const endsWith = (searchString: string, position?: number) => (self: string): boolean =>
-  self.endsWith(searchString, position)
+export const endsWith =
+  (searchString: string, position?: number) =>
+  (self: string): boolean =>
+    self.endsWith(searchString, position);
 
 /**
  * @example
@@ -303,13 +324,16 @@ export const endsWith = (searchString: string, position?: number) => (self: stri
  * @since 2.0.0
  */
 export const charCodeAt: {
-  (index: number): (self: string) => Option.Option<number>
-  (self: string, index: number): Option.Option<number>
+  (index: number): (self: string) => Option.Option<number>;
+  (self: string, index: number): Option.Option<number>;
 } = dual(
   2,
   (self: string, index: number): Option.Option<number> =>
-    Option.filter(Option.some(self.charCodeAt(index)), (charCode) => !isNaN(charCode))
-)
+    Option.filter(
+      Option.some(self.charCodeAt(index)),
+      (charCode) => !isNaN(charCode)
+    )
+);
 
 /**
  * @example
@@ -323,7 +347,10 @@ export const charCodeAt: {
  *
  * @since 2.0.0
  */
-export const substring = (start: number, end?: number) => (self: string): string => self.substring(start, end)
+export const substring =
+  (start: number, end?: number) =>
+  (self: string): string =>
+    self.substring(start, end);
 
 /**
  * @example
@@ -338,9 +365,13 @@ export const substring = (start: number, end?: number) => (self: string): string
  * @since 2.0.0
  */
 export const at: {
-  (index: number): (self: string) => Option.Option<string>
-  (self: string, index: number): Option.Option<string>
-} = dual(2, (self: string, index: number): Option.Option<string> => Option.fromNullable(self.at(index)))
+  (index: number): (self: string) => Option.Option<string>;
+  (self: string, index: number): Option.Option<string>;
+} = dual(
+  2,
+  (self: string, index: number): Option.Option<string> =>
+    Option.fromNullable(self.at(index))
+);
 
 /**
  * @example
@@ -355,12 +386,13 @@ export const at: {
  * @since 2.0.0
  */
 export const charAt: {
-  (index: number): (self: string) => Option.Option<string>
-  (self: string, index: number): Option.Option<string>
+  (index: number): (self: string) => Option.Option<string>;
+  (self: string, index: number): Option.Option<string>;
 } = dual(
   2,
-  (self: string, index: number): Option.Option<string> => Option.filter(Option.some(self.charAt(index)), isNonEmpty)
-)
+  (self: string, index: number): Option.Option<string> =>
+    Option.filter(Option.some(self.charAt(index)), isNonEmpty)
+);
 
 /**
  * @example
@@ -374,9 +406,13 @@ export const charAt: {
  * @since 2.0.0
  */
 export const codePointAt: {
-  (index: number): (self: string) => Option.Option<number>
-  (self: string, index: number): Option.Option<number>
-} = dual(2, (self: string, index: number): Option.Option<number> => Option.fromNullable(self.codePointAt(index)))
+  (index: number): (self: string) => Option.Option<number>;
+  (self: string, index: number): Option.Option<number>;
+} = dual(
+  2,
+  (self: string, index: number): Option.Option<number> =>
+    Option.fromNullable(self.codePointAt(index))
+);
 
 /**
  * @example
@@ -389,8 +425,13 @@ export const codePointAt: {
  *
  * @since 2.0.0
  */
-export const indexOf = (searchString: string) => (self: string): Option.Option<number> =>
-  Option.filter(Option.some(self.indexOf(searchString)), number.greaterThanOrEqualTo(0))
+export const indexOf =
+  (searchString: string) =>
+  (self: string): Option.Option<number> =>
+    Option.filter(
+      Option.some(self.indexOf(searchString)),
+      number.greaterThanOrEqualTo(0)
+    );
 
 /**
  * @example
@@ -404,8 +445,13 @@ export const indexOf = (searchString: string) => (self: string): Option.Option<n
  *
  * @since 2.0.0
  */
-export const lastIndexOf = (searchString: string) => (self: string): Option.Option<number> =>
-  Option.filter(Option.some(self.lastIndexOf(searchString)), number.greaterThanOrEqualTo(0))
+export const lastIndexOf =
+  (searchString: string) =>
+  (self: string): Option.Option<number> =>
+    Option.filter(
+      Option.some(self.lastIndexOf(searchString)),
+      number.greaterThanOrEqualTo(0)
+    );
 
 /**
  * @example
@@ -421,23 +467,33 @@ export const lastIndexOf = (searchString: string) => (self: string): Option.Opti
  * @since 2.0.0
  */
 export const localeCompare =
-  (that: string, locales?: Intl.LocalesArgument, options?: Intl.CollatorOptions) => (self: string): Ordering.Ordering =>
-    number.sign(self.localeCompare(that, locales, options))
+  (
+    that: string,
+    locales?: Intl.LocalesArgument,
+    options?: Intl.CollatorOptions
+  ) =>
+  (self: string): Ordering.Ordering =>
+    number.sign(self.localeCompare(that, locales, options));
 
 /**
  * It is the `pipe`-able version of the native `match` method.
  *
  * @since 2.0.0
  */
-export const match = (regexp: RegExp | string) => (self: string): Option.Option<RegExpMatchArray> =>
-  Option.fromNullable(self.match(regexp))
+export const match =
+  (regexp: RegExp | string) =>
+  (self: string): Option.Option<RegExpMatchArray> =>
+    Option.fromNullable(self.match(regexp));
 
 /**
  * It is the `pipe`-able version of the native `matchAll` method.
  *
  * @since 2.0.0
  */
-export const matchAll = (regexp: RegExp) => (self: string): IterableIterator<RegExpMatchArray> => self.matchAll(regexp)
+export const matchAll =
+  (regexp: RegExp) =>
+  (self: string): IterableIterator<RegExpMatchArray> =>
+    self.matchAll(regexp);
 
 /**
  * @example
@@ -455,7 +511,10 @@ export const matchAll = (regexp: RegExp) => (self: string): IterableIterator<Reg
  *
  * @since 2.0.0
  */
-export const normalize = (form?: "NFC" | "NFD" | "NFKC" | "NFKD") => (self: string): string => self.normalize(form)
+export const normalize =
+  (form?: "NFC" | "NFD" | "NFKC" | "NFKD") =>
+  (self: string): string =>
+    self.normalize(form);
 
 /**
  * @example
@@ -469,8 +528,10 @@ export const normalize = (form?: "NFC" | "NFD" | "NFKC" | "NFKD") => (self: stri
  *
  * @since 2.0.0
  */
-export const padEnd = (maxLength: number, fillString?: string) => (self: string): string =>
-  self.padEnd(maxLength, fillString)
+export const padEnd =
+  (maxLength: number, fillString?: string) =>
+  (self: string): string =>
+    self.padEnd(maxLength, fillString);
 
 /**
  * @example
@@ -484,8 +545,10 @@ export const padEnd = (maxLength: number, fillString?: string) => (self: string)
  *
  * @since 2.0.0
  */
-export const padStart = (maxLength: number, fillString?: string) => (self: string): string =>
-  self.padStart(maxLength, fillString)
+export const padStart =
+  (maxLength: number, fillString?: string) =>
+  (self: string): string =>
+    self.padStart(maxLength, fillString);
 
 /**
  * @example
@@ -498,7 +561,10 @@ export const padStart = (maxLength: number, fillString?: string) => (self: strin
  *
  * @since 2.0.0
  */
-export const repeat = (count: number) => (self: string): string => self.repeat(count)
+export const repeat =
+  (count: number) =>
+  (self: string): string =>
+    self.repeat(count);
 
 /**
  * @example
@@ -512,8 +578,10 @@ export const repeat = (count: number) => (self: string): string => self.repeat(c
  *
  * @since 2.0.0
  */
-export const replaceAll = (searchValue: string | RegExp, replaceValue: string) => (self: string): string =>
-  self.replaceAll(searchValue, replaceValue)
+export const replaceAll =
+  (searchValue: string | RegExp, replaceValue: string) =>
+  (self: string): string =>
+    self.replaceAll(searchValue, replaceValue);
 
 /**
  * @example
@@ -529,13 +597,16 @@ export const replaceAll = (searchValue: string | RegExp, replaceValue: string) =
  * @since 2.0.0
  */
 export const search: {
-  (regexp: RegExp | string): (self: string) => Option.Option<number>
-  (self: string, regexp: RegExp | string): Option.Option<number>
+  (regexp: RegExp | string): (self: string) => Option.Option<number>;
+  (self: string, regexp: RegExp | string): Option.Option<number>;
 } = dual(
   2,
   (self: string, regexp: RegExp | string): Option.Option<number> =>
-    Option.filter(Option.some(self.search(regexp)), number.greaterThanOrEqualTo(0))
-)
+    Option.filter(
+      Option.some(self.search(regexp)),
+      number.greaterThanOrEqualTo(0)
+    )
+);
 
 /**
  * @example
@@ -549,8 +620,10 @@ export const search: {
  *
  * @since 2.0.0
  */
-export const toLocaleLowerCase = (locale?: Intl.LocalesArgument) => (self: string): string =>
-  self.toLocaleLowerCase(locale)
+export const toLocaleLowerCase =
+  (locale?: Intl.LocalesArgument) =>
+  (self: string): string =>
+    self.toLocaleLowerCase(locale);
 
 /**
  * @example
@@ -564,8 +637,10 @@ export const toLocaleLowerCase = (locale?: Intl.LocalesArgument) => (self: strin
  *
  * @since 2.0.0
  */
-export const toLocaleUpperCase = (locale?: Intl.LocalesArgument) => (self: string): string =>
-  self.toLocaleUpperCase(locale)
+export const toLocaleUpperCase =
+  (locale?: Intl.LocalesArgument) =>
+  (self: string): string =>
+    self.toLocaleUpperCase(locale);
 
 /**
  * Keep the specified number of characters from the start of a string.
@@ -588,9 +663,9 @@ export const toLocaleUpperCase = (locale?: Intl.LocalesArgument) => (self: strin
  * @since 2.0.0
  */
 export const takeLeft: {
-  (n: number): (self: string) => string
-  (self: string, n: number): string
-} = dual(2, (self: string, n: number): string => self.slice(0, Math.max(n, 0)))
+  (n: number): (self: string) => string;
+  (self: string, n: number): string;
+} = dual(2, (self: string, n: number): string => self.slice(0, Math.max(n, 0)));
 
 /**
  * Keep the specified number of characters from the end of a string.
@@ -613,15 +688,14 @@ export const takeLeft: {
  * @since 2.0.0
  */
 export const takeRight: {
-  (n: number): (self: string) => string
-  (self: string, n: number): string
-} = dual(
-  2,
-  (self: string, n: number): string => self.slice(Math.max(0, self.length - Math.floor(n)), Infinity)
-)
+  (n: number): (self: string) => string;
+  (self: string, n: number): string;
+} = dual(2, (self: string, n: number): string =>
+  self.slice(Math.max(0, self.length - Math.floor(n)), Number.POSITIVE_INFINITY)
+);
 
-const CR = 0x0d
-const LF = 0x0a
+const CR = 0x0d;
+const LF = 0x0a;
 
 /**
  * Returns an `IterableIterator` which yields each line contained within the
@@ -629,7 +703,8 @@ const LF = 0x0a
  *
  * @since 2.0.0
  */
-export const linesIterator = (self: string): LinesIterator => linesSeparated(self, true)
+export const linesIterator = (self: string): LinesIterator =>
+  linesSeparated(self, true);
 
 /**
  * Returns an `IterableIterator` which yields each line contained within the
@@ -637,7 +712,8 @@ export const linesIterator = (self: string): LinesIterator => linesSeparated(sel
  *
  * @since 2.0.0
  */
-export const linesWithSeparators = (s: string): LinesIterator => linesSeparated(s, false)
+export const linesWithSeparators = (s: string): LinesIterator =>
+  linesSeparated(s, false);
 
 /**
  * For every line in this string, strip a leading prefix consisting of blanks
@@ -647,27 +723,28 @@ export const linesWithSeparators = (s: string): LinesIterator => linesSeparated(
  * @since 2.0.0
  */
 export const stripMarginWith: {
-  (marginChar: string): (self: string) => string
-  (self: string, marginChar: string): string
+  (marginChar: string): (self: string) => string;
+  (self: string, marginChar: string): string;
 } = dual(2, (self: string, marginChar: string): string => {
-  let out = ""
+  let out = "";
 
   for (const line of linesWithSeparators(self)) {
-    let index = 0
+    let index = 0;
 
     while (index < line.length && line.charAt(index) <= " ") {
-      index = index + 1
+      index = index + 1;
     }
 
-    const stripped = index < line.length && line.charAt(index) === marginChar
-      ? line.substring(index + 1)
-      : line
+    const stripped =
+      index < line.length && line.charAt(index) === marginChar
+        ? line.substring(index + 1)
+        : line;
 
-    out = out + stripped
+    out = out + stripped;
   }
 
-  return out
-})
+  return out;
+});
 
 /**
  * For every line in this string, strip a leading prefix consisting of blanks
@@ -675,88 +752,92 @@ export const stripMarginWith: {
  *
  * @since 2.0.0
  */
-export const stripMargin = (self: string): string => stripMarginWith(self, "|")
+export const stripMargin = (self: string): string => stripMarginWith(self, "|");
 
 /**
  * @since 2.0.0
  */
 export const snakeToCamel = (self: string): string => {
-  let str = self[0]
+  let str = self[0];
   for (let i = 1; i < self.length; i++) {
-    str += self[i] === "_" ? self[++i].toUpperCase() : self[i]
+    str += self[i] === "_" ? self[++i].toUpperCase() : self[i];
   }
-  return str
-}
+  return str;
+};
 
 /**
  * @since 2.0.0
  */
 export const snakeToPascal = (self: string): string => {
-  let str = self[0].toUpperCase()
+  let str = self[0].toUpperCase();
   for (let i = 1; i < self.length; i++) {
-    str += self[i] === "_" ? self[++i].toUpperCase() : self[i]
+    str += self[i] === "_" ? self[++i].toUpperCase() : self[i];
   }
-  return str
-}
+  return str;
+};
 
 /**
  * @since 2.0.0
  */
-export const snakeToKebab = (self: string): string => self.replace(/_/g, "-")
+export const snakeToKebab = (self: string): string => self.replace(/_/g, "-");
 
 /**
  * @since 2.0.0
  */
-export const camelToSnake = (self: string): string => self.replace(/([A-Z])/g, "_$1").toLowerCase()
+export const camelToSnake = (self: string): string =>
+  self.replace(/([A-Z])/g, "_$1").toLowerCase();
 
 /**
  * @since 2.0.0
  */
 export const pascalToSnake = (self: string): string =>
-  (self.slice(0, 1) + self.slice(1).replace(/([A-Z])/g, "_$1")).toLowerCase()
+  (self.slice(0, 1) + self.slice(1).replace(/([A-Z])/g, "_$1")).toLowerCase();
 
 /**
  * @since 2.0.0
  */
-export const kebabToSnake = (self: string): string => self.replace(/-/g, "_")
+export const kebabToSnake = (self: string): string => self.replace(/-/g, "_");
 
 class LinesIterator implements IterableIterator<string> {
-  private index: number
-  private readonly length: number
+  private index: number;
+  private readonly length: number;
 
-  constructor(readonly s: string, readonly stripped: boolean = false) {
-    this.index = 0
-    this.length = s.length
+  constructor(
+    readonly s: string,
+    readonly stripped: boolean = false
+  ) {
+    this.index = 0;
+    this.length = s.length;
   }
 
   next(): IteratorResult<string> {
     if (this.done) {
-      return { done: true, value: undefined }
+      return { done: true, value: undefined };
     }
-    const start = this.index
-    while (!this.done && !isLineBreak(this.s[this.index]!)) {
-      this.index = this.index + 1
+    const start = this.index;
+    while (!(this.done || isLineBreak(this.s[this.index]!))) {
+      this.index = this.index + 1;
     }
-    let end = this.index
+    let end = this.index;
     if (!this.done) {
-      const char = this.s[this.index]!
-      this.index = this.index + 1
+      const char = this.s[this.index]!;
+      this.index = this.index + 1;
       if (!this.done && isLineBreak2(char, this.s[this.index]!)) {
-        this.index = this.index + 1
+        this.index = this.index + 1;
       }
       if (!this.stripped) {
-        end = this.index
+        end = this.index;
       }
     }
-    return { done: false, value: this.s.substring(start, end) }
+    return { done: false, value: this.s.substring(start, end) };
   }
 
   [Symbol.iterator](): IterableIterator<string> {
-    return new LinesIterator(this.s, this.stripped)
+    return new LinesIterator(this.s, this.stripped);
   }
 
   private get done(): boolean {
-    return this.index >= this.length
+    return this.index >= this.length;
   }
 }
 
@@ -765,14 +846,16 @@ class LinesIterator implements IterableIterator<string> {
  * or `"\n"`).
  */
 const isLineBreak = (char: string): boolean => {
-  const code = char.charCodeAt(0)
-  return code === CR || code === LF
-}
+  const code = char.charCodeAt(0);
+  return code === CR || code === LF;
+};
 
 /**
  * Test if the provided characters combine to form a carriage return/line-feed
  * (i.e. `"\r\n"`).
  */
-const isLineBreak2 = (char0: string, char1: string): boolean => char0.charCodeAt(0) === CR && char1.charCodeAt(0) === LF
+const isLineBreak2 = (char0: string, char1: string): boolean =>
+  char0.charCodeAt(0) === CR && char1.charCodeAt(0) === LF;
 
-const linesSeparated = (self: string, stripped: boolean): LinesIterator => new LinesIterator(self, stripped)
+const linesSeparated = (self: string, stripped: boolean): LinesIterator =>
+  new LinesIterator(self, stripped);

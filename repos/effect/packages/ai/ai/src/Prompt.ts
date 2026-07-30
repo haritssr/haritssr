@@ -51,17 +51,17 @@
  *
  * @since 1.0.0
  */
-import * as Arbitrary from "effect/Arbitrary"
-import * as Arr from "effect/Array"
-import { constFalse, dual } from "effect/Function"
-import * as ParseResult from "effect/ParseResult"
-import { type Pipeable, pipeArguments } from "effect/Pipeable"
-import * as Predicate from "effect/Predicate"
-import * as Schema from "effect/Schema"
-import type * as AST from "effect/SchemaAST"
-import type * as Response from "./Response.js"
+import * as Arbitrary from "effect/Arbitrary";
+import * as Arr from "effect/Array";
+import { constFalse, dual } from "effect/Function";
+import * as ParseResult from "effect/ParseResult";
+import { type Pipeable, pipeArguments } from "effect/Pipeable";
+import * as Predicate from "effect/Predicate";
+import * as Schema from "effect/Schema";
+import type * as AST from "effect/SchemaAST";
+import type * as Response from "./Response.js";
 
-const constEmptyObject = () => ({})
+const constEmptyObject = () => ({});
 
 // =============================================================================
 // Options
@@ -89,16 +89,16 @@ export const ProviderOptions = Schema.Record({
   value: Schema.UndefinedOr(
     Schema.Record({
       key: Schema.String,
-      value: Schema.Unknown
+      value: Schema.Unknown,
     })
-  )
-})
+  ),
+});
 
 /**
  * @since 1.0.0
  * @category Models
  */
-export type ProviderOptions = typeof ProviderOptions.Type
+export type ProviderOptions = typeof ProviderOptions.Type;
 
 // =============================================================================
 // Base Part
@@ -110,7 +110,7 @@ export type ProviderOptions = typeof ProviderOptions.Type
  * @since 1.0.0
  * @category Type Ids
  */
-export const PartTypeId = "~effect/ai/Prompt/Part"
+export const PartTypeId = "~effect/ai/Prompt/Part";
 
 /**
  * Type-level representation of the Part identifier.
@@ -118,7 +118,7 @@ export const PartTypeId = "~effect/ai/Prompt/Part"
  * @since 1.0.0
  * @category Type Ids
  */
-export type PartTypeId = typeof PartTypeId
+export type PartTypeId = typeof PartTypeId;
 
 /**
  * Type guard to check if a value is a Part.
@@ -126,7 +126,8 @@ export type PartTypeId = typeof PartTypeId
  * @since 1.0.0
  * @category Guards
  */
-export const isPart = (u: unknown): u is Part => Predicate.hasProperty(u, PartTypeId)
+export const isPart = (u: unknown): u is Part =>
+  Predicate.hasProperty(u, PartTypeId);
 
 /**
  * Union type representing all possible content parts within messages.
@@ -137,7 +138,12 @@ export const isPart = (u: unknown): u is Part => Predicate.hasProperty(u, PartTy
  * @since 1.0.0
  * @category Models
  */
-export type Part = TextPart | ReasoningPart | FilePart | ToolCallPart | ToolResultPart
+export type Part =
+  | TextPart
+  | ReasoningPart
+  | FilePart
+  | ToolCallPart
+  | ToolResultPart;
 
 /**
  * Encoded representation of a Part.
@@ -150,7 +156,7 @@ export type PartEncoded =
   | ReasoningPartEncoded
   | FilePartEncoded
   | ToolCallPartEncoded
-  | ToolResultPartEncoded
+  | ToolResultPartEncoded;
 
 /**
  * Base interface for all content parts.
@@ -160,16 +166,19 @@ export type PartEncoded =
  * @since 1.0.0
  * @category Models
  */
-export interface BasePart<Type extends string, Options extends ProviderOptions> {
-  readonly [PartTypeId]: PartTypeId
+export interface BasePart<
+  Type extends string,
+  Options extends ProviderOptions,
+> {
+  readonly [PartTypeId]: PartTypeId;
   /**
    * The type of this content part.
    */
-  readonly type: Type
+  readonly type: Type;
   /**
    * Provider-specific options for this part.
    */
-  readonly options: Options
+  readonly options: Options;
 }
 
 /**
@@ -178,15 +187,18 @@ export interface BasePart<Type extends string, Options extends ProviderOptions> 
  * @since 1.0.0
  * @category Models
  */
-export interface BasePartEncoded<Type extends string, Options extends ProviderOptions> {
+export interface BasePartEncoded<
+  Type extends string,
+  Options extends ProviderOptions,
+> {
   /**
    * The type of this content part.
    */
-  readonly type: Type
+  readonly type: Type;
   /**
    * Provider-specific options for this part.
    */
-  readonly options?: Options | undefined
+  readonly options?: Options | undefined;
 }
 
 /**
@@ -218,19 +230,22 @@ export const makePart = <const Type extends Part["type"]>(
   /**
    * Parameters specific to the part type being created.
    */
-  params: Omit<Extract<Part, { type: Type }>, PartTypeId | "type" | "options"> & {
+  params: Omit<
+    Extract<Part, { type: Type }>,
+    PartTypeId | "type" | "options"
+  > & {
     /**
      * Optional provider-specific options for this part.
      */
-    readonly options?: Extract<Part, { type: Type }>["options"] | undefined
+    readonly options?: Extract<Part, { type: Type }>["options"] | undefined;
   }
 ): Extract<Part, { type: Type }> =>
   ({
     ...params,
     [PartTypeId]: PartTypeId,
     type,
-    options: params.options ?? {}
-  }) as any
+    options: params.options ?? {},
+  }) as any;
 
 /**
  * A utility type for specifying the parameters required to construct a
@@ -239,12 +254,15 @@ export const makePart = <const Type extends Part["type"]>(
  * @since 1.0.0
  * @category Utility Types
  */
-export type PartConstructorParams<P extends Part> = Omit<P, PartTypeId | "type" | "options"> & {
+export type PartConstructorParams<P extends Part> = Omit<
+  P,
+  PartTypeId | "type" | "options"
+> & {
   /**
    * Optional provider-specific options for this part.
    */
-  readonly options?: Part["options"] | undefined
-}
+  readonly options?: Part["options"] | undefined;
+};
 
 // =============================================================================
 // Text Part
@@ -271,7 +289,7 @@ export interface TextPart extends BasePart<"text", TextPartOptions> {
   /**
    * The text content.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -280,11 +298,12 @@ export interface TextPart extends BasePart<"text", TextPartOptions> {
  * @since 1.0.0
  * @category Models
  */
-export interface TextPartEncoded extends BasePartEncoded<"text", TextPartOptions> {
+export interface TextPartEncoded
+  extends BasePartEncoded<"text", TextPartOptions> {
   /**
    * The text content.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -302,14 +321,18 @@ export interface TextPartOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const TextPart: Schema.Schema<TextPart, TextPartEncoded> = Schema.Struct({
-  type: Schema.Literal("text"),
-  text: Schema.String,
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
-}).pipe(
+export const TextPart: Schema.Schema<TextPart, TextPartEncoded> = Schema.Struct(
+  {
+    type: Schema.Literal("text"),
+    text: Schema.String,
+    options: Schema.optionalWith(ProviderOptions, {
+      default: constEmptyObject,
+    }),
+  }
+).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "TextPart" })
-)
+);
 
 /**
  * Constructs a new text part.
@@ -317,7 +340,8 @@ export const TextPart: Schema.Schema<TextPart, TextPartEncoded> = Schema.Struct(
  * @since 1.0.0
  * @category Constructors
  */
-export const textPart = (params: PartConstructorParams<TextPart>): TextPart => makePart("text", params)
+export const textPart = (params: PartConstructorParams<TextPart>): TextPart =>
+  makePart("text", params);
 
 // =============================================================================
 // Reasoning Part
@@ -338,11 +362,12 @@ export const textPart = (params: PartConstructorParams<TextPart>): TextPart => m
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningPart extends BasePart<"reasoning", ReasoningPartOptions> {
+export interface ReasoningPart
+  extends BasePart<"reasoning", ReasoningPartOptions> {
   /**
    * The reasoning or thought process text.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -351,11 +376,12 @@ export interface ReasoningPart extends BasePart<"reasoning", ReasoningPartOption
  * @since 1.0.0
  * @category Models
  */
-export interface ReasoningPartEncoded extends BasePartEncoded<"reasoning", ReasoningPartOptions> {
+export interface ReasoningPartEncoded
+  extends BasePartEncoded<"reasoning", ReasoningPartOptions> {
   /**
    * The reasoning or thought process text.
    */
-  readonly text: string
+  readonly text: string;
 }
 
 /**
@@ -373,14 +399,17 @@ export interface ReasoningPartOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ReasoningPart: Schema.Schema<ReasoningPart, ReasoningPartEncoded> = Schema.Struct({
-  type: Schema.Literal("reasoning"),
-  text: Schema.String,
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "ReasoningPart" })
-)
+export const ReasoningPart: Schema.Schema<ReasoningPart, ReasoningPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("reasoning"),
+    text: Schema.String,
+    options: Schema.optionalWith(ProviderOptions, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "ReasoningPart" })
+  );
 
 /**
  * Constructs a new reasoning part.
@@ -388,8 +417,9 @@ export const ReasoningPart: Schema.Schema<ReasoningPart, ReasoningPartEncoded> =
  * @since 1.0.0
  * @category Constructors
  */
-export const reasoningPart = (params: PartConstructorParams<ReasoningPart>): ReasoningPart =>
-  makePart("reasoning", params)
+export const reasoningPart = (
+  params: PartConstructorParams<ReasoningPart>
+): ReasoningPart => makePart("reasoning", params);
 
 // =============================================================================
 // File Part
@@ -425,15 +455,15 @@ export interface FilePart extends BasePart<"file", FilePartOptions> {
   /**
    * MIME type of the file (e.g., "image/jpeg", "application/pdf").
    */
-  readonly mediaType: string
+  readonly mediaType: string;
   /**
    * Optional filename for the file.
    */
-  readonly fileName?: string | undefined
+  readonly fileName?: string | undefined;
   /**
    * File data as base64 string of data, a byte array, or a URL.
    */
-  readonly data: string | Uint8Array | URL
+  readonly data: string | Uint8Array | URL;
 }
 
 /**
@@ -442,19 +472,20 @@ export interface FilePart extends BasePart<"file", FilePartOptions> {
  * @since 1.0.0
  * @category Models
  */
-export interface FilePartEncoded extends BasePartEncoded<"file", FilePartOptions> {
+export interface FilePartEncoded
+  extends BasePartEncoded<"file", FilePartOptions> {
   /**
    * MIME type of the file (e.g., "image/jpeg", "application/pdf").
    */
-  readonly mediaType: string
+  readonly mediaType: string;
   /**
    * Optional filename for the file.
    */
-  readonly fileName?: string | undefined
+  readonly fileName?: string | undefined;
   /**
    * File data as base64 string of data, a byte array, or a URL.
    */
-  readonly data: string | Uint8Array | URL
+  readonly data: string | Uint8Array | URL;
 }
 
 /**
@@ -472,16 +503,24 @@ export interface FilePartOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const FilePart: Schema.Schema<FilePart, FilePartEncoded> = Schema.Struct({
-  type: Schema.Literal("file"),
-  mediaType: Schema.String,
-  fileName: Schema.optional(Schema.String),
-  data: Schema.Union(Schema.String, Schema.Uint8ArrayFromSelf, Schema.URLFromSelf),
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
-}).pipe(
+export const FilePart: Schema.Schema<FilePart, FilePartEncoded> = Schema.Struct(
+  {
+    type: Schema.Literal("file"),
+    mediaType: Schema.String,
+    fileName: Schema.optional(Schema.String),
+    data: Schema.Union(
+      Schema.String,
+      Schema.Uint8ArrayFromSelf,
+      Schema.URLFromSelf
+    ),
+    options: Schema.optionalWith(ProviderOptions, {
+      default: constEmptyObject,
+    }),
+  }
+).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "FilePart" })
-)
+);
 
 /**
  * Constructs a new file part.
@@ -489,7 +528,8 @@ export const FilePart: Schema.Schema<FilePart, FilePartEncoded> = Schema.Struct(
  * @since 1.0.0
  * @category Constructors
  */
-export const filePart = (params: PartConstructorParams<FilePart>): FilePart => makePart("file", params)
+export const filePart = (params: PartConstructorParams<FilePart>): FilePart =>
+  makePart("file", params);
 
 // =============================================================================
 // Tool Call Part
@@ -513,23 +553,24 @@ export const filePart = (params: PartConstructorParams<FilePart>): FilePart => m
  * @since 1.0.0
  * @category Models
  */
-export interface ToolCallPart extends BasePart<"tool-call", ToolCallPartOptions> {
+export interface ToolCallPart
+  extends BasePart<"tool-call", ToolCallPartOptions> {
   /**
    * Unique identifier for this tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool to invoke.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * Parameters to pass to the tool.
    */
-  readonly params: unknown
+  readonly params: unknown;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted: boolean
+  readonly providerExecuted: boolean;
 }
 
 /**
@@ -538,23 +579,24 @@ export interface ToolCallPart extends BasePart<"tool-call", ToolCallPartOptions>
  * @since 1.0.0
  * @category Models
  */
-export interface ToolCallPartEncoded extends BasePartEncoded<"tool-call", ToolCallPartOptions> {
+export interface ToolCallPartEncoded
+  extends BasePartEncoded<"tool-call", ToolCallPartOptions> {
   /**
    * Unique identifier for this tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool to invoke.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * Parameters to pass to the tool.
    */
-  readonly params: unknown
+  readonly params: unknown;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted?: boolean | undefined
+  readonly providerExecuted?: boolean | undefined;
 }
 
 /**
@@ -572,17 +614,22 @@ export interface ToolCallPartOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ToolCallPart: Schema.Schema<ToolCallPart, ToolCallPartEncoded> = Schema.Struct({
-  type: Schema.Literal("tool-call"),
-  id: Schema.String,
-  name: Schema.String,
-  params: Schema.Unknown,
-  providerExecuted: Schema.optionalWith(Schema.Boolean, { default: constFalse }),
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(PartTypeId, PartTypeId),
-  Schema.annotations({ identifier: "ToolCallPart" })
-)
+export const ToolCallPart: Schema.Schema<ToolCallPart, ToolCallPartEncoded> =
+  Schema.Struct({
+    type: Schema.Literal("tool-call"),
+    id: Schema.String,
+    name: Schema.String,
+    params: Schema.Unknown,
+    providerExecuted: Schema.optionalWith(Schema.Boolean, {
+      default: constFalse,
+    }),
+    options: Schema.optionalWith(ProviderOptions, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(PartTypeId, PartTypeId),
+    Schema.annotations({ identifier: "ToolCallPart" })
+  );
 
 /**
  * Constructs a new tool call part.
@@ -590,7 +637,9 @@ export const ToolCallPart: Schema.Schema<ToolCallPart, ToolCallPartEncoded> = Sc
  * @since 1.0.0
  * @category Constructors
  */
-export const toolCallPart = (params: PartConstructorParams<ToolCallPart>): ToolCallPart => makePart("tool-call", params)
+export const toolCallPart = (
+  params: PartConstructorParams<ToolCallPart>
+): ToolCallPart => makePart("tool-call", params);
 
 // =============================================================================
 // Tool Result Part
@@ -619,27 +668,28 @@ export const toolCallPart = (params: PartConstructorParams<ToolCallPart>): ToolC
  * @since 1.0.0
  * @category Models
  */
-export interface ToolResultPart extends BasePart<"tool-result", ToolResultPartOptions> {
+export interface ToolResultPart
+  extends BasePart<"tool-result", ToolResultPartOptions> {
   /**
    * Unique identifier matching the original tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool that was executed.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * Whether or not the result of executing the tool call handler was an error.
    */
-  readonly isFailure: boolean
+  readonly isFailure: boolean;
   /**
    * The result returned by the tool execution.
    */
-  readonly result: unknown
+  readonly result: unknown;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted: boolean
+  readonly providerExecuted: boolean;
 }
 
 /**
@@ -648,27 +698,28 @@ export interface ToolResultPart extends BasePart<"tool-result", ToolResultPartOp
  * @since 1.0.0
  * @category Models
  */
-export interface ToolResultPartEncoded extends BasePartEncoded<"tool-result", ToolResultPartOptions> {
+export interface ToolResultPartEncoded
+  extends BasePartEncoded<"tool-result", ToolResultPartOptions> {
   /**
    * Unique identifier matching the original tool call.
    */
-  readonly id: string
+  readonly id: string;
   /**
    * Name of the tool that was executed.
    */
-  readonly name: string
+  readonly name: string;
   /**
    * Whether or not the result of executing the tool call handler was an error.
    */
-  readonly isFailure: boolean
+  readonly isFailure: boolean;
   /**
    * The result returned by the tool execution.
    */
-  readonly result: unknown
+  readonly result: unknown;
   /**
    * Whether the tool was executed by the provider (true) or framework (false).
    */
-  readonly providerExecuted: boolean
+  readonly providerExecuted: boolean;
 }
 
 /**
@@ -686,18 +737,21 @@ export interface ToolResultPartOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ToolResultPart: Schema.Schema<ToolResultPart, ToolResultPartEncoded> = Schema.Struct({
+export const ToolResultPart: Schema.Schema<
+  ToolResultPart,
+  ToolResultPartEncoded
+> = Schema.Struct({
   type: Schema.Literal("tool-result"),
   id: Schema.String,
   name: Schema.String,
   isFailure: Schema.Boolean,
   result: Schema.Unknown,
   providerExecuted: Schema.Boolean,
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
+  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject }),
 }).pipe(
   Schema.attachPropertySignature(PartTypeId, PartTypeId),
   Schema.annotations({ identifier: "ToolResultPart" })
-)
+);
 
 /**
  * Constructs a new tool result part.
@@ -705,8 +759,9 @@ export const ToolResultPart: Schema.Schema<ToolResultPart, ToolResultPartEncoded
  * @since 1.0.0
  * @category Constructors
  */
-export const toolResultPart = (params: PartConstructorParams<ToolResultPart>): ToolResultPart =>
-  makePart("tool-result", params)
+export const toolResultPart = (
+  params: PartConstructorParams<ToolResultPart>
+): ToolResultPart => makePart("tool-result", params);
 
 // =============================================================================
 // Base Message
@@ -718,7 +773,7 @@ export const toolResultPart = (params: PartConstructorParams<ToolResultPart>): T
  * @since 1.0.0
  * @category Type Ids
  */
-export const MessageTypeId = "~effect/ai/Prompt/Message"
+export const MessageTypeId = "~effect/ai/Prompt/Message";
 
 /**
  * Type-level representation of the Message identifier.
@@ -726,7 +781,7 @@ export const MessageTypeId = "~effect/ai/Prompt/Message"
  * @since 1.0.0
  * @category Type Ids
  */
-export type MessageTypeId = typeof MessageTypeId
+export type MessageTypeId = typeof MessageTypeId;
 
 /**
  * Type guard to check if a value is a Message.
@@ -734,7 +789,8 @@ export type MessageTypeId = typeof MessageTypeId
  * @since 1.0.0
  * @category Guards
  */
-export const isMessage = (u: unknown): u is Message => Predicate.hasProperty(u, MessageTypeId)
+export const isMessage = (u: unknown): u is Message =>
+  Predicate.hasProperty(u, MessageTypeId);
 
 /**
  * Base interface for all message types.
@@ -744,16 +800,19 @@ export const isMessage = (u: unknown): u is Message => Predicate.hasProperty(u, 
  * @since 1.0.0
  * @category Models
  */
-export interface BaseMessage<Role extends string, Options extends ProviderOptions> {
-  readonly [MessageTypeId]: MessageTypeId
+export interface BaseMessage<
+  Role extends string,
+  Options extends ProviderOptions,
+> {
+  readonly [MessageTypeId]: MessageTypeId;
   /**
    * The role of the message participant.
    */
-  readonly role: Role
+  readonly role: Role;
   /**
    * Provider-specific options for this message.
    */
-  readonly options: Options
+  readonly options: Options;
 }
 
 /**
@@ -764,15 +823,18 @@ export interface BaseMessage<Role extends string, Options extends ProviderOption
  * @since 1.0.0
  * @category Models
  */
-export interface BaseMessageEncoded<Role extends string, Options extends ProviderOptions> {
+export interface BaseMessageEncoded<
+  Role extends string,
+  Options extends ProviderOptions,
+> {
   /**
    * The role of the message participant.
    */
-  readonly role: Role
+  readonly role: Role;
   /**
    * Provider-specific options for this message.
    */
-  readonly options?: Options | undefined
+  readonly options?: Options | undefined;
 }
 
 /**
@@ -796,16 +858,19 @@ export interface BaseMessageEncoded<Role extends string, Options extends Provide
  */
 export const makeMessage = <const Role extends Message["role"]>(
   role: Role,
-  params: Omit<Extract<Message, { role: Role }>, MessageTypeId | "role" | "options"> & {
-    readonly options?: Extract<Message, { role: Role }>["options"]
+  params: Omit<
+    Extract<Message, { role: Role }>,
+    MessageTypeId | "role" | "options"
+  > & {
+    readonly options?: Extract<Message, { role: Role }>["options"];
   }
 ): Extract<Message, { role: Role }> =>
   ({
     ...params,
     [MessageTypeId]: MessageTypeId,
     role,
-    options: params.options ?? {}
-  }) as any
+    options: params.options ?? {},
+  }) as any;
 
 /**
  * A utility type for specifying the parameters required to construct a
@@ -814,12 +879,15 @@ export const makeMessage = <const Role extends Message["role"]>(
  * @since 1.0.0
  * @category Utility Types
  */
-export type MessageConstructorParams<M extends Message> = Omit<M, MessageTypeId | "role" | "options"> & {
+export type MessageConstructorParams<M extends Message> = Omit<
+  M,
+  MessageTypeId | "role" | "options"
+> & {
   /**
    * Optional provider-specific options for this message.
    */
-  readonly options?: Part["options"] | undefined
-}
+  readonly options?: Part["options"] | undefined;
+};
 
 /**
  * Schema for decoding message content (i.e. an array containing a single
@@ -831,11 +899,15 @@ export type MessageConstructorParams<M extends Message> = Omit<M, MessageTypeId 
 export const MessageContentFromString: Schema.Schema<
   Arr.NonEmptyReadonlyArray<TextPart>,
   string
-> = Schema.transform(Schema.String, Schema.NonEmptyArray(Schema.typeSchema(TextPart)), {
-  strict: true,
-  decode: (text) => Arr.of(makePart("text", { text })),
-  encode: (content) => content[0].text
-})
+> = Schema.transform(
+  Schema.String,
+  Schema.NonEmptyArray(Schema.typeSchema(TextPart)),
+  {
+    strict: true,
+    decode: (text) => Arr.of(makePart("text", { text })),
+    encode: (content) => content[0].text,
+  }
+);
 
 // =============================================================================
 // System Message
@@ -857,11 +929,12 @@ export const MessageContentFromString: Schema.Schema<
  * @since 1.0.0
  * @category Models
  */
-export interface SystemMessage extends BaseMessage<"system", SystemMessageOptions> {
+export interface SystemMessage
+  extends BaseMessage<"system", SystemMessageOptions> {
   /**
    * The system instruction or context as plain text.
    */
-  readonly content: string
+  readonly content: string;
 }
 
 /**
@@ -870,11 +943,12 @@ export interface SystemMessage extends BaseMessage<"system", SystemMessageOption
  * @since 1.0.0
  * @category Models
  */
-export interface SystemMessageEncoded extends BaseMessageEncoded<"system", SystemMessageOptions> {
+export interface SystemMessageEncoded
+  extends BaseMessageEncoded<"system", SystemMessageOptions> {
   /**
    * The system instruction or context as plain text.
    */
-  readonly content: string
+  readonly content: string;
 }
 
 /**
@@ -892,14 +966,17 @@ export interface SystemMessageOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const SystemMessage: Schema.Schema<SystemMessage, SystemMessageEncoded> = Schema.Struct({
-  role: Schema.Literal("system"),
-  content: Schema.String,
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(MessageTypeId, MessageTypeId),
-  Schema.annotations({ identifier: "SystemMessage" })
-)
+export const SystemMessage: Schema.Schema<SystemMessage, SystemMessageEncoded> =
+  Schema.Struct({
+    role: Schema.Literal("system"),
+    content: Schema.String,
+    options: Schema.optionalWith(ProviderOptions, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(MessageTypeId, MessageTypeId),
+    Schema.annotations({ identifier: "SystemMessage" })
+  );
 
 /**
  * Constructs a new system message.
@@ -907,8 +984,9 @@ export const SystemMessage: Schema.Schema<SystemMessage, SystemMessageEncoded> =
  * @since 1.0.0
  * @category Constructors
  */
-export const systemMessage = (params: MessageConstructorParams<SystemMessage>): SystemMessage =>
-  makeMessage("system", params)
+export const systemMessage = (
+  params: MessageConstructorParams<SystemMessage>
+): SystemMessage => makeMessage("system", params);
 
 // =============================================================================
 // User Message
@@ -950,7 +1028,7 @@ export interface UserMessage extends BaseMessage<"user", UserMessageOptions> {
   /**
    * Array of content parts that make up the user's message.
    */
-  readonly content: ReadonlyArray<UserMessagePart>
+  readonly content: ReadonlyArray<UserMessagePart>;
 }
 
 /**
@@ -959,7 +1037,7 @@ export interface UserMessage extends BaseMessage<"user", UserMessageOptions> {
  * @since 1.0.0
  * @category Models
  */
-export type UserMessagePart = TextPart | FilePart
+export type UserMessagePart = TextPart | FilePart;
 
 /**
  * Encoded representation of user messages for serialization.
@@ -967,11 +1045,12 @@ export type UserMessagePart = TextPart | FilePart
  * @since 1.0.0
  * @category Models
  */
-export interface UserMessageEncoded extends BaseMessageEncoded<"user", UserMessageOptions> {
+export interface UserMessageEncoded
+  extends BaseMessageEncoded<"user", UserMessageOptions> {
   /**
    * Array of content parts that make up the user's message.
    */
-  readonly content: string | ReadonlyArray<UserMessagePartEncoded>
+  readonly content: string | ReadonlyArray<UserMessagePartEncoded>;
 }
 
 /**
@@ -980,7 +1059,7 @@ export interface UserMessageEncoded extends BaseMessageEncoded<"user", UserMessa
  * @since 1.0.0
  * @category Models
  */
-export type UserMessagePartEncoded = TextPartEncoded | FilePartEncoded
+export type UserMessagePartEncoded = TextPartEncoded | FilePartEncoded;
 
 /**
  * Represents provider-specific options that can be associated with a
@@ -997,17 +1076,20 @@ export interface UserMessageOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const UserMessage: Schema.Schema<UserMessage, UserMessageEncoded> = Schema.Struct({
-  role: Schema.Literal("user"),
-  content: Schema.Union(
-    MessageContentFromString,
-    Schema.Array(Schema.Union(TextPart, FilePart))
-  ),
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(MessageTypeId, MessageTypeId),
-  Schema.annotations({ identifier: "UserMessage" })
-)
+export const UserMessage: Schema.Schema<UserMessage, UserMessageEncoded> =
+  Schema.Struct({
+    role: Schema.Literal("user"),
+    content: Schema.Union(
+      MessageContentFromString,
+      Schema.Array(Schema.Union(TextPart, FilePart))
+    ),
+    options: Schema.optionalWith(ProviderOptions, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(MessageTypeId, MessageTypeId),
+    Schema.annotations({ identifier: "UserMessage" })
+  );
 
 /**
  * Constructs a new user message.
@@ -1015,7 +1097,9 @@ export const UserMessage: Schema.Schema<UserMessage, UserMessageEncoded> = Schem
  * @since 1.0.0
  * @category Constructors
  */
-export const userMessage = (params: MessageConstructorParams<UserMessage>): UserMessage => makeMessage("user", params)
+export const userMessage = (
+  params: MessageConstructorParams<UserMessage>
+): UserMessage => makeMessage("user", params);
 
 // =============================================================================
 // Assistant Message
@@ -1059,11 +1143,12 @@ export const userMessage = (params: MessageConstructorParams<UserMessage>): User
  * @since 1.0.0
  * @category Models
  */
-export interface AssistantMessage extends BaseMessage<"assistant", AssistantMessageOptions> {
+export interface AssistantMessage
+  extends BaseMessage<"assistant", AssistantMessageOptions> {
   /**
    * Array of content parts that make up the assistant's response.
    */
-  readonly content: ReadonlyArray<AssistantMessagePart>
+  readonly content: ReadonlyArray<AssistantMessagePart>;
 }
 
 /**
@@ -1077,7 +1162,7 @@ export type AssistantMessagePart =
   | FilePart
   | ReasoningPart
   | ToolCallPart
-  | ToolResultPart
+  | ToolResultPart;
 
 /**
  * Encoded representation of assistant messages for serialization.
@@ -1085,8 +1170,9 @@ export type AssistantMessagePart =
  * @since 1.0.0
  * @category Models
  */
-export interface AssistantMessageEncoded extends BaseMessageEncoded<"assistant", AssistantMessageOptions> {
-  readonly content: string | ReadonlyArray<AssistantMessagePartEncoded>
+export interface AssistantMessageEncoded
+  extends BaseMessageEncoded<"assistant", AssistantMessageOptions> {
+  readonly content: string | ReadonlyArray<AssistantMessagePartEncoded>;
 }
 
 /**
@@ -1100,7 +1186,7 @@ export type AssistantMessagePartEncoded =
   | FilePartEncoded
   | ReasoningPartEncoded
   | ToolCallPartEncoded
-  | ToolResultPartEncoded
+  | ToolResultPartEncoded;
 
 /**
  * Represents provider-specific options that can be associated with a
@@ -1117,17 +1203,28 @@ export interface AssistantMessageOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const AssistantMessage: Schema.Schema<AssistantMessage, AssistantMessageEncoded> = Schema.Struct({
+export const AssistantMessage: Schema.Schema<
+  AssistantMessage,
+  AssistantMessageEncoded
+> = Schema.Struct({
   role: Schema.Literal("assistant"),
   content: Schema.Union(
     MessageContentFromString,
-    Schema.Array(Schema.Union(TextPart, FilePart, ReasoningPart, ToolCallPart, ToolResultPart))
+    Schema.Array(
+      Schema.Union(
+        TextPart,
+        FilePart,
+        ReasoningPart,
+        ToolCallPart,
+        ToolResultPart
+      )
+    )
   ),
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
+  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject }),
 }).pipe(
   Schema.attachPropertySignature(MessageTypeId, MessageTypeId),
   Schema.annotations({ identifier: "AssistantMessage" })
-)
+);
 
 /**
  * Constructs a new assistant message.
@@ -1135,8 +1232,9 @@ export const AssistantMessage: Schema.Schema<AssistantMessage, AssistantMessageE
  * @since 1.0.0
  * @category Constructors
  */
-export const assistantMessage = (params: MessageConstructorParams<AssistantMessage>): AssistantMessage =>
-  makeMessage("assistant", params)
+export const assistantMessage = (
+  params: MessageConstructorParams<AssistantMessage>
+): AssistantMessage => makeMessage("assistant", params);
 
 // =============================================================================
 // Tool Message
@@ -1175,7 +1273,7 @@ export interface ToolMessage extends BaseMessage<"tool", ToolMessageOptions> {
   /**
    * Array of tool result parts.
    */
-  readonly content: ReadonlyArray<ToolMessagePart>
+  readonly content: ReadonlyArray<ToolMessagePart>;
 }
 
 /**
@@ -1184,7 +1282,7 @@ export interface ToolMessage extends BaseMessage<"tool", ToolMessageOptions> {
  * @since 1.0.0
  * @category Models
  */
-export type ToolMessagePart = ToolResultPart
+export type ToolMessagePart = ToolResultPart;
 
 /**
  * Encoded representation of tool messages for serialization.
@@ -1192,11 +1290,12 @@ export type ToolMessagePart = ToolResultPart
  * @since 1.0.0
  * @category Models
  */
-export interface ToolMessageEncoded extends BaseMessageEncoded<"tool", ToolMessageOptions> {
+export interface ToolMessageEncoded
+  extends BaseMessageEncoded<"tool", ToolMessageOptions> {
   /**
    * Array of tool result parts.
    */
-  readonly content: ReadonlyArray<ToolMessagePartEncoded>
+  readonly content: ReadonlyArray<ToolMessagePartEncoded>;
 }
 
 /**
@@ -1205,7 +1304,7 @@ export interface ToolMessageEncoded extends BaseMessageEncoded<"tool", ToolMessa
  * @since 1.0.0
  * @category Models
  */
-export type ToolMessagePartEncoded = ToolResultPartEncoded
+export type ToolMessagePartEncoded = ToolResultPartEncoded;
 
 /**
  * Represents provider-specific options that can be associated with a
@@ -1222,14 +1321,17 @@ export interface ToolMessageOptions extends ProviderOptions {}
  * @since 1.0.0
  * @category Schemas
  */
-export const ToolMessage: Schema.Schema<ToolMessage, ToolMessageEncoded> = Schema.Struct({
-  role: Schema.Literal("tool"),
-  content: Schema.Array(ToolResultPart),
-  options: Schema.optionalWith(ProviderOptions, { default: constEmptyObject })
-}).pipe(
-  Schema.attachPropertySignature(MessageTypeId, MessageTypeId),
-  Schema.annotations({ identifier: "ToolMessage" })
-)
+export const ToolMessage: Schema.Schema<ToolMessage, ToolMessageEncoded> =
+  Schema.Struct({
+    role: Schema.Literal("tool"),
+    content: Schema.Array(ToolResultPart),
+    options: Schema.optionalWith(ProviderOptions, {
+      default: constEmptyObject,
+    }),
+  }).pipe(
+    Schema.attachPropertySignature(MessageTypeId, MessageTypeId),
+    Schema.annotations({ identifier: "ToolMessage" })
+  );
 
 /**
  * Constructs a new tool message.
@@ -1237,7 +1339,9 @@ export const ToolMessage: Schema.Schema<ToolMessage, ToolMessageEncoded> = Schem
  * @since 1.0.0
  * @category Constructors
  */
-export const toolMessage = (params: MessageConstructorParams<ToolMessage>): ToolMessage => makeMessage("tool", params)
+export const toolMessage = (
+  params: MessageConstructorParams<ToolMessage>
+): ToolMessage => makeMessage("tool", params);
 
 // =============================================================================
 // Message
@@ -1253,7 +1357,7 @@ export type Message =
   | SystemMessage
   | UserMessage
   | AssistantMessage
-  | ToolMessage
+  | ToolMessage;
 
 /**
  * A type representing all possible encoded message types for serialization.
@@ -1265,7 +1369,7 @@ export type MessageEncoded =
   | SystemMessageEncoded
   | UserMessageEncoded
   | AssistantMessageEncoded
-  | ToolMessageEncoded
+  | ToolMessageEncoded;
 
 /**
  * Schema for validation and encoding of messages.
@@ -1278,7 +1382,7 @@ export const Message: Schema.Schema<Message, MessageEncoded> = Schema.Union(
   UserMessage,
   AssistantMessage,
   ToolMessage
-)
+);
 
 // =============================================================================
 // Prompt
@@ -1290,7 +1394,7 @@ export const Message: Schema.Schema<Message, MessageEncoded> = Schema.Union(
  * @since 1.0.0
  * @category Type Ids
  */
-export const TypeId = "~@effect/ai/Prompt"
+export const TypeId = "~@effect/ai/Prompt";
 
 /**
  * Type-level representation of the Prompt identifier.
@@ -1298,7 +1402,7 @@ export const TypeId = "~@effect/ai/Prompt"
  * @since 1.0.0
  * @category Type Ids
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * Type guard to check if a value is a Prompt.
@@ -1306,7 +1410,8 @@ export type TypeId = typeof TypeId
  * @since 1.0.0
  * @category Guards
  */
-export const isPrompt = (u: unknown): u is Prompt => Predicate.hasProperty(u, TypeId)
+export const isPrompt = (u: unknown): u is Prompt =>
+  Predicate.hasProperty(u, TypeId);
 
 /**
  * A Prompt contains a sequence of messages that form the context of a
@@ -1316,11 +1421,11 @@ export const isPrompt = (u: unknown): u is Prompt => Predicate.hasProperty(u, Ty
  * @category Models
  */
 export interface Prompt extends Pipeable {
-  readonly [TypeId]: TypeId
+  readonly [TypeId]: TypeId;
   /**
    * Array of messages that make up the conversation.
    */
-  readonly content: ReadonlyArray<Message>
+  readonly content: ReadonlyArray<Message>;
 }
 
 /**
@@ -1333,7 +1438,7 @@ export interface PromptEncoded {
   /**
    * Array of messages that make up the conversation.
    */
-  readonly content: ReadonlyArray<MessageEncoded>
+  readonly content: ReadonlyArray<MessageEncoded>;
 }
 
 /**
@@ -1342,18 +1447,13 @@ export interface PromptEncoded {
  * @since 1.0.0
  * @category Schemas
  */
-export class PromptFromSelf extends Schema.declare(
-  (u) => isPrompt(u),
-  {
-    typeConstructor: { _tag: "effect/ai/Prompt" },
-    identifier: "PromptFromSelf",
-    description: "a Prompt instance",
-    arbitrary: (): Arbitrary.LazyArbitrary<Prompt> => (fc) =>
-      fc.array(
-        Arbitrary.makeLazy(Message)(fc)
-      ).map(makePrompt)
-  }
-) {}
+export class PromptFromSelf extends Schema.declare((u) => isPrompt(u), {
+  typeConstructor: { _tag: "effect/ai/Prompt" },
+  identifier: "PromptFromSelf",
+  description: "a Prompt instance",
+  arbitrary: (): Arbitrary.LazyArbitrary<Prompt> => (fc) =>
+    fc.array(Arbitrary.makeLazy(Message)(fc)).map(makePrompt),
+}) {}
 
 /**
  * Schema for validation and encoding of prompts.
@@ -1361,30 +1461,37 @@ export class PromptFromSelf extends Schema.declare(
  * @since 1.0.0
  * @category Schemas
  */
-export const Prompt: Schema.Schema<Prompt, PromptEncoded> = Schema.transformOrFail(
-  Schema.Struct({ content: Schema.Array(Schema.encodedSchema(Message)) }),
-  PromptFromSelf,
-  {
-    strict: true,
-    decode: (i, _, ast) => decodePrompt(i, ast),
-    encode: (a, _, ast) => encodePrompt(a, ast)
-  }
-).annotations({ identifier: "Prompt" })
+export const Prompt: Schema.Schema<Prompt, PromptEncoded> =
+  Schema.transformOrFail(
+    Schema.Struct({ content: Schema.Array(Schema.encodedSchema(Message)) }),
+    PromptFromSelf,
+    {
+      strict: true,
+      decode: (i, _, ast) => decodePrompt(i, ast),
+      encode: (a, _, ast) => encodePrompt(a, ast),
+    }
+  ).annotations({ identifier: "Prompt" });
 
-const decodeMessages = ParseResult.decodeEither(Schema.Array(Message))
-const encodeMessages = ParseResult.encodeEither(Schema.Array(Message))
+const decodeMessages = ParseResult.decodeEither(Schema.Array(Message));
+const encodeMessages = ParseResult.encodeEither(Schema.Array(Message));
 
 const decodePrompt = (input: PromptEncoded, ast: AST.AST) =>
   ParseResult.mapBoth(decodeMessages(input.content), {
-    onFailure: () => new ParseResult.Type(ast, input, `Unable to decode ${JSON.stringify(input)} into a Prompt`),
-    onSuccess: makePrompt
-  })
+    onFailure: () =>
+      new ParseResult.Type(
+        ast,
+        input,
+        `Unable to decode ${JSON.stringify(input)} into a Prompt`
+      ),
+    onSuccess: makePrompt,
+  });
 
 const encodePrompt = (input: Prompt, ast: AST.AST) =>
   ParseResult.mapBoth(encodeMessages(input.content), {
-    onFailure: () => new ParseResult.Type(ast, input, `Failed to encode Prompt`),
-    onSuccess: (messages) => ({ content: messages })
-  })
+    onFailure: () =>
+      new ParseResult.Type(ast, input, "Failed to encode Prompt"),
+    onSuccess: (messages) => ({ content: messages }),
+  });
 
 /**
  * Schema for parsing a Prompt from JSON strings.
@@ -1392,7 +1499,7 @@ const encodePrompt = (input: Prompt, ast: AST.AST) =>
  * @since 1.0.0
  * @category Schemas
  */
-export const FromJson = Schema.parseJson(Prompt)
+export const FromJson = Schema.parseJson(Prompt);
 
 /**
  * Raw input types that can be converted into a Prompt.
@@ -1421,24 +1528,21 @@ export const FromJson = Schema.parseJson(Prompt)
  * @since 1.0.0
  * @category Models
  */
-export type RawInput =
-  | string
-  | Iterable<MessageEncoded>
-  | Prompt
+export type RawInput = string | Iterable<MessageEncoded> | Prompt;
 
 const Proto = {
   [TypeId]: TypeId,
   pipe() {
-    return pipeArguments(this, arguments)
-  }
-}
+    return pipeArguments(this, arguments);
+  },
+};
 
 const makePrompt = (content: ReadonlyArray<Message>): Prompt =>
   Object.assign(Object.create(Proto), {
-    content
-  })
+    content,
+  });
 
-const decodeMessagesSync = Schema.decodeSync(Schema.Array(Message))
+const decodeMessagesSync = Schema.decodeSync(Schema.Array(Message));
 
 /**
  * An empty prompt with no messages.
@@ -1454,7 +1558,7 @@ const decodeMessagesSync = Schema.decodeSync(Schema.Array(Message))
  * @since 1.0.0
  * @category Constructors
  */
-export const empty: Prompt = makePrompt([])
+export const empty: Prompt = makePrompt([]);
 
 /**
  * Creates a Prompt from an input.
@@ -1485,19 +1589,21 @@ export const empty: Prompt = makePrompt([])
  */
 export const make = (input: RawInput): Prompt => {
   if (Predicate.isString(input)) {
-    const part = makePart("text", { text: input })
-    const message = makeMessage("user", { content: [part] })
-    return makePrompt([message])
+    const part = makePart("text", { text: input });
+    const message = makeMessage("user", { content: [part] });
+    return makePrompt([message]);
   }
 
   if (Predicate.isIterable(input)) {
-    return makePrompt(decodeMessagesSync(Arr.fromIterable(input), {
-      errors: "all"
-    }))
+    return makePrompt(
+      decodeMessagesSync(Arr.fromIterable(input), {
+        errors: "all",
+      })
+    );
   }
 
-  return input
-}
+  return input;
+};
 
 /**
  * Creates a Prompt from an array of messages.
@@ -1521,7 +1627,8 @@ export const make = (input: RawInput): Prompt => {
  * @since 1.0.0
  * @category Constructors
  */
-export const fromMessages = (messages: ReadonlyArray<Message>): Prompt => makePrompt(messages)
+export const fromMessages = (messages: ReadonlyArray<Message>): Prompt =>
+  makePrompt(messages);
 
 /**
  * Creates a Prompt from the response parts of a previous interaction with a
@@ -1562,76 +1669,82 @@ export const fromMessages = (messages: ReadonlyArray<Message>): Prompt => makePr
  * @since 1.0.0
  * @category Constructors
  */
-export const fromResponseParts = (parts: ReadonlyArray<Response.AnyPart>): Prompt => {
+export const fromResponseParts = (
+  parts: ReadonlyArray<Response.AnyPart>
+): Prompt => {
   if (parts.length === 0) {
-    return empty
+    return empty;
   }
 
-  const assistantParts: Array<AssistantMessagePart> = []
-  const toolParts: Array<ToolMessagePart> = []
+  const assistantParts: Array<AssistantMessagePart> = [];
+  const toolParts: Array<ToolMessagePart> = [];
 
-  const activeTextDeltas = new Map<string, { text: string }>()
-  const activeReasoningDeltas = new Map<string, { text: string }>()
+  const activeTextDeltas = new Map<string, { text: string }>();
+  const activeReasoningDeltas = new Map<string, { text: string }>();
 
   for (const part of parts) {
     switch (part.type) {
       // Text Parts
       case "text": {
-        assistantParts.push(makePart("text", { text: part.text }))
-        break
+        assistantParts.push(makePart("text", { text: part.text }));
+        break;
       }
 
       // Text Parts (streaming)
       case "text-start": {
-        activeTextDeltas.set(part.id, { text: "" })
-        break
+        activeTextDeltas.set(part.id, { text: "" });
+        break;
       }
       case "text-delta": {
         if (activeTextDeltas.has(part.id)) {
-          activeTextDeltas.get(part.id)!.text += part.delta
+          activeTextDeltas.get(part.id)!.text += part.delta;
         }
-        break
+        break;
       }
       case "text-end": {
         if (activeTextDeltas.has(part.id)) {
-          assistantParts.push(makePart("text", activeTextDeltas.get(part.id)!))
+          assistantParts.push(makePart("text", activeTextDeltas.get(part.id)!));
         }
-        break
+        break;
       }
 
       // Reasoning Parts
       case "reasoning": {
-        assistantParts.push(makePart("reasoning", { text: part.text }))
-        break
+        assistantParts.push(makePart("reasoning", { text: part.text }));
+        break;
       }
 
       // Reasoning Parts (streaming)
       case "reasoning-start": {
-        activeReasoningDeltas.set(part.id, { text: "" })
-        break
+        activeReasoningDeltas.set(part.id, { text: "" });
+        break;
       }
       case "reasoning-delta": {
         if (activeReasoningDeltas.has(part.id)) {
-          activeReasoningDeltas.get(part.id)!.text += part.delta
+          activeReasoningDeltas.get(part.id)!.text += part.delta;
         }
-        break
+        break;
       }
       case "reasoning-end": {
         if (activeReasoningDeltas.has(part.id)) {
-          assistantParts.push(makePart("reasoning", activeReasoningDeltas.get(part.id)!))
+          assistantParts.push(
+            makePart("reasoning", activeReasoningDeltas.get(part.id)!)
+          );
         }
-        break
+        break;
       }
 
       // Tool Call Parts
       case "tool-call": {
-        assistantParts.push(makePart("tool-call", {
-          id: part.id,
-          name: part.providerName ?? part.name,
-          params: part.params,
-          providerExecuted: part.providerExecuted ?? false
-        }))
-        break
+        assistantParts.push(
+          makePart("tool-call", {
+            id: part.id,
+            name: part.providerName ?? part.name,
+            params: part.params,
+            providerExecuted: part.providerExecuted ?? false,
+          })
+        );
+        break;
       }
 
       // Tool Result Parts
@@ -1641,33 +1754,33 @@ export const fromResponseParts = (parts: ReadonlyArray<Response.AnyPart>): Promp
           name: part.providerName ?? part.name,
           isFailure: part.isFailure,
           result: part.encodedResult,
-          providerExecuted: part.providerExecuted ?? false
-        })
+          providerExecuted: part.providerExecuted ?? false,
+        });
         if (part.providerExecuted) {
-          assistantParts.push(toolPart)
+          assistantParts.push(toolPart);
         } else {
-          toolParts.push(toolPart)
+          toolParts.push(toolPart);
         }
       }
     }
   }
 
   if (assistantParts.length === 0 && toolParts.length === 0) {
-    return empty
+    return empty;
   }
 
-  const messages: Array<Message> = []
+  const messages: Array<Message> = [];
 
   if (assistantParts.length > 0) {
-    messages.push(makeMessage("assistant", { content: assistantParts }))
+    messages.push(makeMessage("assistant", { content: assistantParts }));
   }
 
   if (toolParts.length > 0) {
-    messages.push(makeMessage("tool", { content: toolParts }))
+    messages.push(makeMessage("tool", { content: toolParts }));
   }
 
-  return makePrompt(messages)
-}
+  return makePrompt(messages);
+};
 
 // =============================================================================
 // Merging Prompts
@@ -1695,18 +1808,18 @@ export const fromResponseParts = (parts: ReadonlyArray<Response.AnyPart>): Promp
  * @category Combinators
  */
 export const merge: {
-  (input: RawInput): (self: Prompt) => Prompt
-  (self: Prompt, input: RawInput): Prompt
+  (input: RawInput): (self: Prompt) => Prompt;
+  (self: Prompt, input: RawInput): Prompt;
 } = dual(2, (self: Prompt, input: RawInput): Prompt => {
-  const other = make(input)
+  const other = make(input);
   if (self.content.length === 0) {
-    return other
+    return other;
   }
   if (other.content.length === 0) {
-    return self
+    return self;
   }
-  return fromMessages([...self.content, ...other.content])
-})
+  return fromMessages([...self.content, ...other.content]);
+});
 
 // =============================================================================
 // Manipulating Prompts
@@ -1742,17 +1855,17 @@ export const merge: {
  * @category Combinators
  */
 export const setSystem: {
-  (content: string): (self: Prompt) => Prompt
-  (self: Prompt, content: string): Prompt
+  (content: string): (self: Prompt) => Prompt;
+  (self: Prompt, content: string): Prompt;
 } = dual(2, (self: Prompt, content: string): Prompt => {
-  const messages: Array<Message> = [makeMessage("system", { content })]
+  const messages: Array<Message> = [makeMessage("system", { content })];
   for (const message of self.content) {
     if (message.role !== "system") {
-      messages.push(message)
+      messages.push(message);
     }
   }
-  return makePrompt(messages)
-})
+  return makePrompt(messages);
+});
 
 /**
  * Creates a new prompt from the specified prompt with the provided text content
@@ -1785,23 +1898,23 @@ export const setSystem: {
  * @category Combinators
  */
 export const prependSystem: {
-  (content: string): (self: Prompt) => Prompt
-  (self: Prompt, content: string): Prompt
+  (content: string): (self: Prompt) => Prompt;
+  (self: Prompt, content: string): Prompt;
 } = dual(2, (self: Prompt, content: string): Prompt => {
-  let system: SystemMessage | undefined = undefined
+  let system: SystemMessage | undefined;
   for (const message of self.content) {
     if (message.role === "system") {
       system = makeMessage("system", {
-        content: content + message.content
-      })
-      break
+        content: content + message.content,
+      });
+      break;
     }
   }
   if (Predicate.isUndefined(system)) {
-    system = makeMessage("system", { content })
+    system = makeMessage("system", { content });
   }
-  return makePrompt([system, ...self.content])
-})
+  return makePrompt([system, ...self.content]);
+});
 
 /**
  * Creates a new prompt from the specified prompt with the provided text content
@@ -1834,20 +1947,20 @@ export const prependSystem: {
  * @category Combinators
  */
 export const appendSystem: {
-  (content: string): (self: Prompt) => Prompt
-  (self: Prompt, content: string): Prompt
+  (content: string): (self: Prompt) => Prompt;
+  (self: Prompt, content: string): Prompt;
 } = dual(2, (self: Prompt, content: string): Prompt => {
-  let system: SystemMessage | undefined = undefined
+  let system: SystemMessage | undefined;
   for (const message of self.content) {
     if (message.role === "system") {
       system = makeMessage("system", {
-        content: message.content + content
-      })
-      break
+        content: message.content + content,
+      });
+      break;
     }
   }
   if (Predicate.isUndefined(system)) {
-    system = makeMessage("system", { content })
+    system = makeMessage("system", { content });
   }
-  return makePrompt([system, ...self.content])
-})
+  return makePrompt([system, ...self.content]);
+});

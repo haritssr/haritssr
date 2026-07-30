@@ -30,10 +30,15 @@ export default function Breadcrumbs() {
             return (
               <span className="flex items-center" key={`${segment}-${index}`}>
                 {isLast ? (
-                  <span className="select-none whitespace-nowrap text-zinc-800">{label.toLocaleLowerCase()}</span>
+                  <span className="select-none whitespace-nowrap text-zinc-800">
+                    {label.toLocaleLowerCase()}
+                  </span>
                 ) : (
                   <>
-                    <Link className="whitespace-nowrap text-zinc-400 hover:text-zinc-700" href={href}>
+                    <Link
+                      className="whitespace-nowrap text-zinc-400 hover:text-zinc-700"
+                      href={href}
+                    >
                       {label.toLocaleLowerCase()}
                     </Link>
                     <Separator />

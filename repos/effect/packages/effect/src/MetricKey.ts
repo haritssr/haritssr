@@ -1,27 +1,27 @@
 /**
  * @since 2.0.0
  */
-import type * as Duration from "./Duration.js"
-import type * as Equal from "./Equal.js"
-import * as internal from "./internal/metric/key.js"
-import type * as MetricBoundaries from "./MetricBoundaries.js"
-import type * as MetricKeyType from "./MetricKeyType.js"
-import type * as MetricLabel from "./MetricLabel.js"
-import type * as Option from "./Option.js"
-import type { Pipeable } from "./Pipeable.js"
-import type * as Types from "./Types.js"
+import type * as Duration from "./Duration.js";
+import type * as Equal from "./Equal.js";
+import * as internal from "./internal/metric/key.js";
+import type * as MetricBoundaries from "./MetricBoundaries.js";
+import type * as MetricKeyType from "./MetricKeyType.js";
+import type * as MetricLabel from "./MetricLabel.js";
+import type * as Option from "./Option.js";
+import type { Pipeable } from "./Pipeable.js";
+import type * as Types from "./Types.js";
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export const MetricKeyTypeId: unique symbol = internal.MetricKeyTypeId
+export const MetricKeyTypeId: unique symbol = internal.MetricKeyTypeId;
 
 /**
  * @since 2.0.0
  * @category symbols
  */
-export type MetricKeyTypeId = typeof MetricKeyTypeId
+export type MetricKeyTypeId = typeof MetricKeyTypeId;
 
 /**
  * A `MetricKey` is a unique key associated with each metric. The key is based
@@ -33,13 +33,15 @@ export type MetricKeyTypeId = typeof MetricKeyTypeId
  * @since 2.0.0
  * @category models
  */
-export interface MetricKey<out Type extends MetricKeyType.MetricKeyType<any, any>>
-  extends MetricKey.Variance<Type>, Equal.Equal, Pipeable
-{
-  readonly name: string
-  readonly keyType: Type
-  readonly description: Option.Option<string>
-  readonly tags: ReadonlyArray<MetricLabel.MetricLabel>
+export interface MetricKey<
+  out Type extends MetricKeyType.MetricKeyType<any, any>,
+> extends MetricKey.Variance<Type>,
+    Equal.Equal,
+    Pipeable {
+  readonly name: string;
+  readonly keyType: Type;
+  readonly description: Option.Option<string>;
+  readonly tags: ReadonlyArray<MetricLabel.MetricLabel>;
 }
 
 /**
@@ -50,37 +52,41 @@ export declare namespace MetricKey {
    * @since 2.0.0
    * @category models
    */
-  export type Untyped = MetricKey<any>
+  export type Untyped = MetricKey<any>;
 
   /**
    * @since 2.0.0
    * @category models
    */
-  export type Counter<A extends (number | bigint)> = MetricKey<MetricKeyType.MetricKeyType.Counter<A>>
+  export type Counter<A extends number | bigint> = MetricKey<
+    MetricKeyType.MetricKeyType.Counter<A>
+  >;
 
   /**
    * @since 2.0.0
    * @category models
    */
-  export type Gauge<A extends (number | bigint)> = MetricKey<MetricKeyType.MetricKeyType.Gauge<A>>
+  export type Gauge<A extends number | bigint> = MetricKey<
+    MetricKeyType.MetricKeyType.Gauge<A>
+  >;
 
   /**
    * @since 2.0.0
    * @category models
    */
-  export type Frequency = MetricKey<MetricKeyType.MetricKeyType.Frequency>
+  export type Frequency = MetricKey<MetricKeyType.MetricKeyType.Frequency>;
 
   /**
    * @since 2.0.0
    * @category models
    */
-  export type Histogram = MetricKey<MetricKeyType.MetricKeyType.Histogram>
+  export type Histogram = MetricKey<MetricKeyType.MetricKeyType.Histogram>;
 
   /**
    * @since 2.0.0
    * @category models
    */
-  export type Summary = MetricKey<MetricKeyType.MetricKeyType.Summary>
+  export type Summary = MetricKey<MetricKeyType.MetricKeyType.Summary>;
 
   /**
    * @since 2.0.0
@@ -88,8 +94,8 @@ export declare namespace MetricKey {
    */
   export interface Variance<out Type> {
     readonly [MetricKeyTypeId]: {
-      _Type: Types.Covariant<Type>
-    }
+      _Type: Types.Covariant<Type>;
+    };
   }
 }
 
@@ -97,8 +103,10 @@ export declare namespace MetricKey {
  * @since 2.0.0
  * @category refinements
  */
-export const isMetricKey: (u: unknown) => u is MetricKey<MetricKeyType.MetricKeyType<unknown, unknown>> =
-  internal.isMetricKey
+export const isMetricKey: (
+  u: unknown
+) => u is MetricKey<MetricKeyType.MetricKeyType<unknown, unknown>> =
+  internal.isMetricKey;
 
 /**
  * Creates a metric key for a counter, with the specified name.
@@ -110,20 +118,20 @@ export const counter: {
   (
     name: string,
     options?: {
-      readonly description?: string | undefined
-      readonly bigint?: false | undefined
-      readonly incremental?: boolean | undefined
+      readonly description?: string | undefined;
+      readonly bigint?: false | undefined;
+      readonly incremental?: boolean | undefined;
     }
-  ): MetricKey.Counter<number>
+  ): MetricKey.Counter<number>;
   (
     name: string,
     options: {
-      readonly description?: string | undefined
-      readonly bigint: true
-      readonly incremental?: boolean | undefined
+      readonly description?: string | undefined;
+      readonly bigint: true;
+      readonly incremental?: boolean | undefined;
     }
-  ): MetricKey.Counter<bigint>
-} = internal.counter
+  ): MetricKey.Counter<bigint>;
+} = internal.counter;
 
 /**
  * Creates a metric key for a categorical frequency table, with the specified
@@ -136,11 +144,11 @@ export const frequency: (
   name: string,
   options?:
     | {
-      readonly description?: string | undefined
-      readonly preregisteredWords?: ReadonlyArray<string> | undefined
-    }
+        readonly description?: string | undefined;
+        readonly preregisteredWords?: ReadonlyArray<string> | undefined;
+      }
     | undefined
-) => MetricKey.Frequency = internal.frequency
+) => MetricKey.Frequency = internal.frequency;
 
 /**
  * Creates a metric key for a gauge, with the specified name.
@@ -149,15 +157,21 @@ export const frequency: (
  * @category constructors
  */
 export const gauge: {
-  (name: string, options?: {
-    readonly description?: string | undefined
-    readonly bigint?: false | undefined
-  }): MetricKey.Gauge<number>
-  (name: string, options: {
-    readonly description?: string | undefined
-    readonly bigint: true
-  }): MetricKey.Gauge<bigint>
-} = internal.gauge
+  (
+    name: string,
+    options?: {
+      readonly description?: string | undefined;
+      readonly bigint?: false | undefined;
+    }
+  ): MetricKey.Gauge<number>;
+  (
+    name: string,
+    options: {
+      readonly description?: string | undefined;
+      readonly bigint: true;
+    }
+  ): MetricKey.Gauge<bigint>;
+} = internal.gauge;
 
 /**
  * Creates a metric key for a histogram, with the specified name and boundaries.
@@ -169,7 +183,7 @@ export const histogram: (
   name: string,
   boundaries: MetricBoundaries.MetricBoundaries,
   description?: string
-) => MetricKey.Histogram = internal.histogram
+) => MetricKey.Histogram = internal.histogram;
 
 /**
  * Creates a metric key for a summary, with the specified name, maxAge,
@@ -178,16 +192,14 @@ export const histogram: (
  * @since 2.0.0
  * @category constructors
  */
-export const summary: (
-  options: {
-    readonly name: string
-    readonly maxAge: Duration.DurationInput
-    readonly maxSize: number
-    readonly error: number
-    readonly quantiles: ReadonlyArray<number>
-    readonly description?: string | undefined
-  }
-) => MetricKey.Summary = internal.summary
+export const summary: (options: {
+  readonly name: string;
+  readonly maxAge: Duration.DurationInput;
+  readonly maxSize: number;
+  readonly error: number;
+  readonly quantiles: ReadonlyArray<number>;
+  readonly description?: string | undefined;
+}) => MetricKey.Summary = internal.summary;
 
 /**
  * Returns a new `MetricKey` with the specified tag appended.
@@ -199,13 +211,15 @@ export const tagged: {
   (
     key: string,
     value: string
-  ): <Type extends MetricKeyType.MetricKeyType<any, any>>(self: MetricKey<Type>) => MetricKey<Type>
+  ): <Type extends MetricKeyType.MetricKeyType<any, any>>(
+    self: MetricKey<Type>
+  ) => MetricKey<Type>;
   <Type extends MetricKeyType.MetricKeyType<any, any>>(
     self: MetricKey<Type>,
     key: string,
     value: string
-  ): MetricKey<Type>
-} = internal.tagged
+  ): MetricKey<Type>;
+} = internal.tagged;
 
 /**
  * Returns a new `MetricKey` with the specified tags appended.
@@ -216,9 +230,11 @@ export const tagged: {
 export const taggedWithLabels: {
   (
     extraTags: ReadonlyArray<MetricLabel.MetricLabel>
-  ): <Type extends MetricKeyType.MetricKeyType<any, any>>(self: MetricKey<Type>) => MetricKey<Type>
+  ): <Type extends MetricKeyType.MetricKeyType<any, any>>(
+    self: MetricKey<Type>
+  ) => MetricKey<Type>;
   <Type extends MetricKeyType.MetricKeyType<any, any>>(
     self: MetricKey<Type>,
     extraTags: ReadonlyArray<MetricLabel.MetricLabel>
-  ): MetricKey<Type>
-} = internal.taggedWithLabels
+  ): MetricKey<Type>;
+} = internal.taggedWithLabels;

@@ -5,4 +5,4 @@
 /**
  * @since 1.0.0
  */
-export * from "@effect/platform-node-shared/NodeMultipart"
+export * from "@effect/platform-node-shared/NodeMultipart";

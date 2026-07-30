@@ -1,18 +1,10 @@
 import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
 
-type ExtendedNextConfig = NextConfig & {
-  experimental?: NextConfig["experimental"] & {
-    turbopackFileSystemCacheForDev?: boolean;
-  };
-};
-
-const nextConfig: ExtendedNextConfig = {
+const nextConfig: NextConfig = {
   turbopack: {},
   reactStrictMode: false,
-  experimental: {
-    turbopackFileSystemCacheForDev: true,
-  },
+  experimental: {},
   redirects() {
     return [
       {

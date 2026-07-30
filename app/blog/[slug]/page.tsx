@@ -14,7 +14,11 @@ export function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const blog = allBlogs.find((blog) => blog.slug === slug);
 
@@ -22,7 +26,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {};
   }
 
-  const { title, publishedAt: publishedTime, summary: description, slug: blogSlug } = blog;
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    slug: blogSlug,
+  } = blog;
 
   const image = "/images/openGraphImage.png";
 
@@ -138,7 +147,11 @@ async function markdownToHtml(content: string) {
   return result.toString();
 }
 
-export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Blog({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const blog = allBlogs.find((blog) => blog.slug === slug);
 
@@ -170,11 +183,17 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
         </div>
         <MDX html={html} />
       </Content>
-      <TableOfContents title={blog.title.toLocaleLowerCase().split(" ").join("-")} />
+      <TableOfContents
+        title={blog.title.toLocaleLowerCase().split(" ").join("-")}
+      />
     </div>
   );
 }
 
 function Content({ children }: { children: React.ReactNode }) {
-  return <section className="border-zinc-200 pb-5 sm:col-span-3 sm:border-r sm:border-b sm:px-5">{children}</section>;
+  return (
+    <section className="border-zinc-200 pb-5 sm:col-span-3 sm:border-r sm:border-b sm:px-5">
+      {children}
+    </section>
+  );
 }

@@ -17,14 +17,24 @@ export default function TaskHistoryPage() {
       <PageDescription description="Record of daily tasks." />
 
       {history.length === 0 ? (
-        <div className="rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-500">No task history yet.</div>
+        <div className="rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-500">
+          No task history yet.
+        </div>
       ) : (
         <div className="space-y-4">
           {history.map((day) => (
-            <Section key={day.date} title={day.date} titleMeta={`${day.doneCount}/${day.totalCount} done`}>
+            <Section
+              key={day.date}
+              title={day.date}
+              titleMeta={`${day.doneCount}/${day.totalCount} done`}
+            >
               <div className="space-y-1.5">
                 {day.tasks.map((task) => (
-                  <TaskItem key={`${day.date}-${task.title}`} readOnly {...task} />
+                  <TaskItem
+                    key={`${day.date}-${task.title}`}
+                    readOnly
+                    {...task}
+                  />
                 ))}
               </div>
             </Section>

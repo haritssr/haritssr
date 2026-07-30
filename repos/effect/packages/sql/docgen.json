@@ -1,9 +1,7 @@
 {
   "$schema": "../../node_modules/@effect/docgen/schema.json",
   "srcLink": "https://github.com/Effect-TS/effect/tree/main/packages/sql/src/",
-  "exclude": [
-    "src/internal/**/*.ts"
-  ],
+  "exclude": ["src/internal/**/*.ts"],
   "examplesCompilerOptions": {
     "noEmit": true,
     "strict": true,

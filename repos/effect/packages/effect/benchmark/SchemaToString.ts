@@ -1,6 +1,6 @@
-import * as ParseResult from "effect/ParseResult"
-import * as S from "effect/Schema"
-import { Bench } from "tinybench"
+import * as ParseResult from "effect/ParseResult";
+import * as S from "effect/Schema";
+import { Bench } from "tinybench";
 
 /*
 ┌─────────┬─────────────────────────────────┬───────────┬────────────────────┬──────────┬─────────┐
@@ -12,31 +12,37 @@ import { Bench } from "tinybench"
 └─────────┴─────────────────────────────────┴───────────┴────────────────────┴──────────┴─────────┘
 */
 
-const bench = new Bench({ time: 1000 })
+const bench = new Bench({ time: 1000 });
 
 const schema = S.Struct({
   a: S.Literal("a"),
   b: S.Array(S.String),
   c: S.Record({ key: S.String, value: S.Number }),
   d: S.NumberFromString,
-  e: S.Boolean
-})
+  e: S.Boolean,
+});
 
-const result: any = ParseResult.decodeUnknownEither(schema)({ a: "a", b: ["b"], c: { c: "c" }, d: "1", e: true })
+const result: any = ParseResult.decodeUnknownEither(schema)({
+  a: "a",
+  b: ["b"],
+  c: { c: "c" },
+  d: "1",
+  e: true,
+});
 
 // console.log(String(schema.ast))
 
 bench
-  .add("toString", function() {
-    String(schema.ast)
+  .add("toString", () => {
+    String(schema.ast);
   })
-  .add("toJSON", function() {
-    schema.ast.toJSON()
+  .add("toJSON", () => {
+    schema.ast.toJSON();
   })
-  .add("TreeFormatter.formatIssueSync", function() {
-    ParseResult.TreeFormatter.formatIssueSync(result.left)
-  })
+  .add("TreeFormatter.formatIssueSync", () => {
+    ParseResult.TreeFormatter.formatIssueSync(result.left);
+  });
 
-await bench.run()
+await bench.run();
 
-console.table(bench.table())
+console.table(bench.table());

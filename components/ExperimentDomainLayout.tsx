@@ -9,7 +9,10 @@ interface ExperimentDomainLayoutProps {
   domain: string;
 }
 
-export default function ExperimentDomainLayout({ children, domain }: ExperimentDomainLayoutProps) {
+export default function ExperimentDomainLayout({
+  children,
+  domain,
+}: ExperimentDomainLayoutProps) {
   const pathname = usePathname();
 
   // Get domain display name
@@ -32,7 +35,7 @@ export default function ExperimentDomainLayout({ children, domain }: ExperimentD
         .join(" ") || domainDisplayName;
 
   return (
-    <div className="min-h-screen w-full sm:-mt-px">
+    <div className="sm:-mt-px min-h-screen w-full">
       <div className="w-full sm:border-t">
         <article className="sm:px-0">
           <BackButton href="/experiments" name="Back" />

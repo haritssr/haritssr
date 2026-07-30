@@ -26,18 +26,18 @@
  *
  * @since 1.0.0
  */
-import * as Context from "effect/Context"
-import type * as Effect from "effect/Effect"
-import { constFalse, constTrue, identity } from "effect/Function"
-import * as JsonSchema from "effect/JSONSchema"
-import * as Option from "effect/Option"
-import type { Pipeable } from "effect/Pipeable"
-import { pipeArguments } from "effect/Pipeable"
-import * as Predicate from "effect/Predicate"
-import * as Schema from "effect/Schema"
-import * as AST from "effect/SchemaAST"
-import type { Covariant } from "effect/Types"
-import type * as AiError from "./AiError.js"
+import * as Context from "effect/Context";
+import type * as Effect from "effect/Effect";
+import { constFalse, constTrue, identity } from "effect/Function";
+import * as JsonSchema from "effect/JSONSchema";
+import * as Option from "effect/Option";
+import type { Pipeable } from "effect/Pipeable";
+import { pipeArguments } from "effect/Pipeable";
+import * as Predicate from "effect/Predicate";
+import * as Schema from "effect/Schema";
+import * as AST from "effect/SchemaAST";
+import type { Covariant } from "effect/Types";
+import type * as AiError from "./AiError.js";
 
 // =============================================================================
 // Type Ids
@@ -49,7 +49,7 @@ import type * as AiError from "./AiError.js"
  * @since 1.0.0
  * @category Type Ids
  */
-export const TypeId = "~@effect/ai/Tool"
+export const TypeId = "~@effect/ai/Tool";
 
 /**
  * Type-level representation of the user-defined tool identifier.
@@ -57,7 +57,7 @@ export const TypeId = "~@effect/ai/Tool"
  * @since 1.0.0
  * @category Type Ids
  */
-export type TypeId = typeof TypeId
+export type TypeId = typeof TypeId;
 
 /**
  * Unique identifier for provider-defined tools.
@@ -65,7 +65,7 @@ export type TypeId = typeof TypeId
  * @since 1.0.0
  * @category Type Ids
  */
-export const ProviderDefinedTypeId = "~@effect/ai/Tool/ProviderDefined"
+export const ProviderDefinedTypeId = "~@effect/ai/Tool/ProviderDefined";
 
 /**
  * Type-level representation of the provider-defined tool identifier.
@@ -73,7 +73,7 @@ export const ProviderDefinedTypeId = "~@effect/ai/Tool/ProviderDefined"
  * @since 1.0.0
  * @category Type Ids
  */
-export type ProviderDefinedTypeId = typeof ProviderDefinedTypeId
+export type ProviderDefinedTypeId = typeof ProviderDefinedTypeId;
 
 // =============================================================================
 // Models
@@ -112,27 +112,27 @@ export type ProviderDefinedTypeId = typeof ProviderDefinedTypeId
 export interface Tool<
   Name extends string,
   Config extends {
-    readonly parameters: AnyStructSchema
-    readonly success: Schema.Schema.Any
-    readonly failure: Schema.Schema.All
-    readonly failureMode: FailureMode
+    readonly parameters: AnyStructSchema;
+    readonly success: Schema.Schema.Any;
+    readonly failure: Schema.Schema.All;
+    readonly failureMode: FailureMode;
   },
-  Requirements = never
+  Requirements = never,
 > extends Tool.Variance<Requirements> {
   /**
    * The tool identifier which is used to uniquely identify the tool.
    */
-  readonly id: string
+  readonly id: string;
 
   /**
    * The name of the tool.
    */
-  readonly name: Name
+  readonly name: Name;
 
   /**
    * The optional description of the tool.
    */
-  readonly description?: string | undefined
+  readonly description?: string | undefined;
 
   /**
    * The strategy used for handling errors returned from tool call handler
@@ -145,30 +145,30 @@ export interface Tool<
    * If set to `"return"`, errors that occur during tool call handler execution
    * will be captured and returned as part of the tool call result.
    */
-  readonly failureMode: FailureMode
+  readonly failureMode: FailureMode;
 
   /**
    * A `Schema` representing the parameters that a tool must be called with.
    */
-  readonly parametersSchema: Config["parameters"]
+  readonly parametersSchema: Config["parameters"];
 
   /**
    * A `Schema` representing the value that a tool must return when called if
    * the tool call is successful.
    */
-  readonly successSchema: Config["success"]
+  readonly successSchema: Config["success"];
 
   /**
    * A `Schema` representing the value that a tool must return when called if
    * it fails.
    */
-  readonly failureSchema: Config["failure"]
+  readonly failureSchema: Config["failure"];
 
   /**
    * A `Context` object containing tool annotations which can store metadata
    * about the tool.
    */
-  readonly annotations: Context.Context<never>
+  readonly annotations: Context.Context<never>;
 
   /**
    * Adds a _request-level_ dependency which must be provided before the tool
@@ -180,27 +180,29 @@ export interface Tool<
    */
   addDependency<Identifier, Service>(
     tag: Context.Tag<Identifier, Service>
-  ): Tool<Name, Config, Identifier | Requirements>
+  ): Tool<Name, Config, Identifier | Requirements>;
 
   /**
    * Set the schema to use to validate the result of a tool call when successful.
    */
   setParameters<
-    ParametersSchema extends Schema.Struct<any> | Schema.Struct.Fields
+    ParametersSchema extends Schema.Struct<any> | Schema.Struct.Fields,
   >(
     schema: ParametersSchema
   ): Tool<
     Name,
     {
-      readonly parameters: ParametersSchema extends Schema.Struct<infer _> ? ParametersSchema
-        : ParametersSchema extends Schema.Struct.Fields ? Schema.Struct<ParametersSchema>
-        : never
-      readonly success: Config["success"]
-      readonly failure: Config["failure"]
-      readonly failureMode: Config["failureMode"]
+      readonly parameters: ParametersSchema extends Schema.Struct<infer _>
+        ? ParametersSchema
+        : ParametersSchema extends Schema.Struct.Fields
+          ? Schema.Struct<ParametersSchema>
+          : never;
+      readonly success: Config["success"];
+      readonly failure: Config["failure"];
+      readonly failureMode: Config["failureMode"];
     },
     Requirements
-  >
+  >;
 
   /**
    * Set the schema to use to validate the result of a tool call when successful.
@@ -210,13 +212,13 @@ export interface Tool<
   ): Tool<
     Name,
     {
-      readonly parameters: Config["parameters"]
-      readonly success: SuccessSchema
-      readonly failure: Config["failure"]
-      readonly failureMode: Config["failureMode"]
+      readonly parameters: Config["parameters"];
+      readonly success: SuccessSchema;
+      readonly failure: Config["failure"];
+      readonly failureMode: Config["failureMode"];
     },
     Requirements
-  >
+  >;
 
   /**
    * Set the schema to use to validate the result of a tool call when it fails.
@@ -226,13 +228,13 @@ export interface Tool<
   ): Tool<
     Name,
     {
-      readonly parameters: Config["parameters"]
-      readonly success: Config["success"]
-      readonly failure: FailureSchema
-      readonly failureMode: Config["failureMode"]
+      readonly parameters: Config["parameters"];
+      readonly success: Config["success"];
+      readonly failure: FailureSchema;
+      readonly failureMode: Config["failureMode"];
     },
     Requirements
-  >
+  >;
 
   /**
    * Add an annotation to the tool.
@@ -240,14 +242,14 @@ export interface Tool<
   annotate<I, S>(
     tag: Context.Tag<I, S>,
     value: S
-  ): Tool<Name, Config, Requirements>
+  ): Tool<Name, Config, Requirements>;
 
   /**
    * Add many annotations to the tool.
    */
   annotateContext<I>(
     context: Context.Context<I>
-  ): Tool<Name, Config, Requirements>
+  ): Tool<Name, Config, Requirements>;
 }
 
 /**
@@ -287,53 +289,51 @@ export interface Tool<
 export interface ProviderDefined<
   Name extends string,
   Config extends {
-    readonly args: AnyStructSchema
-    readonly parameters: AnyStructSchema
-    readonly success: Schema.Schema.Any
-    readonly failure: Schema.Schema.All
-    readonly failureMode: FailureMode
+    readonly args: AnyStructSchema;
+    readonly parameters: AnyStructSchema;
+    readonly success: Schema.Schema.Any;
+    readonly failure: Schema.Schema.All;
+    readonly failureMode: FailureMode;
   } = {
-    readonly args: Schema.Struct<{}>
-    readonly parameters: Schema.Struct<{}>
-    readonly success: typeof Schema.Void
-    readonly failure: typeof Schema.Never
-    readonly failureMode: "error"
+    readonly args: Schema.Struct<{}>;
+    readonly parameters: Schema.Struct<{}>;
+    readonly success: typeof Schema.Void;
+    readonly failure: typeof Schema.Never;
+    readonly failureMode: "error";
   },
-  RequiresHandler extends boolean = false
-> extends
-  Tool<
-    Name,
-    {
-      readonly parameters: Config["parameters"]
-      readonly success: Config["success"]
-      readonly failure: Config["failure"]
-      readonly failureMode: Config["failureMode"]
-    }
-  >,
-  Tool.ProviderDefinedProto
-{
+  RequiresHandler extends boolean = false,
+> extends Tool<
+      Name,
+      {
+        readonly parameters: Config["parameters"];
+        readonly success: Config["success"];
+        readonly failure: Config["failure"];
+        readonly failureMode: Config["failureMode"];
+      }
+    >,
+    Tool.ProviderDefinedProto {
   /**
    * The arguments passed to the provider-defined tool.
    */
-  readonly args: Config["args"]["Encoded"]
+  readonly args: Config["args"]["Encoded"];
 
   /**
    * A `Schema` representing the arguments provided by the end-user which will
    * be used to configure the behavior of the provider-defined tool.
    */
-  readonly argsSchema: Config["args"]
+  readonly argsSchema: Config["args"];
 
   /**
    * Name of the tool as recognized by the large language model provider.
    */
-  readonly providerName: string
+  readonly providerName: string;
 
   /**
    * If set to `true`, this provider-defined tool will require a user-defined
    * tool call handler to be provided when converting the `Toolkit` containing
    * this tool into a `Layer`.
    */
-  readonly requiresHandler: RequiresHandler
+  readonly requiresHandler: RequiresHandler;
 }
 
 /**
@@ -349,7 +349,7 @@ export interface ProviderDefined<
  * @since 1.0.0
  * @category Models
  */
-export type FailureMode = "error" | "return"
+export type FailureMode = "error" | "return";
 
 /**
  * @since 1.0.0
@@ -360,7 +360,7 @@ export declare namespace Tool {
    * @category Models
    */
   export interface Variance<out Requirements> extends Pipeable {
-    readonly [TypeId]: VarianceStruct<Requirements>
+    readonly [TypeId]: VarianceStruct<Requirements>;
   }
 
   /**
@@ -368,7 +368,7 @@ export declare namespace Tool {
    * @category Models
    */
   export interface VarianceStruct<out Requirements> {
-    readonly _Requirements: Covariant<Requirements>
+    readonly _Requirements: Covariant<Requirements>;
   }
 
   /**
@@ -376,7 +376,7 @@ export declare namespace Tool {
    * @category Models
    */
   export interface ProviderDefinedProto {
-    readonly [ProviderDefinedTypeId]: ProviderDefinedTypeId
+    readonly [ProviderDefinedTypeId]: ProviderDefinedTypeId;
   }
 }
 
@@ -426,7 +426,7 @@ export declare namespace Tool {
  * @category Guards
  */
 export const isUserDefined = (u: unknown): u is Tool<string, any, any> =>
-  Predicate.hasProperty(u, TypeId) && !isProviderDefined(u)
+  Predicate.hasProperty(u, TypeId) && !isProviderDefined(u);
 
 /**
  * Type guard to check if a value is a provider-defined tool.
@@ -474,7 +474,8 @@ export const isUserDefined = (u: unknown): u is Tool<string, any, any> =>
  */
 export const isProviderDefined = (
   u: unknown
-): u is ProviderDefined<string, any> => Predicate.hasProperty(u, ProviderDefinedTypeId)
+): u is ProviderDefined<string, any> =>
+  Predicate.hasProperty(u, ProviderDefinedTypeId);
 
 // =============================================================================
 // Utility Types
@@ -488,16 +489,16 @@ export const isProviderDefined = (
  */
 export interface Any extends Pipeable {
   readonly [TypeId]: {
-    readonly _Requirements: Covariant<any>
-  }
-  readonly id: string
-  readonly name: string
-  readonly description?: string | undefined
-  readonly parametersSchema: AnyStructSchema
-  readonly successSchema: Schema.Schema.Any
-  readonly failureSchema: Schema.Schema.All
-  readonly failureMode: FailureMode
-  readonly annotations: Context.Context<never>
+    readonly _Requirements: Covariant<any>;
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | undefined;
+  readonly parametersSchema: AnyStructSchema;
+  readonly successSchema: Schema.Schema.Any;
+  readonly failureSchema: Schema.Schema.All;
+  readonly failureMode: FailureMode;
+  readonly annotations: Context.Context<never>;
 }
 
 /**
@@ -507,13 +508,13 @@ export interface Any extends Pipeable {
  * @category Utility Types
  */
 export interface AnyProviderDefined extends Any {
-  readonly args: any
-  readonly argsSchema: AnyStructSchema
-  readonly requiresHandler: boolean
-  readonly providerName: string
+  readonly args: any;
+  readonly argsSchema: AnyStructSchema;
+  readonly requiresHandler: boolean;
+  readonly providerName: string;
   readonly decodeResult: (
     result: unknown
-  ) => Effect.Effect<any, AiError.AiError>
+  ) => Effect.Effect<any, AiError.AiError>;
 }
 
 /**
@@ -521,14 +522,14 @@ export interface AnyProviderDefined extends Any {
  * @category Utility Types
  */
 export interface AnyStructSchema extends Pipeable {
-  readonly [Schema.TypeId]: any
-  readonly make: any
-  readonly Type: any
-  readonly Encoded: any
-  readonly Context: any
-  readonly ast: AST.AST
-  readonly fields: Schema.Struct.Fields
-  readonly annotations: any
+  readonly [Schema.TypeId]: any;
+  readonly make: any;
+  readonly Type: any;
+  readonly Encoded: any;
+  readonly Context: any;
+  readonly ast: AST.AST;
+  readonly fields: Schema.Struct.Fields;
+  readonly annotations: any;
 }
 
 /**
@@ -536,9 +537,9 @@ export interface AnyStructSchema extends Pipeable {
  * @category Utility Types
  */
 export interface AnyTaggedRequestSchema extends AnyStructSchema {
-  readonly _tag: string
-  readonly success: Schema.Schema.Any
-  readonly failure: Schema.Schema.All
+  readonly _tag: string;
+  readonly success: Schema.Schema.Any;
+  readonly failure: Schema.Schema.All;
 }
 
 /**
@@ -547,17 +548,16 @@ export interface AnyTaggedRequestSchema extends AnyStructSchema {
  * @since 1.0.0
  * @category Utility Types
  */
-export interface FromTaggedRequest<S extends AnyTaggedRequestSchema> extends
-  Tool<
+export interface FromTaggedRequest<S extends AnyTaggedRequestSchema>
+  extends Tool<
     S["_tag"],
     {
-      readonly parameters: S
-      readonly success: S["success"]
-      readonly failure: S["failure"]
-      readonly failureMode: "error"
+      readonly parameters: S;
+      readonly success: S["success"];
+      readonly failure: S["failure"];
+      readonly failureMode: "error";
     }
-  >
-{}
+  > {}
 
 /**
  * A utility type to extract the `Name` type from an `Tool`.
@@ -569,8 +569,9 @@ export type Name<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? _Name
-  : never
+>
+  ? _Name
+  : never;
 
 /**
  * A utility type to extract the type of the tool call parameters.
@@ -582,8 +583,9 @@ export type Parameters<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? Schema.Struct.Type<_Config["parameters"]["fields"]>
-  : never
+>
+  ? Schema.Struct.Type<_Config["parameters"]["fields"]>
+  : never;
 
 /**
  * A utility type to extract the encoded type of the tool call parameters.
@@ -595,8 +597,9 @@ export type ParametersEncoded<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? Schema.Schema.Encoded<_Config["parameters"]>
-  : never
+>
+  ? Schema.Schema.Encoded<_Config["parameters"]>
+  : never;
 
 /**
  * A utility type to extract the schema for the parameters which an `Tool`
@@ -609,8 +612,9 @@ export type ParametersSchema<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? _Config["parameters"]
-  : never
+>
+  ? _Config["parameters"]
+  : never;
 
 /**
  * A utility type to extract the type of the tool call result when it succeeds.
@@ -622,8 +626,9 @@ export type Success<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? Schema.Schema.Type<_Config["success"]>
-  : never
+>
+  ? Schema.Schema.Type<_Config["success"]>
+  : never;
 
 /**
  * A utility type to extract the encoded type of the tool call result when
@@ -636,8 +641,9 @@ export type SuccessEncoded<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? Schema.Schema.Encoded<_Config["success"]>
-  : never
+>
+  ? Schema.Schema.Encoded<_Config["success"]>
+  : never;
 
 /**
  * A utility type to extract the schema for the return type of a tool call when
@@ -650,8 +656,9 @@ export type SuccessSchema<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? _Config["success"]
-  : never
+>
+  ? _Config["success"]
+  : never;
 
 /**
  * A utility type to extract the type of the tool call result when it fails.
@@ -663,8 +670,9 @@ export type Failure<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? Schema.Schema.Type<_Config["failure"]>
-  : never
+>
+  ? Schema.Schema.Type<_Config["failure"]>
+  : never;
 
 /**
  * A utility type to extract the encoded type of the tool call result when
@@ -677,8 +685,9 @@ export type FailureEncoded<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? Schema.Schema.Encoded<_Config["failure"]>
-  : never
+>
+  ? Schema.Schema.Encoded<_Config["failure"]>
+  : never;
 
 /**
  * A utility type to extract the type of the tool call result whether it
@@ -691,8 +700,9 @@ export type Result<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? Success<T> | Failure<T>
-  : never
+>
+  ? Success<T> | Failure<T>
+  : never;
 
 /**
  * A utility type to extract the encoded type of the tool call result whether
@@ -705,8 +715,9 @@ export type ResultEncoded<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? SuccessEncoded<T> | FailureEncoded<T>
-  : never
+>
+  ? SuccessEncoded<T> | FailureEncoded<T>
+  : never;
 
 /**
  * A utility type to extract the requirements of an `Tool`.
@@ -718,12 +729,13 @@ export type Requirements<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ?
-    | _Config["parameters"]["Context"]
-    | _Config["success"]["Context"]
-    | _Config["failure"]["Context"]
-    | _Requirements
-  : never
+>
+  ?
+      | _Config["parameters"]["Context"]
+      | _Config["success"]["Context"]
+      | _Config["failure"]["Context"]
+      | _Requirements
+  : never;
 
 /**
  * Represents an `Tool` that has been implemented within the application.
@@ -732,10 +744,10 @@ export type Requirements<T> = T extends Tool<
  * @category Models
  */
 export interface Handler<Name extends string> {
-  readonly _: unique symbol
-  readonly name: Name
-  readonly context: Context.Context<never>
-  readonly handler: (params: any) => Effect.Effect<any, any>
+  readonly _: unique symbol;
+  readonly name: Name;
+  readonly context: Context.Context<never>;
+  readonly handler: (params: any) => Effect.Effect<any, any>;
 }
 
 /**
@@ -748,17 +760,17 @@ export interface HandlerResult<Tool extends Any> {
   /**
    * Whether the result of executing the tool call handler was an error or not.
    */
-  readonly isFailure: boolean
+  readonly isFailure: boolean;
   /**
    * The result of executing the handler for a particular tool.
    */
-  readonly result: Result<Tool>
+  readonly result: Result<Tool>;
   /**
    * The pre-encoded tool call result of executing the handler for a particular
    * tool as a JSON-serializable value. The encoded result can be incorporated
    * into subsequent requests to the large language model.
    */
-  readonly encodedResult: unknown
+  readonly encodedResult: unknown;
 }
 
 /**
@@ -772,9 +784,11 @@ export type HandlerError<T> = T extends Tool<
   infer _Name,
   infer _Config,
   infer _Requirements
-> ? _Config["failureMode"] extends "error" ? _Config["failure"]["Type"]
-  : never
-  : never
+>
+  ? _Config["failureMode"] extends "error"
+    ? _Config["failure"]["Type"]
+    : never
+  : never;
 
 /**
  * A utility type to create a union of `Handler` types for all tools in a
@@ -784,9 +798,10 @@ export type HandlerError<T> = T extends Tool<
  * @category Utility Types
  */
 export type HandlersFor<Tools extends Record<string, Any>> = {
-  [Name in keyof Tools]: RequiresHandler<Tools[Name]> extends true ? Handler<Tools[Name]["name"]>
-    : never
-}[keyof Tools]
+  [Name in keyof Tools]: RequiresHandler<Tools[Name]> extends true
+    ? Handler<Tools[Name]["name"]>
+    : never;
+}[keyof Tools];
 
 /**
  * A utility type to determine if the specified tool requires a user-defined
@@ -799,8 +814,9 @@ export type RequiresHandler<Tool extends Any> = Tool extends ProviderDefined<
   infer _Name,
   infer _Config,
   infer _RequiresHandler
-> ? _RequiresHandler
-  : true
+>
+  ? _RequiresHandler
+  : true;
 
 // =============================================================================
 // Constructors
@@ -809,10 +825,10 @@ export type RequiresHandler<Tool extends Any> = Tool extends ProviderDefined<
 const Proto = {
   [TypeId]: { _Requirements: identity },
   pipe() {
-    return pipeArguments(this, arguments)
+    return pipeArguments(this, arguments);
   },
   addDependency(this: Any) {
-    return userDefinedProto({ ...this })
+    return userDefinedProto({ ...this });
   },
   setParameters(
     this: Any,
@@ -822,67 +838,67 @@ const Proto = {
       ...this,
       parametersSchema: Schema.isSchema(parametersSchema)
         ? (parametersSchema as any)
-        : Schema.Struct(parametersSchema as any)
-    })
+        : Schema.Struct(parametersSchema as any),
+    });
   },
   setSuccess(this: Any, successSchema: Schema.Schema.Any) {
     return userDefinedProto({
       ...this,
-      successSchema
-    })
+      successSchema,
+    });
   },
   setFailure(this: Any, failureSchema: Schema.Schema.All) {
     return userDefinedProto({
       ...this,
-      failureSchema
-    })
+      failureSchema,
+    });
   },
   annotate<I, S>(this: Any, tag: Context.Tag<I, S>, value: S) {
     return userDefinedProto({
       ...this,
-      annotations: Context.add(this.annotations, tag, value)
-    })
+      annotations: Context.add(this.annotations, tag, value),
+    });
   },
   annotateContext<I>(this: Any, context: Context.Context<I>) {
     return userDefinedProto({
       ...this,
-      annotations: Context.merge(this.annotations, context)
-    })
-  }
-}
+      annotations: Context.merge(this.annotations, context),
+    });
+  },
+};
 
 const ProviderDefinedProto = {
   ...Proto,
-  [ProviderDefinedTypeId]: ProviderDefinedTypeId
-}
+  [ProviderDefinedTypeId]: ProviderDefinedTypeId,
+};
 
 const userDefinedProto = <
   const Name extends string,
   Parameters extends AnyStructSchema,
   Success extends Schema.Schema.Any,
   Failure extends Schema.Schema.All,
-  Mode extends FailureMode
+  Mode extends FailureMode,
 >(options: {
-  readonly name: Name
-  readonly description?: string | undefined
-  readonly parametersSchema: Parameters
-  readonly successSchema: Success
-  readonly failureSchema: Failure
-  readonly annotations: Context.Context<never>
-  readonly failureMode: Mode
+  readonly name: Name;
+  readonly description?: string | undefined;
+  readonly parametersSchema: Parameters;
+  readonly successSchema: Success;
+  readonly failureSchema: Failure;
+  readonly annotations: Context.Context<never>;
+  readonly failureMode: Mode;
 }): Tool<
   Name,
   {
-    readonly parameters: Parameters
-    readonly success: Success
-    readonly failure: Failure
-    readonly failureMode: Mode
+    readonly parameters: Parameters;
+    readonly success: Success;
+    readonly failure: Failure;
+    readonly failureMode: Mode;
   }
 > => {
-  const self = Object.assign(Object.create(Proto), options)
-  self.id = `@effect/ai/Tool/${options.name}`
-  return self
-}
+  const self = Object.assign(Object.create(Proto), options);
+  self.id = `@effect/ai/Tool/${options.name}`;
+  return self;
+};
 
 const providerDefinedProto = <
   const Name extends string,
@@ -891,31 +907,31 @@ const providerDefinedProto = <
   Success extends Schema.Schema.Any,
   Failure extends Schema.Schema.All,
   RequiresHandler extends boolean,
-  Mode extends FailureMode
+  Mode extends FailureMode,
 >(options: {
-  readonly id: string
-  readonly name: Name
-  readonly providerName: string
-  readonly args: Args["Encoded"]
-  readonly argsSchema: Args
-  readonly requiresHandler: RequiresHandler
-  readonly parametersSchema: Parameters
-  readonly successSchema: Success
-  readonly failureSchema: Failure
-  readonly failureMode: FailureMode
+  readonly id: string;
+  readonly name: Name;
+  readonly providerName: string;
+  readonly args: Args["Encoded"];
+  readonly argsSchema: Args;
+  readonly requiresHandler: RequiresHandler;
+  readonly parametersSchema: Parameters;
+  readonly successSchema: Success;
+  readonly failureSchema: Failure;
+  readonly failureMode: FailureMode;
 }): ProviderDefined<
   Name,
   {
-    readonly args: Args
-    readonly parameters: Parameters
-    readonly success: Success
-    readonly failure: Failure
-    readonly failureMode: Mode
+    readonly args: Args;
+    readonly parameters: Parameters;
+    readonly success: Success;
+    readonly failure: Failure;
+    readonly failureMode: Mode;
   },
   RequiresHandler
-> => Object.assign(Object.create(ProviderDefinedProto), options)
+> => Object.assign(Object.create(ProviderDefinedProto), options);
 
-const constEmptyStruct = Schema.Struct({})
+const constEmptyStruct = Schema.Struct({});
 
 /**
  * Creates a user-defined tool with the specified name and configuration.
@@ -945,7 +961,7 @@ export const make = <
   Success extends Schema.Schema.Any = typeof Schema.Void,
   Failure extends Schema.Schema.All = typeof Schema.Never,
   Mode extends FailureMode | undefined = undefined,
-  Dependencies extends Array<Context.Tag<any, any>> = []
+  Dependencies extends Array<Context.Tag<any, any>> = [],
 >(
   /**
    * The unique name identifier for this tool.
@@ -955,19 +971,19 @@ export const make = <
     /**
      * An optional description explaining what the tool does.
      */
-    readonly description?: string | undefined
+    readonly description?: string | undefined;
     /**
      * Schema defining the parameters this tool accepts.
      */
-    readonly parameters?: Parameters | undefined
+    readonly parameters?: Parameters | undefined;
     /**
      * Schema for successful tool execution results.
      */
-    readonly success?: Success | undefined
+    readonly success?: Success | undefined;
     /**
      * Schema for tool execution failures.
      */
-    readonly failure?: Failure | undefined
+    readonly failure?: Failure | undefined;
     /**
      * The strategy used for handling errors returned from tool call handler
      * execution.
@@ -978,24 +994,24 @@ export const make = <
      * If set to `"return"`, errors that occur during tool call handler execution
      * will be captured and returned as part of the tool call result.
      */
-    readonly failureMode?: Mode
+    readonly failureMode?: Mode;
     /**
      * Service dependencies required by the tool handler.
      */
-    readonly dependencies?: Dependencies | undefined
+    readonly dependencies?: Dependencies | undefined;
   }
 ): Tool<
   Name,
   {
-    readonly parameters: Schema.Struct<Parameters>
-    readonly success: Success
-    readonly failure: Failure
-    readonly failureMode: Mode extends undefined ? "error" : Mode
+    readonly parameters: Schema.Struct<Parameters>;
+    readonly success: Success;
+    readonly failure: Failure;
+    readonly failureMode: Mode extends undefined ? "error" : Mode;
   },
   Context.Tag.Identifier<Dependencies[number]>
 > => {
-  const successSchema = options?.success ?? Schema.Void
-  const failureSchema = options?.failure ?? Schema.Never
+  const successSchema = options?.success ?? Schema.Void;
+  const failureSchema = options?.failure ?? Schema.Never;
   return userDefinedProto({
     name,
     description: options?.description,
@@ -1005,9 +1021,9 @@ export const make = <
     successSchema,
     failureSchema,
     failureMode: options?.failureMode ?? "error",
-    annotations: Context.empty()
-  }) as any
-}
+    annotations: Context.empty(),
+  }) as any;
+};
 
 /**
  * Creates a provider-defined tool which leverages functionality built into a
@@ -1043,93 +1059,95 @@ export const make = <
  * @since 1.0.0
  * @category Constructors
  */
-export const providerDefined = <
-  const Name extends string,
-  Args extends Schema.Struct.Fields = {},
-  Parameters extends Schema.Struct.Fields = {},
-  Success extends Schema.Schema.Any = typeof Schema.Void,
-  Failure extends Schema.Schema.All = typeof Schema.Never,
-  RequiresHandler extends boolean = false
->(options: {
-  /**
-   * Unique identifier following format `<provider>.<tool-name>`.
-   */
-  readonly id: `${string}.${string}`
-  /**
-   * Name used by the Toolkit to identify this tool.
-   */
-  readonly toolkitName: Name
-  /**
-   * Name of the tool as recognized by the AI provider.
-   */
-  readonly providerName: string
-  /**
-   * Schema for user-provided configuration arguments.
-   */
-  readonly args: Args
-  /**
-   * Whether this tool requires a custom handler implementation.
-   */
-  readonly requiresHandler?: RequiresHandler | undefined
-  /**
-   * Schema for parameters the provider sends when calling the tool.
-   */
-  readonly parameters?: Parameters | undefined
-  /**
-   * Schema for successful tool execution results.
-   */
-  readonly success?: Success | undefined
-  /**
-   * Schema for failed tool execution results.
-   */
-  readonly failure?: Failure | undefined
-}) =>
-<Mode extends FailureMode | undefined = undefined>(
-  args: RequiresHandler extends true ? Schema.Simplify<
-      Schema.Struct.Encoded<Args> & {
-        /**
-         * The strategy used for handling errors returned from tool call handler
-         * execution.
-         *
-         * If set to `"error"` (the default), errors that occur during tool call handler
-         * execution will be returned in the error channel of the calling effect.
-         *
-         * If set to `"return"`, errors that occur during tool call handler execution
-         * will be captured and returned as part of the tool call result.
-         */
-        readonly failureMode?: Mode
-      }
-    >
-    : Schema.Simplify<Schema.Struct.Encoded<Args>>
-): ProviderDefined<
-  Name,
-  {
-    readonly args: Schema.Struct<Args>
-    readonly parameters: Schema.Struct<Parameters>
-    readonly success: Success
-    readonly failure: Failure
-    readonly failureMode: Mode extends undefined ? "error" : Mode
-  },
-  RequiresHandler
-> => {
-  const failureMode = "failureMode" in args ? args.failureMode : undefined
-  const successSchema = options?.success ?? Schema.Void
-  const failureSchema = options?.failure ?? Schema.Never
-  return providerDefinedProto({
-    id: options.id,
-    name: options.toolkitName,
-    providerName: options.providerName,
-    args,
-    argsSchema: Schema.Struct(options.args as any),
-    requiresHandler: options.requiresHandler ?? false,
-    parametersSchema: options?.parameters
-      ? Schema.Struct(options?.parameters as any)
-      : constEmptyStruct,
-    successSchema,
-    failureSchema,
-    failureMode: failureMode ?? "error"
-  }) as any
-}
+export const providerDefined =
+  <
+    const Name extends string,
+    Args extends Schema.Struct.Fields = {},
+    Parameters extends Schema.Struct.Fields = {},
+    Success extends Schema.Schema.Any = typeof Schema.Void,
+    Failure extends Schema.Schema.All = typeof Schema.Never,
+    RequiresHandler extends boolean = false,
+  >(options: {
+    /**
+     * Unique identifier following format `<provider>.<tool-name>`.
+     */
+    readonly id: `${string}.${string}`;
+    /**
+     * Name used by the Toolkit to identify this tool.
+     */
+    readonly toolkitName: Name;
+    /**
+     * Name of the tool as recognized by the AI provider.
+     */
+    readonly providerName: string;
+    /**
+     * Schema for user-provided configuration arguments.
+     */
+    readonly args: Args;
+    /**
+     * Whether this tool requires a custom handler implementation.
+     */
+    readonly requiresHandler?: RequiresHandler | undefined;
+    /**
+     * Schema for parameters the provider sends when calling the tool.
+     */
+    readonly parameters?: Parameters | undefined;
+    /**
+     * Schema for successful tool execution results.
+     */
+    readonly success?: Success | undefined;
+    /**
+     * Schema for failed tool execution results.
+     */
+    readonly failure?: Failure | undefined;
+  }) =>
+  <Mode extends FailureMode | undefined = undefined>(
+    args: RequiresHandler extends true
+      ? Schema.Simplify<
+          Schema.Struct.Encoded<Args> & {
+            /**
+             * The strategy used for handling errors returned from tool call handler
+             * execution.
+             *
+             * If set to `"error"` (the default), errors that occur during tool call handler
+             * execution will be returned in the error channel of the calling effect.
+             *
+             * If set to `"return"`, errors that occur during tool call handler execution
+             * will be captured and returned as part of the tool call result.
+             */
+            readonly failureMode?: Mode;
+          }
+        >
+      : Schema.Simplify<Schema.Struct.Encoded<Args>>
+  ): ProviderDefined<
+    Name,
+    {
+      readonly args: Schema.Struct<Args>;
+      readonly parameters: Schema.Struct<Parameters>;
+      readonly success: Success;
+      readonly failure: Failure;
+      readonly failureMode: Mode extends undefined ? "error" : Mode;
+    },
+    RequiresHandler
+  > => {
+    const failureMode = "failureMode" in args ? args.failureMode : undefined;
+    const successSchema = options?.success ?? Schema.Void;
+    const failureSchema = options?.failure ?? Schema.Never;
+    return providerDefinedProto({
+      id: options.id,
+      name: options.toolkitName,
+      providerName: options.providerName,
+      args,
+      argsSchema: Schema.Struct(options.args as any),
+      requiresHandler: options.requiresHandler ?? false,
+      parametersSchema: options?.parameters
+        ? Schema.Struct(options?.parameters as any)
+        : constEmptyStruct,
+      successSchema,
+      failureSchema,
+      failureMode: failureMode ?? "error",
+    }) as any;
+  };
 
 /**
  * Creates a Tool from a Schema.TaggedRequest.
@@ -1178,8 +1196,8 @@ export const fromTaggedRequest = <S extends AnyTaggedRequestSchema>(
     successSchema: schema.success,
     failureSchema: schema.failure,
     failureMode: "error",
-    annotations: Context.empty()
-  }) as any
+    annotations: Context.empty(),
+  }) as any;
 
 // =============================================================================
 // Utilities
@@ -1209,11 +1227,11 @@ export const fromTaggedRequest = <S extends AnyTaggedRequestSchema>(
 export const getDescription = <
   Name extends string,
   Config extends {
-    readonly parameters: AnyStructSchema
-    readonly success: Schema.Schema.Any
-    readonly failure: Schema.Schema.All
-    readonly failureMode: FailureMode
-  }
+    readonly parameters: AnyStructSchema;
+    readonly success: Schema.Schema.Any;
+    readonly failure: Schema.Schema.All;
+    readonly failureMode: FailureMode;
+  },
 >(
   /**
    * The tool to get the description from.
@@ -1221,10 +1239,10 @@ export const getDescription = <
   tool: Tool<Name, Config>
 ): string | undefined => {
   if (Predicate.isNotUndefined(tool.description)) {
-    return tool.description
+    return tool.description;
   }
-  return getDescriptionFromSchemaAst(tool.parametersSchema.ast)
-}
+  return getDescriptionFromSchemaAst(tool.parametersSchema.ast);
+};
 
 /**
  * @since 1.0.0
@@ -1233,16 +1251,17 @@ export const getDescription = <
 export const getDescriptionFromSchemaAst = (
   ast: AST.AST
 ): string | undefined => {
-  const annotations = ast._tag === "Transformation"
-    ? {
-      ...ast.to.annotations,
-      ...ast.annotations
-    }
-    : ast.annotations
+  const annotations =
+    ast._tag === "Transformation"
+      ? {
+          ...ast.to.annotations,
+          ...ast.annotations,
+        }
+      : ast.annotations;
   return AST.DescriptionAnnotationId in annotations
     ? (annotations[AST.DescriptionAnnotationId] as string)
-    : undefined
-}
+    : undefined;
+};
 
 /**
  * Generates a JSON Schema for a tool.
@@ -1281,14 +1300,15 @@ export const getDescriptionFromSchemaAst = (
 export const getJsonSchema = <
   Name extends string,
   Config extends {
-    readonly parameters: AnyStructSchema
-    readonly success: Schema.Schema.Any
-    readonly failure: Schema.Schema.All
-    readonly failureMode: FailureMode
-  }
+    readonly parameters: AnyStructSchema;
+    readonly success: Schema.Schema.Any;
+    readonly failure: Schema.Schema.All;
+    readonly failureMode: FailureMode;
+  },
 >(
   tool: Tool<Name, Config>
-): JsonSchema.JsonSchema7 => getJsonSchemaFromSchemaAst(tool.parametersSchema.ast)
+): JsonSchema.JsonSchema7 =>
+  getJsonSchemaFromSchemaAst(tool.parametersSchema.ast);
 
 /**
  * @since 1.0.0
@@ -1297,15 +1317,15 @@ export const getJsonSchema = <
 export const getJsonSchemaFromSchemaAst = (
   ast: AST.AST
 ): JsonSchema.JsonSchema7 => {
-  const $defs = {}
+  const $defs = {};
   const schema = JsonSchema.fromAST(ast, {
     definitions: $defs,
-    topLevelReferenceStrategy: "skip"
-  })
-  if (Object.keys($defs).length === 0) return schema
-  ;(schema as any).$defs = $defs
-  return schema
-}
+    topLevelReferenceStrategy: "skip",
+  });
+  if (Object.keys($defs).length === 0) return schema;
+  (schema as any).$defs = $defs;
+  return schema;
+};
 
 // =============================================================================
 // Annotations
@@ -1347,7 +1367,7 @@ export class Title extends Context.Tag("@effect/ai/Tool/Title")<
 export class Readonly extends Context.Reference<Readonly>()(
   "@effect/ai/Tool/Readonly",
   {
-    defaultValue: constFalse
+    defaultValue: constFalse,
   }
 ) {}
 
@@ -1368,7 +1388,7 @@ export class Readonly extends Context.Reference<Readonly>()(
 export class Destructive extends Context.Reference<Destructive>()(
   "@effect/ai/Tool/Destructive",
   {
-    defaultValue: constTrue
+    defaultValue: constTrue,
   }
 ) {}
 
@@ -1389,7 +1409,7 @@ export class Destructive extends Context.Reference<Destructive>()(
 export class Idempotent extends Context.Reference<Idempotent>()(
   "@effect/ai/Tool/Idempotent",
   {
-    defaultValue: constFalse
+    defaultValue: constFalse,
   }
 ) {}
 
@@ -1410,7 +1430,7 @@ export class Idempotent extends Context.Reference<Idempotent>()(
 export class OpenWorld extends Context.Reference<OpenWorld>()(
   "@effect/ai/Tool/OpenWorld",
   {
-    defaultValue: constTrue
+    defaultValue: constTrue,
   }
 ) {}
 
@@ -1437,57 +1457,57 @@ export class OpenWorld extends Context.Reference<OpenWorld>()(
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-const suspectProtoRx = /"__proto__"\s*:/
-const suspectConstructorRx = /"constructor"\s*:/
+const suspectProtoRx = /"__proto__"\s*:/;
+const suspectConstructorRx = /"constructor"\s*:/;
 
 function _parse(text: string) {
   // Parse normally
-  const obj = JSON.parse(text)
+  const obj = JSON.parse(text);
 
   // Ignore null and non-objects
   if (obj === null || typeof obj !== "object") {
-    return obj
+    return obj;
   }
 
   if (
     suspectProtoRx.test(text) === false &&
     suspectConstructorRx.test(text) === false
   ) {
-    return obj
+    return obj;
   }
 
   // Scan result for proto keys
-  return filter(obj)
+  return filter(obj);
 }
 
 function filter(obj: any) {
-  let next = [obj]
+  let next = [obj];
 
   while (next.length) {
-    const nodes = next
-    next = []
+    const nodes = next;
+    next = [];
 
     for (const node of nodes) {
-      if (Object.prototype.hasOwnProperty.call(node, "__proto__")) {
-        throw new SyntaxError("Object contains forbidden prototype property")
+      if (Object.hasOwn(node, "__proto__")) {
+        throw new SyntaxError("Object contains forbidden prototype property");
       }
 
       if (
-        Object.prototype.hasOwnProperty.call(node, "constructor") &&
-        Object.prototype.hasOwnProperty.call(node.constructor, "prototype")
+        Object.hasOwn(node, "constructor") &&
+        Object.hasOwn(node.constructor, "prototype")
       ) {
-        throw new SyntaxError("Object contains forbidden prototype property")
+        throw new SyntaxError("Object contains forbidden prototype property");
       }
 
       for (const key in node) {
-        const value = node[key]
+        const value = node[key];
         if (value && typeof value === "object") {
-          next.push(value)
+          next.push(value);
         }
       }
     }
   }
-  return obj
+  return obj;
 }
 
 /**
@@ -1499,11 +1519,11 @@ function filter(obj: any) {
  */
 export const unsafeSecureJsonParse = (text: string): unknown => {
   // Performance optimization, see https://github.com/fastify/secure-json-parse/pull/90
-  const { stackTraceLimit } = Error
-  Error.stackTraceLimit = 0
+  const { stackTraceLimit } = Error;
+  Error.stackTraceLimit = 0;
   try {
-    return _parse(text)
+    return _parse(text);
   } finally {
-    Error.stackTraceLimit = stackTraceLimit
+    Error.stackTraceLimit = stackTraceLimit;
   }
-}
+};

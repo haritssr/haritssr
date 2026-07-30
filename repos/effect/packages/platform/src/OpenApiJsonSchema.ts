@@ -1,20 +1,20 @@
 /**
  * @since 1.0.0
  */
-import * as JSONSchema from "effect/JSONSchema"
-import * as Record from "effect/Record"
-import type * as Schema from "effect/Schema"
-import type * as AST from "effect/SchemaAST"
+import * as JSONSchema from "effect/JSONSchema";
+import * as Record from "effect/Record";
+import type * as Schema from "effect/Schema";
+import type * as AST from "effect/SchemaAST";
 
 /**
  * @category model
  * @since 1.0.0
  */
 export interface Annotations {
-  title?: string
-  description?: string
-  default?: unknown
-  examples?: globalThis.Array<unknown>
+  title?: string;
+  description?: string;
+  default?: unknown;
+  examples?: globalThis.Array<unknown>;
 }
 
 /**
@@ -22,9 +22,9 @@ export interface Annotations {
  * @since 1.0.0
  */
 export interface Never extends Annotations {
-  $id: "/schemas/never"
-  not: {}
-  nullable?: boolean
+  $id: "/schemas/never";
+  not: {};
+  nullable?: boolean;
 }
 
 /**
@@ -32,7 +32,7 @@ export interface Never extends Annotations {
  * @since 1.0.0
  */
 export interface Any extends Annotations {
-  $id: "/schemas/any"
+  $id: "/schemas/any";
 }
 
 /**
@@ -40,7 +40,7 @@ export interface Any extends Annotations {
  * @since 1.0.0
  */
 export interface Unknown extends Annotations {
-  $id: "/schemas/unknown"
+  $id: "/schemas/unknown";
 }
 
 /**
@@ -48,7 +48,7 @@ export interface Unknown extends Annotations {
  * @since 0.69.0
  */
 export interface Void extends Annotations {
-  $id: "/schemas/void"
+  $id: "/schemas/void";
 }
 
 /**
@@ -56,12 +56,9 @@ export interface Void extends Annotations {
  * @since 0.71.0
  */
 export interface AnyObject extends Annotations {
-  $id: "/schemas/object"
-  anyOf: [
-    { type: "object" },
-    { type: "array" }
-  ]
-  nullable?: boolean
+  $id: "/schemas/object";
+  anyOf: [{ type: "object" }, { type: "array" }];
+  nullable?: boolean;
 }
 
 /**
@@ -69,12 +66,9 @@ export interface AnyObject extends Annotations {
  * @since 0.71.0
  */
 export interface Empty extends Annotations {
-  $id: "/schemas/%7B%7D"
-  anyOf: [
-    { type: "object" },
-    { type: "array" }
-  ]
-  nullable?: boolean
+  $id: "/schemas/%7B%7D";
+  anyOf: [{ type: "object" }, { type: "array" }];
+  nullable?: boolean;
 }
 
 /**
@@ -82,8 +76,8 @@ export interface Empty extends Annotations {
  * @since 1.0.0
  */
 export interface Ref extends Annotations {
-  $ref: string
-  nullable?: boolean
+  $ref: string;
+  nullable?: boolean;
 }
 
 /**
@@ -91,19 +85,19 @@ export interface Ref extends Annotations {
  * @since 1.0.0
  */
 export interface String extends Annotations {
-  type: "string"
-  minLength?: number
-  maxLength?: number
-  pattern?: string
-  format?: string
-  contentMediaType?: string
-  contentSchema?: JsonSchema
+  type: "string";
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+  format?: string;
+  contentMediaType?: string;
+  contentSchema?: JsonSchema;
   allOf?: globalThis.Array<{
-    minLength?: number
-    maxLength?: number
-    pattern?: string
-  }>
-  nullable?: boolean
+    minLength?: number;
+    maxLength?: number;
+    pattern?: string;
+  }>;
+  nullable?: boolean;
 }
 
 /**
@@ -111,20 +105,20 @@ export interface String extends Annotations {
  * @since 1.0.0
  */
 export interface Numeric extends Annotations {
-  minimum?: number
-  exclusiveMinimum?: number
-  maximum?: number
-  exclusiveMaximum?: number
-  multipleOf?: number
-  format?: string
+  minimum?: number;
+  exclusiveMinimum?: number;
+  maximum?: number;
+  exclusiveMaximum?: number;
+  multipleOf?: number;
+  format?: string;
   allOf?: globalThis.Array<{
-    minimum?: number
-    exclusiveMinimum?: number
-    maximum?: number
-    exclusiveMaximum?: number
-    multipleOf?: number
-  }>
-  nullable?: boolean
+    minimum?: number;
+    exclusiveMinimum?: number;
+    maximum?: number;
+    exclusiveMaximum?: number;
+    multipleOf?: number;
+  }>;
+  nullable?: boolean;
 }
 
 /**
@@ -132,7 +126,7 @@ export interface Numeric extends Annotations {
  * @since 1.0.0
  */
 export interface Number extends Numeric {
-  type: "number"
+  type: "number";
 }
 
 /**
@@ -140,7 +134,7 @@ export interface Number extends Numeric {
  * @since 1.0.0
  */
 export interface Integer extends Numeric {
-  type: "integer"
+  type: "integer";
 }
 
 /**
@@ -148,8 +142,8 @@ export interface Integer extends Numeric {
  * @since 1.0.0
  */
 export interface Boolean extends Annotations {
-  type: "boolean"
-  nullable?: boolean
+  type: "boolean";
+  nullable?: boolean;
 }
 
 /**
@@ -157,12 +151,12 @@ export interface Boolean extends Annotations {
  * @since 1.0.0
  */
 export interface Array extends Annotations {
-  type: "array"
-  items?: JsonSchema | globalThis.Array<JsonSchema>
-  minItems?: number
-  maxItems?: number
-  additionalItems?: JsonSchema | boolean
-  nullable?: boolean
+  type: "array";
+  items?: JsonSchema | globalThis.Array<JsonSchema>;
+  minItems?: number;
+  maxItems?: number;
+  additionalItems?: JsonSchema | boolean;
+  nullable?: boolean;
 }
 
 /**
@@ -170,9 +164,9 @@ export interface Array extends Annotations {
  * @since 1.0.0
  */
 export interface Enum extends Annotations {
-  type?: "string" | "number" | "boolean"
-  enum: globalThis.Array<string | number | boolean | null>
-  nullable?: boolean
+  type?: "string" | "number" | "boolean";
+  enum: globalThis.Array<string | number | boolean | null>;
+  nullable?: boolean;
 }
 
 /**
@@ -180,13 +174,13 @@ export interface Enum extends Annotations {
  * @since 0.71.0
  */
 export interface Enums extends Annotations {
-  $comment: "/schemas/enums"
+  $comment: "/schemas/enums";
   anyOf: globalThis.Array<{
-    type: "string" | "number"
-    title: string
-    enum: [string | number]
-  }>
-  nullable?: boolean
+    type: "string" | "number";
+    title: string;
+    enum: [string | number];
+  }>;
+  nullable?: boolean;
 }
 
 /**
@@ -194,8 +188,8 @@ export interface Enums extends Annotations {
  * @since 1.0.0
  */
 export interface AnyOf extends Annotations {
-  anyOf: globalThis.Array<JsonSchema>
-  nullable?: boolean
+  anyOf: globalThis.Array<JsonSchema>;
+  nullable?: boolean;
 }
 
 /**
@@ -203,13 +197,13 @@ export interface AnyOf extends Annotations {
  * @since 1.0.0
  */
 export interface Object extends Annotations {
-  type: "object"
-  required: globalThis.Array<string>
-  properties: Record<string, JsonSchema>
-  additionalProperties?: boolean | JsonSchema
-  patternProperties?: Record<string, JsonSchema>
-  propertyNames?: JsonSchema
-  nullable?: boolean
+  type: "object";
+  required: globalThis.Array<string>;
+  properties: Record<string, JsonSchema>;
+  additionalProperties?: boolean | JsonSchema;
+  patternProperties?: Record<string, JsonSchema>;
+  propertyNames?: JsonSchema;
+  nullable?: boolean;
 }
 
 /**
@@ -232,32 +226,32 @@ export type JsonSchema =
   | Enum
   | Enums
   | AnyOf
-  | Object
+  | Object;
 
 /**
  * @category model
  * @since 1.0.0
  */
 export type Root = JsonSchema & {
-  $defs?: Record<string, JsonSchema>
-}
+  $defs?: Record<string, JsonSchema>;
+};
 
 /**
  * @category encoding
  * @since 1.0.0
  */
 export const make = <A, I, R>(schema: Schema.Schema<A, I, R>): Root => {
-  const defs: Record<string, JsonSchema> = {}
-  const out: Root = makeWithDefs(schema, { defs })
+  const defs: Record<string, JsonSchema> = {};
+  const out: Root = makeWithDefs(schema, { defs });
   if (!Record.isEmptyRecord(defs)) {
-    out.$defs = defs
+    out.$defs = defs;
   }
-  return out
-}
+  return out;
+};
 
-type TopLevelReferenceStrategy = "skip" | "keep"
+type TopLevelReferenceStrategy = "skip" | "keep";
 
-type AdditionalPropertiesStrategy = "allow" | "strict"
+type AdditionalPropertiesStrategy = "allow" | "strict";
 
 /**
  * Creates a schema with additional options and definitions.
@@ -276,26 +270,36 @@ type AdditionalPropertiesStrategy = "allow" | "strict"
  * @category encoding
  * @since 1.0.0
  */
-export const makeWithDefs = <A, I, R>(schema: Schema.Schema<A, I, R>, options: {
-  readonly defs: Record<string, any>
-  readonly defsPath?: string | undefined
-  readonly topLevelReferenceStrategy?: TopLevelReferenceStrategy | undefined
-  readonly additionalPropertiesStrategy?: AdditionalPropertiesStrategy | undefined
-}): JsonSchema => fromAST(schema.ast, options)
+export const makeWithDefs = <A, I, R>(
+  schema: Schema.Schema<A, I, R>,
+  options: {
+    readonly defs: Record<string, any>;
+    readonly defsPath?: string | undefined;
+    readonly topLevelReferenceStrategy?: TopLevelReferenceStrategy | undefined;
+    readonly additionalPropertiesStrategy?:
+      | AdditionalPropertiesStrategy
+      | undefined;
+  }
+): JsonSchema => fromAST(schema.ast, options);
 
 /** @internal */
-export const fromAST = (ast: AST.AST, options: {
-  readonly defs: Record<string, any>
-  readonly defsPath?: string | undefined
-  readonly topLevelReferenceStrategy?: TopLevelReferenceStrategy | undefined
-  readonly additionalPropertiesStrategy?: AdditionalPropertiesStrategy | undefined
-}): JsonSchema => {
+export const fromAST = (
+  ast: AST.AST,
+  options: {
+    readonly defs: Record<string, any>;
+    readonly defsPath?: string | undefined;
+    readonly topLevelReferenceStrategy?: TopLevelReferenceStrategy | undefined;
+    readonly additionalPropertiesStrategy?:
+      | AdditionalPropertiesStrategy
+      | undefined;
+  }
+): JsonSchema => {
   const jsonSchema = JSONSchema.fromAST(ast, {
     definitions: options.defs,
     definitionPath: options.defsPath ?? "#/components/schemas/",
     target: "openApi3.1",
     topLevelReferenceStrategy: options.topLevelReferenceStrategy,
-    additionalPropertiesStrategy: options.additionalPropertiesStrategy
-  })
-  return jsonSchema as JsonSchema
-}
+    additionalPropertiesStrategy: options.additionalPropertiesStrategy,
+  });
+  return jsonSchema as JsonSchema;
+};

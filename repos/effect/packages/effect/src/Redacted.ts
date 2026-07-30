@@ -6,30 +6,32 @@
  *
  * @since 3.3.0
  */
-import type * as Equal from "./Equal.js"
-import * as Equivalence from "./Equivalence.js"
-import * as redacted_ from "./internal/redacted.js"
-import type { Pipeable } from "./Pipeable.js"
-import type { Covariant } from "./Types.js"
+import type * as Equal from "./Equal.js";
+import * as Equivalence from "./Equivalence.js";
+import * as redacted_ from "./internal/redacted.js";
+import type { Pipeable } from "./Pipeable.js";
+import type { Covariant } from "./Types.js";
 
 /**
  * @since 3.3.0
  * @category symbols
  */
-export const RedactedTypeId: unique symbol = redacted_.RedactedTypeId
+export const RedactedTypeId: unique symbol = redacted_.RedactedTypeId;
 
 /**
  * @since 3.3.0
  * @category symbols
  */
-export type RedactedTypeId = typeof RedactedTypeId
+export type RedactedTypeId = typeof RedactedTypeId;
 
 /**
  * @since 3.3.0
  * @category models
  */
-export interface Redacted<out A = string> extends Redacted.Variance<A>, Equal.Equal, Pipeable {
-}
+export interface Redacted<out A = string>
+  extends Redacted.Variance<A>,
+    Equal.Equal,
+    Pipeable {}
 
 /**
  * @since 3.3.0
@@ -41,22 +43,25 @@ export declare namespace Redacted {
    */
   export interface Variance<out A> {
     readonly [RedactedTypeId]: {
-      readonly _A: Covariant<A>
-    }
+      readonly _A: Covariant<A>;
+    };
   }
 
   /**
    * @since 3.3.0
    * @category type-level
    */
-  export type Value<T extends Redacted<any>> = [T] extends [Redacted<infer _A>] ? _A : never
+  export type Value<T extends Redacted<any>> = [T] extends [Redacted<infer _A>]
+    ? _A
+    : never;
 }
 
 /**
  * @since 3.3.0
  * @category refinements
  */
-export const isRedacted: (u: unknown) => u is Redacted<unknown> = redacted_.isRedacted
+export const isRedacted: (u: unknown) => u is Redacted<unknown> =
+  redacted_.isRedacted;
 
 /**
  * This function creates a `Redacted<A>` instance from a given value `A`,
@@ -72,7 +77,7 @@ export const isRedacted: (u: unknown) => u is Redacted<unknown> = redacted_.isRe
  * @since 3.3.0
  * @category constructors
  */
-export const make: <A>(value: A) => Redacted<A> = redacted_.make
+export const make: <A>(value: A) => Redacted<A> = redacted_.make;
 
 /**
  * Retrieves the original value from a `Redacted` instance. Use this function
@@ -91,7 +96,7 @@ export const make: <A>(value: A) => Redacted<A> = redacted_.make
  * @since 3.3.0
  * @category getters
  */
-export const value: <A>(self: Redacted<A>) => A = redacted_.value
+export const value: <A>(self: Redacted<A>) => A = redacted_.value;
 
 /**
  * Erases the underlying value of a `Redacted` instance, rendering it unusable.
@@ -115,7 +120,8 @@ export const value: <A>(self: Redacted<A>) => A = redacted_.value
  * @since 3.3.0
  * @category unsafe
  */
-export const unsafeWipe: <A>(self: Redacted<A>) => boolean = redacted_.unsafeWipe
+export const unsafeWipe: <A>(self: Redacted<A>) => boolean =
+  redacted_.unsafeWipe;
 
 /**
  * Generates an equivalence relation for `Redacted<A>` values based on an
@@ -140,5 +146,7 @@ export const unsafeWipe: <A>(self: Redacted<A>) => boolean = redacted_.unsafeWip
  * @category equivalence
  * @since 3.3.0
  */
-export const getEquivalence = <A>(isEquivalent: Equivalence.Equivalence<A>): Equivalence.Equivalence<Redacted<A>> =>
-  Equivalence.make((x, y) => isEquivalent(value(x), value(y)))
+export const getEquivalence = <A>(
+  isEquivalent: Equivalence.Equivalence<A>
+): Equivalence.Equivalence<Redacted<A>> =>
+  Equivalence.make((x, y) => isEquivalent(value(x), value(y)));

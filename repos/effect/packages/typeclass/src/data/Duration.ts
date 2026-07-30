@@ -1,10 +1,10 @@
 /**
  * @since 0.24.0
  */
-import * as Duration from "effect/Duration"
-import type * as bounded from "../Bounded.js"
-import * as monoid from "../Monoid.js"
-import * as semigroup from "../Semigroup.js"
+import * as Duration from "effect/Duration";
+import type * as bounded from "../Bounded.js";
+import * as monoid from "../Monoid.js";
+import * as semigroup from "../Semigroup.js";
 
 /**
  * @category instances
@@ -13,14 +13,15 @@ import * as semigroup from "../Semigroup.js"
 export const Bounded: bounded.Bounded<Duration.Duration> = {
   compare: Duration.Order,
   maxBound: Duration.infinity,
-  minBound: Duration.zero
-}
+  minBound: Duration.zero,
+};
 
 /**
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupSum: semigroup.Semigroup<Duration.Duration> = semigroup.make(Duration.sum)
+export const SemigroupSum: semigroup.Semigroup<Duration.Duration> =
+  semigroup.make(Duration.sum);
 
 /**
  * @category instances
@@ -29,13 +30,14 @@ export const SemigroupSum: semigroup.Semigroup<Duration.Duration> = semigroup.ma
 export const MonoidSum: monoid.Monoid<Duration.Duration> = monoid.fromSemigroup(
   SemigroupSum,
   Duration.zero
-)
+);
 
 /**
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupMax: semigroup.Semigroup<Duration.Duration> = semigroup.make(Duration.max)
+export const SemigroupMax: semigroup.Semigroup<Duration.Duration> =
+  semigroup.make(Duration.max);
 
 /**
  * @category instances
@@ -44,13 +46,14 @@ export const SemigroupMax: semigroup.Semigroup<Duration.Duration> = semigroup.ma
 export const MonoidMax: monoid.Monoid<Duration.Duration> = monoid.fromSemigroup(
   SemigroupMax,
   Duration.zero
-)
+);
 
 /**
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupMin: semigroup.Semigroup<Duration.Duration> = semigroup.make(Duration.min)
+export const SemigroupMin: semigroup.Semigroup<Duration.Duration> =
+  semigroup.make(Duration.min);
 
 /**
  * @category instances
@@ -59,4 +62,4 @@ export const SemigroupMin: semigroup.Semigroup<Duration.Duration> = semigroup.ma
 export const MonoidMin: monoid.Monoid<Duration.Duration> = monoid.fromSemigroup(
   SemigroupMin,
   Duration.infinity
-)
+);

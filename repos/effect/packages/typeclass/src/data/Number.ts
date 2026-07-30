@@ -1,10 +1,10 @@
 /**
  * @since 0.24.0
  */
-import * as Number from "effect/Number"
-import * as bounded from "../Bounded.js"
-import * as monoid from "../Monoid.js"
-import * as semigroup from "../Semigroup.js"
+import * as Number from "effect/Number";
+import * as bounded from "../Bounded.js";
+import * as monoid from "../Monoid.js";
+import * as semigroup from "../Semigroup.js";
 
 /**
  * @category instances
@@ -12,9 +12,9 @@ import * as semigroup from "../Semigroup.js"
  */
 export const Bounded: bounded.Bounded<number> = {
   compare: Number.Order,
-  maxBound: Infinity,
-  minBound: -Infinity
-}
+  maxBound: Number.POSITIVE_INFINITY,
+  minBound: Number.NEGATIVE_INFINITY,
+};
 
 /**
  * `number` semigroup under addition.
@@ -31,7 +31,9 @@ export const Bounded: bounded.Bounded<number> = {
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupSum: semigroup.Semigroup<number> = semigroup.make((self, that) => self + that)
+export const SemigroupSum: semigroup.Semigroup<number> = semigroup.make(
+  (self, that) => self + that
+);
 
 /**
  * `number` semigroup under multiplication.
@@ -52,18 +54,18 @@ export const SemigroupMultiply: semigroup.Semigroup<number> = semigroup.make(
   (self, that) => self * that,
   (self, collection) => {
     if (self === 0) {
-      return 0
+      return 0;
     }
-    let out = self
+    let out = self;
     for (const n of collection) {
       if (n === 0) {
-        return 0
+        return 0;
       }
-      out = out * n
+      out = out * n;
     }
-    return out
+    return out;
   }
-)
+);
 
 /**
  * A `Semigroup` that uses the minimum between two values.
@@ -80,7 +82,9 @@ export const SemigroupMultiply: semigroup.Semigroup<number> = semigroup.make(
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupMin: semigroup.Semigroup<number> = semigroup.min(Number.Order)
+export const SemigroupMin: semigroup.Semigroup<number> = semigroup.min(
+  Number.Order
+);
 
 /**
  * A `Semigroup` that uses the maximum between two values.
@@ -97,7 +101,9 @@ export const SemigroupMin: semigroup.Semigroup<number> = semigroup.min(Number.Or
  * @category instances
  * @since 0.24.0
  */
-export const SemigroupMax: semigroup.Semigroup<number> = semigroup.max(Number.Order)
+export const SemigroupMax: semigroup.Semigroup<number> = semigroup.max(
+  Number.Order
+);
 
 /**
  * `number` monoid under addition.
@@ -118,7 +124,10 @@ export const SemigroupMax: semigroup.Semigroup<number> = semigroup.max(Number.Or
  * @category instances
  * @since 0.24.0
  */
-export const MonoidSum: monoid.Monoid<number> = monoid.fromSemigroup(SemigroupSum, 0)
+export const MonoidSum: monoid.Monoid<number> = monoid.fromSemigroup(
+  SemigroupSum,
+  0
+);
 
 /**
  * `number` monoid under multiplication.
@@ -139,7 +148,10 @@ export const MonoidSum: monoid.Monoid<number> = monoid.fromSemigroup(SemigroupSu
  * @category instances
  * @since 0.24.0
  */
-export const MonoidMultiply: monoid.Monoid<number> = monoid.fromSemigroup(SemigroupMultiply, 1)
+export const MonoidMultiply: monoid.Monoid<number> = monoid.fromSemigroup(
+  SemigroupMultiply,
+  1
+);
 
 /**
  * A `Monoid` that uses the minimum between two values.
@@ -160,7 +172,7 @@ export const MonoidMultiply: monoid.Monoid<number> = monoid.fromSemigroup(Semigr
  * @category instances
  * @since 0.24.0
  */
-export const MonoidMin: monoid.Monoid<number> = bounded.min(Bounded)
+export const MonoidMin: monoid.Monoid<number> = bounded.min(Bounded);
 
 /**
  * A `Monoid` that uses the maximum between two values.
@@ -181,4 +193,4 @@ export const MonoidMin: monoid.Monoid<number> = bounded.min(Bounded)
  * @category instances
  * @since 0.24.0
  */
-export const MonoidMax: monoid.Monoid<number> = bounded.max(Bounded)
+export const MonoidMax: monoid.Monoid<number> = bounded.max(Bounded);

@@ -1,19 +1,24 @@
-import * as DevTools from "@effect/experimental/DevTools"
-import { NodeFileSystem } from "@effect/platform-node"
-import { MssqlClient, MssqlMigrator, MssqlTypes, Procedure } from "@effect/sql-mssql"
-import { Effect, Layer, Logger, LogLevel, Redacted, String } from "effect"
-import { pipe } from "effect/Function"
-import { fileURLToPath } from "node:url"
+import { fileURLToPath } from "node:url";
+import * as DevTools from "@effect/experimental/DevTools";
+import { NodeFileSystem } from "@effect/platform-node";
+import {
+  MssqlClient,
+  MssqlMigrator,
+  MssqlTypes,
+  Procedure,
+} from "@effect/sql-mssql";
+import { Effect, Layer, Logger, LogLevel, Redacted, String } from "effect";
+import { pipe } from "effect/Function";
 
 const peopleProcedure = pipe(
   Procedure.make("people_proc"),
   Procedure.param<string>()("name", MssqlTypes.VarChar),
   Procedure.withRows<{ readonly id: number; readonly name: string }>(),
   Procedure.compile
-)
+);
 
-const program = Effect.gen(function*() {
-  const sql = yield* MssqlClient.MssqlClient
+const program = Effect.gen(function* () {
+  const sql = yield* MssqlClient.MssqlClient;
 
   yield* sql`
       CREATE OR ALTER PROC people_proc
@@ -22,17 +27,17 @@ const program = Effect.gen(function*() {
       BEGIN
         SELECT * FROM people WHERE name = @name
       END
-    `
+    `;
 
   // Insert
-  const [inserted] = yield* sql`INSERT INTO ${sql("people")} ${
-    sql.insert({
+  const [inserted] = yield* sql`INSERT INTO ${sql("people")} ${sql
+    .insert({
       name: "Tim",
-      createdAt: new Date()
-    }).returning("*")
-  }`
+      createdAt: new Date(),
+    })
+    .returning("*")}`;
 
-  console.log(inserted)
+  console.log(inserted);
 
   console.log(
     yield* Effect.all(
@@ -40,11 +45,11 @@ const program = Effect.gen(function*() {
         sql`SELECT TOP(3) * FROM ${sql("people")}`,
         sql`SELECT TOP(3) * FROM ${sql("people")}`.values,
         sql`SELECT TOP(3) * FROM ${sql("people")}`.withoutTransform,
-        sql.call(peopleProcedure({ name: "Tim" }))
+        sql.call(peopleProcedure({ name: "Tim" })),
       ],
       { concurrency: "unbounded" }
     )
-  )
+  );
 
   console.log(
     yield* sql`
@@ -53,7 +58,7 @@ const program = Effect.gen(function*() {
       ${sql.updateValues([{ ...inserted, name: "New name" }], "data").returning("*")}
       WHERE people.id = data.id
     `
-  )
+  );
 
   console.log(
     yield* pipe(
@@ -69,13 +74,13 @@ const program = Effect.gen(function*() {
       ),
       sql.withTransaction
     )
-  )
-})
+  );
+});
 
 const SqlLive = MssqlMigrator.layer({
   loader: MssqlMigrator.fromFileSystem(
     fileURLToPath(new URL("./migrations", import.meta.url))
-  )
+  ),
 }).pipe(
   Layer.provideMerge(
     MssqlClient.layer({
@@ -84,17 +89,17 @@ const SqlLive = MssqlMigrator.layer({
       username: "sa",
       password: Redacted.make("Sq1Fx_password"),
       transformQueryNames: String.camelToSnake,
-      transformResultNames: String.snakeToCamel
+      transformResultNames: String.snakeToCamel,
     })
   ),
   Layer.provide(NodeFileSystem.layer),
   Layer.provide(DevTools.layer()),
   Layer.provide(Logger.minimumLogLevel(LogLevel.All))
-)
+);
 
 pipe(
   program,
   Effect.provide(SqlLive),
   Effect.tapErrorCause(Effect.logError),
   Effect.runFork
-)
+);

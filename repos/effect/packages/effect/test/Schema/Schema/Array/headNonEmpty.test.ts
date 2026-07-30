@@ -1,11 +1,11 @@
-import { describe, it } from "@effect/vitest"
-import * as S from "effect/Schema"
-import * as Util from "../../TestUtils.js"
+import { describe, it } from "@effect/vitest";
+import * as S from "effect/Schema";
+import * as Util from "../../TestUtils.js";
 
 describe("headNonEmpty", () => {
   it("decoding", async () => {
-    const schema = S.headNonEmpty(S.NonEmptyArray(S.NumberFromString))
-    await Util.assertions.decoding.succeed(schema, ["1"], 1)
+    const schema = S.headNonEmpty(S.NonEmptyArray(S.NumberFromString));
+    await Util.assertions.decoding.succeed(schema, ["1"], 1);
     await Util.assertions.decoding.fail(
       schema,
       ["a"],
@@ -16,11 +16,11 @@ describe("headNonEmpty", () => {
          └─ NumberFromString
             └─ Transformation process failure
                └─ Unable to decode "a" into a number`
-    )
-  })
+    );
+  });
 
   it("encoding", async () => {
-    const schema = S.headNonEmpty(S.NonEmptyArray(S.NumberFromString))
-    await Util.assertions.encoding.succeed(schema, 1, ["1"])
-  })
-})
+    const schema = S.headNonEmpty(S.NonEmptyArray(S.NumberFromString));
+    await Util.assertions.encoding.succeed(schema, 1, ["1"]);
+  });
+});

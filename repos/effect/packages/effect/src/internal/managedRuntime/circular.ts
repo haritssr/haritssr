@@ -1,6 +1,6 @@
-import type * as M from "../../ManagedRuntime.js"
+import type * as M from "../../ManagedRuntime.js";
 
 // circular with Layer
 
 /** @internal */
-export const TypeId: M.TypeId = Symbol.for("effect/ManagedRuntime") as M.TypeId
+export const TypeId: M.TypeId = Symbol.for("effect/ManagedRuntime") as M.TypeId;

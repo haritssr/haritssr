@@ -1,6 +1,6 @@
-import * as ParseResult from "effect/ParseResult"
-import * as S from "effect/Schema"
-import { Bench } from "tinybench"
+import * as ParseResult from "effect/ParseResult";
+import * as S from "effect/Schema";
+import { Bench } from "tinybench";
 
 /*
 ┌─────────┬────────────────────────────────────────────────────────────┬──────────────┬────────────────────┬──────────┬──────────┐
@@ -13,37 +13,44 @@ import { Bench } from "tinybench"
 └─────────┴────────────────────────────────────────────────────────────┴──────────────┴────────────────────┴──────────┴──────────┘
 */
 
-const bench = new Bench({ time: 1000 })
+const bench = new Bench({ time: 1000 });
 
 const schema = S.Struct({
   a: S.Literal("a"),
   b: S.Array(S.String),
   c: S.Record({ key: S.String, value: S.Number }),
   d: S.NumberFromString,
-  e: S.Boolean
-})
+  e: S.Boolean,
+});
 
-const validInput = { a: "a", b: ["b"], c: { c: 1 }, d: "1", e: true }
+const validInput = { a: "a", b: ["b"], c: { c: 1 }, d: "1", e: true };
 
-const invalidInput = { b: ["b"], c: { c: 1 }, d: "1", e: true, a: null }
+const invalidInput = { b: ["b"], c: { c: 1 }, d: "1", e: true, a: null };
 
-const decodeUnknownEither = ParseResult.decodeUnknownEither(schema)
-const decodeUnknownEitherPreserveInputKeyOrder = ParseResult.decodeUnknownEither(schema, { propertyOrder: "original" })
+const decodeUnknownEither = ParseResult.decodeUnknownEither(schema);
+const decodeUnknownEitherPreserveInputKeyOrder =
+  ParseResult.decodeUnknownEither(schema, { propertyOrder: "original" });
 
 bench
-  .add("ParseResult.decodeUnknownEither (valid input)", function() {
-    decodeUnknownEither(validInput)
+  .add("ParseResult.decodeUnknownEither (valid input)", () => {
+    decodeUnknownEither(validInput);
   })
-  .add("ParseResult.decodeUnknownEitherPreserveInputKeyOrder (valid input)", function() {
-    decodeUnknownEitherPreserveInputKeyOrder(validInput)
+  .add(
+    "ParseResult.decodeUnknownEitherPreserveInputKeyOrder (valid input)",
+    () => {
+      decodeUnknownEitherPreserveInputKeyOrder(validInput);
+    }
+  )
+  .add("ParseResult.decodeUnknownEither (invalid input)", () => {
+    decodeUnknownEither(invalidInput);
   })
-  .add("ParseResult.decodeUnknownEither (invalid input)", function() {
-    decodeUnknownEither(invalidInput)
-  })
-  .add("ParseResult.decodeUnknownEitherPreserveInputKeyOrder (invalid input)", function() {
-    decodeUnknownEitherPreserveInputKeyOrder(invalidInput)
-  })
+  .add(
+    "ParseResult.decodeUnknownEitherPreserveInputKeyOrder (invalid input)",
+    () => {
+      decodeUnknownEitherPreserveInputKeyOrder(invalidInput);
+    }
+  );
 
-await bench.run()
+await bench.run();
 
-console.table(bench.table())
+console.table(bench.table());
