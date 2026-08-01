@@ -20,16 +20,6 @@ graph TD
   haritssr --> pure["/pure"]
 ```
 
-### Site Search
-
-- Top navigation exposes the `TopBarSearch` component (`components/TopBarSearch.tsx`), which queries the `routes.ts` token index and opens matched documentation or experiment pages in `TopBar`.
-- Type a route name (e.g., `experiments/react`) and hit enter to jump straight to the matching page.
-
-### Page That Use Database
-
-- `app/task` stores data with `better-sqlite3` inside `TASK_DB_DIR`, which defaults to `/Users/haritssyah/developer/.data-haritssr/task.db` but can be redirected via the `TASK_DB_DIR` environment variable (read at runtime in `app/task/db.ts`).
-- `app/tools` is a dedicated suite of tooling pages/tests (`app/tools/page.tsx`, `app/tools/db.ts`, `app/tools/db.core.ts`, `app/tools/db.test.js`) that operate against `/Users/haritssyah/developer/.data-haritssr/experiment.db` (shared via `sqlite3.js`/`dbExperiment.js`).
-
 ### Tooling
 
 - Run `bun test` (added to `package.json`) to execute the tool tests targeting the new `app/tools` helpers.
@@ -44,3 +34,10 @@ graph TD
 - Email : [haritssr@gmail.com](mailto:haritssr@gmail.com)
 - Social Media : [X](https://www.x.com/haritssr)
 - Site : [haritssr.com](https://www.haritssr.com)
+
+## My Core Skills
+
+- Highschool and college level Math-Physics
+- Touch typing
+- Deep understanding of the latest JavaScript, TypeScript, React.js, Next.js, Effect.ts, and browser internals along with the principles that connect them and explain why they work the way they do. (This foundation enables building modern, optimized user interfaces that align with user experience principles at scale).
+- *Currently learning to integrate authentication, databases, observability, and payments. Not yet comfortable highlighting those area as a core skill.*
