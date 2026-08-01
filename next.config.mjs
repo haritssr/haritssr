@@ -1,60 +1,59 @@
 import { withContentCollections } from "@content-collections/next";
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  turbopack: {},
-  reactStrictMode: false,
+const nextConfig = {
   experimental: {},
-  redirects() {
-    return [
-      {
-        source: "/experiments/ui-explorations/task",
-        destination: "/task",
-        permanent: true,
-      },
-    ];
-  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
-        protocol: "https",
         hostname: "vignette.wikia.nocookie.net",
-        port: "",
         pathname: "/**",
+        port: "",
+        protocol: "https",
       },
       {
-        protocol: "https",
         hostname: "unsplash.com",
-        port: "",
         pathname: "/**",
+        port: "",
+        protocol: "https",
       },
       {
-        protocol: "https",
         hostname: "res.cloudinary.com",
-        port: "",
         pathname: "/**",
+        port: "",
+        protocol: "https",
       },
       {
-        protocol: "https",
         hostname: "ws-public.interpol.int",
-        port: "",
         pathname: "/**",
+        port: "",
+        protocol: "https",
       },
       {
-        protocol: "https",
         hostname: "assets.vercel.com",
-        port: "",
         pathname: "/**",
+        port: "",
+        protocol: "https",
       },
       {
-        protocol: "https",
         hostname: "vignette.wikia.nocookie.net",
-        port: "",
         pathname: "/**",
+        port: "",
+        protocol: "https",
       },
     ],
   },
+  reactStrictMode: false,
+  redirects() {
+    return [
+      {
+        destination: "/task",
+        permanent: true,
+        source: "/experiments/ui-explorations/task",
+      },
+    ];
+  },
+  turbopack: {},
 };
 
 export default withContentCollections(nextConfig);
