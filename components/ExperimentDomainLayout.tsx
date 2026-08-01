@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 import BackButton from "./BackButton";
 import PageTitle from "./PageTitle";
 
@@ -14,6 +15,11 @@ export default function ExperimentDomainLayout({
   domain,
 }: ExperimentDomainLayoutProps) {
   const pathname = usePathname();
+  const prevRoute = pathname.split("/").at(-2)?.includes("-")
+    ? capitalizeFirstLetter(
+        pathname.split("/").at(-2)?.split("-").join(" ") as string
+      )
+    : (capitalizeFirstLetter(pathname.split("/").at(-2) as string) ?? "back");
 
   // Get domain display name
   const domainDisplayName = domain
@@ -35,10 +41,10 @@ export default function ExperimentDomainLayout({
         .join(" ") || domainDisplayName;
 
   return (
-    <div className="sm:-mt-px min-h-screen w-full">
+    <div className="min-h-screen w-full sm:-mt-px">
       <div className="w-full sm:border-t">
         <article className="sm:px-0">
-          <BackButton href="/experiments" name="Back" />
+          <BackButton href="/experiments" name={prevRoute} />
           {!isIndexPage && <PageTitle title={title} />}
           {children}
         </article>
