@@ -37,7 +37,7 @@ import KaTeXBasic from "@/components/experiments/katex/KaTeXBasicDemo";
 
 // Mantine
 import MantineCarousel from "@/components/experiments/mantine/MantineCarouselDemo";
-import LearnAPIRoute from "@/components/experiments/nextjs/LearnAPIRoute";
+// import LearnAPIRoute from "@/components/experiments/nextjs/LearnAPIRoute";
 // Next.js
 import NextjsImageLocal from "@/components/experiments/nextjs/NextjsImageLocalDemo";
 import NextjsImageRemote from "@/components/experiments/nextjs/NextjsImageRemoteDemo";
@@ -64,7 +64,7 @@ import RadixToggle from "@/components/experiments/radix-ui/RadixToggleDemo";
 import RadixToggleGroup from "@/components/experiments/radix-ui/RadixToggleGroupDemo";
 import RadixToolbar from "@/components/experiments/radix-ui/RadixToolbarDemo";
 import RadixTooltip from "@/components/experiments/radix-ui/RadixTooltipDemo";
-
+import ActivityDemo from "@/components/experiments/react/ActivityDemo";
 // React
 import ReactCmdk from "@/components/experiments/react/ReactCmdkDemo";
 import ReactConfetti from "@/components/experiments/react/ReactConfettiDemo";
@@ -93,6 +93,7 @@ import ReactUseStateObjectForm from "@/components/experiments/react/ReactUseStat
 import ReactUseStateReactingToInput from "@/components/experiments/react/ReactUseStateReactingToInputDemo";
 import ReactUseStateTodoList from "@/components/experiments/react/ReactUseStateTodoListDemo";
 import ReactWrapBalancer from "@/components/experiments/react/ReactWrapBalancerDemo";
+import SimpleSearch from "@/components/experiments/react/SimpleSearch";
 
 // React Aria
 import ReactAriaCalendar from "@/components/experiments/react-aria/ReactAriaCalendarDemo";
@@ -152,8 +153,8 @@ export async function generateMetadata({
     .join(" ");
 
   return {
-    title: `${title} | ${domainDisplayName} Experiments`,
     description: `${title} experiment in ${domainDisplayName}`,
+    title: `${title} | ${domainDisplayName} Experiments`,
   };
 }
 
@@ -204,7 +205,6 @@ const experimentComponents: Record<
     "next-13-image-remote": NextjsImageRemote,
     router: NextjsRouter,
     swr: NextjsSWR,
-    "learn-api-route": LearnAPIRoute,
   },
   "radix-ui": {
     accordion: RadixAccordion,
@@ -228,6 +228,8 @@ const experimentComponents: Record<
     tooltip: RadixTooltip,
   },
   react: {
+    "activity-demo": ActivityDemo,
+    cmdk: ReactCmdk,
     confetti: ReactConfetti,
     counter: ReactCounter,
     "edit-profile": ReactEditProfile,
@@ -236,10 +238,13 @@ const experimentComponents: Record<
     "functional-props": ReactFunctionalProps,
     "generic-select": ReactGenericSelect,
     "modal-inside-modal": ReactModalInsideModal,
+    "react-use-reducer-july-2026": ReactUseReducerJuly2026,
+    "react-wrap-balancer": ReactWrapBalancer,
     "search-books": ReactSearchBooks,
     "search-interpol": ReactSearchInterpol,
     "search-table": ReactSearchTable,
     "searchable-product-data": ReactSearchableProductData,
+    "simple-search": SimpleSearch,
     "submit-form": ReactSubmitForm,
     "usecontext-dark-mode": ReactUseContextDarkMode,
     "useeffect-title": ReactUseEffectTitle,
@@ -252,9 +257,6 @@ const experimentComponents: Record<
     "usestate-object-form": ReactUseStateObjectForm,
     "usestate-reacting-to-input": ReactUseStateReactingToInput,
     "usestate-todo-list": ReactUseStateTodoList,
-    "react-wrap-balancer": ReactWrapBalancer,
-    "react-use-reducer-july-2026": ReactUseReducerJuly2026,
-    cmdk: ReactCmdk,
   },
   "react-aria": {
     calendar: ReactAriaCalendar,
@@ -285,13 +287,13 @@ const experimentComponents: Record<
     "youtube-thumbnail": TailwindYoutubeThumbnail,
   },
   "ui-explorations": {
+    "inline-maki": InlineMaki,
+    "input-list": InputList,
     "notion-navbar": NotionNavbar,
     pure: Pure,
-    "times-table": TimesTable,
-    "inline-maki": InlineMaki,
-    "yearly-interest": YearlyInterest,
-    "input-list": InputList,
     stopwatch: Stopwatch,
+    "times-table": TimesTable,
+    "yearly-interest": YearlyInterest,
   },
   visx: {
     "bar-chart": VisxBarChart,
