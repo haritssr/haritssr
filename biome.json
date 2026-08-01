@@ -9,7 +9,8 @@
     "actions": {
       "source": {
         "organizeImports": "on",
-        "useSortedAttributes": "on"
+        "useSortedAttributes": "on",
+        "useSortedKeys": "off"
       }
     }
   },

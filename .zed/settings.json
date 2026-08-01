@@ -1,7 +1,8 @@
 {
   "code_actions_on_format": {
     "source.action.useSortedAttributes.biome": true,
-    "source.fixAll.biome": true
+    "source.fixAll.biome": true,
+    "source.action.useSortedKeys.biome": false,
   },
   "file_scan_exclusions": [
     "**/.git",
