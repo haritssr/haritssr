@@ -1,5 +1,5 @@
 // Static application pages backed by page.tsx files.
-export const pageRoutes = [
+const pageRoutes = [
   "/",
   "/blog",
   "/input-list",
@@ -17,7 +17,7 @@ export const pageRoutes = [
 ];
 
 // Experiment domain landing pages.
-export const experimentDomainRoutes = [
+const experimentDomainRoutes = [
   "/experiments/browser",
   "/experiments/react",
   "/experiments/nextjs",
@@ -35,7 +35,7 @@ export const experimentDomainRoutes = [
 ];
 
 // Concrete experiment detail routes that are visitable.
-export const experimentRoutes = [
+const experimentRoutes = [
   "/experiments/browser/clock",
   "/experiments/browser/custom-scroll",
   "/experiments/browser/description-list",
@@ -154,7 +154,7 @@ export const experimentRoutes = [
 ];
 
 // Combined unique route list used as the source corpus for search.
-export const allRoutes = Array.from(
+const allRoutes = Array.from(
   new Set([...pageRoutes, ...experimentDomainRoutes, ...experimentRoutes])
 );
 
@@ -207,7 +207,7 @@ function tokenize(value: string): string[] {
 }
 
 // Searchable route documents with derived titles and tokens.
-export const routeDocs: RouteDoc[] = allRoutes.map((route) => {
+const routeDocs: RouteDoc[] = allRoutes.map((route) => {
   // Human-readable route title.
   const title = getRouteTitle(route);
   // Unique search tokens generated from route and title text.
@@ -222,7 +222,7 @@ export const routeDocs: RouteDoc[] = allRoutes.map((route) => {
 });
 
 // Inverted index mapping each token to matching route IDs.
-export const routeTokenIndex = routeDocs.reduce<Record<string, string[]>>(
+const routeTokenIndex = routeDocs.reduce<Record<string, string[]>>(
   (acc, doc) => {
     for (const token of doc.tokens) {
       if (!acc[token]) {
