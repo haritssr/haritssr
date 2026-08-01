@@ -3,10 +3,10 @@ import { headers } from "next/headers";
 import Section from "@/components/Section";
 
 interface Person {
-  id: string;
-  name: string;
   age: string;
   city: string;
+  id: string;
+  name: string;
 }
 
 const getBaseUrl = async () => {
@@ -25,6 +25,7 @@ const getBaseUrl = async () => {
 
 // Fetch people object using Effect
 const getPeople = Effect.tryPromise({
+  catch: (cause) => new Error("Failed to load /api/hello", { cause }),
   try: async () => {
     const response = await fetch(`${await getBaseUrl()}/api/hello`);
 
@@ -34,11 +35,11 @@ const getPeople = Effect.tryPromise({
 
     return (await response.json()) as Person[];
   },
-  catch: (cause) => new Error("Failed to load /api/hello", { cause }),
 });
 
 // Fetch catch-all route using Effect
 const getRouteParams = Effect.tryPromise({
+  catch: (cause) => new Error("Failed to load /api/one/two/three", { cause }),
   try: async () => {
     const response = await fetch(`${await getBaseUrl()}/api/one/two/three`);
 
@@ -48,10 +49,9 @@ const getRouteParams = Effect.tryPromise({
 
     return (await response.json()) as string[];
   },
-  catch: (cause) => new Error("Failed to load /api/one/two/three", { cause }),
 });
 
-export default async function InputListPage() {
+export default async function LearnAPIRoute() {
   // Regular fetch
   // const response = await fetch(`${await getBaseUrl()}/api/hello`);
   // const data: Person[] = await response.json();

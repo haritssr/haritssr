@@ -57,7 +57,7 @@ export const ExperimentsData = [
       "Modal Inside Modal",
       "Confetti",
       "Simple Search",
-      "Activity Demo"
+      "Activity Demo",
     ],
     logoSrc: "/icons/react.jpg",
     title: "React",
@@ -210,21 +210,4 @@ export const ExperimentsData = [
   },
 ];
 
-// console.log(sizeof(ExperimentsData));
-
 export type ExperimentsData = (typeof ExperimentsData)[0];
-
-const TailwindCSSData = ExperimentsData[0];
-const ReactData = ExperimentsData[1];
-const NextjsData = ExperimentsData[2];
-const BrowserData = ExperimentsData[3];
-const VisXData = ExperimentsData[4];
-const MantineData = ExperimentsData[5];
-const HeadlessUIData = ExperimentsData[6];
-const RadixUIData = ExperimentsData[7];
-const UIExplorationData = ExperimentsData[8];
-const HarisLabData = ExperimentsData[9];
-const ReactAriaData = ExperimentsData[10];
-const KaTeXData = ExperimentsData[11];
-const ReactTableData = ExperimentsData[12];
-const ReactQueryData = ExperimentsData[13];
