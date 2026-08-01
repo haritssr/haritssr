@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 
+const URL_REGEX = /^https?:\/\/(www\.)?/;
+
 function boldharitssr(strippedURL: string, haritssr = "haritssr") {
   return strippedURL
     .replace(haritssr, `§§${haritssr}§§`)
@@ -25,13 +27,16 @@ function renderContact(each: { link: string; icon: string }) {
     http://www.
     https://www.
   */
-  const URL_REGEX = /^https?:\/\/(www\.)?/;
 
   if (each.link.startsWith("http")) {
     return (
       <a
         className="corner-squircle flex items-center space-x-2 rounded-xl border border-zinc-300 px-2 py-1.5 sm:mr-1.5 sm:py-1 sm:hover:bg-zinc-100"
-        href={each.link}
+        href={
+          each.link === "https://www.haritssr.com"
+            ? "https://haritssr.vercel.app"
+            : each.link
+        }
         rel="noreferrer noopener"
         target="_blank"
         title={each.link}
@@ -89,7 +94,6 @@ export default function ContactList() {
 }
 
 const ContactData = {
-  section: "Contacts",
   description: "My preferable communication channels.",
   points: [
     {
@@ -110,4 +114,5 @@ const ContactData = {
       name: "Website",
     },
   ],
+  section: "Contacts",
 };
