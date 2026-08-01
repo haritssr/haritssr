@@ -13,34 +13,34 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
+  description: "Developer, teacher, and founder.",
   metadataBase: new URL("https://www.haritssr.com"),
+  openGraph: {
+    description: "Developer, teacher, and founder.",
+    locale: "en-US",
+    siteName: "Harits Syah",
+    title: "Harits Syah",
+    type: "website",
+    url: "https://www.haritssr.com",
+  },
+  robots: {
+    follow: true,
+    googleBot: {
+      follow: true,
+      index: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+    index: true,
+  },
   title: {
     default: "Harits Syah",
     template: "%s - Harits Syah",
   },
-  description: "Developer, teacher, and founder.",
-  openGraph: {
-    title: "Harits Syah",
-    description: "Developer, teacher, and founder.",
-    url: "https://www.haritssr.com",
-    siteName: "Harits Syah",
-    locale: "en-US",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
   twitter: {
-    title: "Harits Syah",
     card: "summary_large_image",
+    title: "Harits Syah",
   },
 };
 
