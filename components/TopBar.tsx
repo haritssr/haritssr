@@ -26,9 +26,9 @@ export default function TopBar() {
         {/* Links */}
         <div className="hidden sm:block">
           <ul className="flex space-x-10">
-            {links.map((link) => {
-              return <Destination key={link} link={link} />;
-            })}
+            {links.map((link) => (
+              <Destination key={link} link={link} />
+            ))}
           </ul>
         </div>
 
@@ -50,4 +50,4 @@ export default function TopBar() {
   );
 }
 
-const links = ["projects", "experiments", "blog", "task"];
+const links = ["projects", "experiments", "blog"];
