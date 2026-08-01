@@ -8,9 +8,9 @@ import {
   updateTool as updateToolCore,
 } from "./db.core";
 
-export type ToolRow = ToolRowCore;
+type ToolRow = ToolRowCore;
 
 export const listTools = listToolsCore;
 export const createTool = createToolCore;
-export const updateTool = updateToolCore;
-export const deleteTool = deleteToolCore;
+const updateTool = updateToolCore;
+const deleteTool = deleteToolCore;

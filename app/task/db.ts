@@ -7,8 +7,7 @@ import type { Task } from "./type";
 
 const DEFAULT_DATABASE_DIRECTORY = "/Users/haritssyah/developer/.data-haritssr";
 // Absolute folder path for task SQLite storage (override via TASK_DB_DIR).
-const DATABASE_DIRECTORY =
-  process.env.TASK_DB_DIR ?? DEFAULT_DATABASE_DIRECTORY;
+const DATABASE_DIRECTORY = process.env.TASK_DB_DIR ?? DEFAULT_DATABASE_DIRECTORY;
 // Absolute SQLite file path used by better-sqlite3.
 const DATABASE_PATH = path.join(DATABASE_DIRECTORY, "task.db");
 
@@ -103,7 +102,7 @@ function migrateStatusColumn() {
 // Run migration on module load so all exported APIs work on a stable schema.
 migrateStatusColumn();
 
-export interface TaskHistoryDay {
+interface TaskHistoryDay {
   date: string;
   doneCount: number;
   totalCount: number;
@@ -125,8 +124,7 @@ function normalizeTask(task: Task): Task {
   // Keep progress in the supported 0..100 range.
   const normalizedProgress = Math.max(0, Math.min(100, task.progress));
   // Enforce "Done" when progress reaches completion.
-  const normalizedType: Task["type"] =
-    normalizedProgress >= 100 ? "Done" : task.type;
+  const normalizedType: Task["type"] = normalizedProgress >= 100 ? "Done" : task.type;
 
   // Normalize duration and return a cleaned task object.
   return {
@@ -153,9 +151,9 @@ function seedTasksForDate(taskDate: string) {
   }
 
   // Check whether this date is already initialized.
-  const countRow = db
-    .prepare("SELECT COUNT(1) AS count FROM daily_tasks WHERE task_date = ?")
-    .get(taskDate) as { count: number };
+  const countRow = db.prepare("SELECT COUNT(1) AS count FROM daily_tasks WHERE task_date = ?").get(taskDate) as {
+    count: number;
+  };
 
   // Avoid duplicating rows when tasks already exist for this date.
   if (countRow.count > 0) {
@@ -167,20 +165,13 @@ function seedTasksForDate(taskDate: string) {
       INSERT INTO daily_tasks
       (task_date, title, duration, progress, type, position)
       VALUES (?, ?, ?, ?, ?, ?)
-    `
+    `,
   );
 
   // Insert all template tasks in one transaction and keep stable ordering by index.
   const insertSeedTasks = db.transaction((tasks: Task[]) => {
     tasks.forEach((task, index) => {
-      insertTaskStatement.run(
-        taskDate,
-        task.title,
-        task.duration,
-        task.progress,
-        task.type,
-        index
-      );
+      insertTaskStatement.run(taskDate, task.title, task.duration, task.progress, task.type, index);
     });
   });
 
@@ -197,7 +188,7 @@ function readTasksForDate(taskDate: string): Task[] {
         FROM daily_tasks
         WHERE task_date = ?
         ORDER BY position ASC, id ASC
-      `
+      `,
     )
     .all(taskDate) as TaskRow[];
 
@@ -215,9 +206,7 @@ export function getTodayTaskDate(date = new Date()) {
 // Load tasks for a date, auto-seed when empty, and persist sanitization corrections.
 export function getTasksForDate(taskDate = getTodayTaskDate()) {
   seedTasksForDate(taskDate);
-  const { droppedNowCount, sanitizedTasks } = normalizeAndSanitizeTasks(
-    readTasksForDate(taskDate)
-  );
+  const { droppedNowCount, sanitizedTasks } = normalizeAndSanitizeTasks(readTasksForDate(taskDate));
 
   // Rewrite rows only when sanitization changed task types/order constraints.
   if (droppedNowCount > 0) {
@@ -232,15 +221,13 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
   const { droppedNowCount, sanitizedTasks } = normalizeAndSanitizeTasks(tasks);
 
   // Precompile statements used by the replace transaction.
-  const deleteTasksStatement = db.prepare(
-    "DELETE FROM daily_tasks WHERE task_date = ?"
-  );
+  const deleteTasksStatement = db.prepare("DELETE FROM daily_tasks WHERE task_date = ?");
   const insertTaskStatement = db.prepare(
     `
       INSERT INTO daily_tasks
       (task_date, title, duration, progress, type, position, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-    `
+    `,
   );
 
   // Delete existing rows and reinsert next rows in a single atomic operation.
@@ -248,14 +235,7 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
     deleteTasksStatement.run(taskDate);
 
     nextTasks.forEach((task, index) => {
-      insertTaskStatement.run(
-        taskDate,
-        task.title,
-        task.duration,
-        task.progress,
-        task.type,
-        index
-      );
+      insertTaskStatement.run(taskDate, task.title, task.duration, task.progress, task.type, index);
     });
   });
 
@@ -265,7 +245,7 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
 }
 
 // Return per-day completion stats for the most recent N days with any tasks.
-export function getTaskHistoryDays(limit = 30): TaskHistoryDay[] {
+function getTaskHistoryDays(limit = 30): TaskHistoryDay[] {
   const rows = db
     .prepare(
       `
@@ -277,7 +257,7 @@ export function getTaskHistoryDays(limit = 30): TaskHistoryDay[] {
         GROUP BY task_date
         ORDER BY task_date DESC
         LIMIT ?
-      `
+      `,
     )
     .all(limit) as TaskHistoryDay[];
 
