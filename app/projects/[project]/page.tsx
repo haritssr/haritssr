@@ -13,11 +13,9 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return ProjectsData.map(({ project_name }) => {
-    return {
-      project: project_name.toLowerCase().split(" ").join("-"),
-    };
-  });
+  return ProjectsData.map(({ project_name }) => ({
+    project: project_name.toLowerCase().split(" ").join("-"),
+  }));
 }
 
 export default async function ExperiencesPage({
