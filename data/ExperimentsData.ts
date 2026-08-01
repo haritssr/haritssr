@@ -73,7 +73,6 @@ export const ExperimentsData = [
       "Posts",
       "Next 13 Image Local",
       "Next 13 Image Remote",
-      "Learn API Route",
     ],
     logoSrc: "/icons/nextjs.jpg",
     title: "Nextjs",

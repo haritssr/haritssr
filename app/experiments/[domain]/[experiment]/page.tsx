@@ -38,8 +38,7 @@ import KaTeXBasic from "@/components/experiments/katex/KaTeXBasicDemo";
 // Mantine
 import MantineCarousel from "@/components/experiments/mantine/MantineCarouselDemo";
 
-// Next.js
-import LearnAPIRoute from "@/components/experiments/nextjs/LearnAPIRoute";
+//Next.js
 import NextjsImageLocal from "@/components/experiments/nextjs/NextjsImageLocalDemo";
 import NextjsImageRemote from "@/components/experiments/nextjs/NextjsImageRemoteDemo";
 import NextjsRouter from "@/components/experiments/nextjs/NextjsRouterDemo";
@@ -203,7 +202,6 @@ const experimentComponents: Record<
     carousel: MantineCarousel,
   },
   nextjs: {
-    "learn-api-route": LearnAPIRoute,
     "next-13-image-local": NextjsImageLocal,
     "next-13-image-remote": NextjsImageRemote,
     router: NextjsRouter,
