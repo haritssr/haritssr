@@ -65,37 +65,35 @@ type MateriTable = materi[];
 type materi = string;
 
 interface domain {
-  title: string;
   chapters: ChaptersTable;
+  title: string;
 }
 
 interface chapter {
-  title: string;
   material: MateriTable;
+  title: string;
 }
 
-export const PhysicsHierarchyData: PhysicsTable = [
+const PhysicsHierarchyData: PhysicsTable = [
   {
-    title: "Pengukuran",
     chapters: [
       {
-        title: "Besaran",
         material: ["Pengantar", "Besaran pokok", "Besaran satuan"],
+        title: "Besaran",
       },
       {
-        title: "Satuan",
         material: ["Pengantar", "Daftar satuan", "Konversi satuan"],
+        title: "Satuan",
       },
       {
-        title: "Dimensi",
         material: ["Pengantar", "Daftar dimensi", "Analisis dimensi"],
+        title: "Dimensi",
       },
       {
-        title: "Notasi Ilmiah",
         material: ["Pengantar", "Angka penting"],
+        title: "Notasi Ilmiah",
       },
       {
-        title: "Ketepatan",
         material: [
           "Pengantar",
           "Akurasi",
@@ -104,9 +102,9 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Kesalahan acak",
           "Kesalahan sistematis",
         ],
+        title: "Ketepatan",
       },
       {
-        title: "Alat Ukur",
         material: [
           "Pengantar",
           "Jangka sorong",
@@ -114,39 +112,39 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Mistar",
           "Tahun Cahaya",
         ],
+        title: "Alat Ukur",
       },
     ],
+    title: "Pengukuran",
   },
   {
-    title: "Gerak",
     chapters: [
       {
-        title: "Gerak Lurus",
         material: [
           "Pengantar",
           "Gerak Lurus Beraturan",
           "Gerak Lurus Berubah Beraturan",
         ],
+        title: "Gerak Lurus",
       },
       {
-        title: "Gerak Rotasi",
         material: [
           "Pengantar",
           "Momentum Sudut",
           "Torsi - Momen Gaya",
           "Momen Inersia",
         ],
+        title: "Gerak Rotasi",
       },
       {
-        title: "Gerak Parabola",
         material: [
           "Pengantar",
           "Gerak Parabola Simetri",
           "Gerak Parabola Asimetri",
         ],
+        title: "Gerak Parabola",
       },
       {
-        title: "Gerak Melingkar",
         material: [
           "Pengantar",
           "Gerak Melingkar Beraturan",
@@ -154,49 +152,49 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Momentum Sudut",
           "Hukum Kekekalan Energi",
         ],
+        title: "Gerak Melingkar",
       },
     ],
+    title: "Gerak",
   },
   {
-    title: "Dinamika",
     chapters: [
       {
-        title: "Gaya",
         material: ["Gaya Newton", "Gaya Gesek", "Gaya Gravitasi"],
+        title: "Gaya",
       },
       {
-        title: "Usaha",
         material: ["Pengantar Usaha", "Hubungan usaha dengan energi"],
+        title: "Usaha",
       },
       {
-        title: "Momentum",
         material: ["Pengantar momentum", "Hukum kekekalan momentum", "Impuls"],
+        title: "Momentum",
       },
       {
-        title: "Energi",
         material: [
           "Pengantar",
           "Energi Kinetik",
           "Energi Potensial",
           "Energi Menanik",
         ],
+        title: "Energi",
       },
     ],
+    title: "Dinamika",
   },
   {
-    title: "Fluida",
     chapters: [
       {
-        title: "Fluida Statis",
         material: [
           "Pengantar Fluida Statis",
           "Tekanan",
           "Hukum Pascal",
           "Hukum Archimedes",
         ],
+        title: "Fluida Statis",
       },
       {
-        title: "Fluida Dinamis",
         material: [
           "Pengantar Fluida Dinamis",
           "Aliran fluida ideal",
@@ -204,23 +202,23 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Kontinuitas",
           "Hukum Bernoulli",
         ],
+        title: "Fluida Dinamis",
       },
     ],
+    title: "Fluida",
   },
   {
-    title: "Gelombang",
     chapters: [
       {
-        title: "Gelombang Dasar",
         material: [
           "Pengantar",
           "Jenis gelombang",
           "Sifat gelombang",
           "Properti gelombang",
         ],
+        title: "Gelombang Dasar",
       },
       {
-        title: "Gelombang Bunyi",
         material: [
           "Pengantar",
           "Taraf intensitas bunyi",
@@ -230,19 +228,19 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Cepat rambat pada medium",
           "Rentang frekuensi",
         ],
+        title: "Gelombang Bunyi",
       },
       {
-        title: "Gelombang Elektromagnetik",
         material: ["Pengantar", "Sifat", "Spektrum", "Energi"],
+        title: "Gelombang Elektromagnetik",
       },
     ],
+    title: "Gelombang",
   },
 
   {
-    title: "Termodinamika",
     chapters: [
       {
-        title: "Hukum termodinamika",
         material: [
           "Pengantar",
           "Hukum termodinamika 0",
@@ -250,13 +248,13 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Hukum termodinamika 2",
           "Hukum termodinamika 3",
         ],
+        title: "Hukum termodinamika",
       },
       {
-        title: "Suhu",
         material: ["Pengantar Suhu", "Alat ukur suhu", "Konversi suhu"],
+        title: "Suhu",
       },
       {
-        title: "Kalor",
         material: [
           "Pengantar",
           "Transfer kalor",
@@ -267,9 +265,9 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Kalor laten",
           "Kapasitas kalor",
         ],
+        title: "Kalor",
       },
       {
-        title: "Fenomena Gas",
         material: [
           "Pengantar",
           "Isobaris",
@@ -277,14 +275,14 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Isotermis",
           "Adiabatis",
         ],
+        title: "Fenomena Gas",
       },
     ],
+    title: "Termodinamika",
   },
   {
-    title: "Listrik",
     chapters: [
       {
-        title: "Listrik Statis",
         material: [
           "Pengantar",
           "Muatan listrik",
@@ -296,9 +294,9 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Hukum Gauss",
           "Kapasitor",
         ],
+        title: "Listrik Statis",
       },
       {
-        title: "Listrik Dinamis",
         material: [
           "Pengantar",
           "Arus Listrik",
@@ -311,9 +309,9 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Hukum Ohm",
           "Alat Ukur Listrik",
         ],
+        title: "Listrik Dinamis",
       },
       {
-        title: "Magnet",
         material: [
           "Pengantar",
           "Medan Magnet",
@@ -322,7 +320,9 @@ export const PhysicsHierarchyData: PhysicsTable = [
           "Momen Kopel",
           "Transformator",
         ],
+        title: "Magnet",
       },
     ],
+    title: "Listrik",
   },
 ];

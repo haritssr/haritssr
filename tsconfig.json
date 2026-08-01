@@ -3,7 +3,7 @@
     "types": ["bun-types"],
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "target": "es5",
+    "target": "ES2023",
     "importHelpers": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -23,14 +23,14 @@
       "@/icons": ["components/icons"],
       "@/styles/*": ["styles/*"],
       "@/utils/*": ["utils/*"],
-      "@content-collections": ["./.content-collections/generated"]
+      "@content-collections": ["./.content-collections/generated"],
     },
     "incremental": true,
     "plugins": [
       {
-        "name": "next"
-      }
-    ]
+        "name": "next",
+      },
+    ],
   },
   "include": [
     "next-env.d.ts",
@@ -55,7 +55,8 @@
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",
     "app/tools/db.bun.ts",
-    "app/tools/db.test.js"
+    "app/tools/db.test.js",
+    "next.config.mjs",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

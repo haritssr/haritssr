@@ -15,86 +15,86 @@ import { Toolbar as ToolbarPrimitive } from "radix-ui";
 import SubTitle from "@/components/SubTitle";
 
 const StyledToolbar = styled(ToolbarPrimitive.Root, {
+  backgroundColor: "white",
+  borderRadius: 6,
+  boxShadow: `0 2px 10px ${blackA.blackA7}`,
   display: "flex",
+  minWidth: "max-content",
   padding: 10,
   width: "100%",
-  minWidth: "max-content",
-  borderRadius: 6,
-  backgroundColor: "white",
-  boxShadow: `0 2px 10px ${blackA.blackA7}`,
 });
 
 const itemStyles = {
-  all: "unset",
-  flex: "0 0 auto",
-  color: mauve.mauve11,
-  height: 25,
-  padding: "0 5px",
-  borderRadius: 4,
-  display: "inline-flex",
-  fontSize: 13,
-  lineHeight: 1,
-  alignItems: "center",
-  justifyContent: "center",
+  "&:focus": { boxShadow: `0 0 0 2px ${violet.violet7}`, position: "relative" },
   "&:hover": { backgroundColor: violet.violet3, color: violet.violet11 },
-  "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${violet.violet7}` },
+  alignItems: "center",
+  all: "unset",
+  borderRadius: 4,
+  color: mauve.mauve11,
+  display: "inline-flex",
+  flex: "0 0 auto",
+  fontSize: 13,
+  height: 25,
+  justifyContent: "center",
+  lineHeight: 1,
+  padding: "0 5px",
 };
 
 const StyledButton = styled(
   ToolbarPrimitive.Button,
   {
     ...itemStyles,
+    backgroundColor: "#2563eb",
+    color: "white",
     paddingLeft: 10,
     paddingRight: 10,
-    color: "white",
-    backgroundColor: "#2563eb",
   },
-  { "&:hover": { color: "white", backgroundColor: "rgb(37, 99, 235, 0.5)" } }
+  { "&:hover": { backgroundColor: "rgb(37, 99, 235, 0.5)", color: "white" } }
 );
 
 const StyledLink = styled(
   ToolbarPrimitive.Link,
   {
     ...itemStyles,
+    alignItems: "center",
     backgroundColor: "transparent",
     color: mauve.mauve11,
     display: "inline-flex",
     justifyContent: "center",
-    alignItems: "center",
   },
   { "&:hover": { backgroundColor: "transparent", cursor: "pointer" } }
 );
 
 const StyledSeparator = styled(ToolbarPrimitive.Separator, {
-  width: 1,
   backgroundColor: mauve.mauve6,
   margin: "0 10px",
+  width: 1,
 });
 
 const StyledToggleGroup = styled(ToolbarPrimitive.ToggleGroup, {
-  display: "inline-flex",
   borderRadius: 4,
+  display: "inline-flex",
 });
 
 const StyledToggleItem = styled(ToolbarPrimitive.ToggleItem, {
   ...itemStyles,
-  boxShadow: 0,
-  backgroundColor: "white",
-  marginLeft: 2,
   "&:first-child": { marginLeft: 0 },
   "&[data-state=on]": {
     backgroundColor: "rgb(37, 99, 235, 0.5)",
     color: "rgb(37, 99, 235, 0.5)",
   },
+  backgroundColor: "white",
+  boxShadow: 0,
+  marginLeft: 2,
 });
 
 // Exports
-export const Toolbar = StyledToolbar;
-export const ToolbarButton = StyledButton;
-export const ToolbarSeparator = StyledSeparator;
-export const ToolbarLink = StyledLink;
-export const ToolbarToggleGroup = StyledToggleGroup;
-export const ToolbarToggleItem = StyledToggleItem;
+const Toolbar = StyledToolbar;
+const ToolbarButton = StyledButton;
+const ToolbarSeparator = StyledSeparator;
+const ToolbarLink = StyledLink;
+const ToolbarToggleGroup = StyledToggleGroup;
+const ToolbarToggleItem = StyledToggleItem;
 
 export default function RadixToolbarDemo() {
   return (

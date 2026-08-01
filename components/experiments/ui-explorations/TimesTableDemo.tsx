@@ -14,7 +14,7 @@ export default function TimesTableDemo() {
   );
 }
 
-export function IncrementButton() {
+function IncrementButton() {
   const [count, setCount] = useQueryState(
     "count",
     parseAsInteger.withDefault(0)
@@ -42,18 +42,18 @@ export function IncrementButton() {
 import { useState } from "react";
 
 interface MainData {
-  index: string;
-  value: string;
-  row: number;
   col: number;
+  index: string;
+  row: number;
+  value: string;
 }
 
 function TimesTableComponent() {
   const [currentInput, setCurrentInput] = useState<MainData>({
-    index: "NOT SELECTED",
-    value: "NOT SELECTED",
-    row: 1,
     col: 1,
+    index: "NOT SELECTED",
+    row: 1,
+    value: "NOT SELECTED",
   });
 
   return (
@@ -163,13 +163,13 @@ function InputElement({
       maxLength={3}
       onChange={(e) => {
         const value = e.target.value;
-        handleOnchange({ index: index.toString(), value, row, col });
+        handleOnchange({ col, index: index.toString(), row, value });
       }}
       onClick={(_e) =>
         handleOnClick((prev) => ({
           ...prev,
-          row,
           col,
+          row,
         }))
       }
       type="text"
