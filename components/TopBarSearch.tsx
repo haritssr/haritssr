@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { RouteDoc } from "../routes";
-import { searchRoutes } from "../routes";
+import type { RouteDoc } from "../data/routes";
+import { searchRoutes } from "../data/routes";
 
 export default function TopBarSearch() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<true | false>(false);
   const [query, setQuery] = useState("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -22,7 +22,7 @@ export default function TopBarSearch() {
       return [];
     }
 
-    return searchRoutes(trimmedQuery, 8);
+    return searchRoutes(trimmedQuery);
   }, [query]);
 
   useEffect(() => {
@@ -67,15 +67,15 @@ export default function TopBarSearch() {
     <div className="relative" ref={containerRef}>
       <button
         aria-label="Search routes"
-        className="inline-flex items-center justify-center"
+        className="flex cursor-pointer items-center justify-center"
         onClick={openSearch}
         title="Search"
         type="button"
       >
-        <MagnifyingGlassIcon className="h-5 w-5 cursor-pointer text-zinc-800 hover:text-zinc-400" />
+        <MagnifyingGlassIcon className="block size-5 text-zinc-800 hover:text-zinc-400" />
       </button>
 
-      {isOpen && (
+      {Boolean(isOpen) && (
         <div className="absolute top-8 right-0 z-50 w-72 rounded-md border border-zinc-200 bg-white p-2 shadow-lg">
           <form onSubmit={handleSubmit}>
             <input
