@@ -7,22 +7,22 @@ import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 //type generate automatically via app.quicktype.io
-export interface Notice {
-  forename: string;
+interface Notice {
+  _links: Links;
   date_of_birth: string;
   entity_id: string;
-  nationalities: string[];
+  forename: string;
   name: string;
-  _links: Links;
+  nationalities: string[];
 }
 
-export interface Links {
-  self: Images;
+interface Links {
   images: Images;
+  self: Images;
   thumbnail: Images;
 }
 
-export interface Images {
+interface Images {
   href: string;
 }
 
