@@ -40,4 +40,8 @@ graph TD
 - Highschool and college level Math-Physics
 - Touch typing
 - Deep understanding of the latest JavaScript, TypeScript, React.js, Next.js, Effect.ts, and browser internals along with the principles that connect them and explain why they work the way they do. (This foundation enables building modern, optimized user interfaces that align with user experience principles at scale).
+- Functional Programming
+  - Using it as a way to code and understanding React.js functional approach in functional component and concurrent features.
+  - Using it as a way to code and understanding Effect.ts structured concurrency that enable so many features with functional approach in conjuction with Effect<A,E,R> monad type.
+  - In general, using it as a way to tame complexity, eliminate hidden bug, and make code easier to test and change.
 - *Currently learning to integrate authentication, databases, observability, and payments. Not yet comfortable highlighting those area as a core skill.*
