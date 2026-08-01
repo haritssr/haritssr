@@ -58,13 +58,11 @@ export function getAllPostIds() {
   //     }
   //   }
   // ]
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ""),
-      },
-    };
-  });
+  return fileNames.map((fileName) => ({
+    params: {
+      id: fileName.replace(REGEX_STRING_ENDING_MD, ""),
+    },
+  }));
 }
 
 // export function getPostData(id) {
@@ -98,8 +96,8 @@ export async function getPostData(id) {
 
   // Combine the data with the id and contentHtml
   return {
-    id,
     contentHtml,
+    id,
     ...matterResult.data,
   };
 }
