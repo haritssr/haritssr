@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import defaultTheme from "tailwindcss/defaultTheme";
-
-const { fontFamily } = defaultTheme;
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 module.exports = {
   darkMode: "class",
