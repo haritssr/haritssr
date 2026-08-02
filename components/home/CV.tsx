@@ -101,9 +101,9 @@ export default function CV() {
           </p>
         </div>
       </Box>
-      <div className="flex justify-end sm:justify-start">
+      <div className="flex justify-start">
         <SecondaryButton
-          className="corner-squircle select-none rounded-xl px-3 py-1 font-medium text-zinc-800 shadow ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden active:ring-offset-1"
+          className="corner-squircle select-none rounded-xl px-3 py-1 font-medium text-zinc-800 ring-1 ring-zinc-950/20 hover:bg-zinc-50 focus:outline-hidden active:ring-offset-1"
           download="cv-dec-2024.pdf"
           href="/cv-dec-2024.pdf"
         >
