@@ -35,7 +35,8 @@ export const ProjectsData: ProjectsDataType[] = [
         "Provide online platform for reference, analyze, practice, assesment, and offline tutoring math and physics high school and early college level.",
       company_name: "PT Haris Laboratorium Indonesia",
       phone_number: "+62-8953-3110-3401",
-      website: "https://www.harislab.com",
+      //https://www.harislab.com
+      website: "https://www.harislab.vercel.app",
       office_location: "-",
       industry: "Education",
     },
