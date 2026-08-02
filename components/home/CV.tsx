@@ -7,7 +7,6 @@ export default function CV() {
   return (
     <HomeSectionWrapper
       className="space-y-5 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0"
-      explanation="Formal working experience, education history, and core skills."
       id="cv-dec-2024.pdf"
       isTitleLink={false}
       topic="CV"

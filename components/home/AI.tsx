@@ -2,12 +2,7 @@ import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function AI() {
   return (
-    <HomeSectionWrapper
-      explanation="Tools I use in the agentic programming era."
-      id="AI"
-      isTitleLink={false}
-      topic="AI"
-    >
+    <HomeSectionWrapper id="AI" isTitleLink={false} topic="AI">
       <ol className="list-inside space-y-1.5">
         <li className="text-zinc-500">
           <span className="font-medium text-zinc-700">Code Editor:</span> Zed
