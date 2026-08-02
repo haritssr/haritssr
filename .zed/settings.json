@@ -28,9 +28,24 @@
           }
         }
       }
+    },
+    "vscode-css-language-server": {
+      "settings": {
+        "css": {
+          "lint": {
+            "unknownAtRules": "ignore"
+          }
+        }
+      }
     }
   },
   "languages": {
+    "CSS": {
+      "language_servers": [
+        "tailwindcss-language-server",
+        "..."
+      ]
+    },
     "JavaScript": {
       "code_actions_on_format": {
         "source.fixAll.biome": true,

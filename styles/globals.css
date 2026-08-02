@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@toolwind/corner-shape";
+@config "./../tailwind.config.js";
 
 @theme {
   --color-action: oklch(62.3% 0.214 259.815);
@@ -24,8 +25,8 @@
   body {
     padding: 0;
     margin: 0;
-    background-color: var(--color-background);
     color: var(--color-foreground);
+    background-color: var(--color-background);
   }
 
   * {
@@ -51,9 +52,9 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="number"]:focus,
 input[type="tel"]:focus {
-  outline: none;
   --tw-ring-color: rgb(39 39 42);
   --tw-ring-shadow: 0 0 0 1px var(--tw-ring-color);
+  outline: none;
   box-shadow:
     var(--tw-ring-shadow),
     0 1px 3px 0 rgb(0 0 0 / 0.1);
@@ -99,6 +100,7 @@ button[type="submit"]:hover {
 }*/
 
 @media (min-width: 640px) {
+
   input[type="reset"],
   input[type="submit"],
   input[type="button"],
@@ -111,13 +113,16 @@ button[type="submit"]:hover {
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: #e4e4e7;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #a1a1aa;
   border-radius: 2px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #71717a;
 }
