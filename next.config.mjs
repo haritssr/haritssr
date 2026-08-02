@@ -1,7 +1,8 @@
 import { withContentCollections } from "@content-collections/next";
 
 const nextConfig = {
-  experimental: {},
+  experimental: { useTypeScriptCli: true },
+
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

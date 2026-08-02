@@ -76,7 +76,7 @@
     "rehype-stringify": "^10.0.1",
     "remark-rehype": "^11.1.2",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "ultracite": "7.9.4",
     "unified": "^11.0.5",
     "zod": "^4.3.6"
