@@ -13,8 +13,8 @@ export default function Home() {
         <Projects />
         <Experiments />
         <Blog />
-        <AI />
         <CV />
+        <AI />
       </div>
     </section>
   );

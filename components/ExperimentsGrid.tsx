@@ -1,4 +1,4 @@
-import { ExperimentsData } from "data/ExperimentsData";
+import { ExperimentsData } from "../data/ExperimentsData";
 import ExperimentCard from "./ExperimentCard";
 
 export default function ExperimentsGrid() {

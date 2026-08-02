@@ -1,9 +1,9 @@
-import { PROJECTS_DESCRIPTION } from "data/PageDescriptions";
-import { ProjectsData } from "data/ProjectsData";
 import type { Metadata } from "next";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import ProjectsCard from "@/components/ProjectsCard";
+import { PROJECTS_DESCRIPTION } from "../../data/PageDescriptions";
+import { ProjectsData } from "../../data/ProjectsData";
 
 export const metadata: Metadata = {
   title: "Experiences",

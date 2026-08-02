@@ -1,5 +1,5 @@
-import { getExperimentsHomeDescription } from "data/PageDescriptions";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
+import { getExperimentsHomeDescription } from "../../data/PageDescriptions";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Experiments() {

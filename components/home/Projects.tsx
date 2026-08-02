@@ -1,6 +1,6 @@
-import { PROJECTS_DESCRIPTION } from "data/PageDescriptions";
-import { ProjectsData } from "data/ProjectsData";
 import ProjectsCard from "@/components/ProjectsCard";
+import { PROJECTS_DESCRIPTION } from "../../data/PageDescriptions";
+import { ProjectsData } from "../../data/ProjectsData";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Projects() {

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ProjectsDataType } from "data/ProjectsData";
+import type { ProjectsDataType } from "../../../data/ProjectsData";
 
 export default function LoadingFigma({
   project,
@@ -9,7 +9,9 @@ export default function LoadingFigma({
 }) {
   return (
     <div>
-      {project.figma.length !== 0 ? (
+      {project.figma.length === 0 ? (
+        <p className="text-zinc-800">No design</p>
+      ) : (
         project.figma.map((a) => (
           <iframe
             allowFullScreen
@@ -19,8 +21,6 @@ export default function LoadingFigma({
             title="figma"
           />
         ))
-      ) : (
-        <p className="text-zinc-800">No design</p>
       )}
     </div>
   );

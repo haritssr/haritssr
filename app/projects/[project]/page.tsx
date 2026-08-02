@@ -1,10 +1,13 @@
-import { ProjectsData, type ProjectsDataType } from "data/ProjectsData";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import {
+  ProjectsData,
+  type ProjectsDataType,
+} from "../../../data/ProjectsData";
 import LoadingFigma from "./LoadingFigma";
 
 export const metadata: Metadata = {

@@ -1,5 +1,5 @@
-import { BLOG_DESCRIPTION } from "data/PageDescriptions";
 import BlogGrid from "@/components/BlogGrid";
+import { BLOG_DESCRIPTION } from "../../data/PageDescriptions";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Blog() {
