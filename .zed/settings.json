@@ -3,6 +3,7 @@
     "source.action.useSortedAttributes.biome": true,
     "source.fixAll.biome": true,
     "source.action.useSortedKeys.biome": false,
+    "source.action.useSortedInterfaceMembers.biome": false,
   },
   "file_scan_exclusions": [
     "**/.git",

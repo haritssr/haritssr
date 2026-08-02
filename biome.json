@@ -10,7 +10,8 @@
       "source": {
         "organizeImports": "on",
         "useSortedAttributes": "on",
-        "useSortedKeys": "off"
+        "useSortedKeys": "off",
+        "useSortedInterfaceMembers": "off"
       }
     }
   },
