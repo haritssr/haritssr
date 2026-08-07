@@ -11,7 +11,7 @@ export default function ContextModalDemo() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-gray-900/70" />
-        <Dialog.Content className="-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 overflow-hidden rounded-lg bg-white sm:w-[400px]">
+        <Dialog.Content className="fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-white sm:w-100">
           <section className="flex items-center justify-between border-apple-gray4 border-b px-5 py-2.5">
             <div className="-space-y-0.5">
               <Dialog.Title className="font-bold text-gray-800 text-xl">
