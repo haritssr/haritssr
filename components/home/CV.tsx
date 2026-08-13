@@ -15,10 +15,10 @@ export default function CV() {
         <div className="flex items-center space-x-2">
           <Image
             alt="logo"
-            blurDataURL="/icons/sman5.jpg"
+            blurDataURL="/Icons/sman5.jpg"
             className="aspect-auto h-5 w-5"
             height={20}
-            src="/icons/sman5.jpg"
+            src="/Icons/sman5.jpg"
             width={20}
           />
           <div className="font-semibold text-lg">Privat Teacher</div>
@@ -115,7 +115,7 @@ export default function CV() {
 
 const NonFormalEducationData = [
   {
-    logo: "/icons/fcc.jpg",
+    logo: "/Icons/fcc.jpg",
     school: "FreeCodeCamp.com",
     period: "Des 2022 - Jun 2023",
     level: "JavaScript Data Structure & Algorithm",
@@ -125,14 +125,14 @@ const NonFormalEducationData = [
 
 const EducationData = [
   {
-    logo: "/icons/uinjkt.jpg",
+    logo: "/Icons/uinjkt.jpg",
     school: "UIN Syarif Hidayatullah Jakarta, Banten, Indonesia",
     period: "Jun 2017 - Jun 2024 ( 7 years )",
     level: "Bachelor of (Physics) Science",
     status: "Status: Resign",
   },
   {
-    logo: "/icons/sman5.jpg",
+    logo: "/Icons/sman5.jpg",
     school: "SMAN 5 South Tangerang, Banten, Indonesia",
     period: "Jun 2014 - Jun 2017 (3 years)",
     level: "High School",
