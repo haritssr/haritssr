@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getTaskActionButtonClassName } from "./data";
 import type {
   NowPrimaryAction,
@@ -49,7 +49,7 @@ function getNowPrimaryAction(
 function TaskActions(props: TaskActionsProps) {
   return (
     <>
-      {props.canDeleteTask && (
+      {!!props.canDeleteTask && (
         <button
           className={getTaskActionButtonClassName("secondary")}
           onClick={props.onDelete}
@@ -58,7 +58,7 @@ function TaskActions(props: TaskActionsProps) {
           Del
         </button>
       )}
-      {props.canMoveNowTask && (
+      {!!props.canMoveNowTask && (
         <button
           className={getTaskActionButtonClassName("zinc")}
           onClick={props.onMoveToOther}
@@ -67,7 +67,7 @@ function TaskActions(props: TaskActionsProps) {
           Other
         </button>
       )}
-      {props.canResetNowTask && (
+      {!!props.canResetNowTask && (
         <button
           className={getTaskActionButtonClassName("zinc")}
           onClick={props.onReset}
@@ -76,7 +76,7 @@ function TaskActions(props: TaskActionsProps) {
           Reset
         </button>
       )}
-      {props.isNowTask && (
+      {!!props.isNowTask && (
         <button
           className={props.primaryNowAction.className}
           onClick={props.primaryNowAction.action}
@@ -85,7 +85,7 @@ function TaskActions(props: TaskActionsProps) {
           {props.primaryNowAction.label}
         </button>
       )}
-      {props.canDoNow && (
+      {!!props.canDoNow && (
         <button
           className={getTaskActionButtonClassName("zinc")}
           onClick={props.onDoNow}
@@ -94,7 +94,7 @@ function TaskActions(props: TaskActionsProps) {
           Now
         </button>
       )}
-      {props.canResumeOtherTask && (
+      {!!props.canResumeOtherTask && (
         <button
           className={getTaskActionButtonClassName("blue")}
           onClick={props.onResume}
@@ -103,7 +103,7 @@ function TaskActions(props: TaskActionsProps) {
           Resume
         </button>
       )}
-      {props.canMarkNowTaskDone && (
+      {!!props.canMarkNowTaskDone && (
         <button
           className={getTaskActionButtonClassName("green")}
           onClick={props.onMarkDone}
@@ -212,6 +212,10 @@ export default function TaskItem(props: TaskItemProps) {
     props.onDelete?.(props.title);
   };
 
+  const handleDoNow = useCallback(() => {
+    props.onDoNow?.(props.title);
+  }, [props.onDoNow, props.title]);
+
   // Auto-start timer after Resume->Now handoff when task already has progress.
   useEffect(() => {
     if (props.type !== "Now" || !props.autoStart || progress <= 0) {
@@ -293,7 +297,7 @@ export default function TaskItem(props: TaskItemProps) {
               canResumeOtherTask={canResumeOtherTask}
               isNowTask={props.type === "Now" && !taskIsDone}
               onDelete={handleDelete}
-              onDoNow={() => props.onDoNow?.(props.title)}
+              onDoNow={handleDoNow}
               onMarkDone={handleDone}
               onMoveToOther={handleMoveToOther}
               onReset={handleReset}

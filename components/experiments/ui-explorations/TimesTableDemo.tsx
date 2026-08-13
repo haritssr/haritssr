@@ -141,28 +141,32 @@ function InputElement({
 }) {
   const isCurrentCell = currentInput.index === index.toString();
 
-  const value = isCurrentCell ? currentInput.value : "";
+  const currentValue = isCurrentCell ? currentInput.value : "";
 
-  function getSelfCorrection(value: string | null, row: number, col: number) {
-    if (value === "") {
+  function getSelfCorrection(
+    inputValue: string | null,
+    inputRow: number,
+    inputCol: number
+  ) {
+    if (inputValue === "") {
       return "";
     }
-    const numeric = Number(value);
+    const numeric = Number(inputValue);
     if (Number.isNaN(numeric)) {
       return "";
     }
-    return row * col === numeric
+    return inputRow * inputCol === numeric
       ? "bg-green-200 border-green-300"
       : "bg-red-200 border-red-300";
   }
 
   return (
     <input
-      className={`h-10 w-10 rounded border border-zinc-300 p-1 text-center hover:border-blue-400 hover:bg-blue-50 ${getSelfCorrection(value, row, col)}`}
+      className={`h-10 w-10 rounded border border-zinc-300 p-1 text-center hover:border-blue-400 hover:bg-blue-50 ${getSelfCorrection(currentValue, row, col)}`}
       id={index.toString()}
       maxLength={3}
       onChange={(e) => {
-        const value = e.target.value;
+        const { value } = e.target;
         handleOnchange({ col, index: index.toString(), row, value });
       }}
       onClick={(_e) =>

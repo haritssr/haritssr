@@ -28,7 +28,7 @@ export default function ExperimentDomainLayout({
     .join(" ");
 
   // Get experiment title from pathname
-  const segments = pathname?.split("/") || [];
+  const segments = pathname.split("/");
   const experimentSlug = segments.at(-1);
   const isIndexPage = segments.length === 3; // /experiments/[domain]
 

@@ -13,7 +13,7 @@ export default function Stopwatch() {
 
     const interval = setInterval(() => {
       setRunning(true);
-      setTime((time) => time + 1);
+      setTime((elapsedTime) => elapsedTime + 1);
     }, 1000);
 
     return () => clearInterval(interval);

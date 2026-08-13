@@ -4,7 +4,9 @@
 
 import { NumberField } from "@base-ui/react/number-field";
 import {
+  type ChangeEvent,
   type FormEvent,
+  type MouseEvent,
   useCallback,
   useEffect,
   useRef,
@@ -63,6 +65,32 @@ export default function TaskPage() {
     parsedNewOtherTaskDuration > 0 &&
     !newOtherTaskTitleExists;
 
+  const handleNewOtherTaskTitleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setNewOtherTaskTitle(event.currentTarget.value);
+    },
+    []
+  );
+
+  const handleNewOtherTaskDurationChange = useCallback(
+    (value: number | null) => {
+      setNewOtherTaskDuration(String(value ?? ""));
+    },
+    []
+  );
+
+  const handlePresetDurationClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      setNewOtherTaskDuration(event.currentTarget.dataset.minutes ?? "");
+      durationInputRef.current?.focus();
+    },
+    []
+  );
+
+  const handleAutoStartConsumed = useCallback((title: string) => {
+    setAutoStartTitle((prev) => (prev === title ? null : prev));
+  }, []);
+
   // Immediate save for critical actions (skip debounce)
   const saveImmediately = useCallback(
     (tasksToSave: Task[]) => {
@@ -70,7 +98,7 @@ export default function TaskPage() {
         return;
       }
       // Cancel any pending debounced save
-      if (saveTimeoutRef.current) {
+      if (saveTimeoutRef.current !== null) {
         clearTimeout(saveTimeoutRef.current);
         saveTimeoutRef.current = null;
       }
@@ -267,7 +295,7 @@ export default function TaskPage() {
     }
 
     // Clear existing timeout to debounce saves
-    if (saveTimeoutRef.current) {
+    if (saveTimeoutRef.current !== null) {
       clearTimeout(saveTimeoutRef.current);
     }
 
@@ -299,7 +327,7 @@ export default function TaskPage() {
 
     // Cleanup: flush pending save on unmount (e.g., page navigation)
     return () => {
-      if (saveTimeoutRef.current) {
+      if (saveTimeoutRef.current !== null) {
         clearTimeout(saveTimeoutRef.current);
         saveTimeoutRef.current = null;
         // Use sendBeacon for reliable save during unload
@@ -322,7 +350,7 @@ export default function TaskPage() {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "hidden") {
         // Cancel pending debounced save
-        if (saveTimeoutRef.current) {
+        if (saveTimeoutRef.current !== null) {
           clearTimeout(saveTimeoutRef.current);
           saveTimeoutRef.current = null;
         }
@@ -338,7 +366,7 @@ export default function TaskPage() {
     // Flushes pending state during hard navigation/close.
     const handleBeforeUnload = () => {
       // Flush any pending save before page unload
-      if (saveTimeoutRef.current) {
+      if (saveTimeoutRef.current !== null) {
         clearTimeout(saveTimeoutRef.current);
         saveTimeoutRef.current = null;
         // Beacon payload for beforeunload event.
@@ -374,7 +402,7 @@ export default function TaskPage() {
       >
         <input
           className="corner-squircle h-8 w-full rounded-lg border border-zinc-300 px-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none sm:w-fit"
-          onChange={(event) => setNewOtherTaskTitle(event.currentTarget.value)}
+          onChange={handleNewOtherTaskTitleChange}
           placeholder="Add new task here"
           type="text"
           value={newOtherTaskTitle}
@@ -383,9 +411,7 @@ export default function TaskPage() {
         <NumberField.Root
           className="flex items-center"
           min={1}
-          onValueChange={(value) =>
-            setNewOtherTaskDuration(String(value ?? ""))
-          }
+          onValueChange={handleNewOtherTaskDurationChange}
           step={1}
           value={newOtherTaskDuration ? Number(newOtherTaskDuration) : null}
         >
@@ -412,11 +438,9 @@ export default function TaskPage() {
             return (
               <button
                 className={`corner-squircle inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border text-sm ${presetClassName}`}
+                data-minutes={preset.minutes}
                 key={preset.minutes}
-                onClick={() => {
-                  setNewOtherTaskDuration(String(preset.minutes));
-                  durationInputRef.current?.focus();
-                }}
+                onClick={handlePresetDurationClick}
                 type="button"
               >
                 {preset.label}
@@ -449,9 +473,7 @@ export default function TaskPage() {
           <TaskItem
             autoStart={autoStartTitle === task.title}
             key={task.title}
-            onAutoStartConsumed={(title) =>
-              setAutoStartTitle((prev) => (prev === title ? null : prev))
-            }
+            onAutoStartConsumed={handleAutoStartConsumed}
             onDelete={handleDeleteTask}
             onMarkDone={handleMarkDone}
             onMoveTask={handleMoveTask}

@@ -35,6 +35,12 @@ import Section from "@/components/Section";
 // 	description: "Design system used in haritssr.com Haris Studio and Haris Lab",
 // };
 
+function oneWeekAway() {
+  const now = new Date();
+  const inOneWeek = now.setDate(now.getDate() + 7);
+  return new Date(inOneWeek);
+}
+
 export default function DesignSystem() {
   const [pressed, setPressed] = useState(false);
 
@@ -45,11 +51,14 @@ export default function DesignSystem() {
   const timerRef = React.useRef(0);
   React.useEffect(() => () => clearTimeout(timerRef.current), []);
 
-  function oneWeekAway() {
-    const now = new Date();
-    const inOneWeek = now.setDate(now.getDate() + 7);
-    return new Date(inOneWeek);
-  }
+  const handleShowToast = React.useCallback(() => {
+    setOpen(false);
+    window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => {
+      eventDateRef.current = oneWeekAway();
+      setOpen(true);
+    }, 100);
+  }, []);
   // -----------------------------------------------------
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -302,14 +311,7 @@ export default function DesignSystem() {
           <Toast.Provider swipeDirection="right">
             <button
               className="rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
-              onClick={() => {
-                setOpen(false);
-                window.clearTimeout(timerRef.current);
-                timerRef.current = window.setTimeout(() => {
-                  eventDateRef.current = oneWeekAway();
-                  setOpen(true);
-                }, 100);
-              }}
+              onClick={handleShowToast}
               type="button"
             >
               Show Toast
@@ -583,9 +585,7 @@ export default function DesignSystem() {
         <Box title="Toggle">
           <Toggle.Root
             className="select-none rounded-md bg-white px-3 py-1 text-zinc-800 shadow ring-1 hover:bg-zinc-50 focus:outline-hidden focus:ring-action data-[state=on]:text-action data-[state=on]:shadow-blue-100 data-[state=off]:ring-zinc-950/20 data-[state=on]:ring-blue-300"
-            onPressedChange={() => {
-              setPressed(!pressed);
-            }}
+            onPressedChange={setPressed}
             pressed={pressed}
           >
             {pressed ? "State : ON" : "State : OFF"}
@@ -623,7 +623,7 @@ export default function DesignSystem() {
                 alt="haritssr.com image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/Icons/haritssr.svg"
+                src="/icons/haritssr.svg"
                 width={10}
               />
               <div className="flex flex-col">
@@ -640,7 +640,7 @@ export default function DesignSystem() {
                 alt="Haris Lab image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/Icons/harislab.svg"
+                src="/icons/harislab.svg"
                 width={10}
               />
               <div className="flex flex-col">
@@ -657,7 +657,7 @@ export default function DesignSystem() {
                 alt="Haris Studio image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/Icons/harisstudio.svg"
+                src="/icons/harisstudio.svg"
                 width={10}
               />
               <div className="flex flex-col">

@@ -7,7 +7,7 @@ import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 export default function Destination({ link }: { link: string }) {
   const pathname = usePathname();
 
-  const CurrentPageBaseRoute = pathname?.split("/")[1];
+  const [, CurrentPageBaseRoute] = pathname.split("/");
 
   let color: string;
 

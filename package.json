@@ -1,4 +1,16 @@
 {
+  "name": "haritssr",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check",
+    "test": "bun test",
+    "check": "ultracite check",
+    "fix": "ultracite fix"
+  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "@base-ui/react": "^1.2.0",
     "@headlessui/react": "^2.2.9",
@@ -62,7 +74,7 @@
     "use-immer": "^0.7.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.3",
+    "@biomejs/biome": "2.5.8",
     "@content-collections/core": "^0.15.2",
     "@content-collections/mdx": "^0.2.2",
     "@content-collections/next": "^0.2.11",
@@ -80,17 +92,5 @@
     "ultracite": "7.9.4",
     "unified": "^11.0.5",
     "zod": "^4.3.6"
-  },
-  "name": "haritssr",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome check",
-    "test": "bun test",
-    "check": "ultracite check",
-    "fix": "ultracite fix"
-  },
-  "version": "0.1.0",
-  "private": true
+  }
 }

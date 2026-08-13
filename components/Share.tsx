@@ -9,9 +9,7 @@ export default function Share() {
   const eventDateRef = React.useRef(new Date());
   const timerRef = React.useRef(0);
 
-  React.useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, []);
+  React.useEffect(() => () => clearTimeout(timerRef.current), []);
 
   function oneWeekAway() {
     const now = new Date();
@@ -27,7 +25,9 @@ export default function Share() {
     }
   }
 
-  const ButtonHandler = () => {
+  const pathname = usePathname();
+
+  const handleButtonClick = () => {
     handleCopy(`haritssr.com${pathname}`);
     setOpen(false);
     window.clearTimeout(timerRef.current);
@@ -37,14 +37,12 @@ export default function Share() {
     }, 100);
   };
 
-  const pathname = usePathname();
-
   return (
     <Toast.Provider swipeDirection="right">
       <button
         className="cursor-pointer select-none text-zinc-400 hover:text-zinc-800"
-        onClick={ButtonHandler}
-        onKeyDown={ButtonHandler}
+        onClick={handleButtonClick}
+        onKeyDown={handleButtonClick}
         type="button"
       >
         Share

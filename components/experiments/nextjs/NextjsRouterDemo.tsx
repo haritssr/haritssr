@@ -22,9 +22,9 @@ function RouterDemoContent() {
   const [inputValue, setInputValue] = useState("");
 
   // Get current query params
-  const currentQuery = searchParams?.toString() || "";
+  const currentQuery = searchParams.toString() || "";
   const queryObj: Record<string, string> = {};
-  searchParams?.forEach((value, key) => {
+  searchParams.forEach((value, key) => {
     queryObj[key] = value;
   });
 
@@ -33,7 +33,7 @@ function RouterDemoContent() {
   // Navigation handlers
   const handlePush = useCallback(() => {
     if (inputValue) {
-      const params = new URLSearchParams(searchParams?.toString());
+      const params = new URLSearchParams(searchParams.toString());
       params.set("q", inputValue);
       router.push(`${pathname}?${params.toString()}`);
     }
@@ -41,7 +41,7 @@ function RouterDemoContent() {
 
   const handleReplace = useCallback(() => {
     if (inputValue) {
-      const params = new URLSearchParams(searchParams?.toString());
+      const params = new URLSearchParams(searchParams.toString());
       params.set("replace", inputValue);
       router.replace(`${pathname}?${params.toString()}`);
     }

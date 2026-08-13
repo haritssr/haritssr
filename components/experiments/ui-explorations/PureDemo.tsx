@@ -31,9 +31,7 @@ export default function PureDemo() {
   const [open, setOpen] = React.useState(false);
   const eventDateRef = React.useRef(new Date());
   const timerRef = React.useRef(0);
-  React.useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, []);
+  React.useEffect(() => () => clearTimeout(timerRef.current), []);
 
   function oneWeekAway() {
     const now = new Date();
@@ -582,7 +580,7 @@ export default function PureDemo() {
                 alt="haritssr.com image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/Icons/haritssr.svg"
+                src="/icons/haritssr.svg"
                 width={10}
               />
               <div className="flex flex-col">
@@ -599,7 +597,7 @@ export default function PureDemo() {
                 alt="Haris Lab image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/Icons/harislab.svg"
+                src="/icons/harislab.svg"
                 width={10}
               />
               <div className="flex flex-col">
@@ -616,7 +614,7 @@ export default function PureDemo() {
                 alt="Haris Studio image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/Icons/harisstudio.svg"
+                src="/icons/harisstudio.svg"
                 width={10}
               />
               <div className="flex flex-col">

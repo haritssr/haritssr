@@ -98,12 +98,12 @@ export default function ReactSearchInterpolDemo() {
         type="search"
       />
 
-      {loading && <div>Loading...</div>}
+      {!!loading && <div>Loading...</div>}
       <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-4">
         {notices.map((notice) => (
           <div key={notice.entity_id}>
             {/* Conditionally show image if the 'notices' have a href (src attribute of img) */}
-            {notice._links.thumbnail?.href && (
+            {!!notice._links.thumbnail?.href && (
               <div>
                 <Image
                   alt={notice.name}

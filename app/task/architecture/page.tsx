@@ -417,7 +417,7 @@ export default function TaskArchitecturePage() {
   return (
     <div className="pb-8">
       <Link
-        className="-mb-10 mt-10 flex w-fit items-center text-blue-500 hover:text-blue-400"
+        className="mt-10 -mb-10 flex w-fit items-center text-blue-500 hover:text-blue-400"
         href="/task"
       >
         <ChevronLeftIcon className="h-5 w-5 stroke-2" />

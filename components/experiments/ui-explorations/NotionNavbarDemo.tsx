@@ -38,9 +38,9 @@ function Logo() {
     <div className="mr-2 flex items-center space-x-2">
       <Image
         alt=""
-        blurDataURL="/Icons/notion.jpg"
+        blurDataURL="/icons/notion.jpg"
         height="30"
-        src="/Icons/notion.jpg"
+        src="/icons/notion.jpg"
         width="30"
       />
       <div className="font-semibold text-black text-lg">Notion</div>
@@ -59,7 +59,7 @@ function Yes() {
               strokeWidth={3}
             />
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="-ml-2 absolute mt-2 w-fit rounded bg-white p-1 drop-shadow-lg">
+          <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 drop-shadow-lg">
             <div className="cursor-pointer rounded px-2 py-1 text-sm hover:bg-zinc-50">
               <div className="font-medium text-black">Home</div>
               <div className="text-zinc-500">Docs, projects, & wikis</div>
@@ -83,7 +83,7 @@ function Yes() {
               strokeWidth={3}
             />
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="-ml-2 absolute mt-2 w-fit rounded bg-white p-1 font-medium text-sm drop-shadow-lg">
+          <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium text-sm drop-shadow-lg">
             <div className="space-y-1">
               <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
                 iOS & Android
@@ -105,7 +105,7 @@ function Yes() {
               strokeWidth={3}
             />
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="-ml-2 absolute mt-2 w-fit rounded bg-white p-1 font-medium drop-shadow-lg">
+          <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium drop-shadow-lg">
             <div className="flex divide-x divide-zinc-300">
               <article className="p-1">
                 <div className="mb-2 text-[10px] text-zinc-400">
@@ -195,7 +195,7 @@ function Yes() {
               strokeWidth={3}
             />
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="-ml-2 absolute mt-2 w-fit rounded bg-white p-1 font-medium text-sm drop-shadow-lg">
+          <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium text-sm drop-shadow-lg">
             <div className="space-y-1">
               <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
                 Blog

@@ -157,10 +157,12 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
 export default function ReactUseStateTodoListDemo() {
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
   function handleAddTodo(title: string) {
+    const id = nextId;
+    nextId += 1;
     setTodos([
       ...todos,
       {
-        id: nextId++,
+        id,
         title,
         done: false,
       },

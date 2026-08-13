@@ -19,6 +19,9 @@
     "rules": {
       "style": {
         "useFilenamingConvention": "off"
+      },
+      "performance": {
+        "noJsxPropsBind": "off"
       }
     }
   },

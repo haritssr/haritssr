@@ -18,7 +18,7 @@ export default function TailwindFloatingLabelsDemo() {
             type="email"
           />
           <label
-            className="-top-5 absolute left-0 cursor-text text-sm text-zinc-500 peer-placeholder-shown:top-[5.5px] peer-placeholder-shown:left-[9.5px] peer-placeholder-shown:text-base"
+            className="absolute -top-5 left-0 cursor-text text-sm text-zinc-500 peer-placeholder-shown:top-[5.5px] peer-placeholder-shown:left-[9.5px] peer-placeholder-shown:text-base"
             htmlFor="email"
           >
             Email Address

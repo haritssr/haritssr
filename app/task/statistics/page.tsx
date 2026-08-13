@@ -39,7 +39,7 @@ function getCurrentFullCompletionStreak(
   let streak = 0;
   let cursorDate = todayDate;
 
-  while (true) {
+  for (;;) {
     const day = historyByDate.get(cursorDate);
     if (!day || day.totalCount === 0 || day.doneCount < day.totalCount) {
       break;
@@ -119,20 +119,25 @@ export default function TaskStatisticsPage() {
   );
 
   const doneCountByTaskTitle = new Map<string, number>();
-  recent30Days.forEach((day) => {
-    day.tasks.forEach((task) => {
+  for (const day of recent30Days) {
+    for (const task of day.tasks) {
       if (task.type !== "Done" && task.progress < 100) {
-        return;
+        continue;
       }
 
       const existing = doneCountByTaskTitle.get(task.title) ?? 0;
       doneCountByTaskTitle.set(task.title, existing + 1);
-    });
-  });
+    }
+  }
 
-  const mostCompletedTaskEntry = Array.from(
+  const [mostCompletedTaskEntry] = Array.from(
     doneCountByTaskTitle.entries()
-  ).sort((firstTask, secondTask) => secondTask[1] - firstTask[1])[0];
+  ).sort(
+    ([, firstTaskCount], [, secondTaskCount]) =>
+      secondTaskCount - firstTaskCount
+  );
+  const [mostCompletedTaskTitle, mostCompletedTaskCount] =
+    mostCompletedTaskEntry ?? [];
 
   const recent7DaysTrend = [...recent7Days].reverse().map((day) => ({
     completionRate: getCompletionRate(day.doneCount, day.totalCount),
@@ -190,11 +195,11 @@ export default function TaskStatisticsPage() {
         <MetricCard
           label="Top completed task (30 days)"
           subtitle={
-            mostCompletedTaskEntry
-              ? `${mostCompletedTaskEntry[1]} completions`
+            mostCompletedTaskCount
+              ? `${mostCompletedTaskCount} completions`
               : "No completed tasks yet"
           }
-          value={mostCompletedTaskEntry ? mostCompletedTaskEntry[0] : "-"}
+          value={mostCompletedTaskTitle ?? "-"}
         />
       </div>
 

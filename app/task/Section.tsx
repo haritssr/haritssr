@@ -18,7 +18,7 @@ export default function Section({
   const header = (
     <div className="flex items-center justify-between">
       <div className="font-medium text-zinc-800">{title}</div>
-      {titleMeta && <div className="text-sm text-zinc-500">{titleMeta}</div>}
+      {!!titleMeta && <div className="text-sm text-zinc-500">{titleMeta}</div>}
     </div>
   );
 

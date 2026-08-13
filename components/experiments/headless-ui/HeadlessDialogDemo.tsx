@@ -57,14 +57,12 @@ const Wrapper = ({
 }: {
   title: string;
   children: React.ReactNode;
-}) => {
-  return (
-    <div>
-      <Section name={title} />
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div>
+    <Section name={title} />
+    {children}
+  </div>
+);
 
 const DialogExample1 = () => {
   const [isOpen, setIsOpen] = useState(false);

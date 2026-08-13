@@ -17,31 +17,29 @@ function submitForm(answer: string) {
   });
 }
 
+function TryAgainButton({ onTryAgain }: { onTryAgain: () => void }) {
+  return (
+    <button className="cursor-pointer" onClick={onTryAgain} type="button">
+      Try again
+    </button>
+  );
+}
+
 const Example = () => {
   const [answer, setAnswer] = useState("");
   //perubahan state error dari null ke string, sedangkan kita harus detect whether is null or not to display the error message from try catch async await block in handleSubmit, can i use trus/false instead of null/string ?
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState("typing");
 
-  const Button = () => {
-    return (
-      <button
-        className="cursor-pointer"
-        onClick={() => {
-          window.location.reload();
-          setAnswer("");
-        }}
-        type="button"
-      >
-        Try again
-      </button>
-    );
+  const handleTryAgain = () => {
+    window.location.reload();
+    setAnswer("");
   };
   if (status === "success") {
     return (
       <div>
         <h1>Kamu benar</h1>
-        <Button />
+        <TryAgainButton onTryAgain={handleTryAgain} />
       </div>
     );
   }
@@ -70,7 +68,7 @@ const Example = () => {
       {error !== null && (
         <div className="text-red-500">
           <div>{error}</div>
-          <Button />
+          <TryAgainButton onTryAgain={handleTryAgain} />
         </div>
       )}
 

@@ -96,7 +96,7 @@ const columns = [
 
 function Table() {
   const [data] = useState(() => [...defaultData]);
-  const rerender = useReducer(() => ({}), {})[1];
+  const [, rerender] = useReducer(() => ({}), {});
 
   const table = useReactTable({
     data,

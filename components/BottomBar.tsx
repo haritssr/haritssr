@@ -18,7 +18,7 @@ export default function BottomBar() {
 
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const pathname = usePathname();
-  const CurrentPageBaseRoute = pathname?.split("/")[1];
+  const [, CurrentPageBaseRoute] = pathname.split("/");
 
   let color: string;
   if (pathname === `/${to.charAt(0).toLowerCase()}${to.slice(1)}`) {

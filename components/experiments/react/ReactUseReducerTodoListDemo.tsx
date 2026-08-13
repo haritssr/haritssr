@@ -176,7 +176,9 @@ export default function ReactUseReducerTodoListDemo() {
     if (!text.trim()) {
       return;
     }
-    dispatch({ type: "added", id: nextId++, text });
+    const id = nextId;
+    nextId += 1;
+    dispatch({ type: "added", id, text });
   }
 
   function handleChangeTask(task: Task) {

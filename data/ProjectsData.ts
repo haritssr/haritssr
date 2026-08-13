@@ -27,7 +27,7 @@ export const ProjectsData: ProjectsDataType[] = [
   {
     project_name: "Haris Lab",
     about_client: {
-      logo_src: "/Icons/harislab.svg",
+      logo_src: "/icons/harislab.svg",
       brand_name: "Haris Lab",
       short_about:
         "Reference, analyze, practice, assesment, tutoring Math and Physics.",
@@ -66,7 +66,7 @@ export const ProjectsData: ProjectsDataType[] = [
   {
     project_name: "AKA Trading Indonesia",
     about_client: {
-      logo_src: "/Icons/aka-tradingindo.PNG",
+      logo_src: "/icons/aka-tradingindo.PNG",
       brand_name: "AKA Trading Indonesia",
       short_about:
         "Provide agricultural product for all your need. From coffee to spices.",
@@ -104,7 +104,7 @@ export const ProjectsData: ProjectsDataType[] = [
   {
     project_name: "Haris Studio",
     about_client: {
-      logo_src: "/Icons/harisstudio.svg",
+      logo_src: "/icons/harisstudio.svg",
       brand_name: "Haris Studio",
       short_about:
         "Provide web design, web creation, and web user experience services.",
@@ -131,7 +131,7 @@ export const ProjectsData: ProjectsDataType[] = [
   {
     project_name: "Mixa Perkasa",
     about_client: {
-      logo_src: "/Icons/mixa-perkasa.jpg",
+      logo_src: "/icons/mixa-perkasa.jpg",
       brand_name: "Mixa Perkasa",
       short_about:
         "Renovation contractor, new building, interior design, landscape work, etc.",
@@ -158,7 +158,7 @@ export const ProjectsData: ProjectsDataType[] = [
   {
     project_name: "Arsya Wyata Mandiri",
     about_client: {
-      logo_src: "/Icons/awm.jpg",
+      logo_src: "/icons/awm.jpg",
       brand_name: "Arsya, Nice Time",
       short_about:
         "Providing good food, drinks, and good place for our loved customers.",
@@ -187,7 +187,7 @@ export const ProjectsData: ProjectsDataType[] = [
   {
     project_name: "Harits Syah",
     about_client: {
-      logo_src: "/Icons/haritssr.svg",
+      logo_src: "/icons/haritssr.svg",
       brand_name: "Harits Syah Personal Site",
       short_about:
         "Harits Syah's personal site. Portfolio, blogs, and frontend experiments.",

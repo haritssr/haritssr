@@ -3,8 +3,8 @@
 }
 
 .animateRocket {
-  animation-duration: 5s;
   animation-name: animate-rocket;
+  animation-duration: 5s;
 }
 
 @keyframes animate-rocket {

@@ -30,7 +30,7 @@ export default function Breadcrumbs() {
             const isLast = index === segments.length - 1;
 
             return (
-              <span className="flex items-center" key={`${segment}-${index}`}>
+              <span className="flex items-center" key={href}>
                 {isLast ? (
                   <span className="select-none whitespace-nowrap text-zinc-800">
                     {label.toLocaleLowerCase()}

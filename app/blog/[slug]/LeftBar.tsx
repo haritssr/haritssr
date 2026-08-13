@@ -7,7 +7,7 @@ import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 export default function LeftBar() {
   const pathname = usePathname();
-  const segments = pathname?.split("/") as string[];
+  const segments = pathname.split("/") as string[];
   const lastSegment = segments.at(-1);
 
   return (

@@ -115,11 +115,9 @@ const Wrapper = ({
 }: {
   title: string;
   children: React.ReactNode;
-}) => {
-  return (
-    <div>
-      <div className="mb-1 font-medium text-zinc-700">{title}</div>
-      <div>{children}</div>
-    </div>
-  );
-};
+}) => (
+  <div>
+    <div className="mb-1 font-medium text-zinc-700">{title}</div>
+    <div>{children}</div>
+  </div>
+);

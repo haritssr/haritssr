@@ -25,7 +25,7 @@ export default function ReactCounterDemo() {
   }, [play]);
 
   const onToggle = useCallback(() => {
-    setPlay((play) => !play);
+    setPlay((isPlaying) => !isPlaying);
   }, []);
   const onReset = useCallback(() => {
     setSecond(0);
