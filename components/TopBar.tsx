@@ -14,7 +14,7 @@ export default function TopBar() {
             className="h-5 w-5"
             height={20}
             priority
-            src="/icons/haritssr.svg"
+            src="/Icons/haritssr.svg"
             width={20}
           />
           <Link aria-label="site logo" className="text-zinc-800" href="/">

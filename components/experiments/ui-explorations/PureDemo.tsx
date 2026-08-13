@@ -580,7 +580,7 @@ export default function PureDemo() {
                 alt="haritssr.com image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/icons/haritssr.svg"
+                src="/Icons/haritssr.svg"
                 width={10}
               />
               <div className="flex flex-col">
@@ -597,7 +597,7 @@ export default function PureDemo() {
                 alt="Haris Lab image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/icons/harislab.svg"
+                src="/Icons/harislab.svg"
                 width={10}
               />
               <div className="flex flex-col">
@@ -614,7 +614,7 @@ export default function PureDemo() {
                 alt="Haris Studio image"
                 className="h-7 w-7 justify-self-center sm:h-10 sm:w-7"
                 height={10}
-                src="/icons/harisstudio.svg"
+                src="/Icons/harisstudio.svg"
                 width={10}
               />
               <div className="flex flex-col">

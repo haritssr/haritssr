@@ -38,9 +38,9 @@ function Logo() {
     <div className="mr-2 flex items-center space-x-2">
       <Image
         alt=""
-        blurDataURL="/icons/notion.jpg"
+        blurDataURL="/Icons/notion.jpg"
         height="30"
-        src="/icons/notion.jpg"
+        src="/Icons/notion.jpg"
         width="30"
       />
       <div className="font-semibold text-black text-lg">Notion</div>
