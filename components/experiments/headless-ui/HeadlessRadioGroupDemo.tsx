@@ -99,7 +99,7 @@ function Example1() {
                           </RadioGroup.Description>
                         </div>
                       </div>
-                      {checked && (
+                      {!!checked && (
                         <div className="shrink-0 text-white">
                           <CheckIcon className="h-6 w-6" />
                         </div>

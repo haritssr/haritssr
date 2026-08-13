@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
+    "types": ["bun-types"],
     "noImplicitAny": true,
     "strictNullChecks": true,
-    // "noUnusedLocals":true,
-    "target": "es5",
+    "target": "ES2023",
     "importHelpers": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -13,16 +13,15 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/Icons": ["components/Icons"],
-      "@/styles/*": ["styles/*"],
-      "@/utils/*": ["utils/*"],
+      "*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/utils/*": ["./utils/*"],
       "@content-collections": ["./.content-collections/generated"]
     },
     "incremental": true,
@@ -53,7 +52,10 @@
     ".content-collections/generated",
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "app/tools/db.bun.ts",
+    "app/tools/db.test.js",
+    "next.config.mjs"
   ],
   "exclude": ["node_modules"]
 }

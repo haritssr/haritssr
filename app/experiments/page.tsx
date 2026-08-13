@@ -1,26 +1,19 @@
-import { ExperimentsData } from "data/ExperimentsData";
 import type { Metadata } from "next";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
-import { PageTitle } from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
+import PageTitle from "@/components/PageTitle";
+import { getExperimentsHomeDescription } from "../../data/PageDescriptions";
 
 export const metadata: Metadata = {
   title: "Experiments",
-  description: "JavaScript-React ecosystem stack experiments",
+  description: getExperimentsHomeDescription(),
 };
 
 export default function ExperimentsPage() {
-  let totalExperiment = 0;
-
-  for (const experiment of ExperimentsData) {
-    totalExperiment += experiment.links.length;
-  }
-
   return (
     <>
-      <PageTitle
-        description={`${totalExperiment} unique individual (per page) experiments across Javascript-React ecosystem stack`}
-        title="Experiments"
-      />
+      <PageTitle title="Experiments" />
+      <PageDescription description={getExperimentsHomeDescription()} />
       <ExperimentsGrid />
     </>
   );

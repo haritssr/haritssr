@@ -4,7 +4,6 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Accordion } from "radix-ui";
 import type React from "react";
 import { useRef, useState } from "react";
-import { fisika } from "../../../data/fisika";
 
 export default function SideBarDemo() {
   const [openAll, setOpenAll] = useState<boolean>(false);
@@ -13,9 +12,9 @@ export default function SideBarDemo() {
     <div className="w-full space-y-5">
       {/* Domains */}
       {fisika.map((domain) => (
-        <div key={domain.domain_name}>
+        <div key={domain.title}>
           <div>
-            <div className="pl-2 font-medium text-lg">{domain.domain_name}</div>
+            <div className="pl-2 font-medium text-lg">{domain.title}</div>
             <button onClick={() => setOpenAll(!openAll)} type="button">
               Open All
             </button>
@@ -26,8 +25,8 @@ export default function SideBarDemo() {
             {domain.chapters.map((chapter) => (
               <AccordionC
                 isOpen={openAll}
-                key={chapter?.chapter_name}
-                title={chapter?.chapter_name ?? " "}
+                key={chapter?.title}
+                title={chapter?.title ?? " "}
               >
                 {chapter?.topics.map((topic) => (
                   // Topic
@@ -77,3 +76,45 @@ function AccordionC({
     </Accordion.Root>
   );
 }
+
+type fisikaType = Array<{
+  title: string;
+  chapters: Array<{ title: string; topics: string[] } | undefined>;
+}>;
+
+const fisika: fisikaType = [
+  {
+    title: "Termodinamika",
+    chapters: [
+      {
+        title: "Suhu",
+        topics: ["Topic 1", "Topic 2", "Topic 3", "Topic 4"],
+      },
+      {
+        title: "Kalor",
+        topics: ["Topic 1", "Topic 2", "Topic 3", "Topic 4"],
+      },
+      {
+        title: "Pemuaian",
+        topics: ["Topic 1", "Topic 2", "Topic 3", "Topic 4"],
+      },
+      {
+        title: "Radiasi Benda Hitam",
+        topics: ["Topic 1", "Topic 2", "Topic 3", "Topic 4"],
+      },
+    ],
+  },
+  {
+    title: "Fluida",
+    chapters: [
+      {
+        title: "Fluida Statis",
+        topics: ["Topic 1", "Topic 2", "Topic 3", "Topic 4"],
+      },
+      {
+        title: "Fluida Dinamis",
+        topics: ["Topic 1", "Topic 2", "Topic 3", "Topic 4"],
+      },
+    ],
+  },
+];

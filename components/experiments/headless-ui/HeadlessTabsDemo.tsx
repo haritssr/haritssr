@@ -129,7 +129,7 @@ function Example1() {
                     {post.title}
                   </h3>
 
-                  <ul className="mt-1 flex space-x-1 text-xs text-coolGray-500">
+                  <ul className="mt-1 flex space-x-1 text-coolGray-500 text-xs">
                     <li>{post.date}</li>
                     <li>&middot;</li>
                     <li>{post.commentCount} comments</li>

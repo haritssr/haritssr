@@ -48,9 +48,7 @@ const SwitchExample1 = () => {
         onChange={setEnabled}
       >
         <div
-          className={`${
-            enabled ? "translate-x-6" : "translate-x-0.5"
-          } inline-block h-6 w-6 transform rounded-full bg-white shadow-md`}
+          className={`${enabled ? "translate-x-6" : "translate-x-0.5"} inline-block h-6 w-6 transform rounded-full bg-white shadow-md`}
         />
       </Switch>
     </Switch.Group>

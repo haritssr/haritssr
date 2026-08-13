@@ -78,46 +78,36 @@ const Wrapper = ({
 }: {
   name: string;
   children: React.ReactNode;
-}) => {
-  return (
-    <div>
-      <Section name={name} />
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div>
+    <Section name={name} />
+    {children}
+  </div>
+);
 
-const InputTel = () => {
-  return (
-    <input
-      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-      placeholder="1234-5678-9101"
-      required
-      type="tel"
-    />
-  );
-};
+const InputTel = () => (
+  <input
+    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+    placeholder="1234-5678-9101"
+    required
+    type="tel"
+  />
+);
 
-const InputSubmit = () => {
-  return <input type="submit" />;
-};
+const InputSubmit = () => <input type="submit" />;
 
-const InputUrl = () => {
-  return (
-    <input
-      id="url"
-      name="url"
-      pattern="https://.*"
-      placeholder="https://www.example.com"
-      required
-      type="url"
-    />
-  );
-};
+const InputUrl = () => (
+  <input
+    id="url"
+    name="url"
+    pattern="https://.*"
+    placeholder="https://www.example.com"
+    required
+    type="url"
+  />
+);
 
-const InputTime = () => {
-  return <input required type="time" />;
-};
+const InputTime = () => <input required type="time" />;
 
 const InputText = () => {
   return (
@@ -129,72 +119,60 @@ const InputText = () => {
   );
 };
 
-const InputWeek = () => {
-  return <input required type="week" />;
-};
+const InputWeek = () => <input required type="week" />;
 
 //weird
-const InputRadio = () => {
-  return (
-    <div>
-      <div className="space-x-2">
-        <input
-          checked
-          id="huey"
-          name="drone"
-          readOnly
-          type="radio"
-          value="huey"
-        />
-        <label htmlFor="huey">Huey</label>
-      </div>
-
-      <div className="space-x-2">
-        <input id="dewey" name="drone" type="radio" value="dewey" />
-        <label htmlFor="dewey">Dewey</label>
-      </div>
-
-      <div className="space-x-2">
-        <input id="louie" name="drone" type="radio" value="louie" />
-        <label htmlFor="louie">Louie</label>
-      </div>
+const InputRadio = () => (
+  <div>
+    <div className="space-x-2">
+      <input
+        checked
+        id="huey"
+        name="drone"
+        readOnly
+        type="radio"
+        value="huey"
+      />
+      <label htmlFor="huey">Huey</label>
     </div>
-  );
-};
 
-const InputPassword = () => {
-  return <input placeholder="Type password" type="password" />;
-};
+    <div className="space-x-2">
+      <input id="dewey" name="drone" type="radio" value="dewey" />
+      <label htmlFor="dewey">Dewey</label>
+    </div>
 
-const InputNumber = () => {
-  return (
-    <input id="tentacles" max="100" min="10" name="tentacles" type="number" />
-  );
-};
+    <div className="space-x-2">
+      <input id="louie" name="drone" type="radio" value="louie" />
+      <label htmlFor="louie">Louie</label>
+    </div>
+  </div>
+);
 
-const InputMonth = () => {
-  return <input id="start" name="start" type="month" />;
-};
+const InputPassword = () => (
+  <input placeholder="Type password" type="password" />
+);
 
-const InputEmail = () => {
-  return (
-    <input
-      id="email"
-      pattern=".+@globex\.com"
-      placeholder="me@email.com"
-      required
-      type="email"
-    />
-  );
-};
+const InputNumber = () => (
+  <input id="tentacles" max="100" min="10" name="tentacles" type="number" />
+);
 
-const InputFile = () => {
-  return <input accept="image/png, image/jpeg" name="Upload" type="file" />;
-};
+const InputMonth = () => <input id="start" name="start" type="month" />;
 
-const InputSearch = () => {
-  return <input placeholder="Search" type="search" />;
-};
+const InputEmail = () => (
+  <input
+    id="email"
+    pattern=".+@globex\.com"
+    placeholder="me@email.com"
+    required
+    type="email"
+  />
+);
+
+const InputFile = () => (
+  <input accept="image/png, image/jpeg" name="Upload" type="file" />
+);
+
+const InputSearch = () => <input placeholder="Search" type="search" />;
 
 //You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.
 const InputDate = () => {
@@ -211,23 +189,17 @@ const InputDate = () => {
   );
 };
 
-const InputButton = () => {
-  return <input type="button" value="Click me" />;
-};
+const InputButton = () => <input type="button" value="Click me" />;
 
-const InputReset = () => {
-  return (
-    <form className="flex flex-col space-y-2">
-      <input name="id" placeholder="Type something" type="text" />
-      <input type="reset" value="Reset" />
-      <input type="submit" value="Submit" />
-    </form>
-  );
-};
+const InputReset = () => (
+  <form className="flex flex-col space-y-2">
+    <input name="id" placeholder="Type something" type="text" />
+    <input type="reset" value="Reset" />
+    <input type="submit" value="Submit" />
+  </form>
+);
 
-const InputCheckbox = () => {
-  return <input type="checkbox" value="Click me" />;
-};
+const InputCheckbox = () => <input type="checkbox" value="Click me" />;
 
 const InputColor = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

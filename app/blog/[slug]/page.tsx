@@ -2,11 +2,8 @@ import { allBlogs } from "@content-collections";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
-import Balancer from "react-wrap-balancer";
 import BackButton from "@/components/BackButton";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { Mdx } from "@/components/mdx";
-import LeftBar from "./LeftBar";
+import MDX from "@/components/mdx";
 import TableOfContents from "./TableOfContent";
 
 export function generateStaticParams() {
@@ -21,7 +18,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const blog = allBlogs.find((blog) => blog.slug === slug);
+  const blog = allBlogs.find((entry) => entry.slug === slug);
 
   if (!blog) {
     return {};
@@ -154,7 +151,7 @@ export default async function Blog({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = allBlogs.find((blog) => blog.slug === slug);
+  const blog = allBlogs.find((each) => each.slug === slug);
 
   if (!blog) {
     notFound();
@@ -164,17 +161,14 @@ export default async function Blog({
 
   return (
     <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
-      <LeftBar />
+      {/*<LeftBar />*/}
       <Content>
-        <Breadcrumbs />
-        <div className="my-5">
+        <div className="mt-5 mb-10">
           <BackButton href="/blog" name="All Articles" />
         </div>
-        <script suppressHydrationWarning type="application/ld+json">
-          {JSON.stringify(blog.structuredData)}
-        </script>
-        <h1 className="font-bold text-2xl tracking-tighter">
-          <Balancer>{blog.title}</Balancer>
+
+        <h1 className="font-bold text-2xl text-zinc-800 tracking-tighter sm:text-3xl">
+          {blog.title}
         </h1>
         <div className="mt-2 mb-8 flex items-center text-sm">
           <p>{formatDate(blog.publishedAt)}</p>
@@ -183,18 +177,16 @@ export default async function Blog({
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
           <p>{Math.ceil(blog.wordCount / 200)} Min Read</p>
         </div>
-        <Mdx html={html} />
+        <MDX html={html} />
       </Content>
-      <TableOfContents
-        title={blog.title.toLocaleLowerCase().split(" ").join("-")}
-      />
+      <TableOfContents slug={blog.slug} />
     </div>
   );
 }
 
 function Content({ children }: { children: React.ReactNode }) {
   return (
-    <section className="border-zinc-200 pb-5 sm:col-span-3 sm:border-r sm:border-b sm:px-5">
+    <section className="border-zinc-200 pb-5 sm:col-span-4 sm:border-r sm:pr-5 sm:pl-2">
       {children}
     </section>
   );

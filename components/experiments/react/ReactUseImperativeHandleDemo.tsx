@@ -1,28 +1,45 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import {
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type Ref,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import SubTitle from "@/components/SubTitle";
 
-// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
-const MyInput = forwardRef(function MyInput(props, ref: any) {
+interface MyInputHandle {
+  focus: () => void;
+  scrollIntoView: () => void;
+}
+
+type MyInputProps = InputHTMLAttributes<HTMLInputElement> & {
+  ref?: Ref<MyInputHandle>;
+};
+
+const MyInput = function MyInput({ ref, ...props }: MyInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useImperativeHandle(ref, () => {
-    return {
+  useImperativeHandle(
+    ref,
+    () => ({
       focus() {
         inputRef.current?.focus();
       },
       scrollIntoView() {
         inputRef.current?.scrollIntoView();
       },
-    };
-  }, []);
+    }),
+    []
+  );
 
   return <input {...props} ref={inputRef} type="text" />;
-});
+};
 
 function SomeApp() {
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<MyInputHandle>(null);
 
   function handleClick(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -40,27 +57,44 @@ function SomeApp() {
   );
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
-const AddComments = forwardRef(function AddComents(ref: any) {
+type AddCommentsProps = InputHTMLAttributes<HTMLInputElement> & {
+  ref?: Ref<HTMLInputElement>;
+};
+
+const AddComments = function AddComents({ ref, ..._props }: AddCommentsProps) {
   return <input placeholder="yada yada" ref={ref} type="text" />;
-});
+};
 
-// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
-const CommentsList = forwardRef(function CommentList(ref: any) {
-  // biome-ignore lint/suspicious/noExplicitAny: ref type needs to be flexible for imperative handle
-  const divRef = useRef<any>(null);
+interface CommentsListHandle {
+  scrollToBottom: () => void;
+}
 
-  useImperativeHandle(ref, () => {
-    return {
+interface CommentsListProps {
+  ref?: Ref<CommentsListHandle>;
+}
+
+const CommentsList = function CommentList({
+  ref,
+  ..._props
+}: CommentsListProps) {
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useImperativeHandle(
+    ref,
+    () => ({
       scrollToBottom() {
         const node = divRef.current;
+        if (!node) {
+          return;
+        }
         node.scrollTop = node.scrollHeight;
       },
-    };
-  }, []);
+    }),
+    []
+  );
 
-  const comments: React.ReactNode[] = [];
-  for (let i = 0; i < 50; i++) {
+  const comments: ReactNode[] = [];
+  for (let i = 0; i < 50; i += 1) {
     comments.push(<p key={i}>Comment #{i}</p>);
   }
 
@@ -69,11 +103,18 @@ const CommentsList = forwardRef(function CommentList(ref: any) {
       {comments}
     </div>
   );
-});
+};
 
-// biome-ignore lint/suspicious/noExplicitAny: forwardRef requires any for ref parameter type
-const Post = forwardRef(function Post(props, ref: any) {
-  const commentListRef = useRef<unknown>(null);
+interface PostHandle {
+  scrollAndFocusAddComment: () => void;
+}
+
+type PostProps = HTMLAttributes<HTMLDivElement> & {
+  ref?: Ref<PostHandle>;
+};
+
+const Post = function Post({ ref, ...props }: PostProps) {
+  const commentListRef = useRef<CommentsListHandle>(null);
   const addCommentRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => {
     return {
@@ -90,11 +131,10 @@ const Post = forwardRef(function Post(props, ref: any) {
       <AddComments ref={addCommentRef} />
     </div>
   );
-});
+};
 
 function Yada() {
-  // biome-ignore lint/suspicious/noExplicitAny: ref type needs to be flexible for imperative handle
-  const buttonRef = useRef<any>(null);
+  const buttonRef = useRef<PostHandle>(null);
   function handleClick() {
     buttonRef.current?.scrollAndFocusAddComment();
   }

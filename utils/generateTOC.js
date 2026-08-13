@@ -1,22 +1,23 @@
 import fs from "node:fs";
 
+const REGEX = /^(#+)\s+(.+)$/;
+
 export default function generateTOC(mdxFilePath) {
   try {
     const mdxContent = fs.readFileSync(mdxFilePath, "utf-8");
-    const headings = [];
+    const titles = [];
 
-    mdxContent.split("\n").forEach((line) => {
-      const match = line.match(/^(#+)\s+(.+)$/);
+    for (const line of mdxContent.split("\n")) {
+      const match = line.match(REGEX);
       if (!match) {
-        return;
+        continue;
       }
 
-      const [, hashes, title] = match;
-      const level = hashes.length;
-      headings.push({ level, title: title.trim() });
-    });
+      const [, , title] = match;
+      titles.push(title.trim().toLowerCase());
+    }
 
-    return headings.map(({ title }) => title.toLowerCase());
+    return titles;
   } catch (error) {
     console.error(`Error reading MDX file: ${error.message}`);
     return [];

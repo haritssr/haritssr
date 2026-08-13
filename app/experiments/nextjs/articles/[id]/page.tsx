@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post: Post = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${id}`,
     { cache: "force-cache" }
-  ).then((post) => post.json());
+  ).then((response) => response.json());
 
   return {
     title: post.title,
@@ -28,7 +28,7 @@ export default async function ArticlePage({ params }: Props) {
   const post: Post = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${id}`,
     { cache: "force-cache" }
-  ).then((post) => post.json());
+  ).then((response) => response.json());
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
@@ -44,7 +44,7 @@ export default async function ArticlePage({ params }: Props) {
 export async function generateStaticParams() {
   const posts: Post[] = await fetch(
     "https://jsonplaceholder.typicode.com/posts/?_limit=20"
-  ).then((post) => post.json());
+  ).then((response) => response.json());
 
   return posts.map((post) => ({
     id: post.id.toString(),

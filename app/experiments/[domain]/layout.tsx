@@ -13,8 +13,8 @@ export async function generateMetadata({
     .join(" ");
 
   return {
-    title: `${title} Experiments`,
     description: `${title} experiments and demos`,
+    title: `${title} Experiments`,
   };
 }
 

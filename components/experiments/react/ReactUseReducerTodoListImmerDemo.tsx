@@ -179,9 +179,11 @@ function IndividualTask({ task, onChange, onDelete }: IndividualTaskProps) {
 export default function ReactUseReducerTodoListImmerDemo() {
   const [tasks, dispatch] = useImmerReducer(tasksReducer, initialTask);
   function handleAddTask(text: string) {
+    const id = nextId;
+    nextId += 1;
     dispatch({
       type: "added",
-      id: nextId++,
+      id,
       text,
     });
   }

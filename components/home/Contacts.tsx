@@ -1,24 +1,23 @@
 import Image from "next/image";
-import InternalLink from "@/components/InternalLink";
 import ContactList from "../ContactList";
 
 export default function Contacts() {
   return (
-    <section className="mb-16 grid grid-cols-1 gap-8 pt-5 md:items-center md:gap-5 lg:grid-cols-4">
-      <section className="corner-squircle grid grid-cols-1 gap-5 rounded-2xl border-zinc-300 sm:grid-cols-2 sm:gap-0 md:mb-0 lg:col-span-2 lg:h-full lg:border">
+    <section className="mb-16 grid grid-cols-1 gap-5 pt-5 md:items-center lg:grid-cols-4">
+      <section className="corner-squircle grid grid-cols-1 gap-3 rounded-2xl border-zinc-300 sm:grid-cols-2 sm:gap-0 md:mb-0 md:gap-5 lg:col-span-2 lg:h-full lg:border">
         <div className="flex flex-col self-center">
           <section className="flex select-none justify-center">
             <Image
               alt="Harits Syah"
               blurDataURL="/images/blur.jpg"
-              className="z-10 mb-4 aspect-ratio h-32 w-32 rounded-full"
-              height="165"
+              className="z-10 mb-4 aspect-ratio h-24 w-24 rounded-full"
+              height="100"
               priority
               src="/images/blur.jpg"
-              width="165"
+              width="100"
             />
           </section>
-          <div className="text-center font-semibold text-xl text-zinc-800">
+          <div className="text-center font-semibold text-lg text-zinc-800">
             Harits Syah
           </div>
         </div>
@@ -132,9 +131,6 @@ export default function Contacts() {
             >
               South Tangerang, Indonesia
             </a>
-          </div>
-          <div className="grid grid-cols-3 py-2 pl-3.5">
-            <InternalLink href="/about">More</InternalLink>
           </div>
         </div>
       </section>

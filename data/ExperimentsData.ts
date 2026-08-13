@@ -6,10 +6,8 @@
 
 export const ExperimentsData = [
   {
-    id: 1,
-    title: "Tailwind CSS",
-    logoSrc: "/Icons/tailwindcss.jpg",
     description: "CSS library for styling websites",
+    id: 1,
     links: [
       "Position",
       "Apple NavBar",
@@ -26,12 +24,12 @@ export const ExperimentsData = [
       "Tailwind vs Apple Color",
       "Feedback",
     ],
+    logoSrc: "/Icons/tailwindcss.jpg",
+    title: "Tailwind CSS",
   },
   {
-    id: 2,
-    title: "React",
-    logoSrc: "/Icons/react.jpg",
     description: "JavaScript library for building user interfaces",
+    id: 2,
     links: [
       "useState Todo List",
       "useState Form",
@@ -58,13 +56,15 @@ export const ExperimentsData = [
       "React Wrap Balancer",
       "Modal Inside Modal",
       "Confetti",
+      "Simple Search",
+      "Activity Demo",
     ],
+    logoSrc: "/Icons/react.jpg",
+    title: "React",
   },
   {
-    id: 3,
-    title: "Nextjs",
-    logoSrc: "/Icons/nextjs.jpg",
     description: "The React framework for the web",
+    id: 3,
     links: [
       "Router",
       "SWR",
@@ -74,12 +74,12 @@ export const ExperimentsData = [
       "Next 13 Image Local",
       "Next 13 Image Remote",
     ],
+    logoSrc: "/Icons/nextjs.jpg",
+    title: "Nextjs",
   },
   {
-    id: 4,
-    title: "Browser",
-    logoSrc: "/Icons/chrome.jpg",
     description: "Native built-in browser API utilities exploration",
+    id: 4,
     links: [
       "Clock",
       "Number game",
@@ -95,26 +95,26 @@ export const ExperimentsData = [
       "Custom Scroll",
       "Different CSS Styling",
     ],
+    logoSrc: "/Icons/chrome.jpg",
+    title: "Browser",
   },
   {
-    id: 5,
-    title: "VisX",
-    logoSrc: "/Icons/VisX.jpg",
     description: "Data visualization using React.js",
+    id: 5,
     links: ["Bar Chart", "Pie Chart"],
+    logoSrc: "/Icons/VisX.jpg",
+    title: "VisX",
   },
   {
-    id: 7,
-    title: "Mantine",
-    logoSrc: "/Icons/mantine.jpg",
     description: "A fully featured React component libray",
+    id: 7,
     links: ["Carousel"],
+    logoSrc: "/Icons/mantine.jpg",
+    title: "Mantine",
   },
   {
-    id: 8,
-    title: "Headless UI",
-    logoSrc: "/Icons/headlessui.jpg",
     description: "Headless UI components by Tailwind CSS Team",
+    id: 8,
     links: [
       "Menu",
       "Listbox",
@@ -125,12 +125,12 @@ export const ExperimentsData = [
       "Radio Group",
       "Tabs",
     ],
+    logoSrc: "/Icons/headlessui.jpg",
+    title: "Headless UI",
   },
   {
-    id: 9,
-    title: "Radix UI",
-    logoSrc: "/Icons/radixui.jpg",
     description: "Headless UI for design system in React.js",
+    id: 9,
     links: [
       "Accordion",
       "Alert Dialog",
@@ -152,67 +152,61 @@ export const ExperimentsData = [
       "Toast",
       "Tabs",
     ],
+    logoSrc: "/Icons/radixui.jpg",
+    title: "Radix UI",
   },
 
   {
-    id: 10,
-    title: "UI Explorations",
-    logoSrc: "/Icons/radixui.jpg",
     description: "Random user interfaces explorations",
-    links: ["Notion NavBar"],
+    id: 10,
+    links: [
+      "Notion NavBar",
+      "Pure",
+      "Times Table",
+      "Inline Maki",
+      "Task",
+      "Yearly Interest",
+      "Input List",
+      "Stopwatch",
+    ],
+    logoSrc: "/Icons/radixui.jpg",
+    title: "UI Explorations",
   },
   {
-    id: 11,
-    title: "Haris Lab",
-    logoSrc: "/Icons/harislab.svg",
     description: "Haris Lab user interfaces design systems",
+    id: 11,
     links: ["Global Modal", "Context Modal", "Side Bar", "Sidebar Hierarchy"],
+    logoSrc: "/Icons/harislab.svg",
+    title: "Haris Lab",
   },
   {
-    id: 12,
-    title: "React Aria",
-    logoSrc: "/Icons/react-aria.jpg",
     description: "A library of React Hooks, UI primitives, and more",
+    id: 12,
     links: ["Calendar"],
+    logoSrc: "/Icons/react-aria.jpg",
+    title: "React Aria",
   },
   {
-    id: 13,
-    title: "KaTeX",
-    logoSrc: "/Icons/KaTeX.jpg",
     description: "The math typesetting library for the web",
+    id: 13,
     links: ["Basic"],
+    logoSrc: "/Icons/KaTeX.jpg",
+    title: "KaTeX",
   },
   {
-    id: 14,
-    title: "React Table",
-    logoSrc: "/Icons/tanstack.jpg",
     description: "Headless UI for building tables & datagrids",
-    links: ["Basic", "Column Group", "Column Ordering", "Column Pinning"],
+    id: 14,
+    links: ["Basic", "Column Group"],
+    logoSrc: "/Icons/tanstack.jpg",
+    title: "React Table",
   },
   {
-    id: 15,
-    title: "React Query",
-    logoSrc: "/Icons/tanstack.jpg",
     description: "Asynchronous state management for TS/JS",
+    id: 15,
     links: ["Basic"],
+    logoSrc: "/Icons/tanstack.jpg",
+    title: "React Query",
   },
 ];
 
-// console.log(sizeof(ExperimentsData));
-
 export type ExperimentsData = (typeof ExperimentsData)[0];
-
-export const TailwindCSSData = ExperimentsData[0];
-export const ReactData = ExperimentsData[1];
-export const NextjsData = ExperimentsData[2];
-export const BrowserData = ExperimentsData[3];
-export const VisXData = ExperimentsData[4];
-export const MantineData = ExperimentsData[5];
-export const HeadlessUIData = ExperimentsData[6];
-export const RadixUIData = ExperimentsData[7];
-export const UIExplorationData = ExperimentsData[8];
-export const HarisLabData = ExperimentsData[9];
-export const ReactAriaData = ExperimentsData[10];
-export const KaTeXData = ExperimentsData[11];
-export const ReactTableData = ExperimentsData[12];
-export const ReactQueryData = ExperimentsData[13];

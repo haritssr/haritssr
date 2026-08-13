@@ -22,9 +22,9 @@ function RouterDemoContent() {
   const [inputValue, setInputValue] = useState("");
 
   // Get current query params
-  const currentQuery = searchParams?.toString() || "";
+  const currentQuery = searchParams.toString() || "";
   const queryObj: Record<string, string> = {};
-  searchParams?.forEach((value, key) => {
+  searchParams.forEach((value, key) => {
     queryObj[key] = value;
   });
 
@@ -33,7 +33,7 @@ function RouterDemoContent() {
   // Navigation handlers
   const handlePush = useCallback(() => {
     if (inputValue) {
-      const params = new URLSearchParams(searchParams?.toString());
+      const params = new URLSearchParams(searchParams.toString());
       params.set("q", inputValue);
       router.push(`${pathname}?${params.toString()}`);
     }
@@ -41,7 +41,7 @@ function RouterDemoContent() {
 
   const handleReplace = useCallback(() => {
     if (inputValue) {
-      const params = new URLSearchParams(searchParams?.toString());
+      const params = new URLSearchParams(searchParams.toString());
       params.set("replace", inputValue);
       router.replace(`${pathname}?${params.toString()}`);
     }
@@ -156,7 +156,7 @@ function RouterDemoContent() {
       </p>
       <div className="flex flex-wrap gap-2">
         <a
-          className="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100"
+          className="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-blue-700 text-sm hover:bg-blue-100"
           href="/experiments"
         >
           Go to Experiments (regular anchor)

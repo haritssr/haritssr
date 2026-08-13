@@ -37,16 +37,14 @@ const Wrapper = ({
   parent: string;
   child: string;
   children: React.ReactNode;
-}) => {
-  return (
-    <div className="text-zinc-500">
-      <div>
-        <span className="font-semibold text-zinc-800">Parent</span> : {parent}
-      </div>
-      <div className="mb-2">
-        <span className="font-semibold text-zinc-800">Child</span> : {child}
-      </div>
-      {children}
+}) => (
+  <div className="text-zinc-500">
+    <div>
+      <span className="font-semibold text-zinc-800">Parent</span> : {parent}
     </div>
-  );
-};
+    <div className="mb-2">
+      <span className="font-semibold text-zinc-800">Child</span> : {child}
+    </div>
+    {children}
+  </div>
+);

@@ -17,7 +17,7 @@ export default function ReactCmdkDemo() {
     }) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setOpen((isOpen) => !isOpen);
       }
     };
 

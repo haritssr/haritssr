@@ -1,25 +1,20 @@
-import Link from "next/link";
-import CopyLinkAllPage from "./CopyLinkAllPage";
+import Share from "./Share";
 
 export default function Footer() {
   return (
-    <footer className="relative mx-auto mt-20 flex max-w-5xl flex-col items-center space-y-2 px-8 py-3 text-[12px] sm:flex-row sm:justify-between sm:space-y-0 sm:py-5 sm:text-tiny xl:px-0">
-      <section>
-        <div className="text-zinc-400">
-          haritssr.com &#169;{" "}
-          <span className="text-[12px] sm:text-tiny">
-            {" "}
-            2021–{new Date().getFullYear()}
-          </span>{" "}
-          by{" "}
-          <Link className="hover:text-zinc-800" href="/about">
-            Harits Syah
-          </Link>
-        </div>
-      </section>
-      <section>
-        <CopyLinkAllPage />
-      </section>
+    <footer className="mx-auto flex max-w-5xl justify-between px-5 py-2 text-sm xl:px-0">
+      <div className="text-zinc-400">
+        <span className=""> 2021–{new Date().getFullYear()}</span> &#169; by{" "}
+        <a
+          className="hover:text-zinc-800"
+          href="https://x.com/haritssr"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Harits Syah
+        </a>
+      </div>
+      <Share />
     </footer>
   );
 }

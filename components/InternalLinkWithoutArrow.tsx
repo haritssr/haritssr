@@ -13,6 +13,7 @@ export default function InternalLinkWithoutArrow({
     <Link
       className={`cursor-pointer text-action hover:underline ${block ? "block" : "inline"}`}
       href={href}
+      prefetch={false}
     >
       <p className="inline truncate">{name}</p>
     </Link>

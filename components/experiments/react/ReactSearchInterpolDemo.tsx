@@ -7,22 +7,22 @@ import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 //type generate automatically via app.quicktype.io
-export interface Notice {
-  forename: string;
+interface Notice {
+  _links: Links;
   date_of_birth: string;
   entity_id: string;
-  nationalities: string[];
+  forename: string;
   name: string;
-  _links: Links;
+  nationalities: string[];
 }
 
-export interface Links {
-  self: Images;
+interface Links {
   images: Images;
+  self: Images;
   thumbnail: Images;
 }
 
-export interface Images {
+interface Images {
   href: string;
 }
 
@@ -98,12 +98,12 @@ export default function ReactSearchInterpolDemo() {
         type="search"
       />
 
-      {loading && <div>Loading...</div>}
+      {!!loading && <div>Loading...</div>}
       <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-4">
         {notices.map((notice) => (
           <div key={notice.entity_id}>
             {/* Conditionally show image if the 'notices' have a href (src attribute of img) */}
-            {notice._links.thumbnail?.href && (
+            {!!notice._links.thumbnail?.href && (
               <div>
                 <Image
                   alt={notice.name}

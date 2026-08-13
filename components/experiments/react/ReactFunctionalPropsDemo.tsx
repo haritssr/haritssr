@@ -37,8 +37,8 @@ function List<ListItem>({
 }) {
   return (
     <ul className={className}>
-      {items.map((item, index) => (
-        <li key={`${index}${item}`}>{render(item)}</li>
+      {items.map((item) => (
+        <li key={String(item)}>{render(item)}</li>
       ))}
     </ul>
   );

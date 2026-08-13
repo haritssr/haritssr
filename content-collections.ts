@@ -1,24 +1,25 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
 
+const REGEX_SPACE = /\s+/;
+
 // Word count utility
 function countWords(content: string): number {
-  const words = content.split(/\s+/).filter((word) => word.length > 0);
+  const words = content.split(REGEX_SPACE).filter((word) => word.length > 0);
   return words.length;
 }
 
 const blogs = defineCollection({
-  name: "blogs",
   directory: "content",
   include: "**/*.mdx",
+  name: "blogs",
   schema: z.object({
-    title: z.string(),
+    content: z.string(),
+    image: z.string().optional(),
     publishedAt: z.string(),
     summary: z.string(),
+    title: z.string(),
     topic: z.string(),
-    notionPageId: z.string(),
-    image: z.string().optional(),
-    content: z.string(),
   }),
   transform: (document) => {
     const wordCount = countWords(document.content);
@@ -26,29 +27,29 @@ const blogs = defineCollection({
     return {
       ...document,
       slug: document._meta.path,
-      wordCount,
       structuredData: {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        headline: document.title,
-        datePublished: document.publishedAt,
-        dateModified: document.publishedAt,
-        description: document.summary,
-        topic: document.topic,
-        wordCount,
-        image: document.image
-          ? `https://haritssr.com${document.image}`
-          : `https://haritssr.com/og?title=${document.title}`,
-        url: `https://haritssr.com/blog/${document._meta.path}`,
         author: {
           "@type": "Person",
           name: "Harits Syah",
         },
+        dateModified: document.publishedAt,
+        datePublished: document.publishedAt,
+        description: document.summary,
+        headline: document.title,
+        image: document.image
+          ? `https://haritssr.com${document.image}`
+          : `https://haritssr.com/og?title=${document.title}`,
+        topic: document.topic,
+        url: `https://haritssr.com/blog/${document._meta.path}`,
+        wordCount,
       },
+      wordCount,
     };
   },
 });
 
 export default defineConfig({
-  collections: [blogs],
+  content: [blogs],
 });

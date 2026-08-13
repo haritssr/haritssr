@@ -41,13 +41,13 @@ function NameInputAddress({
   );
 }
 
-const Greeting = memo(function Greeting({ name }: { name: string }) {
+const Greeting = memo(function GreetingMemo({ name }: { name: string }) {
   console.log("Greeting was rendered at", new Date().toLocaleTimeString());
   const [greeting, setGreeting] = useState("Hello");
   return (
     <>
       <h3>
-        {greeting} {name && ","}
+        {greeting} {!!name && ","}
         {name}!
       </h3>
       <GreetingSelector onChange={setGreeting} value={greeting} />
@@ -103,7 +103,11 @@ function ThemeYeah({ name }: { name: string }) {
   );
 }
 
-const GreetingTheme = memo(function GreetingTheme({ name }: { name: string }) {
+const GreetingTheme = memo(function GreetingThemeMemo({
+  name,
+}: {
+  name: string;
+}) {
   console.log(
     "Greeting Theme was rendered at",
     new Date().toLocaleDateString()
@@ -111,7 +115,7 @@ const GreetingTheme = memo(function GreetingTheme({ name }: { name: string }) {
   const theme = useContext(ThemeContext);
   return (
     <h3 className={`${theme} rounded p-1`}>
-      Hello{name && ","} {name}!
+      Hello{!!name && ","} {name}!
     </h3>
   );
 });

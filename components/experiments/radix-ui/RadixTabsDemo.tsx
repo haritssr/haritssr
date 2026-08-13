@@ -26,7 +26,7 @@ export default function RadixTabsDemo() {
   );
 }
 
-export const TabsDemo = () => (
+const TabsDemo = () => (
   <Tabs.Root className="flex w-[300px] flex-col" defaultValue="tab1">
     <Tabs.List
       aria-label="Manage your account"

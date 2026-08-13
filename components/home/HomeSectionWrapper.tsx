@@ -7,28 +7,31 @@ export default function HomeSectionWrapper({
   className,
   children,
   id,
-  explanation,
+  isTitleLink = true,
 }: {
   topic: string;
   className?: string;
   children: React.ReactNode;
   id: string;
-  explanation: string;
+  isTitleLink?: boolean;
 }) {
   return (
     <div id={id}>
       <section className="flex items-center justify-between">
-        <Link
-          className="select-none font-semibold text-2xl text-zinc-800 hover:underline"
-          href={`/${id}`}
-        >
-          {topic}
-        </Link>
+        {isTitleLink ? (
+          <Link
+            className="mb-6 select-none font-semibold text-3xl text-zinc-800 hover:underline"
+            href={`/${id}`}
+          >
+            {topic}
+          </Link>
+        ) : (
+          <h2 className="mb-6 select-none font-semibold text-3xl text-zinc-800">
+            {topic}
+          </h2>
+        )}
       </section>
-      <div className="mb-16">
-        <div className="mt-3 mb-5 select-none text-lg text-zinc-500">{explanation}</div>
-        <div className={className}>{children}</div>
-      </div>
+      <div className={`mb-16 ${className}`}>{children}</div>
     </div>
   );
 }

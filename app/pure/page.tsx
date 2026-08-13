@@ -23,8 +23,9 @@ import Box from "@/components/Box";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
+import PageDescription from "@/components/PageDescription";
+import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
-import { PageTitle } from "@/components/SubTitle";
 
 // import { Metadata } from "next";
 // can't do this, since metadata only possible on server, and this /pure is client, see "use client"
@@ -34,6 +35,12 @@ import { PageTitle } from "@/components/SubTitle";
 // 	description: "Design system used in haritssr.com Haris Studio and Haris Lab",
 // };
 
+function oneWeekAway() {
+  const now = new Date();
+  const inOneWeek = now.setDate(now.getDate() + 7);
+  return new Date(inOneWeek);
+}
+
 export default function DesignSystem() {
   const [pressed, setPressed] = useState(false);
 
@@ -42,15 +49,16 @@ export default function DesignSystem() {
   const [open, setOpen] = React.useState(false);
   const eventDateRef = React.useRef(new Date());
   const timerRef = React.useRef(0);
-  React.useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, []);
+  React.useEffect(() => () => clearTimeout(timerRef.current), []);
 
-  function oneWeekAway() {
-    const now = new Date();
-    const inOneWeek = now.setDate(now.getDate() + 7);
-    return new Date(inOneWeek);
-  }
+  const handleShowToast = React.useCallback(() => {
+    setOpen(false);
+    window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => {
+      eventDateRef.current = oneWeekAway();
+      setOpen(true);
+    }, 100);
+  }, []);
   // -----------------------------------------------------
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -62,7 +70,8 @@ export default function DesignSystem() {
   }
   return (
     <>
-      <PageTitle
+      <PageTitle title="Pure Design System" />
+      <PageDescription
         description={
           <>
             Design system used in{" "}
@@ -83,10 +92,9 @@ export default function DesignSystem() {
               href="https://www.harislab.com"
               name="Haris Lab"
             />
-            .
+            . (No longer maintained).
           </>
         }
-        title="Pure Design System"
       />
       <Section name="Design Principles" />
       <ExplanationList>
@@ -303,14 +311,7 @@ export default function DesignSystem() {
           <Toast.Provider swipeDirection="right">
             <button
               className="rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
-              onClick={() => {
-                setOpen(false);
-                window.clearTimeout(timerRef.current);
-                timerRef.current = window.setTimeout(() => {
-                  eventDateRef.current = oneWeekAway();
-                  setOpen(true);
-                }, 100);
-              }}
+              onClick={handleShowToast}
               type="button"
             >
               Show Toast
@@ -322,7 +323,7 @@ export default function DesignSystem() {
               open={open}
             >
               <div className="">
-                <Toast.Title className="mb-[5px] font-medium text-[15px] text-slate12 [grid-area:title]">
+                <Toast.Title className="mb-1.25 font-medium text-[15px] text-slate12 [grid-area:title]">
                   Hai, I am Toast!
                 </Toast.Title>
                 <Toast.Description asChild>
@@ -335,7 +336,7 @@ export default function DesignSystem() {
                 OK
               </Toast.Close>
             </Toast.Root>
-            <Toast.Viewport className="fixed right-0 bottom-0 z-2147483647 m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-[10px] p-3 outline-hidden sm:p-6" />
+            <Toast.Viewport className="fixed right-0 bottom-0 z-2147483647 m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-2.5 p-3 outline-hidden sm:p-6" />
           </Toast.Provider>
         </Box>
         <Box title="Internal Link">
@@ -374,7 +375,7 @@ export default function DesignSystem() {
         </Box>
         <Box title="Button: Primary">
           <button
-            className="select-none rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
+            className="select-none rounded-md bg-action px-3 py-1 text-white hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
             type="button"
           >
             Button
@@ -382,7 +383,7 @@ export default function DesignSystem() {
         </Box>
         <Box title="Button: Loading">
           <button
-            className="select-none rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
+            className="select-none rounded-md bg-action px-3 py-1 text-white hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
             onClick={handleClick}
             type="button"
           >
@@ -584,9 +585,7 @@ export default function DesignSystem() {
         <Box title="Toggle">
           <Toggle.Root
             className="select-none rounded-md bg-white px-3 py-1 text-zinc-800 shadow ring-1 hover:bg-zinc-50 focus:outline-hidden focus:ring-action data-[state=on]:text-action data-[state=on]:shadow-blue-100 data-[state=off]:ring-zinc-950/20 data-[state=on]:ring-blue-300"
-            onPressedChange={() => {
-              setPressed(!pressed);
-            }}
+            onPressedChange={setPressed}
             pressed={pressed}
           >
             {pressed ? "State : ON" : "State : OFF"}
@@ -684,17 +683,17 @@ export default function DesignSystem() {
             </Dialog.Trigger>
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 bg-blackA9" />
-              <Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md border border-zinc-300 bg-white p-[25px] shadow-lg focus:outline-hidden">
+              <Dialog.Content className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-112.5 translate-x-[-50%] translate-y-[-50%] rounded-md border border-zinc-300 bg-white p-6.25 shadow-lg focus:outline-hidden">
                 <Dialog.Title className="font-medium text-base text-zinc-800">
                   Title
                 </Dialog.Title>
-                <Dialog.Description className="mt-[10px] mb-5 text-[15px] text-mauve11 leading-normal">
+                <Dialog.Description className="mt-2.5 mb-5 text-[15px] text-mauve11 leading-normal">
                   Description
                 </Dialog.Description>
                 <div className="flex h-24 items-center justify-center">
                   Some content
                 </div>
-                <div className="mt-[25px] flex justify-end space-x-2">
+                <div className="mt-6.25 flex justify-end space-x-2">
                   <Dialog.Close asChild>
                     <button
                       className="select-none rounded border border-zinc-300 bg-zinc-100 px-3 py-1 font-medium text-zinc-800 hover:bg-zinc-200/70 active:ring-1 active:ring-zinc-500 active:ring-offset-1"
@@ -715,7 +714,7 @@ export default function DesignSystem() {
                 <Dialog.Close asChild>
                   <button
                     aria-label="Close"
-                    className="absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full text-violet11 hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 focus:outline-hidden"
+                    className="absolute top-2.5 right-2.5 inline-flex h-6.25 w-6.25 appearance-none items-center justify-center rounded-full text-violet11 hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 focus:outline-hidden"
                     type="button"
                   >
                     <Cross2Icon />

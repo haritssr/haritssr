@@ -5,6 +5,7 @@ import { remark } from "remark";
 import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "/data/postsData");
+const REGEX_STRING_ENDING_MD = /\.md$/;
 
 export function getSortedPostsData() {
   // Get file names under /posts as an array
@@ -13,7 +14,7 @@ export function getSortedPostsData() {
   //Mapping the fileNames array into [{id, ...matterResult.data}, ... ]
   const allPostsData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, "");
+    const id = fileName.replace(REGEX_STRING_ENDING_MD, "");
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
@@ -57,13 +58,11 @@ export function getAllPostIds() {
   //     }
   //   }
   // ]
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ""),
-      },
-    };
-  });
+  return fileNames.map((fileName) => ({
+    params: {
+      id: fileName.replace(REGEX_STRING_ENDING_MD, ""),
+    },
+  }));
 }
 
 // export function getPostData(id) {
@@ -97,8 +96,8 @@ export async function getPostData(id) {
 
   // Combine the data with the id and contentHtml
   return {
-    id,
     contentHtml,
+    id,
     ...matterResult.data,
   };
 }

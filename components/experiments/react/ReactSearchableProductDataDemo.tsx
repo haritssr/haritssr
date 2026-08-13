@@ -22,13 +22,11 @@ const productData: productDataType[] = [
   { category: "Vegetables", price: "$1", stocked: true, name: "Peas" },
 ];
 
-const ProductCategoryRow = ({ category }: { category: string }) => {
-  return (
-    <tr>
-      <th colSpan={2}>{category}</th>
-    </tr>
-  );
-};
+const ProductCategoryRow = ({ category }: { category: string }) => (
+  <tr>
+    <th colSpan={2}>{category}</th>
+  </tr>
+);
 
 const ProductRow = ({ product }: { product: productDataType }) => {
   const name = product.stocked ? (
@@ -57,16 +55,16 @@ const ProductTable = ({
   let lastCategory: string | null = null;
 
   // for (const product of products) {
-  products.forEach((product: productDataType) => {
+  for (const product of products) {
     //couldn't destructure product in as a '({caterogry, name, stocked} : productDataType)' in forEach callback parameter because <ProductRow/> below need 'product' variabel
     const { category, name, stocked } = product;
 
     if (name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
-      return;
+      continue;
     }
 
     if (inStockOnly && !stocked) {
-      return;
+      continue;
     }
 
     if (category !== lastCategory) {
@@ -75,8 +73,7 @@ const ProductTable = ({
 
     rows.push(<ProductRow key={name} product={product} />);
     lastCategory = category;
-  });
-  // products.forEach((product: productDataType) => {});
+  }
 
   return (
     <table className="rounded border p-2">
@@ -101,26 +98,24 @@ const SearchBarWithFilter = ({
   inStockOnly: boolean;
   onFilterTextChange: Dispatch<SetStateAction<string>>;
   onInStockOnlyChange: Dispatch<SetStateAction<boolean>>;
-}) => {
-  return (
-    <form className="flex w-fit flex-col gap-2">
+}) => (
+  <form className="flex w-fit flex-col gap-2">
+    <input
+      onChange={(e) => onFilterTextChange(e.target.value)}
+      placeholder="Search..."
+      type="text"
+      value={filterText}
+    />
+    <label className="text-sm text-zinc-400">
       <input
-        onChange={(e) => onFilterTextChange(e.target.value)}
-        placeholder="Search..."
-        type="text"
-        value={filterText}
-      />
-      <label className="text-sm text-zinc-400">
-        <input
-          checked={inStockOnly}
-          onChange={(e) => onInStockOnlyChange(e.target.checked)}
-          type="checkbox"
-        />{" "}
-        Only show products in stock
-      </label>
-    </form>
-  );
-};
+        checked={inStockOnly}
+        onChange={(e) => onInStockOnlyChange(e.target.checked)}
+        type="checkbox"
+      />{" "}
+      Only show products in stock
+    </label>
+  </form>
+);
 
 const FilterableProductTable = ({
   products,
