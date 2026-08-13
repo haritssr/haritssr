@@ -97,7 +97,6 @@ const experimentRoutes = [
   "/experiments/react/counter",
   "/experiments/react/edit-profile",
   "/experiments/react/font-mixer",
-  "/experiments/react/forwardrefexample",
   "/experiments/react/functional-props",
   "/experiments/react/generic-select",
   "/experiments/react/modal-inside-modal",

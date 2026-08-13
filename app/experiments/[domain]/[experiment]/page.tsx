@@ -72,7 +72,6 @@ import ReactConfetti from "@/components/experiments/react/ReactConfettiDemo";
 import ReactCounter from "@/components/experiments/react/ReactCounterDemo";
 import ReactEditProfile from "@/components/experiments/react/ReactEditProfileDemo";
 import ReactFontMixer from "@/components/experiments/react/ReactFontMixerDemo";
-import ReactForwardRef from "@/components/experiments/react/ReactForwardRefDemo";
 import ReactFunctionalProps from "@/components/experiments/react/ReactFunctionalPropsDemo";
 import ReactGenericSelect from "@/components/experiments/react/ReactGenericSelectDemo";
 import ReactModalInsideModal from "@/components/experiments/react/ReactModalInsideModalDemo";
@@ -235,7 +234,6 @@ const experimentComponents: Record<
     counter: ReactCounter,
     "edit-profile": ReactEditProfile,
     "font-mixer": ReactFontMixer,
-    forwardrefexample: ReactForwardRef,
     "functional-props": ReactFunctionalProps,
     "generic-select": ReactGenericSelect,
     "modal-inside-modal": ReactModalInsideModal,
