@@ -1,5 +1,9 @@
+import type { Metadata } from "next";
 import InternalLink from "@/components/InternalLink";
 import SubTitle from "@/components/SubTitle";
+import { getExperimentMetadata } from "@/data/ExperimentsData";
+
+export const metadata: Metadata = getExperimentMetadata("nextjs", "students");
 
 interface Student {
   id: number;

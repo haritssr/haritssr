@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
+import { getExperimentMetadata } from "@/data/ExperimentsData";
+
+export const metadata: Metadata = getExperimentMetadata("nextjs", "articles");
 
 interface Post {
   id: number;

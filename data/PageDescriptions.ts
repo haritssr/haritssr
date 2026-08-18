@@ -10,7 +10,7 @@ export function getExperimentsHomeDescription(): string {
   let totalExperiment = 0;
 
   for (const experiment of ExperimentsData) {
-    totalExperiment += experiment.links.length;
+    totalExperiment += experiment.experiments.length;
   }
 
   return `${totalExperiment} experiments across the TypeScript and React ecosystem.`;

@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import SubTitle from "@/components/SubTitle";
+import { getExperimentMetadata } from "@/data/ExperimentsData";
 import { getSortedPostsData } from "@/utils/posts.js";
+
+export const metadata: Metadata = getExperimentMetadata("nextjs", "posts");
 
 interface Post {
   id: string;

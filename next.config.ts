@@ -59,15 +59,6 @@ const nextConfig: NextConfig = {
     ];
   },
   reactStrictMode: false,
-  redirects() {
-    return [
-      {
-        destination: "/task",
-        permanent: true,
-        source: "/experiments/ui-explorations/task",
-      },
-    ];
-  },
   turbopack: {},
 };
 

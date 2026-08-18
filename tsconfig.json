@@ -19,6 +19,7 @@
     "jsx": "react-jsx",
     "paths": {
       "*": ["./*"],
+      "@/*": ["./*"],
       "@/components/*": ["./components/*"],
       "@/utils/*": ["./utils/*"],
       "@content-collections": ["./.content-collections/generated"]

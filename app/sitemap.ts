@@ -5,8 +5,6 @@ import { ExperimentsData } from "../data/ExperimentsData";
 import { ProjectsData } from "../data/ProjectsData";
 import { getAllPostIds } from "../utils/posts.js";
 
-// Matches every whitespace run in a title.
-// Example: "React Native" becomes "react-native" after replacement.
 const whitespaceSequencePattern = /\s+/g;
 
 const staticRoutes = [
@@ -22,34 +20,17 @@ const staticRoutes = [
   "/tools",
 ];
 
-function toSlug(value: string): string {
-  return value.toLowerCase().replace(whitespaceSequencePattern, "-");
-}
+const experimentRoutes = ExperimentsData.flatMap((domain) => {
+  const routes = domain.experiments
+    .filter((experiment) => !experiment.redirectTo)
+    .map((experiment) => `/experiments/${domain.slug}/${experiment.slug}`);
 
-const experimentRoutes = ExperimentsData.flatMap((experiment) => {
-  const domain = toSlug(experiment.title);
-  const routes = experiment.links
-    .filter((link) => {
-      // This route redirects to /task and should not appear in the sitemap.
-      if (experiment.title === "UI Explorations" && link === "Task") {
-        return false;
-      }
-
-      // This legacy entry no longer has a corresponding experiment component.
-      return !(experiment.title === "React" && link === "forwardRefExample");
-    })
-    .map((link) => `/experiments/${domain}/${toSlug(link)}`);
-
-  return [`/experiments/${domain}`, ...routes];
+  return [`/experiments/${domain.slug}`, ...routes];
 });
 
 const localPostRoutes = getAllPostIds().map(
   ({ params }) => `/experiments/nextjs/posts/${params.id}`
 );
-
-const additionalExperimentRoutes = [
-  "/experiments/react/react-use-reducer-july-2026",
-];
 
 const articleRoutes = Array.from(
   { length: 20 },
@@ -65,12 +46,12 @@ const routeUrls = Array.from(
   new Set([
     ...staticRoutes,
     ...experimentRoutes,
-    ...additionalExperimentRoutes,
     ...localPostRoutes,
     ...articleRoutes,
     ...studentRoutes,
     ...ProjectsData.map(
-      (project) => `/projects/${toSlug(project.project_name)}`
+      (project) =>
+        `/projects/${project.project_name.toLowerCase().replace(whitespaceSequencePattern, "-")}`
     ),
   ])
 ).map((route) => ({ url: `${SITE_URL}${route}` }));

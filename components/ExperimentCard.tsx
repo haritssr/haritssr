@@ -11,7 +11,7 @@ export default function ExperimentCard({
   return (
     <Link
       className="group corner-squircle space-y-1 rounded-2xl border border-zinc-300 px-3 py-2.5 hover:bg-zinc-50"
-      href={`/experiments/${experiment.title.toLowerCase().replace(" ", "-")}`}
+      href={`/experiments/${experiment.slug}`}
       key={experiment.id}
     >
       <div className="flex items-center justify-between">
@@ -30,7 +30,7 @@ export default function ExperimentCard({
         </div>
         <div className="flex items-center space-x-1">
           <div className="font-light text-sm text-zinc-400">
-            {experiment.links.length}
+            {experiment.experiments.length}
           </div>
           <ChevronRightIcon className="h-4 w-4 text-zinc-400" width={2.5} />
         </div>
