@@ -1,16 +1,16 @@
 {
   "name": "haritssr",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome check",
-    "test": "bun test",
-    "check": "ultracite check",
-    "fix": "ultracite fix"
-  },
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "build": "next build",
+    "check": "ultracite check",
+    "dev": "next dev",
+    "fix": "ultracite fix",
+    "lint": "ultracite check",
+    "start": "next start",
+    "test": "bun test"
+  },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
     "@headlessui/react": "^2.2.9",
@@ -89,7 +89,7 @@
     "remark-rehype": "^11.1.2",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
-    "ultracite": "7.9.4",
+    "ultracite": "7.10.5",
     "unified": "^11.0.5",
     "zod": "^4.3.6"
   }

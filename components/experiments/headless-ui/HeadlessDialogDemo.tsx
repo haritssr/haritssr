@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting */
 "use client";
 import { Dialog, Transition } from "@headlessui/react";
 import type { ComponentType } from "react";
@@ -8,13 +7,19 @@ import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import SubTitle from "@/components/SubTitle";
 
+// biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
 const HeadlessDialog = Dialog as unknown as ComponentType<any> & {
+  // biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
   Title: ComponentType<any>;
+  // biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
   Description: ComponentType<any>;
+  // biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
   Overlay: ComponentType<any>;
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
 const TransitionRoot = Transition.Root as unknown as ComponentType<any>;
+// biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
 const TransitionChild = Transition.Child as unknown as ComponentType<any>;
 
 export default function HeadlessDialogDemo() {
