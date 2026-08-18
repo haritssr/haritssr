@@ -53,8 +53,7 @@
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",
     "app/tools/db.bun.ts",
-    "app/tools/db.test.js",
-    "next.config.mjs"
+    "app/tools/db.test.js"
   ],
   "exclude": ["node_modules"]
 }

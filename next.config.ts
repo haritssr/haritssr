@@ -1,7 +1,10 @@
 import { withContentCollections } from "@content-collections/next";
+import type { NextConfig } from "next";
 
-const nextConfig = {
-  experimental: { useTypeScriptCli: true },
+const nextConfig: NextConfig = {
+  experimental: {
+    useTypeScriptCli: true,
+  },
 
   images: {
     formats: ["image/avif", "image/webp"],
@@ -32,12 +35,6 @@ const nextConfig = {
       },
       {
         hostname: "assets.vercel.com",
-        pathname: "/**",
-        port: "",
-        protocol: "https",
-      },
-      {
-        hostname: "vignette.wikia.nocookie.net",
         pathname: "/**",
         port: "",
         protocol: "https",
