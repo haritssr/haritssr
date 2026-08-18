@@ -54,12 +54,11 @@ export default function ReactSearchTableDemo() {
             />
           </li>
           <li>
-            Data source
-            <ExternalLink
-              href="https://jsonplaceholder.typicode.com/users"
-              name="JSONPlaceHolder"
-            />
-            .
+            Data source: the local{" "}
+            <code className="rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-mono text-sm">
+              /api/searchWithApi
+            </code>{" "}
+            route.
           </li>
           <li>Already applied debounce on search.</li>
         </ExplanationList>

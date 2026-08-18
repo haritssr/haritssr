@@ -1,4 +1,5 @@
 import { format, parseISO } from "date-fns";
+import PageTitle from "@/components/PageTitle";
 import SubTitle from "@/components/SubTitle";
 import { getAllPostIds, getPostData } from "@/utils/posts.js";
 
@@ -20,6 +21,7 @@ export default async function PostPage({
 
   return (
     <>
+      <PageTitle title={postData.title} />
       <SubTitle>
         <time dateTime={postData.date}>
           {format(parseISO(postData.date), "LLLL d, yyyy")}

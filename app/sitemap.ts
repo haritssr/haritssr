@@ -2,6 +2,10 @@ import { allBlogs } from "@content-collections";
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/utils/site";
 import { ExperimentsData } from "../data/ExperimentsData";
+import {
+  NextjsArticlesData,
+  NextjsStudentsData,
+} from "../data/NextjsExperimentsData";
 import { ProjectsData } from "../data/ProjectsData";
 import { getAllPostIds } from "../utils/posts.js";
 
@@ -32,14 +36,12 @@ const localPostRoutes = getAllPostIds().map(
   ({ params }) => `/experiments/nextjs/posts/${params.id}`
 );
 
-const articleRoutes = Array.from(
-  { length: 20 },
-  (_, index) => `/experiments/nextjs/articles/${index + 1}`
+const articleRoutes = NextjsArticlesData.map(
+  (article) => `/experiments/nextjs/articles/${article.id}`
 );
 
-const studentRoutes = Array.from(
-  { length: 10 },
-  (_, index) => `/experiments/nextjs/students/${index + 1}`
+const studentRoutes = NextjsStudentsData.map(
+  (student) => `/experiments/nextjs/students/${student.id}`
 );
 
 const routeUrls = Array.from(
