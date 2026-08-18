@@ -15,41 +15,8 @@ the tree clean.
 
 <!-- END:nextjs-agent-rules -->
 
-# Agent Guidelines
 
-## Code Style Rules
-
-### Block Statements
-
-**Block statements are preferred in this position.**
-
-Always use block statements (`{}`) instead of single-line statements for:
-
-- `if` / `else` / `else if`
-- `for` / `while` / `do while`
-- `try` / `catch` / `finally`
-
-**Good:**
-
-```typescript
-if (condition) {
-  doSomething();
-}
-
-for (const item of items) {
-  process(item);
-}
-```
-
-**Bad:**
-
-```typescript
-if (condition) doSomething();
-
-for (const item of items) process(item);
-```
-
-## Commit Guidelines
+# Commit Guidelines
 
 - feat: A new feature
 - fix: A bug fix
@@ -67,13 +34,3 @@ Example:
 refactor(Breadcrumbs.tsx): make it scrollable at mobile size when it too long
 
 [source](https://ec.europa.eu/component-library/v1.15.0/eu/docs/conventions/git/)
-
-## Vendored Repositories
-
-External source repositories may be vendored under `repos/` with `git subtree --squash` so agents can inspect real upstream source code.
-
-- Treat files under `repos/` as read-only reference material unless explicitly asked to update a subtree or edit vendored code.
-- Prefer examples, tests, and implementation patterns from vendored repositories over guesses or fragmented web search results when working with related libraries.
-- Do not import from `repos/` in application code. Application code should keep importing from normal package dependencies.
-- When writing Effect code, inspect `repos/effect/` for idiomatic usage, tests, module structure, and API design if that subtree is present.
-- If `repos/effect/LLMS.md` exists, read it before making non-trivial Effect changes.
