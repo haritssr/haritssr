@@ -3,7 +3,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { RouteDoc } from "../data/routes";
 import { searchRoutes } from "../data/routes";
@@ -55,7 +55,7 @@ export default function TopBarSearch() {
     router.push(route);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (results.length > 0) {
