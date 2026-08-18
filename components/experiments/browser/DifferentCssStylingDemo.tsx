@@ -2,7 +2,6 @@
 
 import Section from "@/components/Section";
 import SubTitle from "@/components/SubTitle";
-import style from "@/styles/different.module.css";
 
 export default function DifferentCssStylingDemo() {
   return (
@@ -26,7 +25,7 @@ export default function DifferentCssStylingDemo() {
         <div className="h-[100px] w-[100px] rounded-md bg-[#d1d1d6] p-2">
           Tailwind CSS
         </div>
-        <div className={style.box}>CSS Module</div>
+        <div className="box">CSS Module</div>
       </div>
     </>
   );

@@ -5,7 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import FooterSpacing from "@/components/FooterSpacing";
 import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
-import "../styles/globals.css";
+import "./globals.css";
 import localFont from "next/font/local";
 
 const inter = localFont({

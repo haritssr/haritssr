@@ -20,7 +20,6 @@
     "paths": {
       "*": ["./*"],
       "@/components/*": ["./components/*"],
-      "@/styles/*": ["./styles/*"],
       "@/utils/*": ["./utils/*"],
       "@content-collections": ["./.content-collections/generated"]
     },
@@ -45,8 +44,6 @@
     "utils/store-context.js",
     "pages/experiments/react/store-context-selector.tsz",
     "pages/experiments/react/store-zustand.js",
-    "styles/*.css",
-    "styles/*.module.css",
     ".next/types/**/*.ts",
     ".content-collections/generated",
     "utils/getAllMDXFileInsideFolder.js",

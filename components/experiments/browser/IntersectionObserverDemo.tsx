@@ -2,7 +2,6 @@
 
 import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
-import styles from "@/styles/rocket.module.css";
 
 // native version
 // import { useEffect } from "react";
@@ -90,11 +89,7 @@ function IntersectionObserverAPIHooks() {
           {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}
         </h2>
         <p ref={rocketRef}>
-          <span
-            className={`${styles.rocket} ${
-              isRocketVisible ? styles.animateRocket : ""
-            }`}
-          >
+          <span className={`rocket ${isRocketVisible ? "animateRocket" : ""}`}>
             🚀
           </span>
         </p>
