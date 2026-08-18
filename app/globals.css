@@ -31,13 +31,7 @@
   --radius-md: calc(0.5rem - 2px);
   --radius-sm: calc(0.5rem - 4px);
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-
-  --text-landingPage: 2.7rem;
   --text-tiny: 0.9rem;
-
-  --scale-98: 0.98;
-  --scale-101: 1.01;
 
   --z-90: 90;
 }
@@ -62,17 +56,7 @@
   }
 }
 
-/* Form elements - native CSS instead of @apply */
-/*input[type="search"],
-input[type="url"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="tel"] {
-  border-radius: var(--radius-sm);
-  padding: 0.25rem 0.625rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-}*/
+/* Native form focus styles */
 input[type="search"]:focus,
 input[type="url"]:focus,
 input[type="email"]:focus,
@@ -87,16 +71,6 @@ input[type="tel"]:focus {
     0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
 
-/*input[type="time"],
-input[type="date"],
-input[type="week"],
-input[type="month"],
-select {
-  border-radius: var(--radius-md);
-  border: 1.4px solid rgb(113 113 122);
-  padding: 0.25rem 0.5rem;
-}
-
 input[type="time"]:focus,
 input[type="date"]:focus,
 input[type="week"]:focus,
@@ -107,26 +81,8 @@ select:focus {
   box-shadow: 0 0 0 2px rgb(59 130 246 / 0.2);
 }
 
-input[type="reset"],
-input[type="submit"],
-input[type="button"],
-button[type="submit"] {
-  width: 100%;
-  cursor: pointer;
-  border-radius: var(--radius-sm);
-  background-color: rgb(37 99 235);
-  padding: 0.25rem 0.75rem;
-  text-align: center;
-  color: white;
-}
-input[type="reset"]:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover,
-button[type="submit"]:hover {
-  background-color: rgb(37 99 235 / 0.9);
-}*/
-
 @media (min-width: 640px) {
+
   input[type="reset"],
   input[type="submit"],
   input[type="button"],
