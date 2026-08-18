@@ -27,3 +27,7 @@ Example:
 refactor(Breadcrumbs.tsx): make it scrollable at mobile size when it too long
 
 [source](https://ec.europa.eu/component-library/v1.15.0/eu/docs/conventions/git/)
+
+# Run Build
+
+Never use bun run --webpack to run build, use regular bun run build (which using Turbopack)
