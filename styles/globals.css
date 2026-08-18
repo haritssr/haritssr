@@ -127,7 +127,6 @@ button[type="submit"]:hover {
 }*/
 
 @media (min-width: 640px) {
-
   input[type="reset"],
   input[type="submit"],
   input[type="button"],

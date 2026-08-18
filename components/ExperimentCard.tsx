@@ -35,7 +35,7 @@ export default function ExperimentCard({
           <ChevronRightIcon className="h-4 w-4 text-zinc-400" width={2.5} />
         </div>
       </div>
-      <div className="font-light text-zinc-500">{experiment.description}</div>
+      <div className="text-zinc-500">{experiment.description}</div>
     </Link>
   );
 }

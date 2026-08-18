@@ -46,7 +46,7 @@ export default function ProjectsCard({
 
         {/* Site Link (Text Only) */}
         <cite className="group not-italic">
-          <span className="font-light text-base text-zinc-400">
+          <span className="text-base text-zinc-500">
             {href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
           </span>
         </cite>
