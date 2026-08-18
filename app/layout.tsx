@@ -4,6 +4,8 @@ import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import FooterSpacing from "@/components/FooterSpacing";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
 import "./globals.css";
 import localFont from "next/font/local";
@@ -13,6 +15,11 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Harits Syah",
+  },
   description: "Developer, teacher, and founder.",
   metadataBase: new URL("https://www.haritssr.com"),
   openGraph: {
@@ -52,6 +59,7 @@ export default function RootLayout({
   return (
     <html className={inter.className} lang="en">
       <body>
+        <ServiceWorkerRegistration />
         <NuqsAdapter>
           <TopBarBorderOnScroll />
           <main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
@@ -63,6 +71,7 @@ export default function RootLayout({
           </FooterSpacing>
           <BottomBar />
         </NuqsAdapter>
+        <PWAInstallPrompt />
       </body>
     </html>
   );
