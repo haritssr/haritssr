@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const WHITESPACE_SPLIT_REGEX = /\s+/;
+// Matches one or more whitespace characters.
+// Example: "hello  world" splits into ["hello", "world"].
+const whitespaceSequencePattern = /\s+/;
+
+// Matches consecutive hyphens or underscores used as segment separators.
+// Example: "hello-world" becomes "hello world".
+const segmentSeparatorPattern = /[-_]+/g;
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
@@ -61,8 +67,8 @@ function Separator() {
 
 function formatSegmentLabel(segment: string) {
   return decodeURIComponent(segment)
-    .replace(/[-_]+/g, " ")
-    .split(WHITESPACE_SPLIT_REGEX)
+    .replace(segmentSeparatorPattern, " ")
+    .split(whitespaceSequencePattern)
     .filter(Boolean)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");

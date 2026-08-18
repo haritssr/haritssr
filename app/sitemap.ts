@@ -5,6 +5,10 @@ import { ExperimentsData } from "../data/ExperimentsData";
 import { ProjectsData } from "../data/ProjectsData";
 import { getAllPostIds } from "../utils/posts.js";
 
+// Matches every whitespace run in a title.
+// Example: "React Native" becomes "react-native" after replacement.
+const whitespaceSequencePattern = /\s+/g;
+
 const staticRoutes = [
   "/",
   "/blog",
@@ -19,7 +23,7 @@ const staticRoutes = [
 ];
 
 function toSlug(value: string): string {
-  return value.toLowerCase().replace(/\s+/g, "-");
+  return value.toLowerCase().replace(whitespaceSequencePattern, "-");
 }
 
 const experimentRoutes = ExperimentsData.flatMap((experiment) => {

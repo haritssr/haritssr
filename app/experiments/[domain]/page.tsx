@@ -3,19 +3,25 @@ import InternalLink from "@/components/InternalLink";
 import { StatusActionLink, StatusPage } from "@/components/StatusPage";
 import { ExperimentsData } from "../../../data/ExperimentsData";
 
+// Matches every run of whitespace.
+// Example: "React Native" becomes "React-Native" after replacement.
+const whitespaceSequencePattern = /\s+/g;
+
+// Matches each whitespace character individually.
+// Example: "React Native" becomes "React-Native" after replacement.
+const whitespaceCharacterPattern = /\s/g;
+
 export default async function DomainIndexPage({
   params,
 }: {
   params: Promise<{ domain: string }>;
 }) {
   const { domain } = await params;
-  const REGEX_WHITESPACE_COLLAPSE = /\s+/g;
-  const REGEX_WHITESPACE_EACH = /\s/g;
 
   // Find the experiment data for this domain
   const experiment = ExperimentsData.find(
     (exp) =>
-      exp.title.toLowerCase().replace(REGEX_WHITESPACE_COLLAPSE, "-") === domain
+      exp.title.toLowerCase().replace(whitespaceSequencePattern, "-") === domain
   );
 
   if (!experiment) {
@@ -56,7 +62,7 @@ export default async function DomainIndexPage({
         {experiment.links?.map((link) => (
           <li key={link}>
             <InternalLink
-              href={`/experiments/${domain}/${link.toLowerCase().replace(REGEX_WHITESPACE_EACH, "-")}`}
+              href={`/experiments/${domain}/${link.toLowerCase().replace(whitespaceCharacterPattern, "-")}`}
             >
               {link}
             </InternalLink>

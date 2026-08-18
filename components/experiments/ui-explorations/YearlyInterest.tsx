@@ -3,6 +3,10 @@
 import { useState } from "react";
 import PageDescription from "@/components/PageDescription";
 
+// Matches every non-digit character.
+// Example: "Rp 12,000" becomes "12000" after replacement.
+const nonDigitCharacterPattern = /\D/g;
+
 function Section({ name }: { name: string }) {
   return (
     <h2 className="mt-10 mb-4 font-semibold text-xl text-zinc-800">{name}</h2>
@@ -18,7 +22,7 @@ export default function YearlyInterest() {
   // Converts a formatted input string into a number by stripping non-digits.
   function parseNumericInput(value: string): number {
     // Strip all non-digit characters.
-    const digitsOnly = value.replace(/\D/g, "");
+    const digitsOnly = value.replace(nonDigitCharacterPattern, "");
     // Empty input after stripping becomes zero.
     if (!digitsOnly) {
       return 0;

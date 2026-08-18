@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import { Effect } from "effect";
 
-const REGEX = /^(#+)\s+(.+)$/;
+// Captures Markdown heading markers and title text.
+// Example: "## Intro" becomes ["## Intro", "##", "Intro"].
+const markdownHeadingPattern = /^(#+)\s+(.+)$/;
 
 const readMdxFile = Effect.fn("readMdxFile")((mdxFilePath: string) =>
   Effect.try({
@@ -20,7 +22,7 @@ export default function generateTOC(mdxFilePath: string): string[] {
         const titles: string[] = [];
 
         for (const line of mdxContent.split("\n")) {
-          const match = line.match(REGEX);
+          const match = line.match(markdownHeadingPattern);
           if (!match) {
             continue;
           }

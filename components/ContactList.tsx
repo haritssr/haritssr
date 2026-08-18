@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 
-const URL_REGEX = /^https?:\/\/(www\.)?/;
+// Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
+// Example: "https://www.example.com" becomes "example.com" after replacement.
+const urlPrefixPattern = /^https?:\/\/(www\.)?/;
 
 function boldharitssr(strippedURL: string, haritssr = "haritssr") {
   return strippedURL
@@ -20,18 +22,10 @@ function boldharitssr(strippedURL: string, haritssr = "haritssr") {
 }
 
 function renderContact(each: { link: string; icon: string }) {
-  /*
-  URL_REGEX matches any string that begins with one of these four prefixes:
-    http://
-    https://
-    http://www.
-    https://www.
-  */
-
   if (each.link.startsWith("http")) {
     const displayedLink = each.link.includes("x.com/intent/follow")
       ? "x.com/haritssr"
-      : each.link.replace(URL_REGEX, "");
+      : each.link.replace(urlPrefixPattern, "");
 
     return (
       <a

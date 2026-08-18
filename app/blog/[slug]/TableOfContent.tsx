@@ -3,7 +3,13 @@ import Link from "next/link";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 import generateTOC from "utils/generateTOC";
 
-const REGEX = /\s+/;
+// Matches one or more whitespace characters.
+// Example: "hello  world" splits into ["hello", "world"].
+const whitespaceSequencePattern = /\s+/;
+
+// Matches characters that cannot appear in a heading slug.
+// Example: "Hello, world!" becomes "Hello world".
+const nonSlugCharacterPattern = /[^a-zA-Z0-9\s-]/g;
 
 export default function TableOfContents({ slug }: { slug: string }) {
   const articleTOC = generateTOC(
@@ -18,9 +24,9 @@ export default function TableOfContents({ slug }: { slug: string }) {
         <div className="space-y-2 overflow-y-auto sm:p-5">
           {articleTOC.map((heading) => {
             const headingSlug = heading
-              .replace(/[^a-zA-Z0-9\s-]/g, "") // strip everything except letters, numbers, spaces, and hyphens
+              .replace(nonSlugCharacterPattern, "")
               .trim()
-              .split(REGEX) // collapse consecutive spaces before joining
+              .split(whitespaceSequencePattern)
               .join("-");
 
             return (

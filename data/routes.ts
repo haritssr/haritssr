@@ -164,6 +164,14 @@ const routeTitleOverrides: Record<string, string> = {
   "/times-table": "Times Table",
 };
 
+// Matches route separators that should become spaces.
+// Example: "foo-bar" becomes "foo bar" after replacement.
+const routeSeparatorPattern = /[-_/]/g;
+
+// Matches runs of whitespace so normalized text contains single spaces.
+// Example: "foo  bar" becomes "foo bar".
+const whitespaceSequencePattern = /\s+/g;
+
 export interface RouteDoc {
   id: string;
   route: string;
@@ -173,7 +181,11 @@ export interface RouteDoc {
 
 // Normalizes any route or query text into a lowercase, space-separated form.
 function normalizeText(value: string): string {
-  return value.toLowerCase().replace(/[-_/]/g, " ").replace(/\s+/g, " ").trim();
+  return value
+    .toLowerCase()
+    .replace(routeSeparatorPattern, " ")
+    .replace(whitespaceSequencePattern, " ")
+    .trim();
 }
 
 // Converts normalized words into display-friendly title case.
