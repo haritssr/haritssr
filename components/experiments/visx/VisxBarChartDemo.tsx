@@ -7,9 +7,7 @@ import { AxisBottom, AxisLeft } from "@visx/axis";
 import { localPoint } from "@visx/event";
 // <g/>
 import { Group } from "@visx/group";
-import appleStock, {
-  type AppleStock,
-} from "@visx/mock-data/lib/mocks/appleStock";
+import { type AppleStock, appleStock } from "@visx/mock-data";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Bar } from "@visx/shape";
 import { defaultStyles, TooltipWithBounds, useTooltip } from "@visx/tooltip";
