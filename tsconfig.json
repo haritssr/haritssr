@@ -36,7 +36,6 @@
     "**/*.ts",
     "**/*.tsx",
     "**/**/*.tsx",
-    "tailwind.config.js",
     "data/ExperimentsData.ts",
     "pages/experiments/react/calculator.jsx",
     "pages/experiments/radix-ui/navigation-menu.tsx",

@@ -77,17 +77,13 @@ const CommentsList = function CommentList({
   ref,
   ..._props
 }: CommentsListProps) {
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLDivElement | null>(null);
 
   useImperativeHandle(
     ref,
     () => ({
       scrollToBottom() {
-        const node = divRef.current;
-        if (!node) {
-          return;
-        }
-        node.scrollTop = node.scrollHeight;
+        divRef.current?.scrollTo({ top: divRef.current.scrollHeight });
       },
     }),
     []

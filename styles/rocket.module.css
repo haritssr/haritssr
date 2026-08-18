@@ -24,6 +24,6 @@
     transform: scale(2) rotate(0deg);
   }
   100% {
-    transform: scale(20) translate3D(100vw, -100vh, 0) rotate(0);
+    transform: scale(20) translate3d(100vw, -100vh, 0) rotate(0deg);
   }
 }
