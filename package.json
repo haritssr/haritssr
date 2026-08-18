@@ -40,7 +40,7 @@
     "cmdk": "^1.1.1",
     "d3-time-format": "^4.1.0",
     "date-fns": "^4.4.0",
-    "effect": "^3.22.1",
+    "effect": "^4.0.0-rc.110",
     "embla-carousel-react": "^7.0.5",
     "gray-matter": "^4.0.3",
     "immer": "^9.0.17",
