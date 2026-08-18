@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/accounts",
     },
-    sitemap: "https://haritssr.com/sitemap.xml",
-    host: "https://haritssr.com",
+    sitemap: "https://www.haritssr.com/sitemap.xml",
+    host: "https://www.haritssr.com",
   };
 }
