@@ -29,6 +29,10 @@ function renderContact(each: { link: string; icon: string }) {
   */
 
   if (each.link.startsWith("http")) {
+    const displayedLink = each.link.includes("x.com/intent/follow")
+      ? "x.com/haritssr"
+      : each.link.replace(URL_REGEX, "");
+
     return (
       <a
         className="corner-squircle flex items-center space-x-2 rounded-xl border border-zinc-300 px-2 py-1.5 sm:mr-1.5 sm:py-1 sm:hover:bg-zinc-100"
@@ -49,9 +53,7 @@ function renderContact(each: { link: string; icon: string }) {
           title={each.link}
           width={20}
         />
-        <span className="text-zinc-500">
-          {boldharitssr(each.link.replace(URL_REGEX, ""))}
-        </span>
+        <span className="text-zinc-500">{boldharitssr(displayedLink)}</span>
       </a>
     );
   }
@@ -102,7 +104,11 @@ const ContactData = {
       name: "LinkedIn",
     },
     { icon: "/Icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
-    { icon: "/Icons/x.png", link: "https://www.x.com/haritssr", name: "X" },
+    {
+      icon: "/Icons/x.png",
+      link: "https://x.com/intent/follow?screen_name=haritssr",
+      name: "X",
+    },
     {
       icon: "/Icons/github.jpg",
       link: "https://www.github.com/haritssr",

@@ -7,7 +7,7 @@ export default function Footer() {
         <span className=""> 2021–{new Date().getFullYear()}</span> &#169; by{" "}
         <a
           className="hover:text-zinc-800"
-          href="https://x.com/haritssr"
+          href="https://x.com/intent/follow?screen_name=haritssr"
           rel="noopener noreferrer"
           target="_blank"
         >

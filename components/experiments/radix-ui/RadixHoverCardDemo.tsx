@@ -25,7 +25,7 @@ export default function RadixHoverCardDemo() {
       <HoverCard.Root>
         <HoverCard.Trigger
           className="rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium text-zinc-800 hover:cursor-pointer hover:bg-zinc-100"
-          href="https://twitter.com/haritssr"
+          href="https://x.com/intent/follow?screen_name=haritssr"
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -37,7 +37,7 @@ export default function RadixHoverCardDemo() {
 
             <div className="flex flex-col">
               <ExternalLink
-                href="https://www.twitter.com/haritssr"
+                href="https://x.com/intent/follow?screen_name=haritssr"
                 name="@haritssr"
               />
               <ExternalLink
