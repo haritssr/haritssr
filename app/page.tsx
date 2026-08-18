@@ -4,6 +4,7 @@ import Contacts from "@/components/home/Contacts";
 import CV from "@/components/home/CV";
 import Experiments from "@/components/home/Experiments";
 import Projects from "@/components/home/Projects";
+import SubscribedNewsletters from "@/components/home/SubscribedNewsletters";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Projects />
         <Experiments />
         <Blog />
+        <SubscribedNewsletters />
         <CV />
         <AI />
       </div>
