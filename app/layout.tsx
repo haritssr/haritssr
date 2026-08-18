@@ -7,6 +7,7 @@ import FooterSpacing from "@/components/FooterSpacing";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
+import { SITE_URL } from "@/utils/site";
 import "./globals.css";
 import localFont from "next/font/local";
 
@@ -21,14 +22,14 @@ export const metadata: Metadata = {
     title: "Harits Syah",
   },
   description: "Developer, teacher, and founder.",
-  metadataBase: new URL("https://www.haritssr.com"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     description: "Developer, teacher, and founder.",
     locale: "en-US",
     siteName: "Harits Syah",
     title: "Harits Syah",
     type: "website",
-    url: "https://www.haritssr.com",
+    url: SITE_URL,
   },
   robots: {
     follow: true,

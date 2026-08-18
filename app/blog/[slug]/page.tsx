@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type React from "react";
 import BackButton from "@/components/BackButton";
 import MDX from "@/components/mdx";
+import { SITE_URL } from "@/utils/site";
 import TableOfContents from "./TableOfContent";
 
 export function generateStaticParams() {
@@ -36,13 +37,13 @@ export async function generateMetadata({
   return {
     title,
     description,
-    metadataBase: new URL("https://haritssr.vercel.app"),
+    metadataBase: new URL(SITE_URL),
     openGraph: {
       title,
       description,
       publishedTime,
       siteName: "Harits Syah Blog",
-      url: `https://haritssr.vercel.app/blog/${blogSlug}`,
+      url: `${SITE_URL}/blog/${blogSlug}`,
       images: [{ url: image }],
       locale: "en-US",
       type: "article",

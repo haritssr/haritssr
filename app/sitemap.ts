@@ -1,10 +1,9 @@
 import { allBlogs } from "@content-collections";
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/utils/site";
 import { ExperimentsData } from "../data/ExperimentsData";
 import { ProjectsData } from "../data/ProjectsData";
 import { getAllPostIds } from "../utils/posts.js";
-
-const SITE_URL = "https://www.haritssr.com";
 
 const staticRoutes = [
   "/",
