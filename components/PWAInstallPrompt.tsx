@@ -37,11 +37,11 @@ export default function PWAInstallPrompt() {
 
   return (
     <button
-      className="fixed right-4 bottom-20 z-90 rounded-full bg-black px-4 py-2 font-medium text-sm text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+      className="cursor-pointer select-none text-zinc-400 hover:text-zinc-800"
       onClick={installApp}
       type="button"
     >
-      Install app
+      Install
     </button>
   );
 }

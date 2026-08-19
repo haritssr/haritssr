@@ -4,7 +4,6 @@ import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import FooterSpacing from "@/components/FooterSpacing";
-import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
 import { SITE_URL } from "@/utils/site";
@@ -72,7 +71,6 @@ export default function RootLayout({
           </FooterSpacing>
           <BottomBar />
         </NuqsAdapter>
-        <PWAInstallPrompt />
       </body>
     </html>
   );
