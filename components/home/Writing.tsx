@@ -1,14 +1,14 @@
-import BlogGrid from "@/components/BlogGrid";
+import WritingGrid from "@/components/WritingGrid";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
-export default function Blog() {
+export default function Writing() {
   return (
     <HomeSectionWrapper
       className="grid grid-cols-1 space-y-3"
-      id="blog"
-      topic="Blog"
+      id="writing"
+      topic="Writing"
     >
-      <BlogGrid />
+      <WritingGrid />
     </HomeSectionWrapper>
   );
 }

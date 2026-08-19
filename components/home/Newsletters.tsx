@@ -16,13 +16,13 @@ const newsletters = [
   },
 ];
 
-export default function SubscribedNewsletters() {
+export default function Newsletters() {
   return (
     <HomeSectionWrapper
       className="space-y-3"
-      id="subscribed-newsletters"
+      id="newsletters"
       isTitleLink={false}
-      topic="Subscribed Newsletters"
+      topic="Newsletters"
     >
       {newsletters.map((newsletter) => (
         <div key={newsletter.href}>

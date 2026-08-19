@@ -1,10 +1,10 @@
 import AI from "@/components/home/AI";
-import Blog from "@/components/home/Blog";
 import Contacts from "@/components/home/Contacts";
 import CV from "@/components/home/CV";
 import Experiments from "@/components/home/Experiments";
+import Newsletters from "@/components/home/Newsletters";
 import Projects from "@/components/home/Projects";
-import SubscribedNewsletters from "@/components/home/SubscribedNewsletters";
+import Writing from "@/components/home/Writing";
 
 export default function Home() {
   return (
@@ -13,9 +13,9 @@ export default function Home() {
       <div className="space-y-16 sm:space-y-24">
         <Projects />
         <Experiments />
-        <Blog />
-        <SubscribedNewsletters />
         <CV />
+        <Writing />
+        <Newsletters />
         <AI />
       </div>
     </section>
