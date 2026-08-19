@@ -52,9 +52,9 @@ const writings = defineCollection({
         topic: document.topic,
         url: writingUrl.toString(),
         wordCount,
- },
-    wordCount,
-   };
+      },
+      wordCount,
+    };
   },
 });
 

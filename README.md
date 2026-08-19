@@ -20,6 +20,27 @@ graph TD
   haritssr --> pure["/pure"]
 ```
 
+## RSS Feed
+
+The writing RSS feed is available at [`/feed.xml`](https://www.haritssr.com/feed.xml).
+Visitors can paste this URL into an RSS reader such as Feedly, Inoreader,
+NetNewsWire, or Thunderbird. The Writing page also includes a **Subscribe via
+RSS** link.
+
+The feed is generated from the writing content collection:
+
+1. Writing is added to `data/writing/*.mdx` with a `publishedAt` value in
+   `YYYY-MM-DD` format.
+2. Content Collections validates and loads the writing as `allWritings`.
+3. `app/feed.xml/route.ts` passes the collection to `utils/rss.ts`.
+4. The renderer creates a static RSS 2.0 document with each writing's title,
+   summary, canonical URL, publication date, and topic.
+
+The feed contains summaries that link to the full writings. In development,
+Content Collections watches for changes and updates the feed. In production,
+the feed is regenerated during deployment, so a new deployment is required
+for a new writing to appear in the live feed.
+
 ## Architecture Decision Records
 
 Architecture Decision Records (ADRs) document the important decisions that
