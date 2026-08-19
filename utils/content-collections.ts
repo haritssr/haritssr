@@ -1,6 +1,6 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
-import { SITE_URL } from "./utils/site";
+import { SITE_URL } from "./site";
 
 // Matches one or more whitespace characters used to separate words.
 // Example: "one  two" splits into ["one", "two"].
@@ -15,7 +15,7 @@ function countWords(content: string): number {
 }
 
 const writings = defineCollection({
-  directory: "data/writing",
+  directory: "../data/writing",
   include: "**/*.mdx",
   name: "writings",
   schema: z.object({

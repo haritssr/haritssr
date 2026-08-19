@@ -1,5 +1,9 @@
-import { withContentCollections } from "@content-collections/next";
+import { createContentCollectionPlugin } from "@content-collections/next";
 import type { NextConfig } from "next";
+
+const withContentCollections = createContentCollectionPlugin({
+  configPath: "utils/content-collections.ts",
+});
 
 const nextConfig: NextConfig = {
   experimental: {

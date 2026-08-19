@@ -22,7 +22,7 @@
       "@/*": ["./*"],
       "@/components/*": ["./components/*"],
       "@/utils/*": ["./utils/*"],
-      "@content-collections": ["./.content-collections/generated"]
+      "@content-collections": ["./utils/.content-collections/generated"]
     },
     "incremental": true,
     "plugins": [
@@ -46,7 +46,7 @@
     "pages/experiments/react/store-context-selector.tsz",
     "pages/experiments/react/store-zustand.js",
     ".next/types/**/*.ts",
-    ".content-collections/generated",
+    "utils/.content-collections/generated",
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",

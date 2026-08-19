@@ -14,7 +14,7 @@ used Contentlayer and migrated to Content Collections.
 ## Decision
 
 Use `@content-collections/core` with Zod-backed schemas and the Next.js
-integration. Define the blog collection in `content-collections.ts` and consume
+integration. Define the blog collection in `utils/content-collections.ts` and consume
 the generated `allBlogs` collection from routes and components.
 
 ## Alternatives
