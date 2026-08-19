@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import WritingGrid from "@/components/WritingGrid";
-import { WRITING_DESCRIPTION } from "../../data/PageDescriptions";
+
+const WRITING_DESCRIPTION = "Selected notes that I want to share to the world.";
 
 export const metadata: Metadata = {
   title: "Writing",
