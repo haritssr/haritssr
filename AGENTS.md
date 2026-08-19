@@ -30,4 +30,7 @@ refactor(Breadcrumbs.tsx): make it scrollable at mobile size when it too long
 
 # Run Build
 
-Never use bun run --webpack to run build, use regular bun run build (which using Turbopack)
+- Never run the production build from an AI agent environment. Turbopack may
+  require local worker-port permissions unavailable to sandboxed agents; run
+  the build locally or in CI instead.
+- Never use bun run --webpack to run build, use regular bun run build (which using Turbopack)
