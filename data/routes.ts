@@ -1,7 +1,7 @@
 // Static application pages backed by page.tsx files.
 const pageRoutes = [
   "/",
-  "/blog",
+  "/writing",
   "/input-list",
   "/projects",
   "/experiments",

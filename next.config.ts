@@ -58,6 +58,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  redirects() {
+    return [
+      {
+        destination: "/writing",
+        permanent: true,
+        source: "/blog",
+      },
+      {
+        destination: "/writing/:slug*",
+        permanent: true,
+        source: "/blog/:slug*",
+      },
+    ];
+  },
   reactStrictMode: false,
   turbopack: {},
 };

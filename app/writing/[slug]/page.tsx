@@ -1,4 +1,4 @@
-import { allBlogs } from "@content-collections";
+import { allWritings } from "@content-collections";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
@@ -8,8 +8,8 @@ import { SITE_URL } from "@/utils/site";
 import TableOfContents from "./TableOfContent";
 
 export function generateStaticParams() {
-  return allBlogs.map((blog) => ({
-    slug: blog.slug,
+  return allWritings.map((writing) => ({
+    slug: writing.slug,
   }));
 }
 
@@ -19,9 +19,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const blog = allBlogs.find((entry) => entry.slug === slug);
+  const writing = allWritings.find((entry) => entry.slug === slug);
 
-  if (!blog) {
+  if (!writing) {
     return {};
   }
 
@@ -29,8 +29,8 @@ export async function generateMetadata({
     title,
     publishedAt: publishedTime,
     summary: description,
-    slug: blogSlug,
-  } = blog;
+    slug: writingSlug,
+  } = writing;
 
   const image = "/images/openGraphImage.png";
 
@@ -42,8 +42,8 @@ export async function generateMetadata({
       title,
       description,
       publishedTime,
-      siteName: "Harits Syah Blog",
-      url: `${SITE_URL}/blog/${blogSlug}`,
+      siteName: "Harits Syah Writing",
+      url: `${SITE_URL}/writing/${writingSlug}`,
       images: [{ url: image }],
       locale: "en-US",
       type: "article",
@@ -146,41 +146,41 @@ async function markdownToHtml(content: string) {
   return result.toString();
 }
 
-export default async function Blog({
+export default async function Writing({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = allBlogs.find((each) => each.slug === slug);
+  const writing = allWritings.find((each) => each.slug === slug);
 
-  if (!blog) {
+  if (!writing) {
     notFound();
   }
 
-  const html = await markdownToHtml(blog.content);
+  const html = await markdownToHtml(writing.content);
 
   return (
     <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
       {/*<LeftBar />*/}
       <Content>
         <div className="mt-5 mb-10">
-          <BackButton href="/blog" name="All Articles" />
+          <BackButton href="/writing" name="All Writings" />
         </div>
 
         <h1 className="font-bold text-2xl text-zinc-800 tracking-tighter sm:text-3xl">
-          {blog.title}
+          {writing.title}
         </h1>
         <div className="mt-2 mb-8 flex items-center text-sm">
-          <p>{formatDate(blog.publishedAt)}</p>
+          <p>{formatDate(writing.publishedAt)}</p>
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
-          <p>{blog.wordCount} Words</p>
+          <p>{writing.wordCount} Words</p>
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
-          <p>{Math.ceil(blog.wordCount / 200)} Min Read</p>
+          <p>{Math.ceil(writing.wordCount / 200)} Min Read</p>
         </div>
         <MDX html={html} />
       </Content>
-      <TableOfContents slug={blog.slug} />
+      <TableOfContents slug={writing.slug} />
     </div>
   );
 }

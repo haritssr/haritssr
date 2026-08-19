@@ -13,10 +13,10 @@ function countWords(content: string): number {
   return words.length;
 }
 
-const blogs = defineCollection({
+const writings = defineCollection({
   directory: "content",
   include: "**/*.mdx",
-  name: "blogs",
+  name: "writings",
   schema: z.object({
     content: z.string(),
     image: z.string().optional(),
@@ -46,7 +46,7 @@ const blogs = defineCollection({
           ? `https://haritssr.com${document.image}`
           : `https://haritssr.com/og?title=${document.title}`,
         topic: document.topic,
-        url: `https://haritssr.com/blog/${document._meta.path}`,
+        url: `https://haritssr.com/writing/${document._meta.path}`,
         wordCount,
       },
       wordCount,
@@ -55,5 +55,5 @@ const blogs = defineCollection({
 });
 
 export default defineConfig({
-  content: [blogs],
+  content: [writings],
 });

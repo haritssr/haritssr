@@ -1,6 +1,6 @@
 "use client";
 
-import { allBlogs } from "@content-collections";
+import { allWritings } from "@content-collections";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
@@ -14,13 +14,13 @@ export default function LeftBar() {
     <div className="hidden border-r border-b border-l sm:col-span-1 sm:block">
       <Link
         className="sticky top-11.25 block border-b bg-white px-4 py-2 font-medium"
-        href="/blog"
+        href="/writing"
       >
-        Blog
+        Writing
       </Link>
 
       <div className="flex flex-col space-y-1.5 px-2 py-5 sm:max-h-screen sm:overflow-auto">
-        {allBlogs
+        {allWritings
           .sort((a, b) => {
             if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
               return -1;
@@ -34,7 +34,7 @@ export default function LeftBar() {
                   ? "text-action"
                   : "text-zinc-800 hover:text-action"
               } rounded-md px-2 py-1 text-sm`}
-              href={`/blog/${article.slug}`}
+              href={`/writing/${article.slug}`}
               key={article.slug}
             >
               {article.slug

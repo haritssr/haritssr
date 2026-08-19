@@ -1,6 +1,6 @@
 import { ExperimentsData } from "./ExperimentsData";
 
-export const BLOG_DESCRIPTION =
+export const WRITING_DESCRIPTION =
   "Selected notes that I want to share to the world.";
 
 export const PROJECTS_DESCRIPTION =

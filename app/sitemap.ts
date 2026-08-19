@@ -1,4 +1,4 @@
-import { allBlogs } from "@content-collections";
+import { allWritings } from "@content-collections";
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/utils/site";
 import { ExperimentsData } from "../data/ExperimentsData";
@@ -13,7 +13,7 @@ const whitespaceSequencePattern = /\s+/g;
 
 const staticRoutes = [
   "/",
-  "/blog",
+  "/writing",
   "/experiments",
   "/projects",
   "/pure",
@@ -58,11 +58,11 @@ const routeUrls = Array.from(
   ])
 ).map((route) => ({ url: `${SITE_URL}${route}` }));
 
-const blogUrls = allBlogs.map((blog) => ({
-  lastModified: new Date(blog.publishedAt),
-  url: `${SITE_URL}/blog/${blog.slug}`,
+const writingUrls = allWritings.map((writing) => ({
+  lastModified: new Date(writing.publishedAt),
+  url: `${SITE_URL}/writing/${writing.slug}`,
 }));
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [...routeUrls, ...blogUrls];
+  return [...routeUrls, ...writingUrls];
 }

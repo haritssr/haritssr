@@ -58,7 +58,7 @@ const PopoverExample1 = () => (
         <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
           Experiments
         </div>
-        <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Blog</div>
+        <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Writing</div>
         <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
           Articles
         </div>
@@ -88,7 +88,9 @@ const PopoverExample2 = () => (
           <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
             Experiments
           </div>
-          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">Blog</div>
+          <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
+            Writing
+          </div>
           <div className="cursor-pointer px-3 py-2 hover:bg-zinc-50">
             Articles
           </div>

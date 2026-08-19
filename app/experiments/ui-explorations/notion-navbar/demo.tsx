@@ -198,7 +198,7 @@ function Yes() {
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium text-sm drop-shadow-lg">
             <div className="space-y-1">
               <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
-                Blog
+                Writing
               </div>
               <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
                 Guide & Tutorials
