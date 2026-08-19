@@ -141,9 +141,9 @@ const experimentRoutes = [
 
   "/experiments/ui-explorations/inline-maki",
   "/experiments/ui-explorations/notion-navbar",
-  "/experiments/ui-explorations/pure",
   "/experiments/ui-explorations/times-table",
   "/experiments/ui-explorations/yearly-interest",
+  "/experiments/ui-explorations/tools",
 
   "/experiments/visx/bar-chart",
   "/experiments/visx/pie-chart",

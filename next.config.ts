@@ -65,6 +65,11 @@ const nextConfig: NextConfig = {
   redirects() {
     return [
       {
+        destination: "/experiments/ui-explorations/tools",
+        permanent: true,
+        source: "/tools",
+      },
+      {
         destination: "/writing",
         permanent: true,
         source: "/blog",

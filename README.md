@@ -58,7 +58,7 @@ installable PWA architecture.
 
 ## Tooling
 
-- Run `bun test` to execute the tests for the `app/tools` helpers.
+- Run `bun test` to execute the tests for the `app/experiments/ui-explorations/tools` helpers.
 - Use [`utils/sqlite3.js`](utils/sqlite3.js) and
   [`utils/dbExperiment.js`](utils/dbExperiment.js) to inspect the shared
   `experiment.db` or `task.db`. They log table names and sample rows using

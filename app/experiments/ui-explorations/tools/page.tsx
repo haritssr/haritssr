@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import PageDescription from "@/components/PageDescription";
-import PageTitle from "@/components/PageTitle";
 import { createTool, listTools } from "./db";
 
 export const runtime = "nodejs";
+
+const TOOLS_PATH = "/experiments/ui-explorations/tools";
 
 export const metadata: Metadata = {
   title: "Tools",
@@ -43,7 +44,7 @@ async function createToolAction(formData: FormData) {
     price === null ||
     amount === null
   ) {
-    redirect("/tools?error=invalid-input");
+    redirect(`${TOOLS_PATH}?error=invalid-input`);
   }
 
   try {
@@ -55,10 +56,10 @@ async function createToolAction(formData: FormData) {
       })
     );
   } catch {
-    redirect("/tools?error=create-failed");
+    redirect(`${TOOLS_PATH}?error=create-failed`);
   }
 
-  revalidatePath("/tools");
+  revalidatePath(TOOLS_PATH);
 }
 
 interface ToolsPageProps {
@@ -73,7 +74,6 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
 
   return (
     <div>
-      <PageTitle title="Tools" />
       <PageDescription description="Manage tools in experiment database." />
 
       {!!error && (

@@ -21,7 +21,6 @@ const staticRoutes = [
   "/task/architecture",
   "/task/history",
   "/task/statistics",
-  "/tools",
 ];
 
 const experimentRoutes = ExperimentsData.flatMap((domain) => {

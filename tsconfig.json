@@ -50,8 +50,8 @@
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",
-    "app/tools/db.bun.ts",
-    "app/tools/db.test.js"
+    "app/experiments/ui-explorations/tools/db.bun.ts",
+    "app/experiments/ui-explorations/tools/db.test.js"
   ],
   "exclude": ["node_modules"]
 }
