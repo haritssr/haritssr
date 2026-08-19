@@ -1,4 +1,3 @@
-import AI from "./_components/home/AI";
 import Contacts from "./_components/home/Contacts";
 import CV from "./_components/home/CV";
 import Experiments from "./_components/home/Experiments";
@@ -16,7 +15,6 @@ export default function Home() {
         <CV />
         <Writing />
         <Newsletters />
-        <AI />
       </div>
     </section>
   );
