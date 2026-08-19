@@ -15,20 +15,14 @@
     "**/Thumbs.db",
     "**/.classpath",
     "**/.settings",
+    "**/node_modules/**",
+    "**/.next/**",
+    "**/.content-collections/**",
     "**/repos/**"
   ],
   "format_on_save": "on",
   "formatter": "language_server",
   "lsp": {
-    "typescript-language-server": {
-      "settings": {
-        "typescript": {
-          "preferences": {
-            "includePackageJsonAutoImports": "on"
-          }
-        }
-      }
-    },
     "vscode-css-language-server": {
       "settings": {
         "css": {
@@ -43,10 +37,31 @@
     "CSS": {
       "language_servers": [
         "tailwindcss-language-server",
-        "..."
+        "vscode-css-language-server"
       ]
     },
     "JavaScript": {
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "biome"
+      ],
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "JSX": {
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "biome"
+      ],
       "code_actions_on_format": {
         "source.fixAll.biome": true,
         "source.organizeImports.biome": true
@@ -58,6 +73,11 @@
       }
     },
     "TSX": {
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "biome"
+      ],
       "code_actions_on_format": {
         "source.fixAll.biome": true,
         "source.organizeImports.biome": true
@@ -69,6 +89,11 @@
       }
     },
     "TypeScript": {
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "biome"
+      ],
       "code_actions_on_format": {
         "source.fixAll.biome": true,
         "source.organizeImports.biome": true
