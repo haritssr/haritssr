@@ -1,5 +1,6 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
+import { SITE_URL } from "./utils/site";
 
 // Matches one or more whitespace characters used to separate words.
 // Example: "one  two" splits into ["one", "two"].
@@ -20,13 +21,16 @@ const writings = defineCollection({
   schema: z.object({
     content: z.string(),
     image: z.string().optional(),
-    publishedAt: z.string(),
+    publishedAt: z.iso.date(),
     summary: z.string(),
     title: z.string(),
     topic: z.string(),
   }),
   transform: (document) => {
     const wordCount = countWords(document.content);
+    const defaultImageUrl = new URL("/og", SITE_URL);
+    defaultImageUrl.searchParams.set("title", document.title);
+    const writingUrl = new URL(`/writing/${document._meta.path}`, SITE_URL);
 
     return {
       ...document,
@@ -43,14 +47,14 @@ const writings = defineCollection({
         description: document.summary,
         headline: document.title,
         image: document.image
-          ? `https://haritssr.com${document.image}`
-          : `https://haritssr.com/og?title=${document.title}`,
+          ? new URL(document.image, SITE_URL).toString()
+          : defaultImageUrl.toString(),
         topic: document.topic,
-        url: `https://haritssr.com/writing/${document._meta.path}`,
+        url: writingUrl.toString(),
         wordCount,
-      },
-      wordCount,
-    };
+ },
+    wordCount,
+   };
   },
 });
 

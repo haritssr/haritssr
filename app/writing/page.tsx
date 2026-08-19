@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import WritingGrid from "@/components/WritingGrid";
-
-const WRITING_DESCRIPTION = "Selected notes that I want to share to the world.";
+import { RSS_PATH, WRITING_DESCRIPTION } from "@/utils/site";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -14,7 +13,16 @@ export default function WritingPage() {
   return (
     <>
       <PageTitle title="Writing" />
-      <PageDescription description={WRITING_DESCRIPTION} />
+      <PageDescription
+        description={
+          <>
+            {WRITING_DESCRIPTION}{" "}
+            <a className="text-action hover:text-blue-400" href={RSS_PATH}>
+              Subscribe via RSS.
+            </a>
+          </>
+        }
+      />
       <WritingGrid />
     </>
   );

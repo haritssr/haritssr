@@ -1,4 +1,8 @@
 export const SITE_URL = "https://www.haritssr.com";
+export const RSS_PATH = "/feed.xml";
+export const WRITING_PATH = "/writing";
+export const WRITING_DESCRIPTION =
+  "Selected notes that I want to share to the world.";
 
 export const SOURCE_CODE_BASE_URL =
   "https://github.com/haritssr/haritssr/tree/main";

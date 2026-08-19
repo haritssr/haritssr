@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import FooterSpacing from "@/components/FooterSpacing";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
-import { SITE_URL } from "@/utils/site";
+import { RSS_PATH, SITE_URL } from "@/utils/site";
 import "./globals.css";
 import localFont from "next/font/local";
 
@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "default",
     title: "Harits Syah",
+  },
+  alternates: {
+    types: {
+      "application/rss+xml": new URL(RSS_PATH, SITE_URL).toString(),
+    },
   },
   description: "Developer, teacher, and founder.",
   metadataBase: new URL(SITE_URL),
