@@ -27,11 +27,11 @@ shape this site’s structure, dependencies, and long-term maintenance. Each ADR
 captures one decision, its context, the alternatives considered, its
 consequences, confidence, and the conditions that should trigger a review.
 
-ADRs are stored as short, numbered Markdown files in [`docs/adr`](docs/adr).
+ADRs are stored as short, numbered Markdown files in [`data/adr`](data/adr).
 Accepted records are historical and should not be rewritten. When a decision
 changes, create a new ADR and link it as the superseding decision.
 
-See the [ADR index](docs/adr/README.md) for the current decisions, including
+See the [ADR index](data/adr/README.md) for the current decisions, including
 the Next.js App Router, Content Collections, Effect, Biome/Ultracite, and the
 installable PWA architecture.
 
@@ -47,7 +47,7 @@ installable PWA architecture.
 
 The site is configured as an installable Progressive Web App (PWA).
 Installation requires HTTPS in production, plus a browser that supports web
-app installation. See [ADR 0005](docs/adr/0005-support-installable-pwa.md) for
+app installation. See [ADR 0005](data/adr/0005-support-installable-pwa.md) for
 the architectural rationale.
 
 ### Current implementation

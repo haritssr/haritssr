@@ -6,7 +6,7 @@
 
 ## Context
 
-Blog posts are maintained as local MDX files under `content/`. The application
+Blog posts are maintained as local MDX files under `data/writing/`. The application
 needs validated front matter, generated slugs, word counts, structured data,
 and typed access to posts during the Next.js build. The repository previously
 used Contentlayer and migrated to Content Collections.

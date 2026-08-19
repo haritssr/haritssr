@@ -13,7 +13,7 @@ const nonSlugCharacterPattern = /[^a-zA-Z0-9\s-]/g;
 
 export default function TableOfContents({ slug }: { slug: string }) {
   const articleTOC = generateTOC(
-    path.join(process.cwd(), "content", `${slug}.mdx`)
+    path.join(process.cwd(), "data/writing", `${slug}.mdx`)
   );
 
   return (

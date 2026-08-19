@@ -14,7 +14,7 @@ function countWords(content: string): number {
 }
 
 const writings = defineCollection({
-  directory: "content",
+  directory: "data/writing",
   include: "**/*.mdx",
   name: "writings",
   schema: z.object({
