@@ -2,7 +2,7 @@
 
 import type { Key } from "react";
 import useSWR from "swr";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
@@ -30,10 +30,7 @@ export default function NextjsSWRDemo() {
         component
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/swr"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {data.map((d: { id: Key; name: string; age: string; city: string }) => (

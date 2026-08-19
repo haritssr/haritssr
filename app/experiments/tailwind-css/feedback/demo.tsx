@@ -1,6 +1,7 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindFeedbackDemo() {
@@ -14,10 +15,7 @@ export default function TailwindFeedbackDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/feedback"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <form className="absolute right-8 bottom-8 flex flex-col rounded-lg border bg-white">
         <textarea

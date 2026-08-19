@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 function useDebounce(value: string, delay: number) {
@@ -64,10 +65,7 @@ export default function ReactSearchTableDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/search-table"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <input
         className="mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-200"

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import useWindowSize from "react-use/lib/useWindowSize";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
@@ -24,10 +25,7 @@ export default function ReactConfettiDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/confetti"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Confetti height={height} width={width} />
     </>

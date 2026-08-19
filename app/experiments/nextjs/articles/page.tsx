@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import { NextjsArticlesData } from "@/data/NextjsExperimentsData";
@@ -24,10 +25,7 @@ export default function ArticlesPage() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/articles"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="mt-5 grid grid-cols-1 xs:grid-cols-2 gap-5 sm:grid-cols-3">

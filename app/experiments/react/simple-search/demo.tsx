@@ -1,7 +1,7 @@
 "use client";
 
 import { useDeferredValue, useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const fruits = [
@@ -35,10 +35,7 @@ export default function SimpleSearch() {
     <div>
       <SubTitle>Search using useState, useMemo, useCallback</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/simple-search"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <input onChange={handleChange} placeholder="Search" value={query} />
 

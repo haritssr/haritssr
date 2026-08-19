@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useImmerReducer } from "use-immer";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 let nextId = 3;
@@ -211,10 +212,7 @@ export default function ReactUseReducerTodoListImmerDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usereducer-todo-list-immer"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <AddTask onAddTask={handleAddTask} />
       <TaskList

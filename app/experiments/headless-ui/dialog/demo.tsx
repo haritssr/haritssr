@@ -5,6 +5,7 @@ import { Fragment, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 // biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
@@ -44,10 +45,7 @@ export default function HeadlessDialogDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/dialog"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="space-y-10">

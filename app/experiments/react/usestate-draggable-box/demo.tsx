@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface Position {
@@ -136,10 +137,7 @@ export default function ReactUseStateDraggableBoxDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-draggable-box"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="mb-5 w-full sm:w-1/6">
         <select onChange={handleColorChange} value={shape.color}>

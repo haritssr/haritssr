@@ -1,9 +1,9 @@
 "use client";
 
 import { AlertDialog } from "radix-ui";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface AlertDialogDemoProps {
@@ -33,10 +33,7 @@ export default function RadixAlertDialogDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/alert-dialog"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <AlertDialogDemo
         actionDesc="Continue"

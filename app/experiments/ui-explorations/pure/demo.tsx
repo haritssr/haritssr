@@ -24,6 +24,7 @@ import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function PureDemo() {
   const [pressed, setPressed] = useState(false);
@@ -47,10 +48,7 @@ export default function PureDemo() {
   return (
     <>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/pure"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Section name="Design Principles" />
       <ExplanationList>

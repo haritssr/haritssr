@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
-import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getAllPostIds, getPostData } from "@/utils/posts.js";
 
@@ -29,10 +29,7 @@ export default async function PostPage({
         </time>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/posts/[id]"
-          name="Source code"
-        />
+        <SourceCodeLink sourcePath="app/experiments/nextjs/posts/[id]" />
       </div>
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">

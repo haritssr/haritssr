@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 function TextWithNumber({
@@ -52,10 +52,7 @@ export default function ReactFunctionalPropsDemo() {
         Functional Props - TypeScript for beginner to master - Jack Herrington
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/functional-props"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <TextWithNumber
         header={(num: number) => <span>The header is {num}</span>}

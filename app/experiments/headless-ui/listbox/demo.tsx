@@ -5,6 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function HeadlessListboxDemo() {
@@ -28,10 +29,7 @@ export default function HeadlessListboxDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/listbox"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <SelectExample1 />
     </>

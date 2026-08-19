@@ -3,6 +3,7 @@
 import Image from "next/image";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import LenovoWallpaper from "@/public/images/LenovoWallPaper.jpg";
 
@@ -16,10 +17,7 @@ export default function NextjsImageLocalDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/next-13-image-local"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <section className="space-y-5">

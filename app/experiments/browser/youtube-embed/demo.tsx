@@ -1,6 +1,6 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function YoutubeEmbedDemo() {
@@ -8,10 +8,7 @@ export default function YoutubeEmbedDemo() {
     <>
       <SubTitle>Youtube Embed</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/youtube-embed"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <iframe
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pictureBin-picture"

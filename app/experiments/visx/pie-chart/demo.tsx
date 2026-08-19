@@ -5,6 +5,7 @@ import { Pie } from "@visx/shape";
 import { Text } from "@visx/text";
 import { useState } from "react";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const coins = [
@@ -40,10 +41,7 @@ export default function VisxPieChartDemo() {
         Hover the ring to see which and how much coin that I have.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/visx/pie-chart"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <svg height={width} width={width}>
         <title>IDK</title>

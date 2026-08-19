@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindNewspaperDemo() {
@@ -15,10 +16,7 @@ export default function TailwindNewspaperDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/newspaper"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="my-10 border border-zinc-400 p-5 tracking-wide">
         <h1 className="my-2 font-bold text-4xl text-zinc-800">Amazing Title</h1>

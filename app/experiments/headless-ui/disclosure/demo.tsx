@@ -2,10 +2,10 @@
 
 import { Disclosure, Transition } from "@headlessui/react";
 import type React from "react";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const Data = [
@@ -47,10 +47,7 @@ export default function HeadlessDisclosureDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/disclosure"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="grid grid-cols-1 gap-16 sm:grid-cols-2">
         <DisclosureChevronTransitions />

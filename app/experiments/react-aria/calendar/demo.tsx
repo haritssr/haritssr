@@ -2,6 +2,7 @@
 
 import { getLocalTimeZone, today } from "@internationalized/date";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import Calendar from "@/utils/react-aria/Calendar.js";
 
@@ -28,10 +29,7 @@ export default function ReactAriaCalendarDemo() {
         </p>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react-aria/calendar"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="flex max-w-xl flex-col items-center">
         <Calendar

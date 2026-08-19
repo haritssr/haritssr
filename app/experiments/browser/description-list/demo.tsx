@@ -2,6 +2,7 @@
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function DescriptionListDemo() {
@@ -22,10 +23,7 @@ export default function DescriptionListDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/description-list"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <dl className="sm:w-1/2">
         <dt className="font-bold">This is title</dt>

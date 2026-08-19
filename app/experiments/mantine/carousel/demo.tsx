@@ -3,6 +3,7 @@
 import { Carousel } from "@mantine/carousel";
 import { Image } from "@mantine/core";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function MantineCarouselDemo() {
@@ -16,10 +17,7 @@ export default function MantineCarouselDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/mantine/carousel"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Carousel
         className="mx-auto max-w-sm"

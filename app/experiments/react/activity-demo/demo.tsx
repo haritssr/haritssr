@@ -1,7 +1,7 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 /*
 BEFORE
@@ -41,10 +41,7 @@ export default function ActivityDemo() {
         the screen.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/activity-demo"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <button
         className="rounded-sm bg-blue-500 px-2.5 py-1.5 text-sm text-white hover:bg-blue-500/95 active:translate-y-px"

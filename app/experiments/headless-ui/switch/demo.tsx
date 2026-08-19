@@ -4,6 +4,7 @@ import { Switch } from "@headlessui/react";
 import { useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function HeadlessSwitchDemo() {
@@ -27,10 +28,7 @@ export default function HeadlessSwitchDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/switch"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <SwitchExample1 />
     </>

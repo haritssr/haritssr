@@ -1,9 +1,9 @@
 "use client";
 
 import { Slider } from "radix-ui";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixSliderDemo() {
@@ -25,10 +25,7 @@ export default function RadixSliderDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/slider"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <form action="">
         <Slider.Root

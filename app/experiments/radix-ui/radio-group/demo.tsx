@@ -1,8 +1,7 @@
 "use client";
 
 import { RadioGroup } from "radix-ui";
-import ExternalLink from "@/components/ExternalLink";
-
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixRadioGroupDemo() {
@@ -13,10 +12,7 @@ export default function RadixRadioGroupDemo() {
         of the buttons can be checked at a time.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/radio-group"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <RadioGroup.Root className="space-y-3">
         <RadioGroup.Item

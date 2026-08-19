@@ -7,7 +7,7 @@ import {
   useContext,
   useState,
 } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface NameInputAddressProps {
@@ -132,10 +132,7 @@ export default function ReactUseMemo1Demo() {
         unchanged
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usememo-1"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <NameInputAddress
         address={address}

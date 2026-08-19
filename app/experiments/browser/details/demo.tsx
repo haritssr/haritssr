@@ -1,6 +1,7 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function DetailsDemo() {
@@ -21,10 +22,7 @@ export default function DetailsDemo() {
         weird native API.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/details"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <details className="cursor-pointer hover:ring-2 hover:ring-blue-500">
         <summary className="hover:text-rose-500">Expand this</summary>

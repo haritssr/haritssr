@@ -1,9 +1,9 @@
 "use client";
 
 import { ToggleGroup } from "radix-ui";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixToggleGroupDemo() {
@@ -20,10 +20,7 @@ export default function RadixToggleGroupDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/toggle-group"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <ToggleGroup.Root className="space-x-2" type="multiple">

@@ -15,6 +15,7 @@ import { timeFormat } from "d3-time-format";
 import type { MouseEvent, TouchEvent } from "react";
 import useMeasure from "react-use-measure";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const data = appleStock.slice(0, 20);
@@ -76,10 +77,7 @@ export default function VisxBarChartDemo() {
         Hover the bar to see details.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/visx/bar-chart"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <svg className="w-full" ref={ref} viewBox={`0 0 ${width} ${height}`}>
         <title>IDK</title>

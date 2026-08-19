@@ -1,6 +1,6 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindColumnsDemo() {
@@ -8,10 +8,7 @@ export default function TailwindColumnsDemo() {
     <>
       <SubTitle>Columns</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/columns"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 xl:columns-4">

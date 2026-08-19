@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindCenteringDivDemo() {
@@ -11,10 +11,7 @@ export default function TailwindCenteringDivDemo() {
         Methods to centering div in Tailwind CSS or inline CSS
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/centering-div"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <section className="grid grid-cols-1 gap-10 sm:grid-cols-2">

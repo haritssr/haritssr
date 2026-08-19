@@ -2,8 +2,8 @@
 
 import type React from "react";
 import { useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function InputsDemo() {
@@ -11,10 +11,7 @@ export default function InputsDemo() {
     <>
       <SubTitle>Browser built-in input elements </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/inputs"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-14">
         <Wrapper name="text">

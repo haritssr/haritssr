@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 function formatTime(second: number) {
@@ -47,10 +47,7 @@ export default function ReactCounterDemo() {
     <>
       <SubTitle>Counter</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/counter"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div>{formatTime(second)}</div>
       <div>{second}</div>

@@ -2,7 +2,7 @@
 
 import { parseAsInteger, useQueryState } from "nuqs";
 import { Suspense } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 // import { IncrementButton } from "../../../app/times-table/IncrementButton";
 // import TimesTableComponent from "../../../app/times-table/TimesTable";
 
@@ -10,10 +10,7 @@ export default function TimesTableDemo() {
   return (
     <>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/times-table"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Suspense fallback="..loading">
         <IncrementButton />

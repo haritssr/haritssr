@@ -2,11 +2,11 @@
 
 import { Collapsible } from "radix-ui";
 import { useState } from "react";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixCollapsibleDemo() {
@@ -28,10 +28,7 @@ export default function RadixCollapsibleDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/collapsible"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Collapsible.Root
         className="w-full sm:w-2/3"

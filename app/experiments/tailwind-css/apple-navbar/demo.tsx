@@ -2,6 +2,7 @@
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindAppleNavbarDemo() {
@@ -12,10 +13,7 @@ export default function TailwindAppleNavbarDemo() {
         sticky navigation bar
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/apple-navbar"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div>
         <div className="border border-zinc-300">

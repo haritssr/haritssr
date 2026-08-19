@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ClockDemo() {
@@ -11,10 +11,7 @@ export default function ClockDemo() {
         Clock using new Date(), useEffect(), useInterval(), cleanInterval()
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/clock"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Clock />
     </>

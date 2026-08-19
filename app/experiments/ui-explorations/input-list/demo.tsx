@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function InputList() {
   const [input, setInput] = useState<string>("");
@@ -17,10 +17,7 @@ export default function InputList() {
   return (
     <div>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/input-list"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <input
         className="border px-2 py-1"

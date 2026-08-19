@@ -2,9 +2,9 @@
 
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { DropdownMenu } from "radix-ui";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixDropdownMenuDemo() {
@@ -30,10 +30,7 @@ export default function RadixDropdownMenuDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/dropdown-menu"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>

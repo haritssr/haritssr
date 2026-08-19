@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useState } from "react";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function NextjsRouterDemo() {
@@ -68,10 +69,7 @@ function RouterDemoContent() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/router"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="mb-10 space-y-2">

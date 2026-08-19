@@ -1,9 +1,9 @@
 "use client";
 
 import { Popover } from "radix-ui";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixPopoverDemo() {
@@ -20,10 +20,7 @@ export default function RadixPopoverDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/popover"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Popover.Root>
         <Popover.Trigger className="w-auto rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1 font-medium text-zinc-800 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-100">

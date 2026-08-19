@@ -3,10 +3,10 @@
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Accordion } from "radix-ui";
 import type { ReactNode } from "react";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface AccordionComponentsProps {
@@ -34,10 +34,7 @@ export default function RadixAccordionDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/accordion"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="space-y-2">
         <Section name="Accordion + (transition)" />

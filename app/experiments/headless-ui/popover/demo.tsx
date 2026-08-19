@@ -4,6 +4,7 @@ import { Popover, Transition } from "@headlessui/react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function HeadlessPopoverDemo() {
@@ -24,10 +25,7 @@ export default function HeadlessPopoverDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/popover"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="space-y-10">
         <Wrapper title="Popover (for Navigation)">

@@ -1,7 +1,7 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function DifferentCssStylingDemo() {
@@ -11,10 +11,7 @@ export default function DifferentCssStylingDemo() {
         Click blue &quot;source github button&quot; to see the source code
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/different-css-styling"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Section name="Coloring, Box size, Rounded corner, Padding" />
       <div className="flex space-x-5">

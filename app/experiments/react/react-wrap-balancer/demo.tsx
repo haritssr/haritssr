@@ -1,7 +1,7 @@
 "use client";
 
 import Balancer from "react-wrap-balancer";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactWrapBalancerDemo() {
@@ -9,10 +9,7 @@ export default function ReactWrapBalancerDemo() {
     <>
       <SubTitle>React Wrap Balancer</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/react-wrap-balancer"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Balancer>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos similique

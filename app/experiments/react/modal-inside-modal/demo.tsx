@@ -2,7 +2,7 @@
 
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Dialog } from "radix-ui";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactModalInsideModalDemo() {
@@ -10,10 +10,7 @@ export default function ReactModalInsideModalDemo() {
     <>
       <SubTitle>Modal Inside Modal</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/modal-inside-modal"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <Dialog.Root>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function FigureDemo() {
@@ -15,10 +15,7 @@ export default function FigureDemo() {
         need to design it.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/figure"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div>
         <figure>

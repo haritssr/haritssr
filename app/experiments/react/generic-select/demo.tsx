@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface Base {
@@ -86,10 +87,7 @@ export default function ReactGenericSelectDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/generic-select"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="font-semibold text-xl">
         Please choose your subject and teacher

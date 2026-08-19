@@ -1,6 +1,6 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindYoutubeThumbnailDemo() {
@@ -8,10 +8,7 @@ export default function TailwindYoutubeThumbnailDemo() {
     <>
       <SubTitle>Youtube Thumbnail example</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/youtube-thumbnail"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="relative h-[360px] w-full overflow-hidden rounded-md border border-purple-300 bg-linear-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">

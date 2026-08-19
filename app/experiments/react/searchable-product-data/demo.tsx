@@ -3,6 +3,7 @@
 import { type Dispatch, type JSX, type SetStateAction, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface productDataType {
@@ -156,10 +157,7 @@ export default function ReactSearchableProductDataDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/searchable-product-data"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <FilterableProductTable products={productData} />
     </>

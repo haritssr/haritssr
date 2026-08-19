@@ -1,6 +1,6 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 // Doens't work on password type
@@ -10,10 +10,7 @@ export default function TailwindFloatingLabelsDemo() {
     <>
       <SubTitle>Try to tap and write on input, the label will go up</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/floating-labels"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="relative mt-4 space-y-10">

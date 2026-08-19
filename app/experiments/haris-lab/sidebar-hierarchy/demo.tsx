@@ -1,16 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function SidebarHierarchyDemo() {
   return (
     <div className="space-y-5 sm:w-2/5">
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/haris-lab/sidebar-hierarchy"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       {PhysicsHierarchyData.map((domain) => (
         <details

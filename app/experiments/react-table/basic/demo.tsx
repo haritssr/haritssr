@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useReducer, useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactTableBasicDemo() {
@@ -15,10 +15,7 @@ export default function ReactTableBasicDemo() {
     <>
       <SubTitle>Basic table from react table</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react-table/basic"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Table />
     </>

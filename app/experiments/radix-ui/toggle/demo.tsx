@@ -2,9 +2,9 @@
 
 import { Toggle } from "radix-ui";
 import { useState } from "react";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixToggleDemo() {
@@ -22,10 +22,7 @@ export default function RadixToggleDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/toggle"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Toggle.Root
         className="rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium rdx-state-on:text-action rdx-state-on:ring-2 rdx-state-on:ring-blue-600 hover:bg-zinc-50"

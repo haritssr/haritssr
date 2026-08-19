@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactEditProfileDemo() {
@@ -23,10 +24,7 @@ export default function ReactEditProfileDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/edit-profile"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <form
         onSubmit={(e) => {

@@ -2,6 +2,7 @@
 
 import { BeakerIcon } from "@heroicons/react/24/outline";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindGlowingBackgroundDemo() {
@@ -15,10 +16,7 @@ export default function TailwindGlowingBackgroundDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/glowing-background"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="h-auto rounded-lg bg-black px-2 py-6 sm:px-8 sm:py-16">

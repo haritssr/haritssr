@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactUseEffectTitleDemo() {
@@ -17,10 +17,7 @@ export default function ReactUseEffectTitleDemo() {
     <>
       <SubTitle>Count = {count}</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/useeffect-title"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="space-x-2">
         <button onClick={() => setCount(count + 1)} type="button">

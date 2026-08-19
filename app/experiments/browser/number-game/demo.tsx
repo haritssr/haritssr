@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function NumberGameDemo() {
@@ -56,10 +56,7 @@ export default function NumberGameDemo() {
           Every wrong answer decrease one score.
         </SubTitle>
         <div className="mb-14">
-          <ExternalLink
-            href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/number-game"
-            name="Source code"
-          />
+          <SourceCodeLink />
         </div>
         <div className="pt-24 text-center font-bold text-4xl text-green-500">
           You win!
@@ -91,10 +88,7 @@ export default function NumberGameDemo() {
         Every wrong answer decrease one score.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/number-game"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center pt-24">
         <div className={state.incorrect ? "incorrect" : ""}>

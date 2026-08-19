@@ -1,6 +1,7 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindGridDemo() {
@@ -14,10 +15,7 @@ export default function TailwindGridDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/grid"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="grid min-h-screen place-items-center">
         <div className="grid max-w-5xl xs:grid-cols-2 gap-4 md:grid-cols-4">

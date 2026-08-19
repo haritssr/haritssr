@@ -2,6 +2,7 @@
 
 import { useReducer, useState } from "react";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 let nextId = 3;
@@ -204,10 +205,7 @@ export default function ReactUseReducerTodoListDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usereducer-todo-list"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <AddTask onAddTask={handleAddTask} />
       <TaskList

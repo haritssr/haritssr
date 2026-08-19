@@ -2,6 +2,7 @@
 
 import { type FormEvent, type SetStateAction, useState } from "react";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 function submitForm(answer: string) {
@@ -103,10 +104,7 @@ export default function ReactUseStateReactingToInputDemo() {
         />
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-reacting-to-input"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Example />
     </>

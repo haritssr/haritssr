@@ -1,7 +1,7 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface BoxProps {
@@ -16,10 +16,7 @@ export default function TailwindVsAppleColorDemo() {
         The difference between Tailwind CSS Gray colors vs Apple Gray colors
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/tailwind-vs-apple-color"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Section name="Apple" />
       <div className="mb-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">

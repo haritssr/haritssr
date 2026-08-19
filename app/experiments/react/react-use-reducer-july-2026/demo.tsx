@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducer } from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 type Action = "increment" | "decrement";
@@ -22,10 +22,7 @@ export default function ReactUseReducerJuly2026() {
     <div>
       <SubTitle>use reducer</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/react-use-reducer-july-2026"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <h1>{count}</h1>
       <button onClick={() => dispatch("increment")} type="button">

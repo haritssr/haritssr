@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type React from "react";
-import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindPositionDemo() {
@@ -10,10 +10,7 @@ export default function TailwindPositionDemo() {
     <>
       <SubTitle>CSS position with Tailwind CSS</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/position"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="space-y-10">
         <Wrapper title="relative + absolute">

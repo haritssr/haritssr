@@ -9,6 +9,7 @@ import Image from "next/image";
 import { NavigationMenu } from "radix-ui";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function NotionNavbarDemo() {
@@ -36,10 +37,7 @@ export default function NotionNavbarDemo() {
         </div>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/notion-navbar"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
     </>
   );

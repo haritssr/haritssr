@@ -1,6 +1,7 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 // native version
@@ -85,10 +86,7 @@ function IntersectionObserverAPIHooks() {
         Scroll to the bottom to see the effect, the rocket launches.🚀.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/intersection-observer-api"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <div className="mt-96 rounded-md bg-zinc-100 p-10">
         <h2 className="mb-2 font-semibold text-2xl" ref={myRef}>

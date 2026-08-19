@@ -11,8 +11,7 @@ import {
 } from "@radix-ui/react-icons";
 import { styled } from "@stitches/react";
 import { Toolbar as ToolbarPrimitive } from "radix-ui";
-import ExternalLink from "@/components/ExternalLink";
-
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const StyledToolbar = styled(ToolbarPrimitive.Root, {
@@ -105,10 +104,7 @@ export default function RadixToolbarDemo() {
         groups or dropdown menus.
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/toolbar"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
 
       <div className="w-full overflow-x-auto p-1">

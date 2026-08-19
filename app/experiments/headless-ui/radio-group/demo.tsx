@@ -4,6 +4,7 @@ import { RadioGroup } from "@headlessui/react";
 import { type JSX, type SVGProps, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const plans = [
@@ -45,10 +46,7 @@ export default function HeadlessRadioGroupDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/radio-group"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Example1 />
     </>

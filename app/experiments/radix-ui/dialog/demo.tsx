@@ -2,9 +2,9 @@
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog } from "radix-ui";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function RadixDialogDemo() {
@@ -27,10 +27,7 @@ export default function RadixDialogDemo() {
         </ExplanationList>
       </SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/dialog"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <Dialog.Root>
         <Dialog.Trigger className="rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1.5 font-medium text-zinc-800 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-100">

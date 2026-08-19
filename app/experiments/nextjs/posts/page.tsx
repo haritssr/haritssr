@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import { getSortedPostsData } from "@/utils/posts.js";
@@ -22,10 +22,7 @@ export default function PostsPage() {
       <PageTitle title="Posts" />
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
       <div className="mb-14">
-        <ExternalLink
-          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/posts"
-          name="Source code"
-        />
+        <SourceCodeLink />
       </div>
       <ul className="space-y-5">
         {allPostsData.map(({ id, date, title }: Post) => (
