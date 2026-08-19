@@ -34,14 +34,10 @@ export default function ExperimentDomainLayout({
   const experimentSlug = segments.at(-1);
   const isIndexPage = segments.length === 3; // /experiments/<domain>
   const domainChildSlug = segments.at(3);
-
-  if (
+  const isStandaloneNextjsRoute =
     domain === "nextjs" &&
     domainChildSlug &&
-    standaloneNextjsRoutes.has(domainChildSlug)
-  ) {
-    return children;
-  }
+    standaloneNextjsRoutes.has(domainChildSlug);
 
   // Get title for the page
   const title = isIndexPage
@@ -56,7 +52,9 @@ export default function ExperimentDomainLayout({
       <div className="w-full sm:border-t">
         <article className="sm:px-0">
           <BackButton href="/experiments" name={prevRoute} />
-          {!isIndexPage && <PageTitle title={title} />}
+          {!(isIndexPage || isStandaloneNextjsRoute) && (
+            <PageTitle title={title} />
+          )}
           {children}
         </article>
       </div>
