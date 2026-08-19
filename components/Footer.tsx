@@ -1,3 +1,4 @@
+import { RSS_PATH } from "@/utils/site";
 import PWAInstallPrompt from "./PWAInstallPrompt";
 import Share from "./Share";
 
@@ -17,6 +18,12 @@ export default function Footer() {
       </div>
       <div className="flex items-center gap-4">
         <PWAInstallPrompt />
+        <a
+          className="cursor-pointer select-none text-zinc-400 hover:text-zinc-800"
+          href={RSS_PATH}
+        >
+          RSS
+        </a>
         <Share />
       </div>
     </footer>
