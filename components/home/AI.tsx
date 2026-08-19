@@ -8,7 +8,8 @@ export default function AI() {
           <span className="font-medium text-zinc-700">Code Editor:</span> Zed
         </li>
         <li className="text-zinc-500">
-          <span className="font-medium text-zinc-700">Terminal:</span> Zed Agent
+          <span className="font-medium text-zinc-700">Terminal:</span> Zed
+          Agent, Ghossty, MacOS Terminal
         </li>
         <li className="text-zinc-500">
           <span className="font-medium text-zinc-700">Agent:</span> Codex CLI in
