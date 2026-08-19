@@ -1,4 +1,4 @@
-import ExternalLink from "../ExternalLink";
+import ExternalLink from "@/components/ExternalLink";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 const newsletters = [

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Box from "../Box";
-import SecondaryButton from "../SecondaryButton";
+import Box from "@/components/Box";
+import SecondaryButton from "@/components/SecondaryButton";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function CV() {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ContactList from "../ContactList";
+import ContactList from "@/components/ContactList";
 
 export default function Contacts() {
   return (

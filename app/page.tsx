@@ -1,10 +1,10 @@
-import AI from "@/components/home/AI";
-import Contacts from "@/components/home/Contacts";
-import CV from "@/components/home/CV";
-import Experiments from "@/components/home/Experiments";
-import Newsletters from "@/components/home/Newsletters";
-import Projects from "@/components/home/Projects";
-import Writing from "@/components/home/Writing";
+import AI from "./_components/home/AI";
+import Contacts from "./_components/home/Contacts";
+import CV from "./_components/home/CV";
+import Experiments from "./_components/home/Experiments";
+import Newsletters from "./_components/home/Newsletters";
+import Projects from "./_components/home/Projects";
+import Writing from "./_components/home/Writing";
 
 export default function Home() {
   return (
