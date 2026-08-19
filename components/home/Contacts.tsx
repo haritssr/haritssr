@@ -5,7 +5,7 @@ export default function Contacts() {
   return (
     <section
       aria-labelledby="profile-heading"
-      className="mb-20 grid grid-cols-1 gap-5 pt-5 sm:grid-cols-4"
+      className="mb-20 grid grid-cols-1 gap-8 pt-5 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-5"
     >
       <div className="flex select-none items-center justify-start">
         <Image
@@ -36,6 +36,13 @@ export default function Contacts() {
         <p>South Tangerang, Indonesia</p>
       </div>
       <ContactList />
+      <div className="space-y-2.5 text-zinc-500" id="topics">
+        <p className="font-semibold text-zinc-800">Interests</p>
+        <p className="-my-1.5 leading-8 sm:leading-8.5" id="desc">
+          Web, JavaScript, TypeScript, Effect, Next.js, Functional Programming,
+          Category Theory, Math, Physics, and Education .
+        </p>
+      </div>
     </section>
   );
 }
