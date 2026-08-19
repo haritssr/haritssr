@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 const defaultFormData = {
@@ -38,6 +39,12 @@ export default function ReactSubmitFormDemo() {
           <li>Submit (as console.log) contents of input.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/submit-form"
+          name="Source code"
+        />
+      </div>
       <form className="w-full space-y-5 sm:w-1/3" onSubmit={onSubmit}>
         <div className={wrapperStyle}>
           <label htmlFor="title">Title</label>

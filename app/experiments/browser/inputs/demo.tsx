@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import SubTitle from "@/components/SubTitle";
 
@@ -9,6 +10,12 @@ export default function InputsDemo() {
   return (
     <>
       <SubTitle>Browser built-in input elements </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/inputs"
+          name="Source code"
+        />
+      </div>
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-14">
         <Wrapper name="text">
           <InputText />

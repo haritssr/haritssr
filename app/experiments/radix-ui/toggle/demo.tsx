@@ -21,6 +21,12 @@ export default function RadixToggleDemo() {
           <li>Click to change.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/toggle"
+          name="Source code"
+        />
+      </div>
       <Toggle.Root
         className="rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium rdx-state-on:text-action rdx-state-on:ring-2 rdx-state-on:ring-blue-600 hover:bg-zinc-50"
         onPressedChange={() => {

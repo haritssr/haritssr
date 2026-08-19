@@ -26,6 +26,12 @@ export default function HeadlessSwitchDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/switch"
+          name="Source code"
+        />
+      </div>
       <SwitchExample1 />
     </>
   );

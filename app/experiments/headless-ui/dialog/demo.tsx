@@ -43,6 +43,12 @@ export default function HeadlessDialogDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/dialog"
+          name="Source code"
+        />
+      </div>
 
       <div className="space-y-10">
         <Wrapper title="Dialog without transition">

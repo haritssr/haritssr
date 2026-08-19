@@ -7,6 +7,7 @@ import {
   useContext,
   useState,
 } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 interface NameInputAddressProps {
@@ -130,6 +131,12 @@ export default function ReactUseMemo1Demo() {
         useMemo lets you skip re-rendering components when the props are
         unchanged
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usememo-1"
+          name="Source code"
+        />
+      </div>
       <NameInputAddress
         address={address}
         name={name}

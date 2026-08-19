@@ -85,6 +85,12 @@ export default function ReactGenericSelectDemo() {
           <li>The option you choose will immedietly appear in Results.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/generic-select"
+          name="Source code"
+        />
+      </div>
       <div className="font-semibold text-xl">
         Please choose your subject and teacher
       </div>

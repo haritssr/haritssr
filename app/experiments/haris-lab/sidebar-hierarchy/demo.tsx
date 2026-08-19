@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function SidebarHierarchyDemo() {
   return (
     <div className="space-y-5 sm:w-2/5">
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/haris-lab/sidebar-hierarchy"
+          name="Source code"
+        />
+      </div>
       {PhysicsHierarchyData.map((domain) => (
         <details
           aria-label="domain-area"

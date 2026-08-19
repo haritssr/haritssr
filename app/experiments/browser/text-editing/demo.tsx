@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TextEditingDemo() {
@@ -11,6 +12,12 @@ export default function TextEditingDemo() {
   return (
     <>
       <SubTitle>HTML built-in text editing tag</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/text-editing"
+          name="Source code"
+        />
+      </div>
       <div className="flex flex-col space-y-2" ref={elementSelected}>
         <del>del</del>
         <s>s</s>

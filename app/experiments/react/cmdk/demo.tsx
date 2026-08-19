@@ -2,6 +2,7 @@
 
 import { Command } from "cmdk";
 import { useEffect, useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactCmdkDemo() {
@@ -28,6 +29,12 @@ export default function ReactCmdkDemo() {
   return (
     <>
       <SubTitle>Fast, composable, unstyled command menu for React.</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/cmdk"
+          name="Source code"
+        />
+      </div>
       <Command.Dialog
         label="Global Command Menu"
         onOpenChange={setOpen}

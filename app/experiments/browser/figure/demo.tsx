@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function FigureDemo() {
@@ -13,6 +14,12 @@ export default function FigureDemo() {
         tailwindcss preflight, so the figcaption is not italic by default, I
         need to design it.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/figure"
+          name="Source code"
+        />
+      </div>
       <div>
         <figure>
           <Image

@@ -22,6 +22,12 @@ export default function RadixScrollAreaDemo() {
           <li>Try to scroll it.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/scroll-area"
+          name="Source code"
+        />
+      </div>
       <ScrollArea.Root className="h-64 w-2/3 rounded-md border border-zinc-400">
         <ScrollArea.Viewport className="h-full w-full rounded-md bg-white">
           <div className="p-4">

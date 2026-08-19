@@ -46,6 +46,12 @@ export default function HeadlessDisclosureDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/disclosure"
+          name="Source code"
+        />
+      </div>
       <div className="grid grid-cols-1 gap-16 sm:grid-cols-2">
         <DisclosureChevronTransitions />
         <DisclosurePlus />

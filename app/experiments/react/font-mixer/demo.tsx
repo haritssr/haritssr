@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 interface FontMixerProps {
@@ -57,6 +58,12 @@ export default function ReactFontMixerDemo() {
   return (
     <>
       <SubTitle>Font Mixer</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/font-mixer"
+          name="Source code"
+        />
+      </div>
       <FontMixer fonts={["Arial", "Arial"]}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
         convallis mauris dui, non placerat urna fringilla at. Suspendisse a orci

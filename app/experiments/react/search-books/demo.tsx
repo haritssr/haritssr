@@ -3,6 +3,7 @@
 import type { ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 import data from "@/data/Search2Data.json";
 
@@ -56,6 +57,12 @@ export default function ReactSearchBooksDemo(): ReactElement {
           <li>Not include: space sensitive.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/search-books"
+          name="Source code"
+        />
+      </div>
       <div className="group mx-auto flex items-center sm:w-1/3">
         <input
           className="w-full"

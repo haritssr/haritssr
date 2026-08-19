@@ -75,6 +75,12 @@ export default function VisxBarChartDemo() {
         <br />
         Hover the bar to see details.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/visx/bar-chart"
+          name="Source code"
+        />
+      </div>
       <svg className="w-full" ref={ref} viewBox={`0 0 ${width} ${height}`}>
         <title>IDK</title>
         <Group>

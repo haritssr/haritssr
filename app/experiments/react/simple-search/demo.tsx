@@ -1,6 +1,7 @@
 "use client";
 
 import { useDeferredValue, useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 const fruits = [
@@ -33,6 +34,12 @@ export default function SimpleSearch() {
   return (
     <div>
       <SubTitle>Search using useState, useMemo, useCallback</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/simple-search"
+          name="Source code"
+        />
+      </div>
       <input onChange={handleChange} placeholder="Search" value={query} />
 
       {query !== deferredQuery && <p>Searching...</p>}

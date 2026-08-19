@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 
 // Matches every non-digit character.
@@ -43,6 +44,12 @@ export default function YearlyInterest() {
   return (
     <div>
       <PageDescription description="Calculation of yearly save interest" />
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/yearly-interest"
+          name="Source code"
+        />
+      </div>
       <form>
         <label className="block w-fit text-zinc-500" htmlFor="Initial">
           Initial (Rp)

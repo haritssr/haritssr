@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ClockDemo() {
@@ -9,6 +10,12 @@ export default function ClockDemo() {
       <SubTitle>
         Clock using new Date(), useEffect(), useInterval(), cleanInterval()
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/clock"
+          name="Source code"
+        />
+      </div>
       <Clock />
     </>
   );

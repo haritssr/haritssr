@@ -30,6 +30,12 @@ export default function HeadlessTabsDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/tabs"
+          name="Source code"
+        />
+      </div>
       <Example1 />
     </>
   );

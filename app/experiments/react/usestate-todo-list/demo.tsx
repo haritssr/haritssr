@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import type { JSX } from "react/jsx-runtime";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 interface Todo {
@@ -185,6 +186,12 @@ export default function ReactUseStateTodoListDemo() {
   return (
     <>
       <SubTitle>Todo list with useState</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-todo-list"
+          name="Source code"
+        />
+      </div>
       <AddTodo onAddTodo={handleAddTodo} />
       <TaskList
         onChangeTodo={handleChangeTodo}

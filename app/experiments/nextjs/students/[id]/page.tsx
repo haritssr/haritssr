@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
 import {
   getNextjsStudent,
@@ -33,6 +34,12 @@ export default async function StudentPage({ params }: Props) {
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
       <PageTitle title="Student Details" />
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/students/[id]"
+          name="Source code"
+        />
+      </div>
       <div className="mt-5 space-y-2">
         <div className="text-zinc-500">
           <span className="font-semibold text-zinc-800">Name :</span>{" "}

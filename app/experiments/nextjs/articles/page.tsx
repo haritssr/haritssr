@@ -23,6 +23,12 @@ export default function ArticlesPage() {
           name="generateStaticParams"
         />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/articles"
+          name="Source code"
+        />
+      </div>
 
       <div className="mt-5 grid grid-cols-1 xs:grid-cols-2 gap-5 sm:grid-cols-3">
         {NextjsArticlesData.map((article) => (

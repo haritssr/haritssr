@@ -13,24 +13,35 @@ import SubTitle from "@/components/SubTitle";
 
 export default function NotionNavbarDemo() {
   return (
-    <SubTitle>
-      <ExternalLink href="https://www.notion.so/desktop" name="Notion NavBar" />
-      <ExplanationList>
-        <li>Navigation Bar at Notion Marketing Pages</li>
-        <li>
-          Using Radix UI{" "}
-          <ExternalLink
-            href="https://www.radix-ui.com/docs/primitives/components/navigation-menu"
-            name="Navigation Menu"
-          />
-          to enable this features.
-        </li>
-      </ExplanationList>
-      <div className="flex items-center space-x-2 pt-16">
-        <Logo />
-        <Yes />
+    <>
+      <SubTitle>
+        <ExternalLink
+          href="https://www.notion.so/desktop"
+          name="Notion NavBar"
+        />
+        <ExplanationList>
+          <li>Navigation Bar at Notion Marketing Pages</li>
+          <li>
+            Using Radix UI{" "}
+            <ExternalLink
+              href="https://www.radix-ui.com/docs/primitives/components/navigation-menu"
+              name="Navigation Menu"
+            />
+            to enable this features.
+          </li>
+        </ExplanationList>
+        <div className="flex items-center space-x-2 pt-16">
+          <Logo />
+          <Yes />
+        </div>
+      </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/notion-navbar"
+          name="Source code"
+        />
       </div>
-    </SubTitle>
+    </>
   );
 }
 function Logo() {

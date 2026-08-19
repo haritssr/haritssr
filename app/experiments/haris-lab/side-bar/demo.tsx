@@ -4,12 +4,19 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Accordion } from "radix-ui";
 import type React from "react";
 import { useRef, useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function SideBarDemo() {
   const [openAll, setOpenAll] = useState<boolean>(false);
   return (
     // Subjek
     <div className="w-full space-y-5">
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/haris-lab/side-bar"
+          name="Source code"
+        />
+      </div>
       {/* Domains */}
       {fisika.map((domain) => (
         <div key={domain.title}>

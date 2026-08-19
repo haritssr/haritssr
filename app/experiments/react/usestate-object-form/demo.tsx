@@ -37,6 +37,12 @@ export default function ReactUseStateObjectFormDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-object-form"
+          name="Source code"
+        />
+      </div>
       <form className="mb-5 flex flex-col space-y-3">
         <label className={labelStyle}>
           First Name

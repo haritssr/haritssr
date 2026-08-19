@@ -2,10 +2,17 @@
 
 import { QueueListIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog } from "radix-ui";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function ContextModalDemo() {
   return (
     <Dialog.Root>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/haris-lab/context-modal"
+          name="Source code"
+        />
+      </div>
       <Dialog.Trigger className="rounded-md bg-zinc-100 p-2 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-200">
         <QueueListIcon className="h-5 w-5 text-zinc-700" />
       </Dialog.Trigger>

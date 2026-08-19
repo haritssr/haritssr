@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-
 import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function NumberGameDemo() {
@@ -55,6 +55,12 @@ export default function NumberGameDemo() {
           <br />
           Every wrong answer decrease one score.
         </SubTitle>
+        <div className="mb-8">
+          <ExternalLink
+            href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/number-game"
+            name="Source code"
+          />
+        </div>
         <div className="pt-24 text-center font-bold text-4xl text-green-500">
           You win!
         </div>
@@ -84,6 +90,12 @@ export default function NumberGameDemo() {
         <br />
         Every wrong answer decrease one score.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/number-game"
+          name="Source code"
+        />
+      </div>
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center pt-24">
         <div className={state.incorrect ? "incorrect" : ""}>
           {state.num1}+{state.num2}

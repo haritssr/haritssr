@@ -1,11 +1,18 @@
 "use client";
 
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function CustomScrollDemo() {
   return (
     <>
       <SubTitle>Custom Scroll</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/custom-scroll"
+          name="Source code"
+        />
+      </div>
       <div className="h-40 overflow-y-scroll">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias non
         assumenda harum facere tempore a sequi tempora vel adipisci ad itaque,

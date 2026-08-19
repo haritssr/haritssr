@@ -67,6 +67,12 @@ function RouterDemoContent() {
           name="next/navigation"
         />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/router"
+          name="Source code"
+        />
+      </div>
 
       <div className="mb-10 space-y-2">
         <Section name="usePathname" />

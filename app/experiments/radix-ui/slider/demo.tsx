@@ -24,6 +24,12 @@ export default function RadixSliderDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/slider"
+          name="Source code"
+        />
+      </div>
       <form action="">
         <Slider.Root
           className="relative flex w-full select-none items-center"

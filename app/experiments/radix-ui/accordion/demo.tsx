@@ -33,6 +33,12 @@ export default function RadixAccordionDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/accordion"
+          name="Source code"
+        />
+      </div>
       <div className="space-y-2">
         <Section name="Accordion + (transition)" />
         <AccordionComponents title="Title">

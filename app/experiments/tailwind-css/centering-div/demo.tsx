@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindCenteringDivDemo() {
@@ -9,6 +10,12 @@ export default function TailwindCenteringDivDemo() {
       <SubTitle>
         Methods to centering div in Tailwind CSS or inline CSS
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/centering-div"
+          name="Source code"
+        />
+      </div>
 
       <section className="grid grid-cols-1 gap-10 sm:grid-cols-2">
         <Wrapper

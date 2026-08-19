@@ -1,5 +1,6 @@
 import PageTitle from "components/PageTitle";
 import type { Metadata } from "next";
+import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -14,6 +15,12 @@ export default function StudentsPage() {
       <SubTitle>
         A list of students from local data, rendered as static App Router pages.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/students"
+          name="Source code"
+        />
+      </div>
       <div className="flex flex-col space-y-3">
         {NextjsStudentsData.map((student) => (
           <InternalLink

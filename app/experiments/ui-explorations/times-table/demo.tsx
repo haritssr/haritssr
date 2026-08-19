@@ -2,15 +2,24 @@
 
 import { parseAsInteger, useQueryState } from "nuqs";
 import { Suspense } from "react";
+import ExternalLink from "@/components/ExternalLink";
 // import { IncrementButton } from "../../../app/times-table/IncrementButton";
 // import TimesTableComponent from "../../../app/times-table/TimesTable";
 
 export default function TimesTableDemo() {
   return (
-    <Suspense fallback="..loading">
-      <IncrementButton />
-      <TimesTableComponent />
-    </Suspense>
+    <>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/times-table"
+          name="Source code"
+        />
+      </div>
+      <Suspense fallback="..loading">
+        <IncrementButton />
+        <TimesTableComponent />
+      </Suspense>
+    </>
   );
 }
 

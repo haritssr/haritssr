@@ -39,6 +39,12 @@ export default function VisxPieChartDemo() {
         <br />
         Hover the ring to see which and how much coin that I have.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/visx/pie-chart"
+          name="Source code"
+        />
+      </div>
       <svg height={width} width={width}>
         <title>IDK</title>
         <Group left={halfWidth} top={halfWidth}>

@@ -20,6 +20,12 @@ export default function DetailsDemo() {
         <br />I prefer Headless UI or Radix UI similar UI component than this
         weird native API.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/details"
+          name="Source code"
+        />
+      </div>
       <details className="cursor-pointer hover:ring-2 hover:ring-blue-500">
         <summary className="hover:text-rose-500">Expand this</summary>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque dolores

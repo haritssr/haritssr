@@ -22,6 +22,12 @@ export default function SelectDemo() {
           name="Radix Primitive Select"
         />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/select"
+          name="Source code"
+        />
+      </div>
       <select className="w-1/3 px-2 py-2" id="pet-select" name="pets">
         <option value="">Please choose an option</option>
         <option disabled value="dog">

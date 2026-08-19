@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function Stopwatch() {
   const [time, setTime] = useState<number>(0);
@@ -23,6 +24,12 @@ export default function Stopwatch() {
 
   return (
     <>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/stopwatch"
+          name="Source code"
+        />
+      </div>
       <div>{time}</div>
       <div className="space-x-3">
         <button

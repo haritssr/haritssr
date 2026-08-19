@@ -84,6 +84,12 @@ function IntersectionObserverAPIHooks() {
         <br />
         Scroll to the bottom to see the effect, the rocket launches.🚀.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/intersection-observer-api"
+          name="Source code"
+        />
+      </div>
       <div className="mt-96 rounded-md bg-zinc-100 p-10">
         <h2 className="mb-2 font-semibold text-2xl" ref={myRef}>
           {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}

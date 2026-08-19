@@ -1,6 +1,7 @@
 "use client";
 
 import { RadioGroup } from "radix-ui";
+import ExternalLink from "@/components/ExternalLink";
 
 import SubTitle from "@/components/SubTitle";
 
@@ -11,6 +12,12 @@ export default function RadixRadioGroupDemo() {
         A set of checkable buttons—known as radio buttons—where no more than one
         of the buttons can be checked at a time.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/radio-group"
+          name="Source code"
+        />
+      </div>
       <RadioGroup.Root className="space-y-3">
         <RadioGroup.Item
           className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 rdx-state-checked:border-blue-600 bg-white hover:bg-blue-50"

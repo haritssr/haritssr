@@ -29,6 +29,12 @@ export default function RadixDropdownMenuDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/dropdown-menu"
+          name="Source code"
+        />
+      </div>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <div className="rounded-md border border-zinc-400 px-3 py-1 font-medium text-zinc-800 hover:bg-zinc-100 focus:outline-hidden">

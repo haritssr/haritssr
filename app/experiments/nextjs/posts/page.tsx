@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -20,6 +21,12 @@ export default function PostsPage() {
     <>
       <PageTitle title="Posts" />
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/posts"
+          name="Source code"
+        />
+      </div>
       <ul className="space-y-5">
         {allPostsData.map(({ id, date, title }: Post) => (
           <li key={id}>

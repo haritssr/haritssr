@@ -6,6 +6,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import type { Key } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 interface PersonData {
@@ -27,6 +28,12 @@ export default function ReactQueryBasicDemo() {
   return (
     <QueryClientProvider client={queryClient}>
       <SubTitle>Simple query</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react-query/basic"
+          name="Source code"
+        />
+      </div>
       <Example />
     </QueryClientProvider>
   );

@@ -46,6 +46,12 @@ export default function PureDemo() {
 
   return (
     <>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/pure"
+          name="Source code"
+        />
+      </div>
       <Section name="Design Principles" />
       <ExplanationList>
         <li>

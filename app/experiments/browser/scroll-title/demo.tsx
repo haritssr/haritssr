@@ -1,6 +1,7 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ScrollTitleDemo() {
@@ -8,6 +9,12 @@ export default function ScrollTitleDemo() {
   return (
     <>
       <SubTitle>Scroll Title iOS</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/scroll-title"
+          name="Source code"
+        />
+      </div>
       <nav className="sticky top-[90px] flex justify-between bg-blue-100/80 p-2 saturate-150 backdrop-blur">
         <div className="flex w-1/3 items-center space-x-1 text-action">
           <Left />

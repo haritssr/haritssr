@@ -2,6 +2,7 @@
 
 import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { createContext, type ReactNode, useContext, useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 type Theme = "light" | "dark";
@@ -27,6 +28,12 @@ export default function ReactUseContextDarkModeDemo() {
   return (
     <>
       <SubTitle>Yeah</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usecontext-dark-mode"
+          name="Source code"
+        />
+      </div>
       <ThemeContext.Provider value={theme}>
         <div className="space-y-2">
           <Form />

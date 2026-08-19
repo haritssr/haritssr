@@ -8,8 +8,14 @@ export default function TailwindPlanetscaleNavbarDemo() {
     <>
       <SubTitle>
         Responsive PlanetScale navigation bar.{" "}
-        <ExternalLink href="https://www.planetscale.com" name="Source" />
+        <ExternalLink href="https://www.planetscale.com" name="Source code" />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/planetscale-navbar"
+          name="Source code"
+        />
+      </div>
       <div className="flex h-auto w-full flex-col items-start justify-between space-y-5 rounded-md bg-[#1a1b21] px-6 py-6 text-tiny md:flex-row md:items-center md:space-y-0 md:py-4 md:pr-4">
         <div className="flex w-full items-center space-x-2 md:w-1/3">
           <svg

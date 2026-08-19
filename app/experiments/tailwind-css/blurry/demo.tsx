@@ -1,11 +1,18 @@
 "use client";
 
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindBlurryDemo() {
   return (
     <>
       <SubTitle>Background Blurry Effect</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/blurry"
+          name="Source code"
+        />
+      </div>
       <div>
         <div className="border border-zinc-300 p-3">
           <div className="relative w-full max-w-lg">

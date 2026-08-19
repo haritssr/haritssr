@@ -1,4 +1,5 @@
 import { format, parseISO } from "date-fns";
+import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
 import SubTitle from "@/components/SubTitle";
 import { getAllPostIds, getPostData } from "@/utils/posts.js";
@@ -27,6 +28,12 @@ export default async function PostPage({
           {format(parseISO(postData.date), "LLLL d, yyyy")}
         </time>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/posts/[id]"
+          name="Source code"
+        />
+      </div>
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia

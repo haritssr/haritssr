@@ -155,6 +155,12 @@ export default function ReactSearchableProductDataDemo() {
           <li>Haven&#39;t applied debounce.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/searchable-product-data"
+          name="Source code"
+        />
+      </div>
       <FilterableProductTable products={productData} />
     </>
   );

@@ -19,6 +19,12 @@ export default function RadixToggleGroupDemo() {
           <li>Click to change.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/toggle-group"
+          name="Source code"
+        />
+      </div>
 
       <ToggleGroup.Root className="space-x-2" type="multiple">
         <ToggleGroup.Item

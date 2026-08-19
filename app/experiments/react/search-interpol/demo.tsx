@@ -90,6 +90,12 @@ export default function ReactSearchInterpolDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/search-interpol"
+          name="Source code"
+        />
+      </div>
 
       <input
         className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:outline-hidden focus:ring-2 focus:ring-zinc-200"

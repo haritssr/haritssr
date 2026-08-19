@@ -19,6 +19,12 @@ export default function RadixPopoverDemo() {
           <li>Click the button and the portal will appear below.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/popover"
+          name="Source code"
+        />
+      </div>
       <Popover.Root>
         <Popover.Trigger className="w-auto rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1 font-medium text-zinc-800 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-100">
           Open

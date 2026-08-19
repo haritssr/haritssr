@@ -11,9 +11,15 @@ export default function TailwindGlowingBackgroundDemo() {
         Hover on the button to see the glowing effect.{" "}
         <ExternalLink
           href="https://www.youtube.com/watch?v=5W6kEP65AH4"
-          name="Source"
+          name="Source code"
         />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/glowing-background"
+          name="Source code"
+        />
+      </div>
 
       <div className="h-auto rounded-lg bg-black px-2 py-6 sm:px-8 sm:py-16">
         <div className="grid items-start justify-center gap-8">

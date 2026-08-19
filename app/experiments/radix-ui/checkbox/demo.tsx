@@ -23,6 +23,12 @@ export default function RadixCheckboxDemo() {
           <li>Click the checklist button and the state will change.</li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/checkbox"
+          name="Source code"
+        />
+      </div>
       <form>
         <div className="flex align-center">
           <Checkbox.Root

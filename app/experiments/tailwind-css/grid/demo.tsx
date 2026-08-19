@@ -10,9 +10,15 @@ export default function TailwindGridDemo() {
         Responsive Grid Layout with Tailwind CSS.
         <ExternalLink
           href="https://www.youtube.com/watch?v=WJDw1J7FZnE"
-          name="Source"
+          name="Source code"
         />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/grid"
+          name="Source code"
+        />
+      </div>
       <div className="grid min-h-screen place-items-center">
         <div className="grid max-w-5xl xs:grid-cols-2 gap-4 md:grid-cols-4">
           <h1 className="xs:col-span-2 xs:grid xs:grid-cols-2 xs:gap-4 font-extrabold text-4xl md:col-span-3 md:grid-cols-3 md:text-5xl">

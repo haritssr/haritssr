@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindSidebarDemo() {
@@ -8,6 +9,12 @@ export default function TailwindSidebarDemo() {
   return (
     <>
       <SubTitle>Sidebar example</SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/sidebar"
+          name="Source code"
+        />
+      </div>
       <div className="flex flex-row overflow-hidden rounded border border-zinc-400">
         {/* Side Bar */}
         <div className={`w-1/4 bg-zinc-200 ${open ? "block" : "hidden"}`}>

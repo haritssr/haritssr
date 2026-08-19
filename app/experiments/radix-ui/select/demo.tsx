@@ -7,6 +7,7 @@ import {
 } from "@radix-ui/react-icons";
 import { Select } from "radix-ui";
 import type React from "react";
+import ExternalLink from "@/components/ExternalLink";
 
 import SubTitle from "@/components/SubTitle";
 
@@ -17,6 +18,12 @@ export default function RadixSelectDemo() {
         Displays a list of options for the user to pick from—triggered by a
         button.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/select"
+          name="Source code"
+        />
+      </div>
       <SelectDemo />
     </>
   );

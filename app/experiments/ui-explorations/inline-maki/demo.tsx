@@ -6,10 +6,17 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Accordion, Switch, Tooltip } from "radix-ui";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function InlineMakiDemo() {
   return (
     <div className="mx-auto my-20 max-w-xs space-y-2">
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/inline-maki"
+          name="Source code"
+        />
+      </div>
       <InlineMAKI value="1" />
       <InlineMAKI value="2" />
       <InlineMAKI value="3" />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function InputList() {
   const [input, setInput] = useState<string>("");
@@ -15,6 +16,12 @@ export default function InputList() {
 
   return (
     <div>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/input-list"
+          name="Source code"
+        />
+      </div>
       <input
         className="border px-2 py-1"
         onChange={(e) => setInput(e.target.value)}

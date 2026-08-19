@@ -27,6 +27,12 @@ export default function RadixCollapsibleDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/collapsible"
+          name="Source code"
+        />
+      </div>
       <Collapsible.Root
         className="w-full sm:w-2/3"
         onOpenChange={setOpen}

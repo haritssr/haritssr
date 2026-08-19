@@ -11,6 +11,7 @@ import {
 } from "@radix-ui/react-icons";
 import { styled } from "@stitches/react";
 import { Toolbar as ToolbarPrimitive } from "radix-ui";
+import ExternalLink from "@/components/ExternalLink";
 
 import SubTitle from "@/components/SubTitle";
 
@@ -103,6 +104,12 @@ export default function RadixToolbarDemo() {
         A container for grouping a set of controls, such as buttons, toggle
         groups or dropdown menus.
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/toolbar"
+          name="Source code"
+        />
+      </div>
 
       <div className="w-full overflow-x-auto p-1">
         <Toolbar aria-label="Formatting options">

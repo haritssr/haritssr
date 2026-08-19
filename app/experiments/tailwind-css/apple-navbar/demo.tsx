@@ -11,6 +11,12 @@ export default function TailwindAppleNavbarDemo() {
         <ExternalLink href="https://www.apple.com" name="Apple.com" />
         sticky navigation bar
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/apple-navbar"
+          name="Source code"
+        />
+      </div>
       <div>
         <div className="border border-zinc-300">
           <div className="sticky top-[88px] flex items-center justify-between border-b border-b-gray-300 bg-white/70 p-2 py-2 backdrop-blur-md">

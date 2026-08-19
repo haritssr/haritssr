@@ -11,9 +11,15 @@ export default function TailwindNewspaperDemo() {
         Responsive newspaper reading experience with Tailwind CSS columns.{" "}
         <ExternalLink
           href="https://tailwindcss.com/docs/columns"
-          name="Source"
+          name="Source code"
         />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/newspaper"
+          name="Source code"
+        />
+      </div>
       <div className="my-10 border border-zinc-400 p-5 tracking-wide">
         <h1 className="my-2 font-bold text-4xl text-zinc-800">Amazing Title</h1>
         <h2 className="mb-5 font-mw text-lg text-zinc-600 italic">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactUseStateFormDemo() {
@@ -32,6 +33,12 @@ export default function ReactUseStateFormDemo() {
         Simple but not useful useState form. Open your console to see what is
         going on
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-form"
+          name="Source code"
+        />
+      </div>
       <form className="flex flex-col" onSubmit={onSubmit}>
         <div className="mb-4 flex flex-col">
           <label htmlFor="title">Title</label>

@@ -15,6 +15,12 @@ export default function NextjsImageLocalDemo() {
           name="Nextjs 13 Image"
         />
       </SubTitle>
+      <div className="mb-8">
+        <ExternalLink
+          href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/next-13-image-local"
+          name="Source code"
+        />
+      </div>
 
       <section className="space-y-5">
         <Section name="Bare minimum" />
