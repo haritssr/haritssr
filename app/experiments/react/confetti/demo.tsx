@@ -1,10 +1,12 @@
 "use client";
 
-import Confetti from "react-confetti";
+import dynamic from "next/dynamic";
 import useWindowSize from "react-use/lib/useWindowSize";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SubTitle from "@/components/SubTitle";
+
+const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
 
 export default function ReactConfettiDemo() {
   const { width, height } = useWindowSize();
