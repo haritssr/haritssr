@@ -1,4 +1,6 @@
 import { format, parseISO } from "date-fns";
+import PageTitle from "@/components/PageTitle";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getAllPostIds, getPostData } from "@/utils/posts.js";
 
@@ -20,11 +22,15 @@ export default async function PostPage({
 
   return (
     <>
+      <PageTitle title={postData.title} />
       <SubTitle>
         <time dateTime={postData.date}>
           {format(parseISO(postData.date), "LLLL d, yyyy")}
         </time>
       </SubTitle>
+      <div className="mb-14">
+        <SourceCodeLink sourcePath="app/experiments/nextjs/posts/[id]" />
+      </div>
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia

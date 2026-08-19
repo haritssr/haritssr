@@ -1,27 +1,30 @@
+import PageTitle from "components/PageTitle";
+import type { Metadata } from "next";
 import InternalLink from "@/components/InternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
+import { getExperimentMetadata } from "@/data/ExperimentsData";
+import { NextjsStudentsData } from "@/data/NextjsExperimentsData";
 
-interface Student {
-  id: number;
-  name: string;
-}
+export const metadata: Metadata = getExperimentMetadata("nextjs", "students");
 
-export default async function StudentsPage() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users", {
-    cache: "force-cache",
-  });
-  const students: Student[] = await res.json();
-
+export default function StudentsPage() {
   return (
     <>
-      <SubTitle>A list of students come from JSONPlaceholder API</SubTitle>
+      <PageTitle title="Students" />
+      <SubTitle>
+        A list of students from local data, rendered as static App Router pages.
+      </SubTitle>
+      <div className="mb-14">
+        <SourceCodeLink />
+      </div>
       <div className="flex flex-col space-y-3">
-        {students.map((a: Student) => (
+        {NextjsStudentsData.map((student) => (
           <InternalLink
-            href={`/experiments/nextjs/students/${a.id}`}
-            key={a.id}
+            href={`/experiments/nextjs/students/${student.id}`}
+            key={student.id}
           >
-            {a.name}
+            {student.name}
           </InternalLink>
         ))}
       </div>

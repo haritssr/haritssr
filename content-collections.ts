@@ -1,18 +1,22 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
 
-const REGEX_SPACE = /\s+/;
+// Matches one or more whitespace characters used to separate words.
+// Example: "one  two" splits into ["one", "two"].
+const wordSeparatorPattern = /\s+/;
 
 // Word count utility
 function countWords(content: string): number {
-  const words = content.split(REGEX_SPACE).filter((word) => word.length > 0);
+  const words = content
+    .split(wordSeparatorPattern)
+    .filter((word) => word.length > 0);
   return words.length;
 }
 
-const blogs = defineCollection({
-  directory: "content",
+const writings = defineCollection({
+  directory: "data/writing",
   include: "**/*.mdx",
-  name: "blogs",
+  name: "writings",
   schema: z.object({
     content: z.string(),
     image: z.string().optional(),
@@ -42,7 +46,7 @@ const blogs = defineCollection({
           ? `https://haritssr.com${document.image}`
           : `https://haritssr.com/og?title=${document.title}`,
         topic: document.topic,
-        url: `https://haritssr.com/blog/${document._meta.path}`,
+        url: `https://haritssr.com/writing/${document._meta.path}`,
         wordCount,
       },
       wordCount,
@@ -51,5 +55,5 @@ const blogs = defineCollection({
 });
 
 export default defineConfig({
-  content: [blogs],
+  content: [writings],
 });

@@ -3,7 +3,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { RouteDoc } from "../data/routes";
 import { searchRoutes } from "../data/routes";
@@ -55,7 +55,7 @@ export default function TopBarSearch() {
     router.push(route);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (results.length > 0) {
@@ -72,14 +72,14 @@ export default function TopBarSearch() {
         title="Search"
         type="button"
       >
-        <MagnifyingGlassIcon className="block size-5 text-zinc-800 hover:text-zinc-400" />
+        <MagnifyingGlassIcon className="block size-4.5 text-zinc-800 hover:text-zinc-400" />
       </button>
 
       {Boolean(isOpen) && (
         <div className="absolute top-8 right-0 z-50 w-72 rounded-md border border-zinc-200 bg-white p-2 shadow-lg">
           <form onSubmit={handleSubmit}>
             <input
-              className="w-full rounded-md border border-zinc-300 px-2 py-1.5 text-sm outline-none focus:border-zinc-500"
+              className="w-full rounded-md border border-zinc-300 px-2 py-1.5 text-sm outline-none"
               onChange={(event) => {
                 setQuery(event.target.value);
               }}

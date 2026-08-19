@@ -21,7 +21,8 @@
         "useFilenamingConvention": "off"
       },
       "performance": {
-        "noJsxPropsBind": "off"
+        "noJsxPropsBind": "off",
+        "useTopLevelRegex": "error"
       }
     }
   },

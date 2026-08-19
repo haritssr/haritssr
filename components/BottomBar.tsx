@@ -19,23 +19,15 @@ export default function BottomBar() {
 const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const pathname = usePathname();
   const [, CurrentPageBaseRoute] = pathname.split("/");
+  const route = to === "Home" ? "/" : `/${to.toLowerCase()}`;
+  const isCurrentPage =
+    pathname === route ||
+    (route !== "/" && CurrentPageBaseRoute === route.slice(1));
 
-  let color: string;
-  if (pathname === `/${to.charAt(0).toLowerCase()}${to.slice(1)}`) {
-    color = "text-action";
-  } else if (pathname === "/" && to === "Home") {
-    color = "text-action";
-  } else if (CurrentPageBaseRoute === to.slice(1)) {
-    color = "text-action";
-  } else {
-    color = "text-zinc-600";
-  }
+  const color = isCurrentPage ? "text-action" : "text-zinc-600";
 
   return (
-    <Link
-      className="block w-1/4 active:scale-95"
-      href={`${to === "Home" ? "/" : `/${to.charAt(0).toLowerCase()}${to.slice(1)}`}`}
-    >
+    <Link className="block w-1/4 active:scale-95" href={route}>
       <div className="flex flex-col items-center justify-center py-1.25">
         <svg
           className={`h-6 w-6 ${color}`}
@@ -92,7 +84,7 @@ const TitleAndPathData = [
         />
       </>
     ),
-    title: "Blog",
+    title: "Writing",
   },
 
   {

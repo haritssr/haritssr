@@ -5,7 +5,10 @@ import { remark } from "remark";
 import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "/data/postsData");
-const REGEX_STRING_ENDING_MD = /\.md$/;
+
+// Matches a trailing Markdown file extension.
+// Example: "post.md" becomes "post" after replacement.
+const markdownFileExtensionPattern = /\.md$/;
 
 export function getSortedPostsData() {
   // Get file names under /posts as an array
@@ -14,7 +17,7 @@ export function getSortedPostsData() {
   //Mapping the fileNames array into [{id, ...matterResult.data}, ... ]
   const allPostsData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
-    const id = fileName.replace(REGEX_STRING_ENDING_MD, "");
+    const id = fileName.replace(markdownFileExtensionPattern, "");
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
@@ -60,7 +63,7 @@ export function getAllPostIds() {
   // ]
   return fileNames.map((fileName) => ({
     params: {
-      id: fileName.replace(REGEX_STRING_ENDING_MD, ""),
+      id: fileName.replace(markdownFileExtensionPattern, ""),
     },
   }));
 }

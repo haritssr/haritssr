@@ -1,9 +1,10 @@
-import AI from "@/components/home/AI";
-import Blog from "@/components/home/Blog";
-import Contacts from "@/components/home/Contacts";
-import CV from "@/components/home/CV";
-import Experiments from "@/components/home/Experiments";
-import Projects from "@/components/home/Projects";
+import AI from "./_components/home/AI";
+import Contacts from "./_components/home/Contacts";
+import CV from "./_components/home/CV";
+import Experiments from "./_components/home/Experiments";
+import Newsletters from "./_components/home/Newsletters";
+import Projects from "./_components/home/Projects";
+import Writing from "./_components/home/Writing";
 
 export default function Home() {
   return (
@@ -12,8 +13,9 @@ export default function Home() {
       <div className="space-y-16 sm:space-y-24">
         <Projects />
         <Experiments />
-        <Blog />
         <CV />
+        <Writing />
+        <Newsletters />
         <AI />
       </div>
     </section>

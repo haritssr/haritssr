@@ -1,0 +1,20 @@
+"use client";
+
+import SourceCodeLink from "@/components/SourceCodeLink";
+import SubTitle from "@/components/SubTitle";
+import katexify from "@/utils/katexify";
+
+export default function KaTeXBasicDemo() {
+  return (
+    <>
+      <SubTitle>Basic example</SubTitle>
+      <div className="mb-14">
+        <SourceCodeLink />
+      </div>
+      {katexify(
+        "\\text{house-price} = \\hat{\\beta_1} * sqft + \\hat{\\beta_0}",
+        false
+      )}
+    </>
+  );
+}

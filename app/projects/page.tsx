@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import ProjectsCard from "@/components/ProjectsCard";
-import { PROJECTS_DESCRIPTION } from "../../data/PageDescriptions";
 import { ProjectsData } from "../../data/ProjectsData";
+
+const PROJECTS_DESCRIPTION =
+  "Detail informations on how projects I belong to being handled.";
 
 export const metadata: Metadata = {
   title: "Experiences",

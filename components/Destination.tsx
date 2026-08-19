@@ -16,7 +16,7 @@ export default function Destination({ link }: { link: string }) {
   } else if (CurrentPageBaseRoute === link) {
     color = "text-action";
   } else {
-    color = "text-zinc-800 hover:text-action";
+    color = "text-zinc-800 hover:text-zinc-500";
   }
 
   return (

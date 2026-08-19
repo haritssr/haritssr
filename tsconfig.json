@@ -19,8 +19,8 @@
     "jsx": "react-jsx",
     "paths": {
       "*": ["./*"],
+      "@/*": ["./*"],
       "@/components/*": ["./components/*"],
-      "@/styles/*": ["./styles/*"],
       "@/utils/*": ["./utils/*"],
       "@content-collections": ["./.content-collections/generated"]
     },
@@ -36,7 +36,6 @@
     "**/*.ts",
     "**/*.tsx",
     "**/**/*.tsx",
-    "tailwind.config.js",
     "data/ExperimentsData.ts",
     "pages/experiments/react/calculator.jsx",
     "pages/experiments/radix-ui/navigation-menu.tsx",
@@ -46,16 +45,13 @@
     "utils/store-context.js",
     "pages/experiments/react/store-context-selector.tsz",
     "pages/experiments/react/store-zustand.js",
-    "styles/*.css",
-    "styles/*.module.css",
     ".next/types/**/*.ts",
     ".content-collections/generated",
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",
     "app/tools/db.bun.ts",
-    "app/tools/db.test.js",
-    "next.config.mjs"
+    "app/tools/db.test.js"
   ],
   "exclude": ["node_modules"]
 }
