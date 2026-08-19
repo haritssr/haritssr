@@ -15,7 +15,7 @@ export default function StudentsPage() {
       <SubTitle>
         A list of students from local data, rendered as static App Router pages.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/students"
           name="Source code"

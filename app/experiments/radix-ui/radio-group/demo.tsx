@@ -12,7 +12,7 @@ export default function RadixRadioGroupDemo() {
         A set of checkable buttons—known as radio buttons—where no more than one
         of the buttons can be checked at a time.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/radio-group"
           name="Source code"

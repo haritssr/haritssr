@@ -7,7 +7,7 @@ export default function TailwindColumnsDemo() {
   return (
     <>
       <SubTitle>Columns</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/columns"
           name="Source code"

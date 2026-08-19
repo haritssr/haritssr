@@ -21,7 +21,7 @@ export default function PostsPage() {
     <>
       <PageTitle title="Posts" />
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/posts"
           name="Source code"

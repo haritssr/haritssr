@@ -58,7 +58,7 @@ export default function ReactFontMixerDemo() {
   return (
     <>
       <SubTitle>Font Mixer</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/font-mixer"
           name="Source code"

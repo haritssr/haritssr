@@ -23,7 +23,7 @@ export default function ReactConfettiDemo() {
           <li>Try to edit the profile and save to see the result of change.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/confetti"
           name="Source code"

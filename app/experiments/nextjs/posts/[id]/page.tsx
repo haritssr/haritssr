@@ -28,7 +28,7 @@ export default async function PostPage({
           {format(parseISO(postData.date), "LLLL d, yyyy")}
         </time>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/posts/[id]"
           name="Source code"

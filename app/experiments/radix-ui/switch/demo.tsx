@@ -22,7 +22,7 @@ export default function RadixSwitchDemo() {
           <li>Click to change state.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/switch"
           name="Source code"

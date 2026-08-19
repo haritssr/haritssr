@@ -22,7 +22,7 @@ export default function RadixScrollAreaDemo() {
           <li>Try to scroll it.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/scroll-area"
           name="Source code"

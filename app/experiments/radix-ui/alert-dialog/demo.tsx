@@ -32,7 +32,7 @@ export default function RadixAlertDialogDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/alert-dialog"
           name="Source code"

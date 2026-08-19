@@ -102,7 +102,7 @@ export default function ReactUseStateReactingToInputDemo() {
           name="beta.reactjs.org"
         />
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-reacting-to-input"
           name="Source code"

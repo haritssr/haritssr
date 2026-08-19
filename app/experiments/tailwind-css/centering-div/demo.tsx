@@ -10,7 +10,7 @@ export default function TailwindCenteringDivDemo() {
       <SubTitle>
         Methods to centering div in Tailwind CSS or inline CSS
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/centering-div"
           name="Source code"

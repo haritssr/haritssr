@@ -75,7 +75,7 @@ export default function VisxBarChartDemo() {
         <br />
         Hover the bar to see details.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/visx/bar-chart"
           name="Source code"

@@ -23,7 +23,7 @@ export default function HeadlessPopoverDemo() {
           <li>Click the popover to see what inside them.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/popover"
           name="Source code"

@@ -19,7 +19,7 @@ export default function RadixToastDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/toast"
           name="Source code"

@@ -15,7 +15,7 @@ import ExternalLink from "@/components/ExternalLink";
 export default function GlobalModalDemo() {
   return (
     <Dialog.Root>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/haris-lab/global-modal"
           name="Source code"

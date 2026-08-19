@@ -7,7 +7,7 @@ export default function YoutubeEmbedDemo() {
   return (
     <>
       <SubTitle>Youtube Embed</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/youtube-embed"
           name="Source code"

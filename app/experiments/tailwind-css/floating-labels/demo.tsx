@@ -9,7 +9,7 @@ export default function TailwindFloatingLabelsDemo() {
   return (
     <>
       <SubTitle>Try to tap and write on input, the label will go up</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/floating-labels"
           name="Source code"

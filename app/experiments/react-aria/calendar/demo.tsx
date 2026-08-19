@@ -27,7 +27,7 @@ export default function ReactAriaCalendarDemo() {
           <ExternalLink href="https://tailwindcss.com/" name="Tailwind CSS" />
         </p>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react-aria/calendar"
           name="Source code"

@@ -28,7 +28,7 @@ export default function ReactUseContextDarkModeDemo() {
   return (
     <>
       <SubTitle>Yeah</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usecontext-dark-mode"
           name="Source code"

@@ -55,7 +55,7 @@ export default function NumberGameDemo() {
           <br />
           Every wrong answer decrease one score.
         </SubTitle>
-        <div className="mb-8">
+        <div className="mb-14">
           <ExternalLink
             href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/number-game"
             name="Source code"
@@ -90,7 +90,7 @@ export default function NumberGameDemo() {
         <br />
         Every wrong answer decrease one score.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/number-game"
           name="Source code"

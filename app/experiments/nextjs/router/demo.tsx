@@ -67,7 +67,7 @@ function RouterDemoContent() {
           name="next/navigation"
         />
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/nextjs/router"
           name="Source code"

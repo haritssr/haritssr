@@ -23,7 +23,7 @@ export default function RadixTooltipDemo() {
           <li>Hover or click will show a tooltip above.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/tooltip"
           name="Source code"

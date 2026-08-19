@@ -8,7 +8,7 @@ export default function KaTeXBasicDemo() {
   return (
     <>
       <SubTitle>Basic example</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/katex/basic"
           name="Source code"

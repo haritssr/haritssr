@@ -10,7 +10,7 @@ export default function TailwindPlanetscaleNavbarDemo() {
         Responsive PlanetScale navigation bar.{" "}
         <ExternalLink href="https://www.planetscale.com" name="Source code" />
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/planetscale-navbar"
           name="Source code"

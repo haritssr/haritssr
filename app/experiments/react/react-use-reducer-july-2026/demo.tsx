@@ -21,7 +21,7 @@ export default function ReactUseReducerJuly2026() {
   return (
     <div>
       <SubTitle>use reducer</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/react-use-reducer-july-2026"
           name="Source code"

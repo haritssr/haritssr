@@ -11,7 +11,7 @@ import ExternalLink from "@/components/ExternalLink";
 export default function InlineMakiDemo() {
   return (
     <div className="mx-auto my-20 max-w-xs space-y-2">
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/inline-maki"
           name="Source code"

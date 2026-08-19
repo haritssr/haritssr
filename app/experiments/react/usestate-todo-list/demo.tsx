@@ -186,7 +186,7 @@ export default function ReactUseStateTodoListDemo() {
   return (
     <>
       <SubTitle>Todo list with useState</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-todo-list"
           name="Source code"

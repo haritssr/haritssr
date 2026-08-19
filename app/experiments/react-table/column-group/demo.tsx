@@ -14,7 +14,7 @@ export default function ReactTableColumnGroupDemo() {
   return (
     <>
       <SubTitle>Basic table from react table</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react-table/column-group"
           name="Source code"

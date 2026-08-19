@@ -51,7 +51,7 @@ export default function ReactFunctionalPropsDemo() {
       <SubTitle>
         Functional Props - TypeScript for beginner to master - Jack Herrington
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/functional-props"
           name="Source code"

@@ -40,7 +40,7 @@ export default function ActivityDemo() {
         The page intentionally bad looking in order to focus on the code behind
         the screen.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/activity-demo"
           name="Source code"

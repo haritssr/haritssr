@@ -11,7 +11,7 @@ export default function SideBarDemo() {
   return (
     // Subjek
     <div className="w-full space-y-5">
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/haris-lab/side-bar"
           name="Source code"

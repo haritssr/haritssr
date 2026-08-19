@@ -29,7 +29,7 @@ export default function ReactCmdkDemo() {
   return (
     <>
       <SubTitle>Fast, composable, unstyled command menu for React.</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/cmdk"
           name="Source code"

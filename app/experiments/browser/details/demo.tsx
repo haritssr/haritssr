@@ -20,7 +20,7 @@ export default function DetailsDemo() {
         <br />I prefer Headless UI or Radix UI similar UI component than this
         weird native API.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/details"
           name="Source code"

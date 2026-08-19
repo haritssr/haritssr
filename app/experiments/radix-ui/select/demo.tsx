@@ -18,7 +18,7 @@ export default function RadixSelectDemo() {
         Displays a list of options for the user to pick from—triggered by a
         button.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/radix-ui/select"
           name="Source code"

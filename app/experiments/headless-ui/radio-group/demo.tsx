@@ -44,7 +44,7 @@ export default function HeadlessRadioGroupDemo() {
           <li>Click the radio to choose one to serve as an option.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/headless-ui/radio-group"
           name="Source code"

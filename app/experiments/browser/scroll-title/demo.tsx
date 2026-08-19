@@ -9,7 +9,7 @@ export default function ScrollTitleDemo() {
   return (
     <>
       <SubTitle>Scroll Title iOS</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/scroll-title"
           name="Source code"

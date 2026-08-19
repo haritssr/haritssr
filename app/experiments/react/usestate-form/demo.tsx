@@ -33,7 +33,7 @@ export default function ReactUseStateFormDemo() {
         Simple but not useful useState form. Open your console to see what is
         going on
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/usestate-form"
           name="Source code"

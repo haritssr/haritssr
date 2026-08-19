@@ -28,7 +28,7 @@ export default function ReactQueryBasicDemo() {
   return (
     <QueryClientProvider client={queryClient}>
       <SubTitle>Simple query</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react-query/basic"
           name="Source code"

@@ -84,7 +84,7 @@ function IntersectionObserverAPIHooks() {
         <br />
         Scroll to the bottom to see the effect, the rocket launches.🚀.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/intersection-observer-api"
           name="Source code"

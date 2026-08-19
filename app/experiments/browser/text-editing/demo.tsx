@@ -12,7 +12,7 @@ export default function TextEditingDemo() {
   return (
     <>
       <SubTitle>HTML built-in text editing tag</SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/text-editing"
           name="Source code"

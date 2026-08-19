@@ -155,7 +155,7 @@ export default function ReactSearchableProductDataDemo() {
           <li>Haven&#39;t applied debounce.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/react/searchable-product-data"
           name="Source code"

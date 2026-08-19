@@ -15,7 +15,7 @@ export default function TailwindVsAppleColorDemo() {
       <SubTitle>
         The difference between Tailwind CSS Gray colors vs Apple Gray colors
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/tailwind-css/tailwind-vs-apple-color"
           name="Source code"

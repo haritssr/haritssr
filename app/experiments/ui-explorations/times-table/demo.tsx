@@ -9,7 +9,7 @@ import ExternalLink from "@/components/ExternalLink";
 export default function TimesTableDemo() {
   return (
     <>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/ui-explorations/times-table"
           name="Source code"

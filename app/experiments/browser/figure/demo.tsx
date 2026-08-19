@@ -14,7 +14,7 @@ export default function FigureDemo() {
         tailwindcss preflight, so the figcaption is not italic by default, I
         need to design it.
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/figure"
           name="Source code"

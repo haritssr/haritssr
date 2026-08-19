@@ -10,7 +10,7 @@ export default function DifferentCssStylingDemo() {
       <SubTitle>
         Click blue &quot;source github button&quot; to see the source code
       </SubTitle>
-      <div className="mb-8">
+      <div className="mb-14">
         <ExternalLink
           href="https://github.com/haritssr/haritssr/tree/try/app/experiments/browser/different-css-styling"
           name="Source code"
