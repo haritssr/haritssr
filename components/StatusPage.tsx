@@ -5,7 +5,7 @@ const STATUS_ACTION_BASE_CLASS =
   "inline-flex cursor-pointer items-center justify-center rounded-lg corner-squircle px-3.5 py-1.5 text-sm transition-colors";
 
 const STATUS_ACTION_VARIANT_CLASS = {
-  primary: "bg-blue-500 text-white hover:bg-blue-400",
+  primary: "bg-action text-white hover:bg-blue-400",
   secondary: "border border-zinc-300 text-zinc-700 hover:bg-zinc-100",
 } as const;
 
