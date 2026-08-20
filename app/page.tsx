@@ -2,6 +2,7 @@ import Contacts from "./_components/home/Contacts";
 import CV from "./_components/home/CV";
 import Experiments from "./_components/home/Experiments";
 import Newsletters from "./_components/home/Newsletters";
+import ProductEngineer from "./_components/home/ProductEngineer";
 import Projects from "./_components/home/Projects";
 import Writing from "./_components/home/Writing";
 
@@ -15,6 +16,7 @@ export default function Home() {
         <CV />
         <Writing />
         <Newsletters />
+        <ProductEngineer />
       </div>
     </section>
   );
