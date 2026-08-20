@@ -13,10 +13,10 @@ export default function BackButton({
       <span className="inline-block w-full">
         <span className="group flex items-center">
           <ChevronLeftIcon
-            className="-ml-2 h-5 w-5 pt-px text-action sm:group-hover:text-action/80"
+            className="-ml-2 h-5 w-5 pt-px text-action sm:group-hover:text-action-hover"
             strokeWidth={2}
           />
-          <span className="-ml-0.5 block truncate text-action hover:underline sm:group-hover:text-action/80">
+          <span className="-ml-0.5 block truncate text-action hover:underline sm:group-hover:text-action-hover">
             {name}
           </span>
         </span>

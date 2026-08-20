@@ -25,7 +25,7 @@ export default function Contacts() {
         <p>Web Product Engineer</p>
         <p>Math-Physics Teacher</p>
         <a
-          className="block hover:text-action focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
+          className="block hover:text-action-hover focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
           href="https://www.harislab.com"
           rel="noopener noreferrer"
           target="_blank"

@@ -16,6 +16,7 @@
 
 @theme {
   --color-action: oklch(58.8% 0.158 241.966);
+  --color-action-hover: oklch(68.5% 0.169 237.323);
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(240 10% 3.9%);
   --color-border: hsl(240 5.9% 90%);

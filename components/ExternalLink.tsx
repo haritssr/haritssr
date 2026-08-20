@@ -11,7 +11,7 @@ export default function ExternalLink({
     <cite className="group not-italic">
       {" "}
       <a
-        className="group inline-block w-fit cursor-pointer items-center text-action group-hover:text-blue-400"
+        className="group inline-block w-fit cursor-pointer items-center text-action group-hover:text-action-hover"
         href={href}
         rel="noopener noreferrer"
         target="_blank"
@@ -20,7 +20,7 @@ export default function ExternalLink({
         <span className="flex items-center">
           <span className={`${big ? "text-lg" : "text-base"} `}>{name}</span>
           <svg
-            className={` ${big ? "h-4.5 w-4.5" : "h-4 w-4"} mt-0.5 ml-1 text-action group-hover:text-action/80`}
+            className={` ${big ? "h-4.5 w-4.5" : "h-4 w-4"} mt-0.5 ml-1 text-action group-hover:text-action-hover`}
             fill="none"
             stroke="currentColor"
             strokeWidth={1.7}

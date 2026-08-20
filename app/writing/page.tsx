@@ -17,7 +17,7 @@ export default function WritingPage() {
         description={
           <>
             {WRITING_DESCRIPTION}{" "}
-            <a className="text-action hover:text-blue-400" href={RSS_PATH}>
+            <a className="text-action hover:text-action-hover" href={RSS_PATH}>
               Subscribe via RSS.
             </a>
           </>

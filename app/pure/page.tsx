@@ -221,7 +221,7 @@ export default function DesignSystem() {
         <Box title="Popover">
           <Popover.Root>
             <Popover.Trigger>
-              <div className="w-auto rounded-md bg-blue-600 px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1">
+              <div className="w-auto rounded-md bg-blue-600 px-3 py-1 text-white ring-1 ring-action hover:bg-action-hover active:ring-1 active:ring-blue-400 active:ring-offset-1">
                 Show Popover
               </div>
             </Popover.Trigger>
@@ -310,7 +310,7 @@ export default function DesignSystem() {
         <Box title="Toast">
           <Toast.Provider swipeDirection="right">
             <button
-              className="rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
+              className="rounded-md bg-action px-3 py-1 text-white ring-1 ring-action hover:bg-action-hover active:ring-1 active:ring-blue-400 active:ring-offset-1"
               onClick={handleShowToast}
               type="button"
             >
@@ -332,7 +332,7 @@ export default function DesignSystem() {
                   </div>
                 </Toast.Description>
               </div>
-              <Toast.Close className="text-action hover:text-[#2563eb]/90">
+              <Toast.Close className="text-action hover:text-action-hover">
                 OK
               </Toast.Close>
             </Toast.Root>
@@ -375,7 +375,7 @@ export default function DesignSystem() {
         </Box>
         <Box title="Button: Primary">
           <button
-            className="select-none rounded-md bg-action px-3 py-1 text-white hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
+            className="select-none rounded-md bg-action px-3 py-1 text-white hover:bg-action-hover active:ring-1 active:ring-blue-400 active:ring-offset-1"
             type="button"
           >
             Button
@@ -383,7 +383,7 @@ export default function DesignSystem() {
         </Box>
         <Box title="Button: Loading">
           <button
-            className="select-none rounded-md bg-action px-3 py-1 text-white hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
+            className="select-none rounded-md bg-action px-3 py-1 text-white hover:bg-action-hover active:ring-1 active:ring-blue-400 active:ring-offset-1"
             onClick={handleClick}
             type="button"
           >
@@ -704,7 +704,7 @@ export default function DesignSystem() {
                   </Dialog.Close>
                   <Dialog.Close asChild>
                     <button
-                      className="select-none rounded bg-action px-3 py-1 text-white hover:bg-[#2563eb]/90 active:ring-1 active:ring-blue-400 active:ring-offset-1"
+                      className="select-none rounded bg-action px-3 py-1 text-white hover:bg-action-hover active:ring-1 active:ring-blue-400 active:ring-offset-1"
                       type="button"
                     >
                       Action

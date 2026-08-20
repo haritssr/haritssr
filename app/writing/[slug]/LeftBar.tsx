@@ -32,7 +32,7 @@ export default function LeftBar() {
               className={`${
                 lastSegment === article.slug
                   ? "text-action"
-                  : "text-zinc-800 hover:text-action"
+                  : "text-zinc-800 hover:text-action-hover"
               } rounded-md px-2 py-1 text-sm`}
               href={`/writing/${article.slug}`}
               key={article.slug}

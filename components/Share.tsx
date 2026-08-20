@@ -61,7 +61,7 @@ export default function Share() {
               <div className="m-0 text-[13px] text-zinc-500 leading-[1.3] [grid-area:description]">{`haritssr.com${pathname}`}</div>
             </Toast.Description>
           </div>
-          <Toast.Close className="h-12 w-12 text-action hover:text-[#2563eb]/90">
+          <Toast.Close className="h-12 w-12 text-action hover:text-action-hover">
             OK
           </Toast.Close>
         </Toast.Root>
