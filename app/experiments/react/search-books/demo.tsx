@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
-import data from "@/data/Search2Data.json";
+import data from "@/data/search-books.json";
 
 interface DataType {
   author: string;
