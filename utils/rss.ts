@@ -48,7 +48,10 @@ function getWritingUrl(slug: string): string {
   return getSiteUrl(`${WRITING_PATH}/${slug}`);
 }
 
-export function renderWritingRssFeed(writings: readonly RssWriting[]): string {
+export function renderWritingRssFeed(
+  writings: readonly RssWriting[],
+  buildDate = new Date()
+): string {
   const sortedWritings = writings.toSorted((left, right) => {
     const dateDifference =
       getPublicationDate(right.publishedAt).valueOf() -
@@ -58,7 +61,6 @@ export function renderWritingRssFeed(writings: readonly RssWriting[]): string {
       ? left.slug.localeCompare(right.slug)
       : dateDifference;
   });
-  const [newestWriting] = sortedWritings;
   const items = sortedWritings.map((writing) => {
     const writingUrl = getWritingUrl(writing.slug);
 
@@ -73,11 +75,10 @@ export function renderWritingRssFeed(writings: readonly RssWriting[]): string {
       "    </item>",
     ].join("\n");
   });
-  const lastBuildDate = newestWriting
-    ? [
-        `    <lastBuildDate>${formatRssDate(newestWriting.publishedAt)}</lastBuildDate>`,
-      ]
-    : [];
+  const lastBuildDate =
+    sortedWritings.length > 0
+      ? [`    <lastBuildDate>${buildDate.toUTCString()}</lastBuildDate>`]
+      : [];
   const feedUrl = getSiteUrl(RSS_PATH);
   const writingUrl = getSiteUrl(WRITING_PATH);
 

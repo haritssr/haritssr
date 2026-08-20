@@ -63,7 +63,8 @@ export async function generateMetadata({
 
 function formatDate(date: string) {
   const currentDate = new Date();
-  const targetDate = new Date(date);
+  const [year, month, day] = date.split("-").map(Number);
+  const targetDate = new Date(year, month - 1, day);
 
   const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
   const monthsAgo = currentDate.getMonth() - targetDate.getMonth();

@@ -27,7 +27,10 @@ describe("renderWritingRssFeed", () => {
       },
     ];
 
-    const xml = renderWritingRssFeed(writings);
+    const xml = renderWritingRssFeed(
+      writings,
+      new Date("2023-10-01T12:34:56.000Z")
+    );
 
     expect(xml).toContain('<?xml version="1.0" encoding="UTF-8"?>');
     expect(xml).toContain(
@@ -42,7 +45,7 @@ describe("renderWritingRssFeed", () => {
     );
     expect(xml).toContain("<pubDate>Sat, 09 Sep 2023 00:00:00 GMT</pubDate>");
     expect(xml).toContain(
-      "<lastBuildDate>Sat, 09 Sep 2023 00:00:00 GMT</lastBuildDate>"
+      "<lastBuildDate>Sun, 01 Oct 2023 12:34:56 GMT</lastBuildDate>"
     );
     expect(xml).toContain(
       '<guid isPermaLink="true">https://www.haritssr.com/writing/alpha</guid>'
