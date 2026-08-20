@@ -19,7 +19,7 @@ const newsletters = [
 export default function Newsletters() {
   return (
     <HomeSectionWrapper
-      className="space-y-3"
+      className="grid grid-cols-1 gap-3"
       id="newsletters"
       isTitleLink={false}
       topic="Newsletters"
