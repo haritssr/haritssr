@@ -1,19 +1,13 @@
-import type { Metadata } from "next";
-import PageDescription from "@/components/PageDescription";
-import PageTitle from "@/components/PageTitle";
+import HomeSectionWrapper from "./HomeSectionWrapper";
 
-const MISC_DESCRIPTION = "A few miscellaneous facts about me.";
-
-export const metadata: Metadata = {
-  description: MISC_DESCRIPTION,
-  title: "Miscellaneous",
-};
-
-export default function MiscellaneousPage() {
+export default function Misc() {
   return (
-    <>
-      <PageTitle title="Miscellaneous" />
-      <PageDescription description={MISC_DESCRIPTION} />
+    <HomeSectionWrapper
+      className="space-y-5"
+      id="misc"
+      isTitleLink={false}
+      topic="Miscellaneous"
+    >
       <ul className="list-outside list-disc space-y-1 pl-4 text-zinc-500">
         <li>
           I am a touch typist and type around 90 words per minute consistently.
@@ -25,6 +19,6 @@ export default function MiscellaneousPage() {
           <span className="text-zinc-800">r</span>ahmatullah
         </li>
       </ul>
-    </>
+    </HomeSectionWrapper>
   );
 }
