@@ -28,6 +28,8 @@ refactor(Breadcrumbs.tsx): make it scrollable at mobile size when it too long
 
 [source](https://ec.europa.eu/component-library/v1.15.0/eu/docs/conventions/git/)
 
+- Before committing, review the staged files and related documentation. Keep `AGENTS.md` and other project guidance accurate and relevant to the current codebase, updating them in the same change when needed.
+
 # Run Build
 
 - Never run the production build from an AI agent environment. Turbopack may
