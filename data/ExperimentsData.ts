@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export interface ExperimentEntry {
+interface ExperimentEntry {
   readonly redirectTo?: string;
   readonly slug: string;
   readonly title: string;
@@ -272,7 +272,7 @@ export function getExperimentDomain(slug: string): ExperimentDomain {
   return domain;
 }
 
-export function getExperiment(
+function getExperiment(
   domainSlug: string,
   experimentSlug: string
 ): ExperimentEntry {

@@ -31,6 +31,8 @@ graph TD
 ## Tooling
 
 - Run `bun test` to execute the tests for the `app/experiments/ui-explorations/tools` helpers.
+- Run `bun run knip` to check for unused files, exports, and dependencies.
+- Run `bun run knip:production` to run the same check against production code.
 - Use [`utils/sqlite3.js`](utils/sqlite3.js) and
   [`utils/dbExperiment.js`](utils/dbExperiment.js) to inspect the shared
   `experiment.db` or `task.db`. They log table names and sample rows using
