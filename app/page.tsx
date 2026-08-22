@@ -1,7 +1,6 @@
 import Contacts from "./_components/home/Contacts";
 import Experiments from "./_components/home/Experiments";
 import Misc from "./_components/home/Misc";
-import Newsletters from "./_components/home/Newsletters";
 import Projects from "./_components/home/Projects";
 import Writing from "./_components/home/Writing";
 
@@ -13,7 +12,6 @@ export default function Home() {
         <Projects />
         <Experiments />
         <Writing />
-        <Newsletters />
         <Misc />
       </div>
     </section>
