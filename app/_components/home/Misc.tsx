@@ -1,3 +1,4 @@
+import Link from "next/link";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Misc() {
@@ -27,6 +28,15 @@ export default function Misc() {
           >
             Curriculum Vitae
           </a>
+        </li>
+        <li>
+          <Link
+            className="text-action hover:underline"
+            href="/masalah-to-feature"
+            prefetch={false}
+          >
+            Masalah Pelajar → HL Feature
+          </Link>
         </li>
       </ul>
     </HomeSectionWrapper>
