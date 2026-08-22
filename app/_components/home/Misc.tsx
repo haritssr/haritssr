@@ -18,6 +18,16 @@ export default function Misc() {
           <span className="text-zinc-800">s</span>yah{" "}
           <span className="text-zinc-800">r</span>ahmatullah
         </li>
+        <li>
+          <a
+            className="text-action hover:underline"
+            download="cv-dec-2024.pdf"
+            href="/cv-dec-2024.pdf"
+            title="Download CV"
+          >
+            Curriculum Vitae
+          </a>
+        </li>
       </ul>
     </HomeSectionWrapper>
   );

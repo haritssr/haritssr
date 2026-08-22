@@ -1,5 +1,4 @@
 import Contacts from "./_components/home/Contacts";
-import CV from "./_components/home/CV";
 import Experiments from "./_components/home/Experiments";
 import Misc from "./_components/home/Misc";
 import Newsletters from "./_components/home/Newsletters";
@@ -14,7 +13,6 @@ export default function Home() {
       <div className="space-y-16 sm:space-y-24">
         <Projects />
         <Experiments />
-        <CV />
         <Writing />
         <Newsletters />
         <ProductEngineer />
