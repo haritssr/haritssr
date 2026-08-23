@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ExternalLink from "@/components/ExternalLink";
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Misc() {
@@ -10,6 +11,14 @@ export default function Misc() {
       topic="Miscellaneous"
     >
       <ul className="list-outside list-disc space-y-1 pl-4 text-zinc-500">
+        <li>
+          I care deeply about UX/UI design, with references including{" "}
+          <ExternalLink href="https://www.apple.com" name="Apple" />,
+          <ExternalLink href="https://linear.app" name="Linear" />,
+          <ExternalLink href="https://www.raycast.com" name="Raycast" />,
+          <ExternalLink href="https://dub.co" name="Dub" />, and{" "}
+          <ExternalLink href="https://vercel.com" name="Vercel" />.
+        </li>
         <li>
           I am a touch typist and type around 90 words per minute consistently.
         </li>
