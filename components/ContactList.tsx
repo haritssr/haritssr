@@ -27,7 +27,7 @@ function renderContact(each: { link: string; icon: string }) {
 
     return (
       <a
-        className="flex items-center space-x-2.5 focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
+        className="flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
         href={
           each.link === "https://www.haritssr.com"
             ? "https://haritssr.vercel.app"
@@ -53,7 +53,7 @@ function renderContact(each: { link: string; icon: string }) {
   if (each.link.includes("@")) {
     return (
       <a
-        className="flex items-center space-x-2.5 focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
+        className="flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
         href={`mailto:${each.link}`}
         title={each.link}
       >
@@ -75,7 +75,7 @@ function renderContact(each: { link: string; icon: string }) {
 
 export default function ContactList() {
   return (
-    <ul className="space-y-2.5">
+    <ul className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 p-3">
       {data.points.map((each) => (
         <li className="cursor-pointer" key={each.link}>
           {renderContact(each)}
