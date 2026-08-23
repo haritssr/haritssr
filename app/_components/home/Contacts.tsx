@@ -68,13 +68,13 @@ export default function Contacts() {
       </div>
       <ContactList />
       <div
-        className="corner-squircle rounded-2xl border border-zinc-300 px-3 pt-3 pb-2.5 text-zinc-500"
+        className="corner-squircle space-y-2 rounded-2xl border border-zinc-300 px-3 pt-3 pb-2.5 text-zinc-500"
         id="topics"
       >
         <p className="font-semibold text-zinc-800">Interests</p>
-        <p className="leading-7">
-          Web, JavaScript, TypeScript, Effect, React, Next.js, Functional
-          Programming, Math, Physics, and Education .
+        <p className="-mt-1 leading-8">
+          Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
+          Physics, and Education .
         </p>
       </div>
     </section>
