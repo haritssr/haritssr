@@ -8,7 +8,7 @@ const pageRoutes = [
   "/experiments/nextjs/articles",
   "/experiments/nextjs/posts",
   "/experiments/nextjs/students",
-  "/pure",
+  "/components",
   "/task",
   "/task/architecture",
   "/task/history",
@@ -160,7 +160,7 @@ const allRoutes = Array.from(
 // Human-friendly title overrides for routes that need custom labels.
 const routeTitleOverrides: Record<string, string> = {
   "/": "Home",
-  "/pure": "Pure",
+  "/components": "Components",
   "/times-table": "Times Table",
 };
 

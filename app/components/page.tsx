@@ -28,10 +28,10 @@ import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 
 // import { Metadata } from "next";
-// can't do this, since metadata only possible on server, and this /pure is client, see "use client"
+// can't do this, since metadata only possible on server, and this /components is client, see "use client"
 // possible solution: write all of the component below in their own client component
 // export const metadata: Metadata = {
-// 	title: "Pure",
+// 	title: "Components",
 // 	description: "Design system used in haritssr.com Haris Studio and Haris Lab",
 // };
 
@@ -70,29 +70,17 @@ export default function DesignSystem() {
   }
   return (
     <>
-      <PageTitle title="Pure Design System" />
+      <PageTitle title="Components" />
       <PageDescription
         description={
           <>
-            Design system used in{" "}
+            Design system used in this site,
             <ExternalLink
-              big
-              href="https://www.haritssr.com"
-              name="haritssr.com"
-            />
-            ,
-            <ExternalLink
-              big
               href="https://harisstudio.vercel.app"
               name="Haris Studio"
             />{" "}
             and{" "}
-            <ExternalLink
-              big
-              href="https://www.harislab.com"
-              name="Haris Lab"
-            />
-            . (No longer maintained).
+            <ExternalLink href="https://www.harislab.com" name="Haris Lab" />.
           </>
         }
       />
@@ -110,21 +98,21 @@ export default function DesignSystem() {
           of the code.
         </li>
         <li>
-          Pure Design System mimicing the traditional (most cases) environment
-          when student solving math and physics problem, like in paper, pencil,
-          white board, pencil cases, etc, especially in Analysis (MAKI) process.
+          Components Design System mimicing the traditional (most cases)
+          environment when student solving math and physics problem, like in
+          paper, pencil, white board, pencil cases, etc, especially in Analysis
+          (MAKI) process.
         </li>
-        <li>Why called &quot;Pure&quot;?</li>
+        <li>Why called &quot;Components&quot;?</li>
         <ul className="block list-outside list-disc space-y-1 pl-4">
           <li>Well, honestly, I have no idea on naming.</li>
           <li>
-            Blue, black, gray, and white seems pure and minimalist color to me,
-            and it actually my four favourite colors.
+            Blue, black, gray, and white seem like minimalist colors to me, and
+            it actually my four favourite colors.
           </li>
           <li>
-            The word &quot;Pure&quot; also not a long word so it can fit on the
-            TabBars (bottom navigation on mobile-like apps) and top navigation
-            bar at desktop).
+            The name &quot;Components&quot; makes the purpose of this page clear
+            in the navigation.
           </li>
         </ul>
         <li>
@@ -167,7 +155,7 @@ export default function DesignSystem() {
           <InternalLink href="/experiments/radix-ui">here</InternalLink> or{" "}
           <InternalLink href="/experiments/headless-ui">here</InternalLink>
         </li>
-        <li>
+        <li className="text-red-500">
           There is a lot of work to be done in this design system, like:
           typography, use cases, example, do&apos;s and don&apos;t&apos;s,
           description to each UI component, and guidelines. Coming soon.

@@ -16,7 +16,7 @@ const staticRoutes = [
   "/writing",
   "/experiments",
   "/projects",
-  "/pure",
+  "/components",
   "/task",
   "/task/architecture",
   "/task/history",
