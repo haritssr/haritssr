@@ -27,7 +27,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const color = isCurrentPage ? "text-action" : "text-zinc-600";
 
   return (
-    <Link className="block w-1/4 active:scale-95" href={route}>
+    <Link className="block w-1/5 active:scale-95" href={route}>
       <div className="flex flex-col items-center justify-center py-1.25">
         <svg
           className={`h-6 w-6 ${color}`}
@@ -98,5 +98,18 @@ const TitleAndPathData = [
       </>
     ),
     title: "Experiments",
+  },
+
+  {
+    path: (
+      <>
+        <path
+          d="M3.75 3.75h6v6h-6v-6ZM14.25 3.75h6v6h-6v-6ZM3.75 14.25h6v6h-6v-6ZM14.25 14.25h6v6h-6v-6Z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </>
+    ),
+    title: "Components",
   },
 ];
