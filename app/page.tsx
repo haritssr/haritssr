@@ -1,8 +1,8 @@
-import Contacts from "./_components/home/Contacts";
-import Experiments from "./_components/home/Experiments";
-import Misc from "./_components/home/Misc";
-import Projects from "./_components/home/Projects";
-import Writing from "./_components/home/Writing";
+import Contacts from "./_landing_page/Contacts";
+import Experiments from "./_landing_page/Experiments";
+import Misc from "./_landing_page/Misc";
+import Projects from "./_landing_page/Projects";
+import Writing from "./_landing_page/Writing";
 
 export default function Home() {
   return (

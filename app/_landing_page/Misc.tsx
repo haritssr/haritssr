@@ -41,7 +41,7 @@ export default function Misc() {
         <li>
           <Link
             className="text-action hover:underline"
-            href="/masalah-to-feature"
+            href="/experiments/ui-explorations/masalah-to-feature"
             prefetch={false}
           >
             Masalah Pelajar → HL Feature
