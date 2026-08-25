@@ -1,7 +1,5 @@
 "use client";
 
-// link to /experiments/ui-explorations/task redirected to /task, see next.config.ts redirect()
-
 import { NumberField } from "@base-ui/react/number-field";
 import {
   type ChangeEvent,
@@ -12,6 +10,7 @@ import {
   useRef,
   useState,
 } from "react";
+import BackButton from "@/components/BackButton";
 import ExperimentPageBadge from "@/components/ExperimentPageBadge";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -387,13 +386,20 @@ export default function TaskPage() {
 
   return (
     <>
+      <BackButton href="/experiments/ui-explorations" name="UI Explorations" />
       <PageTitle title="Task" />
       <PageDescription description="Realistic Daily Time Budget." />
       <ExperimentPageBadge />
       <section className="mt-2 flex items-center space-x-5">
-        <InternalLink href="/task/history">History</InternalLink>
-        <InternalLink href="/task/statistics">Statistics</InternalLink>
-        <InternalLink href="/task/architecture">Architecture</InternalLink>
+        <InternalLink href="/experiments/ui-explorations/task/history">
+          History
+        </InternalLink>
+        <InternalLink href="/experiments/ui-explorations/task/statistics">
+          Statistics
+        </InternalLink>
+        <InternalLink href="/experiments/ui-explorations/task/architecture">
+          Architecture
+        </InternalLink>
       </section>
 
       <form

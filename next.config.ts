@@ -65,6 +65,16 @@ const nextConfig: NextConfig = {
   redirects() {
     return [
       {
+        destination: "/experiments/ui-explorations/masalah-to-feature",
+        permanent: true,
+        source: "/masalah-to-feature",
+      },
+      {
+        destination: "/experiments/ui-explorations/task/:path*",
+        permanent: true,
+        source: "/task/:path*",
+      },
+      {
         destination: "/experiments/ui-explorations/tools",
         permanent: true,
         source: "/tools",

@@ -16,17 +16,16 @@ const staticRoutes = [
   "/writing",
   "/experiments",
   "/projects",
-  "/components",
-  "/task",
-  "/task/architecture",
-  "/task/history",
-  "/task/statistics",
+  "/design",
+  "/experiments/ui-explorations/task/architecture",
+  "/experiments/ui-explorations/task/history",
+  "/experiments/ui-explorations/task/statistics",
 ];
 
 const experimentRoutes = ExperimentsData.flatMap((domain) => {
-  const routes = domain.experiments
-    .filter((experiment) => !experiment.redirectTo)
-    .map((experiment) => `/experiments/${domain.slug}/${experiment.slug}`);
+  const routes = domain.experiments.map(
+    (experiment) => `/experiments/${domain.slug}/${experiment.slug}`
+  );
 
   return [`/experiments/${domain.slug}`, ...routes];
 });

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 interface ExperimentEntry {
-  readonly redirectTo?: string;
   readonly slug: string;
   readonly title: string;
 }
@@ -199,7 +198,11 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       { slug: "notion-navbar", title: "Notion NavBar" },
       { slug: "times-table", title: "Times Table" },
       { slug: "inline-maki", title: "Inline Maki" },
-      { redirectTo: "/task", slug: "task", title: "Task" },
+      {
+        slug: "masalah-to-feature",
+        title: "Masalah Pelajar → HL Feature",
+      },
+      { slug: "task", title: "Task" },
       { slug: "yearly-interest", title: "Yearly Interest" },
       { slug: "input-list", title: "Input List" },
       { slug: "stopwatch", title: "Stopwatch" },

@@ -182,7 +182,7 @@ flowchart LR
 
 const fileStructureChart = `
 flowchart TB
-    subgraph Task["app/task/"]
+        subgraph Task["app/experiments/ui-explorations/task/"]
         page["page.tsx<br/>Main UI"]
         type["type.ts<br/>Type definitions"]
         data["data.ts<br/>Utilities"]
@@ -418,7 +418,7 @@ export default function TaskArchitecturePage() {
     <div className="pb-8">
       <Link
         className="mt-10 -mb-10 flex w-fit items-center text-action hover:text-action-hover"
-        href="/task"
+        href="/experiments/ui-explorations/task"
       >
         <ChevronLeftIcon className="h-5 w-5 stroke-2" />
         Task

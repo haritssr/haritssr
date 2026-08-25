@@ -1,5 +1,12 @@
-import { permanentRedirect } from "next/navigation";
+import type { Metadata } from "next";
+import { getExperimentMetadata } from "@/data/ExperimentsData";
+import TaskClient from "./TaskClient";
 
-export default function TaskRedirectPage() {
-  permanentRedirect("/task");
+export const metadata: Metadata = getExperimentMetadata(
+  "ui-explorations",
+  "task"
+);
+
+export default function TaskPage() {
+  return <TaskClient />;
 }

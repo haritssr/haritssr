@@ -161,7 +161,7 @@ export default function TaskStatisticsPage() {
 
   return (
     <div className="pb-8">
-      <BackButton href="/task" name="Task" />
+      <BackButton href="/experiments/ui-explorations/task" name="Task" />
       <PageTitle title="Statistic" />
       <PageDescription description="About the daily task." />
 
@@ -242,8 +242,8 @@ export default function TaskStatisticsPage() {
           Database table: daily_tasks
         </h2>
         <p className="mt-1 text-xs text-zinc-500">
-          Uses the task shape from app/task/data.ts: title, duration, progress,
-          and type.
+          Uses the task shape from app/experiments/ui-explorations/task/data.ts:
+          title, duration, progress, and type.
         </p>
         {visibleDatabaseTaskRows.length === 0 ? (
           <div className="mt-2 text-sm text-zinc-500">

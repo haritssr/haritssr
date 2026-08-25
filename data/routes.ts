@@ -8,11 +8,7 @@ const pageRoutes = [
   "/experiments/nextjs/articles",
   "/experiments/nextjs/posts",
   "/experiments/nextjs/students",
-  "/components",
-  "/task",
-  "/task/architecture",
-  "/task/history",
-  "/task/statistics",
+  "/design",
   "/times-table",
 ];
 
@@ -140,7 +136,12 @@ const experimentRoutes = [
   "/experiments/tailwind-css/youtube-thumbnail",
 
   "/experiments/ui-explorations/inline-maki",
+  "/experiments/ui-explorations/masalah-to-feature",
   "/experiments/ui-explorations/notion-navbar",
+  "/experiments/ui-explorations/task",
+  "/experiments/ui-explorations/task/architecture",
+  "/experiments/ui-explorations/task/history",
+  "/experiments/ui-explorations/task/statistics",
   "/experiments/ui-explorations/times-table",
   "/experiments/ui-explorations/yearly-interest",
   "/experiments/ui-explorations/tools",
@@ -160,7 +161,7 @@ const allRoutes = Array.from(
 // Human-friendly title overrides for routes that need custom labels.
 const routeTitleOverrides: Record<string, string> = {
   "/": "Home",
-  "/components": "Components",
+  "/design": "Design",
   "/times-table": "Times Table",
 };
 

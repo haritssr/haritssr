@@ -12,7 +12,7 @@ export default function TaskHistoryPage() {
 
   return (
     <div className="pb-8">
-      <BackButton href="/task" name="Task" />
+      <BackButton href="/experiments/ui-explorations/task" name="Task" />
       <PageTitle title="History" />
       <PageDescription description="Record of daily tasks." />
 

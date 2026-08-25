@@ -2,8 +2,8 @@ import {
   getTasksForDate,
   getTodayTaskDate,
   replaceTasksForDate,
-} from "app/task/db";
-import type { Task } from "app/task/type";
+} from "app/experiments/ui-explorations/task/db";
+import type { Task } from "app/experiments/ui-explorations/task/type";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
