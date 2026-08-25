@@ -4,15 +4,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type React from "react";
 
-export default function BottomBar() {
+export default function BottomBar({
+  preview = false,
+}: {
+  preview?: boolean;
+} = {}) {
   return (
-    <div className="sticky bottom-0 block w-full border-zinc-200 border-t bg-white/90 saturate-150 backdrop-blur-lg sm:hidden">
+    <nav
+      aria-label="Primary navigation"
+      className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} w-full border-zinc-200 border-t bg-white/90 saturate-150 backdrop-blur-lg`}
+    >
       <div className="flex w-full items-center">
         {TitleAndPathData.map(({ title, path }) => (
           <IconWrapper key={title} path={path} to={title} />
         ))}
       </div>
-    </div>
+    </nav>
   );
 }
 
@@ -27,7 +34,11 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   const color = isCurrentPage ? "text-action" : "text-zinc-600";
 
   return (
-    <Link className="block w-1/5 active:scale-95" href={route}>
+    <Link
+      aria-current={isCurrentPage ? "page" : undefined}
+      className="block w-1/5 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-[-2px] active:scale-95"
+      href={route}
+    >
       <div className="flex flex-col items-center justify-center py-1.25">
         <svg
           className={`h-6 w-6 ${color}`}
@@ -110,6 +121,6 @@ const TitleAndPathData = [
         />
       </>
     ),
-    title: "Components",
+    title: "Design",
   },
 ];
