@@ -8,9 +8,6 @@ experiment pages no longer pass through a dynamic component registry.
 ```text
 app/experiments/
 ├── page.tsx
-├── _components/
-│   ├── ExperimentDomainIndex.tsx
-│   └── ExperimentDomainLayout.tsx
 └── react/
     ├── layout.tsx
     ├── page.tsx
@@ -18,6 +15,9 @@ app/experiments/
         ├── demo.tsx
         └── page.tsx
 ```
+
+Shared experiment-domain components live in `components/`:
+`ExperimentDomainIndex.tsx` and `ExperimentDomainLayout.tsx`.
 
 The same structure is used for every experiment domain. The article, post,
 and student detail pages under `nextjs` retain their dynamic `[id]` segments
