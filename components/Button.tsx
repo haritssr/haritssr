@@ -1,6 +1,6 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, Ref } from "react";
 
-export type ButtonVariant = "danger" | "ghost" | "primary" | "secondary";
+type ButtonVariant = "danger" | "ghost" | "primary" | "secondary";
 
 const BUTTON_BASE_CLASS =
   "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-lg corner-squircle px-3 py-1.5 font-medium text-sm transition-colors active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
@@ -15,7 +15,14 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-zinc-300 bg-white text-zinc-800 hover:bg-zinc-50 focus-visible:outline-zinc-700",
 };
 
-export default function Button({
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  iconOnly?: boolean;
+  loading?: boolean;
+  ref?: Ref<HTMLButtonElement>;
+  variant?: ButtonVariant;
+};
+
+const Button = function Button({
   children,
   className,
   disabled,
@@ -23,18 +30,16 @@ export default function Button({
   loading = false,
   type = "button",
   variant = "primary",
+  ref,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & {
-  iconOnly?: boolean;
-  loading?: boolean;
-  variant?: ButtonVariant;
-}) {
+}: ButtonProps) {
   return (
     <button
       {...props}
       aria-busy={loading || undefined}
       className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly ? "p-2" : ""} ${className ?? ""}`}
       disabled={disabled || loading}
+      ref={ref}
       type={type}
     >
       {loading ? (
@@ -44,4 +49,6 @@ export default function Button({
       )}
     </button>
   );
-}
+};
+
+export default Button;
