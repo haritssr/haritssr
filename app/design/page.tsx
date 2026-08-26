@@ -204,519 +204,523 @@ export default function DesignSystem() {
       </ExplanationList>
       <div className="mb-10" />
       <Section name="UI Components" />
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
-        <Box title="Switch">
-          <Switch.Root
-            aria-label="Enable notifications"
-            className="block w-11 rounded-full bg-zinc-300 rdx-state-checked:bg-action p-1 outline-hidden transition-colors focus-visible:outline-2 focus-visible:outline-action"
-            defaultChecked
-            id="s1"
-          >
-            <Switch.Thumb className="block h-4 w-4 rdx-state-checked:translate-x-5 rounded-full bg-white shadow transition-transform duration-100 will-change-transform" />
-          </Switch.Root>
-        </Box>
-        <Box title="Accordion">
-          <Accordion.Root className="w-full max-w-xs" type="multiple">
-            <Accordion.Item value="item-1">
-              <Accordion.Header className="group">
-                <Accordion.Trigger className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-3 py-2 text-left font-medium text-sm text-zinc-800 outline-hidden transition-colors hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-action group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-100">
-                  <span>What is an accordion?</span>
-                  <ChevronDownIcon className="h-5 w-5 text-zinc-800 transition-transform duration-200 group-rdx-state-open:rotate-180" />
-                </Accordion.Trigger>
-              </Accordion.Header>
-
-              <Accordion.Content className="rounded-b-lg border-zinc-300 border-r border-b border-l bg-white p-3 text-sm text-zinc-600">
-                An accordion reveals related content without taking permanent
-                space in the layout.
-              </Accordion.Content>
-            </Accordion.Item>
-          </Accordion.Root>
-        </Box>
-        <Box title="Checkbox">
-          <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-x-2 sm:space-y-0">
-            <Checkbox.Root
-              className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-400 rdx-state-checked:border-action bg-white rdx-state-checked:bg-action rdx-state-checked:shadow-blue-300 shadow-sm outline-hidden hover:border-zinc-500 hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-action"
+      <Toast.Provider swipeDirection="right">
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+          <Box title="Switch">
+            <Switch.Root
+              aria-label="Enable notifications"
+              className="block w-11 rounded-full bg-zinc-300 rdx-state-checked:bg-action p-1 outline-hidden transition-colors focus-visible:outline-2 focus-visible:outline-action"
               defaultChecked
-              id="c1"
+              id="s1"
             >
-              <Checkbox.Indicator className="text-white">
-                <CheckIcon className="h-5 w-5" />
-              </Checkbox.Indicator>
-            </Checkbox.Root>
-            <label className="select-none text-zinc-800" htmlFor="c1">
-              Accept terms and conditions.
-            </label>
-          </div>
-        </Box>
-        <Box title="Popover">
-          <Popover.Root>
-            <Popover.Trigger asChild>
-              <Button>Show Popover</Button>
-            </Popover.Trigger>
+              <Switch.Thumb className="block h-4 w-4 rdx-state-checked:translate-x-5 rounded-full bg-white shadow transition-transform duration-100 will-change-transform" />
+            </Switch.Root>
+          </Box>
+          <Box title="Accordion">
+            <Accordion.Root className="w-full max-w-xs" type="multiple">
+              <Accordion.Item value="item-1">
+                <Accordion.Header className="group">
+                  <Accordion.Trigger className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-3 py-2 text-left font-medium text-sm text-zinc-800 outline-hidden transition-colors hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-action group-rdx-state-open:rounded-b-none group-rdx-state-open:bg-zinc-100">
+                    <span>What is an accordion?</span>
+                    <ChevronDownIcon className="h-5 w-5 text-zinc-800 transition-transform duration-200 group-rdx-state-open:rotate-180" />
+                  </Accordion.Trigger>
+                </Accordion.Header>
 
-            <Popover.Content
-              aria-label="Popover example"
-              className="w-[min(80vw,24rem)] rounded-lg border border-zinc-300 bg-white p-4 text-sm text-zinc-700 shadow-xl outline-hidden"
-              side="bottom"
-              sideOffset={10}
-            >
-              Popovers are useful for short, contextual information.
-              <Popover.Close asChild>
-                <button
-                  className="mt-3 block text-action text-sm hover:text-action-hover hover:underline focus-visible:outline-2 focus-visible:outline-action"
-                  type="button"
-                >
-                  Close
-                </button>
-              </Popover.Close>
-              <Popover.Arrow className="fill-zinc-300" />
-            </Popover.Content>
-          </Popover.Root>
-        </Box>
-        <Box title="Table">
-          <div className="w-full overflow-x-auto">
-            <table className="w-full min-w-[280px] border-collapse divide-y divide-zinc-300 border border-zinc-300 text-sm text-zinc-800">
-              <caption className="sr-only">Example data table</caption>
-              <thead>
-                <tr className="divide-x divide-zinc-300 bg-zinc-50">
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
-                    Name
-                  </th>
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
-                    Role
-                  </th>
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-200">
-                <tr className="divide-x divide-zinc-200">
-                  <td className="px-3 py-2">Ada</td>
-                  <td className="px-3 py-2">Engineer</td>
-                  <td className="px-3 py-2">Active</td>
-                </tr>
-                <tr className="divide-x divide-zinc-200">
-                  <td className="px-3 py-2">Grace</td>
-                  <td className="px-3 py-2">Designer</td>
-                  <td className="px-3 py-2">Away</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Box>
-        <Box title="Tabs">
-          <Tabs.Root
-            className="flex w-full max-w-sm flex-col"
-            defaultValue="tab1"
-          >
-            <Tabs.List
-              aria-label="Account settings"
-              className="flex shrink-0 gap-1 rounded-lg bg-zinc-100 p-1"
-            >
-              <Tabs.Trigger
-                className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 font-medium text-sm text-zinc-500 outline-hidden hover:bg-white/70 focus-visible:outline-2 focus-visible:outline-action data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow"
-                value="tab1"
+                <Accordion.Content className="rounded-b-lg border-zinc-300 border-r border-b border-l bg-white p-3 text-sm text-zinc-600">
+                  An accordion reveals related content without taking permanent
+                  space in the layout.
+                </Accordion.Content>
+              </Accordion.Item>
+            </Accordion.Root>
+          </Box>
+          <Box title="Checkbox">
+            <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-x-2 sm:space-y-0">
+              <Checkbox.Root
+                className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-400 rdx-state-checked:border-action bg-white rdx-state-checked:bg-action rdx-state-checked:shadow-blue-300 shadow-sm outline-hidden hover:border-zinc-500 hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-action"
+                defaultChecked
+                id="c1"
               >
-                Account
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 font-medium text-sm text-zinc-500 outline-hidden hover:bg-white/70 focus-visible:outline-2 focus-visible:outline-action data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow"
-                value="tab2"
-              >
-                Password
-              </Tabs.Trigger>
-            </Tabs.List>
-            <Tabs.Content
-              className="mt-2 grow rounded-lg border border-zinc-200 bg-white p-4 text-sm text-zinc-600 outline-hidden focus-visible:outline-2 focus-visible:outline-action"
-              value="tab1"
-            >
-              Update your profile details and account preferences.
-            </Tabs.Content>
-            <Tabs.Content
-              className="mt-2 grow rounded-lg border border-zinc-200 bg-white p-4 text-sm text-zinc-600 outline-hidden focus-visible:outline-2 focus-visible:outline-action"
-              value="tab2"
-            >
-              Change your password and keep your account secure.
-            </Tabs.Content>
-          </Tabs.Root>
-        </Box>
-        <Box title="Toast">
-          <Toast.Provider swipeDirection="right">
-            <Button onClick={handleShowToast}>Show Toast</Button>
+                <Checkbox.Indicator className="text-white">
+                  <CheckIcon className="h-5 w-5" />
+                </Checkbox.Indicator>
+              </Checkbox.Root>
+              <label className="select-none text-zinc-800" htmlFor="c1">
+                Accept terms and conditions.
+              </label>
+            </div>
+          </Box>
+          <Box title="Popover">
+            <Popover.Root>
+              <Popover.Trigger asChild>
+                <Button>Show Popover</Button>
+              </Popover.Trigger>
 
-            <Toast.Root
-              className="grid grid-cols-[auto_max-content] items-center gap-x-4 rounded-xl border border-zinc-300 bg-white/90 py-3 pr-4 pl-4 shadow-xl backdrop-blur-md [grid-template-areas:'title_action'_'description_action'] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[state=closed]:animate-hide data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
-              onOpenChange={setToastOpen}
-              open={toastOpen}
-            >
-              <div>
-                <Toast.Title className="font-medium text-sm text-zinc-800 [grid-area:title]">
-                  Toast notification
-                </Toast.Title>
-                <Toast.Description asChild>
-                  <div className="m-0 text-xs text-zinc-500 leading-[1.3] [grid-area:description]">
-                    Your action was completed.
-                  </div>
-                </Toast.Description>
-              </div>
-              <Toast.Close className="rounded px-2 py-1 text-action text-sm hover:bg-zinc-100 hover:text-action-hover focus-visible:outline-2 focus-visible:outline-action">
-                OK
-              </Toast.Close>
-            </Toast.Root>
-            <Toast.Viewport className="fixed right-0 bottom-0 z-50 m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-2 p-3 outline-hidden sm:p-6" />
-          </Toast.Provider>
-        </Box>
-        <Box title="Internal Link">
-          <InternalLink href="/">Internal Link</InternalLink>
-        </Box>
-        <Box title="External Link">
-          <ExternalLink href="https://www.harislab.com" name="External Link" />
-        </Box>
-        <Box title="Tooltip">
-          <Tooltip.Provider>
-            <Tooltip.Root>
-              <div className="flex space-x-1">
-                <div className="text-zinc-700">Tooltip</div>
-                <Tooltip.Trigger className="flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700">
-                  <ExclamationCircleIcon
-                    className="h-4 w-4 text-zinc-600 hover:text-zinc-700"
-                    strokeWidth={2}
-                  />
-                </Tooltip.Trigger>
-                <Tooltip.Content
-                  align="center"
-                  className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl"
-                  side="top"
-                >
-                  <div>Hey, I am Tooltip!</div>
-                  <Tooltip.Arrow
-                    className="fill-zinc-700"
-                    height={5}
-                    offset={5}
-                    width={10}
-                  />
-                </Tooltip.Content>
-              </div>
-            </Tooltip.Root>
-          </Tooltip.Provider>
-        </Box>
-        <Box title="Button: Primary">
-          <Button>Button</Button>
-        </Box>
-        <Box title="Button: Loading">
-          <Button loading={loading} onClick={handleLoadingClick}>
-            Button
-          </Button>
-        </Box>
-        <Box title="Button: Secondary">
-          <Button variant="secondary">Button</Button>
-        </Box>
-        <Box title="Button: With Icon">
-          <Button variant="secondary">
-            <svg
-              aria-hidden="true"
-              className="h-[18px] w-[18px] text-zinc-800"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span>Bookmark</span>
-          </Button>
-        </Box>
-        <Box title="Button: Only Icon">
-          <Button aria-label="Bookmark" iconOnly variant="secondary">
-            <svg
-              aria-hidden="true"
-              className="h-5 w-5 text-zinc-800"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Button>
-        </Box>
-        <Box title="Button: Danger">
-          <Button variant="danger">Delete</Button>
-        </Box>
-        <Box title="Button: Disabled">
-          <Button disabled variant="secondary">
-            Button
-          </Button>
-        </Box>
-        <Box title="Main Colors">
-          <div className="grid grid-cols-3 gap-5 sm:grid-cols-4">
-            {MAIN_COLORS.map((color) => (
-              <ColorSwatch
-                className={color.className}
-                key={color.name}
-                name={color.name}
-                value={color.value}
-              />
-            ))}
-          </div>
-        </Box>
-        <Box title="Hierarchical Colors">
-          <div className="grid grid-cols-4 gap-x-5 gap-y-1 sm:grid-cols-6 sm:gap-y-5">
-            {ZINC_COLORS.map((color) => (
-              <ColorSwatch
-                className={color.className}
-                key={color.name}
-                name={color.name}
-                value={color.value}
-              />
-            ))}
-          </div>
-        </Box>
-        <Box title="Input: Text">
-          <label className="block w-full sm:max-w-xs">
-            <span className="sr-only">Text input</span>
-            <input
-              className={FORM_CONTROL_CLASS_NAME}
-              placeholder="Type something..."
-              type="text"
-            />
-          </label>
-        </Box>
-        <Box title="Input: Search">
-          <label className="block w-full sm:max-w-xs">
-            <span className="sr-only">Search input</span>
-            <input
-              className={FORM_CONTROL_CLASS_NAME}
-              placeholder="Search"
-              type="search"
-            />
-          </label>
-        </Box>
-        <Box title="Input: Number">
-          <label className="block w-full sm:max-w-xs">
-            <span className="sr-only">Number input</span>
-            <input
-              className={FORM_CONTROL_CLASS_NAME}
-              min="0"
-              placeholder="0"
-              type="number"
-            />
-          </label>
-        </Box>
-        <Box title="Box">
-          <div className="w-[200px] overflow-hidden rounded-md border border-zinc-400/50 sm:w-[300px]">
-            <div className="select-none border-zinc-400/50 border-b bg-zinc-50 px-3 py-2 font-medium text-zinc-800">
-              Title
-            </div>
-            <div className="flex h-32 items-center justify-center p-5">
-              Content
-            </div>
-          </div>
-        </Box>
-        <Box title="Text Area">
-          <textarea
-            className={FORM_CONTROL_CLASS_NAME}
-            placeholder="Write something here..."
-            rows={3}
-          />
-        </Box>
-        <Box title="Toggle">
-          <Toggle.Root
-            aria-label="Toggle example"
-            className="select-none rounded-lg border border-zinc-300 bg-white px-3 py-1.5 font-medium text-sm text-zinc-800 shadow-sm outline-hidden hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-action data-[state=on]:border-blue-300 data-[state=on]:text-action data-[state=on]:shadow-blue-100"
-            onPressedChange={setPressed}
-            pressed={pressed}
-          >
-            {pressed ? "State: on" : "State: off"}
-          </Toggle.Root>
-        </Box>
-        <Box title="Breadcrumbs">
-          <nav aria-label="Breadcrumb" className="text-sm">
-            <ol className="flex flex-wrap items-center gap-1 text-zinc-500">
-              <li>
-                <a className="hover:text-zinc-800 hover:underline" href="/">
-                  home
-                </a>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <a
-                  className="hover:text-zinc-800 hover:underline"
-                  href="/design"
-                >
-                  design
-                </a>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-zinc-800">
-                buttons
-              </li>
-            </ol>
-          </nav>
-        </Box>
-        <Box title="Badges">
-          <div className="flex flex-wrap gap-2">
-            {BADGES.map((badge) => (
-              <Badge className={badge.className} key={badge.name}>
-                {badge.name}
-              </Badge>
-            ))}
-          </div>
-        </Box>
-        <Box title="Back Button">
-          <BackButton href="/" name="Previous Page" />
-        </Box>
-        <Box title="Logo">
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
-            {LOGOS.map((logo) => (
-              <div className="space-y-2 text-center" key={logo.name}>
-                <Image
-                  alt={logo.alt}
-                  className="mx-auto h-10 w-10"
-                  height={40}
-                  src={logo.src}
-                  width={40}
-                />
-                <div className="flex flex-col">
-                  <span className="text-sm text-zinc-800 sm:text-base">
-                    {logo.name}
-                  </span>
-                  <span className="text-sm text-zinc-400 sm:text-base">
-                    {logo.url}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Box>
-        <Box title="Modal">
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <Button variant="secondary">Open Modal</Button>
-            </Dialog.Trigger>
-            <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 z-40 bg-zinc-950/50 backdrop-blur-[2px]" />
-              <Dialog.Content className="fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-zinc-300 bg-white p-5 shadow-xl outline-hidden focus-visible:outline-2 focus-visible:outline-action sm:p-6">
-                <Dialog.Title className="font-semibold text-lg text-zinc-800">
-                  Modal title
-                </Dialog.Title>
-                <Dialog.Description className="mt-2 mb-5 text-sm text-zinc-600 leading-normal">
-                  Dialogs focus attention on a short task or decision.
-                </Dialog.Description>
-                <div className="rounded-lg bg-zinc-50 p-4 text-sm text-zinc-600">
-                  Content stays inside the dialog while the page beneath it is
-                  temporarily inert.
-                </div>
-                <div className="mt-5 flex justify-end gap-2">
-                  <Dialog.Close asChild>
-                    <Button variant="secondary">Cancel</Button>
-                  </Dialog.Close>
-                  <Dialog.Close asChild>
-                    <Button>Continue</Button>
-                  </Dialog.Close>
-                </div>
-                <Dialog.Close asChild>
+              <Popover.Content
+                aria-label="Popover example"
+                className="w-[min(80vw,24rem)] rounded-lg border border-zinc-300 bg-white p-4 text-sm text-zinc-700 shadow-xl outline-hidden"
+                side="bottom"
+                sideOffset={10}
+              >
+                Popovers are useful for short, contextual information.
+                <Popover.Close asChild>
                   <button
-                    aria-label="Close"
-                    className="absolute top-3 right-3 inline-flex h-8 w-8 appearance-none items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 focus-visible:outline-2 focus-visible:outline-action"
+                    className="mt-3 block text-action text-sm hover:text-action-hover hover:underline focus-visible:outline-2 focus-visible:outline-action"
                     type="button"
                   >
-                    <Cross2Icon aria-hidden="true" />
+                    Close
                   </button>
-                </Dialog.Close>
-              </Dialog.Content>
-            </Dialog.Portal>
-          </Dialog.Root>
-        </Box>
-        <Box title="Select">
-          <Select.Root defaultValue="design">
-            <Select.Trigger
-              aria-label="Choose a discipline"
-              className="inline-flex min-w-40 items-center justify-between gap-3 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm outline-hidden hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-action"
+                </Popover.Close>
+                <Popover.Arrow className="fill-zinc-300" />
+              </Popover.Content>
+            </Popover.Root>
+          </Box>
+          <Box title="Table">
+            <div className="w-full overflow-x-auto">
+              <table className="w-full min-w-[280px] border-collapse divide-y divide-zinc-300 border border-zinc-300 text-sm text-zinc-800">
+                <caption className="sr-only">Example data table</caption>
+                <thead>
+                  <tr className="divide-x divide-zinc-300 bg-zinc-50">
+                    <th className="px-3 py-2 text-left font-medium" scope="col">
+                      Name
+                    </th>
+                    <th className="px-3 py-2 text-left font-medium" scope="col">
+                      Role
+                    </th>
+                    <th className="px-3 py-2 text-left font-medium" scope="col">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-200">
+                  <tr className="divide-x divide-zinc-200">
+                    <td className="px-3 py-2">Ada</td>
+                    <td className="px-3 py-2">Engineer</td>
+                    <td className="px-3 py-2">Active</td>
+                  </tr>
+                  <tr className="divide-x divide-zinc-200">
+                    <td className="px-3 py-2">Grace</td>
+                    <td className="px-3 py-2">Designer</td>
+                    <td className="px-3 py-2">Away</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </Box>
+          <Box title="Tabs">
+            <Tabs.Root
+              className="flex w-full max-w-sm flex-col"
+              defaultValue="tab1"
             >
-              <Select.Value placeholder="Choose one" />
-              <Select.Icon>
-                <ChevronDownIcon className="h-4 w-4" />
-              </Select.Icon>
-            </Select.Trigger>
-            <Select.Portal>
-              <Select.Content
-                className="z-50 overflow-hidden rounded-lg border border-zinc-300 bg-white shadow-xl"
-                position="popper"
-                sideOffset={4}
+              <Tabs.List
+                aria-label="Account settings"
+                className="flex shrink-0 gap-1 rounded-lg bg-zinc-100 p-1"
               >
-                <Select.Viewport className="p-1">
-                  <Select.Item
-                    className="relative flex cursor-pointer select-none items-center rounded-md py-1.5 pr-8 pl-2 text-sm text-zinc-700 outline-hidden data-[highlighted]:bg-zinc-100 data-[highlighted]:text-zinc-900"
-                    value="design"
+                <Tabs.Trigger
+                  className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 font-medium text-sm text-zinc-500 outline-hidden hover:bg-white/70 focus-visible:outline-2 focus-visible:outline-action data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow"
+                  value="tab1"
+                >
+                  Account
+                </Tabs.Trigger>
+                <Tabs.Trigger
+                  className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 font-medium text-sm text-zinc-500 outline-hidden hover:bg-white/70 focus-visible:outline-2 focus-visible:outline-action data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow"
+                  value="tab2"
+                >
+                  Password
+                </Tabs.Trigger>
+              </Tabs.List>
+              <Tabs.Content
+                className="mt-2 grow rounded-lg border border-zinc-200 bg-white p-4 text-sm text-zinc-600 outline-hidden focus-visible:outline-2 focus-visible:outline-action"
+                value="tab1"
+              >
+                Update your profile details and account preferences.
+              </Tabs.Content>
+              <Tabs.Content
+                className="mt-2 grow rounded-lg border border-zinc-200 bg-white p-4 text-sm text-zinc-600 outline-hidden focus-visible:outline-2 focus-visible:outline-action"
+                value="tab2"
+              >
+                Change your password and keep your account secure.
+              </Tabs.Content>
+            </Tabs.Root>
+          </Box>
+          <Box title="Toast">
+            <Button onClick={handleShowToast}>Show Toast</Button>
+          </Box>
+
+          <Box title="Button: Primary">
+            <Button>Button</Button>
+          </Box>
+          <Box title="Button: Loading">
+            <Button loading={loading} onClick={handleLoadingClick}>
+              Button
+            </Button>
+          </Box>
+          <Box title="Button: Secondary">
+            <Button variant="secondary">Button</Button>
+          </Box>
+          <Box title="Button: With Icon">
+            <Button variant="secondary">
+              <svg
+                aria-hidden="true"
+                className="h-[18px] w-[18px] text-zinc-800"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>Bookmark</span>
+            </Button>
+          </Box>
+          <Box title="Button: Only Icon">
+            <Button aria-label="Bookmark" iconOnly variant="secondary">
+              <svg
+                aria-hidden="true"
+                className="h-5 w-4 text-zinc-800"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Button>
+          </Box>
+          <Box title="Button: Danger">
+            <Button variant="danger">Delete</Button>
+          </Box>
+          <Box title="Button: Disabled">
+            <Button disabled variant="secondary">
+              Button
+            </Button>
+          </Box>
+          <Box title="Internal Link">
+            <InternalLink href="/">Internal Link</InternalLink>
+          </Box>
+          <Box title="External Link">
+            <ExternalLink
+              href="https://www.harislab.com"
+              name="External Link"
+            />
+          </Box>
+          <Box title="Input: Text">
+            <label className="block w-full sm:max-w-xs">
+              <span className="sr-only">Text input</span>
+              <input
+                className={FORM_CONTROL_CLASS_NAME}
+                placeholder="Type something..."
+                type="text"
+              />
+            </label>
+          </Box>
+          <Box title="Input: Search">
+            <label className="block w-full sm:max-w-xs">
+              <span className="sr-only">Search input</span>
+              <input
+                className={FORM_CONTROL_CLASS_NAME}
+                placeholder="Search"
+                type="search"
+              />
+            </label>
+          </Box>
+          <Box title="Input: Number">
+            <label className="block w-full sm:max-w-xs">
+              <span className="sr-only">Number input</span>
+              <input
+                className={FORM_CONTROL_CLASS_NAME}
+                min="0"
+                placeholder="0"
+                type="number"
+              />
+            </label>
+          </Box>
+          <Box title="Box">
+            <div className="w-[200px] overflow-hidden rounded-md border border-zinc-400/50 sm:w-[300px]">
+              <div className="select-none border-zinc-400/50 border-b bg-zinc-50 px-3 py-2 font-medium text-zinc-800">
+                Title
+              </div>
+              <div className="flex h-32 items-center justify-center p-5">
+                Content
+              </div>
+            </div>
+          </Box>
+          <Box title="Text Area">
+            <textarea
+              className={FORM_CONTROL_CLASS_NAME}
+              placeholder="Write something here..."
+              rows={3}
+            />
+          </Box>
+          <Box title="Toggle">
+            <Toggle.Root
+              aria-label="Toggle example"
+              className="select-none rounded-lg border border-zinc-300 bg-white px-3 py-1.5 font-medium text-sm text-zinc-800 shadow-sm outline-hidden hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-action data-[state=on]:border-blue-300 data-[state=on]:text-action data-[state=on]:shadow-blue-100"
+              onPressedChange={setPressed}
+              pressed={pressed}
+            >
+              {pressed ? "State: on" : "State: off"}
+            </Toggle.Root>
+          </Box>
+          <Box title="Breadcrumbs">
+            <nav aria-label="Breadcrumb" className="text-sm">
+              <ol className="flex flex-wrap items-center gap-1 text-zinc-500">
+                <li>
+                  <a className="hover:text-zinc-800 hover:underline" href="/">
+                    home
+                  </a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                  <a
+                    className="hover:text-zinc-800 hover:underline"
+                    href="/design"
                   >
-                    <Select.ItemText>Design</Select.ItemText>
-                    <Select.ItemIndicator className="absolute right-2">
-                      <CheckIcon />
-                    </Select.ItemIndicator>
-                  </Select.Item>
-                  <Select.Item
-                    className="relative flex cursor-pointer select-none items-center rounded-md py-1.5 pr-8 pl-2 text-sm text-zinc-700 outline-hidden data-[highlighted]:bg-zinc-100 data-[highlighted]:text-zinc-900"
-                    value="engineering"
+                    design
+                  </a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-zinc-800">
+                  buttons
+                </li>
+              </ol>
+            </nav>
+          </Box>
+          <Box title="Badges">
+            <div className="flex flex-wrap gap-2">
+              {BADGES.map((badge) => (
+                <Badge className={badge.className} key={badge.name}>
+                  {badge.name}
+                </Badge>
+              ))}
+            </div>
+          </Box>
+          <Box title="Back Button">
+            <div className="-mt-10">
+              <BackButton href="/" name="Previous Page" />
+            </div>
+          </Box>
+          <Box title="Tooltip">
+            <Tooltip.Provider>
+              <Tooltip.Root>
+                <div className="flex space-x-1">
+                  <div className="text-zinc-700">Tooltip</div>
+                  <Tooltip.Trigger className="flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700">
+                    <ExclamationCircleIcon
+                      className="h-4 w-4 text-zinc-600 hover:text-zinc-700"
+                      strokeWidth={2}
+                    />
+                  </Tooltip.Trigger>
+                  <Tooltip.Content
+                    align="center"
+                    className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl"
+                    side="top"
                   >
-                    <Select.ItemText>Engineering</Select.ItemText>
-                    <Select.ItemIndicator className="absolute right-2">
-                      <CheckIcon />
-                    </Select.ItemIndicator>
-                  </Select.Item>
-                </Select.Viewport>
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
-        </Box>
-        <Box title="Bottom Navigation Mobile">
-          <div className="overflow-hidden rounded-xl border border-zinc-200">
+                    <div>Hey, I am Tooltip!</div>
+                    <Tooltip.Arrow
+                      className="fill-zinc-700"
+                      height={5}
+                      offset={5}
+                      width={10}
+                    />
+                  </Tooltip.Content>
+                </div>
+              </Tooltip.Root>
+            </Tooltip.Provider>
+          </Box>
+          <Box title="Logo">
+            <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
+              {LOGOS.map((logo) => (
+                <div className="space-y-2 text-center" key={logo.name}>
+                  <Image
+                    alt={logo.alt}
+                    className="mx-auto h-10 w-10"
+                    height={40}
+                    src={logo.src}
+                    width={40}
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-sm text-zinc-800 sm:text-base">
+                      {logo.name}
+                    </span>
+                    <span className="text-sm text-zinc-400 sm:text-base">
+                      {logo.url}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Box>
+          <Box title="Modal">
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <Button variant="secondary">Open Modal</Button>
+              </Dialog.Trigger>
+              <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 z-40 bg-zinc-950/50 backdrop-blur-[2px]" />
+                <Dialog.Content className="fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border border-zinc-300 bg-white p-5 shadow-xl outline-hidden focus-visible:outline-2 focus-visible:outline-action sm:p-6">
+                  <Dialog.Title className="font-semibold text-lg text-zinc-800">
+                    Modal title
+                  </Dialog.Title>
+                  <Dialog.Description className="mt-2 mb-5 text-sm text-zinc-600 leading-normal">
+                    Dialogs focus attention on a short task or decision.
+                  </Dialog.Description>
+                  <div className="rounded-lg bg-zinc-50 p-4 text-sm text-zinc-600">
+                    Content stays inside the dialog while the page beneath it is
+                    temporarily inert.
+                  </div>
+                  <div className="mt-5 flex justify-end gap-2">
+                    <Dialog.Close asChild>
+                      <Button variant="secondary">Cancel</Button>
+                    </Dialog.Close>
+                    <Dialog.Close asChild>
+                      <Button>Continue</Button>
+                    </Dialog.Close>
+                  </div>
+                  <Dialog.Close asChild>
+                    <button
+                      aria-label="Close"
+                      className="absolute top-3 right-3 inline-flex h-8 w-8 appearance-none items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 focus-visible:outline-2 focus-visible:outline-action"
+                      type="button"
+                    >
+                      <Cross2Icon aria-hidden="true" />
+                    </button>
+                  </Dialog.Close>
+                </Dialog.Content>
+              </Dialog.Portal>
+            </Dialog.Root>
+          </Box>
+          <Box title="Select">
+            <Select.Root defaultValue="design">
+              <Select.Trigger
+                aria-label="Choose a discipline"
+                className="inline-flex min-w-40 items-center justify-between gap-3 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm outline-hidden hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-action"
+              >
+                <Select.Value placeholder="Choose one" />
+                <Select.Icon>
+                  <ChevronDownIcon className="h-4 w-4" />
+                </Select.Icon>
+              </Select.Trigger>
+              <Select.Portal>
+                <Select.Content
+                  className="z-50 overflow-hidden rounded-lg border border-zinc-300 bg-white shadow-xl"
+                  position="popper"
+                  sideOffset={4}
+                >
+                  <Select.Viewport className="p-1">
+                    <Select.Item
+                      className="relative flex cursor-pointer select-none items-center rounded-md py-1.5 pr-8 pl-2 text-sm text-zinc-700 outline-hidden data-[highlighted]:bg-zinc-100 data-[highlighted]:text-zinc-900"
+                      value="design"
+                    >
+                      <Select.ItemText>Design</Select.ItemText>
+                      <Select.ItemIndicator className="absolute right-2">
+                        <CheckIcon />
+                      </Select.ItemIndicator>
+                    </Select.Item>
+                    <Select.Item
+                      className="relative flex cursor-pointer select-none items-center rounded-md py-1.5 pr-8 pl-2 text-sm text-zinc-700 outline-hidden data-[highlighted]:bg-zinc-100 data-[highlighted]:text-zinc-900"
+                      value="engineering"
+                    >
+                      <Select.ItemText>Engineering</Select.ItemText>
+                      <Select.ItemIndicator className="absolute right-2">
+                        <CheckIcon />
+                      </Select.ItemIndicator>
+                    </Select.Item>
+                  </Select.Viewport>
+                </Select.Content>
+              </Select.Portal>
+            </Select.Root>
+          </Box>
+          <Box title="Bottom Navigation Mobile">
             <BottomBar preview />
+          </Box>
+          <Box title="Slider">
+            <Slider.Root
+              aria-label="Volume"
+              className="relative flex w-full max-w-sm select-none items-center"
+              defaultValue={[50]}
+              max={100}
+              step={1}
+            >
+              <Slider.Track className="relative h-2 flex-1 rounded-full bg-zinc-200">
+                <Slider.Range className="absolute h-full rounded-full bg-action" />
+              </Slider.Track>
+              <Slider.Thumb className="block h-5 w-5 cursor-pointer rounded-full border border-zinc-300 bg-white shadow outline-hidden hover:border-zinc-400 focus-visible:outline-2 focus-visible:outline-action" />
+            </Slider.Root>
+          </Box>
+          <Box title="Context Menus">
+            <ContextMenuDemo />
+          </Box>
+          <Box title="Date Picker">
+            <label className="block w-full sm:max-w-xs">
+              <span className="mb-1 block font-medium text-sm text-zinc-700">
+                Choose a date
+              </span>
+              <input className={FORM_CONTROL_CLASS_NAME} type="date" />
+            </label>
+          </Box>
+          <Box title="Main Colors">
+            <div className="grid grid-cols-3 gap-5 sm:grid-cols-4">
+              {MAIN_COLORS.map((color) => (
+                <ColorSwatch
+                  className={color.className}
+                  key={color.name}
+                  name={color.name}
+                  value={color.value}
+                />
+              ))}
+            </div>
+          </Box>
+          <Box title="Hierarchical Colors">
+            <div className="grid grid-cols-4 gap-x-5 gap-y-1 sm:grid-cols-6 sm:gap-y-5">
+              {ZINC_COLORS.map((color) => (
+                <ColorSwatch
+                  className={color.className}
+                  key={color.name}
+                  name={color.name}
+                  value={color.value}
+                />
+              ))}
+            </div>
+          </Box>
+        </section>
+        <Toast.Root
+          className="grid grid-cols-[auto_max-content] items-center gap-x-4 rounded-lg border border-zinc-300 bg-white py-3 pr-4 pl-4 shadow-xl [grid-template-areas:'title_action'_'description_action'] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[state=closed]:animate-hide data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
+          onOpenChange={setToastOpen}
+          open={toastOpen}
+        >
+          <div>
+            <Toast.Title className="font-medium text-sm text-zinc-800 [grid-area:title]">
+              Toast notification
+            </Toast.Title>
+            <Toast.Description asChild>
+              <div className="m-0 text-xs text-zinc-500 leading-[1.3] [grid-area:description]">
+                Your action was completed.
+              </div>
+            </Toast.Description>
           </div>
-        </Box>
-        <Box title="Slider">
-          <Slider.Root
-            aria-label="Volume"
-            className="relative flex w-full max-w-sm select-none items-center"
-            defaultValue={[50]}
-            max={100}
-            step={1}
-          >
-            <Slider.Track className="relative h-2 flex-1 rounded-full bg-zinc-200">
-              <Slider.Range className="absolute h-full rounded-full bg-action" />
-            </Slider.Track>
-            <Slider.Thumb className="block h-5 w-5 cursor-pointer rounded-full border border-zinc-300 bg-white shadow outline-hidden hover:border-zinc-400 focus-visible:outline-2 focus-visible:outline-action" />
-          </Slider.Root>
-        </Box>
-        <Box title="Context Menus">
-          <ContextMenuDemo />
-        </Box>
-        <Box title="Date Picker">
-          <label className="block w-full sm:max-w-xs">
-            <span className="mb-1 block font-medium text-sm text-zinc-700">
-              Choose a date
-            </span>
-            <input className={FORM_CONTROL_CLASS_NAME} type="date" />
-          </label>
-        </Box>
-      </section>
+          <Toast.Close className="rounded px-2 py-1 text-action text-sm hover:bg-zinc-100 hover:text-action-hover focus-visible:outline-2 focus-visible:outline-action">
+            OK
+          </Toast.Close>
+        </Toast.Root>
+        <Toast.Viewport className="fixed right-0 bottom-0 z-50 m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-2 p-3 outline-hidden sm:p-6" />
+      </Toast.Provider>
+
       <div className="mt-10" />
       <Section name="Figma Design" />
       <div className="mt-5">
         <iframe
           allowFullScreen
-          className="min-h-[32rem] w-full rounded-xl border border-zinc-300"
+          className="min-h-[32rem] w-full rounded-lg border border-zinc-300"
           height="450"
           loading="lazy"
           src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3DwxLQxcZHLYNHFvrj-1"

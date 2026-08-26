@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes } from "react";
 export type ButtonVariant = "danger" | "ghost" | "primary" | "secondary";
 
 const BUTTON_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 font-medium text-sm transition-colors active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-lg corner-squircle px-3 py-1.5 font-medium text-sm transition-colors active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   danger:

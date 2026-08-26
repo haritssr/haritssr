@@ -12,12 +12,18 @@ export default function BottomBar({
   return (
     <nav
       aria-label="Primary navigation"
-      className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} w-full border-zinc-200 border-t bg-white/90 saturate-150 backdrop-blur-lg`}
+      className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} p-3`}
     >
-      <div className="flex w-full items-center">
-        {TitleAndPathData.map(({ title, path }) => (
-          <IconWrapper key={title} path={path} to={title} />
-        ))}
+      <div
+        className={
+          "corner-squircle w-full rounded-xl border border-zinc-200 bg-white/80 p-1.25 shadow-lg saturate-150 backdrop-blur-lg"
+        }
+      >
+        <div className="flex w-full items-center">
+          {TitleAndPathData.map(({ title, path }) => (
+            <IconWrapper key={title} path={path} to={title} />
+          ))}
+        </div>
       </div>
     </nav>
   );
@@ -39,7 +45,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
       className="block w-1/5 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-[-2px] active:scale-95"
       href={route}
     >
-      <div className="flex flex-col items-center justify-center py-1.25">
+      <div className="flex flex-col items-center justify-center">
         <svg
           className={`h-6 w-6 ${color}`}
           fill="none"
