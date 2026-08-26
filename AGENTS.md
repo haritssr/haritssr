@@ -36,3 +36,9 @@ refactor(Breadcrumbs.tsx): make it scrollable at mobile size when it too long
   require local worker-port permissions unavailable to sandboxed agents; run
   the build locally or in CI instead.
 - Never use bun run --webpack to run build, use regular bun run build (which using Turbopack)
+
+# Skill Selection
+
+- Use the skill that is most specific to the task being performed.
+- Use the smallest set of relevant skills needed to complete the task.
+- Do not invoke unrelated or overlapping skills merely because they are available.
