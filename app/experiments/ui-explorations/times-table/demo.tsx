@@ -111,7 +111,7 @@ function TimesTableComponent() {
                   handleOnClick={setCurrentInput}
                   handleOnchange={setCurrentInput}
                   index={index + 1}
-                  key={"$row-$col"}
+                  key={`${row}-${col}`}
                   row={row}
                 />
               );
