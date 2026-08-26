@@ -32,7 +32,7 @@ import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 
 const FORM_CONTROL_CLASS_NAME =
-  "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm outline-hidden placeholder:text-zinc-400 focus:border-zinc-700 focus:ring-2 focus:ring-zinc-700/20 sm:max-w-xs";
+  "form-control w-full appearance-none rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm outline-hidden placeholder:text-zinc-400 focus:border-zinc-700 focus:ring-2 focus:ring-zinc-700/20 sm:max-w-xs";
 
 const POPOVER_ARROW_CLASS_NAME =
   "relative block h-1.5 w-3 overflow-clip data-[side=bottom]:top-[-6px] data-[side=left]:right-[-9px] data-[side=left]:rotate-90 data-[side=right]:left-[-9px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-6px] data-[side=top]:rotate-180 before:absolute before:bottom-0 before:left-1/2 before:h-[calc(6px*sqrt(2))] before:w-[calc(6px*sqrt(2))] before:border before:border-zinc-300 before:bg-white before:content-[''] before:[transform:translate(-50%,50%)_rotate(45deg)]";
@@ -587,7 +587,7 @@ export default function DesignSystem() {
             <Select.Root defaultValue="design">
               <Select.Trigger
                 aria-label="Choose a discipline"
-                className="inline-flex min-w-40 items-center justify-between gap-3 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm outline-hidden hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-action"
+                className={`${FORM_CONTROL_CLASS_NAME} inline-flex items-center justify-between gap-3 hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-action`}
               >
                 <Select.Value placeholder="Choose one" />
                 <Select.Icon>

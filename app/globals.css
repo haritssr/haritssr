@@ -58,11 +58,11 @@
 }
 
 /* Native form focus styles */
-input[type="search"]:focus,
+input[type="search"]:not(.form-control):focus,
 input[type="url"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
-input[type="number"]:focus,
+input[type="number"]:not(.form-control):focus,
 input[type="tel"]:focus {
   --tw-ring-color: rgb(39 39 42);
   --tw-ring-shadow: 0 0 0 1px var(--tw-ring-color);
