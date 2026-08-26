@@ -1,5 +1,3 @@
-"use client";
-
 // Content Collections compiles MDX to HTML
 export default function MDX({ html }: { html: string }) {
   return (

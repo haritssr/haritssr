@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
@@ -65,17 +64,15 @@ export default function RootLayout({
     <html className={inter.className} lang="en">
       <body>
         <ServiceWorkerRegistration />
-        <NuqsAdapter>
-          <TopBarBorderOnScroll />
-          <main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
-            {children}
-          </main>
-          <Breadcrumbs />
-          <FooterSpacing>
-            <Footer />
-          </FooterSpacing>
-          <BottomBar />
-        </NuqsAdapter>
+        <TopBarBorderOnScroll />
+        <main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
+          {children}
+        </main>
+        <Breadcrumbs />
+        <FooterSpacing>
+          <Footer />
+        </FooterSpacing>
+        <BottomBar />
       </body>
     </html>
   );

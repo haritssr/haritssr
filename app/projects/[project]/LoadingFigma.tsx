@@ -1,5 +1,3 @@
-"use client";
-
 import type { ProjectsDataType } from "../../../data/ProjectsData";
 
 export default function LoadingFigma({
