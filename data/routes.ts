@@ -2,14 +2,12 @@
 const pageRoutes = [
   "/",
   "/writing",
-  "/input-list",
   "/projects",
   "/experiments",
   "/experiments/nextjs/articles",
   "/experiments/nextjs/posts",
   "/experiments/nextjs/students",
   "/design",
-  "/times-table",
 ];
 
 // Experiment domain landing pages.
@@ -136,6 +134,7 @@ const experimentRoutes = [
   "/experiments/tailwind-css/youtube-thumbnail",
 
   "/experiments/ui-explorations/inline-maki",
+  "/experiments/ui-explorations/input-list",
   "/experiments/ui-explorations/masalah-to-feature",
   "/experiments/ui-explorations/notion-navbar",
   "/experiments/ui-explorations/task",
@@ -143,6 +142,7 @@ const experimentRoutes = [
   "/experiments/ui-explorations/task/history",
   "/experiments/ui-explorations/task/statistics",
   "/experiments/ui-explorations/times-table",
+  "/experiments/ui-explorations/stopwatch",
   "/experiments/ui-explorations/yearly-interest",
   "/experiments/ui-explorations/tools",
 
@@ -162,7 +162,8 @@ const allRoutes = Array.from(
 const routeTitleOverrides: Record<string, string> = {
   "/": "Home",
   "/design": "Design",
-  "/times-table": "Times Table",
+  "/experiments/ui-explorations/input-list": "Input List",
+  "/experiments/ui-explorations/times-table": "Times Table",
 };
 
 // Matches route separators that should become spaces.
