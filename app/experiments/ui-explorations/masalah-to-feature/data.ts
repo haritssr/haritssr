@@ -1,8 +1,6 @@
 export const NOTION_DATABASE_URL =
   "https://app.notion.com/p/c1bbdf75e8ae4deab2a9fc5159dbf66a";
 
-export const NOTION_DATABASE_TITLE = "Masalah Pelajar → HL Feature";
-
 export const LAST_SYNCED = "2026-08-22";
 
 export const FEATURE_GROUPS = [
