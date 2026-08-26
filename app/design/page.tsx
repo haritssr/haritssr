@@ -13,10 +13,11 @@ import { Toast } from "@base-ui/react/toast";
 import { Toggle } from "@base-ui/react/toggle";
 import { Tooltip } from "@base-ui/react/tooltip";
 import {
+  CheckIcon,
   ChevronDownIcon,
   ExclamationCircleIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import BackButton from "@/components/BackButton";
@@ -576,7 +577,7 @@ export default function DesignSystem() {
                     aria-label="Close"
                     className="absolute top-3 right-3 inline-flex h-8 w-8 appearance-none items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 focus-visible:outline-2 focus-visible:outline-action"
                   >
-                    <Cross2Icon aria-hidden="true" />
+                    <XMarkIcon aria-hidden="true" className="h-4 w-4" />
                   </Dialog.Close>
                 </Dialog.Popup>
               </Dialog.Portal>
@@ -603,7 +604,7 @@ export default function DesignSystem() {
                       >
                         <Select.ItemText>Design</Select.ItemText>
                         <Select.ItemIndicator className="absolute right-2">
-                          <CheckIcon />
+                          <CheckIcon className="h-4 w-4" />
                         </Select.ItemIndicator>
                       </Select.Item>
                       <Select.Item
@@ -612,7 +613,7 @@ export default function DesignSystem() {
                       >
                         <Select.ItemText>Engineering</Select.ItemText>
                         <Select.ItemIndicator className="absolute right-2">
-                          <CheckIcon />
+                          <CheckIcon className="h-4 w-4" />
                         </Select.ItemIndicator>
                       </Select.Item>
                     </Select.List>
