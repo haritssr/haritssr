@@ -499,7 +499,7 @@ export default function DesignSystem() {
             </div>
           </Box>
           <Box title="Back Button">
-            <div className="-mt-10">
+            <div className="-mt-10 mb-5">
               <BackButton href="/" name="Previous Page" />
             </div>
           </Box>
