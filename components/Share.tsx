@@ -3,36 +3,38 @@
 import { usePathname } from "next/navigation";
 import { Toast } from "radix-ui";
 import React from "react";
+import { SITE_URL } from "@/utils/site";
 
 export default function Share() {
   const [open, setOpen] = React.useState(false);
-  const eventDateRef = React.useRef(new Date());
+  const [toastMessage, setToastMessage] = React.useState(
+    "Link copied to clipboard"
+  );
   const timerRef = React.useRef(0);
 
   React.useEffect(() => () => clearTimeout(timerRef.current), []);
 
-  function oneWeekAway() {
-    const now = new Date();
-    const inOneWeek = now.setDate(now.getDate() + 7);
-    return new Date(inOneWeek);
-  }
-
-  async function handleCopy(page: string) {
+  async function handleCopy(page: string): Promise<boolean> {
     try {
       await navigator.clipboard.writeText(page);
+      return true;
     } catch (err: unknown) {
-      console.log(err);
+      console.error("Unable to copy the page URL.", err);
+      return false;
     }
   }
 
   const pathname = usePathname();
+  const shareUrl = new URL(pathname, SITE_URL).toString();
 
-  const handleButtonClick = () => {
-    handleCopy(`haritssr.com${pathname}`);
+  const handleButtonClick = async () => {
+    const copied = await handleCopy(shareUrl);
+    setToastMessage(
+      copied ? "Link copied to clipboard" : "Unable to copy link"
+    );
     setOpen(false);
     window.clearTimeout(timerRef.current);
     timerRef.current = window.setTimeout(() => {
-      eventDateRef.current = oneWeekAway();
       setOpen(true);
     }, 100);
   };
@@ -42,7 +44,6 @@ export default function Share() {
       <button
         className="cursor-pointer select-none text-zinc-400 hover:text-zinc-800"
         onClick={handleButtonClick}
-        onKeyDown={handleButtonClick}
         type="button"
       >
         Share
@@ -55,10 +56,12 @@ export default function Share() {
         >
           <div className="">
             <Toast.Title className="mb-[5px] font-medium text-[15px] text-slate12 [grid-area:title]">
-              Link copied to clipboard
+              {toastMessage}
             </Toast.Title>
             <Toast.Description asChild>
-              <div className="m-0 text-[13px] text-zinc-500 leading-[1.3] [grid-area:description]">{`haritssr.com${pathname}`}</div>
+              <div className="m-0 text-[13px] text-zinc-500 leading-[1.3] [grid-area:description]">
+                {shareUrl}
+              </div>
             </Toast.Description>
           </div>
           <Toast.Close className="h-12 w-12 text-action hover:text-action-hover">
