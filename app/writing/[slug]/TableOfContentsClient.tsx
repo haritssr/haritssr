@@ -18,12 +18,8 @@ export default function TableOfContentsClient({
 
   useEffect(() => {
     const headingElements = items
-      .map(({ id }) => document.getElementById(id))
+      .map(({ id }) => document.querySelector(`#${id}`))
       .filter((heading): heading is HTMLElement => heading !== null);
-
-    if (headingElements.length === 0) {
-      return;
-    }
 
     const updateActiveHeading = () => {
       const isAtBottom =
@@ -51,7 +47,9 @@ export default function TableOfContentsClient({
 
     updateActiveHeading();
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, [items]);
 
   return (
@@ -65,7 +63,9 @@ export default function TableOfContentsClient({
             className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${isActive ? "border-zinc-700 font-medium text-zinc-800" : "border-transparent text-zinc-500 hover:text-zinc-700"}`}
             href={`#${item.id}`}
             key={item.id}
-            onClick={() => setActiveHeading(item.id)}
+            onClick={() => {
+              setActiveHeading(item.id);
+            }}
           >
             {capitalizeFirstLetter(item.title)}
           </Link>
