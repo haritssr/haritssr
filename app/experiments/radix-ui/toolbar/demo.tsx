@@ -1,6 +1,5 @@
 "use client";
 
-import { blackA, mauve, violet } from "@radix-ui/colors";
 import {
   FontBoldIcon,
   FontItalicIcon,
@@ -9,92 +8,17 @@ import {
   TextAlignLeftIcon,
   TextAlignRightIcon,
 } from "@radix-ui/react-icons";
-import { styled } from "@stitches/react";
 import { Toolbar as ToolbarPrimitive } from "radix-ui";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-const StyledToolbar = styled(ToolbarPrimitive.Root, {
-  backgroundColor: "white",
-  borderRadius: 6,
-  boxShadow: `0 2px 10px ${blackA.blackA7}`,
-  display: "flex",
-  minWidth: "max-content",
-  padding: 10,
-  width: "100%",
-});
+const toolbarItemClassName =
+  "inline-flex h-[25px] flex-[0_0_auto] appearance-none items-center justify-center rounded border-0 px-[5px] font-[inherit] text-[13px] leading-none outline-hidden focus:relative focus:shadow-[0_0_0_2px_#c2b5f5]";
 
-const itemStyles = {
-  "&:focus": { boxShadow: `0 0 0 2px ${violet.violet7}`, position: "relative" },
-  "&:hover": { backgroundColor: violet.violet3, color: violet.violet11 },
-  alignItems: "center",
-  all: "unset",
-  borderRadius: 4,
-  color: mauve.mauve11,
-  display: "inline-flex",
-  flex: "0 0 auto",
-  fontSize: 13,
-  height: 25,
-  justifyContent: "center",
-  lineHeight: 1,
-  padding: "0 5px",
-};
+const toolbarItemHoverClassName = "hover:bg-[#f4f0fe] hover:text-[#6550b9]";
 
-const StyledButton = styled(
-  ToolbarPrimitive.Button,
-  {
-    ...itemStyles,
-    backgroundColor: "#2563eb",
-    color: "white",
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  { "&:hover": { backgroundColor: "rgb(37, 99, 235, 0.5)", color: "white" } }
-);
-
-const StyledLink = styled(
-  ToolbarPrimitive.Link,
-  {
-    ...itemStyles,
-    alignItems: "center",
-    backgroundColor: "transparent",
-    color: mauve.mauve11,
-    display: "inline-flex",
-    justifyContent: "center",
-  },
-  { "&:hover": { backgroundColor: "transparent", cursor: "pointer" } }
-);
-
-const StyledSeparator = styled(ToolbarPrimitive.Separator, {
-  backgroundColor: mauve.mauve6,
-  margin: "0 10px",
-  width: 1,
-});
-
-const StyledToggleGroup = styled(ToolbarPrimitive.ToggleGroup, {
-  borderRadius: 4,
-  display: "inline-flex",
-});
-
-const StyledToggleItem = styled(ToolbarPrimitive.ToggleItem, {
-  ...itemStyles,
-  "&:first-child": { marginLeft: 0 },
-  "&[data-state=on]": {
-    backgroundColor: "rgb(37, 99, 235, 0.5)",
-    color: "rgb(37, 99, 235, 0.5)",
-  },
-  backgroundColor: "white",
-  boxShadow: 0,
-  marginLeft: 2,
-});
-
-// Exports
-const Toolbar = StyledToolbar;
-const ToolbarButton = StyledButton;
-const ToolbarSeparator = StyledSeparator;
-const ToolbarLink = StyledLink;
-const ToolbarToggleGroup = StyledToggleGroup;
-const ToolbarToggleItem = StyledToggleItem;
+const toolbarToggleItemClassName = `${toolbarItemClassName} ${toolbarItemHoverClassName} bg-white shadow-none data-[state=on]:bg-blue-600/50 data-[state=on]:text-blue-600/50`;
 
 export default function RadixToolbarDemo() {
   return (
@@ -108,43 +32,80 @@ export default function RadixToolbarDemo() {
       </div>
 
       <div className="w-full overflow-x-auto p-1">
-        <Toolbar aria-label="Formatting options">
-          <ToolbarToggleGroup aria-label="Text formatting" type="multiple">
-            <ToolbarToggleItem aria-label="Bold" value="bold">
+        <ToolbarPrimitive.Root
+          aria-label="Formatting options"
+          className="flex w-full min-w-max rounded-md bg-white p-2.5 shadow-[0_2px_10px_rgb(0_0_0_/_0.5)]"
+        >
+          <ToolbarPrimitive.ToggleGroup
+            aria-label="Text formatting"
+            className="inline-flex rounded"
+            type="multiple"
+          >
+            <ToolbarPrimitive.ToggleItem
+              aria-label="Bold"
+              className={`${toolbarToggleItemClassName} ml-0 first:ml-0`}
+              value="bold"
+            >
               <FontBoldIcon />
-            </ToolbarToggleItem>
-            <ToolbarToggleItem aria-label="Italic" value="italic">
+            </ToolbarPrimitive.ToggleItem>
+            <ToolbarPrimitive.ToggleItem
+              aria-label="Italic"
+              className={`${toolbarToggleItemClassName} ml-0.5 first:ml-0`}
+              value="italic"
+            >
               <FontItalicIcon />
-            </ToolbarToggleItem>
-            <ToolbarToggleItem
+            </ToolbarPrimitive.ToggleItem>
+            <ToolbarPrimitive.ToggleItem
               aria-label="Strike through"
+              className={`${toolbarToggleItemClassName} ml-0.5 first:ml-0`}
               value="strikethrough"
             >
               <StrikethroughIcon />
-            </ToolbarToggleItem>
-          </ToolbarToggleGroup>
-          <ToolbarSeparator />
-          <ToolbarToggleGroup
+            </ToolbarPrimitive.ToggleItem>
+          </ToolbarPrimitive.ToggleGroup>
+          <ToolbarPrimitive.Separator className="mx-2.5 w-px bg-[#dbd8e0]" />
+          <ToolbarPrimitive.ToggleGroup
             aria-label="Text alignment"
+            className="inline-flex rounded"
             defaultValue="center"
             type="single"
           >
-            <ToolbarToggleItem aria-label="Left aligned" value="left">
+            <ToolbarPrimitive.ToggleItem
+              aria-label="Left aligned"
+              className={`${toolbarToggleItemClassName} ml-0 first:ml-0`}
+              value="left"
+            >
               <TextAlignLeftIcon />
-            </ToolbarToggleItem>
-            <ToolbarToggleItem aria-label="Center aligned" value="center">
+            </ToolbarPrimitive.ToggleItem>
+            <ToolbarPrimitive.ToggleItem
+              aria-label="Center aligned"
+              className={`${toolbarToggleItemClassName} ml-0.5 first:ml-0`}
+              value="center"
+            >
               <TextAlignCenterIcon />
-            </ToolbarToggleItem>
-            <ToolbarToggleItem aria-label="Right aligned" value="right">
+            </ToolbarPrimitive.ToggleItem>
+            <ToolbarPrimitive.ToggleItem
+              aria-label="Right aligned"
+              className={`${toolbarToggleItemClassName} ml-0.5 first:ml-0`}
+              value="right"
+            >
               <TextAlignRightIcon />
-            </ToolbarToggleItem>
-          </ToolbarToggleGroup>
-          <ToolbarSeparator />
-          <ToolbarLink css={{ marginRight: 10 }} href="#" target="_blank">
+            </ToolbarPrimitive.ToggleItem>
+          </ToolbarPrimitive.ToggleGroup>
+          <ToolbarPrimitive.Separator className="mx-2.5 w-px bg-[#dbd8e0]" />
+          <ToolbarPrimitive.Link
+            className={`${toolbarItemClassName} mr-2.5 bg-transparent text-[#65636d] no-underline hover:cursor-pointer hover:bg-transparent hover:text-[#6550b9]`}
+            href="#"
+            target="_blank"
+          >
             Edited 2 hours ago
-          </ToolbarLink>
-          <ToolbarButton css={{ marginLeft: "auto" }}>Share</ToolbarButton>
-        </Toolbar>
+          </ToolbarPrimitive.Link>
+          <ToolbarPrimitive.Button
+            className={`${toolbarItemClassName} ml-auto bg-blue-600 px-2.5 text-white hover:bg-blue-600/50 hover:text-white`}
+          >
+            Share
+          </ToolbarPrimitive.Button>
+        </ToolbarPrimitive.Root>
       </div>
     </>
   );
