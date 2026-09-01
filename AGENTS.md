@@ -19,7 +19,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - perf: A code change that improves performance
 - test: Adding missing tests
 - chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
-- add: Adding new things
 
 Template:
 type(context): message
@@ -48,7 +47,8 @@ This machine has 8 GB RAM. Optimize commands for low resource usage:
 - Never run the production build from an AI agent environment. Turbopack may
   require local worker-port permissions unavailable to sandboxed agents; run
   the build locally or in CI instead.
-- Never use bun run --webpack to run build, use regular bun run build (which using Turbopack)
+- Never use `--webpack` with Next.js or build commands; use the default
+  Turbopack command instead.
 
 # Skill Selection
 
