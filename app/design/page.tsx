@@ -139,6 +139,7 @@ export default function DesignSystem() {
           A design system is a set of rules and opinions that shape the user
           interface and the experience as a whole.
         </li>
+
         <li>
           Design principles explain <span className="font-semibold">why</span>{" "}
           we make specific decisions; implementation explains{" "}
@@ -147,6 +148,14 @@ export default function DesignSystem() {
         <li>
           The Components system takes cues from the tools used to solve math and
           physics problems: paper, pencils, whiteboards, and pencil cases.
+        </li>
+        <li>
+          I care deeply about UX/UI design, with references including{" "}
+          <ExternalLink href="https://www.apple.com" name="Apple" />,
+          <ExternalLink href="https://linear.app" name="Linear" />,
+          <ExternalLink href="https://www.raycast.com" name="Raycast" />,
+          <ExternalLink href="https://dub.co" name="Dub" />, and{" "}
+          <ExternalLink href="https://vercel.com" name="Vercel" />.
         </li>
         <li>
           Why is it called &quot;Components&quot;?
