@@ -31,6 +31,18 @@ refactor(Breadcrumbs.tsx): make it scrollable at mobile size when it too long
 - Before committing, review the staged files and related documentation. Keep `AGENTS.md` and other project guidance accurate and relevant to the current codebase, updating them in the same change when needed.
 - Never commit changes without the user's explicit permission. Treat committing as a separate action that requires confirmation.
 
+# Resource-Constrained Development
+
+This machine has 8 GB RAM. Optimize commands for low resource usage:
+
+- Never start multiple development servers.
+- Reuse the existing development server.
+- Do not run background processes unnecessarily.
+- Kill temporary processes after finishing.
+- Prefer targeted tests and targeted linting.
+- Do not run the entire test suite unless necessary.
+- Do not run `next build` unless necessary.
+
 # Run Build
 
 - Never run the production build from an AI agent environment. Turbopack may
