@@ -7,12 +7,12 @@ const BUTTON_BASE_CLASS =
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   danger:
-    "border border-red-200 bg-white text-red-600 hover:bg-red-50 focus-visible:outline-red-500",
+    "border border-red-600 bg-white text-red-700 hover:bg-red-50 focus-visible:outline-red-700",
   ghost: "text-zinc-700 hover:bg-zinc-100 focus-visible:outline-zinc-700",
   primary:
     "bg-action text-white hover:bg-action-hover focus-visible:outline-action",
   secondary:
-    "border border-zinc-300 bg-white text-zinc-800 hover:bg-zinc-50 focus-visible:outline-zinc-700",
+    "border border-zinc-500 bg-white text-zinc-800 hover:bg-zinc-50 focus-visible:outline-zinc-700",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -36,9 +36,9 @@ const Button = function Button({
   return (
     <button
       {...props}
-      aria-busy={loading || undefined}
+      aria-busy={loading}
       className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly ? "p-2" : ""} ${className ?? ""}`}
-      disabled={disabled || loading}
+      disabled={disabled === true || loading}
       ref={ref}
       type={type}
     >

@@ -6,6 +6,12 @@ type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
 };
 
+function isBeforeInstallPromptEvent(
+  event: Event
+): event is BeforeInstallPromptEvent {
+  return "prompt" in event && typeof event.prompt === "function";
+}
+
 export default function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
@@ -13,7 +19,9 @@ export default function PWAInstallPrompt() {
   useEffect(() => {
     const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
-      setDeferredPrompt(event as BeforeInstallPromptEvent);
+      if (isBeforeInstallPromptEvent(event)) {
+        setDeferredPrompt(event);
+      }
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
@@ -31,14 +39,20 @@ export default function PWAInstallPrompt() {
   }
 
   async function installApp() {
-    await deferredPrompt?.prompt();
+    if (deferredPrompt === null) {
+      return;
+    }
+
+    await deferredPrompt.prompt();
     setDeferredPrompt(null);
   }
 
   return (
     <button
-      className="cursor-pointer select-none text-zinc-400 hover:text-zinc-800"
-      onClick={installApp}
+      className="cursor-pointer text-zinc-500 select-none hover:text-zinc-800"
+      onClick={() => {
+        void installApp();
+      }}
       type="button"
     >
       Install

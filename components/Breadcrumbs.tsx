@@ -24,7 +24,7 @@ export default function Breadcrumbs() {
     <nav className="mt-52">
       <div className="xl-px-0 mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
         <div className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
-          <Link className="text-zinc-400 hover:text-zinc-800" href="/">
+          <Link className="text-zinc-500 hover:text-zinc-800" href="/">
             home
           </Link>
 
@@ -38,13 +38,13 @@ export default function Breadcrumbs() {
             return (
               <span className="flex items-center" key={href}>
                 {isLast ? (
-                  <span className="select-none whitespace-nowrap text-zinc-800">
+                  <span className="whitespace-nowrap text-zinc-800 select-none">
                     {label.toLocaleLowerCase()}
                   </span>
                 ) : (
                   <>
                     <Link
-                      className="whitespace-nowrap text-zinc-400 hover:text-zinc-700"
+                      className="whitespace-nowrap text-zinc-500 hover:text-zinc-700"
                       href={href}
                     >
                       {label.toLocaleLowerCase()}

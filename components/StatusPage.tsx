@@ -6,7 +6,7 @@ const STATUS_ACTION_BASE_CLASS =
 
 const STATUS_ACTION_VARIANT_CLASS = {
   primary: "bg-action text-white hover:bg-action-hover",
-  secondary: "border border-zinc-300 text-zinc-700 hover:bg-zinc-100",
+  secondary: "border border-zinc-500 text-zinc-700 hover:bg-zinc-100",
 } as const;
 
 function getStatusActionClassName(
@@ -64,29 +64,29 @@ export function StatusPage({
   title: string;
   tone?: "error" | "neutral";
 }) {
-  const wrapperClassName = fullScreen
-    ? "flex min-h-screen w-full items-center justify-center px-5"
-    : "px-5";
+  const wrapperClassName =
+    fullScreen === true
+      ? "flex min-h-screen w-full items-center justify-center px-5"
+      : "px-5";
   const cardClassName =
     tone === "error"
       ? "border-rose-200 bg-rose-50"
       : "border-zinc-200 bg-zinc-50/40";
-  const badgeClassName =
-    tone === "error" ? "text-rose-600/80" : "text-zinc-500";
+  const badgeClassName = tone === "error" ? "text-rose-700" : "text-zinc-500";
 
   return (
     <div className={wrapperClassName}>
       <section
         className={`corner-squircle w-full max-w-xl rounded-xl border px-5 py-6 text-center ${cardClassName}`}
       >
-        <div className={`font-medium text-xs uppercase ${badgeClassName}`}>
+        <div className={`text-xs font-medium uppercase ${badgeClassName}`}>
           {tone === "error" ? "Error" : "Status"}
         </div>
-        <h1 className="mt-2 font-semibold text-2xl text-zinc-800">{title}</h1>
-        {description ? (
+        <h1 className="mt-2 text-2xl font-semibold text-zinc-800">{title}</h1>
+        {description !== undefined && description !== null ? (
           <p className="mt-2 text-sm text-zinc-600">{description}</p>
         ) : null}
-        {actions ? (
+        {actions !== undefined && actions !== null ? (
           <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
             {actions}
           </div>

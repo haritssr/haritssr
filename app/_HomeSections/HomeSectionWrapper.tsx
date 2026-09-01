@@ -19,18 +19,18 @@ export default function HomeSectionWrapper({
       <section className="flex items-center justify-between">
         {isTitleLink ? (
           <Link
-            className="mb-6 inline-flex select-none items-center font-semibold text-2xl text-zinc-800 hover:underline"
+            className="mb-6 inline-flex items-center text-2xl font-semibold text-zinc-800 select-none hover:underline"
             href={`/${id}`}
           >
             {topic}
             <ChevronRightIcon
               aria-hidden="true"
-              className="ml-1 h-5 w-5 shrink-0 text-zinc-400"
-              strokeWidth={3}
+              className="ml-1 h-5 w-5 shrink-0 text-zinc-600"
+              strokeWidth={2}
             />
           </Link>
         ) : (
-          <h2 className="mb-6 select-none font-semibold text-2xl text-zinc-800">
+          <h2 className="mb-6 text-2xl font-semibold text-zinc-800 select-none">
             {topic}
           </h2>
         )}

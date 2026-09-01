@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import InternalLink from "@/components/InternalLink";
 import { getExperimentDomain } from "@/data/ExperimentsData";
 
@@ -22,9 +23,9 @@ export default function ExperimentDomainIndex({
             width={36}
           />
         </div>
-        <div className="font-semibold text-2xl sm:text-3xl">{domain.title}</div>
+        <div className="text-2xl font-semibold sm:text-3xl">{domain.title}</div>
         <div className="text-lg text-zinc-800">{domain.description}</div>
-        <div className="font-light text-lg text-zinc-400">
+        <div className="text-lg font-light text-zinc-500">
           {domain.experiments.length} experiments
         </div>
       </div>

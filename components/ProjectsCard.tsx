@@ -18,7 +18,7 @@ export default function ProjectsCard({
   imgSrc,
 }: ProjectsCardType) {
   return (
-    <div className="group corner-squircle flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-300 selection:mx-auto">
+    <div className="group corner-squircle flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-400 selection:mx-auto">
       {/* Header + Title + Explanation */}
       <section className="flex flex-col justify-between space-y-2 p-3">
         <div className="flex items-start justify-between">
@@ -32,13 +32,13 @@ export default function ProjectsCard({
           />
 
           <Link
-            className="corner-squircle flex cursor-pointer items-center justify-center space-x-1.5 rounded-xl border border-zinc-300 px-3 py-1 text-zinc-600 hover:border-zinc-400 hover:text-zinc-700"
+            className="corner-squircle flex cursor-pointer items-center justify-center space-x-1.5 rounded-xl border border-zinc-400 px-3 py-1 text-zinc-600 hover:border-zinc-600 hover:text-zinc-700"
             href={`/projects/${title.toLowerCase().split(" ").join("-")}`}
           >
             <p className="text-sm">Case Study</p>
           </Link>
         </div>
-        <div className="truncate font-medium text-lg text-zinc-800">
+        <div className="truncate text-lg font-medium text-zinc-800">
           {title}
         </div>
 
@@ -54,7 +54,7 @@ export default function ProjectsCard({
 
       <section className="px-3 pb-3">
         <a
-          className="corner-squircle flex w-full select-none items-center justify-center space-x-2 rounded-xl bg-zinc-700 py-1.5 text-center text-tiny text-zinc-100 hover:bg-zinc-600"
+          className="corner-squircle text-tiny flex w-full items-center justify-center space-x-2 rounded-xl bg-zinc-700 py-1.5 text-center text-zinc-100 select-none hover:bg-zinc-600"
           href={href}
           rel="noopener noreferrer"
           target="_blank"
