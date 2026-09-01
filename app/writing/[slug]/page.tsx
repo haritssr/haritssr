@@ -2,10 +2,13 @@ import { allWritings } from "@content-collections";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
+import type { Plugin } from "unified";
 import BackButton from "@/components/BackButton";
 import MDX from "@/components/mdx";
 import { SITE_URL } from "@/utils/site";
 import TableOfContents from "./TableOfContent";
+
+type UnifiedPlugin = Plugin<[options?: unknown]>;
 
 export function generateStaticParams() {
   return allWritings.map((writing) => ({
@@ -101,26 +104,21 @@ async function markdownToHtml(content: string) {
 
   // Create processor with basic plugins
   const processor = unified()
-    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
-    .use(remarkParse.default as any)
-    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
-    .use(remarkGfm.default as any)
-    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
-    .use(remarkRehype.default as any);
+    .use(remarkParse.default as unknown as UnifiedPlugin)
+    .use(remarkGfm.default as unknown as UnifiedPlugin)
+    .use(remarkRehype.default as unknown as UnifiedPlugin);
 
   // Add optional plugins with error handling
   try {
     const rehypeSlug = await import("rehype-slug");
-    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
-    processor.use(rehypeSlug.default as any);
+    processor.use(rehypeSlug.default as unknown as UnifiedPlugin);
   } catch {
     // Skip if plugin fails
   }
 
   try {
     const rehypeAutolinkHeadings = await import("rehype-autolink-headings");
-    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
-    processor.use(rehypeAutolinkHeadings.default as any, {
+    processor.use(rehypeAutolinkHeadings.default as unknown as UnifiedPlugin, {
       properties: {
         className: ["anchor"],
       },
@@ -131,8 +129,7 @@ async function markdownToHtml(content: string) {
 
   try {
     const rehypePrettyCode = await import("rehype-pretty-code");
-    // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
-    processor.use(rehypePrettyCode.default as any, {
+    processor.use(rehypePrettyCode.default as unknown as UnifiedPlugin, {
       theme: "one-dark-pro",
     });
   } catch {
@@ -140,8 +137,7 @@ async function markdownToHtml(content: string) {
   }
 
   // Add stringify at the end
-  // biome-ignore lint/suspicious/noExplicitAny: Plugin version compatibility
-  processor.use(rehypeStringify.default as any);
+  processor.use(rehypeStringify.default as unknown as UnifiedPlugin);
 
   const result = await processor.process(content);
   return result.toString();
