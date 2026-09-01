@@ -1,6 +1,7 @@
 "use client";
 
 import { Tabs } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -36,13 +37,13 @@ const TabsDemo = () => (
       className="flex shrink-0 space-x-1 rounded-lg bg-zinc-100 p-1"
     >
       <Tabs.Trigger
-        className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-white py-1.5 font-medium text-zinc-500 outline-hidden hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
+        className="flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-white py-1.5 font-medium text-zinc-500 outline-hidden select-none hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
         value="tab1"
       >
         Account
       </Tabs.Trigger>
       <Tabs.Trigger
-        className="flex flex-1 cursor-pointer select-none items-center justify-center rounded-md border border-transparent bg-white py-1.5 font-medium text-zinc-500 outline-hidden hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
+        className="flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-white py-1.5 font-medium text-zinc-500 outline-hidden select-none hover:bg-zinc-200/80 data-[state=active]:border-zinc-300 data-[state=active]:bg-white data-[state=active]:text-zinc-800 data-[state=active]:shadow data-[state=active]:focus:relative"
         value="tab2"
       >
         Password

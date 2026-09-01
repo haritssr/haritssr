@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -25,10 +26,12 @@ What does it mean to update the time ?
 In modern frameworks updating text on the screen means changing the associated state data.
 */
 function Clock() {
-  const [date, setData] = useState(new Date());
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const timerId = setInterval(() => setData(new Date()), 1000);
+    const timerId = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
     return function cleanup() {
       clearInterval(timerId);
     };

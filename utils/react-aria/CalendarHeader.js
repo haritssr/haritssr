@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useDateFormatter, VisuallyHidden } from "react-aria";
+
 import { Button } from "./Button";
 
 export function CalendarHeader({
@@ -32,7 +33,7 @@ export function CalendarHeader({
         // and the calendar itself describes the individual month
         // so we don't need to repeat that here for screen reader users.
         aria-hidden="true"
-        className="flex-1 text-center align-center font-bold text-xl"
+        className="align-center flex-1 text-center text-xl font-bold"
       >
         {monthDateFormatter.format(
           state.visibleRange.start.toDate(state.timeZone)
@@ -40,7 +41,7 @@ export function CalendarHeader({
       </div>
       <div
         aria-hidden="true"
-        className="flex-1 text-center align-center font-bold text-xl"
+        className="align-center flex-1 text-center text-xl font-bold"
       >
         {monthDateFormatter.format(
           state.visibleRange.start.add({ months: 1 }).toDate(state.timeZone)

@@ -1,12 +1,14 @@
 "use client";
 
-import { type FormEvent, type SetStateAction, useState } from "react";
+import { useState } from "react";
+import type { FormEvent, SetStateAction } from "react";
+
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-function submitForm(answer: string) {
-  return new Promise<void>((resolve, reject) => {
+async function submitForm(answer: string) {
+  return await new Promise<void>((resolve, reject) => {
     setTimeout(() => {
       const shouldError = answer.toLowerCase() !== "lima";
       if (shouldError) {
@@ -51,9 +53,9 @@ const Example = () => {
     try {
       await submitForm(answer);
       setStatus("success");
-    } catch (err) {
+    } catch (error) {
       setStatus("typing");
-      setError((err as Error).message);
+      setError((error as Error).message);
     }
   }
 

@@ -24,7 +24,7 @@ export default function TailwindFeedbackDemo() {
           placeholder="Feedback?"
           rows={3}
         />
-        <div className="flex justify-between overflow-hidden p-2 font-medium text-sm opacity-100 transition-all duration-100 peer-placeholder-shown:h-0 peer-placeholder-shown:w-0 peer-placeholder-shown:p-0 peer-placeholder-shown:opacity-100 peer-focus:flex peer-focus:h-auto peer-focus:w-auto peer-focus:p-2 peer-focus:opacity-100">
+        <div className="flex justify-between overflow-hidden p-2 text-sm font-medium opacity-100 transition-all duration-100 peer-placeholder-shown:h-0 peer-placeholder-shown:w-0 peer-placeholder-shown:p-0 peer-placeholder-shown:opacity-100 peer-focus:flex peer-focus:h-auto peer-focus:w-auto peer-focus:p-2 peer-focus:opacity-100">
           <button className="rounded-md bg-gray-100 px-2 py-1" type="button">
             Cancel
           </button>

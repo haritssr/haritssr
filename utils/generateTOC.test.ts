@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, test } from "bun:test";
+
 import generateTOC from "./generateTOC";
 
 describe("generateTOC", () => {
@@ -31,7 +32,7 @@ describe("generateTOC", () => {
   });
 
   test("returns an empty list when the file cannot be read", () => {
-    console.error = () => undefined;
+    console.error = () => {};
 
     expect(generateTOC("data/writing/__missing__.mdx")).toEqual([]);
   });

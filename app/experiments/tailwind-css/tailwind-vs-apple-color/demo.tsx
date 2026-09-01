@@ -45,7 +45,7 @@ function Box({ name, color }: BoxProps) {
   return (
     <div className="space-y-1">
       <div className="h-20 w-20 rounded" style={{ backgroundColor: color }} />
-      <div className="font-medium text-tiny text-zinc-700">{name}</div>
+      <div className="text-tiny font-medium text-zinc-700">{name}</div>
       <div className="text-tiny text-zinc-400">{color}</div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -48,7 +49,9 @@ export default function ReactSubmitFormDemo() {
           <input
             className={inputStyle}
             id="title"
-            onChange={(e) => onChange(e)}
+            onChange={(e) => {
+              onChange(e);
+            }}
             type="text"
             value={title}
           />
@@ -58,7 +61,9 @@ export default function ReactSubmitFormDemo() {
           <input
             className={inputStyle}
             id="body"
-            onChange={(e) => onChange(e)}
+            onChange={(e) => {
+              onChange(e);
+            }}
             type="text"
             value={body}
           />

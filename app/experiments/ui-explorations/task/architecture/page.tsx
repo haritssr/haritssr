@@ -3,6 +3,7 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 
@@ -371,10 +372,10 @@ function MermaidDiagram({
           setSvg(renderedSvg);
           setError("");
         }
-      } catch (err) {
+      } catch (error) {
         if (!cancelled) {
           setError(
-            err instanceof Error ? err.message : "Failed to render diagram"
+            error instanceof Error ? error.message : "Failed to render diagram"
           );
         }
       }
@@ -412,7 +413,7 @@ function MermaidDiagram({
 
   if (error) {
     return (
-      <div className="rounded border border-red-200 bg-red-50 p-4 text-red-600 text-sm">
+      <div className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-600">
         Failed to render diagram: {error}
       </div>
     );
@@ -438,7 +439,7 @@ export default function TaskArchitecturePage() {
   return (
     <div className="pb-8">
       <Link
-        className="mt-10 -mb-10 flex w-fit items-center text-action hover:text-action-hover"
+        className="text-action hover:text-action-hover mt-10 -mb-10 flex w-fit items-center"
         href="/experiments/ui-explorations/task"
       >
         <ChevronLeftIcon className="h-5 w-5 stroke-2" />
@@ -549,7 +550,7 @@ export default function TaskArchitecturePage() {
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <div className="rounded border border-blue-200 bg-blue-50 p-3">
-          <code className="font-mono font-semibold text-blue-800 text-sm">
+          <code className="font-mono text-sm font-semibold text-blue-800">
             tasks: Task[]
           </code>
           <p className="mt-1 text-xs text-zinc-600">
@@ -559,7 +560,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         <div className="rounded border border-amber-200 bg-amber-50 p-3">
-          <code className="font-mono font-semibold text-amber-800 text-sm">
+          <code className="font-mono text-sm font-semibold text-amber-800">
             isHydratedFromDb
           </code>
           <p className="mt-1 text-xs text-zinc-600">
@@ -569,7 +570,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         <div className="rounded border border-emerald-200 bg-emerald-50 p-3">
-          <code className="font-mono font-semibold text-emerald-800 text-sm">
+          <code className="font-mono text-sm font-semibold text-emerald-800">
             droppedNowCount
           </code>
           <p className="mt-1 text-xs text-zinc-600">
@@ -579,7 +580,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         <div className="rounded border border-cyan-200 bg-cyan-50 p-3">
-          <code className="font-mono font-semibold text-cyan-800 text-sm">
+          <code className="font-mono text-sm font-semibold text-cyan-800">
             autoStartTitle
           </code>
           <p className="mt-1 text-xs text-zinc-600">
@@ -589,7 +590,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         <div className="rounded border border-violet-200 bg-violet-50 p-3">
-          <code className="font-mono font-semibold text-sm text-violet-800">
+          <code className="font-mono text-sm font-semibold text-violet-800">
             newOtherTaskTitle
           </code>
           <p className="mt-1 text-xs text-zinc-600">
@@ -598,7 +599,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         <div className="rounded border border-orange-200 bg-orange-50 p-3">
-          <code className="font-mono font-semibold text-orange-800 text-sm">
+          <code className="font-mono text-sm font-semibold text-orange-800">
             newOtherTaskDuration
           </code>
           <p className="mt-1 text-xs text-zinc-600">
@@ -608,7 +609,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         <div className="rounded border border-slate-200 bg-slate-50 p-3">
-          <code className="font-mono font-semibold text-slate-800 text-sm">
+          <code className="font-mono text-sm font-semibold text-slate-800">
             saveTimeoutRef
           </code>
           <p className="mt-1 text-xs text-zinc-600">
@@ -618,7 +619,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         <div className="rounded border border-rose-200 bg-rose-50 p-3">
-          <code className="font-mono font-semibold text-rose-800 text-sm">
+          <code className="font-mono text-sm font-semibold text-rose-800">
             isRunning
           </code>
           <p className="mt-1 text-xs text-zinc-600">

@@ -1,6 +1,8 @@
 import { allWritings } from "@content-collections";
 import type { MetadataRoute } from "next";
+
 import { SITE_URL } from "@/utils/site";
+
 import { ExperimentsData } from "../data/ExperimentsData";
 import {
   NextjsArticlesData,
@@ -42,8 +44,8 @@ const studentRoutes = NextjsStudentsData.map(
   (student) => `/experiments/nextjs/students/${student.id}`
 );
 
-const routeUrls = Array.from(
-  new Set([
+const routeUrls = [
+  ...new Set([
     ...staticRoutes,
     ...experimentRoutes,
     ...localPostRoutes,
@@ -53,8 +55,8 @@ const routeUrls = Array.from(
       (project) =>
         `/projects/${project.project_name.toLowerCase().replace(whitespaceSequencePattern, "-")}`
     ),
-  ])
-).map((route) => ({ url: `${SITE_URL}${route}` }));
+  ]),
+].map((route) => ({ url: `${SITE_URL}${route}` }));
 
 const writingUrls = allWritings.map((writing) => ({
   lastModified: new Date(writing.publishedAt),

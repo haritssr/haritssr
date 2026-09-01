@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -17,7 +18,7 @@ const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
     <section className="flex flex-col items-center gap-6">
       <section className="relative flex h-[320px] w-full gap-6 border border-gray-200 bg-red-100/50 leading-6">
         <article
-          className="absolute h-[320px] overflow-hidden overflow-y-auto text-ellipsis bg-yellow-100/50 p-4 text-action"
+          className="text-action absolute h-[320px] overflow-hidden overflow-y-auto bg-yellow-100/50 p-4 text-ellipsis"
           style={{
             fontFamily: a,
             width: "50%",
@@ -28,7 +29,7 @@ const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
           {children}
         </article>
         <article
-          className="absolute h-[320px] overflow-hidden overflow-y-auto text-ellipsis bg-green-100/50 p-4 text-pink-500"
+          className="absolute h-[320px] overflow-hidden overflow-y-auto bg-green-100/50 p-4 text-ellipsis text-pink-500"
           style={{
             fontFamily: b,
             width: "50%",
@@ -43,11 +44,18 @@ const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
         className="w-[50%]"
         max={25}
         min={0}
-        onChange={(e) => setFader(Number(e.target.value))}
+        onChange={(e) => {
+          setFader(Number(e.target.value));
+        }}
         type="range"
         value={fader}
       />
-      <button onClick={(_e) => setFader(0)} type="button">
+      <button
+        onClick={(_e) => {
+          setFader(0);
+        }}
+        type="button"
+      >
         Reset
       </button>
     </section>

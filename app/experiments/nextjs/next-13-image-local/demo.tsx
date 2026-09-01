@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -68,7 +69,7 @@ export default function NextjsImageLocalDemo() {
             src={LenovoWallpaper}
           />
           <div className="absolute top-1/2 left-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-zinc-700/40">
-            <p className="overscroll-y-auto text-ellipsis p-2 text-sm text-white sm:p-20 sm:text-xl">
+            <p className="overscroll-y-auto p-2 text-sm text-ellipsis text-white sm:p-20 sm:text-xl">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
               hic molestiae rerum dolorem et labore laborum nobis est ipsam vel
               mollitia, debitis aliquid dolore? Culpa ipsa molestiae ipsam?

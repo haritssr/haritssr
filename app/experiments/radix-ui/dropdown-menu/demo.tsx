@@ -2,6 +2,7 @@
 
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { DropdownMenu } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";

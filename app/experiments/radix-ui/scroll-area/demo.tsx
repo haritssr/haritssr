@@ -1,6 +1,7 @@
 "use client";
 
 import { ScrollArea } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -28,7 +29,7 @@ export default function RadixScrollAreaDemo() {
       <ScrollArea.Root className="h-64 w-2/3 rounded-md border border-zinc-400">
         <ScrollArea.Viewport className="h-full w-full rounded-md bg-white">
           <div className="p-4">
-            <div className="font-semibold text-lg text-zinc-800">Version</div>
+            <div className="text-lg font-semibold text-zinc-800">Version</div>
             {TAGS.map((tag) => (
               <div
                 className="mt-5 rounded border border-gray-500 p-2"

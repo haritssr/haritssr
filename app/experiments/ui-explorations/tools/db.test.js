@@ -24,8 +24,8 @@ afterAll(() => {
 });
 
 describe("tools db", () => {
-  function loadDb() {
-    return import("./db.bun");
+  async function loadDb() {
+    return await import("./db.bun");
   }
 
   afterEach(async () => {

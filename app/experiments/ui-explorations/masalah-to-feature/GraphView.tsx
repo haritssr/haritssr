@@ -1,16 +1,17 @@
 "use client";
 
 import { useDeferredValue, useMemo, useState } from "react";
+
 import ExternalLink from "@/components/ExternalLink";
+
 import {
   FEATURE_GROUPS,
-  type FeatureGroup,
   LAST_SYNCED,
   NOTION_DATABASE_URL,
-  type ProblemFeatureMapping,
   problemFeatureMappings,
   TOTAL_CONNECTIONS,
 } from "./data";
+import type { FeatureGroup, ProblemFeatureMapping } from "./data";
 
 type FilterGroup = "All" | FeatureGroup;
 type NodeId = `feature:${string}` | `problem:${string}`;
@@ -152,18 +153,18 @@ function SelectionDetails({
     return (
       <div className="space-y-5">
         <div>
-          <p className="mb-2 font-medium text-[11px] text-zinc-400 uppercase tracking-[0.16em]">
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
             Student problem
           </p>
-          <h2 className="font-semibold text-lg text-zinc-900 leading-snug">
+          <h2 className="text-lg leading-snug font-semibold text-zinc-900">
             {selectedProblem.problem}
           </h2>
         </div>
-        <p className="text-sm text-zinc-600 leading-6">
+        <p className="text-sm leading-6 text-zinc-600">
           {selectedProblem.transformation}
         </p>
         <div>
-          <p className="mb-2 font-medium text-[11px] text-zinc-400 uppercase tracking-[0.16em]">
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
             Connected features
           </p>
           <div className="flex flex-wrap gap-2">
@@ -176,7 +177,9 @@ function SelectionDetails({
                 <button
                   className={`rounded-full border px-2.5 py-1 text-left text-xs transition hover:-translate-y-px ${GROUP_STYLES[feature.group].chip}`}
                   key={feature.name}
-                  onClick={() => onSelect(feature.id)}
+                  onClick={() => {
+                    onSelect(feature.id);
+                  }}
                   type="button"
                 >
                   {formatFeatureName(feature.name)}
@@ -207,14 +210,14 @@ function SelectionDetails({
     return (
       <div className="space-y-5">
         <div>
-          <p className="mb-2 font-medium text-[11px] text-zinc-400 uppercase tracking-[0.16em]">
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
             HL feature
           </p>
           <div className="mb-2 flex items-center gap-2">
             <span
               className={`h-2.5 w-2.5 rounded-full ${GROUP_STYLES[selectedFeature.group].dot}`}
             />
-            <h2 className="font-semibold text-lg text-zinc-900 leading-snug">
+            <h2 className="text-lg leading-snug font-semibold text-zinc-900">
               {formatFeatureName(selectedFeature.name)}
             </h2>
           </div>
@@ -224,7 +227,7 @@ function SelectionDetails({
           </p>
         </div>
         <div>
-          <p className="mb-2 font-medium text-[11px] text-zinc-400 uppercase tracking-[0.16em]">
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
             Problems it addresses
           </p>
           <div className="space-y-1.5">
@@ -232,7 +235,9 @@ function SelectionDetails({
               <button
                 className="block w-full rounded-lg px-2.5 py-2 text-left text-sm text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950"
                 key={mapping.id}
-                onClick={() => onSelect(getProblemNodeId(mapping.id))}
+                onClick={() => {
+                  onSelect(getProblemNodeId(mapping.id));
+                }}
                 type="button"
               >
                 {mapping.problem}
@@ -247,11 +252,11 @@ function SelectionDetails({
   return (
     <div className="flex min-h-48 flex-col justify-between gap-8">
       <div>
-        <p className="mb-2 font-medium text-[11px] text-zinc-400 uppercase tracking-[0.16em]">
+        <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
           {getSelectionLabel(selectedNode)}
         </p>
-        <h2 className="font-semibold text-lg text-zinc-900">Explore the map</h2>
-        <p className="mt-2 text-sm text-zinc-600 leading-6">
+        <h2 className="text-lg font-semibold text-zinc-900">Explore the map</h2>
+        <p className="mt-2 text-sm leading-6 text-zinc-600">
           Select any problem or feature to highlight its connections and inspect
           the transformation described in the database.
         </p>
@@ -442,7 +447,7 @@ export default function GraphView() {
     }
     return Boolean(
       selectedProblemId &&
-        mappingById.get(selectedProblemId)?.features.includes(feature.name)
+      mappingById.get(selectedProblemId)?.features.includes(feature.name)
     );
   }
 
@@ -478,10 +483,10 @@ export default function GraphView() {
         <Stat label="Features" value={featureNodes.length} />
         <Stat label="Connections" value={TOTAL_CONNECTIONS} />
         <div className="hidden rounded-xl border border-zinc-200 bg-zinc-50/70 px-3 py-3 sm:block">
-          <p className="text-[11px] text-zinc-400 uppercase tracking-wide">
+          <p className="text-[11px] tracking-wide text-zinc-400 uppercase">
             Synced
           </p>
-          <p className="mt-1 font-medium text-sm text-zinc-800">
+          <p className="mt-1 text-sm font-medium text-zinc-800">
             {LAST_SYNCED}
           </p>
         </div>
@@ -494,8 +499,10 @@ export default function GraphView() {
           </span>
           <input
             aria-label="Search problems, transformations, or features"
-            className="w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-3 text-sm text-zinc-900 shadow-sm outline-none transition placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-2 focus:ring-zinc-200"
-            onChange={(event) => setQuery(event.currentTarget.value)}
+            className="w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-3 text-sm text-zinc-900 shadow-sm transition outline-none placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-2 focus:ring-zinc-200"
+            onChange={(event) => {
+              setQuery(event.currentTarget.value);
+            }}
             placeholder="Search problems, transformations, or features…"
             type="search"
             value={query}
@@ -524,7 +531,9 @@ export default function GraphView() {
                 aria-pressed={isSelected}
                 className={filterClassName}
                 key={group}
-                onClick={() => setSelectedGroup(group)}
+                onClick={() => {
+                  setSelectedGroup(group);
+                }}
                 type="button"
               >
                 {group}
@@ -549,7 +558,9 @@ export default function GraphView() {
         {selectedNode ? (
           <button
             className="text-action hover:text-action-hover hover:underline"
-            onClick={() => setSelectedNode(null)}
+            onClick={() => {
+              setSelectedNode(null);
+            }}
             type="button"
           >
             Clear selection
@@ -568,20 +579,22 @@ export default function GraphView() {
           id="problem-to-feature-graph"
         >
           <div className="mb-2 flex items-center justify-between gap-3 px-2 pt-1">
-            <span className="text-[11px] text-zinc-400 uppercase tracking-[0.14em]">
+            <span className="text-[11px] tracking-[0.14em] text-zinc-400 uppercase">
               Student problems
             </span>
             <button
               aria-controls="problem-to-feature-graph"
               aria-pressed={isExpanded}
               className="shrink-0 rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-[11px] text-zinc-600 transition hover:border-zinc-400 hover:text-zinc-900"
-              onClick={() => setIsExpanded((expanded) => !expanded)}
+              onClick={() => {
+                setIsExpanded((expanded) => !expanded);
+              }}
               title={isExpanded ? "Close expanded graph" : "Expand graph"}
               type="button"
             >
               {isExpanded ? "Close expanded view" : "Expand graph"}
             </button>
-            <span className="text-[11px] text-zinc-400 uppercase tracking-[0.14em]">
+            <span className="text-[11px] tracking-[0.14em] text-zinc-400 uppercase">
               HL features
             </span>
           </div>
@@ -650,9 +663,9 @@ export default function GraphView() {
                           : "border-zinc-200 bg-white"
                       } ${active ? "opacity-100" : "opacity-30"}`}
                       key={mapping.id}
-                      onClick={() =>
-                        handleNodeSelect(getProblemNodeId(mapping.id))
-                      }
+                      onClick={() => {
+                        handleNodeSelect(getProblemNodeId(mapping.id));
+                      }}
                       style={{
                         height: position.height,
                         left: position.left,
@@ -662,14 +675,14 @@ export default function GraphView() {
                       title={mapping.problem}
                       type="button"
                     >
-                      <span className="mb-1 flex items-center gap-1.5 text-[10px] text-zinc-400 uppercase tracking-wide">
+                      <span className="mb-1 flex items-center gap-1.5 text-[10px] tracking-wide text-zinc-400 uppercase">
                         <span className="font-semibold text-zinc-500">
                           P{index + 1}
                         </span>
                         <span>·</span>
                         <span>{mapping.features.length} features</span>
                       </span>
-                      <span className="line-clamp-2 font-medium text-[13px] text-zinc-800 leading-4">
+                      <span className="line-clamp-2 text-[13px] leading-4 font-medium text-zinc-800">
                         {mapping.problem}
                       </span>
                     </button>
@@ -694,7 +707,9 @@ export default function GraphView() {
                           : style.node
                       } ${active ? "opacity-100" : "opacity-30"}`}
                       key={feature.id}
-                      onClick={() => handleNodeSelect(feature.id)}
+                      onClick={() => {
+                        handleNodeSelect(feature.id);
+                      }}
                       style={{
                         height: position.height,
                         left: position.left,
@@ -704,13 +719,13 @@ export default function GraphView() {
                       title={formatFeatureName(feature.name)}
                       type="button"
                     >
-                      <span className="mb-1 flex items-center gap-1.5 text-[10px] uppercase tracking-wide">
+                      <span className="mb-1 flex items-center gap-1.5 text-[10px] tracking-wide uppercase">
                         <span
                           className={`h-1.5 w-1.5 rounded-full ${style.dot}`}
                         />
                         <span className="text-zinc-500">{feature.group}</span>
                       </span>
-                      <span className="line-clamp-2 font-medium text-[13px] leading-4">
+                      <span className="line-clamp-2 text-[13px] leading-4 font-medium">
                         {formatFeatureName(feature.name)}
                       </span>
                       <span className="mt-1 text-[11px] text-zinc-500">
@@ -723,7 +738,7 @@ export default function GraphView() {
               </div>
             </div>
           ) : (
-            <div className="flex min-h-64 items-center justify-center rounded-xl border border-zinc-300 border-dashed bg-white px-6 text-center">
+            <div className="flex min-h-64 items-center justify-center rounded-xl border border-dashed border-zinc-300 bg-white px-6 text-center">
               <div>
                 <p className="font-medium text-zinc-800">
                   No connections found
@@ -762,10 +777,10 @@ export default function GraphView() {
 function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-xl border border-zinc-200 bg-zinc-50/70 px-3 py-3">
-      <p className="text-[11px] text-zinc-400 uppercase tracking-wide">
+      <p className="text-[11px] tracking-wide text-zinc-400 uppercase">
         {label}
       </p>
-      <p className="mt-1 font-medium text-lg text-zinc-800">{value}</p>
+      <p className="mt-1 text-lg font-medium text-zinc-800">{value}</p>
     </div>
   );
 }

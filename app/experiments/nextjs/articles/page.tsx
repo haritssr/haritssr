@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
 import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -28,7 +29,7 @@ export default function ArticlesPage() {
         <SourceCodeLink />
       </div>
 
-      <div className="mt-5 grid grid-cols-1 xs:grid-cols-2 gap-5 sm:grid-cols-3">
+      <div className="xs:grid-cols-2 mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
         {NextjsArticlesData.map((article) => (
           <Link
             className="rounded-md border border-zinc-300 bg-zinc-50 p-4 duration-200 ease-out hover:cursor-pointer hover:bg-white"
@@ -36,7 +37,7 @@ export default function ArticlesPage() {
             key={article.id}
           >
             <div className="text-action">Article {article.id}</div>
-            <div className="font-semibold text-gray-800 text-xl">
+            <div className="text-xl font-semibold text-gray-800">
               {article.title}
             </div>
           </Link>

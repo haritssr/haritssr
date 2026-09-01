@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+
 import PageDescription from "@/components/PageDescription";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
+
 import GraphView from "./GraphView";
 
 const DESCRIPTION =

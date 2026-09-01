@@ -1,7 +1,9 @@
 import { unstable_noStore } from "next/cache";
+
 import BackButton from "@/components/BackButton";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+
 import type { TaskHistoryEntry } from "../db";
 import { getTaskHistory, getTasksForDate, getTodayTaskDate } from "../db";
 
@@ -56,7 +58,7 @@ function MetricCard(props: { label: string; subtitle: string; value: string }) {
   return (
     <div className="rounded-xl border border-zinc-200 p-3">
       <div className="text-sm text-zinc-500">{props.label}</div>
-      <div className="mt-1 font-semibold text-2xl text-zinc-800">
+      <div className="mt-1 text-2xl font-semibold text-zinc-800">
         {props.value}
       </div>
       <div className="mt-1 text-xs text-zinc-500">{props.subtitle}</div>
@@ -130,16 +132,14 @@ export default function TaskStatisticsPage() {
     }
   }
 
-  const [mostCompletedTaskEntry] = Array.from(
-    doneCountByTaskTitle.entries()
-  ).sort(
+  const [mostCompletedTaskEntry] = [...doneCountByTaskTitle.entries()].toSorted(
     ([, firstTaskCount], [, secondTaskCount]) =>
       secondTaskCount - firstTaskCount
   );
   const [mostCompletedTaskTitle, mostCompletedTaskCount] =
     mostCompletedTaskEntry ?? [];
 
-  const recent7DaysTrend = [...recent7Days].reverse().map((day) => ({
+  const recent7DaysTrend = [...recent7Days].toReversed().map((day) => ({
     completionRate: getCompletionRate(day.doneCount, day.totalCount),
     date: day.date,
   }));
@@ -165,7 +165,7 @@ export default function TaskStatisticsPage() {
       <PageTitle title="Statistic" />
       <PageDescription description="About the daily task." />
 
-      <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-blue-700 text-sm">
+      <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
         Ideas shown here: daily completion rate, 7-day completion rate,
         completed minutes, full-completion streak, top completed task, and a
         7-day trend.

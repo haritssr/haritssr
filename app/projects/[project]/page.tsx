@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import {
-  ProjectsData,
-  type ProjectsDataType,
-} from "../../../data/ProjectsData";
+
+import { ProjectsData } from "../../../data/ProjectsData";
+import type { ProjectsDataType } from "../../../data/ProjectsData";
 import LoadingFigma from "./LoadingFigma";
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export default async function ExperiencesPage({
         {/* Title */}
         <section className="my-8 flex items-center justify-between rounded-md border border-zinc-300 bg-zinc-50 px-3 py-2 sm:my-10 sm:px-5 sm:py-4">
           <div className="">
-            <div className="wrap-break-words font-bold text-2xl sm:text-3xl">
+            <div className="wrap-break-words text-2xl font-bold sm:text-3xl">
               {FoundProjectObject.project_name}
             </div>
             <div className="text-lg text-zinc-500">
@@ -64,7 +64,7 @@ export default async function ExperiencesPage({
         <section className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-16">
           {/* About The Client */}
           <section>
-            <h2 className="mb-5 border-zinc-300 border-b pb-4 font-semibold text-xl text-zinc-800">
+            <h2 className="mb-5 border-b border-zinc-300 pb-4 text-xl font-semibold text-zinc-800">
               About The Client
             </h2>
             <div className="mt-5 font-medium text-zinc-800">Company Name</div>
@@ -102,7 +102,7 @@ export default async function ExperiencesPage({
 
           {/* About The Project */}
           <section>
-            <h2 className="mb-5 border-zinc-300 border-b pb-4 font-semibold text-xl text-zinc-800">
+            <h2 className="mb-5 border-b border-zinc-300 pb-4 text-xl font-semibold text-zinc-800">
               About The Project
             </h2>
 
@@ -155,7 +155,7 @@ export default async function ExperiencesPage({
 
         {/* Design */}
         <section className="mt-10">
-          <h2 className="mb-5 font-semibold text-xl text-zinc-800">
+          <h2 className="mb-5 text-xl font-semibold text-zinc-800">
             Design (at Figma)
           </h2>
           <LoadingFigma project={FoundProjectObject} />

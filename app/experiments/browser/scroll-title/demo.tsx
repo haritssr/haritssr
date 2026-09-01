@@ -1,6 +1,7 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -13,7 +14,7 @@ export default function ScrollTitleDemo() {
         <SourceCodeLink />
       </div>
       <nav className="sticky top-[90px] flex justify-between bg-blue-100/80 p-2 saturate-150 backdrop-blur">
-        <div className="flex w-1/3 items-center space-x-1 text-action">
+        <div className="text-action flex w-1/3 items-center space-x-1">
           <Left />
           Kembali
         </div>
@@ -24,11 +25,11 @@ export default function ScrollTitleDemo() {
         >
           Title
         </div>
-        <div className="flex w-1/3 justify-end text-action">
+        <div className="text-action flex w-1/3 justify-end">
           <GlobalTools />
         </div>
       </nav>
-      <h1 className="mt-20 font-bold text-3xl" ref={ref}>
+      <h1 className="mt-20 text-3xl font-bold" ref={ref}>
         Title
       </h1>
       <p className="text-zinc-600">

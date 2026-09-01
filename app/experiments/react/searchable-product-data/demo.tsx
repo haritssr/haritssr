@@ -1,6 +1,8 @@
 "use client";
 
-import { type Dispatch, type JSX, type SetStateAction, useState } from "react";
+import { useState } from "react";
+import type { Dispatch, JSX, SetStateAction } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -60,7 +62,7 @@ const ProductTable = ({
     //couldn't destructure product in as a '({caterogry, name, stocked} : productDataType)' in forEach callback parameter because <ProductRow/> below need 'product' variabel
     const { category, name, stocked } = product;
 
-    if (name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
+    if (!name.toLowerCase().includes(filterText.toLowerCase())) {
       continue;
     }
 
@@ -102,7 +104,9 @@ const SearchBarWithFilter = ({
 }) => (
   <form className="flex w-fit flex-col gap-2">
     <input
-      onChange={(e) => onFilterTextChange(e.target.value)}
+      onChange={(e) => {
+        onFilterTextChange(e.target.value);
+      }}
       placeholder="Search..."
       type="text"
       value={filterText}
@@ -110,7 +114,9 @@ const SearchBarWithFilter = ({
     <label className="text-sm text-zinc-400">
       <input
         checked={inStockOnly}
-        onChange={(e) => onInStockOnlyChange(e.target.checked)}
+        onChange={(e) => {
+          onInStockOnlyChange(e.target.checked);
+        }}
         type="checkbox"
       />{" "}
       Only show products in stock

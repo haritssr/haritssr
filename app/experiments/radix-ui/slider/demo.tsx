@@ -1,6 +1,7 @@
 "use client";
 
 import { Slider } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -29,7 +30,7 @@ export default function RadixSliderDemo() {
       </div>
       <form action="">
         <Slider.Root
-          className="relative flex w-full select-none items-center"
+          className="relative flex w-full items-center select-none"
           defaultValue={[50]}
           // step={10}
           orientation="horizontal"
@@ -38,9 +39,9 @@ export default function RadixSliderDemo() {
             aria-orientation="horizontal"
             className="h-2 flex-1 rounded-full bg-zinc-800"
           >
-            <Slider.Range className="absolute h-full rounded-ful bg-zinc-100" />
+            <Slider.Range className="rounded-ful absolute h-full bg-zinc-100" />
           </Slider.Track>
-          <Slider.Thumb className="block h-5 w-5 cursor-pointer rounded-full border border-zinc-300 bg-white shadow-lg hover:border-zinc-400 hover:bg-zinc-50 focus:border focus:border-zinc-500 focus:outline-hidden focus:ring-4 focus:ring-zinc-400/50" />
+          <Slider.Thumb className="block h-5 w-5 cursor-pointer rounded-full border border-zinc-300 bg-white shadow-lg hover:border-zinc-400 hover:bg-zinc-50 focus:border focus:border-zinc-500 focus:ring-4 focus:ring-zinc-400/50 focus:outline-hidden" />
         </Slider.Root>
       </form>
     </>

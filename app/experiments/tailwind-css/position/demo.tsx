@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import type React from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -96,7 +97,7 @@ export default function TailwindPositionDemo() {
 
             <div className="absolute inset-0 bg-zinc-800/80 text-zinc-200">
               <div className="p-5">
-                <h1 className="font-semibold text-4xl">Title</h1>
+                <h1 className="text-4xl font-semibold">Title</h1>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Eveniet quae eum mollitia eaque, reprehenderit obcaecati dolore
                 incidunt voluptas unde blanditiis atque similique deserunt

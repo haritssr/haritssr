@@ -21,7 +21,7 @@ export default function Destination({ link }: { link: string }) {
 
   return (
     <li>
-      <Link className={`${color}`} href={`/${link}`}>
+      <Link className={color} href={`/${link}`}>
         {capitalizeFirstLetter(link)}
       </Link>
     </li>

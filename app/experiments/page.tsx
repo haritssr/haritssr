@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+
 import { ExperimentsData } from "../../data/ExperimentsData";
 
 function getExperimentsHomeDescription(): string {

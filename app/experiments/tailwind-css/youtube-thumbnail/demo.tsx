@@ -17,14 +17,14 @@ export default function TailwindYoutubeThumbnailDemo() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute w-[512px]h-[512px] bg-purple-400"
+          className="w-[512px]h-[512px] absolute bg-purple-400"
         />
 
         <div className="relative flex h-full flex-col justify-end space-y-4 p-8">
-          <p className="font-semibold text-purple-600 text-xs uppercase">
+          <p className="text-xs font-semibold text-purple-600 uppercase">
             How we&apos;d build it
           </p>
-          <h1 className="900 font-semibold text-4xl text-gray">
+          <h1 className="900 text-gray text-4xl font-semibold">
             Youtube Thumbail with Tailwind CSS
           </h1>
           <TailwindSVG />

@@ -2,6 +2,7 @@
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -30,14 +31,14 @@ export default function RadixDialogDemo() {
         <SourceCodeLink />
       </div>
       <Dialog.Root>
-        <Dialog.Trigger className="rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1.5 font-medium text-zinc-800 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-100">
+        <Dialog.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1.5 font-medium text-zinc-800 hover:bg-zinc-100">
           Show dialog
         </Dialog.Trigger>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-zinc-900/70" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 z-50 w-3/4 max-w-screen-xs -translate-x-1/2 -translate-y-1/2 rounded-md bg-white px-5 py-4">
+        <Dialog.Content className="max-w-screen-xs fixed top-1/2 left-1/2 z-50 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white px-5 py-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Dialog.Title className="font-bold text-lg text-zinc-800 sm:text-xl">
+              <Dialog.Title className="text-lg font-bold text-zinc-800 sm:text-xl">
                 Title for Anything
               </Dialog.Title>
               <Dialog.Close>

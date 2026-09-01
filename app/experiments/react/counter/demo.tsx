@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -52,7 +53,7 @@ export default function ReactCounterDemo() {
       <div>{formatTime(second)}</div>
       <div>{second}</div>
       <button
-        className="cursor-pointer select-none hover:text-action"
+        className="hover:text-action cursor-pointer select-none"
         onClick={onToggle}
         onKeyDown={onToggle}
         tabIndex={0}
@@ -61,7 +62,7 @@ export default function ReactCounterDemo() {
         {label}
       </button>
       <button
-        className="cursor-pointer select-none hover:text-action"
+        className="hover:text-action cursor-pointer select-none"
         onClick={onReset}
         onKeyDown={onReset}
         type="button"

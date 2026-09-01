@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -57,7 +58,7 @@ export default function ReactSearchInterpolDemo() {
 
       const data =
         await fetch(`https://ws-public.interpol.int/notices/v1/red?forename=${debouncedSearch}&resultPerPage=50
-        `).then((r) => r.json());
+        `).then(async (r) => await r.json());
 
       setNotices(data._embedded.notices);
       setLoading(false);
@@ -96,8 +97,10 @@ export default function ReactSearchInterpolDemo() {
       </div>
 
       <input
-        className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:outline-hidden focus:ring-2 focus:ring-zinc-200"
-        onChange={(e) => setSearch(e.target.value)}
+        className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:ring-2 focus:ring-zinc-200 focus:outline-hidden"
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
         placeholder="search"
         type="search"
       />

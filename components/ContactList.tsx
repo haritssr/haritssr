@@ -2,7 +2,7 @@ import Image from "next/image";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
 // Example: "https://www.example.com" becomes "example.com" after replacement.
-const urlPrefixPattern = /^https?:\/\/(www\.)?/;
+const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
 
 function boldharitssr(strippedURL: string, haritssr = "haritssr") {
   return strippedURL
@@ -27,7 +27,7 @@ function renderContact(each: { link: string; icon: string }) {
 
     return (
       <a
-        className="flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
+        className="focus-visible:outline-action flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
         href={
           each.link === "https://www.haritssr.com"
             ? "https://haritssr.vercel.app"
@@ -53,7 +53,7 @@ function renderContact(each: { link: string; icon: string }) {
   if (each.link.includes("@")) {
     return (
       <a
-        className="flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
+        className="focus-visible:outline-action flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
         href={`mailto:${each.link}`}
         title={each.link}
       >

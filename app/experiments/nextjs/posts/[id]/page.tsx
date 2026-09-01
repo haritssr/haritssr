@@ -1,6 +1,7 @@
 import { format, parseISO } from "date-fns";
 import type { Root } from "hast";
-import MDX from "@/components/mdx";
+
+import MarkdownContent from "@/components/mdx";
 import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -42,7 +43,7 @@ export default async function PostPage({
           veniam alias
         </div>
         <div className="col-span-3 rounded-md border border-zinc-300 p-2 sm:p-4">
-          <MDX tree={postData.contentTree} />
+          <MarkdownContent tree={postData.contentTree} />
         </div>
       </div>
     </>

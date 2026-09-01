@@ -1,5 +1,6 @@
 import ProjectsCard from "@/components/ProjectsCard";
 import { ProjectsData } from "@/data/ProjectsData";
+
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Projects() {

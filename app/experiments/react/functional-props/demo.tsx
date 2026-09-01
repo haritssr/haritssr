@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -14,11 +15,13 @@ function TextWithNumber({
   const [state, setState] = useState<number>(1);
   return (
     <div>
-      <div className="font-semibold text-xl">{header(state)}</div>
+      <div className="text-xl font-semibold">{header(state)}</div>
       <div>{children(state)}</div>
       <button
         className="rounded-md bg-blue-500 px-3 py-0.5 text-white"
-        onClick={() => setState(state + 1)}
+        onClick={() => {
+          setState(state + 1);
+        }}
         type="button"
       >
         Add

@@ -14,7 +14,7 @@ export default function YoutubeEmbedDemo() {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pictureBin-picture"
         allowFullScreen={true}
         className="aspect-video w-full"
-        frameBorder="0"
+        sandbox="allow-scripts allow-presentation"
         src="https://www.youtube.com/embed/JXeJANDKwDc"
         title="YouTube video player"
       />

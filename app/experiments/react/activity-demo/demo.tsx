@@ -1,8 +1,9 @@
 "use client";
 
+import { Activity, useEffect, useState } from "react";
+
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
-import SubTitle from "@/components/SubTitle";
 /*
 BEFORE
 { showSidebar && <SideBar/> }
@@ -29,8 +30,7 @@ when visible:
 
 
 */
-
-import { Activity, useEffect, useState } from "react";
+import SubTitle from "@/components/SubTitle";
 
 export default function ActivityDemo() {
   const [visible, setVisible] = useState(false);
@@ -45,7 +45,9 @@ export default function ActivityDemo() {
       </div>
       <button
         className="rounded-sm bg-blue-500 px-2.5 py-1.5 text-sm text-white hover:bg-blue-500/95 active:translate-y-px"
-        onClick={() => setVisible((v) => !v)}
+        onClick={() => {
+          setVisible((v) => !v);
+        }}
         type="button"
       >
         Toggle Visibility
@@ -96,7 +98,12 @@ function Counter() {
   return (
     <>
       <h2>{count}</h2>
-      <button onClick={() => setCount((c) => c + 1)} type="button">
+      <button
+        onClick={() => {
+          setCount((c) => c + 1);
+        }}
+        type="button"
+      >
         +
       </button>
     </>
@@ -108,7 +115,9 @@ function Form() {
   return (
     <input
       className="bg-gray-100"
-      onChange={(e) => setName(e.target.value)}
+      onChange={(e) => {
+        setName(e.target.value);
+      }}
       value={name}
     />
   );
@@ -137,10 +146,20 @@ function Tabs() {
   return (
     <div>
       {/*For butotn, every switch destroy: scroll position, form values, local UI updates*/}
-      <button onClick={() => setTab("settings")} type="button">
+      <button
+        onClick={() => {
+          setTab("settings");
+        }}
+        type="button"
+      >
         set settings
       </button>
-      <button onClick={() => setTab("profile")} type="button">
+      <button
+        onClick={() => {
+          setTab("profile");
+        }}
+        type="button"
+      >
         set profile
       </button>
 

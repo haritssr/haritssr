@@ -11,11 +11,18 @@ export default function ServiceWorkerRegistration() {
       return;
     }
 
-    navigator.serviceWorker
-      .register("/sw.js", { scope: "/", updateViaCache: "none" })
-      .catch((error: unknown) => {
+    const registerServiceWorker = async () => {
+      try {
+        await navigator.serviceWorker.register("/sw.js", {
+          scope: "/",
+          updateViaCache: "none",
+        });
+      } catch (error: unknown) {
         console.error("Service worker registration failed:", error);
-      });
+      }
+    };
+
+    void registerServiceWorker();
   }, []);
 
   return null;

@@ -1,5 +1,6 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
+
 import { SITE_URL } from "./site";
 
 // Matches one or more whitespace characters used to separate words.
@@ -46,9 +47,10 @@ const writings = defineCollection({
         datePublished: document.publishedAt,
         description: document.summary,
         headline: document.title,
-        image: document.image
-          ? new URL(document.image, SITE_URL).toString()
-          : defaultImageUrl.toString(),
+        image:
+          document.image !== undefined && document.image.length > 0
+            ? new URL(document.image, SITE_URL).toString()
+            : defaultImageUrl.toString(),
         topic: document.topic,
         url: writingUrl.toString(),
         wordCount,

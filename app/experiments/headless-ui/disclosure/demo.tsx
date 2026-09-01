@@ -2,6 +2,7 @@
 
 import { Disclosure, Transition } from "@headlessui/react";
 import type React from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";

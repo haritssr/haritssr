@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+
 import ExternalLink from "@/components/ExternalLink";
 import { sourceUrl } from "@/utils/site";
 
@@ -12,7 +13,7 @@ export default function SourceCodeLink({
   const pathname = usePathname();
   const path = sourcePath ?? (pathname ? `app${pathname}` : undefined);
 
-  if (!path) {
+  if (path === undefined) {
     return null;
   }
 

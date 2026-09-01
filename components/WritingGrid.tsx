@@ -1,4 +1,5 @@
 import { allWritings } from "@content-collections";
+
 import InternalLink from "./InternalLink";
 
 export default function WritingGrid() {

@@ -1,12 +1,8 @@
 "use client";
 
-import {
-  type ChangeEvent,
-  createContext,
-  memo,
-  useContext,
-  useState,
-} from "react";
+import { createContext, memo, useContext, useState } from "react";
+import type { ChangeEvent } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -42,7 +38,7 @@ function NameInputAddress({
   );
 }
 
-const Greeting = memo(function GreetingMemo({ name }: { name: string }) {
+const Greeting = memo(({ name }: { name: string }) => {
   console.log("Greeting was rendered at", new Date().toLocaleTimeString());
   const [greeting, setGreeting] = useState("Hello");
   return (
@@ -62,7 +58,9 @@ function GreetingSelector({ value, onChange }: GreetingSelectorProps) {
       <label>
         <input
           checked={value === "Hello"}
-          onChange={(_e) => onChange("Hello")}
+          onChange={(_e) => {
+            onChange("Hello");
+          }}
           type="radio"
           value={value}
         />
@@ -71,7 +69,9 @@ function GreetingSelector({ value, onChange }: GreetingSelectorProps) {
       <label>
         <input
           checked={value === "Hello and welcome"}
-          onChange={(_e) => onChange("Hello and welcome")}
+          onChange={(_e) => {
+            onChange("Hello and welcome");
+          }}
           type="radio"
           value={value}
         />
@@ -104,11 +104,7 @@ function ThemeYeah({ name }: { name: string }) {
   );
 }
 
-const GreetingTheme = memo(function GreetingThemeMemo({
-  name,
-}: {
-  name: string;
-}) {
+const GreetingTheme = memo(({ name }: { name: string }) => {
   console.log(
     "Greeting Theme was rendered at",
     new Date().toLocaleDateString()
@@ -137,12 +133,12 @@ export default function ReactUseMemo1Demo() {
       <NameInputAddress
         address={address}
         name={name}
-        onChangeAddress={(e: ChangeEvent<HTMLInputElement>) =>
-          setAddress(e.target.value)
-        }
-        onChangeName={(e: ChangeEvent<HTMLInputElement>) =>
-          setName(e.target.value)
-        }
+        onChangeAddress={(e: ChangeEvent<HTMLInputElement>) => {
+          setAddress(e.target.value);
+        }}
+        onChangeName={(e: ChangeEvent<HTMLInputElement>) => {
+          setName(e.target.value);
+        }}
       />
       <Greeting name={name} />
       <ThemeYeah name={name} />

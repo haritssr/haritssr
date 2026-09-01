@@ -1,5 +1,7 @@
 import path from "node:path";
+
 import generateTOC from "utils/generateTOC";
+
 import TableOfContentsClient from "./TableOfContentsClient";
 
 // Matches one or more whitespace characters.

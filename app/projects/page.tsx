@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import ProjectsCard from "@/components/ProjectsCard";
+
 import { ProjectsData } from "../../data/ProjectsData";
 
 const PROJECTS_DESCRIPTION =

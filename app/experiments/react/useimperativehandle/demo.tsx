@@ -1,13 +1,13 @@
 "use client";
 
-import {
-  type HTMLAttributes,
-  type InputHTMLAttributes,
-  type ReactNode,
-  type Ref,
-  useImperativeHandle,
-  useRef,
+import { useImperativeHandle, useRef } from "react";
+import type {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+  Ref,
 } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -113,14 +113,16 @@ type PostProps = HTMLAttributes<HTMLDivElement> & {
 const Post = function Post({ ref, ...props }: PostProps) {
   const commentListRef = useRef<CommentsListHandle>(null);
   const addCommentRef = useRef<HTMLInputElement>(null);
-  useImperativeHandle(ref, () => {
-    return {
+  useImperativeHandle(
+    ref,
+    () => ({
       scrollAndFocusAddComment() {
         // commentListRef.current?.scrollToBottom();
         addCommentRef.current?.focus();
       },
-    };
-  }, []);
+    }),
+    []
+  );
   return (
     <div className="" {...props}>
       <div>Welcome lol</div>

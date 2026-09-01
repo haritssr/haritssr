@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useState } from "react";
+
 import { getTaskActionButtonClassName } from "./data";
 import type {
   NowPrimaryAction,
@@ -25,7 +26,9 @@ function getNowPrimaryAction(
 
   if (isRunning) {
     return {
-      action: () => setIsRunning(false),
+      action: () => {
+        setIsRunning(false);
+      },
       className: getTaskActionButtonClassName("rose"),
       label: "Stop",
     };
@@ -33,14 +36,18 @@ function getNowPrimaryAction(
 
   if (progress === 0) {
     return {
-      action: () => setIsRunning(true),
+      action: () => {
+        setIsRunning(true);
+      },
       className: getTaskActionButtonClassName("blue"),
       label: "Start",
     };
   }
 
   return {
-    action: () => setIsRunning(true),
+    action: () => {
+      setIsRunning(true);
+    },
     className: getTaskActionButtonClassName("blue"),
     label: "Resume",
   };
@@ -79,7 +86,9 @@ function TaskActions(props: TaskActionsProps) {
       {!!props.isNowTask && (
         <button
           className={props.primaryNowAction.className}
-          onClick={props.primaryNowAction.action}
+          onClick={() => {
+            props.primaryNowAction.action?.();
+          }}
           type="button"
         >
           {props.primaryNowAction.label}
@@ -255,7 +264,9 @@ export default function TaskItem(props: TaskItemProps) {
       }
     }, 1000);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(timer);
+    };
   }, [
     isRunning,
     progress,
@@ -301,7 +312,7 @@ export default function TaskItem(props: TaskItemProps) {
                 primaryNowAction={primaryNowAction}
               />
             )}
-            <span>{props.duration}"</span>
+            <span>{props.duration}&quot;</span>
             <span>{progress.toFixed(0)}%</span>
             <DonutProgress isRunning={isRunning} progress={progress} />
           </div>
@@ -314,7 +325,7 @@ export default function TaskItem(props: TaskItemProps) {
           open
         >
           <div className="p-5">
-            <h2 className="font-semibold text-lg" id={deleteDialogTitleId}>
+            <h2 className="text-lg font-semibold" id={deleteDialogTitleId}>
               Delete task?
             </h2>
             <p className="mt-2 text-sm text-zinc-600">
@@ -323,7 +334,9 @@ export default function TaskItem(props: TaskItemProps) {
             <div className="mt-5 flex justify-end gap-2">
               <button
                 className="rounded-md px-3 py-1.5 text-sm hover:bg-zinc-100"
-                onClick={() => setIsDeleteDialogOpen(false)}
+                onClick={() => {
+                  setIsDeleteDialogOpen(false);
+                }}
                 type="button"
               >
                 Cancel

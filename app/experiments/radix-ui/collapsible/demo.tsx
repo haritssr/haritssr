@@ -2,6 +2,7 @@
 
 import { Collapsible } from "radix-ui";
 import { useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";

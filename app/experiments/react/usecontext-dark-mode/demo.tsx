@@ -1,7 +1,9 @@
 "use client";
 
 import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/outline";
-import { createContext, type ReactNode, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import type { ReactNode } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -49,7 +51,9 @@ function ToggleThemeButton({ theme, setTheme }: ToggleThemeButtonProps) {
           ? "border border-zinc-300 bg-white shadow hover:bg-zinc-50"
           : "bg-zinc-700"
       } rounded-md p-2`}
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      onClick={() => {
+        setTheme(theme === "light" ? "dark" : "light");
+      }}
       type="button"
     >
       {theme === "light" ? (

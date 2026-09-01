@@ -2,6 +2,7 @@
 
 import type { ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";

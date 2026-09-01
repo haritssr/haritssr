@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function InputList() {
@@ -21,7 +22,9 @@ export default function InputList() {
       </div>
       <input
         className="border px-2 py-1"
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
         type="text"
         value={input}
       />

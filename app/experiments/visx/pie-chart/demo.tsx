@@ -4,6 +4,7 @@ import { Group } from "@visx/group";
 import { Pie } from "@visx/shape";
 import { Text } from "@visx/text";
 import { useState } from "react";
+
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -100,11 +101,21 @@ export default function VisxPieChartDemo() {
               aria-pressed={isActive}
               className="flex items-center gap-1 rounded-md px-2 py-1 text-sm hover:bg-zinc-100"
               key={coin.symbol}
-              onBlur={() => setActive(null)}
-              onClick={() => setActive(isActive ? null : coin)}
-              onFocus={() => setActive(coin)}
-              onMouseEnter={() => setActive(coin)}
-              onMouseLeave={() => setActive(null)}
+              onBlur={() => {
+                setActive(null);
+              }}
+              onClick={() => {
+                setActive(isActive ? null : coin);
+              }}
+              onFocus={() => {
+                setActive(coin);
+              }}
+              onMouseEnter={() => {
+                setActive(coin);
+              }}
+              onMouseLeave={() => {
+                setActive(null);
+              }}
               type="button"
             >
               <span

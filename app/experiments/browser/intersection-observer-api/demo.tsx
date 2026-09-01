@@ -1,14 +1,13 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
-import SubTitle from "@/components/SubTitle";
-
-// native version
-// import { useEffect } from "react";
-
 //useinview version
 import { useInView } from "react-intersection-observer";
+
+import ExternalLink from "@/components/ExternalLink";
+import SourceCodeLink from "@/components/SourceCodeLink";
+// native version
+// import { useEffect } from "react";
+import SubTitle from "@/components/SubTitle";
 
 export default function IntersectionObserverDemo() {
   return (
@@ -89,7 +88,7 @@ function IntersectionObserverAPIHooks() {
         <SourceCodeLink />
       </div>
       <div className="mt-96 rounded-md bg-zinc-100 p-10">
-        <h2 className="mb-2 font-semibold text-2xl" ref={myRef}>
+        <h2 className="mb-2 text-2xl font-semibold" ref={myRef}>
           {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}
         </h2>
         <p ref={rocketRef}>

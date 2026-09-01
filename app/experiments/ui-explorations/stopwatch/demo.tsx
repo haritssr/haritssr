@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function Stopwatch() {
@@ -17,7 +18,9 @@ export default function Stopwatch() {
       setTime((elapsedTime) => elapsedTime + 1);
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, [running]);
 
   const buttonStyle = "border px-2 py-1 rounded-lg hover:bg-zinc-50";
@@ -31,14 +34,18 @@ export default function Stopwatch() {
       <div className="space-x-3">
         <button
           className={buttonStyle}
-          onClick={() => setRunning(true)}
+          onClick={() => {
+            setRunning(true);
+          }}
           type="button"
         >
           Start
         </button>
         <button
           className={buttonStyle}
-          onClick={() => setRunning(false)}
+          onClick={() => {
+            setRunning(false);
+          }}
           type="button"
         >
           Stop

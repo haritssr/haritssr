@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -20,7 +21,7 @@ export default function ReactUseStateFormDemo() {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("This is the form data: ", formData);
+    console.log("This is the form data:", formData);
     setFormData({
       title: "",
       body: "",

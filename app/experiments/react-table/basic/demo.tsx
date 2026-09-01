@@ -6,7 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useReducer, useState } from "react";
+import { useMemo, useReducer } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -99,7 +100,7 @@ const columns = [
 ];
 
 function Table() {
-  const [data] = useState(() => [...defaultData]);
+  const data = useMemo(() => [...defaultData], []);
   const [, rerender] = useReducer(() => ({}), {});
 
   const table = useReactTable({
@@ -116,7 +117,7 @@ function Table() {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
-                  className="whitespace-nowrap border-zinc-500 border-r border-b bg-green-100 px-2 py-1 font-bold"
+                  className="border-r border-b border-zinc-500 bg-green-100 px-2 py-1 font-bold whitespace-nowrap"
                   key={header.id}
                 >
                   {header.isPlaceholder
@@ -135,7 +136,7 @@ function Table() {
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td
-                  className="whitespace-nowrap border-zinc-500 border-r border-b px-2 py-1"
+                  className="border-r border-b border-zinc-500 px-2 py-1 whitespace-nowrap"
                   key={cell.id}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -149,7 +150,7 @@ function Table() {
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
                 <th
-                  className="border-zinc-500 border-r bg-blue-50 font-normal text-zinc-500"
+                  className="border-r border-zinc-500 bg-blue-50 font-normal text-zinc-500"
                   key={header.id}
                 >
                   {header.isPlaceholder
@@ -167,7 +168,9 @@ function Table() {
       <div className="h-4" />
       <button
         className="border border-zinc-700 p-2"
-        onClick={() => rerender()}
+        onClick={() => {
+          rerender();
+        }}
         type="button"
       >
         Rerender

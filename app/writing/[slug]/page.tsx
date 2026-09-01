@@ -4,9 +4,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
 import type { Plugin } from "unified";
+
 import BackButton from "@/components/BackButton";
-import MDX from "@/components/mdx";
+import MarkdownContent from "@/components/mdx";
 import { SITE_URL } from "@/utils/site";
+
 import TableOfContents from "./TableOfContent";
 
 type UnifiedPlugin = Plugin<[options?: unknown]>;
@@ -136,7 +138,12 @@ async function markdownToHast(content: string): Promise<Root> {
   }
 
   const tree = processor.parse(content);
-  return (await processor.run(tree)) as Root;
+  const result = await processor.run(tree);
+  if (result.type !== "root") {
+    throw new Error("Expected markdown processing to produce a root node");
+  }
+
+  return result as Root;
 }
 
 export default async function Writing({
@@ -161,7 +168,7 @@ export default async function Writing({
           <BackButton href="/writing" name="All Writings" />
         </div>
 
-        <h1 className="font-bold text-2xl text-zinc-800 tracking-tighter sm:text-3xl">
+        <h1 className="text-2xl font-bold tracking-tighter text-zinc-800 sm:text-3xl">
           {writing.title}
         </h1>
         <div className="mt-2 mb-8 flex items-center text-sm">
@@ -171,7 +178,7 @@ export default async function Writing({
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
           <p>{Math.ceil(writing.wordCount / 200)} Min Read</p>
         </div>
-        <MDX tree={tree} />
+        <MarkdownContent tree={tree} />
       </Content>
       <TableOfContents slug={writing.slug} />
     </div>

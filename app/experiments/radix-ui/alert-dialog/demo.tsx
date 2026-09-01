@@ -1,6 +1,7 @@
 "use client";
 
 import { AlertDialog } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -57,14 +58,14 @@ function AlertDialogDemo({
         {buttonTitle}
       </AlertDialog.Trigger>
       <AlertDialog.Overlay className="fixed inset-0 z-50 bg-gray-900/50" />
-      <AlertDialog.Content className="fixed top-1/2 left-1/2 z-90 max-h-[80vh] w-4/5 -translate-x-1/2 -translate-y-1/2 select-none rounded-md bg-white p-5 sm:max-w-screen-xs">
-        <AlertDialog.Title className="text-center font-semibold text-gray-800 text-xl sm:text-left">
+      <AlertDialog.Content className="sm:max-w-screen-xs fixed top-1/2 left-1/2 z-90 max-h-[80vh] w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-5 select-none">
+        <AlertDialog.Title className="text-center text-xl font-semibold text-gray-800 sm:text-left">
           {contentTitle}
         </AlertDialog.Title>
         <AlertDialog.Description className="mb-5 text-center text-zinc-800 sm:text-left">
           {contentDesc}
         </AlertDialog.Description>
-        <div className="flex flex-col space-y-2 sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0">
+        <div className="flex flex-col space-y-2 sm:flex-row sm:justify-end sm:space-y-0 sm:space-x-4">
           <AlertDialog.Cancel className="rounded-md border border-red-600 bg-white px-3 py-2 font-medium text-red-600 hover:bg-red-50 sm:py-1.5">
             Cancel
           </AlertDialog.Cancel>

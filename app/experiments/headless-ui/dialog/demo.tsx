@@ -8,6 +8,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { Fragment, useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
@@ -69,10 +70,12 @@ const DialogExample1 = () => {
   return (
     <div>
       <button
-        className={`rounded-full bg-blue-600 px-4 py-2 font-medium text-sm text-white hover:bg-[#2563eb]/90 active:ring-orange-500 ${
+        className={`rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#2563eb]/90 active:ring-orange-500 ${
           isOpen ? "ring-2 ring-orange-500" : ""
         }`}
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+        }}
         type="button"
       >
         Open dialog
@@ -80,13 +83,15 @@ const DialogExample1 = () => {
 
       <Dialog
         className="fixed inset-x-0 top-[25vh] z-40 mx-auto h-fit w-2/3 sm:w-1/2"
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setIsOpen(false);
+        }}
         open={isOpen}
       >
         <DialogBackdrop className="fixed inset-0 bg-zinc-800/80" />
 
         <div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-          <DialogTitle className="font-semibold text-xl">Title</DialogTitle>
+          <DialogTitle className="text-xl font-semibold">Title</DialogTitle>
           <Description className="text-zinc-600">
             Lorem ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry&apos;s standard dummy
@@ -94,8 +99,10 @@ const DialogExample1 = () => {
           </Description>
           <div className="flex w-full justify-end">
             <button
-              className="rounded-md px-2 py-1 text-action hover:bg-zinc-100 hover:text-action"
-              onClick={() => setIsOpen(false)}
+              className="text-action hover:text-action rounded-md px-2 py-1 hover:bg-zinc-100"
+              onClick={() => {
+                setIsOpen(false);
+              }}
               type="button"
             >
               Close
@@ -112,10 +119,12 @@ const DialogExample2 = () => {
   return (
     <div>
       <button
-        className={`rounded-full bg-blue-600 px-4 py-2 font-medium text-sm text-white hover:bg-[#2563eb]/90 active:ring-orange-500 ${
+        className={`rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#2563eb]/90 active:ring-orange-500 ${
           isOpen ? "ring-2 ring-orange-500" : ""
         }`}
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+        }}
         type="button"
       >
         Open dialog
@@ -123,7 +132,9 @@ const DialogExample2 = () => {
       <Transition as={Fragment} show={isOpen}>
         <Dialog
           className="fixed inset-x-0 top-[25vh] z-40 mx-auto h-fit w-2/3 sm:w-1/2"
-          onClose={() => setIsOpen(false)}
+          onClose={() => {
+            setIsOpen(false);
+          }}
           open={isOpen}
         >
           <TransitionChild
@@ -138,7 +149,7 @@ const DialogExample2 = () => {
           </TransitionChild>
 
           <div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-            <DialogTitle className="font-semibold text-xl">Title</DialogTitle>
+            <DialogTitle className="text-xl font-semibold">Title</DialogTitle>
             <Description className="text-zinc-600">
               Lorem ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry&apos;s standard dummy
@@ -146,8 +157,10 @@ const DialogExample2 = () => {
             </Description>
             <div className="flex w-full justify-end">
               <button
-                className="rounded-md px-2 py-1 text-action hover:bg-zinc-100 hover:text-action"
-                onClick={() => setIsOpen(false)}
+                className="text-action hover:text-action rounded-md px-2 py-1 hover:bg-zinc-100"
+                onClick={() => {
+                  setIsOpen(false);
+                }}
                 type="button"
               >
                 Close

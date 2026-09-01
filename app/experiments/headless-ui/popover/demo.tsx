@@ -1,6 +1,7 @@
 "use client";
 
 import { Popover, Transition } from "@headlessui/react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
@@ -54,7 +55,7 @@ const Wrapper = ({
 
 const PopoverExample1 = () => (
   <Popover className="relative">
-    <Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 font-medium text-sm text-zinc-800 hover:bg-zinc-50">
+    <Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-50">
       Navigation
     </Popover.Button>
     <Popover.Panel className="absolute mt-2 w-fit shadow-lg">
@@ -76,7 +77,7 @@ const PopoverExample1 = () => (
 
 const PopoverExample2 = () => (
   <Popover className="relative">
-    <Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 font-medium text-sm text-zinc-800 hover:bg-zinc-50">
+    <Popover.Button className="rounded border border-zinc-400 bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-50">
       Navigation
     </Popover.Button>
     <Transition

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import PageDescription from "@/components/PageDescription";
 import SourceCodeLink from "@/components/SourceCodeLink";
 
@@ -10,7 +11,7 @@ const nonDigitCharacterPattern = /\D/g;
 
 function Section({ name }: { name: string }) {
   return (
-    <h2 className="mt-10 mb-4 font-semibold text-xl text-zinc-800">{name}</h2>
+    <h2 className="mt-10 mb-4 text-xl font-semibold text-zinc-800">{name}</h2>
   );
 }
 
@@ -77,7 +78,9 @@ export default function YearlyInterest() {
         <input
           className="mb-4 rounded-md border px-1.5 py-0.5"
           id="Percent"
-          onChange={(e) => setPercent(Number(e.target.value))}
+          onChange={(e) => {
+            setPercent(Number(e.target.value));
+          }}
           required={true}
           type="number"
         />
@@ -87,7 +90,9 @@ export default function YearlyInterest() {
         <input
           className="mb-4 rounded-md border px-1.5 py-0.5"
           id="Year"
-          onChange={(e) => setYear(Number(e.target.value))}
+          onChange={(e) => {
+            setYear(Number(e.target.value));
+          }}
           required={true}
           type="number"
         />

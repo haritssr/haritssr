@@ -1,20 +1,15 @@
 "use client";
 
 import { NumberField } from "@base-ui/react/number-field";
-import {
-  type ChangeEvent,
-  type FormEvent,
-  type MouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { ChangeEvent, FormEvent, MouseEvent } from "react";
+
 import BackButton from "@/components/BackButton";
 import ExperimentPageBadge from "@/components/ExperimentPageBadge";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+
 import { NEW_TASK_DURATION_PRESETS, sanitizeTasks } from "./data";
 import Section from "./Section";
 import TaskItem from "./TaskItem";
@@ -45,7 +40,9 @@ export default function TaskPage() {
   // Active Other-section tasks sorted by progress desc.
   const otherTasks = tasks
     .filter((task) => task.type === "Other")
-    .sort((firstTask, secondTask) => secondTask.progress - firstTask.progress);
+    .toSorted(
+      (firstTask, secondTask) => secondTask.progress - firstTask.progress
+    );
   // Completed tasks for Done section.
   const doneTasks = tasks.filter((task) => task.type === "Done");
   // Title value trimmed for validation and save.
@@ -280,7 +277,7 @@ export default function TaskPage() {
       }
     };
 
-    hydrateTasksFromDb().catch(() => undefined);
+    hydrateTasksFromDb().catch(() => null);
 
     return () => {
       isCancelled = true;
@@ -316,12 +313,12 @@ export default function TaskPage() {
               .catch(() => ({ error: "Unknown error" }));
             console.error("Failed to save tasks:", errorData);
           }
-        } catch (err) {
-          console.error("Network error saving tasks:", err);
+        } catch (error) {
+          console.error("Network error saving tasks:", error);
         }
       };
 
-      persistTasksToDb().catch(() => undefined);
+      persistTasksToDb().catch(() => null);
     }, 500);
 
     // Cleanup: flush pending save on unmount (e.g., page navigation)
@@ -421,14 +418,14 @@ export default function TaskPage() {
           step={1}
           value={newOtherTaskDuration ? Number(newOtherTaskDuration) : null}
         >
-          <NumberField.Decrement className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-zinc-300 border-t border-b border-l text-zinc-700 hover:bg-zinc-100">
+          <NumberField.Decrement className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-t border-b border-l border-zinc-300 text-zinc-700 hover:bg-zinc-100">
             −
           </NumberField.Decrement>
           <NumberField.Input
             className="h-8 w-10 border border-zinc-300 px-2 py-1 text-center text-sm text-zinc-700 focus:border-blue-500 focus:text-blue-500 focus:outline-none"
             ref={durationInputRef}
           />
-          <NumberField.Increment className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-zinc-300 border-t border-r border-b text-zinc-700 hover:bg-zinc-100">
+          <NumberField.Increment className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-t border-r border-b border-zinc-300 text-zinc-700 hover:bg-zinc-100">
             +
           </NumberField.Increment>
         </NumberField.Root>
@@ -465,7 +462,7 @@ export default function TaskPage() {
 
       <Section title="Now">
         {droppedNowCount > 0 ? (
-          <div className="mb-2 rounded-lg border border-amber-300 bg-amber-50 px-2 py-1 text-amber-700 text-sm">
+          <div className="mb-2 rounded-lg border border-amber-300 bg-amber-50 px-2 py-1 text-sm text-amber-700">
             Only one Now task is allowed. {droppedNowCount} extra Now task(s)
             were moved to Other.
           </div>
@@ -508,7 +505,7 @@ export default function TaskPage() {
       </Section>
 
       {normalizedNewOtherTaskTitle.length > 0 && newOtherTaskTitleExists && (
-        <div className="mb-3 text-rose-500 text-xs">
+        <div className="mb-3 text-xs text-rose-500">
           Task title already exists.
         </div>
       )}

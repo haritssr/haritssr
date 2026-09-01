@@ -6,7 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useReducer, useState } from "react";
+import { useMemo, useReducer } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -108,7 +109,7 @@ const columns = [
 ];
 
 function Table() {
-  const [data] = useState(() => [...defaultData]);
+  const data = useMemo(() => [...defaultData], []);
   const [, rerender] = useReducer(() => ({}), {});
 
   const table = useReactTable({
@@ -125,7 +126,7 @@ function Table() {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
-                  className="whitespace-nowrap border-zinc-500 border-r border-b bg-green-100 px-2 py-1 font-bold"
+                  className="border-r border-b border-zinc-500 bg-green-100 px-2 py-1 font-bold whitespace-nowrap"
                   colSpan={header.colSpan}
                   key={header.id}
                 >
@@ -145,7 +146,7 @@ function Table() {
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td
-                  className="whitespace-nowrap border-zinc-500 border-r border-b px-2 py-1"
+                  className="border-r border-b border-zinc-500 px-2 py-1 whitespace-nowrap"
                   key={cell.id}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -159,7 +160,7 @@ function Table() {
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
                 <th
-                  className="whitespace-nowrap border-zinc-500 border-r border-b bg-blue-50 font-normal text-zinc-500"
+                  className="border-r border-b border-zinc-500 bg-blue-50 font-normal whitespace-nowrap text-zinc-500"
                   colSpan={header.colSpan}
                   key={header.id}
                 >
@@ -176,7 +177,13 @@ function Table() {
         </tfoot>
       </table>
       <div className="h-4" />
-      <button className="border p-2" onClick={() => rerender()} type="button">
+      <button
+        className="border p-2"
+        onClick={() => {
+          rerender();
+        }}
+        type="button"
+      >
         Rerender
       </button>
     </div>

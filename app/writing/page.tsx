@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import WritingGrid from "@/components/WritingGrid";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -37,7 +38,9 @@ export default function ReactEditProfileDemo() {
             <div>FirstName :</div>
             {isEditing ? (
               <input
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
                 type="text"
                 value={firstName}
               />
@@ -49,7 +52,9 @@ export default function ReactEditProfileDemo() {
             <div className="">LastName :</div>
             {isEditing ? (
               <input
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
                 type="text"
                 value={lastName}
               />

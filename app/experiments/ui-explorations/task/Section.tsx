@@ -28,7 +28,10 @@ export default function Section({
         className="group corner-squircle mt-5 mb-1 overflow-hidden rounded-2xl border border-zinc-300"
         open={accordion.defaultOpen}
       >
-        <summary className="cursor-pointer select-none list-none bg-zinc-100/70 px-2.5 py-1.5 group-open:border-zinc-300 group-open:border-b">
+        <summary
+          aria-label={typeof title === "string" ? title : "Toggle section"}
+          className="cursor-pointer list-none bg-zinc-100/70 px-2.5 py-1.5 select-none group-open:border-b group-open:border-zinc-300"
+        >
           <div className="flex items-center justify-between">
             <div className="font-medium text-zinc-800">{title}</div>
             <div className="flex items-center gap-2 text-sm text-zinc-500">
@@ -57,7 +60,7 @@ export default function Section({
 
   return (
     <div className="corner-squircle mt-5 mb-1 overflow-hidden rounded-2xl border border-zinc-300">
-      <div className="select-none border-zinc-300 border-b bg-zinc-100/70 px-2.5 py-1.5">
+      <div className="border-b border-zinc-300 bg-zinc-100/70 px-2.5 py-1.5 select-none">
         {header}
       </div>
       <div className="space-y-2.5 p-2.5">{children}</div>

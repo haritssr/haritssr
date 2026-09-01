@@ -1,5 +1,6 @@
 import PageTitle from "components/PageTitle";
 import type { Metadata } from "next";
+
 import InternalLink from "@/components/InternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";

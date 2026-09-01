@@ -2,6 +2,7 @@
 
 import { QueueListIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog } from "radix-ui";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function ContextModalDemo() {
@@ -10,18 +11,18 @@ export default function ContextModalDemo() {
       <div className="mb-14">
         <SourceCodeLink />
       </div>
-      <Dialog.Trigger className="rounded-md bg-zinc-100 p-2 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-200">
+      <Dialog.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 rounded-md bg-zinc-100 p-2 hover:bg-zinc-200">
         <QueueListIcon className="h-5 w-5 text-zinc-700" />
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-gray-900/70" />
         <Dialog.Content className="fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-white sm:w-100">
-          <section className="flex items-center justify-between border-apple-gray4 border-b px-5 py-2.5">
+          <section className="border-apple-gray4 flex items-center justify-between border-b px-5 py-2.5">
             <div className="-space-y-0.5">
-              <Dialog.Title className="font-bold text-gray-800 text-xl">
+              <Dialog.Title className="text-xl font-bold text-gray-800">
                 Title
               </Dialog.Title>
-              <Dialog.Description className="font-medium text-sm text-zinc-500">
+              <Dialog.Description className="text-sm font-medium text-zinc-500">
                 Description
               </Dialog.Description>
             </div>
@@ -33,7 +34,7 @@ export default function ContextModalDemo() {
             </div>
           </section>
           <section className="space-y-1 p-5">
-            <div className="cursor-pointer rounded-md bg-zinc-100 px-3 py-1 text-action">
+            <div className="text-action cursor-pointer rounded-md bg-zinc-100 px-3 py-1">
               Section
             </div>
             <div className="ml-5 cursor-pointer rounded-md px-3 py-1 hover:bg-zinc-100">

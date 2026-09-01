@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function SidebarHierarchyDemo() {
@@ -17,7 +18,7 @@ export default function SidebarHierarchyDemo() {
         >
           <summary
             aria-label="domain-title"
-            className="cursor-pointer select-none font-semibold"
+            className="cursor-pointer font-semibold select-none"
           >
             titletitletitle {domain.title}
           </summary>

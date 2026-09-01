@@ -8,26 +8,29 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
 function isTask(candidate: unknown): candidate is Task {
-  if (!candidate || typeof candidate !== "object") {
+  if (!isRecord(candidate)) {
     return false;
   }
 
-  const task = candidate as {
-    duration?: unknown;
-    progress?: unknown;
-    title?: unknown;
-    type?: unknown;
-  };
-
   return (
-    typeof task.title === "string" &&
-    typeof task.duration === "number" &&
-    Number.isFinite(task.duration) &&
-    typeof task.progress === "number" &&
-    Number.isFinite(task.progress) &&
-    (task.type === "Now" || task.type === "Other" || task.type === "Done")
+    typeof candidate.title === "string" &&
+    typeof candidate.duration === "number" &&
+    Number.isFinite(candidate.duration) &&
+    typeof candidate.progress === "number" &&
+    Number.isFinite(candidate.progress) &&
+    (candidate.type === "Now" ||
+      candidate.type === "Other" ||
+      candidate.type === "Done")
   );
+}
+
+function isTaskArray(value: unknown): value is Task[] {
+  return Array.isArray(value) && value.every(isTask);
 }
 
 export function GET(request: Request) {
@@ -41,62 +44,50 @@ export function GET(request: Request) {
 export async function POST(request: Request) {
   // POST handler for navigator.sendBeacon (used when page is hidden/closed)
   const payload: unknown = await request.json();
-  if (!payload || typeof payload !== "object") {
+  if (!isRecord(payload)) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  const body = payload as {
-    date?: unknown;
-    tasks?: unknown;
-  };
   const taskDate =
-    typeof body.date === "string" && body.date.length > 0
-      ? body.date
+    typeof payload.date === "string" && payload.date.length > 0
+      ? payload.date
       : getTodayTaskDate();
 
-  if (!Array.isArray(body.tasks)) {
+  if (!isTaskArray(payload.tasks)) {
     return NextResponse.json(
       { error: "Tasks must be an array" },
       { status: 400 }
     );
   }
 
-  const invalidTask = body.tasks.find((task) => !isTask(task));
-  if (invalidTask) {
-    return NextResponse.json({ error: "Invalid task item" }, { status: 400 });
-  }
-
-  const { droppedNowCount, tasks } = replaceTasksForDate(taskDate, body.tasks);
+  const { droppedNowCount, tasks } = replaceTasksForDate(
+    taskDate,
+    payload.tasks
+  );
   return NextResponse.json({ droppedNowCount, taskDate, tasks });
 }
 
 export async function PUT(request: Request) {
   const payload: unknown = await request.json();
-  if (!payload || typeof payload !== "object") {
+  if (!isRecord(payload)) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  const body = payload as {
-    date?: unknown;
-    tasks?: unknown;
-  };
   const taskDate =
-    typeof body.date === "string" && body.date.length > 0
-      ? body.date
+    typeof payload.date === "string" && payload.date.length > 0
+      ? payload.date
       : getTodayTaskDate();
 
-  if (!Array.isArray(body.tasks)) {
+  if (!isTaskArray(payload.tasks)) {
     return NextResponse.json(
       { error: "Tasks must be an array" },
       { status: 400 }
     );
   }
 
-  const invalidTask = body.tasks.find((task) => !isTask(task));
-  if (invalidTask) {
-    return NextResponse.json({ error: "Invalid task item" }, { status: 400 });
-  }
-
-  const { droppedNowCount, tasks } = replaceTasksForDate(taskDate, body.tasks);
+  const { droppedNowCount, tasks } = replaceTasksForDate(
+    taskDate,
+    payload.tasks
+  );
   return NextResponse.json({ droppedNowCount, taskDate, tasks });
 }

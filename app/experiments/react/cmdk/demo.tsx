@@ -2,6 +2,7 @@
 
 import { Command } from "cmdk";
 import { useEffect, useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -23,7 +24,9 @@ export default function ReactCmdkDemo() {
     };
 
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    return () => {
+      document.removeEventListener("keydown", down);
+    };
   }, []);
 
   return (

@@ -1,12 +1,9 @@
 "use client";
 
-import {
-  type ReactElement,
-  type ReactNode,
-  type ReactPortal,
-  useState,
-} from "react";
+import { useState } from "react";
+import type { ReactElement, ReactNode, ReactPortal } from "react";
 import type { JSX } from "react/jsx-runtime";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -42,15 +39,17 @@ const initialTodos = [
 function AddTodo({ onAddTodo }: AddTodoProps) {
   const [title, setTitle] = useState("");
   return (
-    <div className="mb-5 space-y-2 sm:space-x-2 sm:space-y-0">
+    <div className="mb-5 space-y-2 sm:space-y-0 sm:space-x-2">
       <input
-        className="w-full rounded border border-zinc-700 px-2 py-0.5 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-300 sm:w-fit"
-        onChange={(e) => setTitle(e.target.value)}
+        className="w-full rounded border border-zinc-700 px-2 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-hidden sm:w-fit"
+        onChange={(e) => {
+          setTitle(e.target.value);
+        }}
         placeholder="Write todo"
         value={title}
       />
       <button
-        className="w-full rounded border border-blue-500 bg-blue-500 px-2 py-0.5 text-white hover:bg-blue-600 focus:outline-hidden focus:ring-2 focus:ring-blue-300 sm:w-fit"
+        className="w-full rounded border border-blue-500 bg-blue-500 px-2 py-0.5 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 focus:outline-hidden sm:w-fit"
         onClick={() => {
           setTitle("");
           onAddTodo(title);
@@ -103,15 +102,17 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
     todoContent = (
       <>
         <input
-          className="rounded border border-zinc-700 px-1 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-300"
+          className="rounded border border-zinc-700 px-1 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-hidden"
           onChange={(e) => {
             onChange({ ...todo, title: e.target.value });
           }}
           value={todo.title}
         />
         <button
-          className="ml-2 rounded border border-green-500 bg-green-500 px-2 text-sm text-white hover:bg-green-600 focus:outline-hidden focus:ring-2 focus:ring-green-300"
-          onClick={() => setIsEditing(false)}
+          className="ml-2 rounded border border-green-500 bg-green-500 px-2 text-sm text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 focus:outline-hidden"
+          onClick={() => {
+            setIsEditing(false);
+          }}
           type="button"
         >
           Save
@@ -123,8 +124,10 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
       <>
         {todo.title}
         <button
-          className="ml-2 rounded border border-yellow-500 bg-yellow-500 px-2 text-sm text-white hover:bg-yellow-600 focus:outline-hidden focus:ring-2 focus:ring-yellow-300"
-          onClick={() => setIsEditing(true)}
+          className="ml-2 rounded border border-yellow-500 bg-yellow-500 px-2 text-sm text-white hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-300 focus:outline-hidden"
+          onClick={() => {
+            setIsEditing(true);
+          }}
           type="button"
         >
           Edit
@@ -145,8 +148,10 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
       />
       {todoContent}
       <button
-        className="ml-2 rounded border border-rose-500 bg-rose-500 px-2 text-sm text-white hover:bg-rose-600 focus:outline-hidden focus:ring-2 focus:ring-rose-300"
-        onClick={() => onDelete(todo.id)}
+        className="ml-2 rounded border border-rose-500 bg-rose-500 px-2 text-sm text-white hover:bg-rose-600 focus:ring-2 focus:ring-rose-300 focus:outline-hidden"
+        onClick={() => {
+          onDelete(todo.id);
+        }}
         type="button"
       >
         Delete
@@ -195,7 +200,12 @@ export default function ReactUseStateTodoListDemo() {
         onDeleteTodo={handleDeleteTodo}
         todos={todos}
       />
-      <button onClick={() => console.log(todos)} type="button">
+      <button
+        onClick={() => {
+          console.log(todos);
+        }}
+        type="button"
+      >
         Console Todos
       </button>
     </>

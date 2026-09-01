@@ -7,7 +7,7 @@ import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 export default function LeftBar() {
   const pathname = usePathname();
-  const segments = pathname.split("/") as string[];
+  const segments = pathname.split("/");
   const lastSegment = segments.at(-1);
 
   return (
@@ -21,7 +21,7 @@ export default function LeftBar() {
 
       <div className="flex flex-col space-y-1.5 px-2 py-5 sm:max-h-screen sm:overflow-auto">
         {allWritings
-          .sort((a, b) => {
+          .toSorted((a, b) => {
             if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
               return -1;
             }
@@ -32,7 +32,7 @@ export default function LeftBar() {
               className={`${
                 lastSegment === article.slug
                   ? "text-action"
-                  : "text-zinc-800 hover:text-action-hover"
+                  : "hover:text-action-hover text-zinc-800"
               } rounded-md px-2 py-1 text-sm`}
               href={`/writing/${article.slug}`}
               key={article.slug}

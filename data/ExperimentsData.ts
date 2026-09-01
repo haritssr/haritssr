@@ -263,7 +263,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
   },
 ];
 
-export type ExperimentsData = ExperimentDomain;
+export type ExperimentDomainData = ExperimentDomain;
 
 export function getExperimentDomain(slug: string): ExperimentDomain {
   const domain = ExperimentsData.find((entry) => entry.slug === slug);

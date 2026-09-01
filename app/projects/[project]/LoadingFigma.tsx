@@ -15,6 +15,7 @@ export default function LoadingFigma({
             allowFullScreen
             className="h-150 w-full"
             key={a}
+            sandbox="allow-scripts"
             src={a}
             title="figma"
           />

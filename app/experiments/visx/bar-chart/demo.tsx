@@ -7,13 +7,15 @@ import { AxisBottom, AxisLeft } from "@visx/axis";
 import { localPoint } from "@visx/event";
 // <g/>
 import { Group } from "@visx/group";
-import { type AppleStock, appleStock } from "@visx/mock-data";
+import { appleStock } from "@visx/mock-data";
+import type { AppleStock } from "@visx/mock-data";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Bar } from "@visx/shape";
 import { defaultStyles, TooltipWithBounds, useTooltip } from "@visx/tooltip";
 import { timeFormat } from "d3-time-format";
 import type { MouseEvent, TouchEvent } from "react";
 import useMeasure from "react-use-measure";
+
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -93,7 +95,9 @@ export default function VisxBarChartDemo() {
                 fill="royalblue"
                 height={barHeight}
                 key={`bar-${xValue}`}
-                onMouseLeave={() => hideTooltip()}
+                onMouseLeave={() => {
+                  hideTooltip();
+                }}
                 onMouseMove={(
                   event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>
                 ) => {

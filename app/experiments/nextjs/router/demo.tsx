@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useState } from "react";
+
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -25,9 +26,9 @@ function RouterDemoContent() {
   // Get current query params
   const currentQuery = searchParams.toString() || "";
   const queryObj: Record<string, string> = {};
-  searchParams.forEach((value, key) => {
+  for (const [key, value] of searchParams.entries()) {
     queryObj[key] = value;
-  });
+  }
 
   const style = "text-gray-500 font-mono text-sm";
 
@@ -100,7 +101,9 @@ function RouterDemoContent() {
       <div className="flex flex-wrap gap-2">
         <input
           className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+          }}
           onKeyDown={(e) => e.key === "Enter" && handlePush()}
           placeholder="Enter value..."
           type="text"
@@ -160,7 +163,7 @@ function RouterDemoContent() {
       </p>
       <div className="flex flex-wrap gap-2">
         <a
-          className="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-blue-700 text-sm hover:bg-blue-100"
+          className="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100"
           href="/experiments"
         >
           Go to Experiments (regular anchor)

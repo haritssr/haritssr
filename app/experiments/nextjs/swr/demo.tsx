@@ -2,10 +2,12 @@
 
 import type { Key } from "react";
 import useSWR from "swr";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
+const fetcher = async (url: RequestInfo) =>
+  await fetch(url).then(async (res) => await res.json());
 
 export default function NextjsSWRDemo() {
   const { data, error } = useSWR("/api/hello", fetcher);
@@ -20,11 +22,11 @@ export default function NextjsSWRDemo() {
     <>
       <SubTitle>
         Using SWR to fetch data from{" "}
-        <code className="rounded-md border border-green-200 bg-green-50 px-2 py-1 font-mono text-green-500 text-sm">
+        <code className="rounded-md border border-green-200 bg-green-50 px-2 py-1 font-mono text-sm text-green-500">
           /api/hello
         </code>{" "}
         and populate the data to{" "}
-        <code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-rose-500 text-sm">
+        <code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-sm text-rose-500">
           {"<NameCard/>"}
         </code>{" "}
         component
@@ -49,7 +51,7 @@ interface NameCardProps {
 
 const NameCard = ({ name, age, city }: NameCardProps) => (
   <div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
-    <div className="font-semibold text-gray-700 text-xl">{name}</div>
+    <div className="text-xl font-semibold text-gray-700">{name}</div>
     <div className="text-gray-500">{age}</div>
     <div className="text-action">{city}</div>
   </div>

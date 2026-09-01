@@ -1,7 +1,7 @@
 "use client";
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -40,7 +40,7 @@ export default function HeadlessTabsDemo() {
 }
 
 function Example1() {
-  const [categories] = useState({
+  const categories = {
     Recent: [
       {
         id: 1,
@@ -89,7 +89,7 @@ function Example1() {
         shareCount: 2,
       },
     ],
-  });
+  };
 
   return (
     <TabGroup as="div" className="w-full max-w-md px-2 py-16 sm:px-0">
@@ -129,11 +129,11 @@ function Example1() {
                   className="relative rounded-md p-3 hover:bg-zinc-100"
                   key={post.id}
                 >
-                  <h3 className="font-medium text-sm leading-5">
+                  <h3 className="text-sm leading-5 font-medium">
                     {post.title}
                   </h3>
 
-                  <ul className="mt-1 flex space-x-1 text-coolGray-500 text-xs">
+                  <ul className="text-coolGray-500 mt-1 flex space-x-1 text-xs">
                     <li>{post.date}</li>
                     <li>&middot;</li>
                     <li>{post.commentCount} comments</li>

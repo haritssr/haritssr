@@ -2,6 +2,7 @@
 
 import { Carousel } from "@mantine/carousel";
 import { Image } from "@mantine/core";
+
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";

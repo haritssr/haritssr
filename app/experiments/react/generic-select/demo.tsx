@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -89,24 +90,28 @@ export default function ReactGenericSelectDemo() {
       <div className="mb-14">
         <SourceCodeLink />
       </div>
-      <div className="font-semibold text-xl">
+      <div className="text-xl font-semibold">
         Please choose your subject and teacher
       </div>
       <div className="flex space-x-5">
         <GenericSelectComponent<Subject>
-          onChange={(value) => setSubject(value)}
+          onChange={(value) => {
+            setSubject(value);
+          }}
           selectType="Choose Subject"
           values={subjects}
         />
         <GenericSelectComponent<Teacher>
-          onChange={(value) => setTeacher(value)}
+          onChange={(value) => {
+            setTeacher(value);
+          }}
           selectType="Choose Teacher"
           values={teachers}
         />
       </div>
 
       <div className="my-5 w-fit space-y-1">
-        <div className="font-semibold text-xl">Results</div>
+        <div className="text-xl font-semibold">Results</div>
         <div>
           <span className="text-zinc-500">Pelajaran yang dipilih :</span>{" "}
           {subject.title}

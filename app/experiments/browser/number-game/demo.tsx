@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -58,7 +59,7 @@ export default function NumberGameDemo() {
         <div className="mb-14">
           <SourceCodeLink />
         </div>
-        <div className="pt-24 text-center font-bold text-4xl text-green-500">
+        <div className="pt-24 text-center text-4xl font-bold text-green-500">
           You win!
         </div>
 
@@ -67,8 +68,10 @@ export default function NumberGameDemo() {
           href="/experiments/browser/number-game"
         >
           <button
-            className="mx-auto inline-block rounded-md border border-harislab px-4 py-2 text-center text-harislab hover:border-zinc-700 hover:bg-zinc-50"
-            onClick={() => window.location.reload()}
+            className="border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50"
+            onClick={() => {
+              window.location.reload();
+            }}
             type="button"
           >
             Play Again
@@ -95,7 +98,7 @@ export default function NumberGameDemo() {
           {state.num1}+{state.num2}
         </div>
         <input
-          className="rounded-md border border-gray-500 py-1 pl-2 focus:outline-hidden focus:ring-1 focus:ring-harislab"
+          className="focus:ring-harislab rounded-md border border-gray-500 py-1 pl-2 focus:ring-1 focus:outline-hidden"
           onChange={updateResponse}
           onKeyDown={inputKeyPress}
           value={state.response}

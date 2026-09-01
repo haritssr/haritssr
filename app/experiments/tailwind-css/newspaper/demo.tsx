@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -19,8 +20,8 @@ export default function TailwindNewspaperDemo() {
         <SourceCodeLink />
       </div>
       <div className="my-10 border border-zinc-400 p-5 tracking-wide">
-        <h1 className="my-2 font-bold text-4xl text-zinc-800">Amazing Title</h1>
-        <h2 className="mb-5 font-mw text-lg text-zinc-600 italic">
+        <h1 className="my-2 text-4xl font-bold text-zinc-800">Amazing Title</h1>
+        <h2 className="font-mw mb-5 text-lg text-zinc-600 italic">
           This is beautiful subtitle
         </h2>
 

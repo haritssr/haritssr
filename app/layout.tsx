@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
+
 import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import FooterSpacing from "@/components/FooterSpacing";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
-import { RSS_PATH, SITE_URL } from "@/utils/site";
+
 import "./globals.css";
-import localFont from "next/font/local";
+import { RSS_PATH, SITE_URL } from "@/utils/site";
 
 const inter = localFont({
   src: "../public/fonts/InterVariable.woff2",

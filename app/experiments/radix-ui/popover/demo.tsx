@@ -1,6 +1,7 @@
 "use client";
 
 import { Popover } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -23,7 +24,7 @@ export default function RadixPopoverDemo() {
         <SourceCodeLink />
       </div>
       <Popover.Root>
-        <Popover.Trigger className="w-auto rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1 font-medium text-zinc-800 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-100">
+        <Popover.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 w-auto rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1 font-medium text-zinc-800 hover:bg-zinc-100">
           Open
         </Popover.Trigger>
 

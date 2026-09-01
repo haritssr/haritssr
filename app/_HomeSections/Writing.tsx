@@ -1,4 +1,5 @@
 import WritingGrid from "@/components/WritingGrid";
+
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
 export default function Writing() {

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+
 import matter from "gray-matter";
 import { remark } from "remark";
 import remarkRehype from "remark-rehype";
@@ -21,7 +22,7 @@ export function getSortedPostsData() {
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileContents = fs.readFileSync(fullPath, "utf-8");
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
@@ -34,7 +35,7 @@ export function getSortedPostsData() {
   });
 
   // Final return is Sorted posts by date
-  return allPostsData.sort(({ date: a }, { date: b }) => {
+  return allPostsData.toSorted(({ date: a }, { date: b }) => {
     if (a < b) {
       return 1;
     }
@@ -86,7 +87,7 @@ export function getAllPostIds() {
 export async function getPostData(id) {
   //
   const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileContents = fs.readFileSync(fullPath, "utf-8");
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);

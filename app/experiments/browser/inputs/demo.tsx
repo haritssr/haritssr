@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
+
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -113,15 +114,13 @@ const InputUrl = () => (
 
 const InputTime = () => <input required type="time" />;
 
-const InputText = () => {
-  return (
-    <input
-      // style={{ backgroundImage: 'url(/searchicon.svg)', backgroundRepeat: 'no-repeat' }}
-      placeholder="Type something"
-      type="text"
-    />
-  );
-};
+const InputText = () => (
+  <input
+    // style={{ backgroundImage: 'url(/searchicon.svg)', backgroundRepeat: 'no-repeat' }}
+    placeholder="Type something"
+    type="text"
+  />
+);
 
 const InputWeek = () => <input required type="week" />;
 
@@ -179,19 +178,17 @@ const InputFile = () => (
 const InputSearch = () => <input placeholder="Search" type="search" />;
 
 //You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.
-const InputDate = () => {
-  return (
-    <input
-      defaultValue="2018-07-22"
-      id="start"
-      max="2018-12-31"
-      min="2018-01-01"
-      name="trip-start"
-      type="date"
-      //readOnly
-    />
-  );
-};
+const InputDate = () => (
+  <input
+    defaultValue="2018-07-22"
+    id="start"
+    max="2018-12-31"
+    min="2018-01-01"
+    name="trip-start"
+    type="date"
+    //readOnly
+  />
+);
 
 const InputButton = () => <input type="button" value="Click me" />;
 
@@ -236,28 +233,32 @@ const InputRange = () => {
           list="tickmarks"
           max={100}
           min={0}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setTemperature(e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setTemperature(e.target.value);
+          }}
           step={10}
           type="range"
           value={temperature}
         />
       </div>
       <div className="mt-5">
-        <input list="tickmarks" type="range" />
+        <input
+          aria-label="Example temperature range"
+          list="tickmarks"
+          type="range"
+        />
         <datalist id="tickmarks">
-          <option label="0%" value="0" />
-          <option value="10" />
-          <option value="20" />
-          <option value="30" />
-          <option value="40" />
-          <option label="50%" value="50" />
-          <option value="60" />
-          <option value="70" />
-          <option value="80" />
-          <option value="90" />
-          <option label="100%" value="100" />
+          <option value="0">0%</option>
+          <option value="10">10%</option>
+          <option value="20">20%</option>
+          <option value="30">30%</option>
+          <option value="40">40%</option>
+          <option value="50">50%</option>
+          <option value="60">60%</option>
+          <option value="70">70%</option>
+          <option value="80">80%</option>
+          <option value="90">90%</option>
+          <option value="100">100%</option>
         </datalist>
       </div>
     </div>

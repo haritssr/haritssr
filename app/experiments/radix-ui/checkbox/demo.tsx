@@ -2,6 +2,7 @@
 
 import { CheckIcon } from "@radix-ui/react-icons";
 import { Checkbox } from "radix-ui";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -27,9 +28,9 @@ export default function RadixCheckboxDemo() {
         <SourceCodeLink />
       </div>
       <form>
-        <div className="flex align-center">
+        <div className="align-center flex">
           <Checkbox.Root
-            className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-300 rdx-state-checked:border-blue-600 bg-white hover:bg-blue-50"
+            className="rdx-state-checked:border-blue-600 flex h-6 w-6 items-center justify-center rounded-md border border-zinc-300 bg-white hover:bg-blue-50"
             // defaultChecked
             id="c1"
           >
@@ -37,7 +38,7 @@ export default function RadixCheckboxDemo() {
               <CheckIcon className="h-5 w-5" />
             </Checkbox.Indicator>
           </Checkbox.Root>
-          <label className="select-none pl-4 text-zinc-800" htmlFor="c1">
+          <label className="pl-4 text-zinc-800 select-none" htmlFor="c1">
             Accept terms and conditions.
           </label>
         </div>

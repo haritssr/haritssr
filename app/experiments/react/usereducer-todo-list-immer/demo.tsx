@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useImmerReducer } from "use-immer";
+
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -89,7 +90,9 @@ function AddTask({ onAddTask }: AddTaskProps) {
   return (
     <>
       <input
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
         placeholder="Add Task"
         type="text"
         value={text}
@@ -133,11 +136,18 @@ function IndividualTask({ task, onChange, onDelete }: IndividualTaskProps) {
     taskContent = (
       <>
         <input
-          onChange={(e) => onChange({ ...task, text: e.target.value })}
+          onChange={(e) => {
+            onChange({ ...task, text: e.target.value });
+          }}
           type="text"
           value={task.text}
         />
-        <button onClick={() => setIsEditing(false)} type="button">
+        <button
+          onClick={() => {
+            setIsEditing(false);
+          }}
+          type="button"
+        >
           Save
         </button>
       </>
@@ -148,19 +158,25 @@ function IndividualTask({ task, onChange, onDelete }: IndividualTaskProps) {
         <div
           className={`${
             task.done ? "text-red-500 line-through" : "text-action"
-          }  `}
+          } `}
         >
           {task.text}
         </div>
-        <button onClick={() => setIsEditing(true)} type="button">
+        <button
+          onClick={() => {
+            setIsEditing(true);
+          }}
+          type="button"
+        >
           Edit
         </button>
       </div>
     );
   }
   return (
-    <label className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2">
       <input
+        aria-label={`Mark ${task.text} as done`}
         checked={task.done}
         onChange={(e) => {
           onChange({ ...task, done: e.target.checked });
@@ -169,11 +185,16 @@ function IndividualTask({ task, onChange, onDelete }: IndividualTaskProps) {
       />
       <div className="flex items-center space-x-2">
         <div className="inline-block">{taskContent}</div>
-        <button onClick={() => onDelete(task.id)} type="button">
+        <button
+          onClick={() => {
+            onDelete(task.id);
+          }}
+          type="button"
+        >
           Delete
         </button>
       </div>
-    </label>
+    </div>
   );
 }
 
@@ -220,7 +241,12 @@ export default function ReactUseReducerTodoListImmerDemo() {
         onDeleteTask={handleDeleteTask}
         tasks={tasks}
       />
-      <button onClick={() => console.log(tasks)} type="button">
+      <button
+        onClick={() => {
+          console.log(tasks);
+        }}
+        type="button"
+      >
         Console Tasks
       </button>
     </>

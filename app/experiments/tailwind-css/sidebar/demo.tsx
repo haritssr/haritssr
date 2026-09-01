@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -15,7 +16,7 @@ export default function TailwindSidebarDemo() {
       <div className="flex flex-row overflow-hidden rounded border border-zinc-400">
         {/* Side Bar */}
         <div className={`w-1/4 bg-zinc-200 ${open ? "block" : "hidden"}`}>
-          <div className="flex items-center justify-between border-zinc-400 border-b px-4 py-2">
+          <div className="flex items-center justify-between border-b border-zinc-400 px-4 py-2">
             <div className="font-semibold text-zinc-800">Trigonometri</div>
           </div>
           <ul className="space-y-1 p-4">
@@ -52,10 +53,15 @@ export default function TailwindSidebarDemo() {
           </ul>
         </div>
         <div className={`bg-zinc-100 ${open ? "w-3/4" : "w-full"}`}>
-          <div className="flex items-center justify-between border-zinc-400 border-b px-2 py-2">
+          <div className="flex items-center justify-between border-b border-zinc-400 px-2 py-2">
             <button
-              onClick={() => setOpen(!open)}
-              onKeyDown={() => setOpen(!open)}
+              aria-label="Toggle sidebar"
+              onClick={() => {
+                setOpen(!open);
+              }}
+              onKeyDown={() => {
+                setOpen(!open);
+              }}
               type="button"
             >
               <svg
@@ -78,7 +84,7 @@ export default function TailwindSidebarDemo() {
             <input placeholder="Search" type="search" />
           </div>
           <div className="px-4 py-2">
-            <div className="my-4 font-semibold text-xl">JavaScript</div>
+            <div className="my-4 text-xl font-semibold">JavaScript</div>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum,
               adipisci, ducimus eligendi ab aperiam velit, cum quo sit facilis

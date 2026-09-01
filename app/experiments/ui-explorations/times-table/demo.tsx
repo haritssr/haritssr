@@ -1,7 +1,8 @@
 "use client";
 
 import { parseAsInteger, useQueryState } from "nuqs";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 // import { IncrementButton } from "../../../app/times-table/IncrementButton";
 // import TimesTableComponent from "../../../app/times-table/TimesTable";
@@ -30,22 +31,20 @@ function IncrementButton() {
   return (
     <>
       <button
-        className="corner-squircle my-5 block cursor-pointer select-none rounded-2xl border border-zinc-300 px-4 py-1.5 text-zinc-700 hover:bg-zinc-50 active:translate-y-0.5 active:border-zinc-400 active:bg-zinc-100"
-        onClick={() => setCount((c) => c + 1)}
+        className="corner-squircle my-5 block cursor-pointer rounded-2xl border border-zinc-300 px-4 py-1.5 text-zinc-700 select-none hover:bg-zinc-50 active:translate-y-0.5 active:border-zinc-400 active:bg-zinc-100"
+        onClick={async () => await setCount((c) => c + 1)}
         type="button"
       >
         Count: {count}
       </button>
       <input
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={async (e) => await setSearch(e.target.value)}
         type="search"
         value={search}
       />
     </>
   );
 }
-
-import { useState } from "react";
 
 interface MainData {
   col: number;
@@ -75,7 +74,7 @@ function TimesTableComponent() {
             const row = index + 1;
             return (
               <input
-                className="h-10 w-10 select-none rounded border border-zinc-400 bg-zinc-50 p-1 text-center"
+                className="h-10 w-10 rounded border border-zinc-400 bg-zinc-50 p-1 text-center select-none"
                 defaultValue={index}
                 disabled
                 key={row}
@@ -91,7 +90,7 @@ function TimesTableComponent() {
               const col = index + 1;
               return (
                 <input
-                  className="h-10 w-10 select-none rounded border border-zinc-400 bg-zinc-50 p-1 text-center"
+                  className="h-10 w-10 rounded border border-zinc-400 bg-zinc-50 p-1 text-center select-none"
                   defaultValue={col}
                   disabled
                   key={`col-${col}`}
@@ -175,13 +174,13 @@ function InputElement({
         const { value } = e.target;
         handleOnchange({ col, index: index.toString(), row, value });
       }}
-      onClick={(_e) =>
+      onClick={(_e) => {
         handleOnClick((prev) => ({
           ...prev,
           col,
           row,
-        }))
-      }
+        }));
+      }}
       type="text"
     />
   );

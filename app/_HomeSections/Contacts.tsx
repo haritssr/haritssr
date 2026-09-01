@@ -5,6 +5,7 @@ import {
   MapPinIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+
 import ContactList from "@/components/ContactList";
 
 export default function Contacts() {
@@ -13,7 +14,7 @@ export default function Contacts() {
       aria-labelledby="profile-heading"
       className="mb-20 grid grid-cols-1 gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4"
     >
-      <div className="corner-squircle flex select-none items-center justify-center rounded-2xl border-zinc-300 px-3 pt-3 pb-2.5 sm:border">
+      <div className="corner-squircle flex items-center justify-center rounded-2xl border-zinc-300 px-3 pt-3 pb-2.5 select-none sm:border">
         <Image
           alt="Harits Syah"
           blurDataURL="/images/blur.jpg"
@@ -49,7 +50,7 @@ export default function Contacts() {
             className="size-4 shrink-0 stroke-2 text-zinc-600"
           />
           <a
-            className="inline-block hover:text-action focus-visible:outline-2 focus-visible:outline-action focus-visible:outline-offset-2"
+            className="hover:text-action focus-visible:outline-action inline-block focus-visible:outline-2 focus-visible:outline-offset-2"
             href="https://www.harislab.com"
             rel="noopener noreferrer"
             target="_blank"

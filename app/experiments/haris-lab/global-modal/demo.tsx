@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Dialog } from "radix-ui";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function GlobalModalDemo() {
@@ -18,19 +19,19 @@ export default function GlobalModalDemo() {
       <div className="mb-14">
         <SourceCodeLink />
       </div>
-      <Dialog.Trigger className="rounded-md bg-zinc-100 p-2 rdx-state-open:ring-2 rdx-state-open:ring-blue-600 hover:bg-zinc-200">
+      <Dialog.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 rounded-md bg-zinc-100 p-2 hover:bg-zinc-200">
         <MagnifyingGlassIcon className="h-5 w-5 text-zinc-700" />
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-gray-900/70" />
         <Dialog.Content className="fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md bg-white sm:w-[400px]">
-          <section className="flex items-center border-apple-gray4 border-b bg-zinc-100 px-4 py-2">
-            <div className="w-1/3 text-apple-gray6">asdf</div>
-            <Dialog.Title className="w-1/3 text-center font-semibold text-gray-700 text-lg">
+          <section className="border-apple-gray4 flex items-center border-b bg-zinc-100 px-4 py-2">
+            <div className="text-apple-gray6 w-1/3">asdf</div>
+            <Dialog.Title className="w-1/3 text-center text-lg font-semibold text-gray-700">
               Pencarian{" "}
             </Dialog.Title>
             <div className="flex w-1/3 justify-end">
-              <Dialog.Close className="text-end text-action hover:text-blue-700">
+              <Dialog.Close className="text-action text-end hover:text-blue-700">
                 Selesai
               </Dialog.Close>
             </div>
@@ -42,7 +43,7 @@ export default function GlobalModalDemo() {
                 strokeWidth={2}
               />
               <input
-                className="w-full border-0 bg-zinc-100 py-0 pl-1 caret-blue-600 outline-hidden ring-inset placeholder:text-zinc-500 focus:outline-hidden focus:ring-apple-gray6 focus:placeholder:text-zinc-700"
+                className="focus:ring-apple-gray6 w-full border-0 bg-zinc-100 py-0 pl-1 caret-blue-600 outline-hidden ring-inset placeholder:text-zinc-500 focus:outline-hidden focus:placeholder:text-zinc-700"
                 id=""
                 name=""
                 placeholder="Cari Variabel, Bab, Rumus..."

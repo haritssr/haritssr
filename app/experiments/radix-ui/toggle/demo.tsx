@@ -2,6 +2,7 @@
 
 import { Toggle } from "radix-ui";
 import { useState } from "react";
+
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -25,7 +26,7 @@ export default function RadixToggleDemo() {
         <SourceCodeLink />
       </div>
       <Toggle.Root
-        className="rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium rdx-state-on:text-action rdx-state-on:ring-2 rdx-state-on:ring-blue-600 hover:bg-zinc-50"
+        className="rdx-state-on:text-action rdx-state-on:ring-2 rdx-state-on:ring-blue-600 rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium hover:bg-zinc-50"
         onPressedChange={() => {
           setPressed(!pressed);
         }}

@@ -6,6 +6,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import type { Key } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -39,7 +40,10 @@ export default function ReactQueryBasicDemo() {
 function Example() {
   const { isLoading, error, data, isFetching } = useQuery<PersonData[]>(
     ["repoData"],
-    () => fetch("/api/react-query-basic").then((res) => res.json())
+    async () =>
+      await fetch("/api/react-query-basic").then(
+        async (res) => await res.json()
+      )
   );
   if (isLoading) {
     return <div>Loading...</div>;
@@ -68,7 +72,7 @@ function Example() {
 
 const NameCard = ({ name, age, city }: NameCardProps) => (
   <div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
-    <div className="font-semibold text-gray-700 text-xl">{name}</div>
+    <div className="text-xl font-semibold text-gray-700">{name}</div>
     <div className="text-gray-500">{age}</div>
     <div className="text-action">{city}</div>
   </div>

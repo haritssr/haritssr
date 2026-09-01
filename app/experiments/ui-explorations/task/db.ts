@@ -1,7 +1,9 @@
 import { mkdirSync } from "node:fs";
 import path from "node:path";
+
 import Database from "better-sqlite3";
 import "server-only";
+
 import { createDailyTaskTemplate, sanitizeTasks } from "./data";
 import type { Task } from "./type";
 
@@ -174,7 +176,7 @@ function seedTasksForDate(taskDate: string) {
 
   // Insert all template tasks in one transaction and keep stable ordering by index.
   const insertSeedTasks = db.transaction((tasks: Task[]) => {
-    tasks.forEach((task, index) => {
+    for (const [index, task] of tasks.entries()) {
       insertTaskStatement.run(
         taskDate,
         task.title,
@@ -183,7 +185,7 @@ function seedTasksForDate(taskDate: string) {
         task.type,
         index
       );
-    });
+    }
   });
 
   // Execute seeding.
@@ -249,7 +251,7 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
   const replaceTasks = db.transaction((nextTasks: readonly Task[]) => {
     deleteTasksStatement.run(taskDate);
 
-    nextTasks.forEach((task, index) => {
+    for (const [index, task] of nextTasks.entries()) {
       insertTaskStatement.run(
         taskDate,
         task.title,
@@ -258,7 +260,7 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
         task.type,
         index
       );
-    });
+    }
   });
 
   // Execute replacement and return the normalized payload.

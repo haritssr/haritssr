@@ -1,6 +1,7 @@
 "use client";
 
 import { useReducer } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -9,12 +10,15 @@ type Action = "increment" | "decrement";
 export default function ReactUseReducerJuly2026() {
   function reducer(state: number, action: Action): number {
     switch (action) {
-      case "increment":
+      case "increment": {
         return state + 1;
-      case "decrement":
+      }
+      case "decrement": {
         return state === 0 ? 0 : state - 1;
-      default:
+      }
+      default: {
         return count;
+      }
     }
   }
   const [count, dispatch] = useReducer(reducer, 0);
@@ -25,10 +29,20 @@ export default function ReactUseReducerJuly2026() {
         <SourceCodeLink />
       </div>
       <h1>{count}</h1>
-      <button onClick={() => dispatch("increment")} type="button">
+      <button
+        onClick={() => {
+          dispatch("increment");
+        }}
+        type="button"
+      >
         Increment
       </button>
-      <button onClick={() => dispatch("decrement")} type="button">
+      <button
+        onClick={() => {
+          dispatch("decrement");
+        }}
+        type="button"
+      >
         Decrement
       </button>
     </div>

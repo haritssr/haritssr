@@ -1,11 +1,8 @@
 "use client";
 
-import {
-  type ChangeEvent,
-  type PointerEvent,
-  type ReactNode,
-  useState,
-} from "react";
+import { useState } from "react";
+import type { ChangeEvent, PointerEvent, ReactNode } from "react";
+
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";

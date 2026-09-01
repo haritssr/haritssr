@@ -4,6 +4,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Accordion } from "radix-ui";
 import type React from "react";
 import { useRef, useState } from "react";
+
 import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function SideBarDemo() {
@@ -18,8 +19,13 @@ export default function SideBarDemo() {
       {fisika.map((domain) => (
         <div key={domain.title}>
           <div>
-            <div className="pl-2 font-medium text-lg">{domain.title}</div>
-            <button onClick={() => setOpenAll(!openAll)} type="button">
+            <div className="pl-2 text-lg font-medium">{domain.title}</div>
+            <button
+              onClick={() => {
+                setOpenAll(!openAll);
+              }}
+              type="button"
+            >
               Open All
             </button>
             <div>{openAll.toString()}</div>
@@ -69,8 +75,8 @@ function AccordionC({
             data-state={isOpen ? "open" : "closed"}
           >
             {title} {isOpen.toString()} {isOpen.toString()}
-            {ref.current?.getAttribute("data-state")}
-            <ChevronRightIcon className="h-4 w-4 group-rdx-state-open:rotate-90" />
+            {ref.current?.dataset.state}
+            <ChevronRightIcon className="group-rdx-state-open:rotate-90 h-4 w-4" />
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className="pl-3" ref={ref}>
@@ -81,10 +87,10 @@ function AccordionC({
   );
 }
 
-type fisikaType = Array<{
+type fisikaType = {
   title: string;
-  chapters: Array<{ title: string; topics: string[] } | undefined>;
-}>;
+  chapters: ({ title: string; topics: string[] } | undefined)[];
+}[];
 
 const fisika: fisikaType = [
   {
