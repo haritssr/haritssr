@@ -33,7 +33,7 @@ export default function ExperimentCard({
           <div className="text-sm font-light text-zinc-500">
             {experiment.experiments.length}
           </div>
-          <ChevronRightIcon className="h-4 w-4 text-zinc-500 stroke-2" />
+          <ChevronRightIcon className="h-4 w-4 stroke-2 text-zinc-500" />
         </div>
       </div>
       <div className="text-zinc-500">{experiment.description}</div>
