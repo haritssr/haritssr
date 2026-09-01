@@ -1,6 +1,7 @@
 # 0004: Use Ultracite and Biome for code quality
 
-- Status: accepted
+- Status: superseded
+- Superseded by: [0006 — Use Ultracite with Oxlint and Oxfmt for code quality](./0006-use-ultracite-and-oxlint-oxfmt-for-code-quality.md)
 - Date: 2026-08-18
 - Confidence: high
 

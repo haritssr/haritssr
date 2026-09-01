@@ -4,7 +4,7 @@
     "app/experiments/ui-explorations/tools/db.bun.ts",
     "public/sw.js",
     "utils/content-collections.ts",
-    "utils/{dbExperiment,sqlite3}.js"
+    "utils/{dbExperiment,sqlite3}.js",
   ],
   "ignoreFiles": [
     // These components are retained for features that are currently unwired.
@@ -12,14 +12,10 @@
     "components/InternalLinkWithoutArrow.tsx",
     "components/TopBarSearch.tsx",
     "data/routes.ts",
-    "utils/someContext.tsx"
+    "utils/someContext.tsx",
   ],
   "ignore": [
     // Keep the mutation methods available for the next tools-page iteration.
-    "app/experiments/ui-explorations/tools/db.core.ts"
+    "app/experiments/ui-explorations/tools/db.core.ts",
   ],
-  "ignoreDependencies": [
-    // Used by biome.json's editor schema reference.
-    "@biomejs/biome"
-  ]
 }
