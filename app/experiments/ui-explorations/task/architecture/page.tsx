@@ -387,6 +387,29 @@ function MermaidDiagram({
     };
   }, [definition, id]);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!(svg && container)) {
+      return;
+    }
+
+    const parsedDocument = new DOMParser().parseFromString(
+      svg,
+      "image/svg+xml"
+    );
+    const svgElement = parsedDocument.documentElement;
+
+    if (
+      svgElement.tagName.toLowerCase() !== "svg" ||
+      svgElement.namespaceURI !== "http://www.w3.org/2000/svg"
+    ) {
+      setError("Failed to render diagram: Mermaid returned invalid SVG");
+      return;
+    }
+
+    container.replaceChildren(document.importNode(svgElement, true));
+  }, [svg]);
+
   if (error) {
     return (
       <div className="rounded border border-red-200 bg-red-50 p-4 text-red-600 text-sm">
@@ -406,8 +429,6 @@ function MermaidDiagram({
   return (
     <div
       className="flex justify-center overflow-x-auto rounded border border-zinc-200 bg-white p-4"
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: Mermaid generates safe SVG
-      dangerouslySetInnerHTML={{ __html: svg }}
       ref={containerRef}
     />
   );

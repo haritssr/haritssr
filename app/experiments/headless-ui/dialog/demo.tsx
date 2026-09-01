@@ -1,27 +1,18 @@
 "use client";
-import { Dialog, Transition } from "@headlessui/react";
-import type { ComponentType } from "react";
+import {
+  Description,
+  Dialog,
+  DialogBackdrop,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { Fragment, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
-
-// biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
-const HeadlessDialog = Dialog as unknown as ComponentType<any> & {
-  // biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
-  Title: ComponentType<any>;
-  // biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
-  Description: ComponentType<any>;
-  // biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
-  Overlay: ComponentType<any>;
-};
-
-// biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
-const TransitionRoot = Transition.Root as unknown as ComponentType<any>;
-// biome-ignore lint/suspicious/noExplicitAny: Headless UI types need any for ComponentType casting
-const TransitionChild = Transition.Child as unknown as ComponentType<any>;
 
 export default function HeadlessDialogDemo() {
   return (
@@ -87,22 +78,20 @@ const DialogExample1 = () => {
         Open dialog
       </button>
 
-      <HeadlessDialog
+      <Dialog
         className="fixed inset-x-0 top-[25vh] z-40 mx-auto h-fit w-2/3 sm:w-1/2"
         onClose={() => setIsOpen(false)}
         open={isOpen}
       >
-        <HeadlessDialog.Overlay className="fixed inset-0 bg-zinc-800/80" />
+        <DialogBackdrop className="fixed inset-0 bg-zinc-800/80" />
 
         <div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-          <HeadlessDialog.Title className="font-semibold text-xl">
-            Title
-          </HeadlessDialog.Title>
-          <HeadlessDialog.Description className="text-zinc-600">
+          <DialogTitle className="font-semibold text-xl">Title</DialogTitle>
+          <Description className="text-zinc-600">
             Lorem ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry&apos;s standard dummy
             text ever since the 1500s.
-          </HeadlessDialog.Description>
+          </Description>
           <div className="flex w-full justify-end">
             <button
               className="rounded-md px-2 py-1 text-action hover:bg-zinc-100 hover:text-action"
@@ -113,7 +102,7 @@ const DialogExample1 = () => {
             </button>
           </div>
         </div>
-      </HeadlessDialog>
+      </Dialog>
     </div>
   );
 };
@@ -131,8 +120,8 @@ const DialogExample2 = () => {
       >
         Open dialog
       </button>
-      <TransitionRoot as={Fragment} show={isOpen}>
-        <HeadlessDialog
+      <Transition as={Fragment} show={isOpen}>
+        <Dialog
           className="fixed inset-x-0 top-[25vh] z-40 mx-auto h-fit w-2/3 sm:w-1/2"
           onClose={() => setIsOpen(false)}
           open={isOpen}
@@ -145,18 +134,16 @@ const DialogExample2 = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <HeadlessDialog.Overlay className="fixed inset-0 bg-zinc-800/80" />
+            <DialogBackdrop className="fixed inset-0 bg-zinc-800/80" />
           </TransitionChild>
 
           <div className="relative z-50 rounded-md bg-white p-4 shadow-xl">
-            <HeadlessDialog.Title className="font-semibold text-xl">
-              Title
-            </HeadlessDialog.Title>
-            <HeadlessDialog.Description className="text-zinc-600">
+            <DialogTitle className="font-semibold text-xl">Title</DialogTitle>
+            <Description className="text-zinc-600">
               Lorem ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry&apos;s standard dummy
               text ever since the 1500s.
-            </HeadlessDialog.Description>
+            </Description>
             <div className="flex w-full justify-end">
               <button
                 className="rounded-md px-2 py-1 text-action hover:bg-zinc-100 hover:text-action"
@@ -167,8 +154,8 @@ const DialogExample2 = () => {
               </button>
             </div>
           </div>
-        </HeadlessDialog>
-      </TransitionRoot>
+        </Dialog>
+      </Transition>
     </div>
   );
 };

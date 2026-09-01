@@ -1,4 +1,5 @@
 import { allWritings } from "@content-collections";
+import type { Root } from "hast";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
@@ -94,13 +95,11 @@ function formatDate(date: string) {
   return `${fullDate} (${formattedDate})`;
 }
 
-// Process markdown to HTML
-async function markdownToHtml(content: string) {
+async function markdownToHast(content: string): Promise<Root> {
   const { unified } = await import("unified");
   const remarkParse = await import("remark-parse");
   const remarkGfm = await import("remark-gfm");
   const remarkRehype = await import("remark-rehype");
-  const rehypeStringify = await import("rehype-stringify");
 
   // Create processor with basic plugins
   const processor = unified()
@@ -136,11 +135,8 @@ async function markdownToHtml(content: string) {
     // Skip if plugin fails
   }
 
-  // Add stringify at the end
-  processor.use(rehypeStringify.default as unknown as UnifiedPlugin);
-
-  const result = await processor.process(content);
-  return result.toString();
+  const tree = processor.parse(content);
+  return (await processor.run(tree)) as Root;
 }
 
 export default async function Writing({
@@ -155,7 +151,7 @@ export default async function Writing({
     notFound();
   }
 
-  const html = await markdownToHtml(writing.content);
+  const tree = await markdownToHast(writing.content);
 
   return (
     <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
@@ -175,7 +171,7 @@ export default async function Writing({
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
           <p>{Math.ceil(writing.wordCount / 200)} Min Read</p>
         </div>
-        <MDX html={html} />
+        <MDX tree={tree} />
       </Content>
       <TableOfContents slug={writing.slug} />
     </div>

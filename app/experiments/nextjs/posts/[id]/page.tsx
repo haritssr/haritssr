@@ -1,4 +1,6 @@
 import { format, parseISO } from "date-fns";
+import type { Root } from "hast";
+import MDX from "@/components/mdx";
 import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -8,8 +10,7 @@ interface PostData {
   id: string;
   title: string;
   date: string;
-  contentHtml: string;
-  [key: string]: string;
+  contentTree: Root;
 }
 
 export default async function PostPage({
@@ -40,11 +41,9 @@ export default async function PostPage({
           obcaecati ullam corrupti illum officia, nostrum reprehenderit aliquam
           veniam alias
         </div>
-        <div
-          className="col-span-3 rounded-md border border-zinc-300 p-2 sm:p-4"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: needed to render HTML from markdown
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-        />
+        <div className="col-span-3 rounded-md border border-zinc-300 p-2 sm:p-4">
+          <MDX tree={postData.contentTree} />
+        </div>
       </div>
     </>
   );

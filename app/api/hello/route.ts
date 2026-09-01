@@ -1,5 +1,4 @@
-// biome-ignore lint/suspicious/useAwait: Response.json() returns a Promise
-export async function GET() {
+export function GET() {
   return Response.json([
     {
       id: "1",

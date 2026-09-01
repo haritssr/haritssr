@@ -6,6 +6,31 @@ import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  maidenName: string;
+  age: number;
+}
+
+const searchableFields = ["firstName", "lastName", "maidenName"] as const;
+
+function isUser(value: unknown): value is User {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const user = value as Record<string, unknown>;
+  return (
+    typeof user.id === "number" &&
+    typeof user.firstName === "string" &&
+    typeof user.lastName === "string" &&
+    typeof user.maidenName === "string" &&
+    typeof user.age === "number"
+  );
+}
+
 function useDebounce(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -23,23 +48,16 @@ function useDebounce(value: string, delay: number) {
 
 export default function ReactSearchTableDemo() {
   const [query, setQuery] = useState<string>("");
-  // biome-ignore lint/suspicious/noExplicitAny: API response type is unknown
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   const debouncedSearch = useDebounce(query, 1000);
 
   useEffect(() => {
     const dataFetch = async () => {
-      const data = await fetch(`/api/searchWithApi?q=${debouncedSearch}`).then(
-        (r) => r.json()
-      );
-      setUsers(data);
-      // console.log(data);
+      const response = await fetch(`/api/searchWithApi?q=${debouncedSearch}`);
+      const data: unknown = await response.json();
+      setUsers(Array.isArray(data) ? data.filter(isUser) : []);
     };
-    // if (debouncedSearch) dataFetch();
-
-    // debounce without debounced function
-    // if(query.length === 0 || query.length > 2);
     dataFetch();
   }, [debouncedSearch]);
 
@@ -74,7 +92,6 @@ export default function ReactSearchTableDemo() {
         type="search"
         value={query}
       />
-      {/* <ol className='list-item list-inside list-decimal'> */}
       <table className="border">
         <thead>
           <tr>
@@ -85,11 +102,10 @@ export default function ReactSearchTableDemo() {
           </tr>
         </thead>
         <tbody>
-          {/*data => data.firstName.toLowerCase().includes(query.toLowerCase()) */}
           {users
             .filter((item) =>
-              ["firstName", "lastName", "maidenName"].some((key) =>
-                item[key].toLowerCase().includes(query.toLocaleLowerCase())
+              searchableFields.some((key) =>
+                item[key].toLowerCase().includes(query.toLowerCase())
               )
             )
             .map((d) => (
@@ -102,8 +118,6 @@ export default function ReactSearchTableDemo() {
             ))}
         </tbody>
       </table>
-
-      {/* </ol> */}
     </>
   );
 }

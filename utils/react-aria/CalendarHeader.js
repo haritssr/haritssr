@@ -27,27 +27,25 @@ export function CalendarHeader({
       <Button {...prevButtonProps}>
         <ChevronLeftIcon className="h-6 w-6" />
       </Button>
-      {/* biome-ignore lint/a11y/useHeadingContent: heading is aria-hidden, visual only */}
-      <h2
+      <div
         // We have a visually hidden heading describing the entire visible range,
         // and the calendar itself describes the individual month
         // so we don't need to repeat that here for screen reader users.
-        aria-hidden
+        aria-hidden="true"
         className="flex-1 text-center align-center font-bold text-xl"
       >
         {monthDateFormatter.format(
           state.visibleRange.start.toDate(state.timeZone)
         )}
-      </h2>
-      {/* biome-ignore lint/a11y/useHeadingContent: heading is aria-hidden, visual only */}
-      <h2
-        aria-hidden
+      </div>
+      <div
+        aria-hidden="true"
         className="flex-1 text-center align-center font-bold text-xl"
       >
         {monthDateFormatter.format(
           state.visibleRange.start.add({ months: 1 }).toDate(state.timeZone)
         )}
-      </h2>
+      </div>
       <Button {...nextButtonProps}>
         <ChevronRightIcon className="h-6 w-6" />
       </Button>

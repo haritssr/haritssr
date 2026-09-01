@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
 import { getTaskActionButtonClassName } from "./data";
 import type {
   NowPrimaryAction,
@@ -146,6 +146,8 @@ export default function TaskItem(props: TaskItemProps) {
   const taskIsDone = props.type === "Done" || progress >= 100;
   // Local running flag for the Now-task interval timer.
   const [isRunning, setIsRunning] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const deleteDialogTitleId = useId();
   // Allow "Now" action only for non-done Other tasks at 0% progress.
   const canDoNow =
     props.type === "Other" &&
@@ -201,14 +203,11 @@ export default function TaskItem(props: TaskItemProps) {
 
   const handleDelete = () => {
     setIsRunning(false);
+    setIsDeleteDialogOpen(true);
+  };
 
-    // Confirm before destructive delete.
-    // biome-ignore lint/suspicious/noAlert: destructive action requires explicit user confirmation.
-    const shouldDelete = window.confirm(`Delete task "${props.title}"?`);
-    if (!shouldDelete) {
-      return;
-    }
-
+  const handleConfirmDelete = () => {
+    setIsDeleteDialogOpen(false);
     props.onDelete?.(props.title);
   };
 
@@ -276,40 +275,70 @@ export default function TaskItem(props: TaskItemProps) {
   }, [isRunning, taskIsDone]);
 
   return (
-    <div
-      className={
-        "corner-squircle h-10 rounded-xl border border-zinc-300 pr-2.5 pl-2.5"
-      }
-    >
-      <div className="grid h-full grid-cols-[minmax(0,1fr)_auto] items-center gap-2 text-sm">
-        <div className="scrollbar-hide min-w-0 overflow-x-auto overscroll-x-contain whitespace-nowrap text-zinc-700">
-          {props.title}
-        </div>
+    <>
+      <div className="corner-squircle h-10 rounded-xl border border-zinc-300 pr-2.5 pl-2.5">
+        <div className="grid h-full grid-cols-[minmax(0,1fr)_auto] items-center gap-2 text-sm">
+          <div className="scrollbar-hide min-w-0 overflow-x-auto overscroll-x-contain whitespace-nowrap text-zinc-700">
+            {props.title}
+          </div>
 
-        <div className="flex shrink-0 items-center space-x-1.5 text-zinc-400">
-          {props.readOnly !== true && (
-            <TaskActions
-              canDeleteTask={canDeleteTask}
-              canDoNow={canDoNow}
-              canMarkNowTaskDone={canMarkNowTaskDone}
-              canMoveNowTask={canMoveNowTask}
-              canResetNowTask={canResetNowTask}
-              canResumeOtherTask={canResumeOtherTask}
-              isNowTask={props.type === "Now" && !taskIsDone}
-              onDelete={handleDelete}
-              onDoNow={handleDoNow}
-              onMarkDone={handleDone}
-              onMoveToOther={handleMoveToOther}
-              onReset={handleReset}
-              onResume={handleResume}
-              primaryNowAction={primaryNowAction}
-            />
-          )}
-          <span>{props.duration}"</span>
-          <span>{progress.toFixed(0)}%</span>
-          <DonutProgress isRunning={isRunning} progress={progress} />
+          <div className="flex shrink-0 items-center space-x-1.5 text-zinc-400">
+            {props.readOnly !== true && (
+              <TaskActions
+                canDeleteTask={canDeleteTask}
+                canDoNow={canDoNow}
+                canMarkNowTaskDone={canMarkNowTaskDone}
+                canMoveNowTask={canMoveNowTask}
+                canResetNowTask={canResetNowTask}
+                canResumeOtherTask={canResumeOtherTask}
+                isNowTask={props.type === "Now" && !taskIsDone}
+                onDelete={handleDelete}
+                onDoNow={handleDoNow}
+                onMarkDone={handleDone}
+                onMoveToOther={handleMoveToOther}
+                onReset={handleReset}
+                onResume={handleResume}
+                primaryNowAction={primaryNowAction}
+              />
+            )}
+            <span>{props.duration}"</span>
+            <span>{progress.toFixed(0)}%</span>
+            <DonutProgress isRunning={isRunning} progress={progress} />
+          </div>
         </div>
       </div>
-    </div>
+      {isDeleteDialogOpen ? (
+        <dialog
+          aria-labelledby={deleteDialogTitleId}
+          className="fixed inset-0 z-50 m-auto w-[calc(100%-2rem)] max-w-sm rounded-xl border border-zinc-200 bg-white p-0 text-zinc-800 shadow-xl"
+          open
+        >
+          <div className="p-5">
+            <h2 className="font-semibold text-lg" id={deleteDialogTitleId}>
+              Delete task?
+            </h2>
+            <p className="mt-2 text-sm text-zinc-600">
+              This will permanently delete &ldquo;{props.title}&rdquo;.
+            </p>
+            <div className="mt-5 flex justify-end gap-2">
+              <button
+                className="rounded-md px-3 py-1.5 text-sm hover:bg-zinc-100"
+                onClick={() => setIsDeleteDialogOpen(false)}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                className="rounded-md bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700"
+                onClick={handleConfirmDelete}
+                type="button"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </dialog>
+      ) : null}
+    </>
   );
 }

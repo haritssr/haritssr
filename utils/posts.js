@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { remark } from "remark";
-import html from "remark-html";
+import remarkRehype from "remark-rehype";
 
 const postsDirectory = path.join(process.cwd(), "/data/posts");
 
@@ -91,15 +91,14 @@ export async function getPostData(id) {
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
 
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  // Convert markdown into a syntax tree for React to render safely.
+  const processor = remark().use(remarkRehype);
+  const tree = processor.parse(matterResult.content);
+  const contentTree = await processor.run(tree);
 
-  // Combine the data with the id and contentHtml
+  // Combine the data with the id and content tree.
   return {
-    contentHtml,
+    contentTree,
     id,
     ...matterResult.data,
   };

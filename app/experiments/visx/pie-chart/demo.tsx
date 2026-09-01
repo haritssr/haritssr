@@ -14,7 +14,7 @@ const coins = [
   { symbol: "BTC", amount: 0.005, color: "#F59E0B", inUSD: 37_363 },
 ];
 
-interface yes {
+interface Coin {
   symbol: string;
   amount: number;
   color: string;
@@ -22,12 +22,10 @@ interface yes {
 }
 
 export default function VisxPieChartDemo() {
-  const [active, setActive] = useState<yes | null>(null);
+  const [active, setActive] = useState<Coin | null>(null);
 
   const width = 400;
   const halfWidth = width / 2;
-
-  // console.log(active);
 
   return (
     <>
@@ -38,7 +36,7 @@ export default function VisxPieChartDemo() {
           name="Leight Halliday"
         />{" "}
         <br />
-        Hover the ring to see which and how much coin that I have.
+        Select a coin below to see which and how much I have.
       </SubTitle>
       <div className="mb-14">
         <SourceCodeLink />
@@ -56,25 +54,13 @@ export default function VisxPieChartDemo() {
             padAngle={0.01}
             pieValue={(data) => data.amount * data.inUSD}
           >
-            {(pie) => {
-              return pie.arcs.map((arc) => {
-                return (
-                  // biome-ignore lint/a11y/useSemanticElements: SVG group cannot be replaced with button element
-                  <g
-                    aria-label={`${arc.data.symbol} segment`}
-                    key={arc.data.symbol}
-                    onBlur={() => setActive(null)}
-                    onFocus={() => setActive(arc.data)}
-                    onMouseEnter={() => setActive(arc.data)}
-                    onMouseLeave={() => setActive(null)}
-                    role="button"
-                    tabIndex={0}
-                  >
-                    <path d={pie.path(arc) as string} fill={arc.data.color} />
-                  </g>
-                );
-              });
-            }}
+            {(pie) =>
+              pie.arcs.map((arc) => (
+                <g key={arc.data.symbol}>
+                  <path d={pie.path(arc) as string} fill={arc.data.color} />
+                </g>
+              ))
+            }
           </Pie>
           {active ? (
             <>
@@ -105,6 +91,32 @@ export default function VisxPieChartDemo() {
           )}
         </Group>
       </svg>
+      <div className="mt-4 flex flex-wrap justify-center gap-2">
+        {coins.map((coin) => {
+          const isActive = active?.symbol === coin.symbol;
+
+          return (
+            <button
+              aria-pressed={isActive}
+              className="flex items-center gap-1 rounded-md px-2 py-1 text-sm hover:bg-zinc-100"
+              key={coin.symbol}
+              onBlur={() => setActive(null)}
+              onClick={() => setActive(isActive ? null : coin)}
+              onFocus={() => setActive(coin)}
+              onMouseEnter={() => setActive(coin)}
+              onMouseLeave={() => setActive(null)}
+              type="button"
+            >
+              <span
+                aria-hidden="true"
+                className="h-2.5 w-2.5 rounded-full"
+                style={{ backgroundColor: coin.color }}
+              />
+              {coin.symbol}
+            </button>
+          );
+        })}
+      </div>
     </>
   );
 }

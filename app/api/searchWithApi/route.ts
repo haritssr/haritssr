@@ -1,5 +1,4 @@
-// biome-ignore lint/suspicious/useAwait: Response.json() returns a Promise
-export async function GET(request: Request) {
+export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q")?.toLowerCase() || "";
 
