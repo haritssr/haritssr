@@ -1,10 +1,4 @@
 {
-  "code_actions_on_format": {
-    "source.action.useSortedAttributes.biome": true,
-    "source.fixAll.biome": true,
-    "source.action.useSortedKeys.biome": false,
-    "source.action.useSortedInterfaceMembers.biome": false,
-  },
   "file_scan_exclusions": [
     "**/.git",
     "**/.svn",
@@ -21,7 +15,16 @@
     "**/repos/**"
   ],
   "format_on_save": "on",
-  "formatter": "language_server",
+  "formatter": [
+    {
+      "language_server": {
+        "name": "oxfmt"
+      }
+    }
+  ],
+  "code_actions_on_format": {
+    "source.fixAll.oxc": true
+  },
   "lsp": {
     "vscode-css-language-server": {
       "settings": {
@@ -36,23 +39,22 @@
   "languages": {
     "CSS": {
       "language_servers": [
-        "tailwindcss-language-server",
-        "vscode-css-language-server"
+        "tailwindcss-intellisense-css",
+        "!vscode-css-language-server",
+        "..."
       ]
     },
     "JavaScript": {
       "language_servers": [
         "vtsls",
         "effect-tsgo",
-        "biome"
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
       ],
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
       "formatter": {
         "language_server": {
-          "name": "biome"
+          "name": "oxfmt"
         }
       }
     },
@@ -60,15 +62,13 @@
       "language_servers": [
         "vtsls",
         "effect-tsgo",
-        "biome"
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
       ],
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
       "formatter": {
         "language_server": {
-          "name": "biome"
+          "name": "oxfmt"
         }
       }
     },
@@ -76,15 +76,13 @@
       "language_servers": [
         "vtsls",
         "effect-tsgo",
-        "biome"
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
       ],
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
       "formatter": {
         "language_server": {
-          "name": "biome"
+          "name": "oxfmt"
         }
       }
     },
@@ -92,15 +90,13 @@
       "language_servers": [
         "vtsls",
         "effect-tsgo",
-        "biome"
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
       ],
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
       "formatter": {
         "language_server": {
-          "name": "biome"
+          "name": "oxfmt"
         }
       }
     }
