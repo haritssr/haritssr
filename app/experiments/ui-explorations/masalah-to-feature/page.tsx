@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function MasalahToFeaturePage() {
   return (
     <>
-      <PageDescription description={DESCRIPTION} />
+      <PageDescription>{DESCRIPTION}</PageDescription>
       <GraphView />
     </>
   );

@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 export default function ExperimentsPage() {
   return (
     <>
-      <PageTitle title="Experiments" />
-      <PageDescription description={getExperimentsHomeDescription()} />
+      <PageTitle>Experiments</PageTitle>
+      <PageDescription>{getExperimentsHomeDescription()}</PageDescription>
       <ExperimentsGrid />
     </>
   );

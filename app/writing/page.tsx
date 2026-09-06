@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 export default function WritingPage() {
   return (
     <>
-      <PageTitle title="Writing" />
-      <PageDescription description={WRITING_DESCRIPTION} />
+      <PageTitle>Writing</PageTitle>
+      <PageDescription>{WRITING_DESCRIPTION}</PageDescription>
       <WritingGrid />
     </>
   );

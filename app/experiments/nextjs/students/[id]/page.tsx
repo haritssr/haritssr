@@ -34,7 +34,7 @@ export default async function StudentPage({ params }: Props) {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
-      <PageTitle title="Student Details" />
+      <PageTitle>Student Details</PageTitle>
       <div className="mb-14">
         <SourceCodeLink sourcePath="app/experiments/nextjs/students/[id]" />
       </div>

@@ -24,7 +24,7 @@ export default async function PostPage({
 
   return (
     <>
-      <PageTitle title={postData.title} />
+      <PageTitle>{postData.title}</PageTitle>
       <SubTitle>
         <time dateTime={postData.date}>
           {format(parseISO(postData.date), "LLLL d, yyyy")}

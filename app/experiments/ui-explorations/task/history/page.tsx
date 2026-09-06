@@ -14,8 +14,8 @@ export default function TaskHistoryPage() {
   return (
     <div className="pb-8">
       <BackButton href="/experiments/ui-explorations/task" name="Task" />
-      <PageTitle title="History" />
-      <PageDescription description="Record of daily tasks." />
+      <PageTitle>History</PageTitle>
+      <PageDescription>Record of daily tasks.</PageDescription>
 
       {history.length === 0 ? (
         <div className="rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-500">

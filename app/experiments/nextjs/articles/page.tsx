@@ -13,7 +13,7 @@ export const metadata: Metadata = getExperimentMetadata("nextjs", "articles");
 export default function ArticlesPage() {
   return (
     <>
-      <PageTitle title="Articles" />
+      <PageTitle>Articles</PageTitle>
       <SubTitle>
         Static article data from{" "}
         <code className="rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-mono text-sm">

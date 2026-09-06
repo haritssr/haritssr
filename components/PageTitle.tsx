@@ -1,10 +1,10 @@
-import type { Ref } from "react";
+import type { ReactNode, Ref } from "react";
 
 export default function PageTitle({
-  title,
+  children,
   ref,
 }: {
-  title: string;
+  children: ReactNode;
   ref?: Ref<HTMLHeadingElement>;
 }) {
   return (
@@ -13,7 +13,7 @@ export default function PageTitle({
         className="mt-10 mb-4 text-3xl font-bold text-zinc-800 sm:mt-16 sm:text-4xl"
         ref={ref}
       >
-        {title}
+        {children}
       </h1>
     </div>
   );

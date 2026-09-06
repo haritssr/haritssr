@@ -445,8 +445,8 @@ export default function TaskArchitecturePage() {
         <ChevronLeftIcon className="h-5 w-5 stroke-2" />
         Task
       </Link>
-      <PageTitle title="Architecture" />
-      <PageDescription description="How the task app works under the hood." />
+      <PageTitle>Architecture</PageTitle>
+      <PageDescription>How the task app works under the hood.</PageDescription>
 
       {/* Overview */}
       <div className="mb-8 rounded-xl border border-zinc-200 p-4">

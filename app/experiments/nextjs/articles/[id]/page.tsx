@@ -34,7 +34,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
-      <PageTitle title={article.title} />
+      <PageTitle>{article.title}</PageTitle>
       <div className="mb-14">
         <SourceCodeLink sourcePath="app/experiments/nextjs/articles/[id]" />
       </div>

@@ -76,7 +76,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
 
   return (
     <div>
-      <PageDescription description="Manage tools in experiment database." />
+      <PageDescription>Manage tools in experiment database.</PageDescription>
 
       {!!error && (
         <div className="mt-4 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">

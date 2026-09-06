@@ -20,7 +20,7 @@ export default function PostsPage() {
 
   return (
     <>
-      <PageTitle title="Posts" />
+      <PageTitle>Posts</PageTitle>
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
       <div className="mb-14">
         <SourceCodeLink />

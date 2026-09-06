@@ -1,13 +1,9 @@
-import type React from "react";
+import type { ReactNode } from "react";
 
-export default function PageDescription({
-  description,
-}: {
-  description: string | React.ReactNode;
-}) {
+export default function PageDescription({ children }: { children: ReactNode }) {
   return (
     <div className="wrap-break-words mt-4 mb-10 text-lg text-zinc-500">
-      {description}
+      {children}
     </div>
   );
 }

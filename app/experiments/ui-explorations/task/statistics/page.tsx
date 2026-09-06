@@ -162,8 +162,8 @@ export default function TaskStatisticsPage() {
   return (
     <div className="pb-8">
       <BackButton href="/experiments/ui-explorations/task" name="Task" />
-      <PageTitle title="Statistic" />
-      <PageDescription description="About the daily task." />
+      <PageTitle>Statistic</PageTitle>
+      <PageDescription>About the daily task.</PageDescription>
 
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
         Ideas shown here: daily completion rate, 7-day completion rate,

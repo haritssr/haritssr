@@ -121,20 +121,15 @@ export default function DesignSystem() {
   }, []);
   return (
     <>
-      <PageTitle title="Design" />
-      <PageDescription
-        description={
-          <>
-            Design system used in this site,{" "}
-            <ExternalLink
-              href="https://harisstudio.vercel.app"
-              name="Haris Studio"
-            />{" "}
-            and{" "}
-            <ExternalLink href="https://www.harislab.com" name="Haris Lab" />.
-          </>
-        }
-      />
+      <PageTitle>Design</PageTitle>
+      <PageDescription>
+        Design system used in this site,{" "}
+        <ExternalLink
+          href="https://harisstudio.vercel.app"
+          name="Haris Studio"
+        />{" "}
+        and <ExternalLink href="https://www.harislab.com" name="Haris Lab" />.
+      </PageDescription>
       <Section name="Design Principles" />
       <ExplanationList>
         <li>

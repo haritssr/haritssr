@@ -384,8 +384,8 @@ export default function TaskPage() {
   return (
     <>
       <BackButton href="/experiments/ui-explorations" name="UI Explorations" />
-      <PageTitle title="Task" />
-      <PageDescription description="Realistic Daily Time Budget." />
+      <PageTitle>Task</PageTitle>
+      <PageDescription>Realistic Daily Time Budget.</PageDescription>
       <ExperimentPageBadge />
       <section className="mt-2 flex items-center space-x-5">
         <InternalLink href="/experiments/ui-explorations/task/history">

@@ -68,7 +68,7 @@ export default function ExperimentDomainLayout({
         <article className="sm:px-0">
           {!isTaskRoute && <BackButton href="/experiments" name={prevRoute} />}
           {!(isTaskRoute || isIndexPage || isStandaloneNextjsRoute) && (
-            <PageTitle title={title} />
+            <PageTitle>{title}</PageTitle>
           )}
           {children}
         </article>

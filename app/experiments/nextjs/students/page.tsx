@@ -12,7 +12,7 @@ export const metadata: Metadata = getExperimentMetadata("nextjs", "students");
 export default function StudentsPage() {
   return (
     <>
-      <PageTitle title="Students" />
+      <PageTitle>Students</PageTitle>
       <SubTitle>
         A list of students from local data, rendered as static App Router pages.
       </SubTitle>

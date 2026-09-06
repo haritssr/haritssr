@@ -44,7 +44,7 @@ export default function YearlyInterest() {
 
   return (
     <div>
-      <PageDescription description="Calculation of yearly save interest" />
+      <PageDescription>Calculation of yearly save interest</PageDescription>
       <div className="mb-14">
         <SourceCodeLink />
       </div>
