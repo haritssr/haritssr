@@ -25,6 +25,7 @@ export default function Misc() {
           around 2000. Now I have completely stepped away from chess and focus
           on math, physics, and web product engineering at harislab.com.
         </li>
+        <li>I designed all the interface in this site, some kind of batch update or refactor I delegate to AI</li>
         <li>
           <a
             className="text-action hover:underline"
