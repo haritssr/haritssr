@@ -48,7 +48,7 @@ export default function Share() {
   return (
     <Toast.Provider swipeDirection="right">
       <button
-        className="cursor-pointer text-zinc-500 select-none hover:text-zinc-800"
+        className="cursor-pointer select-none hover:text-zinc-800"
         onClick={() => {
           void handleButtonClick();
         }}

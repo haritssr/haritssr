@@ -11,7 +11,7 @@ export default function ExperimentCard({
 }) {
   return (
     <Link
-      className="group corner-squircle space-y-1 rounded-2xl border border-zinc-400 px-3 py-2.5 hover:border-zinc-600 hover:bg-zinc-50"
+      className="group corner-squircle space-y-1 rounded-2xl border border-zinc-300 px-3 py-2.5 hover:bg-zinc-100/50"
       href={`/experiments/${experiment.slug}`}
       key={experiment.id}
     >

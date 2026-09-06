@@ -25,8 +25,8 @@ export default function HomeSectionWrapper({
             {topic}
             <ChevronRightIcon
               aria-hidden="true"
-              className="ml-1 h-5 w-5 shrink-0 text-zinc-600"
-              strokeWidth={2}
+              className="h-5 w-5 shrink-0 text-zinc-500"
+              strokeWidth={2.5}
             />
           </Link>
         ) : (

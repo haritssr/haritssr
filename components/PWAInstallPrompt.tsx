@@ -49,7 +49,7 @@ export default function PWAInstallPrompt() {
 
   return (
     <button
-      className="cursor-pointer text-zinc-500 select-none hover:text-zinc-800"
+      className="cursor-pointer select-none hover:text-zinc-800"
       onClick={() => {
         void installApp();
       }}
