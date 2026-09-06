@@ -17,13 +17,9 @@ export default function Misc() {
           <span className="text-zinc-800">r</span>ahmatullah
         </li>
         <li>
-          I used to be heavily addicted to chess from junior high school through
-          college. I knew all the top grandmasters in the world, won several
-          gold and silver medals representing my school, department, faculty,
-          and university, then threw them all away, by the way. I deleted three
-          chess accounts on Chess.com and Lichess.org, with a peak Elo rating of
-          around 2000. Now I have completely stepped away from chess and focus
-          on math, physics, and web product engineering at harislab.com.
+          Former chess addict, peaked at around 2000 Elo and won several school
+          and university medals. Now I focus on math, physics, and web product
+          engineering at harislab.com.
         </li>
         <li>I designed all the interface in this site, some kind of batch update or refactor I delegate to AI</li>
         <li>
