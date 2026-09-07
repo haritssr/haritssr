@@ -1,6 +1,7 @@
 # 0002: Use Content Collections for blog content
 
-- Status: accepted
+- Status: superseded
+- Superseded by: [0007 — Use Next.js MDX for writing content](./0007-use-nextjs-mdx-for-writing-content.md)
 - Date: 2026-02-04
 - Confidence: high
 

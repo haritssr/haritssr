@@ -3,12 +3,10 @@
   "entry": [
     "app/experiments/ui-explorations/tools/db.bun.ts",
     "public/sw.js",
-    "utils/content-collections.ts",
     "utils/{dbExperiment,sqlite3}.js",
   ],
   "ignoreFiles": [
     // These components are retained for features that are currently unwired.
-    "app/writing/[slug]/LeftBar.tsx",
     "components/InternalLinkWithoutArrow.tsx",
     "components/TopBarSearch.tsx",
     "data/routes.ts",

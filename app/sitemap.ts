@@ -1,7 +1,7 @@
-import { allWritings } from "@content-collections";
 import type { MetadataRoute } from "next";
 
 import { SITE_URL } from "@/utils/site";
+import { allWritings } from "@/utils/writings";
 
 import { ExperimentsData } from "../data/ExperimentsData";
 import {

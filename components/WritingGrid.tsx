@@ -1,4 +1,4 @@
-import { allWritings } from "@content-collections";
+import { allWritings } from "@/utils/writings";
 
 import InternalLink from "./InternalLink";
 

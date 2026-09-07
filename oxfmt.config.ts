@@ -6,8 +6,6 @@ const repositoryIgnorePatterns = [
   "**/*.mdx",
   "**/.agents/**",
   "**/.swc/**",
-  "**/.contentlayer/**",
-  "**/.content-collections/**",
   "**/.vscode/**",
 ];
 

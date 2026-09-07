@@ -1,8 +1,21 @@
-import { createContentCollectionPlugin } from "@content-collections/next";
+import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
-const withContentCollections = createContentCollectionPlugin({
-  configPath: "utils/content-collections.ts",
+const withMDX = createMDX({
+  options: {
+    rehypePlugins: [
+      "rehype-slug",
+      [
+        "rehype-autolink-headings",
+        {
+          properties: {
+            className: ["anchor"],
+          },
+        },
+      ],
+    ],
+    remarkPlugins: ["remark-frontmatter", "remark-gfm"],
+  },
 });
 
 const nextConfig: NextConfig = {
@@ -45,6 +58,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   headers() {
     return [
       {
@@ -95,4 +109,4 @@ const nextConfig: NextConfig = {
   turbopack: {},
 };
 
-export default withContentCollections(nextConfig);
+export default withMDX(nextConfig);

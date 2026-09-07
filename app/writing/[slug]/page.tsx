@@ -1,17 +1,13 @@
-import { allWritings } from "@content-collections";
-import type { Root } from "hast";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
-import type { Plugin } from "unified";
 
 import BackButton from "@/components/BackButton";
-import MarkdownContent from "@/components/mdx";
 import { SITE_URL } from "@/utils/site";
+import { getWritingModule } from "@/utils/writing-modules";
+import { allWritings, getWriting } from "@/utils/writings";
 
 import TableOfContents from "./TableOfContent";
-
-type UnifiedPlugin = Plugin<[options?: unknown]>;
 
 export function generateStaticParams() {
   return allWritings.map((writing) => ({
@@ -25,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const writing = allWritings.find((entry) => entry.slug === slug);
+  const writing = getWriting(slug);
 
   if (!writing) {
     return {};
@@ -97,68 +93,20 @@ function formatDate(date: string) {
   return `${fullDate} (${formattedDate})`;
 }
 
-async function markdownToHast(content: string): Promise<Root> {
-  const { unified } = await import("unified");
-  const remarkParse = await import("remark-parse");
-  const remarkGfm = await import("remark-gfm");
-  const remarkRehype = await import("remark-rehype");
-
-  // Create processor with basic plugins
-  const processor = unified()
-    .use(remarkParse.default as unknown as UnifiedPlugin)
-    .use(remarkGfm.default as unknown as UnifiedPlugin)
-    .use(remarkRehype.default as unknown as UnifiedPlugin);
-
-  // Add optional plugins with error handling
-  try {
-    const rehypeSlug = await import("rehype-slug");
-    processor.use(rehypeSlug.default as unknown as UnifiedPlugin);
-  } catch {
-    // Skip if plugin fails
-  }
-
-  try {
-    const rehypeAutolinkHeadings = await import("rehype-autolink-headings");
-    processor.use(rehypeAutolinkHeadings.default as unknown as UnifiedPlugin, {
-      properties: {
-        className: ["anchor"],
-      },
-    });
-  } catch {
-    // Skip if plugin fails
-  }
-
-  try {
-    const rehypePrettyCode = await import("rehype-pretty-code");
-    processor.use(rehypePrettyCode.default as unknown as UnifiedPlugin, {
-      theme: "one-dark-pro",
-    });
-  } catch {
-    // Skip if plugin fails
-  }
-
-  const tree = processor.parse(content);
-  const result = await processor.run(tree);
-  if (result.type !== "root") {
-    throw new Error("Expected markdown processing to produce a root node");
-  }
-
-  return result as Root;
-}
-
 export default async function Writing({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const writing = allWritings.find((each) => each.slug === slug);
+  const writing = getWriting(slug);
+  const writingModule = getWritingModule(slug);
 
-  if (!writing) {
+  if (!(writing && writingModule)) {
     notFound();
   }
 
-  const tree = await markdownToHast(writing.content);
+  const { default: WritingContent } = await writingModule;
 
   return (
     <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
@@ -178,12 +126,16 @@ export default async function Writing({
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
           <p>{Math.ceil(writing.wordCount / 200)} Min Read</p>
         </div>
-        <MarkdownContent tree={tree} />
+        <article className="prose prose-zinc max-w-none">
+          <WritingContent />
+        </article>
       </Content>
       <TableOfContents slug={writing.slug} />
     </div>
   );
 }
+
+export const dynamicParams = false;
 
 function Content({ children }: { children: React.ReactNode }) {
   return (

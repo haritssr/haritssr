@@ -1,6 +1,5 @@
-import { allWritings } from "@content-collections";
-
 import { renderWritingRssFeed } from "@/utils/rss";
+import { allWritings } from "@/utils/writings";
 
 export const dynamic = "force-static";
 

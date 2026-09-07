@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["bun-types"],
+    "types": ["bun-types", "mdx"],
     "noImplicitAny": true,
     "strictNullChecks": true,
     "target": "ES2023",
@@ -21,8 +21,7 @@
       "*": ["./*"],
       "@/*": ["./*"],
       "@/components/*": ["./components/*"],
-      "@/utils/*": ["./utils/*"],
-      "@content-collections": ["./utils/.content-collections/generated"]
+      "@/utils/*": ["./utils/*"]
     },
     "incremental": true,
     "plugins": [
@@ -46,7 +45,6 @@
     "pages/experiments/react/store-context-selector.tsz",
     "pages/experiments/react/store-zustand.js",
     ".next/types/**/*.ts",
-    "utils/.content-collections/generated",
     "utils/getAllMDXFileInsideFolder.js",
     "utils/word-count.ts",
     ".next/dev/types/**/*.ts",

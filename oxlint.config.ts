@@ -6,8 +6,6 @@ import react from "ultracite/oxlint/react";
 const repositoryIgnorePatterns = [
   "**/.agents/**",
   "**/.swc/**",
-  "**/.contentlayer/**",
-  "**/.content-collections/**",
   "**/.vscode/**",
 ];
 
@@ -93,13 +91,6 @@ export default defineConfig({
       rules: {
         // Effect.catch uses a callback by design; it is not a Promise chain.
         "promise/prefer-await-to-callbacks": "off",
-      },
-    },
-    {
-      files: ["app/writing/**/page.tsx"],
-      rules: {
-        // The remark-gfm v3 types bundle a separate unified v10 type graph.
-        "typescript/no-unsafe-type-assertion": "off",
       },
     },
     {
