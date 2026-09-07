@@ -15,8 +15,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-action: oklch(58.8% 0.158 241.966);
-  --color-action-hover: oklch(68.5% 0.169 237.323);
+  /* Semantic colors documented on /design */
+  --color-action: var(--color-sky-600);
+  --color-action-hover: var(--color-sky-500);
+  --color-success: #34c759;
+  --color-attention: #eab308;
+  --color-danger: #ef4444;
+  --color-information: #a855f7;
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(240 10% 3.9%);
   --color-border: hsl(240 5.9% 90%);

@@ -26,6 +26,15 @@
     "source.fixAll.oxc": true
   },
   "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "tailwindCSS": {
+          "lint": {
+            "cssConflict": "ignore"
+          }
+        }
+      }
+    },
     "vscode-css-language-server": {
       "settings": {
         "css": {

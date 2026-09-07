@@ -3,16 +3,17 @@ import type { ButtonHTMLAttributes, Ref } from "react";
 type ButtonVariant = "danger" | "ghost" | "primary" | "secondary";
 
 const BUTTON_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-lg corner-squircle px-3 py-1.5 font-medium text-sm transition-colors active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle px-3 text-sm transition-colors active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   danger:
-    "border border-red-600 bg-white text-red-700 hover:bg-red-50 focus-visible:outline-red-700",
-  ghost: "text-zinc-700 hover:bg-zinc-100 focus-visible:outline-zinc-700",
+    "rounded-xl border border-red-600 bg-white py-1.25 font-medium text-red-700 select-none hover:bg-red-50 focus-visible:outline-red-700",
+  ghost:
+    "rounded-xl py-1.25 font-medium text-zinc-700 hover:bg-zinc-100 focus-visible:outline-zinc-700",
   primary:
-    "bg-action text-white hover:bg-action-hover focus-visible:outline-action",
+    "rounded-xl bg-action py-1.25 font-medium text-white hover:bg-action-hover focus-visible:outline-action",
   secondary:
-    "border border-zinc-500 bg-white text-zinc-800 hover:bg-zinc-50 focus-visible:outline-zinc-700",
+    "rounded-xl border border-zinc-300 bg-white py-1.25 text-zinc-600 select-none hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-zinc-700",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
