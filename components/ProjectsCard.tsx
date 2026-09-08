@@ -47,7 +47,7 @@ export default function ProjectsCard({
 
       <section className="flex space-x-2 px-3 pb-3">
         <a
-          className="corner-squircle w-1/2 rounded-xl bg-zinc-700 py-1.25 text-center text-sm text-zinc-100 select-none hover:bg-zinc-700/95"
+          className="corner-squircle inline-flex w-1/2 items-center justify-center rounded-xl bg-zinc-700 py-1.25 text-center text-sm text-zinc-100 select-none hover:bg-zinc-700/95"
           href={href}
           rel="noopener noreferrer"
           target="_blank"
@@ -55,7 +55,7 @@ export default function ProjectsCard({
           Visit
         </a>
         <Link
-          className="corner-squircle w-1/2 rounded-xl border border-zinc-300 py-1.25 text-center text-sm text-zinc-600 hover:bg-zinc-100 hover:text-zinc-700"
+          className="corner-squircle inline-flex w-1/2 items-center justify-center rounded-xl border border-zinc-300 py-1.25 text-center text-sm text-zinc-600 hover:bg-zinc-100 hover:text-zinc-700"
           href={`/projects/${title.toLowerCase().split(" ").join("-")}`}
         >
           Details
