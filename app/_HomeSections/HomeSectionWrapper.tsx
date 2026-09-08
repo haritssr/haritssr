@@ -19,7 +19,7 @@ export default function HomeSectionWrapper({
       <section className="flex items-center justify-between">
         {isTitleLink ? (
           <Link
-            className="mb-6 inline-flex items-center text-2xl font-semibold text-zinc-800 select-none hover:underline"
+            className="mb-6 inline-flex items-center text-2xl font-semibold text-zinc-800 select-none hover:text-zinc-500"
             href={`/${id}`}
           >
             {topic}
