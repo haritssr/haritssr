@@ -2,11 +2,12 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 const STATUS_ACTION_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center rounded-lg corner-squircle px-3.5 py-1.5 text-sm transition-colors";
+  "inline-flex w-full cursor-pointer items-center justify-center corner-squircle rounded-xl px-3.5 py-1.5 text-center text-sm transition-colors sm:basis-0 sm:flex-1 sm:w-auto";
 
 const STATUS_ACTION_VARIANT_CLASS = {
-  primary: "bg-action text-white hover:bg-action-hover",
-  secondary: "border border-zinc-500 text-zinc-700 hover:bg-zinc-100",
+  primary: "bg-zinc-700 text-zinc-100 select-none hover:bg-zinc-700/95",
+  secondary:
+    "border border-zinc-300 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-700",
 } as const;
 
 function getStatusActionClassName(
@@ -66,8 +67,8 @@ export function StatusPage({
 }) {
   const wrapperClassName =
     fullScreen === true
-      ? "flex min-h-screen w-full items-center justify-center px-5"
-      : "px-5";
+      ? "flex min-h-screen w-full items-center justify-center"
+      : "";
   const cardClassName =
     tone === "error"
       ? "border-rose-200 bg-rose-50"
@@ -77,17 +78,17 @@ export function StatusPage({
   return (
     <div className={wrapperClassName}>
       <section
-        className={`corner-squircle w-full max-w-xl rounded-xl border px-5 py-6 text-center ${cardClassName}`}
+        className={`corner-squircle max-w-fit rounded-xl border px-4 py-5 text-left ${cardClassName}`}
       >
         <div className={`text-xs font-medium uppercase ${badgeClassName}`}>
-          {tone === "error" ? "Error" : "Status"}
+          {tone === "error" ? "Error" : "404"}
         </div>
         <h1 className="mt-2 text-2xl font-semibold text-zinc-800">{title}</h1>
         {description !== undefined && description !== null ? (
           <p className="mt-2 text-sm text-zinc-600">{description}</p>
         ) : null}
         {actions !== undefined && actions !== null ? (
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+          <div className="mt-5 flex w-full flex-col items-center justify-center gap-2 sm:flex-row">
             {actions}
           </div>
         ) : null}
