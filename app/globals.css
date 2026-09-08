@@ -16,8 +16,12 @@
 
 @theme {
   /* Semantic colors documented on /design */
-  --color-action: var(--color-sky-600);
-  --color-action-hover: var(--color-sky-500);
+  --color-action: var(--color-blue-500);
+  --color-action-hover: color-mix(
+    in oklab,
+    var(--color-blue-500) 60%,
+    var(--color-blue-400) 40%
+  );
   --color-success: #34c759;
   --color-attention: #eab308;
   --color-danger: #ef4444;
