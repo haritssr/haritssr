@@ -26,7 +26,7 @@ export default function Contacts() {
         />
       </div>
       <div
-        className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 px-3 pt-3 pb-2.5 text-left text-zinc-500"
+        className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 px-4 pt-3 pb-2.5 text-left text-zinc-500"
         id="1234"
       >
         <h1 className="font-semibold text-zinc-800">Harits Syah</h1>
@@ -69,7 +69,7 @@ export default function Contacts() {
       </div>
       <ContactList />
       <div
-        className="corner-squircle space-y-2 rounded-2xl border border-zinc-300 px-3 pt-3 pb-2.5 text-zinc-500"
+        className="corner-squircle space-y-2 rounded-2xl border border-zinc-300 px-4 pt-3 pb-2.5 text-zinc-500"
         id="topics"
       >
         <p className="font-semibold text-zinc-800">Interests</p>

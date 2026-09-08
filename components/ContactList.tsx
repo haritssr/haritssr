@@ -75,7 +75,7 @@ function renderContact(each: { link: string; icon: string }) {
 
 export default function ContactList() {
   return (
-    <div className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 p-3">
+    <div className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 px-4 pt-3 pb-2.5">
       <p className="font-semibold text-zinc-800">Contacts</p>
       <ul className="space-y-2.5">
         {data.points.map((each) => (
