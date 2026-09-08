@@ -7,7 +7,7 @@ export default function Box({
 }) {
   return (
     <div className="corner-squircle overflow-hidden rounded-xl border border-zinc-300">
-      <div className="border-b border-zinc-300 bg-zinc-100 px-3 py-1.5 text-zinc-800 select-none">
+      <div className="border-b border-zinc-300 bg-zinc-100 px-3 py-1.5 text-zinc-700 select-none">
         {title}
       </div>
       <div className="space-y-5 p-5">{children}</div>
