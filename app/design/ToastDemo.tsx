@@ -9,7 +9,7 @@ import Button from "@/components/Button";
 export default function ToastDemo() {
   return (
     <Toast.Provider>
-      <Box title="Toast">
+      <Box name="Toast" title="Toast">
         <ToastButton />
       </Box>
       <Toast.Portal>

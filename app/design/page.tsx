@@ -151,19 +151,19 @@ export default function DesignSystem() {
       <div className="mb-10" />
       <Section name="UI Components" />
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
-        <Box title="Switch">
+        <Box name="Switch" title="Switch">
           <SwitchDemo />
         </Box>
 
-        <Box title="Accordion">
+        <Box name="Accordion" title="Accordion">
           <AccordionDemo />
         </Box>
 
-        <Box title="Checkbox">
+        <Box name="Checkbox" title="Checkbox">
           <CheckboxDemo />
         </Box>
 
-        <Box title="Popover">
+        <Box name="Popover" title="Popover">
           <PopoverDemo />
         </Box>
 
@@ -171,49 +171,49 @@ export default function DesignSystem() {
           <TableDemo />
         </Box>
 
-        <Box title="Tabs">
+        <Box name="Tabs" title="Tabs">
           <TabsDemo />
         </Box>
 
         <ToastDemo />
 
-        <Box title="Button: Primary">
+        <Box name="Button" title="Button: Primary">
           <Button variant="primary">Button</Button>
         </Box>
 
-        <Box title="Button: Loading">
+        <Box name="Button" title="Button: Loading">
           <Button loading={loading} onClick={handleLoadingClick}>
             Button
           </Button>
         </Box>
 
-        <Box title="Button: Secondary">
+        <Box name="Button" title="Button: Secondary">
           <Button variant="secondary">Button</Button>
         </Box>
 
-        <Box title="Button: With Icon">
+        <Box name="Button" title="Button: With Icon">
           <ButtonWithIconDemo />
         </Box>
 
-        <Box title="Button: Only Icon">
+        <Box name="Button" title="Button: Only Icon">
           <ButtonIconOnlyDemo />
         </Box>
 
-        <Box title="Button: Danger">
+        <Box name="Button" title="Button: Danger">
           <Button variant="danger">Delete</Button>
         </Box>
 
-        <Box title="Button: Disabled">
+        <Box name="Button" title="Button: Disabled">
           <Button disabled variant="secondary">
             Button
           </Button>
         </Box>
 
-        <Box title="Internal Link">
+        <Box name="InternalLink" title="Internal Link">
           <InternalLink href="/">Internal Link</InternalLink>
         </Box>
 
-        <Box title="External Link">
+        <Box name="ExternalLink" title="External Link">
           <ExternalLink href="https://www.harislab.com" name="External Link" />
         </Box>
 
@@ -251,7 +251,7 @@ export default function DesignSystem() {
           </label>
         </Box>
 
-        <Box title="Box">
+        <Box name="Box" title="Box">
           <div className="w-50 overflow-hidden rounded-md border border-zinc-400/50 sm:w-75">
             <div className="border-b border-zinc-400/50 bg-zinc-50 px-3 py-2 font-medium text-zinc-800 select-none">
               Title
@@ -270,7 +270,7 @@ export default function DesignSystem() {
           />
         </Box>
 
-        <Box title="Toggle">
+        <Box name="Toggle" title="Toggle">
           <ToggleDemo />
         </Box>
 
@@ -278,17 +278,17 @@ export default function DesignSystem() {
           <BreadcrumbsDemo />
         </Box>
 
-        <Box title="Badges">
+        <Box name="Badge" title="Badges">
           <BadgesDemo />
         </Box>
 
-        <Box title="Back Button">
+        <Box name="BackButton" title="Back Button">
           <div className="-mt-10 mb-5">
             <BackButton href="/" name="Previous Page" />
           </div>
         </Box>
 
-        <Box title="Tooltip">
+        <Box name="Tooltip" title="Tooltip">
           <TooltipDemo />
         </Box>
 
@@ -296,23 +296,23 @@ export default function DesignSystem() {
           <LogoDemo />
         </Box>
 
-        <Box title="Modal">
+        <Box name="Dialog" title="Modal">
           <ModalDemo />
         </Box>
 
-        <Box title="Select">
+        <Box name="Select" title="Select">
           <SelectDemo />
         </Box>
 
-        <Box title="Bottom Navigation Mobile">
+        <Box name="BottomBar" title="Bottom Navigation Mobile">
           <BottomBar preview />
         </Box>
 
-        <Box title="Slider">
+        <Box name="Slider" title="Slider">
           <SliderDemo />
         </Box>
 
-        <Box title="Context Menus">
+        <Box name="ContextMenu" title="Context Menus">
           <ContextMenuDemo />
         </Box>
 
