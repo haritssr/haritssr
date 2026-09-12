@@ -1,10 +1,4 @@
 {
-  "code_actions_on_format": {
-    "source.action.useSortedAttributes.biome": true,
-    "source.fixAll.biome": true,
-    "source.action.useSortedKeys.biome": false,
-    "source.action.useSortedInterfaceMembers.biome": false,
-  },
   "file_scan_exclusions": [
     "**/.git",
     "**/.svn",
@@ -15,16 +9,28 @@
     "**/Thumbs.db",
     "**/.classpath",
     "**/.settings",
+    "**/node_modules/**",
+    "**/.next/**",
+    "**/.content-collections/**",
     "**/repos/**"
   ],
   "format_on_save": "on",
-  "formatter": "language_server",
+  "formatter": [
+    {
+      "language_server": {
+        "name": "oxfmt"
+      }
+    }
+  ],
+  "code_actions_on_format": {
+    "source.fixAll.oxc": true
+  },
   "lsp": {
-    "typescript-language-server": {
+    "tailwindcss-language-server": {
       "settings": {
-        "typescript": {
-          "preferences": {
-            "includePackageJsonAutoImports": "on"
+        "tailwindCSS": {
+          "lint": {
+            "cssConflict": "ignore"
           }
         }
       }
@@ -42,40 +48,64 @@
   "languages": {
     "CSS": {
       "language_servers": [
-        "tailwindcss-language-server",
+        "tailwindcss-intellisense-css",
+        "!vscode-css-language-server",
         "..."
       ]
     },
     "JavaScript": {
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
+      ],
       "formatter": {
         "language_server": {
-          "name": "biome"
+          "name": "oxfmt"
+        }
+      }
+    },
+    "JSX": {
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
+      ],
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
         }
       }
     },
     "TSX": {
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
+      ],
       "formatter": {
         "language_server": {
-          "name": "biome"
+          "name": "oxfmt"
         }
       }
     },
     "TypeScript": {
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
+      "language_servers": [
+        "vtsls",
+        "effect-tsgo",
+        "oxlint",
+        "oxfmt",
+        "tailwindcss-language-server"
+      ],
       "formatter": {
         "language_server": {
-          "name": "biome"
+          "name": "oxfmt"
         }
       }
     }

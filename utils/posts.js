@@ -1,11 +1,15 @@
 import fs from "node:fs";
 import path from "node:path";
+
 import matter from "gray-matter";
 import { remark } from "remark";
-import html from "remark-html";
+import remarkRehype from "remark-rehype";
 
-const postsDirectory = path.join(process.cwd(), "/data/postsData");
-const REGEX_STRING_ENDING_MD = /\.md$/;
+const postsDirectory = path.join(process.cwd(), "/data/posts");
+
+// Matches a trailing Markdown file extension.
+// Example: "post.md" becomes "post" after replacement.
+const markdownFileExtensionPattern = /\.md$/;
 
 export function getSortedPostsData() {
   // Get file names under /posts as an array
@@ -14,11 +18,11 @@ export function getSortedPostsData() {
   //Mapping the fileNames array into [{id, ...matterResult.data}, ... ]
   const allPostsData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
-    const id = fileName.replace(REGEX_STRING_ENDING_MD, "");
+    const id = fileName.replace(markdownFileExtensionPattern, "");
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileContents = fs.readFileSync(fullPath, "utf-8");
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
@@ -31,7 +35,7 @@ export function getSortedPostsData() {
   });
 
   // Final return is Sorted posts by date
-  return allPostsData.sort(({ date: a }, { date: b }) => {
+  return allPostsData.toSorted(({ date: a }, { date: b }) => {
     if (a < b) {
       return 1;
     }
@@ -60,7 +64,7 @@ export function getAllPostIds() {
   // ]
   return fileNames.map((fileName) => ({
     params: {
-      id: fileName.replace(REGEX_STRING_ENDING_MD, ""),
+      id: fileName.replace(markdownFileExtensionPattern, ""),
     },
   }));
 }
@@ -83,20 +87,19 @@ export function getAllPostIds() {
 export async function getPostData(id) {
   //
   const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileContents = fs.readFileSync(fullPath, "utf-8");
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
 
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  // Convert markdown into a syntax tree for React to render safely.
+  const processor = remark().use(remarkRehype);
+  const tree = processor.parse(matterResult.content);
+  const contentTree = await processor.run(tree);
 
-  // Combine the data with the id and contentHtml
+  // Combine the data with the id and content tree.
   return {
-    contentHtml,
+    contentTree,
     id,
     ...matterResult.data,
   };

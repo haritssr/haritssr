@@ -1,212 +1,314 @@
-// The way this data works is under topic is always one level deep of content, no second level and so on.
-// You can't using '-' in {name: 'Can't using '-' here'}, or the url will be like this '---'
-// The system will automatically adding '-' to space inside name
-// It is used in all experiments routes, for displaying and routing
-// Every pages should be .tsx extentions, if not, <source/> in <LayoutToExperiments/> won't work
+import type { Metadata } from "next";
 
-export const ExperimentsData = [
+interface ExperimentEntry {
+  readonly slug: string;
+  readonly title: string;
+}
+
+export interface ExperimentDomain {
+  readonly description: string;
+  readonly experiments: readonly ExperimentEntry[];
+  readonly id: number;
+  readonly logoSrc: string;
+  readonly slug: string;
+  readonly title: string;
+}
+
+export const ExperimentsData: readonly ExperimentDomain[] = [
   {
     description: "CSS library for styling websites",
-    id: 1,
-    links: [
-      "Position",
-      "Apple NavBar",
-      "Blurry",
-      "Floating Labels",
-      "Glowing Background",
-      "Grid",
-      "PlanetScale NavBar",
-      "Sidebar",
-      "YouTube Thumbnail",
-      "Newspaper",
-      "Centering Div",
-      "Columns",
-      "Tailwind vs Apple Color",
-      "Feedback",
+    experiments: [
+      { slug: "position", title: "Position" },
+      { slug: "apple-navbar", title: "Apple NavBar" },
+      { slug: "blurry", title: "Blurry" },
+      { slug: "floating-labels", title: "Floating Labels" },
+      { slug: "glowing-background", title: "Glowing Background" },
+      { slug: "grid", title: "Grid" },
+      { slug: "planetscale-navbar", title: "PlanetScale NavBar" },
+      { slug: "sidebar", title: "Sidebar" },
+      { slug: "youtube-thumbnail", title: "YouTube Thumbnail" },
+      { slug: "newspaper", title: "Newspaper" },
+      { slug: "centering-div", title: "Centering Div" },
+      { slug: "columns", title: "Columns" },
+      { slug: "tailwind-vs-apple-color", title: "Tailwind vs Apple Color" },
+      { slug: "feedback", title: "Feedback" },
     ],
+    id: 1,
     logoSrc: "/Icons/tailwindcss.jpg",
+    slug: "tailwind-css",
     title: "Tailwind CSS",
   },
   {
     description: "JavaScript library for building user interfaces",
-    id: 2,
-    links: [
-      "useState Todo List",
-      "useState Form",
-      "useState Object Form",
-      "useState Draggable Box",
-      "useState Reacting To Input",
-      "useEffect Title",
-      "useContext Dark Mode",
-      "useMemo 1",
-      "useImperativeHandle",
-      "useReducer Todo List",
-      "useReducer Todo List Immer",
-      "Submit Form",
-      "Generic Select",
-      "Searchable Product Data",
-      "Search Table",
-      "Search Books",
-      "Search Interpol",
-      "Functional Props",
-      "Edit Profile",
-      "forwardRefExample",
-      "Font Mixer",
-      "Counter",
-      "React Wrap Balancer",
-      "Modal Inside Modal",
-      "Confetti",
-      "Simple Search",
-      "Activity Demo",
+    experiments: [
+      { slug: "usestate-todo-list", title: "useState Todo List" },
+      { slug: "usestate-form", title: "useState Form" },
+      { slug: "usestate-object-form", title: "useState Object Form" },
+      { slug: "usestate-draggable-box", title: "useState Draggable Box" },
+      {
+        slug: "usestate-reacting-to-input",
+        title: "useState Reacting To Input",
+      },
+      { slug: "useeffect-title", title: "useEffect Title" },
+      { slug: "usecontext-dark-mode", title: "useContext Dark Mode" },
+      { slug: "usememo-1", title: "useMemo 1" },
+      { slug: "useimperativehandle", title: "useImperativeHandle" },
+      { slug: "usereducer-todo-list", title: "useReducer Todo List" },
+      {
+        slug: "usereducer-todo-list-immer",
+        title: "useReducer Todo List Immer",
+      },
+      {
+        slug: "react-use-reducer-july-2026",
+        title: "React useReducer July 2026",
+      },
+      { slug: "submit-form", title: "Submit Form" },
+      { slug: "generic-select", title: "Generic Select" },
+      {
+        slug: "searchable-product-data",
+        title: "Searchable Product Data",
+      },
+      { slug: "search-table", title: "Search Table" },
+      { slug: "search-books", title: "Search Books" },
+      { slug: "search-interpol", title: "Search Interpol" },
+      { slug: "functional-props", title: "Functional Props" },
+      { slug: "edit-profile", title: "Edit Profile" },
+      { slug: "font-mixer", title: "Font Mixer" },
+      { slug: "counter", title: "Counter" },
+      { slug: "react-wrap-balancer", title: "React Wrap Balancer" },
+      { slug: "modal-inside-modal", title: "Modal Inside Modal" },
+      { slug: "confetti", title: "Confetti" },
+      { slug: "simple-search", title: "Simple Search" },
+      { slug: "cmdk", title: "cmdk" },
+      { slug: "activity-demo", title: "Activity Demo" },
     ],
+    id: 2,
     logoSrc: "/Icons/react.jpg",
+    slug: "react",
     title: "React",
   },
   {
     description: "The React framework for the web",
-    id: 3,
-    links: [
-      "Router",
-      "SWR",
-      "Articles",
-      "Students",
-      "Posts",
-      "Next 13 Image Local",
-      "Next 13 Image Remote",
+    experiments: [
+      { slug: "router", title: "Router" },
+      { slug: "swr", title: "SWR" },
+      { slug: "articles", title: "Articles" },
+      { slug: "students", title: "Students" },
+      { slug: "posts", title: "Posts" },
+      { slug: "next-13-image-local", title: "Next 13 Image Local" },
+      { slug: "next-13-image-remote", title: "Next 13 Image Remote" },
     ],
+    id: 3,
     logoSrc: "/Icons/nextjs.jpg",
+    slug: "nextjs",
     title: "Nextjs",
   },
   {
     description: "Native built-in browser API utilities exploration",
-    id: 4,
-    links: [
-      "Clock",
-      "Number game",
-      "Inputs",
-      "Details",
-      "Select",
-      "Description List",
-      "Figure",
-      "Text Editing",
-      "YouTube Embed",
-      "Intersection Observer API",
-      "Scroll Title",
-      "Custom Scroll",
-      "Different CSS Styling",
+    experiments: [
+      { slug: "clock", title: "Clock" },
+      { slug: "number-game", title: "Number game" },
+      { slug: "inputs", title: "Inputs" },
+      { slug: "details", title: "Details" },
+      { slug: "select", title: "Select" },
+      { slug: "description-list", title: "Description List" },
+      { slug: "figure", title: "Figure" },
+      { slug: "text-editing", title: "Text Editing" },
+      { slug: "youtube-embed", title: "YouTube Embed" },
+      {
+        slug: "intersection-observer-api",
+        title: "Intersection Observer API",
+      },
+      { slug: "scroll-title", title: "Scroll Title" },
+      { slug: "custom-scroll", title: "Custom Scroll" },
+      { slug: "different-css-styling", title: "Different CSS Styling" },
     ],
+    id: 4,
     logoSrc: "/Icons/chrome.jpg",
+    slug: "browser",
     title: "Browser",
   },
   {
     description: "Data visualization using React.js",
+    experiments: [
+      { slug: "bar-chart", title: "Bar Chart" },
+      { slug: "pie-chart", title: "Pie Chart" },
+    ],
     id: 5,
-    links: ["Bar Chart", "Pie Chart"],
     logoSrc: "/Icons/VisX.jpg",
+    slug: "visx",
     title: "VisX",
   },
   {
     description: "A fully featured React component libray",
+    experiments: [{ slug: "carousel", title: "Carousel" }],
     id: 7,
-    links: ["Carousel"],
     logoSrc: "/Icons/mantine.jpg",
+    slug: "mantine",
     title: "Mantine",
   },
   {
     description: "Headless UI components by Tailwind CSS Team",
-    id: 8,
-    links: [
-      "Menu",
-      "Listbox",
-      "Switch",
-      "Disclosure",
-      "Dialog",
-      "Popover",
-      "Radio Group",
-      "Tabs",
+    experiments: [
+      { slug: "menu", title: "Menu" },
+      { slug: "listbox", title: "Listbox" },
+      { slug: "switch", title: "Switch" },
+      { slug: "disclosure", title: "Disclosure" },
+      { slug: "dialog", title: "Dialog" },
+      { slug: "popover", title: "Popover" },
+      { slug: "radio-group", title: "Radio Group" },
+      { slug: "tabs", title: "Tabs" },
     ],
+    id: 8,
     logoSrc: "/Icons/headlessui.jpg",
+    slug: "headless-ui",
     title: "Headless UI",
   },
   {
     description: "Headless UI for design system in React.js",
-    id: 9,
-    links: [
-      "Accordion",
-      "Alert Dialog",
-      "Checkbox",
-      "Collapsible",
-      "Dialog",
-      "Dropdown Menu",
-      "Hover Card",
-      "Popover",
-      "Radio Group",
-      "Scroll Area",
-      "Select",
-      "Slider",
-      "Switch",
-      "Toggle",
-      "Toggle Group",
-      "Toolbar",
-      "Tooltip",
-      "Toast",
-      "Tabs",
+    experiments: [
+      { slug: "accordion", title: "Accordion" },
+      { slug: "alert-dialog", title: "Alert Dialog" },
+      { slug: "checkbox", title: "Checkbox" },
+      { slug: "collapsible", title: "Collapsible" },
+      { slug: "dialog", title: "Dialog" },
+      { slug: "dropdown-menu", title: "Dropdown Menu" },
+      { slug: "hover-card", title: "Hover Card" },
+      { slug: "popover", title: "Popover" },
+      { slug: "radio-group", title: "Radio Group" },
+      { slug: "scroll-area", title: "Scroll Area" },
+      { slug: "select", title: "Select" },
+      { slug: "slider", title: "Slider" },
+      { slug: "switch", title: "Switch" },
+      { slug: "toggle", title: "Toggle" },
+      { slug: "toggle-group", title: "Toggle Group" },
+      { slug: "toolbar", title: "Toolbar" },
+      { slug: "tooltip", title: "Tooltip" },
+      { slug: "toast", title: "Toast" },
+      { slug: "tabs", title: "Tabs" },
     ],
+    id: 9,
     logoSrc: "/Icons/radixui.jpg",
+    slug: "radix-ui",
     title: "Radix UI",
   },
-
   {
     description: "Random user interfaces explorations",
-    id: 10,
-    links: [
-      "Notion NavBar",
-      "Pure",
-      "Times Table",
-      "Inline Maki",
-      "Task",
-      "Yearly Interest",
-      "Input List",
-      "Stopwatch",
+    experiments: [
+      { slug: "notion-navbar", title: "Notion NavBar" },
+      { slug: "times-table", title: "Times Table" },
+      { slug: "inline-maki", title: "Inline Maki" },
+      {
+        slug: "masalah-to-feature",
+        title: "Masalah Pelajar → HL Feature",
+      },
+      { slug: "task", title: "Task" },
+      { slug: "yearly-interest", title: "Yearly Interest" },
+      { slug: "input-list", title: "Input List" },
+      { slug: "stopwatch", title: "Stopwatch" },
+      { slug: "tools", title: "Tools" },
     ],
+    id: 10,
     logoSrc: "/Icons/radixui.jpg",
+    slug: "ui-explorations",
     title: "UI Explorations",
   },
   {
     description: "Haris Lab user interfaces design systems",
+    experiments: [
+      { slug: "global-modal", title: "Global Modal" },
+      { slug: "context-modal", title: "Context Modal" },
+      { slug: "side-bar", title: "Side Bar" },
+      { slug: "sidebar-hierarchy", title: "Sidebar Hierarchy" },
+    ],
     id: 11,
-    links: ["Global Modal", "Context Modal", "Side Bar", "Sidebar Hierarchy"],
     logoSrc: "/Icons/harislab.svg",
+    slug: "haris-lab",
     title: "Haris Lab",
   },
   {
     description: "A library of React Hooks, UI primitives, and more",
+    experiments: [{ slug: "calendar", title: "Calendar" }],
     id: 12,
-    links: ["Calendar"],
     logoSrc: "/Icons/react-aria.jpg",
+    slug: "react-aria",
     title: "React Aria",
   },
   {
     description: "The math typesetting library for the web",
+    experiments: [{ slug: "basic", title: "Basic" }],
     id: 13,
-    links: ["Basic"],
     logoSrc: "/Icons/KaTeX.jpg",
+    slug: "katex",
     title: "KaTeX",
   },
   {
     description: "Headless UI for building tables & datagrids",
+    experiments: [
+      { slug: "basic", title: "Basic" },
+      { slug: "column-group", title: "Column Group" },
+    ],
     id: 14,
-    links: ["Basic", "Column Group"],
     logoSrc: "/Icons/tanstack.jpg",
+    slug: "react-table",
     title: "React Table",
   },
   {
     description: "Asynchronous state management for TS/JS",
+    experiments: [{ slug: "basic", title: "Basic" }],
     id: 15,
-    links: ["Basic"],
     logoSrc: "/Icons/tanstack.jpg",
+    slug: "react-query",
     title: "React Query",
   },
 ];
 
-export type ExperimentsData = (typeof ExperimentsData)[0];
+export type ExperimentDomainData = ExperimentDomain;
+
+export function getExperimentDomain(slug: string): ExperimentDomain {
+  const domain = ExperimentsData.find((entry) => entry.slug === slug);
+
+  if (!domain) {
+    throw new Error(`Unknown experiment domain: ${slug}`);
+  }
+
+  return domain;
+}
+
+function getExperiment(
+  domainSlug: string,
+  experimentSlug: string
+): ExperimentEntry {
+  const domain = getExperimentDomain(domainSlug);
+  const experiment = domain.experiments.find(
+    (entry) => entry.slug === experimentSlug
+  );
+
+  if (!experiment) {
+    throw new Error(`Unknown experiment: ${domainSlug}/${experimentSlug}`);
+  }
+
+  return experiment;
+}
+
+export function getExperimentDomainMetadata(slug: string): Metadata {
+  const domain = getExperimentDomain(slug);
+
+  return {
+    description: `${domain.title} experiments and demos`,
+    title: `${domain.title} Experiments`,
+  };
+}
+
+export function getExperimentMetadata(
+  domainSlug: string,
+  experimentSlug: string
+): Metadata {
+  const domain = getExperimentDomain(domainSlug);
+  const experiment = getExperiment(domainSlug, experimentSlug);
+
+  return {
+    description: `${experiment.title} experiment in ${domain.title}`,
+    title: `${experiment.title} | ${domain.title} Experiments`,
+  };
+}

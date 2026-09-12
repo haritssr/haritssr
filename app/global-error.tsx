@@ -26,7 +26,7 @@ export default function GlobalError({
             </>
           }
           description={
-            error.digest
+            error.digest !== undefined && error.digest.length > 0
               ? `Error ID: ${error.digest}`
               : "An unexpected error occurred while rendering this page."
           }

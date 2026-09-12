@@ -1,5 +1,3 @@
-"use client";
-
 import type { ProjectsDataType } from "../../../data/ProjectsData";
 
 export default function LoadingFigma({
@@ -17,6 +15,7 @@ export default function LoadingFigma({
             allowFullScreen
             className="h-150 w-full"
             key={a}
+            sandbox="allow-scripts"
             src={a}
             title="figma"
           />

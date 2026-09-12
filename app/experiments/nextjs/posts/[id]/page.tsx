@@ -1,4 +1,9 @@
 import { format, parseISO } from "date-fns";
+import type { Root } from "hast";
+
+import MarkdownContent from "@/components/mdx";
+import PageTitle from "@/components/PageTitle";
+import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getAllPostIds, getPostData } from "@/utils/posts.js";
 
@@ -6,8 +11,7 @@ interface PostData {
   id: string;
   title: string;
   date: string;
-  contentHtml: string;
-  [key: string]: string;
+  contentTree: Root;
 }
 
 export default async function PostPage({
@@ -20,11 +24,15 @@ export default async function PostPage({
 
   return (
     <>
+      <PageTitle>{postData.title}</PageTitle>
       <SubTitle>
         <time dateTime={postData.date}>
           {format(parseISO(postData.date), "LLLL d, yyyy")}
         </time>
       </SubTitle>
+      <div className="mb-14">
+        <SourceCodeLink sourcePath="app/experiments/nextjs/posts/[id]" />
+      </div>
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia
@@ -34,11 +42,9 @@ export default async function PostPage({
           obcaecati ullam corrupti illum officia, nostrum reprehenderit aliquam
           veniam alias
         </div>
-        <div
-          className="col-span-3 rounded-md border border-zinc-300 p-2 sm:p-4"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: needed to render HTML from markdown
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-        />
+        <div className="col-span-3 rounded-md border border-zinc-300 p-2 sm:p-4">
+          <MarkdownContent tree={postData.contentTree} />
+        </div>
       </div>
     </>
   );

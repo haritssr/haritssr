@@ -1,0 +1,172 @@
+@import "tailwindcss";
+@plugin "@toolwind/corner-shape";
+@plugin "@tailwindcss/typography";
+
+@plugin "tailwindcss-radix" {
+  variantprefix: "rdx";
+}
+
+@plugin "@tailwindcss/forms" {
+  strategy: "class";
+}
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Semantic colors documented on /design */
+  --color-action: var(--color-blue-500);
+  --color-action-hover: color-mix(
+    in oklab,
+    var(--color-blue-500) 60%,
+    var(--color-blue-400) 40%
+  );
+  --color-success: #34c759;
+  --color-attention: #eab308;
+  --color-danger: #ef4444;
+  --color-information: #a855f7;
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(240 10% 3.9%);
+  --color-border: hsl(240 5.9% 90%);
+
+  --breakpoint-xs: 450px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+
+  --text-tiny: 0.9rem;
+
+  --z-90: 90;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: auto;
+    scroll-padding-top: 100px;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+  }
+
+  * {
+    box-sizing: border-box;
+    border-color: var(--color-border);
+  }
+}
+
+/* Native form focus styles */
+input[type="search"]:not(.form-control):focus,
+input[type="url"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:not(.form-control):focus,
+input[type="tel"]:focus {
+  --tw-ring-color: rgb(39 39 42);
+  --tw-ring-shadow: 0 0 0 1px var(--tw-ring-color);
+  outline: none;
+  box-shadow:
+    var(--tw-ring-shadow),
+    0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+input[type="time"]:focus,
+input[type="date"]:focus,
+input[type="week"]:focus,
+input[type="month"]:focus,
+select:focus {
+  outline: none;
+  border-color: rgb(59 130 246);
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 0.2);
+}
+
+@media (min-width: 640px) {
+  input[type="reset"],
+  input[type="submit"],
+  input[type="button"],
+  button[type="submit"] {
+    width: fit-content;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e4e4e7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a1a1aa;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
+}
+
+/* Hide scrollbar for scrollable elements */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  padding: 8px;
+  background-color: #d1d1d6;
+  border-radius: 6px;
+}
+
+.rocket {
+  display: inline-block;
+}
+
+.animateRocket {
+  animation-name: animate-rocket;
+  animation-duration: 5s;
+}
+
+@keyframes animate-rocket {
+  0% {
+    transform: scale(1) rotate(10deg);
+  }
+
+  5% {
+    transform: scale(1.25) rotate(-15deg);
+  }
+
+  10% {
+    transform: scale(1.5) rotate(5deg);
+  }
+
+  15% {
+    transform: scale(1.75) rotate(-10deg);
+  }
+
+  20% {
+    transform: scale(2) rotate(0deg);
+  }
+
+  100% {
+    transform: scale(20) translate3d(100vw, -100vh, 0) rotate(0deg);
+  }
+}

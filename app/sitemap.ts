@@ -1,31 +1,68 @@
-// only for example
-
 import type { MetadataRoute } from "next";
 
-const EXTERNAL_DATA_URL = "https://jsonplaceholder.typicode.com/posts";
+import { SITE_URL } from "@/utils/site";
+import { allWritings } from "@/utils/writings";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = await fetch(EXTERNAL_DATA_URL);
-  const posts: Array<{ id: number }> = await response.json();
+import { ExperimentsData } from "../data/ExperimentsData";
+import {
+  NextjsArticlesData,
+  NextjsStudentsData,
+} from "../data/NextjsExperimentsData";
+import { ProjectsData } from "../data/ProjectsData";
+import { getAllPostIds } from "../utils/posts.js";
 
-  const postUrls = posts.map((post) => ({
-    url: `https://your-domain.com/posts/${post.id}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
+const whitespaceSequencePattern = /\s+/g;
 
-  return [
-    {
-      url: "https://your-domain.com",
-      lastModified: new Date(),
-      priority: 1,
-    },
-    {
-      url: "https://your-domain.com/guide",
-      lastModified: new Date(),
-      priority: 0.9,
-    },
-    ...postUrls,
-  ];
+const staticRoutes = [
+  "/",
+  "/writing",
+  "/experiments",
+  "/projects",
+  "/design",
+  "/experiments/ui-explorations/task/architecture",
+  "/experiments/ui-explorations/task/history",
+  "/experiments/ui-explorations/task/statistics",
+];
+
+const experimentRoutes = ExperimentsData.flatMap((domain) => {
+  const routes = domain.experiments.map(
+    (experiment) => `/experiments/${domain.slug}/${experiment.slug}`
+  );
+
+  return [`/experiments/${domain.slug}`, ...routes];
+});
+
+const localPostRoutes = getAllPostIds().map(
+  ({ params }) => `/experiments/nextjs/posts/${params.id}`
+);
+
+const articleRoutes = NextjsArticlesData.map(
+  (article) => `/experiments/nextjs/articles/${article.id}`
+);
+
+const studentRoutes = NextjsStudentsData.map(
+  (student) => `/experiments/nextjs/students/${student.id}`
+);
+
+const routeUrls = [
+  ...new Set([
+    ...staticRoutes,
+    ...experimentRoutes,
+    ...localPostRoutes,
+    ...articleRoutes,
+    ...studentRoutes,
+    ...ProjectsData.map(
+      (project) =>
+        `/projects/${project.project_name.toLowerCase().replace(whitespaceSequencePattern, "-")}`
+    ),
+  ]),
+].map((route) => ({ url: `${SITE_URL}${route}` }));
+
+const writingUrls = allWritings.map((writing) => ({
+  lastModified: new Date(writing.publishedAt),
+  url: `${SITE_URL}/writing/${writing.slug}`,
+}));
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [...routeUrls, ...writingUrls];
 }

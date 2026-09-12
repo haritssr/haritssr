@@ -24,9 +24,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# contentlayer & content-collections
-.content-collections
-
 # local sqlite storage
 .data/
 .data-haritssr/

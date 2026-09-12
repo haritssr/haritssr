@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import TopBar from "@/components/TopBar";
 
 function useIsNotAtTop() {
@@ -14,7 +15,9 @@ function useIsNotAtTop() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return isNotAtTop;

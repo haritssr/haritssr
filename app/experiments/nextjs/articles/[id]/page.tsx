@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-}
+import PageTitle from "@/components/PageTitle";
+import SourceCodeLink from "@/components/SourceCodeLink";
+import {
+  getNextjsArticle,
+  NextjsArticlesData,
+} from "@/data/NextjsExperimentsData";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -12,41 +14,38 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const post: Post = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}`,
-    { cache: "force-cache" }
-  ).then((response) => response.json());
+  const article = getNextjsArticle(id);
 
-  return {
-    title: post.title,
-    description: post.title,
-  };
+  return article
+    ? {
+        title: article.title,
+        description: article.title,
+      }
+    : {};
 }
 
 export default async function ArticlePage({ params }: Props) {
   const { id } = await params;
-  const post: Post = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}`,
-    { cache: "force-cache" }
-  ).then((response) => response.json());
+  const article = getNextjsArticle(id);
+
+  if (!article) {
+    notFound();
+  }
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
-      <div className="mt-10">
-        <div className="text-action">Article {post.id}</div>
-        <h1 className="font-bold text-3xl text-zinc-800">{post.title}</h1>
-        <div className="mt-5 text-zinc-600">{post.body}</div>
+      <PageTitle>{article.title}</PageTitle>
+      <div className="mb-14">
+        <SourceCodeLink sourcePath="app/experiments/nextjs/articles/[id]" />
       </div>
+      <div className="text-action">Article {article.id}</div>
+      <div className="mt-5 text-zinc-600">{article.body}</div>
     </div>
   );
 }
 
 export async function generateStaticParams() {
-  const posts: Post[] = await fetch(
-    "https://jsonplaceholder.typicode.com/posts/?_limit=20"
-  ).then((response) => response.json());
-
-  return posts.map((post) => ({
-    id: post.id.toString(),
+  return NextjsArticlesData.map((article) => ({
+    id: article.id.toString(),
   }));
 }

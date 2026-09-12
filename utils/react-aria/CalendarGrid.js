@@ -1,8 +1,11 @@
 import { endOfMonth, getWeeksInMonth } from "@internationalized/date";
 import { useCalendarGrid, useLocale } from "react-aria";
+
 import { CalendarCell } from "./CalendarCell";
 
-export function CalendarGrid({ state, offset = {} }) {
+const EMPTY_OFFSET = {};
+
+export function CalendarGrid({ state, offset = EMPTY_OFFSET }) {
   const { locale } = useLocale();
   const startDate = state.visibleRange.start.add(offset);
   const endDate = endOfMonth(startDate);
@@ -27,7 +30,7 @@ export function CalendarGrid({ state, offset = {} }) {
         </tr>
       </thead>
       <tbody>
-        {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
+        {Array.from({ length: weeksInMonth }, (_, weekIndex) => (
           <tr key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex, startDate)
@@ -40,7 +43,7 @@ export function CalendarGrid({ state, offset = {} }) {
                     state={state}
                   />
                 ) : (
-                  <td key={date} />
+                  <td aria-hidden="true" key={date} />
                 )
               )}
           </tr>

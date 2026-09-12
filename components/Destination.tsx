@@ -16,15 +16,12 @@ export default function Destination({ link }: { link: string }) {
   } else if (CurrentPageBaseRoute === link) {
     color = "text-action";
   } else {
-    color = "text-zinc-800 hover:text-action";
+    color = "text-zinc-800 hover:text-zinc-500";
   }
 
   return (
     <li>
-      <Link
-        className={`${color}`}
-        href={`${link === "pure" ? "/pure" : `/${link}`}`}
-      >
+      <Link className={color} href={`/${link}`}>
         {capitalizeFirstLetter(link)}
       </Link>
     </li>

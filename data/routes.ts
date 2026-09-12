@@ -1,19 +1,13 @@
 // Static application pages backed by page.tsx files.
 const pageRoutes = [
   "/",
-  "/blog",
-  "/input-list",
+  "/writing",
   "/projects",
   "/experiments",
   "/experiments/nextjs/articles",
   "/experiments/nextjs/posts",
   "/experiments/nextjs/students",
-  "/pure",
-  "/task",
-  "/task/architecture",
-  "/task/history",
-  "/task/statistics",
-  "/times-table",
+  "/design",
 ];
 
 // Experiment domain landing pages.
@@ -140,10 +134,17 @@ const experimentRoutes = [
   "/experiments/tailwind-css/youtube-thumbnail",
 
   "/experiments/ui-explorations/inline-maki",
+  "/experiments/ui-explorations/input-list",
+  "/experiments/ui-explorations/masalah-to-feature",
   "/experiments/ui-explorations/notion-navbar",
-  "/experiments/ui-explorations/pure",
+  "/experiments/ui-explorations/task",
+  "/experiments/ui-explorations/task/architecture",
+  "/experiments/ui-explorations/task/history",
+  "/experiments/ui-explorations/task/statistics",
   "/experiments/ui-explorations/times-table",
+  "/experiments/ui-explorations/stopwatch",
   "/experiments/ui-explorations/yearly-interest",
+  "/experiments/ui-explorations/tools",
 
   "/experiments/visx/bar-chart",
   "/experiments/visx/pie-chart",
@@ -153,16 +154,25 @@ const experimentRoutes = [
 ];
 
 // Combined unique route list used as the source corpus for search.
-const allRoutes = Array.from(
-  new Set([...pageRoutes, ...experimentDomainRoutes, ...experimentRoutes])
-);
+const allRoutes = [
+  ...new Set([...pageRoutes, ...experimentDomainRoutes, ...experimentRoutes]),
+];
 
 // Human-friendly title overrides for routes that need custom labels.
 const routeTitleOverrides: Record<string, string> = {
   "/": "Home",
-  "/pure": "Pure",
-  "/times-table": "Times Table",
+  "/design": "Design",
+  "/experiments/ui-explorations/input-list": "Input List",
+  "/experiments/ui-explorations/times-table": "Times Table",
 };
+
+// Matches route separators that should become spaces.
+// Example: "foo-bar" becomes "foo bar" after replacement.
+const routeSeparatorPattern = /[-_/]/g;
+
+// Matches runs of whitespace so normalized text contains single spaces.
+// Example: "foo  bar" becomes "foo bar".
+const whitespaceSequencePattern = /\s+/g;
 
 export interface RouteDoc {
   id: string;
@@ -173,7 +183,11 @@ export interface RouteDoc {
 
 // Normalizes any route or query text into a lowercase, space-separated form.
 function normalizeText(value: string): string {
-  return value.toLowerCase().replace(/[-_/]/g, " ").replace(/\s+/g, " ").trim();
+  return value
+    .toLowerCase()
+    .replace(routeSeparatorPattern, " ")
+    .replace(whitespaceSequencePattern, " ")
+    .trim();
 }
 
 // Converts normalized words into display-friendly title case.
@@ -187,13 +201,14 @@ function toTitleCase(value: string): string {
 
 // Resolves the display title for a route using overrides and fallback formatting.
 function getRouteTitle(route: string): string {
-  if (routeTitleOverrides[route]) {
-    return routeTitleOverrides[route];
+  const override = routeTitleOverrides[route];
+  if (override !== undefined) {
+    return override;
   }
 
   // Cached normalized route string for empty-route handling and title generation.
   const normalized = normalizeText(route);
-  if (!normalized) {
+  if (normalized.length === 0) {
     return "Home";
   }
 
@@ -202,7 +217,7 @@ function getRouteTitle(route: string): string {
 
 // Tokenizes text into unique searchable words.
 function tokenize(value: string): string[] {
-  return Array.from(new Set(normalizeText(value).split(" ").filter(Boolean)));
+  return [...new Set(normalizeText(value).split(" ").filter(Boolean))];
 }
 
 // Searchable route documents with derived titles and tokens.
@@ -221,20 +236,17 @@ const routeDocs: RouteDoc[] = allRoutes.map((route) => {
 });
 
 // Inverted index mapping each token to matching route IDs.
-const routeTokenIndex = routeDocs.reduce<Record<string, string[]>>(
-  (acc, doc) => {
-    for (const token of doc.tokens) {
-      if (!acc[token]) {
-        acc[token] = [];
-      }
-
-      acc[token].push(doc.id);
+const routeTokenIndex: Record<string, string[]> = {};
+for (const doc of routeDocs) {
+  for (const token of doc.tokens) {
+    const matchingRoutes = routeTokenIndex[token];
+    if (matchingRoutes === undefined) {
+      routeTokenIndex[token] = [doc.id];
+    } else {
+      matchingRoutes.push(doc.id);
     }
-
-    return acc;
-  },
-  {}
-);
+  }
+}
 
 // Searches routes by query tokens and returns ranked route documents.
 export function searchRoutes(query: string, limit = 20): RouteDoc[] {
@@ -249,20 +261,20 @@ export function searchRoutes(query: string, limit = 20): RouteDoc[] {
 
   for (const token of queryTokens) {
     // Candidate routes matching the current token.
-    const matchedRoutes = routeTokenIndex[token] || [];
+    const matchedRoutes = routeTokenIndex[token] ?? [];
 
     for (const route of matchedRoutes) {
       // Previous accumulated score for this route.
-      const prevScore = scored.get(route) || 0;
+      const prevScore = scored.get(route) ?? 0;
       scored.set(route, prevScore + 1);
     }
   }
 
   return routeDocs
     .filter((doc) => scored.has(doc.id))
-    .sort((a, b) => {
+    .toSorted((a, b) => {
       // Primary ranking by token match count.
-      const scoreDelta = (scored.get(b.id) || 0) - (scored.get(a.id) || 0);
+      const scoreDelta = (scored.get(b.id) ?? 0) - (scored.get(a.id) ?? 0);
       if (scoreDelta !== 0) {
         return scoreDelta;
       }

@@ -11,7 +11,7 @@ export default function InternalLinkWithoutArrow({
 }) {
   return (
     <Link
-      className={`cursor-pointer text-action hover:underline ${block ? "block" : "inline"}`}
+      className={`text-action cursor-pointer hover:underline ${block === true ? "block" : "inline"}`}
       href={href}
       prefetch={false}
     >

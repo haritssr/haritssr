@@ -1,8 +1,8 @@
-"use client";
-
 import Image from "next/image";
 
-const URL_REGEX = /^https?:\/\/(www\.)?/;
+// Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
+// Example: "https://www.example.com" becomes "example.com" after replacement.
+const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
 
 function boldharitssr(strippedURL: string, haritssr = "haritssr") {
   return strippedURL
@@ -20,18 +20,14 @@ function boldharitssr(strippedURL: string, haritssr = "haritssr") {
 }
 
 function renderContact(each: { link: string; icon: string }) {
-  /*
-  URL_REGEX matches any string that begins with one of these four prefixes:
-    http://
-    https://
-    http://www.
-    https://www.
-  */
-
   if (each.link.startsWith("http")) {
+    const displayedLink = each.link.includes("x.com/intent/follow")
+      ? "x.com/haritssr"
+      : each.link.replace(urlPrefixPattern, "");
+
     return (
       <a
-        className="corner-squircle flex items-center space-x-2 rounded-xl border border-zinc-300 px-2 py-1.5 sm:mr-1.5 sm:py-1 sm:hover:bg-zinc-100"
+        className="focus-visible:outline-action flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
         href={
           each.link === "https://www.haritssr.com"
             ? "https://haritssr.vercel.app"
@@ -42,16 +38,14 @@ function renderContact(each: { link: string; icon: string }) {
         title={each.link}
       >
         <Image
-          alt={each.link}
-          className="h-4 w-4"
+          alt=""
+          aria-hidden="true"
+          className={`h-4 w-4 object-contain ${each.icon === "/Icons/x.png" ? "rounded" : ""}`}
           height={20}
           src={each.icon}
-          title={each.link}
           width={20}
         />
-        <span className="text-zinc-500">
-          {boldharitssr(each.link.replace(URL_REGEX, ""))}
-        </span>
+        <span className="text-zinc-500">{boldharitssr(displayedLink)}</span>
       </a>
     );
   }
@@ -59,16 +53,16 @@ function renderContact(each: { link: string; icon: string }) {
   if (each.link.includes("@")) {
     return (
       <a
-        className="flex items-center space-x-2 rounded border border-zinc-300 px-2 py-1.5 sm:mr-1.5 sm:py-1 sm:hover:bg-zinc-100"
+        className="focus-visible:outline-action flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
         href={`mailto:${each.link}`}
         title={each.link}
       >
         <Image
-          alt={each.link}
-          className="h-4 w-4"
+          alt=""
+          aria-hidden="true"
+          className="h-4 w-4 object-contain"
           height={20}
           src={each.icon}
-          title={each.link}
           width={20}
         />
         <span className="text-zinc-500">{boldharitssr(each.link)}</span>
@@ -81,9 +75,10 @@ function renderContact(each: { link: string; icon: string }) {
 
 export default function ContactList() {
   return (
-    <div className="justify-center self-center">
-      <ul className="space-y-4 md:space-y-1.5">
-        {ContactData.points.map((each) => (
+    <div className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 px-4 pt-3 pb-2.5">
+      <p className="font-semibold text-zinc-800">Contacts</p>
+      <ul className="space-y-2.5">
+        {data.points.map((each) => (
           <li className="cursor-pointer" key={each.link}>
             {renderContact(each)}
           </li>
@@ -93,21 +88,26 @@ export default function ContactList() {
   );
 }
 
-const ContactData = {
+const data = {
   description: "My preferable communication channels.",
   points: [
-    {
-      icon: "/Icons/linkedin.jpg",
-      link: "https://www.linkedin.com/in/haritssr",
-      name: "LinkedIn",
-    },
+    // {
+    //   icon: "/Icons/linkedin.jpg",
+    //   link: "https://www.linkedin.com/in/haritssr",
+    //   name: "LinkedIn",
+    // },
     { icon: "/Icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
-    { icon: "/Icons/x.png", link: "https://www.x.com/haritssr", name: "X" },
     {
       icon: "/Icons/github.jpg",
       link: "https://www.github.com/haritssr",
       name: "GitHub",
     },
+    {
+      icon: "/Icons/x.png",
+      link: "https://x.com/intent/follow?screen_name=haritssr",
+      name: "X",
+    },
+
     {
       icon: "/Icons/haritssr.svg",
       link: "https://www.haritssr.com",
