@@ -65,9 +65,18 @@ export default function RootLayout({
   return (
     <html className={inter.className} lang="en">
       <body>
+        <a
+          className="focus:bg-action sr-only z-2147483647 rounded-md px-3 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          href="#main-content"
+        >
+          Skip to content
+        </a>
         <ServiceWorkerRegistration />
         <TopBarBorderOnScroll />
-        <main className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
+        <main
+          className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0"
+          id="main-content"
+        >
           {children}
         </main>
         <Breadcrumbs />

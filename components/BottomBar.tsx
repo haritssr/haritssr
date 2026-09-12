@@ -11,7 +11,7 @@ export default function BottomBar({
 } = {}) {
   return (
     <nav
-      aria-label="Primary navigation"
+      aria-label="Mobile navigation"
       className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} p-3`}
     >
       <div className="corner-squircle w-full rounded-xl border border-zinc-200 bg-white/80 p-1.25 shadow-lg saturate-150 backdrop-blur-lg">

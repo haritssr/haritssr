@@ -64,6 +64,11 @@
     box-sizing: border-box;
     border-color: var(--color-border);
   }
+
+  a,
+  button {
+    touch-action: manipulation;
+  }
 }
 
 /* Native form focus styles */
@@ -168,5 +173,16 @@ select:focus {
 
   100% {
     transform: scale(20) translate3d(100vw, -100vh, 0) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

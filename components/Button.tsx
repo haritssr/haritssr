@@ -44,7 +44,7 @@ const Button = function Button({
       type={type}
     >
       {loading ? (
-        <span>Loading...</span>
+        <span>Loading…</span>
       ) : (
         <span className="inline-flex items-center gap-1.5">{children}</span>
       )}

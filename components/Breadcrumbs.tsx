@@ -21,7 +21,7 @@ export default function Breadcrumbs() {
   const segments = pathname.split("/").filter(Boolean);
 
   return (
-    <nav className="mt-52">
+    <nav aria-label="Breadcrumb" className="mt-52">
       <div className="xl-px-0 mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
         <div className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
           <Link className="text-zinc-500 hover:text-zinc-800" href="/">
