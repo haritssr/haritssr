@@ -10,14 +10,40 @@ import { ProjectsData } from "../../../data/ProjectsData";
 import type { ProjectsDataType } from "../../../data/ProjectsData";
 import LoadingFigma from "./LoadingFigma";
 
-export const metadata: Metadata = {
-  title: "Experience",
-  description: "something",
-};
+const whitespaceSequencePattern = /\s+/gu;
+
+function getProjectSlug(projectName: string) {
+  return projectName
+    .toLocaleLowerCase("en-US")
+    .replace(whitespaceSequencePattern, "-");
+}
+
+function getProject(projectSlug: string) {
+  return ProjectsData.find(
+    ({ project_name: projectName }) =>
+      getProjectSlug(projectName) === projectSlug
+  );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ project: string }>;
+}): Promise<Metadata> {
+  const { project: projectSlug } = await params;
+  const project = getProject(projectSlug);
+
+  return project
+    ? {
+        description: project.about_client.short_about,
+        title: project.project_name,
+      }
+    : {};
+}
 
 export function generateStaticParams() {
   return ProjectsData.map(({ project_name }) => ({
-    project: project_name.toLowerCase().split(" ").join("-"),
+    project: getProjectSlug(project_name),
   }));
 }
 
@@ -27,9 +53,7 @@ export default async function ExperiencesPage({
   params: Promise<{ project: string }>;
 }) {
   const { project } = await params;
-  const FoundProjectObject: ProjectsDataType | undefined = ProjectsData.find(
-    (e) => e.project_name.toLowerCase().split(" ").join("-") === project
-  );
+  const FoundProjectObject: ProjectsDataType | undefined = getProject(project);
 
   if (!FoundProjectObject) {
     notFound();
@@ -164,3 +188,5 @@ export default async function ExperiencesPage({
     </div>
   );
 }
+
+export const dynamicParams = false;
