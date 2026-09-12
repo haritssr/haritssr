@@ -123,7 +123,7 @@ function getNodePath(source: NodePosition, target: NodePosition) {
 }
 
 function getSelectionLabel(selectedNode: NodeId | null) {
-  if (!selectedNode) {
+  if (selectedNode === null) {
     return "Nothing selected";
   }
   return selectedNode.startsWith("problem:")
@@ -142,14 +142,16 @@ function SelectionDetails({
   onSelect: (nodeId: NodeId) => void;
   selectedNode: NodeId | null;
 }) {
-  const selectedProblem = selectedNode?.startsWith("problem:")
-    ? mappingById.get(selectedNode.slice("problem:".length))
-    : undefined;
-  const selectedFeature = selectedNode?.startsWith("feature:")
-    ? featureById.get(selectedNode)
-    : undefined;
+  const selectedProblem =
+    selectedNode !== null && selectedNode.startsWith("problem:")
+      ? mappingById.get(selectedNode.slice("problem:".length))
+      : undefined;
+  const selectedFeature =
+    selectedNode !== null && selectedNode.startsWith("feature:")
+      ? featureById.get(selectedNode)
+      : undefined;
 
-  if (selectedProblem) {
+  if (selectedProblem !== undefined) {
     return (
       <div className="space-y-5">
         <div>
@@ -202,7 +204,7 @@ function SelectionDetails({
     );
   }
 
-  if (selectedFeature) {
+  if (selectedFeature !== undefined) {
     const relatedProblems = [...mappingById.values()].filter((mapping) =>
       mapping.features.includes(selectedFeature.name)
     );
@@ -419,35 +421,39 @@ export default function GraphView() {
     [visibleFeatureIds, visibleMappings]
   );
 
-  const selectedProblemId = selectedNode?.startsWith("problem:")
-    ? selectedNode.slice("problem:".length)
-    : null;
-  const selectedFeatureName = selectedNode?.startsWith("feature:")
-    ? selectedNode.slice("feature:".length)
-    : null;
+  const selectedProblemId =
+    selectedNode !== null && selectedNode.startsWith("problem:")
+      ? selectedNode.slice("problem:".length)
+      : null;
+  const selectedFeatureName =
+    selectedNode !== null && selectedNode.startsWith("feature:")
+      ? selectedNode.slice("feature:".length)
+      : null;
 
   function isProblemActive(mapping: ProblemFeatureMapping) {
-    if (!selectedNode) {
+    if (selectedNode === null) {
       return true;
     }
-    if (selectedProblemId) {
+    if (selectedProblemId !== null) {
       return selectedProblemId === mapping.id;
     }
-    return Boolean(
-      selectedFeatureName && mapping.features.includes(selectedFeatureName)
+    return (
+      selectedFeatureName !== null &&
+      mapping.features.includes(selectedFeatureName)
     );
   }
 
   function isFeatureActive(feature: FeatureNode) {
-    if (!selectedNode) {
+    if (selectedNode === null) {
       return true;
     }
-    if (selectedFeatureName) {
+    if (selectedFeatureName !== null) {
       return selectedFeatureName === feature.name;
     }
-    return Boolean(
-      selectedProblemId &&
-      mappingById.get(selectedProblemId)?.features.includes(feature.name)
+    return (
+      selectedProblemId !== null &&
+      mappingById.get(selectedProblemId)?.features.includes(feature.name) ===
+        true
     );
   }
 
@@ -455,7 +461,7 @@ export default function GraphView() {
     mapping: ProblemFeatureMapping,
     featureName: string
   ) {
-    if (!selectedNode) {
+    if (selectedNode === null) {
       return true;
     }
     return (
@@ -555,7 +561,7 @@ export default function GraphView() {
           </span>{" "}
           connections
         </p>
-        {selectedNode ? (
+        {selectedNode !== null && (
           <button
             className="text-action hover:text-action-hover hover:underline"
             onClick={() => {
@@ -565,7 +571,7 @@ export default function GraphView() {
           >
             Clear selection
           </button>
-        ) : null}
+        )}
       </div>
 
       <div className={explorerClassName}>
