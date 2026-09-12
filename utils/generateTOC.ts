@@ -1,10 +1,54 @@
 import fs from "node:fs";
 
 import { Effect } from "effect";
+import GithubSlugger from "github-slugger";
+import { remark } from "remark";
+import remarkFrontmatter from "remark-frontmatter";
 
-// Captures Markdown heading markers and title text.
-// Example: "## Intro" becomes ["## Intro", "##", "Intro"].
-const markdownHeadingPattern = /^(?<markers>#+)\s+(?<title>.+)$/u;
+export interface TableOfContentsItem {
+  id: string;
+  title: string;
+}
+
+interface MarkdownNode {
+  alt?: unknown;
+  children?: MarkdownNode[];
+  type?: unknown;
+  value?: unknown;
+}
+
+const markdownProcessor = remark().use(remarkFrontmatter);
+
+function getNodeText(node: MarkdownNode): string {
+  if (typeof node.value === "string") {
+    return node.value;
+  }
+
+  if (node.type === "image" && typeof node.alt === "string") {
+    return node.alt;
+  }
+
+  return node.children?.map(getNodeText).join("") ?? "";
+}
+
+function parseTableOfContents(mdxContent: string): TableOfContentsItem[] {
+  const tree = markdownProcessor.parse(mdxContent) as MarkdownNode;
+  const slugger = new GithubSlugger();
+  const items: TableOfContentsItem[] = [];
+
+  for (const node of tree.children ?? []) {
+    if (node.type !== "heading") {
+      continue;
+    }
+
+    const title = getNodeText(node).trim();
+    if (title.length > 0) {
+      items.push({ id: slugger.slug(title), title });
+    }
+  }
+
+  return items;
+}
 
 const readMdxFile = Effect.fn("readMdxFile")((mdxFilePath: string) =>
   Effect.try({
@@ -16,28 +60,12 @@ const readMdxFile = Effect.fn("readMdxFile")((mdxFilePath: string) =>
   })
 );
 
-export default function generateTOC(mdxFilePath: string): string[] {
+export default function generateTOC(
+  mdxFilePath: string
+): TableOfContentsItem[] {
   return Effect.runSync(
     readMdxFile(mdxFilePath).pipe(
-      Effect.map((mdxContent) => {
-        const titles: string[] = [];
-
-        for (const line of mdxContent.split("\n")) {
-          const match = markdownHeadingPattern.exec(line);
-          if (!match) {
-            continue;
-          }
-
-          const title = match.groups?.title;
-          if (title === undefined) {
-            continue;
-          }
-
-          titles.push(title.trim().toLowerCase());
-        }
-
-        return titles;
-      }),
+      Effect.map(parseTableOfContents),
       Effect.catch((error) =>
         Effect.sync(() => {
           console.error(error.message);

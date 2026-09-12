@@ -44,7 +44,7 @@ export default async function ArticlePage({ params }: Props) {
   );
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return NextjsArticlesData.map((article) => ({
     id: article.id.toString(),
   }));

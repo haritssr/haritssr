@@ -63,34 +63,15 @@ export async function generateMetadata({
   };
 }
 
+const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
+  day: "numeric",
+  month: "long",
+  timeZone: "UTC",
+  year: "numeric",
+});
+
 function formatDate(date: string) {
-  const currentDate = new Date();
-  const [year, month, day] = date.split("-").map(Number);
-  const targetDate = new Date(year, month - 1, day);
-
-  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  const daysAgo = currentDate.getDate() - targetDate.getDate();
-
-  let formattedDate = "";
-
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`;
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`;
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
-  } else {
-    formattedDate = "Today";
-  }
-
-  const fullDate = targetDate.toLocaleString("en-us", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  return `${fullDate} (${formattedDate})`;
+  return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
 }
 
 export default async function Writing({
@@ -120,7 +101,9 @@ export default async function Writing({
           {writing.title}
         </h1>
         <div className="mt-2 mb-8 flex items-center text-sm">
-          <p>{formatDate(writing.publishedAt)}</p>
+          <time dateTime={writing.publishedAt}>
+            {formatDate(writing.publishedAt)}
+          </time>
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
           <p>{writing.wordCount} Words</p>
           &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;

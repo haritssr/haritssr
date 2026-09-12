@@ -1,18 +1,11 @@
 import { format, parseISO } from "date-fns";
-import type { Root } from "hast";
+import { notFound } from "next/navigation";
 
 import MarkdownContent from "@/components/mdx";
 import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
-import { getAllPostIds, getPostData } from "@/utils/posts.js";
-
-interface PostData {
-  id: string;
-  title: string;
-  date: string;
-  contentTree: Root;
-}
+import { getAllPostIds, getPostData } from "@/utils/posts";
 
 export default async function PostPage({
   params,
@@ -20,7 +13,11 @@ export default async function PostPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const postData = (await getPostData(id)) as PostData;
+  const postData = await getPostData(id);
+
+  if (!postData) {
+    notFound();
+  }
 
   return (
     <>
@@ -54,3 +51,5 @@ export function generateStaticParams() {
   const paths = getAllPostIds();
   return paths.map((path) => ({ id: path.params.id }));
 }
+
+export const dynamicParams = false;

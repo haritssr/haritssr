@@ -60,7 +60,7 @@ export default async function StudentPage({ params }: Props) {
   );
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return NextjsStudentsData.map((student) => ({
     id: student.id.toString(),
   }));

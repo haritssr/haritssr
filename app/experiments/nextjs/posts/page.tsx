@@ -5,18 +5,12 @@ import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
-import { getSortedPostsData } from "@/utils/posts.js";
+import { getSortedPostsData } from "@/utils/posts";
 
 export const metadata: Metadata = getExperimentMetadata("nextjs", "posts");
 
-interface Post {
-  id: string;
-  date: string;
-  title: string;
-}
-
 export default function PostsPage() {
-  const allPostsData = getSortedPostsData() as Post[];
+  const allPostsData = getSortedPostsData();
 
   return (
     <>
@@ -26,7 +20,7 @@ export default function PostsPage() {
         <SourceCodeLink />
       </div>
       <ul className="space-y-5">
-        {allPostsData.map(({ id, date, title }: Post) => (
+        {allPostsData.map(({ id, date, title }) => (
           <li key={id}>
             <Link className="block" href={`/experiments/nextjs/posts/${id}`}>
               <div className="font-medium text-zinc-700 hover:text-zinc-800">

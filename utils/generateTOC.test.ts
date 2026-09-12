@@ -10,7 +10,11 @@ describe("generateTOC", () => {
   });
 
   test("extracts and normalizes Markdown headings", () => {
-    expect(generateTOC("data/writing/on-design-principles.mdx")).toEqual([
+    expect(
+      generateTOC("data/writing/on-design-principles.mdx").map(({ title }) =>
+        title.toLocaleLowerCase("en-US")
+      )
+    ).toEqual([
       "apps should provide",
       "everyone needs to..",
       "wayfinding system",
@@ -29,6 +33,19 @@ describe("generateTOC", () => {
       "challanges applying design principles",
       "notes",
     ]);
+  });
+
+  test("matches rehype-slug for formatted and punctuation-heavy headings", () => {
+    const learningItems = generateTOC("data/writing/on-learning.mdx");
+    expect(learningItems).toContainEqual({
+      id: "asynchronous-reading",
+      title: "Asynchronous Reading",
+    });
+
+    const decisionItems = generateTOC("data/writing/on-decision-making.mdx");
+    expect(decisionItems[1]?.id).toBe(
+      "2-two-choice-looks-50--50-take-the-path-that-is-more-difficult-and-painful-in-the-short-term"
+    );
   });
 
   test("returns an empty list when the file cannot be read", () => {
