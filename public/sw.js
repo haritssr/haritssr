@@ -1,5 +1,15 @@
-const CACHE_NAME = "haritssr-shell-v1";
+const CACHE_NAME = "haritssr-shell-v2";
 const OFFLINE_URL = "/";
+
+const canCacheResponse = (response) => {
+  const cacheControl = response.headers.get("Cache-Control") ?? "";
+  return (
+    response.ok &&
+    response.type === "basic" &&
+    !cacheControl.includes("no-store") &&
+    !cacheControl.includes("private")
+  );
+};
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -26,18 +36,22 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  if (event.request.mode !== "navigate") {
+  const requestUrl = new URL(event.request.url);
+  if (
+    event.request.mode !== "navigate" ||
+    requestUrl.origin !== self.location.origin ||
+    requestUrl.pathname.startsWith("/api/")
+  ) {
     return;
   }
 
   event.respondWith(
     fetch(event.request)
-      .then((response) => {
-        if (response.ok) {
+      .then(async (response) => {
+        if (canCacheResponse(response)) {
           const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(event.request, responseToCache);
         }
 
         return response;

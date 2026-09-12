@@ -13,8 +13,9 @@ for the architectural rationale.
   production.
 - `components/PWAInstallPrompt.tsx` exposes the browser's native install prompt
   when supported.
-- `public/sw.js` caches the app shell and previously visited navigations, with
-  the home page as an offline fallback.
+- `public/sw.js` caches the app shell and cacheable same-origin navigations,
+  with the home page as an offline fallback. It excludes API responses and
+  responses marked `private` or `no-store`.
 - `next.config.ts` prevents stale service-worker responses by setting no-cache
   headers for `/sw.js`.
 
