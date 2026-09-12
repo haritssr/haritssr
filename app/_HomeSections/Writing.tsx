@@ -9,7 +9,7 @@ export default function Writing() {
       id="writing"
       topic="Writing"
     >
-      <WritingGrid />
+      <WritingGrid mobileLimit={5} />
     </HomeSectionWrapper>
   );
 }

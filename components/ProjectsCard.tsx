@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface ProjectsCardType {
+  className?: string;
   href: string;
   title: string;
   description: string;
@@ -12,13 +13,16 @@ interface ProjectsCardType {
 }
 
 export default function ProjectsCard({
+  className,
   href,
   title,
   description,
   imgSrc,
 }: ProjectsCardType) {
   return (
-    <div className="group corner-squircle flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-300 selection:mx-auto">
+    <div
+      className={`group corner-squircle flex w-full flex-col justify-between overflow-hidden rounded-3xl border border-zinc-300 selection:mx-auto ${className ?? ""}`}
+    >
       {/* Header + Title + Explanation */}
       <section className="flex flex-col justify-between space-y-2 p-3">
         <div className="flex items-center space-x-2">

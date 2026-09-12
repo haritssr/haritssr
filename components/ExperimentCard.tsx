@@ -5,13 +5,15 @@ import Link from "next/link";
 import type { ExperimentDomainData } from "../data/ExperimentsData";
 
 export default function ExperimentCard({
+  className,
   experiment,
 }: {
+  className?: string;
   experiment: ExperimentDomainData;
 }) {
   return (
     <Link
-      className="group corner-squircle space-y-1 rounded-2xl border border-zinc-300 px-3 py-2.5 hover:bg-zinc-100/50"
+      className={`group corner-squircle space-y-1 rounded-2xl border border-zinc-300 px-3 py-2.5 hover:bg-zinc-100/50 ${className ?? ""}`}
       href={`/experiments/${experiment.slug}`}
       key={experiment.id}
     >
@@ -36,7 +38,9 @@ export default function ExperimentCard({
           <ChevronRightIcon className="h-4 w-4 stroke-2 text-zinc-500" />
         </div>
       </div>
-      <div className="text-zinc-500">{experiment.description}</div>
+      <div className="line-clamp-1 text-zinc-500 sm:line-clamp-none">
+        {experiment.description}
+      </div>
     </Link>
   );
 }

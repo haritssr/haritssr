@@ -2,17 +2,19 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export default function InternalLink({
+  className,
   children,
   href,
   lg,
 }: {
+  className?: string;
   children: string;
   href: string;
   lg?: boolean;
 }) {
   return (
     <Link
-      className={`group text-action hover:text-action-hover inline-flex w-fit cursor-pointer items-center justify-start py-0.5 ${lg === true ? "text-lg" : "text-normal"}`}
+      className={`group text-action hover:text-action-hover inline-flex w-fit cursor-pointer items-center justify-start py-0.5 ${lg === true ? "text-lg" : "text-normal"} ${className ?? ""}`}
       href={href}
       prefetch={false}
     >

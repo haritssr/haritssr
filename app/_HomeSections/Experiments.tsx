@@ -5,7 +5,7 @@ import HomeSectionWrapper from "./HomeSectionWrapper";
 export default function Experiments() {
   return (
     <HomeSectionWrapper id="experiments" topic="Experiments">
-      <ExperimentsGrid />
+      <ExperimentsGrid mobileLimit={4} />
     </HomeSectionWrapper>
   );
 }
