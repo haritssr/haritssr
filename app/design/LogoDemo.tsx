@@ -4,19 +4,19 @@ const LOGOS = [
   {
     alt: "haritssr.com logo",
     name: "Harits Syah",
-    src: "/Icons/haritssr.svg",
+    src: "/icons/haritssr.svg",
     url: "haritssr.com",
   },
   {
     alt: "Haris Lab logo",
     name: "Haris Lab",
-    src: "/Icons/harislab.svg",
+    src: "/icons/harislab.svg",
     url: "harislab.com",
   },
   {
     alt: "Haris Studio logo",
     name: "Haris Studio",
-    src: "/Icons/harisstudio.svg",
+    src: "/icons/harisstudio.svg",
     url: "harisstudio.com",
   },
 ] as const;

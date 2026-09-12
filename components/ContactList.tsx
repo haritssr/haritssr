@@ -40,7 +40,7 @@ function renderContact(each: { link: string; icon: string }) {
         <Image
           alt=""
           aria-hidden="true"
-          className={`h-4 w-4 object-contain ${each.icon === "/Icons/x.png" ? "rounded" : ""}`}
+          className={`h-4 w-4 object-contain ${each.icon === "/icons/x.png" ? "rounded" : ""}`}
           height={20}
           src={each.icon}
           width={20}
@@ -92,24 +92,24 @@ const data = {
   description: "My preferable communication channels.",
   points: [
     // {
-    //   icon: "/Icons/linkedin.jpg",
+    //   icon: "/icons/linkedin.jpg",
     //   link: "https://www.linkedin.com/in/haritssr",
     //   name: "LinkedIn",
     // },
-    { icon: "/Icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
+    { icon: "/icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
     {
-      icon: "/Icons/github.jpg",
+      icon: "/icons/github.jpg",
       link: "https://www.github.com/haritssr",
       name: "GitHub",
     },
     {
-      icon: "/Icons/x.png",
+      icon: "/icons/x.png",
       link: "https://x.com/intent/follow?screen_name=haritssr",
       name: "X",
     },
 
     {
-      icon: "/Icons/haritssr.svg",
+      icon: "/icons/haritssr.svg",
       link: "https://www.haritssr.com",
       name: "Website",
     },
