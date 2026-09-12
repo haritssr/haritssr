@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { isExperimentAvailable } from "@/utils/databaseExperiments";
 import { SITE_URL } from "@/utils/site";
 import { allWritings } from "@/utils/writings";
 
@@ -9,7 +10,7 @@ import {
   NextjsStudentsData,
 } from "../data/NextjsExperimentsData";
 import { ProjectsData } from "../data/ProjectsData";
-import { getAllPostIds } from "../utils/posts.js";
+import { getAllPostIds } from "../utils/posts";
 
 const whitespaceSequencePattern = /\s+/g;
 
@@ -19,15 +20,19 @@ const staticRoutes = [
   "/experiments",
   "/projects",
   "/design",
-  "/experiments/ui-explorations/task/architecture",
-  "/experiments/ui-explorations/task/history",
-  "/experiments/ui-explorations/task/statistics",
+  ...(process.env.NODE_ENV === "production"
+    ? []
+    : [
+        "/experiments/ui-explorations/task/architecture",
+        "/experiments/ui-explorations/task/history",
+        "/experiments/ui-explorations/task/statistics",
+      ]),
 ];
 
 const experimentRoutes = ExperimentsData.flatMap((domain) => {
-  const routes = domain.experiments.map(
-    (experiment) => `/experiments/${domain.slug}/${experiment.slug}`
-  );
+  const routes = domain.experiments
+    .filter((experiment) => isExperimentAvailable(domain.slug, experiment.slug))
+    .map((experiment) => `/experiments/${domain.slug}/${experiment.slug}`);
 
   return [`/experiments/${domain.slug}`, ...routes];
 });

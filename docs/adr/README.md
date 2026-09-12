@@ -24,3 +24,4 @@ rewriting the old record.
 - [0005 — Support an installable PWA with a small custom service worker](./0005-support-installable-pwa.md)
 - [0006 — Use Ultracite with Oxlint and Oxfmt for code quality](./0006-use-ultracite-and-oxlint-oxfmt-for-code-quality.md)
 - [0007 — Use Next.js MDX for writing content](./0007-use-nextjs-mdx-for-writing-content.md)
+- [0008 — Keep SQLite experiments local-only](./0008-keep-sqlite-experiments-local-only.md)

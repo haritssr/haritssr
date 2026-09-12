@@ -40,6 +40,17 @@ graph TD
   `experiment.db` or `task.db`. They log table names and sample rows using
   `bun:sqlite`.
 
+## Local database experiments
+
+The task and tools database experiments are available only in development.
+They store SQLite files in `.data-haritssr/` by default; set `TASK_DB_DIR` or
+`TOOLS_DB_DIR` to override that directory. Production builds omit these
+experiments from navigation and the sitemap, and their routes return 404.
+
+They must remain local-only until they have user authentication, authorization,
+rate limits, and durable production storage. See
+[ADR 0008](docs/adr/0008-keep-sqlite-experiments-local-only.md).
+
 ## Author
 
 Harits Syah

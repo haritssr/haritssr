@@ -83,16 +83,20 @@ const nextConfig: NextConfig = {
         permanent: true,
         source: "/masalah-to-feature",
       },
-      {
-        destination: "/experiments/ui-explorations/task/:path*",
-        permanent: true,
-        source: "/task/:path*",
-      },
-      {
-        destination: "/experiments/ui-explorations/tools",
-        permanent: true,
-        source: "/tools",
-      },
+      ...(process.env.NODE_ENV === "production"
+        ? []
+        : [
+            {
+              destination: "/experiments/ui-explorations/task/:path*",
+              permanent: true,
+              source: "/task/:path*",
+            },
+            {
+              destination: "/experiments/ui-explorations/tools",
+              permanent: true,
+              source: "/tools",
+            },
+          ]),
       {
         destination: "/writing",
         permanent: true,
@@ -105,7 +109,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  reactStrictMode: false,
   turbopack: {},
 };
 

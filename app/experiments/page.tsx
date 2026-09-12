@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+import { isExperimentAvailable } from "@/utils/databaseExperiments";
 
 import { ExperimentsData } from "../../data/ExperimentsData";
 
@@ -10,7 +11,9 @@ function getExperimentsHomeDescription(): string {
   let totalExperiment = 0;
 
   for (const experiment of ExperimentsData) {
-    totalExperiment += experiment.experiments.length;
+    totalExperiment += experiment.experiments.filter((entry) =>
+      isExperimentAvailable(experiment.slug, entry.slug)
+    ).length;
   }
 
   return `${totalExperiment} experiments across the TypeScript and React ecosystem.`;

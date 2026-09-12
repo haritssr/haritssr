@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import InternalLink from "@/components/InternalLink";
 import { getExperimentDomain } from "@/data/ExperimentsData";
+import { isExperimentAvailable } from "@/utils/databaseExperiments";
 
 interface ExperimentDomainIndexProps {
   domainSlug: string;
@@ -11,6 +12,9 @@ export default function ExperimentDomainIndex({
   domainSlug,
 }: ExperimentDomainIndexProps) {
   const domain = getExperimentDomain(domainSlug);
+  const experiments = domain.experiments.filter((experiment) =>
+    isExperimentAvailable(domain.slug, experiment.slug)
+  );
 
   return (
     <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
@@ -26,11 +30,11 @@ export default function ExperimentDomainIndex({
         <div className="text-2xl font-semibold sm:text-3xl">{domain.title}</div>
         <div className="text-lg text-zinc-800">{domain.description}</div>
         <div className="text-lg font-light text-zinc-500">
-          {domain.experiments.length} experiments
+          {experiments.length} experiments
         </div>
       </div>
       <ol className="space-y-3">
-        {domain.experiments.map((experiment) => (
+        {experiments.map((experiment) => (
           <li key={experiment.slug}>
             <InternalLink
               href={`/experiments/${domain.slug}/${experiment.slug}`}
