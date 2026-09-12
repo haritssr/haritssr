@@ -1,7 +1,7 @@
 import type { Task, TaskLike } from "./type";
 
 function isTask(candidate: unknown): candidate is TaskLike {
-  if (!candidate || typeof candidate !== "object") {
+  if (candidate === null || typeof candidate !== "object") {
     return false;
   }
 

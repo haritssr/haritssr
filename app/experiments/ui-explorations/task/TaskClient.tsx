@@ -2,7 +2,7 @@
 
 import { NumberField } from "@base-ui/react/number-field";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { ChangeEvent, FormEvent, MouseEvent } from "react";
+import type { ChangeEvent, MouseEvent, SubmitEvent } from "react";
 
 import BackButton from "@/components/BackButton";
 import ExperimentPageBadge from "@/components/ExperimentPageBadge";
@@ -10,7 +10,12 @@ import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 
-import { NEW_TASK_DURATION_PRESETS, sanitizeTasks } from "./data";
+import {
+  MAX_TASK_DURATION_MINUTES,
+  MAX_TASKS_PER_DAY,
+  NEW_TASK_DURATION_PRESETS,
+  sanitizeTasks,
+} from "./data";
 import Section from "./Section";
 import TaskItem from "./TaskItem";
 import type { Task } from "./type";
@@ -29,11 +34,22 @@ export default function TaskPage() {
   const [newOtherTaskTitle, setNewOtherTaskTitle] = useState("");
   // Controlled input state for new task duration.
   const [newOtherTaskDuration, setNewOtherTaskDuration] = useState("15");
+  const [persistenceError, setPersistenceError] = useState<string | null>(null);
 
   // Ref for duration input focus/UX updates.
   const durationInputRef = useRef<HTMLInputElement>(null);
   // Ref for the pending debounce timer id.
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const tasksRef = useRef<Task[]>([]);
+  const isHydratedFromDbRef = useRef(false);
+
+  useEffect(() => {
+    tasksRef.current = tasks;
+  }, [tasks]);
+
+  useEffect(() => {
+    isHydratedFromDbRef.current = isHydratedFromDb;
+  }, [isHydratedFromDb]);
 
   // Active Now-section tasks only.
   const nowTasks = tasks.filter((task) => task.type === "Now");
@@ -57,8 +73,10 @@ export default function TaskPage() {
   // Enables Add button only when title/duration/uniqueness are valid.
   const canAddNewOtherTask =
     normalizedNewOtherTaskTitle.length > 0 &&
-    Number.isFinite(parsedNewOtherTaskDuration) &&
+    Number.isSafeInteger(parsedNewOtherTaskDuration) &&
     parsedNewOtherTaskDuration > 0 &&
+    parsedNewOtherTaskDuration <= MAX_TASK_DURATION_MINUTES &&
+    tasks.length < MAX_TASKS_PER_DAY &&
     !newOtherTaskTitleExists;
 
   const handleNewOtherTaskTitleChange = useCallback(
@@ -93,6 +111,7 @@ export default function TaskPage() {
       if (!isHydratedFromDb) {
         return;
       }
+      tasksRef.current = tasksToSave;
       // Cancel any pending debounced save
       if (saveTimeoutRef.current !== null) {
         clearTimeout(saveTimeoutRef.current);
@@ -103,7 +122,9 @@ export default function TaskPage() {
       const blob = new Blob([JSON.stringify({ tasks: tasksToSave })], {
         type: "application/json",
       });
-      navigator.sendBeacon("/api/task", blob);
+      if (!navigator.sendBeacon("/api/task", blob)) {
+        setPersistenceError("Tasks could not be saved. Try again.");
+      }
     },
     [isHydratedFromDb]
   );
@@ -190,7 +211,7 @@ export default function TaskPage() {
   );
 
   const handleAddOtherTask = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
+    (event: SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (!canAddNewOtherTask) {
         return;
@@ -240,12 +261,15 @@ export default function TaskPage() {
         // Fresh read without cache for current day state.
         const response = await fetch("/api/task", { cache: "no-store" });
         if (!response.ok) {
+          setPersistenceError(
+            "Tasks could not be loaded. Refresh to try again."
+          );
           return;
         }
 
         // Raw JSON payload from API.
         const payload: unknown = await response.json();
-        if (!payload || typeof payload !== "object") {
+        if (payload === null || typeof payload !== "object") {
           return;
         }
 
@@ -257,7 +281,7 @@ export default function TaskPage() {
 
         // Parsed and validated task list from payload.
         const parsedTasks = parseTasks(body.tasks);
-        if (!parsedTasks) {
+        if (parsedTasks === null) {
           return;
         }
 
@@ -269,15 +293,24 @@ export default function TaskPage() {
             ? body.droppedNowCount
             : demotedNowCount
         );
-        setTasks(serverTasks.map((task) => ({ ...task })));
-      } finally {
+        const initialTasks = serverTasks.map((task) => ({ ...task }));
+        setTasks(initialTasks);
+        tasksRef.current = initialTasks;
+        setPersistenceError(null);
+      } catch {
         if (!isCancelled) {
-          setIsHydratedFromDb(true);
+          setPersistenceError(
+            "Tasks could not be loaded. Refresh to try again."
+          );
         }
+      }
+
+      if (!isCancelled) {
+        setIsHydratedFromDb(true);
       }
     };
 
-    hydrateTasksFromDb().catch(() => null);
+    void hydrateTasksFromDb();
 
     return () => {
       isCancelled = true;
@@ -286,100 +319,85 @@ export default function TaskPage() {
 
   // Debounced autosave for non-critical task changes.
   useEffect(() => {
-    if (!isHydratedFromDb) {
-      return;
-    }
+    if (isHydratedFromDb) {
+      // Clear existing timeout to debounce saves
+      if (saveTimeoutRef.current !== null) {
+        clearTimeout(saveTimeoutRef.current);
+      }
 
-    // Clear existing timeout to debounce saves
-    if (saveTimeoutRef.current !== null) {
-      clearTimeout(saveTimeoutRef.current);
-    }
-
-    // Debounce save by 500ms to batch rapid updates (e.g., timer ticks)
-    saveTimeoutRef.current = setTimeout(() => {
-      // Writes current task list via PUT.
-      const persistTasksToDb = async () => {
-        try {
-          // API request that persists latest task snapshot.
-          const response = await fetch("/api/task", {
-            body: JSON.stringify({ tasks }),
-            headers: { "Content-Type": "application/json" },
-            method: "PUT",
-          });
-          if (!response.ok) {
-            // Best-effort parsed API error response.
-            const errorData = await response
-              .json()
-              .catch(() => ({ error: "Unknown error" }));
-            console.error("Failed to save tasks:", errorData);
+      // Debounce save by 500ms to batch rapid updates (e.g., timer ticks)
+      saveTimeoutRef.current = setTimeout(() => {
+        saveTimeoutRef.current = null;
+        // Writes current task list via PUT.
+        const persistTasksToDb = async () => {
+          try {
+            // API request that persists latest task snapshot.
+            const response = await fetch("/api/task", {
+              body: JSON.stringify({ tasks }),
+              headers: { "Content-Type": "application/json" },
+              method: "PUT",
+            });
+            if (response.ok) {
+              setPersistenceError(null);
+            } else {
+              // Best-effort parsed API error response.
+              const errorData: unknown = await response
+                .json()
+                .catch(() => ({ error: "Unknown error" }));
+              console.error("Failed to save tasks:", errorData);
+              setPersistenceError("Tasks could not be saved. Try again.");
+            }
+          } catch (error) {
+            console.error("Network error saving tasks:", error);
+            setPersistenceError(
+              "Tasks could not be saved. Check your connection."
+            );
           }
-        } catch (error) {
-          console.error("Network error saving tasks:", error);
-        }
-      };
+        };
 
-      persistTasksToDb().catch(() => null);
-    }, 500);
+        void persistTasksToDb();
+      }, 500);
+    }
 
-    // Cleanup: flush pending save on unmount (e.g., page navigation)
+    // Cleanup only cancels the superseded debounce. Lifecycle events flush the
+    // latest committed task state separately.
     return () => {
       if (saveTimeoutRef.current !== null) {
         clearTimeout(saveTimeoutRef.current);
         saveTimeoutRef.current = null;
-        // Use sendBeacon for reliable save during unload
-        // Beacon payload used during unmount flush.
-        const blob = new Blob([JSON.stringify({ tasks })], {
-          type: "application/json",
-        });
-        navigator.sendBeacon("/api/task", blob);
       }
     };
   }, [isHydratedFromDb, tasks]);
 
-  // Save when user switches tabs or navigates away
+  // Save the latest committed state when the page lifecycle is ending.
   useEffect(() => {
-    if (!isHydratedFromDb) {
-      return;
-    }
-
-    // Flushes pending state when tab becomes hidden.
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        // Cancel pending debounced save
-        if (saveTimeoutRef.current !== null) {
-          clearTimeout(saveTimeoutRef.current);
-          saveTimeoutRef.current = null;
-        }
-        // Send immediate save using sendBeacon for reliability
-        // Beacon payload for visibility change event.
-        const blob = new Blob([JSON.stringify({ tasks })], {
-          type: "application/json",
-        });
-        navigator.sendBeacon("/api/task", blob);
+    const flushPendingTasks = () => {
+      if (!isHydratedFromDbRef.current || saveTimeoutRef.current === null) {
+        return;
       }
+
+      clearTimeout(saveTimeoutRef.current);
+      saveTimeoutRef.current = null;
+      const blob = new Blob([JSON.stringify({ tasks: tasksRef.current })], {
+        type: "application/json",
+      });
+      navigator.sendBeacon("/api/task", blob);
     };
 
-    // Flushes pending state during hard navigation/close.
-    const handleBeforeUnload = () => {
-      // Flush any pending save before page unload
-      if (saveTimeoutRef.current !== null) {
-        clearTimeout(saveTimeoutRef.current);
-        saveTimeoutRef.current = null;
-        // Beacon payload for beforeunload event.
-        const blob = new Blob([JSON.stringify({ tasks })], {
-          type: "application/json",
-        });
-        navigator.sendBeacon("/api/task", blob);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        flushPendingTasks();
       }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("beforeunload", flushPendingTasks);
     return () => {
+      flushPendingTasks();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("beforeunload", flushPendingTasks);
     };
-  }, [isHydratedFromDb, tasks]);
+  }, []);
 
   return (
     <>
@@ -403,29 +421,47 @@ export default function TaskPage() {
         className="mt-10 flex flex-wrap items-center gap-2"
         onSubmit={handleAddOtherTask}
       >
+        <label className="sr-only" htmlFor="new-task-title">
+          Task title
+        </label>
         <input
+          autoComplete="off"
           className="corner-squircle h-8 w-full rounded-lg border border-zinc-300 px-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none sm:w-fit"
+          id="new-task-title"
+          maxLength={200}
+          name="title"
           onChange={handleNewOtherTaskTitleChange}
-          placeholder="Add new task here"
+          placeholder="Task title…"
           type="text"
           value={newOtherTaskTitle}
         />
 
         <NumberField.Root
           className="flex items-center"
+          max={MAX_TASK_DURATION_MINUTES}
           min={1}
           onValueChange={handleNewOtherTaskDurationChange}
           step={1}
           value={newOtherTaskDuration ? Number(newOtherTaskDuration) : null}
         >
-          <NumberField.Decrement className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-t border-b border-l border-zinc-300 text-zinc-700 hover:bg-zinc-100">
+          <NumberField.Decrement
+            aria-label="Decrease task duration"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-t border-b border-l border-zinc-300 text-zinc-700 hover:bg-zinc-100"
+          >
             −
           </NumberField.Decrement>
           <NumberField.Input
+            aria-label="Task duration in minutes"
+            autoComplete="off"
             className="h-8 w-10 border border-zinc-300 px-2 py-1 text-center text-sm text-zinc-700 focus:border-blue-500 focus:text-blue-500 focus:outline-none"
+            inputMode="numeric"
+            name="duration"
             ref={durationInputRef}
           />
-          <NumberField.Increment className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-t border-r border-b border-zinc-300 text-zinc-700 hover:bg-zinc-100">
+          <NumberField.Increment
+            aria-label="Increase task duration"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-t border-r border-b border-zinc-300 text-zinc-700 hover:bg-zinc-100"
+          >
             +
           </NumberField.Increment>
         </NumberField.Root>
@@ -505,9 +541,15 @@ export default function TaskPage() {
       </Section>
 
       {normalizedNewOtherTaskTitle.length > 0 && newOtherTaskTitleExists && (
-        <div className="mb-3 text-xs text-rose-500">
+        <output aria-live="polite" className="mb-3 text-xs text-rose-500">
           Task title already exists.
-        </div>
+        </output>
+      )}
+
+      {persistenceError !== null && (
+        <output aria-live="polite" className="mb-3 text-sm text-rose-600">
+          {persistenceError}
+        </output>
       )}
 
       <Section accordion={{ defaultOpen: false }} title="Done">

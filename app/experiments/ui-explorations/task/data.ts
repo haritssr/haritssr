@@ -1,5 +1,8 @@
 import type { Task } from "./type";
 
+export const MAX_TASKS_PER_DAY = 100;
+export const MAX_TASK_DURATION_MINUTES = 24 * 60;
+
 const TASK_ACTION_BUTTON_BASE_CLASS =
   "cursor-pointer text-xs px-1.5 py-1 rounded-lg corner-squircle";
 

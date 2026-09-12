@@ -18,11 +18,13 @@ export default function Section({
   const header = (
     <div className="flex items-center justify-between">
       <div className="font-medium text-zinc-800">{title}</div>
-      {!!titleMeta && <div className="text-sm text-zinc-500">{titleMeta}</div>}
+      {titleMeta !== undefined && titleMeta !== null ? (
+        <div className="text-sm text-zinc-500">{titleMeta}</div>
+      ) : null}
     </div>
   );
 
-  if (accordion) {
+  if (accordion !== undefined) {
     return (
       <details
         className="group corner-squircle mt-5 mb-1 overflow-hidden rounded-2xl border border-zinc-300"

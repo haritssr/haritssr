@@ -7,50 +7,54 @@ import "server-only";
 import { createDailyTaskTemplate, sanitizeTasks } from "./data";
 import type { Task } from "./type";
 
-const DEFAULT_DATABASE_DIRECTORY = "/Users/haritssyah/developer/.data-haritssr";
-// Absolute folder path for task SQLite storage (override via TASK_DB_DIR).
+const DEFAULT_DATABASE_DIRECTORY = path.join(process.cwd(), ".data-haritssr");
+// Local folder path for task SQLite storage (override via TASK_DB_DIR).
 const DATABASE_DIRECTORY =
   process.env.TASK_DB_DIR ?? DEFAULT_DATABASE_DIRECTORY;
 // Absolute SQLite file path used by better-sqlite3.
 const DATABASE_PATH = path.join(DATABASE_DIRECTORY, "task.db");
 
-// Ensure the database directory exists before creating/opening the file.
-mkdirSync(DATABASE_DIRECTORY, { recursive: true });
+let database: Database.Database | undefined;
 
-// Open a synchronous SQLite connection used by all task operations in this module.
-const db = new Database(DATABASE_PATH);
+function getDatabase() {
+  if (database) {
+    return database;
+  }
 
-// Enable WAL mode for safer concurrent reads/writes and better durability.
-db.pragma("journal_mode = WAL");
-
-// Create the canonical daily_tasks table if this is the first run.
-db.exec(`
-  CREATE TABLE IF NOT EXISTS daily_tasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    task_date TEXT NOT NULL,
-    title TEXT NOT NULL,
-    duration INTEGER NOT NULL,
-    progress REAL NOT NULL,
-    type TEXT NOT NULL,
-    position INTEGER NOT NULL,
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(task_date, title)
-  );
-`);
+  mkdirSync(DATABASE_DIRECTORY, { recursive: true });
+  const nextDatabase = new Database(DATABASE_PATH);
+  nextDatabase.pragma("journal_mode = WAL");
+  nextDatabase.exec(`
+    CREATE TABLE IF NOT EXISTS daily_tasks (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      task_date TEXT NOT NULL,
+      title TEXT NOT NULL,
+      duration INTEGER NOT NULL,
+      progress REAL NOT NULL,
+      type TEXT NOT NULL,
+      position INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(task_date, title)
+    );
+  `);
+  migrateStatusColumn(nextDatabase);
+  database = nextDatabase;
+  return nextDatabase;
+}
 
 // Inspect the current table schema to see whether legacy `status` still exists.
-function hasStatusColumn() {
-  const columns = db.prepare("PRAGMA table_info(daily_tasks)").all() as {
-    name: string;
-  }[];
+function hasStatusColumn(db: Database.Database) {
+  const columns = db
+    .prepare<[], { name: string }>("PRAGMA table_info(daily_tasks)")
+    .all();
   return columns.some((column) => column.name === "status");
 }
 
 // Migrate old schemas that still have `status` into the current `type`-only schema.
-function migrateStatusColumn() {
+function migrateStatusColumn(db: Database.Database) {
   // Skip migration when the database already uses the current schema.
-  if (!hasStatusColumn()) {
+  if (!hasStatusColumn(db)) {
     return;
   }
 
@@ -102,9 +106,6 @@ function migrateStatusColumn() {
   migrate();
 }
 
-// Run migration on module load so all exported APIs work on a stable schema.
-migrateStatusColumn();
-
 interface TaskHistoryDay {
   date: string;
   doneCount: number;
@@ -148,6 +149,7 @@ function normalizeAndSanitizeTasks(tasks: readonly Task[]) {
 
 // Seed a date with template tasks if that date currently has no tasks.
 function seedTasksForDate(taskDate: string) {
+  const db = getDatabase();
   const seedTasks = createDailyTaskTemplate();
   // Do nothing when there is no template to insert.
   if (seedTasks.length === 0) {
@@ -156,13 +158,13 @@ function seedTasksForDate(taskDate: string) {
 
   // Check whether this date is already initialized.
   const countRow = db
-    .prepare("SELECT COUNT(1) AS count FROM daily_tasks WHERE task_date = ?")
-    .get(taskDate) as {
-    count: number;
-  };
+    .prepare<[string], { count: number }>(
+      "SELECT COUNT(1) AS count FROM daily_tasks WHERE task_date = ?"
+    )
+    .get(taskDate);
 
   // Avoid duplicating rows when tasks already exist for this date.
-  if (countRow.count > 0) {
+  if (!countRow || countRow.count > 0) {
     return;
   }
   // Prepare insert once and reuse for each seeded task.
@@ -194,8 +196,8 @@ function seedTasksForDate(taskDate: string) {
 
 // Read tasks for a date in persisted order, then normalize each row for consumers.
 function readTasksForDate(taskDate: string): Task[] {
-  const rows = db
-    .prepare(
+  const rows = getDatabase()
+    .prepare<[string], TaskRow>(
       `
         SELECT title, duration, progress, type
         FROM daily_tasks
@@ -203,7 +205,7 @@ function readTasksForDate(taskDate: string): Task[] {
         ORDER BY position ASC, id ASC
       `
     )
-    .all(taskDate) as TaskRow[];
+    .all(taskDate);
 
   return rows.map((row) => normalizeTask(row));
 }
@@ -233,6 +235,7 @@ export function getTasksForDate(taskDate = getTodayTaskDate()) {
 
 // Replace all tasks for a date atomically after normalization/sanitization.
 export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
+  const db = getDatabase();
   const { droppedNowCount, sanitizedTasks } = normalizeAndSanitizeTasks(tasks);
 
   // Precompile statements used by the replace transaction.
@@ -270,8 +273,8 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
 
 // Return per-day completion stats for the most recent N days with any tasks.
 function getTaskHistoryDays(limit = 30): TaskHistoryDay[] {
-  const rows = db
-    .prepare(
+  const rows = getDatabase()
+    .prepare<[number], TaskHistoryDay>(
       `
         SELECT
           task_date AS date,
@@ -283,7 +286,7 @@ function getTaskHistoryDays(limit = 30): TaskHistoryDay[] {
         LIMIT ?
       `
     )
-    .all(limit) as TaskHistoryDay[];
+    .all(limit);
 
   return rows;
 }

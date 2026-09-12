@@ -1,4 +1,4 @@
-import { unstable_noStore } from "next/cache";
+import { connection } from "next/server";
 
 import BackButton from "@/components/BackButton";
 import PageDescription from "@/components/PageDescription";
@@ -6,9 +6,6 @@ import PageTitle from "@/components/PageTitle";
 
 import type { TaskHistoryEntry } from "../db";
 import { getTaskHistory, getTasksForDate, getTodayTaskDate } from "../db";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 function getCompletionRate(doneCount: number, totalCount: number) {
   if (totalCount === 0) {
@@ -66,8 +63,8 @@ function MetricCard(props: { label: string; subtitle: string; value: string }) {
   );
 }
 
-export default function TaskStatisticsPage() {
-  unstable_noStore();
+export default async function TaskStatisticsPage() {
+  await connection();
   const todayDate = getTodayTaskDate();
   getTasksForDate(todayDate);
 

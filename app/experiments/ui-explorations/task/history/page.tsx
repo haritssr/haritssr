@@ -1,3 +1,5 @@
+import { connection } from "next/server";
+
 import BackButton from "@/components/BackButton";
 import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
@@ -6,9 +8,8 @@ import { getTaskHistory } from "../db";
 import Section from "../Section";
 import TaskItem from "../TaskItem";
 
-export const dynamic = "force-dynamic";
-
-export default function TaskHistoryPage() {
+export default async function TaskHistoryPage() {
+  await connection();
   const history = getTaskHistory();
 
   return (

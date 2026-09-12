@@ -56,7 +56,7 @@ function getNowPrimaryAction(
 function TaskActions(props: TaskActionsProps) {
   return (
     <>
-      {!!props.canDeleteTask && (
+      {props.canDeleteTask && (
         <button
           className={getTaskActionButtonClassName("secondary")}
           onClick={props.onDelete}
@@ -65,7 +65,7 @@ function TaskActions(props: TaskActionsProps) {
           Del
         </button>
       )}
-      {!!props.canMoveNowTask && (
+      {props.canMoveNowTask && (
         <button
           className={getTaskActionButtonClassName("zinc")}
           onClick={props.onMoveToOther}
@@ -74,7 +74,7 @@ function TaskActions(props: TaskActionsProps) {
           Other
         </button>
       )}
-      {!!props.canResetNowTask && (
+      {props.canResetNowTask && (
         <button
           className={getTaskActionButtonClassName("zinc")}
           onClick={props.onReset}
@@ -83,7 +83,7 @@ function TaskActions(props: TaskActionsProps) {
           Reset
         </button>
       )}
-      {!!props.isNowTask && (
+      {props.isNowTask && (
         <button
           className={props.primaryNowAction.className}
           onClick={() => {
@@ -94,7 +94,7 @@ function TaskActions(props: TaskActionsProps) {
           {props.primaryNowAction.label}
         </button>
       )}
-      {!!props.canDoNow && (
+      {props.canDoNow && (
         <button
           className={getTaskActionButtonClassName("zinc")}
           onClick={props.onDoNow}
@@ -103,7 +103,7 @@ function TaskActions(props: TaskActionsProps) {
           Now
         </button>
       )}
-      {!!props.canResumeOtherTask && (
+      {props.canResumeOtherTask && (
         <button
           className={getTaskActionButtonClassName("blue")}
           onClick={props.onResume}
@@ -112,7 +112,7 @@ function TaskActions(props: TaskActionsProps) {
           Resume
         </button>
       )}
-      {!!props.canMarkNowTaskDone && (
+      {props.canMarkNowTaskDone && (
         <button
           className={getTaskActionButtonClassName("green")}
           onClick={props.onMarkDone}
@@ -148,66 +148,112 @@ function DonutProgress({
   );
 }
 
+function getTaskCapabilities({
+  isActivelyRunning,
+  onDelete,
+  onDoNow,
+  onMoveTask,
+  onResumeNow,
+  progress,
+  readOnly,
+  taskIsDone,
+  type,
+}: Pick<
+  TaskItemProps,
+  "onDelete" | "onDoNow" | "onMoveTask" | "onResumeNow" | "type"
+> & {
+  isActivelyRunning: boolean;
+  progress: number;
+  readOnly: boolean;
+  taskIsDone: boolean;
+}) {
+  return {
+    canDeleteTask: !readOnly && Boolean(onDelete),
+    canDoNow:
+      type === "Other" && progress === 0 && !taskIsDone && Boolean(onDoNow),
+    canMarkNowTaskDone: type === "Now" && isActivelyRunning,
+    canMoveNowTask:
+      type === "Now" &&
+      !isActivelyRunning &&
+      progress > 0 &&
+      !taskIsDone &&
+      Boolean(onMoveTask),
+    canResetNowTask: type === "Now" && progress > 0 && !taskIsDone,
+    canResumeOtherTask:
+      type === "Other" && progress > 0 && !taskIsDone && Boolean(onResumeNow),
+  };
+}
+
 export default function TaskItem(props: TaskItemProps) {
+  const {
+    autoStart = false,
+    duration,
+    onAutoStartConsumed,
+    onDelete,
+    onDoNow,
+    onMarkDone,
+    onMoveTask,
+    onProgressChange,
+    onResumeNow,
+    progress: requestedProgress,
+    readOnly = false,
+    title,
+    type,
+  } = props;
   // Clamp progress so UI and timer logic always use a safe 0..100 value.
-  const progress = Math.max(0, Math.min(100, props.progress));
+  const progress = Math.max(0, Math.min(100, requestedProgress));
   // Treat a task as done if type is Done or progress reached 100.
-  const taskIsDone = props.type === "Done" || progress >= 100;
+  const taskIsDone = type === "Done" || progress >= 100;
+  const shouldAutoStart = type === "Now" && autoStart && progress > 0;
   // Local running flag for the Now-task interval timer.
-  const [isRunning, setIsRunning] = useState(false);
+  const [isRunning, setIsRunning] = useState(shouldAutoStart);
+  const isActivelyRunning = isRunning && !taskIsDone;
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const deleteDialogTitleId = useId();
-  // Allow "Now" action only for non-done Other tasks at 0% progress.
-  const canDoNow =
-    props.type === "Other" &&
-    progress === 0 &&
-    !taskIsDone &&
-    Boolean(props.onDoNow);
-  // Show delete only when row is interactive and a delete handler exists.
-  const canDeleteTask = props.readOnly !== true && Boolean(props.onDelete);
-  // Allow "Resume" only for non-done Other tasks with existing progress.
-  const canResumeOtherTask =
-    props.type === "Other" &&
-    progress > 0 &&
-    !taskIsDone &&
-    Boolean(props.onResumeNow);
-  // Allow moving a Now task to Other when paused and in progress.
-  const canMoveNowTask =
-    props.type === "Now" &&
-    !isRunning &&
-    progress > 0 &&
-    !taskIsDone &&
-    Boolean(props.onMoveTask);
-  // Allow resetting a Now task that has started.
-  const canResetNowTask = props.type === "Now" && progress > 0 && !taskIsDone;
-  // Allow quick "Done" while a Now task is actively running.
-  const canMarkNowTaskDone = props.type === "Now" && isRunning && !taskIsDone;
+  const {
+    canDeleteTask,
+    canDoNow,
+    canMarkNowTaskDone,
+    canMoveNowTask,
+    canResetNowTask,
+    canResumeOtherTask,
+  } = getTaskCapabilities({
+    isActivelyRunning,
+    onDelete,
+    onDoNow,
+    onMoveTask,
+    onResumeNow,
+    progress,
+    readOnly,
+    taskIsDone,
+    type,
+  });
   // Compute primary Now action label/style/callback based on task state.
   const primaryNowAction = getNowPrimaryAction(
-    props.type,
+    type,
     progress,
-    isRunning,
+    isActivelyRunning,
     setIsRunning
   );
 
   const handleMoveToOther = () => {
     setIsRunning(false);
-    props.onMoveTask?.(props.title, "Other");
+    onMoveTask?.(title, "Other");
   };
 
   const handleReset = () => {
     setIsRunning(false);
-    props.onProgressChange?.(props.title, 0);
+    onProgressChange?.(title, 0);
   };
 
   const handleDone = () => {
     setIsRunning(false);
-    props.onMarkDone?.(props.title);
+    onMarkDone?.(title);
   };
 
   const handleResume = () => {
     setIsRunning(false);
-    props.onResumeNow?.(props.title);
+    onResumeNow?.(title);
   };
 
   const handleDelete = () => {
@@ -217,84 +263,72 @@ export default function TaskItem(props: TaskItemProps) {
 
   const handleConfirmDelete = () => {
     setIsDeleteDialogOpen(false);
-    props.onDelete?.(props.title);
+    onDelete?.(title);
   };
 
   const handleDoNow = useCallback(() => {
-    props.onDoNow?.(props.title);
-  }, [props.onDoNow, props.title]);
+    onDoNow?.(title);
+  }, [onDoNow, title]);
 
   // Auto-start timer after Resume->Now handoff when task already has progress.
   useEffect(() => {
-    if (props.type !== "Now" || !props.autoStart || progress <= 0) {
+    if (!shouldAutoStart) {
       return;
     }
 
-    setIsRunning(true);
-    props.onAutoStartConsumed?.(props.title);
-  }, [
-    progress,
-    props.autoStart,
-    props.onAutoStartConsumed,
-    props.title,
-    props.type,
-  ]);
+    onAutoStartConsumed?.(title);
+  }, [onAutoStartConsumed, shouldAutoStart, title]);
 
   // Tick progress every second for running Now tasks.
   useEffect(() => {
-    if (
-      props.readOnly ||
-      props.type !== "Now" ||
-      taskIsDone ||
-      !isRunning ||
-      progress >= 100
-    ) {
-      return;
-    }
+    const shouldRunTimer =
+      !readOnly &&
+      type === "Now" &&
+      !taskIsDone &&
+      isActivelyRunning &&
+      progress < 100;
+    let timer: number | undefined;
 
-    // Percentage increment per second for configured duration.
-    const increment = 100 / (props.duration * 60);
-    // Interval that advances progress and stops at completion.
-    const timer = window.setInterval(() => {
-      // Calculate next bounded progress for this tick.
-      const nextProgress = Math.min(100, progress + increment);
-      props.onProgressChange?.(props.title, nextProgress);
-      if (nextProgress >= 100) {
-        setIsRunning(false);
-      }
-    }, 1000);
+    if (shouldRunTimer) {
+      // Percentage increment per second for configured duration.
+      const increment = 100 / (duration * 60);
+      // Interval that advances progress and stops at completion.
+      timer = window.setInterval(() => {
+        // Calculate next bounded progress for this tick.
+        const nextProgress = Math.min(100, progress + increment);
+        onProgressChange?.(title, nextProgress);
+        if (nextProgress >= 100) {
+          setIsRunning(false);
+        }
+      }, 1000);
+    }
 
     return () => {
-      window.clearInterval(timer);
+      if (timer !== undefined) {
+        window.clearInterval(timer);
+      }
     };
   }, [
-    isRunning,
+    duration,
+    isActivelyRunning,
+    onProgressChange,
     progress,
-    props.duration,
-    props.onProgressChange,
-    props.readOnly,
-    props.title,
-    props.type,
+    readOnly,
     taskIsDone,
+    title,
+    type,
   ]);
-
-  // Stop timer if external type/progress changes make task completed.
-  useEffect(() => {
-    if (taskIsDone && isRunning) {
-      setIsRunning(false);
-    }
-  }, [isRunning, taskIsDone]);
 
   return (
     <>
       <div className="corner-squircle h-10 rounded-xl border border-zinc-300 pr-2.5 pl-2.5">
         <div className="grid h-full grid-cols-[minmax(0,1fr)_auto] items-center gap-2 text-sm">
           <div className="scrollbar-hide min-w-0 overflow-x-auto overscroll-x-contain whitespace-nowrap text-zinc-700">
-            {props.title}
+            {title}
           </div>
 
           <div className="flex shrink-0 items-center space-x-1.5 text-zinc-400">
-            {props.readOnly !== true && (
+            {!readOnly && (
               <TaskActions
                 canDeleteTask={canDeleteTask}
                 canDoNow={canDoNow}
@@ -302,7 +336,7 @@ export default function TaskItem(props: TaskItemProps) {
                 canMoveNowTask={canMoveNowTask}
                 canResetNowTask={canResetNowTask}
                 canResumeOtherTask={canResumeOtherTask}
-                isNowTask={props.type === "Now" && !taskIsDone}
+                isNowTask={type === "Now" && !taskIsDone}
                 onDelete={handleDelete}
                 onDoNow={handleDoNow}
                 onMarkDone={handleDone}
@@ -312,16 +346,17 @@ export default function TaskItem(props: TaskItemProps) {
                 primaryNowAction={primaryNowAction}
               />
             )}
-            <span>{props.duration}&quot;</span>
+            <span>{duration} min</span>
             <span>{progress.toFixed(0)}%</span>
-            <DonutProgress isRunning={isRunning} progress={progress} />
+            <DonutProgress isRunning={isActivelyRunning} progress={progress} />
           </div>
         </div>
       </div>
       {isDeleteDialogOpen ? (
         <dialog
           aria-labelledby={deleteDialogTitleId}
-          className="fixed inset-0 z-50 m-auto w-[calc(100%-2rem)] max-w-sm rounded-xl border border-zinc-200 bg-white p-0 text-zinc-800 shadow-xl"
+          aria-modal="true"
+          className="fixed inset-0 z-50 m-auto w-[calc(100%-2rem)] max-w-sm overscroll-contain rounded-xl border border-zinc-200 bg-white p-0 text-zinc-800 shadow-xl"
           open
         >
           <div className="p-5">
@@ -329,7 +364,7 @@ export default function TaskItem(props: TaskItemProps) {
               Delete task?
             </h2>
             <p className="mt-2 text-sm text-zinc-600">
-              This will permanently delete &ldquo;{props.title}&rdquo;.
+              This will permanently delete &ldquo;{title}&rdquo;.
             </p>
             <div className="mt-5 flex justify-end gap-2">
               <button

@@ -1,93 +1,77 @@
+import { NextResponse } from "next/server";
+
 import {
   getTasksForDate,
   getTodayTaskDate,
   replaceTasksForDate,
-} from "app/experiments/ui-explorations/task/db";
-import type { Task } from "app/experiments/ui-explorations/task/type";
-import { NextResponse } from "next/server";
+} from "@/app/experiments/ui-explorations/task/db";
+import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
+
+import { isValidTaskDate, parseTaskPayload } from "./validation";
 
 export const runtime = "nodejs";
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
+function notAvailableResponse() {
+  return NextResponse.json({ error: "Not found" }, { status: 404 });
 }
 
-function isTask(candidate: unknown): candidate is Task {
-  if (!isRecord(candidate)) {
-    return false;
-  }
-
-  return (
-    typeof candidate.title === "string" &&
-    typeof candidate.duration === "number" &&
-    Number.isFinite(candidate.duration) &&
-    typeof candidate.progress === "number" &&
-    Number.isFinite(candidate.progress) &&
-    (candidate.type === "Now" ||
-      candidate.type === "Other" ||
-      candidate.type === "Done")
+function invalidPayloadResponse() {
+  return NextResponse.json(
+    { error: "Use a valid date and up to 100 valid tasks." },
+    { status: 400 }
   );
 }
 
-function isTaskArray(value: unknown): value is Task[] {
-  return Array.isArray(value) && value.every(isTask);
+async function readJson(request: Request): Promise<unknown> {
+  try {
+    return await request.json();
+  } catch {
+    return null;
+  }
 }
 
 export function GET(request: Request) {
+  if (!DATABASE_EXPERIMENTS_ENABLED) {
+    return notAvailableResponse();
+  }
+
   const { searchParams } = new URL(request.url);
   const taskDate = searchParams.get("date") ?? getTodayTaskDate();
-  const { droppedNowCount, tasks } = getTasksForDate(taskDate);
 
+  if (!isValidTaskDate(taskDate)) {
+    return invalidPayloadResponse();
+  }
+
+  const { droppedNowCount, tasks } = getTasksForDate(taskDate);
+  return NextResponse.json({ droppedNowCount, taskDate, tasks });
+}
+
+async function saveTasks(request: Request) {
+  if (!DATABASE_EXPERIMENTS_ENABLED) {
+    return notAvailableResponse();
+  }
+
+  const parsedPayload = parseTaskPayload(
+    await readJson(request),
+    getTodayTaskDate()
+  );
+
+  if (!parsedPayload) {
+    return invalidPayloadResponse();
+  }
+
+  const { taskDate, tasks: requestedTasks } = parsedPayload;
+  const { droppedNowCount, tasks } = replaceTasksForDate(
+    taskDate,
+    requestedTasks
+  );
   return NextResponse.json({ droppedNowCount, taskDate, tasks });
 }
 
 export async function POST(request: Request) {
-  // POST handler for navigator.sendBeacon (used when page is hidden/closed)
-  const payload: unknown = await request.json();
-  if (!isRecord(payload)) {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
-  }
-
-  const taskDate =
-    typeof payload.date === "string" && payload.date.length > 0
-      ? payload.date
-      : getTodayTaskDate();
-
-  if (!isTaskArray(payload.tasks)) {
-    return NextResponse.json(
-      { error: "Tasks must be an array" },
-      { status: 400 }
-    );
-  }
-
-  const { droppedNowCount, tasks } = replaceTasksForDate(
-    taskDate,
-    payload.tasks
-  );
-  return NextResponse.json({ droppedNowCount, taskDate, tasks });
+  return await saveTasks(request);
 }
 
 export async function PUT(request: Request) {
-  const payload: unknown = await request.json();
-  if (!isRecord(payload)) {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
-  }
-
-  const taskDate =
-    typeof payload.date === "string" && payload.date.length > 0
-      ? payload.date
-      : getTodayTaskDate();
-
-  if (!isTaskArray(payload.tasks)) {
-    return NextResponse.json(
-      { error: "Tasks must be an array" },
-      { status: 400 }
-    );
-  }
-
-  const { droppedNowCount, tasks } = replaceTasksForDate(
-    taskDate,
-    payload.tasks
-  );
-  return NextResponse.json({ droppedNowCount, taskDate, tasks });
+  return await saveTasks(request);
 }

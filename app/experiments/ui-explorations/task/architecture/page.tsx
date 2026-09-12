@@ -27,7 +27,7 @@ flowchart TD
     subgraph DB["🗄️ Database (better-sqlite3)"]
         D1["db.ts: normalizeTask + sanitizeTasks"]
         D2["Table: daily_tasks"]
-        D3["/Users/haritssyah/developer/.data-haritssr/task.db (WAL)"]
+        D3[".data-haritssr/task.db (WAL)"]
         D4["Replace strategy: DELETE → INSERT"]
     end
 
@@ -120,7 +120,7 @@ flowchart TB
 
     subgraph External["External"]
         api["API: /api/task"]
-        db["SQLite: /Users/haritssyah/developer/.data-haritssr/task.db"]
+        db["SQLite: .data-haritssr/task.db"]
     end
 
     tasks --> Derived
@@ -150,11 +150,10 @@ flowchart LR
         E4["[cleanup]<br/>Flush pending save on unmount"]
     end
 
-    subgraph ItemEffects["TaskItem useEffect Hooks"]
+    subgraph ItemLifecycle["TaskItem Lifecycle"]
         direction TB
-        I1["[autoStart + type + progress]<br/>Start timer if needed"]
+        I1["[mount]<br/>Initialize resumed timer if needed"]
         I2["[isRunning + progress + duration]<br/>setInterval progress tick"]
-        I3["[progress/type]<br/>Stop timer at completion"]
     end
 
     E1 -->|fetch| GET["GET /api/task"]
@@ -197,7 +196,7 @@ flowchart TB
         route["route.ts<br/>GET, POST, PUT"]
     end
 
-    subgraph Data["/Users/haritssyah/developer/.data-haritssr/"]
+    subgraph Data[".data-haritssr/"]
         taskdb["task.db<br/>SQLite database"]
     end
 
@@ -352,13 +351,14 @@ function MermaidDiagram({
 
     const render = async () => {
       try {
-        const mermaid = (await import("mermaid")).default;
+        const mermaidModule = await import("mermaid");
+        const mermaid = mermaidModule.default;
         mermaid.initialize({
+          htmlLabels: true,
           startOnLoad: false,
           theme: "default",
           flowchart: {
             useMaxWidth: true,
-            htmlLabels: true,
             curve: "basis",
           },
         });
@@ -368,20 +368,34 @@ function MermaidDiagram({
           definition
         );
 
+        const parsedDocument = new DOMParser().parseFromString(
+          renderedSvg,
+          "image/svg+xml"
+        );
+        const svgElement = parsedDocument.documentElement;
+        if (
+          svgElement.tagName.toLocaleLowerCase("en-US") !== "svg" ||
+          svgElement.namespaceURI !== "http://www.w3.org/2000/svg"
+        ) {
+          throw new Error("Mermaid returned invalid SVG");
+        }
+
         if (!cancelled) {
           setSvg(renderedSvg);
           setError("");
         }
-      } catch (error) {
+      } catch (renderError) {
         if (!cancelled) {
           setError(
-            error instanceof Error ? error.message : "Failed to render diagram"
+            renderError instanceof Error
+              ? renderError.message
+              : "Failed to render diagram"
           );
         }
       }
     };
 
-    render();
+    void render();
 
     return () => {
       cancelled = true;
@@ -390,7 +404,7 @@ function MermaidDiagram({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!(svg && container)) {
+    if (svg.length === 0 || container === null) {
       return;
     }
 
@@ -400,18 +414,10 @@ function MermaidDiagram({
     );
     const svgElement = parsedDocument.documentElement;
 
-    if (
-      svgElement.tagName.toLowerCase() !== "svg" ||
-      svgElement.namespaceURI !== "http://www.w3.org/2000/svg"
-    ) {
-      setError("Failed to render diagram: Mermaid returned invalid SVG");
-      return;
-    }
-
     container.replaceChildren(document.importNode(svgElement, true));
   }, [svg]);
 
-  if (error) {
+  if (error.length > 0) {
     return (
       <div className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-600">
         Failed to render diagram: {error}
@@ -512,8 +518,8 @@ export default function TaskArchitecturePage() {
           Production Readiness Notes
         </h2>
         <p className="text-sm text-zinc-700">
-          The current implementation is functional but not production-ready
-          without hardening in these areas:
+          This local implementation is intentionally unavailable in production
+          until these areas are hardened:
         </p>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-700">
           <li>
@@ -521,15 +527,18 @@ export default function TaskArchitecturePage() {
             <code className="px-1">/api/task</code>.
           </li>
           <li>
-            SQLite DB lives in{" "}
-            <code className="px-1">
-              /Users/haritssyah/developer/.data-haritssr/
-            </code>{" "}
-            (or <code className="px-1">TASK_DB_DIR</code>) and is not committed;
+            SQLite DB lives in <code className="px-1">.data-haritssr/</code> (or{" "}
+            <code className="px-1">TASK_DB_DIR</code>) and is not committed;
             production needs managed storage + backups.
           </li>
-          <li>No schema migrations or versioning for the DB.</li>
-          <li>No tests covering task logic, sanitization, or API handlers.</li>
+          <li>
+            One legacy migration exists, but there is no general schema
+            migration/versioning system.
+          </li>
+          <li>
+            Validation has unit coverage, but the API and browser flows still
+            need integration tests.
+          </li>
           <li>No rate limiting or CSRF protection for write endpoints.</li>
           <li>Minimal error handling and observability (logging/metrics).</li>
         </ul>
