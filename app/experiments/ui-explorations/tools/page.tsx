@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { connection } from "next/server";
 
 import PageDescription from "@/components/PageDescription";
+import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
 
 import { createTool, listTools } from "./db";
 
@@ -26,8 +28,8 @@ function parsePositiveInt(value: FormDataEntryValue | null) {
     return null;
   }
 
-  const parsed = Number.parseInt(value, 10);
-  if (!Number.isFinite(parsed) || parsed < 0) {
+  const parsed = Number(value);
+  if (!Number.isSafeInteger(parsed) || parsed < 0 || parsed > 1_000_000_000) {
     return null;
   }
 
@@ -36,6 +38,10 @@ function parsePositiveInt(value: FormDataEntryValue | null) {
 
 async function createToolAction(formData: FormData) {
   "use server";
+  if (!DATABASE_EXPERIMENTS_ENABLED) {
+    notFound();
+  }
+
   const name = formData.get("name");
   const price = parsePositiveInt(formData.get("price"));
   const amount = parsePositiveInt(formData.get("amount"));
@@ -43,6 +49,7 @@ async function createToolAction(formData: FormData) {
   if (
     typeof name !== "string" ||
     name.trim().length === 0 ||
+    name.trim().length > 100 ||
     price === null ||
     amount === null
   ) {
@@ -69,6 +76,11 @@ interface ToolsPageProps {
 }
 
 export default async function ToolsPage({ searchParams }: ToolsPageProps) {
+  if (!DATABASE_EXPERIMENTS_ENABLED) {
+    notFound();
+  }
+
+  await connection();
   const tools = listTools();
   const resolvedParams = searchParams ? await searchParams : {};
   const error =
@@ -78,7 +90,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
     <div>
       <PageDescription>Manage tools in experiment database.</PageDescription>
 
-      {!!error && (
+      {error !== null && (
         <div className="mt-4 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
           Error: {error}
         </div>
@@ -92,12 +104,20 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
         >
           <label className="grid gap-1 text-sm">
             Name
-            <input className="rounded border px-3 py-2" name="name" required />
+            <input
+              autoComplete="off"
+              className="rounded border px-3 py-2"
+              maxLength={100}
+              name="name"
+              required
+            />
           </label>
           <label className="grid gap-1 text-sm">
             Price (IDR)
             <input
               className="rounded border px-3 py-2"
+              inputMode="numeric"
+              max="1000000000"
               min="0"
               name="price"
               required
@@ -109,6 +129,8 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
             Amount
             <input
               className="rounded border px-3 py-2"
+              inputMode="numeric"
+              max="1000000000"
               min="0"
               name="amount"
               required

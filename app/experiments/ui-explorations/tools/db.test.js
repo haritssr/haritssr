@@ -12,6 +12,10 @@ import path from "node:path";
 
 let tempDir = "";
 
+async function loadDb() {
+  return await import("./db.bun");
+}
+
 beforeAll(() => {
   tempDir = mkdtempSync(path.join(os.tmpdir(), "tools-db-"));
   process.env.TOOLS_DB_DIR = tempDir;
@@ -24,10 +28,6 @@ afterAll(() => {
 });
 
 describe("tools db", () => {
-  async function loadDb() {
-    return await import("./db.bun");
-  }
-
   afterEach(async () => {
     const db = await loadDb();
     for (const tool of db.listTools()) {

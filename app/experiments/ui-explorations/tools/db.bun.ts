@@ -2,7 +2,7 @@ import Database from "bun:sqlite";
 import { mkdirSync } from "node:fs";
 import path from "node:path";
 
-const DEFAULT_DATABASE_DIRECTORY = "/Users/haritssyah/developer/.data-haritssr";
+const DEFAULT_DATABASE_DIRECTORY = path.join(process.cwd(), ".data-haritssr");
 const DATABASE_DIRECTORY =
   process.env.TOOLS_DB_DIR ?? DEFAULT_DATABASE_DIRECTORY;
 const DATABASE_PATH = path.join(DATABASE_DIRECTORY, "experiment.db");
@@ -11,7 +11,7 @@ mkdirSync(DATABASE_DIRECTORY, { recursive: true });
 
 const db = new Database(DATABASE_PATH);
 
-db.exec(`
+db.run(`
   CREATE TABLE IF NOT EXISTS tools (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL UNIQUE,
@@ -29,8 +29,10 @@ export interface ToolRow {
 
 export function listTools(): ToolRow[] {
   return db
-    .prepare("SELECT id, name, price, amount FROM tools ORDER BY id ASC")
-    .all() as ToolRow[];
+    .query<ToolRow, []>(
+      "SELECT id, name, price, amount FROM tools ORDER BY id ASC"
+    )
+    .all();
 }
 
 export function createTool(input: Omit<ToolRow, "id">) {
