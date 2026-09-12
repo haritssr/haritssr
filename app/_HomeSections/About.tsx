@@ -1,13 +1,8 @@
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
-export default function Misc() {
+export default function About() {
   return (
-    <HomeSectionWrapper
-      className="space-y-5"
-      id="misc"
-      isTitleLink={false}
-      topic="Miscellaneous"
-    >
+    <HomeSectionWrapper className="space-y-5" id="misc" topic="About">
       <ul className="list-outside list-disc space-y-1 pl-4 text-zinc-500">
         <li>Touch typist (±90 WPM)</li>
         <li>
@@ -16,12 +11,7 @@ export default function Misc() {
           <span className="text-zinc-800">s</span>yah{" "}
           <span className="text-zinc-800">r</span>ahmatullah
         </li>
-        <li>
-          Former chess addict, peaked at around 2000 Elo and won several school
-          and university medals. Now I focus on math, physics, and web product
-          engineering at harislab.com.
-        </li>
-        <li>I designed all the interface in this site, some kind of batch update or refactor I delegate to AI</li>
+        <li>Former chess player, peaked at around 2000 Elo.</li>
         <li>
           <a
             className="text-action hover:underline"

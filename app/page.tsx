@@ -1,6 +1,6 @@
+import About from "./_HomeSections/About";
 import Contacts from "./_HomeSections/Contacts";
 import Experiments from "./_HomeSections/Experiments";
-import Misc from "./_HomeSections/Misc";
 import Projects from "./_HomeSections/Projects";
 import Writing from "./_HomeSections/Writing";
 
@@ -12,7 +12,7 @@ export default function Home() {
         <Projects />
         <Experiments />
         <Writing />
-        <Misc />
+        <About />
       </div>
     </section>
   );
