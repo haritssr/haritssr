@@ -33,7 +33,7 @@ export default defineConfig({
       },
     },
     {
-      files: ["app/experiments/**/*.{ts,tsx,js,jsx}"],
+      files: ["app/experiments/**/demo.{ts,tsx,js,jsx}"],
       rules: {
         // Several examples intentionally demonstrate APIs from older package
         // versions and should not fail the application-wide deprecated API gate.
@@ -106,6 +106,14 @@ export default defineConfig({
       rules: {
         // This example intentionally contrasts a native anchor with Next Link.
         "nextjs/no-html-link-for-pages": "off",
+      },
+    },
+    {
+      files: ["app/experiments/ui-explorations/task/architecture/page.tsx"],
+      rules: {
+        // React Compiler does not support import expressions yet. Keeping
+        // Mermaid dynamic avoids shipping it in the initial client bundle.
+        "react/todo": "off",
       },
     },
   ],

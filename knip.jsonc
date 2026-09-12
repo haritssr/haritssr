@@ -16,4 +16,14 @@
     // Keep the mutation methods available for the next tools-page iteration.
     "app/experiments/ui-explorations/tools/db.core.ts",
   ],
+  "ignoreDependencies": [
+    // The trailing ! scopes this to production mode. next.config.ts loads the
+    // package during configuration, which Knip excludes from that graph.
+    "@next/mdx!",
+  ],
+  "ignoreIssues": {
+    // These exports are intentional test seams and are unused by production.
+    "utils/writing-modules.ts": ["exports"],
+    "utils/writings.ts": ["exports"],
+  },
 }

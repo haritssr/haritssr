@@ -30,7 +30,9 @@ graph TD
 
 - Run `bun run check` to check formatting with Oxfmt and lint with type-aware Oxlint.
 - Run `bun run fix` to format files and apply supported lint fixes.
-- Run `bun test` to execute the tests for the `app/experiments/ui-explorations/tools` helpers.
+- Run `bun test` to execute the unit and integration tests.
+- Run `bun run typecheck` to regenerate Next.js route types and type-check the
+  complete project.
 - Run `bun run knip` to check for unused files, exports, and dependencies.
 - Run `bun run knip:production` to run the same check against production code.
 - Use [`utils/sqlite3.js`](utils/sqlite3.js) and

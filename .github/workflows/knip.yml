@@ -25,6 +25,12 @@ jobs:
       - name: Check formatting and linting
         run: bun run check -- --threads=1
 
+      - name: Check types
+        run: bun run typecheck
+
+      - name: Run tests
+        run: bun test
+
       - name: Check all project code
         run: bun run knip
 
