@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { SITE_URL } from "@/utils/site";
+
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
 // Example: "https://www.example.com" becomes "example.com" after replacement.
 const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
@@ -28,11 +30,7 @@ function renderContact(each: { link: string; icon: string }) {
     return (
       <a
         className="focus-visible:outline-action flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-        href={
-          each.link === "https://www.haritssr.com"
-            ? "https://haritssr.vercel.app"
-            : each.link
-        }
+        href={each.link}
         rel="noreferrer noopener"
         target="_blank"
         title={each.link}
@@ -110,7 +108,7 @@ const data = {
 
     {
       icon: "/icons/haritssr.svg",
-      link: "https://www.haritssr.com",
+      link: SITE_URL,
       name: "Website",
     },
   ],
