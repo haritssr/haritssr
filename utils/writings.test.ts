@@ -22,6 +22,7 @@ const expectedSlugs = [
   "remembering-death",
   "the-most-persisted-myth",
   "tim-cook-speech-stanford",
+  "transformation",
   "why-i-am-building-haris-lab",
 ];
 
@@ -43,6 +44,10 @@ describe("writing index", () => {
     expect(getWriting("product-engineering")).toMatchObject({
       publishedAt: "2026-08-22",
       title: "Product Engineering",
+    });
+    expect(getWriting("transformation")).toMatchObject({
+      publishedAt: "2026-08-16",
+      title: "Transformation",
     });
     expect(getWriting("missing-writing")).toBeUndefined();
   });

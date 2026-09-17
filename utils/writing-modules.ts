@@ -31,6 +31,8 @@ const writingModules = {
     await import("../data/writing/the-most-persisted-myth.mdx"),
   "tim-cook-speech-stanford": async () =>
     await import("../data/writing/tim-cook-speech-stanford.mdx"),
+  transformation: async () =>
+    await import("../data/writing/transformation.mdx"),
   "why-i-am-building-haris-lab": async () =>
     await import("../data/writing/why-i-am-building-haris-lab.mdx"),
 } satisfies Record<string, () => Promise<WritingModule>>;
