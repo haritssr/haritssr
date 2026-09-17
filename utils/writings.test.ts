@@ -7,6 +7,7 @@ const { writingModuleSlugs } = await import("./writing-modules");
 
 const expectedSlugs = [
   "context-switching",
+  "graph",
   "how-brain-works",
   "on-curiosity",
   "on-decision-making",
@@ -35,6 +36,10 @@ describe("writing index", () => {
   });
 
   test("looks up known writings and rejects unknown slugs", () => {
+    expect(getWriting("graph")).toMatchObject({
+      publishedAt: "2026-09-04",
+      title: "Graph",
+    });
     expect(getWriting("product-engineering")).toMatchObject({
       publishedAt: "2026-08-22",
       title: "Product Engineering",

@@ -8,6 +8,7 @@ interface WritingModule {
 const writingModules = {
   "context-switching": async () =>
     await import("../data/writing/context-switching.mdx"),
+  graph: async () => await import("../data/writing/graph.mdx"),
   "how-brain-works": async () =>
     await import("../data/writing/how-brain-works.mdx"),
   "on-curiosity": async () => await import("../data/writing/on-curiosity.mdx"),
