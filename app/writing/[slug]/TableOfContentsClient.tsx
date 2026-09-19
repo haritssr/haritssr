@@ -62,7 +62,7 @@ export default function TableOfContentsClient({
         return (
           <Link
             aria-current={isActive ? "location" : undefined}
-            className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${isActive ? "border-zinc-700 font-medium text-zinc-800" : "border-transparent text-zinc-500 hover:text-zinc-700"}`}
+            className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${isActive ? "border-foreground/80 text-foreground/85 font-medium" : "text-foreground/60 hover:text-foreground/80 border-transparent"}`}
             href={`#${item.id}`}
             key={item.id}
             onClick={() => {

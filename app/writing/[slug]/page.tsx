@@ -97,16 +97,18 @@ export default async function Writing({
           <BackButton href="/writing" name="All Writings" />
         </div>
 
-        <h1 className="text-2xl font-bold tracking-tighter text-zinc-800 sm:text-3xl">
+        <h1 className="text-foreground text-2xl font-bold tracking-tighter sm:text-3xl">
           {writing.title}
         </h1>
         <div className="mt-2 mb-8 flex items-center text-sm">
           <time dateTime={writing.publishedAt}>
             {formatDate(writing.publishedAt)}
           </time>
-          &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
+          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
+          &nbsp;&nbsp;
           <p>{writing.wordCount} Words</p>
-          &nbsp;&nbsp; <span className="text-zinc-400">•</span> &nbsp;&nbsp;
+          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
+          &nbsp;&nbsp;
           <p>{Math.ceil(writing.wordCount / 200)} Min Read</p>
         </div>
         <article className="prose prose-zinc max-w-none">
@@ -122,8 +124,6 @@ export const dynamicParams = false;
 
 function Content({ children }: { children: React.ReactNode }) {
   return (
-    <section className="border-zinc-200 pb-5 sm:col-span-4 sm:border-r sm:pr-5 sm:pl-2">
-      {children}
-    </section>
+    <section className="pb-5 sm:col-span-4 sm:pr-5 sm:pl-2">{children}</section>
   );
 }
