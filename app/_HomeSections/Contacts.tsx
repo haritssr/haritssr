@@ -13,6 +13,7 @@ export default function Contacts() {
     <section
       aria-labelledby="profile-heading"
       className="mb-20 grid grid-cols-1 gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4"
+      id="contacts"
     >
       <div className="corner-squircle border-border flex items-center justify-center rounded-2xl px-3 pt-3 pb-2.5 select-none sm:border">
         <Image

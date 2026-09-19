@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Destination from "@/components/Destination";
+import TopBarSearch from "@/components/TopBarSearch";
 
 export default function TopBar() {
   return (
@@ -13,19 +14,19 @@ export default function TopBar() {
         {/* Harits Syah */}
         <div className="group flex items-center space-x-2">
           <Image
-            alt="Harits Syah"
+            alt=""
             className="h-5 w-5"
             height={20}
             priority
             src="/icons/haritssr.svg"
             width={20}
           />
-          <Link aria-label="site logo" className="text-zinc-800" href="/">
+          <Link className="text-foreground" href="/">
             Harits Syah
           </Link>
         </div>
 
-        <div className="flex items-center sm:space-x-10">
+        <div className="flex items-center sm:space-x-4">
           <div className="hidden sm:block">
             <ul className="flex space-x-10">
               {["projects", "experiments", "writing", "design"].map((link) => (
@@ -33,6 +34,7 @@ export default function TopBar() {
               ))}
             </ul>
           </div>
+          <TopBarSearch />
         </div>
       </div>
     </nav>

@@ -1,143 +1,157 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import type { SubmitEvent } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import type { RouteDoc } from "../data/routes";
-import { searchRoutes } from "../data/routes";
+import { navigationRoutes } from "@/data/routes";
+import type { RouteDoc } from "@/data/routes";
+
+const GlobalSearchDialog = dynamic(
+  async () => await import("./GlobalSearchDialog")
+);
+
+let searchIndexRequest: Promise<readonly RouteDoc[]> | undefined;
+
+function isRouteDoc(value: unknown): value is RouteDoc {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const candidate = value as Partial<RouteDoc>;
+  return (
+    typeof candidate.description === "string" &&
+    typeof candidate.group === "string" &&
+    typeof candidate.route === "string" &&
+    typeof candidate.title === "string" &&
+    (candidate.suggestion === undefined ||
+      candidate.suggestion === "Navigation")
+  );
+}
+
+async function fetchSearchIndex(): Promise<readonly RouteDoc[]> {
+  const response = await fetch("/api/search-index");
+  if (!response.ok) {
+    throw new Error(`Search index request failed: ${response.status}`);
+  }
+
+  const data: unknown = await response.json();
+  if (!Array.isArray(data) || !data.every(isRouteDoc)) {
+    throw new TypeError("Search index response is invalid");
+  }
+
+  return data;
+}
+
+async function requestSearchIndex(): Promise<readonly RouteDoc[]> {
+  searchIndexRequest ??= fetchSearchIndex();
+
+  try {
+    return await searchIndexRequest;
+  } catch (error: unknown) {
+    searchIndexRequest = undefined;
+    throw error;
+  }
+}
 
 export default function TopBarSearch() {
-  const [isOpen, setIsOpen] = useState<true | false>(false);
-  const [query, setQuery] = useState("");
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const pathname = usePathname();
-  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
+  const [entries, setEntries] = useState<readonly RouteDoc[]>(navigationRoutes);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const requestStartedRef = useRef(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const results = useMemo(() => {
-    const trimmedQuery = query.trim();
-    if (!trimmedQuery) {
-      return [];
+  const prepareSearch = useCallback(() => {
+    if (requestStartedRef.current) {
+      return;
     }
 
-    return searchRoutes(trimmedQuery);
-  }, [query]);
+    requestStartedRef.current = true;
+    setIsLoading(true);
+    setLoadError(false);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      const container = containerRef.current;
-      if (
-        container === null ||
-        !(event.target instanceof Node) ||
-        !container.contains(event.target)
-      ) {
-        setIsOpen(false);
+    async function loadSearchIndex() {
+      try {
+        const searchEntries = await requestSearchIndex();
+        setEntries(searchEntries);
+        setIsLoading(false);
+      } catch {
+        requestStartedRef.current = false;
+        setLoadError(true);
+        setIsLoading(false);
       }
     }
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
+    void loadSearchIndex();
+  }, []);
 
   function openSearch() {
-    setIsOpen(true);
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 0);
+    prepareSearch();
+    setHasOpened(true);
+    setOpen(true);
   }
 
-  function handleSelect(route: string) {
-    setIsOpen(false);
-    setQuery("");
-    router.push(route);
-  }
-
-  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (results.length > 0) {
-      handleSelect(results[0].route);
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        event.key.toLowerCase() === "p" &&
+        !event.altKey &&
+        !event.shiftKey &&
+        !event.isComposing
+      ) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!event.repeat) {
+          prepareSearch();
+          setHasOpened(true);
+          setOpen((previous) => !previous);
+        }
+      }
     }
-  }
+
+    function closeSearch() {
+      setOpen(false);
+    }
+
+    document.addEventListener("keydown", handleKeyDown, true);
+    window.addEventListener("popstate", closeSearch);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown, true);
+      window.removeEventListener("popstate", closeSearch);
+    };
+  }, [prepareSearch]);
 
   return (
-    <div className="relative" ref={containerRef}>
+    <>
       <button
-        aria-label="Search routes"
-        className="flex cursor-pointer items-center justify-center"
+        aria-controls={hasOpened ? "global-search-dialog" : undefined}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        aria-keyshortcuts="Meta+P Control+P"
+        aria-label="Search the site"
+        className="text-foreground focus-visible:outline-action hover:text-searchicon-hover flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
         onClick={openSearch}
-        title="Search"
+        onFocus={prepareSearch}
+        onPointerEnter={prepareSearch}
+        ref={triggerRef}
+        title="Search (⌘P / Ctrl+P)"
         type="button"
       >
-        <MagnifyingGlassIcon className="block size-4.5 text-zinc-800 hover:text-zinc-600" />
+        <MagnifyingGlassIcon aria-hidden="true" className="size-4.5 stroke-2" />
       </button>
-
-      {isOpen && (
-        <div className="absolute top-8 right-0 z-50 w-72 rounded-md border border-zinc-200 bg-white p-2 shadow-lg">
-          <form onSubmit={handleSubmit}>
-            <input
-              className="w-full rounded-md border border-zinc-500 px-2 py-1.5 text-sm outline-none"
-              onChange={(event) => {
-                setQuery(event.target.value);
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Escape") {
-                  setIsOpen(false);
-                }
-              }}
-              placeholder="Search route..."
-              ref={inputRef}
-              type="search"
-              value={query}
-            />
-          </form>
-
-          <div className="mt-2 max-h-72 overflow-auto">
-            {query.trim().length === 0 && (
-              <div className="px-2 py-1 text-xs text-zinc-500">
-                Type to search routes
-              </div>
-            )}
-
-            {query.trim().length > 0 && results.length === 0 && (
-              <div className="px-2 py-1 text-xs text-zinc-500">
-                No route found
-              </div>
-            )}
-
-            {results.map((result: RouteDoc) => {
-              const isActive = pathname === result.route;
-
-              return (
-                <Link
-                  className={`block rounded px-2 py-1.5 text-sm ${
-                    isActive
-                      ? "bg-zinc-100 text-zinc-900"
-                      : "text-zinc-700 hover:bg-zinc-100"
-                  }`}
-                  href={result.route}
-                  key={result.id}
-                  onClick={() => {
-                    setIsOpen(false);
-                    setQuery("");
-                  }}
-                >
-                  <div className="font-medium">{result.title}</div>
-                  <div className="text-xs text-zinc-500">{result.route}</div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </div>
+      {hasOpened ? (
+        <GlobalSearchDialog
+          entries={entries}
+          isLoading={isLoading}
+          loadError={loadError}
+          onOpenChange={setOpen}
+          open={open}
+          triggerRef={triggerRef}
+        />
+      ) : null}
+    </>
   );
 }

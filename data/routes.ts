@@ -1,285 +1,94 @@
-// Static application pages backed by page.tsx files.
-const pageRoutes = [
-  "/",
-  "/writing",
-  "/projects",
-  "/experiments",
-  "/experiments/nextjs/articles",
-  "/experiments/nextjs/posts",
-  "/experiments/nextjs/students",
-  "/design",
-];
-
-// Experiment domain landing pages.
-const experimentDomainRoutes = [
-  "/experiments/browser",
-  "/experiments/react",
-  "/experiments/nextjs",
-  "/experiments/tailwind-css",
-  "/experiments/radix-ui",
-  "/experiments/headless-ui",
-  "/experiments/mantine",
-  "/experiments/visx",
-  "/experiments/react-aria",
-  "/experiments/react-query",
-  "/experiments/react-table",
-  "/experiments/katex",
-  "/experiments/haris-lab",
-  "/experiments/ui-explorations",
-];
-
-// Concrete experiment detail routes that are visitable.
-const experimentRoutes = [
-  "/experiments/browser/clock",
-  "/experiments/browser/custom-scroll",
-  "/experiments/browser/description-list",
-  "/experiments/browser/details",
-  "/experiments/browser/different-css-styling",
-  "/experiments/browser/figure",
-  "/experiments/browser/inputs",
-  "/experiments/browser/intersection-observer-api",
-  "/experiments/browser/number-game",
-  "/experiments/browser/scroll-title",
-  "/experiments/browser/select",
-  "/experiments/browser/text-editing",
-  "/experiments/browser/youtube-embed",
-
-  "/experiments/haris-lab/context-modal",
-  "/experiments/haris-lab/global-modal",
-  "/experiments/haris-lab/side-bar",
-  "/experiments/haris-lab/sidebar-hierarchy",
-
-  "/experiments/headless-ui/dialog",
-  "/experiments/headless-ui/disclosure",
-  "/experiments/headless-ui/listbox",
-  "/experiments/headless-ui/menu",
-  "/experiments/headless-ui/popover",
-  "/experiments/headless-ui/radio-group",
-  "/experiments/headless-ui/switch",
-  "/experiments/headless-ui/tabs",
-
-  "/experiments/katex/basic",
-  "/experiments/mantine/carousel",
-
-  "/experiments/nextjs/next-13-image-local",
-  "/experiments/nextjs/next-13-image-remote",
-  "/experiments/nextjs/router",
-  "/experiments/nextjs/swr",
-
-  "/experiments/radix-ui/accordion",
-  "/experiments/radix-ui/alert-dialog",
-  "/experiments/radix-ui/checkbox",
-  "/experiments/radix-ui/collapsible",
-  "/experiments/radix-ui/dialog",
-  "/experiments/radix-ui/dropdown-menu",
-  "/experiments/radix-ui/hover-card",
-  "/experiments/radix-ui/popover",
-  "/experiments/radix-ui/radio-group",
-  "/experiments/radix-ui/scroll-area",
-  "/experiments/radix-ui/select",
-  "/experiments/radix-ui/slider",
-  "/experiments/radix-ui/switch",
-  "/experiments/radix-ui/tabs",
-  "/experiments/radix-ui/toast",
-  "/experiments/radix-ui/toggle",
-  "/experiments/radix-ui/toggle-group",
-  "/experiments/radix-ui/toolbar",
-  "/experiments/radix-ui/tooltip",
-
-  "/experiments/react/cmdk",
-  "/experiments/react/confetti",
-  "/experiments/react/counter",
-  "/experiments/react/edit-profile",
-  "/experiments/react/font-mixer",
-  "/experiments/react/functional-props",
-  "/experiments/react/generic-select",
-  "/experiments/react/modal-inside-modal",
-  "/experiments/react/search-books",
-  "/experiments/react/search-interpol",
-  "/experiments/react/search-table",
-  "/experiments/react/searchable-product-data",
-  "/experiments/react/submit-form",
-  "/experiments/react/usecontext-dark-mode",
-  "/experiments/react/useeffect-title",
-  "/experiments/react/useimperativehandle",
-  "/experiments/react/usememo-1",
-  "/experiments/react/usereducer-todo-list",
-  "/experiments/react/usereducer-todo-list-immer",
-  "/experiments/react/usestate-draggable-box",
-  "/experiments/react/usestate-form",
-  "/experiments/react/usestate-object-form",
-  "/experiments/react/usestate-reacting-to-input",
-  "/experiments/react/usestate-todo-list",
-  "/experiments/react/react-wrap-balancer",
-
-  "/experiments/react-aria/calendar",
-  "/experiments/react-query/basic",
-
-  "/experiments/react-table/basic",
-  "/experiments/react-table/column-group",
-
-  "/experiments/tailwind-css/apple-navbar",
-  "/experiments/tailwind-css/blurry",
-  "/experiments/tailwind-css/centering-div",
-  "/experiments/tailwind-css/columns",
-  "/experiments/tailwind-css/feedback",
-  "/experiments/tailwind-css/floating-labels",
-  "/experiments/tailwind-css/glowing-background",
-  "/experiments/tailwind-css/grid",
-  "/experiments/tailwind-css/newspaper",
-  "/experiments/tailwind-css/planetscale-navbar",
-  "/experiments/tailwind-css/position",
-  "/experiments/tailwind-css/sidebar",
-  "/experiments/tailwind-css/tailwind-vs-apple-color",
-  "/experiments/tailwind-css/youtube-thumbnail",
-
-  "/experiments/ui-explorations/inline-maki",
-  "/experiments/ui-explorations/input-list",
-  "/experiments/ui-explorations/masalah-to-feature",
-  "/experiments/ui-explorations/notion-navbar",
-  "/experiments/ui-explorations/task",
-  "/experiments/ui-explorations/task/architecture",
-  "/experiments/ui-explorations/task/history",
-  "/experiments/ui-explorations/task/statistics",
-  "/experiments/ui-explorations/times-table",
-  "/experiments/ui-explorations/stopwatch",
-  "/experiments/ui-explorations/yearly-interest",
-  "/experiments/ui-explorations/tools",
-
-  "/experiments/visx/bar-chart",
-  "/experiments/visx/pie-chart",
-
-  "/experiments/nextjs/posts/pre-rendering",
-  "/experiments/nextjs/posts/ssg-ssr",
-];
-
-// Combined unique route list used as the source corpus for search.
-const allRoutes = [
-  ...new Set([...pageRoutes, ...experimentDomainRoutes, ...experimentRoutes]),
-];
-
-// Human-friendly title overrides for routes that need custom labels.
-const routeTitleOverrides: Record<string, string> = {
-  "/": "Home",
-  "/design": "Design",
-  "/experiments/ui-explorations/input-list": "Input List",
-  "/experiments/ui-explorations/times-table": "Times Table",
-};
-
-// Matches route separators that should become spaces.
-// Example: "foo-bar" becomes "foo bar" after replacement.
-const routeSeparatorPattern = /[-_/]/g;
-
-// Matches runs of whitespace so normalized text contains single spaces.
-// Example: "foo  bar" becomes "foo bar".
-const whitespaceSequencePattern = /\s+/g;
-
 export interface RouteDoc {
-  id: string;
   route: string;
   title: string;
-  tokens: string[];
+  description: string;
+  group: string;
+  suggestion?: "Navigation";
 }
 
-// Normalizes any route or query text into a lowercase, space-separated form.
-function normalizeText(value: string): string {
+export const navigationRoutes: readonly RouteDoc[] = [
+  {
+    route: "/",
+    title: "Home",
+    description: "Harits Syah — developer, teacher, and founder",
+    group: "Navigation",
+    suggestion: "Navigation",
+  },
+  {
+    route: "/projects",
+    title: "Projects",
+    description: "Selected projects and client work",
+    group: "Navigation",
+    suggestion: "Navigation",
+  },
+  {
+    route: "/experiments",
+    title: "Experiments",
+    description: "Explore code, libraries, and UI experiments",
+    group: "Navigation",
+    suggestion: "Navigation",
+  },
+  {
+    route: "/writing",
+    title: "Writing",
+    description: "Notes, ideas, and articles",
+    group: "Navigation",
+    suggestion: "Navigation",
+  },
+  {
+    route: "/design",
+    title: "Design",
+    description: "Design system, colors, and components",
+    group: "Navigation",
+    suggestion: "Navigation",
+  },
+];
+
+const combiningMarks = /\p{M}/gu;
+const separators = /[^\p{L}\p{N}]+/gu;
+
+function normalize(value: string): string {
   return value
+    .normalize("NFKD")
+    .replace(combiningMarks, "")
     .toLowerCase()
-    .replace(routeSeparatorPattern, " ")
-    .replace(whitespaceSequencePattern, " ")
+    .replace(separators, " ")
     .trim();
 }
 
-// Converts normalized words into display-friendly title case.
-function toTitleCase(value: string): string {
-  return value
-    .split(" ")
-    .filter(Boolean)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-// Resolves the display title for a route using overrides and fallback formatting.
-function getRouteTitle(route: string): string {
-  const override = routeTitleOverrides[route];
-  if (override !== undefined) {
-    return override;
+// Require every query word, including partial words, and prefer title matches.
+export function searchRoutes(
+  docs: readonly RouteDoc[],
+  query: string
+): RouteDoc[] {
+  const normalizedQuery = normalize(query);
+  if (!normalizedQuery) {
+    return docs.filter((doc) => doc.suggestion !== undefined);
   }
 
-  // Cached normalized route string for empty-route handling and title generation.
-  const normalized = normalizeText(route);
-  if (normalized.length === 0) {
-    return "Home";
-  }
-
-  return toTitleCase(normalized);
-}
-
-// Tokenizes text into unique searchable words.
-function tokenize(value: string): string[] {
-  return [...new Set(normalizeText(value).split(" ").filter(Boolean))];
-}
-
-// Searchable route documents with derived titles and tokens.
-const routeDocs: RouteDoc[] = allRoutes.map((route) => {
-  // Human-readable route title.
-  const title = getRouteTitle(route);
-  // Unique search tokens generated from route and title text.
-  const tokens = tokenize(`${route} ${title}`);
-
-  return {
-    id: route,
-    route,
-    title,
-    tokens,
-  };
-});
-
-// Inverted index mapping each token to matching route IDs.
-const routeTokenIndex: Record<string, string[]> = {};
-for (const doc of routeDocs) {
-  for (const token of doc.tokens) {
-    const matchingRoutes = routeTokenIndex[token];
-    if (matchingRoutes === undefined) {
-      routeTokenIndex[token] = [doc.id];
-    } else {
-      matchingRoutes.push(doc.id);
-    }
-  }
-}
-
-// Searches routes by query tokens and returns ranked route documents.
-export function searchRoutes(query: string, limit = 20): RouteDoc[] {
-  // Tokenized user query used for index lookups.
-  const queryTokens = tokenize(query);
-  if (queryTokens.length === 0) {
-    return [];
-  }
-
-  // Score map keyed by route ID; higher values rank earlier.
-  const scored = new Map<string, number>();
-
-  for (const token of queryTokens) {
-    // Candidate routes matching the current token.
-    const matchedRoutes = routeTokenIndex[token] ?? [];
-
-    for (const route of matchedRoutes) {
-      // Previous accumulated score for this route.
-      const prevScore = scored.get(route) ?? 0;
-      scored.set(route, prevScore + 1);
-    }
-  }
-
-  return routeDocs
-    .filter((doc) => scored.has(doc.id))
-    .toSorted((a, b) => {
-      // Primary ranking by token match count.
-      const scoreDelta = (scored.get(b.id) ?? 0) - (scored.get(a.id) ?? 0);
-      if (scoreDelta !== 0) {
-        return scoreDelta;
+  const words = normalizedQuery.split(" ");
+  return docs
+    .map((doc) => {
+      const title = normalize(doc.title);
+      const searchable = normalize(
+        `${doc.title} ${doc.route} ${doc.description} ${doc.group}`
+      );
+      if (!words.every((word) => searchable.includes(word))) {
+        return { doc, score: 0 };
       }
 
-      return a.route.localeCompare(b.route);
+      let score = 1;
+      if (title === normalizedQuery) {
+        score += 100;
+      } else if (title.startsWith(normalizedQuery)) {
+        score += 50;
+      }
+      score += words.filter((word) => title.includes(word)).length * 10;
+      return { doc, score };
     })
-    .slice(0, limit);
+    .filter(({ score }) => score > 0)
+    .toSorted(
+      (a, b) => b.score - a.score || a.doc.route.localeCompare(b.doc.route)
+    )
+    .map(({ doc }) => doc);
 }

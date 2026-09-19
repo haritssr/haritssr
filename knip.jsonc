@@ -8,8 +8,6 @@
   "ignoreFiles": [
     // These components are retained for features that are currently unwired.
     "components/InternalLinkWithoutArrow.tsx",
-    "components/TopBarSearch.tsx",
-    "data/routes.ts",
     "utils/someContext.tsx",
   ],
   "ignore": [
