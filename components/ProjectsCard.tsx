@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { getProjectSlug } from "@/utils/projectSlug";
+
 interface ProjectsCardType {
   className?: string;
   href: string;
@@ -59,8 +61,8 @@ export default function ProjectsCard({
           Visit
         </a>
         <Link
-          className="corner-squircle inline-flex w-1/2 items-center justify-center rounded-xl border border-zinc-300 py-1.25 text-center text-sm text-zinc-600 hover:bg-zinc-100 hover:text-zinc-700"
-          href={`/projects/${title.toLowerCase().split(" ").join("-")}`}
+          className="corner-squircle border-border text-foreground/90 hover:bg-surface-hover hover:border-border-hover inline-flex w-1/2 items-center justify-center rounded-xl border py-1.25 text-center text-sm"
+          href={`/projects/${getProjectSlug(title)}`}
         >
           Details
         </Link>

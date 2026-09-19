@@ -5,18 +5,11 @@ import { notFound } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import { getProjectSlug } from "@/utils/projectSlug";
 
 import { ProjectsData } from "../../../data/ProjectsData";
 import type { ProjectsDataType } from "../../../data/ProjectsData";
 import LoadingFigma from "./LoadingFigma";
-
-const whitespaceSequencePattern = /\s+/gu;
-
-function getProjectSlug(projectName: string) {
-  return projectName
-    .toLocaleLowerCase("en-US")
-    .replace(whitespaceSequencePattern, "-");
-}
 
 function getProject(projectSlug: string) {
   return ProjectsData.find(

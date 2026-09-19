@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { isExperimentAvailable } from "@/utils/databaseExperiments";
+import { getProjectSlug } from "@/utils/projectSlug";
 import { SITE_URL } from "@/utils/site";
 import { allWritings } from "@/utils/writings";
 
@@ -11,8 +12,6 @@ import {
 } from "../data/NextjsExperimentsData";
 import { ProjectsData } from "../data/ProjectsData";
 import { getAllPostIds } from "../utils/posts";
-
-const whitespaceSequencePattern = /\s+/g;
 
 const staticRoutes = [
   "/",
@@ -57,8 +56,7 @@ const routeUrls = [
     ...articleRoutes,
     ...studentRoutes,
     ...ProjectsData.map(
-      (project) =>
-        `/projects/${project.project_name.toLowerCase().replace(whitespaceSequencePattern, "-")}`
+      (project) => `/projects/${getProjectSlug(project.project_name)}`
     ),
   ]),
 ].map((route) => ({ url: `${SITE_URL}${route}` }));
