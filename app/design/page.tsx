@@ -87,6 +87,10 @@ export default function DesignSystem() {
         </li>
         <li>Heavily inspired by Apple design videos.</li>
         <li>
+          The core of digital services is to adapt to their cognitive load and
+          enable their capabilities
+        </li>
+        <li>
           I care deeply about UX/UI design, with references including{" "}
           <ExternalLink href="https://www.apple.com" name="Apple" />,
           <ExternalLink href="https://linear.app" name="Linear" />,
