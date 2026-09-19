@@ -111,7 +111,7 @@ export default async function Writing({
           &nbsp;&nbsp;
           <p>{Math.ceil(writing.wordCount / 200)} Min Read</p>
         </div>
-        <article className="prose prose-zinc max-w-none">
+        <article className="prose prose-zinc prose-headings:text-foreground max-w-none">
           <WritingContent />
         </article>
       </Content>
