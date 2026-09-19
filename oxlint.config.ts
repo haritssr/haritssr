@@ -2,6 +2,7 @@ import { defineConfig } from "oxlint";
 import core from "ultracite/oxlint/core";
 import next from "ultracite/oxlint/next";
 import react from "ultracite/oxlint/react";
+import shadcn from "ultracite/oxlint/shadcn";
 
 const repositoryIgnorePatterns = [
   "**/.agents/**",
@@ -10,9 +11,50 @@ const repositoryIgnorePatterns = [
 ];
 
 export default defineConfig({
-  extends: [core, next, react],
+  extends: [core, next, react, shadcn],
   ignorePatterns: [...(core.ignorePatterns ?? []), ...repositoryIgnorePatterns],
+  jsPlugins: shadcn.jsPlugins,
   overrides: [
+    {
+      files: ["components/**"],
+      rules: {
+        // Component definitions own their appearance and class composition.
+        "shadcn/no-arbitrary-values": "off",
+        "shadcn/no-restyle": "off",
+        "shadcn/require-static-classes": "off",
+      },
+    },
+    {
+      files: ["app/experiments/**"],
+      rules: {
+        // Experiments intentionally demonstrate alternative UI approaches.
+        "shadcn/no-arbitrary-values": "off",
+        "shadcn/no-inline-styles": "off",
+        "shadcn/no-raw-colors": "off",
+        "shadcn/no-restyle": "off",
+        "shadcn/no-unknown-classes": "off",
+        "shadcn/require-static-classes": "off",
+      },
+    },
+    {
+      files: ["utils/react-aria/**"],
+      rules: {
+        // These files are copied React Aria examples, not project UI sources.
+        "shadcn/no-arbitrary-values": "off",
+        "shadcn/no-inline-styles": "off",
+        "shadcn/no-raw-colors": "off",
+        "shadcn/no-restyle": "off",
+        "shadcn/no-unknown-classes": "off",
+        "shadcn/require-static-classes": "off",
+      },
+    },
+    {
+      files: ["app/design/ColorsDemo.tsx"],
+      rules: {
+        // This page intentionally documents the raw Tailwind color palette.
+        "shadcn/no-raw-colors": "off",
+      },
+    },
     {
       files: ["**/*.js"],
       rules: {
@@ -120,6 +162,11 @@ export default defineConfig({
   options: {
     reportUnusedDisableDirectives: "error",
     typeAware: true,
+  },
+  settings: {
+    shadcn: {
+      ui: "@/components",
+    },
   },
   rules: {
     "eslint/func-style": "off",

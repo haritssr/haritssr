@@ -28,10 +28,8 @@
   "lsp": {
     "tailwindcss-language-server": {
       "settings": {
-        "tailwindCSS": {
-          "lint": {
-            "cssConflict": "ignore"
-          }
+        "lint": {
+          "cssConflict": "ignore"
         }
       }
     },
