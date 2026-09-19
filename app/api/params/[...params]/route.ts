@@ -1,7 +1,5 @@
-// Catch-all route for /api/*
-// /api/one returns ["one"]
-// /api/one/two returns ["one", "two"]
-
+// Named experiment for inspecting catch-all route parameters.
+// /api/params/one/two returns ["one", "two"].
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ params: string[] }> }
