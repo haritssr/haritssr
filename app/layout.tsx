@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import FooterSpacing from "@/components/FooterSpacing";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
-import TopBarBorderOnScroll from "@/components/TopBarBorderOnScroll";
+import TopBar from "@/components/TopBar";
 
 import "./globals.css";
 import { RSS_PATH, SITE_URL } from "@/utils/site";
@@ -72,7 +72,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <ServiceWorkerRegistration />
-        <TopBarBorderOnScroll />
+        <TopBar />
         <main
           className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0"
           id="main-content"
