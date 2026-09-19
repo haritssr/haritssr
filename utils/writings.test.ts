@@ -6,34 +6,34 @@ const { allWritings, getWriting, parseWriting } = await import("./writings");
 const { writingModuleSlugs } = await import("./writing-modules");
 
 const expectedSlugs = [
-  "context-switching",
   "graph",
-  "how-brain-works",
-  "on-curiosity",
-  "on-decision-making",
+  "product-engineering",
+  "transformation",
   "on-design-principles",
-  "on-information",
+  "how-brain-works",
+  "on-decision-making",
+  "on-problem",
+  "on-curiosity",
   "on-knowledge",
   "on-learning",
-  "on-problem",
-  "on-questions",
   "on-writing",
-  "product-engineering",
-  "remembering-death",
   "the-most-persisted-myth",
-  "tim-cook-speech-stanford",
-  "transformation",
+  "on-information",
   "why-i-am-building-haris-lab",
+  "context-switching",
+  "on-questions",
+  "remembering-death",
+  "tim-cook-speech-stanford",
 ];
 
 describe("writing index", () => {
-  test("loads every MDX file in deterministic slug order", () => {
+  test("loads every MDX file in reverse chronological order", () => {
     expect(allWritings.map(({ slug }) => slug)).toEqual(expectedSlugs);
     expect(Object.isFrozen(allWritings)).toBe(true);
   });
 
   test("keeps the MDX registry synchronized with the content directory", () => {
-    expect(writingModuleSlugs.toSorted()).toEqual(expectedSlugs);
+    expect(writingModuleSlugs.toSorted()).toEqual(expectedSlugs.toSorted());
   });
 
   test("looks up known writings and rejects unknown slugs", () => {

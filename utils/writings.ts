@@ -65,7 +65,11 @@ function loadWritings(): readonly Writing[] {
           fs.readFileSync(path.join(writingsDirectory, entry.name), "utf-8")
         )
       )
-      .toSorted((left, right) => left.slug.localeCompare(right.slug))
+      .toSorted(
+        (left, right) =>
+          right.publishedAt.localeCompare(left.publishedAt) ||
+          left.slug.localeCompare(right.slug)
+      )
   );
 }
 
