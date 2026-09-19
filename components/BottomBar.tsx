@@ -14,7 +14,7 @@ export default function BottomBar({
       aria-label="Mobile navigation"
       className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} p-3`}
     >
-      <div className="corner-squircle w-full rounded-xl border border-zinc-200 bg-white/80 p-1.25 shadow-lg saturate-150 backdrop-blur-lg">
+      <div className="corner-squircle border-border w-full rounded-xl border bg-white/80 p-1.25 shadow-lg saturate-150 backdrop-blur-lg">
         <div className="flex w-full items-center">
           {TitleAndPathData.map(({ title, path }) => (
             <IconWrapper key={title} path={path} to={title} />
@@ -33,12 +33,12 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
     pathname === route ||
     (route !== "/" && CurrentPageBaseRoute === route.slice(1));
 
-  const color = isCurrentPage ? "text-action" : "text-zinc-600";
+  const color = isCurrentPage ? "text-action" : "text-foreground/60";
 
   return (
     <Link
       aria-current={isCurrentPage ? "page" : undefined}
-      className="focus-visible:outline-action block w-1/5 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] active:scale-95"
+      className="focus-visible:outline-action block w-1/5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 active:scale-95"
       href={route}
     >
       <div className="flex flex-col items-center justify-center">

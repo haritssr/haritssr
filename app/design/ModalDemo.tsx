@@ -10,15 +10,15 @@ export default function ModalDemo() {
         Open Modal
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 z-40 bg-zinc-950/50 backdrop-blur-[2px]" />
-        <Dialog.Popup className="focus-visible:outline-action fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border border-zinc-300 bg-white p-5 shadow-xl outline-hidden focus-visible:outline-2 sm:p-6">
-          <Dialog.Title className="text-lg font-semibold text-zinc-800">
+        <Dialog.Backdrop className="bg-foreground/50 fixed inset-0 z-40 backdrop-blur-xs" />
+        <Dialog.Popup className="focus-visible:outline-action border-border fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border bg-white p-5 shadow-xl outline-hidden focus-visible:outline-2 sm:p-6">
+          <Dialog.Title className="text-foreground/90 text-lg font-semibold">
             Modal title
           </Dialog.Title>
-          <Dialog.Description className="mt-2 mb-5 text-sm leading-normal text-zinc-600">
+          <Dialog.Description className="text-foreground/60 mt-2 mb-5 text-sm leading-normal">
             Dialogs focus attention on a short task or decision.
           </Dialog.Description>
-          <div className="rounded-lg bg-zinc-50 p-4 text-sm text-zinc-600">
+          <div className="bg-foreground/5 text-foreground/60 rounded-lg p-4 text-sm">
             Content stays inside the dialog while the page beneath it is
             temporarily inert.
           </div>
@@ -30,7 +30,7 @@ export default function ModalDemo() {
           </div>
           <Dialog.Close
             aria-label="Close"
-            className="focus-visible:outline-action absolute top-3 right-3 inline-flex h-8 w-8 appearance-none items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 focus-visible:outline-2"
+            className="focus-visible:outline-action text-foreground/60 hover:bg-border hover:text-foreground/90 absolute top-3 right-3 inline-flex h-8 w-8 appearance-none items-center justify-center rounded-full focus-visible:outline-2"
           >
             <XMarkIcon aria-hidden="true" className="h-4 w-4" />
           </Dialog.Close>

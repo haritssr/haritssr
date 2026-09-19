@@ -14,7 +14,7 @@ export default function Contacts() {
       aria-labelledby="profile-heading"
       className="mb-20 grid grid-cols-1 gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4"
     >
-      <div className="corner-squircle flex items-center justify-center rounded-2xl border-zinc-300 px-3 pt-3 pb-2.5 select-none sm:border">
+      <div className="corner-squircle border-border flex items-center justify-center rounded-2xl px-3 pt-3 pb-2.5 select-none sm:border">
         <Image
           alt="Harits Syah"
           blurDataURL="/images/blur.jpg"
@@ -26,28 +26,28 @@ export default function Contacts() {
         />
       </div>
       <div
-        className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 px-4 pt-3 pb-2.5 text-left text-zinc-500"
+        className="corner-squircle border-border text-foreground space-y-2.5 rounded-2xl border px-4 pt-3 pb-2.5 text-left"
         id="1234"
       >
-        <h1 className="font-semibold text-zinc-800">Harits Syah</h1>
+        <h1 className="text-foreground font-semibold">Harits Syah</h1>
         <div className="flex items-center space-x-2">
           <CodeBracketIcon
             aria-hidden="true"
-            className="size-4 shrink-0 stroke-2 text-zinc-600"
+            className="text-foreground/70 size-4 shrink-0 stroke-2"
           />
           <p>Web Product Engineer</p>
         </div>
         <div className="flex items-center space-x-2">
           <AcademicCapIcon
             aria-hidden="true"
-            className="size-4 shrink-0 stroke-2 text-zinc-600"
+            className="text-foreground/70 size-4 shrink-0 stroke-2"
           />
           <p>Math-Physics Teacher</p>
         </div>
         <div className="flex items-center space-x-2">
           <BuildingOffice2Icon
             aria-hidden="true"
-            className="size-4 shrink-0 stroke-2 text-zinc-600"
+            className="text-foreground/70 size-4 shrink-0 stroke-2"
           />
           <a
             className="hover:text-action focus-visible:outline-action inline-block focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -62,18 +62,18 @@ export default function Contacts() {
         <div className="flex items-center gap-2">
           <MapPinIcon
             aria-hidden="true"
-            className="size-4 shrink-0 stroke-2 text-zinc-600"
+            className="text-foreground/70 size-4 shrink-0 stroke-2"
           />
           <p>Tangerang, Indonesia</p>
         </div>
       </div>
       <ContactList />
       <div
-        className="corner-squircle space-y-2 rounded-2xl border border-zinc-300 px-4 pt-3 pb-2.5 text-zinc-500"
+        className="corner-squircle border-border text-foreground space-y-2 rounded-2xl border px-4 pt-3 pb-2.5"
         id="topics"
       >
-        <p className="font-semibold text-zinc-800">Interests</p>
-        <p className="-mt-1 leading-8">
+        <p className="text-foreground font-semibold">Interests</p>
+        <p className="text-foreground/70 -mt-1 leading-8">
           Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
           Physics, and Education .
         </p>

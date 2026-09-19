@@ -12,11 +12,13 @@
 
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
   /* Semantic colors documented on /design */
-  --color-action: var(--color-blue-500);
+  --color-action: color-mix(
+    in oklab,
+    var(--color-blue-600) 60%,
+    var(--color-blue-500) 40%
+  );
   --color-action-hover: color-mix(
     in oklab,
     var(--color-blue-500) 60%,
@@ -26,9 +28,14 @@
   --color-attention: #eab308;
   --color-danger: #ef4444;
   --color-information: #a855f7;
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(240 10% 3.9%);
-  --color-border: hsl(240 5.9% 90%);
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-zinc-800);
+  --color-border: var(--color-zinc-300);
+  --color-border-hover: var(--color-zinc-400);
+  --color-border-interface-hover: var(--color-zinc-300);
+  --color-surface-hover: var(--color-zinc-50);
+  --color-interface-hover: var(--color-zinc-100);
+  --color-searchicon-hover: var(--color-zinc-500);
 
   --breakpoint-xs: 450px;
   --breakpoint-sm: 640px;

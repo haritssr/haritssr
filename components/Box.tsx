@@ -8,11 +8,11 @@ export default function Box({
   children: React.ReactNode;
 }) {
   return (
-    <div className="corner-squircle overflow-hidden rounded-xl border border-zinc-300">
-      <div className="flex items-center justify-between border-b border-zinc-300 bg-zinc-100 px-3 py-1.5 text-zinc-700 select-none">
+    <div className="corner-squircle border-border overflow-hidden rounded-xl border">
+      <div className="border-border bg-surface-hover text-foreground flex items-center justify-between border-b px-3 py-1.5 select-none">
         <span>{title}</span>
         {name !== undefined && name.length > 0 ? (
-          <span className="font-mono text-sm text-zinc-400">{`${name}.tsx`}</span>
+          <span className="text-foreground/50 font-mono text-sm">{`${name}.tsx`}</span>
         ) : null}
       </div>
       <div className="space-y-5 p-5">{children}</div>

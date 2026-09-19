@@ -5,7 +5,7 @@ export default function ButtonIconOnlyDemo() {
     <Button aria-label="Bookmark" iconOnly variant="secondary">
       <svg
         aria-hidden="true"
-        className="h-5 w-4 text-zinc-800"
+        className="text-foreground h-5 w-4"
         fill="none"
         stroke="currentColor"
         strokeWidth={2}

@@ -2,7 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const moreItemsClassName =
-  "corner-squircle flex h-fit w-full items-center justify-center rounded-xl border border-zinc-300 py-2.5 text-center text-blue-500 hover:bg-zinc-100";
+  "corner-squircle flex h-fit w-full items-center justify-center rounded-xl border border-border py-2.5 text-center text-action hover:bg-border";
 
 export default function MoreItemsLink({
   className,

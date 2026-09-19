@@ -34,10 +34,10 @@ export default function LogoDemo() {
             width={40}
           />
           <div className="flex flex-col">
-            <span className="text-sm text-zinc-800 sm:text-base">
+            <span className="text-foreground/90 text-sm sm:text-base">
               {logo.name}
             </span>
-            <span className="text-sm text-zinc-400 sm:text-base">
+            <span className="text-foreground/60 text-sm sm:text-base">
               {logo.url}
             </span>
           </div>

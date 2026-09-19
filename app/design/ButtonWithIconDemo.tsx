@@ -5,7 +5,7 @@ export default function ButtonWithIconDemo() {
     <Button variant="secondary">
       <svg
         aria-hidden="true"
-        className="h-4.5 w-4.5 text-zinc-800"
+        className="text-foreground h-4.5 w-4.5"
         fill="none"
         stroke="currentColor"
         strokeWidth={2}

@@ -3,13 +3,13 @@ import HomeSectionWrapper from "./HomeSectionWrapper";
 export default function About() {
   return (
     <HomeSectionWrapper className="space-y-5" id="misc" topic="About">
-      <ul className="list-outside list-disc space-y-1 pl-4 text-zinc-500">
+      <ul className="text-foreground/70 list-outside list-disc space-y-1 pl-4">
         <li>Touch typist (±90 WPM)</li>
         <li>
-          <span className="text-zinc-800">haritssr</span> ={" "}
-          <span className="text-zinc-800">harits</span>{" "}
-          <span className="text-zinc-800">s</span>yah{" "}
-          <span className="text-zinc-800">r</span>ahmatullah
+          <span className="text-action">haritssr</span> ={" "}
+          <span className="text-action">harits</span>{" "}
+          <span className="text-action">s</span>yah{" "}
+          <span className="text-action">r</span>ahmatullah
         </li>
         <li>Former chess player, peaked at around 2000 Elo.</li>
         <li>Prefer eudaimonic happiness to hedonic happiness.</li>

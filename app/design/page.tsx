@@ -34,7 +34,7 @@ import ToggleDemo from "./ToggleDemo";
 import TooltipDemo from "./TooltipDemo";
 
 const FORM_CONTROL_CLASS_NAME =
-  "form-control w-full appearance-none rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm outline-hidden placeholder:text-zinc-400 focus:border-zinc-700 focus:ring-2 focus:ring-zinc-700/20 sm:max-w-xs";
+  "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 shadow-sm outline-hidden placeholder:text-foreground/40 focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
 
 export default function DesignSystem() {
   const [loading, setLoading] = useState(false);
@@ -143,7 +143,7 @@ export default function DesignSystem() {
             Headless UI
           </InternalLink>
         </li>
-        <li className="text-zinc-500">
+        <li className="text-foreground/60">
           Still evolving: typography, use cases, do&apos;s and don&apos;ts, and
           component-specific guidance are next.
         </li>
@@ -252,8 +252,8 @@ export default function DesignSystem() {
         </Box>
 
         <Box name="Box" title="Box">
-          <div className="w-50 overflow-hidden rounded-md border border-zinc-400/50 sm:w-75">
-            <div className="border-b border-zinc-400/50 bg-zinc-50 px-3 py-2 font-medium text-zinc-800 select-none">
+          <div className="border-foreground/20 w-50 overflow-hidden rounded-md border sm:w-75">
+            <div className="border-foreground/20 bg-background text-foreground/90 border-b px-3 py-2 font-medium select-none">
               Title
             </div>
             <div className="flex h-32 items-center justify-center p-5">
@@ -318,7 +318,7 @@ export default function DesignSystem() {
 
         <Box title="Date Picker">
           <label className="block w-full sm:max-w-xs">
-            <span className="mb-1 block text-sm font-medium text-zinc-700">
+            <span className="text-foreground/80 mb-1 block text-sm font-medium">
               Choose a date
             </span>
             <input className={FORM_CONTROL_CLASS_NAME} type="date" />
@@ -339,7 +339,7 @@ export default function DesignSystem() {
       <div className="mt-5">
         <iframe
           allowFullScreen
-          className="min-h-128 w-full rounded-lg border border-zinc-300"
+          className="border-border min-h-128 w-full rounded-lg border"
           height="450"
           loading="lazy"
           src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3DwxLQxcZHLYNHFvrj-1"

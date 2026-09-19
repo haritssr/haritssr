@@ -6,13 +6,13 @@ export default function AccordionDemo() {
     <Accordion.Root className="w-full max-w-xs" multiple>
       <Accordion.Item value="item-1">
         <Accordion.Header>
-          <Accordion.Trigger className="group focus-visible:outline-action flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-3 py-2 text-left text-sm font-medium text-zinc-800 outline-hidden transition-colors hover:bg-zinc-100 focus-visible:outline-2 data-panel-open:rounded-b-none data-panel-open:bg-zinc-100">
+          <Accordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
             <span>What is an accordion?</span>
-            <ChevronDownIcon className="h-5 w-5 text-zinc-800 transition-transform duration-200 group-data-panel-open:rotate-180" />
+            <ChevronDownIcon className="text-foreground h-5 w-5 transition-transform duration-200 group-data-panel-open:rotate-180" />
           </Accordion.Trigger>
         </Accordion.Header>
 
-        <Accordion.Panel className="rounded-b-lg border-r border-b border-l border-zinc-300 bg-white p-3 text-sm text-zinc-600">
+        <Accordion.Panel className="border-border text-foreground/70 rounded-b-lg border-r border-b border-l bg-white p-3 text-sm">
           An accordion reveals related content without taking permanent space in
           the layout.
         </Accordion.Panel>

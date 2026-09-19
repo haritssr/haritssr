@@ -71,9 +71,10 @@ export function StatusPage({
       : "";
   const cardClassName =
     tone === "error"
-      ? "border-rose-200 bg-rose-50"
-      : "border-zinc-200 bg-zinc-50/40";
-  const badgeClassName = tone === "error" ? "text-rose-700" : "text-zinc-500";
+      ? "border-danger/20 bg-danger/10"
+      : "border-border bg-foreground/5";
+  const badgeClassName =
+    tone === "error" ? "text-danger" : "text-foreground/60";
 
   return (
     <div className={wrapperClassName}>
@@ -83,9 +84,9 @@ export function StatusPage({
         <div className={`text-xs font-medium uppercase ${badgeClassName}`}>
           {tone === "error" ? "Error" : "404"}
         </div>
-        <h1 className="mt-2 text-2xl font-semibold text-zinc-800">{title}</h1>
+        <h1 className="text-foreground mt-2 text-2xl font-semibold">{title}</h1>
         {description !== undefined && description !== null ? (
-          <p className="mt-2 text-sm text-zinc-600">{description}</p>
+          <p className="text-foreground/70 mt-2 text-sm">{description}</p>
         ) : null}
         {actions !== undefined && actions !== null ? (
           <div className="mt-5 flex w-full flex-col items-center justify-center gap-2 sm:flex-row">

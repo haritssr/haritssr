@@ -12,7 +12,10 @@ function boldharitssr(strippedURL: string, haritssr = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === haritssr ? (
-        <span className="text-zinc-800" key={`u-${strippedURL.indexOf(chunk)}`}>
+        <span
+          className="text-foreground"
+          key={`u-${strippedURL.indexOf(chunk)}`}
+        >
           {haritssr}
         </span>
       ) : (
@@ -43,7 +46,9 @@ function renderContact(each: { link: string; icon: string }) {
           src={each.icon}
           width={20}
         />
-        <span className="text-zinc-500">{boldharitssr(displayedLink)}</span>
+        <span className="text-foreground/60">
+          {boldharitssr(displayedLink)}
+        </span>
       </a>
     );
   }
@@ -63,7 +68,7 @@ function renderContact(each: { link: string; icon: string }) {
           src={each.icon}
           width={20}
         />
-        <span className="text-zinc-500">{boldharitssr(each.link)}</span>
+        <span className="text-foreground/60">{boldharitssr(each.link)}</span>
       </a>
     );
   }
@@ -73,8 +78,8 @@ function renderContact(each: { link: string; icon: string }) {
 
 export default function ContactList() {
   return (
-    <div className="corner-squircle space-y-2.5 rounded-2xl border border-zinc-300 px-4 pt-3 pb-2.5">
-      <p className="font-semibold text-zinc-800">Contacts</p>
+    <div className="corner-squircle border-border space-y-2.5 rounded-2xl border px-4 pt-3 pb-2.5">
+      <p className="text-foreground font-semibold">Contacts</p>
       <ul className="space-y-2.5">
         {data.points.map((each) => (
           <li className="cursor-pointer" key={each.link}>

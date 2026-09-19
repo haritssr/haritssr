@@ -12,7 +12,7 @@ export default function HomeSectionWrapper({
   return (
     <div id={id}>
       <section className="flex items-center justify-between">
-        <h2 className="mb-6 text-2xl font-semibold text-zinc-800 select-none">
+        <h2 className="text-foreground mb-6 text-2xl font-semibold select-none">
           {topic}
         </h2>
       </section>

@@ -9,11 +9,11 @@ export default function SliderDemo() {
       step={1}
     >
       <Slider.Control className="relative flex w-full touch-none items-center">
-        <Slider.Track className="relative h-2 flex-1 rounded-full bg-zinc-200">
+        <Slider.Track className="bg-border relative h-2 flex-1 rounded-full">
           <Slider.Indicator className="bg-action absolute h-full rounded-full" />
           <Slider.Thumb
             aria-label="Volume"
-            className="has-focus-visible:outline-action block h-5 w-5 cursor-pointer rounded-full border border-zinc-300 bg-white shadow outline-hidden hover:border-zinc-400 has-focus-visible:outline-2"
+            className="has-focus-visible:outline-action border-border hover:border-action-hover block h-5 w-5 cursor-pointer rounded-full border bg-white shadow outline-hidden has-focus-visible:outline-2"
           />
         </Slider.Track>
       </Slider.Control>

@@ -1,10 +1,10 @@
 export default function TableDemo() {
   return (
     <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-70 border-collapse divide-y divide-zinc-300 border border-zinc-300 text-sm text-zinc-800">
+      <table className="divide-border border-border text-foreground w-full min-w-70 border-collapse divide-y border text-sm">
         <caption className="sr-only">Example data table</caption>
         <thead>
-          <tr className="divide-x divide-zinc-300 bg-zinc-50">
+          <tr className="divide-border bg-foreground/5 divide-x">
             <th className="px-3 py-2 text-left font-medium" scope="col">
               Name
             </th>
@@ -16,13 +16,13 @@ export default function TableDemo() {
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-200">
-          <tr className="divide-x divide-zinc-200">
+        <tbody className="divide-border divide-y">
+          <tr className="divide-border divide-x">
             <td className="px-3 py-2">Ada</td>
             <td className="px-3 py-2">Engineer</td>
             <td className="px-3 py-2">Active</td>
           </tr>
-          <tr className="divide-x divide-zinc-200">
+          <tr className="divide-border divide-x">
             <td className="px-3 py-2">Grace</td>
             <td className="px-3 py-2">Designer</td>
             <td className="px-3 py-2">Away</td>

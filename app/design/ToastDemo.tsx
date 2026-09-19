@@ -39,17 +39,17 @@ function ToastList() {
 
   return toasts.map((toast) => (
     <Toast.Root
-      className="rounded-lg border border-zinc-300 bg-white shadow-xl transition-[transform,opacity] duration-200 ease-out data-ending-style:translate-x-full data-ending-style:opacity-0 data-starting-style:translate-x-full data-starting-style:opacity-0"
+      className="border-border rounded-lg border bg-white shadow-xl transition duration-200 ease-out data-ending-style:translate-x-full data-ending-style:opacity-0 data-starting-style:translate-x-full data-starting-style:opacity-0"
       key={toast.id}
       swipeDirection="right"
       toast={toast}
     >
       <Toast.Content className="grid grid-cols-[auto_max-content] items-center gap-x-4 py-3 pr-4 pl-4 [grid-template-areas:'title_action'_'description_action']">
         <div>
-          <Toast.Title className="text-sm font-medium text-zinc-800 [grid-area:title]" />
-          <Toast.Description className="m-0 text-xs leading-[1.3] text-zinc-500 [grid-area:description]" />
+          <Toast.Title className="text-foreground text-sm font-medium [grid-area:title]" />
+          <Toast.Description className="text-foreground/60 m-0 text-xs leading-tight [grid-area:description]" />
         </div>
-        <Toast.Close className="text-action hover:text-action-hover focus-visible:outline-action rounded px-2 py-1 text-sm hover:bg-zinc-100 focus-visible:outline-2">
+        <Toast.Close className="text-action hover:text-action-hover focus-visible:outline-action hover:bg-border rounded px-2 py-1 text-sm focus-visible:outline-2">
           OK
         </Toast.Close>
       </Toast.Content>

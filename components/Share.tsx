@@ -43,7 +43,7 @@ function ShareContent() {
   return (
     <>
       <button
-        className="cursor-pointer select-none hover:text-zinc-800"
+        className="hover:text-foreground cursor-pointer select-none"
         onClick={() => {
           void handleButtonClick();
         }}
@@ -65,15 +65,15 @@ function ShareToastList() {
 
   return toasts.map((toast) => (
     <Toast.Root
-      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right rounded-lg border border-zinc-300 bg-white/70 shadow-xl saturate-150 backdrop-blur-md transition-[transform,opacity] duration-200 ease-out"
+      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-border rounded-lg border bg-white/70 shadow-xl saturate-150 backdrop-blur-md transition-[transform,opacity] duration-200 ease-out"
       key={toast.id}
       swipeDirection="right"
       toast={toast}
     >
       <Toast.Content className="grid grid-cols-[auto_max-content] items-center gap-x-3.75 py-2 pr-4 pl-4 [grid-template-areas:'title_action'_'description_action']">
         <div>
-          <Toast.Title className="mb-1.25 text-[15px] font-medium text-zinc-800 [grid-area:title]" />
-          <Toast.Description className="m-0 text-[13px] leading-[1.3] text-zinc-500 [grid-area:description]" />
+          <Toast.Title className="text-foreground mb-1.25 text-[15px] font-medium [grid-area:title]" />
+          <Toast.Description className="text-foreground/60 m-0 text-[13px] leading-[1.3] [grid-area:description]" />
         </div>
         <Toast.Close className="text-action hover:text-action-hover h-12 w-12">
           OK
