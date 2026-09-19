@@ -18,7 +18,9 @@ export default function TableOfContentsClient({
 
   useEffect(() => {
     const headingElements = items
-      .map(({ id }) => document.querySelector(`#${id}`))
+      .map(({ id }) =>
+        document.querySelector<HTMLElement>(`#${CSS.escape(id)}`)
+      )
       .filter((heading): heading is HTMLElement => heading !== null);
 
     const updateActiveHeading = () => {
