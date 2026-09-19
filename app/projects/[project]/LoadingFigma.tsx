@@ -8,7 +8,7 @@ export default function LoadingFigma({
   return (
     <div>
       {project.figma.length === 0 ? (
-        <p className="text-zinc-800">No design</p>
+        <p className="text-foreground">No design</p>
       ) : (
         project.figma.map((a, index) => (
           <iframe

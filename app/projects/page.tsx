@@ -7,14 +7,14 @@ import ProjectsCard from "@/components/ProjectsCard";
 import { ProjectsData } from "../../data/ProjectsData";
 
 const PROJECTS_DESCRIPTION =
-  "Detail informations on how projects I belong to being handled.";
+  "Details about the projects I've worked on and how they were handled.";
 
 export const metadata: Metadata = {
-  title: "Experiences",
+  title: "Projects",
   description: PROJECTS_DESCRIPTION,
 };
 
-export default function ProjecstPage() {
+export default function ProjectsPage() {
   return (
     <>
       <PageTitle>Projects</PageTitle>
@@ -25,10 +25,7 @@ export default function ProjecstPage() {
             description={project.about_client.short_about}
             href={project.about_client.website}
             imgSrc={project.about_client.logo_src}
-            industry={project.about_client.industry}
             key={project.project_name}
-            period={project.about_project.working_period}
-            status={project.about_project.website_status}
             title={project.project_name}
           />
         ))}

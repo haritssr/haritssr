@@ -26,10 +26,7 @@ export default function Projects() {
           description={d.about_client.short_about}
           href={d.about_client.website}
           imgSrc={d.about_client.logo_src}
-          industry={d.about_client.industry}
           key={d.project_name}
-          period={d.about_project.working_period}
-          status={d.about_project.website_status}
           title={d.project_name}
         />
       ))}
