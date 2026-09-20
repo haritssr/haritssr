@@ -11,6 +11,11 @@ const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 });
 
+const topicLabels: Record<string, string> = {
+  engineering: "Eng",
+  humanity: "general",
+};
+
 function formatDate(date: string) {
   return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
 }
@@ -91,11 +96,12 @@ export default function WritingGrid({ mobileLimit }: { mobileLimit?: number }) {
                           {formatDate(writing.publishedAt)}
                         </time>
                         <span aria-hidden="true">·</span>
-                        <span>{writing.topic}</span>
-                        <span aria-hidden="true">·</span>
                         <span>
-                          {Math.ceil(writing.wordCount / 200)} min read
+                          {topicLabels[writing.topic.toLowerCase()] ??
+                            writing.topic}
                         </span>
+                        <span aria-hidden="true">·</span>
+                        <span>{Math.ceil(writing.wordCount / 200)} min</span>
                       </div>
                     </div>
                     <p className="text-foreground/70 mt-1 truncate text-sm">
