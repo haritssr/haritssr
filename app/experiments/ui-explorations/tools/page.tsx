@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { connection } from "next/server";
 
-import PageDescription from "@/components/PageDescription";
+import SubTitle from "@/components/SubTitle";
 import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
 
 import { createTool, listTools } from "./db";
@@ -88,7 +88,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
 
   return (
     <div>
-      <PageDescription>Manage tools in experiment database.</PageDescription>
+      <SubTitle>Manage tools in experiment database.</SubTitle>
 
       {error !== null && (
         <div className="mt-4 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">

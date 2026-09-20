@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import ExperimentsGrid from "@/components/ExperimentsGrid";
-import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+import SubTitle from "@/components/SubTitle";
 import { isExperimentAvailable } from "@/utils/databaseExperiments";
 
 import { ExperimentsData } from "../../data/ExperimentsData";
@@ -28,7 +28,7 @@ export default function ExperimentsPage() {
   return (
     <>
       <PageTitle>Experiments</PageTitle>
-      <PageDescription>{getExperimentsHomeDescription()}</PageDescription>
+      <SubTitle>{getExperimentsHomeDescription()}</SubTitle>
       <ExperimentsGrid />
     </>
   );

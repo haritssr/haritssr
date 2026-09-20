@@ -1,8 +1,8 @@
 import { connection } from "next/server";
 
 import BackButton from "@/components/BackButton";
-import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+import SubTitle from "@/components/SubTitle";
 
 import type { TaskHistoryEntry } from "../db";
 import { getTaskHistory, getTasksForDate, getTodayTaskDate } from "../db";
@@ -160,7 +160,7 @@ export default async function TaskStatisticsPage() {
     <div className="pb-8">
       <BackButton href="/experiments/ui-explorations/task" name="Task" />
       <PageTitle>Statistic</PageTitle>
-      <PageDescription>About the daily task.</PageDescription>
+      <SubTitle>About the daily task.</SubTitle>
 
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
         Ideas shown here: daily completion rate, 7-day completion rate,

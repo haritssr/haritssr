@@ -1,8 +1,8 @@
 import { connection } from "next/server";
 
 import BackButton from "@/components/BackButton";
-import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+import SubTitle from "@/components/SubTitle";
 
 import { getTaskHistory } from "../db";
 import Section from "../Section";
@@ -16,7 +16,7 @@ export default async function TaskHistoryPage() {
     <div className="pb-8">
       <BackButton href="/experiments/ui-explorations/task" name="Task" />
       <PageTitle>History</PageTitle>
-      <PageDescription>Record of daily tasks.</PageDescription>
+      <SubTitle>Record of daily tasks.</SubTitle>
 
       {history.length === 0 ? (
         <div className="rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-500">

@@ -7,8 +7,8 @@ import type { ChangeEvent, MouseEvent, SubmitEvent } from "react";
 import BackButton from "@/components/BackButton";
 import ExperimentPageBadge from "@/components/ExperimentPageBadge";
 import InternalLink from "@/components/InternalLink";
-import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+import SubTitle from "@/components/SubTitle";
 
 import {
   MAX_TASK_DURATION_MINUTES,
@@ -403,7 +403,7 @@ export default function TaskPage() {
     <>
       <BackButton href="/experiments/ui-explorations" name="UI Explorations" />
       <PageTitle>Task</PageTitle>
-      <PageDescription>Realistic Daily Time Budget.</PageDescription>
+      <SubTitle>Realistic Daily Time Budget.</SubTitle>
       <ExperimentPageBadge />
       <section className="mt-2 flex items-center space-x-5">
         <InternalLink href="/experiments/ui-explorations/task/history">

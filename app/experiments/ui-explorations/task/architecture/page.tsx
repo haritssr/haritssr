@@ -4,8 +4,8 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
+import SubTitle from "@/components/SubTitle";
 
 // Mermaid chart definitions
 const dataFlowChart = `
@@ -452,7 +452,7 @@ export default function TaskArchitecturePage() {
         Task
       </Link>
       <PageTitle>Architecture</PageTitle>
-      <PageDescription>How the task app works under the hood.</PageDescription>
+      <SubTitle>How the task app works under the hood.</SubTitle>
 
       {/* Overview */}
       <div className="mb-8 rounded-xl border border-zinc-200 p-4">
