@@ -5,6 +5,7 @@ export default function More() {
     <HomeSectionWrapper className="space-y-5" id="misc" topic="More">
       <ul className="text-foreground/70 list-outside list-disc space-y-1 pl-4">
         <li>Touch typist (±90 WPM)</li>
+
         <li>
           <span className="text-action">haritssr</span> ={" "}
           <span className="text-action">harits</span>{" "}
@@ -23,6 +24,10 @@ export default function More() {
           >
             CV
           </a>
+        </li>
+        <li>
+          Press <kbd className="text-foreground">⌘P</kbd> (or{" "}
+          <kbd className="text-foreground">ctrl+P</kbd>) to search the site.
         </li>
       </ul>
     </HomeSectionWrapper>
