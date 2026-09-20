@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  knip:
+  quality:
     name: Check code quality
     runs-on: ubuntu-latest
     steps:
