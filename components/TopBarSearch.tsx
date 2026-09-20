@@ -7,9 +7,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
 
-const GlobalSearchDialog = dynamic(
-  async () => await import("./GlobalSearchDialog")
-);
+const loadGlobalSearchDialog = async () => await import("./GlobalSearchDialog");
+const GlobalSearchDialog = dynamic(loadGlobalSearchDialog);
+
+type SearchIndexStatus = "error" | "idle" | "loading" | "ready";
 
 let searchIndexRequest: Promise<readonly RouteDoc[]> | undefined;
 
@@ -58,29 +59,28 @@ export default function TopBarSearch() {
   const [open, setOpen] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
   const [entries, setEntries] = useState<readonly RouteDoc[]>(navigationRoutes);
-  const [isLoading, setIsLoading] = useState(false);
-  const [loadError, setLoadError] = useState(false);
+  const [indexStatus, setIndexStatus] = useState<SearchIndexStatus>("idle");
   const requestStartedRef = useRef(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const prepareSearch = useCallback(() => {
+    void loadGlobalSearchDialog();
+
     if (requestStartedRef.current) {
       return;
     }
 
     requestStartedRef.current = true;
-    setIsLoading(true);
-    setLoadError(false);
+    setIndexStatus("loading");
 
     async function loadSearchIndex() {
       try {
         const searchEntries = await requestSearchIndex();
         setEntries(searchEntries);
-        setIsLoading(false);
+        setIndexStatus("ready");
       } catch {
         requestStartedRef.current = false;
-        setLoadError(true);
-        setIsLoading(false);
+        setIndexStatus("error");
       }
     }
 
@@ -145,9 +145,9 @@ export default function TopBarSearch() {
       {hasOpened ? (
         <GlobalSearchDialog
           entries={entries}
-          isLoading={isLoading}
-          loadError={loadError}
+          indexStatus={indexStatus}
           onOpenChange={setOpen}
+          onRetry={prepareSearch}
           open={open}
           triggerRef={triggerRef}
         />

@@ -2,7 +2,11 @@ import { describe, expect, mock, test } from "bun:test";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-import { searchRoutes } from "@/data/routes";
+import {
+  getSearchMatchRanges,
+  hasSearchQuery,
+  searchRoutes,
+} from "@/data/routes";
 
 await mock.module("server-only", () => ({}));
 
@@ -109,6 +113,11 @@ describe("search matching", () => {
     ).toBe(true);
   });
 
+  test("treats punctuation-only input as an empty query", () => {
+    expect(hasSearchQuery(" ... ")).toBe(false);
+    expect(searchRoutes(entries, " ... ")).toEqual(searchRoutes(entries, ""));
+  });
+
   test("keeps homepage sections searchable after typing", () => {
     expect(searchRoutes(entries, "profile contacts")[0]?.route).toBe(
       "/#contacts"
@@ -130,6 +139,34 @@ describe("search matching", () => {
         (entry) => entry.route
       )
     ).toContain("/experiments/nextjs/students/1");
+  });
+
+  test("normalizes accents and searches every indexed field", () => {
+    const docs = [
+      {
+        description: "Résumé examples",
+        group: "Reference Library",
+        route: "/guides/cafe",
+        title: "Café guide",
+      },
+    ];
+
+    expect(searchRoutes(docs, "cafe")).toEqual(docs);
+    expect(searchRoutes(docs, "resume")).toEqual(docs);
+    expect(searchRoutes(docs, "reference")).toEqual(docs);
+    expect(searchRoutes(docs, "/guides/cafe")).toEqual(docs);
+  });
+
+  test("locates visible matches using the same normalized search terms", () => {
+    expect(
+      getSearchMatchRanges("Reference · Résumé examples", "resume ref")
+    ).toEqual([
+      { end: 3, start: 0 },
+      { end: 18, start: 12 },
+    ]);
+    expect(getSearchMatchRanges("Résumé", "resume sum")).toEqual([
+      { end: 6, start: 0 },
+    ]);
   });
 
   test("ranks exact title matches first and searches beyond the first twenty results", () => {

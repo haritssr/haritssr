@@ -12,38 +12,87 @@ import type { RefObject } from "react";
 import { useRef, useState } from "react";
 
 import type { RouteDoc } from "@/data/routes";
-import { searchRoutes } from "@/data/routes";
+import {
+  getSearchMatchRanges,
+  hasSearchQuery,
+  searchRoutes,
+} from "@/data/routes";
 
 import styles from "./GlobalSearchDialog.module.css";
 
 interface GlobalSearchDialogProps {
   entries: readonly RouteDoc[];
-  isLoading: boolean;
-  loadError: boolean;
+  indexStatus: "error" | "idle" | "loading" | "ready";
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onRetry: () => void;
   triggerRef: RefObject<HTMLButtonElement | null>;
+}
+
+interface SearchMatchTextProps {
+  query: string;
+  text: string;
+}
+
+function SearchMatchText({ query, text }: SearchMatchTextProps) {
+  const ranges = getSearchMatchRanges(text, query);
+  if (ranges.length === 0) {
+    return text;
+  }
+
+  const parts = [];
+  let offset = 0;
+  for (const range of ranges) {
+    if (range.start > offset) {
+      parts.push(text.slice(offset, range.start));
+    }
+    parts.push(
+      <mark
+        className="text-foreground bg-transparent"
+        key={`${range.start}-${range.end}`}
+      >
+        {text.slice(range.start, range.end)}
+      </mark>
+    );
+    offset = range.end;
+  }
+  if (offset < text.length) {
+    parts.push(text.slice(offset));
+  }
+
+  return parts;
 }
 
 export default function GlobalSearchDialog({
   entries,
-  isLoading,
-  loadError,
+  indexStatus,
   open,
   onOpenChange,
+  onRetry,
   triggerRef,
 }: GlobalSearchDialogProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const results = searchRoutes(entries, query);
-  const isSearching = query.trim().length > 0;
-  const groups = [
-    { title: isSearching ? "Search results" : "Navigation", entries: results },
-  ];
+  const isSearching = hasSearchQuery(query);
+  const isLoading = indexStatus === "loading";
+  const loadError = indexStatus === "error";
+  const showResults = !(isLoading && isSearching);
+  let groupTitle = isSearching ? "Search results" : "Navigation";
+  if (loadError) {
+    groupTitle = "Navigation fallback";
+  }
+  let listLabel = isSearching ? "Search results" : "Suggested pages";
+  if (loadError) {
+    listLabel = "Navigation fallback";
+  }
+
   let resultStatus = "Jump to a page";
   if (isLoading) {
     resultStatus = "Loading all pages…";
+  } else if (loadError) {
+    resultStatus = "Full search unavailable";
   } else if (isSearching) {
     resultStatus = `${results.length} results`;
   }
@@ -77,8 +126,8 @@ export default function GlobalSearchDialog({
           />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Search pages, projects, writing, and experiments. Use the arrow keys
-            to browse results and Enter to open a page.
+            Search navigation, projects, writing, design, and experiments. Use
+            the arrow keys to browse results and Enter to open a page.
           </Dialog.Description>
           <Command
             className="flex min-h-0 flex-1 flex-col"
@@ -98,7 +147,7 @@ export default function GlobalSearchDialog({
                 className="placeholder:text-foreground/50 min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
                 enterKeyHint="go"
                 onValueChange={setQuery}
-                placeholder="Search projects, experiments, writings, ... "
+                placeholder="Search pages, projects, experiments, writing…"
                 ref={inputRef}
                 spellCheck={false}
                 value={query}
@@ -112,28 +161,45 @@ export default function GlobalSearchDialog({
               </Dialog.Close>
             </div>
             <Command.List
+              aria-busy={isLoading}
               className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2"
-              label={isSearching ? "Search results" : "Suggested pages"}
+              label={listLabel}
             >
               {loadError ? (
-                <output className="text-danger block px-4 py-12 text-center text-sm">
-                  The complete search index could not be loaded. Try opening
-                  search again.
-                </output>
+                <div className="px-4 py-8 text-center text-sm" role="alert">
+                  <p className="text-danger">
+                    The complete search index could not be loaded. Navigation is
+                    still available.
+                  </p>
+                  <button
+                    className="text-action hover:text-action-hover focus-visible:outline-action mt-3 cursor-pointer rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+                    onClick={onRetry}
+                    type="button"
+                  >
+                    Try again
+                  </button>
+                </div>
               ) : null}
-              {!isLoading && !loadError && results.length === 0 ? (
-                <output className="text-foreground/60 block px-4 py-12 text-center text-sm">
+              {isLoading && isSearching ? (
+                <div className="text-foreground/60 px-4 py-12 text-center text-sm">
+                  Loading all pages…
+                </div>
+              ) : null}
+              {!isLoading &&
+              !loadError &&
+              isSearching &&
+              results.length === 0 ? (
+                <div className="text-foreground/60 px-4 py-12 text-center text-sm">
                   No pages found for “{query}”. Try a project, topic, or page
                   name.
-                </output>
+                </div>
               ) : null}
-              {groups.map((group) => (
+              {showResults && results.length > 0 ? (
                 <Command.Group
-                  heading={group.title}
-                  key={group.title}
                   className="**:[[cmdk-group-heading]]:text-foreground/50 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:pt-3 **:[[cmdk-group-heading]]:pb-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium"
+                  heading={groupTitle}
                 >
-                  {group.entries.map((entry) => (
+                  {results.map((entry) => (
                     <Command.Item
                       className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-3 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border sm:py-2.5"
                       key={entry.route}
@@ -145,9 +211,14 @@ export default function GlobalSearchDialog({
                           {entry.title}
                         </div>
                         <div className="text-foreground/60 truncate text-xs">
-                          {isSearching
-                            ? `${entry.group} · ${entry.description}`
-                            : entry.description}
+                          {isSearching ? (
+                            <SearchMatchText
+                              query={query}
+                              text={`${entry.group} · ${entry.description}`}
+                            />
+                          ) : (
+                            entry.description
+                          )}
                         </div>
                         {isSearching ? (
                           <div className="text-foreground/40 truncate text-xs">
@@ -162,10 +233,12 @@ export default function GlobalSearchDialog({
                     </Command.Item>
                   ))}
                 </Command.Group>
-              ))}
+              ) : null}
             </Command.List>
             <div className="border-border text-foreground/50 flex shrink-0 items-center justify-between border-t px-4 py-3 text-xs">
-              <output aria-live="polite">{resultStatus}</output>
+              <output aria-live={loadError ? "off" : "polite"}>
+                {resultStatus}
+              </output>
               <span aria-hidden="true" className="hidden sm:inline">
                 ↑ ↓ navigate · ↵ open · esc close
               </span>

@@ -22,8 +22,9 @@
 
 @media (min-width: 640px) {
   .popup {
-    inset: 50% auto auto 50%;
+    inset: 46% auto auto 50%;
     width: min(36rem, calc(100vw - 3rem));
+    height: min(38rem, 80dvh);
     max-height: min(38rem, 80dvh);
     padding-bottom: 0;
     transform: translate(-50%, -50%);
