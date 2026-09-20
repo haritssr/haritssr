@@ -15,9 +15,7 @@ export default function TailwindVsAppleColorDemo() {
       <SubTitle>
         The difference between Tailwind CSS Gray colors vs Apple Gray colors
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Section name="Apple" />
       <div className="mb-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
         {appleColorData.map(({ name, color }) => (

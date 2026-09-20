@@ -27,9 +27,7 @@ export default function RadixDialogDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Dialog.Root>
         <Dialog.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1.5 font-medium text-zinc-800 hover:bg-zinc-100">
           Show dialog

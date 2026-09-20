@@ -33,9 +33,7 @@ export default function RadixAlertDialogDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <AlertDialogDemo
         actionDesc="Continue"
         buttonTitle="Delete"

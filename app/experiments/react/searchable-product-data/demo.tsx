@@ -162,9 +162,7 @@ export default function ReactSearchableProductDataDemo() {
           <li>Haven&#39;t applied debounce.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <FilterableProductTable products={productData} />
     </>
   );

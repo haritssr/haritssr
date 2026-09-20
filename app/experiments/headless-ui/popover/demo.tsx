@@ -25,9 +25,7 @@ export default function HeadlessPopoverDemo() {
           <li>Click the popover to see what inside them.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="space-y-10">
         <Wrapper title="Popover (for Navigation)">
           <PopoverExample1 />

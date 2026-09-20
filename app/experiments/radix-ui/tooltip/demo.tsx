@@ -24,9 +24,7 @@ export default function RadixTooltipDemo() {
           <li>Hover or click will show a tooltip above.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Tooltip.Provider>
         <Tooltip.Root>
           <div className="flex space-x-1">

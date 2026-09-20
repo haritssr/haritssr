@@ -31,9 +31,7 @@ export default function NextjsSWRDemo() {
         </code>{" "}
         component
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {data.map((d: { id: Key; name: string; age: string; city: string }) => (
           <NameCard age={d.age} city={d.city} key={d.id} name={d.name} />

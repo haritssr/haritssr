@@ -84,9 +84,7 @@ function IntersectionObserverAPIHooks() {
         <br />
         Scroll to the bottom to see the effect, the rocket launches.🚀.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="mt-96 rounded-md bg-zinc-100 p-10">
         <h2 className="mb-2 text-2xl font-semibold" ref={myRef}>
           {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}

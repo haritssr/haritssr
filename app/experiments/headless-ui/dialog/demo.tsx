@@ -36,9 +36,7 @@ export default function HeadlessDialogDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <div className="space-y-10">
         <Wrapper title="Dialog without transition">

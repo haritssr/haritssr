@@ -152,9 +152,7 @@ export default function ReactUseImperativeHandleDemo() {
   return (
     <>
       <SubTitle>Example</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <SomeApp />
       <Yada />
     </>

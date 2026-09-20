@@ -16,9 +16,7 @@ export default function StudentsPage() {
       <SubTitle>
         A list of students from local data, rendered as static App Router pages.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="flex flex-col space-y-3">
         {NextjsStudentsData.map((student) => (
           <InternalLink

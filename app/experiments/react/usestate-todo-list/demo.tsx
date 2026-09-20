@@ -191,9 +191,7 @@ export default function ReactUseStateTodoListDemo() {
   return (
     <>
       <SubTitle>Todo list with useState</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <AddTodo onAddTodo={handleAddTodo} />
       <TaskList
         onChangeTodo={handleChangeTodo}

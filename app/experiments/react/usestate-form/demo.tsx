@@ -34,9 +34,7 @@ export default function ReactUseStateFormDemo() {
         Simple but not useful useState form. Open your console to see what is
         going on
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <form className="flex flex-col" onSubmit={onSubmit}>
         <div className="mb-4 flex flex-col">
           <label htmlFor="title">Title</label>

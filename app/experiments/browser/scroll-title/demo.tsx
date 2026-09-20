@@ -10,9 +10,7 @@ export default function ScrollTitleDemo() {
   return (
     <>
       <SubTitle>Scroll Title iOS</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <nav className="sticky top-[90px] flex justify-between bg-blue-100/80 p-2 saturate-150 backdrop-blur">
         <div className="text-action flex w-1/3 items-center space-x-1">
           <Left />

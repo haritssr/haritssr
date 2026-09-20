@@ -20,9 +20,7 @@ export default function RadixToastDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
     </>
   );
 }

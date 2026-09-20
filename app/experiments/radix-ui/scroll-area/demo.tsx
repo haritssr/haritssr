@@ -23,9 +23,7 @@ export default function RadixScrollAreaDemo() {
           <li>Try to scroll it.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <ScrollArea.Root className="h-64 w-2/3 rounded-md border border-zinc-400">
         <ScrollArea.Viewport className="h-full w-full rounded-md bg-white">
           <div className="p-4">

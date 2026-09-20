@@ -16,9 +16,7 @@ export default function TailwindGlowingBackgroundDemo() {
           name="Source code"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <div className="h-auto rounded-lg bg-black px-2 py-6 sm:px-8 sm:py-16">
         <div className="grid items-start justify-center gap-8">

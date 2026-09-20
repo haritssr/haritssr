@@ -16,9 +16,7 @@ export default function ReactUseEffectTitleDemo() {
   return (
     <>
       <SubTitle>Count = {count}</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="space-x-2">
         <button
           onClick={() => {

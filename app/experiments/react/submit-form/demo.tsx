@@ -40,9 +40,7 @@ export default function ReactSubmitFormDemo() {
           <li>Submit (as console.log) contents of input.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <form className="w-full space-y-5 sm:w-1/3" onSubmit={onSubmit}>
         <div className={wrapperStyle}>
           <label htmlFor="title">Title</label>

@@ -7,9 +7,7 @@ export default function TailwindBlurryDemo() {
   return (
     <>
       <SubTitle>Background Blurry Effect</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div>
         <div className="border border-zinc-300 p-3">
           <div className="relative w-full max-w-lg">

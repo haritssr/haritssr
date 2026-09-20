@@ -27,9 +27,7 @@ export default function Stopwatch() {
 
   return (
     <>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div>{time}</div>
       <div className="space-x-3">
         <button

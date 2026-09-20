@@ -11,9 +11,7 @@ export default function ClockDemo() {
       <SubTitle>
         Clock using new Date(), useEffect(), useInterval(), cleanInterval()
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Clock />
     </>
   );

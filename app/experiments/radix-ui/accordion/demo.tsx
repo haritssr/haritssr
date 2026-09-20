@@ -34,9 +34,7 @@ export default function RadixAccordionDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="space-y-2">
         <Section name="Accordion + (transition)" />
         <AccordionComponents title="Title">

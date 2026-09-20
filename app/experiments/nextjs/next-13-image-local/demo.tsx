@@ -17,9 +17,7 @@ export default function NextjsImageLocalDemo() {
           name="Nextjs 13 Image"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <section className="space-y-5">
         <Section name="Bare minimum" />

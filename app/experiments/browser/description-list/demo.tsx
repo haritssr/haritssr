@@ -22,9 +22,7 @@ export default function DescriptionListDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <dl className="sm:w-1/2">
         <dt className="font-bold">This is title</dt>
         <dd className="mb-5 pl-10">

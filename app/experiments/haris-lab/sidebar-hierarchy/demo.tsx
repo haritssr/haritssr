@@ -7,9 +7,7 @@ import SourceCodeLink from "@/components/SourceCodeLink";
 export default function SidebarHierarchyDemo() {
   return (
     <div className="space-y-5 sm:w-2/5">
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       {PhysicsHierarchyData.map((domain) => (
         <details
           aria-label="domain-area"

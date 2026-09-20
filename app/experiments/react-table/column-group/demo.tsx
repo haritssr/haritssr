@@ -15,9 +15,7 @@ export default function ReactTableColumnGroupDemo() {
   return (
     <>
       <SubTitle>Basic table from react table</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Table />
     </>
   );

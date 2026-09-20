@@ -30,9 +30,7 @@ export default function ReactUseContextDarkModeDemo() {
   return (
     <>
       <SubTitle>Yeah</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <ThemeContext.Provider value={theme}>
         <div className="space-y-2">
           <Form />

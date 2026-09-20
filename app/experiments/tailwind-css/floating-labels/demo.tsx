@@ -9,9 +9,7 @@ export default function TailwindFloatingLabelsDemo() {
   return (
     <>
       <SubTitle>Try to tap and write on input, the label will go up</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <div className="relative mt-4 space-y-10">
         <div className="sm:w-1/3">

@@ -56,9 +56,7 @@ export default function NumberGameDemo() {
           <br />
           Every wrong answer decrease one score.
         </SubTitle>
-        <div className="mb-14">
-          <SourceCodeLink />
-        </div>
+        <SourceCodeLink />
         <div className="pt-24 text-center text-4xl font-bold text-green-500">
           You win!
         </div>
@@ -90,9 +88,7 @@ export default function NumberGameDemo() {
         <br />
         Every wrong answer decrease one score.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center pt-24">
         <div className={state.incorrect ? "incorrect" : ""}>
           {state.num1}+{state.num2}

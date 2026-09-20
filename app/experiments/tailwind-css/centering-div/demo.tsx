@@ -11,9 +11,7 @@ export default function TailwindCenteringDivDemo() {
       <SubTitle>
         Methods to centering div in Tailwind CSS or inline CSS
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <section className="grid grid-cols-1 gap-10 sm:grid-cols-2">
         <Wrapper

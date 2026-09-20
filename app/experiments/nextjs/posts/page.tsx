@@ -16,9 +16,7 @@ export default function PostsPage() {
     <>
       <PageTitle>Posts</PageTitle>
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <ul className="space-y-5">
         {allPostsData.map(({ id, date, title }) => (
           <li key={id}>

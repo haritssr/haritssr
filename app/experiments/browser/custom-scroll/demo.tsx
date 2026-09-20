@@ -7,9 +7,7 @@ export default function CustomScrollDemo() {
   return (
     <>
       <SubTitle>Custom Scroll</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="h-40 overflow-y-scroll">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias non
         assumenda harum facere tempore a sequi tempora vel adipisci ad itaque,

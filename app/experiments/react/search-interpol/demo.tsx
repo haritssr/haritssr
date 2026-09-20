@@ -92,9 +92,7 @@ export default function ReactSearchInterpolDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <input
         className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:ring-2 focus:ring-zinc-200 focus:outline-hidden"

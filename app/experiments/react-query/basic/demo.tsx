@@ -29,9 +29,7 @@ export default function ReactQueryBasicDemo() {
   return (
     <QueryClientProvider client={queryClient}>
       <SubTitle>Simple query</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Example />
     </QueryClientProvider>
   );

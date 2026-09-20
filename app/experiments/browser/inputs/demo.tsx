@@ -11,9 +11,7 @@ export default function InputsDemo() {
   return (
     <>
       <SubTitle>Browser built-in input elements </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-14">
         <Wrapper name="text">
           <InputText />

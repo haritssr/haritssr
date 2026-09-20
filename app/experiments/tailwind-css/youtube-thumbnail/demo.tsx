@@ -7,9 +7,7 @@ export default function TailwindYoutubeThumbnailDemo() {
   return (
     <>
       <SubTitle>Youtube Thumbnail example</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <div className="relative h-[360px] w-full overflow-hidden rounded-md border border-purple-300 bg-linear-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">
         <div>

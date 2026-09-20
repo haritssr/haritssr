@@ -12,9 +12,7 @@ export default function SideBarDemo() {
   return (
     // Subjek
     <div className="w-full space-y-5">
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       {/* Domains */}
       {fisika.map((domain) => (
         <div key={domain.title}>

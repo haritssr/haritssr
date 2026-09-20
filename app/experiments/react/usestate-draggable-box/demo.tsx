@@ -133,9 +133,7 @@ export default function ReactUseStateDraggableBoxDemo() {
           name="beta.reactjs.org"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="mb-5 w-full sm:w-1/6">
         <select onChange={handleColorChange} value={shape.color}>
           <option value="orange">Orange</option>

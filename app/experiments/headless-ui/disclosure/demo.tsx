@@ -47,9 +47,7 @@ export default function HeadlessDisclosureDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="grid grid-cols-1 gap-16 sm:grid-cols-2">
         <DisclosureChevronTransitions />
         <DisclosurePlus />

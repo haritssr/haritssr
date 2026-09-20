@@ -27,9 +27,7 @@ export default function ReactConfettiDemo() {
           <li>Try to edit the profile and save to see the result of change.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Confetti height={height} width={width} />
     </>
   );

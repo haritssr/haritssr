@@ -20,9 +20,7 @@ export default function RadixToggleGroupDemo() {
           <li>Click to change.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <ToggleGroup.Root className="space-x-2" type="multiple">
         <ToggleGroup.Item

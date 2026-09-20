@@ -17,9 +17,7 @@ export default function MantineCarouselDemo() {
           name="Mantine"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Carousel
         className="mx-auto max-w-sm"
         height={200}

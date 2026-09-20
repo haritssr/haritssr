@@ -28,9 +28,7 @@ export default function RadixCollapsibleDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Collapsible.Root
         className="w-full sm:w-2/3"
         onOpenChange={setOpen}

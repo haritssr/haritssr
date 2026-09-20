@@ -25,9 +25,7 @@ export default function ReactUseReducerJuly2026() {
   return (
     <div>
       <SubTitle>use reducer</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <h1>{count}</h1>
       <button
         onClick={() => {

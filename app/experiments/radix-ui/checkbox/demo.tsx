@@ -24,9 +24,7 @@ export default function RadixCheckboxDemo() {
           <li>Click the checklist button and the state will change.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <form>
         <div className="align-center flex">
           <Checkbox.Root

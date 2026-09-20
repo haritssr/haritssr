@@ -23,9 +23,7 @@ export default function RadixHoverCardDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <HoverCard.Root>
         <HoverCard.Trigger
           className="rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium text-zinc-800 hover:cursor-pointer hover:bg-zinc-100"

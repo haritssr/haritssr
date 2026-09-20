@@ -27,9 +27,7 @@ export default function RadixToolbarDemo() {
         A container for grouping a set of controls, such as buttons, toggle
         groups or dropdown menus.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <div className="w-full overflow-x-auto p-1">
         <ToolbarPrimitive.Root

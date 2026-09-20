@@ -22,9 +22,7 @@ export default function RadixTabsDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <TabsDemo />
     </>
   );

@@ -31,9 +31,7 @@ export default function HeadlessTabsDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Example1 />
     </>
   );

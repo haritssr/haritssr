@@ -21,9 +21,7 @@ export default function DetailsDemo() {
         <br />I prefer Headless UI or Radix UI similar UI component than this
         weird native API.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <details className="cursor-pointer hover:ring-2 hover:ring-blue-500">
         <summary className="hover:text-rose-500">Expand this</summary>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque dolores

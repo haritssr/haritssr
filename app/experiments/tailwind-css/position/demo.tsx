@@ -10,9 +10,7 @@ export default function TailwindPositionDemo() {
   return (
     <>
       <SubTitle>CSS position with Tailwind CSS</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="space-y-10">
         <Wrapper title="relative + absolute">
           <div className="relative h-40 bg-blue-500">

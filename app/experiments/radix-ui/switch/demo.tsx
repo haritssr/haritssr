@@ -23,9 +23,7 @@ export default function RadixSwitchDemo() {
           <li>Click to change state.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <form>
         <Switch.Root
           className="rdx-state-checked:border-green-700 rdx-state-checked:bg-green-600 block w-11 rounded-full border border-zinc-300 p-1 hover:bg-zinc-50"

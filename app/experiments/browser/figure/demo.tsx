@@ -15,9 +15,7 @@ export default function FigureDemo() {
         tailwindcss preflight, so the figcaption is not italic by default, I
         need to design it.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div>
         <figure>
           <Image

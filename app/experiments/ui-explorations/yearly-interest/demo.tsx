@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import PageDescription from "@/components/PageDescription";
 import SourceCodeLink from "@/components/SourceCodeLink";
+import SubTitle from "@/components/SubTitle";
 
 // Matches every non-digit character.
 // Example: "Rp 12,000" becomes "12000" after replacement.
@@ -44,10 +44,8 @@ export default function YearlyInterest() {
 
   return (
     <div>
-      <PageDescription>Calculation of yearly save interest</PageDescription>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SubTitle>Calculation of yearly save interest</SubTitle>
+      <SourceCodeLink />
       <form>
         <label className="block w-fit text-zinc-500" htmlFor="Initial">
           Initial (Rp)

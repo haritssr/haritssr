@@ -29,9 +29,7 @@ export default function HeadlessListboxDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <SelectExample1 />
     </>
   );

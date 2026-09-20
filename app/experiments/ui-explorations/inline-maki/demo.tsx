@@ -12,9 +12,7 @@ import SourceCodeLink from "@/components/SourceCodeLink";
 export default function InlineMakiDemo() {
   return (
     <div className="mx-auto my-20 max-w-xs space-y-2">
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <InlineMAKI value="1" />
       <InlineMAKI value="2" />
       <InlineMAKI value="3" />

@@ -58,9 +58,7 @@ export default function ReactSearchBooksDemo(): ReactElement {
           <li>Not include: space sensitive.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="group mx-auto flex items-center sm:w-1/3">
         <input
           className="w-full"

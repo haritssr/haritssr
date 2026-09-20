@@ -12,9 +12,7 @@ export default function RadixRadioGroupDemo() {
         A set of checkable buttons—known as radio buttons—where no more than one
         of the buttons can be checked at a time.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <RadioGroup.Root className="space-y-3">
         <RadioGroup.Item
           className="rdx-state-checked:border-blue-600 flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 bg-white hover:bg-blue-50"

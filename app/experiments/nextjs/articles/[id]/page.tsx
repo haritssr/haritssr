@@ -35,9 +35,7 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
       <PageTitle>{article.title}</PageTitle>
-      <div className="mb-14">
-        <SourceCodeLink sourcePath="app/experiments/nextjs/articles/[id]" />
-      </div>
+      <SourceCodeLink sourcePath="app/experiments/nextjs/articles/[id]" />
       <div className="text-action">Article {article.id}</div>
       <div className="mt-5 text-zinc-600">{article.body}</div>
     </div>

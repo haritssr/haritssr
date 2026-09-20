@@ -10,9 +10,7 @@ import SourceCodeLink from "@/components/SourceCodeLink";
 export default function TimesTableDemo() {
   return (
     <>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Suspense fallback="..loading">
         <IncrementButton />
         <TimesTableComponent />

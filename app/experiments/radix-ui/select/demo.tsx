@@ -18,9 +18,7 @@ export default function RadixSelectDemo() {
         Displays a list of options for the user to pick from—triggered by a
         button.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <SelectDemo />
     </>
   );

@@ -7,9 +7,7 @@ export default function YoutubeEmbedDemo() {
   return (
     <>
       <SubTitle>Youtube Embed</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <iframe
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pictureBin-picture"
         allowFullScreen={true}

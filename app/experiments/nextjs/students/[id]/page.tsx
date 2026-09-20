@@ -35,9 +35,7 @@ export default async function StudentPage({ params }: Props) {
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0">
       <PageTitle>Student Details</PageTitle>
-      <div className="mb-14">
-        <SourceCodeLink sourcePath="app/experiments/nextjs/students/[id]" />
-      </div>
+      <SourceCodeLink sourcePath="app/experiments/nextjs/students/[id]" />
       <div className="mt-5 space-y-2">
         <div className="text-zinc-500">
           <span className="font-semibold text-zinc-800">Name :</span>{" "}

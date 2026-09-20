@@ -10,9 +10,7 @@ export default function ReactModalInsideModalDemo() {
   return (
     <>
       <SubTitle>Modal Inside Modal</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <Dialog.Root>
         <Dialog.Trigger asChild>

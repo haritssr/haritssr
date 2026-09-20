@@ -28,9 +28,7 @@ export default function HeadlessSwitchDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <SwitchExample1 />
     </>
   );

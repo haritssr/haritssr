@@ -36,9 +36,7 @@ export default function SimpleSearch() {
   return (
     <div>
       <SubTitle>Search using useState, useMemo, useCallback</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <input onChange={handleChange} placeholder="Search" value={query} />
 
       {query !== deferredQuery && <p>Searching...</p>}

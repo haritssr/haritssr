@@ -37,9 +37,7 @@ export default function NotionNavbarDemo() {
           <Yes />
         </div>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
     </>
   );
 }

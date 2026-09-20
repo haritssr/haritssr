@@ -10,9 +10,7 @@ export default function TailwindSidebarDemo() {
   return (
     <>
       <SubTitle>Sidebar example</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="flex flex-row overflow-hidden rounded border border-zinc-400">
         {/* Side Bar */}
         <div className={`w-1/4 bg-zinc-200 ${open ? "block" : "hidden"}`}>

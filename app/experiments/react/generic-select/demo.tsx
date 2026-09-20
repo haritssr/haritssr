@@ -87,9 +87,7 @@ export default function ReactGenericSelectDemo() {
           <li>The option you choose will immedietly appear in Results.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="text-xl font-semibold">
         Please choose your subject and teacher
       </div>

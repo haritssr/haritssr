@@ -16,9 +16,7 @@ import SourceCodeLink from "@/components/SourceCodeLink";
 export default function GlobalModalDemo() {
   return (
     <Dialog.Root>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Dialog.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 rounded-md bg-zinc-100 p-2 hover:bg-zinc-200">
         <MagnifyingGlassIcon className="h-5 w-5 text-zinc-700" />
       </Dialog.Trigger>

@@ -69,9 +69,7 @@ function RouterDemoContent() {
           name="next/navigation"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <div className="mb-10 space-y-2">
         <Section name="usePathname" />

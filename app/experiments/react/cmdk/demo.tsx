@@ -32,9 +32,7 @@ export default function ReactCmdkDemo() {
   return (
     <>
       <SubTitle>Fast, composable, unstyled command menu for React.</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Command.Dialog
         label="Global Command Menu"
         onOpenChange={setOpen}

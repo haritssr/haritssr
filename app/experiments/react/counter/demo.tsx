@@ -47,9 +47,7 @@ export default function ReactCounterDemo() {
   return (
     <>
       <SubTitle>Counter</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div>{formatTime(second)}</div>
       <div>{second}</div>
       <button

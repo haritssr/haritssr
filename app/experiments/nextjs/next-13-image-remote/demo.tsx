@@ -13,9 +13,7 @@ export default function NextjsImageRemoteDemo() {
           name="Nextjs 13 Image"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <section className="space-y-5">
         {/* FAIL */}

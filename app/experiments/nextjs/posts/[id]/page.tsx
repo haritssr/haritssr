@@ -27,9 +27,7 @@ export default async function PostPage({
           {format(parseISO(postData.date), "LLLL d, yyyy")}
         </time>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink sourcePath="app/experiments/nextjs/posts/[id]" />
-      </div>
+      <SourceCodeLink sourcePath="app/experiments/nextjs/posts/[id]" />
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia

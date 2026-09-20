@@ -225,9 +225,7 @@ export default function ReactUseReducerTodoListDemo() {
           name="beta.reactjs.org"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <AddTask onAddTask={handleAddTask} />
       <TaskList
         onChangeTask={handleChangeTask}

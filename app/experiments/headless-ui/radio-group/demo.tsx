@@ -47,9 +47,7 @@ export default function HeadlessRadioGroupDemo() {
           <li>Click the radio to choose one to serve as an option.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Example1 />
     </>
   );

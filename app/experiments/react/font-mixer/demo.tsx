@@ -66,9 +66,7 @@ export default function ReactFontMixerDemo() {
   return (
     <>
       <SubTitle>Font Mixer</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <FontMixer fonts={["Arial", "Arial"]}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
         convallis mauris dui, non placerat urna fringilla at. Suspendisse a orci

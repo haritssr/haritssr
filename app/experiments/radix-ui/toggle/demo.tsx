@@ -22,9 +22,7 @@ export default function RadixToggleDemo() {
           <li>Click to change.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Toggle.Root
         className="rdx-state-on:text-action rdx-state-on:ring-2 rdx-state-on:ring-blue-600 rounded-md border border-zinc-400 bg-white px-3 py-1.5 font-medium hover:bg-zinc-50"
         onPressedChange={() => {

@@ -83,9 +83,7 @@ export default function ReactSearchTableDemo() {
           <li>Already applied debounce on search.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <input
         className="mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-hidden"
         onChange={(e) => {

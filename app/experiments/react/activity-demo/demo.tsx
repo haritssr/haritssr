@@ -40,9 +40,7 @@ export default function ActivityDemo() {
         The page intentionally bad looking in order to focus on the code behind
         the screen.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <button
         className="rounded-sm bg-blue-500 px-2.5 py-1.5 text-sm text-white hover:bg-blue-500/95 active:translate-y-px"
         onClick={() => {

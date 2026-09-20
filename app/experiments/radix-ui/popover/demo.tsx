@@ -20,9 +20,7 @@ export default function RadixPopoverDemo() {
           <li>Click the button and the portal will appear below.</li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Popover.Root>
         <Popover.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 w-auto rounded-md border border-zinc-400 bg-zinc-50 px-3 py-1 font-medium text-zinc-800 hover:bg-zinc-100">
           Open

@@ -25,9 +25,7 @@ export default function ArticlesPage() {
           name="generateStaticParams"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
 
       <div className="xs:grid-cols-2 mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
         {NextjsArticlesData.map((article) => (

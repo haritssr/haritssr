@@ -39,9 +39,7 @@ export default function ReactUseStateObjectFormDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <form className="mb-5 flex flex-col space-y-3">
         <label className={labelStyle}>
           First Name

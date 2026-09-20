@@ -39,9 +39,7 @@ export default function VisxPieChartDemo() {
         <br />
         Select a coin below to see which and how much I have.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <svg height={width} width={width}>
         <title>IDK</title>
         <Group left={halfWidth} top={halfWidth}>

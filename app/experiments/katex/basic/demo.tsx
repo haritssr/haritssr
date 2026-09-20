@@ -8,9 +8,7 @@ export default function KaTeXBasicDemo() {
   return (
     <>
       <SubTitle>Basic example</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       {katexify(
         "\\text{house-price} = \\hat{\\beta_1} * sqft + \\hat{\\beta_0}",
         false

@@ -25,9 +25,7 @@ export default function RadixSliderDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <form action="">
         <Slider.Root
           className="relative flex w-full items-center select-none"

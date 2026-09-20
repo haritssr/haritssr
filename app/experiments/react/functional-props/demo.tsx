@@ -54,9 +54,7 @@ export default function ReactFunctionalPropsDemo() {
       <SubTitle>
         Functional Props - TypeScript for beginner to master - Jack Herrington
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <TextWithNumber
         header={(num: number) => <span>The header is {num}</span>}
       >

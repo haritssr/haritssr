@@ -17,9 +17,7 @@ export default function InputList() {
 
   return (
     <div>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <input
         className="border px-2 py-1"
         onChange={(e) => {

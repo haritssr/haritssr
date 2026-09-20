@@ -13,9 +13,7 @@ export default function TextEditingDemo() {
   return (
     <>
       <SubTitle>HTML built-in text editing tag</SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="flex flex-col space-y-2" ref={elementSelected}>
         <del>del</del>
         <s>s</s>

@@ -78,9 +78,7 @@ export default function VisxBarChartDemo() {
         <br />
         Hover the bar to see details.
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <svg className="w-full" ref={ref} viewBox={`0 0 ${width} ${height}`}>
         <title>IDK</title>
         <Group>

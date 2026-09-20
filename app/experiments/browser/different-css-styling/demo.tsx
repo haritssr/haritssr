@@ -10,9 +10,7 @@ export default function DifferentCssStylingDemo() {
       <SubTitle>
         Click blue &quot;source github button&quot; to see the source code
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Section name="Coloring, Box size, Rounded corner, Padding" />
       <div className="flex space-x-5">
         <div

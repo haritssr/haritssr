@@ -105,9 +105,7 @@ export default function ReactUseStateReactingToInputDemo() {
           name="beta.reactjs.org"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <Example />
     </>
   );

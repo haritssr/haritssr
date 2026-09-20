@@ -29,9 +29,7 @@ export default function HeadlessMenuDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <MenuExample1 />
     </>
   );

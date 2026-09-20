@@ -29,9 +29,7 @@ export default function ReactAriaCalendarDemo() {
           <ExternalLink href="https://tailwindcss.com/" name="Tailwind CSS" />
         </p>
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <div className="flex max-w-xl flex-col items-center">
         <Calendar
           defaultValue={today(getLocalTimeZone())}

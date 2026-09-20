@@ -14,9 +14,7 @@ export default function TailwindFeedbackDemo() {
           name="this tweet"
         />
       </SubTitle>
-      <div className="mb-14">
-        <SourceCodeLink />
-      </div>
+      <SourceCodeLink />
       <form className="absolute right-8 bottom-8 flex flex-col rounded-lg border bg-white">
         <textarea
           className="peer h-12 w-64 resize-none border-0 bg-transparent p-2 text-sm transition-all duration-100 placeholder-shown:h-9 placeholder-shown:w-24 focus:h-12 focus:w-64 focus:outline-hidden"
