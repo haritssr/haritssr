@@ -15,9 +15,15 @@ const publicationDateSchema = z
     date instanceof Date ? date.toISOString().slice(0, 10) : date
   );
 
+const writingSummarySchema = z
+  .string()
+  .refine((summary) => countWords(summary) === 6, {
+    message: "Summary must contain exactly 6 words",
+  });
+
 const writingFrontmatterSchema = z.strictObject({
   publishedAt: publicationDateSchema,
-  summary: z.string(),
+  summary: writingSummarySchema,
   title: z.string(),
   topic: z.string(),
 });

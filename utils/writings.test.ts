@@ -36,6 +36,14 @@ describe("writing index", () => {
     expect(writingModuleSlugs.toSorted()).toEqual(expectedSlugs.toSorted());
   });
 
+  test("keeps every summary at exactly six words", () => {
+    for (const writing of allWritings) {
+      const wordCount = writing.summary.trim().split(/\s+/).length;
+
+      expect(wordCount).toBe(6);
+    }
+  });
+
   test("looks up known writings and rejects unknown slugs", () => {
     expect(getWriting("graph")).toMatchObject({
       publishedAt: "2026-09-04",
@@ -61,7 +69,7 @@ describe("parseWriting", () => {
         `---
 title: Example
 publishedAt: 2026-09-07
-summary: A summary
+summary: A concise summary containing exactly six
 topic: Engineering
 ---
 
@@ -70,7 +78,7 @@ One two\nthree`
     ).toEqual({
       publishedAt: "2026-09-07",
       slug: "example",
-      summary: "A summary",
+      summary: "A concise summary containing exactly six",
       title: "Example",
       topic: "Engineering",
       wordCount: 3,
@@ -90,5 +98,24 @@ extra: rejected
 ---`
       )
     ).toThrow("Invalid writing frontmatter in invalid.mdx");
+  });
+
+  test("rejects summaries that do not contain exactly six words", () => {
+    for (const summary of [
+      "Too short",
+      "This summary contains more than exactly six words",
+    ]) {
+      expect(() =>
+        parseWriting(
+          "invalid-summary.mdx",
+          `---
+title: Invalid summary
+publishedAt: 2026-09-07
+summary: ${summary}
+topic: Engineering
+---`
+        )
+      ).toThrow("Invalid writing frontmatter in invalid-summary.mdx");
+    }
   });
 });
