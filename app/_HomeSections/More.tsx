@@ -1,8 +1,8 @@
 import HomeSectionWrapper from "./HomeSectionWrapper";
 
-export default function About() {
+export default function More() {
   return (
-    <HomeSectionWrapper className="space-y-5" id="misc" topic="About">
+    <HomeSectionWrapper className="space-y-5" id="misc" topic="More">
       <ul className="text-foreground/70 list-outside list-disc space-y-1 pl-4">
         <li>Touch typist (±90 WPM)</li>
         <li>

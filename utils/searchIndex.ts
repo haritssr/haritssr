@@ -33,7 +33,7 @@ const homeSections: RouteDoc[] = [
     title: "Writing",
     description: "Recent writing on the homepage",
   },
-  { route: "/#misc", title: "About", description: "More about Harits Syah" },
+  { route: "/#misc", title: "More", description: "More about Harits Syah" },
 ].map((doc) => ({
   ...doc,
   group: "Homepage sections",
