@@ -60,7 +60,7 @@ export default async function ExperiencesPage({
         </div>
         {/* Title */}
         <section className="border-border bg-foreground/5 my-8 flex items-center justify-between rounded-md border px-3 py-2 sm:my-10 sm:px-5 sm:py-4">
-          <div className="">
+          <div>
             <div className="text-2xl font-bold wrap-break-word sm:text-3xl">
               {FoundProjectObject.project_name}
             </div>

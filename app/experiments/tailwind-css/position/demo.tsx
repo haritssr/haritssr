@@ -41,7 +41,7 @@ export default function TailwindPositionDemo() {
         </Wrapper>
         <Wrapper title="sticky">
           <div className="h-52 overflow-y-auto bg-blue-500">
-            <div className="">
+            <div>
               <div className="sticky top-0 bg-purple-600 px-2 py-1 text-zinc-300">
                 A
               </div>
@@ -61,7 +61,7 @@ export default function TailwindPositionDemo() {
                 delectus. Maxime et quas molestiae sunt.
               </div>
             </div>
-            <div className="">
+            <div>
               <div className="sticky top-0 bg-purple-600 px-2 py-1 text-zinc-300">
                 B
               </div>

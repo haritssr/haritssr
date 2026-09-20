@@ -38,7 +38,7 @@ const ProductRow = ({ product }: { product: productDataType }) => {
     <span style={{ color: "red" }}>{product.name}</span>
   );
   return (
-    <tr className="">
+    <tr>
       <td>{name}</td>
       <td>{product.price}</td>
     </tr>

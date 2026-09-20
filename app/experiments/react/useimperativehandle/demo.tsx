@@ -124,7 +124,7 @@ const Post = function Post({ ref, ...props }: PostProps) {
     []
   );
   return (
-    <div className="" {...props}>
+    <div {...props}>
       <div>Welcome lol</div>
       <CommentsList ref={commentListRef} />
       <AddComments ref={addCommentRef} />

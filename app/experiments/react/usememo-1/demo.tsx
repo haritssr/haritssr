@@ -26,11 +26,11 @@ function NameInputAddress({
 }: NameInputAddressProps) {
   return (
     <div className="border p-2">
-      <div className="">
+      <div>
         Name:
         <input onChange={onChangeName} type="text" value={name} />
       </div>
-      <div className="">
+      <div>
         Address:
         <input onChange={onChangeAddress} type="text" value={address} />
       </div>

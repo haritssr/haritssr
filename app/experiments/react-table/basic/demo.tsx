@@ -143,7 +143,7 @@ function Table() {
             </tr>
           ))}
         </tbody>
-        <tfoot className="">
+        <tfoot>
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (

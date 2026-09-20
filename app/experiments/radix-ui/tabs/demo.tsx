@@ -29,7 +29,7 @@ export default function RadixTabsDemo() {
 }
 
 const TabsDemo = () => (
-  <Tabs.Root className="flex w-[300px] flex-col" defaultValue="tab1">
+  <Tabs.Root className="flex w-75 flex-col" defaultValue="tab1">
     <Tabs.List
       aria-label="Manage your account"
       className="flex shrink-0 space-x-1 rounded-lg bg-zinc-100 p-1"
@@ -51,7 +51,7 @@ const TabsDemo = () => (
       className="mt-2 grow rounded-md border border-zinc-200 bg-white p-5 outline-hidden"
       value="tab1"
     >
-      <div className="">
+      <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias
         veritatis ullam quae rem quis aliquam, accusantium debitis sint
         praesentium.
@@ -61,7 +61,7 @@ const TabsDemo = () => (
       className="mt-2 grow rounded-md border border-zinc-200 bg-white p-5 outline-hidden"
       value="tab2"
     >
-      <div className="">
+      <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias
         veritatis ullam quae rem quis aliquam, accusantium debitis sint
         praesentium.

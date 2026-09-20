@@ -47,7 +47,7 @@ export default function ReactEditProfileDemo() {
             )}
           </div>
           <div className="flex items-center space-x-2">
-            <div className="">LastName :</div>
+            <div>LastName :</div>
             {isEditing ? (
               <input
                 onChange={(e) => {
