@@ -82,21 +82,24 @@ export default function WritingGrid({ mobileLimit }: { mobileLimit?: number }) {
                     key={writing.slug}
                     prefetch={false}
                   >
-                    <div className="text-action group-hover:text-action-hover">
-                      {writing.title}
-                    </div>
-                    <p className="text-foreground/70 mt-1 truncate text-sm">
-                      {writing.summary}
-                    </p>
-                    <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center gap-x-2 text-xs">
+                    <div className="flex justify-between w-full">
+                      <div className="text-action group-hover:text-action-hover">
+                        {writing.title}
+                      </div>
+                      <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center gap-x-2 text-xs">
                       <time dateTime={writing.publishedAt}>
                         {formatDate(writing.publishedAt)}
                       </time>
                       <span aria-hidden="true">·</span>
                       <span>{writing.topic}</span>
-                      <span aria-hidden="true">·</span>
+                          <span aria-hidden="true">·</span>
                       <span>{Math.ceil(writing.wordCount / 200)} min read</span>
+                </div>
                     </div>
+                    <p className="text-foreground/70 mt-1 truncate text-sm">
+                      {writing.summary}
+                    </p>
+
                   </Link>
                 ))}
               </div>
