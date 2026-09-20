@@ -261,6 +261,14 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     slug: "react-query",
     title: "React Query",
   },
+  {
+    description: "Interactive explorations of physical phenomena",
+    experiments: [{ slug: "units", title: "Besaran dan Satuan" }],
+    id: 16,
+    logoSrc: "/icons/physics.svg",
+    slug: "physics",
+    title: "Physics",
+  },
 ];
 
 export type ExperimentDomainData = ExperimentDomain;
