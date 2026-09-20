@@ -13,7 +13,7 @@ const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
 
 const topicLabels: Record<string, string> = {
   engineering: "Eng",
-  humanity: "general",
+  humanity: "General",
 };
 
 function formatDate(date: string) {
@@ -87,25 +87,25 @@ export default function WritingGrid({ mobileLimit }: { mobileLimit?: number }) {
                     key={writing.slug}
                     prefetch={false}
                   >
-                    <div className="flex w-full justify-between">
+                    <div className="flex w-full items-center justify-between">
                       <div className="text-action group-hover:text-action-hover">
                         {writing.title}
                       </div>
-                      <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center gap-x-2 text-xs">
+                      <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
                         <time dateTime={writing.publishedAt}>
                           {formatDate(writing.publishedAt)}
                         </time>
-                        <span aria-hidden="true">·</span>
+                        <span aria-hidden="true">/</span>
                         <span>
                           {topicLabels[writing.topic.toLowerCase()] ??
                             writing.topic}
                         </span>
-                        <span aria-hidden="true">·</span>
+                        <span aria-hidden="true">/</span>
                         <span>{Math.ceil(writing.wordCount / 200)} min</span>
                       </div>
                     </div>
                     <p className="text-foreground/70 mt-1 truncate text-sm">
-                      {writing.summary}
+                      {writing.summary}.
                     </p>
                   </Link>
                 ))}
