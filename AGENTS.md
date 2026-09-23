@@ -9,6 +9,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 <!-- END:nextjs-agent-rules -->
 
 
+# Testing Policy
+
+- Coding agents must never create, add, rename, or restore test files. This includes files named `*.test.*` or `*.spec.*`, and test files placed in `test/`, `tests/`, or `__tests__/` directories.
+- Do not add tests as part of a feature, bug fix, refactor, or other coding task. Only modify an existing test file when the user explicitly asks for test-file changes.
+- If verification is needed, use the existing test files and other non-test checks already available in the repository; do not create a test file to enable verification.
+
+
 # Commit Guidelines
 
 - feat: A new feature
@@ -17,7 +24,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - refactor: A code change that neither fixes a bug nor adds a feature
 - perf: A code change that improves performance
-- test: Adding missing tests
+- test: Changes to existing tests when explicitly requested
 - chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
 
 Template:
