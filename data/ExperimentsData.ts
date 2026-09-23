@@ -263,7 +263,10 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
   },
   {
     description: "Interactive explorations of physical phenomena",
-    experiments: [{ slug: "units", title: "Besaran dan Satuan" }],
+    experiments: [
+      { slug: "units", title: "Besaran dan Satuan" },
+      { slug: "electron-configuration", title: "Electron Configuration" },
+    ],
     id: 16,
     logoSrc: "/icons/physics.svg",
     slug: "physics",
