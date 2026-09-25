@@ -18,12 +18,12 @@ export default function ExperimentDomainIndex({
 
   return (
     <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
-      <div className="mb-10 space-y-2">
-        <div className="flex items-center space-x-2">
+      <div className="mb-10 space-y-3">
+        <div className="flex items-center">
           <Image alt="" height={36} src={domain.logoSrc} width={36} />
         </div>
         <div className="text-2xl font-semibold sm:text-3xl">{domain.title}</div>
-        <div className="text-foreground text-lg">{domain.description}</div>
+        <div className="text-foreground/90 text-lg">{domain.description}</div>
         <div className="text-foreground/70 text-lg">
           {experiments.length} experiments
         </div>
