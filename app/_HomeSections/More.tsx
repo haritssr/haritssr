@@ -13,7 +13,7 @@ export default function More() {
           <span className="text-action">r</span>ahmatullah
         </li>
         <li>Former chess player, peaked at around 2000 Elo.</li>
-        <li>Prefer eudaimonic happiness to hedonic happiness.</li>
+        <li>Prefer eudaimonic to hedonic.</li>
         <li>Constraints give shape.</li>
         <li>
           <a
