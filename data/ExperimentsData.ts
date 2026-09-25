@@ -26,6 +26,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       { slug: "grid", title: "Grid" },
       { slug: "planetscale-navbar", title: "PlanetScale NavBar" },
       { slug: "sidebar", title: "Sidebar" },
+      { slug: "scrollbar", title: "Scrollbar" },
       { slug: "youtube-thumbnail", title: "YouTube Thumbnail" },
       { slug: "newspaper", title: "Newspaper" },
       { slug: "centering-div", title: "Centering Div" },

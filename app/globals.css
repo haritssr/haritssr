@@ -76,6 +76,24 @@
   button {
     touch-action: manipulation;
   }
+
+  /* Default scrollbars; utilities can override these on specific areas. */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e4e4e7;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #a1a1aa;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #71717a;
+  }
 }
 
 /* Native form focus styles */
@@ -112,22 +130,77 @@ select:focus {
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+@property --scroll-area-scrollbar-repaint {
+  syntax: "*";
+  inherits: false;
 }
 
-::-webkit-scrollbar-track {
-  background: #e4e4e7;
-}
+@utility scroll-area-scrollbar {
+  @media (hover: hover) and (pointer: fine) and (forced-colors: none) {
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
 
-::-webkit-scrollbar-thumb {
-  background: #a1a1aa;
-  border-radius: 2px;
-}
+    @supports selector(::-webkit-scrollbar-thumb) {
+      &::-webkit-scrollbar-thumb,
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+        cursor: pointer;
+      }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #71717a;
+      &::-webkit-scrollbar-track:vertical {
+        margin: 8px 0;
+      }
+
+      &::-webkit-scrollbar-track:horizontal {
+        margin: 0 8px;
+      }
+
+      &::-webkit-scrollbar-corner,
+      &::-webkit-resizer {
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: 3.5px solid transparent;
+        border-radius: 9999px;
+        background-clip: padding-box;
+        background-color: transparent;
+      }
+
+      &:hover::-webkit-scrollbar-thumb {
+        background-color: var(--color-zinc-400);
+      }
+
+      &::-webkit-scrollbar-thumb:hover,
+      &::-webkit-scrollbar-thumb:active {
+        background-color: var(--color-zinc-200);
+      }
+
+      &:hover {
+        --scroll-area-scrollbar-repaint: 1;
+      }
+    }
+
+    @supports not selector(::-webkit-scrollbar-thumb) {
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
+      transition: scrollbar-color 150ms ease;
+
+      &:hover {
+        scrollbar-color: var(--color-zinc-400) transparent;
+      }
+
+      & :where(*) {
+        scrollbar-color: auto;
+      }
+
+      @variant motion-reduce {
+        transition: none;
+      }
+    }
+  }
 }
 
 /* Thin scrollbar for compact horizontal content */
