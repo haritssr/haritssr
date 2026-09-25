@@ -9,9 +9,9 @@ import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
-import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
+import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 
 import AccordionDemo from "./AccordionDemo";
 import BadgesDemo from "./BadgesDemo";
@@ -61,14 +61,14 @@ export default function DesignSystem() {
   return (
     <>
       <PageTitle>Design</PageTitle>
-      <PageDescription>
+      <TopLevelSectionPageDescription>
         Design system used in this site,{" "}
         <ExternalLink
           href="https://harisstudio.vercel.app"
           name="Haris Studio"
         />{" "}
         and <ExternalLink href="https://www.harislab.com" name="Haris Lab" />.
-      </PageDescription>
+      </TopLevelSectionPageDescription>
       <Section name="Design Principles" />
       <ExplanationList>
         <li>

@@ -1,6 +1,6 @@
+import TopLevelSectionPageDescription from "components/TopLevelSectionPageDescription";
 import type { Metadata } from "next";
 
-import PageDescription from "@/components/PageDescription";
 import PageTitle from "@/components/PageTitle";
 import WritingGrid from "@/components/WritingGrid";
 import { WRITING_DESCRIPTION } from "@/utils/site";
@@ -14,7 +14,9 @@ export default function WritingPage() {
   return (
     <>
       <PageTitle>Writing</PageTitle>
-      <PageDescription>{WRITING_DESCRIPTION}</PageDescription>
+      <TopLevelSectionPageDescription>
+        {WRITING_DESCRIPTION}
+      </TopLevelSectionPageDescription>
       <WritingGrid />
     </>
   );
