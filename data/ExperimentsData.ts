@@ -266,6 +266,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     experiments: [
       { slug: "units", title: "Besaran dan Satuan" },
       { slug: "electron-configuration", title: "Electron Configuration" },
+      { slug: "motion-diagrams", title: "Diagram Kartesius Gerak" },
     ],
     id: 16,
     logoSrc: "/icons/physics.svg",
