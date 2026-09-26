@@ -30,15 +30,17 @@ graph TD
 
 - Run `bun run check` to check formatting with Oxfmt and lint with type-aware Oxlint.
 - Run `bun run fix` to format files and apply supported lint fixes.
-- Run `bun test` to execute the unit and integration tests.
+- CI runs `bun test`, but this repository currently has no unit or integration
+  test files.
 - Run `bun run typecheck` to regenerate Next.js route types and type-check the
   complete project.
 - Run `bun run knip` to check for unused files, exports, and dependencies.
 - Run `bun run knip:production` to run the same check against production code.
-- Use [`utils/sqlite3.js`](utils/sqlite3.js) and
-  [`utils/dbExperiment.js`](utils/dbExperiment.js) to inspect the shared
-  `experiment.db` or `task.db`. They log table names and sample rows using
-  `bun:sqlite`.
+- [`utils/sqlite3.js`](utils/sqlite3.js) opens `task.db` and prints its tables
+  and all `daily_tasks` rows; the table must already exist.
+- [`utils/dbExperiment.js`](utils/dbExperiment.js) creates the local directory,
+  `experiment.db`, and `tools` table if needed, then prints all tool rows.
+  Both scripts use `bun:sqlite` and should not be treated as read-only tools.
 
 ## Local database experiments
 

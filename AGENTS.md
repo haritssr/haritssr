@@ -47,7 +47,6 @@ This machine has 8 GB RAM. Optimize commands for low resource usage:
 - Kill temporary processes after finishing.
 - Prefer targeted tests and targeted linting.
 - Do not run the entire test suite unless necessary.
-- Do not run `next build` unless necessary.
 
 # Run Build
 
