@@ -203,11 +203,11 @@ function GraphToolbar({
           ) : null}
           {showFullViewButton ? (
             <Dialog.Trigger
-              className="text-action hover:text-action-hover inline-flex cursor-pointer items-center gap-1.5"
+              aria-label="Lihat penuh"
+              className="inline-flex cursor-pointer items-center gap-1.5"
               type="button"
             >
               <ArrowsPointingOutIcon aria-hidden="true" className="size-4" />
-              Lihat penuh
             </Dialog.Trigger>
           ) : null}
         </div>
@@ -264,10 +264,10 @@ function GraphViewport({
 
   return (
     <div
-      className={`${fullView ? "min-h-0 flex-1" : "max-h-[32rem]"} overflow-auto p-2 sm:p-3`}
+      className={`${fullView ? "min-h-0 flex-1" : "max-h-128"} overflow-auto p-2 sm:p-3`}
     >
       <div
-        className="relative h-[var(--graph-height)] w-[var(--graph-width)]"
+        className="relative h-(--graph-height) w-(--graph-width)"
         style={graphCanvasStyle}
       >
         <svg
@@ -380,7 +380,7 @@ function GraphViewport({
             <button
               aria-label={`Sorot prasyarat ${node.label}`}
               aria-pressed={isSelected}
-              className={`focus-visible:outline-action absolute top-[var(--node-top)] left-[var(--node-left)] flex h-15 w-[var(--node-width)] flex-col items-center justify-center overflow-hidden rounded-xl border px-2 text-center transition-[opacity,border-color,background-color,box-shadow] duration-200 focus-visible:z-10 focus-visible:outline-2 ${kindStyles} ${stateStyles}`}
+              className={`focus-visible:outline-action absolute top-(--node-top) left-(--node-left) flex h-15 w-(--node-width) flex-col items-center justify-center overflow-hidden rounded-xl border px-2 text-center transition-[opacity,border-color,background-color,box-shadow] duration-200 focus-visible:z-10 focus-visible:outline-2 ${kindStyles} ${stateStyles}`}
               key={node.id}
               onClick={() => {
                 onSelectNode(node.id);
