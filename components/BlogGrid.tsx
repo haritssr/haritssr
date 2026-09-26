@@ -49,7 +49,14 @@ function groupBlogPostsByYear(): BlogPostGroup[] {
 
 const blogPostGroups = groupBlogPostsByYear();
 
-export default function BlogGrid({ mobileLimit }: { mobileLimit?: number }) {
+export default function BlogGrid({
+  mobileLimit,
+  headingLevel = 2,
+}: {
+  mobileLimit?: number;
+  headingLevel?: 2 | 3;
+}) {
+  const Heading = headingLevel === 3 ? "h3" : "h2";
   const remainingPosts = Math.max(
     allBlogPosts.length - (mobileLimit ?? allBlogPosts.length),
     0
@@ -70,7 +77,7 @@ export default function BlogGrid({ mobileLimit }: { mobileLimit?: number }) {
               }`}
               key={group.year}
             >
-              <h2 className="text-foreground pb-2">{group.year}</h2>
+              <Heading className="text-foreground pb-2">{group.year}</Heading>
               <div className="divide-border border-border corner-squircle divide-y overflow-hidden rounded-2xl border">
                 {group.posts.map(({ index, post }) => (
                   <Link

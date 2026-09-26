@@ -9,6 +9,7 @@ interface ProjectsCardType {
   title: string;
   description: string;
   imgSrc: string;
+  headingLevel?: 2 | 3;
 }
 
 export default function ProjectsCard({
@@ -17,13 +18,15 @@ export default function ProjectsCard({
   title,
   description,
   imgSrc,
+  headingLevel = 2,
 }: ProjectsCardType) {
+  const Heading = headingLevel === 3 ? "h3" : "h2";
   return (
     <div
       className={`group corner-squircle border-border flex w-full flex-col justify-between overflow-hidden rounded-3xl border selection:mx-auto ${className ?? ""}`}
     >
       {/* Header + Title + Explanation */}
-      <section className="flex flex-col justify-between space-y-2 p-3">
+      <div className="flex flex-col justify-between space-y-2 p-3">
         <div className="flex items-center space-x-2">
           <Image
             alt=""
@@ -33,9 +36,9 @@ export default function ProjectsCard({
             src={imgSrc}
             width={30}
           />
-          <div className="text-foreground/90 truncate text-lg font-medium">
+          <Heading className="text-foreground/90 truncate text-lg font-medium">
             {title}
-          </div>
+          </Heading>
         </div>
 
         <div className="text-foreground/70">{description}</div>
@@ -46,9 +49,9 @@ export default function ProjectsCard({
             {href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
           </span>
         </cite>
-      </section>
+      </div>
 
-      <section className="flex space-x-2 px-3 pb-3">
+      <div className="flex space-x-2 px-3 pb-3">
         <a
           className="corner-squircle bg-foreground/90 text-background hover:bg-foreground/80 inline-flex w-1/2 items-center justify-center rounded-xl py-1.25 text-center text-sm select-none"
           href={href}
@@ -63,7 +66,7 @@ export default function ProjectsCard({
         >
           Details
         </Link>
-      </section>
+      </div>
     </div>
   );
 }
