@@ -3,6 +3,7 @@
 import { NumberField } from "@base-ui/react/number-field";
 import { useState } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import {
@@ -381,14 +382,9 @@ export default function ElectronConfigurationDemo({
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-16">
       <section aria-labelledby="element-selector-title">
-        <h2
-          className="text-foreground mb-4 text-xl font-semibold"
-          id="element-selector-title"
-        >
-          Pick An Element
-        </h2>
+        <Section id="element-selector-title" name="Pick An Element" />
         <p aria-atomic="true" aria-live="polite" className="sr-only">
           {element.name} selected, atomic number {atomicNumber}.
         </p>
@@ -487,17 +483,7 @@ export default function ElectronConfigurationDemo({
       />
 
       <section aria-labelledby="aufbau-diagram-title">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-          <h2
-            className="text-foreground text-xl font-semibold"
-            id="aufbau-diagram-title"
-          >
-            Aufbau Diagram
-          </h2>
-          <p className="text-foreground/70 text-sm">
-            Follow the filling-order path
-          </p>
-        </div>
+        <Section id="aufbau-diagram-title" name="Aufbau Diagram" />
         <div className="border-border rounded-xl border">
           <div className="border-border flex items-center gap-3 border-b p-4">
             <div className="scrollbar-subtle min-w-0 overflow-x-auto">
@@ -602,11 +588,6 @@ export default function ElectronConfigurationDemo({
             </div>
           </div>
         </div>
-        <p className="text-foreground/70 mt-3 text-sm">
-          The numbers and arrows show filling order. The blue subshell contains
-          the last electron. The m value appears above each orbital box; ↑↓ is a
-          pair of electrons with opposite spins.
-        </p>
         {isConfigurationException(atomicNumber) ? (
           <p className="border-attention mt-3 rounded-lg border bg-yellow-50 px-3 py-2 text-sm text-yellow-900">
             {element.name}&apos;s ground-state configuration differs from the

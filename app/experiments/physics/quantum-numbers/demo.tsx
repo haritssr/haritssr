@@ -1,5 +1,6 @@
 "use client";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import { getLastElectronQuantumNumbers } from "../electron-configuration/_data";
@@ -171,16 +172,7 @@ export function QuantumNumbersSummary({
 export function VocabularyGuide() {
   return (
     <section aria-labelledby="vocabulary-title">
-      <div className="mb-4 flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-        <h2
-          className="text-foreground text-xl font-semibold"
-          id="vocabulary-title"
-        >
-          Vocabulary
-        </h2>
-        <p className="text-foreground/70 text-sm">Symbols used on this page</p>
-      </div>
-
+      <Section id="vocabulary-title" name="Vocabulary" />
       <div className="border-border w-full overflow-hidden rounded-md border">
         <div className="scrollbar-subtle w-full overflow-x-auto">
           <table className="divide-border text-foreground w-full min-w-3xl border-collapse divide-y text-sm">

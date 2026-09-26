@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import Section from "@/components/Section";
+
 import type { OrbitalDefinition } from "./_data";
 import { getElectronCounts, ORBITALS } from "./_data";
 import { makeOrbitalSurface, sampleOrbital } from "./orbital-model";
@@ -448,16 +450,7 @@ export default function OrbitalIllustration({
 
   return (
     <section aria-labelledby="orbital-illustration-title">
-      <h2
-        className="text-foreground mb-2 text-xl font-semibold"
-        id="orbital-illustration-title"
-      >
-        Electron Orbital in 3D
-      </h2>
-      <p className="text-foreground/70 mb-4 text-sm">
-        Explore the occupied orbitals of {elementName}. Shaded lobes show their
-        characteristic shapes; the dots show sampled electron probability.
-      </p>
+      <Section id="orbital-illustration-title" name="Electron Orbital in 3D" />
       <div className="border-border overflow-hidden rounded-xl border">
         <div className="border-border flex flex-wrap items-start gap-x-6 gap-y-4 border-b p-4">
           <div className="min-w-0 flex-[1_1_16rem]">
