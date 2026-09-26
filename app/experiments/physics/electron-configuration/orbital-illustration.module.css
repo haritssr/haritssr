@@ -1,0 +1,34 @@
+.viewer {
+  overflow: hidden;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 22rem;
+  touch-action: none;
+  cursor: grab;
+  background: #fff;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+.viewer:fullscreen {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: #fff;
+}
+
+.viewer:fullscreen .canvas {
+  flex: 1;
+  min-height: 0;
+}
+
+@media (min-width: 640px) {
+  .canvas {
+    height: 27rem;
+  }
+}

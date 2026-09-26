@@ -20,6 +20,7 @@ import {
   ORBITALS,
 } from "./_data";
 import type { OrbitalDefinition } from "./_data";
+import OrbitalIllustration from "./orbital-illustration";
 
 const AUFBAU_ROWS: readonly (readonly (number | null)[])[] = [
   [0, null, null, null],
@@ -243,16 +244,20 @@ function AtomicNumberField({
   atomicNumber,
   id,
   onValueChange,
+  showLabel = true,
 }: {
   atomicNumber: number;
   id: string;
   onValueChange: (value: number) => void;
+  showLabel?: boolean;
 }) {
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <label className="text-foreground/70 text-xs" htmlFor={id}>
-        Atomic number
-      </label>
+      {showLabel ? (
+        <label className="text-foreground/70 text-xs" htmlFor={id}>
+          Atomic number
+        </label>
+      ) : null}
       <NumberField.Root
         className="flex items-center"
         max={MAX_ATOMIC_NUMBER}
@@ -270,7 +275,7 @@ function AtomicNumberField({
         <NumberField.Group className="flex items-center">
           <NumberField.Decrement
             aria-label="Previous element"
-            className="border-border hover:bg-background focus-visible:outline-action hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-l-md border-t border-b border-l text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
+            className="border-border focus-visible:outline-action enabled:hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-l-md border-t border-b border-l text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
           >
             −
           </NumberField.Decrement>
@@ -283,7 +288,7 @@ function AtomicNumberField({
           />
           <NumberField.Increment
             aria-label="Next element"
-            className="border-border hover:bg-background focus-visible:outline-action hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-r-md border-t border-r border-b text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
+            className="border-border focus-visible:outline-action enabled:hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-r-md border-t border-r border-b text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
           >
             +
           </NumberField.Increment>
@@ -304,57 +309,45 @@ function AtomicNotation({
 }) {
   const massNumber = getRepresentativeMassNumber(atomicNumber);
   const neutronNumber = massNumber - atomicNumber;
-  const properties = [
-    { label: "Mass number", symbol: "A", value: massNumber },
-    { label: "Proton number", symbol: "p⁺", value: atomicNumber },
-    { label: "Electron number", symbol: "e⁻", value: atomicNumber },
-    { label: "Neutron number", symbol: "n⁰", value: neutronNumber },
-  ] as const;
 
   return (
-    <section aria-labelledby="atomic-notation-title" className="mt-6">
-      <div className="mb-3 flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-        <h3
-          className="text-foreground text-lg font-semibold"
-          id="atomic-notation-title"
-        >
+    <figure className="border-border self-start rounded-xl border p-3">
+      <figcaption>
+        <h3 className="text-foreground/70 text-xs font-medium">
           Atomic Notation
         </h3>
-        <p className="text-foreground/70 text-sm">Representative isotope</p>
+      </figcaption>
+      <div aria-hidden="true" className="mt-2 text-2xl">
+        {katexify(
+          `{}^{${massNumber}}_{${atomicNumber}}\\mathrm{${elementSymbol}}`,
+          false
+        )}
       </div>
-      <div className="grid gap-3 sm:grid-cols-[0.8fr_2.2fr]">
-        <figure className="border-border flex min-h-24 items-center justify-center rounded-xl border p-4">
-          <div aria-hidden="true" className="text-3xl">
-            {katexify(
-              `{}^{${massNumber}}_{${atomicNumber}}\\mathrm{${elementSymbol}}`,
-              false
-            )}
-          </div>
-          <figcaption className="sr-only">
-            {elementName}-{massNumber}, with mass number {massNumber} and atomic
-            number {atomicNumber}.
-          </figcaption>
-        </figure>
-        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {properties.map((property) => (
-            <div
-              className="border-border rounded-xl border p-3"
-              key={property.label}
-            >
-              <dt className="text-foreground/70 text-xs">{property.label}</dt>
-              <dd className="mt-2 flex items-baseline justify-between gap-2">
-                <span className="text-foreground/60 font-mono text-xs">
-                  {property.symbol}
-                </span>
-                <span className="text-xl font-semibold tabular-nums">
-                  {property.value}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
+      <p className="sr-only">
+        {elementName} with mass number {massNumber} and atomic number{" "}
+        {atomicNumber}.
+      </p>
+      <dl className="mt-2 grid grid-cols-3 gap-2">
+        <div>
+          <dt className="text-foreground/70 text-xs">Proton</dt>
+          <dd className="font-mono text-sm font-medium tabular-nums">
+            {atomicNumber}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-foreground/70 text-xs">Electron</dt>
+          <dd className="font-mono text-sm font-medium tabular-nums">
+            {atomicNumber}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-foreground/70 text-xs">Neutron</dt>
+          <dd className="font-mono text-sm font-medium tabular-nums">
+            {neutronNumber}
+          </dd>
+        </div>
+      </dl>
+    </figure>
   );
 }
 
@@ -418,6 +411,11 @@ export default function ElectronConfigurationDemo({
               />
             </div>
           </div>
+          <AtomicNotation
+            atomicNumber={atomicNumber}
+            elementName={element.name}
+            elementSymbol={element.symbol}
+          />
           <div className="border-border rounded-xl border p-3">
             <p className="text-foreground/70 text-xs">Electron configuration</p>
             <p className="mt-2 font-mono text-base leading-6 wrap-break-word">
@@ -481,69 +479,75 @@ export default function ElectronConfigurationDemo({
             <QuantumNumbersSummary atomicNumber={atomicNumber} />
           </div>
         </div>
-        <AtomicNotation
-          atomicNumber={atomicNumber}
-          elementName={element.name}
-          elementSymbol={element.symbol}
-        />
       </section>
 
+      <OrbitalIllustration
+        atomicNumber={atomicNumber}
+        elementName={element.name}
+      />
+
       <section aria-labelledby="aufbau-diagram-title">
-        <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <h2
             className="text-foreground text-xl font-semibold"
             id="aufbau-diagram-title"
           >
             Aufbau Diagram
           </h2>
-          <div className="flex flex-col gap-2 sm:items-end">
-            <p className="text-foreground/70 text-sm">
-              Follow the filling-order path
-            </p>
-            <AtomicNumberField
-              atomicNumber={atomicNumber}
-              id="aufbau-atomic-number"
-              onValueChange={selectAtomicNumber}
-            />
-          </div>
+          <p className="text-foreground/70 text-sm">
+            Follow the filling-order path
+          </p>
         </div>
         <div className="border-border rounded-xl border">
-          <div className="scrollbar-subtle border-border overflow-x-auto border-b p-4">
-            <ol
-              aria-label="Aufbau orbital filling order"
-              className="flex min-w-max items-center gap-1.5"
-            >
-              {ORBITALS.map((orbital, index) => {
-                const electrons = electronCounts[index] ?? 0;
-                const isLastOccupied = index === lastOccupiedOrbitalIndex;
-                let stateClassName =
-                  "border-border bg-background text-foreground/70";
+          <div className="border-border flex items-center gap-3 border-b p-4">
+            <div className="scrollbar-subtle min-w-0 overflow-x-auto">
+              <ol
+                aria-label="Aufbau orbital filling order"
+                className="flex min-w-max items-center gap-1.5"
+              >
+                {ORBITALS.map((orbital, index) => {
+                  const electrons = electronCounts[index] ?? 0;
+                  const isLastOccupied = index === lastOccupiedOrbitalIndex;
+                  let stateClassName =
+                    "border-border bg-background text-foreground/70";
 
-                if (isLastOccupied) {
-                  stateClassName = "border-action bg-action text-white";
-                } else if (electrons > 0) {
-                  stateClassName = "border-action bg-action/10 text-action";
-                }
+                  if (isLastOccupied) {
+                    stateClassName = "border-action bg-action text-white";
+                  } else if (electrons > 0) {
+                    stateClassName = "border-action bg-action/10 text-action";
+                  }
 
-                return (
-                  <li className="flex items-center gap-1.5" key={orbital.label}>
-                    <span
-                      className={`rounded-md border px-2 py-1 font-mono text-xs font-medium ${stateClassName}`}
+                  return (
+                    <li
+                      className="flex items-center gap-1.5"
+                      key={orbital.label}
                     >
-                      {orbital.label}
-                    </span>
-                    {index < ORBITALS.length - 1 ? (
                       <span
-                        aria-hidden="true"
-                        className="text-foreground/50 text-xs"
+                        className={`rounded-md border px-2 py-1 font-mono text-xs font-medium ${stateClassName}`}
                       >
-                        →
+                        {orbital.label}
                       </span>
-                    ) : null}
-                  </li>
-                );
-              })}
-            </ol>
+                      {index < ORBITALS.length - 1 ? (
+                        <span
+                          aria-hidden="true"
+                          className="text-foreground/50 text-xs"
+                        >
+                          →
+                        </span>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+            <div className="ml-auto shrink-0">
+              <AtomicNumberField
+                atomicNumber={atomicNumber}
+                id="aufbau-atomic-number"
+                onValueChange={selectAtomicNumber}
+                showLabel={false}
+              />
+            </div>
           </div>
           <div className="p-4">
             <div className="grid grid-cols-1 gap-2 lg:grid-cols-[3rem_minmax(0,0.75fr)_minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,2fr)]">
