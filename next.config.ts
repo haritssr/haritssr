@@ -1,8 +1,6 @@
 import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
-import { SITE_URL } from "./utils/site";
-
 const withMDX = createMDX({
   options: {
     rehypePlugins: [
@@ -80,17 +78,6 @@ const nextConfig: NextConfig = {
   },
   redirects() {
     return [
-      {
-        destination: `${SITE_URL}/:path*`,
-        has: [
-          {
-            type: "host",
-            value: "haritssr.vercel.app",
-          },
-        ],
-        permanent: true,
-        source: "/:path*",
-      },
       {
         destination: "/experiments/ui-explorations/masalah-to-feature",
         permanent: true,
