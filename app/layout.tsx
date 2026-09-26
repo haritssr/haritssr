@@ -73,13 +73,13 @@ export default function RootLayout({
         </a>
         <ServiceWorkerRegistration />
         <TopBar />
+        <Breadcrumbs />
         <main
           className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0"
           id="main-content"
         >
           {children}
         </main>
-        <Breadcrumbs />
         <FooterSpacing>
           <Footer />
         </FooterSpacing>

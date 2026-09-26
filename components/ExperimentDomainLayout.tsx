@@ -19,7 +19,9 @@ export default function ExperimentDomainLayout({
   domain,
 }: ExperimentDomainLayoutProps) {
   const pathname = usePathname();
-  const previousSegment = pathname.split("/").at(-2);
+  const segments = pathname.split("/").filter(Boolean);
+  const parentPath = `/${segments.slice(0, -1).join("/")}`;
+  const previousSegment = segments.at(-2);
   const prevRoute =
     previousSegment === undefined || previousSegment.length === 0
       ? "back"
@@ -32,11 +34,10 @@ export default function ExperimentDomainLayout({
     .join(" ");
 
   // Get experiment title from pathname
-  const segments = pathname.split("/");
   const experimentSlug = segments.at(-1);
   // The index route has only /experiments/<domain> segments.
-  const isIndexPage = segments.length === 3;
-  const domainChildSlug = segments.at(3);
+  const isIndexPage = segments.length === 2;
+  const domainChildSlug = segments.at(2);
   const isTaskRoute =
     domain === "ui-explorations" && domainChildSlug === "task";
   const isStandaloneNextjsRoute =
@@ -64,9 +65,9 @@ export default function ExperimentDomainLayout({
 
   return (
     <div className="min-h-screen w-full sm:-mt-px">
-      <div className="w-full sm:border-t">
+      <div className="w-full">
         <article className="sm:px-0">
-          {!isTaskRoute && <BackButton href="/experiments" name={prevRoute} />}
+          {!isTaskRoute && <BackButton href={parentPath} name={prevRoute} />}
           {!(isTaskRoute || isIndexPage || isStandaloneNextjsRoute) && (
             <PageTitle>{title}</PageTitle>
           )}

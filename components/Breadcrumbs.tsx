@@ -10,18 +10,21 @@ const whitespaceSequencePattern = /\s+/;
 // Matches consecutive hyphens or underscores used as segment separators.
 // Example: "hello-world" becomes "hello world".
 const segmentSeparatorPattern = /[-_]+/g;
+const mainRoutes = new Set(["projects", "experiments", "blog", "design"]);
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
 
-  if (pathname === "/") {
+  if (
+    segments.length === 0 ||
+    (segments.length === 1 && mainRoutes.has(segments[0]))
+  ) {
     return null;
   }
 
-  const segments = pathname.split("/").filter(Boolean);
-
   return (
-    <nav aria-label="Breadcrumb" className="mt-52">
+    <nav aria-label="Breadcrumb" className="pt-3">
       <div className="mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
         <div className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
           <Link className="text-foreground/60 hover:text-foreground" href="/">
