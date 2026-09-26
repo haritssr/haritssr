@@ -48,9 +48,11 @@ function GenericSelectComponent<TValue extends Base>({
 }: GenericTypeSelect<TValue>) {
   //will fire if the option choosed (after click)
   const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const val = values.find((value) => value.id === event.target.value);
-    if (val) {
-      onChange(val);
+    const matchedOption = values.find(
+      (value) => value.id === event.target.value
+    );
+    if (matchedOption) {
+      onChange(matchedOption);
     }
   };
 

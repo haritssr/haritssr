@@ -18,16 +18,16 @@ export default function Projects() {
       id="projects"
       topic="Projects"
     >
-      {ProjectsData.map((d, index) => (
+      {ProjectsData.map((project, index) => (
         <ProjectsCard
           className={
             index >= HOME_PROJECTS_LIMIT ? "hidden! sm:flex!" : undefined
           }
-          description={d.about_client.short_about}
-          href={d.about_client.website}
-          imgSrc={d.about_client.logo_src}
-          key={d.project_name}
-          title={d.project_name}
+          description={project.about_client.short_about}
+          href={project.about_client.website}
+          imgSrc={project.about_client.logo_src}
+          key={project.project_name}
+          title={project.project_name}
         />
       ))}
       {remainingProjects > 0 ? (

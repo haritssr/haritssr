@@ -110,8 +110,8 @@ function createQuantityDependents(): QuantityDependents[] {
     QuantityDependents["formulas"][number][]
   >(quantities.map((unit) => [unit.quantity, []]));
 
-  for (const result of DERIVED_UNITS) {
-    for (const definition of getFormulaDefinitions(result.quantity)) {
+  for (const derivedUnit of DERIVED_UNITS) {
+    for (const definition of getFormulaDefinitions(derivedUnit.quantity)) {
       const prerequisitesByQuantity = new Map<
         string,
         { label: string; symbol?: string }[]
@@ -143,8 +143,8 @@ function createQuantityDependents(): QuantityDependents[] {
           expression: definition.expression,
           formulaName: definition.name,
           prerequisites,
-          result: result.quantity,
-          resultSymbol: result.quantitySymbol,
+          result: derivedUnit.quantity,
+          resultSymbol: derivedUnit.quantitySymbol,
         });
       }
     }

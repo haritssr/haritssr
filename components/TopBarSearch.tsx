@@ -36,12 +36,15 @@ async function fetchSearchIndex(): Promise<readonly RouteDoc[]> {
     throw new Error(`Search index request failed: ${response.status}`);
   }
 
-  const data: unknown = await response.json();
-  if (!Array.isArray(data) || !data.every(isRouteDoc)) {
+  const searchIndexPayload: unknown = await response.json();
+  if (
+    !Array.isArray(searchIndexPayload) ||
+    !searchIndexPayload.every(isRouteDoc)
+  ) {
     throw new TypeError("Search index response is invalid");
   }
 
-  return data;
+  return searchIndexPayload;
 }
 
 async function requestSearchIndex(): Promise<readonly RouteDoc[]> {

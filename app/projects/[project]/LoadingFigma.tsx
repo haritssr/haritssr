@@ -10,14 +10,14 @@ export default function LoadingFigma({
       {project.figma.length === 0 ? (
         <p className="text-foreground">No design</p>
       ) : (
-        project.figma.map((a, index) => (
+        project.figma.map((figmaUrl, index) => (
           <iframe
             allowFullScreen
             className="h-150 w-full"
-            key={a}
+            key={figmaUrl}
             loading="lazy"
             sandbox="allow-scripts"
-            src={a}
+            src={figmaUrl}
             title={`${project.project_name} Figma design ${index + 1}`}
           />
         ))

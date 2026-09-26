@@ -12,14 +12,14 @@ export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q")?.toLowerCase() ?? "";
 
-  const data = Users.filter((item) =>
-    searchableUserFields.some((key) => item[key].toLowerCase().includes(q))
+  const matchingUsers = users.filter((user) =>
+    searchableUserFields.some((key) => user[key].toLowerCase().includes(q))
   );
 
-  return Response.json(data.slice(0, 10));
+  return Response.json(matchingUsers.slice(0, 10));
 }
 
-const Users: User[] = [
+const users: User[] = [
   {
     id: 1,
     firstName: "Terry",

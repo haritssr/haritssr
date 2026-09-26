@@ -24,7 +24,7 @@ export default function SimpleSearch() {
   const deferredQuery = useDeferredValue(query);
 
   // no need useMemo here
-  const defferedFilter = fruits.filter((fruit) =>
+  const deferredFruits = fruits.filter((fruit) =>
     fruit.toLocaleLowerCase().includes(deferredQuery.toLocaleLowerCase())
   );
 
@@ -41,8 +41,8 @@ export default function SimpleSearch() {
 
       {query !== deferredQuery && <p>Searching...</p>}
 
-      {defferedFilter.map((f) => (
-        <div key={f}>{f}</div>
+      {deferredFruits.map((fruit) => (
+        <div key={fruit}>{fruit}</div>
       ))}
     </div>
   );

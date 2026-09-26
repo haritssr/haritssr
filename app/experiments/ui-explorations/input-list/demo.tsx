@@ -36,10 +36,10 @@ export default function InputList() {
       </button>
 
       <div>
-        {list.map((x) => (
-          <div key={x.id}>
-            {x.id} &nbsp;
-            {x.text}
+        {list.map((item) => (
+          <div key={item.id}>
+            {item.id} &nbsp;
+            {item.text}
           </div>
         ))}
       </div>

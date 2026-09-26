@@ -40,15 +40,15 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function ExperiencesPage({
+export default async function ProjectPage({
   params,
 }: {
   params: Promise<{ project: string }>;
 }) {
-  const { project } = await params;
-  const FoundProjectObject: ProjectsDataType | undefined = getProject(project);
+  const { project: projectSlug } = await params;
+  const project: ProjectsDataType | undefined = getProject(projectSlug);
 
-  if (!FoundProjectObject) {
+  if (!project) {
     notFound();
   }
 
@@ -62,18 +62,18 @@ export default async function ExperiencesPage({
         <section className="border-border bg-foreground/5 my-8 flex items-center justify-between rounded-md border px-3 py-2 sm:my-10 sm:px-5 sm:py-4">
           <div>
             <div className="text-2xl font-bold wrap-break-word sm:text-3xl">
-              {FoundProjectObject.project_name}
+              {project.project_name}
             </div>
             <div className="text-foreground/60 text-lg">
-              {FoundProjectObject.about_client.website.slice(8)}
+              {project.about_client.website.slice(8)}
             </div>
           </div>
           <Image
             alt=""
-            blurDataURL={FoundProjectObject.about_client.logo_src}
+            blurDataURL={project.about_client.logo_src}
             className="h-12 w-12"
             height="40"
-            src={FoundProjectObject.about_client.logo_src}
+            src={project.about_client.logo_src}
             width="40"
             // placeholder='blur'
           />
@@ -88,38 +88,38 @@ export default async function ExperiencesPage({
               Company Name
             </div>
             <p className="text-foreground/60">
-              {FoundProjectObject.about_client.company_name}
+              {project.about_client.company_name}
             </p>
 
             <div className="text-foreground/90 mt-5 font-medium">
               Brand Name
             </div>
             <p className="text-foreground/60">
-              {FoundProjectObject.about_client.brand_name}
+              {project.about_client.brand_name}
             </p>
 
             <div className="text-foreground/90 mt-5 font-medium">About</div>
             <p className="text-foreground/60">
-              {FoundProjectObject.about_client.long_about}
+              {project.about_client.long_about}
             </p>
 
             <div className="text-foreground/90 mt-5 font-medium">
               Phone Number
             </div>
             <p className="text-foreground/60">
-              {FoundProjectObject.about_client.phone_number}
+              {project.about_client.phone_number}
             </p>
 
             <div className="text-foreground/90 mt-5 font-medium">Website</div>
             <ExternalLink
-              href={FoundProjectObject.about_client.website}
-              name={FoundProjectObject.about_client.website.slice(8)}
+              href={project.about_client.website}
+              name={project.about_client.website.slice(8)}
             />
             <div className="text-foreground/90 mt-5 font-medium">
               Office Location
             </div>
             <p className="text-foreground/60">
-              {FoundProjectObject.about_client.office_location}
+              {project.about_client.office_location}
             </p>
           </section>
 
@@ -131,9 +131,9 @@ export default async function ExperiencesPage({
 
             <div className="text-foreground/90 mt-5 font-medium">My Role</div>
             <ExplanationList>
-              {FoundProjectObject.about_project.my_role.map((a: string) => (
-                <li className="text-foreground/60" key={a}>
-                  {a}
+              {project.about_project.my_role.map((role: string) => (
+                <li className="text-foreground/60" key={role}>
+                  {role}
                 </li>
               ))}
             </ExplanationList>
@@ -142,29 +142,27 @@ export default async function ExperiencesPage({
               Working Period
             </div>
             <p className="text-foreground/60">
-              {FoundProjectObject.about_project.working_period}
+              {project.about_project.working_period}
             </p>
 
             <div className="text-foreground/90 mt-5 font-medium">
               Website Status
             </div>
             <ExplanationList>
-              {FoundProjectObject.about_project.website_status.map(
-                (a: string) => (
-                  <li className="text-foreground/60" key={a}>
-                    {a}
-                  </li>
-                )
-              )}
+              {project.about_project.website_status.map((status: string) => (
+                <li className="text-foreground/60" key={status}>
+                  {status}
+                </li>
+              ))}
             </ExplanationList>
 
             <div className="text-foreground/90 mt-5 font-medium">
               Website Routes
             </div>
             <ExplanationList>
-              {FoundProjectObject.about_project.routes.map((a: string) => (
-                <li className="text-foreground/60" key={a}>
-                  {a}
+              {project.about_project.routes.map((route: string) => (
+                <li className="text-foreground/60" key={route}>
+                  {route}
                 </li>
               ))}
             </ExplanationList>
@@ -173,9 +171,9 @@ export default async function ExperiencesPage({
               Website Features
             </div>
             <ExplanationList>
-              {FoundProjectObject.about_project.features.map((a: string) => (
-                <li className="text-foreground/60" key={a}>
-                  {a}
+              {project.about_project.features.map((feature: string) => (
+                <li className="text-foreground/60" key={feature}>
+                  {feature}
                 </li>
               ))}
             </ExplanationList>
@@ -187,7 +185,7 @@ export default async function ExperiencesPage({
           <h2 className="text-foreground/90 mb-5 text-xl font-semibold">
             Design (at Figma)
           </h2>
-          <LoadingFigma project={FoundProjectObject} />
+          <LoadingFigma project={project} />
         </section>
       </div>
     </div>
