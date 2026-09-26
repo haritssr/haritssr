@@ -4,7 +4,7 @@ This repo is Harits Syah's personal site built with Next.js (App Router).
 
 - [`projects`](/projects): Project portfolio and project detail pages.
 - [`experiments`](/experiments): Frontend experiments across frameworks and libraries.
-- [`writing`](/writing): Writing and notes.
+- [`blog`](/blog): Blog posts and notes.
 - [`design`](/design): Design system reference.
 
 ## Site Structure
@@ -16,7 +16,7 @@ graph TD
   haritssr --> home["/"]
   haritssr --> projects["/projects"]
   haritssr --> experiments["/experiments"]
-  haritssr --> writing["/writing"]
+  haritssr --> blog["/blog"]
   haritssr --> design["/design"]
 ```
 

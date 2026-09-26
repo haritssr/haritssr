@@ -3,15 +3,15 @@ import { notFound } from "next/navigation";
 import type React from "react";
 
 import BackButton from "@/components/BackButton";
+import { getBlogModule } from "@/utils/blog-modules";
+import { allBlogPosts, getBlogPost } from "@/utils/blog-posts";
 import { SITE_URL } from "@/utils/site";
-import { getWritingModule } from "@/utils/writing-modules";
-import { allWritings, getWriting } from "@/utils/writings";
 
 import TableOfContents from "./TableOfContent";
 
 export function generateStaticParams() {
-  return allWritings.map((writing) => ({
-    slug: writing.slug,
+  return allBlogPosts.map((post) => ({
+    slug: post.slug,
   }));
 }
 
@@ -21,9 +21,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const writing = getWriting(slug);
+  const post = getBlogPost(slug);
 
-  if (!writing) {
+  if (!post) {
     return {};
   }
 
@@ -31,8 +31,8 @@ export async function generateMetadata({
     title,
     publishedAt: publishedTime,
     summary: description,
-    slug: writingSlug,
-  } = writing;
+    slug: postSlug,
+  } = post;
 
   const image = "/images/openGraphImage.png";
 
@@ -44,8 +44,8 @@ export async function generateMetadata({
       title,
       description,
       publishedTime,
-      siteName: "Harits Syah Writing",
-      url: `${SITE_URL}/writing/${writingSlug}`,
+      siteName: "Harits Syah Blog",
+      url: `${SITE_URL}/blog/${postSlug}`,
       images: [{ url: image }],
       locale: "en-US",
       type: "article",
@@ -63,7 +63,7 @@ export async function generateMetadata({
   };
 }
 
-const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
+const blogDateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   month: "long",
   timeZone: "UTC",
@@ -71,51 +71,51 @@ const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 function formatDate(date: string) {
-  return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
+  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
 }
 
-export default async function Writing({
+export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const writing = getWriting(slug);
-  const writingModule = getWritingModule(slug);
+  const post = getBlogPost(slug);
+  const postModule = getBlogModule(slug);
 
-  if (!(writing && writingModule)) {
+  if (!(post && postModule)) {
     notFound();
   }
 
-  const { default: WritingContent } = await writingModule;
+  const { default: PostContent } = await postModule;
 
   return (
     <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
       {/*<LeftBar />*/}
       <Content>
         <div className="mt-5 mb-10">
-          <BackButton href="/writing" name="All Writings" />
+          <BackButton href="/blog" name="All Posts" />
         </div>
 
         <h1 className="text-foreground text-2xl font-bold tracking-tighter sm:text-3xl">
-          {writing.title}
+          {post.title}
         </h1>
         <div className="mt-2 mb-8 flex items-center text-sm">
-          <time dateTime={writing.publishedAt}>
-            {formatDate(writing.publishedAt)}
+          <time dateTime={post.publishedAt}>
+            {formatDate(post.publishedAt)}
           </time>
           &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
           &nbsp;&nbsp;
-          <p>{writing.wordCount} Words</p>
+          <p>{post.wordCount} Words</p>
           &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
           &nbsp;&nbsp;
-          <p>{Math.ceil(writing.wordCount / 200)} Min Read</p>
+          <p>{Math.ceil(post.wordCount / 200)} Min Read</p>
         </div>
         <article className="prose prose-zinc prose-headings:text-foreground max-w-none">
-          <WritingContent />
+          <PostContent />
         </article>
       </Content>
-      <TableOfContents slug={writing.slug} />
+      <TableOfContents slug={post.slug} />
     </div>
   );
 }

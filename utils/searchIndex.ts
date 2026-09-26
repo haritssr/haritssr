@@ -7,10 +7,10 @@ import {
 import { ProjectsData } from "@/data/ProjectsData";
 import { navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
+import { allBlogPosts } from "@/utils/blog-posts";
 import { isExperimentAvailable } from "@/utils/databaseExperiments";
 import { getSortedPostsData } from "@/utils/posts";
 import { getProjectSlug } from "@/utils/projectSlug";
-import { allWritings } from "@/utils/writings";
 
 const homeSections: RouteDoc[] = [
   {
@@ -29,9 +29,9 @@ const homeSections: RouteDoc[] = [
     description: "Featured experiments on the homepage",
   },
   {
-    route: "/#writing",
-    title: "Writing",
-    description: "Recent writing on the homepage",
+    route: "/#blog",
+    title: "Blog",
+    description: "Recent blog posts on the homepage",
   },
   { route: "/#misc", title: "More", description: "More about Harits Syah" },
 ].map((doc) => ({
@@ -81,11 +81,11 @@ export function getSearchIndex(): RouteDoc[] {
       description: project.about_client.short_about,
       group: "Projects",
     })),
-    ...allWritings.map((writing) => ({
-      route: `/writing/${writing.slug}`,
-      title: writing.title,
-      description: `${writing.topic} · ${writing.summary}`,
-      group: "Writing",
+    ...allBlogPosts.map((post) => ({
+      route: `/blog/${post.slug}`,
+      title: post.title,
+      description: `${post.topic} · ${post.summary}`,
+      group: "Blog",
     })),
     ...getSortedPostsData().map((post) => ({
       route: `/experiments/nextjs/posts/${post.id}`,

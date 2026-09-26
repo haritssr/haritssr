@@ -111,14 +111,9 @@ const nextConfig: NextConfig = {
             },
           ]),
       {
-        destination: "/writing",
+        destination: "/blog/:slug*",
         permanent: true,
-        source: "/blog",
-      },
-      {
-        destination: "/writing/:slug*",
-        permanent: true,
-        source: "/blog/:slug*",
+        source: "/writing/:slug*",
       },
     ];
   },

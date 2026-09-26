@@ -126,8 +126,8 @@ export default function GlobalSearchDialog({
           />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Search navigation, projects, writing, design, and experiments. Use
-            the arrow keys to browse results and Enter to open a page.
+            Search navigation, projects, blog, design, and experiments. Use the
+            arrow keys to browse results and Enter to open a page.
           </Dialog.Description>
           <Command
             className="flex min-h-0 flex-1 flex-col"
@@ -147,7 +147,7 @@ export default function GlobalSearchDialog({
                 className="placeholder:text-foreground/50 min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
                 enterKeyHint="go"
                 onValueChange={setQuery}
-                placeholder="Search pages, projects, experiments, writing…"
+                placeholder="Search pages, projects, experiments, blog…"
                 ref={inputRef}
                 spellCheck={false}
                 value={query}

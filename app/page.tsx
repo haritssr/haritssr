@@ -1,8 +1,8 @@
+import Blog from "./_HomeSections/Blog";
 import Contacts from "./_HomeSections/Contacts";
 import Experiments from "./_HomeSections/Experiments";
 import More from "./_HomeSections/More";
 import Projects from "./_HomeSections/Projects";
-import Writing from "./_HomeSections/Writing";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <div className="space-y-16 sm:space-y-24">
         <Projects />
         <Experiments />
-        <Writing />
+        <Blog />
         <More />
       </div>
     </section>

@@ -1,7 +1,7 @@
-import { RSS_PATH, SITE_URL, WRITING_DESCRIPTION, WRITING_PATH } from "./site";
+import { BLOG_DESCRIPTION, BLOG_PATH, RSS_PATH, SITE_URL } from "./site";
 
 const RSS_LANGUAGE = "en-US";
-const RSS_TITLE = "Harits Syah — Writing";
+const RSS_TITLE = "Harits Syah — Blog";
 const XML_ESCAPES: Record<string, string> = {
   "&": "&amp;",
   "'": "&apos;",
@@ -11,7 +11,7 @@ const XML_ESCAPES: Record<string, string> = {
 };
 const xmlEscapePattern = /[&<>"']/g;
 
-export interface RssWriting {
+export interface RssBlogPost {
   publishedAt: string;
   slug: string;
   summary: string;
@@ -44,15 +44,15 @@ function getSiteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
 
-function getWritingUrl(slug: string): string {
-  return getSiteUrl(`${WRITING_PATH}/${slug}`);
+function getBlogPostUrl(slug: string): string {
+  return getSiteUrl(`${BLOG_PATH}/${slug}`);
 }
 
-export function renderWritingRssFeed(
-  writings: readonly RssWriting[],
+export function renderBlogRssFeed(
+  posts: readonly RssBlogPost[],
   buildDate = new Date()
 ): string {
-  const sortedWritings = writings.toSorted((left, right) => {
+  const sortedPosts = posts.toSorted((left, right) => {
     const dateDifference =
       getPublicationDate(right.publishedAt).valueOf() -
       getPublicationDate(left.publishedAt).valueOf();
@@ -61,34 +61,34 @@ export function renderWritingRssFeed(
       ? left.slug.localeCompare(right.slug)
       : dateDifference;
   });
-  const items = sortedWritings.map((writing) => {
-    const writingUrl = getWritingUrl(writing.slug);
+  const items = sortedPosts.map((post) => {
+    const postUrl = getBlogPostUrl(post.slug);
 
     return [
       "    <item>",
-      `      <title>${escapeXml(writing.title)}</title>`,
-      `      <link>${escapeXml(writingUrl)}</link>`,
-      `      <guid isPermaLink="true">${escapeXml(writingUrl)}</guid>`,
-      `      <pubDate>${formatRssDate(writing.publishedAt)}</pubDate>`,
-      `      <description>${escapeXml(writing.summary)}</description>`,
-      `      <category>${escapeXml(writing.topic)}</category>`,
+      `      <title>${escapeXml(post.title)}</title>`,
+      `      <link>${escapeXml(postUrl)}</link>`,
+      `      <guid isPermaLink="true">${escapeXml(postUrl)}</guid>`,
+      `      <pubDate>${formatRssDate(post.publishedAt)}</pubDate>`,
+      `      <description>${escapeXml(post.summary)}</description>`,
+      `      <category>${escapeXml(post.topic)}</category>`,
       "    </item>",
     ].join("\n");
   });
   const lastBuildDate =
-    sortedWritings.length > 0
+    sortedPosts.length > 0
       ? [`    <lastBuildDate>${buildDate.toUTCString()}</lastBuildDate>`]
       : [];
   const feedUrl = getSiteUrl(RSS_PATH);
-  const writingUrl = getSiteUrl(WRITING_PATH);
+  const blogUrl = getSiteUrl(BLOG_PATH);
 
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
     "  <channel>",
     `    <title>${escapeXml(RSS_TITLE)}</title>`,
-    `    <link>${escapeXml(writingUrl)}</link>`,
-    `    <description>${escapeXml(WRITING_DESCRIPTION)}</description>`,
+    `    <link>${escapeXml(blogUrl)}</link>`,
+    `    <description>${escapeXml(BLOG_DESCRIPTION)}</description>`,
     `    <language>${RSS_LANGUAGE}</language>`,
     `    <atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml" />`,
     ...lastBuildDate,

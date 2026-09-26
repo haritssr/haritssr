@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 
+import { allBlogPosts } from "@/utils/blog-posts";
 import { isExperimentAvailable } from "@/utils/databaseExperiments";
 import { getProjectSlug } from "@/utils/projectSlug";
 import { SITE_URL } from "@/utils/site";
-import { allWritings } from "@/utils/writings";
 
 import { ExperimentsData } from "../data/ExperimentsData";
 import {
@@ -15,7 +15,7 @@ import { getAllPostIds } from "../utils/posts";
 
 const staticRoutes = [
   "/",
-  "/writing",
+  "/blog",
   "/experiments",
   "/projects",
   "/design",
@@ -61,11 +61,11 @@ const routeUrls = [
   ]),
 ].map((route) => ({ url: `${SITE_URL}${route}` }));
 
-const writingUrls = allWritings.map((writing) => ({
-  lastModified: new Date(writing.publishedAt),
-  url: `${SITE_URL}/writing/${writing.slug}`,
+const blogPostUrls = allBlogPosts.map((post) => ({
+  lastModified: new Date(post.publishedAt),
+  url: `${SITE_URL}/blog/${post.slug}`,
 }));
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [...routeUrls, ...writingUrls];
+  return [...routeUrls, ...blogPostUrls];
 }

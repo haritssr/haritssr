@@ -21,7 +21,7 @@
   ],
   "ignoreIssues": {
     // These exports are intentional test seams and are unused by production.
-    "utils/writing-modules.ts": ["exports"],
-    "utils/writings.ts": ["exports"],
+    "utils/blog-modules.ts": ["exports"],
+    "utils/blog-posts.ts": ["exports"],
   },
 }

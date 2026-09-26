@@ -29,7 +29,7 @@ export default function TopBar() {
         <div className="flex items-center sm:space-x-4">
           <div className="hidden sm:block">
             <ul className="flex space-x-10">
-              {["projects", "experiments", "writing", "design"].map((link) => (
+              {["projects", "experiments", "blog", "design"].map((link) => (
                 <Destination key={link} link={link} />
               ))}
             </ul>

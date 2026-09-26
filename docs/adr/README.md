@@ -7,6 +7,9 @@ Each ADR captures one decision. Accepted ADRs are historical records: when a
 decision changes, add a new ADR and link the older record to it instead of
 rewriting the old record.
 
+Older ADRs may refer to the former `data/writing/` directory. Blog posts now
+live in `data/blog/`.
+
 ## Conventions
 
 - Use a monotonically increasing number and a descriptive kebab-case filename.

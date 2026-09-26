@@ -6,7 +6,7 @@ import TableOfContentsClient from "./TableOfContentsClient";
 
 export default function TableOfContents({ slug }: { slug: string }) {
   const articleTOC = generateTOC(
-    path.join(process.cwd(), "data/writing", `${slug}.mdx`)
+    path.join(process.cwd(), "data/blog", `${slug}.mdx`)
   );
 
   return (

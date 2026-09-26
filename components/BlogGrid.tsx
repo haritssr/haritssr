@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import type { Writing } from "@/utils/writings";
-import { allWritings } from "@/utils/writings";
+import type { BlogPost } from "@/utils/blog-posts";
+import { allBlogPosts } from "@/utils/blog-posts";
 
 import MoreItemsLink from "./MoreItemsLink";
 
-const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
+const blogDateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   month: "short",
   timeZone: "UTC",
@@ -17,51 +17,51 @@ const topicLabels: Record<string, string> = {
 };
 
 function formatDate(date: string) {
-  return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
+  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
 }
 
-interface IndexedWriting {
+interface IndexedBlogPost {
   index: number;
-  writing: Writing;
+  post: BlogPost;
 }
 
-interface WritingGroup {
-  writings: IndexedWriting[];
+interface BlogPostGroup {
+  posts: IndexedBlogPost[];
   year: string;
 }
 
-function groupWritingsByYear(): WritingGroup[] {
-  const groups: WritingGroup[] = [];
+function groupBlogPostsByYear(): BlogPostGroup[] {
+  const groups: BlogPostGroup[] = [];
 
-  for (const [index, writing] of allWritings.entries()) {
-    const year = writing.publishedAt.slice(0, 4);
+  for (const [index, post] of allBlogPosts.entries()) {
+    const year = post.publishedAt.slice(0, 4);
     const currentGroup = groups.at(-1);
 
     if (currentGroup?.year === year) {
-      currentGroup.writings.push({ index, writing });
+      currentGroup.posts.push({ index, post });
     } else {
-      groups.push({ writings: [{ index, writing }], year });
+      groups.push({ posts: [{ index, post }], year });
     }
   }
 
   return groups;
 }
 
-const writingGroups = groupWritingsByYear();
+const blogPostGroups = groupBlogPostsByYear();
 
-export default function WritingGrid({ mobileLimit }: { mobileLimit?: number }) {
-  const remainingWritings = Math.max(
-    allWritings.length - (mobileLimit ?? allWritings.length),
+export default function BlogGrid({ mobileLimit }: { mobileLimit?: number }) {
+  const remainingPosts = Math.max(
+    allBlogPosts.length - (mobileLimit ?? allBlogPosts.length),
     0
   );
 
   return (
     <>
       <div className="columns-1 gap-5 md:columns-2">
-        {writingGroups.map((group) => {
+        {blogPostGroups.map((group) => {
           const isHiddenOnMobile =
             mobileLimit !== undefined &&
-            group.writings.every(({ index }) => index >= mobileLimit);
+            group.posts.every(({ index }) => index >= mobileLimit);
 
           return (
             <section
@@ -72,7 +72,7 @@ export default function WritingGrid({ mobileLimit }: { mobileLimit?: number }) {
             >
               <h2 className="text-foreground pb-2">{group.year}</h2>
               <div className="divide-border border-border corner-squircle divide-y overflow-hidden rounded-2xl border">
-                {group.writings.map(({ index, writing }) => (
+                {group.posts.map(({ index, post }) => (
                   <Link
                     className={`group hover:bg-interface-hover flex flex-col px-3 py-2.5 transition-colors ${
                       mobileLimit !== undefined && index >= mobileLimit
@@ -83,29 +83,28 @@ export default function WritingGrid({ mobileLimit }: { mobileLimit?: number }) {
                         ? "max-sm:border-b-0!"
                         : ""
                     }`}
-                    href={`/writing/${writing.slug}`}
-                    key={writing.slug}
+                    href={`/blog/${post.slug}`}
+                    key={post.slug}
                     prefetch={false}
                   >
                     <div className="flex w-full items-center justify-between">
                       <div className="text-action group-hover:text-action-hover">
-                        {writing.title}
+                        {post.title}
                       </div>
                       <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
-                        <time dateTime={writing.publishedAt}>
-                          {formatDate(writing.publishedAt)}
+                        <time dateTime={post.publishedAt}>
+                          {formatDate(post.publishedAt)}
                         </time>
                         <span aria-hidden="true">/</span>
                         <span>
-                          {topicLabels[writing.topic.toLowerCase()] ??
-                            writing.topic}
+                          {topicLabels[post.topic.toLowerCase()] ?? post.topic}
                         </span>
                         <span aria-hidden="true">/</span>
-                        <span>{Math.ceil(writing.wordCount / 200)} min</span>
+                        <span>{Math.ceil(post.wordCount / 200)} min</span>
                       </div>
                     </div>
                     <p className="text-foreground/70 mt-1 truncate text-sm">
-                      {writing.summary}.
+                      {post.summary}.
                     </p>
                   </Link>
                 ))}
@@ -114,12 +113,12 @@ export default function WritingGrid({ mobileLimit }: { mobileLimit?: number }) {
           );
         })}
       </div>
-      {remainingWritings > 0 ? (
+      {remainingPosts > 0 ? (
         <MoreItemsLink
           className="sm:hidden!"
-          count={remainingWritings}
-          href="/writing"
-          itemName="writing"
+          count={remainingPosts}
+          href="/blog"
+          itemName="post"
         />
       ) : null}
     </>

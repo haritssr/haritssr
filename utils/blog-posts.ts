@@ -5,7 +5,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { z } from "zod";
 
-const writingsDirectory = path.join(process.cwd(), "data/writing");
+const blogPostsDirectory = path.join(process.cwd(), "data/blog");
 const mdxFileExtensionPattern = /\.mdx$/;
 const wordSeparatorPattern = /\s+/;
 
@@ -15,20 +15,20 @@ const publicationDateSchema = z
     date instanceof Date ? date.toISOString().slice(0, 10) : date
   );
 
-const writingSummarySchema = z
+const blogPostSummarySchema = z
   .string()
   .refine((summary) => countWords(summary) === 6, {
     message: "Summary must contain exactly 6 words",
   });
 
-const writingFrontmatterSchema = z.strictObject({
+const blogPostFrontmatterSchema = z.strictObject({
   publishedAt: publicationDateSchema,
-  summary: writingSummarySchema,
+  summary: blogPostSummarySchema,
   title: z.string(),
   topic: z.string(),
 });
 
-export interface Writing {
+export interface BlogPost {
   publishedAt: string;
   slug: string;
   summary: string;
@@ -42,11 +42,11 @@ function countWords(content: string): number {
     .length;
 }
 
-export function parseWriting(fileName: string, source: string): Writing {
+export function parseBlogPost(fileName: string, source: string): BlogPost {
   const { content, data } = matter(source);
 
   try {
-    const frontmatter = writingFrontmatterSchema.parse(data);
+    const frontmatter = blogPostFrontmatterSchema.parse(data);
 
     return {
       ...frontmatter,
@@ -54,21 +54,24 @@ export function parseWriting(fileName: string, source: string): Writing {
       wordCount: countWords(content),
     };
   } catch (error) {
-    throw new Error(`Invalid writing frontmatter in ${fileName}`, {
+    throw new Error(`Invalid blog post frontmatter in ${fileName}`, {
       cause: error,
     });
   }
 }
 
-function loadWritings(): readonly Writing[] {
+function loadBlogPosts(): readonly BlogPost[] {
+  // If blog-modules.ts moves to import.meta.glob, keep metadata discovery in
+  // sync. Loading compiled MDX alone does not replace reading its frontmatter
+  // and source text for the summary and word count below.
   return Object.freeze(
     fs
-      .readdirSync(writingsDirectory, { withFileTypes: true })
+      .readdirSync(blogPostsDirectory, { withFileTypes: true })
       .filter((entry) => entry.isFile() && entry.name.endsWith(".mdx"))
       .map((entry) =>
-        parseWriting(
+        parseBlogPost(
           entry.name,
-          fs.readFileSync(path.join(writingsDirectory, entry.name), "utf-8")
+          fs.readFileSync(path.join(blogPostsDirectory, entry.name), "utf-8")
         )
       )
       .toSorted(
@@ -79,12 +82,10 @@ function loadWritings(): readonly Writing[] {
   );
 }
 
-export const allWritings = loadWritings();
+export const allBlogPosts = loadBlogPosts();
 
-const writingsBySlug = new Map(
-  allWritings.map((writing) => [writing.slug, writing])
-);
+const blogPostsBySlug = new Map(allBlogPosts.map((post) => [post.slug, post]));
 
-export function getWriting(slug: string): Writing | undefined {
-  return writingsBySlug.get(slug);
+export function getBlogPost(slug: string): BlogPost | undefined {
+  return blogPostsBySlug.get(slug);
 }

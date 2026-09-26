@@ -1,23 +1,23 @@
 import TopLevelSectionPageDescription from "components/TopLevelSectionPageDescription";
 import type { Metadata } from "next";
 
+import BlogGrid from "@/components/BlogGrid";
 import PageTitle from "@/components/PageTitle";
-import WritingGrid from "@/components/WritingGrid";
-import { WRITING_DESCRIPTION } from "@/utils/site";
+import { BLOG_DESCRIPTION } from "@/utils/site";
 
 export const metadata: Metadata = {
-  title: "Writing",
-  description: WRITING_DESCRIPTION,
+  title: "Blog",
+  description: BLOG_DESCRIPTION,
 };
 
-export default function WritingPage() {
+export default function BlogPage() {
   return (
     <>
-      <PageTitle>Writing</PageTitle>
+      <PageTitle>Blog</PageTitle>
       <TopLevelSectionPageDescription>
-        {WRITING_DESCRIPTION}
+        {BLOG_DESCRIPTION}
       </TopLevelSectionPageDescription>
-      <WritingGrid />
+      <BlogGrid />
     </>
   );
 }
