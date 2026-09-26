@@ -24,7 +24,7 @@ export default function DifferentCssStylingDemo() {
         >
           Inline CSS
         </div>
-        <div className="h-[100px] w-[100px] rounded-md bg-[#d1d1d6] p-2">
+        <div className="h-25 w-25 rounded-md bg-[#d1d1d6] p-2">
           Tailwind CSS
         </div>
         <div className="box">CSS Module</div>
