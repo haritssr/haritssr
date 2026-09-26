@@ -1,9 +1,9 @@
 # Production `instant()` rig
 
-The optimizer suite needs a production build that exposes the Next.js testing
-API, a stable URL for that build, and a Playwright command that can drive the
-initial loads or client navigations being optimized. Discover this setup once,
-record it in `instant-nav.rig.md`, and reuse it across optimization runs.
+The preservation suite needs a production build that exposes the Next.js
+testing API, a stable URL for that build, and a Playwright command that can
+drive the audited Links. Discover this setup once, record it in
+`instant-nav.rig.md`, and reuse it throughout adoption.
 
 Read an existing `instant-nav.rig.md` before creating one. Inspect the
 repository before asking the user:
@@ -22,8 +22,8 @@ credentials or which remote environment may expose the testing API.
 ### Production build and server
 
 Use `next build` followed by `next start`, or a remote artifact produced by the
-same production build. Development can help diagnose a route, but the final
-RED and GREEN must come from a production build.
+same production build. Automatic prefetching does not run in `next dev`, so a
+development server cannot verify preservation.
 
 Record separate build and start commands. For a local rig, record the port,
 stop any previous server before starting, fail on `EADDRINUSE`, and confirm the
@@ -59,7 +59,7 @@ the project's other experimental options.
 Set the condition while running `next build`. Setting it only for `next start`
 is too late because the testing API is compiled into the production artifact.
 When the artifact was built without it, Next.js does not activate the
-navigation lock, so the test cannot distinguish shell content from streamed
+navigation lock, so the test cannot distinguish prefetched UI from streamed
 dynamic content. Rebuild with the condition enabled before interpreting the
 results. Use the project's existing environment naming when it already
 distinguishes test, staging, preview, and production builds.
@@ -77,33 +77,34 @@ For a local rig, a typical sequence is:
 ```bash filename="Terminal"
 EXPOSE_TESTING_API=1 pnpm build
 pnpm start --port 3000
-BASE_URL=http://localhost:3000 pnpm playwright test tests/static-shell.spec.ts
+BASE_URL=http://localhost:3000 pnpm playwright test tests/prefetch-preservation.spec.ts
 ```
 
 Adapt the script names and port to the project. Keep the production server
 running while the test command executes. Follow the public
-[`instant()` testing pattern](https://nextjs.org/docs/app/guides/instant-navigation#prevent-regressions-with-e2e-tests): use `page.goto()` for an initial-load
-contract and click the real `<Link>` for a client-navigation contract.
+[client-navigation test](https://nextjs.org/docs/app/guides/instant-navigation#prevent-regressions-with-e2e-tests): load the source route, confirm the real
+Link is visible, then enter `instant()`, click, wait for the destination URL,
+and assert the prefetched UI.
 
 ### Test context
 
-Record the state required to reach the target route and shell marker:
+Record the state required to reach the audited Links and destination UI:
 
-- Use `public; no authentication` when the route is public.
+- Use `public; no authentication` when the navigation is public.
 - Otherwise record the test account and login mechanism, including a fixture,
   `storageState`, API login, or seeded session.
 - Record flags, plan, role, locale, seeded data, and other state that can change
-  which shell the test sees.
+  which UI the test sees.
 
 A test user is not required. The field exists to make authenticated and
 state-dependent tests reproducible when the app needs one.
 
 ### Drift
 
-List differences between the state used to choose the shell contract and the
-state used by Playwright. Feature flags, permissions, empty test data, and
+List differences between the state used to choose the preservation target and
+the state used by Playwright. Feature flags, permissions, empty test data, and
 locale differences can make an assertion fail because the target is
-unreachable, not because its shell blocks. Write `none known`
+unreachable, not because Partial Prefetching removed it. Write `none known`
 only after checking the test context.
 
 ### Iteration loop
@@ -147,27 +148,27 @@ Place this file at the repository root or next to the end-to-end configuration:
 - RUN: <focused Playwright command and how it receives BASE_URL>
 - TEST USER: <public/no auth, or account and login>; state: <flags, role, data, locale>
 - DRIFT: <differences that could change the asserted UI>
-- CONTRACTS: <route, initial load or source Link, shell marker, and deferred marker>
+- CONTRACTS: <audited source Link, destination, and prefetched UI to preserve>
 - LOOP: <local build → start → test, or push → deploy → test>; agent limits: <...>
 - LIVENESS: <deployed SHA check, or n/a for a local build and start>
 - WALLS: <project-specific obstacles and their resolutions>
 ```
 
-`CONTRACTS` may list more than one focused navigation, but each route and
-navigation type needs its own test. Every field needs a concrete value. `n/a`
-is valid only with a reason, such as `TEST USER: public; no authentication` or
+`CONTRACTS` may list more than one audited navigation, but each contract needs
+its own test. Every field needs a concrete value. `n/a` is valid only with a
+reason, such as `TEST USER: public; no authentication` or
 `LIVENESS: n/a; local build and start`.
 
 ## Check the rig before writing the baseline
 
-Before recording the static-shell contract:
+Before recording the legacy prefetched UI:
 
 1. Build with the testing API condition enabled.
 2. Start or locate that exact artifact and confirm the base URL responds.
-3. Run one focused `instant()` smoke test using the intended navigation type.
-4. Confirm the test can reach the route and eventual destination UI in the
-   recorded test context.
+3. Run one focused `instant()` smoke test through a real `<Link>` navigation.
+4. Confirm the test can reach its source Link and eventual destination UI in
+   the recorded test context.
 
-Fix the rig before interpreting an optimizer failure. A missing testing API,
+Fix the rig before interpreting a preservation failure. A missing testing API,
 stale deployment, unreachable target, or wrong test state is an environment
-failure rather than evidence that the shell blocks.
+failure rather than evidence that the migration changed the prefetch.

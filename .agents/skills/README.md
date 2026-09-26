@@ -8,6 +8,7 @@ another project.
 
 - `next-cache-components-adoption` — adopt Cache Components and resolve its blocking routes.
 - `next-cache-components-optimizer` — make a Next.js route's static shell instant and keep it verified.
+- `next-dev-loop` — verify Next.js runtime behavior through the dev server and browser.
 - `next-partial-prefetching-adoption` — adopt Partial Prefetching and resolve its development insights.
 - `vercel-composition-patterns` — design scalable React composition APIs.
 - `vercel-react-best-practices` — apply React and Next.js performance practices.
