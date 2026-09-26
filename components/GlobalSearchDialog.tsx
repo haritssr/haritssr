@@ -136,7 +136,7 @@ export default function GlobalSearchDialog({
             shouldFilter={false}
             vimBindings={false}
           >
-            <div className="border-border flex shrink-0 items-center gap-3 border-b px-4 py-3">
+            <div className="border-border flex shrink-0 items-center gap-3 border-b px-5 py-3.5">
               <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="text-foreground size-5 shrink-0"
@@ -166,13 +166,16 @@ export default function GlobalSearchDialog({
               label={listLabel}
             >
               {loadError ? (
-                <div className="px-4 py-8 text-center text-sm" role="alert">
+                <div
+                  className="px-4 py-10 text-center text-sm leading-6"
+                  role="alert"
+                >
                   <p className="text-danger">
                     The complete search index could not be loaded. Navigation is
                     still available.
                   </p>
                   <button
-                    className="text-action hover:text-action-hover focus-visible:outline-action mt-3 cursor-pointer rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+                    className="text-action hover:text-action-hover focus-visible:outline-action mt-4 cursor-pointer rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
                     onClick={onRetry}
                     type="button"
                   >
@@ -181,7 +184,7 @@ export default function GlobalSearchDialog({
                 </div>
               ) : null}
               {isLoading && isSearching ? (
-                <div className="text-foreground/60 px-4 py-12 text-center text-sm">
+                <div className="text-foreground/60 px-4 py-10 text-center text-sm leading-6">
                   Loading all pages…
                 </div>
               ) : null}
@@ -189,24 +192,24 @@ export default function GlobalSearchDialog({
               !loadError &&
               isSearching &&
               results.length === 0 ? (
-                <div className="text-foreground/60 px-4 py-12 text-center text-sm">
+                <div className="text-foreground/60 px-4 py-10 text-center text-sm leading-6">
                   No pages found for “{query}”. Try a project, topic, or page
                   name.
                 </div>
               ) : null}
               {showResults && results.length > 0 ? (
                 <Command.Group
-                  className="**:[[cmdk-group-heading]]:text-foreground/50 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:pt-3 **:[[cmdk-group-heading]]:pb-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium"
+                  className="**:[[cmdk-group-heading]]:text-foreground/50 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:pt-2 **:[[cmdk-group-heading]]:pb-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium"
                   heading={groupTitle}
                 >
                   {results.map((entry) => (
                     <Command.Item
-                      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-3 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border sm:py-2.5"
+                      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-4 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border"
                       key={entry.route}
                       onSelect={navigate}
                       value={entry.route}
                     >
-                      <div className="min-w-0 flex-1">
+                      <div className="min-w-0 flex-1 space-y-1">
                         <div className="truncate text-sm font-medium">
                           {entry.title}
                         </div>
@@ -235,7 +238,7 @@ export default function GlobalSearchDialog({
                 </Command.Group>
               ) : null}
             </Command.List>
-            <div className="border-border text-foreground/50 flex shrink-0 items-center justify-between border-t px-4 py-3 text-xs">
+            <div className="border-border text-foreground/50 flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
               <output aria-live={loadError ? "off" : "polite"}>
                 {resultStatus}
               </output>
