@@ -65,6 +65,76 @@ function SearchMatchText({ query, text }: SearchMatchTextProps) {
   return parts;
 }
 
+function SearchResultItem({
+  entry,
+  query,
+  isSearching,
+  onSelect,
+}: {
+  entry: RouteDoc;
+  query: string;
+  isSearching: boolean;
+  onSelect: (route: string) => void;
+}) {
+  return (
+    <Command.Item
+      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-4 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border"
+      onSelect={onSelect}
+      value={entry.route}
+    >
+      <div className="min-w-0 flex-1 space-y-1">
+        <div className="truncate text-sm font-medium">{entry.title}</div>
+        {!isSearching || MAIN_ROUTES.has(entry.route) ? (
+          <div className="text-foreground/60 truncate text-xs">
+            {isSearching ? (
+              <SearchMatchText
+                query={query}
+                text={`${entry.group} · ${entry.description}`}
+              />
+            ) : (
+              entry.description
+            )}
+          </div>
+        ) : null}
+        {isSearching ? (
+          <div className="text-foreground/40 truncate text-xs">
+            {entry.route}
+          </div>
+        ) : null}
+      </div>
+      <ArrowUpRightIcon
+        aria-hidden="true"
+        className="text-foreground/40 size-4 shrink-0"
+      />
+    </Command.Item>
+  );
+}
+
+function getSearchLabels(
+  indexStatus: GlobalSearchDialogProps["indexStatus"],
+  isSearching: boolean,
+  resultCount: number
+) {
+  if (indexStatus === "error") {
+    return {
+      groupTitle: "Navigation fallback",
+      listLabel: "Navigation fallback",
+      resultStatus: "Full search unavailable",
+    };
+  }
+
+  const resultStatus = isSearching
+    ? `${resultCount} results`
+    : "Jump to a page";
+
+  return {
+    groupTitle: isSearching ? "Search results" : "Navigation",
+    listLabel: isSearching ? "Search results" : "Suggested pages",
+    resultStatus:
+      indexStatus === "loading" ? "Loading all pages…" : resultStatus,
+  };
+}
+
 export default function GlobalSearchDialog({
   entries,
   indexStatus,
@@ -80,24 +150,14 @@ export default function GlobalSearchDialog({
   const isSearching = hasSearchQuery(query);
   const isLoading = indexStatus === "loading";
   const loadError = indexStatus === "error";
-  const showResults = !(isLoading && isSearching);
-  let groupTitle = isSearching ? "Search results" : "Navigation";
-  if (loadError) {
-    groupTitle = "Navigation fallback";
-  }
-  let listLabel = isSearching ? "Search results" : "Suggested pages";
-  if (loadError) {
-    listLabel = "Navigation fallback";
-  }
-
-  let resultStatus = "Jump to a page";
-  if (isLoading) {
-    resultStatus = "Loading all pages…";
-  } else if (loadError) {
-    resultStatus = "Full search unavailable";
-  } else if (isSearching) {
-    resultStatus = `${results.length} results`;
-  }
+  const showLoading = isLoading && isSearching;
+  const showEmpty =
+    !isLoading && !loadError && isSearching && results.length === 0;
+  const { groupTitle, listLabel, resultStatus } = getSearchLabels(
+    indexStatus,
+    isSearching,
+    results.length
+  );
 
   function navigate(route: string) {
     onOpenChange(false);
@@ -185,59 +245,30 @@ export default function GlobalSearchDialog({
                   </button>
                 </div>
               ) : null}
-              {isLoading && isSearching ? (
+              {showLoading ? (
                 <div className="text-foreground/60 px-4 py-10 text-center text-sm leading-6">
                   Loading all pages…
                 </div>
               ) : null}
-              {!isLoading &&
-              !loadError &&
-              isSearching &&
-              results.length === 0 ? (
+              {showEmpty ? (
                 <div className="text-foreground/60 px-4 py-10 text-center text-sm leading-6">
                   No pages found for “{query}”. Try a project, topic, or page
                   name.
                 </div>
               ) : null}
-              {showResults && results.length > 0 ? (
+              {!showLoading && results.length > 0 ? (
                 <Command.Group
                   className="**:[[cmdk-group-heading]]:text-foreground/50 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:pt-2 **:[[cmdk-group-heading]]:pb-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium"
                   heading={groupTitle}
                 >
                   {results.map((entry) => (
-                    <Command.Item
-                      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-4 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border"
+                    <SearchResultItem
+                      entry={entry}
+                      isSearching={isSearching}
                       key={entry.route}
                       onSelect={navigate}
-                      value={entry.route}
-                    >
-                      <div className="min-w-0 flex-1 space-y-1">
-                        <div className="truncate text-sm font-medium">
-                          {entry.title}
-                        </div>
-                        {!isSearching || MAIN_ROUTES.has(entry.route) ? (
-                          <div className="text-foreground/60 truncate text-xs">
-                            {isSearching ? (
-                              <SearchMatchText
-                                query={query}
-                                text={`${entry.group} · ${entry.description}`}
-                              />
-                            ) : (
-                              entry.description
-                            )}
-                          </div>
-                        ) : null}
-                        {isSearching ? (
-                          <div className="text-foreground/40 truncate text-xs">
-                            {entry.route}
-                          </div>
-                        ) : null}
-                      </div>
-                      <ArrowUpRightIcon
-                        aria-hidden="true"
-                        className="text-foreground/40 size-4 shrink-0"
-                      />
-                    </Command.Item>
+                      query={query}
+                    />
                   ))}
                 </Command.Group>
               ) : null}
