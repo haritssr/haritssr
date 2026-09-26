@@ -34,6 +34,8 @@ interface SearchMatchTextProps {
   text: string;
 }
 
+const MAIN_ROUTES = new Set(["/projects", "/experiments", "/blog", "/design"]);
+
 function SearchMatchText({ query, text }: SearchMatchTextProps) {
   const ranges = getSearchMatchRanges(text, query);
   if (ranges.length === 0) {
@@ -213,16 +215,18 @@ export default function GlobalSearchDialog({
                         <div className="truncate text-sm font-medium">
                           {entry.title}
                         </div>
-                        <div className="text-foreground/60 truncate text-xs">
-                          {isSearching ? (
-                            <SearchMatchText
-                              query={query}
-                              text={`${entry.group} · ${entry.description}`}
-                            />
-                          ) : (
-                            entry.description
-                          )}
-                        </div>
+                        {!isSearching || MAIN_ROUTES.has(entry.route) ? (
+                          <div className="text-foreground/60 truncate text-xs">
+                            {isSearching ? (
+                              <SearchMatchText
+                                query={query}
+                                text={`${entry.group} · ${entry.description}`}
+                              />
+                            ) : (
+                              entry.description
+                            )}
+                          </div>
+                        ) : null}
                         {isSearching ? (
                           <div className="text-foreground/40 truncate text-xs">
                             {entry.route}
