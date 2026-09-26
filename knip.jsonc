@@ -6,9 +6,8 @@
     "utils/{dbExperiment,sqlite3}.js",
   ],
   "ignoreFiles": [
-    // These components are retained for features that are currently unwired.
+    // This component is retained for a feature that is currently unwired.
     "components/InternalLinkWithoutArrow.tsx",
-    "utils/someContext.tsx",
   ],
   "ignore": [
     // Keep the mutation methods available for the next tools-page iteration.
