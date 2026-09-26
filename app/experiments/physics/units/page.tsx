@@ -25,6 +25,8 @@ import type {
   PrerequisiteNode,
   UnitDefinition,
 } from "./_data";
+import DependentFormulas from "./DependentFormulas";
+import type { QuantityDependents } from "./DependentFormulas";
 
 interface UnitsTableProps {
   caption: string;
@@ -100,6 +102,64 @@ function createPrerequisiteGraphEdges(): PrerequisiteGraphEdgeData[] {
 }
 
 const PREREQUISITE_GRAPH_EDGES = createPrerequisiteGraphEdges();
+
+function createQuantityDependents(): QuantityDependents[] {
+  const quantities = [...BASE_UNITS, ...DERIVED_UNITS];
+  const formulasByQuantity = new Map<
+    string,
+    QuantityDependents["formulas"][number][]
+  >(quantities.map((unit) => [unit.quantity, []]));
+
+  for (const result of DERIVED_UNITS) {
+    for (const definition of getFormulaDefinitions(result.quantity)) {
+      const prerequisitesByQuantity = new Map<
+        string,
+        { label: string; symbol?: string }[]
+      >();
+
+      for (const prerequisite of definition.prerequisites) {
+        if (prerequisite.type !== "quantity") {
+          continue;
+        }
+
+        const quantity =
+          GRAPH_PREREQUISITE_ALIASES[prerequisite.label] ?? prerequisite.label;
+
+        if (!formulasByQuantity.has(quantity)) {
+          continue;
+        }
+
+        const matches = prerequisitesByQuantity.get(quantity) ?? [];
+        matches.push({
+          label: prerequisite.label,
+          symbol: prerequisite.symbol,
+        });
+        prerequisitesByQuantity.set(quantity, matches);
+      }
+
+      for (const [quantity, prerequisites] of prerequisitesByQuantity) {
+        formulasByQuantity.get(quantity)?.push({
+          condition: definition.condition,
+          expression: definition.expression,
+          formulaName: definition.name,
+          prerequisites,
+          result: result.quantity,
+          resultSymbol: result.quantitySymbol,
+        });
+      }
+    }
+  }
+
+  return quantities.map((unit) => ({
+    formulas: formulasByQuantity.get(unit.quantity) ?? [],
+    quantity: unit.quantity,
+    quantitySymbol: unit.quantitySymbol,
+    unit: unit.unit,
+    unitSymbol: unit.unitSymbol,
+  }));
+}
+
+const QUANTITY_DEPENDENTS = createQuantityDependents();
 
 function getFormulaDefinitions(quantity: string) {
   const definitions = DERIVED_FORMULAS[quantity];
@@ -297,36 +357,46 @@ export default function UnitsPage() {
     <>
       <SubTitle>{DESCRIPTION}</SubTitle>
       <SourceCodeLink />
-      <section>
-        <Section name="Besaran Pokok" />
-        <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />
-      </section>
-      <section className="mt-10">
-        <Section name="Besaran Turunan" />
-        <UnitsTable
-          caption="Besaran turunan yang umum dipelajari di SMA"
-          units={DERIVED_UNITS}
-        />
-      </section>
-      <section className="mt-10 select-none">
-        <Section name="Peta Prasyarat" />
-        <p className="text-foreground/70 mb-4 text-sm">
-          Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
-          digunakan di SMA.
-        </p>
-        <PrerequisiteDiagrams units={DERIVED_UNITS} />
-      </section>
-      <section className="mt-10 select-none">
-        <Section name="Graf Prasyarat" />
-        <p className="text-foreground/70 mb-4 text-sm">
-          Klik sebuah besaran untuk menyorot jalur yang menghubungkannya dengan
-          prasyarat besaran pokok dan turunan.
-        </p>
-        <PrerequisiteGraph
-          edges={PREREQUISITE_GRAPH_EDGES}
-          nodes={PREREQUISITE_GRAPH_NODES}
-        />
-      </section>
+      <div className="space-y-16">
+        <section>
+          <Section name="Besaran Pokok" />
+          <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />
+        </section>
+        <section>
+          <Section name="Besaran Turunan" />
+          <UnitsTable
+            caption="Besaran turunan yang umum dipelajari di SMA"
+            units={DERIVED_UNITS}
+          />
+        </section>
+        <section className="select-none">
+          <Section name="Peta Prasyarat" />
+          <p className="text-foreground/70 mb-4 text-sm">
+            Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
+            digunakan di SMA.
+          </p>
+          <PrerequisiteDiagrams units={DERIVED_UNITS} />
+        </section>
+        <section>
+          <Section name="Besaran yang Bergantung" />
+          <p className="text-foreground/70 mb-4 text-sm">
+            Pilih besaran untuk melihat rumus dan besaran lain yang langsung
+            menggunakannya dalam daftar fisika SMA ini.
+          </p>
+          <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
+        </section>
+        <section className="select-none">
+          <Section name="Graf Prasyarat" />
+          <p className="text-foreground/70 mb-4 text-sm">
+            Klik sebuah besaran untuk menyorot jalur yang menghubungkannya
+            dengan prasyarat besaran pokok dan turunan.
+          </p>
+          <PrerequisiteGraph
+            edges={PREREQUISITE_GRAPH_EDGES}
+            nodes={PREREQUISITE_GRAPH_NODES}
+          />
+        </section>
+      </div>
     </>
   );
 }
