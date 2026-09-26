@@ -12,7 +12,7 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span className="text-foreground" key={`u-${text.indexOf(chunk)}`}>
+        <span className="text-foreground/90" key={`u-${text.indexOf(chunk)}`}>
           {siteName}
         </span>
       ) : (

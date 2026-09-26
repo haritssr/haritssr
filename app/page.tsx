@@ -66,10 +66,10 @@ export default function Home() {
           />
         </div>
         <div
-          className="corner-squircle border-border text-foreground space-y-2.5 rounded-2xl border px-4 pt-3 pb-2.5 text-left"
+          className="corner-squircle border-border text-foreground/90 space-y-2.5 rounded-2xl border px-4 pt-3 pb-2.5 text-left"
           id="1234"
         >
-          <h1 className="text-foreground font-semibold" id="profile-heading">
+          <h1 className="text-foreground/90 font-semibold" id="profile-heading">
             Harits Syah
           </h1>
           <div className="flex items-center space-x-2">
@@ -163,14 +163,18 @@ export default function Home() {
             <li>Touch typist (±90 WPM)</li>
 
             <li>
-              <span className="text-action">haritssr</span> ={" "}
-              <span className="text-action">harits</span>{" "}
-              <span className="text-action">s</span>yah{" "}
-              <span className="text-action">r</span>ahmatullah
+              <span className="text-foreground underline">haritssr</span> ={" "}
+              <span className="text-foreground underline">harits</span>{" "}
+              <span className="text-foreground underline">s</span>yah{" "}
+              <span className="text-foreground underline">r</span>ahmatullah
             </li>
             <li>Former chess player, peaked at around 2000 Elo.</li>
             <li>Prefer eudaimonic to hedonic.</li>
             <li>Constraints give shape.</li>
+            <li>
+              Press <kbd className="text-foreground">⌘P</kbd> (or{" "}
+              <kbd className="text-foreground">ctrl+P</kbd>) to search the site.
+            </li>
             <li>
               <a
                 className="text-action hover:underline"
@@ -180,10 +184,6 @@ export default function Home() {
               >
                 CV
               </a>
-            </li>
-            <li>
-              Press <kbd className="text-foreground">⌘P</kbd> (or{" "}
-              <kbd className="text-foreground">ctrl+P</kbd>) to search the site.
             </li>
           </ul>
         </Section>
