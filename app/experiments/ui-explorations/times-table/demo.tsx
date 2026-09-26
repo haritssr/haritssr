@@ -36,6 +36,7 @@ function IncrementButton() {
         Count: {count}
       </button>
       <input
+        aria-label="Search"
         onChange={async (e) => await setSearch(e.target.value)}
         type="search"
         value={search}
@@ -65,56 +66,53 @@ function TimesTableComponent() {
         Attention: This app is not finished yet!
       </div>
 
-      <div className="flex space-x-2">
-        {/* Row Head */}
-        <section className="grid w-fit grid-cols-1 gap-2">
-          {Array.from({ length: 11 }, (_, index) => {
-            const row = index + 1;
-            return (
-              <input
-                className="h-10 w-10 rounded border border-zinc-400 bg-zinc-50 p-1 text-center select-none"
-                defaultValue={index}
-                disabled
-                key={row}
-                type="text"
-              />
-            );
-          })}
-        </section>
-        <div>
-          {/* Col Head */}
-          <section className="mb-2 grid w-fit grid-cols-10 gap-2">
-            {Array.from({ length: 10 }, (_, index) => {
-              const col = index + 1;
-              return (
-                <input
-                  className="h-10 w-10 rounded border border-zinc-400 bg-zinc-50 p-1 text-center select-none"
-                  defaultValue={col}
-                  disabled
-                  key={`col-${col}`}
-                  type="text"
-                />
-              );
-            })}
-          </section>
-          <div className="grid w-fit grid-cols-10 gap-2">
-            {Array.from({ length: 100 }, (_, index) => {
-              const row = Math.floor(index / 10) + 1;
-              const col = (index % 10) + 1;
-              return (
-                <InputElement
-                  col={col}
-                  currentInput={currentInput}
-                  handleOnClick={setCurrentInput}
-                  handleOnchange={setCurrentInput}
-                  index={index + 1}
-                  key={`${row}-${col}`}
-                  row={row}
-                />
-              );
-            })}
-          </div>
-        </div>
+      <div className="overflow-x-auto">
+        <table className="border-separate border-spacing-2">
+          <caption className="sr-only">
+            Multiplication practice: enter the product of each row and column
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">
+                <span aria-hidden="true">×</span>
+                <span className="sr-only">Row multiplier</span>
+              </th>
+              {Array.from({ length: 10 }, (_, index) => (
+                <th
+                  className="h-10 w-10 rounded border border-zinc-400 bg-zinc-50 p-1 text-center font-normal"
+                  key={index + 1}
+                  scope="col"
+                >
+                  {index + 1}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {Array.from({ length: 10 }, (_, rowIndex) => (
+              <tr key={rowIndex + 1}>
+                <th
+                  className="h-10 w-10 rounded border border-zinc-400 bg-zinc-50 p-1 text-center font-normal"
+                  scope="row"
+                >
+                  {rowIndex + 1}
+                </th>
+                {Array.from({ length: 10 }, (_, colIndex) => (
+                  <td key={colIndex + 1}>
+                    <InputElement
+                      col={colIndex + 1}
+                      currentInput={currentInput}
+                      handleOnClick={setCurrentInput}
+                      handleOnchange={setCurrentInput}
+                      index={rowIndex * 10 + colIndex + 1}
+                      row={rowIndex + 1}
+                    />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <div className="mt-10">
@@ -165,6 +163,7 @@ function InputElement({
 
   return (
     <input
+      aria-label={`Row ${row}, column ${col}: ${row} times ${col}`}
       className={`h-10 w-10 rounded border border-zinc-300 p-1 text-center hover:border-blue-400 hover:bg-blue-50 ${getSelfCorrection(currentValue, row, col)}`}
       id={index.toString()}
       maxLength={3}

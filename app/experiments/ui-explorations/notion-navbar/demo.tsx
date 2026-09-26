@@ -68,15 +68,21 @@ function Yes() {
             />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 drop-shadow-lg">
-            <div className="cursor-pointer rounded px-2 py-1 text-sm hover:bg-zinc-50">
+            <a
+              href="https://www.notion.com/"
+              className="block cursor-pointer rounded px-2 py-1 text-sm hover:bg-zinc-50"
+            >
               <div className="font-medium text-black">Home</div>
               <div className="text-zinc-500">Docs, projects, & wikis</div>
-            </div>
+            </a>
             <div className="mt-2 mb-1 px-2">
-              <div className="flex cursor-pointer items-center justify-center space-x-1 rounded-md border border-zinc-200 py-1 text-black">
+              <a
+                href="https://www.notion.com/download"
+                className="flex cursor-pointer items-center justify-center space-x-1 rounded-md border border-zinc-200 py-1 text-black"
+              >
                 <ArrowDownCircleIcon className="h-4 w-4" strokeWidth={1} />
                 <div className="text-sm font-medium">Download Notion</div>
-              </div>
+              </a>
               <div className="mt-1 text-sm font-light text-zinc-400">
                 Mac, Windows, iOS, & Android
               </div>
@@ -93,15 +99,24 @@ function Yes() {
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 text-sm font-medium drop-shadow-lg">
             <div className="space-y-1">
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              <a
+                href="https://www.notion.com/download"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 iOS & Android
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              </a>
+              <a
+                href="https://www.notion.com/download"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 macOS & Windows
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              </a>
+              <a
+                href="https://www.notion.com/download"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 Web Clipper
-              </div>
+              </a>
             </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
@@ -115,12 +130,15 @@ function Yes() {
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 font-medium drop-shadow-lg">
             <div className="flex divide-x divide-zinc-300">
-              <article className="p-1">
+              <div className="p-1">
                 <div className="mb-2 text-[10px] text-zinc-400">
                   BY TEAM SIZE
                 </div>
                 <div className="space-y-1">
-                  <section className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50">
+                  <a
+                    href="https://www.notion.com/enterprise"
+                    className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50"
+                  >
                     <BuildingOffice2Icon
                       className="h-8 w-8 fill-zinc-200 text-zinc-700"
                       strokeWidth={1.5}
@@ -133,8 +151,11 @@ function Yes() {
                         Advance features for your org
                       </div>
                     </div>
-                  </section>
-                  <section className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50">
+                  </a>
+                  <a
+                    href="https://www.notion.com/teams"
+                    className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50"
+                  >
                     <BuildingOffice2Icon
                       className="h-8 w-8 fill-zinc-200 text-zinc-700"
                       strokeWidth={1.5}
@@ -147,8 +168,11 @@ function Yes() {
                         Run your team on one tool
                       </div>
                     </div>
-                  </section>
-                  <section className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50">
+                  </a>
+                  <a
+                    href="https://www.notion.com/"
+                    className="flex cursor-pointer items-center space-x-1 rounded px-1.5 py-0.5 hover:bg-zinc-50"
+                  >
                     <BuildingOffice2Icon
                       className="h-8 w-8 fill-zinc-200 text-zinc-700"
                       strokeWidth={1.5}
@@ -157,41 +181,59 @@ function Yes() {
                       <div className="font-medium text-zinc-800">Personal</div>
                       <div className="text-zinc-400">Free for individual</div>
                     </div>
-                  </section>
+                  </a>
                 </div>
-              </article>
-              <article className="p-1">
+              </div>
+              <div className="p-1">
                 <div className="mb-2 px-1 text-[10px] text-zinc-400">
                   BY TEAM SIZE
                 </div>
                 <div className="space-y-1 text-sm">
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
+                  <a
+                    href="https://www.notion.com/help"
+                    className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50"
+                  >
                     Design
-                  </div>
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
+                  </a>
+                  <a
+                    href="https://www.notion.com/product/projects"
+                    className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50"
+                  >
                     Engineering
-                  </div>
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
+                  </a>
+                  <a
+                    href="https://www.notion.com/product/projects"
+                    className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50"
+                  >
                     Product Manager
-                  </div>
+                  </a>
                 </div>
-              </article>
-              <article className="p-1">
+              </div>
+              <div className="p-1">
                 <div className="mb-2 px-1 text-[10px] text-zinc-400">
                   BY TEAM SIZE
                 </div>
                 <div className="space-y-1 text-sm">
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
+                  <a
+                    href="https://www.notion.com/help"
+                    className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50"
+                  >
                     Design
-                  </div>
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
+                  </a>
+                  <a
+                    href="https://www.notion.com/product/projects"
+                    className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50"
+                  >
                     Engineering
-                  </div>
-                  <div className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50">
+                  </a>
+                  <a
+                    href="https://www.notion.com/product/projects"
+                    className="cursor-pointer rounded px-1 py-0.5 text-zinc-800 hover:bg-zinc-50"
+                  >
                     Product Manager
-                  </div>
+                  </a>
                 </div>
-              </article>
+              </div>
             </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
@@ -205,31 +247,52 @@ function Yes() {
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute mt-2 -ml-2 w-fit rounded bg-white p-1 text-sm font-medium drop-shadow-lg">
             <div className="space-y-1">
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              <a
+                href="https://www.notion.com/en-us/blog"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 Blog
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              </a>
+              <a
+                href="https://www.notion.com/help"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 Guide & Tutorials
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              </a>
+              <a
+                href="https://www.notion.com/webinars"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 Webinar
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              </a>
+              <a
+                href="https://www.notion.com/help"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 Help center
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              </a>
+              <a
+                href="https://developers.notion.com/"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 API Docs
-              </div>
-              <div className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50">
+              </a>
+              <a
+                href="https://www.notion.com/community"
+                className="cursor-pointer rounded px-2 py-0.5 text-zinc-800 hover:bg-zinc-50"
+              >
                 Community
-              </div>
+              </a>
             </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item className="rounded px-2 py-1 hover:bg-zinc-100">
-          <NavigationMenu.Trigger className="group flex items-center space-x-1">
-            <div className="text-sm font-semibold text-black">Pricing</div>
-          </NavigationMenu.Trigger>
+          <a
+            className="text-sm font-semibold text-black"
+            href="https://www.notion.com/pricing"
+          >
+            Pricing
+          </a>
         </NavigationMenu.Item>
       </NavigationMenu.List>
     </NavigationMenu.Root>

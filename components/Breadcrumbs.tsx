@@ -26,12 +26,14 @@ export default function Breadcrumbs() {
   return (
     <nav aria-label="Breadcrumb" className="pt-3">
       <div className="mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
-        <div className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
-          <Link className="text-foreground/60 hover:text-foreground" href="/">
-            home
-          </Link>
+        <ol className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
+          <li className="flex items-center">
+            <Link className="text-foreground/60 hover:text-foreground" href="/">
+              home
+            </Link>
 
-          {segments.length > 0 && <Separator />}
+            {segments.length > 0 && <Separator />}
+          </li>
 
           {segments.map((segment, index) => {
             const href = `/${segments.slice(0, index + 1).join("/")}`;
@@ -39,9 +41,12 @@ export default function Breadcrumbs() {
             const isLast = index === segments.length - 1;
 
             return (
-              <span className="flex items-center" key={href}>
+              <li className="flex items-center" key={href}>
                 {isLast ? (
-                  <span className="text-foreground whitespace-nowrap select-none">
+                  <span
+                    aria-current="page"
+                    className="text-foreground whitespace-nowrap select-none"
+                  >
                     {label.toLocaleLowerCase()}
                   </span>
                 ) : (
@@ -55,17 +60,21 @@ export default function Breadcrumbs() {
                     <Separator />
                   </>
                 )}
-              </span>
+              </li>
             );
           })}
-        </div>
+        </ol>
       </div>
     </nav>
   );
 }
 
 function Separator() {
-  return <span className="text-border ml-1">/</span>;
+  return (
+    <span aria-hidden="true" className="text-border ml-1">
+      /
+    </span>
+  );
 }
 
 function formatSegmentLabel(segment: string) {

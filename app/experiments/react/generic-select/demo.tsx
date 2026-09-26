@@ -60,6 +60,7 @@ function GenericSelectComponent<TValue extends Base>({
     <div>
       <div className="text-sm">{selectType}</div>
       <select
+        aria-label={selectType}
         className="rounded border border-zinc-400"
         onChange={onSelectChange}
       >

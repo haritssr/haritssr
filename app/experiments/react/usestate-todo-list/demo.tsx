@@ -41,6 +41,7 @@ function AddTodo({ onAddTodo }: AddTodoProps) {
   return (
     <div className="mb-5 space-y-2 sm:space-y-0 sm:space-x-2">
       <input
+        aria-label="New todo"
         className="w-full rounded border border-zinc-700 px-2 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-hidden sm:w-fit"
         onChange={(e) => {
           setTitle(e.target.value);
@@ -102,6 +103,7 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
     todoContent = (
       <>
         <input
+          aria-label="Edit task title"
           className="rounded border border-zinc-700 px-1 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-hidden"
           onChange={(e) => {
             onChange({ ...todo, title: e.target.value });
@@ -122,7 +124,7 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
   } else {
     todoContent = (
       <>
-        {todo.title}
+        <label htmlFor={`todo-${todo.id}`}>{todo.title}</label>
         <button
           className="ml-2 rounded border border-yellow-500 bg-yellow-500 px-2 text-sm text-white hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-300 focus:outline-hidden"
           onClick={() => {
@@ -137,8 +139,10 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
   }
 
   return (
-    <label>
+    <div>
       <input
+        aria-label={isEditing ? `Complete ${todo.title}` : undefined}
+        id={`todo-${todo.id}`}
         checked={todo.done}
         className="mr-2"
         onChange={(e) => {
@@ -156,7 +160,7 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
       >
         Delete
       </button>
-    </label>
+    </div>
   );
 }
 

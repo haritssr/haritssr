@@ -37,7 +37,12 @@ export default function SimpleSearch() {
     <div>
       <SubTitle>Search using useState, useMemo, useCallback</SubTitle>
       <SourceCodeLink />
-      <input onChange={handleChange} placeholder="Search" value={query} />
+      <input
+        aria-label="Search fruits"
+        onChange={handleChange}
+        placeholder="Search"
+        value={query}
+      />
 
       {query !== deferredQuery && <p>Searching...</p>}
 

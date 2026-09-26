@@ -19,6 +19,7 @@ export default function InputList() {
     <div>
       <SourceCodeLink />
       <input
+        aria-label="New list item"
         className="border px-2 py-1"
         onChange={(e) => {
           setInput(e.target.value);

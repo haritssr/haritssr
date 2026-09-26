@@ -112,6 +112,7 @@ function Form() {
   const [name, setName] = useState("");
   return (
     <input
+      aria-label="Name"
       className="bg-gray-100"
       onChange={(e) => {
         setName(e.target.value);

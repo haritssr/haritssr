@@ -43,6 +43,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
     >
       <div className="flex flex-col items-center justify-center">
         <svg
+          aria-hidden="true"
           className={`h-6 w-6 ${color}`}
           fill="none"
           stroke="currentColor"
@@ -50,7 +51,6 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <title>{to}</title>
           {path}
         </svg>
 

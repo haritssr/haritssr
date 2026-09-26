@@ -79,7 +79,11 @@ export default function TailwindSidebarDemo() {
                 <path d="M9 3v18" />
               </svg>
             </button>
-            <input placeholder="Search" type="search" />
+            <input
+              aria-label="Search documentation"
+              placeholder="Search"
+              type="search"
+            />
           </div>
           <div className="px-4 py-2">
             <div className="my-4 text-xl font-semibold">JavaScript</div>

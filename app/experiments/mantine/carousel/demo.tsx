@@ -47,7 +47,7 @@ const images = [
 function Demo() {
   const slides = images.map((url) => (
     <Carousel.Slide className="overflow-hidden" key={url}>
-      <Image alt="yes" src={url} />
+      <Image alt="" src={url} />
     </Carousel.Slide>
   ));
 

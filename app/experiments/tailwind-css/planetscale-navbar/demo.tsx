@@ -30,6 +30,7 @@ export default function TailwindPlanetscaleNavbarDemo() {
         </div>
         <div className="justify-left flex flex-col-reverse md:w-2/3 md:flex-row md:justify-between md:space-y-0">
           <input
+            aria-label="Search documentation"
             className="mt-4 rounded-md border border-gray-400 bg-[#30313a] px-3 py-1.5 text-gray-300 placeholder-gray-400 caret-white md:mt-0"
             placeholder="Search documentation"
             type="text"

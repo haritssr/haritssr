@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -61,10 +60,7 @@ export default function NumberGameDemo() {
           You win!
         </div>
 
-        <Link
-          className="mt-5 flex justify-center"
-          href="/experiments/browser/number-game"
-        >
+        <div className="mt-5 flex justify-center">
           <button
             className="border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50"
             onClick={() => {
@@ -74,7 +70,7 @@ export default function NumberGameDemo() {
           >
             Play Again
           </button>
-        </Link>
+        </div>
       </>
     );
   }
@@ -94,6 +90,7 @@ export default function NumberGameDemo() {
           {state.num1}+{state.num2}
         </div>
         <input
+          aria-label={`Answer to ${state.num1} plus ${state.num2}`}
           className="focus:ring-harislab rounded-md border border-gray-500 py-1 pl-2 focus:ring-1 focus:outline-hidden"
           onChange={updateResponse}
           onKeyDown={inputKeyPress}

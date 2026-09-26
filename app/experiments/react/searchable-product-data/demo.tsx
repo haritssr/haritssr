@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Dispatch, JSX, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
@@ -27,7 +27,9 @@ const productData: productDataType[] = [
 
 const ProductCategoryRow = ({ category }: { category: string }) => (
   <tr>
-    <th colSpan={2}>{category}</th>
+    <th colSpan={2} scope="rowgroup">
+      {category}
+    </th>
   </tr>
 );
 
@@ -54,39 +56,39 @@ const ProductTable = ({
   filterText: string;
   inStockOnly: boolean;
 }) => {
-  const rows: JSX.Element[] = [];
-  let lastCategory: string | null = null;
-
-  // for (const product of products) {
+  const groups = new Map<string, productDataType[]>();
   for (const product of products) {
-    //couldn't destructure product in as a '({caterogry, name, stocked} : productDataType)' in forEach callback parameter because <ProductRow/> below need 'product' variabel
-    const { category, name, stocked } = product;
-
-    if (!name.toLowerCase().includes(filterText.toLowerCase())) {
+    if (
+      !product.name.toLowerCase().includes(filterText.toLowerCase()) ||
+      (inStockOnly && !product.stocked)
+    ) {
       continue;
     }
-
-    if (inStockOnly && !stocked) {
-      continue;
+    const group = groups.get(product.category);
+    if (group) {
+      group.push(product);
+    } else {
+      groups.set(product.category, [product]);
     }
-
-    if (category !== lastCategory) {
-      rows.push(<ProductCategoryRow category={category} key={category} />);
-    }
-
-    rows.push(<ProductRow key={name} product={product} />);
-    lastCategory = category;
   }
 
   return (
     <table className="rounded border p-2">
+      <caption className="sr-only">Products and prices</caption>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Price</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
         </tr>
       </thead>
-      <tbody>{rows}</tbody>
+      {Array.from(groups, ([category, items]) => (
+        <tbody key={category}>
+          <ProductCategoryRow category={category} />
+          {items.map((product) => (
+            <ProductRow key={product.name} product={product} />
+          ))}
+        </tbody>
+      ))}
     </table>
   );
 };
@@ -104,6 +106,7 @@ const SearchBarWithFilter = ({
 }) => (
   <form className="flex w-fit flex-col gap-2">
     <input
+      aria-label="Search products"
       onChange={(e) => {
         onFilterTextChange(e.target.value);
       }}

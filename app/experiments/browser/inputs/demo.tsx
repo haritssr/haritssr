@@ -90,6 +90,7 @@ const Wrapper = ({
 
 const InputTel = () => (
   <input
+    aria-label="Telephone number"
     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
     placeholder="1234-5678-9101"
     required
@@ -101,6 +102,7 @@ const InputSubmit = () => <input type="submit" />;
 
 const InputUrl = () => (
   <input
+    aria-label="Website URL"
     id="url"
     name="url"
     pattern="https://.*"
@@ -110,17 +112,18 @@ const InputUrl = () => (
   />
 );
 
-const InputTime = () => <input required type="time" />;
+const InputTime = () => <input aria-label="Time" required type="time" />;
 
 const InputText = () => (
   <input
+    aria-label="Example text"
     // style={{ backgroundImage: 'url(/searchicon.svg)', backgroundRepeat: 'no-repeat' }}
     placeholder="Type something"
     type="text"
   />
 );
 
-const InputWeek = () => <input required type="week" />;
+const InputWeek = () => <input aria-label="Week" required type="week" />;
 
 //weird
 const InputRadio = () => (
@@ -150,17 +153,27 @@ const InputRadio = () => (
 );
 
 const InputPassword = () => (
-  <input placeholder="Type password" type="password" />
+  <input aria-label="Password" placeholder="Type password" type="password" />
 );
 
 const InputNumber = () => (
-  <input id="tentacles" max="100" min="10" name="tentacles" type="number" />
+  <input
+    aria-label="Number of tentacles"
+    id="tentacles"
+    max="100"
+    min="10"
+    name="tentacles"
+    type="number"
+  />
 );
 
-const InputMonth = () => <input id="start" name="start" type="month" />;
+const InputMonth = () => (
+  <input aria-label="Month" id="start-month" name="start" type="month" />
+);
 
 const InputEmail = () => (
   <input
+    aria-label="Email"
     id="email"
     pattern=".+@globex\.com"
     placeholder="me@email.com"
@@ -170,14 +183,22 @@ const InputEmail = () => (
 );
 
 const InputFile = () => (
-  <input accept="image/png, image/jpeg" name="Upload" type="file" />
+  <input
+    aria-label="Upload an image"
+    accept="image/png, image/jpeg"
+    name="Upload"
+    type="file"
+  />
 );
 
-const InputSearch = () => <input placeholder="Search" type="search" />;
+const InputSearch = () => (
+  <input aria-label="Search" placeholder="Search" type="search" />
+);
 
 //You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.
 const InputDate = () => (
   <input
+    aria-label="Trip start date"
     defaultValue="2018-07-22"
     id="start"
     max="2018-12-31"
@@ -192,13 +213,20 @@ const InputButton = () => <input type="button" value="Click me" />;
 
 const InputReset = () => (
   <form className="flex flex-col space-y-2">
-    <input name="id" placeholder="Type something" type="text" />
+    <input
+      aria-label="Example text"
+      name="id"
+      placeholder="Type something"
+      type="text"
+    />
     <input type="reset" value="Reset" />
     <input type="submit" value="Submit" />
   </form>
 );
 
-const InputCheckbox = () => <input type="checkbox" value="Click me" />;
+const InputCheckbox = () => (
+  <input aria-label="Example checkbox" type="checkbox" value="Click me" />
+);
 
 const InputColor = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -206,7 +234,12 @@ const InputColor = () => {
   };
   return (
     <div>
-      <input onChange={handleChange} type="color" value="#5151d2" />
+      <input
+        aria-label="Example color"
+        onChange={handleChange}
+        type="color"
+        value="#5151d2"
+      />
       <div>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero
         doloribus minus dolorem labore enim voluptatibus reiciendis natus

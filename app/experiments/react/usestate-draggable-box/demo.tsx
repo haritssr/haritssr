@@ -135,7 +135,11 @@ export default function ReactUseStateDraggableBoxDemo() {
       </SubTitle>
       <SourceCodeLink />
       <div className="mb-5 w-full sm:w-1/6">
-        <select onChange={handleColorChange} value={shape.color}>
+        <select
+          aria-label="Box color"
+          onChange={handleColorChange}
+          value={shape.color}
+        >
           <option value="orange">Orange</option>
           <option value="lightpink">Lightpink</option>
           <option value="aliceblue">Aliceblue</option>

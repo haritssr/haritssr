@@ -95,6 +95,7 @@ export default function ReactSearchInterpolDemo() {
       <SourceCodeLink />
 
       <input
+        aria-label="Search Interpol notices"
         className="cursor-text rounded border px-2 py-1 hover:border-zinc-700 focus:border-zinc-700 focus:ring-2 focus:ring-zinc-200 focus:outline-hidden"
         onChange={(e) => {
           setSearch(e.target.value);

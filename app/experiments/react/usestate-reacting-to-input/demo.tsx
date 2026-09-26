@@ -67,7 +67,9 @@ const Example = () => {
 
   return (
     <div>
-      <h2>Di kota mana ada baliho yang ada tempat air yang bisa diminum?</h2>
+      <h2 id="city-question">
+        Di kota mana ada baliho yang ada tempat air yang bisa diminum?
+      </h2>
       {error !== null && (
         <div className="text-red-500">
           <div>{error}</div>
@@ -78,6 +80,7 @@ const Example = () => {
       {error === null && (
         <form onSubmit={handleSubmit}>
           <textarea
+            aria-labelledby="city-question"
             className="border border-zinc-400 p-2"
             onChange={handleTextareaChange}
             value={answer}

@@ -154,7 +154,7 @@ export default function DesignSystem() {
       </ExplanationList>
       <div className="mb-10" />
       <Section name="UI Components" />
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
         <Box name="Switch" title="Switch">
           <SwitchDemo />
         </Box>
@@ -336,7 +336,7 @@ export default function DesignSystem() {
         <Box title="Hierarchical Colors">
           <HierarchicalColorsDemo />
         </Box>
-      </section>
+      </div>
 
       <div className="mt-10" />
       <Section name="Figma Design" />

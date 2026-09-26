@@ -13,9 +13,10 @@ export default function RadixRadioGroupDemo() {
         of the buttons can be checked at a time.
       </SubTitle>
       <SourceCodeLink />
-      <RadioGroup.Root className="space-y-3">
+      <RadioGroup.Root aria-label="Example options" className="space-y-3">
         <RadioGroup.Item
           className="rdx-state-checked:border-blue-600 flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 bg-white hover:bg-blue-50"
+          aria-label="Default"
           id="item-1"
           value="default"
         >
@@ -23,6 +24,7 @@ export default function RadixRadioGroupDemo() {
         </RadioGroup.Item>
         <RadioGroup.Item
           className="rdx-state-checked:border-blue-600 flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 bg-white hover:bg-blue-50"
+          aria-label="Option 2"
           id="item-2"
           value="value-2"
         >
@@ -30,6 +32,7 @@ export default function RadixRadioGroupDemo() {
         </RadioGroup.Item>
         <RadioGroup.Item
           className="rdx-state-checked:border-blue-600 flex h-5 w-5 items-center justify-center rounded-full border border-zinc-400 bg-white hover:bg-blue-50"
+          aria-label="Option 3"
           id="item-3"
           value="value-3"
         >

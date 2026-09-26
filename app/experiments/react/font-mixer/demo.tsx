@@ -41,6 +41,7 @@ const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
         </article>
       </section>
       <input
+        aria-label="Font mix"
         className="w-[50%]"
         max={25}
         min={0}

@@ -24,7 +24,12 @@ export default function SelectDemo() {
         />
       </SubTitle>
       <SourceCodeLink />
-      <select className="w-1/3 px-2 py-2" id="pet-select" name="pets">
+      <select
+        aria-label="Pet"
+        className="w-1/3 px-2 py-2"
+        id="pet-select"
+        name="pets"
+      >
         <option value="">Please choose an option</option>
         <option disabled value="dog">
           Dog

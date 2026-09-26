@@ -61,9 +61,9 @@ export default async function ProjectPage({
         {/* Title */}
         <section className="border-border bg-foreground/5 my-8 flex items-center justify-between rounded-md border px-3 py-2 sm:my-10 sm:px-5 sm:py-4">
           <div>
-            <div className="text-2xl font-bold wrap-break-word sm:text-3xl">
+            <h1 className="text-2xl font-bold wrap-break-word sm:text-3xl">
               {project.project_name}
-            </div>
+            </h1>
             <div className="text-foreground/60 text-lg">
               {project.about_client.website.slice(8)}
             </div>
@@ -78,49 +78,53 @@ export default async function ProjectPage({
             // placeholder='blur'
           />
         </section>
-        <section className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-16">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-16">
           {/* About The Client */}
           <section>
             <h2 className="border-border text-foreground/90 mb-5 border-b pb-4 text-xl font-semibold">
               About The Client
             </h2>
-            <div className="text-foreground/90 mt-5 font-medium">
-              Company Name
-            </div>
-            <p className="text-foreground/60">
-              {project.about_client.company_name}
-            </p>
+            <dl>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Company Name
+              </dt>
+              <dd className="text-foreground/60">
+                {project.about_client.company_name}
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">
-              Brand Name
-            </div>
-            <p className="text-foreground/60">
-              {project.about_client.brand_name}
-            </p>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Brand Name
+              </dt>
+              <dd className="text-foreground/60">
+                {project.about_client.brand_name}
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">About</div>
-            <p className="text-foreground/60">
-              {project.about_client.long_about}
-            </p>
+              <dt className="text-foreground/90 mt-5 font-medium">About</dt>
+              <dd className="text-foreground/60">
+                {project.about_client.long_about}
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">
-              Phone Number
-            </div>
-            <p className="text-foreground/60">
-              {project.about_client.phone_number}
-            </p>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Phone Number
+              </dt>
+              <dd className="text-foreground/60">
+                {project.about_client.phone_number}
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">Website</div>
-            <ExternalLink
-              href={project.about_client.website}
-              name={project.about_client.website.slice(8)}
-            />
-            <div className="text-foreground/90 mt-5 font-medium">
-              Office Location
-            </div>
-            <p className="text-foreground/60">
-              {project.about_client.office_location}
-            </p>
+              <dt className="text-foreground/90 mt-5 font-medium">Website</dt>
+              <dd>
+                <ExternalLink
+                  href={project.about_client.website}
+                  name={project.about_client.website.slice(8)}
+                />
+              </dd>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Office Location
+              </dt>
+              <dd className="text-foreground/60">
+                {project.about_client.office_location}
+              </dd>
+            </dl>
           </section>
 
           {/* About The Project */}
@@ -128,57 +132,68 @@ export default async function ProjectPage({
             <h2 className="border-border text-foreground/90 mb-5 border-b pb-4 text-xl font-semibold">
               About The Project
             </h2>
+            <dl>
+              <dt className="text-foreground/90 mt-5 font-medium">My Role</dt>
+              <dd>
+                <ExplanationList>
+                  {project.about_project.my_role.map((role: string) => (
+                    <li className="text-foreground/60" key={role}>
+                      {role}
+                    </li>
+                  ))}
+                </ExplanationList>
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">My Role</div>
-            <ExplanationList>
-              {project.about_project.my_role.map((role: string) => (
-                <li className="text-foreground/60" key={role}>
-                  {role}
-                </li>
-              ))}
-            </ExplanationList>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Working Period
+              </dt>
+              <dd className="text-foreground/60">
+                {project.about_project.working_period}
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">
-              Working Period
-            </div>
-            <p className="text-foreground/60">
-              {project.about_project.working_period}
-            </p>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Website Status
+              </dt>
+              <dd>
+                <ExplanationList>
+                  {project.about_project.website_status.map(
+                    (status: string) => (
+                      <li className="text-foreground/60" key={status}>
+                        {status}
+                      </li>
+                    )
+                  )}
+                </ExplanationList>
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">
-              Website Status
-            </div>
-            <ExplanationList>
-              {project.about_project.website_status.map((status: string) => (
-                <li className="text-foreground/60" key={status}>
-                  {status}
-                </li>
-              ))}
-            </ExplanationList>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Website Routes
+              </dt>
+              <dd>
+                <ExplanationList>
+                  {project.about_project.routes.map((route: string) => (
+                    <li className="text-foreground/60" key={route}>
+                      {route}
+                    </li>
+                  ))}
+                </ExplanationList>
+              </dd>
 
-            <div className="text-foreground/90 mt-5 font-medium">
-              Website Routes
-            </div>
-            <ExplanationList>
-              {project.about_project.routes.map((route: string) => (
-                <li className="text-foreground/60" key={route}>
-                  {route}
-                </li>
-              ))}
-            </ExplanationList>
-
-            <div className="text-foreground/90 mt-5 font-medium">
-              Website Features
-            </div>
-            <ExplanationList>
-              {project.about_project.features.map((feature: string) => (
-                <li className="text-foreground/60" key={feature}>
-                  {feature}
-                </li>
-              ))}
-            </ExplanationList>
+              <dt className="text-foreground/90 mt-5 font-medium">
+                Website Features
+              </dt>
+              <dd>
+                <ExplanationList>
+                  {project.about_project.features.map((feature: string) => (
+                    <li className="text-foreground/60" key={feature}>
+                      {feature}
+                    </li>
+                  ))}
+                </ExplanationList>
+              </dd>
+            </dl>
           </section>
-        </section>
+        </div>
 
         {/* Design */}
         <section className="mt-10">

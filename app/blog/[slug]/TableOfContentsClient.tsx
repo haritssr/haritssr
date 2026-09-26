@@ -55,24 +55,25 @@ export default function TableOfContentsClient({
   }, [items]);
 
   return (
-    <div className="space-y-2 overflow-y-auto sm:p-5">
+    <ul className="space-y-2 overflow-y-auto sm:p-5">
       {items.map((item) => {
         const isActive = activeHeading === item.id;
 
         return (
-          <Link
-            aria-current={isActive ? "location" : undefined}
-            className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${isActive ? "border-foreground/80 text-foreground/85 font-medium" : "text-foreground/60 hover:text-foreground/80 border-transparent"}`}
-            href={`#${item.id}`}
-            key={item.id}
-            onClick={() => {
-              setActiveHeading(item.id);
-            }}
-          >
-            {capitalizeFirstLetter(item.title)}
-          </Link>
+          <li key={item.id}>
+            <Link
+              aria-current={isActive ? "location" : undefined}
+              className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${isActive ? "border-foreground/80 text-foreground/85 font-medium" : "text-foreground/60 hover:text-foreground/80 border-transparent"}`}
+              href={`#${item.id}`}
+              onClick={() => {
+                setActiveHeading(item.id);
+              }}
+            >
+              {capitalizeFirstLetter(item.title)}
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }

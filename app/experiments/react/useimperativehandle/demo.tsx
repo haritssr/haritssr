@@ -50,7 +50,7 @@ function SomeApp() {
 
   return (
     <form>
-      <MyInput ref={ref} />
+      <MyInput aria-label="Example text" ref={ref} />
       <button onClick={handleClick} type="button">
         Edit
       </button>
@@ -63,7 +63,14 @@ type AddCommentsProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const AddComments = function AddComents({ ref, ..._props }: AddCommentsProps) {
-  return <input placeholder="yada yada" ref={ref} type="text" />;
+  return (
+    <input
+      aria-label="Add a comment"
+      placeholder="yada yada"
+      ref={ref}
+      type="text"
+    />
+  );
 };
 
 interface CommentsListHandle {

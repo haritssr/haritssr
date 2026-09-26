@@ -249,14 +249,27 @@ export default async function TaskStatisticsPage() {
         ) : (
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-200 text-left text-sm text-zinc-700">
+              <caption className="sr-only">Task database records</caption>
               <thead className="bg-zinc-50 text-xs text-zinc-500 uppercase">
                 <tr>
-                  <th className="px-2 py-1.5">task_date</th>
-                  <th className="px-2 py-1.5">title</th>
-                  <th className="px-2 py-1.5">duration</th>
-                  <th className="px-2 py-1.5">progress</th>
-                  <th className="px-2 py-1.5">type</th>
-                  <th className="px-2 py-1.5">position</th>
+                  <th scope="col" className="px-2 py-1.5">
+                    task_date
+                  </th>
+                  <th scope="col" className="px-2 py-1.5">
+                    title
+                  </th>
+                  <th scope="col" className="px-2 py-1.5">
+                    duration
+                  </th>
+                  <th scope="col" className="px-2 py-1.5">
+                    progress
+                  </th>
+                  <th scope="col" className="px-2 py-1.5">
+                    type
+                  </th>
+                  <th scope="col" className="px-2 py-1.5">
+                    position
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-100">

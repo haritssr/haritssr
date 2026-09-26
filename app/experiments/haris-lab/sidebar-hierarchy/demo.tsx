@@ -9,37 +9,18 @@ export default function SidebarHierarchyDemo() {
     <div className="space-y-5 sm:w-2/5">
       <SourceCodeLink />
       {PhysicsHierarchyData.map((domain) => (
-        <details
-          aria-label="domain-area"
-          className="bg-red-100 p-1"
-          key={domain.title}
-        >
-          <summary
-            aria-label="domain-title"
-            className="cursor-pointer font-semibold select-none"
-          >
+        <details className="bg-red-100 p-1" key={domain.title}>
+          <summary className="cursor-pointer font-semibold select-none">
             titletitletitle {domain.title}
           </summary>
-          <section
-            aria-label="chapter-area"
-            className="space-y-2 bg-yellow-100 p-1"
-          >
+          <div className="space-y-2 bg-yellow-100 p-1">
             {domain.chapters.map((chapter) => (
-              <details
-                aria-label="materi-area"
-                className="bg-green-100 p-1"
-                key={chapter.title}
-              >
-                <summary>
-                  <Link
-                    aria-label="chapter-title"
-                    className="hover:underline"
-                    href={chapter.title}
-                  >
-                    {chapter.title}
-                  </Link>
-                </summary>
-                <section aria-label="materi-area" className="bg-blue-100 p-1">
+              <details className="bg-green-100 p-1" key={chapter.title}>
+                <summary>{chapter.title}</summary>
+                <Link className="hover:underline" href={chapter.title}>
+                  {chapter.title}
+                </Link>
+                <div className="bg-blue-100 p-1">
                   {chapter.material.map((materi) => (
                     <Link
                       className="ml-2 block bg-blue-100 p-1 hover:underline"
@@ -49,10 +30,10 @@ export default function SidebarHierarchyDemo() {
                       {materi}
                     </Link>
                   ))}
-                </section>
+                </div>
               </details>
             ))}
-          </section>
+          </div>
         </details>
       ))}
     </div>

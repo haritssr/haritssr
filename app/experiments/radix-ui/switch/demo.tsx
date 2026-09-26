@@ -26,6 +26,7 @@ export default function RadixSwitchDemo() {
       <SourceCodeLink />
       <form>
         <Switch.Root
+          aria-label="Enable example setting"
           className="rdx-state-checked:border-green-700 rdx-state-checked:bg-green-600 block w-11 rounded-full border border-zinc-300 p-1 hover:bg-zinc-50"
           defaultChecked
           id="s1"

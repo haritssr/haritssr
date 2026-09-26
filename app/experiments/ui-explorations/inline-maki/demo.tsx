@@ -26,13 +26,15 @@ function InlineMAKI({ value }: { value: string }) {
   return (
     <Accordion.Root asChild type="multiple">
       <Accordion.Item value={value}>
-        <Accordion.Header className="group">
-          <Accordion.Trigger className="w-full">
-            <div className="text-tiny group-rdx-state-open:rounded-b-0 group-rdx-state-open:border-b-0 flex w-full items-center justify-between rounded-md border border-zinc-200 bg-zinc-50/50 px-3 py-1">
-              <div className="text-zinc-400">Nomor Soal</div>
-              <div className="text-action">Kerjakan</div>
-            </div>
-          </Accordion.Trigger>
+        <Accordion.Header asChild className="group">
+          <h2>
+            <Accordion.Trigger className="w-full">
+              <span className="text-tiny group-rdx-state-open:rounded-b-0 group-rdx-state-open:border-b-0 flex w-full items-center justify-between rounded-md border border-zinc-200 bg-zinc-50/50 px-3 py-1">
+                <span className="text-zinc-400">Nomor Soal {value}</span>
+                <span className="text-action">Kerjakan</span>
+              </span>
+            </Accordion.Trigger>
+          </h2>
         </Accordion.Header>
         <Accordion.Content>
           <div className="space-y-2 rounded-b-md border-r border-b border-l border-zinc-200 bg-zinc-50 px-2 pt-0.5 pb-2">
@@ -54,49 +56,53 @@ function Section({ title }: { title: string }) {
   return (
     <Accordion.Root type="multiple">
       <Accordion.Item className="rounded-md bg-white shadow" value="s">
-        <Accordion.Header className="group">
-          <section className="group-rdx-state-open:rounded-b-none group-rdx-state-open:border-b-0 flex w-full items-center justify-between overflow-hidden rounded border border-zinc-400 bg-zinc-100 py-1 pr-3 pl-2 text-sm font-medium">
-            <div className="flex items-center space-x-1">
-              <div className="text-zinc-700">{title}</div>
-              <Tooltip.Provider>
-                <Tooltip.Root>
-                  <Tooltip.Trigger className="flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700">
-                    <QuestionMarkCircleIcon
-                      className="h-4 w-4 text-zinc-400"
-                      strokeWidth={2}
-                    />
-                  </Tooltip.Trigger>
-                  <Tooltip.Content
-                    align="center"
-                    className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl"
-                    side="top"
-                  >
-                    <div>Mozilla Developer Network</div>
-                    <Tooltip.Arrow
-                      className="fill-[#3F3F46]"
-                      height={5}
-                      offset={5}
-                      width={10}
-                    />
-                  </Tooltip.Content>
-                </Tooltip.Root>
-              </Tooltip.Provider>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Switch.Root
-                className="rdx-state-checked:bg-green-600 rdx-state-unchecked:bg-zinc-600 block w-[34px] items-center rounded-full p-[3px]"
-                id="s1"
+        <div className="flex w-full items-center justify-between overflow-hidden rounded border border-zinc-400 bg-zinc-100 py-1 pr-3 pl-2 text-sm font-medium">
+          <Accordion.Header className="group flex-1">
+            <Accordion.Trigger className="flex w-full items-center justify-between text-zinc-700">
+              <span>{title}</span>
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="group-rdx-state-open:rotate-180 h-4 w-4 stroke-2 text-zinc-500"
+              />
+            </Accordion.Trigger>
+          </Accordion.Header>
+          <Tooltip.Provider>
+            <Tooltip.Root>
+              <Tooltip.Trigger
+                aria-label={`Help for ${title}`}
+                className="flex items-center rounded px-1 py-0.5 hover:bg-zinc-100 active:ring-1 active:ring-zinc-700"
               >
-                <Switch.Thumb className="rdx-state-checked:translate-x-[14px] rdx-state-checked:bg-white block h-3.5 w-3.5 rounded-full bg-white shadow duration-100 will-change-transform" />
-              </Switch.Root>
-              <Accordion.Trigger>
-                <ChevronDownIcon className="group-rdx-state-open:rotate-180 h-4 w-4 stroke-2 text-zinc-500" />
-              </Accordion.Trigger>
-            </div>
-          </section>
-        </Accordion.Header>
+                <QuestionMarkCircleIcon
+                  aria-hidden="true"
+                  className="h-4 w-4 text-zinc-400"
+                  strokeWidth={2}
+                />
+              </Tooltip.Trigger>
+              <Tooltip.Content
+                align="center"
+                className="rounded-md bg-zinc-700 px-2.5 py-1.5 text-white shadow-xl"
+                side="top"
+              >
+                Mozilla Developer Network
+                <Tooltip.Arrow
+                  className="fill-[#3F3F46]"
+                  height={5}
+                  offset={5}
+                  width={10}
+                />
+              </Tooltip.Content>
+            </Tooltip.Root>
+          </Tooltip.Provider>
+          <Switch.Root
+            aria-label={`Enable ${title}`}
+            className="rdx-state-checked:bg-green-600 rdx-state-unchecked:bg-zinc-600 block w-[34px] items-center rounded-full p-[3px]"
+          >
+            <Switch.Thumb className="rdx-state-checked:translate-x-[14px] rdx-state-checked:bg-white block h-3.5 w-3.5 rounded-full bg-white shadow duration-100 will-change-transform" />
+          </Switch.Root>
+        </div>
         <Accordion.Content className="rounded-b-md border border-zinc-400 duration-100">
           <textarea
+            aria-label={title}
             className="h-auto w-full px-2 py-1 focus:ring-2 focus:ring-blue-600 focus:outline-hidden"
             placeholder="Empty"
             rows={1}

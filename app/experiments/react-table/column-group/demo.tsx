@@ -119,12 +119,20 @@ function Table() {
   return (
     <div className="overflow-x-auto bg-red-50 p-2">
       <table>
+        <caption className="sr-only">
+          People and activity, grouped by name and information
+        </caption>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
                   className="border-r border-b border-zinc-500 bg-green-100 px-2 py-1 font-bold whitespace-nowrap"
+                  id={
+                    header.isPlaceholder
+                      ? undefined
+                      : `people-header-${encodeURIComponent(header.id)}`
+                  }
                   colSpan={header.colSpan}
                   key={header.id}
                 >
@@ -145,6 +153,20 @@ function Table() {
               {row.getVisibleCells().map((cell) => (
                 <td
                   className="border-r border-b border-zinc-500 px-2 py-1 whitespace-nowrap"
+                  headers={table
+                    .getFlatHeaders()
+                    .filter(
+                      (header) =>
+                        !header.isPlaceholder &&
+                        header.column
+                          .getLeafColumns()
+                          .some((column) => column.id === cell.column.id)
+                    )
+                    .map(
+                      (header) =>
+                        `people-header-${encodeURIComponent(header.id)}`
+                    )
+                    .join(" ")}
                   key={cell.id}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -157,7 +179,7 @@ function Table() {
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
-                <th
+                <td
                   className="border-r border-b border-zinc-500 bg-blue-50 font-normal whitespace-nowrap text-zinc-500"
                   colSpan={header.colSpan}
                   key={header.id}
@@ -168,7 +190,7 @@ function Table() {
                         header.column.columnDef.footer,
                         header.getContext()
                       )}
-                </th>
+                </td>
               ))}
             </tr>
           ))}

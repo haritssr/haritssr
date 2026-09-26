@@ -61,6 +61,7 @@ export default function ReactSearchBooksDemo(): ReactElement {
       <SourceCodeLink />
       <div className="group mx-auto flex items-center sm:w-1/3">
         <input
+          aria-label="Search books"
           className="w-full"
           onChange={handleFilter}
           placeholder="Enter a book"

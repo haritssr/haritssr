@@ -110,11 +110,13 @@ function Table() {
   return (
     <div className="overflow-x-auto bg-red-50 p-2">
       <table className="border border-zinc-500">
+        <caption className="sr-only">People and activity</caption>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
+                  scope="col"
                   className="border-r border-b border-zinc-500 bg-green-100 px-2 py-1 font-bold whitespace-nowrap"
                   key={header.id}
                 >
@@ -148,6 +150,7 @@ function Table() {
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
                 <th
+                  scope="col"
                   className="border-r border-zinc-500 bg-blue-50 font-normal text-zinc-500"
                   key={header.id}
                 >

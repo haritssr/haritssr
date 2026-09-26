@@ -39,7 +39,10 @@ export default function RadixSliderDemo() {
           >
             <Slider.Range className="rounded-ful absolute h-full bg-zinc-100" />
           </Slider.Track>
-          <Slider.Thumb className="block h-5 w-5 cursor-pointer rounded-full border border-zinc-300 bg-white shadow-lg hover:border-zinc-400 hover:bg-zinc-50 focus:border focus:border-zinc-500 focus:ring-4 focus:ring-zinc-400/50 focus:outline-hidden" />
+          <Slider.Thumb
+            aria-label="Example value"
+            className="block h-5 w-5 cursor-pointer rounded-full border border-zinc-300 bg-white shadow-lg hover:border-zinc-400 hover:bg-zinc-50 focus:border focus:border-zinc-500 focus:ring-4 focus:ring-zinc-400/50 focus:outline-hidden"
+          />
         </Slider.Root>
       </form>
     </>

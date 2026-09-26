@@ -157,11 +157,18 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
         ) : (
           <div className="mt-4 overflow-x-auto">
             <table className="w-full border-collapse text-sm">
+              <caption className="sr-only">Current tools</caption>
               <thead>
                 <tr className="border-b border-neutral-200 text-left">
-                  <th className="py-2 pr-4">Name</th>
-                  <th className="py-2 pr-4">Price</th>
-                  <th className="py-2 pr-4">Amount</th>
+                  <th scope="col" className="py-2 pr-4">
+                    Name
+                  </th>
+                  <th scope="col" className="py-2 pr-4">
+                    Price
+                  </th>
+                  <th scope="col" className="py-2 pr-4">
+                    Amount
+                  </th>
                 </tr>
               </thead>
               <tbody>

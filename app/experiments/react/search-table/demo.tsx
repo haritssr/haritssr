@@ -85,6 +85,7 @@ export default function ReactSearchTableDemo() {
       </SubTitle>
       <SourceCodeLink />
       <input
+        aria-label="Search people"
         className="mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-hidden"
         onChange={(e) => {
           setQuery(e.target.value);
@@ -94,12 +95,13 @@ export default function ReactSearchTableDemo() {
         value={query}
       />
       <table className="border">
+        <caption className="sr-only">People search results</caption>
         <thead>
           <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Mainden Name</th>
+            <th scope="col">No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Mainden Name</th>
           </tr>
         </thead>
         <tbody>
