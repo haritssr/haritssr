@@ -37,7 +37,7 @@ function Section({
           {section}
         </h2>
       </div>
-      <div className={`mb-16 ${className}`}>{children}</div>
+      <div className={className}>{children}</div>
     </section>
   );
 }
@@ -48,10 +48,10 @@ export default function Home() {
     0
   );
   return (
-    <div className="mt-5 sm:mt-10">
+    <div className="mt-5 space-y-16 sm:mt-10">
       <section
         aria-labelledby="profile-heading"
-        className="mb-20 grid grid-cols-1 gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4"
+        className="grid grid-cols-1 gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4"
         id="contacts"
       >
         <div className="corner-squircle border-border flex items-center justify-center rounded-2xl px-3 pt-3 pb-2.5 select-none sm:border">
@@ -121,7 +121,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <div className="space-y-16 sm:space-y-24">
+      <div className="space-y-16">
         <Section
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4"
           id="projects"

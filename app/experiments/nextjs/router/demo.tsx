@@ -71,107 +71,119 @@ function RouterDemoContent() {
       </SubTitle>
       <SourceCodeLink />
 
-      <div className="mb-10 space-y-2">
-        <Section name="usePathname" />
-        <div>
-          pathname = <span className={style}>{pathname}</span>
-        </div>
-
-        <Section name="useSearchParams" />
-        <div>
-          searchParams.toString() ={" "}
-          <span className={style}>{currentQuery || "(empty)"}</span>
-        </div>
-        {Object.keys(queryObj).length > 0 && (
-          <div className="mt-2">
-            <div className="text-sm text-zinc-600">Parsed query params:</div>
-            <pre className="mt-1 rounded bg-zinc-100 p-2 text-xs">
-              {JSON.stringify(queryObj, null, 2)}
-            </pre>
+      <div className="space-y-16">
+        <section>
+          <Section name="usePathname" />
+          <div>
+            pathname = <span className={style}>{pathname}</span>
           </div>
-        )}
-      </div>
+        </section>
 
-      <Section name="router.push" />
-      <p className="mb-3 text-sm text-zinc-600">
-        Add a query parameter using router.push (adds to history)
-      </p>
-      <div className="flex flex-wrap gap-2">
-        <input
-          aria-label="Query parameter value"
-          className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          onChange={(e) => {
-            setInputValue(e.target.value);
-          }}
-          onKeyDown={(e) => e.key === "Enter" && handlePush()}
-          placeholder="Enter value..."
-          type="text"
-          value={inputValue}
-        />
-        <button
-          className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-50"
-          disabled={!inputValue}
-          onClick={handlePush}
-          type="button"
-        >
-          router.push
-        </button>
-      </div>
+        <section>
+          <Section name="useSearchParams" />
+          <div>
+            searchParams.toString() ={" "}
+            <span className={style}>{currentQuery || "(empty)"}</span>
+          </div>
+          {Object.keys(queryObj).length > 0 && (
+            <div className="mt-2">
+              <div className="text-sm text-zinc-600">Parsed query params:</div>
+              <pre className="mt-1 rounded bg-zinc-100 p-2 text-xs">
+                {JSON.stringify(queryObj, null, 2)}
+              </pre>
+            </div>
+          )}
+        </section>
 
-      <Section name="router.replace" />
-      <p className="mb-3 text-sm text-zinc-600">
-        Replace current URL without adding to history
-      </p>
-      <button
-        className="rounded-md bg-zinc-700 px-4 py-2 text-sm text-white hover:bg-zinc-800 disabled:opacity-50"
-        disabled={!inputValue}
-        onClick={handleReplace}
-        type="button"
-      >
-        router.replace with input value
-      </button>
+        <section>
+          <Section name="router.push" />
+          <p className="mb-3 text-sm text-zinc-600">
+            Add a query parameter using router.push (adds to history)
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <input
+              aria-label="Query parameter value"
+              className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
+              onKeyDown={(e) => e.key === "Enter" && handlePush()}
+              placeholder="Enter value..."
+              type="text"
+              value={inputValue}
+            />
+            <button
+              className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-50"
+              disabled={!inputValue}
+              onClick={handlePush}
+              type="button"
+            >
+              router.push
+            </button>
+          </div>
+        </section>
 
-      <Section name="Navigation Methods" />
-      <div className="flex flex-wrap gap-2">
-        <button
-          className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
-          onClick={handleBack}
-          type="button"
-        >
-          router.back()
-        </button>
-        <button
-          className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
-          onClick={handleForward}
-          type="button"
-        >
-          router.forward()
-        </button>
-        <button
-          className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
-          onClick={handleRefresh}
-          type="button"
-        >
-          router.refresh()
-        </button>
-      </div>
+        <section>
+          <Section name="router.replace" />
+          <p className="mb-3 text-sm text-zinc-600">
+            Replace current URL without adding to history
+          </p>
+          <button
+            className="rounded-md bg-zinc-700 px-4 py-2 text-sm text-white hover:bg-zinc-800 disabled:opacity-50"
+            disabled={!inputValue}
+            onClick={handleReplace}
+            type="button"
+          >
+            router.replace with input value
+          </button>
+        </section>
 
-      <Section name="Link Component" />
-      <p className="mb-3 text-sm text-zinc-600">
-        Using Link from next/link for client-side navigation:
-      </p>
-      <div className="flex flex-wrap gap-2">
-        <a
-          className="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100"
-          href="/experiments"
-        >
-          Go to Experiments (regular anchor)
-        </a>
+        <section>
+          <Section name="Navigation Methods" />
+          <div className="flex flex-wrap gap-2">
+            <button
+              className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
+              onClick={handleBack}
+              type="button"
+            >
+              router.back()
+            </button>
+            <button
+              className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
+              onClick={handleForward}
+              type="button"
+            >
+              router.forward()
+            </button>
+            <button
+              className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
+              onClick={handleRefresh}
+              type="button"
+            >
+              router.refresh()
+            </button>
+          </div>
+        </section>
+
+        <section>
+          <Section name="Link Component" />
+          <p className="mb-3 text-sm text-zinc-600">
+            Using Link from next/link for client-side navigation:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <a
+              className="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100"
+              href="/experiments"
+            >
+              Go to Experiments (regular anchor)
+            </a>
+          </div>
+          <p className="mt-2 text-xs text-zinc-500">
+            Note: In App Router, use the Link component from next/link for
+            client-side navigation without full page reload.
+          </p>
+        </section>
       </div>
-      <p className="mt-2 text-xs text-zinc-500">
-        Note: In App Router, use the Link component from next/link for
-        client-side navigation without full page reload.
-      </p>
     </>
   );
 }

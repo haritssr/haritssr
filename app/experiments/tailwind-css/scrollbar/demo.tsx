@@ -21,7 +21,7 @@ export default function ScrollbarDemo() {
       </SubTitle>
       <SourceCodeLink />
 
-      <div className="space-y-10 pb-16">
+      <div className="space-y-16 pb-16">
         <section aria-labelledby="vertical-scrollbar-title">
           <h2
             className="mb-3 text-lg font-semibold"

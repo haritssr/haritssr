@@ -78,130 +78,132 @@ export default async function ProjectPage({
             // placeholder='blur'
           />
         </section>
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-16">
-          {/* About The Client */}
-          <section>
-            <h2 className="border-border text-foreground/90 mb-5 border-b pb-4 text-xl font-semibold">
-              About The Client
-            </h2>
-            <dl>
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Company Name
-              </dt>
-              <dd className="text-foreground/60">
-                {project.about_client.company_name}
-              </dd>
+        <div className="space-y-16">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-16">
+            {/* About The Client */}
+            <section>
+              <h2 className="border-border text-foreground/90 mb-5 border-b pb-4 text-xl font-semibold">
+                About The Client
+              </h2>
+              <dl>
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Company Name
+                </dt>
+                <dd className="text-foreground/60">
+                  {project.about_client.company_name}
+                </dd>
 
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Brand Name
-              </dt>
-              <dd className="text-foreground/60">
-                {project.about_client.brand_name}
-              </dd>
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Brand Name
+                </dt>
+                <dd className="text-foreground/60">
+                  {project.about_client.brand_name}
+                </dd>
 
-              <dt className="text-foreground/90 mt-5 font-medium">About</dt>
-              <dd className="text-foreground/60">
-                {project.about_client.long_about}
-              </dd>
+                <dt className="text-foreground/90 mt-5 font-medium">About</dt>
+                <dd className="text-foreground/60">
+                  {project.about_client.long_about}
+                </dd>
 
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Phone Number
-              </dt>
-              <dd className="text-foreground/60">
-                {project.about_client.phone_number}
-              </dd>
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Phone Number
+                </dt>
+                <dd className="text-foreground/60">
+                  {project.about_client.phone_number}
+                </dd>
 
-              <dt className="text-foreground/90 mt-5 font-medium">Website</dt>
-              <dd>
-                <ExternalLink
-                  href={project.about_client.website}
-                  name={project.about_client.website.slice(8)}
-                />
-              </dd>
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Office Location
-              </dt>
-              <dd className="text-foreground/60">
-                {project.about_client.office_location}
-              </dd>
-            </dl>
-          </section>
+                <dt className="text-foreground/90 mt-5 font-medium">Website</dt>
+                <dd>
+                  <ExternalLink
+                    href={project.about_client.website}
+                    name={project.about_client.website.slice(8)}
+                  />
+                </dd>
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Office Location
+                </dt>
+                <dd className="text-foreground/60">
+                  {project.about_client.office_location}
+                </dd>
+              </dl>
+            </section>
 
-          {/* About The Project */}
-          <section>
-            <h2 className="border-border text-foreground/90 mb-5 border-b pb-4 text-xl font-semibold">
-              About The Project
-            </h2>
-            <dl>
-              <dt className="text-foreground/90 mt-5 font-medium">My Role</dt>
-              <dd>
-                <ExplanationList>
-                  {project.about_project.my_role.map((role: string) => (
-                    <li className="text-foreground/60" key={role}>
-                      {role}
-                    </li>
-                  ))}
-                </ExplanationList>
-              </dd>
-
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Working Period
-              </dt>
-              <dd className="text-foreground/60">
-                {project.about_project.working_period}
-              </dd>
-
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Website Status
-              </dt>
-              <dd>
-                <ExplanationList>
-                  {project.about_project.website_status.map(
-                    (status: string) => (
-                      <li className="text-foreground/60" key={status}>
-                        {status}
+            {/* About The Project */}
+            <section>
+              <h2 className="border-border text-foreground/90 mb-5 border-b pb-4 text-xl font-semibold">
+                About The Project
+              </h2>
+              <dl>
+                <dt className="text-foreground/90 mt-5 font-medium">My Role</dt>
+                <dd>
+                  <ExplanationList>
+                    {project.about_project.my_role.map((role: string) => (
+                      <li className="text-foreground/60" key={role}>
+                        {role}
                       </li>
-                    )
-                  )}
-                </ExplanationList>
-              </dd>
+                    ))}
+                  </ExplanationList>
+                </dd>
 
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Website Routes
-              </dt>
-              <dd>
-                <ExplanationList>
-                  {project.about_project.routes.map((route: string) => (
-                    <li className="text-foreground/60" key={route}>
-                      {route}
-                    </li>
-                  ))}
-                </ExplanationList>
-              </dd>
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Working Period
+                </dt>
+                <dd className="text-foreground/60">
+                  {project.about_project.working_period}
+                </dd>
 
-              <dt className="text-foreground/90 mt-5 font-medium">
-                Website Features
-              </dt>
-              <dd>
-                <ExplanationList>
-                  {project.about_project.features.map((feature: string) => (
-                    <li className="text-foreground/60" key={feature}>
-                      {feature}
-                    </li>
-                  ))}
-                </ExplanationList>
-              </dd>
-            </dl>
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Website Status
+                </dt>
+                <dd>
+                  <ExplanationList>
+                    {project.about_project.website_status.map(
+                      (status: string) => (
+                        <li className="text-foreground/60" key={status}>
+                          {status}
+                        </li>
+                      )
+                    )}
+                  </ExplanationList>
+                </dd>
+
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Website Routes
+                </dt>
+                <dd>
+                  <ExplanationList>
+                    {project.about_project.routes.map((route: string) => (
+                      <li className="text-foreground/60" key={route}>
+                        {route}
+                      </li>
+                    ))}
+                  </ExplanationList>
+                </dd>
+
+                <dt className="text-foreground/90 mt-5 font-medium">
+                  Website Features
+                </dt>
+                <dd>
+                  <ExplanationList>
+                    {project.about_project.features.map((feature: string) => (
+                      <li className="text-foreground/60" key={feature}>
+                        {feature}
+                      </li>
+                    ))}
+                  </ExplanationList>
+                </dd>
+              </dl>
+            </section>
+          </div>
+
+          {/* Design */}
+          <section>
+            <h2 className="text-foreground/90 mb-5 text-xl font-semibold">
+              Design (at Figma)
+            </h2>
+            <LoadingFigma project={project} />
           </section>
         </div>
-
-        {/* Design */}
-        <section className="mt-10">
-          <h2 className="text-foreground/90 mb-5 text-xl font-semibold">
-            Design (at Figma)
-          </h2>
-          <LoadingFigma project={project} />
-        </section>
       </div>
     </div>
   );

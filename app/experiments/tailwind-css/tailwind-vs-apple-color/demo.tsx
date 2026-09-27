@@ -16,24 +16,31 @@ export default function TailwindVsAppleColorDemo() {
         The difference between Tailwind CSS Gray colors vs Apple Gray colors
       </SubTitle>
       <SourceCodeLink />
-      <Section name="Apple" />
-      <div className="mb-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
-        {appleColorData.map(({ name, color }) => (
-          <Box color={color} key={name} name={name} />
-        ))}
-      </div>
-      <Section name="zinc" />
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
-        <Box color="#18181b" name="900" />
-        <Box color="#27272a" name="800" />
-        <Box color="#3f3f46" name="700" />
-        <Box color="#52525b" name="600" />
-        <Box color="#71717a" name="500" />
-        <Box color="#a1a1aa" name="400" />
-        <Box color="#d4d4d8" name="300" />
-        <Box color="#e4e4e7" name="200" />
-        <Box color="#f4f4f5" name="100" />
-        <Box color="#fafafa" name="50" />
+      <div className="space-y-16">
+        <section>
+          <Section name="Apple" />
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
+            {appleColorData.map(({ name, color }) => (
+              <Box color={color} key={name} name={name} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <Section name="zinc" />
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
+            <Box color="#18181b" name="900" />
+            <Box color="#27272a" name="800" />
+            <Box color="#3f3f46" name="700" />
+            <Box color="#52525b" name="600" />
+            <Box color="#71717a" name="500" />
+            <Box color="#a1a1aa" name="400" />
+            <Box color="#d4d4d8" name="300" />
+            <Box color="#e4e4e7" name="200" />
+            <Box color="#f4f4f5" name="100" />
+            <Box color="#fafafa" name="50" />
+          </div>
+        </section>
       </div>
     </>
   );

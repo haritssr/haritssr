@@ -96,96 +96,98 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
         </div>
       )}
 
-      <section className="mt-6 rounded-lg border border-neutral-200 p-4">
-        <h2 className="text-lg font-semibold">Manage Tools</h2>
-        <form
-          action={createToolAction}
-          className="mt-3 grid gap-3 sm:grid-cols-4"
-        >
-          <label className="grid gap-1 text-sm">
-            Name
-            <input
-              autoComplete="off"
-              className="rounded border px-3 py-2"
-              maxLength={100}
-              name="name"
-              required
-            />
-          </label>
-          <label className="grid gap-1 text-sm">
-            Price (IDR)
-            <input
-              className="rounded border px-3 py-2"
-              inputMode="numeric"
-              max="1000000000"
-              min="0"
-              name="price"
-              required
-              step="1"
-              type="number"
-            />
-          </label>
-          <label className="grid gap-1 text-sm">
-            Amount
-            <input
-              className="rounded border px-3 py-2"
-              inputMode="numeric"
-              max="1000000000"
-              min="0"
-              name="amount"
-              required
-              step="1"
-              type="number"
-            />
-          </label>
-          <div className="flex items-end">
-            <button
-              className="w-full rounded bg-black px-3 py-2 text-white"
-              type="submit"
-            >
-              Add
-            </button>
-          </div>
-        </form>
-      </section>
+      <div className="mt-6 space-y-16">
+        <section className="rounded-lg border border-neutral-200 p-4">
+          <h2 className="text-lg font-semibold">Manage Tools</h2>
+          <form
+            action={createToolAction}
+            className="mt-3 grid gap-3 sm:grid-cols-4"
+          >
+            <label className="grid gap-1 text-sm">
+              Name
+              <input
+                autoComplete="off"
+                className="rounded border px-3 py-2"
+                maxLength={100}
+                name="name"
+                required
+              />
+            </label>
+            <label className="grid gap-1 text-sm">
+              Price (IDR)
+              <input
+                className="rounded border px-3 py-2"
+                inputMode="numeric"
+                max="1000000000"
+                min="0"
+                name="price"
+                required
+                step="1"
+                type="number"
+              />
+            </label>
+            <label className="grid gap-1 text-sm">
+              Amount
+              <input
+                className="rounded border px-3 py-2"
+                inputMode="numeric"
+                max="1000000000"
+                min="0"
+                name="amount"
+                required
+                step="1"
+                type="number"
+              />
+            </label>
+            <div className="flex items-end">
+              <button
+                className="w-full rounded bg-black px-3 py-2 text-white"
+                type="submit"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </section>
 
-      <section className="mt-6 rounded-lg border border-neutral-200 p-4">
-        <h2 className="text-lg font-semibold">Current Tools</h2>
+        <section className="rounded-lg border border-neutral-200 p-4">
+          <h2 className="text-lg font-semibold">Current Tools</h2>
 
-        {tools.length === 0 ? (
-          <p className="mt-3 text-sm text-neutral-500">No tools yet.</p>
-        ) : (
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full border-collapse text-sm">
-              <caption className="sr-only">Current tools</caption>
-              <thead>
-                <tr className="border-b border-neutral-200 text-left">
-                  <th scope="col" className="py-2 pr-4">
-                    Name
-                  </th>
-                  <th scope="col" className="py-2 pr-4">
-                    Price
-                  </th>
-                  <th scope="col" className="py-2 pr-4">
-                    Amount
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {tools.map((tool) => (
-                  <tr className="border-b border-neutral-100" key={tool.id}>
-                    <td className="py-2 pr-4">{tool.name}</td>
-                    <td className="py-2 pr-4">
-                      {currencyFormatter.format(tool.price)}
-                    </td>
-                    <td className="py-2 pr-4">{tool.amount}</td>
+          {tools.length === 0 ? (
+            <p className="mt-3 text-sm text-neutral-500">No tools yet.</p>
+          ) : (
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full border-collapse text-sm">
+                <caption className="sr-only">Current tools</caption>
+                <thead>
+                  <tr className="border-b border-neutral-200 text-left">
+                    <th scope="col" className="py-2 pr-4">
+                      Name
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      Price
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      Amount
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
+                </thead>
+                <tbody>
+                  {tools.map((tool) => (
+                    <tr className="border-b border-neutral-100" key={tool.id}>
+                      <td className="py-2 pr-4">{tool.name}</td>
+                      <td className="py-2 pr-4">
+                        {currencyFormatter.format(tool.price)}
+                      </td>
+                      <td className="py-2 pr-4">{tool.amount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function HeadlessPopoverDemo() {
         </ExplanationList>
       </SubTitle>
       <SourceCodeLink />
-      <div className="space-y-10">
+      <div className="space-y-16">
         <Wrapper title="Popover (for Navigation)">
           <PopoverExample1 />
         </Wrapper>
@@ -45,10 +45,10 @@ const Wrapper = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div>
+  <section>
     <Section name={title} />
     {children}
-  </div>
+  </section>
 );
 
 const PopoverExample1 = () => (

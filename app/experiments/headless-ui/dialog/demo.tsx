@@ -38,7 +38,7 @@ export default function HeadlessDialogDemo() {
       </SubTitle>
       <SourceCodeLink />
 
-      <div className="space-y-10">
+      <div className="space-y-16">
         <Wrapper title="Dialog without transition">
           <DialogExample1 />
         </Wrapper>
@@ -57,10 +57,10 @@ const Wrapper = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div>
+  <section>
     <Section name={title} />
     {children}
-  </div>
+  </section>
 );
 
 const DialogExample1 = () => {
