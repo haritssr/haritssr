@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
-import FooterSpacing from "@/components/FooterSpacing";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import TopBar from "@/components/TopBar";
 
@@ -80,9 +79,7 @@ export default function RootLayout({
         >
           {children}
         </main>
-        <FooterSpacing>
-          <Footer />
-        </FooterSpacing>
+        <Footer />
         <BottomBar />
       </body>
     </html>
