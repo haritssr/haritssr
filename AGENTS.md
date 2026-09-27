@@ -56,6 +56,17 @@ This machine has 8 GB RAM. Optimize commands for low resource usage:
 - Never use `--webpack` with Next.js or build commands; use the default
   Turbopack command instead.
 
+# Local Database Experiments
+
+The task and tools database experiments are available only in development.
+They store SQLite files in `.data-haritssr/` by default; set `TASK_DB_DIR` or
+`TOOLS_DB_DIR` to override that directory. Production builds omit these
+experiments from navigation and the sitemap, and their routes return 404.
+
+Keep them local-only until they have user authentication, authorization, rate
+limits, and durable production storage. See
+[ADR 0008](docs/adr/0008-keep-sqlite-experiments-local-only.md).
+
 # Skill Selection
 
 - Use the skill that is most specific to the task being performed.
