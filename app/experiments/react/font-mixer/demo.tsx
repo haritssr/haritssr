@@ -10,6 +10,25 @@ interface FontMixerProps {
   children: string;
 }
 
+export default function ReactFontMixerDemo() {
+  return (
+    <>
+      <SubTitle>Font Mixer</SubTitle>
+      <SourceCodeLink />
+      <FontMixer fonts={["Arial", "Arial"]}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+        convallis mauris dui, non placerat urna fringilla at. Suspendisse a orci
+        quis arcu tristique sagittis at sed leo. Nam quis neque dapibus, semper
+        nisl non, lacinia ligula. Duis viverra a nisl ut consectetur. Ut
+        elementum fringilla odio viverra egestas. Morbi aliquet lorem lorem, in
+        suscipit nibh tempus quis. Mauris gravida dapibus odio, vitae interdum
+        lectus pretium ut. Vivamus tincidunt laoreet pellentesque. Praesent
+        tincidunt elementum tempus.
+      </FontMixer>
+    </>
+  );
+}
+
 const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
   // 0 < fader <= 25
   const [fader, setFader] = useState(0);
@@ -62,22 +81,3 @@ const FontMixer: React.FC<FontMixerProps> = ({ fonts: [a, b], children }) => {
     </section>
   );
 };
-
-export default function ReactFontMixerDemo() {
-  return (
-    <>
-      <SubTitle>Font Mixer</SubTitle>
-      <SourceCodeLink />
-      <FontMixer fonts={["Arial", "Arial"]}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-        convallis mauris dui, non placerat urna fringilla at. Suspendisse a orci
-        quis arcu tristique sagittis at sed leo. Nam quis neque dapibus, semper
-        nisl non, lacinia ligula. Duis viverra a nisl ut consectetur. Ut
-        elementum fringilla odio viverra egestas. Morbi aliquet lorem lorem, in
-        suscipit nibh tempus quis. Mauris gravida dapibus odio, vitae interdum
-        lectus pretium ut. Vivamus tincidunt laoreet pellentesque. Praesent
-        tincidunt elementum tempus.
-      </FontMixer>
-    </>
-  );
-}

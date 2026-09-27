@@ -7,10 +7,6 @@ import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function HeadlessTabsDemo() {
   return (
     <>
@@ -35,6 +31,10 @@ export default function HeadlessTabsDemo() {
       <Example1 />
     </>
   );
+}
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
 }
 
 function Example1() {

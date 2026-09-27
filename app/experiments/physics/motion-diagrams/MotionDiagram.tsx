@@ -21,76 +21,6 @@ interface MotionValues {
 const DURATION = 10;
 const PLOT = { left: 70, top: 30, width: 580, height: 250 };
 
-function formatValue(value: number, digits = 1) {
-  return String(Number(value.toFixed(digits)));
-}
-
-function getInitialMotion(
-  angular: boolean,
-  accelerated: boolean
-): MotionValues {
-  let acceleration = 0;
-  if (accelerated) {
-    acceleration = angular ? 0.3 : 0.6;
-  }
-
-  return { acceleration, initial: angular ? 2.5 : 5, time: 6 };
-}
-
-function RangeControl({
-  id,
-  label,
-  max,
-  min,
-  onChange,
-  step,
-  unit,
-  value,
-  valueDigits = 1,
-  accentClass = "accent-blue-600",
-}: {
-  id: string;
-  label: string;
-  max: number;
-  min: number;
-  onChange: (value: number) => void;
-  step: number;
-  unit: string;
-  value: number;
-  valueDigits?: number;
-  accentClass?: string;
-}) {
-  return (
-    <div>
-      <div className="mb-2 flex items-baseline justify-between gap-3 text-sm">
-        <label className="font-medium text-zinc-700" htmlFor={id}>
-          {label}
-        </label>
-        <output className="font-mono text-zinc-900 tabular-nums" htmlFor={id}>
-          {formatValue(value, valueDigits)}{" "}
-          <span className="text-zinc-500">{unit}</span>
-        </output>
-      </div>
-      <input
-        className={`w-full cursor-pointer ${accentClass} focus-visible:outline-2 focus-visible:outline-offset-4`}
-        defaultValue={value}
-        id={id}
-        max={max}
-        min={min}
-        onInput={(event) => {
-          onChange(Number(event.currentTarget.value));
-        }}
-        step={step}
-        type="range"
-      />
-      <div className="mt-1 flex justify-between font-mono text-xs text-zinc-400">
-        <span>{formatValue(min)}</span>
-        <span>{formatValue(max)}</span>
-      </div>
-    </div>
-  );
-}
-
 export default function MotionDiagram({
   accelerated,
   areaFormula,
@@ -351,6 +281,76 @@ export default function MotionDiagram({
           <span className="font-medium text-zinc-900">Luas:</span>{" "}
           <span className="font-mono">{areaFormula}</span>
         </p>
+      </div>
+    </div>
+  );
+}
+
+function formatValue(value: number, digits = 1) {
+  return String(Number(value.toFixed(digits)));
+}
+
+function getInitialMotion(
+  angular: boolean,
+  accelerated: boolean
+): MotionValues {
+  let acceleration = 0;
+  if (accelerated) {
+    acceleration = angular ? 0.3 : 0.6;
+  }
+
+  return { acceleration, initial: angular ? 2.5 : 5, time: 6 };
+}
+
+function RangeControl({
+  id,
+  label,
+  max,
+  min,
+  onChange,
+  step,
+  unit,
+  value,
+  valueDigits = 1,
+  accentClass = "accent-blue-600",
+}: {
+  id: string;
+  label: string;
+  max: number;
+  min: number;
+  onChange: (value: number) => void;
+  step: number;
+  unit: string;
+  value: number;
+  valueDigits?: number;
+  accentClass?: string;
+}) {
+  return (
+    <div>
+      <div className="mb-2 flex items-baseline justify-between gap-3 text-sm">
+        <label className="font-medium text-zinc-700" htmlFor={id}>
+          {label}
+        </label>
+        <output className="font-mono text-zinc-900 tabular-nums" htmlFor={id}>
+          {formatValue(value, valueDigits)}{" "}
+          <span className="text-zinc-500">{unit}</span>
+        </output>
+      </div>
+      <input
+        className={`w-full cursor-pointer ${accentClass} focus-visible:outline-2 focus-visible:outline-offset-4`}
+        defaultValue={value}
+        id={id}
+        max={max}
+        min={min}
+        onInput={(event) => {
+          onChange(Number(event.currentTarget.value));
+        }}
+        step={step}
+        type="range"
+      />
+      <div className="mt-1 flex justify-between font-mono text-xs text-zinc-400">
+        <span>{formatValue(min)}</span>
+        <span>{formatValue(max)}</span>
       </div>
     </div>
   );

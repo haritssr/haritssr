@@ -18,6 +18,35 @@ interface GreetingSelectorProps {
   onChange: (value: string) => void;
 }
 
+const ThemeContext = createContext<string | undefined>(undefined);
+
+export default function ReactUseMemo1Demo() {
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+
+  return (
+    <>
+      <SubTitle>
+        useMemo lets you skip re-rendering components when the props are
+        unchanged
+      </SubTitle>
+      <SourceCodeLink />
+      <NameInputAddress
+        address={address}
+        name={name}
+        onChangeAddress={(e: ChangeEvent<HTMLInputElement>) => {
+          setAddress(e.target.value);
+        }}
+        onChangeName={(e: ChangeEvent<HTMLInputElement>) => {
+          setName(e.target.value);
+        }}
+      />
+      <Greeting name={name} />
+      <ThemeYeah name={name} />
+    </>
+  );
+}
+
 function NameInputAddress({
   name,
   address,
@@ -81,8 +110,6 @@ function GreetingSelector({ value, onChange }: GreetingSelectorProps) {
   );
 }
 
-const ThemeContext = createContext<string | undefined>(undefined);
-
 function ThemeYeah({ name }: { name: string }) {
   const [theme, setTheme] = useState("text-black bg-zinc-50");
   function handleClick() {
@@ -116,30 +143,3 @@ const GreetingTheme = memo(({ name }: { name: string }) => {
     </h3>
   );
 });
-
-export default function ReactUseMemo1Demo() {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-
-  return (
-    <>
-      <SubTitle>
-        useMemo lets you skip re-rendering components when the props are
-        unchanged
-      </SubTitle>
-      <SourceCodeLink />
-      <NameInputAddress
-        address={address}
-        name={name}
-        onChangeAddress={(e: ChangeEvent<HTMLInputElement>) => {
-          setAddress(e.target.value);
-        }}
-        onChangeName={(e: ChangeEvent<HTMLInputElement>) => {
-          setName(e.target.value);
-        }}
-      />
-      <Greeting name={name} />
-      <ThemeYeah name={name} />
-    </>
-  );
-}

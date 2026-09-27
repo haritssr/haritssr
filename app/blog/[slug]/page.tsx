@@ -63,16 +63,14 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
 const blogDateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   month: "long",
   timeZone: "UTC",
   year: "numeric",
 });
-
-function formatDate(date: string) {
-  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
-}
 
 export default async function BlogPostPage({
   params,
@@ -120,7 +118,9 @@ export default async function BlogPostPage({
   );
 }
 
-export const dynamicParams = false;
+function formatDate(date: string) {
+  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
+}
 
 function Content({ children }: { children: React.ReactNode }) {
   return (

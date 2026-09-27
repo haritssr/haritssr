@@ -8,10 +8,6 @@ import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-const Confetti = dynamic(async () => await import("react-confetti"), {
-  ssr: false,
-});
-
 export default function ReactConfettiDemo() {
   const { width, height } = useWindowSize();
   return (
@@ -32,3 +28,7 @@ export default function ReactConfettiDemo() {
     </>
   );
 }
+
+const Confetti = dynamic(async () => await import("react-confetti"), {
+  ssr: false,
+});

@@ -23,10 +23,6 @@ export interface QuantityDependents {
   unitSymbol: string;
 }
 
-function MathSymbol({ value }: { value: string }) {
-  return <span>{katexify(value, false)}</span>;
-}
-
 export default function DependentFormulas({
   quantities,
 }: {
@@ -157,4 +153,8 @@ export default function DependentFormulas({
       </div>
     </div>
   );
+}
+
+function MathSymbol({ value }: { value: string }) {
+  return <span>{katexify(value, false)}</span>;
 }

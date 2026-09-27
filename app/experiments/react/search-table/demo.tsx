@@ -17,36 +17,6 @@ interface User {
 
 const searchableFields = ["firstName", "lastName", "maidenName"] as const;
 
-function isUser(value: unknown): value is User {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-
-  const user = value as Record<string, unknown>;
-  return (
-    typeof user.id === "number" &&
-    typeof user.firstName === "string" &&
-    typeof user.lastName === "string" &&
-    typeof user.maidenName === "string" &&
-    typeof user.age === "number"
-  );
-}
-
-function useDebounce(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-}
-
 export default function ReactSearchTableDemo() {
   const [query, setQuery] = useState<string>("");
   const [users, setUsers] = useState<User[]>([]);
@@ -123,4 +93,34 @@ export default function ReactSearchTableDemo() {
       </table>
     </>
   );
+}
+
+function isUser(value: unknown): value is User {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const user = value as Record<string, unknown>;
+  return (
+    typeof user.id === "number" &&
+    typeof user.firstName === "string" &&
+    typeof user.lastName === "string" &&
+    typeof user.maidenName === "string" &&
+    typeof user.age === "number"
+  );
+}
+
+function useDebounce(value: string, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
 }

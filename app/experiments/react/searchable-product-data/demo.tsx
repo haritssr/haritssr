@@ -25,6 +25,26 @@ const productData: productDataType[] = [
   { category: "Vegetables", price: "$1", stocked: true, name: "Peas" },
 ];
 
+export default function ReactSearchableProductDataDemo() {
+  return (
+    <>
+      <SubTitle>
+        By
+        <ExternalLink
+          href="https://beta.reactjs.org/learn/thinking-in-react"
+          name="beta.reactjs.org"
+        />
+        <ExplanationList>
+          <li>Stock finder with filter.</li>
+          <li>Haven&#39;t applied debounce.</li>
+        </ExplanationList>
+      </SubTitle>
+      <SourceCodeLink />
+      <FilterableProductTable products={productData} />
+    </>
+  );
+}
+
 const ProductCategoryRow = ({ category }: { category: string }) => (
   <tr>
     <th colSpan={2} scope="rowgroup">
@@ -150,23 +170,3 @@ const FilterableProductTable = ({
     </div>
   );
 };
-
-export default function ReactSearchableProductDataDemo() {
-  return (
-    <>
-      <SubTitle>
-        By
-        <ExternalLink
-          href="https://beta.reactjs.org/learn/thinking-in-react"
-          name="beta.reactjs.org"
-        />
-        <ExplanationList>
-          <li>Stock finder with filter.</li>
-          <li>Haven&#39;t applied debounce.</li>
-        </ExplanationList>
-      </SubTitle>
-      <SourceCodeLink />
-      <FilterableProductTable products={productData} />
-    </>
-  );
-}

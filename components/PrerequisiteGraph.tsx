@@ -37,6 +37,148 @@ const GRAPH_PADDING = 24;
 const MAX_NODES_PER_COLUMN = 12;
 const ROW_GAP = 14;
 
+export default function PrerequisiteGraph({
+  edges,
+  nodes,
+}: {
+  edges: readonly PrerequisiteGraphEdgeData[];
+  nodes: readonly PrerequisiteGraphNodeData[];
+}) {
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const nodeById = useMemo(
+    () => new Map(nodes.map((node) => [node.id, node])),
+    [nodes]
+  );
+  const prerequisitesByNode = useMemo(
+    () => createPrerequisiteMap(edges),
+    [edges]
+  );
+  const layout = useMemo(() => createGraphLayout(nodes, edges), [edges, nodes]);
+  const activeNodeDepths = useMemo(() => {
+    if (selectedNodeId === null) {
+      return null;
+    }
+
+    const depths = new Map([[selectedNodeId, 0]]);
+    const pending = [selectedNodeId];
+
+    while (pending.length > 0) {
+      const currentNodeId = pending.pop();
+
+      if (currentNodeId === undefined) {
+        continue;
+      }
+
+      const currentDepth = depths.get(currentNodeId) ?? 0;
+
+      for (const prerequisiteId of prerequisitesByNode.get(currentNodeId) ??
+        []) {
+        const nextDepth = currentDepth + 1;
+        const previousDepth = depths.get(prerequisiteId);
+
+        if (previousDepth !== undefined && previousDepth <= nextDepth) {
+          continue;
+        }
+
+        depths.set(prerequisiteId, nextDepth);
+        pending.push(prerequisiteId);
+      }
+    }
+
+    return depths;
+  }, [prerequisitesByNode, selectedNodeId]);
+  const activeNodeIds = useMemo(
+    () => (activeNodeDepths === null ? null : new Set(activeNodeDepths.keys())),
+    [activeNodeDepths]
+  );
+  const activeEdgeKeys = useMemo(() => {
+    if (activeNodeIds === null) {
+      return null;
+    }
+
+    return new Set(
+      edges
+        .filter(
+          (edge) => activeNodeIds.has(edge.from) && activeNodeIds.has(edge.to)
+        )
+        .map(getEdgeKey)
+    );
+  }, [activeNodeIds, edges]);
+  const selectedNode =
+    selectedNodeId === null ? undefined : nodeById.get(selectedNodeId);
+
+  function resetSelection() {
+    setSelectedNodeId(null);
+  }
+
+  function selectNode(nodeId: string) {
+    setSelectedNodeId((current) => (current === nodeId ? null : nodeId));
+  }
+
+  return (
+    <Dialog.Root>
+      <div className="border-border bg-background overflow-hidden rounded-2xl border">
+        <GraphToolbar
+          onReset={resetSelection}
+          selectedNode={selectedNode}
+          showFullViewButton
+        />
+        <GraphStatus
+          activeNodeIds={activeNodeIds}
+          selectedNode={selectedNode}
+        />
+        <GraphViewport
+          activeEdgeKeys={activeEdgeKeys}
+          activeNodeDepths={activeNodeDepths}
+          activeNodeIds={activeNodeIds}
+          edges={edges}
+          layout={layout}
+          nodes={nodes}
+          onSelectNode={selectNode}
+          selectedNodeId={selectedNodeId}
+        />
+      </div>
+      <Dialog.Portal>
+        <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+        <Dialog.Popup className="bg-background text-foreground fixed inset-0 z-90 flex min-h-0 flex-col outline-hidden">
+          <div className="border-border flex shrink-0 items-center justify-between border-b px-3 py-2.5">
+            <Dialog.Title className="text-sm font-medium">
+              Graf Prasyarat
+            </Dialog.Title>
+            <Dialog.Close
+              aria-label="Tutup tampilan penuh"
+              className="text-foreground/60 hover:bg-interface-hover hover:text-foreground focus-visible:outline-action inline-flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
+              type="button"
+            >
+              <XMarkIcon aria-hidden="true" className="size-5" />
+            </Dialog.Close>
+          </div>
+          <GraphToolbar
+            onReset={resetSelection}
+            selectedNode={selectedNode}
+            showFullViewButton={false}
+          />
+          <GraphStatus
+            activeNodeIds={activeNodeIds}
+            selectedNode={selectedNode}
+          />
+          <GraphViewport
+            activeEdgeKeys={activeEdgeKeys}
+            activeNodeDepths={activeNodeDepths}
+            activeNodeIds={activeNodeIds}
+            edges={edges}
+            fullView
+            layout={layout}
+            nodes={nodes}
+            onSelectNode={selectNode}
+            selectedNodeId={selectedNodeId}
+          />
+        </Dialog.Popup>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
+}
+
 function getEdgeKey(edge: PrerequisiteGraphEdgeData) {
   return `${edge.from}->${edge.to}`;
 }
@@ -400,147 +542,5 @@ function GraphViewport({
         })}
       </div>
     </div>
-  );
-}
-
-export default function PrerequisiteGraph({
-  edges,
-  nodes,
-}: {
-  edges: readonly PrerequisiteGraphEdgeData[];
-  nodes: readonly PrerequisiteGraphNodeData[];
-}) {
-  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
-  const nodeById = useMemo(
-    () => new Map(nodes.map((node) => [node.id, node])),
-    [nodes]
-  );
-  const prerequisitesByNode = useMemo(
-    () => createPrerequisiteMap(edges),
-    [edges]
-  );
-  const layout = useMemo(() => createGraphLayout(nodes, edges), [edges, nodes]);
-  const activeNodeDepths = useMemo(() => {
-    if (selectedNodeId === null) {
-      return null;
-    }
-
-    const depths = new Map([[selectedNodeId, 0]]);
-    const pending = [selectedNodeId];
-
-    while (pending.length > 0) {
-      const currentNodeId = pending.pop();
-
-      if (currentNodeId === undefined) {
-        continue;
-      }
-
-      const currentDepth = depths.get(currentNodeId) ?? 0;
-
-      for (const prerequisiteId of prerequisitesByNode.get(currentNodeId) ??
-        []) {
-        const nextDepth = currentDepth + 1;
-        const previousDepth = depths.get(prerequisiteId);
-
-        if (previousDepth !== undefined && previousDepth <= nextDepth) {
-          continue;
-        }
-
-        depths.set(prerequisiteId, nextDepth);
-        pending.push(prerequisiteId);
-      }
-    }
-
-    return depths;
-  }, [prerequisitesByNode, selectedNodeId]);
-  const activeNodeIds = useMemo(
-    () => (activeNodeDepths === null ? null : new Set(activeNodeDepths.keys())),
-    [activeNodeDepths]
-  );
-  const activeEdgeKeys = useMemo(() => {
-    if (activeNodeIds === null) {
-      return null;
-    }
-
-    return new Set(
-      edges
-        .filter(
-          (edge) => activeNodeIds.has(edge.from) && activeNodeIds.has(edge.to)
-        )
-        .map(getEdgeKey)
-    );
-  }, [activeNodeIds, edges]);
-  const selectedNode =
-    selectedNodeId === null ? undefined : nodeById.get(selectedNodeId);
-
-  function resetSelection() {
-    setSelectedNodeId(null);
-  }
-
-  function selectNode(nodeId: string) {
-    setSelectedNodeId((current) => (current === nodeId ? null : nodeId));
-  }
-
-  return (
-    <Dialog.Root>
-      <div className="border-border bg-background overflow-hidden rounded-2xl border">
-        <GraphToolbar
-          onReset={resetSelection}
-          selectedNode={selectedNode}
-          showFullViewButton
-        />
-        <GraphStatus
-          activeNodeIds={activeNodeIds}
-          selectedNode={selectedNode}
-        />
-        <GraphViewport
-          activeEdgeKeys={activeEdgeKeys}
-          activeNodeDepths={activeNodeDepths}
-          activeNodeIds={activeNodeIds}
-          edges={edges}
-          layout={layout}
-          nodes={nodes}
-          onSelectNode={selectNode}
-          selectedNodeId={selectedNodeId}
-        />
-      </div>
-      <Dialog.Portal>
-        <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
-        <Dialog.Popup className="bg-background text-foreground fixed inset-0 z-90 flex min-h-0 flex-col outline-hidden">
-          <div className="border-border flex shrink-0 items-center justify-between border-b px-3 py-2.5">
-            <Dialog.Title className="text-sm font-medium">
-              Graf Prasyarat
-            </Dialog.Title>
-            <Dialog.Close
-              aria-label="Tutup tampilan penuh"
-              className="text-foreground/60 hover:bg-interface-hover hover:text-foreground focus-visible:outline-action inline-flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
-              type="button"
-            >
-              <XMarkIcon aria-hidden="true" className="size-5" />
-            </Dialog.Close>
-          </div>
-          <GraphToolbar
-            onReset={resetSelection}
-            selectedNode={selectedNode}
-            showFullViewButton={false}
-          />
-          <GraphStatus
-            activeNodeIds={activeNodeIds}
-            selectedNode={selectedNode}
-          />
-          <GraphViewport
-            activeEdgeKeys={activeEdgeKeys}
-            activeNodeDepths={activeNodeDepths}
-            activeNodeIds={activeNodeIds}
-            edges={edges}
-            fullView
-            layout={layout}
-            nodes={nodes}
-            onSelectNode={selectNode}
-            selectedNodeId={selectedNodeId}
-          />
-        </Dialog.Popup>
-      </Dialog.Portal>
-    </Dialog.Root>
   );
 }

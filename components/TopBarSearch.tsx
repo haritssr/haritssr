@@ -7,56 +7,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
 
-const loadGlobalSearchDialog = async () => await import("./GlobalSearchDialog");
-const GlobalSearchDialog = dynamic(loadGlobalSearchDialog);
-
 type SearchIndexStatus = "error" | "idle" | "loading" | "ready";
 
 let searchIndexRequest: Promise<readonly RouteDoc[]> | undefined;
-
-function isRouteDoc(value: unknown): value is RouteDoc {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-
-  const candidate = value as Partial<RouteDoc>;
-  return (
-    typeof candidate.description === "string" &&
-    typeof candidate.group === "string" &&
-    typeof candidate.route === "string" &&
-    typeof candidate.title === "string" &&
-    (candidate.suggestion === undefined ||
-      candidate.suggestion === "Navigation")
-  );
-}
-
-async function fetchSearchIndex(): Promise<readonly RouteDoc[]> {
-  const response = await fetch("/api/search-index");
-  if (!response.ok) {
-    throw new Error(`Search index request failed: ${response.status}`);
-  }
-
-  const searchIndexPayload: unknown = await response.json();
-  if (
-    !Array.isArray(searchIndexPayload) ||
-    !searchIndexPayload.every(isRouteDoc)
-  ) {
-    throw new TypeError("Search index response is invalid");
-  }
-
-  return searchIndexPayload;
-}
-
-async function requestSearchIndex(): Promise<readonly RouteDoc[]> {
-  searchIndexRequest ??= fetchSearchIndex();
-
-  try {
-    return await searchIndexRequest;
-  } catch (error: unknown) {
-    searchIndexRequest = undefined;
-    throw error;
-  }
-}
 
 export default function TopBarSearch() {
   const [open, setOpen] = useState(false);
@@ -157,4 +110,51 @@ export default function TopBarSearch() {
       ) : null}
     </>
   );
+}
+
+const loadGlobalSearchDialog = async () => await import("./GlobalSearchDialog");
+const GlobalSearchDialog = dynamic(loadGlobalSearchDialog);
+
+function isRouteDoc(value: unknown): value is RouteDoc {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const candidate = value as Partial<RouteDoc>;
+  return (
+    typeof candidate.description === "string" &&
+    typeof candidate.group === "string" &&
+    typeof candidate.route === "string" &&
+    typeof candidate.title === "string" &&
+    (candidate.suggestion === undefined ||
+      candidate.suggestion === "Navigation")
+  );
+}
+
+async function fetchSearchIndex(): Promise<readonly RouteDoc[]> {
+  const response = await fetch("/api/search-index");
+  if (!response.ok) {
+    throw new Error(`Search index request failed: ${response.status}`);
+  }
+
+  const searchIndexPayload: unknown = await response.json();
+  if (
+    !Array.isArray(searchIndexPayload) ||
+    !searchIndexPayload.every(isRouteDoc)
+  ) {
+    throw new TypeError("Search index response is invalid");
+  }
+
+  return searchIndexPayload;
+}
+
+async function requestSearchIndex(): Promise<readonly RouteDoc[]> {
+  searchIndexRequest ??= fetchSearchIndex();
+
+  try {
+    return await searchIndexRequest;
+  } catch (error: unknown) {
+    searchIndexRequest = undefined;
+    throw error;
+  }
 }

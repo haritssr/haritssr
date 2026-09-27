@@ -40,40 +40,6 @@ const teachers: Teacher[] = [
   { id: "2", title: "Aura Salvia", region: "West Jakarta" },
 ];
 
-//individual generict select option components
-function GenericSelectComponent<TValue extends Base>({
-  values,
-  onChange,
-  selectType,
-}: GenericTypeSelect<TValue>) {
-  //will fire if the option choosed (after click)
-  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const matchedOption = values.find(
-      (value) => value.id === event.target.value
-    );
-    if (matchedOption) {
-      onChange(matchedOption);
-    }
-  };
-
-  return (
-    <div>
-      <div className="text-sm">{selectType}</div>
-      <select
-        aria-label={selectType}
-        className="rounded border border-zinc-400"
-        onChange={onSelectChange}
-      >
-        {values.map((value) => (
-          <option key={value.id} value={value.id}>
-            {value.title}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
-
 export default function ReactGenericSelectDemo() {
   const [subject, setSubject] = useState<Subject>(subjects[0]);
   const [teacher, setTeacher] = useState<Teacher>(teachers[0]);
@@ -127,5 +93,39 @@ export default function ReactGenericSelectDemo() {
         </div>
       </div>
     </>
+  );
+}
+
+//individual generict select option components
+function GenericSelectComponent<TValue extends Base>({
+  values,
+  onChange,
+  selectType,
+}: GenericTypeSelect<TValue>) {
+  //will fire if the option choosed (after click)
+  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const matchedOption = values.find(
+      (value) => value.id === event.target.value
+    );
+    if (matchedOption) {
+      onChange(matchedOption);
+    }
+  };
+
+  return (
+    <div>
+      <div className="text-sm">{selectType}</div>
+      <select
+        aria-label={selectType}
+        className="rounded border border-zinc-400"
+        onChange={onSelectChange}
+      >
+        {values.map((value) => (
+          <option key={value.id} value={value.id}>
+            {value.title}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }

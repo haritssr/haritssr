@@ -24,8 +24,6 @@ const data = appleStock.slice(0, 20);
 const margin = 32;
 const defaultWidth = 100;
 const defaultHeight = 100;
-const getXValue = (d: AppleStock) => d.date;
-const getYValue = (d: AppleStock) => d.close;
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -142,3 +140,5 @@ export default function VisxBarChartDemo() {
     </>
   );
 }
+const getXValue = (d: AppleStock) => d.date;
+const getYValue = (d: AppleStock) => d.close;

@@ -15,12 +15,6 @@ interface FooterActionsProps {
   rssPath: string;
 }
 
-function isBeforeInstallPromptEvent(
-  event: Event
-): event is BeforeInstallPromptEvent {
-  return "prompt" in event && typeof event.prompt === "function";
-}
-
 export default function FooterActions({ rssPath }: FooterActionsProps) {
   return (
     <Toast.Provider>
@@ -38,6 +32,12 @@ export default function FooterActions({ rssPath }: FooterActionsProps) {
       </Toast.Portal>
     </Toast.Provider>
   );
+}
+
+function isBeforeInstallPromptEvent(
+  event: Event
+): event is BeforeInstallPromptEvent {
+  return "prompt" in event && typeof event.prompt === "function";
 }
 
 function InstallButton() {

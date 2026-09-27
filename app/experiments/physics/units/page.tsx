@@ -33,20 +33,6 @@ interface UnitsTableProps {
   units: readonly UnitDefinition[];
 }
 
-function MathSymbol({
-  useDisplayFractions = false,
-  value,
-}: {
-  useDisplayFractions?: boolean;
-  value: string;
-}) {
-  const math = useDisplayFractions
-    ? value.replaceAll("\\frac", "\\dfrac")
-    : value;
-
-  return <span>{katexify(math, false)}</span>;
-}
-
 const PREREQUISITE_GRAPH_NODES = [
   ...BASE_UNITS.map((unit): PrerequisiteGraphNodeData => ({
     id: `base:${unit.quantity}`,
@@ -61,6 +47,78 @@ const PREREQUISITE_GRAPH_NODES = [
     symbol: <MathSymbol value={unit.quantitySymbol} />,
   })),
 ];
+
+const PREREQUISITE_GRAPH_EDGES = createPrerequisiteGraphEdges();
+
+const QUANTITY_DEPENDENTS = createQuantityDependents();
+
+export const metadata: Metadata = {
+  ...getExperimentMetadata("physics", "units"),
+  description: DESCRIPTION,
+};
+
+export default function UnitsPage() {
+  return (
+    <>
+      <SubTitle>{DESCRIPTION}</SubTitle>
+      <SourceCodeLink />
+      <div className="space-y-16">
+        <section>
+          <Section name="Besaran Pokok" />
+          <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />
+        </section>
+        <section>
+          <Section name="Besaran Turunan" />
+          <UnitsTable
+            caption="Besaran turunan yang umum dipelajari di SMA"
+            units={DERIVED_UNITS}
+          />
+        </section>
+        <section className="select-none">
+          <Section name="Peta Prasyarat" />
+          <p className="text-foreground/70 mb-4 text-sm">
+            Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
+            digunakan di SMA.
+          </p>
+          <PrerequisiteDiagrams units={DERIVED_UNITS} />
+        </section>
+        <section>
+          <Section name="Besaran yang Bergantung" />
+          <p className="text-foreground/70 mb-4 text-sm">
+            Pilih besaran untuk melihat rumus dan besaran lain yang langsung
+            menggunakannya dalam daftar fisika SMA ini.
+          </p>
+          <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
+        </section>
+        <section className="select-none">
+          <Section name="Graf Prasyarat" />
+          <p className="text-foreground/70 mb-4 text-sm">
+            Klik sebuah besaran untuk menyorot jalur yang menghubungkannya
+            dengan prasyarat besaran pokok dan turunan.
+          </p>
+          <PrerequisiteGraph
+            edges={PREREQUISITE_GRAPH_EDGES}
+            nodes={PREREQUISITE_GRAPH_NODES}
+          />
+        </section>
+      </div>
+    </>
+  );
+}
+
+function MathSymbol({
+  useDisplayFractions = false,
+  value,
+}: {
+  useDisplayFractions?: boolean;
+  value: string;
+}) {
+  const math = useDisplayFractions
+    ? value.replaceAll("\\frac", "\\dfrac")
+    : value;
+
+  return <span>{katexify(math, false)}</span>;
+}
 
 function createPrerequisiteGraphEdges(): PrerequisiteGraphEdgeData[] {
   const nodeIdByLabel = new Map(
@@ -100,8 +158,6 @@ function createPrerequisiteGraphEdges(): PrerequisiteGraphEdgeData[] {
 
   return edges;
 }
-
-const PREREQUISITE_GRAPH_EDGES = createPrerequisiteGraphEdges();
 
 function createQuantityDependents(): QuantityDependents[] {
   const quantities = [...BASE_UNITS, ...DERIVED_UNITS];
@@ -158,8 +214,6 @@ function createQuantityDependents(): QuantityDependents[] {
     unitSymbol: unit.unitSymbol,
   }));
 }
-
-const QUANTITY_DEPENDENTS = createQuantityDependents();
 
 function getFormulaDefinitions(quantity: string) {
   const definitions = DERIVED_FORMULAS[quantity];
@@ -344,59 +398,5 @@ function UnitsTable({ caption, units }: UnitsTableProps) {
         </tbody>
       </table>
     </div>
-  );
-}
-
-export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "units"),
-  description: DESCRIPTION,
-};
-
-export default function UnitsPage() {
-  return (
-    <>
-      <SubTitle>{DESCRIPTION}</SubTitle>
-      <SourceCodeLink />
-      <div className="space-y-16">
-        <section>
-          <Section name="Besaran Pokok" />
-          <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />
-        </section>
-        <section>
-          <Section name="Besaran Turunan" />
-          <UnitsTable
-            caption="Besaran turunan yang umum dipelajari di SMA"
-            units={DERIVED_UNITS}
-          />
-        </section>
-        <section className="select-none">
-          <Section name="Peta Prasyarat" />
-          <p className="text-foreground/70 mb-4 text-sm">
-            Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
-            digunakan di SMA.
-          </p>
-          <PrerequisiteDiagrams units={DERIVED_UNITS} />
-        </section>
-        <section>
-          <Section name="Besaran yang Bergantung" />
-          <p className="text-foreground/70 mb-4 text-sm">
-            Pilih besaran untuk melihat rumus dan besaran lain yang langsung
-            menggunakannya dalam daftar fisika SMA ini.
-          </p>
-          <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
-        </section>
-        <section className="select-none">
-          <Section name="Graf Prasyarat" />
-          <p className="text-foreground/70 mb-4 text-sm">
-            Klik sebuah besaran untuk menyorot jalur yang menghubungkannya
-            dengan prasyarat besaran pokok dan turunan.
-          </p>
-          <PrerequisiteGraph
-            edges={PREREQUISITE_GRAPH_EDGES}
-            nodes={PREREQUISITE_GRAPH_NODES}
-          />
-        </section>
-      </div>
-    </>
   );
 }

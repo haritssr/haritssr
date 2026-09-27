@@ -28,22 +28,6 @@ interface Images {
   href: string;
 }
 
-// generate new input value after certain delayed time (in ms) using useEffect
-function useDebounce(value: string | null, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState<string | null>(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-}
-
 export default function ReactSearchInterpolDemo() {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [search, setSearch] = useState<string | null>(null);
@@ -127,4 +111,20 @@ export default function ReactSearchInterpolDemo() {
       </div>
     </>
   );
+}
+
+// generate new input value after certain delayed time (in ms) using useEffect
+function useDebounce(value: string | null, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState<string | null>(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
 }

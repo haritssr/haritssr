@@ -20,6 +20,37 @@ type MyInputProps = InputHTMLAttributes<HTMLInputElement> & {
   ref?: Ref<MyInputHandle>;
 };
 
+type AddCommentsProps = InputHTMLAttributes<HTMLInputElement> & {
+  ref?: Ref<HTMLInputElement>;
+};
+
+interface CommentsListHandle {
+  scrollToBottom: () => void;
+}
+
+interface CommentsListProps {
+  ref?: Ref<CommentsListHandle>;
+}
+
+interface PostHandle {
+  scrollAndFocusAddComment: () => void;
+}
+
+type PostProps = HTMLAttributes<HTMLDivElement> & {
+  ref?: Ref<PostHandle>;
+};
+
+export default function ReactUseImperativeHandleDemo() {
+  return (
+    <>
+      <SubTitle>Example</SubTitle>
+      <SourceCodeLink />
+      <SomeApp />
+      <Yada />
+    </>
+  );
+}
+
 const MyInput = function MyInput({ ref, ...props }: MyInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -58,10 +89,6 @@ function SomeApp() {
   );
 }
 
-type AddCommentsProps = InputHTMLAttributes<HTMLInputElement> & {
-  ref?: Ref<HTMLInputElement>;
-};
-
 const AddComments = function AddComents({ ref, ..._props }: AddCommentsProps) {
   return (
     <input
@@ -72,14 +99,6 @@ const AddComments = function AddComents({ ref, ..._props }: AddCommentsProps) {
     />
   );
 };
-
-interface CommentsListHandle {
-  scrollToBottom: () => void;
-}
-
-interface CommentsListProps {
-  ref?: Ref<CommentsListHandle>;
-}
 
 const CommentsList = function CommentList({
   ref,
@@ -107,14 +126,6 @@ const CommentsList = function CommentList({
       {comments}
     </div>
   );
-};
-
-interface PostHandle {
-  scrollAndFocusAddComment: () => void;
-}
-
-type PostProps = HTMLAttributes<HTMLDivElement> & {
-  ref?: Ref<PostHandle>;
 };
 
 const Post = function Post({ ref, ...props }: PostProps) {
@@ -151,17 +162,6 @@ function Yada() {
         Fuck
       </button>
       <Post ref={buttonRef} />
-    </>
-  );
-}
-
-export default function ReactUseImperativeHandleDemo() {
-  return (
-    <>
-      <SubTitle>Example</SubTitle>
-      <SourceCodeLink />
-      <SomeApp />
-      <Yada />
     </>
   );
 }

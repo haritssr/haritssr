@@ -33,6 +33,58 @@ const initialPosition: Position = {
   y: 0,
 };
 
+export default function ReactUseStateDraggableBoxDemo() {
+  const [shape, setShape] = useState<Shape>({
+    color: "orange",
+    position: initialPosition,
+  });
+
+  function handleMove(dx: number, dy: number) {
+    setShape({
+      ...shape,
+      position: {
+        x: shape.position.x + dx,
+        y: shape.position.y + dy,
+      },
+    });
+  }
+
+  function handleColorChange(e: ChangeEvent<HTMLSelectElement>) {
+    setShape({
+      ...shape,
+      color: e.target.value,
+    });
+  }
+
+  return (
+    <>
+      <SubTitle>
+        Draggable Box By
+        <ExternalLink
+          href="https://beta.reactjs.org/learn/updating-objects-in-state"
+          name="beta.reactjs.org"
+        />
+      </SubTitle>
+      <SourceCodeLink />
+      <div className="mb-5 w-full sm:w-1/6">
+        <select
+          aria-label="Box color"
+          onChange={handleColorChange}
+          value={shape.color}
+        >
+          <option value="orange">Orange</option>
+          <option value="lightpink">Lightpink</option>
+          <option value="aliceblue">Aliceblue</option>
+        </select>
+      </div>
+      <Background position={initialPosition} />
+      <Box color={shape.color} onMove={handleMove} position={shape.position}>
+        Drag Me!
+      </Box>
+    </>
+  );
+}
+
 // initial value of useState should be null, can't {x: 0, y: 0}, or it will buggy like shit
 function Box({ children, color, position, onMove }: BoxProps) {
   const [lastCoordinates, setLastCoordinates] = useState<{
@@ -98,57 +150,5 @@ function Background({ position }: BackgroundProps) {
         backgroundColor: "rgba(200, 200, 0, 0.2)",
       }}
     />
-  );
-}
-
-export default function ReactUseStateDraggableBoxDemo() {
-  const [shape, setShape] = useState<Shape>({
-    color: "orange",
-    position: initialPosition,
-  });
-
-  function handleMove(dx: number, dy: number) {
-    setShape({
-      ...shape,
-      position: {
-        x: shape.position.x + dx,
-        y: shape.position.y + dy,
-      },
-    });
-  }
-
-  function handleColorChange(e: ChangeEvent<HTMLSelectElement>) {
-    setShape({
-      ...shape,
-      color: e.target.value,
-    });
-  }
-
-  return (
-    <>
-      <SubTitle>
-        Draggable Box By
-        <ExternalLink
-          href="https://beta.reactjs.org/learn/updating-objects-in-state"
-          name="beta.reactjs.org"
-        />
-      </SubTitle>
-      <SourceCodeLink />
-      <div className="mb-5 w-full sm:w-1/6">
-        <select
-          aria-label="Box color"
-          onChange={handleColorChange}
-          value={shape.color}
-        >
-          <option value="orange">Orange</option>
-          <option value="lightpink">Lightpink</option>
-          <option value="aliceblue">Aliceblue</option>
-        </select>
-      </div>
-      <Background position={initialPosition} />
-      <Box color={shape.color} onMove={handleMove} position={shape.position}>
-        Drag Me!
-      </Box>
-    </>
   );
 }

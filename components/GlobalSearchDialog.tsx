@@ -36,105 +36,6 @@ interface SearchMatchTextProps {
 
 const MAIN_ROUTES = new Set(["/projects", "/experiments", "/blog", "/design"]);
 
-function SearchMatchText({ query, text }: SearchMatchTextProps) {
-  const ranges = getSearchMatchRanges(text, query);
-  if (ranges.length === 0) {
-    return text;
-  }
-
-  const parts = [];
-  let offset = 0;
-  for (const range of ranges) {
-    if (range.start > offset) {
-      parts.push(text.slice(offset, range.start));
-    }
-    parts.push(
-      <mark
-        className="text-foreground bg-transparent"
-        key={`${range.start}-${range.end}`}
-      >
-        {text.slice(range.start, range.end)}
-      </mark>
-    );
-    offset = range.end;
-  }
-  if (offset < text.length) {
-    parts.push(text.slice(offset));
-  }
-
-  return parts;
-}
-
-function SearchResultItem({
-  entry,
-  query,
-  isSearching,
-  onSelect,
-}: {
-  entry: RouteDoc;
-  query: string;
-  isSearching: boolean;
-  onSelect: (route: string) => void;
-}) {
-  return (
-    <Command.Item
-      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-4 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border"
-      onSelect={onSelect}
-      value={entry.route}
-    >
-      <div className="min-w-0 flex-1 space-y-1">
-        <div className="truncate text-sm font-medium">{entry.title}</div>
-        {!isSearching || MAIN_ROUTES.has(entry.route) ? (
-          <div className="text-foreground/60 truncate text-xs">
-            {isSearching ? (
-              <SearchMatchText
-                query={query}
-                text={`${entry.group} · ${entry.description}`}
-              />
-            ) : (
-              entry.description
-            )}
-          </div>
-        ) : null}
-        {isSearching ? (
-          <div className="text-foreground/40 truncate text-xs">
-            {entry.route}
-          </div>
-        ) : null}
-      </div>
-      <ArrowUpRightIcon
-        aria-hidden="true"
-        className="text-foreground/40 size-4 shrink-0"
-      />
-    </Command.Item>
-  );
-}
-
-function getSearchLabels(
-  indexStatus: GlobalSearchDialogProps["indexStatus"],
-  isSearching: boolean,
-  resultCount: number
-) {
-  if (indexStatus === "error") {
-    return {
-      groupTitle: "Navigation fallback",
-      listLabel: "Navigation fallback",
-      resultStatus: "Full search unavailable",
-    };
-  }
-
-  const resultStatus = isSearching
-    ? `${resultCount} results`
-    : "Jump to a page";
-
-  return {
-    groupTitle: isSearching ? "Search results" : "Navigation",
-    listLabel: isSearching ? "Search results" : "Suggested pages",
-    resultStatus:
-      indexStatus === "loading" ? "Loading all pages…" : resultStatus,
-  };
-}
-
 export default function GlobalSearchDialog({
   entries,
   indexStatus,
@@ -286,4 +187,103 @@ export default function GlobalSearchDialog({
       </Dialog.Portal>
     </Dialog.Root>
   );
+}
+
+function SearchMatchText({ query, text }: SearchMatchTextProps) {
+  const ranges = getSearchMatchRanges(text, query);
+  if (ranges.length === 0) {
+    return text;
+  }
+
+  const parts = [];
+  let offset = 0;
+  for (const range of ranges) {
+    if (range.start > offset) {
+      parts.push(text.slice(offset, range.start));
+    }
+    parts.push(
+      <mark
+        className="text-foreground bg-transparent"
+        key={`${range.start}-${range.end}`}
+      >
+        {text.slice(range.start, range.end)}
+      </mark>
+    );
+    offset = range.end;
+  }
+  if (offset < text.length) {
+    parts.push(text.slice(offset));
+  }
+
+  return parts;
+}
+
+function SearchResultItem({
+  entry,
+  query,
+  isSearching,
+  onSelect,
+}: {
+  entry: RouteDoc;
+  query: string;
+  isSearching: boolean;
+  onSelect: (route: string) => void;
+}) {
+  return (
+    <Command.Item
+      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-4 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border"
+      onSelect={onSelect}
+      value={entry.route}
+    >
+      <div className="min-w-0 flex-1 space-y-1">
+        <div className="truncate text-sm font-medium">{entry.title}</div>
+        {!isSearching || MAIN_ROUTES.has(entry.route) ? (
+          <div className="text-foreground/60 truncate text-xs">
+            {isSearching ? (
+              <SearchMatchText
+                query={query}
+                text={`${entry.group} · ${entry.description}`}
+              />
+            ) : (
+              entry.description
+            )}
+          </div>
+        ) : null}
+        {isSearching ? (
+          <div className="text-foreground/40 truncate text-xs">
+            {entry.route}
+          </div>
+        ) : null}
+      </div>
+      <ArrowUpRightIcon
+        aria-hidden="true"
+        className="text-foreground/40 size-4 shrink-0"
+      />
+    </Command.Item>
+  );
+}
+
+function getSearchLabels(
+  indexStatus: GlobalSearchDialogProps["indexStatus"],
+  isSearching: boolean,
+  resultCount: number
+) {
+  if (indexStatus === "error") {
+    return {
+      groupTitle: "Navigation fallback",
+      listLabel: "Navigation fallback",
+      resultStatus: "Full search unavailable",
+    };
+  }
+
+  const resultStatus = isSearching
+    ? `${resultCount} results`
+    : "Jump to a page";
+
+  return {
+    groupTitle: isSearching ? "Search results" : "Navigation",
+    listLabel: isSearching ? "Search results" : "Suggested pages",
+    resultStatus:
+      indexStatus === "loading" ? "Loading all pages…" : resultStatus,
+  };
 }

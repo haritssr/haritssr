@@ -6,8 +6,11 @@ import useSWR from "swr";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-const fetcher = async (url: RequestInfo) =>
-  await fetch(url).then(async (res) => await res.json());
+interface NameCardProps {
+  age: string;
+  city: string;
+  name: string;
+}
 
 export default function NextjsSWRDemo() {
   const { data, error } = useSWR("/api/hello", fetcher);
@@ -41,11 +44,8 @@ export default function NextjsSWRDemo() {
   );
 }
 
-interface NameCardProps {
-  age: string;
-  city: string;
-  name: string;
-}
+const fetcher = async (url: RequestInfo) =>
+  await fetch(url).then(async (res) => await res.json());
 
 const NameCard = ({ name, age, city }: NameCardProps) => (
   <div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">

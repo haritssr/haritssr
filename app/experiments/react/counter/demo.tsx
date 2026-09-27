@@ -5,12 +5,6 @@ import { useCallback, useEffect, useState } from "react";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-function formatTime(second: number) {
-  const minute = Math.floor(second / 60);
-
-  return `${`${minute}`.padStart(2, "0")}:${`${second % 60}`.padStart(2, "0")}`;
-}
-
 export default function ReactCounterDemo() {
   const [second, setSecond] = useState(0);
   const [play, setPlay] = useState(false);
@@ -69,4 +63,10 @@ export default function ReactCounterDemo() {
       </button>
     </>
   );
+}
+
+function formatTime(second: number) {
+  const minute = Math.floor(second / 60);
+
+  return `${`${minute}`.padStart(2, "0")}:${`${second % 60}`.padStart(2, "0")}`;
 }

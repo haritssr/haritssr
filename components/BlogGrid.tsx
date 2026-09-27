@@ -16,10 +16,6 @@ const topicLabels: Record<string, string> = {
   humanity: "General",
 };
 
-function formatDate(date: string) {
-  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
-}
-
 interface IndexedBlogPost {
   index: number;
   post: BlogPost;
@@ -28,23 +24,6 @@ interface IndexedBlogPost {
 interface BlogPostGroup {
   posts: IndexedBlogPost[];
   year: string;
-}
-
-function groupBlogPostsByYear(): BlogPostGroup[] {
-  const groups: BlogPostGroup[] = [];
-
-  for (const [index, post] of allBlogPosts.entries()) {
-    const year = post.publishedAt.slice(0, 4);
-    const currentGroup = groups.at(-1);
-
-    if (currentGroup?.year === year) {
-      currentGroup.posts.push({ index, post });
-    } else {
-      groups.push({ posts: [{ index, post }], year });
-    }
-  }
-
-  return groups;
 }
 
 const blogPostGroups = groupBlogPostsByYear();
@@ -130,4 +109,25 @@ export default function BlogGrid({
       ) : null}
     </>
   );
+}
+
+function formatDate(date: string) {
+  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
+}
+
+function groupBlogPostsByYear(): BlogPostGroup[] {
+  const groups: BlogPostGroup[] = [];
+
+  for (const [index, post] of allBlogPosts.entries()) {
+    const year = post.publishedAt.slice(0, 4);
+    const currentGroup = groups.at(-1);
+
+    if (currentGroup?.year === year) {
+      currentGroup.posts.push({ index, post });
+    } else {
+      groups.push({ posts: [{ index, post }], year });
+    }
+  }
+
+  return groups;
 }

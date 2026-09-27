@@ -7,6 +7,22 @@ import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
+export default function ReactUseStateReactingToInputDemo() {
+  return (
+    <>
+      <SubTitle>
+        From{" "}
+        <ExternalLink
+          href="https://beta.reactjs.org/learn/reacting-to-input-with-state#step-5-connect-the-event-handlers-to-set-state"
+          name="beta.reactjs.org"
+        />
+      </SubTitle>
+      <SourceCodeLink />
+      <Example />
+    </>
+  );
+}
+
 async function submitForm(answer: string) {
   return await new Promise<void>((resolve, reject) => {
     setTimeout(() => {
@@ -97,19 +113,3 @@ const Example = () => {
     </div>
   );
 };
-
-export default function ReactUseStateReactingToInputDemo() {
-  return (
-    <>
-      <SubTitle>
-        From{" "}
-        <ExternalLink
-          href="https://beta.reactjs.org/learn/reacting-to-input-with-state#step-5-connect-the-event-handlers-to-set-state"
-          name="beta.reactjs.org"
-        />
-      </SubTitle>
-      <SourceCodeLink />
-      <Example />
-    </>
-  );
-}

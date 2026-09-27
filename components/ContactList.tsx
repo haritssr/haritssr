@@ -6,6 +6,50 @@ import { SITE_URL } from "@/utils/site";
 // Example: "https://www.example.com" becomes "example.com" after replacement.
 const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
 
+const data = {
+  description: "My preferable communication channels.",
+  points: [
+    // {
+    //   icon: "/icons/linkedin.jpg",
+    //   link: "https://www.linkedin.com/in/haritssr",
+    //   name: "LinkedIn",
+    // },
+    { icon: "/icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
+    {
+      icon: "/icons/github.jpg",
+      link: "https://www.github.com/haritssr",
+      name: "GitHub",
+    },
+    {
+      icon: "/icons/x.png",
+      link: "https://x.com/intent/follow?screen_name=haritssr",
+      name: "X",
+    },
+
+    {
+      icon: "/icons/haritssr.svg",
+      link: SITE_URL,
+      name: "Website",
+    },
+  ],
+  section: "Contacts",
+};
+
+export default function ContactList() {
+  return (
+    <div className="corner-squircle border-border space-y-2.5 rounded-2xl border px-4 pt-3 pb-2.5">
+      <p className="text-foreground font-semibold">Contacts</p>
+      <ul className="space-y-2.5">
+        {data.points.map((contact) => (
+          <li className="cursor-pointer" key={contact.link}>
+            {renderContact(contact)}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function highlightSiteName(text: string, siteName = "haritssr") {
   return text
     .replace(siteName, `§§${siteName}§§`)
@@ -74,47 +118,3 @@ function renderContact(contact: { link: string; icon: string }) {
 
   return null;
 }
-
-export default function ContactList() {
-  return (
-    <div className="corner-squircle border-border space-y-2.5 rounded-2xl border px-4 pt-3 pb-2.5">
-      <p className="text-foreground font-semibold">Contacts</p>
-      <ul className="space-y-2.5">
-        {data.points.map((contact) => (
-          <li className="cursor-pointer" key={contact.link}>
-            {renderContact(contact)}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-const data = {
-  description: "My preferable communication channels.",
-  points: [
-    // {
-    //   icon: "/icons/linkedin.jpg",
-    //   link: "https://www.linkedin.com/in/haritssr",
-    //   name: "LinkedIn",
-    // },
-    { icon: "/icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
-    {
-      icon: "/icons/github.jpg",
-      link: "https://www.github.com/haritssr",
-      name: "GitHub",
-    },
-    {
-      icon: "/icons/x.png",
-      link: "https://x.com/intent/follow?screen_name=haritssr",
-      name: "X",
-    },
-
-    {
-      icon: "/icons/haritssr.svg",
-      link: SITE_URL,
-      name: "Website",
-    },
-  ],
-  section: "Contacts",
-};

@@ -335,112 +335,6 @@ const charts = [
   { id: "typeschema", title: "Task Type Schema", definition: typeSchemaChart },
 ];
 
-function MermaidDiagram({
-  definition,
-  id,
-}: {
-  definition: string;
-  id: string;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [svg, setSvg] = useState<string>("");
-  const [error, setError] = useState<string>("");
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const render = async () => {
-      try {
-        const mermaidModule = await import("mermaid");
-        const mermaid = mermaidModule.default;
-        mermaid.initialize({
-          htmlLabels: true,
-          startOnLoad: false,
-          theme: "default",
-          flowchart: {
-            useMaxWidth: true,
-            curve: "basis",
-          },
-        });
-
-        const { svg: renderedSvg } = await mermaid.render(
-          `mermaid-${id}`,
-          definition
-        );
-
-        const parsedDocument = new DOMParser().parseFromString(
-          renderedSvg,
-          "image/svg+xml"
-        );
-        const svgElement = parsedDocument.documentElement;
-        if (
-          svgElement.tagName.toLocaleLowerCase("en-US") !== "svg" ||
-          svgElement.namespaceURI !== "http://www.w3.org/2000/svg"
-        ) {
-          throw new Error("Mermaid returned invalid SVG");
-        }
-
-        if (!cancelled) {
-          setSvg(renderedSvg);
-          setError("");
-        }
-      } catch (renderError) {
-        if (!cancelled) {
-          setError(
-            renderError instanceof Error
-              ? renderError.message
-              : "Failed to render diagram"
-          );
-        }
-      }
-    };
-
-    void render();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [definition, id]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (svg.length === 0 || container === null) {
-      return;
-    }
-
-    const parsedDocument = new DOMParser().parseFromString(
-      svg,
-      "image/svg+xml"
-    );
-    const svgElement = parsedDocument.documentElement;
-
-    container.replaceChildren(document.importNode(svgElement, true));
-  }, [svg]);
-
-  if (error.length > 0) {
-    return (
-      <div className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-600">
-        Failed to render diagram: {error}
-      </div>
-    );
-  }
-
-  if (!svg) {
-    return (
-      <div className="flex h-32 items-center justify-center rounded border border-zinc-200 bg-zinc-50">
-        <div className="text-sm text-zinc-500">Loading diagram...</div>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className="flex justify-center overflow-x-auto rounded border border-zinc-200 bg-white p-4"
-      ref={containerRef}
-    />
-  );
-}
-
 export default function TaskArchitecturePage() {
   return (
     <div className="pb-8">
@@ -638,5 +532,111 @@ export default function TaskArchitecturePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function MermaidDiagram({
+  definition,
+  id,
+}: {
+  definition: string;
+  id: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [svg, setSvg] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const render = async () => {
+      try {
+        const mermaidModule = await import("mermaid");
+        const mermaid = mermaidModule.default;
+        mermaid.initialize({
+          htmlLabels: true,
+          startOnLoad: false,
+          theme: "default",
+          flowchart: {
+            useMaxWidth: true,
+            curve: "basis",
+          },
+        });
+
+        const { svg: renderedSvg } = await mermaid.render(
+          `mermaid-${id}`,
+          definition
+        );
+
+        const parsedDocument = new DOMParser().parseFromString(
+          renderedSvg,
+          "image/svg+xml"
+        );
+        const svgElement = parsedDocument.documentElement;
+        if (
+          svgElement.tagName.toLocaleLowerCase("en-US") !== "svg" ||
+          svgElement.namespaceURI !== "http://www.w3.org/2000/svg"
+        ) {
+          throw new Error("Mermaid returned invalid SVG");
+        }
+
+        if (!cancelled) {
+          setSvg(renderedSvg);
+          setError("");
+        }
+      } catch (renderError) {
+        if (!cancelled) {
+          setError(
+            renderError instanceof Error
+              ? renderError.message
+              : "Failed to render diagram"
+          );
+        }
+      }
+    };
+
+    void render();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [definition, id]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (svg.length === 0 || container === null) {
+      return;
+    }
+
+    const parsedDocument = new DOMParser().parseFromString(
+      svg,
+      "image/svg+xml"
+    );
+    const svgElement = parsedDocument.documentElement;
+
+    container.replaceChildren(document.importNode(svgElement, true));
+  }, [svg]);
+
+  if (error.length > 0) {
+    return (
+      <div className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-600">
+        Failed to render diagram: {error}
+      </div>
+    );
+  }
+
+  if (!svg) {
+    return (
+      <div className="flex h-32 items-center justify-center rounded border border-zinc-200 bg-zinc-50">
+        <div className="text-sm text-zinc-500">Loading diagram...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="flex justify-center overflow-x-auto rounded border border-zinc-200 bg-white p-4"
+      ref={containerRef}
+    />
   );
 }

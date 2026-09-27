@@ -10,180 +10,6 @@ import type {
   TaskItemProps,
 } from "./type";
 
-function getNowPrimaryAction(
-  type: Task["type"],
-  progress: number,
-  isRunning: boolean,
-  setIsRunning: (running: boolean) => void
-): NowPrimaryAction {
-  if (type !== "Now") {
-    return { className: "", label: "" };
-  }
-
-  if (progress >= 100) {
-    return { className: "text-green-600", label: "Done" };
-  }
-
-  if (isRunning) {
-    return {
-      action: () => {
-        setIsRunning(false);
-      },
-      className: getTaskActionButtonClassName("rose"),
-      label: "Stop",
-    };
-  }
-
-  if (progress === 0) {
-    return {
-      action: () => {
-        setIsRunning(true);
-      },
-      className: getTaskActionButtonClassName("blue"),
-      label: "Start",
-    };
-  }
-
-  return {
-    action: () => {
-      setIsRunning(true);
-    },
-    className: getTaskActionButtonClassName("blue"),
-    label: "Resume",
-  };
-}
-
-function TaskActions(props: TaskActionsProps) {
-  return (
-    <>
-      {props.canDeleteTask && (
-        <button
-          className={getTaskActionButtonClassName("secondary")}
-          onClick={props.onDelete}
-          type="button"
-        >
-          Del
-        </button>
-      )}
-      {props.canMoveNowTask && (
-        <button
-          className={getTaskActionButtonClassName("zinc")}
-          onClick={props.onMoveToOther}
-          type="button"
-        >
-          Other
-        </button>
-      )}
-      {props.canResetNowTask && (
-        <button
-          className={getTaskActionButtonClassName("zinc")}
-          onClick={props.onReset}
-          type="button"
-        >
-          Reset
-        </button>
-      )}
-      {props.isNowTask && (
-        <button
-          className={props.primaryNowAction.className}
-          onClick={() => {
-            props.primaryNowAction.action?.();
-          }}
-          type="button"
-        >
-          {props.primaryNowAction.label}
-        </button>
-      )}
-      {props.canDoNow && (
-        <button
-          className={getTaskActionButtonClassName("zinc")}
-          onClick={props.onDoNow}
-          type="button"
-        >
-          Now
-        </button>
-      )}
-      {props.canResumeOtherTask && (
-        <button
-          className={getTaskActionButtonClassName("blue")}
-          onClick={props.onResume}
-          type="button"
-        >
-          Resume
-        </button>
-      )}
-      {props.canMarkNowTaskDone && (
-        <button
-          className={getTaskActionButtonClassName("green")}
-          onClick={props.onMarkDone}
-          type="button"
-        >
-          Done
-        </button>
-      )}
-    </>
-  );
-}
-
-function DonutProgress({
-  progress,
-  isRunning,
-}: {
-  progress: number;
-  isRunning: boolean;
-}) {
-  const clampedProgress = Math.max(0, Math.min(100, progress));
-  const activeColor = isRunning ? "#3b82f6" : "#71717a";
-  const trackColor = "#d4d4d8";
-
-  return (
-    <div
-      className="relative h-4 w-4 shrink-0 rounded-full"
-      style={{
-        background: `conic-gradient(${activeColor} ${clampedProgress}%, ${trackColor} ${clampedProgress}% 100%)`,
-      }}
-    >
-      <div className="absolute inset-0.75 rounded-full bg-white" />
-    </div>
-  );
-}
-
-function getTaskCapabilities({
-  isActivelyRunning,
-  onDelete,
-  onDoNow,
-  onMoveTask,
-  onResumeNow,
-  progress,
-  readOnly,
-  taskIsDone,
-  type,
-}: Pick<
-  TaskItemProps,
-  "onDelete" | "onDoNow" | "onMoveTask" | "onResumeNow" | "type"
-> & {
-  isActivelyRunning: boolean;
-  progress: number;
-  readOnly: boolean;
-  taskIsDone: boolean;
-}) {
-  return {
-    canDeleteTask: !readOnly && Boolean(onDelete),
-    canDoNow:
-      type === "Other" && progress === 0 && !taskIsDone && Boolean(onDoNow),
-    canMarkNowTaskDone: type === "Now" && isActivelyRunning,
-    canMoveNowTask:
-      type === "Now" &&
-      !isActivelyRunning &&
-      progress > 0 &&
-      !taskIsDone &&
-      Boolean(onMoveTask),
-    canResetNowTask: type === "Now" && progress > 0 && !taskIsDone,
-    canResumeOtherTask:
-      type === "Other" && progress > 0 && !taskIsDone && Boolean(onResumeNow),
-  };
-}
-
 export default function TaskItem(props: TaskItemProps) {
   const {
     autoStart = false,
@@ -389,4 +215,178 @@ export default function TaskItem(props: TaskItemProps) {
       ) : null}
     </>
   );
+}
+
+function getNowPrimaryAction(
+  type: Task["type"],
+  progress: number,
+  isRunning: boolean,
+  setIsRunning: (running: boolean) => void
+): NowPrimaryAction {
+  if (type !== "Now") {
+    return { className: "", label: "" };
+  }
+
+  if (progress >= 100) {
+    return { className: "text-green-600", label: "Done" };
+  }
+
+  if (isRunning) {
+    return {
+      action: () => {
+        setIsRunning(false);
+      },
+      className: getTaskActionButtonClassName("rose"),
+      label: "Stop",
+    };
+  }
+
+  if (progress === 0) {
+    return {
+      action: () => {
+        setIsRunning(true);
+      },
+      className: getTaskActionButtonClassName("blue"),
+      label: "Start",
+    };
+  }
+
+  return {
+    action: () => {
+      setIsRunning(true);
+    },
+    className: getTaskActionButtonClassName("blue"),
+    label: "Resume",
+  };
+}
+
+function TaskActions(props: TaskActionsProps) {
+  return (
+    <>
+      {props.canDeleteTask && (
+        <button
+          className={getTaskActionButtonClassName("secondary")}
+          onClick={props.onDelete}
+          type="button"
+        >
+          Del
+        </button>
+      )}
+      {props.canMoveNowTask && (
+        <button
+          className={getTaskActionButtonClassName("zinc")}
+          onClick={props.onMoveToOther}
+          type="button"
+        >
+          Other
+        </button>
+      )}
+      {props.canResetNowTask && (
+        <button
+          className={getTaskActionButtonClassName("zinc")}
+          onClick={props.onReset}
+          type="button"
+        >
+          Reset
+        </button>
+      )}
+      {props.isNowTask && (
+        <button
+          className={props.primaryNowAction.className}
+          onClick={() => {
+            props.primaryNowAction.action?.();
+          }}
+          type="button"
+        >
+          {props.primaryNowAction.label}
+        </button>
+      )}
+      {props.canDoNow && (
+        <button
+          className={getTaskActionButtonClassName("zinc")}
+          onClick={props.onDoNow}
+          type="button"
+        >
+          Now
+        </button>
+      )}
+      {props.canResumeOtherTask && (
+        <button
+          className={getTaskActionButtonClassName("blue")}
+          onClick={props.onResume}
+          type="button"
+        >
+          Resume
+        </button>
+      )}
+      {props.canMarkNowTaskDone && (
+        <button
+          className={getTaskActionButtonClassName("green")}
+          onClick={props.onMarkDone}
+          type="button"
+        >
+          Done
+        </button>
+      )}
+    </>
+  );
+}
+
+function DonutProgress({
+  progress,
+  isRunning,
+}: {
+  progress: number;
+  isRunning: boolean;
+}) {
+  const clampedProgress = Math.max(0, Math.min(100, progress));
+  const activeColor = isRunning ? "#3b82f6" : "#71717a";
+  const trackColor = "#d4d4d8";
+
+  return (
+    <div
+      className="relative h-4 w-4 shrink-0 rounded-full"
+      style={{
+        background: `conic-gradient(${activeColor} ${clampedProgress}%, ${trackColor} ${clampedProgress}% 100%)`,
+      }}
+    >
+      <div className="absolute inset-0.75 rounded-full bg-white" />
+    </div>
+  );
+}
+
+function getTaskCapabilities({
+  isActivelyRunning,
+  onDelete,
+  onDoNow,
+  onMoveTask,
+  onResumeNow,
+  progress,
+  readOnly,
+  taskIsDone,
+  type,
+}: Pick<
+  TaskItemProps,
+  "onDelete" | "onDoNow" | "onMoveTask" | "onResumeNow" | "type"
+> & {
+  isActivelyRunning: boolean;
+  progress: number;
+  readOnly: boolean;
+  taskIsDone: boolean;
+}) {
+  return {
+    canDeleteTask: !readOnly && Boolean(onDelete),
+    canDoNow:
+      type === "Other" && progress === 0 && !taskIsDone && Boolean(onDoNow),
+    canMarkNowTaskDone: type === "Now" && isActivelyRunning,
+    canMoveNowTask:
+      type === "Now" &&
+      !isActivelyRunning &&
+      progress > 0 &&
+      !taskIsDone &&
+      Boolean(onMoveTask),
+    canResetNowTask: type === "Now" && progress > 0 && !taskIsDone,
+    canResumeOtherTask:
+      type === "Other" && progress > 0 && !taskIsDone && Boolean(onResumeNow),
+  };
 }

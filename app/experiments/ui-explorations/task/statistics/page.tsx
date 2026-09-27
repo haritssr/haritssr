@@ -7,62 +7,6 @@ import SubTitle from "@/components/SubTitle";
 import type { TaskHistoryEntry } from "../db";
 import { getTaskHistory, getTasksForDate, getTodayTaskDate } from "../db";
 
-function getCompletionRate(doneCount: number, totalCount: number) {
-  if (totalCount === 0) {
-    return 0;
-  }
-
-  return (doneCount / totalCount) * 100;
-}
-
-function getPreviousDate(dateString: string) {
-  return getDateWithOffset(dateString, -1);
-}
-
-function getDateWithOffset(dateString: string, offsetDays: number) {
-  const [year, month, day] = dateString.split("-").map(Number);
-  const utcDate = new Date(Date.UTC(year, month - 1, day));
-  utcDate.setUTCDate(utcDate.getUTCDate() + offsetDays);
-
-  const nextYear = utcDate.getUTCFullYear();
-  const nextMonth = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
-  const nextDay = String(utcDate.getUTCDate()).padStart(2, "0");
-  return `${nextYear}-${nextMonth}-${nextDay}`;
-}
-
-function getCurrentFullCompletionStreak(
-  history: TaskHistoryEntry[],
-  todayDate: string
-) {
-  const historyByDate = new Map(history.map((entry) => [entry.date, entry]));
-  let streak = 0;
-  let cursorDate = todayDate;
-
-  for (;;) {
-    const day = historyByDate.get(cursorDate);
-    if (!day || day.totalCount === 0 || day.doneCount < day.totalCount) {
-      break;
-    }
-
-    streak += 1;
-    cursorDate = getPreviousDate(cursorDate);
-  }
-
-  return streak;
-}
-
-function MetricCard(props: { label: string; subtitle: string; value: string }) {
-  return (
-    <div className="rounded-xl border border-zinc-200 p-3">
-      <div className="text-sm text-zinc-500">{props.label}</div>
-      <div className="mt-1 text-2xl font-semibold text-zinc-800">
-        {props.value}
-      </div>
-      <div className="mt-1 text-xs text-zinc-500">{props.subtitle}</div>
-    </div>
-  );
-}
-
 export default async function TaskStatisticsPage() {
   await connection();
   const todayDate = getTodayTaskDate();
@@ -294,6 +238,62 @@ export default async function TaskStatisticsPage() {
           </div>
         ) : null}
       </section>
+    </div>
+  );
+}
+
+function getCompletionRate(doneCount: number, totalCount: number) {
+  if (totalCount === 0) {
+    return 0;
+  }
+
+  return (doneCount / totalCount) * 100;
+}
+
+function getPreviousDate(dateString: string) {
+  return getDateWithOffset(dateString, -1);
+}
+
+function getDateWithOffset(dateString: string, offsetDays: number) {
+  const [year, month, day] = dateString.split("-").map(Number);
+  const utcDate = new Date(Date.UTC(year, month - 1, day));
+  utcDate.setUTCDate(utcDate.getUTCDate() + offsetDays);
+
+  const nextYear = utcDate.getUTCFullYear();
+  const nextMonth = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
+  const nextDay = String(utcDate.getUTCDate()).padStart(2, "0");
+  return `${nextYear}-${nextMonth}-${nextDay}`;
+}
+
+function getCurrentFullCompletionStreak(
+  history: TaskHistoryEntry[],
+  todayDate: string
+) {
+  const historyByDate = new Map(history.map((entry) => [entry.date, entry]));
+  let streak = 0;
+  let cursorDate = todayDate;
+
+  for (;;) {
+    const day = historyByDate.get(cursorDate);
+    if (!day || day.totalCount === 0 || day.doneCount < day.totalCount) {
+      break;
+    }
+
+    streak += 1;
+    cursorDate = getPreviousDate(cursorDate);
+  }
+
+  return streak;
+}
+
+function MetricCard(props: { label: string; subtitle: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-zinc-200 p-3">
+      <div className="text-sm text-zinc-500">{props.label}</div>
+      <div className="mt-1 text-2xl font-semibold text-zinc-800">
+        {props.value}
+      </div>
+      <div className="mt-1 text-xs text-zinc-500">{props.subtitle}</div>
     </div>
   );
 }

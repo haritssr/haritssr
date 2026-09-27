@@ -96,260 +96,10 @@ const SUPERSCRIPTS: Record<string, string> = {
   "9": "⁹",
 };
 
-function toSuperscript(value: number): string {
-  return String(value).replaceAll(
-    /[0-9]/gu,
-    (digit) => SUPERSCRIPTS[digit] ?? digit
-  );
-}
-
 interface ConfigurationTerm {
   readonly electrons: number;
   readonly label: string;
   readonly shell: number;
-}
-
-function getConfiguration(
-  electronCounts: readonly number[]
-): ConfigurationTerm[] {
-  return ORBITALS.map((orbital, index) => {
-    const electrons = electronCounts[index] ?? 0;
-    return electrons > 0
-      ? { electrons, label: orbital.label, shell: orbital.shell }
-      : null;
-  }).filter((term): term is ConfigurationTerm => term !== null);
-}
-
-function getShellCounts(electronCounts: readonly number[]): number[] {
-  const shellCounts = [0, 0, 0, 0, 0, 0, 0];
-
-  for (const [index, electrons] of electronCounts.entries()) {
-    const orbital = ORBITALS[index];
-    if (orbital !== undefined) {
-      shellCounts[orbital.shell - 1] += electrons;
-    }
-  }
-
-  return shellCounts.filter((electrons) => electrons > 0);
-}
-
-function getOrbitalOccupancy(electrons: number, orbitalCount: number) {
-  const pairedOrbitals = Math.max(electrons - orbitalCount, 0);
-  const singlyOccupiedOrbitals = Math.min(electrons, orbitalCount);
-
-  return Array.from({ length: orbitalCount }, (_, index) => {
-    if (index < pairedOrbitals) {
-      return 2;
-    }
-    if (index < singlyOccupiedOrbitals) {
-      return 1;
-    }
-    return 0;
-  });
-}
-
-function formatMagneticNumber(value: number): string {
-  if (value > 0) {
-    return `+${value}`;
-  }
-  return String(value).replace("-", "−");
-}
-
-function OrbitalBox({
-  electrons,
-  magneticNumber,
-}: {
-  electrons: number;
-  magneticNumber: number;
-}) {
-  let electronSymbol: string | null = null;
-
-  if (electrons === 2) {
-    electronSymbol = "↑↓";
-  } else if (electrons === 1) {
-    electronSymbol = "↑";
-  }
-
-  return (
-    <span className="flex min-w-0 flex-1 flex-col items-center gap-1">
-      <span className="text-foreground/60 font-mono text-xs font-medium">
-        {formatMagneticNumber(magneticNumber)}
-      </span>
-      <span className="border-border bg-background flex h-9 w-full max-w-9 min-w-7 items-center justify-center rounded-md border font-mono text-base">
-        {electronSymbol}
-      </span>
-    </span>
-  );
-}
-
-function AufbauOrbital({
-  electrons,
-  isLastOccupied,
-  orbital,
-  order,
-}: {
-  electrons: number;
-  isLastOccupied: boolean;
-  orbital: OrbitalDefinition;
-  order: number;
-}) {
-  const occupancy = getOrbitalOccupancy(electrons, orbital.orbitalCount);
-  const occupancyDescription = occupancy
-    .map((count, index) => {
-      const magneticNumber = index - (orbital.orbitalCount - 1) / 2;
-      return `m ${formatMagneticNumber(magneticNumber)}: ${count} electron${count === 1 ? "" : "s"}`;
-    })
-    .join(", ");
-
-  return (
-    <figure
-      className={`rounded-lg border p-2.5 ${
-        isLastOccupied
-          ? "border-action bg-action/5"
-          : "border-border bg-background"
-      } ${electrons === 0 ? "opacity-60" : ""}`}
-    >
-      <figcaption className="sr-only">
-        {orbital.label} subshell, filling order {order}, {electrons} electron
-        {electrons === 1 ? "" : "s"}. {occupancyDescription}.
-        {isLastOccupied ? " Contains the last electron." : ""}
-      </figcaption>
-      <div aria-hidden="true">
-        <div className="mb-2 flex items-center justify-between gap-2">
-          <span className="font-mono text-sm font-semibold">
-            {orbital.label}
-            {electrons > 0 ? toSuperscript(electrons) : ""}
-          </span>
-          <span className="bg-surface-hover text-foreground/70 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-medium tabular-nums">
-            {order}
-          </span>
-        </div>
-        <div className="flex gap-1">
-          {occupancy.map((count, index) => {
-            const magneticNumber = index - (orbital.orbitalCount - 1) / 2;
-            return (
-              <OrbitalBox
-                electrons={count}
-                key={`${orbital.label}-${index}`}
-                magneticNumber={magneticNumber}
-              />
-            );
-          })}
-        </div>
-      </div>
-    </figure>
-  );
-}
-
-function AtomicNumberField({
-  atomicNumber,
-  id,
-  onValueChange,
-  showLabel = true,
-}: {
-  atomicNumber: number;
-  id: string;
-  onValueChange: (value: number) => void;
-  showLabel?: boolean;
-}) {
-  return (
-    <div className="flex flex-wrap items-center gap-3">
-      {showLabel ? (
-        <label className="text-foreground/70 text-xs" htmlFor={id}>
-          Atomic number
-        </label>
-      ) : null}
-      <NumberField.Root
-        className="flex items-center"
-        max={MAX_ATOMIC_NUMBER}
-        min={1}
-        name={id}
-        onValueChange={(value) => {
-          if (value !== null) {
-            onValueChange(value);
-          }
-        }}
-        snapOnStep
-        step={1}
-        value={atomicNumber}
-      >
-        <NumberField.Group className="flex items-center">
-          <NumberField.Decrement
-            aria-label="Previous element"
-            className="border-border focus-visible:outline-action enabled:hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-l-md border-t border-b border-l text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            −
-          </NumberField.Decrement>
-          <NumberField.Input
-            aria-label="Atomic number"
-            autoComplete="off"
-            className="form-control border-border bg-background focus:border-foreground/80 h-10 w-14 appearance-none border px-2 text-center font-mono text-base font-medium outline-hidden"
-            id={id}
-            inputMode="numeric"
-          />
-          <NumberField.Increment
-            aria-label="Next element"
-            className="border-border focus-visible:outline-action enabled:hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-r-md border-t border-r border-b text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            +
-          </NumberField.Increment>
-        </NumberField.Group>
-      </NumberField.Root>
-    </div>
-  );
-}
-
-function AtomicNotation({
-  atomicNumber,
-  elementName,
-  elementSymbol,
-}: {
-  atomicNumber: number;
-  elementName: string;
-  elementSymbol: string;
-}) {
-  const massNumber = getRepresentativeMassNumber(atomicNumber);
-  const neutronNumber = massNumber - atomicNumber;
-
-  return (
-    <figure className="border-border self-start rounded-xl border p-3">
-      <figcaption>
-        <h3 className="text-foreground/70 text-xs font-medium">
-          Atomic Notation
-        </h3>
-      </figcaption>
-      <div aria-hidden="true" className="mt-2 text-2xl">
-        {katexify(
-          `{}^{${massNumber}}_{${atomicNumber}}\\mathrm{${elementSymbol}}`,
-          false
-        )}
-      </div>
-      <p className="sr-only">
-        {elementName} with mass number {massNumber} and atomic number{" "}
-        {atomicNumber}.
-      </p>
-      <dl className="mt-2 grid grid-cols-3 gap-2">
-        <div>
-          <dt className="text-foreground/70 text-xs">Proton</dt>
-          <dd className="font-mono text-sm font-medium tabular-nums">
-            {atomicNumber}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-foreground/70 text-xs">Electron</dt>
-          <dd className="font-mono text-sm font-medium tabular-nums">
-            {atomicNumber}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-foreground/70 text-xs">Neutron</dt>
-          <dd className="font-mono text-sm font-medium tabular-nums">
-            {neutronNumber}
-          </dd>
-        </div>
-      </dl>
-    </figure>
-  );
 }
 
 export default function ElectronConfigurationDemo({
@@ -597,5 +347,255 @@ export default function ElectronConfigurationDemo({
       </section>
       <VocabularyGuide />
     </div>
+  );
+}
+
+function toSuperscript(value: number): string {
+  return String(value).replaceAll(
+    /[0-9]/gu,
+    (digit) => SUPERSCRIPTS[digit] ?? digit
+  );
+}
+
+function getConfiguration(
+  electronCounts: readonly number[]
+): ConfigurationTerm[] {
+  return ORBITALS.map((orbital, index) => {
+    const electrons = electronCounts[index] ?? 0;
+    return electrons > 0
+      ? { electrons, label: orbital.label, shell: orbital.shell }
+      : null;
+  }).filter((term): term is ConfigurationTerm => term !== null);
+}
+
+function getShellCounts(electronCounts: readonly number[]): number[] {
+  const shellCounts = [0, 0, 0, 0, 0, 0, 0];
+
+  for (const [index, electrons] of electronCounts.entries()) {
+    const orbital = ORBITALS[index];
+    if (orbital !== undefined) {
+      shellCounts[orbital.shell - 1] += electrons;
+    }
+  }
+
+  return shellCounts.filter((electrons) => electrons > 0);
+}
+
+function getOrbitalOccupancy(electrons: number, orbitalCount: number) {
+  const pairedOrbitals = Math.max(electrons - orbitalCount, 0);
+  const singlyOccupiedOrbitals = Math.min(electrons, orbitalCount);
+
+  return Array.from({ length: orbitalCount }, (_, index) => {
+    if (index < pairedOrbitals) {
+      return 2;
+    }
+    if (index < singlyOccupiedOrbitals) {
+      return 1;
+    }
+    return 0;
+  });
+}
+
+function formatMagneticNumber(value: number): string {
+  if (value > 0) {
+    return `+${value}`;
+  }
+  return String(value).replace("-", "−");
+}
+
+function OrbitalBox({
+  electrons,
+  magneticNumber,
+}: {
+  electrons: number;
+  magneticNumber: number;
+}) {
+  let electronSymbol: string | null = null;
+
+  if (electrons === 2) {
+    electronSymbol = "↑↓";
+  } else if (electrons === 1) {
+    electronSymbol = "↑";
+  }
+
+  return (
+    <span className="flex min-w-0 flex-1 flex-col items-center gap-1">
+      <span className="text-foreground/60 font-mono text-xs font-medium">
+        {formatMagneticNumber(magneticNumber)}
+      </span>
+      <span className="border-border bg-background flex h-9 w-full max-w-9 min-w-7 items-center justify-center rounded-md border font-mono text-base">
+        {electronSymbol}
+      </span>
+    </span>
+  );
+}
+
+function AufbauOrbital({
+  electrons,
+  isLastOccupied,
+  orbital,
+  order,
+}: {
+  electrons: number;
+  isLastOccupied: boolean;
+  orbital: OrbitalDefinition;
+  order: number;
+}) {
+  const occupancy = getOrbitalOccupancy(electrons, orbital.orbitalCount);
+  const occupancyDescription = occupancy
+    .map((count, index) => {
+      const magneticNumber = index - (orbital.orbitalCount - 1) / 2;
+      return `m ${formatMagneticNumber(magneticNumber)}: ${count} electron${count === 1 ? "" : "s"}`;
+    })
+    .join(", ");
+
+  return (
+    <figure
+      className={`rounded-lg border p-2.5 ${
+        isLastOccupied
+          ? "border-action bg-action/5"
+          : "border-border bg-background"
+      } ${electrons === 0 ? "opacity-60" : ""}`}
+    >
+      <figcaption className="sr-only">
+        {orbital.label} subshell, filling order {order}, {electrons} electron
+        {electrons === 1 ? "" : "s"}. {occupancyDescription}.
+        {isLastOccupied ? " Contains the last electron." : ""}
+      </figcaption>
+      <div aria-hidden="true">
+        <div className="mb-2 flex items-center justify-between gap-2">
+          <span className="font-mono text-sm font-semibold">
+            {orbital.label}
+            {electrons > 0 ? toSuperscript(electrons) : ""}
+          </span>
+          <span className="bg-surface-hover text-foreground/70 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-medium tabular-nums">
+            {order}
+          </span>
+        </div>
+        <div className="flex gap-1">
+          {occupancy.map((count, index) => {
+            const magneticNumber = index - (orbital.orbitalCount - 1) / 2;
+            return (
+              <OrbitalBox
+                electrons={count}
+                key={`${orbital.label}-${index}`}
+                magneticNumber={magneticNumber}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </figure>
+  );
+}
+
+function AtomicNumberField({
+  atomicNumber,
+  id,
+  onValueChange,
+  showLabel = true,
+}: {
+  atomicNumber: number;
+  id: string;
+  onValueChange: (value: number) => void;
+  showLabel?: boolean;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      {showLabel ? (
+        <label className="text-foreground/70 text-xs" htmlFor={id}>
+          Atomic number
+        </label>
+      ) : null}
+      <NumberField.Root
+        className="flex items-center"
+        max={MAX_ATOMIC_NUMBER}
+        min={1}
+        name={id}
+        onValueChange={(value) => {
+          if (value !== null) {
+            onValueChange(value);
+          }
+        }}
+        snapOnStep
+        step={1}
+        value={atomicNumber}
+      >
+        <NumberField.Group className="flex items-center">
+          <NumberField.Decrement
+            aria-label="Previous element"
+            className="border-border focus-visible:outline-action enabled:hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-l-md border-t border-b border-l text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            −
+          </NumberField.Decrement>
+          <NumberField.Input
+            aria-label="Atomic number"
+            autoComplete="off"
+            className="form-control border-border bg-background focus:border-foreground/80 h-10 w-14 appearance-none border px-2 text-center font-mono text-base font-medium outline-hidden"
+            id={id}
+            inputMode="numeric"
+          />
+          <NumberField.Increment
+            aria-label="Next element"
+            className="border-border focus-visible:outline-action enabled:hover:bg-interface-hover flex h-10 w-10 cursor-pointer items-center justify-center rounded-r-md border-t border-r border-b text-lg outline-hidden focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            +
+          </NumberField.Increment>
+        </NumberField.Group>
+      </NumberField.Root>
+    </div>
+  );
+}
+
+function AtomicNotation({
+  atomicNumber,
+  elementName,
+  elementSymbol,
+}: {
+  atomicNumber: number;
+  elementName: string;
+  elementSymbol: string;
+}) {
+  const massNumber = getRepresentativeMassNumber(atomicNumber);
+  const neutronNumber = massNumber - atomicNumber;
+
+  return (
+    <figure className="border-border rounded-xl border p-3">
+      <figcaption>
+        <h3 className="text-foreground/70 text-xs font-medium">
+          Atomic Notation
+        </h3>
+      </figcaption>
+      <div aria-hidden="true" className="mt-2 text-2xl">
+        {katexify(
+          `{}^{${massNumber}}_{${atomicNumber}}\\mathrm{${elementSymbol}}`,
+          false
+        )}
+      </div>
+      <p className="sr-only">
+        {elementName} with mass number {massNumber} and atomic number{" "}
+        {atomicNumber}.
+      </p>
+      <dl className="mt-5 grid grid-cols-3 gap-2">
+        <div>
+          <dt className="text-foreground/70 text-xs">Proton</dt>
+          <dd className="font-mono text-sm font-medium tabular-nums">
+            {atomicNumber}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-foreground/70 text-xs">Electron</dt>
+          <dd className="font-mono text-sm font-medium tabular-nums">
+            {atomicNumber}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-foreground/70 text-xs">Neutron</dt>
+          <dd className="font-mono text-sm font-medium tabular-nums">
+            {neutronNumber}
+          </dd>
+        </div>
+      </dl>
+    </figure>
   );
 }

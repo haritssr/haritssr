@@ -16,32 +16,6 @@ import { ProjectsData } from "@/data/ProjectsData";
 
 const HOME_PROJECTS_LIMIT = 4;
 
-function Section({
-  section,
-  className = "",
-  children,
-  id,
-}: {
-  section: string;
-  className?: string;
-  children: ReactNode;
-  id: string;
-}) {
-  return (
-    <section aria-labelledby={`${id}-heading`} id={id}>
-      <div className="flex items-center justify-between">
-        <h2
-          className="text-foreground mb-6 text-2xl font-semibold select-none"
-          id={`${id}-heading`}
-        >
-          {section}
-        </h2>
-      </div>
-      <div className={className}>{children}</div>
-    </section>
-  );
-}
-
 export default function Home() {
   const remainingProjects = Math.max(
     ProjectsData.length - HOME_PROJECTS_LIMIT,
@@ -189,5 +163,31 @@ export default function Home() {
         </Section>
       </div>
     </div>
+  );
+}
+
+function Section({
+  section,
+  className = "",
+  children,
+  id,
+}: {
+  section: string;
+  className?: string;
+  children: ReactNode;
+  id: string;
+}) {
+  return (
+    <section aria-labelledby={`${id}-heading`} id={id}>
+      <div className="flex items-center justify-between">
+        <h2
+          className="text-foreground mb-6 text-2xl font-semibold select-none"
+          id={`${id}-heading`}
+        >
+          {section}
+        </h2>
+      </div>
+      <div className={className}>{children}</div>
+    </section>
   );
 }

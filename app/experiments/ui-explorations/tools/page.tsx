@@ -23,54 +23,6 @@ const currencyFormatter = new Intl.NumberFormat("id-ID", {
   maximumFractionDigits: 0,
 });
 
-function parsePositiveInt(value: FormDataEntryValue | null) {
-  if (typeof value !== "string") {
-    return null;
-  }
-
-  const parsed = Number(value);
-  if (!Number.isSafeInteger(parsed) || parsed < 0 || parsed > 1_000_000_000) {
-    return null;
-  }
-
-  return parsed;
-}
-
-async function createToolAction(formData: FormData) {
-  "use server";
-  if (!DATABASE_EXPERIMENTS_ENABLED) {
-    notFound();
-  }
-
-  const name = formData.get("name");
-  const price = parsePositiveInt(formData.get("price"));
-  const amount = parsePositiveInt(formData.get("amount"));
-
-  if (
-    typeof name !== "string" ||
-    name.trim().length === 0 ||
-    name.trim().length > 100 ||
-    price === null ||
-    amount === null
-  ) {
-    redirect(`${TOOLS_PATH}?error=invalid-input`);
-  }
-
-  try {
-    await Promise.resolve(
-      createTool({
-        name: name.trim(),
-        price,
-        amount,
-      })
-    );
-  } catch {
-    redirect(`${TOOLS_PATH}?error=create-failed`);
-  }
-
-  revalidatePath(TOOLS_PATH);
-}
-
 interface ToolsPageProps {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
@@ -190,4 +142,52 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
       </div>
     </div>
   );
+}
+
+function parsePositiveInt(value: FormDataEntryValue | null) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const parsed = Number(value);
+  if (!Number.isSafeInteger(parsed) || parsed < 0 || parsed > 1_000_000_000) {
+    return null;
+  }
+
+  return parsed;
+}
+
+async function createToolAction(formData: FormData) {
+  "use server";
+  if (!DATABASE_EXPERIMENTS_ENABLED) {
+    notFound();
+  }
+
+  const name = formData.get("name");
+  const price = parsePositiveInt(formData.get("price"));
+  const amount = parsePositiveInt(formData.get("amount"));
+
+  if (
+    typeof name !== "string" ||
+    name.trim().length === 0 ||
+    name.trim().length > 100 ||
+    price === null ||
+    amount === null
+  ) {
+    redirect(`${TOOLS_PATH}?error=invalid-input`);
+  }
+
+  try {
+    await Promise.resolve(
+      createTool({
+        name: name.trim(),
+        price,
+        amount,
+      })
+    );
+  } catch {
+    redirect(`${TOOLS_PATH}?error=create-failed`);
+  }
+
+  revalidatePath(TOOLS_PATH);
 }

@@ -9,10 +9,6 @@ import SubTitle from "@/components/SubTitle";
 // Example: "Rp 12,000" becomes "12000" after replacement.
 const nonDigitCharacterPattern = /\D/g;
 
-function Section({ name }: { name: string }) {
-  return <h2 className="mb-4 text-xl font-semibold text-zinc-800">{name}</h2>;
-}
-
 export default function YearlyInterest() {
   const [initial, setInitial] = useState<number>(0);
   const [initialInput, setInitialInput] = useState<string>("");
@@ -121,4 +117,8 @@ export default function YearlyInterest() {
       </section>
     </div>
   );
+}
+
+function Section({ name }: { name: string }) {
+  return <h2 className="mb-4 text-xl font-semibold text-zinc-800">{name}</h2>;
 }

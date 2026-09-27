@@ -11,13 +11,6 @@ import { ProjectsData } from "../../../data/ProjectsData";
 import type { ProjectsDataType } from "../../../data/ProjectsData";
 import LoadingFigma from "./LoadingFigma";
 
-function getProject(projectSlug: string) {
-  return ProjectsData.find(
-    ({ project_name: projectName }) =>
-      getProjectSlug(projectName) === projectSlug
-  );
-}
-
 export async function generateMetadata({
   params,
 }: {
@@ -39,6 +32,8 @@ export function generateStaticParams() {
     project: getProjectSlug(project_name),
   }));
 }
+
+export const dynamicParams = false;
 
 export default async function ProjectPage({
   params,
@@ -209,4 +204,9 @@ export default async function ProjectPage({
   );
 }
 
-export const dynamicParams = false;
+function getProject(projectSlug: string) {
+  return ProjectsData.find(
+    ({ project_name: projectName }) =>
+      getProjectSlug(projectName) === projectSlug
+  );
+}

@@ -36,6 +36,56 @@ const initialTodos = [
   { id: 2, title: "Brew tea", done: false },
 ];
 
+export default function ReactUseStateTodoListDemo() {
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
+  function handleAddTodo(title: string) {
+    const id = nextId;
+    nextId += 1;
+    setTodos([
+      ...todos,
+      {
+        id,
+        title,
+        done: false,
+      },
+    ]);
+  }
+  function handleChangeTodo(nextTodo: Todo) {
+    setTodos(
+      todos.map((t) => {
+        if (t.id === nextTodo.id) {
+          return nextTodo;
+        }
+        return t;
+      })
+    );
+  }
+  function handleDeleteTodo(todoId: number) {
+    setTodos(todos.filter((t) => t.id !== todoId));
+  }
+
+  return (
+    <>
+      <SubTitle>Todo list with useState</SubTitle>
+      <SourceCodeLink />
+      <AddTodo onAddTodo={handleAddTodo} />
+      <TaskList
+        onChangeTodo={handleChangeTodo}
+        onDeleteTodo={handleDeleteTodo}
+        todos={todos}
+      />
+      <button
+        onClick={() => {
+          console.log(todos);
+        }}
+        type="button"
+      >
+        Console Todos
+      </button>
+    </>
+  );
+}
+
 function AddTodo({ onAddTodo }: AddTodoProps) {
   const [title, setTitle] = useState("");
   return (
@@ -161,55 +211,5 @@ function Task({ todo, onChange, onDelete }: TaskProps) {
         Delete
       </button>
     </div>
-  );
-}
-
-export default function ReactUseStateTodoListDemo() {
-  const [todos, setTodos] = useState<Todo[]>(initialTodos);
-  function handleAddTodo(title: string) {
-    const id = nextId;
-    nextId += 1;
-    setTodos([
-      ...todos,
-      {
-        id,
-        title,
-        done: false,
-      },
-    ]);
-  }
-  function handleChangeTodo(nextTodo: Todo) {
-    setTodos(
-      todos.map((t) => {
-        if (t.id === nextTodo.id) {
-          return nextTodo;
-        }
-        return t;
-      })
-    );
-  }
-  function handleDeleteTodo(todoId: number) {
-    setTodos(todos.filter((t) => t.id !== todoId));
-  }
-
-  return (
-    <>
-      <SubTitle>Todo list with useState</SubTitle>
-      <SourceCodeLink />
-      <AddTodo onAddTodo={handleAddTodo} />
-      <TaskList
-        onChangeTodo={handleChangeTodo}
-        onDeleteTodo={handleDeleteTodo}
-        todos={todos}
-      />
-      <button
-        onClick={() => {
-          console.log(todos);
-        }}
-        type="button"
-      >
-        Console Todos
-      </button>
-    </>
   );
 }

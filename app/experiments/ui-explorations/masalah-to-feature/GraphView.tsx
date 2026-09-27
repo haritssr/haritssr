@@ -89,187 +89,6 @@ const GROUP_STYLES: Record<
   },
 };
 
-function getFeatureGroup(featureName: string): FeatureGroup {
-  const [group] = featureName.split("/");
-  return FEATURE_GROUPS.find((candidate) => candidate === group) ?? "Referensi";
-}
-
-function getFeatureNodeId(featureName: string): NodeId {
-  return `feature:${featureName}`;
-}
-
-function getProblemNodeId(problemId: string): NodeId {
-  return `problem:${problemId}`;
-}
-
-function normalizeText(value: string) {
-  return value.toLocaleLowerCase();
-}
-
-function formatFeatureName(featureName: string) {
-  return featureName.replaceAll("/", " / ");
-}
-
-function getNodePath(source: NodePosition, target: NodePosition) {
-  const sourceX = source.left + source.width;
-  const sourceY = source.top + source.height / 2;
-  const targetX = target.left;
-  const targetY = target.top + target.height / 2;
-  const curve = Math.max(68, (targetX - sourceX) * 0.5);
-
-  return `M ${sourceX} ${sourceY} C ${sourceX + curve} ${sourceY}, ${
-    targetX - curve
-  } ${targetY}, ${targetX} ${targetY}`;
-}
-
-function getSelectionLabel(selectedNode: NodeId | null) {
-  if (selectedNode === null) {
-    return "Nothing selected";
-  }
-  return selectedNode.startsWith("problem:")
-    ? "Problem selected"
-    : "Feature selected";
-}
-
-function SelectionDetails({
-  featureById,
-  mappingById,
-  onSelect,
-  selectedNode,
-}: {
-  featureById: Map<NodeId, FeatureNode>;
-  mappingById: Map<string, ProblemFeatureMapping>;
-  onSelect: (nodeId: NodeId) => void;
-  selectedNode: NodeId | null;
-}) {
-  const selectedProblem =
-    selectedNode !== null && selectedNode.startsWith("problem:")
-      ? mappingById.get(selectedNode.slice("problem:".length))
-      : undefined;
-  const selectedFeature =
-    selectedNode !== null && selectedNode.startsWith("feature:")
-      ? featureById.get(selectedNode)
-      : undefined;
-
-  if (selectedProblem !== undefined) {
-    return (
-      <div className="space-y-5">
-        <div>
-          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
-            Student problem
-          </p>
-          <h2 className="text-lg leading-snug font-semibold text-zinc-900">
-            {selectedProblem.problem}
-          </h2>
-        </div>
-        <p className="text-sm leading-6 text-zinc-600">
-          {selectedProblem.transformation}
-        </p>
-        <div>
-          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
-            Connected features
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {selectedProblem.features.map((featureName) => {
-              const feature = featureById.get(getFeatureNodeId(featureName));
-              if (!feature) {
-                return null;
-              }
-              return (
-                <button
-                  className={`rounded-full border px-2.5 py-1 text-left text-xs transition hover:-translate-y-px ${GROUP_STYLES[feature.group].chip}`}
-                  key={feature.name}
-                  onClick={() => {
-                    onSelect(feature.id);
-                  }}
-                  type="button"
-                >
-                  {formatFeatureName(feature.name)}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-          <ExternalLink
-            href={selectedProblem.mappingUrl}
-            name="Open mapping in Notion"
-          />
-          <ExternalLink
-            href={selectedProblem.linkedPageUrl}
-            name="Open related page"
-          />
-        </div>
-      </div>
-    );
-  }
-
-  if (selectedFeature !== undefined) {
-    const relatedProblems = [...mappingById.values()].filter((mapping) =>
-      mapping.features.includes(selectedFeature.name)
-    );
-
-    return (
-      <div className="space-y-5">
-        <div>
-          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
-            HL feature
-          </p>
-          <div className="mb-2 flex items-center gap-2">
-            <span
-              className={`h-2.5 w-2.5 rounded-full ${GROUP_STYLES[selectedFeature.group].dot}`}
-            />
-            <h2 className="text-lg leading-snug font-semibold text-zinc-900">
-              {formatFeatureName(selectedFeature.name)}
-            </h2>
-          </div>
-          <p className="text-sm text-zinc-500">
-            Connected to {selectedFeature.problemCount} student problem
-            {selectedFeature.problemCount === 1 ? "" : "s"}.
-          </p>
-        </div>
-        <div>
-          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
-            Problems it addresses
-          </p>
-          <div className="space-y-1.5">
-            {relatedProblems.map((mapping) => (
-              <button
-                className="block w-full rounded-lg px-2.5 py-2 text-left text-sm text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950"
-                key={mapping.id}
-                onClick={() => {
-                  onSelect(getProblemNodeId(mapping.id));
-                }}
-                type="button"
-              >
-                {mapping.problem}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex min-h-48 flex-col justify-between gap-8">
-      <div>
-        <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
-          {getSelectionLabel(selectedNode)}
-        </p>
-        <h2 className="text-lg font-semibold text-zinc-900">Explore the map</h2>
-        <p className="mt-2 text-sm leading-6 text-zinc-600">
-          Select any problem or feature to highlight its connections and inspect
-          the transformation described in the database.
-        </p>
-      </div>
-      <p className="text-sm text-zinc-400">
-        Tip: search for a phrase like “lupa” or filter by a feature family.
-      </p>
-    </div>
-  );
-}
-
 export default function GraphView() {
   const [query, setQuery] = useState("");
   const [selectedGroup, setSelectedGroup] = useState<FilterGroup>("All");
@@ -776,6 +595,187 @@ export default function GraphView() {
           />
         </aside>
       </div>
+    </div>
+  );
+}
+
+function getFeatureGroup(featureName: string): FeatureGroup {
+  const [group] = featureName.split("/");
+  return FEATURE_GROUPS.find((candidate) => candidate === group) ?? "Referensi";
+}
+
+function getFeatureNodeId(featureName: string): NodeId {
+  return `feature:${featureName}`;
+}
+
+function getProblemNodeId(problemId: string): NodeId {
+  return `problem:${problemId}`;
+}
+
+function normalizeText(value: string) {
+  return value.toLocaleLowerCase();
+}
+
+function formatFeatureName(featureName: string) {
+  return featureName.replaceAll("/", " / ");
+}
+
+function getNodePath(source: NodePosition, target: NodePosition) {
+  const sourceX = source.left + source.width;
+  const sourceY = source.top + source.height / 2;
+  const targetX = target.left;
+  const targetY = target.top + target.height / 2;
+  const curve = Math.max(68, (targetX - sourceX) * 0.5);
+
+  return `M ${sourceX} ${sourceY} C ${sourceX + curve} ${sourceY}, ${
+    targetX - curve
+  } ${targetY}, ${targetX} ${targetY}`;
+}
+
+function getSelectionLabel(selectedNode: NodeId | null) {
+  if (selectedNode === null) {
+    return "Nothing selected";
+  }
+  return selectedNode.startsWith("problem:")
+    ? "Problem selected"
+    : "Feature selected";
+}
+
+function SelectionDetails({
+  featureById,
+  mappingById,
+  onSelect,
+  selectedNode,
+}: {
+  featureById: Map<NodeId, FeatureNode>;
+  mappingById: Map<string, ProblemFeatureMapping>;
+  onSelect: (nodeId: NodeId) => void;
+  selectedNode: NodeId | null;
+}) {
+  const selectedProblem =
+    selectedNode !== null && selectedNode.startsWith("problem:")
+      ? mappingById.get(selectedNode.slice("problem:".length))
+      : undefined;
+  const selectedFeature =
+    selectedNode !== null && selectedNode.startsWith("feature:")
+      ? featureById.get(selectedNode)
+      : undefined;
+
+  if (selectedProblem !== undefined) {
+    return (
+      <div className="space-y-5">
+        <div>
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
+            Student problem
+          </p>
+          <h2 className="text-lg leading-snug font-semibold text-zinc-900">
+            {selectedProblem.problem}
+          </h2>
+        </div>
+        <p className="text-sm leading-6 text-zinc-600">
+          {selectedProblem.transformation}
+        </p>
+        <div>
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
+            Connected features
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {selectedProblem.features.map((featureName) => {
+              const feature = featureById.get(getFeatureNodeId(featureName));
+              if (!feature) {
+                return null;
+              }
+              return (
+                <button
+                  className={`rounded-full border px-2.5 py-1 text-left text-xs transition hover:-translate-y-px ${GROUP_STYLES[feature.group].chip}`}
+                  key={feature.name}
+                  onClick={() => {
+                    onSelect(feature.id);
+                  }}
+                  type="button"
+                >
+                  {formatFeatureName(feature.name)}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+          <ExternalLink
+            href={selectedProblem.mappingUrl}
+            name="Open mapping in Notion"
+          />
+          <ExternalLink
+            href={selectedProblem.linkedPageUrl}
+            name="Open related page"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (selectedFeature !== undefined) {
+    const relatedProblems = [...mappingById.values()].filter((mapping) =>
+      mapping.features.includes(selectedFeature.name)
+    );
+
+    return (
+      <div className="space-y-5">
+        <div>
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
+            HL feature
+          </p>
+          <div className="mb-2 flex items-center gap-2">
+            <span
+              className={`h-2.5 w-2.5 rounded-full ${GROUP_STYLES[selectedFeature.group].dot}`}
+            />
+            <h2 className="text-lg leading-snug font-semibold text-zinc-900">
+              {formatFeatureName(selectedFeature.name)}
+            </h2>
+          </div>
+          <p className="text-sm text-zinc-500">
+            Connected to {selectedFeature.problemCount} student problem
+            {selectedFeature.problemCount === 1 ? "" : "s"}.
+          </p>
+        </div>
+        <div>
+          <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
+            Problems it addresses
+          </p>
+          <div className="space-y-1.5">
+            {relatedProblems.map((mapping) => (
+              <button
+                className="block w-full rounded-lg px-2.5 py-2 text-left text-sm text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950"
+                key={mapping.id}
+                onClick={() => {
+                  onSelect(getProblemNodeId(mapping.id));
+                }}
+                type="button"
+              >
+                {mapping.problem}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex min-h-48 flex-col justify-between gap-8">
+      <div>
+        <p className="mb-2 text-[11px] font-medium tracking-[0.16em] text-zinc-400 uppercase">
+          {getSelectionLabel(selectedNode)}
+        </p>
+        <h2 className="text-lg font-semibold text-zinc-900">Explore the map</h2>
+        <p className="mt-2 text-sm leading-6 text-zinc-600">
+          Select any problem or feature to highlight its connections and inspect
+          the transformation described in the database.
+        </p>
+      </div>
+      <p className="text-sm text-zinc-400">
+        Tip: search for a phrase like “lupa” or filter by a feature family.
+      </p>
     </div>
   );
 }

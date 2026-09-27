@@ -24,6 +24,212 @@ const ORBITAL_PALETTES = [
   { positive: [43, 184, 105], negative: [61, 165, 141] },
 ] as const;
 
+export default function OrbitalIllustration({
+  atomicNumber,
+  elementName,
+}: {
+  atomicNumber: number;
+  elementName: string;
+}) {
+  const [selectedLabel, setSelectedLabel] = useState("2p");
+  const [selectedOrientation, setSelectedOrientation] = useState(0);
+  const [showAxes, setShowAxes] = useState(true);
+  const [showSurface, setShowSurface] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fullscreenError, setFullscreenError] = useState(false);
+  const viewerRef = useRef<HTMLDivElement>(null);
+  const electronCounts = getElectronCounts(atomicNumber);
+  const selectedIndex = ORBITALS.findIndex(
+    (orbital, index) =>
+      orbital.label === selectedLabel && electronCounts[index] > 0
+  );
+  const activeIndex =
+    selectedIndex === -1
+      ? electronCounts.findLastIndex((electrons) => electrons > 0)
+      : selectedIndex;
+  const orbital = ORBITALS[activeIndex] ?? ORBITALS[0];
+  const electrons = electronCounts[activeIndex] ?? 0;
+  const azimuthal = SUBSHELL_TYPES.indexOf(orbital.label.slice(-1));
+  const orientation = Math.min(
+    selectedOrientation,
+    Math.min(electrons, orbital.orbitalCount) - 1
+  );
+  const points = useMemo(
+    () => sampleOrbital(orbital.shell, azimuthal, orientation - azimuthal),
+    [orbital.shell, azimuthal, orientation]
+  );
+  const surface = useMemo(
+    () => makeOrbitalSurface(orbital.shell, azimuthal, orientation - azimuthal),
+    [orbital.shell, azimuthal, orientation]
+  );
+  const description = `${elementName}: ${orbitalDescription(orbital, orientation)}, ${occupancy(electrons, orbital.orbitalCount, orientation)} electrons`;
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === viewerRef.current);
+    };
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+    };
+  }, []);
+
+  async function toggleFullscreen() {
+    try {
+      await (document.fullscreenElement === viewerRef.current
+        ? document.exitFullscreen()
+        : viewerRef.current?.requestFullscreen());
+      setFullscreenError(false);
+    } catch {
+      setFullscreenError(true);
+    }
+  }
+
+  return (
+    <section aria-labelledby="orbital-illustration-title">
+      <Section id="orbital-illustration-title" name="Electron Orbital in 3D" />
+      <div className="border-border overflow-hidden rounded-xl border">
+        <div className="border-border flex flex-wrap items-start gap-x-6 gap-y-4 border-b p-4">
+          <div className="min-w-0 flex-[1_1_16rem]">
+            <p className="text-foreground/70 mb-2 text-xs font-medium">
+              Occupied subshell
+            </p>
+            <fieldset
+              aria-label="Occupied subshells"
+              className="flex flex-wrap gap-2"
+            >
+              {ORBITALS.map((candidate, index) =>
+                electronCounts[index] > 0 ? (
+                  <button
+                    aria-pressed={index === activeIndex}
+                    className={`focus-visible:outline-action hover:bg-interface-hover hover:text-foreground cursor-pointer rounded-md border px-2.5 py-1 font-mono text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${index === activeIndex ? "border-action bg-action text-white" : "border-border"}`}
+                    key={candidate.label}
+                    onClick={() => {
+                      setSelectedLabel(candidate.label);
+                      setSelectedOrientation(0);
+                    }}
+                    type="button"
+                  >
+                    {candidate.label}
+                    <sup>{electronCounts[index]}</sup>
+                  </button>
+                ) : null
+              )}
+            </fieldset>
+          </div>
+          {orbital.orbitalCount > 1 ? (
+            <div className="ml-auto max-w-full min-w-0">
+              <p className="text-foreground/70 mb-2 text-xs font-medium">
+                Orbital orientation
+              </p>
+              <fieldset
+                aria-label="Occupied orbital orientations"
+                className="flex flex-wrap gap-2"
+              >
+                {Array.from({ length: orbital.orbitalCount }, (_, index) => {
+                  const count = occupancy(
+                    electrons,
+                    orbital.orbitalCount,
+                    index
+                  );
+                  if (count === 0) {
+                    return null;
+                  }
+                  return (
+                    <button
+                      aria-label={`Orientation ${index + 1}, ${count} electron${count === 1 ? "" : "s"}`}
+                      aria-pressed={index === orientation}
+                      className={`focus-visible:outline-action hover:bg-interface-hover hover:text-foreground cursor-pointer rounded-md border px-2.5 py-1 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${index === orientation ? "border-action bg-action text-white" : "border-border"}`}
+                      key={index}
+                      onClick={() => {
+                        setSelectedOrientation(index);
+                      }}
+                      type="button"
+                    >
+                      {index + 1}{" "}
+                      <span aria-hidden="true">{count === 2 ? "↑↓" : "↑"}</span>
+                    </button>
+                  );
+                })}
+              </fieldset>
+            </div>
+          ) : null}
+        </div>
+        <div className={styles.viewer} ref={viewerRef}>
+          <OrbitalCanvas
+            azimuthal={azimuthal}
+            description={description}
+            points={points}
+            showAxes={showAxes}
+            showSurface={showSurface}
+            surface={surface}
+          />
+          <div className="border-border text-foreground flex flex-wrap items-center justify-between gap-3 border-t bg-white p-3 pl-4 text-sm">
+            <span className="font-mono">
+              {orbital.label} · orientation {orientation + 1} ·{" "}
+              {occupancy(electrons, orbital.orbitalCount, orientation)} e⁻
+            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                aria-checked={showSurface}
+                className="focus-visible:outline-action inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+                onClick={() => {
+                  setShowSurface((visible) => !visible);
+                }}
+                role="switch"
+                type="button"
+              >
+                Shape
+                <span
+                  aria-hidden="true"
+                  className={`block w-11 rounded-full p-1 transition-colors ${showSurface ? "bg-action" : "bg-border"}`}
+                >
+                  <span
+                    className={`block size-4 rounded-full bg-white shadow-sm transition-transform ${showSurface ? "translate-x-5" : "translate-x-0"}`}
+                  />
+                </span>
+              </button>
+              <button
+                aria-checked={showAxes}
+                className="focus-visible:outline-action inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+                onClick={() => {
+                  setShowAxes((visible) => !visible);
+                }}
+                role="switch"
+                type="button"
+              >
+                Axes
+                <span
+                  aria-hidden="true"
+                  className={`block w-11 rounded-full p-1 transition-colors ${showAxes ? "bg-action" : "bg-border"}`}
+                >
+                  <span
+                    className={`block size-4 rounded-full bg-white shadow-sm transition-transform ${showAxes ? "translate-x-5" : "translate-x-0"}`}
+                  />
+                </span>
+              </button>
+              <button
+                className="border-border focus-visible:outline-action cursor-pointer rounded-md border px-3 py-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                onClick={() => {
+                  void toggleFullscreen();
+                }}
+                type="button"
+              >
+                {isFullscreen ? "Exit full screen" : "Full screen"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {fullscreenError ? (
+        <p className="mt-2 text-sm text-red-700">
+          Full screen is unavailable in this browser.
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
 function drawOrbitalSurface({
   context,
   surface,
@@ -385,210 +591,4 @@ function occupancy(electrons: number, orbitalCount: number, index: number) {
 
 function orbitalDescription(orbital: OrbitalDefinition, orientation: number) {
   return `${orbital.label} orbital, orientation ${orientation + 1} of ${orbital.orbitalCount}`;
-}
-
-export default function OrbitalIllustration({
-  atomicNumber,
-  elementName,
-}: {
-  atomicNumber: number;
-  elementName: string;
-}) {
-  const [selectedLabel, setSelectedLabel] = useState("2p");
-  const [selectedOrientation, setSelectedOrientation] = useState(0);
-  const [showAxes, setShowAxes] = useState(true);
-  const [showSurface, setShowSurface] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [fullscreenError, setFullscreenError] = useState(false);
-  const viewerRef = useRef<HTMLDivElement>(null);
-  const electronCounts = getElectronCounts(atomicNumber);
-  const selectedIndex = ORBITALS.findIndex(
-    (orbital, index) =>
-      orbital.label === selectedLabel && electronCounts[index] > 0
-  );
-  const activeIndex =
-    selectedIndex === -1
-      ? electronCounts.findLastIndex((electrons) => electrons > 0)
-      : selectedIndex;
-  const orbital = ORBITALS[activeIndex] ?? ORBITALS[0];
-  const electrons = electronCounts[activeIndex] ?? 0;
-  const azimuthal = SUBSHELL_TYPES.indexOf(orbital.label.slice(-1));
-  const orientation = Math.min(
-    selectedOrientation,
-    Math.min(electrons, orbital.orbitalCount) - 1
-  );
-  const points = useMemo(
-    () => sampleOrbital(orbital.shell, azimuthal, orientation - azimuthal),
-    [orbital.shell, azimuthal, orientation]
-  );
-  const surface = useMemo(
-    () => makeOrbitalSurface(orbital.shell, azimuthal, orientation - azimuthal),
-    [orbital.shell, azimuthal, orientation]
-  );
-  const description = `${elementName}: ${orbitalDescription(orbital, orientation)}, ${occupancy(electrons, orbital.orbitalCount, orientation)} electrons`;
-
-  useEffect(() => {
-    const onFullscreenChange = () => {
-      setIsFullscreen(document.fullscreenElement === viewerRef.current);
-    };
-    document.addEventListener("fullscreenchange", onFullscreenChange);
-    return () => {
-      document.removeEventListener("fullscreenchange", onFullscreenChange);
-    };
-  }, []);
-
-  async function toggleFullscreen() {
-    try {
-      await (document.fullscreenElement === viewerRef.current
-        ? document.exitFullscreen()
-        : viewerRef.current?.requestFullscreen());
-      setFullscreenError(false);
-    } catch {
-      setFullscreenError(true);
-    }
-  }
-
-  return (
-    <section aria-labelledby="orbital-illustration-title">
-      <Section id="orbital-illustration-title" name="Electron Orbital in 3D" />
-      <div className="border-border overflow-hidden rounded-xl border">
-        <div className="border-border flex flex-wrap items-start gap-x-6 gap-y-4 border-b p-4">
-          <div className="min-w-0 flex-[1_1_16rem]">
-            <p className="text-foreground/70 mb-2 text-xs font-medium">
-              Occupied subshell
-            </p>
-            <fieldset
-              aria-label="Occupied subshells"
-              className="flex flex-wrap gap-2"
-            >
-              {ORBITALS.map((candidate, index) =>
-                electronCounts[index] > 0 ? (
-                  <button
-                    aria-pressed={index === activeIndex}
-                    className={`focus-visible:outline-action hover:bg-interface-hover hover:text-foreground cursor-pointer rounded-md border px-2.5 py-1 font-mono text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${index === activeIndex ? "border-action bg-action text-white" : "border-border"}`}
-                    key={candidate.label}
-                    onClick={() => {
-                      setSelectedLabel(candidate.label);
-                      setSelectedOrientation(0);
-                    }}
-                    type="button"
-                  >
-                    {candidate.label}
-                    <sup>{electronCounts[index]}</sup>
-                  </button>
-                ) : null
-              )}
-            </fieldset>
-          </div>
-          {orbital.orbitalCount > 1 ? (
-            <div className="ml-auto max-w-full min-w-0">
-              <p className="text-foreground/70 mb-2 text-xs font-medium">
-                Orbital orientation
-              </p>
-              <fieldset
-                aria-label="Occupied orbital orientations"
-                className="flex flex-wrap gap-2"
-              >
-                {Array.from({ length: orbital.orbitalCount }, (_, index) => {
-                  const count = occupancy(
-                    electrons,
-                    orbital.orbitalCount,
-                    index
-                  );
-                  if (count === 0) {
-                    return null;
-                  }
-                  return (
-                    <button
-                      aria-label={`Orientation ${index + 1}, ${count} electron${count === 1 ? "" : "s"}`}
-                      aria-pressed={index === orientation}
-                      className={`focus-visible:outline-action hover:bg-interface-hover hover:text-foreground cursor-pointer rounded-md border px-2.5 py-1 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${index === orientation ? "border-action bg-action text-white" : "border-border"}`}
-                      key={index}
-                      onClick={() => {
-                        setSelectedOrientation(index);
-                      }}
-                      type="button"
-                    >
-                      {index + 1}{" "}
-                      <span aria-hidden="true">{count === 2 ? "↑↓" : "↑"}</span>
-                    </button>
-                  );
-                })}
-              </fieldset>
-            </div>
-          ) : null}
-        </div>
-        <div className={styles.viewer} ref={viewerRef}>
-          <OrbitalCanvas
-            azimuthal={azimuthal}
-            description={description}
-            points={points}
-            showAxes={showAxes}
-            showSurface={showSurface}
-            surface={surface}
-          />
-          <div className="border-border text-foreground flex flex-wrap items-center justify-between gap-3 border-t bg-white p-3 pl-4 text-sm">
-            <span className="font-mono">
-              {orbital.label} · orientation {orientation + 1} ·{" "}
-              {occupancy(electrons, orbital.orbitalCount, orientation)} e⁻
-            </span>
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                aria-checked={showSurface}
-                className="focus-visible:outline-action inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
-                onClick={() => {
-                  setShowSurface((visible) => !visible);
-                }}
-                role="switch"
-                type="button"
-              >
-                Shape
-                <span
-                  aria-hidden="true"
-                  className={`block w-11 rounded-full p-1 transition-colors ${showSurface ? "bg-action" : "bg-border"}`}
-                >
-                  <span
-                    className={`block size-4 rounded-full bg-white shadow-sm transition-transform ${showSurface ? "translate-x-5" : "translate-x-0"}`}
-                  />
-                </span>
-              </button>
-              <button
-                aria-checked={showAxes}
-                className="focus-visible:outline-action inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
-                onClick={() => {
-                  setShowAxes((visible) => !visible);
-                }}
-                role="switch"
-                type="button"
-              >
-                Axes
-                <span
-                  aria-hidden="true"
-                  className={`block w-11 rounded-full p-1 transition-colors ${showAxes ? "bg-action" : "bg-border"}`}
-                >
-                  <span
-                    className={`block size-4 rounded-full bg-white shadow-sm transition-transform ${showAxes ? "translate-x-5" : "translate-x-0"}`}
-                  />
-                </span>
-              </button>
-              <button
-                className="border-border focus-visible:outline-action cursor-pointer rounded-md border px-3 py-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2"
-                onClick={() => {
-                  void toggleFullscreen();
-                }}
-                type="button"
-              >
-                {isFullscreen ? "Exit full screen" : "Full screen"}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {fullscreenError ? (
-        <p className="mt-2 text-sm text-red-700">
-          Full screen is unavailable in this browser.
-        </p>
-      ) : null}
-    </section>
-  );
 }

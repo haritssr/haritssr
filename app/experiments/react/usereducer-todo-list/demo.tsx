@@ -53,6 +53,58 @@ interface IndividualTaskProps {
   onDelete: (taskId: number) => void;
 }
 
+export default function ReactUseReducerTodoListDemo() {
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTask);
+  function handleAddTask(text: string) {
+    if (!text.trim()) {
+      return;
+    }
+    const id = nextId;
+    nextId += 1;
+    dispatch({ type: "added", id, text });
+  }
+
+  function handleChangeTask(task: Task) {
+    dispatch({
+      type: "changed",
+      task,
+    });
+  }
+
+  function handleDeleteTask(taskId: number) {
+    dispatch({
+      type: "deleted",
+      id: taskId,
+    });
+  }
+  return (
+    <>
+      <SubTitle>
+        Todo list with useReducer by{" "}
+        <ExternalLink
+          href="https://beta.reactjs.org/learn/extracting-state-logic-into-a-reducer"
+          name="beta.reactjs.org"
+        />
+      </SubTitle>
+      <SourceCodeLink />
+      <AddTask onAddTask={handleAddTask} />
+      <TaskList
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+        tasks={tasks}
+      />
+      <button
+        onClick={() => {
+          console.log(tasks);
+        }}
+        type="button"
+      >
+        Console Tasks
+      </button>
+    </>
+  );
+}
+
 function tasksReducer(tasks: Task[], action: TaskAction): Task[] {
   switch (action.type) {
     case "added": {
@@ -189,57 +241,5 @@ function IndividualTask({ task, onChange, onDelete }: IndividualTaskProps) {
         </button>
       </div>
     </div>
-  );
-}
-
-export default function ReactUseReducerTodoListDemo() {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTask);
-  function handleAddTask(text: string) {
-    if (!text.trim()) {
-      return;
-    }
-    const id = nextId;
-    nextId += 1;
-    dispatch({ type: "added", id, text });
-  }
-
-  function handleChangeTask(task: Task) {
-    dispatch({
-      type: "changed",
-      task,
-    });
-  }
-
-  function handleDeleteTask(taskId: number) {
-    dispatch({
-      type: "deleted",
-      id: taskId,
-    });
-  }
-  return (
-    <>
-      <SubTitle>
-        Todo list with useReducer by{" "}
-        <ExternalLink
-          href="https://beta.reactjs.org/learn/extracting-state-logic-into-a-reducer"
-          name="beta.reactjs.org"
-        />
-      </SubTitle>
-      <SourceCodeLink />
-      <AddTask onAddTask={handleAddTask} />
-      <TaskList
-        onChangeTask={handleChangeTask}
-        onDeleteTask={handleDeleteTask}
-        tasks={tasks}
-      />
-      <button
-        onClick={() => {
-          console.log(tasks);
-        }}
-        type="button"
-      >
-        Console Tasks
-      </button>
-    </>
   );
 }
