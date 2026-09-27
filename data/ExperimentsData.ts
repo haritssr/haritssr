@@ -33,6 +33,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       { slug: "columns", title: "Columns" },
       { slug: "tailwind-vs-apple-color", title: "Tailwind vs Apple Color" },
       { slug: "feedback", title: "Feedback" },
+      { slug: "grid-vs-column", title: "Grid vs. Columns" },
     ],
     id: 1,
     logoSrc: "/icons/tailwindcss.jpg",
