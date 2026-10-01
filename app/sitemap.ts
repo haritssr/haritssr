@@ -1,60 +1,18 @@
 import type { MetadataRoute } from "next";
 
 import { allBlogPosts } from "@/utils/blog-posts";
-import { isExperimentAvailable } from "@/utils/databaseExperiments";
+import { getExperimentRoutes } from "@/utils/experimentRoutes";
 import { getProjectSlug } from "@/utils/projectSlug";
 import { SITE_URL } from "@/utils/site";
 
-import { ExperimentsData } from "../data/ExperimentsData";
-import {
-  NextjsArticlesData,
-  NextjsStudentsData,
-} from "../data/NextjsExperimentsData";
 import { ProjectsData } from "../data/ProjectsData";
-import { getAllPostIds } from "../utils/posts";
 
-const staticRoutes = [
-  "/",
-  "/blog",
-  "/experiments",
-  "/projects",
-  "/design",
-  ...(process.env.NODE_ENV === "production"
-    ? []
-    : [
-        "/experiments/ui-explorations/task/architecture",
-        "/experiments/ui-explorations/task/history",
-        "/experiments/ui-explorations/task/statistics",
-      ]),
-];
-
-const experimentRoutes = ExperimentsData.flatMap((domain) => {
-  const routes = domain.experiments
-    .filter((experiment) => isExperimentAvailable(domain.slug, experiment.slug))
-    .map((experiment) => `/experiments/${domain.slug}/${experiment.slug}`);
-
-  return [`/experiments/${domain.slug}`, ...routes];
-});
-
-const localPostRoutes = getAllPostIds().map(
-  ({ params }) => `/experiments/nextjs/posts/${params.id}`
-);
-
-const articleRoutes = NextjsArticlesData.map(
-  (article) => `/experiments/nextjs/articles/${article.id}`
-);
-
-const studentRoutes = NextjsStudentsData.map(
-  (student) => `/experiments/nextjs/students/${student.id}`
-);
+const staticRoutes = ["/", "/blog", "/experiments", "/projects", "/design"];
 
 const routeUrls = [
   ...new Set([
     ...staticRoutes,
-    ...experimentRoutes,
-    ...localPostRoutes,
-    ...articleRoutes,
-    ...studentRoutes,
+    ...getExperimentRoutes().map((entry) => entry.route),
     ...ProjectsData.map(
       (project) => `/projects/${getProjectSlug(project.project_name)}`
     ),

@@ -1,5 +1,5 @@
-import { ExperimentsData } from "../data/ExperimentsData";
-import { isExperimentAvailable } from "../utils/databaseExperiments";
+import { getAvailableExperimentDomains } from "@/utils/experimentCatalog";
+
 import ExperimentCard from "./ExperimentCard";
 import MoreItemsLink from "./MoreItemsLink";
 
@@ -8,12 +8,7 @@ export default function ExperimentsGrid({
 }: {
   mobileLimit?: number;
 }) {
-  const visibleDomains = ExperimentsData.map((domain) => ({
-    ...domain,
-    experiments: domain.experiments.filter((experiment) =>
-      isExperimentAvailable(domain.slug, experiment.slug)
-    ),
-  }));
+  const visibleDomains = getAvailableExperimentDomains();
   const remainingDomains = Math.max(
     visibleDomains.length - (mobileLimit ?? visibleDomains.length),
     0

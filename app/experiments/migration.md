@@ -17,7 +17,10 @@ app/experiments/
 ```
 
 Shared experiment-domain components live in `components/`:
-`ExperimentDomainIndex.tsx` and `ExperimentDomainLayout.tsx`.
+`ExperimentDomainIndex.tsx`, `ExperimentDomainLayout.tsx`, and
+`ExperimentDomainShell.tsx`. The layout reads the catalog on the server and
+passes only the current domain's labels and navigation settings to the client
+shell.
 
 The same structure is used for every experiment domain. The article, post,
 and student detail pages under `nextjs` retain their dynamic `[id]` segments
@@ -29,7 +32,12 @@ because those routes are generated from data.
   owns its metadata.
 - `demo.tsx` is the colocated Client Component for interactive examples.
 - `data/ExperimentsData.ts` stores display metadata and explicit URL slugs for
-  the grid, domain indexes, page metadata, counts, and sitemap.
+  the grid, domain indexes, page metadata, counts, and sitemap. It is server-only.
+- `utils/experimentCatalog.ts` provides available experiment records for the
+  grid, domain indexes, and counts, applying the local database availability
+  policy.
+- `utils/experimentRoutes.ts` provides experiment route entries for search and
+  sitemap, including nested task pages and data-generated Next.js detail pages.
 - The catalog never imports page or demo components.
 - Unknown folders use the standard Next.js not-found behavior.
 
@@ -60,9 +68,14 @@ export default function ExperimentPage() {
 No central import map or `generateStaticParams` entry is needed for fixed
 experiment pages.
 
+Set `hideTitle: true` on a catalog entry when the page renders its own title,
+and `hideBackButton: true` when it provides its own navigation. These settings
+also apply to nested pages under that experiment.
+
 ## Validation
 
-`data/ExperimentsData.test.ts` checks both directions of the contract: every
-catalog entry has a route page, and every direct experiment page is listed in
-the catalog. It also verifies unique slugs and guards against restoring the old
-dynamic registry.
+Run `bun run check` and `bun run typecheck` after changing the catalog or shared
+route helpers. Verify that search and sitemap expose the same experiment URLs
+and omit the task and tools database routes in production. Each catalog entry
+must still have a literal route page, and each direct experiment page must be
+listed in the catalog.

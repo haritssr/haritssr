@@ -1,15 +1,9 @@
 import "server-only";
-import { ExperimentsData } from "@/data/ExperimentsData";
-import {
-  NextjsArticlesData,
-  NextjsStudentsData,
-} from "@/data/NextjsExperimentsData";
 import { ProjectsData } from "@/data/ProjectsData";
 import { navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
 import { allBlogPosts } from "@/utils/blog-posts";
-import { isExperimentAvailable } from "@/utils/databaseExperiments";
-import { getSortedPostsData } from "@/utils/posts";
+import { getExperimentRoutes } from "@/utils/experimentRoutes";
 import { getProjectSlug } from "@/utils/projectSlug";
 
 const homeSections: RouteDoc[] = [
@@ -42,39 +36,10 @@ const homeSections: RouteDoc[] = [
 // Derive concrete URLs from the same content that renders each page. Keep
 // filesystem reads and full content records out of the search client bundle.
 export function getSearchIndex(): RouteDoc[] {
-  const experiments = ExperimentsData.flatMap((domain) => [
-    {
-      route: `/experiments/${domain.slug}`,
-      title: domain.title,
-      description: domain.description,
-      group: "Experiment categories",
-    },
-    ...domain.experiments
-      .filter((experiment) =>
-        isExperimentAvailable(domain.slug, experiment.slug)
-      )
-      .map((experiment) => ({
-        route: `/experiments/${domain.slug}/${experiment.slug}`,
-        title: experiment.title,
-        description: domain.title,
-        group: "Experiments",
-      })),
-  ]);
-
-  const taskPages = isExperimentAvailable("ui-explorations", "task")
-    ? ["architecture", "history", "statistics"].map((page) => ({
-        route: `/experiments/ui-explorations/task/${page}`,
-        title: `Task ${page}`,
-        description: "Task tracker · UI explorations",
-        group: "Experiments",
-      }))
-    : [];
-
   const docs: RouteDoc[] = [
     ...navigationRoutes,
     ...homeSections,
-    ...experiments,
-    ...taskPages,
+    ...getExperimentRoutes(),
     ...ProjectsData.map((project) => ({
       route: `/projects/${getProjectSlug(project.project_name)}`,
       title: project.project_name,
@@ -86,24 +51,6 @@ export function getSearchIndex(): RouteDoc[] {
       title: post.title,
       description: `${post.topic} · ${post.summary}`,
       group: "Blog",
-    })),
-    ...getSortedPostsData().map((post) => ({
-      route: `/experiments/nextjs/posts/${post.id}`,
-      title: post.title,
-      description: "Next.js · Posts",
-      group: "Experiments",
-    })),
-    ...NextjsArticlesData.map((article) => ({
-      route: `/experiments/nextjs/articles/${article.id}`,
-      title: article.title,
-      description: "Next.js · Articles",
-      group: "Experiments",
-    })),
-    ...NextjsStudentsData.map((student) => ({
-      route: `/experiments/nextjs/students/${student.id}`,
-      title: student.name,
-      description: `Next.js · Students · ${student.address.city}`,
-      group: "Experiments",
     })),
   ];
 

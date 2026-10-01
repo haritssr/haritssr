@@ -1,35 +1,17 @@
 import Image from "next/image";
 
 import InternalLink from "@/components/InternalLink";
-import { getExperimentDomain } from "@/data/ExperimentsData";
-import { isExperimentAvailable } from "@/utils/databaseExperiments";
+import { getAvailableExperimentDomain } from "@/utils/experimentCatalog";
 
 interface ExperimentDomainIndexProps {
   domainSlug: string;
 }
 
-function formatDate(date: string) {
-  return new Intl.DateTimeFormat("en", {
-    day: "numeric",
-    month: "short",
-    timeZone: "UTC",
-    year: "numeric",
-  }).format(new Date(`${date}T00:00:00.000Z`));
-}
-
 export default function ExperimentDomainIndex({
   domainSlug,
 }: ExperimentDomainIndexProps) {
-  const domain = getExperimentDomain(domainSlug);
-  const availableExperiments = domain.experiments.filter((experiment) =>
-    isExperimentAvailable(domain.slug, experiment.slug)
-  );
-  const experiments =
-    domain.slug === "ui-explorations"
-      ? availableExperiments.toSorted((first, second) =>
-          first.createdAt.localeCompare(second.createdAt)
-        )
-      : availableExperiments;
+  const domain = getAvailableExperimentDomain(domainSlug);
+  const { experiments } = domain;
 
   return (
     <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
@@ -51,12 +33,6 @@ export default function ExperimentDomainIndex({
             >
               {experiment.title}
             </InternalLink>
-            {domain.slug === "ui-explorations" && (
-              <span className="text-foreground/55 ml-2 text-xs">
-                Added {formatDate(experiment.createdAt)} · Edited{" "}
-                {formatDate(experiment.updatedAt)}
-              </span>
-            )}
           </li>
         ))}
       </ol>

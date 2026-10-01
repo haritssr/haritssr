@@ -3,9 +3,7 @@ import type { Metadata } from "next";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import PageTitle from "@/components/PageTitle";
 import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
-import { isExperimentAvailable } from "@/utils/databaseExperiments";
-
-import { ExperimentsData } from "../../data/ExperimentsData";
+import { getAvailableExperimentDomains } from "@/utils/experimentCatalog";
 
 export const metadata: Metadata = {
   title: "Experiments",
@@ -25,13 +23,10 @@ export default function ExperimentsPage() {
 }
 
 function getExperimentsHomeDescription(): string {
-  let totalExperiment = 0;
-
-  for (const experiment of ExperimentsData) {
-    totalExperiment += experiment.experiments.filter((entry) =>
-      isExperimentAvailable(experiment.slug, entry.slug)
-    ).length;
-  }
+  const totalExperiment = getAvailableExperimentDomains().reduce(
+    (total, domain) => total + domain.experiments.length,
+    0
+  );
 
   return `${totalExperiment} experiments across the TypeScript and React ecosystem.`;
 }

@@ -1,8 +1,11 @@
+import "server-only";
 import type { Metadata } from "next";
 
 interface ExperimentEntry {
   /** ISO calendar dates (YYYY-MM-DD) tracked from the route history. */
   readonly createdAt: string;
+  readonly hideBackButton?: boolean;
+  readonly hideTitle?: boolean;
   readonly slug: string;
   readonly title: string;
   readonly updatedAt: string;
@@ -318,18 +321,21 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "articles",
         title: "Articles",
+        hideTitle: true,
         createdAt: "2026-02-04",
         updatedAt: "2026-09-20",
       },
       {
         slug: "students",
         title: "Students",
+        hideTitle: true,
         createdAt: "2026-02-04",
         updatedAt: "2026-09-20",
       },
       {
         slug: "posts",
         title: "Posts",
+        hideTitle: true,
         createdAt: "2026-02-04",
         updatedAt: "2026-09-20",
       },
@@ -783,6 +789,8 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "task",
         title: "Task",
+        hideBackButton: true,
+        hideTitle: true,
         createdAt: "2026-08-18",
         updatedAt: "2026-09-27",
       },
