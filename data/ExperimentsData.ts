@@ -867,6 +867,33 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     slug: "physics",
     title: "Physics",
   },
+  {
+    description: "Explore calculus through guided graphs and practice",
+    experiments: [
+      {
+        slug: "limits",
+        title: "Limits",
+        createdAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+      },
+      {
+        slug: "derivatives",
+        title: "Derivatives",
+        createdAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+      },
+      {
+        slug: "integrals",
+        title: "Integrals",
+        createdAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+      },
+    ],
+    id: 17,
+    logoSrc: "/icons/math.svg",
+    slug: "math",
+    title: "Mathematics",
+  },
 ];
 
 export type ExperimentDomainData = ExperimentDomain;
