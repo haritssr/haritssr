@@ -92,7 +92,7 @@ export default function Home() {
             <p className="text-foreground font-semibold">Interests</p>
             <p className="text-foreground/70 -mt-1 leading-8">
               Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
-              Physics, and Education .
+              Physics, and Education.
             </p>
           </div>
         </div>
@@ -146,7 +146,7 @@ export default function Home() {
               CV
             </a>
           </li>
-          <li>Touch typist (±90 WPM)</li>
+          <li>Touch typist, ±90 WPM.</li>
           <li>Constraints give shape.</li>
           <li>Eudaimonic over hedonic.</li>
           <li>
@@ -160,7 +160,7 @@ export default function Home() {
             <kbd className="text-foreground">ctrl+P</kbd>) to search the site.
           </li>
           <li>I use Codex CLI in Zed Editor for dev.</li>
-          <li>Former chess player, peaked at around 2000 Elo.</li>
+          <li>Former chess player, ±2000 Elo.</li>
         </ul>
       </Section>
     </div>
