@@ -15,22 +15,55 @@ interface User {
   age: number;
 }
 
-const searchableFields = ["firstName", "lastName", "maidenName"] as const;
-
 export default function ReactSearchTableDemo() {
   const [query, setQuery] = useState<string>("");
   const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const debouncedSearch = useDebounce(query, 1000);
 
   useEffect(() => {
+    setUsers([]);
+    setError(null);
+    setLoading(false);
+    if (query !== debouncedSearch) {
+      return;
+    }
+
+    const controller = new AbortController();
     const dataFetch = async () => {
-      const response = await fetch(`/api/searchWithApi?q=${debouncedSearch}`);
-      const data: unknown = await response.json();
-      setUsers(Array.isArray(data) ? data.filter(isUser) : []);
+      setLoading(true);
+      try {
+        const params = new URLSearchParams({ q: debouncedSearch });
+        const response = await fetch(`/api/searchWithApi?${params}`, {
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          throw new Error(`People search failed: ${response.status}`);
+        }
+        const data: unknown = await response.json();
+        if (!Array.isArray(data) || !data.every(isUser)) {
+          throw new TypeError("People search response is invalid");
+        }
+        if (!controller.signal.aborted) {
+          setUsers(data);
+        }
+      } catch {
+        if (!controller.signal.aborted) {
+          setError("People could not be loaded. Try another search.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
     };
-    dataFetch();
-  }, [debouncedSearch]);
+    void dataFetch();
+    return () => {
+      controller.abort();
+    };
+  }, [debouncedSearch, query]);
 
   return (
     <>
@@ -64,31 +97,32 @@ export default function ReactSearchTableDemo() {
         type="search"
         value={query}
       />
-      <table className="border">
+      {loading || query !== debouncedSearch ? (
+        <output className="block">Searching…</output>
+      ) : null}
+      {error ? <p role="alert">{error}</p> : null}
+      <table
+        aria-busy={loading || query !== debouncedSearch}
+        className="border"
+      >
         <caption className="sr-only">People search results</caption>
         <thead>
           <tr>
             <th scope="col">No</th>
             <th scope="col">Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">Mainden Name</th>
+            <th scope="col">Maiden Name</th>
           </tr>
         </thead>
         <tbody>
-          {users
-            .filter((item) =>
-              searchableFields.some((key) =>
-                item[key].toLowerCase().includes(query.toLowerCase())
-              )
-            )
-            .map((d) => (
-              <tr key={d.id}>
-                <td>{d.id}</td>
-                <td>{d.firstName}</td>
-                <td>{d.lastName}</td>
-                <td>{d.maidenName}</td>
-              </tr>
-            ))}
+          {users.map((d) => (
+            <tr key={d.id}>
+              <td>{d.id}</td>
+              <td>{d.firstName}</td>
+              <td>{d.lastName}</td>
+              <td>{d.maidenName}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
