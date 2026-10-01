@@ -51,9 +51,9 @@ export default function ProjectsCard({
         </cite>
       </div>
 
-      <div className="flex space-x-2 px-3 pb-3">
+      <div className="flex space-x-2.5 px-3 pb-3">
         <a
-          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground/80 inline-flex w-1/2 items-center justify-center rounded-xl py-1.25 text-center text-sm select-none"
+          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground/80 inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
           href={href}
           rel="noopener noreferrer"
           target="_blank"
@@ -61,7 +61,7 @@ export default function ProjectsCard({
           Visit
         </a>
         <Link
-          className="corner-squircle border-border text-foreground/90 hover:bg-surface-hover hover:border-border-hover inline-flex w-1/2 items-center justify-center rounded-xl border py-1.25 text-center text-sm"
+          className="corner-squircle border-border text-foreground/90 hover:bg-surface-hover hover:border-border-hover inline-flex w-1/2 items-center justify-center rounded-xl border py-1.5 text-center text-sm"
           href={`/projects/${getProjectSlug(title)}`}
         >
           Details
