@@ -1,12 +1,12 @@
 "use client";
 
+import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Dialog } from "@base-ui/react/dialog";
 import {
   ChevronRightIcon,
   MagnifyingGlassIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
 import type { RefObject } from "react";
 import { useRef } from "react";
@@ -87,28 +87,35 @@ export default function GlobalSearchDialog({
             Search navigation, projects, blog, design, and experiments. Use the
             arrow keys to browse results and Enter to open a page.
           </Dialog.Description>
-          <Command
-            className="flex min-h-0 flex-1 flex-col"
-            label="Site search"
-            loop
-            shouldFilter={false}
-            vimBindings={false}
+          <Autocomplete.Root
+            autoHighlight="always"
+            filter={null}
+            inline
+            items={showLoading ? [] : results}
+            itemToStringValue={(entry) => entry.title}
+            keepHighlight
+            loopFocus={false}
+            onValueChange={(value, details) => {
+              if (details.reason !== "item-press") {
+                onQueryChange(value);
+              }
+            }}
+            open
+            value={query}
           >
-            <div className="border-border flex shrink-0 items-center gap-3 py-2.5 pr-3 pl-4">
+            <Autocomplete.InputGroup className="border-border flex shrink-0 items-center gap-3 py-2.5 pr-3 pl-4">
               <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="text-foreground size-5 shrink-0"
               />
-              <Command.Input
+              <Autocomplete.Input
                 aria-label="Search pages"
                 autoComplete="off"
                 className="placeholder:text-foreground/50 min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
                 enterKeyHint="go"
-                onValueChange={onQueryChange}
                 placeholder="Search pages, projects, experiments, blog…"
                 ref={inputRef}
                 spellCheck={false}
-                value={query}
               />
               <Dialog.Close
                 aria-label="Close search"
@@ -117,11 +124,10 @@ export default function GlobalSearchDialog({
               >
                 <XMarkIcon aria-hidden="true" className="size-5" />
               </Dialog.Close>
-            </div>
-            <Command.List
+            </Autocomplete.InputGroup>
+            <div
               aria-busy={isLoading}
               className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pb-2"
-              label={listLabel}
             >
               {loadError ? (
                 <div
@@ -152,23 +158,27 @@ export default function GlobalSearchDialog({
                   name.
                 </div>
               ) : null}
-              {!showLoading && results.length > 0 ? (
-                <Command.Group
-                  className="**:[[cmdk-group-heading]]:text-foreground/50 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:pt-1 **:[[cmdk-group-heading]]:pb-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium"
-                  heading={groupTitle}
-                >
-                  {results.map((entry) => (
-                    <SearchResultItem
-                      entry={entry}
-                      isSearching={isSearching}
-                      key={entry.route}
-                      onSelect={navigate}
-                      query={query}
-                    />
-                  ))}
-                </Command.Group>
-              ) : null}
-            </Command.List>
+              <Autocomplete.List aria-label={listLabel}>
+                {!showLoading && results.length > 0 ? (
+                  <Autocomplete.Group>
+                    <Autocomplete.GroupLabel className="text-foreground/50 px-3 pt-1 pb-2 text-xs font-medium">
+                      {groupTitle}
+                    </Autocomplete.GroupLabel>
+                    <Autocomplete.Collection>
+                      {(entry: RouteDoc) => (
+                        <SearchResultItem
+                          entry={entry}
+                          isSearching={isSearching}
+                          key={entry.route}
+                          onSelect={navigate}
+                          query={query}
+                        />
+                      )}
+                    </Autocomplete.Collection>
+                  </Autocomplete.Group>
+                ) : null}
+              </Autocomplete.List>
+            </div>
             <div className="border-border text-foreground/50 flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
               <output aria-live={loadError ? "off" : "polite"}>
                 {resultStatus}
@@ -177,7 +187,7 @@ export default function GlobalSearchDialog({
                 ↑ ↓ navigate · ↵ open · esc close
               </span>
             </div>
-          </Command>
+          </Autocomplete.Root>
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>
@@ -225,10 +235,12 @@ function SearchResultItem({
   onSelect: (route: string) => void;
 }) {
   return (
-    <Command.Item
-      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2.5 pr-3 pl-3 select-none data-[selected=true]:border"
-      onSelect={onSelect}
-      value={entry.route}
+    <Autocomplete.Item
+      className="data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2.5 pr-3 pl-3 select-none"
+      onClick={() => {
+        onSelect(entry.route);
+      }}
+      value={entry}
     >
       <div className="min-w-0 flex-1 space-y-1">
         <div className="truncate text-sm">{entry.title}</div>
@@ -254,7 +266,7 @@ function SearchResultItem({
         aria-hidden="true"
         className="text-foreground/40 size-5 shrink-0"
       />
-    </Command.Item>
+    </Autocomplete.Item>
   );
 }
 
