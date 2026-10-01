@@ -1,8 +1,8 @@
 .popup {
   position: fixed;
   inset: auto 0 0;
-  min-height: min(28rem, 85dvh);
-  max-height: min(28rem, 85dvh);
+  min-height: 85dvh;
+  max-height: 85dvh;
   padding-bottom: env(safe-area-inset-bottom);
   transition:
     transform 220ms ease,
