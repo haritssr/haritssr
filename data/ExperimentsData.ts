@@ -849,6 +849,12 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-09-29",
         updatedAt: "2026-09-29",
       },
+      {
+        slug: "double-slit",
+        title: "Double-Slit Interference",
+        createdAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+      },
     ],
     id: 16,
     logoSrc: "/icons/physics.svg",
