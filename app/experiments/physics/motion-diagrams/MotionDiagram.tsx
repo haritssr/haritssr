@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import katexify from "@/utils/katexify";
+
 type MotionKind = "linear" | "angular";
 
 interface MotionDiagramProps {
@@ -69,17 +71,15 @@ export default function MotionDiagram({
   const baseline = y(0);
   const linePath = `M ${x(0)} ${y(initial)} L ${x(DURATION)} ${y(final)}`;
   const areaPath = `M ${x(0)} ${baseline} L ${x(0)} ${y(initial)} L ${x(time)} ${y(current)} L ${x(time)} ${baseline} Z`;
-  const valueSymbol = angular ? "ω" : "v";
-  const valueUnit = angular ? "rad/s" : "m/s";
-  const displacementSymbol = angular ? "Δθ" : "Δx";
-  const displacementUnit = angular ? "rad" : "m";
-  const accelerationUnit = angular ? "rad/s²" : "m/s²";
-  const isCircular = angular;
-  let color = "#2563eb";
-  if (isCircular) {
-    color = "#ea580c";
-  }
-  const rangeAccentClass = isCircular
+  const {
+    valueSymbol,
+    valueUnit,
+    displacementSymbol,
+    displacementUnit,
+    accelerationUnit,
+  } = getMotionNotation(kind);
+  const color = angular ? "#ea580c" : "#2563eb";
+  const rangeAccentClass = angular
     ? "accent-orange-600 focus-visible:outline-orange-600"
     : "accent-blue-600 focus-visible:outline-blue-600";
 
@@ -87,21 +87,27 @@ export default function MotionDiagram({
     <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-100 bg-zinc-50 px-5 py-3 sm:px-6">
         <p className="text-xs font-semibold tracking-[0.14em] text-zinc-500 uppercase">
-          Diagram Kartesius
+          Motion graph
         </p>
         <p className="font-mono text-xs text-zinc-600">
-          {valueSymbol} ({valueUnit}) vs t (s)
+          {katexify(
+            String.raw`${valueSymbol}\,(${valueUnit})\text{ vs }t\,(\mathrm{s})`,
+            false
+          )}
         </p>
       </div>
 
       <div className="grid lg:grid-cols-[minmax(0,1fr)_240px]">
         <div className="min-w-0 p-4 sm:p-6">
           <figure>
+            <div className="mb-1 pl-2 text-xs text-zinc-600">
+              {katexify(String.raw`${valueSymbol}\,(${valueUnit})`, false)}
+            </div>
             <svg
               aria-hidden="true"
               className="w-full"
               focusable="false"
-              viewBox="0 0 700 350"
+              viewBox="0 0 700 325"
             >
               {[0, 0.25, 0.5, 0.75, 1].map((fraction) => {
                 const tickY = baseline - fraction * PLOT.height;
@@ -172,38 +178,30 @@ export default function MotionDiagram({
                 stroke={color}
                 strokeWidth="3"
               />
-              <text
-                fill="#52525b"
-                fontSize="12"
-                fontWeight="600"
-                textAnchor="middle"
-                x={PLOT.left + PLOT.width / 2}
-                y="340"
-              >
-                Waktu, t (s)
-              </text>
-              <text fill="#52525b" fontSize="12" fontWeight="600" x="70" y="16">
-                {valueSymbol} ({valueUnit})
-              </text>
             </svg>
+            <div className="mt-1 text-center text-xs text-zinc-600">
+              {katexify(String.raw`t\,(\mathrm{s})`, false)}
+            </div>
             <figcaption className="sr-only">
-              Grafik {valueSymbol} terhadap waktu: {formula}. Pada{" "}
-              {formatValue(time, 2)} sekon, {valueSymbol} ={" "}
-              {formatValue(current, 2)} {valueUnit}.
+              {angular ? "Angular velocity" : "Velocity"} graphed over time. At{" "}
+              {formatValue(time, 2)} seconds, the{" "}
+              {angular ? "angular velocity" : "velocity"} is{" "}
+              {formatValue(current, 2)}{" "}
+              {angular ? "radians per second" : "meters per second"}.
             </figcaption>
           </figure>
 
           <div className="mt-2 rounded-xl bg-zinc-50 p-4">
             <RangeControl
               id={`${id}-time`}
-              label="Waktu yang diamati"
+              label="Time to inspect"
               max={DURATION}
               min={0}
               onChange={(value) => {
                 updateMotion("time", value);
               }}
               step={0.01}
-              unit="s"
+              unit={String.raw`\mathrm{s}`}
               value={time}
               valueDigits={2}
               accentClass={rangeAccentClass}
@@ -215,7 +213,7 @@ export default function MotionDiagram({
           <div className="space-y-5">
             <RangeControl
               id={`${id}-initial`}
-              label={angular ? "Kecepatan sudut awal" : "Kecepatan awal"}
+              label={angular ? "Initial angular velocity" : "Initial velocity"}
               max={angular ? 6 : 12}
               min={angular ? 2 : 4}
               onChange={(value) => {
@@ -230,7 +228,7 @@ export default function MotionDiagram({
             {accelerated ? (
               <RangeControl
                 id={`${id}-acceleration`}
-                label={angular ? "Percepatan sudut" : "Percepatan"}
+                label={angular ? "Angular acceleration" : "Acceleration"}
                 max={angular ? 0.6 : 1.2}
                 min={angular ? -0.2 : -0.4}
                 onChange={(value) => {
@@ -248,24 +246,28 @@ export default function MotionDiagram({
           <div className="mt-auto space-y-4 border-t border-zinc-200 pt-5">
             <div>
               <p className="text-xs font-medium text-zinc-500">
-                {valueSymbol} pada t = {formatValue(time, 2)} s
+                {angular ? "Angular velocity" : "Velocity"} at{" "}
+                {katexify(
+                  String.raw`t = ${formatValue(time, 2)}\,\mathrm{s}`,
+                  false
+                )}
               </p>
               <p className="mt-1 font-mono text-2xl font-semibold text-zinc-900 tabular-nums">
-                {formatValue(current, 2)}{" "}
-                <span className="text-sm font-normal text-zinc-500">
-                  {valueUnit}
-                </span>
+                {katexify(
+                  String.raw`${formatValue(current, 2)}\,${valueUnit}`,
+                  false
+                )}
               </p>
             </div>
             <div>
               <p className="text-xs font-medium text-zinc-500">
-                Luas di bawah grafik ({displacementSymbol})
+                Area under graph ({katexify(displacementSymbol, false)})
               </p>
               <p className="mt-1 font-mono text-2xl font-semibold text-zinc-900 tabular-nums">
-                {formatValue(displacement, 2)}{" "}
-                <span className="text-sm font-normal text-zinc-500">
-                  {displacementUnit}
-                </span>
+                {katexify(
+                  String.raw`${formatValue(displacement, 2)}\,${displacementUnit}`,
+                  false
+                )}
               </p>
             </div>
           </div>
@@ -274,12 +276,12 @@ export default function MotionDiagram({
 
       <div className="grid gap-3 border-t border-zinc-200 px-5 py-4 text-sm sm:grid-cols-2 sm:px-6">
         <p className="text-zinc-600">
-          <span className="font-medium text-zinc-900">Grafik:</span>{" "}
-          <span className="font-mono">{formula}</span>
+          <span className="font-medium text-zinc-900">Graph:</span>{" "}
+          <span className="font-mono">{katexify(formula, false)}</span>
         </p>
         <p className="text-zinc-600">
-          <span className="font-medium text-zinc-900">Luas:</span>{" "}
-          <span className="font-mono">{areaFormula}</span>
+          <span className="font-medium text-zinc-900">Area:</span>{" "}
+          <span className="font-mono">{katexify(areaFormula, false)}</span>
         </p>
       </div>
     </div>
@@ -288,6 +290,26 @@ export default function MotionDiagram({
 
 function formatValue(value: number, digits = 1) {
   return String(Number(value.toFixed(digits)));
+}
+
+function getMotionNotation(kind: MotionKind) {
+  if (kind === "angular") {
+    return {
+      valueSymbol: String.raw`\omega`,
+      valueUnit: String.raw`\mathrm{rad/s}`,
+      displacementSymbol: String.raw`\Delta\theta`,
+      displacementUnit: String.raw`\mathrm{rad}`,
+      accelerationUnit: String.raw`\mathrm{rad/s^2}`,
+    };
+  }
+
+  return {
+    valueSymbol: "v",
+    valueUnit: String.raw`\mathrm{m/s}`,
+    displacementSymbol: String.raw`\Delta x`,
+    displacementUnit: String.raw`\mathrm{m}`,
+    accelerationUnit: String.raw`\mathrm{m/s^2}`,
+  };
 }
 
 function getInitialMotion(
@@ -332,8 +354,10 @@ function RangeControl({
           {label}
         </label>
         <output className="font-mono text-zinc-900 tabular-nums" htmlFor={id}>
-          {formatValue(value, valueDigits)}{" "}
-          <span className="text-zinc-500">{unit}</span>
+          {katexify(
+            String.raw`${formatValue(value, valueDigits)}\,${unit}`,
+            false
+          )}
         </output>
       </div>
       <input

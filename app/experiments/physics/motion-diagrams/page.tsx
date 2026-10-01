@@ -1,3 +1,4 @@
+import "katex/dist/katex.min.css";
 import SubTitle from "components/SubTitle";
 import type { Metadata } from "next";
 
@@ -10,45 +11,45 @@ import MotionDiagram from "./MotionDiagram";
 const motions = [
   {
     id: "glb",
-    abbreviation: "GLB",
-    name: "Gerak Lurus Beraturan",
+    abbreviation: "ULM",
+    name: "Uniform linear motion",
     description:
-      "Kecepatan tetap terhadap waktu. Grafiknya berupa garis mendatar, sehingga luas di bawah garis menyatakan perpindahan.",
-    formula: "v(t) = v₀",
-    areaFormula: "Δx = v₀t",
+      "Velocity stays constant over time, so the graph is horizontal. The area beneath it gives displacement.",
+    formula: String.raw`v(t) = v_0`,
+    areaFormula: String.raw`\Delta x = v_0 t`,
     kind: "linear" as const,
     accelerated: false,
   },
   {
     id: "glbb",
-    abbreviation: "GLBB",
-    name: "Gerak Lurus Berubah Beraturan",
+    abbreviation: "UALM",
+    name: "Uniformly accelerated linear motion",
     description:
-      "Percepatan konstan membuat kecepatan berubah secara linear. Kemiringan garis adalah percepatan; luas di bawahnya adalah perpindahan.",
-    formula: "v(t) = v₀ + at",
-    areaFormula: "Δx = v₀t + ½at²",
+      "Constant acceleration makes velocity change linearly. The line's slope is acceleration, and the area beneath it is displacement.",
+    formula: String.raw`v(t) = v_0 + at`,
+    areaFormula: String.raw`\Delta x = v_0 t + \frac{1}{2}at^2`,
     kind: "linear" as const,
     accelerated: true,
   },
   {
     id: "gmb",
-    abbreviation: "GMB",
-    name: "Gerak Melingkar Beraturan",
+    abbreviation: "UCM",
+    name: "Uniform circular motion",
     description:
-      "Kecepatan sudut tetap. Grafik ω terhadap t mendatar dan luas di bawahnya menyatakan perpindahan sudut.",
-    formula: "ω(t) = ω₀",
-    areaFormula: "Δθ = ω₀t",
+      "Angular velocity stays constant over time. Its graph is horizontal, and the area beneath it gives angular displacement.",
+    formula: String.raw`\omega(t) = \omega_0`,
+    areaFormula: String.raw`\Delta\theta = \omega_0 t`,
     kind: "angular" as const,
     accelerated: false,
   },
   {
     id: "gmbb",
-    abbreviation: "GMBB",
-    name: "Gerak Melingkar Berubah Beraturan",
+    abbreviation: "UACM",
+    name: "Uniformly accelerated circular motion",
     description:
-      "Percepatan sudut konstan membuat kecepatan sudut berubah secara linear. Kemiringan garis adalah α; luasnya adalah perpindahan sudut.",
-    formula: "ω(t) = ω₀ + αt",
-    areaFormula: "Δθ = ω₀t + ½αt²",
+      "Constant angular acceleration makes angular velocity change linearly. The line's slope is angular acceleration, and the area beneath it is angular displacement.",
+    formula: String.raw`\omega(t) = \omega_0 + \alpha t`,
+    areaFormula: String.raw`\Delta\theta = \omega_0 t + \frac{1}{2}\alpha t^2`,
     kind: "angular" as const,
     accelerated: true,
   },
@@ -57,7 +58,7 @@ const motions = [
 export const metadata: Metadata = {
   ...getExperimentMetadata("physics", "motion-diagrams"),
   description:
-    "Diagram kecepatan dan kecepatan sudut terhadap waktu untuk GLB, GLBB, GMB, dan GMBB.",
+    "Interactive velocity-time diagrams for uniform and uniformly accelerated linear and circular motion.",
 };
 
 export default function MotionDiagramsPage() {
@@ -65,11 +66,11 @@ export default function MotionDiagramsPage() {
     <div className="pb-24">
       <div className="max-w-3xl space-y-4">
         <SubTitle>
-          Atur nilainya dan lihat bagaimana grafik berubah terhadap waktu.
+          Adjust the controls and see how each motion graph changes over time.
         </SubTitle>
         <SourceCodeLink />
         <nav
-          aria-label="Lompat ke jenis gerak"
+          aria-label="Jump to a motion type"
           className="my-10 flex flex-wrap gap-2"
         >
           {motions.map((motion) => (
@@ -96,7 +97,7 @@ export default function MotionDiagramsPage() {
               <div className="max-w-2xl">
                 <Section
                   id={`${motion.id}-title`}
-                  name={`${motion.abbreviation} (${motion.name})`}
+                  name={`${motion.abbreviation} · ${motion.name}`}
                 />
                 <p className="mt-3 text-sm leading-7 text-zinc-600">
                   {motion.description}
