@@ -328,34 +328,7 @@ export default function TaskPage() {
       // Debounce save by 500ms to batch rapid updates (e.g., timer ticks)
       saveTimeoutRef.current = setTimeout(() => {
         saveTimeoutRef.current = null;
-        // Writes current task list via PUT.
-        const persistTasksToDb = async () => {
-          try {
-            // API request that persists latest task snapshot.
-            const response = await fetch("/api/task", {
-              body: JSON.stringify({ tasks }),
-              headers: { "Content-Type": "application/json" },
-              method: "PUT",
-            });
-            if (response.ok) {
-              setPersistenceError(null);
-            } else {
-              // Best-effort parsed API error response.
-              const errorData: unknown = await response
-                .json()
-                .catch(() => ({ error: "Unknown error" }));
-              console.error("Failed to save tasks:", errorData);
-              setPersistenceError("Tasks could not be saved. Try again.");
-            }
-          } catch (error) {
-            console.error("Network error saving tasks:", error);
-            setPersistenceError(
-              "Tasks could not be saved. Check your connection."
-            );
-          }
-        };
-
-        void persistTasksToDb();
+        void persistTasksToDb(tasks, setPersistenceError);
       }, 500);
     }
 
@@ -571,4 +544,29 @@ export default function TaskPage() {
       </Section>
     </>
   );
+}
+
+async function persistTasksToDb(
+  tasks: readonly Task[],
+  setPersistenceError: (error: string | null) => void
+) {
+  try {
+    const response = await fetch("/api/task", {
+      body: JSON.stringify({ tasks }),
+      headers: { "Content-Type": "application/json" },
+      method: "PUT",
+    });
+    if (response.ok) {
+      setPersistenceError(null);
+    } else {
+      const errorData: unknown = await response
+        .json()
+        .catch(() => ({ error: "Unknown error" }));
+      console.error("Failed to save tasks:", errorData);
+      setPersistenceError("Tasks could not be saved. Try again.");
+    }
+  } catch (error) {
+    console.error("Network error saving tasks:", error);
+    setPersistenceError("Tasks could not be saved. Check your connection.");
+  }
 }
