@@ -33,6 +33,15 @@
         }
       }
     },
+    "tailwindcss-intellisense-css": {
+      "settings": {
+        "css": {
+          "lint": {
+            "validProperties": ["corner-shape"]
+          }
+        }
+      }
+    },
     "vscode-css-language-server": {
       "settings": {
         "css": {
