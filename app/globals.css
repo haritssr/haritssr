@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+/* Preserve the case-sensitive plugin option when formatting CSS. */
+/* oxfmt-ignore */
 @plugin "tailwindcss-radix" {
-  variantprefix: "rdx";
+  variantPrefix: "rdx";
 }
 
 @plugin "tailwindcss-animate";
