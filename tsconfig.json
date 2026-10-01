@@ -34,22 +34,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/**/*.tsx",
-    "data/ExperimentsData.ts",
-    "pages/experiments/react/calculator.jsx",
-    "pages/experiments/radix-ui/navigation-menu.tsx",
-    "pages/experiments/react/useStateTodo.js",
-    "utils/store-context-selector.js",
-    "pages/experiments/react/store-context-selector.tes",
-    "utils/store-context.js",
-    "pages/experiments/react/store-context-selector.tsz",
-    "pages/experiments/react/store-zustand.js",
     ".next/types/**/*.ts",
-    "utils/getAllMDXFileInsideFolder.js",
-    "utils/word-count.ts",
-    ".next/dev/types/**/*.ts",
-    "app/experiments/ui-explorations/tools/db.bun.ts",
-    "app/experiments/ui-explorations/tools/db.test.js"
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
