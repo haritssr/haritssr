@@ -62,12 +62,9 @@ export default function DesignSystem() {
     <>
       <PageTitle>Design</PageTitle>
       <TopLevelSectionPageDescription>
-        Design system used in this site,{" "}
-        <ExternalLink
-          href="https://harisstudio.vercel.app"
-          name="Haris Studio"
-        />{" "}
-        and <ExternalLink href="https://www.harislab.com" name="Haris Lab" />.
+        Shared design system for this site,{" "}
+        <ExternalLink href="https://www.haritssr.com" name="haritssr.com" /> and{" "}
+        <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
       </TopLevelSectionPageDescription>
       <div className="space-y-16">
         <section>
@@ -136,7 +133,20 @@ export default function DesignSystem() {
               Components include responsive behavior and keyboard focus
               treatment where interaction requires it.
             </li>
-            <li>The system is designed for both mobile and desktop web.</li>
+            <li>The system works on mobile and desktop.</li>
+            <li>
+              The main grid uses one column on mobile, two on tablets, and four
+              on desktop, with the same <code>gap-5</code> at every size.
+            </li>
+            <li>
+              For Harimaki, supporting-feature modals should use{" "}
+              <code>grid-cols-1</code> and include a button at the bottom to
+              open the full page.
+            </li>
+            <li>
+              The mobile tab bar should appear on every Harimaki page except
+              Materi.
+            </li>
             <li>
               View the component code{" "}
               <ExternalLink
