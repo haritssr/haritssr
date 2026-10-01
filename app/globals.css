@@ -34,6 +34,7 @@
   --color-border-interface-hover: var(--color-zinc-300);
   --color-surface-hover: var(--color-zinc-50);
   --color-interface-hover: var(--color-zinc-100);
+  --color-middle-hover: var(--color-zinc-200);
   --color-searchicon-hover: var(--color-zinc-500);
 
   --breakpoint-xs: 450px;
