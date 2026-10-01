@@ -32,7 +32,25 @@ export default function TopBar() {
         </div>
 
         <NavigationLinks />
-        <TopBarSearch />
+        <div className="flex shrink-0 items-center gap-1">
+          <TopBarSearch />
+          <a
+            aria-label="View this site's source on GitHub (opens in a new tab)"
+            className="focus-visible:outline-action flex size-9 items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2"
+            href="https://github.com/haritssr/haritssr"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="View source on GitHub"
+          >
+            <Image
+              alt=""
+              className="size-4.5"
+              height={18}
+              src="/icons/github.jpg"
+              width={18}
+            />
+          </a>
+        </div>
       </div>
     </nav>
   );
