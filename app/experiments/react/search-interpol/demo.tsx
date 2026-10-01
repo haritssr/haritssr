@@ -8,20 +8,16 @@ import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
-//type generate automatically via app.quicktype.io
 interface Notice {
   _links: Links;
-  date_of_birth: string;
+  date_of_birth?: string | null;
   entity_id: string;
   forename: string;
   name: string;
-  nationalities: string[];
 }
 
 interface Links {
-  images: Images;
-  self: Images;
-  thumbnail: Images;
+  thumbnail?: Images;
 }
 
 interface Images {
@@ -30,27 +26,55 @@ interface Images {
 
 export default function ReactSearchInterpolDemo() {
   const [notices, setNotices] = useState<Notice[]>([]);
-  const [search, setSearch] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
+    setNotices([]);
+    setLoading(false);
+    setError(null);
+    if (!debouncedSearch.trim() || search !== debouncedSearch) {
+      return;
+    }
+
+    const controller = new AbortController();
     async function fetchData() {
       setLoading(true);
-      setNotices([]);
-
-      const data =
-        await fetch(`https://ws-public.interpol.int/notices/v1/red?forename=${debouncedSearch}&resultPerPage=50
-        `).then(async (r) => await r.json());
-
-      setNotices(data._embedded.notices);
-      setLoading(false);
+      try {
+        const params = new URLSearchParams({
+          forename: debouncedSearch.trim(),
+          resultPerPage: "50",
+        });
+        const response = await fetch(
+          `https://ws-public.interpol.int/notices/v1/red?${params}`,
+          { signal: controller.signal }
+        );
+        if (!response.ok) {
+          throw new Error(`Interpol search failed: ${response.status}`);
+        }
+        const data: unknown = await response.json();
+        const results = getNotices(data);
+        if (!controller.signal.aborted) {
+          setNotices(results);
+        }
+      } catch {
+        if (!controller.signal.aborted) {
+          setError("Notices could not be loaded. Try another search.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
     }
-    if (debouncedSearch) {
-      fetchData();
-    }
-  }, [debouncedSearch]);
+    void fetchData();
+    return () => {
+      controller.abort();
+    };
+  }, [debouncedSearch, search]);
 
   return (
     <>
@@ -86,9 +110,13 @@ export default function ReactSearchInterpolDemo() {
         }}
         placeholder="search"
         type="search"
+        value={search}
       />
 
-      {!!loading && <div>Loading...</div>}
+      {loading || (search.trim() && search !== debouncedSearch) ? (
+        <output className="block">Searching…</output>
+      ) : null}
+      {error ? <p role="alert">{error}</p> : null}
       <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-4">
         {notices.map((notice) => (
           <div key={notice.entity_id}>
@@ -114,8 +142,8 @@ export default function ReactSearchInterpolDemo() {
 }
 
 // generate new input value after certain delayed time (in ms) using useEffect
-function useDebounce(value: string | null, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState<string | null>(value);
+function useDebounce(value: string, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -127,4 +155,41 @@ function useDebounce(value: string | null, delay: number) {
   }, [value, delay]);
 
   return debouncedValue;
+}
+
+function getNotices(value: unknown): Notice[] {
+  if (
+    typeof value !== "object" ||
+    value === null ||
+    !("_embedded" in value) ||
+    typeof value._embedded !== "object" ||
+    value._embedded === null ||
+    !("notices" in value._embedded) ||
+    !Array.isArray(value._embedded.notices) ||
+    !value._embedded.notices.every(isNotice)
+  ) {
+    throw new TypeError("Interpol search response is invalid");
+  }
+  return value._embedded.notices;
+}
+
+function isNotice(value: unknown): value is Notice {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  const notice = value as Partial<Notice>;
+  return (
+    typeof notice.entity_id === "string" &&
+    typeof notice.forename === "string" &&
+    typeof notice.name === "string" &&
+    (notice.date_of_birth === null ||
+      notice.date_of_birth === undefined ||
+      typeof notice.date_of_birth === "string") &&
+    typeof notice._links === "object" &&
+    notice._links !== null &&
+    (notice._links.thumbnail === undefined ||
+      (typeof notice._links.thumbnail === "object" &&
+        notice._links.thumbnail !== null &&
+        typeof notice._links.thumbnail.href === "string"))
+  );
 }
