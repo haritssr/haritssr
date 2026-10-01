@@ -12,7 +12,7 @@ const destinations = ["projects", "experiments", "blog", "design"] as const;
 export default function TopBar() {
   return (
     <nav aria-label="Primary navigation" className="sticky top-0 z-30">
-      <div className="relative mx-auto flex max-w-5xl items-center justify-between py-1.5 pr-3 pl-5 sm:py-3.5 xl:px-0">
+      <div className="relative mx-auto flex max-w-5xl items-center justify-between px-5 pt-3 sm:py-3.5 xl:px-0">
         {/* Harits Syah */}
         <div className="group border-middle-hover flex items-center space-x-1.5 rounded-full border bg-white/50 py-1.5 pr-3 pl-2.5 saturate-150 backdrop-blur-lg">
           <Image
