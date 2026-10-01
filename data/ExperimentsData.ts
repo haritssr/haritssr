@@ -810,6 +810,12 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-08-19",
         updatedAt: "2026-09-27",
       },
+      {
+        slug: "emoji-groups",
+        title: "Emoji Groups",
+        createdAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+      },
     ],
     id: 10,
     logoSrc: "/icons/radixui.jpg",
