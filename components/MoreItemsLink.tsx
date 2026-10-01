@@ -1,8 +1,9 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 const moreItemsClassName =
-  "corner-squircle flex h-fit w-full items-center justify-center rounded-xl border border-border py-2.5 text-center text-foreground/80 hover:bg-border";
+  "corner-squircle flex h-fit w-full items-center justify-center rounded-xl  text-center text-foreground/80";
 
 export default function MoreItemsLink({
   className,
@@ -15,7 +16,7 @@ export default function MoreItemsLink({
   href: string;
   itemName: string;
 }) {
-  const label = `See ${count} more ${itemName}${count === 1 ? "" : "s"}`;
+  const label = `See ${count} more ${capitalizeFirstLetter(itemName)}${count === 1 ? "" : "s"}`;
 
   return (
     <Link
