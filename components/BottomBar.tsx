@@ -14,7 +14,7 @@ export default function BottomBar({
       aria-label="Mobile navigation"
       className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} p-3`}
     >
-      <div className="corner-squircle border-border w-full rounded-xl border bg-white/80 p-1.25 shadow-lg saturate-150 backdrop-blur-lg">
+      <div className="border-middle-hover w-full rounded-full border bg-white/80 px-1.25 py-2 saturate-150 backdrop-blur-lg">
         <div className="flex w-full items-center">
           {TitleAndPathData.map(({ title, path }) => (
             <IconWrapper key={title} path={path} to={title} />
