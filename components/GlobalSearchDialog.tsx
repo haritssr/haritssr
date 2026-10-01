@@ -120,7 +120,7 @@ export default function GlobalSearchDialog({
             </div>
             <Command.List
               aria-busy={isLoading}
-              className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2"
+              className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pb-2"
               label={listLabel}
             >
               {loadError ? (
@@ -231,7 +231,7 @@ function SearchResultItem({
       value={entry.route}
     >
       <div className="min-w-0 flex-1 space-y-1">
-        <div className="truncate text-sm font-medium">{entry.title}</div>
+        <div className="truncate text-sm">{entry.title}</div>
         {!isSearching || MAIN_ROUTES.has(entry.route) ? (
           <div className="text-foreground/60 truncate text-xs">
             {isSearching ? (
