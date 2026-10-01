@@ -27,11 +27,8 @@ export default function ExperimentDomainLayout({
       ? "back"
       : capitalizeFirstLetter(previousSegment.split("-").join(" "));
 
-  // Get domain display name
-  const domainDisplayName = domain
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const experimentDomain = getExperimentDomain(domain);
+  const domainDisplayName = experimentDomain.title;
 
   // Get experiment title from pathname
   const experimentSlug = segments.at(-1);
@@ -47,7 +44,7 @@ export default function ExperimentDomainLayout({
   const experimentTitle =
     domainChildSlug === undefined
       ? undefined
-      : getExperimentDomain(domain).experiments.find(
+      : experimentDomain.experiments.find(
           (experiment) => experiment.slug === domainChildSlug
         )?.title;
 
@@ -62,12 +59,15 @@ export default function ExperimentDomainLayout({
   const title = isIndexPage
     ? domainDisplayName
     : (experimentTitle ?? fallbackTitle);
+  const backButtonName = segments.length === 3 ? domainDisplayName : prevRoute;
 
   return (
     <div className="min-h-screen w-full sm:-mt-px">
       <div className="w-full">
         <article className="sm:px-0">
-          {!isTaskRoute && <BackButton href={parentPath} name={prevRoute} />}
+          {!isTaskRoute && (
+            <BackButton href={parentPath} name={backButtonName} />
+          )}
           {!(isTaskRoute || isIndexPage || isStandaloneNextjsRoute) && (
             <PageTitle>{title}</PageTitle>
           )}
