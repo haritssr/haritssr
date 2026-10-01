@@ -855,6 +855,12 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-09-29",
         updatedAt: "2026-09-29",
       },
+      {
+        slug: "mass-energy-equivalence",
+        title: "Mass–Energy Equivalence",
+        createdAt: "2026-09-30",
+        updatedAt: "2026-09-30",
+      },
     ],
     id: 16,
     logoSrc: "/icons/physics.svg",
