@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
@@ -8,46 +10,61 @@ import { getLastElectronQuantumNumbers } from "../electron-configuration/_data";
 const SUBSHELLS = ["s", "p", "d", "f"] as const;
 
 interface VocabularyItem {
-  readonly example: string;
-  readonly meaning: string;
-  readonly symbol: string;
+  readonly example: ReactNode;
+  readonly meaning: ReactNode;
+  readonly symbol: ReactNode;
   readonly term: string;
 }
 
 const VOCABULARY: readonly VocabularyItem[] = [
   {
-    example: "Oxygen: Z = 8",
+    example: <>Oxygen: {katexify("Z = 8", false)}</>,
     meaning:
       "The number of protons in the nucleus. For a neutral atom, it also equals the number of electrons.",
-    symbol: "Z",
+    symbol: katexify("Z", false),
     term: "Atomic number",
   },
   {
-    example: "n = 1 is the K shell",
+    example: <>{katexify("n = 1", false)} is the K shell</>,
     meaning: "The electron shell or main energy level, numbered from 1 to 7.",
-    symbol: "n",
+    symbol: katexify("n", false),
     term: "Principal (shell) quantum number",
   },
   {
-    example: "s = 0, p = 1, d = 2, f = 3",
+    example: katexify(
+      String.raw`\mathrm{s}:\ell=0,\quad\mathrm{p}:\ell=1,\quad\mathrm{d}:\ell=2,\quad\mathrm{f}:\ell=3`,
+      false
+    ),
     meaning: "The subshell and general orbital shape within a shell.",
-    symbol: "ℓ",
+    symbol: katexify(String.raw`\ell`, false),
     term: "Azimuthal (subshell) quantum number",
   },
   {
-    example: "For p: −1, 0, +1",
-    meaning: "The specific orbital orientation inside a subshell.",
-    symbol: "m",
+    example: (
+      <>
+        For {katexify("p", false)}: {katexify("-1, 0, +1", false)}
+      </>
+    ),
+    meaning: (
+      <>
+        The orbital angular-momentum component along a chosen axis. Real orbital
+        shapes can combine different {katexify("m_l", false)} states.
+      </>
+    ),
+    symbol: katexify("m_l", false),
     term: "Magnetic quantum number",
   },
   {
-    example: "+½ or −½",
-    meaning: "The spin direction of an electron.",
-    symbol: "s",
-    term: "Spin quantum number",
+    example: katexify(String.raw`+\frac{1}{2}\text{ or }-\frac{1}{2}`, false),
+    meaning: "The electron's spin component along a chosen axis.",
+    symbol: katexify("m_s", false),
+    term: "Spin-projection quantum number",
   },
   {
-    example: "K (n = 1), L (n = 2), …, Q (n = 7)",
+    example: katexify(
+      String.raw`\mathrm{K}\,(n=1),\;\mathrm{L}\,(n=2),\;\ldots,\;\mathrm{Q}\,(n=7)`,
+      false
+    ),
     meaning: "Letter names for the seven electron shells.",
     symbol: "K–Q",
     term: "Shell names",
@@ -56,31 +73,38 @@ const VOCABULARY: readonly VocabularyItem[] = [
     example: "Maximum: 2, 6, 10, and 14 electrons",
     meaning:
       "The four subshell types, each containing a different number of orbitals.",
-    symbol: "s, p, d, f",
+    symbol: katexify("s, p, d, f", false),
     term: "Subshells",
   },
   {
     example: "One box in the Aufbau diagram",
     meaning:
       "A region that can hold at most two electrons with opposite spins.",
-    symbol: "□",
+    symbol: katexify(String.raw`\square`, false),
     term: "Orbital",
   },
   {
-    example: "↑↓ is a paired orbital",
+    example: (
+      <>{katexify(String.raw`\uparrow\downarrow`, false)} is a paired orbital</>
+    ),
     meaning: "Electrons and their spin directions inside an orbital.",
-    symbol: "↑ / ↓",
+    symbol: katexify(String.raw`\uparrow\;/\;\downarrow`, false),
     term: "Electron arrows",
   },
   {
-    example: "2p⁴ = four electrons in the 2p subshell",
+    example: (
+      <>
+        {katexify("2p^4", false)} = four electrons in the{" "}
+        {katexify("2p", false)} subshell
+      </>
+    ),
     meaning:
       "A compact description of how an atom's electrons occupy its subshells.",
-    symbol: "2p⁴",
+    symbol: katexify("2p^4", false),
     term: "Electron configuration",
   },
   {
-    example: "1s → 2s → 2p → 3s",
+    example: katexify(String.raw`1s\to 2s\to 2p\to 3s`, false),
     meaning:
       "The principle that lower-energy orbitals fill before higher-energy orbitals.",
     symbol: "Aufbau",
@@ -137,21 +161,24 @@ export function QuantumNumbersSummary({
         className="text-foreground/70 text-xs font-medium"
         id="quantum-number-title"
       >
-        Quantum numbers for the last electron
+        One possible last-electron state
       </h3>
       <div className="mt-3 flex flex-wrap items-end gap-x-6 gap-y-3">
         <div>
           <span className="text-foreground/70 block text-xs">
             Selected state
           </span>
-          <span className="mt-1 block font-mono text-2xl font-semibold">
-            {principalNumber}
-            {subshell}
-            <sup>{spin === "+1/2" ? "↑" : "↓"}</sup>
+          <span className="mt-1 block text-2xl font-semibold">
+            {katexify(
+              `${principalNumber}${subshell}^{${spin === "+1/2" ? String.raw`\uparrow` : String.raw`\downarrow`}}`,
+              false
+            )}
           </span>
         </div>
         <div>
-          <span className="text-foreground/70 block text-xs">(n, ℓ, m, s)</span>
+          <span className="text-foreground/70 block text-xs">
+            {katexify(String.raw`(n,\ell,m_l,m_s)`, false)}
+          </span>
           <span className="mt-1 block text-lg">
             {katexify(
               formatQuantumNumberTuple(
@@ -165,6 +192,10 @@ export function QuantumNumbersSummary({
           </span>
         </div>
       </div>
+      <p className="text-foreground/60 mt-2 text-xs leading-5">
+        Degenerate orbitals have no unique filling order; this tuple uses one
+        conventional assignment.
+      </p>
     </section>
   );
 }
@@ -199,10 +230,10 @@ export function VocabularyGuide() {
               {VOCABULARY.map((item) => (
                 <tr
                   className="divide-border divide-x align-top"
-                  key={item.symbol}
+                  key={item.term}
                 >
                   <th
-                    className="px-3 py-2 text-left font-mono font-medium whitespace-nowrap"
+                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
                     scope="row"
                   >
                     {item.symbol}

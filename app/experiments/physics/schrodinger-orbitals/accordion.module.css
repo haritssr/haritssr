@@ -1,0 +1,12 @@
+.panel {
+  --accordion-box-radius: max(0px, calc(var(--radius-lg) - 0.75rem - 1px));
+}
+
+.panel > div,
+.panel select {
+  border-radius: var(--accordion-box-radius);
+}
+
+.resultBox {
+  border-radius: var(--accordion-box-radius, var(--radius-lg));
+}

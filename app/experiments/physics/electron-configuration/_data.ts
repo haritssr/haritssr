@@ -229,6 +229,8 @@ const CONFIGURATION_OVERRIDES: Readonly<
   93: { 16: 4, 17: 1 },
   96: { 16: 7, 17: 1 },
   103: { 17: 0, 18: 1 },
+  110: { 15: 1, 17: 9 },
+  111: { 15: 1, 17: 10 },
 };
 
 export function isConfigurationException(atomicNumber: number): boolean {

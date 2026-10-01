@@ -837,6 +837,18 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-09-25",
         updatedAt: "2026-09-29",
       },
+      {
+        slug: "p-orbital-shape",
+        title: "Where a p Orbital Gets Its Shape",
+        createdAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+      },
+      {
+        slug: "schrodinger-orbitals",
+        title: "How s, p, d, and f Orbitals Get Their Shapes",
+        createdAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+      },
     ],
     id: 16,
     logoSrc: "/icons/physics.svg",
