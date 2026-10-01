@@ -159,7 +159,7 @@ export default function Home() {
             Press <kbd className="text-foreground">⌘P</kbd> (or{" "}
             <kbd className="text-foreground">ctrl+P</kbd>) to search the site.
           </li>
-          <li>I use Codex CLI in Zed Editor for development.</li>
+          <li>I use Codex CLI in Zed Editor for dev.</li>
           <li>Former chess player, peaked at around 2000 Elo.</li>
         </ul>
       </Section>
