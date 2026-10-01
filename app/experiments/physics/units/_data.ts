@@ -61,7 +61,7 @@ export const BASE_UNITS = [
   },
 ] as const;
 
-export type PrerequisiteNodeType = "concept" | "quantity";
+type PrerequisiteNodeType = "concept" | "quantity";
 
 export interface PrerequisiteNode {
   label: string;

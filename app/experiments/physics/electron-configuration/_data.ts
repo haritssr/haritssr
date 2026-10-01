@@ -125,7 +125,7 @@ export const ELEMENTS: readonly ElementData[] = [
   { atomicNumber: 118, name: "Oganesson", symbol: "Og" },
 ];
 
-export const REPRESENTATIVE_MASS_NUMBERS: readonly number[] = [
+const REPRESENTATIVE_MASS_NUMBERS: readonly number[] = [
   // Period 1
   1, 4,
   // Period 2
