@@ -14,7 +14,7 @@ export default function HomeSearch() {
         aria-expanded={open}
         aria-haspopup="dialog"
         aria-label="Search the site"
-        className="border-border hover:border-border-hover focus-visible:border-action focus-visible:outline-action text-foreground/50 col-span-2 col-start-2 flex h-12 w-full cursor-pointer items-center gap-3 rounded-xl border bg-white px-4 text-left text-base transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="border-border hover:border-border-hover focus-visible:border-action focus-visible:outline-action text-foreground/50 col-span-2 col-start-2 flex h-12 w-full cursor-pointer items-center gap-3 rounded-full border bg-white px-4 text-left text-base transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
         onClick={(event) => {
           openSearch(event.currentTarget);
         }}
