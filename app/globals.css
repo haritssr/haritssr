@@ -1,11 +1,9 @@
 @import "tailwindcss";
 @plugin "@toolwind/corner-shape";
 @plugin "@tailwindcss/typography";
-
 @plugin "tailwindcss-radix" {
   variantprefix: "rdx";
 }
-
 @plugin "@tailwindcss/forms" {
   strategy: "class";
 }
@@ -13,7 +11,6 @@
 @plugin "tailwindcss-animate";
 
 @theme {
-  /* Semantic colors documented on /design */
   --color-action: color-mix(
     in oklab,
     var(--color-blue-600) 60%,

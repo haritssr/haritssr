@@ -2,14 +2,14 @@
 
 import { Dialog } from "@base-ui/react/dialog";
 import {
-  ArrowUpRightIcon,
+  ChevronRightIcon,
   MagnifyingGlassIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
 import type { RefObject } from "react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import type { RouteDoc } from "@/data/routes";
 import {
@@ -25,8 +25,10 @@ interface GlobalSearchDialogProps {
   indexStatus: "error" | "idle" | "loading" | "ready";
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onQueryChange: (query: string) => void;
   onRetry: () => void;
-  triggerRef: RefObject<HTMLButtonElement | null>;
+  query: string;
+  triggerRef: RefObject<HTMLElement | null>;
 }
 
 interface SearchMatchTextProps {
@@ -41,10 +43,11 @@ export default function GlobalSearchDialog({
   indexStatus,
   open,
   onOpenChange,
+  onQueryChange,
   onRetry,
+  query,
   triggerRef,
 }: GlobalSearchDialogProps) {
-  const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const results = searchRoutes(entries, query);
@@ -66,15 +69,7 @@ export default function GlobalSearchDialog({
   }
 
   return (
-    <Dialog.Root
-      onOpenChange={onOpenChange}
-      onOpenChangeComplete={(isOpen) => {
-        if (!isOpen) {
-          setQuery("");
-        }
-      }}
-      open={open}
-    >
+    <Dialog.Root onOpenChange={onOpenChange} open={open}>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
         <Dialog.Popup
@@ -99,7 +94,7 @@ export default function GlobalSearchDialog({
             shouldFilter={false}
             vimBindings={false}
           >
-            <div className="border-border flex shrink-0 items-center gap-3 border-b px-5 py-3.5">
+            <div className="border-border flex shrink-0 items-center gap-3 border-b py-2.5 pr-3.5 pl-4">
               <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="text-foreground size-5 shrink-0"
@@ -109,7 +104,7 @@ export default function GlobalSearchDialog({
                 autoComplete="off"
                 className="placeholder:text-foreground/50 min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
                 enterKeyHint="go"
-                onValueChange={setQuery}
+                onValueChange={onQueryChange}
                 placeholder="Search pages, projects, experiments, blog…"
                 ref={inputRef}
                 spellCheck={false}
@@ -231,7 +226,7 @@ function SearchResultItem({
 }) {
   return (
     <Command.Item
-      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover flex cursor-pointer items-center gap-4 rounded-xl border border-white px-3 py-3 select-none data-[selected=true]:border"
+      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2.5 pr-3.5 pl-3 select-none data-[selected=true]:border"
       onSelect={onSelect}
       value={entry.route}
     >
@@ -255,9 +250,9 @@ function SearchResultItem({
           </div>
         ) : null}
       </div>
-      <ArrowUpRightIcon
+      <ChevronRightIcon
         aria-hidden="true"
-        className="text-foreground/40 size-4 shrink-0"
+        className="text-foreground/40 size-5 shrink-0"
       />
     </Command.Item>
   );

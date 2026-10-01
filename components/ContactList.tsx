@@ -37,7 +37,7 @@ const data = {
 
 export default function ContactList() {
   return (
-    <div className="corner-squircle border-border space-y-2.5 rounded-2xl border px-4 pt-3 pb-2.5">
+    <div className="space-y-2.5 bg-white px-4 pt-3 pb-2.5 lg:border-l">
       <p className="text-foreground font-semibold">Contacts</p>
       <ul className="space-y-2.5">
         {data.points.map((contact) => (
