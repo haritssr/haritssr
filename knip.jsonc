@@ -1,10 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
-  "entry": [
-    "app/experiments/ui-explorations/tools/db.bun.ts",
-    "public/sw.js",
-    "utils/{dbExperiment,sqlite3}.js",
-  ],
+  "entry": ["public/sw.js", "utils/{dbExperiment,sqlite3}.js"],
   "ignoreFiles": [
     // This component is retained for a feature that is currently unwired.
     "components/InternalLinkWithoutArrow.tsx",
