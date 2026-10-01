@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import useWindowSize from "react-use/lib/useWindowSize";
+import { useEffect, useState } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
@@ -32,3 +32,37 @@ export default function ReactConfettiDemo() {
 const Confetti = dynamic(async () => await import("react-confetti"), {
   ssr: false,
 });
+
+function useWindowSize() {
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    let frameId: number;
+
+    function updateSize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      setSize((previous) =>
+        previous.width === width && previous.height === height
+          ? previous
+          : { width, height }
+      );
+    }
+
+    function scheduleUpdate() {
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateSize);
+    }
+
+    scheduleUpdate();
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      window.removeEventListener("resize", scheduleUpdate);
+      window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+
+  return size;
+}

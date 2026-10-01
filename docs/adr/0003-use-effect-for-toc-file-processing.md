@@ -1,6 +1,6 @@
 # 0003: Use Effect for table-of-contents file processing
 
-- Status: accepted
+- Status: superseded by [0010](./0010-use-native-apis-for-small-utilities.md)
 - Date: 2026-08-18
 - Confidence: medium
 

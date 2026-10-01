@@ -1,6 +1,5 @@
 import fs from "node:fs";
 
-import { Effect } from "effect";
 import GithubSlugger from "github-slugger";
 import { remark } from "remark";
 import remarkFrontmatter from "remark-frontmatter";
@@ -50,28 +49,19 @@ function parseTableOfContents(mdxContent: string): TableOfContentsItem[] {
   return items;
 }
 
-const readMdxFile = Effect.fn("readMdxFile")((mdxFilePath: string) =>
-  Effect.try({
-    try: () => fs.readFileSync(mdxFilePath, "utf-8"),
-    catch: (cause) =>
-      new Error(
-        `Error reading MDX file: ${cause instanceof Error ? cause.message : String(cause)}`
-      ),
-  })
-);
-
 export default function generateTOC(
   mdxFilePath: string
 ): TableOfContentsItem[] {
-  return Effect.runSync(
-    readMdxFile(mdxFilePath).pipe(
-      Effect.map(parseTableOfContents),
-      Effect.catch((error) =>
-        Effect.sync(() => {
-          console.error(error.message);
-          return [];
-        })
-      )
-    )
-  );
+  let mdxContent: string;
+
+  try {
+    mdxContent = fs.readFileSync(mdxFilePath, "utf-8");
+  } catch (error) {
+    console.error(
+      `Error reading MDX file: ${error instanceof Error ? error.message : String(error)}`
+    );
+    return [];
+  }
+
+  return parseTableOfContents(mdxContent);
 }

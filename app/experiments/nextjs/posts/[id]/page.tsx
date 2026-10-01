@@ -1,4 +1,3 @@
-import { format, parseISO } from "date-fns";
 import { notFound } from "next/navigation";
 
 import MarkdownContent from "@/components/mdx";
@@ -6,6 +5,13 @@ import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getAllPostIds, getPostData } from "@/utils/posts";
+
+const postDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
 
 export default async function PostPage({
   params,
@@ -24,7 +30,7 @@ export default async function PostPage({
       <PageTitle>{postData.title}</PageTitle>
       <SubTitle>
         <time dateTime={postData.date}>
-          {format(parseISO(postData.date), "LLLL d, yyyy")}
+          {postDateFormatter.format(new Date(postData.date))}
         </time>
       </SubTitle>
       <SourceCodeLink sourcePath="app/experiments/nextjs/posts/[id]" />

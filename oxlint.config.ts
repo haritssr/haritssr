@@ -129,13 +129,6 @@ export default defineConfig({
       },
     },
     {
-      files: ["utils/generateTOC.ts"],
-      rules: {
-        // Effect.catch uses a callback by design; it is not a Promise chain.
-        "promise/prefer-await-to-callbacks": "off",
-      },
-    },
-    {
       files: ["utils/react-aria/**/*.js"],
       rules: {
         // These are copied React Aria examples with intentionally complex cell

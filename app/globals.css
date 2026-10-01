@@ -1,14 +1,14 @@
 @import "tailwindcss";
-@plugin "@toolwind/corner-shape";
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-radix" {
   variantprefix: "rdx";
 }
-@plugin "@tailwindcss/forms" {
-  strategy: "class";
-}
 
 @plugin "tailwindcss-animate";
+
+@utility corner-squircle {
+  corner-shape: squircle;
+}
 
 @theme {
   --color-action: color-mix(
