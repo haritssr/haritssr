@@ -11,22 +11,13 @@ const blogDateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 });
 
-const topicLabels: Record<string, string> = {
-  engineering: "Eng",
-  humanity: "General",
-};
-
-interface IndexedBlogPost {
-  index: number;
-  post: BlogPost;
-}
-
 interface BlogPostGroup {
-  posts: IndexedBlogPost[];
+  firstIndex: number;
+  posts: BlogPost[];
   year: string;
 }
 
-const blogPostGroups = groupBlogPostsByYear();
+const blogPostGroups = groupBlogPostsByYear(allBlogPosts);
 
 export default function BlogGrid({
   mobileLimit,
@@ -36,64 +27,59 @@ export default function BlogGrid({
   headingLevel?: 2 | 3;
 }) {
   const Heading = headingLevel === 3 ? "h3" : "h2";
-  const remainingPosts = Math.max(
-    allBlogPosts.length - (mobileLimit ?? allBlogPosts.length),
-    0
-  );
+  const remainingPosts =
+    mobileLimit === undefined
+      ? 0
+      : Math.max(allBlogPosts.length - mobileLimit, 0);
 
   return (
     <>
-      <div className="columns-1 gap-5 md:columns-2">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {blogPostGroups.map((group) => {
-          const isHiddenOnMobile =
-            mobileLimit !== undefined &&
-            group.posts.every(({ index }) => index >= mobileLimit);
+          const groupIsHiddenOnMobile =
+            mobileLimit !== undefined && group.firstIndex >= mobileLimit;
 
           return (
             <section
-              className={`mb-3 break-inside-avoid-column ${
-                isHiddenOnMobile ? "hidden sm:block" : ""
-              }`}
+              className={groupIsHiddenOnMobile ? "hidden sm:block" : undefined}
               key={group.year}
             >
               <Heading className="text-foreground pb-2">{group.year}</Heading>
               <div className="divide-border border-border corner-squircle divide-y overflow-hidden rounded-2xl border">
-                {group.posts.map(({ index, post }) => (
-                  <Link
-                    className={`group hover:bg-interface-hover flex flex-col px-3 py-2.5 transition-colors ${
-                      mobileLimit !== undefined && index >= mobileLimit
-                        ? "hidden! sm:flex!"
-                        : ""
-                    } ${
-                      mobileLimit !== undefined && index === mobileLimit - 1
-                        ? "max-sm:border-b-0!"
-                        : ""
-                    }`}
-                    href={`/blog/${post.slug}`}
-                    key={post.slug}
-                    prefetch={false}
-                  >
-                    <div className="flex w-full items-center justify-between">
-                      <div className="text-action group-hover:text-action-hover">
-                        {post.title}
+                {group.posts.map((post, index) => {
+                  const postIndex = group.firstIndex + index;
+                  const postIsHiddenOnMobile =
+                    mobileLimit !== undefined && postIndex >= mobileLimit;
+                  const isLastMobilePost =
+                    mobileLimit !== undefined && postIndex === mobileLimit - 1;
+
+                  return (
+                    <Link
+                      className={`group hover:bg-interface-hover flex flex-col px-3 py-2.5 transition-colors ${
+                        postIsHiddenOnMobile ? "hidden! sm:flex!" : ""
+                      } ${isLastMobilePost ? "max-sm:border-b-0!" : ""}`}
+                      href={`/blog/${post.slug}`}
+                      key={post.slug}
+                      prefetch={false}
+                    >
+                      <div className="flex w-full items-center justify-between">
+                        <div className="text-action group-hover:text-action-hover">
+                          {post.title}
+                        </div>
+                        <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
+                          <span>{Math.ceil(post.wordCount / 200)} min</span>
+                          <span aria-hidden="true">·</span>
+                          <time dateTime={post.publishedAt}>
+                            {formatDate(post.publishedAt)}
+                          </time>
+                        </div>
                       </div>
-                      <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
-                        <time dateTime={post.publishedAt}>
-                          {formatDate(post.publishedAt)}
-                        </time>
-                        <span aria-hidden="true">/</span>
-                        <span>
-                          {topicLabels[post.topic.toLowerCase()] ?? post.topic}
-                        </span>
-                        <span aria-hidden="true">/</span>
-                        <span>{Math.ceil(post.wordCount / 200)} min</span>
-                      </div>
-                    </div>
-                    <p className="text-foreground/70 mt-1 truncate text-sm">
-                      {post.summary}.
-                    </p>
-                  </Link>
-                ))}
+                      <p className="text-foreground/70 mt-1 truncate text-sm">
+                        {post.summary}.
+                      </p>
+                    </Link>
+                  );
+                })}
               </div>
             </section>
           );
@@ -101,7 +87,7 @@ export default function BlogGrid({
       </div>
       {remainingPosts > 0 ? (
         <MoreItemsLink
-          className="sm:hidden!"
+          className="mt-5 sm:hidden!"
           count={remainingPosts}
           href="/blog"
           itemName="post"
@@ -115,17 +101,17 @@ function formatDate(date: string) {
   return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
 }
 
-function groupBlogPostsByYear(): BlogPostGroup[] {
+function groupBlogPostsByYear(posts: readonly BlogPost[]): BlogPostGroup[] {
   const groups: BlogPostGroup[] = [];
 
-  for (const [index, post] of allBlogPosts.entries()) {
+  for (const [index, post] of posts.entries()) {
     const year = post.publishedAt.slice(0, 4);
     const currentGroup = groups.at(-1);
 
     if (currentGroup?.year === year) {
-      currentGroup.posts.push({ index, post });
+      currentGroup.posts.push(post);
     } else {
-      groups.push({ posts: [{ index, post }], year });
+      groups.push({ firstIndex: index, posts: [post], year });
     }
   }
 
