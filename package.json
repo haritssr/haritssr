@@ -5,14 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "check": "ultracite check",
+    "check": "ultracite check --threads=1",
     "dev": "next dev",
-    "fix": "ultracite fix",
+    "fix": "ultracite fix --threads=1",
     "knip": "knip",
     "knip:production": "knip --production",
-    "lint": "ultracite check",
     "start": "next start",
-    "test": "bun test",
     "typecheck": "next typegen && tsc --noEmit --incremental false"
   },
   "dependencies": {
