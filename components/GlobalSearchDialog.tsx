@@ -94,7 +94,7 @@ export default function GlobalSearchDialog({
             shouldFilter={false}
             vimBindings={false}
           >
-            <div className="border-border flex shrink-0 items-center gap-3 border-b py-2.5 pr-3.5 pl-4">
+            <div className="border-border flex shrink-0 items-center gap-3 py-2.5 pr-3 pl-4">
               <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="text-foreground size-5 shrink-0"
@@ -120,7 +120,7 @@ export default function GlobalSearchDialog({
             </div>
             <Command.List
               aria-busy={isLoading}
-              className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2"
+              className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2"
               label={listLabel}
             >
               {loadError ? (
@@ -154,7 +154,7 @@ export default function GlobalSearchDialog({
               ) : null}
               {!showLoading && results.length > 0 ? (
                 <Command.Group
-                  className="**:[[cmdk-group-heading]]:text-foreground/50 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:pt-2 **:[[cmdk-group-heading]]:pb-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium"
+                  className="**:[[cmdk-group-heading]]:text-foreground/50 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:pt-1 **:[[cmdk-group-heading]]:pb-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium"
                   heading={groupTitle}
                 >
                   {results.map((entry) => (
@@ -226,7 +226,7 @@ function SearchResultItem({
 }) {
   return (
     <Command.Item
-      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2.5 pr-3.5 pl-3 select-none data-[selected=true]:border"
+      className="data-[selected=true]:bg-interface-hover data-[selected=true]:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2.5 pr-3 pl-3 select-none data-[selected=true]:border"
       onSelect={onSelect}
       value={entry.route}
     >
