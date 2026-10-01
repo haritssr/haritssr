@@ -8,6 +8,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+# Mathematical Notation
+
+- Always render mathematical notation in page content and UI with the project
+  math renderer, `katexify` from `@/utils/katexify`. Use inline mode for
+  in-sentence notation and display mode for standalone equations.
+- Write notation as TeX input for the renderer. Do not imitate mathematical
+  typography with Unicode symbols, plain text, `<sub>`/`<sup>`, or monospace
+  styling.
+- Ensure `katex/dist/katex.min.css` is available wherever rendered KaTeX
+  output is used so equations and fonts display correctly.
 
 # Testing Policy
 

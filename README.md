@@ -1,7 +1,7 @@
 Personal and experimental site by Harits Syah [www.haritssr.com](https://www.haritssr.com)
 
 - [`projects`](/projects): Project portfolio and project detail pages.
-- [`experiments`](/experiments): Frontend experiments across frameworks and libraries.
+- [`experiments`](/experiments): Interactive experiments across frontend libraries, browser APIs, mathematics, and physics.
 - [`blog`](/blog): Blog posts and notes.
 - [`design`](/design): Design system reference.
 
