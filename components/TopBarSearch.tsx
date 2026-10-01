@@ -160,7 +160,7 @@ export default function TopBarSearch() {
       onFocus={prepareSearch}
       onPointerEnter={prepareSearch}
       ref={topBarTriggerRef}
-      title="Search (⌘P / Ctrl+P)"
+      title="Search"
       type="button"
     >
       <MagnifyingGlassIcon aria-hidden="true" className="size-4.5 stroke-2" />

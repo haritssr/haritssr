@@ -52,7 +52,7 @@ function GitHubLink() {
       href="https://github.com/haritssr/haritssr"
       rel="noopener noreferrer"
       target="_blank"
-      title="View source on GitHub"
+      title="Repository"
     >
       <Image
         alt=""
