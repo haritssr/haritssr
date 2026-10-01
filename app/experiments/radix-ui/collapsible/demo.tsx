@@ -16,8 +16,8 @@ export default function RadixCollapsibleDemo() {
     <>
       <SubTitle>
         <ExternalLink
-          href="https://www.radix-ui.com/docs/primitives/components/alert-dialog"
-          name="Radix UI Alert Dialog"
+          href="https://www.radix-ui.com/primitives/docs/components/collapsible"
+          name="Radix UI Collapsible"
         />
         <ExplanationList>
           <li>An interactive component which expands/collapses a panel.</li>
@@ -36,22 +36,24 @@ export default function RadixCollapsibleDemo() {
       >
         <Section name="List of a groceries" />
         <div className="space-y-2">
-          <InternalLink href="/work/radix-ui/accordion">
+          <InternalLink href="/experiments/radix-ui/accordion">
             This is Accordion
           </InternalLink>
-          <InternalLink href="/work/radix-ui/dropdown-menu">
+          <InternalLink href="/experiments/radix-ui/dropdown-menu">
             This is Dropdown Menu
           </InternalLink>
-          <InternalLink href="/work/tailwindcss/blurry">
+          <InternalLink href="/experiments/tailwind-css/blurry">
             This is Blurry Effect
           </InternalLink>
         </div>
         <Collapsible.Content className="mt-2 space-y-2">
-          <InternalLink href="/work/radix-ui/accordion">Acordion</InternalLink>
-          <InternalLink href="/work/radix-ui/dropdown-menu">
+          <InternalLink href="/experiments/radix-ui/accordion">
+            Accordion
+          </InternalLink>
+          <InternalLink href="/experiments/radix-ui/dropdown-menu">
             Dropdown Menu
           </InternalLink>
-          <InternalLink href="/work/tailwindcss/blurry">
+          <InternalLink href="/experiments/tailwind-css/blurry">
             Blurry Effect
           </InternalLink>
         </Collapsible.Content>
