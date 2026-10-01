@@ -1,40 +1,60 @@
 "use client";
 
 import { Carousel } from "@mantine/carousel";
-import { Image } from "@mantine/core";
+import { Image, MantineProvider } from "@mantine/core";
+import { useRef } from "react";
+
+import "@mantine/core/styles/global.css";
+import "@mantine/core/styles/UnstyledButton.css";
+import "@mantine/core/styles/Image.css";
+import "@mantine/carousel/styles.css";
 
 import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
+import styles from "./demo.module.css";
+
 export default function MantineCarouselDemo() {
+  const rootRef = useRef<HTMLDivElement>(null);
   return (
-    <>
-      <SubTitle>
-        Carousel from{" "}
-        <ExternalLink
-          href="https://mantine.dev/others/carousel/"
-          name="Mantine"
-        />
-      </SubTitle>
-      <SourceCodeLink />
-      <Carousel
-        className="mx-auto max-w-sm"
-        height={200}
-        orientation="vertical"
-        withIndicators
+    <div
+      data-mantine-color-scheme="light"
+      id="mantine-carousel-demo"
+      ref={rootRef}
+    >
+      <MantineProvider
+        cssVariablesSelector="#mantine-carousel-demo"
+        forceColorScheme="light"
+        getRootElement={() => rootRef.current ?? undefined}
+        withGlobalClasses={false}
       >
-        {["1", "2", "3"].map((item) => (
-          <Carousel.Slide
-            className="flex h-20 w-20 items-center justify-center bg-blue-500 text-white"
-            key={item}
-          >
-            {item}
-          </Carousel.Slide>
-        ))}
-      </Carousel>
-      <Demo />
-    </>
+        <SubTitle>
+          Carousel from{" "}
+          <ExternalLink
+            href="https://mantine.dev/others/carousel/"
+            name="Mantine"
+          />
+        </SubTitle>
+        <SourceCodeLink />
+        <Carousel
+          className="mx-auto max-w-sm"
+          height={200}
+          orientation="vertical"
+          withIndicators
+        >
+          {["1", "2", "3"].map((item) => (
+            <Carousel.Slide
+              className="flex h-20 w-20 items-center justify-center bg-blue-500 text-white"
+              key={item}
+            >
+              {item}
+            </Carousel.Slide>
+          ))}
+        </Carousel>
+        <Demo />
+      </MantineProvider>
+    </div>
   );
 }
 
@@ -54,15 +74,8 @@ function Demo() {
   return (
     <Carousel
       mx="auto"
-      styles={{
-        control: {
-          "&[data-inactive]": {
-            opacity: 0,
-            cursor: "default",
-          },
-        },
-      }}
-      sx={{ maxWidth: 320 }}
+      classNames={{ control: styles.control }}
+      maw={320}
       withIndicators
     >
       {slides}
