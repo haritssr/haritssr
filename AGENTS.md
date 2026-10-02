@@ -32,6 +32,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   the current `YYYY-MM-DD` date to the `updatedAt` array without deleting history.
   Use one entry per calendar day; new experiments initialize both dates to the
   creation date.
+- Include a concise description and relevant tags in each experiment record.
 - Use `getLatestExperimentUpdate()` for display, sorting, or other consumers
   that need a single date.
 
