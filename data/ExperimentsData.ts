@@ -870,10 +870,10 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: "2026-09-29",
       },
       {
-        slug: "mass-energy-equivalence",
-        title: "Mass–Energy Equivalence",
+        slug: "essential-physics-equations",
+        title: "Essential Physics Equations",
         createdAt: "2026-09-30",
-        updatedAt: "2026-09-30",
+        updatedAt: "2026-10-02",
       },
     ],
     id: 16,

@@ -79,6 +79,11 @@ const nextConfig: NextConfig = {
   redirects() {
     return [
       {
+        destination: "/experiments/physics/essential-physics-equations",
+        permanent: true,
+        source: "/experiments/physics/mass-energy-equivalence",
+      },
+      {
         destination: "/experiments/ui-explorations/masalah-to-feature",
         permanent: true,
         source: "/masalah-to-feature",
