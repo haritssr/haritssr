@@ -75,7 +75,9 @@ export default defineConfig({
       },
     },
     {
-      files: ["app/experiments/**/demo.{ts,tsx,js,jsx}"],
+      files: [
+        "app/experiments/{browser,haris-lab,headless-ui,mantine,nextjs,radix-ui,react,react-aria,react-query,react-table,tailwind-css,ui-explorations,visx}/**/demo.{ts,tsx,js,jsx}",
+      ],
       rules: {
         // Several examples intentionally demonstrate APIs from older package
         // versions and should not fail the application-wide deprecated API gate.
