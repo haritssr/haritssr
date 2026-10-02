@@ -19,7 +19,7 @@ export function getExperimentRoutes(): RouteDoc[] {
     ...domain.experiments.map((experiment) => ({
       route: `/experiments/${domain.slug}/${experiment.slug}`,
       title: experiment.title,
-      description: domain.title,
+      description: `${domain.title} · ${experiment.description} · ${experiment.tags.join(", ")}`,
       group: "Experiments",
     })),
   ]);
