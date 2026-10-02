@@ -33,3 +33,12 @@ jobs:
 
       - name: Check production code
         run: bun run knip:production
+
+      - name: Validate content and experiment routes
+        run: bun run validate:content
+
+      - name: Validate production content
+        run: NODE_ENV=production bun run validate:content
+
+      - name: Build production routes
+        run: bun run build

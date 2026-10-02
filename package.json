@@ -9,7 +9,8 @@
     "knip": "knip",
     "knip:production": "knip --production",
     "start": "next start",
-    "typecheck": "next typegen && tsc --noEmit --incremental false"
+    "typecheck": "next typegen && tsc --noEmit --incremental false",
+    "validate:content": "bun --conditions=react-server scripts/validate-content.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
