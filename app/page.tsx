@@ -142,6 +142,7 @@ export default function Home() {
           <li>Touch typist, ±90 WPM.</li>
           <li>Constraints give shape.</li>
           <li>Eudaimonic over hedonic.</li>
+          <li>Effective Accelerationism (e/acc).</li>
           <li>
             <span className="text-foreground underline">haritssr</span> ={" "}
             <span className="text-foreground underline">harits</span>{" "}
