@@ -33,29 +33,37 @@ export default function TableOfContentsClient({
         return;
       }
 
-      const visibleHeading = headingElements.find((heading) => {
-        const { bottom, top } = heading.getBoundingClientRect();
-        return top < window.innerHeight && bottom > 0;
-      });
-
-      setActiveHeading(visibleHeading?.id ?? null);
+      const readingLine = 120;
+      const current = headingElements.findLast(
+        (heading) => heading.getBoundingClientRect().top <= readingLine
+      );
+      setActiveHeading(current?.id ?? headingElements[0]?.id ?? null);
     };
 
-    const observer = new IntersectionObserver(updateActiveHeading);
-
-    for (const heading of headingElements) {
-      observer.observe(heading);
-    }
-
+    let frame: number | null = null;
+    const scheduleUpdate = () => {
+      if (frame !== null) {
+        return;
+      }
+      frame = window.requestAnimationFrame(() => {
+        frame = null;
+        updateActiveHeading();
+      });
+    };
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
     updateActiveHeading();
-
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame);
+      }
     };
   }, [items]);
 
   return (
-    <ul className="space-y-2 overflow-y-auto sm:p-5">
+    <ul className="scrollbar-subtle max-h-[calc(100dvh-10rem)] space-y-2 overflow-y-auto sm:p-5">
       {items.map((item) => {
         const isActive = activeHeading === item.id;
 
