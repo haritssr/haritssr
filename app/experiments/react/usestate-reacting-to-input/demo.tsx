@@ -51,8 +51,9 @@ const Example = () => {
   const [status, setStatus] = useState("typing");
 
   const handleTryAgain = () => {
-    window.location.reload();
     setAnswer("");
+    setError(null);
+    setStatus("typing");
   };
   if (status === "success") {
     return (
