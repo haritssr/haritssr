@@ -36,7 +36,7 @@ export default function ProjectsCard({
             src={imgSrc}
             width={30}
           />
-          <Heading className="text-foreground/90 truncate text-lg font-medium">
+          <Heading className="text-foreground truncate text-lg font-medium">
             {title}
           </Heading>
         </div>
@@ -53,7 +53,7 @@ export default function ProjectsCard({
 
       <div className="flex space-x-2.5 px-3 pb-3">
         <a
-          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground/80 inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
+          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
           href={href}
           rel="noopener noreferrer"
           target="_blank"
