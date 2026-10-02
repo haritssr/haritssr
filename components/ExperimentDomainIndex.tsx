@@ -1,6 +1,8 @@
+import { ClockIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 import InternalLink from "@/components/InternalLink";
+import { getLatestExperimentUpdate } from "@/data/ExperimentsData";
 import { getAvailableExperimentDomain } from "@/utils/experimentCatalog";
 
 interface ExperimentDomainIndexProps {
@@ -26,15 +28,29 @@ export default function ExperimentDomainIndex({
         </div>
       </div>
       <ol className="space-y-3">
-        {experiments.map((experiment) => (
-          <li key={experiment.slug}>
-            <InternalLink
-              href={`/experiments/${domain.slug}/${experiment.slug}`}
+        {experiments.map((experiment) => {
+          const updatedAt = getLatestExperimentUpdate(experiment);
+
+          return (
+            <li
+              className="flex items-center justify-between gap-3"
+              key={experiment.slug}
             >
-              {experiment.title}
-            </InternalLink>
-          </li>
-        ))}
+              <span className="min-w-0 truncate" title={experiment.title}>
+                <InternalLink
+                  href={`/experiments/${domain.slug}/${experiment.slug}`}
+                >
+                  {experiment.title}
+                </InternalLink>
+              </span>
+              <span className="text-muted inline-flex shrink-0 items-center gap-1 text-sm whitespace-nowrap tabular-nums">
+                <ClockIcon aria-hidden="true" className="size-4 sm:hidden" />
+                <span className="sr-only sm:not-sr-only">Latest update:</span>
+                <time dateTime={updatedAt}>{updatedAt}</time>
+              </span>
+            </li>
+          );
+        })}
       </ol>
     </div>
   );
