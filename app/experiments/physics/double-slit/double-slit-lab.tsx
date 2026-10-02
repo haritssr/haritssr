@@ -5,6 +5,8 @@ import type { ReactNode } from "react";
 
 import katexify from "@/utils/katexify";
 
+import { getIntensity, getLightColor } from "./model";
+
 const SCREEN_HALF_RANGE_MM = 20;
 const DEFAULT_VALUES = {
   screenDistance: 2.5,
@@ -12,14 +14,6 @@ const DEFAULT_VALUES = {
   slitSeparation: 0.25,
   wavelength: 532,
 };
-const COLOR_STOPS = [
-  { color: [124, 58, 237], wavelength: 380 },
-  { color: [37, 99, 235], wavelength: 450 },
-  { color: [22, 163, 74], wavelength: 520 },
-  { color: [234, 179, 8], wavelength: 590 },
-  { color: [239, 68, 68], wavelength: 650 },
-  { color: [220, 38, 38], wavelength: 700 },
-] as const;
 const WAVEFRONT_RADII = [64, 128, 192, 256, 320, 384, 448];
 
 interface LabValues {
@@ -38,27 +32,6 @@ interface RangeControlProps {
   step: number;
   value: number;
   valueLabel: ReactNode;
-}
-
-function getLightColor(wavelength: number): string {
-  const upperIndex = COLOR_STOPS.findIndex(
-    (stop) => stop.wavelength >= wavelength
-  );
-  const lower = COLOR_STOPS[Math.max(0, upperIndex - 1)] ?? COLOR_STOPS[0];
-  const upper = COLOR_STOPS[upperIndex] ?? COLOR_STOPS.at(-1) ?? COLOR_STOPS[0];
-  const amount =
-    (wavelength - lower.wavelength) /
-    (upper.wavelength - lower.wavelength || 1);
-  const channels = lower.color.map((channel, index) =>
-    Math.round(channel + (upper.color[index] - channel) * amount)
-  );
-
-  return `rgb(${channels.join(", ")})`;
-}
-
-function getIntensity(screenPosition: number, fringeSpacing: number): number {
-  const phase = (Math.PI * screenPosition) / fringeSpacing;
-  return Math.cos(phase) ** 2;
 }
 
 function RangeControl({
