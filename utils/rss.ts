@@ -16,7 +16,6 @@ export interface RssBlogPost {
   slug: string;
   summary: string;
   title: string;
-  topic: string;
 }
 
 function escapeXml(value: string): string {
@@ -71,7 +70,6 @@ export function renderBlogRssFeed(
       `      <guid isPermaLink="true">${escapeXml(postUrl)}</guid>`,
       `      <pubDate>${formatRssDate(post.publishedAt)}</pubDate>`,
       `      <description>${escapeXml(post.summary)}</description>`,
-      `      <category>${escapeXml(post.topic)}</category>`,
       "    </item>",
     ].join("\n");
   });

@@ -25,7 +25,6 @@ const blogPostFrontmatterSchema = z.strictObject({
   publishedAt: publicationDateSchema,
   summary: blogPostSummarySchema,
   title: z.string(),
-  topic: z.string(),
 });
 
 export interface BlogPost {
@@ -33,7 +32,6 @@ export interface BlogPost {
   slug: string;
   summary: string;
   title: string;
-  topic: string;
   wordCount: number;
 }
 

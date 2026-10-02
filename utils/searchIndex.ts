@@ -49,7 +49,7 @@ export function getSearchIndex(): RouteDoc[] {
     ...allBlogPosts.map((post) => ({
       route: `/blog/${post.slug}`,
       title: post.title,
-      description: `${post.topic} · ${post.summary}`,
+      description: post.summary,
       group: "Blog",
     })),
   ];

@@ -12,7 +12,7 @@ The feed is generated from the local blog post index:
    and word count, and loads the posts into `allBlogPosts`.
 3. `app/feed.xml/route.ts` passes the collection to `utils/rss.ts`.
 4. The renderer creates an RSS 2.0 document with each post's title,
-   summary, canonical URL, publication date, and topic.
+   summary, canonical URL, and publication date.
 
 The feed contains summaries that link to the full posts. Its
 `lastBuildDate` reflects the feed generation time so changes to existing
