@@ -62,12 +62,12 @@ export default function Home() {
               />
               <a
                 className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-                href="https://www.harislab.com"
+                href="https://www.harimaki.com"
                 rel="noopener noreferrer"
                 target="_blank"
-                title="Haris Lab"
+                title="Harimaki Studio"
               >
-                Haris Lab
+                Harimaki Studio
               </a>
             </div>
             <div className="flex items-center gap-2">
