@@ -13,6 +13,7 @@ const sortOptions = [
   { label: "Recently updated", value: "recent" },
   { label: "Title A–Z", value: "title" },
 ];
+
 const parsers = {
   q: parseAsString.withDefault(""),
   domain: parseAsString.withDefault(""),
