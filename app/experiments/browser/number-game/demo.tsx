@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 
+import "katex/dist/katex.min.css";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
+import katexify from "@/utils/katexify";
 
 export default function NumberGameDemo() {
   // the state of the game
@@ -17,7 +19,8 @@ export default function NumberGameDemo() {
 
   function inputKeyPress(event: { key: string }) {
     if (event.key === "Enter") {
-      const answer = Number.parseInt(state.response, 10);
+      const answer =
+        state.response.trim() === "" ? Number.NaN : Number(state.response);
       if (state.num1 + state.num2 === answer) {
         setState({
           ...state,
@@ -64,7 +67,13 @@ export default function NumberGameDemo() {
           <button
             className="border-harislab text-harislab mx-auto inline-block rounded-md border px-4 py-2 text-center hover:border-zinc-700 hover:bg-zinc-50"
             onClick={() => {
-              window.location.reload();
+              setState({
+                num1: 1,
+                num2: 2,
+                response: "",
+                score: 0,
+                incorrect: false,
+              });
             }}
             type="button"
           >
@@ -87,7 +96,7 @@ export default function NumberGameDemo() {
       <SourceCodeLink />
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center pt-24">
         <div className={state.incorrect ? "incorrect" : ""}>
-          {state.num1}+{state.num2}
+          {katexify(`${state.num1} + ${state.num2}`, false)}
         </div>
         <input
           aria-label={`Answer to ${state.num1} plus ${state.num2}`}
