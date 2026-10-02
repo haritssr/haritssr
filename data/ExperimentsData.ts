@@ -978,6 +978,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03"],
       },
+      {
+        slug: "derivation-stepper",
+        title: "Step-by-Step Derivation",
+        description:
+          "Follow a quadratic equation through completing-the-square steps.",
+        tags: ["mathematics", "learning"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
     ],
     id: 13,
     logoSrc: "/icons/KaTeX.jpg",
