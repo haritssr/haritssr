@@ -1,6 +1,7 @@
 # 0005: Support an installable PWA with a small custom service worker
 
-- Status: accepted
+- Status: superseded
+- Superseded by [0012](0012-use-a-self-contained-offline-fallback.md)
 - Date: 2026-08-18
 - Confidence: medium
 
