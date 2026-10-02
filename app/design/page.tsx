@@ -1,7 +1,3 @@
-"use client";
-
-import { useCallback, useEffect, useRef, useState } from "react";
-
 import BackButton from "@/components/BackButton";
 import BottomBar from "@/components/BottomBar";
 import Box from "@/components/Box";
@@ -21,6 +17,7 @@ import ButtonWithIconDemo from "./ButtonWithIconDemo";
 import CheckboxDemo from "./CheckboxDemo";
 import { HierarchicalColorsDemo, MainColorsDemo } from "./ColorsDemo";
 import ContextMenuDemo from "./ContextMenuDemo";
+import LoadingButtonDemo from "./LoadingButtonDemo";
 import LogoDemo from "./LogoDemo";
 import ModalDemo from "./ModalDemo";
 import NumberInputDemo from "./NumberInputDemo";
@@ -34,31 +31,11 @@ import ToastDemo from "./ToastDemo";
 import ToggleDemo from "./ToggleDemo";
 import TooltipDemo from "./TooltipDemo";
 
+
 const FORM_CONTROL_CLASS_NAME =
   "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 shadow-sm outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
 
 export default function DesignSystem() {
-  const [loading, setLoading] = useState(false);
-  const loadingTimerRef = useRef<number | null>(null);
-
-  useEffect(
-    () => () => {
-      if (loadingTimerRef.current !== null) {
-        window.clearTimeout(loadingTimerRef.current);
-      }
-    },
-    []
-  );
-
-  const handleLoadingClick = useCallback(() => {
-    setLoading(true);
-    if (loadingTimerRef.current !== null) {
-      window.clearTimeout(loadingTimerRef.current);
-    }
-    loadingTimerRef.current = window.setTimeout(() => {
-      setLoading(false);
-    }, 800);
-  }, []);
   return (
     <>
       <PageTitle>Design</PageTitle>
@@ -206,9 +183,7 @@ export default function DesignSystem() {
             </Box>
 
             <Box name="Button" title="Button: Loading">
-              <Button loading={loading} onClick={handleLoadingClick}>
-                Button
-              </Button>
+              <LoadingButtonDemo />
             </Box>
 
             <Box name="Button" title="Button: Secondary">

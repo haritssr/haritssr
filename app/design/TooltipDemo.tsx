@@ -1,3 +1,5 @@
+"use client";
+
 import { Tooltip } from "@base-ui/react/tooltip";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 

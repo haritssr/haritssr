@@ -1,3 +1,5 @@
+"use client";
+
 import { Slider } from "@base-ui/react/slider";
 
 export default function SliderDemo() {

@@ -1,3 +1,5 @@
+"use client";
+
 import { Dialog } from "@base-ui/react/dialog";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 

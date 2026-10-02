@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox } from "@base-ui/react/checkbox";
 import { CheckIcon } from "@heroicons/react/24/outline";
 

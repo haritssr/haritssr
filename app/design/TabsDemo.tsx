@@ -1,3 +1,5 @@
+"use client";
+
 import { Tabs } from "@base-ui/react/tabs";
 
 export default function TabsDemo() {

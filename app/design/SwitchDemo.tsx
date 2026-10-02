@@ -1,3 +1,5 @@
+"use client";
+
 import { Switch } from "@base-ui/react/switch";
 
 export default function SwitchDemo() {

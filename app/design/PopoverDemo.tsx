@@ -1,3 +1,5 @@
+"use client";
+
 import { Popover } from "@base-ui/react/popover";
 
 import Button from "@/components/Button";
