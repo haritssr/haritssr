@@ -103,7 +103,7 @@ export default function GlobalSearchDialog({
             open
             value={query}
           >
-            <Autocomplete.InputGroup className="border-border flex shrink-0 items-center gap-3 py-2.5 pr-3 pl-4">
+            <Autocomplete.InputGroup className="border-border focus-within:border-action flex shrink-0 items-center gap-3 border-b py-2.5 pr-3 pl-4">
               <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="text-foreground size-5 shrink-0"
@@ -257,9 +257,7 @@ function SearchResultItem({
           </div>
         ) : null}
         {isSearching ? (
-          <div className="text-muted truncate text-xs">
-            {entry.route}
-          </div>
+          <div className="text-muted truncate text-xs">{entry.route}</div>
         ) : null}
       </div>
       <ChevronRightIcon

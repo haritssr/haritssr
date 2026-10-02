@@ -12,7 +12,7 @@ export default function BottomBar({
   return (
     <nav
       aria-label="Mobile navigation"
-      className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} p-3`}
+      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden"} p-3`}
     >
       <div className="border-middle-hover w-full rounded-full border bg-white/80 px-1.25 py-1.75 saturate-150 backdrop-blur-lg">
         <div className="flex w-full items-center">

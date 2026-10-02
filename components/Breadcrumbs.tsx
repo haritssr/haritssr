@@ -45,7 +45,7 @@ export default function Breadcrumbs() {
                 {isLast ? (
                   <span
                     aria-current="page"
-                    className="text-foreground whitespace-nowrap select-none"
+                    className="text-foreground whitespace-nowrap"
                   >
                     {label.toLocaleLowerCase()}
                   </span>
@@ -78,7 +78,13 @@ function Separator() {
 }
 
 function formatSegmentLabel(segment: string) {
-  return decodeURIComponent(segment)
+  let decoded = segment;
+  try {
+    decoded = decodeURIComponent(segment);
+  } catch {
+    /* Keep malformed URLs readable on the not-found page. */
+  }
+  return decoded
     .replace(segmentSeparatorPattern, " ")
     .split(whitespaceSequencePattern)
     .filter(Boolean)

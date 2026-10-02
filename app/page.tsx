@@ -175,7 +175,7 @@ function Section({
     <section aria-labelledby={`${id}-heading`} id={id}>
       <div className="flex items-center justify-between">
         <h2
-          className="text-foreground mb-6 text-2xl font-semibold select-none"
+          className="text-foreground mb-6 text-2xl font-semibold"
           id={`${id}-heading`}
         >
           {section}

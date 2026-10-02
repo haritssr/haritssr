@@ -77,6 +77,7 @@ function NavigationLinks() {
         <li key={destination}>
           <Link
             className={` ${currentSection === destination ? "text-action" : "text-foreground/90"} hover:bg-middle-hover/50 rounded-full px-3 py-1`}
+            aria-current={currentSection === destination ? "page" : undefined}
             href={`/${destination}`}
           >
             {capitalizeFirstLetter(destination)}
