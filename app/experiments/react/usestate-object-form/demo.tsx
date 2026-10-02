@@ -29,7 +29,7 @@ export default function ReactUseStateObjectFormDemo() {
     <>
       <SubTitle>
         <ExternalLink
-          href="https://beta.reactjs.org/learn/updating-objects-in-state"
+          href="https://react.dev/learn/updating-objects-in-state"
           name="Updating objects in state"
         />
         <ExplanationList>

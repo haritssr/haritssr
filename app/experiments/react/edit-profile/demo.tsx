@@ -16,8 +16,8 @@ export default function ReactEditProfileDemo() {
       <SubTitle>
         From{" "}
         <ExternalLink
-          href="https://beta.reactjs.org/learn/reacting-to-input-with-state#challenges"
-          name="beta.reactjs.org"
+          href="https://react.dev/learn/reacting-to-input-with-state#challenges"
+          name="react.dev"
         />{" "}
         <br />
         <ExplanationList>

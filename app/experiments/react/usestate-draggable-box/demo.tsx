@@ -61,8 +61,8 @@ export default function ReactUseStateDraggableBoxDemo() {
       <SubTitle>
         Draggable Box By{" "}
         <ExternalLink
-          href="https://beta.reactjs.org/learn/updating-objects-in-state"
-          name="beta.reactjs.org"
+          href="https://react.dev/learn/updating-objects-in-state"
+          name="react.dev"
         />
       </SubTitle>
       <SourceCodeLink />

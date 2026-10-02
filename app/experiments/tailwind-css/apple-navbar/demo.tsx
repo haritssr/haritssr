@@ -9,8 +9,8 @@ export default function TailwindAppleNavbarDemo() {
   return (
     <>
       <SubTitle>
-        <ExternalLink href="https://www.apple.com" name="Apple.com" />
-        sticky navigation bar
+        <ExternalLink href="https://www.apple.com" name="Apple.com" /> sticky
+        navigation bar
       </SubTitle>
       <SourceCodeLink />
       <div>

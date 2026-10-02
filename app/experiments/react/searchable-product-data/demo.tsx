@@ -31,8 +31,8 @@ export default function ReactSearchableProductDataDemo() {
       <SubTitle>
         By{" "}
         <ExternalLink
-          href="https://beta.reactjs.org/learn/thinking-in-react"
-          name="beta.reactjs.org"
+          href="https://react.dev/learn/thinking-in-react"
+          name="react.dev"
         />
         <ExplanationList>
           <li>Stock finder with filter.</li>

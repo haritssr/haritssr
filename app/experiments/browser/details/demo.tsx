@@ -12,8 +12,7 @@ export default function DetailsDemo() {
           href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
           name="The Details disclosure element"
         />
-        <br />
-        Browser built-in disclosure.
+        <br /> Browser built-in disclosure.
         <br />
         If you are using google translate extention in chrome and twicely click
         the details tag and content of summary tag, the text will selected and

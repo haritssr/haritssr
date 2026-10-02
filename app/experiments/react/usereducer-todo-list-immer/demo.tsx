@@ -84,8 +84,8 @@ export default function ReactUseReducerTodoListImmerDemo() {
       <SubTitle>
         Todo list with useReducer + Immer by{" "}
         <ExternalLink
-          href="https://beta.reactjs.org/learn/extracting-state-logic-into-a-reducer"
-          name="beta.reactjs.org"
+          href="https://react.dev/learn/extracting-state-logic-into-a-reducer"
+          name="react.dev"
         />
       </SubTitle>
       <SourceCodeLink />

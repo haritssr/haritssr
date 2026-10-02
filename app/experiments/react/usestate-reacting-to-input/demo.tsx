@@ -13,8 +13,8 @@ export default function ReactUseStateReactingToInputDemo() {
       <SubTitle>
         From{" "}
         <ExternalLink
-          href="https://beta.reactjs.org/learn/reacting-to-input-with-state#step-5-connect-the-event-handlers-to-set-state"
-          name="beta.reactjs.org"
+          href="https://react.dev/learn/reacting-to-input-with-state#step-5-connect-the-event-handlers-to-set-state"
+          name="react.dev"
         />
       </SubTitle>
       <SourceCodeLink />

@@ -80,8 +80,7 @@ function IntersectionObserverAPIHooks() {
           href="https://www.youtube.com/watch?v=r1auJEf9ISo"
           name="Colby Fayock"
         />
-        <br />
-        Scroll to the bottom to see the effect, the rocket launches.🚀.
+        <br /> Scroll to the bottom to see the effect, the rocket launches.🚀.
       </SubTitle>
       <SourceCodeLink />
       <div className="mt-96 rounded-md bg-zinc-100 p-10">

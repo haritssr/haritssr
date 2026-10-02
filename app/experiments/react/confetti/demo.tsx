@@ -15,12 +15,14 @@ export default function ReactConfettiDemo() {
       <SubTitle>
         From{" "}
         <ExternalLink
-          href="https://beta.reactjs.org/learn/  reacting-to-input-with-state#challenges"
-          name="beta.reactjs.org"
+          href="https://github.com/alampros/react-confetti"
+          name="react-confetti"
         />{" "}
         <br />
         <ExplanationList>
-          <li>Try to edit the profile and save to see the result of change.</li>
+          <li>
+            Resize the window to see the confetti canvas follow the viewport.
+          </li>
         </ExplanationList>
       </SubTitle>
       <SourceCodeLink />
