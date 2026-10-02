@@ -1,0 +1,17 @@
+.supported {
+  display: none;
+}
+
+.unsupported {
+  display: inline;
+}
+
+@supports (corner-shape: squircle) {
+  .supported {
+    display: inline;
+  }
+
+  .unsupported {
+    display: none;
+  }
+}

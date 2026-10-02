@@ -824,6 +824,12 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-09-29",
         updatedAt: "2026-09-29",
       },
+      {
+        slug: "corner-smoothing",
+        title: "Corner Smoothing: CSS vs Lisse",
+        createdAt: "2026-10-02",
+        updatedAt: "2026-10-02",
+      },
     ],
     id: 10,
     logoSrc: "/icons/radixui.jpg",
