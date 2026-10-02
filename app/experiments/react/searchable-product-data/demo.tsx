@@ -29,7 +29,7 @@ export default function ReactSearchableProductDataDemo() {
   return (
     <>
       <SubTitle>
-        By
+        By{" "}
         <ExternalLink
           href="https://beta.reactjs.org/learn/thinking-in-react"
           name="beta.reactjs.org"

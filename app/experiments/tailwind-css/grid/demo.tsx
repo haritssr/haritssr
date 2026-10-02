@@ -8,7 +8,7 @@ export default function TailwindGridDemo() {
   return (
     <>
       <SubTitle>
-        Responsive Grid Layout with Tailwind CSS.
+        Responsive Grid Layout with Tailwind CSS.{" "}
         <ExternalLink
           href="https://www.youtube.com/watch?v=WJDw1J7FZnE"
           name="Source code"

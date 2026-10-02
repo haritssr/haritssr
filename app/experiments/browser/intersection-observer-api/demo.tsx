@@ -75,8 +75,7 @@ function IntersectionObserverAPIHooks() {
           href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API"
           name="Intersection Observer API"
         />
-        <br />
-        Inspired by
+        <br /> Inspired by{" "}
         <ExternalLink
           href="https://www.youtube.com/watch?v=r1auJEf9ISo"
           name="Colby Fayock"

@@ -108,7 +108,7 @@ function EquationSection({ equation }: { equation: PhysicsEquation }) {
           </div>
         </div>
         <p className="text-foreground/80 min-w-0 text-base leading-7">
-          {equation.explanation}
+          {equation.explanation}{" "}
           <ExternalLink
             href={equation.source.href}
             name={equation.source.label}

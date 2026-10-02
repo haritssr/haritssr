@@ -93,9 +93,9 @@ export default function DesignSystem() {
             </li>
             <li>
               I care deeply about UX/UI design, with references including{" "}
-              <ExternalLink href="https://www.apple.com" name="Apple" />,
-              <ExternalLink href="https://linear.app" name="Linear" />,
-              <ExternalLink href="https://www.raycast.com" name="Raycast" />,
+              <ExternalLink href="https://www.apple.com" name="Apple" />,{" "}
+              <ExternalLink href="https://linear.app" name="Linear" />,{" "}
+              <ExternalLink href="https://www.raycast.com" name="Raycast" />,{" "}
               <ExternalLink href="https://dub.co" name="Dub" />, and{" "}
               <ExternalLink href="https://vercel.com" name="Vercel" />.
             </li>

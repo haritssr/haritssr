@@ -14,17 +14,18 @@ export default function InternalLink({
 }) {
   return (
     <Link
-      className={`group text-action hover:text-action-hover inline-flex w-fit cursor-pointer items-center justify-start py-0.5 ${lg === true ? "text-lg" : "text-base"} ${className ?? ""}`}
+      className={`group text-action hover:text-action-hover inline w-fit cursor-pointer py-0.5 ${lg === true ? "text-lg" : "text-base"} ${className ?? ""}`}
       href={href}
       prefetch={false}
     >
-      <p className="flex items-center">
+      <span>
         {children}
         <ChevronRightIcon
-          className={`${lg === true ? "h-4.5 w-4.5" : "h-4 w-4"} text-action group-hover:text-action-hover mb-[-1.5px]`}
+          aria-hidden="true"
+          className={`${lg === true ? "h-4.5 w-4.5" : "h-4 w-4"} text-action group-hover:text-action-hover inline align-middle`}
           strokeWidth={2.25}
         />
-      </p>
+      </span>
     </Link>
   );
 }

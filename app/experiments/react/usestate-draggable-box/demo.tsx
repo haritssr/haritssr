@@ -59,7 +59,7 @@ export default function ReactUseStateDraggableBoxDemo() {
   return (
     <>
       <SubTitle>
-        Draggable Box By
+        Draggable Box By{" "}
         <ExternalLink
           href="https://beta.reactjs.org/learn/updating-objects-in-state"
           name="beta.reactjs.org"

@@ -111,24 +111,24 @@ export default function CornerSmoothingPage() {
         <div className="text-foreground/80 max-w-3xl space-y-4 leading-relaxed">
           <p>
             Use native CSS when the browser’s corner curve fits your design and
-            rounded corners are an acceptable fallback. Read the
+            rounded corners are an acceptable fallback. Read the{" "}
             <ExternalLink
               href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/corner-shape"
               name="corner-shape documentation"
               size="inherit"
-            />
+            />{" "}
             for its behavior and current browser compatibility.
           </p>
           <p>
             Use Lisse when you want Figma-style smoothing with an adjustable
             amount. This experiment imports only its DOM-free path generator;
             the library also offers components and APIs for borders and shadows.
-            See the
+            See the{" "}
             <ExternalLink
               href="https://github.com/JaceThings/Lisse"
               name="Lisse repository"
               size="inherit"
-            />
+            />{" "}
             for the full library.
           </p>
         </div>

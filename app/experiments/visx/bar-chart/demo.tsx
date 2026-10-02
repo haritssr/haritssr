@@ -66,7 +66,7 @@ export default function VisxBarChartDemo() {
   return (
     <>
       <SubTitle>
-        Inspired by
+        Inspired by{" "}
         <ExternalLink
           href="https://www.youtube.com/playlist?list=PLIHT2Jhq922bBwhH07uT_QRaPCaKZGgR_"
           name="Oh My Function"
