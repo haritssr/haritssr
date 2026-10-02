@@ -4,14 +4,13 @@ import { Dialog } from "@base-ui/react/dialog";
 import { NumberField } from "@base-ui/react/number-field";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useRef, useState } from "react";
+import type { ReactNode } from "react";
 
 import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
-import {
-  QuantumNumbersSummary,
-  VocabularyGuide,
-} from "../quantum-numbers/demo";
+import OrbitalIllustration from "../_components/OrbitalIllustration";
+import { QuantumNumbersSummary } from "../_components/QuantumNumbersSummary";
 import {
   DEFAULT_ATOMIC_NUMBER,
   ELEMENTS,
@@ -21,9 +20,8 @@ import {
   MAX_ATOMIC_NUMBER,
   normalizeAtomicNumber,
   ORBITALS,
-} from "./_data";
-import type { OrbitalDefinition } from "./_data";
-import OrbitalIllustration from "./orbital-illustration";
+} from "../_lib/electron-configuration";
+import type { OrbitalDefinition } from "../_lib/electron-configuration";
 
 const AUFBAU_ROWS: readonly (readonly (number | null)[])[] = [
   [0, null, null, null],
@@ -94,8 +92,10 @@ interface ConfigurationTerm {
 
 export default function ElectronConfigurationDemo({
   initialAtomicNumber = DEFAULT_ATOMIC_NUMBER,
+  vocabulary,
 }: {
   initialAtomicNumber?: number;
+  vocabulary: ReactNode;
 }) {
   const [atomicNumber, setAtomicNumber] = useState(() =>
     normalizeAtomicNumber(initialAtomicNumber)
@@ -344,7 +344,7 @@ export default function ElectronConfigurationDemo({
           </p>
         ) : null}
       </section>
-      <VocabularyGuide />
+      {vocabulary}
     </div>
   );
 }
@@ -441,7 +441,9 @@ function PeriodicTablePicker({
                         : "border-border hover:bg-interface-hover"
                     }`}
                     key={element.atomicNumber}
-                    onClick={() => selectElement(element.atomicNumber)}
+                    onClick={() => {
+                      selectElement(element.atomicNumber);
+                    }}
                     ref={selected ? selectedElementRef : undefined}
                     style={{ gridColumn: column, gridRow: row }}
                     title={element.name}

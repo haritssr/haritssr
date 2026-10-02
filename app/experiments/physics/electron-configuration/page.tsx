@@ -5,7 +5,8 @@ import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
-import { parseAtomicNumber } from "./_data";
+import { VocabularyGuide } from "../_components/VocabularyGuide";
+import { parseAtomicNumber } from "../_lib/electron-configuration";
 import ElectronConfigurationDemo from "./demo";
 
 const DESCRIPTION =
@@ -31,7 +32,10 @@ export default async function ElectronConfigurationPage({
     <>
       <SubTitle>{DESCRIPTION}</SubTitle>
       <SourceCodeLink />
-      <ElectronConfigurationDemo initialAtomicNumber={initialAtomicNumber} />
+      <ElectronConfigurationDemo
+        initialAtomicNumber={initialAtomicNumber}
+        vocabulary={<VocabularyGuide />}
+      />
     </>
   );
 }

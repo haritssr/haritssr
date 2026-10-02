@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 
 import katexify from "@/utils/katexify";
 
-import { OrbitalCanvas } from "../electron-configuration/orbital-illustration";
+import { OrbitalCanvas } from "../_components/OrbitalCanvas";
 import {
   BOHR_RADIUS_PM,
   makeOrbitalSurface,
@@ -12,7 +12,7 @@ import {
   radialProbabilityRadius,
   REAL_ORBITAL_SHAPES,
   sampleOrbital,
-} from "../electron-configuration/orbital-model";
+} from "../_lib/orbital-model";
 
 import styles from "./accordion.module.css";
 
