@@ -12,11 +12,10 @@ import type { PracticeQuestion } from "../practice";
 import IntegralRules from "./integral-rules";
 import IntegralsLab from "./integrals-lab";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("math", "integrals"),
+export const metadata: Metadata = getExperimentMetadata("math", "integrals", {
   description:
     "Learn definite integrals through midpoint rectangles, signed area, and antiderivatives.",
-};
+});
 
 const questions: readonly PracticeQuestion[] = [
   {

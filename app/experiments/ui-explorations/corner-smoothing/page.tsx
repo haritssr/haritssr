@@ -7,11 +7,14 @@ import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import CornerComparison from "./demo";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("ui-explorations", "corner-smoothing"),
-  description:
-    "Compare ordinary rounded corners, native CSS squircles styled with Tailwind CSS, and Lisse’s Figma-style corner smoothing.",
-};
+export const metadata: Metadata = getExperimentMetadata(
+  "ui-explorations",
+  "corner-smoothing",
+  {
+    description:
+      "Compare ordinary rounded corners, native CSS squircles styled with Tailwind CSS, and Lisse’s Figma-style corner smoothing.",
+  }
+);
 
 const comparisonRows = [
   {

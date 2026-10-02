@@ -5,7 +5,7 @@ import type React from "react";
 import BackButton from "@/components/BackButton";
 import { getBlogModule } from "@/utils/blog-modules";
 import { allBlogPosts, getBlogPost } from "@/utils/blog-posts";
-import { SITE_URL } from "@/utils/site";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 import TableOfContents from "./TableOfContent";
 
@@ -34,33 +34,12 @@ export async function generateMetadata({
     slug: postSlug,
   } = post;
 
-  const image = "/images/openGraphImage.png";
-
-  return {
+  return createPageMetadata({
     title,
     description,
-    metadataBase: new URL(SITE_URL),
-    openGraph: {
-      title,
-      description,
-      publishedTime,
-      siteName: "Harits Syah Blog",
-      url: `${SITE_URL}/blog/${postSlug}`,
-      images: [{ url: image }],
-      locale: "en-US",
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
+    path: `/blog/${postSlug}`,
+    publishedTime,
+  });
 }
 
 export const dynamicParams = false;

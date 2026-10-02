@@ -7,6 +7,7 @@ import {
   getNextjsStudent,
   NextjsStudentsData,
 } from "@/data/NextjsExperimentsData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -17,10 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const student = getNextjsStudent(id);
 
   return student
-    ? {
+    ? createPageMetadata({
+        path: `/experiments/nextjs/students/${id}`,
         title: `Student: ${student.name}`,
         description: `Details for ${student.name}`,
-      }
+      })
     : {};
 }
 

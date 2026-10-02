@@ -11,11 +11,10 @@ import Practice from "../practice";
 import type { PracticeQuestion } from "../practice";
 import DerivativesLab from "./derivatives-lab";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("math", "derivatives"),
+export const metadata: Metadata = getExperimentMetadata("math", "derivatives", {
   description:
     "Learn derivatives by shrinking secant lines into tangent lines and practicing polynomial rules.",
-};
+});
 
 const questions: readonly PracticeQuestion[] = [
   {

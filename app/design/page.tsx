@@ -8,6 +8,7 @@ import InternalLink from "@/components/InternalLink";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 import AccordionDemo from "./AccordionDemo";
 import BadgesDemo from "./BadgesDemo";
@@ -31,6 +32,12 @@ import ToastDemo from "./ToastDemo";
 import ToggleDemo from "./ToggleDemo";
 import TooltipDemo from "./TooltipDemo";
 
+export const metadata = createPageMetadata({
+  title: "Design",
+  description:
+    "Components, patterns, and design principles used across this site.",
+  path: "/design",
+});
 
 const FORM_CONTROL_CLASS_NAME =
   "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 shadow-sm outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";

@@ -11,10 +11,11 @@ import ElectronConfigurationDemo from "./demo";
 const DESCRIPTION =
   "Explore how electrons fill atomic orbitals and build an element's electron configuration.";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "electron-configuration"),
-  description: DESCRIPTION,
-};
+export const metadata: Metadata = getExperimentMetadata(
+  "physics",
+  "electron-configuration",
+  { description: DESCRIPTION }
+);
 
 export default async function ElectronConfigurationPage({
   searchParams,

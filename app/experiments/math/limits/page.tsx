@@ -11,11 +11,10 @@ import Practice from "../practice";
 import type { PracticeQuestion } from "../practice";
 import LimitsLab from "./limits-lab";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("math", "limits"),
+export const metadata: Metadata = getExperimentMetadata("math", "limits", {
   description:
     "Learn limits by approaching a point from both sides, including holes and jumps.",
-};
+});
 
 const questions: readonly PracticeQuestion[] = [
   {

@@ -1,3 +1,4 @@
+import type { ExperimentSummary } from "@/data/experimentExplorer";
 import "server-only";
 
 import {
@@ -29,4 +30,20 @@ function withAvailableExperiments(domain: ExperimentDomain): ExperimentDomain {
         )
       ),
   };
+}
+
+export function getAvailableExperimentSummaries(): ExperimentSummary[] {
+  return getAvailableExperimentDomains()
+    .flatMap((domain) =>
+      domain.experiments.map((experiment) => ({
+        route: `/experiments/${domain.slug}/${experiment.slug}`,
+        title: experiment.title,
+        description: experiment.description,
+        domain: domain.slug,
+        domainTitle: domain.title,
+        tags: experiment.tags,
+        updatedAt: getLatestExperimentUpdate(experiment),
+      }))
+    )
+    .toSorted((left, right) => right.updatedAt.localeCompare(left.updatedAt));
 }

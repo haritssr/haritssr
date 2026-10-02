@@ -56,10 +56,9 @@ const PREREQUISITE_GRAPH_EDGES = createPrerequisiteGraphEdges();
 
 const QUANTITY_DEPENDENTS = createQuantityDependents();
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "units"),
+export const metadata: Metadata = getExperimentMetadata("physics", "units", {
   description: DESCRIPTION,
-};
+});
 
 export default function UnitsPage() {
   return (

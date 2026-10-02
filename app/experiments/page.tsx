@@ -4,11 +4,13 @@ import ExperimentsGrid from "@/components/ExperimentsGrid";
 import PageTitle from "@/components/PageTitle";
 import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import { getAvailableExperimentDomains } from "@/utils/experimentCatalog";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/experiments",
   title: "Experiments",
   description: getExperimentsHomeDescription(),
-};
+});
 
 export default function ExperimentsPage() {
   return (

@@ -4,7 +4,8 @@ import MarkdownContent from "@/components/mdx";
 import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
-import { getAllPostIds, getPostData } from "@/utils/posts";
+import { createPageMetadata } from "@/utils/pageMetadata";
+import { getAllPostIds, getPostData, getSortedPostsData } from "@/utils/posts";
 
 const postDateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "long",
@@ -57,3 +58,20 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const post = getSortedPostsData().find((entry) => entry.id === id);
+  return post
+    ? createPageMetadata({
+        title: post.title,
+        description: post.title,
+        path: `/experiments/nextjs/posts/${id}`,
+        publishedTime: post.date,
+      })
+    : {};
+}

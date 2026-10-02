@@ -7,35 +7,28 @@ import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 import "./globals.css";
-import { RSS_PATH, SITE_URL } from "@/utils/site";
+import { SITE_URL } from "@/utils/site";
 
 const inter = localFont({
   src: "../public/fonts/InterVariable.woff2",
 });
 
 export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "Harits Syah",
+    description: "Developer, teacher, and founder.",
+    path: "/",
+  }),
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Harits Syah",
   },
-  alternates: {
-    types: {
-      "application/rss+xml": new URL(RSS_PATH, SITE_URL).toString(),
-    },
-  },
   description: "Developer, teacher, and founder.",
   metadataBase: new URL(SITE_URL),
-  openGraph: {
-    description: "Developer, teacher, and founder.",
-    locale: "en-US",
-    siteName: "Harits Syah",
-    title: "Harits Syah",
-    type: "website",
-    url: SITE_URL,
-  },
   robots: {
     follow: true,
     googleBot: {
@@ -50,10 +43,6 @@ export const metadata: Metadata = {
   title: {
     default: "Harits Syah",
     template: "%s - Harits Syah",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Harits Syah",
   },
 };
 

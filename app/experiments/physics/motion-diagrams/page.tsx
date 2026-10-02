@@ -55,11 +55,14 @@ const motions = [
   },
 ];
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "motion-diagrams"),
-  description:
-    "Interactive velocity-time diagrams for uniform and uniformly accelerated linear and circular motion.",
-};
+export const metadata: Metadata = getExperimentMetadata(
+  "physics",
+  "motion-diagrams",
+  {
+    description:
+      "Interactive velocity-time diagrams for uniform and uniformly accelerated linear and circular motion.",
+  }
+);
 
 export default function MotionDiagramsPage() {
   return (

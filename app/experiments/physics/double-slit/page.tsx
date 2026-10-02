@@ -10,10 +10,11 @@ import DoubleSlitLab from "./double-slit-lab";
 const DESCRIPTION =
   "Explore how wavelength, slit separation, and screen distance shape a two-slit interference pattern.";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "double-slit"),
-  description: DESCRIPTION,
-};
+export const metadata: Metadata = getExperimentMetadata(
+  "physics",
+  "double-slit",
+  { description: DESCRIPTION }
+);
 
 export default function DoubleSlitPage() {
   return (

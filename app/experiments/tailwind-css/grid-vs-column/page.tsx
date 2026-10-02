@@ -33,11 +33,14 @@ const sampleCards = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("tailwind-css", "grid-vs-column"),
-  description:
-    "Compare CSS Grid and multi-column layouts with responsive Tailwind CSS v4 utilities.",
-};
+export const metadata: Metadata = getExperimentMetadata(
+  "tailwind-css",
+  "grid-vs-column",
+  {
+    description:
+      "Compare CSS Grid and multi-column layouts with responsive Tailwind CSS v4 utilities.",
+  }
+);
 
 export default function GridVsColumnPage() {
   return (

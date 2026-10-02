@@ -12,10 +12,11 @@ import katexify from "@/utils/katexify";
 import { DESCRIPTION, PHYSICS_DOMAINS } from "./_data";
 import type { PhysicsEquation } from "./_data";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "essential-physics-equations"),
-  description: DESCRIPTION,
-};
+export const metadata: Metadata = getExperimentMetadata(
+  "physics",
+  "essential-physics-equations",
+  { description: DESCRIPTION }
+);
 
 export default function PhysicsEquationsPage() {
   return (

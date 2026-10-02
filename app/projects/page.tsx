@@ -3,16 +3,18 @@ import type { Metadata } from "next";
 import PageTitle from "@/components/PageTitle";
 import ProjectsCard from "@/components/ProjectsCard";
 import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 import { ProjectsData } from "../../data/ProjectsData";
 
 const PROJECTS_DESCRIPTION =
   "Details about the projects I've worked on and how they were handled.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/projects",
   title: "Projects",
   description: PROJECTS_DESCRIPTION,
-};
+});
 
 export default function ProjectsPage() {
   return (

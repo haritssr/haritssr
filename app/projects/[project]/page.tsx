@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import { createPageMetadata } from "@/utils/pageMetadata";
 import { getProjectSlug } from "@/utils/projectSlug";
 
 import { ProjectsData } from "../../../data/ProjectsData";
@@ -20,10 +21,11 @@ export async function generateMetadata({
   const project = getProject(projectSlug);
 
   return project
-    ? {
+    ? createPageMetadata({
+        path: `/projects/${projectSlug}`,
         description: project.about_client.short_about,
         title: project.project_name,
-      }
+      })
     : {};
 }
 

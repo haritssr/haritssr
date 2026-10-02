@@ -1,6 +1,7 @@
 import "server-only";
 import type { Metadata } from "next";
 
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 export interface ExperimentEntry {
   readonly description: string;
@@ -1252,22 +1253,23 @@ function getExperiment(
 
 export function getExperimentDomainMetadata(slug: string): Metadata {
   const domain = getExperimentDomain(slug);
-
-  return {
-    description: `${domain.title} experiments and demos`,
+  return createPageMetadata({
     title: `${domain.title} Experiments`,
-  };
+    description: domain.description,
+    path: `/experiments/${domain.slug}`,
+  });
 }
 
 export function getExperimentMetadata(
   domainSlug: string,
-  experimentSlug: string
+  experimentSlug: string,
+  overrides: { description?: string } = {}
 ): Metadata {
   const domain = getExperimentDomain(domainSlug);
   const experiment = getExperiment(domainSlug, experimentSlug);
-
-  return {
-    description: `${experiment.title} experiment in ${domain.title}`,
+  return createPageMetadata({
     title: `${experiment.title} | ${domain.title} Experiments`,
-  };
+    description: overrides.description ?? experiment.description,
+    path: `/experiments/${domainSlug}/${experimentSlug}`,
+  });
 }

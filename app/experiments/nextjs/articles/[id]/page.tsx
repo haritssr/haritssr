@@ -7,6 +7,7 @@ import {
   getNextjsArticle,
   NextjsArticlesData,
 } from "@/data/NextjsExperimentsData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -17,10 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getNextjsArticle(id);
 
   return article
-    ? {
+    ? createPageMetadata({
+        path: `/experiments/nextjs/articles/${id}`,
         title: article.title,
         description: article.title,
-      }
+      })
     : {};
 }
 
