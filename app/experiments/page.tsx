@@ -3,13 +3,15 @@ import type { Metadata } from "next";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import PageTitle from "@/components/PageTitle";
 import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
-import { getAvailableExperimentDomains } from "@/utils/experimentCatalog";
+import { getAvailableExperimentCount } from "@/utils/experimentCatalog";
 import { createPageMetadata } from "@/utils/pageMetadata";
+
+const experimentsHomeDescription = getExperimentsHomeDescription();
 
 export const metadata: Metadata = createPageMetadata({
   path: "/experiments",
   title: "Experiments",
-  description: getExperimentsHomeDescription(),
+  description: experimentsHomeDescription,
 });
 
 export default function ExperimentsPage() {
@@ -17,7 +19,7 @@ export default function ExperimentsPage() {
     <>
       <PageTitle>Experiments</PageTitle>
       <TopLevelSectionPageDescription>
-        {getExperimentsHomeDescription()}
+        {experimentsHomeDescription}
       </TopLevelSectionPageDescription>
       <ExperimentsGrid />
     </>
@@ -25,10 +27,8 @@ export default function ExperimentsPage() {
 }
 
 function getExperimentsHomeDescription(): string {
-  const totalExperiment = getAvailableExperimentDomains().reduce(
-    (total, domain) => total + domain.experiments.length,
-    0
-  );
+  const totalExperiments = getAvailableExperimentCount();
+  const experimentLabel = totalExperiments === 1 ? "experiment" : "experiments";
 
-  return `${totalExperiment} experiments in frontend development, browser APIs, mathematics, and physics.`;
+  return `${totalExperiments} ${experimentLabel} in frontend development, browser APIs, mathematics, and physics.`;
 }

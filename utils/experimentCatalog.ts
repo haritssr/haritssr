@@ -1,6 +1,5 @@
-import type { ExperimentSummary } from "@/data/experimentExplorer";
 import "server-only";
-
+import type { ExperimentSummary } from "@/data/experimentExplorer";
 import {
   ExperimentsData,
   getExperimentDomain,
@@ -30,6 +29,20 @@ function withAvailableExperiments(domain: ExperimentDomain): ExperimentDomain {
         )
       ),
   };
+}
+
+export function getAvailableExperimentCount(): number {
+  let count = 0;
+
+  for (const domain of ExperimentsData) {
+    for (const experiment of domain.experiments) {
+      if (isExperimentAvailable(domain.slug, experiment.slug)) {
+        count += 1;
+      }
+    }
+  }
+
+  return count;
 }
 
 export function getAvailableExperimentSummaries(): ExperimentSummary[] {
