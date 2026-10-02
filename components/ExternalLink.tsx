@@ -2,11 +2,25 @@ export default function ExternalLink({
   name,
   href,
   big,
+  size,
 }: {
   name: string;
   href: string;
   big?: boolean;
+  size?: "base" | "inherit" | "lg";
 }) {
+  const resolvedSize = size ?? (big === true ? "lg" : "base");
+  const textClass = {
+    base: "text-base",
+    inherit: "text-[length:inherit]",
+    lg: "text-lg",
+  }[resolvedSize];
+  const iconClass = {
+    base: "h-4 w-4",
+    inherit: "size-[1em]",
+    lg: "h-4.5 w-4.5",
+  }[resolvedSize];
+
   return (
     <cite className="group not-italic">
       {" "}
@@ -19,11 +33,9 @@ export default function ExternalLink({
         title={href}
       >
         <span className="flex items-center">
-          <span className={`${big === true ? "text-lg" : "text-base"} `}>
-            {name}
-          </span>
+          <span className={textClass}>{name}</span>
           <svg
-            className={` ${big === true ? "h-4.5 w-4.5" : "h-4 w-4"} text-action group-hover:text-action-hover mt-0.5 ml-1`}
+            className={`${iconClass} text-action group-hover:text-action-hover mt-0.5 ml-1`}
             fill="none"
             stroke="currentColor"
             strokeWidth={1.7}
