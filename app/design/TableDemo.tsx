@@ -1,7 +1,7 @@
 export default function TableDemo() {
   return (
     <div className="border-border w-full overflow-hidden rounded-md border">
-      <div className="w-full overflow-x-auto">
+      <div className="scrollbar-subtle w-full overflow-x-auto">
         <table className="divide-border text-foreground w-full min-w-70 border-collapse divide-y text-sm">
           <caption className="sr-only">Example data table</caption>
           <thead>

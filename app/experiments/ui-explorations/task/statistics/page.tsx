@@ -191,7 +191,7 @@ export default async function TaskStatisticsPage() {
             No database rows yet.
           </div>
         ) : (
-          <div className="mt-3 overflow-x-auto">
+          <div className="scrollbar-subtle mt-3 overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-200 text-left text-sm text-zinc-700">
               <caption className="sr-only">Task database records</caption>
               <thead className="bg-zinc-50 text-xs text-zinc-500 uppercase">

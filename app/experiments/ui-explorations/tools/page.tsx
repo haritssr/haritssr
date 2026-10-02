@@ -108,7 +108,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
           {tools.length === 0 ? (
             <p className="mt-3 text-sm text-neutral-500">No tools yet.</p>
           ) : (
-            <div className="mt-4 overflow-x-auto">
+            <div className="scrollbar-subtle mt-4 overflow-x-auto">
               <table className="w-full border-collapse text-sm">
                 <caption className="sr-only">Current tools</caption>
                 <thead>

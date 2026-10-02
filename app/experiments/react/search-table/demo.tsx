@@ -101,30 +101,32 @@ export default function ReactSearchTableDemo() {
         <output className="block">Searching…</output>
       ) : null}
       {error ? <p role="alert">{error}</p> : null}
-      <table
-        aria-busy={loading || query !== debouncedSearch}
-        className="border"
-      >
-        <caption className="sr-only">People search results</caption>
-        <thead>
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Maiden Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((d) => (
-            <tr key={d.id}>
-              <td>{d.id}</td>
-              <td>{d.firstName}</td>
-              <td>{d.lastName}</td>
-              <td>{d.maidenName}</td>
+      <div className="scrollbar-subtle w-full overflow-x-auto">
+        <table
+          aria-busy={loading || query !== debouncedSearch}
+          className="border"
+        >
+          <caption className="sr-only">People search results</caption>
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Maiden Name</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((d) => (
+              <tr key={d.id}>
+                <td>{d.id}</td>
+                <td>{d.firstName}</td>
+                <td>{d.lastName}</td>
+                <td>{d.maidenName}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

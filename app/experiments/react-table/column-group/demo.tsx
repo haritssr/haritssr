@@ -117,7 +117,7 @@ function Table() {
   });
 
   return (
-    <div className="overflow-x-auto bg-red-50 p-2">
+    <div className="scrollbar-subtle overflow-x-auto bg-red-50 p-2">
       <table>
         <caption className="sr-only">
           People and activity, grouped by name and information

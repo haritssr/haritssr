@@ -203,14 +203,15 @@ select:focus {
   }
 }
 
-/* Thin scrollbar for compact horizontal content */
+/* Thin scrollbars for compact scrollable content */
 .scrollbar-subtle {
   scrollbar-color: color-mix(in srgb, currentcolor 25%, transparent) transparent;
   scrollbar-width: thin;
 }
 
 .scrollbar-subtle::-webkit-scrollbar {
-  height: 20px;
+  height: 6px;
+  width: 6px;
 }
 
 .scrollbar-subtle::-webkit-scrollbar-track {

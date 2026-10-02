@@ -280,7 +280,7 @@ export default function LimitsLab() {
         <h3 className="text-base font-semibold text-zinc-950">
           Look from both sides
         </h3>
-        <div className="mt-3 overflow-x-auto">
+        <div className="scrollbar-subtle mt-3 overflow-x-auto">
           <table className="w-full min-w-96 text-left text-sm">
             <caption className="sr-only">
               Nearby function values from the left and right

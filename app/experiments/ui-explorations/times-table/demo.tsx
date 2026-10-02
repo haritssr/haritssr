@@ -66,7 +66,7 @@ function TimesTableComponent() {
         Attention: This app is not finished yet!
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="scrollbar-subtle overflow-x-auto">
         <table className="border-separate border-spacing-2">
           <caption className="sr-only">
             Multiplication practice: enter the product of each row and column

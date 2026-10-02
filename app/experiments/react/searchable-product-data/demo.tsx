@@ -93,23 +93,25 @@ const ProductTable = ({
   }
 
   return (
-    <table className="rounded border p-2">
-      <caption className="sr-only">Products and prices</caption>
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
-        </tr>
-      </thead>
-      {Array.from(groups, ([category, items]) => (
-        <tbody key={category}>
-          <ProductCategoryRow category={category} />
-          {items.map((product) => (
-            <ProductRow key={product.name} product={product} />
-          ))}
-        </tbody>
-      ))}
-    </table>
+    <div className="scrollbar-subtle w-full overflow-x-auto">
+      <table className="rounded border p-2">
+        <caption className="sr-only">Products and prices</caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        {Array.from(groups, ([category, items]) => (
+          <tbody key={category}>
+            <ProductCategoryRow category={category} />
+            {items.map((product) => (
+              <ProductRow key={product.name} product={product} />
+            ))}
+          </tbody>
+        ))}
+      </table>
+    </div>
   );
 };
 
