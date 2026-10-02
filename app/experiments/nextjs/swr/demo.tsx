@@ -1,26 +1,13 @@
 "use client";
 
-import type { Key } from "react";
 import useSWR from "swr";
 
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
-
-interface NameCardProps {
-  age: string;
-  city: string;
-  name: string;
-}
+import { fetchPeople } from "@/utils/fetchPeople";
+import type { Person } from "@/utils/fetchPeople";
 
 export default function NextjsSWRDemo() {
-  const { data, error } = useSWR("/api/hello", fetcher);
-  if (error) {
-    return <div>An error has occurred.</div>;
-  }
-  if (!data) {
-    return <div>No Data</div>;
-  }
-
   return (
     <>
       <SubTitle>
@@ -35,22 +22,48 @@ export default function NextjsSWRDemo() {
         component
       </SubTitle>
       <SourceCodeLink />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {data.map((d: { id: Key; name: string; age: string; city: string }) => (
-          <NameCard age={d.age} city={d.city} key={d.id} name={d.name} />
-        ))}
-      </div>
+      <PeopleResults />
     </>
   );
 }
 
-const fetcher = async (url: RequestInfo) =>
-  await fetch(url).then(async (res) => await res.json());
-
-const NameCard = ({ name, age, city }: NameCardProps) => (
+const NameCard = ({ name, age, city }: Person) => (
   <div className="space-y-2 rounded-md border border-zinc-300 bg-zinc-50 p-4">
     <div className="text-xl font-semibold text-gray-700">{name}</div>
     <div className="text-gray-500">{age}</div>
     <div className="text-action">{city}</div>
   </div>
 );
+
+function PeopleResults() {
+  const { data, error, isLoading, mutate } = useSWR("/api/hello", fetchPeople);
+  if (isLoading) {
+    return <output>Loading people…</output>;
+  }
+  if (error) {
+    return (
+      <div role="alert">
+        People could not be loaded.{" "}
+        <button
+          className="text-action hover:underline"
+          onClick={() => {
+            void mutate();
+          }}
+          type="button"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+  if (!data?.length) {
+    return <p>No people found.</p>;
+  }
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      {data.map((person) => (
+        <NameCard key={person.id} {...person} />
+      ))}
+    </div>
+  );
+}

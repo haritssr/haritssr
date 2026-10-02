@@ -3,15 +3,15 @@ export function GET() {
     {
       id: "1",
       name: "Harits Syah",
-      age: "22",
+      age: 22,
       city: "South Tangerang, Indonesia",
     },
     {
       id: "2",
       name: "Guillermo Rauch",
-      age: "32",
+      age: 32,
       city: "San Francisco, California",
     },
-    { id: "3", name: "Lee Robinson", age: "28", city: "Austin, Texas" },
+    { id: "3", name: "Lee Robinson", age: 28, city: "Austin, Texas" },
   ]);
 }
