@@ -71,14 +71,13 @@ export default function VisxBarChartDemo() {
           href="https://www.youtube.com/playlist?list=PLIHT2Jhq922bBwhH07uT_QRaPCaKZGgR_"
           name="Oh My Function"
         />{" "}
-        <br />
-        Bar Chart of Apple Stock.
+        <br /> Letter frequency bar chart.
         <br />
         Hover the bar to see details.
       </SubTitle>
       <SourceCodeLink />
       <svg className="w-full" ref={ref} viewBox={`0 0 ${width} ${height}`}>
-        <title>IDK</title>
+        <title>Letter frequency bar chart</title>
         <Group>
           {data.map((datum) => {
             const xValue = getXValue(datum);
@@ -128,7 +127,6 @@ export default function VisxBarChartDemo() {
       </svg>
       {tooltipData ? (
         <TooltipWithBounds
-          key={Math.random()}
           left={tooltipLeft}
           style={tooltipStyles}
           top={tooltipTop}

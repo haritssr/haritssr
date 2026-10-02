@@ -36,8 +36,7 @@ export default function VisxPieChartDemo() {
           href="https://www.youtube.com/watch?v=bL3P9CqQkKw"
           name="Leight Halliday"
         />{" "}
-        <br />
-        Select a coin below to see which and how much I have.
+        <br /> Select a coin below to see which and how much I have.
       </SubTitle>
       <SourceCodeLink />
       <svg height={width} width={width}>
