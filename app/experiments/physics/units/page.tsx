@@ -1,4 +1,5 @@
 import "katex/dist/katex.min.css";
+import { Accordion } from "@base-ui/react/accordion";
 import { ArrowRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 
@@ -74,7 +75,7 @@ export default function UnitsPage() {
             units={DERIVED_UNITS}
           />
         </section>
-        <section className="select-none">
+        <section>
           <Section name="Peta Prasyarat" />
           <p className="text-foreground/70 mb-4 text-sm">
             Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
@@ -90,7 +91,7 @@ export default function UnitsPage() {
           </p>
           <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
         </section>
-        <section className="select-none">
+        <section>
           <Section name="Graf Prasyarat" />
           <p className="text-foreground/70 mb-4 text-sm">
             Klik sebuah besaran untuk menyorot jalur yang menghubungkannya
@@ -301,25 +302,24 @@ function FormulaPath({
 
 function PrerequisiteDiagrams({ units }: { units: readonly UnitDefinition[] }) {
   return (
-    <div className="space-y-3">
+    <Accordion.Root className="w-full space-y-3" multiple>
       {units.map((unit) => (
-        <details
-          className="group border-border overflow-hidden border"
-          key={unit.quantity}
-        >
-          <summary className="hover:bg-surface-hover focus-visible:outline-action flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-3 outline-hidden focus-visible:outline-2">
-            <span className="flex min-w-0 items-center gap-2">
-              <span className="truncate">{unit.quantity}</span>
-              <span className="text-foreground/60 shrink-0">
-                <MathSymbol value={unit.quantitySymbol} />
+        <Accordion.Item key={unit.quantity} value={unit.quantity}>
+          <Accordion.Header>
+            <Accordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
+              <span className="flex min-w-0 items-center gap-2">
+                <span className="truncate">{unit.quantity}</span>
+                <span className="text-foreground/60 shrink-0">
+                  <MathSymbol value={unit.quantitySymbol} />
+                </span>
               </span>
-            </span>
-            <ChevronDownIcon
-              aria-hidden="true"
-              className="text-foreground/50 size-4 shrink-0 transition-transform group-open:rotate-180"
-            />
-          </summary>
-          <div className="border-border border-t p-3">
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="text-foreground size-5 shrink-0 transition-transform duration-200 group-data-panel-open:rotate-180"
+              />
+            </Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Panel className="border-border text-foreground/70 rounded-b-lg border-r border-b border-l bg-white p-3 text-sm">
             <div className="mb-3 flex items-center gap-3 text-xs">
               <span className="text-foreground/60">
                 Prasyarat → rumus → hasil
@@ -340,63 +340,68 @@ function PrerequisiteDiagrams({ units }: { units: readonly UnitDefinition[] }) {
                 />
               ))}
             </div>
-          </div>
-        </details>
+          </Accordion.Panel>
+        </Accordion.Item>
       ))}
-    </div>
+    </Accordion.Root>
   );
 }
 
 function UnitsTable({ caption, units }: UnitsTableProps) {
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="divide-border border-border text-foreground w-full min-w-70 border-collapse divide-y border text-sm">
-        <caption className="sr-only">{caption}</caption>
-        <thead>
-          <tr className="divide-border bg-foreground/5 divide-x">
-            <th className="w-12 px-3 py-2 text-center font-medium" scope="col">
-              No
-            </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
-              Besaran
-            </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
-              Simbol besaran
-            </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
-              Satuan
-            </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
-              Simbol satuan
-            </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
-              Dimensi
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-border divide-y">
-          {units.map((unit, index) => (
-            <tr className="divide-border divide-x" key={unit.quantity}>
-              <td className="w-12 px-3 py-2 text-center tabular-nums">
-                {index + 1}
-              </td>
-              <th className="px-3 py-2 text-left font-normal" scope="row">
-                {unit.quantity}
+    <div className="border-border w-full overflow-hidden rounded-md border">
+      <div className="scrollbar-subtle w-full overflow-x-auto">
+        <table className="divide-border text-foreground/80 w-full min-w-70 border-collapse divide-y text-sm">
+          <caption className="sr-only">{caption}</caption>
+          <thead>
+            <tr className="divide-border bg-foreground/5 divide-x">
+              <th
+                className="w-12 px-3 py-2 text-center font-medium"
+                scope="col"
+              >
+                No
               </th>
-              <td className="px-3 py-2">
-                <MathSymbol value={unit.quantitySymbol} />
-              </td>
-              <td className="px-3 py-2">{unit.unit}</td>
-              <td className="px-3 py-2">
-                <MathSymbol value={unit.unitSymbol} />
-              </td>
-              <td className="px-3 py-2">
-                <MathSymbol value={unit.dimension} />
-              </td>
+              <th className="px-3 py-2 text-left font-medium" scope="col">
+                Besaran
+              </th>
+              <th className="px-3 py-2 text-left font-medium" scope="col">
+                Simbol besaran
+              </th>
+              <th className="px-3 py-2 text-left font-medium" scope="col">
+                Satuan
+              </th>
+              <th className="px-3 py-2 text-left font-medium" scope="col">
+                Simbol satuan
+              </th>
+              <th className="px-3 py-2 text-left font-medium" scope="col">
+                Dimensi
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="divide-border divide-y">
+            {units.map((unit, index) => (
+              <tr className="divide-border divide-x" key={unit.quantity}>
+                <td className="w-12 px-3 py-2 text-center tabular-nums">
+                  {index + 1}
+                </td>
+                <th className="px-3 py-2 text-left font-normal" scope="row">
+                  {unit.quantity}
+                </th>
+                <td className="px-3 py-2">
+                  <MathSymbol value={unit.quantitySymbol} />
+                </td>
+                <td className="px-3 py-2">{unit.unit}</td>
+                <td className="px-3 py-2">
+                  <MathSymbol value={unit.unitSymbol} />
+                </td>
+                <td className="px-3 py-2">
+                  <MathSymbol value={unit.dimension} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
