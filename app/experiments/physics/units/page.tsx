@@ -31,6 +31,7 @@ import type { QuantityDependents } from "./DependentFormulas";
 
 interface UnitsTableProps {
   caption: string;
+  showFormulas?: boolean;
   units: readonly UnitDefinition[];
 }
 
@@ -72,6 +73,7 @@ export default function UnitsPage() {
           <Section name="Besaran Turunan" />
           <UnitsTable
             caption="Besaran turunan yang umum dipelajari di SMA"
+            showFormulas
             units={DERIVED_UNITS}
           />
         </section>
@@ -347,7 +349,7 @@ function PrerequisiteDiagrams({ units }: { units: readonly UnitDefinition[] }) {
   );
 }
 
-function UnitsTable({ caption, units }: UnitsTableProps) {
+function UnitsTable({ caption, showFormulas = false, units }: UnitsTableProps) {
   return (
     <div className="border-border w-full overflow-hidden rounded-md border">
       <div className="scrollbar-subtle w-full overflow-x-auto">
@@ -367,6 +369,11 @@ function UnitsTable({ caption, units }: UnitsTableProps) {
               <th className="px-3 py-2 text-left font-medium" scope="col">
                 Simbol besaran
               </th>
+              {showFormulas ? (
+                <th className="px-3 py-2 text-left font-medium" scope="col">
+                  Rumus
+                </th>
+              ) : null}
               <th className="px-3 py-2 text-left font-medium" scope="col">
                 Satuan
               </th>
@@ -390,6 +397,29 @@ function UnitsTable({ caption, units }: UnitsTableProps) {
                 <td className="px-3 py-2">
                   <MathSymbol value={unit.quantitySymbol} />
                 </td>
+                {showFormulas ? (
+                  <td className="px-3 py-2">
+                    <ul className="space-y-3">
+                      {getFormulaDefinitions(unit.quantity).map(
+                        (definition) => (
+                          <li key={definition.name}>
+                            <p className="mb-1 text-xs">{definition.name}</p>
+                            <MathSymbol
+                              useDisplayFractions
+                              value={definition.expression}
+                            />
+                            {definition.condition !== undefined &&
+                            definition.condition !== "" ? (
+                              <p className="mt-1 text-xs">
+                                {definition.condition}
+                              </p>
+                            ) : null}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </td>
+                ) : null}
                 <td className="px-3 py-2">{unit.unit}</td>
                 <td className="px-3 py-2">
                   <MathSymbol value={unit.unitSymbol} />
