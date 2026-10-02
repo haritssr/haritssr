@@ -996,6 +996,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03"],
       },
+      {
+        slug: "equation-annotations",
+        title: "Equation Annotations",
+        description:
+          "Annotate terms in Newton’s second law using TeX decorations.",
+        tags: ["mathematics", "learning"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
     ],
     id: 13,
     logoSrc: "/icons/KaTeX.jpg",
