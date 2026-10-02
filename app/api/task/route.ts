@@ -5,9 +5,10 @@ import {
   getTodayTaskDate,
   replaceTasksForDate,
 } from "@/app/experiments/ui-explorations/task/db";
+import { isValidTaskDate } from "@/app/experiments/ui-explorations/task/utils";
 import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
 
-import { isValidTaskDate, parseTaskPayload } from "./validation";
+import { parseTaskPayload } from "./validation";
 
 export const runtime = "nodejs";
 

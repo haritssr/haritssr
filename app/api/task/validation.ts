@@ -3,23 +3,12 @@ import {
   MAX_TASKS_PER_DAY,
 } from "@/app/experiments/ui-explorations/task/data";
 import type { Task } from "@/app/experiments/ui-explorations/task/type";
+import { isValidTaskDate } from "@/app/experiments/ui-explorations/task/utils";
 
 const MAX_TASK_TITLE_LENGTH = 200;
-const taskDatePattern = /^\d{4}-\d{2}-\d{2}$/u;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
-}
-
-export function isValidTaskDate(value: string) {
-  if (!taskDatePattern.test(value)) {
-    return false;
-  }
-
-  const date = new Date(`${value}T00:00:00.000Z`);
-  return (
-    !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value
-  );
 }
 
 function parseTask(candidate: unknown): Task | null {
