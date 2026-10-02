@@ -66,7 +66,7 @@ export default function DesignSystem() {
         <ExternalLink href="https://www.haritssr.com" name="haritssr.com" /> and{" "}
         <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
       </TopLevelSectionPageDescription>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <section>
           <Section name="Design Principles" />
           <ExplanationList>

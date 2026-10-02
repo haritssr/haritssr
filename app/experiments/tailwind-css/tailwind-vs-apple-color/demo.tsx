@@ -16,7 +16,7 @@ export default function TailwindVsAppleColorDemo() {
         The difference between Tailwind CSS Gray colors vs Apple Gray colors
       </SubTitle>
       <SourceCodeLink />
-      <div className="space-y-16">
+      <div className="space-y-20">
         <section>
           <Section name="Apple" />
           <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">

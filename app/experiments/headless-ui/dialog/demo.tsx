@@ -38,7 +38,7 @@ export default function HeadlessDialogDemo() {
       </SubTitle>
       <SourceCodeLink />
 
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Wrapper title="Dialog without transition">
           <DialogExample1 />
         </Wrapper>

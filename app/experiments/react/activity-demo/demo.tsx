@@ -35,7 +35,7 @@ import SubTitle from "@/components/SubTitle";
 export default function ActivityDemo() {
   const [visible, setVisible] = useState(false);
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       <div className="space-y-10">
         <SubTitle>
           The page intentionally bad looking in order to focus on the code
@@ -53,7 +53,7 @@ export default function ActivityDemo() {
         </button>
       </div>
 
-      <div className="space-y-16">
+      <div className="space-y-20">
         <section>
           <Section name="Counter Button" />
           <Activity mode={visible ? "visible" : "hidden"}>

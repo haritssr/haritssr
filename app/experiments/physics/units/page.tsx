@@ -62,7 +62,7 @@ export default function UnitsPage() {
     <>
       <SubTitle>{DESCRIPTION}</SubTitle>
       <SourceCodeLink />
-      <div className="space-y-16">
+      <div className="space-y-20">
         <section>
           <Section name="Besaran Pokok" />
           <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />

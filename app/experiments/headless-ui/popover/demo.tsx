@@ -26,7 +26,7 @@ export default function HeadlessPopoverDemo() {
         </ExplanationList>
       </SubTitle>
       <SourceCodeLink />
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Wrapper title="Popover (for Navigation)">
           <PopoverExample1 />
         </Wrapper>

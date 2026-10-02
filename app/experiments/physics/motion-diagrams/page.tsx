@@ -85,7 +85,7 @@ export default function MotionDiagramsPage() {
         </nav>
       </div>
 
-      <div className="space-y-16">
+      <div className="space-y-20">
         {motions.map((motion) => (
           <section
             aria-labelledby={`${motion.id}-title`}

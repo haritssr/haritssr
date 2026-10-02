@@ -23,7 +23,7 @@ export default function Home() {
     0
   );
   return (
-    <div className="space-y-16 sm:mt-10">
+    <div className="space-y-20 sm:mt-10">
       <section aria-labelledby="profile-heading" className="pt-5" id="Identity">
         <div className="corner-squircle border-border divide-border bg-border-interface-hover lg:bg-surface-hover grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 lg:gap-5 lg:divide-x">
           <div className="flex items-center justify-center bg-white py-5 select-none">

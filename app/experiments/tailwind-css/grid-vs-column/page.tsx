@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function GridVsColumnPage() {
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-20 pb-16">
       <header>
         <p className="text-foreground/70 max-w-3xl text-lg">
           Both layouts can create multiple columns, but they arrange content in

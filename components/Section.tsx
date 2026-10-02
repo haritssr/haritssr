@@ -1,15 +1,24 @@
 export default function Section({
-  className = "text-foreground mb-4 text-xl font-semibold",
+  as: Heading = "h2",
+  className,
   id,
   name,
 }: {
+  as?: "h2" | "h3";
   className?: string;
   id?: string;
   name: string;
 }) {
+  const headingSize = Heading === "h2" ? "text-2xl" : "text-xl";
+
   return (
-    <h2 className={className} id={id}>
+    <Heading
+      className={
+        className ?? `text-foreground mb-4 ${headingSize} font-semibold`
+      }
+      id={id}
+    >
       {name}
-    </h2>
+    </Heading>
   );
 }

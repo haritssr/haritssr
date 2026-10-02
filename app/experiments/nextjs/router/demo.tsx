@@ -71,7 +71,7 @@ function RouterDemoContent() {
       </SubTitle>
       <SourceCodeLink />
 
-      <div className="space-y-16">
+      <div className="space-y-20">
         <section>
           <Section name="usePathname" />
           <div>

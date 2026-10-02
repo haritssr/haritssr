@@ -37,7 +37,7 @@ export default function YearlyInterest() {
   }
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       <div>
         <SubTitle>Calculation of yearly save interest</SubTitle>
         <SourceCodeLink />
