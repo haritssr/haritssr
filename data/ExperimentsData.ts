@@ -852,16 +852,10 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: "2026-09-29",
       },
       {
-        slug: "p-orbital-shape",
-        title: "Where a p Orbital Gets Its Shape",
+        slug: "atomic-orbitals",
+        title: "Atomic Orbitals",
         createdAt: "2026-09-29",
-        updatedAt: "2026-09-29",
-      },
-      {
-        slug: "schrodinger-orbitals",
-        title: "How s, p, d, and f Orbitals Get Their Shapes",
-        createdAt: "2026-09-29",
-        updatedAt: "2026-09-29",
+        updatedAt: "2026-10-02",
       },
       {
         slug: "double-slit",

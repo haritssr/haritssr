@@ -408,7 +408,7 @@ function OrbitalShapeExplanation() {
           <p className="text-foreground/70 mt-3 text-sm">
             <Link
               className="text-action hover:text-action-hover underline"
-              href="/experiments/physics/schrodinger-orbitals"
+              href="/experiments/physics/atomic-orbitals"
             >
               Follow the equation to all orbital shapes
             </Link>

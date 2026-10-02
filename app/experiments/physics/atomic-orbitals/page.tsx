@@ -14,12 +14,15 @@ import katexify from "@/utils/katexify";
 import Contents from "./contents";
 import {
   AngularExplorer,
-  FactorExplorer,
   OrbitalExplorer,
-  PotentialExplorer,
   ProbabilityExplorer,
   RadialExplorer,
 } from "./interactions";
+import {
+  OrbitalSymbolGuide,
+  POrbitalDerivation,
+  POrbitalPattern,
+} from "./p-orbital-explanation";
 
 import styles from "./accordion.module.css";
 
@@ -27,18 +30,21 @@ const SECTIONS = [
   { id: "explore", label: "Compare the shapes" },
   { id: "angular-shapes", label: "Why the shapes differ" },
   { id: "probability", label: "A probability pattern" },
+  { id: "the-shape-in-one-picture", label: "The p orbital up close" },
+  { id: "same-shape-three-directions", label: "Three p orientations" },
   { id: "radial-nodes", label: "Same shape, new shell" },
-  { id: "deeper", label: "Go deeper" },
+  { id: "deeper", label: "From equation to shape" },
+  { id: "symbol-guide", label: "Symbol guide" },
   { id: "references", label: "Sources" },
 ] as const;
 
 export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "schrodinger-orbitals"),
+  ...getExperimentMetadata("physics", "atomic-orbitals"),
   description:
-    "Explore how wave patterns and angular nodes give s, p, d, and f orbitals their shapes with interactive visuals.",
+    "Explore atomic orbital shapes, angular and radial nodes, and wavefunctions, with interactive s, p, d, and f models and a worked p-orbital derivation.",
 };
 
-export default function SchrodingerOrbitalsPage() {
+export default function AtomicOrbitalsPage() {
   return (
     <div className="pb-24">
       <SubTitle>
@@ -51,7 +57,7 @@ export default function SchrodingerOrbitalsPage() {
 
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-8">
         <Contents items={SECTIONS} />
-        <div className="min-w-0 space-y-16 lg:col-start-1 lg:row-start-1">
+        <div className="min-w-0 space-y-20 lg:col-start-1 lg:row-start-1">
           <section
             aria-labelledby="explore-heading"
             className="scroll-mt-28"
@@ -118,8 +124,9 @@ export default function SchrodingerOrbitalsPage() {
               <p>
                 The wavefunction can have positive or negative values. Its sign
                 is not electric charge. Squaring its magnitude,{" "}
-                {katexify(String.raw`|\psi|^2`, false)}, gives the probability
-                of finding the electron in each small region of space.
+                {katexify(String.raw`|\psi|^2`, false)}, gives the position
+                probability density. Integrating that density over a region
+                gives the probability of finding the electron there.
               </p>
               <ProbabilityExplorer />
               <p className="text-foreground/65 text-sm">
@@ -129,6 +136,8 @@ export default function SchrodingerOrbitalsPage() {
               </p>
             </div>
           </section>
+
+          <POrbitalPattern />
 
           <section
             aria-labelledby="radial-nodes-heading"
@@ -174,63 +183,12 @@ export default function SchrodingerOrbitalsPage() {
             className="scroll-mt-28"
             id="deeper"
           >
-            <Section id="deeper-heading" name="Follow the math, if you want" />
-            <Accordion.Root className="space-y-3" keepMounted multiple>
-              <ExplanationAccordionItem
-                title="Why does hydrogen have allowed wave patterns?"
-                value="allowed-waves"
-              >
-                <p>
-                  Start with hydrogen: one electron attracted to one proton. Its
-                  time-independent Schrödinger equation asks which wave patterns
-                  can have a definite energy.
-                </p>
-                <div className="border-border overflow-x-auto rounded-xl border bg-zinc-50 px-4 py-5 text-center">
-                  {katexify(
-                    String.raw`\left[-\frac{\hbar^2}{2m_e}\nabla^2-\frac{e^2}{4\pi\varepsilon_0r}\right]\psi=E\psi`,
-                    true
-                  )}
-                </div>
-                <p>
-                  The first term describes how the wave bends through space; the
-                  second is the attractive electric potential.
-                </p>
-                <PotentialExplorer />
-              </ExplanationAccordionItem>
-
-              <ExplanationAccordionItem
-                title="How do distance and direction fit together?"
-                value="distance-and-direction"
-              >
-                <p>
-                  Hydrogen&apos;s attraction depends only on distance from the
-                  nucleus. That spherical symmetry lets us separate a
-                  wavefunction into a radial part and an angular part:
-                </p>
-                <div className="border-border overflow-x-auto rounded-xl border bg-zinc-50 px-4 py-5 text-center">
-                  {katexify(
-                    String.raw`\psi_{n\ell m}(r,\theta,\phi)=R_{n\ell}(r)Y_{\ell}^{m}(\theta,\phi)`,
-                    true
-                  )}
-                </div>
-                <p>
-                  The radial part changes with distance. The angular part
-                  changes with direction. Probe the real{" "}
-                  {katexify("2p_y", false)} example below;{" "}
-                  {katexify("\\theta", false)} is measured from the vertical{" "}
-                  {katexify("+y", false)} axis used by the 3D viewer.
-                </p>
-                <FactorExplorer />
-                <p className="text-foreground/65 text-sm">
-                  The quantum numbers obey {katexify("n \\ge 1", false)},{" "}
-                  {katexify("0 \\le \\ell < n", false)}, and{" "}
-                  {katexify("-\\ell \\le m \\le \\ell", false)}. The real
-                  orbitals shown here are combinations of the complex{" "}
-                  {katexify("m", false)} states when {katexify("m", false)} is
-                  nonzero.
-                </p>
-              </ExplanationAccordionItem>
-
+            <Section
+              id="deeper-heading"
+              name="From the equation to an orbital shape"
+            />
+            <POrbitalDerivation />
+            <Accordion.Root className="mt-8 space-y-3" keepMounted multiple>
               <ExplanationAccordionItem
                 title="Where do all four families appear in an atom?"
                 value="orbital-families"
@@ -262,6 +220,8 @@ export default function SchrodingerOrbitalsPage() {
               </ExplanationAccordionItem>
             </Accordion.Root>
           </section>
+
+          <OrbitalSymbolGuide />
 
           <section
             aria-labelledby="references-heading"

@@ -84,6 +84,16 @@ const nextConfig: NextConfig = {
         source: "/experiments/physics/mass-energy-equivalence",
       },
       {
+        destination: "/experiments/physics/atomic-orbitals",
+        permanent: true,
+        source: "/experiments/physics/p-orbital-shape",
+      },
+      {
+        destination: "/experiments/physics/atomic-orbitals",
+        permanent: true,
+        source: "/experiments/physics/schrodinger-orbitals",
+      },
+      {
         destination: "/experiments/ui-explorations/masalah-to-feature",
         permanent: true,
         source: "/masalah-to-feature",

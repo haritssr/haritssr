@@ -1,35 +1,12 @@
-import "katex/dist/katex.min.css";
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
-export const metadata: Metadata = {
-  ...getExperimentMetadata("physics", "p-orbital-shape"),
-  description:
-    "Follow Schrödinger's equation from spherical symmetry to the p-orbital's two-lobed probability pattern.",
-};
+import { FactorExplorer, PotentialExplorer } from "./interactions";
 
-export default function POrbitalShapePage() {
+export function POrbitalPattern() {
   return (
-    <article className="pb-16">
-      <header className="mt-10 mb-10 sm:mt-16">
-        <p className="text-action mb-3 text-sm font-semibold tracking-[0.18em] uppercase">
-          From Schrödinger equation to quantum shape
-        </p>
-        <h1 className="text-foreground max-w-3xl text-4xl font-bold text-balance sm:text-5xl">
-          Where does a <InlineMath expression="p" /> orbital get its shape?
-        </h1>
-        <p className="text-foreground/75 mt-5 max-w-2xl text-lg leading-8">
-          The familiar dumbbell is not an electron flying along a path. It is a
-          map of where a quantum wave makes the electron more or less likely to
-          be found.
-        </p>
-      </header>
-
-      <SchrodingerDerivation />
-
+    <>
       <section
         aria-labelledby="the-shape-in-one-picture"
         className="border-border bg-surface-hover mt-12 overflow-hidden rounded-3xl border"
@@ -40,7 +17,7 @@ export default function POrbitalShapePage() {
               The equation, drawn
             </p>
             <h2
-              className="text-foreground mt-2 text-2xl font-semibold text-balance sm:text-3xl"
+              className="text-foreground mt-2 scroll-mt-28 text-2xl font-semibold text-balance sm:text-3xl"
               id="the-shape-in-one-picture"
             >
               The <InlineMath expression="p" /> orbital is the probability
@@ -87,7 +64,7 @@ export default function POrbitalShapePage() {
             Rotate the axis
           </p>
           <h2
-            className="text-foreground mt-2 text-3xl font-bold text-balance"
+            className="text-foreground mt-2 scroll-mt-28 text-3xl font-bold text-balance"
             id="same-shape-three-directions"
           >
             Three orientations, same pattern
@@ -106,221 +83,224 @@ export default function POrbitalShapePage() {
         </div>
       </section>
 
-      <section aria-labelledby="symbol-guide" className="mt-14">
-        <h2 className="text-foreground text-xl font-semibold" id="symbol-guide">
-          Symbol guide: what is inside Schrödinger&apos;s equation?
-        </h2>
-        <div className="border-border mt-5 w-full overflow-hidden rounded-md border">
-          <div className="w-full overflow-x-auto">
-            <table className="divide-border text-foreground w-full min-w-160 border-collapse divide-y text-sm">
-              <caption className="sr-only">
-                Symbols and SI units in the hydrogen orbital derivation
-              </caption>
-              <thead>
-                <tr className="divide-border bg-foreground/5 divide-x">
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
-                    Symbol
-                  </th>
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
-                    Term
-                  </th>
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
-                    Meaning
-                  </th>
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
-                    SI unit
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-border divide-y">
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression={String.raw`\psi`} />
-                  </th>
-                  <td className="px-3 py-2">Wavefunction</td>
-                  <td className="px-3 py-2">
-                    The quantum state whose spatial shape we solve for.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{m}^{-3/2}`} />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression={String.raw`\hbar`} />
-                  </th>
-                  <td className="px-3 py-2">Reduced Planck constant</td>
-                  <td className="px-3 py-2">
-                    Sets the scale of quantum effects.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath
-                      expression={String.raw`\mathrm{J}\,\mathrm{s}`}
-                    />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression="m_e" />
-                  </th>
-                  <td className="px-3 py-2">Electron mass</td>
-                  <td className="px-3 py-2">
-                    Sets the kinetic-energy scale of the electron.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{kg}`} />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression={String.raw`\nabla^2`} />
-                  </th>
-                  <td className="px-3 py-2">Laplacian</td>
-                  <td className="px-3 py-2">
-                    Measures how the wave bends through space.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{m}^{-2}`} />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression="V(r)" />
-                  </th>
-                  <td className="px-3 py-2">Potential energy</td>
-                  <td className="px-3 py-2">
-                    The electron&apos;s electric potential energy, set by
-                    distance <InlineMath expression="r" />.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{J}`} />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression="e" />
-                  </th>
-                  <td className="px-3 py-2">Elementary charge</td>
-                  <td className="px-3 py-2">
-                    Sets the strength of the electron–nucleus attraction.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{C}`} />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression={String.raw`\varepsilon_0`} />
-                  </th>
-                  <td className="px-3 py-2">Vacuum permittivity</td>
-                  <td className="px-3 py-2">
-                    Relates electric charge to the Coulomb potential.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath
-                      expression={String.raw`\mathrm{F}/\mathrm{m}`}
-                    />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression="r" />
-                  </th>
-                  <td className="px-3 py-2">Radial distance</td>
-                  <td className="px-3 py-2">
-                    Distance from the nucleus to the electron.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{m}`} />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression="E" />
-                  </th>
-                  <td className="px-3 py-2">Energy eigenvalue</td>
-                  <td className="px-3 py-2">
-                    An allowed energy of the stationary quantum state.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{J}`} />
-                  </td>
-                </tr>
-                <tr className="divide-border divide-x">
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    scope="row"
-                  >
-                    <InlineMath expression="a_0" />
-                  </th>
-                  <td className="px-3 py-2">Bohr radius</td>
-                  <td className="px-3 py-2">
-                    Sets the radial scale in hydrogen.
-                  </td>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <InlineMath expression={String.raw`\mathrm{m}`} />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <p className="text-foreground/65 mt-3 text-sm leading-6">
-          The wavefunction unit assumes a normalized three-dimensional spatial
-          wavefunction. The Laplacian&apos;s unit describes the operator, before
-          it acts on the wavefunction.
-        </p>
-      </section>
-
       <p className="text-foreground/65 mt-8 text-sm leading-6">
         The drawings are schematic cross-sections of probability density, not
         hard surfaces. An orbital is a quantum state; the electron does not
         trace out the pictured dumbbell.
       </p>
-    </article>
+    </>
   );
 }
 
-function SchrodingerDerivation() {
+export function OrbitalSymbolGuide() {
   return (
-    <section aria-labelledby="from-schrodinger-to-shape" className="mt-10">
+    <section aria-labelledby="symbol-guide" className="scroll-mt-28">
+      <h2
+        className="text-foreground scroll-mt-28 text-xl font-semibold"
+        id="symbol-guide"
+      >
+        Symbol guide: what is inside Schrödinger&apos;s equation?
+      </h2>
+      <div className="border-border mt-5 w-full overflow-hidden rounded-md border">
+        <div className="scrollbar-subtle w-full overflow-x-auto">
+          <table className="divide-border text-foreground w-full min-w-160 border-collapse divide-y text-sm">
+            <caption className="sr-only">
+              Symbols and SI units in the hydrogen orbital derivation
+            </caption>
+            <thead>
+              <tr className="divide-border bg-foreground/5 divide-x">
+                <th className="px-3 py-2 text-left font-medium" scope="col">
+                  Symbol
+                </th>
+                <th className="px-3 py-2 text-left font-medium" scope="col">
+                  Term
+                </th>
+                <th className="px-3 py-2 text-left font-medium" scope="col">
+                  Meaning
+                </th>
+                <th className="px-3 py-2 text-left font-medium" scope="col">
+                  SI unit
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-border divide-y">
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression={String.raw`\psi`} />
+                </th>
+                <td className="px-3 py-2">Wavefunction</td>
+                <td className="px-3 py-2">
+                  The quantum state whose spatial shape we solve for.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{m}^{-3/2}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression={String.raw`\hbar`} />
+                </th>
+                <td className="px-3 py-2">Reduced Planck constant</td>
+                <td className="px-3 py-2">
+                  Sets the scale of quantum effects.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{J}\,\mathrm{s}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression="m_e" />
+                </th>
+                <td className="px-3 py-2">Electron mass</td>
+                <td className="px-3 py-2">
+                  Sets the kinetic-energy scale of the electron.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{kg}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression={String.raw`\nabla^2`} />
+                </th>
+                <td className="px-3 py-2">Laplacian</td>
+                <td className="px-3 py-2">
+                  Measures how the wave bends through space.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{m}^{-2}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression="V(r)" />
+                </th>
+                <td className="px-3 py-2">Potential energy</td>
+                <td className="px-3 py-2">
+                  The electron&apos;s electric potential energy, set by distance{" "}
+                  <InlineMath expression="r" />.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{J}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression="e" />
+                </th>
+                <td className="px-3 py-2">Elementary charge</td>
+                <td className="px-3 py-2">
+                  Sets the strength of the electron–nucleus attraction.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{C}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression={String.raw`\varepsilon_0`} />
+                </th>
+                <td className="px-3 py-2">Vacuum permittivity</td>
+                <td className="px-3 py-2">
+                  Relates electric charge to the Coulomb potential.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{F}/\mathrm{m}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression="r" />
+                </th>
+                <td className="px-3 py-2">Radial distance</td>
+                <td className="px-3 py-2">
+                  Distance from the nucleus to the electron.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{m}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression="E" />
+                </th>
+                <td className="px-3 py-2">Energy eigenvalue</td>
+                <td className="px-3 py-2">
+                  An allowed energy of the stationary quantum state.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{J}`} />
+                </td>
+              </tr>
+              <tr className="divide-border divide-x">
+                <th
+                  className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                  scope="row"
+                >
+                  <InlineMath expression="a_0" />
+                </th>
+                <td className="px-3 py-2">Bohr radius</td>
+                <td className="px-3 py-2">
+                  Sets the radial scale in hydrogen.
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <InlineMath expression={String.raw`\mathrm{m}`} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p className="text-foreground/65 mt-3 text-sm leading-6">
+        The wavefunction unit assumes a normalized three-dimensional spatial
+        wavefunction. The Laplacian&apos;s unit describes the operator, before
+        it acts on the wavefunction.
+      </p>
+    </section>
+  );
+}
+
+export function POrbitalDerivation() {
+  return (
+    <section aria-labelledby="from-schrodinger-to-shape" className="mt-6">
       <div className="max-w-3xl">
         <p className="text-action text-sm font-semibold tracking-[0.18em] uppercase">
           Follow the arrows
         </p>
-        <h2
-          className="text-foreground mt-2 text-3xl font-bold text-balance"
+        <h3
+          className="text-foreground mt-2 scroll-mt-28 text-xl font-semibold text-balance"
           id="from-schrodinger-to-shape"
         >
-          From Schrödinger&apos;s equation to a dumbbell
-        </h2>
+          Worked example: where a p orbital gets its two lobes
+        </h3>
         <p className="text-foreground/70 mt-3 leading-7">
           We solve the stationary Schrödinger equation for an electron attracted
           to a nucleus. Each arrow shows the next mathematical choice and what
@@ -343,6 +323,7 @@ function SchrodingerDerivation() {
               electric attraction to the nucleus. Solving it gives the allowed
               wavefunctions <InlineMath expression={String.raw`\psi`} />.
             </p>
+            <PotentialExplorer />
           </DerivationStep>
           <FlowArrow>
             The potential depends only on distance <InlineMath expression="r" />
@@ -363,6 +344,25 @@ function SchrodingerDerivation() {
               <InlineMath expression="R" /> controls how the wave changes with
               distance. <InlineMath expression="Y" />, a spherical harmonic,
               describes how it changes from one direction to another.
+            </p>
+            <p>
+              The quantum numbers obey{" "}
+              <InlineMath expression={String.raw`n \ge 1`} />,
+              <InlineMath expression={String.raw`0 \le \ell < n`} />, and
+              <InlineMath expression={String.raw`-\ell \le m \le \ell`} />. The
+              real orbitals in the viewer combine complex
+              magnetic-quantum-number states when <InlineMath expression="m" />{" "}
+              is nonzero.
+            </p>
+            <FactorExplorer />
+            <p className="text-foreground/65 text-sm">
+              This probe uses <InlineMath expression="2p_y" /> with its polar
+              angle measured from the viewer&apos;s vertical{" "}
+              <InlineMath expression="+y" />
+              axis. The worked example below uses{" "}
+              <InlineMath expression="2p_z" />
+              and measures the polar angle from <InlineMath expression="+z" />.
+              Rotating the coordinates gives the same two-lobed pattern.
             </p>
           </DerivationStep>
           <FlowArrow>
@@ -456,7 +456,7 @@ function DerivationStep({
     <div className="border-border rounded-2xl border p-5 sm:p-6">
       <div className="flex items-center gap-3">
         <StepNumber>{number}</StepNumber>
-        <h3 className="text-foreground text-lg font-semibold">{title}</h3>
+        <h4 className="text-foreground text-lg font-semibold">{title}</h4>
       </div>
       <div className="text-foreground/70 mt-4 space-y-3 leading-7">
         {children}
