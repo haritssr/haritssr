@@ -74,7 +74,7 @@ export function StatusPage({
       ? "border-danger/20 bg-danger/10"
       : "border-border bg-foreground/5";
   const badgeClassName =
-    tone === "error" ? "text-danger" : "text-foreground/60";
+    tone === "error" ? "text-danger" : "text-muted";
 
   return (
     <div className={wrapperClassName}>

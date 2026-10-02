@@ -59,7 +59,7 @@ export default async function ProjectPage({
             <h1 className="text-2xl font-bold wrap-break-word sm:text-3xl">
               {project.project_name}
             </h1>
-            <div className="text-foreground/60 text-lg">
+            <div className="text-muted text-lg">
               {project.about_client.website.slice(8)}
             </div>
           </div>
@@ -84,26 +84,26 @@ export default async function ProjectPage({
                 <dt className="text-foreground/90 mt-5 font-medium">
                   Company Name
                 </dt>
-                <dd className="text-foreground/60">
+                <dd className="text-muted">
                   {project.about_client.company_name}
                 </dd>
 
                 <dt className="text-foreground/90 mt-5 font-medium">
                   Brand Name
                 </dt>
-                <dd className="text-foreground/60">
+                <dd className="text-muted">
                   {project.about_client.brand_name}
                 </dd>
 
                 <dt className="text-foreground/90 mt-5 font-medium">About</dt>
-                <dd className="text-foreground/60">
+                <dd className="text-muted">
                   {project.about_client.long_about}
                 </dd>
 
                 <dt className="text-foreground/90 mt-5 font-medium">
                   Phone Number
                 </dt>
-                <dd className="text-foreground/60">
+                <dd className="text-muted">
                   {project.about_client.phone_number}
                 </dd>
 
@@ -117,7 +117,7 @@ export default async function ProjectPage({
                 <dt className="text-foreground/90 mt-5 font-medium">
                   Office Location
                 </dt>
-                <dd className="text-foreground/60">
+                <dd className="text-muted">
                   {project.about_client.office_location}
                 </dd>
               </dl>
@@ -133,7 +133,7 @@ export default async function ProjectPage({
                 <dd>
                   <ExplanationList>
                     {project.about_project.my_role.map((role: string) => (
-                      <li className="text-foreground/60" key={role}>
+                      <li className="text-muted" key={role}>
                         {role}
                       </li>
                     ))}
@@ -143,7 +143,7 @@ export default async function ProjectPage({
                 <dt className="text-foreground/90 mt-5 font-medium">
                   Working Period
                 </dt>
-                <dd className="text-foreground/60">
+                <dd className="text-muted">
                   {project.about_project.working_period}
                 </dd>
 
@@ -154,7 +154,7 @@ export default async function ProjectPage({
                   <ExplanationList>
                     {project.about_project.website_status.map(
                       (status: string) => (
-                        <li className="text-foreground/60" key={status}>
+                        <li className="text-muted" key={status}>
                           {status}
                         </li>
                       )
@@ -168,7 +168,7 @@ export default async function ProjectPage({
                 <dd>
                   <ExplanationList>
                     {project.about_project.routes.map((route: string) => (
-                      <li className="text-foreground/60" key={route}>
+                      <li className="text-muted" key={route}>
                         {route}
                       </li>
                     ))}
@@ -181,7 +181,7 @@ export default async function ProjectPage({
                 <dd>
                   <ExplanationList>
                     {project.about_project.features.map((feature: string) => (
-                      <li className="text-foreground/60" key={feature}>
+                      <li className="text-muted" key={feature}>
                         {feature}
                       </li>
                     ))}

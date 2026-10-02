@@ -34,7 +34,7 @@ import ToggleDemo from "./ToggleDemo";
 import TooltipDemo from "./TooltipDemo";
 
 const FORM_CONTROL_CLASS_NAME =
-  "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 shadow-sm outline-hidden placeholder:text-foreground/40 focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
+  "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 shadow-sm outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
 
 export default function DesignSystem() {
   const [loading, setLoading] = useState(false);
@@ -162,7 +162,7 @@ export default function DesignSystem() {
                 Headless UI
               </InternalLink>
             </li>
-            <li className="text-foreground/60">
+            <li className="text-muted">
               Still evolving: typography, use cases, do&apos;s and don&apos;ts,
               and component-specific guidance are next.
             </li>

@@ -33,7 +33,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
     pathname === route ||
     (route !== "/" && CurrentPageBaseRoute === route.slice(1));
 
-  const color = isCurrentPage ? "text-action" : "text-foreground/60";
+  const color = isCurrentPage ? "text-action" : "text-muted";
 
   return (
     <Link

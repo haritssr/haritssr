@@ -47,7 +47,7 @@ function ToastList() {
       <Toast.Content className="grid grid-cols-[auto_max-content] items-center gap-x-4 py-3 pr-4 pl-4 [grid-template-areas:'title_action'_'description_action']">
         <div>
           <Toast.Title className="text-foreground text-sm font-medium [grid-area:title]" />
-          <Toast.Description className="text-foreground/60 m-0 text-xs leading-tight [grid-area:description]" />
+          <Toast.Description className="text-muted m-0 text-xs leading-tight [grid-area:description]" />
         </div>
         <Toast.Close className="text-action hover:text-action-hover focus-visible:outline-action hover:bg-border rounded px-2 py-1 text-sm focus-visible:outline-2">
           OK

@@ -111,7 +111,7 @@ export default function GlobalSearchDialog({
               <Autocomplete.Input
                 aria-label="Search pages"
                 autoComplete="off"
-                className="placeholder:text-foreground/50 min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
+                className="placeholder:text-muted min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
                 enterKeyHint="go"
                 placeholder="Search pages, projects, experiments, blog…"
                 ref={inputRef}
@@ -119,7 +119,7 @@ export default function GlobalSearchDialog({
               />
               <Dialog.Close
                 aria-label="Close search"
-                className="text-foreground/60 focus-visible:outline-action flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
+                className="text-muted focus-visible:outline-action flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
                 type="button"
               >
                 <XMarkIcon aria-hidden="true" className="size-5" />
@@ -148,12 +148,12 @@ export default function GlobalSearchDialog({
                 </div>
               ) : null}
               {showLoading ? (
-                <div className="text-foreground/60 px-4 py-10 text-center text-sm leading-6">
+                <div className="text-muted px-4 py-10 text-center text-sm leading-6">
                   Loading all pages…
                 </div>
               ) : null}
               {showEmpty ? (
-                <div className="text-foreground/60 px-4 py-10 text-center text-sm leading-6">
+                <div className="text-muted px-4 py-10 text-center text-sm leading-6">
                   No pages found for “{query}”. Try a project, topic, or page
                   name.
                 </div>
@@ -161,7 +161,7 @@ export default function GlobalSearchDialog({
               <Autocomplete.List aria-label={listLabel}>
                 {!showLoading && results.length > 0 ? (
                   <Autocomplete.Group>
-                    <Autocomplete.GroupLabel className="text-foreground/50 px-3 pt-1 pb-2 text-xs font-medium">
+                    <Autocomplete.GroupLabel className="text-muted px-3 pt-1 pb-2 text-xs font-medium">
                       {groupTitle}
                     </Autocomplete.GroupLabel>
                     <Autocomplete.Collection>
@@ -179,7 +179,7 @@ export default function GlobalSearchDialog({
                 ) : null}
               </Autocomplete.List>
             </div>
-            <div className="border-border text-foreground/50 flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
+            <div className="border-border text-muted flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
               <output aria-live={loadError ? "off" : "polite"}>
                 {resultStatus}
               </output>
@@ -245,7 +245,7 @@ function SearchResultItem({
       <div className="min-w-0 flex-1 space-y-1">
         <div className="truncate text-sm">{entry.title}</div>
         {!isSearching || MAIN_ROUTES.has(entry.route) ? (
-          <div className="text-foreground/60 truncate text-xs">
+          <div className="text-muted truncate text-xs">
             {isSearching ? (
               <SearchMatchText
                 query={query}
@@ -257,14 +257,14 @@ function SearchResultItem({
           </div>
         ) : null}
         {isSearching ? (
-          <div className="text-foreground/40 truncate text-xs">
+          <div className="text-muted truncate text-xs">
             {entry.route}
           </div>
         ) : null}
       </div>
       <ChevronRightIcon
         aria-hidden="true"
-        className="text-foreground/40 size-5 shrink-0"
+        className="text-muted size-5 shrink-0"
       />
     </Autocomplete.Item>
   );

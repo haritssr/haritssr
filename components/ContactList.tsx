@@ -87,7 +87,7 @@ function renderContact(contact: { link: string; icon: string }) {
           src={contact.icon}
           width={20}
         />
-        <span className="text-foreground/60">
+        <span className="text-muted">
           {highlightSiteName(displayedLink)}
         </span>
       </a>
@@ -109,7 +109,7 @@ function renderContact(contact: { link: string; icon: string }) {
           src={contact.icon}
           width={20}
         />
-        <span className="text-foreground/60">
+        <span className="text-muted">
           {highlightSiteName(contact.link)}
         </span>
       </a>

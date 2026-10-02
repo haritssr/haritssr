@@ -147,7 +147,7 @@ export default function PrerequisiteGraph({
             </Dialog.Title>
             <Dialog.Close
               aria-label="Tutup tampilan penuh"
-              className="text-foreground/60 hover:bg-interface-hover hover:text-foreground focus-visible:outline-action inline-flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
+              className="text-muted hover:bg-interface-hover hover:text-foreground focus-visible:outline-action inline-flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
               type="button"
             >
               <XMarkIcon aria-hidden="true" className="size-5" />
@@ -379,7 +379,7 @@ function GraphStatus({
 }) {
   return (
     <div className="border-border border-b px-3 py-2 text-xs">
-      <output aria-live="polite" className="text-foreground/60">
+      <output aria-live="polite" className="text-muted">
         {selectedNode
           ? `${selectedNode.label} dan ${Math.max((activeNodeIds?.size ?? 1) - 1, 0)} prasyarat disorot.`
           : "Klik sebuah besaran untuk menyorot seluruh prasyaratnya."}

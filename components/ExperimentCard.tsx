@@ -30,13 +30,13 @@ export default function ExperimentCard({
           </Heading>
         </div>
         <div className="flex items-center space-x-1">
-          <div className="text-foreground/60 text-sm font-light">
+          <div className="text-muted text-sm font-light">
             {experiment.experiments.length}
           </div>
-          <ChevronRightIcon className="text-foreground/60 h-4 w-4 stroke-2" />
+          <ChevronRightIcon className="text-muted h-4 w-4 stroke-2" />
         </div>
       </div>
-      <div className="text-foreground/60 line-clamp-1 sm:line-clamp-none">
+      <div className="text-muted line-clamp-1 sm:line-clamp-none">
         {experiment.description}
       </div>
     </Link>

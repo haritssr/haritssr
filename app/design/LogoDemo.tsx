@@ -37,7 +37,7 @@ export default function LogoDemo() {
             <span className="text-foreground/90 text-sm sm:text-base">
               {logo.name}
             </span>
-            <span className="text-foreground/60 text-sm sm:text-base">
+            <span className="text-muted text-sm sm:text-base">
               {logo.url}
             </span>
           </div>

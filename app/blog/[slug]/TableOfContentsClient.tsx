@@ -63,7 +63,7 @@ export default function TableOfContentsClient({
           <li key={item.id}>
             <Link
               aria-current={isActive ? "location" : undefined}
-              className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${isActive ? "border-foreground/80 text-foreground/85 font-medium" : "text-foreground/60 hover:text-foreground/80 border-transparent"}`}
+              className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${isActive ? "border-foreground/80 text-foreground/85 font-medium" : "text-muted hover:text-foreground/80 border-transparent"}`}
               href={`#${item.id}`}
               onClick={() => {
                 setActiveHeading(item.id);

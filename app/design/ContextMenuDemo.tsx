@@ -33,7 +33,7 @@ export default function ContextMenuDemo() {
           </ContextMenu.Positioner>
         </ContextMenu.Portal>
       </ContextMenu.Root>
-      <p className="text-foreground/60 text-xs">{action}</p>
+      <p className="text-muted text-xs">{action}</p>
     </div>
   );
 }

@@ -18,10 +18,11 @@
     var(--color-blue-600) 60%,
     var(--color-blue-500) 40%
   );
-  --color-action-hover: color-mix(
-    in oklab,
-    var(--color-blue-500) 60%,
-    var(--color-blue-400) 40%
+  --color-action-hover: var(--color-blue-700);
+  --color-muted: color-mix(
+    in srgb,
+    var(--color-foreground) 70%,
+    var(--color-background)
   );
   --color-success: #34c759;
   --color-attention: #eab308;

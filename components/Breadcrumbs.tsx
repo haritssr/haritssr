@@ -28,7 +28,7 @@ export default function Breadcrumbs() {
       <div className="mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
         <ol className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
           <li className="flex items-center">
-            <Link className="text-foreground/60 hover:text-foreground" href="/">
+            <Link className="text-muted hover:text-foreground" href="/">
               home
             </Link>
 
@@ -52,7 +52,7 @@ export default function Breadcrumbs() {
                 ) : (
                   <>
                     <Link
-                      className="text-foreground/60 hover:text-foreground/80 whitespace-nowrap"
+                      className="text-muted hover:text-foreground/80 whitespace-nowrap"
                       href={href}
                     >
                       {label.toLocaleLowerCase()}

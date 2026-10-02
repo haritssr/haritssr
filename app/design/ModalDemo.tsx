@@ -15,10 +15,10 @@ export default function ModalDemo() {
           <Dialog.Title className="text-foreground/90 text-lg font-semibold">
             Modal title
           </Dialog.Title>
-          <Dialog.Description className="text-foreground/60 mt-2 mb-5 text-sm leading-normal">
+          <Dialog.Description className="text-muted mt-2 mb-5 text-sm leading-normal">
             Dialogs focus attention on a short task or decision.
           </Dialog.Description>
-          <div className="bg-foreground/5 text-foreground/60 rounded-lg p-4 text-sm">
+          <div className="bg-foreground/5 text-muted rounded-lg p-4 text-sm">
             Content stays inside the dialog while the page beneath it is
             temporarily inert.
           </div>
@@ -30,7 +30,7 @@ export default function ModalDemo() {
           </div>
           <Dialog.Close
             aria-label="Close"
-            className="focus-visible:outline-action text-foreground/60 hover:bg-border hover:text-foreground/90 absolute top-3 right-3 inline-flex h-8 w-8 appearance-none items-center justify-center rounded-full focus-visible:outline-2"
+            className="focus-visible:outline-action text-muted hover:bg-border hover:text-foreground/90 absolute top-3 right-3 inline-flex h-8 w-8 appearance-none items-center justify-center rounded-full focus-visible:outline-2"
           >
             <XMarkIcon aria-hidden="true" className="h-4 w-4" />
           </Dialog.Close>

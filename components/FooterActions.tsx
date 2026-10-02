@@ -140,7 +140,7 @@ function ShareToastList() {
       <Toast.Content className="grid grid-cols-[auto_max-content] items-center gap-x-3.75 py-2 pr-4 pl-4 [grid-template-areas:'title_action'_'description_action']">
         <div>
           <Toast.Title className="text-foreground mb-1.25 text-[15px] font-medium [grid-area:title]" />
-          <Toast.Description className="text-foreground/60 m-0 text-[13px] leading-[1.3] [grid-area:description]" />
+          <Toast.Description className="text-muted m-0 text-[13px] leading-[1.3] [grid-area:description]" />
         </div>
         <Toast.Close className="text-action hover:text-action-hover focus-visible:outline-action h-12 w-12 cursor-pointer rounded-sm focus-visible:outline-2">
           OK

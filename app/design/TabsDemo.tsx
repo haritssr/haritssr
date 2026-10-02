@@ -8,13 +8,13 @@ export default function TabsDemo() {
         className="bg-foreground/10 flex shrink-0 gap-1 rounded-lg p-1"
       >
         <Tabs.Tab
-          className="focus-visible:outline-action text-foreground/60 data-active:border-border data-active:text-foreground flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 text-sm font-medium outline-hidden select-none hover:bg-white/70 focus-visible:outline-2 data-active:bg-white data-active:shadow"
+          className="focus-visible:outline-action text-muted data-active:border-border data-active:text-foreground flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 text-sm font-medium outline-hidden select-none hover:bg-white/70 focus-visible:outline-2 data-active:bg-white data-active:shadow"
           value="tab1"
         >
           Account
         </Tabs.Tab>
         <Tabs.Tab
-          className="focus-visible:outline-action text-foreground/60 data-active:border-border data-active:text-foreground flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 text-sm font-medium outline-hidden select-none hover:bg-white/70 focus-visible:outline-2 data-active:bg-white data-active:shadow"
+          className="focus-visible:outline-action text-muted data-active:border-border data-active:text-foreground flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 text-sm font-medium outline-hidden select-none hover:bg-white/70 focus-visible:outline-2 data-active:bg-white data-active:shadow"
           value="tab2"
         >
           Password

@@ -69,7 +69,7 @@ export default function BlogGrid({
                           <div className="text-action group-hover:text-action-hover">
                             {post.title}
                           </div>
-                          <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
+                          <div className="text-muted mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
                             <span>{Math.ceil(post.wordCount / 200)} min</span>
                             <span aria-hidden="true">·</span>
                             <time dateTime={post.publishedAt}>

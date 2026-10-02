@@ -45,7 +45,7 @@ export default function ProjectsCard({
 
         {/* Site Link (Text Only) */}
         <p>
-          <span className="text-foreground/50 text-base">
+          <span className="text-muted text-base">
             {href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
           </span>
         </p>

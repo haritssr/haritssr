@@ -64,7 +64,7 @@ function ColorSwatch({
   return (
     <figure className="space-y-1">
       <div aria-hidden="true" className={`h-12 w-12 rounded ${className}`} />
-      <figcaption className="text-foreground/60 text-sm">
+      <figcaption className="text-muted text-sm">
         <div>{name}</div>
         <div>{value}</div>
       </figcaption>

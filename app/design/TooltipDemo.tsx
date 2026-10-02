@@ -12,7 +12,7 @@ export default function TooltipDemo() {
           <div className="text-foreground/80">Tooltip</div>
           <Tooltip.Trigger className="hover:bg-foreground/10 active:ring-foreground flex items-center rounded px-1 py-0.5 active:ring-1">
             <ExclamationCircleIcon
-              className="text-foreground/60 hover:text-foreground/80 h-4 w-4"
+              className="text-muted hover:text-foreground/80 h-4 w-4"
               strokeWidth={2}
             />
           </Tooltip.Trigger>
