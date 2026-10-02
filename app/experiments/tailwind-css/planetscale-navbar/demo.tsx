@@ -1,16 +1,12 @@
 "use client";
 
-import ExternalLink from "@/components/ExternalLink";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindPlanetscaleNavbarDemo() {
   return (
     <>
-      <SubTitle>
-        Responsive PlanetScale navigation bar.{" "}
-        <ExternalLink href="https://www.planetscale.com" name="Source code" />
-      </SubTitle>
+      <SubTitle>Responsive PlanetScale navigation bar. </SubTitle>
       <SourceCodeLink />
       <div className="text-tiny flex h-auto w-full flex-col items-start justify-between space-y-5 rounded-md bg-[#1a1b21] px-6 py-6 md:flex-row md:items-center md:space-y-0 md:py-4 md:pr-4">
         <div className="flex w-full items-center space-x-2 md:w-1/3">
