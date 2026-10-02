@@ -1,10 +1,11 @@
-import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 
+import "katex/dist/katex.min.css";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
+import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -132,54 +133,47 @@ function EquationSection({ equation }: { equation: PhysicsEquation }) {
 
 function VariableTable({ equation }: { equation: PhysicsEquation }) {
   return (
-    <div className="border-border mt-5 w-full overflow-hidden rounded-md border">
-      <div className="scrollbar-subtle w-full overflow-x-auto">
-        <table className="divide-border text-foreground/80 w-full min-w-120 border-collapse divide-y text-sm">
-          <caption className="sr-only">
-            {equation.title}: symbols, definitions, SI units, and constant
-            values
-          </caption>
-          <thead>
-            <tr className="divide-border bg-foreground/5 divide-x">
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Symbol
-              </th>
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Meaning
-              </th>
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                SI unit
-              </th>
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Constant value
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-border divide-y">
-            {equation.symbols.map(
-              ({ constantValue, meaning, symbol, unit }) => (
-                <tr className="divide-border divide-x" key={symbol}>
-                  <th
-                    className="px-3 py-2 text-left align-top font-normal whitespace-nowrap"
-                    scope="row"
-                  >
-                    {katexify(symbol, false)}
-                  </th>
-                  <td className="px-3 py-2 align-top">{meaning}</td>
-                  <td className="px-3 py-2 align-top whitespace-nowrap">
-                    {unit === null ? "—" : katexify(unit, false)}
-                  </td>
-                  <td className="px-3 py-2 align-top whitespace-nowrap">
-                    {constantValue === undefined
-                      ? "—"
-                      : katexify(constantValue, false)}
-                  </td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Table className="min-w-120">
+      <caption className="sr-only">
+        {equation.title}: symbols, definitions, SI units, and constant values
+      </caption>
+      <thead>
+        <tr className="divide-border bg-foreground/5 divide-x">
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Symbol
+          </th>
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Meaning
+          </th>
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            SI unit
+          </th>
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Constant value
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-border divide-y">
+        {equation.symbols.map(({ constantValue, meaning, symbol, unit }) => (
+          <tr className="divide-border divide-x" key={symbol}>
+            <th
+              className="px-3 py-2 text-left align-top font-normal whitespace-nowrap"
+              scope="row"
+            >
+              {katexify(symbol, false)}
+            </th>
+            <td className="px-3 py-2 align-top">{meaning}</td>
+            <td className="px-3 py-2 align-top whitespace-nowrap">
+              {unit === null ? "—" : katexify(unit, false)}
+            </td>
+            <td className="px-3 py-2 align-top whitespace-nowrap">
+              {constantValue === undefined
+                ? "—"
+                : katexify(constantValue, false)}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   );
 }

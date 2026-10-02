@@ -23,6 +23,7 @@ import { HierarchicalColorsDemo, MainColorsDemo } from "./ColorsDemo";
 import ContextMenuDemo from "./ContextMenuDemo";
 import LogoDemo from "./LogoDemo";
 import ModalDemo from "./ModalDemo";
+import NumberInputDemo from "./NumberInputDemo";
 import PopoverDemo from "./PopoverDemo";
 import SelectDemo from "./SelectDemo";
 import SliderDemo from "./SliderDemo";
@@ -187,6 +188,9 @@ export default function DesignSystem() {
               <PopoverDemo />
             </Box>
 
+            <Box title="Number input">
+              <NumberInputDemo />
+            </Box>
             <Box title="Table">
               <TableDemo />
             </Box>

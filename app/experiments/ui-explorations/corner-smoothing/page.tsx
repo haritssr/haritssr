@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import CornerComparison from "./demo";
@@ -63,47 +64,43 @@ export default function CornerSmoothingPage() {
 
       <section aria-labelledby="corner-differences-heading">
         <Section id="corner-differences-heading" name="What changes?" />
-        <div className="border-border overflow-hidden rounded-md border">
-          <div className="scrollbar-subtle overflow-x-auto">
-            <table className="divide-border text-foreground/80 w-full min-w-160 border-collapse divide-y text-sm">
-              <caption className="sr-only">
-                Differences between rounded corners, CSS squircles, and Lisse
-              </caption>
-              <thead>
-                <tr className="divide-border bg-foreground/5 divide-x">
-                  {["Feature", "Rounded corners", "CSS squircle", "Lisse"].map(
-                    (heading) => (
-                      <th
-                        className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                        key={heading}
-                        scope="col"
-                      >
-                        {heading}
-                      </th>
-                    )
-                  )}
-                </tr>
-              </thead>
-              <tbody className="divide-border divide-y">
-                {comparisonRows.map((row) => (
-                  <tr className="divide-border divide-x" key={row.feature}>
-                    <th
-                      className="px-3 py-3 text-left align-top font-medium"
-                      scope="row"
-                    >
-                      {row.feature}
-                    </th>
-                    {[row.rounded, row.css, row.lisse].map((value) => (
-                      <td className="px-3 py-3 align-top" key={value}>
-                        {value}
-                      </td>
-                    ))}
-                  </tr>
+        <Table className="min-w-160">
+          <caption className="sr-only">
+            Differences between rounded corners, CSS squircles, and Lisse
+          </caption>
+          <thead>
+            <tr className="divide-border bg-foreground/5 divide-x">
+              {["Feature", "Rounded corners", "CSS squircle", "Lisse"].map(
+                (heading) => (
+                  <th
+                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                    key={heading}
+                    scope="col"
+                  >
+                    {heading}
+                  </th>
+                )
+              )}
+            </tr>
+          </thead>
+          <tbody className="divide-border divide-y">
+            {comparisonRows.map((row) => (
+              <tr className="divide-border divide-x" key={row.feature}>
+                <th
+                  className="px-3 py-3 text-left align-top font-medium"
+                  scope="row"
+                >
+                  {row.feature}
+                </th>
+                {[row.rounded, row.css, row.lisse].map((value) => (
+                  <td className="px-3 py-3 align-top" key={value}>
+                    {value}
+                  </td>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </section>
 
       <section aria-labelledby="corner-reading-heading">

@@ -1,0 +1,50 @@
+"use client";
+import { NumberField } from "@base-ui/react/number-field";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useId } from "react";
+
+export default function NumberInput({
+  label,
+  value,
+  onValueChange,
+  invalid = false,
+}: {
+  label: string;
+  value: number | null;
+  onValueChange: (value: number | null) => void;
+  invalid?: boolean;
+}) {
+  const id = useId();
+  return (
+    <NumberField.Root
+      className="min-w-32"
+      id={id}
+      value={value}
+      onValueChange={onValueChange}
+      step="any"
+      format={{ maximumSignificantDigits: 21, useGrouping: false }}
+    >
+      <label className="sr-only" htmlFor={id}>
+        {label}
+      </label>
+      <NumberField.Group className="border-border focus-within:border-action flex min-w-0 items-center rounded-lg border">
+        <NumberField.Decrement
+          aria-label={`Decrease ${label}`}
+          className="border-border hover:bg-interface-hover focus-visible:outline-action flex h-10 w-12 shrink-0 cursor-pointer items-center justify-center rounded-l-lg border-r focus-visible:outline-2"
+        >
+          <MinusIcon aria-hidden="true" className="size-3" />
+        </NumberField.Decrement>
+        <NumberField.Input
+          aria-invalid={invalid}
+          className="form-control h-10 w-full min-w-0 flex-1 bg-transparent text-center text-base outline-none"
+        />
+        <NumberField.Increment
+          aria-label={`Increase ${label}`}
+          className="border-border hover:bg-interface-hover focus-visible:outline-action flex h-10 w-12 shrink-0 cursor-pointer items-center justify-center rounded-r-lg border-l focus-visible:outline-2"
+        >
+          <PlusIcon aria-hidden="true" className="size-3" />
+        </NumberField.Increment>
+      </NumberField.Group>
+    </NumberField.Root>
+  );
+}

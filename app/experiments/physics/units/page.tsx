@@ -1,5 +1,6 @@
-import "katex/dist/katex.min.css";
 import { Accordion } from "@base-ui/react/accordion";
+
+import "katex/dist/katex.min.css";
 import { ArrowRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 
@@ -11,6 +12,7 @@ import type {
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
+import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -61,7 +63,7 @@ export const metadata: Metadata = {
 
 export default function UnitsPage() {
   return (
-    <>
+    <div lang="id">
       <SubTitle>{DESCRIPTION}</SubTitle>
       <SourceCodeLink />
       <div className="space-y-20">
@@ -105,7 +107,7 @@ export default function UnitsPage() {
           />
         </section>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -351,87 +353,76 @@ function PrerequisiteDiagrams({ units }: { units: readonly UnitDefinition[] }) {
 
 function UnitsTable({ caption, showFormulas = false, units }: UnitsTableProps) {
   return (
-    <div className="border-border w-full overflow-hidden rounded-md border">
-      <div className="scrollbar-subtle w-full overflow-x-auto">
-        <table className="divide-border text-foreground/80 w-full min-w-70 border-collapse divide-y text-sm">
-          <caption className="sr-only">{caption}</caption>
-          <thead>
-            <tr className="divide-border bg-foreground/5 divide-x">
-              <th
-                className="w-12 px-3 py-2 text-center font-medium"
-                scope="col"
-              >
-                No
-              </th>
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Besaran
-              </th>
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Simbol besaran
-              </th>
-              {showFormulas ? (
-                <th className="px-3 py-2 text-left font-medium" scope="col">
-                  Rumus
-                </th>
-              ) : null}
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Satuan
-              </th>
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Simbol satuan
-              </th>
-              <th className="px-3 py-2 text-left font-medium" scope="col">
-                Dimensi
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-border divide-y">
-            {units.map((unit, index) => (
-              <tr className="divide-border divide-x" key={unit.quantity}>
-                <td className="w-12 px-3 py-2 text-center tabular-nums">
-                  {index + 1}
-                </td>
-                <th className="px-3 py-2 text-left font-normal" scope="row">
-                  {unit.quantity}
-                </th>
-                <td className="px-3 py-2">
-                  <MathSymbol value={unit.quantitySymbol} />
-                </td>
-                {showFormulas ? (
-                  <td className="px-3 py-2">
-                    <ul className="space-y-3">
-                      {getFormulaDefinitions(unit.quantity).map(
-                        (definition) => (
-                          <li key={definition.name}>
-                            <p className="mb-1 text-xs">{definition.name}</p>
-                            <MathSymbol
-                              useDisplayFractions
-                              value={definition.expression}
-                            />
-                            {definition.condition !== undefined &&
-                            definition.condition !== "" ? (
-                              <p className="mt-1 text-xs">
-                                {definition.condition}
-                              </p>
-                            ) : null}
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </td>
-                ) : null}
-                <td className="px-3 py-2">{unit.unit}</td>
-                <td className="px-3 py-2">
-                  <MathSymbol value={unit.unitSymbol} />
-                </td>
-                <td className="px-3 py-2">
-                  <MathSymbol value={unit.dimension} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Table className="min-w-70">
+      <caption className="sr-only">{caption}</caption>
+      <thead>
+        <tr className="divide-border bg-foreground/5 divide-x">
+          <th className="w-12 px-3 py-2 text-center font-medium" scope="col">
+            No
+          </th>
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Besaran
+          </th>
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Simbol besaran
+          </th>
+          {showFormulas ? (
+            <th className="px-3 py-2 text-left font-medium" scope="col">
+              Rumus
+            </th>
+          ) : null}
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Satuan
+          </th>
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Simbol satuan
+          </th>
+          <th className="px-3 py-2 text-left font-medium" scope="col">
+            Dimensi
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-border divide-y">
+        {units.map((unit, index) => (
+          <tr className="divide-border divide-x" key={unit.quantity}>
+            <td className="w-12 px-3 py-2 text-center tabular-nums">
+              {index + 1}
+            </td>
+            <th className="px-3 py-2 text-left font-normal" scope="row">
+              {unit.quantity}
+            </th>
+            <td className="px-3 py-2">
+              <MathSymbol value={unit.quantitySymbol} />
+            </td>
+            {showFormulas ? (
+              <td className="px-3 py-2">
+                <ul className="space-y-3">
+                  {getFormulaDefinitions(unit.quantity).map((definition) => (
+                    <li key={definition.name}>
+                      <p className="mb-1 text-xs">{definition.name}</p>
+                      <MathSymbol
+                        useDisplayFractions
+                        value={definition.expression}
+                      />
+                      {definition.condition !== undefined &&
+                      definition.condition !== "" ? (
+                        <p className="mt-1 text-xs">{definition.condition}</p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            ) : null}
+            <td className="px-3 py-2">{unit.unit}</td>
+            <td className="px-3 py-2">
+              <MathSymbol value={unit.unitSymbol} />
+            </td>
+            <td className="px-3 py-2">
+              <MathSymbol value={unit.dimension} />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   );
 }
