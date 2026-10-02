@@ -46,6 +46,7 @@ export default function DependentFormulas({
       <div className="border-border grid items-center gap-x-6 gap-y-3 border-b p-4 sm:grid-cols-2">
         <div className="min-w-0">
           <Select.Root
+            modal={false}
             onValueChange={(value) => {
               if (value !== null) {
                 setSelectedQuantity(value);
@@ -66,7 +67,7 @@ export default function DependentFormulas({
               </Select.Icon>
             </Select.Trigger>
             <Select.Portal>
-              <Select.Positioner sideOffset={4}>
+              <Select.Positioner alignItemWithTrigger={false} sideOffset={4}>
                 <Select.Popup className="border-border z-50 max-w-[calc(100vw-2rem)] overflow-hidden rounded-lg border bg-white shadow-xl">
                   <Select.List className="max-h-72 overflow-y-auto p-1">
                     {quantities.map((quantity) => (
