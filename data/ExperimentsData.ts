@@ -961,6 +961,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-08-18",
         updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
       },
+      {
+        slug: "live-playground",
+        title: "Live TeX Playground",
+        description:
+          "Edit TeX, try templates, and preview mathematical notation live.",
+        tags: ["mathematics", "editor"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
     ],
     id: 13,
     logoSrc: "/icons/KaTeX.jpg",
