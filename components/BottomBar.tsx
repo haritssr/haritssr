@@ -14,7 +14,7 @@ export default function BottomBar({
       aria-label="Mobile navigation"
       className={`${preview ? "relative block" : "sticky bottom-0 block sm:hidden"} p-3`}
     >
-      <div className="border-middle-hover w-full rounded-full border bg-white/80 px-1.25 py-2 saturate-150 backdrop-blur-lg">
+      <div className="border-middle-hover w-full rounded-full border bg-white/80 px-1.25 py-1.75 saturate-150 backdrop-blur-lg">
         <div className="flex w-full items-center">
           {TitleAndPathData.map(({ title, path }) => (
             <IconWrapper key={title} path={path} to={title} />
@@ -54,7 +54,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
           {path}
         </svg>
 
-        <div className={`-mt-px text-[11px] leading-3.75 ${color}`}>{to}</div>
+        <div className={`text-[11px] leading-3.75 ${color}`}>{to}</div>
       </div>
     </Link>
   );
@@ -86,23 +86,23 @@ const TitleAndPathData = [
   {
     path: (
       <path
-        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    ),
-    title: "Blog",
-  },
-
-  {
-    path: (
-      <path
         d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
     ),
     title: "Experiments",
+  },
+
+  {
+    path: (
+      <path
+        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    ),
+    title: "Blog",
   },
 
   {
