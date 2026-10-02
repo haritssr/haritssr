@@ -7,10 +7,13 @@ import type { ExperimentDomainData } from "../data/ExperimentsData";
 export default function ExperimentCard({
   className,
   experiment,
+  headingLevel = 2,
 }: {
   className?: string;
   experiment: ExperimentDomainData;
+  headingLevel?: 2 | 3;
 }) {
+  const Heading = headingLevel === 3 ? "h3" : "h2";
   return (
     <Link
       className={`group corner-squircle border-border hover:bg-surface-hover hover:border-border-hover space-y-1 rounded-2xl border px-3 py-2.5 ${className ?? ""}`}
@@ -22,9 +25,9 @@ export default function ExperimentCard({
           <div className="flex items-center space-x-2">
             <Image alt="" height={18} src={experiment.logoSrc} width={18} />
           </div>
-          <div className="text-foreground font-medium sm:text-lg">
+          <Heading className="text-foreground font-medium sm:text-lg">
             {experiment.title}
-          </div>
+          </Heading>
         </div>
         <div className="flex items-center space-x-1">
           <div className="text-foreground/60 text-sm font-light">

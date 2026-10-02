@@ -45,7 +45,7 @@ export default function BlogGrid({
               key={group.year}
             >
               <Heading className="text-foreground pb-2">{group.year}</Heading>
-              <div className="divide-border border-border corner-squircle divide-y overflow-hidden rounded-2xl border">
+              <ul className="divide-border border-border corner-squircle list-none divide-y overflow-hidden rounded-2xl border">
                 {group.posts.map((post, index) => {
                   const postIndex = group.firstIndex + index;
                   const postIsHiddenOnMobile =
@@ -54,33 +54,37 @@ export default function BlogGrid({
                     mobileLimit !== undefined && postIndex === mobileLimit - 1;
 
                   return (
-                    <Link
-                      className={`group hover:bg-interface-hover flex flex-col px-3 py-2.5 transition-colors ${
-                        postIsHiddenOnMobile ? "hidden! sm:flex!" : ""
+                    <li
+                      className={`${
+                        postIsHiddenOnMobile ? "hidden sm:block" : ""
                       } ${isLastMobilePost ? "max-sm:border-b-0!" : ""}`}
-                      href={`/blog/${post.slug}`}
                       key={post.slug}
-                      prefetch={false}
                     >
-                      <div className="flex w-full items-center justify-between">
-                        <div className="text-action group-hover:text-action-hover">
-                          {post.title}
+                      <Link
+                        className="group hover:bg-interface-hover flex flex-col px-3 py-2.5 transition-colors"
+                        href={`/blog/${post.slug}`}
+                        prefetch={false}
+                      >
+                        <div className="flex w-full items-center justify-between">
+                          <div className="text-action group-hover:text-action-hover">
+                            {post.title}
+                          </div>
+                          <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
+                            <span>{Math.ceil(post.wordCount / 200)} min</span>
+                            <span aria-hidden="true">·</span>
+                            <time dateTime={post.publishedAt}>
+                              {formatDate(post.publishedAt)}
+                            </time>
+                          </div>
                         </div>
-                        <div className="text-foreground/60 mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
-                          <span>{Math.ceil(post.wordCount / 200)} min</span>
-                          <span aria-hidden="true">·</span>
-                          <time dateTime={post.publishedAt}>
-                            {formatDate(post.publishedAt)}
-                          </time>
-                        </div>
-                      </div>
-                      <p className="text-foreground/70 mt-1 truncate text-sm">
-                        {post.summary}.
-                      </p>
-                    </Link>
+                        <p className="text-foreground/70 mt-1 truncate text-sm">
+                          {post.summary}.
+                        </p>
+                      </Link>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </section>
           );
         })}

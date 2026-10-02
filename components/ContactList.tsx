@@ -38,7 +38,7 @@ const data = {
 export default function ContactList() {
   return (
     <div className="space-y-2.5 bg-white px-4 pt-3 pb-2.5 lg:border-l">
-      <p className="text-foreground font-semibold">Contacts</p>
+      <h2 className="text-foreground font-semibold">Contacts</h2>
       <ul className="space-y-2.5">
         {data.points.map((contact) => (
           <li className="cursor-pointer" key={contact.link}>

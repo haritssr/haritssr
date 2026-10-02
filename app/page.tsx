@@ -37,10 +37,7 @@ export default function Home() {
               width="100"
             />
           </div>
-          <div
-            className="text-foreground/90 space-y-2.5 bg-white px-4 pt-3 pb-2.5 text-left lg:border-l"
-            id="1234"
-          >
+          <div className="text-foreground/90 space-y-2.5 bg-white px-4 pt-3 pb-2.5 text-left lg:border-l">
             <h1
               className="text-foreground/90 font-semibold"
               id="profile-heading"
@@ -85,11 +82,8 @@ export default function Home() {
             </div>
           </div>
           <ContactList />
-          <div
-            className="text-foreground space-y-2 bg-white px-4 pt-3 pb-2.5 lg:border-l"
-            id="sections"
-          >
-            <p className="text-foreground font-semibold">Interests</p>
+          <div className="text-foreground space-y-2 bg-white px-4 pt-3 pb-2.5 lg:border-l">
+            <h2 className="text-foreground font-semibold">Interests</h2>
             <p className="text-foreground/70 -mt-1 leading-8">
               Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
               Physics, and Education.
@@ -98,36 +92,38 @@ export default function Home() {
         </div>
       </section>
       <HomeSearch />
-      <Section
-        className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4"
-        id="projects"
-        section="Projects"
-      >
-        {ProjectsData.map((project, index) => (
-          <ProjectsCard
-            headingLevel={3}
-            className={
-              index >= HOME_PROJECTS_LIMIT ? "hidden! sm:flex!" : undefined
-            }
-            description={project.about_client.short_about}
-            href={project.about_client.website}
-            imgSrc={project.about_client.logo_src}
-            key={project.project_name}
-            title={project.project_name}
-          />
-        ))}
-        {remainingProjects > 0 ? (
-          <MoreItemsLink
-            className="sm:hidden!"
-            count={remainingProjects}
-            href="/projects"
-            itemName="project"
-          />
-        ) : null}
+      <Section id="projects" section="Projects">
+        <ul className="grid list-none grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4">
+          {ProjectsData.map((project, index) => (
+            <li
+              className={
+                index >= HOME_PROJECTS_LIMIT ? "hidden! sm:flex!" : "flex"
+              }
+              key={project.project_name}
+            >
+              <ProjectsCard
+                headingLevel={3}
+                description={project.about_client.short_about}
+                href={project.about_client.website}
+                imgSrc={project.about_client.logo_src}
+                title={project.project_name}
+              />
+            </li>
+          ))}
+          {remainingProjects > 0 ? (
+            <li className="sm:hidden">
+              <MoreItemsLink
+                count={remainingProjects}
+                href="/projects"
+                itemName="project"
+              />
+            </li>
+          ) : null}
+        </ul>
       </Section>
 
       <Section id="experiments" section="Experiments">
-        <ExperimentsGrid mobileLimit={4} />
+        <ExperimentsGrid headingLevel={3} mobileLimit={4} />
       </Section>
 
       <Section className="grid grid-cols-1" id="blog" section="Blog">

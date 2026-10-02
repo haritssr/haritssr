@@ -5,8 +5,10 @@ import MoreItemsLink from "./MoreItemsLink";
 
 export default function ExperimentsGrid({
   mobileLimit,
+  headingLevel = 2,
 }: {
   mobileLimit?: number;
+  headingLevel?: 2 | 3;
 }) {
   const visibleDomains = getAvailableExperimentDomains();
   const remainingDomains = Math.max(
@@ -15,26 +17,32 @@ export default function ExperimentsGrid({
   );
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+    <ul className="grid list-none grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
       {visibleDomains.map((experiment, index) => (
-        <ExperimentCard
+        <li
           className={
             mobileLimit !== undefined && index >= mobileLimit
               ? "hidden! sm:block!"
               : undefined
           }
-          experiment={experiment}
           key={experiment.id}
-        />
+        >
+          <ExperimentCard
+            className="block h-full"
+            experiment={experiment}
+            headingLevel={headingLevel}
+          />
+        </li>
       ))}
       {remainingDomains > 0 ? (
-        <MoreItemsLink
-          className="sm:hidden!"
-          count={remainingDomains}
-          href="/experiments"
-          itemName="experiment"
-        />
+        <li className="sm:hidden">
+          <MoreItemsLink
+            count={remainingDomains}
+            href="/experiments"
+            itemName="experiment"
+          />
+        </li>
       ) : null}
-    </div>
+    </ul>
   );
 }

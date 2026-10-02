@@ -44,11 +44,11 @@ export default function ProjectsCard({
         <div className="text-foreground/70">{description}</div>
 
         {/* Site Link (Text Only) */}
-        <cite className="group not-italic">
+        <p>
           <span className="text-foreground/50 text-base">
             {href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
           </span>
-        </cite>
+        </p>
       </div>
 
       <div className="flex space-x-2.5 px-3 pb-3">
