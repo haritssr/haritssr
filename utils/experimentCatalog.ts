@@ -1,5 +1,10 @@
 import "server-only";
-import { ExperimentsData, getExperimentDomain } from "@/data/ExperimentsData";
+
+import {
+  ExperimentsData,
+  getExperimentDomain,
+  getLatestExperimentUpdate,
+} from "@/data/ExperimentsData";
 import type { ExperimentDomain } from "@/data/ExperimentsData";
 import { isExperimentAvailable } from "@/utils/databaseExperiments";
 
@@ -14,8 +19,14 @@ export function getAvailableExperimentDomain(slug: string): ExperimentDomain {
 function withAvailableExperiments(domain: ExperimentDomain): ExperimentDomain {
   return {
     ...domain,
-    experiments: domain.experiments.filter((experiment) =>
-      isExperimentAvailable(domain.slug, experiment.slug)
-    ),
+    experiments: domain.experiments
+      .filter((experiment) =>
+        isExperimentAvailable(domain.slug, experiment.slug)
+      )
+      .toSorted((left, right) =>
+        getLatestExperimentUpdate(right).localeCompare(
+          getLatestExperimentUpdate(left)
+        )
+      ),
   };
 }

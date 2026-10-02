@@ -25,6 +25,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Do not add tests as part of a feature, bug fix, refactor, or other coding task. Only modify an existing test file when the user explicitly asks for test-file changes.
 - If verification is needed, use the existing test files and other non-test checks already available in the repository; do not create a test file to enable verification.
 
+# Experiment Update Dates
+
+- When adding or changing an experiment, update its entry in
+  `data/ExperimentsData.ts`. Keep `createdAt` unchanged after creation and append
+  the current `YYYY-MM-DD` date to the `updatedAt` array without deleting history.
+  Use one entry per calendar day; new experiments initialize both dates to the
+  creation date.
+- Use `getLatestExperimentUpdate()` for display, sorting, or other consumers
+  that need a single date.
+
 
 # Commit Guidelines
 
