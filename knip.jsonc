@@ -1,6 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
-  "entry": ["public/sw.js", "utils/{dbExperiment,sqlite3}.js"],
+  // Turbopack discovers these MDX entry modules through import.meta.glob.
+  "entry": ["public/sw.js", "utils/{dbExperiment,sqlite3}.js", "data/blog/*.mdx"],
   "ignoreFiles": [
     // This component is retained for a feature that is currently unwired.
     "components/InternalLinkWithoutArrow.tsx",
@@ -14,9 +15,4 @@
     // package during configuration, which Knip excludes from that graph.
     "@next/mdx!",
   ],
-  "ignoreIssues": {
-    // These exports are intentional test seams and are unused by production.
-    "utils/blog-modules.ts": ["exports"],
-    "utils/blog-posts.ts": ["exports"],
-  },
 }

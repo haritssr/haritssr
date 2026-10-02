@@ -1,6 +1,7 @@
 # 0007: Use Next.js MDX for writing content
 
-- Status: accepted
+- Status: superseded
+- Superseded by [0011](0011-discover-blog-modules-with-turbopack.md)
 - Date: 2026-09-07
 - Confidence: high
 

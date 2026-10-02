@@ -61,9 +61,6 @@ export function parseBlogPost(fileName: string, source: string): BlogPost {
 }
 
 function loadBlogPosts(): readonly BlogPost[] {
-  // If blog-modules.ts moves to import.meta.glob, keep metadata discovery in
-  // sync. Loading compiled MDX alone does not replace reading its frontmatter
-  // and source text for the summary and word count below.
   return Object.freeze(
     fs
       .readdirSync(blogPostsDirectory, { withFileTypes: true })
