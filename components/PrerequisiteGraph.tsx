@@ -124,6 +124,8 @@ export default function PrerequisiteGraph({
           showFullViewButton
         />
         <GraphStatus
+          nodes={nodes}
+          activeNodeDepths={activeNodeDepths}
           activeNodeIds={activeNodeIds}
           selectedNode={selectedNode}
         />
@@ -140,7 +142,7 @@ export default function PrerequisiteGraph({
       </div>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
-        <Dialog.Popup className="bg-background text-foreground fixed inset-0 z-90 flex min-h-0 flex-col outline-hidden">
+        <Dialog.Popup className="bg-background text-foreground fixed inset-0 z-90 flex min-h-0 flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] outline-hidden">
           <div className="border-border flex shrink-0 items-center justify-between border-b px-3 py-2.5">
             <Dialog.Title className="text-sm font-medium">
               Graf Prasyarat
@@ -159,6 +161,8 @@ export default function PrerequisiteGraph({
             showFullViewButton={false}
           />
           <GraphStatus
+            nodes={nodes}
+            activeNodeDepths={activeNodeDepths}
             activeNodeIds={activeNodeIds}
             selectedNode={selectedNode}
           />
@@ -371,17 +375,27 @@ function GraphToolbar({
 }
 
 function GraphStatus({
+  nodes,
+  activeNodeDepths,
   activeNodeIds,
   selectedNode,
 }: {
   activeNodeIds: ReadonlySet<string> | null;
+  activeNodeDepths: ReadonlyMap<string, number> | null;
+  nodes: readonly PrerequisiteGraphNodeData[];
   selectedNode: PrerequisiteGraphNodeData | undefined;
 }) {
+  const direct = nodes
+    .filter((node) => activeNodeDepths?.get(node.id) === 1)
+    .map((node) => node.label);
+  const further = nodes
+    .filter((node) => (activeNodeDepths?.get(node.id) ?? 0) > 1)
+    .map((node) => node.label);
   return (
     <div className="border-border border-b px-3 py-2 text-xs">
       <output aria-live="polite" className="text-muted">
         {selectedNode
-          ? `${selectedNode.label} dan ${Math.max((activeNodeIds?.size ?? 1) - 1, 0)} prasyarat disorot.`
+          ? `${selectedNode.label} dan ${Math.max((activeNodeIds?.size ?? 1) - 1, 0)} prasyarat disorot. Prasyarat langsung: ${direct.join(", ") || "tidak ada"}. Prasyarat lanjutan: ${further.join(", ") || "tidak ada"}.`
           : "Klik sebuah besaran untuk menyorot seluruh prasyaratnya."}
       </output>
     </div>
@@ -486,7 +500,7 @@ function GraphViewport({
 
             return (
               <path
-                className="transition-all duration-200"
+                className="transition-opacity duration-200"
                 d={getEdgePath(source, target)}
                 key={getEdgeKey(edge)}
                 markerEnd={`url(#${markerPrefix}-${markerName})`}
