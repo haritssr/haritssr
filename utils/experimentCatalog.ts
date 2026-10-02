@@ -5,7 +5,7 @@ import {
   getExperimentDomain,
   getLatestExperimentUpdate,
 } from "@/data/ExperimentsData";
-import type { ExperimentDomain } from "@/data/ExperimentsData";
+import type { ExperimentDomain, ExperimentEntry } from "@/data/ExperimentsData";
 import { isExperimentAvailable } from "@/utils/databaseExperiments";
 
 export function getAvailableExperimentDomains(): ExperimentDomain[] {
@@ -46,17 +46,21 @@ export function getAvailableExperimentCount(): number {
 }
 
 export function getAvailableExperimentSummaries(): ExperimentSummary[] {
-  return getAvailableExperimentDomains()
-    .flatMap((domain) =>
-      domain.experiments.map((experiment) => ({
-        route: `/experiments/${domain.slug}/${experiment.slug}`,
-        title: experiment.title,
-        description: experiment.description,
-        domain: domain.slug,
-        domainTitle: domain.title,
-        tags: experiment.tags,
-        updatedAt: getLatestExperimentUpdate(experiment),
-      }))
-    )
-    .toSorted((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+  return ExperimentsData.flatMap((domain) =>
+    getAvailableExperiments(domain).map((experiment) => ({
+      route: `/experiments/${domain.slug}/${experiment.slug}`,
+      title: experiment.title,
+      description: experiment.description,
+      domain: domain.slug,
+      domainTitle: domain.title,
+      tags: experiment.tags,
+      updatedAt: getLatestExperimentUpdate(experiment),
+    }))
+  ).toSorted((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+}
+
+function getAvailableExperiments(domain: ExperimentDomain): ExperimentEntry[] {
+  return domain.experiments.filter((experiment) =>
+    isExperimentAvailable(domain.slug, experiment.slug)
+  );
 }
