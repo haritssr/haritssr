@@ -2,14 +2,6 @@
   "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
   // Turbopack discovers these MDX entry modules through import.meta.glob.
   "entry": ["public/sw.js", "utils/{dbExperiment,sqlite3}.js", "data/blog/*.mdx"],
-  "ignoreFiles": [
-    // This component is retained for a feature that is currently unwired.
-    "components/InternalLinkWithoutArrow.tsx",
-  ],
-  "ignore": [
-    // Keep the mutation methods available for the next tools-page iteration.
-    "app/experiments/ui-explorations/tools/db.core.ts",
-  ],
   "ignoreDependencies": [
     // The trailing ! scopes this to production mode. next.config.ts loads the
     // package during configuration, which Knip excludes from that graph.

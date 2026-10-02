@@ -50,13 +50,3 @@ export function createTool(input: Omit<ToolRow, "id">) {
     .prepare("INSERT INTO tools (name, price, amount) VALUES (?, ?, ?)")
     .run(input.name, input.price, input.amount);
 }
-
-export function updateTool(id: number, input: Omit<ToolRow, "id">) {
-  return getDatabase()
-    .prepare("UPDATE tools SET name = ?, price = ?, amount = ? WHERE id = ?")
-    .run(input.name, input.price, input.amount, id);
-}
-
-export function deleteTool(id: number) {
-  return getDatabase().prepare("DELETE FROM tools WHERE id = ?").run(id);
-}
