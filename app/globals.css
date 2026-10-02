@@ -27,6 +27,10 @@
   --color-attention: #eab308;
   --color-danger: #ef4444;
   --color-information: #a855f7;
+  --color-graph-base: var(--color-indigo-600);
+  --color-graph-derived: var(--color-yellow-500);
+  --color-graph-direct: var(--color-teal-600);
+  --color-graph-indirect: var(--color-pink-600);
   --color-background: var(--color-white);
   --color-foreground: var(--color-zinc-800);
   --color-border: var(--color-zinc-300);

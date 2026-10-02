@@ -317,19 +317,31 @@ function GraphToolbar({
   return (
     <div className="border-border flex flex-wrap items-center gap-x-4 gap-y-2 border-b px-3 py-2.5 text-xs">
       <span className="text-foreground/70 flex items-center gap-1.5">
-        <span className="bg-surface-hover border-border size-2.5 rounded-full border" />
+        <span
+          aria-hidden="true"
+          className="bg-graph-base size-2.5 shrink-0 rounded-full"
+        />
         Besaran pokok
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
-        <span className="bg-background border-border size-2.5 rounded-full border" />
+        <span
+          aria-hidden="true"
+          className="bg-graph-derived size-2.5 shrink-0 rounded-full"
+        />
         Besaran turunan
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
-        <span className="bg-action size-2.5 rounded-full" />
+        <span
+          aria-hidden="true"
+          className="bg-graph-direct size-2.5 shrink-0 rounded-full"
+        />
         Prasyarat langsung
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
-        <span className="bg-action-hover size-2.5 rounded-full" />
+        <span
+          aria-hidden="true"
+          className="bg-graph-indirect size-2.5 shrink-0 rounded-full"
+        />
         Prasyarat lanjutan
       </span>
       {selectedNode || showFullViewButton ? (
@@ -406,7 +418,7 @@ function GraphViewport({
 
   return (
     <div
-      className={`${fullView ? "min-h-0 flex-1" : "max-h-128"} overflow-auto p-2 sm:p-3`}
+      className={`${fullView ? "min-h-0 flex-1" : "max-h-128"} scrollbar-subtle overflow-auto p-2 sm:p-3`}
     >
       <div
         className="relative h-(--graph-height) w-(--graph-width)"
@@ -421,8 +433,8 @@ function GraphViewport({
         >
           <defs>
             {[
-              ["direct", "var(--color-action)"],
-              ["indirect", "var(--color-action-hover)"],
+              ["direct", "var(--color-graph-direct)"],
+              ["indirect", "var(--color-graph-indirect)"],
               ["muted", "var(--color-border)"],
             ].map(([name, color]) => (
               <marker
@@ -456,11 +468,11 @@ function GraphViewport({
             let edgeStrokeWidth = 1.5;
 
             if (isDirect) {
-              edgeColor = "var(--color-action)";
+              edgeColor = "var(--color-graph-direct)";
               markerName = "direct";
               edgeStrokeWidth = 2.5;
             } else if (isActive) {
-              edgeColor = "var(--color-action-hover)";
+              edgeColor = "var(--color-graph-indirect)";
               markerName = "indirect";
               edgeStrokeWidth = 2;
             }
@@ -481,6 +493,7 @@ function GraphViewport({
                 opacity={edgeOpacity}
                 stroke={edgeColor}
                 strokeLinecap="round"
+                strokeDasharray={isActive && !isDirect ? "6 4" : undefined}
                 strokeWidth={edgeStrokeWidth}
                 fill="none"
               />
@@ -499,17 +512,17 @@ function GraphViewport({
           let stateStyles = "opacity-30";
 
           if (isSelected) {
-            stateStyles = "border-action bg-action text-background shadow-md";
+            stateStyles = "border-graph-direct bg-graph-direct text-background";
           } else if (isActive) {
-            stateStyles = "hover:border-action";
+            stateStyles = "hover:border-graph-direct";
           }
 
-          let kindStyles = "border-border bg-background";
+          let kindStyles = "border-graph-derived/50 bg-graph-derived/10";
 
           if (isSelected) {
             kindStyles = "";
           } else if (node.kind === "base") {
-            kindStyles = "border-border bg-surface-hover";
+            kindStyles = "border-graph-base/40 bg-graph-base/10";
           }
 
           const nodeStyle: GraphStyle = {
@@ -522,7 +535,7 @@ function GraphViewport({
             <button
               aria-label={`Sorot prasyarat ${node.label}`}
               aria-pressed={isSelected}
-              className={`focus-visible:outline-action absolute top-(--node-top) left-(--node-left) flex h-15 w-(--node-width) flex-col items-center justify-center overflow-hidden rounded-xl border px-2 text-center transition-[opacity,border-color,background-color,box-shadow] duration-200 focus-visible:z-10 focus-visible:outline-2 ${kindStyles} ${stateStyles}`}
+              className={`focus-visible:outline-action absolute top-(--node-top) left-(--node-left) flex h-15 w-(--node-width) flex-col items-center justify-center overflow-hidden rounded-xl border px-2 text-center transition-[opacity,border-color,background-color] duration-200 focus-visible:z-10 focus-visible:outline-2 ${kindStyles} ${stateStyles}`}
               key={node.id}
               onClick={() => {
                 onSelectNode(node.id);
