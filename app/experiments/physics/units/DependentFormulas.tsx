@@ -2,7 +2,7 @@
 
 import { Select } from "@base-ui/react/select";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
-import { useId, useState } from "react";
+import { useState } from "react";
 
 import katexify from "@/utils/katexify";
 
@@ -28,7 +28,6 @@ export default function DependentFormulas({
 }: {
   quantities: readonly QuantityDependents[];
 }) {
-  const selectId = useId();
   const [selectedQuantity, setSelectedQuantity] = useState("Momentum");
   const selected =
     quantities.find((quantity) => quantity.quantity === selectedQuantity) ??
@@ -43,12 +42,9 @@ export default function DependentFormulas({
   ).size;
 
   return (
-    <div className="border-border border">
-      <div className="border-border flex flex-wrap items-end gap-x-6 gap-y-3 border-b p-4">
-        <div className="flex min-w-48 flex-col gap-1.5">
-          <label className="text-foreground/70 text-sm" htmlFor={selectId}>
-            Pilih besaran
-          </label>
+    <div className="border-border overflow-hidden rounded-xl border">
+      <div className="border-border grid items-center gap-x-6 gap-y-3 border-b p-4 sm:grid-cols-2">
+        <div className="min-w-0">
           <Select.Root
             onValueChange={(value) => {
               if (value !== null) {
@@ -58,10 +54,13 @@ export default function DependentFormulas({
             value={selected.quantity}
           >
             <Select.Trigger
+              aria-label="Pilih besaran"
               className="form-control border-border text-foreground/90 focus-visible:outline-action hover:bg-foreground/5 inline-flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border bg-white px-3 py-2 text-sm outline-hidden focus-visible:outline-2"
-              id={selectId}
             >
-              <Select.Value />
+              <span className="inline-flex items-center gap-2">
+                <span className="text-foreground/70">Pilih besaran:</span>
+                <Select.Value />
+              </span>
               <Select.Icon>
                 <ChevronDownIcon aria-hidden="true" className="size-4" />
               </Select.Icon>
@@ -95,7 +94,7 @@ export default function DependentFormulas({
           <span className="mx-2" aria-hidden="true">
             ·
           </span>
-          {selected.unit} (<MathSymbol value={selected.unitSymbol} />)
+          <MathSymbol value={selected.unitSymbol} />
         </p>
       </div>
       <div className="p-4">
@@ -106,7 +105,7 @@ export default function DependentFormulas({
           <ul className="grid gap-3 md:grid-cols-2">
             {selected.formulas.map((formula, formulaIndex) => (
               <li
-                className="border-border flex flex-col gap-2 border p-3"
+                className="border-border flex min-w-0 flex-col gap-2 rounded-xl border p-3"
                 key={`${formula.result}:${formula.formulaName}:${formulaIndex}`}
               >
                 <div>
@@ -118,7 +117,7 @@ export default function DependentFormulas({
                     {formula.formulaName}
                   </p>
                 </div>
-                <div className="bg-surface-hover overflow-x-auto px-3 py-2 text-center">
+                <div className="bg-surface-hover scrollbar-subtle overflow-x-auto rounded-lg px-3 py-2 text-center">
                   <MathSymbol value={formula.expression} />
                 </div>
                 <p className="text-foreground/70 text-xs">
