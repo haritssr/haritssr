@@ -148,7 +148,19 @@ export default function Home() {
               name="Eudaimonic over hedonic"
             />
           </li>
-          <li>Effective Accelerationism (e/acc).</li>
+          <li>
+            Effective Accelerationism (e/acc):{" "}
+            <ExternalLink
+              href="https://beff.substack.com/p/notes-on-eacc-principles-and-tenets"
+              name="principles and tenets"
+            />
+            ,{" "}
+            <ExternalLink
+              href="https://effectiveaccelerationism.substack.com/p/what-the-f-is-eacc"
+              name="what is e/acc?"
+            />
+            .
+          </li>
           <li>
             <span className="text-foreground underline">haritssr</span> ={" "}
             <span className="text-foreground underline">harits</span>{" "}
