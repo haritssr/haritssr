@@ -86,7 +86,7 @@ experiments from navigation and the sitemap, and their routes return 404.
 
 Keep them local-only until they have user authentication, authorization, rate
 limits, and durable production storage. See
-[ADR 0008](docs/adr/0008-keep-sqlite-experiments-local-only.md).
+[README decision notes](README.md#decisions).
 
 # Skill Selection
 
