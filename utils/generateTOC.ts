@@ -1,52 +1,59 @@
-import fs from "node:fs";
+import { readFileSync } from "node:fs";
 
-import GithubSlugger from "github-slugger";
+import type { Root, RootContent } from "hast";
+import rehypeSlug from "rehype-slug";
 import { remark } from "remark";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+import remarkMdx from "remark-mdx";
+import remarkRehype from "remark-rehype";
 
 export interface TableOfContentsItem {
   id: string;
   title: string;
 }
 
-interface MarkdownNode {
-  alt?: unknown;
-  children?: MarkdownNode[];
-  type?: unknown;
-  value?: unknown;
-}
+const headingTagPattern = /^h[1-6]$/u;
+const markdownProcessor = remark()
+  .use(remarkMdx)
+  .use(remarkFrontmatter)
+  .use(remarkGfm)
+  .use(remarkRehype, {
+    // Preserve MDX nodes so heading text matches the @next/mdx pipeline.
+    passThrough: [
+      "mdxFlowExpression",
+      "mdxJsxFlowElement",
+      "mdxJsxTextElement",
+      "mdxTextExpression",
+      "mdxjsEsm",
+    ],
+  })
+  .use(rehypeSlug);
 
-const markdownProcessor = remark().use(remarkFrontmatter);
-
-function getNodeText(node: MarkdownNode): string {
-  if (typeof node.value === "string") {
+function getNodeText(node: Root | RootContent): string {
+  if (node.type === "text") {
     return node.value;
   }
 
-  if (node.type === "image" && typeof node.alt === "string") {
-    return node.alt;
-  }
-
-  return node.children?.map(getNodeText).join("") ?? "";
+  return "children" in node ? node.children.map(getNodeText).join("") : "";
 }
 
-function parseTableOfContents(mdxContent: string): TableOfContentsItem[] {
-  const tree = markdownProcessor.parse(mdxContent) as MarkdownNode;
-  const slugger = new GithubSlugger();
-  const items: TableOfContentsItem[] = [];
-
-  for (const node of tree.children ?? []) {
-    if (node.type !== "heading") {
-      continue;
-    }
-
+function collectHeadings(
+  node: Root | RootContent,
+  items: TableOfContentsItem[]
+): void {
+  if (node.type === "element" && headingTagPattern.test(node.tagName)) {
     const title = getNodeText(node).trim();
-    if (title.length > 0) {
-      items.push({ id: slugger.slug(title), title });
+    if (title.length > 0 && typeof node.properties.id === "string") {
+      items.push({ id: node.properties.id, title });
     }
   }
 
-  return items;
+  if ("children" in node) {
+    for (const child of node.children) {
+      collectHeadings(child, items);
+    }
+  }
 }
 
 export default function generateTOC(
@@ -55,7 +62,7 @@ export default function generateTOC(
   let mdxContent: string;
 
   try {
-    mdxContent = fs.readFileSync(mdxFilePath, "utf-8");
+    mdxContent = readFileSync(mdxFilePath, "utf-8");
   } catch (error) {
     console.error(
       `Error reading MDX file: ${error instanceof Error ? error.message : String(error)}`
@@ -63,5 +70,8 @@ export default function generateTOC(
     return [];
   }
 
-  return parseTableOfContents(mdxContent);
+  const tree = markdownProcessor.runSync(markdownProcessor.parse(mdxContent));
+  const items: TableOfContentsItem[] = [];
+  collectHeadings(tree, items);
+  return items;
 }
