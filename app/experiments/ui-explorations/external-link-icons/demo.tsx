@@ -127,16 +127,15 @@ export default function IconComparison({
 }: {
   componentLink: ReactNode;
 }) {
-  const [selectedId, setSelectedId] =
-    useState<IconOption["id"]>("short-northeast");
-  const [size, setSize] = useState(16);
-  const [weight, setWeight] = useState(1.7);
+  const [selectedId, setSelectedId] = useState<IconOption["id"]>("northeast");
+  const [size, setSize] = useState(18);
+  const [weight, setWeight] = useState(2);
   const selected = icons.find((icon) => icon.id === selectedId) ?? icons[1];
 
   function reset() {
-    setSelectedId("short-northeast");
-    setSize(16);
-    setWeight(1.7);
+    setSelectedId("northeast");
+    setSize(18);
+    setWeight(2);
   }
 
   return (
@@ -201,10 +200,10 @@ export default function IconComparison({
         </h2>
         <div className="border-border grid overflow-hidden rounded-xl border sm:grid-cols-2">
           <div className="border-border space-y-5 border-b p-6 sm:border-r sm:border-b-0">
-            <p className="text-muted text-sm">Current component</p>
+            <p className="text-muted text-sm">Chosen icon</p>
             <div className="text-base">{componentLink}</div>
             <p className="text-muted text-sm">
-              Box and arrow · original styling
+              Northeast arrow · 18 px · 2 px stroke
             </p>
           </div>
           <div className="bg-action/3 space-y-5 p-6">
