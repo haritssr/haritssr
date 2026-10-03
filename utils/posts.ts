@@ -29,8 +29,9 @@ export interface PostData extends PostSummary {
 
 function getPostFileNames() {
   return fs
-    .readdirSync(postsDirectory)
-    .filter((fileName) => fileName.endsWith(".md"));
+    .readdirSync(postsDirectory, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .map((entry) => entry.name);
 }
 
 function readPost(fileName: string) {
@@ -44,19 +45,24 @@ function readPost(fileName: string) {
   };
 }
 
+// Keep one local-content snapshot per module, matching the blog post index.
+const posts = getPostFileNames().map(readPost);
+const postsById = new Map(posts.map((post) => [post.id, post]));
+const postSummaries = posts
+  .map(({ date, id, title }) => ({ date, id, title }))
+  .toSorted(
+    (left, right) =>
+      right.date.localeCompare(left.date) || left.id.localeCompare(right.id)
+  );
+
 export function getSortedPostsData(): PostSummary[] {
-  return getPostFileNames()
-    .map((fileName) => {
-      const { date, id, title } = readPost(fileName);
-      return { date, id, title };
-    })
-    .toSorted((left, right) => right.date.localeCompare(left.date));
+  return postSummaries.map((post) => ({ ...post }));
 }
 
 export function getAllPostIds() {
-  return getPostFileNames().map((fileName) => ({
+  return posts.map(({ id }) => ({
     params: {
-      id: fileName.replace(markdownFileExtensionPattern, ""),
+      id,
     },
   }));
 }
@@ -66,12 +72,12 @@ export async function getPostData(id: string): Promise<PostData | undefined> {
     return undefined;
   }
 
-  const fileName = `${id}.md`;
-  if (!getPostFileNames().includes(fileName)) {
+  const post = postsById.get(id);
+  if (!post) {
     return undefined;
   }
 
-  const { content, date, title } = readPost(fileName);
+  const { content, date, title } = post;
   const tree = markdownProcessor.parse(content);
   const contentTree = await markdownProcessor.run(tree);
 
