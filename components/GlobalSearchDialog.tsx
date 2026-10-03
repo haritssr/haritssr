@@ -179,7 +179,7 @@ export default function GlobalSearchDialog({
                 ) : null}
               </Autocomplete.List>
             </div>
-            <div className="border-border text-muted flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
+            <div className="border-middle-hover text-muted flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
               <output aria-live={loadError ? "off" : "polite"}>
                 {resultStatus}
               </output>
@@ -236,7 +236,7 @@ function SearchResultItem({
 }) {
   return (
     <Autocomplete.Item
-      className="data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2.5 pr-3 pl-3 select-none"
+      className="data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2 pr-3 pl-3 select-none"
       onClick={() => {
         onSelect(entry.route);
       }}
