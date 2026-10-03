@@ -1151,6 +1151,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03"],
       },
+      {
+        slug: "external-link-icons",
+        title: "External Link Icons",
+        description:
+          "Compare minimal arrows, chevrons, and exit markers for external links.",
+        tags: ["icons", "design", "interaction"],
+        createdAt: "2026-10-03",
+        updatedAt: ["2026-10-03"],
+      },
     ],
     id: 10,
     logoSrc: "/icons/radixui.jpg",
