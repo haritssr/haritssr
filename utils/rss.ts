@@ -35,46 +35,39 @@ function getPublicationDate(publishedAt: string): Date {
   return date;
 }
 
-function formatRssDate(publishedAt: string): string {
-  return getPublicationDate(publishedAt).toUTCString();
-}
-
 function getSiteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
 
-function getBlogPostUrl(slug: string): string {
-  return getSiteUrl(`${BLOG_PATH}/${slug}`);
+function renderRssItem(post: RssBlogPost, publicationDate: Date): string {
+  const postUrl = escapeXml(getSiteUrl(`${BLOG_PATH}/${post.slug}`));
+
+  return `    <item>
+      <title>${escapeXml(post.title)}</title>
+      <link>${postUrl}</link>
+      <guid isPermaLink="true">${postUrl}</guid>
+      <pubDate>${publicationDate.toUTCString()}</pubDate>
+      <description>${escapeXml(post.summary)}</description>
+    </item>`;
 }
 
 export function renderBlogRssFeed(
   posts: readonly RssBlogPost[],
   buildDate = new Date()
 ): string {
-  const sortedPosts = posts.toSorted((left, right) => {
-    const dateDifference =
-      getPublicationDate(right.publishedAt).valueOf() -
-      getPublicationDate(left.publishedAt).valueOf();
-
-    return dateDifference === 0
-      ? left.slug.localeCompare(right.slug)
-      : dateDifference;
-  });
-  const items = sortedPosts.map((post) => {
-    const postUrl = getBlogPostUrl(post.slug);
-
-    return [
-      "    <item>",
-      `      <title>${escapeXml(post.title)}</title>`,
-      `      <link>${escapeXml(postUrl)}</link>`,
-      `      <guid isPermaLink="true">${escapeXml(postUrl)}</guid>`,
-      `      <pubDate>${formatRssDate(post.publishedAt)}</pubDate>`,
-      `      <description>${escapeXml(post.summary)}</description>`,
-      "    </item>",
-    ].join("\n");
-  });
+  const items = posts
+    .map((post) => ({
+      post,
+      publicationDate: getPublicationDate(post.publishedAt),
+    }))
+    .toSorted(
+      (left, right) =>
+        right.publicationDate.valueOf() - left.publicationDate.valueOf() ||
+        left.post.slug.localeCompare(right.post.slug)
+    )
+    .map(({ post, publicationDate }) => renderRssItem(post, publicationDate));
   const lastBuildDate =
-    sortedPosts.length > 0
+    items.length > 0
       ? [`    <lastBuildDate>${buildDate.toUTCString()}</lastBuildDate>`]
       : [];
   const feedUrl = getSiteUrl(RSS_PATH);
