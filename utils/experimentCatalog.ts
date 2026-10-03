@@ -1,5 +1,4 @@
 import "server-only";
-import type { ExperimentSummary } from "@/data/experimentExplorer";
 import {
   ExperimentsData,
   getExperimentDomain,
@@ -7,6 +6,16 @@ import {
 } from "@/data/ExperimentsData";
 import type { ExperimentDomain, ExperimentEntry } from "@/data/ExperimentsData";
 import { isExperimentAvailable } from "@/utils/databaseExperiments";
+
+interface ExperimentSummary {
+  route: string;
+  title: string;
+  description: string;
+  domain: string;
+  domainTitle: string;
+  tags: readonly string[];
+  updatedAt: string;
+}
 
 export function getAvailableExperimentDomains(): ExperimentDomain[] {
   return ExperimentsData.map(withAvailableExperiments);
