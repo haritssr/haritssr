@@ -149,17 +149,16 @@ export default function Home() {
             />
           </li>
           <li>
-            Effective Accelerationism (e/acc):{" "}
             <ExternalLink
               href="https://beff.substack.com/p/notes-on-eacc-principles-and-tenets"
-              name="principles and tenets"
+              name="Effective Accelerationism"
             />
-            ,{" "}
+            (
             <ExternalLink
               href="https://effectiveaccelerationism.substack.com/p/what-the-f-is-eacc"
-              name="what is e/acc?"
+              name="e/acc"
             />
-            .
+            ).
           </li>
           <li>
             <span className="text-foreground underline">haritssr</span> ={" "}
