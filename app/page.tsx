@@ -10,6 +10,7 @@ import type { ReactNode } from "react";
 import BlogGrid from "@/components/BlogGrid";
 import ContactList from "@/components/ContactList";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
+import ExternalLink from "@/components/ExternalLink";
 import HomeSearch from "@/components/HomeSearch";
 import MoreItemsLink from "@/components/MoreItemsLink";
 import ProjectsCard from "@/components/ProjectsCard";
@@ -141,7 +142,12 @@ export default function Home() {
           </li>
           <li>Touch typist, ±90 WPM.</li>
           <li>Constraints give shape.</li>
-          <li>Eudaimonic over hedonic.</li>
+          <li>
+            <ExternalLink
+              href="https://youtu.be/H7Sfo3lMB8c?t=60"
+              name="Eudaimonic over hedonic"
+            />
+          </li>
           <li>Effective Accelerationism (e/acc).</li>
           <li>
             <span className="text-foreground underline">haritssr</span> ={" "}
