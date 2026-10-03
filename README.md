@@ -31,6 +31,10 @@ server. Run `bun run check`, `bun run typecheck`, `bun run knip`, and
 `NODE_ENV=production bun run validate:content` to verify local-only exclusions.
 The CI workflow performs these checks and the production build.
 
+Inspect existing local SQLite databases with `bun scripts/inspect-task-db.js`
+or `bun scripts/inspect-tools-db.js`. These scripts open the databases read-only
+and respect `TASK_DB_DIR` and `TOOLS_DB_DIR`.
+
 Experiment routes are literal folders. Register their title, description, tags,
 creation date, and update-date history in `data/ExperimentsData.ts`. The explorer,
 search, metadata, and sitemap derive their records from that catalog. Append an

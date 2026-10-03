@@ -3,9 +3,8 @@
   // Turbopack discovers these MDX entry modules through import.meta.glob.
   "entry": [
     "public/sw.js",
-    "utils/{dbExperiment,sqlite3}.js",
+    "scripts/{inspect-*-db.js,validate-content.ts}!",
     "data/blog/*.mdx",
-    "scripts/validate-content.ts!",
   ],
   "ignoreDependencies": [
     // The trailing ! scopes this to production mode. next.config.ts loads the
