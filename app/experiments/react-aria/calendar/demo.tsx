@@ -3,9 +3,9 @@
 import { getLocalTimeZone, today } from "@internationalized/date";
 
 import ExternalLink from "@/components/ExternalLink";
+import Calendar from "@/components/react-aria/Calendar.js";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
-import Calendar from "@/utils/react-aria/Calendar.js";
 
 export default function ReactAriaCalendarDemo() {
   return (

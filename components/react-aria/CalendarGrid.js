@@ -24,8 +24,8 @@ export function CalendarGrid({ state, offset = EMPTY_OFFSET }) {
     <table {...gridProps} cellPadding="0" className="flex-1">
       <thead {...headerProps} className="text-gray-600">
         <tr>
-          {weekDays.map((day) => (
-            <th key={day}>{day}</th>
+          {weekDays.map((day, dayIndex) => (
+            <th key={dayIndex}>{day}</th>
           ))}
         </tr>
       </thead>
@@ -34,16 +34,16 @@ export function CalendarGrid({ state, offset = EMPTY_OFFSET }) {
           <tr key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex, startDate)
-              .map((date) =>
+              .map((date, dayIndex) =>
                 date ? (
                   <CalendarCell
                     currentMonth={startDate}
                     date={date}
-                    key={date}
+                    key={date.toString()}
                     state={state}
                   />
                 ) : (
-                  <td aria-hidden="true" key={date} />
+                  <td aria-hidden="true" key={`empty-${dayIndex}`} />
                 )
               )}
           </tr>

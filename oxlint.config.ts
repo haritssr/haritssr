@@ -37,9 +37,9 @@ export default defineConfig({
       },
     },
     {
-      files: ["utils/react-aria/**"],
+      files: ["components/react-aria/**"],
       rules: {
-        // These files are copied React Aria examples, not project UI sources.
+        // These components demonstrate the React Aria examples.
         "shadcn/no-arbitrary-values": "off",
         "shadcn/no-inline-styles": "off",
         "shadcn/no-raw-colors": "off",
@@ -131,7 +131,7 @@ export default defineConfig({
       },
     },
     {
-      files: ["utils/react-aria/**/*.js"],
+      files: ["components/react-aria/**/*.js"],
       rules: {
         // These are copied React Aria examples with intentionally complex cell
         // rendering; the project-wide complexity limit still applies elsewhere.
