@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import type React from "react";
 
 import BackButton from "@/components/BackButton";
-import { getBlogModule } from "@/utils/blog-modules";
 import { allBlogPosts, getBlogPost } from "@/utils/blog-posts";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
+import { getBlogModule } from "./blog-modules";
 import TableOfContents from "./TableOfContent";
 
 export function generateStaticParams() {

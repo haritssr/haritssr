@@ -1,7 +1,6 @@
 import path from "node:path";
 
-import generateTOC from "utils/generateTOC";
-
+import generateTOC from "./generateTOC";
 import TableOfContentsClient from "./TableOfContentsClient";
 
 export default function TableOfContents({ slug }: { slug: string }) {
