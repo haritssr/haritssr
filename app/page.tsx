@@ -81,59 +81,61 @@ function ProfileSection() {
         </div>
         <div className="text-foreground/70 space-y-2.5 bg-white px-4 pt-3 pb-2.5 text-left lg:border-l">
           <h2 className="text-foreground font-semibold">Profile</h2>
-          <ProfileRow
-            icon={
-              <CodeBracketIcon
-                aria-hidden="true"
-                className="size-4 shrink-0 stroke-2"
-              />
-            }
-          >
-            <p>Web Product Engineer</p>
-          </ProfileRow>
-          <ProfileRow
-            icon={
-              <AcademicCapIcon
-                aria-hidden="true"
-                className="size-4 shrink-0 stroke-2"
-              />
-            }
-          >
-            <p>Math-Physics Teacher</p>
-          </ProfileRow>
-          <ProfileRow
-            icon={
-              <BuildingOffice2Icon
-                aria-hidden="true"
-                className="size-4 shrink-0 stroke-2"
-              />
-            }
-          >
-            <a
-              className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-              href="https://www.harimaki.com"
-              rel="noopener noreferrer"
-              target="_blank"
-              title="Harimaki Studio"
+          <div>
+            <ProfileRow
+              icon={
+                <CodeBracketIcon
+                  aria-hidden="true"
+                  className="size-4 shrink-0 stroke-2"
+                />
+              }
             >
-              Harimaki Studio
-            </a>
-          </ProfileRow>
-          <ProfileRow
-            icon={
-              <MapPinIcon
-                aria-hidden="true"
-                className="size-4 shrink-0 stroke-2"
-              />
-            }
-          >
-            <p>Tangerang, Indonesia</p>
-          </ProfileRow>
+              <p>Web Product Engineer</p>
+            </ProfileRow>
+            <ProfileRow
+              icon={
+                <AcademicCapIcon
+                  aria-hidden="true"
+                  className="size-4 shrink-0 stroke-2"
+                />
+              }
+            >
+              <p>Math-Physics Teacher</p>
+            </ProfileRow>
+            <ProfileRow
+              icon={
+                <BuildingOffice2Icon
+                  aria-hidden="true"
+                  className="size-4 shrink-0 stroke-2"
+                />
+              }
+            >
+              <a
+                className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+                href="https://www.harimaki.com"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Harimaki Studio"
+              >
+                Harimaki Studio
+              </a>
+            </ProfileRow>
+            <ProfileRow
+              icon={
+                <MapPinIcon
+                  aria-hidden="true"
+                  className="size-4 shrink-0 stroke-2"
+                />
+              }
+            >
+              <p>Tangerang, Indonesia</p>
+            </ProfileRow>
+          </div>
         </div>
         <ContactList />
-        <div className="space-y-2 bg-white px-4 pt-3 pb-2.5 lg:border-l">
+        <div className="space-y-2.5 bg-white px-4 pt-3 pb-2.5 lg:border-l">
           <h2 className="text-foreground font-semibold">Interests</h2>
-          <p className="text-foreground/70 -mt-1 leading-8">
+          <p className="text-foreground/70 leading-8">
             Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
             Physics, and Education.
           </p>
@@ -151,7 +153,7 @@ function ProfileRow({
   children: ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex min-h-8 items-center gap-2">
       {icon}
       {children}
     </div>

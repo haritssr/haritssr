@@ -36,7 +36,7 @@ export default function ContactList() {
       <h2 className="font-semibold" id="contacts-heading">
         Contacts
       </h2>
-      <ul className="space-y-0.5">
+      <ul>
         {contacts.map((contact) => (
           <li
             className="flex cursor-pointer items-center justify-between"
