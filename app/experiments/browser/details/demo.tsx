@@ -14,9 +14,9 @@ export default function DetailsDemo() {
         />
         <br /> Browser built-in disclosure.
         <br />
-        If you are using google translate extention in chrome and twicely click
-        the details tag and content of summary tag, the text will selected and
-        get weirdly translated.
+        If you use the Google Translate extension in Chrome, double-clicking the
+        details element or its summary can select the text and lead to odd
+        translations.
         <br />I prefer Headless UI or Radix UI similar UI component than this
         weird native API.
       </SubTitle>

@@ -281,7 +281,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Build a reusable select with TypeScript generics.",
         tags: ["forms", "typescript"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
       },
       {
         slug: "searchable-product-data",
@@ -510,7 +510,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Use native disclosure elements for expandable content.",
         tags: ["disclosure", "html"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-04"],
       },
       {
         slug: "select",

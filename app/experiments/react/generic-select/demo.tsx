@@ -53,7 +53,7 @@ export default function ReactGenericSelectDemo() {
           name="Nadia Makarevich Article&lsquo;s"
         />
         <ExplanationList>
-          <li>The option you choose will immedietly appear in Results.</li>
+          <li>The option you choose will immediately appear in Results.</li>
         </ExplanationList>
       </SubTitle>
       <SourceCodeLink />
