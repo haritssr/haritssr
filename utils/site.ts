@@ -1,4 +1,4 @@
-export const SITE_URL = "https://www.haritssr.com";
+export const SITE_URL = "https://haritssr.com";
 export const RSS_PATH = "/feed.xml";
 export const BLOG_PATH = "/blog";
 export const BLOG_DESCRIPTION =

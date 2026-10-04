@@ -1,4 +1,4 @@
-Personal and experimental site by Harits Syah [www.haritssr.com](https://www.haritssr.com)
+Personal and experimental site by Harits Syah [haritssr.com](https://haritssr.com)
 
 - [`projects`](/projects): Project portfolio and project detail pages.
 - [`experiments`](/experiments): Interactive experiments across frontend libraries, browser APIs, mathematics, and physics.
@@ -61,6 +61,12 @@ The image renderer uses Next.js's bundled font and needs no external service.
 
 The shared metadata identifies `@haritssr` as the Twitter/X site account.
 
+## Canonical URLs
+
+`utils/site.ts` defines `https://haritssr.com` as the primary domain, matching the
+host served by the deployment. Page canonicals, social URLs, the sitemap, and RSS
+feed all use this value; the `www` hostname redirects to the primary domain.
+
 ## Progressive Web App
 
 The site is installable over HTTPS in supporting browsers. The offline behavior
@@ -86,7 +92,7 @@ caches and preserve unrelated caches. No full offline-content support is promise
 
 ## RSS Feed
 
-The blog RSS feed is available at [`/feed.xml`](https://www.haritssr.com/feed.xml).
+The blog RSS feed is available at [`/feed.xml`](https://haritssr.com/feed.xml).
 The site footer includes a link to the feed. Visitors can paste this URL into
 an RSS reader such as Feedly, Inoreader, NetNewsWire, or Thunderbird.
 

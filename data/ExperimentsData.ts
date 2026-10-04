@@ -777,7 +777,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Preview supporting information near a hovered link with Radix UI.",
         tags: ["overlays", "accessibility"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-04"],
       },
       {
         slug: "popover",

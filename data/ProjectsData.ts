@@ -195,7 +195,7 @@ export const ProjectsData: ProjectsDataType[] = [
         "Harits Syah's personal site. Portfolio, blog, and frontend experiments.",
       company_name: "Personal Site",
       phone_number: "+62-8953-3110-3401",
-      website: "https://www.haritssr.com",
+      website: "https://haritssr.com",
       office_location: "-",
       industry: "Personal website",
     },

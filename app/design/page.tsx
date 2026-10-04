@@ -48,7 +48,7 @@ export default function DesignSystem() {
       <PageTitle>Design</PageTitle>
       <TopLevelSectionPageDescription>
         Shared design system for this site,{" "}
-        <ExternalLink href="https://www.haritssr.com" name="haritssr.com" /> and{" "}
+        <ExternalLink href="https://haritssr.com" name="haritssr.com" /> and{" "}
         <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
       </TopLevelSectionPageDescription>
       <div className="space-y-20">

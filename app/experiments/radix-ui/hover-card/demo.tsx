@@ -42,10 +42,7 @@ export default function RadixHoverCardDemo() {
                 href="https://x.com/intent/follow?screen_name=haritssr"
                 name="@haritssr"
               />
-              <ExternalLink
-                href="https://www.haritssr.com"
-                name="haritssr.com"
-              />
+              <ExternalLink href="https://haritssr.com" name="haritssr.com" />
             </div>
             <div className="text-zinc-600">22</div>
             <div className="text-zinc-700">South Tangerang</div>
