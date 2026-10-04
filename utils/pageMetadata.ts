@@ -20,7 +20,7 @@ export function createPageMetadata({
   const url = new URL(path, SITE_URL).toString();
   const imageUrl = new URL("/api/og", SITE_URL);
   imageUrl.search = new URLSearchParams({
-    v: "blue-mint-1",
+    v: "blue-mint-jpeg-2",
     title,
     description: socialDescription,
     path,
@@ -28,6 +28,7 @@ export function createPageMetadata({
   const images = [
     {
       url: imageUrl.toString(),
+      type: "image/jpeg",
       ...OPEN_GRAPH_IMAGE_SIZE,
       alt: `${title} — ${socialDescription}`,
     },

@@ -46,10 +46,12 @@ not require editing a separate import registry.
 
 ## Social Previews
 
-Every page's metadata points to `/api/og`, which renders a 1200 × 630 PNG with
-`ImageResponse` from `next/og`. `utils/pageMetadata.ts` passes the page's title,
-social description, and path in the image URL, so content changes produce a new
-preview URL. Open Graph and Twitter use the same image and descriptive alt text.
+Every page's metadata points to `/api/og`, which renders a 1200 × 630 image with
+`ImageResponse` from `next/og`, then compresses it with Sharp to a quality-90 JPEG
+with full chroma resolution to preserve text clarity and reduce preview file
+size. `utils/pageMetadata.ts` passes the page's title, social description, and
+path in the image URL, so content changes produce a new preview URL. Open Graph
+and Twitter use the same image and descriptive alt text.
 Edit `app/api/og/OpenGraphCard.tsx` to change the shared JSX design and palette.
 The shared watercolor background is `public/images/og-watercolor-blue-mint.png`;
 page text and CTAs are rendered dynamically over it. The route loads the local
