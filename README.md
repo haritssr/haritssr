@@ -59,6 +59,8 @@ image once and embeds it without a network request. Change the `v` parameter in
 `utils/pageMetadata.ts` when updating the design to refresh cached previews.
 The image renderer uses Next.js's bundled font and needs no external service.
 
+The shared metadata identifies `@haritssr` as the Twitter/X site account.
+
 ## Progressive Web App
 
 The site is installable over HTTPS in supporting browsers. The offline behavior

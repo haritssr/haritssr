@@ -53,6 +53,7 @@ export function createPageMetadata({
     },
     twitter: {
       card: "summary_large_image",
+      site: "@haritssr",
       title,
       description: socialDescription,
       images,
