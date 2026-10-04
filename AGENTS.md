@@ -93,3 +93,14 @@ limits, and durable production storage. See
 - Use the skill that is most specific to the task being performed.
 - Use the smallest set of relevant skills needed to complete the task.
 - Do not invoke unrelated or overlapping skills merely because they are available.
+
+# Responding to Explicit Instructions
+
+When the user gives explicit directions, take one of these actions:
+
+1. If you believe the directions are incorrect, explain why with concrete reasoning.
+2. If the directions are ambiguous, request clarification.
+3. Otherwise, execute the directions.
+
+Do not silently ignore instructions or leave them unaddressed. If execution is
+blocked, explain the blocker and what is needed to proceed.
