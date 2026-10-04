@@ -16,6 +16,14 @@ export default defineConfig({
   jsPlugins: shadcn.jsPlugins,
   overrides: [
     {
+      files: ["app/api/og/OpenGraphCard.tsx"],
+      rules: {
+        // ImageResponse renders inline styles and SVG colors without browser CSS.
+        "shadcn/no-inline-styles": "off",
+        "shadcn/no-raw-colors": "off",
+      },
+    },
+    {
       files: ["components/**"],
       rules: {
         // Component definitions own their appearance and class composition.

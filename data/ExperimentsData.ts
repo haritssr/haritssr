@@ -1132,7 +1132,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Record tools and their quantities in a local SQLite database.",
         tags: ["local-data", "forms"],
         createdAt: "2026-08-19",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
       },
       {
         slug: "emoji-groups",

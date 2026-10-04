@@ -44,6 +44,19 @@ Blog posts are local MDX files in `data/blog/`; Turbopack discovers their compil
 modules lazily, while frontmatter is validated on the server. Adding a post does
 not require editing a separate import registry.
 
+## Social Previews
+
+Every page's metadata points to `/api/og`, which renders a 1200 × 630 PNG with
+`ImageResponse` from `next/og`. `utils/pageMetadata.ts` passes the page's title,
+social description, and path in the image URL, so content changes produce a new
+preview URL. Open Graph and Twitter use the same image and descriptive alt text.
+Edit `app/api/og/OpenGraphCard.tsx` to change the shared JSX design and palette.
+The shared watercolor background is `public/images/og-watercolor-blue-mint.png`;
+page text and CTAs are rendered dynamically over it. The route loads the local
+image once and embeds it without a network request. Change the `v` parameter in
+`utils/pageMetadata.ts` when updating the design to refresh cached previews.
+The image renderer uses Next.js's bundled font and needs no external service.
+
 ## Progressive Web App
 
 The site is installable over HTTPS in supporting browsers. The offline behavior

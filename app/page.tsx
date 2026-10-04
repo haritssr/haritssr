@@ -4,6 +4,7 @@ import {
   CodeBracketIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline";
+import type { Metadata } from "next";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
@@ -15,8 +16,23 @@ import HomeSearch from "@/components/HomeSearch";
 import MoreItemsLink from "@/components/MoreItemsLink";
 import ProjectsCard from "@/components/ProjectsCard";
 import { ProjectsData } from "@/data/ProjectsData";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 const HOME_PROJECTS_LIMIT = 4;
+
+const homeTitle = "Harits Syah — Web Product Engineer & Math-Physics Teacher";
+
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: homeTitle,
+    description:
+      "Explore Harits Syah's projects, interactive experiments, and writing on web development, math, physics, and education. Developer, teacher, and founder.",
+    socialDescription:
+      "Projects, experiments, and writing by Harits Syah, a web product engineer and math-physics teacher.",
+    path: "/",
+  }),
+  title: { absolute: homeTitle },
+};
 
 export default function Home() {
   const remainingProjects = Math.max(

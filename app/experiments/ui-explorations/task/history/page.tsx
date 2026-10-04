@@ -3,10 +3,17 @@ import { connection } from "next/server";
 import BackButton from "@/components/BackButton";
 import PageTitle from "@/components/PageTitle";
 import SubTitle from "@/components/SubTitle";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 import { getTaskHistory } from "../db";
 import Section from "../Section";
 import TaskItem from "../TaskItem";
+
+export const metadata = createPageMetadata({
+  title: "Task History",
+  description: "A record of daily tasks and completed work.",
+  path: "/experiments/ui-explorations/task/history",
+});
 
 export default async function TaskHistoryPage() {
   await connection();

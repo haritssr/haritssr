@@ -5,6 +5,7 @@ import { connection } from "next/server";
 
 import SubTitle from "@/components/SubTitle";
 import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 import { createTool, listTools } from "./db";
 
@@ -12,10 +13,11 @@ export const runtime = "nodejs";
 
 const TOOLS_PATH = "/experiments/ui-explorations/tools";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Tools",
   description: "Create and inspect tools in the experiment database.",
-};
+  path: TOOLS_PATH,
+});
 
 const currencyFormatter = new Intl.NumberFormat("id-ID", {
   style: "currency",

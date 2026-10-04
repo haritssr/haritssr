@@ -3,9 +3,16 @@ import { connection } from "next/server";
 import BackButton from "@/components/BackButton";
 import PageTitle from "@/components/PageTitle";
 import SubTitle from "@/components/SubTitle";
+import { createPageMetadata } from "@/utils/pageMetadata";
 
 import type { TaskHistoryEntry } from "../db";
 import { getTaskHistory, getTasksForDate, getTodayTaskDate } from "../db";
+
+export const metadata = createPageMetadata({
+  title: "Task Statistics",
+  description: "Daily task completion, time budgets, and activity trends.",
+  path: "/experiments/ui-explorations/task/statistics",
+});
 
 export default async function TaskStatisticsPage() {
   await connection();
