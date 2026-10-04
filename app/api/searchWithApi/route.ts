@@ -10,7 +10,7 @@ const searchableUserFields = ["firstName", "lastName", "maidenName"] as const;
 
 export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const q = searchParams.get("q")?.toLowerCase() ?? "";
+  const q = searchParams.get("q")?.trim().toLowerCase() ?? "";
 
   const matchingUsers = users.filter((user) =>
     searchableUserFields.some((key) => user[key].toLowerCase().includes(q))
