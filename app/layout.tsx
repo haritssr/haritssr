@@ -36,6 +36,11 @@ export const metadata: Metadata = {
         type: "image/png",
         sizes: "32x32",
       },
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+        sizes: "any",
+      },
     ],
     apple: "/apple-icon.png",
   },
