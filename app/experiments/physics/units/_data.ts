@@ -7,7 +7,7 @@ export interface UnitDefinition {
 }
 
 export const DESCRIPTION =
-  "Besaran pokok dan besaran turunan dalam Sistem Internasional (SI).";
+  "Base and derived physical quantities in the International System of Units (SI).";
 
 export const BASE_UNITS = [
   {

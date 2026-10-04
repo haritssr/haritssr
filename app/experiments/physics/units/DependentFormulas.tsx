@@ -45,9 +45,10 @@ export default function DependentFormulas({
       <div className="border-border grid items-center gap-x-6 gap-y-3 border-b p-4 sm:grid-cols-2">
         <div className="min-w-0">
           <SelectField
-            label="Pilih besaran"
+            label="Select a quantity"
             labelPlacement="inside"
             value={selected.quantity}
+            valueLang="id"
             onValueChange={setSelectedQuantity}
             options={quantities.map((quantity) => ({
               label: quantity.quantity,
@@ -56,7 +57,7 @@ export default function DependentFormulas({
           />
         </div>
         <p className="text-foreground/70 text-sm">
-          <span className="text-foreground font-medium">
+          <span className="text-foreground font-medium" lang="id">
             {selected.quantity} (<MathSymbol value={selected.quantitySymbol} />)
           </span>
           <span className="mx-2" aria-hidden="true">
@@ -67,7 +68,10 @@ export default function DependentFormulas({
       </div>
       <div className="p-4">
         <p aria-live="polite" className="text-foreground/70 mb-3 text-sm">
-          {selected.formulas.length} rumus untuk {dependentCount} besaran lain
+          {selected.formulas.length}{" "}
+          {selected.formulas.length === 1 ? "formula" : "formulas"} for{" "}
+          {dependentCount}{" "}
+          {dependentCount === 1 ? "other quantity" : "other quantities"}
         </p>
         {selected.formulas.length > 0 ? (
           <ul className="grid gap-3 md:grid-cols-2">
@@ -77,11 +81,11 @@ export default function DependentFormulas({
                 key={`${formula.result}:${formula.formulaName}:${formulaIndex}`}
               >
                 <div>
-                  <span className="font-medium">
+                  <span className="font-medium" lang="id">
                     {formula.result} (
                     <MathSymbol value={formula.resultSymbol} />)
                   </span>
-                  <p className="text-foreground/60 text-xs">
+                  <p className="text-foreground/60 text-xs" lang="id">
                     {formula.formulaName}
                   </p>
                 </div>
@@ -89,9 +93,9 @@ export default function DependentFormulas({
                   <MathSymbol value={formula.expression} />
                 </div>
                 <p className="text-foreground/70 text-xs">
-                  Melalui:{" "}
+                  Via:{" "}
                   {formula.prerequisites.map((prerequisite, index) => (
-                    <span key={`${prerequisite.label}:${index}`}>
+                    <span key={`${prerequisite.label}:${index}`} lang="id">
                       {index > 0 ? ", " : null}
                       {prerequisite.label}
                       {prerequisite.symbol !== undefined &&
@@ -106,7 +110,7 @@ export default function DependentFormulas({
                 </p>
                 {formula.condition !== undefined && formula.condition !== "" ? (
                   <p className="text-foreground/60 text-xs">
-                    Syarat: {formula.condition}
+                    Condition: <span lang="id">{formula.condition}</span>
                   </p>
                 ) : null}
               </li>
@@ -114,7 +118,7 @@ export default function DependentFormulas({
           </ul>
         ) : (
           <p className="text-foreground/70 text-sm">
-            Belum ada rumus pada daftar ini yang menggunakan besaran tersebut.
+            No formulas in this list use this quantity yet.
           </p>
         )}
       </div>

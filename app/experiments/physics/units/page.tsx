@@ -42,12 +42,14 @@ const PREREQUISITE_GRAPH_NODES = [
     id: `base:${unit.quantity}`,
     kind: "base",
     label: unit.quantity,
+    lang: "id",
     symbol: <MathSymbol value={unit.quantitySymbol} />,
   })),
   ...DERIVED_UNITS.map((unit): PrerequisiteGraphNodeData => ({
     id: `derived:${unit.quantity}`,
     kind: "derived",
     label: unit.quantity,
+    lang: "id",
     symbol: <MathSymbol value={unit.quantitySymbol} />,
   })),
 ];
@@ -74,43 +76,43 @@ export default function UnitsPage() {
           { name: "units", path: "/experiments/physics/units" },
         ]}
       />
-      <div lang="id">
+      <div>
         <SubTitle>{DESCRIPTION}</SubTitle>
         <SourceCodeLink />
         <div className="space-y-20">
           <section>
-            <Section name="Besaran Pokok" />
-            <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />
+            <Section name="Base Quantities" />
+            <UnitsTable caption="The seven SI base units" units={BASE_UNITS} />
           </section>
           <section>
-            <Section name="Besaran Turunan" />
+            <Section name="Derived Quantities" />
             <UnitsTable
-              caption="Besaran turunan yang umum dipelajari di SMA"
+              caption="Common derived quantities studied in high school physics"
               showFormulas
               units={DERIVED_UNITS}
             />
           </section>
           <section>
-            <Section name="Peta Prasyarat" />
+            <Section name="Prerequisite Map" />
             <p className="text-foreground/70 mb-4 text-sm">
-              Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
-              digunakan di SMA.
+              Open a quantity to view its prerequisite concepts and formulas
+              commonly used in high school physics.
             </p>
             <PrerequisiteDiagrams units={DERIVED_UNITS} />
           </section>
           <section>
-            <Section name="Besaran yang Bergantung" />
+            <Section name="Dependent Quantities" />
             <p className="text-foreground/70 mb-4 text-sm">
-              Pilih besaran untuk melihat rumus dan besaran lain yang langsung
-              menggunakannya dalam daftar fisika SMA ini.
+              Select a quantity to see its formulas and the other quantities
+              that directly depend on it in this high school physics reference.
             </p>
             <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
           </section>
           <section>
-            <Section name="Graf Prasyarat" />
+            <Section name="Prerequisite Graph" />
             <p className="text-foreground/70 mb-4 text-sm">
-              Klik sebuah besaran untuk menyorot jalur yang menghubungkannya
-              dengan prasyarat besaran pokok dan turunan.
+              Select a quantity to highlight its connections to base and derived
+              quantities.
             </p>
             <PrerequisiteGraph
               edges={PREREQUISITE_GRAPH_EDGES}
@@ -251,7 +253,9 @@ function PrerequisiteNodeCard({ node }: { node: PrerequisiteNode }) {
           : "border-border bg-background"
       }`}
     >
-      <span className="text-xs">{node.label}</span>
+      <span className="text-xs" lang="id">
+        {node.label}
+      </span>
       {node.symbol !== undefined && node.symbol !== "" ? (
         <span className="text-foreground/70 mt-1">
           <MathSymbol value={node.symbol} />
@@ -270,7 +274,7 @@ function FormulaPath({
 }) {
   return (
     <div className="border-border border p-3">
-      <div className="text-foreground/60 mb-3 text-xs">
+      <div className="text-foreground/60 mb-3 text-xs" lang="id">
         {formulaDefinition.name}
       </div>
       <div className="flex flex-col items-stretch gap-2 md:flex-row md:items-center">
@@ -301,7 +305,7 @@ function FormulaPath({
           className="text-foreground/40 mx-auto size-4 shrink-0 rotate-90 md:mx-0 md:rotate-0"
         />
         <div className="border-border bg-foreground/5 flex min-h-14 flex-1 items-center justify-center border px-3 py-2 text-center">
-          <span className="text-xs">
+          <span className="text-xs" lang="id">
             {result.quantity} ( <MathSymbol value={result.quantitySymbol} /> )
           </span>
         </div>
@@ -309,7 +313,7 @@ function FormulaPath({
       {formulaDefinition.condition !== undefined &&
       formulaDefinition.condition !== "" ? (
         <p className="text-foreground/60 mt-3 text-xs">
-          Syarat: {formulaDefinition.condition}
+          Condition: <span lang="id">{formulaDefinition.condition}</span>
         </p>
       ) : null}
     </div>
@@ -324,7 +328,9 @@ function PrerequisiteDiagrams({ units }: { units: readonly UnitDefinition[] }) {
           <Accordion.Header>
             <Accordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
               <span className="flex min-w-0 items-center gap-2">
-                <span className="truncate">{unit.quantity}</span>
+                <span className="truncate" lang="id">
+                  {unit.quantity}
+                </span>
                 <span className="text-foreground/60 shrink-0">
                   <MathSymbol value={unit.quantitySymbol} />
                 </span>
@@ -338,13 +344,16 @@ function PrerequisiteDiagrams({ units }: { units: readonly UnitDefinition[] }) {
           <Accordion.Panel className="border-border text-foreground/70 rounded-b-lg border-r border-b border-l bg-white p-3 text-sm">
             <div className="mb-3 flex items-center gap-3 text-xs">
               <span className="text-foreground/60">
-                Prasyarat → rumus → hasil
+                Prerequisites → formula → result
               </span>
               <span aria-hidden="true" className="text-foreground/40">
                 ·
               </span>
               <span className="text-foreground/60">
-                {getFormulaDefinitions(unit.quantity).length} rumus
+                {getFormulaDefinitions(unit.quantity).length}{" "}
+                {getFormulaDefinitions(unit.quantity).length === 1
+                  ? "formula"
+                  : "formulas"}
               </span>
             </div>
             <div className="space-y-3">
@@ -370,31 +379,31 @@ function UnitsTable({ caption, showFormulas = false, units }: UnitsTableProps) {
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
           <th className="w-12 px-3 py-2 text-center font-medium" scope="col">
-            No
+            No.
           </th>
           <th className="px-3 py-2 text-left font-medium" scope="col">
-            Besaran
+            Quantity
           </th>
           <th className="px-3 py-2 text-left font-medium" scope="col">
-            Simbol besaran
+            Quantity symbol
           </th>
           {showFormulas ? (
             <th className="px-3 py-2 text-left font-medium" scope="col">
-              Rumus
+              Formula
             </th>
           ) : null}
           <th className="px-3 py-2 text-left font-medium" scope="col">
-            Satuan
+            Unit
           </th>
           <th className="px-3 py-2 text-left font-medium" scope="col">
-            Simbol satuan
+            Unit symbol
           </th>
           <th className="px-3 py-2 text-left font-medium" scope="col">
-            Dimensi
+            Dimension
           </th>
         </tr>
       </thead>
-      <tbody className="divide-border divide-y">
+      <tbody className="divide-border divide-y" lang="id">
         {units.map((unit, index) => (
           <tr className="divide-border divide-x" key={unit.quantity}>
             <td className="w-12 px-3 py-2 text-center tabular-nums">

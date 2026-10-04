@@ -1171,7 +1171,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     experiments: [
       {
         slug: "units",
-        title: "Besaran dan Satuan",
+        title: "Physical Quantities and Units",
         description:
           "Explore SI quantities, units, formulas, and their prerequisite graph.",
         tags: ["mathematics", "graphs"],

@@ -10,6 +10,7 @@ export function SelectField({
   options,
   placeholder,
   value,
+  valueLang,
 }: {
   label: string;
   labelPlacement?: "above" | "inside";
@@ -17,6 +18,7 @@ export function SelectField({
   options: readonly { label: string; value: string }[];
   placeholder?: string;
   value: string | null;
+  valueLang?: string;
 }) {
   const id = useId();
 
@@ -50,7 +52,7 @@ export function SelectField({
             {labelPlacement === "inside" ? (
               <span className="text-muted">{label}:</span>
             ) : null}
-            <Select.Value placeholder={placeholder} />
+            <Select.Value lang={valueLang} placeholder={placeholder} />
           </span>
           <Select.Icon>
             <ChevronDownIcon aria-hidden="true" className="size-4 shrink-0" />
@@ -66,7 +68,9 @@ export function SelectField({
                     key={option.value}
                     value={option.value}
                   >
-                    <Select.ItemText>{option.label}</Select.ItemText>
+                    <Select.ItemText lang={valueLang}>
+                      {option.label}
+                    </Select.ItemText>
                     <Select.ItemIndicator className="absolute top-2.5 right-3">
                       <CheckIcon aria-hidden="true" className="size-4" />
                     </Select.ItemIndicator>

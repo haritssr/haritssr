@@ -9,6 +9,7 @@ export interface PrerequisiteGraphNodeData {
   id: string;
   kind: "base" | "derived";
   label: string;
+  lang?: string;
   symbol: ReactNode;
 }
 
@@ -145,10 +146,10 @@ export default function PrerequisiteGraph({
         <Dialog.Popup className="bg-background text-foreground fixed inset-0 z-90 flex min-h-0 flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] outline-hidden">
           <div className="border-border flex shrink-0 items-center justify-between border-b px-3 py-2.5">
             <Dialog.Title className="text-sm font-medium">
-              Graf Prasyarat
+              Prerequisite Graph
             </Dialog.Title>
             <Dialog.Close
-              aria-label="Tutup tampilan penuh"
+              aria-label="Close full view"
               className="text-muted hover:bg-interface-hover hover:text-foreground focus-visible:outline-action inline-flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
               type="button"
             >
@@ -325,28 +326,28 @@ function GraphToolbar({
           aria-hidden="true"
           className="bg-graph-base size-2.5 shrink-0 rounded-full"
         />
-        Besaran pokok
+        Base quantities
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
           className="bg-graph-derived size-2.5 shrink-0 rounded-full"
         />
-        Besaran turunan
+        Derived quantities
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
           className="bg-graph-direct size-2.5 shrink-0 rounded-full"
         />
-        Prasyarat langsung
+        Direct prerequisites
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
           className="bg-graph-indirect size-2.5 shrink-0 rounded-full"
         />
-        Prasyarat lanjutan
+        Indirect prerequisites
       </span>
       {selectedNode || showFullViewButton ? (
         <div className="ml-auto flex items-center gap-3">
@@ -356,12 +357,12 @@ function GraphToolbar({
               onClick={onReset}
               type="button"
             >
-              Hapus sorotan
+              Clear highlights
             </button>
           ) : null}
           {showFullViewButton ? (
             <Dialog.Trigger
-              aria-label="Lihat penuh"
+              aria-label="Open full view"
               className="inline-flex cursor-pointer items-center gap-1.5"
               type="button"
             >
@@ -385,21 +386,41 @@ function GraphStatus({
   nodes: readonly PrerequisiteGraphNodeData[];
   selectedNode: PrerequisiteGraphNodeData | undefined;
 }) {
-  const direct = nodes
-    .filter((node) => activeNodeDepths?.get(node.id) === 1)
-    .map((node) => node.label);
-  const further = nodes
-    .filter((node) => (activeNodeDepths?.get(node.id) ?? 0) > 1)
-    .map((node) => node.label);
+  const direct = nodes.filter((node) => activeNodeDepths?.get(node.id) === 1);
+  const further = nodes.filter(
+    (node) => (activeNodeDepths?.get(node.id) ?? 0) > 1
+  );
   return (
     <div className="border-border border-b px-3 py-2 text-xs">
       <output aria-live="polite" className="text-muted">
-        {selectedNode
-          ? `${selectedNode.label} dan ${Math.max((activeNodeIds?.size ?? 1) - 1, 0)} prasyarat disorot. Prasyarat langsung: ${direct.join(", ") || "tidak ada"}. Prasyarat lanjutan: ${further.join(", ") || "tidak ada"}.`
-          : "Klik sebuah besaran untuk menyorot seluruh prasyaratnya."}
+        {selectedNode ? (
+          <>
+            <span lang={selectedNode.lang}>{selectedNode.label}</span> and{" "}
+            {Math.max((activeNodeIds?.size ?? 1) - 1, 0)} prerequisites
+            highlighted. Direct prerequisites: <NodeLabels nodes={direct} />.
+            Indirect prerequisites: <NodeLabels nodes={further} />.
+          </>
+        ) : (
+          "Select a quantity to highlight all of its prerequisites."
+        )}
       </output>
     </div>
   );
+}
+
+function NodeLabels({
+  nodes,
+}: {
+  nodes: readonly PrerequisiteGraphNodeData[];
+}) {
+  return nodes.length === 0
+    ? "none"
+    : nodes.map((node, index) => (
+        <span key={node.id} lang={node.lang}>
+          {index > 0 ? ", " : null}
+          {node.label}
+        </span>
+      ));
 }
 
 function GraphViewport({
@@ -547,7 +568,7 @@ function GraphViewport({
 
           return (
             <button
-              aria-label={`Sorot prasyarat ${node.label}`}
+              aria-label={`Highlight prerequisites for ${node.label}`}
               aria-pressed={isSelected}
               className={`focus-visible:outline-action absolute top-(--node-top) left-(--node-left) flex h-15 w-(--node-width) flex-col items-center justify-center overflow-hidden rounded-xl border px-2 text-center transition-[opacity,border-color,background-color] duration-200 focus-visible:z-10 focus-visible:outline-2 ${kindStyles} ${stateStyles}`}
               key={node.id}
@@ -558,7 +579,9 @@ function GraphViewport({
               title={node.label}
               type="button"
             >
-              <span className="max-w-full truncate text-xs">{node.label}</span>
+              <span className="max-w-full truncate text-xs" lang={node.lang}>
+                {node.label}
+              </span>
               <span
                 className={`mt-1 max-w-full truncate text-xs ${isSelected ? "text-background/80" : "text-foreground/70"}`}
               >
