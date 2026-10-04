@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { SITE_THEME_COLOR } from "@/utils/site";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Harits Syah",
@@ -10,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#000000",
+    theme_color: SITE_THEME_COLOR,
     icons: [
       {
         src: "/icons/haritssr.svg",

@@ -75,6 +75,12 @@ The root layout renders `WebSite` and `Person` JSON-LD using
 structured-data title comes from the same metadata as its page title. All JSON-LD
 is serialized with `<` escaped before insertion into a script element.
 
+## Browser Appearance
+
+`SITE_THEME_COLOR` in `utils/site.ts` sets the browser and installed-app toolbar
+color through the root viewport export and app manifest. The offline document
+declares the same color in its static HTML.
+
 ## Progressive Web App
 
 The site is installable over HTTPS in supporting browsers. The offline behavior

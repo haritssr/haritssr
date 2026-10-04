@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import BottomBar from "@/components/BottomBar";
@@ -11,7 +11,7 @@ import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import "./globals.css";
-import { SITE_URL } from "@/utils/site";
+import { SITE_THEME_COLOR, SITE_URL } from "@/utils/site";
 
 const inter = localFont({
   src: "../public/fonts/InterVariable.woff2",
@@ -45,6 +45,10 @@ export const metadata: Metadata = {
     default: "Harits Syah",
     template: "%s - Harits Syah",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: SITE_THEME_COLOR,
 };
 
 export default function RootLayout({
