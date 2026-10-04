@@ -22,7 +22,7 @@ export default function ExperimentDomainIndex({
           <Image alt="" height={36} src={domain.logoSrc} width={36} />
         </div>
         <h1 className="text-2xl font-semibold sm:text-3xl">{domain.title}</h1>
-        <div className="text-foreground/90 text-lg">{domain.description}</div>
+        <p className="text-foreground/90 text-lg">{domain.description}</p>
         <div className="text-foreground/70 text-lg">
           {experiments.length} experiments
         </div>
