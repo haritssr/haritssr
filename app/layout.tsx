@@ -29,6 +29,16 @@ export const metadata: Metadata = {
     title: "Harits Syah",
   },
   description: "Developer, teacher, and founder.",
+  icons: {
+    icon: [
+      {
+        url: "/favicon-32x32.png",
+        type: "image/png",
+        sizes: "32x32",
+      },
+    ],
+    apple: "/apple-icon.png",
+  },
   metadataBase: new URL(SITE_URL),
   robots: {
     follow: true,

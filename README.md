@@ -81,6 +81,10 @@ is serialized with `<` escaped before insertion into a script element.
 color through the root viewport export and app manifest. The offline document
 declares the same color in its static HTML.
 
+The root metadata registers `/favicon-32x32.png` alongside the existing ICO and
+Apple touch icon. The PNG is rasterized from `public/icons/haritssr.svg` so all
+icons use the site's current logo.
+
 ## Progressive Web App
 
 The site is installable over HTTPS in supporting browsers. The offline behavior
