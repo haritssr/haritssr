@@ -137,10 +137,10 @@ export default function Home() {
               href="/cv-dec-2024.pdf"
               title="Download CV"
             >
-              CV
+              Download CV
             </a>
           </li>
-          <li>Touch typist, ±90 WPM.</li>
+          <li>Touch typist, around 90 WPM.</li>
           <li>Constraints give shape.</li>
           <li>
             <ExternalLink
@@ -151,7 +151,7 @@ export default function Home() {
           <li>
             <ExternalLink
               href="https://beff.substack.com/p/notes-on-eacc-principles-and-tenets"
-              name="Effective Accelerationism"
+              name="Effective accelerationism"
             />
             (
             <ExternalLink
@@ -168,10 +168,10 @@ export default function Home() {
           </li>
           <li>
             Press <kbd className="text-foreground">⌘P</kbd> (or{" "}
-            <kbd className="text-foreground">ctrl+P</kbd>) to search the site.
+            <kbd className="text-foreground">Ctrl+P</kbd>) to search the site.
           </li>
-          <li>I use Codex CLI in Zed Editor for dev.</li>
-          <li>Former chess player, ±2000 Elo.</li>
+          <li>I develop with Codex CLI in Zed.</li>
+          <li>Former chess player, rated around 2000 Elo.</li>
         </ul>
       </Section>
     </div>
