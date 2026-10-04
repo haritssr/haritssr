@@ -1,5 +1,6 @@
 import { allBlogPosts } from "@/utils/blog-posts";
-import { renderBlogRssFeed } from "@/utils/rss";
+
+import { renderBlogRssFeed } from "./rss";
 
 export const dynamic = "force-static";
 

@@ -79,7 +79,7 @@ The feed is generated from the local blog post index:
    `YYYY-MM-DD` format.
 2. `utils/blog-posts.ts` parses and validates the frontmatter, derives the slug
    and word count, and loads the posts into `allBlogPosts`.
-3. `app/feed.xml/route.ts` passes the collection to `utils/rss.ts`.
+3. `app/feed.xml/route.ts` passes the collection to `app/feed.xml/rss.ts`.
 4. The renderer creates an RSS 2.0 document with each post's title,
    summary, canonical URL, and publication date.
 

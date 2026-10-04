@@ -1,4 +1,4 @@
-import { BLOG_DESCRIPTION, BLOG_PATH, RSS_PATH, SITE_URL } from "./site";
+import { BLOG_DESCRIPTION, BLOG_PATH, RSS_PATH, SITE_URL } from "@/utils/site";
 
 const RSS_LANGUAGE = "en-US";
 const RSS_TITLE = "Harits Syah — Blog";
