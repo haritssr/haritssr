@@ -1176,7 +1176,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore SI quantities, units, formulas, and their prerequisite graph.",
         tags: ["mathematics", "graphs"],
         createdAt: "2026-09-20",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
       },
       {
         slug: "electron-configuration",
@@ -1317,7 +1317,7 @@ export function getExperimentMetadata(
   domainSlug: string,
   experimentSlug: string,
   overrides: { description?: string } = {}
-): Metadata {
+): ReturnType<typeof createPageMetadata> {
   const domain = getExperimentDomain(domainSlug);
   const experiment = getExperiment(domainSlug, experimentSlug);
   return createPageMetadata({

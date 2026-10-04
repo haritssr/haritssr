@@ -15,18 +15,20 @@ import ExternalLink from "@/components/ExternalLink";
 import HomeSearch from "@/components/HomeSearch";
 import MoreItemsLink from "@/components/MoreItemsLink";
 import ProjectsCard from "@/components/ProjectsCard";
+import { PageStructuredData } from "@/components/StructuredData";
 import { ProjectsData } from "@/data/ProjectsData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 const HOME_PROJECTS_LIMIT = 4;
 
 const homeTitle = "Harits Syah — Web Product Engineer & Math-Physics Teacher";
+const homeDescription =
+  "Explore Harits Syah's projects, interactive experiments, and writing on web development, math, physics, and education. Developer, teacher, and founder.";
 
 export const metadata: Metadata = {
   ...createPageMetadata({
     title: homeTitle,
-    description:
-      "Explore Harits Syah's projects, interactive experiments, and writing on web development, math, physics, and education. Developer, teacher, and founder.",
+    description: homeDescription,
     socialDescription:
       "Projects, experiments, and writing by Harits Syah, a web product engineer and math-physics teacher.",
     path: "/",
@@ -41,6 +43,11 @@ export default function Home() {
   );
   return (
     <div className="space-y-20 sm:mt-10">
+      <PageStructuredData
+        name={homeTitle}
+        description={homeDescription}
+        path="/"
+      />
       <section aria-labelledby="profile-heading" className="pt-5" id="Identity">
         <div className="corner-squircle border-border divide-border bg-border-interface-hover lg:bg-surface-hover grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 lg:gap-5 lg:divide-x">
           <div className="flex items-center justify-center bg-white py-5 select-none">

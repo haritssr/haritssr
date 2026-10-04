@@ -16,7 +16,7 @@ export function createPageMetadata({
   path: string;
   publishedTime?: string;
   socialDescription?: string;
-}): Metadata {
+}): Metadata & { title: string; description: string } {
   const url = new URL(path, SITE_URL).toString();
   const imageUrl = new URL("/api/og", SITE_URL);
   imageUrl.search = new URLSearchParams({

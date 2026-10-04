@@ -2,7 +2,6 @@ import { Accordion } from "@base-ui/react/accordion";
 
 import "katex/dist/katex.min.css";
 import { ArrowRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
-import type { Metadata } from "next";
 
 import PrerequisiteGraph from "@/components/PrerequisiteGraph";
 import type {
@@ -11,6 +10,7 @@ import type {
 } from "@/components/PrerequisiteGraph";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
+import { PageStructuredData } from "@/components/StructuredData";
 import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -56,57 +56,70 @@ const PREREQUISITE_GRAPH_EDGES = createPrerequisiteGraphEdges();
 
 const QUANTITY_DEPENDENTS = createQuantityDependents();
 
-export const metadata: Metadata = getExperimentMetadata("physics", "units", {
+export const metadata = getExperimentMetadata("physics", "units", {
   description: DESCRIPTION,
 });
 
 export default function UnitsPage() {
   return (
-    <div lang="id">
-      <SubTitle>{DESCRIPTION}</SubTitle>
-      <SourceCodeLink />
-      <div className="space-y-20">
-        <section>
-          <Section name="Besaran Pokok" />
-          <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />
-        </section>
-        <section>
-          <Section name="Besaran Turunan" />
-          <UnitsTable
-            caption="Besaran turunan yang umum dipelajari di SMA"
-            showFormulas
-            units={DERIVED_UNITS}
-          />
-        </section>
-        <section>
-          <Section name="Peta Prasyarat" />
-          <p className="text-foreground/70 mb-4 text-sm">
-            Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
-            digunakan di SMA.
-          </p>
-          <PrerequisiteDiagrams units={DERIVED_UNITS} />
-        </section>
-        <section>
-          <Section name="Besaran yang Bergantung" />
-          <p className="text-foreground/70 mb-4 text-sm">
-            Pilih besaran untuk melihat rumus dan besaran lain yang langsung
-            menggunakannya dalam daftar fisika SMA ini.
-          </p>
-          <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
-        </section>
-        <section>
-          <Section name="Graf Prasyarat" />
-          <p className="text-foreground/70 mb-4 text-sm">
-            Klik sebuah besaran untuk menyorot jalur yang menghubungkannya
-            dengan prasyarat besaran pokok dan turunan.
-          </p>
-          <PrerequisiteGraph
-            edges={PREREQUISITE_GRAPH_EDGES}
-            nodes={PREREQUISITE_GRAPH_NODES}
-          />
-        </section>
+    <>
+      <PageStructuredData
+        name={metadata.title}
+        description={DESCRIPTION}
+        path="/experiments/physics/units"
+        breadcrumbs={[
+          { name: "home", path: "/" },
+          { name: "experiments", path: "/experiments" },
+          { name: "physics", path: "/experiments/physics" },
+          { name: "units", path: "/experiments/physics/units" },
+        ]}
+      />
+      <div lang="id">
+        <SubTitle>{DESCRIPTION}</SubTitle>
+        <SourceCodeLink />
+        <div className="space-y-20">
+          <section>
+            <Section name="Besaran Pokok" />
+            <UnitsTable caption="Tujuh satuan pokok SI" units={BASE_UNITS} />
+          </section>
+          <section>
+            <Section name="Besaran Turunan" />
+            <UnitsTable
+              caption="Besaran turunan yang umum dipelajari di SMA"
+              showFormulas
+              units={DERIVED_UNITS}
+            />
+          </section>
+          <section>
+            <Section name="Peta Prasyarat" />
+            <p className="text-foreground/70 mb-4 text-sm">
+              Buka besaran untuk melihat prasyarat konsep dan rumus yang umum
+              digunakan di SMA.
+            </p>
+            <PrerequisiteDiagrams units={DERIVED_UNITS} />
+          </section>
+          <section>
+            <Section name="Besaran yang Bergantung" />
+            <p className="text-foreground/70 mb-4 text-sm">
+              Pilih besaran untuk melihat rumus dan besaran lain yang langsung
+              menggunakannya dalam daftar fisika SMA ini.
+            </p>
+            <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
+          </section>
+          <section>
+            <Section name="Graf Prasyarat" />
+            <p className="text-foreground/70 mb-4 text-sm">
+              Klik sebuah besaran untuk menyorot jalur yang menghubungkannya
+              dengan prasyarat besaran pokok dan turunan.
+            </p>
+            <PrerequisiteGraph
+              edges={PREREQUISITE_GRAPH_EDGES}
+              nodes={PREREQUISITE_GRAPH_NODES}
+            />
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

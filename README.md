@@ -67,6 +67,14 @@ The shared metadata identifies `@haritssr` as the Twitter/X site account.
 host served by the deployment. Page canonicals, social URLs, the sitemap, and RSS
 feed all use this value; the `www` hostname redirects to the primary domain.
 
+## Structured Data
+
+The root layout renders `WebSite` and `Person` JSON-LD using
+`components/StructuredData.tsx`. The homepage and physics units page also render
+`WebPage` data; the units page includes its visible breadcrumb hierarchy. Its
+structured-data title comes from the same metadata as its page title. All JSON-LD
+is serialized with `<` escaped before insertion into a script element.
+
 ## Progressive Web App
 
 The site is installable over HTTPS in supporting browsers. The offline behavior

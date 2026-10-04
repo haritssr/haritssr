@@ -5,6 +5,7 @@ import BottomBar from "@/components/BottomBar";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import { SiteStructuredData } from "@/components/StructuredData";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -54,6 +55,7 @@ export default function RootLayout({
   return (
     <html className={inter.className} lang="en">
       <body>
+        <SiteStructuredData />
         <a
           className="focus:bg-action sr-only z-2147483647 rounded-md px-3 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
           href="#main-content"
