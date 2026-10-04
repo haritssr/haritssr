@@ -7,6 +7,18 @@ export interface Task {
 
 export type TaskLike = Omit<Task, "type"> & { type: Task["type"] | "Queue" };
 
+export interface TaskSaveVersion {
+  revision: number;
+  writerId: string;
+  sequence: number;
+}
+
+export interface TaskSavePayload {
+  date: string;
+  tasks: readonly Task[];
+  version: TaskSaveVersion;
+}
+
 export interface TaskItemProps extends Task {
   forceDonutProgress?: boolean;
   visualVariant?: "default" | "doneSection";

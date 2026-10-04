@@ -2,10 +2,37 @@ import {
   MAX_TASK_DURATION_MINUTES,
   MAX_TASKS_PER_DAY,
 } from "@/app/experiments/ui-explorations/task/data";
-import type { Task } from "@/app/experiments/ui-explorations/task/type";
+import type {
+  Task,
+  TaskSaveVersion,
+} from "@/app/experiments/ui-explorations/task/type";
 import { isValidTaskDate } from "@/app/experiments/ui-explorations/task/utils";
 
 const MAX_TASK_TITLE_LENGTH = 200;
+const writerIdPattern =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/u;
+
+function parseSaveVersion(value: unknown): TaskSaveVersion | null {
+  if (!isRecord(value)) {
+    return null;
+  }
+
+  const { revision, writerId, sequence } = value;
+  if (
+    typeof revision !== "number" ||
+    !Number.isSafeInteger(revision) ||
+    revision < 0 ||
+    typeof writerId !== "string" ||
+    !writerIdPattern.test(writerId) ||
+    typeof sequence !== "number" ||
+    !Number.isSafeInteger(sequence) ||
+    sequence < 1
+  ) {
+    return null;
+  }
+
+  return { revision, writerId, sequence };
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -41,8 +68,13 @@ function parseTask(candidate: unknown): Task | null {
 export function parseTaskPayload(
   payload: unknown,
   defaultTaskDate: string
-): { taskDate: string; tasks: Task[] } | null {
+): { taskDate: string; tasks: Task[]; version: TaskSaveVersion } | null {
   if (!isRecord(payload) || !Array.isArray(payload.tasks)) {
+    return null;
+  }
+
+  const version = parseSaveVersion(payload.version);
+  if (!version) {
     return null;
   }
 
@@ -73,5 +105,5 @@ export function parseTaskPayload(
     tasks.push(task);
   }
 
-  return { taskDate, tasks };
+  return { taskDate, tasks, version };
 }

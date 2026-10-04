@@ -16,6 +16,7 @@ import {
   NEW_TASK_DURATION_PRESETS,
   sanitizeTasks,
 } from "./data";
+import { createTaskSaveSession } from "./persistence";
 import Section from "./Section";
 import TaskItem from "./TaskItem";
 import type { Task } from "./type";
@@ -29,6 +30,9 @@ export default function TaskPage() {
   const [loadRequest, setLoadRequest] = useState({ url: "/api/task" });
   const [taskDate, setTaskDate] = useState<string | null>(null);
   const taskDateRef = useRef<string | null>(null);
+  const saveSessionRef = useRef<ReturnType<
+    typeof createTaskSaveSession
+  > | null>(null);
   // Main in-memory task list for this page.
   const [tasks, setTasks] = useState<Task[]>([]);
   // Signals which resumed task should auto-start when moved into Now.
@@ -111,7 +115,11 @@ export default function TaskPage() {
   // Immediate save for critical actions (skip debounce)
   const saveImmediately = useCallback(
     (tasksToSave: Task[]) => {
-      if (!isHydratedFromDb || taskDate === null) {
+      if (
+        !isHydratedFromDb ||
+        taskDate === null ||
+        saveSessionRef.current === null
+      ) {
         return;
       }
       tasksRef.current = tasksToSave;
@@ -120,10 +128,9 @@ export default function TaskPage() {
         clearTimeout(saveTimeoutRef.current);
         saveTimeoutRef.current = null;
       }
-      // Use sendBeacon for synchronous save that survives page reload
-      // Payload sent to the API as JSON body via beacon.
+      // Include save ordering because beacon responses cannot update client state.
       const blob = new Blob(
-        [JSON.stringify({ date: taskDate, tasks: tasksToSave })],
+        [JSON.stringify(saveSessionRef.current.createPayload(tasksToSave))],
         {
           type: "application/json",
         }
@@ -291,13 +298,17 @@ export default function TaskPage() {
           droppedNowCount?: unknown;
           tasks?: unknown;
           taskDate?: unknown;
+          revision?: unknown;
         };
         // Parsed and validated task list from payload.
         const parsedTasks = parseTasks(body.tasks);
         if (
           parsedTasks === null ||
           typeof body.taskDate !== "string" ||
-          !isValidTaskDate(body.taskDate)
+          !isValidTaskDate(body.taskDate) ||
+          typeof body.revision !== "number" ||
+          !Number.isSafeInteger(body.revision) ||
+          body.revision < 0
         ) {
           setPersistenceError("Tasks could not be loaded. Try again.");
           return;
@@ -317,6 +328,10 @@ export default function TaskPage() {
         setPersistenceError(null);
         setTaskDate(body.taskDate);
         taskDateRef.current = body.taskDate;
+        saveSessionRef.current = createTaskSaveSession(
+          body.taskDate,
+          body.revision
+        );
         setIsHydratedFromDb(true);
       } catch {
         if (!isCancelled) {
@@ -336,7 +351,8 @@ export default function TaskPage() {
 
   // Debounced autosave for non-critical task changes.
   useEffect(() => {
-    if (isHydratedFromDb && taskDate !== null) {
+    const session = saveSessionRef.current;
+    if (isHydratedFromDb && taskDate !== null && session !== null) {
       // Clear existing timeout to debounce saves
       if (saveTimeoutRef.current !== null) {
         clearTimeout(saveTimeoutRef.current);
@@ -345,7 +361,7 @@ export default function TaskPage() {
       // Debounce save by 500ms to batch rapid updates (e.g., timer ticks)
       saveTimeoutRef.current = setTimeout(() => {
         saveTimeoutRef.current = null;
-        void persistTasksToDb(taskDate, tasks, setPersistenceError);
+        void persistTasksToDb(session, tasks, setPersistenceError);
       }, 500);
     }
 
@@ -365,6 +381,7 @@ export default function TaskPage() {
       if (
         !isHydratedFromDbRef.current ||
         taskDateRef.current === null ||
+        saveSessionRef.current === null ||
         saveTimeoutRef.current === null
       ) {
         return;
@@ -374,10 +391,9 @@ export default function TaskPage() {
       saveTimeoutRef.current = null;
       const blob = new Blob(
         [
-          JSON.stringify({
-            date: taskDateRef.current,
-            tasks: tasksRef.current,
-          }),
+          JSON.stringify(
+            saveSessionRef.current.createPayload(tasksRef.current)
+          ),
         ],
         {
           type: "application/json",
@@ -610,18 +626,26 @@ export default function TaskPage() {
 }
 
 async function persistTasksToDb(
-  date: string,
+  session: ReturnType<typeof createTaskSaveSession>,
   tasks: readonly Task[],
   setPersistenceError: (error: string | null) => void
 ) {
+  const payload = session.createPayload(tasks);
   try {
     const response = await fetch("/api/task", {
-      body: JSON.stringify({ date, tasks }),
+      body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" },
       method: "PUT",
     });
+    if (!session.isLatest(payload.version.sequence)) {
+      return;
+    }
     if (response.ok) {
       setPersistenceError(null);
+    } else if (response.status === 409) {
+      setPersistenceError(
+        "Tasks changed in another tab. Reload before saving again."
+      );
     } else {
       const errorData: unknown = await response
         .json()
@@ -630,6 +654,9 @@ async function persistTasksToDb(
       setPersistenceError("Tasks could not be saved. Try again.");
     }
   } catch (error) {
+    if (!session.isLatest(payload.version.sequence)) {
+      return;
+    }
     console.error("Network error saving tasks:", error);
     setPersistenceError("Tasks could not be saved. Check your connection.");
   }

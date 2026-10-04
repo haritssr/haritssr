@@ -20,13 +20,13 @@ flowchart TD
 
     subgraph API["⚙️ API Route (Next.js)"]
         A1["app/api/task/route.ts"]
-        A2["Validates task schema"]
+        A2["Validates origin, JSON, tasks, and save version"]
         A3["getTasksForDate() / replaceTasksForDate()"]
     end
 
     subgraph DB["🗄️ Database (better-sqlite3)"]
         D1["db.ts: normalizeTask + sanitizeTasks"]
-        D2["Table: daily_tasks"]
+        D2["Tables: daily_tasks + task_day_versions"]
         D3[".data-haritssr/task.db (WAL)"]
         D4["Replace strategy: DELETE → INSERT"]
     end
@@ -358,7 +358,11 @@ export default function TaskArchitecturePage() {
           strategy: debounced <code className="px-1">PUT /api/task</code> for
           regular updates plus immediate{" "}
           <code className="px-1">sendBeacon POST /api/task</code> for critical
-          and unload-safe persistence.
+          and lifecycle saves. Each save includes the loaded day&apos;s
+          revision, a page identifier, and an increasing sequence. SQLite checks
+          these inside the replacement transaction to reject older saves and
+          stale tabs. Writes require JSON and reject foreign origins; conflicts
+          return HTTP 409 and ask the user to reload.
         </p>
       </div>
 

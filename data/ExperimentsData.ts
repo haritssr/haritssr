@@ -1099,7 +1099,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         hideBackButton: true,
         hideTitle: true,
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
       },
       {
         slug: "yearly-interest",

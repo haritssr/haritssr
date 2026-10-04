@@ -5,7 +5,7 @@ import Database from "better-sqlite3";
 import "server-only";
 
 import { createDailyTaskTemplate, sanitizeTasks } from "./data";
-import type { Task } from "./type";
+import type { Task, TaskSaveVersion } from "./type";
 
 const DEFAULT_DATABASE_DIRECTORY = path.join(process.cwd(), ".data-haritssr");
 // Local folder path for task SQLite storage (override via TASK_DB_DIR).
@@ -36,6 +36,12 @@ function getDatabase() {
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       UNIQUE(task_date, title)
+    );
+    CREATE TABLE IF NOT EXISTS task_day_versions (
+      task_date TEXT PRIMARY KEY,
+      revision INTEGER NOT NULL,
+      writer_id TEXT,
+      sequence INTEGER NOT NULL
     );
   `);
   migrateStatusColumn(nextDatabase);
@@ -121,6 +127,47 @@ interface TaskRow {
   progress: number;
   title: string;
   type: Task["type"];
+}
+
+interface TaskDayVersion {
+  revision: number;
+  writerId: string | null;
+  sequence: number;
+}
+
+interface SavedTasks {
+  droppedNowCount: number;
+  revision: number;
+  tasks: Task[];
+}
+
+function readTaskDayVersion(
+  db: Database.Database,
+  taskDate: string
+): TaskDayVersion {
+  return (
+    db
+      .prepare<[string], TaskDayVersion>(
+        "SELECT revision, writer_id AS writerId, sequence FROM task_day_versions WHERE task_date = ?"
+      )
+      .get(taskDate) ?? { revision: 0, writerId: null, sequence: 0 }
+  );
+}
+
+function canSaveVersion(
+  current: TaskDayVersion,
+  requested: TaskSaveVersion
+): boolean {
+  if (requested.writerId === current.writerId) {
+    // Later snapshots from this page may arrive before earlier beacon/PUT saves.
+    return (
+      requested.sequence > current.sequence &&
+      requested.revision <= current.revision
+    );
+  }
+
+  // A different page must have loaded the current revision before taking over.
+  return requested.revision === current.revision;
 }
 
 // Clamp and normalize a task so persisted and returned values stay consistent.
@@ -220,21 +267,39 @@ export function getTodayTaskDate(date = new Date()) {
 
 // Load tasks for a date, auto-seed when empty, and persist sanitization corrections.
 export function getTasksForDate(taskDate = getTodayTaskDate()) {
-  seedTasksForDate(taskDate);
-  const { droppedNowCount, sanitizedTasks } = normalizeAndSanitizeTasks(
-    readTasksForDate(taskDate)
-  );
+  const db = getDatabase();
+  return db
+    .transaction(() => {
+      seedTasksForDate(taskDate);
+      const { droppedNowCount, sanitizedTasks } = normalizeAndSanitizeTasks(
+        readTasksForDate(taskDate)
+      );
 
-  // Rewrite rows only when sanitization changed task types/order constraints.
-  if (droppedNowCount > 0) {
-    return replaceTasksForDate(taskDate, sanitizedTasks);
-  }
+      if (droppedNowCount > 0) {
+        return replaceTasksForDate(taskDate, sanitizedTasks);
+      }
 
-  return { droppedNowCount, tasks: sanitizedTasks };
+      const { revision } = readTaskDayVersion(db, taskDate);
+      return { droppedNowCount, revision, tasks: sanitizedTasks };
+    })
+    .immediate();
 }
 
 // Replace all tasks for a date atomically after normalization/sanitization.
-export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
+export function replaceTasksForDate(
+  taskDate: string,
+  tasks: readonly Task[]
+): SavedTasks;
+export function replaceTasksForDate(
+  taskDate: string,
+  tasks: readonly Task[],
+  version: TaskSaveVersion
+): SavedTasks | null;
+export function replaceTasksForDate(
+  taskDate: string,
+  tasks: readonly Task[],
+  version?: TaskSaveVersion
+): SavedTasks | null {
   const db = getDatabase();
   const { droppedNowCount, sanitizedTasks } = normalizeAndSanitizeTasks(tasks);
 
@@ -252,6 +317,11 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
 
   // Delete existing rows and reinsert next rows in a single atomic operation.
   const replaceTasks = db.transaction((nextTasks: readonly Task[]) => {
+    const currentVersion = readTaskDayVersion(db, taskDate);
+    if (version && !canSaveVersion(currentVersion, version)) {
+      return null;
+    }
+
     deleteTasksStatement.run(taskDate);
 
     for (const [index, task] of nextTasks.entries()) {
@@ -264,11 +334,27 @@ export function replaceTasksForDate(taskDate: string, tasks: readonly Task[]) {
         index
       );
     }
+
+    const revision = currentVersion.revision + 1;
+    db.prepare(`
+      INSERT INTO task_day_versions (task_date, revision, writer_id, sequence)
+      VALUES (?, ?, ?, ?)
+      ON CONFLICT(task_date) DO UPDATE SET
+        revision = excluded.revision,
+        writer_id = excluded.writer_id,
+        sequence = excluded.sequence
+    `).run(
+      taskDate,
+      revision,
+      version?.writerId ?? null,
+      version?.sequence ?? 0
+    );
+
+    return { droppedNowCount, revision, tasks: sanitizedTasks };
   });
 
-  // Execute replacement and return the normalized payload.
-  replaceTasks(sanitizedTasks);
-  return { droppedNowCount, tasks: sanitizedTasks };
+  // Reserve the write lock before checking the revision, including across processes.
+  return replaceTasks.immediate(sanitizedTasks);
 }
 
 // Return per-day completion stats for the most recent N days with any tasks.

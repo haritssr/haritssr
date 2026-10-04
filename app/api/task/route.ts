@@ -18,7 +18,7 @@ function notAvailableResponse() {
 
 function invalidPayloadResponse() {
   return NextResponse.json(
-    { error: "Use a valid date and up to 100 valid tasks." },
+    { error: "Use a valid date, save version, and up to 100 valid tasks." },
     { status: 400 }
   );
 }
@@ -43,13 +43,32 @@ export function GET(request: Request) {
     return invalidPayloadResponse();
   }
 
-  const { droppedNowCount, tasks } = getTasksForDate(taskDate);
-  return NextResponse.json({ droppedNowCount, taskDate, tasks });
+  return NextResponse.json({ ...getTasksForDate(taskDate), taskDate });
 }
 
 async function saveTasks(request: Request) {
   if (!DATABASE_EXPERIMENTS_ENABLED) {
     return notAvailableResponse();
+  }
+
+  const origin = request.headers.get("origin");
+  if (
+    (origin !== null && origin !== new URL(request.url).origin) ||
+    request.headers.get("sec-fetch-site") === "cross-site"
+  ) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  const contentType = request.headers
+    .get("content-type")
+    ?.split(";")[0]
+    .trim()
+    .toLowerCase();
+  if (contentType !== "application/json") {
+    return NextResponse.json(
+      { error: "Use application/json." },
+      { status: 415 }
+    );
   }
 
   const parsedPayload = parseTaskPayload(
@@ -61,12 +80,15 @@ async function saveTasks(request: Request) {
     return invalidPayloadResponse();
   }
 
-  const { taskDate, tasks: requestedTasks } = parsedPayload;
-  const { droppedNowCount, tasks } = replaceTasksForDate(
-    taskDate,
-    requestedTasks
-  );
-  return NextResponse.json({ droppedNowCount, taskDate, tasks });
+  const { taskDate, tasks: requestedTasks, version } = parsedPayload;
+  const result = replaceTasksForDate(taskDate, requestedTasks, version);
+  if (!result) {
+    return NextResponse.json(
+      { error: "Tasks changed since this save. Reload before saving again." },
+      { status: 409 }
+    );
+  }
+  return NextResponse.json({ ...result, taskDate });
 }
 
 export async function POST(request: Request) {
