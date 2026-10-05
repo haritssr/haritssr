@@ -14,7 +14,7 @@ export default function TopBar() {
     <nav aria-label="Primary navigation" className="sticky top-0 z-30">
       <div className="relative mx-auto flex max-w-5xl items-center justify-between px-5 pt-5 sm:py-3.5 xl:px-0">
         {/* Harits Syah */}
-        <div className="group border-middle-hover flex items-center space-x-1.5 rounded-full border bg-white/50 py-1.5 pr-3 pl-2.5 saturate-150 backdrop-blur-lg">
+        <div className="group border-middle-hover flex items-center space-x-1.5 rounded-full border bg-white/50 py-1.5 pr-3 pl-2.5 backdrop-blur-lg">
           <Image
             alt=""
             className="h-5 w-5"

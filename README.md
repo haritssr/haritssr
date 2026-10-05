@@ -82,10 +82,10 @@ color through the root viewport export and app manifest. The offline document
 declares the same color in its static HTML.
 
 The root metadata registers `/favicon-32x32.png` alongside the existing ICO and
-Apple touch icon. The PNG is rasterized from `public/icons/haritssr.svg` so all
-icons use the site's current logo.
-
-`/favicon.svg` uses the same logo and adapts its outer circle to dark mode.
+Apple touch icon. The PNG, ICO, and Apple touch icon are rasterized from
+`public/icons/haritssr.svg`. That asset and `/favicon.svg` use the homepage logo's
+saturated blue palette in both light and dark mode. The top bar displays the
+colors directly without an additional saturation filter.
 
 ## Progressive Web App
 

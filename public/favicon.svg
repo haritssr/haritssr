@@ -6,14 +6,7 @@
   xmlns="http://www.w3.org/2000/svg"
 >
   <title>Haritssr</title>
-  <style>
-    @media (prefers-color-scheme: dark) {
-      .outer {
-        fill: #dbeafe;
-      }
-    }
-  </style>
-  <circle class="outer" cx="150.628" cy="150" fill="#93C5FD" r="150" />
-  <circle cx="150.628" cy="150" fill="#3B82F6" r="100" />
-  <circle cx="150.628" cy="150" fill="#1D4ED8" r="50" />
+  <circle cx="150.628" cy="150" fill="#7DC8FF" r="150" />
+  <circle cx="150.628" cy="150" fill="#1B85FF" r="100" />
+  <circle cx="150.628" cy="150" fill="#054EFF" r="50" />
 </svg>
