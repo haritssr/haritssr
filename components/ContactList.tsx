@@ -33,7 +33,7 @@ export default function ContactList() {
       id="contacts"
       className="text-foreground/70 space-y-2.5 bg-white pt-3 pr-1 pb-2.5 pl-4 lg:border-l"
     >
-      <h2 className="font-semibold" id="contacts-heading">
+      <h2 className="text-foreground font-semibold" id="contacts-heading">
         Contacts
       </h2>
       <ul>
