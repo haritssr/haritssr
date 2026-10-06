@@ -384,8 +384,10 @@ function UnitsTable({ caption, showFormulas = false, units }: UnitsTableProps) {
           <th className="px-3 py-2 text-left font-medium" scope="col">
             Quantity
           </th>
-          <th className="px-3 py-2 text-left font-medium" scope="col">
-            Quantity symbol
+          <th className="w-20 px-2 py-2 text-left font-medium" scope="col">
+            Quantity
+            <br />
+            symbol
           </th>
           {showFormulas ? (
             <th className="px-3 py-2 text-left font-medium" scope="col">
@@ -412,7 +414,7 @@ function UnitsTable({ caption, showFormulas = false, units }: UnitsTableProps) {
             <th className="px-3 py-2 text-left font-normal" scope="row">
               {unit.quantity}
             </th>
-            <td className="px-3 py-2">
+            <td className="w-20 px-2 py-2">
               <MathSymbol value={unit.quantitySymbol} />
             </td>
             {showFormulas ? (
