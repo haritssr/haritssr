@@ -236,7 +236,7 @@ function SearchResultItem({
 }) {
   return (
     <Autocomplete.Item
-      className="data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-white py-2 pr-3 pl-3 select-none"
+      className="data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent py-2 pr-3 pl-3 select-none"
       onClick={() => {
         onSelect(entry.route);
       }}
