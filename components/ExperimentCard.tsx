@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import Link from "next/link";
+
+import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
 
 import type { ExperimentDomainData } from "../data/ExperimentsData";
 
@@ -22,9 +23,7 @@ export default function ExperimentCard({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2">
-            <Image alt="" height={18} src={experiment.logoSrc} width={18} />
-          </div>
+          <ExperimentDomainIcon src={experiment.logoSrc} />
           <Heading className="text-foreground font-medium sm:text-lg">
             {experiment.title}
           </Heading>

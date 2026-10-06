@@ -1,6 +1,6 @@
 import { ClockIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 
+import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
 import InternalLink from "@/components/InternalLink";
 import { getLatestExperimentUpdate } from "@/data/ExperimentsData";
 import { getAvailableExperimentDomain } from "@/utils/experimentCatalog";
@@ -19,7 +19,7 @@ export default function ExperimentDomainIndex({
     <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
       <div className="mb-10 space-y-3">
         <div className="flex items-center">
-          <Image alt="" height={36} src={domain.logoSrc} width={36} />
+          <ExperimentDomainIcon size={36} src={domain.logoSrc} />
         </div>
         <h1 className="text-2xl font-semibold sm:text-3xl">{domain.title}</h1>
         <p className="text-foreground/90 text-lg">{domain.description}</p>

@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <title>Mathematics</title>
-  <path d="M9 32h46M32 55V9" stroke="#71717A" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M12 48c10-1 13-27 22-27 7 0 9 19 18 20" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/>
-  <circle cx="34" cy="21" r="3" fill="#2563EB"/>
+  <path d="M3 3v18h18" stroke="#2563EB" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 17c4 0 3-11 7-11s3 8 7 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="13" cy="6" r="1.75" fill="#2563EB"/>
 </svg>
