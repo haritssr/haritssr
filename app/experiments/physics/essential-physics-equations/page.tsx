@@ -103,7 +103,7 @@ function EquationSection({ equation }: { equation: PhysicsEquation }) {
       id={equation.id}
     >
       <Section as="h3" id={`${equation.id}-title`} name={equation.title} />
-      <div className="grid sm:mt-5 sm:grid-cols-2 sm:items-start sm:gap-8">
+      <div className="mb-5 grid sm:mt-5 sm:grid-cols-2 sm:items-start sm:gap-8">
         <div className="border-border bg-background scrollbar-subtle mb-5 min-w-0 overflow-x-auto rounded-xl border px-4 py-6 sm:my-0 sm:px-6">
           <div className="w-fit min-w-full text-base sm:text-lg">
             {katexify(equation.expression, true)}

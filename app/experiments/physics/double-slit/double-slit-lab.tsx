@@ -47,18 +47,18 @@ function RangeControl({
   return (
     <div className="space-y-2.5">
       <div className="flex items-start justify-between gap-3">
-        <label className="text-sm font-medium text-zinc-700" htmlFor={id}>
+        <label className="text-foreground text-sm font-medium" htmlFor={id}>
           {label}
         </label>
         <output
-          className="shrink-0 font-mono text-sm font-semibold text-zinc-950 tabular-nums"
+          className="text-foreground shrink-0 text-sm font-semibold tabular-nums"
           htmlFor={id}
         >
           {valueLabel}
         </output>
       </div>
       <input
-        className="h-2 w-full cursor-pointer accent-violet-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700"
+        className="accent-action focus-visible:outline-action h-2 w-full cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4"
         id={id}
         max={max}
         min={min}
@@ -69,7 +69,7 @@ function RangeControl({
         type="range"
         value={value}
       />
-      <div className="flex justify-between font-mono text-[11px] text-zinc-400 tabular-nums">
+      <div className="text-muted flex justify-between text-xs tabular-nums">
         <span>{min}</span>
         <span>{max}</span>
       </div>
@@ -133,21 +133,21 @@ export default function DoubleSlitLab() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="text-foreground space-y-8">
       <section
         aria-labelledby="double-slit-lab-heading"
-        className="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm"
+        className="border-border bg-background overflow-hidden rounded-2xl border"
       >
-        <div className="flex flex-col gap-4 border-b border-zinc-200 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+        <div className="border-border flex flex-col gap-4 border-b px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
           <div>
             <h2
-              className="text-lg font-semibold tracking-tight text-zinc-950"
+              className="text-foreground text-lg font-semibold tracking-tight"
               id="double-slit-lab-heading"
             >
               Young’s double slit
             </h2>
           </div>
-          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-600">
+          <span className="text-muted inline-flex w-fit items-center gap-2 text-xs">
             <span
               aria-hidden="true"
               className="h-2 w-2 rounded-full"
@@ -162,7 +162,7 @@ export default function DoubleSlitLab() {
             <figure>
               <svg
                 aria-labelledby="apparatus-title apparatus-description"
-                className="w-full overflow-visible rounded-2xl bg-zinc-50"
+                className="bg-surface-hover w-full overflow-visible rounded-xl"
                 viewBox="0 0 760 300"
               >
                 <title id="apparatus-title">
@@ -180,7 +180,7 @@ export default function DoubleSlitLab() {
                 </defs>
 
                 <line
-                  stroke="#d4d4d8"
+                  stroke="var(--color-border)"
                   strokeDasharray="3 6"
                   x1="50"
                   x2="715"
@@ -215,7 +215,7 @@ export default function DoubleSlitLab() {
                         cy={slitY}
                         fill="none"
                         key={`${slitIndex}-${radius}`}
-                        opacity="0.22"
+                        opacity="0.4"
                         r={radius}
                         stroke={lightColor}
                         strokeWidth="1.25"
@@ -229,7 +229,7 @@ export default function DoubleSlitLab() {
                     return slitYPositions.map((slitY, slitIndex) => (
                       <line
                         key={`ray-${order}-${slitIndex}`}
-                        opacity="0.16"
+                        opacity="0.2"
                         stroke={lightColor}
                         strokeDasharray="4 5"
                         strokeWidth="1.3"
@@ -243,7 +243,7 @@ export default function DoubleSlitLab() {
                 </g>
 
                 <rect
-                  fill="#71717a"
+                  fill="var(--color-muted)"
                   height="190"
                   rx="2"
                   width="8"
@@ -253,7 +253,7 @@ export default function DoubleSlitLab() {
                 {slitYPositions.map((slitY, index) => (
                   <g key={`slit-${index}`}>
                     <rect
-                      fill="#fafafa"
+                      fill="var(--color-surface-hover)"
                       height="16"
                       width="10"
                       x="205"
@@ -264,14 +264,14 @@ export default function DoubleSlitLab() {
                 ))}
 
                 <rect
-                  fill="#e4e4e7"
+                  fill="var(--color-muted)"
                   height="192"
                   rx="3"
                   width="14"
                   x="696"
                   y="54"
                 />
-                <rect fill="#ffffff" height="176" width="10" x="698" y="62" />
+                <rect fill="#18181b" height="176" width="10" x="698" y="62" />
                 {screenReadings.map((reading, index) => (
                   <rect
                     fill={lightColor}
@@ -284,7 +284,7 @@ export default function DoubleSlitLab() {
                   />
                 ))}
                 <line
-                  stroke="#27272a"
+                  stroke="var(--color-action)"
                   strokeDasharray="2 3"
                   strokeWidth="1.2"
                   x1="691"
@@ -295,14 +295,14 @@ export default function DoubleSlitLab() {
                 <circle
                   cx="703"
                   cy={screenY(lab.screenPosition)}
-                  fill="#fff"
+                  fill="var(--color-background)"
                   r="4"
-                  stroke="#27272a"
+                  stroke="var(--color-action)"
                   strokeWidth="1.5"
                 />
 
                 <text
-                  fill="#71717a"
+                  fill="var(--color-muted)"
                   fontSize="11"
                   textAnchor="middle"
                   x="56"
@@ -311,7 +311,7 @@ export default function DoubleSlitLab() {
                   LIGHT SOURCE
                 </text>
                 <text
-                  fill="#71717a"
+                  fill="var(--color-muted)"
                   fontSize="11"
                   textAnchor="middle"
                   x="210"
@@ -320,7 +320,7 @@ export default function DoubleSlitLab() {
                   DOUBLE SLIT
                 </text>
                 <text
-                  fill="#71717a"
+                  fill="var(--color-muted)"
                   fontSize="11"
                   textAnchor="middle"
                   x="703"
@@ -329,7 +329,7 @@ export default function DoubleSlitLab() {
                   SCREEN
                 </text>
                 <text
-                  fill="#a1a1aa"
+                  fill="var(--color-muted)"
                   fontSize="10"
                   textAnchor="middle"
                   x="452"
@@ -338,11 +338,11 @@ export default function DoubleSlitLab() {
                   schematic · not to scale
                 </text>
               </svg>
-              <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-500">
+              <figcaption className="text-muted mt-3 flex flex-wrap items-center justify-between gap-2 text-xs">
                 <span>
                   The marker on the screen follows the measurement control.
                 </span>
-                <span className="font-mono tabular-nums">
+                <span className="tabular-nums">
                   {katexify(
                     String.raw`\lambda = ${lab.wavelength}\,\mathrm{nm}`,
                     false
@@ -351,128 +351,110 @@ export default function DoubleSlitLab() {
               </figcaption>
             </figure>
 
-            <div className="mt-6 rounded-2xl border border-zinc-200 bg-white p-4 sm:p-5">
-              <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-                <div>
-                  <p className="text-[11px] font-semibold tracking-[0.16em] text-zinc-400 uppercase">
-                    Screen readout
-                  </p>
-                  <h3 className="mt-1 font-medium text-zinc-900">
-                    Relative light intensity
-                  </h3>
-                </div>
-                <div className="text-right">
-                  <p className="font-mono text-lg font-semibold text-zinc-900 tabular-nums">
-                    {katexify(
-                      String.raw`\Delta y = ${fringeSpacing.toFixed(2)}\,\mathrm{mm}`,
-                      false
-                    )}
-                  </p>
-                  <p className="text-[11px] text-zinc-500">
-                    bright fringe spacing
-                  </p>
-                </div>
-              </div>
+            <div className="border-border mt-6 border-t pt-5">
+              <h3 className="text-foreground mb-4 font-medium">
+                Relative light intensity,{" "}
+                {katexify(String.raw`\frac{I}{I_0}`, false)}
+              </h3>
 
               <figure>
-                <div className="relative">
-                  <div className="absolute top-1 left-2 text-[11px] text-zinc-500">
-                    {katexify(String.raw`\frac{I}{I_0}`, false)}
-                  </div>
-                  <svg
-                    aria-labelledby="intensity-plot-title intensity-plot-description"
-                    className="w-full"
-                    viewBox="0 0 760 220"
-                  >
-                    <title id="intensity-plot-title">
-                      Predicted interference intensity across the screen
-                    </title>
-                    <desc id="intensity-plot-description">
-                      The graph shows repeating bright maxima and dark minima
-                      over screen positions from minus twenty to plus twenty
-                      millimeters. The selected measurement is at{" "}
-                      {lab.screenPosition.toFixed(1)} millimeters.
-                    </desc>
-                    {[0, 0.5, 1].map((level) => {
-                      const y = plot.bottom - level * plot.height;
-                      return (
-                        <g key={level}>
-                          <line
-                            stroke="#e4e4e7"
-                            strokeDasharray={level === 0 ? undefined : "3 5"}
-                            x1={plot.left}
-                            x2={plot.left + plot.width}
-                            y1={y}
-                            y2={y}
-                          />
-                          <text
-                            fill="#a1a1aa"
-                            fontSize="10"
-                            textAnchor="end"
-                            x="46"
-                            y={y + 3}
-                          >
-                            {level.toFixed(1)}
-                          </text>
-                        </g>
-                      );
-                    })}
-                    {[-20, -10, 0, 10, 20].map((position) => {
-                      const x =
-                        plot.left +
-                        ((position + SCREEN_HALF_RANGE_MM) /
-                          (SCREEN_HALF_RANGE_MM * 2)) *
-                          plot.width;
-                      return (
-                        <g key={position}>
-                          <line
-                            stroke="#f4f4f5"
-                            x1={x}
-                            x2={x}
-                            y1={plot.top}
-                            y2={plot.bottom}
-                          />
-                          <text
-                            fill="#a1a1aa"
-                            fontSize="10"
-                            textAnchor="middle"
-                            x={x}
-                            y="195"
-                          >
-                            {position}
-                          </text>
-                        </g>
-                      );
-                    })}
-                    <path d={areaPath} fill={lightColor} fillOpacity="0.1" />
-                    <path
-                      d={intensityPath}
-                      fill="none"
-                      stroke={lightColor}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2.5"
-                    />
-                    <line
-                      opacity="0.7"
-                      stroke="#52525b"
-                      strokeDasharray="4 4"
-                      x1={selectedX}
-                      x2={selectedX}
-                      y1={plot.top}
-                      y2={plot.bottom}
-                    />
-                    <circle
-                      cx={selectedX}
-                      cy={plot.bottom - measuredIntensity * plot.height}
-                      fill="white"
-                      r="5"
-                      stroke={lightColor}
-                      strokeWidth="2.5"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-1 text-center text-xs text-zinc-500">
+                <svg
+                  aria-labelledby="intensity-plot-title intensity-plot-description"
+                  className="w-full"
+                  viewBox="0 0 760 220"
+                >
+                  <title id="intensity-plot-title">
+                    Predicted interference intensity across the screen
+                  </title>
+                  <desc id="intensity-plot-description">
+                    The graph shows repeating bright maxima and dark minima over
+                    screen positions from minus twenty to plus twenty
+                    millimeters. The selected measurement is at{" "}
+                    {lab.screenPosition.toFixed(1)} millimeters.
+                  </desc>
+                  {[0, 0.5, 1].map((level) => {
+                    const y = plot.bottom - level * plot.height;
+                    return (
+                      <g key={level}>
+                        <line
+                          stroke="var(--color-border)"
+                          strokeDasharray={level === 0 ? undefined : "3 5"}
+                          x1={plot.left}
+                          x2={plot.left + plot.width}
+                          y1={y}
+                          y2={y}
+                        />
+                        <text
+                          fill="var(--color-muted)"
+                          fontSize="10"
+                          textAnchor="end"
+                          x="46"
+                          y={y + 3}
+                        >
+                          {level.toFixed(1)}
+                        </text>
+                      </g>
+                    );
+                  })}
+                  {[-20, -10, 0, 10, 20].map((position) => {
+                    const x =
+                      plot.left +
+                      ((position + SCREEN_HALF_RANGE_MM) /
+                        (SCREEN_HALF_RANGE_MM * 2)) *
+                        plot.width;
+                    return (
+                      <g key={position}>
+                        <line
+                          stroke="var(--color-border)"
+                          x1={x}
+                          x2={x}
+                          y1={plot.top}
+                          y2={plot.bottom}
+                        />
+                        <text
+                          fill="var(--color-muted)"
+                          fontSize="10"
+                          textAnchor="middle"
+                          x={x}
+                          y="195"
+                        >
+                          {position}
+                        </text>
+                      </g>
+                    );
+                  })}
+                  <path
+                    d={areaPath}
+                    fill="var(--color-action)"
+                    fillOpacity="0.1"
+                  />
+                  <path
+                    d={intensityPath}
+                    fill="none"
+                    stroke="var(--color-action)"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.5"
+                  />
+                  <line
+                    opacity="0.7"
+                    stroke="var(--color-action)"
+                    strokeDasharray="4 4"
+                    x1={selectedX}
+                    x2={selectedX}
+                    y1={plot.top}
+                    y2={plot.bottom}
+                  />
+                  <circle
+                    cx={selectedX}
+                    cy={plot.bottom - measuredIntensity * plot.height}
+                    fill="var(--color-background)"
+                    r="5"
+                    stroke="var(--color-action)"
+                    strokeWidth="2.5"
+                  />
+                </svg>
+                <div className="text-muted mt-1 text-center text-xs">
                   {katexify(
                     String.raw`\text{Position on screen, } y\,(\mathrm{mm})`,
                     false
@@ -486,12 +468,12 @@ export default function DoubleSlitLab() {
             </div>
           </div>
 
-          <aside className="space-y-7 border-t border-zinc-200 bg-zinc-50/70 p-5 sm:p-7 lg:border-t-0 lg:border-l">
+          <aside className="border-border bg-surface-hover space-y-7 border-t p-5 sm:p-7 lg:border-t-0 lg:border-l">
             <div>
-              <p className="text-[11px] font-semibold tracking-[0.16em] text-zinc-400 uppercase">
+              <h3 className="text-foreground text-sm font-semibold">
                 Adjust the setup
-              </p>
-              <p className="mt-2 text-sm leading-6 text-zinc-600">
+              </h3>
+              <p className="text-muted mt-2 text-sm leading-6">
                 Each control changes the spacing between neighboring bright
                 fringes.
               </p>
@@ -527,7 +509,7 @@ export default function DoubleSlitLab() {
                   ].map((preset) => (
                     <button
                       aria-pressed={lab.wavelength === preset.value}
-                      className="rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-[11px] font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 aria-pressed:border-violet-300 aria-pressed:bg-violet-50 aria-pressed:text-violet-800"
+                      className="border-border bg-background text-foreground hover:bg-interface-hover focus-visible:outline-action aria-pressed:border-action aria-pressed:bg-action/10 cursor-pointer rounded-md border px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 aria-pressed:font-semibold"
                       key={preset.value}
                       onClick={() => {
                         updateLab("wavelength", preset.value);
@@ -572,7 +554,7 @@ export default function DoubleSlitLab() {
                 )}
               />
 
-              <div className="border-t border-zinc-200 pt-6">
+              <div className="border-border border-t pt-6">
                 <RangeControl
                   id="double-slit-position"
                   label={
@@ -593,14 +575,14 @@ export default function DoubleSlitLab() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-zinc-200 bg-white p-4">
-              <p className="text-[11px] font-semibold tracking-[0.14em] text-zinc-400 uppercase">
+            <div className="border-border border-t pt-5">
+              <h3 className="text-foreground text-sm font-semibold">
                 At the marker
-              </p>
+              </h3>
               <div className="mt-4 grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-zinc-500">Path difference</p>
-                  <p className="mt-1 font-mono text-lg font-semibold text-zinc-900 tabular-nums">
+                  <p className="text-muted text-xs">Path difference</p>
+                  <p className="text-foreground mt-1 text-lg font-semibold tabular-nums">
                     {katexify(
                       String.raw`${pathDifferenceNm.toFixed(0)}\,\mathrm{nm}`,
                       false
@@ -608,8 +590,8 @@ export default function DoubleSlitLab() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-zinc-500">Relative intensity</p>
-                  <p className="mt-1 font-mono text-lg font-semibold text-zinc-900 tabular-nums">
+                  <p className="text-muted text-xs">Relative intensity</p>
+                  <p className="text-foreground mt-1 text-lg font-semibold tabular-nums">
                     {katexify(
                       String.raw`${(measuredIntensity * 100).toFixed(0)}\%`,
                       false
@@ -617,9 +599,9 @@ export default function DoubleSlitLab() {
                   </p>
                 </div>
               </div>
-              <div className="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3 text-xs text-zinc-500">
+              <div className="border-border text-muted mt-4 flex items-center justify-between border-t pt-3 text-xs">
                 <span>Phase difference</span>
-                <span className="font-mono tabular-nums">
+                <span className="tabular-nums">
                   {katexify(
                     String.raw`${(phaseDifference % (2 * Math.PI)).toFixed(2)}\,\mathrm{rad}`,
                     false
@@ -628,17 +610,17 @@ export default function DoubleSlitLab() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-violet-950 p-4 text-white">
-              <p className="text-[11px] font-semibold tracking-[0.15em] text-violet-200 uppercase">
+            <div className="border-border border-t pt-5">
+              <h3 className="text-foreground text-sm font-semibold">
                 Fringe spacing
-              </p>
-              <p className="mt-2 font-mono text-3xl font-semibold tracking-tight tabular-nums">
+              </h3>
+              <p className="text-action mt-2 text-2xl font-semibold tracking-tight tabular-nums">
                 {katexify(
                   String.raw`${fringeSpacing.toFixed(2)}\,\mathrm{mm}`,
                   false
                 )}
               </p>
-              <p className="mt-2 text-xs leading-5 text-violet-200">
+              <p className="text-muted mt-2 text-sm leading-6">
                 Increase {katexify(String.raw`\lambda`, false)} or{" "}
                 {katexify(String.raw`L`, false)} to spread the pattern. Increase{" "}
                 {katexify(String.raw`d`, false)} to bring the fringes closer
@@ -652,7 +634,7 @@ export default function DoubleSlitLab() {
       <section aria-labelledby="reading-pattern-heading" className="space-y-4">
         <div>
           <h2
-            className="text-xl font-semibold tracking-tight text-zinc-950"
+            className="text-foreground text-xl font-semibold tracking-tight"
             id="reading-pattern-heading"
           >
             Why do the bands appear?
@@ -660,41 +642,41 @@ export default function DoubleSlitLab() {
         </div>
 
         <div className="grid gap-3 md:grid-cols-3">
-          <article className="rounded-2xl border border-zinc-200 bg-white p-5">
-            <p className="font-mono text-sm font-semibold text-violet-800">
+          <article className="border-border bg-surface rounded-xl border p-5">
+            <p className="text-action text-sm font-semibold">
               {katexify(String.raw`\Delta r = m\lambda`, false)}
             </p>
-            <h3 className="mt-3 text-sm font-semibold text-zinc-900">
+            <h3 className="text-foreground mt-3 text-sm font-semibold">
               Bright fringes
             </h3>
-            <p className="mt-1 text-sm leading-6 text-zinc-600">
+            <p className="text-muted mt-1 text-sm leading-6">
               The waves arrive in step and reinforce each other. The central
               bright fringe is order {katexify(String.raw`m = 0`, false)}.
             </p>
           </article>
-          <article className="rounded-2xl border border-zinc-200 bg-white p-5">
-            <p className="font-mono text-sm font-semibold text-violet-800">
+          <article className="border-border bg-surface rounded-xl border p-5">
+            <p className="text-action text-sm font-semibold">
               {katexify(String.raw`\Delta r = (m + \frac{1}{2})\lambda`, false)}
             </p>
-            <h3 className="mt-3 text-sm font-semibold text-zinc-900">
+            <h3 className="text-foreground mt-3 text-sm font-semibold">
               Dark fringes
             </h3>
-            <p className="mt-1 text-sm leading-6 text-zinc-600">
+            <p className="text-muted mt-1 text-sm leading-6">
               A half-wavelength path difference brings a crest together with a
               trough, cancelling the light.
             </p>
           </article>
-          <article className="rounded-2xl border border-zinc-200 bg-white p-5">
-            <p className="font-mono text-sm font-semibold text-violet-800">
+          <article className="border-border bg-surface rounded-xl border p-5">
+            <p className="text-action text-sm font-semibold">
               {katexify(
                 String.raw`\Delta y \approx \frac{\lambda L}{d}`,
                 false
               )}
             </p>
-            <h3 className="mt-3 text-sm font-semibold text-zinc-900">
+            <h3 className="text-foreground mt-3 text-sm font-semibold">
               Small-angle model
             </h3>
-            <p className="mt-1 text-sm leading-6 text-zinc-600">
+            <p className="text-muted mt-1 text-sm leading-6">
               The graph assumes narrow slits, a distant screen, and small
               angles. It shows interference without a single-slit envelope.
             </p>

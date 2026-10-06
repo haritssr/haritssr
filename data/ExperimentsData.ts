@@ -1212,7 +1212,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Change wavelength and slit geometry to explore interference fringes.",
         tags: ["waves", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
       },
       {
         slug: "essential-physics-equations",
