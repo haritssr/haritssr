@@ -32,6 +32,7 @@
   --color-graph-derived: var(--color-yellow-500);
   --color-graph-direct: var(--color-teal-600);
   --color-graph-indirect: var(--color-pink-600);
+  --color-surface: var(--color-white);
   --color-background: var(--color-white);
   --color-foreground: var(--color-zinc-800);
   --color-border: var(--color-zinc-300);
@@ -59,6 +60,34 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-action: var(--color-blue-400);
+    --color-action-hover: var(--color-blue-300);
+    --color-background: var(--color-zinc-900);
+    --color-border: var(--color-zinc-700);
+    --color-border-hover: var(--color-zinc-600);
+    --color-border-interface-hover: var(--color-zinc-700);
+    --color-danger: #f87171;
+    --color-foreground: var(--color-zinc-100);
+    --color-graph-base: var(--color-indigo-400);
+    --color-graph-derived: var(--color-yellow-400);
+    --color-graph-direct: var(--color-teal-400);
+    --color-graph-indirect: var(--color-pink-400);
+    --color-information: #c084fc;
+    --color-interface-hover: var(--color-zinc-800);
+    --color-middle-hover: var(--color-zinc-700);
+    --color-searchicon-hover: var(--color-zinc-400);
+    --color-success: #4ade80;
+    --color-surface: var(--color-zinc-800);
+    --color-surface-hover: var(--color-zinc-800);
+    --color-attention: #facc15;
+  }
+
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: auto;
@@ -99,6 +128,279 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #71717a;
   }
+
+  :root[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: #18181b;
+  }
+
+  :root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #52525b;
+  }
+
+  :root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: #71717a;
+  }
+}
+
+/* Keep fixed Tailwind neutral utilities legible in dark mode, including in demos. */
+:root[data-theme="dark"] [class*="bg-white"]:not([data-color-swatch]) {
+  --color-white: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="text-white"],
+:root[data-theme="dark"] [class*="fill-white"],
+:root[data-theme="dark"] [class*="stroke-white"] {
+  --color-white: #fff;
+}
+
+:root[data-theme="dark"] [class*="bg-black"]:not([data-color-swatch]) {
+  --color-black: var(--color-background);
+}
+
+:root[data-theme="dark"] [class*="text-black"]:not([data-color-swatch]) {
+  --color-black: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class~="bg-action"],
+:root[data-theme="dark"] [class~="focus:bg-action"]:focus,
+:root[data-theme="dark"] [class~="data-checked:bg-action"] {
+  --color-action: var(--color-blue-600);
+}
+
+:root[data-theme="dark"] [class~="hover:bg-action-hover"]:hover {
+  --color-action-hover: var(--color-blue-700);
+}
+
+:root[data-theme="dark"]
+  [class*="bg-zinc-50"]:not([class*="bg-zinc-500"]):not([data-color-swatch]) {
+  --color-zinc-50: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-100"]:not([data-color-swatch]) {
+  --color-zinc-100: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-200"]:not([data-color-swatch]) {
+  --color-zinc-200: var(--color-interface-hover);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-300"]:not([data-color-swatch]) {
+  --color-zinc-300: var(--color-interface-hover);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-400"]:not([data-color-swatch]) {
+  --color-zinc-400: var(--color-middle-hover);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-500"]:not([data-color-swatch]) {
+  --color-zinc-500: var(--color-middle-hover);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-600"]:not([data-color-swatch]) {
+  --color-zinc-600: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-700"]:not([data-color-swatch]) {
+  --color-zinc-700: var(--color-border);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-800"]:not([data-color-swatch]) {
+  --color-zinc-800: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-900"]:not([data-color-swatch]) {
+  --color-zinc-900: var(--color-background);
+}
+
+:root[data-theme="dark"] [class*="bg-zinc-950"]:not([data-color-swatch]) {
+  --color-zinc-950: var(--color-background);
+}
+
+:root[data-theme="dark"]
+  [class*="bg-gray-50"]:not([class*="bg-gray-500"]):not([data-color-swatch]) {
+  --color-gray-50: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="bg-gray-100"]:not([data-color-swatch]) {
+  --color-gray-100: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="bg-gray-200"]:not([data-color-swatch]) {
+  --color-gray-200: var(--color-interface-hover);
+}
+
+:root[data-theme="dark"] [class*="bg-gray-300"]:not([data-color-swatch]) {
+  --color-gray-300: var(--color-interface-hover);
+}
+
+:root[data-theme="dark"] [class*="bg-gray-900"]:not([data-color-swatch]) {
+  --color-gray-900: var(--color-background);
+}
+
+:root[data-theme="dark"] [class*="bg-slate-50"]:not([data-color-swatch]) {
+  --color-slate-50: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="bg-neutral-50"]:not([data-color-swatch]) {
+  --color-neutral-50: var(--color-surface);
+}
+
+:root[data-theme="dark"] [class*="bg-stone-50"]:not([data-color-swatch]) {
+  --color-stone-50: var(--color-surface);
+}
+
+:root[data-theme="dark"]
+  [class*="text-zinc-50"]:not([class*="text-zinc-500"]):not(
+    [data-color-swatch]
+  ) {
+  --color-zinc-50: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-zinc-500"]:not([data-color-swatch]) {
+  --color-zinc-500: var(--color-muted);
+}
+
+:root[data-theme="dark"] [class*="text-zinc-600"]:not([data-color-swatch]) {
+  --color-zinc-600: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-zinc-700"]:not([data-color-swatch]) {
+  --color-zinc-700: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-zinc-800"]:not([data-color-swatch]) {
+  --color-zinc-800: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-zinc-900"]:not([data-color-swatch]) {
+  --color-zinc-900: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-zinc-950"]:not([data-color-swatch]) {
+  --color-zinc-950: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-gray-500"]:not([data-color-swatch]) {
+  --color-gray-500: var(--color-muted);
+}
+
+:root[data-theme="dark"] [class*="text-gray-600"]:not([data-color-swatch]) {
+  --color-gray-600: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-gray-700"]:not([data-color-swatch]) {
+  --color-gray-700: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-gray-800"]:not([data-color-swatch]) {
+  --color-gray-800: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-gray-900"]:not([data-color-swatch]) {
+  --color-gray-900: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-slate-800"]:not([data-color-swatch]) {
+  --color-slate-800: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-slate-950"]:not([data-color-swatch]) {
+  --color-slate-950: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="text-neutral-500"]:not([data-color-swatch]) {
+  --color-neutral-500: var(--color-muted);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-100"]:not([data-color-swatch]) {
+  --color-zinc-100: var(--color-border);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-200"]:not([data-color-swatch]) {
+  --color-zinc-200: var(--color-border);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-300"]:not([data-color-swatch]) {
+  --color-zinc-300: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-400"]:not([data-color-swatch]) {
+  --color-zinc-400: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-500"]:not([data-color-swatch]) {
+  --color-zinc-500: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-600"]:not([data-color-swatch]) {
+  --color-zinc-600: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-700"]:not([data-color-swatch]) {
+  --color-zinc-700: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-800"]:not([data-color-swatch]) {
+  --color-zinc-800: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-zinc-900"]:not([data-color-swatch]) {
+  --color-zinc-900: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-gray-200"]:not([data-color-swatch]) {
+  --color-gray-200: var(--color-border);
+}
+
+:root[data-theme="dark"] [class*="border-gray-300"]:not([data-color-swatch]) {
+  --color-gray-300: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-gray-400"]:not([data-color-swatch]) {
+  --color-gray-400: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-gray-500"]:not([data-color-swatch]) {
+  --color-gray-500: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="border-slate-200"]:not([data-color-swatch]) {
+  --color-slate-200: var(--color-border);
+}
+
+:root[data-theme="dark"]
+  [class*="border-neutral-100"]:not([data-color-swatch]) {
+  --color-neutral-100: var(--color-border);
+}
+
+:root[data-theme="dark"]
+  [class*="border-neutral-200"]:not([data-color-swatch]) {
+  --color-neutral-200: var(--color-border);
+}
+
+:root[data-theme="dark"] [class*="ring-zinc-200"]:not([data-color-swatch]) {
+  --color-zinc-200: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="ring-zinc-400"]:not([data-color-swatch]) {
+  --color-zinc-400: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="ring-zinc-700"]:not([data-color-swatch]) {
+  --color-zinc-700: var(--color-border-hover);
+}
+
+:root[data-theme="dark"] [class*="ring-zinc-900"]:not([data-color-swatch]) {
+  --color-zinc-900: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="outline-zinc-700"]:not([data-color-swatch]) {
+  --color-zinc-700: var(--color-foreground);
+}
+
+:root[data-theme="dark"] [class*="fill-zinc-800"]:not([data-color-swatch]),
+:root[data-theme="dark"] [class*="stroke-zinc-800"]:not([data-color-swatch]) {
+  --color-zinc-800: var(--color-foreground);
 }
 
 /* Native form focus styles */
@@ -108,7 +410,7 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="number"]:not(.form-control):focus,
 input[type="tel"]:focus {
-  --tw-ring-color: rgb(39 39 42);
+  --tw-ring-color: var(--color-foreground);
   --tw-ring-shadow: 0 0 0 1px var(--tw-ring-color);
   outline: none;
   box-shadow:

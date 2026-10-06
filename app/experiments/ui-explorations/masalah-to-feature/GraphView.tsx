@@ -324,7 +324,7 @@ export default function GraphView() {
           </span>
           <input
             aria-label="Search problems, transformations, or features"
-            className="w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-3 text-sm text-zinc-900 shadow-sm transition outline-none placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-2 focus:ring-zinc-200"
+            className="placeholder:text-muted w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-3 text-sm text-zinc-900 shadow-sm transition outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-200"
             onChange={(event) => {
               setQuery(event.currentTarget.value);
             }}
@@ -344,7 +344,8 @@ export default function GraphView() {
             let filterClassName =
               "rounded-full border px-3 py-1.5 text-xs transition";
             if (isSelected) {
-              filterClassName += " border-zinc-900 bg-zinc-900 text-white";
+              filterClassName +=
+                " border-foreground bg-foreground text-background";
             } else if (style) {
               filterClassName += ` ${style.chip} hover:-translate-y-px`;
             } else {
@@ -484,7 +485,7 @@ export default function GraphView() {
                       aria-pressed={selected}
                       className={`absolute flex flex-col justify-center rounded-xl border px-3 text-left shadow-sm transition duration-150 hover:-translate-y-px hover:shadow-md ${
                         selected
-                          ? "z-10 border-zinc-900 bg-white ring-2 ring-zinc-900/10"
+                          ? "border-action bg-surface ring-action/20 z-10 ring-2"
                           : "border-zinc-200 bg-white"
                       } ${active ? "opacity-100" : "opacity-30"}`}
                       key={mapping.id}
@@ -528,7 +529,7 @@ export default function GraphView() {
                       aria-pressed={selected}
                       className={`absolute flex flex-col justify-center rounded-xl border px-3 text-left shadow-sm transition duration-150 hover:-translate-y-px hover:shadow-md ${
                         selected
-                          ? "z-10 border-zinc-900 ring-2 ring-zinc-900/10"
+                          ? "border-action ring-action/20 z-10 ring-2"
                           : style.node
                       } ${active ? "opacity-100" : "opacity-30"}`}
                       key={feature.id}

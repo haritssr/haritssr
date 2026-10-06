@@ -9,13 +9,42 @@ import { SiteStructuredData } from "@/components/StructuredData";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { createPageMetadata } from "@/utils/pageMetadata";
+import {
+  SITE_DARK_THEME_COLOR,
+  SITE_THEME_COLOR,
+  SITE_URL,
+} from "@/utils/site";
+import { THEME_PREFERENCE_STORAGE_KEY } from "@/utils/theme";
 
 import "./globals.css";
-import { SITE_THEME_COLOR, SITE_URL } from "@/utils/site";
 
 const inter = localFont({
   src: "../public/fonts/InterVariable.woff2",
 });
+
+const themeBootstrapScript = `(() => {
+  let preference = null;
+
+  try {
+    preference = localStorage.getItem("${THEME_PREFERENCE_STORAGE_KEY}");
+  } catch {}
+
+  const prefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+  const theme =
+    preference === "dark" || (preference !== "light" && prefersDark)
+      ? "dark"
+      : "light";
+
+  document.documentElement.dataset.theme = theme;
+
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  if (themeColor) {
+    themeColor.content =
+      theme === "dark" ? "${SITE_DARK_THEME_COLOR}" : "${SITE_THEME_COLOR}";
+  }
+})();`;
 
 export const metadata: Metadata = {
   ...createPageMetadata({
@@ -72,7 +101,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={inter.className} lang="en">
+    <html className={inter.className} lang="en" suppressHydrationWarning>
+      <head>
+        <script type="text/javascript">{themeBootstrapScript}</script>
+      </head>
       <body>
         <SiteStructuredData />
         <a

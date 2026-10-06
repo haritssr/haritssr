@@ -42,11 +42,11 @@ const MenuExample1 = () => (
       {({ open }) => (
         <>
           <div>
-            <Menu.Button className="focus-visible:ring-opacity-75 inline-flex w-full items-center justify-center rounded-md border border-zinc-500 bg-zinc-800 px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white">
+            <Menu.Button className="focus-visible:ring-opacity-75 inline-flex w-full items-center justify-center rounded-md border border-zinc-500 bg-zinc-800 px-3 py-1.5 text-sm font-medium text-white hover:bg-zinc-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white">
               Options
               <ChevronDownIcon
                 aria-hidden="true"
-                className={`-mr-1 ml-2 h-5 w-5 text-zinc-800 ${
+                className={`-mr-1 ml-2 h-5 w-5 text-white ${
                   open ? "rotate-180" : ""
                 }`}
               />

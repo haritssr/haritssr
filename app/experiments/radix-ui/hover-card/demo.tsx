@@ -34,7 +34,7 @@ export default function RadixHoverCardDemo() {
           @haritssr
         </HoverCard.Trigger>
         <HoverCard.Content>
-          <div className="w-auto rounded-md border border-zinc-400 bg-white p-3 text-white shadow-xl">
+          <div className="text-foreground w-auto rounded-md border border-zinc-400 bg-white p-3 shadow-xl">
             <div className="mb-2 font-semibold text-zinc-800">Harits Syah</div>
 
             <div className="flex flex-col">
@@ -47,7 +47,7 @@ export default function RadixHoverCardDemo() {
             <div className="text-zinc-600">22</div>
             <div className="text-zinc-700">South Tangerang</div>
           </div>
-          <HoverCard.Arrow className="fill-#fff" offset={20} />
+          <HoverCard.Arrow className="fill-surface" offset={20} />
         </HoverCard.Content>
       </HoverCard.Root>
     </>

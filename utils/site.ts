@@ -1,5 +1,6 @@
 export const SITE_URL = "https://haritssr.com";
 export const SITE_THEME_COLOR = "#FAFCF2";
+export const SITE_DARK_THEME_COLOR = "#18181b";
 export const RSS_PATH = "/feed.xml";
 export const BLOG_PATH = "/blog";
 export const BLOG_DESCRIPTION =

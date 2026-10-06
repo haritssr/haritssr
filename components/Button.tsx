@@ -7,7 +7,7 @@ const BUTTON_BASE_CLASS =
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   danger:
-    "border border-red-600 bg-white py-1.25 font-medium text-red-700 select-none hover:bg-red-50 focus-visible:outline-red-700",
+    "border border-danger bg-surface py-1.25 font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
   ghost:
     "py-1.25 font-medium text-zinc-700 hover:bg-zinc-100 focus-visible:outline-zinc-700",
   primary:

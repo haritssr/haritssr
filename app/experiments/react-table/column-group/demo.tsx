@@ -180,7 +180,7 @@ function Table() {
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
                 <td
-                  className="border-r border-b border-zinc-500 bg-blue-50 font-normal whitespace-nowrap text-zinc-500"
+                  className="border-border text-muted bg-surface border-r border-b font-normal whitespace-nowrap"
                   colSpan={header.colSpan}
                   key={header.id}
                 >

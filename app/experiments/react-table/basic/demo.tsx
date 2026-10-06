@@ -151,7 +151,7 @@ function Table() {
               {footerGroup.headers.map((header) => (
                 <th
                   scope="col"
-                  className="border-r border-zinc-500 bg-blue-50 font-normal text-zinc-500"
+                  className="border-border text-muted bg-surface border-r font-normal"
                   key={header.id}
                 >
                   {header.isPlaceholder

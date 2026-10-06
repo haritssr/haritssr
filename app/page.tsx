@@ -65,7 +65,7 @@ function ProfileSection() {
   return (
     <section aria-labelledby="profile-heading" className="pt-5" id="Identity">
       <div className="corner-squircle border-border divide-border bg-border-interface-hover lg:bg-surface-hover grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 lg:gap-5 lg:divide-x">
-        <div className="flex flex-col items-center justify-center gap-2.5 bg-white py-5">
+        <div className="bg-background flex flex-col items-center justify-center gap-2.5 py-5">
           <Image
             alt={profileName}
             blurDataURL="/images/blur.jpg"
@@ -79,7 +79,7 @@ function ProfileSection() {
             {profileName}
           </h1>
         </div>
-        <div className="text-foreground/70 space-y-2.5 bg-white px-4 pt-3 pb-2.5 text-left lg:border-l">
+        <div className="bg-background text-foreground/70 space-y-2.5 px-4 pt-3 pb-2.5 text-left lg:border-l">
           <h2 className="text-foreground font-semibold">Profile</h2>
           <div>
             <ProfileRow
@@ -133,7 +133,7 @@ function ProfileSection() {
           </div>
         </div>
         <ContactList />
-        <div className="space-y-2.5 bg-white px-4 pt-3 pb-2.5 lg:border-l">
+        <div className="bg-background space-y-2.5 px-4 pt-3 pb-2.5 lg:border-l">
           <h2 className="text-foreground font-semibold">Interests</h2>
           <p className="text-foreground/70 leading-8">
             Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,

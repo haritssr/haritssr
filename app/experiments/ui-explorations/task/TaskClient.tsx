@@ -477,7 +477,7 @@ export default function TaskPage() {
           </label>
           <input
             autoComplete="off"
-            className="corner-squircle h-8 w-full rounded-lg border border-zinc-300 px-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none sm:w-fit"
+            className="corner-squircle text-foreground h-8 w-full rounded-lg border border-zinc-300 px-2 text-sm placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none sm:w-fit"
             id="new-task-title"
             maxLength={200}
             name="title"
@@ -522,7 +522,7 @@ export default function TaskPage() {
               const isSelected = parsedNewOtherTaskDuration === preset.minutes;
               // Computes visual variant for selected/unselected preset buttons.
               const presetClassName = isSelected
-                ? "border-zinc-700 text-zinc-700"
+                ? "border-action text-action"
                 : "border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100";
 
               return (

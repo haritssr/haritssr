@@ -1,3 +1,4 @@
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
 import CopyContactButton from "@/components/CopyContactButton";
@@ -8,9 +9,9 @@ import { SITE_URL } from "@/utils/site";
 const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
 
 const contacts = [
-  { icon: "/icons/gmail.jpg", link: "haritssr@gmail.com", name: "GMail" },
+  { icon: "/icons/gmail.png", link: "haritssr@gmail.com", name: "GMail" },
   {
-    icon: "/icons/github.jpg",
+    icon: "github",
     link: "https://www.github.com/haritssr",
     name: "GitHub",
   },
@@ -31,7 +32,7 @@ export default function ContactList() {
     <section
       aria-labelledby="contacts-heading"
       id="contacts"
-      className="text-foreground/70 space-y-2.5 bg-white pt-3 pr-1 pb-2.5 pl-4 lg:border-l"
+      className="bg-background text-foreground/70 space-y-2.5 pt-3 pr-1 pb-2.5 pl-4 lg:border-l"
     >
       <h2 className="text-foreground font-semibold" id="contacts-heading">
         Contacts
@@ -75,14 +76,7 @@ function renderContact(contact: { icon: string; link: string; name: string }) {
         rel="noreferrer noopener"
         target="_blank"
       >
-        <Image
-          alt=""
-          aria-hidden="true"
-          className={`h-4 w-4 object-contain ${contact.icon === "/icons/x.png" ? "rounded" : ""}`}
-          height={20}
-          src={contact.icon}
-          width={20}
-        />
+        <ContactIcon icon={contact.icon} />
         <span>{highlightSiteName(displayedLink)}</span>
       </a>
     );
@@ -95,18 +89,33 @@ function renderContact(contact: { icon: string; link: string; name: string }) {
         href={`mailto:${contact.link}`}
         title={contact.link}
       >
-        <Image
-          alt=""
-          aria-hidden="true"
-          className="h-4 w-4 object-contain"
-          height={20}
-          src={contact.icon}
-          width={20}
-        />
+        <ContactIcon icon={contact.icon} />
         <span>{highlightSiteName(contact.link)}</span>
       </a>
     );
   }
 
   return null;
+}
+
+function ContactIcon({ icon }: { icon: string }) {
+  if (icon === "github") {
+    return (
+      <GitHubLogoIcon
+        aria-hidden="true"
+        className="text-foreground size-4.5 shrink-0"
+      />
+    );
+  }
+
+  return (
+    <Image
+      alt=""
+      aria-hidden="true"
+      className={`h-4 w-4 shrink-0 object-contain ${icon === "/icons/x.png" ? "rounded" : ""}`}
+      height={20}
+      src={icon}
+      width={20}
+    />
+  );
 }

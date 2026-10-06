@@ -1,10 +1,12 @@
 "use client";
 
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import TopBarSearch from "@/components/TopBarSearch";
 
 const destinations = ["projects", "experiments", "blog", "design"] as const;
@@ -29,16 +31,17 @@ export default function TopBar() {
         </div>
 
         <NavigationLinks />
-        <SearchAndSourceLinks />
+        <HeaderActions />
       </div>
     </nav>
   );
 }
 
-function SearchAndSourceLinks() {
+function HeaderActions() {
   return (
     <div className="border-middle-hover flex shrink-0 items-center space-x-1 rounded-full border bg-white/50 saturate-150 backdrop-blur-lg">
       <TopBarSearch />
+      <ThemeSwitcher />
       <GitHubLink />
     </div>
   );
@@ -54,13 +57,7 @@ function GitHubLink() {
       target="_blank"
       title="Repository"
     >
-      <Image
-        alt=""
-        className="size-4.5"
-        height={18}
-        src="/icons/github.jpg"
-        width={18}
-      />
+      <GitHubLogoIcon aria-hidden="true" className="text-foreground size-4.5" />
     </a>
   );
 }
