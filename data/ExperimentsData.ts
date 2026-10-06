@@ -1230,8 +1230,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     title: "Physics",
   },
   {
-    description:
-      "Explore number systems, algebra, and calculus through guided visuals and practice",
+    description: "Interactive math lessons and experiments",
     experiments: [
       {
         slug: "linear-equations-three-variables",
