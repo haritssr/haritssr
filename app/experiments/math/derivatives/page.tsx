@@ -6,7 +6,6 @@ import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
-import LessonNavigation from "../lesson-navigation";
 import Practice from "../practice";
 import type { PracticeQuestion } from "../practice";
 import DerivativesLab from "./derivatives-lab";
@@ -64,7 +63,7 @@ export default function DerivativesPage() {
           gap smaller and the secant turns toward a tangent. The limit of those
           secant slopes is the derivative.
         </p>
-        <div className="overflow-x-auto rounded-xl bg-blue-50 px-5 py-4 text-center text-zinc-950">
+        <div className="bg-interface-hover text-foreground overflow-x-auto rounded-xl px-5 py-4 text-center">
           {katexify(
             String.raw`\text{secant slope}=\frac{f(a+h)-f(a)}{h},\qquad f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}`,
             true
@@ -106,10 +105,6 @@ export default function DerivativesPage() {
       </section>
 
       <Practice questions={questions} />
-      <LessonNavigation
-        next={{ href: "/experiments/math/integrals", title: "Integrals" }}
-        previous={{ href: "/experiments/math/limits", title: "Limits" }}
-      />
     </div>
   );
 }

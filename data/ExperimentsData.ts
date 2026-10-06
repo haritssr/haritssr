@@ -1230,8 +1230,36 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     title: "Physics",
   },
   {
-    description: "Explore calculus through guided graphs and practice",
+    description:
+      "Explore number systems, algebra, and calculus through guided visuals and practice",
     experiments: [
+      {
+        slug: "linear-equations-three-variables",
+        title: "System of Linear Equations in Three Variables",
+        description:
+          "Solve three-variable linear systems with elimination, explore exact row operations, and distinguish unique, infinite, and no-solution cases.",
+        tags: ["algebra", "equations", "linear-algebra"],
+        createdAt: "2026-10-06",
+        updatedAt: ["2026-10-06"],
+      },
+      {
+        slug: "number-systems",
+        title: "Number Systems",
+        description:
+          "Explore number sets with a Venn diagram and connect inequalities, interval notation, and an interactive number line.",
+        tags: ["foundations", "sets", "visualization"],
+        createdAt: "2026-10-06",
+        updatedAt: ["2026-10-06"],
+      },
+      {
+        slug: "quadratic-equations",
+        title: "Quadratic Equations",
+        description:
+          "Learn factoring, completing the square, and the quadratic formula with an interactive root graph.",
+        tags: ["algebra", "equations", "visualization"],
+        createdAt: "2026-10-06",
+        updatedAt: ["2026-10-06"],
+      },
       {
         slug: "limits",
         title: "Limits",
@@ -1239,7 +1267,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore how a function behaves as its input approaches a value.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
       },
       {
         slug: "derivatives",
@@ -1247,7 +1275,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Connect the derivative to the slope of a curve.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
       },
       {
         slug: "integrals",
@@ -1255,7 +1283,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore accumulation and the area beneath a curve.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
       },
     ],
     id: 17,

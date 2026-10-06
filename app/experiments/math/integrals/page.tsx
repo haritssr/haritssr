@@ -6,7 +6,6 @@ import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
-import LessonNavigation from "../lesson-navigation";
 import Practice from "../practice";
 import type { PracticeQuestion } from "../practice";
 import IntegralRules from "./integral-rules";
@@ -65,7 +64,7 @@ export default function IntegralsPage() {
           by the function’s height at the midpoint. Add the rectangles, then
           make them thinner. Their sum approaches the definite integral.
         </p>
-        <div className="overflow-x-auto rounded-xl bg-blue-50 px-5 py-4 text-center text-zinc-950">
+        <div className="bg-interface-hover text-foreground overflow-x-auto rounded-xl px-5 py-4 text-center">
           {katexify(
             String.raw`\int_a^b f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^{n} f(x_i^*)\,\Delta x,\qquad\Delta x=\frac{b-a}{n}`,
             true
@@ -109,12 +108,6 @@ export default function IntegralsPage() {
       <IntegralRules />
 
       <Practice questions={questions} />
-      <LessonNavigation
-        previous={{
-          href: "/experiments/math/derivatives",
-          title: "Derivatives",
-        }}
-      />
     </div>
   );
 }

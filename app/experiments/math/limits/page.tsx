@@ -6,7 +6,6 @@ import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
-import LessonNavigation from "../lesson-navigation";
 import Practice from "../practice";
 import type { PracticeQuestion } from "../practice";
 import LimitsLab from "./limits-lab";
@@ -70,7 +69,7 @@ export default function LimitsPage() {
           right, and watch the function’s height. For a limit to exist from both
           sides, those heights must head toward the same value.
         </p>
-        <div className="overflow-x-auto rounded-xl bg-blue-50 px-5 py-4 text-center text-zinc-950">
+        <div className="bg-interface-hover text-foreground overflow-x-auto rounded-xl px-5 py-4 text-center">
           {katexify(
             String.raw`\lim_{x\to a}f(x)=L\quad\Longleftrightarrow\quad\lim_{x\to a^-}f(x)=\lim_{x\to a^+}f(x)=L`,
             true
@@ -108,10 +107,6 @@ export default function LimitsPage() {
       </section>
 
       <Practice questions={questions} />
-      <LessonNavigation
-        next={{ href: "/experiments/math/derivatives", title: "Derivatives" }}
-        previous={{ href: "/experiments/math", title: "Mathematics" }}
-      />
     </div>
   );
 }
