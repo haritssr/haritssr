@@ -8,6 +8,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+# Engineering Quality
+
+Manage agents with established engineering practices. Clear constraints and
+feedback help both people and agents produce reliable code. Follow repository
+lint rules, types, compiler diagnostics, existing tests, and observability.
+Apply the same quality standards to human-written and agent-written code.
+When mistakes recur, strengthen reusable checks and guardrails.
+
 # Mathematical Notation
 
 - Always render mathematical notation in page content and UI with the project
