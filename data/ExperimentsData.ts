@@ -1176,7 +1176,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore SI quantities, units, formulas, and their prerequisite graph.",
         tags: ["mathematics", "graphs"],
         createdAt: "2026-09-20",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
+        updatedAt: [
+          "2026-09-27",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-04",
+          "2026-10-06",
+        ],
       },
       {
         slug: "electron-configuration",

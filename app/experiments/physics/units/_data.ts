@@ -374,7 +374,7 @@ export const DERIVED_FORMULAS: Record<string, readonly FormulaDefinition[]> = {
     ]),
   ],
   "Taraf intensitas bunyi": [
-    formula("Skala desibel", "\\beta = 10\\log_{10}\\frac{I}{I_0}", [
+    formula("Skala desibel", "\\beta = 10\\log\\frac{I}{I_0}", [
       quantityNode("Intensitas bunyi", "I"),
       conceptNode("Intensitas acuan"),
     ]),
