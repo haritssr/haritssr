@@ -76,49 +76,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  redirects() {
-    return [
-      {
-        destination: "/experiments/physics/essential-physics-equations",
-        permanent: true,
-        source: "/experiments/physics/mass-energy-equivalence",
-      },
-      {
-        destination: "/experiments/physics/atomic-orbitals",
-        permanent: true,
-        source: "/experiments/physics/p-orbital-shape",
-      },
-      {
-        destination: "/experiments/physics/atomic-orbitals",
-        permanent: true,
-        source: "/experiments/physics/schrodinger-orbitals",
-      },
-      {
-        destination: "/experiments/ui-explorations/masalah-to-feature",
-        permanent: true,
-        source: "/masalah-to-feature",
-      },
-      ...(process.env.NODE_ENV === "production"
-        ? []
-        : [
-            {
-              destination: "/experiments/ui-explorations/task/:path*",
-              permanent: true,
-              source: "/task/:path*",
-            },
-            {
-              destination: "/experiments/ui-explorations/tools",
-              permanent: true,
-              source: "/tools",
-            },
-          ]),
-      {
-        destination: "/blog/:slug*",
-        permanent: true,
-        source: "/writing/:slug*",
-      },
-    ];
-  },
   turbopack: {},
 };
 
