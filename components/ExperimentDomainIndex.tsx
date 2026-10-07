@@ -27,7 +27,7 @@ export default function ExperimentDomainIndex({
           {experiments.length} experiments
         </div>
       </div>
-      <ol className="space-y-3">
+      <ol className="space-y-5">
         {experiments.map((experiment) => {
           const updatedAt = getLatestExperimentUpdate(experiment);
 
