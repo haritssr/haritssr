@@ -54,7 +54,7 @@ export default function IntervalLab() {
   return (
     <section
       aria-labelledby="interval-lab-heading"
-      className="border-border bg-background text-foreground overflow-hidden rounded-2xl border"
+      className="border-border text-foreground overflow-hidden rounded-2xl border"
     >
       <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2
@@ -77,7 +77,7 @@ export default function IntervalLab() {
                 aria-pressed={intervalKeys.every(
                   (key) => interval[key] === preset.interval[key]
                 )}
-                className="border-border bg-background text-foreground hover:bg-interface-hover focus-visible:outline-action aria-pressed:border-action aria-pressed:bg-action/10 min-h-11 cursor-pointer rounded-lg border px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="border-border text-foreground hover:bg-interface-hover focus-visible:outline-action aria-pressed:border-action aria-pressed:bg-action/10 min-h-11 cursor-pointer rounded-lg border px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2"
                 key={preset.name}
                 onClick={() => {
                   setInterval(preset.interval);
@@ -89,7 +89,7 @@ export default function IntervalLab() {
             ))}
           </fieldset>
           <div aria-live="polite" className="space-y-4">
-            <div className="bg-interface-hover rounded-xl px-4 py-3 text-center">
+            <div className="border-border rounded-xl border px-4 py-3 text-center">
               <p className="text-muted text-xs font-medium">
                 Interval notation
               </p>
@@ -217,7 +217,7 @@ export default function IntervalLab() {
             </figcaption>
           </figure>
         </div>
-        <div className="border-border bg-surface-hover text-foreground min-w-0 space-y-6 border-t p-5 sm:p-6 lg:border-t-0 lg:border-l">
+        <div className="border-border text-foreground min-w-0 space-y-6 border-t p-5 sm:p-6 lg:border-t-0 lg:border-l">
           {bounds.map((bound) => {
             const isLower = bound === "lower";
             const includeKey = isLower ? "includeLower" : "includeUpper";

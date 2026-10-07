@@ -12,7 +12,7 @@ const DESCRIPTION =
 
 export const metadata: Metadata = getExperimentMetadata(
   "physics",
-  "double-slit",
+  "double-slit-interference",
   { description: DESCRIPTION }
 );
 

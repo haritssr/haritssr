@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import ExperimentDomainLayout from "@/components/ExperimentDomainLayout";
 import { getExperimentDomainMetadata } from "@/data/ExperimentsData";
 
-export const metadata: Metadata = getExperimentDomainMetadata("math");
+export const metadata: Metadata = getExperimentDomainMetadata("mathematics");
 
 export default function MathLayout({
   children,
@@ -12,6 +12,8 @@ export default function MathLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ExperimentDomainLayout domain="math">{children}</ExperimentDomainLayout>
+    <ExperimentDomainLayout domain="mathematics">
+      {children}
+    </ExperimentDomainLayout>
   );
 }

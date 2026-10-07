@@ -10,10 +10,14 @@ import Practice from "../practice";
 import type { PracticeQuestion } from "../practice";
 import DerivativesLab from "./derivatives-lab";
 
-export const metadata: Metadata = getExperimentMetadata("math", "derivatives", {
-  description:
-    "Learn derivatives by shrinking secant lines into tangent lines and practicing polynomial rules.",
-});
+export const metadata: Metadata = getExperimentMetadata(
+  "mathematics",
+  "derivatives",
+  {
+    description:
+      "Learn derivatives by shrinking secant lines into tangent lines and practicing polynomial rules.",
+  }
+);
 
 const questions: readonly PracticeQuestion[] = [
   {
@@ -56,14 +60,14 @@ export default function DerivativesPage() {
         <SourceCodeLink />
       </div>
 
-      <section className="mb-10 max-w-3xl space-y-5 text-base leading-8 text-zinc-700">
+      <section className="text-muted mb-10 max-w-3xl space-y-5 text-base leading-8">
         <Section name="From average change to change right now" />
         <p>
           The slope between two points is a secant slope. Make their horizontal
           gap smaller and the secant turns toward a tangent. The limit of those
           secant slopes is the derivative.
         </p>
-        <div className="bg-interface-hover text-foreground overflow-x-auto rounded-xl px-5 py-4 text-center">
+        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\text{secant slope}=\frac{f(a+h)-f(a)}{h},\qquad f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}`,
             true
@@ -77,26 +81,26 @@ export default function DerivativesPage() {
 
       <DerivativesLab />
 
-      <section className="mt-12 max-w-3xl space-y-5 text-base leading-8 text-zinc-700">
+      <section className="text-muted mt-12 max-w-3xl space-y-5 text-base leading-8">
         <Section name="Why the square curve has this slope" />
         <p>
           Expand the numerator of the secant slope. Once the nonzero gap
           cancels, letting the gap approach zero is straightforward.
         </p>
-        <div className="overflow-x-auto rounded-xl bg-zinc-50 px-5 py-4 text-center text-zinc-950">
+        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\frac{(a+h)^2-a^2}{h}=\frac{2ah+h^2}{h}=2a+h\quad(h\ne0)`,
             true
           )}
         </div>
-        <div className="overflow-x-auto rounded-xl bg-zinc-50 px-5 py-4 text-center text-zinc-950">
+        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(String.raw`\lim_{h\to0}(2a+h)=2a`, true)}
         </div>
         <p>
           This leads to the power rule. You can differentiate a polynomial one
           term at a time; constant terms have zero slope.
         </p>
-        <div className="overflow-x-auto rounded-xl bg-zinc-50 px-5 py-4 text-center text-zinc-950">
+        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\frac{d}{dx}x^n=nx^{n-1},\qquad\frac{d}{dx}(u+v)=u'+v',\qquad\frac{d}{dx}c=0`,
             true

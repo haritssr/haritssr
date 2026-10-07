@@ -8,6 +8,7 @@ import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import { SiteStructuredData } from "@/components/StructuredData";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
+import { ExperimentsData } from "@/data/ExperimentsData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import {
   SITE_DARK_THEME_COLOR,
@@ -21,6 +22,21 @@ import "./globals.css";
 const inter = localFont({
   src: "../public/fonts/InterVariable.woff2",
 });
+
+const breadcrumbLabels = Object.fromEntries<string>([
+  ["/experiments", "Experiments"],
+  ...ExperimentsData.flatMap<[string, string]>((domain) =>
+    domain.slug === "mathematics" || domain.slug === "physics"
+      ? [
+          [`/experiments/${domain.slug}`, domain.title],
+          ...domain.experiments.map<[string, string]>((experiment) => [
+            `/experiments/${domain.slug}/${experiment.slug}`,
+            experiment.title,
+          ]),
+        ]
+      : []
+  ),
+]);
 
 const themeBootstrapScript = `(() => {
   let preference = null;
@@ -116,7 +132,7 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <GlobalSearchProvider>
           <TopBar />
-          <Breadcrumbs />
+          <Breadcrumbs routeLabels={breadcrumbLabels} />
           <main
             className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0"
             id="main-content"

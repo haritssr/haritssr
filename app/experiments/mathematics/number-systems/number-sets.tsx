@@ -124,7 +124,7 @@ export default function NumberSets() {
   return (
     <section
       aria-labelledby="number-sets-heading"
-      className="border-border bg-background text-foreground overflow-hidden rounded-2xl border"
+      className="border-border text-foreground overflow-hidden rounded-2xl border"
     >
       <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2
@@ -207,13 +207,13 @@ export default function NumberSets() {
             together fill the real numbers. Regions are not drawn to scale.
           </figcaption>
         </figure>
-        <div className="border-border bg-surface-hover text-foreground min-w-0 space-y-5 border-t p-5 sm:p-6 lg:border-t-0 lg:border-l">
+        <div className="border-border text-foreground min-w-0 space-y-5 border-t p-5 sm:p-6 lg:border-t-0 lg:border-l">
           <fieldset className="flex flex-wrap gap-2">
             <legend className="sr-only">Example numbers</legend>
             {examples.map(({ tex }, index) => (
               <button
                 aria-pressed={index === selected}
-                className="border-border bg-background text-foreground hover:bg-interface-hover focus-visible:outline-action aria-pressed:border-action aria-pressed:bg-action/10 min-h-11 min-w-11 cursor-pointer rounded-lg border px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="border-border text-foreground hover:bg-interface-hover focus-visible:outline-action aria-pressed:border-action aria-pressed:bg-action/10 min-h-11 min-w-11 cursor-pointer rounded-lg border px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2"
                 key={tex}
                 onClick={() => {
                   setSelected(index);

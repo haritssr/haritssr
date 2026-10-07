@@ -10,7 +10,7 @@ import IntervalLab from "./interval-lab";
 import NumberSets from "./number-sets";
 
 export const metadata: Metadata = getExperimentMetadata(
-  "math",
+  "mathematics",
   "number-systems"
 );
 
@@ -121,7 +121,7 @@ const exercises = [
 
 function Equation({ tex }: { tex: string }) {
   return (
-    <div className="bg-interface-hover overflow-x-auto rounded-xl px-4 py-3 text-center">
+    <div className="border-border overflow-x-auto rounded-xl border px-4 py-3 text-center">
       {katexify(tex, true)}
     </div>
   );
@@ -151,7 +151,7 @@ export default function NumberSystemsPage() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {numberSets.map((set) => (
             <article
-              className="border-border bg-surface rounded-xl border p-5"
+              className="border-border rounded-xl border p-5"
               key={set.name}
             >
               <div className="text-action mb-3 text-xl">
@@ -232,7 +232,7 @@ export default function NumberSystemsPage() {
             <caption className="sr-only">
               Common interval forms and their equivalent inequalities
             </caption>
-            <thead className="bg-interface-hover">
+            <thead>
               <tr>
                 {["Type", "Interval", "Inequality", "Included endpoints"].map(
                   (heading) => (
@@ -338,7 +338,7 @@ export default function NumberSystemsPage() {
         <ol className="space-y-4">
           {exercises.map((exercise, index) => (
             <li
-              className="border-border bg-surface rounded-xl border p-5 sm:p-6"
+              className="border-border rounded-xl border p-5 sm:p-6"
               key={exercise.expression}
             >
               <h3 className="font-semibold">

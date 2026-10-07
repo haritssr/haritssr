@@ -24,9 +24,9 @@ function QuestionCard({
   const isCorrect = selected === question.correctIndex;
 
   return (
-    <li className="rounded-2xl border border-zinc-200 bg-white p-5 sm:p-6">
-      <p className="text-sm font-semibold text-zinc-500">Question {number}</p>
-      <p className="mt-2 font-medium text-zinc-950">{question.prompt}</p>
+    <li className="border-border rounded-2xl border p-5 sm:p-6">
+      <p className="text-muted text-sm font-semibold">Question {number}</p>
+      <p className="text-foreground mt-2 font-medium">{question.prompt}</p>
       <div className="mt-2 overflow-x-auto py-1 text-lg">
         {katexify(question.expression, true)}
       </div>
@@ -37,7 +37,7 @@ function QuestionCard({
         {question.choices.map((choice, index) => (
           <button
             aria-pressed={selected === index}
-            className={`min-h-12 rounded-xl border px-4 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${selected === index ? "border-blue-600 bg-blue-50 text-blue-900" : "border-zinc-200 text-zinc-800 hover:border-blue-300 hover:bg-zinc-50"}`}
+            className={`focus-visible:outline-action min-h-12 rounded-xl border px-4 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${selected === index ? "border-action bg-action/10 text-action" : "border-border text-foreground hover:border-action hover:bg-interface-hover"}`}
             key={choice}
             onClick={() => {
               setSelected(index);
@@ -51,7 +51,7 @@ function QuestionCard({
       {selected === null ? null : (
         <div
           aria-live="polite"
-          className="mt-4 rounded-xl bg-zinc-50 p-4 text-sm leading-6 text-zinc-700"
+          className="text-muted border-border mt-4 rounded-xl border p-4 text-sm leading-6"
         >
           <p
             className={`font-semibold ${isCorrect ? "text-green-700" : "text-amber-800"}`}
@@ -79,12 +79,12 @@ export default function Practice({
   return (
     <section aria-labelledby="practice-heading" className="mt-14">
       <h2
-        className="text-2xl font-semibold text-zinc-950"
+        className="text-foreground text-2xl font-semibold"
         id="practice-heading"
       >
         Check your understanding
       </h2>
-      <p className="mt-2 text-sm leading-6 text-zinc-600">
+      <p className="text-muted mt-2 text-sm leading-6">
         Choose an answer to see why it works. You can change your choice.
       </p>
       <ol className="mt-6 space-y-4">

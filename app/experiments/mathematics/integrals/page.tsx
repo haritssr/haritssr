@@ -11,10 +11,14 @@ import type { PracticeQuestion } from "../practice";
 import IntegralRules from "./integral-rules";
 import IntegralsLab from "./integrals-lab";
 
-export const metadata: Metadata = getExperimentMetadata("math", "integrals", {
-  description:
-    "Learn definite integrals through midpoint rectangles, signed area, and antiderivatives.",
-});
+export const metadata: Metadata = getExperimentMetadata(
+  "mathematics",
+  "integrals",
+  {
+    description:
+      "Learn definite integrals through midpoint rectangles, signed area, and antiderivatives.",
+  }
+);
 
 const questions: readonly PracticeQuestion[] = [
   {
@@ -57,14 +61,14 @@ export default function IntegralsPage() {
         <SourceCodeLink />
       </div>
 
-      <section className="mb-10 max-w-3xl space-y-5 text-base leading-8 text-zinc-700">
+      <section className="text-muted mb-10 max-w-3xl space-y-5 text-base leading-8">
         <Section name="From rectangles to accumulation" />
         <p>
           Split an interval into thin slices. For each slice, multiply its width
           by the function’s height at the midpoint. Add the rectangles, then
           make them thinner. Their sum approaches the definite integral.
         </p>
-        <div className="bg-interface-hover text-foreground overflow-x-auto rounded-xl px-5 py-4 text-center">
+        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\int_a^b f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^{n} f(x_i^*)\,\Delta x,\qquad\Delta x=\frac{b-a}{n}`,
             true
@@ -79,7 +83,7 @@ export default function IntegralsPage() {
 
       <IntegralsLab />
 
-      <section className="mt-12 max-w-3xl space-y-5 text-base leading-8 text-zinc-700">
+      <section className="text-muted mt-12 max-w-3xl space-y-5 text-base leading-8">
         <Section name="A faster exact method" />
         <p>
           An antiderivative reverses differentiation. If differentiating a
@@ -87,7 +91,7 @@ export default function IntegralsPage() {
           at the bounds and subtract. This is the Fundamental Theorem of
           Calculus.
         </p>
-        <div className="overflow-x-auto rounded-xl bg-zinc-50 px-5 py-4 text-center text-zinc-950">
+        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`F'(x)=f(x)\quad\Longrightarrow\quad\int_a^b f(x)\,dx=F(b)-F(a)`,
             true
@@ -97,7 +101,7 @@ export default function IntegralsPage() {
           For the square curve, the power rule works in reverse. The result
           agrees with what the rectangles approach.
         </p>
-        <div className="overflow-x-auto rounded-xl bg-zinc-50 px-5 py-4 text-center text-zinc-950">
+        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\int_0^2 x^2\,dx=\left[\frac{x^3}{3}\right]_0^2=\frac{8}{3}`,
             true

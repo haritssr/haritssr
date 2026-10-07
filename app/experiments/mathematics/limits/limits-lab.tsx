@@ -100,16 +100,16 @@ export default function LimitsLab() {
   return (
     <section
       aria-labelledby="limits-lab-heading"
-      className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm"
+      className="border-border overflow-hidden rounded-2xl border"
     >
-      <div className="border-b border-zinc-200 bg-zinc-50 px-5 py-4 sm:px-6">
+      <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2
-          className="text-lg font-semibold text-zinc-950"
+          className="text-foreground text-lg font-semibold"
           id="limits-lab-heading"
         >
           Approach a point
         </h2>
-        <p className="mt-1 text-sm text-zinc-600">
+        <p className="text-muted mt-1 text-sm">
           Choose a function, then bring the sample point closer from either
           side.
         </p>
@@ -164,7 +164,7 @@ export default function LimitsLab() {
               r="6"
             />
           </svg>
-          <figcaption className="text-sm leading-6 text-zinc-600">
+          <figcaption className="text-muted text-sm leading-6">
             Blue shows the function; amber marks the approaching sample. Open
             circles mark a missing endpoint. The horizontal axis is{" "}
             {katexify(String.raw`x\in[-1,3]`, false)}.
@@ -173,13 +173,13 @@ export default function LimitsLab() {
         <div className="min-w-0 space-y-5">
           <div>
             <label
-              className="block text-sm font-medium text-zinc-800"
+              className="text-foreground block text-sm font-medium"
               htmlFor="limit-example"
             >
               Example
             </label>
             <select
-              className="mt-2 w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-blue-600"
+              className="border-border mt-2 w-full rounded-xl border px-3 py-2 focus-visible:outline-2 focus-visible:outline-blue-600"
               id="limit-example"
               onChange={(event) => {
                 const { value } = event.currentTarget;
@@ -205,13 +205,13 @@ export default function LimitsLab() {
           </div>
           <div>
             <label
-              className="block text-sm font-medium text-zinc-800"
+              className="text-foreground block text-sm font-medium"
               htmlFor="limit-side"
             >
               Approach from
             </label>
             <select
-              className="mt-2 w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-blue-600"
+              className="border-border mt-2 w-full rounded-xl border px-3 py-2 focus-visible:outline-2 focus-visible:outline-blue-600"
               id="limit-side"
               onChange={(event) => {
                 const { value } = event.currentTarget;
@@ -227,7 +227,7 @@ export default function LimitsLab() {
           </div>
           <div>
             <label
-              className="block text-sm font-medium text-zinc-800"
+              className="text-foreground block text-sm font-medium"
               htmlFor="limit-distance"
             >
               Distance from the target
@@ -245,7 +245,7 @@ export default function LimitsLab() {
               value={power}
             />
             <output
-              className="mt-1 block text-sm text-zinc-600"
+              className="text-muted mt-1 block text-sm"
               htmlFor="limit-distance"
             >
               {katexify(`h=${format(distance)}`, false)}
@@ -253,7 +253,7 @@ export default function LimitsLab() {
           </div>
           <div
             aria-live="polite"
-            className="rounded-xl bg-blue-50 p-4 text-sm leading-7 text-blue-950"
+            className="text-foreground border-border rounded-xl border p-4 text-sm leading-7"
           >
             <div>
               {katexify(
@@ -276,8 +276,8 @@ export default function LimitsLab() {
           </div>
         </div>
       </div>
-      <div className="border-t border-zinc-200 px-5 py-5 sm:px-6">
-        <h3 className="text-base font-semibold text-zinc-950">
+      <div className="border-border border-t px-5 py-5 sm:px-6">
+        <h3 className="text-foreground text-base font-semibold">
           Look from both sides
         </h3>
         <div className="scrollbar-subtle mt-3 overflow-x-auto">
@@ -285,7 +285,7 @@ export default function LimitsLab() {
             <caption className="sr-only">
               Nearby function values from the left and right
             </caption>
-            <thead className="border-b border-zinc-200 text-zinc-600">
+            <thead className="border-border text-muted border-b">
               <tr>
                 <th className="py-2 pr-4" scope="col">
                   {katexify("h", false)}
@@ -300,7 +300,7 @@ export default function LimitsLab() {
             </thead>
             <tbody>
               {APPROACHES.map((step) => (
-                <tr className="border-b border-zinc-100" key={step}>
+                <tr className="border-border border-b" key={step}>
                   <td className="py-2 pr-4">{katexify(format(step), false)}</td>
                   <td className="py-2 pr-4">
                     {katexify(
@@ -319,7 +319,7 @@ export default function LimitsLab() {
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-sm leading-6 text-zinc-700">
+        <p className="text-muted mt-4 text-sm leading-6">
           {selected.explanation}
         </p>
       </div>

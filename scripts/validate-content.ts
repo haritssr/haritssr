@@ -16,6 +16,11 @@ const domains = new Set<string>();
 const datePattern = /^\d{4}-\d{2}-\d{2}$/u;
 const localRoutePattern =
   /^\/experiments\/ui-explorations\/(?:task|tools)(?:\/|$)/u;
+const titleSeparatorPattern = /[^a-z0-9]+/g;
+
+function titleSlug(title: string): string {
+  return title.toLowerCase().replace(titleSeparatorPattern, "-");
+}
 
 function validDate(value: string): boolean {
   if (!datePattern.test(value)) {
@@ -28,12 +33,20 @@ function validDate(value: string): boolean {
 }
 
 for (const domain of ExperimentsData) {
+  const usesTitleSlugs =
+    domain.slug === "mathematics" || domain.slug === "physics";
+  if (usesTitleSlugs && domain.slug !== titleSlug(domain.title)) {
+    failures.push(`Domain name differs from URL: ${domain.slug}`);
+  }
   if (domains.has(domain.slug)) {
     failures.push(`Duplicate domain: ${domain.slug}`);
   }
   domains.add(domain.slug);
   for (const experiment of domain.experiments) {
     const route = `/experiments/${domain.slug}/${experiment.slug}`;
+    if (usesTitleSlugs && experiment.slug !== titleSlug(experiment.title)) {
+      failures.push(`Experiment name differs from URL: ${route}`);
+    }
     if (catalogRoutes.has(route)) {
       failures.push(`Duplicate route: ${route}`);
     }

@@ -62,7 +62,7 @@ export default function QuadraticLab() {
   return (
     <section
       aria-labelledby="quadratic-lab-heading"
-      className="border-border bg-background overflow-hidden rounded-2xl border"
+      className="border-border overflow-hidden rounded-2xl border"
     >
       <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2 className="text-lg font-semibold" id="quadratic-lab-heading">
@@ -185,14 +185,14 @@ export default function QuadraticLab() {
           </figcaption>
         </figure>
 
-        <div className="border-border bg-surface-hover min-w-0 space-y-6 border-t p-5 sm:p-6 lg:border-t-0 lg:border-l">
+        <div className="border-border min-w-0 space-y-6 border-t p-5 sm:p-6 lg:border-t-0 lg:border-l">
           <div className="flex flex-wrap gap-2">
             {presets.map((preset) => (
               <button
                 aria-pressed={
                   a === preset.a && b === preset.b && c === preset.c
                 }
-                className="border-border bg-background text-foreground hover:bg-interface-hover focus-visible:outline-action aria-pressed:border-action aria-pressed:bg-action/10 cursor-pointer rounded-md border px-3 py-2 text-xs font-medium focus-visible:outline-2 focus-visible:outline-offset-2 aria-pressed:font-semibold"
+                className="border-border text-foreground hover:bg-interface-hover focus-visible:outline-action aria-pressed:border-action aria-pressed:bg-action/10 cursor-pointer rounded-md border px-3 py-2 text-xs font-medium focus-visible:outline-2 focus-visible:outline-offset-2 aria-pressed:font-semibold"
                 key={preset.label}
                 onClick={() => {
                   setCoefficients({ a: preset.a, b: preset.b, c: preset.c });
@@ -208,7 +208,7 @@ export default function QuadraticLab() {
               Opening and steepness, {katexify("a", false)}
             </label>
             <select
-              className="border-border bg-background focus-visible:outline-action mt-2 w-full rounded-md border px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="border-border focus-visible:outline-action mt-2 w-full rounded-md border px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2"
               id="quadratic-a"
               onChange={(event) => {
                 updateCoefficient("a", Number(event.currentTarget.value));

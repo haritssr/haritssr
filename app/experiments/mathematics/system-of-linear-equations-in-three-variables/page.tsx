@@ -9,8 +9,8 @@ import katexify from "@/utils/katexify";
 import LinearSystemLab from "./linear-system-lab";
 
 export const metadata: Metadata = getExperimentMetadata(
-  "math",
-  "linear-equations-three-variables"
+  "mathematics",
+  "system-of-linear-equations-in-three-variables"
 );
 
 const workedSystem = String.raw`\begin{cases}x+y+z=6\\2x-y+z=3\\x+2y-z=2\end{cases}`;
@@ -60,7 +60,7 @@ const exercises = [
 
 function Equation({ tex }: { tex: string }) {
   return (
-    <div className="bg-interface-hover text-foreground overflow-x-auto rounded-xl px-4 py-4 text-center text-sm sm:text-base">
+    <div className="text-foreground border-border overflow-x-auto rounded-xl border px-4 py-4 text-center text-sm sm:text-base">
       {katexify(tex, true)}
     </div>
   );
@@ -116,7 +116,7 @@ export default function LinearEquationsThreeVariablesPage() {
         <div className="grid gap-3 md:grid-cols-3">
           {solutionCases.map((example) => (
             <article
-              className="border-border bg-surface text-foreground rounded-xl border p-5"
+              className="border-border text-foreground rounded-xl border p-5"
               key={example.name}
             >
               <h3 className="font-semibold">{example.name}</h3>
@@ -294,7 +294,7 @@ export default function LinearEquationsThreeVariablesPage() {
         <ol className="space-y-4">
           {exercises.map((exercise, index) => (
             <li
-              className="border-border bg-surface text-foreground rounded-xl border p-5 sm:p-6"
+              className="border-border text-foreground rounded-xl border p-5 sm:p-6"
               key={exercise.system}
             >
               <h3 className="font-semibold">

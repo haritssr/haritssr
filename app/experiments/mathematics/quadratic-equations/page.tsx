@@ -9,7 +9,7 @@ import katexify from "@/utils/katexify";
 import QuadraticLab from "./quadratic-lab";
 
 export const metadata: Metadata = getExperimentMetadata(
-  "math",
+  "mathematics",
   "quadratic-equations"
 );
 
@@ -58,7 +58,7 @@ const exercises = [
 
 function Equation({ tex }: { tex: string }) {
   return (
-    <div className="bg-interface-hover text-foreground overflow-x-auto rounded-xl px-5 py-4 text-center">
+    <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
       {katexify(tex, true)}
     </div>
   );
@@ -119,7 +119,7 @@ export default function QuadraticEquationsPage() {
         <div className="grid gap-3 md:grid-cols-3">
           {rootCases.map(({ condition, title, description }) => (
             <article
-              className="border-border bg-surface rounded-xl border p-5"
+              className="border-border rounded-xl border p-5"
               key={condition}
             >
               <p className="text-action font-semibold">
@@ -222,7 +222,7 @@ export default function QuadraticEquationsPage() {
           {exercises.map(
             ({ prompt, expression, working, explanation }, index) => (
               <li
-                className="border-border bg-surface rounded-xl border p-5 sm:p-6"
+                className="border-border rounded-xl border p-5 sm:p-6"
                 key={expression}
               >
                 <h3 className="font-semibold">

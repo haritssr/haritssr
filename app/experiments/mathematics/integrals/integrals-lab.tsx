@@ -55,16 +55,16 @@ export default function IntegralsLab() {
   return (
     <section
       aria-labelledby="integrals-lab-heading"
-      className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm"
+      className="border-border overflow-hidden rounded-2xl border"
     >
-      <div className="border-b border-zinc-200 bg-zinc-50 px-5 py-4 sm:px-6">
+      <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2
-          className="text-lg font-semibold text-zinc-950"
+          className="text-foreground text-lg font-semibold"
           id="integrals-lab-heading"
         >
           Build area from rectangles
         </h2>
-        <p className="mt-1 text-sm text-zinc-600">
+        <p className="text-muted mt-1 text-sm">
           Add rectangles and watch the estimate approach the exact integral.
         </p>
       </div>
@@ -105,7 +105,7 @@ export default function IntegralsLab() {
               <path d={curve} fill="none" stroke="#1d4ed8" strokeWidth="3" />
             </g>
           </svg>
-          <figcaption className="text-sm leading-6 text-zinc-600">
+          <figcaption className="text-muted text-sm leading-6">
             Blue rectangles contribute positive signed area. Amber rectangles
             below the horizontal axis contribute negative signed area. Each
             rectangle uses the function value at its midpoint.
@@ -114,13 +114,13 @@ export default function IntegralsLab() {
         <div className="min-w-0 space-y-5">
           <div>
             <label
-              className="block text-sm font-medium text-zinc-800"
+              className="text-foreground block text-sm font-medium"
               htmlFor="integral-function"
             >
               Function
             </label>
             <select
-              className="mt-2 w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-blue-600"
+              className="border-border mt-2 w-full rounded-xl border px-3 py-2 focus-visible:outline-2 focus-visible:outline-blue-600"
               id="integral-function"
               onChange={(event) => {
                 const { value } = event.currentTarget;
@@ -137,7 +137,7 @@ export default function IntegralsLab() {
           </div>
           <div>
             <label
-              className="block text-sm font-medium text-zinc-800"
+              className="text-foreground block text-sm font-medium"
               htmlFor="integral-upper"
             >
               Upper bound
@@ -155,7 +155,7 @@ export default function IntegralsLab() {
               value={upper}
             />
             <output
-              className="mt-1 block text-sm text-zinc-600"
+              className="text-muted mt-1 block text-sm"
               htmlFor="integral-upper"
             >
               {katexify(String.raw`a=${lower},\quad b=${format(upper)}`, false)}
@@ -163,7 +163,7 @@ export default function IntegralsLab() {
           </div>
           <div>
             <label
-              className="block text-sm font-medium text-zinc-800"
+              className="text-foreground block text-sm font-medium"
               htmlFor="integral-rectangles"
             >
               Number of rectangles
@@ -181,7 +181,7 @@ export default function IntegralsLab() {
               value={rectangles}
             />
             <output
-              className="mt-1 block text-sm text-zinc-600"
+              className="text-muted mt-1 block text-sm"
               htmlFor="integral-rectangles"
             >
               {katexify(`n=${rectangles}`, false)}
@@ -189,7 +189,7 @@ export default function IntegralsLab() {
           </div>
           <div
             aria-live="polite"
-            className="rounded-xl bg-blue-50 p-4 text-sm leading-7 text-blue-950"
+            className="text-foreground border-border rounded-xl border p-4 text-sm leading-7"
           >
             <div>
               {katexify(
@@ -205,7 +205,7 @@ export default function IntegralsLab() {
           </div>
         </div>
       </div>
-      <p className="border-t border-zinc-200 px-5 py-4 text-sm leading-6 text-zinc-700 sm:px-6">
+      <p className="border-border text-muted border-t px-5 py-4 text-sm leading-6 sm:px-6">
         A definite integral measures signed accumulation. When the curve crosses
         the axis, positive and negative parts can cancel even though the
         geometric area is not zero.

@@ -41,9 +41,9 @@ const presets = [
 const rowNames = ["first", "second", "third"] as const;
 const columns = [...variables, "constant"] as const;
 const inputClass =
-  "border-border bg-background text-foreground focus-visible:outline-action min-w-0 w-full rounded-md border px-2 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2";
+  "border-border text-foreground focus-visible:outline-action min-w-0 w-full rounded-md border px-2 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2";
 const buttonClass =
-  "border-border bg-background text-foreground hover:bg-interface-hover focus-visible:outline-action min-h-11 cursor-pointer rounded-lg border px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-default disabled:opacity-40";
+  "border-border text-foreground hover:bg-interface-hover focus-visible:outline-action min-h-11 cursor-pointer rounded-lg border px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-default disabled:opacity-40";
 
 function draftFor(system: readonly (readonly number[])[]) {
   return system.map((row) => row.map(String));
@@ -111,7 +111,7 @@ export default function LinearSystemLab() {
   return (
     <section
       aria-labelledby="linear-system-lab-heading"
-      className="border-border bg-background text-foreground overflow-hidden rounded-2xl border"
+      className="border-border text-foreground overflow-hidden rounded-2xl border"
     >
       <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2
@@ -126,7 +126,7 @@ export default function LinearSystemLab() {
         </p>
       </div>
       <div className="grid lg:grid-cols-[20rem_minmax(0,1fr)]">
-        <div className="border-border bg-surface-hover text-foreground min-w-0 space-y-6 border-b p-5 sm:p-6 lg:border-r lg:border-b-0">
+        <div className="border-border text-foreground min-w-0 space-y-6 border-b p-5 sm:p-6 lg:border-r lg:border-b-0">
           <fieldset className="flex flex-wrap gap-2">
             <legend className="sr-only">Example systems</legend>
             {presets.map((preset) => (
@@ -210,7 +210,7 @@ export default function LinearSystemLab() {
               <div className="overflow-x-auto py-2 text-sm sm:text-base">
                 {katexify(systemTex(system), true)}
               </div>
-              <div className="border-border bg-interface-hover rounded-xl border p-4">
+              <div className="border-border rounded-xl border p-4">
                 <p className="text-muted text-xs font-medium">
                   Step {stepIndex + 1} of {result.steps.length}
                 </p>

@@ -11,7 +11,7 @@ function InlineMath({ expression }: { expression: string }) {
 
 function MathBlock({ expression }: { expression: string }) {
   return (
-    <div className="overflow-x-auto rounded-xl bg-zinc-50 px-5 py-4 text-center text-zinc-950">
+    <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
       {katexify(expression, true)}
     </div>
   );
@@ -19,8 +19,8 @@ function MathBlock({ expression }: { expression: string }) {
 
 function Rule({ children, title }: { children: ReactNode; title: string }) {
   return (
-    <li className="space-y-4 border-t border-zinc-200 pt-6">
-      <h3 className="text-lg font-semibold text-zinc-950">{title}</h3>
+    <li className="border-border space-y-4 border-t pt-6">
+      <h3 className="text-foreground text-lg font-semibold">{title}</h3>
       {children}
     </li>
   );
@@ -28,7 +28,7 @@ function Rule({ children, title }: { children: ReactNode; title: string }) {
 
 export default function IntegralRules() {
   return (
-    <section className="mt-14 max-w-3xl space-y-5 text-base leading-8 text-zinc-700">
+    <section className="text-muted mt-14 max-w-3xl space-y-5 text-base leading-8">
       <Section name="Where the basic integration rules come from" />
       <p>
         Every indefinite-integral rule can be checked by differentiating its

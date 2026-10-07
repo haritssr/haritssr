@@ -12,7 +12,11 @@ const whitespaceSequencePattern = /\s+/;
 const segmentSeparatorPattern = /[-_]+/g;
 const mainRoutes = new Set(["projects", "experiments", "blog", "design"]);
 
-export default function Breadcrumbs() {
+export default function Breadcrumbs({
+  routeLabels,
+}: {
+  routeLabels: Readonly<Record<string, string>>;
+}) {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
 
@@ -29,7 +33,7 @@ export default function Breadcrumbs() {
         <ol className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
           <li className="flex items-center">
             <Link className="text-muted hover:text-foreground" href="/">
-              home
+              Home
             </Link>
 
             {segments.length > 0 && <Separator />}
@@ -37,7 +41,7 @@ export default function Breadcrumbs() {
 
           {segments.map((segment, index) => {
             const href = `/${segments.slice(0, index + 1).join("/")}`;
-            const label = formatSegmentLabel(segment);
+            const label = routeLabels[href] ?? formatSegmentLabel(segment);
             const isLast = index === segments.length - 1;
 
             return (
@@ -47,7 +51,7 @@ export default function Breadcrumbs() {
                     aria-current="page"
                     className="text-foreground whitespace-nowrap"
                   >
-                    {label.toLocaleLowerCase()}
+                    {label}
                   </span>
                 ) : (
                   <>
@@ -55,7 +59,7 @@ export default function Breadcrumbs() {
                       className="text-muted hover:text-foreground/80 whitespace-nowrap"
                       href={href}
                     >
-                      {label.toLocaleLowerCase()}
+                      {label}
                     </Link>
                     <Separator />
                   </>

@@ -1170,7 +1170,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     description: "Interactive explorations of physical phenomena",
     experiments: [
       {
-        slug: "units",
+        slug: "physical-quantities-and-units",
         title: "Physical Quantities and Units",
         description:
           "Explore SI quantities, units, formulas, and their prerequisite graph.",
@@ -1191,7 +1191,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Fill atomic orbitals and inspect electron configurations and quantum numbers.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-23",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
       },
       {
         slug: "motion-diagrams",
@@ -1200,7 +1200,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare motion through interactive position and velocity diagrams.",
         tags: ["mechanics", "visualization"],
         createdAt: "2026-09-25",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
       },
       {
         slug: "atomic-orbitals",
@@ -1209,10 +1209,10 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore atomic wavefunctions, probability distributions, and orbital shapes.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06"],
       },
       {
-        slug: "double-slit",
+        slug: "double-slit-interference",
         title: "Double-Slit Interference",
         description:
           "Change wavelength and slit geometry to explore interference fringes.",
@@ -1227,7 +1227,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Read key physics equations with variable definitions, units, and sources.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-09-30",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06"],
       },
     ],
     id: 16,
@@ -1239,7 +1239,25 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     description: "Interactive math lessons and experiments",
     experiments: [
       {
-        slug: "linear-equations-three-variables",
+        slug: "euler-s-identity",
+        title: "Euler’s Identity",
+        description:
+          "Connect exponential growth, circle geometry, and imaginary numbers through Euler’s formula, an interactive unit circle, and a step-by-step derivation of Euler’s identity.",
+        tags: ["complex-numbers", "trigonometry", "exponents", "visualization"],
+        createdAt: "2026-10-07",
+        updatedAt: ["2026-10-07"],
+      },
+      {
+        slug: "logarithms",
+        title: "Logarithms",
+        description:
+          "Understand logarithms, derive their rules, and explore logarithmic graphs and their exponential inverses.",
+        tags: ["algebra", "logarithms", "exponents", "visualization"],
+        createdAt: "2026-10-06",
+        updatedAt: ["2026-10-06"],
+      },
+      {
+        slug: "system-of-linear-equations-in-three-variables",
         title: "System of Linear Equations in Three Variables",
         description:
           "Solve three-variable linear systems with elimination, explore exact row operations, and distinguish unique, infinite, and no-solution cases.",
@@ -1293,7 +1311,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     ],
     id: 17,
     logoSrc: "/icons/math.svg",
-    slug: "math",
+    slug: "mathematics",
     title: "Mathematics",
   },
 ];

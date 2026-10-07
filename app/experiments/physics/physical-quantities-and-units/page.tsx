@@ -58,9 +58,13 @@ const PREREQUISITE_GRAPH_EDGES = createPrerequisiteGraphEdges();
 
 const QUANTITY_DEPENDENTS = createQuantityDependents();
 
-export const metadata = getExperimentMetadata("physics", "units", {
-  description: DESCRIPTION,
-});
+export const metadata = getExperimentMetadata(
+  "physics",
+  "physical-quantities-and-units",
+  {
+    description: DESCRIPTION,
+  }
+);
 
 export default function UnitsPage() {
   return (
@@ -68,12 +72,15 @@ export default function UnitsPage() {
       <PageStructuredData
         name={metadata.title}
         description={DESCRIPTION}
-        path="/experiments/physics/units"
+        path="/experiments/physics/physical-quantities-and-units"
         breadcrumbs={[
-          { name: "home", path: "/" },
-          { name: "experiments", path: "/experiments" },
-          { name: "physics", path: "/experiments/physics" },
-          { name: "units", path: "/experiments/physics/units" },
+          { name: "Home", path: "/" },
+          { name: "Experiments", path: "/experiments" },
+          { name: "Physics", path: "/experiments/physics" },
+          {
+            name: "Physical Quantities and Units",
+            path: "/experiments/physics/physical-quantities-and-units",
+          },
         ]}
       />
       <div>
