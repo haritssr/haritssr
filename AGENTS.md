@@ -72,6 +72,11 @@ This machine has 8 GB RAM. Optimize commands for low resource usage:
 - Never start multiple development servers.
 - Reuse the existing development server.
 - Do not run background processes unnecessarily.
+- Never launch a temporary Chrome process for any purpose, including testing,
+  screenshots, headless browsing, or remote debugging. This prohibition applies
+  to foreground and background processes, whether launched directly or through
+  browser automation tools. Reuse an already-running browser session without
+  launching Chrome, or use non-browser verification instead.
 - Kill temporary processes after finishing.
 - Prefer targeted tests and targeted linting.
 - Do not run the entire test suite unless necessary.
