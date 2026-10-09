@@ -88,7 +88,7 @@ export default async function BlogPostPage({
           &nbsp;&nbsp;
           <p>{Math.ceil(post.wordCount / 200)} Min Read</p>
         </div>
-        <article className="prose prose-zinc prose-headings:text-foreground max-w-none">
+        <article className="prose prose-zinc prose-headings:text-foreground in-data-[theme=dark]:prose-invert max-w-none">
           <PostContent />
         </article>
       </Content>

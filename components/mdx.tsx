@@ -4,7 +4,7 @@ import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 
 export default function MDX({ tree }: { tree: Root }) {
   return (
-    <article className="prose prose-zinc max-w-none">
+    <article className="prose prose-zinc in-data-[theme=dark]:prose-invert max-w-none">
       {toJsxRuntime(tree, {
         Fragment,
         development: false,
