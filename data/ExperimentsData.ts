@@ -927,7 +927,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
     ],
     id: 11,
-    logoSrc: "/icons/harislab.svg",
+    logoSrc: "/icons/harimaki.svg",
     slug: "haris-lab",
     title: "Haris Lab",
   },

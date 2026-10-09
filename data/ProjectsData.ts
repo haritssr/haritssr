@@ -25,23 +25,22 @@ export interface ProjectsDataType {
 
 export const ProjectsData: ProjectsDataType[] = [
   {
-    project_name: "Haris Lab",
+    project_name: "Harimaki Studio",
     about_client: {
-      logo_src: "/icons/harislab.svg",
-      brand_name: "Haris Lab",
+      logo_src: "/icons/harimaki.svg",
+      brand_name: "Harimaki",
       short_about:
         "Reference, analyze, practice, assesment, tutoring Math and Physics.",
       long_about:
         "Provide online platform for reference, analyze, practice, assesment, and offline tutoring math and physics high school and early college level.",
-      company_name: "PT Haris Laboratorium Indonesia",
+      company_name: "PT Harimaki Studio Indonesia",
       phone_number: "+62-8953-3110-3401",
-      //https://www.harislab.com
-      website: "https://www.harislab.vercel.app",
+      website: "https://www.harimaki.com",
       office_location: "-",
       industry: "Education",
     },
     about_project: {
-      client: "PT Haris Laboratorium Indonesia, via Harits Syah*",
+      client: "PT Harimaki, via Harits Syah*",
       my_role: ["Software Engineer", "Designer", "Owner"],
       working_period: "Jun 2021 - Present",
       website_status: ["Production"],

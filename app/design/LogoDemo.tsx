@@ -10,7 +10,7 @@ const LOGOS = [
   {
     alt: "Haris Lab logo",
     name: "Haris Lab",
-    src: "/icons/harislab.svg",
+    src: "/icons/harimaki.svg",
     url: "harislab.com",
   },
   {
