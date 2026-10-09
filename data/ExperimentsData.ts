@@ -1239,6 +1239,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     description: "Interactive math lessons and experiments",
     experiments: [
       {
+        slug: "polinomial",
+        title: "Polinomial",
+        description:
+          "Latihan 27 soal polinomial dengan tabel koefisien, pengelompokan suku, petunjuk bertahap, pembahasan, dan progres yang tersimpan di browser.",
+        tags: ["algebra", "polynomials", "equations", "learning"],
+        createdAt: "2026-10-08",
+        updatedAt: ["2026-10-08"],
+      },
+      {
         slug: "euler-s-identity",
         title: "Euler’s Identity",
         description:
