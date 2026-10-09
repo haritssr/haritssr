@@ -16,6 +16,16 @@ lint rules, types, compiler diagnostics, existing tests, and observability.
 Apply the same quality standards to human-written and agent-written code.
 When mistakes recur, strengthen reusable checks and guardrails.
 
+# Design Component Reuse
+
+- Before creating or changing UI, inspect the `/design` page and its source in
+  `app/design/` for an existing component or pattern that serves the need.
+- Always reuse an available component demonstrated in `/design`, importing its
+  shared implementation and following the demonstrated styling and behavior.
+  Do not create a custom replacement when a suitable component already exists.
+- Create a new component or design only when no suitable existing component or
+  pattern is available. Follow the established design tokens and conventions.
+
 # Mathematical Notation
 
 - Always render mathematical notation in page content and UI with the project
