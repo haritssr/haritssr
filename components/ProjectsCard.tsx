@@ -53,18 +53,18 @@ export default function ProjectsCard({
 
       <div className="flex space-x-2.5 px-3 pb-3">
         <a
-          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
+          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground in-data-[theme=dark]:bg-middle-hover in-data-[theme=dark]:text-foreground in-data-[theme=dark]:hover:bg-surface inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
           href={href}
           rel="noopener noreferrer"
           target="_blank"
         >
-          Visit
+          Website
         </a>
         <Link
           className="corner-squircle border-border text-foreground/90 hover:bg-surface-hover hover:border-border-hover inline-flex w-1/2 items-center justify-center rounded-xl border py-1.5 text-center text-sm"
           href={`/projects/${getProjectSlug(title)}`}
         >
-          Details
+          Overview
         </Link>
       </div>
     </div>
