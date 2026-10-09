@@ -1,5 +1,7 @@
 import path from "node:path";
 
+import Section from "@/components/Section";
+
 import generateTOC from "./generateTOC";
 import TableOfContentsClient from "./TableOfContentsClient";
 
@@ -11,8 +13,8 @@ export default function TableOfContents({ slug }: { slug: string }) {
   return (
     <nav aria-label="On this page" className="hidden sm:col-span-1 sm:block">
       <div className="sticky top-11.25">
-        <div className="text-foreground/80 bg-white px-5 pt-10">
-          In this page
+        <div className="px-5 pt-10">
+          <Section name="On this page" variant="compact" />
         </div>
         <TableOfContentsClient items={articleTOC} />
       </div>
