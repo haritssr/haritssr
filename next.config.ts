@@ -20,38 +20,16 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   experimental: {
-    useTypeScriptCli: true,
+    optimizePackageImports: ["@mantine/core", "@mantine/hooks", "radix-ui"],
+    // Reclaim persisted dev-cache memory on this 8 GB machine.
+    turbopackMemoryEviction: "full",
   },
 
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
-        hostname: "vignette.wikia.nocookie.net",
-        pathname: "/**",
-        port: "",
-        protocol: "https",
-      },
-      {
-        hostname: "unsplash.com",
-        pathname: "/**",
-        port: "",
-        protocol: "https",
-      },
-      {
-        hostname: "res.cloudinary.com",
-        pathname: "/**",
-        port: "",
-        protocol: "https",
-      },
-      {
         hostname: "ws-public.interpol.int",
-        pathname: "/**",
-        port: "",
-        protocol: "https",
-      },
-      {
-        hostname: "assets.vercel.com",
         pathname: "/**",
         port: "",
         protocol: "https",
@@ -76,7 +54,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  turbopack: {},
 };
 
 export default withMDX(nextConfig);
