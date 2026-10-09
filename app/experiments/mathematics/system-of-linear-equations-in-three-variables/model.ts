@@ -3,7 +3,7 @@ interface Fraction {
   denominator: number;
 }
 
-export interface EliminationStep {
+interface EliminationStep {
   operation: string;
   matrix: Fraction[][];
 }
@@ -41,7 +41,7 @@ function subtract(left: Fraction, right: Fraction) {
   );
 }
 
-export function fractionTex(value: Fraction): string {
+function fractionTex(value: Fraction): string {
   if (value.denominator === 1) {
     return `${value.numerator}`;
   }
@@ -79,7 +79,7 @@ function expressionTex(
   return expression || "0";
 }
 
-export function equationTex(row: readonly number[]) {
+function equationTex(row: readonly number[]) {
   return `${expressionTex(
     fraction(0),
     variables.map((variable, index) => ({
