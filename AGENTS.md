@@ -89,6 +89,16 @@ This machine has 8 GB RAM. Optimize commands for low resource usage:
 - Never use `--webpack` with Next.js or build commands; use the default
   Turbopack command instead.
 
+# Discontinued Experiments
+
+- Keep retired experiments as static records in `data/DiscontinuedExperimentsData.ts`,
+  separate from the live catalog. Archive cards must not link to deleted routes.
+- Do not reintroduce Headless UI, Mantine, Radix UI, React Aria, React Table,
+  React Query, or cmdk dependencies. Continuing widgets use the Base UI patterns
+  demonstrated in `/design` and the shared components.
+- The removal-commit link uses the actual full SHA, added in a follow-up change
+  after the removal commit exists. Never use a placeholder or current HEAD.
+
 # Local Database Experiments
 
 The task and tools database experiments are available only in development.

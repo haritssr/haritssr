@@ -20,7 +20,6 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   experimental: {
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks", "radix-ui"],
     // Reclaim persisted dev-cache memory on this 8 GB machine.
     turbopackMemoryEviction: "full",
   },

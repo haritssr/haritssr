@@ -10,13 +10,19 @@ const scienceIconColors = new Map([
 export default function ExperimentDomainIcon({
   src,
   size = 18,
+  variant = "default",
 }: {
   src: string;
   size?: 18 | 36;
+  variant?: "default" | "muted";
 }) {
   const scienceIconColor = scienceIconColors.get(src);
 
-  if (monochromeIcons.has(src) || scienceIconColor !== undefined) {
+  if (
+    variant === "muted" ||
+    monochromeIcons.has(src) ||
+    scienceIconColor !== undefined
+  ) {
     const maskStyle: CSSProperties & { "--icon-mask": string } = {
       "--icon-mask": `url("${src}")`,
     };
@@ -24,7 +30,7 @@ export default function ExperimentDomainIcon({
     return (
       <span
         aria-hidden="true"
-        className={`inline-block shrink-0 bg-current [mask-image:var(--icon-mask)] [mask-size:contain] [mask-position:center] [mask-repeat:no-repeat] ${size === 36 ? "size-9" : "size-4.5"} ${scienceIconColor ?? "text-foreground"}`}
+        className={`inline-block shrink-0 bg-current mask-(--icon-mask) mask-contain mask-center mask-no-repeat ${size === 36 ? "size-9" : "size-4.5"} ${variant === "muted" ? "text-muted" : (scienceIconColor ?? "text-foreground")}`}
         style={maskStyle}
       />
     );

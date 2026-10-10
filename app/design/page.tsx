@@ -140,11 +140,9 @@ export default function DesignSystem() {
               />
             </li>
             <li>
-              Explore other variations in the{" "}
-              <InternalLink href="/experiments/radix-ui">Radix UI</InternalLink>{" "}
-              or{" "}
-              <InternalLink href="/experiments/headless-ui">
-                Headless UI
+              Browse the{" "}
+              <InternalLink href="/experiments">
+                experiment collection and discontinued history
               </InternalLink>
             </li>
             <li className="text-muted">

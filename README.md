@@ -9,7 +9,9 @@ Personal and experimental site by Harits Syah [haritssr.com](https://haritssr.co
 
 Built with Next.js App Router, React, TypeScript, and Tailwind CSS. Blog posts
 use MDX, and Bun is used for project scripts and tooling. The experiments also
-explore libraries including Radix UI, Headless UI, Mantine, and TanStack Table.
+explore frontend techniques, browser APIs, mathematics, and physics.
+Discontinued library experiments are recorded in a static archive; their demo
+code and exclusive dependencies have been removed.
 
 ## Decisions
 
@@ -18,6 +20,10 @@ explore libraries including Radix UI, Headless UI, Mantine, and TanStack Table.
 - Turbopack discovers MDX files automatically, replacing the manual import registry.
 - Ultracite with Oxlint and Oxfmt replaces Biome.
 - Native APIs replace Effect, date-fns, and react-use in small helpers.
+- Retired Headless UI, Mantine, Radix UI, React Aria, React Table, React Query,
+  and cmdk experiments are static historical records rather than live routes.
+  Their implementations and exclusive dependencies were removed; continuing
+  widgets use Base UI. Historical counts are separate from live experiment counts.
 - The installable PWA caches a standalone offline page instead of Next.js pages.
 - SQLite task and tools experiments stay local until they have authentication,
   authorization, rate limits, and durable storage.
@@ -131,3 +137,16 @@ The feed contains summaries that link to the full posts. Its
 posts are visible to RSS readers. In production, the statically generated
 feed is updated during deployment, so a new deployment is required for a new
 post to appear in the live feed.
+
+### Discontinued experiment history
+
+`data/DiscontinuedExperimentsData.ts` contains the archived names, marks, and
+historical experiment counts. The archive renders static cards inside the
+collapsed discontinued accordion; it does not register live pages, search
+entries, or sitemap URLs.
+
+`discontinuedExperimentHistory.removalCommitSha` stores the full SHA of the
+commit that removed the implementations and dependencies. It is recorded in a
+follow-up commit so the accordion can link to that exact GitHub commit. Keep
+this reference fixed to the removal commit; do not replace it with the current
+HEAD, a deployment SHA, or a placeholder.

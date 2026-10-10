@@ -16,5 +16,6 @@ site icon. Physics and Mathematics are custom SVG illustrations. These assets
 have transparent backgrounds; the experiment icon component colors monochrome
 and science icons through the site's theme tokens.
 
-The GitHub marks in the header and contact card use the installed
-`@radix-ui/react-icons` package.
+The GitHub marks in the header and contact card use the shared local
+`GitHubIcon` SVG component, based on the Simple Icons GitHub mark (CC0).
+Archived experiment marks are retained only for the discontinued history cards.

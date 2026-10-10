@@ -1,7 +1,7 @@
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
 import CopyContactButton from "@/components/CopyContactButton";
+import GitHubIcon from "@/components/GitHubIcon";
 import { SITE_URL } from "@/utils/site";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
@@ -101,7 +101,7 @@ function renderContact(contact: { icon: string; link: string; name: string }) {
 function ContactIcon({ icon }: { icon: string }) {
   if (icon === "github") {
     return (
-      <GitHubLogoIcon
+      <GitHubIcon
         aria-hidden="true"
         className="text-foreground size-4.5 shrink-0"
       />

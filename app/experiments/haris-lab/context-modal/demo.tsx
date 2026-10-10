@@ -1,7 +1,7 @@
 "use client";
 
+import { Dialog } from "@base-ui/react/dialog";
 import { QueueListIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Dialog } from "radix-ui";
 
 import SourceCodeLink from "@/components/SourceCodeLink";
 
@@ -9,12 +9,12 @@ export default function ContextModalDemo() {
   return (
     <Dialog.Root>
       <SourceCodeLink />
-      <Dialog.Trigger className="rdx-state-open:ring-2 rdx-state-open:ring-blue-600 rounded-md bg-zinc-100 p-2 hover:bg-zinc-200">
+      <Dialog.Trigger className="rounded-md bg-zinc-100 p-2 hover:bg-zinc-200 data-popup-open:ring-2 data-popup-open:ring-blue-600">
         <QueueListIcon className="h-5 w-5 text-zinc-700" />
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-gray-900/70" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-white sm:w-100">
+        <Dialog.Backdrop className="fixed inset-0 z-50 bg-gray-900/70" />
+        <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 h-auto max-h-[90vh] w-5/6 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-white sm:w-100">
           <section className="border-apple-gray4 flex items-center justify-between border-b px-5 py-2.5">
             <div className="-space-y-0.5">
               <Dialog.Title className="text-xl font-bold text-gray-800">
@@ -39,7 +39,7 @@ export default function ContextModalDemo() {
               SubSection
             </div>
           </section>
-        </Dialog.Content>
+        </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>
   );

@@ -1,87 +1,65 @@
 "use client";
 
+import { Accordion } from "@base-ui/react/accordion";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { Accordion } from "radix-ui";
-import type React from "react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function SideBarDemo() {
-  const [openAll, setOpenAll] = useState<boolean>(false);
+  const [openChapters, setOpenChapters] = useState<string[]>([]);
+  const openAll = chapterTitles.every((title) => openChapters.includes(title));
+
   return (
-    // Subjek
     <div className="w-full space-y-5">
       <SourceCodeLink />
-      {/* Domains */}
       {fisika.map((domain) => (
         <div key={domain.title}>
-          <div>
-            <div className="pl-2 text-lg font-medium">{domain.title}</div>
-            <button
-              onClick={() => {
-                setOpenAll(!openAll);
-              }}
-              type="button"
-            >
-              Open All
-            </button>
-            <div>{openAll.toString()}</div>
-          </div>
-          <div>
-            {/* Chapters */}
-            {domain.chapters.map((chapter) => (
-              <AccordionC
-                isOpen={openAll}
-                key={chapter?.title}
-                title={chapter?.title ?? " "}
-              >
-                {chapter?.topics.map((topic) => (
-                  // Topic
-                  <div className="cursor-pointer hover:bg-zinc-200" key={topic}>
-                    {topic}
-                  </div>
-                ))}
-              </AccordionC>
-            ))}
-          </div>
+          <div className="pl-2 text-lg font-medium">{domain.title}</div>
+          <button
+            type="button"
+            onClick={() => setOpenChapters(openAll ? [] : chapterTitles)}
+          >
+            {openAll ? "Close All" : "Open All"}
+          </button>
+          <Accordion.Root
+            multiple
+            value={openChapters}
+            onValueChange={setOpenChapters}
+          >
+            {domain.chapters.map((chapter) =>
+              chapter === undefined ? null : (
+                <Accordion.Item
+                  className="w-full rounded-md px-2 hover:bg-zinc-100 sm:w-1/3"
+                  key={chapter.title}
+                  value={chapter.title}
+                >
+                  <Accordion.Header>
+                    <Accordion.Trigger className="group flex w-full items-center justify-between py-1">
+                      {chapter.title}
+                      <ChevronRightIcon
+                        aria-hidden="true"
+                        className="h-4 w-4 group-data-panel-open:rotate-90"
+                      />
+                    </Accordion.Trigger>
+                  </Accordion.Header>
+                  <Accordion.Panel className="pl-3">
+                    {chapter.topics.map((topic) => (
+                      <div
+                        key={topic}
+                        className="cursor-pointer hover:bg-zinc-200"
+                      >
+                        {topic}
+                      </div>
+                    ))}
+                  </Accordion.Panel>
+                </Accordion.Item>
+              )
+            )}
+          </Accordion.Root>
         </div>
       ))}
     </div>
-  );
-}
-
-function AccordionC({
-  title,
-  children,
-  isOpen,
-}: {
-  title: string;
-  children: React.ReactNode;
-  isOpen: boolean;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  return (
-    <Accordion.Root
-      className="w-full rounded-md px-2 hover:bg-zinc-100 sm:w-1/3"
-      type="multiple"
-    >
-      <Accordion.Item value="item-1">
-        <Accordion.Header className="group">
-          <Accordion.Trigger
-            className="flex w-full items-center justify-between py-1"
-            data-state={isOpen ? "open" : "closed"}
-          >
-            {title} {isOpen.toString()} {isOpen.toString()}
-            {ref.current?.dataset.state}
-            <ChevronRightIcon className="group-rdx-state-open:rotate-90 h-4 w-4" />
-          </Accordion.Trigger>
-        </Accordion.Header>
-        <Accordion.Content className="pl-3" ref={ref}>
-          {children}
-        </Accordion.Content>
-      </Accordion.Item>
-    </Accordion.Root>
   );
 }
 
@@ -126,3 +104,9 @@ const fisika: fisikaType = [
     ],
   },
 ];
+
+const chapterTitles = fisika.flatMap((domain) =>
+  domain.chapters.flatMap((chapter) =>
+    chapter === undefined ? [] : [chapter.title]
+  )
+);

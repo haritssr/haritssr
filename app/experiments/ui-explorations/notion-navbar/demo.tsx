@@ -13,9 +13,9 @@ export default function NotionNavbarDemo() {
       <ExplanationList>
         <li>Navigation bar inspired by Notion’s marketing pages.</li>
         <li>
-          Dropdowns use Radix UI’s{" "}
+          Dropdowns use Base UI’s{" "}
           <ExternalLink
-            href="https://www.radix-ui.com/primitives/docs/components/navigation-menu"
+            href="https://base-ui.com/react/components/navigation-menu"
             name="Navigation Menu"
           />
           .

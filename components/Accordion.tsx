@@ -22,18 +22,21 @@ export function AccordionItem({
   children,
   panelClassName = "bg-white",
   title,
+  trailing,
   value,
 }: {
   children: ReactNode;
   panelClassName?: string;
   title: ReactNode;
+  trailing?: ReactNode;
   value: string;
 }) {
   return (
     <BaseAccordion.Item value={value}>
       <BaseAccordion.Header>
         <BaseAccordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
-          <span>{title}</span>
+          <span className="min-w-0 flex-1">{title}</span>
+          {trailing}
           <ChevronDownIcon
             aria-hidden="true"
             className="text-foreground h-5 w-5 shrink-0 transition-transform duration-200 group-data-panel-open:rotate-180"

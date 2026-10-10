@@ -1,11 +1,11 @@
 "use client";
 
+import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import {
   ArrowDownCircleIcon,
   BuildingOffice2Icon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
-import { NavigationMenu } from "radix-ui";
 
 interface NavigationLinkData {
   label: string;
@@ -141,11 +141,11 @@ export default function NotionNavigationMenu() {
                   <span>{item.label}</span>
                   <ChevronDownIcon
                     aria-hidden="true"
-                    className="group-rdx-state-open:rotate-180 h-3 w-3 transition-transform"
+                    className="h-3 w-3 transition-transform group-data-popup-open:rotate-180"
                     strokeWidth={3}
                   />
                 </NavigationMenu.Trigger>
-                <NavigationMenu.Content className="absolute top-full left-0 z-20 mt-2 w-max max-w-[calc(100vw-2rem)] overflow-x-auto rounded-md border border-zinc-200 bg-white p-2 text-sm font-medium shadow-lg">
+                <NavigationMenu.Content className="w-max max-w-[calc(100vw-2rem)] overflow-x-auto p-2 text-sm font-medium">
                   <div
                     className={
                       item.groups && item.groups.length > 1
@@ -167,6 +167,17 @@ export default function NotionNavigationMenu() {
           </NavigationMenu.Item>
         ))}
       </NavigationMenu.List>
+      <NavigationMenu.Portal>
+        <NavigationMenu.Positioner
+          sideOffset={8}
+          align="start"
+          className="z-40"
+        >
+          <NavigationMenu.Popup className="max-w-[calc(100vw-2rem)] overflow-hidden rounded-md border border-zinc-200 bg-white shadow-lg">
+            <NavigationMenu.Viewport />
+          </NavigationMenu.Popup>
+        </NavigationMenu.Positioner>
+      </NavigationMenu.Portal>
     </NavigationMenu.Root>
   );
 }
@@ -211,24 +222,22 @@ function MenuLink({
       : "block rounded px-2 py-1 text-zinc-800 hover:bg-zinc-50 focus-visible:bg-zinc-50 focus-visible:outline-hidden";
 
   return (
-    <NavigationMenu.Link asChild>
-      <a className={className} href={link.href}>
-        {icon === "building" ? (
-          <BuildingOffice2Icon
-            aria-hidden="true"
-            className="h-8 w-8 shrink-0 fill-zinc-200 text-zinc-700"
-            strokeWidth={1.5}
-          />
+    <NavigationMenu.Link className={className} href={link.href}>
+      {icon === "building" ? (
+        <BuildingOffice2Icon
+          aria-hidden="true"
+          className="h-8 w-8 shrink-0 fill-zinc-200 text-zinc-700"
+          strokeWidth={1.5}
+        />
+      ) : null}
+      <span className={variant === "detailed" ? "flex flex-col" : undefined}>
+        <span className="font-medium text-zinc-800">{link.label}</span>
+        {typeof link.description === "string" ? (
+          <span className="text-xs font-normal text-zinc-500">
+            {link.description}
+          </span>
         ) : null}
-        <span className={variant === "detailed" ? "flex flex-col" : undefined}>
-          <span className="font-medium text-zinc-800">{link.label}</span>
-          {typeof link.description === "string" ? (
-            <span className="text-xs font-normal text-zinc-500">
-              {link.description}
-            </span>
-          ) : null}
-        </span>
-      </a>
+      </span>
     </NavigationMenu.Link>
   );
 }
@@ -240,18 +249,16 @@ function MenuAction({
 }) {
   return (
     <div className="mt-2 border-t border-zinc-200 px-1 pt-2">
-      <NavigationMenu.Link asChild>
-        <a
-          className="flex items-center justify-center gap-1 rounded-md border border-zinc-200 px-2 py-1 text-black hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-          href={action.href}
-        >
-          <ArrowDownCircleIcon
-            aria-hidden="true"
-            className="h-4 w-4"
-            strokeWidth={1}
-          />
-          <span>{action.label}</span>
-        </a>
+      <NavigationMenu.Link
+        className="flex items-center justify-center gap-1 rounded-md border border-zinc-200 px-2 py-1 text-black hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+        href={action.href}
+      >
+        <ArrowDownCircleIcon
+          aria-hidden="true"
+          className="h-4 w-4"
+          strokeWidth={1}
+        />
+        <span>{action.label}</span>
       </NavigationMenu.Link>
       <p className="mt-1 text-center text-xs font-normal text-zinc-500">
         {action.note}

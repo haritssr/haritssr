@@ -2,6 +2,10 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import {
+  DiscontinuedExperimentsData,
+  discontinuedExperimentHistory,
+} from "@/data/DiscontinuedExperimentsData";
+import {
   ExperimentsData,
   getLatestExperimentUpdate,
 } from "@/data/ExperimentsData";
@@ -113,6 +117,32 @@ for (const file of blogFiles) {
   }
 }
 
+const archiveSlugs = new Set<string>();
+for (const record of DiscontinuedExperimentsData) {
+  if (archiveSlugs.has(record.slug)) {
+    failures.push(`Duplicate archive record: ${record.slug}`);
+  }
+  archiveSlugs.add(record.slug);
+  if (!Number.isInteger(record.experimentCount) || record.experimentCount < 1) {
+    failures.push(`Invalid historical experiment count: ${record.slug}`);
+  }
+  if (record.title.trim() === "" || record.description.trim() === "") {
+    failures.push(`Missing archive content: ${record.slug}`);
+  }
+  if (existsSync(path.join("app", record.formerRoute))) {
+    failures.push(
+      `Removed experiment implementation still exists: ${record.formerRoute}`
+    );
+  }
+}
+const { removalCommitSha } = discontinuedExperimentHistory;
+if (
+  removalCommitSha !== undefined &&
+  !/^[a-f0-9]{40}$/u.test(removalCommitSha)
+) {
+  failures.push("Removal commit SHA must be a full Git commit hash.");
+}
+
 const routes = getExperimentRoutes();
 const searchRoutes = new Set(getSearchIndex().map((entry) => entry.route));
 for (const { route } of routes) {
@@ -121,6 +151,19 @@ for (const { route } of routes) {
   }
   if (process.env.NODE_ENV === "production" && localRoutePattern.test(route)) {
     failures.push(`Local-only route in production: ${route}`);
+  }
+}
+for (const record of DiscontinuedExperimentsData) {
+  if (
+    routes.some(
+      ({ route }) =>
+        route === record.formerRoute ||
+        route.startsWith(`${record.formerRoute}/`)
+    )
+  ) {
+    failures.push(
+      `Archived experiment appears in the live route index: ${record.formerRoute}`
+    );
   }
 }
 const available = getAvailableExperimentSummaries();

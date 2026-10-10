@@ -45,18 +45,6 @@ export default defineConfig({
       },
     },
     {
-      files: ["components/react-aria/**"],
-      rules: {
-        // These components demonstrate the React Aria examples.
-        "shadcn/no-arbitrary-values": "off",
-        "shadcn/no-inline-styles": "off",
-        "shadcn/no-raw-colors": "off",
-        "shadcn/no-restyle": "off",
-        "shadcn/no-unknown-classes": "off",
-        "shadcn/require-static-classes": "off",
-      },
-    },
-    {
       files: ["app/design/ColorsDemo.tsx"],
       rules: {
         // This page intentionally documents the raw Tailwind color palette.
@@ -84,7 +72,7 @@ export default defineConfig({
     },
     {
       files: [
-        "app/experiments/{browser,haris-lab,headless-ui,mantine,nextjs,radix-ui,react,react-aria,react-query,react-table,tailwind-css,ui-explorations,visx}/**/demo.{ts,tsx,js,jsx}",
+        "app/experiments/{browser,haris-lab,nextjs,react,tailwind-css,ui-explorations,visx}/**/demo.{ts,tsx,js,jsx}",
       ],
       rules: {
         // Several examples intentionally demonstrate APIs from older package
@@ -136,14 +124,6 @@ export default defineConfig({
       rules: {
         // The wrapper supplies a safe default for the caller-controlled type.
         "react/button-has-type": "off",
-      },
-    },
-    {
-      files: ["components/react-aria/**/*.js"],
-      rules: {
-        // These are copied React Aria examples with intentionally complex cell
-        // rendering; the project-wide complexity limit still applies elsewhere.
-        "eslint/complexity": "off",
       },
     },
     {

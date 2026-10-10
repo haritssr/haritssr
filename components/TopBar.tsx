@@ -1,11 +1,11 @@
 "use client";
 
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
+import GitHubIcon from "@/components/GitHubIcon";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import TopBarSearch from "@/components/TopBarSearch";
 
@@ -57,7 +57,7 @@ function GitHubLink() {
       target="_blank"
       title="Repository"
     >
-      <GitHubLogoIcon aria-hidden="true" className="text-foreground size-4.5" />
+      <GitHubIcon aria-hidden="true" className="text-foreground size-4.5" />
     </a>
   );
 }
