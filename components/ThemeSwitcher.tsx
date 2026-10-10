@@ -103,7 +103,7 @@ export default function ThemeSwitcher() {
                   className={`flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors ${
                     preference === value
                       ? "bg-action/10 text-action font-medium"
-                      : "text-foreground/80 hover:bg-foreground/10 has-[:focus-visible]:bg-foreground/10"
+                      : "text-foreground/80 hover:bg-foreground/10 has-focus-visible:bg-foreground/10"
                   }`}
                   key={value}
                 >
