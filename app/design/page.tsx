@@ -226,7 +226,7 @@ export default function DesignSystem() {
             <PopoverDemo />
           </Box>
 
-          <Box title="Number input">
+          <Box name="NumberInput" title="Number input">
             <NumberInputDemo />
           </Box>
           <Box title="Table">

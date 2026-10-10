@@ -8,6 +8,7 @@ export default function NumberInputDemo() {
   return (
     <NumberInput
       label="Example number"
+      max={100}
       value={value}
       onValueChange={setValue}
     />
