@@ -897,6 +897,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     description: "Interactive math lessons and experiments",
     experiments: [
       {
+        slug: "circle",
+        title: "Circle",
+        description:
+          "Explore radius, diameter, circumference, area, arcs, and sectors with an interactive circle and worked examples.",
+        tags: ["geometry", "circles", "learning", "visualization"],
+        createdAt: "2026-10-10",
+        updatedAt: ["2026-10-10"],
+      },
+      {
         slug: "polinomial",
         title: "Polinomial",
         description:
