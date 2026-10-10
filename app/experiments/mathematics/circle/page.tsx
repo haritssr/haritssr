@@ -251,6 +251,7 @@ export default function CirclePage() {
             </p>
             <Accordion>
               <AccordionItem
+                excludeFromContents
                 title="Show solution"
                 value={exercise.title}
                 panelClassName="bg-transparent"

@@ -169,6 +169,7 @@ export default function LogarithmsPage() {
               <Accordion className="mt-auto w-full">
                 <AccordionItem
                   panelClassName="bg-transparent"
+                  excludeFromContents
                   title="Show derivation"
                   value={`rule-${index + 1}-derivation`}
                 >
@@ -287,6 +288,7 @@ export default function LogarithmsPage() {
               <Accordion className="mt-auto w-full">
                 <AccordionItem
                   panelClassName="bg-transparent"
+                  excludeFromContents
                   title="Show solution"
                   value={`exercise-${index + 1}-solution`}
                 >

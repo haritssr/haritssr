@@ -20,12 +20,14 @@ export default function Accordion({
 
 export function AccordionItem({
   children,
+  excludeFromContents = false,
   panelClassName = "bg-white",
   title,
   trailing,
   value,
 }: {
   children: ReactNode;
+  excludeFromContents?: boolean;
   panelClassName?: string;
   title: ReactNode;
   trailing?: ReactNode;
@@ -33,7 +35,9 @@ export function AccordionItem({
 }) {
   return (
     <BaseAccordion.Item value={value}>
-      <BaseAccordion.Header>
+      <BaseAccordion.Header
+        data-toc-ignore={excludeFromContents ? "" : undefined}
+      >
         <BaseAccordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full items-center justify-between gap-3 rounded-lg border p-3 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
           <span className="min-w-0 flex-1">{title}</span>
           {trailing}

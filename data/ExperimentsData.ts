@@ -895,7 +895,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Understand logarithms, derive their rules, and explore logarithmic graphs and their exponential inverses.",
         tags: ["algebra", "logarithms", "exponents", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06"],
+        updatedAt: ["2026-10-06", "2026-10-10"],
       },
       {
         slug: "system-of-linear-equations-in-three-variables",
@@ -925,7 +925,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Learn factoring, completing the square, and the quadratic formula with an interactive root graph.",
         tags: ["algebra", "equations", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06"],
+        updatedAt: ["2026-10-06", "2026-10-10"],
       },
       {
         slug: "limits",

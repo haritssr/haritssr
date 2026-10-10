@@ -1,8 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 
 import BackButton from "@/components/BackButton";
+import ExperimentTableOfContents from "@/components/ExperimentTableOfContents";
 import PageTitle from "@/components/PageTitle";
 import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 
@@ -23,6 +25,7 @@ export default function ExperimentDomainShell({
   experiments,
 }: ExperimentDomainShellProps) {
   const pathname = usePathname();
+  const articleRef = useRef<HTMLElement>(null);
   const segments = pathname.split("/").filter(Boolean);
   const parentPath = `/${segments.slice(0, -1).join("/")}`;
   const previousSegment = segments.at(-2);
@@ -48,7 +51,7 @@ export default function ExperimentDomainShell({
   return (
     <div className="min-h-screen w-full sm:-mt-px">
       <div className="w-full">
-        <article className="sm:px-0">
+        <article className="sm:px-0" ref={articleRef}>
           {experiment?.hideBackButton !== true && (
             <BackButton href={parentPath} name={backButtonName} />
           )}
@@ -57,6 +60,13 @@ export default function ExperimentDomainShell({
           )}
           {children}
         </article>
+        {!isIndexPage && (
+          <ExperimentTableOfContents
+            articleRef={articleRef}
+            key={pathname}
+            title={title}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,17 +1,22 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import type { AriaAttributes, MouseEventHandler, ReactNode } from "react";
 
 export default function InternalLink({
   className,
   children,
   href,
   lg,
+  onClick,
+  "aria-current": ariaCurrent,
   variant = "navigation",
 }: {
   className?: string;
-  children: string;
+  children: ReactNode;
   href: string;
   lg?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
+  "aria-current"?: AriaAttributes["aria-current"];
   variant?: "navigation" | "inline";
 }) {
   const appearance =
@@ -21,8 +26,10 @@ export default function InternalLink({
 
   return (
     <Link
+      aria-current={ariaCurrent}
       className={`group text-action hover:text-action-hover inline cursor-pointer hover:underline ${appearance} ${className ?? ""}`}
       href={href}
+      onClick={onClick}
       prefetch={false}
     >
       <span>

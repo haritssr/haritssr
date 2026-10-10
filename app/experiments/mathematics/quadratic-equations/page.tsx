@@ -231,6 +231,7 @@ export default function QuadraticEquationsPage() {
                 <Accordion>
                   <AccordionItem
                     panelClassName="bg-transparent"
+                    excludeFromContents
                     title="Show solution"
                     value={`exercise-${index + 1}-solution`}
                   >

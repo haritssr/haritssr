@@ -1,0 +1,58 @@
+.sheetViewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.sheet {
+  width: 100%;
+  max-height: 75dvh;
+  flex-shrink: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  transform: translateY(var(--drawer-swipe-movement-y, 0px));
+  transition: transform calc(220ms * var(--drawer-swipe-strength, 1)) ease;
+}
+
+.sheet[data-swiping] {
+  transition: none;
+}
+
+.sheet[data-starting-style],
+.sheet[data-ending-style] {
+  transform: translateY(100%);
+}
+
+.popover {
+  width: min(25vw, 24rem);
+  max-height: 75dvh;
+  transform-origin: bottom right;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.popover[data-starting-style],
+.popover[data-ending-style] {
+  opacity: 0;
+  transform: translateY(0.5rem) scale(0.98);
+}
+
+/* The panel may already be open when its lazy-loaded module mounts. */
+@starting-style {
+  .sheet {
+    transform: translateY(100%);
+  }
+
+  .popover {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .popover {
+    transition: none;
+  }
+}
