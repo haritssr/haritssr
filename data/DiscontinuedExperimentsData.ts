@@ -71,4 +71,20 @@ export const DiscontinuedExperimentsData: readonly DiscontinuedExperiment[] = [
     logoSrc: "/icons/react.svg",
     experimentCount: 1,
   },
+  {
+    slug: "visx",
+    formerRoute: "/experiments/visx",
+    title: "VisX",
+    description: "Data visualization using React.js",
+    logoSrc: "/icons/visx.svg",
+    experimentCount: 2,
+  },
+  {
+    slug: "haris-lab",
+    formerRoute: "/experiments/haris-lab",
+    title: "Haris Lab",
+    description: "Haris Lab user interfaces design systems",
+    logoSrc: "/icons/harimaki.svg",
+    experimentCount: 4,
+  },
 ];

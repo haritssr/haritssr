@@ -138,12 +138,19 @@ This machine has 8 GB RAM. Optimize commands for low resource usage:
 # Discontinued Experiments
 
 - Keep retired experiments as static records in `data/DiscontinuedExperimentsData.ts`,
-  separate from the live catalog. Archive cards must not link to deleted routes.
+  separate from the live catalog. Preserve their names, marks, and historical
+  experiment counts. Render static cards inside the collapsed discontinued
+  accordion without registering live pages, search entries, or sitemap URLs.
+  Archive cards must not link to deleted routes.
 - Do not reintroduce Headless UI, Mantine, Radix UI, React Aria, React Table,
-  React Query, or cmdk dependencies. Continuing widgets use the Base UI patterns
+  React Query, cmdk, or VisX dependencies. Continuing widgets use the Base UI patterns
   demonstrated in `/design` and the shared components.
-- The removal-commit link uses the actual full SHA, added in a follow-up change
-  after the removal commit exists. Never use a placeholder or current HEAD.
+- `discontinuedExperimentHistory.removalCommitSha` stores the actual full SHA
+  of the commit that removed the implementations and dependencies. Record it
+  in a follow-up commit because a commit cannot contain its own SHA. Keep this
+  reference fixed to the removal commit; never replace it with the current
+  HEAD, a deployment SHA, or a placeholder. This link records the original
+  retirement batch; later archived experiments may have separate removal commits.
 
 # Local Database Experiments
 

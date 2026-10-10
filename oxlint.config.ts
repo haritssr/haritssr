@@ -72,7 +72,7 @@ export default defineConfig({
     },
     {
       files: [
-        "app/experiments/{browser,haris-lab,nextjs,react,tailwind-css,ui-explorations,visx}/**/demo.{ts,tsx,js,jsx}",
+        "app/experiments/{browser,nextjs,react,tailwind-css,ui-explorations}/**/demo.{ts,tsx,js,jsx}",
       ],
       rules: {
         // Several examples intentionally demonstrate APIs from older package
