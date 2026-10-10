@@ -79,17 +79,14 @@ export default function ExperimentsGrid({
         >
           <div className="space-y-5">
             <p className="text-muted leading-7">
-              These records document experiments I built and explored by hand. I
-              removed their implementations and dependencies to keep the
-              codebase lighter and reduce CI work. They are no longer maintained
-              or available as live demos; the original code remains in Git
-              history.
+              Retired demos, preserved in Git history to keep the codebase
+              light.
               {removalCommitSha === undefined ? null : (
                 <>
                   {" "}
                   <ExternalLink
                     href={`https://github.com/haritssr/haritssr/commit/${removalCommitSha}`}
-                    name="View the original removal commit"
+                    name="View removal commit"
                     size="inherit"
                   />
                   .
