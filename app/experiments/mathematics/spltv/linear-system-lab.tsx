@@ -41,9 +41,9 @@ const presets = [
 const rowNames = ["first", "second", "third"] as const;
 const columns = [...variables, "constant"] as const;
 const equationGridClass =
-  "grid grid-cols-[repeat(3,minmax(0,1fr))_auto_minmax(0,1fr)] items-center gap-2";
+  "grid w-full min-w-0 grid-cols-[repeat(3,minmax(0,1fr))_auto_minmax(0,1fr)] items-center gap-1.5 sm:gap-2";
 const inputClass =
-  "border-border text-foreground focus-visible:outline-action min-w-0 w-full rounded-md border px-2 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2";
+  "form-control border-border text-foreground focus-visible:outline-action min-w-0 w-full rounded-md border bg-transparent px-1.5 py-2 text-center text-sm focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-2";
 const buttonClass =
   "border-border text-foreground hover:bg-interface-hover focus-visible:outline-action min-h-11 cursor-pointer rounded-lg border px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-default disabled:opacity-40";
 
@@ -113,9 +113,9 @@ export default function LinearSystemLab() {
   return (
     <section
       aria-labelledby="linear-system-lab-heading"
-      className="border-border text-foreground overflow-hidden rounded-2xl border"
+      className="border-border text-foreground w-full min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-5 py-4 sm:px-6">
+      <div className="border-border border-b px-4 py-4 sm:px-6">
         <h2
           className="text-foreground text-lg font-semibold"
           id="linear-system-lab-heading"
@@ -127,9 +127,9 @@ export default function LinearSystemLab() {
           to see why the system has its solution type.
         </p>
       </div>
-      <div className="grid lg:grid-cols-[20rem_minmax(0,1fr)]">
-        <div className="border-border text-foreground min-w-0 space-y-6 border-b p-5 sm:p-6 lg:border-r lg:border-b-0">
-          <fieldset className="flex flex-wrap gap-2">
+      <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2">
+        <div className="border-border text-foreground min-w-0 space-y-6 border-b p-4 sm:p-6 lg:border-r lg:border-b-0">
+          <fieldset className="flex min-w-0 flex-wrap gap-2">
             <legend className="sr-only">Example systems</legend>
             {presets.map((preset) => (
               <button
@@ -167,7 +167,7 @@ export default function LinearSystemLab() {
             <span>{katexify("d", false)}</span>
           </div>
           {rowNames.map((name, rowIndex) => (
-            <fieldset key={name}>
+            <fieldset className="min-w-0" key={name}>
               <legend className="mb-2 text-sm font-medium">
                 Equation {rowIndex + 1}
               </legend>
@@ -206,7 +206,7 @@ export default function LinearSystemLab() {
             rather than a plane.
           </p>
         </div>
-        <div className="text-foreground min-w-0 space-y-6 p-5 sm:p-6">
+        <div className="text-foreground min-w-0 space-y-6 p-4 sm:p-6">
           {system === null || result === null || step === undefined ? (
             <output className="text-muted block text-sm leading-6">
               Fill every field with an integer from{" "}
@@ -218,7 +218,7 @@ export default function LinearSystemLab() {
               <div className="overflow-x-auto py-2 text-sm sm:text-base">
                 {katexify(systemTex(system), true)}
               </div>
-              <div className="border-border rounded-xl border p-4">
+              <div className="border-border min-w-0 rounded-xl border p-4">
                 <p className="text-muted text-xs font-medium">
                   Step {stepIndex + 1} of {result.steps.length}
                 </p>
@@ -268,7 +268,7 @@ export default function LinearSystemLab() {
                 <p className="text-muted mt-2 text-sm leading-6">
                   {resultDescription(result.kind, result.rank)}
                 </p>
-                <div className="mt-3 text-center">
+                <div className="mt-3 overflow-x-auto text-center">
                   {katexify(
                     result.kind === "none"
                       ? result.contradictionTex
@@ -277,7 +277,7 @@ export default function LinearSystemLab() {
                   )}
                 </div>
                 {result.parametersTex === "" ? null : (
-                  <p className="text-muted text-center text-sm">
+                  <p className="text-muted overflow-x-auto text-center text-sm">
                     {katexify(result.parametersTex, false)}
                   </p>
                 )}

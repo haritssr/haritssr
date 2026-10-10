@@ -21,7 +21,7 @@ const datePattern = /^\d{4}-\d{2}-\d{2}$/u;
 const localRoutePattern =
   /^\/experiments\/ui-explorations\/(?:task|tools)(?:\/|$)/u;
 const titleSeparatorPattern = /[^a-z0-9]+/g;
-// Preserve these established URLs even though their display titles are longer.
+// Preserve these established URLs when their display titles differ.
 const experimentTitleAliases = new Map([
   ["/experiments/mathematics/live-playground", "live-tex-playground"],
   ["/experiments/mathematics/derivation-stepper", "step-by-step-derivation"],

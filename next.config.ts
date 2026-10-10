@@ -38,6 +38,12 @@ const nextConfig: NextConfig = {
   redirects() {
     return [
       {
+        source:
+          "/experiments/mathematics/system-of-linear-equations-in-three-variables",
+        destination: "/experiments/mathematics/spltv",
+        permanent: true,
+      },
+      {
         source: "/experiments/katex",
         destination: "/experiments/mathematics",
         permanent: true,

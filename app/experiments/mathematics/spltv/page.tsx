@@ -9,10 +9,7 @@ import katexify from "@/utils/katexify";
 
 import LinearSystemLab from "./linear-system-lab";
 
-export const metadata: Metadata = getExperimentMetadata(
-  "mathematics",
-  "system-of-linear-equations-in-three-variables"
-);
+export const metadata: Metadata = getExperimentMetadata("mathematics", "spltv");
 
 const workedSystem = String.raw`\begin{cases}x+y+z=6\\2x-y+z=3\\x+2y-z=2\end{cases}`;
 const solutionCases = [
@@ -125,7 +122,7 @@ const exercises = [
 
 function Equation({ tex }: { tex: string }) {
   return (
-    <div className="text-foreground border-border overflow-x-auto rounded-xl border px-4 py-4 text-center text-sm sm:text-base">
+    <div className="text-foreground border-border min-w-0 overflow-x-auto rounded-xl border px-4 py-4 text-center text-sm sm:text-base">
       {katexify(tex, true)}
     </div>
   );
@@ -133,8 +130,8 @@ function Equation({ tex }: { tex: string }) {
 
 export default function LinearEquationsThreeVariablesPage() {
   return (
-    <div className="text-foreground space-y-20 pb-24">
-      <div>
+    <div className="text-foreground w-full min-w-0 space-y-20 pb-24">
+      <div className="max-w-3xl">
         <SubTitle>
           Find a triple that satisfies three equations at once. Learn
           elimination, interpret the geometry, and explore what changes when
@@ -144,7 +141,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </div>
 
       <Section
-        className="text-base"
+        className="max-w-3xl text-base"
         title="Three unknowns, shared constraints"
         id="linear-system-basics-heading"
         description={
@@ -181,10 +178,10 @@ export default function LinearEquationsThreeVariablesPage() {
           </>
         }
       >
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2">
           {solutionCases.map((example) => (
             <article
-              className="border-border text-foreground rounded-xl border p-5"
+              className="border-border text-foreground min-w-0 rounded-xl border p-5"
               key={example.name}
             >
               <h3 className="font-semibold">{example.name}</h3>
@@ -197,7 +194,7 @@ export default function LinearEquationsThreeVariablesPage() {
             </article>
           ))}
         </div>
-        <p className="text-muted text-sm leading-7">
+        <p className="text-muted max-w-3xl text-sm leading-7">
           A zero row such as {katexify("0=0", false)} carries no new
           information; it does not by itself prove inconsistency. A row such as{" "}
           {katexify("0=1", false)} is impossible. If every equation is an
@@ -206,7 +203,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </Section>
 
       <Section
-        className="text-base"
+        className="max-w-3xl text-base"
         title="Solve the example by elimination"
         id="elimination-heading"
         description={
@@ -263,7 +260,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </Section>
 
       <Section
-        className="text-base"
+        className="max-w-3xl text-base"
         title="Keep the work organized with a matrix"
         id="matrix-heading"
         description={
@@ -294,7 +291,7 @@ export default function LinearEquationsThreeVariablesPage() {
       <LinearSystemLab />
 
       <Section
-        className="text-base"
+        className="max-w-3xl text-base"
         title="Read the final rows"
         id="reading-solutions-heading"
         description={
@@ -328,7 +325,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </Section>
 
       <Section
-        className="text-base"
+        className="max-w-3xl text-base"
         title="Turn a story into three equations"
         id="modeling-heading"
         description={
@@ -361,15 +358,13 @@ export default function LinearEquationsThreeVariablesPage() {
           </>
         }
       >
-        <ol className="space-y-4">
+        <ul className="grid grid-cols-1 items-start gap-4 lg:grid-cols-2">
           {exercises.map((exercise, index) => (
             <li
-              className="border-border text-foreground rounded-xl border p-5 sm:p-6"
+              className="border-border text-foreground min-w-0 rounded-xl border p-5 sm:p-6"
               key={exercise.system}
             >
-              <h3 className="font-semibold">
-                {index + 1}. {exercise.prompt}
-              </h3>
+              <h3 className="font-semibold">{exercise.prompt}</h3>
               <div className="overflow-x-auto py-3 text-sm sm:text-base">
                 {katexify(exercise.system, true)}
               </div>
@@ -404,7 +399,7 @@ export default function LinearEquationsThreeVariablesPage() {
               </Accordion>
             </li>
           ))}
-        </ol>
+        </ul>
       </Section>
     </div>
   );

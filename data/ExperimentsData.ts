@@ -898,14 +898,14 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: ["2026-10-06", "2026-10-10"],
       },
       {
-        slug: "system-of-linear-equations-in-three-variables",
+        slug: "spltv",
         group: "chapters",
-        title: "System of Linear Equations in Three Variables",
+        title: "SPLTV",
         description:
           "Solve three-variable linear systems with elimination, explore exact row operations, and distinguish unique, infinite, and no-solution cases.",
         tags: ["algebra", "equations", "linear-algebra"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-07"],
+        updatedAt: ["2026-10-06", "2026-10-07", "2026-10-10"],
       },
       {
         slug: "number-systems",
