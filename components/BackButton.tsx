@@ -14,14 +14,14 @@ export default function BackButton({
     return (
       <Link
         aria-label={`Back to ${name}`}
-        className="border-middle-hover text-foreground/90 focus-visible:outline-action flex size-9.5 shrink-0 items-center justify-center rounded-full border bg-white/50 backdrop-blur-lg hover:bg-white/75 focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="border-middle-hover text-foreground/90 focus-visible:outline-action flex size-9 shrink-0 items-center justify-center rounded-full border bg-white/50 backdrop-blur-lg hover:bg-white/75 focus-visible:outline-2 focus-visible:outline-offset-2"
         href={href}
         prefetch={false}
         title={`Back to ${name}`}
       >
         <ChevronLeftIcon
           aria-hidden="true"
-          className="size-5"
+          className="size-4.5"
           strokeWidth={2}
         />
       </Link>

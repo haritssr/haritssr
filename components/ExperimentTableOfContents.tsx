@@ -29,7 +29,7 @@ const ContentsPanel = dynamic(
 );
 const DESKTOP_QUERY = "(min-width: 1024px)";
 const FLOATING_BUTTON_CLASS =
-  "border-middle-hover text-foreground/90! hover:bg-middle-hover/50! focus-visible:outline-action fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 h-9.5 rounded-full! border bg-white/50 px-3! py-1.5! text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
+  "border-middle-hover text-foreground/90! hover:bg-middle-hover/50! focus-visible:outline-action fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 rounded-full! border bg-white/50 text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
 
 function getDesktopSnapshot() {
   return window.matchMedia(DESKTOP_QUERY).matches;
@@ -302,7 +302,7 @@ export default function ExperimentTableOfContents({
     setOpenView(nextOpen ? desktop : null);
   }
 
-  const triggerClassName = `${FLOATING_BUTTON_CLASS} right-[max(1.25rem,env(safe-area-inset-right))]`;
+  const triggerClassName = `${FLOATING_BUTTON_CLASS} right-[max(1.25rem,env(safe-area-inset-right))] h-9.5 px-3! py-1.5!`;
   const triggerContent = (
     <>
       <ListBulletIcon
@@ -333,7 +333,7 @@ export default function ExperimentTableOfContents({
     <>
       <Button
         aria-label="To the top"
-        className={`${FLOATING_BUTTON_CLASS} left-[max(1.25rem,env(safe-area-inset-left))] size-9.5 p-0!`}
+        className={`${FLOATING_BUTTON_CLASS} left-[max(1.25rem,env(safe-area-inset-left))] size-9 p-0!`}
         iconOnly
         onClick={() => {
           window.scrollTo({
@@ -348,7 +348,7 @@ export default function ExperimentTableOfContents({
       >
         <ArrowUpIcon
           aria-hidden="true"
-          className="pointer-events-none size-5"
+          className="pointer-events-none size-4.5 stroke-2"
         />
       </Button>
       {desktop ? (
