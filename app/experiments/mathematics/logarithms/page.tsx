@@ -155,15 +155,13 @@ export default function LogarithmsPage() {
           </>
         }
       >
-        <ol className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmRules.map((rule, index) => (
             <li
               className="border-border flex min-w-0 flex-col gap-4 rounded-xl border p-5"
               key={rule.title}
             >
-              <h3 className="font-semibold">
-                {index + 1}. {rule.title}
-              </h3>
+              <h3 className="font-semibold">{rule.title}</h3>
               <Equation tex={rule.formula} />
               <p className="text-muted text-sm leading-6">{rule.explanation}</p>
               <Accordion className="mt-auto w-full">
@@ -191,7 +189,7 @@ export default function LogarithmsPage() {
               </Accordion>
             </li>
           ))}
-        </ol>
+        </ul>
       </Section>
 
       <Section
@@ -275,15 +273,13 @@ export default function LogarithmsPage() {
         id="practice-heading"
         description={<>Work out each answer, then reveal the solution.</>}
       >
-        <ol className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmExercises.map((exercise, index) => (
             <li
               className="border-border flex min-w-0 flex-col gap-4 rounded-xl border p-5"
               key={exercise.title}
             >
-              <h3 className="font-semibold">
-                {index + 1}. {exercise.title}
-              </h3>
+              <h3 className="font-semibold">{exercise.title}</h3>
               <Equation tex={exercise.expression} />
               <Accordion className="mt-auto w-full">
                 <AccordionItem
@@ -306,7 +302,7 @@ export default function LogarithmsPage() {
               </Accordion>
             </li>
           ))}
-        </ol>
+        </ul>
       </Section>
     </div>
   );

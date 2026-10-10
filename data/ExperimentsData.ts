@@ -915,7 +915,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore number sets with a Venn diagram and connect inequalities, interval notation, and an interactive number line.",
         tags: ["foundations", "sets", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06"],
+        updatedAt: ["2026-10-06", "2026-10-10"],
       },
       {
         slug: "quadratic-equations",
@@ -935,7 +935,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore how a function behaves as its input approaches a value.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: [
+          "2026-09-29",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-10",
+        ],
       },
       {
         slug: "derivatives",
@@ -944,7 +950,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Connect the derivative to the slope of a curve.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: [
+          "2026-09-29",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-10",
+        ],
       },
       {
         slug: "integrals",
@@ -953,7 +965,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore accumulation and the area beneath a curve.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: [
+          "2026-09-29",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-10",
+        ],
       },
     ],
     id: 17,

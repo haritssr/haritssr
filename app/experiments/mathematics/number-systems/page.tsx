@@ -334,15 +334,13 @@ export default function NumberSystemsPage() {
         id="number-systems-practice-heading"
         description={<>Decide your answer before revealing the explanation.</>}
       >
-        <ol className="space-y-4">
+        <ul className="space-y-4">
           {exercises.map((exercise, index) => (
             <li
               className="border-border rounded-xl border p-5 sm:p-6"
               key={exercise.expression}
             >
-              <h3 className="font-semibold">
-                {index + 1}. {exercise.question}
-              </h3>
+              <h3 className="font-semibold">{exercise.question}</h3>
               <div className="overflow-x-auto py-3">
                 {katexify(exercise.expression, true)}
               </div>
@@ -362,7 +360,7 @@ export default function NumberSystemsPage() {
               </Accordion>
             </li>
           ))}
-        </ol>
+        </ul>
       </Section>
     </div>
   );

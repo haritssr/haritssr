@@ -39,6 +39,9 @@ When mistakes recur, strengthen reusable checks and guardrails.
 
 ## Sections and Headings
 
+- Keep independent exercise and rule card titles unnumbered. Use unordered
+  lists for these cards; retain numbering for ordered solution steps and
+  question-navigation controls that depend on it.
 - In experiment pages, use `space-y-20` on the parent that stacks page sections,
   including sections rendered by demo or lab components. Let that parent own
   the spacing; omit individual top and bottom margins on its section children.

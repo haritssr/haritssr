@@ -215,16 +215,14 @@ export default function QuadraticEquationsPage() {
           <>Solve each equation on paper, then reveal the explanation.</>
         }
       >
-        <ol className="space-y-4">
+        <ul className="space-y-4">
           {exercises.map(
             ({ prompt, expression, working, explanation }, index) => (
               <li
                 className="border-border rounded-xl border p-5 sm:p-6"
                 key={expression}
               >
-                <h3 className="font-semibold">
-                  {index + 1}. {prompt}
-                </h3>
+                <h3 className="font-semibold">{prompt}</h3>
                 <div className="overflow-x-auto py-3">
                   {katexify(expression, true)}
                 </div>
@@ -246,7 +244,7 @@ export default function QuadraticEquationsPage() {
               </li>
             )
           )}
-        </ol>
+        </ul>
       </Section>
     </div>
   );

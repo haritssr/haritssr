@@ -13,25 +13,18 @@ export interface PracticeQuestion {
   readonly working: string;
 }
 
-function QuestionCard({
-  number,
-  question,
-}: {
-  number: number;
-  question: PracticeQuestion;
-}) {
+function QuestionCard({ question }: { question: PracticeQuestion }) {
   const [selected, setSelected] = useState<number | null>(null);
   const isCorrect = selected === question.correctIndex;
 
   return (
     <li className="border-border rounded-2xl border p-5 sm:p-6">
-      <p className="text-muted text-sm font-semibold">Question {number}</p>
-      <p className="text-foreground mt-2 font-medium">{question.prompt}</p>
+      <p className="text-foreground font-medium">{question.prompt}</p>
       <div className="mt-2 overflow-x-auto py-1 text-lg">
         {katexify(question.expression, true)}
       </div>
       <fieldset
-        aria-label={`Answers for question ${number}`}
+        aria-label={`Answers for: ${question.prompt}`}
         className="mt-4 grid gap-2 sm:grid-cols-2"
       >
         {question.choices.map((choice, index) => (
@@ -87,15 +80,11 @@ export default function Practice({
       <p className="text-muted mt-2 text-sm leading-6">
         Choose an answer to see why it works. You can change your choice.
       </p>
-      <ol className="mt-6 space-y-4">
-        {questions.map((question, index) => (
-          <QuestionCard
-            key={question.prompt}
-            number={index + 1}
-            question={question}
-          />
+      <ul className="mt-6 space-y-4">
+        {questions.map((question) => (
+          <QuestionCard key={question.prompt} question={question} />
         ))}
-      </ol>
+      </ul>
     </section>
   );
 }
