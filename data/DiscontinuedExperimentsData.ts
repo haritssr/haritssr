@@ -9,8 +9,10 @@ export interface DiscontinuedExperiment {
   readonly experimentCount: number;
 }
 
-// The link is added after the removal commit exists; a commit cannot contain its own SHA.
-export const discontinuedExperimentHistory: { removalCommitSha?: string } = {};
+// Recorded in a follow-up commit because a commit cannot contain its own SHA.
+export const discontinuedExperimentHistory: { removalCommitSha?: string } = {
+  removalCommitSha: "d5cf036788e3a0ef1dd126d6899b5db8de810cdd",
+};
 
 export const DiscontinuedExperimentsData: readonly DiscontinuedExperiment[] = [
   {
