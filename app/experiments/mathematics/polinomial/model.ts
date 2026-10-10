@@ -4,7 +4,7 @@ import { questions } from "./questions";
 export const STORAGE_KEY = "haritssr:polinomial:v1";
 export const ANSWER_LENGTH_LIMIT = 32;
 
-export interface Rational {
+interface Rational {
   readonly numerator: bigint;
   readonly denominator: bigint;
 }
@@ -49,7 +49,7 @@ function rational(numerator: bigint, denominator = 1n): Rational | null {
 }
 
 /** Parse bounded decimal or integer-fraction input, with no floating-point rounding. */
-export function parseNumber(input: string): Rational | null {
+function parseNumber(input: string): Rational | null {
   const value = input.trim().replace(",", ".");
   if (value.length === 0 || value.length > ANSWER_LENGTH_LIMIT) {
     return null;
@@ -71,7 +71,7 @@ export function parseNumber(input: string): Rational | null {
   );
 }
 
-export function rationalTex(value: Rational): string {
+function rationalTex(value: Rational): string {
   if (value.denominator === 1n) {
     return String(value.numerator);
   }

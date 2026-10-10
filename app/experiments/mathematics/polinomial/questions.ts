@@ -129,7 +129,7 @@ export const topics = [
 
 export const originalPTex = String.raw`P(x)=-3x^3+4x+x^4-5+5x^3-3x^2`;
 export const originalQTex = String.raw`Q(x)=-ex^2+bx^3+ax-fx^3-c+dx^4`;
-export const parameterTex =
+const parameterTex =
   "a=4,\\quad b=5,\\quad c=5,\\quad d=1,\\quad e=3,\\quad f=3";
 const simplifiedPTex = "P(x)=x^4+2x^3-3x^2+4x-5";
 const simplifiedQTex = "Q(x)=dx^4+(b-f)x^3-ex^2+ax-c";
