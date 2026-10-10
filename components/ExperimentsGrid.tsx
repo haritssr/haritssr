@@ -89,14 +89,14 @@ export default function ExperimentsGrid({
                   {" "}
                   <ExternalLink
                     href={`https://github.com/haritssr/haritssr/commit/${removalCommitSha}`}
-                    name="View the removal commit"
+                    name="View the original removal commit"
                     size="inherit"
                   />
                   .
                 </>
               )}
             </p>
-            <ul className={GRID_CLASS_NAME}>
+            <ul className="grid list-none grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {DiscontinuedExperimentsData.map((experiment) => (
                 <li key={experiment.slug}>
                   <ArchivedExperimentCard
