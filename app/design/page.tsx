@@ -397,11 +397,11 @@ export default function DesignSystem() {
             </label>
           </Box>
 
-          <Box title="Main Colors">
+          <Box name="ColorsDemo" title="Main Colors">
             <MainColorsDemo />
           </Box>
 
-          <Box title="Hierarchical Colors">
+          <Box name="ColorsDemo" title="Hierarchical Colors">
             <HierarchicalColorsDemo />
           </Box>
         </Section>
