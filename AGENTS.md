@@ -137,6 +137,7 @@ This machine has 8 GB RAM. Optimize commands for low resource usage:
 
 # Discontinued Experiments
 
+- The cmdk demo and dependency were also removed; omit cmdk from archive cards.
 - Keep retired experiments as static records in `data/DiscontinuedExperimentsData.ts`,
   separate from the live catalog. Preserve their names, marks, and historical
   experiment counts. Render static cards inside the collapsed discontinued

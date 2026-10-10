@@ -64,14 +64,6 @@ export const DiscontinuedExperimentsData: readonly DiscontinuedExperiment[] = [
     experimentCount: 1,
   },
   {
-    slug: "cmdk",
-    formerRoute: "/experiments/react/cmdk",
-    title: "cmdk",
-    description: "Open a keyboard-driven command menu built with cmdk.",
-    logoSrc: "/icons/react.svg",
-    experimentCount: 1,
-  },
-  {
     slug: "visx",
     formerRoute: "/experiments/visx",
     title: "VisX",
