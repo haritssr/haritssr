@@ -74,7 +74,7 @@ function ExperimentList({
   experiments: readonly ExperimentEntry[];
 }) {
   return (
-    <ol className="space-y-3.5">
+    <ol className="space-y-3">
       {experiments.map((experiment) => {
         const updatedAt = getLatestExperimentUpdate(experiment);
 
