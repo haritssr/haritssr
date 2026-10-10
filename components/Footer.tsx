@@ -6,7 +6,7 @@ const copyrightYear = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="text-muted mx-auto mt-30 flex max-w-5xl justify-between px-5 text-xs sm:py-5 sm:text-sm xl:px-0">
+    <footer className="text-muted mx-auto mt-30 mb-5 flex max-w-5xl justify-between px-5 text-xs sm:text-sm xl:px-0">
       <div>
         &#169; <span> 2021-{copyrightYear}</span>
       </div>
