@@ -93,7 +93,7 @@ export default function ThemeSwitcher() {
               className="space-y-1"
             >
               <legend
-                className="text-foreground px-2 pb-1 text-sm font-semibold"
+                className="text-foreground px-2 pb-1 text-sm font-medium"
                 id="theme-switcher-heading"
               >
                 Appearance
