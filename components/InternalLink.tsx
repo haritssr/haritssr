@@ -14,7 +14,7 @@ export default function InternalLink({
 }) {
   return (
     <Link
-      className={`group text-action hover:text-action-hover inline w-fit cursor-pointer py-0.5 ${lg === true ? "text-lg" : "text-base"} ${className ?? ""}`}
+      className={`group text-action hover:text-action-hover inline w-fit cursor-pointer py-0.5 hover:underline ${lg === true ? "text-lg" : "text-base"} ${className ?? ""}`}
       href={href}
       prefetch={false}
     >

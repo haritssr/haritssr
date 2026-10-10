@@ -18,7 +18,7 @@ export default function ExternalLink({
   return (
     <a
       aria-label={name}
-      className="group text-action hover:text-action-hover cursor-pointer"
+      className="group text-action hover:text-action-hover cursor-pointer hover:underline"
       href={href}
       rel="noopener noreferrer"
       target="_blank"
