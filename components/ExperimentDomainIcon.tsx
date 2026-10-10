@@ -2,7 +2,10 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 
 const monochromeIcons = new Set(["/icons/nextjs.svg", "/icons/radixui.svg"]);
-const scienceIcons = new Set(["/icons/physics.svg", "/icons/math.svg"]);
+const scienceIconColors = new Map([
+  ["/icons/physics.svg", "text-amber-500"],
+  ["/icons/math.svg", "text-pink-500"],
+]);
 
 export default function ExperimentDomainIcon({
   src,
@@ -11,7 +14,9 @@ export default function ExperimentDomainIcon({
   src: string;
   size?: 18 | 36;
 }) {
-  if (monochromeIcons.has(src) || scienceIcons.has(src)) {
+  const scienceIconColor = scienceIconColors.get(src);
+
+  if (monochromeIcons.has(src) || scienceIconColor !== undefined) {
     const maskStyle: CSSProperties & { "--icon-mask": string } = {
       "--icon-mask": `url("${src}")`,
     };
@@ -19,7 +24,7 @@ export default function ExperimentDomainIcon({
     return (
       <span
         aria-hidden="true"
-        className={`inline-block shrink-0 bg-current [mask-image:var(--icon-mask)] [mask-size:contain] [mask-position:center] [mask-repeat:no-repeat] ${size === 36 ? "size-9" : "size-4.5"} ${scienceIcons.has(src) ? "text-action" : "text-foreground"}`}
+        className={`inline-block shrink-0 bg-current [mask-image:var(--icon-mask)] [mask-size:contain] [mask-position:center] [mask-repeat:no-repeat] ${size === 36 ? "size-9" : "size-4.5"} ${scienceIconColor ?? "text-foreground"}`}
         style={maskStyle}
       />
     );
