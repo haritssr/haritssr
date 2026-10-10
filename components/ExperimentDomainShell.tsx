@@ -55,8 +55,17 @@ export default function ExperimentDomainShell({
           {experiment?.hideBackButton !== true && (
             <BackButton href={parentPath} name={backButtonName} />
           )}
-          {!isIndexPage && experiment?.hideTitle !== true && (
-            <PageTitle>{title}</PageTitle>
+          {!isIndexPage && (
+            <div
+              data-experiment-back-label={backButtonName}
+              data-experiment-parent={parentPath}
+              data-experiment-path={
+                segments.length === 3 ? pathname : undefined
+              }
+              data-experiment-title={title}
+            >
+              {experiment?.hideTitle !== true && <PageTitle>{title}</PageTitle>}
+            </div>
           )}
           {children}
         </article>

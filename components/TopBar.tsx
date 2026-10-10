@@ -3,34 +3,63 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
+import BackButton from "@/components/BackButton";
 import GitHubIcon from "@/components/GitHubIcon";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import TopBarSearch from "@/components/TopBarSearch";
+import useScrolledExperiment from "@/components/useScrolledExperiment";
 
 const destinations = ["projects", "experiments", "blog", "design"] as const;
 
 export default function TopBar() {
-  return (
-    <nav aria-label="Primary navigation" className="sticky top-0 z-30">
-      <div className="relative mx-auto flex max-w-5xl items-center justify-between px-5 pt-5 sm:py-3.5 xl:px-0">
-        {/* Harits Syah */}
-        <div className="group border-middle-hover flex items-center space-x-1.5 rounded-full border bg-white/50 py-1.5 pr-3 pl-2.5 backdrop-blur-lg">
-          <Image
-            alt=""
-            className="h-5 w-5"
-            height={20}
-            priority
-            src="/icons/haritssr.svg"
-            width={20}
-          />
-          <Link className="text-foreground/90" href="/">
-            Harits Syah
-          </Link>
-        </div>
+  const pathname = usePathname();
+  const navigationRef = useRef<HTMLElement>(null);
+  const experiment = useScrolledExperiment(pathname, navigationRef);
 
-        <NavigationLinks />
+  return (
+    <nav
+      aria-label="Primary navigation"
+      className="sticky top-0 z-30"
+      ref={navigationRef}
+    >
+      <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-5 pt-5 sm:py-3.5 xl:px-0">
+        {experiment ? (
+          <>
+            <BackButton
+              href={experiment.href}
+              name={experiment.backLabel}
+              variant="topbar"
+            />
+            <div
+              className="border-middle-hover text-foreground/90 min-w-0 flex-1 rounded-full border bg-white/50 px-4 py-1.5 backdrop-blur-lg sm:absolute sm:left-1/2 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
+              title={experiment.title}
+            >
+              <p className="truncate">{experiment.title}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Harits Syah */}
+            <div className="group border-middle-hover flex items-center space-x-1.5 rounded-full border bg-white/50 py-1.5 pr-3 pl-2.5 backdrop-blur-lg">
+              <Image
+                alt=""
+                className="h-5 w-5"
+                height={20}
+                priority
+                src="/icons/haritssr.svg"
+                width={20}
+              />
+              <Link className="text-foreground/90" href="/">
+                Harits Syah
+              </Link>
+            </div>
+
+            <NavigationLinks />
+          </>
+        )}
         <HeaderActions />
       </div>
     </nav>

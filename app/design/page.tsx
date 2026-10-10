@@ -358,6 +358,11 @@ export default function DesignSystem() {
             <div className="-mt-10 mb-5">
               <BackButton href="/" name="Previous Page" />
             </div>
+            <BackButton
+              href="/experiments"
+              name="Experiments"
+              variant="topbar"
+            />
           </Box>
 
           <Box name="Tooltip" title="Tooltip">
