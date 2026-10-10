@@ -34,7 +34,7 @@ export function AccordionItem({
   return (
     <BaseAccordion.Item value={value}>
       <BaseAccordion.Header>
-        <BaseAccordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
+        <BaseAccordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full items-center justify-between gap-3 rounded-lg border p-3 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
           <span className="min-w-0 flex-1">{title}</span>
           {trailing}
           <ChevronDownIcon
