@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SelectField as ExperimentSelect } from "@/components/SelectField";
 import katexify from "@/utils/katexify";
 
-import { DemoButton, TexPreview } from "../_components/DemoControls";
+import { DemoButton, TexPreview } from "../_katex-components/DemoControls";
 
 const TERMS = [
   {

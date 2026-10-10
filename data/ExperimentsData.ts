@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 
 import { createPageMetadata } from "@/utils/pageMetadata";
 
+type ExperimentGroup = "chapters" | "tools";
+
 export interface ExperimentEntry {
+  readonly group?: ExperimentGroup;
   readonly description: string;
   readonly tags: readonly string[];
   /** ISO calendar dates (YYYY-MM-DD) tracked from the route history. */
@@ -17,6 +20,10 @@ export interface ExperimentEntry {
 }
 
 export interface ExperimentDomain {
+  readonly groups?: readonly {
+    readonly id: ExperimentGroup;
+    readonly title: string;
+  }[];
   readonly description: string;
   readonly experiments: readonly ExperimentEntry[];
   readonly id: number;
@@ -651,68 +658,6 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     title: "Haris Lab",
   },
   {
-    description: "The math typesetting library for the web",
-    experiments: [
-      {
-        slug: "basic",
-        title: "Basic",
-        description:
-          "Render standalone and inline mathematical notation with KaTeX.",
-        tags: ["mathematics", "typography"],
-        createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
-      },
-      {
-        slug: "live-playground",
-        title: "Live TeX Playground",
-        description:
-          "Edit TeX, try templates, and preview mathematical notation live.",
-        tags: ["mathematics", "editor"],
-        createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
-      },
-      {
-        slug: "matrix-builder",
-        title: "Matrix Builder",
-        description: "Edit matrix entries and generate the corresponding TeX.",
-        tags: ["mathematics", "forms"],
-        createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
-      },
-      {
-        slug: "derivation-stepper",
-        title: "Step-by-Step Derivation",
-        description:
-          "Follow a quadratic equation through completing-the-square steps.",
-        tags: ["mathematics", "learning"],
-        createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
-      },
-      {
-        slug: "piecewise-functions",
-        title: "Piecewise Functions",
-        description:
-          "Compare thirteen piecewise functions and their evaluated graphs.",
-        tags: ["mathematics", "visualization"],
-        createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
-      },
-      {
-        slug: "equation-annotations",
-        title: "Equation Annotations",
-        description:
-          "Annotate terms in Newton’s second law using TeX decorations.",
-        tags: ["mathematics", "learning"],
-        createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
-      },
-    ],
-    id: 13,
-    logoSrc: "/icons/katex.svg",
-    slug: "katex",
-    title: "KaTeX",
-  },
-  {
     description: "Random user interfaces explorations",
     experiments: [
       {
@@ -895,9 +840,73 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
   },
   {
     description: "Interactive math lessons and experiments",
+    groups: [
+      { id: "chapters", title: "Chapters" },
+      { id: "tools", title: "Tools" },
+    ],
     experiments: [
       {
+        slug: "katex-basics",
+        group: "tools",
+        title: "KaTeX Basics",
+        description:
+          "Render standalone and inline mathematical notation with KaTeX.",
+        tags: ["mathematics", "typography"],
+        createdAt: "2026-08-18",
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+      },
+      {
+        slug: "live-playground",
+        group: "tools",
+        title: "Live TeX Playground",
+        description:
+          "Edit TeX, try templates, and preview mathematical notation live.",
+        tags: ["mathematics", "editor"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
+      {
+        slug: "matrix-builder",
+        group: "tools",
+        title: "Matrix Builder",
+        description: "Edit matrix entries and generate the corresponding TeX.",
+        tags: ["mathematics", "forms"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
+      {
+        slug: "derivation-stepper",
+        group: "chapters",
+        title: "Step-by-Step Derivation",
+        description:
+          "Follow a quadratic equation through completing-the-square steps.",
+        tags: ["mathematics", "learning"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
+      {
+        slug: "piecewise-functions",
+        group: "chapters",
+        title: "Piecewise Functions",
+        description:
+          "Compare thirteen piecewise functions and their evaluated graphs.",
+        tags: ["mathematics", "visualization"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
+      {
+        slug: "equation-annotations",
+        group: "tools",
+        title: "Equation Annotations",
+        description:
+          "Annotate terms in Newton’s second law using TeX decorations.",
+        tags: ["mathematics", "learning"],
+        createdAt: "2026-10-02",
+        updatedAt: ["2026-10-02", "2026-10-03"],
+      },
+      {
         slug: "circle",
+        group: "chapters",
         title: "Circle",
         description:
           "Explore radius, diameter, circumference, area, arcs, and sectors with an interactive circle and worked examples.",
@@ -907,6 +916,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "polinomial",
+        group: "chapters",
         title: "Polinomial",
         description:
           "Latihan 27 soal polinomial dengan tabel koefisien, pengelompokan suku, petunjuk bertahap, pembahasan, dan progres yang tersimpan di browser.",
@@ -916,6 +926,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "euler-s-identity",
+        group: "chapters",
         title: "Euler’s Identity",
         description:
           "Connect exponential growth, circle geometry, and imaginary numbers through Euler’s formula, an interactive unit circle, and a step-by-step derivation of Euler’s identity.",
@@ -925,6 +936,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "logarithms",
+        group: "chapters",
         title: "Logarithms",
         description:
           "Understand logarithms, derive their rules, and explore logarithmic graphs and their exponential inverses.",
@@ -934,6 +946,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "system-of-linear-equations-in-three-variables",
+        group: "chapters",
         title: "System of Linear Equations in Three Variables",
         description:
           "Solve three-variable linear systems with elimination, explore exact row operations, and distinguish unique, infinite, and no-solution cases.",
@@ -943,6 +956,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "number-systems",
+        group: "chapters",
         title: "Number Systems",
         description:
           "Explore number sets with a Venn diagram and connect inequalities, interval notation, and an interactive number line.",
@@ -952,6 +966,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "quadratic-equations",
+        group: "chapters",
         title: "Quadratic Equations",
         description:
           "Learn factoring, completing the square, and the quadratic formula with an interactive root graph.",
@@ -961,6 +976,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "limits",
+        group: "chapters",
         title: "Limits",
         description:
           "Explore how a function behaves as its input approaches a value.",
@@ -970,6 +986,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "derivatives",
+        group: "chapters",
         title: "Derivatives",
         description: "Connect the derivative to the slope of a curve.",
         tags: ["calculus", "visualization"],
@@ -978,6 +995,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "integrals",
+        group: "chapters",
         title: "Integrals",
         description: "Explore accumulation and the area beneath a curve.",
         tags: ["calculus", "visualization"],

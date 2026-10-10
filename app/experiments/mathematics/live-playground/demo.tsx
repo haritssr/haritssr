@@ -3,7 +3,7 @@ import { useDeferredValue, useId, useState } from "react";
 
 import { SelectField as ExperimentSelect } from "@/components/SelectField";
 
-import { DemoButton, TexPreview } from "../_components/DemoControls";
+import { DemoButton, TexPreview } from "../_katex-components/DemoControls";
 
 const TEMPLATE_GROUPS = [
   {

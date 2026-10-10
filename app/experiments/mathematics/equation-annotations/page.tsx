@@ -9,7 +9,7 @@ import katexify from "@/utils/katexify";
 import Demo from "./demo";
 
 export const metadata: Metadata = getExperimentMetadata(
-  "katex",
+  "mathematics",
   "equation-annotations",
   {
     description:

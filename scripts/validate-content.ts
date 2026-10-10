@@ -21,6 +21,11 @@ const datePattern = /^\d{4}-\d{2}-\d{2}$/u;
 const localRoutePattern =
   /^\/experiments\/ui-explorations\/(?:task|tools)(?:\/|$)/u;
 const titleSeparatorPattern = /[^a-z0-9]+/g;
+// Preserve these established URLs even though their display titles are longer.
+const experimentTitleAliases = new Map([
+  ["/experiments/mathematics/live-playground", "live-tex-playground"],
+  ["/experiments/mathematics/derivation-stepper", "step-by-step-derivation"],
+]);
 
 function titleSlug(title: string): string {
   return title.toLowerCase().replace(titleSeparatorPattern, "-");
@@ -48,7 +53,11 @@ for (const domain of ExperimentsData) {
   domains.add(domain.slug);
   for (const experiment of domain.experiments) {
     const route = `/experiments/${domain.slug}/${experiment.slug}`;
-    if (usesTitleSlugs && experiment.slug !== titleSlug(experiment.title)) {
+    if (
+      usesTitleSlugs &&
+      experiment.slug !== titleSlug(experiment.title) &&
+      experimentTitleAliases.get(route) !== titleSlug(experiment.title)
+    ) {
       failures.push(`Experiment name differs from URL: ${route}`);
     }
     if (catalogRoutes.has(route)) {

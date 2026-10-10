@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { DemoButton, TexPreview } from "../_components/DemoControls";
+import { DemoButton, TexPreview } from "../_katex-components/DemoControls";
 
 const STEPS = [
   {

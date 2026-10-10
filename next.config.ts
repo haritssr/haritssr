@@ -35,6 +35,25 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  redirects() {
+    return [
+      {
+        source: "/experiments/katex",
+        destination: "/experiments/mathematics",
+        permanent: true,
+      },
+      {
+        source: "/experiments/katex/basic",
+        destination: "/experiments/mathematics/katex-basics",
+        permanent: true,
+      },
+      {
+        source: "/experiments/katex/:path*",
+        destination: "/experiments/mathematics/:path*",
+        permanent: true,
+      },
+    ];
+  },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   headers() {
     return [

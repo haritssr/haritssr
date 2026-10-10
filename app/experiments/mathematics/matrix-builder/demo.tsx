@@ -4,7 +4,7 @@ import { useState } from "react";
 import NumberInput from "@/components/NumberInput";
 import { SelectField as ExperimentSelect } from "@/components/SelectField";
 
-import { DemoButton, TexPreview } from "../_components/DemoControls";
+import { DemoButton, TexPreview } from "../_katex-components/DemoControls";
 
 const SIZES = [
   { label: "2 by 2", value: "2" },
