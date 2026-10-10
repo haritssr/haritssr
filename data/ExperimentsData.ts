@@ -848,6 +848,16 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: ["2026-10-10"],
       },
       {
+        slug: "high-school-symbols",
+        group: "tools",
+        title: "High School Symbols",
+        description:
+          "Kamus simbol matematika dan fisika SMA Indonesia, dengan arti dan contoh yang ditampilkan menggunakan KaTeX.",
+        tags: ["notation", "katex", "physics", "learning", "indonesia"],
+        createdAt: "2026-10-10",
+        updatedAt: ["2026-10-10"],
+      },
+      {
         slug: "circle",
         group: "chapters",
         title: "Circle",
