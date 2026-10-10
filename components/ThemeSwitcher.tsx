@@ -100,10 +100,10 @@ export default function ThemeSwitcher() {
               </legend>
               {themeOptions.map(({ icon: Icon, label, value }) => (
                 <label
-                  className={`focus-within:outline-action flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm focus-within:outline-2 focus-within:outline-offset-2 ${
+                  className={`flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors ${
                     preference === value
                       ? "bg-action/10 text-action font-medium"
-                      : "text-foreground/80 hover:bg-interface-hover"
+                      : "text-foreground/80 hover:bg-foreground/10 has-[:focus-visible]:bg-foreground/10"
                   }`}
                   key={value}
                 >
