@@ -1,7 +1,7 @@
 "use client";
 
 import { Popover } from "@base-ui/react/popover";
-import { ListBulletIcon } from "@heroicons/react/24/outline";
+import { ArrowUpIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import {
   useCallback,
@@ -28,6 +28,8 @@ const ContentsPanel = dynamic(
   async () => await import("./ExperimentContentsPanel")
 );
 const DESKTOP_QUERY = "(min-width: 1024px)";
+const FLOATING_BUTTON_CLASS =
+  "border-middle-hover text-foreground/90! hover:bg-middle-hover/50! focus-visible:outline-action fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 h-9.5 rounded-full! border bg-white/50 px-3! py-1.5! text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
 
 function getDesktopSnapshot() {
   return window.matchMedia(DESKTOP_QUERY).matches;
@@ -300,8 +302,7 @@ export default function ExperimentTableOfContents({
     setOpenView(nextOpen ? desktop : null);
   }
 
-  const triggerClassName =
-    "border-middle-hover text-foreground/90! hover:bg-middle-hover/50! focus-visible:outline-action fixed right-[max(1.25rem,env(safe-area-inset-right))] bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 min-h-11 rounded-full! border bg-white/50 px-4 py-2! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
+  const triggerClassName = `${FLOATING_BUTTON_CLASS} right-[max(1.25rem,env(safe-area-inset-right))]`;
   const triggerContent = (
     <>
       <ListBulletIcon
@@ -328,38 +329,62 @@ export default function ExperimentTableOfContents({
     />
   ) : null;
 
-  return desktop ? (
-    <Popover.Root
-      modal={false}
-      onOpenChange={changeOpen}
-      onOpenChangeComplete={finishClose}
-      open={open}
-    >
-      <Popover.Trigger
-        render={
-          <Button
+  return (
+    <>
+      <Button
+        aria-label="To the top"
+        className={`${FLOATING_BUTTON_CLASS} left-[max(1.25rem,env(safe-area-inset-left))] size-9.5 p-0!`}
+        iconOnly
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+              .matches
+              ? "auto"
+              : "smooth",
+          });
+        }}
+        variant="ghost"
+      >
+        <ArrowUpIcon
+          aria-hidden="true"
+          className="pointer-events-none size-5"
+        />
+      </Button>
+      {desktop ? (
+        <Popover.Root
+          modal={false}
+          onOpenChange={changeOpen}
+          onOpenChangeComplete={finishClose}
+          open={open}
+        >
+          <Popover.Trigger
+            render={
+              <Button
+                className={triggerClassName}
+                data-experiment-toc-trigger=""
+                ref={triggerRef}
+                variant="ghost"
+              />
+            }
+          >
+            {triggerContent}
+          </Popover.Trigger>
+          {panel}
+        </Popover.Root>
+      ) : (
+        <SheetTrigger isOpen={open} onOpenChange={changeOpen}>
+          <AriaButton
             className={triggerClassName}
             data-experiment-toc-trigger=""
             ref={triggerRef}
-            variant="ghost"
-          />
-        }
-      >
-        {triggerContent}
-      </Popover.Trigger>
-      {panel}
-    </Popover.Root>
-  ) : (
-    <SheetTrigger isOpen={open} onOpenChange={changeOpen}>
-      <AriaButton
-        className={triggerClassName}
-        data-experiment-toc-trigger=""
-        ref={triggerRef}
-        render={(props) => <Button {...props} variant="ghost" />}
-      >
-        {triggerContent}
-      </AriaButton>
-      {panel}
-    </SheetTrigger>
+            render={(props) => <Button {...props} variant="ghost" />}
+          >
+            {triggerContent}
+          </AriaButton>
+          {panel}
+        </SheetTrigger>
+      )}
+    </>
   );
 }
