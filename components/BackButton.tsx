@@ -21,7 +21,7 @@ export default function BackButton({
       >
         <ChevronLeftIcon
           aria-hidden="true"
-          className="size-4.5"
+          className="size-4.5 -translate-x-px"
           strokeWidth={2}
         />
       </Link>
