@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
+import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import Demo from "./demo";
@@ -19,11 +20,11 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function LivePlaygroundPage() {
   return (
     <div className="space-y-20 pb-16">
-      <div>
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
+      <div className="max-w-3xl space-y-5">
+        <SubTitle>
           Write TeX and watch KaTeX typeset it as you edit. Try a template, then
           change the notation or compare inline math with a standalone equation.
-        </p>
+        </SubTitle>
         <SourceCodeLink />
       </div>
       <Section title="Try your own notation" id="playground-heading">
