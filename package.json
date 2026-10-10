@@ -29,6 +29,7 @@
     "next": "^16.4.0",
     "nuqs": "^2.10.2",
     "react": "^19.3.0",
+    "react-aria-components": "1.22.1",
     "react-confetti": "^6.4.0",
     "react-dom": "^19.3.0",
     "react-intersection-observer": "^11.0.1",

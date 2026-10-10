@@ -1,6 +1,5 @@
 "use client";
 
-import { Drawer } from "@base-ui/react/drawer";
 import { Popover } from "@base-ui/react/popover";
 import { ListBulletIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
@@ -12,6 +11,8 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { RefObject } from "react";
+import { Button as AriaButton } from "react-aria-components/Button";
+import { SheetTrigger } from "react-aria-components/Sheet";
 
 import Button from "@/components/Button";
 import {
@@ -231,92 +232,134 @@ export default function ExperimentTableOfContents({
 
   useEffect(
     () => () => {
+      pendingNavigation.current = null;
       cancelAnimationFrame(navigationFrame.current);
     },
     []
   );
 
-  function finishClose(isOpen: boolean) {
+  const finishClose = useCallback((isOpen: boolean) => {
     const navigation = pendingNavigation.current;
     if (isOpen || !navigation) {
       return;
     }
 
+    cancelAnimationFrame(navigationFrame.current);
+    // React Aria restores focus on the next frame after the sheet unmounts.
+    // Navigate on the following frame, once focus and scroll locking settle.
     navigationFrame.current = requestAnimationFrame(() => {
-      pendingNavigation.current = null;
-      const { entry, focus } = navigation;
-      if (!entry.target.isConnected) {
-        return;
-      }
-      const hash = `#${encodeURIComponent(entry.id)}`;
-      if (window.location.hash !== hash) {
-        window.history.pushState(window.history.state, "", hash);
-      }
-      if (focus) {
-        if (!entry.target.hasAttribute("tabindex")) {
-          entry.target.setAttribute("tabindex", "-1");
+      navigationFrame.current = requestAnimationFrame(() => {
+        if (pendingNavigation.current !== navigation) {
+          return;
         }
-        entry.target.focus({ preventScroll: true });
-      }
-      entry.target.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-        block: "start",
+        pendingNavigation.current = null;
+        const { entry, focus } = navigation;
+        if (!entry.target.isConnected) {
+          return;
+        }
+        const hash = `#${encodeURIComponent(entry.id)}`;
+        if (window.location.hash !== hash) {
+          window.history.pushState(window.history.state, "", hash);
+        }
+        if (focus) {
+          if (!entry.target.hasAttribute("tabindex")) {
+            entry.target.setAttribute("tabindex", "-1");
+          }
+          entry.target.focus({ preventScroll: true });
+        }
+        entry.target.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
+          block: "start",
+        });
       });
     });
-  }
+  }, []);
+
+  const sheetRef = useCallback(
+    (element: HTMLDivElement | null) => {
+      if (element === null) {
+        finishClose(false);
+      }
+    },
+    [finishClose]
+  );
 
   if (!visible || outline === null) {
     return null;
   }
 
-  const Root = desktop ? Popover.Root : Drawer.Root;
-  const Trigger = desktop ? Popover.Trigger : Drawer.Trigger;
+  function changeOpen(nextOpen: boolean) {
+    if (nextOpen) {
+      pendingNavigation.current = null;
+      cancelAnimationFrame(navigationFrame.current);
+      setHasOpened(true);
+    }
+    setOpenView(nextOpen ? desktop : null);
+  }
 
-  return (
-    <Root
-      modal={!desktop}
-      onOpenChange={(nextOpen) => {
-        if (nextOpen) {
-          setHasOpened(true);
-        }
-        setOpenView(nextOpen ? desktop : null);
+  const triggerClassName =
+    "border-middle-hover text-foreground/90! hover:bg-middle-hover/50! focus-visible:outline-action fixed right-[max(1.25rem,env(safe-area-inset-right))] bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 min-h-11 rounded-full! border bg-white/50 px-4 py-2! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
+  const triggerContent = (
+    <>
+      <ListBulletIcon
+        aria-hidden="true"
+        className="pointer-events-none size-5"
+      />
+      Contents
+    </>
+  );
+  const panel = hasOpened ? (
+    <ContentsPanel
+      activeId={activeId}
+      desktop={desktop}
+      entries={outline.entries[0].children}
+      finalFocus={() =>
+        pendingNavigation.current ? false : triggerRef.current
+      }
+      sheetRef={sheetRef}
+      onSelect={(entry, focus) => {
+        pendingNavigation.current = { entry, focus };
+        setOpenView(null);
       }}
+      title={title}
+    />
+  ) : null;
+
+  return desktop ? (
+    <Popover.Root
+      modal={false}
+      onOpenChange={changeOpen}
       onOpenChangeComplete={finishClose}
       open={open}
     >
-      <Trigger
+      <Popover.Trigger
         render={
           <Button
-            className="border-middle-hover text-foreground/90! hover:bg-middle-hover/50! focus-visible:outline-action fixed right-[max(1.25rem,env(safe-area-inset-right))] bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 min-h-11 rounded-full! border bg-white/50 px-4 py-2! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!"
+            className={triggerClassName}
             data-experiment-toc-trigger=""
             ref={triggerRef}
             variant="ghost"
           />
         }
       >
-        <ListBulletIcon
-          aria-hidden="true"
-          className="pointer-events-none size-5"
-        />
-        Contents
-      </Trigger>
-      {hasOpened ? (
-        <ContentsPanel
-          activeId={activeId}
-          desktop={desktop}
-          entries={outline.entries[0].children}
-          finalFocus={() =>
-            pendingNavigation.current ? false : triggerRef.current
-          }
-          onSelect={(entry, focus) => {
-            pendingNavigation.current = { entry, focus };
-            setOpenView(null);
-          }}
-          title={title}
-        />
-      ) : null}
-    </Root>
+        {triggerContent}
+      </Popover.Trigger>
+      {panel}
+    </Popover.Root>
+  ) : (
+    <SheetTrigger isOpen={open} onOpenChange={changeOpen}>
+      <AriaButton
+        className={triggerClassName}
+        data-experiment-toc-trigger=""
+        ref={triggerRef}
+        render={(props) => <Button {...props} variant="ghost" />}
+      >
+        {triggerContent}
+      </AriaButton>
+      {panel}
+    </SheetTrigger>
   );
 }

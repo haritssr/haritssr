@@ -1,11 +1,18 @@
 "use client";
 
 import "katex/dist/katex.min.css";
-import { Drawer } from "@base-ui/react/drawer";
 import { Popover } from "@base-ui/react/popover";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { memo } from "react";
-import type { MouseEvent } from "react";
+import type { MouseEvent, Ref } from "react";
+import { Button as AriaButton } from "react-aria-components/Button";
+import { Heading } from "react-aria-components/Heading";
+import {
+  Sheet,
+  SheetBackdrop,
+  SheetContent,
+  SheetOverlay,
+} from "react-aria-components/Sheet";
 
 import Button from "@/components/Button";
 import InternalLink from "@/components/InternalLink";
@@ -83,33 +90,53 @@ export default function ExperimentContentsPanel({
   entries,
   finalFocus,
   onSelect,
+  sheetRef,
   title,
 }: ContentsListProps & {
   desktop: boolean;
   finalFocus: () => false | HTMLElement | null;
+  sheetRef: Ref<HTMLDivElement>;
   title: string;
 }) {
-  const Title = desktop ? Popover.Title : Drawer.Title;
-  const Close = desktop ? Popover.Close : Drawer.Close;
+  const closeIcon = (
+    <XMarkIcon aria-hidden="true" className="pointer-events-none size-5" />
+  );
+  const closeClassName = "size-11 rounded-full! p-0! [corner-shape:round]!";
   const content = (
     <>
       <div className="border-middle-hover flex shrink-0 items-center justify-between gap-3 border-b py-1.5 pr-2 pl-4">
-        <Title className="text-foreground font-semibold">{title}</Title>
-        <Close
-          aria-label="Close contents"
-          render={
-            <Button
-              className="size-11 rounded-full! p-0! [corner-shape:round]!"
-              iconOnly
-              variant="ghost"
-            />
-          }
-        >
-          <XMarkIcon
-            aria-hidden="true"
-            className="pointer-events-none size-5"
-          />
-        </Close>
+        {desktop ? (
+          <Popover.Title className="text-foreground font-semibold">
+            {title}
+          </Popover.Title>
+        ) : (
+          <Heading
+            className="text-foreground font-semibold"
+            level={2}
+            slot="title"
+          >
+            {title}
+          </Heading>
+        )}
+        {desktop ? (
+          <Popover.Close
+            aria-label="Close contents"
+            render={
+              <Button className={closeClassName} iconOnly variant="ghost" />
+            }
+          >
+            {closeIcon}
+          </Popover.Close>
+        ) : (
+          <AriaButton
+            aria-label="Close contents"
+            className={closeClassName}
+            render={(props) => <Button {...props} iconOnly variant="ghost" />}
+            slot="close"
+          >
+            {closeIcon}
+          </AriaButton>
+        )}
       </div>
       <nav
         aria-label="Table of contents"
@@ -149,22 +176,20 @@ export default function ExperimentContentsPanel({
   }
 
   return (
-    <Drawer.Portal>
-      <Drawer.Backdrop className="bg-foreground/30 fixed inset-0 z-40 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
-      <Drawer.Viewport className={`${styles.sheetViewport} z-50`}>
-        <Drawer.Popup
-          className={`${styles.sheet} ${appearance} rounded-t-3xl`}
-          finalFocus={finalFocus}
-        >
+    <SheetOverlay className="z-50" position="bottom" ref={sheetRef}>
+      <SheetBackdrop
+        className="bg-foreground/30 backdrop-blur-xs"
+        swipeAnimation={styles.backdropFade}
+      />
+      <Sheet className={`${styles.sheet} ${appearance} rounded-t-3xl`}>
+        <SheetContent className="flex min-h-0 flex-col outline-hidden">
           <div
             aria-hidden="true"
             className="bg-border mx-auto mt-3 h-1 w-10 shrink-0 rounded-full"
           />
-          <Drawer.Content className="flex min-h-0 flex-col">
-            {content}
-          </Drawer.Content>
-        </Drawer.Popup>
-      </Drawer.Viewport>
-    </Drawer.Portal>
+          {content}
+        </SheetContent>
+      </Sheet>
+    </SheetOverlay>
   );
 }

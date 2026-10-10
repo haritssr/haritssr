@@ -169,7 +169,8 @@ not require editing a separate import registry.
 - Retired Headless UI, Mantine, Radix UI, React Aria, React Table, React Query,
   VisX, and Haris Lab experiments are static historical records rather than live routes.
   Their implementations and exclusive dependencies were removed; continuing
-  widgets use Base UI. Historical counts are separate from live experiment counts.
+  widgets use Base UI, except the mobile experiment table of contents, which uses
+  React Aria Sheet. Historical counts are separate from live experiment counts.
   The cmdk demo and dependency were also removed; omit cmdk from archive cards.
 - The installable PWA caches a standalone offline page instead of Next.js pages.
 - SQLite task and tools experiments stay local until they have authentication,
@@ -273,9 +274,12 @@ post to appear in the live feed.
   experiment counts. Render static cards inside the collapsed discontinued
   accordion without registering live pages, search entries, or sitemap URLs.
   Archive cards must not link to deleted routes.
-- Do not reintroduce Headless UI, Mantine, Radix UI, React Aria, React Table,
+- Do not reintroduce Headless UI, Mantine, Radix UI, React Table,
   React Query, cmdk, or VisX dependencies. Continuing widgets use the Base UI patterns
   demonstrated in `/design` and the shared components.
+- React Aria is permitted only for the mobile experiment table-of-contents Sheet
+  and its supporting trigger, title, and close controls. Keep its retired
+  experiments archived and use Base UI for other continuing widgets.
 - `discontinuedExperimentHistory.removalCommitSha` stores the actual full SHA
   of the commit that removed the implementations and dependencies. Record it
   in a follow-up commit because a commit cannot contain its own SHA. Keep this
