@@ -23,7 +23,7 @@ export const logarithmRules = [
     example: String.raw`{}^{2}\!\log(2^{-3})=-3,\qquad 2^{{}^{2}\!\log 5}=5`,
   },
   {
-    title: "Product rule — sifat perkalian",
+    title: "Product rule",
     formula: String.raw`{}^{a}\!\log(xy)={}^{a}\!\log x+{}^{a}\!\log y`,
     explanation:
       "Multiplying powers with the same base adds their exponents. Here both factors must be positive.",
@@ -36,7 +36,7 @@ export const logarithmRules = [
     example: String.raw`{}^{2}\!\log(4\cdot8)=2+3=5`,
   },
   {
-    title: "Quotient rule — sifat pembagian",
+    title: "Quotient rule",
     formula: String.raw`{}^{a}\!\log\frac{x}{y}={}^{a}\!\log x-{}^{a}\!\log y`,
     explanation:
       "Dividing powers with the same base subtracts their exponents. Both numerator and denominator must be positive.",
@@ -48,7 +48,7 @@ export const logarithmRules = [
     example: String.raw`{}^{3}\!\log\frac{81}{3}=4-1=3`,
   },
   {
-    title: "Power rule — sifat perpangkatan",
+    title: "Power rule",
     formula: String.raw`{}^{a}\!\log(x^r)=r\,{}^{a}\!\log x`,
     explanation:
       "Raising a power to another power multiplies the exponents. This holds for any real exponent when the argument is positive.",
@@ -60,7 +60,7 @@ export const logarithmRules = [
     example: String.raw`{}^{2}\!\log(8^2)=2\cdot3=6`,
   },
   {
-    title: "Root rule — sifat akar",
+    title: "Root rule",
     formula: String.raw`{}^{a}\!\log\sqrt[n]{x}=\frac{1}{n}\,{}^{a}\!\log x`,
     explanation:
       "A root is a fractional power, so this follows directly from the power rule. The root index is a positive integer.",
@@ -83,7 +83,7 @@ export const logarithmRules = [
     example: String.raw`{}^{2}\!\log\frac18=-3`,
   },
   {
-    title: "Change of base — perubahan basis",
+    title: "Change of base",
     formula: String.raw`{}^{a}\!\log x=\frac{{}^{b}\!\log x}{{}^{b}\!\log a}`,
     explanation:
       "Use any valid new base. The denominator is nonzero because the original base is not one. This is how a calculator evaluates other bases with natural logarithms.",

@@ -1,3 +1,4 @@
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -71,14 +72,17 @@ export default function LogarithmsPage() {
         />
       </section>
 
-      <section aria-labelledby="purpose-heading" className="space-y-5">
+      <section
+        aria-labelledby="purpose-heading"
+        className="max-w-3xl space-y-5"
+      >
         <Section id="purpose-heading" name="Why do logarithms exist?" />
-        <p className="text-muted max-w-3xl leading-8">
+        <p className="text-muted leading-8">
           Logarithms fill the gap when the unknown is an exponent. They also
           convert multiplication into addition and make quantities spanning many
           orders of magnitude easier to compare.
         </p>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4">
           <article className="border-border space-y-3 rounded-xl border p-5">
             <h3 className="font-semibold">Find time in a growth model</h3>
             <p className="text-muted text-sm leading-6">
@@ -137,21 +141,18 @@ export default function LogarithmsPage() {
       <LogarithmLab />
 
       <section aria-labelledby="properties-heading" className="space-y-5">
-        <Section
-          id="properties-heading"
-          name="Common rules — sifat-sifat logaritma"
-        />
-        <p className="text-muted max-w-3xl leading-8">
+        <Section id="properties-heading" name="Common rules" />
+        <p className="text-muted leading-8">
           Every rule below comes from the definition and exponent laws. Unless
           stated otherwise, {katexify(String.raw`a,b>0`, false)} and{" "}
           {katexify(String.raw`a,b\ne1`, false)} whenever used as bases,
           arguments {katexify(String.raw`x,y,c>0`, false)}, and powers are real.
           Open any derivation to follow the steps.
         </p>
-        <ol className="grid items-start gap-4 lg:grid-cols-2">
+        <ol className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmRules.map((rule, index) => (
             <li
-              className="border-border min-w-0 space-y-4 rounded-xl border p-5"
+              className="border-border flex min-w-0 flex-col gap-4 rounded-xl border p-5"
               key={rule.title}
             >
               <h3 className="font-semibold">
@@ -159,25 +160,28 @@ export default function LogarithmsPage() {
               </h3>
               <Equation tex={rule.formula} />
               <p className="text-muted text-sm leading-6">{rule.explanation}</p>
-              <details className="border-border border-t pt-3">
-                <summary className="focus-visible:outline-action cursor-pointer rounded-sm text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4">
-                  Show derivation
-                </summary>
-                <ol
-                  className="mt-4 space-y-3"
-                  aria-label={`Derivation of ${rule.title}`}
+              <Accordion className="mt-auto w-full">
+                <AccordionItem
+                  panelClassName="bg-transparent"
+                  title="Show derivation"
+                  value={`rule-${index + 1}-derivation`}
                 >
-                  {rule.steps.map((step) => (
-                    <li key={step}>
-                      <Equation tex={step} />
-                    </li>
-                  ))}
-                </ol>
-                <p className="mt-4 text-sm font-medium">Example</p>
-                <div className="mt-2">
-                  <Equation tex={rule.example} />
-                </div>
-              </details>
+                  <ol
+                    className="space-y-3"
+                    aria-label={`Derivation of ${rule.title}`}
+                  >
+                    {rule.steps.map((step) => (
+                      <li key={step}>
+                        <Equation tex={step} />
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="mt-4 text-sm font-medium">Example</p>
+                  <div className="mt-2">
+                    <Equation tex={rule.example} />
+                  </div>
+                </AccordionItem>
+              </Accordion>
             </li>
           ))}
         </ol>
@@ -217,39 +221,49 @@ export default function LogarithmsPage() {
         className="max-w-3xl space-y-5 leading-8"
       >
         <Section id="mistakes-heading" name="Common mistakes" />
-        <h3 className="text-lg font-semibold">
-          A sum inside a logarithm does not split
-        </h3>
-        <p className="text-muted">
-          The product rule follows from multiplying powers. There is no matching
-          exponent law that turns a sum of arguments into a sum of logarithms. A
-          counterexample is enough to show why that proposed rule fails.
-        </p>
-        <Equation
-          tex={String.raw`{}^{2}\!\log(4+4)=3\ne4={}^{2}\!\log4+{}^{2}\!\log4`}
-        />
-        <h3 className="text-lg font-semibold">
-          Check the original domain before combining
-        </h3>
-        <p className="text-muted">
-          A positive product does not guarantee that each factor is positive.
-          Keep the separate domain conditions when combining logarithms. Also,
-          the power rule above assumes a positive argument; for a squared
-          nonzero real value the correct expansion uses absolute value.
-        </p>
-        <Equation
-          tex={String.raw`{}^{a}\!\log(x^2)=2\,{}^{a}\!\log|x|,\qquad x\ne0`}
-        />
-        <h3 className="text-lg font-semibold">
-          A logarithm is not a factor you can cancel
-        </h3>
-        <p className="text-muted">
-          Logarithms are functions. Use change of base for a quotient of
-          logarithms; dividing their arguments gives a different expression.
-        </p>
-        <Equation
-          tex={String.raw`\frac{\log100}{\log10}=2,\qquad \log\frac{100}{10}=1`}
-        />
+        <div className="space-y-8">
+          <div className="min-w-0 space-y-5">
+            <h3 className="text-lg font-semibold">
+              A sum inside a logarithm does not split
+            </h3>
+            <p className="text-muted">
+              The product rule follows from multiplying powers. There is no
+              matching exponent law that turns a sum of arguments into a sum of
+              logarithms. A counterexample is enough to show why that proposed
+              rule fails.
+            </p>
+            <Equation
+              tex={String.raw`{}^{2}\!\log(4+4)=3\ne4={}^{2}\!\log4+{}^{2}\!\log4`}
+            />
+          </div>
+          <div className="min-w-0 space-y-5">
+            <h3 className="text-lg font-semibold">
+              Check the original domain before combining
+            </h3>
+            <p className="text-muted">
+              A positive product does not guarantee that each factor is
+              positive. Keep the separate domain conditions when combining
+              logarithms. Also, the power rule above assumes a positive
+              argument; for a squared nonzero real value the correct expansion
+              uses absolute value.
+            </p>
+            <Equation
+              tex={String.raw`{}^{a}\!\log(x^2)=2\,{}^{a}\!\log|x|,\qquad x\ne0`}
+            />
+          </div>
+          <div className="min-w-0 space-y-5">
+            <h3 className="text-lg font-semibold">
+              A logarithm is not a factor you can cancel
+            </h3>
+            <p className="text-muted">
+              Logarithms are functions. Use change of base for a quotient of
+              logarithms; dividing their arguments gives a different expression.
+            </p>
+            <Equation
+              tex={String.raw`\frac{\log100}{\log10}=2,\qquad \log\frac{100}{10}=1`}
+            />
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="practice-heading" className="space-y-5">
@@ -257,68 +271,37 @@ export default function LogarithmsPage() {
         <p className="text-muted leading-8">
           Work out each answer, then reveal the solution.
         </p>
-        <ol className="space-y-4">
+        <ol className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmExercises.map((exercise, index) => (
             <li
-              className="border-border space-y-4 rounded-xl border p-5"
+              className="border-border flex min-w-0 flex-col gap-4 rounded-xl border p-5"
               key={exercise.title}
             >
               <h3 className="font-semibold">
                 {index + 1}. {exercise.title}
               </h3>
               <Equation tex={exercise.expression} />
-              <details className="border-border border-t pt-3">
-                <summary className="focus-visible:outline-action cursor-pointer rounded-sm text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4">
-                  Show solution
-                </summary>
-                <ol className="mt-4 space-y-3">
-                  {exercise.steps.map((step) => (
-                    <li key={step}>
-                      <Equation tex={step} />
-                    </li>
-                  ))}
-                </ol>
-                <p className="text-muted mt-4 text-sm leading-6">
-                  {exercise.explanation}
-                </p>
-              </details>
+              <Accordion className="mt-auto w-full">
+                <AccordionItem
+                  panelClassName="bg-transparent"
+                  title="Show solution"
+                  value={`exercise-${index + 1}-solution`}
+                >
+                  <ol className="space-y-3">
+                    {exercise.steps.map((step) => (
+                      <li key={step}>
+                        <Equation tex={step} />
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="text-muted mt-4 text-sm leading-6">
+                    {exercise.explanation}
+                  </p>
+                </AccordionItem>
+              </Accordion>
             </li>
           ))}
         </ol>
-      </section>
-
-      <section
-        aria-labelledby="references-heading"
-        className="max-w-3xl space-y-3 text-sm leading-6"
-      >
-        <Section id="references-heading" name="Further reading" />
-        <p className="text-muted">For additional explanations and practice:</p>
-        <ul className="list-inside list-disc space-y-2">
-          <li>
-            <a
-              className="text-action hover:underline"
-              href="https://repositori.kemendikdasmen.go.id/21931/"
-            >
-              Kemdikbud: fungsi eksponen dan fungsi logaritma
-            </a>
-          </li>
-          <li>
-            <a
-              className="text-action hover:underline"
-              href="https://openstax.org/books/precalculus-2e/pages/4-5-logarithmic-properties"
-            >
-              OpenStax: logarithmic properties
-            </a>
-          </li>
-          <li>
-            <a
-              className="text-action hover:underline"
-              href="https://openstax.org/books/precalculus-2e/pages/4-4-graphs-of-logarithmic-functions"
-            >
-              OpenStax: graphs of logarithmic functions
-            </a>
-          </li>
-        </ul>
       </section>
     </div>
   );
