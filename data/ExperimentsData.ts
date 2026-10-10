@@ -905,6 +905,16 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: ["2026-10-02", "2026-10-03"],
       },
       {
+        slug: "math-notation",
+        group: "tools",
+        title: "Math Notation on the Web",
+        description:
+          "See which high-school math expressions KaTeX can typeset, and when graphs, diagrams, or calculations need other tools.",
+        tags: ["notation", "katex", "learning"],
+        createdAt: "2026-10-10",
+        updatedAt: ["2026-10-10"],
+      },
+      {
         slug: "circle",
         group: "chapters",
         title: "Circle",

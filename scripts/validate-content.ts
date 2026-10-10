@@ -25,6 +25,7 @@ const titleSeparatorPattern = /[^a-z0-9]+/g;
 const experimentTitleAliases = new Map([
   ["/experiments/mathematics/live-playground", "live-tex-playground"],
   ["/experiments/mathematics/derivation-stepper", "step-by-step-derivation"],
+  ["/experiments/mathematics/math-notation", "math-notation-on-the-web"],
 ]);
 
 function titleSlug(title: string): string {
