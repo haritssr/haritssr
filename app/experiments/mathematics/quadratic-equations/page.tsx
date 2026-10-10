@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -231,15 +232,20 @@ export default function QuadraticEquationsPage() {
                 <div className="overflow-x-auto py-3">
                   {katexify(expression, true)}
                 </div>
-                <details className="border-border border-t pt-3">
-                  <summary className="focus-visible:outline-action cursor-pointer rounded-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4">
-                    Show solution
-                  </summary>
-                  <div className="overflow-x-auto py-3">
-                    {katexify(working, true)}
-                  </div>
-                  <p className="text-muted text-sm leading-6">{explanation}</p>
-                </details>
+                <Accordion>
+                  <AccordionItem
+                    panelClassName="bg-transparent"
+                    title="Show solution"
+                    value={`exercise-${index + 1}-solution`}
+                  >
+                    <div className="overflow-x-auto py-3">
+                      {katexify(working, true)}
+                    </div>
+                    <p className="text-muted text-sm leading-6">
+                      {explanation}
+                    </p>
+                  </AccordionItem>
+                </Accordion>
               </li>
             )
           )}

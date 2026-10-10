@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import Button from "@/components/Button";
 
 import AnswerFields from "./answer-fields";
@@ -409,18 +410,23 @@ export default function PolynomialPractice() {
                 progress={progress}
               />
             </div>
-            <details className="border-border rounded-xl border lg:hidden">
-              <summary className="focus-visible:outline-action cursor-pointer rounded-xl px-4 py-3 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2">
-                Pilih topik · {topic.id}. {topic.title}
-              </summary>
-              <div className="px-3 pb-3">
+            <Accordion className="w-full lg:hidden">
+              <AccordionItem
+                panelClassName="bg-transparent"
+                title={
+                  <>
+                    Pilih topik · {topic.id}. {topic.title}
+                  </>
+                }
+                value="topic-navigation"
+              >
                 <TopicNavigation
                   current={question}
                   onNavigate={navigate}
                   progress={progress}
                 />
-              </div>
-            </details>
+              </AccordionItem>
+            </Accordion>
           </aside>
           <section
             aria-labelledby="polynomial-question-heading"
@@ -476,11 +482,12 @@ export default function PolynomialPractice() {
               </nav>
             </div>
             <div className="min-w-0 p-5 sm:p-6" key={question.id}>
-              <details className="border-border mb-5 rounded-xl border">
-                <summary className="focus-visible:outline-action cursor-pointer rounded-xl px-4 py-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-2">
-                  Ingat konsepnya · {topic.title}
-                </summary>
-                <div className="px-4 pb-3">
+              <Accordion className="mb-5 w-full">
+                <AccordionItem
+                  panelClassName="bg-transparent"
+                  title={<>Ingat konsepnya · {topic.title}</>}
+                  value="topic-concept"
+                >
                   <p className="text-muted text-sm leading-6">
                     {topic.description}
                   </p>
@@ -489,8 +496,8 @@ export default function PolynomialPractice() {
                     Koefisien boleh berupa bilangan real. Untuk polinomial,
                     pangkat variabel harus bilangan bulat tak negatif.
                   </p>
-                </div>
-              </details>
+                </AccordionItem>
+              </Accordion>
               <SharedPolynomials question={question} />
               <p className="mt-5 text-base leading-7 font-medium">
                 <MathText text={question.prompt} />

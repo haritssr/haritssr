@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -164,45 +165,48 @@ export default function EulerIdentityPage() {
           series as for real inputs. All three series below converge absolutely
           for every complex input, so we can group their terms.
         </p>
-        <details className="border-border rounded-xl border p-5">
-          <summary className="focus-visible:outline-action cursor-pointer rounded-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-4">
-            Follow the power series derivation
-          </summary>
-          <div className="mt-5 space-y-5">
-            <p className="text-muted">
-              Start with the exponential, cosine, and sine series.
-            </p>
-            <Equation
-              tex={String.raw`e^z=1+z+\frac{z^2}{2!}+\frac{z^3}{3!}+\cdots`}
-            />
-            <Equation
-              tex={String.raw`\cos\theta=1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots`}
-            />
-            <Equation
-              tex={String.raw`\sin\theta=\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots`}
-            />
-            <p className="text-muted">
-              Substitute {katexify(String.raw`z=i\theta`, false)}. Powers of the
-              imaginary unit repeat in a cycle, separating even powers from odd
-              powers.
-            </p>
-            <Equation
-              tex={String.raw`i^0=1,\quad i^1=i,\quad i^2=-1,\quad i^3=-i,\quad i^4=1`}
-            />
-            <Equation
-              tex={String.raw`e^{i\theta}=1+i\theta-\frac{\theta^2}{2!}-i\frac{\theta^3}{3!}+\frac{\theta^4}{4!}+i\frac{\theta^5}{5!}-\cdots`}
-            />
-            <p className="text-muted">
-              Group the real and imaginary terms. The real terms are exactly the
-              cosine series, and the coefficient of the imaginary unit is
-              exactly the sine series.
-            </p>
-            <Equation
-              tex={String.raw`e^{i\theta}=\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)+i\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right)`}
-            />
-            <Equation tex={String.raw`e^{i\theta}=\cos\theta+i\sin\theta`} />
-          </div>
-        </details>
+        <Accordion>
+          <AccordionItem
+            panelClassName="bg-transparent"
+            title="Follow the power series derivation"
+            value="power-series-derivation"
+          >
+            <div className="space-y-5">
+              <p className="text-muted">
+                Start with the exponential, cosine, and sine series.
+              </p>
+              <Equation
+                tex={String.raw`e^z=1+z+\frac{z^2}{2!}+\frac{z^3}{3!}+\cdots`}
+              />
+              <Equation
+                tex={String.raw`\cos\theta=1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots`}
+              />
+              <Equation
+                tex={String.raw`\sin\theta=\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots`}
+              />
+              <p className="text-muted">
+                Substitute {katexify(String.raw`z=i\theta`, false)}. Powers of
+                the imaginary unit repeat in a cycle, separating even powers
+                from odd powers.
+              </p>
+              <Equation
+                tex={String.raw`i^0=1,\quad i^1=i,\quad i^2=-1,\quad i^3=-i,\quad i^4=1`}
+              />
+              <Equation
+                tex={String.raw`e^{i\theta}=1+i\theta-\frac{\theta^2}{2!}-i\frac{\theta^3}{3!}+\frac{\theta^4}{4!}+i\frac{\theta^5}{5!}-\cdots`}
+              />
+              <p className="text-muted">
+                Group the real and imaginary terms. The real terms are exactly
+                the cosine series, and the coefficient of the imaginary unit is
+                exactly the sine series.
+              </p>
+              <Equation
+                tex={String.raw`e^{i\theta}=\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)+i\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right)`}
+              />
+              <Equation tex={String.raw`e^{i\theta}=\cos\theta+i\sin\theta`} />
+            </div>
+          </AccordionItem>
+        </Accordion>
       </section>
 
       <section
