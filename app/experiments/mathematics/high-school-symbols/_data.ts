@@ -14,7 +14,7 @@ export interface NotationGroup {
 export const notationGroups: readonly NotationGroup[] = [
   {
     id: "operasi",
-    title: "Operasi dan hubungan",
+    title: "Operasi dan perbandingan",
     description:
       "Tanda untuk menghitung, membandingkan, dan menyatakan hubungan.",
     entries: [
@@ -98,7 +98,7 @@ export const notationGroups: readonly NotationGroup[] = [
     id: "himpunan",
     title: "Bilangan, himpunan, dan interval",
     description:
-      "Konvensi bilangan asli dapat berbeda antar buku; periksa apakah nol disertakan.",
+      "Jenis bilangan, operasi himpunan, dan batas interval. Periksa apakah definisi bilangan asli yang digunakan menyertakan nol.",
     entries: [
       {
         symbol: "\\mathbb{N},\\mathbb{Z}",
@@ -172,7 +172,7 @@ export const notationGroups: readonly NotationGroup[] = [
   },
   {
     id: "logika",
-    title: "Logika dan penulisan matematis",
+    title: "Logika matematika",
     description: "Notasi yang muncul dalam pernyataan, syarat, dan pembuktian.",
     entries: [
       {
@@ -279,7 +279,8 @@ export const notationGroups: readonly NotationGroup[] = [
   {
     id: "fungsi",
     title: "Fungsi, barisan, deret, dan keuangan",
-    description: "Notasi pemetaan, suku barisan, serta bunga dan pertumbuhan.",
+    description:
+      "Notasi fungsi, suku barisan, jumlah deret, serta bunga dan pertumbuhan.",
     entries: [
       {
         symbol: "f:A\\to B",
@@ -345,7 +346,8 @@ export const notationGroups: readonly NotationGroup[] = [
   {
     id: "geometri",
     title: "Geometri, koordinat, dan transformasi",
-    description: "Bedakan nama titik, panjang ruas, dan bangun geometri.",
+    description:
+      "Notasi titik, garis, sudut, koordinat, dan transformasi. Bedakan nama titik dari panjang ruas dan nama bangun.",
     entries: [
       {
         symbol: "A,B,C;(x,y)",
@@ -457,7 +459,8 @@ export const notationGroups: readonly NotationGroup[] = [
   {
     id: "matriks-vektor",
     title: "Matriks dan vektor",
-    description: "Panah atau huruf tebal membedakan vektor dari skalar.",
+    description:
+      "Elemen dan operasi matriks, serta komponen dan operasi vektor. Panah atau huruf tebal membedakan vektor dari skalar.",
     entries: [
       {
         symbol: "A=(a_{ij}),m\\times n",
@@ -515,7 +518,7 @@ export const notationGroups: readonly NotationGroup[] = [
     id: "statistika",
     title: "Statistika dan peluang",
     description:
-      "Simbol sampel, populasi, kejadian, dan distribusi dapat berbeda antar buku.",
+      "Ukuran pemusatan dan penyebaran data, serta kejadian dan distribusi peluang. Notasi sampel dan populasi dapat berbeda antar buku.",
     entries: [
       {
         symbol: "x_i,f_i,n",
@@ -613,7 +616,7 @@ export const notationGroups: readonly NotationGroup[] = [
     id: "kalkulus",
     title: "Limit, turunan, dan integral",
     description:
-      "Umumnya dipelajari pada matematika tingkat lanjut atau jalur kurikulum tertentu.",
+      "Notasi limit, laju perubahan, dan integral pada materi kalkulus. Cakupannya dapat berbeda menurut kurikulum.",
     entries: [
       {
         symbol: "\\lim_{x\\to a}",
@@ -666,9 +669,9 @@ export const notationGroups: readonly NotationGroup[] = [
   },
   {
     id: "pengukuran",
-    title: "Pengukuran dan cara menulis besaran",
+    title: "Pengukuran dan besaran",
     description:
-      "Besaran dicetak miring, simbol satuan dicetak tegak; kapitalisasi satuan bermakna.",
+      "Notasi nilai ukur, ketidakpastian, dan dimensi. Lambang besaran dicetak miring, sedangkan simbol satuan dicetak tegak.",
     entries: [
       {
         symbol: "x\\pm\\Delta x",
@@ -711,7 +714,7 @@ export const notationGroups: readonly NotationGroup[] = [
     id: "mekanika",
     title: "Gerak, gaya, energi, dan gravitasi",
     description:
-      "Contoh menggunakan notasi yang lazim di SMA; pilih arah positif sebelum menghitung komponen.",
+      "Besaran gerak, gaya, usaha, energi, dan gravitasi. Tentukan arah positif sebelum menghitung komponen vektor.",
     entries: [
       {
         symbol: "s,x,\\Delta x,t",
@@ -852,7 +855,8 @@ export const notationGroups: readonly NotationGroup[] = [
   {
     id: "suhu-kalor",
     title: "Suhu, kalor, gas, dan termodinamika",
-    description: "Konvensi tanda usaha dan kalor harus selalu dinyatakan.",
+    description:
+      "Besaran suhu, kalor, gas, dan proses termodinamika. Perhatikan konvensi tanda usaha dan kalor yang digunakan.",
     entries: [
       {
         symbol: "T,t,{}^\\circ\\mathrm C,\\mathrm K",
@@ -913,7 +917,8 @@ export const notationGroups: readonly NotationGroup[] = [
   {
     id: "gelombang",
     title: "Getaran, gelombang, dan bunyi",
-    description: "Bedakan amplitudo, frekuensi, periode, dan fase.",
+    description:
+      "Besaran getaran, gelombang, dan bunyi. Bedakan amplitudo, frekuensi, periode, dan fase.",
     entries: [
       {
         symbol: "A,y,x",
@@ -957,7 +962,7 @@ export const notationGroups: readonly NotationGroup[] = [
     id: "optika",
     title: "Cahaya dan optika",
     description:
-      "Konvensi tanda jarak benda dan bayangan mengikuti model cermin/lensa yang digunakan.",
+      "Notasi pemantulan, pembiasan, dan pembentukan bayangan. Konvensi tanda jarak mengikuti model cermin atau lensa yang digunakan.",
     entries: [
       {
         symbol: "n,c,v",
@@ -997,9 +1002,9 @@ export const notationGroups: readonly NotationGroup[] = [
   },
   {
     id: "listrik",
-    title: "Listrik, rangkaian, dan magnet",
+    title: "Listrik dan magnet",
     description:
-      "Huruf miring adalah besaran; huruf tegak pada satuan membedakan volt, ampere, dan lainnya.",
+      "Besaran muatan, arus, tegangan, rangkaian, dan medan magnet. Bedakan lambang besaran yang miring dari simbol satuan yang tegak.",
     entries: [
       {
         symbol: "q,Q,e",
@@ -1106,7 +1111,8 @@ export const notationGroups: readonly NotationGroup[] = [
   {
     id: "modern",
     title: "Fisika modern, atom, dan inti",
-    description: "Notasi umum pada materi akhir SMA dan pengayaan.",
+    description:
+      "Notasi foton, atom, inti, dan radioaktivitas pada materi fisika modern dan pengayaan.",
     entries: [
       {
         symbol: "h,f,\\nu,E",
@@ -1176,9 +1182,9 @@ export const notationGroups: readonly NotationGroup[] = [
   },
   {
     id: "satuan",
-    title: "Satuan SI dan satuan lain yang sering dipakai",
+    title: "Satuan SI dan satuan lainnya",
     description:
-      "Simbol satuan selalu tegak. Huruf besar/kecil membedakan, misalnya, mega dan mili.",
+      "Simbol satuan pokok SI, satuan turunan, dan satuan lain yang sering digunakan. Simbol satuan dicetak tegak; huruf besar dan kecil harus dibedakan.",
     entries: [
       {
         symbol: "\\mathrm m,\\mathrm{kg},\\mathrm s",
@@ -1256,9 +1262,9 @@ export const notationGroups: readonly NotationGroup[] = [
   },
   {
     id: "awalan",
-    title: "Awalan satuan yang umum",
+    title: "Awalan satuan",
     description:
-      "Awalan menyatakan faktor pangkat sepuluh; ditempelkan pada satuan tanpa spasi.",
+      "Awalan menyatakan faktor pangkat sepuluh dan ditulis menyatu dengan simbol satuan. Huruf besar dan kecil membedakan awalan, seperti mega dan mili.",
     entries: [
       {
         symbol: "\\mathrm T,\\mathrm G,\\mathrm M",

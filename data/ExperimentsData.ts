@@ -855,7 +855,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Kamus simbol matematika dan fisika SMA Indonesia, dengan arti dan contoh yang ditampilkan menggunakan KaTeX.",
         tags: ["notation", "katex", "physics", "learning", "indonesia"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10"],
+        updatedAt: ["2026-10-10", "2026-10-11"],
       },
       {
         slug: "circle",

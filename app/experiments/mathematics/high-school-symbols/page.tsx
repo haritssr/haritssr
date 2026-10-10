@@ -36,21 +36,6 @@ export default function HighSchoolSymbolsPage() {
           sama bisa memiliki beberapa arti: baca definisi dan satuannya pada
           setiap soal.
         </p>
-        <SourceCodeLink />
-      </div>
-
-      <Section title="Jelajahi menurut topik" id="daftar-topik">
-        <nav aria-label="Topik simbol dan notasi">
-          <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-            {notationGroups.map((group) => (
-              <li key={group.id}>
-                <InternalLink href={`#${group.id}`} variant="navigation">
-                  {group.title}
-                </InternalLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
         <p className="text-muted max-w-3xl">
           Gunakan pencarian halaman di peramban untuk mencari istilah. Pada
           layar kecil, tabel dapat digeser ke samping. Untuk mencoba menulis
@@ -63,12 +48,13 @@ export default function HighSchoolSymbolsPage() {
           </InternalLink>
           .
         </p>
-      </Section>
+        <SourceCodeLink />
+      </div>
 
       <Section
         title="Cara membaca simbol"
         id="cara-membaca"
-        description="Contoh menunjukkan penggunaan notasi, dengan syarat yang dicantumkan. Simbol tidak memiliki satu arti yang berlaku untuk semua topik."
+        description="Makna simbol bergantung pada konteks, bentuk huruf, dan satuannya. Perhatikan definisi serta syarat pada setiap contoh."
       >
         <ul className="text-muted max-w-3xl list-disc space-y-3 pl-5">
           <li>
@@ -113,7 +99,7 @@ export default function HighSchoolSymbolsPage() {
       <Section
         title="Rujukan dan bacaan lanjutan"
         id="rujukan"
-        description="Panduan mata pelajaran menjadi rujukan cakupan belajar; SI menjadi rujukan penulisan satuan. Halaman ini menyatukan konvensi yang umum digunakan, bukan daftar simbol resmi yang diwajibkan pada setiap kelas."
+        description="Panduan mata pelajaran untuk cakupan belajar, rujukan SI untuk satuan, dan dokumentasi KaTeX untuk penulisan rumus. Pilihan simbol dapat berbeda antar buku."
       >
         <ul className="space-y-3">
           <li>
@@ -169,7 +155,7 @@ function NotationTable({ group }: { group: NotationGroup }) {
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
           <th className="px-3 py-3 text-left font-medium" scope="col">
-            Simbol / notasi
+            Simbol
           </th>
           <th className="px-3 py-3 text-left font-medium" scope="col">
             Arti dan cara membaca
