@@ -42,6 +42,10 @@ When mistakes recur, strengthen reusable checks and guardrails.
 - Keep independent exercise and rule card titles unnumbered. Use unordered
   lists for these cards; retain numbering for ordered solution steps and
   question-navigation controls that depend on it.
+- Experiment tables of contents must exclude accordion and disclosure trigger
+  headings, including solution and derivation controls. Apply this globally,
+  regardless of their label or whether they use the shared Accordion component.
+  Ordinary visible headings inside expanded panels may still appear.
 - In experiment pages, use `space-y-20` on the parent that stacks page sections,
   including sections rendered by demo or lab components. Let that parent own
   the spacing; omit individual top and bottom margins on its section children.

@@ -17,6 +17,8 @@ export interface ExperimentOutline {
 }
 
 const HEADING_SELECTOR = "h1, h2, h3, h4, h5, h6";
+const DISCLOSURE_TRIGGER_SELECTOR =
+  'button[aria-expanded], [role="button"][aria-expanded], summary';
 
 function readLabel(heading: HTMLElement): ContentsLabelPart[] {
   const label: ContentsLabelPart[] = [];
@@ -73,7 +75,12 @@ function readLabel(heading: HTMLElement): ContentsLabelPart[] {
 }
 
 function isVisible(heading: HTMLElement, article: HTMLElement) {
-  if (heading.getClientRects().length === 0) {
+  if (
+    heading.getClientRects().length === 0 ||
+    heading.matches(DISCLOSURE_TRIGGER_SELECTOR) ||
+    heading.closest(DISCLOSURE_TRIGGER_SELECTOR) !== null ||
+    heading.querySelector(DISCLOSURE_TRIGGER_SELECTOR) !== null
+  ) {
     return false;
   }
 
