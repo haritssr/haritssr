@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 const monochromeIcons = new Set(["/icons/nextjs.svg", "/icons/radixui.svg"]);
 const scienceIconColors = new Map([
   ["/icons/physics.svg", "text-amber-500"],
-  ["/icons/math.svg", "text-pink-500"],
+  ["/icons/math.svg", "text-[#B784A7]"],
 ]);
 
 export default function ExperimentDomainIcon({
