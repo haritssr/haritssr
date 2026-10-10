@@ -8,7 +8,7 @@ import { SITE_URL } from "@/utils/site";
 
 import { ProjectsData } from "../data/ProjectsData";
 
-const staticRoutes = ["/", "/blog", "/experiments", "/projects", "/design"];
+const staticRoutes = ["/", "/projects", "/experiments", "/blog", "/design"];
 
 const experimentDates = new Map(
   getAvailableExperimentSummaries().map((entry) => [
