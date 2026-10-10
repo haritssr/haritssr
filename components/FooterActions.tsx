@@ -26,7 +26,7 @@ export default function FooterActions({ rssPath }: FooterActionsProps) {
         <ShareButton />
       </div>
       <Toast.Portal>
-        <Toast.Viewport className="fixed right-0 bottom-0 z-2147483647 m-0 flex w-97.5 max-w-[100vw] list-none flex-col gap-2.5 p-3 outline-hidden sm:p-6">
+        <Toast.Viewport className="pointer-events-none fixed right-0 bottom-0 z-2147483647 m-0 flex w-97.5 max-w-[100vw] list-none flex-col gap-2.5 p-3 outline-hidden sm:p-6">
           <ShareToastList />
         </Toast.Viewport>
       </Toast.Portal>
@@ -132,7 +132,7 @@ function ShareToastList() {
 
   return toasts.map((toast) => (
     <Toast.Root
-      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-border rounded-lg border bg-white/70 shadow-xl saturate-150 backdrop-blur-md transition-[transform,opacity] duration-200 ease-out"
+      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-border pointer-events-auto rounded-lg border bg-white/70 shadow-xl saturate-150 backdrop-blur-md transition-[transform,opacity] duration-200 ease-out"
       key={toast.id}
       swipeDirection="right"
       toast={toast}

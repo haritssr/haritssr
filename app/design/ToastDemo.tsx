@@ -13,7 +13,7 @@ export default function ToastDemo() {
         <ToastButton />
       </Box>
       <Toast.Portal>
-        <Toast.Viewport className="fixed right-0 bottom-0 z-50 m-0 flex w-97.5 max-w-[100vw] list-none flex-col gap-2 p-3 outline-hidden sm:p-6">
+        <Toast.Viewport className="pointer-events-none fixed right-0 bottom-0 z-50 m-0 flex w-97.5 max-w-[100vw] list-none flex-col gap-2 p-3 outline-hidden sm:p-6">
           <ToastList />
         </Toast.Viewport>
       </Toast.Portal>
@@ -39,7 +39,7 @@ function ToastList() {
 
   return toasts.map((toast) => (
     <Toast.Root
-      className="border-border rounded-lg border bg-white shadow-xl transition duration-200 ease-out data-ending-style:translate-x-full data-ending-style:opacity-0 data-starting-style:translate-x-full data-starting-style:opacity-0"
+      className="border-border pointer-events-auto rounded-lg border bg-white shadow-xl transition duration-200 ease-out data-ending-style:translate-x-full data-ending-style:opacity-0 data-starting-style:translate-x-full data-starting-style:opacity-0"
       key={toast.id}
       swipeDirection="right"
       toast={toast}
