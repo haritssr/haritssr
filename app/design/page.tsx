@@ -405,21 +405,6 @@ export default function DesignSystem() {
             <HierarchicalColorsDemo />
           </Box>
         </Section>
-
-        <Section title="Figma Design">
-          <div>
-            <iframe
-              allowFullScreen
-              className="border-border min-h-128 w-full rounded-lg border"
-              height="450"
-              loading="lazy"
-              src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FmhfH2JaaCDzRSL71XcSnUw%2FHaris-Lab%3Ftype%3Ddesign%26node-id%3D1416%253A236%26mode%3Ddesign%26t%3DwxLQxcZHLYNHFvrj-1"
-              sandbox="allow-scripts"
-              title="Haris Lab Figma design"
-              width="800"
-            />
-          </div>
-        </Section>
       </div>
     </>
   );
