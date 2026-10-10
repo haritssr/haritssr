@@ -273,7 +273,7 @@ function ProgressSummary({
   return (
     <section
       aria-label="Progres latihan"
-      className="border-border mb-6 rounded-2xl border p-5"
+      className="border-border rounded-2xl border p-5"
     >
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
@@ -385,7 +385,7 @@ export default function PolynomialPractice() {
   };
 
   return (
-    <div aria-busy={!ready}>
+    <div aria-busy={!ready} className="space-y-20">
       <ProgressSummary
         onReset={() => {
           update(() => initialProgress);

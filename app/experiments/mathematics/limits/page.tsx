@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -57,7 +58,7 @@ const questions: readonly PracticeQuestion[] = [
 
 export default function LimitsPage() {
   return (
-    <div className="pb-24">
+    <div className="space-y-20 pb-24">
       <div className="max-w-3xl">
         <SubTitle>
           A limit asks where a function is heading as its input gets close to a
@@ -66,8 +67,8 @@ export default function LimitsPage() {
         <SourceCodeLink />
       </div>
 
-      <div className="text-muted mb-10 max-w-3xl space-y-5 text-base leading-8">
-        <Section name="What does approaching mean?" />
+      <div className="text-muted max-w-3xl space-y-5 text-base leading-8">
+        <SectionHeading>What does approaching mean?</SectionHeading>
         <p>
           Pick a target on the horizontal axis. Move toward it from the left and
           right, and watch the function’s height. For a limit to exist from both
@@ -88,12 +89,16 @@ export default function LimitsPage() {
 
       <LimitsLab />
 
-      <section className="text-muted mt-12 max-w-3xl space-y-5 text-base leading-8">
-        <Section name="Try a limit by hand" />
-        <p>
-          Consider the fraction below. Substitution at the target gives an
-          undefined fraction, but factoring shows what happens nearby.
-        </p>
+      <Section
+        className="text-muted max-w-3xl text-base"
+        title="Try a limit by hand"
+        description={
+          <>
+            Consider the fraction below. Substitution at the target gives an
+            undefined fraction, but factoring shows what happens nearby.
+          </>
+        }
+      >
         <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\frac{x^2-1}{x-1}=\frac{(x-1)(x+1)}{x-1}=x+1\quad(x\ne1)`,
@@ -108,7 +113,7 @@ export default function LimitsPage() {
         <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(String.raw`\lim_{x\to1}\frac{x^2-1}{x-1}=2`, true)}
         </div>
-      </section>
+      </Section>
 
       <Practice questions={questions} />
     </div>

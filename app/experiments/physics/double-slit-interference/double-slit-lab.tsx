@@ -133,7 +133,7 @@ export default function DoubleSlitLab() {
   }
 
   return (
-    <div className="text-foreground space-y-8">
+    <div className="text-foreground space-y-20">
       <section
         aria-labelledby="double-slit-lab-heading"
         className="border-border bg-background overflow-hidden rounded-2xl border"

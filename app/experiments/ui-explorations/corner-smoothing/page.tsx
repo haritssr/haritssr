@@ -60,13 +60,11 @@ export default function CornerSmoothingPage() {
         equal radius values do not guarantee identical outlines.
       </p>
 
-      <section aria-labelledby="corner-comparison-heading">
-        <Section id="corner-comparison-heading" name="Compare the corners" />
+      <Section title="Compare the corners" id="corner-comparison-heading">
         <CornerComparison />
-      </section>
+      </Section>
 
-      <section aria-labelledby="corner-differences-heading">
-        <Section id="corner-differences-heading" name="What changes?" />
+      <Section title="What changes?" id="corner-differences-heading">
         <Table className="min-w-160">
           <caption className="sr-only">
             Differences between rounded corners, CSS squircles, and Lisse
@@ -104,12 +102,13 @@ export default function CornerSmoothingPage() {
             ))}
           </tbody>
         </Table>
-      </section>
+      </Section>
 
-      <section aria-labelledby="corner-reading-heading">
-        <Section id="corner-reading-heading" name="Explore further" />
-        <div className="text-foreground/80 max-w-3xl space-y-4 leading-relaxed">
-          <p>
+      <Section
+        title="Explore further"
+        id="corner-reading-heading"
+        description={
+          <>
             Use native CSS when the browser’s corner curve fits your design and
             rounded corners are an acceptable fallback. Read the{" "}
             <ExternalLink
@@ -118,21 +117,23 @@ export default function CornerSmoothingPage() {
               size="inherit"
             />{" "}
             for its behavior and current browser compatibility.
-          </p>
-          <p>
-            Use Lisse when you want Figma-style smoothing with an adjustable
-            amount. This experiment imports only its DOM-free path generator;
-            the library also offers components and APIs for borders and shadows.
-            See the{" "}
-            <ExternalLink
-              href="https://github.com/JaceThings/Lisse"
-              name="Lisse repository"
-              size="inherit"
-            />{" "}
-            for the full library.
-          </p>
-        </div>
-      </section>
+          </>
+        }
+        contentClassName="text-foreground/80 max-w-3xl space-y-4 leading-relaxed"
+      >
+        <p>
+          Use Lisse when you want Figma-style smoothing with an adjustable
+          amount. This experiment imports only its DOM-free path generator; the
+          library also offers components and APIs for borders and shadows. See
+          the{" "}
+          <ExternalLink
+            href="https://github.com/JaceThings/Lisse"
+            name="Lisse repository"
+            size="inherit"
+          />{" "}
+          for the full library.
+        </p>
+      </Section>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -67,7 +68,7 @@ function Equation({ tex }: { tex: string }) {
 
 export default function QuadraticEquationsPage() {
   return (
-    <div className="text-foreground pb-24">
+    <div className="text-foreground space-y-20 pb-24">
       <div className="max-w-3xl">
         <SubTitle>
           Learn what makes an equation quadratic, how its roots appear on a
@@ -77,19 +78,18 @@ export default function QuadraticEquationsPage() {
         <SourceCodeLink />
       </div>
 
-      <section
-        aria-labelledby="quadratic-basics-heading"
-        className="mb-10 max-w-3xl space-y-5 text-base leading-8"
+      <Section
+        className="max-w-3xl text-base"
+        title="What is a quadratic equation?"
+        id="quadratic-basics-heading"
+        description={
+          <>
+            A quadratic equation has a highest power of two. Bring every term to
+            one side to write it in standard form. Its coefficients are real
+            numbers, and the leading coefficient must be nonzero.
+          </>
+        }
       >
-        <Section
-          id="quadratic-basics-heading"
-          name="What is a quadratic equation?"
-        />
-        <p className="text-muted">
-          A quadratic equation has a highest power of two. Bring every term to
-          one side to write it in standard form. Its coefficients are real
-          numbers, and the leading coefficient must be nonzero.
-        </p>
         <Equation tex={String.raw`ax^2+bx+c=0,\qquad a\ne0`} />
         <p className="text-muted">
           A root is a value of {katexify("x", false)} that makes the left side
@@ -98,19 +98,15 @@ export default function QuadraticEquationsPage() {
           when {katexify("a>0", false)} and downward when{" "}
           {katexify("a<0", false)}.
         </p>
-      </section>
+      </Section>
 
       <QuadraticLab />
 
-      <section
-        aria-labelledby="discriminant-heading"
-        className="mt-12 space-y-5"
-      >
+      <section aria-labelledby="discriminant-heading" className="space-y-5">
         <div className="max-w-3xl">
-          <Section
-            id="discriminant-heading"
-            name="Count the real roots first"
-          />
+          <SectionHeading id="discriminant-heading">
+            Count the real roots first
+          </SectionHeading>
           <p className="text-muted text-base leading-8">
             The discriminant is the quantity inside the square root of the
             quadratic formula. Its sign tells you the kind of roots to expect.
@@ -139,11 +135,12 @@ export default function QuadraticEquationsPage() {
         </p>
       </section>
 
-      <section
-        aria-labelledby="solving-heading"
-        className="mt-12 max-w-3xl space-y-8 text-base leading-8"
+      <Section
+        className="max-w-3xl text-base"
+        title="Three ways to solve"
+        id="solving-heading"
+        contentClassName="space-y-8"
       >
-        <Section id="solving-heading" name="Three ways to solve" />
         <article className="space-y-4">
           <h3 className="text-xl font-semibold">
             Factor when the factors are easy to see
@@ -209,16 +206,15 @@ export default function QuadraticEquationsPage() {
             radicals exact until you need a decimal approximation.
           </p>
         </article>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="quadratic-practice-heading"
-        className="mt-12 space-y-5"
+      <Section
+        title="Try it yourself"
+        id="quadratic-practice-heading"
+        description={
+          <>Solve each equation on paper, then reveal the explanation.</>
+        }
       >
-        <Section id="quadratic-practice-heading" name="Try it yourself" />
-        <p className="text-muted text-base leading-8">
-          Solve each equation on paper, then reveal the explanation.
-        </p>
         <ol className="space-y-4">
           {exercises.map(
             ({ prompt, expression, working, explanation }, index) => (
@@ -250,7 +246,7 @@ export default function QuadraticEquationsPage() {
             )
           )}
         </ol>
-      </section>
+      </Section>
     </div>
   );
 }

@@ -53,108 +53,106 @@ export default function GridVsColumnPage() {
         </p>
       </header>
 
-      <section aria-labelledby="same-cards-heading">
-        <Section id="same-cards-heading" name="Same cards, different flow" />
-        <p className="text-foreground/70 mb-6 max-w-3xl">
-          Grid places items across rows and columns. Multi-column layout flows
-          down one column and continues in the next; the browser balances the
-          columns, while each card is kept together where possible.
-        </p>
-
-        <div className="grid gap-6 lg:grid-cols-2">
-          <section
-            aria-labelledby="grid-example-title"
-            className="border-border min-w-0 rounded-2xl border p-4 sm:p-5"
+      <Section
+        title="Same cards, different flow"
+        id="same-cards-heading"
+        description={
+          <>
+            Grid places items across rows and columns. Multi-column layout flows
+            down one column and continues in the next; the browser balances the
+            columns, while each card is kept together where possible.
+          </>
+        }
+        contentClassName="grid gap-6 lg:grid-cols-2"
+      >
+        <section
+          aria-labelledby="grid-example-title"
+          className="border-border min-w-0 rounded-2xl border p-4 sm:p-5"
+        >
+          <h3
+            className="text-foreground mb-2 text-lg font-semibold"
+            id="grid-example-title"
           >
-            <h3
-              className="text-foreground mb-2 text-lg font-semibold"
-              id="grid-example-title"
-            >
-              CSS Grid
-            </h3>
-            <p className="text-foreground/70 mb-4 text-sm">
-              Items fill each row from left to right. Tracks line up, so the
-              tallest card in a row sets that row&apos;s height.
-            </p>
-            <figure>
-              <ol className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2">
-                {sampleCards.map((card, index) => (
-                  <li key={card.title}>
-                    <article className="bg-background border-border h-full rounded-xl border p-3">
-                      <h4 className="text-foreground text-sm font-semibold">
-                        <span className="text-foreground/40 mr-2 font-normal">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        {card.title}
-                      </h4>
-                      <p className="text-foreground/70 mt-2 text-sm">
-                        {card.description}
-                      </p>
-                    </article>
-                  </li>
-                ))}
-              </ol>
-              <figcaption className="text-foreground/60 mt-3 text-xs">
-                Source order runs across each row before moving down.
-              </figcaption>
-            </figure>
-            <pre className="bg-interface-hover mt-4 overflow-x-auto rounded-xl p-3 text-xs leading-5">
-              <code>{`<ol class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2">
+            CSS Grid
+          </h3>
+          <p className="text-foreground/70 mb-4 text-sm">
+            Items fill each row from left to right. Tracks line up, so the
+            tallest card in a row sets that row&apos;s height.
+          </p>
+          <figure>
+            <ol className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2">
+              {sampleCards.map((card, index) => (
+                <li key={card.title}>
+                  <article className="bg-background border-border h-full rounded-xl border p-3">
+                    <h4 className="text-foreground text-sm font-semibold">
+                      <span className="text-foreground/40 mr-2 font-normal">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {card.title}
+                    </h4>
+                    <p className="text-foreground/70 mt-2 text-sm">
+                      {card.description}
+                    </p>
+                  </article>
+                </li>
+              ))}
+            </ol>
+            <figcaption className="text-foreground/60 mt-3 text-xs">
+              Source order runs across each row before moving down.
+            </figcaption>
+          </figure>
+          <pre className="bg-interface-hover mt-4 overflow-x-auto rounded-xl p-3 text-xs leading-5">
+            <code>{`<ol class="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2">
   <li>...</li>
 </ol>`}</code>
-            </pre>
-          </section>
+          </pre>
+        </section>
 
-          <section
-            aria-labelledby="columns-example-title"
-            className="border-border min-w-0 rounded-2xl border p-4 sm:p-5"
+        <section
+          aria-labelledby="columns-example-title"
+          className="border-border min-w-0 rounded-2xl border p-4 sm:p-5"
+        >
+          <h3
+            className="text-foreground mb-2 text-lg font-semibold"
+            id="columns-example-title"
           >
-            <h3
-              className="text-foreground mb-2 text-lg font-semibold"
-              id="columns-example-title"
-            >
-              CSS columns
-            </h3>
-            <p className="text-foreground/70 mb-4 text-sm">
-              Items flow vertically through the columns. Each column can have
-              its own content height instead of aligning to shared rows.
-            </p>
-            <figure>
-              <ol className="m-0 list-none columns-1 gap-3 p-0 sm:columns-2">
-                {sampleCards.map((card, index) => (
-                  <li
-                    className="mb-3 break-inside-avoid-column"
-                    key={card.title}
-                  >
-                    <article className="bg-background border-border rounded-xl border p-3">
-                      <h4 className="text-foreground text-sm font-semibold">
-                        <span className="text-foreground/40 mr-2 font-normal">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        {card.title}
-                      </h4>
-                      <p className="text-foreground/70 mt-2 text-sm">
-                        {card.description}
-                      </p>
-                    </article>
-                  </li>
-                ))}
-              </ol>
-              <figcaption className="text-foreground/60 mt-3 text-xs">
-                Source order continues down a column, then moves to the next.
-              </figcaption>
-            </figure>
-            <pre className="bg-interface-hover mt-4 overflow-x-auto rounded-xl p-3 text-xs leading-5">
-              <code>{`<ol class="m-0 columns-1 list-none gap-3 p-0 sm:columns-2">
+            CSS columns
+          </h3>
+          <p className="text-foreground/70 mb-4 text-sm">
+            Items flow vertically through the columns. Each column can have its
+            own content height instead of aligning to shared rows.
+          </p>
+          <figure>
+            <ol className="m-0 list-none columns-1 gap-3 p-0 sm:columns-2">
+              {sampleCards.map((card, index) => (
+                <li className="mb-3 break-inside-avoid-column" key={card.title}>
+                  <article className="bg-background border-border rounded-xl border p-3">
+                    <h4 className="text-foreground text-sm font-semibold">
+                      <span className="text-foreground/40 mr-2 font-normal">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {card.title}
+                    </h4>
+                    <p className="text-foreground/70 mt-2 text-sm">
+                      {card.description}
+                    </p>
+                  </article>
+                </li>
+              ))}
+            </ol>
+            <figcaption className="text-foreground/60 mt-3 text-xs">
+              Source order continues down a column, then moves to the next.
+            </figcaption>
+          </figure>
+          <pre className="bg-interface-hover mt-4 overflow-x-auto rounded-xl p-3 text-xs leading-5">
+            <code>{`<ol class="m-0 columns-1 list-none gap-3 p-0 sm:columns-2">
   <li class="mb-3 break-inside-avoid-column">...</li>
 </ol>`}</code>
-            </pre>
-          </section>
-        </div>
-      </section>
+          </pre>
+        </section>
+      </Section>
 
-      <section aria-labelledby="choose-layout-heading">
-        <Section id="choose-layout-heading" name="Which one should you use?" />
+      <Section title="Which one should you use?" id="choose-layout-heading">
         <dl className="grid gap-6 sm:grid-cols-2">
           <div>
             <dt className="text-foreground mb-2 font-semibold">
@@ -200,7 +198,7 @@ export default function GridVsColumnPage() {
           </a>
           .
         </p>
-      </section>
+      </Section>
     </div>
   );
 }

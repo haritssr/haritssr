@@ -20,7 +20,7 @@ function Equation({ tex }: { tex: string }) {
 
 export default function LogarithmsPage() {
   return (
-    <div className="text-foreground space-y-12 pb-24">
+    <div className="text-foreground space-y-20 pb-24">
       <div className="max-w-3xl">
         <SubTitle>
           Find the exponent, understand why logarithms are useful, and derive
@@ -30,16 +30,18 @@ export default function LogarithmsPage() {
         <SourceCodeLink />
       </div>
 
-      <section
-        aria-labelledby="definition-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        className="max-w-3xl"
+        title="What is a logarithm?"
+        id="definition-heading"
+        description={
+          <>
+            A logarithm answers: to what power must we raise a given base to get
+            this number? Exponentiation starts with a base and an exponent;
+            logarithms recover the exponent from the result.
+          </>
+        }
       >
-        <Section id="definition-heading" name="What is a logarithm?" />
-        <p className="text-muted">
-          A logarithm answers: to what power must we raise a given base to get
-          this number? Exponentiation starts with a base and an exponent;
-          logarithms recover the exponent from the result.
-        </p>
         <Equation
           tex={String.raw`{}^{a}\!\log x=t\quad\Longleftrightarrow\quad a^t=x`}
         />
@@ -70,63 +72,63 @@ export default function LogarithmsPage() {
         <Equation
           tex={String.raw`{}^{2}\!\log 1=0,\qquad {}^{2}\!\log\frac14=-2`}
         />
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="purpose-heading"
-        className="max-w-3xl space-y-5"
+      <Section
+        className="max-w-3xl"
+        title="Why do logarithms exist?"
+        id="purpose-heading"
+        description={
+          <>
+            Logarithms fill the gap when the unknown is an exponent. They also
+            convert multiplication into addition and make quantities spanning
+            many orders of magnitude easier to compare.
+          </>
+        }
+        contentClassName="grid grid-cols-1 gap-4"
       >
-        <Section id="purpose-heading" name="Why do logarithms exist?" />
-        <p className="text-muted leading-8">
-          Logarithms fill the gap when the unknown is an exponent. They also
-          convert multiplication into addition and make quantities spanning many
-          orders of magnitude easier to compare.
-        </p>
-        <div className="grid grid-cols-1 gap-4">
-          <article className="border-border space-y-3 rounded-xl border p-5">
-            <h3 className="font-semibold">Find time in a growth model</h3>
-            <p className="text-muted text-sm leading-6">
-              If a population doubles each period, logarithms tell us how many
-              periods it takes to reach ten times its starting size.
-            </p>
-            <Equation tex={String.raw`2^t=10`} />
-            <Equation tex={String.raw`t={}^{2}\!\log 10\approx3.322`} />
-          </article>
-          <article className="border-border space-y-3 rounded-xl border p-5">
-            <h3 className="font-semibold">Turn products into sums</h3>
-            <p className="text-muted text-sm leading-6">
-              Before electronic calculators, logarithm tables turned long
-              multiplication and division into addition and subtraction.
-              Exponent laws explain why this works.
-            </p>
-            <Equation tex={String.raw`10^2\cdot10^3=10^{2+3}`} />
-          </article>
-          <article className="border-border space-y-3 rounded-xl border p-5">
-            <h3 className="font-semibold">Compare multiplicative changes</h3>
-            <p className="text-muted text-sm leading-6">
-              Equal ratios become equal differences. Sound levels use this idea:
-              multiplying intensity by ten adds ten decibels, relative to a
-              fixed positive reference intensity.
-            </p>
-            <Equation tex={String.raw`L=10\log\frac{I}{I_0}`} />
-          </article>
-        </div>
-      </section>
+        <article className="border-border space-y-3 rounded-xl border p-5">
+          <h3 className="font-semibold">Find time in a growth model</h3>
+          <p className="text-muted text-sm leading-6">
+            If a population doubles each period, logarithms tell us how many
+            periods it takes to reach ten times its starting size.
+          </p>
+          <Equation tex={String.raw`2^t=10`} />
+          <Equation tex={String.raw`t={}^{2}\!\log 10\approx3.322`} />
+        </article>
+        <article className="border-border space-y-3 rounded-xl border p-5">
+          <h3 className="font-semibold">Turn products into sums</h3>
+          <p className="text-muted text-sm leading-6">
+            Before electronic calculators, logarithm tables turned long
+            multiplication and division into addition and subtraction. Exponent
+            laws explain why this works.
+          </p>
+          <Equation tex={String.raw`10^2\cdot10^3=10^{2+3}`} />
+        </article>
+        <article className="border-border space-y-3 rounded-xl border p-5">
+          <h3 className="font-semibold">Compare multiplicative changes</h3>
+          <p className="text-muted text-sm leading-6">
+            Equal ratios become equal differences. Sound levels use this idea:
+            multiplying intensity by ten adds ten decibels, relative to a fixed
+            positive reference intensity.
+          </p>
+          <Equation tex={String.raw`L=10\log\frac{I}{I_0}`} />
+        </article>
+      </Section>
 
-      <section
-        aria-labelledby="bases-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        className="max-w-3xl"
+        title="Common logarithms and natural logarithms"
+        id="bases-heading"
+        description={
+          <>
+            In this lesson, a logarithm without a written base means base ten.
+            The natural logarithm uses Euler’s number as its base and is written
+            with its own symbol. Base two is useful for repeated doubling and
+            binary information.
+          </>
+        }
       >
-        <Section
-          id="bases-heading"
-          name="Common logarithms and natural logarithms"
-        />
-        <p className="text-muted">
-          In this lesson, a logarithm without a written base means base ten. The
-          natural logarithm uses Euler’s number as its base and is written with
-          its own symbol. Base two is useful for repeated doubling and binary
-          information.
-        </p>
         <Equation
           tex={String.raw`\log x={}^{10}\!\log x,\qquad \ln x={}^{e}\!\log x`}
         />
@@ -136,19 +138,23 @@ export default function LogarithmsPage() {
           Changing the base changes the output, but every valid base follows the
           same rules.
         </p>
-      </section>
+      </Section>
 
       <LogarithmLab />
 
-      <section aria-labelledby="properties-heading" className="space-y-5">
-        <Section id="properties-heading" name="Common rules" />
-        <p className="text-muted leading-8">
-          Every rule below comes from the definition and exponent laws. Unless
-          stated otherwise, {katexify(String.raw`a,b>0`, false)} and{" "}
-          {katexify(String.raw`a,b\ne1`, false)} whenever used as bases,
-          arguments {katexify(String.raw`x,y,c>0`, false)}, and powers are real.
-          Open any derivation to follow the steps.
-        </p>
+      <Section
+        title="Common rules"
+        id="properties-heading"
+        description={
+          <>
+            Every rule below comes from the definition and exponent laws. Unless
+            stated otherwise, {katexify(String.raw`a,b>0`, false)} and{" "}
+            {katexify(String.raw`a,b\ne1`, false)} whenever used as bases,
+            arguments {katexify(String.raw`x,y,c>0`, false)}, and powers are
+            real. Open any derivation to follow the steps.
+          </>
+        }
+      >
         <ol className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmRules.map((rule, index) => (
             <li
@@ -185,22 +191,21 @@ export default function LogarithmsPage() {
             </li>
           ))}
         </ol>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="inequalities-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        className="max-w-3xl"
+        title="Order and logarithmic inequalities"
+        id="inequalities-heading"
+        description={
+          <>
+            For a base greater than one, exponential powers grow as the exponent
+            increases. Their logarithmic inverse therefore preserves order. A
+            base between zero and one gives decreasing powers, so its inverse
+            reverses order. Both arguments must be positive.
+          </>
+        }
       >
-        <Section
-          id="inequalities-heading"
-          name="Order and logarithmic inequalities"
-        />
-        <p className="text-muted">
-          For a base greater than one, exponential powers grow as the exponent
-          increases. Their logarithmic inverse therefore preserves order. A base
-          between zero and one gives decreasing powers, so its inverse reverses
-          order. Both arguments must be positive.
-        </p>
         <Equation
           tex={String.raw`a>1:\quad x<y\ \Longleftrightarrow\ {}^{a}\!\log x<{}^{a}\!\log y`}
         />
@@ -214,63 +219,61 @@ export default function LogarithmsPage() {
         <Equation
           tex={String.raw`{}^{1/2}\!\log x>2\quad\Longleftrightarrow\quad 0<x<\frac14`}
         />
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="mistakes-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        className="max-w-3xl"
+        title="Common mistakes"
+        id="mistakes-heading"
+        contentClassName="space-y-8"
       >
-        <Section id="mistakes-heading" name="Common mistakes" />
-        <div className="space-y-8">
-          <div className="min-w-0 space-y-5">
-            <h3 className="text-lg font-semibold">
-              A sum inside a logarithm does not split
-            </h3>
-            <p className="text-muted">
-              The product rule follows from multiplying powers. There is no
-              matching exponent law that turns a sum of arguments into a sum of
-              logarithms. A counterexample is enough to show why that proposed
-              rule fails.
-            </p>
-            <Equation
-              tex={String.raw`{}^{2}\!\log(4+4)=3\ne4={}^{2}\!\log4+{}^{2}\!\log4`}
-            />
-          </div>
-          <div className="min-w-0 space-y-5">
-            <h3 className="text-lg font-semibold">
-              Check the original domain before combining
-            </h3>
-            <p className="text-muted">
-              A positive product does not guarantee that each factor is
-              positive. Keep the separate domain conditions when combining
-              logarithms. Also, the power rule above assumes a positive
-              argument; for a squared nonzero real value the correct expansion
-              uses absolute value.
-            </p>
-            <Equation
-              tex={String.raw`{}^{a}\!\log(x^2)=2\,{}^{a}\!\log|x|,\qquad x\ne0`}
-            />
-          </div>
-          <div className="min-w-0 space-y-5">
-            <h3 className="text-lg font-semibold">
-              A logarithm is not a factor you can cancel
-            </h3>
-            <p className="text-muted">
-              Logarithms are functions. Use change of base for a quotient of
-              logarithms; dividing their arguments gives a different expression.
-            </p>
-            <Equation
-              tex={String.raw`\frac{\log100}{\log10}=2,\qquad \log\frac{100}{10}=1`}
-            />
-          </div>
+        <div className="min-w-0 space-y-5">
+          <h3 className="text-lg font-semibold">
+            A sum inside a logarithm does not split
+          </h3>
+          <p className="text-muted">
+            The product rule follows from multiplying powers. There is no
+            matching exponent law that turns a sum of arguments into a sum of
+            logarithms. A counterexample is enough to show why that proposed
+            rule fails.
+          </p>
+          <Equation
+            tex={String.raw`{}^{2}\!\log(4+4)=3\ne4={}^{2}\!\log4+{}^{2}\!\log4`}
+          />
         </div>
-      </section>
+        <div className="min-w-0 space-y-5">
+          <h3 className="text-lg font-semibold">
+            Check the original domain before combining
+          </h3>
+          <p className="text-muted">
+            A positive product does not guarantee that each factor is positive.
+            Keep the separate domain conditions when combining logarithms. Also,
+            the power rule above assumes a positive argument; for a squared
+            nonzero real value the correct expansion uses absolute value.
+          </p>
+          <Equation
+            tex={String.raw`{}^{a}\!\log(x^2)=2\,{}^{a}\!\log|x|,\qquad x\ne0`}
+          />
+        </div>
+        <div className="min-w-0 space-y-5">
+          <h3 className="text-lg font-semibold">
+            A logarithm is not a factor you can cancel
+          </h3>
+          <p className="text-muted">
+            Logarithms are functions. Use change of base for a quotient of
+            logarithms; dividing their arguments gives a different expression.
+          </p>
+          <Equation
+            tex={String.raw`\frac{\log100}{\log10}=2,\qquad \log\frac{100}{10}=1`}
+          />
+        </div>
+      </Section>
 
-      <section aria-labelledby="practice-heading" className="space-y-5">
-        <Section id="practice-heading" name="Try it yourself" />
-        <p className="text-muted leading-8">
-          Work out each answer, then reveal the solution.
-        </p>
+      <Section
+        title="Try it yourself"
+        id="practice-heading"
+        description={<>Work out each answer, then reveal the solution.</>}
+      >
         <ol className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmExercises.map((exercise, index) => (
             <li
@@ -302,7 +305,7 @@ export default function LogarithmsPage() {
             </li>
           ))}
         </ol>
-      </section>
+      </Section>
     </div>
   );
 }

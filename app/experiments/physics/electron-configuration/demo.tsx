@@ -123,8 +123,7 @@ export default function ElectronConfigurationDemo({
 
   return (
     <div className="space-y-20">
-      <section aria-labelledby="element-selector-title">
-        <Section id="element-selector-title" name="Pick An Element" />
+      <Section title="Pick An Element" id="element-selector-title">
         <p aria-atomic="true" aria-live="polite" className="sr-only">
           {element.name} selected, atomic number {atomicNumber}.
         </p>
@@ -218,15 +217,14 @@ export default function ElectronConfigurationDemo({
             <QuantumNumbersSummary atomicNumber={atomicNumber} />
           </div>
         </div>
-      </section>
+      </Section>
 
       <OrbitalIllustration
         atomicNumber={atomicNumber}
         elementName={element.name}
       />
 
-      <section aria-labelledby="aufbau-diagram-title">
-        <Section id="aufbau-diagram-title" name="Aufbau Diagram" />
+      <Section title="Aufbau Diagram" id="aufbau-diagram-title">
         <div className="border-border rounded-xl border">
           <div className="border-border flex items-center gap-3 border-b p-4">
             <div className="scrollbar-subtle min-w-0 overflow-x-auto">
@@ -343,7 +341,7 @@ export default function ElectronConfigurationDemo({
             theoretical predictions rather than directly measured ground states.
           </p>
         ) : null}
-      </section>
+      </Section>
       {vocabulary}
     </div>
   );

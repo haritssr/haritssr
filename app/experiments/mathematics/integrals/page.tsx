@@ -52,7 +52,7 @@ const questions: readonly PracticeQuestion[] = [
 
 export default function IntegralsPage() {
   return (
-    <div className="pb-24">
+    <div className="space-y-20 pb-24">
       <div className="max-w-3xl">
         <SubTitle>
           An integral adds up many small contributions. On a graph, a definite
@@ -61,13 +61,17 @@ export default function IntegralsPage() {
         <SourceCodeLink />
       </div>
 
-      <section className="text-muted mb-10 max-w-3xl space-y-5 text-base leading-8">
-        <Section name="From rectangles to accumulation" />
-        <p>
-          Split an interval into thin slices. For each slice, multiply its width
-          by the function’s height at the midpoint. Add the rectangles, then
-          make them thinner. Their sum approaches the definite integral.
-        </p>
+      <Section
+        className="text-muted max-w-3xl text-base"
+        title="From rectangles to accumulation"
+        description={
+          <>
+            Split an interval into thin slices. For each slice, multiply its
+            width by the function’s height at the midpoint. Add the rectangles,
+            then make them thinner. Their sum approaches the definite integral.
+          </>
+        }
+      >
         <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\int_a^b f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^{n} f(x_i^*)\,\Delta x,\qquad\Delta x=\frac{b-a}{n}`,
@@ -79,18 +83,22 @@ export default function IntegralsPage() {
           definite integral can be zero even when the curve encloses visible
           regions.
         </p>
-      </section>
+      </Section>
 
       <IntegralsLab />
 
-      <section className="text-muted mt-12 max-w-3xl space-y-5 text-base leading-8">
-        <Section name="A faster exact method" />
-        <p>
-          An antiderivative reverses differentiation. If differentiating a
-          function gives the curve you are integrating, evaluate that function
-          at the bounds and subtract. This is the Fundamental Theorem of
-          Calculus.
-        </p>
+      <Section
+        className="text-muted max-w-3xl text-base"
+        title="A faster exact method"
+        description={
+          <>
+            An antiderivative reverses differentiation. If differentiating a
+            function gives the curve you are integrating, evaluate that function
+            at the bounds and subtract. This is the Fundamental Theorem of
+            Calculus.
+          </>
+        }
+      >
         <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`F'(x)=f(x)\quad\Longrightarrow\quad\int_a^b f(x)\,dx=F(b)-F(a)`,
@@ -107,7 +115,7 @@ export default function IntegralsPage() {
             true
           )}
         </div>
-      </section>
+      </Section>
 
       <IntegralRules />
 

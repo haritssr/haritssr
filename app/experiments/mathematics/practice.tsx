@@ -77,7 +77,7 @@ export default function Practice({
   questions: readonly PracticeQuestion[];
 }) {
   return (
-    <section aria-labelledby="practice-heading" className="mt-14">
+    <section aria-labelledby="practice-heading">
       <h2
         className="text-foreground text-2xl font-semibold"
         id="practice-heading"

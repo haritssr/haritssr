@@ -7,6 +7,7 @@ import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -52,8 +53,7 @@ export default function DesignSystem() {
         <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
       </TopLevelSectionPageDescription>
       <div className="space-y-20">
-        <section>
-          <Section name="Design Principles" />
+        <Section title="Design Principles">
           <ExplanationList>
             <li>
               A design system is a set of rules and opinions that shape the user
@@ -141,7 +141,7 @@ export default function DesignSystem() {
             </li>
             <li>
               Browse the{" "}
-              <InternalLink href="/experiments">
+              <InternalLink href="/experiments" variant="inline">
                 experiment collection and discontinued history
               </InternalLink>
             </li>
@@ -150,200 +150,263 @@ export default function DesignSystem() {
               and component-specific guidance are next.
             </li>
           </ExplanationList>
-        </section>
-        <section>
-          <Section name="UI Components" />
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
-            <Box name="Switch" title="Switch">
-              <SwitchDemo />
-            </Box>
+        </Section>
+        <Section
+          id="design-sections"
+          title="Sections and headings"
+          description={
+            <>
+              Section groups content under an accessible heading with shared
+              spacing and line height. Its description has a readable width,
+              while the section and its body can use the available width. Use
+              SectionHeading when a layout only needs a heading.
+            </>
+          }
+          contentClassName={
+            // This demonstrates grid spacing on Section's body wrapper.
+            // oxlint-disable-next-line shadcn/no-restyle -- The demo exercises the contentClassName API.
+            "grid gap-5 sm:grid-cols-2"
+          }
+        >
+          <Box name="Section" title="Section with content">
+            <Section
+              headingAs="h3"
+              id="design-section-example"
+              title="Example section"
+              description={
+                <>
+                  Section descriptions use shared styling. Container attributes
+                  such as <code>id</code>, <code>className</code>, and{" "}
+                  <code>style</code> apply to the outer section.
+                </>
+              }
+              contentClassName="max-w-3xl"
+            >
+              <p className="text-muted text-sm leading-7">
+                Use <code>contentClassName</code> to style the body wrapper. Set
+                responsive grid classes there when the body contains cards.
+              </p>
+            </Section>
+          </Box>
+          <Box name="SectionHeading" title="Heading without a container">
+            <SectionHeading as="h3" id="design-heading-example">
+              Example heading
+            </SectionHeading>
+            <p className="text-muted text-sm leading-7">
+              Native attributes apply directly to the heading. Choose its level
+              with <code>as</code>; both components share the same default and
+              compact typography.
+            </p>
+            <SectionHeading as="h3" variant="compact">
+              Compact heading
+            </SectionHeading>
+          </Box>
+        </Section>
+        <Section
+          title="UI Components"
+          contentClassName={
+            // This demonstrates grid spacing on Section's body wrapper.
+            // oxlint-disable-next-line shadcn/no-restyle -- The demo exercises the contentClassName API.
+            "grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5"
+          }
+        >
+          <Box name="Switch" title="Switch">
+            <SwitchDemo />
+          </Box>
 
-            <Box name="Accordion" title="Accordion">
-              <AccordionDemo />
-            </Box>
+          <Box name="Accordion" title="Accordion">
+            <AccordionDemo />
+          </Box>
 
-            <Box name="Checkbox" title="Checkbox">
-              <CheckboxDemo />
-            </Box>
+          <Box name="Checkbox" title="Checkbox">
+            <CheckboxDemo />
+          </Box>
 
-            <Box name="Popover" title="Popover">
-              <PopoverDemo />
-            </Box>
+          <Box name="Popover" title="Popover">
+            <PopoverDemo />
+          </Box>
 
-            <Box title="Number input">
-              <NumberInputDemo />
-            </Box>
-            <Box title="Table">
-              <TableDemo />
-            </Box>
+          <Box title="Number input">
+            <NumberInputDemo />
+          </Box>
+          <Box title="Table">
+            <TableDemo />
+          </Box>
 
-            <Box name="Tabs" title="Tabs">
-              <TabsDemo />
-            </Box>
+          <Box name="Tabs" title="Tabs">
+            <TabsDemo />
+          </Box>
 
-            <ToastDemo />
+          <ToastDemo />
 
-            <Box name="Button" title="Button: Primary">
-              <Button variant="primary">Button</Button>
-            </Box>
+          <Box name="Button" title="Button: Primary">
+            <Button variant="primary">Button</Button>
+          </Box>
 
-            <Box name="Button" title="Button: Loading">
-              <LoadingButtonDemo />
-            </Box>
+          <Box name="Button" title="Button: Loading">
+            <LoadingButtonDemo />
+          </Box>
 
-            <Box name="Button" title="Button: Secondary">
-              <Button variant="secondary">Button</Button>
-            </Box>
+          <Box name="Button" title="Button: Secondary">
+            <Button variant="secondary">Button</Button>
+          </Box>
 
-            <Box name="Button" title="Button: With Icon">
-              <ButtonWithIconDemo />
-            </Box>
+          <Box name="Button" title="Button: With Icon">
+            <ButtonWithIconDemo />
+          </Box>
 
-            <Box name="Button" title="Button: Only Icon">
-              <ButtonIconOnlyDemo />
-            </Box>
+          <Box name="Button" title="Button: Only Icon">
+            <ButtonIconOnlyDemo />
+          </Box>
 
-            <Box name="Button" title="Button: Danger">
-              <Button variant="danger">Delete</Button>
-            </Box>
+          <Box name="Button" title="Button: Danger">
+            <Button variant="danger">Delete</Button>
+          </Box>
 
-            <Box name="Button" title="Button: Disabled">
-              <Button disabled variant="secondary">
-                Button
-              </Button>
-            </Box>
+          <Box name="Button" title="Button: Disabled">
+            <Button disabled variant="secondary">
+              Button
+            </Button>
+          </Box>
 
-            <Box name="InternalLink" title="Internal Link">
-              <InternalLink href="/">Internal Link</InternalLink>
-            </Box>
+          <Box name="InternalLink" title="Internal Link">
+            <InternalLink href="/">Internal Link</InternalLink>
+            <p className="text-muted text-sm leading-7">
+              Use <code>variant=&quot;inline&quot;</code> for links within
+              sentences, descriptions, and explanatory list items. For example,
+              visit the{" "}
+              <InternalLink href="/" variant="inline">
+                home page
+              </InternalLink>
+              . The default variant is for standalone navigation.
+            </p>
+          </Box>
 
-            <Box name="ExternalLink" title="External Link">
-              <ExternalLink
-                href="https://www.harislab.com"
-                name="External Link"
-              />
-            </Box>
+          <Box name="ExternalLink" title="External Link">
+            <ExternalLink
+              href="https://www.harislab.com"
+              name="External Link"
+            />
+          </Box>
 
-            <Box title="Input: Text">
-              <label className="block w-full sm:max-w-xs">
-                <span className="sr-only">Text input</span>
-                <input
-                  className={FORM_CONTROL_CLASS_NAME}
-                  placeholder="Type something..."
-                  type="text"
-                />
-              </label>
-            </Box>
-
-            <Box title="Input: Search">
-              <label className="block w-full sm:max-w-xs">
-                <span className="sr-only">Search input</span>
-                <input
-                  className={FORM_CONTROL_CLASS_NAME}
-                  placeholder="Search"
-                  type="search"
-                />
-              </label>
-            </Box>
-
-            <Box title="Input: Number">
-              <label className="block w-full sm:max-w-xs">
-                <span className="sr-only">Number input</span>
-                <input
-                  className={FORM_CONTROL_CLASS_NAME}
-                  min="0"
-                  placeholder="0"
-                  type="number"
-                />
-              </label>
-            </Box>
-
-            <Box name="Box" title="Box">
-              <div className="border-foreground/20 w-50 overflow-hidden rounded-md border sm:w-75">
-                <div className="border-foreground/20 bg-background text-foreground/90 border-b px-3 py-2 font-medium select-none">
-                  Title
-                </div>
-                <div className="flex h-32 items-center justify-center p-5">
-                  Content
-                </div>
-              </div>
-            </Box>
-
-            <Box title="Text Area">
-              <textarea
+          <Box title="Input: Text">
+            <label className="block w-full sm:max-w-xs">
+              <span className="sr-only">Text input</span>
+              <input
                 className={FORM_CONTROL_CLASS_NAME}
-                placeholder="Write something here..."
-                rows={3}
+                placeholder="Type something..."
+                type="text"
               />
-            </Box>
+            </label>
+          </Box>
 
-            <Box name="Toggle" title="Toggle">
-              <ToggleDemo />
-            </Box>
+          <Box title="Input: Search">
+            <label className="block w-full sm:max-w-xs">
+              <span className="sr-only">Search input</span>
+              <input
+                className={FORM_CONTROL_CLASS_NAME}
+                placeholder="Search"
+                type="search"
+              />
+            </label>
+          </Box>
 
-            <Box title="Breadcrumbs">
-              <BreadcrumbsDemo />
-            </Box>
+          <Box title="Input: Number">
+            <label className="block w-full sm:max-w-xs">
+              <span className="sr-only">Number input</span>
+              <input
+                className={FORM_CONTROL_CLASS_NAME}
+                min="0"
+                placeholder="0"
+                type="number"
+              />
+            </label>
+          </Box>
 
-            <Box name="Badge" title="Badges">
-              <BadgesDemo />
-            </Box>
-
-            <Box name="BackButton" title="Back Button">
-              <div className="-mt-10 mb-5">
-                <BackButton href="/" name="Previous Page" />
+          <Box name="Box" title="Box">
+            <div className="border-foreground/20 w-50 overflow-hidden rounded-md border sm:w-75">
+              <div className="border-foreground/20 bg-background text-foreground/90 border-b px-3 py-2 font-medium select-none">
+                Title
               </div>
-            </Box>
+              <div className="flex h-32 items-center justify-center p-5">
+                Content
+              </div>
+            </div>
+          </Box>
 
-            <Box name="Tooltip" title="Tooltip">
-              <TooltipDemo />
-            </Box>
+          <Box title="Text Area">
+            <textarea
+              className={FORM_CONTROL_CLASS_NAME}
+              placeholder="Write something here..."
+              rows={3}
+            />
+          </Box>
 
-            <Box title="Logo">
-              <LogoDemo />
-            </Box>
+          <Box name="Toggle" title="Toggle">
+            <ToggleDemo />
+          </Box>
 
-            <Box name="Dialog" title="Modal">
-              <ModalDemo />
-            </Box>
+          <Box title="Breadcrumbs">
+            <BreadcrumbsDemo />
+          </Box>
 
-            <Box name="Select" title="Select">
-              <SelectDemo />
-            </Box>
+          <Box name="Badge" title="Badges">
+            <BadgesDemo />
+          </Box>
 
-            <Box name="BottomBar" title="Bottom Navigation Mobile">
-              <BottomBar preview />
-            </Box>
+          <Box name="BackButton" title="Back Button">
+            <div className="-mt-10 mb-5">
+              <BackButton href="/" name="Previous Page" />
+            </div>
+          </Box>
 
-            <Box name="Slider" title="Slider">
-              <SliderDemo />
-            </Box>
+          <Box name="Tooltip" title="Tooltip">
+            <TooltipDemo />
+          </Box>
 
-            <Box name="ContextMenu" title="Context Menus">
-              <ContextMenuDemo />
-            </Box>
+          <Box title="Logo">
+            <LogoDemo />
+          </Box>
 
-            <Box title="Date Picker">
-              <label className="block w-full sm:max-w-xs">
-                <span className="text-foreground/80 mb-1 block text-sm font-medium">
-                  Choose a date
-                </span>
-                <input className={FORM_CONTROL_CLASS_NAME} type="date" />
-              </label>
-            </Box>
+          <Box name="Dialog" title="Modal">
+            <ModalDemo />
+          </Box>
 
-            <Box title="Main Colors">
-              <MainColorsDemo />
-            </Box>
+          <Box name="Select" title="Select">
+            <SelectDemo />
+          </Box>
 
-            <Box title="Hierarchical Colors">
-              <HierarchicalColorsDemo />
-            </Box>
-          </div>
-        </section>
+          <Box name="BottomBar" title="Bottom Navigation Mobile">
+            <BottomBar preview />
+          </Box>
 
-        <section>
-          <Section name="Figma Design" />
+          <Box name="Slider" title="Slider">
+            <SliderDemo />
+          </Box>
+
+          <Box name="ContextMenu" title="Context Menus">
+            <ContextMenuDemo />
+          </Box>
+
+          <Box title="Date Picker">
+            <label className="block w-full sm:max-w-xs">
+              <span className="text-foreground/80 mb-1 block text-sm font-medium">
+                Choose a date
+              </span>
+              <input className={FORM_CONTROL_CLASS_NAME} type="date" />
+            </label>
+          </Box>
+
+          <Box title="Main Colors">
+            <MainColorsDemo />
+          </Box>
+
+          <Box title="Hierarchical Colors">
+            <HierarchicalColorsDemo />
+          </Box>
+        </Section>
+
+        <Section title="Figma Design">
           <div>
             <iframe
               allowFullScreen
@@ -356,7 +419,7 @@ export default function DesignSystem() {
               width="800"
             />
           </div>
-        </section>
+        </Section>
       </div>
     </>
   );

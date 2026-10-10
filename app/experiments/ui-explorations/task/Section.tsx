@@ -27,7 +27,7 @@ export default function Section({
   if (accordion !== undefined) {
     return (
       <details
-        className="group corner-squircle mt-5 mb-1 overflow-hidden rounded-2xl border border-zinc-300"
+        className="group corner-squircle overflow-hidden rounded-2xl border border-zinc-300"
         open={accordion.defaultOpen}
       >
         <summary
@@ -61,7 +61,7 @@ export default function Section({
   }
 
   return (
-    <div className="corner-squircle mt-5 mb-1 overflow-hidden rounded-2xl border border-zinc-300">
+    <div className="corner-squircle overflow-hidden rounded-2xl border border-zinc-300">
       <div className="border-b border-zinc-300 bg-zinc-100/70 px-2.5 py-1.5 select-none">
         {header}
       </div>

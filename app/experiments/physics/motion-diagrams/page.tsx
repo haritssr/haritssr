@@ -2,7 +2,7 @@ import "katex/dist/katex.min.css";
 import SubTitle from "components/SubTitle";
 import type { Metadata } from "next";
 
-import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
@@ -98,10 +98,9 @@ export default function MotionDiagramsPage() {
           >
             <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="max-w-2xl">
-                <Section
+                <SectionHeading
                   id={`${motion.id}-title`}
-                  name={`${motion.abbreviation} · ${motion.name}`}
-                />
+                >{`${motion.abbreviation} · ${motion.name}`}</SectionHeading>
                 <p className="mt-3 text-sm leading-7 text-zinc-600">
                   {motion.description}
                 </p>

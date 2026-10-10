@@ -3,7 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 
-import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -83,7 +83,7 @@ const Wrapper = ({
   children: React.ReactNode;
 }) => (
   <div>
-    <Section name={name} />
+    <SectionHeading>{name}</SectionHeading>
     {children}
   </div>
 );

@@ -349,190 +349,197 @@ export default function TaskArchitecturePage() {
       <SubTitle>How the task app works under the hood.</SubTitle>
 
       {/* Overview */}
-      <div className="mb-8 rounded-xl border border-zinc-200 p-4">
-        <h2 className="mb-2 font-semibold text-zinc-800">Overview</h2>
-        <p className="text-sm text-zinc-600">
-          A React-based task manager with SQLite persistence. The UI enforces a
-          single active Now task by sanitizing task lists, hydrates from
-          <code className="px-1">GET /api/task</code>, and saves via a mixed
-          strategy: debounced <code className="px-1">PUT /api/task</code> for
-          regular updates plus immediate{" "}
-          <code className="px-1">sendBeacon POST /api/task</code> for critical
-          and lifecycle saves. Each save includes the loaded day&apos;s
-          revision, a page identifier, and an increasing sequence. SQLite checks
-          these inside the replacement transaction to reject older saves and
-          stale tabs. Writes require JSON and reject foreign origins; conflicts
-          return HTTP 409 and ask the user to reload.
-        </p>
-      </div>
+      <div className="space-y-20">
+        <div className="rounded-xl border border-zinc-200 p-4">
+          <h2 className="mb-2 font-semibold text-zinc-800">Overview</h2>
+          <p className="text-sm text-zinc-600">
+            A React-based task manager with SQLite persistence. The UI enforces
+            a single active Now task by sanitizing task lists, hydrates from
+            <code className="px-1">GET /api/task</code>, and saves via a mixed
+            strategy: debounced <code className="px-1">PUT /api/task</code> for
+            regular updates plus immediate{" "}
+            <code className="px-1">sendBeacon POST /api/task</code> for critical
+            and lifecycle saves. Each save includes the loaded day&apos;s
+            revision, a page identifier, and an increasing sequence. SQLite
+            checks these inside the replacement transaction to reject older
+            saves and stale tabs. Writes require JSON and reject foreign
+            origins; conflicts return HTTP 409 and ask the user to reload.
+          </p>
+        </div>
 
-      {/* Task Logic */}
-      <div className="mb-8 rounded-xl border border-zinc-200 p-4">
-        <h2 className="mb-2 font-semibold text-zinc-800">Task Logic</h2>
-        <div className="space-y-4 text-sm text-zinc-600">
-          <div>
-            <div className="font-medium text-zinc-700">Now</div>
-            <ul className="list-disc pl-5">
-              <li>Shows tasks with type Now.</li>
-              <li>Only one Now task is allowed at a time.</li>
-            </ul>
+        {/* Task Logic */}
+        <div className="rounded-xl border border-zinc-200 p-4">
+          <h2 className="mb-2 font-semibold text-zinc-800">Task Logic</h2>
+          <div className="space-y-4 text-sm text-zinc-600">
+            <div>
+              <div className="font-medium text-zinc-700">Now</div>
+              <ul className="list-disc pl-5">
+                <li>Shows tasks with type Now.</li>
+                <li>Only one Now task is allowed at a time.</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-medium text-zinc-700">Other</div>
+              <ul className="list-disc pl-5">
+                <li>Shows tasks with type Other.</li>
+                <li>Sorted by highest progress first.</li>
+                <li>
+                  Do Now moves Other to Now and demotes any existing Now to
+                  Other.
+                </li>
+                <li>Resume appears when progress is greater than 0.</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-medium text-zinc-700">Done</div>
+              <ul className="list-disc pl-5">
+                <li>Shows tasks with type Done.</li>
+                <li>
+                  Tasks become Done when progress reaches 100 or when manually
+                  marked done.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-medium text-zinc-700">Task Schema</div>
+              <ul className="list-disc pl-5">
+                <li>title is a string.</li>
+                <li>duration is a finite number.</li>
+                <li>progress is a finite number.</li>
+                <li>type is Now, Other, or Done.</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <div className="font-medium text-zinc-700">Other</div>
-            <ul className="list-disc pl-5">
-              <li>Shows tasks with type Other.</li>
-              <li>Sorted by highest progress first.</li>
-              <li>
-                Do Now moves Other to Now and demotes any existing Now to Other.
-              </li>
-              <li>Resume appears when progress is greater than 0.</li>
-            </ul>
+        </div>
+
+        {/* Production Readiness Notes */}
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <h2 className="mb-2 font-semibold text-amber-900">
+            Production Readiness Notes
+          </h2>
+          <p className="text-sm text-zinc-700">
+            This local implementation is intentionally unavailable in production
+            until these areas are hardened:
+          </p>
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-700">
+            <li>
+              No authentication or access control on{" "}
+              <code className="px-1">/api/task</code>.
+            </li>
+            <li>
+              SQLite DB lives in <code className="px-1">.data-haritssr/</code>{" "}
+              (or <code className="px-1">TASK_DB_DIR</code>) and is not
+              committed; production needs managed storage + backups.
+            </li>
+            <li>
+              One legacy migration exists, but there is no general schema
+              migration/versioning system.
+            </li>
+            <li>
+              Validation has unit coverage, but the API and browser flows still
+              need integration tests.
+            </li>
+            <li>No rate limiting or CSRF protection for write endpoints.</li>
+            <li>Minimal error handling and observability (logging/metrics).</li>
+          </ul>
+        </div>
+
+        {/* Mermaid Diagrams */}
+        <div className="space-y-20">
+          {charts.map((chart) => (
+            <div key={chart.id}>
+              <h2 className="mb-3 font-semibold text-zinc-800">
+                {chart.title}
+              </h2>
+              <MermaidDiagram definition={chart.definition} id={chart.id} />
+            </div>
+          ))}
+        </div>
+
+        {/* Source State Reference */}
+        <div>
+          <h2 className="mb-3 font-semibold text-zinc-800">State Reference</h2>
+
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div className="rounded border border-blue-200 bg-blue-50 p-3">
+              <code className="font-mono text-sm font-semibold text-blue-800">
+                tasks: Task[]
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Main source of truth. Updated by hydration, add, move, mark
+                done, and progress updates.
+              </p>
+            </div>
+
+            <div className="rounded border border-amber-200 bg-amber-50 p-3">
+              <code className="font-mono text-sm font-semibold text-amber-800">
+                isHydratedFromDb
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Save gate. Debounced and emergency saves are enabled only after
+                initial hydration completes.
+              </p>
+            </div>
+
+            <div className="rounded border border-emerald-200 bg-emerald-50 p-3">
+              <code className="font-mono text-sm font-semibold text-emerald-800">
+                droppedNowCount
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Hydration feedback count when multiple Now tasks are sanitized
+                and extras are demoted to Other.
+              </p>
+            </div>
+
+            <div className="rounded border border-cyan-200 bg-cyan-50 p-3">
+              <code className="font-mono text-sm font-semibold text-cyan-800">
+                autoStartTitle
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Coordinates Resume action from Other to Now so the promoted task
+                timer starts automatically.
+              </p>
+            </div>
+
+            <div className="rounded border border-violet-200 bg-violet-50 p-3">
+              <code className="font-mono text-sm font-semibold text-violet-800">
+                newOtherTaskTitle
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Controlled input value for new Other task title.
+              </p>
+            </div>
+
+            <div className="rounded border border-orange-200 bg-orange-50 p-3">
+              <code className="font-mono text-sm font-semibold text-orange-800">
+                newOtherTaskDuration
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Controlled input value for new task duration used with presets
+                and number field.
+              </p>
+            </div>
+
+            <div className="rounded border border-slate-200 bg-slate-50 p-3">
+              <code className="font-mono text-sm font-semibold text-slate-800">
+                saveTimeoutRef
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Tracks the pending debounce timer so critical and unload flows
+                can cancel and flush safely.
+              </p>
+            </div>
+
+            <div className="rounded border border-rose-200 bg-rose-50 p-3">
+              <code className="font-mono text-sm font-semibold text-rose-800">
+                isRunning
+              </code>
+              <p className="mt-1 text-xs text-zinc-600">
+                Local state inside TaskItem. Controls per-task interval ticks
+                and start/stop behavior for Now tasks.
+              </p>
+            </div>
           </div>
-          <div>
-            <div className="font-medium text-zinc-700">Done</div>
-            <ul className="list-disc pl-5">
-              <li>Shows tasks with type Done.</li>
-              <li>
-                Tasks become Done when progress reaches 100 or when manually
-                marked done.
-              </li>
-            </ul>
-          </div>
-          <div>
-            <div className="font-medium text-zinc-700">Task Schema</div>
-            <ul className="list-disc pl-5">
-              <li>title is a string.</li>
-              <li>duration is a finite number.</li>
-              <li>progress is a finite number.</li>
-              <li>type is Now, Other, or Done.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Production Readiness Notes */}
-      <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
-        <h2 className="mb-2 font-semibold text-amber-900">
-          Production Readiness Notes
-        </h2>
-        <p className="text-sm text-zinc-700">
-          This local implementation is intentionally unavailable in production
-          until these areas are hardened:
-        </p>
-        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-700">
-          <li>
-            No authentication or access control on{" "}
-            <code className="px-1">/api/task</code>.
-          </li>
-          <li>
-            SQLite DB lives in <code className="px-1">.data-haritssr/</code> (or{" "}
-            <code className="px-1">TASK_DB_DIR</code>) and is not committed;
-            production needs managed storage + backups.
-          </li>
-          <li>
-            One legacy migration exists, but there is no general schema
-            migration/versioning system.
-          </li>
-          <li>
-            Validation has unit coverage, but the API and browser flows still
-            need integration tests.
-          </li>
-          <li>No rate limiting or CSRF protection for write endpoints.</li>
-          <li>Minimal error handling and observability (logging/metrics).</li>
-        </ul>
-      </div>
-
-      {/* Mermaid Diagrams */}
-      <div className="space-y-8">
-        {charts.map((chart) => (
-          <div key={chart.id}>
-            <h2 className="mb-3 font-semibold text-zinc-800">{chart.title}</h2>
-            <MermaidDiagram definition={chart.definition} id={chart.id} />
-          </div>
-        ))}
-      </div>
-
-      {/* Source State Reference */}
-      <h2 className="mt-8 mb-3 font-semibold text-zinc-800">State Reference</h2>
-
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-        <div className="rounded border border-blue-200 bg-blue-50 p-3">
-          <code className="font-mono text-sm font-semibold text-blue-800">
-            tasks: Task[]
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Main source of truth. Updated by hydration, add, move, mark done,
-            and progress updates.
-          </p>
-        </div>
-
-        <div className="rounded border border-amber-200 bg-amber-50 p-3">
-          <code className="font-mono text-sm font-semibold text-amber-800">
-            isHydratedFromDb
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Save gate. Debounced and emergency saves are enabled only after
-            initial hydration completes.
-          </p>
-        </div>
-
-        <div className="rounded border border-emerald-200 bg-emerald-50 p-3">
-          <code className="font-mono text-sm font-semibold text-emerald-800">
-            droppedNowCount
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Hydration feedback count when multiple Now tasks are sanitized and
-            extras are demoted to Other.
-          </p>
-        </div>
-
-        <div className="rounded border border-cyan-200 bg-cyan-50 p-3">
-          <code className="font-mono text-sm font-semibold text-cyan-800">
-            autoStartTitle
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Coordinates Resume action from Other to Now so the promoted task
-            timer starts automatically.
-          </p>
-        </div>
-
-        <div className="rounded border border-violet-200 bg-violet-50 p-3">
-          <code className="font-mono text-sm font-semibold text-violet-800">
-            newOtherTaskTitle
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Controlled input value for new Other task title.
-          </p>
-        </div>
-
-        <div className="rounded border border-orange-200 bg-orange-50 p-3">
-          <code className="font-mono text-sm font-semibold text-orange-800">
-            newOtherTaskDuration
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Controlled input value for new task duration used with presets and
-            number field.
-          </p>
-        </div>
-
-        <div className="rounded border border-slate-200 bg-slate-50 p-3">
-          <code className="font-mono text-sm font-semibold text-slate-800">
-            saveTimeoutRef
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Tracks the pending debounce timer so critical and unload flows can
-            cancel and flush safely.
-          </p>
-        </div>
-
-        <div className="rounded border border-rose-200 bg-rose-50 p-3">
-          <code className="font-mono text-sm font-semibold text-rose-800">
-            isRunning
-          </code>
-          <p className="mt-1 text-xs text-zinc-600">
-            Local state inside TaskItem. Controls per-task interval ticks and
-            start/stop behavior for Now tasks.
-          </p>
         </div>
       </div>
     </div>

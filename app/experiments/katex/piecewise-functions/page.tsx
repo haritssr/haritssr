@@ -27,29 +27,28 @@ export default function PiecewiseFunctionsPage() {
         </p>
         <SourceCodeLink />
       </div>
-      <section aria-labelledby="piecewise-heading">
-        <Section id="piecewise-heading" name="Explore the branches" />
+      <Section title="Explore the branches" id="piecewise-heading">
         <Demo />
-      </section>
-      <section aria-labelledby="piecewise-notes-heading">
-        <Section
-          id="piecewise-notes-heading"
-          name="Typeset conditions with cases"
-        />
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
-          The cases environment pairs each expression with its condition under
-          one opening brace. Include equality in the appropriate condition so
-          the definition covers its boundary. Choose from 13 examples, including
-          pulses, step functions, and loss functions. JavaScript evaluates them;
-          KaTeX renders the definition and result. See{" "}
-          <ExternalLink
-            href="https://katex.org/docs/supported.html#environments"
-            name="cases notation"
-            size="inherit"
-          />{" "}
-          for the underlying TeX syntax.
-        </p>
-      </section>
+      </Section>
+      <Section
+        title="Typeset conditions with cases"
+        id="piecewise-notes-heading"
+        description={
+          <>
+            The cases environment pairs each expression with its condition under
+            one opening brace. Include equality in the appropriate condition so
+            the definition covers its boundary. Choose from 13 examples,
+            including pulses, step functions, and loss functions. JavaScript
+            evaluates them; KaTeX renders the definition and result. See{" "}
+            <ExternalLink
+              href="https://katex.org/docs/supported.html#environments"
+              name="cases notation"
+              size="inherit"
+            />{" "}
+            for the underlying TeX syntax.
+          </>
+        }
+      />
     </div>
   );
 }

@@ -17,30 +17,30 @@ export default function TailwindVsAppleColorDemo() {
       </SubTitle>
       <SourceCodeLink />
       <div className="space-y-20">
-        <section>
-          <Section name="Apple" />
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
-            {appleColorData.map(({ name, color }) => (
-              <Box color={color} key={name} name={name} />
-            ))}
-          </div>
-        </section>
+        <Section
+          title="Apple"
+          contentClassName="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10"
+        >
+          {appleColorData.map(({ name, color }) => (
+            <Box color={color} key={name} name={name} />
+          ))}
+        </Section>
 
-        <section>
-          <Section name="zinc" />
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10">
-            <Box color="#18181b" name="900" />
-            <Box color="#27272a" name="800" />
-            <Box color="#3f3f46" name="700" />
-            <Box color="#52525b" name="600" />
-            <Box color="#71717a" name="500" />
-            <Box color="#a1a1aa" name="400" />
-            <Box color="#d4d4d8" name="300" />
-            <Box color="#e4e4e7" name="200" />
-            <Box color="#f4f4f5" name="100" />
-            <Box color="#fafafa" name="50" />
-          </div>
-        </section>
+        <Section
+          title="zinc"
+          contentClassName="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10"
+        >
+          <Box color="#18181b" name="900" />
+          <Box color="#27272a" name="800" />
+          <Box color="#3f3f46" name="700" />
+          <Box color="#52525b" name="600" />
+          <Box color="#71717a" name="500" />
+          <Box color="#a1a1aa" name="400" />
+          <Box color="#d4d4d8" name="300" />
+          <Box color="#e4e4e7" name="200" />
+          <Box color="#f4f4f5" name="100" />
+          <Box color="#fafafa" name="50" />
+        </Section>
       </div>
     </>
   );

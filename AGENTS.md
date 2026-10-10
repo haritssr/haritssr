@@ -26,6 +26,52 @@ When mistakes recur, strengthen reusable checks and guardrails.
 - Create a new component or design only when no suitable existing component or
   pattern is available. Follow the established design tokens and conventions.
 
+## Internal Links
+
+- Use `InternalLink` with `variant="inline"` for links within sentences,
+  section descriptions, and explanatory list items. Inline links omit the
+  chevron and inherit the surrounding text size and line height.
+- Use the default navigation variant for standalone links and navigation
+  lists. It retains the chevron and supports `lg` sizing. The inline variant
+  inherits its size even when `lg` is supplied.
+- Select the variant explicitly at the call site; do not infer it from DOM
+  ancestry. See `/design` for examples of both variants.
+
+## Sections and Headings
+
+- In experiment pages, use `space-y-20` on the parent that stacks page sections,
+  including sections rendered by demo or lab components. Let that parent own
+  the spacing; omit individual top and bottom margins on its section children.
+  Keep introductory text and its source link grouped together. Internal content
+  spacing and responsive grids keep their own layout rules.
+- Use the shared `Section` for a semantic section with a title and content:
+  `<Section title="Title">...</Section>`. It renders the section and its heading
+  and manages `aria-labelledby`. Each section uses the shared `space-y-5`
+  spacing and `leading-8` line height; `className` adds layout classes to the
+  outer section.
+- Use the optional `description` for an introductory paragraph. It accepts
+  React content such as links and inline KaTeX, and `Section` gives it the
+  shared muted color and readable maximum width. The section itself and its
+  body can still use the available width.
+- Use `contentClassName` to style an internal wrapper around section body
+  content, for example to lay cards out in a responsive grid. The wrapper is
+  omitted when the prop is absent or the section has no body. A section may
+  contain a description without additional body children; use `SectionHeading`
+  when only a heading is needed.
+- Native `Section` attributes (`id`, `className`, `style`, `data-*`, etc.) apply
+  to the container. Use `id` for section fragment targets; `Section` generates
+  the heading ID used by `aria-labelledby`. Configure its heading with
+  `headingAs`, `headingClassName`, and `headingVariant`. Heading IDs default to
+  `${id}-heading` when the container has an ID, otherwise a stable generated ID.
+- Use `SectionHeading` for heading-only layouts, including navigation and
+  custom headers. Its children supply the title; native attributes apply to the
+  heading, `as` selects `h2` or `h3`, and `variant` selects default or compact
+  typography. Both components use the same heading design; an explicit heading
+  class replaces the default classes.
+- Preserve existing heading anchors by moving their fragment ID to the Section
+  container. Leave specialized local section components intact unless their
+  behavior is explicitly being refactored.
+
 # Mathematical Notation
 
 - Always render mathematical notation in page content and UI with the project

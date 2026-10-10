@@ -133,8 +133,8 @@ function Equation({ tex }: { tex: string }) {
 
 export default function LinearEquationsThreeVariablesPage() {
   return (
-    <div className="text-foreground pb-24">
-      <div className="mb-10">
+    <div className="text-foreground space-y-20 pb-24">
+      <div>
         <SubTitle>
           Find a triple that satisfies three equations at once. Learn
           elimination, interpret the geometry, and explore what changes when
@@ -143,19 +143,18 @@ export default function LinearEquationsThreeVariablesPage() {
         <SourceCodeLink />
       </div>
 
-      <section
-        aria-labelledby="linear-system-basics-heading"
-        className="mb-10 space-y-5 text-base leading-8"
+      <Section
+        className="text-base"
+        title="Three unknowns, shared constraints"
+        id="linear-system-basics-heading"
+        description={
+          <>
+            A linear equation in three variables has the form below. The
+            coefficients and right-hand side are real numbers; each variable
+            appears only to the first power. There are no products of variables.
+          </>
+        }
       >
-        <Section
-          id="linear-system-basics-heading"
-          name="Three unknowns, shared constraints"
-        />
-        <p className="text-muted">
-          A linear equation in three variables has the form below. The
-          coefficients and right-hand side are real numbers; each variable
-          appears only to the first power. There are no products of variables.
-        </p>
         <Equation tex="ax+by+cz=d" />
         <p className="text-muted">
           A system puts several such equations together. A solution is an
@@ -168,16 +167,20 @@ export default function LinearEquationsThreeVariablesPage() {
           A triple that works in only one or two equations is not a solution to
           the system.
         </p>
-      </section>
+      </Section>
 
-      <section aria-labelledby="planes-heading" className="mb-10 space-y-5">
-        <Section id="planes-heading" name="Think of intersecting planes" />
-        <p className="text-muted text-base leading-8">
-          When at least one variable coefficient is nonzero, an equation
-          describes a plane in three-dimensional space. Solving the system means
-          finding the intersection shared by all three planes. Three equations
-          do not automatically guarantee one solution.
-        </p>
+      <Section
+        title="Think of intersecting planes"
+        id="planes-heading"
+        description={
+          <>
+            When at least one variable coefficient is nonzero, an equation
+            describes a plane in three-dimensional space. Solving the system
+            means finding the intersection shared by all three planes. Three
+            equations do not automatically guarantee one solution.
+          </>
+        }
+      >
         <div className="grid gap-3 md:grid-cols-3">
           {solutionCases.map((example) => (
             <article
@@ -200,22 +203,22 @@ export default function LinearEquationsThreeVariablesPage() {
           {katexify("0=1", false)} is impossible. If every equation is an
           identity, the solution set is all of three-dimensional space.
         </p>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="elimination-heading"
-        className="mb-10 space-y-6 text-base leading-8"
+      <Section
+        className="text-base"
+        title="Solve the example by elimination"
+        id="elimination-heading"
+        description={
+          <>
+            Elimination combines equations to remove one variable, leaving a
+            simpler system. Call the equations {katexify("R_1", false)},{" "}
+            {katexify("R_2", false)}, and {katexify("R_3", false)} in their
+            original order.
+          </>
+        }
+        contentClassName="space-y-6"
       >
-        <Section
-          id="elimination-heading"
-          name="Solve the example by elimination"
-        />
-        <p className="text-muted">
-          Elimination combines equations to remove one variable, leaving a
-          simpler system. Call the equations {katexify("R_1", false)},{" "}
-          {katexify("R_2", false)}, and {katexify("R_3", false)} in their
-          original order.
-        </p>
         <article className="space-y-4">
           <h3 className="text-foreground text-lg font-semibold">
             Remove the first variable
@@ -257,21 +260,20 @@ export default function LinearEquationsThreeVariablesPage() {
             tex={String.raw`\begin{aligned}1+2+3&=6\\2(1)-2+3&=3\\1+2(2)-3&=2\end{aligned}`}
           />
         </article>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="matrix-heading"
-        className="mb-8 space-y-5 text-base leading-8"
+      <Section
+        className="text-base"
+        title="Keep the work organized with a matrix"
+        id="matrix-heading"
+        description={
+          <>
+            An augmented matrix stores the coefficients in the order{" "}
+            {katexify("x,y,z", false)}, with the constants after the divider.
+            Include a zero wherever a variable is missing.
+          </>
+        }
       >
-        <Section
-          id="matrix-heading"
-          name="Keep the work organized with a matrix"
-        />
-        <p className="text-muted">
-          An augmented matrix stores the coefficients in the order{" "}
-          {katexify("x,y,z", false)}, with the constants after the divider.
-          Include a zero wherever a variable is missing.
-        </p>
         <Equation
           tex={String.raw`\left[\begin{array}{ccc|c}1&1&1&6\\2&-1&1&3\\1&2&-1&2\end{array}\right]`}
         />
@@ -287,21 +289,23 @@ export default function LinearEquationsThreeVariablesPage() {
           each pivot is one, and its column is zero in every other row, so the
           answers can be read directly.
         </p>
-      </section>
+      </Section>
 
       <LinearSystemLab />
 
-      <section
-        aria-labelledby="reading-solutions-heading"
-        className="mt-12 space-y-5 text-base leading-8"
+      <Section
+        className="text-base"
+        title="Read the final rows"
+        id="reading-solutions-heading"
+        description={
+          <>
+            Three pivots give a unique solution. If there is no contradiction
+            but fewer than three pivots, at least one variable is free. Give
+            each free variable a real parameter and express the other variables
+            in terms of it.
+          </>
+        }
       >
-        <Section id="reading-solutions-heading" name="Read the final rows" />
-        <p className="text-muted">
-          Three pivots give a unique solution. If there is no contradiction but
-          fewer than three pivots, at least one variable is free. Give each free
-          variable a real parameter and express the other variables in terms of
-          it.
-        </p>
         <Equation
           tex={String.raw`\begin{cases}x+y+z=6\\2x-y+z=3\\3x+2z=9\end{cases}`}
         />
@@ -321,23 +325,22 @@ export default function LinearEquationsThreeVariablesPage() {
           the first two equations from it would give the contradiction{" "}
           {katexify("0=-1", false)}.
         </p>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="modeling-heading"
-        className="mt-12 space-y-5 text-base leading-8"
+      <Section
+        className="text-base"
+        title="Turn a story into three equations"
+        id="modeling-heading"
+        description={
+          <>
+            A group buys six tickets for ten currency units. Adult tickets cost
+            three units, student tickets two, and child tickets one. The group
+            buys one more student ticket than adult ticket. Let{" "}
+            {katexify("x", false)}, {katexify("y", false)}, and{" "}
+            {katexify("z", false)} count adult, student, and child tickets.
+          </>
+        }
       >
-        <Section
-          id="modeling-heading"
-          name="Turn a story into three equations"
-        />
-        <p className="text-muted">
-          A group buys six tickets for ten currency units. Adult tickets cost
-          three units, student tickets two, and child tickets one. The group
-          buys one more student ticket than adult ticket. Let{" "}
-          {katexify("x", false)}, {katexify("y", false)}, and{" "}
-          {katexify("z", false)} count adult, student, and child tickets.
-        </p>
         <Equation
           tex={String.raw`\begin{aligned}x+y+z&=6&&\text{(total tickets)}\\3x+2y+z&=10&&\text{(total cost)}\\-x+y&=1&&\text{(ticket difference)}\end{aligned}`}
         />
@@ -346,17 +349,18 @@ export default function LinearEquationsThreeVariablesPage() {
           counts, the cost, and the difference. Counts must also be nonnegative
           integers; the context can impose restrictions beyond the equations.
         </p>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="linear-system-practice-heading"
-        className="mt-12 space-y-5"
+      <Section
+        title="Try it yourself"
+        id="linear-system-practice-heading"
+        description={
+          <>
+            Solve or classify each system before revealing the step-by-step
+            solution.
+          </>
+        }
       >
-        <Section id="linear-system-practice-heading" name="Try it yourself" />
-        <p className="text-muted text-base leading-8">
-          Solve or classify each system before revealing the step-by-step
-          solution.
-        </p>
         <ol className="space-y-4">
           {exercises.map((exercise, index) => (
             <li
@@ -401,7 +405,7 @@ export default function LinearEquationsThreeVariablesPage() {
             </li>
           ))}
         </ol>
-      </section>
+      </Section>
     </div>
   );
 }

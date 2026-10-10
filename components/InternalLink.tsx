@@ -6,25 +6,34 @@ export default function InternalLink({
   children,
   href,
   lg,
+  variant = "navigation",
 }: {
   className?: string;
   children: string;
   href: string;
   lg?: boolean;
+  variant?: "navigation" | "inline";
 }) {
+  const appearance =
+    variant === "inline"
+      ? "text-[length:inherit] leading-[inherit]"
+      : `w-fit py-0.5 ${lg === true ? "text-lg" : "text-base"}`;
+
   return (
     <Link
-      className={`group text-action hover:text-action-hover inline w-fit cursor-pointer py-0.5 hover:underline ${lg === true ? "text-lg" : "text-base"} ${className ?? ""}`}
+      className={`group text-action hover:text-action-hover inline cursor-pointer hover:underline ${appearance} ${className ?? ""}`}
       href={href}
       prefetch={false}
     >
       <span>
         {children}
-        <ChevronRightIcon
-          aria-hidden="true"
-          className={`${lg === true ? "h-4.5 w-4.5" : "h-4 w-4"} text-action group-hover:text-action-hover inline align-middle`}
-          strokeWidth={2.25}
-        />
+        {variant === "navigation" ? (
+          <ChevronRightIcon
+            aria-hidden="true"
+            className={`${lg === true ? "h-4.5 w-4.5" : "h-4 w-4"} text-action group-hover:text-action-hover inline align-middle`}
+            strokeWidth={2.25}
+          />
+        ) : null}
       </span>
     </Link>
   );

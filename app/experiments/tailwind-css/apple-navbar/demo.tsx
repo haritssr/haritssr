@@ -1,7 +1,7 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
-import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -38,7 +38,7 @@ export default function TailwindAppleNavbarDemo() {
           </div>
           <div className="my-2" />
           <div className="p-4">
-            <Section name="Lorem ipsum" />
+            <SectionHeading>Lorem ipsum</SectionHeading>
             <p className="mb-5">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur
               nesciunt laudantium dolore consectetur animi voluptates fugit
@@ -54,7 +54,7 @@ export default function TailwindAppleNavbarDemo() {
               Voluptatem necessitatibus expedita, asperiores possimus
               consectetur at aliquam sequi nesciunt consequatur accusamus!
             </p>
-            <Section name="Lorem ipsum" />
+            <SectionHeading>Lorem ipsum</SectionHeading>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur
               nesciunt laudantium dolore consectetur animi voluptates fugit

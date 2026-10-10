@@ -9,7 +9,7 @@ export function POrbitalPattern() {
     <>
       <section
         aria-labelledby="the-shape-in-one-picture"
-        className="border-border bg-surface-hover mt-12 overflow-hidden rounded-3xl border"
+        className="border-border bg-surface-hover overflow-hidden rounded-3xl border"
       >
         <div className="grid gap-2 p-5 sm:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-8">
           <div>
@@ -57,7 +57,7 @@ export function POrbitalPattern() {
 
       <section
         aria-labelledby="same-shape-three-directions"
-        className="mt-14 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"
+        className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"
       >
         <div>
           <p className="text-action text-sm font-semibold tracking-[0.18em] uppercase">

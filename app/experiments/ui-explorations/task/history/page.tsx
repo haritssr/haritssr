@@ -30,7 +30,7 @@ export default async function TaskHistoryPage() {
           No task history yet.
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-20">
           {history.map((day) => (
             <Section
               key={day.date}

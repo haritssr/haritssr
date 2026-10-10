@@ -13,8 +13,8 @@ export const metadata: Metadata = getExperimentMetadata(
 
 export default function PolynomialPage() {
   return (
-    <div className="text-foreground pb-24" lang="id">
-      <div className="mb-8 max-w-3xl">
+    <div className="text-foreground space-y-20 pb-24" lang="id">
+      <div className="max-w-3xl">
         <SubTitle>
           Dari mengenali polinomial hingga menyamakan koefisien. Kerjakan 27
           soal secara bertahap, periksa jawabanmu, dan buka petunjuk saat

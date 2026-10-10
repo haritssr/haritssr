@@ -28,34 +28,33 @@ export default function EquationAnnotationsPage() {
         </p>
         <SourceCodeLink />
       </div>
-      <section aria-labelledby="annotations-heading">
-        <Section id="annotations-heading" name="Explain a term" />
+      <Section title="Explain a term" id="annotations-heading">
         <Demo />
-      </section>
-      <section aria-labelledby="annotations-notes-heading">
-        <Section
-          id="annotations-notes-heading"
-          name="Make the meaning visible"
-        />
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
-          Color draws attention, a box isolates a term, and an underbrace adds a
-          label below it. The written explanation stays visible in every mode,
-          so understanding the selected term does not depend on color. Explore
-          KaTeX’s{" "}
-          <ExternalLink
-            href="https://katex.org/docs/supported.html#accents"
-            name="brace annotations"
-            size="inherit"
-          />{" "}
-          and{" "}
-          <ExternalLink
-            href="https://katex.org/docs/supported.html#color"
-            name="color commands"
-            size="inherit"
-          />{" "}
-          for more possibilities.
-        </p>
-      </section>
+      </Section>
+      <Section
+        title="Make the meaning visible"
+        id="annotations-notes-heading"
+        description={
+          <>
+            Color draws attention, a box isolates a term, and an underbrace adds
+            a label below it. The written explanation stays visible in every
+            mode, so understanding the selected term does not depend on color.
+            Explore KaTeX’s{" "}
+            <ExternalLink
+              href="https://katex.org/docs/supported.html#accents"
+              name="brace annotations"
+              size="inherit"
+            />{" "}
+            and{" "}
+            <ExternalLink
+              href="https://katex.org/docs/supported.html#color"
+              name="color commands"
+              size="inherit"
+            />{" "}
+            for more possibilities.
+          </>
+        }
+      />
     </div>
   );
 }

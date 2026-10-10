@@ -122,8 +122,7 @@ const VOCABULARY: readonly VocabularyItem[] = [
 
 export function VocabularyGuide() {
   return (
-    <section aria-labelledby="vocabulary-title">
-      <Section id="vocabulary-title" name="Vocabulary" />
+    <Section title="Vocabulary" id="vocabulary-title">
       <Table className="min-w-3xl">
         <caption className="sr-only">
           Electron configuration and quantum-number vocabulary
@@ -160,6 +159,6 @@ export function VocabularyGuide() {
           ))}
         </tbody>
       </Table>
-    </section>
+    </Section>
   );
 }

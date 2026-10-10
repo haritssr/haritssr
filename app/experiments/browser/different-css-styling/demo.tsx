@@ -1,6 +1,6 @@
 "use client";
 
-import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
@@ -11,7 +11,9 @@ export default function DifferentCssStylingDemo() {
         Click blue &quot;source github button&quot; to see the source code
       </SubTitle>
       <SourceCodeLink />
-      <Section name="Coloring, Box size, Rounded corner, Padding" />
+      <SectionHeading>
+        Coloring, Box size, Rounded corner, Padding
+      </SectionHeading>
       <div className="flex space-x-5">
         <div
           style={{

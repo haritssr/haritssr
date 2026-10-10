@@ -72,15 +72,13 @@ function RouterDemoContent() {
       <SourceCodeLink />
 
       <div className="space-y-20">
-        <section>
-          <Section name="usePathname" />
+        <Section title="usePathname">
           <div>
             pathname = <span className={style}>{pathname}</span>
           </div>
-        </section>
+        </Section>
 
-        <section>
-          <Section name="useSearchParams" />
+        <Section title="useSearchParams">
           <div>
             searchParams.toString() ={" "}
             <span className={style}>{currentQuery || "(empty)"}</span>
@@ -93,41 +91,40 @@ function RouterDemoContent() {
               </pre>
             </div>
           )}
-        </section>
+        </Section>
 
-        <section>
-          <Section name="router.push" />
-          <p className="mb-3 text-sm text-zinc-600">
-            Add a query parameter using router.push (adds to history)
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <input
-              aria-label="Query parameter value"
-              className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-              onChange={(e) => {
-                setInputValue(e.target.value);
-              }}
-              onKeyDown={(e) => e.key === "Enter" && handlePush()}
-              placeholder="Enter value..."
-              type="text"
-              value={inputValue}
-            />
-            <button
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-50"
-              disabled={!inputValue}
-              onClick={handlePush}
-              type="button"
-            >
-              router.push
-            </button>
-          </div>
-        </section>
+        <Section
+          title="router.push"
+          description={
+            <>Add a query parameter using router.push (adds to history)</>
+          }
+          contentClassName="flex flex-wrap gap-2"
+        >
+          <input
+            aria-label="Query parameter value"
+            className="rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+            onChange={(e) => {
+              setInputValue(e.target.value);
+            }}
+            onKeyDown={(e) => e.key === "Enter" && handlePush()}
+            placeholder="Enter value..."
+            type="text"
+            value={inputValue}
+          />
+          <button
+            className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-50"
+            disabled={!inputValue}
+            onClick={handlePush}
+            type="button"
+          >
+            router.push
+          </button>
+        </Section>
 
-        <section>
-          <Section name="router.replace" />
-          <p className="mb-3 text-sm text-zinc-600">
-            Replace current URL without adding to history
-          </p>
+        <Section
+          title="router.replace"
+          description={<>Replace current URL without adding to history</>}
+        >
           <button
             className="rounded-md bg-zinc-700 px-4 py-2 text-sm text-white hover:bg-zinc-800 disabled:opacity-50"
             disabled={!inputValue}
@@ -136,40 +133,41 @@ function RouterDemoContent() {
           >
             router.replace with input value
           </button>
-        </section>
+        </Section>
 
-        <section>
-          <Section name="Navigation Methods" />
-          <div className="flex flex-wrap gap-2">
-            <button
-              className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
-              onClick={handleBack}
-              type="button"
-            >
-              router.back()
-            </button>
-            <button
-              className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
-              onClick={handleForward}
-              type="button"
-            >
-              router.forward()
-            </button>
-            <button
-              className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
-              onClick={handleRefresh}
-              type="button"
-            >
-              router.refresh()
-            </button>
-          </div>
-        </section>
+        <Section
+          title="Navigation Methods"
+          contentClassName="flex flex-wrap gap-2"
+        >
+          <button
+            className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
+            onClick={handleBack}
+            type="button"
+          >
+            router.back()
+          </button>
+          <button
+            className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
+            onClick={handleForward}
+            type="button"
+          >
+            router.forward()
+          </button>
+          <button
+            className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
+            onClick={handleRefresh}
+            type="button"
+          >
+            router.refresh()
+          </button>
+        </Section>
 
-        <section>
-          <Section name="Link Component" />
-          <p className="mb-3 text-sm text-zinc-600">
-            Using Link from next/link for client-side navigation:
-          </p>
+        <Section
+          title="Link Component"
+          description={
+            <>Using Link from next/link for client-side navigation:</>
+          }
+        >
           <div className="flex flex-wrap gap-2">
             <a
               className="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100"
@@ -182,7 +180,7 @@ function RouterDemoContent() {
             Note: In App Router, use the Link component from next/link for
             client-side navigation without full page reload.
           </p>
-        </section>
+        </Section>
       </div>
     </>
   );

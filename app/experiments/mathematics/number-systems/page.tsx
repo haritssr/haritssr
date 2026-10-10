@@ -130,8 +130,8 @@ function Equation({ tex }: { tex: string }) {
 
 export default function NumberSystemsPage() {
   return (
-    <div className="text-foreground pb-24">
-      <div className="mb-10 max-w-3xl">
+    <div className="text-foreground space-y-20 pb-24">
+      <div className="max-w-3xl">
         <SubTitle>
           Learn how number sets fit together, locate values on a number line,
           and translate between inequalities and interval notation.
@@ -139,16 +139,17 @@ export default function NumberSystemsPage() {
         <SourceCodeLink />
       </div>
 
-      <section
-        aria-labelledby="number-families-heading"
-        className="mb-10 space-y-5"
+      <Section
+        title="The families of numbers"
+        id="number-families-heading"
+        description={
+          <>
+            A number can belong to several sets at once. Counting numbers are
+            integers, and every integer is rational because it can be written as
+            a fraction with denominator one.
+          </>
+        }
       >
-        <Section id="number-families-heading" name="The families of numbers" />
-        <p className="text-muted max-w-3xl text-base leading-8">
-          A number can belong to several sets at once. Counting numbers are
-          integers, and every integer is rational because it can be written as a
-          fraction with denominator one.
-        </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {numberSets.map((set) => (
             <article
@@ -185,21 +186,23 @@ export default function NumberSystemsPage() {
           Irrational numbers sit outside the rational set but inside the real
           set.
         </p>
-      </section>
+      </Section>
 
       <NumberSets />
 
-      <section
-        aria-labelledby="number-line-heading"
-        className="my-12 max-w-3xl space-y-5 text-base leading-8"
+      <Section
+        className="max-w-3xl text-base"
+        title="Read the number line"
+        id="number-line-heading"
+        description={
+          <>
+            Zero is the reference point. Negative numbers lie to its left and
+            positive numbers to its right. Values increase as you move right, so{" "}
+            {katexify("-4<-1<0<2", false)}. Equal steps on the line represent
+            equal differences in value.
+          </>
+        }
       >
-        <Section id="number-line-heading" name="Read the number line" />
-        <p className="text-muted">
-          Zero is the reference point. Negative numbers lie to its left and
-          positive numbers to its right. Values increase as you move right, so{" "}
-          {katexify("-4<-1<0<2", false)}. Equal steps on the line represent
-          equal differences in value.
-        </p>
         <p className="text-muted">
           Fractions and irrational numbers occupy points too:{" "}
           {katexify(String.raw`\frac12`, false)} lies halfway between{" "}
@@ -213,21 +216,19 @@ export default function NumberSystemsPage() {
           every fractional and irrational value there. It is not just a list of
           integers.
         </p>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="interval-notation-heading"
-        className="mb-8 space-y-5"
+      <Section
+        title="Brackets, parentheses, and infinity"
+        id="interval-notation-heading"
+        description={
+          <>
+            A square bracket includes a finite endpoint; a parenthesis excludes
+            it. Read the left bound first and the right bound second. In the
+            table, assume {katexify("a<b", false)}.
+          </>
+        }
       >
-        <Section
-          id="interval-notation-heading"
-          name="Brackets, parentheses, and infinity"
-        />
-        <p className="text-muted max-w-3xl text-base leading-8">
-          A square bracket includes a finite endpoint; a parenthesis excludes
-          it. Read the left bound first and the right bound second. In the
-          table, assume {katexify("a<b", false)}.
-        </p>
         <div className="border-border overflow-x-auto rounded-xl border">
           <table className="w-full text-left text-sm">
             <caption className="sr-only">
@@ -281,24 +282,23 @@ export default function NumberSystemsPage() {
           {katexify(String.raw`\infty`, false)}. The whole real line is{" "}
           {katexify(String.raw`(-\infty,\infty)=\mathbb{R}`, false)}.
         </p>
-      </section>
+      </Section>
 
       <IntervalLab />
 
-      <section
-        aria-labelledby="combine-intervals-heading"
-        className="mt-12 max-w-3xl space-y-5 text-base leading-8"
+      <Section
+        className="max-w-3xl text-base"
+        title="Combine intervals with sets"
+        id="combine-intervals-heading"
+        description={
+          <>
+            The union {katexify(String.raw`A\cup B`, false)} includes numbers in
+            either set or both. The intersection{" "}
+            {katexify(String.raw`A\cap B`, false)} includes only numbers in
+            both. For these overlapping intervals:
+          </>
+        }
       >
-        <Section
-          id="combine-intervals-heading"
-          name="Combine intervals with sets"
-        />
-        <p className="text-muted">
-          The union {katexify(String.raw`A\cup B`, false)} includes numbers in
-          either set or both. The intersection{" "}
-          {katexify(String.raw`A\cap B`, false)} includes only numbers in both.
-          For these overlapping intervals:
-        </p>
         <Equation tex={String.raw`A=[-2,1],\qquad B=(0,3)`} />
         <Equation tex={String.raw`A\cup B=[-2,3)`} />
         <Equation tex={String.raw`A\cap B=(0,1]`} />
@@ -309,33 +309,31 @@ export default function NumberSystemsPage() {
           separate: {katexify(String.raw`(-\infty,-1)\cup(2,\infty)`, false)}{" "}
           means {katexify("x<-1", false)} or {katexify("x>2", false)}.
         </p>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="beyond-real-heading"
-        className="mt-12 max-w-3xl space-y-5 text-base leading-8"
-      >
-        <Section id="beyond-real-heading" name="Beyond the real line" />
-        <p className="text-muted">
-          Complex numbers have the form {katexify("a+bi", false)}, with real{" "}
-          {katexify("a", false)} and {katexify("b", false)} and{" "}
-          {katexify("i^2=-1", false)}. Real numbers are the cases where{" "}
-          {katexify("b=0", false)}, so{" "}
-          {katexify(String.raw`\mathbb{R}\subset\mathbb{C}`, false)}. A non-real
-          number such as {katexify("2+i", false)} needs a complex plane; it has
-          no point on the real number line and is neither rational nor
-          irrational.
-        </p>
-      </section>
+      <Section
+        className="max-w-3xl text-base"
+        title="Beyond the real line"
+        id="beyond-real-heading"
+        description={
+          <>
+            Complex numbers have the form {katexify("a+bi", false)}, with real{" "}
+            {katexify("a", false)} and {katexify("b", false)} and{" "}
+            {katexify("i^2=-1", false)}. Real numbers are the cases where{" "}
+            {katexify("b=0", false)}, so{" "}
+            {katexify(String.raw`\mathbb{R}\subset\mathbb{C}`, false)}. A
+            non-real number such as {katexify("2+i", false)} needs a complex
+            plane; it has no point on the real number line and is neither
+            rational nor irrational.
+          </>
+        }
+      />
 
-      <section
-        aria-labelledby="number-systems-practice-heading"
-        className="mt-12 space-y-5"
+      <Section
+        title="Try it yourself"
+        id="number-systems-practice-heading"
+        description={<>Decide your answer before revealing the explanation.</>}
       >
-        <Section id="number-systems-practice-heading" name="Try it yourself" />
-        <p className="text-muted text-base leading-8">
-          Decide your answer before revealing the explanation.
-        </p>
         <ol className="space-y-4">
           {exercises.map((exercise, index) => (
             <li
@@ -365,7 +363,7 @@ export default function NumberSystemsPage() {
             </li>
           ))}
         </ol>
-      </section>
+      </Section>
     </div>
   );
 }

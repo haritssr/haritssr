@@ -468,158 +468,164 @@ export default function TaskPage() {
       </div>
       <fieldset disabled={!isHydratedFromDb}>
         <legend className="sr-only">Daily tasks</legend>
-        <form
-          className="mt-10 flex flex-wrap items-center gap-2"
-          onSubmit={handleAddOtherTask}
-        >
-          <label className="sr-only" htmlFor="new-task-title">
-            Task title
-          </label>
-          <input
-            autoComplete="off"
-            className="corner-squircle text-foreground h-8 w-full rounded-lg border border-zinc-300 px-2 text-sm placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none sm:w-fit"
-            id="new-task-title"
-            maxLength={200}
-            name="title"
-            onChange={handleNewOtherTaskTitleChange}
-            placeholder="Task title…"
-            type="text"
-            value={newOtherTaskTitle}
-          />
-
-          <NumberField.Root
-            className="flex items-center"
-            max={MAX_TASK_DURATION_MINUTES}
-            min={1}
-            onValueChange={handleNewOtherTaskDurationChange}
-            step={1}
-            value={newOtherTaskDuration ? Number(newOtherTaskDuration) : null}
+        <div className="space-y-20">
+          <form
+            className="mt-10 flex flex-wrap items-center gap-2"
+            onSubmit={handleAddOtherTask}
           >
-            <NumberField.Decrement
-              aria-label="Decrease task duration"
-              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-t border-b border-l border-zinc-300 text-zinc-700 hover:bg-zinc-100"
-            >
-              −
-            </NumberField.Decrement>
-            <NumberField.Input
-              aria-label="Task duration in minutes"
+            <label className="sr-only" htmlFor="new-task-title">
+              Task title
+            </label>
+            <input
               autoComplete="off"
-              className="h-8 w-10 border border-zinc-300 px-2 py-1 text-center text-sm text-zinc-700 focus:border-blue-500 focus:text-blue-500 focus:outline-none"
-              inputMode="numeric"
-              name="duration"
-              ref={durationInputRef}
+              className="corner-squircle text-foreground h-8 w-full rounded-lg border border-zinc-300 px-2 text-sm placeholder:text-zinc-400 focus:border-zinc-700 focus:outline-none sm:w-fit"
+              id="new-task-title"
+              maxLength={200}
+              name="title"
+              onChange={handleNewOtherTaskTitleChange}
+              placeholder="Task title…"
+              type="text"
+              value={newOtherTaskTitle}
             />
-            <NumberField.Increment
-              aria-label="Increase task duration"
-              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-t border-r border-b border-zinc-300 text-zinc-700 hover:bg-zinc-100"
+
+            <NumberField.Root
+              className="flex items-center"
+              max={MAX_TASK_DURATION_MINUTES}
+              min={1}
+              onValueChange={handleNewOtherTaskDurationChange}
+              step={1}
+              value={newOtherTaskDuration ? Number(newOtherTaskDuration) : null}
             >
-              +
-            </NumberField.Increment>
-          </NumberField.Root>
-          <div className="flex items-center gap-1">
-            {NEW_TASK_DURATION_PRESETS.map((preset) => {
-              // Highlights the selected quick-duration preset.
-              const isSelected = parsedNewOtherTaskDuration === preset.minutes;
-              // Computes visual variant for selected/unselected preset buttons.
-              const presetClassName = isSelected
-                ? "border-action text-action"
-                : "border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100";
+              <NumberField.Decrement
+                aria-label="Decrease task duration"
+                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l-sm border-t border-b border-l border-zinc-300 text-zinc-700 hover:bg-zinc-100"
+              >
+                −
+              </NumberField.Decrement>
+              <NumberField.Input
+                aria-label="Task duration in minutes"
+                autoComplete="off"
+                className="h-8 w-10 border border-zinc-300 px-2 py-1 text-center text-sm text-zinc-700 focus:border-blue-500 focus:text-blue-500 focus:outline-none"
+                inputMode="numeric"
+                name="duration"
+                ref={durationInputRef}
+              />
+              <NumberField.Increment
+                aria-label="Increase task duration"
+                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r-sm border-t border-r border-b border-zinc-300 text-zinc-700 hover:bg-zinc-100"
+              >
+                +
+              </NumberField.Increment>
+            </NumberField.Root>
+            <div className="flex items-center gap-1">
+              {NEW_TASK_DURATION_PRESETS.map((preset) => {
+                // Highlights the selected quick-duration preset.
+                const isSelected =
+                  parsedNewOtherTaskDuration === preset.minutes;
+                // Computes visual variant for selected/unselected preset buttons.
+                const presetClassName = isSelected
+                  ? "border-action text-action"
+                  : "border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100";
 
-              return (
-                <button
-                  className={`corner-squircle inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border text-sm ${presetClassName}`}
-                  data-minutes={preset.minutes}
-                  key={preset.minutes}
-                  onClick={handlePresetDurationClick}
-                  type="button"
-                >
-                  {preset.label}
-                </button>
-              );
-            })}
-          </div>
-          <button
-            className="corner-squircle h-8 rounded-lg bg-zinc-700 px-3 text-sm text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-70"
-            disabled={!canAddNewOtherTask}
-            type="submit"
-          >
-            Add Task
-          </button>
-        </form>
-
-        <Section title="Now">
-          {droppedNowCount > 0 ? (
-            <div className="mb-2 rounded-lg border border-amber-300 bg-amber-50 px-2 py-1 text-sm text-amber-700">
-              Only one Now task is allowed. {droppedNowCount} extra Now task(s)
-              were moved to Other.
+                return (
+                  <button
+                    className={`corner-squircle inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border text-sm ${presetClassName}`}
+                    data-minutes={preset.minutes}
+                    key={preset.minutes}
+                    onClick={handlePresetDurationClick}
+                    type="button"
+                  >
+                    {preset.label}
+                  </button>
+                );
+              })}
             </div>
-          ) : null}
+            <button
+              className="corner-squircle h-8 rounded-lg bg-zinc-700 px-3 text-sm text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-70"
+              disabled={!canAddNewOtherTask}
+              type="submit"
+            >
+              Add Task
+            </button>
+          </form>
 
-          {nowTasks.length === 0 && (
-            <div className="text-sm text-zinc-400">Empty</div>
+          <Section title="Now">
+            {droppedNowCount > 0 ? (
+              <div className="mb-2 rounded-lg border border-amber-300 bg-amber-50 px-2 py-1 text-sm text-amber-700">
+                Only one Now task is allowed. {droppedNowCount} extra Now
+                task(s) were moved to Other.
+              </div>
+            ) : null}
+
+            {nowTasks.length === 0 && (
+              <div className="text-sm text-zinc-400">Empty</div>
+            )}
+
+            {nowTasks.map((task) => (
+              <TaskItem
+                autoStart={autoStartTitle === task.title}
+                key={task.title}
+                onAutoStartConsumed={handleAutoStartConsumed}
+                onDelete={handleDeleteTask}
+                onMarkDone={handleMarkDone}
+                onMoveTask={handleMoveTask}
+                onProgressChange={handleProgressChange}
+                showZeroProgressBar
+                {...task}
+              />
+            ))}
+          </Section>
+
+          <Section title="Tasks">
+            {otherTasks.length === 0 && (
+              <div className="text-sm text-zinc-400">Empty</div>
+            )}
+            {otherTasks.map((task) => (
+              <TaskItem
+                key={task.title}
+                onDelete={handleDeleteTask}
+                onDoNow={handleDoNow}
+                onMarkDone={handleMarkDone}
+                onProgressChange={handleProgressChange}
+                onResumeNow={handleResumeNow}
+                {...task}
+              />
+            ))}
+          </Section>
+
+          {normalizedNewOtherTaskTitle.length > 0 &&
+            newOtherTaskTitleExists && (
+              <output aria-live="polite" className="mb-3 text-xs text-rose-500">
+                Task title already exists.
+              </output>
+            )}
+
+          {persistenceError !== null && (
+            <output aria-live="polite" className="mb-3 text-sm text-rose-600">
+              {persistenceError}
+            </output>
           )}
 
-          {nowTasks.map((task) => (
-            <TaskItem
-              autoStart={autoStartTitle === task.title}
-              key={task.title}
-              onAutoStartConsumed={handleAutoStartConsumed}
-              onDelete={handleDeleteTask}
-              onMarkDone={handleMarkDone}
-              onMoveTask={handleMoveTask}
-              onProgressChange={handleProgressChange}
-              showZeroProgressBar
-              {...task}
-            />
-          ))}
-        </Section>
-
-        <Section title="Tasks">
-          {otherTasks.length === 0 && (
-            <div className="text-sm text-zinc-400">Empty</div>
-          )}
-          {otherTasks.map((task) => (
-            <TaskItem
-              key={task.title}
-              onDelete={handleDeleteTask}
-              onDoNow={handleDoNow}
-              onMarkDone={handleMarkDone}
-              onProgressChange={handleProgressChange}
-              onResumeNow={handleResumeNow}
-              {...task}
-            />
-          ))}
-        </Section>
-
-        {normalizedNewOtherTaskTitle.length > 0 && newOtherTaskTitleExists && (
-          <output aria-live="polite" className="mb-3 text-xs text-rose-500">
-            Task title already exists.
-          </output>
-        )}
-
-        {persistenceError !== null && (
-          <output aria-live="polite" className="mb-3 text-sm text-rose-600">
-            {persistenceError}
-          </output>
-        )}
-
-        <Section accordion={{ defaultOpen: false }} title="Done">
-          {doneTasks.length === 0 && (
-            <div className="text-sm text-zinc-500">Nothing is done today.</div>
-          )}
-          {doneTasks.map((task) => (
-            <TaskItem
-              forceDonutProgress
-              key={task.title}
-              onDelete={handleDeleteTask}
-              onMarkDone={handleMarkDone}
-              onProgressChange={handleProgressChange}
-              readOnly
-              visualVariant="doneSection"
-              {...task}
-            />
-          ))}
-        </Section>
+          <Section accordion={{ defaultOpen: false }} title="Done">
+            {doneTasks.length === 0 && (
+              <div className="text-sm text-zinc-500">
+                Nothing is done today.
+              </div>
+            )}
+            {doneTasks.map((task) => (
+              <TaskItem
+                forceDonutProgress
+                key={task.title}
+                onDelete={handleDeleteTask}
+                onMarkDone={handleMarkDone}
+                onProgressChange={handleProgressChange}
+                readOnly
+                visualVariant="doneSection"
+                {...task}
+              />
+            ))}
+          </Section>
+        </div>
       </fieldset>
     </>
   );

@@ -50,7 +50,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
         </div>
       )}
 
-      <div className="mt-6 space-y-16">
+      <div className="mt-6 space-y-20">
         <section className="rounded-lg border border-neutral-200 p-4">
           <h2 className="text-lg font-semibold">Manage Tools</h2>
           <form

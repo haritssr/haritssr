@@ -502,7 +502,7 @@ export default function EmojiAtlas() {
     <>
       <SourceCodeLink />
 
-      <div className="space-y-8 pb-12">
+      <div className="space-y-20 pb-12">
         <header className="max-w-3xl space-y-3">
           <p className="text-foreground/60 text-sm font-medium tracking-wide uppercase">
             A visual field guide

@@ -26,25 +26,27 @@ export default function LivePlaygroundPage() {
         </p>
         <SourceCodeLink />
       </div>
-      <section aria-labelledby="playground-heading">
-        <Section id="playground-heading" name="Try your own notation" />
+      <Section title="Try your own notation" id="playground-heading">
         <Demo />
-      </section>
-      <section aria-labelledby="playground-notes-heading">
-        <Section id="playground-notes-heading" name="Inline and display math" />
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
-          Inline mode fits equations into a line of text. Display mode centers a
-          standalone equation and gives large operators more room. Enter TeX
-          directly, without dollar-sign delimiters. KaTeX typesets expressions;
-          it does not solve or evaluate them. Explore the{" "}
-          <ExternalLink
-            href="https://katex.org/docs/supported.html"
-            name="supported TeX functions"
-            size="inherit"
-          />{" "}
-          for more notation to try.
-        </p>
-      </section>
+      </Section>
+      <Section
+        title="Inline and display math"
+        id="playground-notes-heading"
+        description={
+          <>
+            Inline mode fits equations into a line of text. Display mode centers
+            a standalone equation and gives large operators more room. Enter TeX
+            directly, without dollar-sign delimiters. KaTeX typesets
+            expressions; it does not solve or evaluate them. Explore the{" "}
+            <ExternalLink
+              href="https://katex.org/docs/supported.html"
+              name="supported TeX functions"
+              size="inherit"
+            />{" "}
+            for more notation to try.
+          </>
+        }
+      />
     </div>
   );
 }

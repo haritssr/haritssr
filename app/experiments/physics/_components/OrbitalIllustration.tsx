@@ -93,8 +93,7 @@ export default function OrbitalIllustration({
   }
 
   return (
-    <section aria-labelledby="orbital-illustration-title">
-      <Section id="orbital-illustration-title" name="Electron Orbital in 3D" />
+    <Section title="Electron Orbital in 3D" id="orbital-illustration-title">
       <div className="border-border overflow-hidden rounded-xl border">
         <div className="border-border flex flex-wrap items-start gap-x-6 gap-y-4 border-b p-4">
           <div className="min-w-0 flex-[1_1_16rem]">
@@ -281,7 +280,7 @@ export default function OrbitalIllustration({
           Full screen is unavailable in this browser.
         </p>
       ) : null}
-    </section>
+    </Section>
   );
 }
 

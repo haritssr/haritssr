@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "katex/dist/katex.min.css";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
@@ -28,7 +29,9 @@ export default function PhysicsEquationsPage() {
 
         {PHYSICS_DOMAINS.map((domain) => (
           <div className="min-w-0 scroll-mt-24" id={domain.id} key={domain.id}>
-            <Section id={`${domain.id}-title`} name={domain.title} />
+            <SectionHeading id={`${domain.id}-title`}>
+              {domain.title}
+            </SectionHeading>
             <p className="text-foreground/65 mb-10 max-w-3xl text-base leading-7">
               {domain.description}
             </p>
@@ -50,7 +53,9 @@ function EquationContents() {
       aria-labelledby="equation-contents-title"
       className="border-border rounded-2xl border p-5 sm:p-6"
     >
-      <Section id="equation-contents-title" name="Browse by domain" />
+      <SectionHeading id="equation-contents-title">
+        Browse by domain
+      </SectionHeading>
       <p className="text-foreground/65 mb-6 max-w-3xl text-sm leading-6">
         Units follow SI; {katexify("1", false)} means dimensionless. An em dash
         indicates no applicable unit or no universal constant value. Values
@@ -97,12 +102,12 @@ function EquationContents() {
 
 function EquationSection({ equation }: { equation: PhysicsEquation }) {
   return (
-    <section
-      aria-labelledby={`${equation.id}-title`}
+    <Section
       className="min-w-0 scroll-mt-24"
       id={equation.id}
+      title={equation.title}
+      headingAs="h3"
     >
-      <Section as="h3" id={`${equation.id}-title`} name={equation.title} />
       <div className="mb-5 grid sm:mt-5 sm:grid-cols-2 sm:items-start sm:gap-8">
         <div className="border-border bg-background scrollbar-subtle mb-5 min-w-0 overflow-x-auto rounded-xl border px-4 py-6 sm:my-0 sm:px-6">
           <div className="w-fit min-w-full text-base sm:text-lg">
@@ -128,7 +133,7 @@ function EquationSection({ equation }: { equation: PhysicsEquation }) {
         <span className="text-foreground font-medium">When it applies: </span>
         {equation.condition}
       </p>
-    </section>
+    </Section>
   );
 }
 

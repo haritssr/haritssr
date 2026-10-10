@@ -54,41 +54,36 @@ export default function ActivityDemo() {
       </div>
 
       <div className="space-y-20">
-        <section>
-          <Section name="Counter Button" />
+        <Section title="Counter Button">
           <Activity mode={visible ? "visible" : "hidden"}>
             <Counter />
           </Activity>
           {Boolean(visible) && <Counter />}
-        </section>
+        </Section>
 
-        <section>
-          <Section name="Input State" />
+        <Section title="Input State">
           <Activity mode={visible ? "visible" : "hidden"}>
             <Form />
           </Activity>
-        </section>
+        </Section>
 
-        <section>
-          <Section name="Effect Livecycle" />
+        <Section title="Effect Livecycle">
           <Activity mode={visible ? "visible" : "hidden"}>
             <Clock />
           </Activity>
-        </section>
+        </Section>
 
-        <section>
-          <Section name="Tab" />
+        <Section title="Tab">
           <Tabs />
-        </section>
+        </Section>
 
-        <section>
-          <Section name="Pre-render Hidden UI" />
+        <Section title="Pre-render Hidden UI">
           {/*Although it hidden, but behind the screen the dashboard is rendered, prepare jsx, load code, suspend for data*/}
           {/*Later when mode is visible, it appear much faster, because much of work already done in the backgroudn at a lower priority*/}
           <Activity mode="hidden">
             <ExpensiveDashboard />
           </Activity>
-        </section>
+        </Section>
       </div>
     </div>
   );

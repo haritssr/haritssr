@@ -87,45 +87,53 @@ export default function UnitsPage() {
         <SubTitle>{DESCRIPTION}</SubTitle>
         <SourceCodeLink />
         <div className="space-y-20">
-          <section>
-            <Section name="Base Quantities" />
+          <Section title="Base Quantities">
             <UnitsTable caption="The seven SI base units" units={BASE_UNITS} />
-          </section>
-          <section>
-            <Section name="Derived Quantities" />
+          </Section>
+          <Section title="Derived Quantities">
             <UnitsTable
               caption="Common derived quantities studied in high school physics"
               showFormulas
               units={DERIVED_UNITS}
             />
-          </section>
-          <section>
-            <Section name="Prerequisite Map" />
-            <p className="text-foreground/70 mb-4 text-sm">
-              Open a quantity to view its prerequisite concepts and formulas
-              commonly used in high school physics.
-            </p>
+          </Section>
+          <Section
+            title="Prerequisite Map"
+            description={
+              <>
+                Open a quantity to view its prerequisite concepts and formulas
+                commonly used in high school physics.
+              </>
+            }
+          >
             <PrerequisiteDiagrams units={DERIVED_UNITS} />
-          </section>
-          <section>
-            <Section name="Dependent Quantities" />
-            <p className="text-foreground/70 mb-4 text-sm">
-              Select a quantity to see its formulas and the other quantities
-              that directly depend on it in this high school physics reference.
-            </p>
+          </Section>
+          <Section
+            title="Dependent Quantities"
+            description={
+              <>
+                Select a quantity to see its formulas and the other quantities
+                that directly depend on it in this high school physics
+                reference.
+              </>
+            }
+          >
             <DependentFormulas quantities={QUANTITY_DEPENDENTS} />
-          </section>
-          <section>
-            <Section name="Prerequisite Graph" />
-            <p className="text-foreground/70 mb-4 text-sm">
-              Select a quantity to highlight its connections to base and derived
-              quantities.
-            </p>
+          </Section>
+          <Section
+            title="Prerequisite Graph"
+            description={
+              <>
+                Select a quantity to highlight its connections to base and
+                derived quantities.
+              </>
+            }
+          >
             <PrerequisiteGraph
               edges={PREREQUISITE_GRAPH_EDGES}
               nodes={PREREQUISITE_GRAPH_NODES}
             />
-          </section>
+          </Section>
         </div>
       </div>
     </>

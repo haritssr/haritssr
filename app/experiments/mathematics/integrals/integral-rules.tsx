@@ -28,15 +28,19 @@ function Rule({ children, title }: { children: ReactNode; title: string }) {
 
 export default function IntegralRules() {
   return (
-    <section className="text-muted mt-14 max-w-3xl space-y-5 text-base leading-8">
-      <Section name="Where the basic integration rules come from" />
-      <p>
-        Every indefinite-integral rule can be checked by differentiating its
-        answer. If <InlineMath expression="F'(x)=f(x)" />, then{" "}
-        <InlineMath expression={String.raw`\int f(x)\,dx=F(x)+C`} />. The
-        constant <InlineMath expression="C" /> is needed because differentiating
-        any constant gives zero.
-      </p>
+    <Section
+      className="text-muted max-w-3xl text-base"
+      title="Where the basic integration rules come from"
+      description={
+        <>
+          Every indefinite-integral rule can be checked by differentiating its
+          answer. If <InlineMath expression="F'(x)=f(x)" />, then{" "}
+          <InlineMath expression={String.raw`\int f(x)\,dx=F(x)+C`} />. The
+          constant <InlineMath expression="C" /> is needed because
+          differentiating any constant gives zero.
+        </>
+      }
+    >
       <ol className="space-y-8">
         <Rule title="1. Constants, multiples, and sums">
           <p>
@@ -177,6 +181,6 @@ export default function IntegralRules() {
           />
         </Rule>
       </ol>
-    </section>
+    </Section>
   );
 }

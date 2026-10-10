@@ -24,7 +24,7 @@ function Equation({ tex }: { tex: string }) {
 
 export default function EulerIdentityPage() {
   return (
-    <div className="text-foreground space-y-12 pb-24">
+    <div className="text-foreground space-y-20 pb-24">
       <div className="max-w-3xl space-y-5">
         <SubTitle>
           Growth, circles, and imaginary numbers meet in one equation.
@@ -43,49 +43,50 @@ export default function EulerIdentityPage() {
         </p>
       </div>
 
-      <section aria-labelledby="constants-heading" className="space-y-5">
-        <Section id="constants-heading" name="Meet the three constants" />
-        <div className="grid gap-4 md:grid-cols-3">
-          <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
-            <h3 className="text-lg font-semibold">Euler’s number</h3>
-            <Equation tex={String.raw`e\approx2.71828`} />
-            <p className="text-muted text-sm leading-7">
-              The natural base for continuous growth. If interest at a total
-              rate of one per period is compounded more and more frequently, the
-              growth factor approaches {katexify("e", false)}.
-            </p>
-            <Equation
-              tex={String.raw`e=\lim_{n\to\infty}\left(1+\frac1n\right)^n`}
-            />
-          </article>
-          <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
-            <h3 className="text-lg font-semibold">The circle constant</h3>
-            <Equation tex={String.raw`\pi\approx3.14159`} />
-            <p className="text-muted text-sm leading-7">
-              A circle’s circumference divided by its diameter. Radians measure
-              an angle as arc length divided by radius, so a half-turn is{" "}
-              {katexify(String.raw`\pi`, false)} radians.
-            </p>
-            <Equation tex={String.raw`C=2\pi r,\qquad \theta=\frac{s}{r}`} />
-          </article>
-          <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
-            <h3 className="text-lg font-semibold">The imaginary unit</h3>
-            <Equation tex={String.raw`i^2=-1`} />
-            <p className="text-muted text-sm leading-7">
-              A complex number has a real part and an imaginary part. Plotting
-              them on perpendicular axes gives the complex plane. Multiplying by{" "}
-              {katexify("i", false)} makes a counterclockwise quarter-turn.
-            </p>
-            <Equation tex={String.raw`i(a+bi)=-b+ai`} />
-          </article>
-        </div>
-      </section>
-
-      <section
-        aria-labelledby="formula-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        title="Meet the three constants"
+        id="constants-heading"
+        contentClassName="grid gap-4 md:grid-cols-3"
       >
-        <Section id="formula-heading" name="Euler’s formula connects them" />
+        <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
+          <h3 className="text-lg font-semibold">Euler’s number</h3>
+          <Equation tex={String.raw`e\approx2.71828`} />
+          <p className="text-muted text-sm leading-7">
+            The natural base for continuous growth. If interest at a total rate
+            of one per period is compounded more and more frequently, the growth
+            factor approaches {katexify("e", false)}.
+          </p>
+          <Equation
+            tex={String.raw`e=\lim_{n\to\infty}\left(1+\frac1n\right)^n`}
+          />
+        </article>
+        <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
+          <h3 className="text-lg font-semibold">The circle constant</h3>
+          <Equation tex={String.raw`\pi\approx3.14159`} />
+          <p className="text-muted text-sm leading-7">
+            A circle’s circumference divided by its diameter. Radians measure an
+            angle as arc length divided by radius, so a half-turn is{" "}
+            {katexify(String.raw`\pi`, false)} radians.
+          </p>
+          <Equation tex={String.raw`C=2\pi r,\qquad \theta=\frac{s}{r}`} />
+        </article>
+        <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
+          <h3 className="text-lg font-semibold">The imaginary unit</h3>
+          <Equation tex={String.raw`i^2=-1`} />
+          <p className="text-muted text-sm leading-7">
+            A complex number has a real part and an imaginary part. Plotting
+            them on perpendicular axes gives the complex plane. Multiplying by{" "}
+            {katexify("i", false)} makes a counterclockwise quarter-turn.
+          </p>
+          <Equation tex={String.raw`i(a+bi)=-b+ai`} />
+        </article>
+      </Section>
+
+      <Section
+        className="max-w-3xl"
+        title="Euler’s formula connects them"
+        id="formula-heading"
+      >
         <Equation
           tex={String.raw`e^{i\theta}=\cos\theta+i\sin\theta\qquad(\theta\in\mathbb R)`}
         />
@@ -112,24 +113,23 @@ export default function EulerIdentityPage() {
           The factor {katexify("e^a", false)} sets the distance from the origin,
           while {katexify("b", false)} sets the angle in radians.
         </p>
-      </section>
+      </Section>
 
       <UnitCircleLab />
 
-      <section
-        aria-labelledby="identity-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        className="max-w-3xl"
+        title="A half-turn gives Euler’s identity"
+        id="identity-heading"
+        description={
+          <>
+            Substitute {katexify(String.raw`\theta=\pi`, false)} into Euler’s
+            formula. On the unit circle, a half-turn lands on the negative real
+            axis: its real coordinate is {katexify("-1", false)} and its
+            imaginary coordinate is {katexify("0", false)}.
+          </>
+        }
       >
-        <Section
-          id="identity-heading"
-          name="A half-turn gives Euler’s identity"
-        />
-        <p className="text-muted">
-          Substitute {katexify(String.raw`\theta=\pi`, false)} into Euler’s
-          formula. On the unit circle, a half-turn lands on the negative real
-          axis: its real coordinate is {katexify("-1", false)} and its imaginary
-          coordinate is {katexify("0", false)}.
-        </p>
         <ol className="space-y-4">
           <li>
             <p className="mb-2 font-medium">Substitute the half-turn angle</p>
@@ -149,22 +149,21 @@ export default function EulerIdentityPage() {
           special half-turn case, bringing the five constants{" "}
           {katexify(String.raw`e,\pi,i,1,0`, false)} into a single equation.
         </p>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="proof-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        className="max-w-3xl"
+        title="Why an exponential becomes a circle"
+        id="proof-heading"
+        description={
+          <>
+            The picture illustrates the formula, but the power series explain
+            why it is true. The exponential extends to complex inputs using the
+            same series as for real inputs. All three series below converge
+            absolutely for every complex input, so we can group their terms.
+          </>
+        }
       >
-        <Section
-          id="proof-heading"
-          name="Why an exponential becomes a circle"
-        />
-        <p className="text-muted">
-          The picture illustrates the formula, but the power series explain why
-          it is true. The exponential extends to complex inputs using the same
-          series as for real inputs. All three series below converge absolutely
-          for every complex input, so we can group their terms.
-        </p>
         <Accordion>
           <AccordionItem
             panelClassName="bg-transparent"
@@ -207,13 +206,13 @@ export default function EulerIdentityPage() {
             </div>
           </AccordionItem>
         </Accordion>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="takeaways-heading"
-        className="max-w-3xl space-y-5 leading-8"
+      <Section
+        className="max-w-3xl"
+        title="What to remember"
+        id="takeaways-heading"
       >
-        <Section id="takeaways-heading" name="What to remember" />
         <ul className="text-muted list-disc space-y-3 pl-5">
           <li>
             The exponent is the product {katexify(String.raw`i\pi`, false)}.
@@ -252,7 +251,7 @@ export default function EulerIdentityPage() {
           </Link>{" "}
           for the bigger picture of real and complex numbers.
         </p>
-      </section>
+      </Section>
     </div>
   );
 }

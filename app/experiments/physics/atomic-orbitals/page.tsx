@@ -61,135 +61,126 @@ export default function AtomicOrbitalsPage() {
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-8">
         <Contents items={SECTIONS} />
         <div className="min-w-0 space-y-20 lg:col-start-1 lg:row-start-1">
-          <section
-            aria-labelledby="explore-heading"
+          <Section
             className="scroll-mt-28"
             id="explore"
-          >
-            <Section id="explore-heading" name="Start by comparing shapes" />
-            <div className="space-y-4 leading-7">
-              <p>
+            title="Start by comparing shapes"
+
+            description={
+              <>
                 Choose an orbital family, then choose one of its orientations.
                 Rotate the model to see the full three-dimensional pattern.
-              </p>
-              <OrbitalExplorer />
-              <p>
-                Notice where the pattern has lobes and where it has gaps. The
-                gaps are places where the wave is zero; those surfaces help
-                determine each orbital&apos;s shape.
-              </p>
-            </div>
-          </section>
+              </>
+            }
+            contentClassName="space-y-4 leading-7"
+          >
+            <OrbitalExplorer />
+            <p>
+              Notice where the pattern has lobes and where it has gaps. The gaps
+              are places where the wave is zero; those surfaces help determine
+              each orbital&apos;s shape.
+            </p>
+          </Section>
 
-          <section
-            aria-labelledby="angular-shapes-heading"
+          <Section
             className="scroll-mt-28"
             id="angular-shapes"
-          >
-            <Section
-              id="angular-shapes-heading"
-              name="Angular nodes make the shapes"
-            />
-            <div className="space-y-4 leading-7">
-              <p>
+            title="Angular nodes make the shapes"
+
+            description={
+              <>
                 The angular pattern describes how the wave changes with
                 direction. Its zero-amplitude surfaces, called angular nodes,
                 divide the surrounding space into lobes. Changing the angular
                 quantum number {katexify(String.raw`\ell`, false)} changes this
                 pattern.
-              </p>
-              <AngularExplorer />
-              <p>
-                The sequence is{" "}
-                {katexify(
-                  String.raw`s\;(\ell=0),\;p\;(\ell=1),\;d\;(\ell=2)`,
-                  false
-                )}
-                , and {katexify(String.raw`f\;(\ell=3)`, false)}. Each family
-                has {katexify(String.raw`2\ell+1`, false)} orientations: 1, 3,
-                5, and 7. The magnetic quantum number {katexify("m", false)}{" "}
-                distinguishes angular patterns within a family; it does not
-                change the family itself.
-              </p>
-            </div>
-          </section>
+              </>
+            }
+            contentClassName="space-y-4 leading-7"
+          >
+            <AngularExplorer />
+            <p>
+              The sequence is{" "}
+              {katexify(
+                String.raw`s\;(\ell=0),\;p\;(\ell=1),\;d\;(\ell=2)`,
+                false
+              )}
+              , and {katexify(String.raw`f\;(\ell=3)`, false)}. Each family has{" "}
+              {katexify(String.raw`2\ell+1`, false)} orientations: 1, 3, 5, and
+              7. The magnetic quantum number {katexify("m", false)}{" "}
+              distinguishes angular patterns within a family; it does not change
+              the family itself.
+            </p>
+          </Section>
 
-          <section
-            aria-labelledby="probability-heading"
+          <Section
             className="scroll-mt-28"
             id="probability"
-          >
-            <Section
-              id="probability-heading"
-              name="An orbital is a probability pattern"
-            />
-            <div className="space-y-4 leading-7">
-              <p>
+            title="An orbital is a probability pattern"
+
+            description={
+              <>
                 The wavefunction can have positive or negative values. Its sign
                 is not electric charge. Squaring its magnitude,{" "}
                 {katexify(String.raw`|\psi|^2`, false)}, gives the position
                 probability density. Integrating that density over a region
                 gives the probability of finding the electron there.
-              </p>
-              <ProbabilityExplorer />
-              <p className="text-foreground/65 text-sm">
-                The colored lobes are not solid walls. They summarize where the
-                electron is more likely to be found; the color shows the
-                wave&apos;s sign, not a different kind of charge.
-              </p>
-            </div>
-          </section>
+              </>
+            }
+            contentClassName="space-y-4 leading-7"
+          >
+            <ProbabilityExplorer />
+            <p className="text-foreground/65 text-sm">
+              The colored lobes are not solid walls. They summarize where the
+              electron is more likely to be found; the color shows the
+              wave&apos;s sign, not a different kind of charge.
+            </p>
+          </Section>
 
           <POrbitalPattern />
 
-          <section
-            aria-labelledby="radial-nodes-heading"
+          <Section
             className="scroll-mt-28"
             id="radial-nodes"
-          >
-            <Section
-              id="radial-nodes-heading"
-              name="Same shape, different shell"
-            />
-            <div className="space-y-4 leading-7">
-              <p>
+            title="Same shape, different shell"
+
+            description={
+              <>
                 The shell number {katexify("n", false)} changes the radial
                 pattern: how far from the nucleus the electron is likely to be
                 found and how many spherical nodes appear. Changing{" "}
                 {katexify("n", false)} can add radial structure while keeping
                 the same angular family.
-              </p>
-              <Accordion.Root className="w-full" keepMounted multiple>
-                <ExplanationAccordionItem
-                  title="See the radial wave and node rule"
-                  value="radial-wave"
-                >
-                  <p>
-                    For a hydrogen-like orbital, the radial node count is{" "}
-                    {katexify("n - \\ell - 1", false)}. These spherical surfaces
-                    are separate from the angular nodes that shape the lobes.
-                  </p>
-                  <div className="border-border overflow-x-auto rounded-xl border bg-zinc-50 px-4 py-5 text-center">
-                    {katexify(
-                      String.raw`\text{radial nodes}=n-\ell-1\qquad\text{angular nodes}=\ell`,
-                      true
-                    )}
-                  </div>
-                  <RadialExplorer />
-                </ExplanationAccordionItem>
-              </Accordion.Root>
-            </div>
-          </section>
+              </>
+            }
+            contentClassName="space-y-4 leading-7"
+          >
+            <Accordion.Root className="w-full" keepMounted multiple>
+              <ExplanationAccordionItem
+                title="See the radial wave and node rule"
+                value="radial-wave"
+              >
+                <p>
+                  For a hydrogen-like orbital, the radial node count is{" "}
+                  {katexify("n - \\ell - 1", false)}. These spherical surfaces
+                  are separate from the angular nodes that shape the lobes.
+                </p>
+                <div className="border-border overflow-x-auto rounded-xl border bg-zinc-50 px-4 py-5 text-center">
+                  {katexify(
+                    String.raw`\text{radial nodes}=n-\ell-1\qquad\text{angular nodes}=\ell`,
+                    true
+                  )}
+                </div>
+                <RadialExplorer />
+              </ExplanationAccordionItem>
+            </Accordion.Root>
+          </Section>
 
-          <section
-            aria-labelledby="deeper-heading"
+          <Section
             className="scroll-mt-28"
             id="deeper"
+            title="From the equation to an orbital shape"
           >
-            <Section
-              id="deeper-heading"
-              name="From the equation to an orbital shape"
-            />
             <POrbitalDerivation />
             <Accordion.Root className="mt-8 space-y-3" keepMounted multiple>
               <ExplanationAccordionItem
@@ -222,16 +213,15 @@ export default function AtomicOrbitalsPage() {
                 </p>
               </ExplanationAccordionItem>
             </Accordion.Root>
-          </section>
+          </Section>
 
           <OrbitalSymbolGuide />
 
-          <section
-            aria-labelledby="references-heading"
+          <Section
             className="scroll-mt-28"
             id="references"
+            title="Sources and next steps"
           >
-            <Section id="references-heading" name="Sources and next steps" />
             <ul className="text-foreground/70 list-disc space-y-2 pl-5 text-sm leading-6">
               <li>
                 <a
@@ -268,7 +258,7 @@ export default function AtomicOrbitalsPage() {
                 — measured ground-state configurations.
               </li>
             </ul>
-          </section>
+          </Section>
         </div>
       </div>
     </div>

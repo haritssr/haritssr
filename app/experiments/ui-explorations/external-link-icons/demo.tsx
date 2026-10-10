@@ -139,7 +139,7 @@ export default function IconComparison({
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-20">
       <div className="border-border rounded-xl border p-5">
         <div className="grid gap-6 sm:grid-cols-2">
           <label className="space-y-3" htmlFor="external-icon-size">

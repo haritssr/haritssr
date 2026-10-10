@@ -51,7 +51,7 @@ const questions: readonly PracticeQuestion[] = [
 
 export default function DerivativesPage() {
   return (
-    <div className="pb-24">
+    <div className="space-y-20 pb-24">
       <div className="max-w-3xl">
         <SubTitle>
           A derivative gives the slope of a curve at one point. It comes from
@@ -60,13 +60,17 @@ export default function DerivativesPage() {
         <SourceCodeLink />
       </div>
 
-      <section className="text-muted mb-10 max-w-3xl space-y-5 text-base leading-8">
-        <Section name="From average change to change right now" />
-        <p>
-          The slope between two points is a secant slope. Make their horizontal
-          gap smaller and the secant turns toward a tangent. The limit of those
-          secant slopes is the derivative.
-        </p>
+      <Section
+        className="text-muted max-w-3xl text-base"
+        title="From average change to change right now"
+        description={
+          <>
+            The slope between two points is a secant slope. Make their
+            horizontal gap smaller and the secant turns toward a tangent. The
+            limit of those secant slopes is the derivative.
+          </>
+        }
+      >
         <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\text{secant slope}=\frac{f(a+h)-f(a)}{h},\qquad f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}`,
@@ -77,16 +81,20 @@ export default function DerivativesPage() {
           For example, if position changes with time, this same idea turns an
           average velocity over an interval into velocity at an instant.
         </p>
-      </section>
+      </Section>
 
       <DerivativesLab />
 
-      <section className="text-muted mt-12 max-w-3xl space-y-5 text-base leading-8">
-        <Section name="Why the square curve has this slope" />
-        <p>
-          Expand the numerator of the secant slope. Once the nonzero gap
-          cancels, letting the gap approach zero is straightforward.
-        </p>
+      <Section
+        className="text-muted max-w-3xl text-base"
+        title="Why the square curve has this slope"
+        description={
+          <>
+            Expand the numerator of the secant slope. Once the nonzero gap
+            cancels, letting the gap approach zero is straightforward.
+          </>
+        }
+      >
         <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
           {katexify(
             String.raw`\frac{(a+h)^2-a^2}{h}=\frac{2ah+h^2}{h}=2a+h\quad(h\ne0)`,
@@ -106,7 +114,7 @@ export default function DerivativesPage() {
             true
           )}
         </div>
-      </section>
+      </Section>
 
       <Practice questions={questions} />
     </div>
