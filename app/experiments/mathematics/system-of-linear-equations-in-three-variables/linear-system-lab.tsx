@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import katexify from "@/utils/katexify";
 
@@ -40,6 +40,8 @@ const presets = [
 ] as const;
 const rowNames = ["first", "second", "third"] as const;
 const columns = [...variables, "constant"] as const;
+const equationGridClass =
+  "grid grid-cols-[repeat(3,minmax(0,1fr))_auto_minmax(0,1fr)] items-center gap-2";
 const inputClass =
   "border-border text-foreground focus-visible:outline-action min-w-0 w-full rounded-md border px-2 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2";
 const buttonClass =
@@ -155,39 +157,45 @@ export default function LinearSystemLab() {
             variable out of the equation.
           </p>
           <div
-            className="grid grid-cols-4 gap-2 text-center text-sm"
+            className={`${equationGridClass} text-center text-sm`}
             aria-hidden="true"
           >
-            {columns.map((column) => (
-              <span key={column}>
-                {katexify(column === "constant" ? "d" : column, false)}
-              </span>
+            {variables.map((column) => (
+              <span key={column}>{katexify(column, false)}</span>
             ))}
+            <span className="invisible">{katexify("=", false)}</span>
+            <span>{katexify("d", false)}</span>
           </div>
           {rowNames.map((name, rowIndex) => (
             <fieldset key={name}>
               <legend className="mb-2 text-sm font-medium">
                 Equation {rowIndex + 1}
               </legend>
-              <div className="grid grid-cols-4 gap-2">
+              <div className={equationGridClass}>
                 {columns.map((column, columnIndex) => (
-                  <input
-                    aria-label={`${name} equation: ${column === "constant" ? "right-hand side" : `coefficient of ${column}`}`}
-                    className={inputClass}
-                    key={column}
-                    max={ENTRY_LIMIT}
-                    min={-ENTRY_LIMIT}
-                    step="1"
-                    type="number"
-                    value={draft[rowIndex][columnIndex]}
-                    onChange={(event) => {
-                      updateCoefficient(
-                        rowIndex,
-                        columnIndex,
-                        event.currentTarget.value
-                      );
-                    }}
-                  />
+                  <Fragment key={column}>
+                    {column === "constant" ? (
+                      <span aria-hidden="true" className="text-muted">
+                        {katexify("=", false)}
+                      </span>
+                    ) : null}
+                    <input
+                      aria-label={`${name} equation: ${column === "constant" ? "right-hand side" : `coefficient of ${column}`}`}
+                      className={inputClass}
+                      max={ENTRY_LIMIT}
+                      min={-ENTRY_LIMIT}
+                      step="1"
+                      type="number"
+                      value={draft[rowIndex][columnIndex]}
+                      onChange={(event) => {
+                        updateCoefficient(
+                          rowIndex,
+                          columnIndex,
+                          event.currentTarget.value
+                        );
+                      }}
+                    />
+                  </Fragment>
                 ))}
               </div>
             </fieldset>

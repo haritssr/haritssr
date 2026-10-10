@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -39,22 +40,86 @@ const exercises = [
     prompt: "Solve by substitution or elimination.",
     system: String.raw`\begin{cases}x+y+z=6\\x-y=0\\z=2\end{cases}`,
     answer: String.raw`x=y=2,\qquad z=2`,
-    explanation:
-      "The last equation fixes the third variable. The second makes the first two equal, and the first then gives twice either of them as four.",
+    steps: [
+      {
+        title: "Read the known variable",
+        explanation: "The third equation already gives one variable directly.",
+        equation: String.raw`z=2`,
+      },
+      {
+        title: "Relate the remaining variables",
+        explanation:
+          "Rearrange the second equation to express one variable in terms of the other.",
+        equation: String.raw`x-y=0\quad\Longrightarrow\quad x=y`,
+      },
+      {
+        title: "Substitute into the first equation",
+        explanation:
+          "Use both results in the first equation, then solve and substitute back.",
+        equation: String.raw`\begin{aligned}y+y+2&=6\\2y&=4\\y&=2\\x&=2\end{aligned}`,
+      },
+      {
+        title: "Check all three equations",
+        explanation:
+          "The values satisfy every original equation, so this is the unique solution.",
+        equation: String.raw`\begin{aligned}2+2+2&=6\\2-2&=0\\z&=2\end{aligned}`,
+      },
+    ],
   },
   {
     prompt: "Find a family of solutions, not just one point.",
     system: String.raw`\begin{cases}x+y+z=4\\2x+2y+2z=8\\x-y=0\end{cases}`,
     answer: String.raw`\begin{aligned}x&=t\\y&=t\\z&=4-2t\end{aligned}\qquad t\in\mathbb{R}`,
-    explanation:
-      "The second equation repeats the first. The third makes the first two variables equal. Choose their common value freely and use the first equation to find the third.",
+    steps: [
+      {
+        title: "Remove the repeated equation",
+        explanation:
+          "The second equation is twice the first, so subtracting twice the first leaves an identity and adds no constraint.",
+        equation: String.raw`R_2-2R_1:\quad 0=8-2(4)=0`,
+      },
+      {
+        title: "Choose a free parameter",
+        explanation:
+          "The third equation makes the first two variables equal. Their common value can be any real number.",
+        equation: String.raw`x-y=0\quad\Longrightarrow\quad x=y=t,\qquad t\in\mathbb{R}`,
+      },
+      {
+        title: "Find the remaining variable",
+        explanation:
+          "Substitute the parameter into the first equation and rearrange.",
+        equation: String.raw`t+t+z=4\quad\Longrightarrow\quad z=4-2t`,
+      },
+      {
+        title: "Check the whole family",
+        explanation:
+          "Every real parameter value satisfies all three equations, giving infinitely many solutions.",
+        equation: String.raw`\begin{aligned}t+t+(4-2t)&=4\\2t+2t+2(4-2t)&=8\\t-t&=0\end{aligned}`,
+      },
+    ],
   },
   {
     prompt: "Decide whether the system is consistent.",
     system: String.raw`\begin{cases}x+y+z=4\\2x+2y+2z=9\\x-y+z=1\end{cases}`,
-    answer: String.raw`R_2-2R_1:\quad0=1`,
-    explanation:
-      "Twice the first equation would give a right-hand side of eight, but the second says nine. That contradiction is enough to rule out every possible solution.",
+    answer: String.raw`\text{Solution set: }\varnothing`,
+    steps: [
+      {
+        title: "Double the first equation",
+        explanation:
+          "Match the coefficients in the second equation by multiplying the entire first equation by two.",
+        equation: String.raw`2R_1:\quad 2x+2y+2z=8`,
+      },
+      {
+        title: "Subtract from the second equation",
+        explanation: "All variable terms cancel, but the constants differ.",
+        equation: String.raw`R_2-2R_1:\quad 0=9-8=1`,
+      },
+      {
+        title: "Interpret the contradiction",
+        explanation:
+          "Zero cannot equal one. No triple can satisfy the first two equations together, so the third equation cannot make the system consistent. There is no solution.",
+        equation: String.raw`0\ne 1`,
+      },
+    ],
   },
 ];
 
@@ -69,7 +134,7 @@ function Equation({ tex }: { tex: string }) {
 export default function LinearEquationsThreeVariablesPage() {
   return (
     <div className="text-foreground pb-24">
-      <div className="mb-10 max-w-3xl">
+      <div className="mb-10">
         <SubTitle>
           Find a triple that satisfies three equations at once. Learn
           elimination, interpret the geometry, and explore what changes when
@@ -80,7 +145,7 @@ export default function LinearEquationsThreeVariablesPage() {
 
       <section
         aria-labelledby="linear-system-basics-heading"
-        className="mb-10 max-w-3xl space-y-5 text-base leading-8"
+        className="mb-10 space-y-5 text-base leading-8"
       >
         <Section
           id="linear-system-basics-heading"
@@ -107,7 +172,7 @@ export default function LinearEquationsThreeVariablesPage() {
 
       <section aria-labelledby="planes-heading" className="mb-10 space-y-5">
         <Section id="planes-heading" name="Think of intersecting planes" />
-        <p className="text-muted max-w-3xl text-base leading-8">
+        <p className="text-muted text-base leading-8">
           When at least one variable coefficient is nonzero, an equation
           describes a plane in three-dimensional space. Solving the system means
           finding the intersection shared by all three planes. Three equations
@@ -129,7 +194,7 @@ export default function LinearEquationsThreeVariablesPage() {
             </article>
           ))}
         </div>
-        <p className="text-muted max-w-3xl text-sm leading-7">
+        <p className="text-muted text-sm leading-7">
           A zero row such as {katexify("0=0", false)} carries no new
           information; it does not by itself prove inconsistency. A row such as{" "}
           {katexify("0=1", false)} is impossible. If every equation is an
@@ -139,7 +204,7 @@ export default function LinearEquationsThreeVariablesPage() {
 
       <section
         aria-labelledby="elimination-heading"
-        className="mb-10 max-w-3xl space-y-6 text-base leading-8"
+        className="mb-10 space-y-6 text-base leading-8"
       >
         <Section
           id="elimination-heading"
@@ -196,7 +261,7 @@ export default function LinearEquationsThreeVariablesPage() {
 
       <section
         aria-labelledby="matrix-heading"
-        className="mb-8 max-w-3xl space-y-5 text-base leading-8"
+        className="mb-8 space-y-5 text-base leading-8"
       >
         <Section
           id="matrix-heading"
@@ -228,7 +293,7 @@ export default function LinearEquationsThreeVariablesPage() {
 
       <section
         aria-labelledby="reading-solutions-heading"
-        className="mt-12 max-w-3xl space-y-5 text-base leading-8"
+        className="mt-12 space-y-5 text-base leading-8"
       >
         <Section id="reading-solutions-heading" name="Read the final rows" />
         <p className="text-muted">
@@ -260,7 +325,7 @@ export default function LinearEquationsThreeVariablesPage() {
 
       <section
         aria-labelledby="modeling-heading"
-        className="mt-12 max-w-3xl space-y-5 text-base leading-8"
+        className="mt-12 space-y-5 text-base leading-8"
       >
         <Section
           id="modeling-heading"
@@ -289,7 +354,8 @@ export default function LinearEquationsThreeVariablesPage() {
       >
         <Section id="linear-system-practice-heading" name="Try it yourself" />
         <p className="text-muted text-base leading-8">
-          Solve or classify each system before revealing the explanation.
+          Solve or classify each system before revealing the step-by-step
+          solution.
         </p>
         <ol className="space-y-4">
           {exercises.map((exercise, index) => (
@@ -303,17 +369,35 @@ export default function LinearEquationsThreeVariablesPage() {
               <div className="overflow-x-auto py-3 text-sm sm:text-base">
                 {katexify(exercise.system, true)}
               </div>
-              <details className="border-border border-t pt-3">
-                <summary className="focus-visible:outline-action cursor-pointer rounded-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4">
-                  Show explanation
-                </summary>
-                <div className="overflow-x-auto py-3 text-sm sm:text-base">
-                  {katexify(exercise.answer, true)}
-                </div>
-                <p className="text-muted text-sm leading-6">
-                  {exercise.explanation}
-                </p>
-              </details>
+              <Accordion>
+                <AccordionItem
+                  panelClassName="bg-transparent"
+                  title="Show step-by-step solution"
+                  value={`exercise-${index + 1}-solution`}
+                >
+                  <ol className="list-decimal space-y-5 pl-5">
+                    {exercise.steps.map((step) => (
+                      <li className="pl-1" key={step.title}>
+                        <h4 className="text-foreground font-semibold">
+                          {step.title}
+                        </h4>
+                        <p className="text-muted mt-1 leading-6">
+                          {step.explanation}
+                        </p>
+                        <div className="overflow-x-auto py-3 text-sm sm:text-base">
+                          {katexify(step.equation, true)}
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <div className="border-border border-t pt-3">
+                    <p className="text-foreground font-semibold">Answer</p>
+                    <div className="overflow-x-auto py-3 text-sm sm:text-base">
+                      {katexify(exercise.answer, true)}
+                    </div>
+                  </div>
+                </AccordionItem>
+              </Accordion>
             </li>
           ))}
         </ol>
