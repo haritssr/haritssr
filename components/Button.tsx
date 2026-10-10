@@ -43,11 +43,7 @@ const Button = function Button({
       ref={ref}
       type={type}
     >
-      {loading ? (
-        <span>Loading…</span>
-      ) : (
-        <span className="inline-flex items-center gap-1.5">{children}</span>
-      )}
+      {loading ? <span>Loading…</span> : children}
     </button>
   );
 };
