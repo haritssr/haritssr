@@ -102,14 +102,11 @@ function ExperimentList({
               </InternalLink>
             </span>
             <span className="text-muted inline-flex shrink-0 items-center gap-1 text-sm font-normal whitespace-nowrap">
-              <ClockIcon aria-hidden="true" className="size-4 sm:hidden" />
-              <span className="sr-only sm:not-sr-only">Last update:</span>
+              <ClockIcon aria-hidden="true" className="size-4" />
+              <span className="sr-only">Last update:</span>
               <time dateTime={updatedAt}>
-                <span aria-hidden="true" className="sm:hidden">
+                <span aria-hidden="true">
                   {`'${updatedAt.slice(2).replaceAll("-", "/")}`}
-                </span>
-                <span aria-hidden="true" className="hidden sm:inline">
-                  {updatedAt}
                 </span>
                 <span className="sr-only">{updatedAt}</span>
               </time>
