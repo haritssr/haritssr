@@ -84,10 +84,14 @@ function ExperimentList({
   domainSlug: string;
   experiments: readonly ExperimentEntry[];
 }) {
+  const showUpdate = domainSlug !== "physics" && domainSlug !== "mathematics";
+
   return (
     <ol className="space-y-3">
       {experiments.map((experiment) => {
-        const updatedAt = getLatestExperimentUpdate(experiment);
+        const updatedAt = showUpdate
+          ? getLatestExperimentUpdate(experiment)
+          : null;
 
         return (
           <li
@@ -101,16 +105,18 @@ function ExperimentList({
                 {experiment.title}
               </InternalLink>
             </span>
-            <span className="text-muted inline-flex shrink-0 items-center gap-1 text-sm font-normal whitespace-nowrap">
-              <ClockIcon aria-hidden="true" className="size-4" />
-              <span className="sr-only">Last update:</span>
-              <time dateTime={updatedAt}>
-                <span aria-hidden="true">
-                  {`'${updatedAt.slice(2).replaceAll("-", "/")}`}
-                </span>
-                <span className="sr-only">{updatedAt}</span>
-              </time>
-            </span>
+            {updatedAt === null ? null : (
+              <span className="text-muted inline-flex shrink-0 items-center gap-1 text-sm font-normal whitespace-nowrap">
+                <ClockIcon aria-hidden="true" className="size-4" />
+                <span className="sr-only">Last update:</span>
+                <time dateTime={updatedAt}>
+                  <span aria-hidden="true">
+                    {`'${updatedAt.slice(2).replaceAll("-", "/")}`}
+                  </span>
+                  <span className="sr-only">{updatedAt}</span>
+                </time>
+              </span>
+            )}
           </li>
         );
       })}
