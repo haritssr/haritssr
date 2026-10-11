@@ -9,7 +9,7 @@ export interface RouteDoc {
 export const apiRoute: RouteDoc = {
   route: "/api",
   title: "API",
-  description: "Browse the API endpoints available on this site.",
+  description: "Explore data and image endpoints for this site.",
   group: "Navigation",
 };
 
