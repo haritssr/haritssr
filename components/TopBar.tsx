@@ -22,7 +22,7 @@ export default function TopBar() {
   return (
     <nav
       aria-label="Primary navigation"
-      className="sticky top-0 z-30"
+      className="sticky top-0 z-30 select-none"
       ref={navigationRef}
     >
       <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-5 pt-5 sm:py-5 xl:px-0">
