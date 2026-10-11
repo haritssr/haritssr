@@ -56,8 +56,8 @@ When mistakes recur, strengthen reusable checks and guardrails.
 - Use the shared `Section` for a semantic section with a title and content:
   `<Section title="Title">...</Section>`. It renders the section and its heading
   and manages `aria-labelledby`. Each section uses the shared `space-y-5`
-  spacing and `leading-8` line height; `className` adds layout classes to the
-  outer section.
+  spacing, without a global line height; `className` adds layout classes to
+  the outer section.
 - Use the optional `description` for an introductory paragraph. It accepts
   React content such as links and inline KaTeX, and `Section` gives it the
   shared muted color and full available width. Sections, descriptions, prose,

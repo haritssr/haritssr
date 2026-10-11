@@ -36,8 +36,8 @@ export default function Section({
   const hasContentClassName =
     contentClassName !== undefined && contentClassName.length > 0;
   const sectionClassName = hasClassName
-    ? `space-y-5 leading-8 ${className}`
-    : "space-y-5 leading-8";
+    ? `space-y-5 ${className}`
+    : "space-y-5";
   const hasChildren = children !== undefined && children !== null;
 
   return (

@@ -157,9 +157,9 @@ export default function DesignSystem() {
           description={
             <>
               Section groups content under an accessible heading with shared
-              spacing and line height. Sections, descriptions, and body content
-              use the full available width within the page container. Use
-              SectionHeading when a layout only needs a heading.
+              spacing. Sections, descriptions, and body content use the full
+              available width within the page container. Use SectionHeading when
+              a layout only needs a heading.
             </>
           }
           contentClassName={
