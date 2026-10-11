@@ -2,8 +2,8 @@ export const SITE_URL = "https://haritssr.com";
 export const SITE_THEME_COLOR = "#FAFCF2";
 export const SITE_DARK_THEME_COLOR = "#18181b";
 export const RSS_PATH = "/feed.xml";
-export const BLOG_PATH = "/blog";
-export const BLOG_DESCRIPTION =
+export const WRITING_PATH = "/writing";
+export const WRITING_DESCRIPTION =
   "Selected notes that I want to share to the world.";
 
 const SOURCE_CODE_BASE_URL = "https://github.com/haritssr/haritssr/tree/main";

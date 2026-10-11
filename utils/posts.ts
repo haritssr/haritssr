@@ -45,7 +45,7 @@ function readPost(fileName: string) {
   };
 }
 
-// Keep one local-content snapshot per module, matching the blog post index.
+// Keep one local-content snapshot per module, matching the writing post index.
 const posts = getPostFileNames().map(readPost);
 const postsById = new Map(posts.map((post) => [post.id, post]));
 const postSummaries = posts

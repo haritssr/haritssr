@@ -159,14 +159,16 @@ creation date, and update-date history in `data/ExperimentsData.ts`. The explore
 search, metadata, and sitemap derive their records from that catalog. Append an
 update date once per calendar day and retain the creation date and prior history.
 
-Blog posts are local MDX files in `data/blog/`; Turbopack discovers their compiled
+Writing posts are local MDX files in `data/writing/`; Turbopack discovers their compiled
 modules lazily, while frontmatter is validated on the server. Adding a post does
 not require editing a separate import registry.
+The section lives at `/writing`; `next.config.ts` permanently redirects the
+previous `/blog` index and post URLs to their matching Writing routes.
 
 ## Architecture Decisions
 
 - Next.js App Router replaces Pages Router.
-- Next.js MDX replaces Content Collections for blog content.
+- Next.js MDX replaces Content Collections for writing content.
 - Turbopack discovers MDX files automatically, replacing the manual import registry.
 - Ultracite with Oxlint and Oxfmt replaces Biome.
 - Native APIs replace Effect, date-fns, and react-use in small helpers.
@@ -262,16 +264,16 @@ caches and preserve unrelated caches. No full offline-content support is promise
 
 ## RSS Feed
 
-The blog RSS feed is available at [`/feed.xml`](https://haritssr.com/feed.xml).
+The writing RSS feed is available at [`/feed.xml`](https://haritssr.com/feed.xml).
 The site footer includes a link to the feed. Visitors can paste this URL into
 an RSS reader such as Feedly, Inoreader, NetNewsWire, or Thunderbird.
 
-The feed is generated from the local blog post index:
+The feed is generated from the local writing post index:
 
-1. Blog posts are added to `data/blog/*.mdx` with a `publishedAt` value in
+1. Writing posts are added to `data/writing/*.mdx` with a `publishedAt` value in
    `YYYY-MM-DD` format.
-2. `utils/blog-posts.ts` parses and validates the frontmatter, derives the slug
-   and word count, and loads the posts into `allBlogPosts`.
+2. `utils/writing-posts.ts` parses and validates the frontmatter, derives the slug
+   and word count, and loads the posts into `allWritingPosts`.
 3. `app/feed.xml/route.ts` passes the collection to `app/feed.xml/rss.ts`.
 4. The renderer creates an RSS 2.0 document with each post's title,
    summary, canonical URL, and publication date.

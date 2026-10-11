@@ -1,26 +1,28 @@
 import "server-only";
 import type { MDXContent } from "mdx/types";
 
-import { blogModules } from "@/data/blog/modules";
+import { writingModules } from "@/data/writing/modules";
 
-interface BlogModule {
+interface WritingModule {
   default: MDXContent;
 }
 
-export function getBlogModule(slug: string): Promise<BlogModule> | undefined {
+export function getWritingModule(
+  slug: string
+): Promise<WritingModule> | undefined {
   const path = `./${slug}.mdx`;
-  if (!Object.hasOwn(blogModules, path)) {
+  if (!Object.hasOwn(writingModules, path)) {
     return undefined;
   }
-  return blogModules[path]().then((module) => {
-    if (!isBlogModule(module)) {
+  return writingModules[path]().then((module) => {
+    if (!isWritingModule(module)) {
       throw new TypeError(`Invalid MDX module: ${slug}`);
     }
     return module;
   });
 }
 
-function isBlogModule(value: unknown): value is BlogModule {
+function isWritingModule(value: unknown): value is WritingModule {
   return (
     typeof value === "object" &&
     value !== null &&

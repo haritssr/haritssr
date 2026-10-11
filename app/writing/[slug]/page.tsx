@@ -3,14 +3,14 @@ import { notFound } from "next/navigation";
 import type React from "react";
 
 import BackButton from "@/components/BackButton";
-import { allBlogPosts, getBlogPost } from "@/utils/blog-posts";
 import { createPageMetadata } from "@/utils/pageMetadata";
+import { allWritingPosts, getWritingPost } from "@/utils/writing-posts";
 
-import { getBlogModule } from "./blog-modules";
 import TableOfContents from "./TableOfContent";
+import { getWritingModule } from "./writing-modules";
 
 export function generateStaticParams() {
-  return allBlogPosts.map((post) => ({
+  return allWritingPosts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -21,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = getWritingPost(slug);
 
   if (!post) {
     return {};
@@ -37,28 +37,28 @@ export async function generateMetadata({
   return createPageMetadata({
     title,
     description,
-    path: `/blog/${postSlug}`,
+    path: `/writing/${postSlug}`,
     publishedTime,
   });
 }
 
 export const dynamicParams = false;
 
-const blogDateFormatter = new Intl.DateTimeFormat("en-US", {
+const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   month: "long",
   timeZone: "UTC",
   year: "numeric",
 });
 
-export default async function BlogPostPage({
+export default async function WritingPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
-  const postModule = getBlogModule(slug);
+  const post = getWritingPost(slug);
+  const postModule = getWritingModule(slug);
 
   if (!(post && postModule)) {
     notFound();
@@ -71,7 +71,7 @@ export default async function BlogPostPage({
       {/*<LeftBar />*/}
       <Content>
         <div className="mt-5 mb-10">
-          <BackButton href="/blog" name="All Posts" />
+          <BackButton href="/writing" name="All Posts" />
         </div>
 
         <h1 className="text-foreground text-2xl font-bold tracking-tighter sm:text-3xl">
@@ -98,7 +98,7 @@ export default async function BlogPostPage({
 }
 
 function formatDate(date: string) {
-  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
+  return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
 }
 
 function Content({ children }: { children: React.ReactNode }) {

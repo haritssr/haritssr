@@ -8,7 +8,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
-import BlogGrid from "@/components/BlogGrid";
 import ContactList from "@/components/ContactList";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import ExternalLink from "@/components/ExternalLink";
@@ -16,6 +15,7 @@ import HomeSearch from "@/components/HomeSearch";
 import MoreItemsLink from "@/components/MoreItemsLink";
 import ProjectsCard from "@/components/ProjectsCard";
 import { PageStructuredData } from "@/components/StructuredData";
+import WritingGrid from "@/components/WritingGrid";
 import { ProjectsData } from "@/data/ProjectsData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -52,8 +52,8 @@ export default function Home() {
         <ExperimentsGrid headingLevel={3} mobileLimit={4} />
       </Section>
 
-      <Section className="grid grid-cols-1" id="blog" title="Blog">
-        <BlogGrid headingLevel={3} mobileLimit={5} />
+      <Section className="grid grid-cols-1" id="writing" title="Writing">
+        <WritingGrid headingLevel={3} mobileLimit={5} />
       </Section>
 
       <MoreDetails />

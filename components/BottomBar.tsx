@@ -102,7 +102,7 @@ const TitleAndPathData = [
         strokeLinejoin="round"
       />
     ),
-    title: "Blog",
+    title: "Writing",
   },
 
   {

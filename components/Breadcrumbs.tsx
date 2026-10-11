@@ -13,7 +13,7 @@ const segmentSeparatorPattern = /[-_]+/g;
 const mainRoutes = new Set([
   "projects",
   "experiments",
-  "blog",
+  "writing",
   "design",
   "api",
 ]);

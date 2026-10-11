@@ -1,25 +1,25 @@
 import TopLevelSectionPageDescription from "components/TopLevelSectionPageDescription";
 import type { Metadata } from "next";
 
-import BlogGrid from "@/components/BlogGrid";
 import PageTitle from "@/components/PageTitle";
+import WritingGrid from "@/components/WritingGrid";
 import { createPageMetadata } from "@/utils/pageMetadata";
-import { BLOG_DESCRIPTION } from "@/utils/site";
+import { WRITING_DESCRIPTION } from "@/utils/site";
 
 export const metadata: Metadata = createPageMetadata({
-  path: "/blog",
-  title: "Blog",
-  description: BLOG_DESCRIPTION,
+  path: "/writing",
+  title: "Writing",
+  description: WRITING_DESCRIPTION,
 });
 
-export default function BlogPage() {
+export default function WritingPage() {
   return (
     <>
-      <PageTitle>Blog</PageTitle>
+      <PageTitle>Writing</PageTitle>
       <TopLevelSectionPageDescription>
-        {BLOG_DESCRIPTION}
+        {WRITING_DESCRIPTION}
       </TopLevelSectionPageDescription>
-      <BlogGrid />
+      <WritingGrid />
     </>
   );
 }

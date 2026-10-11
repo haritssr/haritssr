@@ -1,11 +1,11 @@
-import { allBlogPosts } from "@/utils/blog-posts";
+import { allWritingPosts } from "@/utils/writing-posts";
 
-import { renderBlogRssFeed } from "./rss";
+import { renderWritingRssFeed } from "./rss";
 
 export const dynamic = "force-static";
 
 export function GET() {
-  return new Response(renderBlogRssFeed(allBlogPosts), {
+  return new Response(renderWritingRssFeed(allWritingPosts), {
     headers: {
       "Content-Type": "application/rss+xml; charset=utf-8",
     },

@@ -2,9 +2,9 @@ import "server-only";
 import { ProjectsData } from "@/data/ProjectsData";
 import { apiRoute, navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
-import { allBlogPosts } from "@/utils/blog-posts";
 import { getExperimentRoutes } from "@/utils/experimentRoutes";
 import { getProjectSlug } from "@/utils/projectSlug";
+import { allWritingPosts } from "@/utils/writing-posts";
 
 const homeSections: RouteDoc[] = [
   {
@@ -23,9 +23,9 @@ const homeSections: RouteDoc[] = [
     description: "Featured experiments on the homepage",
   },
   {
-    route: "/#blog",
-    title: "Blog",
-    description: "Recent blog posts on the homepage",
+    route: "/#writing",
+    title: "Writing",
+    description: "Recent writing posts on the homepage",
   },
   { route: "/#misc", title: "More", description: "More about Harits Syah" },
 ].map((doc) => ({
@@ -47,11 +47,11 @@ export function getSearchIndex(): RouteDoc[] {
       description: project.about_client.short_about,
       group: "Projects",
     })),
-    ...allBlogPosts.map((post) => ({
-      route: `/blog/${post.slug}`,
+    ...allWritingPosts.map((post) => ({
+      route: `/writing/${post.slug}`,
       title: post.title,
       description: post.summary,
-      group: "Blog",
+      group: "Writing",
     })),
   ];
 

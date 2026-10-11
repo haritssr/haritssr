@@ -5,7 +5,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { z } from "zod";
 
-const blogPostsDirectory = path.join(process.cwd(), "data/blog");
+const writingPostsDirectory = path.join(process.cwd(), "data/writing");
 const mdxFileExtensionPattern = /\.mdx$/;
 const wordSeparatorPattern = /\s+/;
 
@@ -15,19 +15,19 @@ const publicationDateSchema = z
     date instanceof Date ? date.toISOString().slice(0, 10) : date
   );
 
-const blogPostSummarySchema = z
+const writingPostSummarySchema = z
   .string()
   .refine((summary) => countWords(summary) === 6, {
     message: "Summary must contain exactly 6 words",
   });
 
-const blogPostFrontmatterSchema = z.strictObject({
+const writingPostFrontmatterSchema = z.strictObject({
   publishedAt: publicationDateSchema,
-  summary: blogPostSummarySchema,
+  summary: writingPostSummarySchema,
   title: z.string(),
 });
 
-export interface BlogPost {
+export interface WritingPost {
   publishedAt: string;
   slug: string;
   summary: string;
@@ -40,11 +40,14 @@ function countWords(content: string): number {
     .length;
 }
 
-export function parseBlogPost(fileName: string, source: string): BlogPost {
+export function parseWritingPost(
+  fileName: string,
+  source: string
+): WritingPost {
   const { content, data } = matter(source);
 
   try {
-    const frontmatter = blogPostFrontmatterSchema.parse(data);
+    const frontmatter = writingPostFrontmatterSchema.parse(data);
 
     return {
       ...frontmatter,
@@ -52,21 +55,21 @@ export function parseBlogPost(fileName: string, source: string): BlogPost {
       wordCount: countWords(content),
     };
   } catch (error) {
-    throw new Error(`Invalid blog post frontmatter in ${fileName}`, {
+    throw new Error(`Invalid writing post frontmatter in ${fileName}`, {
       cause: error,
     });
   }
 }
 
-function loadBlogPosts(): readonly BlogPost[] {
+function loadWritingPosts(): readonly WritingPost[] {
   return Object.freeze(
     fs
-      .readdirSync(blogPostsDirectory, { withFileTypes: true })
+      .readdirSync(writingPostsDirectory, { withFileTypes: true })
       .filter((entry) => entry.isFile() && entry.name.endsWith(".mdx"))
       .map((entry) =>
-        parseBlogPost(
+        parseWritingPost(
           entry.name,
-          fs.readFileSync(path.join(blogPostsDirectory, entry.name), "utf-8")
+          fs.readFileSync(path.join(writingPostsDirectory, entry.name), "utf-8")
         )
       )
       .toSorted(
@@ -77,10 +80,12 @@ function loadBlogPosts(): readonly BlogPost[] {
   );
 }
 
-export const allBlogPosts = loadBlogPosts();
+export const allWritingPosts = loadWritingPosts();
 
-const blogPostsBySlug = new Map(allBlogPosts.map((post) => [post.slug, post]));
+const writingPostsBySlug = new Map(
+  allWritingPosts.map((post) => [post.slug, post])
+);
 
-export function getBlogPost(slug: string): BlogPost | undefined {
-  return blogPostsBySlug.get(slug);
+export function getWritingPost(slug: string): WritingPost | undefined {
+  return writingPostsBySlug.get(slug);
 }

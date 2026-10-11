@@ -36,8 +36,8 @@ export const navigationRoutes: readonly RouteDoc[] = [
     suggestion: "Navigation",
   },
   {
-    route: "/blog",
-    title: "Blog",
+    route: "/writing",
+    title: "Writing",
     description: "Notes, ideas, and articles",
     group: "Navigation",
     suggestion: "Navigation",

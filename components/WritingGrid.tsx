@@ -1,25 +1,25 @@
 import Link from "next/link";
 
-import type { BlogPost } from "@/utils/blog-posts";
-import { allBlogPosts } from "@/utils/blog-posts";
+import type { WritingPost } from "@/utils/writing-posts";
+import { allWritingPosts } from "@/utils/writing-posts";
 
 import MoreItemsLink from "./MoreItemsLink";
 
-const blogDateFormatter = new Intl.DateTimeFormat("en-US", {
+const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   month: "short",
   timeZone: "UTC",
 });
 
-interface BlogPostGroup {
+interface WritingPostGroup {
   firstIndex: number;
-  posts: BlogPost[];
+  posts: WritingPost[];
   year: string;
 }
 
-const blogPostGroups = groupBlogPostsByYear(allBlogPosts);
+const writingPostGroups = groupWritingPostsByYear(allWritingPosts);
 
-export default function BlogGrid({
+export default function WritingGrid({
   mobileLimit,
   headingLevel = 2,
 }: {
@@ -30,12 +30,12 @@ export default function BlogGrid({
   const remainingPosts =
     mobileLimit === undefined
       ? 0
-      : Math.max(allBlogPosts.length - mobileLimit, 0);
+      : Math.max(allWritingPosts.length - mobileLimit, 0);
 
   return (
     <>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        {blogPostGroups.map((group) => {
+        {writingPostGroups.map((group) => {
           const groupIsHiddenOnMobile =
             mobileLimit !== undefined && group.firstIndex >= mobileLimit;
 
@@ -62,7 +62,7 @@ export default function BlogGrid({
                     >
                       <Link
                         className="group hover:bg-interface-hover flex flex-col px-3 py-2.5 transition-colors"
-                        href={`/blog/${post.slug}`}
+                        href={`/writing/${post.slug}`}
                         prefetch={false}
                       >
                         <div className="flex w-full items-center justify-between">
@@ -93,7 +93,7 @@ export default function BlogGrid({
         <MoreItemsLink
           className="mt-5 sm:hidden!"
           count={remainingPosts}
-          href="/blog"
+          href="/writing"
           itemName="post"
         />
       ) : null}
@@ -102,11 +102,13 @@ export default function BlogGrid({
 }
 
 function formatDate(date: string) {
-  return blogDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
+  return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
 }
 
-function groupBlogPostsByYear(posts: readonly BlogPost[]): BlogPostGroup[] {
-  const groups: BlogPostGroup[] = [];
+function groupWritingPostsByYear(
+  posts: readonly WritingPost[]
+): WritingPostGroup[] {
+  const groups: WritingPostGroup[] = [];
 
   for (const [index, post] of posts.entries()) {
     const year = post.publishedAt.slice(0, 4);

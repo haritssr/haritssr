@@ -36,7 +36,12 @@ interface SearchMatchTextProps {
   text: string;
 }
 
-const MAIN_ROUTES = new Set(["/projects", "/experiments", "/blog", "/design"]);
+const MAIN_ROUTES = new Set([
+  "/projects",
+  "/experiments",
+  "/writing",
+  "/design",
+]);
 
 export default function GlobalSearchDialog({
   entries,
@@ -84,8 +89,8 @@ export default function GlobalSearchDialog({
           />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Search navigation, projects, blog, design, and experiments. Use the
-            arrow keys to browse results and Enter to open a page.
+            Search navigation, projects, writing, design, and experiments. Use
+            the arrow keys to browse results and Enter to open a page.
           </Dialog.Description>
           <Autocomplete.Root
             autoHighlight="always"
@@ -113,7 +118,7 @@ export default function GlobalSearchDialog({
                 autoComplete="off"
                 className="placeholder:text-muted min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
                 enterKeyHint="go"
-                placeholder="Search pages, projects, experiments, blog…"
+                placeholder="Search pages, projects, experiments, writing…"
                 ref={inputRef}
                 spellCheck={false}
               />

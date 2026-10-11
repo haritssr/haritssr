@@ -12,7 +12,7 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 import TopBarSearch from "@/components/TopBarSearch";
 import useScrolledExperiment from "@/components/useScrolledExperiment";
 
-const destinations = ["projects", "experiments", "blog", "design"] as const;
+const destinations = ["projects", "experiments", "writing", "design"] as const;
 
 export default function TopBar() {
   const pathname = usePathname();

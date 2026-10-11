@@ -9,10 +9,10 @@ import {
   ExperimentsData,
   getLatestExperimentUpdate,
 } from "@/data/ExperimentsData";
-import { parseBlogPost } from "@/utils/blog-posts";
 import { getAvailableExperimentSummaries } from "@/utils/experimentCatalog";
 import { getExperimentRoutes } from "@/utils/experimentRoutes";
 import { getSearchIndex } from "@/utils/searchIndex";
+import { parseWritingPost } from "@/utils/writing-posts";
 
 const failures: string[] = [];
 const catalogRoutes = new Set<string>();
@@ -116,12 +116,15 @@ for (const domain of readdirSync("app/experiments", { withFileTypes: true })) {
   }
 }
 
-const blogFiles = readdirSync("data/blog").filter((file) =>
+const writingFiles = readdirSync("data/writing").filter((file) =>
   file.endsWith(".mdx")
 );
-for (const file of blogFiles) {
+for (const file of writingFiles) {
   try {
-    parseBlogPost(file, readFileSync(path.join("data/blog", file), "utf-8"));
+    parseWritingPost(
+      file,
+      readFileSync(path.join("data/writing", file), "utf-8")
+    );
   } catch (error) {
     failures.push(String(error));
   }
@@ -189,6 +192,6 @@ if (failures.length > 0) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Validated ${catalogRoutes.size} experiments in ${domains.size} domains, ${blogFiles.length} blog posts, and ${available.length} available experiments (${process.env.NODE_ENV ?? "development"}).`
+    `Validated ${catalogRoutes.size} experiments in ${domains.size} domains, ${writingFiles.length} writing posts, and ${available.length} available experiments (${process.env.NODE_ENV ?? "development"}).`
   );
 }

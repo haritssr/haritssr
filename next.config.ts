@@ -38,6 +38,11 @@ const nextConfig: NextConfig = {
   redirects() {
     return [
       {
+        source: "/blog/:path*",
+        destination: "/writing/:path*",
+        permanent: true,
+      },
+      {
         source:
           "/experiments/mathematics/system-of-linear-equations-in-three-variables",
         destination: "/experiments/mathematics/spltv",

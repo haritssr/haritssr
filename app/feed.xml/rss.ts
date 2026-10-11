@@ -1,7 +1,12 @@
-import { BLOG_DESCRIPTION, BLOG_PATH, RSS_PATH, SITE_URL } from "@/utils/site";
+import {
+  WRITING_DESCRIPTION,
+  WRITING_PATH,
+  RSS_PATH,
+  SITE_URL,
+} from "@/utils/site";
 
 const RSS_LANGUAGE = "en-US";
-const RSS_TITLE = "Harits Syah — Blog";
+const RSS_TITLE = "Harits Syah — Writing";
 const XML_ESCAPES: Record<string, string> = {
   "&": "&amp;",
   "'": "&apos;",
@@ -11,7 +16,7 @@ const XML_ESCAPES: Record<string, string> = {
 };
 const xmlEscapePattern = /[&<>"']/g;
 
-export interface RssBlogPost {
+export interface RssWritingPost {
   publishedAt: string;
   slug: string;
   summary: string;
@@ -39,8 +44,8 @@ function getSiteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
 
-function renderRssItem(post: RssBlogPost, publicationDate: Date): string {
-  const postUrl = escapeXml(getSiteUrl(`${BLOG_PATH}/${post.slug}`));
+function renderRssItem(post: RssWritingPost, publicationDate: Date): string {
+  const postUrl = escapeXml(getSiteUrl(`${WRITING_PATH}/${post.slug}`));
 
   return `    <item>
       <title>${escapeXml(post.title)}</title>
@@ -51,8 +56,8 @@ function renderRssItem(post: RssBlogPost, publicationDate: Date): string {
     </item>`;
 }
 
-export function renderBlogRssFeed(
-  posts: readonly RssBlogPost[],
+export function renderWritingRssFeed(
+  posts: readonly RssWritingPost[],
   buildDate = new Date()
 ): string {
   const items = posts
@@ -71,15 +76,15 @@ export function renderBlogRssFeed(
       ? [`    <lastBuildDate>${buildDate.toUTCString()}</lastBuildDate>`]
       : [];
   const feedUrl = getSiteUrl(RSS_PATH);
-  const blogUrl = getSiteUrl(BLOG_PATH);
+  const writingUrl = getSiteUrl(WRITING_PATH);
 
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
     "  <channel>",
     `    <title>${escapeXml(RSS_TITLE)}</title>`,
-    `    <link>${escapeXml(blogUrl)}</link>`,
-    `    <description>${escapeXml(BLOG_DESCRIPTION)}</description>`,
+    `    <link>${escapeXml(writingUrl)}</link>`,
+    `    <description>${escapeXml(WRITING_DESCRIPTION)}</description>`,
     `    <language>${RSS_LANGUAGE}</language>`,
     `    <atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml" />`,
     ...lastBuildDate,

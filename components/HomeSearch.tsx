@@ -27,7 +27,7 @@ export default function HomeSearch() {
           className="text-foreground/70 size-5 shrink-0"
         />
         <span className="truncate">
-          Search pages, projects, experiments, blog…
+          Search pages, projects, experiments, writing…
         </span>
       </button>
     </div>
