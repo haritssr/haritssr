@@ -34,7 +34,7 @@ export default function Breadcrumbs({
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="pt-3">
+    <nav aria-label="Breadcrumb" className="pt-5">
       <div className="mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
         <ol className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
           <li className="flex items-center">
