@@ -6,6 +6,24 @@
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+.sheet .mobileScroll {
+  scrollbar-width: thin;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .sheet .mobileScroll {
+    scrollbar-width: auto;
+  }
+
+  .sheet .mobileScroll::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .sheet .mobileScroll::-webkit-scrollbar-thumb {
+    border: 0;
+  }
+}
+
 @keyframes backdropFade {
   from {
     opacity: 0;
