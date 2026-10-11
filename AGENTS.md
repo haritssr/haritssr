@@ -8,81 +8,65 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Engineering Quality
 
-Manage agents with established engineering practices. Clear constraints and
-feedback help both people and agents produce reliable code. Follow repository
-lint rules, types, compiler diagnostics, existing tests, and observability.
-Apply the same quality standards to human-written and agent-written code.
-When mistakes recur, strengthen reusable checks and guardrails.
+# Development and Verification
 
-# Design Component Reuse
+- Use Bun: `bun install --frozen-lockfile` and `bun run dev`. Reuse the existing
+  dev server; never start multiple servers. This machine has 8 GB RAM.
+- Never run a production build from an agent environment or use `--webpack`.
+  Production builds belong in local human workflows or CI.
+- Never launch temporary Chrome, including headless or automation sessions.
+  Reuse an already-running browser or use non-browser verification.
+- Avoid unnecessary background processes and stop temporary processes afterward.
+  Prefer targeted verification; run the full test suite only when necessary.
+- Before submitting changes, run `bun run check`, `bun run typecheck`,
+  `bun run knip`, `bun run validate:content`, and
+  `NODE_ENV=production bun run validate:content`.
+- Never create, add, rename, or restore test files (`*.test.*`, `*.spec.*`, or
+  files under `test/`, `tests/`, or `__tests__/`). Modify existing tests only
+  when explicitly requested. Verify with existing tests and non-test checks.
+- Use the smallest set of skills specific to the task.
+- See [README.md](README.md) for architecture and implementation details.
 
-- Before creating or changing UI, inspect the `/design` page and its source in
-  `app/design/` for an existing component or pattern that serves the need.
-- Always reuse an available component demonstrated in `/design`, importing its
-  shared implementation and following the demonstrated styling and behavior.
-  Do not create a custom replacement when a suitable component already exists.
-- Create a new component or design only when no suitable existing component or
-  pattern is available. Follow the established design tokens and conventions.
+# Design and Components
 
-## Internal Links
+- Before changing UI, inspect `/design` and `app/design/`. Reuse suitable shared
+  components and their demonstrated behavior; create new ones only when needed.
+  Follow existing design tokens.
+- Repeated grid cards must have equal widths and equal heights within each row.
+  Align headings, content areas, and bottom actions or equations with grid,
+  subgrid, or flexible rows. No uneven heights or masonry unless explicitly
+  requested. Do not clip content or impose fixed pixel heights to force alignment.
+- Use Base UI for continuing widgets. React Aria is allowed only for the mobile
+  experiment TOC Sheet and its supporting trigger, title, and close controls.
+- Do not reintroduce Headless UI, Mantine, Radix UI, React Table, React Query,
+  cmdk, or VisX dependencies. Prefer native APIs for small helpers.
 
-- Use `InternalLink` with `variant="inline"` for links within sentences,
-  section descriptions, and explanatory list items. Inline links omit the
-  chevron and inherit the surrounding text size and line height.
-- Use the default navigation variant for standalone links and navigation
-  lists. It retains the chevron and supports `lg` sizing. The inline variant
-  inherits its size even when `lg` is supplied.
-- Select the variant explicitly at the call site; do not infer it from DOM
-  ancestry. See `/design` for examples of the available variants.
-- Use `variant="footer"` for footer navigation. It inherits the footer text
-  size, uses muted colors and shared focus styling, and omits the chevron.
+## Links
+
+- Use `InternalLink`: `variant="inline"` for sentences, descriptions, and
+  explanatory list items; default navigation for standalone links/lists;
+  `variant="footer"` for footer navigation. Choose at the call site, never by
+  DOM ancestry. Inline/footer links omit chevrons; inline inherits text sizing.
 
 ## Sections and Headings
 
-- Keep independent exercise and rule card titles unnumbered. Use unordered
-  lists for these cards; retain numbering for ordered solution steps and
-  question-navigation controls that depend on it.
-- Experiment tables of contents must exclude accordion and disclosure trigger
-  headings, including solution and derivation controls. Apply this globally,
-  regardless of their label or whether they use the shared Accordion component.
-  Ordinary visible headings inside expanded panels may still appear.
-- In experiment pages, use `space-y-20` on the parent that stacks page sections,
-  including sections rendered by demo or lab components. Let that parent own
-  the spacing; omit individual top and bottom margins on its section children.
-  Keep introductory text and its source link grouped together. Internal content
-  spacing and responsive grids keep their own layout rules.
-- Use the shared `Section` for a semantic section with a title and content:
-  `<Section title="Title">...</Section>`. It renders the section and its heading
-  and manages `aria-labelledby`. Each section uses the shared `space-y-5`
-  spacing, without a global line height; `className` adds layout classes to
-  the outer section.
-- Use the optional `description` for an introductory paragraph. It accepts
-  React content such as links and inline KaTeX, and `Section` gives it the
-  shared muted color and full available width. Keep page and section titles
-  and descriptions full width; limit only reading body content with
-  `contentClassName` or a body wrapper. Keep interactive content full width.
-- Use `contentClassName` to style an internal wrapper around section body
-  content, for example to lay cards out in a responsive grid. The wrapper is
-  omitted when the prop is absent or the section has no body. A section may
-  contain a description without additional body children; use `SectionHeading`
-  when only a heading is needed.
-- Native `Section` attributes (`id`, `className`, `style`, `data-*`, etc.) apply
-  to the container. Use `id` for section fragment targets; `Section` generates
-  the heading ID used by `aria-labelledby`. Configure its heading with
-  `headingAs`, `headingClassName`, and `headingVariant`. Heading IDs default to
-  `${id}-heading` when the container has an ID, otherwise a stable generated ID.
-- Use `SectionHeading` for heading-only layouts, including navigation and
-  custom headers. Its children supply the title; native attributes apply to the
-  heading, `as` selects `h2` or `h3`, and `variant` selects default or compact
-  typography. Both components use the same heading design; an explicit heading
-  class replaces the default classes.
-- Preserve existing heading anchors by moving their fragment ID to the Section
-  container. Leave specialized local section components intact unless their
-  behavior is explicitly being refactored.
+- Use shared `Section` for titled content and `SectionHeading` for heading-only
+  layouts. Leave specialized local sections intact unless explicitly refactoring.
+- `Section` owns accessible heading IDs and `space-y-5`, with no global line
+  height or width cap. `className` styles the section; `contentClassName` styles
+  an optional body wrapper; `description` supplies muted introductory content.
+- Container attributes apply to `Section`. Configure its heading through
+  `headingAs`, `headingClassName`, and `headingVariant`. Preserve existing
+  fragment anchors by moving their IDs to the section container.
+- Experiment section stacks use parent `space-y-20`, including lab/demo sections.
+  Omit section top/bottom margins; keep introductions and source links together.
+- Keep independent exercise/rule cards unnumbered in unordered lists. Number
+  ordered solution steps and question-navigation controls when needed.
+- Exclude all accordion/disclosure trigger headings from experiment TOCs,
+  including custom implementations. Visible headings inside open panels may appear.
 
-## Experiment Content Width
+## Experiment Width
 
 Apply these defaults to new or refactored experiments in every domain:
 
@@ -100,262 +84,60 @@ Apply these defaults to new or refactored experiments in every domain:
 - Keep mobile layouts fluid; scroll wide equations/tables locally without
   causing page overflow. Other pages stay full width unless directed otherwise.
 
-- Repeated grid cards must have equal widths and equal heights within each row.
-  Align headings, content areas, and bottom actions or equations with grid,
-  subgrid, or flexible rows. No uneven heights or masonry unless explicitly
-  requested. Do not clip content or impose fixed pixel heights to force alignment.
+## Mathematical Notation
 
-# Mathematical Notation
+- Render all mathematical notation as TeX through `@/utils/katexify`: inline
+  within sentences, display mode for standalone equations. Do not substitute
+  Unicode, plain text, `<sub>`/`<sup>`, or monospace mathematical typography.
+- Ensure `katex/dist/katex.min.css` is available wherever KaTeX is rendered.
 
-- Always render mathematical notation in page content and UI with the project
-  math renderer, `katexify` from `@/utils/katexify`. Use inline mode for
-  in-sentence notation and display mode for standalone equations.
-- Write notation as TeX input for the renderer. Do not imitate mathematical
-  typography with Unicode symbols, plain text, `<sub>`/`<sup>`, or monospace
-  styling.
-- Ensure `katex/dist/katex.min.css` is available wherever rendered KaTeX
-  output is used so equations and fonts display correctly.
+# Content and Routes
 
-# Testing Policy
+- Experiment routes are literal folders. Register title, description, tags,
+  creation date, and update history in `data/ExperimentsData.ts`. Append an
+  update date once per calendar day; preserve creation dates and prior history.
+- Writing uses local `data/writing/*.mdx` with validated frontmatter and automatic
+  module discovery, without an import registry. Preserve `/blog` redirects to
+  `/writing` in `next.config.ts`.
+- Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
+  concrete catch-all examples. Keep its footer link left of Install. Include
+  the directory in search/sitemap, not raw endpoints; gate local-only entries.
+- Keep public pages searchable. Cloudflare handles AI-training opt-out when enabled.
 
-- Coding agents must never create, add, rename, or restore test files. This includes files named `*.test.*` or `*.spec.*`, and test files placed in `test/`, `tests/`, or `__tests__/` directories.
-- Do not add tests as part of a feature, bug fix, refactor, or other coding task. Only modify an existing test file when the user explicitly asks for test-file changes.
-- If verification is needed, use the existing test files and other non-test checks already available in the repository; do not create a test file to enable verification.
+## Archived and Local Experiments
 
+- Preserve retired names, marks, and counts in `data/DiscontinuedExperimentsData.ts`,
+  separate from the live catalog. Show static cards in the collapsed archive;
+  no deleted-route links, live pages, search entries, or sitemap URLs. Omit cmdk.
+- Preserve `discontinuedExperimentHistory.removalCommitSha` as the original
+  removal commit's full SHA; never replace it with HEAD or a deployment SHA.
+- Task/tools SQLite experiments remain development-only until authentication,
+  authorization, rate limits, and durable storage exist. Production routes return
+  404 and are excluded from navigation, search, and sitemap.
 
-# Commit Guidelines
+# Metadata and Site Behavior
 
-- feat: A new feature
-- fix: A bug fix
-- docs: Documentation only changes
-- style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- refactor: A code change that neither fixes a bug nor adds a feature
-- perf: A code change that improves performance
-- test: Changes to existing tests when explicitly requested
-- chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
+- Use shared metadata in `utils/pageMetadata.ts` and the canonical domain from
+  `utils/site.ts` for page URLs, social previews, sitemap, and RSS.
+- OG images use `app/api/og/OpenGraphCard.tsx`: simple blue gradient, large title,
+  `haritssr.com` and author branding; descriptions stay in metadata. Show parent
+  breadcrumbs only on nested pages. Experiment titles have two lines: name,
+  then a smaller domain “Experiments” label, without a pipe; scale lines to fit.
+- Bump the image URL's `v` in `utils/pageMetadata.ts` when changing OG design.
+  Preserve crawler access to `/api/og` and the shared Twitter account `@haritssr`.
+- Reuse shared structured-data components; escape `<` in serialized JSON-LD.
+- Keep `SITE_THEME_COLOR`, manifest/viewport, and offline theme colors consistent.
+  Icons use the site logo's saturated blue palette in both themes.
+- Preserve the PWA's offline fallback: cache only `public/offline.html`, never
+  Next.js pages. Preserve API/asset/client-navigation behavior, production-only
+  registration, `/sw.js` no-cache headers, and deletion of only owned old caches.
+- RSS uses writing summaries linking to canonical full posts, with publication
+  dates and generation-time `lastBuildDate`.
 
-Template:
-type(context): message
-Example:
-refactor(Breadcrumbs.tsx): make it scrollable at mobile size when it too long
+# Commits
 
-[source](https://ec.europa.eu/component-library/v1.15.0/eu/docs/conventions/git/)
-
-- Before committing, review the staged files and related documentation. Keep `AGENTS.md` and other project guidance accurate and relevant to the current codebase, updating them in the same change when needed.
-- Never commit changes without the user's explicit permission. Treat committing as a separate action that requires confirmation.
-
-# Resource-Constrained Development
-
-This machine has 8 GB RAM. Optimize commands for low resource usage:
-
-- Never start multiple development servers.
-- Reuse the existing development server.
-- Do not run background processes unnecessarily.
-- Never launch a temporary Chrome process for any purpose, including testing,
-  screenshots, headless browsing, or remote debugging. This prohibition applies
-  to foreground and background processes, whether launched directly or through
-  browser automation tools. Reuse an already-running browser session without
-  launching Chrome, or use non-browser verification instead.
-- Kill temporary processes after finishing.
-- Prefer targeted tests and targeted linting.
-- Do not run the entire test suite unless necessary.
-
-# Run Build
-
-- Never run the production build from an AI agent environment. Turbopack may
-  require local worker-port permissions unavailable to sandboxed agents; run
-  the build locally or in CI instead.
-- Never use `--webpack` with Next.js or build commands; use the default
-  Turbopack command instead.
-
-# Project Development
-
-Use `bun install --frozen-lockfile` and `bun run dev`. Reuse a running development
-server. Run `bun run check`, `bun run typecheck`, `bun run knip`, and
-`bun run validate:content` before submitting changes. Also run
-`NODE_ENV=production bun run validate:content` to verify local-only exclusions.
-The CI workflow performs these checks and the production build.
-
-Experiment routes are literal folders. Register their title, description, tags,
-creation date, and update-date history in `data/ExperimentsData.ts`. The explorer,
-search, metadata, and sitemap derive their records from that catalog. Append an
-update date once per calendar day and retain the creation date and prior history.
-
-Writing posts are local MDX files in `data/writing/`; Turbopack discovers their compiled
-modules lazily, while frontmatter is validated on the server. Adding a post does
-not require editing a separate import registry.
-The section lives at `/writing`; `next.config.ts` permanently redirects the
-previous `/blog` index and post URLs to their matching Writing routes.
-
-## Architecture Decisions
-
-- Next.js App Router replaces Pages Router.
-- Next.js MDX replaces Content Collections for writing content.
-- Turbopack discovers MDX files automatically, replacing the manual import registry.
-- Ultracite with Oxlint and Oxfmt replaces Biome.
-- Native APIs replace Effect, date-fns, and react-use in small helpers.
-- Retired Headless UI, Mantine, Radix UI, React Aria, React Table, React Query,
-  VisX, and Haris Lab experiments are static historical records rather than live routes.
-  Their implementations and exclusive dependencies were removed; continuing
-  widgets use Base UI, except the mobile experiment table of contents, which uses
-  React Aria Sheet. Historical counts are separate from live experiment counts.
-  The cmdk demo and dependency were also removed; omit cmdk from archive cards.
-- The installable PWA caches a standalone offline page instead of Next.js pages.
-- SQLite task and tools experiments stay local until they have authentication,
-  authorization, rate limits, and durable storage.
-- Public pages stay searchable. Cloudflare manages AI-training opt-out when enabled.
-
-# Site Implementation
-
-## API Directory
-
-The footer links to `/api` to the left of the install action. This page lists
-accessible GET endpoints using the shared `InternalLink`, including a concrete example for
-the catch-all parameters route. The task API appears only in development, using
-the same availability flag as the local database experiments. Keep the directory
-current when adding or removing API endpoints. The directory page is included in
-site search and the sitemap; the raw API endpoints remain outside those listings.
-
-## Social Previews
-
-Every page's metadata points to `/api/og`, which renders a 1200 × 630 image with
-`ImageResponse` from `next/og`, then compresses it with Sharp to a quality-90 JPEG
-with full chroma resolution to preserve text clarity and reduce preview file
-size. `utils/pageMetadata.ts` passes the page's title, social description, and
-path in the image URL, so content changes produce a new preview URL. Open Graph
-and Twitter use the same image and descriptive alt text.
-Edit `app/api/og/OpenGraphCard.tsx` to change the shared JSX design and palette.
-The card uses a quiet blue CSS gradient inspired by the site icon, a large page
-title, parent-path breadcrumbs only on nested pages, and site/author branding.
-Experiment titles have two lines: name, then a smaller domain “Experiments”
-label, without a pipe; scale both lines to fit. Descriptions stay in metadata
-rather than the image. No background asset or network request is needed.
-Robots rules allow `/api/og` while keeping other API routes disallowed.
-Change the `v` parameter in
-`utils/pageMetadata.ts` when updating the design to refresh cached previews.
-The image renderer uses Next.js's bundled font and needs no external service.
-
-The shared metadata identifies `@haritssr` as the Twitter/X site account.
-
-## Canonical URLs
-
-`utils/site.ts` defines `https://haritssr.com` as the primary domain, matching the
-host served by the deployment. Page canonicals, social URLs, the sitemap, and RSS
-feed all use this value; the `www` hostname redirects to the primary domain.
-
-## Structured Data
-
-The root layout renders `WebSite` and `Person` JSON-LD using
-`components/StructuredData.tsx`. The homepage and physics units page also render
-`WebPage` data; the units page includes its visible breadcrumb hierarchy. Its
-structured-data title comes from the same metadata as its page title. All JSON-LD
-is serialized with `<` escaped before insertion into a script element.
-
-## Browser Appearance
-
-`SITE_THEME_COLOR` in `utils/site.ts` sets the browser and installed-app toolbar
-color through the root viewport export and app manifest. The offline document
-declares the same color in its static HTML.
-
-The root metadata registers `/favicon-32x32.png` alongside the existing ICO and
-Apple touch icon. The PNG, ICO, and Apple touch icon are rasterized from
-`public/icons/haritssr.svg`. That asset and `/favicon.svg` use the homepage logo's
-saturated blue palette in both light and dark mode. The top bar displays the
-colors directly without an additional saturation filter.
-
-## Progressive Web App
-
-The site is installable over HTTPS in supporting browsers. The offline behavior
-is a clear fallback page, not an offline copy of the experiments or articles.
-
-- `app/manifest.ts` defines the app identity and icons.
-- `components/FooterActions.tsx` offers the native install prompt where available.
-- `components/ServiceWorkerRegistration.tsx` registers the worker only in production.
-- `public/sw.js` pre-caches only `public/offline.html`. That document uses inline
-  styling and system fonts, so it needs no framework scripts or remote assets.
-- Successful network navigations return directly, independently of cache writes.
-  Failed same-origin document navigations show the offline fallback. API requests,
-  assets, and client navigation requests retain their normal browser behavior.
-- Activation deletes only older caches owned by this worker, including the
-  previous HTML navigation caches. `/sw.js` keeps its no-cache response headers.
-
-See the [architecture decisions](#architecture-decisions).
-
-Validate in a production browser: install or register the worker online, disable
-network access, and reload a visited and an unvisited URL. Both should show the
-fallback. Reconnect and reload to recover. Check that updates remove old owned
-caches and preserve unrelated caches. No full offline-content support is promised.
-
-## RSS Feed
-
-The writing RSS feed is available at [`/feed.xml`](https://haritssr.com/feed.xml).
-The site footer includes a link to the feed. Visitors can paste this URL into
-an RSS reader such as Feedly, Inoreader, NetNewsWire, or Thunderbird.
-
-The feed is generated from the local writing post index:
-
-1. Writing posts are added to `data/writing/*.mdx` with a `publishedAt` value in
-   `YYYY-MM-DD` format.
-2. `utils/writing-posts.ts` parses and validates the frontmatter, derives the slug
-   and word count, and loads the posts into `allWritingPosts`.
-3. `app/feed.xml/route.ts` passes the collection to `app/feed.xml/rss.ts`.
-4. The renderer creates an RSS 2.0 document with each post's title,
-   summary, canonical URL, and publication date.
-
-The feed contains summaries that link to the full posts. Its
-`lastBuildDate` reflects the feed generation time so changes to existing
-posts are visible to RSS readers. In production, the statically generated
-feed is updated during deployment, so a new deployment is required for a new
-post to appear in the live feed.
-
-# Discontinued Experiments
-
-- Keep retired experiments as static records in `data/DiscontinuedExperimentsData.ts`,
-  separate from the live catalog. Preserve their names, marks, and historical
-  experiment counts. Render static cards inside the collapsed discontinued
-  accordion without registering live pages, search entries, or sitemap URLs.
-  Archive cards must not link to deleted routes.
-- Do not reintroduce Headless UI, Mantine, Radix UI, React Table,
-  React Query, cmdk, or VisX dependencies. Continuing widgets use the Base UI patterns
-  demonstrated in `/design` and the shared components.
-- React Aria is permitted only for the mobile experiment table-of-contents Sheet
-  and its supporting trigger, title, and close controls. Keep its retired
-  experiments archived and use Base UI for other continuing widgets.
-- `discontinuedExperimentHistory.removalCommitSha` stores the actual full SHA
-  of the commit that removed the implementations and dependencies. Record it
-  in a follow-up commit because a commit cannot contain its own SHA. Keep this
-  reference fixed to the removal commit; never replace it with the current
-  HEAD, a deployment SHA, or a placeholder. This link records the original
-  retirement batch; later archived experiments may have separate removal commits.
-
-# Local Database Experiments
-
-The task and tools database experiments are available only in development.
-They store SQLite files in `.data-haritssr/` by default; set `TASK_DB_DIR` or
-`TOOLS_DB_DIR` to override that directory. Production builds omit these
-experiments from navigation and the sitemap, and their routes return 404.
-
-Keep them local-only until they have user authentication, authorization, rate
-limits, and durable production storage. See
-[architecture decisions](#architecture-decisions).
-
-Inspect existing local SQLite databases with `bun scripts/inspect-task-db.js`
-or `bun scripts/inspect-tools-db.js`. These scripts open the databases read-only
-and respect `TASK_DB_DIR` and `TOOLS_DB_DIR`.
-
-# Skill Selection
-
-- Use the skill that is most specific to the task being performed.
-- Use the smallest set of relevant skills needed to complete the task.
-- Do not invoke unrelated or overlapping skills merely because they are available.
-
-# Responding to Explicit Instructions
-
-When the user gives explicit directions, take one of these actions:
-
-1. If you believe the directions are incorrect, explain why with concrete reasoning.
-2. If the directions are ambiguous, request clarification.
-3. Otherwise, execute the directions.
-
-Do not silently ignore instructions or leave them unaddressed. If execution is
-blocked, explain the blocker and what is needed to proceed.
+- Commit only with explicit user permission; committing is a separate action.
+- Use `type(context): message`, such as `fix(TopBar): align back icon`.
+  Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
+- Review staged changes and related documentation. Keep project guidance accurate
+  in the same change; `test` commits remain subject to the testing policy above.
