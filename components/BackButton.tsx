@@ -30,7 +30,11 @@ export default function BackButton({
   }
 
   return (
-    <Link className="mt-10 -mb-5 block w-fit" href={href} prefetch={false}>
+    <Link
+      className="mt-5 -mb-5 block w-fit sm:mt-10"
+      href={href}
+      prefetch={false}
+    >
       <span className="inline-block w-full">
         <span className="group flex items-center">
           <ChevronLeftIcon
