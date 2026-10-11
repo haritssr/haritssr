@@ -14,6 +14,7 @@ import ExternalLink from "@/components/ExternalLink";
 import HomeSearch from "@/components/HomeSearch";
 import MoreItemsLink from "@/components/MoreItemsLink";
 import ProjectsCard from "@/components/ProjectsCard";
+import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import WritingGrid from "@/components/WritingGrid";
 import { ProjectsData } from "@/data/ProjectsData";
@@ -52,7 +53,7 @@ export default function Home() {
         <ExperimentsGrid headingLevel={3} mobileLimit={4} />
       </Section>
 
-      <Section className="grid grid-cols-1" id="writing" title="Writing">
+      <Section contentClassName="grid grid-cols-1" id="writing" title="Writing">
         <WritingGrid headingLevel={3} mobileLimit={5} />
       </Section>
 
@@ -250,29 +251,5 @@ function MoreDetails() {
         </li>
       </ul>
     </Section>
-  );
-}
-
-function Section({
-  title,
-  className = "",
-  children,
-  id,
-}: {
-  title: string;
-  className?: string;
-  children: ReactNode;
-  id: string;
-}) {
-  return (
-    <section aria-labelledby={`${id}-heading`} id={id}>
-      <h2
-        className="text-foreground pb-6 text-2xl font-semibold"
-        id={`${id}-heading`}
-      >
-        {title}
-      </h2>
-      <div className={className}>{children}</div>
-    </section>
   );
 }
