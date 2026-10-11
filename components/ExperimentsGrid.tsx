@@ -31,7 +31,7 @@ export default function ExperimentsGrid({
   const { removalCommitSha } = discontinuedExperimentHistory;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 sm:space-y-5">
       <ul className={GRID_CLASS_NAME}>
         {domains.map((experiment, index) => (
           <li
