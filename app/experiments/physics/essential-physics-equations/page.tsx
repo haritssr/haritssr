@@ -15,8 +15,7 @@ import type { PhysicsEquation } from "./_data";
 
 export const metadata: Metadata = getExperimentMetadata(
   "physics",
-  "essential-physics-equations",
-  { description: DESCRIPTION }
+  "essential-physics-equations"
 );
 
 export default function PhysicsEquationsPage() {

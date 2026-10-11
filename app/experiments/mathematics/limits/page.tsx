@@ -12,11 +12,7 @@ import LimitsLab from "./limits-lab";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "limits",
-  {
-    description:
-      "Learn limits by approaching a point from both sides, including holes and jumps.",
-  }
+  "limits"
 );
 
 const questions: readonly PracticeQuestion[] = [

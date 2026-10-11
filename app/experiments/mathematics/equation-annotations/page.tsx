@@ -10,11 +10,7 @@ import Demo from "./demo";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "equation-annotations",
-  {
-    description:
-      "Annotate equation terms with color, boxes, and labeled underbraces in KaTeX.",
-  }
+  "equation-annotations"
 );
 
 export default function EquationAnnotationsPage() {

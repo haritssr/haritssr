@@ -12,11 +12,7 @@ import DerivativesLab from "./derivatives-lab";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "derivatives",
-  {
-    description:
-      "Learn derivatives by shrinking secant lines into tangent lines and practicing polynomial rules.",
-  }
+  "derivatives"
 );
 
 const questions: readonly PracticeQuestion[] = [

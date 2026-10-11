@@ -10,11 +10,7 @@ import Demo from "./demo";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "live-playground",
-  {
-    description:
-      "Edit TeX and compare inline and display math in a live KaTeX playground.",
-  }
+  "live-playground"
 );
 
 export default function LivePlaygroundPage() {

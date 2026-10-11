@@ -9,11 +9,7 @@ import Demo from "./demo";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "matrix-builder",
-  {
-    description:
-      "Build an editable matrix and explore KaTeX matrix environments and delimiters.",
-  }
+  "matrix-builder"
 );
 
 export default function MatrixBuilderPage() {

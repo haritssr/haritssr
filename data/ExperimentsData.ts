@@ -709,7 +709,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "physical-quantities-and-units",
         title: "Physical Quantities and Units",
         description:
-          "Explore SI quantities, units, formulas, and their prerequisite graph.",
+          "Explore SI units, physical quantities, and the formulas that connect them.",
         tags: ["mathematics", "graphs"],
         createdAt: "2026-09-20",
         updatedAt: [
@@ -725,7 +725,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "electron-configuration",
         title: "Electron Configuration",
         description:
-          "Fill atomic orbitals and inspect electron configurations and quantum numbers.",
+          "Build electron configurations by filling atomic orbitals.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-23",
         updatedAt: [
@@ -740,7 +740,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "motion-diagrams",
         title: "Motion Diagrams",
         description:
-          "Compare motion through interactive position and velocity diagrams.",
+          "Explore velocity-time graphs for linear and circular motion.",
         tags: ["mechanics", "visualization"],
         createdAt: "2026-09-25",
         updatedAt: [
@@ -755,7 +755,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "atomic-orbitals",
         title: "Atomic Orbitals",
         description:
-          "Explore atomic wavefunctions, probability distributions, and orbital shapes.",
+          "Explore orbital shapes, electron probability, and the nodes between them.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06", "2026-10-11"],
@@ -764,7 +764,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "double-slit-interference",
         title: "Double-Slit Interference",
         description:
-          "Change wavelength and slit geometry to explore interference fringes.",
+          "See how light and slit spacing shape an interference pattern.",
         tags: ["waves", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [
@@ -779,7 +779,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "essential-physics-equations",
         title: "Essential Physics Equations",
         description:
-          "Read key physics equations with variable definitions, units, and sources.",
+          "Find key physics equations with variable meanings and SI units.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-09-30",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06", "2026-10-11"],
@@ -801,8 +801,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "katex-basics",
         group: "tools",
         title: "KaTeX Basics",
-        description:
-          "Render standalone and inline mathematical notation with KaTeX.",
+        description: "Render inline and display math with KaTeX.",
         tags: ["mathematics", "typography"],
         createdAt: "2026-08-18",
         updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-11"],
@@ -811,8 +810,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "live-playground",
         group: "tools",
         title: "Live TeX Playground",
-        description:
-          "Edit TeX, try templates, and preview mathematical notation live.",
+        description: "Write TeX and preview equations as you type.",
         tags: ["mathematics", "editor"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
@@ -821,7 +819,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "matrix-builder",
         group: "tools",
         title: "Matrix Builder",
-        description: "Edit matrix entries and generate the corresponding TeX.",
+        description: "Edit a matrix and generate its TeX notation.",
         tags: ["mathematics", "forms"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
@@ -831,7 +829,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Step-by-Step Derivation",
         description:
-          "Follow a quadratic equation through completing-the-square steps.",
+          "Solve a quadratic equation by completing the square, one step at a time.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
@@ -841,7 +839,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Piecewise Functions",
         description:
-          "Compare thirteen piecewise functions and their evaluated graphs.",
+          "Explore 13 piecewise functions with interactive graphs and values.",
         tags: ["mathematics", "visualization"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
@@ -851,7 +849,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "tools",
         title: "Equation Annotations",
         description:
-          "Annotate terms in Newton’s second law using TeX decorations.",
+          "Explain equation terms with color, boxes, and labels in KaTeX.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
@@ -861,7 +859,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "tools",
         title: "Math Notation on the Web",
         description:
-          "See which high-school math expressions KaTeX can typeset, and when graphs, diagrams, or calculations need other tools.",
+          "Learn what KaTeX can render and when math needs other tools.",
         tags: ["notation", "katex", "learning"],
         createdAt: "2026-10-10",
         updatedAt: ["2026-10-10", "2026-10-11"],
@@ -871,7 +869,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "tools",
         title: "High School Symbols",
         description:
-          "Kamus simbol matematika dan fisika SMA Indonesia, dengan arti dan contoh yang ditampilkan menggunakan KaTeX.",
+          "Cari simbol matematika dan fisika SMA, beserta arti dan contohnya.",
         tags: ["notation", "katex", "physics", "learning", "indonesia"],
         createdAt: "2026-10-10",
         updatedAt: ["2026-10-10", "2026-10-11"],
@@ -881,7 +879,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Circle",
         description:
-          "Explore radius, diameter, circumference, area, arcs, and sectors with an interactive circle and worked examples.",
+          "Explore circle measurements with an interactive diagram and worked examples.",
         tags: ["geometry", "circles", "learning", "visualization"],
         createdAt: "2026-10-10",
         updatedAt: ["2026-10-10", "2026-10-11"],
@@ -891,7 +889,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Polinomial",
         description:
-          "Latihan 27 soal polinomial dengan tabel koefisien, pengelompokan suku, petunjuk bertahap, pembahasan, dan progres yang tersimpan di browser.",
+          "Latihan 27 soal polinomial dengan petunjuk dan pembahasan bertahap.",
         tags: ["algebra", "polynomials", "equations", "learning"],
         createdAt: "2026-10-08",
         updatedAt: ["2026-10-08", "2026-10-11"],
@@ -901,7 +899,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Euler’s Identity",
         description:
-          "Connect exponential growth, circle geometry, and imaginary numbers through Euler’s formula, an interactive unit circle, and a step-by-step derivation of Euler’s identity.",
+          "Explore Euler’s identity through a rotating unit circle and a guided derivation.",
         tags: ["complex-numbers", "trigonometry", "exponents", "visualization"],
         createdAt: "2026-10-07",
         updatedAt: ["2026-10-07", "2026-10-11"],
@@ -911,7 +909,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Logarithms",
         description:
-          "Understand logarithms, derive their rules, and explore logarithmic graphs and their exponential inverses.",
+          "Explore logarithm rules, graphs, and their connection to exponents.",
         tags: ["algebra", "logarithms", "exponents", "visualization"],
         createdAt: "2026-10-06",
         updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
@@ -921,7 +919,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "SPLTV",
         description:
-          "Solve three-variable linear systems with elimination, explore exact row operations, and distinguish unique, infinite, and no-solution cases.",
+          "Solve three-variable linear systems and compare their possible solutions.",
         tags: ["algebra", "equations", "linear-algebra"],
         createdAt: "2026-10-06",
         updatedAt: ["2026-10-06", "2026-10-07", "2026-10-10", "2026-10-11"],
@@ -931,7 +929,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Number Systems",
         description:
-          "Explore number sets with a Venn diagram and connect inequalities, interval notation, and an interactive number line.",
+          "Explore number sets, intervals, and inequalities on an interactive number line.",
         tags: ["foundations", "sets", "visualization"],
         createdAt: "2026-10-06",
         updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
@@ -941,7 +939,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Quadratic Equations",
         description:
-          "Learn factoring, completing the square, and the quadratic formula with an interactive root graph.",
+          "Solve quadratic equations and see how their roots shape a parabola.",
         tags: ["algebra", "equations", "visualization"],
         createdAt: "2026-10-06",
         updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
@@ -951,7 +949,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         group: "chapters",
         title: "Limits",
         description:
-          "Explore how a function behaves as its input approaches a value.",
+          "Explore one-sided limits, holes, and jumps with an interactive graph.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [
@@ -967,7 +965,8 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "derivatives",
         group: "chapters",
         title: "Derivatives",
-        description: "Connect the derivative to the slope of a curve.",
+        description:
+          "See how secant lines become tangents and explore the slope of a curve.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [
@@ -983,7 +982,8 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "integrals",
         group: "chapters",
         title: "Integrals",
-        description: "Explore accumulation and the area beneath a curve.",
+        description:
+          "Explore definite integrals through rectangles, signed area, and antiderivatives.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [

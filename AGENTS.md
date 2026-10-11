@@ -96,6 +96,10 @@ Apply these defaults to new or refactored experiments in every domain:
 - Experiment routes are literal folders. Register title, description, tags,
   creation date, and update history in `data/ExperimentsData.ts`. Append an
   update date once per calendar day; preserve creation dates and prior history.
+- Physics and mathematics preview descriptions use concise catalog copy (aim
+  for 80 characters or fewer) to fit roughly two lines in small link previews.
+  Reuse it in page metadata instead of longer local overrides; keep detailed
+  explanations in page content. Preview line wrapping depends on the host app.
 - Writing uses local `data/writing/*.mdx` with validated frontmatter and automatic
   module discovery, without an import registry. Preserve `/blog` redirects to
   `/writing` in `next.config.ts`.

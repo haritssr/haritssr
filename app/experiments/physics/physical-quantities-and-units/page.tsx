@@ -60,10 +60,7 @@ const QUANTITY_DEPENDENTS = createQuantityDependents();
 
 export const metadata = getExperimentMetadata(
   "physics",
-  "physical-quantities-and-units",
-  {
-    description: DESCRIPTION,
-  }
+  "physical-quantities-and-units"
 );
 
 export default function UnitsPage() {

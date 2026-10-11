@@ -40,11 +40,7 @@ const SECTIONS = [
 
 export const metadata: Metadata = getExperimentMetadata(
   "physics",
-  "atomic-orbitals",
-  {
-    description:
-      "Explore atomic orbital shapes, angular and radial nodes, and wavefunctions, with interactive s, p, d, and f models and a worked p-orbital derivation.",
-  }
+  "atomic-orbitals"
 );
 
 export default function AtomicOrbitalsPage() {

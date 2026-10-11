@@ -10,11 +10,7 @@ import Demo from "./demo";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "derivation-stepper",
-  {
-    description:
-      "Reveal an aligned completing-the-square derivation one step at a time with KaTeX.",
-  }
+  "derivation-stepper"
 );
 
 export default function DerivationStepperPage() {

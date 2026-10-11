@@ -9,11 +9,7 @@ import Demo from "./demo";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "piecewise-functions",
-  {
-    description:
-      "Explore 13 piecewise functions with cases notation, interactive evaluation, and graphs.",
-  }
+  "piecewise-functions"
 );
 
 export default function PiecewiseFunctionsPage() {

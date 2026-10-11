@@ -13,11 +13,7 @@ import IntegralsLab from "./integrals-lab";
 
 export const metadata: Metadata = getExperimentMetadata(
   "mathematics",
-  "integrals",
-  {
-    description:
-      "Learn definite integrals through midpoint rectangles, signed area, and antiderivatives.",
-  }
+  "integrals"
 );
 
 const questions: readonly PracticeQuestion[] = [

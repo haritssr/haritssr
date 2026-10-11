@@ -14,8 +14,7 @@ const DESCRIPTION =
 
 export const metadata: Metadata = getExperimentMetadata(
   "physics",
-  "electron-configuration",
-  { description: DESCRIPTION }
+  "electron-configuration"
 );
 
 export default async function ElectronConfigurationPage({
