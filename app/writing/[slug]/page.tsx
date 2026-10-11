@@ -45,7 +45,7 @@ export const dynamicParams = false;
 
 const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
-  month: "long",
+  month: "short",
   timeZone: "UTC",
   year: "numeric",
 });
@@ -85,7 +85,7 @@ export default async function WritingPostPage({
         &nbsp;&nbsp; <span className="text-foreground/60">•</span> &nbsp;&nbsp;
         <p>{post.wordCount} Words</p>
         &nbsp;&nbsp; <span className="text-foreground/60">•</span> &nbsp;&nbsp;
-        <p>{Math.ceil(post.wordCount / 200)} Min Read</p>
+        <p>{Math.ceil(post.wordCount / 200)} Min</p>
       </div>
       <div className="prose prose-zinc prose-headings:text-foreground in-data-[theme=dark]:prose-invert max-w-none">
         <PostContent />
@@ -95,5 +95,7 @@ export default async function WritingPostPage({
 }
 
 function formatDate(date: string) {
-  return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
+  return writingDateFormatter
+    .format(new Date(`${date}T00:00:00.000Z`))
+    .replace("Sep ", "Sept ");
 }
