@@ -184,7 +184,7 @@ export default function GlobalSearchDialog({
                 ) : null}
               </Autocomplete.List>
             </div>
-            <div className="border-middle-hover text-muted flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
+            <div className="border-middle-hover text-muted in-data-[theme=dark]:border-middle-hover/50 flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
               <output aria-live={loadError ? "off" : "polite"}>
                 {resultStatus}
               </output>
