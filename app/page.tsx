@@ -215,6 +215,7 @@ function MoreDetails() {
         </li>
         <li>Touch typist, around 90 WPM.</li>
         <li>Former chess player, rated around 2000 Elo.</li>
+        <li>Apple&apos;s WWDC Design Videos enjoyer.</li>
         <li>
           <ExternalLink
             href="https://youtu.be/H7Sfo3lMB8c?t=60"
