@@ -1,133 +1,86 @@
 interface OpenGraphCardProps {
   title: string;
-  description: string;
   path: string;
-  background: string;
 }
 
-const sections: Record<string, { label: string; action: string }> = {
-  blog: { label: "Blog", action: "Read the writing" },
-  projects: { label: "Projects", action: "Explore the work" },
-  experiments: { label: "Experiments", action: "Explore the experiment" },
-  design: { label: "Design", action: "Explore the design system" },
-};
+function getHierarchy(path: string): string {
+  const parents = path.split("/").filter(Boolean).slice(0, -1);
+  return parents.length === 0
+    ? "Home"
+    : parents
+        .map((segment) =>
+          segment
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+        )
+        .join(" / ");
+}
 
 function getHeadlineFontSize(title: string): number {
+  if (title.length > 140) {
+    return 52;
+  }
   if (title.length > 85) {
-    return 50;
+    return 64;
   }
   if (title.length > 45) {
-    return 60;
+    return 80;
   }
-  return 76;
+  return 104;
 }
 
-export default function OpenGraphCard({
-  title,
-  description,
-  path,
-  background,
-}: OpenGraphCardProps) {
-  const section = sections[path.split("/")[1] ?? ""];
-  const [name, role] = title.split(" — ");
-  const headline = path === "/" ? (name ?? title) : title;
-  const fontSize = getHeadlineFontSize(headline);
-  const subtitle = path === "/" && role !== undefined ? role : description;
+export default function OpenGraphCard({ title, path }: OpenGraphCardProps) {
+  const headline = path === "/" ? title.split(" — ")[0] : title;
 
   return (
     <div
       style={{
         display: "flex",
-        position: "relative",
         flexDirection: "column",
         width: "100%",
         height: "100%",
-        padding: "52px 64px",
-        overflow: "hidden",
-        backgroundColor: "#FAFCF2",
-        backgroundImage: `url(${background})`,
-        backgroundSize: "100% 100%",
-        color: "#204C5D",
+        padding: "100px 72px",
+        backgroundColor: "#DDEFFF",
+        backgroundImage:
+          "linear-gradient(120deg, #F0F7FF 0%, #C5E5FF 55%, #7DC8FF 80%, #1B85FF 100%)",
+        color: "#082C66",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          fontSize: 23,
-        }}
-      >
-        <span>Harits Syah / {section?.label ?? "Portfolio"}</span>
-        <span>haritssr.com</span>
+      <div style={{ display: "flex", fontSize: 34, lineHeight: 1.2 }}>
+        {getHierarchy(path)}
       </div>
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          marginTop: 42,
-          width: "100%",
+          flex: 1,
+          alignItems: "center",
+          padding: "24px 0",
         }}
       >
         <div
           style={{
-            display: "flex",
-            fontSize,
+            fontSize: getHeadlineFontSize(headline),
             fontWeight: 700,
             lineHeight: 1.08,
-            letterSpacing: "-0.035em",
-            lineClamp: 3,
+            letterSpacing: "-0.04em",
             wordBreak: "break-word",
           }}
         >
           {headline}
         </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 20,
-            fontSize: 26,
-            lineHeight: 1.4,
-            lineClamp: 2,
-            wordBreak: "break-word",
-          }}
-        >
-          {subtitle}
-        </div>
       </div>
       <div
         style={{
           display: "flex",
-          position: "absolute",
-          left: 64,
-          bottom: 142,
           alignItems: "center",
-          gap: 20,
-          border: "2px solid #204C5D",
-          borderRadius: 40,
-          padding: "14px 24px",
-          backgroundColor: "#FAFCF2",
-          fontSize: 23,
+          gap: 14,
+          fontSize: 32,
+          lineHeight: 1.2,
         }}
       >
-        <span>
-          {section?.action ?? "Explore projects, experiments & writing"}
-        </span>
-        <svg
-          aria-hidden="true"
-          fill="none"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-        >
-          <path
-            d="M5 19 19 5M5 5h14v14"
-            stroke="#204C5D"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-          />
-        </svg>
+        <span style={{ fontWeight: 700 }}>haritssr.com</span>
+        <span>· By Harits Syah</span>
       </div>
     </div>
   );

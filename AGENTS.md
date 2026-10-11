@@ -190,9 +190,11 @@ size. `utils/pageMetadata.ts` passes the page's title, social description, and
 path in the image URL, so content changes produce a new preview URL. Open Graph
 and Twitter use the same image and descriptive alt text.
 Edit `app/api/og/OpenGraphCard.tsx` to change the shared JSX design and palette.
-The shared watercolor background is `public/images/og-watercolor-blue-mint.png`;
-page text and CTAs are rendered dynamically over it. The route loads the local
-image once and embeds it without a network request. Change the `v` parameter in
+The card uses a quiet blue CSS gradient inspired by the site icon, a large page
+title, parent-path breadcrumbs, and site/author branding. Descriptions stay in
+metadata rather than the image. No background asset or network request is needed.
+Robots rules allow `/api/og` while keeping other API routes disallowed.
+Change the `v` parameter in
 `utils/pageMetadata.ts` when updating the design to refresh cached previews.
 The image renderer uses Next.js's bundled font and needs no external service.
 
