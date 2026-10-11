@@ -53,7 +53,7 @@ export default function ProjectsCard({
 
       <div className="flex space-x-2.5 px-3 pb-3">
         <a
-          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground in-data-[theme=dark]:bg-middle-hover in-data-[theme=dark]:text-foreground in-data-[theme=dark]:hover:bg-surface inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
+          className="corner-squircle bg-foreground/90 text-background hover:bg-foreground in-data-[theme=dark]:bg-surface in-data-[theme=dark]:text-muted in-data-[theme=dark]:inset-ring-border in-data-[theme=dark]:hover:bg-surface in-data-[theme=dark]:hover:inset-ring-border-hover inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none in-data-[theme=dark]:inset-ring"
           href={href}
           rel="noopener noreferrer"
           target="_blank"
