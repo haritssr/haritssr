@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import Accordion, { AccordionItem } from "@/components/Accordion";
+import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -16,7 +15,7 @@ export const metadata = getExperimentMetadata(
 
 function Equation({ tex }: { tex: string }) {
   return (
-    <div className="border-border overflow-x-auto rounded-xl border px-4 py-3">
+    <div className="border-border w-full max-w-full min-w-0 overflow-x-auto rounded-xl border px-4 py-3">
       {katexify(tex, true)}
     </div>
   );
@@ -24,32 +23,38 @@ function Equation({ tex }: { tex: string }) {
 
 export default function EulerIdentityPage() {
   return (
-    <div className="text-foreground space-y-20 pb-24">
-      <div className="max-w-full space-y-5">
+    <div className="text-foreground w-full max-w-full min-w-0 space-y-20 pb-24">
+      <div className="space-y-5">
         <SubTitle>
           Growth, circles, and imaginary numbers meet in one equation.
           Understand what each constant means, explore complex exponentials as
           rotation, and see why Euler’s identity follows from a half-turn.
         </SubTitle>
         <SourceCodeLink />
-        <div className="border-action/30 rounded-2xl border px-5 py-6 text-xl sm:text-2xl">
-          {katexify(String.raw`e^{i\pi}+1=0`, true)}
+        <div className="max-w-3xl space-y-5">
+          <div className="border-action/30 w-full max-w-full min-w-0 overflow-x-auto rounded-2xl border px-5 py-6 text-xl sm:text-2xl">
+            {katexify(String.raw`e^{i\pi}+1=0`, true)}
+          </div>
+          <p className="text-muted">
+            The connection is Euler’s formula: raising {katexify("e", false)} to
+            a purely imaginary exponent describes a point moving around a
+            circle. At an angle of {katexify(String.raw`\pi`, false)} radians,
+            that point reaches {katexify("-1", false)}.
+          </p>
         </div>
-        <p className="text-muted leading-8">
-          The connection is Euler’s formula: raising {katexify("e", false)} to a
-          purely imaginary exponent describes a point moving around a circle. At
-          an angle of {katexify(String.raw`\pi`, false)} radians, that point
-          reaches {katexify("-1", false)}.
-        </p>
       </div>
 
       <Section
         title="Meet the three constants"
         id="constants-heading"
-        contentClassName="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"
+        contentClassName="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))] gap-x-4 gap-y-5"
       >
-        <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
-          <h3 className="text-lg font-semibold">Euler’s number</h3>
+        <Section
+          className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0! rounded-xl border p-5"
+          headingAs="h3"
+          headingClassName="text-lg font-semibold"
+          title="Euler’s number"
+        >
           <Equation tex={String.raw`e\approx2.71828`} />
           <p className="text-muted text-sm leading-7">
             The natural base for continuous growth. If interest at a total rate
@@ -59,9 +64,13 @@ export default function EulerIdentityPage() {
           <Equation
             tex={String.raw`e=\lim_{n\to\infty}\left(1+\frac1n\right)^n`}
           />
-        </article>
-        <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
-          <h3 className="text-lg font-semibold">The circle constant</h3>
+        </Section>
+        <Section
+          className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0! rounded-xl border p-5"
+          headingAs="h3"
+          headingClassName="text-lg font-semibold"
+          title="The circle constant"
+        >
           <Equation tex={String.raw`\pi\approx3.14159`} />
           <p className="text-muted text-sm leading-7">
             A circle’s circumference divided by its diameter. Radians measure an
@@ -69,9 +78,13 @@ export default function EulerIdentityPage() {
             {katexify(String.raw`\pi`, false)} radians.
           </p>
           <Equation tex={String.raw`C=2\pi r,\qquad \theta=\frac{s}{r}`} />
-        </article>
-        <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
-          <h3 className="text-lg font-semibold">The imaginary unit</h3>
+        </Section>
+        <Section
+          className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0! rounded-xl border p-5"
+          headingAs="h3"
+          headingClassName="text-lg font-semibold"
+          title="The imaginary unit"
+        >
           <Equation tex={String.raw`i^2=-1`} />
           <p className="text-muted text-sm leading-7">
             A complex number has a real part and an imaginary part. Plotting
@@ -79,11 +92,11 @@ export default function EulerIdentityPage() {
             {katexify("i", false)} makes a counterclockwise quarter-turn.
           </p>
           <Equation tex={String.raw`i(a+bi)=-b+ai`} />
-        </article>
+        </Section>
       </Section>
 
       <Section
-        className="max-w-full"
+        contentClassName="max-w-3xl space-y-5"
         title="Euler’s formula connects them"
         id="formula-heading"
       >
@@ -118,7 +131,7 @@ export default function EulerIdentityPage() {
       <UnitCircleLab />
 
       <Section
-        className="max-w-full"
+        contentClassName="max-w-3xl space-y-5"
         title="A half-turn gives Euler’s identity"
         id="identity-heading"
         description={
@@ -152,7 +165,7 @@ export default function EulerIdentityPage() {
       </Section>
 
       <Section
-        className="max-w-full"
+        contentClassName="max-w-3xl space-y-5"
         title="Why an exponential becomes a circle"
         id="proof-heading"
         description={
@@ -166,7 +179,6 @@ export default function EulerIdentityPage() {
       >
         <Accordion>
           <AccordionItem
-            panelClassName="bg-transparent"
             title="Follow the power series derivation"
             value="power-series-derivation"
           >
@@ -209,7 +221,7 @@ export default function EulerIdentityPage() {
       </Section>
 
       <Section
-        className="max-w-full"
+        contentClassName="max-w-3xl space-y-5"
         title="What to remember"
         id="takeaways-heading"
       >
@@ -236,19 +248,19 @@ export default function EulerIdentityPage() {
         <Equation tex={String.raw`e^{i\alpha}e^{i\beta}=e^{i(\alpha+\beta)}`} />
         <p className="text-muted">
           Continue with{" "}
-          <Link
-            className="text-action underline underline-offset-4"
+          <InternalLink
             href="/experiments/mathematics/logarithms"
+            variant="inline"
           >
             logarithms
-          </Link>{" "}
+          </InternalLink>{" "}
           to explore the inverse of exponential growth, or review{" "}
-          <Link
-            className="text-action underline underline-offset-4"
+          <InternalLink
             href="/experiments/mathematics/number-systems"
+            variant="inline"
           >
             number systems
-          </Link>{" "}
+          </InternalLink>{" "}
           for the bigger picture of real and complex numbers.
         </p>
       </Section>

@@ -60,10 +60,9 @@ When mistakes recur, strengthen reusable checks and guardrails.
   the outer section.
 - Use the optional `description` for an introductory paragraph. It accepts
   React content such as links and inline KaTeX, and `Section` gives it the
-  shared muted color and full available width. Sections, descriptions, prose,
-  and content grids use `max-w-full` within the shared page container rather
-  than narrower content caps. Keep responsive grid columns and the intrinsic
-  sizing of diagrams, form controls, and overlays.
+  shared muted color and full available width. Keep page and section titles
+  and descriptions full width; limit only reading body content with
+  `contentClassName` or a body wrapper. Keep interactive content full width.
 - Use `contentClassName` to style an internal wrapper around section body
   content, for example to lay cards out in a responsive grid. The wrapper is
   omitted when the prop is absent or the section has no body. A section may
@@ -82,6 +81,29 @@ When mistakes recur, strengthen reusable checks and guardrails.
 - Preserve existing heading anchors by moving their fragment ID to the Section
   container. Leave specialized local section components intact unless their
   behavior is explicitly being refactored.
+
+## Experiment Content Width
+
+Apply these defaults to new or refactored experiments in every domain:
+
+- Keep page and section containers, titles, and introductory descriptions full
+  width. Apply left-aligned `max-w-3xl` only to reading content (explanations,
+  derivations, solution steps, proofs, summaries, takeaways), such as
+  `<Section contentClassName="max-w-3xl space-y-5" ...>`. Never cap a container
+  that also holds a title or description.
+- Interactive sections, labs, demos, visualizations, tables, and card grids use
+  full available width with responsive columns. Preserve suitable intrinsic
+  sizing for diagrams, controls, and overlays.
+- In mixed sections, narrow only explanatory body content; keep the heading,
+  description, and interactive content full width. Do not add a global cap to
+  `Section`.
+- Keep mobile layouts fluid; scroll wide equations/tables locally without
+  causing page overflow. Other pages stay full width unless directed otherwise.
+
+- Repeated grid cards must have equal widths and equal heights within each row.
+  Align headings, content areas, and bottom actions or equations with grid,
+  subgrid, or flexible rows. No uneven heights or masonry unless explicitly
+  requested. Do not clip content or impose fixed pixel heights to force alignment.
 
 # Mathematical Notation
 
