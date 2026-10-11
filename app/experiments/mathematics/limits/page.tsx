@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import Section from "@/components/Section";
-import SectionHeading from "@/components/SectionHeading";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -59,7 +58,7 @@ const questions: readonly PracticeQuestion[] = [
 export default function LimitsPage() {
   return (
     <div className="space-y-20 pb-24">
-      <div className="max-w-3xl">
+      <div className="max-w-full">
         <SubTitle>
           A limit asks where a function is heading as its input gets close to a
           point. Start by watching nearby values, not by substituting the point.
@@ -67,8 +66,10 @@ export default function LimitsPage() {
         <SourceCodeLink />
       </div>
 
-      <div className="text-muted max-w-3xl space-y-5 text-base leading-8">
-        <SectionHeading>What does approaching mean?</SectionHeading>
+      <Section
+        className="text-muted max-w-full text-base"
+        title="What does approaching mean?"
+      >
         <p>
           Pick a target on the horizontal axis. Move toward it from the left and
           right, and watch the function’s height. For a limit to exist from both
@@ -85,12 +86,12 @@ export default function LimitsPage() {
           limit describes nearby inputs, so that single point does not decide
           the answer.
         </p>
-      </div>
+      </Section>
 
       <LimitsLab />
 
       <Section
-        className="text-muted max-w-3xl text-base"
+        className="text-muted max-w-full text-base"
         title="Try a limit by hand"
         description={
           <>

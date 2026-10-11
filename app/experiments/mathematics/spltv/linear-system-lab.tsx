@@ -122,7 +122,7 @@ export default function LinearSystemLab() {
         >
           Explore a system, one operation at a time
         </h2>
-        <p className="text-muted mt-1 text-sm leading-6">
+        <p className="text-muted mt-1 max-w-full text-sm leading-6">
           Choose an example or edit the coefficients. Follow the row operations
           to see why the system has its solution type.
         </p>

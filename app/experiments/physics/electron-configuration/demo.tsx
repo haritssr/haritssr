@@ -127,12 +127,12 @@ export default function ElectronConfigurationDemo({
         <p aria-atomic="true" aria-live="polite" className="sr-only">
           {element.name} selected, atomic number {atomicNumber}.
         </p>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="border-border rounded-xl border p-3">
+        <div className="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,16rem),1fr))] gap-3">
+          <div className="border-border min-w-0 rounded-xl border p-3">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
                 <p className="text-foreground/70 text-xs">Element</p>
-                <div className="mt-2 flex items-end gap-2">
+                <div className="mt-2 flex flex-wrap items-end gap-2">
                   <span className="text-4xl font-semibold tracking-tight">
                     {element.symbol}
                   </span>
@@ -155,7 +155,7 @@ export default function ElectronConfigurationDemo({
             elementName={element.name}
             elementSymbol={element.symbol}
           />
-          <div className="border-border rounded-xl border p-3">
+          <div className="border-border min-w-0 rounded-xl border p-3">
             <p className="text-foreground/70 text-xs">Electron configuration</p>
             <p className="mt-2 text-base leading-6 wrap-break-word">
               {configuration.map((term, index) => {
@@ -187,7 +187,7 @@ export default function ElectronConfigurationDemo({
               )}
             </ul>
           </div>
-          <div className="border-border rounded-xl border p-3">
+          <div className="border-border min-w-0 rounded-xl border p-3">
             <p className="text-foreground/70 text-xs">Shell distribution</p>
             <ul className="mt-2 flex flex-wrap gap-1.5">
               {shellCounts.map((count, index) => {
@@ -213,7 +213,7 @@ export default function ElectronConfigurationDemo({
               })}
             </ul>
           </div>
-          <div className="border-border rounded-xl border p-3">
+          <div className="border-border min-w-0 rounded-xl border p-3">
             <QuantumNumbersSummary atomicNumber={atomicNumber} />
           </div>
         </div>
@@ -225,7 +225,7 @@ export default function ElectronConfigurationDemo({
       />
 
       <Section title="Aufbau Diagram" id="aufbau-diagram-title">
-        <div className="border-border rounded-xl border">
+        <div className="border-border min-w-0 rounded-xl border">
           <div className="border-border flex items-center gap-3 border-b p-4">
             <div className="scrollbar-subtle min-w-0 overflow-x-auto">
               <ol
@@ -703,7 +703,7 @@ function AtomicNotation({
   const neutronNumber = massNumber - atomicNumber;
 
   return (
-    <figure className="border-border rounded-xl border p-3">
+    <figure className="border-border min-w-0 rounded-xl border p-3">
       <figcaption>
         <h3 className="text-foreground/70 text-xs font-medium">
           Atomic Notation

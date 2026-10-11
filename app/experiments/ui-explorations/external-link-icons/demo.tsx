@@ -280,7 +280,7 @@ export default function IconComparison({
             </SampleLink>
           </p>
         </div>
-        <p className="text-muted mt-4 max-w-2xl text-sm leading-relaxed">
+        <p className="text-muted mt-4 max-w-full text-sm leading-relaxed">
           All sample links open example.com in a new tab. Try hovering, tabbing
           through the links, and narrowing the window to judge the icon at
           reading size. Right arrows and chevrons can also suggest a next step;

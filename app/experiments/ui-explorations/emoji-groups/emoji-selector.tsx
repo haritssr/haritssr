@@ -94,7 +94,7 @@ export default function EmojiSelector({
 
         <p
           aria-live="polite"
-          className="text-foreground/65 max-w-2xl text-sm leading-relaxed"
+          className="text-foreground/65 max-w-full text-sm leading-relaxed"
         >
           {selectedGrouping.description}
         </p>

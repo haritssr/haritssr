@@ -56,7 +56,7 @@ export default function Section({
         {title}
       </SectionHeading>
       {description !== undefined && description !== null ? (
-        <p className="text-muted max-w-3xl">{description}</p>
+        <p className="text-muted">{description}</p>
       ) : null}
       {hasChildren && hasContentClassName ? (
         <div className={contentClassName}>{children}</div>

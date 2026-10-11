@@ -273,7 +273,7 @@ function ProgressSummary({
   return (
     <section
       aria-label="Progres latihan"
-      className="border-border rounded-2xl border p-5"
+      className="border-border max-w-full rounded-2xl border p-5"
     >
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
@@ -398,7 +398,7 @@ export default function PolynomialPractice() {
       />
       <fieldset className="min-w-0" disabled={!ready}>
         <legend className="sr-only">Latihan interaktif polinomial</legend>
-        <div className="grid items-start gap-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
+        <div className="grid min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
           <aside className="min-w-0">
             <div className="hidden lg:block">
               <h2 className="text-muted mb-3 text-xs font-semibold tracking-wide uppercase">

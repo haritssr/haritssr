@@ -165,7 +165,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare CSS Grid with multi-column content flow.",
         tags: ["layout", "css"],
         createdAt: "2026-09-27",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-11"],
       },
     ],
     id: 1,
@@ -431,7 +431,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         tags: ["routing", "data"],
         hideTitle: true,
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "students",
@@ -441,7 +441,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         tags: ["routing", "data"],
         hideTitle: true,
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "posts",
@@ -493,7 +493,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Practice addition with a stateful number guessing game.",
         tags: ["mathematics", "interaction"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "inputs",
@@ -615,7 +615,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore an inline editing interface.",
         tags: ["forms", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "masalah-to-feature",
@@ -676,7 +676,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Browse an atlas of emoji organized into groups.",
         tags: ["search", "content"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "corner-smoothing",
@@ -685,7 +685,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare rounded corners, native CSS squircles, and Lisse curves.",
         tags: ["css", "design"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "external-link-icons",
@@ -694,7 +694,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare minimal arrows, chevrons, and exit markers for external links.",
         tags: ["icons", "design", "interaction"],
         createdAt: "2026-10-03",
-        updatedAt: ["2026-10-03"],
+        updatedAt: ["2026-10-03", "2026-10-11"],
       },
     ],
     id: 10,
@@ -718,6 +718,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-04",
           "2026-10-06",
+          "2026-10-11",
         ],
       },
       {
@@ -727,7 +728,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Fill atomic orbitals and inspect electron configurations and quantum numbers.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-23",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: [
+          "2026-09-29",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-11",
+        ],
       },
       {
         slug: "motion-diagrams",
@@ -736,7 +743,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare motion through interactive position and velocity diagrams.",
         tags: ["mechanics", "visualization"],
         createdAt: "2026-09-25",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: [
+          "2026-09-29",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-11",
+        ],
       },
       {
         slug: "atomic-orbitals",
@@ -745,7 +758,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore atomic wavefunctions, probability distributions, and orbital shapes.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06", "2026-10-11"],
       },
       {
         slug: "double-slit-interference",
@@ -754,7 +767,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Change wavelength and slit geometry to explore interference fringes.",
         tags: ["waves", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: [
+          "2026-09-29",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-11",
+        ],
       },
       {
         slug: "essential-physics-equations",
@@ -763,7 +782,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Read key physics equations with variable definitions, units, and sources.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-09-30",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06", "2026-10-11"],
       },
     ],
     id: 16,
@@ -786,7 +805,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Render standalone and inline mathematical notation with KaTeX.",
         tags: ["mathematics", "typography"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "live-playground",
@@ -796,7 +815,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Edit TeX, try templates, and preview mathematical notation live.",
         tags: ["mathematics", "editor"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "matrix-builder",
@@ -805,7 +824,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Edit matrix entries and generate the corresponding TeX.",
         tags: ["mathematics", "forms"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "derivation-stepper",
@@ -815,7 +834,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Follow a quadratic equation through completing-the-square steps.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "piecewise-functions",
@@ -825,7 +844,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare thirteen piecewise functions and their evaluated graphs.",
         tags: ["mathematics", "visualization"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "equation-annotations",
@@ -835,7 +854,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Annotate terms in Newton’s second law using TeX decorations.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
       },
       {
         slug: "math-notation",
@@ -845,7 +864,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "See which high-school math expressions KaTeX can typeset, and when graphs, diagrams, or calculations need other tools.",
         tags: ["notation", "katex", "learning"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10"],
+        updatedAt: ["2026-10-10", "2026-10-11"],
       },
       {
         slug: "high-school-symbols",
@@ -865,7 +884,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore radius, diameter, circumference, area, arcs, and sectors with an interactive circle and worked examples.",
         tags: ["geometry", "circles", "learning", "visualization"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10"],
+        updatedAt: ["2026-10-10", "2026-10-11"],
       },
       {
         slug: "polinomial",
@@ -875,7 +894,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Latihan 27 soal polinomial dengan tabel koefisien, pengelompokan suku, petunjuk bertahap, pembahasan, dan progres yang tersimpan di browser.",
         tags: ["algebra", "polynomials", "equations", "learning"],
         createdAt: "2026-10-08",
-        updatedAt: ["2026-10-08"],
+        updatedAt: ["2026-10-08", "2026-10-11"],
       },
       {
         slug: "euler-s-identity",
@@ -885,7 +904,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Connect exponential growth, circle geometry, and imaginary numbers through Euler’s formula, an interactive unit circle, and a step-by-step derivation of Euler’s identity.",
         tags: ["complex-numbers", "trigonometry", "exponents", "visualization"],
         createdAt: "2026-10-07",
-        updatedAt: ["2026-10-07"],
+        updatedAt: ["2026-10-07", "2026-10-11"],
       },
       {
         slug: "logarithms",
@@ -895,7 +914,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Understand logarithms, derive their rules, and explore logarithmic graphs and their exponential inverses.",
         tags: ["algebra", "logarithms", "exponents", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-10"],
+        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
       },
       {
         slug: "spltv",
@@ -905,7 +924,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Solve three-variable linear systems with elimination, explore exact row operations, and distinguish unique, infinite, and no-solution cases.",
         tags: ["algebra", "equations", "linear-algebra"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-07", "2026-10-10"],
+        updatedAt: ["2026-10-06", "2026-10-07", "2026-10-10", "2026-10-11"],
       },
       {
         slug: "number-systems",
@@ -915,7 +934,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore number sets with a Venn diagram and connect inequalities, interval notation, and an interactive number line.",
         tags: ["foundations", "sets", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-10"],
+        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
       },
       {
         slug: "quadratic-equations",
@@ -925,7 +944,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Learn factoring, completing the square, and the quadratic formula with an interactive root graph.",
         tags: ["algebra", "equations", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-10"],
+        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
       },
       {
         slug: "limits",
@@ -941,6 +960,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-06",
           "2026-10-10",
+          "2026-10-11",
         ],
       },
       {
@@ -956,6 +976,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-06",
           "2026-10-10",
+          "2026-10-11",
         ],
       },
       {
@@ -971,6 +992,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-06",
           "2026-10-10",
+          "2026-10-11",
         ],
       },
     ],

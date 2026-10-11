@@ -13,7 +13,7 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function ExternalLinkIconsPage() {
   return (
     <div className="space-y-20 pb-16">
-      <p className="text-muted max-w-2xl text-lg leading-relaxed">
+      <p className="text-muted max-w-full text-lg leading-relaxed">
         How little does an icon need to say “go outside”? Try fewer lines,
         shorter arrows, and a lighter footprint beside the same link text.
       </p>

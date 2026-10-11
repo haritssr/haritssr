@@ -41,7 +41,7 @@ export default function DependentFormulas({
   ).size;
 
   return (
-    <div className="border-border overflow-hidden rounded-xl border">
+    <div className="border-border min-w-0 overflow-hidden rounded-xl border">
       <div className="border-border grid items-center gap-x-6 gap-y-3 border-b p-4 sm:grid-cols-2">
         <div className="min-w-0">
           <SelectField
@@ -74,7 +74,7 @@ export default function DependentFormulas({
           {dependentCount === 1 ? "other quantity" : "other quantities"}
         </p>
         {selected.formulas.length > 0 ? (
-          <ul className="grid gap-3 md:grid-cols-2">
+          <ul className="grid min-w-0 grid-cols-1 items-start gap-3 lg:grid-cols-2">
             {selected.formulas.map((formula, formulaIndex) => (
               <li
                 className="border-border flex min-w-0 flex-col gap-2 rounded-xl border p-3"

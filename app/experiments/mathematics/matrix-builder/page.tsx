@@ -20,7 +20,7 @@ export default function MatrixBuilderPage() {
   return (
     <div className="space-y-20 pb-16">
       <div>
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
+        <p className="text-foreground/80 max-w-full text-lg leading-relaxed">
           Build a matrix from individual entries. Change its size and brackets
           to see how the same values become different TeX environments.
         </p>
@@ -30,6 +30,7 @@ export default function MatrixBuilderPage() {
         <Demo />
       </Section>
       <Section
+        className="max-w-full"
         title="Rows, columns, and delimiters"
         id="matrix-notes-heading"
         description={

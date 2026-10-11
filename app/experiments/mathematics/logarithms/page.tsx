@@ -21,7 +21,7 @@ function Equation({ tex }: { tex: string }) {
 export default function LogarithmsPage() {
   return (
     <div className="text-foreground space-y-20 pb-24">
-      <div className="max-w-3xl">
+      <div className="max-w-full">
         <SubTitle>
           Find the exponent, understand why logarithms are useful, and derive
           their rules from the laws of powers. Explore the graph and check your
@@ -31,7 +31,7 @@ export default function LogarithmsPage() {
       </div>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="What is a logarithm?"
         id="definition-heading"
         description={
@@ -75,7 +75,7 @@ export default function LogarithmsPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="min-w-0"
         title="Why do logarithms exist?"
         id="purpose-heading"
         description={
@@ -85,7 +85,7 @@ export default function LogarithmsPage() {
             many orders of magnitude easier to compare.
           </>
         }
-        contentClassName="grid grid-cols-1 gap-4"
+        contentClassName="grid min-w-0 grid-cols-1 items-start gap-4 md:grid-cols-2 xl:grid-cols-3"
       >
         <article className="border-border space-y-3 rounded-xl border p-5">
           <h3 className="font-semibold">Find time in a growth model</h3>
@@ -117,7 +117,7 @@ export default function LogarithmsPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="Common logarithms and natural logarithms"
         id="bases-heading"
         description={
@@ -193,7 +193,7 @@ export default function LogarithmsPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="Order and logarithmic inequalities"
         id="inequalities-heading"
         description={
@@ -221,7 +221,7 @@ export default function LogarithmsPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="Common mistakes"
         id="mistakes-heading"
         contentClassName="space-y-8"

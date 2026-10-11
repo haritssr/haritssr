@@ -54,7 +54,7 @@ export default function IntervalLab() {
   return (
     <section
       aria-labelledby="interval-lab-heading"
-      className="border-border text-foreground overflow-hidden rounded-2xl border"
+      className="border-border text-foreground min-w-0 overflow-hidden rounded-2xl border"
     >
       <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2
@@ -63,12 +63,12 @@ export default function IntervalLab() {
         >
           Build an interval
         </h2>
-        <p className="text-muted mt-1 text-sm leading-6">
+        <p className="text-muted mt-1 max-w-full text-sm leading-6">
           Move the endpoints and decide whether to include them. Unbounded sides
           extend to infinity.
         </p>
       </div>
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="min-w-0 space-y-6 p-5 sm:p-6">
           <fieldset className="flex flex-wrap gap-2">
             <legend className="sr-only">Interval examples</legend>

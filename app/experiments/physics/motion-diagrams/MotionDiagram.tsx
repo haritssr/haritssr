@@ -97,7 +97,7 @@ export default function MotionDiagram({
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_240px]">
+      <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_240px]">
         <div className="min-w-0 p-4 sm:p-6">
           <figure>
             <div className="mb-1 pl-2 text-xs text-zinc-600">

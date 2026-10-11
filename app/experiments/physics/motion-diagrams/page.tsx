@@ -67,7 +67,7 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function MotionDiagramsPage() {
   return (
     <div className="pb-24">
-      <div className="max-w-3xl space-y-4">
+      <div className="max-w-full space-y-4">
         <SubTitle>
           Adjust the controls and see how each motion graph changes over time.
         </SubTitle>
@@ -97,7 +97,7 @@ export default function MotionDiagramsPage() {
             key={motion.id}
           >
             <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="max-w-2xl">
+              <div className="max-w-full">
                 <SectionHeading
                   id={`${motion.id}-title`}
                 >{`${motion.abbreviation} · ${motion.name}`}</SectionHeading>

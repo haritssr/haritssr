@@ -141,7 +141,7 @@ export default function CornerComparison() {
         </figure>
       </div>
 
-      <p className="text-foreground/70 max-w-3xl text-sm leading-relaxed">
+      <p className="text-foreground/70 max-w-full text-sm leading-relaxed">
         All samples keep their pixel dimensions as you resize the page. The
         radius is capped at half the size. Lisse preserves that radius here and
         reduces smoothing if there is too little edge space, so large radii can

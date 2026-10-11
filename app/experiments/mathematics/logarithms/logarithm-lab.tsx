@@ -46,18 +46,18 @@ export default function LogarithmLab() {
   return (
     <section
       aria-labelledby="logarithm-lab-heading"
-      className="border-border overflow-hidden rounded-2xl border"
+      className="border-border min-w-0 overflow-hidden rounded-2xl border"
     >
       <div className="border-border border-b px-5 py-4 sm:px-6">
         <h2 className="text-lg font-semibold" id="logarithm-lab-heading">
           Explore the logarithmic graph
         </h2>
-        <p className="text-muted mt-1 text-sm leading-6">
+        <p className="text-muted mt-1 max-w-full text-sm leading-6">
           Choose a base and move the input. Compare increasing and decreasing
           curves, then show the exponential inverse.
         </p>
       </div>
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <figure className="min-w-0 p-5 sm:p-6">
           <div className="text-action mb-4 text-center">
             {katexify(`y={}^{${base.tex}}\\!\\log x`, true)}

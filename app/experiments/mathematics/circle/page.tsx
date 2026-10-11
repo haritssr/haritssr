@@ -72,7 +72,7 @@ const exercises = [
 export default function CirclePage() {
   return (
     <div className="text-foreground space-y-20 pb-24">
-      <div className="max-w-3xl space-y-5">
+      <div className="max-w-full space-y-5">
         <SubTitle>
           Understand a circle from its center outward. Explore how radius sets
           its size, why circumference and area follow different rules, and how
@@ -82,7 +82,7 @@ export default function CirclePage() {
       </div>
 
       <Section
-        className="max-w-3xl"
+        className="min-w-0"
         title="What is a circle?"
         id="circle-definition"
         description={
@@ -149,7 +149,7 @@ export default function CirclePage() {
       <CircleLab />
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="Arcs and sectors"
         id="circle-sectors"
         description={
@@ -193,7 +193,7 @@ export default function CirclePage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="A circle on the coordinate plane"
         id="circle-coordinates"
         description={

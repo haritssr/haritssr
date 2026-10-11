@@ -53,7 +53,7 @@ const questions: readonly PracticeQuestion[] = [
 export default function IntegralsPage() {
   return (
     <div className="space-y-20 pb-24">
-      <div className="max-w-3xl">
+      <div className="max-w-full">
         <SubTitle>
           An integral adds up many small contributions. On a graph, a definite
           integral is the signed area between the curve and the horizontal axis.
@@ -62,7 +62,7 @@ export default function IntegralsPage() {
       </div>
 
       <Section
-        className="text-muted max-w-3xl text-base"
+        className="text-muted max-w-full text-base"
         title="From rectangles to accumulation"
         description={
           <>
@@ -88,7 +88,7 @@ export default function IntegralsPage() {
       <IntegralsLab />
 
       <Section
-        className="text-muted max-w-3xl text-base"
+        className="text-muted max-w-full text-base"
         title="A faster exact method"
         description={
           <>

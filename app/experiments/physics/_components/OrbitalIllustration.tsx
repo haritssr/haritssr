@@ -249,7 +249,7 @@ export default function OrbitalIllustration({
           </div>
         </div>
       </div>
-      <div className="text-foreground/70 mt-3 space-y-2 text-sm leading-6">
+      <div className="text-foreground/70 mt-3 max-w-full space-y-2 text-sm leading-6">
         <p>
           The shaded lobes illustrate angular probability. Turn off Shape to
           explore dots sampled from {katexify("|\\psi|^2", false)}. Blue and
@@ -307,7 +307,7 @@ function OrbitalShapeExplanation() {
         Why are {katexify("s", false)} orbitals round and {katexify("p", false)}{" "}
         orbitals two-lobed?
       </h3>
-      <p className="text-foreground/70 mt-2 text-sm leading-6">
+      <p className="text-foreground/70 mt-2 max-w-full text-sm leading-6">
         The wave separates into a distance factor {katexify("R", false)} and a
         direction factor {katexify("Y", false)}. For {katexify("s", false)},{" "}
         {katexify("Y", false)} is constant in every direction. For the pictured{" "}
@@ -315,7 +315,7 @@ function OrbitalShapeExplanation() {
         it changes sign across the horizontal nodal plane and is zero there. The
         lobes plot {katexify("|Y|^2", false)} in each direction.
       </p>
-      <div className="mt-4 grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-center">
+      <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 md:items-center">
         <svg
           aria-label={`${family === "s" ? "Round s orbital angular shape" : "Two-lobed p-y orbital angular shape"}. Probe angle ${angle} degrees; relative signed angular amplitude ${amplitude.toFixed(2)}.`}
           className="h-auto w-full"

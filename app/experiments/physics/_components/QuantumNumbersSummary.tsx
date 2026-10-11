@@ -58,7 +58,7 @@ export function QuantumNumbersSummary({
           <span className="text-foreground/70 block text-xs">
             {katexify(String.raw`(n,\ell,m_l,m_s)`, false)}
           </span>
-          <span className="mt-1 block text-lg">
+          <span className="mt-1 block max-w-full overflow-x-auto text-lg">
             {katexify(
               formatQuantumNumberTuple(
                 principalNumber,

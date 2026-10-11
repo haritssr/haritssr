@@ -69,9 +69,9 @@ export default function MatrixDemo() {
   }
 
   return (
-    <div className="grid min-w-0 gap-6 sm:grid-cols-2">
+    <div className="grid min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-2">
       <div className="min-w-0 space-y-5">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,12rem),1fr))] gap-4">
           <ExperimentSelect
             label="Matrix size"
             onValueChange={resize}

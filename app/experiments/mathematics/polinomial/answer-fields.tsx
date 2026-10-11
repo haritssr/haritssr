@@ -238,7 +238,7 @@ function GroupingPreview({
   return (
     <div className="mt-4 space-y-2">
       <p className="text-muted text-xs">Kelompok pilihanmu</p>
-      <div className="grid gap-2 sm:grid-cols-5">
+      <div className="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,8rem),1fr))] gap-2">
         {question.buckets.map((bucket) => {
           const terms =
             group?.fields.filter((field) => answers[field.id] === bucket.id) ??
@@ -303,9 +303,7 @@ export default function AnswerFields({
           <legend className="mb-3 text-sm font-semibold">
             <MathText text={group.title} />
           </legend>
-          <div
-            className={`grid grid-cols-2 gap-2 sm:grid-cols-3 ${group.fields.length === 5 ? "xl:grid-cols-5" : ""}`}
-          >
+          <div className="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,8rem),1fr))] gap-2">
             {group.fields.map((field) => (
               <AnswerInput
                 field={field}

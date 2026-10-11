@@ -22,8 +22,10 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function PhysicsEquationsPage() {
   return (
     <>
-      <SubTitle>{DESCRIPTION}</SubTitle>
-      <SourceCodeLink />
+      <div className="max-w-full">
+        <SubTitle>{DESCRIPTION}</SubTitle>
+        <SourceCodeLink />
+      </div>
       <article className="space-y-20 pb-24">
         <EquationContents />
 
@@ -32,7 +34,7 @@ export default function PhysicsEquationsPage() {
             <SectionHeading id={`${domain.id}-title`}>
               {domain.title}
             </SectionHeading>
-            <p className="text-foreground/65 mb-10 max-w-3xl text-base leading-7">
+            <p className="text-foreground/65 mb-10 max-w-full text-base leading-7">
               {domain.description}
             </p>
             <div className="space-y-20">
@@ -56,7 +58,7 @@ function EquationContents() {
       <SectionHeading id="equation-contents-title">
         Browse by domain
       </SectionHeading>
-      <p className="text-foreground/65 mb-6 max-w-3xl text-sm leading-6">
+      <p className="text-foreground/65 mb-6 max-w-full text-sm leading-6">
         Units follow SI; {katexify("1", false)} means dimensionless. An em dash
         indicates no applicable unit or no universal constant value. Values
         marked {katexify(String.raw`\approx`, false)} are approximate; other
@@ -108,13 +110,13 @@ function EquationSection({ equation }: { equation: PhysicsEquation }) {
       title={equation.title}
       headingAs="h3"
     >
-      <div className="mb-5 grid sm:mt-5 sm:grid-cols-2 sm:items-start sm:gap-8">
-        <div className="border-border bg-background scrollbar-subtle mb-5 min-w-0 overflow-x-auto rounded-xl border px-4 py-6 sm:my-0 sm:px-6">
+      <div className="grid min-w-0 grid-cols-1 items-start gap-5 lg:grid-cols-2 lg:gap-8">
+        <div className="border-border bg-background scrollbar-subtle min-w-0 overflow-x-auto rounded-xl border px-4 py-6 sm:px-6">
           <div className="w-fit min-w-full text-base sm:text-lg">
             {katexify(equation.expression, true)}
           </div>
         </div>
-        <p className="text-foreground/80 min-w-0 text-base leading-7">
+        <p className="text-foreground/80 max-w-full min-w-0 text-base leading-7">
           {equation.explanation}{" "}
           <ExternalLink
             href={equation.source.href}
@@ -129,7 +131,7 @@ function EquationSection({ equation }: { equation: PhysicsEquation }) {
           {equation.unitsNote}
         </p>
       )}
-      <p className="text-foreground/70 mt-5 text-sm leading-6">
+      <p className="text-foreground/70 max-w-full text-sm leading-6">
         <span className="text-foreground font-medium">When it applies: </span>
         {equation.condition}
       </p>

@@ -21,7 +21,7 @@ export default function DerivationStepperPage() {
   return (
     <div className="space-y-20 pb-16">
       <div>
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
+        <p className="text-foreground/80 max-w-full text-lg leading-relaxed">
           Follow a solution of {katexify("x^2+6x+5=0", false)} by completing the
           square. Reveal each transformation and see how KaTeX keeps the
           equations aligned as the derivation grows.
@@ -32,6 +32,7 @@ export default function DerivationStepperPage() {
         <Demo />
       </Section>
       <Section
+        className="max-w-full"
         title="Align a chain of equations"
         id="derivation-notes-heading"
         description={

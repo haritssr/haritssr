@@ -25,7 +25,7 @@ function Equation({ tex }: { tex: string }) {
 export default function EulerIdentityPage() {
   return (
     <div className="text-foreground space-y-20 pb-24">
-      <div className="max-w-3xl space-y-5">
+      <div className="max-w-full space-y-5">
         <SubTitle>
           Growth, circles, and imaginary numbers meet in one equation.
           Understand what each constant means, explore complex exponentials as
@@ -46,7 +46,7 @@ export default function EulerIdentityPage() {
       <Section
         title="Meet the three constants"
         id="constants-heading"
-        contentClassName="grid gap-4 md:grid-cols-3"
+        contentClassName="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"
       >
         <article className="border-border min-w-0 space-y-4 rounded-xl border p-5">
           <h3 className="text-lg font-semibold">Euler’s number</h3>
@@ -83,7 +83,7 @@ export default function EulerIdentityPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="Euler’s formula connects them"
         id="formula-heading"
       >
@@ -118,7 +118,7 @@ export default function EulerIdentityPage() {
       <UnitCircleLab />
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="A half-turn gives Euler’s identity"
         id="identity-heading"
         description={
@@ -152,7 +152,7 @@ export default function EulerIdentityPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="Why an exponential becomes a circle"
         id="proof-heading"
         description={
@@ -209,7 +209,7 @@ export default function EulerIdentityPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="What to remember"
         id="takeaways-heading"
       >

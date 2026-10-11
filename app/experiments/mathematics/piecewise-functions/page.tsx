@@ -20,7 +20,7 @@ export default function PiecewiseFunctionsPage() {
   return (
     <div className="space-y-20 pb-16">
       <div>
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
+        <p className="text-foreground/80 max-w-full text-lg leading-relaxed">
           A piecewise function chooses a rule according to its input. Move the
           slider across each boundary to see the active branch and result while
           KaTeX displays the complete definition.
@@ -31,6 +31,7 @@ export default function PiecewiseFunctionsPage() {
         <Demo />
       </Section>
       <Section
+        className="max-w-full"
         title="Typeset conditions with cases"
         id="piecewise-notes-heading"
         description={

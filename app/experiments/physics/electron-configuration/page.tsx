@@ -30,8 +30,10 @@ export default async function ElectronConfigurationPage({
 
   return (
     <>
-      <SubTitle>{DESCRIPTION}</SubTitle>
-      <SourceCodeLink />
+      <div className="max-w-full">
+        <SubTitle>{DESCRIPTION}</SubTitle>
+        <SourceCodeLink />
+      </div>
       <ElectronConfigurationDemo
         initialAtomicNumber={initialAtomicNumber}
         vocabulary={<VocabularyGuide />}

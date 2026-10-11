@@ -4,7 +4,7 @@ import { Tabs } from "@base-ui/react/tabs";
 
 export default function TabsDemo() {
   return (
-    <Tabs.Root className="flex w-full max-w-sm flex-col" defaultValue="tab1">
+    <Tabs.Root className="flex w-full max-w-full flex-col" defaultValue="tab1">
       <Tabs.List
         aria-label="Account settings"
         className="bg-foreground/10 flex shrink-0 gap-1 rounded-lg p-1"

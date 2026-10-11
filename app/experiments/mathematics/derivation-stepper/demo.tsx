@@ -51,8 +51,8 @@ export default function DerivationDemo() {
     .join(" \\\\\n")}\n\\end{aligned}`;
 
   return (
-    <div className="grid min-w-0 gap-6 sm:grid-cols-2">
-      <div className="space-y-5">
+    <div className="grid min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-2">
+      <div className="min-w-0 space-y-5">
         <div aria-live="polite" className="border-border rounded-xl border p-5">
           <p className="text-foreground/70 mb-2 text-sm">
             Step {step + 1} of {STEPS.length}

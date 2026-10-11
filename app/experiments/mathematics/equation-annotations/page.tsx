@@ -21,7 +21,7 @@ export default function EquationAnnotationsPage() {
   return (
     <div className="space-y-20 pb-16">
       <div>
-        <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
+        <p className="text-foreground/80 max-w-full text-lg leading-relaxed">
           Use annotations to explain the pieces of an equation. Explore{" "}
           {katexify("F=ma", false)}, Newton’s second law for constant mass, with
           three ways to draw attention to a selected term.
@@ -32,6 +32,7 @@ export default function EquationAnnotationsPage() {
         <Demo />
       </Section>
       <Section
+        className="max-w-full"
         title="Make the meaning visible"
         id="annotations-notes-heading"
         description={

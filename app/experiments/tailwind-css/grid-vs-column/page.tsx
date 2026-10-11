@@ -46,7 +46,7 @@ export default function GridVsColumnPage() {
   return (
     <div className="space-y-20 pb-16">
       <header>
-        <p className="text-foreground/70 max-w-3xl text-lg">
+        <p className="text-foreground/70 max-w-full text-lg">
           Both layouts can create multiple columns, but they arrange content in
           different ways. Compare the same cards below, then choose based on
           whether items need shared rows or should flow naturally.

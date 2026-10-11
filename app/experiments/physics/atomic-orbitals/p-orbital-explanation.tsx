@@ -9,9 +9,9 @@ export function POrbitalPattern() {
     <>
       <section
         aria-labelledby="the-shape-in-one-picture"
-        className="border-border bg-surface-hover overflow-hidden rounded-3xl border"
+        className="border-border bg-surface-hover min-w-0 overflow-hidden rounded-3xl border"
       >
-        <div className="grid gap-2 p-5 sm:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-8">
+        <div className="grid gap-2 p-5 sm:p-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-8">
           <div>
             <p className="text-foreground/55 text-sm font-medium tracking-wide uppercase">
               The equation, drawn
@@ -57,7 +57,7 @@ export function POrbitalPattern() {
 
       <section
         aria-labelledby="same-shape-three-directions"
-        className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"
+        className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center"
       >
         <div>
           <p className="text-action text-sm font-semibold tracking-[0.18em] uppercase">
@@ -83,7 +83,7 @@ export function POrbitalPattern() {
         </div>
       </section>
 
-      <p className="text-foreground/65 mt-8 text-sm leading-6">
+      <p className="text-foreground/65 max-w-full text-sm leading-6">
         The drawings are schematic cross-sections of probability density, not
         hard surfaces. An orbital is a quantum state; the electron does not
         trace out the pictured dumbbell.
@@ -290,8 +290,8 @@ export function OrbitalSymbolGuide() {
 
 export function POrbitalDerivation() {
   return (
-    <section aria-labelledby="from-schrodinger-to-shape" className="mt-6">
-      <div className="max-w-3xl">
+    <section aria-labelledby="from-schrodinger-to-shape" className="min-w-0">
+      <div className="max-w-full">
         <p className="text-action text-sm font-semibold tracking-[0.18em] uppercase">
           Follow the arrows
         </p>
@@ -311,14 +311,14 @@ export function POrbitalDerivation() {
       <ol className="mt-7">
         <li>
           <DerivationStep number="01" title="Start with the governing equation">
-            <p>
+            <p className="max-w-full">
               For hydrogen, treat the nucleus as fixed and use its Coulomb
               potential:
             </p>
             <MathDisplay
               expression={String.raw`\begin{aligned} -\frac{\hbar^2}{2m_e}\nabla^2\psi + V(r)\psi &= E\psi \\ V(r) &= -\frac{e^2}{4\pi\varepsilon_0 r} \end{aligned}`}
             />
-            <p>
+            <p className="max-w-full">
               This equation balances the wave&apos;s kinetic energy against its
               electric attraction to the nucleus. Solving it gives the allowed
               wavefunctions <InlineMath expression={String.raw`\psi`} />.
@@ -333,19 +333,19 @@ export function POrbitalDerivation() {
 
         <li>
           <DerivationStep number="02" title="Separate distance from direction">
-            <p>
+            <p className="max-w-full">
               Spherical symmetry lets the solution split into a radial part and
               an angular part:
             </p>
             <MathDisplay
               expression={String.raw`\psi(r,\theta,\phi)=R_{n\ell}(r)Y_{\ell}^{m}(\theta,\phi)`}
             />
-            <p>
+            <p className="max-w-full">
               <InlineMath expression="R" /> controls how the wave changes with
               distance. <InlineMath expression="Y" />, a spherical harmonic,
               describes how it changes from one direction to another.
             </p>
-            <p>
+            <p className="max-w-full">
               The quantum numbers obey{" "}
               <InlineMath expression={String.raw`n \ge 1`} />,
               <InlineMath expression={String.raw`0 \le \ell < n`} />, and
@@ -373,7 +373,7 @@ export function POrbitalDerivation() {
 
         <li>
           <DerivationStep number="03" title="Select the p pattern">
-            <p>
+            <p className="max-w-full">
               The letter p means <InlineMath expression={String.raw`\ell=1`} />.
               The angular-momentum equation gives its allowed angular pattern;
               for the orientation called <InlineMath expression="p_z" />:
@@ -381,7 +381,7 @@ export function POrbitalDerivation() {
             <MathDisplay
               expression={String.raw`\begin{aligned} \hat{L}^2Y_{\ell}^{m} &= \ell(\ell+1)\hbar^2Y_{\ell}^{m} \\ Y_1^0(\theta,\phi) &\propto \cos\theta \end{aligned}`}
             />
-            <p>
+            <p className="max-w-full">
               The cosine is positive on one side of the nucleus and negative on
               the other. At{" "}
               <InlineMath expression={String.raw`\theta=\frac{\pi}{2}`} />, it
@@ -399,7 +399,7 @@ export function POrbitalDerivation() {
             number="04"
             title="Combine the radial and angular waves"
           >
-            <p>
+            <p className="max-w-full">
               The hydrogen <InlineMath expression="2p" /> radial solution is{" "}
               <InlineMath
                 expression={String.raw`R_{21}(r)\propto re^{-r/(2a_0)}`}
@@ -409,7 +409,7 @@ export function POrbitalDerivation() {
             <MathDisplay
               expression={String.raw`\psi_{2p_z}(r,\theta)\propto re^{-r/(2a_0)}\cos\theta`}
             />
-            <p>
+            <p className="max-w-full">
               The radial factor sets how far the cloud extends; the cosine
               factor sets its direction and the nodal plane.
             </p>
@@ -425,7 +425,7 @@ export function POrbitalDerivation() {
             <MathDisplay
               expression={String.raw`|\psi_{2p_z}|^2\propto r^2e^{-r/a_0}\cos^2\theta`}
             />
-            <p>
+            <p className="max-w-full">
               At <InlineMath expression={String.raw`\theta=\frac{\pi}{2}`} />,{" "}
               <InlineMath expression={String.raw`\cos\theta=0`} />, so the
               probability density vanishes across the whole{" "}

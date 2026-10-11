@@ -69,7 +69,7 @@ function Equation({ tex }: { tex: string }) {
 export default function QuadraticEquationsPage() {
   return (
     <div className="text-foreground space-y-20 pb-24">
-      <div className="max-w-3xl">
+      <div className="max-w-full">
         <SubTitle>
           Learn what makes an equation quadratic, how its roots appear on a
           graph, and when to factor, complete the square, or use the quadratic
@@ -79,7 +79,7 @@ export default function QuadraticEquationsPage() {
       </div>
 
       <Section
-        className="max-w-3xl text-base"
+        className="max-w-full text-base"
         title="What is a quadratic equation?"
         id="quadratic-basics-heading"
         description={
@@ -103,7 +103,7 @@ export default function QuadraticEquationsPage() {
       <QuadraticLab />
 
       <section aria-labelledby="discriminant-heading" className="space-y-5">
-        <div className="max-w-3xl">
+        <div className="max-w-full">
           <SectionHeading id="discriminant-heading">
             Count the real roots first
           </SectionHeading>
@@ -113,7 +113,7 @@ export default function QuadraticEquationsPage() {
           </p>
         </div>
         <Equation tex={String.raw`D=b^2-4ac`} />
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {rootCases.map(({ condition, title, description }) => (
             <article
               className="border-border rounded-xl border p-5"
@@ -127,7 +127,7 @@ export default function QuadraticEquationsPage() {
             </article>
           ))}
         </div>
-        <p className="text-muted max-w-3xl text-base leading-8">
+        <p className="text-muted max-w-full text-base leading-8">
           When the discriminant is negative, the square root uses the imaginary
           unit {katexify("i", false)}, defined by {katexify("i^2=-1", false)}.
           For example, {katexify("x^2+1=0", false)} has the roots{" "}
@@ -136,7 +136,7 @@ export default function QuadraticEquationsPage() {
       </section>
 
       <Section
-        className="max-w-3xl text-base"
+        className="max-w-full text-base"
         title="Three ways to solve"
         id="solving-heading"
         contentClassName="space-y-8"

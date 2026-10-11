@@ -58,8 +58,10 @@ When mistakes recur, strengthen reusable checks and guardrails.
   outer section.
 - Use the optional `description` for an introductory paragraph. It accepts
   React content such as links and inline KaTeX, and `Section` gives it the
-  shared muted color and readable maximum width. The section itself and its
-  body can still use the available width.
+  shared muted color and full available width. Sections, descriptions, prose,
+  and content grids use `max-w-full` within the shared page container rather
+  than narrower content caps. Keep responsive grid columns and the intrinsic
+  sizing of diagrams, form controls, and overlays.
 - Use `contentClassName` to style an internal wrapper around section body
   content, for example to lay cards out in a responsive grid. The wrapper is
   omitted when the prop is absent or the section has no body. A section may

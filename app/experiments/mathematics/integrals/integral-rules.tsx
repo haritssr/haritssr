@@ -29,7 +29,7 @@ function Rule({ children, title }: { children: ReactNode; title: string }) {
 export default function IntegralRules() {
   return (
     <Section
-      className="text-muted max-w-3xl text-base"
+      className="text-muted max-w-full text-base"
       title="Where the basic integration rules come from"
       description={
         <>

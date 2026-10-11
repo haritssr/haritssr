@@ -94,7 +94,7 @@ export default function NumberGameDemo() {
         Every wrong answer decrease one score.
       </SubTitle>
       <SourceCodeLink />
-      <div className="mx-auto flex max-w-xl flex-col items-center justify-center pt-24">
+      <div className="mx-auto flex max-w-full flex-col items-center justify-center pt-24">
         <div className={state.incorrect ? "incorrect" : ""}>
           {katexify(`${state.num1} + ${state.num2}`, false)}
         </div>

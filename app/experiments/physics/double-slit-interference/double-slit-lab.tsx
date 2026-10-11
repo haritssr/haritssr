@@ -157,7 +157,7 @@ export default function DoubleSlitLab() {
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-[minmax(0,1fr)_19rem]">
+        <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_19rem]">
           <div className="min-w-0 p-4 sm:p-7">
             <figure>
               <svg
@@ -641,7 +641,7 @@ export default function DoubleSlitLab() {
           </h2>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           <article className="border-border bg-surface rounded-xl border p-5">
             <p className="text-action text-sm font-semibold">
               {katexify(String.raw`\Delta r = m\lambda`, false)}

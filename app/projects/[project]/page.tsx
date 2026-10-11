@@ -51,7 +51,7 @@ export default async function ProjectPage({
 
   return (
     <div className="bg-white">
-      <div className="mx-auto min-h-screen w-full max-w-3xl">
+      <div className="mx-auto min-h-screen w-full max-w-full">
         <div className="pt-10 sm:pt-20">
           <BackButton href="/projects" name="All Projects" />
         </div>

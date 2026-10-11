@@ -19,11 +19,13 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function DoubleSlitPage() {
   return (
     <div className="pb-24">
-      <SubTitle>
-        Send one color of light through two narrow openings. Change the setup,
-        then measure how the bright and dark fringes move across the screen.
-      </SubTitle>
-      <SourceCodeLink />
+      <div className="max-w-full">
+        <SubTitle>
+          Send one color of light through two narrow openings. Change the setup,
+          then measure how the bright and dark fringes move across the screen.
+        </SubTitle>
+        <SourceCodeLink />
+      </div>
       <DoubleSlitLab />
     </div>
   );

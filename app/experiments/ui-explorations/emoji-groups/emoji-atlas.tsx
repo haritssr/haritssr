@@ -503,7 +503,7 @@ export default function EmojiAtlas() {
       <SourceCodeLink />
 
       <div className="space-y-20 pb-12">
-        <header className="max-w-3xl space-y-3">
+        <header className="max-w-full space-y-3">
           <p className="text-foreground/60 text-sm font-medium tracking-wide uppercase">
             A visual field guide
           </p>
@@ -515,7 +515,7 @@ export default function EmojiAtlas() {
 
         <EmojiSelector groupings={groupings} initialGrouping="color" />
 
-        <p className="text-foreground/55 max-w-3xl text-sm leading-relaxed">
+        <p className="text-foreground/55 max-w-full text-sm leading-relaxed">
           These are visual groupings rather than strict rules: the same emoji
           can fit several collections, and its colors or details may look
           different on another device.

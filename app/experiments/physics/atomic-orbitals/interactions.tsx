@@ -99,7 +99,7 @@ export function FactorExplorer() {
       <p className="text-sm font-medium">
         Probe a {katexify("2p_y", false)} wave at one position
       </p>
-      <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-center">
+      <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 md:items-center">
         <svg
           aria-label={`Cross-section of a 2p-y orbital. Probe at radius ${radius.toFixed(1)} Bohr radii and angle ${angle} degrees from the positive y axis.`}
           className="h-auto w-full"
@@ -332,7 +332,7 @@ export function RadialExplorer() {
 
   return (
     <div className="border-border rounded-xl border p-4 sm:p-5">
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-3">
         <label className="text-sm" htmlFor="radial-n">
           Shell {katexify("n", false)}
           <select

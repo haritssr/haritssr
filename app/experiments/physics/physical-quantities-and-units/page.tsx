@@ -84,8 +84,10 @@ export default function UnitsPage() {
         ]}
       />
       <div>
-        <SubTitle>{DESCRIPTION}</SubTitle>
-        <SourceCodeLink />
+        <div className="max-w-full">
+          <SubTitle>{DESCRIPTION}</SubTitle>
+          <SourceCodeLink />
+        </div>
         <div className="space-y-20">
           <Section title="Base Quantities">
             <UnitsTable caption="The seven SI base units" units={BASE_UNITS} />

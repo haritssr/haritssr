@@ -20,7 +20,7 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function LivePlaygroundPage() {
   return (
     <div className="space-y-20 pb-16">
-      <div className="max-w-3xl space-y-5">
+      <div className="max-w-full space-y-5">
         <SubTitle>
           Write TeX and watch KaTeX typeset it as you edit. Try a template, then
           change the notation or compare inline math with a standalone equation.
@@ -31,6 +31,7 @@ export default function LivePlaygroundPage() {
         <Demo />
       </Section>
       <Section
+        className="max-w-full"
         title="Inline and display math"
         id="playground-notes-heading"
         description={

@@ -53,7 +53,7 @@ const comparisonRows = [
 export default function CornerSmoothingPage() {
   return (
     <div className="space-y-20 pb-16">
-      <p className="text-foreground/80 max-w-3xl text-lg leading-relaxed">
+      <p className="text-foreground/80 max-w-full text-lg leading-relaxed">
         Compare the same size, radius, and color across three corner treatments.
         The CSS example uses this site’s Tailwind utility, which sets native
         <code> corner-shape: squircle</code>. Lisse uses a different curve, so
@@ -119,7 +119,7 @@ export default function CornerSmoothingPage() {
             for its behavior and current browser compatibility.
           </>
         }
-        contentClassName="text-foreground/80 max-w-3xl space-y-4 leading-relaxed"
+        contentClassName="text-foreground/80 max-w-full space-y-4 leading-relaxed"
       >
         <p>
           Use Lisse when you want Figma-style smoothing with an adjustable

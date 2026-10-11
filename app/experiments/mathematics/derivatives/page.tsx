@@ -52,7 +52,7 @@ const questions: readonly PracticeQuestion[] = [
 export default function DerivativesPage() {
   return (
     <div className="space-y-20 pb-24">
-      <div className="max-w-3xl">
+      <div className="max-w-full">
         <SubTitle>
           A derivative gives the slope of a curve at one point. It comes from
           asking what happens to the slope between two points as they meet.
@@ -61,7 +61,7 @@ export default function DerivativesPage() {
       </div>
 
       <Section
-        className="text-muted max-w-3xl text-base"
+        className="text-muted max-w-full text-base"
         title="From average change to change right now"
         description={
           <>
@@ -86,7 +86,7 @@ export default function DerivativesPage() {
       <DerivativesLab />
 
       <Section
-        className="text-muted max-w-3xl text-base"
+        className="text-muted max-w-full text-base"
         title="Why the square curve has this slope"
         description={
           <>

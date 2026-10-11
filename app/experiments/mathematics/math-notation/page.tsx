@@ -101,7 +101,7 @@ function SharedConceptTable() {
 export default function MathNotationPage() {
   return (
     <div className="text-foreground min-w-0 space-y-20 pb-24">
-      <div className="max-w-3xl space-y-5">
+      <div className="max-w-full space-y-5">
         <SubTitle>
           Explore which notation from Indonesian SMA/MA and SMK mathematics can
           be displayed with KaTeX or similar renderers, and which operations
@@ -111,7 +111,7 @@ export default function MathNotationPage() {
       </div>
 
       <Section
-        className="max-w-3xl"
+        className="min-w-0"
         title="How notation becomes a math page"
         id="typesetting-vs-calculation"
         description={
@@ -178,7 +178,7 @@ export default function MathNotationPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="When a TeX command is unsupported"
         id="unsupported-notation"
         description={
@@ -207,7 +207,7 @@ export default function MathNotationPage() {
       </Section>
 
       <Section
-        className="max-w-3xl"
+        className="max-w-full"
         title="Try the notation and check support"
         id="try-the-notation"
         description={

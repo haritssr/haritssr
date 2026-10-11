@@ -157,8 +157,8 @@ export default function DesignSystem() {
           description={
             <>
               Section groups content under an accessible heading with shared
-              spacing and line height. Its description has a readable width,
-              while the section and its body can use the available width. Use
+              spacing and line height. Sections, descriptions, and body content
+              use the full available width within the page container. Use
               SectionHeading when a layout only needs a heading.
             </>
           }
@@ -180,7 +180,7 @@ export default function DesignSystem() {
                   <code>style</code> apply to the outer section.
                 </>
               }
-              contentClassName="max-w-3xl"
+              contentClassName="max-w-full"
             >
               <p className="text-muted text-sm leading-7">
                 Use <code>contentClassName</code> to style the body wrapper. Set

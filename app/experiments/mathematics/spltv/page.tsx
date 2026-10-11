@@ -131,7 +131,7 @@ function Equation({ tex }: { tex: string }) {
 export default function LinearEquationsThreeVariablesPage() {
   return (
     <div className="text-foreground w-full min-w-0 space-y-20 pb-24">
-      <div className="max-w-3xl">
+      <div className="max-w-full">
         <SubTitle>
           Find a triple that satisfies three equations at once. Learn
           elimination, interpret the geometry, and explore what changes when
@@ -141,7 +141,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </div>
 
       <Section
-        className="max-w-3xl text-base"
+        className="max-w-full text-base"
         title="Three unknowns, shared constraints"
         id="linear-system-basics-heading"
         description={
@@ -194,7 +194,7 @@ export default function LinearEquationsThreeVariablesPage() {
             </article>
           ))}
         </div>
-        <p className="text-muted max-w-3xl text-sm leading-7">
+        <p className="text-muted max-w-full text-sm leading-7">
           A zero row such as {katexify("0=0", false)} carries no new
           information; it does not by itself prove inconsistency. A row such as{" "}
           {katexify("0=1", false)} is impossible. If every equation is an
@@ -203,7 +203,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </Section>
 
       <Section
-        className="max-w-3xl text-base"
+        className="max-w-full text-base"
         title="Solve the example by elimination"
         id="elimination-heading"
         description={
@@ -260,7 +260,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </Section>
 
       <Section
-        className="max-w-3xl text-base"
+        className="max-w-full text-base"
         title="Keep the work organized with a matrix"
         id="matrix-heading"
         description={
@@ -291,7 +291,7 @@ export default function LinearEquationsThreeVariablesPage() {
       <LinearSystemLab />
 
       <Section
-        className="max-w-3xl text-base"
+        className="max-w-full text-base"
         title="Read the final rows"
         id="reading-solutions-heading"
         description={
@@ -325,7 +325,7 @@ export default function LinearEquationsThreeVariablesPage() {
       </Section>
 
       <Section
-        className="max-w-3xl text-base"
+        className="max-w-full text-base"
         title="Turn a story into three equations"
         id="modeling-heading"
         description={
