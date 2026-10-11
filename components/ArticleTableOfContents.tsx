@@ -29,7 +29,7 @@ const ContentsPanel = dynamic(
 );
 const DESKTOP_QUERY = "(min-width: 1024px)";
 const FLOATING_BUTTON_CLASS =
-  "border-middle-hover text-foreground/90! hover:bg-middle-hover/50! focus-visible:outline-action fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 rounded-full! border bg-white/50 text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
+  "floating-surface hover:bg-surface/95! text-foreground/90! focus-visible:outline-action fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 rounded-full! border text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
 
 function getDesktopSnapshot() {
   return window.matchMedia(DESKTOP_QUERY).matches;

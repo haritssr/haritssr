@@ -45,7 +45,7 @@ export function SelectField({
         value={value}
       >
         <Select.Trigger
-          className="form-control border-border text-foreground/80 focus-visible:border-action hover:bg-foreground/5 flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border bg-white px-3 py-2 text-sm outline-none"
+          className="interactive-elevation form-control border-border text-foreground/80 focus-visible:border-action hover:bg-foreground/5 flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border bg-white px-3 py-2 text-sm outline-none"
           id={id}
         >
           <span className="inline-flex min-w-0 items-center gap-2">

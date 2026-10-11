@@ -3,17 +3,17 @@ import type { ButtonHTMLAttributes, Ref } from "react";
 type ButtonVariant = "danger" | "ghost" | "primary" | "secondary";
 
 const BUTTON_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle rounded-lg px-3 text-sm transition-colors active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle rounded-lg px-3 text-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   danger:
-    "border border-danger bg-surface py-1.25 font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
+    "interactive-elevation border border-danger bg-surface py-1.25 font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
   ghost:
-    "py-1.25 font-medium text-zinc-700 hover:bg-zinc-100 focus-visible:outline-zinc-700",
+    "py-1.25 font-medium text-zinc-700 transition-[background-color,color,box-shadow] duration-150 enabled:hover:shadow-control-hover enabled:active:shadow-control-pressed hover:bg-zinc-100 focus-visible:outline-zinc-700",
   primary:
-    "bg-action py-1.25 font-medium text-white hover:bg-action-hover focus-visible:outline-action",
+    "interactive-elevation bg-action py-1.25 font-medium text-white hover:bg-action-hover focus-visible:outline-action",
   secondary:
-    "border border-zinc-300 bg-white py-1.25 text-zinc-600 select-none hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-zinc-700",
+    "interactive-elevation border border-zinc-300 bg-white py-1.25 text-zinc-600 select-none hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-zinc-700",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

@@ -6,6 +6,60 @@
   corner-shape: squircle;
 }
 
+@utility floating-surface {
+  background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+  border-color: var(--floating-border-color);
+  @apply shadow-floating transition-[background-color,box-shadow] duration-150;
+
+  @media (hover: hover) {
+    &:is(a, button):hover:not(:disabled):not([aria-disabled="true"]):not(
+        [data-disabled]
+      ),
+    &:has(
+      a:hover,
+      button:hover:not(:disabled):not([aria-disabled="true"]):not(
+          [data-disabled]
+        )
+    ) {
+      @apply shadow-floating-hover;
+    }
+  }
+
+  &:is(a, button):active:not(:disabled):not([aria-disabled="true"]):not(
+      [data-disabled]
+    ),
+  &:has(
+    a:active,
+    button:active:not(:disabled):not([aria-disabled="true"]):not(
+        [data-disabled]
+      )
+  ) {
+    @apply shadow-floating-pressed;
+  }
+
+  &:is(:disabled, [aria-disabled="true"], [data-disabled]) {
+    @apply shadow-none;
+  }
+}
+
+@utility interactive-elevation {
+  @apply shadow-control transition-[background-color,border-color,color,box-shadow,transform] duration-150;
+
+  @media (hover: hover) {
+    &:hover:not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
+      @apply shadow-control-hover;
+    }
+  }
+
+  &:active:not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
+    @apply shadow-control-pressed;
+  }
+
+  &:is(:disabled, [aria-disabled="true"], [data-disabled]) {
+    @apply shadow-none;
+  }
+}
+
 @theme {
   --color-action: color-mix(
     in oklab,
@@ -50,16 +104,43 @@
 
   --text-tiny: 0.9rem;
 
+  --shadow-control:
+    0 1px 2px rgb(0 0 0 / var(--control-shadow-opacity)),
+    0 1px 1px rgb(0 0 0 / var(--control-shadow-opacity));
+  --shadow-control-hover:
+    0 2px 4px rgb(0 0 0 / var(--control-shadow-opacity)),
+    0 1px 2px rgb(0 0 0 / var(--control-shadow-opacity));
+  --shadow-control-pressed: 0 1px 1px rgb(0 0 0 / var(--control-shadow-opacity));
+  --shadow-floating:
+    0 3px 12px rgb(0 0 0 / var(--floating-shadow-opacity)),
+    0 1px 2px rgb(0 0 0 / var(--control-shadow-opacity));
+  --shadow-floating-hover:
+    0 4px 14px rgb(0 0 0 / var(--floating-shadow-opacity)),
+    0 2px 3px rgb(0 0 0 / var(--control-shadow-opacity));
+  --shadow-floating-pressed:
+    0 1px 4px rgb(0 0 0 / var(--floating-shadow-opacity)),
+    0 1px 1px rgb(0 0 0 / var(--control-shadow-opacity));
+
   --z-90: 90;
 }
 
 @layer base {
   :root {
     color-scheme: light;
+    --control-shadow-opacity: 6%;
+    --floating-border-color: color-mix(
+      in srgb,
+      var(--color-middle-hover) 50%,
+      var(--color-border)
+    );
+    --floating-shadow-opacity: 12%;
   }
 
   :root[data-theme="dark"] {
     color-scheme: dark;
+    --control-shadow-opacity: 18%;
+    --floating-border-color: var(--color-border-hover);
+    --floating-shadow-opacity: 32%;
     --color-action: var(--color-blue-400);
     --color-action-hover: var(--color-blue-300);
     --color-background: var(--color-zinc-900);

@@ -38,7 +38,7 @@ export function AccordionItem({
       <BaseAccordion.Header
         data-toc-ignore={excludeFromContents ? "" : undefined}
       >
-        <BaseAccordion.Trigger className="group focus-visible:outline-action border-border text-foreground hover:border-foreground/30 flex w-full items-center justify-between gap-3 rounded-lg border p-3 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
+        <BaseAccordion.Trigger className="interactive-elevation group focus-visible:outline-action border-border text-foreground hover:border-foreground/30 flex w-full items-center justify-between gap-3 rounded-lg border p-3 text-left text-sm font-medium outline-hidden focus-visible:outline-2 data-panel-open:rounded-b-none">
           <span className="min-w-0 flex-1">{title}</span>
           {trailing}
           <ChevronDownIcon

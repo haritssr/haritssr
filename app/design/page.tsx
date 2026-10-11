@@ -41,7 +41,7 @@ export const metadata = createPageMetadata({
 });
 
 const FORM_CONTROL_CLASS_NAME =
-  "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 shadow-sm outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
+  "interactive-elevation form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
 
 export default function DesignSystem() {
   return (
@@ -117,6 +117,11 @@ export default function DesignSystem() {
             <li>
               Components include responsive behavior and keyboard focus
               treatment where interaction requires it.
+            </li>
+            <li>
+              Controls use subtle shadows; floating controls sit one level
+              higher. Hover raises elevation and pressing lowers it. Disabled
+              controls stay flat, and keyboard focus keeps a visible outline.
             </li>
             <li>The system works on mobile and desktop.</li>
             <li>

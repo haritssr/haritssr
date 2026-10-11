@@ -34,7 +34,7 @@ export default function NumberInput({
       <label className="sr-only" htmlFor={id}>
         {label}
       </label>
-      <NumberField.Group className="border-border focus-within:border-action flex min-w-0 items-center rounded-lg border">
+      <NumberField.Group className="interactive-elevation border-border focus-within:border-action flex min-w-0 items-center rounded-lg border">
         <NumberField.Decrement
           aria-label={`Decrease ${label}`}
           className="border-border hover:bg-interface-hover focus-visible:outline-action flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-l-lg border-r focus-visible:outline-2 data-disabled:cursor-default data-disabled:opacity-40"
