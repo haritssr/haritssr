@@ -213,7 +213,7 @@ function MoreDetails() {
           </a>
         </li>
         <li>Touch typist, around 90 WPM.</li>
-        <li>Constraints give shape.</li>
+        <li>Former chess player, rated around 2000 Elo.</li>
         <li>
           <ExternalLink
             href="https://youtu.be/H7Sfo3lMB8c?t=60"
@@ -243,11 +243,11 @@ function MoreDetails() {
           <kbd className="text-foreground">Ctrl+P</kbd>) to search the site.
         </li>
         <li>I develop with Codex CLI in Zed.</li>
+        <li>Constraints give shape.</li>
         <li>Money is just store of value.</li>
         <li>
           The real economy is the creation/distribution of goods and services.
         </li>
-        <li>Former chess player, rated around 2000 Elo.</li>
       </ul>
     </Section>
   );
