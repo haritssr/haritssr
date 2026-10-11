@@ -6,7 +6,7 @@ interface OpenGraphCardProps {
 function getHierarchy(path: string): string {
   const parents = path.split("/").filter(Boolean).slice(0, -1);
   return parents.length === 0
-    ? "Home"
+    ? ""
     : parents
         .map((segment) =>
           segment
@@ -30,8 +30,19 @@ function getHeadlineFontSize(title: string): number {
   return 104;
 }
 
+function getSingleLineFontSize(text: string, maximum: number): number {
+  return Math.min(maximum, Math.floor(1000 / (text.length * 0.7)));
+}
+
 export default function OpenGraphCard({ title, path }: OpenGraphCardProps) {
-  const headline = path === "/" ? title.split(" — ")[0] : title;
+  const experimentTitle = path.startsWith("/experiments/")
+    ? /^(?<headline>.+) \| (?<subtitle>.+ Experiments)$/u.exec(title)
+    : null;
+  const headline =
+    experimentTitle?.groups?.headline ??
+    (path === "/" ? title.split(" — ")[0] : title);
+  const subtitle = experimentTitle?.groups?.subtitle ?? "";
+  const hierarchy = getHierarchy(path);
 
   return (
     <div
@@ -47,9 +58,11 @@ export default function OpenGraphCard({ title, path }: OpenGraphCardProps) {
         color: "#082C66",
       }}
     >
-      <div style={{ display: "flex", fontSize: 34, lineHeight: 1.2 }}>
-        {getHierarchy(path)}
-      </div>
+      {hierarchy ? (
+        <div style={{ display: "flex", fontSize: 34, lineHeight: 1.2 }}>
+          {hierarchy}
+        </div>
+      ) : null}
       <div
         style={{
           display: "flex",
@@ -60,14 +73,33 @@ export default function OpenGraphCard({ title, path }: OpenGraphCardProps) {
       >
         <div
           style={{
-            fontSize: getHeadlineFontSize(headline),
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            fontSize: subtitle
+              ? getSingleLineFontSize(headline, 104)
+              : getHeadlineFontSize(headline),
             fontWeight: 700,
             lineHeight: 1.08,
             letterSpacing: "-0.04em",
             wordBreak: "break-word",
           }}
         >
-          {headline}
+          <div style={{ whiteSpace: subtitle ? "nowrap" : "normal" }}>
+            {headline}
+          </div>
+          {subtitle ? (
+            <div
+              style={{
+                fontSize: getSingleLineFontSize(subtitle, 56),
+                fontWeight: 400,
+                letterSpacing: "-0.02em",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {subtitle}
+            </div>
+          ) : null}
         </div>
       </div>
       <div

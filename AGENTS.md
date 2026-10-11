@@ -226,8 +226,10 @@ path in the image URL, so content changes produce a new preview URL. Open Graph
 and Twitter use the same image and descriptive alt text.
 Edit `app/api/og/OpenGraphCard.tsx` to change the shared JSX design and palette.
 The card uses a quiet blue CSS gradient inspired by the site icon, a large page
-title, parent-path breadcrumbs, and site/author branding. Descriptions stay in
-metadata rather than the image. No background asset or network request is needed.
+title, parent-path breadcrumbs only on nested pages, and site/author branding.
+Experiment titles have two lines: name, then a smaller domain “Experiments”
+label, without a pipe; scale both lines to fit. Descriptions stay in metadata
+rather than the image. No background asset or network request is needed.
 Robots rules allow `/api/og` while keeping other API routes disallowed.
 Change the `v` parameter in
 `utils/pageMetadata.ts` when updating the design to refresh cached previews.

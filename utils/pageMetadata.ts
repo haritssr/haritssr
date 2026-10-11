@@ -20,7 +20,7 @@ export function createPageMetadata({
   const url = new URL(path, SITE_URL).toString();
   const imageUrl = new URL("/api/og", SITE_URL);
   imageUrl.search = new URLSearchParams({
-    v: "blue-gradient-3",
+    v: "blue-gradient-5",
     title,
     description: socialDescription,
     path,
