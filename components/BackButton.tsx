@@ -14,7 +14,7 @@ export default function BackButton({
     return (
       <Link
         aria-label={`Back to ${name}`}
-        className="floating-surface hover:bg-surface/95 text-foreground/90 focus-visible:outline-action flex size-9 shrink-0 items-center justify-center rounded-full border backdrop-blur-lg focus-visible:outline-2 focus-visible:outline-offset-2 sm:w-auto sm:gap-1.5 sm:pr-3 sm:pl-2.5"
+        className="floating-surface hover:bg-surface/95 text-foreground/90 focus-visible:outline-action flex size-9 shrink-0 items-center justify-center rounded-full border backdrop-blur-lg focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] sm:w-auto sm:gap-1.5 sm:pr-3 sm:pl-2.5"
         href={href}
         prefetch={false}
         title={`Back to ${name}`}

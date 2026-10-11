@@ -153,7 +153,7 @@ export default function TopBarSearch() {
       aria-haspopup="dialog"
       aria-keyshortcuts="Meta+P Control+P"
       aria-label="Search the site"
-      className="text-foreground focus-visible:outline-action hover:text-searchicon-hover flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
+      className="text-foreground focus-visible:outline-action hover:text-searchicon-hover flex size-9 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98]"
       onClick={(event) => {
         openSearch(event.currentTarget);
       }}

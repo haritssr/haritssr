@@ -77,7 +77,7 @@ export default function ThemeSwitcher() {
     <Popover.Root onOpenChange={handleOpenChange} open={open}>
       <Popover.Trigger
         aria-label="Color theme options"
-        className="focus-visible:outline-action text-foreground flex size-9 cursor-pointer items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="focus-visible:outline-action text-foreground flex size-9 cursor-pointer items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98]"
         title="Color theme"
       >
         <SunIcon aria-hidden="true" className="size-5" />

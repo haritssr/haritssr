@@ -43,7 +43,7 @@ export default function TopBar() {
         ) : (
           <>
             {/* Harits Syah */}
-            <div className="floating-surface hover:bg-surface/95 group flex items-center space-x-1.5 rounded-full border py-1.5 pr-3 pl-2.5 backdrop-blur-lg">
+            <div className="floating-surface hover:bg-surface/95 group flex items-center space-x-1.5 rounded-full border py-1.5 pr-3 pl-2.5 backdrop-blur-lg has-[a:active]:scale-[0.98]">
               <Image
                 alt=""
                 className="h-5 w-5"
@@ -80,7 +80,7 @@ function GitHubLink() {
   return (
     <a
       aria-label="View this site's source on GitHub (opens in a new tab)"
-      className="focus-visible:outline-action flex size-9 items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2"
+      className="focus-visible:outline-action flex size-9 items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98]"
       href="https://github.com/haritssr/haritssr"
       rel="noopener noreferrer"
       target="_blank"
@@ -102,7 +102,7 @@ function NavigationLinks() {
       {destinations.map((destination) => (
         <li key={destination}>
           <Link
-            className={` ${currentSection === destination ? "text-action" : "text-foreground/90"} hover:bg-middle-hover/50 rounded-full px-3 py-1`}
+            className={` ${currentSection === destination ? "text-action" : "text-foreground/90"} hover:bg-middle-hover/50 rounded-full px-3 py-1 active:scale-[0.98]`}
             aria-current={currentSection === destination ? "page" : undefined}
             href={`/${destination}`}
           >
