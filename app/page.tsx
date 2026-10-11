@@ -65,7 +65,7 @@ export default function Home() {
 function ProfileSection() {
   return (
     <section aria-labelledby="profile-heading" className="pt-5" id="Identity">
-      <div className="corner-squircle border-border divide-border bg-border-interface-hover lg:bg-surface-hover grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 lg:gap-5 lg:divide-x">
+      <div className="corner-squircle border-border divide-border bg-border-interface-hover lg:bg-background grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 lg:gap-5 lg:divide-x">
         <div className="bg-background flex flex-col items-center justify-center gap-2.5 py-5">
           <Image
             alt={profileName}
