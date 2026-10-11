@@ -30,13 +30,24 @@ export default function ExperimentDomainIndex({
         </div>
       </div>
       {domain.groups !== undefined && domain.groups.length > 0 ? (
-        <div className="space-y-20">
+        <div
+          className={
+            domain.slug === "mathematics"
+              ? "grid grid-cols-1 items-start gap-x-10 gap-y-20 lg:grid-cols-2"
+              : "space-y-20"
+          }
+        >
           {domain.groups.map((group) => {
             const entries = experiments.filter(
               (entry) => entry.group === group.id
             );
             return entries.length > 0 ? (
-              <Section key={group.id} id={group.id} title={group.title}>
+              <Section
+                className="min-w-0"
+                key={group.id}
+                id={group.id}
+                title={group.title}
+              >
                 <ExperimentList
                   domainSlug={domain.slug}
                   experiments={entries}
