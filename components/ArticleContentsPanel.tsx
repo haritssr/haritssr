@@ -19,10 +19,10 @@ import InternalLink from "@/components/InternalLink";
 import type {
   ContentsEntry,
   ContentsLabelPart,
-} from "@/utils/experimentTableOfContents";
+} from "@/utils/articleTableOfContents";
 import katexify from "@/utils/katexify";
 
-import styles from "./ExperimentContentsPanel.module.css";
+import styles from "./ArticleContentsPanel.module.css";
 
 interface ContentsListProps {
   activeId: string;
@@ -84,7 +84,7 @@ function ContentsList({ activeId, entries, onSelect }: ContentsListProps) {
   );
 }
 
-export default function ExperimentContentsPanel({
+export default function ArticleContentsPanel({
   activeId,
   desktop,
   entries,

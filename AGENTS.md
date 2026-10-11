@@ -38,7 +38,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   subgrid, or flexible rows. No uneven heights or masonry unless explicitly
   requested. Do not clip content or impose fixed pixel heights to force alignment.
 - Use Base UI for continuing widgets. React Aria is allowed only for the mobile
-  experiment TOC Sheet and its supporting trigger, title, and close controls.
+  article TOC Sheet (experiments and writing) and its supporting controls.
 - Do not reintroduce Headless UI, Mantine, Radix UI, React Table, React Query,
   cmdk, or VisX dependencies. Prefer native APIs for small helpers.
 
@@ -63,7 +63,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   Omit section top/bottom margins; keep introductions and source links together.
 - Keep independent exercise/rule cards unnumbered in unordered lists. Number
   ordered solution steps and question-navigation controls when needed.
-- Exclude all accordion/disclosure trigger headings from experiment TOCs,
+- Exclude all accordion/disclosure trigger headings from article TOCs,
   including custom implementations. Visible headings inside open panels may appear.
 
 ## Experiment Width
@@ -103,6 +103,11 @@ Apply these defaults to new or refactored experiments in every domain:
 - Writing uses local `data/writing/*.mdx` with validated frontmatter and automatic
   module discovery, without an import registry. Preserve `/blog` redirects to
   `/writing` in `next.config.ts`.
+- Individual writing and experiment pages share the scrolling top bar and
+  floating reading controls (`useScrolledArticle`, `ArticleTableOfContents`).
+  Keep page titles marked with `data-article-*` for the top bar. Contents use
+  rendered heading anchors, a desktop popover, and a mobile sheet; back-to-top
+  remains available on articles without section headings.
 - Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.

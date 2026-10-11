@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type React from "react";
 
 import BackButton from "@/components/BackButton";
+import WritingArticle from "@/components/WritingArticle";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { allWritingPosts, getWritingPost } from "@/utils/writing-posts";
 
-import TableOfContents from "./TableOfContent";
 import { getWritingModule } from "./writing-modules";
 
 export function generateStaticParams() {
@@ -67,42 +66,34 @@ export default async function WritingPostPage({
   const { default: PostContent } = await postModule;
 
   return (
-    <div className="grid min-h-screen w-full grid-cols-1 sm:grid-cols-5">
-      {/*<LeftBar />*/}
-      <Content>
-        <div className="mt-5 mb-10">
-          <BackButton href="/writing" name="All Posts" />
-        </div>
+    <WritingArticle key={post.slug} title={post.title}>
+      <div className="mt-5 mb-10">
+        <BackButton href="/writing" name="Writing" />
+      </div>
 
-        <h1 className="text-foreground text-2xl font-bold tracking-tighter sm:text-3xl">
-          {post.title}
-        </h1>
-        <div className="mt-2 mb-8 flex items-center text-sm">
-          <time dateTime={post.publishedAt}>
-            {formatDate(post.publishedAt)}
-          </time>
-          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
-          &nbsp;&nbsp;
-          <p>{post.wordCount} Words</p>
-          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
-          &nbsp;&nbsp;
-          <p>{Math.ceil(post.wordCount / 200)} Min Read</p>
-        </div>
-        <article className="prose prose-zinc prose-headings:text-foreground in-data-[theme=dark]:prose-invert max-w-none">
-          <PostContent />
-        </article>
-      </Content>
-      <TableOfContents slug={post.slug} />
-    </div>
+      <h1
+        className="text-foreground text-2xl font-bold tracking-tighter sm:text-3xl"
+        data-article-back-label="Writing"
+        data-article-parent="/writing"
+        data-article-path={`/writing/${post.slug}`}
+        data-article-title={post.title}
+      >
+        {post.title}
+      </h1>
+      <div className="mt-2 mb-8 flex items-center text-sm">
+        <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+        &nbsp;&nbsp; <span className="text-foreground/60">•</span> &nbsp;&nbsp;
+        <p>{post.wordCount} Words</p>
+        &nbsp;&nbsp; <span className="text-foreground/60">•</span> &nbsp;&nbsp;
+        <p>{Math.ceil(post.wordCount / 200)} Min Read</p>
+      </div>
+      <div className="prose prose-zinc prose-headings:text-foreground in-data-[theme=dark]:prose-invert max-w-none">
+        <PostContent />
+      </div>
+    </WritingArticle>
   );
 }
 
 function formatDate(date: string) {
   return writingDateFormatter.format(new Date(`${date}T00:00:00.000Z`));
-}
-
-function Content({ children }: { children: React.ReactNode }) {
-  return (
-    <section className="pb-5 sm:col-span-4 sm:pr-5 sm:pl-2">{children}</section>
-  );
 }

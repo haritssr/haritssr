@@ -10,14 +10,14 @@ import BackButton from "@/components/BackButton";
 import GitHubIcon from "@/components/GitHubIcon";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import TopBarSearch from "@/components/TopBarSearch";
-import useScrolledExperiment from "@/components/useScrolledExperiment";
+import useScrolledArticle from "@/components/useScrolledArticle";
 
 const destinations = ["projects", "experiments", "writing", "design"] as const;
 
 export default function TopBar() {
   const pathname = usePathname();
   const navigationRef = useRef<HTMLElement>(null);
-  const experiment = useScrolledExperiment(pathname, navigationRef);
+  const article = useScrolledArticle(pathname, navigationRef);
 
   return (
     <nav
@@ -26,18 +26,18 @@ export default function TopBar() {
       ref={navigationRef}
     >
       <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-5 pt-5 sm:py-5 xl:px-0">
-        {experiment ? (
+        {article ? (
           <>
             <BackButton
-              href={experiment.href}
-              name={experiment.backLabel}
+              href={article.href}
+              name={article.backLabel}
               variant="topbar"
             />
             <div
               className="border-middle-hover text-foreground/90 min-w-0 flex-1 rounded-full border bg-white/50 px-4 py-1.5 backdrop-blur-lg sm:absolute sm:left-1/2 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
-              title={experiment.title}
+              title={article.title}
             >
-              <p className="truncate">{experiment.title}</p>
+              <p className="truncate">{article.title}</p>
             </div>
           </>
         ) : (

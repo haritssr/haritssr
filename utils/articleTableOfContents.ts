@@ -11,7 +11,7 @@ export interface ContentsEntry {
   target: HTMLElement;
 }
 
-export interface ExperimentOutline {
+export interface ArticleOutline {
   entries: ContentsEntry[];
   sections: ContentsEntry[];
 }
@@ -142,11 +142,11 @@ function assignId(
   return id;
 }
 
-export function collectExperimentOutline(
+export function collectArticleOutline(
   article: HTMLElement,
   fallbackTitle: string,
   generatedIds = new Map<HTMLElement, string>()
-): ExperimentOutline {
+): ArticleOutline {
   const headings = [...article.querySelectorAll<HTMLElement>(HEADING_SELECTOR)]
     .filter((heading) => isVisible(heading, article))
     .map((heading) => ({ heading, label: readLabel(heading) }))
@@ -191,7 +191,7 @@ export function collectExperimentOutline(
   return { entries: [titleEntry], sections };
 }
 
-export function affectsExperimentHeadings(record: MutationRecord) {
+export function affectsArticleHeadings(record: MutationRecord) {
   const target =
     record.target instanceof Element
       ? record.target

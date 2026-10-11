@@ -16,16 +16,16 @@ import { SheetTrigger } from "react-aria-components/Sheet";
 
 import Button from "@/components/Button";
 import {
-  affectsExperimentHeadings,
-  collectExperimentOutline,
-} from "@/utils/experimentTableOfContents";
+  affectsArticleHeadings,
+  collectArticleOutline,
+} from "@/utils/articleTableOfContents";
 import type {
   ContentsEntry,
-  ExperimentOutline,
-} from "@/utils/experimentTableOfContents";
+  ArticleOutline,
+} from "@/utils/articleTableOfContents";
 
 const ContentsPanel = dynamic(
-  async () => await import("./ExperimentContentsPanel")
+  async () => await import("./ArticleContentsPanel")
 );
 const DESKTOP_QUERY = "(min-width: 1024px)";
 const FLOATING_BUTTON_CLASS =
@@ -39,7 +39,7 @@ function getServerSnapshot() {
   return false;
 }
 
-function outlineSignature(outline: ExperimentOutline) {
+function outlineSignature(outline: ArticleOutline) {
   return JSON.stringify(
     [outline.entries[0], ...outline.sections].map((entry) => ({
       id: entry.id,
@@ -49,14 +49,16 @@ function outlineSignature(outline: ExperimentOutline) {
   );
 }
 
-export default function ExperimentTableOfContents({
+export default function ArticleTableOfContents({
   articleRef,
+  minimumSections = 2,
   title,
 }: {
   articleRef: RefObject<HTMLElement | null>;
+  minimumSections?: number;
   title: string;
 }) {
-  const [outline, setOutline] = useState<ExperimentOutline | null>(null);
+  const [outline, setOutline] = useState<ArticleOutline | null>(null);
   const [activeId, setActiveId] = useState("");
   const [openView, setOpenView] = useState<boolean | null>(null);
   const [hasOpened, setHasOpened] = useState(false);
@@ -83,14 +85,15 @@ export default function ExperimentTableOfContents({
     getDesktopSnapshot,
     getServerSnapshot
   );
-  const visible = outline !== null && outline.sections.length >= 2;
+  const visible =
+    outline !== null && outline.sections.length >= minimumSections;
   const open = visible && openView === desktop;
 
   useEffect(() => {
     const article = articleRef.current;
 
     let frame = 0;
-    let previous: ExperimentOutline | null = null;
+    let previous: ArticleOutline | null = null;
     let signature = "";
     let initialHash = window.location.hash;
     const generatedIds = new Map<HTMLElement, string>();
@@ -100,7 +103,7 @@ export default function ExperimentTableOfContents({
       if (!article) {
         return;
       }
-      const next = collectExperimentOutline(article, title, generatedIds);
+      const next = collectArticleOutline(article, title, generatedIds);
       const nextSignature = outlineSignature(next);
       const nextTargets = [next.entries[0], ...next.sections];
       const previousTargets = previous
@@ -114,7 +117,7 @@ export default function ExperimentTableOfContents({
         signature = nextSignature;
         previous = next;
         setOutline(next);
-        if (next.sections.length < 2) {
+        if (next.sections.length < minimumSections) {
           pendingNavigation.current = null;
           setOpenView(null);
         }
@@ -138,7 +141,7 @@ export default function ExperimentTableOfContents({
     }
 
     const observer = new MutationObserver((records) => {
-      if (records.some(affectsExperimentHeadings)) {
+      if (records.some(affectsArticleHeadings)) {
         scheduleCollect();
       }
     });
@@ -175,7 +178,7 @@ export default function ExperimentTableOfContents({
         }
       }
     };
-  }, [articleRef, title]);
+  }, [articleRef, minimumSections, title]);
 
   useEffect(() => {
     const entries =
@@ -289,7 +292,7 @@ export default function ExperimentTableOfContents({
     [finishClose]
   );
 
-  if (!visible || outline === null) {
+  if (outline === null) {
     return null;
   }
 
@@ -329,10 +332,46 @@ export default function ExperimentTableOfContents({
     />
   ) : null;
 
+  const contentsTrigger = desktop ? (
+    <Popover.Root
+      modal={false}
+      onOpenChange={changeOpen}
+      onOpenChangeComplete={finishClose}
+      open={open}
+    >
+      <Popover.Trigger
+        render={
+          <Button
+            className={triggerClassName}
+            data-article-toc-trigger=""
+            ref={triggerRef}
+            variant="ghost"
+          />
+        }
+      >
+        {triggerContent}
+      </Popover.Trigger>
+      {panel}
+    </Popover.Root>
+  ) : (
+    <SheetTrigger isOpen={open} onOpenChange={changeOpen}>
+      <AriaButton
+        className={triggerClassName}
+        data-article-toc-trigger=""
+        ref={triggerRef}
+        render={(props) => <Button {...props} variant="ghost" />}
+      >
+        {triggerContent}
+      </AriaButton>
+      {panel}
+    </SheetTrigger>
+  );
+
   return (
     <>
       <Button
         aria-label="To the top"
+        data-article-back-to-top=""
         className={`${FLOATING_BUTTON_CLASS} left-[max(1.25rem,env(safe-area-inset-left))] size-9 p-0!`}
         iconOnly
         onClick={() => {
@@ -351,40 +390,7 @@ export default function ExperimentTableOfContents({
           className="pointer-events-none size-4.5 stroke-2"
         />
       </Button>
-      {desktop ? (
-        <Popover.Root
-          modal={false}
-          onOpenChange={changeOpen}
-          onOpenChangeComplete={finishClose}
-          open={open}
-        >
-          <Popover.Trigger
-            render={
-              <Button
-                className={triggerClassName}
-                data-experiment-toc-trigger=""
-                ref={triggerRef}
-                variant="ghost"
-              />
-            }
-          >
-            {triggerContent}
-          </Popover.Trigger>
-          {panel}
-        </Popover.Root>
-      ) : (
-        <SheetTrigger isOpen={open} onOpenChange={changeOpen}>
-          <AriaButton
-            className={triggerClassName}
-            data-experiment-toc-trigger=""
-            ref={triggerRef}
-            render={(props) => <Button {...props} variant="ghost" />}
-          >
-            {triggerContent}
-          </AriaButton>
-          {panel}
-        </SheetTrigger>
-      )}
+      {visible ? contentsTrigger : null}
     </>
   );
 }

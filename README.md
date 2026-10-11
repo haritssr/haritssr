@@ -17,7 +17,8 @@ The app uses Next.js App Router, React, TypeScript, Tailwind CSS, and Bun.
 Next.js MDX and Turbopack discover local writing modules automatically;
 `utils/writing-posts.ts` validates frontmatter and derives the post index.
 Ultracite uses Oxlint and Oxfmt. Continuing widgets use Base UI, except the
-mobile experiment table of contents, which uses React Aria Sheet.
+mobile article table of contents, which uses React Aria Sheet. Writing and
+experiments share a scrolling top bar and floating Contents/back-to-top controls.
 
 Earlier migrations replaced Pages Router, Content Collections, a manual MDX
 import registry, and Biome. Small helpers use native APIs instead of Effect,

@@ -3,18 +3,18 @@
 import { useEffect, useState } from "react";
 import type { RefObject } from "react";
 
-interface ScrolledExperiment {
+interface ScrolledArticle {
   backLabel: string;
   href: string;
   pathname: string;
   title: string;
 }
 
-export default function useScrolledExperiment(
+export default function useScrolledArticle(
   pathname: string,
   navigationRef: RefObject<HTMLElement | null>
 ) {
-  const [experiment, setExperiment] = useState<ScrolledExperiment | null>(null);
+  const [article, setArticle] = useState<ScrolledArticle | null>(null);
 
   useEffect(() => {
     const segments = pathname.split("/").filter(Boolean);
@@ -30,21 +30,20 @@ export default function useScrolledExperiment(
         return;
       }
       const heading = [
-        ...main.querySelectorAll<HTMLElement>("[data-experiment-path]"),
-      ].find((element) => element.dataset.experimentPath === pathname);
+        ...main.querySelectorAll<HTMLElement>("[data-article-path]"),
+      ].find((element) => element.dataset.articlePath === pathname);
       if (!heading) {
         intersectionObserver?.disconnect();
         observedHeading = undefined;
-        setExperiment(null);
+        setArticle(null);
         return;
       }
 
-      const { experimentBackLabel, experimentParent, experimentTitle } =
-        heading.dataset;
+      const { articleBackLabel, articleParent, articleTitle } = heading.dataset;
       if (
-        experimentBackLabel === undefined ||
-        experimentParent === undefined ||
-        experimentTitle === undefined
+        articleBackLabel === undefined ||
+        articleParent === undefined ||
+        articleTitle === undefined
       ) {
         return;
       }
@@ -53,26 +52,26 @@ export default function useScrolledExperiment(
       if (
         heading === observedHeading &&
         offset === observedOffset &&
-        experimentTitle === observedTitle
+        articleTitle === observedTitle
       ) {
         return;
       }
       observedHeading = heading;
       observedOffset = offset;
-      observedTitle = experimentTitle;
+      observedTitle = articleTitle;
       intersectionObserver?.disconnect();
       intersectionObserver = new IntersectionObserver(
         ([entry]) => {
           const scrolled =
             entry !== undefined &&
             entry.boundingClientRect.bottom <= (entry.rootBounds?.top ?? 0);
-          setExperiment(
+          setArticle(
             scrolled
               ? {
-                  backLabel: experimentBackLabel,
-                  href: experimentParent,
+                  backLabel: articleBackLabel,
+                  href: articleParent,
                   pathname,
-                  title: experimentTitle,
+                  title: articleTitle,
                 }
               : null
           );
@@ -88,14 +87,12 @@ export default function useScrolledExperiment(
     // Route content may arrive after the persistent top bar has mounted.
     const mutationObserver = new MutationObserver(observeHeading);
     const resizeObserver = new ResizeObserver(observeHeading);
-    if (
-      segments[0] === "experiments" &&
-      segments.length === 3 &&
-      navigation &&
-      main
-    ) {
+    const isArticleRoute =
+      (segments[0] === "experiments" && segments.length === 3) ||
+      (segments[0] === "writing" && segments.length === 2);
+    if (isArticleRoute && navigation && main) {
       mutationObserver.observe(main, {
-        attributeFilter: ["data-experiment-path", "data-experiment-title"],
+        attributeFilter: ["data-article-path", "data-article-title"],
         attributes: true,
         childList: true,
         subtree: true,
@@ -111,5 +108,5 @@ export default function useScrolledExperiment(
     };
   }, [pathname, navigationRef]);
 
-  return experiment?.pathname === pathname ? experiment : null;
+  return article?.pathname === pathname ? article : null;
 }

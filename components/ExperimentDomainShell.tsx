@@ -3,8 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
+import ArticleTableOfContents from "@/components/ArticleTableOfContents";
 import BackButton from "@/components/BackButton";
-import ExperimentTableOfContents from "@/components/ExperimentTableOfContents";
 import PageTitle from "@/components/PageTitle";
 import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 
@@ -57,12 +57,10 @@ export default function ExperimentDomainShell({
           )}
           {!isIndexPage && (
             <div
-              data-experiment-back-label={backButtonName}
-              data-experiment-parent={parentPath}
-              data-experiment-path={
-                segments.length === 3 ? pathname : undefined
-              }
-              data-experiment-title={title}
+              data-article-back-label={backButtonName}
+              data-article-parent={parentPath}
+              data-article-path={segments.length === 3 ? pathname : undefined}
+              data-article-title={title}
             >
               {experiment?.hideTitle !== true && <PageTitle>{title}</PageTitle>}
             </div>
@@ -70,7 +68,7 @@ export default function ExperimentDomainShell({
           {children}
         </article>
         {!isIndexPage && (
-          <ExperimentTableOfContents
+          <ArticleTableOfContents
             articleRef={articleRef}
             key={pathname}
             title={title}
