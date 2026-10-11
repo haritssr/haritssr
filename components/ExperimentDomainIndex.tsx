@@ -2,6 +2,7 @@ import { ClockIcon } from "@heroicons/react/24/outline";
 
 import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
 import InternalLink from "@/components/InternalLink";
+import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import type { ExperimentEntry } from "@/data/ExperimentsData";
 import { getLatestExperimentUpdate } from "@/data/ExperimentsData";
@@ -23,7 +24,7 @@ export default function ExperimentDomainIndex({
         <div className="flex items-center">
           <ExperimentDomainIcon size={36} src={domain.logoSrc} />
         </div>
-        <h1 className="text-2xl font-semibold sm:text-3xl">{domain.title}</h1>
+        <PageTitle spacing="none">{domain.title}</PageTitle>
         <p className="text-foreground/90 text-lg">{domain.description}</p>
         <div className="text-foreground/70 text-lg">
           {experiments.length} experiments
