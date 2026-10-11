@@ -41,7 +41,7 @@ export default function ProjectsCard({
           </Heading>
         </div>
 
-        <p className="text-foreground/70">{description}</p>
+        <p className="text-foreground/70 leading-relaxed">{description}</p>
 
         {/* Site Link (Text Only) */}
         <p>
