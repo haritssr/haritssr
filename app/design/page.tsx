@@ -280,6 +280,13 @@ export default function DesignSystem() {
               </InternalLink>
               . The default variant is for standalone navigation.
             </p>
+            <p className="text-muted text-sm">
+              <InternalLink href="/api" variant="footer">
+                API
+              </InternalLink>
+              {" — "}Use the footer variant to inherit the surrounding text size
+              and match the footer actions.
+            </p>
           </Box>
 
           <Box name="ExternalLink" title="External Link">

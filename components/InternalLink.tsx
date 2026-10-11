@@ -17,17 +17,21 @@ export default function InternalLink({
   lg?: boolean;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   "aria-current"?: AriaAttributes["aria-current"];
-  variant?: "navigation" | "inline";
+  variant?: "navigation" | "inline" | "footer";
 }) {
   const appearance =
-    variant === "inline"
-      ? "text-[length:inherit] leading-[inherit]"
-      : `w-fit py-0.5 ${lg === true ? "text-lg" : "text-base"}`;
+    variant === "navigation"
+      ? `w-fit py-0.5 ${lg === true ? "text-lg" : "text-base"}`
+      : "text-[length:inherit] leading-[inherit]";
+  const interaction =
+    variant === "footer"
+      ? "text-muted rounded-sm select-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+      : "text-action hover:text-action-hover hover:underline";
 
   return (
     <Link
       aria-current={ariaCurrent}
-      className={`group text-action hover:text-action-hover inline cursor-pointer hover:underline ${appearance} ${className ?? ""}`}
+      className={`group inline cursor-pointer ${interaction} ${appearance} ${className ?? ""}`}
       href={href}
       onClick={onClick}
       prefetch={false}

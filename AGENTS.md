@@ -35,7 +35,9 @@ When mistakes recur, strengthen reusable checks and guardrails.
   lists. It retains the chevron and supports `lg` sizing. The inline variant
   inherits its size even when `lg` is supplied.
 - Select the variant explicitly at the call site; do not infer it from DOM
-  ancestry. See `/design` for examples of both variants.
+  ancestry. See `/design` for examples of the available variants.
+- Use `variant="footer"` for footer navigation. It inherits the footer text
+  size, uses muted colors and shared focus styling, and omits the chevron.
 
 ## Sections and Headings
 
@@ -180,6 +182,15 @@ not require editing a separate import registry.
 - Public pages stay searchable. Cloudflare manages AI-training opt-out when enabled.
 
 # Site Implementation
+
+## API Directory
+
+The footer links to `/api` to the left of the install action. This page lists
+accessible GET endpoints using the shared `InternalLink`, including a concrete example for
+the catch-all parameters route. The task API appears only in development, using
+the same availability flag as the local database experiments. Keep the directory
+current when adding or removing API endpoints. The directory page is included in
+site search and the sitemap; the raw API endpoints remain outside those listings.
 
 ## Social Previews
 

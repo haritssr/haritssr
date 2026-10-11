@@ -10,7 +10,13 @@ const whitespaceSequencePattern = /\s+/;
 // Matches consecutive hyphens or underscores used as segment separators.
 // Example: "hello-world" becomes "hello world".
 const segmentSeparatorPattern = /[-_]+/g;
-const mainRoutes = new Set(["projects", "experiments", "blog", "design"]);
+const mainRoutes = new Set([
+  "projects",
+  "experiments",
+  "blog",
+  "design",
+  "api",
+]);
 
 export default function Breadcrumbs({
   routeLabels,

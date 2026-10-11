@@ -6,6 +6,13 @@ export interface RouteDoc {
   suggestion?: "Navigation";
 }
 
+export const apiRoute: RouteDoc = {
+  route: "/api",
+  title: "API",
+  description: "Browse the API endpoints available on this site.",
+  group: "Navigation",
+};
+
 export const navigationRoutes: readonly RouteDoc[] = [
   {
     route: "/",

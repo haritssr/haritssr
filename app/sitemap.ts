@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { apiRoute } from "@/data/routes";
 import { allBlogPosts } from "@/utils/blog-posts";
 import { getAvailableExperimentSummaries } from "@/utils/experimentCatalog";
 import { getExperimentRoutes } from "@/utils/experimentRoutes";
@@ -8,7 +9,14 @@ import { SITE_URL } from "@/utils/site";
 
 import { ProjectsData } from "../data/ProjectsData";
 
-const staticRoutes = ["/", "/projects", "/experiments", "/blog", "/design"];
+const staticRoutes = [
+  "/",
+  "/projects",
+  "/experiments",
+  "/blog",
+  "/design",
+  apiRoute.route,
+];
 
 const experimentDates = new Map(
   getAvailableExperimentSummaries().map((entry) => [

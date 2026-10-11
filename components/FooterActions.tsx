@@ -3,6 +3,9 @@
 import { Toast } from "@base-ui/react/toast";
 import { useEffect, useState } from "react";
 
+import InternalLink from "@/components/InternalLink";
+import { apiRoute } from "@/data/routes";
+
 const ACTION_CLASS_NAME =
   "cursor-pointer rounded-sm select-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current";
 const SHARE_TOAST_ID = "share-toast";
@@ -19,10 +22,13 @@ export default function FooterActions({ rssPath }: FooterActionsProps) {
   return (
     <Toast.Provider>
       <div className="flex items-center gap-5">
+        <InternalLink href={apiRoute.route} variant="footer">
+          {apiRoute.title}
+        </InternalLink>
         <InstallButton />
-        <a className={ACTION_CLASS_NAME} href={rssPath}>
+        <InternalLink href={rssPath} variant="footer">
           RSS
-        </a>
+        </InternalLink>
         <ShareButton />
       </div>
       <Toast.Portal>

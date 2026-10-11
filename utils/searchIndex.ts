@@ -1,6 +1,6 @@
 import "server-only";
 import { ProjectsData } from "@/data/ProjectsData";
-import { navigationRoutes } from "@/data/routes";
+import { apiRoute, navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
 import { allBlogPosts } from "@/utils/blog-posts";
 import { getExperimentRoutes } from "@/utils/experimentRoutes";
@@ -38,6 +38,7 @@ const homeSections: RouteDoc[] = [
 export function getSearchIndex(): RouteDoc[] {
   const docs: RouteDoc[] = [
     ...navigationRoutes,
+    apiRoute,
     ...homeSections,
     ...getExperimentRoutes(),
     ...ProjectsData.map((project) => ({
