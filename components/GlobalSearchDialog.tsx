@@ -3,7 +3,11 @@
 import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Dialog } from "@base-ui/react/dialog";
 import {
+  CheckIcon,
   ChevronRightIcon,
+  ComputerDesktopIcon,
+  MoonIcon,
+  SunIcon,
   MagnifyingGlassIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -11,12 +15,15 @@ import { useRouter } from "next/navigation";
 import type { RefObject } from "react";
 import { useRef } from "react";
 
+import { useTheme } from "@/components/ThemeProvider";
 import type { RouteDoc } from "@/data/routes";
 import {
   getSearchMatchRanges,
   hasSearchQuery,
   searchRoutes,
 } from "@/data/routes";
+import type { ThemeCommand } from "@/utils/themeCommands";
+import { getThemeCommands } from "@/utils/themeCommands";
 
 import styles from "./GlobalSearchDialog.module.css";
 
@@ -30,6 +37,17 @@ interface GlobalSearchDialogProps {
   query: string;
   triggerRef: RefObject<HTMLElement | null>;
 }
+
+interface PageSearchItem {
+  kind: "page";
+  title: string;
+  entry: RouteDoc;
+}
+
+type SearchItem = ThemeCommand | PageSearchItem;
+
+const RESULT_ITEM_CLASS_NAME =
+  "data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent py-2 pr-3 pl-3 select-none";
 
 interface SearchMatchTextProps {
   query: string;
@@ -55,22 +73,37 @@ export default function GlobalSearchDialog({
 }: GlobalSearchDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const results = searchRoutes(entries, query);
+  const { preference, setPreference } = useTheme();
   const isSearching = hasSearchQuery(query);
   const isLoading = indexStatus === "loading";
   const loadError = indexStatus === "error";
   const showLoading = isLoading && isSearching;
+  const themeCommands = getThemeCommands(query);
+  const commandCount = themeCommands.length;
+  const pages: PageSearchItem[] = showLoading
+    ? []
+    : searchRoutes(entries, query).map((entry) => ({
+        kind: "page",
+        title: entry.title,
+        entry,
+      }));
+  const results: SearchItem[] = [...themeCommands, ...pages];
   const showEmpty =
     !isLoading && !loadError && isSearching && results.length === 0;
   const { groupTitle, listLabel, resultStatus } = getSearchLabels(
     indexStatus,
     isSearching,
-    results.length
+    results.length,
+    commandCount
   );
 
-  function navigate(route: string) {
+  function selectItem(item: SearchItem) {
+    if (item.kind === "theme") {
+      setPreference(item.preference);
+    } else {
+      router.push(item.entry.route);
+    }
     onOpenChange(false);
-    router.push(route);
   }
 
   return (
@@ -89,14 +122,14 @@ export default function GlobalSearchDialog({
           />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Search navigation, projects, writing, design, and experiments. Use
-            the arrow keys to browse results and Enter to open a page.
+            Search pages or change appearance with theme commands. Use arrow
+            keys to browse results and Enter to select.
           </Dialog.Description>
           <Autocomplete.Root
             autoHighlight="always"
             filter={null}
             inline
-            items={showLoading ? [] : results}
+            items={results}
             itemToStringValue={(entry) => entry.title}
             keepHighlight
             loopFocus={false}
@@ -114,11 +147,11 @@ export default function GlobalSearchDialog({
                 className="text-foreground size-5 shrink-0"
               />
               <Autocomplete.Input
-                aria-label="Search pages"
+                aria-label="Search pages and commands"
                 autoComplete="off"
                 className="placeholder:text-muted min-w-0 flex-1 border-0 bg-transparent p-0 text-base outline-none focus:ring-0"
                 enterKeyHint="go"
-                placeholder="Search pages, projects, experiments, writing…"
+                placeholder="Search pages or commands…"
                 ref={inputRef}
                 spellCheck={false}
               />
@@ -131,7 +164,7 @@ export default function GlobalSearchDialog({
               </Dialog.Close>
             </Autocomplete.InputGroup>
             <div
-              aria-busy={isLoading}
+              aria-busy={isLoading && commandCount === 0}
               className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pb-2"
             >
               {loadError ? (
@@ -140,8 +173,8 @@ export default function GlobalSearchDialog({
                   role="alert"
                 >
                   <p className="text-danger">
-                    The complete search index could not be loaded. Navigation is
-                    still available.
+                    The complete search index could not be loaded. Navigation
+                    and commands are still available.
                   </p>
                   <button
                     className="text-action hover:text-action-hover focus-visible:outline-action mt-4 cursor-pointer rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -159,23 +192,40 @@ export default function GlobalSearchDialog({
               ) : null}
               {showEmpty ? (
                 <div className="text-muted px-4 py-10 text-center text-sm leading-6">
-                  No pages found for “{query}”. Try a project, topic, or page
-                  name.
+                  No pages or commands found for “{query}”. Try a topic, page
+                  name, or theme.
                 </div>
               ) : null}
               <Autocomplete.List aria-label={listLabel}>
-                {!showLoading && results.length > 0 ? (
-                  <Autocomplete.Group>
+                {themeCommands.length > 0 ? (
+                  <Autocomplete.Group items={themeCommands}>
+                    <Autocomplete.GroupLabel className="text-muted px-3 pt-1 pb-2 text-xs font-medium">
+                      Theme
+                    </Autocomplete.GroupLabel>
+                    <Autocomplete.Collection>
+                      {(command: ThemeCommand) => (
+                        <ThemeCommandItem
+                          command={command}
+                          current={preference === command.preference}
+                          key={command.preference}
+                          onSelect={selectItem}
+                        />
+                      )}
+                    </Autocomplete.Collection>
+                  </Autocomplete.Group>
+                ) : null}
+                {pages.length > 0 ? (
+                  <Autocomplete.Group items={pages}>
                     <Autocomplete.GroupLabel className="text-muted px-3 pt-1 pb-2 text-xs font-medium">
                       {groupTitle}
                     </Autocomplete.GroupLabel>
                     <Autocomplete.Collection>
-                      {(entry: RouteDoc) => (
+                      {(item: PageSearchItem) => (
                         <SearchResultItem
-                          entry={entry}
+                          item={item}
                           isSearching={isSearching}
-                          key={entry.route}
-                          onSelect={navigate}
+                          key={item.entry.route}
+                          onSelect={selectItem}
                           query={query}
                         />
                       )}
@@ -185,11 +235,9 @@ export default function GlobalSearchDialog({
               </Autocomplete.List>
             </div>
             <div className="border-middle-hover text-muted in-data-[theme=dark]:border-middle-hover/50 flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
-              <output aria-live={loadError ? "off" : "polite"}>
-                {resultStatus}
-              </output>
+              <output aria-live="polite">{resultStatus}</output>
               <span aria-hidden="true" className="hidden sm:inline">
-                ↑ ↓ navigate · ↵ open · esc close
+                ↑ ↓ navigate · ↵ select · esc close
               </span>
             </div>
           </Autocomplete.Root>
@@ -228,24 +276,59 @@ function SearchMatchText({ query, text }: SearchMatchTextProps) {
   return parts;
 }
 
+function ThemeCommandItem({
+  command,
+  current,
+  onSelect,
+}: {
+  command: ThemeCommand;
+  current: boolean;
+  onSelect: (item: SearchItem) => void;
+}) {
+  const Icon = {
+    light: SunIcon,
+    dark: MoonIcon,
+    system: ComputerDesktopIcon,
+  }[command.preference];
+  return (
+    <Autocomplete.Item
+      className={RESULT_ITEM_CLASS_NAME}
+      onClick={() => {
+        onSelect(command);
+      }}
+      value={command}
+    >
+      <Icon aria-hidden="true" className="text-muted size-5 shrink-0" />
+      <span className="min-w-0 flex-1 text-sm">{command.title}</span>
+      {current ? (
+        <span className="text-muted flex items-center gap-2 text-xs">
+          Current
+          <CheckIcon aria-hidden="true" className="size-4 shrink-0" />
+        </span>
+      ) : null}
+    </Autocomplete.Item>
+  );
+}
+
 function SearchResultItem({
-  entry,
+  item,
   query,
   isSearching,
   onSelect,
 }: {
-  entry: RouteDoc;
+  item: PageSearchItem;
   query: string;
   isSearching: boolean;
-  onSelect: (route: string) => void;
+  onSelect: (item: SearchItem) => void;
 }) {
+  const { entry } = item;
   return (
     <Autocomplete.Item
-      className="data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent py-2 pr-3 pl-3 select-none"
+      className={RESULT_ITEM_CLASS_NAME}
       onClick={() => {
-        onSelect(entry.route);
+        onSelect(item);
       }}
-      value={entry}
+      value={item}
     >
       <div className="min-w-0 flex-1 space-y-1">
         <div className="truncate text-sm">{entry.title}</div>
@@ -276,24 +359,33 @@ function SearchResultItem({
 function getSearchLabels(
   indexStatus: GlobalSearchDialogProps["indexStatus"],
   isSearching: boolean,
-  resultCount: number
+  resultCount: number,
+  commandCount: number
 ) {
+  const resultStatus = isSearching
+    ? `${resultCount} ${resultCount === 1 ? "result" : "results"}`
+    : "Jump to a page or search commands";
+  const commandStatus = `${commandCount} ${commandCount === 1 ? "command" : "commands"}`;
+
   if (indexStatus === "error") {
     return {
       groupTitle: "Navigation fallback",
-      listLabel: "Navigation fallback",
-      resultStatus: "Full search unavailable",
+      listLabel: "Commands and navigation fallback",
+      resultStatus: `${resultStatus} · Full page search unavailable`,
     };
   }
 
-  const resultStatus = isSearching
-    ? `${resultCount} results`
-    : "Jump to a page";
+  let status = resultStatus;
+  if (indexStatus === "loading") {
+    status =
+      commandCount > 0
+        ? `${commandStatus} · Loading pages…`
+        : "Loading all pages…";
+  }
 
   return {
     groupTitle: isSearching ? "Search results" : "Navigation",
-    listLabel: isSearching ? "Search results" : "Suggested pages",
-    resultStatus:
-      indexStatus === "loading" ? "Loading all pages…" : resultStatus,
+    listLabel: isSearching ? "Pages and commands" : "Suggested pages",
+    resultStatus: status,
   };
 }

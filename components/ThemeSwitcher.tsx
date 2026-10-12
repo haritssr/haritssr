@@ -7,11 +7,10 @@ import {
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-import { SITE_DARK_THEME_COLOR, SITE_THEME_COLOR } from "@/utils/site";
+import { useTheme } from "@/components/ThemeProvider";
 import type { ThemePreference } from "@/utils/theme";
-import { THEME_PREFERENCE_STORAGE_KEY } from "@/utils/theme";
 
 const themeOptions = [
   { icon: ComputerDesktopIcon, label: "System", value: "system" },
@@ -25,56 +24,10 @@ const themeOptions = [
 
 export default function ThemeSwitcher() {
   const [open, setOpen] = useState(false);
-  const [preference, setPreference] = useState<ThemePreference>("system");
-  const preferenceRef = useRef<ThemePreference>("system");
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const initialPreference = readThemePreference();
-
-    preferenceRef.current = initialPreference;
-    applyTheme(initialPreference, mediaQuery.matches);
-
-    function handleSystemThemeChange(event: MediaQueryListEvent) {
-      if (preferenceRef.current === "system") {
-        applyResolvedTheme(event.matches ? "dark" : "light");
-      }
-    }
-
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
-    return () => {
-      mediaQuery.removeEventListener("change", handleSystemThemeChange);
-    };
-  }, []);
-
-  function handleOpenChange(nextOpen: boolean) {
-    if (nextOpen) {
-      const storedPreference = readThemePreference();
-      preferenceRef.current = storedPreference;
-      setPreference(storedPreference);
-    }
-
-    setOpen(nextOpen);
-  }
-
-  function selectPreference(nextPreference: ThemePreference) {
-    preferenceRef.current = nextPreference;
-    setPreference(nextPreference);
-
-    try {
-      window.localStorage.setItem(THEME_PREFERENCE_STORAGE_KEY, nextPreference);
-    } catch {
-      // The selection still applies for this page if storage is unavailable.
-    }
-
-    applyTheme(
-      nextPreference,
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    );
-  }
+  const { preference, setPreference } = useTheme();
 
   return (
-    <Popover.Root onOpenChange={handleOpenChange} open={open}>
+    <Popover.Root onOpenChange={setOpen} open={open}>
       <Popover.Trigger
         aria-label="Color theme options"
         className="focus-visible:outline-action text-foreground flex size-9 cursor-pointer items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98]"
@@ -112,7 +65,7 @@ export default function ThemeSwitcher() {
                     className="sr-only"
                     name="theme-preference"
                     onChange={() => {
-                      selectPreference(value);
+                      setPreference(value);
                     }}
                     type="radio"
                     value={value}
@@ -130,49 +83,4 @@ export default function ThemeSwitcher() {
       </Popover.Portal>
     </Popover.Root>
   );
-}
-
-function readThemePreference(): ThemePreference {
-  try {
-    const storedPreference = window.localStorage.getItem(
-      THEME_PREFERENCE_STORAGE_KEY
-    );
-
-    if (
-      storedPreference === "light" ||
-      storedPreference === "dark" ||
-      storedPreference === "system"
-    ) {
-      return storedPreference;
-    }
-  } catch {
-    // Fall back to the system preference when storage is unavailable.
-  }
-
-  return "system";
-}
-
-function applyTheme(preference: ThemePreference, systemPrefersDark: boolean) {
-  let theme: "light" | "dark";
-
-  if (preference === "system") {
-    theme = systemPrefersDark ? "dark" : "light";
-  } else {
-    theme = preference;
-  }
-
-  applyResolvedTheme(theme);
-}
-
-function applyResolvedTheme(theme: "light" | "dark") {
-  document.documentElement.dataset.theme = theme;
-
-  const themeColor = document.querySelector<HTMLMetaElement>(
-    'meta[name="theme-color"]'
-  );
-
-  if (themeColor) {
-    themeColor.content =
-      theme === "dark" ? SITE_DARK_THEME_COLOR : SITE_THEME_COLOR;
-  }
 }

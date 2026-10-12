@@ -41,6 +41,15 @@ The physics index lists experiments by creation date, newest first.
 Writing posts live in `data/writing/` and use `/writing` URLs directly.
 Legacy URL aliases are intentionally absent from `next.config.ts`.
 
+## Search Commands
+
+Open search with Cmd+P, Ctrl+P, or the top-bar search button. Type `theme`
+to choose Light, Dark, or System; `dark mode` and `light mode` find their
+matching commands directly. Use arrow keys and Enter, or click a command,
+to apply it and close search. The theme switcher shares the same preference,
+which persists across reloads when local storage is available. Commands remain
+available while the page search index loads or if it cannot load.
+
 ## Metadata and Appearance
 
 - `utils/site.ts` defines the canonical `https://haritssr.com` domain and

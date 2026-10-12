@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import { SiteStructuredData } from "@/components/StructuredData";
+import ThemeProvider from "@/components/ThemeProvider";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { ExperimentsData } from "@/data/ExperimentsData";
@@ -130,16 +131,18 @@ export default function RootLayout({
           Skip to content
         </a>
         <ServiceWorkerRegistration />
-        <GlobalSearchProvider>
-          <TopBar />
-          <Breadcrumbs routeLabels={breadcrumbLabels} />
-          <main
-            className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0"
-            id="main-content"
-          >
-            {children}
-          </main>
-        </GlobalSearchProvider>
+        <ThemeProvider>
+          <GlobalSearchProvider>
+            <TopBar />
+            <Breadcrumbs routeLabels={breadcrumbLabels} />
+            <main
+              className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0"
+              id="main-content"
+            >
+              {children}
+            </main>
+          </GlobalSearchProvider>
+        </ThemeProvider>
         <Footer />
         <BottomBar />
       </body>

@@ -26,9 +26,7 @@ export default function HomeSearch() {
           aria-hidden="true"
           className="text-foreground/70 size-5 shrink-0"
         />
-        <span className="truncate">
-          Search pages, projects, experiments, writing…
-        </span>
+        <span className="truncate">Search pages or commands…</span>
       </button>
     </div>
   );
