@@ -761,6 +761,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06", "2026-10-11"],
       },
       {
+        slug: "magnetic-suspension",
+        title: "Magnetic Suspension",
+        description:
+          "Balance magnetic attraction, string tension, and gravity.",
+        tags: ["magnetism", "mechanics", "visualization"],
+        createdAt: "2026-10-11",
+        updatedAt: ["2026-10-11"],
+      },
+      {
         slug: "double-slit-interference",
         title: "Double-Slit Interference",
         description:
