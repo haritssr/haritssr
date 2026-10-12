@@ -51,7 +51,7 @@ interface PageSearchItem {
 type SearchItem = ThemeCommand | SourceCodeCommand | PageSearchItem;
 
 const RESULT_ITEM_CLASS_NAME =
-  "data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent py-2 pr-3 pl-3 select-none";
+  "data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent p-2 select-none";
 
 interface SearchMatchTextProps {
   query: string;
@@ -215,10 +215,10 @@ export default function GlobalSearchDialog({
                   name, theme, or GitHub.
                 </div>
               ) : null}
-              <Autocomplete.List aria-label={listLabel}>
+              <Autocomplete.List aria-label={listLabel} className="space-y-6">
                 {themeCommands.length > 0 ? (
                   <Autocomplete.Group items={themeCommands}>
-                    <Autocomplete.GroupLabel className="text-muted px-3 pt-1 pb-2 text-xs font-medium">
+                    <Autocomplete.GroupLabel className="text-muted px-2 pt-1 pb-2 text-xs font-medium">
                       Theme
                     </Autocomplete.GroupLabel>
                     <Autocomplete.Collection>
@@ -235,7 +235,7 @@ export default function GlobalSearchDialog({
                 ) : null}
                 {sourceCodeCommands.length > 0 ? (
                   <Autocomplete.Group items={sourceCodeCommands}>
-                    <Autocomplete.GroupLabel className="text-muted px-3 pt-1 pb-2 text-xs font-medium">
+                    <Autocomplete.GroupLabel className="text-muted px-2 pt-1 pb-2 text-xs font-medium">
                       Source code
                     </Autocomplete.GroupLabel>
                     <Autocomplete.Collection>
@@ -251,7 +251,7 @@ export default function GlobalSearchDialog({
                 ) : null}
                 {pages.length > 0 ? (
                   <Autocomplete.Group items={pages}>
-                    <Autocomplete.GroupLabel className="text-muted px-3 pt-1 pb-2 text-xs font-medium">
+                    <Autocomplete.GroupLabel className="text-muted px-2 pt-1 pb-2 text-xs font-medium">
                       {groupTitle}
                     </Autocomplete.GroupLabel>
                     <Autocomplete.Collection>
