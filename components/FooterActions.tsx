@@ -28,10 +28,10 @@ export default function FooterActions({ rssPath }: FooterActionsProps) {
         <InternalLink href={apiRoute.route} variant="footer">
           {apiRoute.title}
         </InternalLink>
-        <InstallButton />
         <InternalLink href={rssPath} variant="footer">
           RSS
         </InternalLink>
+        <InstallButton />
         <ShareButton />
       </div>
       <Toast.Portal>
