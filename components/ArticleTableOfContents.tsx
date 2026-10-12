@@ -29,7 +29,7 @@ const ContentsPanel = dynamic(
 );
 const DESKTOP_QUERY = "(min-width: 1024px)";
 const FLOATING_BUTTON_CLASS =
-  "floating-surface hover:bg-surface/95! text-foreground/90! focus-visible:outline-action fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 rounded-full! border text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
+  "floating-surface hover:bg-surface/95! text-foreground/90! focus-visible:outline-action pointer-events-auto shrink-0 rounded-full! border text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!";
 
 function getDesktopSnapshot() {
   return window.matchMedia(DESKTOP_QUERY).matches;
@@ -305,7 +305,7 @@ export default function ArticleTableOfContents({
     setOpenView(nextOpen ? desktop : null);
   }
 
-  const triggerClassName = `${FLOATING_BUTTON_CLASS} right-[max(1.25rem,env(safe-area-inset-right))] h-9.5 px-3! py-1.5!`;
+  const triggerClassName = `${FLOATING_BUTTON_CLASS} h-9.5 px-3! py-1.5!`;
   const triggerContent = (
     <>
       <ListBulletIcon
@@ -368,11 +368,11 @@ export default function ArticleTableOfContents({
   );
 
   return (
-    <>
+    <div className="pointer-events-none fixed inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 mx-auto flex w-full max-w-5xl items-center justify-between gap-3 pr-[max(1.25rem,env(safe-area-inset-right))] pl-[max(1.25rem,env(safe-area-inset-left))] xl:pr-[env(safe-area-inset-right)] xl:pl-[env(safe-area-inset-left)]">
       <Button
         aria-label="To the top"
         data-article-back-to-top=""
-        className={`${FLOATING_BUTTON_CLASS} left-[max(1.25rem,env(safe-area-inset-left))] size-9 p-0!`}
+        className={`${FLOATING_BUTTON_CLASS} size-9 p-0!`}
         iconOnly
         onClick={() => {
           window.scrollTo({
@@ -391,6 +391,6 @@ export default function ArticleTableOfContents({
         />
       </Button>
       {visible ? contentsTrigger : null}
-    </>
+    </div>
   );
 }

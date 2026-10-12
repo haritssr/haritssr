@@ -27,6 +27,7 @@ import styles from "./ArticleContentsPanel.module.css";
 interface ContentsListProps {
   activeId: string;
   entries: ContentsEntry[];
+  depth?: number;
   onSelect: (entry: ContentsEntry, focus: boolean) => void;
 }
 
@@ -39,7 +40,15 @@ const ContentsLabel = memo(({ parts }: { parts: ContentsLabelPart[] }) =>
 );
 ContentsLabel.displayName = "ContentsLabel";
 
-function ContentsList({ activeId, entries, onSelect }: ContentsListProps) {
+function ContentsList({
+  activeId,
+  entries,
+  onSelect,
+  depth = 0,
+}: ContentsListProps) {
+  const entryColor = depth === 0 ? "text-foreground!" : "text-foreground/65!";
+  const markerStyle = depth === 0 ? "list-disc" : "list-['-_']";
+
   function select(event: MouseEvent<HTMLAnchorElement>, entry: ContentsEntry) {
     if (
       event.button !== 0 ||
@@ -55,12 +64,14 @@ function ContentsList({ activeId, entries, onSelect }: ContentsListProps) {
   }
 
   return (
-    <ul className="space-y-4 [&_li]:space-y-4">
+    <ul
+      className={`marker:text-foreground/70 space-y-3 pl-5 [&_li]:space-y-3 ${markerStyle}`}
+    >
       {entries.map((entry) => (
         <li key={entry.id}>
           <InternalLink
             aria-current={activeId === entry.id ? "location" : undefined}
-            className={`focus-visible:outline-action block! w-full! rounded-xl text-sm! leading-6! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : "text-foreground/90!"} ${entry.level === 1 ? "font-semibold" : ""}`}
+            className={`focus-visible:outline-action block! w-full! rounded-xl text-base! leading-6! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
             href={`#${encodeURIComponent(entry.id)}`}
             onClick={(event) => {
               select(event, entry);
@@ -70,9 +81,10 @@ function ContentsList({ activeId, entries, onSelect }: ContentsListProps) {
             <ContentsLabel parts={entry.label} />
           </InternalLink>
           {entry.children.length > 0 ? (
-            <div className="ml-3 pl-2">
+            <div>
               <ContentsList
                 activeId={activeId}
+                depth={depth + 1}
                 entries={entry.children}
                 onSelect={onSelect}
               />
@@ -101,17 +113,17 @@ export default function ArticleContentsPanel({
   const closeIcon = (
     <XMarkIcon aria-hidden="true" className="pointer-events-none size-5" />
   );
-  const closeClassName = "size-11 rounded-full! p-0! [corner-shape:round]!";
+  const closeClassName = "size-10 rounded-full! p-0! [corner-shape:round]!";
   const content = (
     <>
-      <div className="border-middle-hover flex shrink-0 items-center justify-between gap-3 border-b py-1.5 pr-2 pl-4">
+      <div className="border-middle-hover flex shrink-0 items-center justify-between gap-3 border-b py-1 pr-2 pl-4">
         {desktop ? (
-          <Popover.Title className="text-foreground font-semibold">
+          <Popover.Title className="text-foreground text-lg font-medium">
             {title}
           </Popover.Title>
         ) : (
           <Heading
-            className="text-foreground font-semibold"
+            className="text-foreground text-lg font-medium"
             level={2}
             slot="title"
           >
