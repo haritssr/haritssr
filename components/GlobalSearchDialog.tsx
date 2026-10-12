@@ -76,6 +76,7 @@ export default function GlobalSearchDialog({
   triggerRef,
 }: GlobalSearchDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const selectedItemRef = useRef(false);
   const router = useRouter();
   const { preference, setPreference } = useTheme();
   const isSearching = hasSearchQuery(query);
@@ -107,6 +108,7 @@ export default function GlobalSearchDialog({
   );
 
   function selectItem(item: SearchItem) {
+    selectedItemRef.current = true;
     if (item.kind === "theme") {
       setPreference(item.preference);
     } else if (item.kind === "source-code") {
@@ -123,9 +125,14 @@ export default function GlobalSearchDialog({
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
         <Dialog.Popup
           className={`${styles.popup} bg-background border-border text-foreground z-90 flex flex-col overflow-hidden rounded-t-3xl border shadow-xl outline-hidden sm:rounded-2xl`}
-          finalFocus={triggerRef}
+          finalFocus={() =>
+            selectedItemRef.current ? false : triggerRef.current
+          }
           id="global-search-dialog"
-          initialFocus={inputRef}
+          initialFocus={() => {
+            selectedItemRef.current = false;
+            return inputRef.current;
+          }}
         >
           <div
             aria-hidden="true"
