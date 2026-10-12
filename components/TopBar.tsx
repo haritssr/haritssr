@@ -11,6 +11,7 @@ import GitHubIcon from "@/components/GitHubIcon";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import TopBarSearch from "@/components/TopBarSearch";
 import useScrolledArticle from "@/components/useScrolledArticle";
+import { SOURCE_CODE_URL } from "@/utils/site";
 
 const destinations = ["projects", "experiments", "writing", "design"] as const;
 
@@ -81,7 +82,7 @@ function GitHubLink() {
     <a
       aria-label="View this site's source on GitHub (opens in a new tab)"
       className="focus-visible:outline-action flex size-9 items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98]"
-      href="https://github.com/haritssr/haritssr"
+      href={SOURCE_CODE_URL}
       rel="noopener noreferrer"
       target="_blank"
       title="Repository"

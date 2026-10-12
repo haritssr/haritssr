@@ -3,6 +3,7 @@
 import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Dialog } from "@base-ui/react/dialog";
 import {
+  ArrowTopRightOnSquareIcon,
   CheckIcon,
   ChevronRightIcon,
   ComputerDesktopIcon,
@@ -15,6 +16,7 @@ import { useRouter } from "next/navigation";
 import type { RefObject } from "react";
 import { useRef } from "react";
 
+import GitHubIcon from "@/components/GitHubIcon";
 import { useTheme } from "@/components/ThemeProvider";
 import type { RouteDoc } from "@/data/routes";
 import {
@@ -22,6 +24,8 @@ import {
   hasSearchQuery,
   searchRoutes,
 } from "@/data/routes";
+import type { SourceCodeCommand } from "@/utils/sourceCodeCommands";
+import { getSourceCodeCommands } from "@/utils/sourceCodeCommands";
 import type { ThemeCommand } from "@/utils/themeCommands";
 import { getThemeCommands } from "@/utils/themeCommands";
 
@@ -44,7 +48,7 @@ interface PageSearchItem {
   entry: RouteDoc;
 }
 
-type SearchItem = ThemeCommand | PageSearchItem;
+type SearchItem = ThemeCommand | SourceCodeCommand | PageSearchItem;
 
 const RESULT_ITEM_CLASS_NAME =
   "data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent py-2 pr-3 pl-3 select-none";
@@ -79,7 +83,8 @@ export default function GlobalSearchDialog({
   const loadError = indexStatus === "error";
   const showLoading = isLoading && isSearching;
   const themeCommands = getThemeCommands(query);
-  const commandCount = themeCommands.length;
+  const sourceCodeCommands = getSourceCodeCommands(query);
+  const commandCount = themeCommands.length + sourceCodeCommands.length;
   const pages: PageSearchItem[] = showLoading
     ? []
     : searchRoutes(entries, query).map((entry) => ({
@@ -87,7 +92,11 @@ export default function GlobalSearchDialog({
         title: entry.title,
         entry,
       }));
-  const results: SearchItem[] = [...themeCommands, ...pages];
+  const results: SearchItem[] = [
+    ...themeCommands,
+    ...sourceCodeCommands,
+    ...pages,
+  ];
   const showEmpty =
     !isLoading && !loadError && isSearching && results.length === 0;
   const { groupTitle, listLabel, resultStatus } = getSearchLabels(
@@ -100,6 +109,8 @@ export default function GlobalSearchDialog({
   function selectItem(item: SearchItem) {
     if (item.kind === "theme") {
       setPreference(item.preference);
+    } else if (item.kind === "source-code") {
+      window.open(item.url, "_blank", "noopener,noreferrer");
     } else {
       router.push(item.entry.route);
     }
@@ -122,8 +133,9 @@ export default function GlobalSearchDialog({
           />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Search pages or change appearance with theme commands. Use arrow
-            keys to browse results and Enter to select.
+            Search pages, change appearance with theme commands, or type GitHub
+            or source code to open this site&apos;s repository in a new tab. Use
+            arrow keys to browse results and Enter to select.
           </Dialog.Description>
           <Autocomplete.Root
             autoHighlight="always"
@@ -193,7 +205,7 @@ export default function GlobalSearchDialog({
               {showEmpty ? (
                 <div className="text-muted px-4 py-10 text-center text-sm leading-6">
                   No pages or commands found for “{query}”. Try a topic, page
-                  name, or theme.
+                  name, theme, or GitHub.
                 </div>
               ) : null}
               <Autocomplete.List aria-label={listLabel}>
@@ -208,6 +220,22 @@ export default function GlobalSearchDialog({
                           command={command}
                           current={preference === command.preference}
                           key={command.preference}
+                          onSelect={selectItem}
+                        />
+                      )}
+                    </Autocomplete.Collection>
+                  </Autocomplete.Group>
+                ) : null}
+                {sourceCodeCommands.length > 0 ? (
+                  <Autocomplete.Group items={sourceCodeCommands}>
+                    <Autocomplete.GroupLabel className="text-muted px-3 pt-1 pb-2 text-xs font-medium">
+                      Source code
+                    </Autocomplete.GroupLabel>
+                    <Autocomplete.Collection>
+                      {(command: SourceCodeCommand) => (
+                        <SourceCodeCommandItem
+                          command={command}
+                          key={command.url}
                           onSelect={selectItem}
                         />
                       )}
@@ -306,6 +334,34 @@ function ThemeCommandItem({
           <CheckIcon aria-hidden="true" className="size-4 shrink-0" />
         </span>
       ) : null}
+    </Autocomplete.Item>
+  );
+}
+
+function SourceCodeCommandItem({
+  command,
+  onSelect,
+}: {
+  command: SourceCodeCommand;
+  onSelect: (item: SearchItem) => void;
+}) {
+  return (
+    <Autocomplete.Item
+      className={RESULT_ITEM_CLASS_NAME}
+      onClick={() => {
+        onSelect(command);
+      }}
+      value={command}
+    >
+      <GitHubIcon aria-hidden="true" className="text-muted size-5 shrink-0" />
+      <div className="min-w-0 flex-1 space-y-1">
+        <div className="text-sm">{command.title}</div>
+        <div className="text-muted text-xs">Opens in a new tab</div>
+      </div>
+      <ArrowTopRightOnSquareIcon
+        aria-hidden="true"
+        className="text-muted size-5 shrink-0"
+      />
     </Autocomplete.Item>
   );
 }

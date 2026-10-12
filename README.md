@@ -47,8 +47,10 @@ Open search with Cmd+P, Ctrl+P, or the top-bar search button. Type `theme`
 to choose Light, Dark, or System; `dark mode` and `light mode` find their
 matching commands directly. Use arrow keys and Enter, or click a command,
 to apply it and close search. The theme switcher shares the same preference,
-which persists across reloads when local storage is available. Commands remain
-available while the page search index loads or if it cannot load.
+which persists across reloads when local storage is available. Type `github`
+or `source code`, then press Enter or click the command to open this site's
+GitHub repository in a new tab. Commands remain available while the page search
+index loads or if it cannot load.
 
 ## Metadata and Appearance
 
