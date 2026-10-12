@@ -36,6 +36,7 @@ The catalog supplies explorer, search, metadata, and sitemap records.
 Mathematics and physics titles match their URL slugs; shared page titles,
 index links, and breadcrumbs use the catalog names. Euler uses
 `/experiments/mathematics/euler`.
+The physics index lists experiments by creation date, newest first.
 Writing posts live in `data/writing/` and use `/writing` URLs directly.
 Legacy URL aliases are intentionally absent from `next.config.ts`.
 

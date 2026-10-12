@@ -16,7 +16,12 @@ export default function ExperimentDomainIndex({
   domainSlug,
 }: ExperimentDomainIndexProps) {
   const domain = getAvailableExperimentDomain(domainSlug);
-  const { experiments } = domain;
+  const experiments =
+    domain.slug === "physics"
+      ? domain.experiments.toSorted((a, b) =>
+          b.createdAt.localeCompare(a.createdAt)
+        )
+      : domain.experiments;
 
   return (
     <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
