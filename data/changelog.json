@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3ee37530500cfecaaa753245630a41cf1ca88e90",
+      "date": "2026-10-12T22:38:23+07:00",
+      "subject": "refactor(search): share command query matching"
+    },
+    {
       "hash": "695acd9e85fd02449f9a4f504640840d9c5d7160",
       "date": "2026-10-12T22:38:17+07:00",
       "subject": "perf(math): cache repeated KaTeX renderings"
