@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "11083b48d9caa0d636b309cfc8abf0a1c9167412",
+      "date": "2026-10-12T11:00:28+07:00",
+      "subject": "feat(commits): add history explorer and model suitability analysis"
+    },
+    {
       "hash": "8422e886322e38c2b9075f9a727240b37c5c80d1",
       "date": "2026-10-12T11:00:11+07:00",
       "subject": "style(home): align more-section list markers"
