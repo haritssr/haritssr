@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "e76e8cae994954e6177fd32e5194956fb3517b6e",
+      "date": "2026-10-12T22:38:11+07:00",
+      "subject": "perf(commits): reuse prepared history and commit type counts"
+    },
+    {
       "hash": "779a66931b431919847a0fc2639722c91be9a124",
       "date": "2026-10-12T22:38:05+07:00",
       "subject": "docs(commits): simplify model recommendations and cost copy"

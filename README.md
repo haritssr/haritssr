@@ -20,6 +20,8 @@ Next.js MDX and Turbopack discover local writing modules automatically;
 Ultracite uses Oxlint and Oxfmt. Continuing widgets use Base UI, except the
 mobile article table of contents, which uses React Aria Sheet. Writing and
 experiments share a scrolling top bar and floating Contents/back-to-top controls.
+`utils/katexify.tsx` keeps up to 256 recently used equation renderings, keyed by
+TeX and display mode, while preserving the shared KaTeX HTML and MathML output.
 
 Earlier migrations replaced Pages Router, Content Collections, a manual MDX
 import registry, and Biome. Small helpers use native APIs instead of Effect,
