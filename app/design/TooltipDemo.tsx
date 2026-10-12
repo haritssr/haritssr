@@ -20,7 +20,7 @@ export default function TooltipDemo() {
           </Tooltip.Trigger>
           <Tooltip.Portal>
             <Tooltip.Positioner align="center" side="top">
-              <Tooltip.Popup className="bg-foreground rounded-md px-2.5 py-1.5 text-white shadow-xl">
+              <Tooltip.Popup className="bg-foreground text-background rounded-md px-2.5 py-1.5 shadow-xl">
                 <div>Hey, I am Tooltip!</div>
                 <Tooltip.Arrow className={TOOLTIP_ARROW_CLASS_NAME} />
               </Tooltip.Popup>
