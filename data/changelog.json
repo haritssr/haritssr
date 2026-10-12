@@ -1,6 +1,66 @@
 {
   "commits": [
     {
+      "hash": "98cae31a113ee537367ec07e7f2b753c300d3bd0",
+      "date": "2026-10-12T15:28:02+07:00",
+      "subject": "chore(changelog): update commit snapshot"
+    },
+    {
+      "hash": "4168525e231b9c7c8e1230d1720dd0cbc8dde7e9",
+      "date": "2026-10-12T15:27:47+07:00",
+      "subject": "refactor(commits): use timeline description prop"
+    },
+    {
+      "hash": "43ebeec561f64cf279e4825152d24c055bc1f409",
+      "date": "2026-10-12T15:27:12+07:00",
+      "subject": "refactor(commits): share simplified activity chart"
+    },
+    {
+      "hash": "32da9e78da0b70548ec744275c72e443df538e45",
+      "date": "2026-10-12T15:27:02+07:00",
+      "subject": "feat(commits): add sorted commit type counts"
+    },
+    {
+      "hash": "8f6ab29acf3b598a0dc598a4a640bc98e856fdb4",
+      "date": "2026-10-12T15:26:54+07:00",
+      "subject": "style(footer): adjust action order and link hover"
+    },
+    {
+      "hash": "50f4b1a24ce3a16fd9cf6119e7748fc99e33070e",
+      "date": "2026-10-12T15:26:47+07:00",
+      "subject": "style(Section): increase description spacing"
+    },
+    {
+      "hash": "876673f33e0b0a9c671ce5789c44e7037ba38bee",
+      "date": "2026-10-12T15:26:37+07:00",
+      "subject": "style(Accordion): use normal trigger weight"
+    },
+    {
+      "hash": "8127fee26b33a6a9fe9e366b1c1b946c52f4dc81",
+      "date": "2026-10-12T15:26:28+07:00",
+      "subject": "style(home): show 2023 writing in two columns"
+    },
+    {
+      "hash": "be99cb543b178597b00c41b2fbc374349286b1c6",
+      "date": "2026-10-12T15:26:19+07:00",
+      "subject": "style(search): adjust command spacing"
+    },
+    {
+      "hash": "3f3733211739971c82c32b3c071dea9a9ed07a94",
+      "date": "2026-10-12T15:26:09+07:00",
+      "subject": "fix(search): prevent trigger focus after selection"
+    },
+    {
+      "hash": "a7643a11efe20a03a17e7012f44b5163e5658232",
+      "date": "2026-10-12T15:26:00+07:00",
+      "subject": "feat(search): add GitHub source command"
+    },
+    {
+      "hash": "3c6f21630bf411044670d4edad632d63eb817db2",
+      "date": "2026-10-12T15:25:50+07:00",
+      "subject": "feat(search): add theme commands"
+    },
+    {
       "hash": "11083b48d9caa0d636b309cfc8abf0a1c9167412",
       "date": "2026-10-12T11:00:28+07:00",
       "subject": "feat(commits): add history explorer and model suitability analysis"
