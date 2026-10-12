@@ -1,0 +1,90 @@
+/* Match server hex and browser-normalized RGB colors, including mounted panels. */
+.equations :is([style*="#e11d48"], [style*="rgb(225, 29, 72)"]) {
+  color: var(--color-rose-600) !important;
+}
+
+.equations :is([style*="#0f766e"], [style*="rgb(15, 118, 110)"]) {
+  color: var(--color-teal-600) !important;
+}
+
+.equations :is([style*="#0369a1"], [style*="rgb(3, 105, 161)"]) {
+  color: var(--color-sky-600) !important;
+}
+
+.equations :is([style*="#7c3aed"], [style*="rgb(124, 58, 237)"]) {
+  color: var(--color-violet-600) !important;
+}
+
+.equations :is([style*="#be185d"], [style*="rgb(190, 24, 93)"]) {
+  color: var(--color-pink-600) !important;
+}
+
+.equations :is([style*="#4d7c0f"], [style*="rgb(77, 124, 15)"]) {
+  color: var(--color-lime-600) !important;
+}
+
+.equations :is([style*="#c2410c"], [style*="rgb(194, 65, 12)"]) {
+  color: var(--color-orange-600) !important;
+}
+
+.equations :is([style*="#a16207"], [style*="rgb(161, 98, 7)"]) {
+  color: var(--color-amber-600) !important;
+}
+
+.equations :is([style*="#2563eb"], [style*="rgb(37, 99, 235)"]) {
+  color: var(--color-blue-600) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#e11d48"], [style*="rgb(225, 29, 72)"]) {
+  color: var(--color-rose-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#0f766e"], [style*="rgb(15, 118, 110)"]) {
+  color: var(--color-teal-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#0369a1"], [style*="rgb(3, 105, 161)"]) {
+  color: var(--color-sky-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#7c3aed"], [style*="rgb(124, 58, 237)"]) {
+  color: var(--color-violet-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#be185d"], [style*="rgb(190, 24, 93)"]) {
+  color: var(--color-pink-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#4d7c0f"], [style*="rgb(77, 124, 15)"]) {
+  color: var(--color-lime-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#c2410c"], [style*="rgb(194, 65, 12)"]) {
+  color: var(--color-orange-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#a16207"], [style*="rgb(161, 98, 7)"]) {
+  color: var(--color-amber-400) !important;
+}
+
+:global(:root[data-theme="dark"])
+  .equations
+  :is([style*="#2563eb"], [style*="rgb(37, 99, 235)"]) {
+  color: var(--color-blue-400) !important;
+}

@@ -786,12 +786,19 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "essential-physics-equations",
+        hideTitle: true,
         title: "Essential Physics Equations",
         description:
           "Find key physics equations with variable meanings and SI units.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-09-30",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06", "2026-10-11"],
+        updatedAt: [
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-11",
+          "2026-10-12",
+        ],
       },
     ],
     id: 16,

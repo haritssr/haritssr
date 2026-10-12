@@ -503,34 +503,53 @@ export const PHYSICS_DOMAINS: readonly PhysicsDomain[] = [
       {
         id: "ampere-maxwell-law",
         title: "Ampère–Maxwell law",
-        expression: String.raw`\oint_C \mathbf{B}\cdot d\boldsymbol{\ell} = \mu_0 I_{\mathrm{enc}} + \mu_0\varepsilon_0\frac{d\Phi_E}{dt}`,
+        expression: String.raw`\textcolor{#e11d48}{\oint}_{\textcolor{#4d7c0f}{C}} \textcolor{#0f766e}{\mathbf{B}}\cdot \textcolor{#0369a1}{d\boldsymbol{\ell}} = \textcolor{#7c3aed}{\mu_0}\,\textcolor{#c2410c}{I_{\mathrm{enc}}} + \textcolor{#7c3aed}{\mu_0}\textcolor{#a16207}{\varepsilon_0}\frac{d\textcolor{#be185d}{\Phi_E}}{d\textcolor{#2563eb}{t}}`,
         explanation:
           "Magnetic circulation comes from electric current and changing electric flux. Maxwell’s added flux term makes the law work across a charging capacitor and helps explain how electromagnetic waves propagate.",
         symbols: [
           {
-            symbol: String.raw`\mathbf{B}`,
+            symbol: String.raw`\textcolor{#e11d48}{\oint}`,
+            meaning: "Line integral around a closed loop",
+            unit: null,
+          },
+          {
+            symbol: String.raw`\textcolor{#0f766e}{\mathbf{B}}`,
             meaning: "Magnetic field",
             unit: String.raw`\mathrm{T}`,
           },
-          { symbol: "C", meaning: "Closed loop of integration", unit: null },
           {
-            symbol: String.raw`d\boldsymbol{\ell}`,
+            symbol: String.raw`\textcolor{#4d7c0f}{C}`,
+            meaning: "Closed loop of integration",
+            unit: null,
+          },
+          {
+            symbol: String.raw`\textcolor{#0369a1}{d\boldsymbol{\ell}}`,
             meaning: "Directed line element along the loop",
             unit: String.raw`\mathrm{m}`,
           },
           {
-            symbol: String.raw`I_{\mathrm{enc}}`,
+            symbol: String.raw`\textcolor{#c2410c}{I_{\mathrm{enc}}}`,
             meaning: "Current through a surface bounded by the loop",
             unit: String.raw`\mathrm{A}`,
           },
           {
-            symbol: String.raw`\Phi_E`,
+            symbol: String.raw`\textcolor{#be185d}{\Phi_E}`,
             meaning: "Electric flux through that surface",
             unit: String.raw`\mathrm{V\,m}`,
           },
-          { symbol: "t", meaning: "Time", unit: String.raw`\mathrm{s}` },
-          PHYSICAL_CONSTANTS.permeability,
-          PHYSICAL_CONSTANTS.permittivity,
+          {
+            symbol: String.raw`\textcolor{#2563eb}{t}`,
+            meaning: "Time",
+            unit: String.raw`\mathrm{s}`,
+          },
+          {
+            ...PHYSICAL_CONSTANTS.permeability,
+            symbol: String.raw`\textcolor{#7c3aed}{\mu_0}`,
+          },
+          {
+            ...PHYSICAL_CONSTANTS.permittivity,
+            symbol: String.raw`\textcolor{#a16207}{\varepsilon_0}`,
+          },
         ],
         condition:
           "SI field form for a fixed loop and surface, using total current. Loop direction, surface normal, current, and flux signs follow the right-hand rule.",
