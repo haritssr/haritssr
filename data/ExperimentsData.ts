@@ -770,6 +770,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: ["2026-10-11"],
       },
       {
+        slug: "projectile-motion",
+        title: "Projectile Motion",
+        description:
+          "Explore launch angles, parabolic paths, flight time, and range.",
+        tags: ["mechanics", "kinematics", "visualization", "learning"],
+        createdAt: "2026-10-12",
+        updatedAt: ["2026-10-12"],
+      },
+      {
         slug: "double-slit-interference",
         title: "Double-Slit Interference",
         description:
