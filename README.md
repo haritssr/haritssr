@@ -93,6 +93,9 @@ the current day, showing 50 commits at a time. Older history stays available
 through the filters; Today selects the current day, and Reset returns to it.
 Date filters use Asia/Jakarta time, with weeks starting Monday. The activity
 graph includes quiet periods and follows the date, category, and search filters.
+The explorer prepares Jakarta dates, hours, commit types, and search text once
+per history array in the client. Filtering and activity calculations reuse those
+records; the server passes only the original commit fields.
 
 `bun run sync:changelog` generates `data/changelog.json` from Git author dates,
 subjects, and hashes; it runs before `bun run dev` and `bun run build`. Commit

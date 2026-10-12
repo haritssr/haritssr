@@ -1,5 +1,5 @@
 import CommitActivityChart from "@/components/CommitActivityChart";
-import { activityBuckets } from "@/utils/changelog";
+import { activityBuckets, prepareCommits } from "@/utils/changelog";
 import type { ChangelogCommit } from "@/utils/changelog";
 
 export default function CommitHourlyChart({
@@ -11,7 +11,7 @@ export default function CommitHourlyChart({
 }) {
   return (
     <CommitActivityChart
-      buckets={activityBuckets(commits, "day", day, day, day)}
+      buckets={activityBuckets(prepareCommits(commits), "day", day, day, day)}
       title="Commits by hour"
       subtitle={`${day} · Jakarta time (WIB)`}
       axisLabel="Hour (WIB)"

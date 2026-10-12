@@ -15,12 +15,7 @@ import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDesc
 import history from "@/data/changelog.json";
 import modelSuitability from "@/data/model-suitability-2026-10-11.json";
 import { commitsRoute } from "@/data/routes";
-import {
-  changeTypes,
-  commitDay,
-  filterCommits,
-  formatDay,
-} from "@/utils/changelog";
+import { commitDay, countCommitTypes, formatDay } from "@/utils/changelog";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 export const metadata = createPageMetadata({
@@ -29,31 +24,17 @@ export const metadata = createPageMetadata({
   path: commitsRoute.route,
 });
 
+const assessedCommits = history.commits.filter(
+  (commit) => commitDay(commit.date) === modelSuitability.date
+);
+const commitTypeCounts = countCommitTypes(assessedCommits);
+
 export default async function CommitsPage() {
   await connection();
   // oxlint-disable-next-line react/purity -- Request-time server date is passed to the client for consistent hydration.
   const initialDay = commitDay(new Date().toISOString());
   const lastDay = commitDay(history.commits[0]?.date ?? initialDay);
   const firstDay = commitDay(history.commits.at(-1)?.date ?? initialDay);
-  const assessedCommits = filterCommits(
-    history.commits,
-    "day",
-    modelSuitability.date,
-    "all",
-    ""
-  );
-  const commitTypeCounts = changeTypes
-    .map(({ value }) => ({
-      value,
-      count: filterCommits(
-        assessedCommits,
-        "all",
-        modelSuitability.date,
-        value,
-        ""
-      ).length,
-    }))
-    .toSorted((a, b) => b.count - a.count);
   const estimatedCostUsd = assessedCommits.length * 0.04;
   const estimatedCostIdr = new Intl.NumberFormat("en-US", {
     maximumFractionDigits: 0,

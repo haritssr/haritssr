@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "779a66931b431919847a0fc2639722c91be9a124",
+      "date": "2026-10-12T22:38:05+07:00",
+      "subject": "docs(commits): simplify model recommendations and cost copy"
+    },
+    {
       "hash": "7368f4eeecbcd4198045c57426262b8229fa0735",
       "date": "2026-10-12T22:38:00+07:00",
       "subject": "style(commits): collapse model suitability commits by default"

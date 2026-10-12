@@ -4,6 +4,14 @@ export interface ChangelogCommit {
   subject: string;
 }
 
+export interface PreparedCommit {
+  commit: ChangelogCommit;
+  day: string;
+  hour: number;
+  type: string;
+  searchText: string;
+}
+
 export type ChangelogPeriod = "all" | "day" | "week" | "month" | "year";
 
 export const changeTypes = [
@@ -109,25 +117,47 @@ function commitType(subject: string): string {
     : "other";
 }
 
+export function prepareCommits(
+  commits: readonly ChangelogCommit[]
+): PreparedCommit[] {
+  return commits.map((commit) => {
+    const date = new Date(new Date(commit.date).getTime() + JAKARTA_OFFSET_MS);
+    return {
+      commit,
+      day: dateKey(date),
+      hour: date.getUTCHours(),
+      type: commitType(commit.subject),
+      searchText: `${commit.subject} ${commit.hash}`.toLowerCase(),
+    };
+  });
+}
+
+export function countCommitTypes(commits: readonly ChangelogCommit[]) {
+  const counts = new Map<string, number>();
+  for (const commit of commits) {
+    const type = commitType(commit.subject);
+    counts.set(type, (counts.get(type) ?? 0) + 1);
+  }
+  return changeTypes
+    .map(({ value }) => ({ value, count: counts.get(value) ?? 0 }))
+    .toSorted((left, right) => right.count - left.count);
+}
+
 export function filterCommits(
-  commits: readonly ChangelogCommit[],
+  commits: readonly PreparedCommit[],
   period: ChangelogPeriod,
   anchor: string,
   type: string,
   query: string
-): ChangelogCommit[] {
+): PreparedCommit[] {
   const range = periodRange(period, anchor);
   const words = query.trim().toLowerCase().split(/\s+/u).filter(Boolean);
-  return commits.filter((commit) => {
-    const day = commitDay(commit.date);
-    return (
-      (!range || (day >= range.start && day <= range.end)) &&
-      (type === "all" || commitType(commit.subject) === type) &&
-      words.every((word) =>
-        `${commit.subject} ${commit.hash}`.toLowerCase().includes(word)
-      )
-    );
-  });
+  return commits.filter(
+    (commit) =>
+      (!range || (commit.day >= range.start && commit.day <= range.end)) &&
+      (type === "all" || commit.type === type) &&
+      words.every((word) => commit.searchText.includes(word))
+  );
 }
 
 export interface ActivityBucket {
@@ -139,7 +169,7 @@ export interface ActivityBucket {
 }
 
 export function activityBuckets(
-  commits: readonly ChangelogCommit[],
+  commits: readonly PreparedCommit[],
   period: ChangelogPeriod,
   anchor: string,
   firstDay: string,
@@ -150,14 +180,9 @@ export function activityBuckets(
   const hourly = period === "day";
   const counts = new Map<string, number>();
   for (const commit of commits) {
-    const day = commitDay(commit.date);
-    let key = monthly ? day.slice(0, 7) : day;
+    let key = monthly ? commit.day.slice(0, 7) : commit.day;
     if (hourly) {
-      key = String(
-        new Date(
-          new Date(commit.date).getTime() + JAKARTA_OFFSET_MS
-        ).getUTCHours()
-      );
+      key = String(commit.hour);
     }
     counts.set(key, (counts.get(key) ?? 0) + 1);
   }

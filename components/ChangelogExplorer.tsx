@@ -5,7 +5,7 @@ import {
   ChevronRightIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import { useDeferredValue, useId, useState } from "react";
+import { useDeferredValue, useId, useMemo, useState } from "react";
 
 import Button from "@/components/Button";
 import CommitActivityChart from "@/components/CommitActivityChart";
@@ -19,9 +19,14 @@ import {
   filterCommits,
   formatDay,
   periodRange,
+  prepareCommits,
   shiftPeriod,
 } from "@/utils/changelog";
-import type { ChangelogCommit, ChangelogPeriod } from "@/utils/changelog";
+import type {
+  ChangelogCommit,
+  ChangelogPeriod,
+  PreparedCommit,
+} from "@/utils/changelog";
 
 const periodOptions: readonly { value: ChangelogPeriod; label: string }[] = [
   { value: "all", label: "All history" },
@@ -57,13 +62,22 @@ function rangeLabel(period: ChangelogPeriod, anchor: string): string {
     : `${formatDay(range.start)} – ${formatDay(range.end)}`;
 }
 
-function countDays(commits: readonly ChangelogCommit[]): Map<string, number> {
+function summarizeDays(commits: readonly PreparedCommit[]) {
   const days = new Map<string, number>();
   for (const commit of commits) {
-    const day = commitDay(commit.date);
-    days.set(day, (days.get(day) ?? 0) + 1);
+    days.set(commit.day, (days.get(commit.day) ?? 0) + 1);
   }
-  return days;
+  let busiest: [string, number] | undefined;
+  for (const [day, count] of days) {
+    if (
+      busiest === undefined ||
+      count > busiest[1] ||
+      (count === busiest[1] && day > busiest[0])
+    ) {
+      busiest = [day, count];
+    }
+  }
+  return { activeDays: days.size, busiest };
 }
 
 export default function ChangelogExplorer({
@@ -81,12 +95,19 @@ export default function ChangelogExplorer({
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState(PAGE_SIZE);
   const deferredQuery = useDeferredValue(query);
-  const matched = filterCommits(commits, period, anchor, type, deferredQuery);
-  const days = countDays(matched);
-  const [busiest] = [...days].toSorted(
-    (a, b) => b[1] - a[1] || b[0].localeCompare(a[0])
+  const prepared = useMemo(() => prepareCommits(commits), [commits]);
+  const matched = useMemo(
+    () => filterCommits(prepared, period, anchor, type, deferredQuery),
+    [prepared, period, anchor, type, deferredQuery]
   );
-  const buckets = activityBuckets(matched, period, anchor, firstDay, lastDay);
+  const { activeDays, busiest } = useMemo(
+    () => summarizeDays(matched),
+    [matched]
+  );
+  const buckets = useMemo(
+    () => activityBuckets(matched, period, anchor, firstDay, lastDay),
+    [matched, period, anchor, firstDay, lastDay]
+  );
   const label = rangeLabel(period, anchor);
   const graphUnit = graphGranularity(period);
   const activeFilter =
@@ -146,7 +167,7 @@ export default function ChangelogExplorer({
           />
           <Summary
             label="Active days"
-            value={numberFormatter.format(days.size)}
+            value={numberFormatter.format(activeDays)}
             detail="Days with at least one matching commit"
           />
           <Summary
@@ -204,7 +225,9 @@ export default function ChangelogExplorer({
             </Button>
           </div>
         ) : (
-          <CommitTable commits={matched.slice(0, limit)} />
+          <CommitTable
+            commits={matched.slice(0, limit).map(({ commit }) => commit)}
+          />
         )}
         {limit < matched.length ? (
           <Button
