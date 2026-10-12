@@ -33,14 +33,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Before changing UI, inspect `/design` and `app/design/`. Reuse suitable shared
   components and their demonstrated behavior; create new ones only when needed.
   Follow existing design tokens.
-- Repeated grid cards must have equal widths and equal heights within each row.
-  Align headings, content areas, and bottom actions or equations with grid,
-  subgrid, or flexible rows. No uneven heights or masonry unless explicitly
-  requested. Do not clip content or impose fixed pixel heights to force alignment.
-- Use Base UI for continuing widgets. React Aria is allowed only for the mobile
-  article TOC Sheet (experiments and writing) and its supporting controls.
-- Do not reintroduce Headless UI, Mantine, Radix UI, React Table, React Query,
-  cmdk, or VisX dependencies. Prefer native APIs for small helpers.
+- Use Base UI for continuing widgets; React Aria is limited to the mobile
+  article TOC Sheet and supporting controls. Do not reintroduce retired widget
+  libraries; see README.md for architecture.
+- Repeated grid cards must have equal widths and heights within each row.
+  Align content and actions with flexible layouts; avoid clipping, fixed heights,
+  and masonry unless explicitly requested.
 
 ## Links
 
@@ -112,41 +110,25 @@ Apply these defaults to new or refactored experiments in every domain:
 - Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.
-- Keep public pages searchable. Cloudflare handles AI-training opt-out when enabled.
-
-## Archived and Local Experiments
-
-- Preserve retired names, marks, and counts in `data/DiscontinuedExperimentsData.ts`,
-  separate from the live catalog. Show static cards in the collapsed archive;
-  no deleted-route links, live pages, search entries, or sitemap URLs. Omit cmdk.
-- Preserve `discontinuedExperimentHistory.removalCommitSha` as the original
-  removal commit's full SHA; never replace it with HEAD or a deployment SHA.
-- Task/tools SQLite experiments remain development-only until authentication,
-  authorization, rate limits, and durable storage exist. Production routes return
-  404 and are excluded from navigation, search, and sitemap.
+- Keep public pages searchable.
+- Keep task/tools SQLite experiments development-only: production routes return
+  404 and stay out of navigation, search, and sitemap.
 
 # Metadata and Site Behavior
 
 - Use shared metadata in `utils/pageMetadata.ts` and the canonical domain from
   `utils/site.ts` for page URLs, social previews, sitemap, and RSS.
-- OG images use `app/api/og/OpenGraphCard.tsx`: simple blue gradient, large title,
-  `haritssr.com` and author branding; descriptions stay in metadata. Show parent
-  breadcrumbs only on nested pages. Experiment titles have two lines: name,
-  then a smaller domain “Experiments” label, without a pipe; scale lines to fit.
-- Bump the image URL's `v` in `utils/pageMetadata.ts` when changing OG design.
-  Preserve crawler access to `/api/og` and the shared Twitter account `@haritssr`.
-- Reuse shared structured-data components; escape `<` in serialized JSON-LD.
-- Keep `SITE_THEME_COLOR`, manifest/viewport, and offline theme colors consistent.
-  Icons use the site logo's saturated blue palette in both themes.
-- Preserve the PWA's offline fallback: cache only `public/offline.html`, never
-  Next.js pages. Preserve API/asset/client-navigation behavior, production-only
-  registration, `/sw.js` no-cache headers, and deletion of only owned old caches.
-- RSS uses writing summaries linking to canonical full posts, with publication
-  dates and generation-time `lastBuildDate`.
+- Follow README.md's metadata, archive, and offline behavior safeguards when
+  changing their implementations.
 
 # Commits
 
 - Commit only with explicit user permission; committing is a separate action.
+- When asked to commit, run `bun run sync:changelog` before staging and include
+  `data/changelog.json` in the requested commit when it changes. Run it again
+  after every successful commit, including the last commit in a logical batch.
+  Leave the final refreshed snapshot uncommitted: a commit cannot contain its
+  own hash. Do not amend or create extra commits solely to include that hash.
 - Use `type(context): message`, such as `fix(TopBar): align back icon`.
   Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
 - Review staged changes and related documentation. Keep project guidance accurate

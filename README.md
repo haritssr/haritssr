@@ -25,6 +25,9 @@ Earlier migrations replaced Pages Router, Content Collections, a manual MDX
 import registry, and Biome. Small helpers use native APIs instead of Effect,
 date-fns, and react-use. Retired library demos remain static historical records
 in `data/DiscontinuedExperimentsData.ts`, separate from live experiments.
+Archived cards remain static, without deleted-route links or search/sitemap
+entries. Preserve `discontinuedExperimentHistory.removalCommitSha` as the
+original removal commit's full SHA, never the current HEAD or deployment SHA.
 
 ## Development
 
@@ -63,9 +66,13 @@ index loads or if it cannot load.
   chroma resolution. The renderer uses Next.js's bundled font without an
   external image service or background asset. Open Graph and Twitter share
   images and alt text; Twitter identifies `@haritssr`.
+  When changing the OG design, bump the image URL's `v` in
+  `utils/pageMetadata.ts` and preserve crawler access to `/api/og` in
+  `app/robots.ts`.
 - `components/StructuredData.tsx` supplies `WebSite`, `Person`, and `WebPage`
   JSON-LD. The root layout renders site/person data; the homepage and physics
   units page render page data. The units page includes its breadcrumb hierarchy.
+  Reuse these components and preserve escaping of `<` in serialized JSON-LD.
 - Browser and installed-app colors come from the root viewport and manifest;
   the offline document declares the same theme color.
 - PNG, ICO, and Apple touch icons derive from `public/icons/haritssr.svg`.

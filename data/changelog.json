@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "606979cda1668b3a060320ad58b6d9f74465dd40",
+      "date": "2026-10-12T22:37:43+07:00",
+      "subject": "chore(git): ignore local environment files"
+    },
+    {
       "hash": "d25a62b1ef278a69ad89123afe8de24daf575ff8",
       "date": "2026-10-12T22:37:38+07:00",
       "subject": "chore(tooling): align Bun versions and simplify path aliases"
