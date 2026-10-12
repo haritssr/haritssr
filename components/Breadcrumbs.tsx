@@ -3,12 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Matches one or more whitespace characters.
-// Example: "hello  world" splits into ["hello", "world"].
+// Split words on whitespace and replace slug separators with spaces.
 const whitespaceSequencePattern = /\s+/;
-
-// Matches consecutive hyphens or underscores used as segment separators.
-// Example: "hello-world" becomes "hello world".
 const segmentSeparatorPattern = /[-_]+/g;
 const mainRoutes = new Set([
   "projects",
@@ -34,22 +30,34 @@ export default function Breadcrumbs({
     return null;
   }
 
+  let path = "";
+  const breadcrumbs = [];
+  for (const segment of segments) {
+    path += `/${segment}`;
+    breadcrumbs.push({
+      href: path,
+      label: routeLabels[path] ?? formatSegmentLabel(segment),
+    });
+  }
+
   return (
     <nav aria-label="Breadcrumb" className="pt-5">
       <div className="mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
         <ol className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
           <li className="flex items-center">
-            <Link className="text-muted hover:text-foreground" href="/">
+            <Link
+              className="text-muted hover:text-foreground"
+              href="/"
+              prefetch={false}
+            >
               Home
             </Link>
 
-            {segments.length > 0 && <Separator />}
+            <Separator />
           </li>
 
-          {segments.map((segment, index) => {
-            const href = `/${segments.slice(0, index + 1).join("/")}`;
-            const label = routeLabels[href] ?? formatSegmentLabel(segment);
-            const isLast = index === segments.length - 1;
+          {breadcrumbs.map(({ href, label }, index) => {
+            const isLast = index === breadcrumbs.length - 1;
 
             return (
               <li className="flex items-center" key={href}>
@@ -65,6 +73,7 @@ export default function Breadcrumbs({
                     <Link
                       className="text-muted hover:text-foreground/80 whitespace-nowrap"
                       href={href}
+                      prefetch={false}
                     >
                       {label}
                     </Link>

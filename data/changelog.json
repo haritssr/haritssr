@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4f7acdc5222e243f96f302f32aea20297236e24f",
+      "date": "2026-10-12T22:38:47+07:00",
+      "subject": "perf(posts): look up metadata summaries by post ID"
+    },
+    {
       "hash": "f5ff68c1396bae4bda4565fd948cbc68528db162",
       "date": "2026-10-12T22:38:42+07:00",
       "subject": "fix(writing): validate titles and contextualize frontmatter errors"
