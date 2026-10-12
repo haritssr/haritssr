@@ -18,7 +18,7 @@ export default function SourceCodeLink({
   }
 
   return (
-    <div className="mt-3 mb-14">
+    <div className="mt-3 mb-20">
       <ExternalLink href={sourceUrl(path)} name="Source code" />
     </div>
   );
