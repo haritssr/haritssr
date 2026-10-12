@@ -102,6 +102,8 @@ changelog. They are task-complexity estimates based on commit changes and
 [OpenAI model-selection guidance](https://developers.openai.com/api/docs/guides/model-selection),
 not measured comparisons. Newly synced commits for that date show “Not assessed”
 until a recommendation is added; Timeline filters do not affect this table.
+Below the chart, the color legend and commit-type counts use two CSS columns
+from `sm` upward. Counts cover the same fixed date and sort largest first.
 The static line chart below it shows commit counts per hour for the same date
 in Jakarta time, with points only for active hours, a dashed line, gridlines,
 and hourly ticks from 0 to 24.

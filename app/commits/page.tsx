@@ -9,11 +9,17 @@ import CommitTable, {
 import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
+import Table from "@/components/Table";
 import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import history from "@/data/changelog.json";
 import modelSuitability from "@/data/model-suitability-2026-10-11.json";
 import { commitsRoute } from "@/data/routes";
-import { commitDay, filterCommits, formatDay } from "@/utils/changelog";
+import {
+  changeTypes,
+  commitDay,
+  filterCommits,
+  formatDay,
+} from "@/utils/changelog";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 export const metadata = createPageMetadata({
@@ -35,6 +41,18 @@ export default async function CommitsPage() {
     "all",
     ""
   );
+  const commitTypeCounts = changeTypes
+    .map(({ value }) => ({
+      value,
+      count: filterCommits(
+        assessedCommits,
+        "all",
+        modelSuitability.date,
+        value,
+        ""
+      ).length,
+    }))
+    .toSorted((a, b) => b.count - a.count);
   const estimatedCostUsd = assessedCommits.length * 0.04;
   const estimatedCostIdr = new Intl.NumberFormat("en-US", {
     maximumFractionDigits: 0,
@@ -63,7 +81,46 @@ export default async function CommitsPage() {
             commits={assessedCommits}
             day={modelSuitability.date}
           />
-          <ModelSuitabilityLegend />
+          <div className="columns-1 gap-5 space-y-5 sm:columns-2 sm:space-y-0">
+            <div className="break-inside-avoid">
+              <ModelSuitabilityLegend />
+            </div>
+            <div className="break-inside-avoid">
+              <Table>
+                <caption className="sr-only">
+                  Commit types for {modelSuitability.date}
+                </caption>
+                <thead>
+                  <tr className="divide-border bg-foreground/5 divide-x">
+                    <th className="px-3 py-2 text-left font-medium" scope="col">
+                      Commit type
+                    </th>
+                    <th
+                      className="px-3 py-2 text-right font-medium"
+                      scope="col"
+                    >
+                      Number
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-border divide-y">
+                  {commitTypeCounts.map(({ value, count }) => (
+                    <tr className="divide-border divide-x" key={value}>
+                      <th
+                        className="px-3 py-2 text-left font-normal"
+                        scope="row"
+                      >
+                        {value}
+                      </th>
+                      <td className="px-3 py-2 text-right tabular-nums">
+                        {count}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          </div>
           <p className="text-muted leading-7">
             Based on the estimated average task difficulty, use{" "}
             <SuitabilityLabel type="model" value="6 Sol" /> with{" "}
