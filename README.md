@@ -103,7 +103,8 @@ needs no runtime Git installation, GitHub token, or external API request.
 After making commits while the dev server is running, run the sync command to
 refresh the page. Uncommitted work appears after it is committed and synced.
 
-Model Suitability is a separate, fixed table for 2026-10-11 in Jakarta time.
+Model Suitability is a separate, fixed table for 2026-10-11 in Jakarta time,
+inside a "Commits" accordion that starts closed.
 `data/model-suitability-2026-10-11.json` stores model and reasoning-effort
 recommendations keyed by full commit hash, independently of the generated
 changelog. They are task-complexity estimates based on commit changes and

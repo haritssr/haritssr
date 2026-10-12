@@ -1,5 +1,6 @@
 import { connection } from "next/server";
 
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import ChangelogExplorer from "@/components/ChangelogExplorer";
 import CommitHourlyChart from "@/components/CommitHourlyChart";
 import CommitTable, {
@@ -72,11 +73,19 @@ export default async function CommitsPage() {
           title="Model Suitability"
           description={`This analysis use ${modelSuitability.basedOn} for ${modelSuitability.date}`}
         >
-          <CommitTable
-            commits={assessedCommits}
-            caption={`Model suitability for ${modelSuitability.date}, newest first`}
-            models={modelSuitability.models}
-          />
+          <Accordion>
+            <AccordionItem
+              excludeFromContents
+              title="Commits"
+              value="model-suitability-commits"
+            >
+              <CommitTable
+                commits={assessedCommits}
+                caption={`Model suitability for ${modelSuitability.date}, newest first`}
+                models={modelSuitability.models}
+              />
+            </AccordionItem>
+          </Accordion>
           <CommitHourlyChart
             commits={assessedCommits}
             day={modelSuitability.date}

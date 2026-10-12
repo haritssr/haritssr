@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "c25623b133e22890f32f9df152c7d8baf7fc86bd",
+      "date": "2026-10-12T22:37:56+07:00",
+      "subject": "docs(cleanup): remove JavaScript-to-CSS review notes"
+    },
+    {
       "hash": "f2172a3166315aee3f483eceabb370cd5815afc2",
       "date": "2026-10-12T22:37:51+07:00",
       "subject": "docs(guidance): consolidate site rules and sync changelogs on commit"
