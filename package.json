@@ -2,13 +2,14 @@
   "name": "haritssr",
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "build": "bun run sync:changelog && next build",
     "check": "ultracite check --threads=1",
-    "dev": "next dev",
+    "dev": "bun run sync:changelog && next dev",
     "fix": "ultracite fix --threads=1",
     "knip": "knip",
     "knip:production": "knip --production",
     "start": "next start",
+    "sync:changelog": "bun scripts/sync-changelog.ts",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
     "validate:content": "bun --conditions=react-server scripts/validate-content.ts"
   },

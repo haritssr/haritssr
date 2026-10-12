@@ -1,6 +1,6 @@
 import "server-only";
 import { ProjectsData } from "@/data/ProjectsData";
-import { apiRoute, navigationRoutes } from "@/data/routes";
+import { apiRoute, commitsRoute, navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
 import { getExperimentRoutes } from "@/utils/experimentRoutes";
 import { getProjectSlug } from "@/utils/projectSlug";
@@ -38,6 +38,7 @@ const homeSections: RouteDoc[] = [
 export function getSearchIndex(): RouteDoc[] {
   const docs: RouteDoc[] = [
     ...navigationRoutes,
+    commitsRoute,
     apiRoute,
     ...homeSections,
     ...getExperimentRoutes(),

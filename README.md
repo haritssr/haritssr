@@ -4,6 +4,7 @@ Personal site by Harits Syah — [haritssr.com](https://haritssr.com).
 - [Experiments](https://haritssr.com/experiments): Frontend, browser APIs, mathematics, and physics.
 - [Writing](https://haritssr.com/writing): Posts and notes.
 - [Design](https://haritssr.com/design): Design system reference.
+- [Commits](https://haritssr.com/commits): Commit history and activity.
 
 Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
 
@@ -63,6 +64,36 @@ Legacy URL aliases are intentionally absent from `next.config.ts`.
 The `/api` page lists accessible GET endpoints and is linked left of Install
 in the footer. It belongs in site search and the sitemap; raw endpoints do not.
 The task API appears only in development, sharing the local experiment flag.
+
+## Commits
+
+The `/commits` page lists Harits Syah's commits reachable from the checked-out
+HEAD, including the original `haritssr` author name. It is linked immediately
+left of API in the footer and included in search and the sitemap. It opens to
+the current day, showing 50 commits at a time. Older history stays available
+through the filters; Today selects the current day, and Reset returns to it.
+Date filters use Asia/Jakarta time, with weeks starting Monday. The activity
+graph includes quiet periods and follows the date, category, and search filters.
+
+`bun run sync:changelog` generates `data/changelog.json` from Git author dates,
+subjects, and hashes; it runs before `bun run dev` and `bun run build`. Commit
+the snapshot so deployments without Git can still render the entire history.
+Shallow checkouts merge available commits into the saved snapshot; full
+checkouts regenerate it from HEAD. CI fetches the complete history. The page
+needs no runtime Git installation, GitHub token, or external API request.
+After making commits while the dev server is running, run the sync command to
+refresh the page. Uncommitted work appears after it is committed and synced.
+
+Model Suitability is a separate, fixed table for 2026-10-11 in Jakarta time.
+`data/model-suitability-2026-10-11.json` stores model and reasoning-effort
+recommendations keyed by full commit hash, independently of the generated
+changelog. They are task-complexity estimates based on commit changes and
+[OpenAI model-selection guidance](https://developers.openai.com/api/docs/guides/model-selection),
+not measured comparisons. Newly synced commits for that date show “Not assessed”
+until a recommendation is added; Timeline filters do not affect this table.
+The static line chart below it shows commit counts per hour for the same date
+in Jakarta time, with points only for active hours, a dashed line, gridlines,
+and hourly ticks from 0 to 24.
 
 ## Progressive Web App
 

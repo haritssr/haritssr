@@ -13,6 +13,14 @@ export const apiRoute: RouteDoc = {
   group: "Navigation",
 };
 
+export const commitsRoute: RouteDoc = {
+  route: "/commits",
+  title: "Commits",
+  description:
+    "Explore this site's commit history, changes, and activity over time.",
+  group: "Navigation",
+};
+
 export const navigationRoutes: readonly RouteDoc[] = [
   {
     route: "/",

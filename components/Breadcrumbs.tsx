@@ -16,6 +16,7 @@ const mainRoutes = new Set([
   "writing",
   "design",
   "api",
+  "commits",
 ]);
 
 export default function Breadcrumbs({

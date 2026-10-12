@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-11",
+  "basedOn": "GPT 6.1 Sol High",
+  "models": {
+    "5116fcdc64915082f4adb57c10d2c07ff801d019": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "d7752dd4b7d02b030a9e61a58100f57ba8364dcb": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "b0c19105f4db350c6bc429841501ac48bbb30894": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "997415d3ff8ca97c2e35e92fefc4b6b7523d65a0": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "06b6ccc372af8202d03edc748d31c29036224ccb": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "ccf1ab8790f5a21c58ef8efb6c264d6fe3f81a7d": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "2a263387abf90a618dac83a30c89adc88f600ea4": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "ff984b4c580002230dcbaeb7308a219a695ea252": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "100acd39c4c6f31a463c95dda96b5793124d5b68": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "db7e8f8b307bc4e5816c95fa5794fc829bcf13b3": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "3af20eb7ab6bb18a4798f8a4c0d88c1cb06b87e3": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "3906ed0590744ed4be6e7f9ef6193dcabb5c35ed": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "26b6db1be1342be9055fdfa70758c745375888b1": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "917222c71d29439940560946254f9d296df171d5": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "8c576888bfdcb6fdc4eb31fd725d887e26bdb968": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "9b9b32a1dd3a5247a0a4e59a23be693d7d7a2191": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "ce4bee80746153919ab911497d6072c9356c86fa": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "48f2be863a9fbbbc871b3f31eb86039fbfed4fd6": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "204150f249668c02c12130380eb7ddcf97aeba17": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    },
+    "55d75ae124760211a27b83b41dc037d3935db54c": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "dba462c751a48117fd4de402647fc0aab14047ce": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    },
+    "c159df81cbb027c41c63eb4d56b2bd5e272aec55": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "440b02fcedeb59ce5ad280be85ecbdbd20dce3ae": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "190011533a30bc664004a8c5a61ee12b609a9833": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "e2368e66a215760e7c10abd0eb4e0998adb7754f": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "6a67c3237b3f6b1e08f8cf0cd3dd11c8f9fc1db0": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "3dbfedeb099916d126a48b0c256ca7b168086c97": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "e8eba9d6bc2617ac1321271fefdf6ccd63251428": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "6b55b09877f2b611551e388cdf9ee86eb7267ce3": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    },
+    "efc84d7b85c32636e28e4e9b219485b4b908fe84": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    },
+    "9f17bc265eb9359e3a5ec4a6788ebf8bfdaa67b2": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "1f20fbaaed19eacb31c7c53784cc32e5bfe109e2": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "9ef84eee07cb5855aee655c051db0ddfbfabd264": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "49e969d7c487b26aca47131982ca82589ccdba5a": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "443311fbf4d5a2f99646aecb4577090bfdcdffa6": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "acbb1f8261b5f8aa9cc9dcf5b89628a8dd3c612e": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "ef5f7516e93090d7248815aae39920804cd0db61": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    },
+    "2312185a58c0ee4658850bd0998ceb3cd205a033": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "59534bc09086e7f9da68a579e496db588a951b06": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "99a81f50bf172d05b8e57d2e350a849b09bb3ae8": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    },
+    "6fe3ced276ae21d3390dcdc6d0b7c56fd553c1f7": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "52326f75ea1016a7ba49398886fcedbdf54e067d": {
+      "model": "6 Astra",
+      "effort": "Medium"
+    },
+    "27c356d253d469ddfd4e393b64f929dbc8936ffd": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "33db5c098787e867ec589b39ed3b38ca351facec": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    },
+    "fe9f813634176bab73c82096dcee3d93bb68b428": {
+      "model": "6.1 Sol",
+      "effort": "Medium"
+    }
+  }
+}
