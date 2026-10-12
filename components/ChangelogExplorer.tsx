@@ -182,12 +182,16 @@ export default function ChangelogExplorer({
         </p>
       </Section>
 
-      <Section title="Timeline">
-        <p aria-live="polite" aria-atomic="true" className="text-muted text-sm">
-          Showing {numberFormatter.format(Math.min(limit, matched.length))} of{" "}
-          {numberFormatter.format(matched.length)} matching commits
-          {query === deferredQuery ? "" : " · Searching…"}
-        </p>
+      <Section
+        title="Timeline"
+        description={
+          <span aria-live="polite" aria-atomic="true">
+            Showing {numberFormatter.format(Math.min(limit, matched.length))} of{" "}
+            {numberFormatter.format(matched.length)} matching commits
+            {query === deferredQuery ? "" : " · Searching…"}
+          </span>
+        }
+      >
         {matched.length === 0 ? (
           <div className="border-border rounded-xl border border-dashed p-8 text-center">
             <p className="font-medium">No commits match these filters.</p>
