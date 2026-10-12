@@ -28,15 +28,11 @@ export function getAvailableExperimentDomain(slug: string): ExperimentDomain {
 function withAvailableExperiments(domain: ExperimentDomain): ExperimentDomain {
   return {
     ...domain,
-    experiments: domain.experiments
-      .filter((experiment) =>
-        isExperimentAvailable(domain.slug, experiment.slug)
+    experiments: getAvailableExperiments(domain).toSorted((left, right) =>
+      getLatestExperimentUpdate(right).localeCompare(
+        getLatestExperimentUpdate(left)
       )
-      .toSorted((left, right) =>
-        getLatestExperimentUpdate(right).localeCompare(
-          getLatestExperimentUpdate(left)
-        )
-      ),
+    ),
   };
 }
 

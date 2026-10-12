@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "cc0b6740ed7433935be6b4b48e4547a19d0368fd",
+      "date": "2026-10-12T22:38:28+07:00",
+      "subject": "fix(theme): synchronize preferences across tabs and share listeners"
+    },
+    {
       "hash": "3ee37530500cfecaaa753245630a41cf1ca88e90",
       "date": "2026-10-12T22:38:23+07:00",
       "subject": "refactor(search): share command query matching"
