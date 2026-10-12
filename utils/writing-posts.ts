@@ -24,7 +24,9 @@ const writingPostSummarySchema = z
 const writingPostFrontmatterSchema = z.strictObject({
   publishedAt: publicationDateSchema,
   summary: writingPostSummarySchema,
-  title: z.string(),
+  title: z.string().refine((title) => title.trim().length > 0, {
+    message: "Title must not be blank",
+  }),
 });
 
 export interface WritingPost {
@@ -44,9 +46,8 @@ export function parseWritingPost(
   fileName: string,
   source: string
 ): WritingPost {
-  const { content, data } = matter(source);
-
   try {
+    const { content, data } = matter(source);
     const frontmatter = writingPostFrontmatterSchema.parse(data);
 
     return {

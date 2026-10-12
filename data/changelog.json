@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "6f285a906d3db420fbb478554dcddb1608b56948",
+      "date": "2026-10-12T22:38:35+07:00",
+      "subject": "refactor(experiments): reuse catalog availability filtering"
+    },
+    {
       "hash": "cc0b6740ed7433935be6b4b48e4547a19d0368fd",
       "date": "2026-10-12T22:38:28+07:00",
       "subject": "fix(theme): synchronize preferences across tabs and share listeners"
