@@ -59,6 +59,11 @@ export function getSortedPostsData(): PostSummary[] {
   return postSummaries.map((post) => ({ ...post }));
 }
 
+export function getPostSummary(id: string): PostSummary | undefined {
+  const post = postsById.get(id);
+  return post ? { date: post.date, id: post.id, title: post.title } : undefined;
+}
+
 export function getAllPostIds() {
   return posts.map(({ id }) => ({
     params: {

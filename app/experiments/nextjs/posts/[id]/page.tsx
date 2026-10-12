@@ -5,7 +5,7 @@ import PageTitle from "@/components/PageTitle";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { createPageMetadata } from "@/utils/pageMetadata";
-import { getAllPostIds, getPostData, getSortedPostsData } from "@/utils/posts";
+import { getAllPostIds, getPostData, getPostSummary } from "@/utils/posts";
 
 const postDateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "long",
@@ -65,7 +65,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const post = getSortedPostsData().find((entry) => entry.id === id);
+  const post = getPostSummary(id);
   return post
     ? createPageMetadata({
         title: post.title,

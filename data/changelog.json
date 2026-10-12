@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f5ff68c1396bae4bda4565fd948cbc68528db162",
+      "date": "2026-10-12T22:38:42+07:00",
+      "subject": "fix(writing): validate titles and contextualize frontmatter errors"
+    },
+    {
       "hash": "6f285a906d3db420fbb478554dcddb1608b56948",
       "date": "2026-10-12T22:38:35+07:00",
       "subject": "refactor(experiments): reuse catalog availability filtering"
