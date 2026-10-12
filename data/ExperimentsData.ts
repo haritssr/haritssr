@@ -882,7 +882,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore circle measurements with an interactive diagram and worked examples.",
         tags: ["geometry", "circles", "learning", "visualization"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10", "2026-10-11"],
+        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "polinomial",
@@ -912,7 +912,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore logarithm rules, graphs, and their connection to exponents.",
         tags: ["algebra", "logarithms", "exponents", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
+        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "spltv",
@@ -922,7 +922,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Solve three-variable linear systems and compare their possible solutions.",
         tags: ["algebra", "equations", "linear-algebra"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-07", "2026-10-10", "2026-10-11"],
+        updatedAt: [
+          "2026-10-06",
+          "2026-10-07",
+          "2026-10-10",
+          "2026-10-11",
+          "2026-10-12",
+        ],
       },
       {
         slug: "number-systems",
@@ -932,7 +938,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore number sets, intervals, and inequalities on an interactive number line.",
         tags: ["foundations", "sets", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
+        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "quadratic-equations",
@@ -942,7 +948,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Solve quadratic equations and see how their roots shape a parabola.",
         tags: ["algebra", "equations", "visualization"],
         createdAt: "2026-10-06",
-        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11"],
+        updatedAt: ["2026-10-06", "2026-10-10", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "limits",

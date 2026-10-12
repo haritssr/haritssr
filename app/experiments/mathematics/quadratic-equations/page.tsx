@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
@@ -218,15 +219,11 @@ export default function QuadraticEquationsPage() {
         <ul className="space-y-4">
           {exercises.map(
             ({ prompt, expression, working, explanation }, index) => (
-              <li
-                className="border-border rounded-xl border p-5 sm:p-6"
-                key={expression}
-              >
-                <h3 className="font-semibold">{prompt}</h3>
+              <ExerciseCard key={expression} title={prompt}>
                 <div className="overflow-x-auto py-3">
                   {katexify(expression, true)}
                 </div>
-                <Accordion>
+                <Accordion className="mt-auto w-full">
                   <AccordionItem
                     panelClassName="bg-transparent"
                     excludeFromContents
@@ -241,7 +238,7 @@ export default function QuadraticEquationsPage() {
                     </p>
                   </AccordionItem>
                 </Accordion>
-              </li>
+              </ExerciseCard>
             )
           )}
         </ul>

@@ -1,3 +1,4 @@
+import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -87,7 +88,7 @@ export default function LogarithmsPage() {
         }
         contentClassName="grid min-w-0 grid-cols-1 items-start gap-4 md:grid-cols-2 xl:grid-cols-3"
       >
-        <article className="border-border space-y-3 rounded-xl border p-5">
+        <article className="border-border space-y-3 rounded-xl border p-4">
           <h3 className="font-semibold">Find time in a growth model</h3>
           <p className="text-muted text-sm leading-6">
             If a population doubles each period, logarithms tell us how many
@@ -96,7 +97,7 @@ export default function LogarithmsPage() {
           <Equation tex={String.raw`2^t=10`} />
           <Equation tex={String.raw`t={}^{2}\!\log 10\approx3.322`} />
         </article>
-        <article className="border-border space-y-3 rounded-xl border p-5">
+        <article className="border-border space-y-3 rounded-xl border p-4">
           <h3 className="font-semibold">Turn products into sums</h3>
           <p className="text-muted text-sm leading-6">
             Before electronic calculators, logarithm tables turned long
@@ -105,7 +106,7 @@ export default function LogarithmsPage() {
           </p>
           <Equation tex={String.raw`10^2\cdot10^3=10^{2+3}`} />
         </article>
-        <article className="border-border space-y-3 rounded-xl border p-5">
+        <article className="border-border space-y-3 rounded-xl border p-4">
           <h3 className="font-semibold">Compare multiplicative changes</h3>
           <p className="text-muted text-sm leading-6">
             Equal ratios become equal differences. Sound levels use this idea:
@@ -155,13 +156,9 @@ export default function LogarithmsPage() {
           </>
         }
       >
-        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {logarithmRules.map((rule, index) => (
-            <li
-              className="border-border flex min-w-0 flex-col gap-4 rounded-xl border p-5"
-              key={rule.title}
-            >
-              <h3 className="font-semibold">{rule.title}</h3>
+            <ExerciseCard key={rule.title} title={rule.title}>
               <Equation tex={rule.formula} />
               <p className="text-muted text-sm leading-6">{rule.explanation}</p>
               <Accordion className="mt-auto w-full">
@@ -187,7 +184,7 @@ export default function LogarithmsPage() {
                   </div>
                 </AccordionItem>
               </Accordion>
-            </li>
+            </ExerciseCard>
           ))}
         </ul>
       </Section>
@@ -275,11 +272,7 @@ export default function LogarithmsPage() {
       >
         <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmExercises.map((exercise, index) => (
-            <li
-              className="border-border flex min-w-0 flex-col gap-4 rounded-xl border p-5"
-              key={exercise.title}
-            >
-              <h3 className="font-semibold">{exercise.title}</h3>
+            <ExerciseCard key={exercise.title} title={exercise.title}>
               <Equation tex={exercise.expression} />
               <Accordion className="mt-auto w-full">
                 <AccordionItem
@@ -300,7 +293,7 @@ export default function LogarithmsPage() {
                   </p>
                 </AccordionItem>
               </Accordion>
-            </li>
+            </ExerciseCard>
           ))}
         </ul>
       </Section>

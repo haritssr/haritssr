@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -336,15 +337,11 @@ export default function NumberSystemsPage() {
       >
         <ul className="space-y-4">
           {exercises.map((exercise, index) => (
-            <li
-              className="border-border rounded-xl border p-5 sm:p-6"
-              key={exercise.expression}
-            >
-              <h3 className="font-semibold">{exercise.question}</h3>
+            <ExerciseCard key={exercise.expression} title={exercise.question}>
               <div className="overflow-x-auto py-3">
                 {katexify(exercise.expression, true)}
               </div>
-              <Accordion>
+              <Accordion className="mt-auto w-full">
                 <AccordionItem
                   panelClassName="bg-transparent"
                   title="Show explanation"
@@ -358,7 +355,7 @@ export default function NumberSystemsPage() {
                   </p>
                 </AccordionItem>
               </Accordion>
-            </li>
+            </ExerciseCard>
           ))}
         </ul>
       </Section>

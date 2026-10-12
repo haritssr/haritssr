@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
@@ -358,17 +359,13 @@ export default function LinearEquationsThreeVariablesPage() {
           </>
         }
       >
-        <ul className="grid grid-cols-1 items-start gap-4 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {exercises.map((exercise, index) => (
-            <li
-              className="border-border text-foreground min-w-0 rounded-xl border p-5 sm:p-6"
-              key={exercise.system}
-            >
-              <h3 className="font-semibold">{exercise.prompt}</h3>
+            <ExerciseCard key={exercise.system} title={exercise.prompt}>
               <div className="overflow-x-auto py-3 text-sm sm:text-base">
                 {katexify(exercise.system, true)}
               </div>
-              <Accordion>
+              <Accordion className="mt-auto w-full">
                 <AccordionItem
                   panelClassName="bg-transparent"
                   title="Show step-by-step solution"
@@ -397,7 +394,7 @@ export default function LinearEquationsThreeVariablesPage() {
                   </div>
                 </AccordionItem>
               </Accordion>
-            </li>
+            </ExerciseCard>
           ))}
         </ul>
       </Section>

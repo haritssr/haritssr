@@ -1,3 +1,4 @@
+import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import InternalLink from "@/components/InternalLink";
@@ -232,41 +233,43 @@ export default function CirclePage() {
             the final step. Solve each problem before revealing the solution.
           </>
         }
-        contentClassName="grid min-w-0 gap-5 lg:grid-cols-2"
+        contentClassName="min-w-0"
       >
-        {exercises.map((exercise) => (
-          <Box key={exercise.title} title={exercise.title}>
-            <Equation tex={exercise.given} layout="row" />
-            <p className="text-muted flex flex-wrap items-baseline gap-x-1.5 gap-y-1 text-sm leading-7">
-              <span>Find</span>
-              {exercise.find.map((variable, index) => (
-                <span key={variable}>
-                  {katexify(variable, false)}
-                  {index === exercise.find.length - 1 ? "." : ","}
-                </span>
-              ))}
-            </p>
-            <Accordion>
-              <AccordionItem
-                excludeFromContents
-                title="Show solution"
-                value={exercise.title}
-                panelClassName="bg-transparent"
-              >
-                <ol className="space-y-3">
-                  {exercise.steps.map((step) => (
-                    <li key={step}>
-                      <Equation tex={step} />
-                    </li>
-                  ))}
-                </ol>
-                <p className="text-muted mt-4 text-sm leading-7">
-                  {exercise.explanation}
-                </p>
-              </AccordionItem>
-            </Accordion>
-          </Box>
-        ))}
+        <ul className="grid min-w-0 gap-5 lg:grid-cols-2">
+          {exercises.map((exercise) => (
+            <ExerciseCard key={exercise.title} title={exercise.title}>
+              <Equation tex={exercise.given} layout="row" />
+              <p className="text-muted flex flex-wrap items-baseline gap-x-1.5 gap-y-1 text-sm leading-7">
+                <span>Find</span>
+                {exercise.find.map((variable, index) => (
+                  <span key={variable}>
+                    {katexify(variable, false)}
+                    {index === exercise.find.length - 1 ? "." : ","}
+                  </span>
+                ))}
+              </p>
+              <Accordion className="mt-auto w-full">
+                <AccordionItem
+                  excludeFromContents
+                  title="Show solution"
+                  value={exercise.title}
+                  panelClassName="bg-transparent"
+                >
+                  <ol className="space-y-3">
+                    {exercise.steps.map((step) => (
+                      <li key={step}>
+                        <Equation tex={step} />
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="text-muted mt-4 text-sm leading-7">
+                    {exercise.explanation}
+                  </p>
+                </AccordionItem>
+              </Accordion>
+            </ExerciseCard>
+          ))}
+        </ul>
       </Section>
     </div>
   );
