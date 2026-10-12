@@ -131,37 +131,26 @@ export default async function CommitsPage() {
             </div>
           </div>
           <p className="text-muted leading-7">
-            Based on the estimated average task difficulty, use{" "}
-            <SuitabilityLabel type="model" value="6 Sol" /> with{" "}
-            <SuitabilityLabel type="effort" value="Medium" /> effort as your
-            default. Estimated total cost for all {assessedCommits.length} tasks
-            that day is about USD {estimatedCostUsd.toFixed(2)} (IDR{" "}
-            {estimatedCostIdr}) using 6 Sol at{" "}
-            <ExternalLink
-              href="https://developers.openai.com/api/docs/models/gpt-6-sol"
-              name="standard API rates"
-              size="inherit"
-            />
-            , assuming 10,000 uncached input tokens and 2,000 output tokens
-            including reasoning per task, using{" "}
-            <ExternalLink
-              href="https://www.bi.go.id/en/statistik/informasi-kurs/jisdor/default.aspx"
-              name="IDR 17,884/USD (2026-10-09)"
-              size="inherit"
-            />
-            . If you can choose only one model and effort for all tasks on{" "}
-            {modelSuitability.date}, my estimated best balance of quality and
-            cost is <SuitabilityLabel type="model" value="6.1 Sol" /> with{" "}
-            <SuitabilityLabel type="effort" value="High" /> effort, accounting
-            for the harder tasks in the table. Its estimated total is also USD{" "}
-            {estimatedCostUsd.toFixed(2)} (IDR {estimatedCostIdr}) under the
-            same token assumptions and its{" "}
+            Use <SuitabilityLabel type="model" value="6 Sol" /> with{" "}
+            <SuitabilityLabel type="effort" value="Medium" /> for everyday
+            tasks, or <SuitabilityLabel type="model" value="6.1 Sol" /> with{" "}
+            <SuitabilityLabel type="effort" value="High" /> for all tasks.
+            Estimated total for {assessedCommits.length} tasks: USD{" "}
+            {estimatedCostUsd.toFixed(2)} (IDR {estimatedCostIdr}), assuming
+            10,000 uncached input and 2,000 output tokens (including reasoning)
+            per task at{" "}
             <ExternalLink
               href="https://developers.openai.com/api/docs/models/gpt-6.1-sol"
               name="standard API rates"
               size="inherit"
             />
-            ; actual reasoning usage and cost may be higher at High effort.
+            , using{" "}
+            <ExternalLink
+              href="https://www.bi.go.id/en/statistik/informasi-kurs/jisdor/default.aspx"
+              name="IDR 17,884/USD (2026-10-09)"
+              size="inherit"
+            />
+            .
           </p>
         </Section>
       </div>

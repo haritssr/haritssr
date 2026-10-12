@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "7368f4eeecbcd4198045c57426262b8229fa0735",
+      "date": "2026-10-12T22:38:00+07:00",
+      "subject": "style(commits): collapse model suitability commits by default"
+    },
+    {
       "hash": "c25623b133e22890f32f9df152c7d8baf7fc86bd",
       "date": "2026-10-12T22:37:56+07:00",
       "subject": "docs(cleanup): remove JavaScript-to-CSS review notes"
