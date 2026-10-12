@@ -28,6 +28,7 @@ in `data/DiscontinuedExperimentsData.ts`, separate from live experiments.
 
 ## Development
 
+Use Bun 1.4.2, matching `package.json` and CI.
 Install with `bun install --frozen-lockfile`; start with `bun run dev`, reusing
 an existing server when available. Required checks are listed in AGENTS.md;
 CI runs those checks and the production build.

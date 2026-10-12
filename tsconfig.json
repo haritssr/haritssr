@@ -19,9 +19,7 @@
     "jsx": "react-jsx",
     "paths": {
       "*": ["./*"],
-      "@/*": ["./*"],
-      "@/components/*": ["./components/*"],
-      "@/utils/*": ["./utils/*"]
+      "@/*": ["./*"]
     },
     "incremental": true,
     "plugins": [

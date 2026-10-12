@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "fb0fd0415265fcfab224e5eeff9a10e9c110d5a4",
+      "date": "2026-10-12T15:38:51+07:00",
+      "subject": "chore(changelog): record latest logical commits"
+    },
+    {
       "hash": "98cae31a113ee537367ec07e7f2b753c300d3bd0",
       "date": "2026-10-12T15:28:02+07:00",
       "subject": "chore(changelog): update commit snapshot"
