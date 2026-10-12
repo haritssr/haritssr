@@ -8,10 +8,7 @@ import katexify from "@/utils/katexify";
 
 import UnitCircleLab from "./unit-circle-lab";
 
-export const metadata = getExperimentMetadata(
-  "mathematics",
-  "euler-s-identity"
-);
+export const metadata = getExperimentMetadata("mathematics", "euler");
 
 function Equation({ tex }: { tex: string }) {
   return (
@@ -21,7 +18,7 @@ function Equation({ tex }: { tex: string }) {
   );
 }
 
-export default function EulerIdentityPage() {
+export default function EulerPage() {
   return (
     <div className="text-foreground w-full max-w-full min-w-0 space-y-20 pb-24">
       <div className="space-y-5">
@@ -252,14 +249,14 @@ export default function EulerIdentityPage() {
             href="/experiments/mathematics/logarithms"
             variant="inline"
           >
-            logarithms
+            Logarithms
           </InternalLink>{" "}
           to explore the inverse of exponential growth, or review{" "}
           <InternalLink
             href="/experiments/mathematics/number-systems"
             variant="inline"
           >
-            number systems
+            Number Systems
           </InternalLink>{" "}
           for the bigger picture of real and complex numbers.
         </p>

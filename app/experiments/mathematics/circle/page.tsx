@@ -216,11 +216,8 @@ export default function CirclePage() {
           the radius drawn to that point. The unit circle has center at the
           origin and radius {katexify("1", false)}; explore its connection to
           rotation in{" "}
-          <InternalLink
-            href="/experiments/mathematics/euler-s-identity"
-            variant="inline"
-          >
-            Euler’s identity
+          <InternalLink href="/experiments/mathematics/euler" variant="inline">
+            Euler
           </InternalLink>
           .
         </p>

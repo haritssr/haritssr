@@ -809,11 +809,11 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "live-playground",
         group: "tools",
-        title: "Live TeX Playground",
+        title: "Live Playground",
         description: "Write TeX and preview equations as you type.",
         tags: ["mathematics", "editor"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "matrix-builder",
@@ -826,13 +826,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
       {
         slug: "derivation-stepper",
-        group: "chapters",
-        title: "Step-by-Step Derivation",
+        group: "tools",
+        title: "Derivation Stepper",
         description:
           "Solve a quadratic equation by completing the square, one step at a time.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "piecewise-functions",
@@ -857,12 +857,12 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "math-notation",
         group: "tools",
-        title: "Math Notation on the Web",
+        title: "Math Notation",
         description:
           "Learn what KaTeX can render and when math needs other tools.",
         tags: ["notation", "katex", "learning"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10", "2026-10-11"],
+        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "high-school-symbols",
@@ -872,7 +872,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Cari simbol matematika dan fisika SMA, beserta arti dan contohnya.",
         tags: ["notation", "katex", "physics", "learning", "indonesia"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10", "2026-10-11"],
+        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "circle",
@@ -895,14 +895,14 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: ["2026-10-08", "2026-10-11"],
       },
       {
-        slug: "euler-s-identity",
+        slug: "euler",
         group: "chapters",
-        title: "Euler’s Identity",
+        title: "Euler",
         description:
           "Explore Euler’s identity through a rotating unit circle and a guided derivation.",
         tags: ["complex-numbers", "trigonometry", "exponents", "visualization"],
         createdAt: "2026-10-07",
-        updatedAt: ["2026-10-07", "2026-10-11"],
+        updatedAt: ["2026-10-07", "2026-10-11", "2026-10-12"],
       },
       {
         slug: "logarithms",

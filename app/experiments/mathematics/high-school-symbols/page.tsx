@@ -44,7 +44,7 @@ export default function HighSchoolSymbolsPage() {
             href="/experiments/mathematics/live-playground"
             variant="inline"
           >
-            editor TeX
+            Live Playground
           </InternalLink>
           .
         </p>

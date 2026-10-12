@@ -217,7 +217,7 @@ export default function MathNotationPage() {
               href="/experiments/mathematics/live-playground"
               variant="inline"
             >
-              live TeX playground
+              Live Playground
             </InternalLink>
             . Check exact syntax in{" "}
             <ExternalLink
