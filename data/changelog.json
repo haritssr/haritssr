@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "d25a62b1ef278a69ad89123afe8de24daf575ff8",
+      "date": "2026-10-12T22:37:38+07:00",
+      "subject": "chore(tooling): align Bun versions and simplify path aliases"
+    },
+    {
       "hash": "fb0fd0415265fcfab224e5eeff9a10e9c110d5a4",
       "date": "2026-10-12T15:38:51+07:00",
       "subject": "chore(changelog): record latest logical commits"
