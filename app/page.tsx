@@ -202,7 +202,7 @@ function HomeProjects() {
 function MoreDetails() {
   return (
     <Section id="misc" title="More">
-      <ul className="text-foreground/70 list-outside list-disc space-y-1 pl-4">
+      <ul className="text-foreground/70 ml-1 list-outside list-disc space-y-1 pl-4">
         <li>
           <a
             className="text-action hover:underline"
