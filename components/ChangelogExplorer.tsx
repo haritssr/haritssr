@@ -1,6 +1,5 @@
 "use client";
 
-import { Tooltip } from "@base-ui/react/tooltip";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -9,6 +8,7 @@ import {
 import { useDeferredValue, useId, useState } from "react";
 
 import Button from "@/components/Button";
+import CommitActivityChart from "@/components/CommitActivityChart";
 import CommitTable from "@/components/CommitTable";
 import Section from "@/components/Section";
 import { SelectField } from "@/components/SelectField";
@@ -21,11 +21,7 @@ import {
   periodRange,
   shiftPeriod,
 } from "@/utils/changelog";
-import type {
-  ActivityBucket,
-  ChangelogCommit,
-  ChangelogPeriod,
-} from "@/utils/changelog";
+import type { ChangelogCommit, ChangelogPeriod } from "@/utils/changelog";
 
 const periodOptions: readonly { value: ChangelogPeriod; label: string }[] = [
   { value: "all", label: "All history" },
@@ -135,7 +131,7 @@ export default function ChangelogExplorer({
 
       <Section
         title="Activity"
-        description={`Commits per ${graphUnit} for ${label.toLowerCase()}. ${period === "day" ? "Hover or focus a bar for its count." : "Select a bar to explore that period."} The graph follows all active filters.`}
+        description={`Commits per ${graphUnit} for ${label.toLowerCase()}. ${period === "day" ? "Hover a point for its count." : "Select a point to explore that period."} The graph follows all active filters.`}
       >
         <dl className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           <Summary
@@ -165,12 +161,19 @@ export default function ChangelogExplorer({
             }
           />
         </dl>
-        <ActivityChart
+        <CommitActivityChart
           buckets={buckets}
+          title={`Commits by ${graphUnit}`}
+          subtitle={label}
+          axisLabel={period === "day" ? "Hour (WIB)" : graphUnit}
           hourly={period === "day"}
-          onPick={(bucket) => {
-            pickPeriod(bucket.period, bucket.key);
-          }}
+          onPick={
+            period === "day"
+              ? undefined
+              : (bucket) => {
+                  pickPeriod(bucket.period, bucket.key);
+                }
+          }
         />
         <p className="text-muted text-xs">
           Commit counts show how often changes were recorded; they do not
@@ -436,96 +439,5 @@ function Summary({
       </dd>
       <dd className="text-muted mt-auto text-xs">{detail}</dd>
     </div>
-  );
-}
-
-function ActivityChart({
-  buckets,
-  hourly,
-  onPick,
-}: {
-  buckets: readonly ActivityBucket[];
-  hourly: boolean;
-  onPick: (bucket: ActivityBucket) => void;
-}) {
-  const peak = Math.max(1, ...buckets.map((bucket) => bucket.count));
-  const labelStep = Math.max(1, Math.ceil(buckets.length / 8));
-  return (
-    <figure className="border-border rounded-xl border p-5">
-      <figcaption className="text-muted mb-4 flex justify-between gap-3 text-xs">
-        <span>{hourly ? "Hourly activity · WIB" : "Commit activity"}</span>
-        <span>
-          Peak:{" "}
-          {peak === 1 && buckets.every((bucket) => bucket.count === 0)
-            ? 0
-            : peak}{" "}
-          commits
-        </span>
-      </figcaption>
-      <div className="scrollbar-subtle overflow-x-auto pb-2">
-        <Tooltip.Provider>
-          <ol
-            aria-label="Commit counts by period"
-            className="flex min-w-96 gap-1"
-          >
-            {buckets.map((bucket, index) => (
-              <li className="min-w-2 flex-1" key={bucket.key}>
-                <Tooltip.Root>
-                  <Tooltip.Trigger
-                    aria-label={`${bucket.description}: ${bucket.count} commits${hourly ? "" : ". Show this period"}`}
-                    className="group focus-visible:outline-action block w-full rounded-sm outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2"
-                    onClick={() => {
-                      if (!hourly) {
-                        onPick(bucket);
-                      }
-                    }}
-                    type="button"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      className="h-44 w-full"
-                      preserveAspectRatio="none"
-                      viewBox="0 0 24 160"
-                    >
-                      <rect
-                        className="fill-foreground/5"
-                        height="160"
-                        rx="3"
-                        width="24"
-                      />
-                      <rect
-                        className={
-                          bucket.count > 0
-                            ? "fill-action/70 group-hover:fill-action group-focus-visible:fill-action"
-                            : "fill-border"
-                        }
-                        height={Math.max(2, (bucket.count / peak) * 150)}
-                        rx="3"
-                        width="24"
-                        y={160 - Math.max(2, (bucket.count / peak) * 150)}
-                      />
-                    </svg>
-                  </Tooltip.Trigger>
-                  <Tooltip.Portal>
-                    <Tooltip.Positioner side="top" sideOffset={8}>
-                      <Tooltip.Popup className="bg-foreground text-background z-50 rounded-md px-3 py-2 text-xs shadow-lg">
-                        <p className="font-medium">{bucket.description}</p>
-                        <p>{bucket.count} commits</p>
-                      </Tooltip.Popup>
-                    </Tooltip.Positioner>
-                  </Tooltip.Portal>
-                </Tooltip.Root>
-                <span
-                  aria-hidden="true"
-                  className="text-muted mt-2 block min-h-4 w-max text-xs"
-                >
-                  {index % labelStep === 0 ? bucket.label : ""}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </Tooltip.Provider>
-      </div>
-    </figure>
   );
 }
