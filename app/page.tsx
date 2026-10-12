@@ -54,7 +54,7 @@ export default function Home() {
       </Section>
 
       <Section contentClassName="grid grid-cols-1" id="writing" title="Writing">
-        <WritingGrid headingLevel={3} mobileLimit={5} />
+        <WritingGrid headingLevel={3} mobileLimit={5} twoColumnYear="2023" />
       </Section>
 
       <MoreDetails />

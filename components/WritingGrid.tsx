@@ -22,9 +22,11 @@ const writingPostGroups = groupWritingPostsByYear(allWritingPosts);
 export default function WritingGrid({
   mobileLimit,
   headingLevel = 2,
+  twoColumnYear,
 }: {
   mobileLimit?: number;
   headingLevel?: 2 | 3;
+  twoColumnYear?: string;
 }) {
   const Heading = headingLevel === 3 ? "h3" : "h2";
   const remainingPosts =
@@ -34,7 +36,7 @@ export default function WritingGrid({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5">
         {writingPostGroups.map((group) => {
           const groupIsHiddenOnMobile =
             mobileLimit !== undefined && group.firstIndex >= mobileLimit;
@@ -45,7 +47,13 @@ export default function WritingGrid({
               key={group.year}
             >
               <Heading className="text-foreground pb-2">{group.year}</Heading>
-              <ul className="divide-border border-border corner-squircle list-none divide-y overflow-hidden rounded-2xl border">
+              <ul
+                className={`divide-border border-border corner-squircle list-none divide-y overflow-hidden rounded-2xl border ${
+                  group.year === twoColumnYear
+                    ? "sm:grid sm:grid-cols-2 sm:divide-y-0 sm:[&>li:nth-child(n+3)]:border-t sm:[&>li:nth-child(odd)]:border-r"
+                    : ""
+                }`}
+              >
                 {group.posts.map((post, index) => {
                   const postIndex = group.firstIndex + index;
                   const postIsHiddenOnMobile =
@@ -55,21 +63,21 @@ export default function WritingGrid({
 
                   return (
                     <li
-                      className={`${
+                      className={`border-border min-w-0 ${
                         postIsHiddenOnMobile ? "hidden sm:block" : ""
                       } ${isLastMobilePost ? "max-sm:border-b-0!" : ""}`}
                       key={post.slug}
                     >
                       <Link
-                        className="group hover:bg-interface-hover flex flex-col px-3 py-2.5 transition-colors"
+                        className="group hover:bg-interface-hover flex h-full min-w-0 flex-col px-3 py-2.5 transition-colors"
                         href={`/writing/${post.slug}`}
                         prefetch={false}
                       >
-                        <div className="flex w-full items-center justify-between">
+                        <div className="flex w-full items-center justify-between gap-3">
                           <div className="text-action group-hover:text-action-hover">
                             {post.title}
                           </div>
-                          <div className="text-muted mt-1.5 flex flex-wrap items-center space-x-1 text-xs">
+                          <div className="text-muted mt-1.5 flex shrink-0 flex-wrap items-center space-x-1 text-xs">
                             <span>{Math.ceil(post.wordCount / 200)} min</span>
                             <span aria-hidden="true">·</span>
                             <time dateTime={post.publishedAt}>
