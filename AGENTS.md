@@ -93,6 +93,8 @@ Apply these defaults to new or refactored experiments in every domain:
 
 # Content and Routes
 
+- Never add redirect rules in `next.config.ts`. Do not automatically add
+  redirects when renaming routes; legacy URL aliases are intentionally absent.
 - Experiment routes are literal folders. Register title, description, tags,
   creation date, and update history in `data/ExperimentsData.ts`. Append an
   update date once per calendar day; preserve creation dates and prior history.
@@ -101,8 +103,7 @@ Apply these defaults to new or refactored experiments in every domain:
   Reuse it in page metadata instead of longer local overrides; keep detailed
   explanations in page content. Preview line wrapping depends on the host app.
 - Writing uses local `data/writing/*.mdx` with validated frontmatter and automatic
-  module discovery, without an import registry. Preserve `/blog` redirects to
-  `/writing` in `next.config.ts`.
+  module discovery, without an import registry. Use `/writing` URLs directly.
 - Individual writing and experiment pages share the scrolling top bar and
   floating reading controls (`useScrolledArticle`, `ArticleTableOfContents`).
   Keep page titles marked with `data-article-*` for the top bar. Contents use

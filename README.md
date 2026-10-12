@@ -33,8 +33,8 @@ CI runs those checks and the production build.
 
 Experiment routes are literal folders registered in `data/ExperimentsData.ts`.
 The catalog supplies explorer, search, metadata, and sitemap records.
-Writing posts live in `data/writing/`; `/blog` URLs permanently redirect to
-matching `/writing` URLs through `next.config.ts`.
+Writing posts live in `data/writing/` and use `/writing` URLs directly.
+Legacy URL aliases are intentionally absent from `next.config.ts`.
 
 ## Metadata and Appearance
 

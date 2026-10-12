@@ -35,36 +35,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  redirects() {
-    return [
-      {
-        source: "/blog/:path*",
-        destination: "/writing/:path*",
-        permanent: true,
-      },
-      {
-        source:
-          "/experiments/mathematics/system-of-linear-equations-in-three-variables",
-        destination: "/experiments/mathematics/spltv",
-        permanent: true,
-      },
-      {
-        source: "/experiments/katex",
-        destination: "/experiments/mathematics",
-        permanent: true,
-      },
-      {
-        source: "/experiments/katex/basic",
-        destination: "/experiments/mathematics/katex-basics",
-        permanent: true,
-      },
-      {
-        source: "/experiments/katex/:path*",
-        destination: "/experiments/mathematics/:path*",
-        permanent: true,
-      },
-    ];
-  },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   headers() {
     return [
