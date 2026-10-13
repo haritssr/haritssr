@@ -16,7 +16,7 @@ import MoreItemsLink from "@/components/MoreItemsLink";
 import ProjectsCard from "@/components/ProjectsCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
-import WritingGrid from "@/components/WritingGrid";
+import WritingTable from "@/components/WritingTable";
 import { ProjectsData } from "@/data/ProjectsData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -53,8 +53,8 @@ export default function Home() {
         <ExperimentsGrid headingLevel={3} mobileLimit={4} />
       </Section>
 
-      <Section contentClassName="grid grid-cols-1" id="writing" title="Writing">
-        <WritingGrid headingLevel={3} mobileLimit={5} twoColumnYear="2023" />
+      <Section id="writing" title="Writing">
+        <WritingTable />
       </Section>
 
       <MoreDetails />

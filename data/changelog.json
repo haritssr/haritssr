@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "627b066aa88cfeb7c33f5664fc3fd8ec489af35d",
+      "date": "2026-10-13T15:49:55+07:00",
+      "subject": "style(Footer): use a fixed 2026 copyright year"
+    },
+    {
       "hash": "1d50a72cbab02c2da6d5e2660741d6c0a573ff35",
       "date": "2026-10-13T15:49:49+07:00",
       "subject": "refactor(ArticleTableOfContents): extract outline and navigation hooks"
