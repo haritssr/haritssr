@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "90255384d0d2d4c5fc68f12eabec7a74cd458acc",
+      "date": "2026-10-13T23:20:24+07:00",
+      "subject": "refactor(WritingTable): use one tabular ISO date column"
+    },
+    {
       "hash": "5286e5ed3d33a43b5a164b6091d09b861d06e8c2",
       "date": "2026-10-13T23:20:13+07:00",
       "subject": "refactor(Home): combine profile and personal details in four columns"

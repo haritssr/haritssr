@@ -39,10 +39,10 @@ export default function PhysicsEquationsPage() {
             >
               {domain.title}
             </SectionHeading>
-            <p className="text-foreground/65 mb-20 max-w-full text-base leading-7">
+            <p className="text-foreground/65 mb-10 max-w-full text-base leading-7">
               {domain.description}
             </p>
-            <div className="space-y-16">
+            <div className="space-y-10">
               {domain.equations.map((equation) => (
                 <EquationSection equation={equation} key={equation.id} />
               ))}
