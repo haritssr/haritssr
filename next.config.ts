@@ -33,8 +33,8 @@ const nextConfig: NextConfig = {
     // Remove unreachable compiler work from memory and disk.
     turbopackGc: true,
 
-    // Compile client dynamic imports when requested during development.
-    turbopackLazyDynamicImports: true,
+    // Disabled after search preloading hit an unactivated lazy compilation proxy.
+    turbopackLazyDynamicImports: false,
 
     // Reclaim persisted dev-cache memory on this 8 GB machine.
     turbopackMemoryEviction: "full",

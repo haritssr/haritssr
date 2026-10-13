@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "6c8ac67588ae1606a8f1898889a04b55323d4b99",
+      "date": "2026-10-13T23:18:01+07:00",
+      "subject": "feat(TopBar): link GitHub icon to the current page source"
+    },
+    {
       "hash": "25d467d49407494dcbabf8ff0adab5da0dcd25f9",
       "date": "2026-10-13T15:50:08+07:00",
       "subject": "docs(writing): shorten Harimaki and Tim Cook titles"
