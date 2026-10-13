@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "7b652337cb6015004332d070b283aca0ac59867f",
+      "date": "2026-10-13T15:48:59+07:00",
+      "subject": "refactor(experiments): reuse Box for exercise cards"
+    },
+    {
       "hash": "4982efab27e2bb65b007ce390fc890dfc92f7ef1",
       "date": "2026-10-13T15:48:51+07:00",
       "subject": "docs(next-config): list optional experimental features"

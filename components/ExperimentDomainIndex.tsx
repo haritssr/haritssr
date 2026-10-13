@@ -4,6 +4,7 @@ import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
 import InternalLink from "@/components/InternalLink";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
+import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import type { ExperimentEntry } from "@/data/ExperimentsData";
 import { getLatestExperimentUpdate } from "@/data/ExperimentsData";
 import { getAvailableExperimentDomain } from "@/utils/experimentCatalog";
@@ -25,21 +26,18 @@ export default function ExperimentDomainIndex({
 
   return (
     <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
-      <div className="mb-10 space-y-3">
-        <div className="flex items-center">
-          <ExperimentDomainIcon size={36} src={domain.logoSrc} />
-        </div>
+      <div className="space-y-3">
+        <ExperimentDomainIcon size={36} src={domain.logoSrc} />
         <PageTitle spacing="none">{domain.title}</PageTitle>
-        <p className="text-foreground/90 text-lg">{domain.description}</p>
-        <div className="text-foreground/70 text-lg">
-          {experiments.length} experiments
-        </div>
       </div>
+      <TopLevelSectionPageDescription>
+        {domain.description}
+      </TopLevelSectionPageDescription>
       {domain.groups !== undefined && domain.groups.length > 0 ? (
         <div
           className={
             domain.slug === "mathematics"
-              ? "grid grid-cols-1 items-start gap-x-10 gap-y-20 lg:grid-cols-2"
+              ? "grid grid-cols-1 items-start gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4"
               : "space-y-20"
           }
         >
