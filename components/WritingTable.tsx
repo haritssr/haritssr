@@ -2,12 +2,6 @@ import InternalLink from "@/components/InternalLink";
 import Table from "@/components/Table";
 import { allWritingPosts } from "@/utils/writing-posts";
 
-const writingDateFormatter = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  timeZone: "UTC",
-});
-
 export default function WritingTable() {
   return (
     <Table className="min-w-96">
@@ -26,17 +20,11 @@ export default function WritingTable() {
           >
             Description
           </th>
-          <th
-            className="hidden px-3 py-2 text-left font-normal sm:table-cell"
-            scope="col"
-          >
-            Year
-          </th>
           <th className="px-3 py-2 text-left font-normal" scope="col">
             Date
           </th>
           <th className="px-3 py-2 text-left font-normal" scope="col">
-            Time
+            Read
           </th>
         </tr>
       </thead>
@@ -54,18 +42,8 @@ export default function WritingTable() {
             <td className="text-muted hidden px-3 py-2 sm:table-cell">
               {post.summary}.
             </td>
-            <td className="text-muted hidden px-3 py-2 tabular-nums sm:table-cell">
-              {post.publishedAt.slice(0, 4)}
-            </td>
             <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
-              <time className="sm:hidden" dateTime={post.publishedAt}>
-                {post.publishedAt}
-              </time>
-              <time className="hidden sm:inline" dateTime={post.publishedAt}>
-                {writingDateFormatter
-                  .format(new Date(`${post.publishedAt}T00:00:00.000Z`))
-                  .replace(/^Sep /u, "Sept ")}
-              </time>
+              <time dateTime={post.publishedAt}>{post.publishedAt}</time>
             </td>
             <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
               {Math.ceil(post.wordCount / 200)} min

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "5286e5ed3d33a43b5a164b6091d09b861d06e8c2",
+      "date": "2026-10-13T23:20:13+07:00",
+      "subject": "refactor(Home): combine profile and personal details in four columns"
+    },
+    {
       "hash": "bfb57b0fed9326cc4a5cd0deef47004bd65caca1",
       "date": "2026-10-13T23:20:00+07:00",
       "subject": "style(Components): soften floating borders and refine controls"
