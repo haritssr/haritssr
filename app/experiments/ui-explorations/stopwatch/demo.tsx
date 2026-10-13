@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 
 export default function Stopwatch() {
   const [time, setTime] = useState<number>(0);
@@ -26,6 +27,8 @@ export default function Stopwatch() {
 
   return (
     <>
+      <ExperimentPageHeader />
+
       <div>{time}</div>
       <div className="space-x-3">
         <button

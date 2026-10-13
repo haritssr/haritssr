@@ -1,14 +1,18 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import SectionHeading from "@/components/SectionHeading";
-import SubTitle from "@/components/SubTitle";
 
 export default function DifferentCssStylingDemo() {
   return (
     <>
-      <SubTitle>
-        Click blue &quot;source github button&quot; to see the source code
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Click blue &quot;source github button&quot; to see the source code
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <SectionHeading>
         Coloring, Box size, Rounded corner, Padding
       </SectionHeading>

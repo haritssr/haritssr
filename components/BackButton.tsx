@@ -30,12 +30,8 @@ export default function BackButton({
   }
 
   return (
-    <Link
-      className="mt-5 -mb-5 block w-fit sm:mt-10"
-      href={href}
-      prefetch={false}
-    >
-      <span className="inline-block w-full">
+    <Link className="block w-fit max-w-full" href={href} prefetch={false}>
+      <span className="inline-block w-full align-top">
         <span className="group flex items-center">
           <ChevronLeftIcon
             className="text-action sm:group-hover:text-action-hover -ml-2 h-5 w-5 pt-px"

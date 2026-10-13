@@ -2,24 +2,28 @@
 
 import useSWR from "swr";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { fetchPeople } from "@/utils/fetchPeople";
 import type { Person } from "@/utils/fetchPeople";
 
 export default function NextjsSWRDemo() {
   return (
     <>
-      <SubTitle>
-        Using SWR to fetch data from{" "}
-        <code className="rounded-md border border-green-200 bg-green-50 px-2 py-1 font-mono text-sm text-green-500">
-          /api/hello
-        </code>{" "}
-        and populate the data to{" "}
-        <code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-sm text-rose-500">
-          {"<NameCard/>"}
-        </code>{" "}
-        component
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Using SWR to fetch data from{" "}
+          <code className="rounded-md border border-green-200 bg-green-50 px-2 py-1 font-mono text-sm text-green-500">
+            /api/hello
+          </code>{" "}
+          and populate the data to{" "}
+          <code className="rounded-md border border-rose-200 bg-rose-50 px-2 py-1 font-mono text-sm text-rose-500">
+            {"<NameCard/>"}
+          </code>{" "}
+          component
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <PeopleResults />
     </>
   );

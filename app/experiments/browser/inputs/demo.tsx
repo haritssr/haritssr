@@ -3,13 +3,17 @@
 import type React from "react";
 import { useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import SectionHeading from "@/components/SectionHeading";
-import SubTitle from "@/components/SubTitle";
 
 export default function InputsDemo() {
   return (
     <>
-      <SubTitle>Browser built-in input elements </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Browser built-in input elements </PageDescription>
+      </ExperimentPageHeader>
+
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-14">
         <Wrapper name="text">
           <InputText />

@@ -129,7 +129,7 @@ export default function ChangelogExplorer({
   }
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-16">
       <ChangelogFilters
         period={period}
         anchor={anchor}

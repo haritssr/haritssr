@@ -9,15 +9,19 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 
 export default function InlineMakiDemo() {
   return (
-    <div className="mx-auto my-20 max-w-full space-y-2">
-      <InlineMAKI value="1" />
-      <InlineMAKI value="2" />
-      <InlineMAKI value="3" />
-      <InlineMAKI value="4" />
-      <InlineMAKI value="5" />
+    <div className="mx-auto my-20 max-w-full">
+      <ExperimentPageHeader />
+      <div className="space-y-16">
+        <InlineMAKI value="1" />
+        <InlineMAKI value="2" />
+        <InlineMAKI value="3" />
+        <InlineMAKI value="4" />
+        <InlineMAKI value="5" />
+      </div>
     </div>
   );
 }

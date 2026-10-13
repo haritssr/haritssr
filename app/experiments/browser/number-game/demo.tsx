@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
+
 import "katex/dist/katex.min.css";
-import SubTitle from "@/components/SubTitle";
 import katexify from "@/utils/katexify";
 
 export default function NumberGameDemo() {
@@ -50,14 +52,17 @@ export default function NumberGameDemo() {
   if (state.score === 10) {
     return (
       <>
-        <SubTitle>
-          Random additional game.
-          <br />
-          Win if correct 10 times.
-          <br />
-          Every wrong answer decrease one score.
-        </SubTitle>
-        <div className="pt-24 text-center text-4xl font-bold text-green-500">
+        <ExperimentPageHeader>
+          <PageDescription>
+            Random additional game.
+            <br />
+            Win if correct 10 times.
+            <br />
+            Every wrong answer decrease one score.
+          </PageDescription>
+        </ExperimentPageHeader>
+
+        <div className="text-center text-4xl font-bold text-green-500">
           You win!
         </div>
 
@@ -84,14 +89,17 @@ export default function NumberGameDemo() {
 
   return (
     <>
-      <SubTitle>
-        Random additional game.
-        <br />
-        Win if correct 10 times.
-        <br />
-        Every wrong answer decrease one score.
-      </SubTitle>
-      <div className="mx-auto flex max-w-full flex-col items-center justify-center pt-24">
+      <ExperimentPageHeader>
+        <PageDescription>
+          Random additional game.
+          <br />
+          Win if correct 10 times.
+          <br />
+          Every wrong answer decrease one score.
+        </PageDescription>
+      </ExperimentPageHeader>
+
+      <div className="mx-auto flex max-w-full flex-col items-center justify-center">
         <div className={state.incorrect ? "incorrect" : ""}>
           {katexify(`${state.num1} + ${state.num2}`, false)}
         </div>

@@ -3,10 +3,11 @@
 //useinview version
 import { useInView } from "react-intersection-observer";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
 // native version
 // import { useEffect } from "react";
-import SubTitle from "@/components/SubTitle";
 
 export default function IntersectionObserverDemo() {
   return (
@@ -32,7 +33,7 @@ export default function IntersectionObserverDemo() {
 //   }, []);
 //   return (
 //     <LayoutToExperiments domain='Browser' title='Intersection Observer API'>
-//       <SubTitle>
+//       <PageDescription>
 //         <ExternalLink
 //           href='https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API'
 //           name='Intersection Observer API'
@@ -40,7 +41,7 @@ export default function IntersectionObserverDemo() {
 //         <br />
 //         Inspired by
 //         <ExternalLink href='https://www.youtube.com/watch?v=r1auJEf9ISo' name='Colby Fayock' />
-//       </SubTitle>
+//       </PageDescription>
 //       <div className='mt-96 rounded-md bg-zinc-100 p-10'>
 //         <h2 ref={myRef} className='mb-2 text-2xl font-semibold'>
 //           {isMyElementVisible ? 'This heading is visible' : 'This heading is not visible'}
@@ -69,19 +70,22 @@ function IntersectionObserverAPIHooks() {
   // }, [isRocketVisible]);
   return (
     <>
-      <SubTitle>
-        <ExternalLink
-          href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API"
-          name="Intersection Observer API"
-        />
-        <br /> Inspired by{" "}
-        <ExternalLink
-          href="https://www.youtube.com/watch?v=r1auJEf9ISo"
-          name="Colby Fayock"
-        />
-        <br /> Scroll to the bottom to see the effect, the rocket launches.🚀.
-      </SubTitle>
-      <div className="mt-96 rounded-md bg-zinc-100 p-10">
+      <ExperimentPageHeader>
+        <PageDescription>
+          <ExternalLink
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API"
+            name="Intersection Observer API"
+          />
+          <br /> Inspired by{" "}
+          <ExternalLink
+            href="https://www.youtube.com/watch?v=r1auJEf9ISo"
+            name="Colby Fayock"
+          />
+          <br /> Scroll to the bottom to see the effect, the rocket launches.🚀.
+        </PageDescription>
+      </ExperimentPageHeader>
+
+      <div className="rounded-md bg-zinc-100 p-10">
         <h2 className="mb-2 text-2xl font-semibold" ref={myRef}>
           {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}
         </h2>

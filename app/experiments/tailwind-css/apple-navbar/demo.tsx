@@ -1,16 +1,20 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
 import SectionHeading from "@/components/SectionHeading";
-import SubTitle from "@/components/SubTitle";
 
 export default function TailwindAppleNavbarDemo() {
   return (
     <>
-      <SubTitle>
-        <ExternalLink href="https://www.apple.com" name="Apple.com" /> sticky
-        navigation bar
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          <ExternalLink href="https://www.apple.com" name="Apple.com" /> sticky
+          navigation bar
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div>
         <div className="border border-zinc-300">
           <div className="sticky top-[88px] flex items-center justify-between border-b border-b-gray-300 bg-white/70 p-2 py-2 backdrop-blur-md">

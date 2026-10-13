@@ -2,7 +2,8 @@
 
 import { useDeferredValue, useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 const fruits = [
   "Apple",
@@ -34,7 +35,12 @@ export default function SimpleSearch() {
 
   return (
     <div>
-      <SubTitle>Search using useState, useMemo, useCallback</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Search using useState, useMemo, useCallback
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <input
         aria-label="Search fruits"
         onChange={handleChange}

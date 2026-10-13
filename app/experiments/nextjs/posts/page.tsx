@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import PageTitle from "@/components/PageTitle";
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import { getSortedPostsData } from "@/utils/posts";
 
@@ -13,8 +13,10 @@ export default function PostsPage() {
 
   return (
     <>
-      <PageTitle>Posts</PageTitle>
-      <SubTitle>Posts by Nextjs tutorial</SubTitle>
+      <ExperimentPageHeader title="Posts">
+        <PageDescription>Posts by Nextjs tutorial</PageDescription>
+      </ExperimentPageHeader>
+
       <ul className="space-y-5">
         {allPostsData.map(({ id, date, title }) => (
           <li key={id}>

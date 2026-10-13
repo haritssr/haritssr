@@ -3,19 +3,23 @@
 import { useState } from "react";
 import type { FormEvent, SetStateAction } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactUseStateReactingToInputDemo() {
   return (
     <>
-      <SubTitle>
-        From{" "}
-        <ExternalLink
-          href="https://react.dev/learn/reacting-to-input-with-state#step-5-connect-the-event-handlers-to-set-state"
-          name="react.dev"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          From{" "}
+          <ExternalLink
+            href="https://react.dev/learn/reacting-to-input-with-state#step-5-connect-the-event-handlers-to-set-state"
+            name="react.dev"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <Example />
     </>
   );

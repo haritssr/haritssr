@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import BackButton from "@/components/BackButton";
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
+import PageTitle from "@/components/PageTitle";
 import WritingArticle from "@/components/WritingArticle";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { allWritingPosts, getWritingPost } from "@/utils/writing-posts";
@@ -67,26 +70,28 @@ export default async function WritingPostPage({
 
   return (
     <WritingArticle key={post.slug} title={post.title}>
-      <div className="mt-5 mb-10">
-        <BackButton href="/writing" name="Writing" />
-      </div>
-
-      <h1
-        className="text-foreground text-2xl font-bold tracking-tighter sm:text-3xl"
-        data-article-back-label="Writing"
-        data-article-parent="/writing"
-        data-article-path={`/writing/${post.slug}`}
-        data-article-title={post.title}
-      >
-        {post.title}
-      </h1>
-      <div className="mt-2 mb-8 flex items-center text-sm">
-        <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-        &nbsp;&nbsp; <span className="text-foreground/60">•</span> &nbsp;&nbsp;
-        <p>{post.wordCount} Words</p>
-        &nbsp;&nbsp; <span className="text-foreground/60">•</span> &nbsp;&nbsp;
-        <p>{Math.ceil(post.wordCount / 200)} Min</p>
-      </div>
+      <PageHeader navigation={<BackButton href="/writing" name="Writing" />}>
+        <PageTitle
+          data-article-back-label="Writing"
+          data-article-parent="/writing"
+          data-article-path={`/writing/${post.slug}`}
+          data-article-title={post.title}
+        >
+          {post.title}
+        </PageTitle>
+        <PageDescription>{post.summary}</PageDescription>
+        <div className="flex items-center text-sm">
+          <time dateTime={post.publishedAt}>
+            {formatDate(post.publishedAt)}
+          </time>
+          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
+          &nbsp;&nbsp;
+          <p>{post.wordCount} Words</p>
+          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
+          &nbsp;&nbsp;
+          <p>{Math.ceil(post.wordCount / 200)} Min</p>
+        </div>
+      </PageHeader>
       <div className="prose prose-zinc prose-headings:text-foreground in-data-[theme=dark]:prose-invert max-w-none">
         <PostContent />
       </div>

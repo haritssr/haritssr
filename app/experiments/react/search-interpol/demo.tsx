@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 interface Notice {
   _links: Links;
@@ -77,28 +78,31 @@ export default function ReactSearchInterpolDemo() {
 
   return (
     <>
-      <SubTitle>
-        <ExplanationList>
-          <li>
-            Inspired by{" "}
-            <ExternalLink
-              href="https://www.youtube.com/watch?v=PySFIsgXNZ0"
-              name="TomDoesTech"
-            />
-          </li>
-          <li>
-            Data source{" "}
-            <ExternalLink
-              href="https://ws-public.interpol.int/notices/v1/red"
-              name="ws-public interpol"
-            />
-          </li>
-          <li>Already applied debounce on search</li>
-          <li>
-            Search by name with the result of prisoners from interpol public API
-          </li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          <ExplanationList>
+            <li>
+              Inspired by{" "}
+              <ExternalLink
+                href="https://www.youtube.com/watch?v=PySFIsgXNZ0"
+                name="TomDoesTech"
+              />
+            </li>
+            <li>
+              Data source{" "}
+              <ExternalLink
+                href="https://ws-public.interpol.int/notices/v1/red"
+                name="ws-public interpol"
+              />
+            </li>
+            <li>Already applied debounce on search</li>
+            <li>
+              Search by name with the result of prisoners from interpol public
+              API
+            </li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
 
       <input
         aria-label="Search Interpol notices"

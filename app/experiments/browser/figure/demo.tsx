@@ -2,18 +2,22 @@
 
 import Image from "next/image";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function FigureDemo() {
   return (
     <>
-      <SubTitle>
-        Image with figcaption.
-        <br />
-        Unfortunately the default behavior of figcaption has been overrided by
-        tailwindcss preflight, so the figcaption is not italic by default, I
-        need to design it.
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Image with figcaption.
+          <br />
+          Unfortunately the default behavior of figcaption has been overrided by
+          tailwindcss preflight, so the figcaption is not italic by default, I
+          need to design it.
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div>
         <figure>
           <Image

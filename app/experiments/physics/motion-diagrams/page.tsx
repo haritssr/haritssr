@@ -1,7 +1,8 @@
 import "katex/dist/katex.min.css";
-import SubTitle from "components/SubTitle";
 import type { Metadata } from "next";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import SectionHeading from "@/components/SectionHeading";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
@@ -62,13 +63,13 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function MotionDiagramsPage() {
   return (
     <div className="pb-24">
-      <div className="max-w-full space-y-4">
-        <SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
           Adjust the controls and see how each motion graph changes over time.
-        </SubTitle>
+        </PageDescription>
         <nav
           aria-label="Jump to a motion type"
-          className="my-10 flex flex-wrap gap-2"
+          className="flex flex-wrap gap-2"
         >
           {motions.map((motion) => (
             <a
@@ -80,9 +81,9 @@ export default function MotionDiagramsPage() {
             </a>
           ))}
         </nav>
-      </div>
+      </ExperimentPageHeader>
 
-      <div className="space-y-20">
+      <div className="space-y-16">
         {motions.map((motion) => (
           <section
             aria-labelledby={`${motion.id}-title`}

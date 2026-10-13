@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -14,36 +16,38 @@ export const metadata: Metadata = getExperimentMetadata(
 
 export default function DerivationStepperPage() {
   return (
-    <div className="space-y-20 pb-16">
-      <div>
-        <p className="text-foreground/80 max-w-full text-lg leading-relaxed">
+    <div className="pb-16">
+      <ExperimentPageHeader>
+        <PageDescription>
           Follow a solution of {katexify("x^2+6x+5=0", false)} by completing the
           square. Reveal each transformation and see how KaTeX keeps the
           equations aligned as the derivation grows.
-        </p>
+        </PageDescription>
+      </ExperimentPageHeader>
+      <div className="space-y-16">
+        <Section title="Reveal the reasoning" id="derivation-heading">
+          <Demo />
+        </Section>
+        <Section
+          className="max-w-full"
+          title="Align a chain of equations"
+          id="derivation-notes-heading"
+          description={
+            <>
+              Place an ampersand before the relation you want to align, then
+              separate lines with a double backslash. The aligned environment
+              keeps these relations in one column. This example reveals
+              prepared, valid steps; KaTeX handles their presentation. See the{" "}
+              <ExternalLink
+                href="https://katex.org/docs/supported.html#environments"
+                name="alignment environments"
+                size="inherit"
+              />{" "}
+              for other multiline layouts.
+            </>
+          }
+        />
       </div>
-      <Section title="Reveal the reasoning" id="derivation-heading">
-        <Demo />
-      </Section>
-      <Section
-        className="max-w-full"
-        title="Align a chain of equations"
-        id="derivation-notes-heading"
-        description={
-          <>
-            Place an ampersand before the relation you want to align, then
-            separate lines with a double backslash. The aligned environment
-            keeps these relations in one column. This example reveals prepared,
-            valid steps; KaTeX handles their presentation. See the{" "}
-            <ExternalLink
-              href="https://katex.org/docs/supported.html#environments"
-              name="alignment environments"
-              size="inherit"
-            />{" "}
-            for other multiline layouts.
-          </>
-        }
-      />
     </div>
   );
 }

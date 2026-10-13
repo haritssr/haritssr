@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 interface Base {
   id: string;
@@ -45,16 +46,19 @@ export default function ReactGenericSelectDemo() {
 
   return (
     <>
-      <SubTitle>
-        Inspired by{" "}
-        <ExternalLink
-          href="https://www.developerway.com/posts/typescript-generics-for-react-developers"
-          name="Nadia Makarevich Article&lsquo;s"
-        />
-        <ExplanationList>
-          <li>The option you choose will immediately appear in Results.</li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          Inspired by{" "}
+          <ExternalLink
+            href="https://www.developerway.com/posts/typescript-generics-for-react-developers"
+            name="Nadia Makarevich Article&lsquo;s"
+          />
+          <ExplanationList>
+            <li>The option you choose will immediately appear in Results.</li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div className="text-xl font-semibold">
         Please choose your subject and teacher
       </div>

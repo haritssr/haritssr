@@ -1,18 +1,22 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindFeedbackDemo() {
   return (
     <>
-      <SubTitle>
-        From{" "}
-        <ExternalLink
-          href="https://twitter.com/marckohlbrugge/status/1580915114147921920"
-          name="this tweet"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          From{" "}
+          <ExternalLink
+            href="https://twitter.com/marckohlbrugge/status/1580915114147921920"
+            name="this tweet"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <form className="absolute right-8 bottom-8 flex flex-col rounded-lg border bg-white">
         <textarea
           aria-label="Feedback"

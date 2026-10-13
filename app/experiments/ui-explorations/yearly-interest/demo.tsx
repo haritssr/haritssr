@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 // Matches every non-digit character.
 // Example: "Rp 12,000" becomes "12000" after replacement.
@@ -36,84 +37,88 @@ export default function YearlyInterest() {
   }
 
   return (
-    <div className="space-y-20">
-      <div>
-        <SubTitle>Calculation of yearly save interest</SubTitle>
-        <form>
-          <label className="block w-fit text-zinc-500" htmlFor="Initial">
-            Initial (Rp)
-          </label>
-          <input
-            className="mb-4 rounded-md border px-1.5 py-0.5"
-            id="Initial"
-            inputMode="numeric"
-            onChange={(e) => {
-              const nextValue: string = e.target.value;
-              if (!nextValue) {
-                setInitial(0);
-                setInitialInput("");
-                return;
-              }
+    <>
+      <ExperimentPageHeader>
+        <PageDescription>Calculation of yearly save interest</PageDescription>
+      </ExperimentPageHeader>
+      <div className="space-y-16">
+        <div>
+          <form>
+            <label className="block w-fit text-zinc-500" htmlFor="Initial">
+              Initial (Rp)
+            </label>
+            <input
+              className="mb-4 rounded-md border px-1.5 py-0.5"
+              id="Initial"
+              inputMode="numeric"
+              onChange={(e) => {
+                const nextValue: string = e.target.value;
+                if (!nextValue) {
+                  setInitial(0);
+                  setInitialInput("");
+                  return;
+                }
 
-              const numericValue: number = parseNumericInput(nextValue);
-              setInitial(numericValue);
-              setInitialInput(formatNumber(numericValue));
-            }}
-            required={true}
-            type="text"
-            value={initialInput}
-          />
-          <label className="block w-fit text-zinc-500" htmlFor="Percent">
-            Percent (%)
-          </label>
-          <input
-            className="mb-4 rounded-md border px-1.5 py-0.5"
-            id="Percent"
-            onChange={(e) => {
-              setPercent(Number(e.target.value));
-            }}
-            required={true}
-            type="number"
-          />
-          <label className="block w-fit text-zinc-500" htmlFor="Year">
-            Year
-          </label>
-          <input
-            className="mb-4 rounded-md border px-1.5 py-0.5"
-            id="Year"
-            onChange={(e) => {
-              setYear(Number(e.target.value));
-            }}
-            required={true}
-            type="number"
-          />
-        </form>
+                const numericValue: number = parseNumericInput(nextValue);
+                setInitial(numericValue);
+                setInitialInput(formatNumber(numericValue));
+              }}
+              required={true}
+              type="text"
+              value={initialInput}
+            />
+            <label className="block w-fit text-zinc-500" htmlFor="Percent">
+              Percent (%)
+            </label>
+            <input
+              className="mb-4 rounded-md border px-1.5 py-0.5"
+              id="Percent"
+              onChange={(e) => {
+                setPercent(Number(e.target.value));
+              }}
+              required={true}
+              type="number"
+            />
+            <label className="block w-fit text-zinc-500" htmlFor="Year">
+              Year
+            </label>
+            <input
+              className="mb-4 rounded-md border px-1.5 py-0.5"
+              id="Year"
+              onChange={(e) => {
+                setYear(Number(e.target.value));
+              }}
+              required={true}
+              type="number"
+            />
+          </form>
+        </div>
+
+        <section>
+          <Section name="Yearly Simple Interest" />
+          <div className="text-green-700">
+            Result:{" "}
+            {Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              maximumFractionDigits: 0,
+            }).format(Math.floor(initial * (1 + (percent / 100) * year)))}
+          </div>
+        </section>
+
+        <section>
+          <Section name="Yearly Compound Interest" />
+          <div className="text-green-700">
+            Result:{" "}
+            {Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              maximumFractionDigits: 0,
+            }).format(Math.floor(initial * (1 + percent / 100) ** year))}
+          </div>
+        </section>
       </div>
-
-      <section>
-        <Section name="Yearly Simple Interest" />
-        <div className="text-green-700">
-          Result:{" "}
-          {Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-            maximumFractionDigits: 0,
-          }).format(Math.floor(initial * (1 + (percent / 100) * year)))}
-        </div>
-      </section>
-
-      <section>
-        <Section name="Yearly Compound Interest" />
-        <div className="text-green-700">
-          Result:{" "}
-          {Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-            maximumFractionDigits: 0,
-          }).format(Math.floor(initial * (1 + percent / 100) ** year))}
-        </div>
-      </section>
-    </div>
+    </>
   );
 }
 

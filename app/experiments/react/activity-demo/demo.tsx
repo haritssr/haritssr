@@ -2,7 +2,6 @@
 
 import { Activity, useEffect, useState } from "react";
 
-import Section from "@/components/Section";
 /*
 BEFORE
 { showSidebar && <SideBar/> }
@@ -29,61 +28,67 @@ when visible:
 
 
 */
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
+import Section from "@/components/Section";
 
 export default function ActivityDemo() {
   const [visible, setVisible] = useState(false);
   return (
-    <div className="space-y-20">
-      <div className="space-y-10">
-        <SubTitle>
+    <>
+      <ExperimentPageHeader>
+        <PageDescription>
           The page intentionally bad looking in order to focus on the code
           behind the screen.
-        </SubTitle>
-        <button
-          className="rounded-sm bg-blue-500 px-2.5 py-1.5 text-sm text-white hover:bg-blue-500/95 active:translate-y-px"
-          onClick={() => {
-            setVisible((v) => !v);
-          }}
-          type="button"
-        >
-          Toggle Visibility
-        </button>
+        </PageDescription>
+      </ExperimentPageHeader>
+      <div className="space-y-16">
+        <div>
+          <button
+            className="rounded-sm bg-blue-500 px-2.5 py-1.5 text-sm text-white hover:bg-blue-500/95 active:translate-y-px"
+            onClick={() => {
+              setVisible((v) => !v);
+            }}
+            type="button"
+          >
+            Toggle Visibility
+          </button>
+        </div>
+
+        <div className="space-y-16">
+          <Section title="Counter Button">
+            <Activity mode={visible ? "visible" : "hidden"}>
+              <Counter />
+            </Activity>
+            {Boolean(visible) && <Counter />}
+          </Section>
+
+          <Section title="Input State">
+            <Activity mode={visible ? "visible" : "hidden"}>
+              <Form />
+            </Activity>
+          </Section>
+
+          <Section title="Effect Livecycle">
+            <Activity mode={visible ? "visible" : "hidden"}>
+              <Clock />
+            </Activity>
+          </Section>
+
+          <Section title="Tab">
+            <Tabs />
+          </Section>
+
+          <Section title="Pre-render Hidden UI">
+            {/*Although it hidden, but behind the screen the dashboard is rendered, prepare jsx, load code, suspend for data*/}
+            {/*Later when mode is visible, it appear much faster, because much of work already done in the backgroudn at a lower priority*/}
+            <Activity mode="hidden">
+              <ExpensiveDashboard />
+            </Activity>
+          </Section>
+        </div>
       </div>
-
-      <div className="space-y-20">
-        <Section title="Counter Button">
-          <Activity mode={visible ? "visible" : "hidden"}>
-            <Counter />
-          </Activity>
-          {Boolean(visible) && <Counter />}
-        </Section>
-
-        <Section title="Input State">
-          <Activity mode={visible ? "visible" : "hidden"}>
-            <Form />
-          </Activity>
-        </Section>
-
-        <Section title="Effect Livecycle">
-          <Activity mode={visible ? "visible" : "hidden"}>
-            <Clock />
-          </Activity>
-        </Section>
-
-        <Section title="Tab">
-          <Tabs />
-        </Section>
-
-        <Section title="Pre-render Hidden UI">
-          {/*Although it hidden, but behind the screen the dashboard is rendered, prepare jsx, load code, suspend for data*/}
-          {/*Later when mode is visible, it appear much faster, because much of work already done in the backgroudn at a lower priority*/}
-          <Activity mode="hidden">
-            <ExpensiveDashboard />
-          </Activity>
-        </Section>
-      </div>
-    </div>
+    </>
   );
 }
 

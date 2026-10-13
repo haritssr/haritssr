@@ -1,10 +1,12 @@
 import { ClockIcon } from "@heroicons/react/24/outline";
 
+import BackButton from "@/components/BackButton";
 import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
 import InternalLink from "@/components/InternalLink";
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
-import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import type { ExperimentEntry } from "@/data/ExperimentsData";
 import { getLatestExperimentUpdate } from "@/data/ExperimentsData";
 import { getAvailableExperimentDomain } from "@/utils/experimentCatalog";
@@ -25,20 +27,22 @@ export default function ExperimentDomainIndex({
       : domain.experiments;
 
   return (
-    <div className="mx-auto mt-10 min-h-screen w-full sm:px-0">
-      <div className="space-y-3">
-        <ExperimentDomainIcon size={36} src={domain.logoSrc} />
-        <PageTitle spacing="none">{domain.title}</PageTitle>
-      </div>
-      <TopLevelSectionPageDescription>
-        {domain.description}
-      </TopLevelSectionPageDescription>
+    <div className="mx-auto min-h-screen w-full sm:px-0">
+      <PageHeader
+        navigation={<BackButton href="/experiments" name="Experiments" />}
+      >
+        <div className="flex items-start gap-3">
+          <PageTitle>{domain.title}</PageTitle>
+          <ExperimentDomainIcon size={36} src={domain.logoSrc} />
+        </div>
+        <PageDescription>{domain.description}</PageDescription>
+      </PageHeader>
       {domain.groups !== undefined && domain.groups.length > 0 ? (
         <div
           className={
             domain.slug === "mathematics"
-              ? "grid grid-cols-1 items-start gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4"
-              : "space-y-20"
+              ? "grid grid-cols-1 items-start gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-4"
+              : "space-y-16"
           }
         >
           {domain.groups.map((group) => {

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 
 export default function InputList() {
   const [input, setInput] = useState<string>("");
@@ -16,6 +17,8 @@ export default function InputList() {
 
   return (
     <div>
+      <ExperimentPageHeader />
+
       <input
         aria-label="New list item"
         className="border px-2 py-1"

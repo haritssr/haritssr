@@ -2,7 +2,8 @@
 
 import { useRef } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TextEditingDemo() {
   const elementSelected = useRef(null);
@@ -11,7 +12,10 @@ export default function TextEditingDemo() {
 
   return (
     <>
-      <SubTitle>HTML built-in text editing tag</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>HTML built-in text editing tag</PageDescription>
+      </ExperimentPageHeader>
+
       <div className="flex flex-col space-y-2" ref={elementSelected}>
         <del>del</del>
         <s>s</s>

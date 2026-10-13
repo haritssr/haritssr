@@ -3,7 +3,8 @@
 import { createContext, memo, useContext, useState } from "react";
 import type { ChangeEvent } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 interface NameInputAddressProps {
   name: string;
@@ -25,10 +26,13 @@ export default function ReactUseMemo1Demo() {
 
   return (
     <>
-      <SubTitle>
-        useMemo lets you skip re-rendering components when the props are
-        unchanged
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          useMemo lets you skip re-rendering components when the props are
+          unchanged
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <NameInputAddress
         address={address}
         name={name}

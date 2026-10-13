@@ -3,9 +3,10 @@
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 interface productDataType {
   category: string;
@@ -27,17 +28,20 @@ const productData: productDataType[] = [
 export default function ReactSearchableProductDataDemo() {
   return (
     <>
-      <SubTitle>
-        By{" "}
-        <ExternalLink
-          href="https://react.dev/learn/thinking-in-react"
-          name="react.dev"
-        />
-        <ExplanationList>
-          <li>Stock finder with filter.</li>
-          <li>Haven&#39;t applied debounce.</li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          By{" "}
+          <ExternalLink
+            href="https://react.dev/learn/thinking-in-react"
+            name="react.dev"
+          />
+          <ExplanationList>
+            <li>Stock finder with filter.</li>
+            <li>Haven&#39;t applied debounce.</li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <FilterableProductTable products={productData} />
     </>
   );

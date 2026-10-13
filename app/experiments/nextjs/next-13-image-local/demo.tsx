@@ -2,22 +2,25 @@
 
 import Image from "next/image";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 import LenovoWallpaper from "@/public/images/LenovoWallPaper.jpg";
 
 export default function NextjsImageLocalDemo() {
   return (
     <>
-      <SubTitle>
-        <ExternalLink
-          href="https://beta.nextjs.org/docs/optimizing/images"
-          name="Nextjs 13 Image"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          <ExternalLink
+            href="https://beta.nextjs.org/docs/optimizing/images"
+            name="Nextjs 13 Image"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
 
-      <div className="space-y-20">
+      <div className="space-y-16">
         <Section title="Bare minimum">
           <Image
             alt="Lenovo Wallpaper"

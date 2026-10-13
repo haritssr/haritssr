@@ -1,8 +1,9 @@
 import Box from "@/components/Box";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -99,146 +100,147 @@ function SharedConceptTable() {
 
 export default function MathNotationPage() {
   return (
-    <div className="text-foreground min-w-0 space-y-20 pb-24">
-      <div className="max-w-full space-y-5">
-        <SubTitle>
+    <div className="text-foreground min-w-0 pb-24">
+      <ExperimentPageHeader>
+        <PageDescription>
           Explore which notation from Indonesian SMA/MA and SMK mathematics can
           be displayed with KaTeX or similar renderers, and which operations
           need calculation, graphing, or geometry tools.
-        </SubTitle>
+        </PageDescription>
+      </ExperimentPageHeader>
+      <div className="space-y-16">
+        <Section
+          className="min-w-0"
+          title="How notation becomes a math page"
+          id="typesetting-vs-calculation"
+          description={
+            <>
+              LaTeX-style notation describes how an expression should look.
+              KaTeX and MathJax typeset that expression. A React app can combine
+              the renderer with calculation and visualization code to make the
+              expression interactive.
+            </>
+          }
+          contentClassName="grid gap-5 sm:grid-cols-2"
+        >
+          <Box title="Display an operation">
+            <p className="text-muted text-sm leading-7">
+              KaTeX can show {katexify("2+3", false)}. The addition sign is
+              supported notation; displaying it does not evaluate the sum.
+            </p>
+            <div className="border-border overflow-x-auto rounded-lg border px-3 py-3 [&_.katex-display]:my-0">
+              {katexify("2+3", true)}
+            </div>
+          </Box>
+          <Box title="Perform an operation">
+            <p className="text-muted text-sm leading-7">
+              Calculation code finds the answer. The page then supplies the
+              result to KaTeX for display. The same division of work applies to
+              solving equations, differentiating, and multiplying matrices.
+            </p>
+            <div className="border-border overflow-x-auto rounded-lg border px-3 py-3 [&_.katex-display]:my-0">
+              {katexify("2+3=5", true)}
+            </div>
+          </Box>
+        </Section>
+
+        <Section
+          title="Chapter coverage"
+          id="high-school-examples"
+          description={
+            <>
+              These chapters include common and advanced high-school topics;
+              course coverage varies by programme. Each example below uses
+              notation supported by this site&apos;s KaTeX renderer. Similar
+              renderers such as MathJax support these standard forms, with
+              command support depending on their configuration. “Yes” means the
+              notation can be displayed. Calculation and solving require
+              additional logic in every row.
+            </>
+          }
+        >
+          <ChapterTable />
+        </Section>
+
+        <Section
+          title="Capabilities shared across chapters"
+          id="shared-math-concepts"
+          description={
+            <>
+              Some requirements belong to many chapters. Use this table when you
+              need a graph, an input field, worked steps, answer checking, or a
+              complete document rather than a single formula.
+            </>
+          }
+        >
+          <SharedConceptTable />
+        </Section>
+
+        <Section
+          className="max-w-full"
+          title="When a TeX command is unsupported"
+          id="unsupported-notation"
+          description={
+            <>
+              Support is determined by the exact command, environment, and
+              renderer configuration. KaTeX implements a documented set of TeX
+              math commands. MathJax has its own commands and optional
+              extensions. Full LaTeX document compilation uses a separate engine
+              and its installed packages.
+            </>
+          }
+        >
+          <p className="text-muted">
+            A formula can use familiar school mathematics and still contain a
+            command unavailable in the chosen renderer. Check the command,
+            rewrite it using supported notation, or use a renderer with the
+            required extension.
+          </p>
+          <p className="text-muted">
+            This site&apos;s KaTeX setup displays unsupported input with an
+            error treatment. That indicates a rendering problem; successful
+            rendering also does not establish that an equation or proof is
+            mathematically correct. A React wrapper follows the capabilities of
+            the renderer it uses.
+          </p>
+        </Section>
+
+        <Section
+          className="max-w-full"
+          title="Try the notation and check support"
+          id="try-the-notation"
+          description={
+            <>
+              Experiment in the{" "}
+              <InternalLink
+                href="/experiments/mathematics/live-playground"
+                variant="inline"
+              >
+                Live Playground
+              </InternalLink>
+              . Check exact syntax in{" "}
+              <ExternalLink
+                href="https://katex.org/docs/supported"
+                name="KaTeX supported functions"
+                size="inherit"
+              />{" "}
+              and its{" "}
+              <ExternalLink
+                href="https://katex.org/docs/support_table"
+                name="support table"
+                size="inherit"
+              />
+              . Compare other renderer options in the{" "}
+              <ExternalLink
+                href="https://docs.mathjax.org/en/latest/input/tex/index.html"
+                name="MathJax TeX documentation"
+                size="inherit"
+              />
+              .
+            </>
+          }
+        />
       </div>
-
-      <Section
-        className="min-w-0"
-        title="How notation becomes a math page"
-        id="typesetting-vs-calculation"
-        description={
-          <>
-            LaTeX-style notation describes how an expression should look. KaTeX
-            and MathJax typeset that expression. A React app can combine the
-            renderer with calculation and visualization code to make the
-            expression interactive.
-          </>
-        }
-        contentClassName="grid gap-5 sm:grid-cols-2"
-      >
-        <Box title="Display an operation">
-          <p className="text-muted text-sm leading-7">
-            KaTeX can show {katexify("2+3", false)}. The addition sign is
-            supported notation; displaying it does not evaluate the sum.
-          </p>
-          <div className="border-border overflow-x-auto rounded-lg border px-3 py-3 [&_.katex-display]:my-0">
-            {katexify("2+3", true)}
-          </div>
-        </Box>
-        <Box title="Perform an operation">
-          <p className="text-muted text-sm leading-7">
-            Calculation code finds the answer. The page then supplies the result
-            to KaTeX for display. The same division of work applies to solving
-            equations, differentiating, and multiplying matrices.
-          </p>
-          <div className="border-border overflow-x-auto rounded-lg border px-3 py-3 [&_.katex-display]:my-0">
-            {katexify("2+3=5", true)}
-          </div>
-        </Box>
-      </Section>
-
-      <Section
-        title="Chapter coverage"
-        id="high-school-examples"
-        description={
-          <>
-            These chapters include common and advanced high-school topics;
-            course coverage varies by programme. Each example below uses
-            notation supported by this site&apos;s KaTeX renderer. Similar
-            renderers such as MathJax support these standard forms, with command
-            support depending on their configuration. “Yes” means the notation
-            can be displayed. Calculation and solving require additional logic
-            in every row.
-          </>
-        }
-      >
-        <ChapterTable />
-      </Section>
-
-      <Section
-        title="Capabilities shared across chapters"
-        id="shared-math-concepts"
-        description={
-          <>
-            Some requirements belong to many chapters. Use this table when you
-            need a graph, an input field, worked steps, answer checking, or a
-            complete document rather than a single formula.
-          </>
-        }
-      >
-        <SharedConceptTable />
-      </Section>
-
-      <Section
-        className="max-w-full"
-        title="When a TeX command is unsupported"
-        id="unsupported-notation"
-        description={
-          <>
-            Support is determined by the exact command, environment, and
-            renderer configuration. KaTeX implements a documented set of TeX
-            math commands. MathJax has its own commands and optional extensions.
-            Full LaTeX document compilation uses a separate engine and its
-            installed packages.
-          </>
-        }
-      >
-        <p className="text-muted">
-          A formula can use familiar school mathematics and still contain a
-          command unavailable in the chosen renderer. Check the command, rewrite
-          it using supported notation, or use a renderer with the required
-          extension.
-        </p>
-        <p className="text-muted">
-          This site&apos;s KaTeX setup displays unsupported input with an error
-          treatment. That indicates a rendering problem; successful rendering
-          also does not establish that an equation or proof is mathematically
-          correct. A React wrapper follows the capabilities of the renderer it
-          uses.
-        </p>
-      </Section>
-
-      <Section
-        className="max-w-full"
-        title="Try the notation and check support"
-        id="try-the-notation"
-        description={
-          <>
-            Experiment in the{" "}
-            <InternalLink
-              href="/experiments/mathematics/live-playground"
-              variant="inline"
-            >
-              Live Playground
-            </InternalLink>
-            . Check exact syntax in{" "}
-            <ExternalLink
-              href="https://katex.org/docs/supported"
-              name="KaTeX supported functions"
-              size="inherit"
-            />{" "}
-            and its{" "}
-            <ExternalLink
-              href="https://katex.org/docs/support_table"
-              name="support table"
-              size="inherit"
-            />
-            . Compare other renderer options in the{" "}
-            <ExternalLink
-              href="https://docs.mathjax.org/en/latest/input/tex/index.html"
-              name="MathJax TeX documentation"
-              size="inherit"
-            />
-            .
-          </>
-        }
-      />
     </div>
   );
 }

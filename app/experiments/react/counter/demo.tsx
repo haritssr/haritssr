@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactCounterDemo() {
   const [second, setSecond] = useState(0);
@@ -39,7 +40,10 @@ export default function ReactCounterDemo() {
 
   return (
     <>
-      <SubTitle>Counter</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Counter</PageDescription>
+      </ExperimentPageHeader>
+
       <div>{formatTime(second)}</div>
       <div>{second}</div>
       <button

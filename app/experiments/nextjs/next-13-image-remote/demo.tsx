@@ -1,17 +1,20 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function NextjsImageRemoteDemo() {
   return (
     <>
-      <SubTitle>
-        <ExternalLink
-          href="https://beta.nextjs.org/docs/optimizing/images"
-          name="Nextjs 13 Image"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          <ExternalLink
+            href="https://beta.nextjs.org/docs/optimizing/images"
+            name="Nextjs 13 Image"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
 
       <section className="space-y-5">
         {/* FAIL */}

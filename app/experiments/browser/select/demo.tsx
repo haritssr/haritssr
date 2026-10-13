@@ -1,27 +1,31 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function SelectDemo() {
   return (
     <>
-      <SubTitle>
-        Browser built in select API.
-        <br />
-        The chevron down is bad, you can not manipulate that.
-        <br />
-        Alternative using{" "}
-        <ExternalLink
-          href="https://headlessui.com/react/listbox"
-          name="Headless UI Listbox"
-        />{" "}
-        or{" "}
-        <ExternalLink
-          href="https://www.radix-ui.com/docs/primitives/components/select"
-          name="Radix Primitive Select"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Browser built in select API.
+          <br />
+          The chevron down is bad, you can not manipulate that.
+          <br />
+          Alternative using{" "}
+          <ExternalLink
+            href="https://headlessui.com/react/listbox"
+            name="Headless UI Listbox"
+          />{" "}
+          or{" "}
+          <ExternalLink
+            href="https://www.radix-ui.com/docs/primitives/components/select"
+            name="Radix Primitive Select"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <select
         aria-label="Pet"
         className="w-1/3 px-2 py-2"

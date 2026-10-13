@@ -1,11 +1,9 @@
 "use client";
 
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-import PageTitle from "@/components/PageTitle";
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 // Mermaid chart definitions
 const dataFlowChart = `
@@ -338,18 +336,17 @@ const charts = [
 export default function TaskArchitecturePage() {
   return (
     <div className="pb-8">
-      <Link
-        className="text-action hover:text-action-hover mt-10 -mb-10 flex w-fit items-center"
-        href="/experiments/ui-explorations/task"
+      <ExperimentPageHeader
+        back={{ href: "/experiments/ui-explorations/task", name: "Task" }}
+        title="Architecture"
       >
-        <ChevronLeftIcon className="h-5 w-5 stroke-2" />
-        Task
-      </Link>
-      <PageTitle>Architecture</PageTitle>
-      <SubTitle>How the task app works under the hood.</SubTitle>
+        <PageDescription>
+          How the task app works under the hood.
+        </PageDescription>
+      </ExperimentPageHeader>
 
       {/* Overview */}
-      <div className="space-y-20">
+      <div className="space-y-16">
         <div className="rounded-xl border border-zinc-200 p-4">
           <h2 className="mb-2 font-semibold text-zinc-800">Overview</h2>
           <p className="text-sm text-zinc-600">
@@ -445,7 +442,7 @@ export default function TaskArchitecturePage() {
         </div>
 
         {/* Mermaid Diagrams */}
-        <div className="space-y-20">
+        <div className="space-y-16">
           {charts.map((chart) => (
             <div key={chart.id}>
               <h2 className="mb-3 font-semibold text-zinc-800">

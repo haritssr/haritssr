@@ -4,11 +4,10 @@ import { NumberField } from "@base-ui/react/number-field";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChangeEvent, MouseEvent, SubmitEvent } from "react";
 
-import BackButton from "@/components/BackButton";
 import ExperimentPageBadge from "@/components/ExperimentPageBadge";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import InternalLink from "@/components/InternalLink";
-import PageTitle from "@/components/PageTitle";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 import {
   MAX_TASK_DURATION_MINUTES,
@@ -419,23 +418,26 @@ export default function TaskPage() {
 
   return (
     <>
-      <BackButton href="/experiments/ui-explorations" name="UI Explorations" />
-      <PageTitle>Task</PageTitle>
-      <SubTitle>Realistic Daily Time Budget.</SubTitle>
-      <ExperimentPageBadge />
-      <section className="mt-2 flex items-center space-x-5">
-        <InternalLink href="/experiments/ui-explorations/task/history">
-          History
-        </InternalLink>
-        <InternalLink href="/experiments/ui-explorations/task/statistics">
-          Statistics
-        </InternalLink>
-        <InternalLink href="/experiments/ui-explorations/task/architecture">
-          Architecture
-        </InternalLink>
-      </section>
+      <ExperimentPageHeader
+        back={{ href: "/experiments/ui-explorations", name: "UI Explorations" }}
+        title="Task"
+      >
+        <PageDescription>Realistic Daily Time Budget.</PageDescription>
+        <ExperimentPageBadge />
+        <section className="flex items-center space-x-5">
+          <InternalLink href="/experiments/ui-explorations/task/history">
+            History
+          </InternalLink>
+          <InternalLink href="/experiments/ui-explorations/task/statistics">
+            Statistics
+          </InternalLink>
+          <InternalLink href="/experiments/ui-explorations/task/architecture">
+            Architecture
+          </InternalLink>
+        </section>
+      </ExperimentPageHeader>
 
-      <div className="text-foreground/70 mt-6 text-sm" aria-live="polite">
+      <div className="text-foreground/70 text-sm" aria-live="polite">
         {taskDate === null && persistenceError === null ? (
           <p>Loading tasks…</p>
         ) : null}
@@ -468,7 +470,7 @@ export default function TaskPage() {
       </div>
       <fieldset disabled={!isHydratedFromDb}>
         <legend className="sr-only">Daily tasks</legend>
-        <div className="space-y-20">
+        <div className="space-y-16">
           <form
             className="mt-10 flex flex-wrap items-center gap-2"
             onSubmit={handleAddOtherTask}

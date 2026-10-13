@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import PageTitle from "@/components/PageTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import {
   getNextjsArticle,
   NextjsArticlesData,
@@ -35,7 +35,8 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-full px-5 xl:px-0">
-      <PageTitle>{article.title}</PageTitle>
+      <ExperimentPageHeader title={article.title} />
+
       <div className="text-action">Article {article.id}</div>
       <div className="mt-5 text-zinc-600">{article.body}</div>
     </div>

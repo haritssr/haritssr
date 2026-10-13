@@ -1,11 +1,15 @@
 "use client";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function YoutubeEmbedDemo() {
   return (
     <>
-      <SubTitle>Youtube Embed</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Youtube Embed</PageDescription>
+      </ExperimentPageHeader>
+
       <iframe
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pictureBin-picture"
         allowFullScreen={true}

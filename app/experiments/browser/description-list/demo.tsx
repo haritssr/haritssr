@@ -1,26 +1,30 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function DescriptionListDemo() {
   return (
     <>
-      <SubTitle>
-        <ExternalLink
-          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl"
-          name="The Description List element"
-        />
-        <ExplanationList>
-          <li>Glossary with built-in dl, dt, dd browser API.</li>
-          <li>The default style overrided by Tailwind CSS preflight.</li>
-          <li>
-            In apperance it just about styling, but from HTML perspective it is
-            semantic element for accesibility.
-          </li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          <ExternalLink
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl"
+            name="The Description List element"
+          />
+          <ExplanationList>
+            <li>Glossary with built-in dl, dt, dd browser API.</li>
+            <li>The default style overrided by Tailwind CSS preflight.</li>
+            <li>
+              In apperance it just about styling, but from HTML perspective it
+              is semantic element for accesibility.
+            </li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <dl className="sm:w-1/2">
         <dt className="font-bold">This is title</dt>
         <dd className="mb-5 pl-10">

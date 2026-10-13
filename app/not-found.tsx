@@ -31,7 +31,6 @@ export default function NotFound() {
         </>
       }
       description="The route may have moved or no longer exists."
-      fullScreen
       title="Page Not Found"
     />
   );

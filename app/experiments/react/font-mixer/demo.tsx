@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 interface FontMixerProps {
   fonts: [string, string];
@@ -12,7 +13,10 @@ interface FontMixerProps {
 export default function ReactFontMixerDemo() {
   return (
     <>
-      <SubTitle>Font Mixer</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Font Mixer</PageDescription>
+      </ExperimentPageHeader>
+
       <FontMixer fonts={["Arial", "Arial"]}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
         convallis mauris dui, non placerat urna fringilla at. Suspendisse a orci

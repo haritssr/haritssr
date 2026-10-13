@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -52,65 +53,66 @@ const questions: readonly PracticeQuestion[] = [
 
 export default function LimitsPage() {
   return (
-    <div className="space-y-20 pb-24">
-      <div className="max-w-full">
-        <SubTitle>
+    <div className="pb-24">
+      <ExperimentPageHeader>
+        <PageDescription>
           A limit asks where a function is heading as its input gets close to a
           point. Start by watching nearby values, not by substituting the point.
-        </SubTitle>
+        </PageDescription>
+      </ExperimentPageHeader>
+      <div className="space-y-20">
+        <Section
+          className="text-muted max-w-full text-base"
+          title="What does approaching mean?"
+        >
+          <p>
+            Pick a target on the horizontal axis. Move toward it from the left
+            and right, and watch the function’s height. For a limit to exist
+            from both sides, those heights must head toward the same value.
+          </p>
+          <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
+            {katexify(
+              String.raw`\lim_{x\to a}f(x)=L\quad\Longleftrightarrow\quad\lim_{x\to a^-}f(x)=\lim_{x\to a^+}f(x)=L`,
+              true
+            )}
+          </div>
+          <p>
+            The function can have a hole or a different value at the target. A
+            limit describes nearby inputs, so that single point does not decide
+            the answer.
+          </p>
+        </Section>
+
+        <LimitsLab />
+
+        <Section
+          className="text-muted max-w-full text-base"
+          title="Try a limit by hand"
+          description={
+            <>
+              Consider the fraction below. Substitution at the target gives an
+              undefined fraction, but factoring shows what happens nearby.
+            </>
+          }
+        >
+          <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
+            {katexify(
+              String.raw`\frac{x^2-1}{x-1}=\frac{(x-1)(x+1)}{x-1}=x+1\quad(x\ne1)`,
+              true
+            )}
+          </div>
+          <p>
+            The simplified expression has a height approaching{" "}
+            {katexify("2", false)} from either side. The original fraction is
+            still undefined at the target, yet its limit exists:
+          </p>
+          <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
+            {katexify(String.raw`\lim_{x\to1}\frac{x^2-1}{x-1}=2`, true)}
+          </div>
+        </Section>
+
+        <Practice questions={questions} />
       </div>
-
-      <Section
-        className="text-muted max-w-full text-base"
-        title="What does approaching mean?"
-      >
-        <p>
-          Pick a target on the horizontal axis. Move toward it from the left and
-          right, and watch the function’s height. For a limit to exist from both
-          sides, those heights must head toward the same value.
-        </p>
-        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
-          {katexify(
-            String.raw`\lim_{x\to a}f(x)=L\quad\Longleftrightarrow\quad\lim_{x\to a^-}f(x)=\lim_{x\to a^+}f(x)=L`,
-            true
-          )}
-        </div>
-        <p>
-          The function can have a hole or a different value at the target. A
-          limit describes nearby inputs, so that single point does not decide
-          the answer.
-        </p>
-      </Section>
-
-      <LimitsLab />
-
-      <Section
-        className="text-muted max-w-full text-base"
-        title="Try a limit by hand"
-        description={
-          <>
-            Consider the fraction below. Substitution at the target gives an
-            undefined fraction, but factoring shows what happens nearby.
-          </>
-        }
-      >
-        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
-          {katexify(
-            String.raw`\frac{x^2-1}{x-1}=\frac{(x-1)(x+1)}{x-1}=x+1\quad(x\ne1)`,
-            true
-          )}
-        </div>
-        <p>
-          The simplified expression has a height approaching{" "}
-          {katexify("2", false)} from either side. The original fraction is
-          still undefined at the target, yet its limit exists:
-        </p>
-        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
-          {katexify(String.raw`\lim_{x\to1}\frac{x^2-1}{x-1}=2`, true)}
-        </div>
-      </Section>
-
-      <Practice questions={questions} />
     </div>
   );
 }

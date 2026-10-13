@@ -2,14 +2,18 @@
 
 import { useEffect, useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ClockDemo() {
   return (
     <>
-      <SubTitle>
-        Clock using new Date(), useEffect(), useInterval(), cleanInterval()
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Clock using new Date(), useEffect(), useInterval(), cleanInterval()
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <Clock />
     </>
   );

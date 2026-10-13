@@ -3,6 +3,8 @@ import { Accordion } from "@base-ui/react/accordion";
 import "katex/dist/katex.min.css";
 import { ArrowRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import PrerequisiteGraph from "@/components/PrerequisiteGraph";
 import type {
   PrerequisiteGraphEdgeData,
@@ -10,7 +12,6 @@ import type {
 } from "@/components/PrerequisiteGraph";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
-import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -80,10 +81,10 @@ export default function UnitsPage() {
         ]}
       />
       <div>
-        <div className="max-w-full">
-          <SubTitle>{DESCRIPTION}</SubTitle>
-        </div>
-        <div className="space-y-20">
+        <ExperimentPageHeader>
+          <PageDescription>{DESCRIPTION}</PageDescription>
+        </ExperimentPageHeader>
+        <div className="space-y-16">
           <Section title="Base Quantities">
             <UnitsTable caption="The seven SI base units" units={BASE_UNITS} />
           </Section>

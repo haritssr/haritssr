@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactUseEffectTitleDemo() {
   const [count, setCount] = useState(0);
@@ -14,7 +15,10 @@ export default function ReactUseEffectTitleDemo() {
 
   return (
     <>
-      <SubTitle>Count = {count}</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Count = {count}</PageDescription>
+      </ExperimentPageHeader>
+
       <div className="space-x-2">
         <button
           onClick={() => {

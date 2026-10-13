@@ -2,12 +2,16 @@
 
 import Balancer from "react-wrap-balancer";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactWrapBalancerDemo() {
   return (
     <>
-      <SubTitle>React Wrap Balancer</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>React Wrap Balancer</PageDescription>
+      </ExperimentPageHeader>
+
       <Balancer>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos similique
         rem eos praesentium odio atque voluptatum, recusandae harum provident

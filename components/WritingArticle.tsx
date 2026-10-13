@@ -16,7 +16,7 @@ export default function WritingArticle({
 
   return (
     <div className="min-h-screen w-full">
-      <article className="pb-24 sm:pl-2" ref={articleRef}>
+      <article className="pb-24" ref={articleRef}>
         {children}
       </article>
       <ArticleTableOfContents

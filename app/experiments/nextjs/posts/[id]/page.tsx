@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import MarkdownContent from "@/components/mdx";
-import PageTitle from "@/components/PageTitle";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { getAllPostIds, getPostData, getPostSummary } from "@/utils/posts";
 
@@ -27,12 +27,14 @@ export default async function PostPage({
 
   return (
     <>
-      <PageTitle>{postData.title}</PageTitle>
-      <SubTitle>
-        <time dateTime={postData.date}>
-          {postDateFormatter.format(new Date(postData.date))}
-        </time>
-      </SubTitle>
+      <ExperimentPageHeader title={postData.title}>
+        <PageDescription>
+          <time dateTime={postData.date}>
+            {postDateFormatter.format(new Date(postData.date))}
+          </time>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia

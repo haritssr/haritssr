@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 const defaultFormData = {
   title: "",
@@ -34,11 +35,14 @@ export default function ReactSubmitFormDemo() {
 
   return (
     <>
-      <SubTitle>
-        <ExplanationList>
-          <li>Submit (as console.log) contents of input.</li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          <ExplanationList>
+            <li>Submit (as console.log) contents of input.</li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <form className="w-full space-y-5 sm:w-1/3" onSubmit={onSubmit}>
         <div className={wrapperStyle}>
           <label htmlFor="title">Title</label>

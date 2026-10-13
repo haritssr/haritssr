@@ -3,8 +3,9 @@
 import type { ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 import data from "@/data/search-books.json";
 
 interface DataType {
@@ -51,12 +52,15 @@ export default function ReactSearchBooksDemo(): ReactElement {
   // const parsedData = JSON.parse(data);
   return (
     <>
-      <SubTitle>
-        <ExplanationList>
-          <li>Include : case sensitive (lowercase).</li>
-          <li>Not include: space sensitive.</li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          <ExplanationList>
+            <li>Include : case sensitive (lowercase).</li>
+            <li>Not include: space sensitive.</li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div className="group mx-auto flex items-center sm:w-1/3">
         <input
           aria-label="Search books"

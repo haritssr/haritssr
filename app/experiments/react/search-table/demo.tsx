@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 interface User {
   id: number;
@@ -66,25 +67,28 @@ export default function ReactSearchTableDemo() {
 
   return (
     <>
-      <SubTitle>
-        <ExplanationList>
-          <li>
-            Inspired by{" "}
-            <ExternalLink
-              href="https://www.youtube.com/watch?v=MY6ZZIn93V8"
-              name="Lama Dev"
-            />
-          </li>
-          <li>
-            Data source: the local{" "}
-            <code className="rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-mono text-sm">
-              /api/searchWithApi
-            </code>{" "}
-            route.
-          </li>
-          <li>Already applied debounce on search.</li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          <ExplanationList>
+            <li>
+              Inspired by{" "}
+              <ExternalLink
+                href="https://www.youtube.com/watch?v=MY6ZZIn93V8"
+                name="Lama Dev"
+              />
+            </li>
+            <li>
+              Data source: the local{" "}
+              <code className="rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-mono text-sm">
+                /api/searchWithApi
+              </code>{" "}
+              route.
+            </li>
+            <li>Already applied debounce on search.</li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <input
         aria-label="Search people"
         className="mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-hidden"

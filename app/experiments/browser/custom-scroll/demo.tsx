@@ -1,11 +1,15 @@
 "use client";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function CustomScrollDemo() {
   return (
     <>
-      <SubTitle>Custom Scroll</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Custom Scroll</PageDescription>
+      </ExperimentPageHeader>
+
       <div className="h-40 overflow-y-scroll">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias non
         assumenda harum facere tempore a sequi tempora vel adipisci ad itaque,

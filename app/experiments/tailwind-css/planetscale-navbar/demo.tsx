@@ -1,11 +1,17 @@
 "use client";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindPlanetscaleNavbarDemo() {
   return (
     <>
-      <SubTitle>Responsive PlanetScale navigation bar. </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Responsive PlanetScale navigation bar.{" "}
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div className="text-tiny flex h-auto w-full flex-col items-start justify-between space-y-5 rounded-md bg-[#1a1b21] px-6 py-6 md:flex-row md:items-center md:space-y-0 md:py-4 md:pr-4">
         <div className="flex w-full items-center space-x-2 md:w-1/3">
           <svg

@@ -2,13 +2,17 @@
 
 import { useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindSidebarDemo() {
   const [open, setOpen] = useState(true);
   return (
     <>
-      <SubTitle>Sidebar example</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Sidebar example</PageDescription>
+      </ExperimentPageHeader>
+
       <div className="flex flex-row overflow-hidden rounded border border-zinc-400">
         {/* Side Bar */}
         <div className={`w-1/4 bg-zinc-200 ${open ? "block" : "hidden"}`}>

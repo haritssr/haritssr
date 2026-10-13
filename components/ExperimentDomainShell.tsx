@@ -4,8 +4,7 @@ import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
 import ArticleTableOfContents from "@/components/ArticleTableOfContents";
-import BackButton from "@/components/BackButton";
-import PageTitle from "@/components/PageTitle";
+import { ExperimentHeaderContext } from "@/components/ExperimentPageHeader";
 import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 
 interface ExperimentDomainShellProps {
@@ -49,23 +48,20 @@ export default function ExperimentDomainShell({
   const backButtonName = segments.length === 3 ? domainTitle : prevRoute;
 
   return (
-    <div className="min-h-screen w-full sm:-mt-px">
+    <div className="min-h-screen w-full">
       <div className="w-full">
         <article className="sm:px-0" ref={articleRef}>
-          {experiment?.hideBackButton !== true && (
-            <BackButton href={parentPath} name={backButtonName} />
-          )}
-          {!isIndexPage && (
-            <div
-              data-article-back-label={backButtonName}
-              data-article-parent={parentPath}
-              data-article-path={segments.length === 3 ? pathname : undefined}
-              data-article-title={title}
-            >
-              {experiment?.hideTitle !== true && <PageTitle>{title}</PageTitle>}
-            </div>
-          )}
-          {children}
+          <ExperimentHeaderContext
+            value={{
+              back: { href: parentPath, name: backButtonName },
+              hideBackButton: experiment?.hideBackButton === true,
+              hideTitle: experiment?.hideTitle === true,
+              path: segments.length === 3 ? pathname : undefined,
+              title,
+            }}
+          >
+            {children}
+          </ExperimentHeaderContext>
         </article>
         {!isIndexPage && (
           <ArticleTableOfContents

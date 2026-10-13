@@ -2,14 +2,17 @@
 
 import type React from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindCenteringDivDemo() {
   return (
     <>
-      <SubTitle>
-        Methods to centering div in Tailwind CSS or inline CSS
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Methods to centering div in Tailwind CSS or inline CSS
+        </PageDescription>
+      </ExperimentPageHeader>
 
       <section className="grid grid-cols-1 gap-10 sm:grid-cols-2">
         <Wrapper

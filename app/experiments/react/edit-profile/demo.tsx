@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactEditProfileDemo() {
   const [firstName, setFirstName] = useState("Harits");
@@ -12,17 +13,22 @@ export default function ReactEditProfileDemo() {
   const [isEditing, setIsEditing] = useState(false);
   return (
     <>
-      <SubTitle>
-        From{" "}
-        <ExternalLink
-          href="https://react.dev/learn/reacting-to-input-with-state#challenges"
-          name="react.dev"
-        />{" "}
-        <br />
-        <ExplanationList>
-          <li>Try to edit the profile and save to see the result of change.</li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          From{" "}
+          <ExternalLink
+            href="https://react.dev/learn/reacting-to-input-with-state#challenges"
+            name="react.dev"
+          />{" "}
+          <br />
+          <ExplanationList>
+            <li>
+              Try to edit the profile and save to see the result of change.
+            </li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();

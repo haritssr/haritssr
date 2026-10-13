@@ -4,7 +4,8 @@ import { useState } from "react";
 import type { ReactElement, ReactNode, ReactPortal } from "react";
 import type { JSX } from "react/jsx-runtime";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 interface Todo {
   id: number;
@@ -65,7 +66,10 @@ export default function ReactUseStateTodoListDemo() {
 
   return (
     <>
-      <SubTitle>Todo list with useState</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Todo list with useState</PageDescription>
+      </ExperimentPageHeader>
+
       <AddTodo onAddTodo={handleAddTodo} />
       <TaskList
         onChangeTodo={handleChangeTodo}

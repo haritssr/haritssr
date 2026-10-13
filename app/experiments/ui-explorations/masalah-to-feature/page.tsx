@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import GraphView from "./GraphView";
@@ -17,7 +18,10 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function MasalahToFeaturePage() {
   return (
     <>
-      <SubTitle>{DESCRIPTION}</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>{DESCRIPTION}</PageDescription>
+      </ExperimentPageHeader>
+
       <GraphView />
     </>
   );

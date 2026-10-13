@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 import ExperimentsGrid from "@/components/ExperimentsGrid";
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import { getAvailableExperimentCount } from "@/utils/experimentCatalog";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -17,10 +18,10 @@ export const metadata: Metadata = createPageMetadata({
 export default function ExperimentsPage() {
   return (
     <>
-      <PageTitle>Experiments</PageTitle>
-      <TopLevelSectionPageDescription>
-        {experimentsHomeDescription}
-      </TopLevelSectionPageDescription>
+      <PageHeader>
+        <PageTitle>Experiments</PageTitle>
+        <PageDescription>{experimentsHomeDescription}</PageDescription>
+      </PageHeader>
       <ExperimentsGrid />
     </>
   );

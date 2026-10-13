@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import PageTitle from "@/components/PageTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import {
   getNextjsStudent,
   NextjsStudentsData,
@@ -35,8 +35,9 @@ export default async function StudentPage({ params }: Props) {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-full px-5 xl:px-0">
-      <PageTitle>Student Details</PageTitle>
-      <div className="mt-5 space-y-2">
+      <ExperimentPageHeader title="Student Details" />
+
+      <div className="space-y-2">
         <div className="text-zinc-500">
           <span className="font-semibold text-zinc-800">Name :</span>{" "}
           {student.name}

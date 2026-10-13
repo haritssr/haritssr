@@ -1,4 +1,5 @@
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 const rows = [
   "A scrollbar appears when you hover over this area.",
@@ -14,12 +15,14 @@ const rows = [
 export default function ScrollbarDemo() {
   return (
     <>
-      <SubTitle>
-        Hover over the scroll areas and drag their thumbs to try a scrollbar
-        that stays transparent until it is needed.
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Hover over the scroll areas and drag their thumbs to try a scrollbar
+          that stays transparent until it is needed.
+        </PageDescription>
+      </ExperimentPageHeader>
 
-      <div className="space-y-20 pb-16">
+      <div className="space-y-16 pb-16">
         <section aria-labelledby="vertical-scrollbar-title">
           <h2
             className="mb-3 text-lg font-semibold"

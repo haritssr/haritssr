@@ -1,11 +1,14 @@
 "use client";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindYoutubeThumbnailDemo() {
   return (
     <>
-      <SubTitle>Youtube Thumbnail example</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Youtube Thumbnail example</PageDescription>
+      </ExperimentPageHeader>
 
       <div className="relative h-[360px] w-full overflow-hidden rounded-md border border-purple-300 bg-linear-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">
         <div>

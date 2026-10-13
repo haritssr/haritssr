@@ -1,28 +1,16 @@
-import type { ReactNode, Ref } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 
-export default function PageTitle({
-  children,
-  size = "default",
-  ref,
-  spacing = "default",
-}: {
+export type PageTitleProps = Omit<ComponentPropsWithRef<"h1">, "className"> & {
   children: ReactNode;
-  size?: "default" | "large";
-  ref?: Ref<HTMLHeadingElement>;
-  spacing?: "default" | "none";
-}) {
-  const spacingClassName = spacing === "default" ? "mt-10 mb-4 sm:mt-16" : "";
-  const sizeClassName =
-    size === "large" ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl";
+};
 
+export default function PageTitle({ children, ...props }: PageTitleProps) {
   return (
-    <div>
-      <h1
-        className={`text-foreground font-bold text-balance ${sizeClassName} ${spacingClassName}`}
-        ref={ref}
-      >
-        {children}
-      </h1>
-    </div>
+    <h1
+      {...props}
+      className="text-foreground text-3xl font-bold text-balance sm:text-4xl"
+    >
+      {children}
+    </h1>
   );
 }

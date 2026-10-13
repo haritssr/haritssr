@@ -8,7 +8,8 @@ import type {
   Ref,
 } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 interface MyInputHandle {
   focus: () => void;
@@ -42,7 +43,10 @@ type PostProps = HTMLAttributes<HTMLDivElement> & {
 export default function ReactUseImperativeHandleDemo() {
   return (
     <>
-      <SubTitle>Example</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Example</PageDescription>
+      </ExperimentPageHeader>
+
       <SomeApp />
       <Yada />
     </>

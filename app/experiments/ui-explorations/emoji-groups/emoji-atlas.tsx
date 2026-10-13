@@ -1,3 +1,5 @@
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 import EmojiSelector from "./emoji-selector";
 
@@ -499,18 +501,17 @@ const groupings = [
 export default function EmojiAtlas() {
   return (
     <>
+      <ExperimentPageHeader>
+        <p className="text-foreground/60 text-sm font-medium tracking-wide uppercase">
+          A visual field guide
+        </p>
+        <PageDescription>
+          Explore the same emoji through different lenses. Choose to group them
+          by color, shape similarity, type, or theme.
+        </PageDescription>
+      </ExperimentPageHeader>
 
-      <div className="space-y-20 pb-12">
-        <header className="max-w-full space-y-3">
-          <p className="text-foreground/60 text-sm font-medium tracking-wide uppercase">
-            A visual field guide
-          </p>
-          <p className="text-foreground/80 text-lg leading-relaxed">
-            Explore the same emoji through different lenses. Choose to group
-            them by color, shape similarity, type, or theme.
-          </p>
-        </header>
-
+      <div className="space-y-16 pb-12">
         <EmojiSelector groupings={groupings} initialGrouping="color" />
 
         <p className="text-foreground/55 max-w-full text-sm leading-relaxed">

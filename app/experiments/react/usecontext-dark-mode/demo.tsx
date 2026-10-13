@@ -4,7 +4,8 @@ import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 type Theme = "light" | "dark";
 
@@ -28,7 +29,10 @@ export default function ReactUseContextDarkModeDemo() {
   const [theme, setTheme] = useState<Theme>("light");
   return (
     <>
-      <SubTitle>Yeah</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Yeah</PageDescription>
+      </ExperimentPageHeader>
+
       <ThemeContext.Provider value={theme}>
         <div className="space-y-2">
           <Form />

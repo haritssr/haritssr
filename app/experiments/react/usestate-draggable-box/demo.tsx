@@ -3,8 +3,9 @@
 import { useState } from "react";
 import type { ChangeEvent, PointerEvent, ReactNode } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 interface Position {
   x: number;
@@ -57,13 +58,16 @@ export default function ReactUseStateDraggableBoxDemo() {
 
   return (
     <>
-      <SubTitle>
-        Draggable Box By{" "}
-        <ExternalLink
-          href="https://react.dev/learn/updating-objects-in-state"
-          name="react.dev"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Draggable Box By{" "}
+          <ExternalLink
+            href="https://react.dev/learn/updating-objects-in-state"
+            name="react.dev"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div className="mb-5 w-full sm:w-1/6">
         <select
           aria-label="Box color"

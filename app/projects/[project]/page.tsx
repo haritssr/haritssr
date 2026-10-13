@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
+import PageTitle from "@/components/PageTitle";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { getProjectSlug } from "@/utils/projectSlug";
 
@@ -50,31 +53,26 @@ export default async function ProjectPage({
   }
 
   return (
-    <div className="bg-white">
+    <div>
       <div className="mx-auto min-h-screen w-full max-w-full">
-        <div className="pt-10 sm:pt-20">
-          <BackButton href="/projects" name="All Projects" />
-        </div>
-        {/* Title */}
-        <section className="border-border bg-foreground/5 my-8 flex items-center justify-between rounded-md border px-3 py-2 sm:my-10 sm:px-5 sm:py-4">
-          <div>
-            <h1 className="text-2xl font-bold wrap-break-word sm:text-3xl">
-              {project.project_name}
-            </h1>
-            <div className="text-muted text-lg">
-              {project.about_client.website.slice(8)}
-            </div>
+        <PageHeader
+          navigation={<BackButton href="/projects" name="All Projects" />}
+        >
+          <div className="flex items-start justify-between gap-4">
+            <PageTitle>{project.project_name}</PageTitle>
+            <Image
+              alt=""
+              blurDataURL={project.about_client.logo_src}
+              className="size-10 shrink-0 object-contain"
+              height="40"
+              src={project.about_client.logo_src}
+              width="40"
+            />
           </div>
-          <Image
-            alt=""
-            blurDataURL={project.about_client.logo_src}
-            className="h-12 w-12"
-            height="40"
-            src={project.about_client.logo_src}
-            width="40"
-            // placeholder='blur'
-          />
-        </section>
+          <PageDescription>
+            {project.about_client.website.slice(8)}
+          </PageDescription>
+        </PageHeader>
         <div className="space-y-16">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-16">
             {/* About The Client */}

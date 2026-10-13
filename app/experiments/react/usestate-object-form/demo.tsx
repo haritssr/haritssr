@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactUseStateObjectFormDemo() {
   const [person, setPerson] = useState({
@@ -26,18 +27,21 @@ export default function ReactUseStateObjectFormDemo() {
   const labelStyle = "flex flex-col space-y-0.5 w-full sm:w-fit text-sm";
   return (
     <>
-      <SubTitle>
-        <ExternalLink
-          href="https://react.dev/learn/updating-objects-in-state"
-          name="Updating objects in state"
-        />
-        <ExplanationList>
-          <li>
-            Fill the input and simultaneously the value of the input will appear
-            in the buttom.
-          </li>
-        </ExplanationList>
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          <ExternalLink
+            href="https://react.dev/learn/updating-objects-in-state"
+            name="Updating objects in state"
+          />
+          <ExplanationList>
+            <li>
+              Fill the input and simultaneously the value of the input will
+              appear in the buttom.
+            </li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <form className="mb-5 flex flex-col space-y-3">
         <label className={labelStyle}>
           First Name

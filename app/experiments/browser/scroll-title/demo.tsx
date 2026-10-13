@@ -2,13 +2,17 @@
 
 import { useInView } from "react-intersection-observer";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ScrollTitleDemo() {
   const { ref, inView } = useInView();
   return (
     <>
-      <SubTitle>Scroll Title iOS</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Scroll Title iOS</PageDescription>
+      </ExperimentPageHeader>
+
       <nav className="sticky top-[90px] flex justify-between bg-blue-100/80 p-2 saturate-150 backdrop-blur">
         <div className="text-action flex w-1/3 items-center space-x-1">
           <Left />

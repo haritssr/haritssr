@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import ProjectsCard from "@/components/ProjectsCard";
-import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import { ProjectsData } from "../../data/ProjectsData";
@@ -19,10 +20,10 @@ export const metadata: Metadata = createPageMetadata({
 export default function ProjectsPage() {
   return (
     <>
-      <PageTitle>Projects</PageTitle>
-      <TopLevelSectionPageDescription>
-        {PROJECTS_DESCRIPTION}
-      </TopLevelSectionPageDescription>
+      <PageHeader>
+        <PageTitle>Projects</PageTitle>
+        <PageDescription>{PROJECTS_DESCRIPTION}</PageDescription>
+      </PageHeader>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4">
         {ProjectsData.map((project) => (
           <ProjectsCard

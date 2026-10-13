@@ -2,12 +2,13 @@ import { Accordion } from "@base-ui/react/accordion";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 
-import "katex/dist/katex.min.css";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import PageTitle from "@/components/PageTitle";
+
+import "katex/dist/katex.min.css";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
-import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -25,11 +26,11 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function PhysicsEquationsPage() {
   return (
     <>
-      <PageTitle size="large">Essential Physics Equations</PageTitle>
-      <div className="max-w-full">
-        <SubTitle>{DESCRIPTION}</SubTitle>
-      </div>
-      <article className={`${styles.equations} space-y-20 pb-24`}>
+      <ExperimentPageHeader title="Essential Physics Equations">
+        <PageDescription>{DESCRIPTION}</PageDescription>
+      </ExperimentPageHeader>
+
+      <article className={`${styles.equations} space-y-16 pb-24`}>
         {PHYSICS_DOMAINS.map((domain) => (
           <div className="min-w-0 scroll-mt-24" id={domain.id} key={domain.id}>
             <SectionHeading
@@ -41,7 +42,7 @@ export default function PhysicsEquationsPage() {
             <p className="text-foreground/65 mb-20 max-w-full text-base leading-7">
               {domain.description}
             </p>
-            <div className="space-y-20">
+            <div className="space-y-16">
               {domain.equations.map((equation) => (
                 <EquationSection equation={equation} key={equation.id} />
               ))}

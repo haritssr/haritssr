@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -52,88 +54,92 @@ const comparisonRows = [
 
 export default function CornerSmoothingPage() {
   return (
-    <div className="space-y-20 pb-16">
-      <p className="text-foreground/80 max-w-full text-lg leading-relaxed">
-        Compare the same size, radius, and color across three corner treatments.
-        The CSS example uses this site’s Tailwind utility, which sets native
-        <code> corner-shape: squircle</code>. Lisse uses a different curve, so
-        equal radius values do not guarantee identical outlines.
-      </p>
+    <div className="pb-16">
+      <ExperimentPageHeader>
+        <PageDescription>
+          Compare the same size, radius, and color across three corner
+          treatments. The CSS example uses this site’s Tailwind utility, which
+          sets native
+          <code> corner-shape: squircle</code>. Lisse uses a different curve, so
+          equal radius values do not guarantee identical outlines.
+        </PageDescription>
+      </ExperimentPageHeader>
+      <div className="space-y-16">
+        <Section title="Compare the corners" id="corner-comparison-heading">
+          <CornerComparison />
+        </Section>
 
-      <Section title="Compare the corners" id="corner-comparison-heading">
-        <CornerComparison />
-      </Section>
-
-      <Section title="What changes?" id="corner-differences-heading">
-        <Table className="min-w-160">
-          <caption className="sr-only">
-            Differences between rounded corners, CSS squircles, and Lisse
-          </caption>
-          <thead>
-            <tr className="divide-border bg-foreground/5 divide-x">
-              {["Feature", "Rounded corners", "CSS squircle", "Lisse"].map(
-                (heading) => (
-                  <th
-                    className="px-3 py-2 text-left font-medium whitespace-nowrap"
-                    key={heading}
-                    scope="col"
-                  >
-                    {heading}
-                  </th>
-                )
-              )}
-            </tr>
-          </thead>
-          <tbody className="divide-border divide-y">
-            {comparisonRows.map((row) => (
-              <tr className="divide-border divide-x" key={row.feature}>
-                <th
-                  className="px-3 py-3 text-left align-top font-medium"
-                  scope="row"
-                >
-                  {row.feature}
-                </th>
-                {[row.rounded, row.css, row.lisse].map((value) => (
-                  <td className="px-3 py-3 align-top" key={value}>
-                    {value}
-                  </td>
-                ))}
+        <Section title="What changes?" id="corner-differences-heading">
+          <Table className="min-w-160">
+            <caption className="sr-only">
+              Differences between rounded corners, CSS squircles, and Lisse
+            </caption>
+            <thead>
+              <tr className="divide-border bg-foreground/5 divide-x">
+                {["Feature", "Rounded corners", "CSS squircle", "Lisse"].map(
+                  (heading) => (
+                    <th
+                      className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                      key={heading}
+                      scope="col"
+                    >
+                      {heading}
+                    </th>
+                  )
+                )}
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Section>
+            </thead>
+            <tbody className="divide-border divide-y">
+              {comparisonRows.map((row) => (
+                <tr className="divide-border divide-x" key={row.feature}>
+                  <th
+                    className="px-3 py-3 text-left align-top font-medium"
+                    scope="row"
+                  >
+                    {row.feature}
+                  </th>
+                  {[row.rounded, row.css, row.lisse].map((value) => (
+                    <td className="px-3 py-3 align-top" key={value}>
+                      {value}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Section>
 
-      <Section
-        title="Explore further"
-        id="corner-reading-heading"
-        description={
-          <>
-            Use native CSS when the browser’s corner curve fits your design and
-            rounded corners are an acceptable fallback. Read the{" "}
+        <Section
+          title="Explore further"
+          id="corner-reading-heading"
+          description={
+            <>
+              Use native CSS when the browser’s corner curve fits your design
+              and rounded corners are an acceptable fallback. Read the{" "}
+              <ExternalLink
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/corner-shape"
+                name="corner-shape documentation"
+                size="inherit"
+              />{" "}
+              for its behavior and current browser compatibility.
+            </>
+          }
+          contentClassName="text-foreground/80 max-w-full space-y-4 leading-relaxed"
+        >
+          <p>
+            Use Lisse when you want Figma-style smoothing with an adjustable
+            amount. This experiment imports only its DOM-free path generator;
+            the library also offers components and APIs for borders and shadows.
+            See the{" "}
             <ExternalLink
-              href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/corner-shape"
-              name="corner-shape documentation"
+              href="https://github.com/JaceThings/Lisse"
+              name="Lisse repository"
               size="inherit"
             />{" "}
-            for its behavior and current browser compatibility.
-          </>
-        }
-        contentClassName="text-foreground/80 max-w-full space-y-4 leading-relaxed"
-      >
-        <p>
-          Use Lisse when you want Figma-style smoothing with an adjustable
-          amount. This experiment imports only its DOM-free path generator; the
-          library also offers components and APIs for borders and shadows. See
-          the{" "}
-          <ExternalLink
-            href="https://github.com/JaceThings/Lisse"
-            name="Lisse repository"
-            size="inherit"
-          />{" "}
-          for the full library.
-        </p>
-      </Section>
+            for the full library.
+          </p>
+        </Section>
+      </div>
     </div>
   );
 }

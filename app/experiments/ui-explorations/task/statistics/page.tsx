@@ -1,8 +1,7 @@
 import { connection } from "next/server";
 
-import BackButton from "@/components/BackButton";
-import PageTitle from "@/components/PageTitle";
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import type { TaskHistoryEntry } from "../db";
@@ -109,11 +108,14 @@ export default async function TaskStatisticsPage() {
 
   return (
     <div className="pb-8">
-      <BackButton href="/experiments/ui-explorations/task" name="Task" />
-      <PageTitle>Statistic</PageTitle>
-      <SubTitle>About the daily task.</SubTitle>
+      <ExperimentPageHeader
+        back={{ href: "/experiments/ui-explorations/task", name: "Task" }}
+        title="Statistic"
+      >
+        <PageDescription>About the daily task.</PageDescription>
+      </ExperimentPageHeader>
 
-      <div className="space-y-20">
+      <div className="space-y-16">
         <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
           Ideas shown here: daily completion rate, 7-day completion rate,
           completed minutes, full-completion streak, top completed task, and a

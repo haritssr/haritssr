@@ -1,18 +1,22 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindGridDemo() {
   return (
     <>
-      <SubTitle>
-        Responsive Grid Layout with Tailwind CSS.{" "}
-        <ExternalLink
-          href="https://www.youtube.com/watch?v=WJDw1J7FZnE"
-          name="Source code"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Responsive Grid Layout with Tailwind CSS.{" "}
+          <ExternalLink
+            href="https://www.youtube.com/watch?v=WJDw1J7FZnE"
+            name="Source code"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <div className="grid min-h-screen place-items-center">
         <div className="xs:grid-cols-2 grid max-w-5xl gap-4 md:grid-cols-4">
           <h1 className="xs:col-span-2 xs:grid xs:grid-cols-2 xs:gap-4 text-4xl font-extrabold md:col-span-3 md:grid-cols-3 md:text-5xl">

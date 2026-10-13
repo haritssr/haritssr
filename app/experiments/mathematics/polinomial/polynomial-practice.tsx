@@ -385,7 +385,7 @@ export default function PolynomialPractice() {
   };
 
   return (
-    <div aria-busy={!ready} className="space-y-20">
+    <div aria-busy={!ready} className="space-y-16">
       <ProgressSummary
         onReset={() => {
           update(() => initialProgress);

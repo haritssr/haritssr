@@ -5,12 +5,16 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import type { ReactNode } from "react";
 
 import Button from "@/components/Button";
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactModalInsideModalDemo() {
   return (
     <>
-      <SubTitle>Modal Inside Modal</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Modal Inside Modal</PageDescription>
+      </ExperimentPageHeader>
+
       <ProfileDialog title="Edit profile" fieldPrefix="outer">
         <ProfileDialog title="Another Edit profile" fieldPrefix="inner" />
       </ProfileDialog>

@@ -2,8 +2,9 @@
 
 import { useReducer, useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 let nextId = 3;
 const initialTask = [
@@ -78,13 +79,16 @@ export default function ReactUseReducerTodoListDemo() {
   }
   return (
     <>
-      <SubTitle>
-        Todo list with useReducer by{" "}
-        <ExternalLink
-          href="https://react.dev/learn/extracting-state-logic-into-a-reducer"
-          name="react.dev"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Todo list with useReducer by{" "}
+          <ExternalLink
+            href="https://react.dev/learn/extracting-state-logic-into-a-reducer"
+            name="react.dev"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <AddTask onAddTask={handleAddTask} />
       <TaskList
         onChangeTask={handleChangeTask}

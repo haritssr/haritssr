@@ -3,13 +3,17 @@
 import Image from "next/image";
 import type React from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindPositionDemo() {
   return (
     <>
-      <SubTitle>CSS position with Tailwind CSS</SubTitle>
-      <div className="space-y-20">
+      <ExperimentPageHeader>
+        <PageDescription>CSS position with Tailwind CSS</PageDescription>
+      </ExperimentPageHeader>
+
+      <div className="space-y-16">
         <Wrapper title="relative + absolute">
           <div className="relative h-40 bg-blue-500">
             <div className="absolute bottom-0 left-0 bg-purple-500">

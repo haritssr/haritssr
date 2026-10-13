@@ -92,7 +92,17 @@ or configuration changes.
 - Container attributes apply to `Section`. Configure its heading through
   `headingAs`, `headingClassName`, and `headingVariant`. Preserve existing
   fragment anchors by moving their IDs to the section container.
-- Experiment section stacks use parent `space-y-20`, including lab/demo sections.
+- Page titles use the shared `PageTitle` typography inside `PageHeader`, without
+  size or class overrides. The layout always reserves a 24px breadcrumb row,
+  with 32px before it and 32px after it (`py-8`);
+  `PageHeader` always reserves a 24px navigation row followed by `gap-4`, even
+  when breadcrumbs or a back link are absent. Pass back links through its
+  `navigation` prop and put icons beside the title, keeping every title aligned
+  to the same starting position. The header owns `gap-4` internally and `mb-16`
+  before content; its child components have no vertical margins. Keep headers
+  outside content stacks and omit an extra top margin on the first content block.
+- Use `PageDescription` for page introductions (`as="div"` for block content).
+- Experiment section stacks use parent `space-y-16`, including lab/demo sections.
   Omit section top/bottom margins; keep introductions and source links together.
 - Keep independent exercise/rule cards unnumbered in unordered lists. Number
   ordered solution steps and question-navigation controls when needed.

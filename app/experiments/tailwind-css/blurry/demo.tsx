@@ -1,11 +1,15 @@
 "use client";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindBlurryDemo() {
   return (
     <>
-      <SubTitle>Background Blurry Effect</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Background Blurry Effect</PageDescription>
+      </ExperimentPageHeader>
+
       <div>
         <div className="border border-zinc-300 p-3">
           <div className="relative w-full max-w-lg">

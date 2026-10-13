@@ -1,11 +1,14 @@
 "use client";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindColumnsDemo() {
   return (
     <>
-      <SubTitle>Columns</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Columns</PageDescription>
+      </ExperimentPageHeader>
 
       <div className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 xl:columns-4">
         <Box3 />

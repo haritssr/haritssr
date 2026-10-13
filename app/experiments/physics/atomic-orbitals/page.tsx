@@ -1,12 +1,14 @@
-import "katex/dist/katex.min.css";
 import { Accordion } from "@base-ui/react/accordion";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+
+import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -45,18 +47,18 @@ export const metadata: Metadata = getExperimentMetadata(
 export default function AtomicOrbitalsPage() {
   return (
     <div className="pb-24">
-      <div className="max-w-full">
-        <SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
           Orbitals are wave patterns around a nucleus, not paths traced by tiny
           planets. Explore how angular nodes divide those patterns into the s,
           p, d, and f shapes, and how the patterns describe where an electron is
           likely to be found.
-        </SubTitle>
-      </div>
+        </PageDescription>
+      </ExperimentPageHeader>
 
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-8">
         <Contents items={SECTIONS} />
-        <div className="min-w-0 space-y-20 lg:col-start-1 lg:row-start-1">
+        <div className="min-w-0 space-y-16 lg:col-start-1 lg:row-start-1">
           <Section
             className="scroll-mt-28"
             id="explore"

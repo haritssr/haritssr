@@ -1,6 +1,7 @@
-import TopLevelSectionPageDescription from "components/TopLevelSectionPageDescription";
+import PageDescription from "components/PageDescription";
 import type { Metadata } from "next";
 
+import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import WritingTable from "@/components/WritingTable";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -15,10 +16,10 @@ export const metadata: Metadata = createPageMetadata({
 export default function WritingPage() {
   return (
     <>
-      <PageTitle>Writing</PageTitle>
-      <TopLevelSectionPageDescription>
-        {WRITING_DESCRIPTION}
-      </TopLevelSectionPageDescription>
+      <PageHeader>
+        <PageTitle>Writing</PageTitle>
+        <PageDescription>{WRITING_DESCRIPTION}</PageDescription>
+      </PageHeader>
       <WritingTable />
     </>
   );

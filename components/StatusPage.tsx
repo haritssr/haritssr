@@ -1,6 +1,10 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
+import PageTitle from "@/components/PageTitle";
+
 const STATUS_ACTION_BASE_CLASS =
   "inline-flex w-full cursor-pointer items-center justify-center corner-squircle rounded-xl px-3.5 py-1.5 text-center text-sm transition-colors sm:basis-0 sm:flex-1 sm:w-auto";
 
@@ -67,7 +71,7 @@ export function StatusPage({
 }) {
   const wrapperClassName =
     fullScreen === true
-      ? "flex min-h-screen w-full items-center justify-center"
+      ? "mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center px-5"
       : "";
   const cardClassName =
     tone === "error"
@@ -77,22 +81,24 @@ export function StatusPage({
 
   return (
     <div className={wrapperClassName}>
-      <section
-        className={`corner-squircle max-w-fit rounded-xl border px-4 py-5 text-left ${cardClassName}`}
-      >
+      <PageHeader>
+        <PageTitle>{title}</PageTitle>
         <div className={`text-xs font-medium uppercase ${badgeClassName}`}>
           {tone === "error" ? "Error" : "404"}
         </div>
-        <h1 className="text-foreground mt-2 text-2xl font-semibold">{title}</h1>
         {description !== undefined && description !== null ? (
-          <p className="text-foreground/70 mt-2 text-sm">{description}</p>
+          <PageDescription>{description}</PageDescription>
         ) : null}
-        {actions !== undefined && actions !== null ? (
-          <div className="mt-5 flex w-full flex-col items-center justify-center gap-2 sm:flex-row">
+      </PageHeader>
+      {actions !== undefined && actions !== null ? (
+        <section
+          className={`corner-squircle max-w-fit rounded-xl border px-4 py-5 text-left ${cardClassName}`}
+        >
+          <div className="flex w-full flex-col items-center justify-center gap-2 sm:flex-row">
             {actions}
           </div>
-        ) : null}
-      </section>
+        </section>
+      ) : null}
     </div>
   );
 }

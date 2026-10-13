@@ -1,7 +1,8 @@
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -21,13 +22,13 @@ export default function HighSchoolSymbolsPage() {
   );
 
   return (
-    <div className="min-w-0 space-y-20 pb-24" lang="id">
-      <div className="max-w-full space-y-5">
-        <SubTitle>
+    <div className="min-w-0 pb-24" lang="id">
+      <ExperimentPageHeader>
+        <PageDescription>
           Kamus simbol dan notasi matematika serta fisika SMA/MA di Indonesia.
           Setiap notasi ditampilkan dengan KaTeX, disertai arti dan contoh
           penggunaannya.
-        </SubTitle>
+        </PageDescription>
         <p className="text-muted leading-8">
           {entryCount} entri dalam {notationGroups.length} kelompok, mencakup
           materi umum, matematika tingkat lanjut, dan pengayaan. Cakupan serta
@@ -47,100 +48,102 @@ export default function HighSchoolSymbolsPage() {
           </InternalLink>
           .
         </p>
-      </div>
-
-      <Section
-        title="Cara membaca simbol"
-        id="cara-membaca"
-        description="Makna simbol bergantung pada konteks, bentuk huruf, dan satuannya. Perhatikan definisi serta syarat pada setiap contoh."
-      >
-        <ul className="text-muted max-w-full list-disc space-y-3 pl-5">
-          <li>
-            {katexify("m", false)} dapat berarti massa atau gradien, sedangkan{" "}
-            {katexify(String.raw`\mathrm m`, false)} adalah satuan meter. Huruf
-            besar dan kecil juga berbeda: {katexify("P", false)} bisa berarti
-            daya, sedangkan {katexify("p", false)} bisa berarti tekanan atau
-            momentum.
-          </li>
-          <li>
-            {katexify("T", false)} bisa berarti periode, suhu, atau tegangan
-            tali; {katexify(String.raw`\mathrm T`, false)} adalah satuan tesla.
-            Arti huruf dipilih sesuai konteks, bukan bentuk huruf saja.
-          </li>
-          <li>
-            Panah pada {katexify(String.raw`\vec v`, false)} menyatakan vektor.
-            Indeks pada {katexify("v_0", false)} menyatakan keadaan awal, dan
-            tanda {katexify(String.raw`\Delta`, false)} menyatakan perubahan
-            hingga. Contohnya, {katexify(String.raw`\Delta x=x_f-x_0`, false)}.
-          </li>
-          <li>
-            Koma desimal Indonesia ditulis seperti{" "}
-            {katexify(String.raw`3{,}14`, false)}. Simbol{" "}
-            {katexify(String.raw`\approx`, false)} menandai pendekatan; tanda{" "}
-            {katexify("=", false)} menyatakan kesamaan.
-          </li>
-        </ul>
-      </Section>
-
-      {notationGroups.map((group) => (
+      </ExperimentPageHeader>
+      <div className="space-y-16">
         <Section
-          className="min-w-0 scroll-mt-24"
-          description={group.description}
-          id={group.id}
-          key={group.id}
-          title={group.title}
+          title="Cara membaca simbol"
+          id="cara-membaca"
+          description="Makna simbol bergantung pada konteks, bentuk huruf, dan satuannya. Perhatikan definisi serta syarat pada setiap contoh."
         >
-          <NotationTable group={group} />
+          <ul className="text-muted max-w-full list-disc space-y-3 pl-5">
+            <li>
+              {katexify("m", false)} dapat berarti massa atau gradien, sedangkan{" "}
+              {katexify(String.raw`\mathrm m`, false)} adalah satuan meter.
+              Huruf besar dan kecil juga berbeda: {katexify("P", false)} bisa
+              berarti daya, sedangkan {katexify("p", false)} bisa berarti
+              tekanan atau momentum.
+            </li>
+            <li>
+              {katexify("T", false)} bisa berarti periode, suhu, atau tegangan
+              tali; {katexify(String.raw`\mathrm T`, false)} adalah satuan
+              tesla. Arti huruf dipilih sesuai konteks, bukan bentuk huruf saja.
+            </li>
+            <li>
+              Panah pada {katexify(String.raw`\vec v`, false)} menyatakan
+              vektor. Indeks pada {katexify("v_0", false)} menyatakan keadaan
+              awal, dan tanda {katexify(String.raw`\Delta`, false)} menyatakan
+              perubahan hingga. Contohnya,{" "}
+              {katexify(String.raw`\Delta x=x_f-x_0`, false)}.
+            </li>
+            <li>
+              Koma desimal Indonesia ditulis seperti{" "}
+              {katexify(String.raw`3{,}14`, false)}. Simbol{" "}
+              {katexify(String.raw`\approx`, false)} menandai pendekatan; tanda{" "}
+              {katexify("=", false)} menyatakan kesamaan.
+            </li>
+          </ul>
         </Section>
-      ))}
 
-      <Section
-        className="max-w-full"
-        title="Rujukan dan bacaan lanjutan"
-        id="rujukan"
-        description="Panduan mata pelajaran untuk cakupan belajar, rujukan SI untuk satuan, dan dokumentasi KaTeX untuk penulisan rumus. Pilihan simbol dapat berbeda antar buku."
-      >
-        <ul className="space-y-3">
-          <li>
-            <ExternalLink
-              href="https://repositori.kemendikdasmen.go.id/33608/"
-              name="Kemendikdasmen · Panduan Matematika dan Matematika Tingkat Lanjut (2025)"
-            />
-          </li>
-          <li>
-            <ExternalLink
-              href="https://repositori.kemendikdasmen.go.id/33601/"
-              name="Kemendikdasmen · Panduan Fisika Fase F (2025)"
-            />
-          </li>
-          <li>
-            <ExternalLink
-              href="https://www.bipm.org/en/measurement-units/si-base-units"
-              name="BIPM · Satuan pokok SI"
-            />
-          </li>
-          <li>
-            <ExternalLink
-              href="https://www.bipm.org/en/measurement-units/si-prefixes"
-              name="BIPM · Awalan SI lengkap"
-            />
-          </li>
-          <li>
-            <ExternalLink
-              href="https://katex.org/docs/supported.html"
-              name="KaTeX · Notasi dan perintah yang didukung"
-            />
-          </li>
-          <li>
-            <InternalLink
-              href="/experiments/physics/physical-quantities-and-units"
-              variant="navigation"
-            >
-              Besaran, satuan, dan rumus fisika
-            </InternalLink>
-          </li>
-        </ul>
-      </Section>
+        {notationGroups.map((group) => (
+          <Section
+            className="min-w-0 scroll-mt-24"
+            description={group.description}
+            id={group.id}
+            key={group.id}
+            title={group.title}
+          >
+            <NotationTable group={group} />
+          </Section>
+        ))}
+
+        <Section
+          className="max-w-full"
+          title="Rujukan dan bacaan lanjutan"
+          id="rujukan"
+          description="Panduan mata pelajaran untuk cakupan belajar, rujukan SI untuk satuan, dan dokumentasi KaTeX untuk penulisan rumus. Pilihan simbol dapat berbeda antar buku."
+        >
+          <ul className="space-y-3">
+            <li>
+              <ExternalLink
+                href="https://repositori.kemendikdasmen.go.id/33608/"
+                name="Kemendikdasmen · Panduan Matematika dan Matematika Tingkat Lanjut (2025)"
+              />
+            </li>
+            <li>
+              <ExternalLink
+                href="https://repositori.kemendikdasmen.go.id/33601/"
+                name="Kemendikdasmen · Panduan Fisika Fase F (2025)"
+              />
+            </li>
+            <li>
+              <ExternalLink
+                href="https://www.bipm.org/en/measurement-units/si-base-units"
+                name="BIPM · Satuan pokok SI"
+              />
+            </li>
+            <li>
+              <ExternalLink
+                href="https://www.bipm.org/en/measurement-units/si-prefixes"
+                name="BIPM · Awalan SI lengkap"
+              />
+            </li>
+            <li>
+              <ExternalLink
+                href="https://katex.org/docs/supported.html"
+                name="KaTeX · Notasi dan perintah yang didukung"
+              />
+            </li>
+            <li>
+              <InternalLink
+                href="/experiments/physics/physical-quantities-and-units"
+                variant="navigation"
+              >
+                Besaran, satuan, dan rumus fisika
+              </InternalLink>
+            </li>
+          </ul>
+        </Section>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactUseStateFormDemo() {
   const [formData, setFormData] = useState({
@@ -29,10 +30,13 @@ export default function ReactUseStateFormDemo() {
 
   return (
     <>
-      <SubTitle>
-        Simple but not useful useState form. Open your console to see what is
-        going on
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Simple but not useful useState form. Open your console to see what is
+          going on
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <form className="flex flex-col" onSubmit={onSubmit}>
         <div className="mb-4 flex flex-col">
           <label htmlFor="title">Title</label>

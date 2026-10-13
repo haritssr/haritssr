@@ -3,7 +3,8 @@ import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { connection } from "next/server";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -42,15 +43,17 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
 
   return (
     <div>
-      <SubTitle>Manage tools in experiment database.</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>Manage tools in experiment database.</PageDescription>
+      </ExperimentPageHeader>
 
       {error !== null && (
-        <div className="mt-4 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mb-6 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
           Error: {error}
         </div>
       )}
 
-      <div className="mt-6 space-y-20">
+      <div className="space-y-16">
         <section className="rounded-lg border border-neutral-200 p-4">
           <h2 className="text-lg font-semibold">Manage Tools</h2>
           <form

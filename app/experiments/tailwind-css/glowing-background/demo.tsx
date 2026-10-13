@@ -2,19 +2,22 @@
 
 import { BeakerIcon } from "@heroicons/react/24/outline";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindGlowingBackgroundDemo() {
   return (
     <>
-      <SubTitle>
-        Hover on the button to see the glowing effect.{" "}
-        <ExternalLink
-          href="https://www.youtube.com/watch?v=5W6kEP65AH4"
-          name="Source code"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Hover on the button to see the glowing effect.{" "}
+          <ExternalLink
+            href="https://www.youtube.com/watch?v=5W6kEP65AH4"
+            name="Source code"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
 
       <div className="h-auto rounded-lg bg-black px-2 py-6 sm:px-8 sm:py-16">
         <div className="grid items-start justify-center gap-8">

@@ -1,15 +1,20 @@
 "use client";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 // Doens't work on password type
 
 export default function TailwindFloatingLabelsDemo() {
   return (
     <>
-      <SubTitle>Try to tap and write on input, the label will go up</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Try to tap and write on input, the label will go up
+        </PageDescription>
+      </ExperimentPageHeader>
 
-      <div className="relative mt-4 space-y-10">
+      <div className="relative space-y-10">
         <div className="sm:w-1/3">
           <input
             className="peer w-full"

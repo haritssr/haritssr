@@ -1,7 +1,8 @@
 "use client";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 
 interface BoxProps {
   name: string;
@@ -11,10 +12,13 @@ interface BoxProps {
 export default function TailwindVsAppleColorDemo() {
   return (
     <>
-      <SubTitle>
-        The difference between Tailwind CSS Gray colors vs Apple Gray colors
-      </SubTitle>
-      <div className="space-y-20">
+      <ExperimentPageHeader>
+        <PageDescription>
+          The difference between Tailwind CSS Gray colors vs Apple Gray colors
+        </PageDescription>
+      </ExperimentPageHeader>
+
+      <div className="space-y-16">
         <Section
           title="Apple"
           contentClassName="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-10"

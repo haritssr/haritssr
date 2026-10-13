@@ -2,7 +2,8 @@
 
 import { useReducer } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 type Action = "increment" | "decrement";
 
@@ -23,7 +24,10 @@ export default function ReactUseReducerJuly2026() {
   const [count, dispatch] = useReducer(reducer, 0);
   return (
     <div>
-      <SubTitle>use reducer</SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>use reducer</PageDescription>
+      </ExperimentPageHeader>
+
       <h1>{count}</h1>
       <button
         onClick={() => {

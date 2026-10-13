@@ -2,20 +2,24 @@
 
 import Image from "next/image";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 export default function TailwindNewspaperDemo() {
   return (
     <>
-      <SubTitle>
-        Responsive newspaper reading experience with Tailwind CSS columns.{" "}
-        <ExternalLink
-          href="https://tailwindcss.com/docs/columns"
-          name="Source code"
-        />
-      </SubTitle>
-      <div className="my-10 border border-zinc-400 p-5 tracking-wide">
+      <ExperimentPageHeader>
+        <PageDescription>
+          Responsive newspaper reading experience with Tailwind CSS columns.{" "}
+          <ExternalLink
+            href="https://tailwindcss.com/docs/columns"
+            name="Source code"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
+
+      <div className="mb-10 border border-zinc-400 p-5 tracking-wide">
         <h1 className="my-2 text-4xl font-bold text-zinc-800">Amazing Title</h1>
         <h2 className="font-mw mb-5 text-lg text-zinc-600 italic">
           This is beautiful subtitle

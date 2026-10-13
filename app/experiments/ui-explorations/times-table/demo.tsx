@@ -3,12 +3,15 @@
 import { parseAsInteger, useQueryState } from "nuqs";
 import { Suspense, useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 // import { IncrementButton } from "../../../app/times-table/IncrementButton";
 // import TimesTableComponent from "../../../app/times-table/TimesTable";
 
 export default function TimesTableDemo() {
   return (
     <>
+      <ExperimentPageHeader />
+
       <Suspense fallback="..loading">
         <IncrementButton />
         <TimesTableComponent />

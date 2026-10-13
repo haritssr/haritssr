@@ -3,9 +3,10 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useState } from "react";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 
 export default function NextjsRouterDemo() {
   return (
@@ -62,14 +63,16 @@ function RouterDemoContent() {
 
   return (
     <>
-      <SubTitle>
-        <ExternalLink
-          href="https://nextjs.org/docs/app/api-reference/functions/use-router"
-          name="next/navigation"
-        />
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          <ExternalLink
+            href="https://nextjs.org/docs/app/api-reference/functions/use-router"
+            name="next/navigation"
+          />
+        </PageDescription>
+      </ExperimentPageHeader>
 
-      <div className="space-y-20">
+      <div className="space-y-16">
         <Section title="usePathname">
           <div>
             pathname = <span className={style}>{pathname}</span>

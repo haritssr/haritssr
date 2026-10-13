@@ -41,12 +41,12 @@ export default function Breadcrumbs({
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="pt-5">
+    <nav aria-label="Breadcrumb" className="h-6">
       <div className="mx-auto flex w-full max-w-5xl justify-start px-5 xl:px-0">
-        <ol className="scrollbar-hide corner-squircle flex w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg py-1 text-[15px]">
-          <li className="flex items-center">
+        <ol className="scrollbar-hide corner-squircle flex h-6 w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg text-[15px] leading-6">
+          <li className="flex shrink-0 items-center">
             <Link
-              className="text-muted hover:text-foreground"
+              className="text-muted hover:text-foreground whitespace-nowrap"
               href="/"
               prefetch={false}
             >
@@ -60,7 +60,7 @@ export default function Breadcrumbs({
             const isLast = index === breadcrumbs.length - 1;
 
             return (
-              <li className="flex items-center" key={href}>
+              <li className="flex shrink-0 items-center" key={href}>
                 {isLast ? (
                   <span
                     aria-current="page"

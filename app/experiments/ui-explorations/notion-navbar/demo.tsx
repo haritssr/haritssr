@@ -1,30 +1,35 @@
 import Image from "next/image";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SubTitle from "@/components/SubTitle";
+import PageDescription from "@/components/PageDescription";
 
 import NotionNavigationMenu from "./navigation-menu";
 
 export default function NotionNavbarDemo() {
   return (
-    <SubTitle>
-      <ExplanationList>
-        <li>Navigation bar inspired by Notion’s marketing pages.</li>
-        <li>
-          Dropdowns use Base UI’s{" "}
-          <ExternalLink
-            href="https://base-ui.com/react/components/navigation-menu"
-            name="Navigation Menu"
-          />
-          .
-        </li>
-      </ExplanationList>
+    <>
+      <ExperimentPageHeader>
+        <PageDescription as="div">
+          <ExplanationList>
+            <li>Navigation bar inspired by Notion’s marketing pages.</li>
+            <li>
+              Dropdowns use Base UI’s{" "}
+              <ExternalLink
+                href="https://base-ui.com/react/components/navigation-menu"
+                name="Navigation Menu"
+              />
+              .
+            </li>
+          </ExplanationList>
+        </PageDescription>
+      </ExperimentPageHeader>
       <div className="flex flex-wrap items-center gap-2">
         <NotionLogo />
         <NotionNavigationMenu />
       </div>
-    </SubTitle>
+    </>
   );
 }
 

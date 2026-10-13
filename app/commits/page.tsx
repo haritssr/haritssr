@@ -8,10 +8,11 @@ import CommitTable, {
   SuitabilityLabel,
 } from "@/components/CommitTable";
 import ExternalLink from "@/components/ExternalLink";
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
-import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import history from "@/data/changelog.json";
 import modelSuitability from "@/data/model-suitability-2026-10-11.json";
 import { commitsRoute } from "@/data/routes";
@@ -41,14 +42,15 @@ export default async function CommitsPage() {
   }).format(estimatedCostUsd * 17_884);
   return (
     <>
-      <PageTitle>{commitsRoute.title}</PageTitle>
-      <TopLevelSectionPageDescription>
-        {new Intl.NumberFormat("en-US").format(history.commits.length)} commits
-        and counting, from {formatDay(firstDay)} to {formatDay(lastDay)} ·
-        Jakarta time (WIB)
-      </TopLevelSectionPageDescription>
-      <div className="mb-20" />
-      <div className="space-y-20">
+      <PageHeader>
+        <PageTitle>{commitsRoute.title}</PageTitle>
+        <PageDescription>
+          {new Intl.NumberFormat("en-US").format(history.commits.length)}{" "}
+          commits and counting, from {formatDay(firstDay)} to{" "}
+          {formatDay(lastDay)} · Jakarta time (WIB)
+        </PageDescription>
+      </PageHeader>
+      <div className="space-y-16">
         <ChangelogExplorer commits={history.commits} initialDay={initialDay} />
         <Section
           title="Model Suitability"

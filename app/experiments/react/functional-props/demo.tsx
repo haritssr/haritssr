@@ -2,14 +2,18 @@
 
 import { useState } from "react";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 
 export default function ReactFunctionalPropsDemo() {
   return (
     <>
-      <SubTitle>
-        Functional Props - TypeScript for beginner to master - Jack Herrington
-      </SubTitle>
+      <ExperimentPageHeader>
+        <PageDescription>
+          Functional Props - TypeScript for beginner to master - Jack Herrington
+        </PageDescription>
+      </ExperimentPageHeader>
+
       <TextWithNumber
         header={(num: number) => <span>The header is {num}</span>}
       >

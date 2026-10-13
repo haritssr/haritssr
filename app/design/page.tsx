@@ -5,10 +5,11 @@ import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
-import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import AccordionDemo from "./AccordionDemo";
@@ -46,13 +47,63 @@ const FORM_CONTROL_CLASS_NAME =
 export default function DesignSystem() {
   return (
     <>
-      <PageTitle>Design</PageTitle>
-      <TopLevelSectionPageDescription>
-        Shared design system for this site,{" "}
-        <ExternalLink href="https://haritssr.com" name="haritssr.com" /> and{" "}
-        <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
-      </TopLevelSectionPageDescription>
-      <div className="space-y-20">
+      <PageHeader>
+        <PageTitle>Design</PageTitle>
+        <PageDescription>
+          Shared design system for this site,{" "}
+          <ExternalLink href="https://haritssr.com" name="haritssr.com" /> and{" "}
+          <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
+        </PageDescription>
+      </PageHeader>
+      <div className="space-y-16">
+        <Section
+          id="design-page-headers"
+          title="Page headers and spacing"
+          description="PageHeader groups the title and optional introductory items, keeping the same distance to content for every combination."
+        >
+          <ExplanationList>
+            <li>
+              Every page uses the same PageTitle typography inside PageHeader.
+              Pass the optional BackButton through the navigation slot; add
+              PageDescription, badges, or other introductory content below the
+              title.
+            </li>
+            <li>
+              The top bar&apos;s GitHub icon links to the current page&apos;s
+              source. Keep source links out of experiment headers.
+            </li>
+            <li>
+              PageHeader always reserves a 24px back-link row and a 16px gap
+              before the title, even when there is no back link. It owns the
+              16px gap between its remaining items and the 64px gap before
+              content.
+            </li>
+            <li>
+              The layout always reserves a 24px breadcrumb row, with 32px
+              between the top bar and breadcrumbs and another 32px before the
+              page header. These spaces stay reserved when navigation is absent.
+              Place icons beside the title so they do not shift its starting
+              position.
+            </li>
+            <li>
+              Keep PageHeader outside the content stack. Use
+              <code> space-y-16</code> between major content sections and omit
+              an extra top margin on the first content block.
+            </li>
+          </ExplanationList>
+          <pre className="border-border overflow-x-auto rounded-lg border p-4 text-sm">
+            <code>{`<PageHeader
+  navigation={<BackButton href="/experiments" name="Experiments" />}
+>
+  <PageTitle>Example page</PageTitle>
+  <PageDescription>Optional introduction.</PageDescription>
+</PageHeader>
+<div className="space-y-16">
+  <Section title="First section">...</Section>
+  <Section title="Second section">...</Section>
+</div>`}</code>
+          </pre>
+        </Section>
         <Section title="Design Principles">
           <ExplanationList>
             <li>
@@ -367,7 +418,7 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="BackButton" title="Back Button">
-            <div className="-mt-10 mb-5">
+            <div className="mb-5">
               <BackButton href="/" name="Previous Page" />
             </div>
             <BackButton

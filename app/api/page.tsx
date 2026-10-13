@@ -1,7 +1,8 @@
 import InternalLink from "@/components/InternalLink";
+import PageDescription from "@/components/PageDescription";
+import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
-import TopLevelSectionPageDescription from "@/components/TopLevelSectionPageDescription";
 import { apiRoute } from "@/data/routes";
 import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -40,11 +41,11 @@ const publicEndpoints = [
 export default function APIPage() {
   return (
     <>
-      <PageTitle>{apiRoute.title}</PageTitle>
-      <TopLevelSectionPageDescription>
-        {apiRoute.description}
-      </TopLevelSectionPageDescription>
-      <div className="space-y-20">
+      <PageHeader>
+        <PageTitle>{apiRoute.title}</PageTitle>
+        <PageDescription>{apiRoute.description}</PageDescription>
+      </PageHeader>
+      <div className="space-y-16">
         <Section title="Public">
           <ul className="max-w-full space-y-5">
             {publicEndpoints.map((endpoint) => (

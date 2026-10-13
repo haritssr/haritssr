@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -47,73 +48,75 @@ const questions: readonly PracticeQuestion[] = [
 
 export default function IntegralsPage() {
   return (
-    <div className="space-y-20 pb-24">
-      <div className="max-w-full">
-        <SubTitle>
+    <div className="pb-24">
+      <ExperimentPageHeader>
+        <PageDescription>
           An integral adds up many small contributions. On a graph, a definite
           integral is the signed area between the curve and the horizontal axis.
-        </SubTitle>
+        </PageDescription>
+      </ExperimentPageHeader>
+      <div className="space-y-20">
+        <Section
+          className="text-muted max-w-full text-base"
+          title="From rectangles to accumulation"
+          description={
+            <>
+              Split an interval into thin slices. For each slice, multiply its
+              width by the function’s height at the midpoint. Add the
+              rectangles, then make them thinner. Their sum approaches the
+              definite integral.
+            </>
+          }
+        >
+          <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
+            {katexify(
+              String.raw`\int_a^b f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^{n} f(x_i^*)\,\Delta x,\qquad\Delta x=\frac{b-a}{n}`,
+              true
+            )}
+          </div>
+          <p>
+            A rectangle below the horizontal axis counts negatively. That is why
+            a definite integral can be zero even when the curve encloses visible
+            regions.
+          </p>
+        </Section>
+
+        <IntegralsLab />
+
+        <Section
+          className="text-muted max-w-full text-base"
+          title="A faster exact method"
+          description={
+            <>
+              An antiderivative reverses differentiation. If differentiating a
+              function gives the curve you are integrating, evaluate that
+              function at the bounds and subtract. This is the Fundamental
+              Theorem of Calculus.
+            </>
+          }
+        >
+          <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
+            {katexify(
+              String.raw`F'(x)=f(x)\quad\Longrightarrow\quad\int_a^b f(x)\,dx=F(b)-F(a)`,
+              true
+            )}
+          </div>
+          <p>
+            For the square curve, the power rule works in reverse. The result
+            agrees with what the rectangles approach.
+          </p>
+          <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
+            {katexify(
+              String.raw`\int_0^2 x^2\,dx=\left[\frac{x^3}{3}\right]_0^2=\frac{8}{3}`,
+              true
+            )}
+          </div>
+        </Section>
+
+        <IntegralRules />
+
+        <Practice questions={questions} />
       </div>
-
-      <Section
-        className="text-muted max-w-full text-base"
-        title="From rectangles to accumulation"
-        description={
-          <>
-            Split an interval into thin slices. For each slice, multiply its
-            width by the function’s height at the midpoint. Add the rectangles,
-            then make them thinner. Their sum approaches the definite integral.
-          </>
-        }
-      >
-        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
-          {katexify(
-            String.raw`\int_a^b f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^{n} f(x_i^*)\,\Delta x,\qquad\Delta x=\frac{b-a}{n}`,
-            true
-          )}
-        </div>
-        <p>
-          A rectangle below the horizontal axis counts negatively. That is why a
-          definite integral can be zero even when the curve encloses visible
-          regions.
-        </p>
-      </Section>
-
-      <IntegralsLab />
-
-      <Section
-        className="text-muted max-w-full text-base"
-        title="A faster exact method"
-        description={
-          <>
-            An antiderivative reverses differentiation. If differentiating a
-            function gives the curve you are integrating, evaluate that function
-            at the bounds and subtract. This is the Fundamental Theorem of
-            Calculus.
-          </>
-        }
-      >
-        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
-          {katexify(
-            String.raw`F'(x)=f(x)\quad\Longrightarrow\quad\int_a^b f(x)\,dx=F(b)-F(a)`,
-            true
-          )}
-        </div>
-        <p>
-          For the square curve, the power rule works in reverse. The result
-          agrees with what the rectangles approach.
-        </p>
-        <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
-          {katexify(
-            String.raw`\int_0^2 x^2\,dx=\left[\frac{x^3}{3}\right]_0^2=\frac{8}{3}`,
-            true
-          )}
-        </div>
-      </Section>
-
-      <IntegralRules />
-
-      <Practice questions={questions} />
     </div>
   );
 }

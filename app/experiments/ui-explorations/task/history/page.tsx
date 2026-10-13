@@ -1,8 +1,7 @@
 import { connection } from "next/server";
 
-import BackButton from "@/components/BackButton";
-import PageTitle from "@/components/PageTitle";
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import { getTaskHistory } from "../db";
@@ -21,16 +20,19 @@ export default async function TaskHistoryPage() {
 
   return (
     <div className="pb-8">
-      <BackButton href="/experiments/ui-explorations/task" name="Task" />
-      <PageTitle>History</PageTitle>
-      <SubTitle>Record of daily tasks.</SubTitle>
+      <ExperimentPageHeader
+        back={{ href: "/experiments/ui-explorations/task", name: "Task" }}
+        title="History"
+      >
+        <PageDescription>Record of daily tasks.</PageDescription>
+      </ExperimentPageHeader>
 
       {history.length === 0 ? (
         <div className="rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-500">
           No task history yet.
         </div>
       ) : (
-        <div className="space-y-20">
+        <div className="space-y-16">
           {history.map((day) => (
             <Section
               key={day.date}

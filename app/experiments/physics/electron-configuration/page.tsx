@@ -1,7 +1,9 @@
-import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 
-import SubTitle from "@/components/SubTitle";
+import ExperimentPageHeader from "@/components/ExperimentPageHeader";
+
+import "katex/dist/katex.min.css";
+import PageDescription from "@/components/PageDescription";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import { VocabularyGuide } from "../_components/VocabularyGuide";
@@ -28,9 +30,10 @@ export default async function ElectronConfigurationPage({
 
   return (
     <>
-      <div className="max-w-full">
-        <SubTitle>{DESCRIPTION}</SubTitle>
-      </div>
+      <ExperimentPageHeader>
+        <PageDescription>{DESCRIPTION}</PageDescription>
+      </ExperimentPageHeader>
+
       <ElectronConfigurationDemo
         initialAtomicNumber={initialAtomicNumber}
         vocabulary={<VocabularyGuide />}
