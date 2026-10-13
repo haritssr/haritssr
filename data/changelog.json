@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "2d11643cbe369c7e79855b41025563cf913e42d1",
+      "date": "2026-10-13T15:49:30+07:00",
+      "subject": "style(Table): increase default text contrast"
+    },
+    {
       "hash": "66b9b0af7accc8c6f733c2b0a5892c07f3b1626a",
       "date": "2026-10-13T15:49:05+07:00",
       "subject": "style(experiments): simplify domain index layouts"

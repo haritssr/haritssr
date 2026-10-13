@@ -15,6 +15,7 @@ import { Button as AriaButton } from "react-aria-components/Button";
 import { SheetTrigger } from "react-aria-components/Sheet";
 
 import Button from "@/components/Button";
+import useFooterClearance from "@/components/useFooterClearance";
 import {
   affectsArticleHeadings,
   collectArticleOutline,
@@ -63,6 +64,7 @@ export default function ArticleTableOfContents({
   const [openView, setOpenView] = useState<boolean | null>(null);
   const [hasOpened, setHasOpened] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const controlsRef = useFooterClearance(outline !== null);
   const pendingNavigation = useRef<{
     entry: ContentsEntry;
     focus: boolean;
@@ -368,7 +370,10 @@ export default function ArticleTableOfContents({
   );
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 mx-auto flex w-full max-w-5xl items-center justify-between gap-3 pr-[max(1.25rem,env(safe-area-inset-right))] pl-[max(1.25rem,env(safe-area-inset-left))] xl:pr-[env(safe-area-inset-right)] xl:pl-[env(safe-area-inset-left)]">
+    <div
+      className="pointer-events-none fixed inset-x-0 bottom-[calc(max(1.25rem,env(safe-area-inset-bottom))+var(--footer-overlap,0px))] z-40 mx-auto flex w-full max-w-5xl items-center justify-between gap-3 pr-[max(1.25rem,env(safe-area-inset-right))] pl-[max(1.25rem,env(safe-area-inset-left))] xl:pr-[env(safe-area-inset-right)] xl:pl-[env(safe-area-inset-left)]"
+      ref={controlsRef}
+    >
       <Button
         aria-label="To the top"
         data-article-back-to-top=""
