@@ -139,7 +139,11 @@
   :root[data-theme="dark"] {
     color-scheme: dark;
     --control-shadow-opacity: 18%;
-    --floating-border-color: var(--color-border-hover);
+    --floating-border-color: color-mix(
+      in srgb,
+      var(--color-border) 75%,
+      transparent
+    );
     --floating-shadow-opacity: 32%;
     --color-action: var(--color-blue-400);
     --color-action-hover: var(--color-blue-300);

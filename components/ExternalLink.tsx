@@ -28,7 +28,7 @@ export default function ExternalLink({
         <span className={textClass}>{name}</span>
         <svg
           aria-hidden="true"
-          className="text-action group-hover:text-action-hover ml-0.5 inline h-4.5 w-4.5 align-middle"
+          className="text-action group-hover:text-action-hover ml-0.5 inline size-4 align-middle"
           fill="none"
           stroke="currentColor"
           strokeWidth={2}
