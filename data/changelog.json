@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "505f469c8703eb586f3a4d4d165a92c2ce8e4024",
+      "date": "2026-10-13T14:45:07+07:00",
+      "subject": "style(experiments): simplify archive introduction and spacing"
+    },
+    {
       "hash": "d8d3e7ad2abcae378b399f25901fba21b62fa480",
       "date": "2026-10-12T22:38:52+07:00",
       "subject": "perf(Breadcrumbs): build paths incrementally and disable prefetch"
