@@ -1,13 +1,11 @@
 "use client";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindBlurryDemo() {
   return (
     <>
       <SubTitle>Background Blurry Effect</SubTitle>
-      <SourceCodeLink />
       <div>
         <div className="border border-zinc-300 p-3">
           <div className="relative w-full max-w-lg">

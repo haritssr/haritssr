@@ -1,7 +1,6 @@
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -27,7 +26,6 @@ export default function EulerPage() {
           Understand what each constant means, explore complex exponentials as
           rotation, and see why Euler’s identity follows from a half-turn.
         </SubTitle>
-        <SourceCodeLink />
         <div className="max-w-3xl space-y-5">
           <div className="border-action/30 w-full max-w-full min-w-0 overflow-x-auto rounded-2xl border px-5 py-6 text-xl sm:text-2xl">
             {katexify(String.raw`e^{i\pi}+1=0`, true)}

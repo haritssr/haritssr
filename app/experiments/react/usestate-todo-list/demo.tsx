@@ -4,7 +4,6 @@ import { useState } from "react";
 import type { ReactElement, ReactNode, ReactPortal } from "react";
 import type { JSX } from "react/jsx-runtime";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface Todo {
@@ -67,7 +66,6 @@ export default function ReactUseStateTodoListDemo() {
   return (
     <>
       <SubTitle>Todo list with useState</SubTitle>
-      <SourceCodeLink />
       <AddTodo onAddTodo={handleAddTodo} />
       <TaskList
         onChangeTodo={handleChangeTodo}

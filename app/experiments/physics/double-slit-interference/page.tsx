@@ -1,7 +1,6 @@
 import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
@@ -20,7 +19,6 @@ export default function DoubleSlitPage() {
           Send one color of light through two narrow openings. Change the setup,
           then measure how the bright and dark fringes move across the screen.
         </SubTitle>
-        <SourceCodeLink />
       </div>
       <DoubleSlitLab />
     </div>

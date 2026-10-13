@@ -2,7 +2,6 @@ import Box from "@/components/Box";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -107,7 +106,6 @@ export default function MathNotationPage() {
           be displayed with KaTeX or similar renderers, and which operations
           need calculation, graphing, or geometry tools.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

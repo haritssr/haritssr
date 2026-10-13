@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 // Matches every non-digit character.
@@ -40,7 +39,6 @@ export default function YearlyInterest() {
     <div className="space-y-20">
       <div>
         <SubTitle>Calculation of yearly save interest</SubTitle>
-        <SourceCodeLink />
         <form>
           <label className="block w-fit text-zinc-500" htmlFor="Initial">
             Initial (Rp)

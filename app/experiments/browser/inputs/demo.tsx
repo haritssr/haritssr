@@ -4,14 +4,12 @@ import type React from "react";
 import { useState } from "react";
 
 import SectionHeading from "@/components/SectionHeading";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function InputsDemo() {
   return (
     <>
       <SubTitle>Browser built-in input elements </SubTitle>
-      <SourceCodeLink />
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-14">
         <Wrapper name="text">
           <InputText />

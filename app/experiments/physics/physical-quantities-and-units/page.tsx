@@ -9,7 +9,6 @@ import type {
   PrerequisiteGraphNodeData,
 } from "@/components/PrerequisiteGraph";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import { PageStructuredData } from "@/components/StructuredData";
 import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
@@ -83,7 +82,6 @@ export default function UnitsPage() {
       <div>
         <div className="max-w-full">
           <SubTitle>{DESCRIPTION}</SubTitle>
-          <SourceCodeLink />
         </div>
         <div className="space-y-20">
           <Section title="Base Quantities">

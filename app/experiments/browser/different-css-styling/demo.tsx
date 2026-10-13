@@ -1,7 +1,6 @@
 "use client";
 
 import SectionHeading from "@/components/SectionHeading";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function DifferentCssStylingDemo() {
@@ -10,7 +9,6 @@ export default function DifferentCssStylingDemo() {
       <SubTitle>
         Click blue &quot;source github button&quot; to see the source code
       </SubTitle>
-      <SourceCodeLink />
       <SectionHeading>
         Coloring, Box size, Rounded corner, Padding
       </SectionHeading>

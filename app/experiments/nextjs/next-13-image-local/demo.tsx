@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import LenovoWallpaper from "@/public/images/LenovoWallPaper.jpg";
 
@@ -17,7 +16,6 @@ export default function NextjsImageLocalDemo() {
           name="Nextjs 13 Image"
         />
       </SubTitle>
-      <SourceCodeLink />
 
       <div className="space-y-20">
         <Section title="Bare minimum">

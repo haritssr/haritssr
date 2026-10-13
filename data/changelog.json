@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "25d467d49407494dcbabf8ff0adab5da0dcd25f9",
+      "date": "2026-10-13T15:50:08+07:00",
+      "subject": "docs(writing): shorten Harimaki and Tim Cook titles"
+    },
+    {
       "hash": "3fafff47a8cc96453aa82e520f2dcf438bec754e",
       "date": "2026-10-13T15:50:01+07:00",
       "subject": "feat(writing): combine posts in a responsive table"

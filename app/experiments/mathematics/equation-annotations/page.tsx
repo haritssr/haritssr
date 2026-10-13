@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -22,7 +21,6 @@ export default function EquationAnnotationsPage() {
           {katexify("F=ma", false)}, Newton’s second law for constant mass, with
           three ways to draw attention to a selected term.
         </p>
-        <SourceCodeLink />
       </div>
       <Section title="Explain a term" id="annotations-heading">
         <Demo />

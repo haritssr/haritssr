@@ -7,7 +7,6 @@ import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -29,7 +28,6 @@ export default function PhysicsEquationsPage() {
       <PageTitle size="large">Essential Physics Equations</PageTitle>
       <div className="max-w-full">
         <SubTitle>{DESCRIPTION}</SubTitle>
-        <SourceCodeLink />
       </div>
       <article className={`${styles.equations} space-y-20 pb-24`}>
         {PHYSICS_DOMAINS.map((domain) => (

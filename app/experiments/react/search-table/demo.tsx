@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface User {
@@ -86,7 +85,6 @@ export default function ReactSearchTableDemo() {
           <li>Already applied debounce on search.</li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
       <input
         aria-label="Search people"
         className="mb-5 rounded-md border-[1.5px] border-zinc-500 px-2 py-1 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-hidden"

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindSidebarDemo() {
@@ -10,7 +9,6 @@ export default function TailwindSidebarDemo() {
   return (
     <>
       <SubTitle>Sidebar example</SubTitle>
-      <SourceCodeLink />
       <div className="flex flex-row overflow-hidden rounded border border-zinc-400">
         {/* Side Bar */}
         <div className={`w-1/4 bg-zinc-200 ${open ? "block" : "hidden"}`}>

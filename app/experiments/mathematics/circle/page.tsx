@@ -2,7 +2,6 @@ import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -78,7 +77,6 @@ export default function CirclePage() {
           its size, why circumference and area follow different rules, and how
           angles describe arcs and sectors.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

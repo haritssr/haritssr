@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 
 import MarkdownContent from "@/components/mdx";
 import PageTitle from "@/components/PageTitle";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { getAllPostIds, getPostData, getPostSummary } from "@/utils/posts";
@@ -34,7 +33,6 @@ export default async function PostPage({
           {postDateFormatter.format(new Date(postData.date))}
         </time>
       </SubTitle>
-      <SourceCodeLink sourcePath="app/experiments/nextjs/posts/[id]" />
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia

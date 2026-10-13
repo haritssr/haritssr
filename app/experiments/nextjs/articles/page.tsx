@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import ExternalLink from "@/components/ExternalLink";
 import PageTitle from "@/components/PageTitle";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import { NextjsArticlesData } from "@/data/NextjsExperimentsData";
@@ -25,7 +24,6 @@ export default function ArticlesPage() {
           name="generateStaticParams"
         />
       </SubTitle>
-      <SourceCodeLink />
 
       <div className="xs:grid-cols-2 mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
         {NextjsArticlesData.map((article) => (

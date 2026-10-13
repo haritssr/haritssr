@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactUseStateFormDemo() {
@@ -34,7 +33,6 @@ export default function ReactUseStateFormDemo() {
         Simple but not useful useState form. Open your console to see what is
         going on
       </SubTitle>
-      <SourceCodeLink />
       <form className="flex flex-col" onSubmit={onSubmit}>
         <div className="mb-4 flex flex-col">
           <label htmlFor="title">Title</label>

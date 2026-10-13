@@ -3,7 +3,6 @@
 import { useReducer, useState } from "react";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 let nextId = 3;
@@ -86,7 +85,6 @@ export default function ReactUseReducerTodoListDemo() {
           name="react.dev"
         />
       </SubTitle>
-      <SourceCodeLink />
       <AddTask onAddTask={handleAddTask} />
       <TaskList
         onChangeTask={handleChangeTask}

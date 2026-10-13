@@ -2,7 +2,6 @@
 
 import { useDeferredValue, useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const fruits = [
@@ -36,7 +35,6 @@ export default function SimpleSearch() {
   return (
     <div>
       <SubTitle>Search using useState, useMemo, useCallback</SubTitle>
-      <SourceCodeLink />
       <input
         aria-label="Search fruits"
         onChange={handleChange}

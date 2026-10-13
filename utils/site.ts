@@ -7,13 +7,14 @@ export const WRITING_DESCRIPTION =
   "Selected notes that I want to share to the world.";
 
 export const SOURCE_CODE_URL = "https://github.com/haritssr/haritssr";
-const SOURCE_CODE_BASE_URL = `${SOURCE_CODE_URL}/tree/main`;
-
-export function sourceUrl(path: string): string {
+export function sourceUrl(
+  path: string,
+  type: "tree" | "blob" = "tree"
+): string {
   const encodedPath = path
     .split("/")
     .map((segment) => encodeURIComponent(segment))
     .join("/");
 
-  return `${SOURCE_CODE_BASE_URL}/${encodedPath}`;
+  return `${SOURCE_CODE_URL}/${type}/main/${encodedPath}`;
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -54,7 +53,6 @@ export default function IntegralsPage() {
           An integral adds up many small contributions. On a graph, a definite
           integral is the signed area between the curve and the horizontal axis.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

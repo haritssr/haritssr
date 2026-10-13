@@ -1,6 +1,5 @@
 "use client";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 // Doens't work on password type
@@ -9,7 +8,6 @@ export default function TailwindFloatingLabelsDemo() {
   return (
     <>
       <SubTitle>Try to tap and write on input, the label will go up</SubTitle>
-      <SourceCodeLink />
 
       <div className="relative mt-4 space-y-10">
         <div className="sm:w-1/3">

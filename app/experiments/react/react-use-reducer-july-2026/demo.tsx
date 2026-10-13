@@ -2,7 +2,6 @@
 
 import { useReducer } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 type Action = "increment" | "decrement";
@@ -25,7 +24,6 @@ export default function ReactUseReducerJuly2026() {
   return (
     <div>
       <SubTitle>use reducer</SubTitle>
-      <SourceCodeLink />
       <h1>{count}</h1>
       <button
         onClick={() => {

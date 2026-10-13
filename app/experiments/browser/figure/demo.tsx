@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function FigureDemo() {
@@ -15,7 +14,6 @@ export default function FigureDemo() {
         tailwindcss preflight, so the figcaption is not italic by default, I
         need to design it.
       </SubTitle>
-      <SourceCodeLink />
       <div>
         <figure>
           <Image

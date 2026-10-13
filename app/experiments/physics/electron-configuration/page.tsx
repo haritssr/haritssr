@@ -1,7 +1,6 @@
 import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
@@ -31,7 +30,6 @@ export default async function ElectronConfigurationPage({
     <>
       <div className="max-w-full">
         <SubTitle>{DESCRIPTION}</SubTitle>
-        <SourceCodeLink />
       </div>
       <ElectronConfigurationDemo
         initialAtomicNumber={initialAtomicNumber}

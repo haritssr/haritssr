@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -59,7 +58,6 @@ export default function LimitsPage() {
           A limit asks where a function is heading as its input gets close to a
           point. Start by watching nearby values, not by substituting the point.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

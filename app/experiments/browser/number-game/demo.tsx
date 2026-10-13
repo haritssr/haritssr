@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import "katex/dist/katex.min.css";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import katexify from "@/utils/katexify";
 
@@ -58,7 +57,6 @@ export default function NumberGameDemo() {
           <br />
           Every wrong answer decrease one score.
         </SubTitle>
-        <SourceCodeLink />
         <div className="pt-24 text-center text-4xl font-bold text-green-500">
           You win!
         </div>
@@ -93,7 +91,6 @@ export default function NumberGameDemo() {
         <br />
         Every wrong answer decrease one score.
       </SubTitle>
-      <SourceCodeLink />
       <div className="mx-auto flex max-w-full flex-col items-center justify-center pt-24">
         <div className={state.incorrect ? "incorrect" : ""}>
           {katexify(`${state.num1} + ${state.num2}`, false)}

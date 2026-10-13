@@ -1,7 +1,6 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function NextjsImageRemoteDemo() {
@@ -13,7 +12,6 @@ export default function NextjsImageRemoteDemo() {
           name="Nextjs 13 Image"
         />
       </SubTitle>
-      <SourceCodeLink />
 
       <section className="space-y-5">
         {/* FAIL */}

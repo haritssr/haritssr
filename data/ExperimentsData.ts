@@ -43,7 +43,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare static, relative, absolute, fixed, and sticky positioning.",
         tags: ["layout", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "apple-navbar",
@@ -52,7 +52,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Recreate an Apple-inspired navigation bar with Tailwind utilities.",
         tags: ["navigation", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "blurry",
@@ -60,7 +60,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore blurred layers and translucent surfaces.",
         tags: ["visual-effects", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "floating-labels",
@@ -68,7 +68,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Move form labels as fields gain focus or contain text.",
         tags: ["forms", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "glowing-background",
@@ -76,7 +76,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Layer color and blur to create a glowing background.",
         tags: ["visual-effects", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "grid",
@@ -84,7 +84,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Arrange content with CSS Grid and Tailwind utilities.",
         tags: ["layout", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "planetscale-navbar",
@@ -92,7 +92,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore a PlanetScale-inspired navigation layout.",
         tags: ["navigation", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "sidebar",
@@ -100,7 +100,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Build a sidebar layout with Tailwind CSS.",
         tags: ["navigation", "layout"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "scrollbar",
@@ -108,7 +108,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare ways to style and contain scrollbars.",
         tags: ["scrolling", "css"],
         createdAt: "2026-09-25",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "youtube-thumbnail",
@@ -117,7 +117,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compose a video-thumbnail layout with Tailwind utilities.",
         tags: ["layout", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "newspaper",
@@ -125,7 +125,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Arrange a newspaper-inspired page with CSS layout tools.",
         tags: ["layout", "typography"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "centering-div",
@@ -133,7 +133,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare techniques for centering content.",
         tags: ["layout", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "columns",
@@ -141,7 +141,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Flow content through multiple CSS columns.",
         tags: ["layout", "css"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "tailwind-vs-apple-color",
@@ -149,7 +149,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare Tailwind and Apple-inspired color palettes.",
         tags: ["color", "design"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "feedback",
@@ -157,7 +157,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore the layout and controls of a feedback interface.",
         tags: ["forms", "design"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "grid-vs-column",
@@ -165,7 +165,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare CSS Grid with multi-column content flow.",
         tags: ["layout", "css"],
         createdAt: "2026-09-27",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: [
+          "2026-09-27",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
     ],
     id: 1,
@@ -182,7 +188,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Add and manage a task list using local React state.",
         tags: ["state", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usestate-form",
@@ -190,7 +196,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Capture form values with useState.",
         tags: ["state", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usestate-object-form",
@@ -198,7 +204,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Update object-shaped form state immutably.",
         tags: ["state", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usestate-draggable-box",
@@ -206,7 +212,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Move a box by updating its position in React state.",
         tags: ["state", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usestate-reacting-to-input",
@@ -215,7 +221,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Model typing, submitting, error, and success states in a form.",
         tags: ["state", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "useeffect-title",
@@ -223,7 +229,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Synchronize the document title with React state.",
         tags: ["effects", "browser-apis"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usecontext-dark-mode",
@@ -231,7 +237,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Share a theme through React context.",
         tags: ["state", "color"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usememo-1",
@@ -239,7 +245,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Observe rendering and memoization in a React example.",
         tags: ["performance", "state"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "useimperativehandle",
@@ -247,7 +253,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Expose a controlled imperative interface through a ref.",
         tags: ["interaction", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usereducer-todo-list",
@@ -255,7 +261,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Manage task updates through reducer actions.",
         tags: ["state", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "usereducer-todo-list-immer",
@@ -263,7 +269,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Combine a reducer with Immer for task-list updates.",
         tags: ["state", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "react-use-reducer-july-2026",
@@ -272,7 +278,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore a reducer-driven interaction and state transitions.",
         tags: ["state", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "submit-form",
@@ -280,7 +286,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Handle form submission and inspect the submitted values.",
         tags: ["forms", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "generic-select",
@@ -288,7 +294,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Build a reusable select with TypeScript generics.",
         tags: ["forms", "typescript"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
+        updatedAt: [
+          "2026-09-27",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-04",
+          "2026-10-13",
+        ],
       },
       {
         slug: "searchable-product-data",
@@ -296,7 +308,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Filter product data with a search input.",
         tags: ["search", "tables"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "search-table",
@@ -304,7 +316,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Search and display matching table rows.",
         tags: ["search", "tables"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "search-books",
@@ -312,7 +324,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Find books by filtering a local dataset.",
         tags: ["search", "data"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "search-interpol",
@@ -320,7 +332,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore an interface for searching Interpol notice data.",
         tags: ["search", "data-fetching"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "functional-props",
@@ -328,7 +340,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Pass behavior between components using function props.",
         tags: ["composition", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "edit-profile",
@@ -336,7 +348,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Switch between viewing and editing profile information.",
         tags: ["state", "forms"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-21", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-21", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "font-mixer",
@@ -345,7 +357,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare combinations of fonts in an interactive interface.",
         tags: ["typography", "design"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "counter",
@@ -353,7 +365,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Increment and reset a counter using React state.",
         tags: ["state", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "react-wrap-balancer",
@@ -361,7 +373,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Balance text wrapping with React Wrap Balancer.",
         tags: ["typography", "layout"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "modal-inside-modal",
@@ -369,7 +381,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore nested dialogs and their interaction.",
         tags: ["overlays", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "confetti",
@@ -378,7 +390,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Render confetti that follows the size of the browser viewport.",
         tags: ["animation", "browser-apis"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "simple-search",
@@ -386,7 +398,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Filter content with a simple controlled search field.",
         tags: ["search", "state"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "activity-demo",
@@ -395,7 +407,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore how React Activity preserves state while hiding content.",
         tags: ["state", "effects"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
     ],
     id: 2,
@@ -412,7 +424,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare native links with Next.js client navigation.",
         tags: ["navigation", "routing"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "swr",
@@ -421,7 +433,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Fetch people with SWR and handle loading and request failures.",
         tags: ["data-fetching", "data"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "articles",
@@ -431,7 +443,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         tags: ["routing", "data"],
         hideTitle: true,
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: [
+          "2026-09-20",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
       {
         slug: "students",
@@ -441,7 +459,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         tags: ["routing", "data"],
         hideTitle: true,
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: [
+          "2026-09-20",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
       {
         slug: "posts",
@@ -450,7 +474,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         tags: ["routing", "content"],
         hideTitle: true,
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-12"],
+        updatedAt: [
+          "2026-09-20",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-12",
+          "2026-10-13",
+        ],
       },
       {
         slug: "next-13-image-local",
@@ -459,7 +489,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore optimized rendering of local images with Next.js Image.",
         tags: ["images", "performance"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "next-13-image-remote",
@@ -468,7 +498,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore optimized rendering of remote images with Next.js Image.",
         tags: ["images", "performance"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
     ],
     id: 3,
@@ -485,7 +515,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Display a clock using browser time and periodic updates.",
         tags: ["time", "browser-apis"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "number-game",
@@ -493,7 +523,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Practice addition with a stateful number guessing game.",
         tags: ["mathematics", "interaction"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: [
+          "2026-09-26",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
       {
         slug: "inputs",
@@ -501,7 +537,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare native HTML input types and their behavior.",
         tags: ["forms", "html"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "details",
@@ -509,7 +545,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Use native disclosure elements for expandable content.",
         tags: ["disclosure", "html"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-04"],
+        updatedAt: [
+          "2026-09-20",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-04",
+          "2026-10-13",
+        ],
       },
       {
         slug: "select",
@@ -517,7 +559,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore the browser’s native select control.",
         tags: ["forms", "html"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "description-list",
@@ -525,7 +567,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Present terms and their descriptions with semantic HTML.",
         tags: ["content", "html"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "figure",
@@ -534,7 +576,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Group an illustration with its caption using semantic HTML.",
         tags: ["content", "html"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "text-editing",
@@ -542,7 +584,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore editable content and browser text interactions.",
         tags: ["forms", "browser-apis"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "youtube-embed",
@@ -550,7 +592,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Embed a YouTube player inside a page.",
         tags: ["media", "html"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "intersection-observer-api",
@@ -558,7 +600,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "React to elements entering or leaving the viewport.",
         tags: ["scrolling", "browser-apis"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "scroll-title",
@@ -566,7 +608,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Change the document title in response to scrolling.",
         tags: ["scrolling", "browser-apis"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "custom-scroll",
@@ -574,7 +616,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore a customized scrollable region.",
         tags: ["scrolling", "css"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "different-css-styling",
@@ -582,7 +624,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Compare different CSS styling approaches.",
         tags: ["css", "design"],
         createdAt: "2026-02-04",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
     ],
     id: 4,
@@ -599,7 +641,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore a Notion-inspired navigation bar.",
         tags: ["navigation", "design"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "times-table",
@@ -607,7 +649,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore multiplication patterns in a times table.",
         tags: ["mathematics", "tables"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "inline-maki",
@@ -615,7 +657,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore an inline editing interface.",
         tags: ["forms", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: [
+          "2026-09-26",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
       {
         slug: "masalah-to-feature",
@@ -624,7 +672,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Connect student problems to possible Haris Lab features in a graph.",
         tags: ["graphs", "learning"],
         createdAt: "2026-08-25",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "task",
@@ -635,7 +683,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         hideBackButton: true,
         hideTitle: true,
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
+        updatedAt: [
+          "2026-09-27",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-04",
+          "2026-10-13",
+        ],
       },
       {
         slug: "yearly-interest",
@@ -643,7 +697,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore how interest changes an amount over time.",
         tags: ["mathematics", "visualization"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "input-list",
@@ -651,7 +705,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Create and edit a list through form inputs.",
         tags: ["forms", "state"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "stopwatch",
@@ -659,7 +713,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Measure elapsed time with stopwatch controls.",
         tags: ["time", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03"],
+        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
       },
       {
         slug: "tools",
@@ -668,7 +722,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Record tools and their quantities in a local SQLite database.",
         tags: ["local-data", "forms"],
         createdAt: "2026-08-19",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-04"],
+        updatedAt: [
+          "2026-09-27",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-04",
+          "2026-10-13",
+        ],
       },
       {
         slug: "emoji-groups",
@@ -676,7 +736,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Browse an atlas of emoji organized into groups.",
         tags: ["search", "content"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-09-29", "2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: [
+          "2026-09-29",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
       {
         slug: "corner-smoothing",
@@ -685,7 +751,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare rounded corners, native CSS squircles, and Lisse curves.",
         tags: ["css", "design"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
       },
       {
         slug: "external-link-icons",
@@ -694,7 +760,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare minimal arrows, chevrons, and exit markers for external links.",
         tags: ["icons", "design", "interaction"],
         createdAt: "2026-10-03",
-        updatedAt: ["2026-10-03", "2026-10-11"],
+        updatedAt: ["2026-10-03", "2026-10-11", "2026-10-13"],
       },
     ],
     id: 10,
@@ -719,6 +785,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-04",
           "2026-10-06",
           "2026-10-11",
+          "2026-10-13",
         ],
       },
       {
@@ -734,6 +801,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-06",
           "2026-10-11",
+          "2026-10-13",
         ],
       },
       {
@@ -749,6 +817,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-06",
           "2026-10-11",
+          "2026-10-13",
         ],
       },
       {
@@ -758,7 +827,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore orbital shapes, electron probability, and the nodes between them.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-29",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-06", "2026-10-11"],
+        updatedAt: [
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-06",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
       {
         slug: "magnetic-suspension",
@@ -767,7 +842,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Balance magnetic attraction, string tension, and gravity.",
         tags: ["magnetism", "mechanics", "visualization"],
         createdAt: "2026-10-11",
-        updatedAt: ["2026-10-11"],
+        updatedAt: ["2026-10-11", "2026-10-13"],
       },
       {
         slug: "projectile-motion",
@@ -791,6 +866,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-06",
           "2026-10-11",
+          "2026-10-13",
         ],
       },
       {
@@ -807,6 +883,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-06",
           "2026-10-11",
           "2026-10-12",
+          "2026-10-13",
         ],
       },
     ],
@@ -829,7 +906,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Render inline and display math with KaTeX.",
         tags: ["mathematics", "typography"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: [
+          "2026-09-20",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+        ],
       },
       {
         slug: "live-playground",
@@ -838,7 +921,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Write TeX and preview equations as you type.",
         tags: ["mathematics", "editor"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-12"],
+        updatedAt: [
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-12",
+          "2026-10-13",
+        ],
       },
       {
         slug: "matrix-builder",
@@ -847,7 +936,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Edit a matrix and generate its TeX notation.",
         tags: ["mathematics", "forms"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
       },
       {
         slug: "derivation-stepper",
@@ -857,7 +946,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Solve a quadratic equation by completing the square, one step at a time.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-12"],
+        updatedAt: [
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-12",
+          "2026-10-13",
+        ],
       },
       {
         slug: "piecewise-functions",
@@ -867,7 +962,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore 13 piecewise functions with interactive graphs and values.",
         tags: ["mathematics", "visualization"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
       },
       {
         slug: "equation-annotations",
@@ -877,7 +972,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explain equation terms with color, boxes, and labels in KaTeX.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11"],
+        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
       },
       {
         slug: "math-notation",
@@ -887,7 +982,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Learn what KaTeX can render and when math needs other tools.",
         tags: ["notation", "katex", "learning"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12"],
+        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
       },
       {
         slug: "high-school-symbols",
@@ -897,7 +992,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Cari simbol matematika dan fisika SMA, beserta arti dan contohnya.",
         tags: ["notation", "katex", "physics", "learning", "indonesia"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12"],
+        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
       },
       {
         slug: "circle",
@@ -917,7 +1012,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Latihan 27 soal polinomial dengan petunjuk dan pembahasan bertahap.",
         tags: ["algebra", "polynomials", "equations", "learning"],
         createdAt: "2026-10-08",
-        updatedAt: ["2026-10-08", "2026-10-11"],
+        updatedAt: ["2026-10-08", "2026-10-11", "2026-10-13"],
       },
       {
         slug: "euler",
@@ -927,7 +1022,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Explore Euler’s identity through a rotating unit circle and a guided derivation.",
         tags: ["complex-numbers", "trigonometry", "exponents", "visualization"],
         createdAt: "2026-10-07",
-        updatedAt: ["2026-10-07", "2026-10-11", "2026-10-12"],
+        updatedAt: ["2026-10-07", "2026-10-11", "2026-10-12", "2026-10-13"],
       },
       {
         slug: "logarithms",
@@ -1009,6 +1104,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-06",
           "2026-10-10",
           "2026-10-11",
+          "2026-10-13",
         ],
       },
       {
@@ -1026,6 +1122,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-06",
           "2026-10-10",
           "2026-10-11",
+          "2026-10-13",
         ],
       },
       {
@@ -1043,6 +1140,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-06",
           "2026-10-10",
           "2026-10-11",
+          "2026-10-13",
         ],
       },
     ],

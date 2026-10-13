@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ClockDemo() {
@@ -11,7 +10,6 @@ export default function ClockDemo() {
       <SubTitle>
         Clock using new Date(), useEffect(), useInterval(), cleanInterval()
       </SubTitle>
-      <SourceCodeLink />
       <Clock />
     </>
   );

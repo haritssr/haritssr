@@ -3,14 +3,12 @@
 import Image from "next/image";
 import type React from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindPositionDemo() {
   return (
     <>
       <SubTitle>CSS position with Tailwind CSS</SubTitle>
-      <SourceCodeLink />
       <div className="space-y-20">
         <Wrapper title="relative + absolute">
           <div className="relative h-40 bg-blue-500">

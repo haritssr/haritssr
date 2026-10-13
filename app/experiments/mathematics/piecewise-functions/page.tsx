@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import Demo from "./demo";
@@ -21,7 +20,6 @@ export default function PiecewiseFunctionsPage() {
           slider across each boundary to see the active branch and result while
           KaTeX displays the complete definition.
         </p>
-        <SourceCodeLink />
       </div>
       <Section title="Explore the branches" id="piecewise-heading">
         <Demo />

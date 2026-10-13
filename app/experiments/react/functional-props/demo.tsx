@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactFunctionalPropsDemo() {
@@ -11,7 +10,6 @@ export default function ReactFunctionalPropsDemo() {
       <SubTitle>
         Functional Props - TypeScript for beginner to master - Jack Herrington
       </SubTitle>
-      <SourceCodeLink />
       <TextWithNumber
         header={(num: number) => <span>The header is {num}</span>}
       >

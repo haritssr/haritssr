@@ -6,7 +6,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -53,7 +52,6 @@ export default function AtomicOrbitalsPage() {
           p, d, and f shapes, and how the patterns describe where an electron is
           likely to be found.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-8">

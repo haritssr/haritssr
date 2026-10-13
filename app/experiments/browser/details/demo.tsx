@@ -1,7 +1,6 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function DetailsDemo() {
@@ -20,7 +19,6 @@ export default function DetailsDemo() {
         <br />I prefer Headless UI or Radix UI similar UI component than this
         weird native API.
       </SubTitle>
-      <SourceCodeLink />
       <details className="cursor-pointer hover:ring-2 hover:ring-blue-500">
         <summary className="hover:text-rose-500">Expand this</summary>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque dolores

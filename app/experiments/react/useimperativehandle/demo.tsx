@@ -8,7 +8,6 @@ import type {
   Ref,
 } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface MyInputHandle {
@@ -44,7 +43,6 @@ export default function ReactUseImperativeHandleDemo() {
   return (
     <>
       <SubTitle>Example</SubTitle>
-      <SourceCodeLink />
       <SomeApp />
       <Yada />
     </>

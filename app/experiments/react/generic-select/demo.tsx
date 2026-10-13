@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface Base {
@@ -56,7 +55,6 @@ export default function ReactGenericSelectDemo() {
           <li>The option you choose will immediately appear in Results.</li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
       <div className="text-xl font-semibold">
         Please choose your subject and teacher
       </div>

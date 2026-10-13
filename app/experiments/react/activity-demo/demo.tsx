@@ -3,7 +3,6 @@
 import { Activity, useEffect, useState } from "react";
 
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 /*
 BEFORE
 { showSidebar && <SideBar/> }
@@ -41,7 +40,6 @@ export default function ActivityDemo() {
           The page intentionally bad looking in order to focus on the code
           behind the screen.
         </SubTitle>
-        <SourceCodeLink />
         <button
           className="rounded-sm bg-blue-500 px-2.5 py-1.5 text-sm text-white hover:bg-blue-500/95 active:translate-y-px"
           onClick={() => {

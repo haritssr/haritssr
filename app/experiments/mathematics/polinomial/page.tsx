@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
@@ -20,7 +19,6 @@ export default function PolynomialPage() {
           soal secara bertahap, periksa jawabanmu, dan buka petunjuk saat
           diperlukan.
         </SubTitle>
-        <SourceCodeLink />
       </div>
       <PolynomialPractice />
     </div>

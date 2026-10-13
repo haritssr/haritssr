@@ -1,13 +1,11 @@
 "use client";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function CustomScrollDemo() {
   return (
     <>
       <SubTitle>Custom Scroll</SubTitle>
-      <SourceCodeLink />
       <div className="h-40 overflow-y-scroll">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias non
         assumenda harum facere tempore a sequi tempora vel adipisci ad itaque,

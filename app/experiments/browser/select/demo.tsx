@@ -1,7 +1,6 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function SelectDemo() {
@@ -23,7 +22,6 @@ export default function SelectDemo() {
           name="Radix Primitive Select"
         />
       </SubTitle>
-      <SourceCodeLink />
       <select
         aria-label="Pet"
         className="w-1/3 px-2 py-2"

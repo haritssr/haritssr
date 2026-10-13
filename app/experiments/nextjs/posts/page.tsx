@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import PageTitle from "@/components/PageTitle";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import { getSortedPostsData } from "@/utils/posts";
@@ -16,7 +15,6 @@ export default function PostsPage() {
     <>
       <PageTitle>Posts</PageTitle>
       <SubTitle>Posts by Nextjs tutorial</SubTitle>
-      <SourceCodeLink />
       <ul className="space-y-5">
         {allPostsData.map(({ id, date, title }) => (
           <li key={id}>

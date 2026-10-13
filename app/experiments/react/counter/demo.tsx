@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactCounterDemo() {
@@ -41,7 +40,6 @@ export default function ReactCounterDemo() {
   return (
     <>
       <SubTitle>Counter</SubTitle>
-      <SourceCodeLink />
       <div>{formatTime(second)}</div>
       <div>{second}</div>
       <button

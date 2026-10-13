@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import Demo from "./demo";
@@ -20,7 +19,6 @@ export default function MatrixBuilderPage() {
           Build a matrix from individual entries. Change its size and brackets
           to see how the same values become different TeX environments.
         </p>
-        <SourceCodeLink />
       </div>
       <Section title="Build a matrix" id="matrix-heading">
         <Demo />

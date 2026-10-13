@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -138,7 +137,6 @@ export default function LinearEquationsThreeVariablesPage() {
           elimination, interpret the geometry, and explore what changes when
           equations repeat or contradict one another.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

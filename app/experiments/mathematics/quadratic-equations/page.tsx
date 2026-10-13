@@ -4,7 +4,6 @@ import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -76,7 +75,6 @@ export default function QuadraticEquationsPage() {
           graph, and when to factor, complete the square, or use the quadratic
           formula.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

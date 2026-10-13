@@ -4,7 +4,6 @@ import type { ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import data from "@/data/search-books.json";
 
@@ -58,7 +57,6 @@ export default function ReactSearchBooksDemo(): ReactElement {
           <li>Not include: space sensitive.</li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
       <div className="group mx-auto flex items-center sm:w-1/3">
         <input
           aria-label="Search books"

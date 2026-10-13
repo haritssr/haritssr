@@ -4,7 +4,6 @@
 import { useInView } from "react-intersection-observer";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 // native version
 // import { useEffect } from "react";
 import SubTitle from "@/components/SubTitle";
@@ -82,7 +81,6 @@ function IntersectionObserverAPIHooks() {
         />
         <br /> Scroll to the bottom to see the effect, the rocket launches.🚀.
       </SubTitle>
-      <SourceCodeLink />
       <div className="mt-96 rounded-md bg-zinc-100 p-10">
         <h2 className="mb-2 text-2xl font-semibold" ref={myRef}>
           {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}

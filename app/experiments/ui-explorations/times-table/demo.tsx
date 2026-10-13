@@ -3,14 +3,12 @@
 import { parseAsInteger, useQueryState } from "nuqs";
 import { Suspense, useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 // import { IncrementButton } from "../../../app/times-table/IncrementButton";
 // import TimesTableComponent from "../../../app/times-table/TimesTable";
 
 export default function TimesTableDemo() {
   return (
     <>
-      <SourceCodeLink />
       <Suspense fallback="..loading">
         <IncrementButton />
         <TimesTableComponent />

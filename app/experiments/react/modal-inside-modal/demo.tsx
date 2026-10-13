@@ -5,14 +5,12 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import type { ReactNode } from "react";
 
 import Button from "@/components/Button";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactModalInsideModalDemo() {
   return (
     <>
       <SubTitle>Modal Inside Modal</SubTitle>
-      <SourceCodeLink />
       <ProfileDialog title="Edit profile" fieldPrefix="outer">
         <ProfileDialog title="Another Edit profile" fieldPrefix="inner" />
       </ProfileDialog>

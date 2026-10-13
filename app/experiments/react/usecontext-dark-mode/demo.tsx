@@ -4,7 +4,6 @@ import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 type Theme = "light" | "dark";
@@ -30,7 +29,6 @@ export default function ReactUseContextDarkModeDemo() {
   return (
     <>
       <SubTitle>Yeah</SubTitle>
-      <SourceCodeLink />
       <ThemeContext.Provider value={theme}>
         <div className="space-y-2">
           <Form />

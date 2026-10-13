@@ -1,7 +1,6 @@
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -28,7 +27,6 @@ export default function LogarithmsPage() {
           their rules from the laws of powers. Explore the graph and check your
           understanding with worked examples.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

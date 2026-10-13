@@ -2,7 +2,6 @@ import Image from "next/image";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 import NotionNavigationMenu from "./navigation-menu";
@@ -21,7 +20,6 @@ export default function NotionNavbarDemo() {
           .
         </li>
       </ExplanationList>
-      <SourceCodeLink />
       <div className="flex flex-wrap items-center gap-2">
         <NotionLogo />
         <NotionNavigationMenu />

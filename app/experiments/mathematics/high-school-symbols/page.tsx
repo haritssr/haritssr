@@ -1,7 +1,6 @@
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
@@ -48,7 +47,6 @@ export default function HighSchoolSymbolsPage() {
           </InternalLink>
           .
         </p>
-        <SourceCodeLink />
       </div>
 
       <Section

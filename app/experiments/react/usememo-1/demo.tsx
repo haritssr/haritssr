@@ -3,7 +3,6 @@
 import { createContext, memo, useContext, useState } from "react";
 import type { ChangeEvent } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface NameInputAddressProps {
@@ -30,7 +29,6 @@ export default function ReactUseMemo1Demo() {
         useMemo lets you skip re-rendering components when the props are
         unchanged
       </SubTitle>
-      <SourceCodeLink />
       <NameInputAddress
         address={address}
         name={name}

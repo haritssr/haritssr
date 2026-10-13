@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -22,7 +21,6 @@ export default function DerivationStepperPage() {
           square. Reveal each transformation and see how KaTeX keeps the
           equations aligned as the derivation grows.
         </p>
-        <SourceCodeLink />
       </div>
       <Section title="Reveal the reasoning" id="derivation-heading">
         <Demo />

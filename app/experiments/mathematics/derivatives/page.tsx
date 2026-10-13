@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -53,7 +52,6 @@ export default function DerivativesPage() {
           A derivative gives the slope of a curve at one point. It comes from
           asking what happens to the slope between two points as they meet.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

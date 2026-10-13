@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -137,7 +136,6 @@ export default function NumberSystemsPage() {
           Learn how number sets fit together, locate values on a number line,
           and translate between inequalities and interval notation.
         </SubTitle>
-        <SourceCodeLink />
       </div>
 
       <Section

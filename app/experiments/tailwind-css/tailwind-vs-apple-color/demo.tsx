@@ -1,7 +1,6 @@
 "use client";
 
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface BoxProps {
@@ -15,7 +14,6 @@ export default function TailwindVsAppleColorDemo() {
       <SubTitle>
         The difference between Tailwind CSS Gray colors vs Apple Gray colors
       </SubTitle>
-      <SourceCodeLink />
       <div className="space-y-20">
         <Section
           title="Apple"

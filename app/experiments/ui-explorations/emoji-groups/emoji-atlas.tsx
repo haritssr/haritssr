@@ -1,4 +1,3 @@
-import SourceCodeLink from "@/components/SourceCodeLink";
 
 import EmojiSelector from "./emoji-selector";
 
@@ -500,7 +499,6 @@ const groupings = [
 export default function EmojiAtlas() {
   return (
     <>
-      <SourceCodeLink />
 
       <div className="space-y-20 pb-12">
         <header className="max-w-full space-y-3">

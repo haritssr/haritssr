@@ -3,7 +3,6 @@
 import { BeakerIcon } from "@heroicons/react/24/outline";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindGlowingBackgroundDemo() {
@@ -16,7 +15,6 @@ export default function TailwindGlowingBackgroundDemo() {
           name="Source code"
         />
       </SubTitle>
-      <SourceCodeLink />
 
       <div className="h-auto rounded-lg bg-black px-2 py-6 sm:px-8 sm:py-16">
         <div className="grid items-start justify-center gap-8">

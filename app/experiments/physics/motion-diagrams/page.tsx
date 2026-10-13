@@ -3,7 +3,6 @@ import SubTitle from "components/SubTitle";
 import type { Metadata } from "next";
 
 import SectionHeading from "@/components/SectionHeading";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import MotionDiagram from "./MotionDiagram";
@@ -67,7 +66,6 @@ export default function MotionDiagramsPage() {
         <SubTitle>
           Adjust the controls and see how each motion graph changes over time.
         </SubTitle>
-        <SourceCodeLink />
         <nav
           aria-label="Jump to a motion type"
           className="my-10 flex flex-wrap gap-2"

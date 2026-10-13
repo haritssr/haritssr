@@ -1,4 +1,3 @@
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 const rows = [
@@ -19,7 +18,6 @@ export default function ScrollbarDemo() {
         Hover over the scroll areas and drag their thumbs to try a scrollbar
         that stays transparent until it is needed.
       </SubTitle>
-      <SourceCodeLink />
 
       <div className="space-y-20 pb-16">
         <section aria-labelledby="vertical-scrollbar-title">

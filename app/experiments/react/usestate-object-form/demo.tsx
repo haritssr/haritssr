@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactUseStateObjectFormDemo() {
@@ -39,7 +38,6 @@ export default function ReactUseStateObjectFormDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
       <form className="mb-5 flex flex-col space-y-3">
         <label className={labelStyle}>
           First Name

@@ -2,7 +2,6 @@
 
 import type React from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindCenteringDivDemo() {
@@ -11,7 +10,6 @@ export default function TailwindCenteringDivDemo() {
       <SubTitle>
         Methods to centering div in Tailwind CSS or inline CSS
       </SubTitle>
-      <SourceCodeLink />
 
       <section className="grid grid-cols-1 gap-10 sm:grid-cols-2">
         <Wrapper

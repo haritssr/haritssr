@@ -4,7 +4,6 @@ import { useState } from "react";
 import type { FormEvent, SetStateAction } from "react";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactUseStateReactingToInputDemo() {
@@ -17,7 +16,6 @@ export default function ReactUseStateReactingToInputDemo() {
           name="react.dev"
         />
       </SubTitle>
-      <SourceCodeLink />
       <Example />
     </>
   );

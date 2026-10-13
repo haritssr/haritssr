@@ -1,13 +1,11 @@
 "use client";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindColumnsDemo() {
   return (
     <>
       <SubTitle>Columns</SubTitle>
-      <SourceCodeLink />
 
       <div className="columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-3 xl:columns-4">
         <Box3 />

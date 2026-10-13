@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface Notice {
@@ -100,7 +99,6 @@ export default function ReactSearchInterpolDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
 
       <input
         aria-label="Search Interpol notices"

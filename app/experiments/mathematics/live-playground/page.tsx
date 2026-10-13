@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
@@ -21,7 +20,6 @@ export default function LivePlaygroundPage() {
           Write TeX and watch KaTeX typeset it as you edit. Try a template, then
           change the notation or compare inline math with a standalone equation.
         </SubTitle>
-        <SourceCodeLink />
       </div>
       <Section title="Try your own notation" id="playground-heading">
         <Demo />

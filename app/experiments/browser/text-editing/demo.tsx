@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TextEditingDemo() {
@@ -13,7 +12,6 @@ export default function TextEditingDemo() {
   return (
     <>
       <SubTitle>HTML built-in text editing tag</SubTitle>
-      <SourceCodeLink />
       <div className="flex flex-col space-y-2" ref={elementSelected}>
         <del>del</del>
         <s>s</s>

@@ -5,7 +5,6 @@ import type { Dispatch, SetStateAction } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface productDataType {
@@ -39,7 +38,6 @@ export default function ReactSearchableProductDataDemo() {
           <li>Haven&#39;t applied debounce.</li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
       <FilterableProductTable products={productData} />
     </>
   );

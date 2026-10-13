@@ -1,7 +1,6 @@
 import "katex/dist/katex.min.css";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -19,7 +18,6 @@ export default function MagneticSuspensionPage() {
           Explore how magnetic attraction, tension, and gravity can hold it at
           an angle.
         </SubTitle>
-        <SourceCodeLink />
       </div>
       <Section
         id="read-the-setup"

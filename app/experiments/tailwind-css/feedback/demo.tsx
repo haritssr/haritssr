@@ -1,7 +1,6 @@
 "use client";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindFeedbackDemo() {
@@ -14,7 +13,6 @@ export default function TailwindFeedbackDemo() {
           name="this tweet"
         />
       </SubTitle>
-      <SourceCodeLink />
       <form className="absolute right-8 bottom-8 flex flex-col rounded-lg border bg-white">
         <textarea
           aria-label="Feedback"

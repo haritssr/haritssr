@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import PageTitle from "@/components/PageTitle";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import {
   getNextjsStudent,
   NextjsStudentsData,
@@ -37,7 +36,6 @@ export default async function StudentPage({ params }: Props) {
   return (
     <div className="mx-auto min-h-screen w-full max-w-full px-5 xl:px-0">
       <PageTitle>Student Details</PageTitle>
-      <SourceCodeLink sourcePath="app/experiments/nextjs/students/[id]" />
       <div className="mt-5 space-y-2">
         <div className="text-zinc-500">
           <span className="font-semibold text-zinc-800">Name :</span>{" "}

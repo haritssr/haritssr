@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface FontMixerProps {
@@ -14,7 +13,6 @@ export default function ReactFontMixerDemo() {
   return (
     <>
       <SubTitle>Font Mixer</SubTitle>
-      <SourceCodeLink />
       <FontMixer fonts={["Arial", "Arial"]}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
         convallis mauris dui, non placerat urna fringilla at. Suspendisse a orci

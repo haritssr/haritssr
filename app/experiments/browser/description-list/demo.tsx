@@ -2,7 +2,6 @@
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function DescriptionListDemo() {
@@ -22,7 +21,6 @@ export default function DescriptionListDemo() {
           </li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
       <dl className="sm:w-1/2">
         <dt className="font-bold">This is title</dt>
         <dd className="mb-5 pl-10">

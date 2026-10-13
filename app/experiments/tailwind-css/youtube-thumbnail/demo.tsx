@@ -1,13 +1,11 @@
 "use client";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindYoutubeThumbnailDemo() {
   return (
     <>
       <SubTitle>Youtube Thumbnail example</SubTitle>
-      <SourceCodeLink />
 
       <div className="relative h-[360px] w-full overflow-hidden rounded-md border border-purple-300 bg-linear-to-br from-zinc-50 to-purple-100 shadow-md shadow-purple-100">
         <div>

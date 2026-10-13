@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactUseEffectTitleDemo() {
@@ -16,7 +15,6 @@ export default function ReactUseEffectTitleDemo() {
   return (
     <>
       <SubTitle>Count = {count}</SubTitle>
-      <SourceCodeLink />
       <div className="space-x-2">
         <button
           onClick={() => {

@@ -4,7 +4,6 @@ import { useState } from "react";
 import type { ChangeEvent, PointerEvent, ReactNode } from "react";
 
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 interface Position {
@@ -65,7 +64,6 @@ export default function ReactUseStateDraggableBoxDemo() {
           name="react.dev"
         />
       </SubTitle>
-      <SourceCodeLink />
       <div className="mb-5 w-full sm:w-1/6">
         <select
           aria-label="Box color"

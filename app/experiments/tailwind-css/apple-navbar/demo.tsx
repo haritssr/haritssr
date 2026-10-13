@@ -2,7 +2,6 @@
 
 import ExternalLink from "@/components/ExternalLink";
 import SectionHeading from "@/components/SectionHeading";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function TailwindAppleNavbarDemo() {
@@ -12,7 +11,6 @@ export default function TailwindAppleNavbarDemo() {
         <ExternalLink href="https://www.apple.com" name="Apple.com" /> sticky
         navigation bar
       </SubTitle>
-      <SourceCodeLink />
       <div>
         <div className="border border-zinc-300">
           <div className="sticky top-[88px] flex items-center justify-between border-b border-b-gray-300 bg-white/70 p-2 py-2 backdrop-blur-md">

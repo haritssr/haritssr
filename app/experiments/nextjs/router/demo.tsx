@@ -5,7 +5,6 @@ import { Suspense, useCallback, useState } from "react";
 
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function NextjsRouterDemo() {
@@ -69,7 +68,6 @@ function RouterDemoContent() {
           name="next/navigation"
         />
       </SubTitle>
-      <SourceCodeLink />
 
       <div className="space-y-20">
         <Section title="usePathname">

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 
 export default function Stopwatch() {
   const [time, setTime] = useState<number>(0);
@@ -27,7 +26,6 @@ export default function Stopwatch() {
 
   return (
     <>
-      <SourceCodeLink />
       <div>{time}</div>
       <div className="space-x-3">
         <button

@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 
 export default function ReactEditProfileDemo() {
@@ -24,7 +23,6 @@ export default function ReactEditProfileDemo() {
           <li>Try to edit the profile and save to see the result of change.</li>
         </ExplanationList>
       </SubTitle>
-      <SourceCodeLink />
       <form
         onSubmit={(e) => {
           e.preventDefault();

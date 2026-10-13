@@ -2,7 +2,6 @@
 
 import useSWR from "swr";
 
-import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
 import { fetchPeople } from "@/utils/fetchPeople";
 import type { Person } from "@/utils/fetchPeople";
@@ -21,7 +20,6 @@ export default function NextjsSWRDemo() {
         </code>{" "}
         component
       </SubTitle>
-      <SourceCodeLink />
       <PeopleResults />
     </>
   );
