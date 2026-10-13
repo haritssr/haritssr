@@ -28,6 +28,41 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Use the smallest set of skills specific to the task.
 - See [README.md](README.md) for architecture and implementation details.
 
+## Next.js 16.4 Feature Assessment
+
+Reviewed on 2026-10-13 against `next.config.ts`, the route implementations,
+and the installed version-matched documentation. These are recommendations,
+not measured speedups or instructions to enable every option.
+
+| Feature | Current status | Recommendation | Fit and verification for this codebase |
+| --- | --- | --- | --- |
+| Smaller disk cache, lazy server HMR, shared runtime, and production minification | Automatic with Turbopack | Keep | Standard `next dev` and `next build` already receive these improvements; no extra flags needed. |
+| `turbopackMemoryEviction: "full"` | Enabled | Keep; measure if recompilation becomes slow | Suits the 8 GB machine by evicting persisted compiler data aggressively. This is separate from garbage collection. |
+| `experimental.turbopackGc: true` | Enabled for trial | Monitor before retaining long term | Removes unreachable compiler work from memory and disk across many experiment routes. Requires filesystem caching and affects both development and builds. Compare long-session memory, cache size, and recompilation time; verify CI. |
+| `experimental.turbopackLazyDynamicImports: true` | Enabled for trial | Monitor first-use compilation | Search, TOC, confetti, and Mermaid use dynamic imports. May reduce initial development compilation; some `next/dynamic` targets remain eager. Check first-use latency, hover/focus search preloading, and deferred compilation errors. Production behavior is unchanged. |
+| `reactCompiler` with `experimental.turbopackRustReactCompiler` | Disabled | Pilot after profiling | Interactive physics/math labs and the changelog explorer could benefit from automatic memoization. The Rust implementation needs both flags and no Babel compiler dependency. Compare render cost and compilation time; preserve existing memoization and verify widget behavior before wider adoption. |
+| `cacheComponents: true` with `partialPrefetching: true` | Disabled | Plan a separate migration | Static articles and interactive labs could benefit from reusable navigation shells and preserved state. Review uncached work, Suspense boundaries, and request-time `connection()` in Commits and local task routes. Audit timer, canvas, dialog, and TOC effects when routes become hidden and visible. Many shared links currently use `prefetch={false}`; change that policy deliberately. |
+| Route `ensureStatic` | Unused | Use selectively after Cache Components adoption | Could protect writing and static article routes from accidental request-time rendering. Requires Cache Components. Avoid a root-wide static requirement: Commits and local database pages intentionally render at request time. |
+| `navigation()` and `prefetch()` from `next/cache` | Unused | Use only for identified prefetch costs after migration | Useful for expensive server subtrees that should load later. Current large commit tables are passed to clients; these APIs do not make client accordion content fetch only when opened. |
+| `experimental.turbopackPluginRuntimeStrategy: "workerThreads"` | Disabled | Defer | MDX and PostCSS could benefit, but the installed guide documents a fallback on Node 24.13.1 and newer; this machine currently uses Node 26.8.2. Recheck compatibility before trialing; avoid `forceWorkerThreads`. |
+| React 19.3 View Transitions and Fragment Refs | Available, unused | Add only for a concrete UI requirement | They provide animation and DOM interaction capabilities, not automatic rendering speedups. Preserve reduced-motion behavior if adding transitions. |
+| Additional Turbopack roots/global virtual stores | Not configured | Skip for the current structure | No linked workspace packages or external dependency roots are configured; there is no demonstrated need. |
+
+Use the installed guides before changing configuration:
+[garbage collection](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/turbopackGc.md),
+[lazy imports](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/turbopackLazyDynamicImports.md),
+[Rust compiler](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/turbopackRustReactCompiler.md),
+and [Cache Components](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/cacheComponents.md).
+The first two candidates follow the documented behavior in the official
+[garbage collection](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackGc)
+and [lazy import](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackLazyDynamicImports)
+references; their suitability here is an inference from the codebase.
+
+Trial one change at a time. Run the required checks above; production-build
+verification belongs in CI or a local human workflow. Follow the existing
+browser and test-file restrictions. Reassess this table after framework upgrades
+or configuration changes.
+
 # Design and Components
 
 - Before changing UI, inspect `/design` and `app/design/`. Reuse suitable shared
