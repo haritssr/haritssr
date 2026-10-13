@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "1d50a72cbab02c2da6d5e2660741d6c0a573ff35",
+      "date": "2026-10-13T15:49:49+07:00",
+      "subject": "refactor(ArticleTableOfContents): extract outline and navigation hooks"
+    },
+    {
       "hash": "b30bd8e14d95da3cb8ea7dcc6bf7d082d17e7761",
       "date": "2026-10-13T15:49:43+07:00",
       "subject": "fix(ArticleTableOfContents): keep reading controls above footer"

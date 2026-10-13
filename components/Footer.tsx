@@ -2,8 +2,6 @@ import { RSS_PATH } from "@/utils/site";
 
 import FooterActions from "./FooterActions";
 
-const copyrightYear = new Date().getFullYear();
-
 export default function Footer() {
   return (
     <footer
@@ -11,7 +9,7 @@ export default function Footer() {
       data-site-footer=""
     >
       <div className="shrink-0">
-        &#169; <span> 2021-{copyrightYear}</span>
+        &#169; <span> 2021-2026</span>
       </div>
       <FooterActions rssPath={RSS_PATH} />
     </footer>
