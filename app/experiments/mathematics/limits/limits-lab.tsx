@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import { GraphAxes, graphPath, graphX, graphY } from "../graph";
@@ -98,22 +99,13 @@ export default function LimitsLab() {
         ];
 
   return (
-    <section
-      aria-labelledby="limits-lab-heading"
-      className="border-border min-w-0 overflow-hidden rounded-2xl border"
+    <Section
+      id="limits-lab-heading"
+      title="Approach a point"
+      description="Choose a function, then bring the sample point closer from either side."
+      className="min-w-0"
+      contentClassName="border-border min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-5 py-4 sm:px-6">
-        <h2
-          className="text-foreground text-lg font-semibold"
-          id="limits-lab-heading"
-        >
-          Approach a point
-        </h2>
-        <p className="text-muted mt-1 max-w-full text-sm">
-          Choose a function, then bring the sample point closer from either
-          side.
-        </p>
-      </div>
       <div className="grid min-w-0 grid-cols-1 gap-6 p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_260px]">
         <figure className="min-w-0">
           <svg
@@ -323,6 +315,6 @@ export default function LimitsLab() {
           {selected.explanation}
         </p>
       </div>
-    </section>
+    </Section>
   );
 }

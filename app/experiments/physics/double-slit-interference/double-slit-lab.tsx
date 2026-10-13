@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import { getIntensity, getLightColor } from "./model";
@@ -134,19 +135,13 @@ export default function DoubleSlitLab() {
 
   return (
     <div className="text-foreground space-y-20">
-      <section
-        aria-labelledby="double-slit-lab-heading"
-        className="border-border bg-background overflow-hidden rounded-2xl border"
+      <Section
+        id="double-slit-lab-heading"
+        title="Young’s double slit"
+        className="min-w-0"
+        contentClassName="border-border bg-background overflow-hidden rounded-2xl border"
       >
-        <div className="border-border flex flex-col gap-4 border-b px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
-          <div>
-            <h2
-              className="text-foreground text-lg font-semibold tracking-tight"
-              id="double-slit-lab-heading"
-            >
-              Young’s double slit
-            </h2>
-          </div>
+        <div className="border-border border-b px-5 py-5 sm:px-7">
           <span className="text-muted inline-flex w-fit items-center gap-2 text-xs">
             <span
               aria-hidden="true"
@@ -629,18 +624,9 @@ export default function DoubleSlitLab() {
             </div>
           </aside>
         </div>
-      </section>
+      </Section>
 
-      <section aria-labelledby="reading-pattern-heading" className="space-y-4">
-        <div>
-          <h2
-            className="text-foreground text-xl font-semibold tracking-tight"
-            id="reading-pattern-heading"
-          >
-            Why do the bands appear?
-          </h2>
-        </div>
-
+      <Section id="reading-pattern-heading" title="Why do the bands appear?">
         <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           <article className="border-border bg-surface rounded-xl border p-5">
             <p className="text-action text-sm font-semibold">
@@ -682,7 +668,7 @@ export default function DoubleSlitLab() {
             </p>
           </article>
         </div>
-      </section>
+      </Section>
     </div>
   );
 }

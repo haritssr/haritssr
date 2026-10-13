@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import { GraphAxes, graphPath, graphX, graphY } from "../graph";
@@ -53,21 +54,13 @@ export default function IntegralsLab() {
   }
 
   return (
-    <section
-      aria-labelledby="integrals-lab-heading"
-      className="border-border min-w-0 overflow-hidden rounded-2xl border"
+    <Section
+      id="integrals-lab-heading"
+      title="Build area from rectangles"
+      description="Add rectangles and watch the estimate approach the exact integral."
+      className="min-w-0"
+      contentClassName="border-border min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-5 py-4 sm:px-6">
-        <h2
-          className="text-foreground text-lg font-semibold"
-          id="integrals-lab-heading"
-        >
-          Build area from rectangles
-        </h2>
-        <p className="text-muted mt-1 max-w-full text-sm">
-          Add rectangles and watch the estimate approach the exact integral.
-        </p>
-      </div>
       <div className="grid min-w-0 grid-cols-1 gap-6 p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_260px]">
         <figure className="min-w-0">
           <svg
@@ -210,6 +203,6 @@ export default function IntegralsLab() {
         the axis, positive and negative parts can cancel even though the
         geometric area is not zero.
       </p>
-    </section>
+    </Section>
   );
 }

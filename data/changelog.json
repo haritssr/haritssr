@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "133caca36519209f95583ce97df5fca5fe9494d4",
+      "date": "2026-10-13T23:19:27+07:00",
+      "subject": "refactor(PageHeader): unify titles and introductory spacing"
+    },
+    {
       "hash": "d1fd253aff5ab53a97de4fcde9a425784a13a15c",
       "date": "2026-10-13T23:18:33+07:00",
       "subject": "fix(Theme): insert bootstrap script only in server HTML"

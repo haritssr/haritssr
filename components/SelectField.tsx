@@ -2,6 +2,7 @@
 import { Select } from "@base-ui/react/select";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useId } from "react";
+import type { ReactNode } from "react";
 
 export function SelectField({
   label,
@@ -12,7 +13,7 @@ export function SelectField({
   value,
   valueLang,
 }: {
-  label: string;
+  label: ReactNode;
   labelPlacement?: "above" | "inside";
   onValueChange: (value: string) => void;
   options: readonly { label: string; value: string }[];

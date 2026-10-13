@@ -2,6 +2,7 @@
 
 import { Fragment, useState } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import {
@@ -111,22 +112,13 @@ export default function LinearSystemLab() {
   }
 
   return (
-    <section
-      aria-labelledby="linear-system-lab-heading"
-      className="border-border text-foreground w-full min-w-0 overflow-hidden rounded-2xl border"
+    <Section
+      id="linear-system-lab-heading"
+      title="Explore a system, one operation at a time"
+      description="Choose an example or edit the coefficients. Follow the row operations to see why the system has its solution type."
+      className="min-w-0"
+      contentClassName="border-border text-foreground w-full min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-4 py-4 sm:px-6">
-        <h2
-          className="text-foreground text-lg font-semibold"
-          id="linear-system-lab-heading"
-        >
-          Explore a system, one operation at a time
-        </h2>
-        <p className="text-muted mt-1 max-w-full text-sm leading-6">
-          Choose an example or edit the coefficients. Follow the row operations
-          to see why the system has its solution type.
-        </p>
-      </div>
       <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2">
         <div className="border-border text-foreground min-w-0 space-y-6 border-b p-4 sm:p-6 lg:border-r lg:border-b-0">
           <fieldset className="flex min-w-0 flex-wrap gap-2">
@@ -291,6 +283,6 @@ export default function LinearSystemLab() {
           )}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

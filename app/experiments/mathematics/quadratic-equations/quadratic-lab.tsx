@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import Section from "@/components/Section";
+import { SelectField } from "@/components/SelectField";
 import katexify from "@/utils/katexify";
 
 import { graphPath, graphX, graphY } from "../graph";
@@ -14,6 +16,10 @@ const presets = [
   { label: "No real roots", a: 1, b: 0, c: 1 },
 ] as const;
 const leadingCoefficients = [-3, -2, -1, 1, 2, 3];
+const leadingCoefficientOptions = leadingCoefficients.map((value) => ({
+  label: String(value),
+  value: String(value),
+}));
 
 function axisTicks(min: number, max: number): number[] {
   const targetStep = (max - min) / 4;
@@ -60,19 +66,13 @@ export default function QuadraticLab() {
   }
 
   return (
-    <section
-      aria-labelledby="quadratic-lab-heading"
-      className="border-border min-w-0 overflow-hidden rounded-2xl border"
+    <Section
+      id="quadratic-lab-heading"
+      title="See where the roots come from"
+      description="Change the coefficients or choose an example. The view adjusts to keep the vertex and real roots visible."
+      className="min-w-0"
+      contentClassName="border-border min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-5 py-4 sm:px-6">
-        <h2 className="text-lg font-semibold" id="quadratic-lab-heading">
-          See where the roots come from
-        </h2>
-        <p className="text-muted mt-1 max-w-full text-sm leading-6">
-          Change the coefficients or choose an example. The view adjusts to keep
-          the vertex and real roots visible.
-        </p>
-      </div>
       <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <figure className="min-w-0 p-5 sm:p-6">
           <div className="text-foreground overflow-x-auto pb-3 text-center">
@@ -204,23 +204,14 @@ export default function QuadraticLab() {
             ))}
           </div>
           <div>
-            <label className="block text-sm font-medium" htmlFor="quadratic-a">
-              Opening and steepness, {katexify("a", false)}
-            </label>
-            <select
-              className="border-border focus-visible:outline-action mt-2 w-full rounded-md border px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2"
-              id="quadratic-a"
-              onChange={(event) => {
-                updateCoefficient("a", Number(event.currentTarget.value));
+            <SelectField
+              label={<>Opening and steepness, {katexify("a", false)}</>}
+              onValueChange={(value) => {
+                updateCoefficient("a", Number(value));
               }}
-              value={a}
-            >
-              {leadingCoefficients.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
+              options={leadingCoefficientOptions}
+              value={String(a)}
+            />
             <p className="text-muted mt-2 text-xs leading-5">
               A positive value opens upward; a negative value opens downward.
               Zero is excluded so the equation stays quadratic.
@@ -272,6 +263,6 @@ export default function QuadraticLab() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

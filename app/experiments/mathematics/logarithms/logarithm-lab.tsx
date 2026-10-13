@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import { graphPath, graphX, graphY } from "../graph";
@@ -44,19 +45,13 @@ export default function LogarithmLab() {
     base.value > 1 ? Math.min(range.xMax, inverseBound) : range.xMax;
 
   return (
-    <section
-      aria-labelledby="logarithm-lab-heading"
-      className="border-border min-w-0 overflow-hidden rounded-2xl border"
+    <Section
+      id="logarithm-lab-heading"
+      title="Explore the logarithmic graph"
+      description="Choose a base and move the input. Compare increasing and decreasing curves, then show the exponential inverse."
+      className="min-w-0"
+      contentClassName="border-border min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-5 py-4 sm:px-6">
-        <h2 className="text-lg font-semibold" id="logarithm-lab-heading">
-          Explore the logarithmic graph
-        </h2>
-        <p className="text-muted mt-1 max-w-full text-sm leading-6">
-          Choose a base and move the input. Compare increasing and decreasing
-          curves, then show the exponential inverse.
-        </p>
-      </div>
       <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <figure className="min-w-0 p-5 sm:p-6">
           <div className="text-action mb-4 text-center">
@@ -314,6 +309,6 @@ export default function LogarithmLab() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

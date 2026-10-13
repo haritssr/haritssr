@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 const examples = [
@@ -122,21 +123,13 @@ export default function NumberSets() {
   const memberships = sets.filter((set) => set.level <= example.level);
 
   return (
-    <section
-      aria-labelledby="number-sets-heading"
-      className="border-border text-foreground min-w-0 overflow-hidden rounded-2xl border"
+    <Section
+      id="number-sets-heading"
+      title="Where does a number belong?"
+      description="Choose a number. Blue outlines show all the sets it belongs to."
+      className="min-w-0"
+      contentClassName="border-border text-foreground min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-5 py-4 sm:px-6">
-        <h2
-          className="text-foreground text-lg font-semibold"
-          id="number-sets-heading"
-        >
-          Where does a number belong?
-        </h2>
-        <p className="text-muted mt-1 max-w-full text-sm leading-6">
-          Choose a number. Blue outlines show all the sets it belongs to.
-        </p>
-      </div>
       <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <figure className="min-w-0 p-4 sm:p-6">
           <svg
@@ -246,6 +239,6 @@ export default function NumberSets() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

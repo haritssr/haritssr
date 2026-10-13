@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import type { Interval } from "./model";
@@ -52,22 +53,13 @@ export default function IntervalLab() {
   }
 
   return (
-    <section
-      aria-labelledby="interval-lab-heading"
-      className="border-border text-foreground min-w-0 overflow-hidden rounded-2xl border"
+    <Section
+      id="interval-lab-heading"
+      title="Build an interval"
+      description="Move the endpoints and decide whether to include them. Unbounded sides extend to infinity."
+      className="min-w-0"
+      contentClassName="border-border text-foreground min-w-0 overflow-hidden rounded-2xl border"
     >
-      <div className="border-border border-b px-5 py-4 sm:px-6">
-        <h2
-          className="text-foreground text-lg font-semibold"
-          id="interval-lab-heading"
-        >
-          Build an interval
-        </h2>
-        <p className="text-muted mt-1 max-w-full text-sm leading-6">
-          Move the endpoints and decide whether to include them. Unbounded sides
-          extend to infinity.
-        </p>
-      </div>
       <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="min-w-0 space-y-6 p-5 sm:p-6">
           <fieldset className="flex flex-wrap gap-2">
@@ -286,6 +278,6 @@ export default function IntervalLab() {
           </p>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
