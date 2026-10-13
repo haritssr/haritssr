@@ -78,21 +78,15 @@ export default function ExperimentsGrid({
           panelClassName="bg-transparent"
         >
           <div className="space-y-5">
-            <p className="text-muted leading-7">
-              Retired demos, preserved in Git history to keep the codebase
-              light.
-              {removalCommitSha === undefined ? null : (
-                <>
-                  {" "}
-                  <ExternalLink
-                    href={`https://github.com/haritssr/haritssr/commit/${removalCommitSha}`}
-                    name="View removal commit"
-                    size="inherit"
-                  />
-                  .
-                </>
-              )}
-            </p>
+            {removalCommitSha === undefined ? null : (
+              <p className="text-muted mb-0 pb-2 leading-7">
+                <ExternalLink
+                  href={`https://github.com/haritssr/haritssr/commit/${removalCommitSha}`}
+                  name="View removal commit"
+                  size="inherit"
+                />
+              </p>
+            )}
             <ul className="grid list-none grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {DiscontinuedExperimentsData.map((experiment) => (
                 <li key={experiment.slug}>

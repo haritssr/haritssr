@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "d8d3e7ad2abcae378b399f25901fba21b62fa480",
+      "date": "2026-10-12T22:38:52+07:00",
+      "subject": "perf(Breadcrumbs): build paths incrementally and disable prefetch"
+    },
+    {
       "hash": "4f7acdc5222e243f96f302f32aea20297236e24f",
       "date": "2026-10-12T22:38:47+07:00",
       "subject": "perf(posts): look up metadata summaries by post ID"
