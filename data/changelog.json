@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3fafff47a8cc96453aa82e520f2dcf438bec754e",
+      "date": "2026-10-13T15:50:01+07:00",
+      "subject": "feat(writing): combine posts in a responsive table"
+    },
+    {
       "hash": "627b066aa88cfeb7c33f5664fc3fd8ec489af35d",
       "date": "2026-10-13T15:49:55+07:00",
       "subject": "style(Footer): use a fixed 2026 copyright year"
