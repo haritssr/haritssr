@@ -1,7 +1,3 @@
-import Image from "next/image";
-
-import CopyContactButton from "@/components/CopyContactButton";
-import GitHubIcon from "@/components/GitHubIcon";
 import { SITE_URL } from "@/utils/site";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
@@ -9,19 +5,16 @@ import { SITE_URL } from "@/utils/site";
 const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
 
 const contacts = [
-  { icon: "/icons/gmail.png", link: "haritssr@gmail.com", name: "GMail" },
+  { link: "haritssr@gmail.com", name: "GMail" },
   {
-    icon: "github",
     link: "https://www.github.com/haritssr",
     name: "GitHub",
   },
   {
-    icon: "/icons/x.png",
     link: "https://www.x.com/haritssr",
     name: "X",
   },
   {
-    icon: "/icons/haritssr.svg",
     link: SITE_URL,
     name: "Website",
   },
@@ -29,26 +22,13 @@ const contacts = [
 
 export default function ContactList() {
   return (
-    <section
-      aria-labelledby="contacts-heading"
-      id="contacts"
-      className="bg-background text-foreground/70 space-y-2.5 pt-3 pr-1 pb-2.5 pl-4 lg:border-l"
-    >
-      <h2 className="text-foreground font-semibold" id="contacts-heading">
-        Contacts
-      </h2>
-      <ul>
-        {contacts.map((contact) => (
-          <li
-            className="flex cursor-pointer items-center justify-between"
-            key={contact.link}
-          >
-            {renderContact(contact)}
-            <CopyContactButton label={contact.name} value={contact.link} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <>
+      {contacts.map((contact, index) => (
+        <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
+          {renderContact(contact)}
+        </li>
+      ))}
+    </>
   );
 }
 
@@ -58,25 +38,26 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span key={`u-${text.indexOf(chunk)}`}>{siteName}</span>
+        <span className="text-foreground" key={`u-${text.indexOf(chunk)}`}>
+          {siteName}
+        </span>
       ) : (
         chunk
       )
     );
 }
 
-function renderContact(contact: { icon: string; link: string; name: string }) {
+function renderContact(contact: { link: string; name: string }) {
   if (contact.link.startsWith("http")) {
     const displayedLink = contact.link.replace(urlPrefixPattern, "");
 
     return (
       <a
-        className="focus-visible:outline-action flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
         href={contact.link}
         rel="noreferrer noopener"
         target="_blank"
       >
-        <ContactIcon icon={contact.icon} />
         <span>{highlightSiteName(displayedLink)}</span>
       </a>
     );
@@ -85,37 +66,14 @@ function renderContact(contact: { icon: string; link: string; name: string }) {
   if (contact.link.includes("@")) {
     return (
       <a
-        className="focus-visible:outline-action flex items-center space-x-2.5 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
         href={`mailto:${contact.link}`}
         title={contact.link}
       >
-        <ContactIcon icon={contact.icon} />
         <span>{highlightSiteName(contact.link)}</span>
       </a>
     );
   }
 
   return null;
-}
-
-function ContactIcon({ icon }: { icon: string }) {
-  if (icon === "github") {
-    return (
-      <GitHubIcon
-        aria-hidden="true"
-        className="text-foreground size-4.5 shrink-0"
-      />
-    );
-  }
-
-  return (
-    <Image
-      alt=""
-      aria-hidden="true"
-      className={`h-4 w-4 shrink-0 object-contain ${icon === "/icons/x.png" ? "rounded" : ""}`}
-      height={20}
-      src={icon}
-      width={20}
-    />
-  );
 }

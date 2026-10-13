@@ -26,7 +26,12 @@ export default function HomeSearch() {
           aria-hidden="true"
           className="text-foreground/70 size-5 shrink-0"
         />
-        <span className="truncate">Search pages or commands…</span>
+        <span className="min-w-0 flex-1 truncate">
+          Search pages or commands…
+        </span>
+        <kbd className="border-border bg-foreground/5 text-foreground shrink-0 rounded-lg border px-1.5 py-0.5 font-mono text-xs">
+          ⌘P
+        </kbd>
       </button>
     </div>
   );

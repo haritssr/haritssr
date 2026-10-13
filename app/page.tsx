@@ -1,12 +1,5 @@
-import {
-  AcademicCapIcon,
-  BuildingOffice2Icon,
-  CodeBracketIcon,
-  MapPinIcon,
-} from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
-import type { ReactNode } from "react";
 
 import ContactList from "@/components/ContactList";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
@@ -39,125 +32,94 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="space-y-20 sm:mt-10">
+    <>
       <PageStructuredData
         name={profileName}
         description={homeDescription}
         path="/"
       />
-      <ProfileSection />
-      <HomeSearch />
-      <HomeProjects />
+      <div className="space-y-16">
+        <ProfileSection />
+        {/*<HomeSearch />*/}
+        <HomeProjects />
 
-      <Section id="experiments" title="Experiments">
-        <ExperimentsGrid headingLevel={3} mobileLimit={4} />
-      </Section>
+        <Section id="experiments" title="Experiments">
+          <ExperimentsGrid headingLevel={3} mobileLimit={4} />
+        </Section>
 
-      <Section id="writing" title="Writing">
-        <WritingTable />
-      </Section>
-
-      <MoreDetails />
-    </div>
+        <Section id="writing" title="Writing">
+          <WritingTable />
+        </Section>
+      </div>
+    </>
   );
 }
 
 function ProfileSection() {
   return (
-    <section aria-labelledby="profile-heading" className="pt-5" id="Identity">
-      <div className="corner-squircle border-border divide-border bg-border-interface-hover lg:bg-background grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 lg:gap-5 lg:divide-x">
-        <div className="bg-background flex flex-col items-center justify-center gap-2.5 py-5">
+    <section aria-label="About Harits Syah" id="Identity">
+      <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2 xl:grid-cols-4">
+        <div className="min-w-0">
           <Image
             alt={profileName}
             blurDataURL="/images/blur.jpg"
-            className="z-10 h-25 w-25 rounded-full"
+            className="size-20 rounded-full"
             height="100"
             priority
             src="/images/blur.jpg"
             width="100"
           />
-          <h1 className="text-foreground font-semibold" id="profile-heading">
-            {profileName}
-          </h1>
         </div>
-        <div className="bg-background text-foreground/70 space-y-2.5 px-4 pt-3 pb-2.5 text-left lg:border-l">
-          <h2 className="text-foreground font-semibold">Profile</h2>
-          <div>
-            <ProfileRow
-              icon={
-                <CodeBracketIcon
-                  aria-hidden="true"
-                  className="size-4 shrink-0 stroke-2"
-                />
-              }
+        <ul
+          aria-label="Profile details"
+          className="text-foreground/70 marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5"
+        >
+          <li>Web Product Engineer</li>
+          <li>Math-Physics Teacher</li>
+          <li>
+            <ExternalLink
+              href="https://www.harimaki.com"
+              name="Harimaki Studio"
+            />
+          </li>
+          <li>Tangerang, Indonesia</li>
+          <li>
+            <a
+              className="text-action focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+              download="cv-dec-2024.pdf"
+              href="/cv-dec-2024.pdf"
+              title="Download CV"
             >
-              <p>Web Product Engineer</p>
-            </ProfileRow>
-            <ProfileRow
-              icon={
-                <AcademicCapIcon
-                  aria-hidden="true"
-                  className="size-4 shrink-0 stroke-2"
-                />
-              }
-            >
-              <p>Math-Physics Teacher</p>
-            </ProfileRow>
-            <ProfileRow
-              icon={
-                <BuildingOffice2Icon
-                  aria-hidden="true"
-                  className="size-4 shrink-0 stroke-2"
-                />
-              }
-            >
-              <a
-                className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-                href="https://www.harimaki.com"
-                rel="noopener noreferrer"
-                target="_blank"
-                title="Harimaki Studio"
-              >
-                Harimaki Studio
-              </a>
-            </ProfileRow>
-            <ProfileRow
-              icon={
-                <MapPinIcon
-                  aria-hidden="true"
-                  className="size-4 shrink-0 stroke-2"
-                />
-              }
-            >
-              <p>Tangerang, Indonesia</p>
-            </ProfileRow>
-          </div>
-        </div>
-        <ContactList />
-        <div className="bg-background space-y-2.5 px-4 pt-3 pb-2.5 lg:border-l">
-          <h2 className="text-foreground font-semibold">Interests</h2>
-          <p className="text-foreground/70 leading-8">
-            Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
-            Physics, and Education.
-          </p>
-        </div>
+              Download CV
+            </a>
+          </li>
+          <li>
+            Interests: Web, JS, TS, Effect, React, Next.js, Functional
+            Programming, Math, Physics, and Education.
+          </li>
+        </ul>
+        <ul
+          aria-label="Personal notes"
+          className="text-foreground/70 marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5"
+        >
+          <li id="misc">Touch typist, ±90 WPM.</li>
+          <li>Former chess player, ±2000 Elo.</li>
+          <li>
+            <span className="text-foreground">haritssr</span> ={" "}
+            <span className="text-foreground">harits</span>{" "}
+            <span className="text-foreground">s</span>yah{" "}
+            <span className="text-foreground">r</span>ahmatullah
+          </li>
+          <li>I develop with Codex CLI in Zed.</li>
+        </ul>
+        <ul
+          aria-label="Contact links"
+          className="text-foreground/70 marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
+        >
+          <ContactList />
+        </ul>
       </div>
     </section>
-  );
-}
-
-function ProfileRow({
-  icon,
-  children,
-}: {
-  icon: ReactNode;
-  children: ReactNode;
-}) {
-  return (
-    <div className="flex min-h-8 items-center gap-2">
-      {icon}
-      {children}
-    </div>
   );
 }
 
@@ -194,62 +156,6 @@ function HomeProjects() {
             />
           </li>
         ) : null}
-      </ul>
-    </Section>
-  );
-}
-
-function MoreDetails() {
-  return (
-    <Section id="misc" title="More">
-      <ul className="text-foreground/70 ml-1 list-outside list-disc space-y-1 pl-4">
-        <li>
-          <a
-            className="text-action hover:underline"
-            download="cv-dec-2024.pdf"
-            href="/cv-dec-2024.pdf"
-            title="Download CV"
-          >
-            Download CV
-          </a>
-        </li>
-        <li>Touch typist, around 90 WPM.</li>
-        <li>Former chess player, rated around 2000 Elo.</li>
-        <li>Apple&apos;s WWDC Design Videos enjoyer.</li>
-        <li>
-          <ExternalLink
-            href="https://youtu.be/H7Sfo3lMB8c?t=60"
-            name="Eudaimonic over hedonic"
-          />
-        </li>
-        <li>
-          <ExternalLink
-            href="https://beff.substack.com/p/notes-on-eacc-principles-and-tenets"
-            name="Effective accelerationism"
-          />
-          (
-          <ExternalLink
-            href="https://effectiveaccelerationism.substack.com/p/what-the-f-is-eacc"
-            name="e/acc"
-          />
-          ).
-        </li>
-        <li>
-          <span className="text-foreground underline">haritssr</span> ={" "}
-          <span className="text-foreground underline">harits</span>{" "}
-          <span className="text-foreground underline">s</span>yah{" "}
-          <span className="text-foreground underline">r</span>ahmatullah
-        </li>
-        <li>
-          Press <kbd className="text-foreground">⌘P</kbd> (or{" "}
-          <kbd className="text-foreground">Ctrl+P</kbd>) to search the site.
-        </li>
-        <li>I develop with Codex CLI in Zed.</li>
-        <li>Constraints give shape.</li>
-        <li>Money is just store of value.</li>
-        <li>
-          The real economy is the creation/distribution of goods and services.
-        </li>
       </ul>
     </Section>
   );

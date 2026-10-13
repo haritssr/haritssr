@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "bfb57b0fed9326cc4a5cd0deef47004bd65caca1",
+      "date": "2026-10-13T23:20:00+07:00",
+      "subject": "style(Components): soften floating borders and refine controls"
+    },
+    {
       "hash": "5a00423e04f05e1dd69c656aa8a55784f4948693",
       "date": "2026-10-13T23:19:47+07:00",
       "subject": "refactor(Experiments): share lab sections and Base UI select"
