@@ -1,9 +1,10 @@
-import "katex/dist/katex.min.css";
 import { Accordion as BaseAccordion } from "@base-ui/react/accordion";
+
+import "katex/dist/katex.min.css";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
-import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
+import Box from "@/components/Box";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
 import Section from "@/components/Section";
@@ -360,7 +361,11 @@ export default function ProjectileMotionPage() {
         description="Predict the result first, then open the solution or check it in the lab."
       >
         <ul className="flex flex-col gap-4">
-          <ExerciseCard title="Launch horizontally from a platform">
+          <Box
+            as="li"
+            headingAs="h3"
+            title="Launch horizontally from a platform"
+          >
             <p>
               A ball starts {katexify("20\\,\\mathrm{m}", false)} above the
               ground with horizontal speed{" "}
@@ -387,8 +392,8 @@ export default function ProjectileMotionPage() {
                 </div>
               </AccordionItem>
             </Accordion>
-          </ExerciseCard>
-          <ExerciseCard title="Compare two launch angles">
+          </Box>
+          <Box as="li" headingAs="h3" title="Compare two launch angles">
             <p>
               Launch two balls from ground level at{" "}
               {katexify("20\\,\\mathrm{m\\,s^{-1}}", false)}, one at{" "}
@@ -418,7 +423,7 @@ export default function ProjectileMotionPage() {
                 </div>
               </AccordionItem>
             </Accordion>
-          </ExerciseCard>
+          </Box>
         </ul>
       </Section>
     </div>

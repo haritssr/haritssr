@@ -336,14 +336,14 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="Box" title="Box">
-            <div className="border-foreground/20 w-50 overflow-hidden rounded-md border sm:w-75">
-              <div className="border-foreground/20 bg-background text-foreground/90 border-b px-3 py-2 font-medium select-none">
-                Title
-              </div>
-              <div className="flex h-32 items-center justify-center p-5">
-                Content
-              </div>
-            </div>
+            <ul className="grid gap-5 sm:grid-cols-2">
+              <Box as="li" headingAs="h3" title="Exercise title">
+                <p>Use a heading and list item for exercise cards.</p>
+              </Box>
+              <Box as="li" headingAs="h3" title="Another exercise">
+                <p>Cards stretch to the same height within each grid row.</p>
+              </Box>
+            </ul>
           </Box>
 
           <Box title="Text Area">

@@ -1,4 +1,3 @@
-import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import InternalLink from "@/components/InternalLink";
@@ -237,7 +236,12 @@ export default function CirclePage() {
       >
         <ul className="grid min-w-0 gap-5 lg:grid-cols-2">
           {exercises.map((exercise) => (
-            <ExerciseCard key={exercise.title} title={exercise.title}>
+            <Box
+              as="li"
+              headingAs="h3"
+              key={exercise.title}
+              title={exercise.title}
+            >
               <Equation tex={exercise.given} layout="row" />
               <p className="text-muted flex flex-wrap items-baseline gap-x-1.5 gap-y-1 text-sm leading-7">
                 <span>Find</span>
@@ -267,7 +271,7 @@ export default function CirclePage() {
                   </p>
                 </AccordionItem>
               </Accordion>
-            </ExerciseCard>
+            </Box>
           ))}
         </ul>
       </Section>

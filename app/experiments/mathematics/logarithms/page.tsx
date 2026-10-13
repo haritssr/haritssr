@@ -1,5 +1,5 @@
-import ExerciseCard from "@/app/experiments/mathematics/ExerciseCard";
 import Accordion, { AccordionItem } from "@/components/Accordion";
+import Box from "@/components/Box";
 import Section from "@/components/Section";
 import SourceCodeLink from "@/components/SourceCodeLink";
 import SubTitle from "@/components/SubTitle";
@@ -158,7 +158,7 @@ export default function LogarithmsPage() {
       >
         <ul className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {logarithmRules.map((rule, index) => (
-            <ExerciseCard key={rule.title} title={rule.title}>
+            <Box as="li" headingAs="h3" key={rule.title} title={rule.title}>
               <Equation tex={rule.formula} />
               <p className="text-muted text-sm leading-6">{rule.explanation}</p>
               <Accordion className="mt-auto w-full">
@@ -184,7 +184,7 @@ export default function LogarithmsPage() {
                   </div>
                 </AccordionItem>
               </Accordion>
-            </ExerciseCard>
+            </Box>
           ))}
         </ul>
       </Section>
@@ -272,7 +272,12 @@ export default function LogarithmsPage() {
       >
         <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {logarithmExercises.map((exercise, index) => (
-            <ExerciseCard key={exercise.title} title={exercise.title}>
+            <Box
+              as="li"
+              headingAs="h3"
+              key={exercise.title}
+              title={exercise.title}
+            >
               <Equation tex={exercise.expression} />
               <Accordion className="mt-auto w-full">
                 <AccordionItem
@@ -293,7 +298,7 @@ export default function LogarithmsPage() {
                   </p>
                 </AccordionItem>
               </Accordion>
-            </ExerciseCard>
+            </Box>
           ))}
         </ul>
       </Section>

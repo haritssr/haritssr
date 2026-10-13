@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4982efab27e2bb65b007ce390fc890dfc92f7ef1",
+      "date": "2026-10-13T15:48:51+07:00",
+      "subject": "docs(next-config): list optional experimental features"
+    },
+    {
       "hash": "68349ae756d84e34384faee57cab031c7e4edd68",
       "date": "2026-10-13T14:45:21+07:00",
       "subject": "perf(turbopack): trial garbage collection and lazy dynamic imports"

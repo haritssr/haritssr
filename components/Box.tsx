@@ -1,21 +1,35 @@
+import type { ReactNode } from "react";
+
 export default function Box({
+  as: Container = "div",
+  headingAs: Heading = "span",
   title,
   name,
   children,
 }: {
-  title: string;
+  as?: "div" | "li";
+  headingAs?: "span" | "h3";
+  title: ReactNode;
   name?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <div className="corner-squircle border-border overflow-hidden rounded-xl border">
-      <div className="border-border bg-surface-hover text-foreground flex items-center justify-between border-b px-3 py-1.5 select-none">
-        <span>{title}</span>
+    <Container className="corner-squircle border-border flex min-w-0 flex-col overflow-hidden rounded-xl border">
+      <div className="border-border bg-surface-hover text-foreground flex items-center justify-between gap-3 border-b px-3 py-2 select-none">
+        <Heading className="min-w-0 font-normal">{title}</Heading>
         {name !== undefined && name.length > 0 ? (
           <span className="text-muted font-mono text-sm">{`${name}.tsx`}</span>
         ) : null}
       </div>
-      <div className="space-y-5 p-5">{children}</div>
-    </div>
+      <div
+        className={
+          Container === "li"
+            ? "text-foreground flex min-w-0 flex-1 flex-col gap-5 p-5"
+            : "space-y-5 p-5"
+        }
+      >
+        {children}
+      </div>
+    </Container>
   );
 }
