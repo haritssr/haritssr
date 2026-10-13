@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "b30bd8e14d95da3cb8ea7dcc6bf7d082d17e7761",
+      "date": "2026-10-13T15:49:43+07:00",
+      "subject": "fix(ArticleTableOfContents): keep reading controls above footer"
+    },
+    {
       "hash": "2d11643cbe369c7e79855b41025563cf913e42d1",
       "date": "2026-10-13T15:49:30+07:00",
       "subject": "style(Table): increase default text contrast"
