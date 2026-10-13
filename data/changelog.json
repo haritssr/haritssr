@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "68349ae756d84e34384faee57cab031c7e4edd68",
+      "date": "2026-10-13T14:45:21+07:00",
+      "subject": "perf(turbopack): trial garbage collection and lazy dynamic imports"
+    },
+    {
       "hash": "3d411a62dd495bfd43a6bb7fdf363f6e40c1326e",
       "date": "2026-10-13T14:45:14+07:00",
       "subject": "docs(readme): condense site overview to links and stack"
