@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "d3e6029c20778fb938af2dd34c4d7ea7242c199b",
+      "date": "2026-10-13T23:18:20+07:00",
+      "subject": "fix(Next): disable unstable lazy dynamic import compilation"
+    },
+    {
       "hash": "6c8ac67588ae1606a8f1898889a04b55323d4b99",
       "date": "2026-10-13T23:18:01+07:00",
       "subject": "feat(TopBar): link GitHub icon to the current page source"
