@@ -1,14 +1,10 @@
-import { ClockIcon } from "@heroicons/react/24/outline";
-
 import BackButton from "@/components/BackButton";
 import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import Section from "@/components/Section";
 import type { ExperimentEntry } from "@/data/ExperimentsData";
-import { getLatestExperimentUpdate } from "@/data/ExperimentsData";
 import { getAvailableExperimentDomain } from "@/utils/experimentCatalog";
 
 interface ExperimentDomainIndexProps {
@@ -37,50 +33,7 @@ export default function ExperimentDomainIndex({
         </div>
         <PageDescription>{domain.description}</PageDescription>
       </PageHeader>
-      {domain.groups !== undefined && domain.groups.length > 0 ? (
-        <div
-          className={
-            domain.slug === "mathematics"
-              ? "grid grid-cols-1 items-start gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-4"
-              : "space-y-16"
-          }
-        >
-          {domain.groups.map((group) => {
-            const entries = experiments.filter(
-              (entry) => entry.group === group.id
-            );
-            return entries.length > 0 ? (
-              <Section
-                className="min-w-0"
-                key={group.id}
-                id={group.id}
-                title={group.title}
-              >
-                <ExperimentList
-                  domainSlug={domain.slug}
-                  experiments={entries}
-                />
-              </Section>
-            ) : null;
-          })}
-          {experiments.some(
-            (entry) =>
-              !(domain.groups ?? []).some((group) => group.id === entry.group)
-          ) ? (
-            <ExperimentList
-              domainSlug={domain.slug}
-              experiments={experiments.filter(
-                (entry) =>
-                  !(domain.groups ?? []).some(
-                    (group) => group.id === entry.group
-                  )
-              )}
-            />
-          ) : null}
-        </div>
-      ) : (
-        <ExperimentList domainSlug={domain.slug} experiments={experiments} />
-      )}
+      <ExperimentList domainSlug={domain.slug} experiments={experiments} />
     </div>
   );
 }
@@ -92,42 +45,22 @@ function ExperimentList({
   domainSlug: string;
   experiments: readonly ExperimentEntry[];
 }) {
-  const showUpdate = domainSlug !== "physics" && domainSlug !== "mathematics";
-
   return (
-    <ol className="space-y-3">
-      {experiments.map((experiment) => {
-        const updatedAt = showUpdate
-          ? getLatestExperimentUpdate(experiment)
-          : null;
-
-        return (
-          <li
-            className="flex items-center justify-between gap-3"
-            key={experiment.slug}
-          >
-            <span className="min-w-0 truncate" title={experiment.title}>
-              <InternalLink
-                href={`/experiments/${domainSlug}/${experiment.slug}`}
-              >
-                {experiment.title}
-              </InternalLink>
-            </span>
-            {updatedAt === null ? null : (
-              <span className="text-muted inline-flex shrink-0 items-center gap-1 text-sm font-normal whitespace-nowrap">
-                <ClockIcon aria-hidden="true" className="size-4" />
-                <span className="sr-only">Last update:</span>
-                <time dateTime={updatedAt}>
-                  <span aria-hidden="true">
-                    {`'${updatedAt.slice(2).replaceAll("-", "/")}`}
-                  </span>
-                  <span className="sr-only">{updatedAt}</span>
-                </time>
-              </span>
-            )}
-          </li>
-        );
-      })}
+    <ol className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+      {experiments.map((experiment) => (
+        <li
+          className="flex items-center justify-between gap-3"
+          key={experiment.slug}
+        >
+          <span className="min-w-0 truncate" title={experiment.title}>
+            <InternalLink
+              href={`/experiments/${domainSlug}/${experiment.slug}`}
+            >
+              {experiment.title}
+            </InternalLink>
+          </span>
+        </li>
+      ))}
     </ol>
   );
 }

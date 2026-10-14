@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "25fcb567f768c22a7145b5a111970c49922e8fe7",
+      "date": "2026-10-14T11:15:46+07:00",
+      "subject": "style(Experiments): align discontinued accordion with a grid column"
+    },
+    {
       "hash": "dc054924ce27d806e386c949a649e716b8ba6b95",
       "date": "2026-10-14T11:15:40+07:00",
       "subject": "style(BottomBar): adjust navigation item padding"
