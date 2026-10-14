@@ -29,6 +29,9 @@ Home and first-level routes omit the Contents button. Writing and experiment
 articles show their floating back-to-top control when scrolling upward. It
 hides while scrolling downward and at the top of the page.
 
+The theme button cycles System → Light → Dark → System and shows the selected
+preference's icon. First visits use System; explicit choices persist locally.
+
 The mobile BottomBar appears only on `/projects`, `/experiments`, `/writing`,
 and `/design`, matching its destinations exactly. Home keeps it hidden;
 nested pages and other routes omit it. The design preview remains available.

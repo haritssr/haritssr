@@ -6,6 +6,11 @@
       "subject": "refactor(IndexCard): rename navigation card and simplify design examples"
     },
     {
+      "hash": "48a4e5bf76ec990cc26b3e21221274a8b6fbfa10",
+      "date": "2026-10-15T01:33:56+07:00",
+      "subject": "feat(TopBar): move mobile actions into numbered contents sheet"
+    },
+    {
       "hash": "541425a9146f714d24ee6713fd4bafac3f7282f6",
       "date": "2026-10-15T01:33:55+07:00",
       "subject": "fix(LogoDemo): show Harimaki and remove Haris Studio"
