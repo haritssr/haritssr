@@ -11,19 +11,23 @@ export default function BottomBar({
 } = {}) {
   const pathname = usePathname();
 
-  if (!preview && pathname === "/") {
+  if (
+    !preview &&
+    (pathname === "/" ||
+      !TitleAndPathData.some(({ href }) => href === pathname))
+  ) {
     return null;
   }
 
   return (
     <nav
       aria-label="Mobile navigation"
-      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden [body:has([data-article-back-to-top])_&]:hidden"} px-3.5 pb-3`}
+      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden"} px-3.5 pb-3`}
     >
-      <div className="border-middle-hover w-full rounded-full border bg-white/80 px-1.25 py-1 saturate-150 backdrop-blur-lg">
+      <div className="border-middle-hover bg-surface/30 hover:bg-surface/40 w-full rounded-full border px-1.25 py-1 saturate-150 backdrop-blur-lg transition-colors duration-150">
         <div className="flex w-full items-center">
-          {TitleAndPathData.map(({ title, path }) => (
-            <IconWrapper key={title} path={path} to={title} />
+          {TitleAndPathData.map(({ title, path, href }) => (
+            <IconWrapper href={href} key={title} path={path} to={title} />
           ))}
         </div>
       </div>
@@ -31,13 +35,17 @@ export default function BottomBar({
   );
 }
 
-const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
+const IconWrapper = ({
+  to,
+  path,
+  href,
+}: {
+  to: string;
+  path: React.ReactNode;
+  href: string;
+}) => {
   const pathname = usePathname();
-  const [, CurrentPageBaseRoute] = pathname.split("/");
-  const route = to === "Home" ? "/" : `/${to.toLowerCase()}`;
-  const isCurrentPage =
-    pathname === route ||
-    (route !== "/" && CurrentPageBaseRoute === route.slice(1));
+  const isCurrentPage = pathname === href;
 
   const color = isCurrentPage ? "text-action" : "text-muted";
 
@@ -45,7 +53,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
     <Link
       aria-current={isCurrentPage ? "page" : undefined}
       className="focus-visible:outline-action block w-1/5 py-0.5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 active:scale-95"
-      href={route}
+      href={href}
     >
       <div className="flex flex-col items-center justify-center">
         <svg
@@ -76,6 +84,7 @@ const TitleAndPathData = [
       />
     ),
     title: "Home",
+    href: "/",
   },
 
   {
@@ -87,6 +96,7 @@ const TitleAndPathData = [
       />
     ),
     title: "Projects",
+    href: "/projects",
   },
 
   {
@@ -98,6 +108,7 @@ const TitleAndPathData = [
       />
     ),
     title: "Experiments",
+    href: "/experiments",
   },
 
   {
@@ -109,6 +120,7 @@ const TitleAndPathData = [
       />
     ),
     title: "Writing",
+    href: "/writing",
   },
 
   {
@@ -120,5 +132,6 @@ const TitleAndPathData = [
       />
     ),
     title: "Design",
+    href: "/design",
   },
 ];

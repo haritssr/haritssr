@@ -25,3 +25,7 @@ below the trigger on desktop and in a sheet on mobile. Home and first-level
 routes omit the Contents button. Writing and experiment
 articles show their floating back-to-top control when scrolling upward. It
 hides while scrolling downward and at the top of the page.
+
+The mobile BottomBar appears only on `/projects`, `/experiments`, `/writing`,
+and `/design`, matching its destinations exactly. Home keeps it hidden;
+nested pages and other routes omit it. The design preview remains available.

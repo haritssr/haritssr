@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "ef2cecd0cb590d13dc33a670f1966fd7afe2c6dd",
+      "date": "2026-10-14T21:37:17+07:00",
+      "subject": "fix(Contents): include MDX headings and compact the nested-page panel"
+    },
+    {
       "hash": "4583b15192124f6ce0c1e843296d048d4ac20e52",
       "date": "2026-10-14T21:37:16+07:00",
       "subject": "refactor(Commits): name suitability review by its date"
