@@ -6,6 +6,11 @@
       "subject": "fix(Layout): fit short pages and reserve stable scrollbar gutters"
     },
     {
+      "hash": "ae2fa93689ea5ab4b7e3b226003ccb08687d2913",
+      "date": "2026-10-14T21:37:18+07:00",
+      "subject": "fix(TopBar): fit the title pill to its content"
+    },
+    {
       "hash": "b1c0c98626bf7315ae63bf7108cad6ffdd44803a",
       "date": "2026-10-14T21:37:18+07:00",
       "subject": "style(Typography): align footer and page description colors"

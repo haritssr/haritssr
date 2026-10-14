@@ -4,7 +4,7 @@ import { allWritingPosts } from "@/utils/writing-posts";
 export default function WritingTable() {
   return (
     <div className="scrollbar-subtle border-border w-full overflow-x-auto border-y">
-      <table className="text-foreground/90 w-full min-w-96 border-collapse text-sm">
+      <table className="text-foreground/90 w-full border-collapse text-sm sm:min-w-96">
         <caption className="sr-only">Writing, newest first</caption>
         <tbody className="divide-border divide-y">
           {allWritingPosts.map((post) => (
@@ -26,7 +26,7 @@ export default function WritingTable() {
               <td className="text-muted py-2 whitespace-nowrap tabular-nums">
                 <time dateTime={post.publishedAt}>{post.publishedAt}</time>
               </td>
-              <td className="text-muted py-2 pl-5 whitespace-nowrap tabular-nums">
+              <td className="text-muted hidden py-2 pl-5 whitespace-nowrap tabular-nums sm:table-cell">
                 {Math.ceil(post.wordCount / 200)} min
               </td>
             </tr>
