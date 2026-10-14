@@ -118,7 +118,7 @@ export default function RootLayout({
               <Breadcrumbs routeLabels={breadcrumbLabels} />
             </div>
             <main
-              className="mx-auto min-h-screen w-full max-w-5xl px-4 xl:px-0"
+              className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 xl:px-0"
               id="main-content"
             >
               {children}

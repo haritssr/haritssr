@@ -54,7 +54,7 @@ export default async function ProjectPage({
 
   return (
     <div>
-      <div className="mx-auto min-h-screen w-full max-w-full">
+      <div className="mx-auto w-full max-w-full">
         <PageHeader
           navigation={<BackButton href="/projects" name="Projects" />}
           path={`/projects/${projectSlug}`}

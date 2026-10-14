@@ -34,7 +34,7 @@ export default async function StudentPage({ params }: Props) {
   }
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-full px-5 xl:px-0">
+    <div className="mx-auto w-full max-w-full px-5 xl:px-0">
       <ExperimentPageHeader title="Student Details" />
 
       <div className="space-y-2">

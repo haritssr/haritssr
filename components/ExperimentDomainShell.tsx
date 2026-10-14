@@ -46,7 +46,7 @@ export default function ExperimentDomainShell({
   const backButtonName = segments.length === 3 ? domainTitle : prevRoute;
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="w-full">
       <div className="w-full">
         <article className="sm:px-0">
           <ExperimentHeaderContext

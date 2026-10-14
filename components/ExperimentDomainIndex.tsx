@@ -24,7 +24,7 @@ export default function ExperimentDomainIndex({
       : domain.experiments;
 
   return (
-    <div className="mx-auto min-h-screen w-full sm:px-0">
+    <div className="mx-auto w-full sm:px-0">
       <PageHeader
         navigation={<BackButton href="/experiments" name="Experiments" />}
         path={`/experiments/${domain.slug}`}

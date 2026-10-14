@@ -29,3 +29,8 @@ hides while scrolling downward and at the top of the page.
 The mobile BottomBar appears only on `/projects`, `/experiments`, `/writing`,
 and `/design`, matching its destinations exactly. Home keeps it hidden;
 nested pages and other routes omit it. The design preview remains available.
+
+The shared layout uses a viewport-height flex layout for the whole page, so its footer fits
+without extra scrolling when the content fits. Longer content still scrolls normally.
+The root reserves symmetric scrollbar gutters so expanding accordions or navigating
+between short and long pages keeps the centered layout in place.

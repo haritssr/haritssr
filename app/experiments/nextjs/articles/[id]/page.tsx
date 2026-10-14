@@ -34,7 +34,7 @@ export default async function ArticlePage({ params }: Props) {
   }
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-full px-5 xl:px-0">
+    <div className="mx-auto w-full max-w-full px-5 xl:px-0">
       <ExperimentPageHeader title={article.title} />
 
       <div className="text-action">Article {article.id}</div>
