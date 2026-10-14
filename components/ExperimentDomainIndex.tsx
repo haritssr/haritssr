@@ -5,6 +5,7 @@ import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import type { ExperimentEntry } from "@/data/ExperimentsData";
+import { isDatabaseExperiment } from "@/utils/databaseExperiments";
 import { getAvailableExperimentDomain } from "@/utils/experimentCatalog";
 
 interface ExperimentDomainIndexProps {
@@ -55,6 +56,11 @@ function ExperimentList({
           <span className="min-w-0 truncate" title={experiment.title}>
             <InternalLink
               href={`/experiments/${domainSlug}/${experiment.slug}`}
+              variant={
+                isDatabaseExperiment(domainSlug, experiment.slug)
+                  ? "database"
+                  : "navigation"
+              }
             >
               {experiment.title}
             </InternalLink>

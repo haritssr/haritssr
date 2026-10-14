@@ -19,7 +19,7 @@ const catalogRoutes = new Set<string>();
 const domains = new Set<string>();
 const datePattern = /^\d{4}-\d{2}-\d{2}$/u;
 const localRoutePattern =
-  /^\/experiments\/ui-explorations\/(?:task|tools)(?:\/|$)/u;
+  /^\/experiments\/user-interface\/(?:task|tools)(?:\/|$)/u;
 const titleSeparatorPattern = /[^a-z0-9]+/g;
 
 function titleSlug(title: string): string {

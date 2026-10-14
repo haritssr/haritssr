@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "00d853933e8756cfc50764251f1d025dfcd1ad63",
+      "date": "2026-10-14T20:10:26+07:00",
+      "subject": "refactor(Home): flatten contacts and rename counted navigation cards"
+    },
+    {
       "hash": "d0cf3d3be1abe3b0cc50fbc81ad8c25f086033f6",
       "date": "2026-10-14T20:10:14+07:00",
       "subject": "chore(Components): remove unused search and contact code"

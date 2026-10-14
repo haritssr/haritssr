@@ -248,6 +248,9 @@ export default function DesignSystem() {
 
           <Box name="InternalLink" title="Internal Link">
             <InternalLink href="/">Internal Link</InternalLink>
+            <InternalLink href="/" variant="database">
+              Database link example
+            </InternalLink>
             <p className="text-muted text-sm leading-7">
               Use <code>variant=&quot;inline&quot;</code> for links within
               sentences, descriptions, and explanatory list items. For example,

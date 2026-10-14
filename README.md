@@ -7,3 +7,6 @@
 
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
 - Subscribe to the [RSS feed](https://haritssr.com/feed.xml).
+
+User Interface experiments live at `/experiments/user-interface` and its child
+routes.

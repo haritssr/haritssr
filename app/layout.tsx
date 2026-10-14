@@ -22,17 +22,15 @@ const inter = localFont({
 
 const breadcrumbLabels = Object.fromEntries<string>([
   ["/experiments", "Experiments"],
-  ...ExperimentsData.flatMap<[string, string]>((domain) =>
-    domain.slug === "mathematics" || domain.slug === "physics"
-      ? [
-          [`/experiments/${domain.slug}`, domain.title],
-          ...domain.experiments.map<[string, string]>((experiment) => [
-            `/experiments/${domain.slug}/${experiment.slug}`,
-            experiment.title,
-          ]),
-        ]
-      : []
-  ),
+  ...ExperimentsData.flatMap<[string, string]>((domain) => [
+    [`/experiments/${domain.slug}`, domain.title],
+    ...(domain.slug === "mathematics" || domain.slug === "physics"
+      ? domain.experiments.map<[string, string]>((experiment) => [
+          `/experiments/${domain.slug}/${experiment.slug}`,
+          experiment.title,
+        ])
+      : []),
+  ]),
 ]);
 
 export const metadata: Metadata = {

@@ -4,8 +4,8 @@ import {
   getTasksForDate,
   getTodayTaskDate,
   replaceTasksForDate,
-} from "@/app/experiments/ui-explorations/task/db";
-import { isValidTaskDate } from "@/app/experiments/ui-explorations/task/utils";
+} from "@/app/experiments/user-interface/task/db";
+import { isValidTaskDate } from "@/app/experiments/user-interface/task/utils";
 import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
 
 import { parseTaskPayload } from "./validation";

@@ -23,9 +23,9 @@ export function getExperimentRoutes(): RouteDoc[] {
       group: "Experiments",
     })),
   ]);
-  const taskPages = isExperimentAvailable("ui-explorations", "task")
+  const taskPages = isExperimentAvailable("user-interface", "task")
     ? ["architecture", "history", "statistics"].map((page) => ({
-        route: `/experiments/ui-explorations/task/${page}`,
+        route: `/experiments/user-interface/task/${page}`,
         title: `Task ${page}`,
         description: "Task tracker · User Interface",
         group: "Experiments",

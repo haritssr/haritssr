@@ -649,7 +649,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore a Notion-inspired navigation bar.",
         tags: ["navigation", "design"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
+        updatedAt: [
+          "2026-09-26",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-13",
+          "2026-10-14",
+        ],
       },
       {
         slug: "times-table",
@@ -657,7 +663,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore multiplication patterns in a times table.",
         tags: ["mathematics", "tables"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
+        updatedAt: [
+          "2026-09-26",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-13",
+          "2026-10-14",
+        ],
       },
       {
         slug: "inline-maki",
@@ -671,6 +683,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-11",
           "2026-10-13",
+          "2026-10-14",
         ],
       },
       {
@@ -680,7 +693,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Connect student problems to possible Haris Lab features in a graph.",
         tags: ["graphs", "learning"],
         createdAt: "2026-08-25",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
+        updatedAt: [
+          "2026-09-27",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-13",
+          "2026-10-14",
+        ],
       },
       {
         slug: "task",
@@ -697,6 +716,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-04",
           "2026-10-13",
+          "2026-10-14",
         ],
       },
       {
@@ -705,7 +725,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore how interest changes an amount over time.",
         tags: ["mathematics", "visualization"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-27", "2026-10-02", "2026-10-03", "2026-10-13"],
+        updatedAt: [
+          "2026-09-27",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-13",
+          "2026-10-14",
+        ],
       },
       {
         slug: "input-list",
@@ -713,7 +739,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Create and edit a list through form inputs.",
         tags: ["forms", "state"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-26", "2026-10-02", "2026-10-03", "2026-10-13"],
+        updatedAt: [
+          "2026-09-26",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-13",
+          "2026-10-14",
+        ],
       },
       {
         slug: "stopwatch",
@@ -721,7 +753,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Measure elapsed time with stopwatch controls.",
         tags: ["time", "interaction"],
         createdAt: "2026-08-18",
-        updatedAt: ["2026-09-20", "2026-10-02", "2026-10-03", "2026-10-13"],
+        updatedAt: [
+          "2026-09-20",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-13",
+          "2026-10-14",
+        ],
       },
       {
         slug: "tools",
@@ -736,6 +774,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-04",
           "2026-10-13",
+          "2026-10-14",
         ],
       },
       {
@@ -750,6 +789,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-03",
           "2026-10-11",
           "2026-10-13",
+          "2026-10-14",
         ],
       },
       {
@@ -759,7 +799,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare rounded corners, native CSS squircles, and Lisse curves.",
         tags: ["css", "design"],
         createdAt: "2026-10-02",
-        updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
+        updatedAt: [
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-11",
+          "2026-10-13",
+          "2026-10-14",
+        ],
       },
       {
         slug: "external-link-icons",
@@ -768,12 +814,12 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "Compare minimal arrows, chevrons, and exit markers for external links.",
         tags: ["icons", "design", "interaction"],
         createdAt: "2026-10-03",
-        updatedAt: ["2026-10-03", "2026-10-11", "2026-10-13"],
+        updatedAt: ["2026-10-03", "2026-10-11", "2026-10-13", "2026-10-14"],
       },
     ],
     id: 10,
     logoSrc: "/icons/user-interface.svg",
-    slug: "ui-explorations",
+    slug: "user-interface",
     title: "User Interface",
   },
   {
