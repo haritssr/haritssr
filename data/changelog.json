@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "c07fe601336f55489b930e175c528a7fa4fbf279",
+      "date": "2026-10-14T11:15:35+07:00",
+      "subject": "chore(Home): remove CV download and unused search import"
+    },
+    {
       "hash": "4b2885edd39974ecef2e0befbea8c1b2664cbbde",
       "date": "2026-10-14T11:15:25+07:00",
       "subject": "feat(Navigation): add breadcrumbs and back links to root pages"
