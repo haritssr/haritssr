@@ -1,5 +1,6 @@
 import { connection } from "next/server";
 
+import BackButton from "@/components/BackButton";
 import ChangelogExplorer from "@/components/ChangelogExplorer";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -28,7 +29,10 @@ export default async function CommitsPage() {
   const firstDay = commitDay(history.commits.at(-1)?.date ?? initialDay);
   return (
     <>
-      <PageHeader>
+      <PageHeader
+        navigation={<BackButton href="/" name="Home" />}
+        path={commitsRoute.route}
+      >
         <PageTitle>{commitsRoute.title}</PageTitle>
         <PageDescription>
           {new Intl.NumberFormat("en-US").format(history.commits.length)}{" "}

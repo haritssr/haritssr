@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLayoutEffect, useRef } from "react";
 
 // Split words on whitespace and replace slug separators with spaces.
 const whitespaceSequencePattern = /\s+/;
 const segmentSeparatorPattern = /[-_]+/g;
-const hiddenRootRoutes = new Set(["api", "commits"]);
 
 export default function Breadcrumbs({
   routeLabels,
@@ -14,12 +14,21 @@ export default function Breadcrumbs({
   routeLabels: Readonly<Record<string, string>>;
 }) {
   const pathname = usePathname();
+  const listRef = useRef<HTMLOListElement>(null);
   const segments = pathname.split("/").filter(Boolean);
 
-  if (
-    segments.length === 0 ||
-    (segments.length === 1 && hiddenRootRoutes.has(segments[0]))
-  ) {
+  useLayoutEffect(() => {
+    if (pathname === "/" || !window.matchMedia("(width < 40rem)").matches) {
+      return;
+    }
+
+    const list = listRef.current;
+    if (list !== null) {
+      list.scrollLeft = list.scrollWidth - list.clientWidth;
+    }
+  }, [pathname]);
+
+  if (segments.length === 0) {
     return null;
   }
 
@@ -36,10 +45,13 @@ export default function Breadcrumbs({
   return (
     <nav aria-label="Breadcrumb" className="h-6">
       <div className="mx-auto flex w-full max-w-5xl justify-start px-4 xl:px-0">
-        <ol className="scrollbar-hide corner-squircle flex h-6 w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg text-[15px] leading-6">
+        <ol
+          className="scrollbar-hide corner-squircle flex h-6 w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg text-[15px] leading-6"
+          ref={listRef}
+        >
           <li className="flex shrink-0 items-center">
             <Link
-              className="text-muted hover:text-foreground whitespace-nowrap"
+              className="text-foreground/70 hover:text-foreground whitespace-nowrap"
               href="/"
               prefetch={false}
             >
@@ -64,7 +76,7 @@ export default function Breadcrumbs({
                 ) : (
                   <>
                     <Link
-                      className="text-muted hover:text-foreground/80 whitespace-nowrap"
+                      className="text-foreground/70 hover:text-foreground whitespace-nowrap"
                       href={href}
                       prefetch={false}
                     >
