@@ -46,7 +46,7 @@ export function SelectField({
         value={value}
       >
         <Select.Trigger
-          className="interactive-elevation form-control border-border text-foreground/80 focus-visible:border-action hover:bg-foreground/5 flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border bg-white px-3 py-2 text-sm outline-none"
+          className="form-control border-border text-foreground/80 focus-visible:border-action flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border bg-white px-3 py-2 text-sm outline-none"
           id={id}
         >
           <span className="inline-flex min-w-0 items-center gap-2">
@@ -61,7 +61,7 @@ export function SelectField({
         </Select.Trigger>
         <Select.Portal>
           <Select.Positioner alignItemWithTrigger={false} sideOffset={4}>
-            <Select.Popup className="border-border z-50 max-w-[calc(100vw-2rem)] min-w-(--anchor-width) overflow-hidden rounded-lg border bg-white shadow-lg">
+            <Select.Popup className="border-border z-50 max-w-[calc(100vw-2rem)] min-w-(--anchor-width) overflow-hidden rounded-lg border bg-white">
               <Select.List className="scrollbar-subtle max-h-72 overflow-y-auto p-1">
                 {options.map((option) => (
                   <Select.Item

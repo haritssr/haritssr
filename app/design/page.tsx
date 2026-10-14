@@ -129,7 +129,8 @@ export default function DesignSystem() {
             <li>
               Controls use subtle shadows; floating controls sit one level
               higher. Hover raises elevation and pressing lowers it. Disabled
-              controls stay flat, and keyboard focus keeps a visible outline.
+              controls and selects stay flat, and keyboard focus keeps a visible
+              outline.
             </li>
             <li>The system works on mobile and desktop.</li>
             <li>

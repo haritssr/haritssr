@@ -9,7 +9,7 @@ export default function ContextMenuDemo() {
   return (
     <div className="space-y-2">
       <ContextMenu.Root>
-        <ContextMenu.Trigger className="focus-visible:outline-action border-border bg-foreground/5 text-foreground/70 hover:bg-foreground/10 flex min-h-20 w-full max-w-full items-center justify-center rounded-lg border border-dashed px-3 text-sm outline-hidden focus-visible:outline-2">
+        <ContextMenu.Trigger className="focus-visible:outline-action border-border bg-foreground/5 text-foreground/70 flex min-h-20 w-full max-w-full cursor-pointer items-center justify-center rounded-lg border border-dashed px-3 text-sm outline-hidden focus-visible:outline-2">
           Right-click here
         </ContextMenu.Trigger>
         <ContextMenu.Portal>

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "8d7f9231afed69fbe3493197a9a04620094ddf9d",
+      "date": "2026-10-14T21:49:26+07:00",
+      "subject": "refactor(ColorsDemo): share swatch rendering and retain theme variables"
+    },
+    {
       "hash": "5cb6e40f15169b22741cffe959cadfda2eec53bb",
       "date": "2026-10-14T21:37:19+07:00",
       "subject": "fix(Writing): hide reading time on mobile"
