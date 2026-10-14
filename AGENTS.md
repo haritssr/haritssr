@@ -18,50 +18,49 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Never launch temporary Chrome, including headless or automation sessions.
   Reuse an already-running browser or use non-browser verification.
 - Avoid unnecessary background processes and stop temporary processes afterward.
-  Prefer targeted verification; run the full test suite only when necessary.
-- Before submitting changes, run `bun run check`, `bun run typecheck`,
-  `bun run knip`, `bun run validate:content`, and
-  `NODE_ENV=production bun run validate:content`.
 - Never create, add, rename, or restore test files (`*.test.*`, `*.spec.*`, or
   files under `test/`, `tests/`, or `__tests__/`). Modify existing tests only
   when explicitly requested. Verify with existing tests and non-test checks.
 - Use the smallest set of skills specific to the task.
 - See [README.md](README.md) for architecture and implementation details.
 
-## Next.js 16.4 Feature Assessment
+## Verification
 
-Reviewed on 2026-10-13 against `next.config.ts`, the route implementations,
-and the installed version-matched documentation. These are recommendations,
-not measured speedups or instructions to enable every option.
+Run only commands whose triggers apply; multiple rows may apply. Check once after
+the final relevant edit, reuse unchanged passing results, and rerun only affected
+checks after failures or new edits. Questions and status updates need no checks.
+Markdown-only documentation needs diff/link review; writing MDX follows the
+content rule below. Markdown/MDX are excluded from Oxfmt.
 
-| Feature | Current status | Recommendation | Fit and verification for this codebase |
-| --- | --- | --- | --- |
-| Smaller disk cache, lazy server HMR, shared runtime, and production minification | Automatic with Turbopack | Keep | Standard `next dev` and `next build` already receive these improvements; no extra flags needed. |
-| `turbopackMemoryEviction: "full"` | Enabled | Keep; measure if recompilation becomes slow | Suits the 8 GB machine by evicting persisted compiler data aggressively. This is separate from garbage collection. |
-| `experimental.turbopackGc: true` | Enabled for trial | Monitor before retaining long term | Removes unreachable compiler work from memory and disk across many experiment routes. Requires filesystem caching and affects both development and builds. Compare long-session memory, cache size, and recompilation time; verify CI. |
-| `experimental.turbopackLazyDynamicImports: false` | Disabled after trial | Keep disabled pending a framework fix | Search hover/focus preloading triggered an unactivated lazy compilation proxy for `GlobalSearchDialog` on Next.js 16.4.0. Dynamic imports and application preloading remain in place. Re-test search, TOC, confetti, and Mermaid before another trial. Production behavior is unchanged. |
-| `reactCompiler` with `experimental.turbopackRustReactCompiler` | Disabled | Pilot after profiling | Interactive physics/math labs and the changelog explorer could benefit from automatic memoization. The Rust implementation needs both flags and no Babel compiler dependency. Compare render cost and compilation time; preserve existing memoization and verify widget behavior before wider adoption. |
-| `cacheComponents: true` with `partialPrefetching: true` | Disabled | Plan a separate migration | Static articles and interactive labs could benefit from reusable navigation shells and preserved state. Review uncached work, Suspense boundaries, and request-time `connection()` in Commits and local task routes. Audit timer, canvas, dialog, and TOC effects when routes become hidden and visible. Many shared links currently use `prefetch={false}`; change that policy deliberately. |
-| Route `ensureStatic` | Unused | Use selectively after Cache Components adoption | Could protect writing and static article routes from accidental request-time rendering. Requires Cache Components. Avoid a root-wide static requirement: Commits and local database pages intentionally render at request time. |
-| `navigation()` and `prefetch()` from `next/cache` | Unused | Use only for identified prefetch costs after migration | Useful for expensive server subtrees that should load later. Current large commit tables are passed to clients; these APIs do not make client accordion content fetch only when opened. |
-| `experimental.turbopackPluginRuntimeStrategy: "workerThreads"` | Disabled | Defer | MDX and PostCSS could benefit, but the installed guide documents a fallback on Node 24.13.1 and newer; this machine currently uses Node 26.8.2. Recheck compatibility before trialing; avoid `forceWorkerThreads`. |
-| React 19.3 View Transitions and Fragment Refs | Available, unused | Add only for a concrete UI requirement | They provide animation and DOM interaction capabilities, not automatic rendering speedups. Preserve reduced-motion behavior if adding transitions. |
-| Additional Turbopack roots/global virtual stores | Not configured | Skip for the current structure | No linked workspace packages or external dependency roots are configured; there is no demonstrated need. |
+`check` uses Ultracite → Oxfmt + Oxlint (`oxlint-tsgolint` for type-aware rules).
+`typecheck` separately runs Next.js route type generation → native TypeScript 7.
 
-Use the installed guides before changing configuration:
-[garbage collection](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/turbopackGc.md),
-[lazy imports](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/turbopackLazyDynamicImports.md),
-[Rust compiler](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/turbopackRustReactCompiler.md),
-and [Cache Components](node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/cacheComponents.md).
-The first two candidates follow the documented behavior in the official
-[garbage collection](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackGc)
-and [lazy import](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackLazyDynamicImports)
-references; their suitability here is an inference from the codebase.
+| Command | Trigger |
+| --- | --- |
+| `bun run check <files...>` | Changes to supported source, CSS, or JSON files, including classes and JSX copy. Pass changed paths; skip unsupported assets and Markdown/MDX. |
+| `bun run check` | Lint/format config or dependency changes, or refactors across shared modules and consumers. Otherwise use scoped checks. |
+| `bun run typecheck` | Imports/exports, types, props, JSX structure, logic/hooks, API handlers, route folders/params, data shapes, TS/Next config, or type-affecting dependencies. Skip CSS/classes, static copy, unchanged-shape data values, Markdown, and assets. |
+| `bun run knip` | Imports/exports, added/removed/renamed source or route files, dependencies, scripts, discovery entry points, or Knip config. Skip changes that leave the module/dependency graph unchanged. |
+| `bun run knip:production` | Production entry points, conditional imports, dependency classification, or production Knip config; otherwise skip. |
+| `bun run validate:content` | Experiment catalog/routes, discontinued records, writing MDX/frontmatter, catalog/route/search discovery, frontmatter parsing, or the validator and its utilities. Skip unrelated UI/layout/CSS/docs. |
+| `NODE_ENV=production bun run validate:content` | Those changes could alter public experiment availability, including production filters and local DB gates; otherwise skip. |
+| `bun run fix <files...>` | Auto-fixable errors in edited files; review the diff. Skip passing checks/manual-only failures; never fix the whole project for a local change. |
 
-Trial one change at a time. Run the required checks above; production-build
-verification belongs in CI or a local human workflow. Follow the existing
-browser and test-file restrictions. Reassess this table after framework upgrades
-or configuration changes.
+Verify behavior with existing tests or focused non-test checks, retaining the
+browser/test-file restrictions. Other commands:
+
+- `bun run sync:changelog`: only for requested commits, before staging and after
+  each commit (see Commits). `dev`/`build` also run it automatically.
+- `bun run dev`: only when needed and no server exists; never just for checks.
+- `bun run build`: human/CI only; never in an agent environment.
+- `bun run start`: only when asked to serve an existing production build and no
+  server exists; never build first or use it for verification.
+- `bun install --frozen-lockfile`: only for missing dependencies or an installed
+  dependency tree that does not match the lockfile.
+
+## Next.js Documentation
+
+[Official Next.js App Router documentation](https://nextjs.org/docs/app).
 
 # Design and Components
 
