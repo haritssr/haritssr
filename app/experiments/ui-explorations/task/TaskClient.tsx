@@ -418,7 +418,7 @@ export default function TaskPage() {
   return (
     <>
       <ExperimentPageHeader
-        back={{ href: "/experiments/ui-explorations", name: "UI Explorations" }}
+        back={{ href: "/experiments/ui-explorations", name: "User Interface" }}
         title="Task"
       >
         <PageDescription>Realistic Daily Time Budget.</PageDescription>

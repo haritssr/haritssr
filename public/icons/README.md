@@ -12,9 +12,9 @@ The Gmail contact icon preserves the original multicolor logo from
 The Next.js mark omits the enclosing disk so it has no circular backplate.
 
 The KaTeX hummingbird is a simplified vector interpretation of the existing
-site icon. Physics and Mathematics are custom SVG illustrations. These assets
-have transparent backgrounds; the experiment icon component colors monochrome
-and science icons through the site's theme tokens.
+site icon. Physics, Mathematics, and User Interface are custom SVG illustrations.
+These assets have transparent backgrounds; the experiment icon component colors
+monochrome and science icons through the site's theme tokens.
 
 The GitHub marks in the header and contact card use the shared local
 `GitHubIcon` SVG component, based on the Simple Icons GitHub mark (CC0).

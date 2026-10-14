@@ -633,7 +633,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     title: "Browser",
   },
   {
-    description: "Random user interfaces explorations",
+    description: "Interface layouts and interactions.",
     experiments: [
       {
         slug: "analog-clock",
@@ -772,9 +772,9 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
     ],
     id: 10,
-    logoSrc: "/icons/radixui.svg",
+    logoSrc: "/icons/user-interface.svg",
     slug: "ui-explorations",
-    title: "UI Explorations",
+    title: "User Interface",
   },
   {
     description: "Interactive explorations of physical phenomena",

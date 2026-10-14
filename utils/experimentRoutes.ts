@@ -27,7 +27,7 @@ export function getExperimentRoutes(): RouteDoc[] {
     ? ["architecture", "history", "statistics"].map((page) => ({
         route: `/experiments/ui-explorations/task/${page}`,
         title: `Task ${page}`,
-        description: "Task tracker · UI explorations",
+        description: "Task tracker · User Interface",
         group: "Experiments",
       }))
     : [];
