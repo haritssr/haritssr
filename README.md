@@ -4,7 +4,7 @@
 - [Design](https://haritssr.com/design): Design system reference.
 - [More](https://haritssr.com/more): Interests and personal notes.
 - [Commits](https://haritssr.com/commits): Commit history and activity.
-  Model suitability lives at `/commits/model-suitability`; the dated review at
+  Model suitability lives at `/commits/2026-10-11`; the dated review at
   `/commits/2026-10-14` covers a fixed set of committed changes in Jakarta time.
   Both pages are linked below the timeline and included in search and the sitemap.
 

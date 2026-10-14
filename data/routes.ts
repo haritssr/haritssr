@@ -22,8 +22,8 @@ export const commitsRoute: RouteDoc = {
 };
 
 export const modelSuitabilityRoute: RouteDoc = {
-  route: "/commits/model-suitability",
-  title: "Model Suitability",
+  route: "/commits/2026-10-11",
+  title: "2026-10-11",
   description:
     "Model and reasoning effort estimates for commits on 11 October 2026.",
   group: "Commits",
