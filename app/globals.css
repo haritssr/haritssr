@@ -81,6 +81,8 @@
   --color-graph-direct: var(--color-teal-600);
   --color-graph-indirect: var(--color-pink-600);
   --color-surface: var(--color-white);
+  --color-switch-thumb: #fff;
+  --color-slider-thumb: #fff;
   --color-background: var(--color-white);
   --color-foreground: var(--color-zinc-800);
   --color-border: var(--color-zinc-300);

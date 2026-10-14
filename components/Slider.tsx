@@ -35,7 +35,7 @@ export default function Slider({
           <BaseSlider.Thumb
             aria-label={label}
             aria-valuetext={valueText}
-            className="interactive-elevation has-focus-visible:outline-action border-border hover:border-action-hover block h-5 w-5 cursor-pointer rounded-full border bg-white outline-hidden has-focus-visible:outline-2"
+            className="interactive-elevation has-focus-visible:outline-action border-border hover:border-action-hover bg-slider-thumb block h-5 w-5 cursor-pointer rounded-full border outline-hidden has-focus-visible:outline-2"
           />
         </BaseSlider.Track>
       </BaseSlider.Control>

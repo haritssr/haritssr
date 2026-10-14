@@ -10,7 +10,7 @@ export default function SwitchDemo() {
       defaultChecked
       id="s1"
     >
-      <Switch.Thumb className="shadow-control block h-4 w-4 rounded-full bg-white transition-transform duration-100 will-change-transform data-checked:translate-x-5" />
+      <Switch.Thumb className="bg-switch-thumb shadow-control block h-4 w-4 rounded-full transition-transform duration-100 will-change-transform data-checked:translate-x-5" />
     </Switch.Root>
   );
 }
