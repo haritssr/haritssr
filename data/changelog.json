@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "22834342f87c860bf244b581c4fb6a1c635c1dda",
+      "date": "2026-10-14T16:33:31+07:00",
+      "subject": "feat(Home): simplify profile and move personal notes to More"
+    },
+    {
       "hash": "80e074b1031dba252a5b66eade52aa1769dc60c5",
       "date": "2026-10-14T16:33:08+07:00",
       "subject": "feat(NavigationCards): share counted cards across home and experiments"

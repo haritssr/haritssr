@@ -133,7 +133,7 @@
       var(--color-middle-hover) 50%,
       var(--color-border)
     );
-    --floating-shadow-opacity: 12%;
+    --floating-shadow-opacity: 6%;
   }
 
   :root[data-theme="dark"] {
@@ -144,7 +144,7 @@
       var(--color-border) 75%,
       transparent
     );
-    --floating-shadow-opacity: 32%;
+    --floating-shadow-opacity: 16%;
     --color-action: var(--color-blue-400);
     --color-action-hover: var(--color-blue-300);
     --color-background: var(--color-zinc-900);

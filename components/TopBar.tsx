@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 import BackButton from "@/components/BackButton";
@@ -13,17 +12,32 @@ import TopBarSearch from "@/components/TopBarSearch";
 import useScrolledArticle from "@/components/useScrolledArticle";
 import pageSourceUrl from "@/utils/pageSourceUrl";
 
+import styles from "./TopBar.module.css";
+
 const destinations = ["projects", "experiments", "writing", "design"] as const;
 
 export default function TopBar() {
   const pathname = usePathname();
   const navigationRef = useRef<HTMLElement>(null);
   const article = useScrolledArticle(pathname, navigationRef);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrolled = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", updateScrolled);
+    };
+  }, []);
 
   return (
     <nav
       aria-label="Primary navigation"
-      className="sticky top-0 z-30 select-none"
+      className={`${styles.navigation} sticky top-0 z-30 select-none`}
+      data-scrolled={scrolled}
       ref={navigationRef}
     >
       <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-5 pt-5 xl:px-0">
@@ -43,22 +57,13 @@ export default function TopBar() {
           </>
         ) : (
           <>
-            {/* Harits Syah */}
-            <div className="floating-surface hover:bg-surface/95 group flex items-center space-x-1.5 rounded-full border py-1.5 pr-3 pl-2.5 backdrop-blur-lg has-[a:active]:scale-[0.98]">
-              <Image
-                alt=""
-                className="h-5 w-5"
-                height={20}
-                priority
-                src="/icons/haritssr.svg"
-                width={20}
-              />
+            <div className="floating-surface hover:bg-surface/95 group flex items-center space-x-1.5 rounded-full border py-1.5 pr-3 pl-3.5 backdrop-blur-lg has-[a:active]:scale-[0.98]">
               <Link className="text-foreground/90" href="/">
                 Harits Syah
               </Link>
             </div>
 
-            <NavigationLinks />
+            {pathname === "/" ? null : <NavigationLinks />}
           </>
         )}
         <HeaderActions pathname={pathname} />

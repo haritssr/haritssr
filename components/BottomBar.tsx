@@ -9,6 +9,12 @@ export default function BottomBar({
 }: {
   preview?: boolean;
 } = {}) {
+  const pathname = usePathname();
+
+  if (!preview && pathname === "/") {
+    return null;
+  }
+
   return (
     <nav
       aria-label="Mobile navigation"

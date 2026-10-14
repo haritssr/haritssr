@@ -1,0 +1,3 @@
+.navigation[data-scrolled="false"] :global(.floating-surface) {
+  box-shadow: none;
+}
