@@ -24,6 +24,7 @@ export function AccordionItem({
   panelClassName = "",
   title,
   trailing,
+  triggerClassName = "",
   value,
 }: {
   children: ReactNode;
@@ -31,6 +32,7 @@ export function AccordionItem({
   panelClassName?: string;
   title: ReactNode;
   trailing?: ReactNode;
+  triggerClassName?: string;
   value: string;
 }) {
   return (
@@ -38,7 +40,9 @@ export function AccordionItem({
       <BaseAccordion.Header
         data-toc-ignore={excludeFromContents ? "" : undefined}
       >
-        <BaseAccordion.Trigger className="group focus-visible:outline-action border-border text-foreground flex w-full items-center justify-between gap-3 rounded-lg border px-3 py-2.5 text-left text-sm outline-hidden focus-visible:outline-2 data-panel-open:rounded-b-none">
+        <BaseAccordion.Trigger
+          className={`group focus-visible:outline-action border-border text-foreground flex w-full items-center justify-between gap-3 rounded-lg border px-3 py-2.5 text-left text-sm outline-hidden focus-visible:outline-2 data-panel-open:rounded-b-none ${triggerClassName}`}
+        >
           <span className="min-w-0 flex-1">{title}</span>
           {trailing}
           <ChevronDownIcon

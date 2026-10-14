@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "dc054924ce27d806e386c949a649e716b8ba6b95",
+      "date": "2026-10-14T11:15:40+07:00",
+      "subject": "style(BottomBar): adjust navigation item padding"
+    },
+    {
       "hash": "c07fe601336f55489b930e175c528a7fa4fbf279",
       "date": "2026-10-14T11:15:35+07:00",
       "subject": "chore(Home): remove CV download and unused search import"

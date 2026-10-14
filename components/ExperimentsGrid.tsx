@@ -67,7 +67,8 @@ export default function ExperimentsGrid({
         }
       >
         <AccordionItem
-          title="Discontinued experiments"
+          title="Discontinued"
+          triggerClassName="lg:w-[calc((100%_-_var(--spacing)*15)/4)] lg:data-panel-open:rounded-b-lg"
           trailing={
             <span className="text-muted shrink-0 font-normal tabular-nums">
               {archivedCount}
@@ -75,7 +76,7 @@ export default function ExperimentsGrid({
             </span>
           }
           value="discontinued"
-          panelClassName="bg-transparent"
+          panelClassName="bg-transparent lg:mt-3 lg:rounded-lg lg:border-t"
         >
           <div className="space-y-5">
             {removalCommitSha === undefined ? null : (
