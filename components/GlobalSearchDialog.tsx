@@ -394,9 +394,9 @@ function SearchResultItem({
       value={item}
     >
       <div className="min-w-0 flex-1 space-y-1">
-        <div className="truncate text-sm">{entry.title}</div>
+        <div className="text-foreground truncate text-sm">{entry.title}</div>
         {!isSearching || MAIN_ROUTES.has(entry.route) ? (
-          <div className="text-muted truncate text-xs">
+          <div className="text-foreground/70 truncate text-xs">
             {isSearching ? (
               <SearchMatchText
                 query={query}
