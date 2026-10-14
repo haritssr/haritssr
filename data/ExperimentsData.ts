@@ -636,6 +636,14 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     description: "Random user interfaces explorations",
     experiments: [
       {
+        slug: "analog-clock",
+        title: "Analog Clock",
+        description: "A live analog clock, set to your local time.",
+        tags: ["time", "clock", "svg", "design"],
+        createdAt: "2026-10-14",
+        updatedAt: ["2026-10-14"],
+      },
+      {
         slug: "notion-navbar",
         title: "Notion NavBar",
         description: "Explore a Notion-inspired navigation bar.",

@@ -1,0 +1,16 @@
+.viewer:fullscreen {
+  height: 100dvh;
+  overflow-y: auto;
+  justify-content: safe center;
+  gap: 1.5rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--color-background);
+  padding: 4rem 1.25rem 2rem;
+}
+
+.viewer:fullscreen .face {
+  width: min(75vw, max(8rem, calc(100dvh - 14rem)));
+  max-width: 40rem;
+  flex-shrink: 0;
+}

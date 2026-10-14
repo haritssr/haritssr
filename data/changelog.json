@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "15e0f1d871ec9d79846fdfb6ee981b49e4efd810",
+      "date": "2026-10-14T11:16:18+07:00",
+      "subject": "feat(PlaneGeometry): add shape area and perimeter reference"
+    },
+    {
       "hash": "765bb8ea2635ed802f6311820856deb4519aa581",
       "date": "2026-10-14T11:16:01+07:00",
       "subject": "chore(Task): remove redundant experiment badge"
