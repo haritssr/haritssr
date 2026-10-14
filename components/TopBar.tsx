@@ -50,7 +50,7 @@ export default function TopBar() {
               variant="topbar"
             />
             <div
-              className="floating-surface text-foreground/90 min-w-0 flex-1 rounded-full border px-4 py-1.5 font-medium backdrop-blur-lg sm:absolute sm:left-1/2 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
+              className="floating-surface text-foreground/90 w-fit min-w-0 rounded-full border px-4 py-1.5 font-medium backdrop-blur-lg sm:absolute sm:left-1/2 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
               title={header.title}
             >
               <p className="truncate">{header.title}</p>
