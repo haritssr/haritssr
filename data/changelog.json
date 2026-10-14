@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "0f1d885f4a0db7b1d8705e3db42ae1c73f97a84d",
+      "date": "2026-10-15T01:33:57+07:00",
+      "subject": "feat(PillMaterial): explore opacity and blur while scrolling"
+    },
+    {
       "hash": "7e5b9b9225b0adc7ad01b6c5d514369497d4b49a",
       "date": "2026-10-15T01:33:57+07:00",
       "subject": "fix(BottomBar): show navigation through second-level routes"

@@ -12,6 +12,7 @@ import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
+import { colorPhysicsSymbols } from "./_colors";
 import { DESCRIPTION, PHYSICS_DOMAINS } from "./_data";
 import type { PhysicsEquation } from "./_data";
 
@@ -61,7 +62,7 @@ function EquationSection({ equation }: { equation: PhysicsEquation }) {
       <div className="border-border bg-background min-w-0 overflow-hidden rounded-xl border">
         <div className="scrollbar-subtle min-w-0 overflow-x-auto px-4 py-12 sm:px-6 sm:py-16">
           <div className="w-fit min-w-full text-base sm:text-lg">
-            {katexify(equation.expression, true)}
+            {katexify(colorPhysicsSymbols(equation.expression), true)}
           </div>
         </div>
         <Accordion.Root>
@@ -132,7 +133,7 @@ function VariableTable({ equation }: { equation: PhysicsEquation }) {
               className="px-3 py-2 text-left align-top font-normal whitespace-nowrap"
               scope="row"
             >
-              {katexify(symbol, false)}
+              {katexify(colorPhysicsSymbols(symbol), false)}
             </th>
             <td className="px-3 py-2 align-top">{meaning}</td>
             <td className="px-3 py-2 align-top whitespace-nowrap">
