@@ -7,8 +7,8 @@ const monochromeIcons = new Set([
   "/icons/user-interface.svg",
 ]);
 const scienceIconColors = new Map([
-  ["/icons/physics.svg", "text-amber-500"],
-  ["/icons/math.svg", "text-[#B784A7]"],
+  ["/icons/physics.svg", "text-green-600"],
+  ["/icons/math.svg", "text-violet-500"],
 ]);
 
 export default function ExperimentDomainIcon({

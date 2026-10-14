@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "362070f3e62c383f5ef3ad79247d9dc035011965",
+      "date": "2026-10-14T21:49:27+07:00",
+      "subject": "style(Design): keep select and context menu triggers flat"
+    },
+    {
       "hash": "8d7f9231afed69fbe3493197a9a04620094ddf9d",
       "date": "2026-10-14T21:49:26+07:00",
       "subject": "refactor(ColorsDemo): share swatch rendering and retain theme variables"
