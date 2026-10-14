@@ -11,6 +11,11 @@
       "subject": "feat(TopBar): move mobile actions into numbered contents sheet"
     },
     {
+      "hash": "8809615802df170d0384b96d38e84591295b5fae",
+      "date": "2026-10-15T01:33:56+07:00",
+      "subject": "feat(ThemeSwitcher): cycle system light and dark preferences"
+    },
+    {
       "hash": "541425a9146f714d24ee6713fd4bafac3f7282f6",
       "date": "2026-10-15T01:33:55+07:00",
       "subject": "fix(LogoDemo): show Harimaki and remove Haris Studio"

@@ -32,9 +32,11 @@ hides while scrolling downward and at the top of the page.
 The theme button cycles System → Light → Dark → System and shows the selected
 preference's icon. First visits use System; explicit choices persist locally.
 
-The mobile BottomBar appears only on `/projects`, `/experiments`, `/writing`,
-and `/design`, matching its destinations exactly. Home keeps it hidden;
-nested pages and other routes omit it. The design preview remains available.
+The mobile BottomBar appears on Home and routes under Projects, Experiments,
+Writing, and Design up to two URL segments deep, such as
+`/experiments/mathematics`. Nested routes highlight their main section. Individual
+writing articles, deeper routes, and other sections omit it. The design preview
+remains available.
 
 The shared layout uses a viewport-height flex layout for the whole page, so its footer fits
 without extra scrolling when the content fits. Longer content still scrolls normally.
