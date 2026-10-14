@@ -69,8 +69,11 @@ export default async function WritingPostPage({
   const { default: PostContent } = await postModule;
 
   return (
-    <WritingArticle key={post.slug} title={post.title}>
-      <PageHeader navigation={<BackButton href="/writing" name="Writing" />}>
+    <WritingArticle key={post.slug}>
+      <PageHeader
+        navigation={<BackButton href="/writing" name="Writing" />}
+        path={`/writing/${post.slug}`}
+      >
         <PageTitle
           data-article-back-label="Writing"
           data-article-parent="/writing"

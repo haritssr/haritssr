@@ -14,7 +14,7 @@ export const metadata = createPageMetadata({
 export default function MorePage() {
   return (
     <>
-      <PageHeader navigation={<BackButton href="/" name="Home" />}>
+      <PageHeader navigation={<BackButton href="/" name="Home" />} path="/more">
         <PageTitle>More</PageTitle>
         <PageDescription>
           Interests and personal notes about me.

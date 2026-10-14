@@ -173,7 +173,7 @@ export default function ArticleContentsPanel({
           className="z-50"
           collisionAvoidance={{ side: "none", align: "shift" }}
           positionMethod="fixed"
-          side="top"
+          side="bottom"
           sideOffset={12}
         >
           <Popover.Popup

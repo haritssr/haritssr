@@ -1,3 +1,11 @@
 .navigation[data-scrolled="false"] :global(.floating-surface) {
   box-shadow: none;
 }
+
+.navigation :global(.floating-surface) {
+  background-color: color-mix(in srgb, var(--color-surface) 30%, transparent);
+}
+
+.navigation :global(.floating-surface):hover {
+  background-color: color-mix(in srgb, var(--color-surface) 40%, transparent);
+}

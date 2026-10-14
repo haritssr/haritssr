@@ -43,6 +43,7 @@ export default function ExperimentPageHeader({
       navigation={
         resolvedBack === null ? null : <BackButton {...resolvedBack} />
       }
+      path={defaults.path}
     >
       {resolvedTitle === null ? null : (
         <PageTitle

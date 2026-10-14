@@ -104,13 +104,11 @@ export default function RootLayout({
         <ThemeProvider>
           <GlobalSearchProvider>
             <TopBar />
-            <div className="py-8" data-page-breadcrumbs="">
-              <div className="h-6">
-                <Breadcrumbs routeLabels={breadcrumbLabels} />
-              </div>
+            <div className="min-h-22 py-8" data-page-breadcrumbs="">
+              <Breadcrumbs routeLabels={breadcrumbLabels} />
             </div>
             <main
-              className="mx-auto min-h-screen w-full max-w-5xl px-5 xl:px-0"
+              className="mx-auto min-h-screen w-full max-w-5xl px-4 xl:px-0"
               id="main-content"
             >
               {children}

@@ -8,8 +8,9 @@ import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 import BackButton from "@/components/BackButton";
 import GitHubIcon from "@/components/GitHubIcon";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import TopBarContents from "@/components/TopBarContents";
 import TopBarSearch from "@/components/TopBarSearch";
-import useScrolledArticle from "@/components/useScrolledArticle";
+import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 import pageSourceUrl from "@/utils/pageSourceUrl";
 
 import styles from "./TopBar.module.css";
@@ -19,7 +20,7 @@ const destinations = ["projects", "experiments", "writing", "design"] as const;
 export default function TopBar() {
   const pathname = usePathname();
   const navigationRef = useRef<HTMLElement>(null);
-  const article = useScrolledArticle(pathname, navigationRef);
+  const header = useScrolledPageHeader(pathname, navigationRef);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -40,25 +41,28 @@ export default function TopBar() {
       data-scrolled={scrolled}
       ref={navigationRef}
     >
-      <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-5 pt-5 xl:px-0">
-        {article ? (
+      <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-4 xl:px-0">
+        {header ? (
           <>
             <BackButton
-              href={article.href}
-              name={article.backLabel}
+              href={header.href}
+              name={header.backLabel}
               variant="topbar"
             />
             <div
-              className="floating-surface text-foreground/90 min-w-0 flex-1 rounded-full border px-4 py-1.5 backdrop-blur-lg sm:absolute sm:left-1/2 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
-              title={article.title}
+              className="floating-surface text-foreground/90 min-w-0 flex-1 rounded-full border px-4 py-1.5 font-medium backdrop-blur-lg sm:absolute sm:left-1/2 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
+              title={header.title}
             >
-              <p className="truncate">{article.title}</p>
+              <p className="truncate">{header.title}</p>
             </div>
           </>
         ) : (
           <>
             <div className="floating-surface hover:bg-surface/95 group flex items-center space-x-1.5 rounded-full border py-1.5 pr-3 pl-3.5 backdrop-blur-lg has-[a:active]:scale-[0.98]">
-              <Link className="text-foreground/90" href="/">
+              <Link
+                className="text-foreground/90 hover:text-foreground/80"
+                href="/"
+              >
                 Harits Syah
               </Link>
             </div>
@@ -74,10 +78,13 @@ export default function TopBar() {
 
 function HeaderActions({ pathname }: { pathname: string }) {
   return (
-    <div className="floating-surface hover:bg-surface/95 flex shrink-0 items-center space-x-1 rounded-full border saturate-150 backdrop-blur-lg">
-      <TopBarSearch />
-      <ThemeSwitcher />
-      <GitHubLink pathname={pathname} />
+    <div className="flex shrink-0 items-center gap-2">
+      <div className="floating-surface hover:bg-surface/95 flex items-center space-x-1 rounded-full border saturate-150 backdrop-blur-lg">
+        <TopBarSearch />
+        <ThemeSwitcher />
+        <GitHubLink pathname={pathname} />
+      </div>
+      <TopBarContents key={pathname} />
     </div>
   );
 }
@@ -102,7 +109,7 @@ function NavigationLinks() {
 
   return (
     <ul
-      className="floating-surface hover:bg-surface/95 absolute left-1/2 hidden -translate-x-1/2 rounded-full border p-1.5 saturate-150 backdrop-blur-lg sm:flex"
+      className="floating-surface absolute left-1/2 hidden -translate-x-1/2 rounded-full border p-1.5 saturate-150 backdrop-blur-lg sm:flex"
       id="main-navigation"
     >
       {destinations.map((destination) => (

@@ -14,7 +14,9 @@ export default function BackButton({
     return (
       <Link
         aria-label={`Back to ${name}`}
-        className="floating-surface hover:bg-surface/95 text-foreground/90 focus-visible:outline-action flex size-9 shrink-0 items-center justify-center rounded-full border backdrop-blur-lg focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] sm:w-auto sm:gap-1.5 sm:pr-3 sm:pl-2.5"
+        className="floating-surface hover:bg-surface/95 text-foreground/90 focus-visible:outline-action flex size-9 shrink-0 items-center justify-center rounded-full border backdrop-blur-lg focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] sm:w-auto sm:gap-0.5 sm:pr-3.5 sm:pl-2.5"
+        data-page-back-href={href}
+        data-page-back-label={name}
         href={href}
         prefetch={false}
         title={`Back to ${name}`}
@@ -30,7 +32,13 @@ export default function BackButton({
   }
 
   return (
-    <Link className="block w-fit max-w-full" href={href} prefetch={false}>
+    <Link
+      className="block w-fit max-w-full"
+      data-page-back-href={href}
+      data-page-back-label={name}
+      href={href}
+      prefetch={false}
+    >
       <span className="inline-block w-full align-top">
         <span className="group flex items-center">
           <ChevronLeftIcon

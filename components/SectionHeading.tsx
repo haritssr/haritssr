@@ -20,7 +20,11 @@ export default function SectionHeading({
       : `text-foreground mb-4 ${headingSize} font-semibold`;
 
   return (
-    <Heading {...props} className={className ?? appearance}>
+    <Heading
+      {...props}
+      className={className ?? appearance}
+      data-section-heading=""
+    >
       {children}
     </Heading>
   );

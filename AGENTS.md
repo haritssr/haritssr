@@ -148,11 +148,18 @@ Apply these defaults to new or refactored experiments in every domain:
   explanations in page content. Preview line wrapping depends on the host app.
 - Writing uses local `data/writing/*.mdx` with validated frontmatter and automatic
   module discovery, without an import registry. Use `/writing` URLs directly.
-- Individual writing and experiment pages share the scrolling top bar and
-  floating reading controls (`useScrolledArticle`, `ArticleTableOfContents`).
-  Keep page titles marked with `data-article-*` for the top bar. Contents use
-  rendered heading anchors, a desktop popover, and a mobile sheet; back-to-top
-  remains available on articles without section headings.
+- Pages with a title and back button inside `PageHeader` share the scrolling
+  top bar (`useScrolledPageHeader`). Pass the exact route through the header's
+  `path` prop; the shared `PageTitle` and `BackButton` supply discovery markers.
+  The title replaces center navigation and the back button replaces the site
+  name once the title scrolls behind the top bar. Headers without either stay
+  in the normal navigation mode.
+- Pages with visible `SectionHeading` components show `TopBarContents` in its
+  own pill to the right of the top bar actions. Contents use rendered heading anchors,
+  a desktop popover below the trigger, and a mobile sheet. Individual writing
+  and experiment pages keep the floating `ArticleBackToTop` control, including
+  articles without section headings. Show it only when scrolling upward away
+  from the page top. Preserve their `data-article-*` title metadata.
 - Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.

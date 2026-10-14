@@ -1,9 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
 
-import ArticleTableOfContents from "@/components/ArticleTableOfContents";
+import ArticleBackToTop from "@/components/ArticleBackToTop";
 import { ExperimentHeaderContext } from "@/components/ExperimentPageHeader";
 import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 
@@ -24,7 +23,6 @@ export default function ExperimentDomainShell({
   experiments,
 }: ExperimentDomainShellProps) {
   const pathname = usePathname();
-  const articleRef = useRef<HTMLElement>(null);
   const segments = pathname.split("/").filter(Boolean);
   const parentPath = `/${segments.slice(0, -1).join("/")}`;
   const previousSegment = segments.at(-2);
@@ -50,7 +48,7 @@ export default function ExperimentDomainShell({
   return (
     <div className="min-h-screen w-full">
       <div className="w-full">
-        <article className="sm:px-0" ref={articleRef}>
+        <article className="sm:px-0">
           <ExperimentHeaderContext
             value={{
               back: { href: parentPath, name: backButtonName },
@@ -63,13 +61,7 @@ export default function ExperimentDomainShell({
             {children}
           </ExperimentHeaderContext>
         </article>
-        {!isIndexPage && (
-          <ArticleTableOfContents
-            articleRef={articleRef}
-            key={pathname}
-            title={title}
-          />
-        )}
+        {!isIndexPage && <ArticleBackToTop key={pathname} />}
       </div>
     </div>
   );

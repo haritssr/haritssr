@@ -37,7 +37,7 @@
 .popover {
   width: min(25vw, 24rem);
   max-height: 75dvh;
-  transform-origin: bottom right;
+  transform-origin: top right;
   transition:
     transform 180ms ease,
     opacity 180ms ease;
@@ -46,14 +46,14 @@
 .popover[data-starting-style],
 .popover[data-ending-style] {
   opacity: 0;
-  transform: translateY(0.5rem) scale(0.98);
+  transform: translateY(-0.5rem) scale(0.98);
 }
 
 /* The panel may already be open when its lazy-loaded module mounts. */
 @starting-style {
   .popover {
     opacity: 0;
-    transform: translateY(0.5rem) scale(0.98);
+    transform: translateY(-0.5rem) scale(0.98);
   }
 }
 

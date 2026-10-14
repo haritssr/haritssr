@@ -49,7 +49,10 @@ const FORM_CONTROL_CLASS_NAME =
 export default function DesignSystem() {
   return (
     <>
-      <PageHeader navigation={<BackButton href="/" name="Home" />}>
+      <PageHeader
+        navigation={<BackButton href="/" name="Home" />}
+        path="/design"
+      >
         <PageTitle>Design</PageTitle>
         <PageDescription>
           Shared design system for{" "}

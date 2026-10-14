@@ -41,7 +41,11 @@ export default function useArticleOutline(
       if (!article) {
         return;
       }
-      const next = collectArticleOutline(article, title, generatedIds);
+      const next = collectArticleOutline(
+        article.querySelector<HTMLElement>("article") ?? article,
+        title,
+        generatedIds
+      );
       const nextSignature = outlineSignature(next);
       const nextTargets = [next.entries[0], ...next.sections];
       const previousTargets = previous

@@ -17,7 +17,10 @@ export const metadata: Metadata = createPageMetadata({
 export default function WritingPage() {
   return (
     <>
-      <PageHeader navigation={<BackButton href="/" name="Home" />}>
+      <PageHeader
+        navigation={<BackButton href="/" name="Home" />}
+        path="/writing"
+      >
         <PageTitle>Writing</PageTitle>
         <PageDescription>{WRITING_DESCRIPTION}</PageDescription>
       </PageHeader>

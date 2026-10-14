@@ -18,7 +18,7 @@ export default function BottomBar({
   return (
     <nav
       aria-label="Mobile navigation"
-      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden [body:has([data-article-back-to-top])_&]:hidden"} px-3 pb-3`}
+      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden [body:has([data-article-back-to-top])_&]:hidden"} px-3.5 pb-3`}
     >
       <div className="border-middle-hover w-full rounded-full border bg-white/80 px-1.25 py-1 saturate-150 backdrop-blur-lg">
         <div className="flex w-full items-center">
@@ -44,7 +44,7 @@ const IconWrapper = ({ to, path }: { to: string; path: React.ReactNode }) => {
   return (
     <Link
       aria-current={isCurrentPage ? "page" : undefined}
-      className="focus-visible:outline-action block w-1/5 py-1 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 active:scale-95"
+      className="focus-visible:outline-action block w-1/5 py-0.5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 active:scale-95"
       href={route}
     >
       <div className="flex flex-col items-center justify-center">

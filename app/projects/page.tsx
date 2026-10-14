@@ -21,7 +21,10 @@ export const metadata: Metadata = createPageMetadata({
 export default function ProjectsPage() {
   return (
     <>
-      <PageHeader navigation={<BackButton href="/" name="Home" />}>
+      <PageHeader
+        navigation={<BackButton href="/" name="Home" />}
+        path="/projects"
+      >
         <PageTitle>Projects</PageTitle>
         <PageDescription>{PROJECTS_DESCRIPTION}</PageDescription>
       </PageHeader>

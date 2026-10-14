@@ -9,6 +9,7 @@ export default function PageTitle({ children, ...props }: PageTitleProps) {
     <h1
       {...props}
       className="text-foreground text-3xl font-bold text-balance sm:text-4xl"
+      data-page-title=""
     >
       {children}
     </h1>

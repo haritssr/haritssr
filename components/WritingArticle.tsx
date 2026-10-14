@@ -1,29 +1,14 @@
 "use client";
 
-import { useRef } from "react";
 import type { ReactNode } from "react";
 
-import ArticleTableOfContents from "@/components/ArticleTableOfContents";
+import ArticleBackToTop from "@/components/ArticleBackToTop";
 
-export default function WritingArticle({
-  children,
-  title,
-}: {
-  children: ReactNode;
-  title: string;
-}) {
-  const articleRef = useRef<HTMLElement>(null);
-
+export default function WritingArticle({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen w-full">
-      <article className="pb-24" ref={articleRef}>
-        {children}
-      </article>
-      <ArticleTableOfContents
-        articleRef={articleRef}
-        minimumSections={1}
-        title={title}
-      />
+    <div className="min-h-screen w-full max-w-3xl">
+      <article className="pb-24">{children}</article>
+      <ArticleBackToTop />
     </div>
   );
 }

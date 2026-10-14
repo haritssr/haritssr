@@ -57,6 +57,7 @@ export default async function ProjectPage({
       <div className="mx-auto min-h-screen w-full max-w-full">
         <PageHeader
           navigation={<BackButton href="/projects" name="Projects" />}
+          path={`/projects/${projectSlug}`}
         >
           <div className="flex items-start justify-between gap-4">
             <PageTitle>{project.project_name}</PageTitle>

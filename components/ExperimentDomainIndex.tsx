@@ -27,6 +27,7 @@ export default function ExperimentDomainIndex({
     <div className="mx-auto min-h-screen w-full sm:px-0">
       <PageHeader
         navigation={<BackButton href="/experiments" name="Experiments" />}
+        path={`/experiments/${domain.slug}`}
       >
         <div className="flex items-start gap-3">
           <PageTitle>{domain.title}</PageTitle>
