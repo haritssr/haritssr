@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "9c09f34df1a9656ee8150e8e33f70474253ea288",
+      "date": "2026-10-15T01:33:55+07:00",
+      "subject": "style(Badges): use semantic fills and status dots"
+    },
+    {
       "hash": "362070f3e62c383f5ef3ad79247d9dc035011965",
       "date": "2026-10-14T21:49:27+07:00",
       "subject": "style(Design): keep select and context menu triggers flat"

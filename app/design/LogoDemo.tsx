@@ -8,22 +8,16 @@ const LOGOS = [
     url: "haritssr.com",
   },
   {
-    alt: "Haris Lab logo",
-    name: "Haris Lab",
+    alt: "Harimaki logo",
+    name: "Harimaki",
     src: "/icons/harimaki.svg",
-    url: "harislab.com",
-  },
-  {
-    alt: "Haris Studio logo",
-    name: "Haris Studio",
-    src: "/icons/harisstudio.svg",
-    url: "harisstudio.com",
+    url: "harimaki.com",
   },
 ] as const;
 
 export default function LogoDemo() {
   return (
-    <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
+    <div className="grid grid-cols-2 gap-5">
       {LOGOS.map((logo) => (
         <div className="space-y-2 text-center" key={logo.name}>
           <Image
