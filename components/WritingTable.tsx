@@ -10,7 +10,7 @@ export default function WritingTable() {
           {allWritingPosts.map((post) => (
             <tr className="hover:bg-interface-hover" key={post.slug}>
               <th
-                className="w-full px-3 py-2 text-left font-normal sm:w-1/3"
+                className="w-full py-2 text-left font-normal sm:w-1/3"
                 scope="row"
               >
                 <InternalLink
@@ -20,13 +20,13 @@ export default function WritingTable() {
                   {post.title}
                 </InternalLink>
               </th>
-              <td className="text-muted hidden px-3 py-2 sm:table-cell">
+              <td className="text-muted hidden py-2 sm:table-cell">
                 {post.summary}.
               </td>
-              <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
+              <td className="text-muted py-2 whitespace-nowrap tabular-nums">
                 <time dateTime={post.publishedAt}>{post.publishedAt}</time>
               </td>
-              <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
+              <td className="text-muted py-2 pl-5 whitespace-nowrap tabular-nums">
                 {Math.ceil(post.wordCount / 200)} min
               </td>
             </tr>

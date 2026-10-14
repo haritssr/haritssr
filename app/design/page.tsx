@@ -7,7 +7,7 @@ import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
-import InternalLinkCardWithNumber from "@/components/InternalLinkCardWithNumber";
+import InternalLinkCardNumber from "@/components/InternalLinkCardNumber";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
@@ -170,11 +170,8 @@ export default function DesignSystem() {
             "grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5"
           }
         >
-          <Box
-            name="InternalLinkCardWithNumber"
-            title="Navigation card with count"
-          >
-            <InternalLinkCardWithNumber
+          <Box name="InternalLinkCardNumber" title="Navigation card with count">
+            <InternalLinkCardNumber
               title="Writing"
               description="Notes and ideas I want to share."
               href="/writing"

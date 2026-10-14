@@ -7,15 +7,30 @@ import {
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import ContactList from "@/components/ContactList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
-import InternalLinkCardWithNumber from "@/components/InternalLinkCardWithNumber";
+import InternalLinkCardNumber from "@/components/InternalLinkCardNumber";
 import { PageStructuredData } from "@/components/StructuredData";
 import { ProjectsData } from "@/data/ProjectsData";
 import { getAvailableExperimentCount } from "@/utils/experimentCatalog";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { allWritingPosts } from "@/utils/writing-posts";
+
+// Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
+// Example: "https://www.example.com" becomes "example.com" after replacement.
+const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
+
+const contacts = [
+  { link: "haritssr@gmail.com", name: "GMail" },
+  {
+    link: "https://www.x.com/haritssr",
+    name: "X",
+  },
+  {
+    link: "https://www.github.com/haritssr",
+    name: "GitHub",
+  },
+];
 
 const homeNavigation = [
   {
@@ -91,7 +106,7 @@ function HomeNavigation() {
     >
       {homeNavigation.map(
         ({ href, title, description, icon: Icon, count, countLabel }) => (
-          <InternalLinkCardWithNumber
+          <InternalLinkCardNumber
             href={href}
             key={href}
             title={title}
@@ -130,7 +145,7 @@ function ProfileSection() {
       />
       <ul
         aria-label="Profile and contact details"
-        className="text-foreground/70 marker:text-muted list-outside list-disc space-y-3 pl-5 wrap-break-word md:col-span-3 md:col-start-1 md:row-start-1"
+        className="text-foreground/70 marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word md:col-span-3 md:col-start-1 md:row-start-1"
       >
         <li>
           <span className="text-foreground">Product Engineer</span> &{" "}
@@ -142,14 +157,11 @@ function ProfileSection() {
           />
         </li>
         <li>Tangerang, Indonesia</li>
-        <li className="list-none">
-          <ul
-            aria-label="Contact links"
-            className="list-outside list-disc space-y-3"
-          >
-            <ContactList />
-          </ul>
-        </li>
+        {contacts.map((contact, index) => (
+          <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
+            {renderContact(contact)}
+          </li>
+        ))}
         <li>
           <InternalLink href="/more" variant="inline">
             More
@@ -158,4 +170,50 @@ function ProfileSection() {
       </ul>
     </section>
   );
+}
+
+function highlightSiteName(text: string, siteName = "haritssr") {
+  return text
+    .replace(siteName, `§§${siteName}§§`)
+    .split("§§")
+    .map((chunk) =>
+      chunk === siteName ? (
+        <span className="text-foreground" key={`u-${text.indexOf(chunk)}`}>
+          {siteName}
+        </span>
+      ) : (
+        chunk
+      )
+    );
+}
+
+function renderContact(contact: { link: string; name: string }) {
+  if (contact.link.startsWith("http")) {
+    const displayedLink = contact.link.replace(urlPrefixPattern, "");
+
+    return (
+      <a
+        className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+        href={contact.link}
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        <span>{highlightSiteName(displayedLink)}</span>
+      </a>
+    );
+  }
+
+  if (contact.link.includes("@")) {
+    return (
+      <a
+        className="focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+        href={`mailto:${contact.link}`}
+        title={contact.link}
+      >
+        <span>{highlightSiteName(contact.link)}</span>
+      </a>
+    );
+  }
+
+  return null;
 }
