@@ -60,7 +60,7 @@
   }
 }
 
-@theme {
+@theme static {
   --color-action: color-mix(
     in oklab,
     var(--color-blue-600) 60%,

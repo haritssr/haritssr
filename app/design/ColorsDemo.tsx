@@ -7,7 +7,11 @@ const MAIN_COLORS = [
   { name: "Action", token: "action" },
   { name: "Foreground", token: "foreground" },
   { name: "Background", token: "background" },
-] as const;
+].map(({ name, token }) => ({
+  name,
+  label: `bg-${token}`,
+  value: `var(--color-${token})`,
+}));
 
 const ZINC_COLORS = [
   { name: "white", value: "#ffffff" },
@@ -22,47 +26,33 @@ const ZINC_COLORS = [
   { name: "zinc-800", value: "#27272a" },
   { name: "zinc-900", value: "#18181b" },
   { name: "black", value: "#000000" },
-] as const;
+].map(({ name, value }) => ({ name, label: value, value }));
 
-export function MainColorsDemo() {
-  return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      {MAIN_COLORS.map((color) => (
-        <ColorSwatch
-          key={color.name}
-          name={color.name}
-          label={`bg-${color.token}`}
-          value={`var(--color-${color.token})`}
-        />
-      ))}
-    </div>
-  );
-}
-
-export function HierarchicalColorsDemo() {
-  return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      {ZINC_COLORS.map((color) => (
-        <ColorSwatch
-          key={color.name}
-          name={color.name}
-          label={color.value}
-          value={color.value}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ColorSwatch({
-  label,
-  name,
-  value,
-}: {
+interface ColorSwatchProps {
   label: string;
   name: string;
   value: string;
-}) {
+}
+
+export function MainColorsDemo() {
+  return <ColorSwatchGrid colors={MAIN_COLORS} />;
+}
+
+export function HierarchicalColorsDemo() {
+  return <ColorSwatchGrid colors={ZINC_COLORS} />;
+}
+
+function ColorSwatchGrid({ colors }: { colors: readonly ColorSwatchProps[] }) {
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      {colors.map((color) => (
+        <ColorSwatch key={color.name} {...color} />
+      ))}
+    </div>
+  );
+}
+
+function ColorSwatch({ label, name, value }: ColorSwatchProps) {
   const style: CSSProperties & { "--swatch-color": string } = {
     "--swatch-color": value,
   };

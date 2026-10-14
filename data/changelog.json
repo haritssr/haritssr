@@ -11,6 +11,11 @@
       "subject": "style(Experiments): shorten the index description"
     },
     {
+      "hash": "e9258ae18295b8594e013c89617e8328581645e3",
+      "date": "2026-10-14T21:37:19+07:00",
+      "subject": "docs(Agents): scope verification commands and link Next.js documentation"
+    },
+    {
       "hash": "006c48e0edeefa2d0731e8f972a40b1ec8152906",
       "date": "2026-10-14T21:37:18+07:00",
       "subject": "fix(Layout): fit short pages and reserve stable scrollbar gutters"
