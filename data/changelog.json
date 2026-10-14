@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "006c48e0edeefa2d0731e8f972a40b1ec8152906",
+      "date": "2026-10-14T21:37:18+07:00",
+      "subject": "fix(Layout): fit short pages and reserve stable scrollbar gutters"
+    },
+    {
       "hash": "6c3dfd75b72c2fcf8cbeceb27a9f5757b6e54e7f",
       "date": "2026-10-14T21:37:17+07:00",
       "subject": "fix(BottomBar): limit destinations and match translucent navigation"

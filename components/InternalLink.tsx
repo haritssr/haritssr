@@ -25,7 +25,7 @@ export default function InternalLink({
       : "text-[length:inherit] leading-[inherit]";
   const interaction =
     variant === "footer"
-      ? "text-muted rounded-sm select-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current hover:underline"
+      ? "text-foreground/70 rounded-sm select-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current hover:underline"
       : "text-action hover:text-action-hover hover:underline";
 
   return (

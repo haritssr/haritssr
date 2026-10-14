@@ -8,7 +8,7 @@ export default function PageDescription({
   children: ReactNode;
 }) {
   return (
-    <Element className="text-foreground/80 text-lg wrap-break-word">
+    <Element className="text-foreground/70 text-lg wrap-break-word">
       {children}
     </Element>
   );
