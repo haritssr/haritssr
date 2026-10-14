@@ -35,5 +35,5 @@ function getExperimentsHomeDescription(): string {
   const totalExperiments = getAvailableExperimentCount();
   const experimentLabel = totalExperiments === 1 ? "experiment" : "experiments";
 
-  return `${totalExperiments} ${experimentLabel} in frontend development, browser APIs, mathematics, and physics.`;
+  return `${totalExperiments} ${experimentLabel} exploring web development, mathematics, and physics.`;
 }
