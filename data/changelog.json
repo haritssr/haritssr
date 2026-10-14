@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "5d249c1533728178c9f5190d673a0f2dd7faa669",
+      "date": "2026-10-14T16:34:08+07:00",
+      "subject": "refactor(Writing): detach list table and simplify its borders"
+    },
+    {
       "hash": "92e717720bc2b229a962a637d72c2180ca41d51e",
       "date": "2026-10-14T16:33:51+07:00",
       "subject": "style(Projects): space detail values and shorten back label"

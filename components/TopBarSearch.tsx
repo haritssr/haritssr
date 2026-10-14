@@ -134,7 +134,7 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useGlobalSearch() {
+function useGlobalSearch() {
   const context = useContext(GlobalSearchContext);
   if (!context) {
     throw new Error("Global search must be used inside GlobalSearchProvider");
