@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "92e717720bc2b229a962a637d72c2180ca41d51e",
+      "date": "2026-10-14T16:33:51+07:00",
+      "subject": "style(Projects): space detail values and shorten back label"
+    },
+    {
       "hash": "a0ee7aba9eed3bc84b6b93799daf674c3920f696",
       "date": "2026-10-14T16:33:46+07:00",
       "subject": "style(Navigation): hide home menus and show subtle shadows after scrolling"

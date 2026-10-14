@@ -1,56 +1,38 @@
 import InternalLink from "@/components/InternalLink";
-import Table from "@/components/Table";
 import { allWritingPosts } from "@/utils/writing-posts";
 
 export default function WritingTable() {
   return (
-    <Table className="min-w-96">
-      <caption className="sr-only">Writing, newest first</caption>
-      <thead>
-        <tr className="divide-border bg-foreground/5 divide-x">
-          <th
-            className="w-full px-3 py-2 text-left font-normal sm:w-1/3"
-            scope="col"
-          >
-            Title
-          </th>
-          <th
-            className="hidden px-3 py-2 text-left font-normal sm:table-cell"
-            scope="col"
-          >
-            Description
-          </th>
-          <th className="px-3 py-2 text-left font-normal" scope="col">
-            Date
-          </th>
-          <th className="px-3 py-2 text-left font-normal" scope="col">
-            Read
-          </th>
-        </tr>
-      </thead>
-      <tbody className="divide-border divide-y">
-        {allWritingPosts.map((post) => (
-          <tr
-            className="divide-border hover:bg-interface-hover divide-x"
-            key={post.slug}
-          >
-            <th className="px-3 py-2 text-left font-normal" scope="row">
-              <InternalLink className="text-sm" href={`/writing/${post.slug}`}>
-                {post.title}
-              </InternalLink>
-            </th>
-            <td className="text-muted hidden px-3 py-2 sm:table-cell">
-              {post.summary}.
-            </td>
-            <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
-              <time dateTime={post.publishedAt}>{post.publishedAt}</time>
-            </td>
-            <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
-              {Math.ceil(post.wordCount / 200)} min
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <div className="scrollbar-subtle border-border w-full overflow-x-auto border-y">
+      <table className="text-foreground/90 w-full min-w-96 border-collapse text-sm">
+        <caption className="sr-only">Writing, newest first</caption>
+        <tbody className="divide-border divide-y">
+          {allWritingPosts.map((post) => (
+            <tr className="hover:bg-interface-hover" key={post.slug}>
+              <th
+                className="w-full px-3 py-2 text-left font-normal sm:w-1/3"
+                scope="row"
+              >
+                <InternalLink
+                  className="text-sm"
+                  href={`/writing/${post.slug}`}
+                >
+                  {post.title}
+                </InternalLink>
+              </th>
+              <td className="text-muted hidden px-3 py-2 sm:table-cell">
+                {post.summary}.
+              </td>
+              <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
+                <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+              </td>
+              <td className="text-muted px-3 py-2 whitespace-nowrap tabular-nums">
+                {Math.ceil(post.wordCount / 200)} min
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
