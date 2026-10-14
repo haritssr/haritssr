@@ -6,6 +6,11 @@
       "subject": "style(Design): keep select and context menu triggers flat"
     },
     {
+      "hash": "4501616ef0ae9196c507f2d8a3de9d6d3b3ecb98",
+      "date": "2026-10-14T21:49:27+07:00",
+      "subject": "style(Design): tighten box padding and lighten badge labels"
+    },
+    {
       "hash": "c15035036af6977da094f416cdaaf9efbef9a2aa",
       "date": "2026-10-14T21:49:27+07:00",
       "subject": "style(Experiments): use wind and Pythagorean domain logos"
