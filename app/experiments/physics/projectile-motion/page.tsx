@@ -103,12 +103,10 @@ export default function ProjectileMotionPage() {
     <div className="pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          A thrown ball moves forward while gravity pulls it downward. Explore
-          how these two motions combine into a parabolic path, then predict its
-          height, flight time, and landing point.
+          Explore launch angles, flight paths, and range.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section
           id="two-motions"
           title="One flight, two independent motions"
@@ -150,7 +148,7 @@ export default function ProjectileMotionPage() {
           title="Equations behind the flight"
           description="Open each explanation for the symbols, units, and meaning of the equation."
         >
-          <div className="space-y-16">
+          <div className="space-y-20">
             {EQUATIONS.map((equation) => (
               <Section
                 key={equation.id}

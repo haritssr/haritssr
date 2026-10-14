@@ -103,12 +103,10 @@ export default function MathNotationPage() {
     <div className="text-foreground min-w-0 pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Explore which notation from Indonesian SMA/MA and SMK mathematics can
-          be displayed with KaTeX or similar renderers, and which operations
-          need calculation, graphing, or geometry tools.
+          Explore math notation and what KaTeX can render.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section
           className="min-w-0"
           title="How notation becomes a math page"
@@ -177,7 +175,6 @@ export default function MathNotationPage() {
         </Section>
 
         <Section
-          className="max-w-full"
           title="When a TeX command is unsupported"
           id="unsupported-notation"
           description={
@@ -189,6 +186,7 @@ export default function MathNotationPage() {
               and its installed packages.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <p className="text-muted">
             A formula can use familiar school mathematics and still contain a
@@ -206,7 +204,6 @@ export default function MathNotationPage() {
         </Section>
 
         <Section
-          className="max-w-full"
           title="Try the notation and check support"
           id="try-the-notation"
           description={

@@ -87,8 +87,9 @@ export default function DesignSystem() {
             </li>
             <li>
               Keep PageHeader outside the content stack. Use
-              <code> space-y-16</code> between major content sections and omit
-              an extra top margin on the first content block.
+              <code> space-y-16</code> between major content sections. Physics
+              and mathematics experiments use <code>space-y-20</code>. Omit an
+              extra top margin on the first content block.
             </li>
           </ExplanationList>
           <pre className="border-border overflow-x-auto rounded-lg border p-4 text-sm">
@@ -215,7 +216,9 @@ export default function DesignSystem() {
               Section groups content under an accessible heading with shared
               spacing. Sections, descriptions, and body content use the full
               available width within the page container. Use SectionHeading when
-              a layout only needs a heading.
+              a layout only needs a heading. In physics and mathematics,
+              constrain reading content with <code>max-w-3xl</code> on the body
+              wrapper; keep headings, descriptions, labs, and tables full width.
             </>
           }
           contentClassName={

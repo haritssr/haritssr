@@ -74,12 +74,10 @@ export default function CirclePage() {
     <div className="text-foreground pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Understand a circle from its center outward. Explore how radius sets
-          its size, why circumference and area follow different rules, and how
-          angles describe arcs and sectors.
+          Explore radius, circumference, area, and angles.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section
           className="min-w-0"
           title="What is a circle?"
@@ -148,7 +146,6 @@ export default function CirclePage() {
         <CircleLab />
 
         <Section
-          className="max-w-full"
           title="Arcs and sectors"
           id="circle-sectors"
           description={
@@ -160,6 +157,7 @@ export default function CirclePage() {
               {katexify(String.raw`0^\circ\le\alpha\le360^\circ`, false)}.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation
             tex={[
@@ -192,7 +190,6 @@ export default function CirclePage() {
         </Section>
 
         <Section
-          className="max-w-full"
           title="A circle on the coordinate plane"
           id="circle-coordinates"
           description={
@@ -203,6 +200,7 @@ export default function CirclePage() {
               Pythagorean theorem gives the circle equation:
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation tex={String.raw`(x-h)^2+(y-k)^2=r^2`} />
           <p className="text-muted">

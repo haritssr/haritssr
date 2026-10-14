@@ -10,8 +10,7 @@ import { VocabularyGuide } from "../_components/VocabularyGuide";
 import { parseAtomicNumber } from "../_lib/electron-configuration";
 import ElectronConfigurationDemo from "./demo";
 
-const DESCRIPTION =
-  "Explore how electrons fill atomic orbitals and build an element's electron configuration.";
+const DESCRIPTION = "See how electrons fill atomic orbitals.";
 
 export const metadata: Metadata = getExperimentMetadata(
   "physics",

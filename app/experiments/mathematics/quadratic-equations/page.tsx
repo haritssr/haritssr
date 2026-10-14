@@ -5,7 +5,6 @@ import Box from "@/components/Box";
 import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SectionHeading from "@/components/SectionHeading";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
@@ -72,14 +71,11 @@ export default function QuadraticEquationsPage() {
     <div className="text-foreground pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Learn what makes an equation quadratic, how its roots appear on a
-          graph, and when to factor, complete the square, or use the quadratic
-          formula.
+          Solve quadratics and explore their roots.
         </PageDescription>
       </ExperimentPageHeader>
       <div className="space-y-20">
         <Section
-          className="max-w-full text-base"
           title="What is a quadratic equation?"
           id="quadratic-basics-heading"
           description={
@@ -89,6 +85,7 @@ export default function QuadraticEquationsPage() {
               real numbers, and the leading coefficient must be nonzero.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation tex={String.raw`ax^2+bx+c=0,\qquad a\ne0`} />
           <p className="text-muted">
@@ -102,16 +99,11 @@ export default function QuadraticEquationsPage() {
 
         <QuadraticLab />
 
-        <section aria-labelledby="discriminant-heading" className="space-y-5">
-          <div className="max-w-full">
-            <SectionHeading id="discriminant-heading">
-              Count the real roots first
-            </SectionHeading>
-            <p className="text-muted text-base leading-8">
-              The discriminant is the quantity inside the square root of the
-              quadratic formula. Its sign tells you the kind of roots to expect.
-            </p>
-          </div>
+        <Section
+          id="discriminant-heading"
+          title="Count the real roots first"
+          description="The discriminant is the quantity inside the square root of the quadratic formula. Its sign tells you the kind of roots to expect."
+        >
           <Equation tex={String.raw`D=b^2-4ac`} />
           <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
             {rootCases.map(({ condition, title, description }) => (
@@ -129,25 +121,25 @@ export default function QuadraticEquationsPage() {
               </article>
             ))}
           </div>
-          <p className="text-muted max-w-full text-base leading-8">
+          <p className="text-muted max-w-3xl text-base leading-8">
             When the discriminant is negative, the square root uses the
             imaginary unit {katexify("i", false)}, defined by{" "}
             {katexify("i^2=-1", false)}. For example,{" "}
             {katexify("x^2+1=0", false)} has the roots{" "}
             {katexify(String.raw`x=\pm i`, false)}.
           </p>
-        </section>
+        </Section>
 
         <Section
-          className="max-w-full text-base"
           title="Three ways to solve"
           id="solving-heading"
           contentClassName="space-y-8"
         >
-          <article className="space-y-4">
-            <h3 className="text-xl font-semibold">
-              Factor when the factors are easy to see
-            </h3>
+          <Section
+            headingAs="h3"
+            contentClassName="max-w-3xl space-y-5"
+            title="Factor when the factors are easy to see"
+          >
             <p className="text-muted">
               For a leading coefficient of one, look for two numbers whose sum
               is {katexify("b", false)} and whose product is{" "}
@@ -162,11 +154,12 @@ export default function QuadraticEquationsPage() {
               This is often the quickest method when the polynomial has simple
               integer factors.
             </p>
-          </article>
-          <article className="space-y-4">
-            <h3 className="text-xl font-semibold">
-              Complete the square to expose the structure
-            </h3>
+          </Section>
+          <Section
+            headingAs="h3"
+            contentClassName="max-w-3xl space-y-5"
+            title="Complete the square to expose the structure"
+          >
             <p className="text-muted">
               Make the leading coefficient one, move the constant, and add the
               square of half the linear coefficient to both sides. The left side
@@ -186,11 +179,12 @@ export default function QuadraticEquationsPage() {
               form {katexify(String.raw`y=a(x-h)^2+k`, false)}, whose vertex is{" "}
               {katexify("(h,k)", false)}.
             </p>
-          </article>
-          <article className="space-y-4">
-            <h3 className="text-xl font-semibold">
-              Use the quadratic formula for any quadratic
-            </h3>
+          </Section>
+          <Section
+            headingAs="h3"
+            contentClassName="max-w-3xl space-y-5"
+            title="Use the quadratic formula for any quadratic"
+          >
             <p className="text-muted">
               Completing the square on the general equation gives a formula that
               works even when the factors are hard to spot. Include each
@@ -209,7 +203,7 @@ export default function QuadraticEquationsPage() {
               Substitute each root into the original equation to check it. Keep
               radicals exact until you need a decimal approximation.
             </p>
-          </article>
+          </Section>
         </Section>
 
         <Section

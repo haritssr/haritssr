@@ -24,14 +24,11 @@ export default function LogarithmsPage() {
     <div className="text-foreground pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Find the exponent, understand why logarithms are useful, and derive
-          their rules from the laws of powers. Explore the graph and check your
-          understanding with worked examples.
+          Explore logarithm rules, graphs, and exponents.
         </PageDescription>
       </ExperimentPageHeader>
       <div className="space-y-20">
         <Section
-          className="max-w-full"
           title="What is a logarithm?"
           id="definition-heading"
           description={
@@ -41,6 +38,7 @@ export default function LogarithmsPage() {
               exponent; logarithms recover the exponent from the result.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation
             tex={String.raw`{}^{a}\!\log x=t\quad\Longleftrightarrow\quad a^t=x`}
@@ -86,7 +84,7 @@ export default function LogarithmsPage() {
               many orders of magnitude easier to compare.
             </>
           }
-          contentClassName="grid min-w-0 grid-cols-1 items-start gap-4 md:grid-cols-2 xl:grid-cols-3"
+          contentClassName="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"
         >
           <article className="border-border space-y-3 rounded-xl border p-4">
             <h3 className="font-semibold">Find time in a growth model</h3>
@@ -118,7 +116,6 @@ export default function LogarithmsPage() {
         </Section>
 
         <Section
-          className="max-w-full"
           title="Common logarithms and natural logarithms"
           id="bases-heading"
           description={
@@ -129,6 +126,7 @@ export default function LogarithmsPage() {
               doubling and binary information.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation
             tex={String.raw`\log x={}^{10}\!\log x,\qquad \ln x={}^{e}\!\log x`}
@@ -192,7 +190,6 @@ export default function LogarithmsPage() {
         </Section>
 
         <Section
-          className="max-w-full"
           title="Order and logarithmic inequalities"
           id="inequalities-heading"
           description={
@@ -203,6 +200,7 @@ export default function LogarithmsPage() {
               inverse reverses order. Both arguments must be positive.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation
             tex={String.raw`a>1:\quad x<y\ \Longleftrightarrow\ {}^{a}\!\log x<{}^{a}\!\log y`}
@@ -220,15 +218,15 @@ export default function LogarithmsPage() {
         </Section>
 
         <Section
-          className="max-w-full"
           title="Common mistakes"
           id="mistakes-heading"
           contentClassName="space-y-8"
         >
-          <div className="min-w-0 space-y-5">
-            <h3 className="text-lg font-semibold">
-              A sum inside a logarithm does not split
-            </h3>
+          <Section
+            headingAs="h3"
+            contentClassName="max-w-3xl space-y-5"
+            title="A sum inside a logarithm does not split"
+          >
             <p className="text-muted">
               The product rule follows from multiplying powers. There is no
               matching exponent law that turns a sum of arguments into a sum of
@@ -238,11 +236,12 @@ export default function LogarithmsPage() {
             <Equation
               tex={String.raw`{}^{2}\!\log(4+4)=3\ne4={}^{2}\!\log4+{}^{2}\!\log4`}
             />
-          </div>
-          <div className="min-w-0 space-y-5">
-            <h3 className="text-lg font-semibold">
-              Check the original domain before combining
-            </h3>
+          </Section>
+          <Section
+            headingAs="h3"
+            contentClassName="max-w-3xl space-y-5"
+            title="Check the original domain before combining"
+          >
             <p className="text-muted">
               A positive product does not guarantee that each factor is
               positive. Keep the separate domain conditions when combining
@@ -253,11 +252,12 @@ export default function LogarithmsPage() {
             <Equation
               tex={String.raw`{}^{a}\!\log(x^2)=2\,{}^{a}\!\log|x|,\qquad x\ne0`}
             />
-          </div>
-          <div className="min-w-0 space-y-5">
-            <h3 className="text-lg font-semibold">
-              A logarithm is not a factor you can cancel
-            </h3>
+          </Section>
+          <Section
+            headingAs="h3"
+            contentClassName="max-w-3xl space-y-5"
+            title="A logarithm is not a factor you can cancel"
+          >
             <p className="text-muted">
               Logarithms are functions. Use change of base for a quotient of
               logarithms; dividing their arguments gives a different expression.
@@ -265,7 +265,7 @@ export default function LogarithmsPage() {
             <Equation
               tex={String.raw`\frac{\log100}{\log10}=2,\qquad \log\frac{100}{10}=1`}
             />
-          </div>
+          </Section>
         </Section>
 
         <Section

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import { FactorExplorer, PotentialExplorer } from "./interactions";
@@ -7,22 +8,21 @@ import { FactorExplorer, PotentialExplorer } from "./interactions";
 export function POrbitalPattern() {
   return (
     <>
-      <section
-        aria-labelledby="the-shape-in-one-picture"
-        className="border-border bg-surface-hover min-w-0 overflow-hidden rounded-3xl border"
+      <Section
+        id="the-shape-in-one-picture"
+        title={
+          <>
+            The <InlineMath expression="p" /> orbital is the probability pattern
+          </>
+        }
+        className="border-border bg-surface-hover min-w-0 scroll-mt-28 rounded-3xl border p-5 sm:p-8"
       >
-        <div className="grid gap-2 p-5 sm:p-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-8">
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-8">
           <div>
             <p className="text-foreground/55 text-sm font-medium tracking-wide uppercase">
               The equation, drawn
             </p>
-            <h2
-              className="text-foreground mt-2 scroll-mt-28 text-2xl font-semibold text-balance sm:text-3xl"
-              id="the-shape-in-one-picture"
-            >
-              The <InlineMath expression="p" /> orbital is the probability
-              pattern
-            </h2>
+
             <p className="text-foreground/75 mt-4 leading-7">
               For <InlineMath expression="p_z" />, the angular wave is
               proportional to <InlineMath expression={String.raw`\cos\theta`} />
@@ -37,7 +37,7 @@ export function POrbitalPattern() {
           </div>
           <POrbitalDiagram />
         </div>
-        <div className="border-border grid gap-4 border-t px-5 py-4 text-sm sm:grid-cols-2 sm:px-8">
+        <div className="border-border grid gap-4 border-t pt-5 text-sm sm:grid-cols-2">
           <p className="text-foreground/70">
             <span className="text-foreground font-semibold">
               Color = wave phase.
@@ -53,22 +53,19 @@ export function POrbitalPattern() {
             plane.
           </p>
         </div>
-      </section>
+      </Section>
 
-      <section
-        aria-labelledby="same-shape-three-directions"
-        className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center"
+      <Section
+        id="same-shape-three-directions"
+        title="Three orientations, same pattern"
+        className="min-w-0 scroll-mt-28"
+        contentClassName="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center"
       >
         <div>
           <p className="text-action text-sm font-semibold tracking-[0.18em] uppercase">
             Rotate the axis
           </p>
-          <h2
-            className="text-foreground mt-2 scroll-mt-28 text-3xl font-bold text-balance"
-            id="same-shape-three-directions"
-          >
-            Three orientations, same pattern
-          </h2>
+
           <p className="text-foreground/70 mt-3 leading-7">
             The three diagrams show the same two-lobed pattern aimed along
             different axes. For an isolated atom without an external field,
@@ -81,9 +78,9 @@ export function POrbitalPattern() {
           <OrientationDiagram axis="y" />
           <OrientationDiagram axis="z" />
         </div>
-      </section>
+      </Section>
 
-      <p className="text-foreground/65 max-w-full text-sm leading-6">
+      <p className="text-foreground/65 max-w-3xl text-sm leading-6">
         The drawings are schematic cross-sections of probability density, not
         hard surfaces. An orbital is a quantum state; the electron does not
         trace out the pictured dumbbell.
@@ -94,14 +91,12 @@ export function POrbitalPattern() {
 
 export function OrbitalSymbolGuide() {
   return (
-    <section aria-labelledby="symbol-guide" className="scroll-mt-28">
-      <h2
-        className="text-foreground scroll-mt-28 text-xl font-semibold"
-        id="symbol-guide"
-      >
-        Symbol guide: what is inside Schrödinger&apos;s equation?
-      </h2>
-      <div className="border-border mt-5 w-full overflow-hidden rounded-md border">
+    <Section
+      id="symbol-guide"
+      className="scroll-mt-28"
+      title="Symbol guide: what is inside Schrödinger’s equation?"
+    >
+      <div className="border-border w-full overflow-hidden rounded-md border">
         <div className="scrollbar-subtle w-full overflow-x-auto">
           <table className="divide-border text-foreground w-full min-w-160 border-collapse divide-y text-sm">
             <caption className="sr-only">
@@ -284,23 +279,24 @@ export function OrbitalSymbolGuide() {
         wavefunction. The Laplacian&apos;s unit describes the operator, before
         it acts on the wavefunction.
       </p>
-    </section>
+    </Section>
   );
 }
 
 export function POrbitalDerivation() {
   return (
-    <section aria-labelledby="from-schrodinger-to-shape" className="min-w-0">
-      <div className="max-w-full">
+    <Section
+      id="from-schrodinger-to-shape"
+      className="min-w-0 scroll-mt-28"
+      title="Worked example: where a p orbital gets its two lobes"
+      headingAs="h3"
+      contentClassName="max-w-3xl space-y-5"
+    >
+      <div>
         <p className="text-action text-sm font-semibold tracking-[0.18em] uppercase">
           Follow the arrows
         </p>
-        <h3
-          className="text-foreground mt-2 scroll-mt-28 text-xl font-semibold text-balance"
-          id="from-schrodinger-to-shape"
-        >
-          Worked example: where a p orbital gets its two lobes
-        </h3>
+
         <p className="text-foreground/70 mt-3 leading-7">
           We solve the stationary Schrödinger equation for an electron attracted
           to a nucleus. Each arrow shows the next mathematical choice and what
@@ -308,17 +304,17 @@ export function POrbitalDerivation() {
         </p>
       </div>
 
-      <ol className="mt-7">
+      <ol>
         <li>
           <DerivationStep number="01" title="Start with the governing equation">
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               For hydrogen, treat the nucleus as fixed and use its Coulomb
               potential:
             </p>
             <MathDisplay
               expression={String.raw`\begin{aligned} -\frac{\hbar^2}{2m_e}\nabla^2\psi + V(r)\psi &= E\psi \\ V(r) &= -\frac{e^2}{4\pi\varepsilon_0 r} \end{aligned}`}
             />
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               This equation balances the wave&apos;s kinetic energy against its
               electric attraction to the nucleus. Solving it gives the allowed
               wavefunctions <InlineMath expression={String.raw`\psi`} />.
@@ -333,19 +329,19 @@ export function POrbitalDerivation() {
 
         <li>
           <DerivationStep number="02" title="Separate distance from direction">
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               Spherical symmetry lets the solution split into a radial part and
               an angular part:
             </p>
             <MathDisplay
               expression={String.raw`\psi(r,\theta,\phi)=R_{n\ell}(r)Y_{\ell}^{m}(\theta,\phi)`}
             />
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               <InlineMath expression="R" /> controls how the wave changes with
               distance. <InlineMath expression="Y" />, a spherical harmonic,
               describes how it changes from one direction to another.
             </p>
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               The quantum numbers obey{" "}
               <InlineMath expression={String.raw`n \ge 1`} />,
               <InlineMath expression={String.raw`0 \le \ell < n`} />, and
@@ -373,7 +369,7 @@ export function POrbitalDerivation() {
 
         <li>
           <DerivationStep number="03" title="Select the p pattern">
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               The letter p means <InlineMath expression={String.raw`\ell=1`} />.
               The angular-momentum equation gives its allowed angular pattern;
               for the orientation called <InlineMath expression="p_z" />:
@@ -381,7 +377,7 @@ export function POrbitalDerivation() {
             <MathDisplay
               expression={String.raw`\begin{aligned} \hat{L}^2Y_{\ell}^{m} &= \ell(\ell+1)\hbar^2Y_{\ell}^{m} \\ Y_1^0(\theta,\phi) &\propto \cos\theta \end{aligned}`}
             />
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               The cosine is positive on one side of the nucleus and negative on
               the other. At{" "}
               <InlineMath expression={String.raw`\theta=\frac{\pi}{2}`} />, it
@@ -399,7 +395,7 @@ export function POrbitalDerivation() {
             number="04"
             title="Combine the radial and angular waves"
           >
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               The hydrogen <InlineMath expression="2p" /> radial solution is{" "}
               <InlineMath
                 expression={String.raw`R_{21}(r)\propto re^{-r/(2a_0)}`}
@@ -409,7 +405,7 @@ export function POrbitalDerivation() {
             <MathDisplay
               expression={String.raw`\psi_{2p_z}(r,\theta)\propto re^{-r/(2a_0)}\cos\theta`}
             />
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               The radial factor sets how far the cloud extends; the cosine
               factor sets its direction and the nodal plane.
             </p>
@@ -425,7 +421,7 @@ export function POrbitalDerivation() {
             <MathDisplay
               expression={String.raw`|\psi_{2p_z}|^2\propto r^2e^{-r/a_0}\cos^2\theta`}
             />
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               At <InlineMath expression={String.raw`\theta=\frac{\pi}{2}`} />,{" "}
               <InlineMath expression={String.raw`\cos\theta=0`} />, so the
               probability density vanishes across the whole{" "}
@@ -439,7 +435,7 @@ export function POrbitalDerivation() {
           </DerivationStep>
         </li>
       </ol>
-    </section>
+    </Section>
   );
 }
 

@@ -18,16 +18,14 @@ export default function LivePlaygroundPage() {
     <div className="pb-16">
       <ExperimentPageHeader>
         <PageDescription>
-          Write TeX and watch KaTeX typeset it as you edit. Try a template, then
-          change the notation or compare inline math with a standalone equation.
+          Write TeX and preview equations as you type.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section title="Try your own notation" id="playground-heading">
           <Demo />
         </Section>
         <Section
-          className="max-w-full"
           title="Inline and display math"
           id="playground-notes-heading"
           description={

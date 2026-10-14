@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import PageDescription from "@/components/PageDescription";
-import SectionHeading from "@/components/SectionHeading";
+import Section from "@/components/Section";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 
 import MotionDiagram from "./MotionDiagram";
@@ -65,7 +65,7 @@ export default function MotionDiagramsPage() {
     <div className="pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Adjust the controls and see how each motion graph changes over time.
+          Explore graphs of linear and circular motion.
         </PageDescription>
         <nav
           aria-label="Jump to a motion type"
@@ -83,25 +83,19 @@ export default function MotionDiagramsPage() {
         </nav>
       </ExperimentPageHeader>
 
-      <div className="space-y-16">
+      <div className="space-y-20">
         {motions.map((motion) => (
-          <section
-            aria-labelledby={`${motion.id}-title`}
+          <Section
             className="scroll-mt-24"
             id={motion.id}
             key={motion.id}
+            title={
+              <span
+                id={`${motion.id}-title`}
+              >{`${motion.abbreviation} · ${motion.name}`}</span>
+            }
+            description={motion.description}
           >
-            <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="max-w-full">
-                <SectionHeading
-                  id={`${motion.id}-title`}
-                >{`${motion.abbreviation} · ${motion.name}`}</SectionHeading>
-                <p className="mt-3 text-sm leading-7 text-zinc-600">
-                  {motion.description}
-                </p>
-              </div>
-            </div>
-
             <MotionDiagram
               accelerated={motion.accelerated}
               areaFormula={motion.areaFormula}
@@ -109,7 +103,7 @@ export default function MotionDiagramsPage() {
               id={motion.id}
               kind={motion.kind}
             />
-          </section>
+          </Section>
         ))}
       </div>
     </div>

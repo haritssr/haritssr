@@ -134,14 +134,11 @@ export default function LinearEquationsThreeVariablesPage() {
     <div className="text-foreground w-full min-w-0 pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Find a triple that satisfies three equations at once. Learn
-          elimination, interpret the geometry, and explore what changes when
-          equations repeat or contradict one another.
+          Solve linear systems with three variables.
         </PageDescription>
       </ExperimentPageHeader>
       <div className="space-y-20">
         <Section
-          className="max-w-full text-base"
           title="Three unknowns, shared constraints"
           id="linear-system-basics-heading"
           description={
@@ -152,6 +149,7 @@ export default function LinearEquationsThreeVariablesPage() {
               variables.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation tex="ax+by+cz=d" />
           <p className="text-muted">
@@ -195,7 +193,7 @@ export default function LinearEquationsThreeVariablesPage() {
               </article>
             ))}
           </div>
-          <p className="text-muted max-w-full text-sm leading-7">
+          <p className="text-muted max-w-3xl text-sm leading-7">
             A zero row such as {katexify("0=0", false)} carries no new
             information; it does not by itself prove inconsistency. A row such
             as {katexify("0=1", false)} is impossible. If every equation is an
@@ -204,7 +202,6 @@ export default function LinearEquationsThreeVariablesPage() {
         </Section>
 
         <Section
-          className="max-w-full text-base"
           title="Solve the example by elimination"
           id="elimination-heading"
           description={
@@ -217,10 +214,7 @@ export default function LinearEquationsThreeVariablesPage() {
           }
           contentClassName="space-y-6"
         >
-          <article className="space-y-4">
-            <h3 className="text-foreground text-lg font-semibold">
-              Remove the first variable
-            </h3>
+          <Section headingAs="h3" title="Remove the first variable">
             <p className="text-muted">
               Subtract twice the first equation from the second. Subtract the
               first equation from the third. The first variable disappears from
@@ -228,22 +222,16 @@ export default function LinearEquationsThreeVariablesPage() {
             </p>
             <Equation tex={String.raw`R_2-2R_1:\quad-3y-z=-9`} />
             <Equation tex={String.raw`R_3-R_1:\quad y-2z=-4`} />
-          </article>
-          <article className="space-y-4">
-            <h3 className="text-foreground text-lg font-semibold">
-              Reduce to one variable
-            </h3>
+          </Section>
+          <Section headingAs="h3" title="Reduce to one variable">
             <p className="text-muted">
               Add the first reduced equation to three times the second reduced
               equation. Their terms in {katexify("y", false)} cancel.
             </p>
             <Equation tex={String.raw`(-3y-z)+3(y-2z)=-9+3(-4)`} />
             <Equation tex={String.raw`-7z=-21\quad\Longrightarrow\quad z=3`} />
-          </article>
-          <article className="space-y-4">
-            <h3 className="text-foreground text-lg font-semibold">
-              Substitute back and check
-            </h3>
+          </Section>
+          <Section headingAs="h3" title="Substitute back and check">
             <p className="text-muted">
               Substitute into the reduced equation to find{" "}
               {katexify("y", false)}, then use the original first equation to
@@ -260,11 +248,10 @@ export default function LinearEquationsThreeVariablesPage() {
             <Equation
               tex={String.raw`\begin{aligned}1+2+3&=6\\2(1)-2+3&=3\\1+2(2)-3&=2\end{aligned}`}
             />
-          </article>
+          </Section>
         </Section>
 
         <Section
-          className="max-w-full text-base"
           title="Keep the work organized with a matrix"
           id="matrix-heading"
           description={
@@ -274,6 +261,7 @@ export default function LinearEquationsThreeVariablesPage() {
               Include a zero wherever a variable is missing.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation
             tex={String.raw`\left[\begin{array}{ccc|c}1&1&1&6\\2&-1&1&3\\1&2&-1&2\end{array}\right]`}
@@ -296,7 +284,6 @@ export default function LinearEquationsThreeVariablesPage() {
         <LinearSystemLab />
 
         <Section
-          className="max-w-full text-base"
           title="Read the final rows"
           id="reading-solutions-heading"
           description={
@@ -307,6 +294,7 @@ export default function LinearEquationsThreeVariablesPage() {
               variables in terms of it.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation
             tex={String.raw`\begin{cases}x+y+z=6\\2x-y+z=3\\3x+2z=9\end{cases}`}
@@ -330,7 +318,6 @@ export default function LinearEquationsThreeVariablesPage() {
         </Section>
 
         <Section
-          className="max-w-full text-base"
           title="Turn a story into three equations"
           id="modeling-heading"
           description={
@@ -342,6 +329,7 @@ export default function LinearEquationsThreeVariablesPage() {
               {katexify("z", false)} count adult, student, and child tickets.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation
             tex={String.raw`\begin{aligned}x+y+z&=6&&\text{(total tickets)}\\3x+2y+z&=10&&\text{(total cost)}\\-x+y&=1&&\text{(ticket difference)}\end{aligned}`}

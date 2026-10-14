@@ -122,7 +122,7 @@ export default function ElectronConfigurationDemo({
   }
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       <Section title="Pick An Element" id="element-selector-title">
         <p aria-atomic="true" aria-live="polite" className="sr-only">
           {element.name} selected, atomic number {atomicNumber}.

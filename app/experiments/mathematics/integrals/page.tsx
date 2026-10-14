@@ -50,14 +50,10 @@ export default function IntegralsPage() {
   return (
     <div className="pb-24">
       <ExperimentPageHeader>
-        <PageDescription>
-          An integral adds up many small contributions. On a graph, a definite
-          integral is the signed area between the curve and the horizontal axis.
-        </PageDescription>
+        <PageDescription>Explore signed area and accumulation.</PageDescription>
       </ExperimentPageHeader>
       <div className="space-y-20">
         <Section
-          className="text-muted max-w-full text-base"
           title="From rectangles to accumulation"
           description={
             <>
@@ -67,6 +63,7 @@ export default function IntegralsPage() {
               definite integral.
             </>
           }
+          contentClassName="text-muted max-w-3xl space-y-5 text-base"
         >
           <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
             {katexify(
@@ -84,7 +81,6 @@ export default function IntegralsPage() {
         <IntegralsLab />
 
         <Section
-          className="text-muted max-w-full text-base"
           title="A faster exact method"
           description={
             <>
@@ -94,6 +90,7 @@ export default function IntegralsPage() {
               Theorem of Calculus.
             </>
           }
+          contentClassName="text-muted max-w-3xl space-y-5 text-base"
         >
           <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
             {katexify(

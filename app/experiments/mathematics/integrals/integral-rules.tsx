@@ -19,9 +19,14 @@ function MathBlock({ expression }: { expression: string }) {
 
 function Rule({ children, title }: { children: ReactNode; title: string }) {
   return (
-    <li className="border-border space-y-4 border-t pt-6">
-      <h3 className="text-foreground text-lg font-semibold">{title}</h3>
-      {children}
+    <li>
+      <Section
+        headingAs="h3"
+        title={title}
+        contentClassName="max-w-3xl space-y-5"
+      >
+        {children}
+      </Section>
     </li>
   );
 }
@@ -29,7 +34,6 @@ function Rule({ children, title }: { children: ReactNode; title: string }) {
 export default function IntegralRules() {
   return (
     <Section
-      className="text-muted max-w-full text-base"
       title="Where the basic integration rules come from"
       description={
         <>
@@ -40,9 +44,10 @@ export default function IntegralRules() {
           differentiating any constant gives zero.
         </>
       }
+      contentClassName="text-muted space-y-5 text-base"
     >
-      <ol className="space-y-8">
-        <Rule title="1. Constants, multiples, and sums">
+      <ul className="space-y-10">
+        <Rule title="Constants, multiples, and sums">
           <p>
             Differentiation distributes across sums and constant multiples. It
             also turns <InlineMath expression="cx" /> into the constant{" "}
@@ -58,7 +63,7 @@ export default function IntegralRules() {
           </p>
         </Rule>
 
-        <Rule title="2. Powers">
+        <Rule title="Powers">
           <p>
             The derivative power rule lowers an exponent by one. To reverse it,
             raise the exponent first, then divide by the new exponent:
@@ -74,7 +79,7 @@ export default function IntegralRules() {
           </p>
         </Rule>
 
-        <Rule title="3. The reciprocal becomes a logarithm">
+        <Rule title="The reciprocal becomes a logarithm">
           <p>
             The missing power-rule case has its own antiderivative. On either
             side of zero, the derivative of the logarithm of absolute value is
@@ -89,7 +94,7 @@ export default function IntegralRules() {
           </p>
         </Rule>
 
-        <Rule title="4. Exponentials">
+        <Rule title="Exponentials">
           <p>
             The natural exponential differentiates to itself. For any other
             positive base, differentiation introduces a logarithm factor, so
@@ -100,7 +105,7 @@ export default function IntegralRules() {
           />
         </Rule>
 
-        <Rule title="5. Basic trigonometric functions">
+        <Rule title="Basic trigonometric functions">
           <p>
             The familiar derivative identities supply the antiderivatives. In
             particular, differentiating cosine introduces a minus sign, so
@@ -121,7 +126,7 @@ export default function IntegralRules() {
           </p>
         </Rule>
 
-        <Rule title="6. Substitution reverses the chain rule">
+        <Rule title="Substitution reverses the chain rule">
           <p>
             If an inner function appears along with its derivative, treat the
             inner function as a new variable. The chain rule explains why this
@@ -140,7 +145,7 @@ export default function IntegralRules() {
           />
         </Rule>
 
-        <Rule title="7. Integration by parts reverses the product rule">
+        <Rule title="Integration by parts reverses the product rule">
           <p>
             A product is different: differentiating it creates two terms.
             Integrate the product rule and move one term to the other side:
@@ -159,7 +164,7 @@ export default function IntegralRules() {
           />
         </Rule>
 
-        <Rule title="8. Why endpoint subtraction gives a definite integral">
+        <Rule title="Why endpoint subtraction gives a definite integral">
           <p>
             Let <InlineMath expression={String.raw`A(x)=\int_a^x f(t)\,dt`} />{" "}
             be the area accumulated up to <InlineMath expression="x" />. If{" "}
@@ -180,7 +185,7 @@ export default function IntegralRules() {
             expression={String.raw`A(x)=F(x)-F(a)\qquad\Longrightarrow\qquad\int_a^b f(x)\,dx=F(b)-F(a)`}
           />
         </Rule>
-      </ol>
+      </ul>
     </Section>
   );
 }

@@ -25,9 +25,7 @@ export default function HighSchoolSymbolsPage() {
     <div className="min-w-0 pb-24" lang="id">
       <ExperimentPageHeader>
         <PageDescription>
-          Kamus simbol dan notasi matematika serta fisika SMA/MA di Indonesia.
-          Setiap notasi ditampilkan dengan KaTeX, disertai arti dan contoh
-          penggunaannya.
+          Cari simbol matematika dan fisika SMA.
         </PageDescription>
         <p className="text-muted leading-8">
           {entryCount} entri dalam {notationGroups.length} kelompok, mencakup
@@ -49,11 +47,12 @@ export default function HighSchoolSymbolsPage() {
           .
         </p>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section
           title="Cara membaca simbol"
           id="cara-membaca"
           description="Makna simbol bergantung pada konteks, bentuk huruf, dan satuannya. Perhatikan definisi serta syarat pada setiap contoh."
+          contentClassName="max-w-3xl space-y-5"
         >
           <ul className="text-muted max-w-full list-disc space-y-3 pl-5">
             <li>
@@ -97,10 +96,10 @@ export default function HighSchoolSymbolsPage() {
         ))}
 
         <Section
-          className="max-w-full"
           title="Rujukan dan bacaan lanjutan"
           id="rujukan"
           description="Panduan mata pelajaran untuk cakupan belajar, rujukan SI untuk satuan, dan dokumentasi KaTeX untuk penulisan rumus. Pilihan simbol dapat berbeda antar buku."
+          contentClassName="max-w-3xl space-y-5"
         >
           <ul className="space-y-3">
             <li>

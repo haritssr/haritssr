@@ -18,16 +18,14 @@ export default function MatrixBuilderPage() {
     <div className="pb-16">
       <ExperimentPageHeader>
         <PageDescription>
-          Build a matrix from individual entries. Change its size and brackets
-          to see how the same values become different TeX environments.
+          Build a matrix and generate its TeX notation.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section title="Build a matrix" id="matrix-heading">
           <Demo />
         </Section>
         <Section
-          className="max-w-full"
           title="Rows, columns, and delimiters"
           id="matrix-notes-heading"
           description={

@@ -9,9 +9,11 @@ export default function KaTeXBasicDemo() {
   return (
     <div className="min-w-0">
       <ExperimentPageHeader>
-        <PageDescription>Basic example</PageDescription>
+        <PageDescription>
+          Render inline and display math with KaTeX.
+        </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section className="max-w-full min-w-0" title="Render a formula">
           <div className="max-w-full overflow-x-auto py-1">
             {katexify(

@@ -50,13 +50,11 @@ export default function DerivativesPage() {
     <div className="pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          A derivative gives the slope of a curve at one point. It comes from
-          asking what happens to the slope between two points as they meet.
+          Explore tangent lines and the slope of a curve.
         </PageDescription>
       </ExperimentPageHeader>
       <div className="space-y-20">
         <Section
-          className="text-muted max-w-full text-base"
           title="From average change to change right now"
           description={
             <>
@@ -65,6 +63,7 @@ export default function DerivativesPage() {
               limit of those secant slopes is the derivative.
             </>
           }
+          contentClassName="text-muted max-w-3xl space-y-5 text-base"
         >
           <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
             {katexify(
@@ -81,7 +80,6 @@ export default function DerivativesPage() {
         <DerivativesLab />
 
         <Section
-          className="text-muted max-w-full text-base"
           title="Why the square curve has this slope"
           description={
             <>
@@ -89,6 +87,7 @@ export default function DerivativesPage() {
               cancels, letting the gap approach zero is straightforward.
             </>
           }
+          contentClassName="text-muted max-w-3xl space-y-5 text-base"
         >
           <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
             {katexify(

@@ -134,8 +134,7 @@ export default function NumberSystemsPage() {
     <div className="text-foreground pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Learn how number sets fit together, locate values on a number line,
-          and translate between inequalities and interval notation.
+          Explore number sets, intervals, and inequalities.
         </PageDescription>
       </ExperimentPageHeader>
       <div className="space-y-20">
@@ -169,7 +168,7 @@ export default function NumberSystemsPage() {
               </article>
             ))}
           </div>
-          <p className="text-muted max-w-full text-sm leading-7">
+          <p className="text-muted max-w-3xl text-sm leading-7">
             Conventions vary: some books include {katexify("0", false)} in{" "}
             {katexify(String.raw`\mathbb{N}`, false)}. Here we start natural
             numbers at {katexify("1", false)} and use{" "}
@@ -180,7 +179,7 @@ export default function NumberSystemsPage() {
           <Equation
             tex={String.raw`\mathbb{N}\subset\mathbb{W}\subset\mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}`}
           />
-          <p className="text-muted max-w-full text-base leading-8">
+          <p className="text-muted max-w-3xl text-base leading-8">
             The subset symbol {katexify(String.raw`\subset`, false)} means every
             member of the set on the left also belongs to the set on the right.
             Irrational numbers sit outside the rational set but inside the real
@@ -191,7 +190,6 @@ export default function NumberSystemsPage() {
         <NumberSets />
 
         <Section
-          className="max-w-full text-base"
           title="Read the number line"
           id="number-line-heading"
           description={
@@ -202,6 +200,7 @@ export default function NumberSystemsPage() {
               represent equal differences in value.
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <p className="text-muted">
             Fractions and irrational numbers occupy points too:{" "}
@@ -275,7 +274,7 @@ export default function NumberSystemsPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-muted max-w-full text-base leading-8">
+          <p className="text-muted max-w-3xl text-base leading-8">
             Infinity describes an unbounded direction, not a number you can
             include. Always use parentheses at{" "}
             {katexify(String.raw`-\infty`, false)} and{" "}
@@ -287,7 +286,6 @@ export default function NumberSystemsPage() {
         <IntervalLab />
 
         <Section
-          className="max-w-full text-base"
           title="Combine intervals with sets"
           id="combine-intervals-heading"
           description={
@@ -298,6 +296,7 @@ export default function NumberSystemsPage() {
               both. For these overlapping intervals:
             </>
           }
+          contentClassName="max-w-3xl space-y-5"
         >
           <Equation tex={String.raw`A=[-2,1],\qquad B=(0,3)`} />
           <Equation tex={String.raw`A\cup B=[-2,3)`} />
@@ -312,7 +311,6 @@ export default function NumberSystemsPage() {
         </Section>
 
         <Section
-          className="max-w-full text-base"
           title="Beyond the real line"
           id="beyond-real-heading"
           description={

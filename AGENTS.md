@@ -102,7 +102,8 @@ or configuration changes.
   before content; its child components have no vertical margins. Keep headers
   outside content stacks and omit an extra top margin on the first content block.
 - Use `PageDescription` for page introductions (`as="div"` for block content).
-- Experiment section stacks use parent `space-y-16`, including lab/demo sections.
+- Physics and mathematics experiment section stacks use parent `space-y-20`,
+  including lab/demo sections. Other experiment domains use `space-y-16`.
   Omit section top/bottom margins; keep introductions and source links together.
 - Keep independent exercise/rule cards unnumbered in unordered lists. Number
   ordered solution steps and question-navigation controls when needed.

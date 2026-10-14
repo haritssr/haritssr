@@ -18,17 +18,14 @@ export default function PiecewiseFunctionsPage() {
     <div className="pb-16">
       <ExperimentPageHeader>
         <PageDescription>
-          A piecewise function chooses a rule according to its input. Move the
-          slider across each boundary to see the active branch and result while
-          KaTeX displays the complete definition.
+          Explore functions with different rules by interval.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section title="Explore the branches" id="piecewise-heading">
           <Demo />
         </Section>
         <Section
-          className="max-w-full"
           title="Typeset conditions with cases"
           id="piecewise-notes-heading"
           description={

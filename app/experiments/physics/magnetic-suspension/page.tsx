@@ -16,12 +16,10 @@ export default function MagneticSuspensionPage() {
     <div className="pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          A weight hangs near a magnet while a taut string runs down to a base.
-          Explore how magnetic attraction, tension, and gravity can hold it at
-          an angle.
+          Balance magnetism, tension, and gravity.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section
           id="read-the-setup"
           title="Read the setup"

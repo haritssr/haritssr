@@ -84,7 +84,7 @@ export default function UnitsPage() {
         <ExperimentPageHeader>
           <PageDescription>{DESCRIPTION}</PageDescription>
         </ExperimentPageHeader>
-        <div className="space-y-16">
+        <div className="space-y-20">
           <Section title="Base Quantities">
             <UnitsTable caption="The seven SI base units" units={BASE_UNITS} />
           </Section>

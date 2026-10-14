@@ -56,14 +56,13 @@ export default function LimitsPage() {
     <div className="pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          A limit asks where a function is heading as its input gets close to a
-          point. Start by watching nearby values, not by substituting the point.
+          Explore limits, holes, and jumps on a graph.
         </PageDescription>
       </ExperimentPageHeader>
       <div className="space-y-20">
         <Section
-          className="text-muted max-w-full text-base"
           title="What does approaching mean?"
+          contentClassName="text-muted max-w-3xl space-y-5 text-base"
         >
           <p>
             Pick a target on the horizontal axis. Move toward it from the left
@@ -86,7 +85,6 @@ export default function LimitsPage() {
         <LimitsLab />
 
         <Section
-          className="text-muted max-w-full text-base"
           title="Try a limit by hand"
           description={
             <>
@@ -94,6 +92,7 @@ export default function LimitsPage() {
               undefined fraction, but factoring shows what happens nearby.
             </>
           }
+          contentClassName="text-muted max-w-3xl space-y-5 text-base"
         >
           <div className="text-foreground border-border overflow-x-auto rounded-xl border px-5 py-4 text-center">
             {katexify(

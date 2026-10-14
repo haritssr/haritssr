@@ -49,16 +49,13 @@ export default function AtomicOrbitalsPage() {
     <div className="pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Orbitals are wave patterns around a nucleus, not paths traced by tiny
-          planets. Explore how angular nodes divide those patterns into the s,
-          p, d, and f shapes, and how the patterns describe where an electron is
-          likely to be found.
+          Explore orbital shapes and electron probability.
         </PageDescription>
       </ExperimentPageHeader>
 
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-8">
         <Contents items={SECTIONS} />
-        <div className="min-w-0 space-y-16 lg:col-start-1 lg:row-start-1">
+        <div className="min-w-0 space-y-20 lg:col-start-1 lg:row-start-1">
           <Section
             className="scroll-mt-28"
             id="explore"
@@ -73,7 +70,7 @@ export default function AtomicOrbitalsPage() {
             contentClassName="space-y-4 leading-7"
           >
             <OrbitalExplorer />
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               Notice where the pattern has lobes and where it has gaps. The gaps
               are places where the wave is zero; those surfaces help determine
               each orbital&apos;s shape.
@@ -97,7 +94,7 @@ export default function AtomicOrbitalsPage() {
             contentClassName="space-y-4 leading-7"
           >
             <AngularExplorer />
-            <p className="max-w-full">
+            <p className="max-w-3xl">
               The sequence is{" "}
               {katexify(
                 String.raw`s\;(\ell=0),\;p\;(\ell=1),\;d\;(\ell=2)`,
@@ -128,7 +125,7 @@ export default function AtomicOrbitalsPage() {
             contentClassName="space-y-4 leading-7"
           >
             <ProbabilityExplorer />
-            <p className="text-foreground/65 max-w-full text-sm">
+            <p className="text-foreground/65 max-w-3xl text-sm">
               The colored lobes are not solid walls. They summarize where the
               electron is more likely to be found; the color shows the
               wave&apos;s sign, not a different kind of charge.
@@ -158,7 +155,7 @@ export default function AtomicOrbitalsPage() {
                 title="See the radial wave and node rule"
                 value="radial-wave"
               >
-                <p className="max-w-full">
+                <p className="max-w-3xl">
                   For a hydrogen-like orbital, the radial node count is{" "}
                   {katexify("n - \\ell - 1", false)}. These spherical surfaces
                   are separate from the angular nodes that shape the lobes.
@@ -185,7 +182,7 @@ export default function AtomicOrbitalsPage() {
                 title="Where do all four families appear in an atom?"
                 value="orbital-families"
               >
-                <p className="max-w-full">
+                <p className="max-w-3xl">
                   Cerium (Ce, atomic number 58) is the first neutral
                   ground-state atom with occupied s, p, d, and f subshells. Its
                   configuration is{" "}
@@ -194,12 +191,12 @@ export default function AtomicOrbitalsPage() {
                   subshells. Lanthanum (57) has no occupied f subshell in its
                   ground state.
                 </p>
-                <p className="max-w-full">
+                <p className="max-w-3xl">
                   The interactive shapes above are hydrogen-like models. They
                   isolate the shape families; they are not exact solutions for
                   the many-electron cerium atom.
                 </p>
-                <p className="max-w-full">
+                <p className="max-w-3xl">
                   To see how electrons fill these subshells, continue to the{" "}
                   <Link
                     className="text-action hover:text-action-hover underline"
@@ -216,9 +213,10 @@ export default function AtomicOrbitalsPage() {
           <OrbitalSymbolGuide />
 
           <Section
-            className="max-w-full scroll-mt-28"
+            className="scroll-mt-28"
             id="references"
             title="Sources and next steps"
+            contentClassName="max-w-3xl space-y-5"
           >
             <ul className="text-foreground/70 list-disc space-y-2 pl-5 text-sm leading-6">
               <li>

@@ -8,7 +8,6 @@ import ExternalLink from "@/components/ExternalLink";
 import "katex/dist/katex.min.css";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import SectionHeading from "@/components/SectionHeading";
 import Table from "@/components/Table";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
@@ -30,24 +29,21 @@ export default function PhysicsEquationsPage() {
         <PageDescription>{DESCRIPTION}</PageDescription>
       </ExperimentPageHeader>
 
-      <article className={`${styles.equations} space-y-16 pb-24`}>
+      <article className={`${styles.equations} space-y-20 pb-24`}>
         {PHYSICS_DOMAINS.map((domain) => (
-          <div className="min-w-0 scroll-mt-24" id={domain.id} key={domain.id}>
-            <SectionHeading
-              className="text-foreground mb-4 text-3xl font-bold"
-              id={`${domain.id}-title`}
-            >
-              {domain.title}
-            </SectionHeading>
-            <p className="text-foreground/65 mb-10 max-w-full text-base leading-7">
-              {domain.description}
-            </p>
+          <Section
+            className="min-w-0 scroll-mt-24"
+            id={domain.id}
+            key={domain.id}
+            title={<span id={`${domain.id}-title`}>{domain.title}</span>}
+            description={domain.description}
+          >
             <div className="space-y-10">
               {domain.equations.map((equation) => (
                 <EquationSection equation={equation} key={equation.id} />
               ))}
             </div>
-          </div>
+          </Section>
         ))}
       </article>
     </>

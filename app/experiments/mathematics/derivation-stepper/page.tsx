@@ -5,7 +5,6 @@ import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
-import katexify from "@/utils/katexify";
 
 import Demo from "./demo";
 
@@ -19,17 +18,14 @@ export default function DerivationStepperPage() {
     <div className="pb-16">
       <ExperimentPageHeader>
         <PageDescription>
-          Follow a solution of {katexify("x^2+6x+5=0", false)} by completing the
-          square. Reveal each transformation and see how KaTeX keeps the
-          equations aligned as the derivation grows.
+          Complete the square, one step at a time.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section title="Reveal the reasoning" id="derivation-heading">
           <Demo />
         </Section>
         <Section
-          className="max-w-full"
           title="Align a chain of equations"
           id="derivation-notes-heading"
           description={

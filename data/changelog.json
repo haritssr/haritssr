@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "a7fadadf6dea769cf2ba66c2b4baf07981af73e6",
+      "date": "2026-10-13T23:20:51+07:00",
+      "subject": "style(PhysicsEquations): use consistent spacing of ten"
+    },
+    {
       "hash": "90255384d0d2d4c5fc68f12eabec7a74cd458acc",
       "date": "2026-10-13T23:20:24+07:00",
       "subject": "refactor(WritingTable): use one tabular ISO date column"

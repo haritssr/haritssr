@@ -774,8 +774,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "physical-quantities-and-units",
         title: "Physical Quantities and Units",
-        description:
-          "Explore SI units, physical quantities, and the formulas that connect them.",
+        description: "Explore physical quantities and SI units.",
         tags: ["mathematics", "graphs"],
         createdAt: "2026-09-20",
         updatedAt: [
@@ -791,8 +790,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "electron-configuration",
         title: "Electron Configuration",
-        description:
-          "Build electron configurations by filling atomic orbitals.",
+        description: "See how electrons fill atomic orbitals.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-23",
         updatedAt: [
@@ -807,8 +805,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "motion-diagrams",
         title: "Motion Diagrams",
-        description:
-          "Explore velocity-time graphs for linear and circular motion.",
+        description: "Explore graphs of linear and circular motion.",
         tags: ["mechanics", "visualization"],
         createdAt: "2026-09-25",
         updatedAt: [
@@ -823,8 +820,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "atomic-orbitals",
         title: "Atomic Orbitals",
-        description:
-          "Explore orbital shapes, electron probability, and the nodes between them.",
+        description: "Explore orbital shapes and electron probability.",
         tags: ["atomic-physics", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [
@@ -838,8 +834,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "magnetic-suspension",
         title: "Magnetic Suspension",
-        description:
-          "Balance magnetic attraction, string tension, and gravity.",
+        description: "Balance magnetism, tension, and gravity.",
         tags: ["magnetism", "mechanics", "visualization"],
         createdAt: "2026-10-11",
         updatedAt: ["2026-10-11", "2026-10-13"],
@@ -847,8 +842,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "projectile-motion",
         title: "Projectile Motion",
-        description:
-          "Explore launch angles, parabolic paths, flight time, and range.",
+        description: "Explore launch angles, flight paths, and range.",
         tags: ["mechanics", "kinematics", "visualization", "learning"],
         createdAt: "2026-10-12",
         updatedAt: ["2026-10-12", "2026-10-13"],
@@ -856,8 +850,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       {
         slug: "double-slit-interference",
         title: "Double-Slit Interference",
-        description:
-          "See how light and slit spacing shape an interference pattern.",
+        description: "Explore bright and dark interference fringes.",
         tags: ["waves", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [
@@ -873,8 +866,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "essential-physics-equations",
         hideTitle: true,
         title: "Essential Physics Equations",
-        description:
-          "Find key physics equations with variable meanings and SI units.",
+        description: "Find physics equations, symbols, and SI units.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-09-30",
         updatedAt: [
@@ -933,7 +925,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "matrix-builder",
         group: "tools",
         title: "Matrix Builder",
-        description: "Edit a matrix and generate its TeX notation.",
+        description: "Build a matrix and generate its TeX notation.",
         tags: ["mathematics", "forms"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
@@ -942,8 +934,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "derivation-stepper",
         group: "tools",
         title: "Derivation Stepper",
-        description:
-          "Solve a quadratic equation by completing the square, one step at a time.",
+        description: "Complete the square, one step at a time.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
         updatedAt: [
@@ -958,8 +949,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "piecewise-functions",
         group: "chapters",
         title: "Piecewise Functions",
-        description:
-          "Explore 13 piecewise functions with interactive graphs and values.",
+        description: "Explore functions with different rules by interval.",
         tags: ["mathematics", "visualization"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
@@ -968,8 +958,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "equation-annotations",
         group: "tools",
         title: "Equation Annotations",
-        description:
-          "Explain equation terms with color, boxes, and labels in KaTeX.",
+        description: "Explain equation terms with colors and labels.",
         tags: ["mathematics", "learning"],
         createdAt: "2026-10-02",
         updatedAt: ["2026-10-02", "2026-10-03", "2026-10-11", "2026-10-13"],
@@ -978,8 +967,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "math-notation",
         group: "tools",
         title: "Math Notation",
-        description:
-          "Learn what KaTeX can render and when math needs other tools.",
+        description: "Explore math notation and what KaTeX can render.",
         tags: ["notation", "katex", "learning"],
         createdAt: "2026-10-10",
         updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
@@ -988,8 +976,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "high-school-symbols",
         group: "tools",
         title: "High School Symbols",
-        description:
-          "Cari simbol matematika dan fisika SMA, beserta arti dan contohnya.",
+        description: "Cari simbol matematika dan fisika SMA.",
         tags: ["notation", "katex", "physics", "learning", "indonesia"],
         createdAt: "2026-10-10",
         updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
@@ -998,8 +985,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "circle",
         group: "chapters",
         title: "Circle",
-        description:
-          "Explore circle measurements with an interactive diagram and worked examples.",
+        description: "Explore radius, circumference, area, and angles.",
         tags: ["geometry", "circles", "learning", "visualization"],
         createdAt: "2026-10-10",
         updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
@@ -1008,8 +994,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "polinomial",
         group: "chapters",
         title: "Polinomial",
-        description:
-          "Latihan 27 soal polinomial dengan petunjuk dan pembahasan bertahap.",
+        description: "Latihan soal polinomial dengan pembahasan.",
         tags: ["algebra", "polynomials", "equations", "learning"],
         createdAt: "2026-10-08",
         updatedAt: ["2026-10-08", "2026-10-11", "2026-10-13"],
@@ -1018,8 +1003,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "euler",
         group: "chapters",
         title: "Euler",
-        description:
-          "Explore Euler’s identity through a rotating unit circle and a guided derivation.",
+        description: "Explore Euler’s identity on the unit circle.",
         tags: ["complex-numbers", "trigonometry", "exponents", "visualization"],
         createdAt: "2026-10-07",
         updatedAt: ["2026-10-07", "2026-10-11", "2026-10-12", "2026-10-13"],
@@ -1028,8 +1012,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "logarithms",
         group: "chapters",
         title: "Logarithms",
-        description:
-          "Explore logarithm rules, graphs, and their connection to exponents.",
+        description: "Explore logarithm rules, graphs, and exponents.",
         tags: ["algebra", "logarithms", "exponents", "visualization"],
         createdAt: "2026-10-06",
         updatedAt: [
@@ -1044,8 +1027,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "spltv",
         group: "chapters",
         title: "SPLTV",
-        description:
-          "Solve three-variable linear systems and compare their possible solutions.",
+        description: "Solve linear systems with three variables.",
         tags: ["algebra", "equations", "linear-algebra"],
         createdAt: "2026-10-06",
         updatedAt: [
@@ -1061,8 +1043,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "number-systems",
         group: "chapters",
         title: "Number Systems",
-        description:
-          "Explore number sets, intervals, and inequalities on an interactive number line.",
+        description: "Explore number sets, intervals, and inequalities.",
         tags: ["foundations", "sets", "visualization"],
         createdAt: "2026-10-06",
         updatedAt: [
@@ -1077,8 +1058,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "quadratic-equations",
         group: "chapters",
         title: "Quadratic Equations",
-        description:
-          "Solve quadratic equations and see how their roots shape a parabola.",
+        description: "Solve quadratics and explore their roots.",
         tags: ["algebra", "equations", "visualization"],
         createdAt: "2026-10-06",
         updatedAt: [
@@ -1093,8 +1073,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "limits",
         group: "chapters",
         title: "Limits",
-        description:
-          "Explore one-sided limits, holes, and jumps with an interactive graph.",
+        description: "Explore limits, holes, and jumps on a graph.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [
@@ -1111,8 +1090,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "derivatives",
         group: "chapters",
         title: "Derivatives",
-        description:
-          "See how secant lines become tangents and explore the slope of a curve.",
+        description: "Explore tangent lines and the slope of a curve.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [
@@ -1129,8 +1107,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         slug: "integrals",
         group: "chapters",
         title: "Integrals",
-        description:
-          "Explore definite integrals through rectangles, signed area, and antiderivatives.",
+        description: "Explore signed area and accumulation.",
         tags: ["calculus", "visualization"],
         createdAt: "2026-09-29",
         updatedAt: [

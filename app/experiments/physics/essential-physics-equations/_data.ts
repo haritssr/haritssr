@@ -87,8 +87,7 @@ const PHYSICAL_CONSTANTS = {
   },
 } as const;
 
-export const DESCRIPTION =
-  "Explore foundational physics equations, grouped by domain, with explanations, symbol definitions, SI units, constant values, and the conditions in which they apply.";
+export const DESCRIPTION = "Find physics equations, symbols, and SI units.";
 
 export const PHYSICS_DOMAINS: readonly PhysicsDomain[] = [
   {

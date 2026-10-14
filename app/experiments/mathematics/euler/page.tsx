@@ -23,13 +23,15 @@ export default function EulerPage() {
     <div className="text-foreground w-full max-w-full min-w-0 pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Growth, circles, and imaginary numbers meet in one equation.
-          Understand what each constant means, explore complex exponentials as
-          rotation, and see why Euler’s identity follows from a half-turn.
+          Explore Euler’s identity on the unit circle.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
-        <div className="max-w-3xl space-y-5">
+      <div className="space-y-20">
+        <Section
+          id="identity-heading"
+          title="Five constants, one identity"
+          contentClassName="max-w-3xl space-y-5"
+        >
           <div className="border-action/30 w-full max-w-full min-w-0 overflow-x-auto rounded-2xl border px-5 py-6 text-xl sm:text-2xl">
             {katexify(String.raw`e^{i\pi}+1=0`, true)}
           </div>
@@ -39,7 +41,7 @@ export default function EulerPage() {
             circle. At an angle of {katexify(String.raw`\pi`, false)} radians,
             that point reaches {katexify("-1", false)}.
           </p>
-        </div>
+        </Section>
         <Section
           title="Meet the three constants"
           id="constants-heading"

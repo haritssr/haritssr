@@ -5,7 +5,6 @@ import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
-import katexify from "@/utils/katexify";
 
 import Demo from "./demo";
 
@@ -19,17 +18,14 @@ export default function EquationAnnotationsPage() {
     <div className="pb-16">
       <ExperimentPageHeader>
         <PageDescription>
-          Use annotations to explain the pieces of an equation. Explore{" "}
-          {katexify("F=ma", false)}, Newton’s second law for constant mass, with
-          three ways to draw attention to a selected term.
+          Explain equation terms with colors and labels.
         </PageDescription>
       </ExperimentPageHeader>
-      <div className="space-y-16">
+      <div className="space-y-20">
         <Section title="Explain a term" id="annotations-heading">
           <Demo />
         </Section>
         <Section
-          className="max-w-full"
           title="Make the meaning visible"
           id="annotations-notes-heading"
           description={

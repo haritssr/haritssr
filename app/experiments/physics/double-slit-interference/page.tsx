@@ -18,8 +18,7 @@ export default function DoubleSlitPage() {
     <div className="pb-24">
       <ExperimentPageHeader>
         <PageDescription>
-          Send one color of light through two narrow openings. Change the setup,
-          then measure how the bright and dark fringes move across the screen.
+          Explore bright and dark interference fringes.
         </PageDescription>
       </ExperimentPageHeader>
 

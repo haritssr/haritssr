@@ -6,8 +6,7 @@ export interface UnitDefinition {
   unitSymbol: string;
 }
 
-export const DESCRIPTION =
-  "Base and derived physical quantities in the International System of Units (SI).";
+export const DESCRIPTION = "Explore physical quantities and SI units.";
 
 export const BASE_UNITS = [
   {
