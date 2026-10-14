@@ -6,9 +6,10 @@ const monochromeIcons = new Set([
   "/icons/radixui.svg",
   "/icons/user-interface.svg",
 ]);
-const scienceIconColors = new Map([
+const domainIconColors = new Map([
   ["/icons/physics.svg", "text-green-600"],
   ["/icons/math.svg", "text-violet-500"],
+  ["/icons/browser.svg", "text-amber-500"],
 ]);
 
 export default function ExperimentDomainIcon({
@@ -20,12 +21,12 @@ export default function ExperimentDomainIcon({
   size?: 18 | 36;
   variant?: "default" | "muted";
 }) {
-  const scienceIconColor = scienceIconColors.get(src);
+  const domainIconColor = domainIconColors.get(src);
 
   if (
     variant === "muted" ||
     monochromeIcons.has(src) ||
-    scienceIconColor !== undefined
+    domainIconColor !== undefined
   ) {
     const maskStyle: CSSProperties & { "--icon-mask": string } = {
       "--icon-mask": `url("${src}")`,
@@ -34,7 +35,7 @@ export default function ExperimentDomainIcon({
     return (
       <span
         aria-hidden="true"
-        className={`inline-block shrink-0 bg-current mask-(--icon-mask) mask-contain mask-center mask-no-repeat ${size === 36 ? "size-9" : "size-4.5"} ${variant === "muted" ? "text-muted" : (scienceIconColor ?? "text-foreground")}`}
+        className={`inline-block shrink-0 bg-current mask-(--icon-mask) mask-contain mask-center mask-no-repeat ${size === 36 ? "size-9" : "size-4.5"} ${variant === "muted" ? "text-muted" : (domainIconColor ?? "text-foreground")}`}
         style={maskStyle}
       />
     );

@@ -628,7 +628,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
       },
     ],
     id: 4,
-    logoSrc: "/icons/chrome.svg",
+    logoSrc: "/icons/browser.svg",
     slug: "browser",
     title: "Browser",
   },
