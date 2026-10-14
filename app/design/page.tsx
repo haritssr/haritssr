@@ -6,8 +6,8 @@ import Box from "@/components/Box";
 import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
-import InternalLinkCardNumber from "@/components/InternalLinkCardNumber";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
@@ -174,8 +174,8 @@ export default function DesignSystem() {
             "grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5"
           }
         >
-          <Box name="InternalLinkCardNumber" title="Navigation card with count">
-            <InternalLinkCardNumber
+          <Box name="IndexCard" title="Index Card">
+            <IndexCard
               title="Writing"
               description="Notes and ideas I want to share."
               href="/writing"
@@ -251,26 +251,26 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="InternalLink" title="Internal Link">
-            <InternalLink href="/">Internal Link</InternalLink>
-            <InternalLink href="/" variant="database">
-              Database link example
-            </InternalLink>
-            <p className="text-muted text-sm leading-7">
-              Use <code>variant=&quot;inline&quot;</code> for links within
-              sentences, descriptions, and explanatory list items. For example,
-              visit the{" "}
-              <InternalLink href="/" variant="inline">
-                home page
-              </InternalLink>
-              . The default variant is for standalone navigation.
-            </p>
-            <p className="text-muted text-sm">
-              <InternalLink href="/api" variant="footer">
-                API
-              </InternalLink>
-              {" — "}Use the footer variant to inherit the surrounding text size
-              and match the footer actions.
-            </p>
+            <div className="space-y-2">
+              <div>
+                <InternalLink href="/">Internal Link</InternalLink>
+              </div>
+              <div>
+                <InternalLink href="/" variant="database">
+                  Database link example
+                </InternalLink>
+              </div>
+              <div>
+                <InternalLink href="/" variant="inline">
+                  Inline Link
+                </InternalLink>
+              </div>
+              <div className="text-sm">
+                <InternalLink href="/api" variant="footer">
+                  API
+                </InternalLink>
+              </div>
+            </div>
           </Box>
 
           <Box name="ExternalLink" title="External Link">
@@ -372,7 +372,7 @@ export default function DesignSystem() {
             <SelectDemo />
           </Box>
 
-          <Box name="BottomBar" title="Bottom Navigation Mobile">
+          <Box name="BottomBar" title="Bottom Bar">
             <BottomBar preview />
           </Box>
 

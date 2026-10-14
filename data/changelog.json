@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "541425a9146f714d24ee6713fd4bafac3f7282f6",
+      "date": "2026-10-15T01:33:55+07:00",
+      "subject": "fix(LogoDemo): show Harimaki and remove Haris Studio"
+    },
+    {
       "hash": "9c09f34df1a9656ee8150e8e33f70474253ea288",
       "date": "2026-10-15T01:33:55+07:00",
       "subject": "style(Badges): use semantic fills and status dots"

@@ -1,5 +1,5 @@
 import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
-import InternalLinkCardNumber from "@/components/InternalLinkCardNumber";
+import IndexCard from "@/components/IndexCard";
 import type { DiscontinuedExperiment } from "@/data/DiscontinuedExperimentsData";
 import type { ExperimentDomainData } from "@/data/ExperimentsData";
 
@@ -15,7 +15,7 @@ export default function ExperimentCard({
   headingLevel?: HeadingLevel;
 }) {
   return (
-    <InternalLinkCardNumber
+    <IndexCard
       className={className}
       href={`/experiments/${experiment.slug}`}
       title={experiment.title}
@@ -36,7 +36,7 @@ export function ArchivedExperimentCard({
   headingLevel?: HeadingLevel;
 }) {
   return (
-    <InternalLinkCardNumber
+    <IndexCard
       title={experiment.title}
       description={experiment.description}
       icon={<ExperimentDomainIcon src={experiment.logoSrc} variant="muted" />}

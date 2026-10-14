@@ -8,8 +8,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import ExternalLink from "@/components/ExternalLink";
+import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
-import InternalLinkCardNumber from "@/components/InternalLinkCardNumber";
 import { PageStructuredData } from "@/components/StructuredData";
 import { ProjectsData } from "@/data/ProjectsData";
 import { getAvailableExperimentCount } from "@/utils/experimentCatalog";
@@ -106,7 +106,7 @@ function HomeNavigation() {
     >
       {homeNavigation.map(
         ({ href, title, description, icon: Icon, count, countLabel }) => (
-          <InternalLinkCardNumber
+          <IndexCard
             href={href}
             key={href}
             title={title}

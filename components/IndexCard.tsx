@@ -2,7 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-interface InternalLinkCardNumberProps {
+interface IndexCardProps {
   title: string;
   description: string;
   count: number;
@@ -13,7 +13,7 @@ interface InternalLinkCardNumberProps {
   className?: string;
 }
 
-export default function InternalLinkCardNumber({
+export default function IndexCard({
   title,
   description,
   count,
@@ -22,7 +22,7 @@ export default function InternalLinkCardNumber({
   href,
   headingLevel = 2,
   className,
-}: InternalLinkCardNumberProps) {
+}: IndexCardProps) {
   const Heading = `h${headingLevel}` as const;
   const content = (
     <>
