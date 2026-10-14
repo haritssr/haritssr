@@ -1,6 +1,11 @@
 import type { MetadataRoute } from "next";
 
-import { apiRoute, commitsRoute } from "@/data/routes";
+import {
+  apiRoute,
+  commitAnalysisRoute,
+  commitsRoute,
+  modelSuitabilityRoute,
+} from "@/data/routes";
 import { getAvailableExperimentSummaries } from "@/utils/experimentCatalog";
 import { getExperimentRoutes } from "@/utils/experimentRoutes";
 import { getProjectSlug } from "@/utils/projectSlug";
@@ -17,6 +22,8 @@ const staticRoutes = [
   "/design",
   "/more",
   commitsRoute.route,
+  modelSuitabilityRoute.route,
+  commitAnalysisRoute.route,
   apiRoute.route,
 ];
 

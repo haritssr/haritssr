@@ -11,6 +11,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { ExperimentsData } from "@/data/ExperimentsData";
+import { commitAnalysisRoute, modelSuitabilityRoute } from "@/data/routes";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { SITE_THEME_COLOR, SITE_URL } from "@/utils/site";
 
@@ -22,6 +23,8 @@ const inter = localFont({
 
 const breadcrumbLabels = Object.fromEntries<string>([
   ["/experiments", "Experiments"],
+  [modelSuitabilityRoute.route, modelSuitabilityRoute.title],
+  [commitAnalysisRoute.route, commitAnalysisRoute.title],
   ...ExperimentsData.flatMap<[string, string]>((domain) => [
     [`/experiments/${domain.slug}`, domain.title],
     ...(domain.slug === "mathematics" || domain.slug === "physics"

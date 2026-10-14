@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-14",
+  "reviewedThrough": "5d249c1533728178c9f5190d673a0f2dd7faa669",
+  "groups": [
+    {
+      "id": "shared-structure",
+      "title": "A shared structure for experiments",
+      "analysis": "The largest structural change replaces repeated heading and spacing markup across mathematics and physics with shared Sections. Catalog descriptions are shortened and reused in page metadata. Experiment lists lose their grouping and update badges, while home and experiment cards share one counted navigation component. These changes make future layout updates easier to apply consistently.",
+      "hashes": [
+        "9195a34946edbf8e1cf0a305b9caaeef6aaeec64",
+        "4b56176ffd769ac206feb1afd32f192f0c150c5c",
+        "80e074b1031dba252a5b66eade52aa1769dc60c5"
+      ]
+    },
+    {
+      "id": "new-experiments",
+      "title": "Two new learning tools",
+      "analysis": "Plane Geometry adds a reference table for shape areas and perimeters. Analog Clock adds a live local-time dial, date and timezone display, and fullscreen controls. These are the clearest additions to what visitors can use; the other commits mainly change the presentation and organization of existing content.",
+      "hashes": [
+        "15e0f1d871ec9d79846fdfb6ee981b49e4efd810",
+        "ebd0af41c99fdeb3a963ca6785957843ba4ab98f"
+      ]
+    },
+    {
+      "id": "home-navigation",
+      "title": "A simpler home and clearer navigation",
+      "analysis": "The home page focuses on identity, work, location, contact links, and four destination cards. Personal notes move to a new More page, and the CV download is removed. Projects, Experiments, Writing, and Design gain breadcrumbs and back links. Home menus are hidden, floating navigation shadows appear after scrolling, and the discontinued experiments accordion aligns with a grid column.",
+      "hashes": [
+        "22834342f87c860bf244b581c4fb6a1c635c1dda",
+        "4b2885edd39974ecef2e0befbea8c1b2664cbbde",
+        "a0ee7aba9eed3bc84b6b93799daf674c3920f696",
+        "dc054924ce27d806e386c949a649e716b8ba6b95",
+        "c07fe601336f55489b930e175c528a7fa4fbf279",
+        "25fcb567f768c22a7145b5a111970c49922e8fe7"
+      ]
+    },
+    {
+      "id": "presentation",
+      "title": "More direct control over presentation",
+      "analysis": "The writing list becomes a local table with simpler borders, making its layout easier to edit independently. Project detail values gain breathing room and the back label becomes Projects. Design examples are simplified, User Interface gets its new category name and icon, and Task loses a redundant badge. The User Interface commit changes the category label; its route migration is outside this review.",
+      "hashes": [
+        "5d249c1533728178c9f5190d673a0f2dd7faa669",
+        "92e717720bc2b229a962a637d72c2180ca41d51e",
+        "69d9c49f07b6200398d36b1fee4cc9d7152a3faa",
+        "52dc5421e2260739e66f5f1d14927e9861b73ff9",
+        "765bb8ea2635ed802f6311820856deb4519aa581"
+      ]
+    }
+  ]
+}

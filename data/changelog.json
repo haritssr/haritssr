@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "d2855cc7f827eb4ea6aea261c1f0fde1a9bfb174",
+      "date": "2026-10-14T20:11:30+07:00",
+      "subject": "fix(AtomicOrbitals): stabilize SVG hydration and simplify reading layout"
+    },
+    {
       "hash": "f0cd2fceb30aac530f087f4a0f94a025adb9d933",
       "date": "2026-10-14T20:10:50+07:00",
       "subject": "feat(Navigation): share scrolling headers and move contents into top bar"
