@@ -982,6 +982,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
       },
       {
+        slug: "plane-geometry",
+        group: "chapters",
+        title: "Plane Geometry",
+        description: "Find area and perimeter formulas for plane shapes.",
+        tags: ["geometry", "shapes", "area", "perimeter", "reference"],
+        createdAt: "2026-10-14",
+        updatedAt: ["2026-10-14"],
+      },
+      {
         slug: "circle",
         group: "chapters",
         title: "Circle",
