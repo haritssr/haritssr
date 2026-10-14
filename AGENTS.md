@@ -154,9 +154,11 @@ Apply these defaults to new or refactored experiments in every domain:
   The title replaces center navigation and the back button replaces the site
   name once the title scrolls behind the top bar. Headers without either stay
   in the normal navigation mode.
-- Pages with visible `SectionHeading` components show `TopBarContents` in its
+- Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
+  shared `SectionHeading` components) show `TopBarContents` in its
   own pill to the right of the top bar actions. Contents use rendered heading anchors,
-  a desktop popover below the trigger, and a mobile sheet. Individual writing
+  a desktop popover below the trigger, and a mobile sheet. Hide it on Home and
+  all first-level routes. Individual writing
   and experiment pages keep the floating `ArticleBackToTop` control, including
   articles without section headings. Show it only when scrolling upward away
   from the page top. Preserve their `data-article-*` title metadata.

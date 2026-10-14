@@ -65,13 +65,13 @@ function ContentsList({
 
   return (
     <ul
-      className={`marker:text-foreground/70 space-y-3 pl-5 [&_li]:space-y-3 ${markerStyle}`}
+      className={`marker:text-foreground/70 space-y-2 pl-4 [&_li]:space-y-2 ${markerStyle}`}
     >
       {entries.map((entry) => (
         <li key={entry.id}>
           <InternalLink
             aria-current={activeId === entry.id ? "location" : undefined}
-            className={`focus-visible:outline-action block! w-full! rounded-xl text-base! leading-6! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
+            className={`focus-visible:outline-action block! w-full! rounded-lg text-sm! leading-5! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
             href={`#${encodeURIComponent(entry.id)}`}
             onClick={(event) => {
               select(event, entry);
@@ -103,31 +103,29 @@ export default function ArticleContentsPanel({
   finalFocus,
   onSelect,
   sheetRef,
-  title,
 }: ContentsListProps & {
   desktop: boolean;
   finalFocus: () => false | HTMLElement | null;
   sheetRef: Ref<HTMLDivElement>;
-  title: string;
 }) {
   const closeIcon = (
     <XMarkIcon aria-hidden="true" className="pointer-events-none size-5" />
   );
-  const closeClassName = "size-10 rounded-full! p-0! [corner-shape:round]!";
+  const closeClassName = `${desktop ? "size-8" : "size-10"} rounded-full! p-0! [corner-shape:round]!`;
   const content = (
     <>
-      <div className="border-middle-hover flex shrink-0 items-center justify-between gap-3 border-b py-1 pr-2 pl-4">
+      <div className="border-middle-hover flex shrink-0 items-center justify-between gap-2 border-b py-1 pr-2 pl-3">
         {desktop ? (
-          <Popover.Title className="text-foreground text-lg font-medium">
-            {title}
+          <Popover.Title className="text-foreground text-base font-medium">
+            Table of Contents
           </Popover.Title>
         ) : (
           <Heading
-            className="text-foreground text-lg font-medium"
+            className="text-foreground text-base font-medium"
             level={2}
             slot="title"
           >
-            {title}
+            Table of Contents
           </Heading>
         )}
         {desktop ? (
@@ -152,7 +150,7 @@ export default function ArticleContentsPanel({
       </div>
       <nav
         aria-label="Table of contents"
-        className={`min-h-0 overflow-x-hidden overflow-y-auto overscroll-contain p-4 ${desktop ? "" : `scrollbar-subtle ${styles.mobileScroll}`}`}
+        className={`min-h-0 overflow-x-hidden overflow-y-auto overscroll-contain p-3 ${desktop ? "" : `scrollbar-subtle ${styles.mobileScroll}`}`}
       >
         <ContentsList
           activeId={activeId}
@@ -177,7 +175,7 @@ export default function ArticleContentsPanel({
           sideOffset={12}
         >
           <Popover.Popup
-            className={`${styles.popover} ${appearance} rounded-2xl`}
+            className={`${styles.popover} ${appearance} rounded-xl`}
             finalFocus={finalFocus}
           >
             {content}

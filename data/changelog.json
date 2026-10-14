@@ -6,6 +6,11 @@
       "subject": "refactor(Commits): name suitability review by its date"
     },
     {
+      "hash": "8e2c4c5f4c8990ff70c88a831a9c3bda76a7624e",
+      "date": "2026-10-14T21:37:16+07:00",
+      "subject": "fix(Navigation): enable API and Commits headers and mobile breadcrumbs"
+    },
+    {
       "hash": "6c5e3dae8a781910e1ee7b69f6f6c6b9d45260b4",
       "date": "2026-10-14T20:11:51+07:00",
       "subject": "feat(Commits): add dedicated model suitability and dated analysis pages"

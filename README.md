@@ -18,8 +18,10 @@ Pages with a title and back button inside `PageHeader` show that back button
 and title in the top bar once the title scrolls behind it. Set the header's
 `path` to the exact route; `PageTitle` and `BackButton` provide the discovery
 markers used by `useScrolledPageHeader`. Returning to the title restores the
-normal navigation. Pages with a visible `SectionHeading` show an icon-only
+normal navigation. Nested pages with visible content headings (`h2`–`h6`, including
+MDX headings and shared `SectionHeading` components) show an icon-only
 Contents button in its own pill to the right of the top bar actions. Contents opens
-below the trigger on desktop and in a sheet on mobile. Writing and experiment
+below the trigger on desktop and in a sheet on mobile. Home and first-level
+routes omit the Contents button. Writing and experiment
 articles show their floating back-to-top control when scrolling upward. It
 hides while scrolling downward and at the top of the page.

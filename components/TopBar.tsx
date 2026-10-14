@@ -77,6 +77,8 @@ export default function TopBar() {
 }
 
 function HeaderActions({ pathname }: { pathname: string }) {
+  const isNestedRoute = pathname.split("/").filter(Boolean).length > 1;
+
   return (
     <div className="flex shrink-0 items-center gap-2">
       <div className="floating-surface hover:bg-surface/95 flex items-center space-x-1 rounded-full border saturate-150 backdrop-blur-lg">
@@ -84,7 +86,7 @@ function HeaderActions({ pathname }: { pathname: string }) {
         <ThemeSwitcher />
         <GitHubLink pathname={pathname} />
       </div>
-      <TopBarContents key={pathname} />
+      {isNestedRoute ? <TopBarContents key={pathname} /> : null}
     </div>
   );
 }

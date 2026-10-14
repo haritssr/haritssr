@@ -35,13 +35,7 @@ export default function TopBarContents() {
     onOutlineChange,
   } = useArticleContentsNavigation(1);
   const outline = useArticleOutline(mainRef, "Contents", onOutlineChange);
-  const visible =
-    outline !== null &&
-    outline.sections.some(
-      (entry) =>
-        entry.target.matches("[data-section-heading]") ||
-        entry.target.querySelector("[data-section-heading]") !== null
-    );
+  const visible = outline !== null && outline.sections.length > 0;
   const activeId = useActiveArticleSection(outline, visible);
 
   if (!visible || outline === null) {
@@ -61,7 +55,6 @@ export default function TopBarContents() {
       finalFocus={finalFocus}
       sheetRef={sheetRef}
       onSelect={selectEntry}
-      title={outline.entries[0].label.map((part) => part.value).join("")}
     />
   ) : null;
 
@@ -78,8 +71,8 @@ export default function TopBarContents() {
             render={
               <button
                 type="button"
-                aria-label="Contents"
-                title="Contents"
+                aria-label="Table of Contents"
+                title="Table of Contents"
                 className={triggerClassName}
                 data-article-toc-trigger=""
                 ref={triggerRef}
@@ -93,12 +86,12 @@ export default function TopBarContents() {
       ) : (
         <SheetTrigger isOpen={visible && open} onOpenChange={changeOpen}>
           <AriaButton
-            aria-label="Contents"
+            aria-label="Table of Contents"
             className={triggerClassName}
             data-article-toc-trigger=""
             ref={triggerRef}
             render={(props) => (
-              <button {...props} title="Contents" type="button" />
+              <button {...props} title="Table of Contents" type="button" />
             )}
           >
             {triggerContent}
