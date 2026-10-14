@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "51e2d414f3eeaf9423b4fed513c3ea96d9283296",
+      "date": "2026-10-15T01:33:58+07:00",
+      "subject": "style(Search): clarify result title and description hierarchy"
+    },
+    {
       "hash": "70bafc357f02f60d92afb24ec001c889a1c0ea5c",
       "date": "2026-10-15T01:33:58+07:00",
       "subject": "feat(Physics): color equation variables consistently across sections"
