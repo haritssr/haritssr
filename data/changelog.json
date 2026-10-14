@@ -6,6 +6,11 @@
       "subject": "fix(BottomBar): show navigation through second-level routes"
     },
     {
+      "hash": "b4306bab17c4655fa17d17d056f7d553020ba243",
+      "date": "2026-10-15T01:33:57+07:00",
+      "subject": "style(Experiments): use an amber globe for browser experiments"
+    },
+    {
       "hash": "bf74ce896569824a31d77d708e12a964af5cddb1",
       "date": "2026-10-15T01:33:57+07:00",
       "subject": "fix(Controls): keep slider and switch thumbs white in both themes"

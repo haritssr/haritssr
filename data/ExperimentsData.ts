@@ -636,6 +636,15 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
     description: "Interface layouts and interactions.",
     experiments: [
       {
+        slug: "pill-material",
+        title: "Pill Material",
+        description:
+          "Explore translucent pills with adjustable opacity and blur.",
+        tags: ["design", "transparency", "blur", "navigation"],
+        createdAt: "2026-10-15",
+        updatedAt: [],
+      },
+      {
         slug: "analog-clock",
         title: "Analog Clock",
         description: "A live analog clock, set to your local time.",
