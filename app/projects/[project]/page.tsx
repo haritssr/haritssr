@@ -56,7 +56,7 @@ export default async function ProjectPage({
     <div>
       <div className="mx-auto min-h-screen w-full max-w-full">
         <PageHeader
-          navigation={<BackButton href="/projects" name="All Projects" />}
+          navigation={<BackButton href="/projects" name="Projects" />}
         >
           <div className="flex items-start justify-between gap-4">
             <PageTitle>{project.project_name}</PageTitle>
@@ -81,40 +81,44 @@ export default async function ProjectPage({
                 About The Client
               </h2>
               <dl>
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Company Name
                 </dt>
                 <dd className="text-muted">
                   {project.about_client.company_name}
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Brand Name
                 </dt>
                 <dd className="text-muted">
                   {project.about_client.brand_name}
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">About</dt>
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
+                  About
+                </dt>
                 <dd className="text-muted">
                   {project.about_client.long_about}
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Phone Number
                 </dt>
                 <dd className="text-muted">
                   {project.about_client.phone_number}
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">Website</dt>
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
+                  Website
+                </dt>
                 <dd>
                   <ExternalLink
                     href={project.about_client.website}
                     name={project.about_client.website.slice(8)}
                   />
                 </dd>
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Office Location
                 </dt>
                 <dd className="text-muted">
@@ -129,7 +133,9 @@ export default async function ProjectPage({
                 About The Project
               </h2>
               <dl>
-                <dt className="text-foreground/90 mt-5 font-medium">My Role</dt>
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
+                  My Role
+                </dt>
                 <dd>
                   <ExplanationList>
                     {project.about_project.my_role.map((role: string) => (
@@ -140,14 +146,14 @@ export default async function ProjectPage({
                   </ExplanationList>
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Working Period
                 </dt>
                 <dd className="text-muted">
                   {project.about_project.working_period}
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Website Status
                 </dt>
                 <dd>
@@ -162,7 +168,7 @@ export default async function ProjectPage({
                   </ExplanationList>
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Website Routes
                 </dt>
                 <dd>
@@ -175,7 +181,7 @@ export default async function ProjectPage({
                   </ExplanationList>
                 </dd>
 
-                <dt className="text-foreground/90 mt-5 font-medium">
+                <dt className="text-foreground/90 mt-5 mb-1 font-medium">
                   Website Features
                 </dt>
                 <dd>
