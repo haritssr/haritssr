@@ -25,7 +25,7 @@ export default function Box({
         className={
           Container === "li"
             ? "text-foreground flex min-w-0 flex-1 flex-col gap-5 p-5"
-            : "space-y-5 p-5"
+            : "space-y-5 p-4"
         }
       >
         {children}

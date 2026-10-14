@@ -27,7 +27,7 @@ function Badge({
 }) {
   return (
     <span
-      className={`w-fit rounded-full border px-2.5 py-0.5 text-center text-sm font-medium select-none ${className}`}
+      className={`w-fit rounded-full border px-2.5 py-0.5 text-center text-sm select-none ${className}`}
     >
       {children}
     </span>
