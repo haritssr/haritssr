@@ -4,7 +4,6 @@ import { NumberField } from "@base-ui/react/number-field";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChangeEvent, MouseEvent, SubmitEvent } from "react";
 
-import ExperimentPageBadge from "@/components/ExperimentPageBadge";
 import ExperimentPageHeader from "@/components/ExperimentPageHeader";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -423,7 +422,6 @@ export default function TaskPage() {
         title="Task"
       >
         <PageDescription>Realistic Daily Time Budget.</PageDescription>
-        <ExperimentPageBadge />
         <section className="flex items-center space-x-5">
           <InternalLink href="/experiments/ui-explorations/task/history">
             History

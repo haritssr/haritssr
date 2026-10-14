@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4b56176ffd769ac206feb1afd32f192f0c150c5c",
+      "date": "2026-10-14T11:15:52+07:00",
+      "subject": "refactor(ExperimentIndex): flatten lists and remove update badges"
+    },
+    {
       "hash": "25fcb567f768c22a7145b5a111970c49922e8fe7",
       "date": "2026-10-14T11:15:46+07:00",
       "subject": "style(Experiments): align discontinued accordion with a grid column"
