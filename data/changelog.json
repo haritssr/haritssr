@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4b2885edd39974ecef2e0befbea8c1b2664cbbde",
+      "date": "2026-10-14T11:15:25+07:00",
+      "subject": "feat(Navigation): add breadcrumbs and back links to root pages"
+    },
+    {
       "hash": "9195a34946edbf8e1cf0a305b9caaeef6aaeec64",
       "date": "2026-10-14T11:15:17+07:00",
       "subject": "refactor(SciencePages): unify sections and shorten introductions"

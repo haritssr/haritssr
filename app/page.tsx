@@ -4,7 +4,6 @@ import Image from "next/image";
 import ContactList from "@/components/ContactList";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import ExternalLink from "@/components/ExternalLink";
-import HomeSearch from "@/components/HomeSearch";
 import MoreItemsLink from "@/components/MoreItemsLink";
 import ProjectsCard from "@/components/ProjectsCard";
 import Section from "@/components/Section";
@@ -83,16 +82,6 @@ function ProfileSection() {
             />
           </li>
           <li>Tangerang, Indonesia</li>
-          <li>
-            <a
-              className="text-action focus-visible:outline-action hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-              download="cv-dec-2024.pdf"
-              href="/cv-dec-2024.pdf"
-              title="Download CV"
-            >
-              Download CV
-            </a>
-          </li>
           <li>
             Interests: Web, JS, TS, Effect, React, Next.js, Functional
             Programming, Math, Physics, and Education.
