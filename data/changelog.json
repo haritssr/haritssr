@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "69d9c49f07b6200398d36b1fee4cc9d7152a3faa",
+      "date": "2026-10-14T16:32:26+07:00",
+      "subject": "refactor(Design): simplify guidance and adjust example box padding"
+    },
+    {
       "hash": "52dc5421e2260739e66f5f1d14927e9861b73ff9",
       "date": "2026-10-14T11:16:34+07:00",
       "subject": "refactor(UserInterface): rename category and replace its icon"

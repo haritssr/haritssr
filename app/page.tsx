@@ -1,18 +1,55 @@
+import {
+  BeakerIcon,
+  BriefcaseIcon,
+  DocumentTextIcon,
+  RectangleGroupIcon,
+} from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
 
 import ContactList from "@/components/ContactList";
-import ExperimentsGrid from "@/components/ExperimentsGrid";
 import ExternalLink from "@/components/ExternalLink";
-import MoreItemsLink from "@/components/MoreItemsLink";
-import ProjectsCard from "@/components/ProjectsCard";
-import Section from "@/components/Section";
+import InternalLinkCardWithNumber from "@/components/InternalLinkCardWithNumber";
 import { PageStructuredData } from "@/components/StructuredData";
-import WritingTable from "@/components/WritingTable";
 import { ProjectsData } from "@/data/ProjectsData";
+import { getAvailableExperimentCount } from "@/utils/experimentCatalog";
 import { createPageMetadata } from "@/utils/pageMetadata";
+import { allWritingPosts } from "@/utils/writing-posts";
 
-const HOME_PROJECTS_LIMIT = 4;
+const homeNavigation = [
+  {
+    href: "/projects",
+    title: "Projects",
+    count: ProjectsData.length,
+    countLabel: "projects",
+    icon: BriefcaseIcon,
+    description: "Websites and products I’ve designed and built.",
+  },
+  {
+    href: "/experiments",
+    title: "Experiments",
+    count: getAvailableExperimentCount(),
+    countLabel: "experiments",
+    icon: BeakerIcon,
+    description: "Interactive lessons and tools for exploration.",
+  },
+  {
+    href: "/writing",
+    title: "Writing",
+    count: allWritingPosts.length,
+    countLabel: "writing posts",
+    icon: DocumentTextIcon,
+    description: "Notes and ideas about the things I’m learning.",
+  },
+  {
+    href: "/design",
+    title: "Design",
+    count: 36,
+    countLabel: "design examples",
+    icon: RectangleGroupIcon,
+    description: "Components and patterns used across this site.",
+  },
+];
 
 const profileName = "Harits Syah";
 const homeDescription =
@@ -39,18 +76,38 @@ export default function Home() {
       />
       <div className="space-y-16">
         <ProfileSection />
-        {/*<HomeSearch />*/}
-        <HomeProjects />
-
-        <Section id="experiments" title="Experiments">
-          <ExperimentsGrid headingLevel={3} mobileLimit={4} />
-        </Section>
-
-        <Section id="writing" title="Writing">
-          <WritingTable />
-        </Section>
+        <HomeNavigation />
       </div>
     </>
+  );
+}
+
+function HomeNavigation() {
+  return (
+    <nav
+      aria-label="Explore the site"
+      className="grid gap-4 sm:grid-cols-2 md:grid-cols-4"
+    >
+      {homeNavigation.map(
+        ({ href, title, description, icon: Icon, count, countLabel }) => (
+          <InternalLinkCardWithNumber
+            href={href}
+            key={href}
+            title={title}
+            description={description}
+            count={count}
+            countLabel={countLabel}
+            icon={
+              <Icon
+                aria-hidden="true"
+                className="text-foreground size-4.5 shrink-0"
+                strokeWidth={1.5}
+              />
+            }
+          />
+        )
+      )}
+    </nav>
   );
 }
 
@@ -109,43 +166,5 @@ function ProfileSection() {
         </ul>
       </div>
     </section>
-  );
-}
-
-function HomeProjects() {
-  const remainingProjects = Math.max(
-    ProjectsData.length - HOME_PROJECTS_LIMIT,
-    0
-  );
-  return (
-    <Section id="projects" title="Projects">
-      <ul className="grid list-none grid-cols-1 gap-5 sm:grid-cols-2 sm:px-0 lg:grid-cols-4">
-        {ProjectsData.map((project, index) => (
-          <li
-            className={
-              index >= HOME_PROJECTS_LIMIT ? "hidden! sm:flex!" : "flex"
-            }
-            key={project.project_name}
-          >
-            <ProjectsCard
-              headingLevel={3}
-              description={project.about_client.short_about}
-              href={project.about_client.website}
-              imgSrc={project.about_client.logo_src}
-              title={project.project_name}
-            />
-          </li>
-        ))}
-        {remainingProjects > 0 ? (
-          <li className="sm:hidden">
-            <MoreItemsLink
-              count={remainingProjects}
-              href="/projects"
-              itemName="project"
-            />
-          </li>
-        ) : null}
-      </ul>
-    </Section>
   );
 }

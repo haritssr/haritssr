@@ -1,3 +1,5 @@
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
+
 import BackButton from "@/components/BackButton";
 import BottomBar from "@/components/BottomBar";
 import Box from "@/components/Box";
@@ -5,6 +7,7 @@ import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
+import InternalLinkCardWithNumber from "@/components/InternalLinkCardWithNumber";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
@@ -167,6 +170,26 @@ export default function DesignSystem() {
             "grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5"
           }
         >
+          <Box
+            name="InternalLinkCardWithNumber"
+            title="Navigation card with count"
+          >
+            <InternalLinkCardWithNumber
+              title="Writing"
+              description="Notes and ideas I want to share."
+              href="/writing"
+              count={18}
+              countLabel="writing posts"
+              icon={
+                <DocumentTextIcon
+                  aria-hidden="true"
+                  className="text-foreground size-4.5 shrink-0"
+                  strokeWidth={1.5}
+                />
+              }
+              headingLevel={3}
+            />
+          </Box>
           <Box name="Switch" title="Switch">
             <SwitchDemo />
           </Box>
