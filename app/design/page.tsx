@@ -9,7 +9,6 @@ import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
-import SectionHeading from "@/components/SectionHeading";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import AccordionDemo from "./AccordionDemo";
@@ -56,55 +55,6 @@ export default function DesignSystem() {
         </PageDescription>
       </PageHeader>
       <div className="space-y-16">
-        <Section
-          id="design-page-headers"
-          title="Page headers and spacing"
-          description="PageHeader groups the title and optional introductory items, keeping the same distance to content for every combination."
-        >
-          <ExplanationList>
-            <li>
-              Every page uses the same PageTitle typography inside PageHeader.
-              Pass the optional BackButton through the navigation slot; add
-              PageDescription, badges, or other introductory content below the
-              title.
-            </li>
-            <li>
-              The top bar&apos;s GitHub icon links to the current page&apos;s
-              source. Keep source links out of experiment headers.
-            </li>
-            <li>
-              PageHeader always reserves a 24px back-link row and a 16px gap
-              before the title, even when there is no back link. It owns the
-              16px gap between its remaining items and the 64px gap before
-              content.
-            </li>
-            <li>
-              The layout always reserves a 24px breadcrumb row, with 32px
-              between the top bar and breadcrumbs and another 32px before the
-              page header. These spaces stay reserved when navigation is absent.
-              Place icons beside the title so they do not shift its starting
-              position.
-            </li>
-            <li>
-              Keep PageHeader outside the content stack. Use
-              <code> space-y-16</code> between major content sections. Physics
-              and mathematics experiments use <code>space-y-20</code>. Omit an
-              extra top margin on the first content block.
-            </li>
-          </ExplanationList>
-          <pre className="border-border overflow-x-auto rounded-lg border p-4 text-sm">
-            <code>{`<PageHeader
-  navigation={<BackButton href="/experiments" name="Experiments" />}
->
-  <PageTitle>Example page</PageTitle>
-  <PageDescription>Optional introduction.</PageDescription>
-</PageHeader>
-<div className="space-y-16">
-  <Section title="First section">...</Section>
-  <Section title="Second section">...</Section>
-</div>`}</code>
-          </pre>
-        </Section>
         <Section title="Design Principles">
           <ExplanationList>
             <li>
@@ -208,59 +158,7 @@ export default function DesignSystem() {
             </li>
           </ExplanationList>
         </Section>
-        <Section
-          id="design-sections"
-          title="Sections and headings"
-          description={
-            <>
-              Section groups content under an accessible heading with shared
-              spacing. Sections, descriptions, and body content use the full
-              available width within the page container. Use SectionHeading when
-              a layout only needs a heading. In physics and mathematics,
-              constrain reading content with <code>max-w-3xl</code> on the body
-              wrapper; keep headings, descriptions, labs, and tables full width.
-            </>
-          }
-          contentClassName={
-            // This demonstrates grid spacing on Section's body wrapper.
-            // oxlint-disable-next-line shadcn/no-restyle -- The demo exercises the contentClassName API.
-            "grid gap-5 sm:grid-cols-2"
-          }
-        >
-          <Box name="Section" title="Section with content">
-            <Section
-              headingAs="h3"
-              id="design-section-example"
-              title="Example section"
-              description={
-                <>
-                  Section descriptions use shared styling. Container attributes
-                  such as <code>id</code>, <code>className</code>, and{" "}
-                  <code>style</code> apply to the outer section.
-                </>
-              }
-              contentClassName="max-w-full"
-            >
-              <p className="text-muted text-sm leading-7">
-                Use <code>contentClassName</code> to style the body wrapper. Set
-                responsive grid classes there when the body contains cards.
-              </p>
-            </Section>
-          </Box>
-          <Box name="SectionHeading" title="Heading without a container">
-            <SectionHeading as="h3" id="design-heading-example">
-              Example heading
-            </SectionHeading>
-            <p className="text-muted text-sm leading-7">
-              Native attributes apply directly to the heading. Choose its level
-              with <code>as</code>; both components share the same default and
-              compact typography.
-            </p>
-            <SectionHeading as="h3" variant="compact">
-              Compact heading
-            </SectionHeading>
-          </Box>
-        </Section>
+
         <Section
           title="UI Components"
           contentClassName={

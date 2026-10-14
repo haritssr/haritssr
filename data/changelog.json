@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "52dc5421e2260739e66f5f1d14927e9861b73ff9",
+      "date": "2026-10-14T11:16:34+07:00",
+      "subject": "refactor(UserInterface): rename category and replace its icon"
+    },
+    {
       "hash": "ebd0af41c99fdeb3a963ca6785957843ba4ab98f",
       "date": "2026-10-14T11:16:26+07:00",
       "subject": "feat(AnalogClock): add local time dial and fullscreen controls"

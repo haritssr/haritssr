@@ -15,7 +15,7 @@ export default function Box({
 }) {
   return (
     <Container className="corner-squircle border-border flex min-w-0 flex-col overflow-hidden rounded-xl border">
-      <div className="border-border bg-surface-hover text-foreground flex items-center justify-between gap-2 border-b p-2 select-none">
+      <div className="border-border bg-surface-hover text-foreground flex items-center justify-between gap-2 border-b px-3 py-2 select-none">
         <Heading className="min-w-0 font-normal">{title}</Heading>
         {name !== undefined && name.length > 0 ? (
           <span className="text-muted font-mono text-sm">{`${name}.tsx`}</span>
