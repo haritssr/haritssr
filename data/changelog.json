@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "9195a34946edbf8e1cf0a305b9caaeef6aaeec64",
+      "date": "2026-10-14T11:15:17+07:00",
+      "subject": "refactor(SciencePages): unify sections and shorten introductions"
+    },
+    {
       "hash": "a7fadadf6dea769cf2ba66c2b4baf07981af73e6",
       "date": "2026-10-13T23:20:51+07:00",
       "subject": "style(PhysicsEquations): use consistent spacing of ten"

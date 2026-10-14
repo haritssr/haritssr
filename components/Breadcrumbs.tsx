@@ -6,14 +6,7 @@ import { usePathname } from "next/navigation";
 // Split words on whitespace and replace slug separators with spaces.
 const whitespaceSequencePattern = /\s+/;
 const segmentSeparatorPattern = /[-_]+/g;
-const mainRoutes = new Set([
-  "projects",
-  "experiments",
-  "writing",
-  "design",
-  "api",
-  "commits",
-]);
+const hiddenRootRoutes = new Set(["api", "commits"]);
 
 export default function Breadcrumbs({
   routeLabels,
@@ -25,7 +18,7 @@ export default function Breadcrumbs({
 
   if (
     segments.length === 0 ||
-    (segments.length === 1 && mainRoutes.has(segments[0]))
+    (segments.length === 1 && hiddenRootRoutes.has(segments[0]))
   ) {
     return null;
   }

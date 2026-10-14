@@ -1,6 +1,7 @@
 import PageDescription from "components/PageDescription";
 import type { Metadata } from "next";
 
+import BackButton from "@/components/BackButton";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import WritingTable from "@/components/WritingTable";
@@ -16,7 +17,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function WritingPage() {
   return (
     <>
-      <PageHeader>
+      <PageHeader navigation={<BackButton href="/" name="Home" />}>
         <PageTitle>Writing</PageTitle>
         <PageDescription>{WRITING_DESCRIPTION}</PageDescription>
       </PageHeader>

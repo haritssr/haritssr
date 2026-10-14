@@ -47,10 +47,10 @@ const FORM_CONTROL_CLASS_NAME =
 export default function DesignSystem() {
   return (
     <>
-      <PageHeader>
+      <PageHeader navigation={<BackButton href="/" name="Home" />}>
         <PageTitle>Design</PageTitle>
         <PageDescription>
-          Shared design system for this site,{" "}
+          Shared design system for{" "}
           <ExternalLink href="https://haritssr.com" name="haritssr.com" /> and{" "}
           <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
         </PageDescription>
