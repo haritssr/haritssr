@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f0cd2fceb30aac530f087f4a0f94a025adb9d933",
+      "date": "2026-10-14T20:10:50+07:00",
+      "subject": "feat(Navigation): share scrolling headers and move contents into top bar"
+    },
+    {
       "hash": "0f64bd0c60fb22caefddf3d81b7f9dc35977ab93",
       "date": "2026-10-14T20:10:40+07:00",
       "subject": "feat(Experiments): rename User Interface routes and mark database links"

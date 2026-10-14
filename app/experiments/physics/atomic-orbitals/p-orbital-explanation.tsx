@@ -274,7 +274,7 @@ export function OrbitalSymbolGuide() {
           </table>
         </div>
       </div>
-      <p className="text-foreground/65 mt-3 text-sm leading-6">
+      <p className="text-foreground/65 mt-3 max-w-3xl text-sm leading-6">
         The wavefunction unit assumes a normalized three-dimensional spatial
         wavefunction. The Laplacian&apos;s unit describes the operator, before
         it acts on the wavefunction.
@@ -290,9 +290,9 @@ export function POrbitalDerivation() {
       className="min-w-0 scroll-mt-28"
       title="Worked example: where a p orbital gets its two lobes"
       headingAs="h3"
-      contentClassName="max-w-3xl space-y-5"
+      contentClassName="space-y-5"
     >
-      <div>
+      <div className="max-w-3xl">
         <p className="text-action text-sm font-semibold tracking-[0.18em] uppercase">
           Follow the arrows
         </p>
@@ -306,7 +306,11 @@ export function POrbitalDerivation() {
 
       <ol>
         <li>
-          <DerivationStep number="01" title="Start with the governing equation">
+          <DerivationStep
+            className="w-full"
+            number="01"
+            title="Start with the governing equation"
+          >
             <p className="max-w-3xl">
               For hydrogen, treat the nucleus as fixed and use its Coulomb
               potential:
@@ -328,7 +332,11 @@ export function POrbitalDerivation() {
         </li>
 
         <li>
-          <DerivationStep number="02" title="Separate distance from direction">
+          <DerivationStep
+            className="w-full"
+            number="02"
+            title="Separate distance from direction"
+          >
             <p className="max-w-3xl">
               Spherical symmetry lets the solution split into a radial part and
               an angular part:
@@ -351,7 +359,7 @@ export function POrbitalDerivation() {
               is nonzero.
             </p>
             <FactorExplorer />
-            <p className="text-foreground/65 text-sm">
+            <p className="text-foreground/65 max-w-3xl text-sm">
               This probe uses <InlineMath expression="2p_y" /> with its polar
               angle measured from the viewer&apos;s vertical{" "}
               <InlineMath expression="+y" />
@@ -441,15 +449,17 @@ export function POrbitalDerivation() {
 
 function DerivationStep({
   children,
+  className = "max-w-3xl",
   number,
   title,
 }: {
   children: ReactNode;
+  className?: string;
   number: string;
   title: string;
 }) {
   return (
-    <div className="border-border rounded-2xl border p-5 sm:p-6">
+    <div className={`border-border rounded-2xl border p-5 sm:p-6 ${className}`}>
       <div className="flex items-center gap-3">
         <StepNumber>{number}</StepNumber>
         <h4 className="text-foreground text-lg font-semibold">{title}</h4>
@@ -463,7 +473,7 @@ function DerivationStep({
 
 function MathDisplay({ expression }: { expression: string }) {
   return (
-    <div className="border-border bg-surface-hover text-foreground overflow-x-auto rounded-xl border px-4 py-3 text-sm sm:text-base">
+    <div className="border-border bg-surface-hover text-foreground max-w-3xl overflow-x-auto rounded-xl border px-4 py-3 text-sm sm:text-base">
       {katexify(expression, true)}
     </div>
   );
@@ -477,7 +487,7 @@ function InlineMath({ expression }: { expression: string }) {
 
 function FlowArrow({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center gap-3 py-3 pl-5 sm:pl-7">
+    <div className="flex max-w-3xl items-center gap-3 py-3 pl-5 sm:pl-7">
       <span aria-hidden="true" className="text-action text-2xl leading-none">
         ↓
       </span>

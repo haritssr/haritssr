@@ -883,6 +883,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
           "2026-10-06",
           "2026-10-11",
           "2026-10-13",
+          "2026-10-14",
         ],
       },
       {

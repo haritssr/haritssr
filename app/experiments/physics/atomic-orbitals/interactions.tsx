@@ -21,6 +21,11 @@ const CONTROL_CLASS =
 
 const FAMILY_LABELS = ["s", "p", "d", "f"] as const;
 
+// Avoid hydration differences from server/browser floating-point math.
+function formatSvgNumber(value: number) {
+  return value.toFixed(4);
+}
+
 export function PotentialExplorer() {
   const [radius, setRadius] = useState(2);
   const markerX = 30 + ((radius - 1) / 5) * 300;
@@ -44,12 +49,17 @@ export function PotentialExplorer() {
         <line
           stroke="#a1a1aa"
           strokeDasharray="4 4"
-          x1={markerX}
-          x2={markerX}
-          y1={markerY}
+          x1={formatSvgNumber(markerX)}
+          x2={formatSvgNumber(markerX)}
+          y1={formatSvgNumber(markerY)}
           y2="150"
         />
-        <circle cx={markerX} cy={markerY} fill="#1d4ed8" r="6" />
+        <circle
+          cx={formatSvgNumber(markerX)}
+          cy={formatSvgNumber(markerY)}
+          fill="#1d4ed8"
+          r="6"
+        />
         <foreignObject height="24" width="70" x="34" y="10">
           <span className="text-xs text-zinc-600">
             {katexify("V=0", false)}
@@ -127,11 +137,16 @@ export function FactorExplorer() {
             stroke="#18181b"
             strokeWidth="2"
             x1="180"
-            x2={x}
+            x2={formatSvgNumber(x)}
             y1="110"
-            y2={y}
+            y2={formatSvgNumber(y)}
           />
-          <circle cx={x} cy={y} fill="#18181b" r="5" />
+          <circle
+            cx={formatSvgNumber(x)}
+            cy={formatSvgNumber(y)}
+            fill="#18181b"
+            r="5"
+          />
           <circle cx="180" cy="110" fill="#18181b" r="4" />
           <foreignObject height="24" width="32" x="188" y="6">
             <span className="text-xs text-zinc-600">
@@ -278,18 +293,18 @@ export function AngularExplorer() {
               stroke={ray.color}
               strokeWidth="2"
               x1="180"
-              x2={ray.x}
+              x2={formatSvgNumber(ray.x)}
               y1="105"
-              y2={ray.y}
+              y2={formatSvgNumber(ray.y)}
             />
             <line
               opacity="0.4"
               stroke={ray.color}
               strokeWidth="2"
               x1="180"
-              x2={ray.oppositeX}
+              x2={formatSvgNumber(ray.oppositeX)}
               y1="105"
-              y2={ray.y}
+              y2={formatSvgNumber(ray.y)}
             />
           </g>
         ))}
@@ -479,11 +494,11 @@ export function ProbabilityExplorer() {
               cy={dot.y}
               fill={color}
               key={index}
-              opacity={
+              opacity={formatSvgNumber(
                 showProbability
                   ? dot.intensity ** 2 * 0.85
                   : dot.intensity * 0.85
-              }
+              )}
               r="6"
             />
           );

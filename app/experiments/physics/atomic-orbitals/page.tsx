@@ -12,7 +12,6 @@ import Section from "@/components/Section";
 import { getExperimentMetadata } from "@/data/ExperimentsData";
 import katexify from "@/utils/katexify";
 
-import Contents from "./contents";
 import {
   AngularExplorer,
   OrbitalExplorer,
@@ -26,18 +25,6 @@ import {
 } from "./p-orbital-explanation";
 
 import styles from "./accordion.module.css";
-
-const SECTIONS = [
-  { id: "explore", label: "Compare the shapes" },
-  { id: "angular-shapes", label: "Why the shapes differ" },
-  { id: "probability", label: "A probability pattern" },
-  { id: "the-shape-in-one-picture", label: "The p orbital up close" },
-  { id: "same-shape-three-directions", label: "Three p orientations" },
-  { id: "radial-nodes", label: "Same shape, new shell" },
-  { id: "deeper", label: "From equation to shape" },
-  { id: "symbol-guide", label: "Symbol guide" },
-  { id: "references", label: "Sources" },
-] as const;
 
 export const metadata: Metadata = getExperimentMetadata(
   "physics",
@@ -53,209 +40,205 @@ export default function AtomicOrbitalsPage() {
         </PageDescription>
       </ExperimentPageHeader>
 
-      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-8">
-        <Contents items={SECTIONS} />
-        <div className="min-w-0 space-y-20 lg:col-start-1 lg:row-start-1">
-          <Section
-            className="scroll-mt-28"
-            id="explore"
-            title="Start by comparing shapes"
+      <div className="min-w-0 space-y-20">
+        <Section
+          className="scroll-mt-28"
+          id="explore"
+          title="Start by comparing shapes"
 
-            description={
-              <>
-                Choose an orbital family, then choose one of its orientations.
-                Rotate the model to see the full three-dimensional pattern.
-              </>
-            }
-            contentClassName="space-y-4 leading-7"
-          >
-            <OrbitalExplorer />
-            <p className="max-w-3xl">
-              Notice where the pattern has lobes and where it has gaps. The gaps
-              are places where the wave is zero; those surfaces help determine
-              each orbital&apos;s shape.
-            </p>
-          </Section>
+          description={
+            <>
+              Choose an orbital family, then choose one of its orientations.
+              Rotate the model to see the full three-dimensional pattern.
+            </>
+          }
+          contentClassName="space-y-4 leading-7"
+        >
+          <OrbitalExplorer />
+          <p className="max-w-3xl">
+            Notice where the pattern has lobes and where it has gaps. The gaps
+            are places where the wave is zero; those surfaces help determine
+            each orbital&apos;s shape.
+          </p>
+        </Section>
 
-          <Section
-            className="scroll-mt-28"
-            id="angular-shapes"
-            title="Angular nodes make the shapes"
+        <Section
+          className="scroll-mt-28"
+          id="angular-shapes"
+          title="Angular nodes make the shapes"
 
-            description={
-              <>
-                The angular pattern describes how the wave changes with
-                direction. Its zero-amplitude surfaces, called angular nodes,
-                divide the surrounding space into lobes. Changing the angular
-                quantum number {katexify(String.raw`\ell`, false)} changes this
-                pattern.
-              </>
-            }
-            contentClassName="space-y-4 leading-7"
-          >
-            <AngularExplorer />
-            <p className="max-w-3xl">
-              The sequence is{" "}
-              {katexify(
-                String.raw`s\;(\ell=0),\;p\;(\ell=1),\;d\;(\ell=2)`,
-                false
-              )}
-              , and {katexify(String.raw`f\;(\ell=3)`, false)}. Each family has{" "}
-              {katexify(String.raw`2\ell+1`, false)} orientations: 1, 3, 5, and
-              7. The magnetic quantum number {katexify("m", false)}{" "}
-              distinguishes angular patterns within a family; it does not change
-              the family itself.
-            </p>
-          </Section>
+          description={
+            <>
+              The angular pattern describes how the wave changes with direction.
+              Its zero-amplitude surfaces, called angular nodes, divide the
+              surrounding space into lobes. Changing the angular quantum number{" "}
+              {katexify(String.raw`\ell`, false)} changes this pattern.
+            </>
+          }
+          contentClassName="space-y-4 leading-7"
+        >
+          <AngularExplorer />
+          <p className="max-w-3xl">
+            The sequence is{" "}
+            {katexify(
+              String.raw`s\;(\ell=0),\;p\;(\ell=1),\;d\;(\ell=2)`,
+              false
+            )}
+            , and {katexify(String.raw`f\;(\ell=3)`, false)}. Each family has{" "}
+            {katexify(String.raw`2\ell+1`, false)} orientations: 1, 3, 5, and 7.
+            The magnetic quantum number {katexify("m", false)} distinguishes
+            angular patterns within a family; it does not change the family
+            itself.
+          </p>
+        </Section>
 
-          <Section
-            className="scroll-mt-28"
-            id="probability"
-            title="An orbital is a probability pattern"
+        <Section
+          className="scroll-mt-28"
+          id="probability"
+          title="An orbital is a probability pattern"
 
-            description={
-              <>
-                The wavefunction can have positive or negative values. Its sign
-                is not electric charge. Squaring its magnitude,{" "}
-                {katexify(String.raw`|\psi|^2`, false)}, gives the position
-                probability density. Integrating that density over a region
-                gives the probability of finding the electron there.
-              </>
-            }
-            contentClassName="space-y-4 leading-7"
-          >
-            <ProbabilityExplorer />
-            <p className="text-foreground/65 max-w-3xl text-sm">
-              The colored lobes are not solid walls. They summarize where the
-              electron is more likely to be found; the color shows the
-              wave&apos;s sign, not a different kind of charge.
-            </p>
-          </Section>
+          description={
+            <>
+              The wavefunction can have positive or negative values. Its sign is
+              not electric charge. Squaring its magnitude,{" "}
+              {katexify(String.raw`|\psi|^2`, false)}, gives the position
+              probability density. Integrating that density over a region gives
+              the probability of finding the electron there.
+            </>
+          }
+          contentClassName="space-y-4 leading-7"
+        >
+          <ProbabilityExplorer />
+          <p className="text-foreground/65 max-w-3xl text-sm">
+            The colored lobes are not solid walls. They summarize where the
+            electron is more likely to be found; the color shows the wave&apos;s
+            sign, not a different kind of charge.
+          </p>
+        </Section>
 
-          <POrbitalPattern />
+        <POrbitalPattern />
 
-          <Section
-            className="scroll-mt-28"
-            id="radial-nodes"
-            title="Same shape, different shell"
+        <Section
+          className="scroll-mt-28"
+          id="radial-nodes"
+          title="Same shape, different shell"
 
-            description={
-              <>
-                The shell number {katexify("n", false)} changes the radial
-                pattern: how far from the nucleus the electron is likely to be
-                found and how many spherical nodes appear. Changing{" "}
-                {katexify("n", false)} can add radial structure while keeping
-                the same angular family.
-              </>
-            }
-            contentClassName="space-y-4 leading-7"
-          >
-            <Accordion.Root className="w-full" keepMounted multiple>
-              <ExplanationAccordionItem
-                title="See the radial wave and node rule"
-                value="radial-wave"
+          description={
+            <>
+              The shell number {katexify("n", false)} changes the radial
+              pattern: how far from the nucleus the electron is likely to be
+              found and how many spherical nodes appear. Changing{" "}
+              {katexify("n", false)} can add radial structure while keeping the
+              same angular family.
+            </>
+          }
+          contentClassName="space-y-4 leading-7"
+        >
+          <Accordion.Root className="w-full" keepMounted multiple>
+            <ExplanationAccordionItem
+              title="See the radial wave and node rule"
+              value="radial-wave"
+            >
+              <p className="max-w-3xl">
+                For a hydrogen-like orbital, the radial node count is{" "}
+                {katexify("n - \\ell - 1", false)}. These spherical surfaces are
+                separate from the angular nodes that shape the lobes.
+              </p>
+              <div className="border-border max-w-3xl overflow-x-auto rounded-xl border bg-zinc-50 px-4 py-5 text-center">
+                {katexify(
+                  String.raw`\text{radial nodes}=n-\ell-1\qquad\text{angular nodes}=\ell`,
+                  true
+                )}
+              </div>
+              <RadialExplorer />
+            </ExplanationAccordionItem>
+          </Accordion.Root>
+        </Section>
+
+        <Section
+          className="scroll-mt-28"
+          id="deeper"
+          title="From the equation to an orbital shape"
+          contentClassName="space-y-5"
+        >
+          <POrbitalDerivation />
+          <Accordion.Root className="max-w-3xl space-y-3" keepMounted multiple>
+            <ExplanationAccordionItem
+              title="Where do all four families appear in an atom?"
+              value="orbital-families"
+            >
+              <p className="max-w-3xl">
+                Cerium (Ce, atomic number 58) is the first neutral ground-state
+                atom with occupied s, p, d, and f subshells. Its configuration
+                is {katexify("[\\mathrm{Xe}]4f^1 5d^1 6s^2", false)}; the{" "}
+                {katexify("[\\mathrm{Xe}]", false)} core includes filled p
+                subshells. Lanthanum (57) has no occupied f subshell in its
+                ground state.
+              </p>
+              <p className="max-w-3xl">
+                The interactive shapes above are hydrogen-like models. They
+                isolate the shape families; they are not exact solutions for the
+                many-electron cerium atom.
+              </p>
+              <p className="max-w-3xl">
+                To see how electrons fill these subshells, continue to the{" "}
+                <Link
+                  className="text-action hover:text-action-hover underline"
+                  href="/experiments/physics/electron-configuration"
+                >
+                  electron-configuration experiment
+                </Link>
+                .
+              </p>
+            </ExplanationAccordionItem>
+          </Accordion.Root>
+        </Section>
+
+        <OrbitalSymbolGuide />
+
+        <Section
+          className="scroll-mt-28"
+          id="references"
+          title="Sources and next steps"
+          contentClassName="max-w-3xl space-y-5"
+        >
+          <ul className="text-foreground/70 list-disc space-y-2 pl-5 text-sm leading-6">
+            <li>
+              <a
+                className="text-action underline"
+                href="https://openstax.org/books/university-physics-volume-3/pages/8-1-the-hydrogen-atom"
               >
-                <p className="max-w-3xl">
-                  For a hydrogen-like orbital, the radial node count is{" "}
-                  {katexify("n - \\ell - 1", false)}. These spherical surfaces
-                  are separate from the angular nodes that shape the lobes.
-                </p>
-                <div className="border-border overflow-x-auto rounded-xl border bg-zinc-50 px-4 py-5 text-center">
-                  {katexify(
-                    String.raw`\text{radial nodes}=n-\ell-1\qquad\text{angular nodes}=\ell`,
-                    true
-                  )}
-                </div>
-                <RadialExplorer />
-              </ExplanationAccordionItem>
-            </Accordion.Root>
-          </Section>
-
-          <Section
-            className="scroll-mt-28"
-            id="deeper"
-            title="From the equation to an orbital shape"
-          >
-            <POrbitalDerivation />
-            <Accordion.Root className="mt-8 space-y-3" keepMounted multiple>
-              <ExplanationAccordionItem
-                title="Where do all four families appear in an atom?"
-                value="orbital-families"
+                OpenStax: The Hydrogen Atom
+              </a>{" "}
+              — equation, separation, and probability.
+            </li>
+            <li>
+              <a
+                className="text-action underline"
+                href="https://openstax.org/books/chemistry-atoms-first-2e/pages/3-3-development-of-quantum-theory"
               >
-                <p className="max-w-3xl">
-                  Cerium (Ce, atomic number 58) is the first neutral
-                  ground-state atom with occupied s, p, d, and f subshells. Its
-                  configuration is{" "}
-                  {katexify("[\\mathrm{Xe}]4f^1 5d^1 6s^2", false)}; the{" "}
-                  {katexify("[\\mathrm{Xe}]", false)} core includes filled p
-                  subshells. Lanthanum (57) has no occupied f subshell in its
-                  ground state.
-                </p>
-                <p className="max-w-3xl">
-                  The interactive shapes above are hydrogen-like models. They
-                  isolate the shape families; they are not exact solutions for
-                  the many-electron cerium atom.
-                </p>
-                <p className="max-w-3xl">
-                  To see how electrons fill these subshells, continue to the{" "}
-                  <Link
-                    className="text-action hover:text-action-hover underline"
-                    href="/experiments/physics/electron-configuration"
-                  >
-                    electron-configuration experiment
-                  </Link>
-                  .
-                </p>
-              </ExplanationAccordionItem>
-            </Accordion.Root>
-          </Section>
-
-          <OrbitalSymbolGuide />
-
-          <Section
-            className="scroll-mt-28"
-            id="references"
-            title="Sources and next steps"
-            contentClassName="max-w-3xl space-y-5"
-          >
-            <ul className="text-foreground/70 list-disc space-y-2 pl-5 text-sm leading-6">
-              <li>
-                <a
-                  className="text-action underline"
-                  href="https://openstax.org/books/university-physics-volume-3/pages/8-1-the-hydrogen-atom"
-                >
-                  OpenStax: The Hydrogen Atom
-                </a>{" "}
-                — equation, separation, and probability.
-              </li>
-              <li>
-                <a
-                  className="text-action underline"
-                  href="https://openstax.org/books/chemistry-atoms-first-2e/pages/3-3-development-of-quantum-theory"
-                >
-                  OpenStax: Development of Quantum Theory
-                </a>{" "}
-                — orbital families and quantum numbers.
-              </li>
-              <li>
-                <a
-                  className="text-action underline"
-                  href="https://physics.nist.gov/PhysRefData/Handbook/Tables/ceriumtable1.htm"
-                >
-                  NIST: Cerium
-                </a>{" "}
-                and{" "}
-                <a
-                  className="text-action underline"
-                  href="https://physics.nist.gov/PhysRefData/Handbook/Tables/lanthanumtable1.htm"
-                >
-                  NIST: Lanthanum
-                </a>{" "}
-                — measured ground-state configurations.
-              </li>
-            </ul>
-          </Section>
-        </div>
+                OpenStax: Development of Quantum Theory
+              </a>{" "}
+              — orbital families and quantum numbers.
+            </li>
+            <li>
+              <a
+                className="text-action underline"
+                href="https://physics.nist.gov/PhysRefData/Handbook/Tables/ceriumtable1.htm"
+              >
+                NIST: Cerium
+              </a>{" "}
+              and{" "}
+              <a
+                className="text-action underline"
+                href="https://physics.nist.gov/PhysRefData/Handbook/Tables/lanthanumtable1.htm"
+              >
+                NIST: Lanthanum
+              </a>{" "}
+              — measured ground-state configurations.
+            </li>
+          </ul>
+        </Section>
       </div>
     </div>
   );
