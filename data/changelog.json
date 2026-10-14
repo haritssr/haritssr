@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "80e074b1031dba252a5b66eade52aa1769dc60c5",
+      "date": "2026-10-14T16:33:08+07:00",
+      "subject": "feat(NavigationCards): share counted cards across home and experiments"
+    },
+    {
       "hash": "69d9c49f07b6200398d36b1fee4cc9d7152a3faa",
       "date": "2026-10-14T16:32:26+07:00",
       "subject": "refactor(Design): simplify guidance and adjust example box padding"

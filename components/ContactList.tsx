@@ -1,5 +1,3 @@
-import { SITE_URL } from "@/utils/site";
-
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
 // Example: "https://www.example.com" becomes "example.com" after replacement.
 const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
@@ -7,16 +5,12 @@ const urlPrefixPattern = /^https?:\/\/(?<www>www\.)?/u;
 const contacts = [
   { link: "haritssr@gmail.com", name: "GMail" },
   {
-    link: "https://www.github.com/haritssr",
-    name: "GitHub",
-  },
-  {
     link: "https://www.x.com/haritssr",
     name: "X",
   },
   {
-    link: SITE_URL,
-    name: "Website",
+    link: "https://www.github.com/haritssr",
+    name: "GitHub",
   },
 ];
 

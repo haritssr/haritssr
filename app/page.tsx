@@ -9,6 +9,7 @@ import Image from "next/image";
 
 import ContactList from "@/components/ContactList";
 import ExternalLink from "@/components/ExternalLink";
+import InternalLink from "@/components/InternalLink";
 import InternalLinkCardWithNumber from "@/components/InternalLinkCardWithNumber";
 import { PageStructuredData } from "@/components/StructuredData";
 import { ProjectsData } from "@/data/ProjectsData";
@@ -113,58 +114,48 @@ function HomeNavigation() {
 
 function ProfileSection() {
   return (
-    <section aria-label="About Harits Syah" id="Identity">
-      <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2 xl:grid-cols-4">
-        <div className="min-w-0">
-          <Image
-            alt={profileName}
-            blurDataURL="/images/blur.jpg"
-            className="size-20 rounded-full"
-            height="100"
-            priority
-            src="/images/blur.jpg"
-            width="100"
+    <section
+      aria-label="About Harits Syah"
+      className="space-y-6 md:grid md:grid-cols-4 md:items-start md:gap-8 md:space-y-0"
+      id="Identity"
+    >
+      <Image
+        alt={profileName}
+        blurDataURL="/images/blur.jpg"
+        className="size-25 rounded-full md:col-start-4 md:row-start-1 md:self-start md:justify-self-end"
+        height="100"
+        priority
+        src="/images/blur.jpg"
+        width="100"
+      />
+      <ul
+        aria-label="Profile and contact details"
+        className="text-foreground/70 marker:text-muted list-outside list-disc space-y-3 pl-5 wrap-break-word md:col-span-3 md:col-start-1 md:row-start-1"
+      >
+        <li>
+          <span className="text-foreground">Product Engineer</span> &{" "}
+          <span className="text-foreground">Science Teacher</span> at{" "}
+          <ExternalLink
+            href="https://www.harimaki.com"
+            name="Harimaki"
+            showArrow={false}
           />
-        </div>
-        <ul
-          aria-label="Profile details"
-          className="text-foreground/70 marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5"
-        >
-          <li>Web Product Engineer</li>
-          <li>Math-Physics Teacher</li>
-          <li>
-            <ExternalLink
-              href="https://www.harimaki.com"
-              name="Harimaki Studio"
-            />
-          </li>
-          <li>Tangerang, Indonesia</li>
-          <li>
-            Interests: Web, JS, TS, Effect, React, Next.js, Functional
-            Programming, Math, Physics, and Education.
-          </li>
-        </ul>
-        <ul
-          aria-label="Personal notes"
-          className="text-foreground/70 marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5"
-        >
-          <li id="misc">Touch typist, ±90 WPM.</li>
-          <li>Former chess player, ±2000 Elo.</li>
-          <li>
-            <span className="text-foreground">haritssr</span> ={" "}
-            <span className="text-foreground">harits</span>{" "}
-            <span className="text-foreground">s</span>yah{" "}
-            <span className="text-foreground">r</span>ahmatullah
-          </li>
-          <li>I develop with Codex CLI in Zed.</li>
-        </ul>
-        <ul
-          aria-label="Contact links"
-          className="text-foreground/70 marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
-        >
-          <ContactList />
-        </ul>
-      </div>
+        </li>
+        <li>Tangerang, Indonesia</li>
+        <li className="list-none">
+          <ul
+            aria-label="Contact links"
+            className="list-outside list-disc space-y-3"
+          >
+            <ContactList />
+          </ul>
+        </li>
+        <li>
+          <InternalLink href="/more" variant="inline">
+            More
+          </InternalLink>
+        </li>
+      </ul>
     </section>
   );
 }

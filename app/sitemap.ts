@@ -15,6 +15,7 @@ const staticRoutes = [
   "/experiments",
   "/writing",
   "/design",
+  "/more",
   commitsRoute.route,
   apiRoute.route,
 ];

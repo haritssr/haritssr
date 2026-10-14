@@ -3,11 +3,13 @@ export default function ExternalLink({
   href,
   big,
   size,
+  showArrow = true,
 }: {
   name: string;
   href: string;
   big?: boolean;
   size?: "base" | "inherit" | "lg";
+  showArrow?: boolean;
 }) {
   const resolvedSize = size ?? (big === true ? "lg" : "base");
   const textClass = {
@@ -26,21 +28,23 @@ export default function ExternalLink({
     >
       <span>
         <span className={textClass}>{name}</span>
-        <svg
-          aria-hidden="true"
-          className="text-action group-hover:text-action-hover ml-0.5 inline size-4 align-middle"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M6 18 18 6M7 6h11v11"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        {showArrow ? (
+          <svg
+            aria-hidden="true"
+            className="text-action group-hover:text-action-hover ml-0.5 inline size-4.5 align-middle"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 18 18 6M7 6h11v11"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ) : null}
       </span>
     </a>
   );

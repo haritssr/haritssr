@@ -23,6 +23,12 @@ export const commitsRoute: RouteDoc = {
 
 export const navigationRoutes: readonly RouteDoc[] = [
   {
+    route: "/more",
+    title: "More",
+    description: "Interests and personal notes about Harits Syah",
+    group: "Navigation",
+  },
+  {
     route: "/",
     title: "Home",
     description: "Harits Syah — developer, teacher, and founder",
