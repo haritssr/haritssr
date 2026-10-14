@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "268256728d912b275255b9d264db4ab93772631d",
+      "date": "2026-10-15T01:33:56+07:00",
+      "subject": "refactor(IndexCard): rename navigation card and simplify design examples"
+    },
+    {
       "hash": "541425a9146f714d24ee6713fd4bafac3f7282f6",
       "date": "2026-10-15T01:33:55+07:00",
       "subject": "fix(LogoDemo): show Harimaki and remove Haris Studio"

@@ -62,9 +62,11 @@ export default function useArticleContentsNavigation(minimumSections: number) {
     entry: ContentsEntry;
     focus: boolean;
   } | null>(null);
+  const pendingAction = useRef<(() => void) | null>(null);
   const navigationFrame = useRef(0);
   const cancelNavigation = useCallback(() => {
     pendingNavigation.current = null;
+    pendingAction.current = null;
     cancelAnimationFrame(navigationFrame.current);
   }, []);
   const subscribeToDesktop = useCallback(
@@ -92,7 +94,8 @@ export default function useArticleContentsNavigation(minimumSections: number) {
 
   const finishClose = useCallback((isOpen: boolean) => {
     const navigation = pendingNavigation.current;
-    if (isOpen || !navigation) {
+    const action = pendingAction.current;
+    if (isOpen || (!navigation && !action)) {
       return;
     }
 
@@ -101,11 +104,19 @@ export default function useArticleContentsNavigation(minimumSections: number) {
     // Navigate on the following frame, once focus and scroll locking settle.
     navigationFrame.current = requestAnimationFrame(() => {
       navigationFrame.current = requestAnimationFrame(() => {
-        if (pendingNavigation.current !== navigation) {
+        if (
+          pendingNavigation.current !== navigation ||
+          pendingAction.current !== action
+        ) {
           return;
         }
         pendingNavigation.current = null;
-        navigateToEntry(navigation.entry, navigation.focus);
+        pendingAction.current = null;
+        if (navigation) {
+          navigateToEntry(navigation.entry, navigation.focus);
+        } else {
+          action?.();
+        }
       });
     });
   }, []);
@@ -138,12 +149,21 @@ export default function useArticleContentsNavigation(minimumSections: number) {
   );
 
   function selectEntry(entry: ContentsEntry, focus: boolean) {
+    cancelNavigation();
     pendingNavigation.current = { entry, focus };
     setOpenView(null);
   }
 
+  function runAfterClose(action: () => void) {
+    cancelNavigation();
+    pendingAction.current = action;
+    setOpenView(null);
+  }
+
   function finalFocus() {
-    return pendingNavigation.current ? false : triggerRef.current;
+    return pendingNavigation.current || pendingAction.current
+      ? false
+      : triggerRef.current;
   }
 
   return {
@@ -156,6 +176,7 @@ export default function useArticleContentsNavigation(minimumSections: number) {
     finishClose,
     finalFocus,
     selectEntry,
+    runAfterClose,
     onOutlineChange,
   };
 }

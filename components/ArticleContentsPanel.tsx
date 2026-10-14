@@ -4,7 +4,7 @@ import "katex/dist/katex.min.css";
 import { Popover } from "@base-ui/react/popover";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { memo } from "react";
-import type { MouseEvent, Ref } from "react";
+import type { MouseEvent, ReactNode, Ref } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { Heading } from "react-aria-components/Heading";
 import {
@@ -47,7 +47,6 @@ function ContentsList({
   depth = 0,
 }: ContentsListProps) {
   const entryColor = depth === 0 ? "text-foreground!" : "text-foreground/65!";
-  const markerStyle = depth === 0 ? "list-disc" : "list-['-_']";
 
   function select(event: MouseEvent<HTMLAnchorElement>, entry: ContentsEntry) {
     if (
@@ -64,14 +63,12 @@ function ContentsList({
   }
 
   return (
-    <ul
-      className={`marker:text-foreground/70 space-y-2 pl-4 [&_li]:space-y-2 ${markerStyle}`}
-    >
+    <ol className="marker:text-foreground/70 list-decimal space-y-2 pl-5 [&_li]:space-y-2">
       {entries.map((entry) => (
         <li key={entry.id}>
           <InternalLink
             aria-current={activeId === entry.id ? "location" : undefined}
-            className={`focus-visible:outline-action block! w-full! rounded-lg text-sm! leading-5! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
+            className={`focus-visible:outline-action block! w-full! rounded-lg text-base leading-5! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
             href={`#${encodeURIComponent(entry.id)}`}
             onClick={(event) => {
               select(event, entry);
@@ -92,7 +89,7 @@ function ContentsList({
           ) : null}
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }
 
@@ -103,10 +100,12 @@ export default function ArticleContentsPanel({
   finalFocus,
   onSelect,
   sheetRef,
+  mobileActions,
 }: ContentsListProps & {
   desktop: boolean;
   finalFocus: () => false | HTMLElement | null;
   sheetRef: Ref<HTMLDivElement>;
+  mobileActions?: ReactNode;
 }) {
   const closeIcon = (
     <XMarkIcon aria-hidden="true" className="pointer-events-none size-5" />
@@ -197,6 +196,11 @@ export default function ArticleContentsPanel({
             aria-hidden="true"
             className="bg-border mx-auto mt-3 h-1 w-10 shrink-0 rounded-full"
           />
+          {mobileActions !== undefined && mobileActions !== null ? (
+            <div className="flex shrink-0 justify-end px-3 pt-3 pb-1">
+              {mobileActions}
+            </div>
+          ) : null}
           {content}
         </SheetContent>
       </Sheet>

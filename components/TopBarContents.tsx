@@ -3,10 +3,12 @@
 import { Popover } from "@base-ui/react/popover";
 import { ListBulletIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { SheetTrigger } from "react-aria-components/Sheet";
 
+import TopBarActions from "@/components/TopBarActions";
+import { useGlobalSearch } from "@/components/TopBarSearch";
 import useArticleContentsNavigation from "@/components/useArticleContentsNavigation";
 import useArticleOutline, {
   useActiveArticleSection,
@@ -16,8 +18,38 @@ const ContentsPanel = dynamic(
   async () => await import("./ArticleContentsPanel")
 );
 
-export default function TopBarContents() {
+const MOBILE_QUERY = "(width < 40rem)";
+
+function subscribeToMobile(onChange: () => void) {
+  const media = window.matchMedia(MOBILE_QUERY);
+  media.addEventListener("change", onChange);
+  return () => {
+    media.removeEventListener("change", onChange);
+  };
+}
+
+function getMobileSnapshot() {
+  return window.matchMedia(MOBILE_QUERY).matches;
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+export default function TopBarContents({
+  pathname,
+  compact,
+}: {
+  pathname: string;
+  compact: boolean;
+}) {
   const mainRef = useRef<HTMLElement>(null);
+  const mobile = useSyncExternalStore(
+    subscribeToMobile,
+    getMobileSnapshot,
+    getServerSnapshot
+  );
+  const { openSearch } = useGlobalSearch();
 
   useEffect(() => {
     mainRef.current = document.querySelector<HTMLElement>("#main-content");
@@ -32,14 +64,16 @@ export default function TopBarContents() {
     finishClose,
     finalFocus,
     selectEntry,
+    runAfterClose,
     onOutlineChange,
   } = useArticleContentsNavigation(1);
   const outline = useArticleOutline(mainRef, "Contents", onOutlineChange);
   const visible = outline !== null && outline.sections.length > 0;
   const activeId = useActiveArticleSection(outline, visible);
+  const collapseActions = compact && mobile && visible;
 
   if (!visible || outline === null) {
-    return null;
+    return <TopBarActions pathname={pathname} />;
   }
 
   const triggerClassName =
@@ -55,50 +89,68 @@ export default function TopBarContents() {
       finalFocus={finalFocus}
       sheetRef={sheetRef}
       onSelect={selectEntry}
+      mobileActions={
+        collapseActions ? (
+          <TopBarActions
+            pathname={pathname}
+            onSearch={(trigger) => {
+              runAfterClose(() => {
+                openSearch(triggerRef.current ?? trigger);
+              });
+            }}
+          />
+        ) : undefined
+      }
     />
   ) : null;
 
   return (
-    <div className="floating-surface flex shrink-0 items-center rounded-full border saturate-150 backdrop-blur-lg">
-      {desktop ? (
-        <Popover.Root
-          modal={false}
-          onOpenChange={changeOpen}
-          onOpenChangeComplete={finishClose}
-          open={visible && open}
-        >
-          <Popover.Trigger
-            render={
-              <button
-                type="button"
-                aria-label="Table of Contents"
-                title="Table of Contents"
-                className={triggerClassName}
-                data-article-toc-trigger=""
-                ref={triggerRef}
-              />
-            }
+    <>
+      {collapseActions ? null : <TopBarActions pathname={pathname} />}
+      <div
+        className="floating-surface data-[open]:border-action flex shrink-0 items-center rounded-full border saturate-150 backdrop-blur-lg"
+        data-open={open ? "" : undefined}
+      >
+        {desktop ? (
+          <Popover.Root
+            modal={false}
+            onOpenChange={changeOpen}
+            onOpenChangeComplete={finishClose}
+            open={visible && open}
           >
-            {triggerContent}
-          </Popover.Trigger>
-          {panel}
-        </Popover.Root>
-      ) : (
-        <SheetTrigger isOpen={visible && open} onOpenChange={changeOpen}>
-          <AriaButton
-            aria-label="Table of Contents"
-            className={triggerClassName}
-            data-article-toc-trigger=""
-            ref={triggerRef}
-            render={(props) => (
-              <button {...props} title="Table of Contents" type="button" />
-            )}
-          >
-            {triggerContent}
-          </AriaButton>
-          {panel}
-        </SheetTrigger>
-      )}
-    </div>
+            <Popover.Trigger
+              render={
+                <button
+                  type="button"
+                  aria-label="Table of Contents"
+                  title="Table of Contents"
+                  className={triggerClassName}
+                  data-article-toc-trigger=""
+                  ref={triggerRef}
+                />
+              }
+            >
+              {triggerContent}
+            </Popover.Trigger>
+            {panel}
+          </Popover.Root>
+        ) : (
+          <SheetTrigger isOpen={visible && open} onOpenChange={changeOpen}>
+            <AriaButton
+              aria-label="Table of Contents"
+              className={triggerClassName}
+              data-article-toc-trigger=""
+              ref={triggerRef}
+              render={(props) => (
+                <button {...props} title="Table of Contents" type="button" />
+              )}
+            >
+              {triggerContent}
+            </AriaButton>
+            {panel}
+          </SheetTrigger>
+        )}
+      </div>
+    </>
   );
 }

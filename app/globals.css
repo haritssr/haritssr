@@ -7,7 +7,7 @@
 }
 
 @utility floating-surface {
-  background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+  background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
   border-color: var(--floating-border-color);
   @apply shadow-floating transition-[background-color,box-shadow] duration-150;
 

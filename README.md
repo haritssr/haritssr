@@ -21,8 +21,11 @@ markers used by `useScrolledPageHeader`. Returning to the title restores the
 normal navigation. Nested pages with visible content headings (`h2`–`h6`, including
 MDX headings and shared `SectionHeading` components) show an icon-only
 Contents button in its own pill to the right of the top bar actions. Contents opens
-below the trigger on desktop and in a sheet on mobile. Home and first-level
-routes omit the Contents button. Writing and experiment
+below the trigger on desktop and in a sheet on mobile. Below 640px, once the
+scrolling title appears, Search, Theme, and GitHub move into their existing pill
+below the sheet's grab handle. Pages without contents keep these actions in the
+top bar. Search waits for the sheet to close; its shortcut remains available.
+Home and first-level routes omit the Contents button. Writing and experiment
 articles show their floating back-to-top control when scrolling upward. It
 hides while scrolling downward and at the top of the page.
 

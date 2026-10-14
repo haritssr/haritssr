@@ -94,9 +94,16 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
         event.preventDefault();
         event.stopPropagation();
         if (!event.repeat) {
+          const trigger = topBarTriggerRef.current;
+          if (trigger?.closest('[role="dialog"]')) {
+            trigger.click();
+            return;
+          }
           prepareSearch();
           setHasOpened(true);
-          activeTriggerRef.current = topBarTriggerRef.current;
+          activeTriggerRef.current =
+            topBarTriggerRef.current ??
+            document.querySelector<HTMLElement>("[data-article-toc-trigger]");
           setQuery("");
           setOpen((previous) => !previous);
         }
@@ -134,7 +141,7 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
   );
 }
 
-function useGlobalSearch() {
+export function useGlobalSearch() {
   const context = useContext(GlobalSearchContext);
   if (!context) {
     throw new Error("Global search must be used inside GlobalSearchProvider");
@@ -142,7 +149,11 @@ function useGlobalSearch() {
   return context;
 }
 
-export default function TopBarSearch() {
+export default function TopBarSearch({
+  onSearch,
+}: {
+  onSearch?: (trigger: HTMLButtonElement) => void;
+}) {
   const { hasOpened, open, openSearch, prepareSearch, topBarTriggerRef } =
     useGlobalSearch();
 
@@ -155,7 +166,11 @@ export default function TopBarSearch() {
       aria-label="Search the site"
       className="text-foreground hover:text-searchicon-hover flex size-9 cursor-pointer items-center justify-center rounded-lg active:scale-[0.98]"
       onClick={(event) => {
-        openSearch(event.currentTarget);
+        if (onSearch) {
+          onSearch(event.currentTarget);
+        } else {
+          openSearch(event.currentTarget);
+        }
       }}
       onFocus={prepareSearch}
       onPointerEnter={prepareSearch}

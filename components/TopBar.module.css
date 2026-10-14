@@ -2,10 +2,12 @@
   box-shadow: none;
 }
 
-.navigation :global(.floating-surface) {
+.navigation :global(.floating-surface),
+.actionPill {
   background-color: color-mix(in srgb, var(--color-surface) 30%, transparent);
 }
 
-.navigation :global(.floating-surface):hover {
+.navigation :global(.floating-surface):hover,
+.actionPill:hover {
   background-color: color-mix(in srgb, var(--color-surface) 40%, transparent);
 }

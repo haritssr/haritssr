@@ -6,12 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 import BackButton from "@/components/BackButton";
-import GitHubIcon from "@/components/GitHubIcon";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
+import TopBarActions from "@/components/TopBarActions";
 import TopBarContents from "@/components/TopBarContents";
-import TopBarSearch from "@/components/TopBarSearch";
 import useScrolledPageHeader from "@/components/useScrolledPageHeader";
-import pageSourceUrl from "@/utils/pageSourceUrl";
 
 import styles from "./TopBar.module.css";
 
@@ -50,7 +47,7 @@ export default function TopBar() {
               variant="topbar"
             />
             <div
-              className="floating-surface text-foreground/90 w-fit min-w-0 rounded-full border px-4 py-1.5 font-medium backdrop-blur-lg sm:absolute sm:left-1/2 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
+              className="floating-surface text-action mx-auto w-fit min-w-0 rounded-full border px-4 py-1.5 backdrop-blur-lg sm:absolute sm:left-1/2 sm:mx-0 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
               title={header.title}
             >
               <p className="truncate">{header.title}</p>
@@ -70,39 +67,33 @@ export default function TopBar() {
             {pathname === "/" ? null : <NavigationLinks />}
           </>
         )}
-        <HeaderActions pathname={pathname} />
+        <HeaderActions
+          key={pathname}
+          pathname={pathname}
+          compact={header !== null}
+        />
       </div>
     </nav>
   );
 }
 
-function HeaderActions({ pathname }: { pathname: string }) {
+function HeaderActions({
+  pathname,
+  compact,
+}: {
+  pathname: string;
+  compact: boolean;
+}) {
   const isNestedRoute = pathname.split("/").filter(Boolean).length > 1;
 
   return (
     <div className="flex shrink-0 items-center gap-2">
-      <div className="floating-surface hover:bg-surface/95 flex items-center space-x-1 rounded-full border saturate-150 backdrop-blur-lg">
-        <TopBarSearch />
-        <ThemeSwitcher />
-        <GitHubLink pathname={pathname} />
-      </div>
-      {isNestedRoute ? <TopBarContents key={pathname} /> : null}
+      {isNestedRoute ? (
+        <TopBarContents pathname={pathname} compact={compact} />
+      ) : (
+        <TopBarActions pathname={pathname} />
+      )}
     </div>
-  );
-}
-
-function GitHubLink({ pathname }: { pathname: string }) {
-  return (
-    <a
-      aria-label="View this page's source on GitHub (opens in a new tab)"
-      className="focus-visible:outline-action flex size-9 items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98]"
-      href={pageSourceUrl(pathname)}
-      rel="noopener noreferrer"
-      target="_blank"
-      title="View page source on GitHub"
-    >
-      <GitHubIcon aria-hidden="true" className="text-foreground size-4.5" />
-    </a>
   );
 }
 
