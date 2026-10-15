@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f20a4167bd5fc14728233a16764146991dc36f9b",
+      "date": "2026-10-15T15:01:15+07:00",
+      "subject": "refactor(navigation): move back and share controls into the top bar"
+    },
+    {
       "hash": "815f16757e071bea33463edbd3ba3e671ed79167",
       "date": "2026-10-15T15:01:05+07:00",
       "subject": "refactor(Table): share header spacing and improve symbol readability"

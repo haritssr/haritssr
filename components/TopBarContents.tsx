@@ -77,7 +77,7 @@ export default function TopBarContents({
   }
 
   const triggerClassName =
-    "focus-visible:outline-action text-foreground flex size-10 sm:size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2";
+    "focus-visible:outline-action text-foreground flex size-10 sm:size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:[&>svg]:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2";
   const triggerContent = (
     <ListBulletIcon aria-hidden="true" className="pointer-events-none size-5" />
   );

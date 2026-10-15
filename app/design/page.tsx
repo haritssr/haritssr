@@ -343,14 +343,7 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="BackButton" title="Back Button">
-            <div className="mb-5">
-              <BackButton href="/" name="Previous Page" />
-            </div>
-            <BackButton
-              href="/experiments"
-              name="Experiments"
-              variant="topbar"
-            />
+            <BackButton href="/experiments" name="Experiments" />
           </Box>
 
           <Box name="Tooltip" title="Tooltip">

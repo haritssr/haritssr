@@ -20,7 +20,7 @@ export default function TopBarActions({
       <TopBarShare />
       <a
         aria-label="View this page's source on GitHub (opens in a new tab)"
-        className="focus-visible:outline-action flex size-10 items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 sm:size-9"
+        className="focus-visible:outline-action flex size-10 items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 sm:size-9 hover:[&>svg]:opacity-50"
         href={pageSourceUrl(pathname)}
         rel="noopener noreferrer"
         target="_blank"

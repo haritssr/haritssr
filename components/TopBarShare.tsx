@@ -43,7 +43,7 @@ function ShareButton() {
     <button
       aria-label="Share this page"
       title="Share this page"
-      className="focus-visible:outline-action flex size-10 cursor-pointer items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 sm:size-9"
+      className="focus-visible:outline-action flex size-10 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 sm:size-9 hover:[&>svg]:opacity-50"
       onClick={() => {
         void handleShare();
       }}

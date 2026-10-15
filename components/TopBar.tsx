@@ -41,7 +41,7 @@ export default function TopBar() {
       <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-4 xl:px-0">
         {pathname === "/" ? (
           <Link
-            className="floating-surface text-foreground/90 hover:text-foreground/80 flex min-h-10 min-w-0 items-center border py-1.5 pr-3 pl-3.5 sm:min-h-0"
+            className="floating-surface text-foreground/90 flex min-h-10 min-w-0 items-center border py-1.5 pr-3 pl-3.5 sm:min-h-0 hover:[&>span]:opacity-50"
             href="/"
           >
             <span className="truncate">Harits Syah</span>
@@ -51,7 +51,6 @@ export default function TopBar() {
             compact={scrolled}
             href={header?.href ?? "/"}
             name={header?.backLabel ?? "Home"}
-            variant="topbar"
           />
         )}
         {pathname !== "/" && header?.scrolled === true ? (
@@ -106,7 +105,7 @@ function NavigationLinks() {
       {destinations.map((destination) => (
         <li key={destination}>
           <Link
-            className={` ${currentSection === destination ? "text-action" : "text-foreground/90 hover:text-foreground/50"} rounded-full px-3 py-1`}
+            className={` ${currentSection === destination ? "text-action" : "text-foreground/90"} rounded-full px-3 py-1 hover:opacity-50`}
             aria-current={currentSection === destination ? "page" : undefined}
             href={`/${destination}`}
           >

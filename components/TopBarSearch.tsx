@@ -164,7 +164,7 @@ export default function TopBarSearch({
       aria-haspopup="dialog"
       aria-keyshortcuts="Meta+P Control+P"
       aria-label="Search the site"
-      className="text-foreground hover:text-searchicon-hover flex size-10 cursor-pointer items-center justify-center rounded-lg sm:size-9"
+      className="text-foreground flex size-10 cursor-pointer items-center justify-center rounded-lg sm:size-9 hover:[&>svg]:opacity-50"
       onClick={(event) => {
         if (onSearch) {
           onSearch(event.currentTarget);
