@@ -132,7 +132,7 @@ export default function PlaneGeometryPage() {
                 ].map((heading) => (
                   <th
                     aria-label={heading}
-                    className="px-4 py-3 text-left font-medium"
+                    className="px-4 text-left font-medium"
                     key={heading}
                     scope="col"
                   >

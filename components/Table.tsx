@@ -16,7 +16,7 @@ export default function Table({
     >
       <div className="scrollbar-subtle w-full overflow-x-auto">
         <table
-          className={`divide-border text-foreground/90 w-full border-collapse divide-y text-sm ${className}`}
+          className={`divide-border text-foreground/90 w-full border-collapse divide-y text-sm [&>thead>tr>th]:py-2 ${className}`}
           {...props}
         >
           {children}

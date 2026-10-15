@@ -112,16 +112,16 @@ function VariableTable({ equation }: { equation: PhysicsEquation }) {
       </caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
-          <th className="px-3 py-2 text-left font-normal" scope="col">
+          <th className="px-3 text-left font-normal" scope="col">
             Symbol
           </th>
-          <th className="px-3 py-2 text-left font-normal" scope="col">
+          <th className="px-3 text-left font-normal" scope="col">
             Meaning
           </th>
-          <th className="px-3 py-2 text-left font-normal" scope="col">
+          <th className="px-3 text-left font-normal" scope="col">
             SI unit
           </th>
-          <th className="px-3 py-2 text-left font-normal" scope="col">
+          <th className="px-3 text-left font-normal" scope="col">
             Constant value
           </th>
         </tr>

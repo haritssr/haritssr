@@ -76,10 +76,10 @@ export default function ModelSuitabilityPage() {
               </caption>
               <thead>
                 <tr className="divide-border bg-foreground/5 divide-x">
-                  <th className="px-3 py-2 text-left font-medium" scope="col">
+                  <th className="px-3 text-left font-medium" scope="col">
                     Commit type
                   </th>
-                  <th className="px-3 py-2 text-right font-medium" scope="col">
+                  <th className="px-3 text-right font-medium" scope="col">
                     Number
                   </th>
                 </tr>

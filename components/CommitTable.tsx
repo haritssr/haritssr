@@ -51,10 +51,10 @@ export function ModelSuitabilityLegend() {
       <caption className="sr-only">Model and effort color meanings</caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
-          <th className="px-3 py-2 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Model
           </th>
-          <th className="px-3 py-2 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Effort
           </th>
         </tr>
@@ -89,24 +89,21 @@ export default function CommitTable({
       <caption className="sr-only">{caption}</caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
-          <th className="px-3 py-2 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Message
           </th>
-          <th
-            className="w-28 px-3 py-2 text-left font-medium sm:w-32"
-            scope="col"
-          >
+          <th className="w-28 px-3 text-left font-medium sm:w-32" scope="col">
             Date
           </th>
-          <th className="w-20 px-3 py-2 text-left font-medium" scope="col">
+          <th className="w-20 px-3 text-left font-medium" scope="col">
             Time
           </th>
           {models ? (
             <>
-              <th className="w-28 px-3 py-2 text-left font-medium" scope="col">
+              <th className="w-28 px-3 text-left font-medium" scope="col">
                 Model
               </th>
-              <th className="w-24 px-3 py-2 text-left font-medium" scope="col">
+              <th className="w-24 px-3 text-left font-medium" scope="col">
                 Effort
               </th>
             </>

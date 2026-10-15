@@ -1035,7 +1035,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Explore math notation and what KaTeX can render.",
         tags: ["notation", "katex", "learning"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
+        updatedAt: [
+          "2026-10-10",
+          "2026-10-11",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-15",
+        ],
       },
       {
         slug: "high-school-symbols",
@@ -1044,7 +1050,13 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Cari simbol matematika dan fisika SMA.",
         tags: ["notation", "katex", "physics", "learning", "indonesia"],
         createdAt: "2026-10-10",
-        updatedAt: ["2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"],
+        updatedAt: [
+          "2026-10-10",
+          "2026-10-11",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-15",
+        ],
       },
       {
         slug: "plane-geometry",
@@ -1053,7 +1065,7 @@ export const ExperimentsData: readonly ExperimentDomain[] = [
         description: "Find area and perimeter formulas for plane shapes.",
         tags: ["geometry", "shapes", "area", "perimeter", "reference"],
         createdAt: "2026-10-14",
-        updatedAt: ["2026-10-14"],
+        updatedAt: ["2026-10-14", "2026-10-15"],
       },
       {
         slug: "circle",

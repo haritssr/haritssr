@@ -391,29 +391,29 @@ function UnitsTable({ caption, showFormulas = false, units }: UnitsTableProps) {
       <caption className="sr-only">{caption}</caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
-          <th className="w-12 px-3 py-2 text-center font-medium" scope="col">
+          <th className="w-12 px-3 text-center font-medium" scope="col">
             No.
           </th>
-          <th className="px-3 py-2 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Quantity
           </th>
-          <th className="w-20 px-2 py-2 text-left font-medium" scope="col">
+          <th className="w-20 px-2 text-left font-medium" scope="col">
             Quantity
             <br />
             symbol
           </th>
           {showFormulas ? (
-            <th className="px-3 py-2 text-left font-medium" scope="col">
+            <th className="px-3 text-left font-medium" scope="col">
               Formula
             </th>
           ) : null}
-          <th className="px-3 py-2 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Unit
           </th>
-          <th className="px-3 py-2 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Unit symbol
           </th>
-          <th className="px-3 py-2 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Dimension
           </th>
         </tr>

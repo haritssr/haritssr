@@ -129,16 +129,16 @@ export function VocabularyGuide() {
         </caption>
         <thead>
           <tr className="divide-border bg-foreground/5 divide-x">
-            <th className="px-3 py-2 text-left font-medium" scope="col">
+            <th className="px-3 text-left font-medium" scope="col">
               Symbol
             </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
+            <th className="px-3 text-left font-medium" scope="col">
               Term
             </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
+            <th className="px-3 text-left font-medium" scope="col">
               Meaning
             </th>
-            <th className="px-3 py-2 text-left font-medium" scope="col">
+            <th className="px-3 text-left font-medium" scope="col">
               Example
             </th>
           </tr>

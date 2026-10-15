@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "5a7c575a639a473fea8731978af7dd8a7c2df6d8",
+      "date": "2026-10-15T15:00:36+07:00",
+      "subject": "style(ui): unify floating pills and refine shared visual tokens"
+    },
+    {
       "hash": "c6fb1f30c53c0280073ed1f3f43a52f68e21d0a6",
       "date": "2026-10-15T10:28:43+07:00",
       "subject": "style(WritingTable): remove row hover background"

@@ -21,16 +21,16 @@ function ChapterTable() {
       </caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
-          <th className="w-64 px-3 py-3 text-left font-medium" scope="col">
+          <th className="w-64 px-3 text-left font-medium" scope="col">
             Chapter
           </th>
-          <th className="px-3 py-3 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Display notation?
           </th>
-          <th className="w-36 px-3 py-3 text-left font-medium" scope="col">
+          <th className="w-36 px-3 text-left font-medium" scope="col">
             Calculate or solve?
           </th>
-          <th className="w-72 px-3 py-3 text-left font-medium" scope="col">
+          <th className="w-72 px-3 text-left font-medium" scope="col">
             What needs another tool?
           </th>
         </tr>
@@ -65,16 +65,16 @@ function SharedConceptTable() {
       </caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
-          <th className="w-52 px-3 py-3 text-left font-medium" scope="col">
+          <th className="w-52 px-3 text-left font-medium" scope="col">
             Concept or capability
           </th>
-          <th className="px-3 py-3 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             What can be displayed?
           </th>
-          <th className="px-3 py-3 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Can the renderer perform the task?
           </th>
-          <th className="px-3 py-3 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Additional support
           </th>
         </tr>

@@ -27,34 +27,35 @@ export default function HighSchoolSymbolsPage() {
         <PageDescription>
           Cari simbol matematika dan fisika SMA.
         </PageDescription>
-        <p className="text-muted leading-8">
-          {entryCount} entri dalam {notationGroups.length} kelompok, mencakup
-          materi umum, matematika tingkat lanjut, dan pengayaan. Cakupan serta
-          pilihan simbol dapat berbeda menurut buku dan kurikulum. Huruf yang
-          sama bisa memiliki beberapa arti: baca definisi dan satuannya pada
-          setiap soal.
-        </p>
-        <p className="text-muted max-w-full">
-          Gunakan pencarian halaman di peramban untuk mencari istilah. Pada
-          layar kecil, tabel dapat digeser ke samping. Untuk mencoba menulis
-          rumus sendiri, buka{" "}
-          <InternalLink
-            href="/experiments/mathematics/live-playground"
-            variant="inline"
-          >
-            Live Playground
-          </InternalLink>
-          .
-        </p>
       </ExperimentPageHeader>
       <div className="space-y-20">
         <Section
           title="Cara membaca simbol"
           id="cara-membaca"
-          description="Makna simbol bergantung pada konteks, bentuk huruf, dan satuannya. Perhatikan definisi serta syarat pada setiap contoh."
+          description="Makna simbol bergantung pada konteks, bentuk huruf, dan satuannya.
+          Perhatikan definisi serta syarat pada setiap contoh."
           contentClassName="max-w-3xl space-y-5"
         >
           <ul className="text-muted max-w-full list-disc space-y-3 pl-5">
+            <li>
+              {entryCount} entri dalam {notationGroups.length} kelompok,
+              mencakup materi umum, matematika tingkat lanjut, dan pengayaan.
+              Cakupan serta pilihan simbol dapat berbeda menurut buku dan
+              kurikulum. Huruf yang sama bisa memiliki beberapa arti: baca
+              definisi dan satuannya pada setiap soal.
+            </li>
+            <li>
+              Gunakan pencarian halaman di peramban untuk mencari istilah. Pada
+              layar kecil, tabel dapat digeser ke samping. Untuk mencoba menulis
+              rumus sendiri, buka{" "}
+              <InternalLink
+                href="/experiments/mathematics/live-playground"
+                variant="inline"
+              >
+                Live Playground
+              </InternalLink>
+              .
+            </li>
             <li>
               {katexify("m", false)} dapat berarti massa atau gradien, sedangkan{" "}
               {katexify(String.raw`\mathrm m`, false)} adalah satuan meter.
@@ -155,13 +156,13 @@ function NotationTable({ group }: { group: NotationGroup }) {
       </caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
-          <th className="px-3 py-3 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Simbol
           </th>
-          <th className="px-3 py-3 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             Arti dan cara membaca
           </th>
-          <th className="px-3 py-3 text-left font-medium" scope="col">
+          <th className="px-3 text-left font-medium" scope="col">
             {group.id === "huruf-yunani" ? "Bentuk kecil / varian" : "Contoh"}
           </th>
         </tr>
@@ -173,11 +174,11 @@ function NotationTable({ group }: { group: NotationGroup }) {
               className="px-3 py-3 text-left font-normal whitespace-nowrap"
               scope="row"
             >
-              {katexify(entry.symbol, false)}
+              {katexify(String.raw`\displaystyle ${entry.symbol}`, false)}
             </th>
             <td className="min-w-64 px-3 py-3">{entry.meaning}</td>
             <td className="px-3 py-3 whitespace-nowrap">
-              {katexify(entry.example, false)}
+              {katexify(String.raw`\displaystyle ${entry.example}`, false)}
             </td>
           </tr>
         ))}
