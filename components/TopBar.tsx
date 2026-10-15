@@ -8,6 +8,7 @@ import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 import BackButton from "@/components/BackButton";
 import TopBarActions from "@/components/TopBarActions";
 import TopBarContents from "@/components/TopBarContents";
+import { scrollArticleToTop } from "@/components/useArticleContentsNavigation";
 import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 
 import styles from "./TopBar.module.css";
@@ -18,6 +19,7 @@ export default function TopBar() {
   const pathname = usePathname();
   const navigationRef = useRef<HTMLElement>(null);
   const header = useScrolledPageHeader(pathname, navigationRef);
+  const isNestedRoute = pathname.split("/").filter(Boolean).length > 1;
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -54,12 +56,18 @@ export default function TopBar() {
           />
         )}
         {pathname !== "/" && header?.scrolled === true ? (
-          <div
-            className="floating-surface mr-auto ml-2 flex min-h-10 w-fit min-w-0 items-center border px-4 py-1.5 sm:absolute sm:left-1/2 sm:mx-0 sm:min-h-0 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
+          <Link
+            className={`floating-surface flex min-h-10 w-fit min-w-0 items-center border px-4 py-1.5 sm:absolute sm:left-1/2 sm:mx-0 sm:min-h-0 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2 ${isNestedRoute ? "absolute left-1/2 max-w-[calc(100%-9rem)] -translate-x-1/2" : "mr-auto ml-2"}`}
+            href={pathname}
+            onNavigate={(event) => {
+              event.preventDefault();
+              scrollArticleToTop();
+            }}
+            prefetch={false}
             title={header.title}
           >
             <p className="truncate">{header.title}</p>
-          </div>
+          </Link>
         ) : null}
         {pathname !== "/" && header?.scrolled !== true ? (
           <NavigationLinks />
@@ -95,7 +103,7 @@ function HeaderActions({
 }
 
 function NavigationLinks() {
-  const [, currentSection] = usePathname().split("/");
+  const currentSection = usePathname().split("/")[1] || "home";
 
   return (
     <ul
@@ -105,7 +113,7 @@ function NavigationLinks() {
       {destinations.map((destination) => (
         <li key={destination}>
           <Link
-            className={` ${currentSection === destination ? "text-action" : "text-foreground/90"} rounded-full px-3 py-1 hover:opacity-50`}
+            className={` ${currentSection === destination ? "text-action" : "text-foreground/90 hover:opacity-50"} rounded-full px-3 py-1`}
             aria-current={currentSection === destination ? "page" : undefined}
             href={`/${destination}`}
           >

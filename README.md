@@ -4,9 +4,13 @@
 - [Design](https://haritssr.com/design): Design system reference.
 - [More](https://haritssr.com/more): Interests and personal notes.
 - [Commits](https://haritssr.com/commits): Commit history and activity.
-  Model suitability lives at `/commits/2026-10-11`; the dated review at
+  Model suitability lives at `/commits/2026-10-11` and `/commits/2026-10-15`;
+  the dated review at
   `/commits/2026-10-14` covers a fixed set of committed changes in Jakarta time.
-  Both pages are linked below the timeline and included in search and the sitemap.
+  All three pages are linked below the timeline and included in search and
+  the sitemap.
+  The October 15 assessment covers a fixed set of committed changes; model and
+  effort labels are editorial estimates, not recorded model usage.
 
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
 - Subscribe to the [RSS feed](https://haritssr.com/feed.xml).
@@ -30,8 +34,10 @@ truncate to keep the controls on one row.
 position. `PageTitle` provides the title marker: once the title scrolls behind the
 top bar, it replaces the center navigation. Returning to the title restores center
 navigation while keeping the back button visible.
-On mobile, the scrolling title sits 16px after the back pill, matching the 16px
-screen inset. Desktop keeps the title centered.
+On mobile article pages, the scrolling title is centered between the screen
+edges, with its width capped to leave room for the back and Contents pills.
+Other mobile pages keep the title after the back pill. Desktop keeps the title
+centered.
 
 Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
 shared `SectionHeading` components) show an icon-only
