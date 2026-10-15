@@ -14,8 +14,9 @@ The Next.js mark omits the enclosing disk so it has no circular backplate.
 The KaTeX hummingbird is a simplified vector interpretation of the existing
 site icon. Physics, Mathematics, and User Interface are custom SVG illustrations.
 These assets have transparent backgrounds; the lab icon component colors
-monochrome and science icons through the site's theme tokens.
+monochrome and domain icons through the site's theme tokens. User Interface uses
+a simple panel-layout icon in `pink-500`.
 
 The GitHub marks in the header and contact card use the shared local
 `GitHubIcon` SVG component, based on the Simple Icons GitHub mark (CC0).
-Archived experiment marks are retained only for the discontinued history cards.
+Archived lab marks are retained only for the discontinued history cards.

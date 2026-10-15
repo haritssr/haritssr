@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "0f68ff4a3a9ae7a5cfea6a1856ee9c8165e6bd02",
+      "date": "2026-10-15T19:56:02+07:00",
+      "subject": "feat(TopBar): refine responsive menus and site navigation"
+    },
+    {
       "hash": "db830454fcd56b9ddd0feb0ff20ad5d4f74da9af",
       "date": "2026-10-15T19:55:47+07:00",
       "subject": "refactor(Labs): rename experiments routes and catalog to labs"
