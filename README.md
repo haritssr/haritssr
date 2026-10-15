@@ -60,6 +60,11 @@ Bottom navigation keeps its pill styling without scaling while pressed.
 UI colors use near-white (`zinc-50`) and near-black (`zinc-900`) instead of pure
 white or black, including shared color tokens, control thumbs, and shadows.
 
+Global search opens with a single list of Home, Projects, Experiments, Writing,
+and Design, followed by Share, theme choices, and GitHub. Type to filter pages
+and commands. Type `share` and press Enter to copy the current page URL (including its query and fragment); the same confirmation
+and clipboard behavior are shared with the top-bar Share button.
+
 The theme button cycles System → Light → Dark → System and shows the selected
 preference's icon. First visits use System; explicit choices persist locally.
 

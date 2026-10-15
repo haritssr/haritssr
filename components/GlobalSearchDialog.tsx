@@ -10,6 +10,7 @@ import {
   MoonIcon,
   SunIcon,
   MagnifyingGlassIcon,
+  LinkIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
@@ -17,6 +18,9 @@ import type { RefObject } from "react";
 import { useRef } from "react";
 
 import GitHubIcon from "@/components/GitHubIcon";
+import SharePageProvider, {
+  useSharePageUrl,
+} from "@/components/SharePageProvider";
 import { useTheme } from "@/components/ThemeProvider";
 import type { RouteDoc } from "@/data/routes";
 import {
@@ -24,6 +28,7 @@ import {
   hasSearchQuery,
   searchRoutes,
 } from "@/data/routes";
+import { commandWords, matchesCommand } from "@/utils/commandMatching";
 import type { SourceCodeCommand } from "@/utils/sourceCodeCommands";
 import { getSourceCodeCommands } from "@/utils/sourceCodeCommands";
 import type { ThemeCommand } from "@/utils/themeCommands";
@@ -48,7 +53,20 @@ interface PageSearchItem {
   entry: RouteDoc;
 }
 
-type SearchItem = ThemeCommand | SourceCodeCommand | PageSearchItem;
+interface ShareCommand {
+  kind: "share";
+  title: string;
+}
+
+const SHARE_COMMAND: ShareCommand = {
+  kind: "share",
+  title: "Share: Copy page URL",
+};
+type SearchItem =
+  | ThemeCommand
+  | SourceCodeCommand
+  | ShareCommand
+  | PageSearchItem;
 
 const RESULT_ITEM_CLASS_NAME =
   "data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent p-2 select-none";
@@ -65,7 +83,15 @@ const MAIN_ROUTES = new Set([
   "/design",
 ]);
 
-export default function GlobalSearchDialog({
+export default function GlobalSearchDialog(props: GlobalSearchDialogProps) {
+  return (
+    <SharePageProvider>
+      <SearchDialogContent {...props} />
+    </SharePageProvider>
+  );
+}
+
+function SearchDialogContent({
   entries,
   indexStatus,
   open,
@@ -78,29 +104,48 @@ export default function GlobalSearchDialog({
   const inputRef = useRef<HTMLInputElement>(null);
   const selectedItemRef = useRef(false);
   const router = useRouter();
+  const sharePageUrl = useSharePageUrl();
   const { preference, setPreference } = useTheme();
   const isSearching = hasSearchQuery(query);
   const isLoading = indexStatus === "loading";
   const loadError = indexStatus === "error";
   const showLoading = isLoading && isSearching;
-  const themeCommands = getThemeCommands(query);
-  const sourceCodeCommands = getSourceCodeCommands(query);
-  const commandCount = themeCommands.length + sourceCodeCommands.length;
+  const themeCommands = getThemeCommands(isSearching ? query : "theme");
+  const sourceCodeCommands = getSourceCodeCommands(
+    isSearching ? query : "github"
+  );
+  const shareCommands =
+    !isSearching ||
+    matchesCommand(commandWords(query), [
+      "share",
+      "copy",
+      "link",
+      "url",
+      "page",
+    ])
+      ? [SHARE_COMMAND]
+      : [];
+  const commandCount =
+    themeCommands.length + sourceCodeCommands.length + shareCommands.length;
+  const pageEntries = searchRoutes(entries, query);
   const pages: PageSearchItem[] = showLoading
     ? []
-    : searchRoutes(entries, query).map((entry) => ({
+    : pageEntries.map((entry) => ({
         kind: "page",
         title: entry.title,
         entry,
       }));
-  const results: SearchItem[] = [
+  const commands: SearchItem[] = [
+    ...shareCommands,
     ...themeCommands,
     ...sourceCodeCommands,
-    ...pages,
   ];
+  const results: SearchItem[] = isSearching
+    ? [...commands, ...pages]
+    : [...pages, ...commands];
   const showEmpty =
     !isLoading && !loadError && isSearching && results.length === 0;
-  const { groupTitle, listLabel, resultStatus } = getSearchLabels(
+  const { listLabel, resultStatus } = getSearchLabels(
     indexStatus,
     isSearching,
     results.length,
@@ -109,7 +154,9 @@ export default function GlobalSearchDialog({
 
   function selectItem(item: SearchItem) {
     selectedItemRef.current = true;
-    if (item.kind === "theme") {
+    if (item.kind === "share") {
+      void sharePageUrl();
+    } else if (item.kind === "theme") {
       setPreference(item.preference);
     } else if (item.kind === "source-code") {
       window.open(item.url, "_blank", "noopener,noreferrer");
@@ -140,9 +187,10 @@ export default function GlobalSearchDialog({
           />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Search pages, change appearance with theme commands, or type GitHub
-            or source code to open this site&apos;s repository in a new tab. Use
-            arrow keys to browse results and Enter to select.
+            Search pages, type share to copy this page URL, change appearance
+            with theme commands, or type GitHub or source code to open this
+            site&apos;s repository in a new tab. Use arrow keys to browse
+            results and Enter to select.
           </Dialog.Description>
           <Autocomplete.Root
             autoHighlight="always"
@@ -212,61 +260,65 @@ export default function GlobalSearchDialog({
               {showEmpty ? (
                 <div className="text-muted px-4 py-10 text-center text-sm leading-6">
                   No pages or commands found for “{query}”. Try a topic, page
-                  name, theme, or GitHub.
+                  name, share, theme, or GitHub.
                 </div>
               ) : null}
-              <Autocomplete.List aria-label={listLabel} className="space-y-6">
-                {themeCommands.length > 0 ? (
-                  <Autocomplete.Group items={themeCommands}>
-                    <Autocomplete.GroupLabel className="text-muted px-2 pt-1 pb-2 text-xs font-medium">
-                      Theme
-                    </Autocomplete.GroupLabel>
-                    <Autocomplete.Collection>
-                      {(command: ThemeCommand) => (
+              <Autocomplete.List aria-label={listLabel} className="space-y-1">
+                <Autocomplete.Collection>
+                  {(item: SearchItem) => {
+                    if (item.kind === "share") {
+                      return (
+                        <Autocomplete.Item
+                          className={RESULT_ITEM_CLASS_NAME}
+                          key={item.kind}
+                          onClick={() => {
+                            selectItem(item);
+                          }}
+                          value={item}
+                        >
+                          <LinkIcon
+                            aria-hidden="true"
+                            className="text-muted size-5 shrink-0"
+                          />
+                          <div className="min-w-0 flex-1 space-y-1">
+                            <div className="text-sm">{item.title}</div>
+                            <div className="text-muted text-xs">
+                              Copy the current page link to your clipboard
+                            </div>
+                          </div>
+                        </Autocomplete.Item>
+                      );
+                    }
+                    if (item.kind === "theme") {
+                      return (
                         <ThemeCommandItem
-                          command={command}
-                          current={preference === command.preference}
-                          key={command.preference}
+                          command={item}
+                          current={preference === item.preference}
+                          key={item.preference}
                           onSelect={selectItem}
                         />
-                      )}
-                    </Autocomplete.Collection>
-                  </Autocomplete.Group>
-                ) : null}
-                {sourceCodeCommands.length > 0 ? (
-                  <Autocomplete.Group items={sourceCodeCommands}>
-                    <Autocomplete.GroupLabel className="text-muted px-2 pt-1 pb-2 text-xs font-medium">
-                      Source code
-                    </Autocomplete.GroupLabel>
-                    <Autocomplete.Collection>
-                      {(command: SourceCodeCommand) => (
+                      );
+                    }
+                    if (item.kind === "source-code") {
+                      return (
                         <SourceCodeCommandItem
-                          command={command}
-                          key={command.url}
+                          command={item}
+                          key={item.url}
                           onSelect={selectItem}
                         />
-                      )}
-                    </Autocomplete.Collection>
-                  </Autocomplete.Group>
-                ) : null}
-                {pages.length > 0 ? (
-                  <Autocomplete.Group items={pages}>
-                    <Autocomplete.GroupLabel className="text-muted px-2 pt-1 pb-2 text-xs font-medium">
-                      {groupTitle}
-                    </Autocomplete.GroupLabel>
-                    <Autocomplete.Collection>
-                      {(item: PageSearchItem) => (
-                        <SearchResultItem
-                          item={item}
-                          isSearching={isSearching}
-                          key={item.entry.route}
-                          onSelect={selectItem}
-                          query={query}
-                        />
-                      )}
-                    </Autocomplete.Collection>
-                  </Autocomplete.Group>
-                ) : null}
+                      );
+                    }
+                    return (
+                      <SearchResultItem
+                        item={item}
+                        isSearching={isSearching}
+                        key={item.entry.route}
+                        onSelect={selectItem}
+                        query={query}
+                      />
+                    );
+                  }}
+                </Autocomplete.Collection>
               </Autocomplete.List>
             </div>
             <div className="border-middle-hover text-muted in-data-[theme=dark]:border-middle-hover/50 flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
@@ -432,7 +484,6 @@ function getSearchLabels(
 
   if (indexStatus === "error") {
     return {
-      groupTitle: "Navigation fallback",
       listLabel: "Commands and navigation fallback",
       resultStatus: `${resultStatus} · Full page search unavailable`,
     };
@@ -447,8 +498,9 @@ function getSearchLabels(
   }
 
   return {
-    groupTitle: isSearching ? "Search results" : "Navigation",
-    listLabel: isSearching ? "Pages and commands" : "Suggested pages",
+    listLabel: isSearching
+      ? "Pages and commands"
+      : "Suggested pages and commands",
     resultStatus: status,
   };
 }

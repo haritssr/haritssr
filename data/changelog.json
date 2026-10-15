@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f5313ee41e6e0e2aa054e4d2d1cd0f7404dd42b0",
+      "date": "2026-10-15T15:22:58+07:00",
+      "subject": "refactor(navigation): keep pill back buttons and fade hover content"
+    },
+    {
       "hash": "f20a4167bd5fc14728233a16764146991dc36f9b",
       "date": "2026-10-15T15:01:15+07:00",
       "subject": "refactor(navigation): move back and share controls into the top bar"
