@@ -3,52 +3,28 @@
 import { Popover } from "@base-ui/react/popover";
 import { ListBulletIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { SheetTrigger } from "react-aria-components/Sheet";
 
+import TopBarActionMenu from "@/components/TopBarActionMenu";
 import TopBarActions from "@/components/TopBarActions";
 import { useGlobalSearch } from "@/components/TopBarSearch";
 import useArticleContentsNavigation from "@/components/useArticleContentsNavigation";
-import useArticleOutline, {
-  useActiveArticleSection,
-} from "@/components/useArticleOutline";
+import useArticleOutline from "@/components/useArticleOutline";
 
 const ContentsPanel = dynamic(
   async () => await import("./ArticleContentsPanel")
 );
 
-const MOBILE_QUERY = "(width < 40rem)";
-
-function subscribeToMobile(onChange: () => void) {
-  const media = window.matchMedia(MOBILE_QUERY);
-  media.addEventListener("change", onChange);
-  return () => {
-    media.removeEventListener("change", onChange);
-  };
-}
-
-function getMobileSnapshot() {
-  return window.matchMedia(MOBILE_QUERY).matches;
-}
-
-function getServerSnapshot() {
-  return false;
-}
-
 export default function TopBarContents({
+  mobile,
   pathname,
-  compact,
 }: {
+  mobile: boolean;
   pathname: string;
-  compact: boolean;
 }) {
   const mainRef = useRef<HTMLElement>(null);
-  const mobile = useSyncExternalStore(
-    subscribeToMobile,
-    getMobileSnapshot,
-    getServerSnapshot
-  );
   const { openSearch } = useGlobalSearch();
 
   useEffect(() => {
@@ -69,23 +45,22 @@ export default function TopBarContents({
   } = useArticleContentsNavigation(1);
   const outline = useArticleOutline(mainRef, "Contents", onOutlineChange);
   const visible = outline !== null && outline.sections.length > 0;
-  const activeId = useActiveArticleSection(outline, visible);
-  const collapseActions = compact && mobile && visible;
+  const collapseActions = mobile && visible;
 
   if (!visible || outline === null) {
-    return <TopBarActions pathname={pathname} />;
+    return <TopBarActionMenu mobile={mobile} pathname={pathname} />;
   }
 
   const triggerClassName =
-    "focus-visible:outline-action text-foreground flex size-10 sm:size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:[&>svg]:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2";
+    "focus-visible:outline-action text-foreground flex size-10 sm:size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:[&>svg]:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2";
   const triggerContent = (
     <ListBulletIcon aria-hidden="true" className="pointer-events-none size-5" />
   );
   const panel = hasOpened ? (
     <ContentsPanel
-      activeId={activeId}
       desktop={desktop}
-      entries={outline.entries[0].children}
+      open={open}
+      outline={outline}
       finalFocus={finalFocus}
       sheetRef={sheetRef}
       onSelect={selectEntry}
@@ -106,8 +81,14 @@ export default function TopBarContents({
 
   return (
     <>
-      {collapseActions ? null : <TopBarActions pathname={pathname} />}
-      <div className="floating-surface flex shrink-0 items-center border">
+      {collapseActions ? null : (
+        <div className="hidden sm:block">
+          <TopBarActions pathname={pathname} />
+        </div>
+      )}
+      <div
+        className={`floating-surface flex shrink-0 items-center border ${open ? "border-action!" : ""}`}
+      >
         {desktop ? (
           <Popover.Root
             modal={false}

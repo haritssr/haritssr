@@ -16,7 +16,10 @@
 - Subscribe to the [RSS feed](https://haritssr.com/feed.xml).
 
 User Interface labs live at `/labs/user-interface` and its child
-routes.
+routes. Labs uses `/labs` throughout navigation, metadata, search, and the sitemap;
+the previous `/experiments` routes have no redirects or aliases. Discontinued
+records retain their historical URLs. The Tools lab keeps its existing
+`experiment.db` SQLite filename so local data remains available after the rename.
 
 Every non-home page shows a pill back button in the top bar at every screen size,
 including before scrolling. Home keeps the “Harits Syah” link. Pass the destination
@@ -34,19 +37,40 @@ truncate to keep the controls on one row.
 position. `PageTitle` provides the title marker: once the title scrolls behind the
 top bar, it replaces the center navigation. Returning to the title restores center
 navigation while keeping the back button visible.
-On mobile article pages, the scrolling title is centered between the screen
-edges, with its width capped to leave room for the back and Contents pills.
-Other mobile pages keep the title after the back pill. Desktop keeps the title
-centered.
+On every screen size, the scrolling title is centered in the available space
+between the Back pill and the complete right-hand control group, with equal
+gaps on either side. The title pill fits its text and truncates long titles
+within that space.
+
+The desktop navigation pill is also visible on Home and lists Home, Projects,
+Labs, Writing, Design, and Commits in that order. It appears from 1024px so all
+six links fit between the side controls. Home's responsive card grid also links
+to Commits with the count from the shared changelog snapshot.
 
 Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
 shared `SectionHeading` components) show an icon-only
 Contents button in its own pill to the right of the top bar actions. Contents opens
-below the trigger on desktop and in a sheet on mobile. Below 640px, once the
-scrolling title appears, Search, Theme, Share, and GitHub move into their existing pill
-below the sheet's grab handle. Pages without contents keep these actions in the
-top bar. Search waits for the sheet to close; its shortcut remains available.
-Home and first-level routes omit the Contents button. Writing and experiment
+below the trigger on desktop and in a sheet on mobile. Below 640px, Search,
+Theme, Share, and GitHub always appear inside the sheet below its grab handle,
+including before scrolling. Only the Contents trigger appears in the top bar.
+Home and first-level routes show the inline actions pill at the page top,
+collapsing it into Page actions on mobile after scrolling. Nested pages without
+contents always show a matching Page actions
+pill with the same list icon as Contents on mobile, opening the actions in a
+modal Dialog that locks background scrolling and traps focus. Desktop shows the
+inline actions pill instead. The menu stays right-aligned below its trigger and uses
+the Contents panel material and rounded corners, with
+vertical icon-and-label rows for Search, Theme: System/Light/Dark, Copy URL, and View Source.
+Selecting any action closes the dialog; copy-link feedback remains visible
+after it closes.
+Search waits for the sheet or actions dialog to close; its shortcut remains
+available and returns focus to the corresponding trigger.
+The top bar shares one mobile breakpoint subscription across its controls and
+updates scroll state only when entering or leaving the page top. Header discovery
+ignores unrelated content mutations. Active-section tracking runs inside the
+Contents panel only while it is open; search status updates are isolated from
+the menu action callbacks.
+Home and first-level routes omit the Contents button. Writing and lab
 articles show their floating back-to-top control when scrolling upward. It
 hides while scrolling downward and at the top of the page.
 
@@ -60,7 +84,7 @@ fully rounded corners, a blurred 50% surface background (60% on hover), 150%
 color saturation, and 98% scale while pressed. Top bar borders match content
 borders at the page top and gain contrast with a tight, soft shadow around their edges while scrolling.
 The back-to-top control shares that border and shadow. The Pill Material
-experiment retains its adjustable opacity and blur.
+lab retains its adjustable opacity and blur.
 Bottom navigation keeps its pill styling without scaling while pressed.
 
 UI colors use near-white (`zinc-50`) and near-black (`zinc-900`) instead of pure
@@ -75,10 +99,10 @@ The theme button cycles System → Light → Dark → System and shows the selec
 preference's icon. First visits use System; explicit choices persist locally.
 
 The mobile BottomBar appears on Home and routes under Projects, Labs,
-Writing, and Design up to two URL segments deep, such as
+Writing, Design, and Commits up to two URL segments deep, such as
 `/labs/mathematics`. Nested routes highlight their main section. Individual
 writing articles, deeper routes, and other sections omit it. The design preview
-remains available.
+remains available. Its six links share equal width; Commits uses a history clock icon.
 
 The shared layout uses a viewport-height flex layout for the whole page, so its footer fits
 without extra scrolling when the content fits. Longer content still scrolls normally.

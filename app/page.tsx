@@ -1,6 +1,7 @@
 import {
   BeakerIcon,
   BriefcaseIcon,
+  ClockIcon,
   DocumentTextIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/24/outline";
@@ -11,6 +12,7 @@ import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
 import { PageStructuredData } from "@/components/StructuredData";
+import history from "@/data/changelog.json";
 import { ProjectsData } from "@/data/ProjectsData";
 import { getAvailableLabCount } from "@/utils/labCatalog";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -65,6 +67,14 @@ const homeNavigation = [
     icon: RectangleGroupIcon,
     description: "Components and patterns used across this site.",
   },
+  {
+    href: "/commits",
+    title: "Commits",
+    count: history.commits.length,
+    countLabel: "commits",
+    icon: ClockIcon,
+    description: "Code changes and the history behind this site.",
+  },
 ];
 
 const profileName = "Harits Syah";
@@ -102,7 +112,7 @@ function HomeNavigation() {
   return (
     <nav
       aria-label="Explore the site"
-      className="grid gap-4 sm:grid-cols-2 md:grid-cols-4"
+      className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
       {homeNavigation.map(
         ({ href, title, description, icon: Icon, count, countLabel }) => (
@@ -131,13 +141,13 @@ function ProfileSection() {
   return (
     <section
       aria-label="About Harits Syah"
-      className="mt-6 md:grid md:grid-cols-4 md:items-start md:gap-5"
+      className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:items-start lg:grid-cols-4"
       id="Identity"
     >
       <Image
         alt={profileName}
         blurDataURL="/images/blur.jpg"
-        className="size-25 rounded-full md:col-start-4 md:row-start-1 md:self-start md:justify-self-end"
+        className="size-25 rounded-full sm:col-start-2 sm:row-start-1 sm:self-start sm:justify-self-end lg:col-start-4"
         height="100"
         priority
         src="/images/blur.jpg"
@@ -145,7 +155,7 @@ function ProfileSection() {
       />
       <ul
         aria-label="Profile and contact details"
-        className="text-foreground/70 marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word md:col-span-3 md:col-start-1 md:row-start-1"
+        className="text-foreground/70 marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word sm:col-start-1 sm:row-start-1 lg:col-span-3"
       >
         <li>
           <span className="text-foreground">Product Engineer</span> &{" "}

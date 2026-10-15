@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "db830454fcd56b9ddd0feb0ff20ad5d4f74da9af",
+      "date": "2026-10-15T19:55:47+07:00",
+      "subject": "refactor(Labs): rename experiments routes and catalog to labs"
+    },
+    {
       "hash": "baffe668b71503403c632d25a4f110c9f0a425cd",
       "date": "2026-10-15T16:59:23+07:00",
       "subject": "style(WritingTable): use inline links for post titles"

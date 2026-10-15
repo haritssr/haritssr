@@ -21,8 +21,6 @@ type SearchIndexStatus = "error" | "idle" | "loading" | "ready";
 let searchIndexRequest: Promise<readonly RouteDoc[]> | undefined;
 
 interface GlobalSearchContextValue {
-  hasOpened: boolean;
-  open: boolean;
   openSearch: (trigger: HTMLElement, query?: string) => void;
   prepareSearch: () => void;
   topBarTriggerRef: RefObject<HTMLButtonElement | null>;
@@ -31,6 +29,11 @@ interface GlobalSearchContextValue {
 const GlobalSearchContext = createContext<GlobalSearchContextValue | null>(
   null
 );
+
+const GlobalSearchStatusContext = createContext({
+  hasOpened: false,
+  open: false,
+});
 
 export function GlobalSearchProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -78,9 +81,10 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
   );
 
   const contextValue = useMemo(
-    () => ({ hasOpened, open, openSearch, prepareSearch, topBarTriggerRef }),
-    [hasOpened, open, openSearch, prepareSearch]
+    () => ({ openSearch, prepareSearch, topBarTriggerRef }),
+    [openSearch, prepareSearch]
   );
+  const statusValue = useMemo(() => ({ hasOpened, open }), [hasOpened, open]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -103,7 +107,9 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
           setHasOpened(true);
           activeTriggerRef.current =
             topBarTriggerRef.current ??
-            document.querySelector<HTMLElement>("[data-article-toc-trigger]");
+            document.querySelector<HTMLElement>(
+              "[data-article-toc-trigger], [data-header-actions-trigger]"
+            );
           setQuery("");
           setOpen((previous) => !previous);
         }
@@ -124,7 +130,9 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
 
   return (
     <GlobalSearchContext.Provider value={contextValue}>
-      {children}
+      <GlobalSearchStatusContext.Provider value={statusValue}>
+        {children}
+      </GlobalSearchStatusContext.Provider>
       {hasOpened ? (
         <GlobalSearchDialog
           entries={entries}
@@ -151,11 +159,13 @@ export function useGlobalSearch() {
 
 export default function TopBarSearch({
   onSearch,
+  showLabel = false,
 }: {
   onSearch?: (trigger: HTMLButtonElement) => void;
+  showLabel?: boolean;
 }) {
-  const { hasOpened, open, openSearch, prepareSearch, topBarTriggerRef } =
-    useGlobalSearch();
+  const { openSearch, prepareSearch, topBarTriggerRef } = useGlobalSearch();
+  const { hasOpened, open } = useContext(GlobalSearchStatusContext);
 
   return (
     <button
@@ -164,7 +174,11 @@ export default function TopBarSearch({
       aria-haspopup="dialog"
       aria-keyshortcuts="Meta+P Control+P"
       aria-label="Search the site"
-      className="text-foreground flex size-10 cursor-pointer items-center justify-center rounded-lg sm:size-9 hover:[&>svg]:opacity-50"
+      className={
+        showLabel
+          ? "focus-visible:outline-action text-foreground hover:bg-foreground/5 flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
+          : "text-foreground flex size-10 cursor-pointer items-center justify-center rounded-lg sm:size-9 hover:[&>svg]:opacity-50"
+      }
       onClick={(event) => {
         if (onSearch) {
           onSearch(event.currentTarget);
@@ -180,8 +194,9 @@ export default function TopBarSearch({
     >
       <MagnifyingGlassIcon
         aria-hidden="true"
-        className="size-5 stroke-2 sm:size-4.5"
+        className="size-5 shrink-0 stroke-2 sm:size-4.5"
       />
+      {showLabel ? <span>Search</span> : null}
     </button>
   );
 }

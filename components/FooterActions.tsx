@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import InternalLink from "@/components/InternalLink";
-import { apiRoute, commitsRoute } from "@/data/routes";
+import { apiRoute } from "@/data/routes";
 
 const ACTION_CLASS_NAME =
   "cursor-pointer rounded-sm select-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current";
@@ -19,9 +19,6 @@ interface FooterActionsProps {
 export default function FooterActions({ rssPath }: FooterActionsProps) {
   return (
     <div className="flex flex-wrap items-center justify-end gap-x-4 sm:gap-x-6">
-      <InternalLink href={commitsRoute.route} variant="footer">
-        {commitsRoute.title}
-      </InternalLink>
       <InternalLink href={apiRoute.route} variant="footer">
         {apiRoute.title}
       </InternalLink>

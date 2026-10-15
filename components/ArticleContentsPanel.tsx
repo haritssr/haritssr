@@ -16,7 +16,9 @@ import {
 
 import Button from "@/components/Button";
 import InternalLink from "@/components/InternalLink";
+import { useActiveArticleSection } from "@/components/useArticleOutline";
 import type {
+  ArticleOutline,
   ContentsEntry,
   ContentsLabelPart,
 } from "@/utils/articleTableOfContents";
@@ -94,19 +96,22 @@ function ContentsList({
 }
 
 export default function ArticleContentsPanel({
-  activeId,
   desktop,
-  entries,
+  open,
+  outline,
   finalFocus,
   onSelect,
   sheetRef,
   mobileActions,
-}: ContentsListProps & {
+}: Pick<ContentsListProps, "onSelect"> & {
   desktop: boolean;
+  open: boolean;
+  outline: ArticleOutline;
   finalFocus: () => false | HTMLElement | null;
   sheetRef: Ref<HTMLDivElement>;
   mobileActions?: ReactNode;
 }) {
+  const activeId = useActiveArticleSection(outline, open);
   const closeIcon = (
     <XMarkIcon aria-hidden="true" className="pointer-events-none size-5" />
   );
@@ -153,7 +158,7 @@ export default function ArticleContentsPanel({
       >
         <ContentsList
           activeId={activeId}
-          entries={entries}
+          entries={outline.entries[0].children}
           onSelect={onSelect}
         />
       </nav>

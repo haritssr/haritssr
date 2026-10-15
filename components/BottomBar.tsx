@@ -58,7 +58,7 @@ const IconWrapper = ({
   return (
     <Link
       aria-current={isCurrentSection ? currentLocation : undefined}
-      className="focus-visible:outline-action block min-h-10 w-1/5 py-0.5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2"
+      className="focus-visible:outline-action block min-h-10 min-w-0 flex-1 py-0.5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2"
       href={href}
     >
       <div className="flex flex-col items-center justify-center">
@@ -139,5 +139,16 @@ const TitleAndPathData = [
     ),
     title: "Design",
     href: "/design",
+  },
+  {
+    path: (
+      <path
+        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    ),
+    title: "Commits",
+    href: "/commits",
   },
 ];

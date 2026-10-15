@@ -76,12 +76,7 @@ interface SearchMatchTextProps {
   text: string;
 }
 
-const MAIN_ROUTES = new Set([
-  "/projects",
-  "/labs",
-  "/writing",
-  "/design",
-]);
+const MAIN_ROUTES = new Set(["/projects", "/labs", "/writing", "/design"]);
 
 export default function GlobalSearchDialog(props: GlobalSearchDialogProps) {
   return (
@@ -171,7 +166,7 @@ function SearchDialogContent({
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
         <Dialog.Popup
-          className={`${styles.popup} bg-background border-border text-foreground z-90 flex flex-col overflow-hidden rounded-t-3xl border shadow-xl outline-hidden sm:rounded-2xl`}
+          className={`${styles.popup} border-middle-hover text-foreground z-90 flex flex-col overflow-hidden rounded-t-3xl border bg-white/50 shadow-xl outline-hidden saturate-150 backdrop-blur-lg sm:rounded-xl`}
           finalFocus={() =>
             selectedItemRef.current ? false : triggerRef.current
           }
