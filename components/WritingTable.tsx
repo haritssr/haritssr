@@ -8,7 +8,7 @@ export default function WritingTable() {
         <caption className="sr-only">Writing, newest first</caption>
         <tbody className="divide-border divide-y">
           {allWritingPosts.map((post) => (
-            <tr className="hover:bg-interface-hover" key={post.slug}>
+            <tr key={post.slug}>
               <th
                 className="w-full py-2.5 text-left font-normal sm:w-1/3"
                 scope="row"

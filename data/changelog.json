@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "a845b46fbe89a27d654723563899186624c64b2f",
+      "date": "2026-10-15T10:28:06+07:00",
+      "subject": "fix(TopBar): make the full name pill clickable"
+    },
+    {
       "hash": "51e2d414f3eeaf9423b4fed513c3ea96d9283296",
       "date": "2026-10-15T01:33:58+07:00",
       "subject": "style(Search): clarify result title and description hierarchy"
