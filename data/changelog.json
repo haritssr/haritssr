@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f3460c517a614e1d6afa1de331b714dd0c7d0137",
+      "date": "2026-10-15T15:22:58+07:00",
+      "subject": "feat(search): flatten results and add a shared copy-link command"
+    },
+    {
       "hash": "f5313ee41e6e0e2aa054e4d2d1cd0f7404dd42b0",
       "date": "2026-10-15T15:22:58+07:00",
       "subject": "refactor(navigation): keep pill back buttons and fade hover content"
