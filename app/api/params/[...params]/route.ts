@@ -1,4 +1,4 @@
-// Named experiment for inspecting catch-all route parameters.
+// Named lab for inspecting catch-all route parameters.
 // /api/params/one/two returns ["one", "two"].
 export async function GET(
   _request: Request,

@@ -13,7 +13,7 @@ import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 
 import styles from "./TopBar.module.css";
 
-const destinations = ["projects", "experiments", "writing", "design"] as const;
+const destinations = ["projects", "labs", "writing", "design"] as const;
 
 export default function TopBar() {
   const pathname = usePathname();

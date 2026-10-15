@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "baffe668b71503403c632d25a4f110c9f0a425cd",
+      "date": "2026-10-15T16:59:23+07:00",
+      "subject": "style(WritingTable): use inline links for post titles"
+    },
+    {
       "hash": "7968fc3a4f5c6da3fbdc7500b595ef700418cc5b",
       "date": "2026-10-15T16:59:18+07:00",
       "subject": "fix(TopBar): center article titles and scroll home on title click"

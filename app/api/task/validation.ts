@@ -1,12 +1,12 @@
 import {
   MAX_TASK_DURATION_MINUTES,
   MAX_TASKS_PER_DAY,
-} from "@/app/experiments/user-interface/task/data";
+} from "@/app/labs/user-interface/task/data";
 import type {
   Task,
   TaskSaveVersion,
-} from "@/app/experiments/user-interface/task/type";
-import { isValidTaskDate } from "@/app/experiments/user-interface/task/utils";
+} from "@/app/labs/user-interface/task/type";
+import { isValidTaskDate } from "@/app/labs/user-interface/task/utils";
 
 const MAX_TASK_TITLE_LENGTH = 200;
 const writerIdPattern =

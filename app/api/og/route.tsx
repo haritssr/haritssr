@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import sharp from "sharp";
 
-import { isExperimentAvailable } from "@/utils/databaseExperiments";
+import { isLabAvailable } from "@/utils/databaseLabs";
 import { OPEN_GRAPH_IMAGE_SIZE } from "@/utils/pageMetadata";
 
 import OpenGraphCard from "./OpenGraphCard";
@@ -11,8 +11,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const title = searchParams.get("title")?.trim() ?? "Harits Syah";
   const description =
-    searchParams.get("description")?.trim() ??
-    "Projects, experiments & writing.";
+    searchParams.get("description")?.trim() ?? "Projects, labs & writing.";
   const path = searchParams.get("path") ?? "/";
 
   if (
@@ -25,13 +24,8 @@ export async function GET(request: NextRequest) {
     return new Response("Invalid image parameters", { status: 400 });
   }
 
-  const [, section, domain, experiment] = path.split("/");
-  if (
-    section === "experiments" &&
-    domain &&
-    experiment &&
-    !isExperimentAvailable(domain, experiment)
-  ) {
+  const [, section, domain, lab] = path.split("/");
+  if (section === "labs" && domain && lab && !isLabAvailable(domain, lab)) {
     return new Response("Not found", { status: 404 });
   }
 

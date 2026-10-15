@@ -4,7 +4,7 @@ const trailingSlashPattern = /\/+$/u;
 const writingPathPattern = /^\/writing\/(?<slug>[^/]+)$/u;
 const projectPathPattern = /^\/projects\/[^/]+$/u;
 const nextjsDetailPathPattern =
-  /^(?<path>\/experiments\/nextjs\/(?:articles|posts|students))\/[^/]+$/u;
+  /^(?<path>\/labs\/nextjs\/(?:articles|posts|students))\/[^/]+$/u;
 
 export default function pageSourceUrl(pathname: string): string {
   const path = pathname.replace(trailingSlashPattern, "");

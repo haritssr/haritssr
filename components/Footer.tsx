@@ -1,4 +1,4 @@
-import { ExperimentsData } from "@/data/ExperimentsData";
+import { LabsData } from "@/data/LabsData";
 import {
   apiRoute,
   commitAnalysisRoute,
@@ -12,18 +12,18 @@ import Breadcrumbs from "./Breadcrumbs";
 import FooterActions from "./FooterActions";
 
 const breadcrumbLabels = Object.fromEntries<string>([
-  ["/experiments", "Experiments"],
+  ["/labs", "Labs"],
   [apiRoute.route, apiRoute.title],
   [commitsRoute.route, commitsRoute.title],
   [modelSuitabilityRoute.route, modelSuitabilityRoute.title],
   [todayModelSuitabilityRoute.route, todayModelSuitabilityRoute.title],
   [commitAnalysisRoute.route, commitAnalysisRoute.title],
-  ...ExperimentsData.flatMap<[string, string]>((domain) => [
-    [`/experiments/${domain.slug}`, domain.title],
+  ...LabsData.flatMap<[string, string]>((domain) => [
+    [`/labs/${domain.slug}`, domain.title],
     ...(domain.slug === "mathematics" || domain.slug === "physics"
-      ? domain.experiments.map<[string, string]>((experiment) => [
-          `/experiments/${domain.slug}/${experiment.slug}`,
-          experiment.title,
+      ? domain.labs.map<[string, string]>((lab) => [
+          `/labs/${domain.slug}/${lab.slug}`,
+          lab.title,
         ])
       : []),
   ]),

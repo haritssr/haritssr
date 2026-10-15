@@ -33,9 +33,9 @@ export default defineConfig({
       },
     },
     {
-      files: ["app/experiments/**"],
+      files: ["app/labs/**"],
       rules: {
-        // Experiments intentionally demonstrate alternative UI approaches.
+        // Labs intentionally demonstrate alternative UI approaches.
         "shadcn/no-arbitrary-values": "off",
         "shadcn/no-inline-styles": "off",
         "shadcn/no-raw-colors": "off",
@@ -72,7 +72,7 @@ export default defineConfig({
     },
     {
       files: [
-        "app/experiments/{browser,nextjs,react,tailwind-css,user-interface}/**/demo.{ts,tsx,js,jsx}",
+        "app/labs/{browser,nextjs,react,tailwind-css,user-interface}/**/demo.{ts,tsx,js,jsx}",
       ],
       rules: {
         // Several examples intentionally demonstrate APIs from older package
@@ -127,14 +127,14 @@ export default defineConfig({
       },
     },
     {
-      files: ["app/experiments/nextjs/router/demo.tsx"],
+      files: ["app/labs/nextjs/router/demo.tsx"],
       rules: {
         // This example intentionally contrasts a native anchor with Next Link.
         "nextjs/no-html-link-for-pages": "off",
       },
     },
     {
-      files: ["app/experiments/user-interface/task/architecture/page.tsx"],
+      files: ["app/labs/user-interface/task/architecture/page.tsx"],
       rules: {
         // React Compiler does not support import expressions yet. Keeping
         // Mermaid dynamic avoids shipping it in the initial client bundle.

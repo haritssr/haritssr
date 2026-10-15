@@ -1,0 +1,28 @@
+import type { Metadata } from "next";
+
+import LabPageHeader from "@/components/LabPageHeader";
+
+import "katex/dist/katex.min.css";
+import PageDescription from "@/components/PageDescription";
+import { getLabMetadata } from "@/data/LabsData";
+
+import DoubleSlitLab from "./double-slit-lab";
+
+export const metadata: Metadata = getLabMetadata(
+  "physics",
+  "double-slit-interference"
+);
+
+export default function DoubleSlitPage() {
+  return (
+    <div className="pb-24">
+      <LabPageHeader>
+        <PageDescription>
+          Explore bright and dark interference fringes.
+        </PageDescription>
+      </LabPageHeader>
+
+      <DoubleSlitLab />
+    </div>
+  );
+}

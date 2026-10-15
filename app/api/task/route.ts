@@ -4,9 +4,9 @@ import {
   getTasksForDate,
   getTodayTaskDate,
   replaceTasksForDate,
-} from "@/app/experiments/user-interface/task/db";
-import { isValidTaskDate } from "@/app/experiments/user-interface/task/utils";
-import { DATABASE_EXPERIMENTS_ENABLED } from "@/utils/databaseExperiments";
+} from "@/app/labs/user-interface/task/db";
+import { isValidTaskDate } from "@/app/labs/user-interface/task/utils";
+import { DATABASE_LABS_ENABLED } from "@/utils/databaseLabs";
 
 import { parseTaskPayload } from "./validation";
 
@@ -32,7 +32,7 @@ async function readJson(request: Request): Promise<unknown> {
 }
 
 export function GET(request: Request) {
-  if (!DATABASE_EXPERIMENTS_ENABLED) {
+  if (!DATABASE_LABS_ENABLED) {
     return notAvailableResponse();
   }
 
@@ -47,7 +47,7 @@ export function GET(request: Request) {
 }
 
 async function saveTasks(request: Request) {
-  if (!DATABASE_EXPERIMENTS_ENABLED) {
+  if (!DATABASE_LABS_ENABLED) {
     return notAvailableResponse();
   }
 

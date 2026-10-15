@@ -1,0 +1,50 @@
+"use client";
+
+import { useState } from "react";
+
+import LabPageHeader from "@/components/LabPageHeader";
+
+export default function InputList() {
+  const [input, setInput] = useState<string>("");
+  const [list, setList] = useState<{ id: number; text: string }[]>([]);
+
+  function handleAdd() {
+    if (input.trim()) {
+      setList([...list, { id: Math.random(), text: input }]);
+      setInput("");
+    }
+  }
+
+  return (
+    <div>
+      <LabPageHeader />
+
+      <input
+        aria-label="New list item"
+        className="border px-2 py-1"
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+        type="text"
+        value={input}
+      />
+
+      <button
+        className="rounded bg-blue-500 px-2 py-1 text-white"
+        onClick={handleAdd}
+        type="button"
+      >
+        Add
+      </button>
+
+      <div>
+        {list.map((item) => (
+          <div key={item.id}>
+            {item.id} &nbsp;
+            {item.text}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

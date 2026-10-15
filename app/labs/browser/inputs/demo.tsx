@@ -1,0 +1,299 @@
+"use client";
+
+import type React from "react";
+import { useState } from "react";
+
+import LabPageHeader from "@/components/LabPageHeader";
+import PageDescription from "@/components/PageDescription";
+import SectionHeading from "@/components/SectionHeading";
+
+export default function InputsDemo() {
+  return (
+    <>
+      <LabPageHeader>
+        <PageDescription>Browser built-in input elements </PageDescription>
+      </LabPageHeader>
+
+      <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-14">
+        <Wrapper name="text">
+          <InputText />
+        </Wrapper>
+        <Wrapper name="search">
+          <InputSearch />
+        </Wrapper>
+        <Wrapper name="date">
+          <InputDate />
+        </Wrapper>
+        <Wrapper name="button">
+          <InputButton />
+        </Wrapper>
+        <Wrapper name="reset">
+          <InputReset />
+        </Wrapper>
+        <Wrapper name="checkbox">
+          <InputCheckbox />
+        </Wrapper>
+        <Wrapper name="color">
+          <InputColor />
+        </Wrapper>
+        <Wrapper name="range">
+          <InputRange />
+        </Wrapper>
+        <Wrapper name="file">
+          <InputFile />
+        </Wrapper>
+        <Wrapper name="email">
+          <InputEmail />
+        </Wrapper>
+        <Wrapper name="month">
+          <InputMonth />
+        </Wrapper>
+        <Wrapper name="number">
+          <InputNumber />
+        </Wrapper>
+        <Wrapper name="password">
+          <InputPassword />
+        </Wrapper>
+        <Wrapper name="radio">
+          <InputRadio />
+        </Wrapper>
+        <Wrapper name="week">
+          <InputWeek />
+        </Wrapper>
+        <Wrapper name="time">
+          <InputTime />
+        </Wrapper>
+        <Wrapper name="url">
+          <InputUrl />
+        </Wrapper>
+        <Wrapper name="submit">
+          <InputSubmit />
+        </Wrapper>
+        <Wrapper name="tel">
+          <InputTel />
+        </Wrapper>
+      </div>
+    </>
+  );
+}
+
+const Wrapper = ({
+  name,
+  children,
+}: {
+  name: string;
+  children: React.ReactNode;
+}) => (
+  <div>
+    <SectionHeading>{name}</SectionHeading>
+    {children}
+  </div>
+);
+
+const InputTel = () => (
+  <input
+    aria-label="Telephone number"
+    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+    placeholder="1234-5678-9101"
+    required
+    type="tel"
+  />
+);
+
+const InputSubmit = () => <input type="submit" />;
+
+const InputUrl = () => (
+  <input
+    aria-label="Website URL"
+    id="url"
+    name="url"
+    pattern="https://.*"
+    placeholder="https://www.example.com"
+    required
+    type="url"
+  />
+);
+
+const InputTime = () => <input aria-label="Time" required type="time" />;
+
+const InputText = () => (
+  <input
+    aria-label="Example text"
+    // style={{ backgroundImage: 'url(/searchicon.svg)', backgroundRepeat: 'no-repeat' }}
+    placeholder="Type something"
+    type="text"
+  />
+);
+
+const InputWeek = () => <input aria-label="Week" required type="week" />;
+
+//weird
+const InputRadio = () => (
+  <div>
+    <div className="space-x-2">
+      <input
+        checked
+        id="huey"
+        name="drone"
+        readOnly
+        type="radio"
+        value="huey"
+      />
+      <label htmlFor="huey">Huey</label>
+    </div>
+
+    <div className="space-x-2">
+      <input id="dewey" name="drone" type="radio" value="dewey" />
+      <label htmlFor="dewey">Dewey</label>
+    </div>
+
+    <div className="space-x-2">
+      <input id="louie" name="drone" type="radio" value="louie" />
+      <label htmlFor="louie">Louie</label>
+    </div>
+  </div>
+);
+
+const InputPassword = () => (
+  <input aria-label="Password" placeholder="Type password" type="password" />
+);
+
+const InputNumber = () => (
+  <input
+    aria-label="Number of tentacles"
+    id="tentacles"
+    max="100"
+    min="10"
+    name="tentacles"
+    type="number"
+  />
+);
+
+const InputMonth = () => (
+  <input aria-label="Month" id="start-month" name="start" type="month" />
+);
+
+const InputEmail = () => (
+  <input
+    aria-label="Email"
+    id="email"
+    pattern=".+@globex\.com"
+    placeholder="me@email.com"
+    required
+    type="email"
+  />
+);
+
+const InputFile = () => (
+  <input
+    aria-label="Upload an image"
+    accept="image/png, image/jpeg"
+    name="Upload"
+    type="file"
+  />
+);
+
+const InputSearch = () => (
+  <input aria-label="Search" placeholder="Search" type="search" />
+);
+
+//You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.
+const InputDate = () => (
+  <input
+    aria-label="Trip start date"
+    defaultValue="2018-07-22"
+    id="start"
+    max="2018-12-31"
+    min="2018-01-01"
+    name="trip-start"
+    type="date"
+    //readOnly
+  />
+);
+
+const InputButton = () => <input type="button" value="Click me" />;
+
+const InputReset = () => (
+  <form className="flex flex-col space-y-2">
+    <input
+      aria-label="Example text"
+      name="id"
+      placeholder="Type something"
+      type="text"
+    />
+    <input type="reset" value="Reset" />
+    <input type="submit" value="Submit" />
+  </form>
+);
+
+const InputCheckbox = () => (
+  <input aria-label="Example checkbox" type="checkbox" value="Click me" />
+);
+
+const InputColor = () => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  };
+  return (
+    <div>
+      <input
+        aria-label="Example color"
+        onChange={handleChange}
+        type="color"
+        value="#5151d2"
+      />
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero
+        doloribus minus dolorem labore enim voluptatibus reiciendis natus
+        placeat voluptas maxime!
+      </div>
+    </div>
+  );
+};
+
+const InputRange = () => {
+  const [temperature, setTemperature] = useState<string>("0");
+
+  return (
+    <div>
+      <div>
+        <label className="block text-sm" htmlFor="temperature">
+          Temparature : {temperature}&deg;C
+        </label>
+        <input
+          className="block"
+          id="temperature"
+          list="tickmarks"
+          max={100}
+          min={0}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setTemperature(e.target.value);
+          }}
+          step={10}
+          type="range"
+          value={temperature}
+        />
+      </div>
+      <div className="mt-5">
+        <input
+          aria-label="Example temperature range"
+          list="tickmarks"
+          type="range"
+        />
+        <datalist id="tickmarks">
+          <option value="0">0%</option>
+          <option value="10">10%</option>
+          <option value="20">20%</option>
+          <option value="30">30%</option>
+          <option value="40">40%</option>
+          <option value="50">50%</option>
+          <option value="60">60%</option>
+          <option value="70">70%</option>
+          <option value="80">80%</option>
+          <option value="90">90%</option>
+          <option value="100">100%</option>
+        </datalist>
+      </div>
+    </div>
+  );
+};

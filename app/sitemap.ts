@@ -7,8 +7,8 @@ import {
   modelSuitabilityRoute,
   todayModelSuitabilityRoute,
 } from "@/data/routes";
-import { getAvailableExperimentSummaries } from "@/utils/experimentCatalog";
-import { getExperimentRoutes } from "@/utils/experimentRoutes";
+import { getAvailableLabSummaries } from "@/utils/labCatalog";
+import { getLabRoutes } from "@/utils/labRoutes";
 import { getProjectSlug } from "@/utils/projectSlug";
 import { SITE_URL } from "@/utils/site";
 import { allWritingPosts } from "@/utils/writing-posts";
@@ -18,7 +18,7 @@ import { ProjectsData } from "../data/ProjectsData";
 const staticRoutes = [
   "/",
   "/projects",
-  "/experiments",
+  "/labs",
   "/writing",
   "/design",
   "/more",
@@ -29,26 +29,21 @@ const staticRoutes = [
   apiRoute.route,
 ];
 
-const experimentDates = new Map(
-  getAvailableExperimentSummaries().map((entry) => [
-    entry.route,
-    entry.updatedAt,
-  ])
+const labDates = new Map(
+  getAvailableLabSummaries().map((entry) => [entry.route, entry.updatedAt])
 );
 
 const routeUrls = [
   ...new Set([
     ...staticRoutes,
-    ...getExperimentRoutes().map((entry) => entry.route),
+    ...getLabRoutes().map((entry) => entry.route),
     ...ProjectsData.map(
       (project) => `/projects/${getProjectSlug(project.project_name)}`
     ),
   ]),
 ].map((route) => ({
   url: `${SITE_URL}${route}`,
-  ...(experimentDates.has(route)
-    ? { lastModified: experimentDates.get(route) }
-    : {}),
+  ...(labDates.has(route) ? { lastModified: labDates.get(route) } : {}),
 }));
 
 const writingPostUrls = allWritingPosts.map((post) => ({

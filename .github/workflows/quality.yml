@@ -36,7 +36,7 @@ jobs:
       - name: Check production code
         run: bun run knip:production
 
-      - name: Validate content and experiment routes
+      - name: Validate content and lab routes
         run: bun run validate:content
 
       - name: Validate production content

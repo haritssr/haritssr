@@ -1,0 +1,77 @@
+import { notFound } from "next/navigation";
+
+import LabPageHeader from "@/components/LabPageHeader";
+import MarkdownContent from "@/components/mdx";
+import PageDescription from "@/components/PageDescription";
+import { createPageMetadata } from "@/utils/pageMetadata";
+import { getAllPostIds, getPostData, getPostSummary } from "@/utils/posts";
+
+const postDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const postData = await getPostData(id);
+
+  if (!postData) {
+    notFound();
+  }
+
+  return (
+    <>
+      <LabPageHeader title={postData.title}>
+        <PageDescription>
+          <time dateTime={postData.date}>
+            {postDateFormatter.format(new Date(postData.date))}
+          </time>
+        </PageDescription>
+      </LabPageHeader>
+
+      <div className="grid grid-cols-4 gap-5">
+        <div className="col-span-1 rounded-md border border-zinc-300 p-2 sm:p-4">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia
+          harum laudantium sint rem excepturi opti dolor id quasi, dicta illum
+          eaque amet exercitationem? Maiores natus cupiditate reiciendis harum
+          doloribus suscipit, magnam possimus. Tenetur quos id harum placeat
+          obcaecati ullam corrupti illum officia, nostrum reprehenderit aliquam
+          veniam alias
+        </div>
+        <div className="col-span-3 rounded-md border border-zinc-300 p-2 sm:p-4">
+          <MarkdownContent tree={postData.contentTree} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function generateStaticParams() {
+  const paths = getAllPostIds();
+  return paths.map((path) => ({ id: path.params.id }));
+}
+
+export const dynamicParams = false;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const post = getPostSummary(id);
+  return post
+    ? createPageMetadata({
+        title: post.title,
+        description: post.title,
+        path: `/labs/nextjs/posts/${id}`,
+        publishedTime: post.date,
+      })
+    : {};
+}

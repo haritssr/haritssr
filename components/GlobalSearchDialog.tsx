@@ -78,7 +78,7 @@ interface SearchMatchTextProps {
 
 const MAIN_ROUTES = new Set([
   "/projects",
-  "/experiments",
+  "/labs",
   "/writing",
   "/design",
 ]);

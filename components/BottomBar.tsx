@@ -113,8 +113,8 @@ const TitleAndPathData = [
         strokeLinejoin="round"
       />
     ),
-    title: "Experiments",
-    href: "/experiments",
+    title: "Labs",
+    href: "/labs",
   },
 
   {

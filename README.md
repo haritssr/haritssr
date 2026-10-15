@@ -1,5 +1,5 @@
 - [Projects](https://haritssr.com/projects): Portfolio and project details.
-- [Experiments](https://haritssr.com/experiments): Frontend, browser APIs, mathematics, and physics.
+- [Labs](https://haritssr.com/labs): Frontend, browser APIs, mathematics, and physics.
 - [Writing](https://haritssr.com/writing): Posts and notes.
 - [Design](https://haritssr.com/design): Design system reference.
 - [More](https://haritssr.com/more): Interests and personal notes.
@@ -15,14 +15,14 @@
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
 - Subscribe to the [RSS feed](https://haritssr.com/feed.xml).
 
-User Interface experiments live at `/experiments/user-interface` and its child
+User Interface labs live at `/labs/user-interface` and its child
 routes.
 
 Every non-home page shows a pill back button in the top bar at every screen size,
 including before scrolling. Home keeps the “Harits Syah” link. Pass the destination
 through `PageHeader`'s `back={{ href, name }}` prop and set `path` to the exact route;
 the header stores navigation metadata without rendering a back link or reserving
-an empty navigation row above the title. Experiment headers provide their parent
+an empty navigation row above the title. Lab headers provide their parent
 destination even when the former in-content back button was hidden. The top bar
 uses Home when matching header metadata is unavailable. Below 640px, the back
 pill shows its destination name at the page top and becomes chevron-only as soon
@@ -66,7 +66,7 @@ Bottom navigation keeps its pill styling without scaling while pressed.
 UI colors use near-white (`zinc-50`) and near-black (`zinc-900`) instead of pure
 white or black, including shared color tokens, control thumbs, and shadows.
 
-Global search opens with a single list of Home, Projects, Experiments, Writing,
+Global search opens with a single list of Home, Projects, Labs, Writing,
 and Design, followed by Share, theme choices, and GitHub. Type to filter pages
 and commands. Type `share` and press Enter to copy the current page URL (including its query and fragment); the same confirmation
 and clipboard behavior are shared with the top-bar Share button.
@@ -74,9 +74,9 @@ and clipboard behavior are shared with the top-bar Share button.
 The theme button cycles System → Light → Dark → System and shows the selected
 preference's icon. First visits use System; explicit choices persist locally.
 
-The mobile BottomBar appears on Home and routes under Projects, Experiments,
+The mobile BottomBar appears on Home and routes under Projects, Labs,
 Writing, and Design up to two URL segments deep, such as
-`/experiments/mathematics`. Nested routes highlight their main section. Individual
+`/labs/mathematics`. Nested routes highlight their main section. Individual
 writing articles, deeper routes, and other sections omit it. The design preview
 remains available.
 

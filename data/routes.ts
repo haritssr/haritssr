@@ -67,9 +67,9 @@ export const navigationRoutes: readonly RouteDoc[] = [
     suggestion: "Navigation",
   },
   {
-    route: "/experiments",
-    title: "Experiments",
-    description: "Explore code, libraries, and UI experiments",
+    route: "/labs",
+    title: "Labs",
+    description: "Explore code, libraries, and UI labs",
     group: "Navigation",
     suggestion: "Navigation",
   },

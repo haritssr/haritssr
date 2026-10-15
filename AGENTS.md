@@ -42,8 +42,8 @@ content rule below. Markdown/MDX are excluded from Oxfmt.
 | `bun run typecheck` | Imports/exports, types, props, JSX structure, logic/hooks, API handlers, route folders/params, data shapes, TS/Next config, or type-affecting dependencies. Skip CSS/classes, static copy, unchanged-shape data values, Markdown, and assets. |
 | `bun run knip` | Imports/exports, added/removed/renamed source or route files, dependencies, scripts, discovery entry points, or Knip config. Skip changes that leave the module/dependency graph unchanged. |
 | `bun run knip:production` | Production entry points, conditional imports, dependency classification, or production Knip config; otherwise skip. |
-| `bun run validate:content` | Experiment catalog/routes, discontinued records, writing MDX/frontmatter, catalog/route/search discovery, frontmatter parsing, or the validator and its utilities. Skip unrelated UI/layout/CSS/docs. |
-| `NODE_ENV=production bun run validate:content` | Those changes could alter public experiment availability, including production filters and local DB gates; otherwise skip. |
+| `bun run validate:content` | Lab catalog/routes, discontinued records, writing MDX/frontmatter, catalog/route/search discovery, frontmatter parsing, or the validator and its utilities. Skip unrelated UI/layout/CSS/docs. |
+| `NODE_ENV=production bun run validate:content` | Those changes could alter public lab availability, including production filters and local DB gates; otherwise skip. |
 | `bun run fix <files...>` | Auto-fixable errors in edited files; review the diff. Skip passing checks/manual-only failures; never fix the whole project for a local change. |
 
 Verify behavior with existing tests or focused non-test checks, retaining the
@@ -104,17 +104,17 @@ browser/test-file restrictions. Other commands:
   before content; its child components have no vertical margins. Keep headers
   outside content stacks and omit an extra top margin on the first content block.
 - Use `PageDescription` for page introductions (`as="div"` for block content).
-- Physics and mathematics experiment section stacks use parent `space-y-20`,
-  including lab/demo sections. Other experiment domains use `space-y-16`.
+- Physics and mathematics lab section stacks use parent `space-y-20`,
+  including lab/demo sections. Other lab domains use `space-y-16`.
   Omit section top/bottom margins; keep introductions and source links together.
 - Keep independent exercise/rule cards unnumbered in unordered lists. Number
   ordered solution steps and question-navigation controls when needed.
 - Exclude all accordion/disclosure trigger headings from article TOCs,
   including custom implementations. Visible headings inside open panels may appear.
 
-## Experiment Width
+## Lab Width
 
-Apply these defaults to new or refactored experiments in every domain:
+Apply these defaults to new or refactored labs in every domain:
 
 - Keep page and section containers, titles, and introductory descriptions full
   width. Apply left-aligned `max-w-3xl` only to reading content (explanations,
@@ -141,8 +141,8 @@ Apply these defaults to new or refactored experiments in every domain:
 
 - Never add redirect rules in `next.config.ts`. Do not automatically add
   redirects when renaming routes; legacy URL aliases are intentionally absent.
-- Experiment routes are literal folders. Register title, description, tags,
-  creation date, and update history in `data/ExperimentsData.ts`. Append an
+- Lab routes are literal folders. Register title, description, tags,
+  creation date, and update history in `data/LabsData.ts`. Append an
   update date once per calendar day; preserve creation dates and prior history.
 - Physics and mathematics preview descriptions use concise catalog copy (aim
   for 80 characters or fewer) to fit roughly two lines in small link previews.
@@ -162,14 +162,14 @@ Apply these defaults to new or refactored experiments in every domain:
   own pill to the right of the top bar actions. Contents use rendered heading anchors,
   a desktop popover below the trigger, and a mobile sheet. Hide it on Home and
   all first-level routes. Individual writing
-  and experiment pages keep the floating `ArticleBackToTop` control, including
+  and lab pages keep the floating `ArticleBackToTop` control, including
   articles without section headings. Show it only when scrolling upward away
   from the page top. Preserve their `data-article-*` title metadata.
 - Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.
 - Keep public pages searchable.
-- Keep task/tools SQLite experiments development-only: production routes return
+- Keep task/tools SQLite labs development-only: production routes return
   404 and stay out of navigation, search, and sitemap.
 
 # Metadata and Site Behavior

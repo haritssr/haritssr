@@ -152,8 +152,8 @@ export default function DesignSystem() {
             </li>
             <li>
               Browse the{" "}
-              <InternalLink href="/experiments" variant="inline">
-                experiment collection and discontinued history
+              <InternalLink href="/labs" variant="inline">
+                lab collection and discontinued history
               </InternalLink>
             </li>
             <li className="text-muted">
@@ -343,7 +343,7 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="BackButton" title="Back Button">
-            <BackButton href="/experiments" name="Experiments" />
+            <BackButton href="/labs" name="Labs" />
           </Box>
 
           <Box name="Tooltip" title="Tooltip">

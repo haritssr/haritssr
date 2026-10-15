@@ -35,13 +35,13 @@ function getSingleLineFontSize(text: string, maximum: number): number {
 }
 
 export default function OpenGraphCard({ title, path }: OpenGraphCardProps) {
-  const experimentTitle = path.startsWith("/experiments/")
-    ? /^(?<headline>.+) \| (?<subtitle>.+ Experiments)$/u.exec(title)
+  const labTitle = path.startsWith("/labs/")
+    ? /^(?<headline>.+) \| (?<subtitle>.+ Labs)$/u.exec(title)
     : null;
   const headline =
-    experimentTitle?.groups?.headline ??
+    labTitle?.groups?.headline ??
     (path === "/" ? title.split(" — ")[0] : title);
-  const subtitle = experimentTitle?.groups?.subtitle ?? "";
+  const subtitle = labTitle?.groups?.subtitle ?? "";
   const hierarchy = getHierarchy(path);
 
   return (

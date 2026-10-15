@@ -12,7 +12,7 @@ import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
 import { PageStructuredData } from "@/components/StructuredData";
 import { ProjectsData } from "@/data/ProjectsData";
-import { getAvailableExperimentCount } from "@/utils/experimentCatalog";
+import { getAvailableLabCount } from "@/utils/labCatalog";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { allWritingPosts } from "@/utils/writing-posts";
 
@@ -42,10 +42,10 @@ const homeNavigation = [
     description: "Websites and products I’ve designed and built.",
   },
   {
-    href: "/experiments",
-    title: "Experiments",
-    count: getAvailableExperimentCount(),
-    countLabel: "experiments",
+    href: "/labs",
+    title: "Labs",
+    count: getAvailableLabCount(),
+    countLabel: "labs",
     icon: BeakerIcon,
     description: "Interactive lessons and tools for exploration.",
   },
@@ -69,14 +69,14 @@ const homeNavigation = [
 
 const profileName = "Harits Syah";
 const homeDescription =
-  "Explore Harits Syah's projects, interactive experiments, and writing on web development, math, physics, and education. Developer, teacher, and founder.";
+  "Explore Harits Syah's projects, interactive labs, and writing on web development, math, physics, and education. Developer, teacher, and founder.";
 
 export const metadata: Metadata = {
   ...createPageMetadata({
     title: profileName,
     description: homeDescription,
     socialDescription:
-      "Projects, experiments, and writing by Harits Syah, a web product engineer and math-physics teacher.",
+      "Projects, labs, and writing by Harits Syah, a web product engineer and math-physics teacher.",
     path: "/",
   }),
   title: { absolute: profileName },

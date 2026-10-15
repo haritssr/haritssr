@@ -2,15 +2,12 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import {
-  DiscontinuedExperimentsData,
-  discontinuedExperimentHistory,
-} from "@/data/DiscontinuedExperimentsData";
-import {
-  ExperimentsData,
-  getLatestExperimentUpdate,
-} from "@/data/ExperimentsData";
-import { getAvailableExperimentSummaries } from "@/utils/experimentCatalog";
-import { getExperimentRoutes } from "@/utils/experimentRoutes";
+  DiscontinuedLabsData,
+  discontinuedLabHistory,
+} from "@/data/DiscontinuedLabsData";
+import { LabsData, getLatestLabUpdate } from "@/data/LabsData";
+import { getAvailableLabSummaries } from "@/utils/labCatalog";
+import { getLabRoutes } from "@/utils/labRoutes";
 import { getSearchIndex } from "@/utils/searchIndex";
 import { parseWritingPost } from "@/utils/writing-posts";
 
@@ -18,9 +15,13 @@ const failures: string[] = [];
 const catalogRoutes = new Set<string>();
 const domains = new Set<string>();
 const datePattern = /^\d{4}-\d{2}-\d{2}$/u;
-const localRoutePattern =
-  /^\/experiments\/user-interface\/(?:task|tools)(?:\/|$)/u;
+const localRoutePattern = /^\/labs\/user-interface\/(?:task|tools)(?:\/|$)/u;
 const titleSeparatorPattern = /[^a-z0-9]+/g;
+
+function archivedRoutes(formerRoute: string): string[] {
+  // Keep the recorded URL intact while also checking the renamed namespace.
+  return [formerRoute, formerRoute.replace(/^\/experiments(?=\/|$)/u, "/labs")];
+}
 
 function titleSlug(title: string): string {
   return title.toLowerCase().replace(titleSeparatorPattern, "-");
@@ -36,7 +37,7 @@ function validDate(value: string): boolean {
   );
 }
 
-for (const domain of ExperimentsData) {
+for (const domain of LabsData) {
   const usesTitleSlugs =
     domain.slug === "mathematics" || domain.slug === "physics";
   if (usesTitleSlugs && domain.slug !== titleSlug(domain.title)) {
@@ -46,10 +47,10 @@ for (const domain of ExperimentsData) {
     failures.push(`Duplicate domain: ${domain.slug}`);
   }
   domains.add(domain.slug);
-  for (const experiment of domain.experiments) {
-    const route = `/experiments/${domain.slug}/${experiment.slug}`;
-    if (usesTitleSlugs && experiment.slug !== titleSlug(experiment.title)) {
-      failures.push(`Experiment name differs from URL: ${route}`);
+  for (const lab of domain.labs) {
+    const route = `/labs/${domain.slug}/${lab.slug}`;
+    if (usesTitleSlugs && lab.slug !== titleSlug(lab.title)) {
+      failures.push(`Lab name differs from URL: ${route}`);
     }
     if (catalogRoutes.has(route)) {
       failures.push(`Duplicate route: ${route}`);
@@ -59,44 +60,43 @@ for (const domain of ExperimentsData) {
       failures.push(`Missing page: ${route}`);
     }
     if (
-      experiment.description.trim() === "" ||
-      experiment.tags.length === 0 ||
-      experiment.tags.some((tag) => tag.trim() === "")
+      lab.description.trim() === "" ||
+      lab.tags.length === 0 ||
+      lab.tags.some((tag) => tag.trim() === "")
     ) {
       failures.push(`Missing discovery content: ${route}`);
     }
-    const dates = [experiment.createdAt, ...experiment.updatedAt];
+    const dates = [lab.createdAt, ...lab.updatedAt];
     if (
       !dates.every(validDate) ||
-      experiment.updatedAt.some((date) => date < experiment.createdAt)
+      lab.updatedAt.some((date) => date < lab.createdAt)
     ) {
       failures.push(`Invalid dates: ${route}`);
     }
-    if (new Set(experiment.updatedAt).size !== experiment.updatedAt.length) {
+    if (new Set(lab.updatedAt).size !== lab.updatedAt.length) {
       failures.push(`Duplicate update date: ${route}`);
     }
-    if (getLatestExperimentUpdate(experiment) !== dates.toSorted().at(-1)) {
+    if (getLatestLabUpdate(lab) !== dates.toSorted().at(-1)) {
       failures.push(`Incorrect latest update: ${route}`);
     }
   }
 }
 
-for (const domain of readdirSync("app/experiments", { withFileTypes: true })) {
+for (const domain of readdirSync("app/labs", { withFileTypes: true })) {
   if (!domain.isDirectory() || domain.name.startsWith("_")) {
     continue;
   }
-  for (const experiment of readdirSync(
-    path.join("app/experiments", domain.name),
-    { withFileTypes: true }
-  )) {
+  for (const lab of readdirSync(path.join("app/labs", domain.name), {
+    withFileTypes: true,
+  })) {
     if (
-      !experiment.isDirectory() ||
-      experiment.name.startsWith("_") ||
-      experiment.name.startsWith("[")
+      !lab.isDirectory() ||
+      lab.name.startsWith("_") ||
+      lab.name.startsWith("[")
     ) {
       continue;
     }
-    const route = `/experiments/${domain.name}/${experiment.name}`;
+    const route = `/labs/${domain.name}/${lab.name}`;
     if (
       existsSync(path.join("app", route, "page.tsx")) &&
       !catalogRoutes.has(route)
@@ -121,24 +121,24 @@ for (const file of writingFiles) {
 }
 
 const archiveSlugs = new Set<string>();
-for (const record of DiscontinuedExperimentsData) {
+for (const record of DiscontinuedLabsData) {
   if (archiveSlugs.has(record.slug)) {
     failures.push(`Duplicate archive record: ${record.slug}`);
   }
   archiveSlugs.add(record.slug);
-  if (!Number.isInteger(record.experimentCount) || record.experimentCount < 1) {
-    failures.push(`Invalid historical experiment count: ${record.slug}`);
+  if (!Number.isInteger(record.labCount) || record.labCount < 1) {
+    failures.push(`Invalid historical lab count: ${record.slug}`);
   }
   if (record.title.trim() === "" || record.description.trim() === "") {
     failures.push(`Missing archive content: ${record.slug}`);
   }
-  if (existsSync(path.join("app", record.formerRoute))) {
-    failures.push(
-      `Removed experiment implementation still exists: ${record.formerRoute}`
-    );
+  for (const route of archivedRoutes(record.formerRoute)) {
+    if (existsSync(path.join("app", route))) {
+      failures.push(`Removed lab implementation still exists: ${route}`);
+    }
   }
 }
-const { removalCommitSha } = discontinuedExperimentHistory;
+const { removalCommitSha } = discontinuedLabHistory;
 if (
   removalCommitSha !== undefined &&
   !/^[a-f0-9]{40}$/u.test(removalCommitSha)
@@ -146,35 +146,34 @@ if (
   failures.push("Removal commit SHA must be a full Git commit hash.");
 }
 
-const routes = getExperimentRoutes();
+const routes = getLabRoutes();
 const searchRoutes = new Set(getSearchIndex().map((entry) => entry.route));
 for (const { route } of routes) {
   if (!searchRoutes.has(route)) {
-    failures.push(`Experiment absent from search: ${route}`);
+    failures.push(`Lab absent from search: ${route}`);
   }
   if (process.env.NODE_ENV === "production" && localRoutePattern.test(route)) {
     failures.push(`Local-only route in production: ${route}`);
   }
 }
-for (const record of DiscontinuedExperimentsData) {
+for (const record of DiscontinuedLabsData) {
   if (
-    routes.some(
-      ({ route }) =>
-        route === record.formerRoute ||
-        route.startsWith(`${record.formerRoute}/`)
+    routes.some(({ route }) =>
+      archivedRoutes(record.formerRoute).some(
+        (archivedRoute) =>
+          route === archivedRoute || route.startsWith(`${archivedRoute}/`)
+      )
     )
   ) {
     failures.push(
-      `Archived experiment appears in the live route index: ${record.formerRoute}`
+      `Archived lab appears in the live route index: ${record.formerRoute}`
     );
   }
 }
-const available = getAvailableExperimentSummaries();
+const available = getAvailableLabSummaries();
 for (const entry of available) {
   if (!routes.some(({ route }) => route === entry.route)) {
-    failures.push(
-      `Available experiment absent from route index: ${entry.route}`
-    );
+    failures.push(`Available lab absent from route index: ${entry.route}`);
   }
 }
 if (failures.length > 0) {
@@ -182,6 +181,6 @@ if (failures.length > 0) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Validated ${catalogRoutes.size} experiments in ${domains.size} domains, ${writingFiles.length} writing posts, and ${available.length} available experiments (${process.env.NODE_ENV ?? "development"}).`
+    `Validated ${catalogRoutes.size} labs in ${domains.size} domains, ${writingFiles.length} writing posts, and ${available.length} available labs (${process.env.NODE_ENV ?? "development"}).`
   );
 }

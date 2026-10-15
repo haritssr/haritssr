@@ -9,7 +9,7 @@ import {
   navigationRoutes,
 } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
-import { getExperimentRoutes } from "@/utils/experimentRoutes";
+import { getLabRoutes } from "@/utils/labRoutes";
 import { getProjectSlug } from "@/utils/projectSlug";
 import { allWritingPosts } from "@/utils/writing-posts";
 
@@ -23,7 +23,7 @@ export function getSearchIndex(): RouteDoc[] {
     todayModelSuitabilityRoute,
     commitAnalysisRoute,
     apiRoute,
-    ...getExperimentRoutes(),
+    ...getLabRoutes(),
     ...ProjectsData.map((project) => ({
       route: `/projects/${getProjectSlug(project.project_name)}`,
       title: project.project_name,

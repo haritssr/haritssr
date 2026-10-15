@@ -189,9 +189,9 @@ export const ProjectsData: ProjectsDataType[] = [
       logo_src: "/icons/haritssr.svg",
       brand_name: "Harits Syah Personal Site",
       short_about:
-        "Harits Syah's personal site. Portfolio, writing, and frontend experiments.",
+        "Harits Syah's personal site. Portfolio, writing, and frontend labs.",
       long_about:
-        "Harits Syah's personal site. Portfolio, writing, and frontend experiments.",
+        "Harits Syah's personal site. Portfolio, writing, and frontend labs.",
       company_name: "Personal Site",
       phone_number: "+62-8953-3110-3401",
       website: "https://haritssr.com",
@@ -203,8 +203,8 @@ export const ProjectsData: ProjectsDataType[] = [
       my_role: ["Software Engineer", "Designer", "Owner"],
       working_period: "Jun 2021 - Present",
       website_status: ["Production"],
-      routes: ["Home", "Experiments", "Projects", "Design Systems"],
-      features: ["Global Navigation", "CV", "Projects", "Experiment"],
+      routes: ["Home", "Labs", "Projects", "Design Systems"],
+      features: ["Global Navigation", "CV", "Projects", "Lab"],
     },
     figma: [
       "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FbLTdTJgThkmzd5aAZVP8Rr%2Fharitssr%3Fnode-id%3D17%253A2",
