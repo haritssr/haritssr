@@ -10,6 +10,7 @@ import {
   commitAnalysisRoute,
   commitsRoute,
   modelSuitabilityRoute,
+  todayModelSuitabilityRoute,
 } from "@/data/routes";
 import { commitDay, formatDay } from "@/utils/changelog";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -47,6 +48,9 @@ export default async function CommitsPage() {
           </InternalLink>
           <InternalLink href={commitAnalysisRoute.route}>
             {commitAnalysisRoute.title}
+          </InternalLink>
+          <InternalLink href={todayModelSuitabilityRoute.route}>
+            {todayModelSuitabilityRoute.title}
           </InternalLink>
         </nav>
       </div>

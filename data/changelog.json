@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "7f71a1b7970c08d7571222d28b52b4b18b2379c8",
+      "date": "2026-10-15T15:23:03+07:00",
+      "subject": "fix(search): exclude homepage section anchors from results"
+    },
+    {
       "hash": "f3460c517a614e1d6afa1de331b714dd0c7d0137",
       "date": "2026-10-15T15:22:58+07:00",
       "subject": "feat(search): flatten results and add a shared copy-link command"

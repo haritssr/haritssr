@@ -5,6 +5,7 @@ import {
   commitAnalysisRoute,
   commitsRoute,
   modelSuitabilityRoute,
+  todayModelSuitabilityRoute,
 } from "@/data/routes";
 import { getAvailableExperimentSummaries } from "@/utils/experimentCatalog";
 import { getExperimentRoutes } from "@/utils/experimentRoutes";
@@ -23,6 +24,7 @@ const staticRoutes = [
   "/more",
   commitsRoute.route,
   modelSuitabilityRoute.route,
+  todayModelSuitabilityRoute.route,
   commitAnalysisRoute.route,
   apiRoute.route,
 ];

@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-15",
+  "basedOn": "commit messages and diffs",
+  "reviewedThrough": "7f71a1b7970c08d7571222d28b52b4b18b2379c8",
+  "models": {
+    "7f71a1b7970c08d7571222d28b52b4b18b2379c8": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "f3460c517a614e1d6afa1de331b714dd0c7d0137": {
+      "model": "6 Sol",
+      "effort": "High"
+    },
+    "f5313ee41e6e0e2aa054e4d2d1cd0f7404dd42b0": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "f20a4167bd5fc14728233a16764146991dc36f9b": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "815f16757e071bea33463edbd3ba3e671ed79167": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "5a7c575a639a473fea8731978af7dd8a7c2df6d8": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "c6fb1f30c53c0280073ed1f3f43a52f68e21d0a6": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "a845b46fbe89a27d654723563899186624c64b2f": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "51e2d414f3eeaf9423b4fed513c3ea96d9283296": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "70bafc357f02f60d92afb24ec001c889a1c0ea5c": {
+      "model": "6 Sol",
+      "effort": "High"
+    },
+    "de37dc295bff30efe7097e742bf27530eb24ade9": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "0f1d885f4a0db7b1d8705e3db42ae1c73f97a84d": {
+      "model": "6 Sol",
+      "effort": "High"
+    },
+    "7e5b9b9225b0adc7ad01b6c5d514369497d4b49a": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "b4306bab17c4655fa17d17d056f7d553020ba243": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "bf74ce896569824a31d77d708e12a964af5cddb1": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "268256728d912b275255b9d264db4ab93772631d": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "48a4e5bf76ec990cc26b3e21221274a8b6fbfa10": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "8809615802df170d0384b96d38e84591295b5fae": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "541425a9146f714d24ee6713fd4bafac3f7282f6": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "9c09f34df1a9656ee8150e8e33f70474253ea288": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    }
+  }
+}

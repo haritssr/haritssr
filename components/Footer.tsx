@@ -4,6 +4,7 @@ import {
   commitAnalysisRoute,
   commitsRoute,
   modelSuitabilityRoute,
+  todayModelSuitabilityRoute,
 } from "@/data/routes";
 import { RSS_PATH } from "@/utils/site";
 
@@ -15,6 +16,7 @@ const breadcrumbLabels = Object.fromEntries<string>([
   [apiRoute.route, apiRoute.title],
   [commitsRoute.route, commitsRoute.title],
   [modelSuitabilityRoute.route, modelSuitabilityRoute.title],
+  [todayModelSuitabilityRoute.route, todayModelSuitabilityRoute.title],
   [commitAnalysisRoute.route, commitAnalysisRoute.title],
   ...ExperimentsData.flatMap<[string, string]>((domain) => [
     [`/experiments/${domain.slug}`, domain.title],

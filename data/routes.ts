@@ -37,6 +37,14 @@ export const commitAnalysisRoute: RouteDoc = {
   group: "Commits",
 };
 
+export const todayModelSuitabilityRoute: RouteDoc = {
+  route: "/commits/2026-10-15",
+  title: "2026-10-15",
+  description:
+    "Model and reasoning effort estimates for commits on 15 October 2026.",
+  group: "Commits",
+};
+
 export const navigationRoutes: readonly RouteDoc[] = [
   {
     route: "/more",

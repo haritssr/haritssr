@@ -5,6 +5,7 @@ import {
   commitAnalysisRoute,
   commitsRoute,
   modelSuitabilityRoute,
+  todayModelSuitabilityRoute,
   navigationRoutes,
 } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
@@ -19,6 +20,7 @@ export function getSearchIndex(): RouteDoc[] {
     ...navigationRoutes,
     commitsRoute,
     modelSuitabilityRoute,
+    todayModelSuitabilityRoute,
     commitAnalysisRoute,
     apiRoute,
     ...getExperimentRoutes(),
