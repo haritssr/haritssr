@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import BackButton from "@/components/BackButton";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -56,7 +55,7 @@ export default async function ProjectPage({
     <div>
       <div className="mx-auto w-full max-w-full">
         <PageHeader
-          navigation={<BackButton href="/projects" name="Projects" />}
+          back={{ href: "/projects", name: "Projects" }}
           path={`/projects/${projectSlug}`}
         >
           <div className="flex items-start justify-between gap-4">

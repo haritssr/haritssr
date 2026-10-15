@@ -1,4 +1,3 @@
-import BackButton from "@/components/BackButton";
 import ExperimentDomainIcon from "@/components/ExperimentDomainIcon";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -26,7 +25,7 @@ export default function ExperimentDomainIndex({
   return (
     <div className="mx-auto w-full sm:px-0">
       <PageHeader
-        navigation={<BackButton href="/experiments" name="Experiments" />}
+        back={{ href: "/experiments", name: "Experiments" }}
         path={`/experiments/${domain.slug}`}
       >
         <div className="flex items-start gap-3">

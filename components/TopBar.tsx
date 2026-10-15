@@ -39,36 +39,36 @@ export default function TopBar() {
       ref={navigationRef}
     >
       <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-4 xl:px-0">
-        {header ? (
-          <>
-            <BackButton
-              href={header.href}
-              name={header.backLabel}
-              variant="topbar"
-            />
-            <div
-              className="floating-surface text-action mx-auto w-fit min-w-0 rounded-full border px-4 py-1.5 backdrop-blur-lg sm:absolute sm:left-1/2 sm:mx-0 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
-              title={header.title}
-            >
-              <p className="truncate">{header.title}</p>
-            </div>
-          </>
+        {pathname === "/" ? (
+          <Link
+            className="floating-surface text-foreground/90 hover:text-foreground/80 flex min-h-10 min-w-0 items-center border py-1.5 pr-3 pl-3.5 sm:min-h-0"
+            href="/"
+          >
+            <span className="truncate">Harits Syah</span>
+          </Link>
         ) : (
-          <>
-            <Link
-              className="floating-surface hover:bg-surface/95 text-foreground/90 hover:text-foreground/80 flex items-center rounded-full border py-1.5 pr-3 pl-3.5 backdrop-blur-lg active:scale-[0.98]"
-              href="/"
-            >
-              Harits Syah
-            </Link>
-
-            {pathname === "/" ? null : <NavigationLinks />}
-          </>
+          <BackButton
+            compact={scrolled}
+            href={header?.href ?? "/"}
+            name={header?.backLabel ?? "Home"}
+            variant="topbar"
+          />
         )}
+        {pathname !== "/" && header?.scrolled === true ? (
+          <div
+            className="floating-surface mr-auto ml-2 flex min-h-10 w-fit min-w-0 items-center border px-4 py-1.5 sm:absolute sm:left-1/2 sm:mx-0 sm:min-h-0 sm:max-w-[calc(100%-20rem)] sm:-translate-x-1/2"
+            title={header.title}
+          >
+            <p className="truncate">{header.title}</p>
+          </div>
+        ) : null}
+        {pathname !== "/" && header?.scrolled !== true ? (
+          <NavigationLinks />
+        ) : null}
         <HeaderActions
           key={pathname}
           pathname={pathname}
-          compact={header !== null}
+          compact={header?.scrolled === true}
         />
       </div>
     </nav>
@@ -100,13 +100,13 @@ function NavigationLinks() {
 
   return (
     <ul
-      className="floating-surface absolute left-1/2 hidden -translate-x-1/2 rounded-full border p-1.5 saturate-150 backdrop-blur-lg sm:flex"
+      className="floating-surface absolute left-1/2 hidden -translate-x-1/2 border p-1.5 [--floating-pressed-scale:1] sm:flex"
       id="main-navigation"
     >
       {destinations.map((destination) => (
         <li key={destination}>
           <Link
-            className={` ${currentSection === destination ? "text-action" : "text-foreground/90"} hover:bg-middle-hover/50 rounded-full px-3 py-1 active:scale-[0.98]`}
+            className={` ${currentSection === destination ? "text-action" : "text-foreground/90 hover:text-foreground/50"} rounded-full px-3 py-1`}
             aria-current={currentSection === destination ? "page" : undefined}
             href={`/${destination}`}
           >

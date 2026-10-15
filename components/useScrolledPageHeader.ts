@@ -7,6 +7,7 @@ interface ScrolledPageHeader {
   backLabel: string;
   href: string;
   pathname: string;
+  scrolled: boolean;
   title: string;
 }
 
@@ -14,22 +15,15 @@ function getPageHeader(main: Element, pathname: string) {
   const pageHeader = [
     ...main.querySelectorAll<HTMLElement>("[data-page-header][data-page-path]"),
   ].find((element) => element.dataset.pagePath === pathname);
-  const heading = pageHeader?.querySelector<HTMLElement>("[data-page-title]");
-  const backButton = pageHeader?.querySelector<HTMLElement>(
-    "[data-page-header-navigation] [data-page-back-href]"
-  );
-  const backLabel = backButton?.dataset.pageBackLabel;
-  const href = backButton?.dataset.pageBackHref;
+  const heading =
+    pageHeader?.querySelector<HTMLElement>("[data-page-title]") ?? undefined;
+  const backLabel = pageHeader?.dataset.pageBackLabel;
+  const href = pageHeader?.dataset.pageBackHref;
   const title = (heading?.dataset.articleTitle ?? heading?.textContent ?? "")
     .replaceAll(/\s+/gu, " ")
     .trim();
 
-  if (
-    !heading ||
-    backLabel === undefined ||
-    href === undefined ||
-    title.length === 0
-  ) {
+  if (backLabel === undefined || href === undefined) {
     return null;
   }
 
@@ -57,6 +51,10 @@ export default function useScrolledPageHeader(
       intersectionObserver?.disconnect();
       intersectionObserver = undefined;
       observedHeading = undefined;
+      observedOffset = -1;
+      observedTitle = undefined;
+      observedBackLabel = undefined;
+      observedHref = undefined;
       setHeader(null);
     }
 
@@ -87,6 +85,20 @@ export default function useScrolledPageHeader(
       observedBackLabel = backLabel;
       observedHref = href;
       intersectionObserver?.disconnect();
+      intersectionObserver = undefined;
+      setHeader({
+        backLabel,
+        href,
+        pathname,
+        scrolled:
+          heading !== undefined &&
+          title.length > 0 &&
+          heading.getBoundingClientRect().bottom <= offset,
+        title,
+      });
+      if (!heading || title.length === 0) {
+        return;
+      }
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (disposed || intersectionObserver !== observer) {
@@ -95,15 +107,10 @@ export default function useScrolledPageHeader(
           const scrolled =
             entry !== undefined &&
             entry.boundingClientRect.bottom <= (entry.rootBounds?.top ?? 0);
-          setHeader(
-            scrolled
-              ? {
-                  backLabel,
-                  href,
-                  pathname,
-                  title,
-                }
-              : null
+          setHeader((current) =>
+            current?.pathname === pathname && current.scrolled === scrolled
+              ? current
+              : { backLabel, href, pathname, scrolled, title }
           );
         },
         {

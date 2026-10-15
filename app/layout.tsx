@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import BottomBar from "@/components/BottomBar";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import { SiteStructuredData } from "@/components/StructuredData";
@@ -10,13 +9,6 @@ import ThemeBootstrap from "@/components/ThemeBootstrap";
 import ThemeProvider from "@/components/ThemeProvider";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
-import { ExperimentsData } from "@/data/ExperimentsData";
-import {
-  apiRoute,
-  commitAnalysisRoute,
-  commitsRoute,
-  modelSuitabilityRoute,
-} from "@/data/routes";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { SITE_THEME_COLOR, SITE_URL } from "@/utils/site";
 
@@ -25,23 +17,6 @@ import "./globals.css";
 const inter = localFont({
   src: "../public/fonts/InterVariable.woff2",
 });
-
-const breadcrumbLabels = Object.fromEntries<string>([
-  ["/experiments", "Experiments"],
-  [apiRoute.route, apiRoute.title],
-  [commitsRoute.route, commitsRoute.title],
-  [modelSuitabilityRoute.route, modelSuitabilityRoute.title],
-  [commitAnalysisRoute.route, commitAnalysisRoute.title],
-  ...ExperimentsData.flatMap<[string, string]>((domain) => [
-    [`/experiments/${domain.slug}`, domain.title],
-    ...(domain.slug === "mathematics" || domain.slug === "physics"
-      ? domain.experiments.map<[string, string]>((experiment) => [
-          `/experiments/${domain.slug}/${experiment.slug}`,
-          experiment.title,
-        ])
-      : []),
-  ]),
-]);
 
 export const metadata: Metadata = {
   ...createPageMetadata({
@@ -114,11 +89,8 @@ export default function RootLayout({
         <ThemeProvider>
           <GlobalSearchProvider>
             <TopBar />
-            <div className="min-h-22 py-8" data-page-breadcrumbs="">
-              <Breadcrumbs routeLabels={breadcrumbLabels} />
-            </div>
             <main
-              className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 xl:px-0"
+              className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 pt-8 xl:px-0"
               id="main-content"
             >
               {children}

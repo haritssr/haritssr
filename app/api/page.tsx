@@ -1,4 +1,3 @@
-import BackButton from "@/components/BackButton";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -42,10 +41,7 @@ const publicEndpoints = [
 export default function APIPage() {
   return (
     <>
-      <PageHeader
-        navigation={<BackButton href="/" name="Home" />}
-        path={apiRoute.route}
-      >
+      <PageHeader back={{ href: "/", name: "Home" }} path={apiRoute.route}>
         <PageTitle>{apiRoute.title}</PageTitle>
         <PageDescription>{apiRoute.description}</PageDescription>
       </PageHeader>

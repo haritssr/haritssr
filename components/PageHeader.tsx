@@ -2,25 +2,21 @@ import type { ReactNode } from "react";
 
 export default function PageHeader({
   children,
-  navigation,
+  back,
   path,
 }: {
   children: ReactNode;
-  navigation?: ReactNode;
+  back?: { href: string; name: string };
   path?: string;
 }) {
   return (
     <header
-      className="mb-16 flex w-full flex-col gap-4"
+      className="mt-6 mb-16 flex w-full flex-col gap-4"
+      data-page-back-href={back?.href}
+      data-page-back-label={back?.name}
       data-page-header=""
       data-page-path={path}
     >
-      <div
-        className="flex h-6 min-w-0 items-center"
-        data-page-header-navigation=""
-      >
-        {navigation}
-      </div>
       {children}
     </header>
   );

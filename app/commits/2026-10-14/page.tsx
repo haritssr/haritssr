@@ -1,4 +1,3 @@
-import BackButton from "@/components/BackButton";
 import CommitHourlyChart from "@/components/CommitHourlyChart";
 import CommitTable from "@/components/CommitTable";
 import ExternalLink from "@/components/ExternalLink";
@@ -32,7 +31,7 @@ export default function CommitAnalysisPage() {
   return (
     <>
       <PageHeader
-        navigation={<BackButton href="/commits" name="Commits" />}
+        back={{ href: "/commits", name: "Commits" }}
         path={commitAnalysisRoute.route}
       >
         <PageTitle>{commitAnalysisRoute.title}</PageTitle>

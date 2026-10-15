@@ -1,4 +1,3 @@
-import BackButton from "@/components/BackButton";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
@@ -14,7 +13,7 @@ export const metadata = createPageMetadata({
 export default function MorePage() {
   return (
     <>
-      <PageHeader navigation={<BackButton href="/" name="Home" />} path="/more">
+      <PageHeader back={{ href: "/", name: "Home" }} path="/more">
         <PageTitle>More</PageTitle>
         <PageDescription>
           Interests and personal notes about me.

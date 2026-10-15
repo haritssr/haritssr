@@ -16,10 +16,9 @@ export default function ExperimentDomainLayout({
     <ExperimentDomainShell
       domainTitle={experimentDomain.title}
       experiments={experimentDomain.experiments.map(
-        ({ slug, title, hideBackButton, hideTitle }) => ({
+        ({ slug, title, hideTitle }) => ({
           slug,
           title,
-          hideBackButton,
           hideTitle,
         })
       )}

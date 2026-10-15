@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import BackButton from "@/components/BackButton";
 import ExperimentsGrid from "@/components/ExperimentsGrid";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -19,10 +18,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function ExperimentsPage() {
   return (
     <>
-      <PageHeader
-        navigation={<BackButton href="/" name="Home" />}
-        path="/experiments"
-      >
+      <PageHeader back={{ href: "/", name: "Home" }} path="/experiments">
         <PageTitle>Experiments</PageTitle>
         <PageDescription>{experimentsHomeDescription}</PageDescription>
       </PageHeader>

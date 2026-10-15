@@ -77,7 +77,7 @@ export default function TopBarContents({
   }
 
   const triggerClassName =
-    "focus-visible:outline-action text-foreground flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98]";
+    "focus-visible:outline-action text-foreground flex size-10 sm:size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:opacity-65 focus-visible:outline-2 focus-visible:outline-offset-2";
   const triggerContent = (
     <ListBulletIcon aria-hidden="true" className="pointer-events-none size-5" />
   );
@@ -107,10 +107,7 @@ export default function TopBarContents({
   return (
     <>
       {collapseActions ? null : <TopBarActions pathname={pathname} />}
-      <div
-        className="floating-surface data-[open]:border-action flex shrink-0 items-center rounded-full border saturate-150 backdrop-blur-lg"
-        data-open={open ? "" : undefined}
-      >
+      <div className="floating-surface flex shrink-0 items-center border">
         {desktop ? (
           <Popover.Root
             modal={false}

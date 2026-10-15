@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import BackButton from "@/components/BackButton";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
@@ -71,7 +70,7 @@ export default async function WritingPostPage({
   return (
     <WritingArticle key={post.slug}>
       <PageHeader
-        navigation={<BackButton href="/writing" name="Writing" />}
+        back={{ href: "/writing", name: "Writing" }}
         path={`/writing/${post.slug}`}
       >
         <PageTitle

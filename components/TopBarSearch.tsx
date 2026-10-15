@@ -164,7 +164,7 @@ export default function TopBarSearch({
       aria-haspopup="dialog"
       aria-keyshortcuts="Meta+P Control+P"
       aria-label="Search the site"
-      className="text-foreground hover:text-searchicon-hover flex size-9 cursor-pointer items-center justify-center rounded-lg active:scale-[0.98]"
+      className="text-foreground hover:text-searchicon-hover flex size-10 cursor-pointer items-center justify-center rounded-lg sm:size-9"
       onClick={(event) => {
         if (onSearch) {
           onSearch(event.currentTarget);
@@ -178,7 +178,10 @@ export default function TopBarSearch({
       title="Search"
       type="button"
     >
-      <MagnifyingGlassIcon aria-hidden="true" className="size-4.5 stroke-2" />
+      <MagnifyingGlassIcon
+        aria-hidden="true"
+        className="size-5 stroke-2 sm:size-4.5"
+      />
     </button>
   );
 }

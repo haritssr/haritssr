@@ -1,5 +1,4 @@
 import Accordion, { AccordionItem } from "@/components/Accordion";
-import BackButton from "@/components/BackButton";
 import CommitHourlyChart from "@/components/CommitHourlyChart";
 import CommitTable, {
   ModelSuitabilityLegend,
@@ -36,7 +35,7 @@ export default function ModelSuitabilityPage() {
   return (
     <>
       <PageHeader
-        navigation={<BackButton href="/commits" name="Commits" />}
+        back={{ href: "/commits", name: "Commits" }}
         path={modelSuitabilityRoute.route}
       >
         <PageTitle>{modelSuitabilityRoute.title}</PageTitle>

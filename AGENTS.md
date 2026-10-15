@@ -67,6 +67,9 @@ browser/test-file restrictions. Other commands:
 - Before changing UI, inspect `/design` and `app/design/`. Reuse suitable shared
   components and their demonstrated behavior; create new ones only when needed.
   Follow existing design tokens.
+- When discussing colors with the user, always use design-system color names,
+  Tailwind tokens, or custom class/token names (for example, `zinc-50`,
+  `bg-surface`, or `--color-border`). Never describe colors using hex values.
 - Use Base UI for continuing widgets; React Aria is limited to the mobile
   article TOC Sheet and supporting controls. Do not reintroduce retired widget
   libraries; see README.md for architecture.
@@ -92,12 +95,12 @@ browser/test-file restrictions. Other commands:
   `headingAs`, `headingClassName`, and `headingVariant`. Preserve existing
   fragment anchors by moving their IDs to the section container.
 - Page titles use the shared `PageTitle` typography inside `PageHeader`, without
-  size or class overrides. The layout always reserves a 24px breadcrumb row,
-  with 32px before it and 32px after it (`py-8`);
-  `PageHeader` always reserves a 24px navigation row followed by `gap-4`, even
-  when breadcrumbs or a back link are absent. Pass back links through its
-  `navigation` prop and put icons beside the title, keeping every title aligned
-  to the same starting position. The header owns `gap-4` internally and `mb-16`
+  size or class overrides. The layout provides 32px above page content. `Footer`
+  owns a reserved 24px breadcrumb row above its actions; `Breadcrumbs` owns its spacing;
+  `PageHeader` starts with its title and renders no back link or empty navigation
+  row. Pass back destinations through `back={{ href, name }}` for the top bar;
+  put icons beside the title, keeping every title aligned to the same starting
+  position. The header owns `gap-4` internally and `mb-16`
   before content; its child components have no vertical margins. Keep headers
   outside content stacks and omit an extra top margin on the first content block.
 - Use `PageDescription` for page introductions (`as="div"` for block content).
@@ -147,12 +150,13 @@ Apply these defaults to new or refactored experiments in every domain:
   explanations in page content. Preview line wrapping depends on the host app.
 - Writing uses local `data/writing/*.mdx` with validated frontmatter and automatic
   module discovery, without an import registry. Use `/writing` URLs directly.
-- Pages with a title and back button inside `PageHeader` share the scrolling
-  top bar (`useScrolledPageHeader`). Pass the exact route through the header's
-  `path` prop; the shared `PageTitle` and `BackButton` supply discovery markers.
-  The title replaces center navigation and the back button replaces the site
-  name once the title scrolls behind the top bar. Headers without either stay
-  in the normal navigation mode.
+- Every non-home page shows a pill `BackButton` in the top bar at every screen
+  size, regardless of scroll position. Home keeps the site-name link. Pass the
+  exact route through `PageHeader.path` and the destination through its `back`
+  prop; the header supplies back metadata and `PageTitle` supplies the title marker
+  for `useScrolledPageHeader`. Use Home when matching back metadata is unavailable.
+  The title replaces center navigation only after scrolling behind the top bar;
+  returning to the title restores center navigation while retaining the back pill.
 - Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
   shared `SectionHeading` components) show `TopBarContents` in its
   own pill to the right of the top bar actions. Contents use rendered heading anchors,

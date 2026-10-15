@@ -14,20 +14,51 @@
 User Interface experiments live at `/experiments/user-interface` and its child
 routes.
 
-Pages with a title and back button inside `PageHeader` show that back button
-and title in the top bar once the title scrolls behind it. Set the header's
-`path` to the exact route; `PageTitle` and `BackButton` provide the discovery
-markers used by `useScrolledPageHeader`. Returning to the title restores the
-normal navigation. Nested pages with visible content headings (`h2`–`h6`, including
-MDX headings and shared `SectionHeading` components) show an icon-only
+Every non-home page shows a pill back button in the top bar at every screen size,
+including before scrolling. Home keeps the “Harits Syah” link. Pass the destination
+through `PageHeader`'s `back={{ href, name }}` prop and set `path` to the exact route;
+the header stores navigation metadata without rendering a back link or reserving
+an empty navigation row above the title. Experiment headers provide their parent
+destination even when the former in-content back button was hidden. The top bar
+uses Home when matching header metadata is unavailable. Below 640px, the back
+pill shows its destination name at the page top and becomes chevron-only as soon
+as the page is scrolled. Desktop always keeps the destination name. The topbar
+`BackButton` accepts `compact` for this mobile-only icon state; long labels
+truncate to keep the controls on one row.
+
+`useScrolledPageHeader` discovers back metadata independently of the title's scroll
+position. `PageTitle` provides the title marker: once the title scrolls behind the
+top bar, it replaces the center navigation. Returning to the title restores center
+navigation while keeping the back button visible.
+On mobile, the scrolling title sits 16px after the back pill, matching the 16px
+screen inset. Desktop keeps the title centered.
+
+Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
+shared `SectionHeading` components) show an icon-only
 Contents button in its own pill to the right of the top bar actions. Contents opens
 below the trigger on desktop and in a sheet on mobile. Below 640px, once the
-scrolling title appears, Search, Theme, and GitHub move into their existing pill
+scrolling title appears, Search, Theme, Share, and GitHub move into their existing pill
 below the sheet's grab handle. Pages without contents keep these actions in the
 top bar. Search waits for the sheet to close; its shortcut remains available.
 Home and first-level routes omit the Contents button. Writing and experiment
 articles show their floating back-to-top control when scrolling upward. It
 hides while scrolling downward and at the top of the page.
+
+Below 640px, floating icon controls use 40px tap targets and 20px icons;
+desktop controls retain their compact sizing. Text pills have a matching minimum
+height, and bottom navigation links have at least 40px tap height. The top bar
+stays on one row, truncating the site name or page title when space is limited.
+
+Floating navigation pills and the back-to-top control share `floating-surface`:
+fully rounded corners, a blurred 50% surface background (60% on hover), 150%
+color saturation, and 98% scale while pressed. Top bar borders match content
+borders at the page top and gain contrast with a tight, soft shadow around their edges while scrolling.
+The back-to-top control shares that border and shadow. The Pill Material
+experiment retains its adjustable opacity and blur.
+Bottom navigation keeps its pill styling without scaling while pressed.
+
+UI colors use near-white (`zinc-50`) and near-black (`zinc-900`) instead of pure
+white or black, including shared color tokens, control thumbs, and shadows.
 
 The theme button cycles System → Light → Dark → System and shows the selected
 preference's icon. First visits use System; explicit choices persist locally.

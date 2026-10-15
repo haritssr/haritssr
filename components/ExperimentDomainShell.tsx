@@ -10,7 +10,6 @@ interface ExperimentDomainShellProps {
   children: React.ReactNode;
   domainTitle: string;
   experiments: readonly {
-    hideBackButton?: boolean;
     hideTitle?: boolean;
     slug: string;
     title: string;
@@ -52,7 +51,6 @@ export default function ExperimentDomainShell({
           <ExperimentHeaderContext
             value={{
               back: { href: parentPath, name: backButtonName },
-              hideBackButton: experiment?.hideBackButton === true,
               hideTitle: experiment?.hideTitle === true,
               path: segments.length === 3 ? pathname : undefined,
               title,

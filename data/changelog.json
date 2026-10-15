@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "815f16757e071bea33463edbd3ba3e671ed79167",
+      "date": "2026-10-15T15:01:05+07:00",
+      "subject": "refactor(Table): share header spacing and improve symbol readability"
+    },
+    {
       "hash": "5a7c575a639a473fea8731978af7dd8a7c2df6d8",
       "date": "2026-10-15T15:00:36+07:00",
       "subject": "style(ui): unify floating pills and refine shared visual tokens"

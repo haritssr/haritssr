@@ -43,7 +43,7 @@ export default function Breadcrumbs({
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="h-6">
+    <nav aria-label="Breadcrumb" className="mb-5" data-page-breadcrumbs="">
       <div className="mx-auto flex w-full max-w-5xl justify-start px-4 xl:px-0">
         <ol
           className="scrollbar-hide corner-squircle flex h-6 w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg text-[15px] leading-6"

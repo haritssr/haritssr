@@ -131,7 +131,7 @@ function ProfileSection() {
   return (
     <section
       aria-label="About Harits Syah"
-      className="space-y-6 md:grid md:grid-cols-4 md:items-start md:gap-8 md:space-y-0"
+      className="mt-6 md:grid md:grid-cols-4 md:items-start md:gap-5"
       id="Identity"
     >
       <Image
