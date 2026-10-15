@@ -129,7 +129,7 @@ export default function LimitsLab() {
               <circle
                 cx={graphX(selected.target, RANGE)}
                 cy={graphY(selected.leftLimit, RANGE)}
-                fill="white"
+                fill="var(--color-white)"
                 r="7"
                 stroke="#2563eb"
                 strokeWidth="3"

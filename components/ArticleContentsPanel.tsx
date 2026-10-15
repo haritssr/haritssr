@@ -63,7 +63,7 @@ function ContentsList({
   }
 
   return (
-    <ol className="marker:text-foreground/70 list-decimal space-y-2 pl-5 [&_li]:space-y-2">
+    <ol className="marker:text-foreground/70 list-decimal space-y-2 pl-8 [&_li]:space-y-2">
       {entries.map((entry) => (
         <li key={entry.id}>
           <InternalLink

@@ -25,13 +25,13 @@ export default function InternalLink({
       : "text-[length:inherit] leading-[inherit]";
   const interaction =
     variant === "footer"
-      ? "text-foreground/70 rounded-sm select-none transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current hover:underline"
+      ? "text-foreground/70 rounded-sm select-none transition-[color,transform] hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current hover:underline"
       : "text-action hover:text-action-hover hover:underline";
 
   return (
     <Link
       aria-current={ariaCurrent}
-      className={`group inline cursor-pointer ${interaction} ${appearance} ${className ?? ""}`}
+      className={`group inline-block cursor-pointer transition-transform active:scale-[0.98] motion-reduce:transition-none ${interaction} ${appearance} ${className ?? ""}`}
       href={href}
       onClick={onClick}
       prefetch={false}

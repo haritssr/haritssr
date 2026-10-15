@@ -46,14 +46,14 @@ export default function ArticleBackToTop() {
       <Button
         aria-label="To the top"
         data-article-back-to-top=""
-        className="floating-surface hover:bg-surface/95! text-foreground/90! focus-visible:outline-action pointer-events-auto size-9 shrink-0 rounded-full! border p-0! text-base! saturate-150 backdrop-blur-lg select-none [corner-shape:round]!"
+        className="floating-surface text-foreground/90! focus-visible:outline-action pointer-events-auto size-10 shrink-0 -translate-x-1 border p-0! text-base! select-none [--floating-border-color:var(--floating-border-scrolled-color)] sm:size-9"
         iconOnly
         onClick={scrollArticleToTop}
         variant="ghost"
       >
         <ArrowUpIcon
           aria-hidden="true"
-          className="pointer-events-none size-4.5 stroke-2"
+          className="pointer-events-none size-5 stroke-2 sm:size-4.5"
         />
       </Button>
     </div>

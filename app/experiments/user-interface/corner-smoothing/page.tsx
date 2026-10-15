@@ -79,7 +79,7 @@ export default function CornerSmoothingPage() {
                 {["Feature", "Rounded corners", "CSS squircle", "Lisse"].map(
                   (heading) => (
                     <th
-                      className="px-3 py-2 text-left font-medium whitespace-nowrap"
+                      className="px-3 text-left font-medium whitespace-nowrap"
                       key={heading}
                       scope="col"
                     >

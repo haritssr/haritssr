@@ -173,7 +173,7 @@ export default function MotionDiagram({
               <circle
                 cx={x(time)}
                 cy={y(current)}
-                fill="white"
+                fill="var(--color-white)"
                 r="7"
                 stroke={color}
                 strokeWidth="3"

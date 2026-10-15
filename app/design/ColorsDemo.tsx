@@ -14,7 +14,7 @@ const MAIN_COLORS = [
 }));
 
 const ZINC_COLORS = [
-  { name: "white", value: "#ffffff" },
+  { name: "white", value: "#fafafa" },
   { name: "zinc-50", value: "#fafafa" },
   { name: "zinc-100", value: "#f4f4f5" },
   { name: "zinc-200", value: "#e4e4e7" },
@@ -25,7 +25,7 @@ const ZINC_COLORS = [
   { name: "zinc-700", value: "#3f3f46" },
   { name: "zinc-800", value: "#27272a" },
   { name: "zinc-900", value: "#18181b" },
-  { name: "black", value: "#000000" },
+  { name: "black", value: "#18181b" },
 ].map(({ name, value }) => ({ name, label: value, value }));
 
 interface ColorSwatchProps {

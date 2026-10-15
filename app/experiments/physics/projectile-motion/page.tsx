@@ -190,7 +190,7 @@ export default function ProjectileMotionPage() {
                                   <th
                                     key={heading}
                                     scope="col"
-                                    className="px-3 py-2 text-left font-normal"
+                                    className="px-3 text-left font-normal"
                                   >
                                     {heading}
                                   </th>

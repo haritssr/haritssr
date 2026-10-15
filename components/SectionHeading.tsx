@@ -17,7 +17,7 @@ export default function SectionHeading({
   const appearance =
     variant === "compact"
       ? "text-muted text-sm font-medium"
-      : `text-foreground mb-4 ${headingSize} font-semibold`;
+      : `text-foreground mb-2 ${headingSize} font-semibold`;
 
   return (
     <Heading

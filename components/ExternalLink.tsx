@@ -20,7 +20,7 @@ export default function ExternalLink({
   return (
     <a
       aria-label={name}
-      className="group text-action hover:text-action-hover cursor-pointer hover:underline"
+      className="group text-action hover:text-action-hover inline-block cursor-pointer transition-transform hover:underline active:scale-[0.98] motion-reduce:transition-none"
       href={href}
       rel="noopener noreferrer"
       target="_blank"

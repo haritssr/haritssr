@@ -27,7 +27,7 @@ export default function BottomBar({
       aria-label="Mobile navigation"
       className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden"} px-3.5 pb-3`}
     >
-      <div className="border-middle-hover bg-surface/50 hover:bg-surface/60 w-full rounded-full border px-1.25 py-1 saturate-150 backdrop-blur-lg transition-colors duration-150">
+      <div className="floating-surface w-full border px-1.25 py-1 [--floating-pressed-scale:1]">
         <div className="flex w-full items-center">
           {TitleAndPathData.map(({ title, path, href }) => (
             <IconWrapper href={href} key={title} path={path} to={title} />
@@ -58,7 +58,7 @@ const IconWrapper = ({
   return (
     <Link
       aria-current={isCurrentSection ? currentLocation : undefined}
-      className="focus-visible:outline-action block w-1/5 py-0.5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 active:scale-95"
+      className="focus-visible:outline-action block min-h-10 w-1/5 py-0.5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2"
       href={href}
     >
       <div className="flex flex-col items-center justify-center">

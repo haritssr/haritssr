@@ -51,7 +51,7 @@ export default function IndexCard({
       <p className="text-foreground/70">{description}</p>
     </>
   );
-  const cardClassName = `corner-squircle border-border block h-full space-y-1 rounded-2xl border px-3 py-2.5 shadow-xs ${className ?? ""}`;
+  const cardClassName = `corner-squircle border-border block h-full space-y-1 rounded-2xl border px-3 py-2.5 ${className ?? ""}`;
 
   if (href === undefined) {
     return <div className={cardClassName}>{content}</div>;

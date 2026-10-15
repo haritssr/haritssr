@@ -1,13 +1,11 @@
+.navigation[data-scrolled="false"] {
+  --floating-border-color: var(--color-border);
+}
+
+.navigation[data-scrolled="true"] {
+  --floating-border-color: var(--floating-border-scrolled-color);
+}
+
 .navigation[data-scrolled="false"] :global(.floating-surface) {
   box-shadow: none;
-}
-
-.navigation :global(.floating-surface),
-.actionPill {
-  background-color: color-mix(in srgb, var(--color-surface) 30%, transparent);
-}
-
-.navigation :global(.floating-surface):hover,
-.actionPill:hover {
-  background-color: color-mix(in srgb, var(--color-surface) 40%, transparent);
 }

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "c6fb1f30c53c0280073ed1f3f43a52f68e21d0a6",
+      "date": "2026-10-15T10:28:43+07:00",
+      "subject": "style(WritingTable): remove row hover background"
+    },
+    {
       "hash": "a845b46fbe89a27d654723563899186624c64b2f",
       "date": "2026-10-15T10:28:06+07:00",
       "subject": "fix(TopBar): make the full name pill clickable"
