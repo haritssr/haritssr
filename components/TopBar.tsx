@@ -55,14 +55,12 @@ export default function TopBar() {
           </>
         ) : (
           <>
-            <div className="floating-surface hover:bg-surface/95 group flex items-center space-x-1.5 rounded-full border py-1.5 pr-3 pl-3.5 backdrop-blur-lg has-[a:active]:scale-[0.98]">
-              <Link
-                className="text-foreground/90 hover:text-foreground/80"
-                href="/"
-              >
-                Harits Syah
-              </Link>
-            </div>
+            <Link
+              className="floating-surface hover:bg-surface/95 text-foreground/90 hover:text-foreground/80 flex items-center rounded-full border py-1.5 pr-3 pl-3.5 backdrop-blur-lg active:scale-[0.98]"
+              href="/"
+            >
+              Harits Syah
+            </Link>
 
             {pathname === "/" ? null : <NavigationLinks />}
           </>

@@ -11,6 +11,11 @@
       "subject": "feat(Physics): color equation variables consistently across sections"
     },
     {
+      "hash": "de37dc295bff30efe7097e742bf27530eb24ade9",
+      "date": "2026-10-15T01:33:58+07:00",
+      "subject": "style(Writing): increase table text size and row spacing"
+    },
+    {
       "hash": "0f1d885f4a0db7b1d8705e3db42ae1c73f97a84d",
       "date": "2026-10-15T01:33:57+07:00",
       "subject": "feat(PillMaterial): explore opacity and blur while scrolling"
