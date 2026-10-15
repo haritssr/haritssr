@@ -16,6 +16,7 @@ export default function WritingTable() {
                 <InternalLink
                   className="text-base"
                   href={`/writing/${post.slug}`}
+                  variant="inline"
                 >
                   {post.title}
                 </InternalLink>

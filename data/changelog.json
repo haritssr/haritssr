@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "7968fc3a4f5c6da3fbdc7500b595ef700418cc5b",
+      "date": "2026-10-15T16:59:18+07:00",
+      "subject": "fix(TopBar): center article titles and scroll home on title click"
+    },
+    {
       "hash": "9f02a4b2be75d6a0209eb343e9bcc9d4748b5f77",
       "date": "2026-10-15T16:59:14+07:00",
       "subject": "feat(commits): add October 15 model and cost analysis"
