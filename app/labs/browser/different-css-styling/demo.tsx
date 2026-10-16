@@ -2,7 +2,7 @@
 
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import SectionHeading from "@/components/SectionHeading";
+import { SectionHeading } from "@/components/Section";
 
 export default function DifferentCssStylingDemo() {
   return (

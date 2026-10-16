@@ -3,7 +3,7 @@
 import ExternalLink from "@/components/ExternalLink";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import SectionHeading from "@/components/SectionHeading";
+import { SectionHeading } from "@/components/Section";
 
 export default function TailwindAppleNavbarDemo() {
   return (

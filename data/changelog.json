@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "d3f75e43d6bf4a4bae9d69b7590bf8d124143079",
+      "date": "2026-10-16T17:33:29+07:00",
+      "subject": "refactor(Physics): shorten quantities and units route"
+    },
+    {
       "hash": "718162a56eae0b87443c99eb529fd82efc383c33",
       "date": "2026-10-16T17:32:33+07:00",
       "subject": "chore(CI): parallelize checks and update Next.js"
