@@ -5,8 +5,6 @@ import BottomBar from "@/components/BottomBar";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import { SiteStructuredData } from "@/components/StructuredData";
-import ThemeBootstrap from "@/components/ThemeBootstrap";
-import ThemeProvider from "@/components/ThemeProvider";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -73,10 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={inter.className} lang="en" suppressHydrationWarning>
-      <head>
-        <ThemeBootstrap />
-      </head>
+    <html className={inter.className} lang="en">
       <body>
         <SiteStructuredData />
         <a
@@ -86,7 +81,6 @@ export default function RootLayout({
           Skip to content
         </a>
         <ServiceWorkerRegistration />
-        <ThemeProvider>
           <GlobalSearchProvider>
             <TopBar />
             <main
@@ -96,7 +90,6 @@ export default function RootLayout({
               {children}
             </main>
           </GlobalSearchProvider>
-        </ThemeProvider>
         <Footer />
         <BottomBar />
       </body>

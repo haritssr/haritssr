@@ -94,7 +94,7 @@ export default async function WritingPostPage({
           <p>{Math.ceil(post.wordCount / 200)} Min</p>
         </div>
       </PageHeader>
-      <div className="prose prose-zinc prose-headings:text-foreground in-data-[theme=dark]:prose-invert max-w-none">
+      <div className="prose prose-zinc prose-headings:text-foreground max-w-none">
         <PostContent />
       </div>
     </WritingArticle>

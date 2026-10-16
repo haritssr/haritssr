@@ -80,8 +80,8 @@ export default function PillMaterial({ samples }: { samples: Sample[] }) {
         <p className="text-foreground/70 max-w-3xl">
           Background opacity changes the surface color without fading the pill’s
           label. Backdrop blur softens only the content behind it. Move the pill
-          or scroll inside a preview to compare edges and readability. Try the
-          site’s light and dark themes too.
+          or scroll inside a preview to compare edges and readability. The site
+          keeps a light appearance.
         </p>
       </Section>
       <Section id="page-scroll" title="Scroll beneath the pill">

@@ -5,19 +5,19 @@ import type { ChangelogCommit } from "@/utils/changelog";
 const JAKARTA_OFFSET_MS = 7 * 60 * 60 * 1000;
 
 const MODEL_COLORS: Readonly<Record<string, string>> = {
-  "6 Luna": "text-blue-700 in-data-[theme=dark]:text-blue-400",
-  "6 Sol": "text-green-700 in-data-[theme=dark]:text-green-400",
-  "6.1 Sol": "text-yellow-700 in-data-[theme=dark]:text-yellow-400",
-  "6 Astra": "text-red-700 in-data-[theme=dark]:text-red-400",
+  "6 Luna": "text-blue-700",
+  "6 Sol": "text-green-700",
+  "6.1 Sol": "text-yellow-700",
+  "6 Astra": "text-red-700",
 };
 
 const EFFORT_COLORS: Readonly<Record<string, string>> = {
-  Low: "text-violet-700 in-data-[theme=dark]:text-violet-400",
-  Medium: "text-blue-700 in-data-[theme=dark]:text-blue-400",
-  High: "text-green-700 in-data-[theme=dark]:text-green-400",
-  Xhigh: "text-yellow-700 in-data-[theme=dark]:text-yellow-400",
-  Max: "text-orange-700 in-data-[theme=dark]:text-orange-400",
-  Ultra: "text-red-700 in-data-[theme=dark]:text-red-400",
+  Low: "text-violet-700",
+  Medium: "text-blue-700",
+  High: "text-green-700",
+  Xhigh: "text-yellow-700",
+  Max: "text-orange-700",
+  Ultra: "text-red-700",
 };
 
 const COLOR_LEGEND = [

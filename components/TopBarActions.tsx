@@ -1,7 +1,7 @@
 "use client";
 
-import GitHubIcon from "@/components/GitHubIcon";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { CodeBracketIcon } from "@heroicons/react/24/outline";
+
 import TopBarSearch from "@/components/TopBarSearch";
 import TopBarShare, { ShareButton } from "@/components/TopBarShare";
 import pageSourceUrl from "@/utils/pageSourceUrl";
@@ -20,29 +20,26 @@ export default function TopBarActions({
   return (
     <div
       className={
-        list
-          ? "flex flex-col p-1"
-          : "floating-surface flex w-fit items-center space-x-1 border"
+        list ? "flex flex-col p-1" : "flex w-fit items-center space-x-4"
       }
     >
       <TopBarSearch onSearch={onSearch} showLabel={list} />
-      <ThemeSwitcher showLabel={list} />
       {list ? <ShareButton showLabel /> : <TopBarShare />}
       <a
-        aria-label="View this page's source on GitHub (opens in a new tab)"
+        aria-label="View this page's source code (opens in a new tab)"
         className={
           list
-            ? "focus-visible:outline-action hover:bg-foreground/5 flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
-            : "focus-visible:outline-action flex size-10 items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 sm:size-9 hover:[&>svg]:opacity-50"
+            ? "focus-visible:outline-action hover:bg-foreground/5 flex items-center gap-3 rounded-lg px-3 py-2 text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
+            : "focus-visible:outline-action text-foreground/70 hover:text-foreground flex items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
         }
         href={pageSourceUrl(pathname)}
         rel="noopener noreferrer"
         target="_blank"
-        title="View page source on GitHub"
+        title="View Source"
       >
-        <GitHubIcon
+        <CodeBracketIcon
           aria-hidden="true"
-          className="text-foreground size-5 shrink-0 sm:size-4.5"
+          className="size-5 shrink-0 sm:size-4.5"
         />
         {list ? <span>View Source</span> : null}
       </a>

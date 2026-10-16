@@ -4,11 +4,7 @@ import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Dialog } from "@base-ui/react/dialog";
 import {
   ArrowTopRightOnSquareIcon,
-  CheckIcon,
   ChevronRightIcon,
-  ComputerDesktopIcon,
-  MoonIcon,
-  SunIcon,
   MagnifyingGlassIcon,
   LinkIcon,
   XMarkIcon,
@@ -21,7 +17,6 @@ import GitHubIcon from "@/components/GitHubIcon";
 import SharePageProvider, {
   useSharePageUrl,
 } from "@/components/SharePageProvider";
-import { useTheme } from "@/components/ThemeProvider";
 import type { RouteDoc } from "@/data/routes";
 import {
   getSearchMatchRanges,
@@ -31,8 +26,6 @@ import {
 import { commandWords, matchesCommand } from "@/utils/commandMatching";
 import type { SourceCodeCommand } from "@/utils/sourceCodeCommands";
 import { getSourceCodeCommands } from "@/utils/sourceCodeCommands";
-import type { ThemeCommand } from "@/utils/themeCommands";
-import { getThemeCommands } from "@/utils/themeCommands";
 
 import styles from "./GlobalSearchDialog.module.css";
 
@@ -62,11 +55,7 @@ const SHARE_COMMAND: ShareCommand = {
   kind: "share",
   title: "Share: Copy page URL",
 };
-type SearchItem =
-  | ThemeCommand
-  | SourceCodeCommand
-  | ShareCommand
-  | PageSearchItem;
+type SearchItem = SourceCodeCommand | ShareCommand | PageSearchItem;
 
 const RESULT_ITEM_CLASS_NAME =
   "data-highlighted:bg-interface-hover data-highlighted:border-border-interface-hover corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent p-2 select-none";
@@ -100,12 +89,10 @@ function SearchDialogContent({
   const selectedItemRef = useRef(false);
   const router = useRouter();
   const sharePageUrl = useSharePageUrl();
-  const { preference, setPreference } = useTheme();
   const isSearching = hasSearchQuery(query);
   const isLoading = indexStatus === "loading";
   const loadError = indexStatus === "error";
   const showLoading = isLoading && isSearching;
-  const themeCommands = getThemeCommands(isSearching ? query : "theme");
   const sourceCodeCommands = getSourceCodeCommands(
     isSearching ? query : "github"
   );
@@ -120,8 +107,7 @@ function SearchDialogContent({
     ])
       ? [SHARE_COMMAND]
       : [];
-  const commandCount =
-    themeCommands.length + sourceCodeCommands.length + shareCommands.length;
+  const commandCount = sourceCodeCommands.length + shareCommands.length;
   const pageEntries = searchRoutes(entries, query);
   const pages: PageSearchItem[] = showLoading
     ? []
@@ -130,11 +116,7 @@ function SearchDialogContent({
         title: entry.title,
         entry,
       }));
-  const commands: SearchItem[] = [
-    ...shareCommands,
-    ...themeCommands,
-    ...sourceCodeCommands,
-  ];
+  const commands: SearchItem[] = [...shareCommands, ...sourceCodeCommands];
   const results: SearchItem[] = isSearching
     ? [...commands, ...pages]
     : [...pages, ...commands];
@@ -151,8 +133,6 @@ function SearchDialogContent({
     selectedItemRef.current = true;
     if (item.kind === "share") {
       void sharePageUrl();
-    } else if (item.kind === "theme") {
-      setPreference(item.preference);
     } else if (item.kind === "source-code") {
       window.open(item.url, "_blank", "noopener,noreferrer");
     } else {
@@ -166,7 +146,7 @@ function SearchDialogContent({
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
         <Dialog.Popup
-          className={`${styles.popup} border-middle-hover text-foreground z-90 flex flex-col overflow-hidden rounded-t-3xl border bg-white/50 shadow-xl outline-hidden saturate-150 backdrop-blur-lg sm:rounded-xl`}
+          className={`${styles.popup} border-middle-hover text-foreground bg-background z-90 flex flex-col overflow-hidden rounded-t-3xl border shadow-xl outline-hidden sm:rounded-xl`}
           finalFocus={() =>
             selectedItemRef.current ? false : triggerRef.current
           }
@@ -182,10 +162,9 @@ function SearchDialogContent({
           />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Search pages, type share to copy this page URL, change appearance
-            with theme commands, or type GitHub or source code to open this
-            site&apos;s repository in a new tab. Use arrow keys to browse
-            results and Enter to select.
+            Search pages, type share to copy this page URL, or type GitHub or
+            source code to open this site&apos;s repository in a new tab. Use
+            arrow keys to browse results and Enter to select.
           </Dialog.Description>
           <Autocomplete.Root
             autoHighlight="always"
@@ -255,7 +234,7 @@ function SearchDialogContent({
               {showEmpty ? (
                 <div className="text-muted px-4 py-10 text-center text-sm leading-6">
                   No pages or commands found for “{query}”. Try a topic, page
-                  name, share, theme, or GitHub.
+                  name, share, or GitHub.
                 </div>
               ) : null}
               <Autocomplete.List aria-label={listLabel} className="space-y-1">
@@ -284,16 +263,6 @@ function SearchDialogContent({
                         </Autocomplete.Item>
                       );
                     }
-                    if (item.kind === "theme") {
-                      return (
-                        <ThemeCommandItem
-                          command={item}
-                          current={preference === item.preference}
-                          key={item.preference}
-                          onSelect={selectItem}
-                        />
-                      );
-                    }
                     if (item.kind === "source-code") {
                       return (
                         <SourceCodeCommandItem
@@ -316,7 +285,7 @@ function SearchDialogContent({
                 </Autocomplete.Collection>
               </Autocomplete.List>
             </div>
-            <div className="border-middle-hover text-muted in-data-[theme=dark]:border-middle-hover/50 flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
+            <div className="border-middle-hover text-muted flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
               <output aria-live="polite">{resultStatus}</output>
               <span aria-hidden="true" className="hidden sm:inline">
                 ↑ ↓ navigate · ↵ select · esc close
@@ -356,40 +325,6 @@ function SearchMatchText({ query, text }: SearchMatchTextProps) {
   }
 
   return parts;
-}
-
-function ThemeCommandItem({
-  command,
-  current,
-  onSelect,
-}: {
-  command: ThemeCommand;
-  current: boolean;
-  onSelect: (item: SearchItem) => void;
-}) {
-  const Icon = {
-    light: SunIcon,
-    dark: MoonIcon,
-    system: ComputerDesktopIcon,
-  }[command.preference];
-  return (
-    <Autocomplete.Item
-      className={RESULT_ITEM_CLASS_NAME}
-      onClick={() => {
-        onSelect(command);
-      }}
-      value={command}
-    >
-      <Icon aria-hidden="true" className="text-muted size-5 shrink-0" />
-      <span className="min-w-0 flex-1 text-sm">{command.title}</span>
-      {current ? (
-        <span className="text-muted flex items-center gap-2 text-xs">
-          Current
-          <CheckIcon aria-hidden="true" className="size-4 shrink-0" />
-        </span>
-      ) : null}
-    </Autocomplete.Item>
-  );
 }
 
 function SourceCodeCommandItem({

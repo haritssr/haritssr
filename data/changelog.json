@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "d310b646a8a7d41675e023bb422e59c4ff868591",
+      "date": "2026-10-16T17:33:50+07:00",
+      "subject": "refactor(Section): co-locate heading component"
+    },
+    {
       "hash": "d3f75e43d6bf4a4bae9d69b7590bf8d124143079",
       "date": "2026-10-16T17:33:29+07:00",
       "subject": "refactor(Physics): shorten quantities and units route"
