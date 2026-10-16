@@ -13,6 +13,24 @@
   effort labels are editorial estimates, not recorded model usage.
 
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
+- Timer at `/timer` tracks today's activities in Jakarta time, with daily history
+  and a 30-day totals chart at `/timer/statistic`. `/timer/details` explains its
+  behavior and lists its source and storage locations. Only one activity runs at once.
+  Starting another pauses the current activity. Running timers recover from saved
+  timestamps after navigation, reloads, or browser closure, and stop at midnight.
+  X and House keeping recur daily with one-hour budgets; added activities are for
+  today only. Reached activities stop at their duration.
+- Local Timer data lives in ignored `data/timer/YYYY-MM-DD.json` files, written
+  atomically by one local Node server process. Run `bun run seed:timer` to create
+  realistic sample records for the previous 30 completed days; it never overwrites
+  existing files. These are sample records, not measured activity. Production
+  shows a read-only generated preview, does not read personal files, and rejects
+  Timer mutations. Personal files are excluded from deployment tracing.
+- Timer browser notifications are opt-in, with visible completion messages as a
+  fallback. Alerts may be delayed while the browser is closed or suspended;
+  there is no push service or background scheduler. Notification support varies
+  by browser; mobile may require installing the site. The Timer registers the
+  existing service worker locally only when a permitted completion needs it.
 - Subscribe to the [RSS feed](https://haritssr.com/feed.xml).
 
 User Interface labs live at `/labs/user-interface` and its child
@@ -51,7 +69,7 @@ Nested pages with visible content headings (`h2`–`h6`, including MDX headings 
 shared `SectionHeading` components) show an icon-only
 Contents button in its own pill to the right of the top bar actions. Contents opens
 below the trigger on desktop and in a sheet on mobile. Below 640px, Search,
-Theme, Share, and GitHub always appear inside the sheet below its grab handle,
+Share, and GitHub always appear inside the sheet below its grab handle,
 including before scrolling. Only the Contents trigger appears in the top bar.
 Home and first-level routes show the inline actions pill at the page top,
 collapsing it into Page actions on mobile after scrolling. Nested pages without
@@ -59,8 +77,8 @@ contents always show a matching Page actions
 pill with the same list icon as Contents on mobile, opening the actions in a
 modal Dialog that locks background scrolling and traps focus. Desktop shows the
 inline actions pill instead. The menu stays right-aligned below its trigger and uses
-the Contents panel material and rounded corners, with
-vertical icon-and-label rows for Search, Theme: System/Light/Dark, Copy URL, and View Source.
+the Contents panel material and rounded corners, with vertical icon-and-label
+rows for Search, Copy URL, and View Source.
 Selecting any action closes the dialog; copy-link feedback remains visible
 after it closes.
 Search waits for the sheet or actions dialog to close; its shortcut remains
@@ -79,24 +97,18 @@ desktop controls retain their compact sizing. Text pills have a matching minimum
 height, and bottom navigation links have at least 40px tap height. The top bar
 stays on one row, truncating the site name or page title when space is limited.
 
-Floating navigation pills and the back-to-top control share `floating-surface`:
-fully rounded corners, a blurred 50% surface background (60% on hover), 150%
-color saturation, and 98% scale while pressed. Top bar borders match content
-borders at the page top and gain contrast with a tight, soft shadow around their edges while scrolling.
-The back-to-top control shares that border and shadow. The Pill Material
-lab retains its adjustable opacity and blur.
-Bottom navigation keeps its pill styling without scaling while pressed.
+The top bar uses the layout background at 70% opacity with a subtle blur while
+scrolling. Navigation controls no longer share a floating surface treatment.
+The Pill Material lab retains its adjustable opacity and blur.
 
 UI colors use near-white (`zinc-50`) and near-black (`zinc-900`) instead of pure
 white or black, including shared color tokens, control thumbs, and shadows.
 
 Global search opens with a single list of Home, Projects, Labs, Writing,
-and Design, followed by Share, theme choices, and GitHub. Type to filter pages
-and commands. Type `share` and press Enter to copy the current page URL (including its query and fragment); the same confirmation
-and clipboard behavior are shared with the top-bar Share button.
-
-The theme button cycles System → Light → Dark → System and shows the selected
-preference's icon. First visits use System; explicit choices persist locally.
+and Design, followed by Share and GitHub. Type to filter pages and commands.
+Type `share` and press Enter to copy the current page URL (including its query
+and fragment); the same confirmation and clipboard behavior are shared with the
+top-bar Share button.
 
 The mobile BottomBar appears on Home and routes under Projects, Labs,
 Writing, Design, and Commits up to two URL segments deep, such as
