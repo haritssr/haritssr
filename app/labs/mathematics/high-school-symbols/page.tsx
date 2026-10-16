@@ -132,7 +132,7 @@ export default function HighSchoolSymbolsPage() {
             </li>
             <li>
               <InternalLink
-                href="/labs/physics/physical-quantities-and-units"
+                href="/labs/physics/quantities-and-units"
                 variant="navigation"
               >
                 Besaran, satuan, dan rumus fisika

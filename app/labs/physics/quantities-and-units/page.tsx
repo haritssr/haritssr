@@ -1,8 +1,7 @@
-import { Accordion } from "@base-ui/react/accordion";
-
 import "katex/dist/katex.min.css";
-import { ArrowRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import PrerequisiteGraph from "@/components/PrerequisiteGraph";
@@ -58,10 +57,7 @@ const PREREQUISITE_GRAPH_EDGES = createPrerequisiteGraphEdges();
 
 const QUANTITY_DEPENDENTS = createQuantityDependents();
 
-export const metadata = getLabMetadata(
-  "physics",
-  "physical-quantities-and-units"
-);
+export const metadata = getLabMetadata("physics", "quantities-and-units");
 
 export default function UnitsPage() {
   return (
@@ -69,14 +65,14 @@ export default function UnitsPage() {
       <PageStructuredData
         name={metadata.title}
         description={DESCRIPTION}
-        path="/labs/physics/physical-quantities-and-units"
+        path="/labs/physics/quantities-and-units"
         breadcrumbs={[
           { name: "Home", path: "/" },
           { name: "Labs", path: "/labs" },
           { name: "Physics", path: "/labs/physics" },
           {
-            name: "Physical Quantities and Units",
-            path: "/labs/physics/physical-quantities-and-units",
+            name: "Quantities and Units",
+            path: "/labs/physics/quantities-and-units",
           },
         ]}
       />
@@ -335,53 +331,48 @@ function FormulaPath({
 
 function PrerequisiteDiagrams({ units }: { units: readonly UnitDefinition[] }) {
   return (
-    <Accordion.Root className="w-full space-y-3" multiple>
+    <Accordion className="w-full max-w-full space-y-3">
       {units.map((unit) => (
-        <Accordion.Item key={unit.quantity} value={unit.quantity}>
-          <Accordion.Header>
-            <Accordion.Trigger className="group focus-visible:outline-action border-border bg-foreground/5 text-foreground hover:bg-foreground/10 data-panel-open:bg-foreground/10 flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm font-medium outline-hidden transition-colors focus-visible:outline-2 data-panel-open:rounded-b-none">
-              <span className="flex min-w-0 items-center gap-2">
-                <span className="truncate" lang="id">
-                  {unit.quantity}
-                </span>
-                <span className="text-foreground/60 shrink-0">
-                  <MathSymbol value={unit.quantitySymbol} />
-                </span>
+        <AccordionItem
+          key={unit.quantity}
+          title={
+            <span className="flex min-w-0 items-center gap-2">
+              <span className="truncate" lang="id">
+                {unit.quantity}
               </span>
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="text-foreground size-5 shrink-0 transition-transform duration-200 group-data-panel-open:rotate-180"
+              <span className="text-foreground/60 shrink-0">
+                <MathSymbol value={unit.quantitySymbol} />
+              </span>
+            </span>
+          }
+          value={unit.quantity}
+        >
+          <div className="mb-3 flex items-center gap-3 text-xs">
+            <span className="text-foreground/60">
+              Prerequisites → formula → result
+            </span>
+            <span aria-hidden="true" className="text-foreground/40">
+              ·
+            </span>
+            <span className="text-foreground/60">
+              {getFormulaDefinitions(unit.quantity).length}{" "}
+              {getFormulaDefinitions(unit.quantity).length === 1
+                ? "formula"
+                : "formulas"}
+            </span>
+          </div>
+          <div className="space-y-3">
+            {getFormulaDefinitions(unit.quantity).map((formulaDefinition) => (
+              <FormulaPath
+                formulaDefinition={formulaDefinition}
+                key={formulaDefinition.name}
+                result={unit}
               />
-            </Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Panel className="border-border text-foreground/70 rounded-b-lg border-r border-b border-l bg-white p-3 text-sm">
-            <div className="mb-3 flex items-center gap-3 text-xs">
-              <span className="text-foreground/60">
-                Prerequisites → formula → result
-              </span>
-              <span aria-hidden="true" className="text-foreground/40">
-                ·
-              </span>
-              <span className="text-foreground/60">
-                {getFormulaDefinitions(unit.quantity).length}{" "}
-                {getFormulaDefinitions(unit.quantity).length === 1
-                  ? "formula"
-                  : "formulas"}
-              </span>
-            </div>
-            <div className="space-y-3">
-              {getFormulaDefinitions(unit.quantity).map((formulaDefinition) => (
-                <FormulaPath
-                  formulaDefinition={formulaDefinition}
-                  key={formulaDefinition.name}
-                  result={unit}
-                />
-              ))}
-            </div>
-          </Accordion.Panel>
-        </Accordion.Item>
+            ))}
+          </div>
+        </AccordionItem>
       ))}
-    </Accordion.Root>
+    </Accordion>
   );
 }
 

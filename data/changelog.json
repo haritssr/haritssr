@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "718162a56eae0b87443c99eb529fd82efc383c33",
+      "date": "2026-10-16T17:32:33+07:00",
+      "subject": "chore(CI): parallelize checks and update Next.js"
+    },
+    {
       "hash": "10483600b236aa06649ef1a5f83995965dc1ac0f",
       "date": "2026-10-15T19:56:08+07:00",
       "subject": "style(Labs): simplify and color the user interface icon"

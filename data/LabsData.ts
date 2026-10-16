@@ -1195,8 +1195,8 @@ export const LabsData: readonly LabDomain[] = [
     description: "Explore physics through interactive demos.",
     labs: [
       {
-        slug: "physical-quantities-and-units",
-        title: "Physical Quantities and Units",
+        slug: "quantities-and-units",
+        title: "Quantities and Units",
         description: "Explore physical quantities and SI units.",
         tags: ["mathematics", "graphs"],
         createdAt: "2026-09-20",
@@ -1209,6 +1209,7 @@ export const LabsData: readonly LabDomain[] = [
           "2026-10-11",
           "2026-10-13",
           "2026-10-15",
+          "2026-10-16",
         ],
       },
       {
