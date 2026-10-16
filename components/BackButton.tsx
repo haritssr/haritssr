@@ -13,14 +13,14 @@ export default function BackButton({
   return (
     <Link
       aria-label={`Back to ${name}`}
-      className={`floating-surface text-foreground/90 focus-visible:outline-action flex h-10.5 min-w-10 items-center justify-center gap-0.5 border focus-visible:outline-2 focus-visible:outline-offset-2 sm:h-9.5 sm:min-w-9 sm:shrink-0 hover:[&>span]:opacity-50 hover:[&>svg]:opacity-50 ${compact ? "w-10 shrink-0 sm:w-fit sm:pr-3.5 sm:pl-2" : "w-fit pr-3.5 pl-2"}`}
+      className={`text-foreground/70 focus-visible:outline-action hover:[&>svg]:text-foreground hover:[&>span]:text-foreground flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 sm:shrink-0 ${compact ? "w-fit shrink-0" : "w-fit"}`}
       href={href}
       prefetch={false}
       title={`Back to ${name}`}
     >
       <ChevronLeftIcon
         aria-hidden="true"
-        className={`size-5 shrink-0 sm:size-4.5 ${compact ? "-translate-x-px sm:translate-x-0" : ""}`}
+        className="size-5 shrink-0 sm:size-4.5"
         strokeWidth={2}
       />
       <span

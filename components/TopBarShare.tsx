@@ -25,18 +25,15 @@ export function ShareButton({ showLabel }: { showLabel: boolean }) {
       title="Share this page"
       className={
         showLabel
-          ? "focus-visible:outline-action text-foreground hover:bg-foreground/5 flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
-          : "focus-visible:outline-action flex size-10 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 sm:size-9 hover:[&>svg]:opacity-50"
+          ? "focus-visible:outline-action text-foreground hover:bg-foreground/5 flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
+          : "focus-visible:outline-action text-foreground/70 hover:text-foreground flex cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
       }
       onClick={() => {
         void handleShare();
       }}
       type="button"
     >
-      <LinkIcon
-        aria-hidden="true"
-        className="text-foreground size-5 shrink-0 sm:size-4.5"
-      />
+      <LinkIcon aria-hidden="true" className="size-5 shrink-0 sm:size-4.5" />
       {showLabel ? <span>Copy URL</span> : null}
     </button>
   );

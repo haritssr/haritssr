@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog } from "@base-ui/react/dialog";
-import { ListBulletIcon } from "@heroicons/react/24/outline";
+import { QueueListIcon } from "@heroicons/react/24/outline";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import SharePageProvider from "@/components/SharePageProvider";
@@ -80,16 +80,16 @@ function MobileActionMenu({ pathname }: { pathname: string }) {
         }}
       >
         <div
-          className={`floating-surface flex shrink-0 items-center border ${open ? "border-action!" : ""}`}
+          className={`flex shrink-0 items-center ${open ? "border-action!" : ""}`}
         >
           <Dialog.Trigger
             aria-label="Page actions"
             title="Page actions"
             data-header-actions-trigger=""
             ref={triggerRef}
-            className="focus-visible:outline-action text-foreground flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 sm:size-9 hover:[&>svg]:opacity-50"
+            className="focus-visible:outline-action text-foreground/70 flex shrink-0 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 hover:[&>svg]:opacity-50"
           >
-            <ListBulletIcon
+            <QueueListIcon
               aria-hidden="true"
               className="pointer-events-none size-5"
             />

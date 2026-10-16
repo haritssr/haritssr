@@ -27,7 +27,7 @@ export default function BottomBar({
       aria-label="Mobile navigation"
       className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden"} px-3.5 pb-3`}
     >
-      <div className="floating-surface w-full border px-1.25 py-1 [--floating-pressed-scale:1]">
+      <div className="bg-background/70 w-full rounded-xl border px-1.25 py-1 backdrop-blur-md">
         <div className="flex w-full items-center">
           {TitleAndPathData.map(({ title, path, href }) => (
             <IconWrapper href={href} key={title} path={path} to={title} />
@@ -139,16 +139,5 @@ const TitleAndPathData = [
     ),
     title: "Design",
     href: "/design",
-  },
-  {
-    path: (
-      <path
-        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    ),
-    title: "Commits",
-    href: "/commits",
   },
 ];

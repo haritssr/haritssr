@@ -1,7 +1,7 @@
 "use client";
 
 import { Popover } from "@base-ui/react/popover";
-import { ListBulletIcon } from "@heroicons/react/24/outline";
+import { Bars3BottomRightIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
@@ -52,9 +52,12 @@ export default function TopBarContents({
   }
 
   const triggerClassName =
-    "focus-visible:outline-action text-foreground flex size-10 sm:size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:[&>svg]:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2";
+    "focus-visible:outline-action text-foreground/70 flex shrink-0 cursor-pointer items-center justify-center rounded-lg hover:[&>svg]:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2";
   const triggerContent = (
-    <ListBulletIcon aria-hidden="true" className="pointer-events-none size-5" />
+    <Bars3BottomRightIcon
+      aria-hidden="true"
+      className="pointer-events-none size-5"
+    />
   );
   const panel = hasOpened ? (
     <ContentsPanel
@@ -87,7 +90,7 @@ export default function TopBarContents({
         </div>
       )}
       <div
-        className={`floating-surface flex shrink-0 items-center border ${open ? "border-action!" : ""}`}
+        className={`flex shrink-0 items-center ${open ? "border-action!" : ""}`}
       >
         {desktop ? (
           <Popover.Root

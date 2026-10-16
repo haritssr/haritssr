@@ -1,11 +1,8 @@
-.navigation[data-scrolled="false"] {
-  --floating-border-color: var(--color-border);
-}
-
 .navigation[data-scrolled="true"] {
-  --floating-border-color: var(--floating-border-scrolled-color);
-}
-
-.navigation[data-scrolled="false"] :global(.floating-surface) {
-  box-shadow: none;
+  background-color: color-mix(
+    in srgb,
+    var(--color-background) 70%,
+    transparent
+  );
+  backdrop-filter: blur(12px);
 }

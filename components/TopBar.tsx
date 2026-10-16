@@ -13,14 +13,7 @@ import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 
 import styles from "./TopBar.module.css";
 
-const destinations = [
-  "home",
-  "projects",
-  "labs",
-  "writing",
-  "design",
-  "commits",
-] as const;
+const destinations = ["home", "projects", "labs", "writing", "design"] as const;
 
 let mobileMedia: MediaQueryList | undefined;
 
@@ -79,10 +72,10 @@ export default function TopBar() {
       data-scrolled={scrolled}
       ref={navigationRef}
     >
-      <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-4 xl:px-0">
+      <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:py-5 xl:px-0">
         {pathname === "/" ? (
           <Link
-            className="floating-surface text-foreground/90 flex h-10 min-w-0 items-center border pr-3 pl-3.5 sm:h-9 hover:[&>span]:opacity-60"
+            className="text-foreground/70 flex min-w-0 items-center"
             href="/"
           >
             <span className="truncate">Harits Syah</span>
@@ -98,7 +91,7 @@ export default function TopBar() {
           // TitleWhileScroll
           <div className="flex min-w-0 flex-1 justify-center">
             <Link
-              className="floating-surface flex h-10.5 w-fit max-w-full min-w-0 items-center border px-4 sm:h-9.5"
+              className="text-foreground flex w-fit max-w-full min-w-0 items-center px-4 font-medium"
               href={pathname}
               onNavigate={(event) => {
                 event.preventDefault();
@@ -137,7 +130,7 @@ const HeaderActions = memo(
     const isNestedRoute = pathname.split("/").filter(Boolean).length > 1;
 
     return (
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex shrink-0 items-center gap-4">
         {isNestedRoute ? (
           <TopBarContents mobile={mobile} pathname={pathname} />
         ) : (
@@ -156,17 +149,25 @@ HeaderActions.displayName = "HeaderActions";
 function NavigationLinks({ currentSection }: { currentSection: string }) {
   return (
     <ul
-      className="floating-surface absolute left-1/2 hidden h-9.5 -translate-x-1/2 items-center border px-1.5 [--floating-pressed-scale:1] lg:flex"
+      className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 lg:flex"
       id="main-navigation"
     >
       {destinations.map((destination) => (
-        <li className="flex h-full items-center" key={destination}>
+        <li className="flex h-full items-center space-x-3" key={destination}>
           <Link
-            className={` ${currentSection === destination ? "text-action" : "text-foreground/90 hover:opacity-60"} flex h-full items-center rounded-full px-3`}
+            className="group flex h-full items-center rounded-full"
             aria-current={currentSection === destination ? "page" : undefined}
             href={destination === "home" ? "/" : `/${destination}`}
           >
-            {capitalizeFirstLetter(destination)}
+            <span
+              className={
+                currentSection === destination
+                  ? "text-foreground"
+                  : "text-foreground/70"
+              }
+            >
+              {capitalizeFirstLetter(destination)}
+            </span>
           </Link>
         </li>
       ))}
