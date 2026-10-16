@@ -2,6 +2,23 @@ const CACHE_NAME = "haritssr-offline-v1";
 const OFFLINE_URL = "/offline.html";
 const OWNED_PREFIXES = ["haritssr-shell-", "haritssr-offline-"];
 
+self.addEventListener("notificationclick", (event) => {
+  if (!event.notification.tag.startsWith("timer-")) {
+    return;
+  }
+  event.notification.close();
+  event.waitUntil(
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then(async (clients) => {
+        const timer = clients.find(
+          (client) => new URL(client.url).pathname === "/timer"
+        );
+        await (timer ? timer.focus() : self.clients.openWindow("/timer"));
+      })
+  );
+});
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches

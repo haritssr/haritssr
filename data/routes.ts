@@ -47,6 +47,25 @@ export const todayModelSuitabilityRoute: RouteDoc = {
 
 export const navigationRoutes: readonly RouteDoc[] = [
   {
+    route: "/timer/details",
+    title: "Details",
+    description:
+      "How Timer works, its daily storage, and source file locations.",
+    group: "Timer",
+  },
+  {
+    route: "/timer/statistic",
+    title: "Statistics",
+    description: "Review daily activities and time spent over 30 days.",
+    group: "Timer",
+  },
+  {
+    route: "/timer",
+    title: "Timer",
+    description: "A simple timer for focused work and everyday tasks.",
+    group: "Tools",
+  },
+  {
     route: "/more",
     title: "More",
     description: "Interests and personal notes about Harits Syah",

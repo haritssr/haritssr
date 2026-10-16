@@ -27,6 +27,10 @@ yarn-error.log*
 .data/
 .data-haritssr/
 
+# Personal timer history (generated mock days also stay local)
+/data/timer/*.json
+/data/timer/*.tmp
+
 *.tsbuildinfo
 
 .zed/

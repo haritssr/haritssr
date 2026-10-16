@@ -1,9 +1,9 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
-  // Turbopack discovers these MDX entry modules through import.meta.glob.
+  // Include discovered MDX modules and standalone operational scripts.
   "entry": [
     "public/sw.js",
-    "scripts/{inspect-*-db.js,validate-content.ts}!",
+    "scripts/{inspect-*-db.js,validate-content.ts,seed-timer.ts,sync-changelog.ts}!",
     "data/writing/*.mdx",
   ],
   "ignoreDependencies": [

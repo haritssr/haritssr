@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "e45dd6faf761b692662e13b22313527d5ca0c24c",
+      "date": "2026-10-16T17:37:33+07:00",
+      "subject": "refactor(theme): remove site-wide dark mode"
+    },
+    {
       "hash": "d310b646a8a7d41675e023bb422e59c4ff868591",
       "date": "2026-10-16T17:33:50+07:00",
       "subject": "refactor(Section): co-locate heading component"

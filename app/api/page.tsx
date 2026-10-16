@@ -15,6 +15,11 @@ export const metadata = createPageMetadata({
 
 const publicEndpoints = [
   {
+    href: "/api/timer",
+    description:
+      "Timer activities and 30-day totals. Production returns generated sample data; local development uses personal JSON files.",
+  },
+  {
     href: "/api/hello",
     description: "Sample people for data-fetching demos.",
   },
@@ -60,6 +65,18 @@ export default function APIPage() {
         </Section>
         {DATABASE_LABS_ENABLED ? (
           <Section title="Local">
+            <InternalLink href="/api/timer" variant="inline">
+              /api/timer
+            </InternalLink>
+            <p className="text-muted">
+              Today’s timer activities. Use GET with a date, such as{" "}
+              <InternalLink href="/api/timer?date=2026-10-15" variant="inline">
+                /api/timer?date=2026-10-15
+              </InternalLink>
+              , for a daily activity list and 30-day totals. POST adds, starts,
+              pauses, or acknowledges completion of an activity. Production GET
+              responses contain sample data; production POST is unavailable.
+            </p>
             <InternalLink href="/api/task" variant="inline">
               /api/task
             </InternalLink>

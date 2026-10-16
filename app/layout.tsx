@@ -5,6 +5,7 @@ import BottomBar from "@/components/BottomBar";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import { SiteStructuredData } from "@/components/StructuredData";
+import TimerProvider from "@/components/TimerProvider";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -81,7 +82,8 @@ export default function RootLayout({
           Skip to content
         </a>
         <ServiceWorkerRegistration />
-          <GlobalSearchProvider>
+        <GlobalSearchProvider>
+          <TimerProvider>
             <TopBar />
             <main
               className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 pt-8 xl:px-0"
@@ -89,7 +91,8 @@ export default function RootLayout({
             >
               {children}
             </main>
-          </GlobalSearchProvider>
+          </TimerProvider>
+        </GlobalSearchProvider>
         <Footer />
         <BottomBar />
       </body>

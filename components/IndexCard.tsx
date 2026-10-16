@@ -5,8 +5,8 @@ import type { ReactNode } from "react";
 interface IndexCardProps {
   title: string;
   description: string;
-  count: number;
-  countLabel: string;
+  count?: number;
+  countLabel?: string;
   icon: ReactNode;
   href?: string;
   headingLevel?: 2 | 3 | 4;
@@ -36,10 +36,12 @@ export default function IndexCard({
           </Heading>
         </div>
         <div className="flex shrink-0 items-center space-x-1">
-          <span className="text-muted text-sm font-light tabular-nums">
-            {count}
-            <span className="sr-only"> {countLabel}</span>
-          </span>
+          {count === undefined ? null : (
+            <span className="text-muted text-sm font-light tabular-nums">
+              {count}
+              <span className="sr-only"> {countLabel}</span>
+            </span>
+          )}
           {href === undefined ? null : (
             <ChevronRightIcon
               aria-hidden="true"

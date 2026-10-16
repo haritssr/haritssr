@@ -1,0 +1,177 @@
+export interface TimerTask {
+  id: string;
+  activity: string;
+  description: string;
+  duration: number;
+  spent: number;
+  startedAt: string | null;
+  reachedAt: string | null;
+  notifiedAt: string | null;
+}
+
+export interface TimerDay {
+  schemaVersion: 1;
+  date: string;
+  revision: number;
+  tasks: TimerTask[];
+}
+
+export interface TimerNotice {
+  date: string;
+  taskId: string;
+  activity: string;
+}
+
+export interface TimerSnapshot {
+  day: TimerDay;
+  today: string;
+  now: string;
+  mode: "local" | "demo";
+  notifications: TimerNotice[];
+}
+
+export interface TimerHistory {
+  day: TimerDay;
+  today: string;
+  mode: "local" | "demo";
+  totals: { date: string; spent: number }[];
+}
+
+export type TimerAction =
+  | {
+      action: "add";
+      date: string;
+      activity: string;
+      description: string;
+      duration: number;
+    }
+  | { action: "start" | "pause" | "acknowledge"; date: string; taskId: string };
+
+const TIMER_TIME_ZONE = "Asia/Jakarta";
+
+const dateFormatter = new Intl.DateTimeFormat("en-CA", {
+  timeZone: TIMER_TIME_ZONE,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+export function timerDate(now: number = Date.now()) {
+  const parts = dateFormatter.formatToParts(now);
+  const part = (type: string) =>
+    parts.find((value) => value.type === type)?.value;
+  return `${part("year")}-${part("month")}-${part("day")}`;
+}
+
+export function validTimerDate(value: string) {
+  return (
+    /^\d{4}-\d{2}-\d{2}$/u.test(value) &&
+    Number.isFinite(Date.parse(`${value}T00:00:00Z`)) &&
+    new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value
+  );
+}
+
+export function shiftTimerDate(date: string, days: number) {
+  return new Date(Date.parse(`${date}T00:00:00Z`) + days * 86_400_000)
+    .toISOString()
+    .slice(0, 10);
+}
+
+export function timerMidnight(date: string) {
+  return Date.parse(`${shiftTimerDate(date, 1)}T00:00:00+07:00`);
+}
+
+export function taskSpent(task: TimerTask, date: string, now: number) {
+  const elapsed =
+    task.startedAt === null
+      ? 0
+      : Math.max(
+          0,
+          (Math.min(now, timerMidnight(date)) - Date.parse(task.startedAt)) /
+            1000
+        );
+  return Math.min(task.duration, task.spent + elapsed);
+}
+
+export function formatTimerTime(seconds: number) {
+  const value = Math.max(0, Math.floor(seconds));
+  const hours = Math.floor(value / 3600);
+  const minutes = Math.floor((value % 3600) / 60);
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(value % 60).padStart(2, "0")}`;
+}
+
+export function createTimerDay(date: string): TimerDay {
+  return {
+    schemaVersion: 1,
+    date,
+    revision: 0,
+    tasks: [
+      {
+        id: "daily-x",
+        activity: "X",
+        description: "x bookmarks doom scrolling",
+        duration: 3600,
+      },
+      {
+        id: "daily-house-keeping",
+        activity: "House keeping",
+        description: "sapu pel, siram tanaman, cuci piring, masak nasi",
+        duration: 3600,
+      },
+    ].map((task) => ({
+      ...task,
+      spent: 0,
+      startedAt: null,
+      reachedAt: null,
+      notifiedAt: null,
+    })),
+  };
+}
+
+export function createSampleTimerDay(date: string): TimerDay {
+  const day = createTimerDay(date);
+  let seed = Number(date.replaceAll("-", ""));
+  const random = () => {
+    seed = (seed * 1_664_525 + 1_013_904_223) % 4_294_967_296;
+    return seed / 4_294_967_296;
+  };
+  const activities = [
+    ["Focused work", "Build and refine one useful feature.", 7200],
+    ["Reading", "Read a chapter and write down the main ideas.", 2700],
+    ["Exercise", "A walk, stretching, or a short workout.", 1800],
+    ["Planning", "Choose priorities and batch small tasks.", 1200],
+    ["Physics", "Work through problems and review the solutions.", 3600],
+  ] as const;
+  for (const [
+    index,
+    [activity, description, duration],
+  ] of activities.entries()) {
+    if (random() > 0.3) {
+      day.tasks.push({
+        id: `sample-${index}`,
+        activity,
+        description,
+        duration,
+        spent: 0,
+        startedAt: null,
+        reachedAt: null,
+        notifiedAt: null,
+      });
+    }
+  }
+  for (const task of day.tasks) {
+    const progress = random();
+    task.spent = Math.floor(task.duration * (0.2 + random() * 0.7));
+    if (progress < 0.12) {
+      task.spent = 0;
+    }
+    if (progress > 0.62) {
+      task.spent = task.duration;
+    }
+    if (task.spent === task.duration) {
+      task.reachedAt = `${date}T16:00:00+07:00`;
+      task.notifiedAt = task.reachedAt;
+    }
+  }
+  return day;
+}

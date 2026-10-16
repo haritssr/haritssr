@@ -1,10 +1,4 @@
-import {
-  BeakerIcon,
-  BriefcaseIcon,
-  ClockIcon,
-  DocumentTextIcon,
-  RectangleGroupIcon,
-} from "@heroicons/react/24/outline";
+import { ClockIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -13,10 +7,7 @@ import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
 import { PageStructuredData } from "@/components/StructuredData";
 import history from "@/data/changelog.json";
-import { ProjectsData } from "@/data/ProjectsData";
-import { getAvailableLabCount } from "@/utils/labCatalog";
 import { createPageMetadata } from "@/utils/pageMetadata";
-import { allWritingPosts } from "@/utils/writing-posts";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
 // Example: "https://www.example.com" becomes "example.com" after replacement.
@@ -31,49 +22,6 @@ const contacts = [
   {
     link: "https://www.github.com/haritssr",
     name: "GitHub",
-  },
-];
-
-const homeNavigation = [
-  {
-    href: "/projects",
-    title: "Projects",
-    count: ProjectsData.length,
-    countLabel: "projects",
-    icon: BriefcaseIcon,
-    description: "Websites and products I’ve designed and built.",
-  },
-  {
-    href: "/labs",
-    title: "Labs",
-    count: getAvailableLabCount(),
-    countLabel: "labs",
-    icon: BeakerIcon,
-    description: "Interactive lessons and tools for exploration.",
-  },
-  {
-    href: "/writing",
-    title: "Writing",
-    count: allWritingPosts.length,
-    countLabel: "writing posts",
-    icon: DocumentTextIcon,
-    description: "Notes and ideas about the things I’m learning.",
-  },
-  {
-    href: "/design",
-    title: "Design",
-    count: 36,
-    countLabel: "design examples",
-    icon: RectangleGroupIcon,
-    description: "Components and patterns used across this site.",
-  },
-  {
-    href: "/commits",
-    title: "Commits",
-    count: history.commits.length,
-    countLabel: "commits",
-    icon: ClockIcon,
-    description: "Code changes and the history behind this site.",
   },
 ];
 
@@ -101,47 +49,18 @@ export default function Home() {
         path="/"
       />
       <div className="space-y-16">
-        <ProfileSection />
-        <HomeNavigation />
+        <Profile />
+        <Tools />
       </div>
     </>
   );
 }
 
-function HomeNavigation() {
-  return (
-    <nav
-      aria-label="Explore the site"
-      className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-    >
-      {homeNavigation.map(
-        ({ href, title, description, icon: Icon, count, countLabel }) => (
-          <IndexCard
-            href={href}
-            key={href}
-            title={title}
-            description={description}
-            count={count}
-            countLabel={countLabel}
-            icon={
-              <Icon
-                aria-hidden="true"
-                className="text-foreground size-4.5 shrink-0"
-                strokeWidth={1.5}
-              />
-            }
-          />
-        )
-      )}
-    </nav>
-  );
-}
-
-function ProfileSection() {
+function Profile() {
   return (
     <section
       aria-label="About Harits Syah"
-      className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:items-start lg:grid-cols-4"
+      className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:items-start lg:grid-cols-4"
       id="Identity"
     >
       <Image
@@ -179,6 +98,44 @@ function ProfileSection() {
         </li>
       </ul>
     </section>
+  );
+}
+
+function Tools() {
+  return (
+    <nav
+      aria-label="Tools"
+      className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+    >
+      <IndexCard
+        title="Timer"
+        description="A simple timer for focused work and everyday tasks."
+        href="/timer"
+        headingLevel={3}
+        icon={
+          <ClockIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
+        title="Commits"
+        description="Recent code changes and updates across this site."
+        count={history.commits.length}
+        countLabel="commits"
+        href="/commits"
+        headingLevel={3}
+        icon={
+          <DocumentTextIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+    </nav>
   );
 }
 

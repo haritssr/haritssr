@@ -1,19 +1,29 @@
 import type { ButtonHTMLAttributes, Ref } from "react";
 
-type ButtonVariant = "danger" | "ghost" | "primary" | "secondary";
+type ButtonVariant =
+  | "danger"
+  | "ghost"
+  | "outline"
+  | "primary"
+  | "secondary"
+  | "success-subtle";
 
 const BUTTON_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle rounded-lg px-3 text-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle rounded-xl px-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   danger:
-    "interactive-elevation border border-danger bg-surface py-1.25 font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
+    "border border-danger bg-surface py-1.5 font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
   ghost:
-    "py-1.25 font-medium text-zinc-700 transition-[background-color,color,box-shadow] duration-150 enabled:hover:shadow-control-hover enabled:active:shadow-control-pressed hover:bg-zinc-100 focus-visible:outline-zinc-700",
+    "py-1.5 font-medium text-zinc-700 transition-colors duration-150 hover:bg-zinc-100 focus-visible:outline-zinc-700",
+  outline:
+    "border-border text-foreground border bg-transparent py-1.5 font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   primary:
-    "interactive-elevation bg-action py-1.25 font-medium text-white hover:bg-action-hover focus-visible:outline-action",
+    "bg-action py-1.5 font-medium text-white hover:bg-action-hover focus-visible:outline-action",
   secondary:
-    "interactive-elevation border border-zinc-300 bg-white py-1.25 text-zinc-600 select-none hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-zinc-700",
+    "border border-zinc-300 bg-white py-1.5 text-zinc-600 select-none hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-zinc-700",
+  "success-subtle":
+    "border border-transparent bg-success py-1.5 font-medium text-white transition-colors duration-150 enabled:hover:bg-success/90 focus-visible:outline-success",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

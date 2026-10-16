@@ -19,6 +19,10 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
+  // Personal timer files must never be copied into deployment artifacts.
+  outputFileTracingExcludes: {
+    "/api/timer": ["./data/timer/**/*"],
+  },
   // Related top-level features; enabling these requires a route migration.
   // Cache component/function output and stream dynamic content behind a static shell.
   // - cacheComponents: true,
