@@ -1,8 +1,34 @@
-.navigation[data-scrolled="true"] {
-  background-color: color-mix(
-    in srgb,
-    var(--color-background) 70%,
+.navigation {
+  isolation: isolate;
+}
+
+.navigation[data-scrolled="true"]::before,
+.navigation[data-scrolled="true"]::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 -2rem;
+  pointer-events: none;
+  content: "";
+}
+
+.navigation[data-scrolled="true"]::before {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-background) 80%, transparent),
+    color-mix(in srgb, var(--color-background) 40%, transparent) 55%,
     transparent
   );
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to bottom, black 35%, transparent);
+}
+
+.navigation[data-scrolled="true"]::after {
+  backdrop-filter: blur(24px);
+  mask-image: linear-gradient(
+    to bottom,
+    black 10%,
+    rgb(0 0 0 / 80%) 35%,
+    rgb(0 0 0 / 25%) 65%,
+    transparent 90%
+  );
 }

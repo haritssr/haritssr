@@ -65,12 +65,12 @@ function ContentsList({
   }
 
   return (
-    <ol className="marker:text-foreground/70 list-decimal space-y-2 pl-8 [&_li]:space-y-2">
+    <ol className="marker:text-foreground/70 list-decimal space-y-3 pl-8 text-sm [&_li]:space-y-3">
       {entries.map((entry) => (
         <li key={entry.id}>
           <InternalLink
             aria-current={activeId === entry.id ? "location" : undefined}
-            className={`focus-visible:outline-action block! w-full! rounded-lg text-base leading-5! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
+            className={`focus-visible:outline-action block! w-full! rounded-lg text-sm leading-5! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
             href={`#${encodeURIComponent(entry.id)}`}
             onClick={(event) => {
               select(event, entry);
@@ -202,7 +202,7 @@ export default function ArticleContentsPanel({
             className="bg-border mx-auto mt-3 h-1 w-10 shrink-0 rounded-full"
           />
           {mobileActions !== undefined && mobileActions !== null ? (
-            <div className="flex shrink-0 justify-end px-3 pt-3 pb-1">
+            <div className="flex shrink-0 justify-end pt-3 pr-5 pb-1">
               {mobileActions}
             </div>
           ) : null}

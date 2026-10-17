@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "13062390aaca7371b5bbc675b114f6d25a7860f2",
+      "date": "2026-10-18T06:49:51+07:00",
+      "subject": "style(ProjectsCard): align overview and website actions"
+    },
+    {
       "hash": "109ad47922a5b1fb84e190c3fcf5ac8bd9785ef7",
       "date": "2026-10-18T06:49:50+07:00",
       "subject": "feat(timer): summarize daily history with activity tables"
