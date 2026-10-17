@@ -133,6 +133,7 @@ export default function ChangelogExplorer({
       <ChangelogFilters
         period={period}
         anchor={anchor}
+        initialDay={initialDay}
         firstDay={firstDay}
         lastDay={lastDay}
         type={type}
@@ -254,6 +255,7 @@ function graphGranularity(period: ChangelogPeriod): string {
 interface ChangelogFiltersProps {
   period: ChangelogPeriod;
   anchor: string;
+  initialDay: string;
   firstDay: string;
   lastDay: string;
   type: string;
@@ -268,6 +270,7 @@ interface ChangelogFiltersProps {
 function ChangelogFilters({
   period,
   anchor,
+  initialDay,
   firstDay,
   lastDay,
   type,
@@ -284,20 +287,31 @@ function ChangelogFilters({
   const previousEnd = periodRange(period, previous)?.end ?? firstDay;
   const nextStart = periodRange(period, next)?.start ?? lastDay;
   const label = rangeLabel(period, anchor);
+  const selectedRange = periodRange(period, anchor);
   return (
     <Section title="Filters">
       <div className="flex flex-wrap gap-2">
-        {(["day", "week", "month", "year"] as const).map((value) => (
-          <Button
-            key={value}
-            onClick={() => {
-              pickPeriod(value, commitDay(new Date().toISOString()));
-            }}
-            variant="secondary"
-          >
-            {value === "day" ? "Today" : `This ${value}`}
-          </Button>
-        ))}
+        {(["day", "week", "month", "year"] as const).map((value) => {
+          const currentRange = periodRange(value, initialDay);
+          const isActive =
+            period === value &&
+            selectedRange?.start === currentRange?.start &&
+            selectedRange?.end === currentRange?.end;
+
+          return (
+            <Button
+              aria-pressed={isActive}
+              className="aria-pressed:border-border-hover aria-pressed:bg-middle-hover aria-pressed:text-foreground aria-pressed:hover:bg-middle-hover"
+              key={value}
+              onClick={() => {
+                pickPeriod(value, commitDay(new Date().toISOString()));
+              }}
+              variant="secondary"
+            >
+              {value === "day" ? "Today" : `This ${value}`}
+            </Button>
+          );
+        })}
         <Button
           disabled={!activeFilter}
           onClick={resetFilters}
