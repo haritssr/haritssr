@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import LabPageHeader from "@/components/LabPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { getNextjsStudent, NextjsStudentsData } from "@/data/NextjsLabsData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -32,7 +33,12 @@ export default async function StudentPage({ params }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-full px-5 xl:px-0">
-      <LabPageHeader title="Student Details" />
+      <LabPageHeader title="Student Details">
+        <PageDescription>
+          Contact and location details for {student.name}, rendered from local
+          student data.
+        </PageDescription>
+      </LabPageHeader>
 
       <div className="space-y-2">
         <div className="text-zinc-500">

@@ -9,9 +9,11 @@ export default function NextjsImageRemoteDemo() {
     <>
       <LabPageHeader>
         <PageDescription>
+          An unfinished experiment for displaying remote images with Next.js
+          Image; examples are currently disabled. See the documentation for{" "}
           <ExternalLink
-            href="https://beta.nextjs.org/docs/optimizing/images"
-            name="Nextjs 13 Image"
+            href="https://nextjs.org/docs/app/api-reference/components/image"
+            name="Next.js Image documentation"
           />
         </PageDescription>
       </LabPageHeader>

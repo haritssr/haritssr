@@ -29,6 +29,7 @@ export default async function PostPage({
     <>
       <LabPageHeader title={postData.title}>
         <PageDescription>
+          A local Markdown post rendered on its own App Router page. Published{" "}
           <time dateTime={postData.date}>
             {postDateFormatter.format(new Date(postData.date))}
           </time>

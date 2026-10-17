@@ -14,7 +14,9 @@ export default function PostsPage() {
   return (
     <>
       <LabPageHeader title="Posts">
-        <PageDescription>Posts by Nextjs tutorial</PageDescription>
+        <PageDescription>
+          Browse local Markdown posts and open each post on its own page.
+        </PageDescription>
       </LabPageHeader>
 
       <ul className="space-y-5">

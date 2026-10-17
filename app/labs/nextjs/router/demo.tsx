@@ -65,6 +65,8 @@ function RouterDemoContent() {
     <>
       <LabPageHeader>
         <PageDescription>
+          Explore App Router navigation, URL paths, query parameters, and
+          browser history. See the documentation for{" "}
           <ExternalLink
             href="https://nextjs.org/docs/app/api-reference/functions/use-router"
             name="next/navigation"

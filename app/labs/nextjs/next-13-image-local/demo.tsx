@@ -13,9 +13,11 @@ export default function NextjsImageLocalDemo() {
     <>
       <LabPageHeader>
         <PageDescription>
+          Compare local image layouts, blur placeholders, grids, and text
+          overlays with Next.js Image. See the documentation for{" "}
           <ExternalLink
-            href="https://beta.nextjs.org/docs/optimizing/images"
-            name="Nextjs 13 Image"
+            href="https://nextjs.org/docs/app/api-reference/components/image"
+            name="Next.js Image documentation"
           />
         </PageDescription>
       </LabPageHeader>

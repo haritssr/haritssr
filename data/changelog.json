@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "69204808f69efc81bf3abf8743a9eca5760844e9",
+      "date": "2026-10-18T06:49:57+07:00",
+      "subject": "feat(labs): add navigation diagrams and shadow examples"
+    },
+    {
       "hash": "dee5776c62ce5206fb1455513c7ba7031aebf514",
       "date": "2026-10-18T06:49:56+07:00",
       "subject": "style(layout): refine mobile spacing and section headings"

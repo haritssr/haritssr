@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import LabPageHeader from "@/components/LabPageHeader";
+import PageDescription from "@/components/PageDescription";
 import { getNextjsArticle, NextjsArticlesData } from "@/data/NextjsLabsData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -32,7 +33,11 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-full px-5 xl:px-0">
-      <LabPageHeader title={article.title} />
+      <LabPageHeader title={article.title}>
+        <PageDescription>
+          An article from local data, rendered as a static App Router page.
+        </PageDescription>
+      </LabPageHeader>
 
       <div className="text-action">Article {article.id}</div>
       <div className="mt-5 text-zinc-600">{article.body}</div>
