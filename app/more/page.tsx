@@ -26,7 +26,7 @@ export default function MorePage() {
             Physics, and Education.
           </p>
         </Section>
-        <Section id="misc" title="Personal notes">
+        <Section id="notes" title="Notes">
           <ul className="marker:text-muted list-outside list-disc space-y-2 pl-5">
             <li>Touch typist, ±90 WPM.</li>
             <li>Former chess player, ±2000 Elo.</li>
@@ -37,6 +37,13 @@ export default function MorePage() {
               <span className="text-foreground">r</span>ahmatullah
             </li>
             <li>I develop with Codex CLI in Zed.</li>
+          </ul>
+        </Section>
+        <Section id="words" title="Words">
+          <ul className="marker:text-muted list-outside list-disc space-y-2 pl-5">
+            <li>e/acc</li>
+            <li>Existence = f(constraints, maintainence, ...)</li>
+            <li>100% is easier than 98%</li>
           </ul>
         </Section>
       </div>

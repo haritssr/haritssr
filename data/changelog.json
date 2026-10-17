@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4172e2cd4604c8c83b9cf754caddf0ad3eeeeb8b",
+      "date": "2026-10-18T06:50:02+07:00",
+      "subject": "fix(changelog): highlight the selected current period"
+    },
+    {
       "hash": "69204808f69efc81bf3abf8743a9eca5760844e9",
       "date": "2026-10-18T06:49:57+07:00",
       "subject": "feat(labs): add navigation diagrams and shadow examples"
