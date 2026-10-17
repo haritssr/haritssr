@@ -77,7 +77,7 @@ export function SectionHeading({
   const appearance =
     variant === "compact"
       ? "text-muted text-sm font-medium"
-      : `text-foreground ${spacingAfter === "section" ? "mb-7" : "mb-2"} ${headingSize} font-semibold`;
+      : `text-foreground ${spacingAfter === "section" ? "mb-4" : "mb-2"} ${headingSize} font-semibold`;
 
   return (
     <Heading

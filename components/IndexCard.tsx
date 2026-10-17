@@ -45,7 +45,7 @@ export default function IndexCard({
           {href === undefined ? null : (
             <ChevronRightIcon
               aria-hidden="true"
-              className="text-muted size-4 shrink-0 stroke-2"
+              className="text-muted size-4.5 shrink-0 stroke-2"
             />
           )}
         </div>
