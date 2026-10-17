@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "633cd797d512acb1272daea905932a2403e2d1a8",
+      "date": "2026-10-18T06:49:31+07:00",
+      "subject": "feat(timer): add task editing, autoplay, and responsive task views"
+    },
+    {
       "hash": "964b82256bfccb8d82ae6277dde5c8fcc5e289ae",
       "date": "2026-10-16T17:38:33+07:00",
       "subject": "docs(README): document timer and light-only appearance"
