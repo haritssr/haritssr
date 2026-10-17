@@ -979,6 +979,24 @@ export const LabsData: readonly LabDomain[] = [
     description: "Explore interface patterns and animations.",
     labs: [
       {
+        slug: "shadow",
+        title: "Shadow",
+        description:
+          "Explore how box shadows and borders give surfaces depth and definition.",
+        tags: ["css", "design", "shadows"],
+        createdAt: "2026-10-17",
+        updatedAt: ["2026-10-17"],
+      },
+      {
+        slug: "navigation-logic",
+        title: "Navigation Logic",
+        description:
+          "Map this site’s responsive navigation behavior with Mermaid.",
+        tags: ["navigation", "design", "mermaid", "documentation"],
+        createdAt: "2026-10-16",
+        updatedAt: ["2026-10-16"],
+      },
+      {
         slug: "pill-material",
         title: "Pill Material",
         description:

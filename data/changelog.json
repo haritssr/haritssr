@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "dee5776c62ce5206fb1455513c7ba7031aebf514",
+      "date": "2026-10-18T06:49:56+07:00",
+      "subject": "style(layout): refine mobile spacing and section headings"
+    },
+    {
       "hash": "13062390aaca7371b5bbc675b114f6d25a7860f2",
       "date": "2026-10-18T06:49:51+07:00",
       "subject": "style(ProjectsCard): align overview and website actions"

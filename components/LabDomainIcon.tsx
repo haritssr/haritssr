@@ -6,7 +6,7 @@ const domainIconColors = new Map([
   ["/icons/physics.svg", "text-green-600"],
   ["/icons/math.svg", "text-violet-500"],
   ["/icons/browser.svg", "text-amber-500"],
-  ["/icons/user-interface.svg", "text-pink-500"],
+  ["/icons/user-interface.svg", "text-sky-500"],
 ]);
 
 export default function LabDomainIcon({

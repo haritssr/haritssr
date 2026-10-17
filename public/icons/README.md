@@ -15,7 +15,7 @@ The KaTeX hummingbird is a simplified vector interpretation of the existing
 site icon. Physics, Mathematics, and User Interface are custom SVG illustrations.
 These assets have transparent backgrounds; the lab icon component colors
 monochrome and domain icons through the site's theme tokens. User Interface uses
-a simple panel-layout icon in `pink-500`.
+a simple cursor icon in `sky-500`.
 
 The GitHub marks in the header and contact card use the shared local
 `GitHubIcon` SVG component, based on the Simple Icons GitHub mark (CC0).

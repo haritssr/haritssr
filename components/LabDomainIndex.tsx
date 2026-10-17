@@ -43,7 +43,7 @@ function LabList({
   labs: readonly LabEntry[];
 }) {
   return (
-    <ol className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+    <ol className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
       {labs.map((lab) => (
         <li className="flex items-center justify-between gap-3" key={lab.slug}>
           <span className="min-w-0 truncate" title={lab.title}>
