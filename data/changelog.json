@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "109ad47922a5b1fb84e190c3fcf5ac8bd9785ef7",
+      "date": "2026-10-18T06:49:50+07:00",
+      "subject": "feat(timer): summarize daily history with activity tables"
+    },
+    {
       "hash": "633cd797d512acb1272daea905932a2403e2d1a8",
       "date": "2026-10-18T06:49:31+07:00",
       "subject": "feat(timer): add task editing, autoplay, and responsive task views"

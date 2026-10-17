@@ -26,7 +26,7 @@ export default function ProjectsCard({
       className={`group corner-squircle border-border flex w-full flex-col justify-between overflow-hidden rounded-3xl border selection:mx-auto ${className ?? ""}`}
     >
       {/* Header + Title + Explanation */}
-      <div className="flex flex-col justify-between space-y-2 p-3">
+      <div className="flex flex-col justify-between space-y-2 p-3.5">
         <div className="flex items-center space-x-2">
           <Image
             alt=""
@@ -51,7 +51,13 @@ export default function ProjectsCard({
         </p>
       </div>
 
-      <div className="flex space-x-2.5 px-3 pb-3">
+      <div className="flex space-x-2.5 px-3.5 pb-3.5">
+        <Link
+          className="corner-squircle border-border text-foreground hover:bg-secondary-hover focus-visible:outline-foreground inline-flex w-1/2 items-center justify-center gap-1.5 rounded-xl border bg-white px-3 py-1.5 text-center text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
+          href={`/projects/${getProjectSlug(title)}`}
+        >
+          Overview
+        </Link>
         <a
           className="interactive-elevation corner-squircle bg-foreground/90 text-background hover:bg-foreground inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
           href={href}
@@ -60,12 +66,6 @@ export default function ProjectsCard({
         >
           Website
         </a>
-        <Link
-          className="interactive-elevation corner-squircle border-border text-foreground/90 hover:bg-surface-hover hover:border-border-hover inline-flex w-1/2 items-center justify-center rounded-xl border py-1.5 text-center text-sm"
-          href={`/projects/${getProjectSlug(title)}`}
-        >
-          Overview
-        </Link>
       </div>
     </div>
   );
