@@ -6,6 +6,11 @@
       "subject": "fix(changelog): highlight the selected current period"
     },
     {
+      "hash": "9236b5af8179587672ce5d8e8349840d7376c75a",
+      "date": "2026-10-18T06:50:02+07:00",
+      "subject": "docs(more): refresh personal notes and add words"
+    },
+    {
       "hash": "69204808f69efc81bf3abf8743a9eca5760844e9",
       "date": "2026-10-18T06:49:57+07:00",
       "subject": "feat(labs): add navigation diagrams and shadow examples"

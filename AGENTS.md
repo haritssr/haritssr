@@ -35,6 +35,11 @@ content rule below. Markdown/MDX are excluded from Oxfmt.
 `check` uses Ultracite → Oxfmt + Oxlint (`oxlint-tsgolint` for type-aware rules).
 `typecheck` separately runs Next.js route type generation → native TypeScript 7.
 
+For simple visual changes (colors, spacing, borders, typography, or CSS classes),
+run only scoped `check`; do not run `typecheck`. This also applies to small
+styling-only cleanup of inline styles or CSS custom properties when component
+contracts and behavior stay unchanged.
+
 | Command | Trigger |
 | --- | --- |
 | `bun run check <files...>` | Changes to supported source, CSS, or JSON files, including classes and JSX copy. Pass changed paths; skip unsupported assets and Markdown/MDX. |
