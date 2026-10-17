@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "964b82256bfccb8d82ae6277dde5c8fcc5e289ae",
+      "date": "2026-10-16T17:38:33+07:00",
+      "subject": "docs(README): document timer and light-only appearance"
+    },
+    {
       "hash": "f4135998ae813e6ea048df01105b5e2015738721",
       "date": "2026-10-16T17:38:12+07:00",
       "subject": "refactor(Navigation): simplify responsive controls"

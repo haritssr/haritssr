@@ -29,18 +29,28 @@ export const daySchema = z
 
 export const actionSchema = z.discriminatedUnion("action", [
   z.object({
+    action: z.literal("edit"),
+    date: dateSchema,
+    taskId: z.string().min(1).max(100),
+    activity: z.string().trim().min(1).max(120),
+    description: z.string().trim().max(2000),
+    duration: z.number().int().min(1).max(86_400),
+  }),
+  z.object({
     action: z.literal("add"),
     date: dateSchema,
     activity: z.string().trim().min(1).max(120),
     description: z.string().trim().max(2000),
     duration: z.number().int().min(1).max(86_400),
   }),
-  ...(["start", "pause", "acknowledge"] as const).map((action) =>
-    z.object({
-      action: z.literal(action),
-      date: dateSchema,
-      taskId: z.string().min(1).max(100),
-    })
+  ...(["start", "pause", "done", "acknowledge", "delete"] as const).map(
+    (action) =>
+      z.object({
+        action: z.literal(action),
+        autoplay: z.boolean().optional(),
+        date: dateSchema,
+        taskId: z.string().min(1).max(100),
+      })
   ),
 ]);
 

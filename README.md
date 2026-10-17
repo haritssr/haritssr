@@ -19,7 +19,16 @@
   Starting another pauses the current activity. Running timers recover from saved
   timestamps after navigation, reloads, or browser closure, and stop at midnight.
   X and House keeping recur daily with one-hour budgets; added activities are for
-  today only. Reached activities stop at their duration.
+  today only. Reached activities stop at their duration. Done finishes a running or paused activity
+  early while preserving its actual time spent. Autoplay starts the next unfinished
+  activity after Done or a duration completion, prioritizing paused activities.
+  It runs while the site is open and stops when no unfinished activities remain. Unfinished activities
+  have an Edit action to change their name, description, and duration using the same
+  fields and presets as Add Task. Edited durations must exceed time already spent.
+- Timer UI components live in `app/timer/components/`; its [component guide](app/timer/components/README.md)
+  maps each visible control to its file. `TimerClient.tsx` composes the page,
+  `taskPresentation.ts` owns card/list layout and colors, and `TaskFormDialog.tsx`
+  supplies the identical Add/Edit form.
 - Local Timer data lives in ignored `data/timer/YYYY-MM-DD.json` files, written
   atomically by one local Node server process. Run `bun run seed:timer` to create
   realistic sample records for the previous 30 completed days; it never overwrites
@@ -55,6 +64,8 @@ truncate to keep the controls on one row.
 position. `PageTitle` provides the title marker: once the title scrolls behind the
 top bar, it replaces the center navigation. Returning to the title restores center
 navigation while keeping the back button visible.
+Clicking the scrolling title or article back-to-top clears the URL fragment
+without adding a history entry, preserves query parameters, and scrolls to the top.
 On every screen size, the scrolling title is centered in the available space
 between the Back pill and the complete right-hand control group, with equal
 gaps on either side. The title pill fits its text and truncates long titles

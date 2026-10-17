@@ -4,6 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
+import TimerDate from "./components/TimerDate";
 import TimerClient from "./TimerClient";
 
 const description = "A simple timer for focused work and everyday tasks.";
@@ -20,8 +21,7 @@ export default function TimerPage() {
       <PageHeader back={{ href: "/", name: "Home" }} path="/timer">
         <PageTitle>Timer</PageTitle>
         <PageDescription>
-          Make room for what matters. Focus on one activity, batch everyday
-          tasks, and guard your time.
+          <TimerDate />
         </PageDescription>
         <div className="flex flex-wrap gap-5">
           <InternalLink href="/timer/statistic">Statistics</InternalLink>

@@ -1,5 +1,6 @@
 "use client";
 
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import {
   createContext,
@@ -15,12 +16,17 @@ import useSWR from "swr";
 
 import { timerMidnight } from "@/utils/timer";
 import type { TimerAction, TimerNotice, TimerSnapshot } from "@/utils/timer";
+import { playTaskSound, prepareTaskSound } from "@/utils/timerSound";
 
 interface TimerContextValue {
   snapshot: TimerSnapshot | undefined;
   error: string | null;
   busy: boolean;
   clockOffset: number;
+  autoplay: boolean;
+  setAutoplay: (enabled: boolean) => void;
+  notificationsEnabled: boolean;
+  setNotificationsEnabled: (enabled: boolean) => void;
   act: (action: TimerAction) => Promise<boolean>;
   refresh: () => Promise<unknown>;
 }
@@ -78,7 +84,7 @@ async function showCompletion(notice: TimerNotice) {
     return;
   }
   const options = {
-    body: `${notice.activity} reached its planned duration.`,
+    body: `${notice.activity} is done.`,
     tag: `timer-${notice.date}-${notice.taskId}`,
     icon: "/favicon-32x32.png",
     data: { url: "/timer" },
@@ -115,6 +121,8 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
     setEnabled(true);
   }
   const [busy, setBusy] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [autoplay, setAutoplay] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [completion, setCompletion] = useState<string | null>(null);
   const actionPending = useRef(false);
@@ -165,7 +173,9 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
       setActionError(null);
       let saved = false;
       try {
-        const result = await sendAction(action);
+        const result = await sendAction(
+          action.action === "done" ? { ...action, autoplay } : action
+        );
         await publish(result.snapshot);
         saved = true;
       } catch (error) {
@@ -180,7 +190,7 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
       setBusy(false);
       return saved;
     },
-    [publish, refresh]
+    [publish, refresh, autoplay]
   );
 
   useEffect(() => {
@@ -222,16 +232,18 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
       claiming.current.add(key);
       void sendAction({
         action: "acknowledge",
+        autoplay,
         date: notice.date,
         taskId: notice.taskId,
       })
         .then(async (result) => {
           await publish(result.snapshot);
           if (result.notification !== null) {
-            setCompletion(
-              `${result.notification.activity} reached its planned duration.`
-            );
-            await showCompletion(result.notification);
+            setCompletion(`${result.notification.activity} is done.`);
+            playTaskSound(prepareTaskSound(), "reached");
+            if (notificationsEnabled) {
+              await showCompletion(result.notification);
+            }
           }
         })
         .catch(() => {
@@ -241,36 +253,50 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
           claiming.current.delete(key);
         });
     }
-  }, [data, publish]);
+  }, [data, publish, notificationsEnabled, autoplay]);
 
   const value = useMemo(
     () => ({
       snapshot: data,
       busy,
       clockOffset,
+      notificationsEnabled,
+      setNotificationsEnabled,
+      autoplay,
+      setAutoplay,
       act,
       refresh,
       error:
         actionError ?? (loadError instanceof Error ? loadError.message : null),
     }),
-    [data, busy, clockOffset, act, refresh, actionError, loadError]
+    [
+      data,
+      busy,
+      clockOffset,
+      notificationsEnabled,
+      autoplay,
+      act,
+      refresh,
+      actionError,
+      loadError,
+    ]
   );
 
   return (
     <TimerContext value={value}>
       {children}
       {completion === null ? null : (
-        <div className="border-border bg-background shadow-floating fixed right-4 bottom-20 left-4 z-50 flex items-center justify-between gap-4 rounded-xl border p-4 text-sm sm:bottom-6 sm:left-auto sm:max-w-sm">
+        <div className="border-border bg-background shadow-floating fixed right-4 bottom-20 left-4 z-50 flex items-center justify-between gap-4 rounded-xl border py-2 pr-2 pl-4 sm:bottom-6 sm:left-auto sm:max-w-sm">
           <output>{completion}</output>
           <button
             aria-label="Dismiss completion message"
-            className="text-muted hover:text-foreground cursor-pointer p-1"
+            className="text-muted hover:text-foreground inline-flex size-10 cursor-pointer items-center justify-center"
             onClick={() => {
               setCompletion(null);
             }}
             type="button"
           >
-            ×
+            <XMarkIcon aria-hidden="true" className="size-5" />
           </button>
         </div>
       )}

@@ -23,6 +23,7 @@ import type {
   TimerDay,
   TimerHistory,
   TimerNotice,
+  TimerTask,
   TimerSnapshot,
 } from "@/utils/timer";
 import { actionSchema, daySchema } from "@/utils/timerValidation";
@@ -116,6 +117,12 @@ function settle(day: TimerDay, now: number) {
   return changed;
 }
 
+function finishTask(task: TimerTask, now: number) {
+  task.startedAt = null;
+  task.reachedAt ??= new Date(now).toISOString();
+  task.notifiedAt ??= new Date(now).toISOString();
+}
+
 function notices(day: TimerDay): TimerNotice[] {
   return day.tasks
     .filter((task) => task.reachedAt !== null && task.notifiedAt === null)
@@ -153,15 +160,7 @@ async function localSnapshot(now: number): Promise<TimerSnapshot> {
   }
   const existing = await loadDay(today);
   const day = existing ?? createTimerDay(today);
-  // Also repair missing defaults without duplicating recurring tasks.
-  let changed = existing === null;
-  for (const task of createTimerDay(today).tasks) {
-    if (!day.tasks.some((entry) => entry.id === task.id)) {
-      day.tasks.push(task);
-      changed = true;
-    }
-  }
-  changed = settle(day, now) || changed;
+  const changed = settle(day, now) || existing === null;
   if (changed) {
     await saveDay(day);
   }
@@ -187,6 +186,86 @@ export async function getTimerSnapshot(): Promise<TimerSnapshot> {
     };
   }
   return await serialized(async () => await localSnapshot(Date.now()));
+}
+
+function autoplayNextTask(
+  day: TimerDay,
+  enabled: boolean | undefined,
+  now: number
+) {
+  if (
+    enabled !== true ||
+    day.date !== timerDate(now) ||
+    day.tasks.some((task) => task.startedAt !== null)
+  ) {
+    return;
+  }
+  const unfinished = day.tasks.filter(
+    (task) => task.reachedAt === null && task.spent < task.duration
+  );
+  const next = unfinished.find((task) => task.spent > 0) ?? unfinished[0];
+  if (next !== undefined) {
+    next.startedAt = new Date(now).toISOString();
+  }
+}
+
+function editTaskDetails(
+  task: TimerTask,
+  command: Extract<TimerAction, { action: "edit" }>
+) {
+  if (task.reachedAt !== null || task.spent >= task.duration) {
+    throw new TimerStoreError("Finished activities cannot be edited.", 409);
+  }
+  if (command.duration <= task.spent) {
+    throw new TimerStoreError(
+      "Choose a duration longer than the time already spent.",
+      409
+    );
+  }
+  task.activity = command.activity;
+  task.description = command.description;
+  task.duration = command.duration;
+}
+
+function changeTask(
+  day: TimerDay,
+  command: Exclude<TimerAction, { action: "add" }>,
+  now: number
+): TimerNotice | null {
+  let notification: TimerNotice | null = null;
+  const task = day.tasks.find((entry) => entry.id === command.taskId);
+  if (task === undefined) {
+    throw new TimerStoreError("Task not found.", 404);
+  }
+  if (command.action === "delete") {
+    day.tasks = day.tasks.filter((entry) => entry.id !== task.id);
+  } else if (command.action === "edit") {
+    editTaskDetails(task, command);
+  } else if (command.action === "start") {
+    if (task.reachedAt !== null || task.spent >= task.duration) {
+      throw new TimerStoreError("This activity has reached its duration.", 409);
+    }
+    for (const entry of day.tasks) {
+      entry.startedAt = null;
+    }
+    task.startedAt = new Date(now).toISOString();
+  } else if (command.action === "done") {
+    if (task.reachedAt === null) {
+      finishTask(task, now);
+      autoplayNextTask(day, command.autoplay, now);
+    }
+  } else if (command.action === "pause") {
+    task.startedAt = null;
+  } else if (task.reachedAt !== null && task.notifiedAt === null) {
+    task.notifiedAt = new Date(now).toISOString();
+    autoplayNextTask(day, command.autoplay, now);
+    notification = {
+      date: day.date,
+      taskId: task.id,
+      activity: task.activity,
+    };
+  }
+  return notification;
 }
 
 export async function changeTimer(payload: unknown) {
@@ -233,31 +312,7 @@ export async function changeTimer(payload: unknown) {
         notifiedAt: null,
       });
     } else {
-      const task = day.tasks.find((entry) => entry.id === command.taskId);
-      if (task === undefined) {
-        throw new TimerStoreError("Task not found.", 404);
-      }
-      if (command.action === "start") {
-        if (task.spent >= task.duration) {
-          throw new TimerStoreError(
-            "This activity has reached its duration.",
-            409
-          );
-        }
-        for (const entry of day.tasks) {
-          entry.startedAt = null;
-        }
-        task.startedAt = new Date(now).toISOString();
-      } else if (command.action === "pause") {
-        task.startedAt = null;
-      } else if (task.reachedAt !== null && task.notifiedAt === null) {
-        task.notifiedAt = new Date(now).toISOString();
-        notification = {
-          date: day.date,
-          taskId: task.id,
-          activity: task.activity,
-        };
-      }
+      notification = changeTask(day, command, now);
     }
     day.revision += 1;
     await saveDay(day);

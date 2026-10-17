@@ -45,7 +45,20 @@ export type TimerAction =
       description: string;
       duration: number;
     }
-  | { action: "start" | "pause" | "acknowledge"; date: string; taskId: string };
+  | {
+      action: "edit";
+      date: string;
+      taskId: string;
+      activity: string;
+      description: string;
+      duration: number;
+    }
+  | {
+      action: "start" | "pause" | "done" | "acknowledge" | "delete";
+      autoplay?: boolean;
+      date: string;
+      taskId: string;
+    };
 
 const TIMER_TIME_ZONE = "Asia/Jakarta";
 

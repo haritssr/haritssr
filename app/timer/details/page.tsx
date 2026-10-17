@@ -3,126 +3,17 @@ import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
-import Table from "@/components/Table";
 import { createPageMetadata } from "@/utils/pageMetadata";
+
+import { implementationFiles, integrationFiles, storageFiles } from "./files";
+import FileTable from "./FileTable";
+import TaskColorExamples from "./TaskColorExamples";
 
 export const metadata = createPageMetadata({
   title: "Details",
   description: "How Timer works, its daily storage, and source file locations.",
   path: "/timer/details",
 });
-
-const implementationFiles = [
-  ["app/timer/page.tsx", "Timer page header, introduction, and navigation."],
-  [
-    "app/timer/TimerClient.tsx",
-    "Activity cards, progress, controls, and the add-task dialog.",
-  ],
-  [
-    "app/timer/store.ts",
-    "Daily JSON storage, task operations, midnight rollover, and history.",
-  ],
-  ["app/timer/statistic/page.tsx", "Statistics page header and metadata."],
-  [
-    "app/timer/statistic/Statistics.tsx",
-    "Date selection, the 30-day chart, and activity history.",
-  ],
-  ["app/timer/details/page.tsx", "This explanation and file inventory."],
-  [
-    "app/api/timer/route.ts",
-    "GET and POST handlers for Timer data and actions.",
-  ],
-  [
-    "components/TimerProvider.tsx",
-    "Shared state, server synchronization, and completion notifications.",
-  ],
-  [
-    "utils/timer.ts",
-    "Types, time calculations, recurring defaults, and sample data generation.",
-  ],
-  [
-    "utils/timerValidation.ts",
-    "Validation schemas for stored records and API messages.",
-  ],
-  [
-    "scripts/seed-timer.ts",
-    "Creates sample history for the previous 30 completed days.",
-  ],
-] as const;
-
-const integrationFiles = [
-  [
-    "app/layout.tsx",
-    "Mounts TimerProvider so a running activity survives page navigation.",
-  ],
-  ["app/page.tsx", "Links to Timer from the Home Tools section."],
-  ["app/api/page.tsx", "Documents the Timer API."],
-  ["app/sitemap.ts", "Includes the public Timer pages in the sitemap."],
-  ["data/routes.ts", "Makes Timer pages available in site search."],
-  [
-    "public/sw.js",
-    "Opens or focuses Timer when a completion notification is clicked.",
-  ],
-  [
-    "next.config.ts",
-    "Excludes personal Timer records from deployment tracing.",
-  ],
-  ["package.json", "Defines the seed:timer command."],
-  ["knip.jsonc", "Registers the seed script as an operational entry point."],
-  [
-    ".gitignore",
-    "Excludes daily JSON records and temporary storage files from Git.",
-  ],
-  ["README.md", "Documents Timer behavior, storage, and notification support."],
-] as const;
-
-const storageFiles = [
-  [
-    "data/timer/YYYY-MM-DD.json",
-    "One record per Jakarta calendar day, containing the date, revision, and activities.",
-  ],
-  [
-    "data/timer/*.tmp",
-    "Temporary files used during atomic writes, removed after saving.",
-  ],
-] as const;
-
-function FileTable({
-  caption,
-  files,
-}: {
-  caption: string;
-  files: readonly (readonly [string, string])[];
-}) {
-  return (
-    <Table>
-      <caption className="sr-only">{caption}</caption>
-      <thead>
-        <tr className="bg-foreground/5">
-          <th className="px-3 text-left font-medium" scope="col">
-            File location
-          </th>
-          <th className="px-3 text-left font-medium" scope="col">
-            Purpose
-          </th>
-        </tr>
-      </thead>
-      <tbody className="divide-border divide-y">
-        {files.map(([path, purpose]) => (
-          <tr key={path}>
-            <th
-              className="px-3 py-3 text-left align-top font-normal"
-              scope="row"
-            >
-              <code className="wrap-anywhere">{path}</code>
-            </th>
-            <td className="px-3 py-3 align-top">{purpose}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-  );
-}
 
 export default function TimerDetailsPage() {
   return (
@@ -155,7 +46,10 @@ export default function TimerDetailsPage() {
               activity, Pause stops it, and Continue resumes from the saved
               time. Only one activity runs at once; starting another pauses the
               current one. At its duration, the activity stops and is marked
-              Reached.
+              Reached. With Autoplay enabled, Done or a duration completion
+              starts the next unfinished activity, prioritizing paused
+              activities. Autoplay runs while the site is open and stops when
+              all activities are complete.
             </p>
             <p>
               X and House keeping appear every day with a one-hour budget each.
@@ -164,6 +58,18 @@ export default function TimerDetailsPage() {
               Activities you add belong to that day only.
             </p>
           </div>
+        </Section>
+        <Section id="task-colors" title="Task colors">
+          <div className="max-w-3xl space-y-5">
+            <p>
+              Task colors show each activity’s current state: danger means it is
+              running, attention means it is paused, and success means it has
+              not started. Completed activities use muted colors and appear in
+              the completed tasks table. The progress bar uses the same state
+              color as the timer.
+            </p>
+          </div>
+          <TaskColorExamples />
         </Section>
         <Section id="time-and-notifications" title="Time and notifications">
           <div className="max-w-3xl space-y-5">

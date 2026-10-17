@@ -10,6 +10,7 @@ export function SelectField({
   onValueChange,
   options,
   placeholder,
+  variant = "outlined",
   value,
   valueLang,
 }: {
@@ -18,13 +19,14 @@ export function SelectField({
   onValueChange: (value: string) => void;
   options: readonly { label: string; value: string }[];
   placeholder?: string;
+  variant?: "outlined" | "plain";
   value: string | null;
   valueLang?: string;
 }) {
   const id = useId();
 
   return (
-    <div className="min-w-0 space-y-2">
+    <div className="min-w-0">
       <label
         className={
           labelPlacement === "inside"
@@ -46,7 +48,7 @@ export function SelectField({
         value={value}
       >
         <Select.Trigger
-          className="form-control border-border text-foreground/80 focus-visible:border-action flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border bg-white px-3 py-2 text-sm outline-none"
+          className={`form-control text-foreground/80 flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-lg border text-sm outline-none ${variant === "plain" ? "hover:text-foreground focus-visible:outline-action border-transparent bg-transparent shadow-none focus-visible:outline-2" : "border-border focus-visible:border-action bg-white px-3"}`}
           id={id}
         >
           <span className="inline-flex min-w-0 items-center gap-2">
@@ -55,7 +57,7 @@ export function SelectField({
             ) : null}
             <Select.Value lang={valueLang} placeholder={placeholder} />
           </span>
-          <Select.Icon>
+          <Select.Icon className="inline-flex transition-transform duration-150 data-popup-open:rotate-180 motion-reduce:transition-none">
             <ChevronDownIcon aria-hidden="true" className="size-4 shrink-0" />
           </Select.Icon>
         </Select.Trigger>
