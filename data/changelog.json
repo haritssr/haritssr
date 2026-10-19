@@ -11,6 +11,11 @@
       "subject": "docs(more): refresh personal notes and add words"
     },
     {
+      "hash": "e346431ab4e99a3caac992edb9953a85a6e3c490",
+      "date": "2026-10-18T06:50:02+07:00",
+      "subject": "docs(agents): scope verification for visual changes"
+    },
+    {
       "hash": "69204808f69efc81bf3abf8743a9eca5760844e9",
       "date": "2026-10-18T06:49:57+07:00",
       "subject": "feat(labs): add navigation diagrams and shadow examples"

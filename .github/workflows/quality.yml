@@ -24,24 +24,23 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - parallel:
-          - name: Check formatting and linting
-            run: bun run check
+      - name: Check formatting and linting
+        run: bun run check
 
-          - name: Check types
-            run: bun run typecheck
+      - name: Check types
+        run: bun run typecheck
 
-          - name: Check all project code
-            run: bun run knip
+      - name: Check all project code
+        run: bun run knip
 
-          - name: Check production code
-            run: bun run knip:production
+      - name: Check production code
+        run: bun run knip:production
 
-          - name: Validate content and lab routes
-            run: bun run validate:content
+      - name: Validate content and lab routes
+        run: bun run validate:content
 
-          - name: Validate production content
-            run: NODE_ENV=production bun run validate:content
+      - name: Validate production content
+        run: NODE_ENV=production bun run validate:content
 
       - name: Build production routes
         run: bun run build
