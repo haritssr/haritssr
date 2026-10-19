@@ -86,7 +86,7 @@ export default function RootLayout({
           <TimerProvider>
             <TopBar />
             <main
-              className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 sm:pt-8 xl:px-0"
+              className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 sm:pt-5 xl:px-0"
               id="main-content"
             >
               {children}

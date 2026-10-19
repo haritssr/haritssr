@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f06c5c0bca8bdd263da36c3598b85bdd0ee64f8d",
+      "date": "2026-10-19T13:20:57+07:00",
+      "subject": "style(status): unify error and offline page presentation"
+    },
+    {
       "hash": "a01649609b9748347c5af57489badad49a079d06",
       "date": "2026-10-19T13:20:52+07:00",
       "subject": "refactor(diagrams): replace Mermaid renderer with Pele"

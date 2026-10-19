@@ -120,6 +120,11 @@ export default function DesignSystem() {
               development while maintaining consistency.
             </li>
             <li>
+              Use Oklab/Oklch (not RGB or HSV) for random colors, palettes, and
+              gradients to ensure perceptually uniform, balanced results that
+              match human vision.
+            </li>
+            <li>
               Components include responsive behavior and keyboard focus
               treatment where interaction requires it.
             </li>
@@ -128,6 +133,10 @@ export default function DesignSystem() {
               higher. Hover raises elevation and pressing lowers it. Disabled
               controls and selects stay flat, and keyboard focus keeps a visible
               outline.
+            </li>
+            <li>
+              Strive for one line navigation layer on all screen views as
+              possible.
             </li>
             <li>The system works on mobile and desktop.</li>
             <li>
