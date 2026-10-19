@@ -1,17 +1,22 @@
 import { Popover } from "@base-ui/react/popover";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { useRef } from "react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import type { RefObject } from "react";
 
 import type { TimerTask } from "@/utils/timer";
 
 const TASK_DESCRIPTION_ARROW_CLASS_NAME =
   "relative block h-1.75 w-3 overflow-clip data-[side=bottom]:top-[-6px] data-[side=left]:right-[-9px] data-[side=left]:rotate-90 data-[side=right]:left-[-9px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-6px] data-[side=top]:rotate-180 before:absolute before:bottom-[1px] before:left-1/2 before:h-[calc(6px*sqrt(2))] before:w-[calc(6px*sqrt(2))] before:border before:border-border before:bg-white before:content-[''] before:[transform:translate(-50%,50%)_rotate(45deg)]";
 
-export default function TaskDescription({ task }: { task: TimerTask }) {
-  const anchor = useRef<HTMLDivElement>(null);
+export default function TaskDescription({
+  task,
+  anchor,
+}: {
+  task: TimerTask;
+  anchor: RefObject<HTMLDivElement | null>;
+}) {
   // Keep the popover's focus guards out of the card's space-y layout.
   return (
-    <div className="min-w-0" ref={anchor}>
+    <div className="min-w-0">
       <Popover.Root>
         <Popover.Trigger
           aria-label={`Show description for ${task.activity}`}
@@ -19,9 +24,9 @@ export default function TaskDescription({ task }: { task: TimerTask }) {
           openOnHover
         >
           <span>Description</span>
-          <ChevronRightIcon
+          <ChevronDownIcon
             aria-hidden="true"
-            className="mt-px size-4 shrink-0 transition-transform group-data-popup-open:rotate-90"
+            className="mt-px size-4 shrink-0 transition-transform group-data-popup-open:rotate-180 sm:rotate-270 sm:group-data-popup-open:rotate-0"
             strokeWidth={2.5}
           />
         </Popover.Trigger>
@@ -35,7 +40,7 @@ export default function TaskDescription({ task }: { task: TimerTask }) {
             sideOffset={8}
           >
             <Popover.Popup
-              className="border-border text-foreground w-full rounded-lg border bg-white px-3 py-2 text-sm shadow-2xl outline-hidden"
+              className="border-border text-foreground shadow-foreground/40 w-full rounded-lg border bg-white px-3 py-2 text-sm shadow-2xl outline-hidden"
               initialFocus={false}
               finalFocus={false}
             >

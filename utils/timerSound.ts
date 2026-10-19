@@ -14,7 +14,7 @@ export function prepareTaskSound() {
 
 export function playTaskSound(
   context: AudioContext | null,
-  action: "start" | "done" | "reached"
+  action: "start" | "pause" | "done" | "reached"
 ) {
   if (context === null) {
     return;
@@ -22,6 +22,7 @@ export function playTaskSound(
   try {
     const notes = {
       start: [520, 780],
+      pause: [780, 520],
       done: [660, 880, 1100],
       reached: [880, 660, 880, 660, 1100],
     }[action];

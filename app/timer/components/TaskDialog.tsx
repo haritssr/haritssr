@@ -1,5 +1,4 @@
 import { Dialog } from "@base-ui/react/dialog";
-import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import type { SubmitEvent } from "react";
 
@@ -19,6 +18,30 @@ const TASK_NAME_SUGGESTIONS = [
   "Stretch",
   "Review notes",
   "Work on a project",
+  "Get some fresh air",
+  "Do a quick workout",
+  "Rest your eyes",
+  "Take a screen break",
+  "Breathe slowly",
+  "Make a cup of tea",
+  "Water the plants",
+  "Prepare a meal",
+  "Fold the laundry",
+  "Clear the inbox",
+  "Write a journal",
+  "Sketch an idea",
+  "Practice guitar",
+  "Learn new words",
+  "Solve a puzzle",
+  "Review flashcards",
+  "Draft an outline",
+  "Fix a small bug",
+  "Organize files",
+  "Plan the week",
+  "Call a friend",
+  "Listen to music",
+  "Read a poem",
+  "Reflect on today",
 ];
 
 function readTaskForm(element: HTMLFormElement) {
@@ -39,6 +62,9 @@ function readTaskForm(element: HTMLFormElement) {
     typeof activityValue === "string" ? activityValue.trim() : "";
   if (activity.length === 0) {
     return "Enter an activity name.";
+  }
+  if (activity.length > 20) {
+    return "Use 20 characters or fewer for the activity name.";
   }
   const description = form.get("description");
   return {
@@ -166,11 +192,11 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         disabled={disabled}
         render={<Button variant="primary-subtle" />}
       >
-        <PlusIcon aria-hidden="true" className="size-4.5 shrink-0 stroke-2" />
-        <span>Add Task</span>
+        <span>New Task</span>
       </Dialog.Trigger>
       <TaskFormDialog
-        title="Add Task"
+        title="New Task"
+        submitLabel="Add"
         defaultActivity={activityName}
         busy={busy}
         error={formError}

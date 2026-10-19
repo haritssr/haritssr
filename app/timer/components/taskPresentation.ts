@@ -8,23 +8,23 @@ export type TaskView = "cards" | "list";
 export const TASK_VIEW_LAYOUT = {
   cards: {
     collection: "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4",
-    item: "flex flex-col gap-5",
+    item: "flex flex-col gap-3 sm:gap-5",
     controls: "mt-auto space-y-3",
-    surface: "corner-squircle rounded-2xl border px-4 pt-3.5 pb-4 shadow-lg",
-    time: "flex items-center justify-between gap-2 text-base sm:text-sm",
+    surface:
+      "corner-squircle rounded-[1.25rem] border px-4 pb-4 pt-3.5 shadow-lg",
+    time: "flex items-baseline justify-between gap-2 text-base sm:text-sm",
     progress: "h-2.5 sm:h-2",
-    running: "border-danger/60",
+    running: "border-danger/80",
     paused: "border-border",
     percentage: "",
   },
   list: {
-    collection: "grid grid-cols-1 gap-5",
+    collection: "grid grid-cols-1 gap-3",
     item: "grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)] sm:items-center sm:gap-0 sm:[&>:first-child]:pr-4",
     controls:
       "grid min-w-0 grid-cols-[minmax(0,1fr)_6.5rem] items-center gap-5 sm:contents [&>:first-child]:border-r [&>:first-child]:border-border [&>:first-child]:pr-5 sm:[&>:first-child]:border-l sm:[&>:first-child]:px-5 sm:[&>:last-child]:ml-5 sm:[&>:last-child]:w-auto",
-    surface:
-      "rounded-xl border border-border px-4 py-2.5 shadow-lg sm:pl-3.5 sm:pr-4",
-    time: "flex items-center justify-between gap-2 text-base sm:text-sm",
+    surface: "rounded-lg border border-border px-4 py-2.5 sm:pl-3.5 sm:pr-4",
+    time: "flex items-baseline justify-between gap-2 text-base sm:text-sm",
     progress: "h-2.5 sm:h-1.5",
     running: "border-danger/60",
     paused: "border-border",
@@ -79,7 +79,7 @@ export function taskAppearance(
   const appearance = TASK_STATE_APPEARANCE[state];
   let surface = "text-foreground";
   if (running) {
-    surface = `text-foreground ${TASK_VIEW_LAYOUT[view].running} shadow-lg`;
+    surface = `text-foreground ${TASK_VIEW_LAYOUT[view].running} shadow-lg shadow-danger/20`;
   } else if (paused) {
     surface = `text-foreground ${TASK_VIEW_LAYOUT[view].paused} shadow-lg`;
   }

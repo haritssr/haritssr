@@ -25,14 +25,14 @@ export default function TaskActions({
   const { act, snapshot, busy } = useTimer();
   const showDone = running || task.spent > 0;
   function toggleRunning() {
-    const sound = running ? null : prepareTaskSound();
+    const sound = prepareTaskSound();
     void act({
       action: running ? "pause" : "start",
       date,
       taskId: task.id,
     }).then((saved) => {
-      if (saved && !running) {
-        playTaskSound(sound, "start");
+      if (saved) {
+        playTaskSound(sound, running ? "pause" : "start");
       }
     });
   }
@@ -51,7 +51,8 @@ export default function TaskActions({
       className={`flex items-center ${view === "cards" ? "space-x-2.5" : "space-x-3"}`}
     >
       <Button
-        className="w-full"
+        className={`w-full ${showDone ? "" : "select-none"}`}
+        dimWhenDisabled={snapshot?.mode !== "local"}
         size="mobile-roomy"
         disabled={busy || snapshot?.mode === "demo"}
         onClick={showDone ? finishTask : toggleRunning}
@@ -61,11 +62,12 @@ export default function TaskActions({
       </Button>
       {showDone ? (
         <Button
-          className="w-full"
+          className="w-full select-none"
+          dimWhenDisabled={snapshot?.mode !== "local"}
           size="mobile-roomy"
           disabled={busy || snapshot?.mode === "demo"}
           onClick={toggleRunning}
-          variant="neutral-subtle"
+          variant={running ? "danger-subtle" : "attention-subtle"}
         >
           {label}
         </Button>

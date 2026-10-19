@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "93a71b6e85c52fa9f28906e73b9c323869599726",
+      "date": "2026-10-19T13:21:03+07:00",
+      "subject": "style(layout): tighten page spacing and expand design guidance"
+    },
+    {
       "hash": "f06c5c0bca8bdd263da36c3598b85bdd0ee64f8d",
       "date": "2026-10-19T13:20:57+07:00",
       "subject": "style(status): unify error and offline page presentation"

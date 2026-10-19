@@ -44,12 +44,23 @@ export default function TimerDetailsPage() {
             <p>
               Each card shows time spent against its duration. Start begins an
               activity, Pause stops it, and Continue resumes from the saved
-              time. Only one activity runs at once; starting another pauses the
-              current one. At its duration, the activity stops and is marked
-              Reached. With Autoplay enabled, Done or a duration completion
-              starts the next unfinished activity, prioritizing paused
-              activities. Autoplay runs while the site is open and stops when
-              all activities are complete.
+              time. By default, starting another activity pauses the current
+              one. Enable Multitask to run several activities independently.
+              Turning it off with multiple running activities asks for
+              confirmation, then keeps only the most recently started activity
+              running. Multitask and Autoplay reset on reload. At its duration,
+              the activity stops and is marked Reached. With Autoplay enabled,
+              Done or a duration completion starts the next unfinished activity
+              when no activities remain running, prioritizing paused activities.
+              Autoplay runs while the site is open and stops when all activities
+              are complete.
+            </p>
+            <p>
+              The underlined speed control beside Description cycles through 1x,
+              1.5x, 2x, 2.5x, and 3x, then returns to 1x. Each activity saves
+              its own speed across pauses and reloads. At 2x, every real second
+              adds two seconds toward its duration. Changing speed preserves
+              existing progress; statistics include accelerated task time.
             </p>
             <p>
               X and House keeping appear every day with a one-hour budget each.

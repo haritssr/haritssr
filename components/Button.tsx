@@ -17,7 +17,7 @@ type ButtonVariant =
   | "success-subtle";
 
 const BUTTON_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle rounded-xl px-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle rounded-xl px-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "attention-subtle":
@@ -59,6 +59,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: keyof typeof BUTTON_SIZE_CLASS;
   iconOnly?: boolean;
   loading?: boolean;
+  dimWhenDisabled?: boolean;
   ref?: Ref<HTMLButtonElement>;
   variant?: ButtonVariant;
 };
@@ -69,6 +70,7 @@ const Button = function Button({
   disabled,
   iconOnly = false,
   loading = false,
+  dimWhenDisabled = true,
   size = "default",
   type = "button",
   variant = "primary",
@@ -79,7 +81,7 @@ const Button = function Button({
     <button
       {...props}
       aria-busy={loading}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly ? "p-2" : BUTTON_SIZE_CLASS[size]} ${className ?? ""}`}
+      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly ? "p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
       disabled={disabled === true || loading}
       ref={ref}
       type={type}

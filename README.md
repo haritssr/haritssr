@@ -15,16 +15,23 @@
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
 - Timer at `/timer` tracks today's activities in Jakarta time, with daily history
   and a 30-day totals chart at `/timer/statistic`. `/timer/details` explains its
-  behavior and lists its source and storage locations. Only one activity runs at once.
-  Starting another pauses the current activity. Running timers recover from saved
+  behavior and lists its source and storage locations. By default, one activity runs at once.
+  Starting another pauses the current activity unless Multitask is enabled.
+  Multitask allows several activities to run independently; switching it off
+  confirms keeping only the most recently started task running. Multitask and
+  Autoplay preferences reset on reload. Running timers recover from saved
   timestamps after navigation, reloads, or browser closure, and stop at midnight.
-  X and House keeping recur daily with one-hour budgets; added activities are for
+  Each task has a saved speed from 1x to 3x in 0.5x steps; its speed control cycles
+  through the options. Speed changes preserve recorded progress, and statistics
+  include accelerated task time.
+  X Traversal and House keeping recur daily with one-hour budgets; added activities are for
   today only. Reached activities stop at their duration. Done finishes a running or paused activity
   early while preserving its actual time spent. Autoplay starts the next unfinished
-  activity after Done or a duration completion, prioritizing paused activities.
+  activity after Done or a duration completion when no tasks remain running,
+  prioritizing paused activities.
   It runs while the site is open and stops when no unfinished activities remain. Unfinished activities
   have an Edit action to change their name, description, and duration using the same
-  fields and presets as Add Task. Edited durations must exceed time already spent.
+  fields and presets as New Task. Edited durations must exceed time already spent.
 - Timer UI components live in `app/timer/components/`; its [component guide](app/timer/components/README.md)
   maps each visible control to its file. `TimerClient.tsx` composes the page,
   `taskPresentation.ts` owns card/list layout and colors, and `TaskFormDialog.tsx`

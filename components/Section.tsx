@@ -62,7 +62,7 @@ export type SectionHeadingProps = ComponentPropsWithoutRef<"h2"> & {
   as?: "h2" | "h3";
   children: ReactNode;
   spacingAfter?: "default" | "section";
-  variant?: "default" | "compact";
+  variant?: "default" | "compact" | "toolbar";
 };
 
 export function SectionHeading({
@@ -74,10 +74,13 @@ export function SectionHeading({
   ...props
 }: SectionHeadingProps) {
   const headingSize = Heading === "h2" ? "text-2xl" : "text-xl";
-  const appearance =
+  let appearance =
     variant === "compact"
       ? "text-muted text-sm font-medium"
       : `text-foreground ${spacingAfter === "section" ? "mb-4" : "mb-2"} ${headingSize} font-semibold`;
+  if (variant === "toolbar") {
+    appearance = "text-foreground/80 text-base font-normal";
+  }
 
   return (
     <Heading

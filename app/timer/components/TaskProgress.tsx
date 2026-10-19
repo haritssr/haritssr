@@ -20,10 +20,7 @@ export default function TaskProgress({
   appearance: TaskAppearance;
 }) {
   const percentage = Math.min(100, (spent / task.duration) * 100);
-  let percentageLabel = percentage.toFixed(1);
-  if (percentage === 0 || percentage >= 100) {
-    percentageLabel = percentage.toFixed(0);
-  }
+  const percentageLabel = percentage.toFixed(0);
   const progressStyle: CSSProperties & { "--timer-progress-fill": string } = {
     "--timer-progress-fill": appearance.progress,
   };
@@ -33,13 +30,13 @@ export default function TaskProgress({
         aria-hidden="true"
         className={`tabular-nums ${TASK_VIEW_LAYOUT[view].time}`}
       >
-        <span className="flex min-w-0 items-center gap-0.5">
+        <span className="flex min-w-0 items-baseline gap-0.5">
           <span className={appearance.elapsed}>{formatTimerTime(spent)}</span>
           <span className="text-muted font-normal">/</span>
           <span className="text-muted">{formatTimerTime(task.duration)}</span>
         </span>
         <span
-          className={`shrink-0 font-medium ${TASK_VIEW_LAYOUT[view].percentage} ${appearance.elapsed}`}
+          className={`shrink-0 ${TASK_VIEW_LAYOUT[view].percentage} ${appearance.elapsed}`}
         >
           {percentageLabel}%
         </span>

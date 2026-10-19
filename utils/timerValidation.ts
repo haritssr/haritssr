@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { validTimerDate } from "@/utils/timer";
+import { TIMER_SPEEDS, validTimerDate } from "@/utils/timer";
 
 const dateSchema = z.string().refine(validTimerDate);
 const instant = z.iso.datetime({ offset: true });
@@ -12,6 +12,8 @@ const taskSchema = z
     duration: z.number().int().min(1).max(86_400),
     spent: z.number().min(0),
     startedAt: instant.nullable(),
+    lastStartedAt: instant.optional(),
+    speed: z.literal(TIMER_SPEEDS).optional(),
     reachedAt: instant.nullable(),
     notifiedAt: instant.nullable(),
   })
@@ -29,28 +31,43 @@ export const daySchema = z
 
 export const actionSchema = z.discriminatedUnion("action", [
   z.object({
+    action: z.literal("speed"),
+    date: dateSchema,
+    taskId: z.string().min(1).max(100),
+    speed: z.literal(TIMER_SPEEDS),
+  }),
+  z.object({
+    action: z.literal("single-task"),
+    date: dateSchema,
+  }),
+  z.object({
+    action: z.literal("start"),
+    date: dateSchema,
+    taskId: z.string().min(1).max(100),
+    multitask: z.boolean().optional(),
+  }),
+  z.object({
     action: z.literal("edit"),
     date: dateSchema,
     taskId: z.string().min(1).max(100),
-    activity: z.string().trim().min(1).max(120),
+    activity: z.string().trim().min(1).max(20),
     description: z.string().trim().max(2000),
     duration: z.number().int().min(1).max(86_400),
   }),
   z.object({
     action: z.literal("add"),
     date: dateSchema,
-    activity: z.string().trim().min(1).max(120),
+    activity: z.string().trim().min(1).max(20),
     description: z.string().trim().max(2000),
     duration: z.number().int().min(1).max(86_400),
   }),
-  ...(["start", "pause", "done", "acknowledge", "delete"] as const).map(
-    (action) =>
-      z.object({
-        action: z.literal(action),
-        autoplay: z.boolean().optional(),
-        date: dateSchema,
-        taskId: z.string().min(1).max(100),
-      })
+  ...(["pause", "done", "acknowledge", "delete"] as const).map((action) =>
+    z.object({
+      action: z.literal(action),
+      autoplay: z.boolean().optional(),
+      date: dateSchema,
+      taskId: z.string().min(1).max(100),
+    })
   ),
 ]);
 

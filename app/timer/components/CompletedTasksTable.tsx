@@ -83,8 +83,8 @@ export default function CompletedTasksTable({
   return (
     <section aria-label="Completed tasks" className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <SectionHeading as="h3" variant="compact" className="mb-0">
-          Completed tasks
+        <SectionHeading as="h3" variant="toolbar">
+          Completed
         </SectionHeading>
         <div className="ml-auto flex flex-wrap items-center gap-4">
           <div className="[&>div>label]:sr-only">
@@ -161,7 +161,7 @@ export default function CompletedTasksTable({
                 {formatTimerTime(task.duration)}
               </td>
               <td className="tabular-nums">
-                {percentage >= 100 ? "100" : percentage.toFixed(1)}%
+                {percentage >= 100 ? "100" : percentage.toFixed(0)}%
               </td>
               <td className="whitespace-nowrap">
                 {reached ? "Reached" : "Done"}

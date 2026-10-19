@@ -1,4 +1,5 @@
 import { Dialog } from "@base-ui/react/dialog";
+import { useId, useState } from "react";
 import type { CSSProperties, SubmitEvent } from "react";
 
 import Button from "@/components/Button";
@@ -15,6 +16,7 @@ const SHEET_STYLE: CSSProperties & { "--timer-safe-bottom": string } = {
 
 export default function TaskFormDialog({
   title,
+  submitLabel = "Save",
   defaultActivity,
   defaultDescription = "",
   defaultDuration = 1500,
@@ -24,6 +26,7 @@ export default function TaskFormDialog({
   onDelete,
 }: {
   title: string;
+  submitLabel?: string;
   defaultActivity: string;
   defaultDescription?: string;
   defaultDuration?: number;
@@ -37,7 +40,7 @@ export default function TaskFormDialog({
       <Dialog.Backdrop className="timer-dialog-backdrop bg-foreground/40 fixed inset-0 z-90" />
       <Dialog.Popup
         style={SHEET_STYLE}
-        className="border-border bg-background text-foreground shadow-floating fixed inset-x-0 bottom-0 z-90 max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-3xl border px-4 py-3.5 outline-hidden sm:inset-auto sm:top-1/2 sm:left-1/2 sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl"
+        className="border-border bg-background text-foreground shadow-floating fixed inset-x-0 bottom-0 z-90 max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-3xl border p-4 outline-hidden sm:inset-auto sm:top-1/2 sm:left-1/2 sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl"
       >
         <div
           aria-hidden="true"
@@ -49,9 +52,11 @@ export default function TaskFormDialog({
             void onSubmit(event);
           }}
         >
-          <Dialog.Title className="text-center font-semibold">
-            {title}
-          </Dialog.Title>
+          <TaskFormActions
+            busy={busy}
+            submitLabel={submitLabel}
+            title={title}
+          />
           <TaskNameField defaultValue={defaultActivity} disabled={busy} />
           <TaskDescriptionField
             defaultValue={defaultDescription}
@@ -63,7 +68,19 @@ export default function TaskFormDialog({
               {error}
             </p>
           )}
-          <TaskFormActions busy={busy} onDelete={onDelete} />
+          {onDelete === undefined ? null : (
+            <div className="flex items-center gap-3 pt-2">
+              <Button
+                disabled={busy}
+                onClick={() => {
+                  void onDelete();
+                }}
+                variant="danger"
+              >
+                Delete
+              </Button>
+            </div>
+          )}
         </form>
       </Dialog.Popup>
     </Dialog.Portal>
@@ -77,17 +94,33 @@ function TaskNameField({
   defaultValue: string;
   disabled: boolean;
 }) {
+  const hintId = useId();
+  const [length, setLength] = useState(defaultValue.length);
   return (
     <label className="flex flex-col gap-2 text-sm">
       <span>Name</span>
-      <input
-        className={`${INPUT_CLASS} h-10`}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        maxLength={120}
-        name="activity"
-        required
-      />
+      <span className="relative block">
+        <input
+          aria-describedby={hintId}
+          className={`${INPUT_CLASS} h-10 pr-18`}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          maxLength={20}
+          name="activity"
+          onChange={(event) => {
+            setLength(event.currentTarget.value.length);
+          }}
+          placeholder="Short title"
+          required
+        />
+        <span
+          className={`pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs tabular-nums ${length >= 20 ? "text-attention font-medium" : "text-muted"}`}
+          id={hintId}
+        >
+          <span className="sr-only">Characters: </span>
+          {length}/20
+        </span>
+      </span>
     </label>
   );
 }
@@ -118,30 +151,27 @@ function TaskDescriptionField({
 
 function TaskFormActions({
   busy,
-  onDelete,
+  title,
+  submitLabel,
 }: {
   busy: boolean;
-  onDelete?: () => Promise<void>;
+  title: string;
+  submitLabel: string;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 pt-2">
-      {onDelete === undefined ? null : (
-        <Button
+    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+      <div className="grid w-18 justify-self-start">
+        <Dialog.Close
           disabled={busy}
-          onClick={() => {
-            void onDelete();
-          }}
-          variant="danger"
+          render={<Button className="w-full!" variant="secondary" />}
         >
-          Delete
-        </Button>
-      )}
-      <div className="ml-auto flex items-center gap-3">
-        <Dialog.Close disabled={busy} render={<Button variant="secondary" />}>
           Cancel
         </Dialog.Close>
-        <Button loading={busy} type="submit">
-          Save
+      </div>
+      <Dialog.Title className="text-center font-medium">{title}</Dialog.Title>
+      <div className="grid w-18 justify-self-end">
+        <Button className="w-full!" loading={busy} type="submit">
+          {submitLabel}
         </Button>
       </div>
     </div>

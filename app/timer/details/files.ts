@@ -6,7 +6,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/components/TimerToolbar.tsx",
-    "Notification and Autoplay switches, Cards/List selection, and Add Task.",
+    "Notification and Autoplay switches, Cards/List selection, and New Task.",
   ],
   [
     "app/timer/components/TaskList.tsx",

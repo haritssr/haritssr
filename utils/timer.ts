@@ -1,3 +1,6 @@
+export const TIMER_SPEEDS = [1, 1.5, 2, 2.5, 3] as const;
+type TimerSpeed = (typeof TIMER_SPEEDS)[number];
+
 export interface TimerTask {
   id: string;
   activity: string;
@@ -5,6 +8,8 @@ export interface TimerTask {
   duration: number;
   spent: number;
   startedAt: string | null;
+  lastStartedAt?: string;
+  speed?: TimerSpeed;
   reachedAt: string | null;
   notifiedAt: string | null;
 }
@@ -39,6 +44,22 @@ export interface TimerHistory {
 
 export type TimerAction =
   | {
+      action: "speed";
+      date: string;
+      taskId: string;
+      speed: TimerSpeed;
+    }
+  | {
+      action: "single-task";
+      date: string;
+    }
+  | {
+      action: "start";
+      multitask?: boolean;
+      date: string;
+      taskId: string;
+    }
+  | {
       action: "add";
       date: string;
       activity: string;
@@ -54,7 +75,7 @@ export type TimerAction =
       duration: number;
     }
   | {
-      action: "start" | "pause" | "done" | "acknowledge" | "delete";
+      action: "pause" | "done" | "acknowledge" | "delete";
       autoplay?: boolean;
       date: string;
       taskId: string;
@@ -103,14 +124,17 @@ export function taskSpent(task: TimerTask, date: string, now: number) {
           (Math.min(now, timerMidnight(date)) - Date.parse(task.startedAt)) /
             1000
         );
-  return Math.min(task.duration, task.spent + elapsed);
+  return Math.min(task.duration, task.spent + elapsed * (task.speed ?? 1));
 }
 
 export function formatTimerTime(seconds: number) {
   const value = Math.max(0, Math.floor(seconds));
   const hours = Math.floor(value / 3600);
   const minutes = Math.floor((value % 3600) / 60);
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(value % 60).padStart(2, "0")}`;
+  const remainder = String(value % 60).padStart(2, "0");
+  return hours > 0
+    ? `${hours}:${String(minutes).padStart(2, "0")}:${remainder}`
+    : `${minutes}:${remainder}`;
 }
 
 export function createTimerDay(date: string): TimerDay {
@@ -121,7 +145,7 @@ export function createTimerDay(date: string): TimerDay {
     tasks: [
       {
         id: "daily-x",
-        activity: "X",
+        activity: "X Traversal",
         description: "x bookmarks doom scrolling",
         duration: 3600,
       },

@@ -34,7 +34,7 @@ export default function TimerClient() {
     getServerMobileSnapshot
   );
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {snapshot?.mode === "demo" ? (
         <p className="border-border bg-surface text-muted rounded-lg border p-4 text-sm">
           Sample preview. Run this site locally to save your activities in daily
