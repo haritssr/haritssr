@@ -1,5 +1,6 @@
 "use client";
 
+import "./globals.css";
 import {
   StatusActionButton,
   StatusActionLink,
@@ -8,27 +9,37 @@ import {
 
 export default function GlobalError({
   error,
-  reset,
+  retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  retry: () => void;
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Something went wrong · Harits Syah</title>
+        <meta content="noindex" name="robots" />
+      </head>
       <body>
         <StatusPage
           actions={
             <>
-              <StatusActionButton onClick={reset}>Try again</StatusActionButton>
+              <StatusActionButton onClick={retry}>Try again</StatusActionButton>
               <StatusActionLink href="/" variant="secondary">
-                Back to Home
+                Back to home
               </StatusActionLink>
             </>
           }
           description={
-            error.digest !== undefined && error.digest.length > 0
-              ? `Error ID: ${error.digest}`
-              : "An unexpected error occurred while rendering this page."
+            <>
+              We couldn’t load this page. Try again, or head home to keep
+              exploring.
+              {error.digest !== undefined && error.digest.length > 0 ? (
+                <span className="text-muted mt-4 block text-sm wrap-anywhere">
+                  Error ID: {error.digest}
+                </span>
+              ) : null}
+            </>
           }
           fullScreen
           title="Something went wrong"

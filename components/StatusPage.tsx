@@ -6,12 +6,11 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 
 const STATUS_ACTION_BASE_CLASS =
-  "inline-flex w-full cursor-pointer items-center justify-center corner-squircle rounded-xl px-3.5 py-1.5 text-center text-sm transition-colors sm:basis-0 sm:flex-1 sm:w-auto";
+  "inline-flex min-h-10 cursor-pointer items-center justify-center corner-squircle rounded-xl border px-4 py-2 text-center text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action";
 
 const STATUS_ACTION_VARIANT_CLASS = {
-  primary: "bg-zinc-700 text-zinc-100 select-none hover:bg-zinc-700/95",
-  secondary:
-    "border border-zinc-300 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-700",
+  primary: "border-transparent bg-action text-white hover:bg-action-hover",
+  secondary: "border-border bg-white text-foreground hover:bg-secondary-hover",
 } as const;
 
 function getStatusActionClassName(
@@ -69,36 +68,26 @@ export function StatusPage({
   title: string;
   tone?: "error" | "neutral";
 }) {
-  const wrapperClassName =
-    fullScreen === true
-      ? "mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center px-5"
-      : "";
-  const cardClassName =
-    tone === "error"
-      ? "border-danger/20 bg-danger/10"
-      : "border-border bg-foreground/5";
-  const badgeClassName = tone === "error" ? "text-danger" : "text-muted";
-
   return (
-    <div className={wrapperClassName}>
-      <PageHeader>
-        <PageTitle>{title}</PageTitle>
-        <div className={`text-xs font-medium uppercase ${badgeClassName}`}>
-          {tone === "error" ? "Error" : "404"}
+    <div
+      className={`flex w-full items-center py-16 ${fullScreen === true ? "bg-background text-foreground min-h-dvh px-4 sm:px-8" : "min-h-[60dvh]"}`}
+    >
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="max-w-xl">
+          <p className="text-muted mb-5 text-sm font-medium">
+            {tone === "error" ? "Error" : "404 · Page not found"}
+          </p>
+          <PageHeader back={{ href: "/", name: "Home" }}>
+            <PageTitle>{title}</PageTitle>
+            {description !== undefined && description !== null ? (
+              <PageDescription>{description}</PageDescription>
+            ) : null}
+          </PageHeader>
+          {actions !== undefined && actions !== null ? (
+            <div className="flex flex-wrap gap-3">{actions}</div>
+          ) : null}
         </div>
-        {description !== undefined && description !== null ? (
-          <PageDescription>{description}</PageDescription>
-        ) : null}
-      </PageHeader>
-      {actions !== undefined && actions !== null ? (
-        <section
-          className={`corner-squircle max-w-fit rounded-xl border px-4 py-5 text-left ${cardClassName}`}
-        >
-          <div className="flex w-full flex-col items-center justify-center gap-2 sm:flex-row">
-            {actions}
-          </div>
-        </section>
-      ) : null}
+      </div>
     </div>
   );
 }

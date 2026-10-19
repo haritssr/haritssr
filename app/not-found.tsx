@@ -23,15 +23,15 @@ export default function NotFound() {
       actions={
         <>
           <StatusActionLink href="/" variant="primary">
-            Back to Home
+            Back to home
           </StatusActionLink>
           <StatusActionButton onClick={handlePreviousPage} variant="secondary">
-            Previous Page
+            Go back
           </StatusActionButton>
         </>
       }
-      description="The route may have moved or no longer exists."
-      title="Page Not Found"
+      description="We couldn’t find this page. Check the address, go back, or head home to keep exploring."
+      title="Page not found"
     />
   );
 }
