@@ -127,8 +127,8 @@ export default function NavigationLogicPage() {
       <LabPageHeader>
         <PageDescription>
           How this site’s navigation responds to routes, screen sizes, headings,
-          and scrolling. These Mermaid diagrams describe the current
-          implementation.
+          and scrolling. These diagrams use Pele to render the current
+          implementation from Mermaid syntax.
         </PageDescription>
       </LabPageHeader>
       <div className="space-y-16">

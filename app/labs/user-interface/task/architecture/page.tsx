@@ -448,7 +448,7 @@ export default function TaskArchitecturePage() {
               <h2 className="mb-3 font-semibold text-zinc-800">
                 {chart.title}
               </h2>
-              <MermaidDiagram definition={chart.definition} id={chart.id} />
+              <PeleDiagram definition={chart.definition} id={chart.id} />
             </div>
           ))}
         </div>
@@ -543,13 +543,7 @@ export default function TaskArchitecturePage() {
   );
 }
 
-function MermaidDiagram({
-  definition,
-  id,
-}: {
-  definition: string;
-  id: string;
-}) {
+function PeleDiagram({ definition, id }: { definition: string; id: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -559,22 +553,24 @@ function MermaidDiagram({
 
     const render = async () => {
       try {
-        const mermaidModule = await import("mermaid");
-        const mermaid = mermaidModule.default;
-        mermaid.initialize({
-          htmlLabels: true,
-          startOnLoad: false,
-          theme: "default",
-          flowchart: {
-            useMaxWidth: true,
-            curve: "basis",
-          },
+        const [pele, { default: flowchart }, { default: classDiagram }] =
+          await Promise.all([
+            import("pele/core"),
+            import("pele/diagrams/flowchart"),
+            import("pele/diagrams/class"),
+          ]);
+        await document.fonts.ready;
+        if (cancelled) {
+          return;
+        }
+        pele.register(flowchart, classDiagram);
+        const { svg: renderedSvg } = pele.render(definition, {
+          idPrefix: `task-${id}`,
+          fontFamily: getComputedStyle(document.body).fontFamily,
+          autoDirection: false,
+          links: false,
+          images: false,
         });
-
-        const { svg: renderedSvg } = await mermaid.render(
-          `mermaid-${id}`,
-          definition
-        );
 
         const parsedDocument = new DOMParser().parseFromString(
           renderedSvg,
@@ -585,7 +581,7 @@ function MermaidDiagram({
           svgElement.tagName.toLocaleLowerCase("en-US") !== "svg" ||
           svgElement.namespaceURI !== "http://www.w3.org/2000/svg"
         ) {
-          throw new Error("Mermaid returned invalid SVG");
+          throw new Error("Pele returned invalid SVG");
         }
 
         if (!cancelled) {

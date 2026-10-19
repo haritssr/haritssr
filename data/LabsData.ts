@@ -991,10 +991,10 @@ export const LabsData: readonly LabDomain[] = [
         slug: "navigation-logic",
         title: "Navigation Logic",
         description:
-          "Map this site’s responsive navigation behavior with Mermaid.",
-        tags: ["navigation", "design", "mermaid", "documentation"],
+          "Map this site’s responsive navigation behavior with Pele.",
+        tags: ["navigation", "design", "pele", "documentation"],
         createdAt: "2026-10-16",
-        updatedAt: ["2026-10-16"],
+        updatedAt: ["2026-10-16", "2026-10-18"],
       },
       {
         slug: "pill-material",

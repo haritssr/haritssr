@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "7713b3a604d5f8bcb1c54dcea20dbc85148ee095",
+      "date": "2026-10-19T13:20:44+07:00",
+      "subject": "fix(ci): run quality checks as sequential workflow steps"
+    },
+    {
       "hash": "4172e2cd4604c8c83b9cf754caddf0ad3eeeeb8b",
       "date": "2026-10-18T06:50:02+07:00",
       "subject": "fix(changelog): highlight the selected current period"

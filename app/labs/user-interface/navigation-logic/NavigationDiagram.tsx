@@ -22,9 +22,13 @@ const MIN_ZOOM = 0.25;
 const MAX_ZOOM = 3;
 const ZOOM_STEP = 0.25;
 
-async function loadMermaid() {
-  const { default: mermaid } = await import("mermaid");
-  return mermaid;
+async function loadPele() {
+  const [pele, { default: flowchart }] = await Promise.all([
+    import("pele/core"),
+    import("pele/diagrams/flowchart"),
+  ]);
+  pele.register(flowchart);
+  return pele;
 }
 
 export default function NavigationDiagram({
@@ -46,24 +50,25 @@ export default function NavigationDiagram({
 
     async function render() {
       try {
-        const mermaid = await loadMermaid();
+        const pele = await loadPele();
+        await document.fonts.ready;
         if (cancelled) {
           return;
         }
-        mermaid.initialize({
-          startOnLoad: false,
-          securityLevel: "strict",
-          suppressErrorRendering: true,
-          theme: "neutral",
-          htmlLabels: false,
-          flowchart: { curve: "linear", useMaxWidth: false },
+        const theme = getComputedStyle(document.body);
+        const { svg, width, height } = pele.render(definition, {
+          idPrefix: `navigation-${id}`,
+          responsive: false,
+          autoDirection: false,
+          fontFamily: theme.fontFamily,
+          links: false,
+          images: false,
         });
-        const { svg } = await mermaid.render(`navigation-${id}`, definition);
-        if (cancelled) {
-          return;
-        }
-        const document = new DOMParser().parseFromString(svg, "image/svg+xml");
-        const element = document.documentElement;
+        const svgDocument = new DOMParser().parseFromString(
+          svg,
+          "image/svg+xml"
+        );
+        const element = svgDocument.documentElement;
         if (
           element.localName !== "svg" ||
           element.namespaceURI !== "http://www.w3.org/2000/svg"
@@ -71,9 +76,6 @@ export default function NavigationDiagram({
           setStatus("error");
           return;
         }
-        const viewBox = element.getAttribute("viewBox")?.trim().split(/\s+/u);
-        const width = Number(viewBox?.[2]);
-        const height = Number(viewBox?.[3]);
         if (
           !Number.isFinite(width) ||
           !Number.isFinite(height) ||
@@ -83,15 +85,25 @@ export default function NavigationDiagram({
           setStatus("error");
           return;
         }
-        // Give the standalone image the same viewport as its complete drawing.
-        // Mermaid's responsive sizing can otherwise clip the exported SVG.
+        // Standalone SVG images cannot inherit the page's CSS variables.
+        for (const [name, token] of [
+          ["bg", "background"],
+          ["fg", "foreground"],
+          ["muted", "muted"],
+          ["line", "foreground"],
+          ["surface", "surface"],
+          ["surface-alt", "secondary-hover"],
+          ["border", "border"],
+          ["accent", "action"],
+        ]) {
+          element.style.setProperty(
+            `--pele-${name}`,
+            theme.getPropertyValue(`--color-${token}`).trim()
+          );
+        }
         element.setAttribute("width", String(width));
         element.setAttribute("height", String(height));
         element.setAttribute("preserveAspectRatio", "xMinYMin meet");
-        element.setAttribute(
-          "style",
-          `width:${width}px;height:${height}px;max-width:none;max-height:none;`
-        );
         const imageSvg = new XMLSerializer().serializeToString(element);
         setDiagram({
           src: `data:image/svg+xml,${encodeURIComponent(imageSvg)}`,
@@ -135,7 +147,7 @@ export default function NavigationDiagram({
         {status === "error" ? (
           <div className="space-y-3">
             <output className="text-muted block">
-              Unable to render the diagram. Its Mermaid source is shown below.
+              Unable to render the diagram. Its diagram source is shown below.
             </output>
             <pre className="overflow-x-auto text-sm">{definition}</pre>
           </div>

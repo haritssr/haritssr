@@ -137,7 +137,7 @@ export default defineConfig({
       files: ["app/labs/user-interface/task/architecture/page.tsx"],
       rules: {
         // React Compiler does not support import expressions yet. Keeping
-        // Mermaid dynamic avoids shipping it in the initial client bundle.
+        // Pele dynamic avoids shipping it in the initial client bundle.
         "react/todo": "off",
       },
     },
