@@ -74,7 +74,6 @@ function TaskHeader({
   return (
     <div
       className={`min-w-0 space-y-1.5 ${view === "list" ? "sm:space-y-0.5" : "sm:space-y-1.5"}`}
-      ref={anchor}
     >
       <div className="flex items-center justify-between gap-3">
         <p
@@ -87,7 +86,7 @@ function TaskHeader({
           <EditTask task={task} date={date} reached={reached} />
         </div>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between" ref={anchor}>
         <TaskDescription task={task} anchor={anchor} />
         <TaskSpeedControl task={task} date={date} />
       </div>

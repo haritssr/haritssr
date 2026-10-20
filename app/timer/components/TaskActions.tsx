@@ -5,6 +5,7 @@ import { useTimer } from "@/components/TimerProvider";
 import type { TimerTask } from "@/utils/timer";
 import { playTaskSound, prepareTaskSound } from "@/utils/timerSound";
 
+import DeleteTaskButton from "./DeleteTaskButton";
 import type { TaskView } from "./taskPresentation";
 
 export default function TaskActions({
@@ -50,6 +51,19 @@ export default function TaskActions({
     <div
       className={`flex items-center ${view === "cards" ? "space-x-2.5" : "space-x-3"}`}
     >
+      {showDone ? null : (
+        <DeleteTaskButton
+          className="w-full"
+          dimWhenDisabled={snapshot?.mode !== "local"}
+          size="mobile-roomy"
+          disabled={busy || snapshot?.mode !== "local"}
+          onDelete={async () =>
+            await act({ action: "delete", date, taskId: task.id })
+          }
+          variant="secondary-strong"
+          aria-label={`Delete ${task.activity}`}
+        />
+      )}
       <Button
         className={`w-full ${showDone ? "" : "select-none"}`}
         dimWhenDisabled={snapshot?.mode !== "local"}

@@ -7,6 +7,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useEffectEvent,
   useMemo,
   useRef,
   useState,
@@ -14,9 +15,13 @@ import {
 import type { ReactNode } from "react";
 import useSWR from "swr";
 
-import { timerMidnight } from "@/utils/timer";
+import { taskSpent, timerMidnight } from "@/utils/timer";
 import type { TimerAction, TimerNotice, TimerSnapshot } from "@/utils/timer";
-import { playTaskSound, prepareTaskSound } from "@/utils/timerSound";
+import {
+  playClockTick,
+  playTaskSound,
+  prepareTaskSound,
+} from "@/utils/timerSound";
 
 interface TimerContextValue {
   snapshot: TimerSnapshot | undefined;
@@ -25,6 +30,8 @@ interface TimerContextValue {
   clockOffset: number;
   autoplay: boolean;
   setAutoplay: (enabled: boolean) => void;
+  tickingEnabled: boolean;
+  setTickingEnabled: (enabled: boolean) => void;
   multitask: boolean;
   setMultitask: (enabled: boolean) => Promise<boolean>;
   notificationsEnabled: boolean;
@@ -125,6 +132,8 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
   const [busy, setBusy] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [autoplay, setAutoplay] = useState(false);
+  const [ticking, setTicking] = useState(false);
+  const tickingAudio = useRef<AudioContext | null>(null);
   const [multitaskEnabled, setMultitaskEnabled] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [completion, setCompletion] = useState<string | null>(null);
@@ -145,6 +154,63 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
   );
 
   const clockOffset = data?.clockOffset ?? 0;
+  const setTickingEnabled = useCallback((next: boolean) => {
+    if (next) {
+      tickingAudio.current = prepareTaskSound();
+    }
+    setTicking(next);
+  }, []);
+  const hasRunningTask =
+    data?.mode === "local" &&
+    data.day.tasks.some((task) => task.startedAt !== null);
+  const tick = useEffectEvent((alternate: boolean) => {
+    if (data?.mode !== "local") {
+      return 1000;
+    }
+    const now = Date.now() + clockOffset;
+    let remaining = Infinity;
+    if (now < timerMidnight(data.today)) {
+      for (const task of data.day.tasks) {
+        if (task.startedAt === null || task.reachedAt !== null) {
+          continue;
+        }
+        const seconds =
+          (task.duration - taskSpent(task, data.today, now)) /
+          (task.speed ?? 1);
+        if (seconds > 0) {
+          remaining = Math.min(remaining, seconds);
+        }
+      }
+    }
+    const urgent = remaining <= 10;
+    if (urgent || (ticking && remaining < Infinity)) {
+      const context = tickingAudio.current ?? prepareTaskSound();
+      tickingAudio.current = context;
+      playClockTick(context, alternate, urgent);
+    }
+    if (remaining <= 3) {
+      return 250;
+    }
+    return remaining <= 6 ? 500 : 1000;
+  });
+  useEffect(() => {
+    if (!hasRunningTask) {
+      return () => {
+        /* No ticking interval while idle. */
+      };
+    }
+    let alternate = false;
+    let timeout: number;
+    const scheduleTick = () => {
+      const delay = tick(alternate);
+      alternate = !alternate;
+      timeout = window.setTimeout(scheduleTick, delay);
+    };
+    scheduleTick();
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [hasRunningTask]);
   const refresh = useCallback(async () => await mutate(), [mutate]);
   const publish = useCallback(
     async (next: ReceivedSnapshot) => {
@@ -291,6 +357,8 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
       setNotificationsEnabled,
       autoplay,
       setAutoplay,
+      tickingEnabled: ticking,
+      setTickingEnabled,
       multitask: multitaskEnabled,
       setMultitask,
       act,
@@ -304,6 +372,8 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
       clockOffset,
       notificationsEnabled,
       autoplay,
+      ticking,
+      setTickingEnabled,
       multitaskEnabled,
       setMultitask,
       act,
@@ -317,19 +387,19 @@ export default function TimerProvider({ children }: { children: ReactNode }) {
     <TimerContext value={value}>
       {children}
       {completion === null ? null : (
-        <div className="border-border bg-background shadow-floating fixed right-4 bottom-20 left-4 z-50 flex items-center justify-between gap-4 rounded-xl border py-2 pr-2 pl-5 sm:bottom-6 sm:left-auto sm:max-w-sm">
+        <div className="border-border bg-background shadow-floating fixed right-4 bottom-20 left-4 z-50 flex items-center justify-between gap-2 rounded-xl border py-2 pr-2.5 pl-5 sm:bottom-6 sm:left-auto sm:max-w-sm">
           <output>
-            <strong className="font-semibold">{completion}</strong> is done.
+            <strong className="font-semibold">{completion}</strong> is done
           </output>
           <button
             aria-label="Dismiss completion message"
-            className="text-muted hover:text-foreground inline-flex size-10 cursor-pointer items-center justify-center"
+            className="bg-foreground/5 text-muted hover:bg-foreground/15 hover:text-foreground focus-visible:outline-action inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
             onClick={() => {
               setCompletion(null);
             }}
             type="button"
           >
-            <XMarkIcon aria-hidden="true" className="size-5" />
+            <XMarkIcon aria-hidden="true" className="size-5 stroke-3" />
           </button>
         </div>
       )}

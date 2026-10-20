@@ -5,7 +5,7 @@ import type { RefObject } from "react";
 import type { TimerTask } from "@/utils/timer";
 
 const TASK_DESCRIPTION_ARROW_CLASS_NAME =
-  "relative block h-1.75 w-3 overflow-clip data-[side=bottom]:top-[-6px] data-[side=left]:right-[-9px] data-[side=left]:rotate-90 data-[side=right]:left-[-9px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-6px] data-[side=top]:rotate-180 before:absolute before:bottom-[1px] before:left-1/2 before:h-[calc(6px*sqrt(2))] before:w-[calc(6px*sqrt(2))] before:border before:border-border before:bg-white before:content-[''] before:[transform:translate(-50%,50%)_rotate(45deg)]";
+  "relative block h-1.5 w-3 overflow-clip data-[side=bottom]:top-[-6px] data-[side=left]:right-[-9px] data-[side=left]:rotate-90 data-[side=right]:left-[-9px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-6px] data-[side=top]:rotate-180 before:absolute before:bottom-0 before:left-1/2 before:h-[calc(6px*sqrt(2))] before:w-[calc(6px*sqrt(2))] before:bg-foreground before:content-[''] before:[transform:translate(-50%,50%)_rotate(45deg)]";
 
 export default function TaskDescription({
   task,
@@ -36,11 +36,11 @@ export default function TaskDescription({
             anchor={anchor}
             className="z-50 w-(--anchor-width)"
             positionMethod="fixed"
-            side="bottom"
+            side="top"
             sideOffset={8}
           >
             <Popover.Popup
-              className="border-border text-foreground shadow-foreground/40 w-full rounded-lg border bg-white px-3 py-2 text-sm shadow-2xl outline-hidden"
+              className="bg-foreground text-background w-full rounded-md px-2.5 py-1.5 text-sm shadow-xl outline-hidden"
               initialFocus={false}
               finalFocus={false}
             >
@@ -48,13 +48,13 @@ export default function TaskDescription({
                 {task.activity} description
               </Popover.Title>
               <Popover.Description
-                className={`wrap-anywhere whitespace-pre-wrap ${task.description.trim().length === 0 ? "text-muted italic" : ""}`}
+                className={`wrap-anywhere whitespace-pre-wrap ${task.description.trim().length === 0 ? "text-background/70 italic" : ""}`}
               >
-                {task.description.trim().length === 0
-                  ? "No description added"
-                  : task.description}
+                {task.description.trim().length === 0 ? "—" : task.description}
               </Popover.Description>
-              <Popover.Arrow className={TASK_DESCRIPTION_ARROW_CLASS_NAME} />
+              <Popover.Arrow
+                className={`${TASK_DESCRIPTION_ARROW_CLASS_NAME} left-9! sm:left-7!`}
+              />
             </Popover.Popup>
           </Popover.Positioner>
         </Popover.Portal>

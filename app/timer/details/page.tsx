@@ -85,6 +85,11 @@ export default function TimerDetailsPage() {
         <Section id="time-and-notifications" title="Time and notifications">
           <div className="max-w-3xl space-y-5">
             <p>
+              Enable Ticking in the toolbar for a clock tick each second while
+              any task runs. It defaults off and resets on reload. Multiple
+              tasks share one tick, and task speed does not change its cadence.
+            </p>
+            <p>
               Running time is calculated from saved timestamps, so it can
               recover after navigating away, reloading, or closing the browser.
               Time spent never exceeds the activity’s duration. At midnight in

@@ -5,6 +5,7 @@ import {
   BellAlertIcon,
   ForwardIcon,
   ListBulletIcon,
+  SpeakerWaveIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { useRef, useState, useSyncExternalStore } from "react";
@@ -42,7 +43,7 @@ export default function TimerToolbar({
 }) {
   const { snapshot } = useTimer();
   return (
-    <div className="border-border flex w-full items-center justify-between pb-5 sm:border-b sm:border-dashed">
+    <div className="border-border flex w-full items-center justify-between border-b border-dashed pb-5">
       <AddTask disabled={snapshot === undefined || snapshot.mode === "demo"} />
       <div className="flex shrink-0 items-center gap-5">
         <TimerSettings />
@@ -59,6 +60,8 @@ function TimerSettings() {
     setNotificationsEnabled,
     autoplay,
     setAutoplay,
+    tickingEnabled,
+    setTickingEnabled,
   } = useTimer();
   const [permissionFailed, setPermissionFailed] = useState(false);
   const browserPermission = useSyncExternalStore(
@@ -107,6 +110,14 @@ function TimerSettings() {
         onCheckedChange={setAutoplay}
       />
       <MultitaskSetting />
+      <TimerSettingToggle
+        label="Ticking"
+        title="Clock ticking while tasks run"
+        icon={<SpeakerWaveIcon aria-hidden="true" className="size-4.5" />}
+        disabled={snapshot?.mode !== "local"}
+        checked={tickingEnabled}
+        onCheckedChange={setTickingEnabled}
+      />
     </div>
   );
 }
@@ -226,7 +237,7 @@ function TimerSettingToggle({
       title={title}
     >
       {icon}
-      <span className="hidden sm:inline">{label}</span>
+      <span className="hidden md:inline">{label}</span>
     </Toggle>
   );
 }

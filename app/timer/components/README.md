@@ -6,15 +6,16 @@ run inside its `use client` boundary.
 
 | Change | File |
 | --- | --- |
-| Notification, Autoplay, and Multitask toggles; Multitask confirmation; Cards/List controls | [TimerToolbar.tsx](TimerToolbar.tsx) |
+| Notification, Autoplay, Multitask, and Ticking toggles; Multitask confirmation; Cards/List controls | [TimerToolbar.tsx](TimerToolbar.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
 | Active card structure, title, description placement, and per-task speed control | [TaskCard.tsx](TaskCard.tsx) |
 | Completed task names, descriptions, times, percentages, and status | [CompletedTasksTable.tsx](CompletedTasksTable.tsx) |
 | Time display, percentage, and progress bar | [TaskProgress.tsx](TaskProgress.tsx) |
+| Delete confirmation for card and edit dialog | [DeleteTaskButton.tsx](DeleteTaskButton.tsx) |
 | Start, Continue, Pause, and Done controls | [TaskActions.tsx](TaskActions.tsx) |
 | Description hover target and popover | [TaskDescription.tsx](TaskDescription.tsx) |
 | Add/Edit triggers and save behavior | [TaskDialog.tsx](TaskDialog.tsx) |
-| Shared modal dimensions, fields, header actions, and Delete footer | [TaskFormDialog.tsx](TaskFormDialog.tsx) |
+| Shared modal dimensions, fields, and header actions | [TaskFormDialog.tsx](TaskFormDialog.tsx) |
 | Number inputs, stepper buttons, and duration presets | [DurationFields.tsx](DurationFields.tsx) |
 | Card/list dimensions, borders, shadow, spacing, and state colors | [taskPresentation.ts](taskPresentation.ts) |
 | Timer updates and derived task state | [useTaskState.ts](useTaskState.ts) |
@@ -41,8 +42,9 @@ Local timer actions and Multitask keep
 their opacity while disabled during saves; unavailable preview controls remain dimmed.
 
 Completed tasks appear in `CompletedTasksTable` below active tasks in both views.
-All details stay visible, with wrapping task names and descriptions and horizontal
-scrolling on narrow screens. `TaskList` partitions tasks using their current elapsed
+The section defaults collapsed. View reveals the sort controls and table; Hide
+collapses them again. The expanded table wraps task names and descriptions and
+scrolls horizontally on narrow screens. `TaskList` partitions tasks using their current elapsed
 time, so a task moves into the table as soon as its duration is reached.
 
 Multitask appears after Autoplay. It defaults off and, like Autoplay, is a
@@ -56,6 +58,18 @@ tasks running; OK keeps the most recently started or continued task and pauses
 the rest, preserving elapsed time. The server re-evaluates running tasks when
 confirming. A failed save keeps Multitask enabled and shows an error. With zero
 or one running task, no confirmation is needed.
+
+Ticking defaults off and resets on reload. When enabled, one shared analog-style
+tick plays per real second while any local task runs, regardless of task speed
+or the number of running tasks. It stops when all tasks pause, finish, or reach
+midnight, and continues across page navigation. It does not mute the existing
+Start, Pause, Done, or completion sounds. Audio setup happens in the toggle's
+click handler; the provider owns interval cleanup and checks elapsed time before
+each tick, so overdue tasks stay silent while waiting for a server refresh.
+
+During the final 10 real seconds of a task, warning ticks play automatically,
+even with Ticking off. They become faster with 6 and 3 seconds remaining and
+stop when the task pauses or finishes. Remaining time accounts for task speed.
 
 Task persistence, notifications, autoplay, multitask state, and sound generation remain in
 [TimerProvider](../../../components/TimerProvider.tsx),
