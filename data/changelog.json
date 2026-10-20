@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "5d6e0b0a726699a65875ed4f1b2ff8def02eb103",
+      "date": "2026-10-20T19:30:12+07:00",
+      "subject": "feat(timer): improve task controls and countdown warnings"
+    },
+    {
       "hash": "3794908323367f3748dae2cd03042c7c93833be2",
       "date": "2026-10-20T19:30:00+07:00",
       "subject": "refactor(design): simplify tokens and component showcases"

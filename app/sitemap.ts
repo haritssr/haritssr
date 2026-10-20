@@ -23,6 +23,7 @@ const staticRoutes = [
   "/design",
   "/more",
   "/timer",
+  "/tree",
   "/timer/statistic",
   "/timer/details",
   commitsRoute.route,

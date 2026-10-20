@@ -47,6 +47,12 @@ export const todayModelSuitabilityRoute: RouteDoc = {
 
 export const navigationRoutes: readonly RouteDoc[] = [
   {
+    route: "/tree",
+    title: "Tree",
+    description: "Tree views of site map information architecture",
+    group: "Tools",
+  },
+  {
     route: "/timer/details",
     title: "Details",
     description:

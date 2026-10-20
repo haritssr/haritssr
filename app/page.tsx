@@ -1,4 +1,8 @@
-import { ClockIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
+import {
+  ClockIcon,
+  DocumentTextIcon,
+  QueueListIcon,
+} from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -129,6 +133,19 @@ function Tools() {
         headingLevel={3}
         icon={
           <DocumentTextIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
+        title="Tree"
+        description="Tree views of site map information architecture"
+        href="/tree"
+        headingLevel={3}
+        icon={
+          <QueueListIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}
