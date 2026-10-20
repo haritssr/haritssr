@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f1a9afe8e82946c5df23fa9f0fe171b9cd6c6dc5",
+      "date": "2026-10-19T13:21:14+07:00",
+      "subject": "feat(timer): add multitasking and speed controls with refined task UI"
+    },
+    {
       "hash": "93a71b6e85c52fa9f28906e73b9c323869599726",
       "date": "2026-10-19T13:21:03+07:00",
       "subject": "style(layout): tighten page spacing and expand design guidance"

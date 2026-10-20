@@ -20,13 +20,13 @@ const BADGES = [
     name: "Attention",
   },
   {
-    className: "border-information/30 bg-information/10",
-    dotClassName: "bg-information",
+    className: "border-secondary-accent/30 bg-secondary-accent/10",
+    dotClassName: "bg-secondary-accent",
     name: "Information",
   },
 ] as const;
 
-export default function BadgesDemo() {
+export default function Badges() {
   return (
     <div className="flex flex-wrap gap-2">
       {BADGES.map((badge) => (

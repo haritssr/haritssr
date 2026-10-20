@@ -10,7 +10,7 @@ const STATUS_ACTION_BASE_CLASS =
 
 const STATUS_ACTION_VARIANT_CLASS = {
   primary: "border-transparent bg-action text-white hover:bg-action-hover",
-  secondary: "border-border bg-white text-foreground hover:bg-secondary-hover",
+  secondary: "border-border bg-white text-foreground hover:bg-interface-hover",
 } as const;
 
 function getStatusActionClassName(

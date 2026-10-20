@@ -104,7 +104,7 @@ export default function TopBar() {
             </Link>
           </div>
         ) : (
-          <NavigationLinks currentSection={pathname.split("/")[1] || "home"} />
+          <TabBarTop currentSection={pathname.split("/")[1] || "home"} />
         )}
         <HeaderActions
           key={pathname}
@@ -146,7 +146,7 @@ const HeaderActions = memo(
 );
 HeaderActions.displayName = "HeaderActions";
 
-function NavigationLinks({ currentSection }: { currentSection: string }) {
+function TabBarTop({ currentSection }: { currentSection: string }) {
   return (
     <ul
       className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 lg:flex"

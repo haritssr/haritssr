@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 
-export default function ButtonIconOnlyDemo() {
+export default function ButtonIconOnly() {
   return (
     <Button aria-label="Bookmark" iconOnly variant="secondary">
       <svg

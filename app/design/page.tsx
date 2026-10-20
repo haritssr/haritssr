@@ -1,7 +1,6 @@
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 
 import BackButton from "@/components/BackButton";
-import BottomBar from "@/components/BottomBar";
 import Box from "@/components/Box";
 import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
@@ -12,29 +11,31 @@ import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
+import TabBarButtom from "@/components/TabBarButtom";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
-import AccordionDemo from "./AccordionDemo";
-import BadgesDemo from "./BadgesDemo";
-import BreadcrumbsDemo from "./BreadcrumbsDemo";
-import ButtonIconOnlyDemo from "./ButtonIconOnlyDemo";
-import ButtonWithIconDemo from "./ButtonWithIconDemo";
-import CheckboxDemo from "./CheckboxDemo";
-import { HierarchicalColorsDemo, MainColorsDemo } from "./ColorsDemo";
-import ContextMenuDemo from "./ContextMenuDemo";
-import LoadingButtonDemo from "./LoadingButtonDemo";
-import LogoDemo from "./LogoDemo";
-import ModalDemo from "./ModalDemo";
-import NumberInputDemo from "./NumberInputDemo";
-import PopoverDemo from "./PopoverDemo";
-import SelectDemo from "./SelectDemo";
-import SliderDemo from "./SliderDemo";
-import SwitchDemo from "./SwitchDemo";
-import TableDemo from "./TableDemo";
-import TabsDemo from "./TabsDemo";
-import ToastDemo from "./ToastDemo";
-import ToggleDemo from "./ToggleDemo";
-import TooltipDemo from "./TooltipDemo";
+import Accordion from "./Accordion";
+import Badges from "./Badges";
+import Breadcrumbs from "./Breadcrumbs";
+import ButtonIconOnly from "./ButtonIconOnly";
+import ButtonWithIcon from "./ButtonWithIcon";
+import Checkbox from "./Checkbox";
+import { DesignTokens, HierarchicalColors, MainColors } from "./Colors";
+import ContextMenu from "./ContextMenu";
+import InterfacePrinciples from "./InterfacePrinciples";
+import LoadingButton from "./LoadingButton";
+import Logo from "./Logo";
+import Modal from "./Modal";
+import NumberInput from "./NumberInput";
+import Popover from "./Popover";
+import Select from "./Select";
+import Slider from "./Slider";
+import Switch from "./Switch";
+import Table from "./Table";
+import Tabs from "./Tabs";
+import Toast from "./Toast";
+import Toggle from "./Toggle";
+import Tooltip from "./Tooltip";
 
 export const metadata = createPageMetadata({
   title: "Design",
@@ -44,7 +45,7 @@ export const metadata = createPageMetadata({
 });
 
 const FORM_CONTROL_CLASS_NAME =
-  "interactive-elevation form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
+  "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
 
 export default function DesignSystem() {
   return (
@@ -58,7 +59,7 @@ export default function DesignSystem() {
         </PageDescription>
       </PageHeader>
       <div className="space-y-16">
-        <Section title="Design Principles">
+        <Section title="Principles">
           <ExplanationList>
             <li>
               A design system is a set of rules and opinions that shape the user
@@ -71,15 +72,205 @@ export default function DesignSystem() {
               decisions; implementation explains{" "}
               <span className="font-semibold">how</span> they work in code.
             </li>
+            <li>Pattern can only appear on data, not datum.</li>
+            <InterfacePrinciples>
+              <div className="pl-3">
+                <ol className="mt-1 list-outside list-decimal space-y-1 pl-4">
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/law-of-proximity/"
+                      name="Proximity"
+                    />
+                    : Elements close together look like a group.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/pareto-principle/"
+                      name="Pareto"
+                    />
+                    : Roughly 80% of results often come from 20% of causes.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/law-of-similarity/"
+                      name="Similarity"
+                    />
+                    : Elements with matching styles look related, even when
+                    apart.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/law-of-common-region/"
+                      name="Common Region"
+                    />
+                    : Elements inside one boundary look like a group.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/law-of-uniform-connectedness/"
+                      name="Uniform Connectedness"
+                    />
+                    : A visible connection makes elements look related.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/law-of-pragnanz/"
+                      name="Prägnanz"
+                    />
+                    : People interpret complex visuals as the simplest
+                    recognizable forms.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/fittss-law/"
+                      name="Fitts’s Law"
+                    />
+                    : Larger targets closer to the pointer are quicker to
+                    select.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/hicks-law/"
+                      name="Hick’s Law"
+                    />
+                    : More choices, or harder choices, take longer to decide.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/jakobs-law/"
+                      name="Jakob’s Law"
+                    />
+                    : People expect interfaces to work like ones they already
+                    know.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/aesthetic-usability-effect/"
+                      name="Aesthetic–Usability"
+                    />
+                    : Visual appeal can make an interface seem easier to use.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/choice-overload/"
+                      name="Choice Overload"
+                    />
+                    : Too many options can make choosing feel overwhelming.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/chunking/"
+                      name="Chunking"
+                    />
+                    : Breaking information into meaningful groups makes it
+                    easier to process.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/cognitive-load/"
+                      name="Cognitive Load"
+                    />
+                    : The mental effort needed to understand and use an
+                    interface.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/millers-law/"
+                      name="Miller’s Law"
+                    />
+                    : Working memory is limited; group information into
+                    manageable chunks.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/doherty-threshold/"
+                      name="Doherty Threshold"
+                    />
+                    : Feedback in under 400 ms helps keep interaction flowing.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/goal-gradient-effect/"
+                      name="Goal Gradient"
+                    />
+                    : People tend to try harder as they get closer to finishing.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/peak-end-rule/"
+                      name="Peak–End Rule"
+                    />
+                    : The most intense moment and ending shape how an experience
+                    is remembered.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/serial-position-effect/"
+                      name="Serial Position"
+                    />
+                    : People tend to remember the start and end of a sequence.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/von-restorff-effect/"
+                      name="Von Restorff"
+                    />
+                    : An item that differs from similar neighbors is easier to
+                    remember.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/postels-law/"
+                      name="Postel’s Law"
+                    />
+                    : Accept varied input formats and give clear, consistent
+                    responses.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/teslers-law/"
+                      name="Tesler’s Law"
+                    />
+                    : Some complexity cannot be removed; handle it for users
+                    where possible.
+                  </li>
+                  <li>
+                    <ExternalLink
+                      href="https://lawsofux.com/zeigarnik-effect/"
+                      name="Zeigarnik Effect"
+                    />
+                    : Unfinished or interrupted tasks tend to stay in memory
+                    longer.
+                  </li>
+                </ol>
+              </div>
+            </InterfacePrinciples>
+            <li>
+              UX considerations:{" "}
+              <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />{" "}
+              and{" "}
+              <ExternalLink
+                href="https://developer.apple.com/design/human-interface-guidelines/design-principles"
+                name="Principles of Great Design"
+              />
+              .
+            </li>
             <li>
               The Components system takes cues from the tools used to solve math
               and physics problems: paper, pencils, whiteboards, and pencil
               cases.
             </li>
-            <li>Heavily inspired by Apple design videos.</li>
             <li>
-              The core of digital services is to adapt to their cognitive load
-              and enable their capabilities
+              Heavily inspired by{" "}
+              <ExternalLink
+                href="https://developer.apple.com/videos/design/"
+                name="Apple design videos"
+              />
+              .
+            </li>
+            <li>
+              Digital services should expand what people can do while respecting
+              the limits of their attention and working memory.
             </li>
             <li>
               I care deeply about UX/UI design, with references including{" "}
@@ -129,6 +320,10 @@ export default function DesignSystem() {
               treatment where interaction requires it.
             </li>
             <li>
+              Defining feature or update make it easy for sharing and
+              documentation.
+            </li>
+            <li>
               Controls use subtle shadows; floating controls sit one level
               higher. Hover raises elevation and pressing lowers it. Disabled
               controls and selects stay flat, and keyboard focus keeps a visible
@@ -165,11 +360,50 @@ export default function DesignSystem() {
                 lab collection and discontinued history
               </InternalLink>
             </li>
-            <li className="text-muted">
-              Still evolving: typography, use cases, do&apos;s and don&apos;ts,
-              and component-specific guidance are next.
-            </li>
           </ExplanationList>
+        </Section>
+
+        <Section
+          title="Layout"
+          description="A fluid grid with equal columns and consistent spacing. Resize the window to explore each breakpoint."
+        >
+          <Box title="Responsive Grid">
+            <div className="text-muted flex flex-wrap items-center justify-between gap-3 text-sm">
+              <p className="text-foreground font-medium">
+                <span className="sm:hidden">1 column</span>
+                <span className="hidden sm:inline md:hidden">2 columns</span>
+                <span className="hidden md:inline lg:hidden">3 columns</span>
+                <span className="hidden lg:inline">4 columns</span>
+              </p>
+              <p>
+                <span className="sm:hidden">Default · 16px gap</span>
+                <span className="hidden sm:inline md:hidden">
+                  sm · 20px gap
+                </span>
+                <span className="hidden md:inline lg:hidden">
+                  md · 20px gap
+                </span>
+                <span className="hidden lg:inline">lg · 20px gap</span>
+              </p>
+            </div>
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+                <li
+                  className="corner-squircle border-action/20 bg-action/5 flex min-h-32 min-w-0 flex-col justify-between gap-6 rounded-xl border p-4"
+                  key={item}
+                >
+                  <span className="text-action font-mono text-2xl tabular-nums">
+                    {String(item).padStart(2, "0")}
+                  </span>
+                  <span className="text-muted text-sm">Equal-width column</span>
+                </li>
+              ))}
+            </ul>
+            <code className="text-muted block font-mono text-sm wrap-anywhere">
+              grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+              gap-4 sm:gap-5
+            </code>
+          </Box>
         </Section>
 
         <Section
@@ -177,61 +411,78 @@ export default function DesignSystem() {
           contentClassName={
             // This demonstrates grid spacing on Section's body wrapper.
             // oxlint-disable-next-line shadcn/no-restyle -- The demo exercises the contentClassName API.
-            "grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5"
+            "grid grid-cols-1 gap-5 md:grid-cols-2"
           }
         >
           <Box name="IndexCard" title="Index Card">
-            <IndexCard
-              title="Writing"
-              description="Notes and ideas I want to share."
-              href="/writing"
-              count={18}
-              countLabel="writing posts"
-              icon={
-                <DocumentTextIcon
-                  aria-hidden="true"
-                  className="text-foreground size-4.5 shrink-0"
-                  strokeWidth={1.5}
-                />
-              }
-              headingLevel={3}
-            />
+            <div className="grid gap-3.5 sm:grid-cols-2">
+              <IndexCard
+                title="Writing"
+                description="Notes and ideas I want to share."
+                href="/writing"
+                count={18}
+                countLabel="writing posts"
+                icon={
+                  <DocumentTextIcon
+                    aria-hidden="true"
+                    className="text-foreground size-4.5 shrink-0"
+                    strokeWidth={1.5}
+                  />
+                }
+                headingLevel={3}
+              />
+              <IndexCard
+                title="Labs"
+                description="Experiments and interactive explorations."
+                href="/labs"
+                count={18}
+                countLabel="labs"
+                icon={
+                  <DocumentTextIcon
+                    aria-hidden="true"
+                    className="text-foreground size-4.5 shrink-0"
+                    strokeWidth={1.5}
+                  />
+                }
+                headingLevel={3}
+              />
+            </div>
           </Box>
           <Box name="Switch" title="Switch">
-            <SwitchDemo />
+            <Switch />
           </Box>
 
           <Box name="Accordion" title="Accordion">
-            <AccordionDemo />
+            <Accordion />
           </Box>
 
           <Box name="Checkbox" title="Checkbox">
-            <CheckboxDemo />
+            <Checkbox />
           </Box>
 
           <Box name="Popover" title="Popover">
-            <PopoverDemo />
+            <Popover />
           </Box>
 
-          <Box name="NumberInput" title="Number input">
-            <NumberInputDemo />
+          <Box name="NumberInput" title="Number Input">
+            <NumberInput />
           </Box>
-          <Box title="Table">
-            <TableDemo />
+          <Box name="Table" title="Table">
+            <Table />
           </Box>
 
           <Box name="Tabs" title="Tabs">
-            <TabsDemo />
+            <Tabs />
           </Box>
 
-          <ToastDemo />
+          <Toast />
 
           <Box name="Button" title="Button: Primary">
             <Button variant="primary">Button</Button>
           </Box>
 
           <Box name="Button" title="Button: Loading">
-            <LoadingButtonDemo />
+            <LoadingButton />
           </Box>
 
           <Box name="Button" title="Button: Secondary">
@@ -239,11 +490,11 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="Button" title="Button: With Icon">
-            <ButtonWithIconDemo />
+            <ButtonWithIcon />
           </Box>
 
           <Box name="Button" title="Button: Only Icon">
-            <ButtonIconOnlyDemo />
+            <ButtonIconOnly />
           </Box>
 
           <Box name="Button" title="Button: Danger">
@@ -308,24 +559,12 @@ export default function DesignSystem() {
             </label>
           </Box>
 
-          <Box title="Input: Number">
-            <label className="block w-full sm:max-w-xs">
-              <span className="sr-only">Number input</span>
-              <input
-                className={FORM_CONTROL_CLASS_NAME}
-                min="0"
-                placeholder="0"
-                type="number"
-              />
-            </label>
-          </Box>
-
           <Box name="Box" title="Box">
             <ul className="grid gap-5 sm:grid-cols-2">
-              <Box as="li" headingAs="h3" title="Exercise title">
+              <Box as="li" headingAs="h3" name="Box" title="Exercise title">
                 <p>Use a heading and list item for exercise cards.</p>
               </Box>
-              <Box as="li" headingAs="h3" title="Another exercise">
+              <Box as="li" headingAs="h3" name="Box" title="Another exercise">
                 <p>Cards stretch to the same height within each grid row.</p>
               </Box>
             </ul>
@@ -340,15 +579,15 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="Toggle" title="Toggle">
-            <ToggleDemo />
+            <Toggle />
           </Box>
 
-          <Box title="Breadcrumbs">
-            <BreadcrumbsDemo />
+          <Box name="Breadcrumbs" title="Breadcrumbs">
+            <Breadcrumbs />
           </Box>
 
-          <Box name="Badge" title="Badges">
-            <BadgesDemo />
+          <Box name="Badges" title="Badges">
+            <Badges />
           </Box>
 
           <Box name="BackButton" title="Back Button">
@@ -356,31 +595,31 @@ export default function DesignSystem() {
           </Box>
 
           <Box name="Tooltip" title="Tooltip">
-            <TooltipDemo />
+            <Tooltip />
           </Box>
 
-          <Box title="Logo">
-            <LogoDemo />
+          <Box name="Logo" title="Logo">
+            <Logo />
           </Box>
 
-          <Box name="Dialog" title="Modal">
-            <ModalDemo />
+          <Box name="Modal" title="Modal">
+            <Modal />
           </Box>
 
-          <Box name="Select" title="Select">
-            <SelectDemo />
+          <Box name="SelectField" title="Select">
+            <Select />
           </Box>
 
-          <Box name="BottomBar" title="Bottom Bar">
-            <BottomBar preview />
+          <Box name="TabBarButtom" title="Bottom Bar">
+            <TabBarButtom preview />
           </Box>
 
           <Box name="Slider" title="Slider">
-            <SliderDemo />
+            <Slider />
           </Box>
 
           <Box name="ContextMenu" title="Context Menus">
-            <ContextMenuDemo />
+            <ContextMenu />
           </Box>
 
           <Box title="Date Picker">
@@ -392,12 +631,13 @@ export default function DesignSystem() {
             </label>
           </Box>
 
-          <Box name="ColorsDemo" title="Main Colors">
-            <MainColorsDemo />
+          <Box name="Colors" title="Design Tokens">
+            <DesignTokens />
           </Box>
 
-          <Box name="ColorsDemo" title="Hierarchical Colors">
-            <HierarchicalColorsDemo />
+          <Box name="Colors" title="Main Colors">
+            <MainColors />
+            <HierarchicalColors />
           </Box>
         </Section>
       </div>

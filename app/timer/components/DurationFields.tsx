@@ -58,7 +58,7 @@ export default function DurationFields({
             <NumberField.Group className="border-border bg-background focus-within:border-action focus-within:ring-action/20 flex h-8.5 min-w-0 items-center overflow-hidden rounded-lg border focus-within:ring-2">
               <NumberField.Decrement
                 aria-label={`Decrease ${unit}`}
-                className="hover:bg-secondary-hover focus-visible:outline-action flex h-full w-8 shrink-0 cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:-outline-offset-2 data-disabled:cursor-default data-disabled:opacity-40"
+                className="hover:bg-interface-hover focus-visible:outline-action flex h-full w-8 shrink-0 cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:-outline-offset-2 data-disabled:cursor-default data-disabled:opacity-40"
               >
                 <MinusIcon aria-hidden="true" className="size-4" />
               </NumberField.Decrement>
@@ -68,7 +68,7 @@ export default function DurationFields({
               />
               <NumberField.Increment
                 aria-label={`Increase ${unit}`}
-                className="hover:bg-secondary-hover focus-visible:outline-action flex h-full w-8 shrink-0 cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:-outline-offset-2 data-disabled:cursor-default data-disabled:opacity-40"
+                className="hover:bg-interface-hover focus-visible:outline-action flex h-full w-8 shrink-0 cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:-outline-offset-2 data-disabled:cursor-default data-disabled:opacity-40"
               >
                 <PlusIcon aria-hidden="true" className="size-4" />
               </NumberField.Increment>

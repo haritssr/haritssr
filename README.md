@@ -128,7 +128,7 @@ Type `share` and press Enter to copy the current page URL (including its query
 and fragment); the same confirmation and clipboard behavior are shared with the
 top-bar Share button.
 
-The mobile BottomBar appears on Home and routes under Projects, Labs,
+The mobile TabBarButtom appears on Home and routes under Projects, Labs,
 Writing, Design, and Commits up to two URL segments deep, such as
 `/labs/mathematics`. Nested routes highlight their main section. Individual
 writing articles, deeper routes, and other sections omit it. The design preview

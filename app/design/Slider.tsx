@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
-import Slider from "@/components/Slider";
+import SharedSlider from "@/components/Slider";
 
-export default function SliderDemo() {
+export default function Slider() {
   const [value, setValue] = useState(50);
 
   return (
-    <Slider
+    <SharedSlider
       label="Volume"
       value={value}
       onValueChange={setValue}

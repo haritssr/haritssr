@@ -92,7 +92,7 @@ export default function NavigationDiagram({
           ["muted", "muted"],
           ["line", "foreground"],
           ["surface", "surface"],
-          ["surface-alt", "secondary-hover"],
+          ["surface-alt", "interface-hover"],
           ["border", "border"],
           ["accent", "action"],
         ]) {

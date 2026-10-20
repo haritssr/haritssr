@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function BreadcrumbsDemo() {
+export default function Breadcrumbs() {
   return (
     <nav aria-label="Breadcrumb" className="text-sm">
       <ol className="text-foreground/70 flex flex-wrap items-center gap-1">

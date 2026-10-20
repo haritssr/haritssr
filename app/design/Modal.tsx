@@ -5,7 +5,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import Button from "@/components/Button";
 
-export default function ModalDemo() {
+export default function Modal() {
   return (
     <Dialog.Root>
       <Dialog.Trigger render={<Button variant="secondary" />}>

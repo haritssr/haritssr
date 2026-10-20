@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type React from "react";
 
-export default function BottomBar({
+export default function TabBarButtom({
   preview = false,
 }: {
   preview?: boolean;

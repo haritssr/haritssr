@@ -13,18 +13,18 @@ export default function BackButton({
   return (
     <Link
       aria-label={`Back to ${name}`}
-      className={`text-action focus-visible:outline-action flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 sm:shrink-0 ${compact ? "w-fit shrink-0" : "w-fit"}`}
+      className={`group text-action hover:text-action-hover focus-visible:outline-action flex items-center justify-center transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 sm:shrink-0 ${compact ? "w-fit shrink-0" : "w-fit"}`}
       href={href}
       prefetch={false}
       title={`Back to ${name}`}
     >
       <ChevronLeftIcon
         aria-hidden="true"
-        className="text-action size-5 shrink-0 sm:size-4.5"
+        className="size-5 shrink-0 sm:size-4.5"
         strokeWidth={2}
       />
       <span
-        className={`text-action ${compact ? "hidden whitespace-nowrap sm:inline" : "truncate"}`}
+        className={compact ? "hidden whitespace-nowrap sm:inline" : "truncate"}
       >
         {name}
       </span>

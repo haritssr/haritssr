@@ -31,7 +31,7 @@ export function SelectField({
         className={
           labelPlacement === "inside"
             ? "sr-only"
-            : "text-foreground/80 block text-sm font-medium"
+            : "text-foreground/80 mb-1.5 block text-sm font-medium"
         }
         htmlFor={id}
       >
@@ -48,7 +48,7 @@ export function SelectField({
         value={value}
       >
         <Select.Trigger
-          className={`form-control text-foreground/80 flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-lg border text-sm outline-none ${variant === "plain" ? "hover:text-foreground focus-visible:outline-action border-transparent bg-transparent shadow-none focus-visible:outline-2" : "border-border focus-visible:border-action bg-white px-3"}`}
+          className={`form-control text-foreground/80 flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-lg border text-sm outline-none ${variant === "plain" ? "hover:text-foreground focus-visible:outline-action border-transparent bg-transparent shadow-none focus-visible:outline-2" : "border-border focus-visible:border-action bg-white px-3 py-2"}`}
           id={id}
         >
           <span className="inline-flex min-w-0 items-center gap-2">

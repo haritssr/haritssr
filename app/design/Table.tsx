@@ -1,8 +1,8 @@
-import Table from "@/components/Table";
+import SharedTable from "@/components/Table";
 
-export default function TableDemo() {
+export default function Table() {
   return (
-    <Table className="min-w-70">
+    <SharedTable className="min-w-70">
       <caption className="sr-only">Example data table</caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
@@ -29,6 +29,6 @@ export default function TableDemo() {
           <td className="px-3 py-2">Away</td>
         </tr>
       </tbody>
-    </Table>
+    </SharedTable>
   );
 }

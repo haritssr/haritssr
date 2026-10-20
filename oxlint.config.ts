@@ -45,7 +45,7 @@ export default defineConfig({
       },
     },
     {
-      files: ["app/design/ColorsDemo.tsx"],
+      files: ["app/design/Colors.tsx"],
       rules: {
         // This page intentionally documents the raw Tailwind color palette.
         "shadcn/no-raw-colors": "off",

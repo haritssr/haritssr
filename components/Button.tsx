@@ -21,17 +21,17 @@ const BUTTON_BASE_CLASS =
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "attention-subtle":
-    "border border-transparent bg-attention font-medium text-white transition-colors duration-150 enabled:hover:bg-attention/90 focus-visible:outline-attention",
+    "border border-transparent bg-attention font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-attention)_60%,var(--color-amber-600))] focus-visible:outline-attention",
   danger:
     "border border-danger/30 bg-surface font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
   "danger-subtle":
-    "border border-transparent bg-danger font-medium text-white transition-colors duration-150 enabled:hover:bg-danger/90 focus-visible:outline-danger",
+    "border border-transparent bg-danger font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-danger)_60%,var(--color-red-600))] focus-visible:outline-danger",
   ghost:
     "font-medium text-zinc-700 transition-colors duration-150 hover:bg-zinc-100 focus-visible:outline-zinc-700",
   "neutral-subtle":
     "border border-transparent bg-foreground/90 font-medium text-white transition-colors duration-150 enabled:hover:bg-foreground focus-visible:outline-foreground",
   "secondary-strong":
-    "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-secondary-hover focus-visible:outline-foreground",
+    "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-foreground",
   outline:
     "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "action-outline":
@@ -45,7 +45,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "primary-subtle":
     "border border-transparent bg-action font-medium text-white transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action",
   secondary:
-    "border border-zinc-300 bg-white text-secondary-foreground select-none hover:bg-secondary-hover hover:text-secondary-hover-foreground data-popup-open:border-action focus-visible:outline-zinc-700",
+    "border border-zinc-300 bg-white text-secondary-foreground select-none hover:bg-interface-hover hover:text-secondary-hover-foreground data-popup-open:border-action focus-visible:outline-zinc-700",
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 enabled:hover:bg-success-hover focus-visible:outline-success",
 };

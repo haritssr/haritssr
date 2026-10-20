@@ -15,7 +15,7 @@ const LOGOS = [
   },
 ] as const;
 
-export default function LogoDemo() {
+export default function Logo() {
   return (
     <div className="grid grid-cols-2 gap-5">
       {LOGOS.map((logo) => (

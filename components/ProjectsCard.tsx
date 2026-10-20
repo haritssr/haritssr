@@ -53,7 +53,7 @@ export default function ProjectsCard({
 
       <div className="flex space-x-2.5 px-3.5 pb-3.5">
         <Link
-          className="corner-squircle border-border text-foreground hover:bg-secondary-hover focus-visible:outline-foreground inline-flex w-1/2 items-center justify-center gap-1.5 rounded-xl border bg-white px-3 py-1.5 text-center text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="corner-squircle border-border text-foreground hover:bg-interface-hover focus-visible:outline-foreground inline-flex w-1/2 items-center justify-center gap-1.5 rounded-xl border bg-white px-3 py-1.5 text-center text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
           href={`/projects/${getProjectSlug(title)}`}
         >
           Overview

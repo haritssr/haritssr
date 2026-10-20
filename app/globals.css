@@ -25,7 +25,6 @@
 }
 
 @theme static {
-  --color-timer-progress: var(--color-zinc-600);
   --color-white: #fafafa;
   --color-black: #18181b;
   --color-action: color-mix(
@@ -56,22 +55,15 @@
   );
   --color-attention: var(--color-amber-500);
   --color-danger: var(--color-red-500);
-  --color-information: var(--color-purple-500);
-  --color-graph-base: var(--color-indigo-600);
-  --color-graph-derived: var(--color-yellow-500);
-  --color-graph-direct: var(--color-teal-600);
-  --color-graph-indirect: var(--color-pink-600);
   --color-surface: var(--color-white);
   --color-switch-thumb: #fafafa;
   --color-switch-active: var(--color-zinc-600);
   --color-slider-thumb: #fafafa;
-  --color-background: rgb(252 252 252);
+  --color-background: #fcfcfc;
   --color-foreground: var(--color-zinc-800);
   --color-border: var(--color-zinc-300);
   --color-border-hover: var(--color-zinc-400);
-  --color-border-interface-hover: var(--color-zinc-300);
   --color-surface-hover: var(--color-zinc-50);
-  --color-secondary-hover: var(--color-zinc-100);
   --color-secondary-foreground: var(--color-zinc-600);
   --color-secondary-hover-foreground: var(--color-zinc-700);
   --color-interface-hover: var(--color-zinc-100);

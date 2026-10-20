@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
-import BottomBar from "@/components/BottomBar";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import { SiteStructuredData } from "@/components/StructuredData";
+import TabBarButtom from "@/components/TabBarButtom";
 import TimerProvider from "@/components/TimerProvider";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
@@ -94,7 +94,7 @@ export default function RootLayout({
           </TimerProvider>
         </GlobalSearchProvider>
         <Footer />
-        <BottomBar />
+        <TabBarButtom />
       </body>
     </html>
   );

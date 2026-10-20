@@ -324,28 +324,28 @@ function GraphToolbar({
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
-          className="bg-graph-base size-2.5 shrink-0 rounded-full"
+          className="bg-action size-2.5 shrink-0 rounded-full"
         />
         Base quantities
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
-          className="bg-graph-derived size-2.5 shrink-0 rounded-full"
+          className="bg-attention size-2.5 shrink-0 rounded-full"
         />
         Derived quantities
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
-          className="bg-graph-direct size-2.5 shrink-0 rounded-full"
+          className="bg-success size-2.5 shrink-0 rounded-full"
         />
         Direct prerequisites
       </span>
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
-          className="bg-graph-indirect size-2.5 shrink-0 rounded-full"
+          className="bg-secondary-accent size-2.5 shrink-0 rounded-full"
         />
         Indirect prerequisites
       </span>
@@ -468,8 +468,8 @@ function GraphViewport({
         >
           <defs>
             {[
-              ["direct", "var(--color-graph-direct)"],
-              ["indirect", "var(--color-graph-indirect)"],
+              ["direct", "var(--color-success)"],
+              ["indirect", "var(--color-secondary-accent)"],
               ["muted", "var(--color-border)"],
             ].map(([name, color]) => (
               <marker
@@ -503,11 +503,11 @@ function GraphViewport({
             let edgeStrokeWidth = 1.5;
 
             if (isDirect) {
-              edgeColor = "var(--color-graph-direct)";
+              edgeColor = "var(--color-success)";
               markerName = "direct";
               edgeStrokeWidth = 2.5;
             } else if (isActive) {
-              edgeColor = "var(--color-graph-indirect)";
+              edgeColor = "var(--color-secondary-accent)";
               markerName = "indirect";
               edgeStrokeWidth = 2;
             }
@@ -547,17 +547,17 @@ function GraphViewport({
           let stateStyles = "opacity-30";
 
           if (isSelected) {
-            stateStyles = "border-graph-direct bg-graph-direct text-background";
+            stateStyles = "border-success bg-success text-background";
           } else if (isActive) {
-            stateStyles = "hover:border-graph-direct";
+            stateStyles = "hover:border-success";
           }
 
-          let kindStyles = "border-graph-derived/50 bg-graph-derived/10";
+          let kindStyles = "border-attention/50 bg-attention/10";
 
           if (isSelected) {
             kindStyles = "";
           } else if (node.kind === "base") {
-            kindStyles = "border-graph-base/40 bg-graph-base/10";
+            kindStyles = "border-action/40 bg-action/10";
           }
 
           const nodeStyle: GraphStyle = {

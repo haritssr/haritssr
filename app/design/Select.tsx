@@ -7,7 +7,7 @@ const options = [
   { label: "Design", value: "design" },
   { label: "Engineering", value: "engineering" },
 ];
-export default function SelectDemo() {
+export default function Select() {
   const [value, setValue] = useState("design");
   return (
     <SelectField

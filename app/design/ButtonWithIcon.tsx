@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 
-export default function ButtonWithIconDemo() {
+export default function ButtonWithIcon() {
   return (
     <Button variant="secondary">
       <svg

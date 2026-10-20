@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Button from "@/components/Button";
 
-export default function LoadingButtonDemo() {
+export default function LoadingButton() {
   const [loading, setLoading] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(
