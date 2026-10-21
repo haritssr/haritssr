@@ -48,7 +48,7 @@ export default function Section({
       >
         {title}
       </SectionHeading>
-      {hasDescription ? <p className="text-muted mb-7">{description}</p> : null}
+      {hasDescription ? <p className="text-muted mb-5">{description}</p> : null}
       {wrapContent ? (
         <div className={contentClassName}>{children}</div>
       ) : (

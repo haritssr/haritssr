@@ -49,6 +49,7 @@ function ContentsList({
   depth = 0,
 }: ContentsListProps) {
   const entryColor = depth === 0 ? "text-foreground!" : "text-foreground/65!";
+  const List = depth === 0 ? "ol" : "ul";
 
   function select(event: MouseEvent<HTMLAnchorElement>, entry: ContentsEntry) {
     if (
@@ -65,12 +66,14 @@ function ContentsList({
   }
 
   return (
-    <ol className="marker:text-foreground/70 list-decimal space-y-3 pl-8 text-sm [&_li]:space-y-3">
+    <List
+      className={`marker:text-foreground/70 space-y-3 pl-8 text-base [&_li]:space-y-3 ${depth === 0 ? "list-decimal" : "list-disc"}`}
+    >
       {entries.map((entry) => (
         <li key={entry.id}>
           <InternalLink
             aria-current={activeId === entry.id ? "location" : undefined}
-            className={`focus-visible:outline-action block! w-full! rounded-lg text-sm leading-5! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
+            className={`focus-visible:outline-action inline! rounded-sm text-base leading-6! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
             href={`#${encodeURIComponent(entry.id)}`}
             onClick={(event) => {
               select(event, entry);
@@ -91,7 +94,7 @@ function ContentsList({
           ) : null}
         </li>
       ))}
-    </ol>
+    </List>
   );
 }
 

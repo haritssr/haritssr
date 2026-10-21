@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3518c8ac67d60134ce63a02d0c2f5bee9c5eac89",
+      "date": "2026-10-22T04:33:13+07:00",
+      "subject": "style(labs): refine domain navigation and icons"
+    },
+    {
       "hash": "a1a3f0f7470d6a88f1bd390d23a47ad4b0bb5308",
       "date": "2026-10-22T04:33:05+07:00",
       "subject": "refactor(data): colocate content with owning routes"

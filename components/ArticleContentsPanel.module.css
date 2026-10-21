@@ -35,7 +35,7 @@
 }
 
 .popover {
-  width: min(30vw, 24rem);
+  width: min(30vw, 18rem);
   max-height: 75dvh;
   transform-origin: top right;
   transition:
