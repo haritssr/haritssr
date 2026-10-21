@@ -329,7 +329,9 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         ref={triggerRef}
         render={<Button variant="primary-subtle" />}
       >
-        <span>Add Task</span>
+        <span>
+          Add<span className="hidden sm:inline"> Task</span>
+        </span>
       </Dialog.Trigger>
       <TaskFormDialog
         title="New Task"

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "9ab790ec8a51d6ab1b7de53bb09dc1991225201b",
+      "date": "2026-10-22T04:34:19+07:00",
+      "subject": "docs(timer): document storage and component relationships"
+    },
+    {
       "hash": "3eaaa880d8fda3b11c122b032b24f9869fc461b7",
       "date": "2026-10-22T04:33:52+07:00",
       "subject": "feat(timer): add floating task controls across routes"
