@@ -11,7 +11,7 @@ export default function PageHeader({
 }) {
   return (
     <header
-      className="mt-6 mb-16 flex w-full flex-col gap-3"
+      className="mt-6 mb-16 flex w-full flex-col gap-1 sm:gap-3"
       data-page-back-href={back?.href}
       data-page-back-label={back?.name}
       data-page-header=""

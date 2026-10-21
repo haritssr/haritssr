@@ -154,7 +154,7 @@ export default function ArticleContentsPanel({
       </div>
       <nav
         aria-label="Table of contents"
-        className={`min-h-0 overflow-x-hidden overflow-y-auto overscroll-contain p-3 ${desktop ? "" : `scrollbar-subtle ${styles.mobileScroll}`}`}
+        className={`min-h-0 overflow-x-hidden overflow-y-auto overscroll-contain px-2 py-3 sm:px-3 ${desktop ? "" : `scrollbar-subtle ${styles.mobileScroll}`}`}
       >
         <ContentsList
           activeId={activeId}

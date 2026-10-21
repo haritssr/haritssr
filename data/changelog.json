@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f3289e47e8acfcfa983dfe8596ddf26b5390c4e0",
+      "date": "2026-10-20T19:30:17+07:00",
+      "subject": "feat(tree): add collapsible site route hierarchy"
+    },
+    {
       "hash": "5d6e0b0a726699a65875ed4f1b2ff8def02eb103",
       "date": "2026-10-20T19:30:12+07:00",
       "subject": "feat(timer): improve task controls and countdown warnings"

@@ -32,7 +32,7 @@ const breadcrumbLabels = Object.fromEntries<string>([
 export default function Footer() {
   return (
     <footer
-      className="text-foreground/70 mt-30 mb-5 w-full text-xs sm:text-sm"
+      className="text-foreground/70 mt-30 mb-5 w-full text-[15px]"
       data-site-footer=""
     >
       <Breadcrumbs routeLabels={breadcrumbLabels} />
