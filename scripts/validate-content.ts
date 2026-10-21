@@ -1,11 +1,11 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
+import { LabsData, getLatestLabUpdate } from "@/app/labs/data";
 import {
   DiscontinuedLabsData,
   discontinuedLabHistory,
-} from "@/data/DiscontinuedLabsData";
-import { LabsData, getLatestLabUpdate } from "@/data/LabsData";
+} from "@/app/labs/discontinued-data";
 import { getAvailableLabSummaries } from "@/utils/labCatalog";
 import { getLabRoutes } from "@/utils/labRoutes";
 import { getSearchIndex } from "@/utils/searchIndex";
@@ -106,14 +106,14 @@ for (const domain of readdirSync("app/labs", { withFileTypes: true })) {
   }
 }
 
-const writingFiles = readdirSync("data/writing").filter((file) =>
+const writingFiles = readdirSync("app/writing/content").filter((file) =>
   file.endsWith(".mdx")
 );
 for (const file of writingFiles) {
   try {
     parseWritingPost(
       file,
-      readFileSync(path.join("data/writing", file), "utf-8")
+      readFileSync(path.join("app/writing/content", file), "utf-8")
     );
   } catch (error) {
     failures.push(String(error));

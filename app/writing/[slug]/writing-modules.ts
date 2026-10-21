@@ -1,7 +1,7 @@
 import "server-only";
 import type { MDXContent } from "mdx/types";
 
-import { writingModules } from "@/data/writing/modules";
+import { writingModules } from "../content/modules";
 
 interface WritingModule {
   default: MDXContent;

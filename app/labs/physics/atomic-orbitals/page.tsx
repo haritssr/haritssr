@@ -6,10 +6,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { getLabMetadata } from "@/app/labs/data";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import { getLabMetadata } from "@/data/LabsData";
 import katexify from "@/utils/katexify";
 
 import {

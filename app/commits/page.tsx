@@ -1,11 +1,11 @@
 import { connection } from "next/server";
 
+import history from "@/app/commits/changelog.json";
 import ChangelogExplorer from "@/components/ChangelogExplorer";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import history from "@/data/changelog.json";
 import {
   commitAnalysisRoute,
   commitsRoute,

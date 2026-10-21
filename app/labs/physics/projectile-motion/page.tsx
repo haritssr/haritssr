@@ -1,9 +1,10 @@
 import { Accordion as BaseAccordion } from "@base-ui/react/accordion";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
-import Accordion, { AccordionItem } from "@/components/Accordion";
+import { getLabMetadata } from "@/app/labs/data";
 
 import "katex/dist/katex.min.css";
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
@@ -11,7 +12,6 @@ import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
-import { getLabMetadata } from "@/data/LabsData";
 import katexify from "@/utils/katexify";
 
 import ProjectileLab from "./projectile-lab";

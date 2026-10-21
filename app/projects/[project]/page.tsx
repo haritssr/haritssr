@@ -10,8 +10,8 @@ import PageTitle from "@/components/PageTitle";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { getProjectSlug } from "@/utils/projectSlug";
 
-import { ProjectsData } from "../../../data/ProjectsData";
-import type { ProjectsDataType } from "../../../data/ProjectsData";
+import { ProjectsData } from "../data";
+import type { ProjectsDataType } from "../data";
 import LoadingFigma from "./LoadingFigma";
 
 export async function generateMetadata({

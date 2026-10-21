@@ -2,9 +2,9 @@ import Image from "next/image";
 
 import "katex/dist/katex.min.css";
 
+import { getLabMetadata } from "@/app/labs/data";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { getLabMetadata } from "@/data/LabsData";
 import katexify from "@/utils/katexify";
 
 import PillMaterial from "./pill-material";

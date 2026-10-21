@@ -1,3 +1,4 @@
+import { getLabMetadata } from "@/app/labs/data";
 import Box from "@/components/Box";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
@@ -5,7 +6,6 @@ import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
-import { getLabMetadata } from "@/data/LabsData";
 import katexify from "@/utils/katexify";
 
 import { chapterTopics, sharedConcepts } from "./_data";

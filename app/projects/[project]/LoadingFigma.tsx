@@ -1,4 +1,4 @@
-import type { ProjectsDataType } from "../../../data/ProjectsData";
+import type { ProjectsDataType } from "../data";
 
 export default function LoadingFigma({
   project,

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { getLabMetadata } from "@/data/LabsData";
+import { getLabMetadata } from "@/app/labs/data";
 
 import Demo from "./demo";
 

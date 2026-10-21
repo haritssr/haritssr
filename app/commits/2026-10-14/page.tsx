@@ -1,3 +1,4 @@
+import history from "@/app/commits/changelog.json";
 import CommitHourlyChart from "@/components/CommitHourlyChart";
 import CommitTable from "@/components/CommitTable";
 import ExternalLink from "@/components/ExternalLink";
@@ -5,12 +6,12 @@ import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
-import history from "@/data/changelog.json";
-import analysis from "@/data/commit-analysis-2026-10-14.json";
 import { commitAnalysisRoute } from "@/data/routes";
 import { commitDay, countCommitTypes, formatDay } from "@/utils/changelog";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { SOURCE_CODE_URL } from "@/utils/site";
+
+import analysis from "./analysis.json";
 
 export const metadata = createPageMetadata({
   title: commitAnalysisRoute.title,

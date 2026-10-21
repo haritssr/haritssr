@@ -4,7 +4,7 @@
   "entry": [
     "public/sw.js",
     "scripts/{inspect-*-db.js,validate-content.ts,seed-timer.ts,sync-changelog.ts}!",
-    "data/writing/*.mdx",
+    "app/writing/content/*.mdx",
   ],
   "ignoreDependencies": [
     // The trailing ! scopes this to production mode. next.config.ts loads the

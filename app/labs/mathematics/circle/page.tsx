@@ -1,10 +1,10 @@
+import { getLabMetadata } from "@/app/labs/data";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Box from "@/components/Box";
 import InternalLink from "@/components/InternalLink";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
-import { getLabMetadata } from "@/data/LabsData";
 import katexify from "@/utils/katexify";
 
 import CircleLab from "./circle-lab";

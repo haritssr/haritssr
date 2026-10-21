@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { getNextjsArticle, NextjsArticlesData } from "@/data/NextjsLabsData";
 import { createPageMetadata } from "@/utils/pageMetadata";
+
+import { getNextjsArticle, NextjsArticlesData } from "../data";
 
 interface Props {
   params: Promise<{ id: string }>;

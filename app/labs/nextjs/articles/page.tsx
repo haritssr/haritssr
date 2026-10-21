@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { getLabMetadata } from "@/app/labs/data";
 import ExternalLink from "@/components/ExternalLink";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { getLabMetadata } from "@/data/LabsData";
-import { NextjsArticlesData } from "@/data/NextjsLabsData";
+
+import { NextjsArticlesData } from "./data";
 
 export const metadata: Metadata = getLabMetadata("nextjs", "articles");
 
@@ -16,7 +17,7 @@ export default function ArticlesPage() {
         <PageDescription>
           Static article data from{" "}
           <code className="rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-mono text-sm">
-            data/NextjsLabsData.ts
+            app/labs/nextjs/articles/data.ts
           </code>{" "}
           is rendered at build time, with a new page for each article using{" "}
           <ExternalLink

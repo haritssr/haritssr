@@ -1,6 +1,6 @@
 import "server-only";
-import { LabsData, getLabDomain, getLatestLabUpdate } from "@/data/LabsData";
-import type { LabDomain, LabEntry } from "@/data/LabsData";
+import { LabsData, getLabDomain, getLatestLabUpdate } from "@/app/labs/data";
+import type { LabDomain, LabEntry } from "@/app/labs/data";
 import { isLabAvailable } from "@/utils/databaseLabs";
 
 interface LabSummary {

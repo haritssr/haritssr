@@ -83,6 +83,17 @@ Labs, Writing, Design, and Commits in that order. It appears from 1024px so all
 six links fit between the side controls. Home's responsive card grid also links
 to Commits with the count from the shared changelog snapshot.
 
+Route-owned data lives beside its implementation: Projects uses
+`app/projects/data.ts`; the Next.js articles and students demos each own a
+`data.ts`; book search and dated commit articles keep their JSON beside the page
+or demo. Writing MDX and its automatic module discovery live in
+`app/writing/content/`, while the Next.js posts demo reads Markdown from
+`app/labs/nextjs/posts/content/`. The active lab catalog and its metadata helpers
+live in `app/labs/data.ts`; discontinued records live in
+`app/labs/discontinued-data.ts`. The generated changelog snapshot lives in
+`app/commits/changelog.json`; the site-wide route registry remains in `data/`.
+Search and sitemap reuse these route-owned sources without duplicating records.
+
 Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
 shared `SectionHeading` components) show an icon-only
 Contents button in its own pill to the right of the top bar actions. Contents opens

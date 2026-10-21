@@ -1,6 +1,6 @@
+import { getLabMetadata } from "@/app/labs/data";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { getLabMetadata } from "@/data/LabsData";
 
 import AnalogClock from "./analog-clock";
 

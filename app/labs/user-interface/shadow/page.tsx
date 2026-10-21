@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
+import { getLabMetadata } from "@/app/labs/data";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { getLabMetadata } from "@/data/LabsData";
 
 export const metadata: Metadata = getLabMetadata("user-interface", "shadow");
 

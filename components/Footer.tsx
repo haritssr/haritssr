@@ -1,4 +1,4 @@
-import { LabsData } from "@/data/LabsData";
+import { LabsData } from "@/app/labs/data";
 import {
   apiRoute,
   commitAnalysisRoute,

@@ -1,5 +1,6 @@
 import "server-only";
-import { NextjsArticlesData, NextjsStudentsData } from "@/data/NextjsLabsData";
+import { NextjsArticlesData } from "@/app/labs/nextjs/articles/data";
+import { NextjsStudentsData } from "@/app/labs/nextjs/students/data";
 import type { RouteDoc } from "@/data/routes";
 import { isLabAvailable } from "@/utils/databaseLabs";
 import { getAvailableLabDomains } from "@/utils/labCatalog";

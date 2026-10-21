@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { getLabMetadata } from "@/app/labs/data";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { getLabMetadata } from "@/data/LabsData";
 import { getSortedPostsData } from "@/utils/posts";
 
 export const metadata: Metadata = getLabMetadata("nextjs", "posts");

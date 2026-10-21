@@ -1,7 +1,7 @@
+import type { LabDomainData } from "@/app/labs/data";
+import type { DiscontinuedLab } from "@/app/labs/discontinued-data";
 import IndexCard from "@/components/IndexCard";
 import LabDomainIcon from "@/components/LabDomainIcon";
-import type { DiscontinuedLab } from "@/data/DiscontinuedLabsData";
-import type { LabDomainData } from "@/data/LabsData";
 
 type HeadingLevel = 2 | 3 | 4;
 

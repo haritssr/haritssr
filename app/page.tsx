@@ -6,11 +6,11 @@ import {
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import history from "@/app/commits/changelog.json";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
 import { PageStructuredData } from "@/components/StructuredData";
-import history from "@/data/changelog.json";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.

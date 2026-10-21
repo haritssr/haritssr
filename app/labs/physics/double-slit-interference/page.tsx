@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import { getLabMetadata } from "@/app/labs/data";
 
 import "katex/dist/katex.min.css";
+import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { getLabMetadata } from "@/data/LabsData";
 
 import DoubleSlitLab from "./double-slit-lab";
 

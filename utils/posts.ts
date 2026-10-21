@@ -8,7 +8,10 @@ import { remark } from "remark";
 import remarkRehype from "remark-rehype";
 import { z } from "zod";
 
-const postsDirectory = path.join(process.cwd(), "data/posts");
+const postsDirectory = path.join(
+  process.cwd(),
+  "app/labs/nextjs/posts/content"
+);
 const markdownFileExtensionPattern = /\.md$/u;
 const postIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const postFrontmatterSchema = z.strictObject({

@@ -147,14 +147,14 @@ Apply these defaults to new or refactored labs in every domain:
 - Never add redirect rules in `next.config.ts`. Do not automatically add
   redirects when renaming routes; legacy URL aliases are intentionally absent.
 - Lab routes are literal folders. Register title, description, tags,
-  creation date, and update history in `data/LabsData.ts`. Append an
+  creation date, and update history in `app/labs/data.ts`. Append an
   update date once per calendar day; preserve creation dates and prior history.
 - Physics and mathematics preview descriptions use concise catalog copy (aim
   for 80 characters or fewer) to fit roughly two lines in small link previews.
   Reuse it in page metadata instead of longer local overrides; keep detailed
   explanations in page content. Preview line wrapping depends on the host app.
-- Writing uses local `data/writing/*.mdx` with validated frontmatter and automatic
-  module discovery, without an import registry. Use `/writing` URLs directly.
+- Writing uses local `app/writing/content/*.mdx` with validated frontmatter and
+  automatic module discovery, without an import registry. Use `/writing` URLs directly.
 - Every non-home page shows a pill `BackButton` in the top bar at every screen
   size, regardless of scroll position. Home keeps the site-name link. Pass the
   exact route through `PageHeader.path` and the destination through its `back`
@@ -188,7 +188,7 @@ Apply these defaults to new or refactored labs in every domain:
 
 - Commit only with explicit user permission; committing is a separate action.
 - When asked to commit, run `bun run sync:changelog` before staging and include
-  `data/changelog.json` in the requested commit when it changes. Run it again
+  `app/commits/changelog.json` in the requested commit when it changes. Run it again
   after every successful commit, including the last commit in a logical batch.
   Leave the final refreshed snapshot uncommitted: a commit cannot contain its
   own hash. Do not amend or create extra commits solely to include that hash.

@@ -13,7 +13,7 @@ import { getProjectSlug } from "@/utils/projectSlug";
 import { SITE_URL } from "@/utils/site";
 import { allWritingPosts } from "@/utils/writing-posts";
 
-import { ProjectsData } from "../data/ProjectsData";
+import { ProjectsData } from "./projects/data";
 
 const staticRoutes = [
   "/",

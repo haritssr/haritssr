@@ -11,7 +11,7 @@ export default function pageSourceUrl(pathname: string): string {
   const writingSlug = writingPathPattern.exec(path)?.groups?.slug;
 
   if (writingSlug !== undefined) {
-    return sourceUrl(`data/writing/${writingSlug}.mdx`, "blob");
+    return sourceUrl(`app/writing/content/${writingSlug}.mdx`, "blob");
   }
 
   if (projectPathPattern.test(path)) {

@@ -6,7 +6,7 @@ import { z } from "zod";
 import type { ChangelogCommit } from "../utils/changelog";
 
 const root = new URL("../", import.meta.url);
-const snapshotPath = new URL("../data/changelog.json", import.meta.url);
+const snapshotPath = new URL("../app/commits/changelog.json", import.meta.url);
 const authors = new Set(["Harits Syah", "haritssr"]);
 const snapshotSchema = z.object({
   commits: z.array(

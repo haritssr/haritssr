@@ -1,8 +1,8 @@
+import { getLabMetadata } from "@/app/labs/data";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
-import { getLabMetadata } from "@/data/LabsData";
 import katexify from "@/utils/katexify";
 
 export const metadata = getLabMetadata("mathematics", "plane-geometry");

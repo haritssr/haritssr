@@ -1,6 +1,7 @@
 import "katex/dist/katex.min.css";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
+import { getLabMetadata } from "@/app/labs/data";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
@@ -12,7 +13,6 @@ import type {
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import Table from "@/components/Table";
-import { getLabMetadata } from "@/data/LabsData";
 import katexify from "@/utils/katexify";
 
 import {

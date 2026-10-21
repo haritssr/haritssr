@@ -1,3 +1,4 @@
+import history from "@/app/commits/changelog.json";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import CommitHourlyChart from "@/components/CommitHourlyChart";
 import CommitTable, {
@@ -10,11 +11,11 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
-import history from "@/data/changelog.json";
-import modelSuitability from "@/data/model-suitability-2026-10-11.json";
 import { modelSuitabilityRoute } from "@/data/routes";
 import { commitDay, countCommitTypes } from "@/utils/changelog";
 import { createPageMetadata } from "@/utils/pageMetadata";
+
+import modelSuitability from "./model-suitability.json";
 
 export const metadata = createPageMetadata({
   title: modelSuitabilityRoute.title,

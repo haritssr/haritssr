@@ -1,5 +1,5 @@
+import { getLabDomain } from "@/app/labs/data";
 import LabDomainShell from "@/components/LabDomainShell";
-import { getLabDomain } from "@/data/LabsData";
 
 interface LabDomainLayoutProps {
   children: React.ReactNode;

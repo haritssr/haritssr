@@ -1,9 +1,9 @@
+import type { LabEntry } from "@/app/labs/data";
 import InternalLink from "@/components/InternalLink";
 import LabDomainIcon from "@/components/LabDomainIcon";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import type { LabEntry } from "@/data/LabsData";
 import { isDatabaseLab } from "@/utils/databaseLabs";
 import { getAvailableLabDomain } from "@/utils/labCatalog";
 

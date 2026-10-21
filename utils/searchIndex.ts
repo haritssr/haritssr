@@ -1,5 +1,5 @@
 import "server-only";
-import { ProjectsData } from "@/data/ProjectsData";
+import { ProjectsData } from "@/app/projects/data";
 import {
   apiRoute,
   commitAnalysisRoute,

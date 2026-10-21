@@ -1,9 +1,9 @@
-import Accordion, { AccordionItem } from "@/components/Accordion";
-import ExternalLink from "@/components/ExternalLink";
 import {
   DiscontinuedLabsData,
   discontinuedLabHistory,
-} from "@/data/DiscontinuedLabsData";
+} from "@/app/labs/discontinued-data";
+import Accordion, { AccordionItem } from "@/components/Accordion";
+import ExternalLink from "@/components/ExternalLink";
 import { getAvailableLabDomains } from "@/utils/labCatalog";
 
 import LabCard, { ArchivedLabCard } from "./LabCard";

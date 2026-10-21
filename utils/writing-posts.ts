@@ -5,7 +5,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { z } from "zod";
 
-const writingPostsDirectory = path.join(process.cwd(), "data/writing");
+const writingPostsDirectory = path.join(process.cwd(), "app/writing/content");
 const mdxFileExtensionPattern = /\.mdx$/;
 const wordSeparatorPattern = /\s+/;
 

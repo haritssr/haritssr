@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
+import { getLabDomainMetadata } from "@/app/labs/data";
 import LabDomainLayout from "@/components/LabDomainLayout";
-import { getLabDomainMetadata } from "@/data/LabsData";
 
 export const metadata: Metadata = getLabDomainMetadata("physics");
 

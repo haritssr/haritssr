@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import ExplanationList from "@/components/ExplanationList";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import data from "@/data/search-books.json";
+
+import data from "./books.json";
 
 interface DataType {
   author: string;

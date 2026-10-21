@@ -6,7 +6,7 @@ import PageTitle from "@/components/PageTitle";
 import ProjectsCard from "@/components/ProjectsCard";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
-import { ProjectsData } from "../../data/ProjectsData";
+import { ProjectsData } from "./data";
 
 const PROJECTS_DESCRIPTION =
   "Details about the projects I've worked on and how they were handled.";

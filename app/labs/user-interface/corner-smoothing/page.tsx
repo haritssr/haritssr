@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
+import { getLabMetadata } from "@/app/labs/data";
 import ExternalLink from "@/components/ExternalLink";
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
-import { getLabMetadata } from "@/data/LabsData";
 
 import CornerComparison from "./demo";
 
