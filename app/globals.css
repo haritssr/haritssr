@@ -124,8 +124,9 @@
     scrollbar-gutter: stable both-edges;
   }
 
-  /* Match the reserved scrollbar gutters to the Timer modal backdrop. */
-  html:has(.timer-dialog-backdrop) {
+  /* Match reserved scrollbar gutters to modal backdrops. */
+  html:has(.timer-dialog-backdrop),
+  html:has(.flow-diagram-backdrop) {
     background-color: color-mix(
       in srgb,
       var(--color-foreground) 40%,

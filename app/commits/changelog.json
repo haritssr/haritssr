@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f7b96867090dee5d5defc5d9784e1e4c8689600b",
+      "date": "2026-10-22T04:33:17+07:00",
+      "subject": "style(contents): refine hierarchy and section spacing"
+    },
+    {
       "hash": "3518c8ac67d60134ce63a02d0c2f5bee9c5eac89",
       "date": "2026-10-22T04:33:13+07:00",
       "subject": "style(labs): refine domain navigation and icons"
