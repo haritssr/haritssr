@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "784c8e4e19154fcd1f1764d3847f718318b0512d",
+      "date": "2026-10-22T04:33:46+07:00",
+      "subject": "feat(TopBar): show Google account controls"
+    },
+    {
       "hash": "3c529d552d93cac92146f85b49befc060ae4f2b3",
       "date": "2026-10-22T04:33:42+07:00",
       "subject": "feat(timer): add authenticated Turso storage and optimistic actions"

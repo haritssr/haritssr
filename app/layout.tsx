@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import FloatingTimerDock from "@/components/FloatingTimerDock";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import { SiteStructuredData } from "@/components/StructuredData";
@@ -91,6 +92,7 @@ export default function RootLayout({
             >
               {children}
             </main>
+            <FloatingTimerDock />
           </TimerProvider>
         </GlobalSearchProvider>
         <Footer />

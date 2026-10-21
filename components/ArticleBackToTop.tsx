@@ -40,7 +40,7 @@ export default function ArticleBackToTop() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 bottom-[calc(max(1.25rem,env(safe-area-inset-bottom))+var(--footer-overlap,0px))] z-40 mx-auto flex w-full max-w-5xl items-center justify-between gap-3 pr-[max(1.25rem,env(safe-area-inset-right))] pl-[max(1.25rem,env(safe-area-inset-left))] xl:pr-[env(safe-area-inset-right)] xl:pl-[env(safe-area-inset-left)]"
+      className="pointer-events-none fixed inset-x-0 bottom-[max(calc(max(1.25rem,env(safe-area-inset-bottom))+var(--footer-overlap,0px)),var(--timer-dock-clearance,0px))] z-40 mx-auto flex w-full max-w-5xl items-center justify-between gap-3 pr-[max(1.25rem,env(safe-area-inset-right))] pl-[max(1.25rem,env(safe-area-inset-left))] xl:pr-[env(safe-area-inset-right)] xl:pl-[env(safe-area-inset-left)]"
       ref={controlsRef}
     >
       <Button
