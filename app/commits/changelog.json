@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3eaaa880d8fda3b11c122b032b24f9869fc461b7",
+      "date": "2026-10-22T04:33:52+07:00",
+      "subject": "feat(timer): add floating task controls across routes"
+    },
+    {
       "hash": "784c8e4e19154fcd1f1764d3847f718318b0512d",
       "date": "2026-10-22T04:33:46+07:00",
       "subject": "feat(TopBar): show Google account controls"

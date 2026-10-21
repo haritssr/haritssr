@@ -5,24 +5,36 @@ export const implementationFiles = [
     "Page composition: Today, toolbar, feedback, and task collection.",
   ],
   [
+    "app/timer/components/TimerDataControls.tsx",
+    "Icon-only toolbar Export/Import actions, authentication, and backup errors.",
+  ],
+  [
     "app/timer/components/TimerToolbar.tsx",
-    "Notification and Autoplay switches, Cards/List selection, and New Task.",
+    "Notification, Autoplay, Multitask, and Ticking switches, backup icons, Cards/List selection, and Add Task.",
   ],
   [
     "app/timer/components/TaskList.tsx",
-    "Task sorting and the responsive card/list collection.",
+    "Shared task clock, state calculation, and active/completed collections.",
+  ],
+  [
+    "app/timer/components/CompletedTasksTable.tsx",
+    "Completed Tasks, View/Hide controls, sorting, and completion status.",
   ],
   [
     "app/timer/components/TaskCard.tsx",
-    "Card composition, title, description, progress, and completion message.",
+    "Active card composition, title, description, speed, progress, and actions.",
   ],
   [
     "app/timer/components/TaskProgress.tsx",
     "Current time, duration, percentage, and progress bar.",
   ],
   [
+    "app/timer/components/TaskSpeedControl.tsx",
+    "Shared text-only speed cycle, with an optional clock icon.",
+  ],
+  [
     "app/timer/components/TaskActions.tsx",
-    "Start, Continue, Pause, and Done buttons and their sounds.",
+    "Start, Continue, Pause, and Done controls, text/icon presentations, and sounds.",
   ],
   [
     "app/timer/components/TaskDescription.tsx",
@@ -30,11 +42,11 @@ export const implementationFiles = [
   ],
   [
     "app/timer/components/TaskDialog.tsx",
-    "Add/Edit triggers, form submission, and validation.",
+    "Add/Edit triggers, Shift+N shortcut, random suggestions, and form validation.",
   ],
   [
     "app/timer/components/TaskFormDialog.tsx",
-    "Shared Add/Edit modal, name and description fields, Cancel, and Save.",
+    "Shared Add/Edit modal, initial focus, character counters, clear buttons, and form actions.",
   ],
   [
     "app/timer/components/DurationFields.tsx",
@@ -45,12 +57,24 @@ export const implementationFiles = [
     "Card/list layout, spacing, borders, shadows, and state colors.",
   ],
   [
-    "app/timer/components/useTaskState.ts",
-    "The ticking clock and derived running, paused, and completed state.",
+    "app/timer/components/taskState.ts",
+    "Task ordering, completion partition, elapsed time, and control state.",
+  ],
+  [
+    "app/timer/components/floatingTaskState.ts",
+    "Running and retained paused task selection, start ordering, and midnight cutoff.",
   ],
   [
     "app/timer/store.ts",
-    "Daily JSON storage, task operations, midnight rollover, and history.",
+    "Transactional Turso task operations, midnight rollover, preferences, history, and backups.",
+  ],
+  [
+    "utils/timerAuth.ts",
+    "Owner-only Google OpenID Connect, signed session cookies, and request origin checks.",
+  ],
+  [
+    "app/api/timer/auth/[action]/route.ts",
+    "Account session, Google login, callback, and sign-out endpoints.",
   ],
   ["app/timer/statistic/page.tsx", "Statistics page header and metadata."],
   [
@@ -59,20 +83,76 @@ export const implementationFiles = [
   ],
   ["app/timer/details/page.tsx", "This explanation and file inventory."],
   [
+    "app/timer/details/relationships.ts",
+    "Pele diagram definitions and explanations of Timer’s file and function relationships.",
+  ],
+  [
     "app/api/timer/route.ts",
-    "GET and POST handlers for Timer data and actions.",
+    "Protected GET, POST, and PATCH handlers for Timer data and actions.",
   ],
   [
     "components/TimerProvider.tsx",
-    "Shared state, server synchronization, and completion notifications.",
+    "Site-wide snapshot loading, optimistic Timer state, preferences, and shared scheduling.",
+  ],
+  [
+    "components/FloatingTimerDock.tsx",
+    "Compact floating task bar, task switcher, retained pause, and completion feedback.",
+  ],
+  [
+    "components/useTimerClock.ts",
+    "Display-local clock shared by the task list and floating task UI.",
+  ],
+  [
+    "components/useTimerDockPosition.ts",
+    "Measured mobile navigation gap, desktop positioning, and floating layout clearance.",
+  ],
+  [
+    "components/useTimerSchedule.ts",
+    "Ticking, countdown warnings, completion refreshes, and midnight rollover.",
+  ],
+  [
+    "components/useTimerNotifications.ts",
+    "Completion claims, browser notifications, sound, and visible feedback.",
+  ],
+  [
+    "utils/timerClient.ts",
+    "API transport, cache keys, validation, and tab change subscriptions.",
+  ],
+  [
+    "utils/timerMutations.ts",
+    "In-memory optimistic projection, ordered saves, revision reconciliation, rollback, and failed form drafts.",
+  ],
+  [
+    "utils/timerEngine.ts",
+    "Shared settlement, actions, completion claims, Multitask, and Autoplay rules.",
+  ],
+  [
+    "utils/timerDatabase.ts",
+    "Turso schema, batched reads, changed-row persistence, and reusable-client transactions.",
+  ],
+  [
+    "utils/timerBackup.ts",
+    "Versioned backup validation, paused export copies, and conflict-safe imports.",
+  ],
+  [
+    "components/useTimerAudioOwner.ts",
+    "Single-owner ticking and warning audio, with a focused-tab fallback.",
+  ],
+  [
+    "utils/timerSound.ts",
+    "Action sounds, playful ticking, and countdown warnings.",
   ],
   [
     "utils/timer.ts",
-    "Types, time calculations, recurring defaults, and sample data generation.",
+    "Types, time calculations, empty personal days, and sample data generation.",
   ],
   [
     "utils/timerValidation.ts",
     "Validation schemas for stored records and API messages.",
+  ],
+  [
+    "scripts/migrate-timer.ts",
+    "Initializes Turso and imports backup or legacy JSON history.",
   ],
   [
     "scripts/seed-timer.ts",
@@ -90,6 +170,22 @@ export const integrationFiles = [
   ["app/sitemap.ts", "Includes the public Timer pages in the sitemap."],
   ["data/routes.ts", "Makes Timer pages available in site search."],
   [
+    "components/Button.tsx",
+    "Shared buttons, including circular timer actions and small field-clear controls.",
+  ],
+  [
+    "components/TabBarButtom.tsx",
+    "Mobile navigation surface measured for floating Timer placement.",
+  ],
+  [
+    "components/ArticleBackToTop.tsx",
+    "Keeps the reading control above the Timer dock when visible.",
+  ],
+  [
+    "components/FlowDiagram.tsx",
+    "Shared Pele viewer with zoom, drag-to-pan, keyboard scrolling, and a full-width dialog.",
+  ],
+  [
     "public/sw.js",
     "Opens or focuses Timer when a completion notification is clicked.",
   ],
@@ -97,8 +193,11 @@ export const integrationFiles = [
     "next.config.ts",
     "Excludes personal Timer records from deployment tracing.",
   ],
-  ["package.json", "Defines the seed:timer command."],
-  ["knip.jsonc", "Registers the seed script as an operational entry point."],
+  ["package.json", "Defines the migration and sample generation commands."],
+  [
+    "knip.jsonc",
+    "Registers the migration and seed scripts as an operational entry point.",
+  ],
   [
     ".gitignore",
     "Excludes daily JSON records and temporary storage files from Git.",
@@ -109,10 +208,7 @@ export const integrationFiles = [
 export const storageFiles = [
   [
     "data/timer/YYYY-MM-DD.json",
-    "One record per Jakarta calendar day, containing the date, revision, and activities.",
+    "Legacy migration source; no longer used for runtime persistence.",
   ],
-  [
-    "data/timer/*.tmp",
-    "Temporary files used during atomic writes, removed after saving.",
-  ],
+  ["data/timer/*.tmp", "Legacy temporary files; no longer written by Timer."],
 ] as const;

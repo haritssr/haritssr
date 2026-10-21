@@ -13,35 +13,75 @@
   effort labels are editorial estimates, not recorded model usage.
 
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
-- Timer at `/timer` tracks today's activities in Jakarta time, with daily history
-  and a 30-day totals chart at `/timer/statistic`. `/timer/details` explains its
-  behavior and lists its source and storage locations. By default, one activity runs at once.
-  Starting another pauses the current activity unless Multitask is enabled.
-  Multitask allows several activities to run independently; switching it off
-  confirms keeping only the most recently started task running. Multitask and
-  Autoplay preferences reset on reload. Running timers recover from saved
-  timestamps after navigation, reloads, or browser closure, and stop at midnight.
-  Each task has a saved speed from 1x to 3x in 0.5x steps; its speed control cycles
-  through the options. Speed changes preserve recorded progress, and statistics
-  include accelerated task time.
-  X Traversal and House keeping recur daily with one-hour budgets; added activities are for
-  today only. Reached activities stop at their duration. Done finishes a running or paused activity
-  early while preserving its actual time spent. Autoplay starts the next unfinished
-  activity after Done or a duration completion when no tasks remain running,
-  prioritizing paused activities.
-  It runs while the site is open and stops when no unfinished activities remain. Unfinished activities
-  have an Edit action to change their name, description, and duration using the same
-  fields and presets as New Task. Edited durations must exceed time already spent.
-- Timer UI components live in `app/timer/components/`; its [component guide](app/timer/components/README.md)
-  maps each visible control to its file. `TimerClient.tsx` composes the page,
-  `taskPresentation.ts` owns card/list layout and colors, and `TaskFormDialog.tsx`
-  supplies the identical Add/Edit form.
-- Local Timer data lives in ignored `data/timer/YYYY-MM-DD.json` files, written
-  atomically by one local Node server process. Run `bun run seed:timer` to create
-  realistic sample records for the previous 30 completed days; it never overwrites
-  existing files. These are sample records, not measured activity. Production
-  shows a read-only generated preview, does not read personal files, and rejects
-  Timer mutations. Personal files are excluded from deployment tracing.
+- Timer at `/timer` tracks personal activities by Jakarta calendar day, with
+  daily history and 30-day totals at `/timer/statistic`. `/timer/details` explains
+  behavior, Turso schema, source files, and interactive Pele relationship diagrams.
+- Turso is the only runtime store. The protected Next.js API keeps credentials
+  server-only. `utils/timerDatabase.ts` maps SQL rows and owns transactions;
+  `app/timer/store.ts` applies the shared `timerEngine.ts` rules. Reads are batched,
+  ordinary writes update only changed task rows, and runtime requests reuse a
+  database client. `timerMutations.ts` projects queued changes in memory and
+  reconciles confirmed revisions. Add accepts an optional UUID `taskId` so repeat
+  creation cannot duplicate the task. No task data is
+  written to IndexedDB or local JSON. Signed-in devices share tasks and preferences.
+- Personal access uses Google OpenID Connect restricted to `TIMER_GOOGLE_EMAIL`.
+  Only the configured verified email can sign in; optionally pin the permanent
+  account subject with `TIMER_GOOGLE_USER_ID`. Sessions identify the Google subject,
+  include the allowed email, use signed HttpOnly SameSite cookies, expire after
+  seven days, and use Secure cookies in production. The server validates Google's
+  ID token signature, issuer, audience, expiration, nonce, and verified email.
+  OAuth uses state and PKCE. No Google tokens are persisted. Old GitHub sessions
+  are rejected. Rotate `TIMER_SESSION_SECRET` to invalidate all sessions.
+  Visitors receive read-only samples; personal history requires the owner session.
+  Sign-out clears the current browser session. No account table is needed.
+- Configure credentials in the Git-ignored `.env.local`; setup comments live beside
+  its settings. In Google Cloud Console, configure the
+  consent screen and create an OAuth client of type **Web application**. Register
+  `{TIMER_AUTH_ORIGIN}/api/timer/auth/callback` as an authorized redirect URI.
+  For localhost this is `http://localhost:3000/api/timer/auth/callback`; production
+  is `https://haritssr.com/api/timer/auth/callback`. Match the actual origin exactly.
+  Configure `TIMER_GOOGLE_CLIENT_ID`, `TIMER_GOOGLE_CLIENT_SECRET`,
+  `TIMER_GOOGLE_EMAIL`, `TIMER_SESSION_SECRET`, and `TIMER_AUTH_ORIGIN` locally and
+  in deployment. If the Google app is in testing, add your account as a test user.
+  Generate a session secret with `openssl rand -base64 32`. Keep every variable
+  server-only. Missing settings leave personal data locked. Remove obsolete
+  `TIMER_GITHUB_*` variables; the callback route and Turso schema do not change.
+- Set `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` locally and in deployment.
+  Run `bun run migrate:timer` to initialize the three-table schema. Run
+  `bun run migrate:timer path/to/backup.json` to import a browser backup, or
+  `bun run migrate:timer --local-json` to import `data/timer/*.json`. These commands
+  write to the configured Turso database; source files remain untouched. Imports
+  preserve IDs and dates (tasks use a composite date/ID key for legacy recurring IDs), restore timers paused, suppress old completion alerts,
+  skip identical days, fill empty dates, and reject occupied-date conflicts atomically.
+- Export/Import in Timer provide versioned JSON history backups (10 MB maximum).
+  Backups contain
+  task history, not preferences or credentials. Keep a backup before migrating.
+- Start normally pauses other activities; Multitask permits concurrent tasks.
+  Disabling it keeps the most recently started task, atomically with its preference.
+  Autoplay starts the next unfinished task when none remain running, preferring
+  paused tasks. Tasks support 1x–3x speed in 0.5x steps. Done preserves actual time;
+  Reached stops at the duration. Edits require duration above time already spent.
+  Names allow 20 characters and descriptions 35; legacy longer descriptions remain
+  readable but must be shortened on edit. New days start empty.
+- Progress derives from timestamps without a write every second. Tasks stop at
+  Jakarta midnight. Actions and completion claims use write transactions so only
+  one device handles a completion and its Autoplay transition. The API is polled
+  every 15 seconds and revalidated on focus. Changes require network connectivity;
+  actions update immediately through an in-memory optimistic queue while saves
+  run in order. Failed saves restore confirmed state, retain Add/Edit drafts for
+  reopening, and show an error with Retry to refresh authoritative data. Uncertain
+  writes are not automatically resent. There is no offline writable fallback,
+  background scheduler, or Autoplay while all pages close.
+- Autoplay, Multitask, and notification preferences persist in Turso. Ticking
+  resets off on reload. Web Locks coordinate continuous audio within one browser;
+  other devices can play their own ticking. Completion feedback is claimed globally.
+- Timer UI components live in `app/timer/components/`; its
+  [component guide](app/timer/components/README.md) maps the controls. The global
+  `TimerProvider` loads state across navigation. Outside Timer, the compact
+  floating dock shows the task title, progress, speed, and circular actions above
+  mobile navigation or within desktop content width. Completion messages link
+  back to Timer. `timerClient.ts` handles HTTP transport; scheduling, notification,
+  audio ownership, display clocks, and dock geometry live in focused hooks.
 - Timer browser notifications are opt-in, with visible completion messages as a
   fallback. Alerts may be delayed while the browser is closed or suspended;
   there is no push service or background scheduler. Notification support varies
