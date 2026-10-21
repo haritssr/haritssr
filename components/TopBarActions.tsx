@@ -2,6 +2,7 @@
 
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
 
+import TopBarAccount from "@/components/TopBarAccount";
 import TopBarSearch from "@/components/TopBarSearch";
 import TopBarShare, { ShareButton } from "@/components/TopBarShare";
 import pageSourceUrl from "@/utils/pageSourceUrl";
@@ -19,9 +20,7 @@ export default function TopBarActions({
 
   return (
     <div
-      className={
-        list ? "flex flex-col p-1" : "flex w-fit items-center space-x-4"
-      }
+      className={list ? "flex flex-col p-1" : "flex w-fit items-center gap-4"}
     >
       <TopBarSearch onSearch={onSearch} showLabel={list} />
       {list ? <ShareButton showLabel /> : <TopBarShare />}
@@ -43,6 +42,9 @@ export default function TopBarActions({
         />
         {list ? <span>View Source</span> : null}
       </a>
+      <div className={list ? "w-full" : "flex shrink-0 items-center"}>
+        <TopBarAccount showLabel={list} />
+      </div>
     </div>
   );
 }

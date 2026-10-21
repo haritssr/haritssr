@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3c529d552d93cac92146f85b49befc060ae4f2b3",
+      "date": "2026-10-22T04:33:42+07:00",
+      "subject": "feat(timer): add authenticated Turso storage and optimistic actions"
+    },
+    {
       "hash": "91c24f7ed12e1be90f528533fc6e3b7afee86ec8",
       "date": "2026-10-22T04:33:20+07:00",
       "subject": "refactor(diagrams): extract shared interactive flow renderer"

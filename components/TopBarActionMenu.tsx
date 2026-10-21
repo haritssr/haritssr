@@ -102,7 +102,8 @@ function MobileActionMenu({ pathname }: { pathname: string }) {
             onClick={(event) => {
               if (
                 event.target instanceof Element &&
-                event.target.closest("button, a[href]")
+                event.target.closest("button, a[href]") &&
+                !event.target.closest("[data-account-control]")
               ) {
                 setOpen(false);
               }
