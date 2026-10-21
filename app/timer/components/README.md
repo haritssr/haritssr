@@ -59,8 +59,8 @@ the rest, preserving elapsed time. The server re-evaluates running tasks when
 confirming. A failed save keeps Multitask enabled and shows an error. With zero
 or one running task, no confirmation is needed.
 
-Ticking defaults off and resets on reload. When enabled, one shared analog-style
-tick plays per real second while any local task runs, regardless of task speed
+Ticking defaults off and resets on reload. When enabled, one shared playful,
+plucked tone alternates between two pitches each real second while any local task runs, regardless of task speed
 or the number of running tasks. It stops when all tasks pause, finish, or reach
 midnight, and continues across page navigation. It does not mute the existing
 Start, Pause, Done, or completion sounds. Audio setup happens in the toggle's

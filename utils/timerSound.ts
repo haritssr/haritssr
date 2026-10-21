@@ -21,41 +21,28 @@ export function playClockTick(
     return;
   }
   try {
-    const buffer = context.createBuffer(
-      1,
-      Math.ceil(context.sampleRate * 0.03),
-      context.sampleRate
-    );
-    const samples = buffer.getChannelData(0);
-    for (let index = 0; index < samples.length; index += 1) {
-      samples[index] = Math.random() * 2 - 1;
-    }
-    const source = context.createBufferSource();
-    const filter = context.createBiquadFilter();
+    const source = context.createOscillator();
     const gain = context.createGain();
     const start = context.currentTime;
-    source.buffer = buffer;
-    filter.type = "bandpass";
-    const frequency = alternate ? 1400 : 1800;
-    filter.frequency.value = urgent ? frequency + 1000 : frequency;
-    filter.Q.value = 1;
+    const frequency = (alternate ? 660 : 880) * (urgent ? 1.5 : 1);
+    source.type = "sine";
+    source.frequency.setValueAtTime(frequency * 1.4, start);
+    source.frequency.exponentialRampToValueAtTime(frequency, start + 0.035);
     gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(urgent ? 0.3 : 0.18, start + 0.001);
-    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.025);
-    source.connect(filter);
-    filter.connect(gain);
+    gain.gain.linearRampToValueAtTime(urgent ? 0.12 : 0.08, start + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.11);
+    source.connect(gain);
     gain.connect(context.destination);
     source.addEventListener(
       "ended",
       () => {
         source.disconnect();
-        filter.disconnect();
         gain.disconnect();
       },
       { once: true }
     );
     source.start(start);
-    source.stop(start + 0.03);
+    source.stop(start + 0.12);
   } catch {
     // Clock audio must not interrupt running tasks.
   }

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "60199211bd3f727392789478850e1539e80295e4",
+      "date": "2026-10-21T18:17:21+07:00",
+      "subject": "style(layout): refine responsive typography and spacing"
+    },
+    {
       "hash": "f3289e47e8acfcfa983dfe8596ddf26b5390c4e0",
       "date": "2026-10-20T19:30:17+07:00",
       "subject": "feat(tree): add collapsible site route hierarchy"
