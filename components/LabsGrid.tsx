@@ -2,7 +2,7 @@ import {
   DiscontinuedLabsData,
   discontinuedLabHistory,
 } from "@/app/labs/discontinued-data";
-import Accordion, { AccordionItem } from "@/components/Accordion";
+import DiscontinuedLabs from "@/components/DiscontinuedLabs";
 import ExternalLink from "@/components/ExternalLink";
 import { getAvailableLabDomains } from "@/utils/labCatalog";
 
@@ -59,48 +59,36 @@ export default function LabsGrid({
           </li>
         ) : null}
       </ul>
-      <Accordion
+      <DiscontinuedLabs
+        count={archivedCount}
         className={
           mobileLimit !== undefined && domains.length >= mobileLimit
             ? "hidden! w-full sm:block!"
             : "w-full"
         }
       >
-        <AccordionItem
-          title="Discontinued"
-          triggerClassName="lg:w-[calc((100%_-_var(--spacing)*15)/4)] lg:data-panel-open:rounded-b-lg"
-          trailing={
-            <span className="text-muted shrink-0 font-normal tabular-nums">
-              {archivedCount}
-              <span className="sr-only"> historical labs</span>
-            </span>
-          }
-          value="discontinued"
-          panelClassName="bg-transparent lg:mt-3 lg:rounded-lg lg:border-t"
-        >
-          <div className="space-y-5">
-            {removalCommitSha === undefined ? null : (
-              <p className="text-muted mb-0 pb-2 leading-7">
-                <ExternalLink
-                  href={`https://github.com/haritssr/haritssr/commit/${removalCommitSha}`}
-                  name="View removal commit"
-                  size="inherit"
+        <div className="space-y-5">
+          {removalCommitSha === undefined ? null : (
+            <p className="text-muted mb-0 pb-2 leading-7">
+              <ExternalLink
+                href={`https://github.com/haritssr/haritssr/commit/${removalCommitSha}`}
+                name="View removal commit"
+                size="inherit"
+              />
+            </p>
+          )}
+          <ul className="grid list-none grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {DiscontinuedLabsData.map((lab) => (
+              <li key={lab.slug}>
+                <ArchivedLabCard
+                  lab={lab}
+                  headingLevel={headingLevel === 2 ? 3 : 4}
                 />
-              </p>
-            )}
-            <ul className="grid list-none grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {DiscontinuedLabsData.map((lab) => (
-                <li key={lab.slug}>
-                  <ArchivedLabCard
-                    lab={lab}
-                    headingLevel={headingLevel === 2 ? 3 : 4}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </AccordionItem>
-      </Accordion>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </DiscontinuedLabs>
     </div>
   );
 }

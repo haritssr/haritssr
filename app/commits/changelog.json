@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "a1a3f0f7470d6a88f1bd390d23a47ad4b0bb5308",
+      "date": "2026-10-22T04:33:05+07:00",
+      "subject": "refactor(data): colocate content with owning routes"
+    },
+    {
       "hash": "d9e4b465204d23ee74c1f8c2388d407240dbdf60",
       "date": "2026-10-21T18:17:37+07:00",
       "subject": "docs(more): add eudaimonic principle"

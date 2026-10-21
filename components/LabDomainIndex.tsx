@@ -13,10 +13,9 @@ interface LabDomainIndexProps {
 
 export default function LabDomainIndex({ domainSlug }: LabDomainIndexProps) {
   const domain = getAvailableLabDomain(domainSlug);
-  const labs =
-    domain.slug === "physics"
-      ? domain.labs.toSorted((a, b) => b.createdAt.localeCompare(a.createdAt))
-      : domain.labs;
+  const labs = domain.labs.toSorted((a, b) =>
+    a.createdAt.localeCompare(b.createdAt)
+  );
 
   return (
     <div className="mx-auto w-full sm:px-0">
@@ -42,22 +41,34 @@ function LabList({
   domainSlug: string;
   labs: readonly LabEntry[];
 }) {
+  const columnLength = Math.ceil(labs.length / 2);
+  const columns = [labs.slice(0, columnLength), labs.slice(columnLength)];
+
   return (
-    <ol className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
-      {labs.map((lab) => (
-        <li className="flex items-center justify-between gap-3" key={lab.slug}>
-          <span className="min-w-0 truncate" title={lab.title}>
-            <InternalLink
-              href={`/labs/${domainSlug}/${lab.slug}`}
-              variant={
-                isDatabaseLab(domainSlug, lab.slug) ? "database" : "navigation"
-              }
-            >
-              {lab.title}
-            </InternalLink>
-          </span>
-        </li>
-      ))}
-    </ol>
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {columns.map((column) =>
+        column.length === 0 ? null : (
+          <ul
+            className="marker:text-muted list-outside list-disc space-y-3 pl-4"
+            key={column[0].slug}
+          >
+            {column.map((lab) => (
+              <li className="min-w-0 pl-1" key={lab.slug}>
+                <InternalLink
+                  href={`/labs/${domainSlug}/${lab.slug}`}
+                  variant={
+                    isDatabaseLab(domainSlug, lab.slug)
+                      ? "database"
+                      : "navigation"
+                  }
+                >
+                  {lab.title}
+                </InternalLink>
+              </li>
+            ))}
+          </ul>
+        )
+      )}
+    </div>
   );
 }

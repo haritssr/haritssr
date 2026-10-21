@@ -1,6 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <title>User Interface</title>
   <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="m4 3 16 9-8 2-3 8L4 3Z"/>
+    <path d="M3 5h4m4 0h10M3 12h10m4 0h4M3 19h4m4 0h10"/>
+    <circle cx="9" cy="5" r="2"/>
+    <circle cx="15" cy="12" r="2"/>
+    <circle cx="9" cy="19" r="2"/>
   </g>
 </svg>

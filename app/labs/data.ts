@@ -34,7 +34,8 @@ export interface LabDomain {
 
 export const LabsData: readonly LabDomain[] = [
   {
-    description: "Explore responsive layouts using Tailwind.",
+    description:
+      "Explore layouts, spacing, and responsive styles with Tailwind.",
     labs: [
       {
         slug: "position",
@@ -271,7 +272,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "Tailwind CSS",
   },
   {
-    description: "Explore React components and interactions.",
+    description: "Explore React state, hooks, and reusable component patterns.",
     labs: [
       {
         slug: "usestate-todo-list",
@@ -664,7 +665,8 @@ export const LabsData: readonly LabDomain[] = [
     title: "React",
   },
   {
-    description: "Explore Next.js navigation and components.",
+    description:
+      "Explore routing, rendering, and server components in Next.js.",
     labs: [
       {
         slug: "router",
@@ -782,7 +784,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "Nextjs",
   },
   {
-    description: "Explore browser features through examples.",
+    description: "Explore browser APIs, storage, and native web interactions.",
     labs: [
       {
         slug: "clock",
@@ -976,7 +978,8 @@ export const LabsData: readonly LabDomain[] = [
     title: "Browser",
   },
   {
-    description: "Explore interface patterns and animations.",
+    description:
+      "Explore interface patterns, motion, and everyday interactions.",
     labs: [
       {
         slug: "shadow",
@@ -1210,7 +1213,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "User Interface",
   },
   {
-    description: "Explore physics through interactive demos.",
+    description: "Explore motion, atoms, and light through interactive demos.",
     labs: [
       {
         slug: "quantities-and-units",
@@ -1334,7 +1337,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "Physics",
   },
   {
-    description: "Explore math concepts through simulations.",
+    description: "Explore algebra, geometry, and calculus through simulations.",
     groups: [
       { id: "chapters", title: "Chapters" },
       { id: "tools", title: "Tools" },
