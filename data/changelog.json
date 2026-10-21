@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "ccf42fb90dffc95b5daac5fa51478912b4e1df31",
+      "date": "2026-10-21T18:17:32+07:00",
+      "subject": "feat(timer): make ticking sound more playful"
+    },
+    {
       "hash": "60199211bd3f727392789478850e1539e80295e4",
       "date": "2026-10-21T18:17:21+07:00",
       "subject": "style(layout): refine responsive typography and spacing"

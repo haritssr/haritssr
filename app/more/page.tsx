@@ -44,6 +44,7 @@ export default function MorePage() {
             <li>e/acc</li>
             <li>Existence = f(constraints, maintainence, ...)</li>
             <li>100% is easier than 98%</li>
+            <li>Eudaimonic &gt; Hedonic</li>
           </ul>
         </Section>
       </div>
