@@ -15,9 +15,14 @@ export const metadata = createPageMetadata({
 
 const publicEndpoints = [
   {
+    href: "/api/timer/auth/session",
+    description:
+      "Current owner account email and optional Google photo, or null when signed out. Cookie-authenticated and never cached; used by the top bar. Signing in only unlocks personal Timer access.",
+  },
+  {
     href: "/api/timer",
     description:
-      "Timer activities and 30-day totals. Production returns generated sample data; local development uses personal JSON files.",
+      "Timer activities and 30-day totals. Visitors receive generated samples; the signed-in owner reads personal Turso records. POST changes tasks (Add accepts an optional UUID taskId to prevent duplicate creation), PATCH saves preferences, and ?backup=1 exports or imports history. All personal operations require the owner session.",
   },
   {
     href: "/api/hello",
@@ -65,18 +70,6 @@ export default function APIPage() {
         </Section>
         {DATABASE_LABS_ENABLED ? (
           <Section title="Local">
-            <InternalLink href="/api/timer" variant="inline">
-              /api/timer
-            </InternalLink>
-            <p className="text-muted">
-              Today’s timer activities. Use GET with a date, such as{" "}
-              <InternalLink href="/api/timer?date=2026-10-15" variant="inline">
-                /api/timer?date=2026-10-15
-              </InternalLink>
-              , for a daily activity list and 30-day totals. POST adds, starts,
-              pauses, or acknowledges completion of an activity. Production GET
-              responses contain sample data; production POST is unavailable.
-            </p>
             <InternalLink href="/api/task" variant="inline">
               /api/task
             </InternalLink>

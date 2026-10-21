@@ -1,4 +1,6 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon as TrashSolidIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import type { ComponentProps } from "react";
 
@@ -39,8 +41,12 @@ export default function DeleteTaskButton({
         }
       }}
     >
-      <AlertDialog.Trigger render={<Button {...buttonProps} />}>
-        Delete
+      <AlertDialog.Trigger
+        render={
+          <Button aria-label="Delete task" title="Delete" {...buttonProps} />
+        }
+      >
+        <TrashIcon aria-hidden="true" className="size-5" />
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Backdrop
@@ -67,13 +73,15 @@ export default function DeleteTaskButton({
               Cancel
             </AlertDialog.Close>
             <Button
+              aria-label="Confirm delete task"
+              title="Delete"
               loading={deleting}
               variant="danger-subtle"
               onClick={() => {
                 void confirmDelete();
               }}
             >
-              Delete
+              <TrashSolidIcon aria-hidden="true" className="size-5" />
             </Button>
           </div>
         </AlertDialog.Popup>

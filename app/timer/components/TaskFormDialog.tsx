@@ -1,6 +1,6 @@
 import { Dialog } from "@base-ui/react/dialog";
 import { useId, useRef, useState } from "react";
-import type { CSSProperties, Ref, SubmitEvent } from "react";
+import type { CSSProperties, RefObject, SubmitEvent } from "react";
 
 import Button from "@/components/Button";
 
@@ -8,7 +8,7 @@ import DeleteTaskButton from "./DeleteTaskButton";
 import DurationFields from "./DurationFields";
 
 const INPUT_CLASS =
-  "form-control border-border bg-background focus:border-action focus:ring-action/20 w-full rounded-lg border px-3 py-2 text-base outline-hidden focus:ring-2";
+  "form-control border-border bg-background focus:border-action focus:ring-action/20 w-full rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2";
 
 const SHEET_STYLE: CSSProperties & { "--timer-safe-bottom": string } = {
   "--timer-safe-bottom":
@@ -89,35 +89,62 @@ function TaskNameField({
 }: {
   defaultValue: string;
   disabled: boolean;
-  inputRef: Ref<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
 }) {
   const hintId = useId();
-  const [length, setLength] = useState(defaultValue.length);
+  const [value, setValue] = useState(defaultValue);
+  const { length } = value;
   return (
     <label className="flex flex-col gap-2 text-sm">
-      <span>Name</span>
-      <span className="relative block">
-        <input
-          aria-describedby={hintId}
-          className={`${INPUT_CLASS} h-10 pr-18`}
-          defaultValue={defaultValue}
-          disabled={disabled}
-          maxLength={20}
-          name="activity"
-          onChange={(event) => {
-            setLength(event.currentTarget.value.length);
-          }}
-          placeholder="Short title"
-          ref={inputRef}
-          required
-        />
+      <span className="flex items-center justify-between">
+        <span>Name</span>
         <span
-          className={`pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs tabular-nums ${length >= 20 ? "text-attention font-medium" : "text-muted"}`}
+          className={`text-xs tabular-nums ${length >= 20 ? "text-attention font-medium" : "text-muted"}`}
           id={hintId}
         >
           <span className="sr-only">Characters: </span>
           {length}/20
         </span>
+      </span>
+      <span className="relative block">
+        <input
+          aria-describedby={hintId}
+          className={`${INPUT_CLASS} h-10 pr-11.5`}
+          value={value}
+          disabled={disabled}
+          maxLength={20}
+          name="activity"
+          onChange={(event) => {
+            setValue(event.currentTarget.value);
+          }}
+          placeholder="Short title"
+          ref={inputRef}
+          required
+        />
+
+        <Button
+          aria-label="Clear name"
+          title="Clear"
+          className="absolute top-1/2 right-2.5 -translate-y-1/2"
+          size="icon-small"
+          disabled={disabled || length === 0}
+          onClick={() => {
+            setValue("");
+            inputRef.current?.focus();
+          }}
+          variant="black"
+        >
+          <svg
+            aria-hidden="true"
+            className="size-2.5 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 16 16"
+          >
+            <path d="m4 4 8 8M12 4l-8 8" strokeLinecap="round" />
+          </svg>
+        </Button>
       </span>
     </label>
   );
@@ -130,20 +157,64 @@ function TaskDescriptionField({
   defaultValue: string;
   disabled: boolean;
 }) {
+  const hintId = useId();
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const [value, setValue] = useState(defaultValue);
+  const { length } = value;
   return (
     <label className="flex flex-col gap-2 text-sm">
-      <span>
-        Description <span className="text-muted">(optional)</span>
+      <span className="flex items-center justify-between">
+        <span>
+          Description <span className="text-muted">(optional)</span>
+        </span>
+        <span
+          className={`text-xs tabular-nums ${length >= 35 ? "text-danger font-medium" : "text-muted"}`}
+          id={hintId}
+        >
+          <span className="sr-only">Characters: </span>
+          {length}/35
+        </span>
       </span>
-      <textarea
-        className={`${INPUT_CLASS} h-10 resize-y overflow-hidden`}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        maxLength={2000}
-        name="description"
-        placeholder="e.g. Review notes and finish one practice exercise"
-        rows={1}
-      />
+      <span className="relative block">
+        <textarea
+          aria-describedby={hintId}
+          className={`${INPUT_CLASS} scrollbar-subtle block h-10 resize-y overflow-y-auto pr-11.5`}
+          value={value}
+          disabled={disabled}
+          maxLength={35}
+          name="description"
+          onChange={(event) => {
+            setValue(event.currentTarget.value);
+          }}
+          placeholder="e.g. Review notes and practice"
+          ref={descriptionRef}
+          rows={2}
+        />
+
+        <Button
+          aria-label="Clear description"
+          title="Clear"
+          className="absolute top-1/2 right-2.5 -translate-y-1/2"
+          size="icon-small"
+          disabled={disabled || length === 0}
+          onClick={() => {
+            setValue("");
+            descriptionRef.current?.focus();
+          }}
+          variant="black"
+        >
+          <svg
+            aria-hidden="true"
+            className="size-2.5 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 16 16"
+          >
+            <path d="m4 4 8 8M12 4l-8 8" strokeLinecap="round" />
+          </svg>
+        </Button>
+      </span>
     </label>
   );
 }

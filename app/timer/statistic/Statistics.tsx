@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 import Button from "@/components/Button";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
-import { fetchTimer, useTimer } from "@/components/TimerProvider";
+import { useTimer } from "@/components/TimerProvider";
 import { formatTimerTime, timerDate, validTimerDate } from "@/utils/timer";
 import type { TimerHistory, TimerTask } from "@/utils/timer";
-
-async function fetchHistory(url: string) {
-  const { historySchema } = await import("@/utils/timerValidation");
-  return historySchema.parse(await fetchTimer(url));
-}
+import {
+  fetchTimerHistory,
+  subscribeTimerChanges,
+  timerHistoryKey,
+} from "@/utils/timerClient";
 
 function taskStatus(task: TimerTask) {
   if (task.spent >= task.duration) {
@@ -34,10 +34,25 @@ export default function Statistics() {
   const today = snapshot?.today ?? timerDate();
   const validDate = validTimerDate(date) && date <= today;
   const { data, error, mutate } = useSWR<TimerHistory, Error>(
-    validDate ? `/api/timer?date=${date}` : null,
-    fetchHistory,
-    { refreshInterval: date === today ? 15_000 : 0, shouldRetryOnError: false }
+    validDate ? timerHistoryKey(date) : null,
+    async () => await fetchTimerHistory(date),
+    {
+      refreshInterval: 15_000,
+      shouldRetryOnError: false,
+    }
   );
+
+  useEffect(() => {
+    try {
+      return subscribeTimerChanges(() => {
+        void mutate();
+      });
+    } catch {
+      return () => {
+        // Focus refresh and polling remain available if messaging fails.
+      };
+    }
+  }, [mutate]);
 
   return (
     <div className="space-y-10">
@@ -68,12 +83,6 @@ export default function Statistics() {
             </Button>
           </div>
         </div>
-        {data?.mode === "demo" ? (
-          <p className="text-muted text-sm">
-            Sample preview. Personal timer history is available only when
-            running locally.
-          </p>
-        ) : null}
         {error === undefined ? null : (
           <div
             className="text-danger flex flex-wrap items-center gap-3"

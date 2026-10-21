@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SectionHeading } from "@/components/Section";
 import { SelectField } from "@/components/SelectField";
 import Table from "@/components/Table";
-import { formatTimerTime, taskSpent } from "@/utils/timer";
+import { formatTimerTime, taskCompletionTime, taskSpent } from "@/utils/timer";
 import type { TimerTask } from "@/utils/timer";
 
 const SORT_OPTIONS = [
@@ -49,11 +49,7 @@ export default function CompletedTasksTable({
   const rows = tasks
     .map((task) => {
       const spent = taskSpent(task, date, now);
-      let reachedTime = 0;
-      if (task.startedAt !== null) {
-        reachedTime =
-          Date.parse(task.startedAt) + (task.duration - task.spent) * 1000;
-      }
+      let reachedTime = task.startedAt === null ? 0 : taskCompletionTime(task);
       if (task.reachedAt !== null) {
         reachedTime = Date.parse(task.reachedAt);
       }
@@ -91,7 +87,7 @@ export default function CompletedTasksTable({
     >
       <div className="flex flex-wrap items-center gap-3">
         <SectionHeading as="h3" variant="toolbar">
-          Completed
+          Completed Tasks
         </SectionHeading>
         <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-sm underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
           {open ? "Hide" : "View"}

@@ -12,11 +12,13 @@
     "start": "next start",
     "sync:changelog": "bun scripts/sync-changelog.ts",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
-    "validate:content": "bun --conditions=react-server scripts/validate-content.ts"
+    "validate:content": "bun --conditions=react-server scripts/validate-content.ts",
+    "migrate:timer": "bun scripts/migrate-timer.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
     "@heroicons/react": "^2.2.0",
+    "@libsql/client": "^0.18.0",
     "@lisse/core": "^0.7.2",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
@@ -26,6 +28,7 @@
     "hast-util-from-html": "^2.0.3",
     "hast-util-to-jsx-runtime": "^2.3.6",
     "immer": "^9.0.21",
+    "jose": "^6.2.13",
     "katex": "^0.18.11",
     "next": "^16.4.2",
     "nuqs": "^2.10.2",

@@ -27,18 +27,32 @@ export interface TimerNotice {
   activity: string;
 }
 
+export interface TimerPreferences {
+  revision: number;
+  autoplay: boolean;
+  multitask: boolean;
+  notificationsEnabled: boolean;
+}
+
+export function canUseTimer(
+  snapshot: TimerSnapshot | undefined
+): snapshot is TimerSnapshot & { mode: "turso" } {
+  return snapshot !== undefined && snapshot.mode !== "demo";
+}
+
 export interface TimerSnapshot {
   day: TimerDay;
   today: string;
   now: string;
-  mode: "local" | "demo";
+  mode: "turso" | "demo";
   notifications: TimerNotice[];
+  preferences?: TimerPreferences;
 }
 
 export interface TimerHistory {
   day: TimerDay;
   today: string;
-  mode: "local" | "demo";
+  mode: "turso" | "demo";
   totals: { date: string; spent: number }[];
 }
 
@@ -61,6 +75,7 @@ export type TimerAction =
     }
   | {
       action: "add";
+      taskId?: string;
       date: string;
       activity: string;
       description: string;
@@ -127,6 +142,14 @@ export function taskSpent(task: TimerTask, date: string, now: number) {
   return Math.min(task.duration, task.spent + elapsed * (task.speed ?? 1));
 }
 
+// The projected finish at the current speed, before the midnight cutoff.
+export function taskCompletionTime(task: TimerTask) {
+  return task.startedAt === null
+    ? Infinity
+    : Date.parse(task.startedAt) +
+        ((task.duration - task.spent) / (task.speed ?? 1)) * 1000;
+}
+
 export function formatTimerTime(seconds: number) {
   const value = Math.max(0, Math.floor(seconds));
   const hours = Math.floor(value / 3600);
@@ -137,7 +160,11 @@ export function formatTimerTime(seconds: number) {
     : `${minutes}:${remainder}`;
 }
 
-export function createTimerDay(date: string): TimerDay {
+export function createEmptyTimerDay(date: string): TimerDay {
+  return { schemaVersion: 1, date, revision: 0, tasks: [] };
+}
+
+function createTimerDay(date: string): TimerDay {
   return {
     schemaVersion: 1,
     date,

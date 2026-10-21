@@ -11,7 +11,7 @@ export default function TimerDate() {
   const { snapshot } = useTimer();
 
   return snapshot === undefined ? null : (
-    <time className="block" dateTime={snapshot.today}>
+    <time dateTime={snapshot.today}>
       {snapshot.today},{" "}
       {WEEKDAY_FORMATTER.format(new Date(`${snapshot.today}T00:00:00+07:00`))}
     </time>

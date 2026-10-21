@@ -4,6 +4,11 @@ import { TIMER_SPEEDS, validTimerDate } from "@/utils/timer";
 
 const dateSchema = z.string().refine(validTimerDate);
 const instant = z.iso.datetime({ offset: true });
+const taskDetails = {
+  activity: z.string().trim().min(1).max(20),
+  description: z.string().trim().max(35),
+  duration: z.number().int().min(1).max(86_400),
+};
 const taskSchema = z
   .object({
     id: z.string().min(1).max(100),
@@ -50,16 +55,13 @@ export const actionSchema = z.discriminatedUnion("action", [
     action: z.literal("edit"),
     date: dateSchema,
     taskId: z.string().min(1).max(100),
-    activity: z.string().trim().min(1).max(20),
-    description: z.string().trim().max(2000),
-    duration: z.number().int().min(1).max(86_400),
+    ...taskDetails,
   }),
   z.object({
     action: z.literal("add"),
+    taskId: z.uuid().optional(),
     date: dateSchema,
-    activity: z.string().trim().min(1).max(20),
-    description: z.string().trim().max(2000),
-    duration: z.number().int().min(1).max(86_400),
+    ...taskDetails,
   }),
   ...(["pause", "done", "acknowledge", "delete"] as const).map((action) =>
     z.object({
@@ -76,12 +78,20 @@ const noticeSchema = z.object({
   taskId: z.string(),
   activity: z.string(),
 });
+export const preferencesSchema = z.object({
+  revision: z.number().int().nonnegative(),
+  autoplay: z.boolean(),
+  multitask: z.boolean(),
+  notificationsEnabled: z.boolean(),
+});
+
 export const snapshotSchema = z.object({
   day: daySchema,
   today: dateSchema,
   now: instant,
-  mode: z.enum(["local", "demo"]),
+  mode: z.enum(["turso", "demo"]),
   notifications: z.array(noticeSchema),
+  preferences: preferencesSchema.optional(),
 });
 export const changeSchema = z.object({
   snapshot: snapshotSchema,
@@ -90,7 +100,7 @@ export const changeSchema = z.object({
 export const historySchema = z.object({
   day: daySchema,
   today: dateSchema,
-  mode: z.enum(["local", "demo"]),
+  mode: z.enum(["turso", "demo"]),
   totals: z
     .array(z.object({ date: dateSchema, spent: z.number().nonnegative() }))
     .length(30),

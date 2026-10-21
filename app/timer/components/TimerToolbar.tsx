@@ -6,6 +6,7 @@ import {
   ForwardIcon,
   ListBulletIcon,
   SpeakerWaveIcon,
+  Square3Stack3DIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { useRef, useState, useSyncExternalStore } from "react";
@@ -13,6 +14,7 @@ import type { ReactNode, Ref } from "react";
 
 import Button from "@/components/Button";
 import { useTimer } from "@/components/TimerProvider";
+import { canUseTimer } from "@/utils/timer";
 
 import { AddTask } from "./TaskDialog";
 import type { TaskView } from "./taskPresentation";
@@ -37,16 +39,21 @@ function serverPermission() {
 export default function TimerToolbar({
   view,
   onViewChange,
+  backupActions,
 }: {
+  backupActions: ReactNode;
   view: TaskView;
   onViewChange: (view: TaskView) => void;
 }) {
   const { snapshot } = useTimer();
   return (
-    <div className="border-border flex w-full items-center justify-between border-b border-dashed pb-5">
-      <AddTask disabled={snapshot === undefined || snapshot.mode === "demo"} />
-      <div className="flex shrink-0 items-center gap-5">
+    <div className="border-border flex w-full flex-wrap items-center justify-between gap-3 border-b border-dashed pb-5">
+      <div className="shrink-0">
+        <AddTask disabled={!canUseTimer(snapshot)} />
+      </div>
+      <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2">
         <TimerSettings />
+        {backupActions}
         <TaskViewSwitcher onViewChange={onViewChange} view={view} />
       </div>
     </div>
@@ -81,7 +88,7 @@ function TimerSettings() {
             : "Notification"
         }
         disabled={
-          snapshot?.mode !== "local" ||
+          !canUseTimer(snapshot) ||
           permission === "denied" ||
           permission === "unsupported"
         }
@@ -90,14 +97,14 @@ function TimerSettings() {
           if (permission === "default") {
             void Notification.requestPermission()
               .then((result) => {
-                setNotificationsEnabled(result === "granted");
+                void setNotificationsEnabled(result === "granted");
                 window.dispatchEvent(new Event("timer-notifications"));
               })
               .catch(() => {
                 setPermissionFailed(true);
               });
           } else {
-            setNotificationsEnabled(pressed);
+            void setNotificationsEnabled(pressed);
           }
         }}
       />
@@ -105,16 +112,18 @@ function TimerSettings() {
         label="Autoplay"
         icon={<ForwardIcon aria-hidden="true" className="size-4.5" />}
         title="Autoplay"
-        disabled={snapshot?.mode !== "local"}
+        disabled={!canUseTimer(snapshot)}
         checked={autoplay}
-        onCheckedChange={setAutoplay}
+        onCheckedChange={(next) => {
+          void setAutoplay(next);
+        }}
       />
       <MultitaskSetting />
       <TimerSettingToggle
         label="Ticking"
-        title="Clock ticking while tasks run"
+        title="Ticking"
         icon={<SpeakerWaveIcon aria-hidden="true" className="size-4.5" />}
-        disabled={snapshot?.mode !== "local"}
+        disabled={!canUseTimer(snapshot)}
         checked={tickingEnabled}
         onCheckedChange={setTickingEnabled}
       />
@@ -123,7 +132,7 @@ function TimerSettings() {
 }
 
 function MultitaskSetting() {
-  const { snapshot, busy, error, multitask, setMultitask } = useTimer();
+  const { snapshot, error, multitask, setMultitask } = useTimer();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [failed, setFailed] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -131,9 +140,9 @@ function MultitaskSetting() {
 
   async function confirmSingleTask() {
     setFailed(false);
-    if (await setMultitask(false)) {
-      setConfirmOpen(false);
-    } else {
+    const saving = setMultitask(false);
+    setConfirmOpen(false);
+    if (!(await saving)) {
       setFailed(true);
     }
   }
@@ -142,16 +151,14 @@ function MultitaskSetting() {
     <AlertDialog.Root
       open={confirmOpen}
       onOpenChange={(open) => {
-        if (!busy) {
-          setConfirmOpen(open);
-        }
+        setConfirmOpen(open);
       }}
     >
       <TimerSettingToggle
         checked={multitask}
-        disabled={snapshot?.mode !== "local" || busy}
-        dimWhenDisabled={snapshot?.mode !== "local"}
-        icon={<Squares2X2Icon aria-hidden="true" className="size-4.5" />}
+        disabled={!canUseTimer(snapshot)}
+        dimWhenDisabled={!canUseTimer(snapshot)}
+        icon={<Square3Stack3DIcon aria-hidden="true" className="size-4.5" />}
         label="Multitask"
         ref={toggleRef}
         onCheckedChange={(checked) => {
@@ -186,14 +193,11 @@ function MultitaskSetting() {
           ) : null}
           <div className="mt-5 flex justify-end gap-3">
             <AlertDialog.Close
-              disabled={busy}
               render={<Button ref={cancelRef} variant="secondary" />}
             >
               Cancel
             </AlertDialog.Close>
             <Button
-              disabled={busy}
-              loading={busy}
               onClick={() => {
                 void confirmSingleTask();
               }}
@@ -237,7 +241,7 @@ function TimerSettingToggle({
       title={title}
     >
       {icon}
-      <span className="hidden md:inline">{label}</span>
+      <span className="sr-only">{label}</span>
     </Toggle>
   );
 }

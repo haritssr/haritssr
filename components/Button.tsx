@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes, Ref } from "react";
 
 type ButtonVariant =
+  | "black"
   | "attention-subtle"
   | "danger"
   | "danger-subtle"
@@ -17,9 +18,11 @@ type ButtonVariant =
   | "success-subtle";
 
 const BUTTON_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center gap-1.5 corner-squircle rounded-xl px-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed";
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
+  black:
+    "bg-zinc-500 text-zinc-50 transition-colors duration-150 enabled:hover:bg-zinc-600 focus-visible:outline-zinc-500",
   "attention-subtle":
     "border border-transparent bg-attention font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-attention)_60%,var(--color-amber-600))] focus-visible:outline-attention",
   danger:
@@ -51,8 +54,11 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
 };
 
 const BUTTON_SIZE_CLASS = {
-  default: "py-1.5",
-  "mobile-roomy": "py-2 sm:py-1.5",
+  "icon-circle":
+    "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:size-8 sm:p-1.5",
+  "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
+  default: "corner-squircle rounded-xl px-3 py-1.5",
+  "mobile-roomy": "corner-squircle rounded-xl px-3 py-2 sm:py-1.5",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -81,7 +87,7 @@ const Button = function Button({
     <button
       {...props}
       aria-busy={loading}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly ? "p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
+      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" ? "corner-squircle rounded-xl p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
       disabled={disabled === true || loading}
       ref={ref}
       type={type}

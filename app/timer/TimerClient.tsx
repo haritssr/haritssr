@@ -7,6 +7,7 @@ import { useTimer } from "@/components/TimerProvider";
 
 import TaskList from "./components/TaskList";
 import type { TaskView } from "./components/taskPresentation";
+import TimerDataControls from "./components/TimerDataControls";
 import TimerToolbar from "./components/TimerToolbar";
 
 function subscribeToMobile(onChange: () => void) {
@@ -26,7 +27,6 @@ function getServerMobileSnapshot() {
 }
 
 export default function TimerClient() {
-  const { snapshot } = useTimer();
   const [view, setView] = useState<TaskView>("cards");
   const mobile = useSyncExternalStore(
     subscribeToMobile,
@@ -35,13 +35,15 @@ export default function TimerClient() {
   );
   return (
     <div className="space-y-5">
-      {snapshot?.mode === "demo" ? (
-        <p className="border-border bg-surface text-muted rounded-lg border p-4 text-sm">
-          Sample preview. Run this site locally to save your activities in daily
-          JSON files.
-        </p>
-      ) : null}
-      <TimerToolbar view={view} onViewChange={setView} />
+      <TimerDataControls>
+        {(backupActions) => (
+          <TimerToolbar
+            view={view}
+            onViewChange={setView}
+            backupActions={backupActions}
+          />
+        )}
+      </TimerDataControls>
       <TimerLoadError />
       <TaskList view={mobile ? "cards" : view} />
     </div>

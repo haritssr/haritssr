@@ -4,7 +4,7 @@ import type { SubmitEvent } from "react";
 
 import Button from "@/components/Button";
 import { useTimer } from "@/components/TimerProvider";
-import { taskSpent } from "@/utils/timer";
+import { canUseTimer, taskSpent } from "@/utils/timer";
 import type { TimerTask } from "@/utils/timer";
 
 import TaskFormDialog from "./TaskFormDialog";
@@ -12,137 +12,131 @@ import TaskFormDialog from "./TaskFormDialog";
 const TASK_SUGGESTIONS = [
   {
     activity: "Read a chapter",
-    description: "Read one chapter and write down the main takeaway.",
+    description: "Read and note the main takeaway.",
   },
   {
     activity: "Take a short walk",
-    description: "Step outside and walk at a comfortable pace.",
+    description: "Step outside for a gentle walk.",
   },
   {
     activity: "Practice a skill",
-    description: "Choose one technique and repeat it with focused attention.",
+    description: "Repeat one technique with focus.",
   },
   {
     activity: "Tidy the desk",
-    description: "Clear the surface and put everything back in its place.",
+    description: "Clear and organize the desk.",
   },
   {
     activity: "Plan tomorrow",
-    description: "Choose three priorities and prepare what you need.",
+    description: "Pick priorities for tomorrow.",
   },
   {
     activity: "Stretch",
-    description: "Gently stretch your shoulders, back, and legs.",
+    description: "Stretch your back and shoulders.",
   },
   {
     activity: "Review notes",
-    description: "Read through your notes and highlight anything to revisit.",
+    description: "Review notes and mark key ideas.",
   },
   {
     activity: "Work on a project",
-    description: "Pick one small milestone and work toward finishing it.",
+    description: "Finish one small milestone.",
   },
   {
     activity: "Get some fresh air",
-    description: "Spend a few quiet minutes outside away from your screen.",
+    description: "Enjoy a quiet moment outside.",
   },
   {
     activity: "Do a quick workout",
-    description: "Warm up, move through a short routine, and cool down.",
+    description: "Warm up, exercise, and cool down.",
   },
   {
     activity: "Rest your eyes",
-    description:
-      "Look away from the screen and focus on something in the distance.",
+    description: "Look away and rest your eyes.",
   },
   {
     activity: "Take a screen break",
-    description: "Step away from your devices and give your attention a rest.",
+    description: "Step away from screens and rest.",
   },
   {
     activity: "Breathe slowly",
-    description: "Sit comfortably and take slow, steady breaths.",
+    description: "Take slow, steady breaths.",
   },
   {
     activity: "Make a cup of tea",
-    description: "Prepare your favorite tea and enjoy it without distractions.",
+    description: "Enjoy tea without distractions.",
   },
   {
     activity: "Water the plants",
-    description: "Check the soil and water the plants that need it.",
+    description: "Check soil and water the plants.",
   },
   {
     activity: "Prepare a meal",
-    description: "Prepare the ingredients and make something nourishing.",
+    description: "Prepare a nourishing meal.",
   },
   {
     activity: "Fold the laundry",
-    description: "Fold clean clothes and put them away.",
+    description: "Fold clothes and put them away.",
   },
   {
     activity: "Clear the inbox",
-    description:
-      "Reply to urgent messages and archive what you no longer need.",
+    description: "Reply and archive old messages.",
   },
   {
     activity: "Write a journal",
-    description:
-      "Write about your day, your thoughts, or something you noticed.",
+    description: "Write about your day and thoughts.",
   },
   {
     activity: "Sketch an idea",
-    description: "Explore a rough idea on paper without worrying about polish.",
+    description: "Explore a rough idea on paper.",
   },
   {
     activity: "Practice guitar",
-    description: "Warm up your fingers and practice a short passage.",
+    description: "Practice a short piece of music.",
   },
   {
     activity: "Learn new words",
-    description: "Learn a few useful words and use each in a sentence.",
+    description: "Use new words in a sentence.",
   },
   {
     activity: "Solve a puzzle",
-    description: "Work through a puzzle and explain your reasoning.",
+    description: "Solve and explain your reasoning.",
   },
   {
     activity: "Review flashcards",
-    description: "Review a small set of cards and repeat the difficult ones.",
+    description: "Review cards and repeat hard ones.",
   },
   {
     activity: "Draft an outline",
-    description: "List the key points and arrange them in a clear order.",
+    description: "List and arrange the key points.",
   },
   {
     activity: "Fix a small bug",
-    description:
-      "Reproduce the issue, make a focused fix, and review the result.",
+    description: "Reproduce, fix, and review a bug.",
   },
   {
     activity: "Organize files",
-    description: "Group related files and remove unnecessary duplicates.",
+    description: "Group files and remove duplicates.",
   },
   {
     activity: "Plan the week",
-    description: "Review upcoming commitments and choose your main priorities.",
+    description: "Review plans and pick priorities.",
   },
   {
     activity: "Call a friend",
-    description:
-      "Catch up with someone and give the conversation your full attention.",
+    description: "Catch up and give your attention.",
   },
   {
     activity: "Listen to music",
-    description:
-      "Choose an album or playlist and enjoy a few uninterrupted songs.",
+    description: "Enjoy a few uninterrupted songs.",
   },
   {
     activity: "Read a poem",
-    description: "Read slowly and notice the images, rhythm, and meaning.",
+    description: "Notice imagery and rhythm.",
   },
   {
     activity: "Reflect on today",
-    description: "Note what went well and one thing to improve tomorrow.",
+    description: "Note wins and one improvement.",
   },
 ];
 
@@ -168,10 +162,15 @@ function readTaskForm(element: HTMLFormElement) {
   if (activity.length > 20) {
     return "Use 20 characters or fewer for the activity name.";
   }
-  const description = form.get("description");
+  const descriptionValue = form.get("description");
+  const description =
+    typeof descriptionValue === "string" ? descriptionValue.trim() : "";
+  if (description.length > 35) {
+    return "Use 35 characters or fewer for the description.";
+  }
   return {
     activity,
-    description: typeof description === "string" ? description.trim() : "",
+    description,
     duration,
   };
 }
@@ -185,7 +184,7 @@ export function EditTask({
   date: string;
   reached: boolean;
 }) {
-  const { act, snapshot, busy, clockOffset } = useTimer();
+  const { act, snapshot, drafts, clockOffset } = useTimer();
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   async function submit(event: SubmitEvent<HTMLFormElement>) {
@@ -200,9 +199,9 @@ export function EditTask({
       return;
     }
     setFormError(null);
-    if (await act({ action: "edit", date, taskId: task.id, ...values })) {
-      setOpen(false);
-    } else {
+    const saving = act({ action: "edit", date, taskId: task.id, ...values });
+    setOpen(false);
+    if (!(await saving)) {
       setFormError(
         "The task could not be saved. It may have finished. Please try again."
       );
@@ -210,38 +209,42 @@ export function EditTask({
   }
   async function deleteTask() {
     setFormError(null);
-    if (await act({ action: "delete", date, taskId: task.id })) {
-      setOpen(false);
-    } else {
+    const saving = act({ action: "delete", date, taskId: task.id });
+    setOpen(false);
+    if (!(await saving)) {
       setFormError("The task could not be deleted. Please try again.");
     }
   }
-  if (reached || snapshot?.mode !== "local") {
+  if (reached || !canUseTimer(snapshot)) {
     return null;
   }
   return (
     <Dialog.Root
       open={open}
       onOpenChange={(value) => {
-        if (!busy) {
-          setOpen(value);
-          setFormError(null);
-        }
+        setOpen(value);
+        setFormError(null);
       }}
     >
       <Dialog.Trigger
-        className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded text-base underline-offset-4 hover:underline focus-visible:outline-2 sm:text-sm"
-        disabled={busy}
+        render={
+          <Button
+            className="w-fit shrink-0"
+            size="mobile-roomy"
+            variant="secondary-strong"
+          />
+        }
+        title="Edit"
         aria-label={`Edit ${task.activity}`}
       >
         Edit
       </Dialog.Trigger>
       <TaskFormDialog
         title="Edit Task"
-        defaultActivity={task.activity}
-        defaultDescription={task.description}
-        defaultDuration={task.duration}
-        busy={busy}
+        defaultActivity={drafts[task.id]?.activity ?? task.activity}
+        defaultDescription={drafts[task.id]?.description ?? task.description}
+        defaultDuration={drafts[task.id]?.duration ?? task.duration}
+        busy={false}
         error={formError}
         onSubmit={submit}
         onDelete={deleteTask}
@@ -251,7 +254,7 @@ export function EditTask({
 }
 
 export function AddTask({ disabled }: { disabled: boolean }) {
-  const { act, snapshot, busy } = useTimer();
+  const { act, snapshot, drafts } = useTimer();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
   const [suggestion, setSuggestion] = useState({
@@ -274,7 +277,6 @@ export function AddTask({ disabled }: { disabled: boolean }) {
           (target.isContentEditable ||
             target.closest("input, textarea, select") !== null)) ||
         disabled ||
-        busy ||
         open ||
         document.querySelector('[role="dialog"][data-open]') !== null
       ) {
@@ -287,7 +289,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [busy, disabled, open]);
+  }, [disabled, open]);
 
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -300,9 +302,9 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       return;
     }
     setFormError(null);
-    if (await act({ action: "add", date: snapshot.today, ...values })) {
-      setOpen(false);
-    } else {
+    const saving = act({ action: "add", date: snapshot.today, ...values });
+    setOpen(false);
+    if (!(await saving)) {
       setFormError("The activity could not be saved. Please try again.");
     }
   }
@@ -310,34 +312,32 @@ export function AddTask({ disabled }: { disabled: boolean }) {
     <Dialog.Root
       open={open}
       onOpenChange={(value) => {
-        if (!busy) {
-          if (value) {
-            setSuggestion(
-              TASK_SUGGESTIONS[
-                Math.floor(Math.random() * TASK_SUGGESTIONS.length)
-              ] ?? { activity: "New task", description: "" }
-            );
-          }
-          setOpen(value);
-          setFormError(null);
+        if (value) {
+          setSuggestion(
+            TASK_SUGGESTIONS[
+              Math.floor(Math.random() * TASK_SUGGESTIONS.length)
+            ] ?? { activity: "New task", description: "" }
+          );
         }
+        setOpen(value);
+        setFormError(null);
       }}
     >
       <Dialog.Trigger
         aria-keyshortcuts="Shift+N"
-        aria-disabled={busy || undefined}
         disabled={disabled}
         ref={triggerRef}
         render={<Button variant="primary-subtle" />}
       >
-        <span>New Task</span>
+        <span>Add Task</span>
       </Dialog.Trigger>
       <TaskFormDialog
         title="New Task"
         submitLabel="Add"
-        defaultActivity={suggestion.activity}
-        defaultDescription={suggestion.description}
-        busy={busy}
+        defaultActivity={drafts.add?.activity ?? suggestion.activity}
+        defaultDescription={drafts.add?.description ?? suggestion.description}
+        defaultDuration={drafts.add?.duration ?? 300}
+        busy={false}
         error={formError}
         onSubmit={submit}
       />

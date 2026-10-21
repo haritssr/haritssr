@@ -21,7 +21,6 @@ yarn-error.log*
 # local env files
 .env
 .env.*
-!.env.example
 
 # local sqlite storage
 .data/

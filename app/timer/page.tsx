@@ -21,12 +21,15 @@ export default function TimerPage() {
       <PageHeader back={{ href: "/", name: "Home" }} path="/timer">
         <PageTitle>Timer</PageTitle>
         <PageDescription>
-          <TimerDate />
+          <InternalLink href="/timer/details" variant="inline">
+            Details
+          </InternalLink>
+          .{" "}
+          <InternalLink href="/timer/statistic" variant="inline">
+            Statistics
+          </InternalLink>
+          . <TimerDate />.
         </PageDescription>
-        <div className="flex flex-wrap gap-5">
-          <InternalLink href="/timer/statistic">Statistics</InternalLink>
-          <InternalLink href="/timer/details">Details</InternalLink>
-        </div>
       </PageHeader>
       <TimerClient />
     </>
