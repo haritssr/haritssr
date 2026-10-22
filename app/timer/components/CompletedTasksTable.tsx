@@ -82,12 +82,12 @@ export default function CompletedTasksTable({
     <Collapsible.Root
       open={open}
       onOpenChange={setOpen}
-      render={<section aria-label="Completed tasks" />}
+      render={<section aria-label="History" />}
       className="space-y-3"
     >
       <div className="flex flex-wrap items-center gap-3">
         <SectionHeading as="h3" variant="toolbar">
-          Completed
+          History
         </SectionHeading>
         <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-sm underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
           {open ? "Hide" : "View"}

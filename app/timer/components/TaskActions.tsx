@@ -9,8 +9,6 @@ import type { TimerTask } from "@/utils/timer";
 import { playTaskSound, prepareTaskSound } from "@/utils/timerSound";
 
 import DeleteTaskButton from "./DeleteTaskButton";
-import { EditTask } from "./TaskDialog";
-import type { TaskView } from "./taskPresentation";
 
 export default function TaskActions({
   date,
@@ -18,7 +16,6 @@ export default function TaskActions({
   running,
   label,
   variant,
-  view,
   presentation = "text",
   onPause,
 }: {
@@ -27,7 +24,6 @@ export default function TaskActions({
   running: boolean;
   label: string;
   variant: ComponentProps<typeof Button>["variant"];
-  view: TaskView;
   presentation?: "text" | "icons";
   onPause?: () => void;
 }) {
@@ -75,62 +71,51 @@ export default function TaskActions({
     ToggleIcon = ForwardIcon;
   }
   return (
-    <div className="flex items-center justify-between gap-3">
-      <div className="flex shrink-0 items-center">
-        <EditTask task={task} date={date} reached={false} />
-      </div>
-      <div
-        className={`flex items-center ${view === "cards" ? "gap-2.5" : "gap-3"}`}
-      >
-        {showDone ? null : (
-          <DeleteTaskButton
-            className="w-fit shrink-0"
-            title="Delete"
-            dimWhenDisabled={unavailable}
-            size="mobile-roomy"
-            disabled={disabled}
-            onDelete={async () =>
-              await act({ action: "delete", date, taskId: task.id })
-            }
-            variant="secondary-strong"
-            aria-label={`Delete ${task.activity}`}
-          />
-        )}
-        <Button
-          className={`w-fit shrink-0 ${showDone ? "" : "select-none"}`}
+    <div className="flex min-w-0 items-center justify-end gap-2">
+      {showDone ? null : (
+        <DeleteTaskButton
+          className="w-fit shrink-0"
+          title="Delete"
           dimWhenDisabled={unavailable}
-          size="mobile-roomy"
+          iconOnly
           disabled={disabled}
-          aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
-          title={showDone ? "Done" : label}
-          onClick={showDone ? finishTask : toggleRunning}
-          variant={showDone ? "secondary-strong" : variant}
-        >
-          {showDone ? (
-            <CheckIcon
-              strokeWidth={2.5}
-              aria-hidden="true"
-              className="size-5"
-            />
-          ) : (
-            <ToggleIcon aria-hidden="true" className="size-5" />
-          )}
-        </Button>
+          onDelete={async () =>
+            await act({ action: "delete", date, taskId: task.id })
+          }
+          variant="secondary-strong"
+          aria-label={`Delete ${task.activity}`}
+        />
+      )}
+      <Button
+        className={`w-fit shrink-0 ${showDone ? "" : "select-none"}`}
+        dimWhenDisabled={unavailable}
+        iconOnly
+        disabled={disabled}
+        aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
+        title={showDone ? "Done" : label}
+        onClick={showDone ? finishTask : toggleRunning}
+        variant={showDone ? "secondary-strong" : variant}
+      >
         {showDone ? (
-          <Button
-            className="w-fit shrink-0 select-none"
-            dimWhenDisabled={unavailable}
-            size="mobile-roomy"
-            disabled={disabled}
-            aria-label={`${label}: ${task.activity}`}
-            title={label}
-            onClick={toggleRunning}
-            variant={running ? "danger-subtle" : "attention-subtle"}
-          >
-            <ToggleIcon aria-hidden="true" className="size-5" />
-          </Button>
-        ) : null}
-      </div>
+          <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-5" />
+        ) : (
+          <ToggleIcon aria-hidden="true" className="size-5" />
+        )}
+      </Button>
+      {showDone ? (
+        <Button
+          className="w-fit shrink-0 select-none"
+          dimWhenDisabled={unavailable}
+          iconOnly
+          disabled={disabled}
+          aria-label={`${label}: ${task.activity}`}
+          title={label}
+          onClick={toggleRunning}
+          variant={running ? "danger-subtle" : "attention-subtle"}
+        >
+          <ToggleIcon aria-hidden="true" className="size-5" />
+        </Button>
+      ) : null}
     </div>
   );
 }

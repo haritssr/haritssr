@@ -1,4 +1,5 @@
 import { Dialog } from "@base-ui/react/dialog";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 
@@ -227,17 +228,15 @@ export function EditTask({
       }}
     >
       <Dialog.Trigger
-        render={
-          <Button
-            className="w-fit shrink-0"
-            size="mobile-roomy"
-            variant="secondary-strong"
-          />
-        }
+        className="text-muted hover:text-muted/70 focus-visible:outline-action flex h-5 w-fit shrink-0 cursor-pointer items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2"
         title="Edit"
         aria-label={`Edit ${task.activity}`}
       >
-        Edit
+        <AdjustmentsHorizontalIcon
+          aria-hidden="true"
+          className="size-5.5"
+          strokeWidth={1.5}
+        />
       </Dialog.Trigger>
       <TaskFormDialog
         title="Edit Task"

@@ -3,14 +3,13 @@ import type { CSSProperties, ReactNode } from "react";
 import { formatTimerTime } from "@/utils/timer";
 import type { TimerTask } from "@/utils/timer";
 
-import { TASK_VIEW_LAYOUT } from "./taskPresentation";
-import type { TaskAppearance, TaskView } from "./taskPresentation";
+import { TASK_LAYOUT } from "./taskPresentation";
+import type { TaskAppearance } from "./taskPresentation";
 
 export default function TaskProgress({
   task,
   spent,
   running,
-  view,
   appearance,
   compact = false,
   speedControl,
@@ -18,7 +17,6 @@ export default function TaskProgress({
   task: TimerTask;
   spent: number;
   running: boolean;
-  view: TaskView;
   appearance: TaskAppearance;
   compact?: boolean;
   speedControl?: ReactNode;
@@ -31,7 +29,7 @@ export default function TaskProgress({
   return (
     <div className={compact ? "@container space-y-1" : "space-y-2"}>
       <div
-        className={`tabular-nums ${compact ? "flex min-w-0 items-baseline justify-between gap-2 text-sm leading-4" : TASK_VIEW_LAYOUT[view].time}`}
+        className={`tabular-nums ${compact ? "flex min-w-0 items-baseline justify-between gap-2 text-sm leading-4" : TASK_LAYOUT.time}`}
       >
         <span className="flex min-w-0 items-baseline gap-0.5">
           <span className={`shrink-0 ${appearance.elapsed}`}>
@@ -44,7 +42,7 @@ export default function TaskProgress({
           {speedControl}
         </span>
         <span
-          className={`shrink-0 ${compact ? "hidden @min-[9rem]:inline" : TASK_VIEW_LAYOUT[view].percentage} ${appearance.elapsed}`}
+          className={`shrink-0 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} ${appearance.elapsed}`}
         >
           {percentageLabel}%
         </span>
@@ -52,7 +50,7 @@ export default function TaskProgress({
       <progress
         aria-label={`${task.activity}: time spent`}
         aria-valuetext={`${formatTimerTime(spent)} of ${formatTimerTime(task.duration)}`}
-        className={`bg-border [&::-webkit-progress-bar]:bg-border block w-full appearance-none overflow-hidden rounded-full border-0 text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_VIEW_LAYOUT[view].progress}`}
+        className={`bg-border [&::-webkit-progress-bar]:bg-border block w-full appearance-none overflow-hidden rounded-full border-0 text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_LAYOUT.progress}`}
         key={running ? "running" : "idle"}
         max={task.duration}
         style={progressStyle}

@@ -43,7 +43,7 @@ export default function TaskFormDialog({
       <Dialog.Popup
         initialFocus={nameRef}
         style={SHEET_STYLE}
-        className="border-border bg-background text-foreground shadow-floating fixed inset-x-0 bottom-0 z-90 max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-3xl border p-4 outline-hidden sm:inset-auto sm:top-1/2 sm:left-1/2 sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl"
+        className="border-border bg-background text-foreground shadow-floating fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-3xl border p-4 outline-hidden sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl"
       >
         <div
           aria-hidden="true"

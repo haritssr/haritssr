@@ -69,7 +69,6 @@ export default function FloatingTimerDock() {
 
   const appearance = selected
     ? taskAppearance(
-        "cards",
         selected.state.running,
         selected.state.paused,
         selected.state.reached
@@ -143,7 +142,6 @@ export default function FloatingTimerDock() {
                 task={selected.task}
                 spent={selected.state.spent}
                 running={selected.state.running}
-                view="cards"
                 appearance={appearance}
                 compact
               />
@@ -172,7 +170,6 @@ export default function FloatingTimerDock() {
               running={selected.state.running}
               label={selected.state.label}
               variant={appearance.button}
-              view="cards"
               presentation="icons"
               onPause={() => {
                 setSelection({

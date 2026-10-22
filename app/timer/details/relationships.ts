@@ -64,7 +64,7 @@ export const timerRelationships = [
       State -->|active tasks and derived state| Card["TaskCard.tsx"]
       State -->|completed tasks| Completed["CompletedTasksTable.tsx"]
       State -->|taskSpent| Time["utils/timer.ts"]
-      Card -->|taskAppearance / TASK_VIEW_LAYOUT| Appearance["taskPresentation.ts"]
+      Card -->|taskAppearance / TASK_LAYOUT| Appearance["taskPresentation.ts"]
       Card --> Desc["TaskDescription.tsx: description popover"]
       Card --> Progress["TaskProgress.tsx: time, percentage, progress bar"]
       Card --> Actions["TaskActions.tsx: Start, Pause, Continue, Done"]

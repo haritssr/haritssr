@@ -1,7 +1,4 @@
-import {
-  TASK_VIEW_LAYOUT,
-  taskAppearance,
-} from "../components/taskPresentation";
+import { TASK_LAYOUT, taskAppearance } from "../components/taskPresentation";
 import TaskProgress from "../components/TaskProgress";
 
 const examples = [
@@ -39,7 +36,6 @@ export default function TaskColorExamples() {
     >
       {examples.map((example) => {
         const appearance = taskAppearance(
-          "cards",
           example.running,
           example.paused,
           false
@@ -57,7 +53,7 @@ export default function TaskColorExamples() {
         return (
           <li
             key={example.label}
-            className={`flex min-w-0 flex-col gap-5 ${TASK_VIEW_LAYOUT.cards.surface} ${appearance.surface}`}
+            className={`flex min-w-0 flex-col gap-5 ${TASK_LAYOUT.surface} ${appearance.surface}`}
           >
             <div className="space-y-1.5">
               <p className="font-medium">{example.label}</p>
@@ -71,7 +67,6 @@ export default function TaskColorExamples() {
                 task={task}
                 spent={example.spent}
                 running={false}
-                view="cards"
                 appearance={appearance}
               />
             </div>

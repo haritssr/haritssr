@@ -6,7 +6,7 @@ run inside its `use client` boundary.
 
 | Change | File |
 | --- | --- |
-| Notification, Autoplay, Multitask, and Ticking toggles; Multitask confirmation; Cards/List controls | [TimerToolbar.tsx](TimerToolbar.tsx) |
+| Notification, Autoplay, Multitask, and Ticking toggles; Multitask confirmation | [TimerToolbar.tsx](TimerToolbar.tsx) |
 | Export/Import, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
 | Active card structure, title, and description placement | [TaskCard.tsx](TaskCard.tsx) |
@@ -19,7 +19,7 @@ run inside its `use client` boundary.
 | Add/Edit triggers and save behavior | [TaskDialog.tsx](TaskDialog.tsx) |
 | Shared modal dimensions, fields, and header actions | [TaskFormDialog.tsx](TaskFormDialog.tsx) |
 | Number inputs, stepper buttons, and duration presets | [DurationFields.tsx](DurationFields.tsx) |
-| Card/list dimensions, borders, shadow, spacing, and state colors | [taskPresentation.ts](taskPresentation.ts) |
+| Grid card dimensions, borders, shadow, spacing, and state colors | [taskPresentation.ts](taskPresentation.ts) |
 | Task ordering, completion partition, elapsed time, and Start/Pause/Continue state | [taskState.ts](taskState.ts) |
 | Floating-task eligibility, retained paused task, and most-recent-start ordering | [floatingTaskState.ts](floatingTaskState.ts) |
 | Site-wide floating task, switcher, and completion messages | [FloatingTimerDock.tsx](../../../components/FloatingTimerDock.tsx) |
@@ -36,12 +36,12 @@ vertically and uses a subtle scrollbar when needed. Longer descriptions in exist
 records remain readable and must be shortened when editing the task.
 
 `taskPresentation.ts` holds layout choices shared by the collection and cards.
-Within `TASK_VIEW_LAYOUT`, `collection` controls the outer grid and gaps,
+Within `TASK_LAYOUT`, `collection` controls the outer grid and gaps,
 `surface` controls the card shell, and `controls` controls the timer/action area.
 Element-specific styles stay beside their JSX in the component files above.
 
-The header places the title on the left, with a circular information icon for the description on the right.
-Edit uses a secondary text button on the left of the bottom action row; the two task actions stay grouped on the right with `justify-between`.
+The header places the title on the left, with an Adjustments Horizontal edit button and a circular description icon on the right.
+Cards use two columns from `sm`. Below the header, time and progress occupy 60% of the row, followed by a gap and the secondary and primary actions. Edit is a plain icon matching the description icon in size.
 The text-only speed control follows the total duration in the progress row. The description popover
 opens on hover or click. The speed button cycles through 1x, 1.5x, 2x,
 2.5x, and 3x, then returns to 1x. Each task defaults to 1x and saves its own speed
@@ -54,7 +54,7 @@ Personal timer actions and Multitask keep
 their opacity while unavailable; preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
 
-Completed tasks appear in `CompletedTasksTable` below active tasks in both views.
+Completed tasks appear in `CompletedTasksTable` below the active task grid.
 The section defaults collapsed. View reveals the sort controls and table; Hide
 collapses them again. The expanded table wraps task names and descriptions and
 scrolls horizontally on narrow screens. `TaskList` partitions tasks using their current elapsed
@@ -152,7 +152,7 @@ before sending later queued commands; uncertain writes are not automatically
 resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root README.
 
-Export and Import share a segmented icon-only group matching Cards/List,
+Export and Import share a segmented icon-only group,
 immediately beside the settings icons, with native hover labels and accessible names. `TimerDataControls` owns
 backup state and passes its actions into `TimerToolbar`. Only errors appear above
 the toolbar; save status, backup guidance, and success messages are omitted.

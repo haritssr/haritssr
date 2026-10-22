@@ -1,13 +1,10 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Toggle } from "@base-ui/react/toggle";
-import { ToggleGroup } from "@base-ui/react/toggle-group";
 import {
   BellAlertIcon,
   ForwardIcon,
-  ListBulletIcon,
   SpeakerWaveIcon,
   Square3Stack3DIcon,
-  Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { useRef, useState, useSyncExternalStore } from "react";
 import type { ReactNode, Ref } from "react";
@@ -17,7 +14,6 @@ import { useTimer } from "@/components/TimerProvider";
 import { canUseTimer } from "@/utils/timer";
 
 import { AddTask } from "./TaskDialog";
-import type { TaskView } from "./taskPresentation";
 
 function subscribePermission(onChange: () => void) {
   window.addEventListener("focus", onChange);
@@ -37,24 +33,19 @@ function serverPermission() {
 }
 
 export default function TimerToolbar({
-  view,
-  onViewChange,
   backupActions,
 }: {
   backupActions: ReactNode;
-  view: TaskView;
-  onViewChange: (view: TaskView) => void;
 }) {
   const { snapshot } = useTimer();
   return (
-    <div className="border-border flex w-full flex-wrap items-center justify-between gap-3 border-b border-dashed pb-5">
+    <div className="border-border mb-5 flex w-full flex-wrap items-center justify-between gap-3">
       <div className="shrink-0">
         <AddTask disabled={!canUseTimer(snapshot)} />
       </div>
       <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2">
         <TimerSettings />
         {backupActions}
-        <TaskViewSwitcher onViewChange={onViewChange} view={view} />
       </div>
     </div>
   );
@@ -243,44 +234,5 @@ function TimerSettingToggle({
       {icon}
       <span className="sr-only">{label}</span>
     </Toggle>
-  );
-}
-
-function TaskViewSwitcher({
-  onViewChange,
-  view,
-}: {
-  onViewChange: (view: TaskView) => void;
-  view: TaskView;
-}) {
-  return (
-    <ToggleGroup
-      aria-label="Task view"
-      className="isolate hidden shrink-0 items-center rounded sm:inline-flex"
-      onValueChange={(values: TaskView[]) => {
-        const [next] = values;
-        if (next !== undefined) {
-          onViewChange(next);
-        }
-      }}
-      value={[view]}
-    >
-      {(
-        [
-          { value: "cards", label: "Cards", icon: Squares2X2Icon },
-          { value: "list", label: "List", icon: ListBulletIcon },
-        ] as const
-      ).map(({ value, label, icon: Icon }) => (
-        <Toggle
-          aria-label={label}
-          className="border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground data-pressed:border-border data-pressed:text-action corner-squircle relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center gap-1.5 border px-3 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-xl last:rounded-r-xl focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 data-pressed:z-10 motion-reduce:transition-none"
-          key={value}
-          title={label}
-          value={value}
-        >
-          <Icon aria-hidden="true" className="size-4.5" />
-        </Toggle>
-      ))}
-    </ToggleGroup>
   );
 }

@@ -2,8 +2,8 @@ import type { TimerTask } from "@/utils/timer";
 
 import TaskActions from "./TaskActions";
 import TaskDescription from "./TaskDescription";
-import { TASK_VIEW_LAYOUT, taskAppearance } from "./taskPresentation";
-import type { TaskView } from "./taskPresentation";
+import { EditTask } from "./TaskDialog";
+import { TASK_LAYOUT, taskAppearance } from "./taskPresentation";
 import TaskProgress from "./TaskProgress";
 import TaskSpeedControl from "./TaskSpeedControl";
 import type { TaskState } from "./taskState";
@@ -11,16 +11,14 @@ import type { TaskState } from "./taskState";
 export default function TaskCard({
   task,
   date,
-  view,
   state,
 }: {
   task: TimerTask;
   date: string;
-  view: TaskView;
   state: TaskState;
 }) {
   const { spent, reached, running, paused, label } = state;
-  const appearance = taskAppearance(view, running, paused, reached);
+  const appearance = taskAppearance(running, paused, reached);
 
   if (reached) {
     return null;
@@ -29,38 +27,38 @@ export default function TaskCard({
   return (
     <div
       data-completed={reached || undefined}
-      className={`group/task min-w-0 flex-1 ${TASK_VIEW_LAYOUT[view].surface} ${TASK_VIEW_LAYOUT[view].item} ${appearance.surface}`}
+      className={`group/task min-w-0 flex-1 ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${appearance.surface}`}
     >
-      <TaskHeader task={task} />
+      <TaskHeader task={task} date={date} />
       <div
-        className={`group-data-completed/task:*:opacity-60 ${TASK_VIEW_LAYOUT[view].controls} ${view === "list" && (running || paused) ? "grid-cols-[minmax(0,1fr)_11rem]" : ""}`}
+        className={`group-data-completed/task:*:opacity-60 ${TASK_LAYOUT.controls}`}
       >
-        <TaskProgress
-          task={task}
-          spent={spent}
-          running={running}
-          view={view}
-          appearance={appearance}
-          speedControl={
-            <span className="ml-2 inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
-              <TaskSpeedControl task={task} date={date} showIcon={false} />
-            </span>
-          }
-        />
+        <div className="min-w-0">
+          <TaskProgress
+            task={task}
+            spent={spent}
+            running={running}
+            appearance={appearance}
+            speedControl={
+              <span className="ml-2 inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
+                <TaskSpeedControl task={task} date={date} showIcon={false} />
+              </span>
+            }
+          />
+        </div>
         <TaskActions
           date={date}
           task={task}
           running={running}
           label={label}
           variant={appearance.button}
-          view={view}
         />
       </div>
     </div>
   );
 }
 
-function TaskHeader({ task }: { task: TimerTask }) {
+function TaskHeader({ task, date }: { task: TimerTask; date: string }) {
   return (
     <div className="flex min-w-0 items-center justify-between gap-3">
       <p
@@ -69,7 +67,10 @@ function TaskHeader({ task }: { task: TimerTask }) {
       >
         {task.activity}
       </p>
-      <TaskDescription task={task} />
+      <div className="flex shrink-0 items-center gap-2">
+        <EditTask task={task} date={date} reached={false} />
+        <TaskDescription task={task} />
+      </div>
     </div>
   );
 }

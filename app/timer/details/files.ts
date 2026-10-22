@@ -10,7 +10,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/components/TimerToolbar.tsx",
-    "Notification, Autoplay, Multitask, and Ticking switches, backup icons, Cards/List selection, and Add Task.",
+    "Notification, Autoplay, Multitask, and Ticking switches, backup icons, and Add Task.",
   ],
   [
     "app/timer/components/TaskList.tsx",
@@ -18,11 +18,11 @@ export const implementationFiles = [
   ],
   [
     "app/timer/components/CompletedTasksTable.tsx",
-    "Completed Tasks, View/Hide controls, sorting, and completion status.",
+    "Collapsed History table, View/Hide controls, sorting, and completion status.",
   ],
   [
     "app/timer/components/TaskCard.tsx",
-    "Active card composition, title, description, speed, progress, and actions.",
+    "Three-column desktop cards, header icons, progress/speed, and icon actions.",
   ],
   [
     "app/timer/components/TaskProgress.tsx",
@@ -46,7 +46,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/components/TaskFormDialog.tsx",
-    "Shared Add/Edit modal, initial focus, character counters, clear buttons, and form actions.",
+    "90%-height mobile Add/Edit sheets, desktop dialogs, focus, counters, and form actions.",
   ],
   [
     "app/timer/components/DurationFields.tsx",
@@ -54,7 +54,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/components/taskPresentation.ts",
-    "Card/list layout, spacing, borders, shadows, and state colors.",
+    "Grid card layout, spacing, borders, shadows, and state colors.",
   ],
   [
     "app/timer/components/taskState.ts",
@@ -165,7 +165,11 @@ export const integrationFiles = [
     "app/layout.tsx",
     "Mounts TimerProvider so a running activity survives page navigation.",
   ],
-  ["app/page.tsx", "Links to Timer from the Home Tools section."],
+  ["app/page.tsx", "Home page content and tool navigation."],
+  [
+    "components/TopBar.tsx",
+    "Desktop Timer navigation and shared top bar account controls.",
+  ],
   ["app/api/page.tsx", "Documents the Timer API."],
   ["app/sitemap.ts", "Includes the public Timer pages in the sitemap."],
   ["data/routes.ts", "Makes Timer pages available in site search."],
@@ -183,7 +187,7 @@ export const integrationFiles = [
   ],
   [
     "components/FlowDiagram.tsx",
-    "Shared Pele viewer with zoom, drag-to-pan, keyboard scrolling, and a full-width dialog.",
+    "Shared Pele flowchart/ERD viewer with zoom, pan, keyboard scrolling, and a full-width dialog.",
   ],
   [
     "public/sw.js",

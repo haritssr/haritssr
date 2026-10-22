@@ -25,12 +25,14 @@ const ZOOM_STEP = 0.25;
 const DIAGRAM_FONT_FAMILY =
   'ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace';
 
-async function loadPele() {
-  const [pele, { default: flowchart }] = await Promise.all([
+async function loadPele(definition: string) {
+  const [pele, { default: renderer }] = await Promise.all([
     import("pele/core"),
-    import("pele/diagrams/flowchart"),
+    definition.trimStart().startsWith("erDiagram")
+      ? import("pele/diagrams/er")
+      : import("pele/diagrams/flowchart"),
   ]);
-  pele.register(flowchart);
+  pele.register(renderer);
   return pele;
 }
 
@@ -55,7 +57,7 @@ export default function FlowDiagram({
 
     async function render() {
       try {
-        const pele = await loadPele();
+        const pele = await loadPele(definition);
         await document.fonts.ready;
         if (cancelled) {
           return;
@@ -339,7 +341,7 @@ function DiagramViewport({
         style={dimensions}
       >
         <Image
-          alt={`${title} flowchart`}
+          alt={`${title} diagram`}
           className="pointer-events-none h-full w-full max-w-none"
           draggable={false}
           height={Math.ceil(diagram.height)}

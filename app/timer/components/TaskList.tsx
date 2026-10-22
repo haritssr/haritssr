@@ -3,11 +3,10 @@ import useTimerClock from "@/components/useTimerClock";
 
 import CompletedTasksTable from "./CompletedTasksTable";
 import TaskCard from "./TaskCard";
-import { TASK_VIEW_LAYOUT } from "./taskPresentation";
-import type { TaskView } from "./taskPresentation";
+import { TASK_LAYOUT } from "./taskPresentation";
 import { getTaskCollection } from "./taskState";
 
-export default function TaskList({ view }: { view: TaskView }) {
+export default function TaskList() {
   const { snapshot, clockOffset } = useTimer();
   const timestamp = useTimerClock(snapshot, clockOffset);
   if (snapshot === undefined) {
@@ -30,18 +29,10 @@ export default function TaskList({ view }: { view: TaskView }) {
   return (
     <div className="min-w-0 space-y-16">
       {active.length > 0 && (
-        <ul
-          aria-label="Today's activities"
-          className={TASK_VIEW_LAYOUT[view].collection}
-        >
+        <ul aria-label="Today's activities" className={TASK_LAYOUT.collection}>
           {active.map(({ task, state }) => (
             <li className="flex min-w-0" key={task.id}>
-              <TaskCard
-                date={snapshot.today}
-                task={task}
-                state={state}
-                view={view}
-              />
+              <TaskCard date={snapshot.today} task={task} state={state} />
             </li>
           ))}
         </ul>

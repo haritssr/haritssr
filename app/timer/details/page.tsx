@@ -12,19 +12,35 @@ import FileTable from "./FileTable";
 import { timerRelationships } from "./relationships";
 import TaskColorExamples from "./TaskColorExamples";
 
-const tursoSchemaDiagram = `flowchart TD
+const tursoSchemaDiagram = `erDiagram
   accTitle: Personal Timer Turso schema
-  accDescr: Timer calls a protected Next.js API. The API accesses daily records and singleton preferences in Turso. Each day contains multiple tasks linked by date.
-  Timer["Timer on your devices"] --> API["Protected Next.js API"]
-  API --> Days["timer_days: date (PK), revision"]
-  Days -->|one day contains many tasks; date foreign key| Tasks["timer_tasks: date + id (PK), position, activity, description, duration_seconds, spent_seconds, speed, started_at, last_started_at, completed_at, notification_claimed_at"]
-  API --> Preferences["timer_preferences: id = 1 (PK), revision, autoplay, multitask, notifications_enabled"]
-  class Timer action
-  class API attention
-  class Days,Tasks,Preferences success
-  classDef action stroke-width:2px
-  classDef attention stroke-width:2px
-  classDef success stroke-width:2px
+  accDescr: Each timer day contains zero or more tasks, linked by date. Preferences are an independent singleton table. PK marks primary keys, FK marks foreign keys, and UK marks unique keys.
+  timer_days ||--o{ timer_tasks : contains
+  timer_days {
+    TEXT date PK "Jakarta calendar date"
+    INTEGER revision "NOT NULL; nonnegative"
+  }
+  timer_tasks {
+    TEXT date PK,FK,UK "References timer_days.date; cascade delete"
+    TEXT id PK "Composite primary key: date, id"
+    INTEGER position UK "Unique pair: date, position"
+    TEXT activity "NOT NULL"
+    TEXT description "NOT NULL; empty string allowed"
+    INTEGER duration_seconds "1 to 86400"
+    REAL spent_seconds "0 to duration_seconds"
+    REAL speed "1, 1.5, 2, 2.5, or 3"
+    TEXT started_at "Nullable UTC timestamp"
+    TEXT last_started_at "Nullable UTC timestamp"
+    TEXT completed_at "Nullable UTC timestamp"
+    TEXT notification_claimed_at "Nullable UTC timestamp"
+  }
+  timer_preferences {
+    INTEGER id PK "Singleton: id = 1"
+    INTEGER revision "NOT NULL; default 0"
+    INTEGER autoplay "Boolean; default 0"
+    INTEGER multitask "Boolean; default 0"
+    INTEGER notifications_enabled "Boolean; default 1"
+  }
 `;
 
 const timerDatabaseStructure = `CREATE TABLE timer_days (
@@ -48,6 +64,10 @@ CREATE TABLE timer_tasks (
   PRIMARY KEY(date, id),
   UNIQUE(date, position)
 );
+
+CREATE INDEX timer_tasks_date_position ON timer_tasks(date, position);
+CREATE INDEX timer_tasks_running ON timer_tasks(date)
+  WHERE started_at IS NOT NULL;
 
 CREATE TABLE timer_preferences (
   id INTEGER PRIMARY KEY CHECK(id = 1),
@@ -86,8 +106,8 @@ export default function TimerDetailsPage() {
         >
           <ExplanationList>
             <li>
-              The main reason timer exist is so that we dont overdo something
-              like social media doom scrolling.
+              Timer helps you set limits on activities such as social media
+              scrolling, so they do not take more time than you intended.
             </li>
             <li>
               Timer is a daily activity tracker for focused work, learning,
@@ -132,7 +152,8 @@ export default function TimerDetailsPage() {
             <li>
               Add Task accepts a name up to 20 characters, an optional
               description up to 35, and a duration from one second to 24 hours,
-              entered as hours, minutes, and seconds.
+              entered as hours, minutes, and seconds. Presets offer 5, 15, 30,
+              and 60 minutes.
             </li>
             <li>
               The form prefills a random name and matching description, with
@@ -140,13 +161,18 @@ export default function TimerDetailsPage() {
               or using another dialog.
             </li>
             <li>
+              On mobile, Add and Edit open as bottom sheets at 90% of the screen
+              height, with scrolling for longer content. From the small
+              breakpoint upward, they use a centered, content-sized dialog.
               Field labels show character counts. Each Clear button has a hover
               hint, empties its field, and returns focus to it.
             </li>
             <li>
-              Cards compare time spent with the duration. Start begins, Pause
-              stops, and Continue resumes saved progress. Starting another task
-              pauses the current one unless Multitask is enabled.
+              Tasks use a card grid: one column on mobile, two from the small
+              breakpoint, and three on desktop. Cards compare time spent with
+              the duration. Start begins, Pause stops, and Continue resumes
+              saved progress. Starting another task pauses the current one
+              unless Multitask is enabled.
             </li>
             <li>
               Multitask runs tasks independently. Turning it off while several
@@ -158,9 +184,11 @@ export default function TimerDetailsPage() {
               finishes early and preserves actual time spent.
             </li>
             <li>
-              Only unfinished tasks can be edited, and their new duration must
-              exceed time spent. Older descriptions over 35 characters remain
-              readable but must be shortened when saving an edit.
+              The adjustments icon beside the title opens Edit; the information
+              icon shows the description on hover or click. Only unfinished
+              tasks can be edited, and their new duration must exceed time
+              spent. Older descriptions over 35 characters remain readable but
+              must be shortened when saving an edit.
             </li>
             <li>
               Autoplay starts the next unfinished task after Done or Reached
@@ -172,10 +200,10 @@ export default function TimerDetailsPage() {
               across devices and reloads; Ticking stays local and resets off.
             </li>
             <li>
-              The underlined speed control beside Description cycles through 1x,
-              1.5x, 2x, 2.5x, and 3x. Each task remembers its speed across
-              pauses and reloads. At 2x, one real second counts as two; changing
-              speed preserves progress, and statistics include accelerated time.
+              The speed control beside elapsed time cycles through 1x, 1.5x, 2x,
+              2.5x, and 3x. Each task remembers its speed across pauses and
+              reloads. At 2x, one real second counts as two; changing speed
+              preserves progress, and statistics include accelerated time.
             </li>
             <li>
               Legacy JSON records may include X Traversal and House keeping,
@@ -194,8 +222,9 @@ export default function TimerDetailsPage() {
                 completed tasks use muted colors.
               </li>
               <li>
-                Completed Tasks sits below active tasks in Cards and List views.
-                It starts collapsed; View opens the table and Hide closes it.
+                History sits below the active task grid and contains completed
+                tasks. It starts collapsed; View opens the table and Hide closes
+                it.
               </li>
               <li>
                 The table shows descriptions, time spent, duration, percentage,
@@ -337,7 +366,7 @@ export default function TimerDetailsPage() {
         <Section
           id="proposed-turso-schema"
           title="Turso schema"
-          description="One personal database shared by your signed-in devices."
+          description="Entity tables, column types, keys, and the day-to-task relationship."
         >
           <FlowDiagram
             definition={tursoSchemaDiagram}
@@ -346,9 +375,12 @@ export default function TimerDetailsPage() {
           <div className="max-w-3xl">
             <ExplanationList>
               <li>
-                Three tables serve one owner, with no user IDs or account table.
-                A protected Next.js API verifies the configured Google owner;
-                Turso credentials stay on the server.
+                The ERD shows primary keys (PK), foreign keys (FK), and unique
+                keys (UK). Multiple marked columns form the composite keys
+                described below. Each day has zero or more tasks; preferences
+                are independent. Three tables serve one owner, with no user IDs
+                or account table. A protected Next.js API verifies the
+                configured Google owner; Turso credentials stay on the server.
               </li>
               <li>
                 <code>timer_days</code>: <code>date</code> is the primary key,
