@@ -118,6 +118,11 @@
   existing service worker locally only when a permitted completion needs it.
 - Subscribe to the [RSS feed](https://haritssr.com/feed.xml).
 
+Components used by a single route live beside that route’s page. Related groups
+shared across routes within a feature use `_components/`, such as
+`app/labs/_components/`; shared UI primitives remain in the root `components/`
+directory.
+
 User Interface labs live at `/labs/user-interface` and its child
 routes. Labs uses `/labs` throughout navigation, metadata, search, and the sitemap;
 the previous `/experiments` routes have no redirects or aliases. Discontinued

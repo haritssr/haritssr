@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 
+import { LabHeaderContext } from "@/app/labs/_components/LabPageHeader";
 import ArticleBackToTop from "@/components/ArticleBackToTop";
-import { LabHeaderContext } from "@/components/LabPageHeader";
 import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 
 interface LabDomainShellProps {

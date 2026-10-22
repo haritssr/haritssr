@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 
 export default function InputList() {
   const [input, setInput] = useState<string>("");

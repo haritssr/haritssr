@@ -3,8 +3,8 @@
 import type { ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import ExplanationList from "@/components/ExplanationList";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 import data from "./books.json";

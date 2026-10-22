@@ -3,7 +3,7 @@
 import { parseAsInteger, useQueryState } from "nuqs";
 import { Suspense, useState } from "react";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 // import { IncrementButton } from "../../../app/times-table/IncrementButton";
 // import TimesTableComponent from "../../../app/times-table/TimesTable";
 

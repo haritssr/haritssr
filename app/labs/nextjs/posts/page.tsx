@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import { getSortedPostsData } from "@/utils/posts";
 

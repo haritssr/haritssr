@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 
 export default function Stopwatch() {
   const [time, setTime] = useState<number>(0);

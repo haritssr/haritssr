@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import ExplanationList from "@/components/ExplanationList";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 const defaultFormData = {

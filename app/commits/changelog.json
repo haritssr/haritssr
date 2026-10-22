@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "92cc618d3addc303c3e14bfb19d34ef11b01ad1c",
+      "date": "2026-10-23T05:28:42+07:00",
+      "subject": "refactor(timer): colocate UI state and storage modules"
+    },
+    {
       "hash": "787e16ad7c5a7460944508043839974c4c793ff3",
       "date": "2026-10-22T21:46:34+07:00",
       "subject": "style(TopBar): unify icon sizes and strengthen the mobile site label"

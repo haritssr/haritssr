@@ -3,10 +3,10 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 export default function ReactConfettiDemo() {

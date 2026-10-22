@@ -4,7 +4,7 @@ import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 type Theme = "light" | "dark";

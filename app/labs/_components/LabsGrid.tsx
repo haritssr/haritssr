@@ -1,8 +1,8 @@
+import DiscontinuedLabs from "@/app/labs/_components/DiscontinuedLabs";
 import {
   DiscontinuedLabsData,
   discontinuedLabHistory,
 } from "@/app/labs/discontinued-data";
-import DiscontinuedLabs from "@/components/DiscontinuedLabs";
 import ExternalLink from "@/components/ExternalLink";
 import { getAvailableLabDomains } from "@/utils/labCatalog";
 

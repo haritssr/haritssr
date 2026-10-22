@@ -2,7 +2,7 @@
 
 import Balancer from "react-wrap-balancer";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 export default function ReactWrapBalancerDemo() {

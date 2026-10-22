@@ -1,8 +1,8 @@
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
-import ExternalLink from "@/components/ExternalLink";
 
 import "katex/dist/katex.min.css";
-import LabPageHeader from "@/components/LabPageHeader";
+import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 import katexify from "@/utils/katexify";

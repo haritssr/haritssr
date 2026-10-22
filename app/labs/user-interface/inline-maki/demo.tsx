@@ -9,7 +9,7 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 
 export default function InlineMakiDemo() {
   return (

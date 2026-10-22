@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { connection } from "next/server";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import { DATABASE_LABS_ENABLED } from "@/utils/databaseLabs";
 import { createPageMetadata } from "@/utils/pageMetadata";

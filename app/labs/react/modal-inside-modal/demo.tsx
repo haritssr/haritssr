@@ -4,8 +4,8 @@ import { Dialog } from "@base-ui/react/dialog";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import type { ReactNode } from "react";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import Button from "@/components/Button";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 export default function ReactModalInsideModalDemo() {

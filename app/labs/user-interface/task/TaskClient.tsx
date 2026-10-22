@@ -4,8 +4,8 @@ import { NumberField } from "@base-ui/react/number-field";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChangeEvent, MouseEvent, SubmitEvent } from "react";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import InternalLink from "@/components/InternalLink";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 import {

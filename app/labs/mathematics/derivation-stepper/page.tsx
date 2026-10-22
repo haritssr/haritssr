@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
 import ExternalLink from "@/components/ExternalLink";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 

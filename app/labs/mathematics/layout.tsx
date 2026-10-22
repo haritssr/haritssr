@@ -1,8 +1,8 @@
 import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 
+import LabDomainLayout from "@/app/labs/_components/LabDomainLayout";
 import { getLabDomainMetadata } from "@/app/labs/data";
-import LabDomainLayout from "@/components/LabDomainLayout";
 
 export const metadata: Metadata = getLabDomainMetadata("mathematics");
 

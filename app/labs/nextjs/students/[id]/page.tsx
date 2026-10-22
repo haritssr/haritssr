@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import { createPageMetadata } from "@/utils/pageMetadata";
 

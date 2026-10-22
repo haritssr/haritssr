@@ -1,7 +1,7 @@
 import Image from "next/image";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import ExternalLink from "@/components/ExternalLink";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 export default function TailwindNewspaperDemo() {

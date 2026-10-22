@@ -3,7 +3,7 @@
 import { createContext, memo, useContext, useState } from "react";
 import type { ChangeEvent } from "react";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 interface NameInputAddressProps {

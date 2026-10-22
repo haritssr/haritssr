@@ -2,8 +2,8 @@ import Image from "next/image";
 
 import "katex/dist/katex.min.css";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import katexify from "@/utils/katexify";
 

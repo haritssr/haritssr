@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { ReactElement, ReactNode, ReactPortal } from "react";
 import type { JSX } from "react/jsx-runtime";
 
-import LabPageHeader from "@/components/LabPageHeader";
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 interface Todo {

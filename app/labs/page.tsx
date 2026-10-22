@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import LabsGrid from "@/components/LabsGrid";
+import LabsGrid from "@/app/labs/_components/LabsGrid";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";

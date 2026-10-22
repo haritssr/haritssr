@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
 import InternalLink from "@/components/InternalLink";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
 import { NextjsStudentsData } from "./data";

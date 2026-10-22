@@ -1,15 +1,10 @@
 import "katex/dist/katex.min.css";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
+import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
 import Accordion, { AccordionItem } from "@/components/Accordion";
-import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import PrerequisiteGraph from "@/components/PrerequisiteGraph";
-import type {
-  PrerequisiteGraphEdgeData,
-  PrerequisiteGraphNodeData,
-} from "@/components/PrerequisiteGraph";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import Table from "@/components/Table";
@@ -29,6 +24,11 @@ import type {
 } from "./_data";
 import DependentFormulas from "./DependentFormulas";
 import type { QuantityDependents } from "./DependentFormulas";
+import PrerequisiteGraph from "./PrerequisiteGraph";
+import type {
+  PrerequisiteGraphEdgeData,
+  PrerequisiteGraphNodeData,
+} from "./PrerequisiteGraph";
 
 interface UnitsTableProps {
   caption: string;
