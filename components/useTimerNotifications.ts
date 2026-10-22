@@ -52,8 +52,20 @@ export default function useTimerNotifications({
   autoplay: boolean;
   notificationsEnabled: boolean;
 }) {
-  const [completion, setCompletion] = useState<string | null>(null);
+  const [completion, setCompletion] = useState<TimerNotice | null>(null);
   const claiming = useRef(new Set<string>());
+
+  useEffect(() => {
+    let timeout: number | undefined;
+    if (completion !== null) {
+      timeout = window.setTimeout(() => {
+        setCompletion(null);
+      }, 5000);
+    }
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [completion]);
 
   useEffect(() => {
     if (!canUseTimer(snapshot)) {
@@ -74,7 +86,7 @@ export default function useTimerNotifications({
         .then(async (result) => {
           publish(result.snapshot);
           if (result.notification !== null) {
-            setCompletion(result.notification.activity);
+            setCompletion(result.notification);
             playTaskSound(prepareTaskSound(), "reached");
             if (
               result.snapshot.preferences?.notificationsEnabled ??
@@ -93,5 +105,5 @@ export default function useTimerNotifications({
     }
   }, [snapshot, publish, notificationsEnabled, autoplay]);
 
-  return { completion, setCompletion };
+  return { completion: completion?.activity ?? null, setCompletion };
 }

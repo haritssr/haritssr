@@ -133,6 +133,8 @@ modules keep independent work separate:
   warnings, the earliest task completion, and midnight refreshes.
 - [useTimerNotifications.ts](../../../components/useTimerNotifications.ts) claims
   completions and supplies sound, browser notifications, and visible feedback.
+  Visible completion messages dismiss automatically after five seconds; a new
+  completion restarts that timeout, and the close button dismisses them immediately.
 - [store.ts](../store.ts) persists daily records, and
   [timerSound.ts](../../../utils/timerSound.ts) generates sound.
 
