@@ -1,7 +1,9 @@
+import CommitHourlyChart from "@/app/commits/_components/CommitHourlyChart";
+import CommitTable, {
+  ModelSuitabilityLegend,
+} from "@/app/commits/_components/CommitTable";
 import history from "@/app/commits/changelog.json";
 import Accordion, { AccordionItem } from "@/components/Accordion";
-import CommitHourlyChart from "@/components/CommitHourlyChart";
-import CommitTable, { ModelSuitabilityLegend } from "@/components/CommitTable";
 import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";

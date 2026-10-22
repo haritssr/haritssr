@@ -26,6 +26,7 @@ export default defineConfig({
     {
       files: [
         "components/**",
+        "app/commits/_components/**",
         "app/timer/_components/FloatingTimerDock.tsx",
       ],
       rules: {

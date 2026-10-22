@@ -235,6 +235,8 @@ without extra scrolling when the content fits. Longer content still scrolls norm
 The root reserves symmetric scrollbar gutters so expanding accordions or navigating
 between short and long pages keeps the centered layout in place.
 
+Commit-specific components live in `app/commits/_components/`.
+
 Commit history defaults to the latest recorded day and renders at most 50 rows
 on first load. `/api/commits` filters the committed snapshot and computes summary
 counts and activity buckets on the server; later selections load on demand with

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "96573ac4c643c3842a19c8ff227e61ebf5a6e732",
+      "date": "2026-10-23T05:28:57+07:00",
+      "subject": "refactor(labs): colocate lab components with their routes"
+    },
+    {
       "hash": "92cc618d3addc303c3e14bfb19d34ef11b01ad1c",
       "date": "2026-10-23T05:28:42+07:00",
       "subject": "refactor(timer): colocate UI state and storage modules"

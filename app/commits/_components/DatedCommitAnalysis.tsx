@@ -1,9 +1,9 @@
 import type { ComponentProps } from "react";
 
+import CommitHourlyChart from "@/app/commits/_components/CommitHourlyChart";
+import CommitModelSuitability from "@/app/commits/_components/CommitModelSuitability";
+import CommitTable from "@/app/commits/_components/CommitTable";
 import history from "@/app/commits/changelog.json";
-import CommitHourlyChart from "@/components/CommitHourlyChart";
-import CommitModelSuitability from "@/components/CommitModelSuitability";
-import CommitTable from "@/components/CommitTable";
 import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";

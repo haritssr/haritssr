@@ -1,4 +1,4 @@
-import CommitActivityChart from "@/components/CommitActivityChart";
+import CommitActivityChart from "@/app/commits/_components/CommitActivityChart";
 import { activityBuckets, prepareCommits } from "@/utils/changelog";
 import type { ChangelogCommit } from "@/utils/changelog";
 

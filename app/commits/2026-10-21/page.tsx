@@ -1,4 +1,4 @@
-import DatedCommitAnalysis from "@/components/DatedCommitAnalysis";
+import DatedCommitAnalysis from "@/app/commits/_components/DatedCommitAnalysis";
 import { october21AnalysisRoute } from "@/data/routes";
 import { createPageMetadata } from "@/utils/pageMetadata";
 

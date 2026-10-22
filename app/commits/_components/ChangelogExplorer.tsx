@@ -14,9 +14,9 @@ import {
 } from "react";
 import useSWR from "swr";
 
+import CommitActivityChart from "@/app/commits/_components/CommitActivityChart";
+import CommitTable from "@/app/commits/_components/CommitTable";
 import Button from "@/components/Button";
-import CommitActivityChart from "@/components/CommitActivityChart";
-import CommitTable from "@/components/CommitTable";
 import Section from "@/components/Section";
 import { SelectField } from "@/components/SelectField";
 import {

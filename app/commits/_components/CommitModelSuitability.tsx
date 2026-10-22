@@ -1,4 +1,6 @@
-import CommitTable, { ModelSuitabilityLegend } from "@/components/CommitTable";
+import CommitTable, {
+  ModelSuitabilityLegend,
+} from "@/app/commits/_components/CommitTable";
 import ExternalLink from "@/components/ExternalLink";
 import Section from "@/components/Section";
 import type { ChangelogCommit } from "@/utils/changelog";

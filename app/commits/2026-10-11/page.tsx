@@ -1,10 +1,10 @@
-import history from "@/app/commits/changelog.json";
-import Accordion, { AccordionItem } from "@/components/Accordion";
-import CommitHourlyChart from "@/components/CommitHourlyChart";
+import CommitHourlyChart from "@/app/commits/_components/CommitHourlyChart";
 import CommitTable, {
   ModelSuitabilityLegend,
   SuitabilityLabel,
-} from "@/components/CommitTable";
+} from "@/app/commits/_components/CommitTable";
+import history from "@/app/commits/changelog.json";
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";

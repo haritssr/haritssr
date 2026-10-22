@@ -1,4 +1,4 @@
-import ChangelogExplorer from "@/components/ChangelogExplorer";
+import ChangelogExplorer from "@/app/commits/_components/ChangelogExplorer";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
