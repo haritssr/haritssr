@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "9900685d51fe5feb4a79cb9da8609c723268855d",
+      "date": "2026-10-22T15:18:03+07:00",
+      "subject": "style(PageDescription): use base text size on mobile"
+    },
+    {
       "hash": "59dc40e302149592b16df4f8a26b78d5524ef0e8",
       "date": "2026-10-22T15:17:57+07:00",
       "subject": "fix(footer): match spacing above the floating timer"

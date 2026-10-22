@@ -234,7 +234,7 @@ export function EditTask({
       >
         <AdjustmentsHorizontalIcon
           aria-hidden="true"
-          className="size-5.5"
+          className="size-5"
           strokeWidth={1.5}
         />
       </Dialog.Trigger>
