@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import ProjectsCard from "@/components/ProjectsCard";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import { ProjectsData } from "./data";
+import ProjectsCard from "./ProjectsCard";
 
 const PROJECTS_DESCRIPTION =
   "Details about the projects I've worked on and how they were handled.";

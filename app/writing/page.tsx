@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import WritingTable from "@/components/WritingTable";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { WRITING_DESCRIPTION } from "@/utils/site";
+
+import WritingTable from "./WritingTable";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/writing",

@@ -4,11 +4,11 @@ import { notFound } from "next/navigation";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import WritingArticle from "@/components/WritingArticle";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { allWritingPosts, getWritingPost } from "@/utils/writing-posts";
 
 import { getWritingModule } from "./writing-modules";
+import WritingArticle from "./WritingArticle";
 
 export function generateStaticParams() {
   return allWritingPosts.map((post) => ({

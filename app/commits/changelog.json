@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "288d0c8ff5bed1b0b8cc77372c04094e457d166a",
+      "date": "2026-10-23T05:29:08+07:00",
+      "subject": "refactor(commits): colocate charts and history components"
+    },
+    {
       "hash": "96573ac4c643c3842a19c8ff227e61ebf5a6e732",
       "date": "2026-10-23T05:28:57+07:00",
       "subject": "refactor(labs): colocate lab components with their routes"

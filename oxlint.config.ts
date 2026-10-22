@@ -26,8 +26,9 @@ export default defineConfig({
     {
       files: [
         "components/**",
-        "app/commits/_components/**",
         "app/timer/_components/FloatingTimerDock.tsx",
+        "app/commits/_components/**",
+        "app/writing/WritingTable.tsx",
       ],
       rules: {
         // Component definitions own their appearance and class composition.
