@@ -170,7 +170,7 @@ function Profile() {
       <section aria-label="About" id="Identity">
         <ul
           aria-label="Profile details"
-          className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5 wrap-break-word"
+          className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word"
         >
           <li>Web Product Engineer</li>
           <li>Science Teacher</li>
@@ -193,7 +193,7 @@ function Profile() {
         <hr className="border-border my-4" />
         <ul
           aria-label="Contact details"
-          className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5 wrap-break-word"
+          className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word"
         >
           {contacts.map((contact, index) => (
             <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
@@ -209,12 +209,22 @@ function Profile() {
 function PersonalDetails() {
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      <div className="corner-squircle bg-interface-hover rounded-xl">
+      <div className="corner-squircle bg-interface-hover flex items-center justify-center rounded-xl py-8 lg:col-start-1 lg:py-0">
+        <Image
+          alt={profileName}
+          className="size-25 rounded-full"
+          height={100}
+          loading="eager"
+          src="/images/blur.jpg"
+          width={100}
+        />
+      </div>
+      <div className="corner-squircle bg-interface-hover rounded-xl lg:col-start-2">
         <Profile />
       </div>
-      <div className="corner-squircle bg-interface-hover min-w-0 rounded-xl p-4 lg:col-span-2">
+      <div className="corner-squircle bg-interface-hover min-w-0 rounded-xl p-4 lg:col-span-2 lg:col-start-3">
         <section aria-label="Personal notes and words" id="personal-notes">
-          <ul className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5">
+          <ul className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5">
             <li>Touch typist, ±90 WPM.</li>
             <li>Former chess player, ±2000 Elo.</li>
             <li>I develop with Codex CLI in Zed.</li>
@@ -222,7 +232,7 @@ function PersonalDetails() {
             <li>JS, TS, Effect, React, Next.js, FP, Math, Phy, and Edu.</li>
           </ul>
           <hr className="border-border my-4" />
-          <ul className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5">
+          <ul className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5">
             <li>
               <ExternalLink
                 href="https://youtu.be/H7Sfo3lMB8c?t=72"
@@ -237,16 +247,6 @@ function PersonalDetails() {
             <li>What gets measured gets managed</li>
           </ul>
         </section>
-      </div>
-      <div className="corner-squircle bg-interface-hover order-first flex justify-center rounded-xl py-8 sm:order-0 lg:col-start-4 lg:self-start lg:justify-self-end lg:bg-transparent lg:p-0">
-        <Image
-          alt={profileName}
-          className="size-25 rounded-full"
-          height={100}
-          loading="eager"
-          src="/images/blur.jpg"
-          width={100}
-        />
       </div>
     </div>
   );

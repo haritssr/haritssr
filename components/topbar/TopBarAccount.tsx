@@ -4,7 +4,6 @@ import { Menu } from "@base-ui/react/menu";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-import Button from "@/components/Button";
 import { useTimerSession } from "@/utils/timerSession";
 
 export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
@@ -65,10 +64,8 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
       </Menu.Trigger>
       <Menu.Portal>
         <Menu.Positioner align="end" sideOffset={12} className="z-60">
-          <Menu.Popup className="border-border text-foreground corner-squircle max-w-[calc(100vw-2rem)] rounded-2xl border bg-white/80 p-1 shadow-xl outline-hidden backdrop-blur-lg">
-            <p className="text-muted px-3 py-2 text-sm break-all">
-              {account.email}
-            </p>
+          <Menu.Popup className="border-border text-foreground corner-squircle max-w-[calc(100vw-2rem)] space-y-2 rounded-2xl border bg-white/80 p-2 shadow-xl outline-hidden backdrop-blur-lg">
+            <p className="text-muted text-sm break-all">{account.email}</p>
             <form
               action="/api/timer/auth/logout"
               className="w-full"
@@ -76,14 +73,8 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
             >
               <Menu.Item
                 nativeButton
-                render={
-                  <Button
-                    aria-label="Sign out"
-                    type="submit"
-                    variant="secondary"
-                  />
-                }
-                className="data-highlighted:bg-interface-hover w-full"
+                render={<button aria-label="Sign out" type="submit" />}
+                className="text-secondary-foreground hover:bg-interface-hover hover:text-secondary-hover-foreground data-highlighted:bg-interface-hover data-highlighted:text-secondary-hover-foreground corner-squircle border-border focus-visible:outline-foreground block w-full! cursor-pointer rounded-xl border bg-white px-3 py-1.5 text-center text-sm select-none focus-visible:outline-2"
               >
                 Sign out
               </Menu.Item>
