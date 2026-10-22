@@ -234,7 +234,7 @@ function TimerSettingToggle({
     <Toggle
       ref={ref}
       aria-label={label}
-      className={`border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground data-pressed:border-border data-pressed:text-action corner-squircle relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center gap-1.5 border px-3 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-xl last:rounded-r-xl focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-pressed:z-10 motion-reduce:transition-none ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
+      className={`border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground data-pressed:border-border data-pressed:text-action corner-squircle relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center gap-1.5 border px-2 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-xl last:rounded-r-xl focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-pressed:z-10 motion-reduce:transition-none sm:px-3 ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
       disabled={disabled}
       onPressedChange={onCheckedChange}
       pressed={checked}

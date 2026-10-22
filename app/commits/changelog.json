@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "204e9fa2b512b3532732e422e35971487bfe33ac",
+      "date": "2026-10-22T10:32:13+07:00",
+      "subject": "fix(timer): improve authentication configuration diagnostics"
+    },
+    {
       "hash": "ad248f183a7f0067dbce996197afa7e4463cfb34",
       "date": "2026-10-22T04:35:45+07:00",
       "subject": "style(timer): shorten Add Task label on mobile"
