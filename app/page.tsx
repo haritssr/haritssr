@@ -1,7 +1,7 @@
 import {
   DocumentTextIcon,
   QueueListIcon,
-  SquaresPlusIcon,
+  ClockIcon,
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import Image from "next/image";
 import history from "@/app/commits/changelog.json";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
+import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -53,7 +54,9 @@ export default function Home() {
       />
       <div className="space-y-16">
         <PersonalDetails />
-        <Tools />
+        <Section title="Tools">
+          <Tools />
+        </Section>
       </div>
     </>
   );
@@ -64,12 +67,13 @@ function Profile() {
     <div className="min-w-0 p-4">
       <section aria-label="About" id="Identity">
         <ul
-          aria-label="Profile and contact details"
-          className="text-foreground/70 marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word"
+          aria-label="Profile details"
+          className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5 wrap-break-word"
         >
-          <li>Product Engineer</li>
+          <li>Web Product Engineer</li>
           <li>Science Teacher</li>
           <li>
+            Build{" "}
             <ExternalLink
               href="https://www.harimaki.com"
               name="Harimaki"
@@ -77,6 +81,18 @@ function Profile() {
             />
           </li>
           <li>Tangerang, Indonesia</li>
+          <li>
+            <span className="text-secondary-accent">haritssr</span> ={" "}
+            <span className="text-secondary-accent">harits</span>{" "}
+            <span className="text-secondary-accent">s</span>yah{" "}
+            <span className="text-secondary-accent">r</span>ahmatullah
+          </li>
+        </ul>
+        <hr className="border-border my-4" />
+        <ul
+          aria-label="Contact details"
+          className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5 wrap-break-word"
+        >
           {contacts.map((contact, index) => (
             <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
               {renderContact(contact)}
@@ -96,23 +112,15 @@ function PersonalDetails() {
       </div>
       <div className="corner-squircle bg-interface-hover min-w-0 rounded-xl p-4 lg:col-span-2">
         <section aria-label="Personal notes and words" id="personal-notes">
-          <ul className="marker:text-muted list-outside list-disc space-y-2 pl-5">
+          <ul className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5">
             <li>Touch typist, ±90 WPM.</li>
             <li>Former chess player, ±2000 Elo.</li>
-            <li>
-              <span className="text-foreground">haritssr</span> ={" "}
-              <span className="text-foreground">harits</span>{" "}
-              <span className="text-foreground">s</span>yah{" "}
-              <span className="text-foreground">r</span>ahmatullah
-            </li>
             <li>I develop with Codex CLI in Zed.</li>
-            <li>Effective/Accelerationism</li>
-            <li>
-              Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
-              Physics, and Education.
-            </li>
-            <li>Existence = f(constraints, maintainence, ...)</li>
-            <li>100% is easier than 98%</li>
+
+            <li>JS, TS, Effect, React, Next.js, FP, Math, Phy, and Edu.</li>
+          </ul>
+          <hr className="border-border my-4" />
+          <ul className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5">
             <li>
               <ExternalLink
                 href="https://youtu.be/H7Sfo3lMB8c?t=72"
@@ -121,10 +129,14 @@ function PersonalDetails() {
               />{" "}
               &gt; Hedonic
             </li>
+            <li>Effective/Accelerationism</li>
+            <li>Existence = f(constraints, maintainence, ...)</li>
+            <li>100% is easier than 98%</li>
+            <li>What gets measured gets managed</li>
           </ul>
         </section>
       </div>
-      <div className="corner-squircle bg-interface-hover order-first flex justify-center rounded-xl py-8 sm:order-none lg:col-start-4 lg:self-start lg:justify-self-end lg:bg-transparent lg:p-0">
+      <div className="corner-squircle bg-interface-hover order-first flex justify-center rounded-xl py-8 sm:order-0 lg:col-start-4 lg:self-start lg:justify-self-end lg:bg-transparent lg:p-0">
         <Image
           alt={profileName}
           className="size-25 rounded-full"
@@ -144,12 +156,12 @@ function Tools() {
       className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
       <IndexCard
-        title="Design"
-        description="Components and patterns used across this site."
-        href="/design"
+        title="Timer"
+        description="A simple timer for focused work and everyday tasks."
+        href="/timer"
         headingLevel={3}
         icon={
-          <SquaresPlusIcon
+          <ClockIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}
@@ -194,7 +206,7 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span className="text-foreground" key={`u-${text.indexOf(chunk)}`}>
+        <span className="text-danger" key={`u-${text.indexOf(chunk)}`}>
           {siteName}
         </span>
       ) : (

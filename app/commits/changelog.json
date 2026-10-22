@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "dc52f33ccfbe505cec57f3595982fd615dda613f",
+      "date": "2026-10-22T19:03:43+07:00",
+      "subject": "style(PageHeader): reduce spacing before page content"
+    },
+    {
       "hash": "8d1168e5feac35285ed98d69314706996fe7bfe6",
       "date": "2026-10-22T19:03:32+07:00",
       "subject": "fix(Timer): align toolbar controls and preserve task label"

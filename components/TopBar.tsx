@@ -13,7 +13,7 @@ import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 
 import styles from "./TopBar.module.css";
 
-const destinations = ["home", "projects", "labs", "writing", "timer"] as const;
+const destinations = ["home", "projects", "labs", "writing", "design"] as const;
 
 let mobileMedia: MediaQueryList | undefined;
 
