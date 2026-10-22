@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "84a27a6c7ee8eba72130d47fd96f4dd91e668932",
+      "date": "2026-10-22T15:18:52+07:00",
+      "subject": "refactor(timer): arrange floating task around linked progress"
+    },
+    {
       "hash": "4054411ccf66dd9bc8f59de296e7dc7445ce8d59",
       "date": "2026-10-22T15:18:44+07:00",
       "subject": "feat(timer): use Quartz ticks for running and countdown sounds"

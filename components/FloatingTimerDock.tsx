@@ -124,7 +124,7 @@ export default function FloatingTimerDock() {
       {selected && appearance ? (
         <section
           aria-label="Floating task"
-          className="pointer-events-auto w-full space-y-2 sm:w-[28rem]"
+          className="pointer-events-auto w-full space-y-2 sm:w-[22.4rem]"
         >
           <div className="border-border bg-background/70 shadow-floating flex min-h-[var(--timer-tabbar-height,3.3125rem)] items-center gap-2 rounded-xl border p-2 backdrop-blur-md">
             <InternalLink
