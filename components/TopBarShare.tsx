@@ -22,6 +22,7 @@ export function ShareButton({ showLabel }: { showLabel: boolean }) {
   return (
     <button
       aria-label="Share this page"
+      aria-keyshortcuts="Alt+S"
       title="Share this page"
       className={
         showLabel

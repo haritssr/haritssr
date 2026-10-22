@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "78da768263bb820bef554139e79376fc76e66c83",
+      "date": "2026-10-22T21:45:59+07:00",
+      "subject": "perf(Home): eagerly load the profile image"
+    },
+    {
       "hash": "4b468d37a456463b2c10fbd277d213583496f6d6",
       "date": "2026-10-22T21:45:45+07:00",
       "subject": "fix(Offline): remove duplicate status label"

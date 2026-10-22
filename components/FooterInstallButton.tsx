@@ -57,6 +57,8 @@ export default function FooterInstallButton() {
 
   return (
     <button
+      aria-keyshortcuts="Alt+I"
+      data-install-trigger=""
       className={ACTION_CLASS_NAME}
       onClick={() => {
         void handleInstall();

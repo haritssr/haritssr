@@ -11,6 +11,7 @@ import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
+import Table from "@/components/Table";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
@@ -30,6 +31,18 @@ const contacts = [
 ];
 
 const profileName = "Harits Syah";
+const featureAccess = [
+  { name: "Search", key: "K", access: "Search in the top bar" },
+  {
+    name: "Contents",
+    key: "C",
+    access: "Toggle Contents on nested pages with headings",
+  },
+  { name: "Share", key: "S", access: "Copy the current page URL" },
+  { name: "Timer", key: "T", access: "Open Timer" },
+  { name: "RSS", key: "R", access: "Open the RSS feed" },
+  { name: "Install", key: "I", access: "Install the site, when available" },
+];
 const homeDescription =
   "Explore Harits Syah's projects, interactive labs, and writing on web development, math, physics, and education. Developer, teacher, and founder.";
 
@@ -96,6 +109,55 @@ export default function Home() {
               </span>
             </li>
           </ul>
+        </Section>
+        <Section title="Shortcuts">
+          <div className="w-fit max-w-full">
+            <div className="min-w-0">
+              <Table className="w-max! whitespace-nowrap">
+                <caption className="sr-only">
+                  Feature keyboard shortcuts and access points
+                </caption>
+                <thead>
+                  <tr className="divide-border bg-foreground/5 divide-x">
+                    <th className="px-3 text-left font-medium" scope="col">
+                      Feature
+                    </th>
+                    <th className="px-3 text-left font-medium" scope="col">
+                      Keyboard shortcut
+                    </th>
+                    <th className="px-3 text-left font-medium" scope="col">
+                      Access
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-border divide-y">
+                  {featureAccess.map(({ name, key, access }) => (
+                    <tr className="divide-border divide-x" key={name}>
+                      <th
+                        className="px-3 py-2 text-left font-medium"
+                        scope="row"
+                      >
+                        {name}
+                      </th>
+                      <td className="px-3 py-2">
+                        {name === "Search" ? (
+                          <span className="whitespace-nowrap">
+                            <kbd aria-label="Command K">⌘K</kbd> /{" "}
+                            <kbd>Ctrl+K</kbd>
+                          </span>
+                        ) : (
+                          <span className="whitespace-nowrap">
+                            <kbd>Option+{key}</kbd> / <kbd>Alt+{key}</kbd>
+                          </span>
+                        )}
+                      </td>
+                      <td className="text-muted px-3 py-2">{access}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          </div>
         </Section>
       </div>
     </>

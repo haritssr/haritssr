@@ -104,6 +104,7 @@ export default function TopBarContents({
                 <button
                   type="button"
                   aria-label="Table of Contents"
+                  aria-keyshortcuts="Alt+C"
                   title="Table of Contents"
                   className={triggerClassName}
                   data-article-toc-trigger=""
@@ -119,6 +120,7 @@ export default function TopBarContents({
           <SheetTrigger isOpen={visible && open} onOpenChange={changeOpen}>
             <AriaButton
               aria-label="Table of Contents"
+              aria-keyshortcuts="Alt+C"
               className={triggerClassName}
               data-article-toc-trigger=""
               ref={triggerRef}

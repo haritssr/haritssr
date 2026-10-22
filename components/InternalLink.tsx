@@ -9,6 +9,7 @@ export default function InternalLink({
   lg,
   onClick,
   "aria-current": ariaCurrent,
+  "aria-keyshortcuts": ariaKeyShortcuts,
   variant = "navigation",
 }: {
   className?: string;
@@ -17,6 +18,7 @@ export default function InternalLink({
   lg?: boolean;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   "aria-current"?: AriaAttributes["aria-current"];
+  "aria-keyshortcuts"?: AriaAttributes["aria-keyshortcuts"];
   variant?: "navigation" | "database" | "inline" | "footer";
 }) {
   const appearance =
@@ -31,6 +33,7 @@ export default function InternalLink({
   return (
     <Link
       aria-current={ariaCurrent}
+      aria-keyshortcuts={ariaKeyShortcuts}
       className={`group inline-block cursor-pointer transition-transform active:scale-[0.98] motion-reduce:transition-none ${interaction} ${appearance} ${className ?? ""}`}
       href={href}
       onClick={onClick}

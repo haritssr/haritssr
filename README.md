@@ -209,6 +209,14 @@ Type `share` and press Enter to copy the current page URL (including its query
 and fragment); the same confirmation and clipboard behavior are shared with the
 top-bar Share button.
 
+The homepage Shortcuts table documents the working global controls: Command+K
+on Mac or Ctrl+K opens Search. Option on Mac or Alt on Windows with C toggles
+Contents, S copies the current page URL with confirmation, T opens Timer,
+R opens the RSS feed, and I opens the install prompt when available. Contents
+requires a nested page with headings. The Option/Alt shortcuts ignore typing in
+editable controls, composition, held-key repeats, and additional modifiers;
+physical letter codes keep them working when Option changes the typed character.
+
 The mobile TabBarButtom appears on Home and routes under Projects, Labs,
 Writing, and Design up to two URL segments deep, such as
 `/labs/mathematics`. Nested routes highlight their main section. Individual

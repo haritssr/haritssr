@@ -13,7 +13,7 @@ export default function FooterActions({ rssPath }: FooterActionsProps) {
       <InternalLink href={apiRoute.route} variant="footer">
         {apiRoute.title}
       </InternalLink>
-      <InternalLink href={rssPath} variant="footer">
+      <InternalLink aria-keyshortcuts="Alt+R" href={rssPath} variant="footer">
         RSS
       </InternalLink>
       <FooterInstallButton />

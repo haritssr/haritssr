@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import SiteShortcuts from "@/components/SiteShortcuts";
 import { SiteStructuredData } from "@/components/StructuredData";
 import TabBarButtom from "@/components/TabBarButtom";
 import TimerProvider from "@/components/TimerProvider";
@@ -82,6 +83,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <ServiceWorkerRegistration />
+        <SiteShortcuts />
         <GlobalSearchProvider>
           <TimerProvider>
             <TopBar />
