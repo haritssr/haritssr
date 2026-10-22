@@ -1,7 +1,7 @@
 import {
-  ClockIcon,
   DocumentTextIcon,
   QueueListIcon,
+  SquaresPlusIcon,
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -9,7 +9,6 @@ import Image from "next/image";
 import history from "@/app/commits/changelog.json";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
-import InternalLink from "@/components/InternalLink";
 import { PageStructuredData } from "@/components/StructuredData";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
@@ -53,7 +52,7 @@ export default function Home() {
         path="/"
       />
       <div className="space-y-16">
-        <Profile />
+        <PersonalDetails />
         <Tools />
       </div>
     </>
@@ -62,46 +61,79 @@ export default function Home() {
 
 function Profile() {
   return (
-    <section
-      aria-label="About Harits Syah"
-      className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:items-start lg:grid-cols-4"
-      id="Identity"
-    >
-      <Image
-        alt={profileName}
-        blurDataURL="/images/blur.jpg"
-        className="size-25 rounded-full sm:col-start-2 sm:row-start-1 sm:self-start sm:justify-self-end lg:col-start-4"
-        height="100"
-        priority
-        src="/images/blur.jpg"
-        width="100"
-      />
-      <ul
-        aria-label="Profile and contact details"
-        className="text-foreground/70 marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word sm:col-start-1 sm:row-start-1 lg:col-span-3"
-      >
-        <li>
-          <span className="text-foreground">Product Engineer</span> &{" "}
-          <span className="text-foreground">Science Teacher</span> at{" "}
-          <ExternalLink
-            href="https://www.harimaki.com"
-            name="Harimaki"
-            showArrow={false}
-          />
-        </li>
-        <li>Tangerang, Indonesia</li>
-        {contacts.map((contact, index) => (
-          <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
-            {renderContact(contact)}
+    <div className="min-w-0 p-4">
+      <section aria-label="About" id="Identity">
+        <ul
+          aria-label="Profile and contact details"
+          className="text-foreground/70 marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word"
+        >
+          <li>Product Engineer</li>
+          <li>Science Teacher</li>
+          <li>
+            <ExternalLink
+              href="https://www.harimaki.com"
+              name="Harimaki"
+              showArrow={false}
+            />
           </li>
-        ))}
-        <li>
-          <InternalLink href="/more" variant="inline">
-            More
-          </InternalLink>
-        </li>
-      </ul>
-    </section>
+          <li>Tangerang, Indonesia</li>
+          {contacts.map((contact, index) => (
+            <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
+              {renderContact(contact)}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}
+
+function PersonalDetails() {
+  return (
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="corner-squircle bg-interface-hover rounded-xl">
+        <Profile />
+      </div>
+      <div className="corner-squircle bg-interface-hover min-w-0 rounded-xl p-4 lg:col-span-2">
+        <section aria-label="Personal notes and words" id="personal-notes">
+          <ul className="marker:text-muted list-outside list-disc space-y-2 pl-5">
+            <li>Touch typist, ±90 WPM.</li>
+            <li>Former chess player, ±2000 Elo.</li>
+            <li>
+              <span className="text-foreground">haritssr</span> ={" "}
+              <span className="text-foreground">harits</span>{" "}
+              <span className="text-foreground">s</span>yah{" "}
+              <span className="text-foreground">r</span>ahmatullah
+            </li>
+            <li>I develop with Codex CLI in Zed.</li>
+            <li>Effective/Accelerationism</li>
+            <li>
+              Web, JS, TS, Effect, React, Next.js, Functional Programming, Math,
+              Physics, and Education.
+            </li>
+            <li>Existence = f(constraints, maintainence, ...)</li>
+            <li>100% is easier than 98%</li>
+            <li>
+              <ExternalLink
+                href="https://youtu.be/H7Sfo3lMB8c?t=72"
+                name="Eudaimonic"
+                showArrow={false}
+              />{" "}
+              &gt; Hedonic
+            </li>
+          </ul>
+        </section>
+      </div>
+      <div className="corner-squircle bg-interface-hover order-first flex justify-center rounded-xl py-8 sm:order-none lg:col-start-4 lg:self-start lg:justify-self-end lg:bg-transparent lg:p-0">
+        <Image
+          alt={profileName}
+          className="size-25 rounded-full"
+          height={100}
+          src="/images/blur.jpg"
+          width={100}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -112,12 +144,12 @@ function Tools() {
       className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
       <IndexCard
-        title="Timer"
-        description="A simple timer for focused work and everyday tasks."
-        href="/timer"
+        title="Design"
+        description="Components and patterns used across this site."
+        href="/design"
         headingLevel={3}
         icon={
-          <ClockIcon
+          <SquaresPlusIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}

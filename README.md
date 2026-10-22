@@ -127,9 +127,9 @@ gaps on either side. The title pill fits its text and truncates long titles
 within that space.
 
 The desktop navigation pill is also visible on Home and lists Home, Projects,
-Labs, Writing, Design, and Commits in that order. It appears from 1024px so all
-six links fit between the side controls. Home's responsive card grid also links
-to Commits with the count from the shared changelog snapshot.
+Labs, Writing, and Timer in that order. It appears from 1024px so all
+five links fit between the side controls. Home's responsive card grid links
+to Design, Commits, and Tree, with the commit count from the shared changelog snapshot.
 
 Route-owned data lives beside its implementation: Projects uses
 `app/projects/data.ts`; the Next.js articles and students demos each own a
@@ -188,10 +188,10 @@ and fragment); the same confirmation and clipboard behavior are shared with the
 top-bar Share button.
 
 The mobile TabBarButtom appears on Home and routes under Projects, Labs,
-Writing, Design, and Commits up to two URL segments deep, such as
+Writing, and Timer up to two URL segments deep, such as
 `/labs/mathematics`. Nested routes highlight their main section. Individual
 writing articles, deeper routes, and other sections omit it. The design preview
-remains available. Its six links share equal width; Commits uses a history clock icon.
+remains available. Its five links share equal width; Timer uses a clock icon.
 
 The shared layout uses a viewport-height flex layout for the whole page, so its footer fits
 without extra scrolling when the content fits. Longer content still scrolls normally.

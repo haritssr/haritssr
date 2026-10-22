@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "b914ebbfdc287ab63ea990e7bc0ff2b730613804",
+      "date": "2026-10-22T14:20:17+07:00",
+      "subject": "feat(timer): refine task cards and document timer behavior"
+    },
+    {
       "hash": "fd2aac397a8561adceffc10ed7ab6010a425ced3",
       "date": "2026-10-22T14:19:46+07:00",
       "subject": "feat(commits): add dated analysis and model suitability pages"

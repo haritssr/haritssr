@@ -26,7 +26,7 @@ export default function IndexCard({
   const Heading = `h${headingLevel}` as const;
   const content = (
     <>
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center justify-between sm:gap-2">
         <div className="flex min-w-0 items-center gap-2">
           {icon}
           <Heading
@@ -50,10 +50,10 @@ export default function IndexCard({
           )}
         </div>
       </div>
-      <p className="text-foreground/70">{description}</p>
+      <p className="text-foreground/70 hidden sm:block">{description}</p>
     </>
   );
-  const cardClassName = `corner-squircle border-border block h-full space-y-1 rounded-2xl border px-3 py-2.5 ${className ?? ""}`;
+  const cardClassName = `corner-squircle border-border block h-full rounded-2xl border px-3 py-2.5 sm:space-y-1 ${className ?? ""}`;
 
   if (href === undefined) {
     return <div className={cardClassName}>{content}</div>;
