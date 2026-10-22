@@ -1,36 +1,38 @@
 import { NumberField } from "@base-ui/react/number-field";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useId, useState } from "react";
+import { useId } from "react";
 
 import Button from "@/components/Button";
 
-const DURATION_PRESETS = [5, 15, 30, 60];
+import {
+  durationSeconds,
+  durationValue,
+  formatPresetDuration,
+} from "./durationValue";
+import type { DurationValue } from "./durationValue";
 
 export default function DurationFields({
-  defaultDuration,
+  value: duration,
+  onChange,
   disabled,
+  presets,
+  hideLegend = false,
 }: {
-  defaultDuration: number;
+  value: DurationValue;
+  onChange: (value: DurationValue) => void;
   disabled: boolean;
+  presets?: number[];
+  hideLegend?: boolean;
 }) {
   const id = useId();
-  const [duration, setDuration] = useState({
-    hours: String(Math.floor(defaultDuration / 3600)),
-    minutes: String(Math.floor((defaultDuration % 3600) / 60)),
-    seconds: String(defaultDuration % 60),
-  });
-  const totalSeconds =
-    Number(duration.hours) * 3600 +
-    Number(duration.minutes) * 60 +
-    Number(duration.seconds);
-  const presetSelected = DURATION_PRESETS.some(
-    (minutes) => totalSeconds === minutes * 60
-  );
+  const totalSeconds = durationSeconds(duration);
 
   return (
     <fieldset className="space-y-3" disabled={disabled}>
-      <legend className="mb-2 text-sm">Duration</legend>
-      <div className="grid grid-cols-3 gap-3">
+      <legend className={hideLegend ? "sr-only" : "mb-2 text-sm"}>
+        Duration
+      </legend>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,5rem),1fr))] gap-2">
         {(["hours", "minutes", "seconds"] as const).map((unit) => (
           <NumberField.Root
             className="flex min-w-0 flex-col gap-2 text-sm"
@@ -42,10 +44,10 @@ export default function DurationFields({
             min={0}
             name={unit}
             onValueChange={(value) => {
-              setDuration((current) => ({
-                ...current,
+              onChange({
+                ...duration,
                 [unit]: value === null ? "" : String(value),
-              }));
+              });
             }}
             required
             smallStep={1}
@@ -76,33 +78,32 @@ export default function DurationFields({
           </NumberField.Root>
         ))}
       </div>
-      <fieldset
-        aria-label="Duration presets"
-        className="border-border grid grid-cols-4 gap-2"
-      >
-        <p className="text-muted col-span-4 text-sm">Presets</p>
-        {DURATION_PRESETS.map((minutes) => (
-          <Button
-            aria-pressed={totalSeconds === minutes * 60}
-            key={minutes}
-            tabIndex={presetSelected ? -1 : 0}
-            onClick={() => {
-              setDuration({
-                hours: String(Math.floor(minutes / 60)),
-                minutes: String(minutes % 60),
-                seconds: "0",
-              });
-            }}
-            variant={
-              totalSeconds === minutes * 60
-                ? "action-outline-regular"
-                : "outline-regular"
-            }
-          >
-            {minutes === 60 ? "1 hour" : `${minutes} min`}
-          </Button>
-        ))}
-      </fieldset>
+      {presets === undefined || presets.length === 0 ? null : (
+        <fieldset
+          aria-label="Duration presets"
+          className="border-border border-t border-dashed pt-3"
+        >
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(4rem,1fr))] gap-2">
+            {presets.map((seconds, index) => (
+              <Button
+                aria-pressed={totalSeconds === seconds}
+                className="h-8.5"
+                key={`${index}-${seconds}`}
+                onClick={() => {
+                  onChange(durationValue(seconds));
+                }}
+                variant={
+                  totalSeconds === seconds
+                    ? "action-outline-regular"
+                    : "outline-regular"
+                }
+              >
+                {formatPresetDuration(seconds)}
+              </Button>
+            ))}
+          </div>
+        </fieldset>
+      )}
     </fieldset>
   );
 }

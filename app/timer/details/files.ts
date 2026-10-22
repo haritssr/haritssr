@@ -53,6 +53,14 @@ export const implementationFiles = [
     "Duration number fields and the preset grid.",
   ],
   [
+    "app/timer/components/PresetSettings.tsx",
+    "Duration and task preset editors, five-duration/six-task limits, and section Save/Cancel drafts.",
+  ],
+  [
+    "app/timer/components/durationValue.ts",
+    "Controlled duration units, seconds conversion, and preset labels.",
+  ],
+  [
     "app/timer/components/taskPresentation.ts",
     "Grid card layout, spacing, borders, shadows, and state colors.",
   ],

@@ -4,7 +4,6 @@ import { Switch } from "@base-ui/react/switch";
 import {
   BellAlertIcon,
   Cog6ToothIcon,
-  XMarkIcon,
   ForwardIcon,
   SpeakerWaveIcon,
   Square3Stack3DIcon,
@@ -16,6 +15,7 @@ import Button from "@/components/Button";
 import { useTimer } from "@/components/TimerProvider";
 import { canUseTimer } from "@/utils/timer";
 
+import PresetSettings from "./PresetSettings";
 import { AddTask } from "./TaskDialog";
 
 function subscribePermission(onChange: () => void) {
@@ -65,23 +65,10 @@ function TimerSettingsDialog() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
-        <Dialog.Popup className="border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-5 outline-hidden">
-          <div className="mb-5 flex items-center justify-between gap-3">
-            <Dialog.Title className="text-lg font-semibold">
-              Settings
-            </Dialog.Title>
-            <Dialog.Close
-              render={
-                <Button
-                  aria-label="Close settings"
-                  size="icon-circle"
-                  variant="secondary"
-                />
-              }
-            >
-              <XMarkIcon aria-hidden="true" className="size-4" />
-            </Dialog.Close>
-          </div>
+        <Dialog.Popup className="border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-4 outline-hidden">
+          <Dialog.Title className="mb-5 text-center font-medium">
+            Settings
+          </Dialog.Title>
           <TimerSettings />
         </Dialog.Popup>
       </Dialog.Portal>
@@ -108,54 +95,57 @@ function TimerSettings() {
   const permission = permissionFailed ? "unsupported" : browserPermission;
   return (
     <div className="space-y-5">
-      <TimerSettingSwitch
-        label="Notification"
-        icon={<BellAlertIcon aria-hidden="true" className="size-4.5" />}
-        title={
-          permission === "denied" || permission === "unsupported"
-            ? "Browser notifications unavailable"
-            : "Notification"
-        }
-        disabled={
-          !canUseTimer(snapshot) ||
-          permission === "denied" ||
-          permission === "unsupported"
-        }
-        checked={permission === "granted" && notificationsEnabled}
-        onCheckedChange={(pressed) => {
-          if (permission === "default") {
-            void Notification.requestPermission()
-              .then((result) => {
-                void setNotificationsEnabled(result === "granted");
-                window.dispatchEvent(new Event("timer-notifications"));
-              })
-              .catch(() => {
-                setPermissionFailed(true);
-              });
-          } else {
-            void setNotificationsEnabled(pressed);
+      <div className="divide-border space-y-2.5 divide-y divide-dashed [&>*:not(:last-child)]:pb-2.5">
+        <TimerSettingSwitch
+          label="Notification"
+          icon={<BellAlertIcon aria-hidden="true" className="size-4.5" />}
+          title={
+            permission === "denied" || permission === "unsupported"
+              ? "Browser notifications unavailable"
+              : "Notification"
           }
-        }}
-      />
-      <TimerSettingSwitch
-        label="Autoplay"
-        icon={<ForwardIcon aria-hidden="true" className="size-4.5" />}
-        title="Autoplay"
-        disabled={!canUseTimer(snapshot)}
-        checked={autoplay}
-        onCheckedChange={(next) => {
-          void setAutoplay(next);
-        }}
-      />
-      <MultitaskSetting />
-      <TimerSettingSwitch
-        label="Ticking"
-        title="Ticking"
-        icon={<SpeakerWaveIcon aria-hidden="true" className="size-4.5" />}
-        disabled={!canUseTimer(snapshot)}
-        checked={tickingEnabled}
-        onCheckedChange={setTickingEnabled}
-      />
+          disabled={
+            !canUseTimer(snapshot) ||
+            permission === "denied" ||
+            permission === "unsupported"
+          }
+          checked={permission === "granted" && notificationsEnabled}
+          onCheckedChange={(pressed) => {
+            if (permission === "default") {
+              void Notification.requestPermission()
+                .then((result) => {
+                  void setNotificationsEnabled(result === "granted");
+                  window.dispatchEvent(new Event("timer-notifications"));
+                })
+                .catch(() => {
+                  setPermissionFailed(true);
+                });
+            } else {
+              void setNotificationsEnabled(pressed);
+            }
+          }}
+        />
+        <TimerSettingSwitch
+          label="Autoplay"
+          icon={<ForwardIcon aria-hidden="true" className="size-4.5" />}
+          title="Autoplay"
+          disabled={!canUseTimer(snapshot)}
+          checked={autoplay}
+          onCheckedChange={(next) => {
+            void setAutoplay(next);
+          }}
+        />
+        <MultitaskSetting />
+        <TimerSettingSwitch
+          label="Ticking"
+          title="Ticking"
+          icon={<SpeakerWaveIcon aria-hidden="true" className="size-4.5" />}
+          disabled={!canUseTimer(snapshot)}
+          checked={tickingEnabled}
+          onCheckedChange={setTickingEnabled}
+        />
+      </div>
+      <PresetSettings />
     </div>
   );
 }
@@ -274,7 +264,7 @@ function TimerSettingSwitch({
         id={id}
         ref={ref}
         aria-label={label}
-        className={`interactive-elevation focus-visible:outline-action data-checked:bg-action bg-border block w-11 shrink-0 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2 data-disabled:cursor-not-allowed ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
+        className={`interactive-elevation focus-visible:outline-action data-checked:bg-action bg-border not-data-disabled:not-data-checked:hover:bg-border-hover/60 not-data-disabled:data-checked:hover:bg-action/85 block w-11 shrink-0 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2 data-disabled:cursor-not-allowed ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
         disabled={disabled}
         onCheckedChange={onCheckedChange}
         checked={checked}

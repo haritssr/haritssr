@@ -18,14 +18,23 @@ run inside its `use client` boundary.
 | Description hover target and popover | [TaskDescription.tsx](TaskDescription.tsx) |
 | Add/Edit triggers and save behavior | [TaskDialog.tsx](TaskDialog.tsx) |
 | Shared modal dimensions, fields, and header actions | [TaskFormDialog.tsx](TaskFormDialog.tsx) |
+| Settings preset list editors, draft validation, and Save/Cancel | [PresetSettings.tsx](PresetSettings.tsx) |
+| Duration conversion and preset labels | [durationValue.ts](durationValue.ts) |
 | Number inputs, stepper buttons, and duration presets | [DurationFields.tsx](DurationFields.tsx) |
 | Grid card dimensions, borders, shadow, spacing, and state colors | [taskPresentation.ts](taskPresentation.ts) |
 | Task ordering, completion partition, elapsed time, and Start/Pause/Continue state | [taskState.ts](taskState.ts) |
 | Floating-task eligibility, retained paused task, and most-recent-start ordering | [floatingTaskState.ts](floatingTaskState.ts) |
 | Site-wide floating task, switcher, and completion messages | [FloatingTimerDock.tsx](../../../components/FloatingTimerDock.tsx) |
 
-Add and Edit use the same `TaskFormDialog`; only their title and initial values
-differ. In that file, `TaskNameField`, `TaskDescriptionField`, and `TaskFormActions`
+Add and Edit use the same `TaskFormDialog` with controlled field state inside
+its mounted portal. Only Add shows the Preset task buttons, arranged in two columns below
+Duration. Selecting one fills Name, Description, and all duration units without
+submitting or closing. Done creates the task; Cancel and dismissal add nothing.
+Matching field values determine the selected task preset styling. Defaults include
+X Traversal (1h), YouTube (2h), House Keeping (1h), Short Break (10m),
+Long Break (30m), and Orientation (30m). The three new presets have empty
+descriptions; existing saved lists retain their configured entries. Duration labels
+use compact h, m, and s units. In that file, `TaskNameField`, `TaskDescriptionField`, and `TaskFormActions`
 keep each form section easy to locate. `DurationFields` is shared too.
 Name allows 20 characters; the optional Description allows 35. Both show a
 character counter beside their labels, using `text-attention` for Name and
@@ -158,7 +167,18 @@ Initialize or migrate through `bun run migrate:timer`; see the root README.
 Export and Import share a segmented icon-only group,
 beside the secondary Settings button, with native hover labels and accessible names.
 Settings opens a modal containing Notification, Autoplay, Multitask, and Ticking
-switches with their existing icons. `TimerDataControls` owns
+switches. Its header shows only the centered Settings title. Escape or clicking
+outside closes the modal; switches save immediately, while preset changes use
+their section Save buttons. The
+switches retain their existing icons, followed by initially collapsed Duration
+Presets and Task Presets accordions. Duration lists allow 1–5 entries and task lists 1–6, with editable values,
+Add preset, Remove, and separate Save/Cancel controls.
+Drafts survive collapsing a section; closing Settings discards unsaved changes.
+Save keeps Settings open, disables that editor while saving, and retains the
+draft with an inline error on failure. Cancel restores saved values. Presets sync
+through the existing preference mutation queue and Turso. Duration presets apply
+to Add and Edit; task presets only appear in Add. Existing tasks and open task
+form values are unaffected. `TimerDataControls` owns
 backup state and passes its actions into `TimerToolbar`. Only errors appear above
 the toolbar; save status, backup guidance, and success messages are omitted.
 

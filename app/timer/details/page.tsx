@@ -40,6 +40,8 @@ const tursoSchemaDiagram = `erDiagram
     INTEGER autoplay "Boolean; default 0"
     INTEGER multitask "Boolean; default 0"
     INTEGER notifications_enabled "Boolean; default 1"
+    TEXT duration_presets "Nullable JSON array; defaults to 5, 15, 30, 60 minutes"
+    TEXT task_presets "Nullable JSON array; 1 to 6 task templates"
   }
 `;
 
@@ -74,7 +76,9 @@ CREATE TABLE timer_preferences (
   revision INTEGER NOT NULL DEFAULT 0,
   autoplay INTEGER NOT NULL DEFAULT 0 CHECK(autoplay IN (0, 1)),
   multitask INTEGER NOT NULL DEFAULT 0 CHECK(multitask IN (0, 1)),
-  notifications_enabled INTEGER NOT NULL DEFAULT 1 CHECK(notifications_enabled IN (0, 1))
+  notifications_enabled INTEGER NOT NULL DEFAULT 1 CHECK(notifications_enabled IN (0, 1)),
+  duration_presets TEXT,
+  task_presets TEXT
 );`;
 
 export const metadata = createPageMetadata({
@@ -330,9 +334,9 @@ export default function TimerDetailsPage() {
               days start empty.
             </li>
             <li>
-              Autoplay, Multitask, and notification preferences sync across
-              devices. Ticking, notification permission, and audio ownership
-              stay local.
+              Autoplay, Multitask, notification preferences, and presets sync
+              across devices. Ticking, notification permission, and audio
+              ownership stay local.
             </li>
             <li>
               Open pages refresh every 15 seconds and on focus. Changes from
@@ -420,8 +424,12 @@ export default function TimerDetailsPage() {
                 <code>timer_preferences</code> has one row, constrained to
                 <code> id = 1</code>, with <code>revision</code>,
                 <code> autoplay</code>, <code>multitask</code>, and
-                <code> notifications_enabled</code>. Ticking, browser
-                notification permission, and audio ownership stay device-local.
+                <code> notifications_enabled</code>, plus nullable JSON columns
+                <code> duration_presets</code> and <code>task_presets</code>.
+                Duration preset lists contain 1–5 entries and task lists 1–6;
+                missing values use defaults. Settings saves each list
+                separately. Ticking, browser notification permission, and audio
+                ownership stay device-local.
               </li>
               <li>
                 Task changes, day revisions, and Autoplay transitions save in
@@ -459,8 +467,11 @@ export default function TimerDetailsPage() {
               <li>
                 <code>timer_preferences</code> is independent and has one row
                 with <code>id = 1</code>. Boolean settings use integers: 0 for
-                off, 1 for on. Nullable timestamp columns use ISO date-time
-                text.
+                off, 1 for on. Preset columns store JSON arrays and are added
+                idempotently by <code>bun run migrate:timer</code> before
+                deployment. Task presets fill New Task without creating a task
+                until Done; changing presets never edits existing tasks.
+                Nullable timestamp columns use ISO date-time text.
               </li>
               <li>
                 Each imported daily JSON file becomes one day row, and each task

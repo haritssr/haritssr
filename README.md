@@ -84,6 +84,15 @@
   reopening, and show an error with Retry to refresh authoritative data. Uncertain
   writes are not automatically resent. There is no offline writable fallback,
   background scheduler, or Autoplay while all pages close.
+- Settings includes Duration Presets and Task Presets editors. Duration lists
+  allow 1–5 entries and task lists 1–6, with separate Save and Cancel
+  controls. Duration presets apply to Add and Edit; task presets in two columns appear below
+  Duration in New Task, fill every field, and wait for Done before adding a task.
+  Presets sync across devices and never change existing tasks. Names allow 20
+  characters, descriptions 35, and durations one second to 24 hours. History
+  backups do not include presets. Run `bun run migrate:timer` before deploying
+  this version: it idempotently adds nullable `duration_presets` and `task_presets`
+  JSON columns to existing preferences; missing values use the default presets.
 - Autoplay, Multitask, and notification preferences persist in Turso. Ticking
   resets off on reload. Web Locks coordinate continuous audio within one browser;
   other devices can play their own ticking. Completion feedback is claimed globally.

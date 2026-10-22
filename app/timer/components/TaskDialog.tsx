@@ -332,7 +332,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       </Dialog.Trigger>
       <TaskFormDialog
         title="New Task"
-        submitLabel="Add"
+        showTaskPresets
         defaultActivity={drafts.add?.activity ?? suggestion.activity}
         defaultDescription={drafts.add?.description ?? suggestion.description}
         defaultDuration={drafts.add?.duration ?? 300}

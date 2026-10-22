@@ -3,9 +3,15 @@ import { useId, useRef, useState } from "react";
 import type { CSSProperties, RefObject, SubmitEvent } from "react";
 
 import Button from "@/components/Button";
+import { useTimer } from "@/components/TimerProvider";
 
 import DeleteTaskButton from "./DeleteTaskButton";
 import DurationFields from "./DurationFields";
+import {
+  durationSeconds,
+  durationValue,
+  formatPresetDuration,
+} from "./durationValue";
 
 const INPUT_CLASS =
   "form-control border-border bg-background focus:border-action focus:ring-action/20 w-full rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2";
@@ -15,30 +21,48 @@ const SHEET_STYLE: CSSProperties & { "--timer-safe-bottom": string } = {
     "max(calc(var(--spacing) * 5), env(safe-area-inset-bottom))",
 };
 
-export default function TaskFormDialog({
-  title,
-  submitLabel = "Done",
-  defaultActivity,
-  defaultDescription = "",
-  defaultDuration = 300,
-  busy,
-  error,
-  onSubmit,
-  onDelete,
-}: {
+interface TaskFormDialogProps {
   title: string;
   submitLabel?: string;
   defaultActivity: string;
   defaultDescription?: string;
   defaultDuration?: number;
+  showTaskPresets?: boolean;
   busy: boolean;
   error: string | null;
   onDelete?: () => Promise<void>;
   onSubmit: (event: SubmitEvent<HTMLFormElement>) => Promise<void>;
-}) {
-  const nameRef = useRef<HTMLInputElement>(null);
+}
+
+export default function TaskFormDialog(props: TaskFormDialogProps) {
   return (
     <Dialog.Portal>
+      <TaskFormPopup {...props} />
+    </Dialog.Portal>
+  );
+}
+
+function TaskFormPopup({
+  title,
+  submitLabel = "Done",
+  defaultActivity,
+  defaultDescription = "",
+  defaultDuration = 300,
+  showTaskPresets = false,
+  busy,
+  error,
+  onSubmit,
+  onDelete,
+}: TaskFormDialogProps) {
+  const { durationPresets, taskPresets } = useTimer();
+  const [activity, setActivity] = useState(defaultActivity);
+  const [description, setDescription] = useState(defaultDescription);
+  const [duration, setDuration] = useState(() =>
+    durationValue(defaultDuration)
+  );
+  const nameRef = useRef<HTMLInputElement>(null);
+  return (
+    <>
       <Dialog.Backdrop className="timer-dialog-backdrop bg-foreground/40 fixed inset-0 z-90" />
       <Dialog.Popup
         initialFocus={nameRef}
@@ -56,15 +80,55 @@ export default function TaskFormDialog({
           }}
         >
           <TaskNameField
-            defaultValue={defaultActivity}
+            value={activity}
+            onChange={setActivity}
             disabled={busy}
             inputRef={nameRef}
           />
           <TaskDescriptionField
-            defaultValue={defaultDescription}
+            value={description}
+            onChange={setDescription}
             disabled={busy}
           />
-          <DurationFields defaultDuration={defaultDuration} disabled={busy} />
+          <DurationFields
+            value={duration}
+            onChange={setDuration}
+            disabled={busy}
+            presets={durationPresets}
+          />
+          {showTaskPresets ? (
+            <fieldset className="space-y-3" disabled={busy}>
+              <legend className="mb-2 text-sm">Preset</legend>
+              <div className="grid grid-cols-2 gap-2">
+                {taskPresets.map((preset) => {
+                  const selected =
+                    activity === preset.activity &&
+                    description === preset.description &&
+                    durationSeconds(duration) === preset.duration;
+                  return (
+                    <Button
+                      key={preset.id}
+                      aria-pressed={selected}
+                      className="h-8.5 w-full items-center justify-between!"
+                      variant={
+                        selected ? "action-outline-regular" : "outline-regular"
+                      }
+                      onClick={() => {
+                        setActivity(preset.activity);
+                        setDescription(preset.description);
+                        setDuration(durationValue(preset.duration));
+                      }}
+                    >
+                      <span>{preset.activity}</span>
+                      <span className="text-muted shrink-0">
+                        {formatPresetDuration(preset.duration)}
+                      </span>
+                    </Button>
+                  );
+                })}
+              </div>
+            </fieldset>
+          ) : null}
           {error === null ? null : (
             <p className="text-danger text-sm" role="alert">
               {error}
@@ -78,21 +142,24 @@ export default function TaskFormDialog({
           />
         </form>
       </Dialog.Popup>
-    </Dialog.Portal>
+    </>
   );
 }
 
-function TaskNameField({
-  defaultValue,
+export function TaskNameField({
+  value,
+  onChange,
   disabled,
   inputRef,
 }: {
-  defaultValue: string;
+  value: string;
+  onChange: (value: string) => void;
   disabled: boolean;
-  inputRef: RefObject<HTMLInputElement | null>;
+  inputRef?: RefObject<HTMLInputElement | null>;
 }) {
+  const localRef = useRef<HTMLInputElement>(null);
+  const fieldRef = inputRef ?? localRef;
   const hintId = useId();
-  const [value, setValue] = useState(defaultValue);
   const { length } = value;
   return (
     <label className="flex flex-col gap-2 text-sm">
@@ -115,10 +182,10 @@ function TaskNameField({
           maxLength={20}
           name="activity"
           onChange={(event) => {
-            setValue(event.currentTarget.value);
+            onChange(event.currentTarget.value);
           }}
           placeholder="Short title"
-          ref={inputRef}
+          ref={fieldRef}
           required
         />
 
@@ -129,8 +196,8 @@ function TaskNameField({
           size="icon-small"
           disabled={disabled || length === 0}
           onClick={() => {
-            setValue("");
-            inputRef.current?.focus();
+            onChange("");
+            fieldRef.current?.focus();
           }}
           variant="black"
         >
@@ -150,16 +217,17 @@ function TaskNameField({
   );
 }
 
-function TaskDescriptionField({
-  defaultValue,
+export function TaskDescriptionField({
+  value,
+  onChange,
   disabled,
 }: {
-  defaultValue: string;
+  value: string;
+  onChange: (value: string) => void;
   disabled: boolean;
 }) {
   const hintId = useId();
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState(defaultValue);
   const { length } = value;
   return (
     <label className="flex flex-col gap-2 text-sm">
@@ -184,7 +252,7 @@ function TaskDescriptionField({
           maxLength={35}
           name="description"
           onChange={(event) => {
-            setValue(event.currentTarget.value);
+            onChange(event.currentTarget.value);
           }}
           placeholder="e.g. Review notes and practice"
           ref={descriptionRef}
@@ -198,7 +266,7 @@ function TaskDescriptionField({
           size="icon-small"
           disabled={disabled || length === 0}
           onClick={() => {
-            setValue("");
+            onChange("");
             descriptionRef.current?.focus();
           }}
           variant="black"
