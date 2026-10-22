@@ -1,12 +1,15 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
-import { Toggle } from "@base-ui/react/toggle";
+import { Dialog } from "@base-ui/react/dialog";
+import { Switch } from "@base-ui/react/switch";
 import {
   BellAlertIcon,
+  Cog6ToothIcon,
+  XMarkIcon,
   ForwardIcon,
   SpeakerWaveIcon,
   Square3Stack3DIcon,
 } from "@heroicons/react/24/outline";
-import { useRef, useState, useSyncExternalStore } from "react";
+import { useId, useRef, useState, useSyncExternalStore } from "react";
 import type { ReactNode, Ref } from "react";
 
 import Button from "@/components/Button";
@@ -44,10 +47,43 @@ export default function TimerToolbar({
         <AddTask disabled={!canUseTimer(snapshot)} />
       </div>
       <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2">
-        <TimerSettings />
         {backupActions}
+        <TimerSettingsDialog />
       </div>
     </div>
+  );
+}
+
+function TimerSettingsDialog() {
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger render={<Button variant="secondary" />}>
+        <Cog6ToothIcon aria-hidden="true" className="size-4.5" />
+        Settings
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
+        <Dialog.Popup className="border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-5 outline-hidden">
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <Dialog.Title className="text-lg font-semibold">
+              Settings
+            </Dialog.Title>
+            <Dialog.Close
+              render={
+                <Button
+                  aria-label="Close settings"
+                  size="icon-circle"
+                  variant="secondary"
+                />
+              }
+            >
+              <XMarkIcon aria-hidden="true" className="size-4" />
+            </Dialog.Close>
+          </div>
+          <TimerSettings />
+        </Dialog.Popup>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
 
@@ -69,8 +105,8 @@ function TimerSettings() {
   );
   const permission = permissionFailed ? "unsupported" : browserPermission;
   return (
-    <div className="isolate inline-flex shrink-0 items-center rounded">
-      <TimerSettingToggle
+    <div className="space-y-5">
+      <TimerSettingSwitch
         label="Notification"
         icon={<BellAlertIcon aria-hidden="true" className="size-4.5" />}
         title={
@@ -99,7 +135,7 @@ function TimerSettings() {
           }
         }}
       />
-      <TimerSettingToggle
+      <TimerSettingSwitch
         label="Autoplay"
         icon={<ForwardIcon aria-hidden="true" className="size-4.5" />}
         title="Autoplay"
@@ -110,7 +146,7 @@ function TimerSettings() {
         }}
       />
       <MultitaskSetting />
-      <TimerSettingToggle
+      <TimerSettingSwitch
         label="Ticking"
         title="Ticking"
         icon={<SpeakerWaveIcon aria-hidden="true" className="size-4.5" />}
@@ -126,7 +162,7 @@ function MultitaskSetting() {
   const { snapshot, error, multitask, setMultitask } = useTimer();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [failed, setFailed] = useState(false);
-  const toggleRef = useRef<HTMLButtonElement>(null);
+  const toggleRef = useRef<HTMLElement>(null);
   const cancelRef = useRef<HTMLButtonElement>(null);
 
   async function confirmSingleTask() {
@@ -145,7 +181,7 @@ function MultitaskSetting() {
         setConfirmOpen(open);
       }}
     >
-      <TimerSettingToggle
+      <TimerSettingSwitch
         checked={multitask}
         disabled={!canUseTimer(snapshot)}
         dimWhenDisabled={!canUseTimer(snapshot)}
@@ -202,7 +238,7 @@ function MultitaskSetting() {
   );
 }
 
-function TimerSettingToggle({
+function TimerSettingSwitch({
   ref,
   label,
   icon,
@@ -212,7 +248,7 @@ function TimerSettingToggle({
   dimWhenDisabled = true,
   onCheckedChange,
 }: {
-  ref?: Ref<HTMLButtonElement>;
+  ref?: Ref<HTMLElement>;
   label: string;
   icon: ReactNode;
   title?: string;
@@ -221,18 +257,28 @@ function TimerSettingToggle({
   dimWhenDisabled?: boolean;
   onCheckedChange: (checked: boolean) => void;
 }) {
+  const id = useId();
   return (
-    <Toggle
-      ref={ref}
-      aria-label={label}
-      className={`border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground data-pressed:border-border data-pressed:text-action corner-squircle relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center gap-1.5 border px-2 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-xl last:rounded-r-xl focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-pressed:z-10 motion-reduce:transition-none sm:px-3 ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
-      disabled={disabled}
-      onPressedChange={onCheckedChange}
-      pressed={checked}
+    <label
+      htmlFor={id}
+      className={`flex cursor-pointer items-center justify-between gap-5 ${disabled ? "cursor-not-allowed" : ""}`}
       title={title}
     >
-      {icon}
-      <span className="sr-only">{label}</span>
-    </Toggle>
+      <span className="flex items-center gap-3">
+        <span className="text-muted">{icon}</span>
+        <span>{label}</span>
+      </span>
+      <Switch.Root
+        id={id}
+        ref={ref}
+        aria-label={label}
+        className={`interactive-elevation focus-visible:outline-action data-checked:bg-action bg-border block w-11 shrink-0 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2 data-disabled:cursor-not-allowed ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
+        disabled={disabled}
+        onCheckedChange={onCheckedChange}
+        checked={checked}
+      >
+        <Switch.Thumb className="bg-switch-thumb shadow-control block h-4 w-4 rounded-full transition-transform duration-100 will-change-transform data-checked:translate-x-5 motion-reduce:transition-none" />
+      </Switch.Root>
+    </label>
   );
 }

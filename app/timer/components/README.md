@@ -154,7 +154,9 @@ resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root README.
 
 Export and Import share a segmented icon-only group,
-immediately beside the settings icons, with native hover labels and accessible names. `TimerDataControls` owns
+beside the secondary Settings button, with native hover labels and accessible names.
+Settings opens a modal containing Notification, Autoplay, Multitask, and Ticking
+switches with their existing icons. `TimerDataControls` owns
 backup state and passes its actions into `TimerToolbar`. Only errors appear above
 the toolbar; save status, backup guidance, and success messages are omitted.
 
