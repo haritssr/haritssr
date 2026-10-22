@@ -50,7 +50,7 @@ export default function LabDomainShell({
             value={{
               back: { href: parentPath, name: backButtonName },
               hideTitle: lab?.hideTitle === true,
-              path: segments.length === 3 ? pathname : undefined,
+              path: pathname,
               title,
             }}
           >

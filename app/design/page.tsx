@@ -572,6 +572,7 @@ export default function DesignSystem() {
 
           <Box title="Text Area">
             <textarea
+              aria-label="Text area example"
               className={FORM_CONTROL_CLASS_NAME}
               placeholder="Write something here..."
               rows={3}

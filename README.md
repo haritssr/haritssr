@@ -159,7 +159,10 @@ or demo. Writing MDX and its automatic module discovery live in
 live in `app/labs/data.ts`; discontinued records live in
 `app/labs/discontinued-data.ts`. The generated changelog snapshot lives in
 `app/commits/changelog.json`; the site-wide route registry remains in `data/`.
-Search and sitemap reuse these route-owned sources without duplicating records.
+The server-only `utils/routeManifest.ts` derives available routes, dynamic
+patterns, parents, and update dates from these sources. Search, sitemap, and
+tree reuse the manifest; content validation checks its page files and production
+availability.
 
 Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
 shared `SectionHeading` components) show an icon-only
@@ -222,3 +225,7 @@ on first load. `/api/commits` filters the committed snapshot and computes summar
 counts and activity buckets on the server; later selections load on demand with
 public response caching. Period, date, type, query, and row limit live in the URL;
 Back/Forward restore them, and typing updates are debounced before requests.
+
+Global search uses Ctrl/Cmd+K, preserving the browser Print shortcut. Top and
+bottom navigation share `data/navigation.ts`; section links distinguish the
+current page from a parent location.

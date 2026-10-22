@@ -3,17 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { memo, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
 import BackButton from "@/components/BackButton";
 import TopBarActionMenu from "@/components/TopBarActionMenu";
 import TopBarContents from "@/components/TopBarContents";
 import { scrollArticleToTop } from "@/components/useArticleContentsNavigation";
 import useScrolledPageHeader from "@/components/useScrolledPageHeader";
+import { primaryNavigation } from "@/data/navigation";
 
 import styles from "./TopBar.module.css";
-
-const destinations = ["home", "projects", "labs", "writing", "design"] as const;
 
 let mobileMedia: MediaQueryList | undefined;
 
@@ -104,7 +102,7 @@ export default function TopBar() {
             </Link>
           </div>
         ) : (
-          <TabBarTop currentSection={pathname.split("/")[1] || "home"} />
+          <TabBarTop pathname={pathname} />
         )}
         <HeaderActions
           key={pathname}
@@ -146,31 +144,33 @@ const HeaderActions = memo(
 );
 HeaderActions.displayName = "HeaderActions";
 
-function TabBarTop({ currentSection }: { currentSection: string }) {
+function TabBarTop({ pathname }: { pathname: string }) {
   return (
     <ul
       className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 lg:flex"
       id="main-navigation"
     >
-      {destinations.map((destination) => (
-        <li className="flex h-full items-center space-x-3" key={destination}>
-          <Link
-            className="group flex h-full items-center rounded-full"
-            aria-current={currentSection === destination ? "page" : undefined}
-            href={destination === "home" ? "/" : `/${destination}`}
-          >
-            <span
-              className={
-                currentSection === destination
-                  ? "text-foreground"
-                  : "text-foreground/70"
-              }
+      {primaryNavigation.map(({ title, href }) => {
+        const exact = pathname === href;
+        const current =
+          exact || (href !== "/" && pathname.startsWith(`${href}/`));
+        const currentLocation = exact ? "page" : "location";
+        return (
+          <li className="flex h-full items-center space-x-3" key={href}>
+            <Link
+              className="group flex h-full items-center rounded-full"
+              aria-current={current ? currentLocation : undefined}
+              href={href}
             >
-              {capitalizeFirstLetter(destination)}
-            </span>
-          </Link>
-        </li>
-      ))}
+              <span
+                className={current ? "text-foreground" : "text-foreground/70"}
+              >
+                {title}
+              </span>
+            </Link>
+          </li>
+        );
+      })}
     </ul>
   );
 }

@@ -8,6 +8,7 @@ import {
 } from "@/app/labs/discontinued-data";
 import { getAvailableLabSummaries } from "@/utils/labCatalog";
 import { getLabRoutes } from "@/utils/labRoutes";
+import { getRouteManifest } from "@/utils/routeManifest";
 import { getSearchIndex } from "@/utils/searchIndex";
 import { parseWritingPost } from "@/utils/writing-posts";
 
@@ -144,6 +145,20 @@ if (
   !/^[a-f0-9]{40}$/u.test(removalCommitSha)
 ) {
   failures.push("Removal commit SHA must be a full Git commit hash.");
+}
+
+for (const entry of getRouteManifest()) {
+  if (!existsSync(path.join("app", entry.pattern, "page.tsx"))) {
+    failures.push(
+      `Discovery route has no page: ${entry.route} (${entry.pattern})`
+    );
+  }
+  if (
+    process.env.NODE_ENV === "production" &&
+    localRoutePattern.test(entry.route)
+  ) {
+    failures.push(`Local-only manifest route in production: ${entry.route}`);
+  }
 }
 
 const routes = getLabRoutes();

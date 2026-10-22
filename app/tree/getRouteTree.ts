@@ -1,5 +1,5 @@
 import "server-only";
-import { getSearchIndex } from "@/utils/searchIndex";
+import { getRouteManifest } from "@/utils/routeManifest";
 
 export interface RouteNode {
   path: string;
@@ -8,18 +8,10 @@ export interface RouteNode {
   children: RouteNode[];
 }
 
-const dynamicParents = [
-  "/labs/nextjs/articles",
-  "/labs/nextjs/posts",
-  "/labs/nextjs/students",
-];
-
-const dynamicPageParents = [...dynamicParents, "/projects", "/writing"];
-
 export function getRouteTree() {
   const roots: RouteNode[] = [];
   const nodes = new Map<string, RouteNode>();
-  const routes = getSearchIndex();
+  const routes = getRouteManifest();
   const activeDynamicParents = new Set<string>();
   const routesByLevel: number[] = [];
   let generatedPages = 0;
@@ -27,18 +19,11 @@ export function getRouteTree() {
   for (const route of routes) {
     const level = Math.max(1, route.route.split("/").filter(Boolean).length);
     routesByLevel[level - 1] = (routesByLevel[level - 1] ?? 0) + 1;
-    const dynamicPageParent = dynamicPageParents.find((parent) =>
-      route.route.startsWith(`${parent}/`)
-    );
-    if (dynamicPageParent !== undefined) {
+    if (route.pattern !== route.route) {
       generatedPages += 1;
-      activeDynamicParents.add(dynamicPageParent);
+      activeDynamicParents.add(route.pattern);
     }
-    const dynamicParent = dynamicParents.find((parent) =>
-      route.route.startsWith(`${parent}/`)
-    );
-    const path =
-      dynamicParent === undefined ? route.route : `${dynamicParent}/[...]`;
+    const path = route.collapseInTree ? `${route.parent}/[...]` : route.route;
     const segments = path === "/" ? [""] : path.slice(1).split("/");
     let siblings = roots;
 
@@ -55,7 +40,7 @@ export function getRouteTree() {
         nodes.set(nodePath, node);
         siblings.push(node);
       }
-      if (nodePath === path && dynamicParent === undefined) {
+      if (nodePath === path && !route.collapseInTree) {
         node.title = route.title;
         node.href = route.route;
       }
