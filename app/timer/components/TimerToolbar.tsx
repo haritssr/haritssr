@@ -57,9 +57,11 @@ export default function TimerToolbar({
 function TimerSettingsDialog() {
   return (
     <Dialog.Root>
-      <Dialog.Trigger render={<Button variant="secondary" />}>
+      <Dialog.Trigger
+        aria-label="Settings"
+        className="border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground corner-squircle inline-flex min-h-8.5 cursor-pointer items-center justify-center rounded-xl border px-2 py-1.5 text-sm transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+      >
         <Cog6ToothIcon aria-hidden="true" className="size-4.5" />
-        Settings
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
