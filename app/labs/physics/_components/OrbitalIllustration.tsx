@@ -1,20 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
 import { getElectronCounts, ORBITALS } from "../_lib/electron-configuration";
-import {
-  BOHR_RADIUS_PM,
-  makeOrbitalSurface,
-  radialProbabilityRadius,
-  REAL_ORBITAL_SHAPES,
-  sampleOrbital,
-} from "../_lib/orbital-model";
+import { BOHR_RADIUS_PM, REAL_ORBITAL_SHAPES } from "../_lib/orbital-model";
+import type { OrbitalResponse } from "./orbital-worker";
 import { OrbitalCanvas, PHYSICAL_UNITS } from "./OrbitalCanvas";
+import useOrbitalGeometry from "./useOrbitalGeometry";
 
 import styles from "./orbital-illustration.module.css";
 
@@ -59,16 +55,12 @@ export default function OrbitalIllustration({
   );
   const selectedOrbitalTex = `${orbital.shell}${shape?.tex ?? orbital.label.slice(-1)}`;
   const selectedOrbitalLabel = `${orbital.shell}${shape?.label ?? orbital.label.slice(-1)}`;
-  const points = useMemo(
-    () => sampleOrbital(orbital.shell, azimuthal, orientation - azimuthal),
-    [orbital.shell, azimuthal, orientation]
+  const result = useOrbitalGeometry(
+    orbital.shell,
+    azimuthal,
+    orientation - azimuthal
   );
-  const surface = useMemo(
-    () => makeOrbitalSurface(orbital.shell, azimuthal, orientation - azimuthal),
-    [orbital.shell, azimuthal, orientation]
-  );
-  const selectedRadius = radialProbabilityRadius(orbital.shell, azimuthal, 0.9);
-  const fitRadius = radialProbabilityRadius(orbital.shell, azimuthal, 0.98);
+
   const description = `Hydrogen-like model of an occupied subshell in ${elementName}: ${selectedOrbitalLabel}, ${occupancy(electrons, orbital.orbitalCount, orientation)} electrons`;
 
   useEffect(() => {
@@ -177,14 +169,12 @@ export default function OrbitalIllustration({
           ) : null}
         </div>
         <div className={styles.viewer} ref={viewerRef}>
-          <OrbitalCanvas
-            azimuthal={azimuthal}
+          <OrbitalPreview
+            result={result}
             description={description}
-            fitRadius={fitRadius}
-            points={points}
+            azimuthal={azimuthal}
             showAxes={showAxes}
             showSurface={showSurface}
-            surface={surface}
           />
           <div className="border-border text-foreground flex flex-wrap items-center justify-between gap-3 border-t bg-white p-3 pl-4 text-sm">
             <span className="inline-flex items-center gap-2">
@@ -263,15 +253,10 @@ export default function OrbitalIllustration({
             false
           )}
           ). For this hydrogen-like orbital, 90% of radial probability lies
-          within{" "}
-          {katexify(
-            `${selectedRadius.toFixed(1)}a_0 \\approx ${PHYSICAL_UNITS.format(selectedRadius * BOHR_RADIUS_PM)}\\,\\mathrm{pm}`,
-            false
-          )}{" "}
-          of the nucleus. These model sizes are not measured sizes of{" "}
-          {elementName}. Real orbital orientations can combine magnetic states,
-          so axis names do not correspond one-to-one with Aufbau{" "}
-          {katexify("m_l", false)} labels.
+          within <OrbitalRadius result={result} /> of the nucleus. These model
+          sizes are not measured sizes of {elementName}. Real orbital
+          orientations can combine magnetic states, so axis names do not
+          correspond one-to-one with Aufbau {katexify("m_l", false)} labels.
         </p>
       </div>
       <OrbitalShapeExplanation />
@@ -281,6 +266,54 @@ export default function OrbitalIllustration({
         </p>
       ) : null}
     </Section>
+  );
+}
+
+function OrbitalPreview({
+  result,
+  description,
+  azimuthal,
+  showAxes,
+  showSurface,
+}: {
+  result: OrbitalResponse | null;
+  description: string;
+  azimuthal: number;
+  showAxes: boolean;
+  showSurface: boolean;
+}) {
+  if (result === null) {
+    return <output className="text-muted block p-6">Preparing orbital…</output>;
+  }
+  if ("error" in result) {
+    return (
+      <output className="text-muted block p-6">
+        The orbital could not be rendered. Choose another orbital or refresh to
+        try again.
+      </output>
+    );
+  }
+  return (
+    <OrbitalCanvas
+      azimuthal={azimuthal}
+      description={description}
+      fitRadius={result.geometry.fitRadius}
+      points={result.geometry.points}
+      showAxes={showAxes}
+      showSurface={showSurface}
+      surface={result.geometry.surface}
+    />
+  );
+}
+
+function OrbitalRadius({ result }: { result: OrbitalResponse | null }) {
+  if (result === null || "error" in result) {
+    return <span>the radius being calculated</span>;
+  }
+  const { selectedRadius } = result.geometry;
+  return katexify(
+    `${selectedRadius.toFixed(1)}a_0 \\approx ${PHYSICAL_UNITS.format(selectedRadius * BOHR_RADIUS_PM)}\\,\\mathrm{pm}`,
+    false
   );
 }
 

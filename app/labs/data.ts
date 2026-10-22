@@ -1247,6 +1247,7 @@ export const LabsData: readonly LabDomain[] = [
           "2026-10-11",
           "2026-10-13",
           "2026-10-15",
+          "2026-10-22",
         ],
       },
       {

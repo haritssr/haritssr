@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "5cc275f5f00571c307e3647b01b78c14e4c1efda",
+      "date": "2026-10-22T21:24:18+07:00",
+      "subject": "perf(Content): render static math on the server and defer diagrams"
+    },
+    {
       "hash": "3fba6680aa7ea2ad682a45b139ffe805edba9c06",
       "date": "2026-10-22T21:24:06+07:00",
       "subject": "refactor(Navigation): share route discovery and correct page semantics"
