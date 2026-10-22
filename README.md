@@ -2,7 +2,6 @@
 - [Labs](https://haritssr.com/labs): Frontend, browser APIs, mathematics, and physics.
 - [Writing](https://haritssr.com/writing): Posts and notes.
 - [Design](https://haritssr.com/design): Design system reference.
-- [More](https://haritssr.com/more): Interests and personal notes.
 - [Commits](https://haritssr.com/commits): Commit history and activity.
   Model suitability lives at `/commits/2026-10-11` and `/commits/2026-10-15`;
   the dated review at

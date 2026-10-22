@@ -10,7 +10,7 @@
 
 .triangle {
   --tree-link-color: var(--color-success);
-  list-style-type: "▸ ";
+  list-style-type: "- ";
 }
 
 .dash {

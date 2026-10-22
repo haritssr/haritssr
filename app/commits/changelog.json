@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "b01f0d31607771d46786fae552f7e0ae56dc70f3",
+      "date": "2026-10-22T19:06:50+07:00",
+      "subject": "feat(Home): organize tools and refine profile navigation"
+    },
+    {
       "hash": "dc52f33ccfbe505cec57f3595982fd615dda613f",
       "date": "2026-10-22T19:03:43+07:00",
       "subject": "style(PageHeader): reduce spacing before page content"
