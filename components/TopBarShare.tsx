@@ -34,7 +34,7 @@ export function ShareButton({ showLabel }: { showLabel: boolean }) {
       }}
       type="button"
     >
-      <LinkIcon aria-hidden="true" className="size-5 shrink-0 sm:size-4.5" />
+      <LinkIcon aria-hidden="true" className="size-5 shrink-0" />
       {showLabel ? <span>Copy URL</span> : null}
     </button>
   );

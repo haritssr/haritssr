@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "01539611393206d7ce7d36d6ad567bb6286113e6",
+      "date": "2026-10-22T21:46:24+07:00",
+      "subject": "style(Home): align horizontal spacing between tool cards"
+    },
+    {
       "hash": "4e60fa682976bc89b70ced770750c227c7e98455",
       "date": "2026-10-22T21:46:21+07:00",
       "subject": "feat(Shortcuts): add global feature controls and homepage reference"

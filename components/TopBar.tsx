@@ -73,7 +73,7 @@ export default function TopBar() {
       <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:py-5 xl:px-0">
         {pathname === "/" ? (
           <Link
-            className="text-foreground/70 flex min-w-0 items-center"
+            className="text-foreground sm:text-foreground/70 flex min-w-0 items-center"
             href="/"
           >
             <span className="truncate">Harits Syah</span>

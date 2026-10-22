@@ -36,10 +36,7 @@ export default function TopBarActions({
         target="_blank"
         title="View Source"
       >
-        <CodeBracketIcon
-          aria-hidden="true"
-          className="size-5 shrink-0 sm:size-4.5"
-        />
+        <CodeBracketIcon aria-hidden="true" className="size-5 shrink-0" />
         {list ? <span>View Source</span> : null}
       </a>
       <div className={list ? "w-full" : "flex shrink-0 items-center"}>

@@ -194,7 +194,7 @@ export default function TopBarSearch({
     >
       <MagnifyingGlassIcon
         aria-hidden="true"
-        className="size-5 shrink-0 stroke-2 sm:size-4.5"
+        className="size-5 shrink-0 stroke-2"
       />
       {showLabel ? <span>Search</span> : null}
     </button>

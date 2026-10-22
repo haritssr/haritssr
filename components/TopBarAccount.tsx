@@ -22,7 +22,7 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
       // oxlint-disable-next-line nextjs/no-img-element
       <img
         alt=""
-        className="size-5 shrink-0 rounded-full object-cover sm:size-4.5"
+        className="size-5 shrink-0 rounded-full object-cover"
         height={20}
         onError={() => {
           setFailedPicture(account.picture);
@@ -32,10 +32,7 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
         width={20}
       />
     ) : (
-      <UserCircleIcon
-        aria-hidden="true"
-        className="size-5 shrink-0 sm:size-4.5"
-      />
+      <UserCircleIcon aria-hidden="true" className="size-5 shrink-0" />
     );
 
   if (!account) {
