@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "0ec7b0df3293eb72e2bb603eb56e8d70e83f1014",
+      "date": "2026-10-23T05:29:55+07:00",
+      "subject": "refactor(topbar): group shared navigation components"
+    },
+    {
       "hash": "933dcc18d4582d2e4d8903fb581cec1f0e89dc58",
       "date": "2026-10-23T05:29:19+07:00",
       "subject": "refactor(routes): colocate Writing and Projects components"

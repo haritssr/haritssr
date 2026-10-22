@@ -122,6 +122,7 @@ Components used by a single route live beside that route’s page. Related group
 shared across routes within a feature use `_components/`, such as
 `app/labs/_components/`; shared UI primitives remain in the root `components/`
 directory. Top bar components and their CSS module live in `components/topbar/`.
+Article navigation components, hooks, and styles live in `components/article/`.
 
 User Interface labs live at `/labs/user-interface` and its child
 routes. Labs uses `/labs` throughout navigation, metadata, search, and the sitemap;

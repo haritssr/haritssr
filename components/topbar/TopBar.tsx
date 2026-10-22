@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { memo, useEffect, useRef, useState, useSyncExternalStore } from "react";
 
+import { scrollArticleToTop } from "@/components/article/useArticleContentsNavigation";
 import BackButton from "@/components/BackButton";
-import { scrollArticleToTop } from "@/components/useArticleContentsNavigation";
 import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 import { primaryNavigation } from "@/data/navigation";
 

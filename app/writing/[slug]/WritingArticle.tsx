@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import ArticleBackToTop from "@/components/ArticleBackToTop";
+import ArticleBackToTop from "@/components/article/ArticleBackToTop";
 
 export default function WritingArticle({ children }: { children: ReactNode }) {
   return (

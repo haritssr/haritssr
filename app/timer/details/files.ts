@@ -202,7 +202,7 @@ export const integrationFiles = [
     "Mobile navigation surface measured for floating Timer placement.",
   ],
   [
-    "components/ArticleBackToTop.tsx",
+    "components/article/ArticleBackToTop.tsx",
     "Keeps the reading control above the Timer dock when visible.",
   ],
   [

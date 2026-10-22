@@ -4,8 +4,9 @@ import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
 import Button from "@/components/Button";
-import { scrollArticleToTop } from "@/components/useArticleContentsNavigation";
-import useFooterClearance from "@/components/useFooterClearance";
+
+import { scrollArticleToTop } from "./useArticleContentsNavigation";
+import useFooterClearance from "./useFooterClearance";
 
 export default function ArticleBackToTop() {
   const [visible, setVisible] = useState(false);
