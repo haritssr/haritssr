@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4e60fa682976bc89b70ced770750c227c7e98455",
+      "date": "2026-10-22T21:46:21+07:00",
+      "subject": "feat(Shortcuts): add global feature controls and homepage reference"
+    },
+    {
       "hash": "78da768263bb820bef554139e79376fc76e66c83",
       "date": "2026-10-22T21:45:59+07:00",
       "subject": "perf(Home): eagerly load the profile image"
