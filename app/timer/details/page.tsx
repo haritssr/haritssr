@@ -201,7 +201,8 @@ export default function TimerDetailsPage() {
             </li>
             <li>
               Turso remembers Multitask, Autoplay, and notification preferences
-              across devices and reloads; Ticking stays local and resets off.
+              across devices and reloads; Ticking remembers its setting in this
+              browser across reloads and tabs.
             </li>
             <li>
               The speed control beside elapsed time cycles through 1x, 1.5x, 2x,
@@ -248,7 +249,8 @@ export default function TimerDetailsPage() {
             <li>
               Ticking plays one Quartz clock mechanical tick per second while
               any task runs, repeating at a single pitch. Tasks share the tick
-              regardless of speed. It defaults off and resets on reload.
+              regardless of speed. It defaults off and remembers your choice
+              across reloads in this browser.
             </li>
             <li>
               The same Quartz ticks play during the final 10 real seconds even

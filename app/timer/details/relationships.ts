@@ -135,7 +135,7 @@ export const timerRelationships = [
     notes: [
       "timerEngine applies settlement, actions, latest-running selection, and Autoplay inside one Turso write transaction. Saved preferences are read in the same transaction; confirmed snapshots publish only after commit.",
       "Refreshes derive progress from timestamps without rewriting running baselines. Completion and midnight boundaries persist when due. Failed transactions publish no changes. History includes accelerated live time across exactly 30 dates.",
-      "useTimerSchedule refreshes at completion or midnight. useTimerAudioOwner gives continuous audio to one eligible browser tab through Web Locks, falling back to the focused tab. Explicit action sounds remain in the clicked tab, and Ticking resets off on reload.",
+      "useTimerSchedule refreshes at completion or midnight. useTimerAudioOwner gives continuous audio to one eligible browser tab through Web Locks, falling back to the focused tab. Explicit action sounds remain in the clicked tab. timerTicking remembers Ticking across reloads and tabs in the same browser; pointer or key interaction can unlock restored audio.",
       "useTimerNotifications submits acknowledge through the protected API. In Turso, the completion claim and Autoplay transition are atomic and read saved preferences. Only the winning claim shows feedback; imported historical completions are already acknowledged. The service worker opens or focuses Timer when a system notification is clicked.",
     ],
   },

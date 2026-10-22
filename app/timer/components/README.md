@@ -96,7 +96,8 @@ Observers and event listeners are active only while the dock is visible.
 
 Multitask appears after Autoplay and defaults off. Turso remembers Multitask,
 Autoplay, and notification preferences across devices and reloads. Ticking stays
-local and resets off. Autoplay starts one next unfinished task when none run.
+local and persists across reloads and tabs in the same browser. Autoplay starts
+one next unfinished task when none run.
 
 Turning Multitask off with multiple running tasks opens a confirmation:
 “Only the most recent task will continue”, with Cancel and OK. Cancel leaves all
@@ -106,12 +107,18 @@ confirming. Turso saves the preference and keeps the latest task in one
 transaction. A failed save keeps Multitask enabled and shows an error. With zero
 or one running task, no confirmation is needed.
 
-Ticking defaults off and resets on reload. When enabled, one shared Quartz clock
+Ticking defaults off and stores its setting in browser localStorage under the
+versioned `haritssr-timer-ticking:v1` key through
+[timerTicking.ts](../../../utils/timerTicking.ts). Both on and off survive reloads;
+storage events synchronize open tabs. If storage is blocked, the toggle still
+works in memory. When enabled, one shared Quartz clock
 mechanical tick repeats at a single pitch each real second while any personal task
 runs, regardless of task speed or the number of running tasks. It stops when all
 tasks pause, finish, or reach midnight, and continues across page navigation. It does not mute the existing
 Start, Pause, Done, or completion sounds. Audio setup happens in the toggle's
-click handler; the scheduling hook owns timeout cleanup and checks elapsed time
+click handler and on pointer/key interaction when restored ticking needs audio
+permission after a reload. The switch stays enabled while the browser blocks
+autoplay. The scheduling hook owns timeout cleanup and checks elapsed time
 before each tick, so overdue tasks stay silent while waiting for a server refresh.
 
 During the final 10 real seconds of a task, the same Quartz warning ticks play automatically,

@@ -3,7 +3,7 @@ import {
   useEffect,
   useEffectEvent,
   useRef,
-  useState,
+  useSyncExternalStore,
 } from "react";
 
 import {
@@ -14,26 +14,58 @@ import {
 } from "@/utils/timer";
 import type { TimerSnapshot } from "@/utils/timer";
 import { playClockTick, prepareTaskSound } from "@/utils/timerSound";
+import {
+  getTickingEnabled,
+  setTickingEnabled as saveTickingEnabled,
+  subscribeTicking,
+} from "@/utils/timerTicking";
 
 import useTimerAudioOwner from "./useTimerAudioOwner";
+
+function getServerTickingEnabled() {
+  return false;
+}
 
 export default function useTimerSchedule(
   snapshot: TimerSnapshot | undefined,
   clockOffset: number,
   refresh: () => Promise<unknown>
 ) {
-  const [ticking, setTicking] = useState(false);
+  const ticking = useSyncExternalStore(
+    subscribeTicking,
+    getTickingEnabled,
+    getServerTickingEnabled
+  );
   const audio = useRef<AudioContext | null>(null);
   const canPlayAudio = useTimerAudioOwner(snapshot, clockOffset, ticking);
   const setTickingEnabled = useCallback((enabled: boolean) => {
     if (enabled) {
       audio.current = prepareTaskSound();
     }
-    setTicking(enabled);
+    saveTickingEnabled(enabled);
   }, []);
   const hasRunningTask =
     canUseTimer(snapshot) &&
     snapshot.day.tasks.some((task) => task.startedAt !== null);
+
+  useEffect(() => {
+    if (!ticking) {
+      return () => {
+        /* No audio activation listener while ticking is disabled. */
+      };
+    }
+    function resumeAudio() {
+      if (audio.current?.state !== "running") {
+        audio.current = prepareTaskSound();
+      }
+    }
+    window.addEventListener("pointerdown", resumeAudio);
+    window.addEventListener("keydown", resumeAudio);
+    return () => {
+      window.removeEventListener("pointerdown", resumeAudio);
+      window.removeEventListener("keydown", resumeAudio);
+    };
+  }, [ticking]);
 
   const tick = useEffectEvent(() => {
     if (!canUseTimer(snapshot)) {

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "c1f79a68b763167dec8a3596869cd67fbd271318",
+      "date": "2026-10-22T20:56:27+07:00",
+      "subject": "fix(Timer): recover stalled snapshot loads"
+    },
+    {
       "hash": "b2e7a226773dac0d3578097eb7c3219546f61928",
       "date": "2026-10-22T20:01:52+07:00",
       "subject": "feat(Home): describe available site features"

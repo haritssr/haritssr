@@ -94,7 +94,8 @@
   this version: it idempotently adds nullable `duration_presets` and `task_presets`
   JSON columns to existing preferences; missing values use the default presets.
 - Autoplay, Multitask, and notification preferences persist in Turso. Ticking
-  resets off on reload. Web Locks coordinate continuous audio within one browser;
+  defaults off and remembers its setting in this browser across reloads and tabs.
+  Web Locks coordinate continuous audio within one browser;
   other devices can play their own ticking. Completion feedback is claimed globally.
 - Timer UI components live in `app/timer/components/`; its
   [component guide](app/timer/components/README.md) maps the controls. The global

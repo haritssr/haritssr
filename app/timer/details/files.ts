@@ -119,6 +119,10 @@ export const implementationFiles = [
     "Ticking, countdown warnings, completion refreshes, and midnight rollover.",
   ],
   [
+    "utils/timerTicking.ts",
+    "Browser-persisted Ticking preference, hydration-safe reads, and tab synchronization.",
+  ],
+  [
     "components/useTimerNotifications.ts",
     "Completion claims, browser notifications, sound, and visible feedback.",
   ],
