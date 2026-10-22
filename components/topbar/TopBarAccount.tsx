@@ -4,6 +4,7 @@ import { Menu } from "@base-ui/react/menu";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
+import Button from "@/components/Button";
 import { useTimerSession } from "@/utils/timerSession";
 
 export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
@@ -68,11 +69,21 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
             <p className="text-muted px-3 py-2 text-sm break-all">
               {account.email}
             </p>
-            <form action="/api/timer/auth/logout" method="post">
+            <form
+              action="/api/timer/auth/logout"
+              className="w-full"
+              method="post"
+            >
               <Menu.Item
                 nativeButton
-                render={<button aria-label="Sign out" type="submit" />}
-                className="data-highlighted:bg-foreground/10 flex w-full cursor-pointer rounded-lg px-3 py-2 text-left text-sm outline-hidden"
+                render={
+                  <Button
+                    aria-label="Sign out"
+                    type="submit"
+                    variant="secondary"
+                  />
+                }
+                className="data-highlighted:bg-interface-hover w-full"
               >
                 Sign out
               </Menu.Item>

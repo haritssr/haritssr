@@ -206,7 +206,7 @@ function SearchDialogContent({
             </Autocomplete.InputGroup>
             <div
               aria-busy={isLoading && commandCount === 0}
-              className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pb-2"
+              className="scrollbar-subtle min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pb-2"
             >
               {loadError ? (
                 <div

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "89bef2f32be8cf3ff94bd231e14b585a2149bcd5",
+      "date": "2026-10-23T05:30:07+07:00",
+      "subject": "refactor(article): group reading controls and navigation hooks"
+    },
+    {
       "hash": "0ec7b0df3293eb72e2bb603eb56e8d70e83f1014",
       "date": "2026-10-23T05:29:55+07:00",
       "subject": "refactor(topbar): group shared navigation components"

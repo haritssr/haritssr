@@ -164,7 +164,11 @@ function TabBarTop({ pathname }: { pathname: string }) {
               href={href}
             >
               <span
-                className={current ? "text-foreground" : "text-foreground/70"}
+                className={
+                  current
+                    ? "text-foreground underline"
+                    : "text-foreground/70 hover:text-foreground"
+                }
               >
                 {title}
               </span>
