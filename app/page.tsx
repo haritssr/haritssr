@@ -181,6 +181,7 @@ function PersonalDetails() {
           alt={profileName}
           className="size-25 rounded-full"
           height={100}
+          loading="eager"
           src="/images/blur.jpg"
           width={100}
         />
