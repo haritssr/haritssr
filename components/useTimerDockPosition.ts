@@ -34,6 +34,7 @@ export default function useTimerDockPosition(
             .replace("px", "")
         ) || 0;
       let bottom = desktop ? 1.5 * rem : Math.max(0.75 * rem, safeBottom);
+      let gap = 0.75 * rem;
       const bounds = navigation?.getBoundingClientRect();
       if (
         !desktop &&
@@ -42,15 +43,27 @@ export default function useTimerDockPosition(
         bounds.bottom > 0 &&
         bounds.top < window.innerHeight
       ) {
-        const gap = Math.max(bottom, window.innerHeight - bounds.bottom);
+        gap = Math.max(bottom, window.innerHeight - bounds.bottom);
         bottom = window.innerHeight - bounds.top + gap;
         dock.style.setProperty("--timer-tabbar-height", `${bounds.height}px`);
       } else {
         dock.style.removeProperty("--timer-tabbar-height");
       }
-      const height = dock.getBoundingClientRect().height + 0.75 * rem;
+      const { height } = dock.getBoundingClientRect();
+      // The tab bar already occupies space after the footer in normal flow.
+      const navigationHeight = desktop
+        ? 0
+        : (navigation?.closest("[data-mobile-tabbar]")?.getBoundingClientRect()
+            .height ?? 0);
       dock.style.setProperty("--timer-dock-bottom", `${bottom}px`);
-      root.style.setProperty("--timer-dock-clearance", `${bottom + height}px`);
+      root.style.setProperty(
+        "--timer-dock-clearance",
+        `${bottom + height + 0.75 * rem}px`
+      );
+      root.style.setProperty(
+        "--timer-footer-clearance",
+        `${Math.max(1.25 * rem, bottom + height + gap - navigationHeight)}px`
+      );
     }
 
     function schedulePosition() {
@@ -75,6 +88,7 @@ export default function useTimerDockPosition(
       window.removeEventListener("scroll", schedulePosition);
       cancelAnimationFrame(frame);
       root.style.removeProperty("--timer-dock-clearance");
+      root.style.removeProperty("--timer-footer-clearance");
       dock.style.removeProperty("--timer-dock-bottom");
       dock.style.removeProperty("--timer-tabbar-height");
     };

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f238678ad8d70302e8b8c69316a944ac4a05063b",
+      "date": "2026-10-22T15:17:52+07:00",
+      "subject": "refactor(footer): isolate install button client behavior"
+    },
+    {
       "hash": "648f31be712ab90ba68378aaf576618c26edff39",
       "date": "2026-10-22T14:20:43+07:00",
       "subject": "feat(home): update profile grid and navigation"
