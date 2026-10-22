@@ -12,40 +12,57 @@ export function prepareTaskSound() {
   }
 }
 
-export function playClockTick(
-  context: AudioContext | null,
-  alternate: boolean,
-  urgent = false
-) {
+export function playClockTick(context: AudioContext | null) {
   if (context === null || context.state !== "running") {
     return;
   }
   try {
-    const source = context.createOscillator();
-    const gain = context.createGain();
-    const start = context.currentTime;
-    const frequency = (alternate ? 660 : 880) * (urgent ? 1.5 : 1);
-    source.type = "sine";
-    source.frequency.setValueAtTime(frequency * 1.4, start);
-    source.frequency.exponentialRampToValueAtTime(frequency, start + 0.035);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(urgent ? 0.12 : 0.08, start + 0.004);
-    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.11);
-    source.connect(gain);
-    gain.connect(context.destination);
-    source.addEventListener(
-      "ended",
-      () => {
-        source.disconnect();
-        gain.disconnect();
-      },
-      { once: true }
-    );
-    source.start(start);
-    source.stop(start + 0.12);
+    playQuartzTick(context);
   } catch {
     // Clock audio must not interrupt running tasks.
   }
+}
+
+// A short broadband impact and a damped body mimic a mechanical escapement.
+function playQuartzTick(context: AudioContext) {
+  const pitch = 3100;
+  const body = 950;
+  const decay = 0.009;
+  const weight = 0.25;
+  const duration = 0.12;
+  const buffer = context.createBuffer(
+    1,
+    Math.ceil(context.sampleRate * duration),
+    context.sampleRate
+  );
+  const samples = buffer.getChannelData(0);
+  let seed = 12_345;
+  let smoothed = 0;
+  for (let index = 0; index < samples.length; index += 1) {
+    const time = index / context.sampleRate;
+    seed = (seed * 16_807) % 2_147_483_647;
+    const noise = (seed / 2_147_483_647) * 2 - 1;
+    smoothed += 0.35 * (noise - smoothed);
+    const attack = Math.min(1, time / 0.0008);
+    const impact = (noise - smoothed) * Math.exp(-time / 0.0025);
+    const mechanism =
+      Math.sin(2 * Math.PI * pitch * time) * Math.exp(-time / (decay * 0.35));
+    const resonance =
+      Math.sin(2 * Math.PI * body * time) * Math.exp(-time / decay);
+    samples[index] =
+      attack * (impact * 0.35 + mechanism * 0.2 + resonance * weight) * 0.25;
+  }
+  const source = context.createBufferSource();
+  source.buffer = buffer;
+  source.connect(context.destination);
+  source.addEventListener(
+    "ended",
+    () => {
+      source.disconnect();
+    },
+    { once: true }
+  );
+  source.start(context.currentTime);
 }
 
 export function playTaskSound(

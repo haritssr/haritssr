@@ -242,13 +242,13 @@ export default function TimerDetailsPage() {
         >
           <ExplanationList>
             <li>
-              Ticking plays one plucked tick per second while any task runs,
-              alternating between two pitches. Tasks share the tick regardless
-              of speed. It defaults off and resets on reload.
+              Ticking plays one Quartz clock mechanical tick per second while
+              any task runs, repeating at a single pitch. Tasks share the tick
+              regardless of speed. It defaults off and resets on reload.
             </li>
             <li>
-              Warning ticks play during the final 10 real seconds even with
-              Ticking off, speeding up at 6 and 3 seconds remaining. They
+              The same Quartz ticks play during the final 10 real seconds even
+              with Ticking off, speeding up at 6 and 3 seconds remaining. They
               account for task speed and stop on pause or completion.
             </li>
             <li>

@@ -140,7 +140,7 @@ export const implementationFiles = [
   ],
   [
     "utils/timerSound.ts",
-    "Action sounds, playful ticking, and countdown warnings.",
+    "Action sounds, Quartz clock ticking, and countdown warnings.",
   ],
   [
     "utils/timer.ts",

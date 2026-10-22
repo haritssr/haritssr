@@ -96,15 +96,15 @@ confirming. Turso saves the preference and keeps the latest task in one
 transaction. A failed save keeps Multitask enabled and shows an error. With zero
 or one running task, no confirmation is needed.
 
-Ticking defaults off and resets on reload. When enabled, one shared playful,
-plucked tone alternates between two pitches each real second while any personal task
+Ticking defaults off and resets on reload. When enabled, one shared Quartz clock
+mechanical tick repeats at a single pitch each real second while any personal task
 runs, regardless of task speed or the number of running tasks. It stops when all
 tasks pause, finish, or reach midnight, and continues across page navigation. It does not mute the existing
 Start, Pause, Done, or completion sounds. Audio setup happens in the toggle's
 click handler; the scheduling hook owns timeout cleanup and checks elapsed time
 before each tick, so overdue tasks stay silent while waiting for a server refresh.
 
-During the final 10 real seconds of a task, warning ticks play automatically,
+During the final 10 real seconds of a task, the same Quartz warning ticks play automatically,
 even with Ticking off. They become faster with 6 and 3 seconds remaining and
 stop when the task pauses or finishes. Remaining time accounts for task speed.
 

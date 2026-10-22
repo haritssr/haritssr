@@ -35,7 +35,7 @@ export default function useTimerSchedule(
     canUseTimer(snapshot) &&
     snapshot.day.tasks.some((task) => task.startedAt !== null);
 
-  const tick = useEffectEvent((alternate: boolean) => {
+  const tick = useEffectEvent(() => {
     if (!canUseTimer(snapshot)) {
       return 1000;
     }
@@ -58,7 +58,7 @@ export default function useTimerSchedule(
     if (canPlayAudio() && (urgent || (ticking && remaining < Infinity))) {
       const context = audio.current ?? prepareTaskSound();
       audio.current = context;
-      playClockTick(context, alternate, urgent);
+      playClockTick(context);
     }
     if (remaining <= 3) {
       return 250;
@@ -72,11 +72,9 @@ export default function useTimerSchedule(
         /* No ticking timeout while idle. */
       };
     }
-    let alternate = false;
     let timeout: number;
     const scheduleTick = () => {
-      const delay = tick(alternate);
-      alternate = !alternate;
+      const delay = tick();
       timeout = window.setTimeout(scheduleTick, delay);
     };
     scheduleTick();
