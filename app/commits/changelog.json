@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3fdba4a3a4c2fbc9b01c54b3e9f755c0bc81fe99",
+      "date": "2026-10-23T06:26:29+07:00",
+      "subject": "feat(Mathematics): add HMMT scaling integral solution"
+    },
+    {
       "hash": "90d103294163edb624366e3c929009753d86ed30",
       "date": "2026-10-23T05:30:15+07:00",
       "subject": "style(navigation): align links account actions and search scrolling"

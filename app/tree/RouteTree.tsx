@@ -60,14 +60,19 @@ function TreeList({
             <div className="inline-flex min-h-8 max-w-full items-center space-x-2 align-middle">
               <NodeLabel node={node} />
               <Collapsible.Trigger
-                aria-label={`Toggle ${node.title} routes`}
-                className="bg-foreground/90 hover:bg-foreground/80 focus-visible:outline-action group flex size-4.5 shrink-0 cursor-pointer items-center justify-center rounded-full text-white [corner-shape:round] focus-visible:outline-2 focus-visible:outline-offset-2"
+                aria-label={`Toggle ${node.title} routes (${node.children.length} children)`}
+                className="focus-visible:outline-action group flex shrink-0 cursor-pointer items-center gap-2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2"
               >
-                <ChevronDownIcon
-                  aria-hidden="true"
-                  className="size-3 -rotate-90 group-data-panel-open:rotate-0"
-                  strokeWidth={3}
-                />
+                <span className="bg-foreground/90 group-hover:bg-foreground/80 flex size-4.5 items-center justify-center rounded-full text-white [corner-shape:round]">
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="size-3 -rotate-90 group-data-panel-open:rotate-0"
+                    strokeWidth={3}
+                  />
+                </span>
+                <span className="text-muted tabular-nums">
+                  {node.children.length}
+                </span>
               </Collapsible.Trigger>
             </div>
             <Collapsible.Panel>
@@ -91,9 +96,12 @@ function TreeList({
 }
 
 export default function RouteTree({ nodes }: { nodes: RouteNode[] }) {
-  const [allOpen, setAllOpen] = useState(true);
+  const [allOpen, setAllOpen] = useState(false);
   const [openOverrides, setOpenOverrides] = useState<Record<string, boolean>>(
     {}
+  );
+  const hasOpenBranch = nodes.some(
+    (node) => node.children.length > 0 && (openOverrides[node.path] ?? allOpen)
   );
 
   function setAll(open: boolean) {
@@ -110,11 +118,11 @@ export default function RouteTree({ nodes }: { nodes: RouteNode[] }) {
       <div className="flex flex-wrap gap-2">
         <Button
           onClick={() => {
-            setAll(!allOpen);
+            setAll(!hasOpenBranch);
           }}
           variant="secondary"
         >
-          {allOpen ? "Collapse all" : "Expand all"}
+          {hasOpenBranch ? "Collapse all" : "Expand all"}
         </Button>
       </div>
       <nav aria-label="Site route tree">
