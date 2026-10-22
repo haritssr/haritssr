@@ -1664,6 +1664,16 @@ export const LabsData: readonly LabDomain[] = [
           "2026-10-22",
         ],
       },
+      {
+        slug: "hmmt-2002-calculus-problem-10",
+        group: "chapters",
+        title: "HMMT 2002: Calculus Problem 10",
+        description:
+          "Solve a scaling integral using substitution and interval additivity.",
+        tags: ["calculus", "integrals", "problem-solving", "hmmt"],
+        createdAt: "2026-10-23",
+        updatedAt: ["2026-10-23"],
+      },
     ],
     id: 17,
     logoSrc: "/icons/math.svg",

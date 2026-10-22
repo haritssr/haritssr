@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "90d103294163edb624366e3c929009753d86ed30",
+      "date": "2026-10-23T05:30:15+07:00",
+      "subject": "style(navigation): align links account actions and search scrolling"
+    },
+    {
       "hash": "89bef2f32be8cf3ff94bd231e14b585a2149bcd5",
       "date": "2026-10-23T05:30:07+07:00",
       "subject": "refactor(article): group reading controls and navigation hooks"
