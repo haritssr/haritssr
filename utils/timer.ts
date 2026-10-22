@@ -27,11 +27,60 @@ export interface TimerNotice {
   activity: string;
 }
 
+export interface TimerTaskPreset {
+  id: string;
+  activity: string;
+  description: string;
+  duration: number;
+}
+
+export const DEFAULT_DURATION_PRESETS = [300, 900, 1800, 3600];
+export const DEFAULT_TASK_PRESETS: TimerTaskPreset[] = [
+  {
+    id: "x-traversal",
+    activity: "X Traversal",
+    description: "bookmarks, for you tab",
+    duration: 3600,
+  },
+  {
+    id: "youtube",
+    activity: "YouTube",
+    description: "watch later",
+    duration: 7200,
+  },
+  {
+    id: "house-keeping",
+    activity: "House Keeping",
+    description: "sapu, pel, tanaman, cleaning",
+    duration: 3600,
+  },
+  {
+    id: "short-break",
+    activity: "Short Break",
+    description: "",
+    duration: 600,
+  },
+  {
+    id: "long-break",
+    activity: "Long Break",
+    description: "",
+    duration: 1800,
+  },
+  {
+    id: "orientation",
+    activity: "Orientation",
+    description: "",
+    duration: 1800,
+  },
+];
+
 export interface TimerPreferences {
   revision: number;
   autoplay: boolean;
   multitask: boolean;
   notificationsEnabled: boolean;
+  durationPresets: number[];
+  taskPresets: TimerTaskPreset[];
 }
 
 export function canUseTimer(

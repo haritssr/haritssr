@@ -11,6 +11,8 @@ import {
 import type { ReactNode } from "react";
 import useSWR from "swr";
 
+import { DEFAULT_DURATION_PRESETS, DEFAULT_TASK_PRESETS } from "@/utils/timer";
+import type { TimerTaskPreset } from "@/utils/timer";
 import {
   fetchTimerSnapshot,
   saveTimerPreferences,
@@ -102,6 +104,13 @@ function useTimerState() {
       autoplay,
       multitask,
       notificationsEnabled,
+      durationPresets:
+        snapshot?.preferences?.durationPresets ?? DEFAULT_DURATION_PRESETS,
+      taskPresets: snapshot?.preferences?.taskPresets ?? DEFAULT_TASK_PRESETS,
+      setDurationPresets: async (durationPresets: number[]) =>
+        await mutations.preferences({ durationPresets }),
+      setTaskPresets: async (taskPresets: TimerTaskPreset[]) =>
+        await mutations.preferences({ taskPresets }),
       setAutoplay: async (enabled: boolean) =>
         await mutations.preferences({ autoplay: enabled }),
       setMultitask: async (enabled: boolean) =>

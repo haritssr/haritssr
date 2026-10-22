@@ -9,7 +9,7 @@ import {
 import {
   readTimerDays,
   closeTimerDatabase,
-  TIMER_DATABASE_SCHEMA,
+  initializeTimerDatabase,
   timerDatabase,
   timerDatabaseTransaction,
   writeTimerDays,
@@ -19,7 +19,7 @@ import { daySchema } from "../utils/timerValidation";
 try {
   const client = timerDatabase();
   try {
-    await client.batch(TIMER_DATABASE_SCHEMA, "write");
+    await initializeTimerDatabase(client);
   } finally {
     client.close();
   }

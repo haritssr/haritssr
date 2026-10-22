@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "5553a18a4c9b23f85324faaecdd463dbd76b51fc",
+      "date": "2026-10-22T19:07:01+07:00",
+      "subject": "feat(Commits): add curated weekly changelog for 2026"
+    },
+    {
       "hash": "4fc93abcab1a010acfa6f585baa425ca54fc2f99",
       "date": "2026-10-22T19:06:57+07:00",
       "subject": "feat(Tree): add route analytics and shared collapse control"

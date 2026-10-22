@@ -26,7 +26,7 @@ export function timerDatabase() {
   return createClient({ url, authToken: process.env.TURSO_AUTH_TOKEN });
 }
 
-export const TIMER_DATABASE_SCHEMA: InStatement[] = [
+const TIMER_DATABASE_SCHEMA: InStatement[] = [
   `CREATE TABLE IF NOT EXISTS timer_days (
     date TEXT PRIMARY KEY, revision INTEGER NOT NULL CHECK(revision >= 0)
   )`,
@@ -48,10 +48,32 @@ export const TIMER_DATABASE_SCHEMA: InStatement[] = [
     id INTEGER PRIMARY KEY CHECK(id = 1), revision INTEGER NOT NULL DEFAULT 0,
     autoplay INTEGER NOT NULL DEFAULT 0 CHECK(autoplay IN (0, 1)),
     multitask INTEGER NOT NULL DEFAULT 0 CHECK(multitask IN (0, 1)),
-    notifications_enabled INTEGER NOT NULL DEFAULT 1 CHECK(notifications_enabled IN (0, 1))
+    notifications_enabled INTEGER NOT NULL DEFAULT 1 CHECK(notifications_enabled IN (0, 1)),
+    duration_presets TEXT, task_presets TEXT
   )`,
   "INSERT OR IGNORE INTO timer_preferences(id) VALUES (1)",
 ];
+
+export async function initializeTimerDatabase(client: Client) {
+  const tx = await client.transaction("write");
+  try {
+    await tx.batch(TIMER_DATABASE_SCHEMA);
+    const columns = await tx.execute("PRAGMA table_info(timer_preferences)");
+    const names = new Set(columns.rows.map((column) => column.name));
+    const additions = ["duration_presets", "task_presets"]
+      .filter((name) => !names.has(name))
+      .map((name) => `ALTER TABLE timer_preferences ADD COLUMN ${name} TEXT`);
+    if (additions.length > 0) {
+      await tx.batch(additions);
+    }
+    await tx.commit();
+  } catch (error) {
+    await tx.rollback();
+    throw error;
+  } finally {
+    tx.close();
+  }
+}
 
 function dayQueries(date?: string): InStatement[] {
   const dates =
@@ -120,6 +142,14 @@ export async function readTimerState(tx: Transaction, date?: string) {
       autoplay: row.autoplay === 1,
       multitask: row.multitask === 1,
       notificationsEnabled: row.notifications_enabled === 1,
+      durationPresets:
+        typeof row.duration_presets === "string"
+          ? (JSON.parse(row.duration_presets) as unknown)
+          : undefined,
+      taskPresets:
+        typeof row.task_presets === "string"
+          ? (JSON.parse(row.task_presets) as unknown)
+          : undefined,
     }),
   };
 }

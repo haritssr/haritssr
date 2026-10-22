@@ -28,7 +28,7 @@ import {
   timerNotices,
   TimerStoreError,
 } from "@/utils/timerEngine";
-import { actionSchema, preferencesSchema } from "@/utils/timerValidation";
+import { actionSchema, preferencesPatchSchema } from "@/utils/timerValidation";
 
 export { TimerStoreError } from "@/utils/timerEngine";
 
@@ -119,11 +119,7 @@ export async function changeTimer(payload: unknown) {
 }
 
 export async function changeTimerPreferences(payload: unknown) {
-  const patch = preferencesSchema
-    .omit({ revision: true })
-    .partial()
-    .strict()
-    .parse(payload);
+  const patch = preferencesPatchSchema.parse(payload);
   const result = await timerDatabaseTransaction(async (tx) => {
     const value = await state(tx);
     if (patch.multitask === false) {
@@ -142,12 +138,14 @@ export async function changeTimerPreferences(payload: unknown) {
     await updateTimerDays(tx, value.days, value.previous);
     const prefs = value.preferences;
     await tx.execute({
-      sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, notifications_enabled = ? WHERE id = 1",
+      sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, notifications_enabled = ?, duration_presets = ?, task_presets = ? WHERE id = 1",
       args: [
         prefs.revision,
         Number(prefs.autoplay),
         Number(prefs.multitask),
         Number(prefs.notificationsEnabled),
+        JSON.stringify(prefs.durationPresets),
+        JSON.stringify(prefs.taskPresets),
       ],
     });
     return snapshot(value);

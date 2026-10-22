@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-import { TIMER_SPEEDS, validTimerDate } from "@/utils/timer";
+import {
+  DEFAULT_DURATION_PRESETS,
+  DEFAULT_TASK_PRESETS,
+  TIMER_SPEEDS,
+  validTimerDate,
+} from "@/utils/timer";
 
 const dateSchema = z.string().refine(validTimerDate);
 const instant = z.iso.datetime({ offset: true });
@@ -78,12 +83,45 @@ const noticeSchema = z.object({
   taskId: z.string(),
   activity: z.string(),
 });
+export const durationPresetsSchema = z
+  .array(z.number().int().min(1).max(86_400))
+  .min(1)
+  .max(5);
+export const taskPresetsSchema = z
+  .array(
+    z.object({
+      id: z.string().min(1).max(100),
+      ...taskDetails,
+    })
+  )
+  .min(1)
+  .max(6)
+  .refine(
+    (presets) =>
+      new Set(presets.map((preset) => preset.id)).size === presets.length
+  );
+
 export const preferencesSchema = z.object({
   revision: z.number().int().nonnegative(),
   autoplay: z.boolean(),
   multitask: z.boolean(),
   notificationsEnabled: z.boolean(),
+  durationPresets: durationPresetsSchema.default(() => [
+    ...DEFAULT_DURATION_PRESETS,
+  ]),
+  taskPresets: taskPresetsSchema.default(() =>
+    DEFAULT_TASK_PRESETS.map((preset) => ({ ...preset }))
+  ),
 });
+
+export const preferencesPatchSchema = preferencesSchema
+  .omit({ revision: true, durationPresets: true, taskPresets: true })
+  .extend({
+    durationPresets: durationPresetsSchema,
+    taskPresets: taskPresetsSchema,
+  })
+  .partial()
+  .strict();
 
 export const snapshotSchema = z.object({
   day: daySchema,
