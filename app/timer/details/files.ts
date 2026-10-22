@@ -187,7 +187,7 @@ export const integrationFiles = [
   ],
   ["app/page.tsx", "Home page content and tool navigation."],
   [
-    "components/TopBar.tsx",
+    "components/topbar/TopBar.tsx",
     "Desktop Timer navigation and shared top bar account controls.",
   ],
   ["app/api/page.tsx", "Documents the Timer API."],

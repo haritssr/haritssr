@@ -2,7 +2,7 @@
 
 import { LinkIcon } from "@heroicons/react/24/outline";
 
-import SharePageProvider, { useSharePageUrl } from "./SharePageProvider";
+import SharePageProvider, { useSharePageUrl } from "../SharePageProvider";
 
 export default function TopBarShare({
   showLabel = false,

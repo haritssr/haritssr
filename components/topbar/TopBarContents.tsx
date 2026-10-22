@@ -7,14 +7,15 @@ import { useEffect, useRef } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { SheetTrigger } from "react-aria-components/Sheet";
 
-import TopBarActionMenu from "@/components/TopBarActionMenu";
-import TopBarActions from "@/components/TopBarActions";
-import { useGlobalSearch } from "@/components/TopBarSearch";
 import useArticleContentsNavigation from "@/components/useArticleContentsNavigation";
 import useArticleOutline from "@/components/useArticleOutline";
 
+import TopBarActionMenu from "./TopBarActionMenu";
+import TopBarActions from "./TopBarActions";
+import { useGlobalSearch } from "./TopBarSearch";
+
 const ContentsPanel = dynamic(
-  async () => await import("./ArticleContentsPanel")
+  async () => await import("../ArticleContentsPanel")
 );
 
 export default function TopBarContents({

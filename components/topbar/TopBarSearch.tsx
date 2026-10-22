@@ -201,7 +201,8 @@ export default function TopBarSearch({
   );
 }
 
-const loadGlobalSearchDialog = async () => await import("./GlobalSearchDialog");
+const loadGlobalSearchDialog = async () =>
+  await import("../GlobalSearchDialog");
 const GlobalSearchDialog = dynamic(loadGlobalSearchDialog);
 
 function isRouteDoc(value: unknown): value is RouteDoc {

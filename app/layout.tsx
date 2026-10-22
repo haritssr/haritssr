@@ -7,8 +7,8 @@ import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import SiteShortcuts from "@/components/SiteShortcuts";
 import { SiteStructuredData } from "@/components/StructuredData";
 import TabBarButtom from "@/components/TabBarButtom";
-import TopBar from "@/components/TopBar";
-import { GlobalSearchProvider } from "@/components/TopBarSearch";
+import TopBar from "@/components/topbar/TopBar";
+import { GlobalSearchProvider } from "@/components/topbar/TopBarSearch";
 import { createPageMetadata } from "@/utils/pageMetadata";
 import { SITE_THEME_COLOR, SITE_URL } from "@/utils/site";
 

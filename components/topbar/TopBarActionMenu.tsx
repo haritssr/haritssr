@@ -5,8 +5,9 @@ import { QueueListIcon } from "@heroicons/react/24/outline";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import SharePageProvider from "@/components/SharePageProvider";
-import TopBarActions from "@/components/TopBarActions";
-import { useGlobalSearch } from "@/components/TopBarSearch";
+
+import TopBarActions from "./TopBarActions";
+import { useGlobalSearch } from "./TopBarSearch";
 
 export default function TopBarActionMenu({
   mobile,

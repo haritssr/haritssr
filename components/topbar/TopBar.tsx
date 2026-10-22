@@ -5,11 +5,12 @@ import { usePathname } from "next/navigation";
 import { memo, useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 import BackButton from "@/components/BackButton";
-import TopBarActionMenu from "@/components/TopBarActionMenu";
-import TopBarContents from "@/components/TopBarContents";
 import { scrollArticleToTop } from "@/components/useArticleContentsNavigation";
 import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 import { primaryNavigation } from "@/data/navigation";
+
+import TopBarActionMenu from "./TopBarActionMenu";
+import TopBarContents from "./TopBarContents";
 
 import styles from "./TopBar.module.css";
 

@@ -2,10 +2,11 @@
 
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
 
-import TopBarAccount from "@/components/TopBarAccount";
-import TopBarSearch from "@/components/TopBarSearch";
-import TopBarShare, { ShareButton } from "@/components/TopBarShare";
 import pageSourceUrl from "@/utils/pageSourceUrl";
+
+import TopBarAccount from "./TopBarAccount";
+import TopBarSearch from "./TopBarSearch";
+import TopBarShare, { ShareButton } from "./TopBarShare";
 
 export default function TopBarActions({
   pathname,
