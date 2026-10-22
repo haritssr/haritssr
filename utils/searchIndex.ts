@@ -5,6 +5,8 @@ import {
   commitAnalysisRoute,
   commitsRoute,
   modelSuitabilityRoute,
+  october21AnalysisRoute,
+  october22AnalysisRoute,
   todayModelSuitabilityRoute,
   navigationRoutes,
 } from "@/data/routes";
@@ -22,6 +24,8 @@ export function getSearchIndex(): RouteDoc[] {
     modelSuitabilityRoute,
     todayModelSuitabilityRoute,
     commitAnalysisRoute,
+    october21AnalysisRoute,
+    october22AnalysisRoute,
     apiRoute,
     ...getLabRoutes(),
     ...ProjectsData.map((project) => ({

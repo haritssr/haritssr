@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-14",
+  "basedOn": "commit messages and diffs",
+  "reviewedThrough": "5d249c1533728178c9f5190d673a0f2dd7faa669",
+  "conclusion": "Luna at Low effort fits isolated spacing, copy, and badge edits. Sol at Medium fits component extraction and navigation wiring; High is appropriate for the live clock. The shared science-page refactor merits 6.1 Sol at High because it touches many pages and shared layout conventions.",
+  "models": {
+    "9195a34946edbf8e1cf0a305b9caaeef6aaeec64": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "4b56176ffd769ac206feb1afd32f192f0c150c5c": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "80e074b1031dba252a5b66eade52aa1769dc60c5": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "15e0f1d871ec9d79846fdfb6ee981b49e4efd810": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "ebd0af41c99fdeb3a963ca6785957843ba4ab98f": {
+      "model": "6 Sol",
+      "effort": "High"
+    },
+    "22834342f87c860bf244b581c4fb6a1c635c1dda": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "4b2885edd39974ecef2e0befbea8c1b2664cbbde": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "a0ee7aba9eed3bc84b6b93799daf674c3920f696": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "dc054924ce27d806e386c949a649e716b8ba6b95": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "c07fe601336f55489b930e175c528a7fa4fbf279": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "25fcb567f768c22a7145b5a111970c49922e8fe7": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "5d249c1533728178c9f5190d673a0f2dd7faa669": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "92e717720bc2b229a962a637d72c2180ca41d51e": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "69d9c49f07b6200398d36b1fee4cc9d7152a3faa": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "52dc5421e2260739e66f5f1d14927e9861b73ff9": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "765bb8ea2635ed802f6311820856deb4519aa581": {
+      "model": "6 Luna",
+      "effort": "Low"
+    }
+  }
+}

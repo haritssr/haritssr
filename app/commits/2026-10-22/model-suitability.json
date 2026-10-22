@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-22",
+  "basedOn": "commit messages and diffs",
+  "reviewedThrough": "09a013bc8f67f664508844075f3865d73a7b8057",
+  "conclusion": "6.1 Sol at High fits the authenticated storage, optimistic mutations, floating controls, and authentication diagnostics because correctness spans state, persistence, and security boundaries. Sol at Medium or High fits the navigation, content moves, diagrams, and architecture documentation. Luna handles isolated copy, spacing, and cleanup changes.",
+  "models": {
+    "3c529d552d93cac92146f85b49befc060ae4f2b3": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "204e9fa2b512b3532732e422e35971487bfe33ac": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "784c8e4e19154fcd1f1764d3847f718318b0512d": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "3eaaa880d8fda3b11c122b032b24f9869fc461b7": {
+      "model": "6.1 Sol",
+      "effort": "High"
+    },
+    "a1a3f0f7470d6a88f1bd390d23a47ad4b0bb5308": {
+      "model": "6 Sol",
+      "effort": "High"
+    },
+    "3518c8ac67d60134ce63a02d0c2f5bee9c5eac89": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "f7b96867090dee5d5defc5d9784e1e4c8689600b": {
+      "model": "6 Luna",
+      "effort": "Medium"
+    },
+    "91c24f7ed12e1be90f528533fc6e3b7afee86ec8": {
+      "model": "6 Sol",
+      "effort": "High"
+    },
+    "9ab790ec8a51d6ab1b7de53bb09dc1991225201b": {
+      "model": "6 Sol",
+      "effort": "Medium"
+    },
+    "ad248f183a7f0067dbce996197afa7e4463cfb34": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "62d773d78dd479d25a789db1a3dc794594440158": {
+      "model": "6 Luna",
+      "effort": "Low"
+    },
+    "09a013bc8f67f664508844075f3865d73a7b8057": {
+      "model": "6 Luna",
+      "effort": "Low"
+    }
+  }
+}

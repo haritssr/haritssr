@@ -33,7 +33,7 @@ export const commitAnalysisRoute: RouteDoc = {
   route: "/commits/2026-10-14",
   title: "2026-10-14",
   description:
-    "An analysis of experiment layouts, new learning tools, and navigation changes committed on 14 October 2026.",
+    "Changes and model suitability for experiment layouts, learning tools, and navigation committed on 14 October 2026.",
   group: "Commits",
 };
 
@@ -42,6 +42,22 @@ export const todayModelSuitabilityRoute: RouteDoc = {
   title: "2026-10-15",
   description:
     "Model and reasoning effort estimates for commits on 15 October 2026.",
+  group: "Commits",
+};
+
+export const october21AnalysisRoute: RouteDoc = {
+  route: "/commits/2026-10-21",
+  title: "2026-10-21",
+  description:
+    "Changes and model suitability for responsive layout, timer audio, and personal notes committed on 21 October 2026.",
+  group: "Commits",
+};
+
+export const october22AnalysisRoute: RouteDoc = {
+  route: "/commits/2026-10-22",
+  title: "2026-10-22",
+  description:
+    "Changes and model suitability for timer storage, floating controls, and site structure committed on 22 October 2026.",
   group: "Commits",
 };
 

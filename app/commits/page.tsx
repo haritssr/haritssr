@@ -10,6 +10,8 @@ import {
   commitAnalysisRoute,
   commitsRoute,
   modelSuitabilityRoute,
+  october21AnalysisRoute,
+  october22AnalysisRoute,
   todayModelSuitabilityRoute,
 } from "@/data/routes";
 import { commitDay, formatDay } from "@/utils/changelog";
@@ -51,6 +53,12 @@ export default async function CommitsPage() {
           </InternalLink>
           <InternalLink href={todayModelSuitabilityRoute.route}>
             {todayModelSuitabilityRoute.title}
+          </InternalLink>
+          <InternalLink href={october21AnalysisRoute.route}>
+            {october21AnalysisRoute.title}
+          </InternalLink>
+          <InternalLink href={october22AnalysisRoute.route}>
+            {october22AnalysisRoute.title}
           </InternalLink>
         </nav>
       </div>

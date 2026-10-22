@@ -7,8 +7,10 @@
   Model suitability lives at `/commits/2026-10-11` and `/commits/2026-10-15`;
   the dated review at
   `/commits/2026-10-14` covers a fixed set of committed changes in Jakarta time.
-  All three pages are linked below the timeline and included in search and
-  the sitemap.
+  Reviews for `/commits/2026-10-21` and `/commits/2026-10-22` cover fixed
+  snapshots of those days’ committed changes. All dated pages are linked below
+  the timeline and included in search and the sitemap. The October 14, 21, and
+  22 reviews include per-commit model and reasoning-effort suitability estimates.
   The October 15 assessment covers a fixed set of committed changes; model and
   effort labels are editorial estimates, not recorded model usage.
 

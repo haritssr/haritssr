@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "09a013bc8f67f664508844075f3865d73a7b8057",
+      "date": "2026-10-22T10:32:21+07:00",
+      "subject": "docs: remove completed dark mode removal plan"
+    },
+    {
       "hash": "62d773d78dd479d25a789db1a3dc794594440158",
       "date": "2026-10-22T10:32:20+07:00",
       "subject": "style(timer): compact controls and completed heading"

@@ -1,5 +1,6 @@
 import history from "@/app/commits/changelog.json";
 import CommitHourlyChart from "@/components/CommitHourlyChart";
+import CommitModelSuitability from "@/components/CommitModelSuitability";
 import CommitTable from "@/components/CommitTable";
 import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -12,6 +13,7 @@ import { createPageMetadata } from "@/utils/pageMetadata";
 import { SOURCE_CODE_URL } from "@/utils/site";
 
 import analysis from "./analysis.json";
+import suitability from "./model-suitability.json";
 
 export const metadata = createPageMetadata({
   title: commitAnalysisRoute.title,
@@ -80,6 +82,7 @@ export default function CommitAnalysisPage() {
             />
           </Section>
         ))}
+        <CommitModelSuitability commits={commits} suitability={suitability} />
         <Section id="activity" title="Commit activity">
           <CommitHourlyChart commits={commits} day={analysis.date} />
           <p className="text-muted max-w-3xl">
