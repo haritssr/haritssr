@@ -57,6 +57,46 @@ export default function Home() {
         <Section title="Tools">
           <Tools />
         </Section>
+        <Section title="Features">
+          <ul className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5">
+            <li>
+              <span className="font-medium">Search:</span>{" "}
+              <span className="text-muted">
+                Find pages across the site and run global commands.
+              </span>
+            </li>
+            <li>
+              <span className="font-medium">Contents:</span>{" "}
+              <span className="text-muted">
+                Jump to sections within articles and nested pages.
+              </span>
+            </li>
+            <li>
+              <span className="font-medium">Share:</span>{" "}
+              <span className="text-muted">
+                Copy the current page URL, including its section link.
+              </span>
+            </li>
+            <li>
+              <span className="font-medium">Timer:</span>{" "}
+              <span className="text-muted">
+                Track tasks and keep a timer running across pages.
+              </span>
+            </li>
+            <li>
+              <span className="font-medium">RSS:</span>{" "}
+              <span className="text-muted">
+                Subscribe to new writing in your feed reader.
+              </span>
+            </li>
+            <li>
+              <span className="font-medium">Install:</span>{" "}
+              <span className="text-muted">
+                Add the site to your home screen for quick access.
+              </span>
+            </li>
+          </ul>
+        </Section>
       </div>
     </>
   );
