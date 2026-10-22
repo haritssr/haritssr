@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
+import { isTimerOwner, timerSameOrigin } from "@/app/timer/server/timerAuth";
 import {
   changeTimer,
   changeTimerPreferences,
@@ -16,8 +17,7 @@ import {
   taskSpent,
   timerDate,
   validTimerDate,
-} from "@/utils/timer";
-import { isTimerOwner, timerSameOrigin } from "@/utils/timerAuth";
+} from "@/app/timer/utils/timer";
 
 export const runtime = "nodejs";
 const headers = { "Cache-Control": "private, no-store", Vary: "Cookie" };

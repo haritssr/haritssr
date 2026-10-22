@@ -1,11 +1,15 @@
 import { Collapsible } from "@base-ui/react/collapsible";
 import { useState } from "react";
 
+import {
+  formatTimerTime,
+  taskCompletionTime,
+  taskSpent,
+} from "@/app/timer/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
 import { SectionHeading } from "@/components/Section";
 import { SelectField } from "@/components/SelectField";
 import Table from "@/components/Table";
-import { formatTimerTime, taskCompletionTime, taskSpent } from "@/utils/timer";
-import type { TimerTask } from "@/utils/timer";
 
 const SORT_OPTIONS = [
   { value: "reached", label: "Reached" },

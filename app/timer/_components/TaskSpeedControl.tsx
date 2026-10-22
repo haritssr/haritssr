@@ -1,9 +1,9 @@
 import { Button as BaseButton } from "@base-ui/react/button";
 import { ClockIcon } from "@heroicons/react/24/outline";
 
-import { useTimer } from "@/components/TimerProvider";
-import { canUseTimer, TIMER_SPEEDS } from "@/utils/timer";
-import type { TimerTask } from "@/utils/timer";
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import { canUseTimer, TIMER_SPEEDS } from "@/app/timer/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
 
 export default function TaskSpeedControl({
   task,

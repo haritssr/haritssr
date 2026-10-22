@@ -5,11 +5,12 @@ import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
+import type { TimerState } from "@/app/timer/_components/TimerRuntime";
 import { useTimerSession } from "@/utils/timerSession";
 
-import type { TimerState } from "./TimerRuntime";
-
-const TimerRuntime = dynamic(async () => await import("./TimerRuntime"));
+const TimerRuntime = dynamic(
+  async () => await import("@/app/timer/_components/TimerRuntime")
+);
 export const TimerContext = createContext<TimerState | null>(null);
 
 export default function TimerProvider({ children }: { children: ReactNode }) {

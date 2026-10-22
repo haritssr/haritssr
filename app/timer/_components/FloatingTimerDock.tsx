@@ -4,17 +4,16 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { getFloatingTasks } from "@/app/timer/components/floatingTaskState";
-import TaskActions from "@/app/timer/components/TaskActions";
-import { taskAppearance } from "@/app/timer/components/taskPresentation";
-import TaskProgress from "@/app/timer/components/TaskProgress";
-import { canUseTimer } from "@/utils/timer";
-
-import Button from "./Button";
-import InternalLink from "./InternalLink";
-import { useTimer } from "./TimerProvider";
-import useTimerClock from "./useTimerClock";
-import useTimerDockPosition from "./useTimerDockPosition";
+import { getFloatingTasks } from "@/app/timer/_components/floatingTaskState";
+import TaskActions from "@/app/timer/_components/TaskActions";
+import { taskAppearance } from "@/app/timer/_components/taskPresentation";
+import TaskProgress from "@/app/timer/_components/TaskProgress";
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import useTimerClock from "@/app/timer/hooks/useTimerClock";
+import useTimerDockPosition from "@/app/timer/hooks/useTimerDockPosition";
+import { canUseTimer } from "@/app/timer/utils/timer";
+import Button from "@/components/Button";
+import InternalLink from "@/components/InternalLink";
 
 export default function FloatingTimerDock() {
   const pathname = usePathname();

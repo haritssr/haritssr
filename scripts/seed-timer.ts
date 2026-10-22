@@ -5,7 +5,7 @@ import {
   createSampleTimerDay,
   shiftTimerDate,
   timerDate,
-} from "../utils/timer";
+} from "@/app/timer/utils/timer";
 
 const directory = path.join(process.cwd(), "data", "timer");
 await mkdir(directory, { recursive: true });

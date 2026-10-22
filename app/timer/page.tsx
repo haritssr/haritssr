@@ -1,11 +1,11 @@
+import { TimerContent } from "@/app/timer/_components/TimerProvider";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { TimerContent } from "@/components/TimerProvider";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
-import TimerDate from "./components/TimerDate";
+import TimerDate from "./_components/TimerDate";
 import TimerClient from "./TimerClient";
 
 const description = "A simple timer for focused work and everyday tasks.";

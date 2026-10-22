@@ -8,8 +8,11 @@ import type {
   Transaction,
 } from "@libsql/client";
 
-import type { TimerDay } from "./timer";
-import { daySchema, preferencesSchema } from "./timerValidation";
+import type { TimerDay } from "@/app/timer/utils/timer";
+import {
+  daySchema,
+  preferencesSchema,
+} from "@/app/timer/utils/timerValidation";
 
 export function timerDatabase() {
   const url = process.env.TURSO_DATABASE_URL;

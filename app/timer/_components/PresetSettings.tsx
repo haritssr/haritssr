@@ -1,14 +1,14 @@
 import { useState } from "react";
 import type { SubmitEvent } from "react";
 
-import Accordion, { AccordionItem } from "@/components/Accordion";
-import Button from "@/components/Button";
-import { useTimer } from "@/components/TimerProvider";
-import { canUseTimer } from "@/utils/timer";
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import { canUseTimer } from "@/app/timer/utils/timer";
 import {
   durationPresetsSchema,
   taskPresetsSchema,
-} from "@/utils/timerValidation";
+} from "@/app/timer/utils/timerValidation";
+import Accordion, { AccordionItem } from "@/components/Accordion";
+import Button from "@/components/Button";
 
 import DurationFields from "./DurationFields";
 import { durationSeconds, durationValue } from "./durationValue";

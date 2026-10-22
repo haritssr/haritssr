@@ -10,26 +10,26 @@ export const timerRelationships = [
     id: "timer-runtime-map",
     title: "Pages, shared state, and storage",
     description:
-      "Arrows describe composition, function calls, and returned data. File paths start at the project root; UI component filenames in the next diagram live in app/timer/components/.",
+      "Arrows describe composition, function calls, and returned data. File paths start at the project root; UI component filenames in the next diagram live in app/timer/_components/.",
     definition: `flowchart TD
       accTitle: Timer pages, provider, API, and daily storage
       accDescr: The root layout mounts TimerProvider. TimerClient reads its shared snapshot. The provider and Statistics call the protected Timer API. The store applies timerEngine rules inside Turso transactions.
-      Layout["app/layout.tsx"] -->|mounts across navigation| Provider["components/TimerProvider.tsx: useTimer, act, publish, refresh"]
+      Layout["app/layout.tsx"] -->|mounts across navigation| Provider["app/timer/_components/TimerProvider.tsx: useTimer, act, publish, refresh"]
       Page["app/timer/page.tsx"] --> Client["app/timer/TimerClient.tsx"]
-      Page --> Date["TimerDate.tsx: date label from utils/timer.ts"]
+      Page --> Date["TimerDate.tsx: date label from app/timer/utils/timer.ts"]
       Provider -->|snapshot, preferences, actions| Client
-      Provider -->|site-wide snapshot and completion feedback| Dock["components/FloatingTimerDock.tsx"]
-      Dock -->|mobile navigation geometry and dock clearance| Position["components/useTimerDockPosition.ts"]
+      Provider -->|site-wide snapshot and completion feedback| Dock["app/timer/_components/FloatingTimerDock.tsx"]
+      Dock -->|mobile navigation geometry and dock clearance| Position["app/timer/hooks/useTimerDockPosition.ts"]
       Position --> Navigation["components/TabBarButtom.tsx"]
       Client --> Toolbar["TimerToolbar.tsx"]
       Client --> List["TaskList.tsx"]
-      Provider -->|fetchTimerSnapshot / sendTimerAction| Transport["utils/timerClient.ts"]
+      Provider -->|fetchTimerSnapshot / sendTimerAction| Transport["app/timer/utils/timerClient.ts"]
       StatsPage["app/timer/statistic/page.tsx"] --> Stats["app/timer/statistic/Statistics.tsx"]
       Stats -->|fetchTimerHistory| Transport
       Transport -->|protected GET / POST / PATCH| API["app/api/timer/route.ts"]
       API --> Store["app/timer/store.ts: snapshots, actions, preferences, history"]
-      Store --> Engine["utils/timerEngine.ts: shared rules"]
-      Store --> Database["utils/timerDatabase.ts: SQL mapping and transactions"]
+      Store --> Engine["app/timer/utils/timerEngine.ts: shared rules"]
+      Store --> Database["app/timer/server/timerDatabase.ts: SQL mapping and transactions"]
       Database --> Turso[("Turso: days, tasks, preferences")]
       API -->|snapshot or history response| Transport
       Transport -->|validated snapshot and clock offset| Provider
@@ -57,19 +57,19 @@ export const timerRelationships = [
       Client["TimerClient.tsx"] --> Toolbar["TimerToolbar.tsx: preferences and view"]
       Client --> List["TaskList.tsx: one shared clock"]
       Client --> Data["TimerDataControls.tsx: Export, Import, errors"]
-      Data --> Backups["utils/timerBackup.ts: validation and conflict-safe merge"]
+      Data --> Backups["app/timer/utils/timerBackup.ts: validation and conflict-safe merge"]
       Data --> Backup["protected Timer API: backup import and export"]
-      List --> Clock["components/useTimerClock.ts: display-local clock"]
+      List --> Clock["app/timer/hooks/useTimerClock.ts: display-local clock"]
       List -->|getTaskCollection calls getTaskState| State["taskState.ts: sort, partition, elapsed state"]
       State -->|active tasks and derived state| Card["TaskCard.tsx"]
       State -->|completed tasks| Completed["CompletedTasksTable.tsx"]
-      State -->|taskSpent| Time["utils/timer.ts"]
+      State -->|taskSpent| Time["app/timer/utils/timer.ts"]
       Card -->|taskAppearance / TASK_LAYOUT| Appearance["taskPresentation.ts"]
       Card --> Desc["TaskDescription.tsx: description popover"]
       Card --> Progress["TaskProgress.tsx: time, percentage, progress bar"]
       Card --> Actions["TaskActions.tsx: Start, Pause, Continue, Done"]
       Card --> Speed["TaskSpeedControl.tsx: speed cycle"]
-      Dock["components/FloatingTimerDock.tsx"] --> Clock
+      Dock["app/timer/_components/FloatingTimerDock.tsx"] --> Clock
       Dock --> Selection["floatingTaskState.ts: running or retained paused; start order"]
       Selection --> State
       Dock --> Progress
@@ -81,12 +81,12 @@ export const timerRelationships = [
       Form --> Duration["DurationFields.tsx: NumberInput and presets"]
       Actions --> Delete["DeleteTaskButton.tsx: confirmation"]
       Form --> Delete
-      Dialog -->|validated add / edit| Act["components/TimerProvider.tsx: act"]
+      Dialog -->|validated add / edit| Act["app/timer/_components/TimerProvider.tsx: act"]
       Actions -->|start / pause / done| Act
       Delete -->|delete| Act
       Speed -->|speed| Act
       Toolbar -->|setMultitask; single-task when needed| Act
-      Actions --> Sound["utils/timerSound.ts: action feedback"]
+      Actions --> Sound["app/timer/utils/timerSound.ts: action feedback"]
       class Client,Toolbar,List,Card,Completed,Desc,Progress,Actions,Dialog,Form,Duration,Delete,Dock,Speed,Data action
       class State,Appearance,Time,Act,Clock,Selection attention
       class Sound danger
@@ -118,12 +118,12 @@ export const timerRelationships = [
       Auto --> Commit
       Commit --> Publish["timerMutations.receive: confirmed snapshot"]
       Commit --> Tabs["BroadcastChannel invalidation; focus and polling refresh"]
-      Publish --> Schedule["components/useTimerSchedule.ts"]
+      Publish --> Schedule["app/timer/hooks/useTimerSchedule.ts"]
       Schedule -->|earliest completion or Jakarta midnight| Refresh["TimerProvider.refresh: protected API"]
       Refresh --> Send
-      Schedule --> Owner["components/useTimerAudioOwner.ts: Web Lock or focus fallback"]
-      Owner --> Sound["utils/timerSound.ts: ticks and warnings"]
-      Publish --> Notify["components/useTimerNotifications.ts"]
+      Schedule --> Owner["app/timer/hooks/useTimerAudioOwner.ts: Web Lock or focus fallback"]
+      Owner --> Sound["app/timer/utils/timerSound.ts: ticks and warnings"]
+      Publish --> Notify["app/timer/hooks/useTimerNotifications.ts"]
       Notify -->|acknowledge: atomic completion claim| Send
       Notify -->|claimed notification only| Feedback["visible message, reached sound, optional browser notification"]
       Feedback --> Sound

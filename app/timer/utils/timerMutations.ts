@@ -1,8 +1,11 @@
 /* oxlint-disable no-await-in-loop -- Commands must save in order; recovery must finish before the next write. */
-import { canUseTimer } from "./timer";
-import type { TimerAction, TimerPreferences } from "./timer";
-import type { ReceivedTimerSnapshot } from "./timerClient";
-import { applyTimerAction, settleTimerDay } from "./timerEngine";
+import { canUseTimer } from "@/app/timer/utils/timer";
+import type { TimerAction, TimerPreferences } from "@/app/timer/utils/timer";
+import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
+import {
+  applyTimerAction,
+  settleTimerDay,
+} from "@/app/timer/utils/timerEngine";
 
 type PreferencePatch = Partial<Omit<TimerPreferences, "revision">>;
 type Mutation = { action: TimerAction } | { preferences: PreferencePatch };

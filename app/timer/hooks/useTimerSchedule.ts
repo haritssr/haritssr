@@ -6,21 +6,20 @@ import {
   useSyncExternalStore,
 } from "react";
 
+import useTimerAudioOwner from "@/app/timer/hooks/useTimerAudioOwner";
 import {
   canUseTimer,
   taskCompletionTime,
   taskSpent,
   timerMidnight,
-} from "@/utils/timer";
-import type { TimerSnapshot } from "@/utils/timer";
-import { playClockTick, prepareTaskSound } from "@/utils/timerSound";
+} from "@/app/timer/utils/timer";
+import type { TimerSnapshot } from "@/app/timer/utils/timer";
+import { playClockTick, prepareTaskSound } from "@/app/timer/utils/timerSound";
 import {
   getTickingEnabled,
   setTickingEnabled as saveTickingEnabled,
   subscribeTicking,
-} from "@/utils/timerTicking";
-
-import useTimerAudioOwner from "./useTimerAudioOwner";
+} from "@/app/timer/utils/timerTicking";
 
 function getServerTickingEnabled() {
   return false;

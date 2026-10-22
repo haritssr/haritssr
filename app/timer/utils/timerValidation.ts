@@ -5,7 +5,7 @@ import {
   DEFAULT_TASK_PRESETS,
   TIMER_SPEEDS,
   validTimerDate,
-} from "@/utils/timer";
+} from "@/app/timer/utils/timer";
 
 const dateSchema = z.string().refine(validTimerDate);
 const instant = z.iso.datetime({ offset: true });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTimer } from "@/components/TimerProvider";
+import { useTimer } from "@/app/timer/_components/TimerProvider";
 
 const WEEKDAY_FORMATTER = new Intl.DateTimeFormat("en-US", {
   weekday: "short",

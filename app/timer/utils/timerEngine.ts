@@ -3,8 +3,13 @@ import {
   taskSpent,
   timerDate,
   timerMidnight,
-} from "./timer";
-import type { TimerAction, TimerDay, TimerNotice, TimerTask } from "./timer";
+} from "@/app/timer/utils/timer";
+import type {
+  TimerAction,
+  TimerDay,
+  TimerNotice,
+  TimerTask,
+} from "@/app/timer/utils/timer";
 
 export class TimerStoreError extends Error {
   readonly status: number;

@@ -3,22 +3,24 @@
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import useSWR from "swr";
 
-import { DEFAULT_DURATION_PRESETS, DEFAULT_TASK_PRESETS } from "@/utils/timer";
-import type { TimerTaskPreset } from "@/utils/timer";
+import FloatingTimerDock from "@/app/timer/_components/FloatingTimerDock";
+import { TimerContext } from "@/app/timer/_components/TimerProvider";
+import useTimerNotifications from "@/app/timer/hooks/useTimerNotifications";
+import useTimerSchedule from "@/app/timer/hooks/useTimerSchedule";
+import {
+  DEFAULT_DURATION_PRESETS,
+  DEFAULT_TASK_PRESETS,
+} from "@/app/timer/utils/timer";
+import type { TimerTaskPreset } from "@/app/timer/utils/timer";
 import {
   fetchTimerSnapshot,
   saveTimerPreferences,
   sendTimerAction,
   subscribeTimerChanges,
   TIMER_SNAPSHOT_KEY,
-} from "@/utils/timerClient";
-import type { ReceivedTimerSnapshot } from "@/utils/timerClient";
-import { TimerMutations } from "@/utils/timerMutations";
-
-import FloatingTimerDock from "./FloatingTimerDock";
-import { TimerContext } from "./TimerProvider";
-import useTimerNotifications from "./useTimerNotifications";
-import useTimerSchedule from "./useTimerSchedule";
+} from "@/app/timer/utils/timerClient";
+import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
+import { TimerMutations } from "@/app/timer/utils/timerMutations";
 
 function useTimerState() {
   // oxlint-disable-next-line react/hook-use-state -- One stable external store per provider; no setter is needed.

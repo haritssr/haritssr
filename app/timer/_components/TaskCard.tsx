@@ -1,4 +1,4 @@
-import type { TimerTask } from "@/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
 
 import TaskActions from "./TaskActions";
 import TaskDescription from "./TaskDescription";

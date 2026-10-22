@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "787e16ad7c5a7460944508043839974c4c793ff3",
+      "date": "2026-10-22T21:46:34+07:00",
+      "subject": "style(TopBar): unify icon sizes and strengthen the mobile site label"
+    },
+    {
       "hash": "01539611393206d7ce7d36d6ad567bb6286113e6",
       "date": "2026-10-22T21:46:24+07:00",
       "subject": "style(Home): align horizontal spacing between tool cards"

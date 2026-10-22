@@ -2,19 +2,19 @@ import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
 import {
-  createTimerBackup,
-  mergeTimerBackup,
-  parseTimerBackup,
-} from "../utils/timerBackup";
-import {
   readTimerDays,
   closeTimerDatabase,
   initializeTimerDatabase,
   timerDatabase,
   timerDatabaseTransaction,
   writeTimerDays,
-} from "../utils/timerDatabase";
-import { daySchema } from "../utils/timerValidation";
+} from "@/app/timer/server/timerDatabase";
+import {
+  createTimerBackup,
+  mergeTimerBackup,
+  parseTimerBackup,
+} from "@/app/timer/utils/timerBackup";
+import { daySchema } from "@/app/timer/utils/timerValidation";
 
 try {
   const client = timerDatabase();

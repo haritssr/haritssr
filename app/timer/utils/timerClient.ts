@@ -2,7 +2,7 @@ import type {
   TimerAction,
   TimerPreferences,
   TimerSnapshot,
-} from "@/utils/timer";
+} from "@/app/timer/utils/timer";
 
 export const TIMER_SNAPSHOT_KEY = "/api/timer";
 export function timerHistoryKey(date: string) {
@@ -62,7 +62,7 @@ function received(snapshot: TimerSnapshot): ReceivedTimerSnapshot {
 export async function fetchTimerSnapshot() {
   return await loadTimer(async (signal) => {
     const [{ snapshotSchema }, result] = await Promise.all([
-      import("@/utils/timerValidation"),
+      import("@/app/timer/utils/timerValidation"),
       fetchTimer("/api/timer", { signal }),
     ]);
     return received(snapshotSchema.parse(result));
@@ -72,7 +72,7 @@ export async function fetchTimerSnapshot() {
 export async function fetchTimerHistory(date: string) {
   return await loadTimer(async (signal) => {
     const [{ historySchema }, result] = await Promise.all([
-      import("@/utils/timerValidation"),
+      import("@/app/timer/utils/timerValidation"),
       fetchTimer(`/api/timer?date=${date}`, { signal }),
     ]);
     return historySchema.parse(result);
@@ -80,7 +80,7 @@ export async function fetchTimerHistory(date: string) {
 }
 
 export async function sendTimerAction(action: TimerAction) {
-  const { changeSchema } = await import("@/utils/timerValidation");
+  const { changeSchema } = await import("@/app/timer/utils/timerValidation");
   const result = changeSchema.parse(
     await fetchTimer("/api/timer", {
       method: "POST",
@@ -95,7 +95,7 @@ export async function sendTimerAction(action: TimerAction) {
 export async function saveTimerPreferences(
   patch: Partial<Omit<TimerPreferences, "revision">>
 ) {
-  const { snapshotSchema } = await import("@/utils/timerValidation");
+  const { snapshotSchema } = await import("@/app/timer/utils/timerValidation");
   const result = received(
     snapshotSchema.parse(
       await fetchTimer("/api/timer", {

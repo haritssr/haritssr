@@ -1,5 +1,5 @@
-import { TASK_LAYOUT, taskAppearance } from "../components/taskPresentation";
-import TaskProgress from "../components/TaskProgress";
+import { TASK_LAYOUT, taskAppearance } from "../_components/taskPresentation";
+import TaskProgress from "../_components/TaskProgress";
 
 const examples = [
   {

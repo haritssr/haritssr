@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 
-import { formatTimerTime } from "@/utils/timer";
-import type { TimerTask } from "@/utils/timer";
+import { formatTimerTime } from "@/app/timer/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
 
 import { TASK_LAYOUT } from "./taskPresentation";
 import type { TaskAppearance } from "./taskPresentation";

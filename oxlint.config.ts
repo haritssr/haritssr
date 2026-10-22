@@ -24,7 +24,10 @@ export default defineConfig({
       },
     },
     {
-      files: ["components/**"],
+      files: [
+        "components/**",
+        "app/timer/_components/FloatingTimerDock.tsx",
+      ],
       rules: {
         // Component definitions own their appearance and class composition.
         "shadcn/no-arbitrary-values": "off",

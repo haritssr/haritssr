@@ -1,5 +1,5 @@
-import { useTimer } from "@/components/TimerProvider";
-import useTimerClock from "@/components/useTimerClock";
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import useTimerClock from "@/app/timer/hooks/useTimerClock";
 
 import CompletedTasksTable from "./CompletedTasksTable";
 import TaskCard from "./TaskCard";

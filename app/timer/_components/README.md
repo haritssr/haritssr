@@ -24,7 +24,7 @@ run inside its `use client` boundary.
 | Grid card dimensions, borders, shadow, spacing, and state colors | [taskPresentation.ts](taskPresentation.ts) |
 | Task ordering, completion partition, elapsed time, and Start/Pause/Continue state | [taskState.ts](taskState.ts) |
 | Floating-task eligibility, retained paused task, and most-recent-start ordering | [floatingTaskState.ts](floatingTaskState.ts) |
-| Site-wide floating task, switcher, and completion messages | [FloatingTimerDock.tsx](../../../components/FloatingTimerDock.tsx) |
+| Site-wide floating task, switcher, and completion messages | [FloatingTimerDock.tsx](./FloatingTimerDock.tsx) |
 
 Add and Edit use the same `TaskFormDialog` with controlled field state inside
 its mounted portal. Only Add shows the Preset task buttons, arranged in two columns below
@@ -68,7 +68,7 @@ The section defaults collapsed. View reveals the sort controls and table; Hide
 collapses them again. The expanded table wraps task names and descriptions and
 scrolls horizontally on narrow screens. `TaskList` partitions tasks using their current elapsed
 time, so a task moves into the table as soon as its duration is reached.
-The list uses [useTimerClock.ts](../../../components/useTimerClock.ts) for one
+The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
 
@@ -86,7 +86,7 @@ The dock matches the mobile tab bar's translucent background, blur, border, and
 rounded corners. Its compact row combines title, remaining time, a thin progress
 bar and circular actions, without a separate status row. Its minimum
 height matches the navigation surface, with a 53px fallback when absent.
-[useTimerDockPosition.ts](../../../components/useTimerDockPosition.ts)
+[useTimerDockPosition.ts](../hooks/useTimerDockPosition.ts)
 measures the real navigation surface and matches its bottom screen gap above it.
 Without mobile navigation it uses safe-area-aware bottom clearance; desktop
 aligns a 28rem bar to the site's content width. The dock overlays page content
@@ -109,7 +109,7 @@ or one running task, no confirmation is needed.
 
 Ticking defaults off and stores its setting in browser localStorage under the
 versioned `haritssr-timer-ticking:v1` key through
-[timerTicking.ts](../../../utils/timerTicking.ts). Both on and off survive reloads;
+[timerTicking.ts](../utils/timerTicking.ts). Both on and off survive reloads;
 storage events synchronize open tabs. If storage is blocked, the toggle still
 works in memory. When enabled, one shared Quartz clock
 mechanical tick repeats at a single pitch each real second while any personal task
@@ -125,11 +125,11 @@ During the final 10 real seconds of a task, the same Quartz warning ticks play a
 even with Ticking off. They become faster with 6 and 3 seconds remaining and
 stop when the task pauses or finishes. Remaining time accounts for task speed.
 
-The [provider](../../../components/TimerProvider.tsx) activates the deferred
-[runtime](../../../components/TimerRuntime.tsx) for owner sessions or Timer visits
+The [provider](./TimerProvider.tsx) activates the deferred
+[runtime](./TimerRuntime.tsx) for owner sessions or Timer visits
 and keeps it alive across navigation. The runtime owns preference access,
 the shared SWR loading cache, and optimistic state from
-[timerMutations.ts](../../../utils/timerMutations.ts). The mutation controller
+[timerMutations.ts](../utils/timerMutations.ts). The mutation controller
 keeps confirmed revisions and projects pending changes in memory. It saves in
 order, rebases pending changes over refreshed snapshots, and rolls back failed
 changes. Add uses a stable UUID so a repeated creation cannot duplicate a task.
@@ -139,7 +139,7 @@ Completion claims consume confirmed snapshots only. The provider loads the
 snapshot on any page so saved running tasks can appear after direct navigation or reload. Supporting
 modules keep independent work separate:
 
-- [timerClient.ts](../../../utils/timerClient.ts) handles protected API requests,
+- [timerClient.ts](../utils/timerClient.ts) handles protected API requests,
   response validation, cache keys, and tab change subscriptions. Snapshot and
   history reads start alongside validation-module loading and have a ten-second
   deadline covering both operations. Initial snapshot failures retry at most
@@ -147,28 +147,28 @@ modules keep independent work separate:
   recover. When no snapshot exists, a failed load replaces the loading message
   with the existing error and Try again control. Saves retain their fifteen-second
   request timeout and are never automatically resent.
-- [timerDatabase.ts](../../../utils/timerDatabase.ts) owns SQL mapping and atomic
+- [timerDatabase.ts](../server/timerDatabase.ts) owns SQL mapping and atomic
   Turso transactions, with batched reads, changed-row writes, and a reused runtime
-  client. [timerEngine.ts](../../../utils/timerEngine.ts) applies timer
-  rules and [timerBackup.ts](../../../utils/timerBackup.ts) validates imports.
-- [useTimerAudioOwner.ts](../../../components/useTimerAudioOwner.ts) coordinates
+  client. [timerEngine.ts](../utils/timerEngine.ts) applies timer
+  rules and [timerBackup.ts](../utils/timerBackup.ts) validates imports.
+- [useTimerAudioOwner.ts](../hooks/useTimerAudioOwner.ts) coordinates
   continuous audio with a Web Lock and focused-tab fallback.
-- [useTimerSchedule.ts](../../../components/useTimerSchedule.ts) schedules ticking,
+- [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules ticking,
   warnings, the earliest task completion, and midnight refreshes.
-- [useTimerNotifications.ts](../../../components/useTimerNotifications.ts) claims
+- [useTimerNotifications.ts](../hooks/useTimerNotifications.ts) claims
   completions and supplies sound, browser notifications, and visible feedback.
   Visible completion messages dismiss automatically after five seconds; a new
   completion restarts that timeout, and the close button dismisses them immediately.
 - [store.ts](../store.ts) persists daily records, and
-  [timerSound.ts](../../../utils/timerSound.ts) generates sound.
+  [timerSound.ts](../utils/timerSound.ts) generates sound.
 
 The shared completion-time calculation in `timer.ts` accounts for task speed in
 scheduling, stored completion timestamps, and completed-task ordering. The store
 accounts for each task's speed, concurrent starts, and atomic single-task transitions. Optional
 `lastStartedAt` timestamps preserve start order across elapsed-time updates;
 older records remain readable without a migration. Action types and validation
-live in [timer.ts](../../../utils/timer.ts) and
-[timerValidation.ts](../../../utils/timerValidation.ts).
+live in [timer.ts](../utils/timer.ts) and
+[timerValidation.ts](../utils/timerValidation.ts).
 
 Turso days start empty. Export creates a paused copy without changing live timers;
 Import adds missing dates, fills empty days, skips identical records, and rejects

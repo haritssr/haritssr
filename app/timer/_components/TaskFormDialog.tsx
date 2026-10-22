@@ -2,8 +2,8 @@ import { Dialog } from "@base-ui/react/dialog";
 import { useId, useRef, useState } from "react";
 import type { CSSProperties, RefObject, SubmitEvent } from "react";
 
+import { useTimer } from "@/app/timer/_components/TimerProvider";
 import Button from "@/components/Button";
-import { useTimer } from "@/components/TimerProvider";
 
 import DeleteTaskButton from "./DeleteTaskButton";
 import DurationFields from "./DurationFields";

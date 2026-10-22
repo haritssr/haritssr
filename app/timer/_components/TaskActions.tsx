@@ -2,11 +2,11 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 import { ForwardIcon, PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 import type { ComponentProps } from "react";
 
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import { canUseTimer } from "@/app/timer/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
+import { playTaskSound, prepareTaskSound } from "@/app/timer/utils/timerSound";
 import Button from "@/components/Button";
-import { useTimer } from "@/components/TimerProvider";
-import { canUseTimer } from "@/utils/timer";
-import type { TimerTask } from "@/utils/timer";
-import { playTaskSound, prepareTaskSound } from "@/utils/timerSound";
 
 import DeleteTaskButton from "./DeleteTaskButton";
 

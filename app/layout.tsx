@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import TimerProvider from "@/app/timer/_components/TimerProvider";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import SiteShortcuts from "@/components/SiteShortcuts";
 import { SiteStructuredData } from "@/components/StructuredData";
 import TabBarButtom from "@/components/TabBarButtom";
-import TimerProvider from "@/components/TimerProvider";
 import TopBar from "@/components/TopBar";
 import { GlobalSearchProvider } from "@/components/TopBarSearch";
 import { createPageMetadata } from "@/utils/pageMetadata";

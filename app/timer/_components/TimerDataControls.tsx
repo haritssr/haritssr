@@ -7,9 +7,9 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import { timerDate } from "@/app/timer/utils/timer";
 import Button from "@/components/Button";
-import { useTimer } from "@/components/TimerProvider";
-import { timerDate } from "@/utils/timer";
 
 const BACKUP_ACTION_CLASS =
   "border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground corner-squircle relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center border px-2 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-xl last:rounded-r-xl focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 motion-reduce:transition-none";

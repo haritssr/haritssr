@@ -11,9 +11,9 @@ import {
 import { useId, useRef, useState, useSyncExternalStore } from "react";
 import type { ReactNode, Ref } from "react";
 
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import { canUseTimer } from "@/app/timer/utils/timer";
 import Button from "@/components/Button";
-import { useTimer } from "@/components/TimerProvider";
-import { canUseTimer } from "@/utils/timer";
 
 import PresetSettings from "./PresetSettings";
 import { AddTask } from "./TaskDialog";

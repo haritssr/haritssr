@@ -3,10 +3,10 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import { canUseTimer, taskSpent } from "@/app/timer/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
 import Button from "@/components/Button";
-import { useTimer } from "@/components/TimerProvider";
-import { canUseTimer, taskSpent } from "@/utils/timer";
-import type { TimerTask } from "@/utils/timer";
 
 import TaskFormDialog from "./TaskFormDialog";
 

@@ -1,5 +1,5 @@
-import { taskSpent } from "@/utils/timer";
-import type { TimerTask } from "@/utils/timer";
+import { taskSpent } from "@/app/timer/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
 
 function getTaskState(task: TimerTask, date: string, now: number) {
   const spent = taskSpent(task, date, now);

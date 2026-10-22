@@ -1,11 +1,11 @@
 "use client";
 
+import { useTimer } from "@/app/timer/_components/TimerProvider";
 import Button from "@/components/Button";
-import { useTimer } from "@/components/TimerProvider";
 
-import TaskList from "./components/TaskList";
-import TimerDataControls from "./components/TimerDataControls";
-import TimerToolbar from "./components/TimerToolbar";
+import TaskList from "./_components/TaskList";
+import TimerDataControls from "./_components/TimerDataControls";
+import TimerToolbar from "./_components/TimerToolbar";
 
 export default function TimerClient() {
   return (

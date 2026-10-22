@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import type { TimerSnapshot } from "@/utils/timer";
+import type { TimerSnapshot } from "@/app/timer/utils/timer";
 
 // Keep live progress updates local to the display, outside the shared provider.
 export default function useTimerClock(

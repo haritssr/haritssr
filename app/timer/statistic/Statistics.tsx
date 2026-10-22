@@ -3,17 +3,21 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-import Button from "@/components/Button";
-import Section from "@/components/Section";
-import Table from "@/components/Table";
-import { useTimer } from "@/components/TimerProvider";
-import { formatTimerTime, timerDate, validTimerDate } from "@/utils/timer";
-import type { TimerHistory, TimerTask } from "@/utils/timer";
+import { useTimer } from "@/app/timer/_components/TimerProvider";
+import {
+  formatTimerTime,
+  timerDate,
+  validTimerDate,
+} from "@/app/timer/utils/timer";
+import type { TimerHistory, TimerTask } from "@/app/timer/utils/timer";
 import {
   fetchTimerHistory,
   subscribeTimerChanges,
   timerHistoryKey,
-} from "@/utils/timerClient";
+} from "@/app/timer/utils/timerClient";
+import Button from "@/components/Button";
+import Section from "@/components/Section";
+import Table from "@/components/Table";
 
 function taskStatus(task: TimerTask) {
   if (task.spent >= task.duration) {

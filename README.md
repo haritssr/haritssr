@@ -23,7 +23,7 @@
   daily history and 30-day totals at `/timer/statistic`. `/timer/details` explains
   behavior, Turso schema, source files, and interactive Pele relationship diagrams.
 - Turso is the only runtime store. The protected Next.js API keeps credentials
-  server-only. `utils/timerDatabase.ts` maps SQL rows and owns transactions;
+  server-only. `app/timer/server/timerDatabase.ts` maps SQL rows and owns transactions;
   `app/timer/store.ts` applies the shared `timerEngine.ts` rules. Reads are batched,
   ordinary writes update only changed task rows, and runtime requests reuse a
   database client. `timerMutations.ts` projects queued changes in memory and
@@ -99,8 +99,10 @@
   defaults off and remembers its setting in this browser across reloads and tabs.
   Web Locks coordinate continuous audio within one browser;
   other devices can play their own ticking. Completion feedback is claimed globally.
-- Timer UI components live in `app/timer/components/`; its
-  [component guide](app/timer/components/README.md) maps the controls. The global
+- Timer UI components live in `app/timer/_components/`; its
+  [component guide](app/timer/_components/README.md) maps the controls. The global
+  Timer components, hooks, utilities, and server modules are colocated under
+  `app/timer/`. The shared account-session utility remains in `utils/timerSession.ts`.
   `TimerProvider` shares a lightweight session check with the account control.
   It lazy-loads `TimerRuntime` for the owner or after visiting a Timer page, then
   keeps it mounted across navigation. Anonymous visitors elsewhere do not load

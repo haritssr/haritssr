@@ -1,5 +1,5 @@
-import { timerMidnight } from "@/utils/timer";
-import type { TimerTask } from "@/utils/timer";
+import { timerMidnight } from "@/app/timer/utils/timer";
+import type { TimerTask } from "@/app/timer/utils/timer";
 
 import { getTaskCollection } from "./taskState";
 

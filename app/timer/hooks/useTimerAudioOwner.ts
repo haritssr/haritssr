@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 
-import { canUseTimer, taskCompletionTime, timerMidnight } from "@/utils/timer";
-import type { TimerSnapshot } from "@/utils/timer";
+import {
+  canUseTimer,
+  taskCompletionTime,
+  timerMidnight,
+} from "@/app/timer/utils/timer";
+import type { TimerSnapshot } from "@/app/timer/utils/timer";
 
 // Coordinate continuous audio only; explicit actions sound in the clicked tab,
 // and completion feedback is protected by the database's atomic notice claim.

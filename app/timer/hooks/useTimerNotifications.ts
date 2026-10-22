@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-import { canUseTimer } from "@/utils/timer";
-import type { TimerNotice, TimerSnapshot } from "@/utils/timer";
-import { sendTimerAction } from "@/utils/timerClient";
-import type { ReceivedTimerSnapshot } from "@/utils/timerClient";
-import { playTaskSound, prepareTaskSound } from "@/utils/timerSound";
+import { canUseTimer } from "@/app/timer/utils/timer";
+import type { TimerNotice, TimerSnapshot } from "@/app/timer/utils/timer";
+import { sendTimerAction } from "@/app/timer/utils/timerClient";
+import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
+import { playTaskSound, prepareTaskSound } from "@/app/timer/utils/timerSound";
 
 async function showCompletion(notice: TimerNotice) {
   if (!("Notification" in window) || Notification.permission !== "granted") {

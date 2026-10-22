@@ -5,71 +5,71 @@ export const implementationFiles = [
     "Page composition: Today, toolbar, feedback, and task collection.",
   ],
   [
-    "app/timer/components/TimerDataControls.tsx",
+    "app/timer/_components/TimerDataControls.tsx",
     "Icon-only toolbar Export/Import actions, authentication, and backup errors.",
   ],
   [
-    "app/timer/components/TimerToolbar.tsx",
+    "app/timer/_components/TimerToolbar.tsx",
     "Notification, Autoplay, Multitask, and Ticking switches, backup icons, and Add Task.",
   ],
   [
-    "app/timer/components/TaskList.tsx",
+    "app/timer/_components/TaskList.tsx",
     "Shared task clock, state calculation, and active/completed collections.",
   ],
   [
-    "app/timer/components/CompletedTasksTable.tsx",
+    "app/timer/_components/CompletedTasksTable.tsx",
     "Collapsed History table, View/Hide controls, sorting, and completion status.",
   ],
   [
-    "app/timer/components/TaskCard.tsx",
+    "app/timer/_components/TaskCard.tsx",
     "Three-column desktop cards, header icons, progress/speed, and icon actions.",
   ],
   [
-    "app/timer/components/TaskProgress.tsx",
+    "app/timer/_components/TaskProgress.tsx",
     "Current time, duration, percentage, and progress bar.",
   ],
   [
-    "app/timer/components/TaskSpeedControl.tsx",
+    "app/timer/_components/TaskSpeedControl.tsx",
     "Shared text-only speed cycle, with an optional clock icon.",
   ],
   [
-    "app/timer/components/TaskActions.tsx",
+    "app/timer/_components/TaskActions.tsx",
     "Start, Continue, Pause, and Done controls, text/icon presentations, and sounds.",
   ],
   [
-    "app/timer/components/TaskDescription.tsx",
+    "app/timer/_components/TaskDescription.tsx",
     "Description hover target, popover, and empty message.",
   ],
   [
-    "app/timer/components/TaskDialog.tsx",
+    "app/timer/_components/TaskDialog.tsx",
     "Add/Edit triggers, Shift+N shortcut, random suggestions, and form validation.",
   ],
   [
-    "app/timer/components/TaskFormDialog.tsx",
+    "app/timer/_components/TaskFormDialog.tsx",
     "90%-height mobile Add/Edit sheets, desktop dialogs, focus, counters, and form actions.",
   ],
   [
-    "app/timer/components/DurationFields.tsx",
+    "app/timer/_components/DurationFields.tsx",
     "Duration number fields and the preset grid.",
   ],
   [
-    "app/timer/components/PresetSettings.tsx",
+    "app/timer/_components/PresetSettings.tsx",
     "Duration and task preset editors, five-duration/six-task limits, and section Save/Cancel drafts.",
   ],
   [
-    "app/timer/components/durationValue.ts",
+    "app/timer/_components/durationValue.ts",
     "Controlled duration units, seconds conversion, and preset labels.",
   ],
   [
-    "app/timer/components/taskPresentation.ts",
+    "app/timer/_components/taskPresentation.ts",
     "Grid card layout, spacing, borders, shadows, and state colors.",
   ],
   [
-    "app/timer/components/taskState.ts",
+    "app/timer/_components/taskState.ts",
     "Task ordering, completion partition, elapsed time, and control state.",
   ],
   [
-    "app/timer/components/floatingTaskState.ts",
+    "app/timer/_components/floatingTaskState.ts",
     "Running and retained paused task selection, start ordering, and midnight cutoff.",
   ],
   [
@@ -77,7 +77,7 @@ export const implementationFiles = [
     "Transactional Turso task operations, midnight rollover, preferences, history, and backups.",
   ],
   [
-    "utils/timerAuth.ts",
+    "app/timer/server/timerAuth.ts",
     "Owner-only Google OpenID Connect, signed session cookies, and request origin checks.",
   ],
   [
@@ -99,11 +99,11 @@ export const implementationFiles = [
     "Protected GET, POST, and PATCH handlers for Timer data and actions.",
   ],
   [
-    "components/TimerProvider.tsx",
+    "app/timer/_components/TimerProvider.tsx",
     "Lightweight session-aware activation, shared context, and loading boundaries.",
   ],
   [
-    "components/TimerRuntime.tsx",
+    "app/timer/_components/TimerRuntime.tsx",
     "Deferred snapshot loading, optimistic Timer state, preferences, and scheduling.",
   ],
   [
@@ -111,63 +111,63 @@ export const implementationFiles = [
     "Shared account session request with lightweight response validation.",
   ],
   [
-    "components/FloatingTimerDock.tsx",
+    "app/timer/_components/FloatingTimerDock.tsx",
     "Compact floating task bar, task switcher, retained pause, and completion feedback.",
   ],
   [
-    "components/useTimerClock.ts",
+    "app/timer/hooks/useTimerClock.ts",
     "Display-local clock shared by the task list and floating task UI.",
   ],
   [
-    "components/useTimerDockPosition.ts",
+    "app/timer/hooks/useTimerDockPosition.ts",
     "Measured mobile navigation gap, desktop positioning, and floating layout clearance.",
   ],
   [
-    "components/useTimerSchedule.ts",
+    "app/timer/hooks/useTimerSchedule.ts",
     "Ticking, countdown warnings, completion refreshes, and midnight rollover.",
   ],
   [
-    "utils/timerTicking.ts",
+    "app/timer/utils/timerTicking.ts",
     "Browser-persisted Ticking preference, hydration-safe reads, and tab synchronization.",
   ],
   [
-    "components/useTimerNotifications.ts",
+    "app/timer/hooks/useTimerNotifications.ts",
     "Completion claims, browser notifications, sound, and visible feedback.",
   ],
   [
-    "utils/timerClient.ts",
+    "app/timer/utils/timerClient.ts",
     "API transport, cache keys, validation, and tab change subscriptions.",
   ],
   [
-    "utils/timerMutations.ts",
+    "app/timer/utils/timerMutations.ts",
     "In-memory optimistic projection, ordered saves, revision reconciliation, rollback, and failed form drafts.",
   ],
   [
-    "utils/timerEngine.ts",
+    "app/timer/utils/timerEngine.ts",
     "Shared settlement, actions, completion claims, Multitask, and Autoplay rules.",
   ],
   [
-    "utils/timerDatabase.ts",
+    "app/timer/server/timerDatabase.ts",
     "Turso schema, batched reads, changed-row persistence, and reusable-client transactions.",
   ],
   [
-    "utils/timerBackup.ts",
+    "app/timer/utils/timerBackup.ts",
     "Versioned backup validation, paused export copies, and conflict-safe imports.",
   ],
   [
-    "components/useTimerAudioOwner.ts",
+    "app/timer/hooks/useTimerAudioOwner.ts",
     "Single-owner ticking and warning audio, with a focused-tab fallback.",
   ],
   [
-    "utils/timerSound.ts",
+    "app/timer/utils/timerSound.ts",
     "Action sounds, Quartz clock ticking, and countdown warnings.",
   ],
   [
-    "utils/timer.ts",
+    "app/timer/utils/timer.ts",
     "Types, time calculations, empty personal days, and sample data generation.",
   ],
   [
-    "utils/timerValidation.ts",
+    "app/timer/utils/timerValidation.ts",
     "Validation schemas for stored records and API messages.",
   ],
   [
