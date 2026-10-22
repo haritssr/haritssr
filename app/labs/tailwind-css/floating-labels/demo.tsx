@@ -1,5 +1,3 @@
-"use client";
-
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 

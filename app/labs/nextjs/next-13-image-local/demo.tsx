@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 
 import ExternalLink from "@/components/ExternalLink";
@@ -27,6 +25,7 @@ export default function NextjsImageLocalDemo() {
           <Image
             alt="Lenovo Wallpaper"
             placeholder="blur"
+            sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
             src={LenovoWallpaper}
           />
         </Section>
@@ -36,6 +35,7 @@ export default function NextjsImageLocalDemo() {
             alt="Lenovo Wallpaper"
             className="rounded-md"
             placeholder="blur"
+            sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
             src={LenovoWallpaper}
           />
         </Section>
@@ -44,21 +44,25 @@ export default function NextjsImageLocalDemo() {
           <Image
             alt="Lenovo Wallpaper"
             placeholder="blur"
+            sizes="(min-width: 1024px) 502px, calc((100vw - 52px) / 2)"
             src={LenovoWallpaper}
           />
           <Image
             alt="Lenovo Wallpaper"
             placeholder="blur"
+            sizes="(min-width: 1024px) 502px, calc((100vw - 52px) / 2)"
             src={LenovoWallpaper}
           />
           <Image
             alt="Lenovo Wallpaper"
             placeholder="blur"
+            sizes="(min-width: 1024px) 502px, calc((100vw - 52px) / 2)"
             src={LenovoWallpaper}
           />
           <Image
             alt="Lenovo Wallpaper"
             placeholder="blur"
+            sizes="(min-width: 1024px) 502px, calc((100vw - 52px) / 2)"
             src={LenovoWallpaper}
           />
         </Section>
@@ -67,6 +71,7 @@ export default function NextjsImageLocalDemo() {
           <Image
             alt="Lenovo Wallpaper"
             placeholder="blur"
+            sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
             src={LenovoWallpaper}
           />
           <div className="absolute top-1/2 left-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-zinc-700/40">
@@ -87,6 +92,7 @@ export default function NextjsImageLocalDemo() {
             className="object-cover object-center"
             fill
             placeholder="blur"
+            sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
             src={LenovoWallpaper}
           />
         </Section>
@@ -97,13 +103,11 @@ export default function NextjsImageLocalDemo() {
             className="object-cover object-center"
             fill
             placeholder="blur"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
             src={LenovoWallpaper}
           />
         </Section>
 
-        {/* Still confused about this part */}
-        {/* https://beta.nextjs.org/docs/api-reference/components/image#style */}
         <Section
           title="Using style + height/width auto"
           contentClassName="relative h-auto"
@@ -112,11 +116,9 @@ export default function NextjsImageLocalDemo() {
             alt="Lenovo Wallpaper"
             className="object-cover object-center"
             placeholder="blur"
-            // fill
-            // height="auto"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
             src={LenovoWallpaper}
-            style={{}}
+            style={{ width: "100%", height: "auto" }}
           />
         </Section>
       </div>

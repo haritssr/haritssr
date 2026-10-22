@@ -1,5 +1,3 @@
-"use client";
-
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LabPageHeader from "@/components/LabPageHeader";

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "6a1f73493dc71736e2338f115ad2492e057b01be",
+      "date": "2026-10-22T21:24:32+07:00",
+      "subject": "perf(Physics): compute orbital geometry in a cached worker"
+    },
+    {
       "hash": "5cc275f5f00571c307e3647b01b78c14e4c1efda",
       "date": "2026-10-22T21:24:18+07:00",
       "subject": "perf(Content): render static math on the server and defer diagrams"

@@ -60,7 +60,7 @@ const Example = () => {
   if (status === "success") {
     return (
       <div>
-        <h1>Kamu benar</h1>
+        <output>Kamu benar</output>
         <TryAgainButton onTryAgain={handleTryAgain} />
       </div>
     );

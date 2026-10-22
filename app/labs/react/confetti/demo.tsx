@@ -1,8 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
+import Button from "@/components/Button";
 import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import LabPageHeader from "@/components/LabPageHeader";
@@ -10,6 +11,12 @@ import PageDescription from "@/components/PageDescription";
 
 export default function ReactConfettiDemo() {
   const { width, height } = useWindowSize();
+  const reducedMotion = useSyncExternalStore(
+    subscribeMotion,
+    getMotion,
+    () => true
+  );
+  const [playing, setPlaying] = useState(false);
   return (
     <>
       <LabPageHeader>
@@ -28,7 +35,24 @@ export default function ReactConfettiDemo() {
         </PageDescription>
       </LabPageHeader>
 
-      <Confetti height={height} width={width} />
+      <div className="space-y-3">
+        <Button
+          disabled={reducedMotion}
+          aria-pressed={playing && !reducedMotion}
+          onClick={() => setPlaying((current) => !current)}
+          variant="secondary"
+        >
+          {playing && !reducedMotion ? "Stop confetti" : "Start confetti"}
+        </Button>
+        {reducedMotion ? (
+          <p className="text-muted">
+            Confetti is disabled by your reduced motion preference.
+          </p>
+        ) : null}
+      </div>
+      {playing && !reducedMotion ? (
+        <Confetti height={height} width={width} />
+      ) : null}
     </>
   );
 }
@@ -36,6 +60,16 @@ export default function ReactConfettiDemo() {
 const Confetti = dynamic(async () => await import("react-confetti"), {
   ssr: false,
 });
+
+function subscribeMotion(listener: () => void) {
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  media.addEventListener("change", listener);
+  return () => media.removeEventListener("change", listener);
+}
+
+function getMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 function useWindowSize() {
   const [size, setSize] = useState({ width: 0, height: 0 });

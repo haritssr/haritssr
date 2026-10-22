@@ -81,7 +81,7 @@ function Panel({ title, children }: PanelProps) {
   const className = `panel-${theme}`;
   return (
     <section className={`${className} space-y-2 rounded-md p-2`}>
-      <h1 className="text-xl">{title}</h1>
+      <h2 className="text-xl">{title}</h2>
       {children}
     </section>
   );

@@ -1,5 +1,3 @@
-"use client";
-
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
@@ -23,9 +21,9 @@ export default function TailwindYoutubeThumbnailDemo() {
           <p className="text-xs font-semibold text-purple-600 uppercase">
             How we&apos;d build it
           </p>
-          <h1 className="900 text-gray text-4xl font-semibold">
+          <h2 className="900 text-gray text-4xl font-semibold">
             Youtube Thumbail with Tailwind CSS
-          </h1>
+          </h2>
           <TailwindSVG />
         </div>
       </div>

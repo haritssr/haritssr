@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 
 import ExternalLink from "@/components/ExternalLink";
@@ -20,19 +18,17 @@ export default function TailwindNewspaperDemo() {
       </LabPageHeader>
 
       <div className="mb-10 border border-zinc-400 p-5 tracking-wide">
-        <h1 className="my-2 text-4xl font-bold text-zinc-800">Amazing Title</h1>
-        <h2 className="font-mw mb-5 text-lg text-zinc-600 italic">
+        <h2 className="my-2 text-4xl font-bold text-zinc-800">Amazing Title</h2>
+        <p className="font-mw mb-5 text-lg text-zinc-600 italic">
           This is beautiful subtitle
-        </h2>
+        </p>
 
         <p className="columns-1 text-zinc-700 sm:columns-2 lg:columns-3">
           <span className="float-none block p-2">
             <Image
               alt=""
-              blurDataURL="/images/blur.jpg"
               className="rounded shadow-md"
               height={200}
-              priority
               src="/images/blur.jpg"
               width={200}
             />

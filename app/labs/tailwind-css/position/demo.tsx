@@ -1,10 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import type React from "react";
 
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
+import hero from "@/public/images/hero.jpg";
 
 export default function TailwindPositionDemo() {
   return (
@@ -89,15 +88,15 @@ export default function TailwindPositionDemo() {
           <div className="relative h-96 overflow-hidden">
             <Image
               alt=""
-              blurDataURL="/images/hero.jpg"
               height="3840"
-              src="/images/hero.jpg"
+              sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
+              src={hero}
               width="5760"
             />
 
             <div className="absolute inset-0 bg-zinc-800/80 text-zinc-200">
               <div className="p-5">
-                <h1 className="text-4xl font-semibold">Title</h1>
+                <h2 className="text-4xl font-semibold">Title</h2>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Eveniet quae eum mollitia eaque, reprehenderit obcaecati dolore
                 incidunt voluptas unde blanditiis atque similique deserunt

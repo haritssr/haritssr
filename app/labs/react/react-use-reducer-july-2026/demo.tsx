@@ -28,7 +28,7 @@ export default function ReactUseReducerJuly2026() {
         <PageDescription>use reducer</PageDescription>
       </LabPageHeader>
 
-      <h1>{count}</h1>
+      <output>{count}</output>
       <button
         onClick={() => {
           dispatch("increment");

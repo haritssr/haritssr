@@ -1,5 +1,3 @@
-"use client";
-
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 
@@ -11,7 +9,8 @@ export default function YoutubeEmbedDemo() {
       </LabPageHeader>
 
       <iframe
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pictureBin-picture"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen={true}
         className="aspect-video w-full"
         sandbox="allow-scripts allow-presentation"

@@ -234,4 +234,5 @@ Plain table-of-contents labels do not load KaTeX; mathematical labels load their
 renderer separately. Fixed practice formulas render on the server, leaving only
 answer selection in the client. Flow diagrams load near the viewport. Electron
 configuration geometry runs in a dedicated worker with a four-entry cache and
-ignores results from older selections.
+ignores results from older selections. Confetti requires an explicit start,
+provides Stop, and respects reduced motion.

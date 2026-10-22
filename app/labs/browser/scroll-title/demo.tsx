@@ -29,9 +29,9 @@ export default function ScrollTitleDemo() {
           <GlobalTools />
         </div>
       </nav>
-      <h1 className="mt-20 text-3xl font-bold" ref={ref}>
+      <h2 className="mt-20 text-3xl font-bold" ref={ref}>
         Title
-      </h1>
+      </h2>
       <p className="text-zinc-600">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae maiores
         fugiat dolor nisi debitis! Sunt repellendus quaerat voluptatem explicabo

@@ -1,9 +1,8 @@
-"use client";
-
 import Image from "next/image";
 
 import LabPageHeader from "@/components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
+import hero from "@/public/images/hero.jpg";
 
 export default function FigureDemo() {
   return (
@@ -22,10 +21,10 @@ export default function FigureDemo() {
         <figure>
           <Image
             alt="Mountain with beautiful panoramic sky wadadaw"
-            blurDataURL="/images/hero.jpg"
             height="582"
             placeholder="blur"
-            src="/images/hero.jpg"
+            sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
+            src={hero}
             width="1007"
           />
           <figcaption className="text-center text-zinc-500 italic">
