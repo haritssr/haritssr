@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "38622e67cfba47d675ae791bd084f0269fb37bb3",
+      "date": "2026-10-22T20:56:53+07:00",
+      "subject": "fix(Timer): label the edit task delete button"
+    },
+    {
       "hash": "f70157596dab5ad074c513c4f740f044787b6b64",
       "date": "2026-10-22T20:56:42+07:00",
       "subject": "fix(Timer): persist ticking preference across reloads"
