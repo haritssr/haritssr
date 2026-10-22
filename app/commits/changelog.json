@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "648f31be712ab90ba68378aaf576618c26edff39",
+      "date": "2026-10-22T14:20:43+07:00",
+      "subject": "feat(home): update profile grid and navigation"
+    },
+    {
       "hash": "b914ebbfdc287ab63ea990e7bc0ff2b730613804",
       "date": "2026-10-22T14:20:17+07:00",
       "subject": "feat(timer): refine task cards and document timer behavior"
