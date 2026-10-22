@@ -20,7 +20,7 @@ async function fetchTimer(
   const response = await fetch(url, {
     ...options,
     cache: "no-store",
-    signal: AbortSignal.timeout(15_000),
+    signal: options?.signal ?? AbortSignal.timeout(15_000),
   });
   const result: unknown = await response.json();
   if (!response.ok) {
@@ -36,6 +36,22 @@ async function fetchTimer(
   return result;
 }
 
+async function loadTimer<T>(
+  load: (signal: AbortSignal) => Promise<T>
+): Promise<T> {
+  const controller = new AbortController();
+  const deadline = Promise.withResolvers<never>();
+  const timeout = setTimeout(() => {
+    deadline.reject(new Error("Timer is taking too long to load. Try again."));
+    controller.abort();
+  }, 10_000);
+  try {
+    return await Promise.race([load(controller.signal), deadline.promise]);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 function received(snapshot: TimerSnapshot): ReceivedTimerSnapshot {
   return {
     ...snapshot,
@@ -44,13 +60,23 @@ function received(snapshot: TimerSnapshot): ReceivedTimerSnapshot {
 }
 
 export async function fetchTimerSnapshot() {
-  const { snapshotSchema } = await import("@/utils/timerValidation");
-  return received(snapshotSchema.parse(await fetchTimer("/api/timer")));
+  return await loadTimer(async (signal) => {
+    const [{ snapshotSchema }, result] = await Promise.all([
+      import("@/utils/timerValidation"),
+      fetchTimer("/api/timer", { signal }),
+    ]);
+    return received(snapshotSchema.parse(result));
+  });
 }
 
 export async function fetchTimerHistory(date: string) {
-  const { historySchema } = await import("@/utils/timerValidation");
-  return historySchema.parse(await fetchTimer(`/api/timer?date=${date}`));
+  return await loadTimer(async (signal) => {
+    const [{ historySchema }, result] = await Promise.all([
+      import("@/utils/timerValidation"),
+      fetchTimer(`/api/timer?date=${date}`, { signal }),
+    ]);
+    return historySchema.parse(result);
+  });
 }
 
 export async function sendTimerAction(action: TimerAction) {

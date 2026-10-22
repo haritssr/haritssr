@@ -131,7 +131,13 @@ snapshot on any page so saved running tasks can appear after direct navigation o
 modules keep independent work separate:
 
 - [timerClient.ts](../../../utils/timerClient.ts) handles protected API requests,
-  response validation, cache keys, and tab change subscriptions.
+  response validation, cache keys, and tab change subscriptions. Snapshot and
+  history reads start alongside validation-module loading and have a ten-second
+  deadline covering both operations. Initial snapshot failures retry at most
+  twice with a five-second base delay; focus, reconnect, and Try again can also
+  recover. When no snapshot exists, a failed load replaces the loading message
+  with the existing error and Try again control. Saves retain their fifteen-second
+  request timeout and are never automatically resent.
 - [timerDatabase.ts](../../../utils/timerDatabase.ts) owns SQL mapping and atomic
   Turso transactions, with batched reads, changed-row writes, and a reused runtime
   client. [timerEngine.ts](../../../utils/timerEngine.ts) applies timer

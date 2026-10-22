@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "b2e7a226773dac0d3578097eb7c3219546f61928",
+      "date": "2026-10-22T20:01:52+07:00",
+      "subject": "feat(Home): describe available site features"
+    },
+    {
       "hash": "6c523bf3b07eb8ee3912940a2db3254203729c9c",
       "date": "2026-10-22T20:01:44+07:00",
       "subject": "fix(Timer): label the delete confirmation action"

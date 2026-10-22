@@ -50,7 +50,9 @@ function useTimerState() {
     {
       refreshInterval: 15_000,
       refreshWhenHidden: true,
-      shouldRetryOnError: false,
+      shouldRetryOnError: true,
+      errorRetryCount: 2,
+      errorRetryInterval: 5000,
     }
   );
   useEffect(() => {

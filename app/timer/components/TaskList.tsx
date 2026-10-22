@@ -7,12 +7,12 @@ import { TASK_LAYOUT } from "./taskPresentation";
 import { getTaskCollection } from "./taskState";
 
 export default function TaskList() {
-  const { snapshot, clockOffset } = useTimer();
+  const { snapshot, clockOffset, error } = useTimer();
   const timestamp = useTimerClock(snapshot, clockOffset);
   if (snapshot === undefined) {
-    return (
+    return error === null ? (
       <output className="text-muted block">Loading today’s activities…</output>
-    );
+    ) : null;
   }
   if (snapshot.mode === "turso" && snapshot.day.tasks.length === 0) {
     return (
