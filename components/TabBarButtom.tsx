@@ -27,10 +27,10 @@ export default function TabBarButtom({
     <nav
       aria-label="Mobile navigation"
       data-mobile-tabbar={preview ? undefined : ""}
-      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! sm:hidden"} px-3.5 pb-3`}
+      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.75rem,env(safe-area-inset-bottom))]! lg:hidden"} px-3.5 pb-3`}
     >
       <div
-        className="bg-background/70 w-full rounded-xl border px-1.25 py-1 backdrop-blur-md"
+        className="bg-background/70 mx-auto w-full rounded-xl border px-1.25 py-1 backdrop-blur-md sm:max-w-[22.4rem]"
         data-mobile-tabbar-surface={preview ? undefined : pathname}
       >
         <div className="flex w-full items-center">

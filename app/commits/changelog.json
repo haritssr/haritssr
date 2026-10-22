@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "fd468900ae1bec96d2576315c4540cdeb1a3d770",
+      "date": "2026-10-23T06:26:35+07:00",
+      "subject": "fix(Tree): show child counts and synchronize expansion controls"
+    },
+    {
       "hash": "3fdba4a3a4c2fbc9b01c54b3e9f755c0bc81fe99",
       "date": "2026-10-23T06:26:29+07:00",
       "subject": "feat(Mathematics): add HMMT scaling integral solution"

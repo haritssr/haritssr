@@ -25,7 +25,7 @@ export default function useTimerDockPosition(
       if (!dock) {
         return;
       }
-      const desktop = window.matchMedia("(min-width: 640px)").matches;
+      const desktop = window.matchMedia("(min-width: 1024px)").matches;
       const rem = Number(getComputedStyle(root).fontSize.replace("px", ""));
       const safeBottom =
         Number(
@@ -35,11 +35,8 @@ export default function useTimerDockPosition(
         ) || 0;
       // Read all geometry before changing styles to avoid forced layout between writes.
       const { height } = dock.getBoundingClientRect();
-      const navigationHeight = desktop
-        ? 0
-        : (navigation?.closest("[data-mobile-tabbar]")?.getBoundingClientRect()
-            .height ?? 0);
       let bottom = desktop ? 1.5 * rem : Math.max(0.75 * rem, safeBottom);
+      const footerGap = bottom;
       let gap = 0.75 * rem;
       const bounds = navigation?.getBoundingClientRect();
       if (
@@ -62,7 +59,9 @@ export default function useTimerDockPosition(
       );
       root.style.setProperty(
         "--timer-footer-clearance",
-        `${Math.max(1.25 * rem, bottom + height + gap - navigationHeight)}px`
+        // Keep document spacing independent of the sticky navigation's position.
+        // Otherwise moving the footer moves navigation and feeds back into this margin.
+        `${Math.max(1.25 * rem, height + 2 * footerGap)}px`
       );
     }
 

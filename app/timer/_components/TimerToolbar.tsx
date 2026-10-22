@@ -65,7 +65,7 @@ function TimerSettingsDialog() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
-        <Dialog.Popup className="border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-4 outline-hidden">
+        <Dialog.Popup className="scrollbar-subtle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-10 outline-hidden">
           <Dialog.Title className="mb-5 text-center font-medium">
             Settings
           </Dialog.Title>

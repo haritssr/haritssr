@@ -89,8 +89,10 @@ height matches the navigation surface, with a 53px fallback when absent.
 [useTimerDockPosition.ts](../hooks/useTimerDockPosition.ts)
 measures the real navigation surface and matches its bottom screen gap above it.
 Without mobile navigation it uses safe-area-aware bottom clearance; desktop
-aligns a 28rem bar to the site's content width. The dock overlays page content
-without adding footer padding or changing document height. Completion messages
+aligns a 22.4rem bar to the site's content width. The dock overlays page content;
+mobile footer clearance uses the dock height and a stable safe-area-aware gap,
+independent of the sticky navigation position, to avoid a measurement feedback loop.
+Completion messages
 share the dock, while measured CSS properties keep back-to-top controls clear.
 Observers and event listeners are active only while the dock is visible.
 
