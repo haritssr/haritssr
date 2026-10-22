@@ -10,12 +10,12 @@ const domainIconColors = new Map([
 ]);
 
 export default function LabDomainIcon({
+  className = "size-5",
   src,
-  size = 18,
   variant = "default",
 }: {
+  className?: string;
   src: string;
-  size?: 18 | 36;
   variant?: "default" | "muted";
 }) {
   const domainIconColor = domainIconColors.get(src);
@@ -32,7 +32,7 @@ export default function LabDomainIcon({
     return (
       <span
         aria-hidden="true"
-        className={`inline-block shrink-0 bg-current mask-(--icon-mask) mask-contain mask-center mask-no-repeat ${size === 36 ? "size-9" : "size-4.5"} ${variant === "muted" ? "text-muted" : (domainIconColor ?? "text-foreground")}`}
+        className={`inline-block shrink-0 bg-current mask-(--icon-mask) mask-contain mask-center mask-no-repeat ${className} ${variant === "muted" ? "text-muted" : (domainIconColor ?? "text-foreground")}`}
         style={maskStyle}
       />
     );
@@ -42,10 +42,10 @@ export default function LabDomainIcon({
     <Image
       alt=""
       aria-hidden="true"
-      className="shrink-0 object-contain"
-      height={size}
+      className={`shrink-0 object-contain ${className}`}
+      height={32}
       src={src}
-      width={size}
+      width={32}
     />
   );
 }

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "891f53dadd5ff7ab863f570ee9254cb21e023b78",
+      "date": "2026-10-22T20:56:57+07:00",
+      "subject": "style(InternalLink): place database badge after chevron"
+    },
+    {
       "hash": "38622e67cfba47d675ae791bd084f0269fb37bb3",
       "date": "2026-10-22T20:56:53+07:00",
       "subject": "fix(Timer): label the edit task delete button"
