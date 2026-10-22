@@ -3,6 +3,11 @@
 - [Writing](https://haritssr.com/writing): Posts and notes.
 - [Design](https://haritssr.com/design): Design system reference.
 - [Commits](https://haritssr.com/commits): Commit history and activity.
+  [Weekly changelog](https://haritssr.com/commits/weekly-changelog) presents
+  curated summaries from January 2026 through October 22, newest first. Each
+  month uses days 1–7, 8–14, 15–21, 22–28, and 29–month end; inactive weeks
+  remain visible and the current week is marked partial. Update the summaries
+  and review cutoff together in `app/commits/weekly-changelog/data.ts`.
   Model suitability lives at `/commits/2026-10-11` and `/commits/2026-10-15`;
   the dated review at
   `/commits/2026-10-14` covers a fixed set of committed changes in Jakarta time.

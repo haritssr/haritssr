@@ -9,6 +9,7 @@ import {
   october22AnalysisRoute,
   todayModelSuitabilityRoute,
   navigationRoutes,
+  weeklyChangelogRoute,
 } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
 import { getLabRoutes } from "@/utils/labRoutes";
@@ -21,6 +22,7 @@ export function getSearchIndex(): RouteDoc[] {
   const docs: RouteDoc[] = [
     ...navigationRoutes,
     commitsRoute,
+    weeklyChangelogRoute,
     modelSuitabilityRoute,
     todayModelSuitabilityRoute,
     commitAnalysisRoute,

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4fc93abcab1a010acfa6f585baa425ca54fc2f99",
+      "date": "2026-10-22T19:06:57+07:00",
+      "subject": "feat(Tree): add route analytics and shared collapse control"
+    },
+    {
       "hash": "b01f0d31607771d46786fae552f7e0ae56dc70f3",
       "date": "2026-10-22T19:06:50+07:00",
       "subject": "feat(Home): organize tools and refine profile navigation"

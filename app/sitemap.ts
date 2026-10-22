@@ -8,6 +8,7 @@ import {
   october21AnalysisRoute,
   october22AnalysisRoute,
   todayModelSuitabilityRoute,
+  weeklyChangelogRoute,
 } from "@/data/routes";
 import { getAvailableLabSummaries } from "@/utils/labCatalog";
 import { getLabRoutes } from "@/utils/labRoutes";
@@ -29,6 +30,7 @@ const staticRoutes = [
   "/timer/statistic",
   "/timer/details",
   commitsRoute.route,
+  weeklyChangelogRoute.route,
   modelSuitabilityRoute.route,
   todayModelSuitabilityRoute.route,
   commitAnalysisRoute.route,

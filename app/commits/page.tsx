@@ -13,6 +13,7 @@ import {
   october21AnalysisRoute,
   october22AnalysisRoute,
   todayModelSuitabilityRoute,
+  weeklyChangelogRoute,
 } from "@/data/routes";
 import { commitDay, formatDay } from "@/utils/changelog";
 import { createPageMetadata } from "@/utils/pageMetadata";
@@ -38,6 +39,11 @@ export default async function CommitsPage() {
           commits and counting, from {formatDay(firstDay)} to{" "}
           {formatDay(lastDay)} · Jakarta time (WIB)
         </PageDescription>
+        <nav aria-label="Changelog">
+          <InternalLink href={weeklyChangelogRoute.route}>
+            {weeklyChangelogRoute.title}
+          </InternalLink>
+        </nav>
       </PageHeader>
       <div className="space-y-16">
         <ChangelogExplorer commits={history.commits} initialDay={initialDay} />

@@ -21,6 +21,14 @@ export const commitsRoute: RouteDoc = {
   group: "Navigation",
 };
 
+export const weeklyChangelogRoute: RouteDoc = {
+  route: "/commits/weekly-changelog",
+  title: "Weekly changelog",
+  description:
+    "Concise weekly highlights of site changes from January 2026 onward.",
+  group: "Commits",
+};
+
 export const modelSuitabilityRoute: RouteDoc = {
   route: "/commits/2026-10-11",
   title: "2026-10-11",
