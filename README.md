@@ -77,8 +77,10 @@
   readable but must be shortened on edit. New days start empty.
 - Progress derives from timestamps without a write every second. Tasks stop at
   Jakarta midnight. Actions and completion claims use write transactions so only
-  one device handles a completion and its Autoplay transition. The API is polled
-  every 15 seconds and revalidated on focus. Changes require network connectivity;
+  one device handles a completion and its Autoplay transition. Visible owner pages poll every 15 seconds while tasks run, or every
+  60 seconds while idle, and revalidate on focus. Hidden tabs stop polling;
+  timestamp-based completion and midnight scheduling remain active. Read-only
+  previews do not poll. Changes require network connectivity;
   actions update immediately through an in-memory optimistic queue while saves
   run in order. Failed saves restore confirmed state, retain Add/Edit drafts for
   reopening, and show an error with Retry to refresh authoritative data. Uncertain
@@ -99,7 +101,10 @@
   other devices can play their own ticking. Completion feedback is claimed globally.
 - Timer UI components live in `app/timer/components/`; its
   [component guide](app/timer/components/README.md) maps the controls. The global
-  `TimerProvider` loads state across navigation. Outside Timer, the compact
+  `TimerProvider` shares a lightweight session check with the account control.
+  It lazy-loads `TimerRuntime` for the owner or after visiting a Timer page, then
+  keeps it mounted across navigation. Anonymous visitors elsewhere do not load
+  the runtime or request Timer snapshots. Outside Timer, the compact
   floating dock shows the task title, progress, speed, and circular actions above
   mobile navigation or within desktop content width. Completion messages link
   back to Timer. `timerClient.ts` handles HTTP transport; scheduling, notification,

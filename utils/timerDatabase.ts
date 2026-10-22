@@ -96,27 +96,34 @@ function dayQueries(date?: string): InStatement[] {
 }
 
 function decodeDays(days: ResultSet, tasks: ResultSet) {
+  const tasksByDate = new Map<unknown, typeof tasks.rows>();
+  for (const task of tasks.rows) {
+    const group = tasksByDate.get(task.date);
+    if (group) {
+      group.push(task);
+    } else {
+      tasksByDate.set(task.date, [task]);
+    }
+  }
   return days.rows.map((day) =>
     daySchema.parse({
       schemaVersion: 1,
       date: day.date,
       revision: Number(day.revision),
-      tasks: tasks.rows
-        .filter((task) => task.date === day.date)
-        .map((task) => ({
-          id: task.id,
-          activity: task.activity,
-          description: task.description,
-          duration: Number(task.duration_seconds),
-          spent: Number(task.spent_seconds),
-          speed: Number(task.speed),
-          startedAt: task.started_at,
-          ...(task.last_started_at === null
-            ? {}
-            : { lastStartedAt: task.last_started_at }),
-          reachedAt: task.completed_at,
-          notifiedAt: task.notification_claimed_at,
-        })),
+      tasks: (tasksByDate.get(day.date) ?? []).map((task) => ({
+        id: task.id,
+        activity: task.activity,
+        description: task.description,
+        duration: Number(task.duration_seconds),
+        spent: Number(task.spent_seconds),
+        speed: Number(task.speed),
+        startedAt: task.started_at,
+        ...(task.last_started_at === null
+          ? {}
+          : { lastStartedAt: task.last_started_at }),
+        reachedAt: task.completed_at,
+        notifiedAt: task.notification_claimed_at,
+      })),
     })
   );
 }

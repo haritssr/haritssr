@@ -37,7 +37,7 @@ export default function Statistics() {
     validDate ? timerHistoryKey(date) : null,
     async () => await fetchTimerHistory(date),
     {
-      refreshInterval: 15_000,
+      refreshInterval: (history) => (history?.mode === "demo" ? 0 : 60_000),
       shouldRetryOnError: false,
     }
   );

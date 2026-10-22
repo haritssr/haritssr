@@ -100,7 +100,15 @@ export const implementationFiles = [
   ],
   [
     "components/TimerProvider.tsx",
-    "Site-wide snapshot loading, optimistic Timer state, preferences, and shared scheduling.",
+    "Lightweight session-aware activation, shared context, and loading boundaries.",
+  ],
+  [
+    "components/TimerRuntime.tsx",
+    "Deferred snapshot loading, optimistic Timer state, preferences, and scheduling.",
+  ],
+  [
+    "utils/timerSession.ts",
+    "Shared account session request with lightweight response validation.",
   ],
   [
     "components/FloatingTimerDock.tsx",

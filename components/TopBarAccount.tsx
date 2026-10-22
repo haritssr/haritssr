@@ -3,29 +3,11 @@
 import { Menu } from "@base-ui/react/menu";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import useSWR from "swr";
-import { z } from "zod";
 
-interface Session {
-  account: { email: string; picture: string | null } | null;
-}
-
-async function fetchSession(url: string): Promise<Session> {
-  const response = await fetch(url, { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error("Account status is unavailable.");
-  }
-  return z
-    .object({
-      account: z
-        .object({ email: z.string(), picture: z.string().nullable() })
-        .nullable(),
-    })
-    .parse(await response.json());
-}
+import { useTimerSession } from "@/utils/timerSession";
 
 export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
-  const { data } = useSWR<Session>("/api/timer/auth/session", fetchSession);
+  const { data } = useTimerSession();
   const [failedPicture, setFailedPicture] = useState<string | null>(null);
   const account = data?.account;
   const label = account ? "Account" : "Sign in with Google";

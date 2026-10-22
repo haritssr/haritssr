@@ -33,6 +33,12 @@ export default function useTimerDockPosition(
             .getPropertyValue("--timer-safe-bottom")
             .replace("px", "")
         ) || 0;
+      // Read all geometry before changing styles to avoid forced layout between writes.
+      const { height } = dock.getBoundingClientRect();
+      const navigationHeight = desktop
+        ? 0
+        : (navigation?.closest("[data-mobile-tabbar]")?.getBoundingClientRect()
+            .height ?? 0);
       let bottom = desktop ? 1.5 * rem : Math.max(0.75 * rem, safeBottom);
       let gap = 0.75 * rem;
       const bounds = navigation?.getBoundingClientRect();
@@ -49,12 +55,6 @@ export default function useTimerDockPosition(
       } else {
         dock.style.removeProperty("--timer-tabbar-height");
       }
-      const { height } = dock.getBoundingClientRect();
-      // The tab bar already occupies space after the footer in normal flow.
-      const navigationHeight = desktop
-        ? 0
-        : (navigation?.closest("[data-mobile-tabbar]")?.getBoundingClientRect()
-            .height ?? 0);
       dock.style.setProperty("--timer-dock-bottom", `${bottom}px`);
       root.style.setProperty(
         "--timer-dock-clearance",

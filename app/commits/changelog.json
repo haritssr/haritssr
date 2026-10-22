@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "620673e7b4bd6137e9bdb51f778b33f31f900b7b",
+      "date": "2026-10-22T21:02:40+07:00",
+      "subject": "refactor(Labs): control domain icon sizing with classes"
+    },
+    {
       "hash": "891f53dadd5ff7ab863f570ee9254cb21e023b78",
       "date": "2026-10-22T20:56:57+07:00",
       "subject": "style(InternalLink): place database badge after chevron"

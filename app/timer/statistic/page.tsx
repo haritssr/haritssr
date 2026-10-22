@@ -1,6 +1,7 @@
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
+import { TimerContent } from "@/components/TimerProvider";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 import Statistics from "./Statistics";
@@ -25,7 +26,9 @@ export default function TimerStatisticsPage() {
           the previous 30 days of time spent.
         </PageDescription>
       </PageHeader>
-      <Statistics />
+      <TimerContent>
+        <Statistics />
+      </TimerContent>
     </>
   );
 }

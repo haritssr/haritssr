@@ -1,162 +1,55 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
+import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
-import useSWR from "swr";
 
-import { DEFAULT_DURATION_PRESETS, DEFAULT_TASK_PRESETS } from "@/utils/timer";
-import type { TimerTaskPreset } from "@/utils/timer";
-import {
-  fetchTimerSnapshot,
-  saveTimerPreferences,
-  sendTimerAction,
-  subscribeTimerChanges,
-  TIMER_SNAPSHOT_KEY,
-} from "@/utils/timerClient";
-import type { ReceivedTimerSnapshot } from "@/utils/timerClient";
-import { TimerMutations } from "@/utils/timerMutations";
+import { useTimerSession } from "@/utils/timerSession";
 
-import useTimerNotifications from "./useTimerNotifications";
-import useTimerSchedule from "./useTimerSchedule";
+import type { TimerState } from "./TimerRuntime";
 
-function useTimerState() {
-  // oxlint-disable-next-line react/hook-use-state -- One stable external store per provider; no setter is needed.
-  const [mutations] = useState(
-    () =>
-      new TimerMutations({
-        action: async (action) => {
-          const result = await sendTimerAction(action);
-          return result.snapshot;
-        },
-        preferences: saveTimerPreferences,
-        refresh: fetchTimerSnapshot,
-      })
-  );
-  const state = useSyncExternalStore(
-    mutations.subscribe,
-    mutations.getSnapshot,
-    mutations.getSnapshot
-  );
-  const { data, error: loadError } = useSWR<ReceivedTimerSnapshot, Error>(
-    TIMER_SNAPSHOT_KEY,
-    fetchTimerSnapshot,
-    {
-      refreshInterval: 15_000,
-      refreshWhenHidden: true,
-      shouldRetryOnError: true,
-      errorRetryCount: 2,
-      errorRetryInterval: 5000,
-    }
-  );
-  useEffect(() => {
-    if (data !== undefined) {
-      mutations.receive(data);
-    }
-  }, [data, mutations]);
-  useEffect(() => {
-    if (loadError !== undefined) {
-      mutations.loadFailed(loadError);
-    }
-  }, [loadError, mutations]);
-  useEffect(() => {
-    try {
-      return subscribeTimerChanges(() => {
-        void mutations.refresh();
-      });
-    } catch {
-      return () => {
-        // Polling and focus remain available.
-      };
-    }
-  }, [mutations]);
-  const { snapshot, confirmed, pendingCount, drafts } = state;
-  const autoplay = snapshot?.preferences?.autoplay ?? false;
-  const multitask = snapshot?.preferences?.multitask ?? false;
-  const notificationsEnabled =
-    snapshot?.preferences?.notificationsEnabled ?? true;
-  const clockOffset = snapshot?.clockOffset ?? 0;
-  const { tickingEnabled, setTickingEnabled } = useTimerSchedule(
-    snapshot,
-    clockOffset,
-    mutations.refresh
-  );
-  const { completion, setCompletion } = useTimerNotifications({
-    snapshot: confirmed,
-    publish: mutations.receive,
-    autoplay: confirmed?.preferences?.autoplay ?? false,
-    notificationsEnabled: confirmed?.preferences?.notificationsEnabled ?? true,
-  });
-  return useMemo(
-    () => ({
-      completion,
-      dismissCompletion: () => {
-        setCompletion(null);
-      },
-      snapshot,
-      pendingCount,
-      drafts,
-      clockOffset,
-      autoplay,
-      multitask,
-      notificationsEnabled,
-      durationPresets:
-        snapshot?.preferences?.durationPresets ?? DEFAULT_DURATION_PRESETS,
-      taskPresets: snapshot?.preferences?.taskPresets ?? DEFAULT_TASK_PRESETS,
-      setDurationPresets: async (durationPresets: number[]) =>
-        await mutations.preferences({ durationPresets }),
-      setTaskPresets: async (taskPresets: TimerTaskPreset[]) =>
-        await mutations.preferences({ taskPresets }),
-      setAutoplay: async (enabled: boolean) =>
-        await mutations.preferences({ autoplay: enabled }),
-      setMultitask: async (enabled: boolean) =>
-        await mutations.preferences({ multitask: enabled }),
-      setNotificationsEnabled: async (enabled: boolean) =>
-        await mutations.preferences({ notificationsEnabled: enabled }),
-      tickingEnabled,
-      setTickingEnabled,
-      act: mutations.act,
-      refresh: mutations.refresh,
-      error: state.error ?? state.loadError,
-    }),
-    [
-      completion,
-      setCompletion,
-      snapshot,
-      pendingCount,
-      drafts,
-      clockOffset,
-      autoplay,
-      multitask,
-      notificationsEnabled,
-      tickingEnabled,
-      setTickingEnabled,
-      mutations,
-      state.error,
-      state.loadError,
-    ]
+const TimerRuntime = dynamic(async () => await import("./TimerRuntime"));
+export const TimerContext = createContext<TimerState | null>(null);
+
+export default function TimerProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const { data } = useTimerSession();
+  const [activated, setActivated] = useState(false);
+  const [value, setValue] = useState<TimerState | null>(null);
+  const needed =
+    pathname === "/timer" ||
+    pathname.startsWith("/timer/") ||
+    (data !== undefined && data.account !== null);
+  if (needed && !activated) {
+    setActivated(true);
+  }
+
+  return (
+    <TimerContext value={value}>
+      {children}
+      {activated ? <TimerRuntime onStateChange={setValue} /> : null}
+    </TimerContext>
   );
 }
 
-const TimerContext = createContext<ReturnType<typeof useTimerState> | null>(
-  null
-);
-
-export default function TimerProvider({ children }: { children: ReactNode }) {
-  const value = useTimerState();
-  return <TimerContext value={value}>{children}</TimerContext>;
+export function TimerContent({
+  children,
+  fallback,
+}: {
+  children: ReactNode;
+  fallback?: ReactNode;
+}): ReactNode {
+  const context = useContext(TimerContext);
+  return context === null
+    ? (fallback ?? <output className="text-muted block">Loading Timer…</output>)
+    : children;
 }
 
 export function useTimer() {
   const context = useContext(TimerContext);
   if (context === null) {
-    throw new Error("Timer controls require TimerProvider.");
+    throw new Error("Timer controls require an activated TimerProvider.");
   }
   return context;
 }

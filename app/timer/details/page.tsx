@@ -341,8 +341,10 @@ export default function TimerDetailsPage() {
               ownership stay local.
             </li>
             <li>
-              Open pages refresh every 15 seconds and on focus. Changes from
-              another device can take until the next refresh to appear.
+              Visible owner pages refresh every 15 seconds while tasks run, or
+              every 60 seconds while idle, and on focus. Hidden tabs stop
+              polling. Anonymous previews do not poll. Changes from another
+              device can take until the next refresh to appear.
             </li>
             <li>
               Export downloads a versioned JSON history backup without pausing

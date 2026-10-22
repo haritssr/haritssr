@@ -125,7 +125,9 @@ During the final 10 real seconds of a task, the same Quartz warning ticks play a
 even with Ticking off. They become faster with 6 and 3 seconds remaining and
 stop when the task pauses or finishes. Remaining time accounts for task speed.
 
-The [provider](../../../components/TimerProvider.tsx) owns preference access,
+The [provider](../../../components/TimerProvider.tsx) activates the deferred
+[runtime](../../../components/TimerRuntime.tsx) for owner sessions or Timer visits
+and keeps it alive across navigation. The runtime owns preference access,
 the shared SWR loading cache, and optimistic state from
 [timerMutations.ts](../../../utils/timerMutations.ts). The mutation controller
 keeps confirmed revisions and projects pending changes in memory. It saves in
