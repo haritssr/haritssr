@@ -20,27 +20,87 @@ const cookieOptions = {
   sameSite: "lax" as const,
   path: "/",
 };
+const authOrigin = z
+  .string()
+  .trim()
+  .pipe(z.url())
+  .transform((value, context) => {
+    const origin = new URL(value);
+    if (
+      !["http:", "https:"].includes(origin.protocol) ||
+      (secure && origin.protocol !== "https:") ||
+      origin.username !== "" ||
+      origin.password !== "" ||
+      origin.pathname !== "/" ||
+      origin.search !== "" ||
+      origin.hash !== ""
+    ) {
+      context.issues.push({
+        code: "custom",
+        input: value,
+        message: "Use an HTTP origin, HTTPS in production, without a path.",
+      });
+      return z.NEVER;
+    }
+    return origin.origin;
+  });
 const authConfig = z.object({
-  TIMER_GOOGLE_CLIENT_ID: z.string().min(1),
-  TIMER_GOOGLE_CLIENT_SECRET: z.string().min(1),
-  TIMER_GOOGLE_EMAIL: z.email().transform((email) => email.toLowerCase()),
-  TIMER_GOOGLE_USER_ID: z.string().min(1).max(255).optional(),
-  TIMER_SESSION_SECRET: z.string().min(32),
-  TIMER_AUTH_ORIGIN: z.url(),
+  TIMER_GOOGLE_CLIENT_ID: z.string().trim().min(1),
+  TIMER_GOOGLE_CLIENT_SECRET: z
+    .string()
+    .refine((value) => value.trim().length > 0),
+  TIMER_GOOGLE_EMAIL: z
+    .string()
+    .trim()
+    .pipe(z.email())
+    .transform((email) => email.toLowerCase()),
+  TIMER_GOOGLE_USER_ID: z
+    .string()
+    .trim()
+    .max(255)
+    .optional()
+    .transform((value) => (value === "" ? undefined : value)),
+  TIMER_SESSION_SECRET: z
+    .string()
+    .min(32)
+    .refine((value) => value.trim().length > 0),
+  TIMER_AUTH_ORIGIN: authOrigin,
 });
+const configurationMessages = {
+  TIMER_GOOGLE_CLIENT_ID: "Set the Google OAuth client ID.",
+  TIMER_GOOGLE_CLIENT_SECRET: "Set the Google OAuth client secret.",
+  TIMER_GOOGLE_EMAIL: "Set a valid owner email address.",
+  TIMER_GOOGLE_USER_ID:
+    "Omit this optional value or use at most 255 characters.",
+  TIMER_SESSION_SECRET:
+    "Set a session secret containing at least 32 characters.",
+  TIMER_AUTH_ORIGIN:
+    "Set an HTTP origin, HTTPS in production, without a path, query, credentials, or fragment.",
+};
+
+export class TimerAuthConfigurationError extends Error {
+  readonly issues: { variable: string; message: string }[];
+  constructor(issues: { variable: string; message: string }[]) {
+    super(
+      `Timer sign-in configuration is invalid. ${issues.map(({ variable, message }) => `${variable}: ${message}`).join(" ")}`
+    );
+    this.name = "TimerAuthConfigurationError";
+    this.issues = issues;
+  }
+}
 
 function config() {
-  const value = authConfig.parse(process.env);
-  const origin = new URL(value.TIMER_AUTH_ORIGIN);
-  if (
-    origin.origin !== value.TIMER_AUTH_ORIGIN ||
-    (secure && origin.protocol !== "https:")
-  ) {
-    throw new Error(
-      "TIMER_AUTH_ORIGIN must be an exact origin, HTTPS in production."
+  const settings = authConfig.safeParse(process.env);
+  if (!settings.success) {
+    const variables = new Set(
+      settings.error.issues.map((issue) => issue.path[0])
     );
+    const issues = Object.entries(configurationMessages)
+      .filter(([variable]) => variables.has(variable))
+      .map(([variable, message]) => ({ variable, message }));
+    throw new TimerAuthConfigurationError(issues);
   }
-  return value;
+  return settings.data;
 }
 
 function sign(payload: object, secret: string) {

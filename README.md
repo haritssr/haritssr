@@ -43,6 +43,12 @@
   Configure `TIMER_GOOGLE_CLIENT_ID`, `TIMER_GOOGLE_CLIENT_SECRET`,
   `TIMER_GOOGLE_EMAIL`, `TIMER_SESSION_SECRET`, and `TIMER_AUTH_ORIGIN` locally and
   in deployment. If the Google app is in testing, add your account as a test user.
+  `TIMER_GOOGLE_USER_ID` is optional; an empty or whitespace-only value is treated
+  as unset. `TIMER_AUTH_ORIGIN` accepts surrounding whitespace and a trailing slash;
+  it must use HTTPS in production and contain no credentials, path, query, or fragment.
+  Login configuration failures return `AUTH_CONFIGURATION_INVALID` with the affected
+  variable names and safe setup hints. Responses and server logs never include their
+  values. Save corrected Production variables in Vercel and redeploy before retrying.
   Generate a session secret with `openssl rand -base64 32`. Keep every variable
   server-only. Missing settings leave personal data locked. Remove obsolete
   `TIMER_GITHUB_*` variables; the callback route and Turso schema do not change.

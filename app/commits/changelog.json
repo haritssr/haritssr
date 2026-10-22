@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "ad248f183a7f0067dbce996197afa7e4463cfb34",
+      "date": "2026-10-22T04:35:45+07:00",
+      "subject": "style(timer): shorten Add Task label on mobile"
+    },
+    {
       "hash": "9ab790ec8a51d6ab1b7de53bb09dc1991225201b",
       "date": "2026-10-22T04:34:19+07:00",
       "subject": "docs(timer): document storage and component relationships"

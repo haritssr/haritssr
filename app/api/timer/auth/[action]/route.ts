@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import {
+  TimerAuthConfigurationError,
   timerSession,
   timerSignIn,
   timerSignInCallback,
@@ -26,7 +27,26 @@ export async function GET(request: Request, { params }: Context) {
     }
     response.headers.set("Cache-Control", "no-store");
     return response;
-  } catch {
+  } catch (error) {
+    if (error instanceof TimerAuthConfigurationError) {
+      console.error("Timer authentication configuration is invalid.", {
+        action,
+        issues: error.issues,
+      });
+      return NextResponse.json(
+        {
+          error: error.message,
+          code: "AUTH_CONFIGURATION_INVALID",
+          issues: error.issues,
+        },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+    // Raw errors can include tokens, URLs, or other credentials.
+    console.error("Timer authentication request failed.", {
+      action,
+      errorType: error instanceof TypeError ? "TypeError" : "UnexpectedError",
+    });
     return NextResponse.json(
       {
         error:
