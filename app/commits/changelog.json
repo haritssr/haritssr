@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "59dc40e302149592b16df4f8a26b78d5524ef0e8",
+      "date": "2026-10-22T15:17:57+07:00",
+      "subject": "fix(footer): match spacing above the floating timer"
+    },
+    {
       "hash": "f238678ad8d70302e8b8c69316a944ac4a05063b",
       "date": "2026-10-22T15:17:52+07:00",
       "subject": "refactor(footer): isolate install button client behavior"
