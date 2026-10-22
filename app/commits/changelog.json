@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "f70157596dab5ad074c513c4f740f044787b6b64",
+      "date": "2026-10-22T20:56:42+07:00",
+      "subject": "fix(Timer): persist ticking preference across reloads"
+    },
+    {
       "hash": "c1f79a68b763167dec8a3596869cd67fbd271318",
       "date": "2026-10-22T20:56:27+07:00",
       "subject": "fix(Timer): recover stalled snapshot loads"

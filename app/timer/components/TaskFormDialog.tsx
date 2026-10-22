@@ -314,7 +314,9 @@ function TaskFormActions({
             disabled={busy}
             onDelete={onDelete}
             variant="secondary"
-          />
+          >
+            Delete
+          </DeleteTaskButton>
         )}
       </div>
       <Dialog.Title className="text-center font-medium">{title}</Dialog.Title>

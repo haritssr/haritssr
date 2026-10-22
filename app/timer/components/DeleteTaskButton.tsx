@@ -7,8 +7,9 @@ import Button from "@/components/Button";
 
 export default function DeleteTaskButton({
   onDelete,
+  children,
   ...buttonProps
-}: Omit<ComponentProps<typeof Button>, "onClick" | "children"> & {
+}: Omit<ComponentProps<typeof Button>, "onClick"> & {
   onDelete: () => Promise<boolean> | Promise<void>;
 }) {
   const [open, setOpen] = useState(false);
@@ -45,7 +46,7 @@ export default function DeleteTaskButton({
           <Button aria-label="Delete task" title="Delete" {...buttonProps} />
         }
       >
-        <TrashIcon aria-hidden="true" className="size-5" />
+        {children ?? <TrashIcon aria-hidden="true" className="size-5" />}
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Backdrop
