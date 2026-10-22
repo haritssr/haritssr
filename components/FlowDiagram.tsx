@@ -45,6 +45,8 @@ export default function FlowDiagram({
   legend?: ReactNode;
   title: string;
 }) {
+  const figureRef = useRef<HTMLElement>(null);
+  const [nearby, setNearby] = useState(false);
   const id = useId().replaceAll(/[^a-zA-Z0-9_-]/gu, "");
   const [diagram, setDiagram] = useState<RenderedDiagram | null>(null);
   const [zoom, setZoom] = useState(1);
@@ -53,6 +55,33 @@ export default function FlowDiagram({
   );
 
   useEffect(() => {
+    const figure = figureRef.current;
+    if (figure === null) {
+      return () => {
+        /* No figure to observe. */
+      };
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setNearby(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    observer.observe(figure);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!nearby) {
+      return () => {
+        /* Defer work until the diagram is near the viewport. */
+      };
+    }
     let cancelled = false;
 
     async function render() {
@@ -139,11 +168,11 @@ export default function FlowDiagram({
     return () => {
       cancelled = true;
     };
-  }, [definition, id]);
+  }, [definition, id, nearby]);
 
   return (
     <Dialog.Root>
-      <figure className="min-w-0 space-y-3">
+      <figure className="min-w-0 space-y-3" ref={figureRef}>
         <figcaption className="sr-only">{title} diagram</figcaption>
         <div className="flex flex-wrap items-center gap-3">
           {legend}

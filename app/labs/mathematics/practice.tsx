@@ -1,9 +1,7 @@
-"use client";
-
-import { useState } from "react";
-
 import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
+
+import PracticeQuestionCard from "./practice-question-card";
 
 export interface PracticeQuestion {
   readonly prompt: string;
@@ -12,57 +10,6 @@ export interface PracticeQuestion {
   readonly correctIndex: number;
   readonly explanation: string;
   readonly working: string;
-}
-
-function QuestionCard({ question }: { question: PracticeQuestion }) {
-  const [selected, setSelected] = useState<number | null>(null);
-  const isCorrect = selected === question.correctIndex;
-
-  return (
-    <li className="border-border min-w-0 rounded-2xl border p-5 sm:p-6">
-      <p className="text-foreground font-medium">{question.prompt}</p>
-      <div className="mt-2 overflow-x-auto py-1 text-lg">
-        {katexify(question.expression, true)}
-      </div>
-      <fieldset
-        aria-label={`Answers for: ${question.prompt}`}
-        className="mt-4 grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,10rem),1fr))] gap-2"
-      >
-        {question.choices.map((choice, index) => (
-          <button
-            aria-pressed={selected === index}
-            className={`focus-visible:outline-action min-h-12 min-w-0 overflow-x-auto rounded-xl border px-4 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${selected === index ? "border-action bg-action/10 text-action" : "border-border text-foreground hover:border-action hover:bg-interface-hover"}`}
-            key={choice}
-            onClick={() => {
-              setSelected(index);
-            }}
-            type="button"
-          >
-            {katexify(choice, false)}
-          </button>
-        ))}
-      </fieldset>
-      {selected === null ? null : (
-        <div
-          aria-live="polite"
-          className="text-muted border-border mt-4 rounded-xl border p-4 text-sm leading-6"
-        >
-          <p
-            className={`font-semibold ${isCorrect ? "text-green-700" : "text-amber-800"}`}
-          >
-            {isCorrect ? "Correct." : "Not quite. The correct answer is"}{" "}
-            {isCorrect
-              ? null
-              : katexify(question.choices[question.correctIndex], false)}
-          </p>
-          <p className="mt-2">{question.explanation}</p>
-          <div className="mt-2 overflow-x-auto py-1">
-            {katexify(question.working, true)}
-          </div>
-        </div>
-      )}
-    </li>
-  );
 }
 
 export default function Practice({
@@ -79,7 +26,15 @@ export default function Practice({
     >
       <ul className="grid min-w-0 grid-cols-1 items-start gap-4 lg:grid-cols-2">
         {questions.map((question) => (
-          <QuestionCard key={question.prompt} question={question} />
+          <PracticeQuestionCard
+            key={question.prompt}
+            prompt={question.prompt}
+            expression={katexify(question.expression, true)}
+            choices={question.choices.map((choice) => katexify(choice, false))}
+            correctIndex={question.correctIndex}
+            explanation={question.explanation}
+            working={katexify(question.working, true)}
+          />
         ))}
       </ul>
     </Section>

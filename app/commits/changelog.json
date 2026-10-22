@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3fba6680aa7ea2ad682a45b139ffe805edba9c06",
+      "date": "2026-10-22T21:24:06+07:00",
+      "subject": "refactor(Navigation): share route discovery and correct page semantics"
+    },
+    {
       "hash": "4a06dc23524ff850cb17314038417e68777b2440",
       "date": "2026-10-22T21:23:49+07:00",
       "subject": "perf(Commits): filter history on the server with shareable views"

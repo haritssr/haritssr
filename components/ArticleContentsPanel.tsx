@@ -1,8 +1,8 @@
 "use client";
 
-import "katex/dist/katex.min.css";
 import { Popover } from "@base-ui/react/popover";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import dynamic from "next/dynamic";
 import { memo } from "react";
 import type { MouseEvent, ReactNode, Ref } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
@@ -22,7 +22,6 @@ import type {
   ContentsEntry,
   ContentsLabelPart,
 } from "@/utils/articleTableOfContents";
-import katexify from "@/utils/katexify";
 
 import styles from "./ArticleContentsPanel.module.css";
 
@@ -33,10 +32,12 @@ interface ContentsListProps {
   onSelect: (entry: ContentsEntry, focus: boolean) => void;
 }
 
+const ContentsMath = dynamic(async () => await import("./ContentsMath"));
+
 const ContentsLabel = memo(({ parts }: { parts: ContentsLabelPart[] }) =>
   parts.map((part, index) => (
     <span key={`${part.kind}-${index}`}>
-      {part.kind === "math" ? katexify(part.value, false) : part.value}
+      {part.kind === "math" ? <ContentsMath tex={part.value} /> : part.value}
     </span>
   ))
 );

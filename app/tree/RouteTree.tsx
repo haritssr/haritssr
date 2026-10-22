@@ -70,7 +70,7 @@ function TreeList({
                 />
               </Collapsible.Trigger>
             </div>
-            <Collapsible.Panel keepMounted>
+            <Collapsible.Panel>
               <TreeList
                 allOpen={allOpen}
                 depth={depth + 1}

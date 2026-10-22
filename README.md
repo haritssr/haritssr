@@ -229,3 +229,7 @@ Back/Forward restore them, and typing updates are debounced before requests.
 Global search uses Ctrl/Cmd+K, preserving the browser Print shortcut. Top and
 bottom navigation share `data/navigation.ts`; section links distinguish the
 current page from a parent location.
+
+Plain table-of-contents labels do not load KaTeX; mathematical labels load their
+renderer separately. Fixed practice formulas render on the server, leaving only
+answer selection in the client. Flow diagrams load near the viewport.
