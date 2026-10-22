@@ -15,6 +15,11 @@ export const metadata = createPageMetadata({
 
 const publicEndpoints = [
   {
+    href: "/api/commits?period=month&date=2026-10-01&limit=50",
+    description:
+      "Filtered commit history, summary counts, and activity buckets. Supports period (day, week, month, year, all), date, type, q, and limit (50–5000). Defaults to the latest recorded day; responses are publicly cached.",
+  },
+  {
     href: "/api/timer/auth/session",
     description:
       "Current owner account email and optional Google photo, or null when signed out. Cookie-authenticated and never cached; used by the top bar. Signing in only unlocks personal Timer access.",

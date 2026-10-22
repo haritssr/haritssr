@@ -5,7 +5,14 @@ import {
   ChevronRightIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import { useDeferredValue, useId, useMemo, useState } from "react";
+import {
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import useSWR from "swr";
 
 import Button from "@/components/Button";
 import CommitActivityChart from "@/components/CommitActivityChart";
@@ -13,20 +20,21 @@ import CommitTable from "@/components/CommitTable";
 import Section from "@/components/Section";
 import { SelectField } from "@/components/SelectField";
 import {
-  activityBuckets,
   changeTypes,
-  commitDay,
-  filterCommits,
   formatDay,
   periodRange,
-  prepareCommits,
   shiftPeriod,
 } from "@/utils/changelog";
+import type { ChangelogPeriod } from "@/utils/changelog";
+import { parseChangelogResult } from "@/utils/changelogResponse";
+import {
+  changelogParams,
+  parseChangelogSelection,
+} from "@/utils/changelogSelection";
 import type {
-  ChangelogCommit,
-  ChangelogPeriod,
-  PreparedCommit,
-} from "@/utils/changelog";
+  ChangelogResult,
+  ChangelogSelection,
+} from "@/utils/commitHistory";
 
 const periodOptions: readonly { value: ChangelogPeriod; label: string }[] = [
   { value: "all", label: "All history" },
@@ -62,52 +70,85 @@ function rangeLabel(period: ChangelogPeriod, anchor: string): string {
     : `${formatDay(range.start)} – ${formatDay(range.end)}`;
 }
 
-function summarizeDays(commits: readonly PreparedCommit[]) {
-  const days = new Map<string, number>();
-  for (const commit of commits) {
-    days.set(commit.day, (days.get(commit.day) ?? 0) + 1);
+function subscribeLocation(listener: () => void) {
+  window.addEventListener("popstate", listener);
+  window.addEventListener("changelog-filters", listener);
+  return () => {
+    window.removeEventListener("popstate", listener);
+    window.removeEventListener("changelog-filters", listener);
+  };
+}
+
+const getLocation = () => window.location.search;
+const getServerLocation = () => "";
+
+async function fetchSelection(url: string): Promise<ChangelogResult> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Commit history could not be loaded. Try again.");
   }
-  let busiest: [string, number] | undefined;
-  for (const [day, count] of days) {
-    if (
-      busiest === undefined ||
-      count > busiest[1] ||
-      (count === busiest[1] && day > busiest[0])
-    ) {
-      busiest = [day, count];
-    }
-  }
-  return { activeDays: days.size, busiest };
+  return parseChangelogResult(await response.json());
 }
 
 export default function ChangelogExplorer({
-  commits,
+  initial,
   initialDay,
 }: {
-  commits: readonly ChangelogCommit[];
+  initial: ChangelogResult;
   initialDay: string;
 }) {
-  const [period, setPeriod] = useState<ChangelogPeriod>("day");
-  const lastDay = commitDay(commits[0]?.date ?? "2021-09-21T00:00:00Z");
-  const firstDay = commitDay(commits.at(-1)?.date ?? "2021-09-21T00:00:00Z");
-  const [anchor, setAnchor] = useState(initialDay);
-  const [type, setType] = useState("all");
-  const [query, setQuery] = useState("");
-  const [limit, setLimit] = useState(PAGE_SIZE);
-  const deferredQuery = useDeferredValue(query);
-  const prepared = useMemo(() => prepareCommits(commits), [commits]);
-  const matched = useMemo(
-    () => filterCommits(prepared, period, anchor, type, deferredQuery),
-    [prepared, period, anchor, type, deferredQuery]
+  const search = useSyncExternalStore(
+    subscribeLocation,
+    getLocation,
+    getServerLocation
   );
-  const { activeDays, busiest } = useMemo(
-    () => summarizeDays(matched),
-    [matched]
+  const selection = useMemo(
+    () => parseChangelogSelection(new URLSearchParams(search), initialDay),
+    [search, initialDay]
   );
-  const buckets = useMemo(
-    () => activityBuckets(matched, period, anchor, firstDay, lastDay),
-    [matched, period, anchor, firstDay, lastDay]
+  const { period, anchor, type, query, limit } = selection;
+  const [request, setRequest] = useState(selection);
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setRequest(selection);
+    }, 200);
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [selection]);
+  const initialKey = `/api/commits?${changelogParams(parseChangelogSelection(new URLSearchParams(), initialDay))}`;
+  const key = `/api/commits?${changelogParams(request)}`;
+  const { data, error, mutate, isValidating } = useSWR<ChangelogResult, Error>(
+    key,
+    fetchSelection,
+    {
+      fallbackData: key === initialKey ? initial : undefined,
+      keepPreviousData: true,
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
+  const result = data ?? initial;
+  const { firstDay, lastDay, total, activeDays, busiest, buckets } = result;
+  const pending = request !== selection || isValidating;
+
+  function updateSelection(
+    patch: Partial<ChangelogSelection>,
+    replace = false
+  ) {
+    const url = new URL(window.location.href);
+    const next = {
+      ...parseChangelogSelection(url.searchParams, initialDay),
+      ...patch,
+    };
+    for (const [name, value] of changelogParams(next)) {
+      url.searchParams.set(name, value);
+    }
+    window.history[replace ? "replaceState" : "pushState"](null, "", url);
+    window.dispatchEvent(new Event("changelog-filters"));
+  }
+
   const label = rangeLabel(period, anchor);
   const graphUnit = graphGranularity(period);
   const activeFilter =
@@ -117,19 +158,21 @@ export default function ChangelogExplorer({
     query.length > 0;
 
   function pickPeriod(nextPeriod: ChangelogPeriod, day = anchor) {
-    setPeriod(nextPeriod);
-    setAnchor(day);
-    setLimit(PAGE_SIZE);
+    updateSelection({ period: nextPeriod, anchor: day, limit: PAGE_SIZE });
   }
 
   function resetFilters() {
-    pickPeriod("day", initialDay);
-    setType("all");
-    setQuery("");
+    updateSelection({
+      period: "day",
+      anchor: initialDay,
+      type: "all",
+      query: "",
+      limit: PAGE_SIZE,
+    });
   }
 
   return (
-    <div className="space-y-16">
+    <div aria-busy={pending} className="space-y-16">
       <ChangelogFilters
         period={period}
         anchor={anchor}
@@ -142,15 +185,26 @@ export default function ChangelogExplorer({
         pickPeriod={pickPeriod}
         resetFilters={resetFilters}
         onTypeChange={(value) => {
-          setType(value);
-          setLimit(PAGE_SIZE);
+          updateSelection({ type: value, limit: PAGE_SIZE });
         }}
         onQueryChange={(value) => {
-          setQuery(value);
-          setLimit(PAGE_SIZE);
+          updateSelection({ query: value, limit: PAGE_SIZE }, true);
         }}
       />
 
+      {error ? (
+        <div role="alert" className="flex items-center gap-3">
+          <p>Commit history could not be loaded.</p>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              void mutate();
+            }}
+          >
+            Try again
+          </Button>
+        </div>
+      ) : null}
       <Section
         title="Activity"
         description={`Commits per ${graphUnit} for ${label.toLowerCase()}. ${period === "day" ? "Hover a point for its count." : "Select a point to explore that period."} The graph follows all active filters.`}
@@ -158,7 +212,7 @@ export default function ChangelogExplorer({
         <dl className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           <Summary
             label="Matching commits"
-            value={numberFormatter.format(matched.length)}
+            value={numberFormatter.format(total)}
             detail={
               type === "all"
                 ? "Across all change types"
@@ -208,13 +262,13 @@ export default function ChangelogExplorer({
         title="Timeline"
         description={
           <span aria-live="polite" aria-atomic="true">
-            Showing {numberFormatter.format(Math.min(limit, matched.length))} of{" "}
-            {numberFormatter.format(matched.length)} matching commits
-            {query === deferredQuery ? "" : " · Searching…"}
+            Showing {numberFormatter.format(Math.min(limit, total))} of{" "}
+            {numberFormatter.format(total)} matching commits
+            {pending ? " · Updating…" : ""}
           </span>
         }
       >
-        {matched.length === 0 ? (
+        {total === 0 ? (
           <div className="border-border rounded-xl border border-dashed p-8 text-center">
             <p className="font-medium">No commits match these filters.</p>
             <p className="text-muted mt-2 mb-5 text-sm">
@@ -222,22 +276,20 @@ export default function ChangelogExplorer({
               words.
             </p>
             <Button onClick={resetFilters} variant="secondary">
-              Back to this day
+              Back to latest day
             </Button>
           </div>
         ) : (
-          <CommitTable
-            commits={matched.slice(0, limit).map(({ commit }) => commit)}
-          />
+          <CommitTable commits={result.commits} />
         )}
-        {limit < matched.length ? (
+        {limit < total ? (
           <Button
             onClick={() => {
-              setLimit((current) => current + PAGE_SIZE);
+              updateSelection({ limit: limit + PAGE_SIZE });
             }}
             variant="secondary"
           >
-            Show {Math.min(PAGE_SIZE, matched.length - limit)} more commits
+            Show {Math.min(PAGE_SIZE, total - limit)} more commits
           </Button>
         ) : null}
       </Section>
@@ -304,11 +356,11 @@ function ChangelogFilters({
               className="aria-pressed:border-border-hover aria-pressed:bg-middle-hover aria-pressed:text-foreground aria-pressed:hover:bg-middle-hover"
               key={value}
               onClick={() => {
-                pickPeriod(value, commitDay(new Date().toISOString()));
+                pickPeriod(value, initialDay);
               }}
               variant="secondary"
             >
-              {value === "day" ? "Today" : `This ${value}`}
+              {value === "day" ? "Latest day" : `Latest ${value}`}
             </Button>
           );
         })}

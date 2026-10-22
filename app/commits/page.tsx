@@ -1,6 +1,3 @@
-import { connection } from "next/server";
-
-import history from "@/app/commits/changelog.json";
 import ChangelogExplorer from "@/components/ChangelogExplorer";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -15,7 +12,9 @@ import {
   todayModelSuitabilityRoute,
   weeklyChangelogRoute,
 } from "@/data/routes";
-import { commitDay, formatDay } from "@/utils/changelog";
+import { formatDay } from "@/utils/changelog";
+import { parseChangelogSelection } from "@/utils/changelogSelection";
+import { changelogSummary, getChangelogResult } from "@/utils/commitHistory";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 export const metadata = createPageMetadata({
@@ -24,20 +23,19 @@ export const metadata = createPageMetadata({
   path: commitsRoute.route,
 });
 
-export default async function CommitsPage() {
-  await connection();
-  // oxlint-disable-next-line react/purity -- Request-time server date is passed to the client for consistent hydration.
-  const initialDay = commitDay(new Date().toISOString());
-  const lastDay = commitDay(history.commits[0]?.date ?? initialDay);
-  const firstDay = commitDay(history.commits.at(-1)?.date ?? initialDay);
+export default function CommitsPage() {
+  const { firstDay, lastDay, count } = changelogSummary;
+  const initial = getChangelogResult(
+    parseChangelogSelection(new URLSearchParams(), lastDay)
+  );
   return (
     <>
       <PageHeader back={{ href: "/", name: "Home" }} path={commitsRoute.route}>
         <PageTitle>{commitsRoute.title}</PageTitle>
         <PageDescription>
-          {new Intl.NumberFormat("en-US").format(history.commits.length)}{" "}
-          commits and counting, from {formatDay(firstDay)} to{" "}
-          {formatDay(lastDay)} · Jakarta time (WIB)
+          {new Intl.NumberFormat("en-US").format(count)} commits and counting,
+          from {formatDay(firstDay)} to {formatDay(lastDay)} · Jakarta time
+          (WIB)
         </PageDescription>
         <nav aria-label="Changelog">
           <InternalLink href={weeklyChangelogRoute.route}>
@@ -46,7 +44,7 @@ export default async function CommitsPage() {
         </nav>
       </PageHeader>
       <div className="space-y-16">
-        <ChangelogExplorer commits={history.commits} initialDay={initialDay} />
+        <ChangelogExplorer initial={initial} initialDay={lastDay} />
         <nav
           aria-label="Commit analyses"
           className="flex flex-col items-start gap-3"
