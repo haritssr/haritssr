@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4029ba67e7795198a2e198703eb2021326f4879c",
+      "date": "2026-10-22T20:01:38+07:00",
+      "subject": "feat(Timer): add preset selection and settings editors"
+    },
+    {
       "hash": "64ec30557039d25dc926b0858f4ba51ad6096823",
       "date": "2026-10-22T20:01:02+07:00",
       "subject": "feat(Timer): persist configurable duration and task presets"

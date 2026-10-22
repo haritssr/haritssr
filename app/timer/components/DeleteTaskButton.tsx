@@ -1,6 +1,5 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { TrashIcon as TrashSolidIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import type { ComponentProps } from "react";
 
@@ -81,7 +80,7 @@ export default function DeleteTaskButton({
                 void confirmDelete();
               }}
             >
-              <TrashSolidIcon aria-hidden="true" className="size-5" />
+              Delete
             </Button>
           </div>
         </AlertDialog.Popup>
