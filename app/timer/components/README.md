@@ -64,7 +64,8 @@ clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
 
 Outside `/timer`, `FloatingTimerDock` reuses compact `TaskProgress`, the icon presentation
-of `TaskActions`, and `TaskSpeedControl` without its clock icon. It shows one
+of `TaskActions`. Its wrapping title and muted remaining time (prefixed with `-`) sit above the progress bar
+and form one link to `/timer`, with circular actions beside it. It shows one
 running task, initially the most recently started, with a task-count button that
 cycles through tasks when needed. Manual selection survives navigation. Pausing from the dock retains
 one paused task for Continue or Done; unrelated paused tasks are not added.
@@ -73,8 +74,8 @@ running task. Selection resets at Jakarta midnight and is not stored on disk.
 Turso running tasks use the dock.
 
 The dock matches the mobile tab bar's translucent background, blur, border, and
-rounded corners. Its compact row combines title, elapsed time, a thin progress
-bar, speed, and circular actions, without a separate status row. Its minimum
+rounded corners. Its compact row combines title, remaining time, a thin progress
+bar and circular actions, without a separate status row. Its minimum
 height matches the navigation surface, with a 53px fallback when absent.
 [useTimerDockPosition.ts](../../../components/useTimerDockPosition.ts)
 measures the real navigation surface and matches its bottom screen gap above it.

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4054411ccf66dd9bc8f59de296e7dc7445ce8d59",
+      "date": "2026-10-22T15:18:44+07:00",
+      "subject": "feat(timer): use Quartz ticks for running and countdown sounds"
+    },
+    {
       "hash": "1c496da4a7b57c92d3c04d20bc0080e568854a6e",
       "date": "2026-10-22T15:18:13+07:00",
       "subject": "style(timer): align task edit icon size"

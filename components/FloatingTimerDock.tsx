@@ -8,7 +8,6 @@ import { getFloatingTasks } from "@/app/timer/components/floatingTaskState";
 import TaskActions from "@/app/timer/components/TaskActions";
 import { taskAppearance } from "@/app/timer/components/taskPresentation";
 import TaskProgress from "@/app/timer/components/TaskProgress";
-import TaskSpeedControl from "@/app/timer/components/TaskSpeedControl";
 import { canUseTimer } from "@/utils/timer";
 
 import Button from "./Button";
@@ -77,7 +76,7 @@ export default function FloatingTimerDock() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 bottom-[var(--timer-dock-bottom,max(0.75rem,env(safe-area-inset-bottom)))] z-50 mx-auto flex w-full max-w-5xl flex-col items-end gap-3 px-3.5 [--timer-safe-bottom:env(safe-area-inset-bottom,0px)] sm:bottom-[var(--timer-dock-bottom,1.5rem)] sm:px-4 xl:px-0"
+      className="pointer-events-none fixed inset-x-0 bottom-[var(--timer-dock-bottom,max(0.75rem,env(safe-area-inset-bottom)))] z-50 mx-auto flex w-full max-w-5xl flex-col items-end gap-3 px-3.5 [--timer-safe-bottom:env(safe-area-inset-bottom,0px)] sm:bottom-[var(--timer-dock-bottom,1.5rem)] sm:items-center sm:px-4 xl:px-0"
       ref={dockRef}
     >
       {completion === null ? null : (
@@ -128,42 +127,34 @@ export default function FloatingTimerDock() {
           className="pointer-events-auto w-full space-y-2 sm:w-[28rem]"
         >
           <div className="border-border bg-background/70 shadow-floating flex min-h-[var(--timer-tabbar-height,3.3125rem)] items-center gap-2 rounded-xl border p-2 backdrop-blur-md">
-            <div className="w-20 min-w-0 shrink text-sm leading-4 sm:w-24">
-              <InternalLink
-                className="text-foreground! hover:text-foreground! block max-w-full truncate font-medium underline-offset-2"
-                href="/timer"
-                variant="inline"
-              >
-                {selected.task.activity}
-              </InternalLink>
-            </div>
-            <div className="min-w-24 flex-1">
+            <InternalLink
+              className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto min-w-0 flex-1 rounded-sm py-1 pl-2 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-2 sm:[&_progress]:h-1.5"
+              href="/timer"
+              variant="inline"
+            >
               <TaskProgress
                 task={selected.task}
                 spent={selected.state.spent}
                 running={selected.state.running}
                 appearance={appearance}
                 compact
+                title={selected.task.activity}
               />
-            </div>
+            </InternalLink>
             {tasks.length > 1 ? (
               <Button
                 aria-label={`Switch task: ${selectedIndex + 1} of ${tasks.length}. Next task`}
+                className="w-auto! min-w-10 px-1.5! sm:min-w-8"
                 onClick={selectNextTask}
                 size="icon-circle"
                 title={`Next task (${selectedIndex + 1}/${tasks.length})`}
                 variant="outline"
               >
-                <span className="min-w-0 truncate text-xs tabular-nums">
+                <span className="text-xs whitespace-nowrap tabular-nums">
                   {selectedIndex + 1}/{tasks.length}
                 </span>
               </Button>
             ) : null}
-            <TaskSpeedControl
-              task={selected.task}
-              date={date}
-              showIcon={false}
-            />
             <TaskActions
               date={date}
               task={selected.task}
