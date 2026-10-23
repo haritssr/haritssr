@@ -15,6 +15,7 @@ import Button from "@/components/Button";
 
 interface RenderedDiagram {
   src: string;
+  svg?: string;
   width: number;
   height: number;
 }
@@ -39,13 +40,16 @@ async function loadPele(definition: string) {
 export default function FlowDiagram({
   definition,
   legend,
+  mathLabels,
   title,
 }: {
   definition: string;
   legend?: ReactNode;
+  mathLabels?: Record<string, ReactNode>;
   title: string;
 }) {
   const figureRef = useRef<HTMLElement>(null);
+  const mathRef = useRef<HTMLDivElement>(null);
   const [nearby, setNearby] = useState(false);
   const id = useId().replaceAll(/[^a-zA-Z0-9_-]/gu, "");
   const [diagram, setDiagram] = useState<RenderedDiagram | null>(null);
@@ -92,6 +96,24 @@ export default function FlowDiagram({
           return;
         }
         const theme = getComputedStyle(document.body);
+        const math = new Map(
+          [...(mathRef.current?.children ?? [])].flatMap((element) => {
+            if (!(element instanceof HTMLElement)) {
+              return [];
+            }
+            const bounds = element.getBoundingClientRect();
+            return [
+              [
+                element.dataset.tex ?? "",
+                {
+                  html: element.innerHTML,
+                  width: Math.ceil(bounds.width),
+                  height: Math.ceil(bounds.height),
+                },
+              ] as const,
+            ];
+          })
+        );
         const { svg, width, height } = pele.render(definition, {
           idPrefix: `diagram-${id}`,
           responsive: false,
@@ -100,6 +122,7 @@ export default function FlowDiagram({
           fontFamilyMono: DIAGRAM_FONT_FAMILY,
           links: false,
           images: false,
+          math: mathLabels ? (tex) => math.get(tex) : undefined,
         });
         const svgDocument = new DOMParser().parseFromString(
           svg,
@@ -157,6 +180,7 @@ export default function FlowDiagram({
         const imageSvg = new XMLSerializer().serializeToString(element);
         setDiagram({
           src: `data:image/svg+xml,${encodeURIComponent(imageSvg)}`,
+          svg: mathLabels ? imageSvg : undefined,
           width,
           height,
         });
@@ -172,48 +196,67 @@ export default function FlowDiagram({
     return () => {
       cancelled = true;
     };
-  }, [definition, id, nearby]);
+  }, [definition, id, mathLabels, nearby]);
 
   return (
     <Dialog.Root>
       <figure className="min-w-0 space-y-3" ref={figureRef}>
+        {mathLabels ? (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none invisible fixed top-0 left-0 w-max -translate-x-full"
+            ref={mathRef}
+          >
+            {Object.entries(mathLabels).map(([tex, label]) => (
+              <div className="w-max text-base" data-tex={tex} key={tex}>
+                {label}
+              </div>
+            ))}
+          </div>
+        ) : null}
         <figcaption className="sr-only">{title} diagram</figcaption>
-        <div className="flex flex-wrap items-center gap-3">
-          {legend}
-          <div className="ml-auto flex shrink-0 items-center gap-2">
-            <ZoomControls
-              disabled={status !== "ready"}
-              onZoomChange={setZoom}
-              zoom={zoom}
-            />
-            <Dialog.Trigger
-              aria-label="Expand diagram"
-              render={
-                <Button
-                  disabled={status !== "ready"}
-                  iconOnly
-                  variant="outline"
-                />
-              }
-            >
-              <ArrowsPointingOutIcon aria-hidden="true" className="size-4" />
-            </Dialog.Trigger>
+        <div className="border-border relative rounded-lg border">
+          <div className="pointer-events-none absolute inset-x-3 top-3 z-10 flex flex-wrap items-start gap-3">
+            <div className="bg-background pointer-events-auto rounded-lg">
+              {legend}
+            </div>
+            <div className="bg-background pointer-events-auto ml-auto flex shrink-0 items-center gap-2 rounded-lg">
+              <ZoomControls
+                disabled={status !== "ready"}
+                onZoomChange={setZoom}
+                zoom={zoom}
+              />
+              <Dialog.Trigger
+                aria-label="Expand diagram"
+                render={
+                  <Button
+                    disabled={status !== "ready"}
+                    iconOnly
+                    variant="outline"
+                  />
+                }
+              >
+                <ArrowsPointingOutIcon aria-hidden="true" className="size-4" />
+              </Dialog.Trigger>
+            </div>
           </div>
-        </div>
-        {status === "loading" ? (
-          <output className="text-muted block">Rendering diagram…</output>
-        ) : null}
-        {status === "error" ? (
-          <div className="space-y-3">
-            <output className="text-muted block">
-              Unable to render the diagram. Its diagram source is shown below.
+          {status === "loading" ? (
+            <output className="text-muted block min-h-24 p-4">
+              Rendering diagram…
             </output>
-            <pre className="overflow-x-auto text-sm">{definition}</pre>
-          </div>
-        ) : null}
-        {diagram === null ? null : (
-          <DiagramViewport diagram={diagram} title={title} zoom={zoom} />
-        )}
+          ) : null}
+          {status === "error" ? (
+            <div className="space-y-3 p-4">
+              <output className="text-muted block">
+                Unable to render the diagram. Its diagram source is shown below.
+              </output>
+              <pre className="overflow-x-auto text-sm">{definition}</pre>
+            </div>
+          ) : null}
+          {diagram === null ? null : (
+            <DiagramViewport diagram={diagram} title={title} zoom={zoom} />
+          )}
+        </div>
       </figure>
       <Dialog.Portal>
         <Dialog.Backdrop className="flow-diagram-backdrop bg-foreground/40 fixed inset-0 z-80 backdrop-blur-xs" />
@@ -223,9 +266,11 @@ export default function FlowDiagram({
             Drag to pan, scroll, or focus the diagram and use the arrow keys.
             Zoom out to see more of the diagram.
           </Dialog.Description>
-          <div className="flex flex-wrap items-center gap-3">
-            {legend}
-            <div className="ml-auto flex shrink-0 items-center gap-2">
+          <div className="pointer-events-none absolute inset-x-4 top-4 z-10 flex flex-wrap items-start gap-3 sm:inset-x-6 sm:top-6">
+            <div className="bg-background pointer-events-auto rounded-lg">
+              {legend}
+            </div>
+            <div className="bg-background pointer-events-auto ml-auto flex shrink-0 items-center gap-2 rounded-lg">
               <ZoomControls
                 disabled={status !== "ready"}
                 onZoomChange={setZoom}
@@ -367,21 +412,32 @@ function DiagramViewport({
         drag.current = null;
         delete event.currentTarget.dataset.dragging;
       }}
-      className={`focus-visible:outline-action min-h-0 max-w-full min-w-0 cursor-grab overflow-auto overscroll-contain rounded-lg select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-dragging:cursor-grabbing ${expanded ? "scrollbar-hide flex-1" : "scrollbar-subtle border-border max-h-[65dvh] border"}`}
+      className={`focus-visible:outline-action min-h-0 max-w-full min-w-0 cursor-grab overflow-auto overscroll-contain rounded-lg select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-dragging:cursor-grabbing ${expanded ? "scrollbar-hide flex-1" : "scrollbar-subtle max-h-[65dvh]"}`}
     >
       <div
         className="box-content h-(--diagram-height) w-(--diagram-width) p-4"
         style={dimensions}
       >
-        <Image
-          alt={`${title} diagram`}
-          className="pointer-events-none h-full w-full max-w-none"
-          draggable={false}
-          height={Math.ceil(diagram.height)}
-          src={diagram.src}
-          unoptimized
-          width={Math.ceil(diagram.width)}
-        />
+        {diagram.svg === undefined ? (
+          <Image
+            alt={`${title} diagram`}
+            className="pointer-events-none h-full w-full max-w-none"
+            draggable={false}
+            height={Math.ceil(diagram.height)}
+            src={diagram.src}
+            unoptimized
+            width={Math.ceil(diagram.width)}
+          />
+        ) : (
+          <div
+            aria-label={`${title} diagram`}
+            className="pointer-events-none h-full w-full [&>svg]:h-full [&>svg]:w-full"
+            // oxlint-disable-next-line react/no-danger -- Pele generates this SVG from local definitions and our KaTeX-rendered React nodes, without external markup.
+            dangerouslySetInnerHTML={{ __html: diagram.svg }}
+            // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role -- Inline SVG preserves HTML KaTeX labels, which an img cannot render.
+            role="img"
+          />
+        )}
       </div>
     </section>
   );
