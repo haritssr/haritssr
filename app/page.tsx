@@ -195,7 +195,7 @@ function PersonalDetails() {
       <div className="border-border grid gap-4 border-t border-dashed pt-4 md:grid-cols-3">
         <ul
           aria-label="Profile and contacts"
-          className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1 pl-5 wrap-break-word"
+          className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 pl-5 wrap-break-word"
         >
           <li>
             Build{" "}
@@ -227,7 +227,7 @@ function PersonalDetails() {
         <ul
           aria-label="Background and tools"
           id="personal-notes"
-          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
         >
           <li>Touch typist, ±90 WPM.</li>
           <li>Former chess player, ±2000 Elo.</li>
@@ -239,7 +239,7 @@ function PersonalDetails() {
         </ul>
         <ul
           aria-label="Principles"
-          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
         >
           <li>
             <ExternalLink
