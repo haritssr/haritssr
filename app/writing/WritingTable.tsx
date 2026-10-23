@@ -21,7 +21,7 @@ export default function WritingTable() {
                   {post.title}
                 </InternalLink>
               </th>
-              <td className="text-muted hidden py-2.5 sm:table-cell">
+              <td className="text-foreground hidden py-2.5 sm:table-cell">
                 {post.summary}.
               </td>
               <td className="text-muted py-2.5 whitespace-nowrap tabular-nums">
