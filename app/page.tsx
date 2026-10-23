@@ -239,12 +239,12 @@ function PersonalDetails() {
             <li>
               <ExternalLink
                 href="https://youtu.be/H7Sfo3lMB8c?t=72"
-                name="Eudaimonic"
+                name="Eudaimonia"
                 showArrow={false}
               />{" "}
-              &gt; Hedonic
+              &gt; Hedonia
             </li>
-            <li>Effective/Accelerationism</li>
+            <li>Effective Accelerationism (e/acc)</li>
             <li>Existence = f(constraints, maintainence, ...)</li>
             <li>100% is easier than 98%</li>
             <li>What gets measured gets managed</li>
