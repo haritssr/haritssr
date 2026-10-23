@@ -233,11 +233,11 @@ function ActivitiesTable({ tasks }: { tasks: TimerTask[] }) {
 function ActivityRow({ task, number }: { task: TimerTask; number: number }) {
   const status = taskStatus(task);
   const statusColor = {
-    Running: "text-danger",
-    Paused: "text-attention",
-    "Not started": "text-success",
-    Reached: "text-muted",
-    Done: "text-muted",
+    Running: "text-timer-running",
+    Paused: "text-foreground",
+    "Not started": "text-foreground",
+    Reached: "text-foreground",
+    Done: "text-foreground",
   }[status];
 
   return (

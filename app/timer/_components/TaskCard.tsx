@@ -57,7 +57,7 @@ function TaskHeader({ task, date }: { task: TimerTask; date: string }) {
   return (
     <div className="flex min-w-0 items-center justify-between gap-3">
       <p
-        className="text-foreground min-w-0 truncate text-lg font-medium sm:text-base"
+        className="text-foreground min-w-0 truncate text-lg font-medium"
         title={task.activity}
       >
         {task.activity}

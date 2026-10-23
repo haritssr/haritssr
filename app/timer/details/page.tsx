@@ -303,8 +303,8 @@ export default function TimerDetailsPage() {
           <div className="max-w-3xl">
             <ExplanationList>
               <li>
-                Danger means running, attention means paused, and success means
-                not started. Completed tasks use muted colors.
+                Running tasks use green-600. Paused, not started, and completed
+                tasks use dark zinc through the foreground token.
               </li>
               <li>
                 History lists completed tasks below the grid. Use View or Hide

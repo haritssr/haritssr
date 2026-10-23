@@ -34,6 +34,7 @@
   );
   --color-action-hover: var(--color-blue-700);
   --color-secondary-accent: var(--color-purple-500);
+  --color-timer-running: var(--color-green-600);
   --color-contact-accent: color-mix(
     in oklab,
     var(--color-emerald-600) 80%,

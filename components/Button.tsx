@@ -13,6 +13,7 @@ type ButtonVariant =
   | "action-outline-regular"
   | "action-outline"
   | "primary"
+  | "timer-running"
   | "primary-subtle"
   | "secondary"
   | "success-subtle";
@@ -21,6 +22,8 @@ const BUTTON_BASE_CLASS =
   "inline-flex cursor-pointer items-center justify-center gap-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
+  "timer-running":
+    "border border-transparent bg-timer-running font-medium text-white hover:bg-timer-running/90 focus-visible:outline-timer-running",
   black:
     "bg-zinc-500 text-zinc-50 transition-colors duration-150 enabled:hover:bg-zinc-600 focus-visible:outline-zinc-500",
   "attention-subtle":

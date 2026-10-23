@@ -6,34 +6,35 @@ import type Button from "@/components/Button";
 export const TASK_LAYOUT = {
   collection: "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3",
   item: "flex flex-col gap-2",
-  controls: "mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2",
-  surface: "corner-squircle rounded-[1.25rem] border p-3.5 shadow-lg",
+  controls: "mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4",
+  surface:
+    "corner-squircle rounded-[1.25rem] border pl-4 pr-3.5 py-3.5 shadow-lg",
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-sm",
   progress: "h-2",
-  running: "border-danger/80 shadow-red-100",
+  running: "border-timer-running/80 shadow-timer-running/10",
   paused: "border-border",
   percentage: "",
 };
 
 const TASK_STATE_APPEARANCE = {
   running: {
-    elapsed: "text-danger",
-    progress: "var(--color-danger)",
-    button: "neutral-subtle",
+    elapsed: "text-timer-running",
+    progress: "var(--color-timer-running)",
+    button: "timer-running",
   },
   paused: {
-    elapsed: "text-attention",
-    progress: "var(--color-attention)",
+    elapsed: "text-foreground",
+    progress: "var(--color-foreground)",
     button: "neutral-subtle",
   },
   ready: {
-    elapsed: "text-success",
-    progress: "var(--color-success)",
-    button: "success-subtle",
+    elapsed: "text-foreground",
+    progress: "var(--color-foreground)",
+    button: "neutral-subtle",
   },
   complete: {
-    elapsed: "text-muted",
-    progress: "var(--color-muted)",
+    elapsed: "text-foreground",
+    progress: "var(--color-foreground)",
     button: "outline",
   },
 } satisfies Record<

@@ -99,7 +99,11 @@ export default function TaskActions({
         {showDone ? (
           <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-5" />
         ) : (
-          <ToggleIcon aria-hidden="true" className="size-5" />
+          <ToggleIcon
+            aria-hidden="true"
+            data-running={running}
+            className="size-5 data-[running=false]:translate-x-px"
+          />
         )}
       </Button>
       {showDone ? (
@@ -111,9 +115,13 @@ export default function TaskActions({
           aria-label={`${label}: ${task.activity}`}
           title={label}
           onClick={toggleRunning}
-          variant={running ? "danger-subtle" : "attention-subtle"}
+          variant={running ? "timer-running" : "neutral-subtle"}
         >
-          <ToggleIcon aria-hidden="true" className="size-5" />
+          <ToggleIcon
+            aria-hidden="true"
+            data-running={running}
+            className="size-5 data-[running=false]:translate-x-px"
+          />
         </Button>
       ) : null}
     </div>
@@ -154,11 +162,7 @@ function TaskIconActions({
         title="Done"
         variant="secondary-strong"
       >
-        <CheckIcon
-          strokeWidth={2.5}
-          aria-hidden="true"
-          className="size-5 sm:size-4"
-        />
+        <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-4.5" />
       </Button>
       <Button
         aria-label={`${label}: ${activity}`}
@@ -167,9 +171,13 @@ function TaskIconActions({
         onClick={onToggle}
         size="icon-circle"
         title={label}
-        variant={running ? "danger-subtle" : "attention-subtle"}
+        variant={running ? "timer-running" : "neutral-subtle"}
       >
-        <ToggleIcon aria-hidden="true" className="size-5 sm:size-4" />
+        <ToggleIcon
+          aria-hidden="true"
+          data-running={running}
+          className="size-4.5 data-[running=false]:translate-x-px"
+        />
       </Button>
     </div>
   );

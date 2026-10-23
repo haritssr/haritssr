@@ -1,3 +1,4 @@
+import { ClockIcon } from "@heroicons/react/24/outline";
 import type { CSSProperties } from "react";
 
 import { formatTimerTime } from "@/app/timer/utils/timer";
@@ -21,7 +22,7 @@ export default function TaskProgress({
   compact?: boolean;
   title?: string;
 }) {
-  const stackClass = compact ? "@container space-y-1.5" : "space-y-2";
+  const stackClass = compact ? "@container space-y-1.5" : "space-y-1";
   const percentage = Math.min(100, (spent / task.duration) * 100);
   const percentageLabel = percentage.toFixed(0);
   const progressStyle: CSSProperties & { "--timer-progress-fill": string } = {
@@ -35,8 +36,9 @@ export default function TaskProgress({
         className={`tabular-nums ${compact ? `flex min-w-0 items-baseline justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
       >
         {title === undefined ? null : (
-          <span className="min-w-0 flex-1 truncate text-sm leading-4 font-medium normal-nums">
-            {title}
+          <span className="flex min-w-0 flex-1 items-center gap-1 text-sm leading-4 font-medium normal-nums">
+            <ClockIcon aria-hidden="true" className="size-4 shrink-0" />
+            <span className="truncate">{title}</span>
           </span>
         )}
         <span className="flex shrink-0 items-baseline gap-0.5">

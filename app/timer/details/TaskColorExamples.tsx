@@ -7,7 +7,7 @@ const examples = [
     running: true,
     paused: false,
     spent: 450,
-    meaning: "danger",
+    meaning: "timer-running",
     description: "Time is counting toward the duration.",
   },
   {
@@ -15,7 +15,7 @@ const examples = [
     running: false,
     paused: true,
     spent: 300,
-    meaning: "attention",
+    meaning: "foreground",
     description: "Time is saved. Continue when you are ready.",
   },
   {
@@ -23,7 +23,7 @@ const examples = [
     running: false,
     paused: false,
     spent: 0,
-    meaning: "success",
+    meaning: "foreground",
     description: "The activity is ready to start.",
   },
 ] as const;
