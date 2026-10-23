@@ -97,9 +97,7 @@ export default function TimerDetailsPage() {
       >
         <PageTitle>Details</PageTitle>
         <PageDescription>
-          A daily activity timer for focusing, batching everyday tasks, and
-          guarding your time. Learn how it works and where its code and data
-          live.
+          How Timer works, saves data, and connects to the site.
         </PageDescription>
       </PageHeader>
       <div className="space-y-16">
@@ -109,34 +107,23 @@ export default function TimerDetailsPage() {
           contentClassName="max-w-3xl"
         >
           <ExplanationList>
+            <li>Set time limits for work, breaks, and everyday tasks.</li>
+            <li>Track activities and review your daily time spent.</li>
+            <li>Pause, resume, or finish an activity early.</li>
             <li>
-              Timer helps you set limits on activities such as social media
-              scrolling, so they do not take more time than you intended.
+              Use Multitask to run activities together, or Autoplay to start the
+              next one.
             </li>
             <li>
-              Timer is a daily activity tracker for focused work, learning,
-              breaks, and everyday chores.
+              Sounds and messages warn you before time runs out and when it
+              ends.
             </li>
             <li>
-              Give each activity a time budget and see how much of it you have
-              spent. Pause, resume, or finish early as your day changes.
+              Activities follow Jakarta calendar days. Statistics cover 30 days.
             </li>
             <li>
-              Focus on one activity at a time, or enable Multitask to track
-              several together. Autoplay can start the next unfinished activity.
-            </li>
-            <li>
-              Sound cues and completion messages help you notice when an
-              activity is nearing or has reached its time budget.
-            </li>
-            <li>
-              Activities are grouped by Jakarta calendar day. Daily history and
-              a 30-day chart help you review where your time went.
-            </li>
-            <li>
-              Sign in to use your personal Timer. Your activities and history
-              are saved in your personal Turso database and shared across
-              signed-in devices.
+              Sign in to save activities in your personal Turso database and
+              sync across devices.
             </li>
           </ExplanationList>
         </Section>
@@ -150,71 +137,53 @@ export default function TimerDetailsPage() {
               <InternalLink href="/timer" variant="inline">
                 Timer
               </InternalLink>{" "}
-              groups activities by Asia/Jakarta day. Added tasks belong to that
-              day only; each day starts empty.
+              groups tasks by Jakarta date. Each day starts empty.
             </li>
             <li>
-              Add Task accepts a name up to 20 characters, an optional
-              description up to 35, and a duration from one second to 24 hours,
-              entered as hours, minutes, and seconds. Presets offer 5, 15, 30,
-              and 60 minutes.
+              Add a name (20 characters), optional description (35 characters),
+              and duration (one second to 24 hours). Default presets are 5, 15,
+              30, and 60 minutes.
             </li>
             <li>
-              The form prefills a random name and matching description, with
-              focus in Name. Shift+N opens it on Timer when you are not typing
-              or using another dialog.
+              Add Task suggests a name and description. Press Shift+N on Timer
+              to open it when no field or dialog is active.
             </li>
             <li>
-              On mobile, Add and Edit open as bottom sheets at 90% of the screen
-              height, with scrolling for longer content. From the small
-              breakpoint upward, they use a centered, content-sized dialog.
-              Field labels show character counts. Each Clear button has a hover
-              hint, empties its field, and returns focus to it.
+              Add and Edit use bottom sheets on mobile and centered dialogs on
+              larger screens. Fields show character counts and Clear controls.
             </li>
             <li>
-              Tasks use a card grid: one column on mobile, two from the small
-              breakpoint, and three on desktop. Cards compare time spent with
-              the duration. Start begins, Pause stops, and Continue resumes
-              saved progress. Starting another task pauses the current one
-              unless Multitask is enabled.
+              Start, Pause, and Continue control progress. Starting a task
+              pauses the current one unless Multitask is on.
             </li>
             <li>
-              Multitask runs tasks independently. Turning it off while several
-              run asks for confirmation and keeps only the most recently started
-              task running.
+              Turning off Multitask asks for confirmation and keeps only the
+              most recently started task running.
             </li>
             <li>
-              Reaching the duration stops a task and marks it Reached. Done
-              finishes early and preserves actual time spent.
+              Reached marks a task that used its full duration. Done finishes
+              early and saves actual time spent.
             </li>
             <li>
-              The adjustments icon beside the title opens Edit; the information
-              icon shows the description on hover or click. Only unfinished
-              tasks can be edited, and their new duration must exceed time
-              spent. Older descriptions over 35 characters remain readable but
-              must be shortened when saving an edit.
+              Use the adjustments icon to edit an unfinished task. Its duration
+              must exceed time spent. Older descriptions must meet the current
+              limit when edited.
             </li>
             <li>
-              Autoplay starts the next unfinished task after Done or Reached
-              when none remain running, prioritizing paused tasks. It works
-              while the site is open and stops when all tasks are complete.
+              Autoplay starts the next unfinished task when none are running,
+              prioritizing paused tasks. The site must stay open.
             </li>
             <li>
-              Turso remembers Multitask, Autoplay, and notification preferences
-              across devices and reloads; Ticking remembers its setting in this
-              browser across reloads and tabs.
+              Multitask, Autoplay, and notification settings sync across
+              devices. Ticking stays in this browser.
             </li>
             <li>
-              The speed control beside elapsed time cycles through 1x, 1.5x, 2x,
-              2.5x, and 3x. Each task remembers its speed across pauses and
-              reloads. At 2x, one real second counts as two; changing speed
-              preserves progress, and statistics include accelerated time.
+              Speed cycles through 1x, 1.5x, 2x, 2.5x, and 3x. Changes preserve
+              progress; statistics count accelerated time.
             </li>
             <li>
-              Legacy JSON records may include X Traversal and House keeping,
-              each with a one-hour budget. X Traversal covers bookmarks and
-              scrolling; House keeping covers sweeping, mopping, watering
-              plants, washing dishes, and cooking rice.
+              Legacy backups may include the one-hour X Traversal and House
+              keeping tasks.
             </li>
           </ExplanationList>
         </Section>
@@ -223,18 +192,15 @@ export default function TimerDetailsPage() {
             <ExplanationList>
               <li>
                 Danger means running, attention means paused, and success means
-                not started. The timer and progress bar share the state color;
-                completed tasks use muted colors.
+                not started. Completed tasks use muted colors.
               </li>
               <li>
-                History sits below the active task grid and contains completed
-                tasks. It starts collapsed; View opens the table and Hide closes
-                it.
+                History lists completed tasks below the grid. Use View or Hide
+                to toggle it.
               </li>
               <li>
-                The table shows descriptions, time spent, duration, percentage,
-                and Reached or Done status. Sort by completion time, percentage,
-                status, or time spent.
+                History shows descriptions, time spent, duration, percentage,
+                and completion status, with sortable columns.
               </li>
             </ExplanationList>
           </div>
@@ -247,50 +213,41 @@ export default function TimerDetailsPage() {
         >
           <ExplanationList>
             <li>
-              Ticking plays one Quartz clock mechanical tick per second while
-              any task runs, repeating at a single pitch. Tasks share the tick
-              regardless of speed. It defaults off and remembers your choice
-              across reloads in this browser.
+              Ticking plays once per real second while tasks run. It defaults
+              off and remembers your choice in this browser.
             </li>
             <li>
-              The same Quartz ticks play during the final 10 real seconds even
-              with Ticking off, speeding up at 6 and 3 seconds remaining. They
-              account for task speed and stop on pause or completion.
+              Countdown ticks play during the final 10 real seconds, even with
+              Ticking off, and speed up at 6 and 3 seconds remaining.
             </li>
             <li>
-              Saved timestamps recover progress after navigation, reload, or
-              closing the browser. Time spent never exceeds the task’s duration.
-              At Jakarta midnight, the previous day stops counting; the new day
-              starts with an empty task list.
+              Timestamps recover progress after navigation, reload, or closing
+              the browser. Tasks stop counting at Jakarta midnight and never
+              exceed their duration.
             </li>
             <li>
-              Shared timer state loads on every page, keeping ticking,
-              completion alerts, and Autoplay active as you navigate.
+              Timers, sounds, alerts, and Autoplay continue as you navigate the
+              site.
             </li>
             <li>
-              Outside Timer, a compact floating bar shows the task’s title,
-              speed, elapsed time, and progress, with circular pause, continue,
-              and finish controls. Click the title to return to Timer.
+              Outside Timer, a floating bar shows progress and task controls.
+              Click its title to return to Timer.
             </li>
             <li>
-              With several running tasks, the task-count button cycles through
-              them, starting with the most recently started. Pausing from the
-              floating bar keeps that task available to resume for the session.
+              The task-count control cycles through running tasks. A task paused
+              from the bar stays available to resume during that session.
             </li>
             <li>
-              The bar sits above mobile bottom navigation when present, or at
-              the bottom right within the desktop page width. It matches the
-              bottom navigation’s height and floats over content without
-              reserving footer space.
+              The bar sits above mobile navigation or at the bottom right on
+              desktop. It overlays page content.
             </li>
             <li>
-              Completion shows an on-screen message; outside Timer, its Timer
-              link returns to the page. Optional browser notifications also open
-              or focus Timer when clicked.
+              Completion shows an on-screen message. Optional browser
+              notifications open or focus Timer when clicked.
             </li>
             <li>
-              Alerts may arrive late when the browser is closed or suspended.
-              There is no background scheduler or push service.
+              Alerts can be delayed when the browser is closed or suspended.
+              There is no background push service.
             </li>
           </ExplanationList>
         </Section>
@@ -301,10 +258,8 @@ export default function TimerDetailsPage() {
               <InternalLink href="/timer/statistic" variant="inline">
                 Statistics
               </InternalLink>{" "}
-              to choose a date and review every activity’s description,
-              duration, time spent, and status. The chart shows total time spent
-              each day across 30 dates ending on the selected date. Dates
-              without records contribute zero time.
+              to review tasks by date and daily time spent across 30 days. Days
+              without records count as zero.
             </p>
           </div>
         </Section>
@@ -315,66 +270,50 @@ export default function TimerDetailsPage() {
         >
           <ExplanationList>
             <li>
-              Timer stores personal tasks and history in Turso. Your signed-in
-              devices share one database; browser storage and local JSON files
-              are no longer runtime backends.
+              Turso stores personal tasks and history across signed-in devices.
             </li>
             <li>
-              The protected Next.js API verifies access before reading or
-              changing personal records. Database credentials stay on the
-              server.
+              The API checks access to personal records. Database credentials
+              stay on the server.
             </li>
             <li>
-              Atomic write transactions save task actions, preferences,
-              completion claims, and Autoplay transitions. Reads are batched;
-              normal actions save changed task rows instead of replacing the
-              entire day. Only the winning completion claim produces feedback.
+              Transactions save actions, preferences, and Autoplay changes
+              together. Completion claims prevent duplicate alerts.
             </li>
             <li>
-              Elapsed time is calculated from timestamps and speed, without
-              saving every tick. Tasks stop counting at Jakarta midnight. New
-              days start empty.
+              Progress comes from timestamps and speed, without saving every
+              tick. Tasks stop at Jakarta midnight.
             </li>
             <li>
-              Autoplay, Multitask, notification preferences, and presets sync
-              across devices. Ticking, notification permission, and audio
-              ownership stay local.
+              Preferences and presets sync across devices. Ticking, notification
+              permission, and audio ownership stay local.
             </li>
             <li>
-              Visible owner pages refresh every 15 seconds while tasks run, or
-              every 60 seconds while idle, and on focus. Hidden tabs stop
-              polling. Anonymous previews do not poll. Changes from another
-              device can take until the next refresh to appear.
+              Visible owner pages refresh on focus and every 15 seconds while
+              running or 60 seconds while idle. Hidden tabs and anonymous
+              previews do not poll.
             </li>
             <li>
-              Export downloads a versioned JSON history backup without pausing
-              live timers. Import restores paused copies, suppresses old alerts,
-              adds missing or empty dates, and skips identical records. Any
-              conflicting occupied date aborts the whole import. Backups are
-              limited to 10 MB.
+              Export backs up history without pausing timers. Import restores
+              paused copies, skips identical dates, and rejects the whole import
+              if a date conflicts. Maximum file size: 10 MB.
             </li>
             <li>
-              Run <code>bun run migrate:timer</code> to initialize the schema.
-              Add a backup file path to import it, or <code>--local-json</code>{" "}
-              to import existing <code>data/timer/</code> records. Source files
-              are preserved.
+              Run <code>bun run migrate:timer</code> to initialize storage. Add
+              a backup path or <code>--local-json</code> to import legacy
+              records; source files are preserved.
             </li>
             <li>
-              Actions and settings update immediately while ordered requests
-              save to Turso. Add and Edit close after validation; failed saves
-              restore the confirmed state and keep form entries for reopening.
-              An error offers Retry to refresh saved data, without automatically
-              resending an uncertain write. Pending changes exist only in
-              memory; saving requires connectivity. There is no offline writable
-              database, push scheduler, or Autoplay execution while all pages
-              are closed.
+              Changes appear immediately while saving. Failed saves restore
+              confirmed data and retain form drafts. Retry refreshes saved data.
+              Saving needs connectivity; Autoplay needs an open page.
             </li>
           </ExplanationList>
         </Section>
         <Section
           id="proposed-turso-schema"
           title="Turso schema"
-          description="Entity tables, column types, keys, and the day-to-task relationship."
+          description="Tables, keys, and relationships."
         >
           <FlowDiagram
             definition={tursoSchemaDiagram}
@@ -383,69 +322,44 @@ export default function TimerDetailsPage() {
           <div className="max-w-3xl">
             <ExplanationList>
               <li>
-                The ERD shows primary keys (PK), foreign keys (FK), and unique
-                keys (UK). Multiple marked columns form the composite keys
-                described below. Each day has zero or more tasks; preferences
-                are independent. Three tables serve one owner, with no user IDs
-                or account table. A protected Next.js API verifies the
-                configured Google owner; Turso credentials stay on the server.
+                Each day has tasks; preferences are separate. PK, FK, and UK
+                mark primary, foreign, and unique keys. The database serves one
+                configured Google owner.
               </li>
               <li>
-                <code>timer_days</code>: <code>date</code> is the primary key,
-                using Jakarta dates in <code>YYYY-MM-DD</code> format.
-                <code> revision</code> tracks changes for concurrency control.
+                <code>timer_days</code> uses a Jakarta date as its primary key
+                and a revision for concurrency control.
               </li>
               <li>
-                <code>timer_tasks</code>: <code>id</code> preserves each task’s
-                ID; the primary key is <code>(date, id)</code> because legacy
-                recurring tasks reuse IDs on different dates. <code>date</code>{" "}
-                references its day. An index on
-                <code> (date, position)</code> supports daily lists and history;
-                <code> position</code> preserves display and Autoplay order.
+                <code>timer_tasks</code> uses <code>(date, id)</code> as its
+                primary key. Position sets display and Autoplay order.
               </li>
               <li>
-                Task content uses <code>activity</code>,{" "}
-                <code>description</code>, and <code>duration_seconds</code>.
-                Empty descriptions use an empty string; durations are whole
-                seconds from 1 to 86,400. Existing longer descriptions remain
-                importable, with current length limits applied to new edits.
+                Tasks store a name, description, and duration of 1–86,400 whole
+                seconds. Older descriptions remain importable.
               </li>
               <li>
-                <code>spent_seconds</code> stores fractional progress before the
-                current running interval; <code>speed</code> stores 1, 1.5, 2,
-                2.5, or 3. Percentage, remaining time, status, and daily totals
-                are calculated rather than saved on every tick.
+                <code>spent_seconds</code> stores progress before the current
+                run; <code>speed</code> stores the multiplier. Remaining time,
+                status, and totals are calculated.
               </li>
               <li>
-                Nullable UTC timestamps record <code>started_at</code> for the
-                current run, <code>last_started_at</code> for task selection,
-                <code> completed_at</code> for Done or Reached, and
-                <code> notification_claimed_at</code> for claiming completion
-                alerts. The existing <code>reachedAt</code> field maps to
-                <code> completed_at</code>.
+                Nullable UTC timestamps track the current run, last start,
+                completion, and notification claim. Backup{" "}
+                <code>reachedAt</code> maps to <code>completed_at</code>.
               </li>
               <li>
-                <code>timer_preferences</code> has one row, constrained to
-                <code> id = 1</code>, with <code>revision</code>,
-                <code> autoplay</code>, <code>multitask</code>, and
-                <code> notifications_enabled</code>, plus nullable JSON columns
-                <code> duration_presets</code> and <code>task_presets</code>.
-                Duration preset lists contain 1–5 entries and task lists 1–6;
-                missing values use defaults. Settings saves each list
-                separately. Ticking, browser notification permission, and audio
-                ownership stay device-local.
+                <code>timer_preferences</code> has one row for settings and JSON
+                presets: 1–5 durations and 1–6 tasks. Missing presets use
+                defaults; each list saves separately.
               </li>
               <li>
-                Task changes, day revisions, and Autoplay transitions save in
-                one transaction, with conditional completion claims to avoid
-                duplicate handling across devices. A partial index on running
-                tasks helps find timers spanning midnight.
+                Task changes, revisions, and Autoplay save together. Atomic
+                claims prevent duplicate completion handling.
               </li>
               <li>
-                Existing browser backups and local JSON records can be imported
-                using the migration command or Import. Turso is the
-                authoritative store; there is no independently writable offline
-                copy.
+                Import backups or legacy JSON through Import or the migration
+                command. Turso is the authoritative store.
               </li>
             </ExplanationList>
           </div>
@@ -458,37 +372,29 @@ export default function TimerDetailsPage() {
           <div className="max-w-3xl">
             <ExplanationList>
               <li>
-                One <code>timer_days</code> row contains zero or more{" "}
-                <code>timer_tasks</code> rows. The task’s <code>date</code> is a
-                foreign key; deleting a day also deletes its tasks.
+                <code>timer_tasks.date</code> references{" "}
+                <code>timer_days.date</code>. Deleting a day deletes its tasks.
               </li>
               <li>
-                The composite task key <code>(date, id)</code> allows a
-                recurring ID on different dates. Unique{" "}
-                <code>(date, position)</code> preserves one task per position
-                within each day.
+                The primary key <code>(date, id)</code> allows recurring IDs
+                across dates. <code>(date, position)</code> is unique within a
+                day.
               </li>
               <li>
-                <code>timer_preferences</code> is independent and has one row
-                with <code>id = 1</code>. Boolean settings use integers: 0 for
-                off, 1 for on. Preset columns store JSON arrays and are added
-                idempotently by <code>bun run migrate:timer</code> before
-                deployment. Task presets fill New Task without creating a task
-                until Done; changing presets never edits existing tasks.
-                Nullable timestamp columns use ISO date-time text.
+                <code>timer_preferences</code> has one row, with{" "}
+                <code>id = 1</code>. Booleans use 0 or 1; presets use JSON;
+                timestamps use ISO text. Migration adds preset columns safely.
+                Presets fill the task form without changing existing tasks.
               </li>
               <li>
-                Each imported daily JSON file becomes one day row, and each task
-                becomes one task row. Array order becomes zero-based{" "}
-                <code>position</code>; missing speed defaults to 1. Import does
-                not replace preferences.
+                Import maps each daily JSON file to a day and its tasks. Array
+                order becomes position; missing speed defaults to 1. Preferences
+                stay unchanged.
               </li>
               <li>
-                JSON fields <code>duration</code> and <code>spent</code> map to
-                seconds columns. <code>reachedAt</code> maps to{" "}
-                <code>completed_at</code>, and <code>notifiedAt</code> maps to{" "}
-                <code>notification_claimed_at</code>. Imported tasks are paused
-                and old completion alerts are suppressed.
+                Backup duration and spent fields map to seconds; reachedAt and
+                notifiedAt map to completion and notification timestamps.
+                Imported tasks are paused and old alerts suppressed.
               </li>
             </ExplanationList>
           </div>
@@ -499,7 +405,7 @@ export default function TimerDetailsPage() {
         <Section
           id="code-relationships"
           title="Code relationships"
-          description="How Timer’s files and functions work together, rendered with Pele. Each diagram has zoom controls, drag-to-pan, and a Full width view."
+          description="Timer’s file relationships. Zoom, pan, or open a full-width view."
         >
           <div className="space-y-10">
             {timerRelationships.map((diagram) => (
@@ -571,9 +477,7 @@ export default function TimerDetailsPage() {
             files={storageFiles}
           />
           <p className="max-w-3xl">
-            Legacy files such as <code>data/timer/2026-10-16.json</code> can be
-            imported once. They are preserved as migration sources; live records
-            are stored in Turso.
+            Import legacy JSON files once; live records are stored in Turso.
           </p>
         </Section>
       </div>

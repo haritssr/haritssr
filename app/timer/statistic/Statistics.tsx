@@ -140,7 +140,7 @@ function HistorySections({ history }: { history: TimerHistory }) {
       </Section>
       <Section
         title="Activities"
-        description="Your activities for the selected day. Times are hours:minutes:seconds."
+        description="Your activities for the selected day."
       >
         <ActivitiesTable tasks={history.day.tasks} />
       </Section>

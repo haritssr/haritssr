@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "362d9dcc99e7bfa7cccc917df5827384fa289386",
+      "date": "2026-10-23T11:16:40+07:00",
+      "subject": "refactor(Labs): remove unused mobile grid truncation"
+    },
+    {
       "hash": "3de11a1bf837d2c203f5398bf1cfdb9131ac66f0",
       "date": "2026-10-23T11:16:35+07:00",
       "subject": "feat(Labs): add error page playground and fallback previews"
