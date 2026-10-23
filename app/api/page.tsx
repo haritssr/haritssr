@@ -12,7 +12,14 @@ export const metadata = createPageMetadata({
   path: apiRoute.route,
 });
 
-const publicEndpoints = [
+interface Endpoint {
+  href: string;
+  description: string;
+  method?: string;
+  authenticated?: boolean;
+}
+
+const endpoints: Endpoint[] = [
   {
     href: "/api/commits?period=month&date=2026-10-01&limit=50",
     description:
@@ -21,12 +28,33 @@ const publicEndpoints = [
   {
     href: "/api/timer/auth/session",
     description:
-      "Current owner account email and optional Google photo, or null when signed out. Cookie-authenticated and never cached; used by the top bar. Signing in only unlocks personal Timer access.",
+      "Current owner account email and optional Google photo, or null when signed out. Reads the session cookie and is never cached; used by the top bar. No sign-in is required to check session status. Signing in only unlocks personal Timer access.",
   },
   {
     href: "/api/timer",
     description:
-      "Timer activities and 30-day totals. Visitors receive generated samples; the signed-in owner reads personal Turso records. POST changes tasks (Add accepts an optional UUID taskId to prevent duplicate creation), PATCH saves preferences, including ordered durationPresets (1–5 entries) and taskPresets (1–10 entries) lists, and ?backup=1 exports or imports history. All personal operations require the owner session.",
+      "Current Timer activities, or a historical day and 30-day totals with ?date=YYYY-MM-DD. Visitors receive generated samples; the signed-in owner reads personal Turso records. Responses are private and never cached.",
+  },
+  {
+    href: "/api/timer",
+    method: "POST",
+    authenticated: true,
+    description:
+      "Change personal Timer tasks. Add accepts an optional UUID taskId to prevent duplicate creation. Requires the owner session, a same-origin request, and application/json.",
+  },
+  {
+    href: "/api/timer",
+    method: "PATCH",
+    authenticated: true,
+    description:
+      "Save personal preferences, including ordered durationPresets (1–5 entries) and taskPresets (1–10 entries). Requires the owner session, a same-origin request, and application/json.",
+  },
+  {
+    href: "/api/timer?backup=1",
+    method: "GET / POST",
+    authenticated: true,
+    description:
+      "Export personal history with GET or import a JSON backup with POST. Requires the owner session; imports also require a same-origin request and application/json, with a 10 MB limit.",
   },
   {
     href: "/api/hello",
@@ -60,13 +88,30 @@ export default function APIPage() {
         <PageDescription>{apiRoute.description}</PageDescription>
       </PageHeader>
       <div className="space-y-16">
-        <Section title="Public">
+        <Section title="Endpoints">
           <ul className="max-w-full space-y-5">
-            {publicEndpoints.map((endpoint) => (
-              <li className="min-w-0 space-y-1" key={endpoint.href}>
-                <InternalLink href={endpoint.href} variant="inline">
-                  {endpoint.href}
-                </InternalLink>
+            {endpoints.map((endpoint) => (
+              <li
+                className="min-w-0 space-y-1"
+                key={`${endpoint.method ?? "GET"} ${endpoint.href}`}
+              >
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-muted font-mono text-xs">
+                    {endpoint.method ?? "GET"}
+                  </span>
+                  <InternalLink href={endpoint.href}>
+                    {endpoint.href}
+                  </InternalLink>
+                  {endpoint.authenticated === true && (
+                    <span className="border-border bg-foreground/5 text-foreground/70 inline-flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium">
+                      <span
+                        aria-hidden="true"
+                        className="bg-muted size-1.5 shrink-0 rounded-full"
+                      />
+                      Authenticated
+                    </span>
+                  )}
+                </div>
                 <p className="text-muted">{endpoint.description}</p>
               </li>
             ))}

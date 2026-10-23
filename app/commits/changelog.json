@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "aadfd412bfc6c94af36d936f33f6d88adc1775d3",
+      "date": "2026-10-23T17:05:57+07:00",
+      "subject": "feat(Footer): show live Jakarta date and time beside breadcrumbs"
+    },
+    {
       "hash": "179b295255e1b28cb933a53d29d0fb6b300fc54a",
       "date": "2026-10-23T17:05:49+07:00",
       "subject": "style(Timer): refine card padding and truncate dock titles"
