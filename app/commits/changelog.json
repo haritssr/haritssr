@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "3de11a1bf837d2c203f5398bf1cfdb9131ac66f0",
+      "date": "2026-10-23T11:16:35+07:00",
+      "subject": "feat(Labs): add error page playground and fallback previews"
+    },
+    {
       "hash": "7ed3d2e4246d587362f1c1637550fb995a582018",
       "date": "2026-10-23T11:16:30+07:00",
       "subject": "chore(Dependencies): update packages and satisfy lint rules"
