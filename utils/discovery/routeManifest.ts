@@ -12,10 +12,10 @@ import {
   weeklyChangelogRoute,
 } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
-import { getAvailableLabSummaries } from "@/utils/labCatalog";
-import { getLabRoutes } from "@/utils/labRoutes";
-import { getProjectSlug } from "@/utils/projectSlug";
-import { allWritingPosts } from "@/utils/writing-posts";
+import { allWritingPosts } from "@/utils/content/writing-posts";
+import { getAvailableLabSummaries } from "@/utils/discovery/labCatalog";
+import { getLabRoutes } from "@/utils/discovery/labRoutes";
+import { getProjectSlug } from "@/utils/navigation/projectSlug";
 
 export interface RouteRecord extends RouteDoc {
   pattern: string;

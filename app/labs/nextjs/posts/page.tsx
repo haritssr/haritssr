@@ -4,7 +4,7 @@ import Link from "next/link";
 import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
 import PageDescription from "@/components/PageDescription";
-import { getSortedPostsData } from "@/utils/posts";
+import { getSortedPostsData } from "@/utils/content/posts";
 
 export const metadata: Metadata = getLabMetadata("nextjs", "posts");
 

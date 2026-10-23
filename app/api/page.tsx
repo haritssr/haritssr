@@ -4,7 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import { apiRoute } from "@/data/routes";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 export const metadata = createPageMetadata({
   title: apiRoute.title,

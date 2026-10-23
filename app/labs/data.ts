@@ -1,7 +1,7 @@
 import "server-only";
 import type { Metadata } from "next";
 
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 type LabGroup = "chapters" | "tools";
 

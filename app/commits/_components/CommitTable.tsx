@@ -1,6 +1,6 @@
 import ExternalLink from "@/components/ExternalLink";
 import Table from "@/components/Table";
-import type { ChangelogCommit } from "@/utils/changelog";
+import type { ChangelogCommit } from "@/utils/commits/changelog";
 
 const JAKARTA_OFFSET_MS = 7 * 60 * 60 * 1000;
 

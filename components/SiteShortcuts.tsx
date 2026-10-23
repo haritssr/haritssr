@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import SharePageProvider, {
   useSharePageUrl,
 } from "@/components/SharePageProvider";
-import { RSS_PATH } from "@/utils/site";
+import { RSS_PATH } from "@/utils/metadata/site";
 
 export default function SiteShortcuts() {
   return (

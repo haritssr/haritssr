@@ -11,7 +11,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import TabBarButtom from "@/components/TabBarButtom";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import Accordion from "./Accordion";
 import Badges from "./Badges";

@@ -3,7 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 import { z } from "zod";
 
-import type { ChangelogCommit } from "../utils/changelog";
+import type { ChangelogCommit } from "../utils/commits/changelog";
 
 const root = new URL("../", import.meta.url);
 const snapshotPath = new URL("../app/commits/changelog.json", import.meta.url);

@@ -2,7 +2,7 @@
 
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
 
-import pageSourceUrl from "@/utils/pageSourceUrl";
+import pageSourceUrl from "@/utils/navigation/pageSourceUrl";
 
 import TopBarAccount from "./TopBarAccount";
 import TopBarSearch from "./TopBarSearch";

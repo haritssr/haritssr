@@ -3,8 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import { weeklyChangelogRoute } from "@/data/routes";
-import { formatDay } from "@/utils/changelog";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { formatDay } from "@/utils/commits/changelog";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import { reviewedThrough, weeklyChangelog } from "./data";
 

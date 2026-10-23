@@ -1,5 +1,8 @@
-import { parseChangelogSelection } from "@/utils/changelogSelection";
-import { changelogSummary, getChangelogResult } from "@/utils/commitHistory";
+import { parseChangelogSelection } from "@/utils/commits/changelogSelection";
+import {
+  changelogSummary,
+  getChangelogResult,
+} from "@/utils/commits/commitHistory";
 
 export function GET(request: Request) {
   const selection = parseChangelogSelection(

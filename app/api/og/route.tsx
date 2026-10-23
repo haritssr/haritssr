@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import sharp from "sharp";
 
-import { OPEN_GRAPH_IMAGE_SIZE } from "@/utils/pageMetadata";
+import { OPEN_GRAPH_IMAGE_SIZE } from "@/utils/metadata/pageMetadata";
 
 import OpenGraphCard from "./OpenGraphCard";
 

@@ -10,8 +10,12 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import type { RouteDoc } from "@/data/routes";
-import { commitDay, countCommitTypes, formatDay } from "@/utils/changelog";
-import { SOURCE_CODE_URL } from "@/utils/site";
+import {
+  commitDay,
+  countCommitTypes,
+  formatDay,
+} from "@/utils/commits/changelog";
+import { SOURCE_CODE_URL } from "@/utils/metadata/site";
 
 interface Analysis {
   date: string;

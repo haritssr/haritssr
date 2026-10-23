@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { createPageMetadata } from "@/utils/pageMetadata";
-import { WRITING_DESCRIPTION } from "@/utils/site";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
+import { WRITING_DESCRIPTION } from "@/utils/metadata/site";
 
 import WritingTable from "./WritingTable";
 

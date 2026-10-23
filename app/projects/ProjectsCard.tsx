@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getProjectSlug } from "@/utils/projectSlug";
+import { getProjectSlug } from "@/utils/navigation/projectSlug";
 
 interface ProjectsCardType {
   className?: string;

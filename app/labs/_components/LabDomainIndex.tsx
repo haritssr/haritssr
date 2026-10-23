@@ -4,7 +4,7 @@ import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { getAvailableLabDomain } from "@/utils/labCatalog";
+import { getAvailableLabDomain } from "@/utils/discovery/labCatalog";
 
 interface LabDomainIndexProps {
   domainSlug: string;

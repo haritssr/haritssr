@@ -1,4 +1,4 @@
-import { allWritingPosts } from "@/utils/writing-posts";
+import { allWritingPosts } from "@/utils/content/writing-posts";
 
 import { renderWritingRssFeed } from "./rss";
 

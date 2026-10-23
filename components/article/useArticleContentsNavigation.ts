@@ -11,7 +11,7 @@ import {
 import type {
   ArticleOutline,
   ContentsEntry,
-} from "@/utils/articleTableOfContents";
+} from "@/utils/content/articleTableOfContents";
 
 const DESKTOP_QUERY = "(min-width: 1024px)";
 

@@ -1,5 +1,5 @@
 import "server-only";
-import { getRouteManifest } from "@/utils/routeManifest";
+import { getRouteManifest } from "@/utils/discovery/routeManifest";
 
 export interface RouteNode {
   path: string;

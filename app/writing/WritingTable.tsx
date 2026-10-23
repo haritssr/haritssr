@@ -1,5 +1,5 @@
 import InternalLink from "@/components/InternalLink";
-import { allWritingPosts } from "@/utils/writing-posts";
+import { allWritingPosts } from "@/utils/content/writing-posts";
 
 export default function WritingTable() {
   return (

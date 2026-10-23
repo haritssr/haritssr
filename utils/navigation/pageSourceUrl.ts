@@ -1,4 +1,4 @@
-import { sourceUrl } from "@/utils/site";
+import { sourceUrl } from "@/utils/metadata/site";
 
 const trailingSlashPattern = /\/+$/u;
 const writingPathPattern = /^\/writing\/(?<slug>[^/]+)$/u;

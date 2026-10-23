@@ -8,9 +8,13 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import { commitAnalysisRoute } from "@/data/routes";
-import { commitDay, countCommitTypes, formatDay } from "@/utils/changelog";
-import { createPageMetadata } from "@/utils/pageMetadata";
-import { SOURCE_CODE_URL } from "@/utils/site";
+import {
+  commitDay,
+  countCommitTypes,
+  formatDay,
+} from "@/utils/commits/changelog";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
+import { SOURCE_CODE_URL } from "@/utils/metadata/site";
 
 import analysis from "./analysis.json";
 import suitability from "./model-suitability.json";

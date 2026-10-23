@@ -3,7 +3,7 @@ import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import TimerDate from "./_components/TimerDate";
 import TimerClient from "./TimerClient";

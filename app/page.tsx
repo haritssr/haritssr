@@ -12,7 +12,7 @@ import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import Table from "@/components/Table";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
 // Example: "https://www.example.com" becomes "example.com" after replacement.

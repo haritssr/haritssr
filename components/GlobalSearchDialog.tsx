@@ -23,9 +23,12 @@ import {
   hasSearchQuery,
   searchRoutes,
 } from "@/data/routes";
-import { commandWords, matchesCommand } from "@/utils/commandMatching";
-import type { SourceCodeCommand } from "@/utils/sourceCodeCommands";
-import { getSourceCodeCommands } from "@/utils/sourceCodeCommands";
+import {
+  commandWords,
+  matchesCommand,
+} from "@/utils/navigation/commandMatching";
+import type { SourceCodeCommand } from "@/utils/navigation/sourceCodeCommands";
+import { getSourceCodeCommands } from "@/utils/navigation/sourceCodeCommands";
 
 import styles from "./GlobalSearchDialog.module.css";
 

@@ -158,6 +158,13 @@ Labs, Writing, and Design in that order. It appears from 1024px so all
 five links fit between the side controls. Home's responsive card grid links
 to Timer, Commits, and Tree under Tools, with the commit count from the shared changelog snapshot.
 
+Shared helpers in `utils/` are grouped by responsibility: `commits/` handles
+commit records and Turso reads; `content/` handles posts and article outlines;
+`discovery/` handles catalogs, routes, and search indexing; `metadata/` handles
+site constants and page metadata; `navigation/` handles command matching, slugs,
+and source links. Standalone helpers remain at the root. Import individual modules
+directly to preserve client/server boundaries.
+
 Route-owned data lives beside its implementation: Projects uses
 `app/projects/data.ts`; the Next.js articles and students demos each own a
 `data.ts`; book search and dated commit articles keep their JSON beside the page
@@ -167,7 +174,7 @@ or demo. Writing MDX and its automatic module discovery live in
 live in `app/labs/data.ts`; discontinued records live in
 `app/labs/discontinued-data.ts`. The generated changelog snapshot lives in
 `app/commits/changelog.json`; the site-wide route registry remains in `data/`.
-The server-only `utils/routeManifest.ts` derives available routes, dynamic
+The server-only `utils/discovery/routeManifest.ts` derives available routes, dynamic
 patterns, parents, and update dates from these sources. Search, sitemap, and
 tree reuse the manifest; content validation checks its page files and production
 availability.

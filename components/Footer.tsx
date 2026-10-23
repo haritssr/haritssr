@@ -6,7 +6,7 @@ import {
   modelSuitabilityRoute,
   todayModelSuitabilityRoute,
 } from "@/data/routes";
-import { RSS_PATH } from "@/utils/site";
+import { RSS_PATH } from "@/utils/metadata/site";
 
 import Breadcrumbs from "./Breadcrumbs";
 import FooterActions from "./FooterActions";

@@ -1,6 +1,6 @@
 import "server-only";
 import type { RouteDoc } from "@/data/routes";
-import { getRouteManifest } from "@/utils/routeManifest";
+import { getRouteManifest } from "@/utils/discovery/routeManifest";
 
 export function getSearchIndex(): RouteDoc[] {
   return getRouteManifest().map(

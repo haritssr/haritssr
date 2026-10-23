@@ -4,8 +4,8 @@ import LabsGrid from "@/app/labs/_components/LabsGrid";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { getAvailableLabCount } from "@/utils/labCatalog";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { getAvailableLabCount } from "@/utils/discovery/labCatalog";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 const labsHomeDescription = getLabsHomeDescription();
 

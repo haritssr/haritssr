@@ -6,11 +6,11 @@ import {
   DiscontinuedLabsData,
   discontinuedLabHistory,
 } from "@/app/labs/discontinued-data";
-import { getAvailableLabSummaries } from "@/utils/labCatalog";
-import { getLabRoutes } from "@/utils/labRoutes";
-import { getRouteManifest } from "@/utils/routeManifest";
-import { getSearchIndex } from "@/utils/searchIndex";
-import { parseWritingPost } from "@/utils/writing-posts";
+import { parseWritingPost } from "@/utils/content/writing-posts";
+import { getAvailableLabSummaries } from "@/utils/discovery/labCatalog";
+import { getLabRoutes } from "@/utils/discovery/labRoutes";
+import { getRouteManifest } from "@/utils/discovery/routeManifest";
+import { getSearchIndex } from "@/utils/discovery/searchIndex";
 
 const failures: string[] = [];
 const catalogRoutes = new Set<string>();

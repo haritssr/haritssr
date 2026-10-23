@@ -1,6 +1,6 @@
 import CommitActivityChart from "@/app/commits/_components/CommitActivityChart";
-import { activityBuckets, prepareCommits } from "@/utils/changelog";
-import type { ChangelogCommit } from "@/utils/changelog";
+import { activityBuckets, prepareCommits } from "@/utils/commits/changelog";
+import type { ChangelogCommit } from "@/utils/commits/changelog";
 
 export default function CommitHourlyChart({
   commits,

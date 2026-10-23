@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import type { ActivityBucket } from "@/utils/changelog";
+import type { ActivityBucket } from "@/utils/commits/changelog";
 
 const WIDTH = 800;
 const HEIGHT = 210;

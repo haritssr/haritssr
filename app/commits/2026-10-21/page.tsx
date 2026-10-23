@@ -1,6 +1,6 @@
 import DatedCommitAnalysis from "@/app/commits/_components/DatedCommitAnalysis";
 import { october21AnalysisRoute } from "@/data/routes";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import analysis from "./analysis.json";
 import suitability from "./model-suitability.json";

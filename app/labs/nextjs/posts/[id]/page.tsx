@@ -2,8 +2,12 @@ import { notFound } from "next/navigation";
 
 import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { createPageMetadata } from "@/utils/pageMetadata";
-import { getAllPostIds, getPostData, getPostSummary } from "@/utils/posts";
+import {
+  getAllPostIds,
+  getPostData,
+  getPostSummary,
+} from "@/utils/content/posts";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import MarkdownContent from "./mdx";
 

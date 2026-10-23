@@ -1,4 +1,4 @@
-import { getSearchIndex } from "@/utils/searchIndex";
+import { getSearchIndex } from "@/utils/discovery/searchIndex";
 
 export const dynamic = "force-static";
 

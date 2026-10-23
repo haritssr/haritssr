@@ -177,8 +177,8 @@ Apply these defaults to new or refactored labs in every domain:
 
 # Metadata and Site Behavior
 
-- Use shared metadata in `utils/pageMetadata.ts` and the canonical domain from
-  `utils/site.ts` for page URLs, social previews, sitemap, and RSS.
+- Use shared metadata in `utils/metadata/pageMetadata.ts` and the canonical domain from
+  `utils/metadata/site.ts` for page URLs, social previews, sitemap, and RSS.
 - Follow README.md's metadata, archive, and offline behavior safeguards when
   changing their implementations.
 

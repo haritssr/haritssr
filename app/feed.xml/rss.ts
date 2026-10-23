@@ -3,7 +3,7 @@ import {
   WRITING_PATH,
   RSS_PATH,
   SITE_URL,
-} from "@/utils/site";
+} from "@/utils/metadata/site";
 
 const RSS_LANGUAGE = "en-US";
 const RSS_TITLE = "Harits Syah — Writing";

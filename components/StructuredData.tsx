@@ -1,4 +1,4 @@
-import { SITE_URL } from "@/utils/site";
+import { SITE_URL } from "@/utils/metadata/site";
 
 const personId = `${SITE_URL}/#person`;
 const websiteId = `${SITE_URL}/#website`;

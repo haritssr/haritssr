@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { RSS_PATH, SITE_URL } from "@/utils/site";
+import { RSS_PATH, SITE_URL } from "@/utils/metadata/site";
 
 export const OPEN_GRAPH_IMAGE_SIZE = { width: 1200, height: 630 };
 

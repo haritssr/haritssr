@@ -6,8 +6,8 @@ import type { RefObject } from "react";
 import {
   affectsArticleHeadings,
   collectArticleOutline,
-} from "@/utils/articleTableOfContents";
-import type { ArticleOutline } from "@/utils/articleTableOfContents";
+} from "@/utils/content/articleTableOfContents";
+import type { ArticleOutline } from "@/utils/content/articleTableOfContents";
 
 function outlineSignature(outline: ArticleOutline) {
   return JSON.stringify(

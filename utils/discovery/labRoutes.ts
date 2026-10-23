@@ -2,8 +2,8 @@ import "server-only";
 import { NextjsArticlesData } from "@/app/labs/nextjs/articles/data";
 import { NextjsStudentsData } from "@/app/labs/nextjs/students/data";
 import type { RouteDoc } from "@/data/routes";
-import { getAvailableLabDomains } from "@/utils/labCatalog";
-import { getSortedPostsData } from "@/utils/posts";
+import { getSortedPostsData } from "@/utils/content/posts";
+import { getAvailableLabDomains } from "@/utils/discovery/labCatalog";
 
 export function getLabRoutes(): RouteDoc[] {
   const labs = getAvailableLabDomains().flatMap((domain) => [

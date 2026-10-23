@@ -1,5 +1,8 @@
-import { commandWords, matchesCommand } from "@/utils/commandMatching";
-import { SOURCE_CODE_URL } from "@/utils/site";
+import { SOURCE_CODE_URL } from "@/utils/metadata/site";
+import {
+  commandWords,
+  matchesCommand,
+} from "@/utils/navigation/commandMatching";
 
 export interface SourceCodeCommand {
   kind: "source-code";

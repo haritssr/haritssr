@@ -4,7 +4,7 @@ import {
   discontinuedLabHistory,
 } from "@/app/labs/discontinued-data";
 import ExternalLink from "@/components/ExternalLink";
-import { getAvailableLabDomains } from "@/utils/labCatalog";
+import { getAvailableLabDomains } from "@/utils/discovery/labCatalog";
 
 import LabCard, { ArchivedLabCard } from "./LabCard";
 

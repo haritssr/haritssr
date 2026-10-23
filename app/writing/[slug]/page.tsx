@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { createPageMetadata } from "@/utils/pageMetadata";
-import { allWritingPosts, getWritingPost } from "@/utils/writing-posts";
+import { allWritingPosts, getWritingPost } from "@/utils/content/writing-posts";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import { getWritingModule } from "./writing-modules";
 import WritingArticle from "./WritingArticle";

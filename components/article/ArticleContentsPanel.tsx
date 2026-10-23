@@ -20,7 +20,7 @@ import type {
   ArticleOutline,
   ContentsEntry,
   ContentsLabelPart,
-} from "@/utils/articleTableOfContents";
+} from "@/utils/content/articleTableOfContents";
 
 import { useActiveArticleSection } from "./useArticleOutline";
 

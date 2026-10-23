@@ -12,10 +12,13 @@ import {
   todayModelSuitabilityRoute,
   weeklyChangelogRoute,
 } from "@/data/routes";
-import { formatDay } from "@/utils/changelog";
-import { parseChangelogSelection } from "@/utils/changelogSelection";
-import { changelogSummary, getChangelogResult } from "@/utils/commitHistory";
-import { createPageMetadata } from "@/utils/pageMetadata";
+import { formatDay } from "@/utils/commits/changelog";
+import { parseChangelogSelection } from "@/utils/commits/changelogSelection";
+import {
+  changelogSummary,
+  getChangelogResult,
+} from "@/utils/commits/commitHistory";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 export const metadata = createPageMetadata({
   title: commitsRoute.title,

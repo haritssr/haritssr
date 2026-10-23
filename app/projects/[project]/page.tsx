@@ -7,8 +7,8 @@ import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { createPageMetadata } from "@/utils/pageMetadata";
-import { getProjectSlug } from "@/utils/projectSlug";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
+import { getProjectSlug } from "@/utils/navigation/projectSlug";
 
 import { ProjectsData } from "../data";
 import type { ProjectsDataType } from "../data";

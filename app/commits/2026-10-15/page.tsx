@@ -11,9 +11,9 @@ import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
 import { todayModelSuitabilityRoute } from "@/data/routes";
-import { commitDay, countCommitTypes } from "@/utils/changelog";
-import { createPageMetadata } from "@/utils/pageMetadata";
-import { SOURCE_CODE_URL } from "@/utils/site";
+import { commitDay, countCommitTypes } from "@/utils/commits/changelog";
+import { createPageMetadata } from "@/utils/metadata/pageMetadata";
+import { SOURCE_CODE_URL } from "@/utils/metadata/site";
 
 import modelSuitability from "./model-suitability.json";
 

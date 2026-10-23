@@ -24,17 +24,17 @@ import {
   formatDay,
   periodRange,
   shiftPeriod,
-} from "@/utils/changelog";
-import type { ChangelogPeriod } from "@/utils/changelog";
-import { parseChangelogResult } from "@/utils/changelogResponse";
+} from "@/utils/commits/changelog";
+import type { ChangelogPeriod } from "@/utils/commits/changelog";
+import { parseChangelogResult } from "@/utils/commits/changelogResponse";
 import {
   changelogParams,
   parseChangelogSelection,
-} from "@/utils/changelogSelection";
+} from "@/utils/commits/changelogSelection";
 import type {
   ChangelogResult,
   ChangelogSelection,
-} from "@/utils/commitHistory";
+} from "@/utils/commits/commitHistory";
 
 const periodOptions: readonly { value: ChangelogPeriod; label: string }[] = [
   { value: "all", label: "All history" },
