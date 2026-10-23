@@ -1647,6 +1647,16 @@ export const LabsData: readonly LabDomain[] = [
         createdAt: "2026-10-23",
         updatedAt: ["2026-10-23"],
       },
+      {
+        slug: "quadratic-formula-derivation",
+        group: "chapters",
+        title: "Quadratic Formula Derivation",
+        description:
+          "Derive the quadratic formula with a completing-the-square flowchart.",
+        tags: ["algebra", "equations", "derivation", "pele", "visualization"],
+        createdAt: "2026-10-23",
+        updatedAt: ["2026-10-23"],
+      },
     ],
     id: 17,
     logoSrc: "/icons/math.svg",
