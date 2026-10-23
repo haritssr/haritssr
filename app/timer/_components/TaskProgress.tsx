@@ -35,7 +35,7 @@ export default function TaskProgress({
         className={`tabular-nums ${compact ? `flex min-w-0 items-baseline justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
       >
         {title === undefined ? null : (
-          <span className="min-w-0 flex-1 text-sm leading-4 font-medium wrap-anywhere normal-nums">
+          <span className="min-w-0 flex-1 truncate text-sm leading-4 font-medium normal-nums">
             {title}
           </span>
         )}

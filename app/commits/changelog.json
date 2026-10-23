@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "7397bf6e53d34784048b2f67de5c377c015ec2a5",
+      "date": "2026-10-23T17:05:42+07:00",
+      "subject": "docs(Timer): add scheduling principles and task types"
+    },
+    {
       "hash": "5447c4c4103d5f1fc3242dce696580e017c16b1c",
       "date": "2026-10-23T17:05:33+07:00",
       "subject": "feat(Timer): support ten task presets and add Working and Thinking"
