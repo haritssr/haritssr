@@ -1,7 +1,6 @@
 import "server-only";
 import { LabsData, getLabDomain, getLatestLabUpdate } from "@/app/labs/data";
-import type { LabDomain, LabEntry } from "@/app/labs/data";
-import { isLabAvailable } from "@/utils/databaseLabs";
+import type { LabDomain } from "@/app/labs/data";
 
 interface LabSummary {
   route: string;
@@ -14,39 +13,29 @@ interface LabSummary {
 }
 
 export function getAvailableLabDomains(): LabDomain[] {
-  return LabsData.map(withAvailableLabs);
+  return LabsData.map(withSortedLabs);
 }
 
 export function getAvailableLabDomain(slug: string): LabDomain {
-  return withAvailableLabs(getLabDomain(slug));
+  return withSortedLabs(getLabDomain(slug));
 }
 
-function withAvailableLabs(domain: LabDomain): LabDomain {
+function withSortedLabs(domain: LabDomain): LabDomain {
   return {
     ...domain,
-    labs: getAvailableLabs(domain).toSorted((left, right) =>
+    labs: domain.labs.toSorted((left, right) =>
       getLatestLabUpdate(right).localeCompare(getLatestLabUpdate(left))
     ),
   };
 }
 
 export function getAvailableLabCount(): number {
-  let count = 0;
-
-  for (const domain of LabsData) {
-    for (const lab of domain.labs) {
-      if (isLabAvailable(domain.slug, lab.slug)) {
-        count += 1;
-      }
-    }
-  }
-
-  return count;
+  return LabsData.reduce((count, domain) => count + domain.labs.length, 0);
 }
 
 export function getAvailableLabSummaries(): LabSummary[] {
   return LabsData.flatMap((domain) =>
-    getAvailableLabs(domain).map((lab) => ({
+    domain.labs.map((lab) => ({
       route: `/labs/${domain.slug}/${lab.slug}`,
       title: lab.title,
       description: lab.description,
@@ -56,8 +45,4 @@ export function getAvailableLabSummaries(): LabSummary[] {
       updatedAt: getLatestLabUpdate(lab),
     }))
   ).toSorted((left, right) => right.updatedAt.localeCompare(left.updatedAt));
-}
-
-function getAvailableLabs(domain: LabDomain): LabEntry[] {
-  return domain.labs.filter((lab) => isLabAvailable(domain.slug, lab.slug));
 }

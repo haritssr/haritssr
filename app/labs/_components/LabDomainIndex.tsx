@@ -4,7 +4,6 @@ import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import { isDatabaseLab } from "@/utils/databaseLabs";
 import { getAvailableLabDomain } from "@/utils/labCatalog";
 
 interface LabDomainIndexProps {
@@ -54,14 +53,7 @@ function LabList({
           >
             {column.map((lab) => (
               <li className="min-w-0 pl-1" key={lab.slug}>
-                <InternalLink
-                  href={`/labs/${domainSlug}/${lab.slug}`}
-                  variant={
-                    isDatabaseLab(domainSlug, lab.slug)
-                      ? "database"
-                      : "navigation"
-                  }
-                >
+                <InternalLink href={`/labs/${domainSlug}/${lab.slug}`}>
                   {lab.title}
                 </InternalLink>
               </li>

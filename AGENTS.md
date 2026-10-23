@@ -174,8 +174,6 @@ Apply these defaults to new or refactored labs in every domain:
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.
 - Keep public pages searchable.
-- Keep task/tools SQLite labs development-only: production routes return
-  404 and stay out of navigation, search, and sitemap.
 
 # Metadata and Site Behavior
 

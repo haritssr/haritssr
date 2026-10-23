@@ -22,10 +22,6 @@ yarn-error.log*
 .env
 .env.*
 
-# local sqlite storage
-.data/
-.data-haritssr/
-
 # Personal timer history (generated mock days also stay local)
 /data/timer/*.json
 /data/timer/*.tmp

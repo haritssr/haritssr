@@ -2,7 +2,6 @@ import "server-only";
 import { NextjsArticlesData } from "@/app/labs/nextjs/articles/data";
 import { NextjsStudentsData } from "@/app/labs/nextjs/students/data";
 import type { RouteDoc } from "@/data/routes";
-import { isLabAvailable } from "@/utils/databaseLabs";
 import { getAvailableLabDomains } from "@/utils/labCatalog";
 import { getSortedPostsData } from "@/utils/posts";
 
@@ -21,18 +20,9 @@ export function getLabRoutes(): RouteDoc[] {
       group: "Labs",
     })),
   ]);
-  const taskPages = isLabAvailable("user-interface", "task")
-    ? ["architecture", "history", "statistics"].map((page) => ({
-        route: `/labs/user-interface/task/${page}`,
-        title: `Task ${page}`,
-        description: "Task tracker · User Interface",
-        group: "Labs",
-      }))
-    : [];
 
   return [
     ...labs,
-    ...taskPages,
     ...getSortedPostsData().map((post) => ({
       route: `/labs/nextjs/posts/${post.id}`,
       title: post.title,

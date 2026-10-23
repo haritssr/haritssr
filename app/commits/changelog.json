@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "9f6207d7f2b3781e9a4fd8ba29efbbd128fe5870",
+      "date": "2026-10-23T12:56:45+07:00",
+      "subject": "style(Design): refine grids and homepage cards"
+    },
+    {
       "hash": "30996335ffeae7847ff5a4cc6ba3df6d321e37f7",
       "date": "2026-10-23T11:17:19+07:00",
       "subject": "style(Diagrams): fill nodes with matching design tokens"

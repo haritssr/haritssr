@@ -19,10 +19,10 @@ export default function InternalLink({
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   "aria-current"?: AriaAttributes["aria-current"];
   "aria-keyshortcuts"?: AriaAttributes["aria-keyshortcuts"];
-  variant?: "navigation" | "database" | "inline" | "footer";
+  variant?: "navigation" | "inline" | "footer";
 }) {
   const appearance =
-    variant === "navigation" || variant === "database"
+    variant === "navigation"
       ? `w-fit py-0.5 ${lg === true ? "text-lg" : "text-base"}`
       : "text-[length:inherit] leading-[inherit]";
   const interaction =
@@ -40,21 +40,12 @@ export default function InternalLink({
       prefetch={false}
     >
       {children}
-      {variant === "navigation" || variant === "database" ? (
+      {variant === "navigation" ? (
         <ChevronRightIcon
           aria-hidden="true"
           className={`${lg === true ? "h-4.5 w-4.5" : "h-4 w-4"} text-action group-hover:text-action-hover inline align-middle`}
           strokeWidth={2.25}
         />
-      ) : null}
-      {variant === "database" ? (
-        <span
-          className="border-border bg-foreground/5 text-muted mx-1.5 inline-block rounded border px-1 py-0.5 align-middle text-xs leading-none font-medium"
-          title="Uses a database"
-        >
-          <span aria-hidden="true">DB</span>
-          <span className="sr-only">Uses a database</span>
-        </span>
       ) : null}
     </Link>
   );

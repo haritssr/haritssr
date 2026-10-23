@@ -138,14 +138,6 @@ export default defineConfig({
         "nextjs/no-html-link-for-pages": "off",
       },
     },
-    {
-      files: ["app/labs/user-interface/task/architecture/page.tsx"],
-      rules: {
-        // React Compiler does not support import expressions yet. Keeping
-        // Pele dynamic avoids shipping it in the initial client bundle.
-        "react/todo": "off",
-      },
-    },
   ],
   options: {
     reportUnusedDisableDirectives: "error",

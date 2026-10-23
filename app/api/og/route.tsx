@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import sharp from "sharp";
 
-import { isLabAvailable } from "@/utils/databaseLabs";
 import { OPEN_GRAPH_IMAGE_SIZE } from "@/utils/pageMetadata";
 
 import OpenGraphCard from "./OpenGraphCard";
@@ -22,11 +21,6 @@ export async function GET(request: NextRequest) {
     !/^\/(?!\/)[^?#\s]*$/u.test(path)
   ) {
     return new Response("Invalid image parameters", { status: 400 });
-  }
-
-  const [, section, domain, lab] = path.split("/");
-  if (section === "labs" && domain && lab && !isLabAvailable(domain, lab)) {
-    return new Response("Not found", { status: 404 });
   }
 
   const image = new ImageResponse(<OpenGraphCard title={title} path={path} />, {

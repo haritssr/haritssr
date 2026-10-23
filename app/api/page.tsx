@@ -4,7 +4,6 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import { apiRoute } from "@/data/routes";
-import { DATABASE_LABS_ENABLED } from "@/utils/databaseLabs";
 import { createPageMetadata } from "@/utils/pageMetadata";
 
 export const metadata = createPageMetadata({
@@ -73,16 +72,6 @@ export default function APIPage() {
             ))}
           </ul>
         </Section>
-        {DATABASE_LABS_ENABLED ? (
-          <Section title="Local">
-            <InternalLink href="/api/task" variant="inline">
-              /api/task
-            </InternalLink>
-            <p className="text-muted max-w-full">
-              Local tasks by date, with POST and PUT support for editing.
-            </p>
-          </Section>
-        ) : null}
       </div>
     </>
   );

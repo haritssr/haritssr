@@ -127,8 +127,8 @@ Article navigation components, hooks, and styles live in `components/article/`.
 User Interface labs live at `/labs/user-interface` and its child
 routes. Labs uses `/labs` throughout navigation, metadata, search, and the sitemap;
 the previous `/experiments` routes have no redirects or aliases. Discontinued
-records retain their historical URLs. The Tools lab keeps its existing
-`experiment.db` SQLite filename so local data remains available after the rename.
+records retain their historical URLs. The former Task and Tools SQLite labs,
+their local databases, and the Task API have been removed.
 
 Every non-home page shows a pill back button in the top bar at every screen size,
 including before scrolling. Home keeps the “Harits Syah” link. Pass the destination
