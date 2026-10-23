@@ -198,7 +198,7 @@ function PersonalDetails() {
           className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 pl-5 wrap-break-word"
         >
           <li>
-            Building{" "}
+            At{" "}
             <ExternalLink
               href="https://www.harimaki.com"
               name="harimaki.com"
