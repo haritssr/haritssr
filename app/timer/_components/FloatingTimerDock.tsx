@@ -102,7 +102,7 @@ export default function FloatingTimerDock() {
       )}
       {showError ? (
         <div
-          className="border-border bg-background/70 pointer-events-auto flex w-full items-center gap-3 rounded-xl border px-3 py-2 text-sm backdrop-blur-md sm:w-[28rem]"
+          className="border-border bg-background/70 pointer-events-auto flex w-full items-center gap-3 rounded-xl border px-3 py-2 text-sm backdrop-blur-md sm:w-md"
           role="alert"
         >
           <p className="text-danger flex-1">{error}</p>
@@ -121,7 +121,7 @@ export default function FloatingTimerDock() {
           aria-label="Floating task"
           className="pointer-events-auto w-full space-y-2 sm:w-[22.4rem]"
         >
-          <div className="border-border bg-background/70 shadow-foreground/15 flex min-h-[var(--floating-tabbar-height,3.3125rem)] items-center gap-2 rounded-xl border p-2 shadow-lg backdrop-blur-md">
+          <div className="border-border bg-background/70 shadow-foreground/15 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-2 rounded-xl border p-2 shadow-lg backdrop-blur-md">
             <InternalLink
               className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto w-1/2 min-w-0 shrink-0 rounded-sm py-1 pl-2 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-2 sm:[&_progress]:h-1.5"
               href="/timer"
