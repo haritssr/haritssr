@@ -32,3 +32,17 @@
     transparent 90%
   );
 }
+
+@media (width < 640px) {
+  .row[data-show-title="true"] {
+    display: grid;
+    grid-template-columns: var(--topbar-side-width, 2.5rem) minmax(0, 1fr) var(
+        --topbar-side-width,
+        2.5rem
+      );
+  }
+
+  .row:has([data-topbar-contents]) {
+    --topbar-side-width: 5rem;
+  }
+}

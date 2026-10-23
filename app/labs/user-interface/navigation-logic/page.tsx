@@ -78,8 +78,8 @@ const diagrams = [
       "Bottom navigation is mobile-only. It appears on the five main destinations and eligible pages one level below them; writing articles and deeper routes use article navigation instead.",
     definition: `flowchart TD
       accTitle: Mobile bottom navigation visibility
-      accDescr: Below 640 pixels, show bottom navigation only for recognized main sections with at most two path segments, excluding writing articles. Highlight the current section using the action color.
-      Width{"Below 640px?"} -->|No| Hide["Hide bottom navigation"]
+      accDescr: Below 1024 pixels, show bottom navigation only for recognized main sections with at most two path segments, excluding writing articles. Highlight the current section using the action color.
+      Width{"Below 1024px?"} -->|No| Hide["Hide bottom navigation"]
       Width -->|Yes| Section{"Home, Projects, Labs, Writing, or Design section?"}
       Section -->|No| Hide
       Section -->|Yes| Depth{"More than two path segments?"}

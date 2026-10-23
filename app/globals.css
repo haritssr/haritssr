@@ -121,7 +121,7 @@
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: auto;
-    scroll-padding-top: 100px;
+    scroll-padding-top: var(--topbar-height, 4rem);
     scrollbar-gutter: stable both-edges;
   }
 

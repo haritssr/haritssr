@@ -5,8 +5,9 @@ import { CodeBracketIcon } from "@heroicons/react/24/outline";
 import pageSourceUrl from "@/utils/navigation/pageSourceUrl";
 
 import TopBarAccount from "./TopBarAccount";
+import { topBarActionClassName } from "./TopBarAction";
 import TopBarSearch from "./TopBarSearch";
-import TopBarShare, { ShareButton } from "./TopBarShare";
+import TopBarShare from "./TopBarShare";
 
 export default function TopBarActions({
   pathname,
@@ -21,17 +22,15 @@ export default function TopBarActions({
 
   return (
     <div
-      className={list ? "flex flex-col p-1" : "flex w-fit items-center gap-4"}
+      className={
+        list ? "flex flex-col p-1" : "flex w-fit items-center gap-0 sm:gap-4"
+      }
     >
       <TopBarSearch onSearch={onSearch} showLabel={list} />
-      {list ? <ShareButton showLabel /> : <TopBarShare />}
+      <TopBarShare showLabel={list} />
       <a
         aria-label="View this page's source code (opens in a new tab)"
-        className={
-          list
-            ? "focus-visible:outline-action hover:bg-foreground/5 flex items-center gap-3 rounded-lg px-3 py-2 text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
-            : "focus-visible:outline-action text-foreground/70 hover:text-foreground flex items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
-        }
+        className={topBarActionClassName(list)}
         href={pageSourceUrl(pathname)}
         rel="noopener noreferrer"
         target="_blank"

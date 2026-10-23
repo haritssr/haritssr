@@ -1,3 +1,5 @@
+import { primaryRoutes } from "./primaryRoutes";
+
 export interface RouteDoc {
   route: string;
   title: string;
@@ -103,41 +105,11 @@ export const navigationRoutes: readonly RouteDoc[] = [
     description: "A simple timer for focused work and everyday tasks.",
     group: "Tools",
   },
-  {
-    route: "/",
-    title: "Home",
-    description: "Harits Syah — developer, teacher, and founder",
+  ...primaryRoutes.map((route) => ({
+    ...route,
     group: "Navigation",
-    suggestion: "Navigation",
-  },
-  {
-    route: "/projects",
-    title: "Projects",
-    description: "Selected projects and client work",
-    group: "Navigation",
-    suggestion: "Navigation",
-  },
-  {
-    route: "/labs",
-    title: "Labs",
-    description: "Explore code, libraries, and UI labs",
-    group: "Navigation",
-    suggestion: "Navigation",
-  },
-  {
-    route: "/writing",
-    title: "Writing",
-    description: "Notes, ideas, and articles",
-    group: "Navigation",
-    suggestion: "Navigation",
-  },
-  {
-    route: "/design",
-    title: "Design",
-    description: "Design system, colors, and components",
-    group: "Navigation",
-    suggestion: "Navigation",
-  },
+    suggestion: "Navigation" as const,
+  })),
 ];
 
 const combiningMarks = /\p{M}/gu;

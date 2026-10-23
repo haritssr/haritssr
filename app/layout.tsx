@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import TimerProvider from "@/app/timer/_components/TimerProvider";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import SharePageProvider from "@/components/SharePageProvider";
 import SiteShortcuts from "@/components/SiteShortcuts";
 import { SiteStructuredData } from "@/components/StructuredData";
 import TabBarButtom from "@/components/TabBarButtom";
@@ -83,18 +84,20 @@ export default function RootLayout({
           Skip to content
         </a>
         <ServiceWorkerRegistration />
-        <SiteShortcuts />
-        <GlobalSearchProvider>
-          <TimerProvider>
-            <TopBar />
-            <main
-              className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 sm:pt-5 xl:px-0"
-              id="main-content"
-            >
-              {children}
-            </main>
-          </TimerProvider>
-        </GlobalSearchProvider>
+        <SharePageProvider>
+          <SiteShortcuts />
+          <GlobalSearchProvider>
+            <TimerProvider>
+              <TopBar />
+              <main
+                className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 sm:pt-5 xl:px-0"
+                id="main-content"
+              >
+                {children}
+              </main>
+            </TimerProvider>
+          </GlobalSearchProvider>
+        </SharePageProvider>
         <Footer />
         <TabBarButtom />
       </body>

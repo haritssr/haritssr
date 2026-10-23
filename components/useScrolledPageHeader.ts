@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Dispatch, RefObject, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 interface ScrolledPageHeader {
   backLabel: string;
@@ -53,12 +53,11 @@ function getPageHeader(main: Element, pathname: string) {
 
 function observePageHeader(
   pathname: string,
-  navigation: HTMLElement | null,
+  offset: number,
   setHeader: Dispatch<SetStateAction<ScrolledPageHeader | null>>
 ) {
   const main = document.querySelector("#main-content");
   let observedHeading: HTMLElement | undefined;
-  let observedOffset = -1;
   let observedTitle: string | undefined;
   let observedBackLabel: string | undefined;
   let observedHref: string | undefined;
@@ -69,7 +68,6 @@ function observePageHeader(
     intersectionObserver?.disconnect();
     intersectionObserver = undefined;
     observedHeading = undefined;
-    observedOffset = -1;
     observedTitle = undefined;
     observedBackLabel = undefined;
     observedHref = undefined;
@@ -77,7 +75,7 @@ function observePageHeader(
   }
 
   function observeHeading() {
-    if (disposed || !main || !navigation) {
+    if (disposed || !main || offset <= 0) {
       return;
     }
     const pageHeader = getPageHeader(main, pathname);
@@ -87,10 +85,8 @@ function observePageHeader(
     }
     const { backLabel, heading, href, title } = pageHeader;
 
-    const offset = navigation.getBoundingClientRect().bottom;
     if (
       heading === observedHeading &&
-      offset === observedOffset &&
       title === observedTitle &&
       backLabel === observedBackLabel &&
       href === observedHref
@@ -98,7 +94,6 @@ function observePageHeader(
       return;
     }
     observedHeading = heading;
-    observedOffset = offset;
     observedTitle = title;
     observedBackLabel = backLabel;
     observedHref = href;
@@ -146,8 +141,7 @@ function observePageHeader(
       observeHeading();
     }
   });
-  const resizeObserver = new ResizeObserver(observeHeading);
-  if (navigation && main) {
+  if (offset > 0 && main) {
     mutationObserver.observe(main, {
       attributeFilter: [
         "data-page-path",
@@ -161,7 +155,6 @@ function observePageHeader(
       childList: true,
       subtree: true,
     });
-    resizeObserver.observe(navigation);
     observeHeading();
   }
 
@@ -169,13 +162,12 @@ function observePageHeader(
     disposed = true;
     intersectionObserver?.disconnect();
     mutationObserver.disconnect();
-    resizeObserver.disconnect();
   };
 }
 
 export default function useScrolledPageHeader(
   pathname: string,
-  navigationRef: RefObject<HTMLElement | null>
+  topBarHeight: number
 ) {
   const [header, setHeader] = useState<ScrolledPageHeader | null>(null);
 
@@ -183,9 +175,9 @@ export default function useScrolledPageHeader(
     const cleanup =
       pathname === "/"
         ? undefined
-        : observePageHeader(pathname, navigationRef.current, setHeader);
+        : observePageHeader(pathname, topBarHeight, setHeader);
     return () => cleanup?.();
-  }, [pathname, navigationRef]);
+  }, [pathname, topBarHeight]);
 
   return header?.pathname === pathname ? header : null;
 }

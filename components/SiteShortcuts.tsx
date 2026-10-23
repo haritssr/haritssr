@@ -3,20 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import SharePageProvider, {
-  useSharePageUrl,
-} from "@/components/SharePageProvider";
+import { useSharePageUrl } from "@/components/SharePageProvider";
 import { RSS_PATH } from "@/utils/metadata/site";
 
 export default function SiteShortcuts() {
-  return (
-    <SharePageProvider>
-      <ShortcutListener />
-    </SharePageProvider>
-  );
-}
-
-function ShortcutListener() {
   const router = useRouter();
   const share = useSharePageUrl();
 

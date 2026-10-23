@@ -1,6 +1,7 @@
 "use client";
 
 import { Toast } from "@base-ui/react/toast";
+import { useCallback } from "react";
 import type { ReactNode } from "react";
 
 const SHARE_TOAST_ID = "share-toast";
@@ -25,7 +26,7 @@ export default function SharePageProvider({
 export function useSharePageUrl() {
   const toastManager = Toast.useToastManager();
 
-  return async () => {
+  return useCallback(async () => {
     const pageUrl = window.location.href;
     let copied = false;
 
@@ -41,7 +42,7 @@ export function useSharePageUrl() {
       id: SHARE_TOAST_ID,
       title: copied ? "Link copied to clipboard" : "Unable to copy link",
     });
-  };
+  }, [toastManager]);
 }
 
 function ShareToastList() {

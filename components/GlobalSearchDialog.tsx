@@ -14,9 +14,8 @@ import type { RefObject } from "react";
 import { useRef } from "react";
 
 import GitHubIcon from "@/components/GitHubIcon";
-import SharePageProvider, {
-  useSharePageUrl,
-} from "@/components/SharePageProvider";
+import { useSharePageUrl } from "@/components/SharePageProvider";
+import { primaryRoutes } from "@/data/primaryRoutes";
 import type { RouteDoc } from "@/data/routes";
 import {
   getSearchMatchRanges,
@@ -68,17 +67,11 @@ interface SearchMatchTextProps {
   text: string;
 }
 
-const MAIN_ROUTES = new Set(["/projects", "/labs", "/writing", "/design"]);
+const MAIN_ROUTES = new Set<string>(
+  primaryRoutes.filter(({ route }) => route !== "/").map(({ route }) => route)
+);
 
-export default function GlobalSearchDialog(props: GlobalSearchDialogProps) {
-  return (
-    <SharePageProvider>
-      <SearchDialogContent {...props} />
-    </SharePageProvider>
-  );
-}
-
-function SearchDialogContent({
+export default function GlobalSearchDialog({
   entries,
   indexStatus,
   open,

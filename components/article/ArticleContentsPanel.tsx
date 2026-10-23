@@ -107,14 +107,16 @@ export default function ArticleContentsPanel({
   finalFocus,
   onSelect,
   sheetRef,
+  topBarHeight,
 }: Pick<ContentsListProps, "onSelect"> & {
+  topBarHeight: number;
   desktop: boolean;
   open: boolean;
   outline: ArticleOutline;
   finalFocus: () => false | HTMLElement | null;
   sheetRef: Ref<HTMLDivElement>;
 }) {
-  const activeId = useActiveArticleSection(outline, open);
+  const activeId = useActiveArticleSection(outline, open, topBarHeight);
   const closeIcon = (
     <XMarkIcon aria-hidden="true" className="pointer-events-none size-5" />
   );

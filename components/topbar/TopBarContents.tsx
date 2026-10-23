@@ -3,33 +3,27 @@
 import { Popover } from "@base-ui/react/popover";
 import { Bars3BottomRightIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { SheetTrigger } from "react-aria-components/Sheet";
 
-import useArticleContentsNavigation from "@/components/article/useArticleContentsNavigation";
-import useArticleOutline from "@/components/article/useArticleOutline";
+import type useArticleContentsNavigation from "@/components/article/useArticleContentsNavigation";
+import type { ArticleOutline } from "@/utils/content/articleTableOfContents";
 
-import TopBarActionMenu from "./TopBarActionMenu";
-import { useGlobalSearch } from "./TopBarSearch";
+import { topBarActionClassName } from "./TopBarAction";
 
 const ContentsPanel = dynamic(
   async () => await import("../article/ArticleContentsPanel")
 );
 
 export default function TopBarContents({
-  pathname,
-  compactActions,
+  outline,
+  navigation,
+  topBarHeight,
 }: {
-  pathname: string;
-  compactActions: boolean;
+  outline: ArticleOutline;
+  navigation: ReturnType<typeof useArticleContentsNavigation>;
+  topBarHeight: number;
 }) {
-  const mainRef = useRef<HTMLElement>(null);
-  const { openSearch } = useGlobalSearch();
-
-  useEffect(() => {
-    mainRef.current = document.querySelector<HTMLElement>("#main-content");
-  }, []);
   const {
     desktop,
     open,
@@ -40,18 +34,8 @@ export default function TopBarContents({
     finishClose,
     finalFocus,
     selectEntry,
-    runAfterClose,
-    onOutlineChange,
-  } = useArticleContentsNavigation(1);
-  const outline = useArticleOutline(mainRef, "Contents", onOutlineChange);
-  const visible = outline !== null && outline.sections.length > 0;
-
-  if (!visible || outline === null) {
-    return <TopBarActionMenu pathname={pathname} compact={compactActions} />;
-  }
-
-  const triggerClassName =
-    "focus-visible:outline-action text-foreground/70 flex shrink-0 cursor-pointer items-center justify-center rounded-lg hover:[&>svg]:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2";
+  } = navigation;
+  const triggerClassName = topBarActionClassName();
   const triggerContent = (
     <Bars3BottomRightIcon
       aria-hidden="true"
@@ -60,6 +44,7 @@ export default function TopBarContents({
   );
   const panel = hasOpened ? (
     <ContentsPanel
+      topBarHeight={topBarHeight}
       desktop={desktop}
       open={open}
       outline={outline}
@@ -70,65 +55,51 @@ export default function TopBarContents({
   ) : null;
 
   return (
-    <>
-      <TopBarActionMenu
-        compact={compactActions}
-        pathname={pathname}
-        onSearch={(trigger) => {
-          if (open) {
-            runAfterClose(() => {
-              openSearch(trigger);
-            });
-          } else {
-            openSearch(trigger);
-          }
-        }}
-      />
-      <div
-        className={`flex shrink-0 items-center ${open ? "border-action!" : ""}`}
-      >
-        {desktop ? (
-          <Popover.Root
-            modal={false}
-            onOpenChange={changeOpen}
-            onOpenChangeComplete={finishClose}
-            open={visible && open}
+    <div
+      data-topbar-contents=""
+      className={`flex shrink-0 items-center ${open ? "border-action!" : ""}`}
+    >
+      {desktop ? (
+        <Popover.Root
+          modal={false}
+          onOpenChange={changeOpen}
+          onOpenChangeComplete={finishClose}
+          open={open}
+        >
+          <Popover.Trigger
+            render={
+              <button
+                type="button"
+                aria-label="Table of Contents"
+                aria-keyshortcuts="Alt+C"
+                title="Table of Contents"
+                className={triggerClassName}
+                data-article-toc-trigger=""
+                ref={triggerRef}
+              />
+            }
           >
-            <Popover.Trigger
-              render={
-                <button
-                  type="button"
-                  aria-label="Table of Contents"
-                  aria-keyshortcuts="Alt+C"
-                  title="Table of Contents"
-                  className={triggerClassName}
-                  data-article-toc-trigger=""
-                  ref={triggerRef}
-                />
-              }
-            >
-              {triggerContent}
-            </Popover.Trigger>
-            {panel}
-          </Popover.Root>
-        ) : (
-          <SheetTrigger isOpen={visible && open} onOpenChange={changeOpen}>
-            <AriaButton
-              aria-label="Table of Contents"
-              aria-keyshortcuts="Alt+C"
-              className={triggerClassName}
-              data-article-toc-trigger=""
-              ref={triggerRef}
-              render={(props) => (
-                <button {...props} title="Table of Contents" type="button" />
-              )}
-            >
-              {triggerContent}
-            </AriaButton>
-            {panel}
-          </SheetTrigger>
-        )}
-      </div>
-    </>
+            {triggerContent}
+          </Popover.Trigger>
+          {panel}
+        </Popover.Root>
+      ) : (
+        <SheetTrigger isOpen={open} onOpenChange={changeOpen}>
+          <AriaButton
+            aria-label="Table of Contents"
+            aria-keyshortcuts="Alt+C"
+            className={triggerClassName}
+            data-article-toc-trigger=""
+            ref={triggerRef}
+            render={(props) => (
+              <button {...props} title="Table of Contents" type="button" />
+            )}
+          >
+            {triggerContent}
+          </AriaButton>
+          {panel}
+        </SheetTrigger>
+      )}
+    </div>
   );
 }

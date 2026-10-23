@@ -6,14 +6,14 @@ import { useState } from "react";
 
 import { useTimerSession } from "@/utils/timerSession";
 
+import { topBarActionClassName } from "./TopBarAction";
+
 export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
   const { data } = useTimerSession();
   const [failedPicture, setFailedPicture] = useState<string | null>(null);
   const account = data?.account;
   const label = account ? "Account" : "Sign in with Google";
-  const className = showLabel
-    ? "focus-visible:outline-action text-foreground hover:bg-foreground/5 flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
-    : "focus-visible:outline-action text-foreground/70 hover:text-foreground flex cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2";
+  const className = topBarActionClassName(showLabel);
   const icon =
     account?.picture !== undefined &&
     account.picture !== null &&

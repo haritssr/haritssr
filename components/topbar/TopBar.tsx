@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { memo, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 import { scrollArticleToTop } from "@/components/article/useArticleContentsNavigation";
 import BackButton from "@/components/BackButton";
 import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 import { primaryNavigation } from "@/data/navigation";
+import { navigationCurrent } from "@/utils/navigation/navigationState";
 
-import TopBarActionMenu from "./TopBarActionMenu";
-import TopBarContents from "./TopBarContents";
+import HeaderActions from "./HeaderActions";
+import useTopBarHeight from "./useTopBarHeight";
 
 import styles from "./TopBar.module.css";
 
@@ -45,7 +46,8 @@ export default function TopBar() {
     getServerMobileSnapshot
   );
   const navigationRef = useRef<HTMLElement>(null);
-  const header = useScrolledPageHeader(pathname, navigationRef);
+  const topBarHeight = useTopBarHeight(navigationRef);
+  const header = useScrolledPageHeader(pathname, topBarHeight);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -75,7 +77,8 @@ export default function TopBar() {
       ref={navigationRef}
     >
       <div
-        className={`relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:py-5 xl:px-0 ${showTitle ? "max-sm:grid max-sm:grid-cols-[3.5rem_minmax(0,1fr)_3.5rem]" : ""}`}
+        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-2 sm:py-5 xl:px-0`}
+        data-show-title={showTitle}
       >
         {pathname === "/" ? (
           <Link
@@ -114,45 +117,26 @@ export default function TopBar() {
           key={pathname}
           pathname={pathname}
           compact={compactActions}
+          topBarHeight={topBarHeight}
         />
       </div>
     </nav>
   );
 }
 
-const HeaderActions = memo(
-  ({ pathname, compact }: { pathname: string; compact: boolean }) => {
-    const isNestedRoute = pathname.split("/").filter(Boolean).length > 1;
-
-    return (
-      <div className="flex shrink-0 items-center justify-end gap-4">
-        {isNestedRoute ? (
-          <TopBarContents pathname={pathname} compactActions={compact} />
-        ) : (
-          <TopBarActionMenu pathname={pathname} compact={compact} />
-        )}
-      </div>
-    );
-  }
-);
-HeaderActions.displayName = "HeaderActions";
-
 function TabBarTop({ pathname }: { pathname: string }) {
   return (
     <ul
-      className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 md:flex"
+      className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 lg:flex"
       id="main-navigation"
     >
       {primaryNavigation.map(({ title, href }) => {
-        const exact = pathname === href;
-        const current =
-          exact || (href !== "/" && pathname.startsWith(`${href}/`));
-        const currentLocation = exact ? "page" : "location";
+        const current = navigationCurrent(pathname, href);
         return (
           <li className="flex h-full items-center space-x-3" key={href}>
             <Link
               className="group flex h-full items-center rounded-full"
-              aria-current={current ? currentLocation : undefined}
+              aria-current={current}
               href={href}
             >
               <span

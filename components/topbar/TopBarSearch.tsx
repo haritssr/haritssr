@@ -16,6 +16,8 @@ import type { ReactNode, RefObject } from "react";
 import { navigationRoutes } from "@/data/routes";
 import type { RouteDoc } from "@/data/routes";
 
+import TopBarAction from "./TopBarAction";
+
 type SearchIndexStatus = "error" | "idle" | "loading" | "ready";
 
 let searchIndexRequest: Promise<readonly RouteDoc[]> | undefined;
@@ -170,17 +172,13 @@ export default function TopBarSearch({
   const { hasOpened, open } = useContext(GlobalSearchStatusContext);
 
   return (
-    <button
+    <TopBarAction
       aria-controls={hasOpened ? "global-search-dialog" : undefined}
       aria-expanded={open}
       aria-haspopup="dialog"
       aria-keyshortcuts="Meta+K Control+K"
       aria-label="Search the site"
-      className={
-        showLabel
-          ? "focus-visible:outline-action text-foreground hover:bg-foreground/5 flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left text-sm focus-visible:outline-2 focus-visible:-outline-offset-2"
-          : "text-foreground/70 hover:text-foreground flex cursor-pointer items-center justify-center rounded-lg"
-      }
+      showLabel={showLabel}
       onClick={(event) => {
         if (onSearch) {
           onSearch(event.currentTarget);
@@ -192,14 +190,13 @@ export default function TopBarSearch({
       onPointerEnter={prepareSearch}
       ref={topBarTriggerRef}
       title="Search (Ctrl/⌘ K)"
-      type="button"
     >
       <MagnifyingGlassIcon
         aria-hidden="true"
         className="size-5 shrink-0 stroke-2"
       />
       {showLabel ? <span>Search</span> : null}
-    </button>
+    </TopBarAction>
   );
 }
 

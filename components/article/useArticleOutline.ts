@@ -124,6 +124,7 @@ export default function useArticleOutline(
 
 function observeActiveSection(
   outline: ArticleOutline,
+  topBarHeight: number,
   onActiveChange: (id: string) => void
 ) {
   const entries = [outline.entries[0], ...outline.sections];
@@ -142,7 +143,7 @@ function observeActiveSection(
     while (low <= high) {
       const middle = Math.floor((low + high) / 2);
       const entry = entries[middle];
-      if (entry.target.getBoundingClientRect().top <= 101) {
+      if (entry.target.getBoundingClientRect().top <= topBarHeight + 1) {
         current = entry;
         low = middle + 1;
       } else {
@@ -162,7 +163,7 @@ function observeActiveSection(
   }
 
   const observer = new IntersectionObserver(scheduleActive, {
-    rootMargin: "-100px 0px 0px",
+    rootMargin: `-${topBarHeight}px 0px 0px`,
   });
   for (const entry of entries) {
     observer.observe(entry.target);
@@ -182,17 +183,18 @@ function observeActiveSection(
 
 export function useActiveArticleSection(
   outline: ArticleOutline | null,
-  enabled: boolean
+  enabled: boolean,
+  topBarHeight: number
 ) {
   const [activeId, setActiveId] = useState("");
 
   useLayoutEffect(() => {
     const cleanup =
       enabled && outline !== null
-        ? observeActiveSection(outline, setActiveId)
+        ? observeActiveSection(outline, topBarHeight, setActiveId)
         : undefined;
     return () => cleanup?.();
-  }, [outline, enabled]);
+  }, [outline, enabled, topBarHeight]);
 
   return activeId;
 }

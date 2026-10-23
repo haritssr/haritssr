@@ -4,6 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { primaryNavigation } from "@/data/navigation";
+import {
+  navigationCurrent,
+  showsMobileNavigation,
+} from "@/utils/navigation/navigationState";
 
 export default function TabBarButtom({
   preview = false,
@@ -11,15 +15,7 @@ export default function TabBarButtom({
   preview?: boolean;
 } = {}) {
   const pathname = usePathname();
-  const segments = pathname.split("/").filter(Boolean);
-  const sectionPath = `/${segments[0] ?? ""}`;
-
-  if (
-    !preview &&
-    (segments.length > 2 ||
-      (segments[0] === "writing" && segments.length > 1) ||
-      !primaryNavigation.some(({ href }) => href === sectionPath))
-  ) {
+  if (!preview && !showsMobileNavigation(pathname)) {
     return null;
   }
 
@@ -35,7 +31,13 @@ export default function TabBarButtom({
       >
         <div className="flex w-full items-center">
           {primaryNavigation.map(({ title, icon, href }) => (
-            <IconWrapper href={href} key={title} icon={icon} to={title} />
+            <IconWrapper
+              href={href}
+              key={title}
+              icon={icon}
+              to={title}
+              current={navigationCurrent(pathname, href)}
+            />
           ))}
         </div>
       </div>
@@ -47,22 +49,18 @@ const IconWrapper = ({
   to,
   icon: Icon,
   href,
+  current,
 }: {
   to: string;
   icon: (typeof primaryNavigation)[number]["icon"];
   href: string;
+  current: "page" | "location" | undefined;
 }) => {
-  const pathname = usePathname();
-  const isCurrentPage = pathname === href;
-  const isCurrentSection =
-    isCurrentPage || (href !== "/" && pathname.startsWith(`${href}/`));
-
-  const color = isCurrentSection ? "text-action" : "text-muted";
-  const currentLocation = isCurrentPage ? "page" : "location";
+  const color = current ? "text-action" : "text-muted";
 
   return (
     <Link
-      aria-current={isCurrentSection ? currentLocation : undefined}
+      aria-current={current}
       className="focus-visible:outline-action block min-h-10 min-w-0 flex-1 py-0.5 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2"
       href={href}
     >
