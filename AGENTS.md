@@ -54,8 +54,9 @@ contracts and behavior stay unchanged.
 Verify behavior with existing tests or focused non-test checks, retaining the
 browser/test-file restrictions. Other commands:
 
-- `bun run sync:changelog`: only for requested commits, before staging and after
-  each commit (see Commits). `dev`/`build` also run it automatically.
+- `bun run import:commits --dry-run`: validate Git history without database access.
+- `bun run sync:commits`: manually upload Git history to Turso when requested;
+  never run automatically when committing, developing, or building.
 - `bun run dev`: only when needed and no server exists; never just for checks.
 - `bun run build`: human/CI only; never in an agent environment.
 - `bun run start`: only when asked to serve an existing production build and no
@@ -185,11 +186,9 @@ Apply these defaults to new or refactored labs in every domain:
 # Commits
 
 - Commit only with explicit user permission; committing is a separate action.
-- When asked to commit, run `bun run sync:changelog` before staging and include
-  `app/commits/changelog.json` in the requested commit when it changes. Run it again
-  after every successful commit, including the last commit in a logical batch.
-  Leave the final refreshed snapshot uncommitted: a commit cannot contain its
-  own hash. Do not amend or create extra commits solely to include that hash.
+- Do not generate or restore `changelog.json`. Commit history is imported directly
+  from Git into Turso with `bun run sync:commits`, only when explicitly requested.
+  Creating Git commits does not authorize a database upload.
 - Use `type(context): message`, such as `fix(TopBar): align back icon`.
   Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
 - Review staged changes and related documentation. Keep project guidance accurate

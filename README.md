@@ -22,17 +22,17 @@
 - Every footer shows breadcrumbs above the Jakarta date, with a live 24-hour WIB
   clock beside the date. Updates pause in hidden tabs and resume immediately on return;
   the display uses local clock data without API or database reads.
-- Commit maintenance scripts live beside their data in `app/commits/`:
-  `sync-changelog.ts` refreshes the Git snapshot and `import-commits.ts` uploads it.
-  `bun run import:commits` copies `app/commits/changelog.json` into the separate
-  Turso `commits` table; an optional JSON path can be passed. Configure
+- The commit importer lives in `app/commits/import-commits.ts`.
+  `bun run sync:commits` (or `bun run import:commits`) reads Git history directly
+  into the separate Turso `commits` table from a full Git checkout. It includes
+  authors Harits Syah and haritssr and rejects shallow checkouts. Configure
   `TURSO_COMMITS_DATABASE_URL` and `TURSO_COMMITS_AUTH_TOKEN` in `.env.local`.
-  The importer validates the snapshot before connecting, uploads in one transaction,
+  The importer validates Git records before connecting, uploads in one transaction,
   and verifies every source record before committing. Reruns update changed hashes
-  without duplicating rows or deleting extra history. The JSON remains the import
-  source and backup. Run `bun run sync:commits` after committing to refresh the Git
-  snapshot and upload new records; importing is manual, never part of deployments.
-  This command updates the JSON snapshot in the working tree.
+  without duplicating rows or deleting extra history. Run it manually after committing
+  to upload new records; importing never runs during development, builds, or commits.
+  `bun run import:commits --dry-run` validates Git history without database access.
+  No JSON snapshot is generated or required.
 - `/commits`, its dated analysis pages, `/api/commits`, and the homepage commit count
   read the separate Turso database through the server-only `utils/commits/commitHistory.ts`.
   The homepage uses a separate count-only query cached for 24 hours, so home visits
@@ -45,7 +45,7 @@
   returns an uncached 503; the homepage keeps its Tools links without the count.
   Next.js can retain previously cached results during revalidation failures.
   Set the two `TURSO_COMMITS_*` variables in Vercel Production and Preview before
-  deploying. No runtime reader falls back to the JSON snapshot.
+  deploying. Runtime readers have no local file fallback.
   `/commits/details`, linked before Changelog in the Commits header,
   documents storage, cache consumers and periods, request-driven refreshes,
   database usage, and the manual import workflow.
@@ -212,8 +212,8 @@ or demo. Writing MDX and its automatic module discovery live in
 `app/writing/content/`, while the Next.js posts demo reads Markdown from
 `app/labs/nextjs/posts/content/`. The active lab catalog and its metadata helpers
 live in `app/labs/data.ts`; discontinued records live in
-`app/labs/discontinued-data.ts`. The generated changelog import snapshot and backup lives in
-`app/commits/changelog.json`; the site-wide route registry remains in `data/`.
+`app/labs/discontinued-data.ts`. Commit history lives in Git and Turso; the
+site-wide route registry remains in `data/`.
 The server-only `utils/discovery/routeManifest.ts` derives available routes, dynamic
 patterns, parents, and update dates from these sources. Search, sitemap, and
 tree reuse the manifest; content validation checks its page files and production
@@ -286,7 +286,7 @@ between short and long pages keeps the centered layout in place.
 Commit-specific components live in `app/commits/_components/`.
 
 Commit history defaults to the latest recorded day and renders at most 50 rows
-on first load. `/api/commits` filters the committed snapshot and computes summary
+on first load. `/api/commits` filters cached Turso history and computes summary
 counts and activity buckets on the server; later selections load on demand with
 public response caching. Period, date, type, query, and row limit live in the URL;
 Back/Forward restore them, and typing updates are debounced before requests.

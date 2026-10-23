@@ -4,7 +4,8 @@
   "entry": [
     "public/sw.js",
     "scripts/{inspect-*-db.js,validate-content.ts}!",
-    "app/commits/{import-commits,sync-changelog}.ts!",
+    // Bun discovers this script in development; production mode needs it explicitly.
+    "app/commits/import-commits.ts!",
     "app/timer/{migrate-timer,seed-timer}.ts!",
     "app/writing/content/*.mdx",
   ],

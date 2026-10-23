@@ -12,6 +12,8 @@
 # misc
 .DS_Store
 *.pem
+# Commit history is imported directly from Git; do not restore JSON snapshots.
+/app/commits/changelog.json
 
 # debug
 npm-debug.log*

@@ -1,29 +1,64 @@
-import { readFile } from "node:fs/promises";
+import { spawnSync } from "node:child_process";
 
 import { createClient } from "@libsql/client";
 import { z } from "zod";
 
-const snapshotSchema = z.object({
-  commits: z
-    .array(
-      z.object({
-        hash: z.string().regex(/^[a-f0-9]{40}$/u),
-        date: z.iso.datetime({ offset: true }),
-        subject: z.string().min(1),
-      })
-    )
-    .min(1)
-    .refine(
-      (commits) =>
-        new Set(commits.map((commit) => commit.hash)).size === commits.length,
-      "Commit hashes must be unique."
-    ),
-});
+const commitsSchema = z
+  .array(
+    z.object({
+      hash: z.string().regex(/^[a-f0-9]{40}$/u),
+      date: z.iso.datetime({ offset: true }),
+      subject: z.string().min(1),
+    })
+  )
+  .min(1)
+  .refine(
+    (commits) =>
+      new Set(commits.map((commit) => commit.hash)).size === commits.length,
+    "Commit hashes must be unique."
+  );
 
-const source = process.argv.at(2) ?? new URL("changelog.json", import.meta.url);
-const { commits } = snapshotSchema.parse(
-  JSON.parse(await readFile(source, "utf-8"))
+const cliArgs = process.argv.slice(2);
+if (
+  cliArgs.length > 1 ||
+  (cliArgs.length === 1 && cliArgs[0] !== "--dry-run")
+) {
+  throw new Error("Usage: bun run import:commits [--dry-run]");
+}
+
+function git(args: string[]): string {
+  const result = spawnSync("git", args, {
+    cwd: new URL("../../", import.meta.url),
+    encoding: "utf-8",
+    maxBuffer: 16 * 1024 * 1024,
+  });
+  if (result.error || result.status !== 0) {
+    throw new Error("Cannot read Git history. Run from a full Git checkout.", {
+      cause: result.error ?? result.stderr.trim(),
+    });
+  }
+  return result.stdout.trim();
+}
+
+if (git(["rev-parse", "--is-shallow-repository"]) !== "false") {
+  throw new Error("A full Git checkout is required to import commit history.");
+}
+const authors = new Set(["Harits Syah", "haritssr"]);
+const records = git(["log", "HEAD", "--format=%H%x00%aI%x00%an%x00%s"]);
+const commits = commitsSchema.parse(
+  records.split("\n").flatMap((line) => {
+    const [hash, date, author, subject] = line.split("\0");
+    return author !== undefined && authors.has(author)
+      ? [{ hash, date, subject }]
+      : [];
+  })
 );
+if (cliArgs[0] === "--dry-run") {
+  console.info(
+    `Validated ${commits.length} Git commits. No database changes made.`
+  );
+  process.exit(0);
+}
 const url = process.env.TURSO_COMMITS_DATABASE_URL;
 const authToken = process.env.TURSO_COMMITS_AUTH_TOKEN;
 if (
@@ -72,7 +107,7 @@ try {
     }
     await tx.commit();
     console.info(
-      `Verified ${commits.length} source commits; inserted or updated ${changed}. Database contains ${result.rows.length} commits. Source JSON was preserved.`
+      `Verified ${commits.length} Git commits; inserted or updated ${changed}. Database contains ${result.rows.length} commits.`
     );
   } catch (error) {
     await tx.rollback();

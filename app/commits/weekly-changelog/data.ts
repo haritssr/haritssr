@@ -10,7 +10,7 @@ interface WeeklyEntry extends WeekSummary {
   partial: boolean;
 }
 
-// Curated from changelog.json through e7442486deb52ebd3569aec77b6b0766f7dc702c.
+// Curated from Git history through e7442486deb52ebd3569aec77b6b0766f7dc702c.
 // Update the cutoff and summaries together; future commits are not summarized automatically.
 export const reviewedThrough = "2026-10-22";
 

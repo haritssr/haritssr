@@ -55,8 +55,9 @@ export default function CommitsDetailsPage() {
           <p>
             The cache belongs to Next.js: locally it uses generated storage
             under .next, while Vercel manages it for the deployed site. Local
-            and deployed environments have separate caches. The cache is
-            separate from the source snapshot in app/commits/changelog.json.
+            and deployed environments have separate caches. Commit history is
+            imported directly from Git into Turso; no local JSON snapshot is
+            used.
           </p>
         </Section>
 
@@ -259,11 +260,12 @@ export default function CommitsDetailsPage() {
 
         <Section id="updates" title="Publishing changes and handling failures">
           <p>
-            The update workflow is Git history, then changelog.json, then a
-            manual import into Turso. Run bun run sync:commits after committing
-            to refresh the snapshot and upload records. Imports preserve
-            existing history and skip unchanged records. Deploying the site does
-            not upload commits automatically.
+            The update workflow is Git history directly into Turso. Run bun run
+            sync:commits manually after committing from a full Git checkout to
+            upload records. Run bun run import:commits --dry-run to validate the
+            source without database access. Imports preserve existing history
+            and skip unchanged records. Deploying the site does not upload
+            commits automatically.
           </p>
           <p>
             An import does not invalidate either data cache. New records become
@@ -275,7 +277,8 @@ export default function CommitsDetailsPage() {
             If a background refresh fails, Next.js can retain previously cached
             data. When no usable result is available, the homepage still shows
             its Tools links without the count, and the API returns an uncached
-            503 response. Runtime readers do not fall back to changelog.json.
+            503 response. Runtime readers use Turso without a local file
+            fallback.
           </p>
         </Section>
       </div>
