@@ -11,7 +11,6 @@ import useArticleContentsNavigation from "@/components/article/useArticleContent
 import useArticleOutline from "@/components/article/useArticleOutline";
 
 import TopBarActionMenu from "./TopBarActionMenu";
-import TopBarActions from "./TopBarActions";
 import { useGlobalSearch } from "./TopBarSearch";
 
 const ContentsPanel = dynamic(
@@ -19,11 +18,11 @@ const ContentsPanel = dynamic(
 );
 
 export default function TopBarContents({
-  mobile,
   pathname,
+  compactActions,
 }: {
-  mobile: boolean;
   pathname: string;
+  compactActions: boolean;
 }) {
   const mainRef = useRef<HTMLElement>(null);
   const { openSearch } = useGlobalSearch();
@@ -46,10 +45,9 @@ export default function TopBarContents({
   } = useArticleContentsNavigation(1);
   const outline = useArticleOutline(mainRef, "Contents", onOutlineChange);
   const visible = outline !== null && outline.sections.length > 0;
-  const collapseActions = mobile && visible;
 
   if (!visible || outline === null) {
-    return <TopBarActionMenu mobile={mobile} pathname={pathname} />;
+    return <TopBarActionMenu pathname={pathname} compact={compactActions} />;
   }
 
   const triggerClassName =
@@ -68,28 +66,24 @@ export default function TopBarContents({
       finalFocus={finalFocus}
       sheetRef={sheetRef}
       onSelect={selectEntry}
-      mobileActions={
-        collapseActions ? (
-          <TopBarActions
-            pathname={pathname}
-            onSearch={(trigger) => {
-              runAfterClose(() => {
-                openSearch(triggerRef.current ?? trigger);
-              });
-            }}
-          />
-        ) : undefined
-      }
     />
   ) : null;
 
   return (
     <>
-      {collapseActions ? null : (
-        <div className="hidden sm:block">
-          <TopBarActions pathname={pathname} />
-        </div>
-      )}
+      <TopBarActionMenu
+        compact={compactActions}
+        pathname={pathname}
+        onSearch={(trigger) => {
+          if (open) {
+            runAfterClose(() => {
+              openSearch(trigger);
+            });
+          } else {
+            openSearch(trigger);
+          }
+        }}
+      />
       <div
         className={`flex shrink-0 items-center ${open ? "border-action!" : ""}`}
       >

@@ -98,8 +98,12 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
         event.preventDefault();
         event.stopPropagation();
         if (!event.repeat) {
+          if (open) {
+            setOpen(false);
+            return;
+          }
           const trigger = topBarTriggerRef.current;
-          if (trigger?.closest('[role="dialog"]')) {
+          if (trigger) {
             trigger.click();
             return;
           }
@@ -107,11 +111,9 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
           setHasOpened(true);
           activeTriggerRef.current =
             topBarTriggerRef.current ??
-            document.querySelector<HTMLElement>(
-              "[data-article-toc-trigger], [data-header-actions-trigger]"
-            );
+            document.querySelector<HTMLElement>("[data-article-toc-trigger]");
           setQuery("");
-          setOpen((previous) => !previous);
+          setOpen(true);
         }
       }
     }
@@ -126,7 +128,7 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
       document.removeEventListener("keydown", handleKeyDown, true);
       window.removeEventListener("popstate", closeSearch);
     };
-  }, [prepareSearch]);
+  }, [open, prepareSearch]);
 
   return (
     <GlobalSearchContext.Provider value={contextValue}>

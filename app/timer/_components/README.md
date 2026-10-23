@@ -210,6 +210,6 @@ form values are unaffected. `TimerDataControls` owns
 backup state and passes its actions into `TimerToolbar`. Only errors appear above
 the toolbar; save status, backup guidance, and success messages are omitted.
 
-Account access lives beside View Source in the shared top bar (inside Page actions on mobile). The Google photo opens an account menu with email and Sign out; missing or failed photos use a profile icon. Existing sessions gain photos after signing in again. Timer authorization remains owner-only.
+Account access stays beside View Source in the shared top bar. Below 640px, both move into Page actions while the scrolling page title is visible. The Google photo opens an account menu with email and Sign out; missing or failed photos use a profile icon. Existing sessions gain photos after signing in again. Timer authorization remains owner-only.
 
 Task action buttons use Trash, Play, Pause, and outline Check icons with a heavier `strokeWidth={2.5}` with hover labels and accessible names. Start uses Play and Continue uses Forward; Delete retains its confirmation dialog. The Edit Task header uses a text Delete button.

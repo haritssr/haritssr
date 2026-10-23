@@ -1,8 +1,8 @@
 "use client";
 
-import { Dialog } from "@base-ui/react/dialog";
+import { Popover } from "@base-ui/react/popover";
 import { QueueListIcon } from "@heroicons/react/24/outline";
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import SharePageProvider from "@/components/SharePageProvider";
 
@@ -10,123 +10,93 @@ import TopBarActions from "./TopBarActions";
 import { useGlobalSearch } from "./TopBarSearch";
 
 export default function TopBarActionMenu({
-  mobile,
+  compact,
   pathname,
-  compact = true,
+  onSearch,
 }: {
-  mobile: boolean;
+  compact: boolean;
   pathname: string;
-  compact?: boolean;
+  onSearch?: (trigger: HTMLButtonElement) => void;
 }) {
-  return mobile && compact ? (
-    <MobileActionMenu pathname={pathname} />
+  return compact ? (
+    <CompactActionMenu pathname={pathname} onSearch={onSearch} />
   ) : (
-    <div className={compact ? "hidden sm:block" : undefined}>
-      <TopBarActions pathname={pathname} />
-    </div>
+    <TopBarActions pathname={pathname} onSearch={onSearch} />
   );
 }
 
-function MobileActionMenu({ pathname }: { pathname: string }) {
+function CompactActionMenu({
+  pathname,
+  onSearch,
+}: {
+  pathname: string;
+  onSearch?: (trigger: HTMLButtonElement) => void;
+}) {
   const [open, setOpen] = useState(false);
   const searchRequested = useRef(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const popupRef = useRef<HTMLDivElement>(null);
   const { openSearch } = useGlobalSearch();
-
-  const updatePosition = useCallback(() => {
-    const trigger = triggerRef.current;
-    const popup = popupRef.current;
-    if (!trigger || !popup) {
-      return;
+  const requestSearch = () => {
+    if (triggerRef.current) {
+      (onSearch ?? openSearch)(triggerRef.current);
     }
-    const rect = trigger.getBoundingClientRect();
-    popup.style.top = `${rect.bottom + 12}px`;
-    popup.style.right = `${Math.max(16, document.documentElement.clientWidth - rect.right)}px`;
-  }, []);
-
-  const setPopupRef = useCallback(
-    (element: HTMLDivElement | null) => {
-      popupRef.current = element;
-      if (element) {
-        updatePosition();
-      }
-    },
-    [updatePosition]
-  );
-
-  useLayoutEffect(() => {
-    if (open) {
-      updatePosition();
-      window.addEventListener("resize", updatePosition);
-      window.visualViewport?.addEventListener("resize", updatePosition);
-    }
-    return () => {
-      window.removeEventListener("resize", updatePosition);
-      window.visualViewport?.removeEventListener("resize", updatePosition);
-    };
-  }, [open, updatePosition]);
+  };
 
   return (
     <SharePageProvider>
-      <Dialog.Root
+      <Popover.Root
         modal
         open={open}
         onOpenChange={setOpen}
         onOpenChangeComplete={(nextOpen) => {
-          if (!nextOpen && searchRequested.current && triggerRef.current) {
+          if (!nextOpen && searchRequested.current) {
             searchRequested.current = false;
-            openSearch(triggerRef.current);
+            requestSearch();
           }
         }}
       >
-        <div
-          className={`flex shrink-0 items-center ${open ? "border-action!" : ""}`}
+        <Popover.Trigger
+          aria-label="Page actions"
+          title="Page actions"
+          ref={triggerRef}
+          className="focus-visible:outline-action text-foreground/70 hover:text-foreground flex shrink-0 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
         >
-          <Dialog.Trigger
-            aria-label="Page actions"
-            title="Page actions"
-            data-header-actions-trigger=""
-            ref={triggerRef}
-            className="focus-visible:outline-action text-foreground/70 flex shrink-0 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 hover:[&>svg]:opacity-50"
-          >
-            <QueueListIcon
-              aria-hidden="true"
-              className="pointer-events-none size-5"
-            />
-          </Dialog.Trigger>
-        </div>
-        <Dialog.Portal>
-          <Dialog.Backdrop className="fixed inset-0 z-50" />
-          <Dialog.Popup
-            ref={setPopupRef}
-            onClick={(event) => {
-              if (
-                event.target instanceof Element &&
-                event.target.closest("button, a[href]") &&
-                !event.target.closest("[data-account-control]")
-              ) {
-                setOpen(false);
+          <QueueListIcon aria-hidden="true" className="size-5" />
+        </Popover.Trigger>
+        <Popover.Portal keepMounted>
+          <Popover.Positioner align="end" sideOffset={12} className="z-50">
+            <Popover.Popup
+              aria-label="Page actions"
+              finalFocus={() =>
+                searchRequested.current ? false : triggerRef.current
               }
-            }}
-            finalFocus={() =>
-              searchRequested.current ? false : triggerRef.current
-            }
-            className="border-middle-hover text-foreground corner-squircle fixed z-50 w-45 max-w-[calc(100vw-2rem)] overflow-hidden rounded-4xl border bg-white/50 shadow-xl outline-hidden saturate-150 backdrop-blur-lg"
-          >
-            <Dialog.Title className="sr-only">Page actions</Dialog.Title>
-            <TopBarActions
-              layout="list"
-              pathname={pathname}
-              onSearch={() => {
-                searchRequested.current = true;
-                setOpen(false);
+              onClick={(event) => {
+                if (
+                  event.target instanceof Element &&
+                  event.target.closest("button, a[href]") &&
+                  !event.target.closest("[data-account-control]")
+                ) {
+                  setOpen(false);
+                }
               }}
-            />
-            <Dialog.Close className="sr-only">Close page actions</Dialog.Close>
-          </Dialog.Popup>
-        </Dialog.Portal>
-      </Dialog.Root>
+              className="border-border text-foreground corner-squircle w-48 max-w-[calc(100vw-2rem)] rounded-2xl border bg-white/80 shadow-xl outline-hidden backdrop-blur-lg"
+            >
+              <TopBarActions
+                layout="list"
+                pathname={pathname}
+                onSearch={() => {
+                  if (open) {
+                    searchRequested.current = true;
+                    setOpen(false);
+                  } else {
+                    requestSearch();
+                  }
+                }}
+              />
+            </Popover.Popup>
+          </Popover.Positioner>
+        </Popover.Portal>
+      </Popover.Root>
     </SharePageProvider>
   );
 }

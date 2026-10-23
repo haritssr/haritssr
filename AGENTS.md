@@ -165,6 +165,10 @@ Apply these defaults to new or refactored labs in every domain:
   for `useScrolledPageHeader`. Use Home when matching back metadata is unavailable.
   The title replaces center navigation only after scrolling behind the top bar;
   returning to the title restores center navigation while retaining the back pill.
+- Keep Search, Share, View Source, and account controls inline at the page top
+  and on Home. Below 640px, group them in a Page actions menu only while the
+  scrolled page title is visible. Center that title with equal-width side columns.
+  Keep Contents separate; never move page actions into its sheet.
 - Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
   shared `SectionHeading` components) show `TopBarContents` in its
   own pill to the right of the top bar actions. Contents use rendered heading anchors,

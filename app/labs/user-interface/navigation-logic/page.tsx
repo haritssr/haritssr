@@ -35,31 +35,26 @@ const diagrams = [
     id: "actions-and-contents",
     title: "Actions and Contents",
     description:
-      "Search, Share, and View Source stay inline when space allows. Nested pages with visible section headings use a Contents trigger, including before scrolling.",
+      "Page actions stay inline at the page top and on Home. Below 640px, they collapse into a menu while the scrolling title is visible. Contents keeps a separate trigger.",
     definition: `flowchart TD
       accTitle: Choosing top bar actions and Contents
-      accDescr: Nested routes with visible section headings show Contents. Below 640 pixels their actions move into the Contents sheet. Other mobile routes collapse actions after scrolling, while nested routes without headings always collapse them.
+      accDescr: Page actions collapse into a menu only below 640 pixels while the scrolling title is visible. Otherwise they stay inline. Nested routes with headings add a separate Contents trigger.
+      State{"Below 640px and scrolling title visible?"}
+      State -->|Yes| Menu["Page actions menu; title centered with equal side columns"]
+      State -->|No| Actions["Inline Search, Share, View Source, and account controls"]
       Route["Current route"] --> Nested{"More than one path segment?"}
       Nested -->|Yes| Headings{"Visible content headings h2–h6?"}
       Headings -->|Yes| Contents["Show Contents trigger"]
-      Contents --> Small{"Below 640px?"}
-      Small -->|Yes| SheetActions["Only Contents in top bar; actions inside its sheet"]
-      Small -->|No| InlineContents["Inline actions beside Contents trigger"]
-      Nested -->|No| Scroll{"scrollY greater than 0?"}
-      Scroll -->|No| Inline["Inline actions"]
-      Scroll -->|Yes| Mobile{"Below 640px?"}
-      Headings -->|No| Mobile
-      Mobile -->|Yes| Menu["Page actions trigger"]
-      Mobile -->|No| Inline
-      Menu --> Dialog["Open modal below trigger; lock scrolling and trap focus"]
-      Dialog --> Select["Select Search, Copy URL, or View Source"]
-      Select --> Close["Close menu; Search opens after close completes"]`,
+      Contents --> Beside["Keep Contents separate from page actions"]
+      Beside --> State
+      Nested -->|No| State
+      Headings -->|No| State`,
   },
   {
     id: "contents-navigation",
     title: "Inside Contents",
     description:
-      "The panel uses rendered heading anchors, excludes disclosure triggers, and tracks the current section while open. The sheet breakpoint is 1024px, while actions move into it only below 640px.",
+      "The panel uses rendered heading anchors, excludes disclosure triggers, and tracks the current section while open. Below 1024px it opens as a sheet; page actions remain in the top bar.",
     definition: `flowchart TD
       accTitle: Contents panel and heading navigation
       accDescr: Contents opens as a desktop popover at 1024 pixels or wider and a bottom sheet below that width. Selecting a heading closes the panel before updating the URL hash and scrolling.
@@ -73,7 +68,6 @@ const diagrams = [
       Select -->|Choose heading| Close["Close panel; wait for focus restoration"]
       Close --> Hash["Update URL hash; scroll to heading"]
       Hash --> Keyboard["Keyboard selection also focuses the heading"]
-      Select -->|Choose Search in sheet| Search["Close sheet, then open Search"]
       Select -->|Dismiss| Focus["Restore focus to Contents trigger"]
       Track -->|Cross 1024px breakpoint| Reset["Close panel and cancel pending navigation"]`,
   },

@@ -64,6 +64,9 @@ export default function TopBar() {
     };
   }, []);
 
+  const showTitle = pathname !== "/" && header?.scrolled === true;
+  const compactActions = mobile && showTitle;
+
   return (
     <nav
       aria-label="Primary navigation"
@@ -71,7 +74,9 @@ export default function TopBar() {
       data-scrolled={scrolled}
       ref={navigationRef}
     >
-      <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:py-5 xl:px-0">
+      <div
+        className={`relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:py-5 xl:px-0 ${showTitle ? "max-sm:grid max-sm:grid-cols-[3.5rem_minmax(0,1fr)_3.5rem]" : ""}`}
+      >
         {pathname === "/" ? (
           <Link
             className="text-foreground sm:text-foreground/70 flex min-w-0 items-center"
@@ -86,11 +91,11 @@ export default function TopBar() {
             name={header?.backLabel ?? "Home"}
           />
         )}
-        {pathname !== "/" && header?.scrolled === true ? (
+        {showTitle ? (
           // TitleWhileScroll
           <div className="flex min-w-0 flex-1 justify-center">
             <Link
-              className="text-foreground flex w-fit max-w-full min-w-0 items-center px-4 font-medium"
+              className="text-foreground flex w-fit max-w-full min-w-0 items-center px-2 font-medium sm:px-4"
               href={pathname}
               onNavigate={(event) => {
                 event.preventDefault();
@@ -107,9 +112,8 @@ export default function TopBar() {
         )}
         <HeaderActions
           key={pathname}
-          mobile={mobile}
           pathname={pathname}
-          scrolled={scrolled}
+          compact={compactActions}
         />
       </div>
     </nav>
@@ -117,27 +121,15 @@ export default function TopBar() {
 }
 
 const HeaderActions = memo(
-  ({
-    mobile,
-    pathname,
-    scrolled,
-  }: {
-    mobile: boolean;
-    pathname: string;
-    scrolled: boolean;
-  }) => {
+  ({ pathname, compact }: { pathname: string; compact: boolean }) => {
     const isNestedRoute = pathname.split("/").filter(Boolean).length > 1;
 
     return (
-      <div className="flex shrink-0 items-center gap-4">
+      <div className="flex shrink-0 items-center justify-end gap-4">
         {isNestedRoute ? (
-          <TopBarContents mobile={mobile} pathname={pathname} />
+          <TopBarContents pathname={pathname} compactActions={compact} />
         ) : (
-          <TopBarActionMenu
-            compact={scrolled}
-            mobile={mobile}
-            pathname={pathname}
-          />
+          <TopBarActionMenu pathname={pathname} compact={compact} />
         )}
       </div>
     );

@@ -190,10 +190,10 @@ top bar, it replaces the center navigation. Returning to the title restores cent
 navigation while keeping the back button visible.
 Clicking the scrolling title clears the URL fragment
 without adding a history entry, preserves query parameters, and scrolls to the top.
-On every screen size, the scrolling title is centered in the available space
-between the Back pill and the complete right-hand control group, with equal
-gaps on either side. The title pill fits its text and truncates long titles
-within that space.
+Below 640px, the scrolling title is centered in the bar with equal-width side
+columns for Back and the compact action controls. At larger widths, it is centered
+in the available space between Back and the complete right-hand control group.
+Long titles truncate within that space.
 
 The desktop navigation pill is also visible on Home and lists Home, Projects,
 Labs, Writing, and Design in that order. It appears from 1024px so all
@@ -224,26 +224,17 @@ availability.
 Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
 shared `SectionHeading` components) show an icon-only
 Contents button in its own pill to the right of the top bar actions. Contents opens
-below the trigger on desktop and in a sheet on mobile. Below 640px, Search,
-Share, and GitHub always appear inside the sheet below its grab handle,
-including before scrolling. Only the Contents trigger appears in the top bar.
-Home and first-level routes show the inline actions pill at the page top,
-collapsing it into Page actions on mobile after scrolling. Nested pages without
-contents always show a matching Page actions
-pill with the same list icon as Contents on mobile, opening the actions in a
-modal Dialog that locks background scrolling and traps focus. Desktop shows the
-inline actions pill instead. The menu stays right-aligned below its trigger and uses
-the Contents panel material and rounded corners, with vertical icon-and-label
-rows for Search, Copy URL, and View Source.
-Selecting any action closes the dialog; copy-link feedback remains visible
-after it closes.
-Search waits for the sheet or actions dialog to close; its shortcut remains
-available and returns focus to the corresponding trigger.
-The top bar shares one mobile breakpoint subscription across its controls and
-updates scroll state only when entering or leaving the page top. Header discovery
+below the trigger on desktop and in a sheet on mobile. Search, Share, View Source,
+and account controls stay inline at the page top and on Home. Below 640px, they
+collapse into a Page actions menu only while the scrolling title is visible.
+Contents keeps its own trigger; actions never move into its sheet.
+Search closes an open Contents panel before opening its dialog, and its shortcut
+returns focus to the Search button or compact Page actions trigger when dismissed.
+The top bar updates scroll state only when entering or leaving the page top and
+subscribes to the mobile breakpoint rather than continuous resize events. Header discovery
 ignores unrelated content mutations. Active-section tracking runs inside the
 Contents panel only while it is open; search status updates are isolated from
-the menu action callbacks.
+the navigation action callbacks.
 Home and first-level routes omit the Contents button. Writing and lab
 articles have no floating back-to-top button.
 

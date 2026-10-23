@@ -4,7 +4,7 @@ import { Popover } from "@base-ui/react/popover";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { memo } from "react";
-import type { MouseEvent, ReactNode, Ref } from "react";
+import type { MouseEvent, Ref } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { Heading } from "react-aria-components/Heading";
 import {
@@ -107,14 +107,12 @@ export default function ArticleContentsPanel({
   finalFocus,
   onSelect,
   sheetRef,
-  mobileActions,
 }: Pick<ContentsListProps, "onSelect"> & {
   desktop: boolean;
   open: boolean;
   outline: ArticleOutline;
   finalFocus: () => false | HTMLElement | null;
   sheetRef: Ref<HTMLDivElement>;
-  mobileActions?: ReactNode;
 }) {
   const activeId = useActiveArticleSection(outline, open);
   const closeIcon = (
@@ -206,11 +204,6 @@ export default function ArticleContentsPanel({
             aria-hidden="true"
             className="bg-border mx-auto mt-3 h-1 w-10 shrink-0 rounded-full"
           />
-          {mobileActions !== undefined && mobileActions !== null ? (
-            <div className="flex shrink-0 justify-end pt-3 pr-5 pb-1">
-              {mobileActions}
-            </div>
-          ) : null}
           {content}
         </SheetContent>
       </Sheet>
