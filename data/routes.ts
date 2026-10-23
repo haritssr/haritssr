@@ -79,7 +79,15 @@ export const october22AnalysisRoute: RouteDoc = {
   group: "Commits",
 };
 
+export const urlRoute: RouteDoc = {
+  route: "/url",
+  title: "URL",
+  description: "Remove URL parameters and fragments.",
+  group: "Tools",
+};
+
 export const navigationRoutes: readonly RouteDoc[] = [
+  urlRoute,
   {
     route: "/tree",
     title: "Tree",
