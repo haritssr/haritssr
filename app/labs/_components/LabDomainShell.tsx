@@ -45,7 +45,7 @@ export default function LabDomainShell({
   return (
     <div className="w-full">
       <div className="w-full">
-        <article className="sm:px-0">
+        <article className="sm:px-0" data-lab-content="">
           <LabHeaderContext
             value={{
               back: { href: parentPath, name: backButtonName },

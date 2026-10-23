@@ -282,39 +282,49 @@ select:focus {
   }
 }
 
-/* Thin scrollbars for compact scrollable content */
-.scrollbar-subtle {
+/* Thin scrollbars for compact scrollable content and lab overflow areas. */
+@utility scrollbar-subtle {
   scrollbar-color: color-mix(in srgb, currentcolor 25%, transparent) transparent;
   scrollbar-width: thin;
-}
 
-/* Let explicit scrollbar dimensions apply where WebKit styling is supported. */
-@supports selector(::-webkit-scrollbar) {
-  .scrollbar-subtle {
+  /* Let explicit scrollbar dimensions apply where WebKit styling is supported. */
+  @supports selector(::-webkit-scrollbar) {
     scrollbar-color: auto;
     scrollbar-width: auto;
   }
+
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, currentcolor 25%, transparent);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, currentcolor 40%, transparent);
+    background-clip: padding-box;
+  }
 }
 
-.scrollbar-subtle::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
-}
-
-.scrollbar-subtle::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scrollbar-subtle::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, currentcolor 25%, transparent);
-  background-clip: padding-box;
-  border: 2px solid transparent;
-  border-radius: 9999px;
-}
-
-.scrollbar-subtle::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, currentcolor 40%, transparent);
-  background-clip: padding-box;
+article[data-lab-content]
+  :is(
+    [class~="overflow-auto"],
+    [class~="overflow-scroll"],
+    [class~="overflow-x-auto"],
+    [class~="overflow-x-scroll"],
+    [class~="overflow-y-auto"],
+    [class~="overflow-y-scroll"]
+  ) {
+  @apply scrollbar-subtle;
 }
 
 /* Hide scrollbar for scrollable elements */
