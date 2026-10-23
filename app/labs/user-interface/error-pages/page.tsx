@@ -6,6 +6,7 @@ import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
 
 import ErrorPreview from "./ErrorPreview";
+import GlobalErrorPreview from "./GlobalErrorPreview";
 
 export const metadata = getLabMetadata("user-interface", "error-pages");
 
@@ -19,6 +20,27 @@ export default function ErrorPagesLab() {
       </LabPageHeader>
       <div className="space-y-16">
         <Section
+          title="Open a status page"
+          description="Access the site’s fallback pages and preview its global error screen."
+        >
+          <nav aria-label="Status pages" className="flex flex-wrap gap-5">
+            <InternalLink href="/labs/user-interface/error-pages/missing-page-preview">
+              Not found
+            </InternalLink>
+            <InternalLink href="#global-error">Global error</InternalLink>
+            <InternalLink href="/offline.html">Offline</InternalLink>
+            <InternalLink href="#error-playground">HTTP errors</InternalLink>
+          </nav>
+        </Section>
+        <Section
+          id="global-error"
+          title="This site’s global error page"
+          description="Shown when an application failure reaches the root error boundary."
+        >
+          <GlobalErrorPreview />
+        </Section>
+        <Section
+          id="error-playground"
           title="Error playground"
           description="Choose a state to compare its message, meaning, and recovery action."
         >

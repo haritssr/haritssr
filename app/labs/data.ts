@@ -1030,7 +1030,7 @@ export const LabsData: readonly LabDomain[] = [
         slug: "error-pages",
         title: "Error Pages",
         description:
-          "Preview offline screens, HTTP errors, and application failures.",
+          "Access not-found, global-error, offline, and HTTP error screens.",
         tags: ["errors", "http", "offline", "design"],
         createdAt: "2026-10-23",
         updatedAt: ["2026-10-23"],
