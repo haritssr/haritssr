@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "b6184581e4a255bf8927c40341caf4fde9e858fc",
+      "date": "2026-10-23T11:17:15+07:00",
+      "subject": "style(Buttons): standardize corners and status actions"
+    },
+    {
       "hash": "d02869299ad3754f13e82425faea440475f00dbf",
       "date": "2026-10-23T11:16:52+07:00",
       "subject": "style(Navigation): refine press feedback and tablet visibility"

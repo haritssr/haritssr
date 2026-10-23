@@ -138,13 +138,17 @@ export default function FlowDiagram({
             theme.getPropertyValue(`--color-${token}`).trim()
           );
         }
-        // Node classes named after design tokens opt into colored outlines.
+        // Token classes color outlines and add a subtle matching background.
         for (const token of ["action", "attention", "success", "danger"]) {
           const color = theme.getPropertyValue(`--color-${token}`).trim();
           for (const shape of element.querySelectorAll<SVGElement>(
             `.pele-node.${token} [stroke]`
           )) {
             shape.style.setProperty("stroke", color);
+            shape.style.setProperty(
+              "fill",
+              `color-mix(in srgb, ${color} 12%, ${theme.getPropertyValue("--color-background").trim()})`
+            );
           }
         }
         element.setAttribute("width", String(width));
