@@ -39,11 +39,6 @@ export default function TaskCard({
             spent={spent}
             running={running}
             appearance={appearance}
-            speedControl={
-              <span className="ml-2 inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
-                <TaskSpeedControl task={task} date={date} showIcon={false} />
-              </span>
-            }
           />
         </div>
         <TaskActions
@@ -68,6 +63,9 @@ function TaskHeader({ task, date }: { task: TimerTask; date: string }) {
         {task.activity}
       </p>
       <div className="flex shrink-0 items-center gap-2">
+        <span className="inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
+          <TaskSpeedControl task={task} date={date} showIcon={false} />
+        </span>
         <EditTask task={task} date={date} reached={false} />
         <TaskDescription task={task} />
       </div>

@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 
 import { formatTimerTime } from "@/app/timer/utils/timer";
 import type { TimerTask } from "@/app/timer/utils/timer";
@@ -12,7 +12,6 @@ export default function TaskProgress({
   running,
   appearance,
   compact = false,
-  speedControl,
   title,
 }: {
   task: TimerTask;
@@ -20,10 +19,9 @@ export default function TaskProgress({
   running: boolean;
   appearance: TaskAppearance;
   compact?: boolean;
-  speedControl?: ReactNode;
   title?: string;
 }) {
-  const stackClass = compact ? "@container space-y-1" : "space-y-2";
+  const stackClass = compact ? "@container space-y-1.5" : "space-y-2";
   const percentage = Math.min(100, (spent / task.duration) * 100);
   const percentageLabel = percentage.toFixed(0);
   const progressStyle: CSSProperties & { "--timer-progress-fill": string } = {
@@ -31,7 +29,7 @@ export default function TaskProgress({
   };
   return (
     <div
-      className={`${stackClass} ${title === undefined ? "" : "max-sm:space-y-1.5"}`}
+      className={`${stackClass} ${title === undefined ? "" : "max-sm:space-y-2"}`}
     >
       <div
         className={`tabular-nums ${compact ? `flex min-w-0 items-baseline justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
@@ -55,15 +53,17 @@ export default function TaskProgress({
               <span className={`text-muted ${compact ? "truncate" : ""}`}>
                 {formatTimerTime(task.duration)}
               </span>
-              {speedControl}
             </>
           ) : null}
         </span>
         {title === undefined ? (
           <span
-            className={`shrink-0 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} ${appearance.elapsed}`}
+            className={`flex shrink-0 items-baseline gap-1 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} ${running ? appearance.elapsed : "text-muted"}`}
           >
-            {percentageLabel}%
+            <span className="text-muted">
+              -{formatTimerTime(Math.max(0, task.duration - spent))}
+            </span>
+            <span>{percentageLabel}%</span>
           </span>
         ) : null}
       </div>

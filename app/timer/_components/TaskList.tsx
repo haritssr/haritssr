@@ -27,7 +27,7 @@ export default function TaskList() {
     timestamp
   );
   return (
-    <div className="min-w-0 space-y-16">
+    <div className="min-w-0 space-y-5">
       {active.length > 0 && (
         <ul aria-label="Today's activities" className={TASK_LAYOUT.collection}>
           {active.map(({ task, state }) => (

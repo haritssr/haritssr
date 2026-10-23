@@ -6,7 +6,7 @@ run inside its `use client` boundary.
 
 | Change | File |
 | --- | --- |
-| Notification, Autoplay, Multitask, and Ticking toggles; Multitask confirmation | [TimerToolbar.tsx](TimerToolbar.tsx) |
+| Notification, Autoplay, Multitask, and Sound toggles; Multitask confirmation | [TimerToolbar.tsx](TimerToolbar.tsx) |
 | Export/Import, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
 | Active card structure, title, and description placement | [TaskCard.tsx](TaskCard.tsx) |
@@ -49,9 +49,9 @@ Within `TASK_LAYOUT`, `collection` controls the outer grid and gaps,
 `surface` controls the card shell, and `controls` controls the timer/action area.
 Element-specific styles stay beside their JSX in the component files above.
 
-The header places the title on the left, with an Adjustments Horizontal edit button and a circular description icon on the right.
-Cards use two columns from `sm`. Below the header, time and progress occupy 60% of the row, followed by a gap and the secondary and primary actions. Edit is a plain icon matching the description icon in size.
-The text-only speed control follows the total duration in the progress row. The description popover
+The header places the title on the left, with speed, an Adjustments Horizontal edit button, and a circular description icon on the right.
+Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, remaining time, and percentage. Edit is a plain icon matching the description icon in size.
+The description popover
 opens on hover or click. The speed button cycles through 1x, 1.5x, 2x,
 2.5x, and 3x, then returns to 1x. Each task defaults to 1x and saves its own speed
 across pauses and reloads. At 2x, each real second adds two seconds toward the
@@ -74,7 +74,7 @@ receive that state instead of creating their own intervals.
 
 Outside `/timer`, `FloatingTimerDock` reuses compact `TaskProgress`, the icon presentation
 of `TaskActions`. Its wrapping title and muted remaining time (prefixed with `-`) sit above the progress bar
-and form one link to `/timer`, with circular actions beside it. It shows one
+and form one link occupying half the dock, with circular actions beside it. It shows one
 running task, initially the most recently started, with a task-count button that
 cycles through tasks when needed. Manual selection survives navigation. Pausing from the dock retains
 one paused task for Continue or Done; unrelated paused tasks are not added.
@@ -97,7 +97,7 @@ share the dock, while measured CSS properties keep back-to-top controls clear.
 Observers and event listeners are active only while the dock is visible.
 
 Multitask appears after Autoplay and defaults off. Turso remembers Multitask,
-Autoplay, and notification preferences across devices and reloads. Ticking stays
+Autoplay, and notification preferences across devices and reloads. Sound stays
 local and persists across reloads and tabs in the same browser. Autoplay starts
 one next unfinished task when none run.
 
@@ -109,7 +109,7 @@ confirming. Turso saves the preference and keeps the latest task in one
 transaction. A failed save keeps Multitask enabled and shows an error. With zero
 or one running task, no confirmation is needed.
 
-Ticking defaults off and stores its setting in browser localStorage under the
+The Sound switch controls ticking, defaults off, and stores its setting in browser localStorage under the
 versioned `haritssr-timer-ticking:v1` key through
 [timerTicking.ts](../utils/timerTicking.ts). Both on and off survive reloads;
 storage events synchronize open tabs. If storage is blocked, the toggle still
@@ -124,7 +124,7 @@ autoplay. The scheduling hook owns timeout cleanup and checks elapsed time
 before each tick, so overdue tasks stay silent while waiting for a server refresh.
 
 During the final 10 real seconds of a task, the same Quartz warning ticks play automatically,
-even with Ticking off. They become faster with 6 and 3 seconds remaining and
+even with Sound off. They become faster with 6 and 3 seconds remaining and
 stop when the task pauses or finishes. Remaining time accounts for task speed.
 
 The [provider](./TimerProvider.tsx) activates the deferred
@@ -183,7 +183,8 @@ Initialize or migrate through `bun run migrate:timer`; see the root README.
 
 Export and Import share a segmented icon-only group,
 beside the secondary Settings button, with native hover labels and accessible names.
-Settings opens a modal containing Notification, Autoplay, Multitask, and Ticking
+These controls sit beside Add Task on desktop and at the opposite end on mobile.
+Settings opens a modal containing Notification, Autoplay, Multitask, and Sound
 switches. Its header shows only the centered Settings title. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
 their section Save buttons. The

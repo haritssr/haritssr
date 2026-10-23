@@ -42,11 +42,11 @@ export default function TimerToolbar({
 }) {
   const { snapshot } = useTimer();
   return (
-    <div className="border-border mb-5 flex w-full flex-wrap items-center justify-between gap-3">
+    <div className="border-border mb-5 flex w-full flex-wrap items-center justify-between gap-3 sm:justify-start">
       <div className="shrink-0">
         <AddTask disabled={!canUseTimer(snapshot)} />
       </div>
-      <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2">
+      <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-3 sm:ml-0">
         {backupActions}
         <TimerSettingsDialog />
       </div>
@@ -137,8 +137,8 @@ function TimerSettings() {
         />
         <MultitaskSetting />
         <TimerSettingSwitch
-          label="Ticking"
-          title="Ticking"
+          label="Sound"
+          title="Sound"
           icon={<SpeakerWaveIcon aria-hidden="true" className="size-4.5" />}
           disabled={!canUseTimer(snapshot)}
           checked={tickingEnabled}

@@ -127,7 +127,7 @@ export default function FloatingTimerDock() {
         >
           <div className="border-border bg-background/70 shadow-foreground/15 flex min-h-[var(--timer-tabbar-height,3.3125rem)] items-center gap-2 rounded-xl border p-2 shadow-lg backdrop-blur-md">
             <InternalLink
-              className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto min-w-0 flex-1 rounded-sm py-1 pl-2 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-2 sm:[&_progress]:h-1.5"
+              className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto w-1/2 min-w-0 shrink-0 rounded-sm py-1 pl-2 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-2 sm:[&_progress]:h-1.5"
               href="/timer"
               variant="inline"
             >
@@ -143,7 +143,6 @@ export default function FloatingTimerDock() {
             {tasks.length > 1 ? (
               <Button
                 aria-label={`Switch task: ${selectedIndex + 1} of ${tasks.length}. Next task`}
-                className="w-auto! min-w-10 px-1.5! sm:min-w-8"
                 onClick={selectNextTask}
                 size="icon-circle"
                 title={`Next task (${selectedIndex + 1}/${tasks.length})`}

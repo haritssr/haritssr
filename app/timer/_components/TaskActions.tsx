@@ -74,10 +74,10 @@ export default function TaskActions({
     <div className="flex min-w-0 items-center justify-end gap-2">
       {showDone ? null : (
         <DeleteTaskButton
-          className="w-fit shrink-0"
+          className="shrink-0"
           title="Delete"
           dimWhenDisabled={unavailable}
-          iconOnly
+          size="icon-circle"
           disabled={disabled}
           onDelete={async () =>
             await act({ action: "delete", date, taskId: task.id })
@@ -87,9 +87,9 @@ export default function TaskActions({
         />
       )}
       <Button
-        className={`w-fit shrink-0 ${showDone ? "" : "select-none"}`}
+        className={`shrink-0 ${showDone ? "" : "select-none"}`}
         dimWhenDisabled={unavailable}
-        iconOnly
+        size="icon-circle"
         disabled={disabled}
         aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
         title={showDone ? "Done" : label}
@@ -104,9 +104,9 @@ export default function TaskActions({
       </Button>
       {showDone ? (
         <Button
-          className="w-fit shrink-0 select-none"
+          className="shrink-0 select-none"
           dimWhenDisabled={unavailable}
-          iconOnly
+          size="icon-circle"
           disabled={disabled}
           aria-label={`${label}: ${task.activity}`}
           title={label}
