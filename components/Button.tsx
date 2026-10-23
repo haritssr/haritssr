@@ -6,15 +6,19 @@ type ButtonVariant =
   | "danger"
   | "danger-subtle"
   | "ghost"
+  | "icon"
+  | "icon-active"
   | "neutral-subtle"
+  | "neutral-subtle-underlined"
   | "secondary-strong"
   | "outline"
   | "outline-regular"
   | "action-outline-regular"
   | "action-outline"
   | "primary"
-  | "timer-running"
   | "primary-subtle"
+  | "timer-running"
+  | "music"
   | "secondary"
   | "success-subtle";
 
@@ -24,6 +28,8 @@ const BUTTON_BASE_CLASS =
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "timer-running":
     "border border-transparent bg-timer-running font-medium text-white hover:bg-timer-running/90 focus-visible:outline-timer-running",
+  music:
+    "border border-transparent bg-music-accent font-medium text-white hover:bg-music-accent/90 focus-visible:outline-music-accent",
   black:
     "bg-zinc-500 text-zinc-50 transition-colors duration-150 enabled:hover:bg-zinc-600 focus-visible:outline-zinc-500",
   "attention-subtle":
@@ -34,8 +40,13 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-transparent bg-danger font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-danger)_60%,var(--color-red-600))] focus-visible:outline-danger",
   ghost:
     "font-medium text-zinc-700 transition-colors duration-150 hover:bg-zinc-100 focus-visible:outline-zinc-700",
+  icon: "gap-0 text-foreground transition-colors duration-150 hover:text-action focus-visible:outline-action",
+  "icon-active":
+    "gap-0 text-action transition-colors duration-150 focus-visible:outline-action",
   "neutral-subtle":
     "border border-transparent bg-foreground/90 font-medium text-white transition-colors duration-150 enabled:hover:bg-foreground focus-visible:outline-foreground",
+  "neutral-subtle-underlined":
+    "gap-0 rounded-none p-0 font-semibold text-foreground underline underline-offset-2 transition-colors duration-150 hover:text-action focus-visible:outline-action",
   "secondary-strong":
     "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-foreground",
   outline:
@@ -59,9 +70,13 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
 const BUTTON_SIZE_CLASS = {
   "icon-circle":
     "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
+  "icon-circle-large":
+    "size-11 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
+  "icon-large": "size-10 shrink-0 rounded-md p-2",
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
   default: "rounded-md px-3 py-1.5",
   "mobile-roomy": "rounded-md px-3 py-2 sm:py-1.5",
+  text: "rounded-none p-0",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

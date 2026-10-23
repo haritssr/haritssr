@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 // Match the navigation gap and reserve mobile footer clearance for the dock.
-export default function useTimerDockPosition(
+export default function useFloatingDockPosition(
   visible: boolean,
   pathname: string
 ) {
@@ -30,7 +30,7 @@ export default function useTimerDockPosition(
       const safeBottom =
         Number(
           getComputedStyle(dock)
-            .getPropertyValue("--timer-safe-bottom")
+            .getPropertyValue("--floating-safe-bottom")
             .replace("px", "")
         ) || 0;
       // Read all geometry before changing styles to avoid forced layout between writes.
@@ -48,13 +48,16 @@ export default function useTimerDockPosition(
       ) {
         gap = Math.max(bottom, window.innerHeight - bounds.bottom);
         bottom = window.innerHeight - bounds.top + gap;
-        dock.style.setProperty("--timer-tabbar-height", `${bounds.height}px`);
+        dock.style.setProperty(
+          "--floating-tabbar-height",
+          `${bounds.height}px`
+        );
       } else {
-        dock.style.removeProperty("--timer-tabbar-height");
+        dock.style.removeProperty("--floating-tabbar-height");
       }
-      dock.style.setProperty("--timer-dock-bottom", `${bottom}px`);
+      dock.style.setProperty("--floating-dock-bottom", `${bottom}px`);
       root.style.setProperty(
-        "--timer-footer-clearance",
+        "--floating-footer-clearance",
         // Keep document spacing independent of the sticky navigation's position.
         // Otherwise moving the footer moves navigation and feeds back into this margin.
         `${Math.max(1.25 * rem, height + 2 * footerGap)}px`
@@ -82,9 +85,9 @@ export default function useTimerDockPosition(
       window.removeEventListener("resize", schedulePosition);
       window.removeEventListener("scroll", schedulePosition);
       cancelAnimationFrame(frame);
-      root.style.removeProperty("--timer-footer-clearance");
-      dock.style.removeProperty("--timer-dock-bottom");
-      dock.style.removeProperty("--timer-tabbar-height");
+      root.style.removeProperty("--floating-footer-clearance");
+      dock.style.removeProperty("--floating-dock-bottom");
+      dock.style.removeProperty("--floating-tabbar-height");
     };
   }, [visible, pathname]);
 

@@ -178,6 +178,13 @@ Apply these defaults to new or refactored labs in every domain:
 - Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.
+- Music imports remain device-local in IndexedDB; never upload imported files.
+  Included songs live in `public/music` with their catalog in `app/music/data.ts`
+  and stream directly from the site. These public assets are deployed with it.
+  Keep its persistent audio runtime lazy. Shared `FloatingDock` owns Music above
+  Timer, navigation clearance, and combined footer spacing. Cache only the public
+  Music shell and required immutable assets for offline reopening; never cache
+  API/account responses or return HTML to RSC requests.
 - Keep public pages searchable.
 
 # Metadata and Site Behavior

@@ -33,3 +33,6 @@ yarn-error.log*
 .zed/
 
 next-env.d.ts
+
+# Keep loose MP3s private; included songs belong in public/music.
+/*.mp3

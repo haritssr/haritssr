@@ -119,8 +119,8 @@ export const implementationFiles = [
     "Display-local clock shared by the task list and floating task UI.",
   ],
   [
-    "app/timer/hooks/useTimerDockPosition.ts",
-    "Measured mobile navigation gap, desktop positioning, and floating layout clearance.",
+    "components/floating/useFloatingDockPosition.ts",
+    "Shared Music and Timer navigation gap, desktop positioning, and combined floating layout clearance.",
   ],
   [
     "app/timer/hooks/useTimerSchedule.ts",

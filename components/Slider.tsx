@@ -10,6 +10,8 @@ export default function Slider({
   max,
   step,
   valueText,
+  trackClassName = "h-2.5",
+  variant = "default",
 }: {
   label: string;
   value: number;
@@ -18,6 +20,8 @@ export default function Slider({
   max: number;
   step: number;
   valueText?: string;
+  trackClassName?: string;
+  variant?: "default" | "music";
 }) {
   return (
     <BaseSlider.Root
@@ -29,13 +33,17 @@ export default function Slider({
       step={step}
       thumbAlignment="edge"
     >
-      <BaseSlider.Control className="relative flex h-8 w-full min-w-0 touch-none items-center">
-        <BaseSlider.Track className="bg-border relative h-2 min-w-0 flex-1 rounded-full">
-          <BaseSlider.Indicator className="bg-action absolute h-full rounded-full" />
+      <BaseSlider.Control className="group/slider relative flex w-full min-w-0 touch-none items-center">
+        <BaseSlider.Track
+          className={`bg-border relative min-w-0 flex-1 rounded-full ${variant === "music" ? "group-hover/slider:bg-slider-track-hover" : ""} ${trackClassName}`}
+        >
+          <BaseSlider.Indicator
+            className={`${variant === "music" ? "bg-music-accent" : "bg-action"} absolute h-full rounded-full`}
+          />
           <BaseSlider.Thumb
             aria-label={label}
             aria-valuetext={valueText}
-            className="interactive-elevation has-focus-visible:outline-action border-border hover:border-action-hover bg-slider-thumb block h-5 w-5 cursor-pointer rounded-full border outline-hidden has-focus-visible:outline-2"
+            className="interactive-elevation has-focus-visible:outline-action border-border hover:border-action-hover bg-slider-thumb data-dragging:border-action data-dragging:ring-action/20 block h-5 w-5 cursor-pointer rounded-full border outline-hidden has-focus-visible:outline-2 data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:ring-4 motion-safe:transition-[scale,box-shadow,border-color] motion-safe:duration-150"
           />
         </BaseSlider.Track>
       </BaseSlider.Control>

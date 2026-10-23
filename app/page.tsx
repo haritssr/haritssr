@@ -2,6 +2,7 @@ import {
   DocumentTextIcon,
   QueueListIcon,
   ClockIcon,
+  MusicalNoteIcon,
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -12,6 +13,7 @@ import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import Table from "@/components/Table";
+import { musicRoute } from "@/data/routes";
 import { getCommitCount } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
@@ -312,6 +314,19 @@ function Tools({ count }: { count?: number }) {
         headingLevel={3}
         icon={
           <QueueListIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
+        title={musicRoute.title}
+        description={musicRoute.description}
+        href={musicRoute.route}
+        headingLevel={3}
+        icon={
+          <MusicalNoteIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}

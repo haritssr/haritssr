@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import MusicProvider from "@/app/music/_components/MusicProvider";
 import TimerProvider from "@/app/timer/_components/TimerProvider";
+import FloatingDock from "@/components/floating/FloatingDock";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import SharePageProvider from "@/components/SharePageProvider";
@@ -87,15 +89,19 @@ export default function RootLayout({
         <SharePageProvider>
           <SiteShortcuts />
           <GlobalSearchProvider>
-            <TimerProvider>
-              <TopBar />
-              <main
-                className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 sm:pt-5 xl:px-0"
-                id="main-content"
-              >
-                {children}
-              </main>
-            </TimerProvider>
+            <FloatingDock>
+              <MusicProvider>
+                <TimerProvider>
+                  <TopBar />
+                  <main
+                    className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 sm:pt-5 xl:px-0"
+                    id="main-content"
+                  >
+                    {children}
+                  </main>
+                </TimerProvider>
+              </MusicProvider>
+            </FloatingDock>
           </GlobalSearchProvider>
         </SharePageProvider>
         <Footer />

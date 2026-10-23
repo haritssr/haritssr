@@ -10,9 +10,9 @@ import { taskAppearance } from "@/app/timer/_components/taskPresentation";
 import TaskProgress from "@/app/timer/_components/TaskProgress";
 import { useTimer } from "@/app/timer/_components/TimerProvider";
 import useTimerClock from "@/app/timer/hooks/useTimerClock";
-import useTimerDockPosition from "@/app/timer/hooks/useTimerDockPosition";
 import { canUseTimer } from "@/app/timer/utils/timer";
 import Button from "@/components/Button";
+import { FloatingDockSlot } from "@/components/floating/FloatingDock";
 import InternalLink from "@/components/InternalLink";
 
 export default function FloatingTimerDock() {
@@ -52,7 +52,6 @@ export default function FloatingTimerDock() {
   const showError =
     pathname !== "/timer" && error !== null && canUseTimer(snapshot);
   const visible = selected !== undefined || completion !== null || showError;
-  const dockRef = useTimerDockPosition(visible, pathname);
 
   if (!visible) {
     return null;
@@ -74,10 +73,7 @@ export default function FloatingTimerDock() {
     : null;
 
   return (
-    <div
-      className="pointer-events-none fixed inset-x-0 bottom-[var(--timer-dock-bottom,max(0.75rem,env(safe-area-inset-bottom)))] z-50 mx-auto flex w-full max-w-5xl flex-col items-end gap-3 px-3.5 [--timer-safe-bottom:env(safe-area-inset-bottom,0px)] sm:bottom-[var(--timer-dock-bottom,1.5rem)] sm:items-center sm:px-4 xl:px-0"
-      ref={dockRef}
-    >
+    <FloatingDockSlot position="timer">
       {completion === null ? null : (
         <div className="border-border bg-background/70 shadow-foreground/15 pointer-events-auto flex w-full items-center justify-between gap-3 rounded-xl border py-2 pr-3 pl-4 shadow-lg backdrop-blur-md sm:w-fit">
           <output>
@@ -125,7 +121,7 @@ export default function FloatingTimerDock() {
           aria-label="Floating task"
           className="pointer-events-auto w-full space-y-2 sm:w-[22.4rem]"
         >
-          <div className="border-border bg-background/70 shadow-foreground/15 flex min-h-[var(--timer-tabbar-height,3.3125rem)] items-center gap-2 rounded-xl border p-2 shadow-lg backdrop-blur-md">
+          <div className="border-border bg-background/70 shadow-foreground/15 flex min-h-[var(--floating-tabbar-height,3.3125rem)] items-center gap-2 rounded-xl border p-2 shadow-lg backdrop-blur-md">
             <InternalLink
               className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto w-1/2 min-w-0 shrink-0 rounded-sm py-1 pl-2 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-2 sm:[&_progress]:h-1.5"
               href="/timer"
@@ -171,6 +167,6 @@ export default function FloatingTimerDock() {
           </div>
         </section>
       ) : null}
-    </div>
+    </FloatingDockSlot>
   );
 }

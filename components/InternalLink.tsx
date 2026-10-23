@@ -19,16 +19,16 @@ export default function InternalLink({
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   "aria-current"?: AriaAttributes["aria-current"];
   "aria-keyshortcuts"?: AriaAttributes["aria-keyshortcuts"];
-  variant?: "navigation" | "inline" | "footer";
+  variant?: "navigation" | "inline" | "footer" | "control";
 }) {
   const appearance =
     variant === "navigation"
       ? `w-fit py-0.5 ${lg === true ? "text-lg" : "text-base"}`
-      : "text-[length:inherit] leading-[inherit]";
+      : `${variant === "control" ? "rounded-sm py-1 pl-2 " : ""}text-[length:inherit] leading-[inherit]`;
   const interaction =
     variant === "footer"
       ? "text-foreground/70 rounded-sm select-none transition-[color,transform] hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current hover:underline"
-      : "text-action hover:text-action-hover hover:underline";
+      : `text-action hover:text-action-hover ${variant === "control" ? "focus-visible:outline-action focus-visible:outline-2 focus-visible:outline-offset-2" : "hover:underline"}`;
 
   return (
     <Link

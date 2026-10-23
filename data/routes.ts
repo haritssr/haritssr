@@ -79,6 +79,13 @@ export const october22AnalysisRoute: RouteDoc = {
   group: "Commits",
 };
 
+export const musicRoute: RouteDoc = {
+  route: "/music",
+  title: "Music",
+  description: "Play and organize your music, right on this device.",
+  group: "Tools",
+};
+
 export const urlRoute: RouteDoc = {
   route: "/url",
   title: "URL",
@@ -87,7 +94,15 @@ export const urlRoute: RouteDoc = {
 };
 
 export const navigationRoutes: readonly RouteDoc[] = [
+  musicRoute,
   urlRoute,
+  {
+    route: "/music/details",
+    title: "Details",
+    description:
+      "How included songs, local imports, and offline playback work.",
+    group: "Music",
+  },
   {
     route: "/tree",
     title: "Tree",

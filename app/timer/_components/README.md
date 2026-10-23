@@ -83,11 +83,13 @@ Completed or deleted tasks disappear, and selection falls back to a remaining
 running task. Selection resets at Jakarta midnight and is not stored on disk.
 Turso running tasks use the dock.
 
+The shared `FloatingDock` host stacks Music above Timer when both are visible.
+It measures the combined stack and reserves footer clearance once.
 The dock matches the mobile tab bar's translucent background, blur, border, and
 rounded corners. Its compact row combines title, remaining time, a thin progress
 bar and circular actions, without a separate status row. Its minimum
 height matches the navigation surface, with a 53px fallback when absent.
-[useTimerDockPosition.ts](../hooks/useTimerDockPosition.ts)
+[useFloatingDockPosition.ts](../../../components/floating/useFloatingDockPosition.ts)
 measures the real navigation surface and matches its bottom screen gap above it.
 Without mobile navigation it uses safe-area-aware bottom clearance; desktop
 aligns a 22.4rem bar to the site's content width. The dock overlays page content;
