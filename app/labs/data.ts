@@ -1009,6 +1009,15 @@ export const LabsData: readonly LabDomain[] = [
       "Explore interface patterns, motion, and everyday interactions.",
     labs: [
       {
+        slug: "error-pages",
+        title: "Error Pages",
+        description:
+          "Preview offline screens, HTTP errors, and application failures.",
+        tags: ["errors", "http", "offline", "design"],
+        createdAt: "2026-10-23",
+        updatedAt: ["2026-10-23"],
+      },
+      {
         slug: "shadow",
         title: "Shadow",
         description:

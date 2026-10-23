@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "7ed3d2e4246d587362f1c1637550fb995a582018",
+      "date": "2026-10-23T11:16:30+07:00",
+      "subject": "chore(Dependencies): update packages and satisfy lint rules"
+    },
+    {
       "hash": "fc06d0b1182e98587f3596b6923e0cad21d83e35",
       "date": "2026-10-23T06:26:40+07:00",
       "subject": "style(Site): refine profile layout and account menu"
