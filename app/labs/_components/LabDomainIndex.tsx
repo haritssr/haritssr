@@ -24,7 +24,7 @@ export default function LabDomainIndex({ domainSlug }: LabDomainIndexProps) {
       >
         <div className="flex items-center gap-3">
           <PageTitle>{domain.title}</PageTitle>
-          <LabDomainIcon className="size-4.5 sm:size-7" src={domain.logoSrc} />
+          <LabDomainIcon className="size-6 sm:size-7" src={domain.logoSrc} />
         </div>
         <PageDescription>{domain.description}</PageDescription>
       </PageHeader>
