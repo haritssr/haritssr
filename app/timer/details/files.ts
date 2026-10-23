@@ -54,7 +54,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/_components/PresetSettings.tsx",
-    "Duration and task preset editors, five-duration/six-task limits, and section Save/Cancel drafts.",
+    "Duration and task preset editors, five-duration/ten-task limits, and section Save/Cancel drafts.",
   ],
   [
     "app/timer/_components/durationValue.ts",

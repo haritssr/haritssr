@@ -72,6 +72,18 @@ export const DEFAULT_TASK_PRESETS: TimerTaskPreset[] = [
     description: "",
     duration: 1800,
   },
+  {
+    id: "working-session",
+    activity: "Working",
+    description: "focus",
+    duration: 5400,
+  },
+  {
+    id: "thinking",
+    activity: "Thinking",
+    description: "do not disturb",
+    duration: 1800,
+  },
 ];
 
 export interface TimerPreferences {

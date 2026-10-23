@@ -26,7 +26,7 @@ const publicEndpoints = [
   {
     href: "/api/timer",
     description:
-      "Timer activities and 30-day totals. Visitors receive generated samples; the signed-in owner reads personal Turso records. POST changes tasks (Add accepts an optional UUID taskId to prevent duplicate creation), PATCH saves preferences, including ordered durationPresets (1–5 entries) and taskPresets (1–6 entries) lists, and ?backup=1 exports or imports history. All personal operations require the owner session.",
+      "Timer activities and 30-day totals. Visitors receive generated samples; the signed-in owner reads personal Turso records. POST changes tasks (Add accepts an optional UUID taskId to prevent duplicate creation), PATCH saves preferences, including ordered durationPresets (1–5 entries) and taskPresets (1–10 entries) lists, and ?backup=1 exports or imports history. All personal operations require the owner session.",
   },
   {
     href: "/api/hello",

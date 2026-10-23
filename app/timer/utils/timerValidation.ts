@@ -95,7 +95,7 @@ export const taskPresetsSchema = z
     })
   )
   .min(1)
-  .max(6)
+  .max(10)
   .refine(
     (presets) =>
       new Set(presets.map((preset) => preset.id)).size === presets.length

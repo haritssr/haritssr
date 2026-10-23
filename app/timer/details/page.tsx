@@ -41,7 +41,7 @@ const tursoSchemaDiagram = `erDiagram
     INTEGER multitask "Boolean; default 0"
     INTEGER notifications_enabled "Boolean; default 1"
     TEXT duration_presets "Nullable JSON array; defaults to 5, 15, 30, 60 minutes"
-    TEXT task_presets "Nullable JSON array; 1 to 6 task templates"
+    TEXT task_presets "Nullable JSON array; 1 to 10 task templates"
   }
 `;
 
@@ -359,7 +359,7 @@ export default function TimerDetailsPage() {
               </li>
               <li>
                 <code>timer_preferences</code> has one row for settings and JSON
-                presets: 1–5 durations and 1–6 tasks. Missing presets use
+                presets: 1–5 durations and 1–10 tasks. Missing presets use
                 defaults; each list saves separately.
               </li>
               <li>

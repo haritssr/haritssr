@@ -118,7 +118,7 @@
   its selected 30-day window. Backups and imports retain full-history reads.
   Run `bun run migrate:timer` after updating to add the pending-notification index.
 - Settings includes Duration Presets and Task Presets editors. Duration lists
-  allow 1–5 entries and task lists 1–6, with separate Save and Cancel
+  allow 1–5 entries and task lists 1–10, with separate Save and Cancel
   controls. Duration presets apply to Add and Edit; task presets in two columns appear below
   Duration in New Task, fill every field, and wait for Done before adding a task.
   Presets sync across devices and never change existing tasks. Names allow 20

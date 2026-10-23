@@ -47,7 +47,7 @@ function PresetEditor({ kind }: { kind: "duration" | "task" }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const task = kind === "task";
-  const limit = task ? 6 : 5;
+  const limit = task ? 10 : 5;
   const title = task ? "Task Presets" : "Duration Presets";
   const saved: PresetDraft[] = task
     ? taskPresets.map((preset) => ({

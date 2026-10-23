@@ -200,7 +200,7 @@ switches. Its header shows only the centered Settings title. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
 their section Save buttons. The
 switches retain their existing icons, followed by initially collapsed Duration
-Presets and Task Presets accordions. Duration lists allow 1–5 entries and task lists 1–6, with editable values,
+Presets and Task Presets accordions. Duration lists allow 1–5 entries and task lists 1–10, with editable values,
 Add preset, Remove, and separate Save/Cancel controls.
 Drafts survive collapsing a section; closing Settings discards unsaved changes.
 Save keeps Settings open, disables that editor while saving, and retains the
