@@ -104,6 +104,116 @@ export default function TimerDetailsPage() {
       </PageHeader>
       <div className="space-y-16">
         <Section
+          id="principles"
+          title="Principles"
+          contentClassName="max-w-3xl"
+        >
+          <ExplanationList>
+            <li>Human activity fundamentally a task</li>
+            <li>Without a task, human become death</li>
+            <li>Task needs time</li>
+            <li>Human time are limited</li>
+            <li>
+              Task management is scheduling problem, not performance problem
+            </li>
+            <li>
+              Certain arranggement of task schedulling can consume different
+              time and mental energy profile, eventhough those tasks have same
+              definition and time requirement
+            </li>
+            <li>Certain task should only be doing at certain period of time</li>
+            <li>
+              Batching (interrupt coalescing) is the most optimal schedulling
+              optimization method
+            </li>
+            <li>
+              Certain tasks should be doing repeatedly every certain period
+              because that&apos;s what maintain an identity
+            </li>
+            <li>Task is fundamentally computation</li>
+            <li>
+              Maintaining task is an act of traversing computational
+              irreducibility
+            </li>
+            <li>
+              Certain computational level need constant computation to maintain
+              it&apos;s state
+            </li>
+            <li>Some task delegated to machine</li>
+            <li>
+              Human brain have limited cognitive loads capacity
+              <ExplanationList>
+                <li>
+                  Batching is a way to optimize it (reduce), so we can quickly
+                  back to rest state
+                </li>
+              </ExplanationList>
+            </li>
+            <li>
+              When human can&apos;t have too much energy, time, and brain
+              capacity, but want to live in certain computational level, they
+              must be delegate, either to other human or computer/robots. To
+              delegate to human, they need to pay money, no every human have
+              money, but we can delegate certain task to computer/robots
+            </li>
+            <li>
+              Schedulling is a way to minimize decision fatigue, jumping to
+              certain computation level, so we don&apos;t spend to much time in
+              low level computation
+            </li>
+            <li>
+              Computation level correspondent with quality of living or
+              capability
+            </li>
+          </ExplanationList>
+        </Section>
+        <Section
+          id="type-of-task"
+          title="Type of Task"
+          contentClassName="max-w-3xl"
+        >
+          <ExplanationList>
+            <li>
+              Quick Task
+              <ExplanationList>
+                <li>Short break, Long break</li>
+              </ExplanationList>
+            </li>
+            <li>
+              Repeateted Task
+              <ExplanationList>
+                <li>
+                  Daily
+                  <ExplanationList>
+                    <li>
+                      Shower, water plants, housekeeping, cooking, meditation
+                    </li>
+                  </ExplanationList>
+                </li>
+                <li>
+                  Weekly
+                  <ExplanationList>
+                    <li>Curate notes,</li>
+                  </ExplanationList>
+                </li>
+                <li>
+                  Monthly
+                  <ExplanationList>
+                    <li>Electricity bill, trash fee, internet</li>
+                  </ExplanationList>
+                </li>
+              </ExplanationList>
+            </li>
+            <li>
+              Long Task
+              <ExplanationList>
+                <li>Task that cannot be done in one session</li>
+                <li>Reading books, reading articles,</li>
+              </ExplanationList>
+            </li>
+          </ExplanationList>
+        </Section>
+        <Section
           id="about-timer"
           title="About Timer"
           contentClassName="max-w-3xl"

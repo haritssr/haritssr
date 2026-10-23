@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "5447c4c4103d5f1fc3242dce696580e017c16b1c",
+      "date": "2026-10-23T17:05:33+07:00",
+      "subject": "feat(Timer): support ten task presets and add Working and Thinking"
+    },
+    {
       "hash": "dad2b8f7eb78a821b08b515778a004e5c26e553e",
       "date": "2026-10-23T17:05:23+07:00",
       "subject": "feat(Timer): add a live analog clock to the page header"
