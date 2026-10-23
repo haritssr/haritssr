@@ -5,13 +5,14 @@ import {
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Suspense } from "react";
 
-import history from "@/app/commits/changelog.json";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import Table from "@/components/Table";
+import { getChangelogSummary } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
@@ -68,7 +69,9 @@ export default function Home() {
       <div className="space-y-16">
         <PersonalDetails />
         <Section title="Tools">
-          <Tools />
+          <Suspense fallback={<Tools />}>
+            <LiveTools />
+          </Suspense>
         </Section>
         <Section title="Features">
           <ul className="text-foreground marker:text-foreground list-outside list-disc space-y-2 pl-5">
@@ -252,7 +255,17 @@ function PersonalDetails() {
   );
 }
 
-function Tools() {
+async function LiveTools() {
+  let count: number | undefined;
+  try {
+    ({ count } = await getChangelogSummary());
+  } catch {
+    console.error("Homepage commit count could not be loaded.");
+  }
+  return <Tools count={count} />;
+}
+
+function Tools({ count }: { count?: number }) {
   return (
     <nav
       aria-label="Tools"
@@ -275,7 +288,7 @@ function Tools() {
       <IndexCard
         title="Commits"
         description="Recent code changes and updates across this site."
-        count={history.commits.length}
+        count={count}
         countLabel="commits"
         href="/commits"
         headingLevel={3}

@@ -1,21 +1,26 @@
 import "server-only";
-import history from "@/app/commits/changelog.json";
+import { unstable_cache } from "next/cache";
+import { cache } from "react";
 
-import {
-  activityBuckets,
-  commitDay,
-  filterCommits,
-  prepareCommits,
-} from "./changelog";
+import { activityBuckets, filterCommits, prepareCommits } from "./changelog";
 import type {
   ActivityBucket,
   ChangelogCommit,
   ChangelogPeriod,
 } from "./changelog";
+import { readCommitHistory } from "./commitsDatabase";
 
-const prepared = prepareCommits(history.commits);
-const lastDay = prepared[0]?.day ?? "2021-09-21";
-const firstDay = prepared.at(-1)?.day ?? lastDay;
+export const getCommitHistory = cache(
+  unstable_cache(readCommitHistory, ["turso-commits-v1"], { revalidate: 300 })
+);
+
+const getPreparedHistory = cache(async () => {
+  const commits = await getCommitHistory();
+  const prepared = prepareCommits(commits);
+  const lastDay = prepared[0]?.day ?? "2021-09-21";
+  const firstDay = prepared.at(-1)?.day ?? lastDay;
+  return { prepared, lastDay, firstDay };
+});
 
 export interface ChangelogSelection {
   period: ChangelogPeriod;
@@ -35,9 +40,10 @@ export interface ChangelogResult {
   lastDay: string;
 }
 
-export function getChangelogResult(
+export async function getChangelogResult(
   selection: ChangelogSelection
-): ChangelogResult {
+): Promise<ChangelogResult> {
+  const { prepared, firstDay, lastDay } = await getPreparedHistory();
   const matched = filterCommits(
     prepared,
     selection.period,
@@ -69,8 +75,7 @@ export function getChangelogResult(
   };
 }
 
-export const changelogSummary = {
-  count: history.commits.length,
-  firstDay: commitDay(history.commits.at(-1)?.date ?? `${firstDay}T00:00:00Z`),
-  lastDay,
-};
+export async function getChangelogSummary() {
+  const { prepared, firstDay, lastDay } = await getPreparedHistory();
+  return { count: prepared.length, firstDay, lastDay };
+}

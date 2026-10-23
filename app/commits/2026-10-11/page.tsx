@@ -3,7 +3,6 @@ import CommitTable, {
   ModelSuitabilityLegend,
   SuitabilityLabel,
 } from "@/app/commits/_components/CommitTable";
-import history from "@/app/commits/changelog.json";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -13,6 +12,7 @@ import Section from "@/components/Section";
 import Table from "@/components/Table";
 import { modelSuitabilityRoute } from "@/data/routes";
 import { commitDay, countCommitTypes } from "@/utils/commits/changelog";
+import { getCommitHistory } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import modelSuitability from "./model-suitability.json";
@@ -23,12 +23,13 @@ export const metadata = createPageMetadata({
   path: modelSuitabilityRoute.route,
 });
 
-const assessedCommits = history.commits.filter(
-  (commit) => commitDay(commit.date) === modelSuitability.date
-);
-const commitTypeCounts = countCommitTypes(assessedCommits);
+export default async function ModelSuitabilityPage() {
+  const history = await getCommitHistory();
+  const assessedCommits = history.filter(
+    (commit) => commitDay(commit.date) === modelSuitability.date
+  );
+  const commitTypeCounts = countCommitTypes(assessedCommits);
 
-export default function ModelSuitabilityPage() {
   const estimatedCostUsd = assessedCommits.length * 0.04;
   const estimatedCostIdr = new Intl.NumberFormat("en-US", {
     maximumFractionDigits: 0,

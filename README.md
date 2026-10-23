@@ -19,6 +19,27 @@
   effort labels are editorial estimates, not recorded model usage.
 
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
+- Commit maintenance scripts live beside their data in `app/commits/`:
+  `sync-changelog.ts` refreshes the Git snapshot and `import-commits.ts` uploads it.
+  `bun run import:commits` copies `app/commits/changelog.json` into the separate
+  Turso `commits` table; an optional JSON path can be passed. Configure
+  `TURSO_COMMITS_DATABASE_URL` and `TURSO_COMMITS_AUTH_TOKEN` in `.env.local`.
+  The importer validates the snapshot before connecting, uploads in one transaction,
+  and verifies every source record before committing. Reruns update changed hashes
+  without duplicating rows or deleting extra history. The JSON remains the import
+  source and backup. Run `bun run sync:commits` after committing to refresh the Git
+  snapshot and upload new records; importing is manual, never part of deployments.
+  This command updates the JSON snapshot in the working tree.
+- `/commits`, its dated analysis pages, `/api/commits`, and the homepage commit count
+  read the separate Turso database through the server-only `utils/commits/commitHistory.ts`.
+  One full-history query is cached across requests for five minutes, while React
+  deduplicates reads within a server render. Filtering and activity calculations
+  retain the existing behavior. API responses also use a five-minute CDN cache,
+  so changes can take several minutes to appear. If a fresh read fails, the API
+  returns an uncached 503; the homepage keeps its Tools links without the count.
+  Next.js can retain previously cached results during revalidation failures.
+  Set the two `TURSO_COMMITS_*` variables in Vercel Production and Preview before
+  deploying. No runtime reader falls back to the JSON snapshot.
 - Timer at `/timer` tracks personal activities by Jakarta calendar day, with
   daily history and 30-day totals at `/timer/statistic`. `/timer/details` explains
   behavior, Turso schema, source files, and interactive Pele relationship diagrams.
@@ -159,7 +180,7 @@ within that space.
 The desktop navigation pill is also visible on Home and lists Home, Projects,
 Labs, Writing, and Design in that order. It appears from 1024px so all
 five links fit between the side controls. Home's responsive card grid links
-to Timer, Commits, and Tree under Tools, with the commit count from the shared changelog snapshot.
+to Timer, Commits, and Tree under Tools, with the commit count from the shared cached Turso reader.
 
 Shared helpers in `utils/` are grouped by responsibility: `commits/` handles
 commit records and Turso reads; `content/` handles posts and article outlines;
@@ -175,7 +196,7 @@ or demo. Writing MDX and its automatic module discovery live in
 `app/writing/content/`, while the Next.js posts demo reads Markdown from
 `app/labs/nextjs/posts/content/`. The active lab catalog and its metadata helpers
 live in `app/labs/data.ts`; discontinued records live in
-`app/labs/discontinued-data.ts`. The generated changelog snapshot lives in
+`app/labs/discontinued-data.ts`. The generated changelog import snapshot and backup lives in
 `app/commits/changelog.json`; the site-wide route registry remains in `data/`.
 The server-only `utils/discovery/routeManifest.ts` derives available routes, dynamic
 patterns, parents, and update dates from these sources. Search, sitemap, and

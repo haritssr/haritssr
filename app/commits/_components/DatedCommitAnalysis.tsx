@@ -3,7 +3,6 @@ import type { ComponentProps } from "react";
 import CommitHourlyChart from "@/app/commits/_components/CommitHourlyChart";
 import CommitModelSuitability from "@/app/commits/_components/CommitModelSuitability";
 import CommitTable from "@/app/commits/_components/CommitTable";
-import history from "@/app/commits/changelog.json";
 import ExternalLink from "@/components/ExternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -15,6 +14,7 @@ import {
   countCommitTypes,
   formatDay,
 } from "@/utils/commits/changelog";
+import { getCommitHistory } from "@/utils/commits/commitHistory";
 import { SOURCE_CODE_URL } from "@/utils/metadata/site";
 
 interface Analysis {
@@ -24,7 +24,7 @@ interface Analysis {
   groups: { id: string; title: string; analysis: string; hashes: string[] }[];
 }
 
-export default function DatedCommitAnalysis({
+export default async function DatedCommitAnalysis({
   analysis,
   route,
   suitability,
@@ -36,7 +36,8 @@ export default function DatedCommitAnalysis({
   const reviewedHashes = new Set(
     analysis.groups.flatMap((group) => group.hashes)
   );
-  const commits = history.commits.filter(
+  const history = await getCommitHistory();
+  const commits = history.filter(
     (commit) =>
       commitDay(commit.date) === analysis.date &&
       reviewedHashes.has(commit.hash)

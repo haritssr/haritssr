@@ -15,7 +15,7 @@ import {
 import { formatDay } from "@/utils/commits/changelog";
 import { parseChangelogSelection } from "@/utils/commits/changelogSelection";
 import {
-  changelogSummary,
+  getChangelogSummary,
   getChangelogResult,
 } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
@@ -26,9 +26,9 @@ export const metadata = createPageMetadata({
   path: commitsRoute.route,
 });
 
-export default function CommitsPage() {
-  const { firstDay, lastDay, count } = changelogSummary;
-  const initial = getChangelogResult(
+export default async function CommitsPage() {
+  const { firstDay, lastDay, count } = await getChangelogSummary();
+  const initial = await getChangelogResult(
     parseChangelogSelection(new URLSearchParams(), lastDay)
   );
   return (

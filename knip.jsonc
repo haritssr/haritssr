@@ -4,7 +4,7 @@
   "entry": [
     "public/sw.js",
     "scripts/{inspect-*-db.js,validate-content.ts}!",
-    "app/commits/sync-changelog.ts!",
+    "app/commits/{import-commits,sync-changelog}.ts!",
     "app/timer/{migrate-timer,seed-timer}.ts!",
     "app/writing/content/*.mdx",
   ],

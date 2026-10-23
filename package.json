@@ -13,7 +13,9 @@
     "sync:changelog": "bun app/commits/sync-changelog.ts",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
     "validate:content": "bun --conditions=react-server scripts/validate-content.ts",
-    "migrate:timer": "bun app/timer/migrate-timer.ts"
+    "migrate:timer": "bun app/timer/migrate-timer.ts",
+    "import:commits": "bun app/commits/import-commits.ts",
+    "sync:commits": "bun run sync:changelog && bun run import:commits"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
