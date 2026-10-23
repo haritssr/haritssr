@@ -190,7 +190,7 @@ function Profile() {
             <span className="text-secondary-accent">r</span>ahmatullah
           </li>
         </ul>
-        <hr className="border-border my-4" />
+        <hr className="border-border my-4 border-dashed" />
         <ul
           aria-label="Contact details"
           className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word"
@@ -209,7 +209,7 @@ function Profile() {
 function PersonalDetails() {
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      <div className="corner-squircle bg-interface-hover flex items-center justify-center rounded-xl py-8 lg:col-start-1 lg:py-0">
+      <div className="corner-squircle border-border/75 bg-interface-hover flex items-center justify-center rounded-xl border py-8 lg:col-start-1 lg:py-0">
         <Image
           alt={profileName}
           className="size-25 rounded-full"
@@ -219,10 +219,10 @@ function PersonalDetails() {
           width={100}
         />
       </div>
-      <div className="corner-squircle bg-interface-hover rounded-xl lg:col-start-2">
+      <div className="corner-squircle border-border/75 bg-interface-hover rounded-xl border lg:col-start-2">
         <Profile />
       </div>
-      <div className="corner-squircle bg-interface-hover min-w-0 rounded-xl p-4 lg:col-span-2 lg:col-start-3">
+      <div className="corner-squircle border-border/75 bg-interface-hover min-w-0 rounded-xl border p-4 lg:col-span-2 lg:col-start-3">
         <section aria-label="Personal notes and words" id="personal-notes">
           <ul className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5">
             <li>Touch typist, ±90 WPM.</li>
@@ -231,7 +231,7 @@ function PersonalDetails() {
 
             <li>JS, TS, Effect, React, Next.js, FP, Math, Phy, and Edu.</li>
           </ul>
-          <hr className="border-border my-4" />
+          <hr className="border-border my-4 border-dashed" />
           <ul className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5">
             <li>
               <ExternalLink
@@ -260,6 +260,7 @@ function Tools() {
     >
       <IndexCard
         title="Timer"
+        badge="DB"
         description="A simple timer for focused work and everyday tasks."
         href="/timer"
         headingLevel={3}
@@ -309,7 +310,7 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span className="text-danger" key={`u-${text.indexOf(chunk)}`}>
+        <span className="text-contact-accent" key={`u-${text.indexOf(chunk)}`}>
           {siteName}
         </span>
       ) : (

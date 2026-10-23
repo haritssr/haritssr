@@ -3,7 +3,6 @@ import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import BackButton from "@/components/BackButton";
 import Box from "@/components/Box";
 import Button from "@/components/Button";
-import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
@@ -60,12 +59,11 @@ export default function DesignSystem() {
       </PageHeader>
       <div className="space-y-16">
         <Section title="Principles">
-          <ExplanationList>
+          <ol className="text-foreground [&>li::marker]:text-muted [&>li]:border-border list-outside list-decimal gap-16 space-y-4 leading-relaxed sm:columns-2 sm:[column-rule:1px_dashed_var(--color-border)] [&>li]:ml-7 [&>li]:break-inside-avoid [&>li]:border-b [&>li]:border-dashed [&>li]:pb-4 [&>li]:pl-1">
             <li>
               A design system is a set of rules and opinions that shape the user
               interface and the experience as a whole.
             </li>
-
             <li>
               Design principles explain{" "}
               <span className="font-semibold">why</span> we make specific
@@ -360,7 +358,7 @@ export default function DesignSystem() {
                 lab collection and discontinued history
               </InternalLink>
             </li>
-          </ExplanationList>
+          </ol>
         </Section>
 
         <Section
@@ -369,37 +367,33 @@ export default function DesignSystem() {
         >
           <Box title="Responsive Grid">
             <div className="text-muted flex flex-wrap items-center justify-between gap-3 text-sm">
-              <p className="text-foreground font-medium">
+              <p className="text-foreground text-lg font-semibold tracking-tight">
                 <span className="sm:hidden">1 column</span>
                 <span className="hidden sm:inline md:hidden">2 columns</span>
                 <span className="hidden md:inline lg:hidden">3 columns</span>
                 <span className="hidden lg:inline">4 columns</span>
               </p>
-              <p>
-                <span className="sm:hidden">Default · 16px gap</span>
-                <span className="hidden sm:inline md:hidden">
-                  sm · 20px gap
-                </span>
-                <span className="hidden md:inline lg:hidden">
-                  md · 20px gap
-                </span>
-                <span className="hidden lg:inline">lg · 20px gap</span>
+              <p className="text-muted text-sm tabular-nums">
+                <span className="sm:hidden">Default · gap-4</span>
+                <span className="hidden sm:inline md:hidden">sm · gap-5</span>
+                <span className="hidden md:inline lg:hidden">md · gap-5</span>
+                <span className="hidden lg:inline">lg · gap-5</span>
               </p>
             </div>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
                 <li
-                  className="corner-squircle border-action/20 bg-action/5 flex min-h-32 min-w-0 flex-col justify-between gap-6 rounded-xl border p-4"
+                  className="bg-interface-hover flex min-h-32 min-w-0 flex-col justify-between gap-5 rounded-lg p-5"
                   key={item}
                 >
-                  <span className="text-action font-mono text-2xl tabular-nums">
-                    {String(item).padStart(2, "0")}
+                  <span className="text-foreground text-4xl font-medium tracking-tight tabular-nums">
+                    {item}
                   </span>
                   <span className="text-muted text-sm">Equal-width column</span>
                 </li>
               ))}
             </ul>
-            <code className="text-muted block font-mono text-sm wrap-anywhere">
+            <code className="text-muted block font-mono text-base leading-relaxed wrap-anywhere">
               grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
               gap-4 sm:gap-5
             </code>
@@ -411,235 +405,302 @@ export default function DesignSystem() {
           contentClassName={
             // This demonstrates grid spacing on Section's body wrapper.
             // oxlint-disable-next-line shadcn/no-restyle -- The demo exercises the contentClassName API.
-            "grid grid-cols-1 gap-5 md:grid-cols-2"
+            "grid grid-cols-1 md:grid-cols-2 md:[&>div:last-child:nth-child(odd)]:col-span-2 [&>div]:border-border [&>div]:border-b [&>div]:border-dashed [&>div]:last:border-b-0 md:[&>div:nth-child(odd):not(:last-child)]:border-r"
           }
         >
-          <Box name="IndexCard" title="Index Card">
-            <div className="grid gap-3.5 sm:grid-cols-2">
-              <IndexCard
-                title="Writing"
-                description="Notes and ideas I want to share."
-                href="/writing"
-                count={18}
-                countLabel="writing posts"
-                icon={
-                  <DocumentTextIcon
-                    aria-hidden="true"
-                    className="text-foreground size-4.5 shrink-0"
-                    strokeWidth={1.5}
-                  />
-                }
-                headingLevel={3}
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="IndexCard" title="Index Card">
+              <div className="grid gap-3.5 sm:grid-cols-2">
+                <IndexCard
+                  title="Writing"
+                  description="Notes and ideas I want to share."
+                  href="/writing"
+                  count={18}
+                  countLabel="writing posts"
+                  icon={
+                    <DocumentTextIcon
+                      aria-hidden="true"
+                      className="text-foreground size-4.5 shrink-0"
+                      strokeWidth={1.5}
+                    />
+                  }
+                  headingLevel={3}
+                />
+                <IndexCard
+                  title="Labs"
+                  description="Experiments and interactive explorations."
+                  href="/labs"
+                  count={18}
+                  countLabel="labs"
+                  icon={
+                    <DocumentTextIcon
+                      aria-hidden="true"
+                      className="text-foreground size-4.5 shrink-0"
+                      strokeWidth={1.5}
+                    />
+                  }
+                  headingLevel={3}
+                />
+              </div>
+            </Box>
+          </div>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Switch" title="Switch">
+              <Switch />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Accordion" title="Accordion">
+              <Accordion />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Checkbox" title="Checkbox">
+              <Checkbox />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Popover" title="Popover">
+              <Popover />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="NumberInput" title="Number Input">
+              <NumberInput />
+            </Box>
+          </div>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Table" title="Table">
+              <Table />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Tabs" title="Tabs">
+              <Tabs />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Toast />
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Button" title="Button: Primary">
+              <Button variant="primary">Button</Button>
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Button" title="Button: Loading">
+              <LoadingButton />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Button" title="Button: Secondary">
+              <Button variant="secondary">Button</Button>
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Button" title="Button: With Icon">
+              <ButtonWithIcon />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Button" title="Button: Only Icon">
+              <ButtonIconOnly />
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Button" title="Button: Danger">
+              <Button variant="danger">Delete</Button>
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Button" title="Button: Disabled">
+              <Button disabled variant="secondary">
+                Button
+              </Button>
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="InternalLink" title="Internal Link">
+              <div className="space-y-2">
+                <div>
+                  <InternalLink href="/">Internal Link</InternalLink>
+                </div>
+                <div>
+                  <InternalLink href="/" variant="inline">
+                    Inline Link
+                  </InternalLink>
+                </div>
+                <div className="text-sm">
+                  <InternalLink href="/api" variant="footer">
+                    API
+                  </InternalLink>
+                </div>
+              </div>
+            </Box>
+          </div>
+
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="ExternalLink" title="External Link">
+              <ExternalLink
+                href="https://www.harislab.com"
+                name="External Link"
               />
-              <IndexCard
-                title="Labs"
-                description="Experiments and interactive explorations."
-                href="/labs"
-                count={18}
-                countLabel="labs"
-                icon={
-                  <DocumentTextIcon
-                    aria-hidden="true"
-                    className="text-foreground size-4.5 shrink-0"
-                    strokeWidth={1.5}
-                  />
-                }
-                headingLevel={3}
-              />
-            </div>
-          </Box>
-          <Box name="Switch" title="Switch">
-            <Switch />
-          </Box>
+            </Box>
+          </div>
 
-          <Box name="Accordion" title="Accordion">
-            <Accordion />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box title="Input: Text">
+              <label className="block w-full sm:max-w-xs">
+                <span className="sr-only">Text input</span>
+                <input
+                  className={FORM_CONTROL_CLASS_NAME}
+                  placeholder="Type something..."
+                  type="text"
+                />
+              </label>
+            </Box>
+          </div>
 
-          <Box name="Checkbox" title="Checkbox">
-            <Checkbox />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box title="Input: Search">
+              <label className="block w-full sm:max-w-xs">
+                <span className="sr-only">Search input</span>
+                <input
+                  className={FORM_CONTROL_CLASS_NAME}
+                  placeholder="Search"
+                  type="search"
+                />
+              </label>
+            </Box>
+          </div>
 
-          <Box name="Popover" title="Popover">
-            <Popover />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Box" title="Box">
+              <ul className="grid gap-5 sm:grid-cols-2">
+                <Box as="li" headingAs="h3" name="Box" title="Exercise title">
+                  <p>Use a heading and list item for exercise cards.</p>
+                </Box>
+                <Box as="li" headingAs="h3" name="Box" title="Another exercise">
+                  <p>Cards stretch to the same height within each grid row.</p>
+                </Box>
+              </ul>
+            </Box>
+          </div>
 
-          <Box name="NumberInput" title="Number Input">
-            <NumberInput />
-          </Box>
-          <Box name="Table" title="Table">
-            <Table />
-          </Box>
-
-          <Box name="Tabs" title="Tabs">
-            <Tabs />
-          </Box>
-
-          <Toast />
-
-          <Box name="Button" title="Button: Primary">
-            <Button variant="primary">Button</Button>
-          </Box>
-
-          <Box name="Button" title="Button: Loading">
-            <LoadingButton />
-          </Box>
-
-          <Box name="Button" title="Button: Secondary">
-            <Button variant="secondary">Button</Button>
-          </Box>
-
-          <Box name="Button" title="Button: With Icon">
-            <ButtonWithIcon />
-          </Box>
-
-          <Box name="Button" title="Button: Only Icon">
-            <ButtonIconOnly />
-          </Box>
-
-          <Box name="Button" title="Button: Danger">
-            <Button variant="danger">Delete</Button>
-          </Box>
-
-          <Box name="Button" title="Button: Disabled">
-            <Button disabled variant="secondary">
-              Button
-            </Button>
-          </Box>
-
-          <Box name="InternalLink" title="Internal Link">
-            <div className="space-y-2">
-              <div>
-                <InternalLink href="/">Internal Link</InternalLink>
-              </div>
-              <div>
-                <InternalLink href="/" variant="database">
-                  Database link example
-                </InternalLink>
-              </div>
-              <div>
-                <InternalLink href="/" variant="inline">
-                  Inline Link
-                </InternalLink>
-              </div>
-              <div className="text-sm">
-                <InternalLink href="/api" variant="footer">
-                  API
-                </InternalLink>
-              </div>
-            </div>
-          </Box>
-
-          <Box name="ExternalLink" title="External Link">
-            <ExternalLink
-              href="https://www.harislab.com"
-              name="External Link"
-            />
-          </Box>
-
-          <Box title="Input: Text">
-            <label className="block w-full sm:max-w-xs">
-              <span className="sr-only">Text input</span>
-              <input
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box title="Text Area">
+              <textarea
+                aria-label="Text area example"
                 className={FORM_CONTROL_CLASS_NAME}
-                placeholder="Type something..."
-                type="text"
+                placeholder="Write something here..."
+                rows={3}
               />
-            </label>
-          </Box>
+            </Box>
+          </div>
 
-          <Box title="Input: Search">
-            <label className="block w-full sm:max-w-xs">
-              <span className="sr-only">Search input</span>
-              <input
-                className={FORM_CONTROL_CLASS_NAME}
-                placeholder="Search"
-                type="search"
-              />
-            </label>
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Toggle" title="Toggle">
+              <Toggle />
+            </Box>
+          </div>
 
-          <Box name="Box" title="Box">
-            <ul className="grid gap-5 sm:grid-cols-2">
-              <Box as="li" headingAs="h3" name="Box" title="Exercise title">
-                <p>Use a heading and list item for exercise cards.</p>
-              </Box>
-              <Box as="li" headingAs="h3" name="Box" title="Another exercise">
-                <p>Cards stretch to the same height within each grid row.</p>
-              </Box>
-            </ul>
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Breadcrumbs" title="Breadcrumbs">
+              <Breadcrumbs />
+            </Box>
+          </div>
 
-          <Box title="Text Area">
-            <textarea
-              aria-label="Text area example"
-              className={FORM_CONTROL_CLASS_NAME}
-              placeholder="Write something here..."
-              rows={3}
-            />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Badges" title="Badges">
+              <Badges />
+            </Box>
+          </div>
 
-          <Box name="Toggle" title="Toggle">
-            <Toggle />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="BackButton" title="Back Button">
+              <BackButton href="/labs" name="Labs" />
+            </Box>
+          </div>
 
-          <Box name="Breadcrumbs" title="Breadcrumbs">
-            <Breadcrumbs />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Tooltip" title="Tooltip">
+              <Tooltip />
+            </Box>
+          </div>
 
-          <Box name="Badges" title="Badges">
-            <Badges />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Logo" title="Logo">
+              <Logo />
+            </Box>
+          </div>
 
-          <Box name="BackButton" title="Back Button">
-            <BackButton href="/labs" name="Labs" />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Modal" title="Modal">
+              <Modal />
+            </Box>
+          </div>
 
-          <Box name="Tooltip" title="Tooltip">
-            <Tooltip />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="SelectField" title="Select">
+              <Select />
+            </Box>
+          </div>
 
-          <Box name="Logo" title="Logo">
-            <Logo />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="TabBarButtom" title="Bottom Bar">
+              <TabBarButtom preview />
+            </Box>
+          </div>
 
-          <Box name="Modal" title="Modal">
-            <Modal />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Slider" title="Slider">
+              <Slider />
+            </Box>
+          </div>
 
-          <Box name="SelectField" title="Select">
-            <Select />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="ContextMenu" title="Context Menus">
+              <ContextMenu />
+            </Box>
+          </div>
 
-          <Box name="TabBarButtom" title="Bottom Bar">
-            <TabBarButtom preview />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box title="Date Picker">
+              <label className="block w-full sm:max-w-xs">
+                <span className="text-foreground/80 mb-1 block text-sm font-medium">
+                  Choose a date
+                </span>
+                <input className={FORM_CONTROL_CLASS_NAME} type="date" />
+              </label>
+            </Box>
+          </div>
 
-          <Box name="Slider" title="Slider">
-            <Slider />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Colors" title="Design Tokens">
+              <DesignTokens />
+            </Box>
+          </div>
 
-          <Box name="ContextMenu" title="Context Menus">
-            <ContextMenu />
-          </Box>
-
-          <Box title="Date Picker">
-            <label className="block w-full sm:max-w-xs">
-              <span className="text-foreground/80 mb-1 block text-sm font-medium">
-                Choose a date
-              </span>
-              <input className={FORM_CONTROL_CLASS_NAME} type="date" />
-            </label>
-          </Box>
-
-          <Box name="Colors" title="Design Tokens">
-            <DesignTokens />
-          </Box>
-
-          <Box name="Colors" title="Main Colors">
-            <MainColors />
-            <HierarchicalColors />
-          </Box>
+          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+            <Box name="Colors" title="Main Colors">
+              <MainColors />
+              <HierarchicalColors />
+            </Box>
+          </div>
         </Section>
       </div>
     </>

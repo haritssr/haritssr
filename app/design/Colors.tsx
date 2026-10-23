@@ -85,6 +85,10 @@ const DESIGN_TOKENS = [
     definition: "color-mix( in oklab, purple-400 60.5%, purple-500 39.5% )",
   },
   {
+    name: "contact-accent",
+    definition: "emerald-600",
+  },
+  {
     name: "muted",
     definition: "color-mix( in srgb, foreground 70%, background )",
   },

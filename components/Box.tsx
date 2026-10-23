@@ -20,7 +20,7 @@ export default function Box({
           {title}
         </Heading>
         {name !== undefined && name.length > 0 ? (
-          <span className="text-muted text-sm">{`${name}.tsx`}</span>
+          <span className="text-muted font-mono text-sm">{`${name}.tsx`}</span>
         ) : null}
       </div>
       <div

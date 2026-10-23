@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 interface IndexCardProps {
   title: string;
+  badge?: string;
   description: string;
   count?: number;
   countLabel?: string;
@@ -15,6 +16,7 @@ interface IndexCardProps {
 
 export default function IndexCard({
   title,
+  badge,
   description,
   count,
   countLabel,
@@ -34,6 +36,11 @@ export default function IndexCard({
           >
             {title}
           </Heading>
+          {badge === undefined ? null : (
+            <span className="border-border bg-foreground/5 text-muted shrink-0 rounded-full border px-2 py-0.5 text-xs font-medium">
+              {badge}
+            </span>
+          )}
         </div>
         <div className="flex shrink-0 items-center space-x-1">
           {count === undefined ? null : (

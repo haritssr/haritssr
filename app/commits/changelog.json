@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "30996335ffeae7847ff5a4cc6ba3df6d321e37f7",
+      "date": "2026-10-23T11:17:19+07:00",
+      "subject": "style(Diagrams): fill nodes with matching design tokens"
+    },
+    {
       "hash": "b6184581e4a255bf8927c40341caf4fde9e858fc",
       "date": "2026-10-23T11:17:15+07:00",
       "subject": "style(Buttons): standardize corners and status actions"
