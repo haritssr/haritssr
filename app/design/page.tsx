@@ -309,6 +309,14 @@ export default function DesignSystem() {
               development while maintaining consistency.
             </li>
             <li>
+              Colors communicate purpose:
+              <ul className="mt-1 list-outside list-disc space-y-1 pl-4">
+                <li>Blue (action) marks available actions.</li>
+                <li>Red (danger) marks dangerous or destructive actions.</li>
+                <li>Green (success) marks done or finished states.</li>
+              </ul>
+            </li>
+            <li>
               Use Oklab/Oklch (not RGB or HSV) for random colors, palettes, and
               gradients to ensure perceptually uniform, balanced results that
               match human vision.
