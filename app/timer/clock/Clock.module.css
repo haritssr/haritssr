@@ -1,0 +1,29 @@
+.frame {
+  display: flex;
+  flex: 1 1 0;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Let the clock use the space left after the actual navigation and footer. */
+:global(body):has(.frame) {
+  height: 100dvh;
+}
+
+:global(main):has(.frame) {
+  display: flex;
+  flex: 1 1 0;
+  min-height: 0;
+  flex-direction: column;
+}
+
+:global(main):has(.frame) > :global(header) {
+  flex-shrink: 0;
+  margin-block: clamp(0.75rem, 3dvh, 1.5rem) clamp(0.75rem, 4dvh, 3rem);
+}
+
+:global(body):has(.frame) > :global(footer) {
+  flex-shrink: 0;
+  margin-top: clamp(0.75rem, 3dvh, 1.5rem);
+}

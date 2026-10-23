@@ -11,7 +11,11 @@ const TIME_FORMATTER = new Intl.DateTimeFormat("en-GB", {
   hourCycle: "h23",
 });
 
-export default function AnalogClock() {
+export default function AnalogClock({
+  className = "absolute top-0 right-0 h-full w-auto",
+}: {
+  className?: string;
+}) {
   const [timestamp, setTimestamp] = useState<number | null>(null);
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function AnalogClock() {
 
   return (
     <svg
-      className="text-foreground absolute top-0 right-0 h-full w-auto drop-shadow-sm"
+      className={`text-foreground drop-shadow-sm ${className}`}
       viewBox="0 0 100 100"
     >
       <title>

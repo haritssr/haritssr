@@ -108,6 +108,12 @@ export const navigationRoutes: readonly RouteDoc[] = [
     group: "Timer",
   },
   {
+    route: "/timer/clock",
+    title: "Clock",
+    description: "An analog clock showing Jakarta time.",
+    group: "Timer",
+  },
+  {
     route: "/timer",
     title: "Timer",
     description: "A simple timer for focused work and everyday tasks.",

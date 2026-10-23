@@ -20,24 +20,24 @@ export const metadata = createPageMetadata({
 export default function TimerPage() {
   return (
     <>
-      <PageHeader back={{ href: "/", name: "Home" }} path="/timer">
-        <div className="relative pr-28 sm:pr-36">
-          <div className="flex min-w-0 flex-col gap-1 sm:gap-3">
-            <PageTitle>Timer</PageTitle>
-            <PageDescription>
-              <span className="block min-h-lh">
-                <TimerContent fallback="Jakarta time · WIB">
-                  <TimerDate />
-                </TimerContent>
-              </span>
-            </PageDescription>
-            <nav aria-label="Timer" className="flex flex-wrap gap-3">
-              <InternalLink href="/timer/details">Details</InternalLink>
-              <InternalLink href="/timer/statistic">Statistics</InternalLink>
-            </nav>
-          </div>
-          <AnalogClock />
-        </div>
+      <PageHeader
+        back={{ href: "/", name: "Home" }}
+        path="/timer"
+        aside={<AnalogClock className="size-24 sm:size-32" />}
+      >
+        <PageTitle>Timer</PageTitle>
+        <PageDescription>
+          <span className="block min-h-lh">
+            <TimerContent fallback="Jakarta time · WIB">
+              <TimerDate />
+            </TimerContent>
+          </span>
+        </PageDescription>
+        <nav aria-label="Timer" className="flex flex-wrap gap-3">
+          <InternalLink href="/timer/details">Details</InternalLink>
+          <InternalLink href="/timer/statistic">Statistics</InternalLink>
+          <InternalLink href="/timer/clock">Clock</InternalLink>
+        </nav>
       </PageHeader>
       <TimerContent>
         <TimerClient />
