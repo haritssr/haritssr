@@ -45,11 +45,12 @@ function LabList({
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {columns.map((column) =>
+      {columns.map((column, columnIndex) =>
         column.length === 0 ? null : (
-          <ul
-            className="marker:text-muted list-outside list-disc space-y-3 pl-4"
+          <ol
+            className="marker:text-muted list-outside list-decimal space-y-3 pl-7"
             key={column[0].slug}
+            start={columnIndex * columnLength + 1}
           >
             {column.map((lab) => (
               <li className="min-w-0 pl-1" key={lab.slug}>
@@ -58,7 +59,7 @@ function LabList({
                 </InternalLink>
               </li>
             ))}
-          </ul>
+          </ol>
         )
       )}
     </div>
