@@ -198,13 +198,13 @@ function PersonalDetails() {
           className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 pl-5 wrap-break-word"
         >
           <li>
-            Build{" "}
+            Building{" "}
             <ExternalLink
               href="https://www.harimaki.com"
               name="harimaki.com"
               showArrow={false}
             />
-            {" and "}
+            {" & "}
             <ExternalLink
               href="https://haritssr.com"
               name="haritssr.com"
@@ -251,7 +251,7 @@ function PersonalDetails() {
             &gt; Hedonia
           </li>
           <li>Effective Accelerationism (e/acc)</li>
-          <li>Existence = f(constraints, maintainence, ...)</li>
+          <li>Existence = f(constraints, maintainence)</li>
           <li>100% is easier than 98%</li>
           <li>What gets measured gets managed</li>
         </ul>
