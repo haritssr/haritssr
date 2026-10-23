@@ -57,8 +57,8 @@ const BUTTON_SIZE_CLASS = {
   "icon-circle":
     "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:size-8 sm:p-1.5",
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
-  default: "corner-squircle rounded-xl px-3 py-1.5",
-  "mobile-roomy": "corner-squircle rounded-xl px-3 py-2 sm:py-1.5",
+  default: "rounded-md px-3 py-1.5",
+  "mobile-roomy": "rounded-md px-3 py-2 sm:py-1.5",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -87,7 +87,7 @@ const Button = function Button({
     <button
       {...props}
       aria-busy={loading}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" ? "corner-squircle rounded-xl p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
+      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" ? "rounded-lg p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
       disabled={disabled === true || loading}
       ref={ref}
       type={type}

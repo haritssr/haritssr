@@ -261,11 +261,11 @@ function ZoomControls({
   return (
     <fieldset
       aria-label="Diagram zoom"
-      className="border-border text-foreground corner-squircle m-0 flex shrink-0 items-center rounded-xl border p-0"
+      className="border-border text-foreground m-0 flex shrink-0 items-center rounded-md border p-0"
     >
       <button
         aria-label="Zoom out"
-        className="border-border hover:bg-interface-hover focus-visible:outline-action corner-squircle flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-l-xl border-r focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-50"
+        className="border-border hover:bg-interface-hover focus-visible:outline-action flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-l-md border-r focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-50"
         disabled={disabled || zoom <= MIN_ZOOM}
         onClick={() => {
           onZoomChange(Math.max(MIN_ZOOM, zoom - ZOOM_STEP));
@@ -287,7 +287,7 @@ function ZoomControls({
       </button>
       <button
         aria-label="Zoom in"
-        className="border-border hover:bg-interface-hover focus-visible:outline-action corner-squircle flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-r-xl border-l focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-50"
+        className="border-border hover:bg-interface-hover focus-visible:outline-action flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-r-md border-l focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-50"
         disabled={disabled || zoom >= MAX_ZOOM}
         onClick={() => {
           onZoomChange(Math.min(MAX_ZOOM, zoom + ZOOM_STEP));

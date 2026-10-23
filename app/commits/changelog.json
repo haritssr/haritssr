@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "d02869299ad3754f13e82425faea440475f00dbf",
+      "date": "2026-10-23T11:16:52+07:00",
+      "subject": "style(Navigation): refine press feedback and tablet visibility"
+    },
+    {
       "hash": "252c787732b02516a4490cb1427179efba5b6c82",
       "date": "2026-10-23T11:16:45+07:00",
       "subject": "docs(Timer): simplify details and statistics descriptions"

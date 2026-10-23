@@ -483,7 +483,7 @@ export default function GraphView() {
                     <button
                       aria-label={`Student problem: ${mapping.problem}`}
                       aria-pressed={selected}
-                      className={`absolute flex flex-col justify-center rounded-xl border px-3 text-left shadow-sm transition duration-150 hover:-translate-y-px hover:shadow-md ${
+                      className={`absolute flex flex-col justify-center rounded-md border px-3 text-left shadow-sm transition duration-150 hover:-translate-y-px hover:shadow-md ${
                         selected
                           ? "border-action bg-surface ring-action/20 z-10 ring-2"
                           : "border-zinc-200 bg-white"
@@ -527,7 +527,7 @@ export default function GraphView() {
                     <button
                       aria-label={`HL feature: ${formatFeatureName(feature.name)}`}
                       aria-pressed={selected}
-                      className={`absolute flex flex-col justify-center rounded-xl border px-3 text-left shadow-sm transition duration-150 hover:-translate-y-px hover:shadow-md ${
+                      className={`absolute flex flex-col justify-center rounded-md border px-3 text-left shadow-sm transition duration-150 hover:-translate-y-px hover:shadow-md ${
                         selected
                           ? "border-action ring-action/20 z-10 ring-2"
                           : style.node

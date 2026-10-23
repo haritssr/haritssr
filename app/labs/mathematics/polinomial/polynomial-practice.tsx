@@ -72,7 +72,7 @@ function TopicNavigation({
           <button
             aria-label={`${topic.id}. ${topic.title}, ${complete} dari ${topicQuestions.length} soal benar`}
             aria-current={active ? "true" : undefined}
-            className={`focus-visible:outline-action min-w-0 cursor-pointer rounded-xl border px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${active ? "border-action bg-action/10" : "border-border hover:bg-interface-hover"}`}
+            className={`focus-visible:outline-action min-w-0 cursor-pointer rounded-md border px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${active ? "border-action bg-action/10" : "border-border hover:bg-interface-hover"}`}
             key={topic.id}
             onClick={() => {
               onNavigate(topicQuestions[0].id);

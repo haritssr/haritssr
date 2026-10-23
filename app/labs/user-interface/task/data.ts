@@ -4,7 +4,7 @@ export const MAX_TASKS_PER_DAY = 100;
 export const MAX_TASK_DURATION_MINUTES = 24 * 60;
 
 const TASK_ACTION_BUTTON_BASE_CLASS =
-  "cursor-pointer text-xs px-1.5 py-1 rounded-lg corner-squircle";
+  "cursor-pointer text-xs px-1.5 py-1 rounded-lg";
 
 const TASK_ACTION_BUTTON_COLOR_CLASS = {
   blue: "bg-blue-600 hover:bg-blue-500 text-blue-50",

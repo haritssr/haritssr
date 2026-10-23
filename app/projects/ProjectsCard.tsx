@@ -53,13 +53,13 @@ export default function ProjectsCard({
 
       <div className="flex space-x-2.5 px-3.5 pb-3.5">
         <Link
-          className="corner-squircle border-border text-foreground hover:bg-interface-hover focus-visible:outline-foreground inline-flex w-1/2 items-center justify-center gap-1.5 rounded-xl border bg-white px-3 py-1.5 text-center text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="border-border text-foreground hover:bg-interface-hover focus-visible:outline-foreground inline-flex w-1/2 items-center justify-center gap-1.5 rounded-md border bg-white px-3 py-1.5 text-center text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
           href={`/projects/${getProjectSlug(title)}`}
         >
           Overview
         </Link>
         <a
-          className="interactive-elevation corner-squircle bg-foreground/90 text-background hover:bg-foreground inline-flex w-1/2 items-center justify-center rounded-xl py-1.5 text-center text-sm select-none"
+          className="interactive-elevation bg-foreground/90 text-background hover:bg-foreground inline-flex w-1/2 items-center justify-center rounded-md py-1.5 text-center text-sm select-none"
           href={href}
           rel="noopener noreferrer"
           target="_blank"

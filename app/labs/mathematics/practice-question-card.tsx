@@ -32,7 +32,7 @@ export default function PracticeQuestionCard({
         {choices.map((choice, index) => (
           <button
             aria-pressed={selected === index}
-            className={`focus-visible:outline-action min-h-12 min-w-0 overflow-x-auto rounded-xl border px-4 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${selected === index ? "border-action bg-action/10 text-action" : "border-border text-foreground hover:border-action hover:bg-interface-hover"}`}
+            className={`focus-visible:outline-action min-h-12 min-w-0 overflow-x-auto rounded-md border px-4 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${selected === index ? "border-action bg-action/10 text-action" : "border-border text-foreground hover:border-action hover:bg-interface-hover"}`}
             key={index}
             onClick={() => {
               setSelected(index);

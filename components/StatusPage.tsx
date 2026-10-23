@@ -6,11 +6,12 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 
 const STATUS_ACTION_BASE_CLASS =
-  "inline-flex min-h-10 cursor-pointer items-center justify-center corner-squircle rounded-xl border px-4 py-2 text-center text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action";
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-center text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action";
 
 const STATUS_ACTION_VARIANT_CLASS = {
-  primary: "border-transparent bg-action text-white hover:bg-action-hover",
-  secondary: "border-border bg-white text-foreground hover:bg-interface-hover",
+  primary: "bg-action font-medium text-white hover:bg-action-hover",
+  secondary:
+    "border-border border bg-white text-secondary-foreground select-none hover:bg-interface-hover hover:text-secondary-hover-foreground",
 } as const;
 
 function getStatusActionClassName(

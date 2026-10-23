@@ -1,4 +1,4 @@
-const CACHE_NAME = "haritssr-offline-v2";
+const CACHE_NAME = "haritssr-offline-v4";
 const OFFLINE_URL = "/offline.html";
 const OWNED_PREFIXES = ["haritssr-shell-", "haritssr-offline-"];
 

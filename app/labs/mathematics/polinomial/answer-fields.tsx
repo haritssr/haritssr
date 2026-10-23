@@ -188,7 +188,7 @@ function Classification({
           const selected = answers[field.id] === option.id;
           return (
             <label
-              className={`focus-within:outline-action flex min-h-16 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 focus-within:outline-2 focus-within:outline-offset-2 ${selected ? "border-action bg-action/10 text-action" : "border-border hover:bg-interface-hover"}`}
+              className={`focus-within:outline-action flex min-h-16 cursor-pointer items-center gap-3 rounded-md border px-4 py-3 focus-within:outline-2 focus-within:outline-offset-2 ${selected ? "border-action bg-action/10 text-action" : "border-border hover:bg-interface-hover"}`}
               key={option.id}
             >
               <input

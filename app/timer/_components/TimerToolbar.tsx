@@ -59,13 +59,13 @@ function TimerSettingsDialog() {
     <Dialog.Root>
       <Dialog.Trigger
         aria-label="Settings"
-        className="border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground corner-squircle inline-flex min-h-8.5 cursor-pointer items-center justify-center rounded-xl border px-2 py-1.5 text-sm transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+        className="border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground inline-flex min-h-8.5 cursor-pointer items-center justify-center rounded-md border px-2 py-1.5 text-sm transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
       >
         <Cog6ToothIcon aria-hidden="true" className="size-4.5" />
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
-        <Dialog.Popup className="scrollbar-subtle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-10 outline-hidden">
+        <Dialog.Popup className="scrollbar-subtle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-4 outline-hidden">
           <Dialog.Title className="mb-5 text-center font-medium">
             Settings
           </Dialog.Title>

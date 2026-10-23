@@ -58,7 +58,7 @@ const SHARE_COMMAND: ShareCommand = {
 type SearchItem = SourceCodeCommand | ShareCommand | PageSearchItem;
 
 const RESULT_ITEM_CLASS_NAME =
-  "data-highlighted:bg-interface-hover data-highlighted:border-border corner-squircle flex cursor-pointer items-center gap-4 rounded-xl border border-transparent p-2 select-none";
+  "data-highlighted:bg-interface-hover data-highlighted:border-border flex cursor-pointer items-center gap-4 rounded-md border border-transparent p-2 select-none";
 
 interface SearchMatchTextProps {
   query: string;

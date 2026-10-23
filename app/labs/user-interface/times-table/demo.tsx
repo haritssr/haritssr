@@ -30,7 +30,7 @@ function IncrementButton() {
   return (
     <>
       <button
-        className="corner-squircle my-5 block cursor-pointer rounded-2xl border border-zinc-300 px-4 py-1.5 text-zinc-700 select-none hover:bg-zinc-50 active:translate-y-0.5 active:border-zinc-400 active:bg-zinc-100"
+        className="my-5 block cursor-pointer rounded-2xl border border-zinc-300 px-4 py-1.5 text-zinc-700 select-none hover:bg-zinc-50 active:translate-y-0.5 active:border-zinc-400 active:bg-zinc-100"
         onClick={async () => await setCount((c) => c + 1)}
         type="button"
       >

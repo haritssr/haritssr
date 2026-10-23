@@ -529,7 +529,7 @@ export default function TaskPage() {
 
                 return (
                   <button
-                    className={`corner-squircle inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border text-sm ${presetClassName}`}
+                    className={`inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border text-sm ${presetClassName}`}
                     data-minutes={preset.minutes}
                     key={preset.minutes}
                     onClick={handlePresetDurationClick}
@@ -541,7 +541,7 @@ export default function TaskPage() {
               })}
             </div>
             <button
-              className="corner-squircle h-8 rounded-lg bg-zinc-700 px-3 text-sm text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-70"
+              className="h-8 rounded-lg bg-zinc-700 px-3 text-sm text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-70"
               disabled={!canAddNewOtherTask}
               type="submit"
             >

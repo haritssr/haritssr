@@ -223,7 +223,7 @@ export default function IconComparison({
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {icons.map((icon) => (
             <label
-              className="border-border has-checked:border-action has-checked:bg-action/5 hover:bg-surface-hover has-focus-visible:outline-action relative flex cursor-pointer flex-col gap-4 rounded-xl border p-4 has-focus-visible:outline-2 has-focus-visible:outline-offset-2"
+              className="border-border has-checked:border-action has-checked:bg-action/5 hover:bg-surface-hover has-focus-visible:outline-action relative flex cursor-pointer flex-col gap-4 rounded-md border p-4 has-focus-visible:outline-2 has-focus-visible:outline-offset-2"
               key={icon.id}
             >
               <div className="flex items-center justify-between gap-4">

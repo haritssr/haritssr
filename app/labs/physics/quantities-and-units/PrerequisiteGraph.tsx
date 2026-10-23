@@ -570,7 +570,7 @@ function GraphViewport({
             <button
               aria-label={`Highlight prerequisites for ${node.label}`}
               aria-pressed={isSelected}
-              className={`focus-visible:outline-action absolute top-(--node-top) left-(--node-left) flex h-15 w-(--node-width) flex-col items-center justify-center overflow-hidden rounded-xl border px-2 text-center transition-[opacity,border-color,background-color] duration-200 focus-visible:z-10 focus-visible:outline-2 ${kindStyles} ${stateStyles}`}
+              className={`focus-visible:outline-action absolute top-(--node-top) left-(--node-left) flex h-15 w-(--node-width) flex-col items-center justify-center overflow-hidden rounded-md border px-2 text-center transition-[opacity,border-color,background-color] duration-200 focus-visible:z-10 focus-visible:outline-2 ${kindStyles} ${stateStyles}`}
               key={node.id}
               onClick={() => {
                 onSelectNode(node.id);
