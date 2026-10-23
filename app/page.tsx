@@ -172,7 +172,7 @@ function PersonalDetails() {
     <section
       aria-label="About"
       id="Identity"
-      className="corner-squircle border-border/75 bg-interface-hover min-w-0 space-y-4 rounded-2xl border p-4"
+      className="corner-squircle border-border/75 bg-interface-hover/50 min-w-0 space-y-4 rounded-2xl border p-4"
     >
       <div className="flex items-center gap-4">
         <Image
