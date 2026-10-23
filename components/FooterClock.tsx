@@ -46,17 +46,18 @@ export default function FooterClock({ children }: { children: ReactNode }) {
     timestamp === null ? undefined : DATE_FORMATTER.format(timestamp);
 
   return (
-    <>
-      <div className="mb-3 flex min-h-6">{children}</div>
-      <div className="mb-3 flex min-h-6 items-center justify-between gap-4">
-        <div className="h-6 leading-6 tabular-nums">
+    <div className="mb-3 grid min-w-0 grid-cols-1 items-center gap-x-5 gap-y-3 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div className="flex min-h-6 min-w-0">{children}</div>
+      <div className="flex h-6 min-w-0 items-center justify-between gap-4 leading-6 whitespace-nowrap tabular-nums lg:block">
+        <span>
           {timestamp !== null && (
             <time dateTime={date}>
               {date}, {WEEKDAY_FORMATTER.format(timestamp)}
             </time>
           )}
-        </div>
-        <div className="ml-auto h-6 shrink-0 leading-6 tabular-nums">
+        </span>
+        {timestamp !== null && <span className="hidden lg:inline">, </span>}
+        <span>
           {timestamp === null ? (
             <span aria-hidden="true" className="invisible">
               00:00:00 WIB
@@ -66,8 +67,8 @@ export default function FooterClock({ children }: { children: ReactNode }) {
               {TIME_FORMATTER.format(timestamp)} WIB
             </time>
           )}
-        </div>
+        </span>
       </div>
-    </>
+    </div>
   );
 }

@@ -9,7 +9,7 @@ interface FooterActionsProps {
 
 export default function FooterActions({ rssPath }: FooterActionsProps) {
   return (
-    <div className="flex flex-wrap items-center justify-end gap-x-4 sm:gap-x-6">
+    <div className="flex shrink-0 items-center gap-x-4 whitespace-nowrap sm:gap-x-6">
       <InternalLink href={apiRoute.route} variant="footer">
         {apiRoute.title}
       </InternalLink>

@@ -102,7 +102,9 @@ browser/test-file restrictions. Other commands:
   fragment anchors by moving their IDs to the section container.
 - Page titles use the shared `PageTitle` typography inside `PageHeader`, without
   size or class overrides. The layout provides 32px above page content. `Footer`
-  owns a reserved 24px breadcrumb row above its actions; `Breadcrumbs` owns its spacing;
+  reserves a 24px breadcrumb row above the date and clock below 1024px; on desktop,
+  breadcrumbs share a row with the date and clock grouped on the right, above
+  the footer actions. `Breadcrumbs` owns its spacing;
   `PageHeader` starts with its title and renders no back link or empty navigation
   row. Pass back destinations through `back={{ href, name }}` for the top bar;
   put icons beside the title, keeping every title aligned to the same starting

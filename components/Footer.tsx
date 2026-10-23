@@ -38,7 +38,7 @@ export default function Footer() {
           <Breadcrumbs routeLabels={breadcrumbLabels} />
         </FooterClock>
       </div>
-      <div className="mx-auto flex w-full max-w-5xl justify-between gap-5 px-4 xl:px-0">
+      <div className="mx-auto flex w-full max-w-5xl flex-wrap justify-between gap-x-5 gap-y-2 px-4 xl:px-0">
         <div className="shrink-0">
           2021-2026 &#169; <span>Harits Syah</span>
         </div>

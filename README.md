@@ -19,8 +19,10 @@
   effort labels are editorial estimates, not recorded model usage.
 
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
-- Every footer shows breadcrumbs above the Jakarta date, with a live 24-hour WIB
-  clock beside the date. Updates pause in hidden tabs and resume immediately on return;
+- Below 1024px, the footer shows breadcrumbs above the Jakarta date and live
+  24-hour WIB clock. On desktop, breadcrumbs share a row with the date and clock
+  combined on the right as `YYYY-MM-DD, Day, HH:mm:ss WIB`.
+  Updates pause in hidden tabs and resume immediately on return;
   the display uses local clock data without API or database reads.
 - The commit importer lives in `app/commits/import-commits.ts`.
   `bun run sync:commits` (or `bun run import:commits`) reads Git history directly
