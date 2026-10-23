@@ -101,8 +101,11 @@
   readable but must be shortened on edit. New days start empty.
 - Progress derives from timestamps without a write every second. Tasks stop at
   Jakarta midnight. Actions and completion claims use write transactions so only
-  one device handles a completion and its Autoplay transition. Visible owner pages poll every 15 seconds while tasks run, or every
-  60 seconds while idle, and revalidate on focus. Hidden tabs stop polling;
+  one device handles a completion and its Autoplay transition. One visible owner
+  tab polls every 30 seconds while tasks run, or every two minutes while idle,
+  and shares validated snapshots with other tabs. Web Locks elect the polling
+  tab; unsupported browsers use independent polling. Pages revalidate on focus.
+  Hidden tabs stop polling;
   timestamp-based completion and midnight scheduling remain active. Read-only
   previews do not poll. Changes require network connectivity;
   actions update immediately through an in-memory optimistic queue while saves
@@ -110,6 +113,10 @@
   reopening, and show an error with Retry to refresh authoritative data. Uncertain
   writes are not automatically resent. There is no offline writable fallback,
   background scheduler, or Autoplay while all pages close.
+- Snapshot reads discover running and unacknowledged-task dates once through
+  partial indexes, then fetch only those dates and today. Statistics adds only
+  its selected 30-day window. Backups and imports retain full-history reads.
+  Run `bun run migrate:timer` after updating to add the pending-notification index.
 - Settings includes Duration Presets and Task Presets editors. Duration lists
   allow 1–5 entries and task lists 1–6, with separate Save and Cancel
   controls. Duration presets apply to Add and Edit; task presets in two columns appear below

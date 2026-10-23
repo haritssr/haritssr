@@ -148,7 +148,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/server/timerDatabase.ts",
-    "Turso schema, batched reads, changed-row persistence, and reusable-client transactions.",
+    "Turso schema, indexed date-scoped reads, changed-row persistence, and reusable-client transactions.",
   ],
   [
     "app/timer/utils/timerBackup.ts",
@@ -157,6 +157,10 @@ export const implementationFiles = [
   [
     "app/timer/hooks/useTimerAudioOwner.ts",
     "Single-owner ticking and warning audio, with a focused-tab fallback.",
+  ],
+  [
+    "app/timer/hooks/useTimerPolling.ts",
+    "One visible polling tab through Web Locks, with independent polling as a fallback.",
   ],
   [
     "app/timer/utils/timerSound.ts",

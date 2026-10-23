@@ -47,6 +47,7 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
   )`,
   "CREATE INDEX IF NOT EXISTS timer_tasks_date_position ON timer_tasks(date, position)",
   "CREATE INDEX IF NOT EXISTS timer_tasks_running ON timer_tasks(date) WHERE started_at IS NOT NULL",
+  "CREATE INDEX IF NOT EXISTS timer_tasks_pending_notice ON timer_tasks(date) WHERE completed_at IS NOT NULL AND notification_claimed_at IS NULL",
   `CREATE TABLE IF NOT EXISTS timer_preferences (
     id INTEGER PRIMARY KEY CHECK(id = 1), revision INTEGER NOT NULL DEFAULT 0,
     autoplay INTEGER NOT NULL DEFAULT 0 CHECK(autoplay IN (0, 1)),
@@ -78,24 +79,39 @@ export async function initializeTimerDatabase(client: Client) {
   }
 }
 
-function dayQueries(date?: string): InStatement[] {
-  const dates =
-    "date = ? OR date IN (SELECT date FROM timer_tasks WHERE started_at IS NOT NULL OR (completed_at IS NOT NULL AND notification_claimed_at IS NULL))";
-  return date === undefined
-    ? [
-        "SELECT * FROM timer_days ORDER BY date",
-        "SELECT * FROM timer_tasks ORDER BY date, position",
-      ]
-    : [
-        {
-          sql: `SELECT * FROM timer_days WHERE ${dates} ORDER BY date`,
-          args: [date],
-        },
-        {
-          sql: `SELECT * FROM timer_tasks WHERE ${dates} ORDER BY date, position`,
-          args: [date],
-        },
-      ];
+async function dayQueries(
+  tx: Transaction,
+  date?: string,
+  range?: { from: string; to: string }
+): Promise<InStatement[]> {
+  if (date === undefined) {
+    // Full history is reserved for backups and imports.
+    return [
+      "SELECT * FROM timer_days ORDER BY date",
+      "SELECT * FROM timer_tasks ORDER BY date, position",
+    ];
+  }
+  // Discover dates once. Separate branches use the small partial indexes instead
+  // of scanning task history for an OR condition in both subsequent queries.
+  const dates = await tx.execute({
+    sql: `SELECT ? AS date
+      UNION SELECT date FROM timer_tasks WHERE started_at IS NOT NULL
+      UNION SELECT date FROM timer_tasks WHERE completed_at IS NOT NULL AND notification_claimed_at IS NULL
+      ${range === undefined ? "" : "UNION SELECT date FROM timer_days WHERE date BETWEEN ? AND ?"}`,
+    args: range === undefined ? [date] : [date, range.from, range.to],
+  });
+  const args = dates.rows.map((row) => row.date);
+  const placeholders = args.map(() => "?").join(", ");
+  return [
+    {
+      sql: `SELECT * FROM timer_days WHERE date IN (${placeholders}) ORDER BY date`,
+      args,
+    },
+    {
+      sql: `SELECT * FROM timer_tasks WHERE date IN (${placeholders}) ORDER BY date, position`,
+      args,
+    },
+  ];
 }
 
 function decodeDays(days: ResultSet, tasks: ResultSet) {
@@ -132,13 +148,17 @@ function decodeDays(days: ResultSet, tasks: ResultSet) {
 }
 
 export async function readTimerDays(tx: Transaction, date?: string) {
-  const [days, tasks] = await tx.batch(dayQueries(date));
+  const [days, tasks] = await tx.batch(await dayQueries(tx, date));
   return decodeDays(days, tasks);
 }
 
-export async function readTimerState(tx: Transaction, date?: string) {
+export async function readTimerState(
+  tx: Transaction,
+  date: string,
+  range?: { from: string; to: string }
+) {
   const [days, tasks, preferences] = await tx.batch([
-    ...dayQueries(date),
+    ...(await dayQueries(tx, date, range)),
     "SELECT * FROM timer_preferences WHERE id = 1",
   ]);
   const [row] = preferences.rows;

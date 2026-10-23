@@ -42,7 +42,7 @@ export const timerRelationships = [
     notes: [
       "TimerProvider checks the shared account session and loads TimerRuntime for the owner or a Timer page, recovering saved running tasks on direct navigation or reload. Anonymous visitors elsewhere do not load Timer state. SWR loads confirmed snapshots; timerMutations projects ordered pending changes in memory through useTimer; mounting it in app/layout.tsx keeps scheduling and completion effects alive across navigation.",
       "FloatingTimerDock reuses the shared snapshot outside /timer and stacks completion messages with a compact task bar. useTimerDockPosition measures mobile navigation height and gap and publishes back-to-top clearance; desktop placement follows the content width. The dock overlays content without reserving footer space.",
-      "act projects the change immediately, then timerMutations calls sendTimerAction in order through the protected API. Task actions read saved preferences in the same Turso transaction. receive protects newer confirmed revisions and rebases pending changes; failed writes restore confirmed state and preserve form drafts. Committed changes invalidate other tabs without triggering a redundant same-tab fetch.",
+      "act projects the change immediately, then timerMutations calls sendTimerAction in order through the protected API. Task actions read saved preferences in the same Turso transaction. receive protects newer confirmed revisions and rebases pending changes; failed writes restore confirmed state and preserve form drafts. Reads and committed changes broadcast validated snapshots to other tabs without another fetch. One visible tab owns periodic polling through Web Locks.",
       "Statistics uses GET /api/timer?date=YYYY-MM-DD for history and 30-day totals. The API checks access before returning personal Turso records.",
     ],
   },
@@ -117,7 +117,7 @@ export const timerRelationships = [
       Engine --> Commit["Turso transaction commit"]
       Auto --> Commit
       Commit --> Publish["timerMutations.receive: confirmed snapshot"]
-      Commit --> Tabs["BroadcastChannel invalidation; focus and polling refresh"]
+      Commit --> Tabs["BroadcastChannel snapshots; focus and one polling tab"]
       Publish --> Schedule["app/timer/hooks/useTimerSchedule.ts"]
       Schedule -->|earliest completion or Jakarta midnight| Refresh["TimerProvider.refresh: protected API"]
       Refresh --> Send

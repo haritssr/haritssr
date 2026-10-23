@@ -6,6 +6,7 @@ import useSWR from "swr";
 import FloatingTimerDock from "@/app/timer/_components/FloatingTimerDock";
 import { TimerContext } from "@/app/timer/_components/TimerProvider";
 import useTimerNotifications from "@/app/timer/hooks/useTimerNotifications";
+import useTimerPolling from "@/app/timer/hooks/useTimerPolling";
 import useTimerSchedule from "@/app/timer/hooks/useTimerSchedule";
 import {
   DEFAULT_DURATION_PRESETS,
@@ -23,6 +24,7 @@ import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
 import { TimerMutations } from "@/app/timer/utils/timerMutations";
 
 function useTimerState() {
+  const polling = useTimerPolling();
   // oxlint-disable-next-line react/hook-use-state -- One stable external store per provider; no setter is needed.
   const [mutations] = useState(
     () =>
@@ -45,13 +47,14 @@ function useTimerState() {
     fetchTimerSnapshot,
     {
       refreshInterval: (snapshot) => {
-        if (snapshot?.mode === "demo") {
+        const latest = mutations.getSnapshot().confirmed ?? snapshot;
+        if (!polling || latest?.mode === "demo") {
           return 0;
         }
-        return snapshot?.day.tasks.some((task) => task.startedAt !== null) ===
+        return latest?.day.tasks.some((task) => task.startedAt !== null) ===
           true
-          ? 15_000
-          : 60_000;
+          ? 30_000
+          : 120_000;
       },
       refreshWhenHidden: false,
       shouldRetryOnError: true,
@@ -71,8 +74,12 @@ function useTimerState() {
   }, [loadError, mutations]);
   useEffect(() => {
     try {
-      return subscribeTimerChanges(() => {
-        void mutations.refresh();
+      return subscribeTimerChanges((snapshot) => {
+        if (snapshot === undefined) {
+          void mutations.refresh();
+        } else {
+          mutations.receive(snapshot);
+        }
       });
     } catch {
       return () => {

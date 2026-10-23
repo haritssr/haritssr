@@ -142,7 +142,8 @@ snapshot on any page so saved running tasks can appear after direct navigation o
 modules keep independent work separate:
 
 - [timerClient.ts](../utils/timerClient.ts) handles protected API requests,
-  response validation, cache keys, and tab change subscriptions. Snapshot and
+  response validation, cache keys, and validated snapshot broadcasts between tabs.
+  Concurrent snapshot reads in one tab share a single request. Snapshot and
   history reads start alongside validation-module loading and have a ten-second
   deadline covering both operations. Initial snapshot failures retry at most
   twice with a five-second base delay; focus, reconnect, and Try again can also
@@ -150,11 +151,20 @@ modules keep independent work separate:
   with the existing error and Try again control. Saves retain their fifteen-second
   request timeout and are never automatically resent.
 - [timerDatabase.ts](../server/timerDatabase.ts) owns SQL mapping and atomic
-  Turso transactions, with batched reads, changed-row writes, and a reused runtime
-  client. [timerEngine.ts](../utils/timerEngine.ts) applies timer
+  Turso transactions, with indexed active/pending-date discovery performed once,
+  date-scoped batched reads, changed-row writes, and a reused runtime client.
+  Statistics reads only its 30-day window plus today and outstanding tasks;
+  backups and imports still read all history. Run `bun run migrate:timer` to add
+  the pending-notification partial index. [timerEngine.ts](../utils/timerEngine.ts) applies timer
   rules and [timerBackup.ts](../utils/timerBackup.ts) validates imports.
 - [useTimerAudioOwner.ts](../hooks/useTimerAudioOwner.ts) coordinates
   continuous audio with a Web Lock and focused-tab fallback.
+- [useTimerPolling.ts](../hooks/useTimerPolling.ts) elects one visible polling
+  tab using Web Locks, releasing ownership on hide or close. It polls every
+  30 seconds while running or two minutes while idle. Snapshots from reads and
+  saves update other tabs without another fetch; unsupported or blocked browser
+  APIs fall back to independent polling. Focus and scheduled completion/midnight
+  refreshes remain available in every tab.
 - [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules ticking,
   warnings, the earliest task completion, and midnight refreshes.
 - [useTimerNotifications.ts](../hooks/useTimerNotifications.ts) claims

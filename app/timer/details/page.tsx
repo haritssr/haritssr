@@ -70,6 +70,8 @@ CREATE TABLE timer_tasks (
 CREATE INDEX timer_tasks_date_position ON timer_tasks(date, position);
 CREATE INDEX timer_tasks_running ON timer_tasks(date)
   WHERE started_at IS NOT NULL;
+CREATE INDEX timer_tasks_pending_notice ON timer_tasks(date)
+  WHERE completed_at IS NOT NULL AND notification_claimed_at IS NULL;
 
 CREATE TABLE timer_preferences (
   id INTEGER PRIMARY KEY CHECK(id = 1),
@@ -289,9 +291,16 @@ export default function TimerDetailsPage() {
               permission, and audio ownership stay local.
             </li>
             <li>
-              Visible owner pages refresh on focus and every 15 seconds while
-              running or 60 seconds while idle. Hidden tabs and anonymous
-              previews do not poll.
+              One visible owner tab polls every 30 seconds while running or two
+              minutes while idle and shares snapshots with other tabs. Browsers
+              without Web Locks or tab messaging poll independently. Pages
+              refresh on focus; hidden tabs and anonymous previews do not poll.
+              Completion and midnight checks keep their scheduled timing.
+            </li>
+            <li>
+              Snapshot queries use indexes to read today and dates with running
+              tasks or unclaimed notifications. Statistics adds only its 30-day
+              window. Full-history reads are reserved for backups and imports.
             </li>
             <li>
               Export backs up history without pausing timers. Import restores

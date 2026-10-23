@@ -35,13 +35,10 @@ import {
 
 export { TimerStoreError } from "@/app/timer/utils/timerEngine";
 
-async function state(tx: Transaction, all = false) {
+async function state(tx: Transaction, range?: { from: string; to: string }) {
   const now = Date.now();
   const today = timerDate(now);
-  const { days, preferences } = await readTimerState(
-    tx,
-    all ? undefined : today
-  );
+  const { days, preferences } = await readTimerState(tx, today, range);
   const previous = structuredClone(days);
   for (const day of days) {
     const due = day.tasks.some(
@@ -161,7 +158,10 @@ export async function getTimerHistory(date: string) {
     throw new TimerStoreError("Choose today or an earlier valid date.");
   }
   return await timerDatabaseTransaction(async (tx) => {
-    const value = await state(tx, true);
+    const value = await state(tx, {
+      from: shiftTimerDate(date, -29),
+      to: date,
+    });
     await updateTimerDays(tx, value.days, value.previous);
     const day = structuredClone(
       value.days.find((entry) => entry.date === date) ??

@@ -52,21 +52,36 @@ async function loadTimer<T>(
   }
 }
 
-function received(snapshot: TimerSnapshot): ReceivedTimerSnapshot {
+function received(
+  snapshot: TimerSnapshot,
+  receivedAt = Date.now()
+): ReceivedTimerSnapshot {
   return {
     ...snapshot,
-    clockOffset: Date.parse(snapshot.now) - Date.now(),
+    clockOffset: Date.parse(snapshot.now) - receivedAt,
   };
 }
 
+let snapshotRequest: Promise<ReceivedTimerSnapshot> | undefined;
+
 export async function fetchTimerSnapshot() {
-  return await loadTimer(async (signal) => {
+  snapshotRequest ??= loadTimer(async (signal) => {
     const [{ snapshotSchema }, result] = await Promise.all([
       import("@/app/timer/utils/timerValidation"),
       fetchTimer("/api/timer", { signal }),
     ]);
-    return received(snapshotSchema.parse(result));
+    const snapshot = snapshotSchema.parse(result);
+    notifyTimerChanges(snapshot);
+    return received(snapshot);
   });
+  const request = snapshotRequest;
+  try {
+    return await request;
+  } finally {
+    if (snapshotRequest === request) {
+      snapshotRequest = undefined;
+    }
+  }
 }
 
 export async function fetchTimerHistory(date: string) {
@@ -88,7 +103,7 @@ export async function sendTimerAction(action: TimerAction) {
       body: JSON.stringify(action),
     })
   );
-  notifyTimerChanges();
+  notifyTimerChanges(result.snapshot);
   return { ...result, snapshot: received(result.snapshot) };
 }
 
@@ -105,7 +120,7 @@ export async function saveTimerPreferences(
       })
     )
   );
-  notifyTimerChanges();
+  notifyTimerChanges(result);
   return result;
 }
 
@@ -115,39 +130,74 @@ function timerChangeSource() {
   return changeSource;
 }
 
-function notifyTimerChanges() {
+function notifyTimerChanges(snapshot: TimerSnapshot) {
   try {
     if (!("BroadcastChannel" in window)) {
       return;
     }
     const channel = new BroadcastChannel("haritssr-timer");
+    const message = {
+      source: timerChangeSource(),
+      snapshot,
+      sentAt: Date.now(),
+    };
     // oxlint-disable-next-line unicorn/require-post-message-target-origin -- BroadcastChannel has no targetOrigin parameter.
-    channel.postMessage({ source: timerChangeSource() });
+    channel.postMessage(message);
     channel.close();
   } catch {
     // A blocked messaging API must not turn a committed save into an error.
   }
 }
 
-export function subscribeTimerChanges(listener: () => void) {
+export function subscribeTimerChanges(
+  listener: (snapshot?: ReceivedTimerSnapshot) => void
+) {
   if (!("BroadcastChannel" in window)) {
     return () => {
       /* Focus and polling remain available. */
     };
   }
   const channel = new BroadcastChannel("haritssr-timer");
-  channel.addEventListener("message", (event: MessageEvent<unknown>) => {
-    const { data } = event;
+  let disposed = false;
+  async function receive(data: unknown) {
     if (
       typeof data !== "object" ||
       data === null ||
       !("source" in data) ||
-      data.source !== timerChangeSource()
+      data.source === timerChangeSource()
     ) {
-      listener();
+      return;
     }
+    try {
+      const { snapshotSchema } =
+        await import("@/app/timer/utils/timerValidation");
+      const result = snapshotSchema.safeParse(
+        "snapshot" in data ? data.snapshot : undefined
+      );
+      // Background tabs may receive a message much later. Preserve the sender's
+      // clock calibration instead of treating the delayed snapshot as current.
+      const receivedAt =
+        "sentAt" in data &&
+        typeof data.sentAt === "number" &&
+        Number.isFinite(data.sentAt)
+          ? data.sentAt
+          : Date.now();
+      if (!disposed) {
+        listener(
+          result.success ? received(result.data, receivedAt) : undefined
+        );
+      }
+    } catch {
+      if (!disposed) {
+        listener();
+      }
+    }
+  }
+  channel.addEventListener("message", (event: MessageEvent<unknown>) => {
+    void receive(event.data);
   });
   return () => {
+    disposed = true;
     channel.close();
   };
 }

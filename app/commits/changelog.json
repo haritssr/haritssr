@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "702e0947cfdfdafa8a3c858cb3debd82f2da074f",
+      "date": "2026-10-23T17:04:58+07:00",
+      "subject": "feat(Commits): serve cached history from Turso"
+    },
+    {
       "hash": "9092f12f53cf57504c7645c076532274f8ec8cdc",
       "date": "2026-10-23T17:04:40+07:00",
       "subject": "refactor(Scripts): colocate feature maintenance commands"
