@@ -18,7 +18,7 @@ export default function YearlyInterest() {
   // Converts a formatted input string into a number by stripping non-digits.
   function parseNumericInput(value: string): number {
     // Strip all non-digit characters.
-    const digitsOnly = value.replace(nonDigitCharacterPattern, "");
+    const digitsOnly = value.replaceAll(nonDigitCharacterPattern, "");
     // Empty input after stripping becomes zero.
     if (!digitsOnly) {
       return 0;

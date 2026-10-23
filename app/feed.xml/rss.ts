@@ -24,7 +24,10 @@ export interface RssWritingPost {
 }
 
 function escapeXml(value: string): string {
-  return value.replace(xmlEscapePattern, (character) => XML_ESCAPES[character]);
+  return value.replaceAll(
+    xmlEscapePattern,
+    (character) => XML_ESCAPES[character]
+  );
 }
 
 function getPublicationDate(publishedAt: string): Date {

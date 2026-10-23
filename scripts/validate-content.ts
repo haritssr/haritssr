@@ -25,7 +25,7 @@ function archivedRoutes(formerRoute: string): string[] {
 }
 
 function titleSlug(title: string): string {
-  return title.toLowerCase().replace(titleSeparatorPattern, "-");
+  return title.toLowerCase().replaceAll(titleSeparatorPattern, "-");
 }
 
 function validDate(value: string): boolean {

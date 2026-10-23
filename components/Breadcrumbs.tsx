@@ -110,7 +110,7 @@ function formatSegmentLabel(segment: string) {
     /* Keep malformed URLs readable on the not-found page. */
   }
   return decoded
-    .replace(segmentSeparatorPattern, " ")
+    .replaceAll(segmentSeparatorPattern, " ")
     .split(whitespaceSequencePattern)
     .filter(Boolean)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())

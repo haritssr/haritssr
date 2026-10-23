@@ -154,9 +154,9 @@ const searchIndexCache = new WeakMap<
 function normalize(value: string): string {
   return value
     .normalize("NFKD")
-    .replace(combiningMarks, "")
+    .replaceAll(combiningMarks, "")
     .toLowerCase()
-    .replace(separators, " ")
+    .replaceAll(separators, " ")
     .trim();
 }
 
@@ -182,9 +182,9 @@ export function getSearchMatchRanges(
     sourceOffset += character.length;
     const normalizedCharacter = character
       .normalize("NFKD")
-      .replace(combiningMarks, "")
+      .replaceAll(combiningMarks, "")
       .toLowerCase()
-      .replace(separators, " ");
+      .replaceAll(separators, " ");
 
     normalizedValue += normalizedCharacter;
     for (const normalizedCodePoint of normalizedCharacter) {

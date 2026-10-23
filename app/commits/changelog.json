@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "fc06d0b1182e98587f3596b6923e0cad21d83e35",
+      "date": "2026-10-23T06:26:40+07:00",
+      "subject": "style(Site): refine profile layout and account menu"
+    },
+    {
       "hash": "190e9cd356385e8111d1b076ac3bab31e6849b1e",
       "date": "2026-10-23T06:26:36+07:00",
       "subject": "fix(Timer): stabilize dock clearance and align tablet navigation"

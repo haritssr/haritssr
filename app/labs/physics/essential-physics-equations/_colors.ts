@@ -71,7 +71,7 @@ const VECTOR_SYMBOL = /^d?\\(?:mathbf|boldsymbol)\{(?<symbol>[^{}]+)\}$/u;
 const INTEGRATION_OR_SUM = /^\\(?:oint|oiint|int|sum)$/u;
 
 export function colorPhysicsSymbols(expression: string): string {
-  return expression.replace(
+  return expression.replaceAll(
     TEX_SYMBOL,
     (match: string, atom: string, subscript: string | undefined) => {
       const symbol = VECTOR_SYMBOL.exec(atom)?.groups?.symbol ?? atom;
