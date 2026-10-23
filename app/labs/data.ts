@@ -1009,6 +1009,15 @@ export const LabsData: readonly LabDomain[] = [
       "Explore interface patterns, motion, and everyday interactions.",
     labs: [
       {
+        slug: "gradient-cards",
+        title: "Gradient Cards",
+        description:
+          "Explore 100 cards with gradients, imagery, shadows, and varied layouts.",
+        tags: ["css", "design", "gradients", "cards", "layout"],
+        createdAt: "2026-10-23",
+        updatedAt: ["2026-10-23"],
+      },
+      {
         slug: "error-pages",
         title: "Error Pages",
         description:
