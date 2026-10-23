@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import Section from "@/components/Section";
 import katexify from "@/utils/katexify";
 
@@ -30,7 +32,9 @@ export default function Practice({
             key={question.prompt}
             prompt={question.prompt}
             expression={katexify(question.expression, true)}
-            choices={question.choices.map((choice) => katexify(choice, false))}
+            choices={question.choices.map((choice) => (
+              <Fragment key={choice}>{katexify(choice, false)}</Fragment>
+            ))}
             correctIndex={question.correctIndex}
             explanation={question.explanation}
             working={katexify(question.working, true)}

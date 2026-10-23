@@ -1088,8 +1088,9 @@ export const LabsData: readonly LabDomain[] = [
       {
         slug: "times-table",
         title: "Times Table",
-        description: "Explore multiplication patterns in a times table.",
-        tags: ["mathematics", "tables"],
+        description:
+          "Practice multiplication with a shuffled grid and instant feedback.",
+        tags: ["mathematics", "tables", "practice"],
         createdAt: "2026-08-18",
         updatedAt: [
           "2026-09-26",
@@ -1098,6 +1099,7 @@ export const LabsData: readonly LabDomain[] = [
           "2026-10-13",
           "2026-10-14",
           "2026-10-15",
+          "2026-10-23",
         ],
       },
       {
