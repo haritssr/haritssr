@@ -23,9 +23,17 @@ export const commitsRoute: RouteDoc = {
 
 export const weeklyChangelogRoute: RouteDoc = {
   route: "/commits/weekly-changelog",
-  title: "Weekly changelog",
+  title: "Changelog",
   description:
     "Concise weekly highlights of site changes from January 2026 onward.",
+  group: "Commits",
+};
+
+export const commitsDetailsRoute: RouteDoc = {
+  route: "/commits/details",
+  title: "Details",
+  description:
+    "How commit history uses Turso, shared caches, and request-driven refreshes.",
   group: "Commits",
 };
 

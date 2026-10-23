@@ -3,7 +3,7 @@
 - [Writing](https://haritssr.com/writing): Posts and notes.
 - [Design](https://haritssr.com/design): Design system reference.
 - [Commits](https://haritssr.com/commits): Commit history and activity.
-  [Weekly changelog](https://haritssr.com/commits/weekly-changelog) presents
+  [Changelog](https://haritssr.com/commits/weekly-changelog) presents
   curated summaries from January 2026 through October 22, newest first. Each
   month uses days 1–7, 8–14, 15–21, 22–28, and 29–month end; inactive weeks
   remain visible and the current week is marked partial. Update the summaries
@@ -46,6 +46,9 @@
   Next.js can retain previously cached results during revalidation failures.
   Set the two `TURSO_COMMITS_*` variables in Vercel Production and Preview before
   deploying. No runtime reader falls back to the JSON snapshot.
+  `/commits/details`, linked after Changelog in the Commits header,
+  documents storage, cache consumers and periods, request-driven refreshes,
+  database usage, and the manual import workflow.
 - Timer at `/timer` tracks personal activities by Jakarta calendar day, with
   daily history and 30-day totals at `/timer/statistic`. `/timer/details` explains
   behavior, Turso schema, source files, and interactive Pele relationship diagrams.

@@ -3,6 +3,7 @@ import { ProjectsData } from "@/app/projects/data";
 import {
   apiRoute,
   commitAnalysisRoute,
+  commitsDetailsRoute,
   commitsRoute,
   modelSuitabilityRoute,
   october21AnalysisRoute,
@@ -54,6 +55,7 @@ export function getRouteManifest(): RouteRecord[] {
     ...navigationRoutes,
     commitsRoute,
     weeklyChangelogRoute,
+    commitsDetailsRoute,
     modelSuitabilityRoute,
     todayModelSuitabilityRoute,
     commitAnalysisRoute,

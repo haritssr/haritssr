@@ -5,6 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import {
   commitAnalysisRoute,
+  commitsDetailsRoute,
   commitsRoute,
   modelSuitabilityRoute,
   october21AnalysisRoute,
@@ -40,9 +41,12 @@ export default async function CommitsPage() {
           from {formatDay(firstDay)} to {formatDay(lastDay)} · Jakarta time
           (WIB)
         </PageDescription>
-        <nav aria-label="Changelog">
+        <nav aria-label="Changelog" className="flex flex-wrap gap-x-4 gap-y-2">
           <InternalLink href={weeklyChangelogRoute.route}>
             {weeklyChangelogRoute.title}
+          </InternalLink>
+          <InternalLink href={commitsDetailsRoute.route}>
+            {commitsDetailsRoute.title}
           </InternalLink>
         </nav>
       </PageHeader>
