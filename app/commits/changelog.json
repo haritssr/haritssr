@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "4ce4039ddf763239d85fc6c457ae6ac635c5129f",
+      "date": "2026-10-23T17:05:15+07:00",
+      "subject": "perf(Timer): index history reads and share polling across tabs"
+    },
+    {
       "hash": "702e0947cfdfdafa8a3c858cb3debd82f2da074f",
       "date": "2026-10-23T17:04:58+07:00",
       "subject": "feat(Commits): serve cached history from Turso"
