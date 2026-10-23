@@ -159,7 +159,7 @@ export async function getTimerHistory(date: string) {
   }
   return await timerDatabaseTransaction(async (tx) => {
     const value = await state(tx, {
-      from: shiftTimerDate(date, -29),
+      from: date,
       to: date,
     });
     await updateTimerDays(tx, value.days, value.previous);
@@ -168,6 +168,16 @@ export async function getTimerHistory(date: string) {
         createEmptyTimerDay(date)
     );
     settleTimerDay(day, value.now);
+    const savedTotals = await tx.execute({
+      sql: "SELECT date, spent_seconds FROM timer_days WHERE date BETWEEN ? AND ?",
+      args: [shiftTimerDate(date, -29), date],
+    });
+    const totalsByDate = new Map(
+      savedTotals.rows.map((row) => [
+        typeof row.date === "string" ? row.date : "",
+        Number(row.spent_seconds),
+      ])
+    );
     return {
       day,
       today: value.today,
@@ -176,9 +186,14 @@ export async function getTimerHistory(date: string) {
         const key = shiftTimerDate(date, index - 29);
         return {
           date: key,
-          spent: (
-            value.days.find((entry) => entry.date === key)?.tasks ?? []
-          ).reduce((total, task) => total + taskSpent(task, key, value.now), 0),
+          spent: value.days.some((entry) => entry.date === key)
+            ? (
+                value.days.find((entry) => entry.date === key)?.tasks ?? []
+              ).reduce(
+                (total, task) => total + taskSpent(task, key, value.now),
+                0
+              )
+            : (totalsByDate.get(key) ?? 0),
         };
       }),
     };

@@ -70,6 +70,26 @@ export async function initializeTimerDatabase(client: Client) {
     if (additions.length > 0) {
       await tx.batch(additions);
     }
+    const dayColumns = await tx.execute("PRAGMA table_info(timer_days)");
+    if (!dayColumns.rows.some((column) => column.name === "spent_seconds")) {
+      await tx.execute(
+        "ALTER TABLE timer_days ADD COLUMN spent_seconds REAL NOT NULL DEFAULT 0"
+      );
+      await tx.execute(`UPDATE timer_days SET spent_seconds = COALESCE(
+        (SELECT SUM(spent_seconds) FROM timer_tasks WHERE timer_tasks.date = timer_days.date), 0)`);
+    }
+    await tx.batch([
+      `CREATE TRIGGER IF NOT EXISTS timer_totals_insert AFTER INSERT ON timer_tasks BEGIN
+        UPDATE timer_days SET spent_seconds = spent_seconds + NEW.spent_seconds WHERE date = NEW.date;
+      END`,
+      `CREATE TRIGGER IF NOT EXISTS timer_totals_delete AFTER DELETE ON timer_tasks BEGIN
+        UPDATE timer_days SET spent_seconds = MAX(0, spent_seconds - OLD.spent_seconds) WHERE date = OLD.date;
+      END`,
+      `CREATE TRIGGER IF NOT EXISTS timer_totals_update AFTER UPDATE OF spent_seconds, date ON timer_tasks BEGIN
+        UPDATE timer_days SET spent_seconds = MAX(0, spent_seconds - OLD.spent_seconds) WHERE date = OLD.date;
+        UPDATE timer_days SET spent_seconds = spent_seconds + NEW.spent_seconds WHERE date = NEW.date;
+      END`,
+    ]);
     await tx.commit();
   } catch (error) {
     await tx.rollback();

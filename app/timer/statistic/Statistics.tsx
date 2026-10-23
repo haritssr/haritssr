@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 
 import { useTimer } from "@/app/timer/_components/TimerProvider";
@@ -46,9 +46,23 @@ export default function Statistics() {
     }
   );
 
+  const lastBroadcast = useRef<string | undefined>(undefined);
   useEffect(() => {
+    lastBroadcast.current = undefined;
     try {
-      return subscribeTimerChanges(() => {
+      return subscribeTimerChanges((next) => {
+        if (next !== undefined) {
+          const revision = JSON.stringify([
+            date,
+            next.day.date,
+            next.day.revision,
+            next.notifications,
+          ]);
+          if (lastBroadcast.current === revision) {
+            return;
+          }
+          lastBroadcast.current = revision;
+        }
         void mutate();
       });
     } catch {
@@ -56,7 +70,7 @@ export default function Statistics() {
         // Focus refresh and polling remain available if messaging fails.
       };
     }
-  }, [mutate]);
+  }, [date, mutate]);
 
   return (
     <div className="space-y-10">
