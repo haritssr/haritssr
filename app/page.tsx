@@ -12,7 +12,7 @@ import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import Table from "@/components/Table";
-import { getChangelogSummary } from "@/utils/commits/commitHistory";
+import { getCommitCount } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 // Matches an HTTP(S) URL prefix and captures the optional "www." subdomain.
@@ -258,7 +258,7 @@ function PersonalDetails() {
 async function LiveTools() {
   let count: number | undefined;
   try {
-    ({ count } = await getChangelogSummary());
+    count = await getCommitCount();
   } catch {
     console.error("Homepage commit count could not be loaded.");
   }

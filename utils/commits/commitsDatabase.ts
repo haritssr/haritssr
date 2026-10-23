@@ -14,7 +14,7 @@ const commitsSchema = z
   .min(1);
 let client: Client | undefined;
 
-export async function readCommitHistory() {
+function commitsDatabase(): Client {
   if (client === undefined) {
     const url = process.env.TURSO_COMMITS_DATABASE_URL;
     const authToken = process.env.TURSO_COMMITS_AUTH_TOKEN;
@@ -28,7 +28,18 @@ export async function readCommitHistory() {
     }
     client = createClient({ url, authToken });
   }
-  const result = await client.execute(
+  return client;
+}
+
+export async function readCommitCount() {
+  const result = await commitsDatabase().execute(
+    "SELECT COUNT(*) AS count FROM commits"
+  );
+  return z.number().int().nonnegative().parse(result.rows[0]?.count);
+}
+
+export async function readCommitHistory() {
+  const result = await commitsDatabase().execute(
     "SELECT hash, date, subject FROM commits"
   );
   return commitsSchema

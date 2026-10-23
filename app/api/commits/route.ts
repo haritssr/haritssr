@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     return Response.json(await getChangelogResult(selection), {
       headers: {
         "Cache-Control":
-          "public, max-age=60, s-maxage=300, stale-while-revalidate=86400",
+          "public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400",
       },
     });
   } catch {

@@ -35,10 +35,13 @@
   This command updates the JSON snapshot in the working tree.
 - `/commits`, its dated analysis pages, `/api/commits`, and the homepage commit count
   read the separate Turso database through the server-only `utils/commits/commitHistory.ts`.
-  One full-history query is cached across requests for five minutes, while React
+  The homepage uses a separate count-only query cached for 24 hours, so home visits
+  do not refresh the full history. One full-history query is cached across requests
+  for 24 hours, while React
   deduplicates reads within a server render. Filtering and activity calculations
-  retain the existing behavior. API responses also use a five-minute CDN cache,
-  so changes can take several minutes to appear. If a fresh read fails, the API
+  retain the existing behavior. API responses also use 24-hour browser and CDN caches,
+  so changes can take longer than 24 hours to appear across cache layers.
+  If a fresh read fails, the API
   returns an uncached 503; the homepage keeps its Tools links without the count.
   Next.js can retain previously cached results during revalidation failures.
   Set the two `TURSO_COMMITS_*` variables in Vercel Production and Preview before
@@ -190,7 +193,7 @@ within that space.
 The desktop navigation pill is also visible on Home and lists Home, Projects,
 Labs, Writing, and Design in that order. It appears from 1024px so all
 five links fit between the side controls. Home's responsive card grid links
-to Timer, Commits, and Tree under Tools, with the commit count from the shared cached Turso reader.
+to Timer, Commits, and Tree under Tools, with the commit count from a separate Turso count query cached for 24 hours.
 
 Shared helpers in `utils/` are grouped by responsibility: `commits/` handles
 commit records and Turso reads; `content/` handles posts and article outlines;

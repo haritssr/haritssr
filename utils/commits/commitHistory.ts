@@ -8,10 +8,18 @@ import type {
   ChangelogCommit,
   ChangelogPeriod,
 } from "./changelog";
-import { readCommitHistory } from "./commitsDatabase";
+import { readCommitCount, readCommitHistory } from "./commitsDatabase";
+
+export const getCommitCount = cache(
+  unstable_cache(readCommitCount, ["turso-commit-count-v1"], {
+    revalidate: 86_400,
+  })
+);
 
 export const getCommitHistory = cache(
-  unstable_cache(readCommitHistory, ["turso-commits-v1"], { revalidate: 300 })
+  unstable_cache(readCommitHistory, ["turso-commits-v1"], {
+    revalidate: 86_400,
+  })
 );
 
 const getPreparedHistory = cache(async () => {

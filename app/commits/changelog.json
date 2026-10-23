@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "a9c0ff1954b03a3e9006b3e180cbd0d4445a23f2",
+      "date": "2026-10-23T17:08:25+07:00",
+      "subject": "style(Timer): stabilize speed label width"
+    },
+    {
       "hash": "758862537aef39f7f03311cf28c0bd7c2eb4689f",
       "date": "2026-10-23T17:08:19+07:00",
       "subject": "style(Timer): fit description popovers to their content"

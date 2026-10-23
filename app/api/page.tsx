@@ -23,7 +23,7 @@ const endpoints: Endpoint[] = [
   {
     href: "/api/commits?period=month&date=2026-10-01&limit=50",
     description:
-      "Filtered commit history, summary counts, and activity buckets. Supports period (day, week, month, year, all), date, type, q, and limit (50–5000). Reads public commit history from Turso and defaults to the latest recorded day. Database reads and successful responses use five-minute caches; a storage failure returns 503 without caching the error.",
+      "Filtered commit history, summary counts, and activity buckets. Supports period (day, week, month, year, all), date, type, q, and limit (50–5000). Reads public commit history from Turso and defaults to the latest recorded day. Database reads and successful responses use 24-hour caches; a storage failure returns 503 without caching the error.",
   },
   {
     href: "/api/timer/auth/session",
