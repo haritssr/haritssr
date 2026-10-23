@@ -1009,20 +1009,20 @@ export const LabsData: readonly LabDomain[] = [
       "Explore interface patterns, motion, and everyday interactions.",
     labs: [
       {
-        slug: "chapter-prerequisites",
-        title: "Chapter Prerequisites",
-        description:
-          "Map high-school mathematics and physics prerequisites with Pele.",
-        tags: ["diagrams", "pele", "mathematics", "physics", "education"],
-        createdAt: "2026-10-23",
-        updatedAt: ["2026-10-23"],
-      },
-      {
         slug: "gradient-cards",
         title: "Gradient Cards",
         description:
           "Explore 100 cards with gradients, imagery, shadows, and varied layouts.",
         tags: ["css", "design", "gradients", "cards", "layout"],
+        createdAt: "2026-10-23",
+        updatedAt: ["2026-10-23"],
+      },
+      {
+        slug: "chapter-prerequisites",
+        title: "Chapter Prerequisites",
+        description:
+          "Map high-school mathematics and physics prerequisites with Pele.",
+        tags: ["diagrams", "pele", "mathematics", "physics", "education"],
         createdAt: "2026-10-23",
         updatedAt: ["2026-10-23"],
       },
