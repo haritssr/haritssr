@@ -93,8 +93,7 @@ Without mobile navigation it uses safe-area-aware bottom clearance; desktop
 aligns a 22.4rem bar to the site's content width. The dock overlays page content;
 mobile footer clearance uses the dock height and a stable safe-area-aware gap,
 independent of the sticky navigation position, to avoid a measurement feedback loop.
-Completion messages
-share the dock, while measured CSS properties keep back-to-top controls clear.
+Completion messages share the dock.
 Observers and event listeners are active only while the dock is visible.
 
 Multitask appears after Autoplay and defaults off. Turso remembers Multitask,

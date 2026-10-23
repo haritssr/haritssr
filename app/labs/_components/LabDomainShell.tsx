@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 
 import { LabHeaderContext } from "@/app/labs/_components/LabPageHeader";
-import ArticleBackToTop from "@/components/article/ArticleBackToTop";
 import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 
 interface LabDomainShellProps {
@@ -57,7 +56,6 @@ export default function LabDomainShell({
             {children}
           </LabHeaderContext>
         </article>
-        {!isIndexPage && <ArticleBackToTop key={pathname} />}
       </div>
     </div>
   );

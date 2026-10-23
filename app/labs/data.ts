@@ -1033,7 +1033,7 @@ export const LabsData: readonly LabDomain[] = [
           "Map this site’s responsive navigation behavior with Pele.",
         tags: ["navigation", "design", "pele", "documentation"],
         createdAt: "2026-10-16",
-        updatedAt: ["2026-10-16", "2026-10-18"],
+        updatedAt: ["2026-10-16", "2026-10-18", "2026-10-23"],
       },
       {
         slug: "pill-material",

@@ -206,10 +206,6 @@ export const integrationFiles = [
     "Mobile navigation surface measured for floating Timer placement.",
   ],
   [
-    "components/article/ArticleBackToTop.tsx",
-    "Keeps the reading control above the Timer dock when visible.",
-  ],
-  [
     "components/FlowDiagram.tsx",
     "Shared Pele flowchart/ERD viewer with zoom, pan, keyboard scrolling, and a full-width dialog.",
   ],

@@ -167,10 +167,8 @@ Apply these defaults to new or refactored labs in every domain:
   shared `SectionHeading` components) show `TopBarContents` in its
   own pill to the right of the top bar actions. Contents use rendered heading anchors,
   a desktop popover below the trigger, and a mobile sheet. Hide it on Home and
-  all first-level routes. Individual writing
-  and lab pages keep the floating `ArticleBackToTop` control, including
-  articles without section headings. Show it only when scrolling upward away
-  from the page top. Preserve their `data-article-*` title metadata.
+  all first-level routes. Do not add floating back-to-top buttons to writing
+  or lab pages. Preserve their `data-article-*` title metadata.
 - Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.

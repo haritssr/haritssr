@@ -186,7 +186,7 @@ truncate to keep the controls on one row.
 position. `PageTitle` provides the title marker: once the title scrolls behind the
 top bar, it replaces the center navigation. Returning to the title restores center
 navigation while keeping the back button visible.
-Clicking the scrolling title or article back-to-top clears the URL fragment
+Clicking the scrolling title clears the URL fragment
 without adding a history entry, preserves query parameters, and scrolls to the top.
 On every screen size, the scrolling title is centered in the available space
 between the Back pill and the complete right-hand control group, with equal
@@ -243,8 +243,7 @@ ignores unrelated content mutations. Active-section tracking runs inside the
 Contents panel only while it is open; search status updates are isolated from
 the menu action callbacks.
 Home and first-level routes omit the Contents button. Writing and lab
-articles show their floating back-to-top control when scrolling upward. It
-hides while scrolling downward and at the top of the page.
+articles have no floating back-to-top button.
 
 Below 640px, floating icon controls use 40px tap targets and 20px icons;
 desktop controls retain their compact sizing. Text pills have a matching minimum

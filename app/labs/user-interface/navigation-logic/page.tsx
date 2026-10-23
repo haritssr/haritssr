@@ -100,19 +100,14 @@ const diagrams = [
     id: "scroll-and-appearance",
     title: "Scroll and appearance",
     description:
-      "The top bar stays sticky. Its background changes as soon as scrolling starts; the floating back-to-top control follows scroll direction on lab and writing articles.",
+      "The top bar stays sticky. Its background changes as soon as scrolling starts; clicking the scrolling page title returns to the page top.",
     definition: `flowchart TD
-      accTitle: Navigation appearance and back-to-top behavior
-      accDescr: At page top the top bar has no added background. After scrolling it uses the layout background at 70 percent opacity and a 12 pixel blur. Article back-to-top appears only while scrolling upward away from the top.
+      accTitle: Navigation appearance and scrolling title behavior
+      accDescr: At page top the top bar has no added background. After scrolling it uses the layout background at 70 percent opacity and a 12 pixel blur. Clicking the scrolling page title clears the URL fragment and returns to the top.
       Scroll["Scroll position changes"] --> Top{"scrollY greater than 0?"}
       Top -->|No| Clear["Top bar: no added background"]
       Top -->|Yes| Blur["Top bar: bg-background at 70% opacity; 12px blur"]
-      Scroll --> Article{"Lab or writing article?"}
-      Article -->|No| None["No article back-to-top control"]
-      Article -->|Yes| Up{"Scrolling upward and away from page top?"}
-      Up -->|Yes| Show["Show floating back-to-top; avoid footer overlap"]
-      Up -->|No| Hide["Hide floating back-to-top"]
-      Show --> Click["Click: clear URL fragment and scroll to page top"]
+      Title["Click scrolling page title"] --> Click["Clear URL fragment and scroll to page top"]
       Click --> Motion{"Reduced motion preferred?"}
       Motion -->|Yes| Auto["Immediate scroll"]
       Motion -->|No| Smooth["Smooth scroll"]

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-// Match the navigation gap and keep other floating controls clear of the dock.
+// Match the navigation gap and reserve mobile footer clearance for the dock.
 export default function useTimerDockPosition(
   visible: boolean,
   pathname: string
@@ -54,10 +54,6 @@ export default function useTimerDockPosition(
       }
       dock.style.setProperty("--timer-dock-bottom", `${bottom}px`);
       root.style.setProperty(
-        "--timer-dock-clearance",
-        `${bottom + height + 0.75 * rem}px`
-      );
-      root.style.setProperty(
         "--timer-footer-clearance",
         // Keep document spacing independent of the sticky navigation's position.
         // Otherwise moving the footer moves navigation and feeds back into this margin.
@@ -86,7 +82,6 @@ export default function useTimerDockPosition(
       window.removeEventListener("resize", schedulePosition);
       window.removeEventListener("scroll", schedulePosition);
       cancelAnimationFrame(frame);
-      root.style.removeProperty("--timer-dock-clearance");
       root.style.removeProperty("--timer-footer-clearance");
       dock.style.removeProperty("--timer-dock-bottom");
       dock.style.removeProperty("--timer-tabbar-height");
