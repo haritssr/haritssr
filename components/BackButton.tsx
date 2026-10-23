@@ -13,7 +13,7 @@ export default function BackButton({
   return (
     <Link
       aria-label={`Back to ${name}`}
-      className={`group text-action hover:text-action-hover focus-visible:outline-action flex items-center justify-center transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 sm:shrink-0 ${compact ? "w-fit shrink-0" : "w-fit"}`}
+      className={`group text-action hover:text-action-hover focus-visible:outline-action flex items-center justify-center transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.95] motion-reduce:transition-none sm:shrink-0 ${compact ? "w-fit shrink-0" : "w-fit"}`}
       href={href}
       prefetch={false}
       title={`Back to ${name}`}

@@ -34,7 +34,7 @@ export default function InternalLink({
     <Link
       aria-current={ariaCurrent}
       aria-keyshortcuts={ariaKeyShortcuts}
-      className={`group inline-block cursor-pointer transition-transform active:scale-[0.98] motion-reduce:transition-none ${interaction} ${appearance} ${className ?? ""}`}
+      className={`group inline-block cursor-pointer transition-transform active:scale-[0.95] motion-reduce:transition-none ${interaction} ${appearance} ${className ?? ""}`}
       href={href}
       onClick={onClick}
       prefetch={false}

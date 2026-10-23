@@ -148,7 +148,7 @@ HeaderActions.displayName = "HeaderActions";
 function TabBarTop({ pathname }: { pathname: string }) {
   return (
     <ul
-      className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 lg:flex"
+      className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 md:flex"
       id="main-navigation"
     >
       {primaryNavigation.map(({ title, href }) => {
