@@ -46,7 +46,7 @@
   Next.js can retain previously cached results during revalidation failures.
   Set the two `TURSO_COMMITS_*` variables in Vercel Production and Preview before
   deploying. No runtime reader falls back to the JSON snapshot.
-  `/commits/details`, linked after Changelog in the Commits header,
+  `/commits/details`, linked before Changelog in the Commits header,
   documents storage, cache consumers and periods, request-driven refreshes,
   database usage, and the manual import workflow.
 - Timer at `/timer` tracks personal activities by Jakarta calendar day, with

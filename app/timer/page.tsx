@@ -31,7 +31,7 @@ export default function TimerPage() {
                 </TimerContent>
               </span>
             </PageDescription>
-            <nav aria-label="Timer" className="flex flex-wrap gap-2">
+            <nav aria-label="Timer" className="flex flex-wrap gap-3">
               <InternalLink href="/timer/details">Details</InternalLink>
               <InternalLink href="/timer/statistic">Statistics</InternalLink>
             </nav>

@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "8d9b52b19717a901ef003141d674a8495f213739",
+      "date": "2026-10-23T18:22:59+07:00",
+      "subject": "refactor(Home): compact the profile layout and refresh details"
+    },
+    {
       "hash": "bc083f6a3a16ce9e9ba3105271ffdae93f44dc88",
       "date": "2026-10-23T17:58:43+07:00",
       "subject": "docs(Commits): explain cache periods and route consumers"

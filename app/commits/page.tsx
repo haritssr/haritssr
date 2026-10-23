@@ -41,12 +41,12 @@ export default async function CommitsPage() {
           from {formatDay(firstDay)} to {formatDay(lastDay)} · Jakarta time
           (WIB)
         </PageDescription>
-        <nav aria-label="Changelog" className="flex flex-wrap gap-x-4 gap-y-2">
-          <InternalLink href={weeklyChangelogRoute.route}>
-            {weeklyChangelogRoute.title}
-          </InternalLink>
+        <nav aria-label="Changelog" className="flex flex-wrap gap-3">
           <InternalLink href={commitsDetailsRoute.route}>
             {commitsDetailsRoute.title}
+          </InternalLink>
+          <InternalLink href={weeklyChangelogRoute.route}>
+            {weeklyChangelogRoute.title}
           </InternalLink>
         </nav>
       </PageHeader>
