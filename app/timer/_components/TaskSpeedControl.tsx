@@ -32,7 +32,7 @@ export default function TaskSpeedControl({
       {showIcon ? (
         <ClockIcon aria-hidden="true" className="size-4 shrink-0" />
       ) : null}
-      <span className="inline-block text-right tabular-nums underline-offset-2 hover:underline">
+      <span className="inline-block min-w-[4ch] text-right tabular-nums underline-offset-2 hover:underline">
         {speed}x
       </span>
     </BaseButton>
