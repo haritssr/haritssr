@@ -63,7 +63,7 @@ export default function TaskProgress({
             <span className="text-muted">
               -{formatTimerTime(Math.max(0, task.duration - spent))}
             </span>
-            <span>{percentageLabel}%</span>
+            <span className={appearance.elapsed}>{percentageLabel}%</span>
           </span>
         ) : null}
       </div>
