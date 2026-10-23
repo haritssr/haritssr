@@ -33,12 +33,12 @@
     var(--color-blue-500) 40%
   );
   --color-action-hover: var(--color-blue-700);
-  --color-secondary-accent: color-mix(
+  --color-secondary-accent: var(--color-purple-500);
+  --color-contact-accent: color-mix(
     in oklab,
-    var(--color-purple-400) 60.5%,
-    var(--color-purple-500) 39.5%
+    var(--color-emerald-600) 80%,
+    var(--color-emerald-500) 20%
   );
-  --color-contact-accent: var(--color-emerald-600);
   --color-muted: color-mix(
     in srgb,
     var(--color-foreground) 70%,

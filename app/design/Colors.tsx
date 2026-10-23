@@ -82,11 +82,11 @@ const DESIGN_TOKENS = [
   },
   {
     name: "secondary-accent",
-    definition: "color-mix( in oklab, purple-400 60.5%, purple-500 39.5% )",
+    definition: "purple-500",
   },
   {
     name: "contact-accent",
-    definition: "emerald-600",
+    definition: "color-mix( in oklab, emerald-600 80%, emerald-500 20% )",
   },
   {
     name: "muted",
