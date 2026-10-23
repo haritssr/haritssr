@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "09fd76b8fa3e072b785741db1522a99fac0bb568",
+      "date": "2026-10-23T17:04:27+07:00",
+      "subject": "refactor(Utils): group shared helpers by responsibility"
+    },
+    {
       "hash": "df1674db05c3414b0f81f8fb5c74856cf2b5a4e4",
       "date": "2026-10-23T12:57:04+07:00",
       "subject": "style(Timer): refine card layout and circular controls"

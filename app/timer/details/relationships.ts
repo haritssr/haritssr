@@ -34,7 +34,7 @@ export const timerRelationships = [
       API -->|snapshot or history response| Transport
       Transport -->|validated snapshot and clock offset| Provider
       Transport -->|validated history and 30-day totals| Stats
-      Migration["scripts/migrate-timer.ts"] -->|initialize schema; import backups or JSON| Turso
+      Migration["app/timer/migrate-timer.ts"] -->|initialize schema; import backups or JSON| Turso
       class Page,Client,Date,Toolbar,List,StatsPage,Stats,Dock,Navigation action
       class Layout,Provider,Transport,Position attention
       class API,Store,Database,Turso,Migration,Engine success

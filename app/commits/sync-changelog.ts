@@ -3,10 +3,10 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 import { z } from "zod";
 
-import type { ChangelogCommit } from "../utils/commits/changelog";
+import type { ChangelogCommit } from "../../utils/commits/changelog";
 
-const root = new URL("../", import.meta.url);
-const snapshotPath = new URL("../app/commits/changelog.json", import.meta.url);
+const root = new URL("../../", import.meta.url);
+const snapshotPath = new URL("changelog.json", import.meta.url);
 const authors = new Set(["Harits Syah", "haritssr"]);
 const snapshotSchema = z.object({
   commits: z.array(

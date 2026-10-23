@@ -59,6 +59,9 @@
   server-only. Missing settings leave personal data locked. Remove obsolete
   `TIMER_GITHUB_*` variables; the callback route and Turso schema do not change.
 - Set `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` locally and in deployment.
+  Timer maintenance scripts live in `app/timer/`. `bun run seed:timer` optionally
+  generates 30 days of local sample JSON for imports; runtime demos generate samples
+  directly without those files.
   Run `bun run migrate:timer` to initialize the three-table schema. Run
   `bun run migrate:timer path/to/backup.json` to import a browser backup, or
   `bun run migrate:timer --local-json` to import `data/timer/*.json`. These commands

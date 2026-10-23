@@ -8,12 +8,12 @@
     "fix": "ultracite fix --threads=1",
     "knip": "knip",
     "knip:production": "knip --production",
-    "seed:timer": "bun scripts/seed-timer.ts",
+    "seed:timer": "bun app/timer/seed-timer.ts",
     "start": "next start",
-    "sync:changelog": "bun scripts/sync-changelog.ts",
+    "sync:changelog": "bun app/commits/sync-changelog.ts",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
     "validate:content": "bun --conditions=react-server scripts/validate-content.ts",
-    "migrate:timer": "bun scripts/migrate-timer.ts"
+    "migrate:timer": "bun app/timer/migrate-timer.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

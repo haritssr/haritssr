@@ -3,7 +3,9 @@
   // Include discovered MDX modules and standalone operational scripts.
   "entry": [
     "public/sw.js",
-    "scripts/{inspect-*-db.js,validate-content.ts,seed-timer.ts,migrate-timer.ts,sync-changelog.ts}!",
+    "scripts/{inspect-*-db.js,validate-content.ts}!",
+    "app/commits/sync-changelog.ts!",
+    "app/timer/{migrate-timer,seed-timer}.ts!",
     "app/writing/content/*.mdx",
   ],
   "ignoreDependencies": [

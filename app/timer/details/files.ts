@@ -171,11 +171,11 @@ export const implementationFiles = [
     "Validation schemas for stored records and API messages.",
   ],
   [
-    "scripts/migrate-timer.ts",
+    "app/timer/migrate-timer.ts",
     "Initializes Turso and imports backup or legacy JSON history.",
   ],
   [
-    "scripts/seed-timer.ts",
+    "app/timer/seed-timer.ts",
     "Creates sample history for the previous 30 completed days.",
   ],
 ] as const;
