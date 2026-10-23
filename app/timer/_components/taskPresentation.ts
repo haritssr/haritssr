@@ -7,11 +7,10 @@ export const TASK_LAYOUT = {
   collection: "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3",
   item: "flex flex-col gap-2",
   controls: "mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2",
-  surface:
-    "corner-squircle rounded-[1.25rem] border p-3.5 shadow-lg shadow-red-100",
+  surface: "corner-squircle rounded-[1.25rem] border p-3.5 shadow-lg",
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-sm",
   progress: "h-2",
-  running: "border-danger/80",
+  running: "border-danger/80 shadow-red-100",
   paused: "border-border",
   percentage: "",
 };
