@@ -25,7 +25,7 @@ export default function TaskDescription({ task }: { task: TimerTask }) {
         <Popover.Portal>
           <Popover.Positioner
             align="center"
-            className="z-50 w-64 max-w-[calc(100vw-2rem)]"
+            className="z-50 w-max max-w-[min(16rem,calc(100vw-2rem))]"
             positionMethod="fixed"
             side="top"
             sideOffset={8}
