@@ -60,7 +60,7 @@ export default function IndexCard({
       <p className="text-foreground/70 hidden sm:block">{description}</p>
     </>
   );
-  const cardClassName = `corner-squircle border-border block h-full rounded-2xl border px-3 py-2.5 sm:space-y-1 ${className ?? ""}`;
+  const cardClassName = `corner-squircle border-border block h-full rounded-2xl border px-3 py-2.5 max-sm:border-border/50 max-sm:bg-interface-hover sm:space-y-1 ${className ?? ""}`;
 
   if (href === undefined) {
     return <div className={cardClassName}>{content}</div>;
