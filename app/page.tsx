@@ -167,21 +167,47 @@ export default function Home() {
   );
 }
 
-function Profile() {
+function PersonalDetails() {
   return (
-    <div className="min-w-0 p-4">
-      <section aria-label="About" id="Identity">
+    <section
+      aria-label="About"
+      id="Identity"
+      className="corner-squircle border-border/75 bg-interface-hover min-w-0 space-y-4 rounded-2xl border p-4"
+    >
+      <div className="flex items-center gap-4">
+        <Image
+          alt={profileName}
+          className="size-16 shrink-0 rounded-full sm:size-14"
+          height={100}
+          loading="eager"
+          src="/images/blur.jpg"
+          width={100}
+        />
+        <div className="min-w-0">
+          <p className="font-medium">{profileName}</p>
+          <p className="text-muted">
+            <span className="block sm:inline">Web Product Engineer</span>
+            <span className="hidden sm:inline"> · </span>
+            <span className="block sm:inline">Science Teacher</span>
+          </p>
+        </div>
+      </div>
+      <div className="border-border grid gap-4 border-t border-dashed pt-4 md:grid-cols-3">
         <ul
-          aria-label="Profile details"
-          className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word"
+          aria-label="Profile and contacts"
+          className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1 pl-5 wrap-break-word"
         >
-          <li>Web Product Engineer</li>
-          <li>Science Teacher</li>
           <li>
             Build{" "}
             <ExternalLink
               href="https://www.harimaki.com"
-              name="Harimaki"
+              name="harimaki.com"
+              showArrow={false}
+            />
+            {" and "}
+            <ExternalLink
+              href="https://haritssr.com"
+              name="haritssr.com"
               showArrow={false}
             />
           </li>
@@ -192,66 +218,45 @@ function Profile() {
             <span className="text-secondary-accent">s</span>yah{" "}
             <span className="text-secondary-accent">r</span>ahmatullah
           </li>
-        </ul>
-        <hr className="border-border my-4 border-dashed" />
-        <ul
-          aria-label="Contact details"
-          className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5 wrap-break-word"
-        >
           {contacts.map((contact, index) => (
             <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
               {renderContact(contact)}
             </li>
           ))}
         </ul>
-      </section>
-    </div>
-  );
-}
-
-function PersonalDetails() {
-  return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      <div className="corner-squircle border-border/75 bg-interface-hover flex items-center justify-center rounded-xl border py-8 lg:col-start-1 lg:py-0">
-        <Image
-          alt={profileName}
-          className="size-25 rounded-full"
-          height={100}
-          loading="eager"
-          src="/images/blur.jpg"
-          width={100}
-        />
+        <ul
+          aria-label="Background and tools"
+          id="personal-notes"
+          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+        >
+          <li>Touch typist, ±90 WPM.</li>
+          <li>Former chess player, ±2000 Elo.</li>
+          <li>I develop with Codex CLI in Zed.</li>
+          <li>
+            JS, TS, Effect, React, Next.js, FP, Math, Physics, and Education.
+          </li>
+          <li>Background in Physics</li>
+        </ul>
+        <ul
+          aria-label="Principles"
+          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+        >
+          <li>
+            <ExternalLink
+              href="https://youtu.be/H7Sfo3lMB8c?t=72"
+              name="Eudaimonia"
+              showArrow={false}
+              variant="muted"
+            />{" "}
+            &gt; Hedonia
+          </li>
+          <li>Effective Accelerationism (e/acc)</li>
+          <li>Existence = f(constraints, maintainence, ...)</li>
+          <li>100% is easier than 98%</li>
+          <li>What gets measured gets managed</li>
+        </ul>
       </div>
-      <div className="corner-squircle border-border/75 bg-interface-hover rounded-xl border lg:col-start-2">
-        <Profile />
-      </div>
-      <div className="corner-squircle border-border/75 bg-interface-hover min-w-0 rounded-xl border p-4 lg:col-span-2 lg:col-start-3">
-        <section aria-label="Personal notes and words" id="personal-notes">
-          <ul className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5">
-            <li>Touch typist, ±90 WPM.</li>
-            <li>Former chess player, ±2000 Elo.</li>
-            <li>I develop with Codex CLI in Zed.</li>
-
-            <li>JS, TS, Effect, React, Next.js, FP, Math, Phy, and Edu.</li>
-          </ul>
-          <hr className="border-border my-4 border-dashed" />
-          <ul className="text-muted marker:text-muted list-outside list-disc space-y-2 pl-5">
-            <li>
-              <ExternalLink
-                href="https://youtu.be/H7Sfo3lMB8c?t=72"
-                name="Eudaimonia"
-                showArrow={false}
-              />{" "}
-              &gt; Hedonia
-            </li>
-            <li>Effective Accelerationism (e/acc)</li>
-            <li>Existence = f(constraints, maintainence, ...)</li>
-            <li>100% is easier than 98%</li>
-            <li>What gets measured gets managed</li>
-          </ul>
-        </section>
-      </div>
-    </div>
+    </section>
   );
 }
 

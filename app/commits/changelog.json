@@ -1,6 +1,11 @@
 {
   "commits": [
     {
+      "hash": "bc083f6a3a16ce9e9ba3105271ffdae93f44dc88",
+      "date": "2026-10-23T17:58:43+07:00",
+      "subject": "docs(Commits): explain cache periods and route consumers"
+    },
+    {
       "hash": "eab74958c8baa5eaba792f82a55ae4d740cd35cc",
       "date": "2026-10-23T17:58:35+07:00",
       "subject": "perf(Commits): cache counts and history for 24 hours"

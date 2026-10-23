@@ -4,12 +4,14 @@ export default function ExternalLink({
   big,
   size,
   showArrow = true,
+  variant = "default",
 }: {
   name: string;
   href: string;
   big?: boolean;
   size?: "base" | "inherit" | "lg";
   showArrow?: boolean;
+  variant?: "default" | "muted";
 }) {
   const resolvedSize = size ?? (big === true ? "lg" : "base");
   const textClass = {
@@ -20,7 +22,7 @@ export default function ExternalLink({
   return (
     <a
       aria-label={name}
-      className="group text-action hover:text-action-hover inline-block cursor-pointer transition-transform hover:underline active:scale-[0.98] motion-reduce:transition-none"
+      className={`group inline-block cursor-pointer transition-transform hover:underline focus-visible:underline active:scale-[0.98] motion-reduce:transition-none ${variant === "muted" ? "text-muted hover:text-foreground underline" : "text-action hover:text-action-hover"}`}
       href={href}
       rel="noopener noreferrer"
       target="_blank"
@@ -31,7 +33,7 @@ export default function ExternalLink({
         {showArrow ? (
           <svg
             aria-hidden="true"
-            className="text-action group-hover:text-action-hover ml-0.5 inline size-4.5 align-middle"
+            className="ml-0.5 inline size-4.5 align-middle"
             fill="none"
             stroke="currentColor"
             strokeWidth={2}
