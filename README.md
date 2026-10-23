@@ -1,7 +1,9 @@
+- [URL](https://haritssr.com/url): Remove selected query parameters and fragments locally, preserving retained URL encoding and parameter order.
 - [Projects](https://haritssr.com/projects): Portfolio and project details.
 - [Labs](https://haritssr.com/labs): Frontend, browser APIs, mathematics, and physics.
 - [Writing](https://haritssr.com/writing): Posts and notes.
 - [Design](https://haritssr.com/design): Design system reference.
+- [Music](https://haritssr.com/music): Included songs and a device-local MP3 library and player.
 - [Commits](https://haritssr.com/commits): Commit history and activity.
   [Changelog](https://haritssr.com/commits/weekly-changelog) presents
   curated summaries from January 2026 through October 22, newest first. Each
@@ -125,8 +127,13 @@
   writes are not automatically resent. There is no offline writable fallback,
   background scheduler, or Autoplay while all pages close.
 - Snapshot reads discover running and unacknowledged-task dates once through
-  partial indexes, then fetch only those dates and today. Statistics adds only
-  its selected 30-day window. Backups and imports retain full-history reads.
+  partial indexes, then fetch only those dates and today. Statistics reads full tasks only for its selected day and active dates, plus
+  30 daily summary rows. SQLite triggers keep saved totals synchronized with
+  inserts, edits, deletes, and imports; live task time is overlaid at read time.
+  Run `bun run migrate:timer` before deploying these statistics changes to add
+  and backfill the totals column and install its triggers. Unchanged snapshot
+  broadcasts no longer trigger duplicate statistics requests; periodic polling,
+  focus refresh, and cross-device updates retain their existing intervals. Backups and imports retain full-history reads.
   Run `bun run migrate:timer` after updating to add the pending-notification index.
 - Settings includes Duration Presets and Task Presets editors. Duration lists
   allow 1–5 entries and task lists 1–10, with separate Save and Cancel
@@ -198,7 +205,7 @@ Long titles truncate within that space.
 The desktop navigation pill is also visible on Home and lists Home, Projects,
 Labs, Writing, and Design in that order. It appears from 1024px so all
 five links fit between the side controls. Home's responsive card grid links
-to Timer, Commits, and Tree under Tools, with the commit count from a separate Turso count query cached for 24 hours.
+to Timer, Commits, Tree, and Music under Tools, with the commit count from a separate Turso count query cached for 24 hours.
 
 Shared helpers in `utils/` are grouped by responsibility: `commits/` handles
 commit records and Turso reads; `content/` handles posts and article outlines;
@@ -283,8 +290,18 @@ counts and activity buckets on the server; later selections load on demand with
 public response caching. Period, date, type, query, and row limit live in the URL;
 Back/Forward restore them, and typing updates are debounced before requests.
 
+The top bar measures its height once through `useTopBarHeight`; scrolling titles,
+Contents highlighting, and anchor scroll padding use that measurement.
+`HeaderActions` coordinates page actions, Contents, and Search handoffs;
+`TopBarContents` renders only its outline control and panel. Shared action styling
+lives in `TopBarAction`, and one root `SharePageProvider` supplies copy feedback
+for buttons, keyboard shortcuts, and Search.
+
+
 Global search uses Ctrl/Cmd+K, preserving the browser Print shortcut. Top and
-bottom navigation share `data/navigation.ts`; section links distinguish the
+bottom navigation share `data/navigation.ts` and route matching from
+`utils/navigation/navigationState.ts`. Primary titles and search descriptions live
+in `data/primaryRoutes.ts`; section links distinguish the
 current page from a parent location.
 
 Plain table-of-contents labels do not load KaTeX; mathematical labels load their
@@ -293,3 +310,76 @@ answer selection in the client. Flow diagrams load near the viewport. Electron
 configuration geometry runs in a dedicated worker with a four-entry cache and
 ignores results from older selections. Confetti requires an explicit start,
 provides Stop, and respects reduced motion.
+
+## Gradient Cards
+
+`/labs/user-interface/gradient-cards` contains 100 authored card recipes in one
+mixed grid. It uses one, two, and four columns with `gap-5`, and demonstrates all
+16 desktop column/row spans from 1×1 through 4×4. Tablet spans are capped at two;
+mobile cards return to a single column with content-driven heights.
+
+The gallery renders on the server. A small client controller delegates inspection
+to native buttons and loads one Base UI inspector on demand. Gallery and inspector
+share artwork and CSS serialization. Ten animated examples pause offscreen and
+disable motion for reduced-motion preferences. Six generated images are stored
+under `public/images/gradient-cards`; that folder's README records their prompts.
+
+## Music
+
+The Music header links to `/music/details` for storage notes and offline status.
+Offline preparation still runs on the player page; Details only checks its status.
+
+`/music` includes seven songs from `public/music`, cataloged in `app/music/data.ts`.
+They appear automatically and stream directly from their public URLs, with native
+audio seeking and no import step. These files are deployment assets and need a
+connection. Add included songs by placing an MP3 in that folder and registering
+its metadata in the catalog. Included songs cannot be removed through the player.
+
+Users can also import MP3s into this browser's versioned IndexedDB database.
+Original imported files stay untouched; imports are never uploaded. Track metadata, audio,
+256px artwork thumbnails, and playback settings have separate stores. Clearing
+site data or browser storage eviction removes the saved library. Root-level
+MP3s remain ignored by Git; included audio is grouped under `public/music` instead.
+
+The compact library initially sorts titles alphabetically and supports search,
+saved library reordering, shuffle, repeat, seeking, and volume/mute. Move songs
+with the library's six-dot drag handles; focused handles
+also support arrow keys. Playback follows that order without a
+separate Queue panel. New imports append after manually ordered songs.
+The current song expands inside the library to show seeking and playback controls.
+Embedded tags use `music-metadata`,
+loaded during import, with filenames and a music icon as fallbacks. Imports run
+sequentially and commit each file atomically. Identical filename/size/modification
+time signatures are skipped. Import failures retain successful songs.
+Repeat One applies only to automatic completion.
+
+A lazy Music runtime activates on `/music` or for a remembered visible player.
+One native audio element survives client navigation; only the selected song
+is loaded, from its public URL or a local audio blob. Position updates have
+separate subscribers from the library.
+Library, queue, selected song, position, and preferences restore paused after a
+reload. A new playing tab pauses the previous one through BroadcastChannel and
+storage events. Media Session controls are optional browser enhancements. Device
+volume controls remain available where browser volume changes are unsupported.
+Music and Timer sounds play together.
+
+Outside `/music`, the Music bar remains visible while playing or paused. Close
+pauses and dismisses it without losing the selected song. The shared
+`components/floating/FloatingDock.tsx` portals Music above Timer and measures the
+combined stack for navigation, safe-area, and footer clearance. Timer completion
+and error messages retain their existing behavior. Neither inactive runtime is
+loaded just to display the floating host.
+
+In production, visiting Music prepares its public document and required immutable
+Next.js assets through the existing service worker. Asset responses must carry
+`Cache-Control: immutable`; development chunks are never served from this cache.
+Development startup updates an existing site worker and removes stale Music
+shell caches containing development assets, then reloads once when needed.
+Imported songs and metadata remain in IndexedDB. “Player and imported songs
+available offline” appears only after preparation succeeds. The document is committed to the cache after
+its dependencies; failed refreshes retain the last complete shell. `/music` can
+then reopen offline and play imported songs. Included songs are streamed online
+and are not downloaded during offline setup. API/account responses, RSC payloads,
+and other page documents are not cached. The generic offline fallback and Timer
+notification click behavior remain intact. Initial setup needs a connection;
+service-worker support and retained browser storage are required.
