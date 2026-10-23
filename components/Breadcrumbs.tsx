@@ -43,53 +43,55 @@ export default function Breadcrumbs({
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="mb-3" data-page-breadcrumbs="">
-      <div className="mx-auto flex w-full max-w-5xl justify-start px-4 xl:px-0">
-        <ol
-          className="scrollbar-hide corner-squircle flex h-6 w-fit items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg text-[15px] leading-6"
-          ref={listRef}
-        >
-          <li className="flex shrink-0 items-center">
-            <Link
-              className="text-foreground/70 hover:text-foreground whitespace-nowrap"
-              href="/"
-              prefetch={false}
-            >
-              Home
-            </Link>
+    <nav
+      aria-label="Breadcrumb"
+      className="min-w-0 flex-1"
+      data-page-breadcrumbs=""
+    >
+      <ol
+        className="scrollbar-hide corner-squircle flex h-6 w-fit max-w-full items-center gap-1 overflow-x-auto overscroll-x-contain rounded-lg text-[15px] leading-6"
+        ref={listRef}
+      >
+        <li className="flex shrink-0 items-center">
+          <Link
+            className="text-foreground/70 hover:text-foreground whitespace-nowrap"
+            href="/"
+            prefetch={false}
+          >
+            Home
+          </Link>
 
-            <Separator />
-          </li>
+          <Separator />
+        </li>
 
-          {breadcrumbs.map(({ href, label }, index) => {
-            const isLast = index === breadcrumbs.length - 1;
+        {breadcrumbs.map(({ href, label }, index) => {
+          const isLast = index === breadcrumbs.length - 1;
 
-            return (
-              <li className="flex shrink-0 items-center" key={href}>
-                {isLast ? (
-                  <span
-                    aria-current="page"
-                    className="text-foreground whitespace-nowrap"
+          return (
+            <li className="flex shrink-0 items-center" key={href}>
+              {isLast ? (
+                <span
+                  aria-current="page"
+                  className="text-foreground whitespace-nowrap"
+                >
+                  {label}
+                </span>
+              ) : (
+                <>
+                  <Link
+                    className="text-foreground/70 hover:text-foreground whitespace-nowrap"
+                    href={href}
+                    prefetch={false}
                   >
                     {label}
-                  </span>
-                ) : (
-                  <>
-                    <Link
-                      className="text-foreground/70 hover:text-foreground whitespace-nowrap"
-                      href={href}
-                      prefetch={false}
-                    >
-                      {label}
-                    </Link>
-                    <Separator />
-                  </>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </div>
+                  </Link>
+                  <Separator />
+                </>
+              )}
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   );
 }

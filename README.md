@@ -19,6 +19,9 @@
   effort labels are editorial estimates, not recorded model usage.
 
 - Built with Next.js, React, TypeScript, Tailwind CSS, MDX, and Bun.
+- Every footer shows breadcrumbs above the Jakarta date, with a live 24-hour WIB
+  clock beside the date. Updates pause in hidden tabs and resume immediately on return;
+  the display uses local clock data without API or database reads.
 - Commit maintenance scripts live beside their data in `app/commits/`:
   `sync-changelog.ts` refreshes the Git snapshot and `import-commits.ts` uploads it.
   `bun run import:commits` copies `app/commits/changelog.json` into the separate

@@ -10,6 +10,7 @@ import { RSS_PATH } from "@/utils/metadata/site";
 
 import Breadcrumbs from "./Breadcrumbs";
 import FooterActions from "./FooterActions";
+import FooterClock from "./FooterClock";
 
 const breadcrumbLabels = Object.fromEntries<string>([
   ["/labs", "Labs"],
@@ -35,7 +36,11 @@ export default function Footer() {
       className="text-foreground/70 mt-30 mb-(--timer-footer-clearance,1rem) w-full text-[15px] sm:mb-5"
       data-site-footer=""
     >
-      <Breadcrumbs routeLabels={breadcrumbLabels} />
+      <div className="mx-auto w-full max-w-5xl px-4 xl:px-0">
+        <FooterClock>
+          <Breadcrumbs routeLabels={breadcrumbLabels} />
+        </FooterClock>
+      </div>
       <div className="mx-auto flex w-full max-w-5xl justify-between gap-5 px-4 xl:px-0">
         <div className="shrink-0">
           2021-2026 &#169; <span>Harits Syah</span>
