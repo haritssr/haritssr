@@ -1,4 +1,4 @@
-- [URL](https://haritssr.com/url): Available in the homepage Tools section. Paste a URL to automatically remove all query parameters and copy the result. Turn automatic mode off to select individual parameters or fragments manually. Processing stays local and preserves retained URL encoding and parameter order.
+- [URL](https://haritssr.com/url): Available in the homepage Tools section. Paste a URL to inspect its hierarchy by level, showing one route segment per row. Copy segments and parameter names or values individually, select parameters or the fragment to remove, and copy the cleaned result. Parameters and fragments are kept until selected for removal. Processing stays local and preserves retained URL encoding and parameter order.
 - [Projects](https://haritssr.com/projects): Portfolio and project details.
 - [Labs](https://haritssr.com/labs): Frontend, browser APIs, mathematics, and physics.
 - [Writing](https://haritssr.com/writing): Posts and notes.
