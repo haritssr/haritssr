@@ -13,7 +13,7 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
 
 import Button from "@/components/Button";
 import Slider from "@/components/Slider";
@@ -47,53 +47,6 @@ function Library({ store }: { store: MusicStore }) {
   const [query, setQuery] = useState("");
   const input = useRef<HTMLInputElement>(null);
   useMusicOffline(tracks.length);
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (
-        event.code !== "Space" ||
-        event.defaultPrevented ||
-        event.repeat ||
-        event.isComposing ||
-        event.altKey ||
-        event.ctrlKey ||
-        event.metaKey ||
-        event.shiftKey
-      ) {
-        return;
-      }
-      const { target } = event;
-      if (
-        (target instanceof HTMLElement && target.isContentEditable) ||
-        (target instanceof Element &&
-          target.closest(
-            "input, textarea, select, button, a, summary, [role='button'], [role='textbox'], [role='slider'], [role='menuitem'], [role='dialog'], [role='alertdialog']"
-          ) !== null) ||
-        document.querySelector("[role='dialog'], [role='alertdialog']") !== null
-      ) {
-        return;
-      }
-      const snapshot = store.getSnapshot();
-      if (!snapshot.ready) {
-        return;
-      }
-      event.preventDefault();
-      if (store.currentTrack()) {
-        store.toggle();
-      } else {
-        const first = snapshot.tracks.at(0);
-        if (first !== undefined) {
-          store.startTrack(
-            first.id,
-            snapshot.tracks.map((track) => track.id)
-          );
-        }
-      }
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [store]);
   const search = query.trim().toLocaleLowerCase();
   const filtered = tracks.filter((track) =>
     `${track.title} ${track.artist} ${track.album} ${track.filename}`

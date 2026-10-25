@@ -379,6 +379,11 @@ storage events. Media Session controls are optional browser enhancements. Device
 volume controls remain available where browser volume changes are unsupported.
 Music and Timer sounds play together.
 
+Space toggles music on `/music` and wherever the floating Music bar is visible.
+On `/music`, it starts the first song if none is selected. Typing, focused
+interactive controls, open dialogs, modifiers, and held keys retain their normal
+behavior. A dismissed player does not capture Space outside `/music`.
+
 Outside `/music`, the Music bar remains visible while playing or paused. Close
 pauses and dismisses it without losing the selected song. The shared
 `components/floating/FloatingDock.tsx` portals Music above Timer and measures the
