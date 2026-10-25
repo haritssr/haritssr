@@ -74,7 +74,7 @@ export default function TaskProgress({
       <progress
         aria-label={`${task.activity}: time spent`}
         aria-valuetext={`${formatTimerTime(spent)} of ${formatTimerTime(task.duration)}`}
-        className={`bg-border [&::-webkit-progress-bar]:bg-border block w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_LAYOUT.progress}`}
+        className={`bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_LAYOUT.progress}`}
         key={running ? "running" : "idle"}
         max={task.duration}
         style={progressStyle}
