@@ -98,7 +98,7 @@ export default function TopBar() {
           // TitleWhileScroll
           <div className="flex min-w-0 flex-1 justify-center">
             <Link
-              className="text-foreground flex w-fit max-w-full min-w-0 items-center px-2 font-medium sm:px-4"
+              className="text-foreground flex w-fit max-w-full min-w-0 items-center px-2 text-lg font-medium sm:px-4"
               href={pathname}
               onNavigate={(event) => {
                 event.preventDefault();
