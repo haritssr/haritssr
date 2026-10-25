@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 import { primaryNavigation } from "@/data/navigation";
 import {
@@ -15,6 +16,7 @@ export default function TabBarButtom({
   preview?: boolean;
 } = {}) {
   const pathname = usePathname();
+  const [previewPath, setPreviewPath] = useState(pathname);
   if (!preview && !showsMobileNavigation(pathname)) {
     return null;
   }
@@ -29,14 +31,18 @@ export default function TabBarButtom({
         className="border-foreground/10 bg-background/70 shadow-foreground/5 mx-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md [corner-shape:round] sm:max-w-[22.4rem]"
         data-mobile-tabbar-surface={preview ? undefined : pathname}
       >
-        <div className="flex w-full items-center">
+        <div className="flex w-full items-center gap-0.5">
           {primaryNavigation.map(({ title, icon, href }) => (
             <IconWrapper
               href={href}
               key={title}
               icon={icon}
               to={title}
-              current={navigationCurrent(pathname, href)}
+              current={navigationCurrent(
+                preview ? previewPath : pathname,
+                href
+              )}
+              onPreviewSelect={preview ? setPreviewPath : undefined}
             />
           ))}
         </div>
@@ -50,11 +56,13 @@ const IconWrapper = ({
   icon: Icon,
   href,
   current,
+  onPreviewSelect,
 }: {
   to: string;
   icon: (typeof primaryNavigation)[number]["icon"];
   href: string;
   current: "page" | "location" | undefined;
+  onPreviewSelect?: (href: string) => void;
 }) => {
   const appearance = current
     ? "bg-foreground/8 text-action"
@@ -65,6 +73,14 @@ const IconWrapper = ({
       aria-current={current}
       className={`focus-visible:outline-action flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full px-1 py-1 transition-colors duration-150 [corner-shape:round] focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none ${appearance}`}
       href={href}
+      onClick={
+        onPreviewSelect
+          ? (event) => {
+              event.preventDefault();
+              onPreviewSelect(href);
+            }
+          : undefined
+      }
     >
       <div className="flex flex-col items-center justify-center">
         <Icon aria-hidden="true" className="size-6 shrink-0" />
