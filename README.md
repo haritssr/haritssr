@@ -377,9 +377,9 @@ Library, queue, selected song, position, and preferences restore paused after a
 reload. A new playing tab pauses the previous one through BroadcastChannel and
 storage events. Media Session controls are optional browser enhancements. Device
 volume controls remain available where browser volume changes are unsupported.
-The list volume icon toggles mute; hover or keyboard focus reveals a vertical
-volume slider in a translucent capsule. Touching the icon also reveals the slider,
-and tapping outside dismisses it. Music and Timer sounds play together.
+The list volume icon opens a translucent capsule with a vertical volume slider
+and a separate mute button. Hovering also reveals the capsule, and tapping
+outside dismisses it. Music and Timer sounds play together.
 
 Space toggles music on `/music` and wherever the floating Music bar is visible.
 On `/music`, it starts the first song if none is selected. Typing, focused

@@ -8,6 +8,8 @@ type ButtonVariant =
   | "ghost"
   | "icon"
   | "icon-active"
+  | "icon-hover"
+  | "icon-active-hover"
   | "neutral-subtle"
   | "neutral-subtle-underlined"
   | "secondary-strong"
@@ -41,6 +43,10 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   ghost:
     "font-medium text-zinc-700 transition-colors duration-150 hover:bg-zinc-100 focus-visible:outline-zinc-700",
   icon: "gap-0 text-foreground transition-colors duration-150 hover:text-action focus-visible:outline-action",
+  "icon-hover":
+    "gap-0 text-foreground transition-colors duration-150 enabled:hover:bg-foreground/5 hover:text-action focus-visible:outline-action",
+  "icon-active-hover":
+    "gap-0 text-action transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "icon-active":
     "gap-0 text-action transition-colors duration-150 focus-visible:outline-action",
   "neutral-subtle":

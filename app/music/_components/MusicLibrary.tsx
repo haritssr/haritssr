@@ -166,7 +166,7 @@ function TrackMenu({ track, store }: { track: MusicTrack; store: MusicStore }) {
         <Menu.Trigger
           ref={trigger}
           aria-label={`Actions for ${track.title}`}
-          render={<Button size="icon-large" variant="icon" />}
+          render={<Button size="icon-circle" variant="icon-hover" />}
         >
           <AdjustmentsHorizontalIcon aria-hidden="true" className="size-5" />
         </Menu.Trigger>
@@ -237,10 +237,10 @@ function PlaybackControls({ store }: { store: MusicStore }) {
         onClick={() => {
           store.previous();
         }}
-        size="icon-large"
-        variant="icon"
+        size="icon-circle"
+        variant="icon-hover"
       >
-        <BackwardIcon aria-hidden="true" className="size-5" />
+        <BackwardIcon aria-hidden="true" className="size-5 -translate-x-px" />
       </Button>
       <Button
         aria-label={playing ? "Pause music" : "Play music"}
@@ -248,8 +248,8 @@ function PlaybackControls({ store }: { store: MusicStore }) {
         onClick={() => {
           store.toggle();
         }}
-        size="icon-large"
-        variant="icon"
+        size="icon-circle"
+        variant="icon-hover"
       >
         <PlaybackIcon playing={playing} />
       </Button>
@@ -259,21 +259,21 @@ function PlaybackControls({ store }: { store: MusicStore }) {
         onClick={() => {
           store.next();
         }}
-        size="icon-large"
-        variant="icon"
+        size="icon-circle"
+        variant="icon-hover"
       >
-        <ForwardIcon aria-hidden="true" className="size-5" />
+        <ForwardIcon aria-hidden="true" className="size-5 translate-x-px" />
       </Button>
       <div className="contents lg:flex lg:items-center lg:gap-0">
         <Button
           aria-label="Shuffle"
           title={session.shuffle ? "Shuffle: On" : "Shuffle: Off"}
-          size="icon-large"
+          size="icon-circle"
           aria-pressed={session.shuffle}
           onClick={() => {
             store.preferences({ shuffle: !session.shuffle });
           }}
-          variant={session.shuffle ? "icon-active" : "icon"}
+          variant={session.shuffle ? "icon-active-hover" : "icon-hover"}
         >
           <svg
             aria-hidden="true"
@@ -291,13 +291,15 @@ function PlaybackControls({ store }: { store: MusicStore }) {
         <Button
           aria-label={`Repeat: ${repeatLabels[session.repeat]}. Switch to ${repeatLabels[nextRepeat[session.repeat]].toLowerCase()}`}
           title={`Repeat: ${repeatLabels[session.repeat]}`}
-          size="icon-large"
+          size="icon-circle"
           onClick={() => {
             store.preferences({
               repeat: nextRepeat[session.repeat],
             });
           }}
-          variant={session.repeat === "off" ? "icon" : "icon-active"}
+          variant={
+            session.repeat === "off" ? "icon-hover" : "icon-active-hover"
+          }
         >
           <span aria-hidden="true" className="relative block size-5">
             <ArrowPathRoundedSquareIcon className="size-5" />
@@ -310,26 +312,21 @@ function PlaybackControls({ store }: { store: MusicStore }) {
         </Button>
         <Popover.Root
           open={volumeOpen}
-          onOpenChange={(open, details) => {
-            setVolumeOpen(details.reason === "trigger-press" ? true : open);
+          onOpenChange={(open) => {
+            setVolumeOpen(open);
           }}
         >
           <Popover.Trigger
-            aria-label={muted ? "Unmute music" : "Mute music"}
-            aria-pressed={muted}
+            aria-label="Music volume"
             openOnHover
             delay={0}
             closeDelay={150}
-            onFocus={() => {
-              setVolumeOpen(true);
-            }}
-            onClick={() => {
-              store.preferences({
-                muted: !muted,
-                ...(muted && session.volume === 0 ? { volume: 1 } : {}),
-              });
-            }}
-            render={<Button size="icon-large" variant="icon" />}
+            render={
+              <Button
+                size="icon-circle"
+                variant={volumeOpen ? "icon-active-hover" : "icon-hover"}
+              />
+            }
           >
             {muted ? (
               <SpeakerXMarkIcon aria-hidden="true" className="size-5" />
@@ -342,12 +339,12 @@ function PlaybackControls({ store }: { store: MusicStore }) {
               align="center"
               className="z-50"
               side="top"
-              sideOffset={8}
+              sideOffset={2}
             >
               <Popover.Popup
                 aria-label="Music volume"
                 initialFocus={false}
-                className={`${styles.controls} border-foreground/10 bg-background/70 shadow-foreground/10 rounded-full border px-2 py-3 shadow-lg outline-hidden backdrop-blur-md [corner-shape:round] ${volumeSupported ? "" : "w-40"}`}
+                className={`${styles.volumeControls} border-foreground/10 bg-background/70 shadow-foreground/10 flex flex-col items-center gap-2 rounded-full border px-2 pt-4 pb-2 shadow-lg outline-hidden backdrop-blur-md [corner-shape:round] ${volumeSupported ? "" : "w-40"}`}
               >
                 {volumeSupported ? (
                   <Slider
@@ -371,6 +368,25 @@ function PlaybackControls({ store }: { store: MusicStore }) {
                     Use device volume controls.
                   </p>
                 )}
+                <Button
+                  aria-label={muted ? "Unmute music" : "Mute music"}
+                  aria-pressed={muted}
+                  title={muted ? "Unmute music" : "Mute music"}
+                  size="text"
+                  variant="icon"
+                  onClick={() => {
+                    store.preferences({
+                      muted: !muted,
+                      ...(muted && session.volume === 0 ? { volume: 1 } : {}),
+                    });
+                  }}
+                >
+                  {muted ? (
+                    <SpeakerXMarkIcon aria-hidden="true" className="size-5" />
+                  ) : (
+                    <SpeakerWaveIcon aria-hidden="true" className="size-5" />
+                  )}
+                </Button>
               </Popover.Popup>
             </Popover.Positioner>
           </Popover.Portal>
@@ -433,10 +449,10 @@ function SongList({
           data-music-track={track.id}
           key={track.id}
         >
-          <div className="flex min-w-0 flex-wrap items-center gap-0 p-1.5">
+          <div className="flex min-w-0 flex-wrap items-center gap-2 px-2 py-1.5">
             <button
               aria-label={`Reorder ${track.title}. Drag or use up and down arrow keys.`}
-              className="text-muted hover:bg-foreground/5 hover:text-foreground focus-visible:outline-action flex min-h-10 w-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-sm focus-visible:outline-2 active:cursor-grabbing"
+              className="text-muted hover:bg-foreground/5 hover:text-foreground focus-visible:outline-action flex min-h-10 w-4 shrink-0 cursor-grab touch-none items-center justify-center rounded-sm focus-visible:outline-2 active:cursor-grabbing"
               onKeyDown={(event) => {
                 if (event.key === "Escape") {
                   setDrag(null);
@@ -527,10 +543,10 @@ function SongList({
                 <circle cx="11" cy="13" r="1.25" />
               </svg>
             </button>
-            <div className="flex min-w-0 flex-1 basis-64 items-center gap-0">
+            <div className="flex min-w-0 flex-1 basis-0 items-center gap-0 group-data-[current=true]/song:basis-64">
               <button
                 aria-label={`${track.id === current?.id && playing ? "Pause" : "Play"} ${track.title}${includedTrack(track.id) ? "" : " (imported song)"}`}
-                className="focus-visible:outline-action text-foreground group-data-[current=true]/song:text-music-accent -my-2 flex min-w-0 flex-1 cursor-pointer items-center gap-0 rounded-md text-left transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="focus-visible:outline-action text-foreground group-data-[current=true]/song:text-music-accent -my-2 flex min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-md text-left transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
                 onClick={() => {
                   if (track.id === current?.id) {
                     store.toggle();
@@ -541,7 +557,7 @@ function SongList({
                 type="button"
               >
                 <MusicArtwork
-                  className="text-muted group-data-[current=true]/song:text-music-accent size-10"
+                  className="text-muted group-data-[current=true]/song:text-music-accent h-10 w-5 [&>svg]:size-5"
                   track={track}
                 />
                 <span className="min-w-0 flex-1">
@@ -568,12 +584,12 @@ function SongList({
                 </span>
               </button>
               {track.id === current?.id ? (
-                <div className="max-w-xs min-w-0 flex-1">
+                <div className="max-w-xs min-w-0 flex-1 pr-2">
                   <MusicProgress store={store} />
                 </div>
               ) : null}
             </div>
-            <div className="flex flex-wrap items-center justify-end gap-0 max-lg:group-data-[current=true]/song:w-full max-lg:group-data-[current=true]/song:basis-full max-lg:group-data-[current=true]/song:justify-between">
+            <div className="max-lg:group-data-[current=true]/song:border-border flex flex-wrap items-center justify-end gap-0 max-lg:group-data-[current=true]/song:w-full max-lg:group-data-[current=true]/song:basis-full max-lg:group-data-[current=true]/song:justify-between max-lg:group-data-[current=true]/song:border-t max-lg:group-data-[current=true]/song:border-dashed max-lg:group-data-[current=true]/song:pt-1">
               {track.id === current?.id ? (
                 <PlaybackControls store={store} />
               ) : null}

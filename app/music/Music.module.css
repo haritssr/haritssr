@@ -6,3 +6,9 @@
   --color-action: var(--color-music-accent);
   --color-action-hover: var(--color-music-accent);
 }
+
+.volumeControls {
+  --color-action: var(--color-foreground);
+  --color-action-hover: var(--color-foreground);
+  --color-music-accent: var(--color-foreground);
+}
