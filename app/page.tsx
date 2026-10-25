@@ -295,6 +295,7 @@ function Tools({ count }: { count?: number }) {
       />
       <IndexCard
         title="Commits"
+        badge="DB"
         description="Recent code changes and updates across this site."
         count={count}
         countLabel="commits"

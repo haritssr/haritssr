@@ -270,7 +270,7 @@ UI colors use near-white (`zinc-50`) and near-black (`zinc-900`) instead of pure
 white or black, including shared color tokens, control thumbs, and shadows.
 
 Global search opens with a single list of Home, Projects, Labs, Writing,
-and Design, followed by Share and GitHub. Type to filter pages and commands.
+and Design, followed by Share, GitHub, and the Timer, Commits, Tree, Music, and URL tools. Type to filter pages and commands.
 Type `share` and press Enter to copy the current page URL (including its query
 and fragment); the same confirmation and clipboard behavior are shared with the
 top-bar Share button.

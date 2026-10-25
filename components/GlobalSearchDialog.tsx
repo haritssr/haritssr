@@ -17,8 +17,10 @@ import { useSharePageUrl } from "@/components/SharePageProvider";
 import { primaryRoutes } from "@/data/primaryRoutes";
 import type { RouteDoc } from "@/data/routes";
 import {
+  commitsRoute,
   getSearchMatchRanges,
   hasSearchQuery,
+  navigationRoutes,
   searchRoutes,
 } from "@/data/routes";
 import {
@@ -70,6 +72,15 @@ const MAIN_ROUTES = new Set<string>(
   primaryRoutes.filter(({ route }) => route !== "/").map(({ route }) => route)
 );
 
+const TOOL_ENTRIES = ["/timer", "/commits", "/tree", "/music", "/url"].flatMap(
+  (route) => {
+    const entry = [...navigationRoutes, commitsRoute].find(
+      (candidate) => candidate.route === route
+    );
+    return entry ? [entry] : [];
+  }
+);
+
 export default function GlobalSearchDialog({
   entries,
   indexStatus,
@@ -112,9 +123,14 @@ export default function GlobalSearchDialog({
         entry,
       }));
   const commands: SearchItem[] = [...shareCommands, ...sourceCodeCommands];
+  const tools: PageSearchItem[] = TOOL_ENTRIES.map((entry) => ({
+    kind: "page",
+    title: entry.title,
+    entry,
+  }));
   const results: SearchItem[] = isSearching
     ? [...commands, ...pages]
-    : [...pages, ...commands];
+    : [...pages, ...commands, ...tools];
   const showEmpty =
     !isLoading && !loadError && isSearching && results.length === 0;
   const { listLabel, resultStatus } = getSearchLabels(
