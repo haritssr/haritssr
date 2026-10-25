@@ -22,7 +22,9 @@ export default function TaskProgress({
   compact?: boolean;
   title?: string;
 }) {
-  const stackClass = compact ? "@container space-y-1.5" : "space-y-1";
+  const stackClass = compact
+    ? "@container flex flex-col gap-1.5"
+    : "flex flex-col gap-1";
   const percentage = Math.min(100, (spent / task.duration) * 100);
   const percentageLabel = percentage.toFixed(0);
   const progressStyle: CSSProperties & { "--timer-progress-fill": string } = {
@@ -30,7 +32,7 @@ export default function TaskProgress({
   };
   return (
     <div
-      className={`${stackClass} ${title === undefined ? "" : "max-sm:space-y-2"}`}
+      className={`${stackClass} ${title === undefined ? "" : "max-sm:gap-2"}`}
     >
       <div
         className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
