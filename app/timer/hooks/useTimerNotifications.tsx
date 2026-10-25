@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { Toast } from "@base-ui/react/toast";
+import { useEffect, useRef } from "react";
 
 import { canUseTimer } from "@/app/timer/utils/timer";
 import type { TimerNotice, TimerSnapshot } from "@/app/timer/utils/timer";
 import { sendTimerAction } from "@/app/timer/utils/timerClient";
 import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
 import { playTaskSound, prepareTaskSound } from "@/app/timer/utils/timerSound";
+import InternalLink from "@/components/InternalLink";
 
 async function showCompletion(notice: TimerNotice) {
   if (!("Notification" in window) || Notification.permission !== "granted") {
@@ -52,20 +54,8 @@ export default function useTimerNotifications({
   autoplay: boolean;
   notificationsEnabled: boolean;
 }) {
-  const [completion, setCompletion] = useState<TimerNotice | null>(null);
+  const { add } = Toast.useToastManager();
   const claiming = useRef(new Set<string>());
-
-  useEffect(() => {
-    let timeout: number | undefined;
-    if (completion !== null) {
-      timeout = window.setTimeout(() => {
-        setCompletion(null);
-      }, 5000);
-    }
-    return () => {
-      window.clearTimeout(timeout);
-    };
-  }, [completion]);
 
   useEffect(() => {
     if (!canUseTimer(snapshot)) {
@@ -86,7 +76,16 @@ export default function useTimerNotifications({
         .then(async (result) => {
           publish(result.snapshot);
           if (result.notification !== null) {
-            setCompletion(result.notification);
+            add({
+              id: "timer-completion",
+              title: "Task completed",
+              description: (
+                <InternalLink href="/timer" variant="footer">
+                  {result.notification.activity} is done!
+                </InternalLink>
+              ),
+              timeout: 5000,
+            });
             playTaskSound(prepareTaskSound(), "reached");
             if (
               result.snapshot.preferences?.notificationsEnabled ??
@@ -103,7 +102,5 @@ export default function useTimerNotifications({
           claiming.current.delete(key);
         });
     }
-  }, [snapshot, publish, notificationsEnabled, autoplay]);
-
-  return { completion: completion?.activity ?? null, setCompletion };
+  }, [snapshot, publish, notificationsEnabled, autoplay, add]);
 }

@@ -131,7 +131,7 @@ export const implementationFiles = [
     "Browser-persisted Ticking preference, hydration-safe reads, and tab synchronization.",
   ],
   [
-    "app/timer/hooks/useTimerNotifications.ts",
+    "app/timer/hooks/useTimerNotifications.tsx",
     "Completion claims, browser notifications, sound, and visible feedback.",
   ],
   [

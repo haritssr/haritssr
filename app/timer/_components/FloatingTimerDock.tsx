@@ -1,6 +1,5 @@
 "use client";
 
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -17,14 +16,7 @@ import InternalLink from "@/components/InternalLink";
 
 export default function FloatingTimerDock() {
   const pathname = usePathname();
-  const {
-    snapshot,
-    clockOffset,
-    error,
-    completion,
-    dismissCompletion,
-    refresh,
-  } = useTimer();
+  const { snapshot, clockOffset, error, refresh } = useTimer();
   const showTasks = pathname !== "/timer" && canUseTimer(snapshot);
   const now = useTimerClock(snapshot, clockOffset, showTasks);
   const date = snapshot?.today ?? "";
@@ -51,7 +43,7 @@ export default function FloatingTimerDock() {
   const selected = showTasks ? tasks.at(selectedIndex) : undefined;
   const showError =
     pathname !== "/timer" && error !== null && canUseTimer(snapshot);
-  const visible = selected !== undefined || completion !== null || showError;
+  const visible = selected !== undefined || showError;
 
   if (!visible) {
     return null;
@@ -74,32 +66,6 @@ export default function FloatingTimerDock() {
 
   return (
     <FloatingDockSlot position="timer">
-      {completion === null ? null : (
-        <div className="border-border bg-background/70 shadow-foreground/15 pointer-events-auto flex w-full items-center justify-between gap-3 rounded-xl border py-2 pr-3 pl-4 shadow-lg backdrop-blur-md sm:w-fit">
-          <output>
-            <strong className="text-secondary-accent font-medium">
-              {completion}
-            </strong>{" "}
-            is done!
-          </output>
-          <div className="flex shrink-0 items-center gap-3">
-            {pathname === "/timer" ? null : (
-              <InternalLink className="text-sm" href="/timer" variant="inline">
-                Visit
-              </InternalLink>
-            )}
-            <Button
-              aria-label="Dismiss completion message"
-              onClick={dismissCompletion}
-              size="icon-circle"
-              title="Dismiss"
-              variant="outline"
-            >
-              <XMarkIcon aria-hidden="true" className="size-4 stroke-2" />
-            </Button>
-          </div>
-        </div>
-      )}
       {showError ? (
         <div
           className="border-border bg-background/70 pointer-events-auto flex w-full items-center gap-3 rounded-xl border px-3 py-2 text-sm backdrop-blur-md sm:w-md"

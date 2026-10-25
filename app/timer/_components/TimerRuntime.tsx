@@ -98,7 +98,7 @@ function useTimerState() {
     clockOffset,
     mutations.refresh
   );
-  const { completion, setCompletion } = useTimerNotifications({
+  useTimerNotifications({
     snapshot: confirmed,
     publish: mutations.receive,
     autoplay: confirmed?.preferences?.autoplay ?? false,
@@ -106,10 +106,6 @@ function useTimerState() {
   });
   return useMemo(
     () => ({
-      completion,
-      dismissCompletion: () => {
-        setCompletion(null);
-      },
       snapshot,
       pendingCount,
       drafts,
@@ -137,8 +133,6 @@ function useTimerState() {
       error: state.error ?? state.loadError,
     }),
     [
-      completion,
-      setCompletion,
       snapshot,
       pendingCount,
       drafts,

@@ -173,10 +173,12 @@ modules keep independent work separate:
   refreshes remain available in every tab.
 - [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules ticking,
   warnings, the earliest task completion, and midnight refreshes.
-- [useTimerNotifications.ts](../hooks/useTimerNotifications.ts) claims
+- [useTimerNotifications.tsx](../hooks/useTimerNotifications.tsx) claims
   completions and supplies sound, browser notifications, and visible feedback.
-  Visible completion messages dismiss automatically after five seconds; a new
-  completion restarts that timeout, and the close button dismisses them immediately.
+  Completion messages use the shared share-feedback toast: a capsule over the
+  mobile tab bar or at the desktop bottom right, with a task link to Timer and
+  a “Got it” action. They dismiss after five seconds; a new completion refreshes
+  the toast and its timeout.
 - [store.ts](../store.ts) persists daily records, and
   [timerSound.ts](../utils/timerSound.ts) generates sound.
 
