@@ -1,3 +1,11 @@
+.results > [role="option"] + [role="option"]::before {
+  position: absolute;
+  inset: -5px 0.5rem auto;
+  border-top: 1px dashed var(--color-border);
+  content: "";
+  pointer-events: none;
+}
+
 .popup {
   position: fixed;
   inset: auto 0 0;
@@ -24,7 +32,7 @@
 @media (min-width: 640px) {
   .popup {
     inset: 46% auto auto 50%;
-    width: min(36rem, calc(100vw - 3rem));
+    width: min(27rem, calc(100vw - 3rem));
     min-height: min(32rem, 80dvh);
     max-height: min(32rem, 80dvh);
     padding-bottom: 0;

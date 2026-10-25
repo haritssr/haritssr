@@ -3,8 +3,8 @@
 import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Dialog } from "@base-ui/react/dialog";
 import {
-  ArrowTopRightOnSquareIcon,
   ChevronRightIcon,
+  CodeBracketIcon,
   MagnifyingGlassIcon,
   LinkIcon,
   XMarkIcon,
@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import type { RefObject } from "react";
 import { useRef } from "react";
 
-import GitHubIcon from "@/components/GitHubIcon";
 import { useSharePageUrl } from "@/components/SharePageProvider";
 import { primaryRoutes } from "@/data/primaryRoutes";
 import type { RouteDoc } from "@/data/routes";
@@ -60,7 +59,7 @@ const SHARE_COMMAND: ShareCommand = {
 type SearchItem = SourceCodeCommand | ShareCommand | PageSearchItem;
 
 const RESULT_ITEM_CLASS_NAME =
-  "data-highlighted:bg-interface-hover data-highlighted:border-border flex cursor-pointer items-center gap-4 rounded-md border border-transparent p-2 select-none";
+  "data-highlighted:bg-foreground/5 relative flex cursor-pointer items-center gap-2.25 rounded-xl border border-transparent px-2 py-1.5 transition-colors duration-150 select-none motion-reduce:transition-none";
 
 interface SearchMatchTextProps {
   query: string;
@@ -142,7 +141,7 @@ export default function GlobalSearchDialog({
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
         <Dialog.Popup
-          className={`${styles.popup} border-middle-hover text-foreground bg-background z-90 flex flex-col overflow-hidden rounded-t-3xl border shadow-xl outline-hidden sm:rounded-xl`}
+          className={`${styles.popup} border-middle-hover text-foreground bg-background z-90 flex flex-col overflow-hidden rounded-t-3xl border shadow-xl outline-hidden sm:rounded-2xl`}
           finalFocus={() =>
             selectedItemRef.current ? false : triggerRef.current
           }
@@ -152,10 +151,6 @@ export default function GlobalSearchDialog({
             return inputRef.current;
           }}
         >
-          <div
-            aria-hidden="true"
-            className="bg-border mx-auto mt-3 h-1 w-10 shrink-0 rounded-full sm:hidden"
-          />
           <Dialog.Title className="sr-only">Search the site</Dialog.Title>
           <Dialog.Description className="sr-only">
             Search pages, type share to copy this page URL, or type GitHub or
@@ -178,7 +173,7 @@ export default function GlobalSearchDialog({
             open
             value={query}
           >
-            <Autocomplete.InputGroup className="flex shrink-0 items-center gap-3 py-2.5 pr-3 pl-4">
+            <Autocomplete.InputGroup className="flex shrink-0 items-center gap-3 py-2.5 pr-2.5 pl-4">
               <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="text-foreground size-5 shrink-0"
@@ -194,10 +189,14 @@ export default function GlobalSearchDialog({
               />
               <Dialog.Close
                 aria-label="Close search"
-                className="text-muted focus-visible:outline-action flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2"
+                className="border-foreground/10 bg-background/70 text-foreground shadow-foreground/5 hover:text-action focus-visible:outline-action hover:before:bg-foreground/8 relative isolate flex size-10.5 shrink-0 cursor-pointer items-center justify-center rounded-full border shadow-sm backdrop-blur-md transition-colors duration-150 [corner-shape:round] before:pointer-events-none before:absolute before:inset-1 before:-z-10 before:rounded-full before:transition-colors before:duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.95] motion-reduce:transition-none motion-reduce:before:transition-none"
                 type="button"
               >
-                <XMarkIcon aria-hidden="true" className="size-5" />
+                <XMarkIcon
+                  aria-hidden="true"
+                  className="size-5"
+                  strokeWidth={2.5}
+                />
               </Dialog.Close>
             </Autocomplete.InputGroup>
             <div
@@ -233,7 +232,10 @@ export default function GlobalSearchDialog({
                   name, share, or GitHub.
                 </div>
               ) : null}
-              <Autocomplete.List aria-label={listLabel} className="space-y-1">
+              <Autocomplete.List
+                aria-label={listLabel}
+                className={`${styles.results} space-y-2`}
+              >
                 <Autocomplete.Collection>
                   {(item: SearchItem) => {
                     if (item.kind === "share") {
@@ -248,9 +250,9 @@ export default function GlobalSearchDialog({
                         >
                           <LinkIcon
                             aria-hidden="true"
-                            className="text-muted size-5 shrink-0"
+                            className="text-muted bg-foreground/5 size-10 shrink-0 rounded-full p-2.5"
                           />
-                          <div className="min-w-0 flex-1 space-y-1">
+                          <div className="min-w-0 flex-1 space-y-0.5">
                             <div className="text-sm">{item.title}</div>
                             <div className="text-muted text-xs">
                               Copy the current page link to your clipboard
@@ -281,7 +283,7 @@ export default function GlobalSearchDialog({
                 </Autocomplete.Collection>
               </Autocomplete.List>
             </div>
-            <div className="border-middle-hover text-muted flex shrink-0 items-center justify-between gap-4 border-t px-5 py-3 text-xs">
+            <div className="border-middle-hover text-muted flex shrink-0 items-center justify-between gap-4 border-t px-5 py-2.5 text-xs">
               <output aria-live="polite">{resultStatus}</output>
               <span aria-hidden="true" className="hidden sm:inline">
                 ↑ ↓ navigate · ↵ select · esc close
@@ -338,15 +340,14 @@ function SourceCodeCommandItem({
       }}
       value={command}
     >
-      <GitHubIcon aria-hidden="true" className="text-muted size-5 shrink-0" />
-      <div className="min-w-0 flex-1 space-y-1">
+      <CodeBracketIcon
+        aria-hidden="true"
+        className="text-muted bg-foreground/5 size-10 shrink-0 rounded-full p-2.5"
+      />
+      <div className="min-w-0 flex-1 space-y-0.5">
         <div className="text-sm">{command.title}</div>
         <div className="text-muted text-xs">Opens in a new tab</div>
       </div>
-      <ArrowTopRightOnSquareIcon
-        aria-hidden="true"
-        className="text-muted size-5 shrink-0"
-      />
     </Autocomplete.Item>
   );
 }
@@ -371,7 +372,7 @@ function SearchResultItem({
       }}
       value={item}
     >
-      <div className="min-w-0 flex-1 space-y-1">
+      <div className="min-w-0 flex-1 space-y-0.5">
         <div className="text-foreground truncate text-sm">{entry.title}</div>
         {!isSearching || MAIN_ROUTES.has(entry.route) ? (
           <div className="text-foreground/70 truncate text-xs">

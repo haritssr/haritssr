@@ -21,6 +21,4 @@ Browser a rounded window, and User Interface slider controls. Colors remain
 `violet-500` for Mathematics, `teal-600` for Browser, `rose-500` for User Interface,
 and `green-600` for Physics.
 
-The GitHub marks in the header and contact card use the shared local
-`GitHubIcon` SVG component, based on the Simple Icons GitHub mark (CC0).
 Archived lab marks are retained only for the discontinued history cards.
