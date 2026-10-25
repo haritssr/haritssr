@@ -227,7 +227,7 @@ export function TaskDescriptionField({
   disabled: boolean;
 }) {
   const hintId = useId();
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const descriptionRef = useRef<HTMLInputElement>(null);
   const { length } = value;
   return (
     <label className="flex flex-col gap-2 text-sm">
@@ -244,9 +244,10 @@ export function TaskDescriptionField({
         </span>
       </span>
       <span className="relative block">
-        <textarea
+        <input
           aria-describedby={hintId}
-          className={`${INPUT_CLASS} scrollbar-subtle block h-10 resize-y overflow-y-auto pr-11.5`}
+          className={`${INPUT_CLASS} pr-11.5`}
+          type="text"
           value={value}
           disabled={disabled}
           maxLength={35}
@@ -256,7 +257,6 @@ export function TaskDescriptionField({
           }}
           placeholder="e.g. Review notes and practice"
           ref={descriptionRef}
-          rows={2}
         />
 
         <Button
