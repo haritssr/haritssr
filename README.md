@@ -365,7 +365,9 @@ Embedded tags use `music-metadata`,
 loaded during import, with filenames and a music icon as fallbacks. Imports run
 sequentially and commit each file atomically. Identical filename/size/modification
 time signatures are skipped. Import failures retain successful songs.
-Repeat One applies only to automatic completion.
+Repeat One applies only to automatic completion. Clicking Next at the end of the
+queue wraps to its first song even with repeat off; automatic completion still
+stops at the end. Exhausted shuffle queues also restart on manual Next.
 
 A lazy Music runtime activates on `/music` or for a remembered visible player.
 One native audio element survives client navigation; only the selected song

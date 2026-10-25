@@ -156,6 +156,8 @@ export function nextQueueKey(
   if (priority !== undefined) {
     return priority;
   }
+  const fallbackKey =
+    manual || repeat === "all" ? (queue[0]?.key ?? null) : null;
   if (shuffle) {
     let candidates = queue.filter(
       ({ key }) => key !== currentKey && !session.visited.includes(key)
@@ -166,12 +168,12 @@ export function nextQueueKey(
         return currentKey;
       }
     }
-    return candidates[Math.floor(random() * candidates.length)]?.key ?? null;
+    return (
+      candidates[Math.floor(random() * candidates.length)]?.key ?? fallbackKey
+    );
   }
   const index = queue.findIndex(({ key }) => key === currentKey);
-  return (
-    queue[index + 1]?.key ?? (repeat === "all" ? (queue[0]?.key ?? null) : null)
-  );
+  return queue[index + 1]?.key ?? fallbackKey;
 }
 
 export function musicTime(seconds: number): string {

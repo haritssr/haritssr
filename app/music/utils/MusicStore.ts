@@ -510,7 +510,7 @@ export default class MusicStore {
     if (
       session.shuffle &&
       session.visited.includes(key) &&
-      session.repeat === "all" &&
+      (manual || session.repeat === "all") &&
       key !== session.currentKey
     ) {
       this.update({ session: { ...session, visited: [] } });
