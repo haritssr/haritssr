@@ -32,7 +32,7 @@
 @media (min-width: 640px) {
   .popup {
     inset: 46% auto auto 50%;
-    width: min(27rem, calc(100vw - 3rem));
+    width: min(32.4rem, calc(100vw - 3rem));
     min-height: min(32rem, 80dvh);
     max-height: min(32rem, 80dvh);
     padding-bottom: 0;
