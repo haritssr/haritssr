@@ -41,23 +41,38 @@ function Option({
 
 export default function URLCleaner() {
   const [input, setInput] = useState("");
+  const [automatic, setAutomatic] = useState(true);
   const [removed, setRemoved] = useState<Set<number>>(new Set());
   const [removeFragment, setRemoveFragment] = useState(false);
   const [feedback, setFeedback] = useState("");
   const parsed = parseURL(input);
-  const result = cleanURL(input, removed, removeFragment);
+  const result = automatic
+    ? `${parsed?.base ?? ""}${parsed?.fragment ?? ""}`
+    : cleanURL(input, removed, removeFragment);
   const fieldClass =
-    "border-border bg-background focus-visible:outline-action block w-full min-w-0 rounded-xl border p-3 text-sm wrap-anywhere focus-visible:outline-2";
+    "form-control border-border text-foreground/90 placeholder:text-muted focus:border-foreground/80 focus:ring-foreground/20 block w-full min-w-0 appearance-none rounded-lg border bg-white px-3 py-2 text-sm outline-hidden focus:ring-2";
   return (
     <div className="space-y-12">
       <div className="space-y-3">
+        <Option
+          checked={automatic}
+          onChange={(checked) => {
+            setAutomatic(checked);
+            setFeedback("");
+          }}
+        >
+          Automatically remove all query parameters
+          <span className="text-muted block text-sm">
+            Turn off to choose which parameters to remove manually.
+          </span>
+        </Option>
         <label htmlFor="source-url" className="block font-medium">
           Original URL
         </label>
-        <textarea
+        <input
           id="source-url"
           className={fieldClass}
-          rows={3}
+          type="text"
           spellCheck={false}
           autoCapitalize="none"
           placeholder="https://example.com/page?utm_source=newsletter&category=books#reviews"
@@ -86,92 +101,100 @@ export default function URLCleaner() {
       </div>
       {parsed ? (
         <>
-          <Section
-            title="Query parameters"
-            description="Select the parameters you want to remove. Repeated parameters can be selected individually."
-          >
-            {parsed.parameters.length ? (
-              <>
-                <div className="flex flex-wrap gap-3">
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setRemoved(
-                        new Set(parsed.parameters.map((_, index) => index))
-                      );
-                      setFeedback("");
-                    }}
-                  >
-                    Remove all parameters
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setRemoved(new Set());
-                      setFeedback("");
-                    }}
-                  >
-                    Keep all parameters
-                  </Button>
-                </div>
-                <ul className="border-border divide-border divide-y rounded-xl border">
-                  {parsed.parameters.map((raw, index) => {
-                    const parameter = parameterLabel(raw);
-                    return (
-                      <li key={`${index}:${raw}`} className="p-4">
-                        <Option
-                          checked={removed.has(index)}
-                          onChange={(checked) => {
-                            setRemoved((previous) => {
-                              const next = new Set(previous);
-                              if (checked) {
-                                next.add(index);
-                              } else {
-                                next.delete(index);
-                              }
-                              return next;
-                            });
-                            setFeedback("");
-                          }}
-                        >
-                          <span className="font-medium">{parameter.name}</span>
-                          <span className="text-muted block text-sm">
-                            {parameter.value || "(empty value)"}
-                          </span>
-                        </Option>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </>
-            ) : (
-              <p className="text-muted">This URL has no query parameters.</p>
-            )}
-          </Section>
-          <Section title="Fragment">
-            {parsed.fragment ? (
-              <Option
-                checked={removeFragment}
-                onChange={(checked) => {
-                  setRemoveFragment(checked);
-                  setFeedback("");
-                }}
+          {automatic ? null : (
+            <>
+              <Section
+                title="Query parameters"
+                description="Select the parameters you want to remove. Repeated parameters can be selected individually."
               >
-                Remove fragment{" "}
-                <span className="text-muted block text-sm">
-                  {parsed.fragment}
-                </span>
-              </Option>
-            ) : (
-              <p className="text-muted">This URL has no fragment.</p>
-            )}
-          </Section>
+                {parsed.parameters.length ? (
+                  <>
+                    <div className="flex flex-wrap gap-3">
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setRemoved(
+                            new Set(parsed.parameters.map((_, index) => index))
+                          );
+                          setFeedback("");
+                        }}
+                      >
+                        Remove all parameters
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setRemoved(new Set());
+                          setFeedback("");
+                        }}
+                      >
+                        Keep all parameters
+                      </Button>
+                    </div>
+                    <ul className="border-border divide-border divide-y rounded-xl border">
+                      {parsed.parameters.map((raw, index) => {
+                        const parameter = parameterLabel(raw);
+                        return (
+                          <li key={`${index}:${raw}`} className="p-4">
+                            <Option
+                              checked={removed.has(index)}
+                              onChange={(checked) => {
+                                setRemoved((previous) => {
+                                  const next = new Set(previous);
+                                  if (checked) {
+                                    next.add(index);
+                                  } else {
+                                    next.delete(index);
+                                  }
+                                  return next;
+                                });
+                                setFeedback("");
+                              }}
+                            >
+                              <span className="font-medium">
+                                {parameter.name}
+                              </span>
+                              <span className="text-muted block text-sm">
+                                {parameter.value || "(empty value)"}
+                              </span>
+                            </Option>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                ) : (
+                  <p className="text-muted">
+                    This URL has no query parameters.
+                  </p>
+                )}
+              </Section>
+              <Section title="Fragment">
+                {parsed.fragment ? (
+                  <Option
+                    checked={removeFragment}
+                    onChange={(checked) => {
+                      setRemoveFragment(checked);
+                      setFeedback("");
+                    }}
+                  >
+                    Remove fragment{" "}
+                    <span className="text-muted block text-sm">
+                      {parsed.fragment}
+                    </span>
+                  </Option>
+                ) : (
+                  <p className="text-muted">This URL has no fragment.</p>
+                )}
+              </Section>
+            </>
+          )}
           <Section title="Cleaned URL">
-            <textarea
+            <input
               aria-label="Cleaned URL"
               className={fieldClass}
               readOnly
-              rows={3}
+              type="text"
               value={result}
               spellCheck={false}
             />
@@ -198,6 +221,7 @@ export default function URLCleaner() {
                 variant="outline"
                 onClick={() => {
                   setRemoved(new Set());
+                  setAutomatic(false);
                   setRemoveFragment(false);
                   setFeedback("");
                 }}

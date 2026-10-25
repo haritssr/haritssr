@@ -1,4 +1,4 @@
-- [URL](https://haritssr.com/url): Remove selected query parameters and fragments locally, preserving retained URL encoding and parameter order.
+- [URL](https://haritssr.com/url): Available in the homepage Tools section. Paste a URL to automatically remove all query parameters and copy the result. Turn automatic mode off to select individual parameters or fragments manually. Processing stays local and preserves retained URL encoding and parameter order.
 - [Projects](https://haritssr.com/projects): Portfolio and project details.
 - [Labs](https://haritssr.com/labs): Frontend, browser APIs, mathematics, and physics.
 - [Writing](https://haritssr.com/writing): Posts and notes.
@@ -205,7 +205,7 @@ Long titles truncate within that space.
 The desktop navigation pill is also visible on Home and lists Home, Projects,
 Labs, Writing, and Design in that order. It appears from 1024px so all
 five links fit between the side controls. Home's responsive card grid links
-to Timer, Commits, Tree, and Music under Tools, with the commit count from a separate Turso count query cached for 24 hours.
+to Timer, Commits, Tree, Music, and URL under Tools, with the commit count from a separate Turso count query cached for 24 hours.
 
 Shared helpers in `utils/` are grouped by responsibility: `commits/` handles
 commit records and Turso reads; `content/` handles posts and article outlines;
