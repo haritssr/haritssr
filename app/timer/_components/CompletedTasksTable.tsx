@@ -93,7 +93,7 @@ export default function CompletedTasksTable({
         <SectionHeading as="h3" variant="toolbar">
           History
         </SectionHeading>
-        <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-sm underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
+        <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-base underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
           {open ? "Hide" : "View"}
         </Collapsible.Trigger>
         <div className="ml-auto flex flex-wrap items-center gap-4">
