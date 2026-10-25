@@ -5,34 +5,34 @@ import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 export default function Tabs() {
   return (
     <BaseTabs.Root
-      className="flex w-full max-w-full flex-col"
+      className="border-border flex w-full max-w-full flex-col overflow-hidden rounded-lg border bg-white"
       defaultValue="tab1"
     >
       <BaseTabs.List
         aria-label="Account settings"
-        className="bg-foreground/10 flex shrink-0 gap-1 rounded-lg p-1"
+        className="border-border flex w-full shrink-0 gap-1 border-b p-1"
       >
         <BaseTabs.Tab
-          className="focus-visible:outline-action text-muted data-active:border-border data-active:text-foreground flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 text-sm font-medium outline-hidden select-none hover:bg-white/70 focus-visible:outline-2 data-active:bg-white data-active:shadow"
+          className="focus-visible:outline-action text-foreground data-active:bg-foreground/8 data-active:text-action hover:bg-foreground/5 flex cursor-pointer items-center justify-center rounded-lg px-3 py-1 font-normal whitespace-nowrap outline-hidden transition-colors duration-150 select-none [corner-shape:round] focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none"
           value="tab1"
         >
           Account
         </BaseTabs.Tab>
         <BaseTabs.Tab
-          className="focus-visible:outline-action text-muted data-active:border-border data-active:text-foreground flex flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent px-3 py-1.5 text-sm font-medium outline-hidden select-none hover:bg-white/70 focus-visible:outline-2 data-active:bg-white data-active:shadow"
+          className="focus-visible:outline-action text-foreground data-active:bg-foreground/8 data-active:text-action hover:bg-foreground/5 flex cursor-pointer items-center justify-center rounded-lg px-3 py-1 font-normal whitespace-nowrap outline-hidden transition-colors duration-150 select-none [corner-shape:round] focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none"
           value="tab2"
         >
           Password
         </BaseTabs.Tab>
       </BaseTabs.List>
       <BaseTabs.Panel
-        className="focus-visible:outline-action border-border text-foreground/80 mt-2 grow rounded-lg border bg-white p-4 text-sm outline-hidden focus-visible:outline-2"
+        className="focus-visible:outline-action text-foreground/80 grow p-4 text-sm outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2"
         value="tab1"
       >
         Update your profile details and account preferences.
       </BaseTabs.Panel>
       <BaseTabs.Panel
-        className="focus-visible:outline-action border-border text-foreground/80 mt-2 grow rounded-lg border bg-white p-4 text-sm outline-hidden focus-visible:outline-2"
+        className="focus-visible:outline-action text-foreground/80 grow p-4 text-sm outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2"
         value="tab2"
       >
         Change your password and keep your account secure.

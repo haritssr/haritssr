@@ -1,68 +1,5 @@
 import type { CSSProperties } from "react";
 
-const MAIN_COLORS = [
-  { name: "Success", token: "success", definition: "green-500 / green-600" },
-  { name: "Attention", token: "attention", definition: "amber-500" },
-  { name: "Danger", token: "danger", definition: "red-500" },
-  { name: "Action", token: "action", definition: "blue-600 / blue-500" },
-  { name: "Foreground", token: "foreground", definition: "zinc-800" },
-  { name: "Background", token: "background", definition: "#fcfcfc" },
-].map(({ name, token, definition }) => ({ name, token, definition }));
-
-const ZINC_COLORS = [
-  { name: "white", value: "#fafafa" },
-  { name: "zinc-50", value: "#fafafa" },
-  { name: "zinc-100", value: "#f4f4f5" },
-  { name: "zinc-200", value: "#e4e4e7" },
-  { name: "zinc-300", value: "#d4d4d8" },
-  { name: "zinc-400", value: "#a1a1aa" },
-  { name: "zinc-500", value: "#71717a" },
-  { name: "zinc-600", value: "#52525b" },
-  { name: "zinc-700", value: "#3f3f46" },
-  { name: "zinc-800", value: "#27272a" },
-  { name: "zinc-900", value: "#18181b" },
-  { name: "black", value: "#18181b" },
-].map(({ name, value }) => ({ name, token: name, definition: value }));
-
-export function MainColors() {
-  return <ColorTokenList colors={MAIN_COLORS} />;
-}
-
-export function HierarchicalColors() {
-  return <ColorTokenList colors={ZINC_COLORS} />;
-}
-
-function ColorTokenList({
-  colors,
-}: {
-  colors: readonly { definition: string; name: string; token: string }[];
-}) {
-  return (
-    <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
-      {colors.map(({ definition, name, token }) => {
-        const style: CSSProperties & { "--swatch-color": string } = {
-          "--swatch-color": `var(--color-${token})`,
-        };
-        return (
-          <li className="flex items-start gap-4" key={name}>
-            <div
-              aria-hidden="true"
-              className="corner-squircle border-foreground/10 size-10 shrink-0 rounded-lg border bg-(--swatch-color)"
-              style={style}
-            />
-            <div className="min-w-0">
-              <div className="text-foreground font-medium">{name}</div>
-              <code className="text-muted block text-sm wrap-break-word">
-                {definition}
-              </code>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
 const DESIGN_TOKENS = [
   {
     name: "white",
@@ -74,7 +11,7 @@ const DESIGN_TOKENS = [
   },
   {
     name: "action",
-    definition: "color-mix( in oklab, blue-600 60%, blue-500 40% )",
+    definition: "blue-600/60 + blue-500/40",
   },
   {
     name: "action-hover",
@@ -82,23 +19,25 @@ const DESIGN_TOKENS = [
   },
   {
     name: "secondary-accent",
+    label: "accent",
     definition: "purple-500",
   },
   {
     name: "contact-accent",
-    definition: "color-mix( in oklab, emerald-600 80%, emerald-500 20% )",
+    label: "contact",
+    definition: "emerald-600/80 + emerald-500/20",
   },
   {
     name: "muted",
-    definition: "color-mix( in srgb, foreground 70%, background )",
+    definition: "foreground/70 + background/30",
   },
   {
     name: "success",
-    definition: "color-mix( in oklab, green-500 60%, green-600 )",
+    definition: "green-500/60 + green-600/40",
   },
   {
     name: "success-hover",
-    definition: "color-mix( in oklab, success 60%, green-600 )",
+    definition: "success/60 + green-600/40",
   },
   {
     name: "attention",
@@ -146,10 +85,12 @@ const DESIGN_TOKENS = [
   },
   {
     name: "secondary-foreground",
+    label: "secondary",
     definition: "zinc-600",
   },
   {
     name: "secondary-hover-foreground",
+    label: "secondary-hover",
     definition: "zinc-700",
   },
   {
@@ -162,14 +103,15 @@ const DESIGN_TOKENS = [
   },
   {
     name: "searchicon-hover",
+    label: "search-hover",
     definition: "zinc-500",
   },
 ];
 
 export function DesignTokens() {
   return (
-    <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
-      {DESIGN_TOKENS.map(({ name, definition }) => {
+    <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {DESIGN_TOKENS.map(({ name, definition, label }) => {
         const style: CSSProperties & { "--swatch-color": string } = {
           "--swatch-color": `var(--color-${name})`,
         };
@@ -181,7 +123,7 @@ export function DesignTokens() {
               style={style}
             />
             <div className="min-w-0">
-              <div className="text-foreground font-medium">{name}</div>
+              <div className="text-foreground font-medium">{label ?? name}</div>
               <code className="text-muted block text-sm wrap-break-word">
                 {definition}
               </code>

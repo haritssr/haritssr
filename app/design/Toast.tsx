@@ -1,58 +1,27 @@
 "use client";
 
 import { Toast as BaseToast } from "@base-ui/react/toast";
-import { useCallback } from "react";
 
 import Box from "@/components/Box";
 import Button from "@/components/Button";
 
 export default function Toast() {
+  const { add } = BaseToast.useToastManager();
+
   return (
-    <BaseToast.Provider>
-      <Box name="Toast" title="Toast">
-        <ToastButton />
-      </Box>
-      <BaseToast.Portal>
-        <BaseToast.Viewport className="pointer-events-none fixed right-0 bottom-0 z-50 m-0 flex w-97.5 max-w-[100vw] list-none flex-col gap-2 p-3 outline-hidden sm:p-6">
-          <ToastList />
-        </BaseToast.Viewport>
-      </BaseToast.Portal>
-    </BaseToast.Provider>
+    <Box name="Toast" title="Toast">
+      <Button
+        onClick={() => {
+          add({
+            id: "design-toast",
+            description: "Your action was completed.",
+            title: "Toast notification",
+            timeout: 5000,
+          });
+        }}
+      >
+        Show
+      </Button>
+    </Box>
   );
-}
-
-function ToastButton() {
-  const toastManager = BaseToast.useToastManager();
-
-  const handleShowToast = useCallback(() => {
-    toastManager.add({
-      description: "Your action was completed.",
-      title: "Toast notification",
-    });
-  }, [toastManager]);
-
-  return <Button onClick={handleShowToast}>Show Toast</Button>;
-}
-
-function ToastList() {
-  const { toasts } = BaseToast.useToastManager();
-
-  return toasts.map((toast) => (
-    <BaseToast.Root
-      className="border-border pointer-events-auto rounded-lg border bg-white shadow-xl transition duration-200 ease-out data-ending-style:translate-x-full data-ending-style:opacity-0 data-starting-style:translate-x-full data-starting-style:opacity-0"
-      key={toast.id}
-      swipeDirection="right"
-      toast={toast}
-    >
-      <BaseToast.Content className="grid grid-cols-[auto_max-content] items-center gap-x-4 py-3 pr-4 pl-4 [grid-template-areas:'title_action'_'description_action']">
-        <div>
-          <BaseToast.Title className="text-foreground text-sm font-medium [grid-area:title]" />
-          <BaseToast.Description className="text-muted m-0 text-xs leading-tight [grid-area:description]" />
-        </div>
-        <BaseToast.Close className="text-action hover:text-action-hover focus-visible:outline-action hover:bg-border rounded px-2 py-1 text-sm focus-visible:outline-2">
-          OK
-        </BaseToast.Close>
-      </BaseToast.Content>
-    </BaseToast.Root>
-  ));
 }

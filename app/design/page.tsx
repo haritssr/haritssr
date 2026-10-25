@@ -1,4 +1,7 @@
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import {
+  DocumentTextIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 
 import BackButton from "@/components/BackButton";
 import Box from "@/components/Box";
@@ -19,21 +22,19 @@ import Breadcrumbs from "./Breadcrumbs";
 import ButtonIconOnly from "./ButtonIconOnly";
 import ButtonWithIcon from "./ButtonWithIcon";
 import Checkbox from "./Checkbox";
-import { DesignTokens, HierarchicalColors, MainColors } from "./Colors";
+import { DesignTokens } from "./Colors";
 import ContextMenu from "./ContextMenu";
 import InterfacePrinciples from "./InterfacePrinciples";
 import LoadingButton from "./LoadingButton";
 import Logo from "./Logo";
 import Modal from "./Modal";
 import NumberInput from "./NumberInput";
-import Popover from "./Popover";
 import Select from "./Select";
 import Slider from "./Slider";
 import Switch from "./Switch";
 import Table from "./Table";
 import Tabs from "./Tabs";
 import Toast from "./Toast";
-import Toggle from "./Toggle";
 import Tooltip from "./Tooltip";
 
 export const metadata = createPageMetadata({
@@ -44,7 +45,7 @@ export const metadata = createPageMetadata({
 });
 
 const FORM_CONTROL_CLASS_NAME =
-  "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground/90 outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
+  "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm leading-5 font-normal text-foreground/90 outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
 
 export default function DesignSystem() {
   return (
@@ -59,7 +60,7 @@ export default function DesignSystem() {
       </PageHeader>
       <div className="space-y-16">
         <Section title="Principles">
-          <ol className="text-foreground [&>li::marker]:text-muted [&>li]:border-border list-outside list-decimal gap-16 space-y-4 leading-relaxed sm:columns-2 sm:[column-rule:1px_dashed_var(--color-border)] [&>li]:ml-7 [&>li]:break-inside-avoid [&>li]:border-b [&>li]:border-dashed [&>li]:pb-4 [&>li]:pl-1">
+          <ol className="text-foreground [&>li::marker]:text-muted [&>li::after]:border-border list-outside list-decimal gap-16 space-y-2 leading-relaxed sm:columns-2 sm:[column-rule:1px_dashed_var(--color-border)] [&>li]:relative [&>li]:ml-7 [&>li]:break-inside-avoid [&>li]:pb-2 [&>li]:pl-1 [&>li::after]:absolute [&>li::after]:right-0 [&>li::after]:bottom-0 [&>li::after]:-left-7 [&>li::after]:border-b [&>li::after]:border-dashed [&>li::after]:content-['']">
             <li>
               A design system is a set of rules and opinions that shape the user
               interface and the experience as a whole.
@@ -73,7 +74,7 @@ export default function DesignSystem() {
             <li>Pattern can only appear on data, not datum.</li>
             <InterfacePrinciples>
               <div className="pl-3">
-                <ol className="mt-1 list-outside list-decimal space-y-1 pl-4">
+                <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
                   <li>
                     <ExternalLink
                       href="https://lawsofux.com/law-of-proximity/"
@@ -240,16 +241,16 @@ export default function DesignSystem() {
                     : Unfinished or interrupted tasks tend to stay in memory
                     longer.
                   </li>
-                </ol>
+                </ul>
               </div>
             </InterfacePrinciples>
             <li>
-              UX considerations:{" "}
+              Consider UX through the{" "}
               <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />{" "}
               and{" "}
               <ExternalLink
                 href="https://developer.apple.com/design/human-interface-guidelines/design-principles"
-                name="Principles of Great Design"
+                name="Apple’s Principles of Great Design"
               />
               .
             </li>
@@ -280,7 +281,7 @@ export default function DesignSystem() {
             </li>
             <li>
               Why is it called &quot;Components&quot;?
-              <ul className="mt-1 list-outside list-disc space-y-1 pl-4">
+              <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
                 <li>
                   The name makes the purpose of this page clear in navigation.
                 </li>
@@ -293,7 +294,7 @@ export default function DesignSystem() {
             <li>
               Distinguish between link and button, link to navigate, button for
               action.
-              <ul className="mt-1 list-outside list-disc space-y-1 pl-4">
+              <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
                 <li>
                   Both need clear hover, active, and focus-visible states when
                   those states are relevant.
@@ -310,10 +311,23 @@ export default function DesignSystem() {
             </li>
             <li>
               Colors communicate purpose:
-              <ul className="mt-1 list-outside list-disc space-y-1 pl-4">
-                <li>Blue (action) marks available actions.</li>
-                <li>Red (danger) marks dangerous or destructive actions.</li>
-                <li>Green (success) marks done or finished states.</li>
+              <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
+                <li>
+                  <span className="text-action">Blue</span> (action) marks
+                  available actions.
+                </li>
+                <li>
+                  <span className="text-danger">Red</span> (danger) marks
+                  destructive actions and errors.
+                </li>
+                <li>
+                  <span className="text-success">Green</span> (success) marks
+                  completed tasks and successful outcomes.
+                </li>
+                <li>
+                  <span className="text-attention">Amber</span> (attention)
+                  highlights warnings and items that need attention.
+                </li>
               </ul>
             </li>
             <li>
@@ -351,20 +365,7 @@ export default function DesignSystem() {
             </li>
             <li>
               The mobile tab bar should appear on every Harimaki page except
-              Materi.
-            </li>
-            <li>
-              View the component code{" "}
-              <ExternalLink
-                href="https://github.com/haritssr/haritssr/tree/main/components"
-                name="here"
-              />
-            </li>
-            <li>
-              Browse the{" "}
-              <InternalLink href="/labs" variant="inline">
-                lab collection and discontinued history
-              </InternalLink>
+              Materi pages under the Belajar route.
             </li>
           </ol>
         </Section>
@@ -410,13 +411,9 @@ export default function DesignSystem() {
 
         <Section
           title="UI Components"
-          contentClassName={
-            // This demonstrates grid spacing on Section's body wrapper.
-            // oxlint-disable-next-line shadcn/no-restyle -- The demo exercises the contentClassName API.
-            "grid grid-cols-1 md:grid-cols-2 md:[&>div:last-child:nth-child(odd)]:col-span-2 [&>div]:border-border [&>div]:border-b [&>div]:border-dashed [&>div]:last:border-b-0 md:[&>div:nth-child(odd):not(:last-child)]:border-r"
-          }
+          contentClassName="grid grid-cols-1 md:grid-cols-2"
         >
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="IndexCard" title="Index Card">
               <div className="grid gap-3.5 sm:grid-cols-2">
                 <IndexCard
@@ -452,96 +449,85 @@ export default function DesignSystem() {
               </div>
             </Box>
           </div>
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Switch" title="Switch">
-              <Switch />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Accordion" title="Accordion">
-              <Accordion />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Checkbox" title="Checkbox">
-              <Checkbox />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Popover" title="Popover">
-              <Popover />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="NumberInput" title="Number Input">
-              <NumberInput />
-            </Box>
-          </div>
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="Table" title="Table">
               <Table />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <Box name="Switch" title="Switch">
+              <Switch />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <Box name="Accordion" title="Accordion">
+              <Accordion />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <Box name="Checkbox" title="Checkbox">
+              <Checkbox />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <Box name="Tooltip" title="Tooltip">
+              <Tooltip />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <Box name="NumberInput" title="Input: Number">
+              <NumberInput />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="Tabs" title="Tabs">
               <Tabs />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Toast />
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Button" title="Button: Primary">
-              <Button variant="primary">Button</Button>
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <Box name="Modal" title="Modal">
+              <Modal />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Button" title="Button: Loading">
-              <LoadingButton />
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <Box name="Button" title="Buttons">
+              <div className="flex flex-wrap items-center gap-3">
+                <Button variant="primary">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <LoadingButton />
+                <Button variant="danger">Danger</Button>
+                <Button disabled variant="secondary">
+                  Disabled
+                </Button>
+              </div>
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Button" title="Button: Secondary">
-              <Button variant="secondary">Button</Button>
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="Button" title="Button: With Icon">
               <ButtonWithIcon />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="Button" title="Button: Only Icon">
               <ButtonIconOnly />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Button" title="Button: Danger">
-              <Button variant="danger">Delete</Button>
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Button" title="Button: Disabled">
-              <Button disabled variant="secondary">
-                Button
-              </Button>
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="InternalLink" title="Internal Link">
               <div className="space-y-2">
                 <div>
@@ -549,7 +535,7 @@ export default function DesignSystem() {
                 </div>
                 <div>
                   <InternalLink href="/" variant="inline">
-                    Inline Link
+                    Internal Link Without Arrow
                   </InternalLink>
                 </div>
                 <div className="text-sm">
@@ -561,16 +547,23 @@ export default function DesignSystem() {
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="ExternalLink" title="External Link">
-              <ExternalLink
-                href="https://www.harislab.com"
-                name="External Link"
-              />
+              <div className="flex flex-col items-start gap-2">
+                <ExternalLink
+                  href="https://www.harislab.com"
+                  name="External Link"
+                />
+                <ExternalLink
+                  href="https://www.harislab.com"
+                  name="External Link Without Arrow"
+                  showArrow={false}
+                />
+              </div>
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box title="Input: Text">
               <label className="block w-full sm:max-w-xs">
                 <span className="sr-only">Text input</span>
@@ -583,12 +576,17 @@ export default function DesignSystem() {
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box title="Input: Search">
-              <label className="block w-full sm:max-w-xs">
+              <label className="relative block w-full sm:max-w-xs">
                 <span className="sr-only">Search input</span>
+                <MagnifyingGlassIcon
+                  aria-hidden="true"
+                  className="text-muted pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+                  strokeWidth={1.5}
+                />
                 <input
-                  className={FORM_CONTROL_CLASS_NAME}
+                  className={`${FORM_CONTROL_CLASS_NAME} pl-9`}
                   placeholder="Search"
                   type="search"
                 />
@@ -596,7 +594,7 @@ export default function DesignSystem() {
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="Box" title="Box">
               <ul className="grid gap-5 sm:grid-cols-2">
                 <Box as="li" headingAs="h3" name="Box" title="Exercise title">
@@ -609,7 +607,7 @@ export default function DesignSystem() {
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box title="Text Area">
               <textarea
                 aria-label="Text area example"
@@ -620,74 +618,56 @@ export default function DesignSystem() {
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Toggle" title="Toggle">
-              <Toggle />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="Breadcrumbs" title="Breadcrumbs">
               <Breadcrumbs />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="Badges" title="Badges">
               <Badges />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="BackButton" title="Back Button">
               <BackButton href="/labs" name="Labs" />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Tooltip" title="Tooltip">
-              <Tooltip />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="Logo" title="Logo">
               <Logo />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Modal" title="Modal">
-              <Modal />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="SelectField" title="Select">
               <Select />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="TabBarButtom" title="Bottom Navigation Capsule">
               <TabBarButtom preview />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="Slider" title="Slider">
               <Slider />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="ContextMenu" title="Context Menus">
               <ContextMenu />
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box title="Date Picker">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <Box title="Input: Date">
               <label className="block w-full sm:max-w-xs">
                 <span className="text-foreground/80 mb-1 block text-sm font-medium">
                   Choose a date
@@ -697,16 +677,9 @@ export default function DesignSystem() {
             </Box>
           </div>
 
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-b-0 border-dashed py-5 md:col-span-2 [&>div]:flex-1">
             <Box name="Colors" title="Design Tokens">
               <DesignTokens />
-            </Box>
-          </div>
-
-          <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="Colors" title="Main Colors">
-              <MainColors />
-              <HierarchicalColors />
             </Box>
           </div>
         </Section>

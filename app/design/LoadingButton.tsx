@@ -27,7 +27,7 @@ export default function LoadingButton() {
         }, 800);
       }}
     >
-      Button
+      Loading
     </Button>
   );
 }

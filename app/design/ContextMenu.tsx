@@ -4,7 +4,7 @@ import { ContextMenu as BaseContextMenu } from "@base-ui/react/context-menu";
 import { useState } from "react";
 
 export default function ContextMenu() {
-  const [action, setAction] = useState("Right-click the panel");
+  const [action, setAction] = useState("");
 
   return (
     <div className="space-y-2">
@@ -35,7 +35,7 @@ export default function ContextMenu() {
           </BaseContextMenu.Positioner>
         </BaseContextMenu.Portal>
       </BaseContextMenu.Root>
-      <p className="text-muted text-xs">{action}</p>
+      {action ? <p className="text-muted text-xs">{action}</p> : null}
     </div>
   );
 }

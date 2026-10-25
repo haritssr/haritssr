@@ -10,11 +10,13 @@ const options = [
 export default function Select() {
   const [value, setValue] = useState("design");
   return (
-    <SelectField
-      label="Choose a discipline"
-      options={options}
-      value={value}
-      onValueChange={setValue}
-    />
+    <div className="[&>div>label]:sr-only">
+      <SelectField
+        label="Choose a discipline"
+        options={options}
+        value={value}
+        onValueChange={setValue}
+      />
+    </div>
   );
 }

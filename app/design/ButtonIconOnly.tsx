@@ -4,11 +4,11 @@ import Button from "@/components/Button";
 
 export default function ButtonIconOnly() {
   return (
-    <div className="flex items-center gap-3">
-      <Button aria-label="Bookmark" iconOnly variant="secondary">
+    <div className="flex items-center gap-2">
+      <Button aria-label="Bookmark" size="icon-circle" variant="outline">
         <svg
           aria-hidden="true"
-          className="text-foreground h-5 w-4"
+          className="size-5"
           fill="none"
           stroke="currentColor"
           strokeWidth={2}
@@ -24,12 +24,11 @@ export default function ButtonIconOnly() {
       </Button>
       <Button
         aria-label="Done"
-        iconOnly
         size="icon-circle"
         title="Done"
-        variant="secondary-strong"
+        variant="outline"
       >
-        <CheckIcon aria-hidden="true" className="size-5 sm:size-4" />
+        <CheckIcon aria-hidden="true" className="size-5" strokeWidth={2.5} />
       </Button>
     </div>
   );
