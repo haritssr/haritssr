@@ -69,7 +69,7 @@ export default function Home() {
         description={homeDescription}
         path="/"
       />
-      <div className="space-y-16">
+      <div className="space-y-16 pt-2">
         <PersonalDetails />
         <Section title="Tools">
           <Suspense fallback={<Tools />}>
@@ -180,7 +180,7 @@ function PersonalDetails() {
       <div className="flex items-center gap-4">
         <Image
           alt={profileName}
-          className="size-16 shrink-0 rounded-full sm:size-14"
+          className="size-[3lh] shrink-0 rounded-full sm:size-[2lh]"
           height={100}
           loading="eager"
           src="/images/blur.jpg"
