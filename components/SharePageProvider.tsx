@@ -55,7 +55,7 @@ function ShareToastList() {
       swipeDirection="right"
       toast={toast}
     >
-      <Toast.Content className="flex min-h-11.75 items-center gap-2 pl-4">
+      <Toast.Content className="flex min-h-11.75 items-center gap-2 pl-5.5">
         <div className="min-w-0 flex-1">
           <Toast.Title className="text-foreground text-sm leading-5 font-medium" />
           <Toast.Description className="text-muted m-0 truncate text-xs leading-4" />

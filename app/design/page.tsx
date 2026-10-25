@@ -73,7 +73,7 @@ export default function DesignSystem() {
             </li>
             <li>Pattern can only appear on data, not datum.</li>
             <InterfacePrinciples>
-              <div className="pl-3">
+              <div>
                 <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
                   <li>
                     <ExternalLink
@@ -449,6 +449,7 @@ export default function DesignSystem() {
               </div>
             </Box>
           </div>
+
           <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="Table" title="Table">
               <Table />
@@ -486,16 +487,10 @@ export default function DesignSystem() {
           </div>
 
           <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Tabs" title="Tabs">
-              <Tabs />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Toast />
           </div>
 
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
             <Box name="Modal" title="Modal">
               <Modal />
             </Box>
@@ -667,6 +662,12 @@ export default function DesignSystem() {
           </div>
 
           <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <Box name="Tabs" title="Tabs">
+              <Tabs />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box title="Input: Date">
               <label className="block w-full sm:max-w-xs">
                 <span className="text-foreground/80 mb-1 block text-sm font-medium">

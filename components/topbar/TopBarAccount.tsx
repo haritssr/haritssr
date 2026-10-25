@@ -22,17 +22,17 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
       // oxlint-disable-next-line nextjs/no-img-element
       <img
         alt=""
-        className="size-5 shrink-0 rounded-full object-cover"
-        height={20}
+        className="size-6 shrink-0 rounded-full object-cover"
+        height={24}
         onError={() => {
           setFailedPicture(account.picture);
         }}
         referrerPolicy="no-referrer"
         src={account.picture}
-        width={20}
+        width={24}
       />
     ) : (
-      <UserCircleIcon aria-hidden="true" className="size-5 shrink-0" />
+      <UserCircleIcon aria-hidden="true" className="size-6 shrink-0" />
     );
 
   if (!account) {

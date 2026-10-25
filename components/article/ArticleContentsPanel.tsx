@@ -69,7 +69,7 @@ function ContentsList({
 
   return (
     <List
-      className={`marker:text-foreground/70 space-y-3 pl-8 text-base [&_li]:space-y-3 ${depth === 0 ? "list-decimal" : "list-disc"}`}
+      className={`marker:text-foreground/70 space-y-3 text-base [&_li]:space-y-3 ${depth === 0 ? "list-decimal pl-8" : "list-disc pl-5"}`}
     >
       {entries.map((entry) => (
         <li key={entry.id}>
@@ -159,7 +159,7 @@ export default function ArticleContentsPanel({
       </div>
       <nav
         aria-label="Table of contents"
-        className={`min-h-0 overflow-x-hidden overflow-y-auto overscroll-contain px-2 py-3 sm:px-3 ${desktop ? "" : `scrollbar-subtle ${styles.mobileScroll}`}`}
+        className={`scrollbar-subtle min-h-0 overflow-x-hidden overflow-y-auto overscroll-contain px-2 py-3 sm:px-3 ${desktop ? "" : styles.mobileScroll}`}
       >
         <ContentsList
           activeId={activeId}
