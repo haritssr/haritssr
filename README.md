@@ -307,7 +307,9 @@ Contents highlighting, and anchor scroll padding use that measurement.
 `HeaderActions` coordinates page actions, Contents, and Search handoffs;
 `TopBarContents` renders only its outline control and panel. Shared action styling
 lives in `TopBarAction`, and one root `SharePageProvider` supplies copy feedback
-for buttons, keyboard shortcuts, and Search.
+for buttons, keyboard shortcuts, and Search. Copy feedback uses a capsule matching
+the bottom navigation's width, height, and safe-area spacing below `lg`; on desktop
+it appears at the bottom right. Long URLs truncate within the capsule.
 
 
 Global search uses Ctrl/Cmd+K, preserving the browser Print shortcut. Top and

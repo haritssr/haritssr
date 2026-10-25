@@ -15,7 +15,7 @@ export default function SharePageProvider({
     <Toast.Provider>
       {children}
       <Toast.Portal>
-        <Toast.Viewport className="pointer-events-none fixed right-0 bottom-0 z-2147483647 m-0 flex w-97.5 max-w-[100vw] list-none flex-col gap-2.5 p-3 outline-hidden sm:p-6">
+        <Toast.Viewport className="pointer-events-none fixed right-0 bottom-0 left-0 z-2147483647 m-0 flex list-none flex-col items-center gap-2 p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] outline-hidden lg:left-auto lg:w-97.5 lg:max-w-[100vw] lg:p-6">
           <ShareToastList />
         </Toast.Viewport>
       </Toast.Portal>
@@ -50,18 +50,18 @@ function ShareToastList() {
 
   return toasts.map((toast) => (
     <Toast.Root
-      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-border pointer-events-auto rounded-lg border bg-white/70 shadow-xl saturate-150 backdrop-blur-md transition-[transform,opacity] duration-200 ease-out"
+      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-foreground/10 bg-background/70 shadow-foreground/5 pointer-events-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md transition-[transform,opacity] duration-200 ease-out [corner-shape:round] sm:max-w-[22.4rem]"
       key={toast.id}
       swipeDirection="right"
       toast={toast}
     >
-      <Toast.Content className="flex items-center gap-3 py-2 pr-4 pl-4">
+      <Toast.Content className="flex min-h-11.75 items-center gap-2 pl-4">
         <div className="min-w-0 flex-1">
-          <Toast.Title className="text-foreground mb-1.25 text-[15px] font-medium wrap-anywhere" />
-          <Toast.Description className="text-muted m-0 text-[13px] leading-[1.3] wrap-anywhere" />
+          <Toast.Title className="text-foreground text-sm leading-5 font-medium" />
+          <Toast.Description className="text-muted m-0 truncate text-xs leading-4" />
         </div>
-        <Toast.Close className="text-action hover:text-action-hover focus-visible:outline-action h-12 w-12 shrink-0 cursor-pointer rounded-sm focus-visible:outline-2">
-          OK
+        <Toast.Close className="text-action hover:text-action-hover focus-visible:outline-action min-h-11.75 shrink-0 cursor-pointer rounded-full px-4 text-base font-medium [corner-shape:round] focus-visible:outline-2">
+          Got it
         </Toast.Close>
       </Toast.Content>
     </Toast.Root>
