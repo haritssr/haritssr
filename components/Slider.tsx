@@ -10,7 +10,8 @@ export default function Slider({
   max,
   step,
   valueText,
-  trackClassName = "h-2.5",
+  trackClassName,
+  orientation = "horizontal",
   variant = "default",
 }: {
   label: string;
@@ -21,11 +22,13 @@ export default function Slider({
   step: number;
   valueText?: string;
   trackClassName?: string;
+  orientation?: "horizontal" | "vertical";
   variant?: "default" | "music";
 }) {
   return (
     <BaseSlider.Root
-      className="relative flex w-full min-w-0 items-center select-none"
+      className={`relative flex min-w-0 items-center select-none ${orientation === "vertical" ? "h-32 w-5 justify-center" : "w-full"}`}
+      orientation={orientation}
       value={value}
       onValueChange={onValueChange}
       min={min}
@@ -33,12 +36,14 @@ export default function Slider({
       step={step}
       thumbAlignment="edge"
     >
-      <BaseSlider.Control className="group/slider relative flex w-full min-w-0 touch-none items-center">
+      <BaseSlider.Control
+        className={`group/slider relative flex min-w-0 touch-none items-center ${orientation === "vertical" ? "h-full w-full justify-center" : "w-full"}`}
+      >
         <BaseSlider.Track
-          className={`bg-border relative min-w-0 flex-1 rounded-full ${variant === "music" ? "group-hover/slider:bg-slider-track-hover" : ""} ${trackClassName}`}
+          className={`bg-border relative min-w-0 rounded-full ${variant === "music" ? "group-hover/slider:bg-slider-track-hover" : ""} ${orientation === "horizontal" ? "flex-1" : ""} ${trackClassName ?? (orientation === "vertical" ? "h-full w-1.5" : "h-2.5")}`}
         >
           <BaseSlider.Indicator
-            className={`${variant === "music" ? "bg-music-accent" : "bg-action"} absolute h-full rounded-full`}
+            className={`${variant === "music" ? "bg-music-accent" : "bg-action"} absolute rounded-full ${orientation === "vertical" ? "w-full" : "h-full"}`}
           />
           <BaseSlider.Thumb
             aria-label={label}

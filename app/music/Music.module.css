@@ -1,3 +1,8 @@
 .accent {
   --music-progress-fill: var(--color-music-accent);
 }
+
+.controls {
+  --color-action: var(--color-music-accent);
+  --color-action-hover: var(--color-music-accent);
+}

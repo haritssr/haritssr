@@ -39,7 +39,7 @@ export function emptySession(): MusicSession {
     queue: [],
     currentKey: null,
     position: 0,
-    volume: 0.7,
+    volume: 0.5,
     muted: false,
     shuffle: false,
     repeat: "off",
