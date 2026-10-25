@@ -92,7 +92,7 @@ export function GlobalSearchProvider({ children }: { children: ReactNode }) {
     function handleKeyDown(event: KeyboardEvent) {
       if (
         (event.metaKey || event.ctrlKey) &&
-        event.key.toLowerCase() === "k" &&
+        event.key.toLowerCase() === "p" &&
         !event.altKey &&
         !event.shiftKey &&
         !event.isComposing
@@ -176,7 +176,7 @@ export default function TopBarSearch({
       aria-controls={hasOpened ? "global-search-dialog" : undefined}
       aria-expanded={open}
       aria-haspopup="dialog"
-      aria-keyshortcuts="Meta+K Control+K"
+      aria-keyshortcuts="Meta+P Control+P"
       aria-label="Search the site"
       showLabel={showLabel}
       onClick={(event) => {
@@ -189,7 +189,7 @@ export default function TopBarSearch({
       onFocus={prepareSearch}
       onPointerEnter={prepareSearch}
       ref={topBarTriggerRef}
-      title="Search (Ctrl/⌘ K)"
+      title="Search (Ctrl/⌘ P)"
     >
       <MagnifyingGlassIcon aria-hidden="true" className="size-5 shrink-0" />
       {showLabel ? <span>Search</span> : null}

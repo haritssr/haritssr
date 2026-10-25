@@ -275,8 +275,8 @@ Type `share` and press Enter to copy the current page URL (including its query
 and fragment); the same confirmation and clipboard behavior are shared with the
 top-bar Share button.
 
-The homepage Shortcuts table documents the working global controls: Command+K
-on Mac or Ctrl+K opens Search. Option on Mac or Alt on Windows with C toggles
+The homepage Shortcuts table documents the working global controls: Command+P
+on Mac or Ctrl+P opens Search. Option on Mac or Alt on Windows with C toggles
 Contents, S copies the current page URL with confirmation, T opens Timer,
 R opens the RSS feed, and I opens the install prompt when available. Contents
 requires a nested page with headings. The Option/Alt shortcuts ignore typing in
@@ -312,7 +312,7 @@ the bottom navigation's width, height, and safe-area spacing below `lg`; on desk
 it appears at the bottom right. Long URLs truncate within the capsule.
 
 
-Global search uses Ctrl/Cmd+K, preserving the browser Print shortcut. Top and
+Global search uses Ctrl/Cmd+P, overriding the browser Print shortcut. Top and
 bottom navigation share `data/navigation.ts` and route matching from
 `utils/navigation/navigationState.ts`. Primary titles and search descriptions live
 in `data/primaryRoutes.ts`; section links distinguish the

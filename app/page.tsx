@@ -36,7 +36,7 @@ const contacts = [
 
 const profileName = "Harits Syah";
 const featureAccess = [
-  { name: "Search", key: "K", access: "Search in the top bar" },
+  { name: "Search", key: "P", access: "Search in the top bar" },
   {
     name: "Contents",
     key: "C",
@@ -148,8 +148,8 @@ export default function Home() {
                       <td className="px-3 py-2">
                         {name === "Search" ? (
                           <span className="whitespace-nowrap">
-                            <kbd aria-label="Command K">⌘K</kbd> /{" "}
-                            <kbd>Ctrl+K</kbd>
+                            <kbd aria-label="Command P">⌘P</kbd> /{" "}
+                            <kbd>Ctrl+P</kbd>
                           </span>
                         ) : (
                           <span className="whitespace-nowrap">
