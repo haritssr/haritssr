@@ -5,7 +5,10 @@ import { CodeBracketIcon } from "@heroicons/react/24/outline";
 import pageSourceUrl from "@/utils/navigation/pageSourceUrl";
 
 import TopBarAccount from "./TopBarAccount";
-import { topBarActionClassName } from "./TopBarAction";
+import {
+  TOP_BAR_CAPSULE_CLASS_NAME,
+  topBarActionClassName,
+} from "./TopBarAction";
 import TopBarSearch from "./TopBarSearch";
 import TopBarShare from "./TopBarShare";
 
@@ -21,11 +24,7 @@ export default function TopBarActions({
   const list = layout === "list";
 
   return (
-    <div
-      className={
-        list ? "flex flex-col p-1" : "flex w-fit items-center gap-0 sm:gap-4"
-      }
-    >
+    <div className={list ? "flex flex-col p-1" : TOP_BAR_CAPSULE_CLASS_NAME}>
       <TopBarSearch onSearch={onSearch} showLabel={list} />
       <TopBarShare showLabel={list} />
       <a

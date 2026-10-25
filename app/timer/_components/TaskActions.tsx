@@ -1,6 +1,6 @@
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { ForwardIcon, PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { useTimer } from "@/app/timer/_components/TimerProvider";
 import { canUseTimer } from "@/app/timer/utils/timer";
@@ -18,6 +18,7 @@ export default function TaskActions({
   variant,
   presentation = "text",
   onPause,
+  children,
 }: {
   date: string;
   task: TimerTask;
@@ -26,6 +27,7 @@ export default function TaskActions({
   variant: ComponentProps<typeof Button>["variant"];
   presentation?: "text" | "icons";
   onPause?: () => void;
+  children?: ReactNode;
 }) {
   const { act, snapshot } = useTimer();
   const showDone = running || task.spent > 0;
@@ -60,7 +62,9 @@ export default function TaskActions({
         dimWhenDisabled={unavailable}
         onDone={finishTask}
         onToggle={toggleRunning}
-      />
+      >
+        {children}
+      </TaskIconActions>
     );
   }
 
@@ -136,6 +140,7 @@ function TaskIconActions({
   dimWhenDisabled,
   onDone,
   onToggle,
+  children,
 }: {
   activity: string;
   running: boolean;
@@ -144,6 +149,7 @@ function TaskIconActions({
   dimWhenDisabled: boolean;
   onDone: () => void;
   onToggle: () => void;
+  children?: ReactNode;
 }) {
   let ToggleIcon = PlayIcon;
   if (running) {
@@ -153,6 +159,7 @@ function TaskIconActions({
   }
   return (
     <div className="flex shrink-0 items-center gap-2">
+      {children}
       <Button
         aria-label={`Done: ${activity}`}
         dimWhenDisabled={dimWhenDisabled}

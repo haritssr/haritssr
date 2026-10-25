@@ -36,9 +36,9 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
         aria-label="Floating music player"
         className={`${styles.accent} pointer-events-auto w-full space-y-2 sm:w-[22.4rem]`}
       >
-        <div className="border-border bg-background/70 shadow-foreground/15 flex min-h-[var(--floating-tabbar-height,3.3125rem)] items-center gap-2 rounded-xl border p-2 shadow-lg backdrop-blur-md">
+        <div className="border-foreground/10 bg-background/70 shadow-foreground/10 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-2 rounded-full border py-2 pr-2 pl-3 shadow-lg backdrop-blur-md [corner-shape:round]">
           <InternalLink
-            className="mr-auto max-w-1/2 min-w-0 flex-1"
+            className="mr-auto min-w-0 flex-1"
             href="/music"
             variant="control"
             onClick={(event) => {
@@ -62,23 +62,6 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
               <MusicProgress compact store={store} />
             </span>
           </InternalLink>
-          <Button
-            aria-label={playing ? "Pause music" : "Play music"}
-            onClick={() => {
-              store.toggle();
-            }}
-            size="icon-circle"
-            variant="music"
-          >
-            {playing ? (
-              <PauseIcon aria-hidden="true" className="size-4.5" />
-            ) : (
-              <PlayIcon
-                aria-hidden="true"
-                className="size-4.5 translate-x-px"
-              />
-            )}
-          </Button>
           <Button
             aria-label="Next song"
             onClick={() => {
@@ -106,6 +89,23 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
               className="size-4.5"
               strokeWidth={2.5}
             />
+          </Button>
+          <Button
+            aria-label={playing ? "Pause music" : "Play music"}
+            onClick={() => {
+              store.toggle();
+            }}
+            size="icon-circle"
+            variant="music"
+          >
+            {playing ? (
+              <PauseIcon aria-hidden="true" className="size-4.5" />
+            ) : (
+              <PlayIcon
+                aria-hidden="true"
+                className="size-4.5 translate-x-px"
+              />
+            )}
           </Button>
         </div>
         {error === null ? null : (

@@ -33,7 +33,7 @@ export default function TaskProgress({
       className={`${stackClass} ${title === undefined ? "" : "max-sm:space-y-2"}`}
     >
       <div
-        className={`tabular-nums ${compact ? `flex min-w-0 items-baseline justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
+        className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
       >
         {title === undefined ? null : (
           <span className="flex min-w-0 flex-1 items-center gap-1 text-sm leading-4 font-medium normal-nums">

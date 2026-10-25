@@ -15,7 +15,7 @@ interface HeaderActionsProps {
   topBarHeight: number;
 }
 
-const GROUP_CLASS = "flex shrink-0 items-center justify-end gap-0 sm:gap-4";
+const GROUP_CLASS = "flex shrink-0 items-center justify-end gap-2";
 
 const HeaderActions = memo((props: HeaderActionsProps) => {
   const isNestedRoute = props.pathname.split("/").filter(Boolean).length > 1;

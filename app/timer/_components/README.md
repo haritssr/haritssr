@@ -86,7 +86,11 @@ Turso running tasks use the dock.
 The shared `FloatingDock` host stacks Music above Timer when both are visible.
 It measures the combined stack and reserves footer clearance once.
 The dock matches the mobile tab bar's translucent background, blur, border, and
-rounded corners. Its compact row combines title, remaining time, a thin progress
+fully rounded capsule. It uses an 8px outer phone inset, 20px internal left
+padding, and 8px internal right and vertical padding. Its flexible title area
+shrinks around the fixed-size buttons, separated by 8px gaps. Controls appear as
+The task switcher when multiple tasks are available, Complete, then Play/Pause.
+Its compact row combines title, remaining time, a thin progress
 bar and circular actions, without a separate status row. Its minimum
 height matches the navigation surface, with a 53px fallback when absent.
 [useFloatingDockPosition.ts](../../../components/floating/useFloatingDockPosition.ts)
@@ -214,4 +218,4 @@ the toolbar; save status, backup guidance, and success messages are omitted.
 
 Account access stays beside View Source in the shared top bar. Below 640px, both move into Page actions while the scrolling page title is visible. The Google photo opens an account menu with email and Sign out; missing or failed photos use a profile icon. Existing sessions gain photos after signing in again. Timer authorization remains owner-only.
 
-Task action buttons use Trash, Play, Pause, and outline Check icons with a heavier `strokeWidth={2.5}` with hover labels and accessible names. Start uses Play and Continue uses Forward; Delete retains its confirmation dialog. The Edit Task header uses a text Delete button.
+Task cards place Complete before Play/Pause or Continue, matching the floating timer. Task action buttons use Trash, Play, Pause, and outline Check icons with a heavier `strokeWidth={2.5}` with hover labels and accessible names. Start uses Play and Continue uses Forward; Delete retains its confirmation dialog. The Edit Task header uses a text Delete button.

@@ -43,7 +43,7 @@ export default function FloatingDock({ children }: { children: ReactNode }) {
     <DockContext value={value}>
       {children}
       <div
-        className={`${count === 0 ? "hidden" : "flex"} pointer-events-none fixed inset-x-0 bottom-[var(--floating-dock-bottom,max(0.75rem,env(safe-area-inset-bottom)))] z-50 mx-auto w-full max-w-5xl flex-col items-end gap-3 px-3.5 [--floating-safe-bottom:env(safe-area-inset-bottom,0px)] sm:bottom-[var(--floating-dock-bottom,1.5rem)] sm:items-center sm:px-4 xl:px-0`}
+        className={`${count === 0 ? "hidden" : "flex"} pointer-events-none fixed inset-x-0 bottom-[var(--floating-dock-bottom,max(0.5rem,env(safe-area-inset-bottom)))] z-50 mx-auto w-full max-w-5xl flex-col items-end gap-[max(0.5rem,env(safe-area-inset-bottom))] px-2 [--floating-safe-bottom:env(safe-area-inset-bottom,0px)] sm:bottom-[var(--floating-dock-bottom,1.5rem)] sm:items-center sm:px-4 lg:gap-3 xl:px-0`}
         ref={setDock}
       />
     </DockContext>

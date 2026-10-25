@@ -4,7 +4,7 @@ import {
   DocumentTextIcon,
   HomeIcon,
   SquaresPlusIcon,
-} from "@heroicons/react/24/outline";
+} from "@heroicons/react/24/solid";
 
 import { primaryRoutes } from "./primaryRoutes";
 

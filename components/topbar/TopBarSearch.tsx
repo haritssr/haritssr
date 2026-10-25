@@ -191,10 +191,7 @@ export default function TopBarSearch({
       ref={topBarTriggerRef}
       title="Search (Ctrl/⌘ K)"
     >
-      <MagnifyingGlassIcon
-        aria-hidden="true"
-        className="size-5 shrink-0 stroke-2"
-      />
+      <MagnifyingGlassIcon aria-hidden="true" className="size-5 shrink-0" />
       {showLabel ? <span>Search</span> : null}
     </TopBarAction>
   );

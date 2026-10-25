@@ -2,6 +2,10 @@
   isolation: isolate;
 }
 
+.tabs a:hover {
+  font-variation-settings: "GRAD" 150;
+}
+
 .navigation[data-scrolled="true"]::before,
 .navigation[data-scrolled="true"]::after {
   position: absolute;
@@ -36,13 +40,13 @@
 @media (width < 640px) {
   .row[data-show-title="true"] {
     display: grid;
-    grid-template-columns: var(--topbar-side-width, 2.5rem) minmax(0, 1fr) var(
-        --topbar-side-width,
-        2.5rem
-      );
+    grid-template-columns: var(--topbar-side-width, 2.625rem) minmax(
+        0,
+        1fr
+      ) var(--topbar-side-width, 2.625rem);
   }
 
   .row:has([data-topbar-contents]) {
-    --topbar-side-width: 5rem;
+    --topbar-side-width: 5.75rem;
   }
 }

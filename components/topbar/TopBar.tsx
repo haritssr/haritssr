@@ -77,16 +77,16 @@ export default function TopBar() {
       ref={navigationRef}
     >
       <div
-        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-2 sm:py-5 xl:px-0`}
+        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-2 py-2 sm:px-4 sm:py-5 xl:px-0`}
         data-show-title={showTitle}
       >
         {pathname === "/" ? (
-          <Link
-            className="text-foreground sm:text-foreground/70 flex min-w-0 items-center"
+          <BackButton
             href="/"
-          >
-            <span className="truncate">Harits Syah</span>
-          </Link>
+            label="Home"
+            name="Harits Syah"
+            showChevron={false}
+          />
         ) : (
           <BackButton
             compact={scrolled}
@@ -127,27 +127,19 @@ export default function TopBar() {
 function TabBarTop({ pathname }: { pathname: string }) {
   return (
     <ul
-      className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-7 lg:flex"
+      className={`${styles.tabs} border-foreground/10 bg-background/70 shadow-foreground/5 absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.25 rounded-full border p-1 shadow-sm backdrop-blur-md [corner-shape:round] lg:flex`}
       id="main-navigation"
     >
       {primaryNavigation.map(({ title, href }) => {
         const current = navigationCurrent(pathname, href);
         return (
-          <li className="flex h-full items-center space-x-3" key={href}>
+          <li className="flex min-w-0 items-center" key={href}>
             <Link
-              className="group flex h-full items-center rounded-full"
+              className={`focus-visible:outline-action flex items-center justify-center rounded-full px-3 py-1 font-medium whitespace-nowrap transition-colors duration-150 [corner-shape:round] focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none ${current ? "bg-foreground/8 text-action" : "text-foreground hover:bg-foreground/5"}`}
               aria-current={current}
               href={href}
             >
-              <span
-                className={
-                  current
-                    ? "text-foreground"
-                    : "text-foreground/70 hover:text-foreground"
-                }
-              >
-                {title}
-              </span>
+              {title}
             </Link>
           </li>
         );

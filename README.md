@@ -180,7 +180,7 @@ records retain their historical URLs. The former Task and Tools SQLite labs,
 their local databases, and the Task API have been removed.
 
 Every non-home page shows a pill back button in the top bar at every screen size,
-including before scrolling. Home keeps the “Harits Syah” link. Pass the destination
+including before scrolling. Home shows the “Harits Syah” link in a matching pill without a chevron, keeping the top bar height consistent across routes. Pass the destination
 through `PageHeader`'s `back={{ href, name }}` prop and set `path` to the exact route;
 the header stores navigation metadata without rendering a back link or reserving
 an empty navigation row above the title. Lab headers provide their parent
@@ -202,9 +202,21 @@ columns for Back and the compact action controls. At larger widths, it is center
 in the available space between Back and the complete right-hand control group.
 Long titles truncate within that space.
 
+Top-right inline actions share a 42px translucent capsule with 4px padding,
+32px buttons, and 1px gaps. The compact Page actions trigger and separate Contents
+trigger use matching circular capsules with an 8px gap. Icons use foreground color
+and switch to the action token with an inset foreground highlight on hover or
+while open. Mobile title columns reserve 42px, or 92px when Contents is present.
+
 The desktop navigation pill is also visible on Home and lists Home, Projects,
 Labs, Writing, and Design in that order. It appears from 1024px so all
-five links fit between the side controls. Home's responsive card grid links
+five links fit between the side controls. Both navigation bars use translucent
+fully rounded capsules, action-blue selected labels over a foreground/8 pill,
+and foreground-colored inactive labels. Bottom tabs use filled icons and 8px
+outer padding, with bottom safe-area clearance. Floating Music and Timer bars
+share the capsule treatment and phone inset; their mobile stack gap matches the
+navigation's safe-area-aware bottom padding (at least 8px). Flexible title areas leave room
+for their fixed-size controls. Home's responsive card grid links
 to Timer, Commits, Tree, Music, and URL under Tools, with the commit count from a separate Turso count query cached for 24 hours.
 
 Shared helpers in `utils/` are grouped by responsibility: `commits/` handles
@@ -247,7 +259,7 @@ articles have no floating back-to-top button.
 
 Below 640px, floating icon controls use 40px tap targets and 20px icons;
 desktop controls retain their compact sizing. Text pills have a matching minimum
-height, and bottom navigation links have at least 40px tap height. The top bar
+height, and bottom navigation links have at least 44px tap height. The top bar
 stays on one row, truncating the site name or page title when space is limited.
 
 The top bar uses the layout background at 70% opacity with a subtle blur while

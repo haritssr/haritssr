@@ -4,7 +4,10 @@ import { Popover } from "@base-ui/react/popover";
 import { QueueListIcon } from "@heroicons/react/24/outline";
 import { useRef, useState } from "react";
 
-import { topBarActionClassName } from "./TopBarAction";
+import {
+  TOP_BAR_CAPSULE_CLASS_NAME,
+  topBarActionClassName,
+} from "./TopBarAction";
 import TopBarActions from "./TopBarActions";
 import { useGlobalSearch } from "./TopBarSearch";
 
@@ -18,7 +21,9 @@ export default function TopBarActionMenu({
   onSearch?: (trigger: HTMLButtonElement) => void;
 }) {
   return compact ? (
-    <CompactActionMenu pathname={pathname} onSearch={onSearch} />
+    <div className={TOP_BAR_CAPSULE_CLASS_NAME}>
+      <CompactActionMenu pathname={pathname} onSearch={onSearch} />
+    </div>
   ) : (
     <TopBarActions pathname={pathname} onSearch={onSearch} />
   );

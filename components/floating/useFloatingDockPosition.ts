@@ -35,7 +35,7 @@ export default function useFloatingDockPosition(
         ) || 0;
       // Read all geometry before changing styles to avoid forced layout between writes.
       const { height } = dock.getBoundingClientRect();
-      let bottom = desktop ? 1.5 * rem : Math.max(0.75 * rem, safeBottom);
+      let bottom = desktop ? 1.5 * rem : Math.max(0.5 * rem, safeBottom);
       const footerGap = bottom;
       let gap = 0.75 * rem;
       const bounds = navigation?.getBoundingClientRect();

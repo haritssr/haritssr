@@ -669,7 +669,7 @@ export default function DesignSystem() {
           </div>
 
           <div className="bg-background flex min-w-0 flex-col py-5 md:odd:pr-5 md:even:pl-5 [&>div]:flex-1">
-            <Box name="TabBarButtom" title="Bottom Bar">
+            <Box name="TabBarButtom" title="Bottom Navigation Capsule">
               <TabBarButtom preview />
             </Box>
           </div>

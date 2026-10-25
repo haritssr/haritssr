@@ -9,7 +9,10 @@ import { SheetTrigger } from "react-aria-components/Sheet";
 import type useArticleContentsNavigation from "@/components/article/useArticleContentsNavigation";
 import type { ArticleOutline } from "@/utils/content/articleTableOfContents";
 
-import { topBarActionClassName } from "./TopBarAction";
+import {
+  TOP_BAR_CAPSULE_CLASS_NAME,
+  topBarActionClassName,
+} from "./TopBarAction";
 
 const ContentsPanel = dynamic(
   async () => await import("../article/ArticleContentsPanel")
@@ -55,10 +58,7 @@ export default function TopBarContents({
   ) : null;
 
   return (
-    <div
-      data-topbar-contents=""
-      className={`flex shrink-0 items-center ${open ? "border-action!" : ""}`}
-    >
+    <div data-topbar-contents="" className={TOP_BAR_CAPSULE_CLASS_NAME}>
       {desktop ? (
         <Popover.Root
           modal={false}

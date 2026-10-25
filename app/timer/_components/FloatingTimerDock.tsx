@@ -121,9 +121,9 @@ export default function FloatingTimerDock() {
           aria-label="Floating task"
           className="pointer-events-auto w-full space-y-2 sm:w-[22.4rem]"
         >
-          <div className="border-border bg-background/70 shadow-foreground/15 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-2 rounded-xl border p-2 shadow-lg backdrop-blur-md">
+          <div className="border-foreground/10 bg-background/70 shadow-foreground/10 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-2 rounded-full border py-2 pr-2 pl-5 shadow-lg backdrop-blur-md [corner-shape:round]">
             <InternalLink
-              className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto w-1/2 min-w-0 shrink-0 rounded-sm py-1 pl-2 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-2 sm:[&_progress]:h-1.5"
+              className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto min-w-0 flex-1 rounded-sm py-1 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-2 sm:[&_progress]:h-1.5"
               href="/timer"
               variant="inline"
             >
@@ -136,19 +136,6 @@ export default function FloatingTimerDock() {
                 title={selected.task.activity}
               />
             </InternalLink>
-            {tasks.length > 1 ? (
-              <Button
-                aria-label={`Switch task: ${selectedIndex + 1} of ${tasks.length}. Next task`}
-                onClick={selectNextTask}
-                size="icon-circle"
-                title={`Next task (${selectedIndex + 1}/${tasks.length})`}
-                variant="outline"
-              >
-                <span className="text-xs whitespace-nowrap tabular-nums">
-                  {selectedIndex + 1}/{tasks.length}
-                </span>
-              </Button>
-            ) : null}
             <TaskActions
               date={date}
               task={selected.task}
@@ -163,7 +150,21 @@ export default function FloatingTimerDock() {
                   retainedTaskId: selected.task.id,
                 });
               }}
-            />
+            >
+              {tasks.length > 1 ? (
+                <Button
+                  aria-label={`Switch task: ${selectedIndex + 1} of ${tasks.length}. Next task`}
+                  onClick={selectNextTask}
+                  size="icon-circle"
+                  title={`Next task (${selectedIndex + 1}/${tasks.length})`}
+                  variant="outline"
+                >
+                  <span className="text-xs whitespace-nowrap tabular-nums">
+                    {selectedIndex + 1}/{tasks.length}
+                  </span>
+                </Button>
+              ) : null}
+            </TaskActions>
           </div>
         </section>
       ) : null}
