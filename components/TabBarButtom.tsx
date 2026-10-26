@@ -71,16 +71,20 @@ const IconWrapper = ({
   return (
     <Link
       aria-current={current}
-      className={`focus-visible:outline-action flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full px-1 py-1 transition-colors duration-150 [corner-shape:round] focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none ${appearance}`}
+      className={`focus-visible:outline-action active:bg-foreground/8 flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full px-1 py-1 transition-[color,background-color,scale] duration-150 [corner-shape:round] focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 motion-safe:active:scale-95 motion-reduce:transition-none ${appearance}`}
       href={href}
-      onClick={
-        onPreviewSelect
-          ? (event) => {
-              event.preventDefault();
-              onPreviewSelect(href);
-            }
-          : undefined
-      }
+      onClick={(event) => {
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          event.currentTarget.animate(
+            [{ transform: "scale(0.88)" }, { transform: "scale(1)" }],
+            { duration: 300, easing: "ease-out" }
+          );
+        }
+        if (onPreviewSelect) {
+          event.preventDefault();
+          onPreviewSelect(href);
+        }
+      }}
     >
       <div className="flex flex-col items-center justify-center">
         <Icon aria-hidden="true" className="size-6 shrink-0" />
