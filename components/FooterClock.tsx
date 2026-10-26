@@ -60,11 +60,11 @@ export default function FooterClock({ children }: { children: ReactNode }) {
         <span>
           {timestamp === null ? (
             <span aria-hidden="true" className="invisible">
-              00:00:00 WIB
+              00:00:00 WIB/UTC+7
             </span>
           ) : (
             <time dateTime={new Date(timestamp).toISOString()}>
-              {TIME_FORMATTER.format(timestamp)} WIB
+              {TIME_FORMATTER.format(timestamp)} WIB/UTC+7
             </time>
           )}
         </span>

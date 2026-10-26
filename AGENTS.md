@@ -150,7 +150,7 @@ substitute Unicode, plain text, `<sub>`/`<sup>`, or monospace notation.
 - Use viewport-height layout and symmetric scrollbar gutters. `Breadcrumbs` owns
   its spacing: below 1024px, Footer reserves a 24px breadcrumb row above the Jakarta
   date/WIB clock; desktop places breadcrumbs and right-aligned date/clock together
-  above actions. Format: `YYYY-MM-DD, Day, HH:mm:ss WIB`. Clock data is local and
+  above actions. Format: `YYYY-MM-DD, Day, HH:mm:ss WIB/UTC+7`. Clock data is local and
   updates pause in hidden tabs.
 - `useTopBarHeight` supplies title/Contents/anchor measurements; `HeaderActions`
   coordinates handoffs. Track active Contents sections only while open and update
