@@ -88,10 +88,7 @@ export default function ToggleList({
           Collapse all
         </Button>
       </div>
-      <div
-        className="border-border bg-surface rounded-lg border p-2 sm:p-4"
-        id={listId}
-      >
+      <div id={listId}>
         <ul aria-label={label} className="font-mono text-sm">
           {nodes.map((node) => (
             <ToggleNode
