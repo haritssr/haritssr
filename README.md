@@ -275,6 +275,9 @@ Type `share` and press Enter to copy the current page URL (including its query
 and fragment); the same confirmation and clipboard behavior are shared with the
 top-bar Share button.
 
+The homepage profile card keeps contacts visible and collapses background and
+principles into a More accordion below 768px; desktop retains three columns.
+
 The homepage Shortcuts table documents the working global controls: Command+P
 on Mac or Ctrl+P opens Search. Option on Mac or Alt on Windows with C toggles
 Contents, S copies the current page URL with confirmation, T opens Timer,

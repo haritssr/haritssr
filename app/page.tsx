@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 
+import Accordion, { AccordionItem } from "@/components/Accordion";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
@@ -227,39 +228,60 @@ function PersonalDetails() {
             </li>
           ))}
         </ul>
-        <ul
-          aria-label="Background and tools"
-          id="personal-notes"
-          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
-        >
-          <li>Touch typist, ±90 WPM.</li>
-          <li>Former chess player, ±2000 Elo.</li>
-          <li>I develop with Codex CLI in Zed.</li>
-          <li>
-            JS, TS, Effect, React, Next.js, FP, Math, Physics, and Education.
-          </li>
-          <li>Background in Physics</li>
-        </ul>
-        <ul
-          aria-label="Principles"
-          className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
-        >
-          <li>
-            <ExternalLink
-              href="https://youtu.be/H7Sfo3lMB8c?t=72"
-              name="Eudaimonia"
-              showArrow={false}
-              variant="muted"
-            />{" "}
-            &gt; Hedonia
-          </li>
-          <li>Effective Accelerationism (e/acc)</li>
-          <li>Existence = f(constraints, maintainence)</li>
-          <li>100% is easier than 98%</li>
-          <li>What gets measured gets managed</li>
-        </ul>
+        <div className="hidden md:contents">
+          <PersonalNotes />
+        </div>
+        <Accordion className="md:hidden">
+          <AccordionItem
+            excludeFromContents
+            title="More"
+            value="personal-notes"
+          >
+            <div className="space-y-4">
+              <PersonalNotes mobile />
+            </div>
+          </AccordionItem>
+        </Accordion>
       </div>
     </section>
+  );
+}
+
+function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
+  return (
+    <>
+      <ul
+        aria-label="Background and tools"
+        id={mobile ? "personal-notes-mobile" : "personal-notes"}
+        className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 pl-5 wrap-break-word md:border-l md:border-dashed md:pl-9"
+      >
+        <li>Touch typist, ±90 WPM.</li>
+        <li>Former chess player, ±2000 Elo.</li>
+        <li>I develop with Codex CLI in Zed.</li>
+        <li>
+          JS, TS, Effect, React, Next.js, FP, Math, Physics, and Education.
+        </li>
+        <li>Background in Physics</li>
+      </ul>
+      <ul
+        aria-label="Principles"
+        className="border-border text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+      >
+        <li>
+          <ExternalLink
+            href="https://youtu.be/H7Sfo3lMB8c?t=72"
+            name="Eudaimonia"
+            showArrow={false}
+            variant="muted"
+          />{" "}
+          &gt; Hedonia
+        </li>
+        <li>Effective Accelerationism (e/acc)</li>
+        <li>Existence = f(constraints, maintainence)</li>
+        <li>100% is easier than 98%</li>
+        <li>What gets measured gets managed</li>
+      </ul>
+    </>
   );
 }
 

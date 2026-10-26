@@ -47,12 +47,12 @@ export function AccordionItem({
           {trailing}
           <ChevronDownIcon
             aria-hidden="true"
-            className="text-foreground h-5 w-5 shrink-0 transition-transform duration-200 group-data-panel-open:rotate-180"
+            className="text-foreground h-5 w-5 shrink-0 rotate-0 transition-transform duration-200 group-data-panel-open:rotate-180 motion-reduce:transition-none"
           />
         </BaseAccordion.Trigger>
       </BaseAccordion.Header>
       <BaseAccordion.Panel
-        className={`border-border text-foreground/70 rounded-b-lg border-r border-b border-l p-3 text-sm ${panelClassName}`}
+        className={`border-border text-foreground/70 rounded-b-lg border-r border-b border-l p-3 text-base ${panelClassName}`}
       >
         {children}
       </BaseAccordion.Panel>
