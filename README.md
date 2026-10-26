@@ -341,7 +341,12 @@ under `public/images/gradient-cards`; that folder's README records their prompts
 ## Music
 
 The Music header links to `/music/details` for storage notes and offline status.
+Its Logics section explains library sources, local imports, playback order,
+repeat, cross-tab playback, keyboard controls, and offline constraints.
 Offline preparation still runs on the player page; Details only checks its status.
+Details also lists commits whose titles mention Music in a numbered changelog
+table, oldest first, using the shared 24-hour commit history cache and Jakarta dates
+and times in separate columns.
 
 `/music` includes seven songs from `public/music`, cataloged in `app/music/data.ts`.
 They appear automatically and stream directly from their public URLs, with native

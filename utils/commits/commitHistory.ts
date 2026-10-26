@@ -17,7 +17,7 @@ export const getCommitCount = cache(
 );
 
 export const getCommitHistory = cache(
-  unstable_cache(readCommitHistory, ["turso-commits-v1"], {
+  unstable_cache(readCommitHistory, ["turso-commits-v2"], {
     revalidate: 86_400,
   })
 );
