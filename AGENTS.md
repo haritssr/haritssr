@@ -8,489 +8,355 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+# Development
 
-# Development and Verification
-
-- Use Bun: `bun install --frozen-lockfile` and `bun run dev`. Reuse the existing
-  dev server; never start multiple servers. This machine has 8 GB RAM.
-- Never run a production build from an agent environment or use `--webpack`.
-  Production builds belong in local human workflows or CI.
-- Never launch temporary Chrome, including headless or automation sessions.
-  Reuse an already-running browser or use non-browser verification.
-- Avoid unnecessary background processes and stop temporary processes afterward.
-- Never create, add, rename, or restore test files (`*.test.*`, `*.spec.*`, or
-  files under `test/`, `tests/`, or `__tests__/`). Modify existing tests only
-  when explicitly requested. Verify with existing tests and non-test checks.
-- Use the smallest set of skills specific to the task.
-- Keep [README.md](README.md) as a short, public introduction to the repository.
-  Put developer setup and architecture notes in this file; explain feature
-  behavior on its Details route. See Implementation Reference below.
+- Use Bun. Install with `bun install --frozen-lockfile` only when dependencies
+  are missing or differ from the lockfile.
+- Reuse the dev server. Run `bun run dev` only when needed and none exists, never
+  just for checks. This machine has 8 GB RAM; avoid unnecessary background
+  processes and stop temporary ones afterward.
+- Never run production builds or use `--webpack` in an agent environment.
+  Builds belong to humans/CI. Use `bun run start` only when asked to serve an
+  existing build and no server exists; never build first or use it for checks.
+- Never launch temporary Chrome, including headless/automation sessions. Reuse
+  an existing browser or verify without one.
+- Never create, add, rename, or restore `*.test.*`, `*.spec.*`, or files under
+  `test/`, `tests/`, or `__tests__/`. Modify existing tests only when explicitly
+  requested. Use existing tests or focused non-test checks.
+- Use the smallest set of task-specific skills.
+- Keep [README.md](README.md) a short public introduction, developer setup and
+  architecture here, and feature behavior on its Details route.
 
 ## Verification
 
-Run only commands whose triggers apply; multiple rows may apply. Check once after
-the final relevant edit, reuse unchanged passing results, and rerun only affected
-checks after failures or new edits. Questions and status updates need no checks.
-Markdown-only documentation needs diff/link review; writing MDX follows the
-content rule below. Markdown/MDX are excluded from Oxfmt.
+Run only applicable checks after the final relevant edit; multiple triggers may
+apply. Reuse unchanged passing results and rerun only affected checks after edits
+or failures. Questions/status need no checks. Markdown-only changes need diff/link
+review; Markdown/MDX are excluded from Oxfmt, but writing MDX needs content validation.
 
-`check` uses Ultracite → Oxfmt + Oxlint (`oxlint-tsgolint` for type-aware rules).
-`typecheck` separately runs Next.js route type generation → native TypeScript 7.
-
-For simple visual changes (colors, spacing, borders, typography, or CSS classes),
-run only scoped `check`; do not run `typecheck`. This also applies to small
-styling-only cleanup of inline styles or CSS custom properties when component
-contracts and behavior stay unchanged.
+`check` runs Ultracite → Oxfmt + Oxlint (type-aware `oxlint-tsgolint`);
+`typecheck` runs Next.js route type generation → native TypeScript 7.
 
 | Command | Trigger |
 | --- | --- |
-| `bun run check <files...>` | Changes to supported source, CSS, or JSON files, including classes and JSX copy. Pass changed paths; skip unsupported assets and Markdown/MDX. |
-| `bun run check` | Lint/format config or dependency changes, or refactors across shared modules and consumers. Otherwise use scoped checks. |
-| `bun run typecheck` | Imports/exports, types, props, JSX structure, logic/hooks, API handlers, route folders/params, data shapes, TS/Next config, or type-affecting dependencies. Skip CSS/classes, static copy, unchanged-shape data values, Markdown, and assets. |
-| `bun run knip` | Imports/exports, added/removed/renamed source or route files, dependencies, scripts, discovery entry points, or Knip config. Skip changes that leave the module/dependency graph unchanged. |
-| `bun run knip:production` | Production entry points, conditional imports, dependency classification, or production Knip config; otherwise skip. |
-| `bun run validate:content` | Lab catalog/routes, discontinued records, writing MDX/frontmatter, catalog/route/search discovery, frontmatter parsing, or the validator and its utilities. Skip unrelated UI/layout/CSS/docs. |
-| `NODE_ENV=production bun run validate:content` | Those changes could alter public lab availability, including production filters and local DB gates; otherwise skip. |
-| `bun run fix <files...>` | Auto-fixable errors in edited files; review the diff. Skip passing checks/manual-only failures; never fix the whole project for a local change. |
+| `bun run check <files...>` | Changed supported source, CSS, or JSON, including classes and JSX copy. Pass changed paths; exclude assets and Markdown/MDX. |
+| `bun run check` | Lint/format config, dependencies, or refactors across shared modules and consumers. Otherwise scope it. |
+| `bun run typecheck` | Imports/exports, types, props, JSX structure, logic/hooks, API handlers, route folders/params, data shapes, TS/Next config, or type-affecting dependencies. Skip styling, static copy, unchanged-shape values, Markdown, and assets. |
+| `bun run knip` | Module/dependency graph changes: imports/exports, source/route files, dependencies, scripts, discovery entry points, or Knip config. |
+| `bun run knip:production` | Production entry points, conditional imports, dependency classification, or production Knip config. |
+| `bun run validate:content` | Lab catalog/routes, discontinued records, writing MDX/frontmatter, catalog/route/search discovery, frontmatter parsing, or validator utilities. |
+| `NODE_ENV=production bun run validate:content` | Content changes that could affect public lab availability, production filters, or local DB gates. |
+| `bun run fix <files...>` | Auto-fixable errors in edited files; review the diff. Never fix the whole project for a local change or run on passing/manual-only checks. |
 
-Verify behavior with existing tests or focused non-test checks, retaining the
-browser/test-file restrictions. Other commands:
-
-- `bun run import:commits --dry-run`: validate Git history without database access.
-- `bun run sync:commits`: manually upload Git history to Turso when requested;
-  never run automatically when committing, developing, or building.
-- `bun run dev`: only when needed and no server exists; never just for checks.
-- `bun run build`: human/CI only; never in an agent environment.
-- `bun run start`: only when asked to serve an existing production build and no
-  server exists; never build first or use it for verification.
-- `bun install --frozen-lockfile`: only for missing dependencies or an installed
-  dependency tree that does not match the lockfile.
-
-## Next.js Documentation
-
-[Official Next.js App Router documentation](https://nextjs.org/docs/app).
+Simple visual changes need only scoped `check`, including inline styles and CSS
+custom properties when contracts and behavior stay unchanged. Do not typecheck them.
 
 # Design and Components
 
-- Before changing UI, inspect `/design` and `app/design/`. Reuse suitable shared
-  components and their demonstrated behavior; create new ones only when needed.
-  Follow existing design tokens.
-- When discussing colors with the user, always use design-system color names,
-  Tailwind tokens, or custom class/token names (for example, `zinc-50`,
-  `bg-surface`, or `--color-border`). Never describe colors using hex values.
-- Use Base UI for continuing widgets; React Aria is limited to the mobile
-  article TOC Sheet and supporting controls. Do not reintroduce retired widget
-  libraries; see Implementation Reference below for architecture.
-- Repeated grid cards must have equal widths and heights within each row.
-  Align content and actions with flexible layouts; avoid clipping, fixed heights,
-  and masonry unless explicitly requested.
+- Inspect `/design` and `app/design/` before UI changes. Reuse suitable shared
+  components, demonstrated behavior, and existing tokens.
+- Describe colors with design-system names or tokens (`zinc-50`, `bg-surface`,
+  `--color-border`), never hex. Use `zinc-50`/`zinc-900` instead of pure white/black.
+- Use Base UI for continuing widgets. React Aria is limited to the mobile article
+  TOC Sheet and supporting controls; do not restore retired widget libraries.
+- Repeated grid cards have equal widths/heights per row. Use flexible content/action
+  alignment; avoid clipping, fixed heights, and masonry unless requested.
+- Mobile floating controls have 40px targets; bottom tabs are at least 44px tall.
+- `InternalLink` variants: `inline` in prose/descriptions/explanatory lists, default
+  for standalone navigation, `footer` for footer links. Choose at the call site,
+  never by ancestry. Inline/footer omit chevrons; inline inherits text size.
 
-## Links
+## Sections and page layout
 
-- Use `InternalLink`: `variant="inline"` for sentences, descriptions, and
-  explanatory list items; default navigation for standalone links/lists;
-  `variant="footer"` for footer navigation. Choose at the call site, never by
-  DOM ancestry. Inline/footer links omit chevrons; inline inherits text sizing.
+- Use `Section` for titled content and `SectionHeading` for heading-only layouts.
+  Preserve specialized local sections unless explicitly refactoring.
+- `Section` owns accessible heading IDs and `space-y-5`, without global line-height
+  or width caps. Container attributes and `className` style the section;
+  `contentClassName` styles an optional body wrapper; `description` is muted intro copy.
+  Configure headings with `headingAs`, `headingClassName`, and `headingVariant`.
+  Preserve fragment anchors by moving their IDs to the section container.
+- Use unmodified `PageTitle` typography inside `PageHeader`, with icons beside it
+  and consistent title alignment. The layout provides 32px above page content.
+  `PageHeader` starts with its title, without a back link or empty navigation row;
+  it owns `gap-4` and `mb-16`. Keep it outside content stacks, with no child vertical
+  margins or extra top margin on the first content block.
+- Use `PageDescription` for introductions (`as="div"` for block content).
+- Lab section stacks use parent `space-y-20` for physics/mathematics (including
+  demos), `space-y-16` elsewhere. Omit section vertical margins; keep introductions
+  and source links together.
+- Use unordered, unnumbered independent exercise/rule cards. Number ordered
+  solution steps and question-navigation controls when needed.
+- Exclude accordion/disclosure trigger headings from article TOCs, including custom
+  triggers. Visible headings inside open panels may appear.
 
-## Sections and Headings
+## Lab width and mathematics
 
-- Use shared `Section` for titled content and `SectionHeading` for heading-only
-  layouts. Leave specialized local sections intact unless explicitly refactoring.
-- `Section` owns accessible heading IDs and `space-y-5`, with no global line
-  height or width cap. `className` styles the section; `contentClassName` styles
-  an optional body wrapper; `description` supplies muted introductory content.
-- Container attributes apply to `Section`. Configure its heading through
-  `headingAs`, `headingClassName`, and `headingVariant`. Preserve existing
-  fragment anchors by moving their IDs to the section container.
-- Page titles use the shared `PageTitle` typography inside `PageHeader`, without
-  size or class overrides. The layout provides 32px above page content. `Footer`
-  reserves a 24px breadcrumb row above the date and clock below 1024px; on desktop,
-  breadcrumbs share a row with the date and clock grouped on the right, above
-  the footer actions. `Breadcrumbs` owns its spacing;
-  `PageHeader` starts with its title and renders no back link or empty navigation
-  row. Pass back destinations through `back={{ href, name }}` for the top bar;
-  put icons beside the title, keeping every title aligned to the same starting
-  position. The header owns `gap-4` internally and `mb-16`
-  before content; its child components have no vertical margins. Keep headers
-  outside content stacks and omit an extra top margin on the first content block.
-- Use `PageDescription` for page introductions (`as="div"` for block content).
-- Physics and mathematics lab section stacks use parent `space-y-20`,
-  including lab/demo sections. Other lab domains use `space-y-16`.
-  Omit section top/bottom margins; keep introductions and source links together.
-- Keep independent exercise/rule cards unnumbered in unordered lists. Number
-  ordered solution steps and question-navigation controls when needed.
-- Exclude all accordion/disclosure trigger headings from article TOCs,
-  including custom implementations. Visible headings inside open panels may appear.
+For new/refactored labs, keep containers, titles, introductions, and interactive
+content full width. Apply left-aligned `max-w-3xl` only to reading content
+(explanations, proofs, solution steps, summaries), e.g.
+`<Section contentClassName="max-w-3xl space-y-5" ...>`. Never cap a wrapper containing
+a title/description or add a global cap to `Section`.
 
-## Lab Width
+Use responsive columns for interactive content, tables, and grids; preserve suitable
+intrinsic diagram/control/overlay sizing. Keep mobile layouts fluid and scroll wide
+equations/tables locally. Other pages stay full width unless directed otherwise.
 
-Apply these defaults to new or refactored labs in every domain:
-
-- Keep page and section containers, titles, and introductory descriptions full
-  width. Apply left-aligned `max-w-3xl` only to reading content (explanations,
-  derivations, solution steps, proofs, summaries, takeaways), such as
-  `<Section contentClassName="max-w-3xl space-y-5" ...>`. Never cap a container
-  that also holds a title or description.
-- Interactive sections, labs, demos, visualizations, tables, and card grids use
-  full available width with responsive columns. Preserve suitable intrinsic
-  sizing for diagrams, controls, and overlays.
-- In mixed sections, narrow only explanatory body content; keep the heading,
-  description, and interactive content full width. Do not add a global cap to
-  `Section`.
-- Keep mobile layouts fluid; scroll wide equations/tables locally without
-  causing page overflow. Other pages stay full width unless directed otherwise.
-
-## Mathematical Notation
-
-- Render all mathematical notation as TeX through `@/utils/katexify`: inline
-  within sentences, display mode for standalone equations. Do not substitute
-  Unicode, plain text, `<sub>`/`<sup>`, or monospace mathematical typography.
-- Ensure `katex/dist/katex.min.css` is available wherever KaTeX is rendered.
+Render all mathematics as TeX through `@/utils/katexify`, inline in prose or display
+mode for standalone equations, with `katex/dist/katex.min.css` available. Do not
+substitute Unicode, plain text, `<sub>`/`<sup>`, or monospace notation.
 
 # Content and Routes
 
-- Every tool must have a Details page with these sections:
-  - **Logics**: The axioms, rules, constraints, and design principles governing
-    the tool's behavior.
-  - **How this works**: A Pele diagram showing how related components connect
-    and how data flows between them.
-- Never add redirect rules in `next.config.ts`. Do not automatically add
-  redirects when renaming routes; legacy URL aliases are intentionally absent.
-- Lab routes are literal folders. Register title, description, tags,
-  creation date, and update history in `app/labs/data.ts`. Append an
-  update date once per calendar day; preserve creation dates and prior history.
-- Physics and mathematics preview descriptions use concise catalog copy (aim
-  for 80 characters or fewer) to fit roughly two lines in small link previews.
-  Reuse it in page metadata instead of longer local overrides; keep detailed
-  explanations in page content. Preview line wrapping depends on the host app.
-- Writing uses local `app/writing/content/*.mdx` with validated frontmatter and
-  automatic module discovery, without an import registry. Use `/writing` URLs directly.
-- Every non-home page shows a pill `BackButton` in the top bar at every screen
-  size, regardless of scroll position. Home keeps the site-name link. Pass the
-  exact route through `PageHeader.path` and the destination through its `back`
-  prop; the header supplies back metadata and `PageTitle` supplies the title marker
-  for `useScrolledPageHeader`. Use Home when matching back metadata is unavailable.
-  The title replaces center navigation only after scrolling behind the top bar;
-  returning to the title restores center navigation while retaining the back pill.
-- Keep Search, Share, View Source, and account controls inline at the page top
-  and on Home. Below 640px, group them in a Page actions menu only while the
-  scrolled page title is visible. Center that title with equal-width side columns.
-  Keep Contents separate; never move page actions into its sheet.
-- Nested pages with visible content headings (`h2`–`h6`, including MDX headings and
-  shared `SectionHeading` components) show `TopBarContents` in its
-  own pill to the right of the top bar actions. Contents use rendered heading anchors,
-  a desktop popover below the trigger, and a mobile sheet. Hide it on Home and
-  all first-level routes. Do not add floating back-to-top buttons to writing
-  or lab pages. Preserve their `data-article-*` title metadata.
-- Keep `/api` current when GET endpoints change. Use shared `InternalLink` and
-  concrete catch-all examples. Keep its footer link left of Install. Include
-  the directory in search/sitemap, not raw endpoints; gate local-only entries.
-- Music imports remain device-local in IndexedDB; never upload imported files.
-  Included songs live in `public/music` with their catalog in `app/(tools)/music/data.ts`
-  and stream directly from the site. These public assets are deployed with it.
-  Keep its persistent audio runtime lazy. Shared `FloatingDock` owns Music above
-  Timer, navigation clearance, and combined footer spacing. Cache only the public
-  Music shell and required immutable assets for offline reopening; never cache
-  API/account responses or return HTML to RSC requests.
-- Keep public pages searchable.
+- Every tool needs a Details page with **Logics** (axioms, rules, constraints,
+  design principles) and **How this works** (Pele component/data-flow diagram).
+- Never add redirects in `next.config.ts` or automatically when renaming routes.
+  Legacy aliases are intentionally absent.
+- Lab routes are literal folders. Register title, description, tags, creation date,
+  and update history in `app/labs/data.ts`. Append updates once per calendar day;
+  preserve creation dates and history.
+- Physics/mathematics preview copy should aim for ≤80 characters (roughly two lines,
+  host-dependent). Reuse catalog copy in metadata; put detailed explanations on-page.
+- Writing uses `app/writing/content/*.mdx`, validated frontmatter, automatic module
+  discovery, and direct `/writing` URLs; no import registry.
+- Keep `/api` current with GET endpoints, using `InternalLink` and concrete catch-all
+  examples. Its footer link stays left of Install. Index the directory in
+  search/sitemap, not raw endpoints; gate local-only entries.
+- Keep public pages searchable. Use `utils/metadata/pageMetadata.ts` and the canonical
+  domain in `utils/metadata/site.ts` for URLs, social previews, sitemap, and RSS.
 
-# Metadata and Site Behavior
+## Navigation
 
-- Use shared metadata in `utils/metadata/pageMetadata.ts` and the canonical domain from
-  `utils/metadata/site.ts` for page URLs, social previews, sitemap, and RSS.
-- Follow the metadata, archive, and offline safeguards in Implementation
-  Reference below when changing their implementations.
+- Pass the exact `PageHeader.path` and `back={{ href, name }}`. Every non-home page
+  shows a top-bar `BackButton` pill at every size/scroll position; Home shows the
+  site name. Fall back to Home when back metadata is unavailable.
+- `PageTitle` supplies the marker for `useScrolledPageHeader`. Only after the title
+  scrolls behind the top bar does it replace center navigation; scrolling back
+  restores navigation while retaining the back pill. Below 640px the scrolled back
+  label becomes icon-only. Equal side columns center the title; truncate long titles.
+  Clicking it scrolls up and removes the fragment, preserving query/history.
+- Search, Share, View Source, and account controls stay inline at the page top and
+  on Home. Below 640px, move them into Page actions only while the scrolled title
+  is visible. Keep Contents separate from these actions and their sheet.
+- Nested pages with visible `h2`–`h6` content headings (including MDX/SectionHeading)
+  show `TopBarContents` in its own pill right of the actions. Use rendered anchors,
+  a desktop popover below its trigger, and a mobile sheet. Hide on Home/first-level
+  routes. Search closes Contents and restores focus on dismissal.
+- No floating back-to-top controls on writing/labs; preserve `data-article-*` metadata.
+- Desktop navigation starts at 1024px. Mobile bottom navigation appears on Home and
+  Projects/Labs/Writing/Design up to two URL segments deep, excluding articles/deeper
+  routes. Both use shared navigation data and `utils/navigation/navigationState.ts`.
+- `FloatingDock` places Music above Timer and owns navigation, safe-area, and combined
+  footer clearance without loading inactive runtimes.
+- Use viewport-height layout and symmetric scrollbar gutters. `Breadcrumbs` owns
+  its spacing: below 1024px, Footer reserves a 24px breadcrumb row above the Jakarta
+  date/WIB clock; desktop places breadcrumbs and right-aligned date/clock together
+  above actions. Format: `YYYY-MM-DD, Day, HH:mm:ss WIB`. Clock data is local and
+  updates pause in hidden tabs.
+- `useTopBarHeight` supplies title/Contents/anchor measurements; `HeaderActions`
+  coordinates handoffs. Track active Contents sections only while open and update
+  scroll state at boundaries, not on every event.
 
-# Commits
+## Homepage and shortcuts
 
-- Commit only with explicit user permission; committing is a separate action.
-- Do not generate or restore `changelog.json`. Commit history is imported directly
-  from Git into Turso with `bun run sync:commits`, only when explicitly requested.
-  Creating Git commits does not authorize a database upload.
-- Use `type(context): message`, such as `fix(TopBar): align back icon`.
-  Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
-- Review staged changes and related documentation. Keep project guidance accurate
-  in the same change; `test` commits remain subject to the testing policy above.
-
-
-# Implementation Reference
-
-These notes describe the current implementation. Keep operational instructions
-here and user-facing explanations on each feature's Details route:
-[Music](https://haritssr.com/music/details),
-[Timer](https://haritssr.com/timer/details), and
-[Commits](https://haritssr.com/commits/details).
-
-## Project structure
-
-Route-specific components and data live beside their pages. Components shared
-within a feature use `_components/`; site-wide UI lives in `components/`.
-Top bar and article navigation live in `components/topbar/` and
-`components/article/`.
-
-Timer, Commits, Tree, Music, and URL live under `app/(tools)/` and share the
-root layout without changing their public URLs. `appRouteDirectory` maps public
-routes to source directories for View Source and content validation; manifest
-patterns remain public URL patterns.
-
-Important content sources:
-
-| Content | Location |
-| --- | --- |
-| Projects | `app/projects/data.ts` |
-| Active labs and metadata | `app/labs/data.ts` |
-| Discontinued labs | `app/labs/discontinued-data.ts` |
-| Writing and automatic MDX discovery | `app/writing/content/` |
-| Next.js posts demo | `app/labs/nextjs/posts/content/` |
-| Included songs | `app/(tools)/music/data.ts` and `public/music/` |
-| Primary routes and navigation | `data/topLevelNavigation.ts` and `data/navigation.ts` |
-| Commit history | Git and the separate Turso commits database |
-
-Other demos keep their data beside their implementation. Shared utilities are
-grouped under `utils/{commits,content,discovery,metadata,navigation}/`; import
-individual modules to preserve client/server boundaries.
-
-The server-only `utils/discovery/routeManifest.ts` derives routes, parents,
-dynamic patterns, and update dates. Search, sitemap, Tree, and content validation
-reuse it. Metadata helpers and canonical site constants live in
-`utils/metadata/`.
-
-Dynamic route patterns in `utils/navigation/routePatterns.ts` are shared with
-View Source. `utils/content/validate-content.ts` runs catalog, filesystem,
-writing, archive, and discovery checks in separate phases. `utils/calendar.ts`
-shares date validation; `utils/content/localContent.ts` shares server-only content
-loading. TOC label reading lives in `articleHeadingLabels.ts`, separate from
-outline assembly.
-
-Labs use literal `/labs` routes, including `/labs/user-interface`. Former
-`/experiments` routes have no aliases or redirects; discontinued records retain
-historical URLs. The former Task and Tools SQLite labs and Task API are removed.
-
-## Navigation and UI
-
-`PageHeader` receives the exact `path` and `back={{ href, name }}` destination.
-Every non-home page shows a top-bar back pill; Home shows the site name. Below
-640px, the back label becomes icon-only after scrolling. `PageTitle` supplies the
-marker that replaces center navigation with the scrolled title. Equal side
-columns center that title; long titles truncate. Clicking it scrolls to the top
-and removes the fragment without changing query parameters or adding history.
-
-Nested pages with headings show Contents in a separate pill: a desktop popover
-or mobile sheet. Home and first-level routes omit it. Search, Share, View Source,
-and account controls remain inline until the scrolled title appears below 640px,
-when they move into Page actions. Search closes Contents and restores focus on
-dismissal. Writing and lab articles have no floating back-to-top control.
-
-Desktop navigation appears from 1024px. Mobile bottom navigation appears on Home
-and within Projects, Labs, Writing, and Design up to two URL segments deep;
-articles and deeper routes omit it. Both use the shared navigation data and
-`utils/navigation/navigationState.ts`.
-
-Controls follow `/design` tokens, using `zinc-50` and `zinc-900` rather than pure
-white or black. Mobile floating controls have 40px targets; bottom tabs have at
-least 44px height. Shared `FloatingDock` positions Music above Timer and reserves
-navigation, safe-area, and footer clearance without loading inactive runtimes.
-
-The viewport-height layout keeps the footer at the bottom on short pages.
-Symmetric scrollbar gutters prevent horizontal shifts. Below 1024px, footer
-breadcrumbs sit above the Jakarta date and live WIB clock; desktop groups the
-date and clock on the right as `YYYY-MM-DD, Day, HH:mm:ss WIB`. The clock uses
-local data and pauses in hidden tabs.
-
-### Homepage and shortcuts
-
-The profile card keeps contacts visible and puts background and principles in a
-More accordion below 768px. Desktop retains three columns.
-
-Features use a rounded grid with dashed dividers, one column on mobile and three
-on desktop. Each title shows its shortcut. Previews are decorative except for
-the working Install button. It shares a browser install prompt with the footer's
-plain Install action; the footer action appears only when available, while the
-homepage button is disabled otherwise. Installation requires user activation.
+Contacts stay visible; background/principles move into More below 768px, with three
+columns on desktop. Features use a rounded, dashed-divider grid: one column mobile,
+three desktop, shortcut beside each title. Previews are decorative except Install.
+The homepage button and footer Install share a browser prompt requiring user
+activation; when unavailable, disable the homepage button and hide the footer action.
 
 | Shortcut | Action |
 | --- | --- |
-| `⌘P/Ctrl+P` | Search; overrides browser Print |
+| `⌘P/Ctrl+P` | Search, overriding browser Print |
 | `Opt+C/Alt+C` | Toggle Contents on nested pages with headings |
-| `Opt+S/Alt+S` | Copy the current URL, including query and fragment |
+| `Opt+S/Alt+S` | Copy URL including query/fragment |
 | `Opt+T/Alt+T` | Open Timer |
 | `Opt+R/Alt+R` | Open RSS |
 | `Opt+I/Alt+I` | Install when available |
 
-Option/Alt shortcuts ignore editable controls, composition, repeats, and extra
-modifiers. They use physical letter codes. Search filters primary pages, tools,
-and commands; its Share command uses the same feedback as the top-bar action.
-One root `SharePageProvider` supplies copy feedback.
+Option/Alt shortcuts use physical letter codes and ignore editable controls,
+composition, repeats, and extra modifiers. Search filters primary pages, tools,
+and commands; Search and top-bar Share use root `SharePageProvider` feedback.
 
-`useTopBarHeight` provides the measurement used by scrolling titles, Contents,
-and anchor spacing. `HeaderActions` coordinates action handoffs; Contents tracks
-active sections only while open. Scroll updates occur at state boundaries,
-not on every scroll event.
+# Commits
 
-## Commits
+- Commit only with explicit permission; it does not authorize database uploads.
+- Use `type(context): message`, e.g. `fix(TopBar): align back icon`. Types:
+  `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
+- Review staged changes and related docs; update guidance in the same change.
+  The test-file policy still applies to `test` commits.
+- Never generate/restore `changelog.json`. Upload Git history to Turso only when
+  explicitly requested with `bun run sync:commits`, never during development,
+  builds, or commits. `bun run import:commits --dry-run` validates without DB access.
 
-`/commits`, dated reviews, `/api/commits`, and the homepage count read Turso through
-server-only `utils/commits/commitHistory.ts`. Runtime readers have no local fallback.
+# Implementation Reference
 
-Configure these server-only variables locally and in Vercel Production/Preview:
+Keep setup/architecture here and behavior on Details routes:
+[Music](https://haritssr.com/music/details),
+[Timer](https://haritssr.com/timer/details),
+[Commits](https://haritssr.com/commits/details).
 
-- `TURSO_COMMITS_DATABASE_URL`
-- `TURSO_COMMITS_AUTH_TOKEN`
+## Project structure
 
-Import manually from a full Git checkout:
+Keep route-specific code/data beside pages, feature-shared components in
+`_components/`, and site-wide UI in `components/`. Top-bar/article navigation lives
+in `components/topbar/` and `components/article/`. Import individual modules from
+`utils/{commits,content,discovery,metadata,navigation}/` to preserve client/server boundaries.
 
-```sh
-bun run import:commits --dry-run
-bun run sync:commits
-```
+Timer, Commits, Tree, Music, and URL live under `app/(tools)/`, sharing the root
+layout and retaining `/timer`, `/commits`, `/tree`, `/music`, and `/url` URLs.
+`appRouteDirectory` in `utils/navigation/routePatterns.ts` maps these public routes
+to source directories for View Source and content validation. Manifest patterns
+remain public URL patterns; do not include route-group names in links or metadata.
 
-The importer (`app/(tools)/commits/import-commits.ts`) accepts authors Harits Syah and
-haritssr, rejects shallow checkouts, validates before connecting, and verifies
-records within one transaction. Reruns update matching hashes without duplicates
-or deleting extra history. Imports never run automatically during development,
-builds, or commits. No JSON snapshot is used.
+| Content | Source |
+| --- | --- |
+| Projects | `app/projects/data.ts` |
+| Labs / discontinued records | `app/labs/data.ts` / `app/labs/discontinued-data.ts` |
+| Writing | `app/writing/content/` |
+| Next.js posts demo | `app/labs/nextjs/posts/content/` |
+| Included music | `app/(tools)/music/data.ts` + `public/music/` |
+| Routes / navigation | `data/topLevelNavigation.ts` / `data/navigation.ts` |
+| Commit history | Git + separate Turso commits database |
 
-History and the separate count-only query cache for 24 hours. API responses also
-have 24-hour browser/CDN caches, so updates may take longer to appear. Failed fresh
-API reads return uncached 503 responses; Home retains tool links without a count.
-Next.js may retain cached results after revalidation failures.
+Server-only `utils/discovery/routeManifest.ts` derives routes, parents, dynamic
+patterns, and update dates for search, sitemap, Tree, and content validation.
+It shares dynamic patterns with View Source through `utils/navigation/routePatterns.ts`;
+`data/navigation.ts` adds icons to the text-only `topLevelNavigation` definitions.
+`utils/content/validate-content.ts` runs catalog, filesystem, writing, archive, and
+discovery checks in separate phases. Shared calendar validation lives in
+`utils/calendar.ts`; server-only `utils/content/localContent.ts` discovers and
+reads local posts, while frontmatter parsers retain their own rules. Article TOC
+label extraction lives separately from outline assembly.
+Labs use `/labs`, including `/labs/user-interface`; old `/experiments` URLs survive
+only in historical discontinued records, without aliases/redirects. Task/Tools
+SQLite labs and the Task API are removed. Other demos keep data beside their code.
 
-The explorer starts on the latest recorded day with at most 50 rows. Filters and
-row limits live in the URL; later selections load through the API with debounced
-search and Back/Forward support. See `/commits/details` for storage and caching.
+## Commit history
 
-`/commits/weekly-changelog` contains curated summaries from January 2026 through
-October 22. Weeks use days 1–7, 8–14, 15–21, 22–28, and 29–month end; inactive weeks
-remain visible and the current week is partial. Update summaries and the review
-cutoff together in `app/(tools)/commits/weekly-changelog/data.ts`.
-Dated reviews and model assessments cover fixed commit snapshots and appear in
-search and sitemap. Model and reasoning-effort labels are editorial estimates,
-not recorded usage.
+`/commits`, dated reviews, `/api/commits`, and the homepage count read server-only
+`utils/commits/commitHistory.ts`, with no local fallback. Set
+`TURSO_COMMITS_DATABASE_URL` and `TURSO_COMMITS_AUTH_TOKEN` locally and in Vercel
+Production/Preview. Import from a full Git checkout using the commands above.
 
-`changelogTypes.ts` holds shared selection/response contracts;
-`changelogSummary.ts` performs pure calculations. `commitHistory.ts` retains
-server-only cached reads with the existing keys and freshness periods.
+`app/(tools)/commits/import-commits.ts` accepts Harits Syah/haritssr authors, rejects shallow
+checkouts, validates before connecting, and verifies in one transaction. Reruns
+update matching hashes without duplicates or deleting extra history; no JSON snapshot.
+
+History, the separate count query, and browser/CDN API responses cache for 24 hours;
+updates may take longer to appear. Failed fresh API reads return uncached 503s;
+Home retains tool links without a count. Next.js may retain stale results after
+revalidation failures. The explorer starts on the latest day with ≤50 rows; URL
+filters/limits drive later API reads with debounced search and Back/Forward support.
+
+Weekly changelog summaries cover January 2026–October 22. Weeks use days 1–7, 8–14,
+15–21, 22–28, and 29–month end; retain inactive weeks and mark the current week
+partial. Update summaries and cutoff together in `app/(tools)/commits/weekly-changelog/data.ts`.
+Dated reviews/model assessments cover fixed snapshots and appear in search/sitemap;
+model/reasoning labels are editorial estimates, not recorded usage.
+
+`changelogTypes.ts` holds client/server response and selection contracts;
+`changelogSummary.ts` performs pure filtering and aggregation. `commitHistory.ts`
+owns cached reads and delegates calculation without changing cache keys or periods.
 
 ## Timer
 
-`/timer` tracks activities by Jakarta calendar day. `/timer/statistic` shows daily
-history and 30-day totals; `/timer/details` explains rules, schema, and component
-diagrams. The [component guide](app/(tools)/timer/_components/README.md) maps its controls.
+`/timer` tracks Jakarta calendar days; `/timer/statistic` shows daily history and
+30-day totals. Details covers rules/schema/diagrams; the
+[component guide](app/(tools)/timer/_components/README.md) maps controls.
 
-### Storage and setup
+### Storage and authentication
 
-Turso stores owner tasks and preferences across devices. Visitors receive read-only
-samples. Credentials stay server-only; no task data is stored in IndexedDB or local
-JSON at runtime.
+Turso syncs owner tasks/preferences; visitors get read-only samples. Credentials
+stay server-only; no runtime task data in IndexedDB/local JSON. Set
+`TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`; run `bun run migrate:timer` before schema
+deployments. It idempotently creates tables, summary triggers, pending-notification
+indexes, and preset columns.
 
-Set `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`, then initialize or update the schema:
+`timerDatabase.ts` owns SQL mapping, preference writes, historical totals, and
+transactions; `store.ts` coordinates `timerEngine.ts`. Shared command/preference
+operations drive optimistic projection, while server authorization, date checks,
+revisions, and completion claims stay authoritative. Queued mutations reconcile
+confirmed revisions. Write changed rows only; optional UUID `taskId` makes creation idempotent.
 
-```sh
-bun run migrate:timer
-```
+Google OpenID Connect admits only the verified owner email, optionally pinned by
+subject. Configure Git-ignored `.env.local` and deployment:
 
-Run migration before deploying schema changes. It idempotently creates tables,
-summary triggers, pending-notification indexes, and preset columns.
-`timerDatabase.ts` owns SQL mapping, preference writes, historical-total reads,
-and transactions; `store.ts` coordinates `timerEngine.ts` rules. Shared command
-and preference operations also drive optimistic projection; server authorization,
-date checks, revisions, and completion claims remain authoritative. Mutations
-project queued changes in memory and reconcile confirmed revisions. Writes affect changed rows; optional UUID `taskId` makes
-repeated creation idempotent.
-
-### Owner authentication
-
-Google OpenID Connect allows only the verified `TIMER_GOOGLE_EMAIL`. Optionally
-pin its permanent subject with `TIMER_GOOGLE_USER_ID`. Configure in Git-ignored
-`.env.local` and deployment:
-
-- `TIMER_GOOGLE_CLIENT_ID`
-- `TIMER_GOOGLE_CLIENT_SECRET`
-- `TIMER_GOOGLE_EMAIL`
+- `TIMER_GOOGLE_CLIENT_ID`, `TIMER_GOOGLE_CLIENT_SECRET`, `TIMER_GOOGLE_EMAIL`
 - `TIMER_SESSION_SECRET` (generate with `openssl rand -base64 32`)
 - `TIMER_AUTH_ORIGIN`
 - `TIMER_GOOGLE_USER_ID` (optional; blank means unset)
 
-Create a Google OAuth **Web application** client and register
-`{TIMER_AUTH_ORIGIN}/api/timer/auth/callback`, for example
+Use a Google OAuth **Web application** client with callback
+`{TIMER_AUTH_ORIGIN}/api/timer/auth/callback` (e.g.
 `http://localhost:3000/api/timer/auth/callback` or
-`https://haritssr.com/api/timer/auth/callback`. Add the owner as a test user when
-the consent app is in testing. The origin must match exactly, use HTTPS in
-production, and contain no credentials, path, query, or fragment; surrounding
-whitespace and a trailing slash are accepted.
+`https://haritssr.com/api/timer/auth/callback`). Add the owner as a test user while
+the consent app is in testing. Origin must match exactly, use HTTPS in production,
+and contain no credentials/path/query/fragment; surrounding whitespace/trailing slash are accepted.
 
-OAuth uses state, PKCE, and nonce. The server validates Google's signature,
-issuer, audience, expiration, and verified email. Seven-day sessions use signed
-HttpOnly SameSite cookies, Secure in production. No Google tokens or account
-table are stored. Sign-out clears this browser's session; rotating the session
-secret invalidates all sessions. Old GitHub sessions are rejected; remove obsolete
-`TIMER_GITHUB_*` settings.
+OAuth uses state, PKCE, nonce, and server validation of signature, issuer, audience,
+expiry, and verified email. Signed seven-day HttpOnly SameSite cookies are Secure
+in production. Store no Google tokens/account table. Sign-out clears this browser;
+rotating the session secret invalidates all sessions. Reject old GitHub sessions
+and remove `TIMER_GITHUB_*`. Missing config locks personal data;
+`AUTH_CONFIGURATION_INVALID` exposes only variable names/safe hints. Correct
+Vercel Production variables and redeploy before retrying.
 
-Missing configuration keeps personal data locked. `AUTH_CONFIGURATION_INVALID`
-reports variable names and safe hints without exposing values. Correct Vercel
-Production variables and redeploy before retrying.
+### Rules and runtime
 
-### Rules and synchronization
+- Start pauses other tasks unless Multitask is on; disabling it atomically keeps
+  the most recently started task with the preference change.
+- Autoplay prefers paused unfinished tasks when none run. Speed: 1x–3x in 0.5x
+  steps. Done preserves actual time; Reached stops at duration.
+- Duration must exceed spent time. Names: 20 characters; descriptions: 35 (shorten
+  longer legacy descriptions on edit). New days are empty.
+- Timestamps drive time without per-second writes; tasks stop at Jakarta midnight.
+  Transactions allow one device to claim each completion/transition.
+- Web Locks elect one visible owner tab to poll every 30 seconds running / two
+  minutes idle and share validated snapshots. Unsupported browsers poll separately.
+  Focus refreshes. Hidden tabs/previews do not poll; hidden completion/midnight
+  scheduling remains active.
+- Writes require a connection and save in queue order. Failures restore confirmed
+  state, retain Add/Edit drafts, and offer Retry to refresh. Never automatically
+  resend uncertain writes. No writable offline fallback, background scheduler,
+  or Autoplay after all pages close.
 
-- Start pauses other tasks unless Multitask is enabled. Disabling Multitask keeps
-  the most recently started task atomically with its preference.
-- Autoplay prefers paused unfinished tasks when none remain running. Speed ranges
-  from 1x to 3x in 0.5x steps. Done preserves actual time; Reached stops at duration.
-- Duration must exceed time spent. Names allow 20 characters and descriptions 35;
-  longer legacy descriptions must be shortened on edit. New days start empty.
-- Time derives from timestamps without per-second writes. Tasks stop at Jakarta
-  midnight. Transactions ensure one device claims each completion and transition.
-- One visible owner tab polls every 30 seconds while running or two minutes while
-  idle. Web Locks elect it and validated snapshots reach other tabs; unsupported
-  browsers poll independently. Focus refreshes data. Hidden tabs and previews do
-  not poll, though completion and midnight scheduling remain active in hidden tabs.
-- Changes need a connection. An optimistic queue saves in order; failures restore
-  confirmed state, preserve Add/Edit drafts, and offer Retry to refresh. Uncertain
-  writes are never resent automatically. There is no offline writable fallback,
-  background scheduler, or Autoplay after all pages close.
+Snapshots read today plus running/unacknowledged dates via partial indexes;
+statistics read selected/active dates plus 30 summary rows. SQL triggers maintain
+saved totals; reads overlay live time. Backups read full history.
 
-Snapshot reads fetch today plus running/unacknowledged dates found through partial
-indexes. Statistics fetch selected/active dates and 30 summary rows. SQL triggers
-maintain saved totals; reads overlay live time. Backups still read full history.
+Duration Presets allow 1–5 entries (one second–24 hours), Task Presets 1–10, with
+Save/Cancel. They sync and apply to Add/Edit without changing existing tasks.
+Autoplay, Multitask, and notification preferences also sync. Ticking defaults off,
+stays browser-local, and uses Web Locks for audio; completion feedback is claimed globally.
 
-Duration Presets allow 1–5 entries and Task Presets 1–10, with Save/Cancel controls.
-They sync across devices, apply to Add/Edit, and never modify existing tasks.
-Durations range from one second to 24 hours; history backups exclude presets.
-Autoplay, Multitask, and notification preferences also sync through Turso. Ticking
-defaults off and persists in this browser; Web Locks coordinate local audio.
-Completion feedback is claimed globally.
+`TimerProvider` shares the account check and retains lazy `TimerRuntime` after owner
+access or a Timer visit; other anonymous visitors load neither runtime nor snapshots.
+The runtime registers a stable `timerController`; `useTimer` subscribes to selected
+fields directly, without provider snapshot relays. `useTimerAudio` owns ticking/
+warnings, `useTimerSchedule` completion/midnight refreshes, and `useTimerTicking`
+Settings subscription/audio unlock. `timerInput` shares form/counter/schema limits
+while preserving broader legacy validation. Transport, scheduling, audio,
+notifications, and display clocks stay in focused `app/(tools)/timer/` modules.
 
-`TimerProvider` shares the account session check and lazy-loads `TimerRuntime` for
-the owner or after a Timer visit, retaining it across navigation. Other anonymous
-visitors load neither runtime nor snapshots. The runtime registers one stable
-`timerController` with the provider; `useTimer` subscribes directly to selected
-fields, without relaying snapshots through provider state. `useTimerAudio` owns
-ticking and warnings, `useTimerSchedule` owns completion/midnight refreshes, and
-`useTimerTicking` handles the Settings preference subscription and audio unlock.
-`timerInput` shares form limits with counters and server schemas while preserving
-broader legacy record validation. HTTP transport, scheduling, audio,
-notifications, and display clocks live in focused modules under `app/(tools)/timer/`.
+Notifications are opt-in with on-screen fallback, no push service. Closed/suspended
+browsers may delay alerts; mobile may require installation. The existing service
+worker registers locally when a permitted completion needs it.
 
-Notifications are opt-in with on-screen fallback. Closed or suspended browsers
-may delay alerts; there is no push service. Mobile support may require installation.
-The existing service worker registers locally when a permitted completion needs it.
+### Backups
 
-### Backups and imports
-
-Export/Import accepts versioned history JSON up to 10 MB, excluding preferences
-and credentials. Keep a backup before migration.
+Export/Import accepts versioned history JSON ≤10 MB, excluding preferences/presets
+and credentials. Back up before migration:
 
 ```sh
 bun run migrate:timer path/to/backup.json
 bun run migrate:timer --local-json
 ```
 
-These write to configured Turso without changing source files. Imports preserve
-IDs/dates, restore timers paused, suppress old alerts, skip identical days, fill
-empty dates, and reject occupied-date conflicts atomically. Legacy recurring IDs
-use a composite date/ID key. `--local-json` reads `data/timer/*.json`.
-`bun run seed:timer` optionally generates 30 days of sample JSON; runtime demos
-generate samples without these files.
+These write configured Turso without changing source files. Imports preserve IDs/
+dates, restore paused, suppress old alerts, skip identical days, fill empty dates,
+and atomically reject occupied-date conflicts. Legacy recurring IDs use date/ID
+composite keys. `--local-json` reads `data/timer/*.json`; `bun run seed:timer`
+optionally generates 30 days of sample JSON. Runtime demos need neither.
 
 ## Music
 
@@ -502,74 +368,64 @@ cross-tab claims/messages; `importMusic` owns sequential decoding/commits.
 subscription. See the [component guide](app/(tools)/music/_components/README.md) and
 Details' Pele diagram for module relationships.
 
-`/music` streams seven included songs from `public/music`, registered in
-`app/(tools)/music/data.ts`. Add public MP3s and catalog metadata together. Included songs
-need a connection and cannot be removed through the player.
+Seven included songs stream from deployed `public/music` assets, cataloged in
+`app/(tools)/music/data.ts`; add MP3s and metadata together. They require connectivity and
+cannot be removed through the player. Root-level MP3s remain Git-ignored.
 
-Imported MP3s stay in this browser's versioned IndexedDB database. Audio,
-metadata, 256px artwork thumbnails, and settings use separate stores. Imports and
-metadata edits never upload or alter original files. Clearing site data or browser
-eviction removes the local library. Root-level MP3s remain Git-ignored.
+Imported MP3s stay in versioned browser IndexedDB, with separate audio, metadata,
+256px artwork, and settings stores. Never upload imports or alter original files.
+Clearing/evicting browser data removes the library. Sequential imports commit each
+file atomically, skip matching filename/size/mtime, and preserve successes on failure.
+Load `music-metadata` during import, with filename/icon fallbacks.
 
-Imports run sequentially and commit each file atomically. Matching filename,
-size, and modification-time signatures are skipped; failures preserve successful
-imports. `music-metadata` loads during import, with filename/icon fallbacks.
+Search, saved ordering, shuffle, repeat, seeking, and volume are supported. Start
+alphabetically; drag handles/focused arrows reorder, and imports append after
+manual ordering. Repeat One affects automatic completion only. Manual Next wraps
+even with repeat off and restarts exhausted shuffle; automatic completion stops at
+the end with repeat off.
 
-The library supports search, saved ordering, shuffle, repeat, seeking, and volume.
-It starts alphabetically; drag handles or focused arrow keys reorder playback.
-New imports append after manually ordered songs. Repeat One affects automatic
-completion only. Manual Next wraps at the end even with repeat off; automatic
-completion stops there. Exhausted shuffle queues restart on manual Next.
+Lazy runtime starts on `/music` or for a remembered visible player. One native audio
+element survives navigation and loads only the selected URL/blob. Library/order/
+selection/position/settings restore paused. A playing tab pauses the previous one
+via BroadcastChannel/storage events. Media Session/browser volume are optional;
+device controls remain. Volume opens on click/hover and dismisses outside. Music
+and Timer audio may coexist.
 
-A lazy runtime starts on `/music` or for a remembered visible player. One native
-audio element survives navigation and loads only the selected URL/blob. Library,
-order, selection, position, and settings restore paused after reload. A playing
-tab pauses the previous one through BroadcastChannel and storage events. Media
-Session and browser volume support are optional; device controls remain available.
-The volume capsule opens on click/hover and dismisses outside. Timer and Music
-sounds can play together.
-
-Space toggles playback on `/music` or while its floating bar is visible, starting
-the first song if needed. Typing, interactive controls, dialogs, modifiers, and
-held keys retain normal behavior. Closing the floating player pauses and dismisses
-it without losing selection; a dismissed bar does not capture Space elsewhere.
-
-`/music/details` documents rules, storage, and offline status without preparing
-the cache itself. Its oldest-first Music changelog uses the shared 24-hour commit
-cache, with separate Jakarta date/time columns.
+Space toggles on `/music` or with a visible floating player, starting the first song
+if needed. Preserve typing, interactive controls, dialogs, modifiers, and held-key
+behavior. Closing pauses/dismisses without losing selection or capturing Space
+elsewhere. Details shows rules/storage/offline status without preparing caches;
+its oldest-first changelog uses the shared 24-hour commit cache and separate
+Jakarta date/time columns.
 
 ### Offline safeguards
 
-Production Music visits prepare only the public Music document and required
-immutable Next.js assets through the existing service worker. Dependencies cache
-before the document; failed refreshes preserve the last complete shell.
+- Production Music visits use the existing service worker to cache only the public
+  Music document and required immutable Next.js assets. Cache dependencies first;
+  failed refreshes retain the last complete shell.
+- Assets require `Cache-Control: immutable`; exclude development chunks. Development
+  startup updates workers, clears stale development Music caches, and reloads once
+  when needed.
+- Offline reopening plays IndexedDB imports; never download included songs at setup.
+- Never cache API/account responses, RSC payloads, or other documents, or return HTML
+  for RSC requests. Preserve generic offline fallback and Timer notification clicks.
+- Show readiness only after successful preparation, which requires connectivity,
+  service-worker support, and retained browser storage.
 
-- Assets must carry `Cache-Control: immutable`; development chunks are excluded.
-- Development startup updates existing workers, removes stale development Music
-  caches, and reloads once when needed.
-- Offline reopening plays imported songs from IndexedDB. Included songs stream
-  online and are never downloaded during setup.
-- API/account responses, RSC payloads, and other documents are never cached.
-- The generic offline fallback and Timer notification clicks remain intact.
-- Offline readiness appears only after preparation succeeds; initial setup needs
-  connectivity, service-worker support, and retained browser storage.
+`public/sw.js` stays a standalone classic worker. Its event listeners delegate to
+separate lifecycle, notification, preparation/status, asset, and navigation handlers;
+cache names and the Music message protocol stay stable.
 
-`public/sw.js` remains a standalone classic worker with focused lifecycle,
-notification, Music preparation/status, asset, and navigation handlers. Cache
-names, the Music message protocol, and offline safeguards remain unchanged.
+## Labs
 
-## Lab implementation notes
+Plain Contents labels avoid KaTeX; mathematical labels load it separately. Render
+fixed practice formulas on the server and load flow diagrams near the viewport.
+Electron geometry uses a worker/four-entry cache and ignores stale results.
+Confetti requires explicit Start, offers Stop, and respects reduced motion.
 
-Plain Contents labels avoid KaTeX; mathematical labels load their renderer
-separately. Fixed practice formulas render on the server. Flow diagrams load near
-the viewport. Electron geometry uses a worker with a four-entry cache and ignores
-stale results. Confetti requires explicit Start, provides Stop, and respects
-reduced motion.
-
-`/labs/user-interface/gradient-cards` renders 100 authored recipes on the server
-in one/two/four columns with `gap-5`. All 16 desktop spans from 1×1 through 4×4
-appear; tablet spans cap at two and mobile uses content-driven single columns.
-A small client controller loads a Base UI inspector on demand, sharing artwork
-and CSS serialization. Animated examples pause offscreen and respect reduced
-motion. Six generated images live in `public/images/gradient-cards`, whose README
-records their prompts.
+`/labs/user-interface/gradient-cards` server-renders 100 recipes in one/two/four
+columns with `gap-5`: all 16 desktop spans from 1×1 to 4×4, tablet spans capped at
+two, and mobile content-driven single columns. A small client controller lazily
+loads the Base UI inspector, sharing artwork/CSS serialization. Pause animations
+offscreen and respect reduced motion. Six generated images and their prompt README
+live in `public/images/gradient-cards`.
