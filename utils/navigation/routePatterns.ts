@@ -25,3 +25,13 @@ const dynamicRoutes = [
 export function getDynamicRoute(pathname: string) {
   return dynamicRoutes.find(({ parent }) => pathname.startsWith(`${parent}/`));
 }
+
+const toolRoutes = ["/timer", "/commits", "/tree", "/music", "/url"];
+
+// Route groups organize source files without appearing in public URLs.
+export function appRouteDirectory(route: string): string {
+  const tools = toolRoutes.some(
+    (prefix) => route === prefix || route.startsWith(`${prefix}/`)
+  );
+  return `app${tools ? "/(tools)" : ""}${route}`;
+}

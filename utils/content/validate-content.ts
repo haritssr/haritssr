@@ -12,6 +12,7 @@ import { getAvailableLabSummaries } from "@/utils/discovery/labCatalog";
 import { getLabRoutes } from "@/utils/discovery/labRoutes";
 import { getRouteManifest } from "@/utils/discovery/routeManifest";
 import { getSearchIndex } from "@/utils/discovery/searchIndex";
+import { appRouteDirectory } from "@/utils/navigation/routePatterns";
 
 const localRoutePattern = /^\/labs\/user-interface\/(?:task|tools)(?:\/|$)/u;
 const titleSeparatorPattern = /[^a-z0-9]+/g;
@@ -148,7 +149,7 @@ function validateArchive(failures: string[]) {
 
 function validateDiscovery(failures: string[], production: boolean): number {
   for (const entry of getRouteManifest()) {
-    if (!existsSync(path.join("app", entry.pattern, "page.tsx"))) {
+    if (!existsSync(path.join(appRouteDirectory(entry.pattern), "page.tsx"))) {
       failures.push(
         `Discovery route has no page: ${entry.route} (${entry.pattern})`
       );

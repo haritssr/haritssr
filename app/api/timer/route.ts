@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-import { isTimerOwner, timerSameOrigin } from "@/app/timer/server/timerAuth";
+import {
+  isTimerOwner,
+  timerSameOrigin,
+} from "@/app/(tools)/timer/server/timerAuth";
 import {
   changeTimer,
   changeTimerPreferences,
@@ -10,14 +13,14 @@ import {
   getTimerSnapshot,
   importTimer,
   TimerStoreError,
-} from "@/app/timer/store";
+} from "@/app/(tools)/timer/store";
 import {
   createSampleTimerDay,
   shiftTimerDate,
   taskSpent,
   timerDate,
   validTimerDate,
-} from "@/app/timer/utils/timer";
+} from "@/app/(tools)/timer/utils/timer";
 
 export const runtime = "nodejs";
 const headers = { "Cache-Control": "private, no-store", Vary: "Cookie" };

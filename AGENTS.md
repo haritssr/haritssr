@@ -186,7 +186,7 @@ Apply these defaults to new or refactored labs in every domain:
   concrete catch-all examples. Keep its footer link left of Install. Include
   the directory in search/sitemap, not raw endpoints; gate local-only entries.
 - Music imports remain device-local in IndexedDB; never upload imported files.
-  Included songs live in `public/music` with their catalog in `app/music/data.ts`
+  Included songs live in `public/music` with their catalog in `app/(tools)/music/data.ts`
   and stream directly from the site. These public assets are deployed with it.
   Keep its persistent audio runtime lazy. Shared `FloatingDock` owns Music above
   Timer, navigation clearance, and combined footer spacing. Cache only the public
@@ -228,6 +228,11 @@ within a feature use `_components/`; site-wide UI lives in `components/`.
 Top bar and article navigation live in `components/topbar/` and
 `components/article/`.
 
+Timer, Commits, Tree, Music, and URL live under `app/(tools)/` and share the
+root layout without changing their public URLs. `appRouteDirectory` maps public
+routes to source directories for View Source and content validation; manifest
+patterns remain public URL patterns.
+
 Important content sources:
 
 | Content | Location |
@@ -237,7 +242,7 @@ Important content sources:
 | Discontinued labs | `app/labs/discontinued-data.ts` |
 | Writing and automatic MDX discovery | `app/writing/content/` |
 | Next.js posts demo | `app/labs/nextjs/posts/content/` |
-| Included songs | `app/music/data.ts` and `public/music/` |
+| Included songs | `app/(tools)/music/data.ts` and `public/music/` |
 | Primary routes and navigation | `data/topLevelNavigation.ts` and `data/navigation.ts` |
 | Commit history | Git and the separate Turso commits database |
 
@@ -339,7 +344,7 @@ bun run import:commits --dry-run
 bun run sync:commits
 ```
 
-The importer (`app/commits/import-commits.ts`) accepts authors Harits Syah and
+The importer (`app/(tools)/commits/import-commits.ts`) accepts authors Harits Syah and
 haritssr, rejects shallow checkouts, validates before connecting, and verifies
 records within one transaction. Reruns update matching hashes without duplicates
 or deleting extra history. Imports never run automatically during development,
@@ -357,7 +362,7 @@ search and Back/Forward support. See `/commits/details` for storage and caching.
 `/commits/weekly-changelog` contains curated summaries from January 2026 through
 October 22. Weeks use days 1–7, 8–14, 15–21, 22–28, and 29–month end; inactive weeks
 remain visible and the current week is partial. Update summaries and the review
-cutoff together in `app/commits/weekly-changelog/data.ts`.
+cutoff together in `app/(tools)/commits/weekly-changelog/data.ts`.
 Dated reviews and model assessments cover fixed commit snapshots and appear in
 search and sitemap. Model and reasoning-effort labels are editorial estimates,
 not recorded usage.
@@ -370,7 +375,7 @@ server-only cached reads with the existing keys and freshness periods.
 
 `/timer` tracks activities by Jakarta calendar day. `/timer/statistic` shows daily
 history and 30-day totals; `/timer/details` explains rules, schema, and component
-diagrams. The [component guide](app/timer/_components/README.md) maps its controls.
+diagrams. The [component guide](app/(tools)/timer/_components/README.md) maps its controls.
 
 ### Storage and setup
 
@@ -464,7 +469,7 @@ ticking and warnings, `useTimerSchedule` owns completion/midnight refreshes, and
 `useTimerTicking` handles the Settings preference subscription and audio unlock.
 `timerInput` shares form limits with counters and server schemas while preserving
 broader legacy record validation. HTTP transport, scheduling, audio,
-notifications, and display clocks live in focused modules under `app/timer/`.
+notifications, and display clocks live in focused modules under `app/(tools)/timer/`.
 
 Notifications are opt-in with on-screen fallback. Closed or suspended browsers
 may delay alerts; there is no push service. Mobile support may require installation.
@@ -494,11 +499,11 @@ generate samples without these files.
 cross-tab claims/messages; `importMusic` owns sequential decoding/commits.
 `MusicLibrary` composes search/import controls, `MusicSongList`,
 `MusicPlaybackControls`, and `MusicTrackMenu`. Progress uses a separate clock
-subscription. See the [component guide](app/music/_components/README.md) and
+subscription. See the [component guide](app/(tools)/music/_components/README.md) and
 Details' Pele diagram for module relationships.
 
 `/music` streams seven included songs from `public/music`, registered in
-`app/music/data.ts`. Add public MP3s and catalog metadata together. Included songs
+`app/(tools)/music/data.ts`. Add public MP3s and catalog metadata together. Included songs
 need a connection and cannot be removed through the player.
 
 Imported MP3s stay in this browser's versioned IndexedDB database. Audio,

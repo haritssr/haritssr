@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
-import MusicProvider from "@/app/music/_components/MusicProvider";
-import TimerProvider from "@/app/timer/_components/TimerProvider";
+import MusicProvider from "@/app/(tools)/music/_components/MusicProvider";
+import TimerProvider from "@/app/(tools)/timer/_components/TimerProvider";
 import FloatingDock from "@/components/floating/FloatingDock";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";

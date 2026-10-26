@@ -6,7 +6,7 @@ import {
   timerSignIn,
   timerSignInCallback,
   timerSignOut,
-} from "@/app/timer/server/timerAuth";
+} from "@/app/(tools)/timer/server/timerAuth";
 
 export const runtime = "nodejs";
 interface Context {
