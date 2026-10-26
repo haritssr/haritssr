@@ -24,6 +24,7 @@ import ButtonWithIcon from "./ButtonWithIcon";
 import Checkbox from "./Checkbox";
 import { DesignTokens } from "./Colors";
 import ContextMenu from "./ContextMenu";
+import FloatingPill from "./FloatingPill";
 import InterfacePrinciples from "./InterfacePrinciples";
 import LoadingButton from "./LoadingButton";
 import Logo from "./Logo";
@@ -669,6 +670,12 @@ export default function DesignSystem() {
                 </span>
                 <input className={FORM_CONTROL_CLASS_NAME} type="date" />
               </label>
+            </Box>
+          </div>
+
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <Box name="FloatingPill" title="Floating Pill">
+              <FloatingPill />
             </Box>
           </div>
 
