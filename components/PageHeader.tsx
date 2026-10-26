@@ -16,7 +16,7 @@ export default function PageHeader({
   const hasAside = aside !== undefined && aside !== null;
   return (
     <header
-      className={`mt-6 mb-10 w-full sm:mb-12 ${hasAside ? "flex items-start justify-between gap-5" : CONTENT_CLASS_NAME}`}
+      className={`mt-3 mb-10 w-full sm:mt-6 sm:mb-12 ${hasAside ? "flex items-start justify-between gap-5" : CONTENT_CLASS_NAME}`}
       data-page-back-href={back?.href}
       data-page-back-label={back?.name}
       data-page-header=""
