@@ -71,12 +71,8 @@ function TaskFormPopup({
       <Dialog.Popup
         initialFocus={nameRef}
         style={SHEET_STYLE}
-        className="border-border bg-background text-foreground shadow-floating fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-3xl border p-4 outline-hidden sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl"
+        className="border-border bg-background text-foreground shadow-floating rounded-t-dialog fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain border p-4 outline-hidden sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl"
       >
-        <div
-          aria-hidden="true"
-          className="bg-border mx-auto mb-5 h-1 w-10 rounded-full sm:hidden"
-        />
         <form
           className="flex flex-col gap-5"
           onSubmit={(event) => {
@@ -196,7 +192,7 @@ export function TaskNameField({
         <Button
           aria-label="Clear name"
           title="Clear"
-          className="absolute top-1/2 right-2.5 -translate-y-1/2"
+          className="absolute top-1/2 right-2.5 size-4.5! -translate-y-1/2"
           size="icon-small"
           disabled={disabled || length === 0}
           onClick={() => {
@@ -207,7 +203,7 @@ export function TaskNameField({
         >
           <svg
             aria-hidden="true"
-            className="size-2.5 shrink-0"
+            className="size-3 shrink-0"
             fill="none"
             stroke="currentColor"
             strokeWidth={2}
@@ -266,7 +262,7 @@ export function TaskDescriptionField({
         <Button
           aria-label="Clear description"
           title="Clear"
-          className="absolute top-1/2 right-2.5 -translate-y-1/2"
+          className="absolute top-1/2 right-2.5 size-4.5! -translate-y-1/2"
           size="icon-small"
           disabled={disabled || length === 0}
           onClick={() => {
@@ -277,7 +273,7 @@ export function TaskDescriptionField({
         >
           <svg
             aria-hidden="true"
-            className="size-2.5 shrink-0"
+            className="size-3 shrink-0"
             fill="none"
             stroke="currentColor"
             strokeWidth={2}

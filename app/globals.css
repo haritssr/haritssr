@@ -80,6 +80,7 @@
 
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
+  --radius-dialog: calc(var(--radius-md) + var(--spacing) * 4 + 1px);
   --radius-sm: calc(0.5rem - 4px);
 
   --text-tiny: 0.9rem;
