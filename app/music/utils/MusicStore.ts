@@ -1,5 +1,5 @@
 import { includedMusic, includedTrack } from "../data";
-import { fileSignature, readMusicFile } from "./importMusic";
+import { importMusicFiles } from "./importMusic";
 import {
   deleteTrack,
   loadLibrary,
@@ -7,19 +7,18 @@ import {
   loadMusicSession,
   saveMusicSession,
   saveLibraryOrder,
-  saveTrack,
   saveTrackDetails,
 } from "./musicDatabase";
+import MusicMediaSession from "./MusicMediaSession";
 import {
   emptySession,
-  isMusicRecord,
   MUSIC_ACTIVE_KEY,
-  MUSIC_CLAIM_KEY,
   nextQueueKey,
   restoreSession,
   sortMusicTracks,
 } from "./musicState";
 import type { MusicSession, MusicTrack } from "./musicState";
+import MusicTabSync from "./MusicTabSync";
 
 interface MusicSnapshot {
   ready: boolean;
@@ -54,18 +53,46 @@ export default class MusicStore {
   private audio: HTMLAudioElement | null = null;
   private url: string | null = null;
   private loadedTrack: string | null = null;
-  private channel: BroadcastChannel | null = null;
-  private readonly tab = crypto.randomUUID();
-  private claim = "";
-  private ownsSession = true;
+  private readonly tabs = new MusicTabSync(
+    () => {
+      this.sequence += 1;
+      this.audio?.pause();
+      this.update({ playing: false });
+    },
+    () => {
+      void this.refreshLibrary();
+    }
+  );
   private sequence = 0;
   private generation = 0;
   private lastSave = 0;
   private lastPosition = 0;
   private dirty = false;
   private storageAvailable = true;
-  private mediaArtwork: string | null = null;
-  private mediaTrackId: string | null = null;
+  private readonly media = new MusicMediaSession({
+    read: () => ({
+      track: this.currentTrack(),
+      playing: this.state.playing,
+      position: this.clock.position,
+      duration: this.clock.duration,
+      connected: this.audio !== null,
+    }),
+    play: async () => {
+      await this.play();
+    },
+    pause: () => {
+      this.pause();
+    },
+    next: () => {
+      this.next();
+    },
+    previous: () => {
+      this.previous();
+    },
+    seek: (position) => {
+      this.seek(position);
+    },
+  });
 
   subscribe = (listener: () => void) => {
     this.listeners.add(listener);
@@ -110,7 +137,7 @@ export default class MusicStore {
   }
 
   private persist() {
-    if (!this.state.ready || !this.ownsSession || !this.dirty) {
+    if (!this.state.ready || !this.tabs.ownsSession || !this.dirty) {
       return;
     }
     this.lastSave = Date.now();
@@ -132,46 +159,6 @@ export default class MusicStore {
           "Your playback position could not be saved. Free some device storage and try again.",
       });
     });
-  }
-
-  private readonly receiveClaim = (claim: string) => {
-    if (claim <= this.claim) {
-      return;
-    }
-    this.claim = claim;
-    this.ownsSession = false;
-    this.sequence += 1;
-    this.audio?.pause();
-    this.update({ playing: false });
-  };
-
-  private readonly storage = (event: StorageEvent) => {
-    if (event.key === MUSIC_CLAIM_KEY && event.newValue !== null) {
-      this.receiveClaim(event.newValue);
-    }
-    if (event.key === "haritssr-music-library:v1") {
-      void this.refreshLibrary();
-    }
-  };
-
-  private claimPlayback() {
-    this.ownsSession = true;
-    this.claim = `${String(Date.now()).padStart(16, "0")}:${this.tab}`;
-    try {
-      localStorage.setItem(MUSIC_CLAIM_KEY, this.claim);
-    } catch {
-      /* BroadcastChannel can still coordinate playback. */
-    }
-    this.channel?.postMessage({ type: "play", claim: this.claim });
-  }
-
-  private announceLibrary() {
-    this.channel?.postMessage({ type: "library" });
-    try {
-      localStorage.setItem("haritssr-music-library:v1", crypto.randomUUID());
-    } catch {
-      /* The current tab remains usable. */
-    }
   }
 
   private async refreshLibrary() {
@@ -203,28 +190,8 @@ export default class MusicStore {
     audio.addEventListener("pause", this.paused);
     audio.addEventListener("ended", this.ended);
     audio.addEventListener("error", this.failed);
-    window.addEventListener("storage", this.storage);
+    this.tabs.connect();
     window.addEventListener("pagehide", this.pagehide);
-    try {
-      this.channel = new BroadcastChannel("haritssr-music:v1");
-      this.channel.addEventListener(
-        "message",
-        (event: MessageEvent<unknown>) => {
-          if (!isMusicRecord(event.data)) {
-            return;
-          }
-          const { data } = event;
-          if (data.type === "play" && typeof data.claim === "string") {
-            this.receiveClaim(data.claim);
-          }
-          if (data.type === "library") {
-            void this.refreshLibrary();
-          }
-        }
-      );
-    } catch {
-      /* Storage events provide cross-tab coordination when available. */
-    }
     try {
       const [tracks, stored] = await Promise.all([
         loadLibrary(),
@@ -238,7 +205,7 @@ export default class MusicStore {
       this.update({ tracks, session, ready: true });
       this.updateClock(session.position, this.currentTrack()?.duration ?? 0);
       this.applyVolume();
-      this.updateMediaSession();
+      this.media.update();
     } catch {
       if (generation === this.generation) {
         this.storageAvailable = false;
@@ -257,9 +224,7 @@ export default class MusicStore {
     this.persist();
     this.generation += 1;
     this.sequence += 1;
-    this.channel?.close();
-    this.channel = null;
-    window.removeEventListener("storage", this.storage);
+    this.tabs.disconnect();
     window.removeEventListener("pagehide", this.pagehide);
     if (this.audio) {
       for (const [name, handler] of [
@@ -276,30 +241,7 @@ export default class MusicStore {
       this.unload();
       this.audio = null;
     }
-    if (this.mediaArtwork !== null) {
-      URL.revokeObjectURL(this.mediaArtwork);
-      this.mediaArtwork = null;
-    }
-    this.mediaTrackId = null;
-    if ("mediaSession" in navigator) {
-      for (const action of [
-        "play",
-        "pause",
-        "previoustrack",
-        "nexttrack",
-        "seekto",
-        "seekbackward",
-        "seekforward",
-      ] as const) {
-        try {
-          navigator.mediaSession.setActionHandler(action, null);
-        } catch {
-          /* Optional browser capability. */
-        }
-      }
-      navigator.mediaSession.metadata = null;
-      navigator.mediaSession.playbackState = "none";
-    }
+    this.media.disconnect();
   };
 
   private readonly pagehide = () => {
@@ -311,7 +253,7 @@ export default class MusicStore {
     }
     this.dirty = true;
     this.updateClock(this.audio.currentTime);
-    this.updateMediaPosition();
+    this.media.updatePosition();
     if (Date.now() - this.lastSave > 5000) {
       this.persist();
     }
@@ -327,7 +269,7 @@ export default class MusicStore {
         Math.max(0, duration - 0.01)
       );
       this.updateClock(this.audio.currentTime, duration);
-      this.updateMediaPosition();
+      this.media.updatePosition();
     }
   };
   private readonly durationchange = () => {
@@ -337,12 +279,12 @@ export default class MusicStore {
   };
   private readonly started = () => {
     this.update({ playing: true });
-    this.updateMediaSession();
+    this.media.update();
   };
   private readonly paused = () => {
     this.update({ playing: false });
     this.persist();
-    this.updateMediaSession();
+    this.media.update();
   };
   private readonly ended = () => {
     this.next(false);
@@ -353,7 +295,7 @@ export default class MusicStore {
       error:
         "This song could not be played. Check your connection for included songs, or reimport a local file.",
     });
-    this.updateMediaSession();
+    this.media.update();
   };
 
   private unload() {
@@ -374,7 +316,7 @@ export default class MusicStore {
     if (!track || !this.audio || !this.state.ready) {
       return;
     }
-    this.claimPlayback();
+    this.tabs.claimPlayback();
     this.session({ dismissed: false });
     this.update({ error: null });
     const { audio } = this;
@@ -412,7 +354,7 @@ export default class MusicStore {
       if (sequence !== this.sequence) {
         return;
       }
-      this.updateMediaSession();
+      this.media.update();
     } catch (error) {
       if (sequence !== this.sequence) {
         return;
@@ -432,7 +374,7 @@ export default class MusicStore {
     this.audio?.pause();
     this.update({ playing: false });
     this.persist();
-    this.updateMediaSession();
+    this.media.update();
   };
   toggle = () => {
     if (this.state.playing) {
@@ -469,7 +411,7 @@ export default class MusicStore {
       upNext: session.upNext.filter((item) => item !== key),
       dismissed: false,
     });
-    this.updateMediaSession();
+    this.media.update();
     if (playing) {
       void this.play();
     }
@@ -546,7 +488,7 @@ export default class MusicStore {
     }
     this.updateClock(safe);
     this.persist();
-    this.updateMediaPosition();
+    this.media.updatePosition();
   };
   preferences = (
     patch: Partial<
@@ -565,7 +507,7 @@ export default class MusicStore {
           }),
     });
     this.applyVolume();
-    this.updateMediaPosition();
+    this.media.updatePosition();
   };
   private applyVolume() {
     if (!this.audio) {
@@ -617,7 +559,7 @@ export default class MusicStore {
           (ranks.get(left.trackId) ?? 0) - (ranks.get(right.trackId) ?? 0)
       );
       this.session({ queue, upNext: [] });
-      this.announceLibrary();
+      this.tabs.announceLibrary();
     } catch {
       this.update({ error: "The song order could not be saved. Try again." });
     }
@@ -646,8 +588,8 @@ export default class MusicStore {
         ),
         error: null,
       });
-      this.updateMediaSession();
-      this.announceLibrary();
+      this.media.update();
+      this.tabs.announceLibrary();
       return true;
     } catch {
       return false;
@@ -688,8 +630,8 @@ export default class MusicStore {
         }
       }
       this.persist();
-      this.updateMediaSession();
-      this.announceLibrary();
+      this.media.update();
+      this.tabs.announceLibrary();
     } catch {
       this.update({
         error: "The song could not be removed. Please try again.",
@@ -701,48 +643,20 @@ export default class MusicStore {
     if (this.state.importing !== null || !files.length) {
       return;
     }
-    let imported = 0;
-    let skipped = 0;
-    const failures: string[] = [];
     this.update({ error: null, notice: null });
-    const signatures = new Set(
-      this.state.tracks.map((track) => track.signature)
-    );
-    for (const [index, file] of files.entries()) {
-      this.update({ importing: `${index + 1}/${files.length}: ${file.name}` });
-      if (signatures.has(fileSignature(file))) {
-        skipped += 1;
-        continue;
-      }
-      try {
-        // oxlint-disable-next-line no-await-in-loop -- Process one MP3 at a time to bound import memory.
-        const { track, artwork } = await readMusicFile(file);
-        // oxlint-disable-next-line no-await-in-loop -- Commit this file before loading another MP3.
-        await saveTrack(track, file, artwork);
-        signatures.add(track.signature);
+    const { imported, notice, error } = await importMusicFiles(
+      files,
+      this.state.tracks,
+      (importing) => {
+        this.update({ importing });
+      },
+      (track) => {
         this.update({ tracks: sortMusicTracks([...this.state.tracks, track]) });
-        imported += 1;
-      } catch (error) {
-        let reason = "Import failed.";
-        if (error instanceof Error) {
-          reason = error.message;
-        }
-        if (
-          error instanceof DOMException &&
-          error.name === "QuotaExceededError"
-        ) {
-          reason = "Not enough device storage.";
-        }
-        failures.push(`${file.name}: ${reason}`);
       }
-    }
-    this.update({
-      importing: null,
-      notice: `${imported} imported${skipped ? `, ${skipped} duplicates skipped` : ""}.`,
-      error: failures.length ? failures.join(" ") : null,
-    });
+    );
+    this.update({ importing: null, notice, error });
     if (imported) {
-      this.announceLibrary();
+      this.tabs.announceLibrary();
       try {
         await navigator.storage?.persist?.();
       } catch {
@@ -750,117 +664,4 @@ export default class MusicStore {
       }
     }
   };
-
-  private updateMediaSession() {
-    if (!("mediaSession" in navigator)) {
-      return;
-    }
-    const track = this.currentTrack();
-    if ((track?.id ?? null) !== this.mediaTrackId) {
-      if (this.mediaArtwork !== null) {
-        URL.revokeObjectURL(this.mediaArtwork);
-        this.mediaArtwork = null;
-      }
-      this.mediaTrackId = track?.id ?? null;
-      if (track?.hasArtwork === true) {
-        void this.loadMediaArtwork(track.id);
-      }
-    }
-    try {
-      navigator.mediaSession.metadata = track
-        ? new MediaMetadata({
-            title: track.title,
-            artist: track.artist,
-            album: track.album,
-            artwork:
-              this.mediaArtwork === null ? [] : [{ src: this.mediaArtwork }],
-          })
-        : null;
-      let playbackState: MediaSessionPlaybackState = "none";
-      if (track) {
-        playbackState = this.state.playing ? "playing" : "paused";
-      }
-      navigator.mediaSession.playbackState = playbackState;
-      const actions: [MediaSessionAction, MediaSessionActionHandler][] = [
-        [
-          "play",
-          () => {
-            void this.play();
-          },
-        ],
-        ["pause", this.pause],
-        [
-          "nexttrack",
-          () => {
-            this.next();
-          },
-        ],
-        ["previoustrack", this.previous],
-        [
-          "seekto",
-          (details) => {
-            if (details.seekTime !== undefined) {
-              this.seek(details.seekTime);
-            }
-          },
-        ],
-        [
-          "seekbackward",
-          (details) => {
-            this.seek(this.clock.position - (details.seekOffset ?? 10));
-          },
-        ],
-        [
-          "seekforward",
-          (details) => {
-            this.seek(this.clock.position + (details.seekOffset ?? 10));
-          },
-        ],
-      ];
-      for (const [action, handler] of actions) {
-        try {
-          navigator.mediaSession.setActionHandler(action, handler);
-        } catch {
-          /* Each action is optional. */
-        }
-      }
-      this.updateMediaPosition();
-    } catch {
-      /* Media controls do not affect in-app playback. */
-    }
-  }
-  private async loadMediaArtwork(id: string) {
-    try {
-      const blob = await loadMusicBlob(id, "artwork");
-      if (
-        blob === undefined ||
-        this.mediaTrackId !== id ||
-        this.audio === null
-      ) {
-        return;
-      }
-      this.mediaArtwork = URL.createObjectURL(blob);
-      this.updateMediaSession();
-    } catch {
-      /* Artwork is optional for platform media controls. */
-    }
-  }
-
-  private updateMediaPosition() {
-    if (
-      !("mediaSession" in navigator) ||
-      typeof navigator.mediaSession.setPositionState !== "function" ||
-      this.clock.duration <= 0
-    ) {
-      return;
-    }
-    try {
-      navigator.mediaSession.setPositionState({
-        duration: this.clock.duration,
-        position: Math.min(this.clock.position, this.clock.duration),
-      });
-    } catch {
-      /* Optional platform integration. */
-    }
-  }
 }

@@ -1,3 +1,4 @@
+import FlowDiagram from "@/components/FlowDiagram";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
@@ -8,6 +9,7 @@ import { getCommitHistory } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import OfflineStatus from "./OfflineStatus";
+import { musicRelationships } from "./relationships";
 
 const commitWeekday = new Intl.DateTimeFormat("en-GB", {
   timeZone: "Asia/Jakarta",
@@ -139,6 +141,25 @@ export default async function MusicDetailsPage() {
                 </span>
               </li>
             </ul>
+          </div>
+        </Section>
+        <Section title="How this works">
+          <FlowDiagram
+            definition={musicRelationships}
+            title="Music components and data flow"
+          />
+          <div className="text-muted max-w-3xl space-y-3">
+            <p>
+              One persistent player owns audio and playback state. The library,
+              song controls, and floating player use the same store; progress
+              displays subscribe separately to playback time.
+            </p>
+            <p>
+              Browser media controls, tab coordination, and sequential imports
+              have separate modules. Imports commit to this device before the
+              library updates. The offline cache holds the public player shell
+              and immutable assets, while imported audio stays in IndexedDB.
+            </p>
           </div>
         </Section>
         <Section title="Changelog">

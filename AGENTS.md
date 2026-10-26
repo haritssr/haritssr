@@ -478,6 +478,14 @@ generate samples without these files.
 
 ## Music
 
+`MusicStore` owns audio, queue transitions, persistence, and library mutations.
+`MusicMediaSession` handles optional device controls/artwork; `MusicTabSync` owns
+cross-tab claims/messages; `importMusic` owns sequential decoding/commits.
+`MusicLibrary` composes search/import controls, `MusicSongList`,
+`MusicPlaybackControls`, and `MusicTrackMenu`. Progress uses a separate clock
+subscription. See the [component guide](app/music/_components/README.md) and
+Details' Pele diagram for module relationships.
+
 `/music` streams seven included songs from `public/music`, registered in
 `app/music/data.ts`. Add public MP3s and catalog metadata together. Included songs
 need a connection and cannot be removed through the player.

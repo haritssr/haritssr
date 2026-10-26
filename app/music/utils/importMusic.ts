@@ -1,7 +1,8 @@
 import { includedMusic } from "../data";
+import { saveTrack } from "./musicDatabase";
 import type { MusicTrack } from "./musicState";
 
-export function fileSignature(file: File): string {
+function fileSignature(file: File): string {
   return JSON.stringify([file.name, file.size, file.lastModified]);
 }
 
@@ -35,7 +36,7 @@ function tagText(value: string | undefined, fallback: string): string {
   return text.length > 0 ? text : fallback;
 }
 
-export async function readMusicFile(
+async function readMusicFile(
   file: File
 ): Promise<{ track: MusicTrack; artwork: Blob | null }> {
   if (!file.name.toLowerCase().endsWith(".mp3") || file.size === 0) {
@@ -76,5 +77,50 @@ export async function readMusicFile(
       hasArtwork: artwork !== null,
     },
     artwork,
+  };
+}
+
+export async function importMusicFiles(
+  files: File[],
+  tracks: MusicTrack[],
+  onProgress: (message: string) => void,
+  onTrack: (track: MusicTrack) => void
+) {
+  let imported = 0;
+  let skipped = 0;
+  const failures: string[] = [];
+  const signatures = new Set(tracks.map((track) => track.signature));
+  for (const [index, file] of files.entries()) {
+    onProgress(`${index + 1}/${files.length}: ${file.name}`);
+    if (signatures.has(fileSignature(file))) {
+      skipped += 1;
+      continue;
+    }
+    try {
+      // oxlint-disable-next-line no-await-in-loop -- Process one MP3 at a time to bound import memory.
+      const { track, artwork } = await readMusicFile(file);
+      // oxlint-disable-next-line no-await-in-loop -- Commit this file before loading another MP3.
+      await saveTrack(track, file, artwork);
+      signatures.add(track.signature);
+      onTrack(track);
+      imported += 1;
+    } catch (error) {
+      let reason = "Import failed.";
+      if (error instanceof Error) {
+        reason = error.message;
+      }
+      if (
+        error instanceof DOMException &&
+        error.name === "QuotaExceededError"
+      ) {
+        reason = "Not enough device storage.";
+      }
+      failures.push(`${file.name}: ${reason}`);
+    }
+  }
+  return {
+    imported,
+    notice: `${imported} imported${skipped ? `, ${skipped} duplicates skipped` : ""}.`,
+    error: failures.length ? failures.join(" ") : null,
   };
 }
