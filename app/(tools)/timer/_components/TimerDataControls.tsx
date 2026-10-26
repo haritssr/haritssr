@@ -12,7 +12,7 @@ import { timerDate } from "@/app/(tools)/timer/utils/timer";
 import Button from "@/components/Button";
 
 const BACKUP_ACTION_CLASS =
-  "border-border text-muted hover:bg-foreground/5 focus-visible:outline-foreground relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center border px-2 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-md last:rounded-r-md focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 motion-reduce:transition-none";
+  "border-border text-foreground hover:bg-foreground/5 focus-visible:outline-foreground relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center border px-2 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-md last:rounded-r-md focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 motion-reduce:transition-none";
 
 async function exportData() {
   const response = await fetch("/api/timer?backup=1", { cache: "no-store" });
@@ -152,7 +152,7 @@ export default function TimerDataControls({
           >
             <ArrowDownTrayIcon
               aria-hidden="true"
-              className="size-4.5"
+              className="size-4.5 stroke-2"
             />
           </BaseButton>
           <BaseButton
@@ -164,7 +164,7 @@ export default function TimerDataControls({
             }}
             title="Import"
           >
-            <ArrowUpTrayIcon aria-hidden="true" className="size-4.5" />
+            <ArrowUpTrayIcon aria-hidden="true" className="size-4.5 stroke-2" />
           </BaseButton>
         </div>
       )}
