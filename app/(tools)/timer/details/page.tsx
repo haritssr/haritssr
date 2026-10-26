@@ -321,9 +321,10 @@ export default function TimerDetailsPage() {
         >
           <ExplanationList>
             <li>
-              Clock has a Sound checkbox beside its title for a quartz tick each
-              second, without a running task. It starts off, pauses while the
-              page is hidden, and stops when you leave Clock.
+              Select the clock in the Timer header to open the full clock. Its
+              Sound checkbox adds a quartz tick each second without a running
+              task. It starts off, pauses while the page is hidden, and stops
+              when you leave Clock.
             </li>
             <li>
               Ticking plays once per real second while tasks run. It defaults

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { TimerContent } from "@/app/(tools)/timer/_components/TimerProvider";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -23,7 +25,17 @@ export default function TimerPage() {
       <PageHeader
         back={{ href: "/", name: "Home" }}
         path="/timer"
-        aside={<AnalogClock className="size-24 sm:size-32" />}
+        aside={
+          <Link
+            aria-label="Open the full clock"
+            className="focus-visible:outline-action block w-fit rounded-full focus-visible:outline-2 focus-visible:outline-offset-4"
+            href="/timer/clock"
+            prefetch={false}
+            title="Open clock"
+          >
+            <AnalogClock className="size-24 sm:size-32" />
+          </Link>
+        }
       >
         <PageTitle>Timer</PageTitle>
         <PageDescription>
@@ -36,7 +48,6 @@ export default function TimerPage() {
         <nav aria-label="Timer" className="flex flex-wrap gap-3">
           <InternalLink href="/timer/details">Details</InternalLink>
           <InternalLink href="/timer/statistic">Statistics</InternalLink>
-          <InternalLink href="/timer/clock">Clock</InternalLink>
         </nav>
       </PageHeader>
       <TimerContent>
