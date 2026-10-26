@@ -549,6 +549,10 @@ before the document; failed refreshes preserve the last complete shell.
 - Offline readiness appears only after preparation succeeds; initial setup needs
   connectivity, service-worker support, and retained browser storage.
 
+`public/sw.js` remains a standalone classic worker with focused lifecycle,
+notification, Music preparation/status, asset, and navigation handlers. Cache
+names, the Music message protocol, and offline safeguards remain unchanged.
+
 ## Lab implementation notes
 
 Plain Contents labels avoid KaTeX; mathematical labels load their renderer

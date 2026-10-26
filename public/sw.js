@@ -1,57 +1,48 @@
 const CACHE_NAME = "haritssr-offline-v4";
 const OFFLINE_URL = "/offline.html";
 const OWNED_PREFIXES = ["haritssr-shell-", "haritssr-offline-"];
+const MUSIC_URL = "/music";
+const ASSET_DOWNLOAD_LIMIT = 4;
+const FETCH_TIMEOUT_MS = 20_000;
 
-self.addEventListener("notificationclick", (event) => {
-  if (!event.notification.tag.startsWith("timer-")) {
-    return;
+const openTimer = async () => {
+  const clients = await self.clients.matchAll({
+    type: "window",
+    includeUncontrolled: true,
+  });
+  const timer = clients.find(
+    (client) => new URL(client.url).pathname === "/timer"
+  );
+  await (timer ? timer.focus() : self.clients.openWindow("/timer"));
+};
+
+const installOfflineFallback = async () => {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.add(OFFLINE_URL);
+  } catch {
+    // Cache storage is optional; the worker also has a plain-text fallback.
   }
-  event.notification.close();
-  event.waitUntil(
-    self.clients
-      .matchAll({ type: "window", includeUncontrolled: true })
-      .then(async (clients) => {
-        const timer = clients.find(
-          (client) => new URL(client.url).pathname === "/timer"
-        );
-        await (timer ? timer.focus() : self.clients.openWindow("/timer"));
-      })
-  );
-});
+  await self.skipWaiting();
+};
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then((cache) => cache.add(OFFLINE_URL))
-      .catch(() => {
-        // Cache storage is optional; the worker also has a plain-text fallback.
-      })
-      .then(() => self.skipWaiting())
-  );
-});
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches
-      .keys()
-      .then((names) =>
-        Promise.all(
-          names
-            .filter(
-              (name) =>
-                name !== CACHE_NAME &&
-                OWNED_PREFIXES.some((prefix) => name.startsWith(prefix))
-            )
-            .map((name) => caches.delete(name))
+const activateOfflineFallback = async () => {
+  try {
+    const names = await caches.keys();
+    await Promise.all(
+      names
+        .filter(
+          (name) =>
+            name !== CACHE_NAME &&
+            OWNED_PREFIXES.some((prefix) => name.startsWith(prefix))
         )
-      )
-      .catch(() => {
-        // Cache storage is optional; the worker also has a plain-text fallback.
-      })
-      .then(() => self.clients.claim())
-  );
-});
+        .map((name) => caches.delete(name))
+    );
+  } catch {
+    // Cache storage is optional; the worker also has a plain-text fallback.
+  }
+  await self.clients.claim();
+};
 
 const offlineResponse = async () => {
   try {
@@ -75,13 +66,13 @@ const offlineResponse = async () => {
 const MUSIC_CACHE = "haritssr-music-v1";
 let musicPreparation;
 
-const immutableAsset = (response) =>
+const isImmutableAsset = (response) =>
   response.ok &&
   /(?:^|,)\s*immutable\s*(?:,|$)/i.test(
     response.headers.get("cache-control") ?? ""
   );
 
-const musicAsset = (value) => {
+const musicAssetUrl = (value) => {
   try {
     const url = new URL(value, self.location.origin);
     return url.origin === self.location.origin &&
@@ -94,10 +85,10 @@ const musicAsset = (value) => {
 };
 
 const cacheMusicShell = async (assets) => {
-  const response = await fetch("/music", {
+  const response = await fetch(MUSIC_URL, {
     credentials: "omit",
     cache: "no-cache",
-    signal: AbortSignal.timeout(20_000),
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
   if (
     !response.ok ||
@@ -111,7 +102,7 @@ const cacheMusicShell = async (assets) => {
     (match) => match[0].replaceAll("&amp;", "&")
   );
   const urls = [
-    ...new Set([...assets, ...embedded].map(musicAsset).filter(Boolean)),
+    ...new Set([...assets, ...embedded].map(musicAssetUrl).filter(Boolean)),
   ];
   if (!urls.length) {
     throw new Error("Music assets are unavailable.");
@@ -119,130 +110,148 @@ const cacheMusicShell = async (assets) => {
   const cache = await caches.open(MUSIC_CACHE);
   // Bound concurrent downloads on small devices. Commit the document last so a
   // failed update never replaces the previous complete offline shell.
-  for (let index = 0; index < urls.length; index += 4) {
+  for (let index = 0; index < urls.length; index += ASSET_DOWNLOAD_LIMIT) {
     // oxlint-disable-next-line no-await-in-loop -- Limit concurrent asset downloads on small devices.
     await Promise.all(
-      urls.slice(index, index + 4).map(async (url) => {
+      urls.slice(index, index + ASSET_DOWNLOAD_LIMIT).map(async (url) => {
         const saved = await cache.match(url);
-        if (saved && immutableAsset(saved)) {
+        if (saved && isImmutableAsset(saved)) {
           return;
         }
         const asset = await fetch(url, {
           credentials: "omit",
-          signal: AbortSignal.timeout(20_000),
+          signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
         });
-        if (!immutableAsset(asset)) {
+        if (!isImmutableAsset(asset)) {
           throw new Error("Music asset is unavailable or not immutable.");
         }
         await cache.put(url, asset);
       })
     );
   }
-  await cache.put("/music", response);
+  await cache.put(MUSIC_URL, response);
 };
+
+const prepareMusicOffline = async (assets) => {
+  // Serialize updates so two tabs cannot publish mismatched document/assets.
+  musicPreparation = Promise.resolve(musicPreparation)
+    .catch(() => {
+      // A failed earlier preparation must not block the next attempt.
+    })
+    .then(async () => {
+      await cacheMusicShell(assets);
+    });
+  await musicPreparation;
+};
+
+const handleMusicMessage = async (event) => {
+  try {
+    if (event.data.type === "music-offline-prepare") {
+      const assets = Array.isArray(event.data.assets)
+        ? event.data.assets.filter((asset) => typeof asset === "string")
+        : [];
+      await prepareMusicOffline(assets);
+    }
+  } catch {
+    // A previously prepared shell is still usable if a refresh fails.
+  }
+  try {
+    const cache = await caches.open(MUSIC_CACHE);
+    event.ports[0]?.postMessage({
+      ready: Boolean(await cache.match(MUSIC_URL)),
+    });
+  } catch {
+    event.ports[0]?.postMessage({ ready: false });
+  }
+};
+
+const serveMusicAsset = async (request, clientId) => {
+  try {
+    const cache = await caches.open(MUSIC_CACHE);
+    const saved = await cache.match(request);
+    if (saved && isImmutableAsset(saved)) {
+      return saved;
+    }
+    if (saved) {
+      await cache.delete(request);
+    }
+  } catch {
+    /* Network remains available when cache storage is blocked. */
+  }
+  const response = await fetch(request);
+  const client = clientId ? await self.clients.get(clientId) : null;
+  if (
+    isImmutableAsset(response) &&
+    client &&
+    new URL(client.url).pathname === MUSIC_URL
+  ) {
+    try {
+      const cache = await caches.open(MUSIC_CACHE);
+      await cache.put(request, response.clone());
+    } catch {
+      /* Offline preparation reports cache failures separately. */
+    }
+  }
+  return response;
+};
+
+const serveNavigation = async (request, pathname) =>
+  await fetch(request).catch(async () => {
+    if (pathname === MUSIC_URL) {
+      try {
+        const cache = await caches.open(MUSIC_CACHE);
+        const saved = await cache.match(MUSIC_URL);
+        if (saved) {
+          return saved;
+        }
+      } catch {
+        /* Use the generic offline fallback when Music is not prepared. */
+      }
+    }
+    return await offlineResponse();
+  });
+
+self.addEventListener("notificationclick", (event) => {
+  if (!event.notification.tag.startsWith("timer-")) {
+    return;
+  }
+  event.notification.close();
+  event.waitUntil(openTimer());
+});
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(installOfflineFallback());
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(activateOfflineFallback());
+});
 
 self.addEventListener("message", (event) => {
   if (
-    event.data?.type !== "music-offline-prepare" &&
-    event.data?.type !== "music-offline-status"
+    event.data?.type === "music-offline-prepare" ||
+    event.data?.type === "music-offline-status"
   ) {
-    return;
+    event.waitUntil(handleMusicMessage(event));
   }
-  event.waitUntil(
-    (async () => {
-      try {
-        if (event.data.type === "music-offline-prepare") {
-          const assets = Array.isArray(event.data.assets)
-            ? event.data.assets.filter((asset) => typeof asset === "string")
-            : [];
-          // Serialize updates so two tabs cannot publish mismatched document/assets.
-          musicPreparation = Promise.resolve(musicPreparation)
-            .catch(() => {
-              // A failed earlier preparation must not block the next attempt.
-            })
-            .then(async () => {
-              await cacheMusicShell(assets);
-            });
-          await musicPreparation;
-        }
-      } catch {
-        // A previously prepared shell is still usable if a refresh fails.
-      }
-      try {
-        const cache = await caches.open(MUSIC_CACHE);
-        event.ports[0]?.postMessage({
-          ready: Boolean(await cache.match("/music")),
-        });
-      } catch {
-        event.ports[0]?.postMessage({ ready: false });
-      }
-    })()
-  );
 });
 
 self.addEventListener("fetch", (event) => {
-  const url = new URL(event.request.url);
+  const { request } = event;
+  const url = new URL(request.url);
   if (
-    event.request.method !== "GET" ||
+    request.method !== "GET" ||
     url.origin !== self.location.origin ||
     url.pathname.startsWith("/api/")
   ) {
     return;
   }
-  if (musicAsset(url.href)) {
-    event.respondWith(
-      (async () => {
-        try {
-          const cache = await caches.open(MUSIC_CACHE);
-          const saved = await cache.match(event.request);
-          if (saved && immutableAsset(saved)) {
-            return saved;
-          }
-          if (saved) {
-            await cache.delete(event.request);
-          }
-        } catch {
-          /* Network remains available when cache storage is blocked. */
-        }
-        const response = await fetch(event.request);
-        const client = event.clientId
-          ? await self.clients.get(event.clientId)
-          : null;
-        if (
-          immutableAsset(response) &&
-          client &&
-          new URL(client.url).pathname === "/music"
-        ) {
-          try {
-            const cache = await caches.open(MUSIC_CACHE);
-            await cache.put(event.request, response.clone());
-          } catch {
-            /* Offline preparation reports cache failures separately. */
-          }
-        }
-        return response;
-      })()
-    );
+  if (musicAssetUrl(url.href)) {
+    event.respondWith(serveMusicAsset(request, event.clientId));
     return;
   }
   // RSC, prefetch, and API requests never receive cached HTML documents.
-  if (event.request.mode !== "navigate") {
-    return;
+  if (request.mode === "navigate") {
+    event.respondWith(serveNavigation(request, url.pathname));
   }
-  event.respondWith(
-    fetch(event.request).catch(async () => {
-      if (url.pathname === "/music") {
-        try {
-          const cache = await caches.open(MUSIC_CACHE);
-          const saved = await cache.match("/music");
-          if (saved) {
-            return saved;
-          }
-        } catch {
-          /* Use the generic offline fallback when Music is not prepared. */
-        }
-      }
-      return await offlineResponse();
-    })
-  );
 });
