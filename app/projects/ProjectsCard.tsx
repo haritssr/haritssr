@@ -26,7 +26,7 @@ export default function ProjectsCard({
       className={`group corner-squircle border-border flex w-full flex-col justify-between overflow-hidden rounded-3xl border selection:mx-auto ${className ?? ""}`}
     >
       {/* Header + Title + Explanation */}
-      <div className="flex flex-col justify-between space-y-2 p-3.5">
+      <div className="flex flex-1 flex-col justify-between space-y-2 p-3.5 pb-2">
         <div className="flex items-center space-x-2">
           <Image
             alt=""
@@ -44,7 +44,7 @@ export default function ProjectsCard({
         <p className="text-foreground/70 leading-relaxed">{description}</p>
 
         {/* Site Link (Text Only) */}
-        <p>
+        <p className="border-border border-t border-dashed pt-2">
           <span className="text-muted text-base">
             {href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
           </span>
