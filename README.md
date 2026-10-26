@@ -275,6 +275,10 @@ Type `share` and press Enter to copy the current page URL (including its query
 and fragment); the same confirmation and clipboard behavior are shared with the
 top-bar Share button.
 
+The homepage Features section showcases Search, Contents, Share, Timer, RSS, and
+Install with decorative UI previews, stacked on mobile and in three columns on
+desktop. Previews are static and do not activate the features.
+
 The homepage profile card keeps contacts visible and collapses background and
 principles into a More accordion below 768px; desktop retains three columns.
 
