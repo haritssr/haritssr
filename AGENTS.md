@@ -238,7 +238,7 @@ Important content sources:
 | Writing and automatic MDX discovery | `app/writing/content/` |
 | Next.js posts demo | `app/labs/nextjs/posts/content/` |
 | Included songs | `app/music/data.ts` and `public/music/` |
-| Primary routes and navigation | `data/primaryRoutes.ts` and `data/navigation.ts` |
+| Primary routes and navigation | `data/topLevelNavigation.ts` and `data/navigation.ts` |
 | Commit history | Git and the separate Turso commits database |
 
 Other demos keep their data beside their implementation. Shared utilities are

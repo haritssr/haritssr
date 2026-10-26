@@ -1,4 +1,4 @@
-import { primaryRoutes } from "./primaryRoutes";
+import { topLevelNavigation } from "./topLevelNavigation";
 
 export interface RouteDoc {
   route: string;
@@ -134,7 +134,7 @@ export const navigationRoutes: readonly RouteDoc[] = [
     description: "A simple timer for focused work and everyday tasks.",
     group: "Tools",
   },
-  ...primaryRoutes.map((route) => ({
+  ...topLevelNavigation.map((route) => ({
     ...route,
     group: "Navigation",
     suggestion: "Navigation" as const,

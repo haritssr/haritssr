@@ -1,5 +1,5 @@
 // Shared text-only definitions keep navigation icons out of search metadata.
-export const primaryRoutes = [
+export const topLevelNavigation = [
   {
     route: "/",
     title: "Home",

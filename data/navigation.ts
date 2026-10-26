@@ -6,7 +6,9 @@ import {
   SquaresPlusIcon,
 } from "@heroicons/react/24/solid";
 
-import { primaryRoutes } from "./primaryRoutes";
+import { topLevelNavigation } from "./topLevelNavigation";
+
+type TopLevelRoute = (typeof topLevelNavigation)[number]["route"];
 
 const icons = {
   "/": HomeIcon,
@@ -14,9 +16,9 @@ const icons = {
   "/labs": BeakerIcon,
   "/writing": DocumentTextIcon,
   "/design": SquaresPlusIcon,
-};
+} satisfies Record<TopLevelRoute, typeof HomeIcon>;
 
-export const primaryNavigation = primaryRoutes.map(({ route, title }) => ({
+export const primaryNavigation = topLevelNavigation.map(({ route, title }) => ({
   title,
   href: route,
   icon: icons[route],

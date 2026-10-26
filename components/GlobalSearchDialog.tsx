@@ -14,7 +14,6 @@ import type { RefObject } from "react";
 import { useRef } from "react";
 
 import { useSharePageUrl } from "@/components/SharePageProvider";
-import { primaryRoutes } from "@/data/primaryRoutes";
 import type { RouteDoc } from "@/data/routes";
 import {
   commitsRoute,
@@ -23,6 +22,7 @@ import {
   navigationRoutes,
   searchRoutes,
 } from "@/data/routes";
+import { topLevelNavigation } from "@/data/topLevelNavigation";
 import {
   commandWords,
   matchesCommand,
@@ -69,7 +69,9 @@ interface SearchMatchTextProps {
 }
 
 const MAIN_ROUTES = new Set<string>(
-  primaryRoutes.filter(({ route }) => route !== "/").map(({ route }) => route)
+  topLevelNavigation
+    .filter(({ route }) => route !== "/")
+    .map(({ route }) => route)
 );
 
 const TOOL_ENTRIES = ["/timer", "/commits", "/tree", "/music", "/url"].flatMap(

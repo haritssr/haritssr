@@ -1,4 +1,8 @@
-import { primaryRoutes } from "@/data/primaryRoutes";
+import { topLevelNavigation } from "@/data/topLevelNavigation";
+
+const topLevelPaths = new Set<string>(
+  topLevelNavigation.map(({ route }) => route)
+);
 
 export function navigationCurrent(
   pathname: string,
@@ -18,6 +22,6 @@ export function showsMobileNavigation(pathname: string): boolean {
   return (
     segments.length <= 2 &&
     !(segments[0] === "writing" && segments.length > 1) &&
-    primaryRoutes.some(({ route }) => route === sectionPath)
+    topLevelPaths.has(sectionPath)
   );
 }
