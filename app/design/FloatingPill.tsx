@@ -9,7 +9,7 @@ import Button from "@/components/Button";
 
 export default function FloatingPill() {
   return (
-    <div className="border-foreground/10 bg-background/70 shadow-foreground/10 mx-auto flex min-h-[3.3125rem] w-full max-w-[22.4rem] items-center gap-2 rounded-full border py-2 pr-2 pl-3 shadow-lg backdrop-blur-md [corner-shape:round]">
+    <div className="border-foreground/10 bg-background/70 shadow-foreground/10 mx-auto flex min-h-13.25 w-full max-w-[22.4rem] items-center gap-2 rounded-full border py-2 pr-2 pl-5 shadow-lg backdrop-blur-md [corner-shape:round]">
       <div className="min-w-0 flex-1 space-y-2 sm:space-y-1.5">
         <div className="flex min-w-0 items-center justify-between gap-2">
           <span className="text-foreground flex min-w-0 items-center gap-1 text-sm leading-4 font-medium">
