@@ -467,26 +467,14 @@ export default function DesignSystem() {
           </div>
 
           <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Accordion" title="Accordion">
-              <Accordion />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Checkbox" title="Checkbox">
-              <Checkbox />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
             <Box name="Tooltip" title="Tooltip">
               <Tooltip />
             </Box>
           </div>
 
           <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="NumberInput" title="Input: Number">
-              <NumberInput />
+            <Box name="Modal" title="Modal">
+              <Modal />
             </Box>
           </div>
 
@@ -495,8 +483,20 @@ export default function DesignSystem() {
           </div>
 
           <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Modal" title="Modal">
-              <Modal />
+            <Box name="Accordion" title="Accordion">
+              <Accordion />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <Box name="Checkbox" title="Checkbox">
+              <Checkbox />
+            </Box>
+          </div>
+
+          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <Box name="NumberInput" title="Input: Number">
+              <NumberInput />
             </Box>
           </div>
 
@@ -510,19 +510,9 @@ export default function DesignSystem() {
                 <Button disabled variant="secondary">
                   Disabled
                 </Button>
+                <ButtonIconOnly />
+                <ButtonWithIcon />
               </div>
-            </Box>
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Button" title="Button: With Icon">
-              <ButtonWithIcon />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Button" title="Button: Only Icon">
-              <ButtonIconOnly />
             </Box>
           </div>
 

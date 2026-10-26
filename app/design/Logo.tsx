@@ -19,19 +19,21 @@ export default function Logo() {
   return (
     <div className="grid grid-cols-2 gap-5">
       {LOGOS.map((logo) => (
-        <div className="space-y-2 text-center" key={logo.name}>
+        <div className="flex items-center gap-3" key={logo.name}>
           <Image
             alt={logo.alt}
-            className="mx-auto h-10 w-10"
+            className="h-10 w-10 shrink-0"
             height={40}
             src={logo.src}
             width={40}
           />
           <div className="flex flex-col">
-            <span className="text-foreground/90 text-sm sm:text-base">
+            <span className="text-foreground/90 text-sm leading-tight sm:text-base sm:leading-tight">
               {logo.name}
             </span>
-            <span className="text-muted text-sm sm:text-base">{logo.url}</span>
+            <span className="text-muted text-sm leading-tight sm:text-base sm:leading-tight">
+              {logo.url}
+            </span>
           </div>
         </div>
       ))}

@@ -56,10 +56,6 @@ const DESIGN_TOKENS = [
     definition: "#fafafa",
   },
   {
-    name: "switch-active",
-    definition: "zinc-600",
-  },
-  {
     name: "slider-thumb",
     definition: "#fafafa",
   },
@@ -68,8 +64,16 @@ const DESIGN_TOKENS = [
     definition: "#fcfcfc",
   },
   {
-    name: "foreground",
-    definition: "zinc-800",
+    name: "surface-hover",
+    definition: "zinc-50",
+  },
+  {
+    name: "interface-hover",
+    definition: "zinc-100",
+  },
+  {
+    name: "middle-hover",
+    definition: "zinc-200",
   },
   {
     name: "border",
@@ -80,8 +84,13 @@ const DESIGN_TOKENS = [
     definition: "zinc-400",
   },
   {
-    name: "surface-hover",
-    definition: "zinc-50",
+    name: "searchicon-hover",
+    label: "search-hover",
+    definition: "zinc-500",
+  },
+  {
+    name: "switch-active",
+    definition: "zinc-600",
   },
   {
     name: "secondary-foreground",
@@ -94,17 +103,8 @@ const DESIGN_TOKENS = [
     definition: "zinc-700",
   },
   {
-    name: "interface-hover",
-    definition: "zinc-100",
-  },
-  {
-    name: "middle-hover",
-    definition: "zinc-200",
-  },
-  {
-    name: "searchicon-hover",
-    label: "search-hover",
-    definition: "zinc-500",
+    name: "foreground",
+    definition: "zinc-800",
   },
 ];
 
