@@ -48,7 +48,7 @@ export default function Slider({
           <BaseSlider.Thumb
             aria-label={label}
             aria-valuetext={valueText}
-            className="interactive-elevation has-focus-visible:outline-action border-border hover:border-action-hover bg-slider-thumb data-dragging:border-action data-dragging:ring-action/20 block h-5 w-5 cursor-pointer rounded-full border outline-hidden has-focus-visible:outline-2 data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:ring-4 motion-safe:transition-[scale,box-shadow,border-color] motion-safe:duration-150"
+            className="interactive-elevation has-focus-visible:outline-action border-border hover:border-action-hover data-dragging:border-action data-dragging:ring-action/20 bg-surface block h-5 w-5 cursor-pointer rounded-full border outline-hidden has-focus-visible:outline-2 data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:ring-4 motion-safe:transition-[scale,box-shadow,border-color] motion-safe:duration-150"
           />
         </BaseSlider.Track>
       </BaseSlider.Control>

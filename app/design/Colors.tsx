@@ -2,14 +2,6 @@ import type { CSSProperties } from "react";
 
 const DESIGN_TOKENS = [
   {
-    name: "white",
-    definition: "#fafafa",
-  },
-  {
-    name: "black",
-    definition: "#18181b",
-  },
-  {
     name: "action",
     definition: "blue-600/60 + blue-500/40",
   },
@@ -26,10 +18,6 @@ const DESIGN_TOKENS = [
     name: "contact-accent",
     label: "contact",
     definition: "emerald-600/80 + emerald-500/20",
-  },
-  {
-    name: "muted",
-    definition: "foreground/70 + background/30",
   },
   {
     name: "success",
@@ -49,14 +37,6 @@ const DESIGN_TOKENS = [
   },
   {
     name: "surface",
-    definition: "white",
-  },
-  {
-    name: "switch-thumb",
-    definition: "#fafafa",
-  },
-  {
-    name: "slider-thumb",
     definition: "#fafafa",
   },
   {
@@ -89,6 +69,10 @@ const DESIGN_TOKENS = [
     definition: "zinc-500",
   },
   {
+    name: "muted",
+    definition: "foreground/70 + background/30",
+  },
+  {
     name: "switch-active",
     definition: "zinc-600",
   },
@@ -105,6 +89,10 @@ const DESIGN_TOKENS = [
   {
     name: "foreground",
     definition: "zinc-800",
+  },
+  {
+    name: "black",
+    definition: "#18181b",
   },
 ];
 
