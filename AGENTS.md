@@ -147,6 +147,11 @@ Apply these defaults to new or refactored labs in every domain:
 
 # Content and Routes
 
+- Every tool must have a Details page with these sections:
+  - **Logics**: The axioms, rules, constraints, and design principles governing
+    the tool's behavior.
+  - **How this works**: A Pele diagram showing how related components connect
+    and how data flows between them.
 - Never add redirect rules in `next.config.ts`. Do not automatically add
   redirects when renaming routes; legacy URL aliases are intentionally absent.
 - Lab routes are literal folders. Register title, description, tags,
