@@ -15,6 +15,11 @@ const DESIGN_TOKENS = [
     definition: "purple-500",
   },
   {
+    name: "contact-accent",
+    label: "contact",
+    definition: "emerald-600/80 + emerald-500/20",
+  },
+  {
     name: "success",
     definition: "green-500/60 + green-600/40",
   },

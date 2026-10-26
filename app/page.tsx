@@ -283,7 +283,7 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span className="text-success-hover" key={`u-${text.indexOf(chunk)}`}>
+        <span className="text-contact-accent" key={`u-${text.indexOf(chunk)}`}>
           {siteName}
         </span>
       ) : (
