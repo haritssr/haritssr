@@ -14,6 +14,7 @@ type ButtonVariant =
   | "neutral-subtle-underlined"
   | "secondary-strong"
   | "outline"
+  | "outline-interactive"
   | "outline-regular"
   | "action-outline-regular"
   | "action-outline"
@@ -22,12 +23,15 @@ type ButtonVariant =
   | "timer-running"
   | "music"
   | "secondary"
-  | "success-subtle";
+  | "success-subtle"
+  | "theme-fill";
 
 const BUTTON_BASE_CLASS =
   "inline-flex cursor-pointer items-center justify-center gap-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
+  "theme-fill":
+    "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
   "timer-running":
     "border border-transparent bg-timer-running font-medium text-white hover:bg-timer-running/90 focus-visible:outline-timer-running",
   music:
@@ -57,6 +61,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-foreground",
   outline:
     "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
+  "outline-interactive":
+    "border-border text-foreground border bg-transparent font-medium transition-[color,border-color,background-color,transform] duration-150 enabled:hover:bg-foreground/5 focus:border-foreground focus-visible:outline-foreground active:scale-95 active:border-foreground motion-reduce:transition-none",
   "action-outline":
     "border border-action bg-surface font-medium text-action transition-colors duration-150 enabled:hover:bg-action/10 focus-visible:outline-action",
   "outline-regular":
@@ -79,6 +85,7 @@ const BUTTON_SIZE_CLASS = {
   "icon-circle-large":
     "size-11 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
   "icon-large": "size-10 shrink-0 rounded-md p-2",
+  "icon-compact": "size-7 shrink-0 rounded-md p-1",
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
   default: "rounded-md px-3 py-1.5",
   "mobile-roomy": "rounded-md px-3 py-2 sm:py-1.5",
@@ -111,7 +118,7 @@ const Button = function Button({
     <button
       {...props}
       aria-busy={loading}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" ? "rounded-lg p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
+      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" && size !== "icon-compact" ? "rounded-lg p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
       disabled={disabled === true || loading}
       ref={ref}
       type={type}
