@@ -4,6 +4,14 @@ export const implementationFiles = [
     "Timer page header, introduction, and navigation.",
   ],
   [
+    "app/timer/clock/page.tsx",
+    "Full-page Jakarta clock and Sound control.",
+  ],
+  [
+    "app/timer/clock/ClockSound.tsx",
+    "Clock-only Sound checkbox and visible-page, second-aligned quartz ticking.",
+  ],
+  [
     "app/timer/TimerClient.tsx",
     "Page composition: Today, toolbar, feedback, and task collection.",
   ],

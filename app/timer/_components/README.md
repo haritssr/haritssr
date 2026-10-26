@@ -7,6 +7,7 @@ run inside its `use client` boundary.
 | Change | File |
 | --- | --- |
 | Header analog clock, ticking once per second in WIB | [AnalogClock.tsx](AnalogClock.tsx) |
+| Full-page Clock Sound checkbox and quartz ticks | [ClockSound.tsx](../clock/ClockSound.tsx) |
 | Notification, Autoplay, Multitask, and Sound toggles; Multitask confirmation | [TimerToolbar.tsx](TimerToolbar.tsx) |
 | Export/Import, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
