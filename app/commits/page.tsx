@@ -38,8 +38,7 @@ export default async function CommitsPage() {
         <PageTitle>{commitsRoute.title}</PageTitle>
         <PageDescription>
           {new Intl.NumberFormat("en-US").format(count)} commits and counting,
-          from {formatDay(firstDay)} to {formatDay(lastDay)} · Jakarta time
-          (WIB)
+          from {formatDay(firstDay)} to {formatDay(lastDay)} · UTC+7
         </PageDescription>
         <nav aria-label="Changelog" className="flex flex-wrap gap-3">
           <InternalLink href={commitsDetailsRoute.route}>
