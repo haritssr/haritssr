@@ -36,6 +36,7 @@ import Switch from "./Switch";
 import Table from "./Table";
 import Tabs from "./Tabs";
 import Toast from "./Toast";
+import ToggleList from "./ToggleList";
 import Tooltip from "./Tooltip";
 
 export const metadata = createPageMetadata({
@@ -414,275 +415,289 @@ export default function DesignSystem() {
           </Box>
         </Section>
 
-        <Section
-          title="UI Components"
-          contentClassName="grid grid-cols-1 md:grid-cols-2"
-        >
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="IndexCard" title="Index Card">
-              <div className="grid gap-3.5 sm:grid-cols-2">
-                <IndexCard
-                  title="Writing"
-                  description="Notes and ideas I want to share."
-                  href="/writing"
-                  count={18}
-                  countLabel="writing posts"
-                  icon={
-                    <DocumentTextIcon
-                      aria-hidden="true"
-                      className="text-foreground size-4.5 shrink-0"
-                      strokeWidth={1.5}
-                    />
-                  }
-                  headingLevel={3}
-                />
-                <IndexCard
-                  title="Labs"
-                  description="Experiments and interactive explorations."
-                  href="/labs"
-                  count={18}
-                  countLabel="labs"
-                  icon={
-                    <DocumentTextIcon
-                      aria-hidden="true"
-                      className="text-foreground size-4.5 shrink-0"
-                      strokeWidth={1.5}
-                    />
-                  }
-                  headingLevel={3}
-                />
-              </div>
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Table" title="Table">
-              <Table />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Switch" title="Switch">
-              <Switch />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Tooltip" title="Tooltip">
-              <Tooltip />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Modal" title="Modal">
-              <Modal />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Toast />
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Accordion" title="Accordion">
-              <Accordion />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Checkbox" title="Checkbox">
-              <Checkbox />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
-            <Box name="NumberInput" title="Input: Number">
-              <NumberInput />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
-            <Box name="Button" title="Buttons">
-              <div className="flex flex-wrap items-center gap-3">
-                <Button variant="primary">Primary</Button>
-                <Button variant="secondary">Secondary</Button>
-                <LoadingButton />
-                <Button variant="danger">Danger</Button>
-                <Button disabled variant="secondary">
-                  Disabled
-                </Button>
-                <ButtonIconOnly />
-                <ButtonWithIcon />
-              </div>
-            </Box>
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="InternalLink" title="Internal Link">
-              <div className="space-y-2">
-                <div>
-                  <InternalLink href="/">Internal Link</InternalLink>
+        <Section title="UI Components">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 pt-0 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:top-0 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="IndexCard" title="Index Card">
+                <div className="grid gap-3.5 sm:grid-cols-2">
+                  <IndexCard
+                    title="Writing"
+                    description="Notes and ideas I want to share."
+                    href="/writing"
+                    count={18}
+                    countLabel="writing posts"
+                    icon={
+                      <DocumentTextIcon
+                        aria-hidden="true"
+                        className="text-foreground size-4.5 shrink-0"
+                        strokeWidth={1.5}
+                      />
+                    }
+                    headingLevel={3}
+                  />
+                  <IndexCard
+                    title="Labs"
+                    description="Experiments and interactive explorations."
+                    href="/labs"
+                    count={18}
+                    countLabel="labs"
+                    icon={
+                      <DocumentTextIcon
+                        aria-hidden="true"
+                        className="text-foreground size-4.5 shrink-0"
+                        strokeWidth={1.5}
+                      />
+                    }
+                    headingLevel={3}
+                  />
                 </div>
-                <div>
-                  <InternalLink href="/" variant="inline">
-                    Internal Link Without Arrow
-                  </InternalLink>
-                </div>
-                <div className="text-sm">
-                  <InternalLink href="/api" variant="footer">
-                    API
-                  </InternalLink>
-                </div>
-              </div>
-            </Box>
-          </div>
+              </Box>
+            </div>
 
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="ExternalLink" title="External Link">
-              <div className="flex flex-col items-start gap-2">
-                <ExternalLink
-                  href="https://www.harislab.com"
-                  name="External Link"
-                />
-                <ExternalLink
-                  href="https://www.harislab.com"
-                  name="External Link Without Arrow"
-                  showArrow={false}
-                />
-              </div>
-            </Box>
-          </div>
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pt-0 md:pl-5 [&>div]:flex-1">
+              <Box name="Table" title="Table">
+                <Table />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box title="Input: Text">
-              <label className="block w-full sm:max-w-xs">
-                <span className="sr-only">Text input</span>
-                <input
+            <div className="grid min-w-0 grid-cols-1 md:col-span-2 md:grid-cols-2 lg:grid-cols-4">
+              <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed lg:pr-3 [&>div]:flex-1">
+                <Box name="Switch" title="Switch">
+                  <Switch />
+                </Box>
+              </div>
+
+              <div className="border-border-hover lg:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 lg:px-3 lg:after:absolute lg:after:inset-y-5 lg:after:right-0 lg:after:border-r lg:after:border-dashed [&>div]:flex-1">
+                <Box name="Tooltip" title="Tooltip">
+                  <Tooltip />
+                </Box>
+              </div>
+
+              <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed lg:px-3 [&>div]:flex-1">
+                <Box name="Modal" title="Modal">
+                  <Modal />
+                </Box>
+              </div>
+
+              <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 lg:pl-3 [&>div]:flex-1">
+                <Toast />
+              </div>
+            </div>
+
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="Checkbox" title="Checkbox">
+                <Checkbox />
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box name="NumberInput" title="Input: Number">
+                <NumberInput />
+              </Box>
+            </div>
+
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="Accordion" title="Accordion">
+                <Accordion />
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box name="SelectField" title="Select">
+                <Select />
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+              <Box name="ToggleList" title="Toggle list">
+                <ToggleList />
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+              <Box name="FloatingPill" title="Floating Pill">
+                <FloatingPill />
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+              <Box name="Button" title="Buttons">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button variant="primary">Primary</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <LoadingButton />
+                  <Button variant="danger">Danger</Button>
+                  <Button disabled variant="secondary">
+                    Disabled
+                  </Button>
+                  <ButtonIconOnly />
+                  <ButtonWithIcon />
+                </div>
+              </Box>
+            </div>
+
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="InternalLink" title="Internal Link">
+                <div className="space-y-2">
+                  <div>
+                    <InternalLink href="/">Internal Link</InternalLink>
+                  </div>
+                  <div>
+                    <InternalLink href="/" variant="inline">
+                      Internal Link Without Arrow
+                    </InternalLink>
+                  </div>
+                  <div className="text-sm">
+                    <InternalLink href="/api" variant="footer">
+                      API
+                    </InternalLink>
+                  </div>
+                </div>
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box name="ExternalLink" title="External Link">
+                <div className="flex flex-col items-start gap-2">
+                  <ExternalLink
+                    href="https://www.harislab.com"
+                    name="External Link"
+                  />
+                  <ExternalLink
+                    href="https://www.harislab.com"
+                    name="External Link Without Arrow"
+                    showArrow={false}
+                  />
+                </div>
+              </Box>
+            </div>
+
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box title="Input: Text">
+                <label className="block w-full sm:max-w-xs">
+                  <span className="sr-only">Text input</span>
+                  <input
+                    className={FORM_CONTROL_CLASS_NAME}
+                    placeholder="Type something..."
+                    type="text"
+                  />
+                </label>
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box title="Input: Search">
+                <label className="relative block w-full sm:max-w-xs">
+                  <span className="sr-only">Search input</span>
+                  <MagnifyingGlassIcon
+                    aria-hidden="true"
+                    className="text-muted pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+                    strokeWidth={1.5}
+                  />
+                  <input
+                    className={`${FORM_CONTROL_CLASS_NAME} pl-9`}
+                    placeholder="Search"
+                    type="search"
+                  />
+                </label>
+              </Box>
+            </div>
+
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="Box" title="Box">
+                <ul className="grid gap-5 sm:grid-cols-2">
+                  <Box as="li" headingAs="h3" name="Box" title="Exercise title">
+                    <p>Use a heading and list item for exercise cards.</p>
+                  </Box>
+                  <Box
+                    as="li"
+                    headingAs="h3"
+                    name="Box"
+                    title="Another exercise"
+                  >
+                    <p>
+                      Cards stretch to the same height within each grid row.
+                    </p>
+                  </Box>
+                </ul>
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box title="Text Area">
+                <textarea
+                  aria-label="Text area example"
                   className={FORM_CONTROL_CLASS_NAME}
-                  placeholder="Type something..."
-                  type="text"
+                  placeholder="Write something here..."
+                  rows={3}
                 />
-              </label>
-            </Box>
-          </div>
+              </Box>
+            </div>
 
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box title="Input: Search">
-              <label className="relative block w-full sm:max-w-xs">
-                <span className="sr-only">Search input</span>
-                <MagnifyingGlassIcon
-                  aria-hidden="true"
-                  className="text-muted pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
-                  strokeWidth={1.5}
-                />
-                <input
-                  className={`${FORM_CONTROL_CLASS_NAME} pl-9`}
-                  placeholder="Search"
-                  type="search"
-                />
-              </label>
-            </Box>
-          </div>
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="Breadcrumbs" title="Breadcrumbs">
+                <Breadcrumbs />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Box" title="Box">
-              <ul className="grid gap-5 sm:grid-cols-2">
-                <Box as="li" headingAs="h3" name="Box" title="Exercise title">
-                  <p>Use a heading and list item for exercise cards.</p>
-                </Box>
-                <Box as="li" headingAs="h3" name="Box" title="Another exercise">
-                  <p>Cards stretch to the same height within each grid row.</p>
-                </Box>
-              </ul>
-            </Box>
-          </div>
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box name="Badges" title="Badges">
+                <Badges />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box title="Text Area">
-              <textarea
-                aria-label="Text area example"
-                className={FORM_CONTROL_CLASS_NAME}
-                placeholder="Write something here..."
-                rows={3}
-              />
-            </Box>
-          </div>
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="BackButton" title="Back Button">
+                <BackButton href="/labs" name="Labs" />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Breadcrumbs" title="Breadcrumbs">
-              <Breadcrumbs />
-            </Box>
-          </div>
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box name="Logo" title="Logo">
+                <Logo />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Badges" title="Badges">
-              <Badges />
-            </Box>
-          </div>
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="TabBarButtom" title="Bottom Navigation Capsule">
+                <TabBarButtom preview />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="BackButton" title="Back Button">
-              <BackButton href="/labs" name="Labs" />
-            </Box>
-          </div>
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box name="Slider" title="Slider">
+                <Slider />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="Logo" title="Logo">
-              <Logo />
-            </Box>
-          </div>
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+              <Box name="ContextMenu" title="Context Menus">
+                <ContextMenu />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="SelectField" title="Select">
-              <Select />
-            </Box>
-          </div>
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+              <Box name="Tabs" title="Tabs">
+                <Tabs />
+              </Box>
+            </div>
 
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="TabBarButtom" title="Bottom Navigation Capsule">
-              <TabBarButtom preview />
-            </Box>
-          </div>
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 [&>div]:flex-1">
+              <Box title="Input: Date">
+                <label className="block w-full sm:max-w-xs">
+                  <span className="text-foreground/80 mb-1 block text-sm font-medium">
+                    Choose a date
+                  </span>
+                  <input className={FORM_CONTROL_CLASS_NAME} type="date" />
+                </label>
+              </Box>
+            </div>
 
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Slider" title="Slider">
-              <Slider />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box name="ContextMenu" title="Context Menus">
-              <ContextMenu />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border md:after:border-border relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-            <Box name="Tabs" title="Tabs">
-              <Tabs />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
-            <Box title="Input: Date">
-              <label className="block w-full sm:max-w-xs">
-                <span className="text-foreground/80 mb-1 block text-sm font-medium">
-                  Choose a date
-                </span>
-                <input className={FORM_CONTROL_CLASS_NAME} type="date" />
-              </label>
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
-            <Box name="FloatingPill" title="Floating Pill">
-              <FloatingPill />
-            </Box>
-          </div>
-
-          <div className="bg-background border-border flex min-w-0 flex-col border-b border-b-0 border-dashed py-5 md:col-span-2 [&>div]:flex-1">
-            <Box name="Colors" title="Design Tokens">
-              <DesignTokens />
-            </Box>
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-b-0 border-dashed py-5 pb-0 md:col-span-2 [&>div]:flex-1">
+              <Box name="Colors" title="Design Tokens">
+                <DesignTokens />
+              </Box>
+            </div>
           </div>
         </Section>
       </div>
