@@ -6,6 +6,15 @@
   font-variation-settings: "GRAD" 150;
 }
 
+.row[data-show-title="true"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.row[data-show-title="true"] > :last-child {
+  justify-self: end;
+}
+
 .navigation[data-scrolled="true"]::before,
 .navigation[data-scrolled="true"]::after {
   position: absolute;
@@ -39,7 +48,6 @@
 
 @media (width < 640px) {
   .row[data-show-title="true"] {
-    display: grid;
     grid-template-columns: var(--topbar-side-width, 2.625rem) minmax(
         0,
         1fr
