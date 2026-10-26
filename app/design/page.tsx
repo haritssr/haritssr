@@ -396,7 +396,7 @@ export default function DesignSystem() {
               </p>
             </div>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+              {[1, 2, 3, 4].map((item) => (
                 <li
                   className="bg-interface-hover flex min-h-32 min-w-0 flex-col justify-between gap-5 rounded-lg p-5"
                   key={item}
