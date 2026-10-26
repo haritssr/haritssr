@@ -1,11 +1,24 @@
+import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Table from "@/components/Table";
+import ToggleList from "@/components/ToggleList";
+import type { ToggleListNode } from "@/components/ToggleList";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import { getRouteTree } from "./getRouteTree";
-import RouteTree from "./RouteTree";
+import type { RouteNode } from "./getRouteTree";
+
+function toToggleNode(node: RouteNode): ToggleListNode {
+  return {
+    id: node.path,
+    label: node.title,
+    href: node.href,
+    ...(node.children.length > 0 ? { count: node.children.length } : {}),
+    children: node.children.map(toToggleNode),
+  };
+}
 
 export const metadata = createPageMetadata({
   title: "Tree",
@@ -60,7 +73,14 @@ export default function TreePage() {
             ))}
           </tbody>
         </Table>
-        <RouteTree nodes={nodes} />
+        <nav aria-label="Site route tree">
+          <ToggleList
+            initialExpanded="none"
+            label="Site routes"
+            nodes={nodes.map(toToggleNode)}
+          />
+        </nav>
+        <InternalLink href="/tree/details">Details</InternalLink>
       </div>
     </>
   );

@@ -110,6 +110,12 @@ export const navigationRoutes: readonly RouteDoc[] = [
     group: "Tools",
   },
   {
+    route: "/tree/details",
+    title: "Details",
+    description: "How Tree organizes and displays the site's routes.",
+    group: "Tree",
+  },
+  {
     route: "/timer/details",
     title: "Details",
     description:
