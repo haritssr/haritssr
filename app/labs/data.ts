@@ -34,6 +34,31 @@ export interface LabDomain {
 
 export const LabsData: readonly LabDomain[] = [
   {
+    id: 18,
+    slug: "harimaki",
+    title: "Harimaki",
+    logoSrc: "/icons/harimaki.svg",
+    description: "Explore reference hierarchies for mathematics and physics.",
+    labs: [
+      {
+        slug: "matematika",
+        title: "Struktur Referensi — Matematika",
+        description: "Peta subjek, domain, bab, dan materi matematika.",
+        tags: ["harimaki", "mathematics", "reference", "hierarchy"],
+        createdAt: "2026-10-26",
+        updatedAt: [],
+      },
+      {
+        slug: "fisika",
+        title: "Struktur Referensi — Fisika",
+        description: "Peta subjek, domain, bab, dan materi fisika.",
+        tags: ["harimaki", "physics", "reference", "hierarchy"],
+        createdAt: "2026-10-26",
+        updatedAt: [],
+      },
+    ],
+  },
+  {
     description:
       "Explore layouts, spacing, and responsive styles with Tailwind.",
     labs: [

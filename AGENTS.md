@@ -416,7 +416,22 @@ Jakarta date/time columns.
 separate lifecycle, notification, preparation/status, asset, and navigation handlers;
 cache names and the Music message protocol stay stable.
 
+Tree builds its route hierarchy and analytics from the discovery manifest. The
+shared ToggleList displays route links and child counts with independent disclosure
+controls; branches start closed on Tree. See `/tree/details` for its rules and flow.
+
 ## Labs
+
+Harimaki reference labs live at `app/labs/harimaki/{matematika,fisika}/`.
+Each `reference.json` is a local snapshot of its named Notion source, preserving
+Indonesian labels and order. Update snapshots deliberately; there is no runtime
+Notion connection. `ReferencePage` derives hierarchy counts and renders editorial
+analysis above the tree. Shared `components/ToggleList.tsx` uses Base UI
+Collapsible for text-only nested lists, indentation guides, and Expand all /
+Collapse all controls; its example lives in `app/design/ToggleList.tsx`.
+The Diagram section derives the complete parent–child flowchart from the same
+snapshot through `referenceDiagram.ts`, rendered lazily by shared `FlowDiagram`
+with zoom, pan, and expanded view.
 
 Plain Contents labels avoid KaTeX; mathematical labels load it separately. Render
 fixed practice formulas on the server and load flow diagrams near the viewport.

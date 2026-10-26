@@ -1,0 +1,932 @@
+{
+  "source": "https://app.notion.com/p/3ca9ba5efe15812e9190c299064fac4f?pvs=204",
+  "sourceEditedAt": "2026-10-26T06:27:22.120Z",
+  "tree": {
+    "id": "matematika",
+    "label": "Subjek: Matematika",
+    "children": [
+      {
+        "id": "matematika-0",
+        "label": "Domain: Fondasi Matematika",
+        "children": [
+          {
+            "id": "matematika-0-0",
+            "label": "Bab: Logika Matematika",
+            "children": [
+              {
+                "id": "matematika-0-0-0",
+                "label": "Pernyataan dan Nilai Kebenaran"
+              },
+              {
+                "id": "matematika-0-0-1",
+                "label": "Negasi, Konjungsi, dan Disjungsi"
+              },
+              {
+                "id": "matematika-0-0-2",
+                "label": "Implikasi dan Biimplikasi"
+              },
+              {
+                "id": "matematika-0-0-3",
+                "label": "Tabel Kebenaran"
+              },
+              {
+                "id": "matematika-0-0-4",
+                "label": "Kuantor dan Negasinya"
+              },
+              {
+                "id": "matematika-0-0-5",
+                "label": "Penalaran Deduktif"
+              },
+              {
+                "id": "matematika-0-0-6",
+                "label": "Pengantar Pembuktian"
+              }
+            ]
+          },
+          {
+            "id": "matematika-0-1",
+            "label": "Bab: Himpunan",
+            "children": [
+              {
+                "id": "matematika-0-1-0",
+                "label": "Notasi dan Jenis Himpunan"
+              },
+              {
+                "id": "matematika-0-1-1",
+                "label": "Keanggotaan dan Himpunan Bagian"
+              },
+              {
+                "id": "matematika-0-1-2",
+                "label": "Operasi Himpunan"
+              },
+              {
+                "id": "matematika-0-1-3",
+                "label": "Diagram Venn"
+              },
+              {
+                "id": "matematika-0-1-4",
+                "label": "Kardinalitas Himpunan"
+              },
+              {
+                "id": "matematika-0-1-5",
+                "label": "Hasil Kali Kartesius"
+              },
+              {
+                "id": "matematika-0-1-6",
+                "label": "Himpunan Bilangan"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "matematika-1",
+        "label": "Domain: Bilangan dan Aritmetika",
+        "children": [
+          {
+            "id": "matematika-1-0",
+            "label": "Bab: Sistem Bilangan",
+            "children": [
+              {
+                "id": "matematika-1-0-0",
+                "label": "Bilangan Asli dan Cacah"
+              },
+              {
+                "id": "matematika-1-0-1",
+                "label": "Bilangan Bulat"
+              },
+              {
+                "id": "matematika-1-0-2",
+                "label": "Pecahan dan Bilangan Rasional"
+              },
+              {
+                "id": "matematika-1-0-3",
+                "label": "Bilangan Irasional"
+              },
+              {
+                "id": "matematika-1-0-4",
+                "label": "Bilangan Real"
+              },
+              {
+                "id": "matematika-1-0-5",
+                "label": "Garis Bilangan dan Interval"
+              },
+              {
+                "id": "matematika-1-0-6",
+                "label": "Nilai Mutlak"
+              }
+            ]
+          },
+          {
+            "id": "matematika-1-1",
+            "label": "Bab: Operasi dan Sifat Bilangan",
+            "children": [
+              {
+                "id": "matematika-1-1-0",
+                "label": "Urutan Operasi Hitung"
+              },
+              {
+                "id": "matematika-1-1-1",
+                "label": "Sifat Komutatif, Asosiatif, dan Distributif"
+              },
+              {
+                "id": "matematika-1-1-2",
+                "label": "Faktor Prima, FPB, dan KPK"
+              },
+              {
+                "id": "matematika-1-1-3",
+                "label": "Rasio dan Proporsi"
+              },
+              {
+                "id": "matematika-1-1-4",
+                "label": "Persentase"
+              },
+              {
+                "id": "matematika-1-1-5",
+                "label": "Pembulatan dan Estimasi"
+              },
+              {
+                "id": "matematika-1-1-6",
+                "label": "Notasi Ilmiah"
+              }
+            ]
+          },
+          {
+            "id": "matematika-1-2",
+            "label": "Bab: Barisan dan Deret",
+            "children": [
+              {
+                "id": "matematika-1-2-0",
+                "label": "Pola Bilangan"
+              },
+              {
+                "id": "matematika-1-2-1",
+                "label": "Barisan Aritmetika"
+              },
+              {
+                "id": "matematika-1-2-2",
+                "label": "Deret Aritmetika"
+              },
+              {
+                "id": "matematika-1-2-3",
+                "label": "Barisan Geometri"
+              },
+              {
+                "id": "matematika-1-2-4",
+                "label": "Deret Geometri Berhingga"
+              },
+              {
+                "id": "matematika-1-2-5",
+                "label": "Deret Geometri Tak Hingga"
+              },
+              {
+                "id": "matematika-1-2-6",
+                "label": "Notasi Sigma"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "matematika-2",
+        "label": "Domain: Aljabar",
+        "children": [
+          {
+            "id": "matematika-2-0",
+            "label": "Bab: Bentuk Aljabar",
+            "children": [
+              {
+                "id": "matematika-2-0-0",
+                "label": "Variabel, Konstanta, Koefisien, dan Suku"
+              },
+              {
+                "id": "matematika-2-0-1",
+                "label": "Operasi Bentuk Aljabar"
+              },
+              {
+                "id": "matematika-2-0-2",
+                "label": "Identitas Aljabar"
+              },
+              {
+                "id": "matematika-2-0-3",
+                "label": "Pemfaktoran"
+              },
+              {
+                "id": "matematika-2-0-4",
+                "label": "Pecahan Aljabar"
+              },
+              {
+                "id": "matematika-2-0-5",
+                "label": "Bentuk Akar"
+              }
+            ]
+          },
+          {
+            "id": "matematika-2-1",
+            "label": "Bab: Eksponen dan Logaritma",
+            "children": [
+              {
+                "id": "matematika-2-1-0",
+                "label": "Sifat-Sifat Eksponen"
+              },
+              {
+                "id": "matematika-2-1-1",
+                "label": "Persamaan Eksponen"
+              },
+              {
+                "id": "matematika-2-1-2",
+                "label": "Fungsi Eksponen"
+              },
+              {
+                "id": "matematika-2-1-3",
+                "label": "Definisi dan Sifat Logaritma"
+              },
+              {
+                "id": "matematika-2-1-4",
+                "label": "Persamaan Logaritma"
+              },
+              {
+                "id": "matematika-2-1-5",
+                "label": "Fungsi Logaritma"
+              },
+              {
+                "id": "matematika-2-1-6",
+                "label": "Pertumbuhan dan Peluruhan Eksponensial"
+              }
+            ]
+          },
+          {
+            "id": "matematika-2-2",
+            "label": "Bab: Persamaan dan Pertidaksamaan",
+            "children": [
+              {
+                "id": "matematika-2-2-0",
+                "label": "Persamaan Linear Satu Variabel"
+              },
+              {
+                "id": "matematika-2-2-1",
+                "label": "Pertidaksamaan Linear"
+              },
+              {
+                "id": "matematika-2-2-2",
+                "label": "Persamaan dan Pertidaksamaan Nilai Mutlak"
+              },
+              {
+                "id": "matematika-2-2-3",
+                "label": "Persamaan Kuadrat"
+              },
+              {
+                "id": "matematika-2-2-4",
+                "label": "Pertidaksamaan Kuadrat"
+              },
+              {
+                "id": "matematika-2-2-5",
+                "label": "Persamaan Rasional dan Irasional"
+              },
+              {
+                "id": "matematika-2-2-6",
+                "label": "Sistem Persamaan Linear Dua Variabel"
+              },
+              {
+                "id": "matematika-2-2-7",
+                "label": "Sistem Persamaan Linear Tiga Variabel"
+              }
+            ]
+          },
+          {
+            "id": "matematika-2-3",
+            "label": "Bab: Polinomial",
+            "children": [
+              {
+                "id": "matematika-2-3-0",
+                "label": "Operasi Polinomial"
+              },
+              {
+                "id": "matematika-2-3-1",
+                "label": "Pembagian Polinomial"
+              },
+              {
+                "id": "matematika-2-3-2",
+                "label": "Teorema Sisa"
+              },
+              {
+                "id": "matematika-2-3-3",
+                "label": "Teorema Faktor"
+              },
+              {
+                "id": "matematika-2-3-4",
+                "label": "Akar-Akar Polinomial"
+              },
+              {
+                "id": "matematika-2-3-5",
+                "label": "Persamaan Polinomial"
+              }
+            ]
+          },
+          {
+            "id": "matematika-2-4",
+            "label": "Bab: Relasi dan Fungsi",
+            "children": [
+              {
+                "id": "matematika-2-4-0",
+                "label": "Relasi"
+              },
+              {
+                "id": "matematika-2-4-1",
+                "label": "Definisi Fungsi"
+              },
+              {
+                "id": "matematika-2-4-2",
+                "label": "Domain, Kodomain, dan Range"
+              },
+              {
+                "id": "matematika-2-4-3",
+                "label": "Representasi dan Grafik Fungsi"
+              },
+              {
+                "id": "matematika-2-4-4",
+                "label": "Fungsi Linear"
+              },
+              {
+                "id": "matematika-2-4-5",
+                "label": "Fungsi Kuadrat"
+              },
+              {
+                "id": "matematika-2-4-6",
+                "label": "Fungsi Nilai Mutlak dan Fungsi Sepotong"
+              },
+              {
+                "id": "matematika-2-4-7",
+                "label": "Transformasi Grafik Fungsi"
+              },
+              {
+                "id": "matematika-2-4-8",
+                "label": "Komposisi Fungsi"
+              },
+              {
+                "id": "matematika-2-4-9",
+                "label": "Fungsi Invers"
+              }
+            ]
+          },
+          {
+            "id": "matematika-2-5",
+            "label": "Bab: Matriks dan Sistem Linear",
+            "children": [
+              {
+                "id": "matematika-2-5-0",
+                "label": "Notasi dan Jenis Matriks"
+              },
+              {
+                "id": "matematika-2-5-1",
+                "label": "Operasi Matriks"
+              },
+              {
+                "id": "matematika-2-5-2",
+                "label": "Determinan"
+              },
+              {
+                "id": "matematika-2-5-3",
+                "label": "Invers Matriks"
+              },
+              {
+                "id": "matematika-2-5-4",
+                "label": "Sistem Persamaan dalam Bentuk Matriks"
+              },
+              {
+                "id": "matematika-2-5-5",
+                "label": "Transformasi Linear Dasar"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "matematika-3",
+        "label": "Domain: Geometri dan Trigonometri",
+        "children": [
+          {
+            "id": "matematika-3-0",
+            "label": "Bab: Geometri Bidang",
+            "children": [
+              {
+                "id": "matematika-3-0-0",
+                "label": "Titik, Garis, dan Sudut"
+              },
+              {
+                "id": "matematika-3-0-1",
+                "label": "Segitiga"
+              },
+              {
+                "id": "matematika-3-0-2",
+                "label": "Kongruensi dan Kesebangunan"
+              },
+              {
+                "id": "matematika-3-0-3",
+                "label": "Segiempat dan Poligon"
+              },
+              {
+                "id": "matematika-3-0-4",
+                "label": "Lingkaran"
+              },
+              {
+                "id": "matematika-3-0-5",
+                "label": "Keliling dan Luas Bangun Datar"
+              }
+            ]
+          },
+          {
+            "id": "matematika-3-1",
+            "label": "Bab: Geometri Analitik",
+            "children": [
+              {
+                "id": "matematika-3-1-0",
+                "label": "Koordinat Kartesius"
+              },
+              {
+                "id": "matematika-3-1-1",
+                "label": "Jarak dan Titik Tengah"
+              },
+              {
+                "id": "matematika-3-1-2",
+                "label": "Gradien"
+              },
+              {
+                "id": "matematika-3-1-3",
+                "label": "Persamaan Garis"
+              },
+              {
+                "id": "matematika-3-1-4",
+                "label": "Persamaan Lingkaran"
+              },
+              {
+                "id": "matematika-3-1-5",
+                "label": "Parabola"
+              },
+              {
+                "id": "matematika-3-1-6",
+                "label": "Elips dan Hiperbola"
+              }
+            ]
+          },
+          {
+            "id": "matematika-3-2",
+            "label": "Bab: Transformasi Geometri",
+            "children": [
+              {
+                "id": "matematika-3-2-0",
+                "label": "Translasi"
+              },
+              {
+                "id": "matematika-3-2-1",
+                "label": "Refleksi"
+              },
+              {
+                "id": "matematika-3-2-2",
+                "label": "Rotasi"
+              },
+              {
+                "id": "matematika-3-2-3",
+                "label": "Dilatasi"
+              },
+              {
+                "id": "matematika-3-2-4",
+                "label": "Komposisi Transformasi"
+              }
+            ]
+          },
+          {
+            "id": "matematika-3-3",
+            "label": "Bab: Geometri Ruang",
+            "children": [
+              {
+                "id": "matematika-3-3-0",
+                "label": "Kedudukan Titik, Garis, dan Bidang"
+              },
+              {
+                "id": "matematika-3-3-1",
+                "label": "Bangun Ruang Sisi Datar"
+              },
+              {
+                "id": "matematika-3-3-2",
+                "label": "Bangun Ruang Sisi Lengkung"
+              },
+              {
+                "id": "matematika-3-3-3",
+                "label": "Luas Permukaan dan Volume"
+              },
+              {
+                "id": "matematika-3-3-4",
+                "label": "Jarak dalam Ruang"
+              },
+              {
+                "id": "matematika-3-3-5",
+                "label": "Sudut dalam Ruang"
+              }
+            ]
+          },
+          {
+            "id": "matematika-3-4",
+            "label": "Bab: Vektor",
+            "children": [
+              {
+                "id": "matematika-3-4-0",
+                "label": "Notasi dan Komponen Vektor"
+              },
+              {
+                "id": "matematika-3-4-1",
+                "label": "Operasi Vektor"
+              },
+              {
+                "id": "matematika-3-4-2",
+                "label": "Panjang dan Arah Vektor"
+              },
+              {
+                "id": "matematika-3-4-3",
+                "label": "Vektor Posisi"
+              },
+              {
+                "id": "matematika-3-4-4",
+                "label": "Perkalian Titik"
+              },
+              {
+                "id": "matematika-3-4-5",
+                "label": "Aplikasi Vektor pada Geometri"
+              }
+            ]
+          },
+          {
+            "id": "matematika-3-5",
+            "label": "Bab: Trigonometri",
+            "children": [
+              {
+                "id": "matematika-3-5-0",
+                "label": "Perbandingan Trigonometri"
+              },
+              {
+                "id": "matematika-3-5-1",
+                "label": "Sudut Istimewa"
+              },
+              {
+                "id": "matematika-3-5-2",
+                "label": "Lingkaran Satuan"
+              },
+              {
+                "id": "matematika-3-5-3",
+                "label": "Grafik Fungsi Trigonometri"
+              },
+              {
+                "id": "matematika-3-5-4",
+                "label": "Identitas Trigonometri"
+              },
+              {
+                "id": "matematika-3-5-5",
+                "label": "Persamaan Trigonometri"
+              },
+              {
+                "id": "matematika-3-5-6",
+                "label": "Rumus Penjumlahan dan Selisih Sudut"
+              },
+              {
+                "id": "matematika-3-5-7",
+                "label": "Aturan Sinus"
+              },
+              {
+                "id": "matematika-3-5-8",
+                "label": "Aturan Cosinus"
+              },
+              {
+                "id": "matematika-3-5-9",
+                "label": "Luas Segitiga dengan Trigonometri"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "matematika-4",
+        "label": "Domain: Statistika dan Peluang",
+        "children": [
+          {
+            "id": "matematika-4-0",
+            "label": "Bab: Statistika Deskriptif",
+            "children": [
+              {
+                "id": "matematika-4-0-0",
+                "label": "Jenis dan Pengumpulan Data"
+              },
+              {
+                "id": "matematika-4-0-1",
+                "label": "Tabel dan Distribusi Frekuensi"
+              },
+              {
+                "id": "matematika-4-0-2",
+                "label": "Diagram Data"
+              },
+              {
+                "id": "matematika-4-0-3",
+                "label": "Mean, Median, dan Modus"
+              },
+              {
+                "id": "matematika-4-0-4",
+                "label": "Kuartil, Desil, dan Persentil"
+              },
+              {
+                "id": "matematika-4-0-5",
+                "label": "Jangkauan, Varians, dan Simpangan Baku"
+              },
+              {
+                "id": "matematika-4-0-6",
+                "label": "Box Plot"
+              },
+              {
+                "id": "matematika-4-0-7",
+                "label": "Data Berkelompok"
+              }
+            ]
+          },
+          {
+            "id": "matematika-4-1",
+            "label": "Bab: Kaidah Pencacahan",
+            "children": [
+              {
+                "id": "matematika-4-1-0",
+                "label": "Aturan Penjumlahan dan Perkalian"
+              },
+              {
+                "id": "matematika-4-1-1",
+                "label": "Faktorial"
+              },
+              {
+                "id": "matematika-4-1-2",
+                "label": "Permutasi"
+              },
+              {
+                "id": "matematika-4-1-3",
+                "label": "Kombinasi"
+              },
+              {
+                "id": "matematika-4-1-4",
+                "label": "Teorema Binomial"
+              }
+            ]
+          },
+          {
+            "id": "matematika-4-2",
+            "label": "Bab: Peluang",
+            "children": [
+              {
+                "id": "matematika-4-2-0",
+                "label": "Ruang Sampel dan Kejadian"
+              },
+              {
+                "id": "matematika-4-2-1",
+                "label": "Peluang Suatu Kejadian"
+              },
+              {
+                "id": "matematika-4-2-2",
+                "label": "Peluang Gabungan"
+              },
+              {
+                "id": "matematika-4-2-3",
+                "label": "Peluang Bersyarat"
+              },
+              {
+                "id": "matematika-4-2-4",
+                "label": "Kejadian Saling Bebas"
+              },
+              {
+                "id": "matematika-4-2-5",
+                "label": "Teorema Peluang Total"
+              },
+              {
+                "id": "matematika-4-2-6",
+                "label": "Teorema Bayes"
+              }
+            ]
+          },
+          {
+            "id": "matematika-4-3",
+            "label": "Bab: Distribusi Peluang",
+            "children": [
+              {
+                "id": "matematika-4-3-0",
+                "label": "Variabel Acak"
+              },
+              {
+                "id": "matematika-4-3-1",
+                "label": "Nilai Harapan dan Varians"
+              },
+              {
+                "id": "matematika-4-3-2",
+                "label": "Distribusi Binomial"
+              },
+              {
+                "id": "matematika-4-3-3",
+                "label": "Distribusi Normal"
+              },
+              {
+                "id": "matematika-4-3-4",
+                "label": "Standardisasi dan Skor Z"
+              }
+            ]
+          },
+          {
+            "id": "matematika-4-4",
+            "label": "Bab: Statistika Inferensial",
+            "children": [
+              {
+                "id": "matematika-4-4-0",
+                "label": "Populasi dan Sampel"
+              },
+              {
+                "id": "matematika-4-4-1",
+                "label": "Teknik Sampling"
+              },
+              {
+                "id": "matematika-4-4-2",
+                "label": "Distribusi Sampling"
+              },
+              {
+                "id": "matematika-4-4-3",
+                "label": "Estimasi Parameter"
+              },
+              {
+                "id": "matematika-4-4-4",
+                "label": "Interval Kepercayaan"
+              },
+              {
+                "id": "matematika-4-4-5",
+                "label": "Uji Hipotesis"
+              },
+              {
+                "id": "matematika-4-4-6",
+                "label": "Korelasi dan Regresi Linear"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "matematika-5",
+        "label": "Domain: Kalkulus",
+        "children": [
+          {
+            "id": "matematika-5-0",
+            "label": "Bab: Limit dan Kontinuitas",
+            "children": [
+              {
+                "id": "matematika-5-0-0",
+                "label": "Konsep Limit"
+              },
+              {
+                "id": "matematika-5-0-1",
+                "label": "Limit Aljabar"
+              },
+              {
+                "id": "matematika-5-0-2",
+                "label": "Limit Trigonometri"
+              },
+              {
+                "id": "matematika-5-0-3",
+                "label": "Limit Tak Hingga"
+              },
+              {
+                "id": "matematika-5-0-4",
+                "label": "Asimtot"
+              },
+              {
+                "id": "matematika-5-0-5",
+                "label": "Kontinuitas Fungsi"
+              }
+            ]
+          },
+          {
+            "id": "matematika-5-1",
+            "label": "Bab: Turunan",
+            "children": [
+              {
+                "id": "matematika-5-1-0",
+                "label": "Definisi Turunan"
+              },
+              {
+                "id": "matematika-5-1-1",
+                "label": "Aturan Turunan"
+              },
+              {
+                "id": "matematika-5-1-2",
+                "label": "Turunan Fungsi Trigonometri"
+              },
+              {
+                "id": "matematika-5-1-3",
+                "label": "Turunan Fungsi Eksponen dan Logaritma"
+              },
+              {
+                "id": "matematika-5-1-4",
+                "label": "Aturan Rantai"
+              },
+              {
+                "id": "matematika-5-1-5",
+                "label": "Turunan Implisit"
+              },
+              {
+                "id": "matematika-5-1-6",
+                "label": "Turunan Tingkat Tinggi"
+              }
+            ]
+          },
+          {
+            "id": "matematika-5-2",
+            "label": "Bab: Aplikasi Turunan",
+            "children": [
+              {
+                "id": "matematika-5-2-0",
+                "label": "Gradien Garis Singgung"
+              },
+              {
+                "id": "matematika-5-2-1",
+                "label": "Laju Perubahan"
+              },
+              {
+                "id": "matematika-5-2-2",
+                "label": "Interval Naik dan Turun"
+              },
+              {
+                "id": "matematika-5-2-3",
+                "label": "Titik Stasioner dan Nilai Ekstrem"
+              },
+              {
+                "id": "matematika-5-2-4",
+                "label": "Kecekungan dan Titik Belok"
+              },
+              {
+                "id": "matematika-5-2-5",
+                "label": "Sketsa Kurva"
+              },
+              {
+                "id": "matematika-5-2-6",
+                "label": "Optimasi"
+              }
+            ]
+          },
+          {
+            "id": "matematika-5-3",
+            "label": "Bab: Integral",
+            "children": [
+              {
+                "id": "matematika-5-3-0",
+                "label": "Antiturunan"
+              },
+              {
+                "id": "matematika-5-3-1",
+                "label": "Integral Tak Tentu"
+              },
+              {
+                "id": "matematika-5-3-2",
+                "label": "Integral Tentu"
+              },
+              {
+                "id": "matematika-5-3-3",
+                "label": "Teorema Dasar Kalkulus"
+              },
+              {
+                "id": "matematika-5-3-4",
+                "label": "Substitusi"
+              },
+              {
+                "id": "matematika-5-3-5",
+                "label": "Luas Daerah"
+              },
+              {
+                "id": "matematika-5-3-6",
+                "label": "Volume Benda Putar"
+              }
+            ]
+          },
+          {
+            "id": "matematika-5-4",
+            "label": "Bab: Persamaan Diferensial Dasar",
+            "children": [
+              {
+                "id": "matematika-5-4-0",
+                "label": "Konsep Persamaan Diferensial"
+              },
+              {
+                "id": "matematika-5-4-1",
+                "label": "Pemisahan Variabel"
+              },
+              {
+                "id": "matematika-5-4-2",
+                "label": "Masalah Nilai Awal"
+              },
+              {
+                "id": "matematika-5-4-3",
+                "label": "Model Pertumbuhan dan Peluruhan"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

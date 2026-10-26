@@ -1,0 +1,1026 @@
+{
+  "source": "https://app.notion.com/p/3ca9ba5efe1581938ca5c266cde23e72?pvs=204",
+  "sourceEditedAt": "2026-09-06T14:23:24.009Z",
+  "tree": {
+    "id": "fisika",
+    "label": "Subjek: Fisika",
+    "children": [
+      {
+        "id": "fisika-0",
+        "label": "Domain: Pengukuran dan Eksperimen",
+        "children": [
+          {
+            "id": "fisika-0-0",
+            "label": "Bab: Besaran, Satuan, dan Dimensi",
+            "children": [
+              {
+                "id": "fisika-0-0-0",
+                "label": "Besaran Pokok dan Besaran Turunan"
+              },
+              {
+                "id": "fisika-0-0-1",
+                "label": "Sistem Satuan Internasional"
+              },
+              {
+                "id": "fisika-0-0-2",
+                "label": "Konversi Satuan"
+              },
+              {
+                "id": "fisika-0-0-3",
+                "label": "Analisis Dimensi"
+              },
+              {
+                "id": "fisika-0-0-4",
+                "label": "Notasi Ilmiah dan Orde Magnitudo"
+              },
+              {
+                "id": "fisika-0-0-5",
+                "label": "Angka Penting"
+              }
+            ]
+          },
+          {
+            "id": "fisika-0-1",
+            "label": "Bab: Pengukuran",
+            "children": [
+              {
+                "id": "fisika-0-1-0",
+                "label": "Alat Ukur Panjang"
+              },
+              {
+                "id": "fisika-0-1-1",
+                "label": "Alat Ukur Massa dan Waktu"
+              },
+              {
+                "id": "fisika-0-1-2",
+                "label": "Ketelitian dan Ketepatan"
+              },
+              {
+                "id": "fisika-0-1-3",
+                "label": "Ketidakpastian Pengukuran"
+              },
+              {
+                "id": "fisika-0-1-4",
+                "label": "Kesalahan Sistematis dan Acak"
+              },
+              {
+                "id": "fisika-0-1-5",
+                "label": "Propagasi Ketidakpastian"
+              }
+            ]
+          },
+          {
+            "id": "fisika-0-2",
+            "label": "Bab: Analisis Data Eksperimen",
+            "children": [
+              {
+                "id": "fisika-0-2-0",
+                "label": "Tabel dan Grafik Data"
+              },
+              {
+                "id": "fisika-0-2-1",
+                "label": "Variabel Bebas, Terikat, dan Kontrol"
+              },
+              {
+                "id": "fisika-0-2-2",
+                "label": "Pemodelan Linear"
+              },
+              {
+                "id": "fisika-0-2-3",
+                "label": "Gradien dan Intersep"
+              },
+              {
+                "id": "fisika-0-2-4",
+                "label": "Interpretasi Hasil Eksperimen"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fisika-1",
+        "label": "Domain: Mekanika",
+        "children": [
+          {
+            "id": "fisika-1-0",
+            "label": "Bab: Vektor",
+            "children": [
+              {
+                "id": "fisika-1-0-0",
+                "label": "Skalar dan Vektor"
+              },
+              {
+                "id": "fisika-1-0-1",
+                "label": "Komponen Vektor"
+              },
+              {
+                "id": "fisika-1-0-2",
+                "label": "Penjumlahan dan Pengurangan Vektor"
+              },
+              {
+                "id": "fisika-1-0-3",
+                "label": "Perkalian Titik"
+              },
+              {
+                "id": "fisika-1-0-4",
+                "label": "Perkalian Silang"
+              }
+            ]
+          },
+          {
+            "id": "fisika-1-1",
+            "label": "Bab: Kinematika Satu Dimensi",
+            "children": [
+              {
+                "id": "fisika-1-1-0",
+                "label": "Posisi, Jarak, dan Perpindahan"
+              },
+              {
+                "id": "fisika-1-1-1",
+                "label": "Kelajuan dan Kecepatan"
+              },
+              {
+                "id": "fisika-1-1-2",
+                "label": "Percepatan"
+              },
+              {
+                "id": "fisika-1-1-3",
+                "label": "Gerak Lurus Beraturan"
+              },
+              {
+                "id": "fisika-1-1-4",
+                "label": "Gerak Lurus Berubah Beraturan"
+              },
+              {
+                "id": "fisika-1-1-5",
+                "label": "Gerak Vertikal"
+              },
+              {
+                "id": "fisika-1-1-6",
+                "label": "Grafik Gerak"
+              }
+            ]
+          },
+          {
+            "id": "fisika-1-2",
+            "label": "Bab: Kinematika Dua Dimensi",
+            "children": [
+              {
+                "id": "fisika-1-2-0",
+                "label": "Gerak Parabola"
+              },
+              {
+                "id": "fisika-1-2-1",
+                "label": "Gerak Relatif"
+              },
+              {
+                "id": "fisika-1-2-2",
+                "label": "Gerak Melingkar Beraturan"
+              },
+              {
+                "id": "fisika-1-2-3",
+                "label": "Kecepatan dan Percepatan Sudut"
+              },
+              {
+                "id": "fisika-1-2-4",
+                "label": "Percepatan Sentripetal"
+              }
+            ]
+          },
+          {
+            "id": "fisika-1-3",
+            "label": "Bab: Dinamika Partikel",
+            "children": [
+              {
+                "id": "fisika-1-3-0",
+                "label": "Hukum I Newton"
+              },
+              {
+                "id": "fisika-1-3-1",
+                "label": "Hukum II Newton"
+              },
+              {
+                "id": "fisika-1-3-2",
+                "label": "Hukum III Newton"
+              },
+              {
+                "id": "fisika-1-3-3",
+                "label": "Diagram Benda Bebas"
+              },
+              {
+                "id": "fisika-1-3-4",
+                "label": "Gaya Normal dan Tegangan Tali"
+              },
+              {
+                "id": "fisika-1-3-5",
+                "label": "Gaya Gesek"
+              },
+              {
+                "id": "fisika-1-3-6",
+                "label": "Dinamika Gerak Melingkar"
+              }
+            ]
+          },
+          {
+            "id": "fisika-1-4",
+            "label": "Bab: Usaha dan Energi",
+            "children": [
+              {
+                "id": "fisika-1-4-0",
+                "label": "Usaha oleh Gaya Konstan"
+              },
+              {
+                "id": "fisika-1-4-1",
+                "label": "Usaha oleh Gaya Berubah"
+              },
+              {
+                "id": "fisika-1-4-2",
+                "label": "Energi Kinetik"
+              },
+              {
+                "id": "fisika-1-4-3",
+                "label": "Energi Potensial"
+              },
+              {
+                "id": "fisika-1-4-4",
+                "label": "Teorema Usaha–Energi"
+              },
+              {
+                "id": "fisika-1-4-5",
+                "label": "Kekekalan Energi Mekanik"
+              },
+              {
+                "id": "fisika-1-4-6",
+                "label": "Daya"
+              }
+            ]
+          },
+          {
+            "id": "fisika-1-5",
+            "label": "Bab: Momentum dan Tumbukan",
+            "children": [
+              {
+                "id": "fisika-1-5-0",
+                "label": "Momentum Linear"
+              },
+              {
+                "id": "fisika-1-5-1",
+                "label": "Impuls"
+              },
+              {
+                "id": "fisika-1-5-2",
+                "label": "Teorema Impuls–Momentum"
+              },
+              {
+                "id": "fisika-1-5-3",
+                "label": "Kekekalan Momentum"
+              },
+              {
+                "id": "fisika-1-5-4",
+                "label": "Tumbukan Lenting dan Tidak Lenting"
+              },
+              {
+                "id": "fisika-1-5-5",
+                "label": "Pusat Massa"
+              }
+            ]
+          },
+          {
+            "id": "fisika-1-6",
+            "label": "Bab: Rotasi dan Kesetimbangan",
+            "children": [
+              {
+                "id": "fisika-1-6-0",
+                "label": "Kinematika Rotasi"
+              },
+              {
+                "id": "fisika-1-6-1",
+                "label": "Torsi"
+              },
+              {
+                "id": "fisika-1-6-2",
+                "label": "Momen Inersia"
+              },
+              {
+                "id": "fisika-1-6-3",
+                "label": "Dinamika Rotasi"
+              },
+              {
+                "id": "fisika-1-6-4",
+                "label": "Momentum Sudut"
+              },
+              {
+                "id": "fisika-1-6-5",
+                "label": "Kekekalan Momentum Sudut"
+              },
+              {
+                "id": "fisika-1-6-6",
+                "label": "Gerak Menggelinding"
+              },
+              {
+                "id": "fisika-1-6-7",
+                "label": "Kesetimbangan Benda Tegar"
+              }
+            ]
+          },
+          {
+            "id": "fisika-1-7",
+            "label": "Bab: Gravitasi",
+            "children": [
+              {
+                "id": "fisika-1-7-0",
+                "label": "Hukum Gravitasi Universal"
+              },
+              {
+                "id": "fisika-1-7-1",
+                "label": "Medan Gravitasi"
+              },
+              {
+                "id": "fisika-1-7-2",
+                "label": "Energi Potensial Gravitasi"
+              },
+              {
+                "id": "fisika-1-7-3",
+                "label": "Potensial Gravitasi"
+              },
+              {
+                "id": "fisika-1-7-4",
+                "label": "Hukum Kepler"
+              },
+              {
+                "id": "fisika-1-7-5",
+                "label": "Orbit Satelit"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fisika-2",
+        "label": "Domain: Fluida",
+        "children": [
+          {
+            "id": "fisika-2-0",
+            "label": "Bab: Fluida Statis",
+            "children": [
+              {
+                "id": "fisika-2-0-0",
+                "label": "Massa Jenis"
+              },
+              {
+                "id": "fisika-2-0-1",
+                "label": "Tekanan"
+              },
+              {
+                "id": "fisika-2-0-2",
+                "label": "Tekanan Hidrostatis"
+              },
+              {
+                "id": "fisika-2-0-3",
+                "label": "Hukum Pascal"
+              },
+              {
+                "id": "fisika-2-0-4",
+                "label": "Hukum Archimedes"
+              },
+              {
+                "id": "fisika-2-0-5",
+                "label": "Tegangan Permukaan"
+              },
+              {
+                "id": "fisika-2-0-6",
+                "label": "Kapilaritas"
+              }
+            ]
+          },
+          {
+            "id": "fisika-2-1",
+            "label": "Bab: Fluida Dinamis",
+            "children": [
+              {
+                "id": "fisika-2-1-0",
+                "label": "Debit Aliran"
+              },
+              {
+                "id": "fisika-2-1-1",
+                "label": "Persamaan Kontinuitas"
+              },
+              {
+                "id": "fisika-2-1-2",
+                "label": "Persamaan Bernoulli"
+              },
+              {
+                "id": "fisika-2-1-3",
+                "label": "Teorema Torricelli"
+              },
+              {
+                "id": "fisika-2-1-4",
+                "label": "Viskositas"
+              },
+              {
+                "id": "fisika-2-1-5",
+                "label": "Hukum Stokes"
+              },
+              {
+                "id": "fisika-2-1-6",
+                "label": "Aliran Laminar dan Turbulen"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fisika-3",
+        "label": "Domain: Getaran, Gelombang, dan Bunyi",
+        "children": [
+          {
+            "id": "fisika-3-0",
+            "label": "Bab: Getaran Harmonik",
+            "children": [
+              {
+                "id": "fisika-3-0-0",
+                "label": "Gerak Harmonik Sederhana"
+              },
+              {
+                "id": "fisika-3-0-1",
+                "label": "Sistem Pegas"
+              },
+              {
+                "id": "fisika-3-0-2",
+                "label": "Bandul Sederhana"
+              },
+              {
+                "id": "fisika-3-0-3",
+                "label": "Energi Gerak Harmonik"
+              },
+              {
+                "id": "fisika-3-0-4",
+                "label": "Getaran Teredam"
+              },
+              {
+                "id": "fisika-3-0-5",
+                "label": "Resonansi"
+              }
+            ]
+          },
+          {
+            "id": "fisika-3-1",
+            "label": "Bab: Gelombang Mekanik",
+            "children": [
+              {
+                "id": "fisika-3-1-0",
+                "label": "Besaran-Besaran Gelombang"
+              },
+              {
+                "id": "fisika-3-1-1",
+                "label": "Persamaan Gelombang"
+              },
+              {
+                "id": "fisika-3-1-2",
+                "label": "Gelombang Transversal dan Longitudinal"
+              },
+              {
+                "id": "fisika-3-1-3",
+                "label": "Superposisi"
+              },
+              {
+                "id": "fisika-3-1-4",
+                "label": "Interferensi"
+              },
+              {
+                "id": "fisika-3-1-5",
+                "label": "Gelombang Stasioner"
+              },
+              {
+                "id": "fisika-3-1-6",
+                "label": "Pemantulan dan Pembiasan Gelombang"
+              }
+            ]
+          },
+          {
+            "id": "fisika-3-2",
+            "label": "Bab: Bunyi",
+            "children": [
+              {
+                "id": "fisika-3-2-0",
+                "label": "Cepat Rambat Bunyi"
+              },
+              {
+                "id": "fisika-3-2-1",
+                "label": "Intensitas dan Taraf Intensitas"
+              },
+              {
+                "id": "fisika-3-2-2",
+                "label": "Efek Doppler"
+              },
+              {
+                "id": "fisika-3-2-3",
+                "label": "Pelayangan"
+              },
+              {
+                "id": "fisika-3-2-4",
+                "label": "Resonansi Kolom Udara"
+              },
+              {
+                "id": "fisika-3-2-5",
+                "label": "Harmonik pada Dawai dan Pipa Organa"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fisika-4",
+        "label": "Domain: Termodinamika",
+        "children": [
+          {
+            "id": "fisika-4-0",
+            "label": "Bab: Suhu dan Kalor",
+            "children": [
+              {
+                "id": "fisika-4-0-0",
+                "label": "Suhu dan Skala Termometer"
+              },
+              {
+                "id": "fisika-4-0-1",
+                "label": "Pemuaian"
+              },
+              {
+                "id": "fisika-4-0-2",
+                "label": "Kalor dan Kalor Jenis"
+              },
+              {
+                "id": "fisika-4-0-3",
+                "label": "Perubahan Wujud"
+              },
+              {
+                "id": "fisika-4-0-4",
+                "label": "Asas Black"
+              },
+              {
+                "id": "fisika-4-0-5",
+                "label": "Konduksi"
+              },
+              {
+                "id": "fisika-4-0-6",
+                "label": "Konveksi"
+              },
+              {
+                "id": "fisika-4-0-7",
+                "label": "Radiasi"
+              }
+            ]
+          },
+          {
+            "id": "fisika-4-1",
+            "label": "Bab: Teori Kinetik Gas",
+            "children": [
+              {
+                "id": "fisika-4-1-0",
+                "label": "Gas Ideal"
+              },
+              {
+                "id": "fisika-4-1-1",
+                "label": "Persamaan Keadaan Gas Ideal"
+              },
+              {
+                "id": "fisika-4-1-2",
+                "label": "Tekanan Gas Secara Mikroskopis"
+              },
+              {
+                "id": "fisika-4-1-3",
+                "label": "Energi Kinetik dan Suhu"
+              },
+              {
+                "id": "fisika-4-1-4",
+                "label": "Kecepatan Efektif Molekul"
+              },
+              {
+                "id": "fisika-4-1-5",
+                "label": "Ekipartisi Energi"
+              }
+            ]
+          },
+          {
+            "id": "fisika-4-2",
+            "label": "Bab: Hukum Termodinamika",
+            "children": [
+              {
+                "id": "fisika-4-2-0",
+                "label": "Sistem, Lingkungan, dan Variabel Keadaan"
+              },
+              {
+                "id": "fisika-4-2-1",
+                "label": "Usaha pada Gas"
+              },
+              {
+                "id": "fisika-4-2-2",
+                "label": "Energi Dalam"
+              },
+              {
+                "id": "fisika-4-2-3",
+                "label": "Hukum Nol Termodinamika"
+              },
+              {
+                "id": "fisika-4-2-4",
+                "label": "Hukum I Termodinamika"
+              },
+              {
+                "id": "fisika-4-2-5",
+                "label": "Proses Isotermal, Isobarik, Isokhorik, dan Adiabatik"
+              },
+              {
+                "id": "fisika-4-2-6",
+                "label": "Mesin Kalor dan Efisiensi"
+              },
+              {
+                "id": "fisika-4-2-7",
+                "label": "Entropi dan Hukum II Termodinamika"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fisika-5",
+        "label": "Domain: Listrik dan Magnetisme",
+        "children": [
+          {
+            "id": "fisika-5-0",
+            "label": "Bab: Elektrostatika",
+            "children": [
+              {
+                "id": "fisika-5-0-0",
+                "label": "Muatan Listrik"
+              },
+              {
+                "id": "fisika-5-0-1",
+                "label": "Hukum Coulomb"
+              },
+              {
+                "id": "fisika-5-0-2",
+                "label": "Medan Listrik"
+              },
+              {
+                "id": "fisika-5-0-3",
+                "label": "Fluks Listrik"
+              },
+              {
+                "id": "fisika-5-0-4",
+                "label": "Hukum Gauss"
+              },
+              {
+                "id": "fisika-5-0-5",
+                "label": "Potensial Listrik"
+              },
+              {
+                "id": "fisika-5-0-6",
+                "label": "Energi Potensial Listrik"
+              },
+              {
+                "id": "fisika-5-0-7",
+                "label": "Kapasitor dan Kapasitansi"
+              }
+            ]
+          },
+          {
+            "id": "fisika-5-1",
+            "label": "Bab: Arus Searah",
+            "children": [
+              {
+                "id": "fisika-5-1-0",
+                "label": "Arus Listrik"
+              },
+              {
+                "id": "fisika-5-1-1",
+                "label": "Tegangan dan Gaya Gerak Listrik"
+              },
+              {
+                "id": "fisika-5-1-2",
+                "label": "Hambatan dan Resistivitas"
+              },
+              {
+                "id": "fisika-5-1-3",
+                "label": "Hukum Ohm"
+              },
+              {
+                "id": "fisika-5-1-4",
+                "label": "Rangkaian Seri dan Paralel"
+              },
+              {
+                "id": "fisika-5-1-5",
+                "label": "Hukum Kirchhoff"
+              },
+              {
+                "id": "fisika-5-1-6",
+                "label": "Energi dan Daya Listrik"
+              },
+              {
+                "id": "fisika-5-1-7",
+                "label": "Rangkaian RC"
+              }
+            ]
+          },
+          {
+            "id": "fisika-5-2",
+            "label": "Bab: Medan Magnet",
+            "children": [
+              {
+                "id": "fisika-5-2-0",
+                "label": "Medan Magnet oleh Arus Listrik"
+              },
+              {
+                "id": "fisika-5-2-1",
+                "label": "Hukum Biot–Savart"
+              },
+              {
+                "id": "fisika-5-2-2",
+                "label": "Hukum Ampère"
+              },
+              {
+                "id": "fisika-5-2-3",
+                "label": "Gaya Lorentz pada Muatan"
+              },
+              {
+                "id": "fisika-5-2-4",
+                "label": "Gaya Lorentz pada Kawat"
+              },
+              {
+                "id": "fisika-5-2-5",
+                "label": "Gerak Partikel Bermuatan dalam Medan Magnet"
+              },
+              {
+                "id": "fisika-5-2-6",
+                "label": "Torsi pada Kumparan"
+              }
+            ]
+          },
+          {
+            "id": "fisika-5-3",
+            "label": "Bab: Induksi Elektromagnetik dan Arus Bolak-Balik",
+            "children": [
+              {
+                "id": "fisika-5-3-0",
+                "label": "Fluks Magnetik"
+              },
+              {
+                "id": "fisika-5-3-1",
+                "label": "Hukum Faraday"
+              },
+              {
+                "id": "fisika-5-3-2",
+                "label": "Hukum Lenz"
+              },
+              {
+                "id": "fisika-5-3-3",
+                "label": "Induktansi"
+              },
+              {
+                "id": "fisika-5-3-4",
+                "label": "Generator dan Motor Listrik"
+              },
+              {
+                "id": "fisika-5-3-5",
+                "label": "Arus dan Tegangan Bolak-Balik"
+              },
+              {
+                "id": "fisika-5-3-6",
+                "label": "Rangkaian RLC"
+              },
+              {
+                "id": "fisika-5-3-7",
+                "label": "Transformator"
+              }
+            ]
+          },
+          {
+            "id": "fisika-5-4",
+            "label": "Bab: Gelombang Elektromagnetik",
+            "children": [
+              {
+                "id": "fisika-5-4-0",
+                "label": "Medan Listrik dan Medan Magnet Berubah"
+              },
+              {
+                "id": "fisika-5-4-1",
+                "label": "Spektrum Elektromagnetik"
+              },
+              {
+                "id": "fisika-5-4-2",
+                "label": "Cepat Rambat Gelombang Elektromagnetik"
+              },
+              {
+                "id": "fisika-5-4-3",
+                "label": "Energi dan Intensitas Gelombang Elektromagnetik"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fisika-6",
+        "label": "Domain: Optika",
+        "children": [
+          {
+            "id": "fisika-6-0",
+            "label": "Bab: Optika Geometris",
+            "children": [
+              {
+                "id": "fisika-6-0-0",
+                "label": "Pemantulan Cahaya"
+              },
+              {
+                "id": "fisika-6-0-1",
+                "label": "Cermin Datar"
+              },
+              {
+                "id": "fisika-6-0-2",
+                "label": "Cermin Lengkung"
+              },
+              {
+                "id": "fisika-6-0-3",
+                "label": "Pembiasan Cahaya"
+              },
+              {
+                "id": "fisika-6-0-4",
+                "label": "Hukum Snellius"
+              },
+              {
+                "id": "fisika-6-0-5",
+                "label": "Pemantulan Internal Total"
+              },
+              {
+                "id": "fisika-6-0-6",
+                "label": "Lensa Tipis"
+              },
+              {
+                "id": "fisika-6-0-7",
+                "label": "Sistem Lensa"
+              }
+            ]
+          },
+          {
+            "id": "fisika-6-1",
+            "label": "Bab: Alat Optik",
+            "children": [
+              {
+                "id": "fisika-6-1-0",
+                "label": "Mata dan Akomodasi"
+              },
+              {
+                "id": "fisika-6-1-1",
+                "label": "Cacat Mata dan Koreksinya"
+              },
+              {
+                "id": "fisika-6-1-2",
+                "label": "Lup"
+              },
+              {
+                "id": "fisika-6-1-3",
+                "label": "Mikroskop"
+              },
+              {
+                "id": "fisika-6-1-4",
+                "label": "Teleskop"
+              },
+              {
+                "id": "fisika-6-1-5",
+                "label": "Kamera"
+              }
+            ]
+          },
+          {
+            "id": "fisika-6-2",
+            "label": "Bab: Optika Gelombang",
+            "children": [
+              {
+                "id": "fisika-6-2-0",
+                "label": "Interferensi Cahaya"
+              },
+              {
+                "id": "fisika-6-2-1",
+                "label": "Difraksi"
+              },
+              {
+                "id": "fisika-6-2-2",
+                "label": "Kisi Difraksi"
+              },
+              {
+                "id": "fisika-6-2-3",
+                "label": "Polarisasi"
+              },
+              {
+                "id": "fisika-6-2-4",
+                "label": "Dispersi"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fisika-7",
+        "label": "Domain: Fisika Modern",
+        "children": [
+          {
+            "id": "fisika-7-0",
+            "label": "Bab: Relativitas Khusus",
+            "children": [
+              {
+                "id": "fisika-7-0-0",
+                "label": "Postulat Relativitas Khusus"
+              },
+              {
+                "id": "fisika-7-0-1",
+                "label": "Relativitas Keserempakan"
+              },
+              {
+                "id": "fisika-7-0-2",
+                "label": "Dilatasi Waktu"
+              },
+              {
+                "id": "fisika-7-0-3",
+                "label": "Kontraksi Panjang"
+              },
+              {
+                "id": "fisika-7-0-4",
+                "label": "Transformasi Lorentz"
+              },
+              {
+                "id": "fisika-7-0-5",
+                "label": "Kesetaraan Massa–Energi"
+              }
+            ]
+          },
+          {
+            "id": "fisika-7-1",
+            "label": "Bab: Fisika Kuantum dan Atom",
+            "children": [
+              {
+                "id": "fisika-7-1-0",
+                "label": "Radiasi Benda Hitam"
+              },
+              {
+                "id": "fisika-7-1-1",
+                "label": "Efek Fotolistrik"
+              },
+              {
+                "id": "fisika-7-1-2",
+                "label": "Dualisme Gelombang–Partikel"
+              },
+              {
+                "id": "fisika-7-1-3",
+                "label": "Hipotesis de Broglie"
+              },
+              {
+                "id": "fisika-7-1-4",
+                "label": "Prinsip Ketidakpastian"
+              },
+              {
+                "id": "fisika-7-1-5",
+                "label": "Model Atom Bohr"
+              },
+              {
+                "id": "fisika-7-1-6",
+                "label": "Spektrum Atom"
+              }
+            ]
+          },
+          {
+            "id": "fisika-7-2",
+            "label": "Bab: Fisika Inti",
+            "children": [
+              {
+                "id": "fisika-7-2-0",
+                "label": "Struktur Inti Atom"
+              },
+              {
+                "id": "fisika-7-2-1",
+                "label": "Defek Massa dan Energi Ikat"
+              },
+              {
+                "id": "fisika-7-2-2",
+                "label": "Radioaktivitas"
+              },
+              {
+                "id": "fisika-7-2-3",
+                "label": "Peluruhan Radioaktif"
+              },
+              {
+                "id": "fisika-7-2-4",
+                "label": "Reaksi Inti"
+              },
+              {
+                "id": "fisika-7-2-5",
+                "label": "Fisi Nuklir"
+              },
+              {
+                "id": "fisika-7-2-6",
+                "label": "Fusi Nuklir"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
