@@ -1,5 +1,5 @@
 import { CheckIcon } from "@heroicons/react/24/outline";
-import { ForwardIcon, PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
+import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 import type { ComponentProps, ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
@@ -71,12 +71,7 @@ export default function TaskActions({
     );
   }
 
-  let ToggleIcon = PlayIcon;
-  if (running) {
-    ToggleIcon = PauseIcon;
-  } else if (label === "Continue") {
-    ToggleIcon = ForwardIcon;
-  }
+  const ToggleIcon = running ? PauseIcon : PlayIcon;
   return (
     <div className="flex min-w-0 items-center justify-end gap-2">
       {showDone ? null : (
@@ -154,12 +149,7 @@ function TaskIconActions({
   onToggle: () => void;
   children?: ReactNode;
 }) {
-  let ToggleIcon = PlayIcon;
-  if (running) {
-    ToggleIcon = PauseIcon;
-  } else if (label === "Continue") {
-    ToggleIcon = ForwardIcon;
-  }
+  const ToggleIcon = running ? PauseIcon : PlayIcon;
   return (
     <div className="flex shrink-0 items-center gap-2">
       {children}
