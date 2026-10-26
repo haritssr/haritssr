@@ -26,7 +26,7 @@ export default function ProjectsCard({
       className={`group corner-squircle border-border flex w-full flex-col justify-between overflow-hidden rounded-3xl border selection:mx-auto ${className ?? ""}`}
     >
       {/* Header + Title + Explanation */}
-      <div className="flex flex-1 flex-col justify-between space-y-2 p-3.5 pb-2">
+      <div className="flex flex-1 flex-col justify-between space-y-2 p-3.5 pt-3 pb-2">
         <div className="flex items-center space-x-2">
           <Image
             alt=""
