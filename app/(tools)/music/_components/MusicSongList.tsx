@@ -59,7 +59,7 @@ export default function MusicSongList({
     <ul className="divide-border divide-y" ref={list}>
       {filtered.map((track) => (
         <li
-          className={`group/song relative min-w-0 overflow-hidden ${track.id === current?.id ? "bg-interface-hover" : ""} ${drag?.id === track.id ? "bg-action/5 opacity-60" : ""} ${drag?.target === track.id && drag.id !== track.id ? dropIndicator : ""}`}
+          className={`group/song hover:bg-interface-hover relative min-w-0 overflow-hidden ${track.id === current?.id ? "bg-interface-hover" : ""} ${drag?.id === track.id ? "bg-action/5 opacity-60" : ""} ${drag?.target === track.id && drag.id !== track.id ? dropIndicator : ""}`}
           data-current={track.id === current?.id}
           data-music-track={track.id}
           key={track.id}
