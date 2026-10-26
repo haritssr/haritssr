@@ -71,7 +71,11 @@ export default function DesignSystem() {
               decisions; implementation explains{" "}
               <span className="font-semibold">how</span> they work in code.
             </li>
-            <li>Pattern can only appear on data, not datum.</li>
+            <li>
+              Patterns emerge from multiple observations, not a single datum.
+              Mental rehearsal (usually in sleep or meditation) lets us replay
+              our experiences and recognize patterns faster.
+            </li>
             <InterfacePrinciples>
               <div>
                 <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
