@@ -1,5 +1,5 @@
 import { Popover } from "@base-ui/react/popover";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
 
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 
@@ -16,9 +16,9 @@ export default function TaskDescription({ task }: { task: TimerTask }) {
           className="text-muted hover:text-muted/70 focus-visible:outline-action group flex h-5 w-fit cursor-pointer items-center justify-start gap-px rounded text-base leading-5 group-data-completed/task:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-sm"
           openOnHover
         >
-          <InformationCircleIcon
+          <DocumentTextIcon
             aria-hidden="true"
-            className="size-5.5 shrink-0"
+            className="size-5 shrink-0"
             strokeWidth={1.5}
           />
         </Popover.Trigger>

@@ -8,7 +8,7 @@ export const TASK_LAYOUT = {
   item: "flex flex-col gap-2",
   controls: "mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4",
   surface:
-    "corner-squircle rounded-[1.25rem] border pl-4 pr-3.5 py-3 shadow-lg",
+    "corner-squircle rounded-[1.25rem] border-[0.5px] bg-linear-to-b from-zinc-50 to-zinc-100/70 pl-4 pr-3.5 py-3 shadow-xl inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md",
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-sm",
   progress: "h-2",
   running: "border-timer-running/80 shadow-timer-running/10",
@@ -62,9 +62,9 @@ export function taskAppearance(
   const appearance = TASK_STATE_APPEARANCE[state];
   let surface = "text-foreground";
   if (running) {
-    surface = `text-foreground ${TASK_LAYOUT.running} shadow-lg`;
+    surface = `text-foreground ${TASK_LAYOUT.running}`;
   } else if (paused) {
-    surface = `text-foreground ${TASK_LAYOUT.paused} shadow-lg`;
+    surface = `text-foreground ${TASK_LAYOUT.paused}`;
   }
   return {
     elapsed: appearance.elapsed,

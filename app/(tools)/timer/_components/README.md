@@ -54,8 +54,8 @@ Within `TASK_LAYOUT`, `collection` controls the outer grid and gaps,
 `surface` controls the card shell, and `controls` controls the timer/action area.
 Element-specific styles stay beside their JSX in the component files above.
 
-The header places the title on the left, with speed, an Adjustments Horizontal edit button, and a circular description icon on the right.
-Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, remaining time, and percentage. Edit is a plain icon matching the description icon in size.
+The header places the title on the left, with speed, a document description icon, and an Adjustments Horizontal edit button on the right.
+Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and percentage, with remaining time below the progress bar. Edit is a plain icon matching the description icon in size.
 The description popover
 opens on hover or click. The speed button cycles through 1x, 1.5x, 2x,
 2.5x, and 3x, then returns to 1x. Each task defaults to 1x and saves its own speed

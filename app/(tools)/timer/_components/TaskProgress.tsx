@@ -64,9 +64,11 @@ export default function TaskProgress({
           <span
             className={`flex shrink-0 items-baseline gap-1 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} ${running ? appearance.elapsed : "text-muted"}`}
           >
-            <span className="text-muted">
-              -{formatTimerTime(Math.max(0, task.duration - spent))}
-            </span>
+            {compact ? (
+              <span className="text-muted">
+                -{formatTimerTime(Math.max(0, task.duration - spent))}
+              </span>
+            ) : null}
             <span className={appearance.elapsed}>{percentageLabel}%</span>
           </span>
         ) : null}
@@ -80,6 +82,11 @@ export default function TaskProgress({
         style={progressStyle}
         value={spent}
       />
+      {!compact && title === undefined ? (
+        <span className="text-muted text-xs tabular-nums">
+          {formatTimerTime(Math.max(0, task.duration - spent))} remaining
+        </span>
+      ) : null}
     </div>
   );
 }
