@@ -214,7 +214,7 @@ export default function GlobalSearchDialog({
               </Autocomplete.Clear>
               <Dialog.Close
                 aria-label="Close search"
-                className="border-foreground/10 bg-background/70 text-foreground shadow-foreground/5 hover:text-action focus-visible:outline-action hover:before:bg-foreground/8 relative isolate flex size-10.5 shrink-0 cursor-pointer items-center justify-center rounded-full border shadow-sm backdrop-blur-md transition-colors duration-150 [corner-shape:round] before:pointer-events-none before:absolute before:inset-1 before:-z-10 before:rounded-full before:transition-colors before:duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.95] motion-reduce:transition-none motion-reduce:before:transition-none"
+                className="border-border bg-background/70 text-foreground shadow-foreground/5 hover:text-action focus-visible:outline-action hover:before:bg-foreground/8 relative isolate flex size-10.5 shrink-0 cursor-pointer items-center justify-center rounded-full border shadow-sm backdrop-blur-md transition-colors duration-150 [corner-shape:round] before:pointer-events-none before:absolute before:inset-1 before:-z-10 before:rounded-full before:transition-colors before:duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.95] motion-reduce:transition-none motion-reduce:before:transition-none"
                 type="button"
               >
                 <XMarkIcon

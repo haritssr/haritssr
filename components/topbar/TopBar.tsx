@@ -127,7 +127,7 @@ export default function TopBar() {
 function TabBarTop({ pathname }: { pathname: string }) {
   return (
     <ul
-      className={`${styles.tabs} border-foreground/10 bg-background/70 shadow-foreground/5 absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.25 rounded-full border p-1 shadow-sm backdrop-blur-md [corner-shape:round] lg:flex`}
+      className={`${styles.tabs} border-border bg-background/70 shadow-foreground/5 absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.25 rounded-full border p-1 shadow-sm backdrop-blur-md [corner-shape:round] lg:flex`}
       id="main-navigation"
     >
       {primaryNavigation.map(({ title, href }) => {

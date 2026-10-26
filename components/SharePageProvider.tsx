@@ -50,7 +50,7 @@ function ShareToastList() {
 
   return toasts.map((toast) => (
     <Toast.Root
-      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-foreground/10 bg-background/70 shadow-foreground/5 pointer-events-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md transition-[transform,opacity] duration-200 ease-out [corner-shape:round] sm:max-w-[22.4rem]"
+      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-border bg-background/70 shadow-foreground/5 pointer-events-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md transition-[transform,opacity] duration-200 ease-out [corner-shape:round] sm:max-w-[22.4rem]"
       key={toast.id}
       swipeDirection="right"
       toast={toast}

@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef } from "react";
 
 export const TOP_BAR_CAPSULE_CLASS_NAME =
-  "border-foreground/10 bg-background/70 shadow-foreground/5 flex w-fit shrink-0 items-center gap-0.25 rounded-full border p-1 shadow-sm backdrop-blur-md [corner-shape:round]";
+  "border-border bg-background/70 shadow-foreground/5 flex w-fit shrink-0 items-center gap-0.25 rounded-full border p-1 shadow-sm backdrop-blur-md [corner-shape:round]";
 
 export function topBarActionClassName(showLabel = false): string {
   const base =
