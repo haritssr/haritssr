@@ -5,6 +5,10 @@ The [Music page](../page.tsx) renders `MusicLibrary`; the root layout retains
 Music visit or for a remembered visible player. The runtime creates one store,
 connects/disconnects it, handles Space, and renders the floating player.
 
+Music and Timer use separate floating pills, with Music above Timer when both
+are visible. Each pill spans the available width on phones, and both players'
+controls remain accessible.
+
 | Responsibility | File |
 | --- | --- |
 | Search, import/drop controls, feedback, offline preparation | [MusicLibrary.tsx](MusicLibrary.tsx) |

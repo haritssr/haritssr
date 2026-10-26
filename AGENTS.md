@@ -145,8 +145,9 @@ substitute Unicode, plain text, `<sub>`/`<sup>`, or monospace notation.
 - Desktop navigation starts at 1024px. Mobile bottom navigation appears on Home and
   Projects/Labs/Writing/Design up to two URL segments deep, excluding articles/deeper
   routes. Both use shared navigation data and `utils/navigation/navigationState.ts`.
-- `FloatingDock` places Music above Timer and owns navigation, safe-area, and combined
-  footer clearance without loading inactive runtimes.
+- `FloatingDock` owns navigation, safe-area, and combined footer clearance without
+  loading inactive runtimes. Visible Music and Timer players appear as separate
+  full-width pills on mobile, with Music above Timer at every size.
 - Use viewport-height layout and symmetric scrollbar gutters. `Breadcrumbs` owns
   its spacing: below 1024px, Footer reserves a 24px breadcrumb row above the Jakarta
   date/WIB clock; desktop places breadcrumbs and right-aligned date/clock together

@@ -5,6 +5,7 @@ export const musicRelationships = `flowchart TD
   Provider --> Runtime["MusicRuntime: lifetime and Space shortcut"]
   Runtime --> Store["MusicStore: audio, queue, session, subscriptions"]
   Runtime --> Dock["FloatingMusicDock"]
+  Dock --> Host["FloatingDock: Music above Timer"]
   Page["/music"] --> Library["MusicLibrary: search, imports, feedback"]
   Library --> List["MusicSongList: selection and sorting"]
   List --> Controls["MusicPlaybackControls: playback, repeat, shuffle, volume"]

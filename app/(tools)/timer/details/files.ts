@@ -140,6 +140,10 @@ export const implementationFiles = [
     "Display-local clock shared by the task list and floating task UI.",
   ],
   [
+    "components/floating/FloatingDock.tsx",
+    "Shared player visibility, Music-above-Timer layout, and notices.",
+  ],
+  [
     "components/floating/useFloatingDockPosition.ts",
     "Shared Music and Timer navigation gap, desktop positioning, and combined floating layout clearance.",
   ],

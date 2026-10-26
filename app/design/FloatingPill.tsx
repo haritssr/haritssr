@@ -20,9 +20,9 @@ const themes = {
     label: "Dark",
     variables: "[--pill-accent:var(--color-foreground)]",
   },
-  blue: {
-    label: "Blue",
-    variables: "[--pill-accent:var(--color-action)]",
+  danger: {
+    label: "Red",
+    variables: "[--pill-accent:var(--color-danger)]",
   },
   yellow: {
     label: "Yellow",
@@ -32,6 +32,10 @@ const themes = {
     label: "Green",
     variables: "[--pill-accent:var(--color-success)]",
   },
+  blue: {
+    label: "Blue",
+    variables: "[--pill-accent:var(--color-action)]",
+  },
   purple: {
     label: "Purple",
     variables: "[--pill-accent:var(--color-secondary-accent)]",
@@ -39,7 +43,14 @@ const themes = {
 } as const;
 
 type Theme = keyof typeof themes;
-const options: readonly Theme[] = ["dark", "blue", "yellow", "green", "purple"];
+const options: readonly Theme[] = [
+  "dark",
+  "danger",
+  "yellow",
+  "green",
+  "blue",
+  "purple",
+];
 
 export default function FloatingPill() {
   const [theme, setTheme] = useState<Theme>("dark");
@@ -53,11 +64,11 @@ export default function FloatingPill() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-center lg:justify-evenly">
       <div
-        className={`border-foreground/10 bg-background/70 shadow-foreground/10 mx-auto flex min-h-13.25 w-full max-w-[22.4rem] items-center gap-2 rounded-full border py-2 pr-2 pl-5 shadow-lg backdrop-blur-md [corner-shape:round] ${selected.variables}`}
+        className={`border-border bg-background/70 shadow-foreground/10 mx-auto flex min-h-13.25 w-full max-w-[22.4rem] items-center gap-1.5 rounded-full border py-2 pr-2 pl-4 shadow-lg backdrop-blur-md [corner-shape:round] lg:mx-0 ${selected.variables}`}
       >
-        <div className="min-w-0 flex-1 space-y-2 sm:space-y-1.5">
+        <div className="min-w-0 flex-1 space-y-1.5">
           <div className="flex min-w-0 items-center justify-between gap-2">
             <span className="text-foreground flex min-w-0 items-center gap-1 text-sm leading-4 font-medium">
               <SparklesIcon aria-hidden="true" className="size-4 shrink-0" />
@@ -69,19 +80,23 @@ export default function FloatingPill() {
           </div>
           <progress
             aria-label="Creative session progress"
-            className="bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block h-2 w-full appearance-none overflow-hidden rounded-full border-0 sm:h-1.5 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--pill-accent) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--pill-accent)"
+            className="bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block h-1.5 w-full appearance-none overflow-hidden rounded-full border-0 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--pill-accent) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--pill-accent)"
             max={100}
             value={40}
           />
         </div>
-        <Button aria-label="Next" size="icon-circle" variant="outline">
+        <Button aria-label="Next" size="icon-circle" variant="floating-outline">
           <ForwardIcon
             aria-hidden="true"
-            className="size-4.5"
+            className="size-4.5 translate-x-[0.5px] -translate-y-[0.5px]"
             strokeWidth={2}
           />
         </Button>
-        <Button aria-label="Dismiss" size="icon-circle" variant="outline">
+        <Button
+          aria-label="Dismiss"
+          size="icon-circle"
+          variant="floating-outline"
+        >
           <XMarkIcon
             aria-hidden="true"
             className="size-4.5"
@@ -129,7 +144,7 @@ export default function FloatingPill() {
         </div>
         <RadioGroup<Theme>
           aria-label="Creative pill color"
-          className="flex flex-wrap justify-end gap-x-3 gap-y-2"
+          className="flex min-w-0 flex-wrap justify-end gap-x-3 gap-y-2"
           onValueChange={setTheme}
           value={theme}
         >
@@ -139,14 +154,16 @@ export default function FloatingPill() {
               key={option}
             >
               <Radio.Root
-                className="border-border focus-visible:outline-action flex size-5 shrink-0 items-center justify-center rounded border bg-white outline-hidden focus-visible:outline-2 data-checked:border-(--pill-accent) data-checked:bg-(--pill-accent)"
+                className="focus-visible:outline-action flex size-5 shrink-0 items-center justify-center rounded border border-(--pill-accent) bg-white outline-hidden focus-visible:outline-2 data-checked:border-(--pill-accent) data-checked:bg-(--pill-accent)"
                 value={option}
               >
                 <Radio.Indicator className="text-white">
                   <CheckIcon aria-hidden="true" className="size-4" />
                 </Radio.Indicator>
               </Radio.Root>
-              {themes[option].label}
+              <span className="sr-only text-(--pill-accent) sm:not-sr-only">
+                {themes[option].label}
+              </span>
             </label>
           ))}
         </RadioGroup>

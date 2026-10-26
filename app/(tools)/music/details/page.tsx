@@ -109,7 +109,9 @@ export default async function MusicDetailsPage() {
                   restores the song, position, and settings paused. Starting
                   playback in another tab pauses the previous tab. Closing the
                   floating player pauses it and keeps the selected song. Music
-                  and Timer sounds can play together.
+                  and Timer sounds can play together. When both floating players
+                  are visible, Music sits above Timer in separate pills with
+                  both sets of controls accessible.
                 </span>
               </li>
               <li>

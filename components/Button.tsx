@@ -13,7 +13,9 @@ type ButtonVariant =
   | "neutral-subtle"
   | "neutral-subtle-underlined"
   | "secondary-strong"
+  | "floating-secondary"
   | "outline"
+  | "floating-outline"
   | "outline-interactive"
   | "outline-regular"
   | "action-outline-regular"
@@ -59,7 +61,11 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "gap-0 rounded-none p-0 font-semibold text-foreground underline underline-offset-2 transition-colors duration-150 hover:text-action focus-visible:outline-action",
   "secondary-strong":
     "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-foreground",
+  "floating-secondary":
+    "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-foreground",
   outline:
+    "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
+  "floating-outline":
     "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "outline-interactive":
     "border-border text-foreground border bg-transparent font-medium transition-[color,border-color,background-color,transform] duration-150 enabled:hover:bg-foreground/5 focus:border-foreground focus-visible:outline-foreground active:scale-95 active:border-foreground motion-reduce:transition-none",

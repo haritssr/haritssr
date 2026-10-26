@@ -345,7 +345,8 @@ export default function TimerDetailsPage() {
             </li>
             <li>
               Outside Timer, a floating bar shows progress and task controls.
-              Click its title to return to Timer.
+              When Music is also visible, it sits above Timer in a separate
+              pill. Tap the task title to return to Timer.
             </li>
             <li>
               The task-count control cycles through running tasks. A task paused

@@ -14,38 +14,68 @@ import { createPortal } from "react-dom";
 
 import useFloatingDockPosition from "./useFloatingDockPosition";
 
-const DockContext = createContext<{
+type DockPosition = "music" | "timer";
+type DockCounts = Record<DockPosition | "notice", number>;
+
+interface DockContextValue {
+  noticeTarget: HTMLDivElement | null;
   target: HTMLDivElement | null;
-  register: () => () => void;
-} | null>(null);
+  register: (position: keyof DockCounts) => () => void;
+}
+
+const DockContext = createContext<DockContextValue | null>(null);
+function useFloatingDock() {
+  const context = useContext(DockContext);
+  if (!context) {
+    throw new Error("Floating controls require FloatingDock.");
+  }
+  return context;
+}
 
 export default function FloatingDock({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
-  const [count, setCount] = useState(0);
+  const [noticeTarget, setNoticeTarget] = useState<HTMLDivElement | null>(null);
+  const [counts, setCounts] = useState<DockCounts>({
+    music: 0,
+    timer: 0,
+    notice: 0,
+  });
+  const count = counts.music + counts.timer + counts.notice;
   const ref = useFloatingDockPosition(count > 0, pathname);
-  const register = useCallback(() => {
-    setCount((value) => value + 1);
+
+  const register = useCallback((position: keyof DockCounts) => {
+    setCounts((current) => ({ ...current, [position]: current[position] + 1 }));
     return () => {
-      setCount((value) => Math.max(0, value - 1));
+      setCounts((current) => ({
+        ...current,
+        [position]: Math.max(0, current[position] - 1),
+      }));
     };
   }, []);
-  const setDock = useCallback(
-    (node: HTMLDivElement | null) => {
-      ref.current = node;
-      setTarget(node);
-    },
-    [ref]
-  );
 
-  const value = useMemo(() => ({ target, register }), [target, register]);
+  const value = useMemo(
+    () => ({ noticeTarget, target, register }),
+    [noticeTarget, target, register]
+  );
+  const hasPlayers = counts.music + counts.timer > 0;
+
   return (
     <DockContext value={value}>
       {children}
       <div
         className={`${count === 0 ? "hidden" : "flex"} pointer-events-none fixed inset-x-0 bottom-[var(--floating-dock-bottom,max(0.5rem,env(safe-area-inset-bottom)))] z-50 mx-auto w-full max-w-5xl flex-col items-end gap-[max(0.5rem,env(safe-area-inset-bottom))] px-2 [--floating-safe-bottom:env(safe-area-inset-bottom,0px)] sm:bottom-[var(--floating-dock-bottom,1.5rem)] sm:items-center sm:px-4 lg:gap-3 xl:px-0`}
-        ref={setDock}
-      />
+        ref={ref}
+      >
+        <div
+          className={`${counts.notice === 0 ? "hidden" : "flex"} w-full flex-col items-end gap-3 sm:w-auto sm:items-center`}
+          ref={setNoticeTarget}
+        />
+        <div
+          className={`${hasPlayers ? "flex" : "hidden"} w-full flex-col items-end gap-[max(0.5rem,env(safe-area-inset-bottom))] sm:w-auto sm:items-center lg:gap-3`}
+          ref={setTarget}
+        />
+      </div>
     </DockContext>
   );
 }
@@ -55,19 +85,24 @@ export function FloatingDockSlot({
   position,
 }: {
   children: ReactNode;
-  position: "music" | "timer";
+  position: DockPosition;
 }) {
-  const context = useContext(DockContext);
-  const register = context?.register;
-  useEffect(() => register?.(), [register]);
-  return context?.target
+  const { register, target } = useFloatingDock();
+  useEffect(() => register(position), [position, register]);
+  return target
     ? createPortal(
         <div
           className={`${position === "music" ? "order-1" : "order-2"} flex w-full flex-col items-end gap-3 sm:w-auto sm:items-center`}
         >
           {children}
         </div>,
-        context.target
+        target
       )
     : null;
+}
+
+export function FloatingDockNotice({ children }: { children: ReactNode }) {
+  const { noticeTarget, register } = useFloatingDock();
+  useEffect(() => register("notice"), [register]);
+  return noticeTarget ? createPortal(children, noticeTarget) : null;
 }

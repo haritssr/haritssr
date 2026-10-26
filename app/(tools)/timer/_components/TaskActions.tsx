@@ -151,7 +151,7 @@ function TaskIconActions({
 }) {
   const ToggleIcon = running ? PauseIcon : PlayIcon;
   return (
-    <div className="flex shrink-0 items-center gap-2">
+    <div className="flex shrink-0 items-center gap-1.5">
       {children}
       <Button
         aria-label={`Done: ${activity}`}
@@ -160,7 +160,7 @@ function TaskIconActions({
         onClick={onDone}
         size="icon-circle"
         title="Done"
-        variant="secondary-strong"
+        variant="floating-secondary"
       >
         <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-4.5" />
       </Button>

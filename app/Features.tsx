@@ -151,8 +151,8 @@ function SharePreview() {
 
 function TimerPreview() {
   return (
-    <div className="border-foreground/10 bg-background/70 shadow-foreground/10 flex w-full min-w-0 items-center gap-2 rounded-full border py-2 pr-2 pl-5 shadow-lg backdrop-blur-md [corner-shape:round]">
-      <div className="min-w-0 flex-1 space-y-2">
+    <div className="border-border bg-background/70 shadow-foreground/10 flex w-full min-w-0 items-center gap-2 rounded-full border py-2 pr-2 pl-5 shadow-lg backdrop-blur-md [corner-shape:round]">
+      <div className="min-w-0 flex-1 space-y-1.5">
         <div className="text-foreground flex min-w-0 items-center justify-between gap-2 text-xs">
           <span className="truncate font-medium">Focused work</span>
           <span className="text-muted shrink-0 tabular-nums">12:30</span>

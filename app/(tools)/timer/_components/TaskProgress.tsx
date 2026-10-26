@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 
 import { formatTimerTime } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
+import { formatRemainingTime } from "@/components/floating/formatRemainingTime";
 
 import { TASK_LAYOUT } from "./taskPresentation";
 import type { TaskAppearance } from "./taskPresentation";
@@ -13,6 +14,7 @@ export default function TaskProgress({
   running,
   appearance,
   compact = false,
+  showTitleIcon = true,
   title,
 }: {
   task: TimerTask;
@@ -20,6 +22,7 @@ export default function TaskProgress({
   running: boolean;
   appearance: TaskAppearance;
   compact?: boolean;
+  showTitleIcon?: boolean;
   title?: string;
 }) {
   const stackClass = compact
@@ -31,15 +34,15 @@ export default function TaskProgress({
     "--timer-progress-fill": appearance.progress,
   };
   return (
-    <div
-      className={`${stackClass} ${title === undefined ? "" : "max-sm:gap-2"}`}
-    >
+    <div className={stackClass}>
       <div
         className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
       >
         {title === undefined ? null : (
           <span className="flex min-w-0 flex-1 items-center gap-1 text-sm leading-4 font-medium normal-nums">
-            <ClockIcon aria-hidden="true" className="size-4 shrink-0" />
+            {showTitleIcon ? (
+              <ClockIcon aria-hidden="true" className="size-4 shrink-0" />
+            ) : null}
             <span className="truncate">{title}</span>
           </span>
         )}
@@ -47,9 +50,18 @@ export default function TaskProgress({
           <span
             className={`shrink-0 ${title === undefined ? appearance.elapsed : "text-muted"}`}
           >
-            {title === undefined
-              ? formatTimerTime(spent)
-              : `-${formatTimerTime(Math.max(0, task.duration - spent))}`}
+            {title === undefined ? (
+              formatTimerTime(spent)
+            ) : (
+              <>
+                <span className="sr-only">
+                  {formatRemainingTime(task.duration - spent)}
+                </span>
+                <span aria-hidden="true">
+                  -{formatTimerTime(Math.max(0, task.duration - spent))}
+                </span>
+              </>
+            )}
           </span>
           {title === undefined ? (
             <>

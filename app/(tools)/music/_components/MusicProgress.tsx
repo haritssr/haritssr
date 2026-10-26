@@ -23,7 +23,7 @@ export default function MusicProgress({
     return (
       <progress
         aria-label="Song progress"
-        className="bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block h-2 w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 sm:h-1.5 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--music-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--music-progress-fill)"
+        className="bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block h-1.5 w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--music-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--music-progress-fill)"
         max={duration || 1}
         value={Math.min(position, duration || 0)}
       />
