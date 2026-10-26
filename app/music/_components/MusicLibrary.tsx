@@ -543,7 +543,7 @@ function SongList({
                 <circle cx="11" cy="13" r="1.25" />
               </svg>
             </button>
-            <div className="flex min-w-0 flex-1 basis-0 items-center gap-0 group-data-[current=true]/song:basis-64">
+            <div className="flex min-w-0 flex-1 basis-0 items-center gap-2 group-data-[current=true]/song:basis-64 sm:gap-0">
               <button
                 aria-label={`${track.id === current?.id && playing ? "Pause" : "Play"} ${track.title}${includedTrack(track.id) ? "" : " (imported song)"}`}
                 className="focus-visible:outline-action text-foreground group-data-[current=true]/song:text-music-accent -my-2 flex min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-md text-left transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
