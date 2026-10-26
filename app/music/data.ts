@@ -32,7 +32,7 @@ export const includedMusic = [
     "all-for-you",
     "All For You.mp3",
     "All For You",
-    "Unknown artist",
+    "Seo In-guk, Jung Eun-ji (MV)",
     249.96571428571428,
     5_999_941
   ),
@@ -40,14 +40,14 @@ export const includedMusic = [
     "all-for-you-live",
     "All For You - Live.mp3",
     "All For You (Live)",
-    "Unknown artist",
+    "Seo In-guk, Jung Eun-ji",
     273.37142857142857,
     3_899_635
   ),
   track(
-    "all-for-you-suhyun",
-    "All For You - SuhYun.mp3",
-    "All For You",
+    "yeowooya-suhyun",
+    "Yeowooya - SuhYun.mp3",
+    "Yeowooya",
     "SuhYun",
     220.42122448979592,
     3_352_101
