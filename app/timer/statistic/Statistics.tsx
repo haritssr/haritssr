@@ -33,7 +33,7 @@ function taskStatus(task: TimerTask) {
 }
 
 export default function Statistics() {
-  const { snapshot } = useTimer();
+  const { snapshot } = useTimer("snapshot");
   const [date, setDate] = useState(() => timerDate());
   const today = snapshot?.today ?? timerDate();
   const validDate = validTimerDate(date) && date <= today;

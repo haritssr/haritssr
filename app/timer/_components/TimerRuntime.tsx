@@ -1,42 +1,26 @@
 "use client";
 
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useContext, useEffect, useState, useSyncExternalStore } from "react";
 import useSWR from "swr";
 
 import FloatingTimerDock from "@/app/timer/_components/FloatingTimerDock";
 import { TimerContext } from "@/app/timer/_components/TimerProvider";
+import useTimerAudio from "@/app/timer/hooks/useTimerAudio";
 import useTimerNotifications from "@/app/timer/hooks/useTimerNotifications";
 import useTimerPolling from "@/app/timer/hooks/useTimerPolling";
 import useTimerSchedule from "@/app/timer/hooks/useTimerSchedule";
 import {
-  DEFAULT_DURATION_PRESETS,
-  DEFAULT_TASK_PRESETS,
-} from "@/app/timer/utils/timer";
-import type { TimerTaskPreset } from "@/app/timer/utils/timer";
-import {
   fetchTimerSnapshot,
-  saveTimerPreferences,
-  sendTimerAction,
   subscribeTimerChanges,
   TIMER_SNAPSHOT_KEY,
 } from "@/app/timer/utils/timerClient";
 import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
-import { TimerMutations } from "@/app/timer/utils/timerMutations";
+import { createTimerController } from "@/app/timer/utils/timerController";
+import type { TimerController } from "@/app/timer/utils/timerController";
 
-function useTimerState() {
+function useTimerRuntime(controller: TimerController) {
   const polling = useTimerPolling();
-  // oxlint-disable-next-line react/hook-use-state -- One stable external store per provider; no setter is needed.
-  const [mutations] = useState(
-    () =>
-      new TimerMutations({
-        action: async (action) => {
-          const result = await sendTimerAction(action);
-          return result.snapshot;
-        },
-        preferences: saveTimerPreferences,
-        refresh: fetchTimerSnapshot,
-      })
-  );
+  const { mutations } = controller;
   const state = useSyncExternalStore(
     mutations.subscribe,
     mutations.getSnapshot,
@@ -87,82 +71,38 @@ function useTimerState() {
       };
     }
   }, [mutations]);
-  const { snapshot, confirmed, pendingCount, drafts } = state;
-  const autoplay = snapshot?.preferences?.autoplay ?? false;
-  const multitask = snapshot?.preferences?.multitask ?? false;
-  const notificationsEnabled =
-    snapshot?.preferences?.notificationsEnabled ?? true;
+  const { snapshot, confirmed } = state;
   const clockOffset = snapshot?.clockOffset ?? 0;
-  const { tickingEnabled, setTickingEnabled } = useTimerSchedule(
-    snapshot,
-    clockOffset,
-    mutations.refresh
-  );
+  useTimerSchedule(snapshot, clockOffset, mutations.refresh);
+  useTimerAudio(snapshot, clockOffset);
   useTimerNotifications({
     snapshot: confirmed,
     publish: mutations.receive,
     autoplay: confirmed?.preferences?.autoplay ?? false,
     notificationsEnabled: confirmed?.preferences?.notificationsEnabled ?? true,
   });
-  return useMemo(
-    () => ({
-      snapshot,
-      pendingCount,
-      drafts,
-      clockOffset,
-      autoplay,
-      multitask,
-      notificationsEnabled,
-      durationPresets:
-        snapshot?.preferences?.durationPresets ?? DEFAULT_DURATION_PRESETS,
-      taskPresets: snapshot?.preferences?.taskPresets ?? DEFAULT_TASK_PRESETS,
-      setDurationPresets: async (durationPresets: number[]) =>
-        await mutations.preferences({ durationPresets }),
-      setTaskPresets: async (taskPresets: TimerTaskPreset[]) =>
-        await mutations.preferences({ taskPresets }),
-      setAutoplay: async (enabled: boolean) =>
-        await mutations.preferences({ autoplay: enabled }),
-      setMultitask: async (enabled: boolean) =>
-        await mutations.preferences({ multitask: enabled }),
-      setNotificationsEnabled: async (enabled: boolean) =>
-        await mutations.preferences({ notificationsEnabled: enabled }),
-      tickingEnabled,
-      setTickingEnabled,
-      act: mutations.act,
-      refresh: mutations.refresh,
-      error: state.error ?? state.loadError,
-    }),
-    [
-      snapshot,
-      pendingCount,
-      drafts,
-      clockOffset,
-      autoplay,
-      multitask,
-      notificationsEnabled,
-      tickingEnabled,
-      setTickingEnabled,
-      mutations,
-      state.error,
-      state.loadError,
-    ]
+}
+
+export default function TimerRuntime({
+  onReady,
+}: {
+  onReady: (controller: TimerController) => void;
+}) {
+  // oxlint-disable-next-line react/hook-use-state -- One stable controller for the lifetime of the deferred runtime.
+  const [controller] = useState(createTimerController);
+  const shared = useContext(TimerContext);
+  useEffect(() => {
+    onReady(controller);
+  }, [onReady, controller]);
+  return (
+    <>
+      <TimerEffects controller={controller} />
+      {shared === controller ? <FloatingTimerDock /> : null}
+    </>
   );
 }
 
-export type TimerState = ReturnType<typeof useTimerState>;
-
-export default function TimerRuntime({
-  onStateChange,
-}: {
-  onStateChange: (state: TimerState) => void;
-}) {
-  const value = useTimerState();
-  useEffect(() => {
-    onStateChange(value);
-  }, [onStateChange, value]);
-  return (
-    <TimerContext value={value}>
-      <FloatingTimerDock />
-    </TimerContext>
-  );
+function TimerEffects({ controller }: { controller: TimerController }) {
+  useTimerRuntime(controller);
+  return null;
 }

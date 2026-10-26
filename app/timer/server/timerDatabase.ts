@@ -8,7 +8,10 @@ import type {
   Transaction,
 } from "@libsql/client";
 
-import type { TimerDay } from "@/app/timer/utils/timer";
+import type {
+  TimerDay,
+  TimerPreferences,
+} from "@/app/timer/utils/timer";
 import {
   daySchema,
   preferencesSchema,
@@ -366,4 +369,38 @@ export async function timerDatabaseTransaction<T>(
   } finally {
     tx.close();
   }
+}
+
+export async function writeTimerPreferences(
+  tx: Transaction,
+  prefs: TimerPreferences
+) {
+  await tx.execute({
+    sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, notifications_enabled = ?, duration_presets = ?, task_presets = ? WHERE id = 1",
+    args: [
+      prefs.revision,
+      Number(prefs.autoplay),
+      Number(prefs.multitask),
+      Number(prefs.notificationsEnabled),
+      JSON.stringify(prefs.durationPresets),
+      JSON.stringify(prefs.taskPresets),
+    ],
+  });
+}
+
+export async function readTimerTotals(
+  tx: Transaction,
+  from: string,
+  to: string
+) {
+  const result = await tx.execute({
+    sql: "SELECT date, spent_seconds FROM timer_days WHERE date BETWEEN ? AND ?",
+    args: [from, to],
+  });
+  return new Map(
+    result.rows.map((row) => [
+      typeof row.date === "string" ? row.date : "",
+      Number(row.spent_seconds),
+    ])
+  );
 }

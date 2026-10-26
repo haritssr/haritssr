@@ -95,7 +95,8 @@ export async function fetchTimerHistory(date: string) {
 }
 
 export async function sendTimerAction(action: TimerAction) {
-  const { changeSchema } = await import("@/app/timer/utils/timerValidation");
+  const { changeSchema } =
+    await import("@/app/timer/utils/timerValidation");
   const result = changeSchema.parse(
     await fetchTimer("/api/timer", {
       method: "POST",
@@ -110,7 +111,8 @@ export async function sendTimerAction(action: TimerAction) {
 export async function saveTimerPreferences(
   patch: Partial<Omit<TimerPreferences, "revision">>
 ) {
-  const { snapshotSchema } = await import("@/app/timer/utils/timerValidation");
+  const { snapshotSchema } =
+    await import("@/app/timer/utils/timerValidation");
   const result = received(
     snapshotSchema.parse(
       await fetchTimer("/api/timer", {

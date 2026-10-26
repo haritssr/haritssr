@@ -2,10 +2,16 @@ import { Toast } from "@base-ui/react/toast";
 import { useEffect, useRef } from "react";
 
 import { canUseTimer } from "@/app/timer/utils/timer";
-import type { TimerNotice, TimerSnapshot } from "@/app/timer/utils/timer";
+import type {
+  TimerNotice,
+  TimerSnapshot,
+} from "@/app/timer/utils/timer";
 import { sendTimerAction } from "@/app/timer/utils/timerClient";
 import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
-import { playTaskSound, prepareTaskSound } from "@/app/timer/utils/timerSound";
+import {
+  playTaskSound,
+  prepareTaskSound,
+} from "@/app/timer/utils/timerSound";
 import InternalLink from "@/components/InternalLink";
 
 async function showCompletion(notice: TimerNotice) {

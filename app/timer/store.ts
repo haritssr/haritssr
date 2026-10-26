@@ -3,6 +3,8 @@ import type { Transaction } from "@libsql/client";
 
 import {
   readTimerDays,
+  readTimerTotals,
+  writeTimerPreferences,
   readTimerState,
   updateTimerDays,
   timerDatabaseTransaction,
@@ -16,14 +18,18 @@ import {
   timerMidnight,
   validTimerDate,
 } from "@/app/timer/utils/timer";
-import type { TimerAction, TimerSnapshot } from "@/app/timer/utils/timer";
+import type {
+  TimerAction,
+  TimerSnapshot,
+} from "@/app/timer/utils/timer";
 import {
   createTimerBackup,
   mergeTimerBackup,
   parseTimerBackup,
 } from "@/app/timer/utils/timerBackup";
 import {
-  applyTimerAction,
+  applyTimerCommand,
+  applyTimerPreferencePatch,
   settleTimerDay,
   timerNotices,
   TimerStoreError,
@@ -88,7 +94,7 @@ export async function changeTimer(payload: unknown) {
   }
   const result = await timerDatabaseTransaction(async (tx) => {
     const value = await state(tx);
-    let command: TimerAction = parsed.data;
+    const command: TimerAction = parsed.data;
     if (
       command.date !== value.today &&
       (command.action !== "acknowledge" || command.date > value.today)
@@ -102,13 +108,14 @@ export async function changeTimer(payload: unknown) {
     if (!day) {
       throw new TimerStoreError("Task not found.", 404);
     }
-    settleTimerDay(day, value.now);
-    if (command.action === "start") {
-      command = { ...command, multitask: value.preferences.multitask };
-    } else if (command.action === "done" || command.action === "acknowledge") {
-      command = { ...command, autoplay: value.preferences.autoplay };
-    }
-    const notification = applyTimerAction(day, command, value.now);
+    const notification = applyTimerCommand(
+      day,
+      command.action === "acknowledge"
+        ? { ...command, autoplay: value.preferences.autoplay }
+        : command,
+      value.preferences,
+      value.now
+    );
     await updateTimerDays(tx, value.days, value.previous);
     return { snapshot: snapshot(value), notification };
   });
@@ -122,32 +129,15 @@ export async function changeTimerPreferences(payload: unknown) {
   const patch = preferencesPatchSchema.parse(payload);
   const result = await timerDatabaseTransaction(async (tx) => {
     const value = await state(tx);
-    if (patch.multitask === false) {
-      settleTimerDay(value.day, value.now);
-      applyTimerAction(
-        value.day,
-        { action: "single-task", date: value.today },
-        value.now
-      );
-    }
-    value.preferences = {
-      ...value.preferences,
-      ...patch,
-      revision: value.preferences.revision + 1,
-    };
+    value.preferences = applyTimerPreferencePatch(
+      value.day,
+      value.preferences,
+      patch,
+      value.now
+    );
+    value.preferences.revision += 1;
     await updateTimerDays(tx, value.days, value.previous);
-    const prefs = value.preferences;
-    await tx.execute({
-      sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, notifications_enabled = ?, duration_presets = ?, task_presets = ? WHERE id = 1",
-      args: [
-        prefs.revision,
-        Number(prefs.autoplay),
-        Number(prefs.multitask),
-        Number(prefs.notificationsEnabled),
-        JSON.stringify(prefs.durationPresets),
-        JSON.stringify(prefs.taskPresets),
-      ],
-    });
+    await writeTimerPreferences(tx, value.preferences);
     return snapshot(value);
   });
   return { ...result, now: new Date().toISOString() };
@@ -168,15 +158,10 @@ export async function getTimerHistory(date: string) {
         createEmptyTimerDay(date)
     );
     settleTimerDay(day, value.now);
-    const savedTotals = await tx.execute({
-      sql: "SELECT date, spent_seconds FROM timer_days WHERE date BETWEEN ? AND ?",
-      args: [shiftTimerDate(date, -29), date],
-    });
-    const totalsByDate = new Map(
-      savedTotals.rows.map((row) => [
-        typeof row.date === "string" ? row.date : "",
-        Number(row.spent_seconds),
-      ])
+    const totalsByDate = await readTimerTotals(
+      tx,
+      shiftTimerDate(date, -29),
+      date
     );
     return {
       day,

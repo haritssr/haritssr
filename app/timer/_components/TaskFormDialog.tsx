@@ -3,6 +3,7 @@ import { useId, useRef, useState } from "react";
 import type { CSSProperties, RefObject, SubmitEvent } from "react";
 
 import { useTimer } from "@/app/timer/_components/TimerProvider";
+import { TASK_INPUT_LIMITS } from "@/app/timer/utils/timerInput";
 import Button from "@/components/Button";
 
 import DeleteTaskButton from "./DeleteTaskButton";
@@ -54,7 +55,10 @@ function TaskFormPopup({
   onSubmit,
   onDelete,
 }: TaskFormDialogProps) {
-  const { durationPresets, taskPresets } = useTimer();
+  const { durationPresets, taskPresets } = useTimer(
+    "durationPresets",
+    "taskPresets"
+  );
   const [activity, setActivity] = useState(defaultActivity);
   const [description, setDescription] = useState(defaultDescription);
   const [duration, setDuration] = useState(() =>
@@ -166,11 +170,11 @@ export function TaskNameField({
       <span className="flex items-center justify-between">
         <span>Name</span>
         <span
-          className={`text-xs tabular-nums ${length >= 20 ? "text-attention font-medium" : "text-muted"}`}
+          className={`text-xs tabular-nums ${length >= TASK_INPUT_LIMITS.activity ? "text-attention font-medium" : "text-muted"}`}
           id={hintId}
         >
           <span className="sr-only">Characters: </span>
-          {length}/20
+          {length}/{TASK_INPUT_LIMITS.activity}
         </span>
       </span>
       <span className="relative block">
@@ -179,7 +183,7 @@ export function TaskNameField({
           className={`${INPUT_CLASS} h-10 pr-11.5`}
           value={value}
           disabled={disabled}
-          maxLength={20}
+          maxLength={TASK_INPUT_LIMITS.activity}
           name="activity"
           onChange={(event) => {
             onChange(event.currentTarget.value);
@@ -236,11 +240,11 @@ export function TaskDescriptionField({
           Description <span className="text-muted">(optional)</span>
         </span>
         <span
-          className={`text-xs tabular-nums ${length >= 35 ? "text-danger font-medium" : "text-muted"}`}
+          className={`text-xs tabular-nums ${length >= TASK_INPUT_LIMITS.description ? "text-danger font-medium" : "text-muted"}`}
           id={hintId}
         >
           <span className="sr-only">Characters: </span>
-          {length}/35
+          {length}/{TASK_INPUT_LIMITS.description}
         </span>
       </span>
       <span className="relative block">
@@ -250,7 +254,7 @@ export function TaskDescriptionField({
           type="text"
           value={value}
           disabled={disabled}
-          maxLength={35}
+          maxLength={TASK_INPUT_LIMITS.description}
           name="description"
           onChange={(event) => {
             onChange(event.currentTarget.value);

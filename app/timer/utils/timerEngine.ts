@@ -8,6 +8,7 @@ import type {
   TimerAction,
   TimerDay,
   TimerNotice,
+  TimerPreferences,
   TimerTask,
 } from "@/app/timer/utils/timer";
 
@@ -178,7 +179,7 @@ function changeTask(
   return notification;
 }
 
-export function applyTimerAction(
+function applyTimerAction(
   day: TimerDay,
   command: TimerAction,
   now: number
@@ -211,4 +212,34 @@ export function applyTimerAction(
   }
   day.revision += 1;
   return notification;
+}
+
+// Callers own date eligibility, authorization, transactions, and snapshot revisions.
+export function applyTimerCommand(
+  day: TimerDay,
+  action: TimerAction,
+  preferences: TimerPreferences | undefined,
+  now: number
+) {
+  settleTimerDay(day, now);
+  let command = action;
+  if (command.action === "start") {
+    command = { ...command, multitask: preferences?.multitask };
+  } else if (command.action === "done") {
+    command = { ...command, autoplay: preferences?.autoplay };
+  }
+  return applyTimerAction(day, command, now);
+}
+
+export function applyTimerPreferencePatch(
+  day: TimerDay,
+  preferences: TimerPreferences,
+  patch: Partial<Omit<TimerPreferences, "revision">>,
+  now: number
+): TimerPreferences {
+  if (patch.multitask === false) {
+    settleTimerDay(day, now);
+    applyTimerAction(day, { action: "single-task", date: day.date }, now);
+  }
+  return { ...preferences, ...patch };
 }

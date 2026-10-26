@@ -6,20 +6,29 @@ import {
   TIMER_SPEEDS,
   validTimerDate,
 } from "@/app/timer/utils/timer";
+import { TASK_INPUT_LIMITS } from "@/app/timer/utils/timerInput";
 
 const dateSchema = z.string().refine(validTimerDate);
 const instant = z.iso.datetime({ offset: true });
 const taskDetails = {
-  activity: z.string().trim().min(1).max(20),
-  description: z.string().trim().max(35),
-  duration: z.number().int().min(1).max(86_400),
+  activity: z.string().trim().min(1).max(TASK_INPUT_LIMITS.activity),
+  description: z.string().trim().max(TASK_INPUT_LIMITS.description),
+  duration: z
+    .number()
+    .int()
+    .min(TASK_INPUT_LIMITS.minimumDuration)
+    .max(TASK_INPUT_LIMITS.maximumDuration),
 };
 const taskSchema = z
   .object({
     id: z.string().min(1).max(100),
     activity: z.string().trim().min(1).max(120),
     description: z.string().max(2000),
-    duration: z.number().int().min(1).max(86_400),
+    duration: z
+      .number()
+      .int()
+      .min(TASK_INPUT_LIMITS.minimumDuration)
+      .max(TASK_INPUT_LIMITS.maximumDuration),
     spent: z.number().min(0),
     startedAt: instant.nullable(),
     lastStartedAt: instant.optional(),
@@ -84,7 +93,13 @@ const noticeSchema = z.object({
   activity: z.string(),
 });
 export const durationPresetsSchema = z
-  .array(z.number().int().min(1).max(86_400))
+  .array(
+    z
+      .number()
+      .int()
+      .min(TASK_INPUT_LIMITS.minimumDuration)
+      .max(TASK_INPUT_LIMITS.maximumDuration)
+  )
   .min(1)
   .max(5);
 export const taskPresetsSchema = z

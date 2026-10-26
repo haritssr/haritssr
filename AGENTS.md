@@ -375,9 +375,11 @@ bun run migrate:timer
 
 Run migration before deploying schema changes. It idempotently creates tables,
 summary triggers, pending-notification indexes, and preset columns.
-`timerDatabase.ts` owns SQL mapping and transactions; `store.ts` applies
-`timerEngine.ts` rules. Mutations project queued changes in memory and reconcile
-confirmed revisions. Writes affect changed rows; optional UUID `taskId` makes
+`timerDatabase.ts` owns SQL mapping, preference writes, historical-total reads,
+and transactions; `store.ts` coordinates `timerEngine.ts` rules. Shared command
+and preference operations also drive optimistic projection; server authorization,
+date checks, revisions, and completion claims remain authoritative. Mutations
+project queued changes in memory and reconcile confirmed revisions. Writes affect changed rows; optional UUID `taskId` makes
 repeated creation idempotent.
 
 ### Owner authentication
@@ -444,7 +446,13 @@ Completion feedback is claimed globally.
 
 `TimerProvider` shares the account session check and lazy-loads `TimerRuntime` for
 the owner or after a Timer visit, retaining it across navigation. Other anonymous
-visitors load neither runtime nor snapshots. HTTP transport, scheduling, audio,
+visitors load neither runtime nor snapshots. The runtime registers one stable
+`timerController` with the provider; `useTimer` subscribes directly to selected
+fields, without relaying snapshots through provider state. `useTimerAudio` owns
+ticking and warnings, `useTimerSchedule` owns completion/midnight refreshes, and
+`useTimerTicking` handles the Settings preference subscription and audio unlock.
+`timerInput` shares form limits with counters and server schemas while preserving
+broader legacy record validation. HTTP transport, scheduling, audio,
 notifications, and display clocks live in focused modules under `app/timer/`.
 
 Notifications are opt-in with on-screen fallback. Closed or suspended browsers

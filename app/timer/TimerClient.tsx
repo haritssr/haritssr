@@ -20,7 +20,7 @@ export default function TimerClient() {
 }
 
 function TimerLoadError() {
-  const { error, refresh } = useTimer();
+  const { error, refresh } = useTimer("error", "refresh");
   return error === null ? null : (
     <div
       className="border-danger text-danger flex flex-wrap items-center justify-between gap-3 rounded-lg border p-4"

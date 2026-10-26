@@ -5,7 +5,10 @@ import type { ComponentProps, ReactNode } from "react";
 import { useTimer } from "@/app/timer/_components/TimerProvider";
 import { canUseTimer } from "@/app/timer/utils/timer";
 import type { TimerTask } from "@/app/timer/utils/timer";
-import { playTaskSound, prepareTaskSound } from "@/app/timer/utils/timerSound";
+import {
+  playTaskSound,
+  prepareTaskSound,
+} from "@/app/timer/utils/timerSound";
 import Button from "@/components/Button";
 
 import DeleteTaskButton from "./DeleteTaskButton";
@@ -29,7 +32,7 @@ export default function TaskActions({
   onPause?: () => void;
   children?: ReactNode;
 }) {
-  const { act, snapshot } = useTimer();
+  const { act, snapshot } = useTimer("act", "snapshot");
   const showDone = running || task.spent > 0;
   const unavailable = !canUseTimer(snapshot);
   const disabled = unavailable;

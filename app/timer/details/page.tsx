@@ -103,11 +103,7 @@ export default function TimerDetailsPage() {
         </PageDescription>
       </PageHeader>
       <div className="space-y-16">
-        <Section
-          id="principles"
-          title="Principles"
-          contentClassName="max-w-3xl"
-        >
+        <Section id="principles" title="Logics" contentClassName="max-w-3xl">
           <ExplanationList>
             <li>Human activity fundamentally a task</li>
             <li>Without a task, human become death</li>
@@ -523,8 +519,8 @@ export default function TimerDetailsPage() {
         </Section>
         <Section
           id="code-relationships"
-          title="Code relationships"
-          description="Timer’s file relationships. Zoom, pan, or open a full-width view."
+          title="How this works"
+          description="Shared rules connect optimistic changes to saved records. Controls subscribe to the state they use; separate hooks handle audio and refresh deadlines. Zoom, pan, or open a full-width view."
         >
           <div className="space-y-10">
             {timerRelationships.map((diagram) => (

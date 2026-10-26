@@ -1,5 +1,8 @@
 export const implementationFiles = [
-  ["app/timer/page.tsx", "Timer page header, introduction, and navigation."],
+  [
+    "app/timer/page.tsx",
+    "Timer page header, introduction, and navigation.",
+  ],
   [
     "app/timer/TimerClient.tsx",
     "Page composition: Today, toolbar, feedback, and task collection.",
@@ -84,12 +87,18 @@ export const implementationFiles = [
     "app/api/timer/auth/[action]/route.ts",
     "Account session, Google login, callback, and sign-out endpoints.",
   ],
-  ["app/timer/statistic/page.tsx", "Statistics page header and metadata."],
+  [
+    "app/timer/statistic/page.tsx",
+    "Statistics page header and metadata.",
+  ],
   [
     "app/timer/statistic/Statistics.tsx",
     "Date selection, the 30-day chart, and activity history.",
   ],
-  ["app/timer/details/page.tsx", "This explanation and file inventory."],
+  [
+    "app/timer/details/page.tsx",
+    "This explanation and file inventory.",
+  ],
   [
     "app/timer/details/relationships.ts",
     "Pele diagram definitions and explanations of Timer’s file and function relationships.",
@@ -104,7 +113,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/_components/TimerRuntime.tsx",
-    "Deferred snapshot loading, optimistic Timer state, preferences, and scheduling.",
+    "Deferred controller creation, snapshot loading, scheduling, and confirmed-only completion effects.",
   ],
   [
     "utils/timerSession.ts",
@@ -124,7 +133,23 @@ export const implementationFiles = [
   ],
   [
     "app/timer/hooks/useTimerSchedule.ts",
-    "Ticking, countdown warnings, completion refreshes, and midnight rollover.",
+    "Completion and midnight refresh deadlines and timeout cleanup.",
+  ],
+  [
+    "app/timer/hooks/useTimerAudio.ts",
+    "Audio activation, ticking, countdown warnings, and audio ownership.",
+  ],
+  [
+    "app/timer/hooks/useTimerTicking.ts",
+    "Settings subscription to local ticking and audio unlock on user interaction.",
+  ],
+  [
+    "app/timer/utils/timerController.ts",
+    "Stable actions and cached field selections over the mutation controller.",
+  ],
+  [
+    "app/timer/utils/timerInput.ts",
+    "Shared task-input limits and form parsing; legacy stored limits remain separate.",
   ],
   [
     "app/timer/utils/timerTicking.ts",
@@ -148,7 +173,7 @@ export const implementationFiles = [
   ],
   [
     "app/timer/server/timerDatabase.ts",
-    "Turso schema, indexed date-scoped reads, changed-row persistence, and reusable-client transactions.",
+    "Turso schema, indexed reads, historical totals, task/preference writes, and transactions.",
   ],
   [
     "app/timer/utils/timerBackup.ts",
@@ -226,7 +251,11 @@ export const integrationFiles = [
     ".gitignore",
     "Excludes daily JSON records and temporary storage files from Git.",
   ],
-  ["README.md", "Documents Timer behavior, storage, and notification support."],
+  ["AGENTS.md", "Developer setup, verification rules, and architecture notes."],
+  [
+    "app/timer/_components/README.md",
+    "Timer component and runtime implementation guide.",
+  ],
 ] as const;
 
 export const storageFiles = [

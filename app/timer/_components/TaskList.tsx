@@ -7,7 +7,11 @@ import { TASK_LAYOUT } from "./taskPresentation";
 import { getTaskCollection } from "./taskState";
 
 export default function TaskList() {
-  const { snapshot, clockOffset, error } = useTimer();
+  const { snapshot, clockOffset, error } = useTimer(
+    "snapshot",
+    "clockOffset",
+    "error"
+  );
   const timestamp = useTimerClock(snapshot, clockOffset);
   if (snapshot === undefined) {
     return error === null ? (

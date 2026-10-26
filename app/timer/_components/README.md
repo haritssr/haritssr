@@ -37,6 +37,9 @@ Long Break (30m), and Orientation (30m). The three new presets have empty
 descriptions; existing saved lists retain their configured entries. Duration labels
 use compact h, m, and s units. In that file, `TaskNameField`, `TaskDescriptionField`, and `TaskFormActions`
 keep each form section easy to locate. `DurationFields` is shared too.
+Task form parsing lives in [timerInput.ts](../utils/timerInput.ts). Its lightweight
+limits are shared with input counters and server schemas; stored legacy text keeps
+its existing broader limits. Live elapsed-time validation remains in Edit.
 Name allows 20 characters; the optional Description allows 35. Both show a
 character counter beside their labels, using `text-attention` for Name and
 `text-danger` for Description at the limit. Each field has
@@ -126,7 +129,7 @@ tasks pause, finish, or reach midnight, and continues across page navigation. It
 Start, Pause, Done, or completion sounds. Audio setup happens in the toggle's
 click handler and on pointer/key interaction when restored ticking needs audio
 permission after a reload. The switch stays enabled while the browser blocks
-autoplay. The scheduling hook owns timeout cleanup and checks elapsed time
+autoplay. The audio hook owns ticking timeout cleanup and checks elapsed time
 before each tick, so overdue tasks stay silent while waiting for a server refresh.
 
 During the final 10 real seconds of a task, the same Quartz warning ticks play automatically,
@@ -135,8 +138,12 @@ stop when the task pauses or finishes. Remaining time accounts for task speed.
 
 The [provider](./TimerProvider.tsx) activates the deferred
 [runtime](./TimerRuntime.tsx) for owner sessions or Timer visits
-and keeps it alive across navigation. The runtime owns preference access,
-the shared SWR loading cache, and optimistic state from
+and keeps it alive across navigation. The runtime creates one stable
+[controller](../utils/timerController.ts), registers it with the provider once,
+and owns the shared SWR loading cache. `useTimer` subscribes
+directly to selected fields through `useSyncExternalStore`; actions keep stable
+identities. The provider does not relay snapshot updates through React state.
+The controller derives preference defaults and exposes optimistic state from
 [timerMutations.ts](../utils/timerMutations.ts). The mutation controller
 keeps confirmed revisions and projects pending changes in memory. It saves in
 order, rebases pending changes over refreshed snapshots, and rolls back failed
@@ -161,8 +168,12 @@ modules keep independent work separate:
   date-scoped batched reads, changed-row writes, and a reused runtime client.
   Statistics reads only its 30-day window plus today and outstanding tasks;
   backups and imports still read all history. Run `bun run migrate:timer` to add
-  the pending-notification partial index. [timerEngine.ts](../utils/timerEngine.ts) applies timer
-  rules and [timerBackup.ts](../utils/timerBackup.ts) validates imports.
+  the pending-notification partial index. This module also owns preference writes
+  and historical-total queries. [timerEngine.ts](../utils/timerEngine.ts) shares
+  settlement, command preparation, and preference transitions between optimistic
+  projection and server operations. The server retains authorization, date checks,
+  revision increments, and completion claims.
+  [timerBackup.ts](../utils/timerBackup.ts) validates imports.
 - [useTimerAudioOwner.ts](../hooks/useTimerAudioOwner.ts) coordinates
   continuous audio with a Web Lock and focused-tab fallback.
 - [useTimerPolling.ts](../hooks/useTimerPolling.ts) elects one visible polling
@@ -171,8 +182,12 @@ modules keep independent work separate:
   saves update other tabs without another fetch; unsupported or blocked browser
   APIs fall back to independent polling. Focus and scheduled completion/midnight
   refreshes remain available in every tab.
-- [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules ticking,
-  warnings, the earliest task completion, and midnight refreshes.
+- [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules only the earliest
+  task completion and midnight refreshes.
+- [useTimerAudio.ts](../hooks/useTimerAudio.ts) owns ticking, countdown warnings,
+  restored-audio activation listeners, and audio-owner coordination.
+- [useTimerTicking.ts](../hooks/useTimerTicking.ts) lets Settings subscribe to the
+  browser-local preference and unlock audio during the toggle interaction.
 - [useTimerNotifications.tsx](../hooks/useTimerNotifications.tsx) claims
   completions and supplies sound, browser notifications, and visible feedback.
   Completion messages use the shared share-feedback toast: a capsule over the
@@ -197,7 +212,7 @@ acknowledged. Saving requires network access; failures restore confirmed data
 and retain failed form drafts in memory. Recovery refreshes authoritative data
 before sending later queued commands; uncertain writes are not automatically
 resent. Backup controls wait for queued saves to finish.
-Initialize or migrate through `bun run migrate:timer`; see the root README.
+Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
 Export and Import share a segmented icon-only group,
 beside the secondary Settings button, with native hover labels and accessible names.

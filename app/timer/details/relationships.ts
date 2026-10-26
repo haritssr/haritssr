@@ -13,37 +13,45 @@ export const timerRelationships = [
       "Arrows describe composition, function calls, and returned data. File paths start at the project root; UI component filenames in the next diagram live in app/timer/_components/.",
     definition: `flowchart TD
       accTitle: Timer pages, provider, API, and daily storage
-      accDescr: The root layout mounts TimerProvider. TimerClient reads its shared snapshot. The provider and Statistics call the protected Timer API. The store applies timerEngine rules inside Turso transactions.
-      Layout["app/layout.tsx"] -->|mounts across navigation| Provider["app/timer/_components/TimerProvider.tsx: useTimer, act, publish, refresh"]
+      accDescr: The root layout mounts TimerProvider. TimerClient reads its shared snapshot. The deferred runtime shares one controller through the provider; controls subscribe to selected fields. The controller and Statistics call the protected Timer API. The store applies timerEngine rules inside Turso transactions.
+      Layout["app/layout.tsx"] -->|mounts across navigation| Provider["app/timer/_components/TimerProvider.tsx: lazy activation and selected subscriptions"]
       Page["app/timer/page.tsx"] --> Client["app/timer/TimerClient.tsx"]
       Page --> Date["TimerDate.tsx: date label from app/timer/utils/timer.ts"]
-      Provider -->|snapshot, preferences, actions| Client
-      Provider -->|site-wide snapshot and completion feedback| Dock["app/timer/_components/FloatingTimerDock.tsx"]
+      ClockPage["app/timer/clock/page.tsx"] --> ClockFace["AnalogClock.tsx: Jakarta time"]
+      ClockPage --> ClockSound["app/timer/clock/ClockSound.tsx: Sound checkbox and visible-page ticks"]
+      ClockSound --> Sound["app/timer/utils/timerSound.ts: shared quartz tick"]
+      Provider -->|loads once when needed| Runtime["app/timer/_components/TimerRuntime.tsx"]
+      Runtime -->|creates and registers once| Controller["app/timer/utils/timerController.ts: stable actions and selections"]
+      Controller -->|selected snapshot, preferences, actions| Client
+      Controller -->|selected state and actions| Dock["app/timer/_components/FloatingTimerDock.tsx"]
       Dock -->|portal slot| Host["components/floating/FloatingDock.tsx"]
       Host -->|combined Music and Timer geometry| Position["components/floating/useFloatingDockPosition.ts"]
       Position --> Navigation["components/TabBarButtom.tsx"]
       Client --> Toolbar["TimerToolbar.tsx"]
       Client --> List["TaskList.tsx"]
-      Provider -->|fetchTimerSnapshot / sendTimerAction| Transport["app/timer/utils/timerClient.ts"]
+      Runtime -->|snapshot loading and broadcasts| Transport
+      Controller --> Mutations["app/timer/utils/timerMutations.ts: ordered optimistic changes"]
+      Mutations -->|sendTimerAction / saveTimerPreferences| Transport["app/timer/utils/timerClient.ts"]
       StatsPage["app/timer/statistic/page.tsx"] --> Stats["app/timer/statistic/Statistics.tsx"]
       Stats -->|fetchTimerHistory| Transport
       Transport -->|protected GET / POST / PATCH| API["app/api/timer/route.ts"]
       API --> Store["app/timer/store.ts: snapshots, actions, preferences, history"]
-      Store --> Engine["app/timer/utils/timerEngine.ts: shared rules"]
+      Store --> Engine["app/timer/utils/timerEngine.ts: shared commands and preferences"]
+      Mutations --> Engine
       Store --> Database["app/timer/server/timerDatabase.ts: SQL mapping and transactions"]
       Database --> Turso[("Turso: days, tasks, preferences")]
       API -->|snapshot or history response| Transport
-      Transport -->|validated snapshot and clock offset| Provider
+      Transport -->|validated snapshot and clock offset| Mutations
       Transport -->|validated history and 30-day totals| Stats
       Migration["app/timer/migrate-timer.ts"] -->|initialize schema; import backups or JSON| Turso
       class Page,Client,Date,Toolbar,List,StatsPage,Stats,Dock,Navigation action
-      class Layout,Provider,Transport,Position attention
+      class Layout,Provider,Runtime,Controller,Mutations,Transport,Position attention
       class API,Store,Database,Turso,Migration,Engine success
       ${colors}`,
     notes: [
-      "TimerProvider checks the shared account session and loads TimerRuntime for the owner or a Timer page, recovering saved running tasks on direct navigation or reload. Anonymous visitors elsewhere do not load Timer state. SWR loads confirmed snapshots; timerMutations projects ordered pending changes in memory through useTimer; mounting it in app/layout.tsx keeps scheduling and completion effects alive across navigation.",
+      "TimerProvider checks the shared account session and loads TimerRuntime for the owner or a Timer page, recovering saved running tasks on direct navigation or reload. Anonymous visitors elsewhere do not load Timer state. TimerRuntime creates one controller and registers it with the provider once. SWR loads confirmed snapshots; timerMutations projects ordered pending changes in memory. useTimer subscribes directly to selected fields with stable action functions; mounting it in app/layout.tsx keeps scheduling and completion effects alive across navigation.",
       "FloatingTimerDock reuses the shared snapshot outside /timer and shows a compact task bar. Completion feedback uses the shared toast over mobile navigation or at the desktop bottom right. The shared FloatingDock host stacks Music above Timer. useFloatingDockPosition measures the combined stack and mobile navigation height and gap; desktop placement follows the content width. The dock overlays content and reserves mobile footer clearance using its height and a stable bottom gap.",
-      "act projects the change immediately, then timerMutations calls sendTimerAction in order through the protected API. Task actions read saved preferences in the same Turso transaction. receive protects newer confirmed revisions and rebases pending changes; failed writes restore confirmed state and preserve form drafts. Reads and committed changes broadcast validated snapshots to other tabs without another fetch. One visible tab owns periodic polling through Web Locks.",
+      "act projects the change immediately, then timerMutations calls sendTimerAction in order through the protected API. Task actions read saved preferences in the same Turso transaction. Optimistic projection and server commands share settlement and preference rules; server authorization, date checks, revisions, and notification claims remain authoritative. timerDatabase owns preference writes and historical-total queries as well as task persistence. receive protects newer confirmed revisions and rebases pending changes; failed writes restore confirmed state and preserve form drafts. Reads and committed changes broadcast validated snapshots to other tabs without another fetch. One visible tab owns periodic polling through Web Locks.",
       "Statistics uses GET /api/timer?date=YYYY-MM-DD for history and 30-day totals. The API checks access before returning personal Turso records.",
     ],
   },
@@ -76,8 +84,10 @@ export const timerRelationships = [
       Dock --> Progress
       Dock -->|circular icon presentation| Actions
       Dock -->|text only| Speed
-      Card -->|EditTask| Dialog["TaskDialog.tsx: AddTask / EditTask; readTaskForm"]
+      Card -->|EditTask| Dialog["TaskDialog.tsx: AddTask / EditTask"]
       Toolbar -->|Add Task / Shift+N| Dialog
+      Dialog --> Input["app/timer/utils/timerInput.ts: readTaskForm and input limits"]
+      Input --> Validation["app/timer/utils/timerValidation.ts: server schemas"]
       Dialog --> Form["TaskFormDialog.tsx: name, description, counters, clear buttons"]
       Form --> Duration["DurationFields.tsx: NumberInput and presets"]
       Actions --> Delete["DeleteTaskButton.tsx: confirmation"]
@@ -89,16 +99,16 @@ export const timerRelationships = [
       Toolbar -->|setMultitask; single-task when needed| Act
       Actions --> Sound["app/timer/utils/timerSound.ts: action feedback"]
       class Client,Toolbar,List,Card,Completed,Desc,Progress,Actions,Dialog,Form,Duration,Delete,Dock,Speed,Data action
-      class State,Appearance,Time,Act,Clock,Selection attention
+      class State,Appearance,Time,Act,Clock,Selection,Input attention
       class Sound danger
-      class Backups,Backup success
+      class Backups,Backup,Validation success
       ${colors}`,
     notes: [
       "getTaskCollection maps each task through getTaskState, sorts the results, and separates active tasks from completed tasks. getTaskState uses taskSpent to derive elapsed time, completion, running/paused state, and the action label.",
       "TaskCard combines taskPresentation styling with TaskDescription, TaskProgress, TaskActions, EditTask, and its speed control. CompletedTasksTable handles the collapsed completed list, sorting, and completion-time display.",
       "FloatingTimerDock shares compact progress, speed, action handlers, and sounds. getFloatingTasks excludes completed tasks and stops showing the old day at midnight; it includes running tasks and the one paused from the dock. The task-count button cycles through tasks and preserves selection for the session. Both displays use useTimerClock, with the dock clock disabled on /timer.",
       "TimerDataControls exports paused copies without changing live timers. Import validates the whole backup and atomically adds missing dates, fills empty days, or skips identical records. Conflicts reject every addition; imported completions do not alert again.",
-      "AddTask chooses a random name and description and handles Shift+N. AddTask and EditTask both call readTaskForm, share TaskFormDialog and DurationFields, and submit through act. Add/Edit close after validation and keep failed drafts for reopening. DeleteTaskButton routes confirmed deletion back to its caller, which submits through act.",
+      "AddTask chooses a random name and description and handles Shift+N. AddTask and EditTask both call readTaskForm from timerInput, whose limits are shared with field counters and server schemas, share TaskFormDialog and DurationFields, and submit through act. Add/Edit close after validation and keep failed drafts for reopening. DeleteTaskButton routes confirmed deletion back to its caller, which submits through act.",
     ],
   },
   {
@@ -109,34 +119,39 @@ export const timerRelationships = [
     definition: `flowchart TD
       accTitle: Turso saves, scheduling, and completion feedback
       accDescr: The protected API applies timer rules in a Turso write transaction. Results publish after commit. Browser hooks refresh at completion and midnight and claim completion feedback atomically.
-      Act["TimerProvider.tsx: act / saved preferences"] --> Send["timerClient.ts: protected HTTP requests"]
+      Act["timerController.ts: stable actions"] --> Queue["timerMutations.ts: optimistic projection and ordered saves"]
+      Queue --> Send["timerClient.ts: protected HTTP requests"]
       Send --> Local["store.ts: changeTimer / state"]
       Local --> Validate["timerValidation.ts: action, day, preferences"]
       Local --> Tx["timerDatabase.ts: write transaction"]
-      Tx --> Engine["timerEngine.ts: settleTimerDay / applyTimerAction"]
+      Tx --> Engine["timerEngine.ts: applyTimerCommand / applyTimerPreferencePatch"]
+      Queue --> Engine
       Engine --> Auto["autoplayNextTask: only when no tasks run"]
       Engine --> Commit["Turso transaction commit"]
       Auto --> Commit
       Commit --> Publish["timerMutations.receive: confirmed snapshot"]
       Commit --> Tabs["BroadcastChannel snapshots; focus and one polling tab"]
-      Publish --> Schedule["app/timer/hooks/useTimerSchedule.ts"]
+      Publish -->|projected state| Schedule["app/timer/hooks/useTimerSchedule.ts"]
       Schedule -->|earliest completion or Jakarta midnight| Refresh["TimerProvider.refresh: protected API"]
       Refresh --> Send
-      Schedule --> Owner["app/timer/hooks/useTimerAudioOwner.ts: Web Lock or focus fallback"]
+      Publish -->|projected state| Audio["app/timer/hooks/useTimerAudio.ts: ticking and warnings"]
+      Audio --> Owner["app/timer/hooks/useTimerAudioOwner.ts: Web Lock or focus fallback"]
+      Ticking["useTimerTicking.ts: settings subscription and audio unlock"] --> Preference["timerTicking.ts: browser preference"]
+      Preference --> Audio
       Owner --> Sound["app/timer/utils/timerSound.ts: ticks and warnings"]
-      Publish --> Notify["app/timer/hooks/useTimerNotifications.tsx"]
+      Publish -->|confirmed state only| Notify["app/timer/hooks/useTimerNotifications.tsx"]
       Notify -->|acknowledge: atomic completion claim| Send
       Notify -->|claimed notification only| Feedback["visible message, reached sound, optional browser notification"]
       Feedback --> Sound
       Feedback --> Worker["public/sw.js: notification click opens Timer"]
-      class Act,Send,Publish,Refresh attention
+      class Act,Queue,Send,Publish,Refresh,Ticking,Preference attention
       class Local,Validate,Tx,Engine,Auto,Commit,Tabs success
-      class Schedule,Owner,Sound,Notify,Feedback,Worker danger
+      class Schedule,Audio,Owner,Sound,Notify,Feedback,Worker danger
       ${colors}`,
     notes: [
       "timerEngine applies settlement, actions, latest-running selection, and Autoplay inside one Turso write transaction. Saved preferences are read in the same transaction; confirmed snapshots publish only after commit.",
       "Refreshes derive progress from timestamps without rewriting running baselines. Completion and midnight boundaries persist when due. Failed transactions publish no changes. History includes accelerated live time across exactly 30 dates.",
-      "useTimerSchedule refreshes at completion or midnight. useTimerAudioOwner gives continuous audio to one eligible browser tab through Web Locks, falling back to the focused tab. Explicit action sounds remain in the clicked tab. timerTicking remembers Ticking across reloads and tabs in the same browser; pointer or key interaction can unlock restored audio.",
+      "useTimerSchedule owns only completion and midnight refreshes. useTimerAudio owns ticking, warnings, and restored-audio listeners; useTimerTicking lets Settings subscribe to the local preference and unlock audio during the click. useTimerAudioOwner gives continuous audio to one eligible browser tab through Web Locks, falling back to the focused tab. Explicit action sounds remain in the clicked tab. timerTicking remembers Ticking across reloads and tabs in the same browser; pointer or key interaction can unlock restored audio.",
       "useTimerNotifications submits acknowledge through the protected API. In Turso, the completion claim and Autoplay transition are atomic and read saved preferences. Only the winning claim shows feedback; imported historical completions are already acknowledged. The service worker opens or focuses Timer when a system notification is clicked.",
     ],
   },

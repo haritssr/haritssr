@@ -14,7 +14,7 @@ export default function TaskSpeedControl({
   date: string;
   showIcon?: boolean;
 }) {
-  const { act, snapshot } = useTimer();
+  const { act, snapshot } = useTimer("act", "snapshot");
   const speed = task.speed ?? 1;
   const nextSpeed =
     TIMER_SPEEDS[(TIMER_SPEEDS.indexOf(speed) + 1) % TIMER_SPEEDS.length] ?? 1;

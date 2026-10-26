@@ -8,7 +8,7 @@ const WEEKDAY_FORMATTER = new Intl.DateTimeFormat("en-US", {
 });
 
 export default function TimerDate() {
-  const { snapshot } = useTimer();
+  const { snapshot } = useTimer("snapshot");
 
   return snapshot === undefined ? null : (
     <time dateTime={snapshot.today}>

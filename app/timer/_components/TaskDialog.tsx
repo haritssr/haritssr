@@ -6,6 +6,7 @@ import type { SubmitEvent } from "react";
 import { useTimer } from "@/app/timer/_components/TimerProvider";
 import { canUseTimer, taskSpent } from "@/app/timer/utils/timer";
 import type { TimerTask } from "@/app/timer/utils/timer";
+import { readTaskForm } from "@/app/timer/utils/timerInput";
 import Button from "@/components/Button";
 
 import TaskFormDialog from "./TaskFormDialog";
@@ -141,41 +142,6 @@ const TASK_SUGGESTIONS = [
   },
 ];
 
-function readTaskForm(element: HTMLFormElement) {
-  const form = new FormData(element);
-  const hours = Number(form.get("hours"));
-  const minutes = Number(form.get("minutes"));
-  const seconds = Number(form.get("seconds"));
-  const duration = hours * 3600 + minutes * 60 + seconds;
-  if (
-    ![hours, minutes, seconds].every(Number.isInteger) ||
-    duration < 1 ||
-    duration > 86_400
-  ) {
-    return "Choose a duration from one second to 24 hours.";
-  }
-  const activityValue = form.get("activity");
-  const activity =
-    typeof activityValue === "string" ? activityValue.trim() : "";
-  if (activity.length === 0) {
-    return "Enter an activity name.";
-  }
-  if (activity.length > 20) {
-    return "Use 20 characters or fewer for the activity name.";
-  }
-  const descriptionValue = form.get("description");
-  const description =
-    typeof descriptionValue === "string" ? descriptionValue.trim() : "";
-  if (description.length > 35) {
-    return "Use 35 characters or fewer for the description.";
-  }
-  return {
-    activity,
-    description,
-    duration,
-  };
-}
-
 export function EditTask({
   task,
   date,
@@ -185,12 +151,17 @@ export function EditTask({
   date: string;
   reached: boolean;
 }) {
-  const { act, snapshot, drafts, clockOffset } = useTimer();
+  const { act, snapshot, drafts, clockOffset } = useTimer(
+    "act",
+    "snapshot",
+    "drafts",
+    "clockOffset"
+  );
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    const values = readTaskForm(event.currentTarget);
+    const values = readTaskForm(new FormData(event.currentTarget));
     if (typeof values === "string") {
       setFormError(values);
       return;
@@ -254,7 +225,7 @@ export function EditTask({
 }
 
 export function AddTask({ disabled }: { disabled: boolean }) {
-  const { act, snapshot, drafts } = useTimer();
+  const { act, snapshot, drafts } = useTimer("act", "snapshot", "drafts");
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
   const [suggestion, setSuggestion] = useState({
@@ -296,7 +267,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
     if (snapshot === undefined) {
       return;
     }
-    const values = readTaskForm(event.currentTarget);
+    const values = readTaskForm(new FormData(event.currentTarget));
     if (typeof values === "string") {
       setFormError(values);
       return;

@@ -12,6 +12,7 @@ import { useId, useRef, useState, useSyncExternalStore } from "react";
 import type { ReactNode, Ref } from "react";
 
 import { useTimer } from "@/app/timer/_components/TimerProvider";
+import useTimerTicking from "@/app/timer/hooks/useTimerTicking";
 import { canUseTimer } from "@/app/timer/utils/timer";
 import Button from "@/components/Button";
 
@@ -40,7 +41,7 @@ export default function TimerToolbar({
 }: {
   backupActions: ReactNode;
 }) {
-  const { snapshot } = useTimer();
+  const { snapshot } = useTimer("snapshot");
   return (
     <div className="border-border mb-5 flex w-full flex-wrap items-center justify-between gap-3 sm:justify-start">
       <div className="shrink-0">
@@ -83,9 +84,14 @@ function TimerSettings() {
     setNotificationsEnabled,
     autoplay,
     setAutoplay,
-    tickingEnabled,
-    setTickingEnabled,
-  } = useTimer();
+  } = useTimer(
+    "snapshot",
+    "notificationsEnabled",
+    "setNotificationsEnabled",
+    "autoplay",
+    "setAutoplay"
+  );
+  const { tickingEnabled, setTickingEnabled } = useTimerTicking();
   const [permissionFailed, setPermissionFailed] = useState(false);
   const browserPermission = useSyncExternalStore(
     subscribePermission,
@@ -151,7 +157,12 @@ function TimerSettings() {
 }
 
 function MultitaskSetting() {
-  const { snapshot, error, multitask, setMultitask } = useTimer();
+  const { snapshot, error, multitask, setMultitask } = useTimer(
+    "snapshot",
+    "error",
+    "multitask",
+    "setMultitask"
+  );
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [failed, setFailed] = useState(false);
   const toggleRef = useRef<HTMLElement>(null);

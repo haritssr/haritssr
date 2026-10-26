@@ -42,7 +42,13 @@ function PresetEditor({ kind }: { kind: "duration" | "task" }) {
     taskPresets,
     setDurationPresets,
     setTaskPresets,
-  } = useTimer();
+  } = useTimer(
+    "snapshot",
+    "durationPresets",
+    "taskPresets",
+    "setDurationPresets",
+    "setTaskPresets"
+  );
   const [draft, setDraft] = useState<PresetDraft[] | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);

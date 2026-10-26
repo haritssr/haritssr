@@ -62,7 +62,11 @@ export default function TimerDataControls({
 }: {
   children: (actions: ReactNode) => ReactNode;
 }) {
-  const { snapshot, refresh, pendingCount } = useTimer();
+  const { snapshot, refresh, pendingCount } = useTimer(
+    "snapshot",
+    "refresh",
+    "pendingCount"
+  );
   const input = useRef<HTMLInputElement>(null);
   const [working, setWorking] = useState(false);
   const [backupError, setBackupError] = useState<string | null>(null);
@@ -146,7 +150,10 @@ export default function TimerDataControls({
             }}
             title="Export"
           >
-            <ArrowDownTrayIcon aria-hidden="true" className="size-4.5" />
+            <ArrowDownTrayIcon
+              aria-hidden="true"
+              className="size-4.5"
+            />
           </BaseButton>
           <BaseButton
             aria-label="Import Timer backup"

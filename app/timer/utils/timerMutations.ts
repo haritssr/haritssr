@@ -1,10 +1,13 @@
 /* oxlint-disable no-await-in-loop -- Commands must save in order; recovery must finish before the next write. */
 import { canUseTimer } from "@/app/timer/utils/timer";
-import type { TimerAction, TimerPreferences } from "@/app/timer/utils/timer";
+import type {
+  TimerAction,
+  TimerPreferences,
+} from "@/app/timer/utils/timer";
 import type { ReceivedTimerSnapshot } from "@/app/timer/utils/timerClient";
 import {
-  applyTimerAction,
-  settleTimerDay,
+  applyTimerCommand,
+  applyTimerPreferencePatch,
 } from "@/app/timer/utils/timerEngine";
 
 type PreferencePatch = Partial<Omit<TimerPreferences, "revision">>;
@@ -55,28 +58,18 @@ function project(snapshot: ReceivedTimerSnapshot, change: PendingChange) {
   const next = structuredClone(snapshot);
   const now = Math.max(change.now, Date.parse(snapshot.now));
   if ("action" in change.mutation) {
-    let command = change.mutation.action;
+    const command = change.mutation.action;
     if (command.date !== next.today) {
       throw new Error("The day has changed. Refresh to see today's tasks.");
     }
-    settleTimerDay(next.day, now);
-    if (command.action === "start") {
-      command = { ...command, multitask: next.preferences?.multitask };
-    } else if (command.action === "done") {
-      command = { ...command, autoplay: next.preferences?.autoplay };
-    }
-    applyTimerAction(next.day, command, now);
+    applyTimerCommand(next.day, command, next.preferences, now);
   } else if (next.preferences !== undefined) {
-    const patch = change.mutation.preferences;
-    if (patch.multitask === false) {
-      settleTimerDay(next.day, now);
-      applyTimerAction(
-        next.day,
-        { action: "single-task", date: next.today },
-        now
-      );
-    }
-    next.preferences = { ...next.preferences, ...patch };
+    next.preferences = applyTimerPreferencePatch(
+      next.day,
+      next.preferences,
+      change.mutation.preferences,
+      now
+    );
   }
   return next;
 }

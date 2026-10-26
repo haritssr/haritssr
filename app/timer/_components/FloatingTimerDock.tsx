@@ -16,7 +16,12 @@ import InternalLink from "@/components/InternalLink";
 
 export default function FloatingTimerDock() {
   const pathname = usePathname();
-  const { snapshot, clockOffset, error, refresh } = useTimer();
+  const { snapshot, clockOffset, error, refresh } = useTimer(
+    "snapshot",
+    "clockOffset",
+    "error",
+    "refresh"
+  );
   const showTasks = pathname !== "/timer" && canUseTimer(snapshot);
   const now = useTimerClock(snapshot, clockOffset, showTasks);
   const date = snapshot?.today ?? "";
