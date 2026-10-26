@@ -275,12 +275,12 @@ function TimerSettingSwitch({
         id={id}
         ref={ref}
         aria-label={label}
-        className={`interactive-elevation focus-visible:outline-action data-checked:bg-action bg-border not-data-disabled:not-data-checked:hover:bg-border-hover/60 not-data-disabled:data-checked:hover:bg-action/85 block w-11 shrink-0 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2 data-disabled:cursor-not-allowed ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
+        className={`focus-visible:outline-action data-checked:bg-action bg-border not-data-disabled:not-data-checked:hover:bg-border-hover/60 not-data-disabled:data-checked:hover:bg-action/85 block w-11 shrink-0 cursor-pointer rounded-full p-1 outline-hidden transition-colors duration-150 focus-visible:outline-2 data-disabled:cursor-not-allowed ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
         disabled={disabled}
         onCheckedChange={onCheckedChange}
         checked={checked}
       >
-        <Switch.Thumb className="shadow-control bg-surface block h-4 w-4 rounded-full transition-transform duration-100 will-change-transform data-checked:translate-x-5 motion-reduce:transition-none" />
+        <Switch.Thumb className="bg-surface block h-4 w-4 rounded-full transition-transform duration-100 will-change-transform data-checked:translate-x-5 motion-reduce:transition-none" />
       </Switch.Root>
     </label>
   );

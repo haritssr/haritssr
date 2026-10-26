@@ -71,7 +71,7 @@ function CompactCopyButton({
         {copied ? (
           <CheckIcon
             aria-hidden="true"
-            className="text-success-hover col-start-1 row-start-1 size-4 brightness-75"
+            className="text-success col-start-1 row-start-1 size-4"
             strokeWidth={3}
           />
         ) : null}

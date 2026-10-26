@@ -24,10 +24,6 @@ const DESIGN_TOKENS = [
     definition: "green-500/60 + green-600/40",
   },
   {
-    name: "success-hover",
-    definition: "success/60 + green-600/40",
-  },
-  {
     name: "attention",
     definition: "amber-500",
   },

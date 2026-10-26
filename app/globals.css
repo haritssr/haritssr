@@ -51,11 +51,6 @@
     var(--color-green-500) 60%,
     var(--color-green-600)
   );
-  --color-success-hover: color-mix(
-    in oklab,
-    var(--color-success) 60%,
-    var(--color-green-600)
-  );
   --color-attention: var(--color-amber-500);
   --color-danger: var(--color-red-500);
   --color-surface: #fafafa;

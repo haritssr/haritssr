@@ -76,7 +76,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   secondary:
     "border border-zinc-300 bg-white text-secondary-foreground select-none hover:bg-interface-hover hover:text-secondary-hover-foreground data-popup-open:border-action focus-visible:outline-zinc-700",
   "success-subtle":
-    "border border-transparent bg-success font-medium text-white transition-colors duration-150 enabled:hover:bg-success-hover focus-visible:outline-success",
+    "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
 };
 
 const BUTTON_SIZE_CLASS = {
