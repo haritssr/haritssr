@@ -34,7 +34,7 @@ import {
 import type {
   ChangelogResult,
   ChangelogSelection,
-} from "@/utils/commits/commitHistory";
+} from "@/utils/commits/changelogTypes";
 
 const periodOptions: readonly { value: ChangelogPeriod; label: string }[] = [
   { value: "all", label: "All history" },

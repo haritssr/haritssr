@@ -2,12 +2,9 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
 
-import { activityBuckets, filterCommits, prepareCommits } from "./changelog";
-import type {
-  ActivityBucket,
-  ChangelogCommit,
-  ChangelogPeriod,
-} from "./changelog";
+import { prepareCommits } from "./changelog";
+import { summarizeCommits } from "./changelogSummary";
+import type { ChangelogResult, ChangelogSelection } from "./changelogTypes";
 import { readCommitCount, readCommitHistory } from "./commitsDatabase";
 
 export const getCommitCount = cache(
@@ -30,57 +27,11 @@ const getPreparedHistory = cache(async () => {
   return { prepared, lastDay, firstDay };
 });
 
-export interface ChangelogSelection {
-  period: ChangelogPeriod;
-  anchor: string;
-  type: string;
-  query: string;
-  limit: number;
-}
-
-export interface ChangelogResult {
-  commits: readonly ChangelogCommit[];
-  total: number;
-  activeDays: number;
-  busiest?: readonly [string, number];
-  buckets: ActivityBucket[];
-  firstDay: string;
-  lastDay: string;
-}
-
 export async function getChangelogResult(
   selection: ChangelogSelection
 ): Promise<ChangelogResult> {
   const { prepared, firstDay, lastDay } = await getPreparedHistory();
-  const matched = filterCommits(
-    prepared,
-    selection.period,
-    selection.anchor,
-    selection.type,
-    selection.query
-  );
-  const days = new Map<string, number>();
-  for (const commit of matched) {
-    days.set(commit.day, (days.get(commit.day) ?? 0) + 1);
-  }
-  const [busiest] = [...days].toSorted(
-    (a, b) => b[1] - a[1] || b[0].localeCompare(a[0])
-  );
-  return {
-    commits: matched.slice(0, selection.limit).map(({ commit }) => commit),
-    total: matched.length,
-    activeDays: days.size,
-    busiest,
-    buckets: activityBuckets(
-      matched,
-      selection.period,
-      selection.anchor,
-      firstDay,
-      lastDay
-    ),
-    firstDay,
-    lastDay,
-  };
+  return summarizeCommits(prepared, selection, firstDay, lastDay);
 }
 
 export async function getChangelogSummary() {

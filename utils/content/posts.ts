@@ -1,5 +1,4 @@
 import "server-only";
-import fs from "node:fs";
 import path from "node:path";
 
 import matter from "gray-matter";
@@ -7,6 +6,8 @@ import type { Root } from "hast";
 import { remark } from "remark";
 import remarkRehype from "remark-rehype";
 import { z } from "zod";
+
+import { readLocalContent } from "./localContent";
 
 const postsDirectory = path.join(
   process.cwd(),
@@ -30,16 +31,8 @@ export interface PostData extends PostSummary {
   contentTree: Root;
 }
 
-function getPostFileNames() {
-  return fs
-    .readdirSync(postsDirectory, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
-    .map((entry) => entry.name);
-}
-
-function readPost(fileName: string) {
+function readPost(fileName: string, source: string) {
   const id = fileName.replace(markdownFileExtensionPattern, "");
-  const source = fs.readFileSync(path.join(postsDirectory, fileName), "utf-8");
   const parsed = matter(source);
   return {
     content: parsed.content,
@@ -49,7 +42,7 @@ function readPost(fileName: string) {
 }
 
 // Keep one local-content snapshot per module, matching the writing post index.
-const posts = getPostFileNames().map(readPost);
+const posts = readLocalContent(postsDirectory, ".md", readPost);
 const postsById = new Map(posts.map((post) => [post.id, post]));
 const postSummaries = posts
   .map(({ date, id, title }) => ({ date, id, title }))

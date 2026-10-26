@@ -250,6 +250,13 @@ dynamic patterns, and update dates. Search, sitemap, Tree, and content validatio
 reuse it. Metadata helpers and canonical site constants live in
 `utils/metadata/`.
 
+Dynamic route patterns in `utils/navigation/routePatterns.ts` are shared with
+View Source. `utils/content/validate-content.ts` runs catalog, filesystem,
+writing, archive, and discovery checks in separate phases. `utils/calendar.ts`
+shares date validation; `utils/content/localContent.ts` shares server-only content
+loading. TOC label reading lives in `articleHeadingLabels.ts`, separate from
+outline assembly.
+
 Labs use literal `/labs` routes, including `/labs/user-interface`. Former
 `/experiments` routes have no aliases or redirects; discontinued records retain
 historical URLs. The former Task and Tools SQLite labs and Task API are removed.
@@ -354,6 +361,10 @@ cutoff together in `app/commits/weekly-changelog/data.ts`.
 Dated reviews and model assessments cover fixed commit snapshots and appear in
 search and sitemap. Model and reasoning-effort labels are editorial estimates,
 not recorded usage.
+
+`changelogTypes.ts` holds shared selection/response contracts;
+`changelogSummary.ts` performs pure calculations. `commitHistory.ts` retains
+server-only cached reads with the existing keys and freshness periods.
 
 ## Timer
 

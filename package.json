@@ -11,7 +11,7 @@
     "seed:timer": "bun app/timer/seed-timer.ts",
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
-    "validate:content": "bun --conditions=react-server scripts/validate-content.ts",
+    "validate:content": "bun --conditions=react-server utils/content/validate-content.ts",
     "migrate:timer": "bun app/timer/migrate-timer.ts",
     "import:commits": "bun app/commits/import-commits.ts",
     "sync:commits": "bun run import:commits"

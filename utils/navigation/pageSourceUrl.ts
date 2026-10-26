@@ -1,11 +1,9 @@
 import { sourceUrl } from "@/utils/metadata/site";
 
+import { getDynamicRoute } from "./routePatterns";
+
 const trailingSlashPattern = /\/+$/u;
 const writingPathPattern = /^\/writing\/(?<slug>[^/]+)$/u;
-const projectPathPattern = /^\/projects\/[^/]+$/u;
-const nextjsDetailPathPattern =
-  /^(?<path>\/labs\/nextjs\/(?:articles|posts|students))\/[^/]+$/u;
-
 export default function pageSourceUrl(pathname: string): string {
   const path = pathname.replace(trailingSlashPattern, "");
   const writingSlug = writingPathPattern.exec(path)?.groups?.slug;
@@ -14,14 +12,10 @@ export default function pageSourceUrl(pathname: string): string {
     return sourceUrl(`app/writing/content/${writingSlug}.mdx`, "blob");
   }
 
-  if (projectPathPattern.test(path)) {
-    return sourceUrl("app/projects/[project]");
-  }
-
-  const nextjsDetailPath = nextjsDetailPathPattern.exec(path)?.groups?.path;
-
-  if (nextjsDetailPath !== undefined) {
-    return sourceUrl(`app${nextjsDetailPath}/[id]`);
+  const dynamic = getDynamicRoute(path);
+  const child = dynamic ? path.slice(dynamic.parent.length + 1) : "";
+  if (dynamic && child.length > 0 && !child.includes("/")) {
+    return sourceUrl(`app${dynamic.pattern}`);
   }
 
   return path.length === 0

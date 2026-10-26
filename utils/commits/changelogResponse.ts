@@ -1,5 +1,5 @@
 import type { ActivityBucket, ChangelogCommit } from "./changelog";
-import type { ChangelogResult } from "./commitHistory";
+import type { ChangelogResult } from "./changelogTypes";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;

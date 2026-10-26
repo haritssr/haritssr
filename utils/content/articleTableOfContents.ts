@@ -1,7 +1,5 @@
-export interface ContentsLabelPart {
-  kind: "text" | "math";
-  value: string;
-}
+import { readHeadingLabel } from "./articleHeadingLabels";
+import type { ContentsLabelPart } from "./articleHeadingLabels";
 
 export interface ContentsEntry {
   children: ContentsEntry[];
@@ -19,60 +17,6 @@ export interface ArticleOutline {
 const HEADING_SELECTOR = "h1, h2, h3, h4, h5, h6";
 const DISCLOSURE_TRIGGER_SELECTOR =
   'button[aria-expanded], [role="button"][aria-expanded], summary';
-
-function readLabel(heading: HTMLElement): ContentsLabelPart[] {
-  const label: ContentsLabelPart[] = [];
-
-  function visit(node: Node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const value = node.textContent ?? "";
-      const previous = label.at(-1);
-      if (previous?.kind === "text") {
-        previous.value += value;
-      } else {
-        label.push({ kind: "text", value });
-      }
-      return;
-    }
-
-    if (!(node instanceof Element)) {
-      return;
-    }
-
-    if (node.matches(".katex")) {
-      const tex = node.querySelector(
-        'annotation[encoding="application/x-tex"]'
-      );
-      if (
-        tex?.textContent !== undefined &&
-        tex.textContent !== null &&
-        tex.textContent.length > 0
-      ) {
-        label.push({ kind: "math", value: tex.textContent });
-      }
-      return;
-    }
-
-    if (node.matches('svg, [aria-hidden="true"], [hidden], .anchor')) {
-      return;
-    }
-
-    if (node.matches("br")) {
-      label.push({ kind: "text", value: " " });
-      return;
-    }
-
-    for (const child of node.childNodes) {
-      visit(child);
-    }
-  }
-
-  for (const child of heading.childNodes) {
-    visit(child);
-  }
-
-  return label.filter((part) => part.value.trim().length > 0);
-}
 
 function isVisible(heading: HTMLElement, article: HTMLElement) {
   if (
@@ -149,7 +93,7 @@ export function collectArticleOutline(
 ): ArticleOutline {
   const headings = [...article.querySelectorAll<HTMLElement>(HEADING_SELECTOR)]
     .filter((heading) => isVisible(heading, article))
-    .map((heading) => ({ heading, label: readLabel(heading) }))
+    .map((heading) => ({ heading, label: readHeadingLabel(heading) }))
     .filter(({ label }) => label.length > 0);
   const pageHeading = headings.find(({ heading }) => heading.tagName === "H1");
   const titleLabel = pageHeading?.label ?? [

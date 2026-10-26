@@ -3,7 +3,7 @@
   // Include discovered MDX modules and standalone operational scripts.
   "entry": [
     "public/sw.js",
-    "scripts/{inspect-*-db.js,validate-content.ts}!",
+    "utils/content/validate-content.ts!",
     // Bun discovers this script in development; production mode needs it explicitly.
     "app/commits/import-commits.ts!",
     "app/timer/{migrate-timer,seed-timer}.ts!",

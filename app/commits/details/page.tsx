@@ -1,4 +1,5 @@
 import ExplanationList from "@/components/ExplanationList";
+import FlowDiagram from "@/components/FlowDiagram";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -16,6 +17,8 @@ import {
   weeklyChangelogRoute,
 } from "@/data/routes";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
+
+import { commitRelationships } from "./relationships";
 
 export const metadata = createPageMetadata({
   title: commitsDetailsRoute.title,
@@ -45,6 +48,29 @@ export default function CommitsDetailsPage() {
         </PageDescription>
       </PageHeader>
       <div className="space-y-16">
+        <Section title="Logics" contentClassName="max-w-3xl">
+          <ExplanationList>
+            <li>
+              Git history is imported only on request. Pages read the separate
+              commits database without a local fallback.
+            </li>
+            <li>
+              Calendar filters use Jakarta dates. The URL preserves filters and
+              row limits; calculations use the full matching history before
+              limiting displayed rows.
+            </li>
+            <li>
+              History and count caches are independent. Their freshness windows
+              depend on requests rather than a background schedule.
+            </li>
+          </ExplanationList>
+        </Section>
+        <Section title="How this works">
+          <FlowDiagram
+            definition={commitRelationships}
+            title="Commit history components and data flow"
+          />
+        </Section>
         <Section id="storage" title="Storage and data flow">
           <p>
             A separate Turso database named commits contains a table also named

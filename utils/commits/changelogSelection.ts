@@ -1,6 +1,8 @@
+import { isCalendarDate } from "@/utils/calendar";
+
 import type { ChangelogPeriod } from "./changelog";
 import { changeTypes } from "./changelog";
-import type { ChangelogSelection } from "./commitHistory";
+import type { ChangelogSelection } from "./changelogTypes";
 
 const periods: readonly ChangelogPeriod[] = [
   "all",
@@ -13,7 +15,6 @@ const periods: readonly ChangelogPeriod[] = [
 function isPeriod(value: string): value is ChangelogPeriod {
   return periods.some((period) => period === value);
 }
-const datePattern = /^\d{4}-\d{2}-\d{2}$/u;
 
 export function parseChangelogSelection(
   params: URLSearchParams,
@@ -22,11 +23,7 @@ export function parseChangelogSelection(
   const period = params.get("period") ?? "day";
   const date = params.get("date") ?? initialDay;
   const validDate =
-    datePattern.test(date) &&
-    date >= "0001-01-01" &&
-    date <= "9998-12-31" &&
-    Number.isFinite(Date.parse(`${date}T00:00:00Z`)) &&
-    new Date(`${date}T00:00:00Z`).toISOString().slice(0, 10) === date;
+    isCalendarDate(date) && date >= "0001-01-01" && date <= "9998-12-31";
   const type = params.get("type") ?? "all";
   const limit = Number(params.get("limit") ?? 50);
   return {

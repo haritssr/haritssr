@@ -17,6 +17,7 @@ import { allWritingPosts } from "@/utils/content/writing-posts";
 import { getAvailableLabSummaries } from "@/utils/discovery/labCatalog";
 import { getLabRoutes } from "@/utils/discovery/labRoutes";
 import { getProjectSlug } from "@/utils/navigation/projectSlug";
+import { getDynamicRoute } from "@/utils/navigation/routePatterns";
 
 export interface RouteRecord extends RouteDoc {
   pattern: string;
@@ -24,30 +25,6 @@ export interface RouteRecord extends RouteDoc {
   lastModified?: string;
   collapseInTree: boolean;
 }
-
-const dynamicRoutes = [
-  {
-    parent: "/labs/nextjs/articles",
-    pattern: "/labs/nextjs/articles/[id]",
-    collapseInTree: true,
-  },
-  {
-    parent: "/labs/nextjs/posts",
-    pattern: "/labs/nextjs/posts/[id]",
-    collapseInTree: true,
-  },
-  {
-    parent: "/labs/nextjs/students",
-    pattern: "/labs/nextjs/students/[id]",
-    collapseInTree: true,
-  },
-  {
-    parent: "/projects",
-    pattern: "/projects/[project]",
-    collapseInTree: false,
-  },
-  { parent: "/writing", pattern: "/writing/[slug]", collapseInTree: false },
-];
 
 // Available public pages and local-only pages in development, derived from route-owned content.
 export function getRouteManifest(): RouteRecord[] {
@@ -87,9 +64,7 @@ export function getRouteManifest(): RouteRecord[] {
   ]);
   return [...new Map(docs.map((doc) => [doc.route, doc])).values()].map(
     (doc) => {
-      const dynamic = dynamicRoutes.find(({ parent }) =>
-        doc.route.startsWith(`${parent}/`)
-      );
+      const dynamic = getDynamicRoute(doc.route);
       return {
         ...doc,
         pattern: dynamic?.pattern ?? doc.route,

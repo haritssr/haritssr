@@ -1,9 +1,10 @@
 import "server-only";
-import fs from "node:fs";
 import path from "node:path";
 
 import matter from "gray-matter";
 import { z } from "zod";
+
+import { readLocalContent } from "./localContent";
 
 const writingPostsDirectory = path.join(process.cwd(), "app/writing/content");
 const mdxFileExtensionPattern = /\.mdx$/;
@@ -64,20 +65,11 @@ export function parseWritingPost(
 
 function loadWritingPosts(): readonly WritingPost[] {
   return Object.freeze(
-    fs
-      .readdirSync(writingPostsDirectory, { withFileTypes: true })
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".mdx"))
-      .map((entry) =>
-        parseWritingPost(
-          entry.name,
-          fs.readFileSync(path.join(writingPostsDirectory, entry.name), "utf-8")
-        )
-      )
-      .toSorted(
-        (left, right) =>
-          right.publishedAt.localeCompare(left.publishedAt) ||
-          left.slug.localeCompare(right.slug)
-      )
+    readLocalContent(writingPostsDirectory, ".mdx", parseWritingPost).toSorted(
+      (left, right) =>
+        right.publishedAt.localeCompare(left.publishedAt) ||
+        left.slug.localeCompare(right.slug)
+    )
   );
 }
 

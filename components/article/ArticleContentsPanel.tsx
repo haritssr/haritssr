@@ -16,10 +16,10 @@ import {
 
 import Button from "@/components/Button";
 import InternalLink from "@/components/InternalLink";
+import type { ContentsLabelPart } from "@/utils/content/articleHeadingLabels";
 import type {
   ArticleOutline,
   ContentsEntry,
-  ContentsLabelPart,
 } from "@/utils/content/articleTableOfContents";
 
 import { useActiveArticleSection } from "./useArticleOutline";
