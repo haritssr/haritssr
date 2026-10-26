@@ -240,6 +240,7 @@ export function EditTask({
       </Dialog.Trigger>
       <TaskFormDialog
         title="Edit Task"
+        submitLabel="Save"
         defaultActivity={drafts[task.id]?.activity ?? task.activity}
         defaultDescription={drafts[task.id]?.description ?? task.description}
         defaultDuration={drafts[task.id]?.duration ?? task.duration}
