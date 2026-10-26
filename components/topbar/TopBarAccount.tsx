@@ -32,7 +32,7 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
         width={24}
       />
     ) : (
-      <UserCircleIcon aria-hidden="true" className="size-6 shrink-0" />
+      <UserCircleIcon aria-hidden="true" className="size-5 shrink-0" />
     );
 
   if (!account) {
@@ -41,7 +41,7 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
         <button
           type="submit"
           aria-label={label}
-          className={className}
+          className={`${className} ${showLabel ? "w-full!" : "w-8!"}`}
           title={label}
         >
           {icon}
