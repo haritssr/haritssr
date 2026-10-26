@@ -8,10 +8,11 @@ import {
   MagnifyingGlassIcon,
   PauseIcon,
   RssIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import type { ReactNode } from "react";
+
+import InstallButton from "@/components/InstallButton";
 
 const PREVIEW_PANEL =
   "border-border bg-background shadow-foreground/5 w-full min-w-0 rounded-xl border text-sm shadow-lg";
@@ -19,31 +20,37 @@ const PREVIEW_PANEL =
 const features = [
   {
     title: "Search",
+    shortcut: "⌘P/Ctrl+P",
     description: "Find pages across the site and run global commands.",
     preview: <SearchPreview />,
   },
   {
     title: "Contents",
+    shortcut: "Opt+C/Alt+C",
     description: "Jump to sections within articles and nested pages.",
     preview: <ContentsPreview />,
   },
   {
     title: "Share",
+    shortcut: "Opt+S/Alt+S",
     description: "Copy the current page URL, including its section link.",
     preview: <SharePreview />,
   },
   {
     title: "Timer",
+    shortcut: "Opt+T/Alt+T",
     description: "Track tasks and keep a timer running across pages.",
     preview: <TimerPreview />,
   },
   {
     title: "RSS",
+    shortcut: "Opt+R/Alt+R",
     description: "Subscribe to new writing in your feed reader.",
     preview: <FeedPreview />,
   },
   {
     title: "Install",
+    shortcut: "Opt+I/Alt+I",
     description: "Add the site to your home screen for quick access.",
     preview: <InstallPreview />,
   },
@@ -51,19 +58,24 @@ const features = [
 
 export default function Features() {
   return (
-    <ul className="grid grid-cols-1 lg:grid-cols-3">
-      {features.map(({ title, description, preview }) => (
+    <ul className="grid grid-cols-1 overflow-hidden rounded-2xl lg:grid-cols-3">
+      {features.map(({ title, shortcut, description, preview }) => (
         <li
           className="border-border bg-foreground/2 flex min-w-0 flex-col border-b border-dashed px-6 py-8 last:border-b-0 lg:not-nth-[3n]:border-r lg:nth-last-[-n+3]:border-b-0"
           key={title}
         >
           <div
-            aria-hidden="true"
+            aria-hidden={title === "Install" ? undefined : true}
             className="mb-6 flex min-h-60 min-w-0 items-center justify-center p-5"
           >
             {preview}
           </div>
-          <h3 className="text-foreground font-medium">{title}</h3>
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+            <h3 className="text-foreground font-medium">{title}</h3>
+            <kbd className="text-foreground/70 text-sm whitespace-nowrap">
+              {shortcut}
+            </kbd>
+          </div>
           <p className="text-muted mt-1">{description}</p>
         </li>
       ))}
@@ -183,9 +195,8 @@ function InstallPreview() {
   return (
     <div className={PREVIEW_PANEL}>
       <PanelHeading>
-        <ArrowDownTrayIcon className="size-4" />
+        <ArrowDownTrayIcon aria-hidden="true" className="size-4" />
         <span className="flex-1">Install app</span>
-        <XMarkIcon className="text-muted size-4" />
       </PanelHeading>
       <div className="space-y-4 p-3">
         <div className="flex min-w-0 items-center gap-3">
@@ -195,9 +206,7 @@ function InstallPreview() {
             <div className="text-muted text-xs">haritssr.com</div>
           </div>
         </div>
-        <span className="bg-action text-background block rounded-md px-3 py-1.5 text-center font-medium">
-          Install
-        </span>
+        <InstallButton placement="feature" />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import InternalLink from "@/components/InternalLink";
 import { apiRoute } from "@/data/routes";
 
-import FooterInstallButton from "./FooterInstallButton";
+import InstallButton from "./InstallButton";
 
 interface FooterActionsProps {
   rssPath: string;
@@ -16,7 +16,7 @@ export default function FooterActions({ rssPath }: FooterActionsProps) {
       <InternalLink aria-keyshortcuts="Alt+R" href={rssPath} variant="footer">
         RSS
       </InternalLink>
-      <FooterInstallButton />
+      <InstallButton />
     </div>
   );
 }

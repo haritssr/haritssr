@@ -277,12 +277,16 @@ top-bar Share button.
 
 The homepage Features section showcases Search, Contents, Share, Timer, RSS, and
 Install with decorative UI previews, stacked on mobile and in three columns on
-desktop. Previews are static and do not activate the features.
+desktop. The Install preview has a working primary button; other previews are
+static. The homepage button and simple footer Install text action share one browser
+install prompt. The footer action appears only when that prompt is available;
+the homepage button remains disabled otherwise. Installation only starts after
+a user activates a button or the install keyboard shortcut.
 
 The homepage profile card keeps contacts visible and collapses background and
 principles into a More accordion below 768px; desktop retains three columns.
 
-The homepage Shortcuts table documents the working global controls: Command+P
+The homepage feature titles show the working global shortcuts: Command+P
 on Mac or Ctrl+P opens Search. Option on Mac or Alt on Windows with C toggles
 Contents, S copies the current page URL with confirmation, T opens Timer,
 R opens the RSS feed, and I opens the install prompt when available. Contents
