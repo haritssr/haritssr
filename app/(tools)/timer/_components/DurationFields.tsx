@@ -1,8 +1,5 @@
-import { NumberField } from "@base-ui/react/number-field";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useId } from "react";
-
 import Button from "@/components/Button";
+import NumberInput from "@/components/NumberInput";
 
 import {
   durationSeconds,
@@ -24,7 +21,6 @@ export default function DurationFields({
   presets?: number[];
   hideLegend?: boolean;
 }) {
-  const id = useId();
   const totalSeconds = durationSeconds(duration);
 
   return (
@@ -32,14 +28,13 @@ export default function DurationFields({
       <legend className={hideLegend ? "sr-only" : "mb-2 text-sm"}>
         Duration
       </legend>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,5rem),1fr))] gap-2">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,6.25rem),1fr))] gap-2">
         {(["hours", "minutes", "seconds"] as const).map((unit) => (
-          <NumberField.Root
-            className="flex min-w-0 flex-col gap-2 text-sm"
+          <NumberInput
             disabled={disabled}
             format={{ useGrouping: false, maximumFractionDigits: 0 }}
-            id={`${id}-${unit}`}
             key={unit}
+            label={unit}
             max={unit === "hours" ? 24 : 59}
             min={0}
             name={unit}
@@ -53,29 +48,8 @@ export default function DurationFields({
             smallStep={1}
             step={1}
             value={duration[unit] === "" ? null : Number(duration[unit])}
-          >
-            <label className="text-muted capitalize" htmlFor={`${id}-${unit}`}>
-              {unit}
-            </label>
-            <NumberField.Group className="border-border bg-background focus-within:border-action focus-within:ring-action/20 flex h-8.5 min-w-0 items-center overflow-hidden rounded-lg border focus-within:ring-2">
-              <NumberField.Decrement
-                aria-label={`Decrease ${unit}`}
-                className="hover:bg-interface-hover focus-visible:outline-action flex h-full w-8 shrink-0 cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:-outline-offset-2 data-disabled:cursor-default data-disabled:opacity-40"
-              >
-                <MinusIcon aria-hidden="true" className="size-4" />
-              </NumberField.Decrement>
-              <NumberField.Input
-                className="form-control h-full w-full min-w-0 bg-transparent px-1 text-center text-base tabular-nums outline-hidden"
-                inputMode="numeric"
-              />
-              <NumberField.Increment
-                aria-label={`Increase ${unit}`}
-                className="hover:bg-interface-hover focus-visible:outline-action flex h-full w-8 shrink-0 cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:-outline-offset-2 data-disabled:cursor-default data-disabled:opacity-40"
-              >
-                <PlusIcon aria-hidden="true" className="size-4" />
-              </NumberField.Increment>
-            </NumberField.Group>
-          </NumberField.Root>
+            variant="field"
+          />
         ))}
       </div>
       {presets === undefined || presets.length === 0 ? null : (

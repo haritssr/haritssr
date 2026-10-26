@@ -61,7 +61,11 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/DurationFields.tsx",
-    "Duration number fields and the preset grid.",
+    "Shared NumberInput controls for duration units and the preset grid.",
+  ],
+  [
+    "components/NumberInput.tsx",
+    "Base UI number input with labeled field layout, bounds, step, and form state.",
   ],
   [
     "app/(tools)/timer/_components/PresetSettings.tsx",

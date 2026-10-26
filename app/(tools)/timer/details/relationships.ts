@@ -90,6 +90,7 @@ export const timerRelationships = [
       Input --> Validation["app/(tools)/timer/utils/timerValidation.ts: server schemas"]
       Dialog --> Form["TaskFormDialog.tsx: name, description, counters, clear buttons"]
       Form --> Duration["DurationFields.tsx: NumberInput and presets"]
+      Duration --> NumberInput["components/NumberInput.tsx: labeled integer fields"]
       Actions --> Delete["DeleteTaskButton.tsx: confirmation"]
       Form --> Delete
       Dialog -->|validated add / edit| Act["app/(tools)/timer/_components/TimerProvider.tsx: act"]
@@ -98,7 +99,7 @@ export const timerRelationships = [
       Speed -->|speed| Act
       Toolbar -->|setMultitask; single-task when needed| Act
       Actions --> Sound["app/(tools)/timer/utils/timerSound.ts: action feedback"]
-      class Client,Toolbar,List,Card,Completed,Desc,Progress,Actions,Dialog,Form,Duration,Delete,Dock,Speed,Data action
+      class Client,Toolbar,List,Card,Completed,Desc,Progress,Actions,Dialog,Form,Duration,NumberInput,Delete,Dock,Speed,Data action
       class State,Appearance,Time,Act,Clock,Selection,Input attention
       class Sound danger
       class Backups,Backup,Validation success

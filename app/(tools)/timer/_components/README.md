@@ -22,7 +22,7 @@ run inside its `use client` boundary.
 | Shared modal dimensions, fields, and header actions | [TaskFormDialog.tsx](TaskFormDialog.tsx) |
 | Settings preset list editors, draft validation, and Save/Cancel | [PresetSettings.tsx](PresetSettings.tsx) |
 | Duration conversion and preset labels | [durationValue.ts](durationValue.ts) |
-| Number inputs, stepper buttons, and duration presets | [DurationFields.tsx](DurationFields.tsx) |
+| Shared NumberInput controls and duration presets | [DurationFields.tsx](DurationFields.tsx), [NumberInput.tsx](../../../../components/NumberInput.tsx) |
 | Grid card dimensions, borders, shadow, spacing, and state colors | [taskPresentation.ts](taskPresentation.ts) |
 | Task ordering, completion partition, elapsed time, and Start/Pause/Continue state | [taskState.ts](taskState.ts) |
 | Floating-task eligibility, retained paused task, and most-recent-start ordering | [floatingTaskState.ts](floatingTaskState.ts) |
