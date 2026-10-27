@@ -6,7 +6,9 @@ import TimerProvider from "@/app/(tools)/timer/_components/TimerProvider";
 import FloatingDock from "@/components/floating/FloatingDock";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
-import SharePageProvider from "@/components/SharePageProvider";
+import SharePageProvider, {
+  ShareToastViewport,
+} from "@/components/SharePageProvider";
 import SiteShortcuts from "@/components/SiteShortcuts";
 import { SiteStructuredData } from "@/components/StructuredData";
 import TabBarButtom from "@/components/TabBarButtom";
@@ -90,6 +92,7 @@ export default function RootLayout({
           <SiteShortcuts />
           <GlobalSearchProvider>
             <FloatingDock>
+              <ShareToastViewport />
               <MusicProvider>
                 <TimerProvider>
                   <TopBar />

@@ -48,7 +48,6 @@ function CompactCopyButton({
         id: "url-copy-error",
         title: "Could not copy",
         description: "Select the text and copy it manually.",
-        timeout: 5000,
       });
     }
   }
@@ -395,7 +394,6 @@ export default function URLCleaner() {
                           id: "url-copied",
                           title: "Copied",
                           description: "Cleaned URL copied to clipboard.",
-                          timeout: 5000,
                         });
                       })
                       .catch(() => {

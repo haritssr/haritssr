@@ -83,14 +83,12 @@ export default function useTimerNotifications({
           publish(result.snapshot);
           if (result.notification !== null) {
             add({
-              id: "timer-completion",
               title: "Task completed",
               description: (
                 <InternalLink href="/timer" variant="footer">
                   {result.notification.activity} is done!
                 </InternalLink>
               ),
-              timeout: 5000,
             });
             playTaskSound(prepareTaskSound(), "reached");
             if (

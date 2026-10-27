@@ -1,8 +1,15 @@
 "use client";
 
 import { Toast } from "@base-ui/react/toast";
+import { CheckIcon } from "@heroicons/react/24/outline";
 import { useCallback } from "react";
 import type { ReactNode } from "react";
+
+import Button from "@/components/Button";
+import { FloatingDockNotice } from "@/components/floating/FloatingDock";
+import FloatingNotification, {
+  FLOATING_NOTIFICATION_CLASS_NAME,
+} from "@/components/floating/FloatingNotification";
 
 const SHARE_TOAST_ID = "share-toast";
 
@@ -12,13 +19,8 @@ export default function SharePageProvider({
   children: ReactNode;
 }) {
   return (
-    <Toast.Provider>
+    <Toast.Provider limit={Number.POSITIVE_INFINITY} timeout={0}>
       {children}
-      <Toast.Portal>
-        <Toast.Viewport className="pointer-events-none fixed right-0 bottom-0 left-0 z-2147483647 m-0 flex list-none flex-col items-center gap-2 p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] outline-hidden lg:left-auto lg:w-97.5 lg:max-w-[100vw] lg:p-6">
-          <ShareToastList />
-        </Toast.Viewport>
-      </Toast.Portal>
     </Toast.Provider>
   );
 }
@@ -45,25 +47,56 @@ export function useSharePageUrl() {
   }, [toastManager]);
 }
 
-function ShareToastList() {
+export function ShareToastViewport() {
   const { toasts } = Toast.useToastManager();
 
-  return toasts.map((toast) => (
-    <Toast.Root
-      className="data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right border-border bg-background/70 shadow-foreground/5 pointer-events-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md transition-[transform,opacity] duration-200 ease-out [corner-shape:round] sm:max-w-[22.4rem]"
-      key={toast.id}
-      swipeDirection="right"
-      toast={toast}
-    >
-      <Toast.Content className="flex min-h-11.75 items-center gap-2 pl-5.5">
-        <div className="min-w-0 flex-1">
-          <Toast.Title className="text-foreground text-sm leading-5 font-medium" />
-          <Toast.Description className="text-muted m-0 truncate text-xs leading-4" />
-        </div>
-        <Toast.Close className="text-action hover:text-action-hover focus-visible:outline-action min-h-11.75 shrink-0 cursor-pointer rounded-full px-4 text-base font-medium [corner-shape:round] focus-visible:outline-2">
-          Got it
-        </Toast.Close>
-      </Toast.Content>
-    </Toast.Root>
-  ));
+  if (toasts.length === 0) {
+    return null;
+  }
+
+  return (
+    <FloatingDockNotice>
+      {toasts.length > 1 && (
+        <p className="text-muted text-right text-xs" aria-live="polite">
+          {toasts.length} notifications
+        </p>
+      )}
+      <Toast.Viewport className="pointer-events-auto m-0 flex max-h-[40dvh] w-full list-none flex-col gap-3 overflow-y-auto outline-hidden sm:w-[22.4rem]">
+        {toasts.map((toast) => (
+          <Toast.Root
+            className={`${FLOATING_NOTIFICATION_CLASS_NAME} data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right shrink-0 transition-[transform,opacity] duration-200 ease-out`}
+            key={toast.id}
+            swipeDirection={[]}
+            toast={toast}
+          >
+            <Toast.Content>
+              <FloatingNotification
+                action={
+                  <Toast.Close
+                    aria-label="Dismiss notification"
+                    render={
+                      <Button
+                        data-timer-play=""
+                        size="icon-circle"
+                        variant="primary-subtle"
+                      />
+                    }
+                  >
+                    <CheckIcon
+                      aria-hidden="true"
+                      className="size-4.5"
+                      strokeWidth={2.5}
+                    />
+                  </Toast.Close>
+                }
+              >
+                <Toast.Title className="text-foreground text-sm leading-5 font-medium" />
+                <Toast.Description className="text-muted m-0 truncate text-xs leading-4" />
+              </FloatingNotification>
+            </Toast.Content>
+          </Toast.Root>
+        ))}
+      </Toast.Viewport>
+    </FloatingDockNotice>
+  );
 }

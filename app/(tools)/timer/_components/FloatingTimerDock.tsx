@@ -11,10 +11,8 @@ import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import Button from "@/components/Button";
-import {
-  FloatingDockNotice,
-  FloatingDockSlot,
-} from "@/components/floating/FloatingDock";
+import { FloatingDockSlot } from "@/components/floating/FloatingDock";
+import FloatingRetryNotification from "@/components/floating/FloatingRetryNotification";
 import InternalLink from "@/components/InternalLink";
 
 export default function FloatingTimerDock() {
@@ -50,7 +48,7 @@ export default function FloatingTimerDock() {
   );
   const selected = showTasks ? tasks.at(selectedIndex) : undefined;
   const showError =
-    pathname !== "/timer" && error !== null && canUseTimer(snapshot);
+    error !== null && (pathname === "/timer" || canUseTimer(snapshot));
   const visible = selected !== undefined || showError;
 
   if (!visible) {
@@ -71,22 +69,12 @@ export default function FloatingTimerDock() {
   return (
     <>
       {showError ? (
-        <FloatingDockNotice>
-          <div
-            className="border-border bg-background/70 pointer-events-auto flex w-full items-center gap-3 rounded-xl border px-3 py-2 text-sm backdrop-blur-md sm:w-md"
-            role="alert"
-          >
-            <p className="text-danger flex-1">{error}</p>
-            <Button
-              variant="outline"
-              onClick={() => {
-                void refresh();
-              }}
-            >
-              Retry
-            </Button>
-          </div>
-        </FloatingDockNotice>
+        <FloatingRetryNotification
+          message={error}
+          onRetry={() => {
+            void refresh();
+          }}
+        />
       ) : null}
       {selected ? (
         <FloatingTimerPlayer

@@ -151,7 +151,7 @@ export class TimerMutations {
     } catch (error) {
       this.state = {
         ...this.state,
-        error:
+        loadError:
           error instanceof Error
             ? error.message
             : "Timer could not be refreshed.",
