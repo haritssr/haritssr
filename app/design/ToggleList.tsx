@@ -3,18 +3,23 @@ import SharedToggleList from "@/components/ToggleList";
 const nodes = [
   {
     id: "subject",
-    label: "Subjek: Matematika",
+    label: "Subjek: Fisika",
     children: [
       {
         id: "domain",
-        label: "Domain: Fondasi Matematika",
+        label: "Domain: Fluida",
         children: [
           {
             id: "chapter",
-            label: "Bab: Himpunan",
+            label: "Bab: Fluida Statis",
             children: [
-              { id: "notation", label: "Notasi dan Jenis Himpunan" },
-              { id: "operations", label: "Operasi Himpunan" },
+              { id: "density", label: "Massa Jenis" },
+              { id: "pressure", label: "Tekanan" },
+              { id: "hydrostatic-pressure", label: "Tekanan Hidrostatis" },
+              { id: "pascal", label: "Hukum Pascal" },
+              { id: "archimedes", label: "Hukum Archimedes" },
+              { id: "surface-tension", label: "Tegangan Permukaan" },
+              { id: "capillarity", label: "Kapilaritas" },
             ],
           },
         ],

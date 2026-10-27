@@ -1,4 +1,3 @@
-import { Button as BaseButton } from "@base-ui/react/button";
 import {
   ArrowDownTrayIcon,
   ArrowUpTrayIcon,
@@ -10,9 +9,7 @@ import type { ReactNode } from "react";
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { timerDate } from "@/app/(tools)/timer/utils/timer";
 import Button from "@/components/Button";
-
-const BACKUP_ACTION_CLASS =
-  "border-border text-foreground hover:bg-foreground/5 focus-visible:outline-foreground relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center border px-2 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-md last:rounded-r-md focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 motion-reduce:transition-none";
+import { ButtonGroup, ButtonGroupItem } from "@/components/ButtonGroup";
 
 async function exportData() {
   const response = await fetch("/api/timer?backup=1", { cache: "no-store" });
@@ -140,10 +137,9 @@ export default function TimerDataControls({
         )}
       </div>
       {children(
-        <div className="isolate inline-flex shrink-0 items-center rounded">
-          <BaseButton
+        <ButtonGroup aria-label="Timer backup">
+          <ButtonGroupItem
             aria-label="Export Timer backup"
-            className={BACKUP_ACTION_CLASS}
             disabled={disabled}
             onClick={() => {
               void perform(exportData);
@@ -154,10 +150,9 @@ export default function TimerDataControls({
               aria-hidden="true"
               className="size-4.5 stroke-2"
             />
-          </BaseButton>
-          <BaseButton
+          </ButtonGroupItem>
+          <ButtonGroupItem
             aria-label="Import Timer backup"
-            className={BACKUP_ACTION_CLASS}
             disabled={disabled}
             onClick={() => {
               input.current?.click();
@@ -165,8 +160,8 @@ export default function TimerDataControls({
             title="Import"
           >
             <ArrowUpTrayIcon aria-hidden="true" className="size-4.5 stroke-2" />
-          </BaseButton>
-        </div>
+          </ButtonGroupItem>
+        </ButtonGroup>
       )}
     </>
   );

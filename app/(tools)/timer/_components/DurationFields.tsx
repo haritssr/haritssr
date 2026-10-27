@@ -44,6 +44,9 @@ export default function DurationFields({
                 [unit]: value === null ? "" : String(value),
               });
             }}
+            onReset={() => {
+              onChange({ ...duration, [unit]: "0" });
+            }}
             required
             smallStep={1}
             step={1}

@@ -6,7 +6,7 @@ export default function Switch() {
   return (
     <BaseSwitch.Root
       aria-label="Enable notifications"
-      className="focus-visible:outline-action data-checked:bg-action bg-border block w-11 rounded-full p-1 outline-hidden focus-visible:outline-2"
+      className="focus-visible:outline-action data-checked:bg-action bg-border block w-11 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2"
       defaultChecked
       id="s1"
     >

@@ -121,9 +121,11 @@ function ToggleNode({
   if (!node.children || node.children.length === 0) {
     return (
       <li
-        className={`text-foreground marker:text-muted my-0.5 ml-5 min-w-0 list-outside list-disc rounded py-1.5 pr-2 pl-1 wrap-anywhere ${levelColor}`}
+        className={`text-foreground marker:text-muted my-1 ml-5 min-w-0 list-outside list-disc rounded py-1.5 pr-2 pl-1 wrap-anywhere ${levelColor}`}
       >
-        <NodeLabel node={node} />
+        <span className="pl-1.5">
+          <NodeLabel node={node} />
+        </span>
       </li>
     );
   }
@@ -138,7 +140,7 @@ function ToggleNode({
       >
         {node.href === undefined && node.count === undefined ? (
           <Collapsible.Trigger
-            className={`group text-foreground focus-visible:outline-action my-0.5 flex w-full cursor-pointer items-start gap-2 rounded px-1 py-1.5 text-left outline-hidden focus-visible:outline-2 ${levelColor}`}
+            className={`group text-foreground focus-visible:outline-action my-1 flex w-full cursor-pointer items-start gap-2 rounded py-1.5 pr-1 pl-2 text-left outline-hidden focus-visible:outline-2 ${levelColor}`}
           >
             <ChevronRightIcon
               aria-hidden="true"
@@ -148,7 +150,7 @@ function ToggleNode({
           </Collapsible.Trigger>
         ) : (
           <div
-            className={`my-0.5 flex min-w-0 items-center gap-2 rounded px-1 py-1.5 ${levelColor}`}
+            className={`my-1 flex min-w-0 items-center gap-2 rounded py-1.5 pr-1 pl-2 ${levelColor}`}
           >
             <Collapsible.Trigger
               aria-label={`Toggle ${node.label} (${node.children.length} children)`}
@@ -164,7 +166,7 @@ function ToggleNode({
           </div>
         )}
         <Collapsible.Panel keepMounted>
-          <ul className="border-border ml-3 border-l pl-2 sm:pl-3">
+          <ul className="border-border ml-4 border-l pl-1 sm:pl-2">
             {node.children.map((child) => (
               <ToggleNode
                 depth={depth + 1}

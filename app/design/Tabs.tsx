@@ -10,7 +10,7 @@ export default function Tabs() {
     >
       <BaseTabs.List
         aria-label="Account settings"
-        className="border-border flex w-full shrink-0 gap-1 border-b p-1"
+        className="border-border flex w-full shrink-0 gap-1 border-b border-dashed p-1"
       >
         <BaseTabs.Tab
           className="focus-visible:outline-action text-foreground data-active:bg-foreground/8 data-active:text-action hover:bg-foreground/5 flex cursor-pointer items-center justify-center rounded-lg px-3 py-1 font-normal whitespace-nowrap outline-hidden transition-colors duration-150 select-none [corner-shape:round] focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none"

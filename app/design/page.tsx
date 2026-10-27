@@ -19,6 +19,7 @@ import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 import Accordion from "./Accordion";
 import Badges from "./Badges";
 import Breadcrumbs from "./Breadcrumbs";
+import ButtonGroupExample from "./ButtonGroup";
 import ButtonIconOnly from "./ButtonIconOnly";
 import ButtonWithIcon from "./ButtonWithIcon";
 import Checkbox from "./Checkbox";
@@ -522,17 +523,30 @@ export default function DesignSystem() {
 
             <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
               <Box name="Button" title="Buttons">
-                <div className="flex flex-wrap items-center gap-3">
-                  <Button variant="primary">Primary</Button>
+                <div className="flex flex-wrap items-center gap-3 [&>button]:leading-5 [&>button]:font-medium">
+                  <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
+                    <Button variant="primary">Primary</Button>
+                  </span>
+                  <span className="inline-flex [&>button]:rounded-md! [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium [&>button]:[corner-shape:round]!">
+                    <Button variant="primary">Fallback</Button>
+                  </span>
+                  <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
+                    <LoadingButton />
+                  </span>
                   <Button variant="secondary">Secondary</Button>
-                  <LoadingButton />
                   <Button variant="danger">Danger</Button>
                   <Button disabled variant="secondary">
                     Disabled
                   </Button>
-                  <ButtonIconOnly />
                   <ButtonWithIcon />
+                  <ButtonIconOnly />
                 </div>
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+              <Box name="ButtonGroup" title="Button group">
+                <ButtonGroupExample />
               </Box>
             </div>
 

@@ -48,7 +48,7 @@ export function SelectField({
         value={value}
       >
         <Select.Trigger
-          className={`form-control text-foreground/80 flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-lg border text-sm outline-none ${variant === "plain" ? "hover:text-foreground focus-visible:outline-action border-transparent bg-transparent shadow-none focus-visible:outline-2" : "border-border focus-visible:border-action bg-white px-3 py-2"}`}
+          className={`form-control flex w-full cursor-pointer items-center justify-between border text-left text-sm outline-hidden ${variant === "plain" ? "text-foreground/80 hover:text-foreground focus-visible:outline-action gap-1.5 rounded-lg border-transparent bg-transparent shadow-none focus-visible:outline-2" : "corner-squircle focus-visible:outline-action border-border text-foreground gap-3 rounded-md px-3 py-2.5 focus-visible:outline-2 supports-[corner-shape:squircle]:rounded-xl"}`}
           id={id}
         >
           <span className="inline-flex min-w-0 items-center gap-2">
@@ -57,13 +57,20 @@ export function SelectField({
             ) : null}
             <Select.Value lang={valueLang} placeholder={placeholder} />
           </span>
-          <Select.Icon className="inline-flex transition-transform duration-150 data-popup-open:rotate-180 motion-reduce:transition-none">
-            <ChevronDownIcon aria-hidden="true" className="size-4 shrink-0" />
+          <Select.Icon
+            className={`inline-flex transition-transform data-popup-open:rotate-180 motion-reduce:transition-none ${variant === "plain" ? "duration-150" : "duration-200"}`}
+          >
+            <ChevronDownIcon
+              aria-hidden="true"
+              className={`shrink-0 ${variant === "plain" ? "size-4" : "text-foreground size-5"}`}
+            />
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
           <Select.Positioner alignItemWithTrigger={false} sideOffset={4}>
-            <Select.Popup className="border-border z-50 max-w-[calc(100vw-2rem)] min-w-(--anchor-width) overflow-hidden rounded-lg border bg-white">
+            <Select.Popup
+              className={`border-border z-50 max-w-[calc(100vw-2rem)] min-w-(--anchor-width) overflow-hidden border bg-white ${variant === "plain" ? "rounded-lg" : "corner-squircle rounded-md supports-[corner-shape:squircle]:rounded-xl"}`}
+            >
               <Select.List className="scrollbar-subtle max-h-72 overflow-y-auto p-1">
                 {options.map((option) => (
                   <Select.Item

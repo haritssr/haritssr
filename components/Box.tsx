@@ -15,7 +15,7 @@ export default function Box({
 }) {
   return (
     <Container className="corner-squircle border-border flex min-w-0 flex-col overflow-hidden rounded-xl border bg-white drop-shadow-sm">
-      <div className="border-border bg-surface-hover text-foreground flex items-center justify-between gap-2 border-b px-3 py-2">
+      <div className="border-border bg-surface-hover text-foreground flex items-center justify-between gap-2 border-b border-dashed px-3 py-2">
         <Heading className="text-foreground/90 min-w-0 text-sm font-medium">
           {title}
         </Heading>

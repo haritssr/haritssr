@@ -17,6 +17,7 @@ type ButtonVariant =
   | "outline"
   | "floating-outline"
   | "outline-interactive"
+  | "outline-toolbar"
   | "outline-regular"
   | "action-outline-regular"
   | "action-outline"
@@ -69,6 +70,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "outline-interactive":
     "border-border text-foreground border bg-transparent font-medium transition-[color,border-color,background-color,transform] duration-150 enabled:hover:bg-foreground/5 focus:border-foreground focus-visible:outline-foreground active:scale-95 active:border-foreground motion-reduce:transition-none",
+  "outline-toolbar":
+    "border-border text-foreground border bg-transparent transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-foreground motion-reduce:transition-none",
   "action-outline":
     "border border-action bg-surface font-medium text-action transition-colors duration-150 enabled:hover:bg-action/10 focus-visible:outline-action",
   "outline-regular":
@@ -90,11 +93,17 @@ const BUTTON_SIZE_CLASS = {
     "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
   "icon-circle-large":
     "size-11 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
-  "icon-large": "size-10 shrink-0 rounded-md p-2",
-  "icon-compact": "size-7 shrink-0 rounded-md p-1",
+  "icon-large":
+    "corner-squircle size-10 shrink-0 rounded-sm p-2 supports-[corner-shape:squircle]:rounded-md",
+  "icon-compact":
+    "corner-squircle size-7 shrink-0 rounded-sm p-1 supports-[corner-shape:squircle]:rounded-md",
+  "icon-toolbar":
+    "corner-squircle min-h-8.5 shrink-0 rounded-md px-2 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
-  default: "rounded-md px-3 py-1.5",
-  "mobile-roomy": "rounded-md px-3 py-2 sm:py-1.5",
+  default:
+    "corner-squircle rounded-md px-3 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
+  "mobile-roomy":
+    "corner-squircle rounded-md px-3 py-2 supports-[corner-shape:squircle]:rounded-xl sm:py-1.5",
   text: "rounded-none p-0",
 };
 
@@ -124,7 +133,7 @@ const Button = function Button({
     <button
       {...props}
       aria-busy={loading}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" && size !== "icon-compact" ? "rounded-lg p-2" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
+      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" && size !== "icon-circle-large" && size !== "icon-compact" && size !== "icon-toolbar" ? "corner-squircle rounded-md p-2 supports-[corner-shape:squircle]:rounded-lg" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
       disabled={disabled === true || loading}
       ref={ref}
       type={type}

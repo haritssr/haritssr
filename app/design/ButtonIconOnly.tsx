@@ -1,10 +1,18 @@
-import { CheckIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 import Button from "@/components/Button";
 
 export default function ButtonIconOnly() {
   return (
     <div className="flex items-center gap-2">
+      <Button
+        aria-label="Settings"
+        size="icon-toolbar"
+        title="Settings"
+        variant="outline-toolbar"
+      >
+        <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
+      </Button>
       <Button aria-label="Bookmark" size="icon-circle" variant="outline">
         <svg
           aria-hidden="true"

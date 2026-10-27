@@ -55,6 +55,9 @@ custom properties when contracts and behavior stay unchanged. Do not typecheck t
 
 - Inspect `/design` and `app/design/` before UI changes. Reuse suitable shared
   components, demonstrated behavior, and existing tokens.
+- For new rectangular UI, consider `corner-squircle` with a rounded fallback
+  radius half the supported squircle radius (for example, 6px fallback and 12px
+  under `@supports (corner-shape: squircle)`). Keep circles and pills round.
 - Describe colors with design-system names or tokens (`zinc-50`, `bg-surface`,
   `--color-border`), never hex. Use `zinc-50`/`zinc-900` instead of pure white/black.
 - Use Base UI for continuing widgets. React Aria is limited to the mobile article

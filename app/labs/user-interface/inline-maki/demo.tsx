@@ -112,7 +112,7 @@ function Section({ title }: { title: string }) {
             <Switch.Thumb className="block h-3.5 w-3.5 rounded-full bg-white shadow duration-100 will-change-transform data-checked:translate-x-[14px] data-checked:bg-white" />
           </Switch.Root>
         </div>
-        <Accordion.Panel className="rounded-b-md border border-zinc-400 duration-100">
+        <Accordion.Panel className="rounded-b-md border border-zinc-400">
           <textarea
             aria-label={title}
             className="h-auto w-full px-2 py-1 focus:ring-2 focus:ring-blue-600 focus:outline-hidden"
