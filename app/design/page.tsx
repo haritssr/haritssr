@@ -3,6 +3,7 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 
+import { TASK_LAYOUT } from "@/app/(tools)/timer/_components/taskPresentation";
 import BackButton from "@/components/BackButton";
 import Box from "@/components/Box";
 import Button from "@/components/Button";
@@ -14,6 +15,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import TabBarButtom from "@/components/TabBarButtom";
+import { TOP_BAR_CAPSULE_CLASS_NAME } from "@/components/topbar/TopBarAction";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import Accordion from "./Accordion";
@@ -25,7 +27,8 @@ import ButtonWithIcon from "./ButtonWithIcon";
 import Checkbox from "./Checkbox";
 import { DesignTokens } from "./Colors";
 import ContextMenu from "./ContextMenu";
-import FloatingPill from "./FloatingPill";
+import FloatingTask from "./FloatingTask";
+import FloatingTaskVariations from "./FloatingTaskVariations";
 import InterfacePrinciples from "./InterfacePrinciples";
 import LoadingButton from "./LoadingButton";
 import Logo from "./Logo";
@@ -313,6 +316,10 @@ export default function DesignSystem() {
               </ul>
             </li>
             <li>
+              Use flat buttons directly on the page and physical buttons inside
+              containers.
+            </li>
+            <li>
               Prefer the system&apos;s basic colors and components to accelerate
               development while maintaining consistency.
             </li>
@@ -516,8 +523,49 @@ export default function DesignSystem() {
             </div>
 
             <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
-              <Box name="FloatingPill" title="Floating Pill">
-                <FloatingPill />
+              <Box name="FloatingTask" title="Task: Floating">
+                <FloatingTask />
+                <FloatingTaskVariations />
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+              <Box title="Floating container shape">
+                <div className="flex flex-wrap items-start gap-5">
+                  <div className="space-y-2">
+                    <div
+                      aria-hidden="true"
+                      className={TOP_BAR_CAPSULE_CLASS_NAME}
+                    >
+                      <div className="h-8 w-40" />
+                    </div>
+                    <p className="text-muted text-center text-sm">Navigation</p>
+                  </div>
+                  <div className="space-y-2">
+                    <div
+                      aria-hidden="true"
+                      className="corner-squircle border-border bg-background/70 shadow-foreground/10 h-14 w-48 rounded-full border shadow-lg backdrop-blur-md"
+                    />
+                    <p className="text-muted text-center text-sm">Task</p>
+                  </div>
+                </div>
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+              <Box title="Materials">
+                <div className="flex flex-wrap items-start gap-5">
+                  <div className="space-y-2">
+                    <div
+                      className={`${TASK_LAYOUT.surface} border-border h-28 w-48`}
+                    />
+                    <p className="text-muted text-center text-sm">Stand out</p>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="floating-material h-14 w-48 rounded-xl" />
+                    <p className="text-muted text-center text-sm">Floating</p>
+                  </div>
+                </div>
               </Box>
             </div>
 
@@ -538,8 +586,43 @@ export default function DesignSystem() {
                   <Button disabled variant="secondary">
                     Disabled
                   </Button>
-                  <ButtonWithIcon />
+                  <span className="inline-flex">
+                    <ButtonWithIcon />
+                  </span>
                   <ButtonIconOnly />
+                </div>
+              </Box>
+            </div>
+
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+              <Box name="Button" title="Buttons: Physical">
+                <div className="flex flex-wrap items-center gap-3 [&>button]:leading-5 [&>button]:font-medium">
+                  <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
+                    <Button data-timer-play="" variant="primary">
+                      Primary
+                    </Button>
+                  </span>
+                  <span className="inline-flex [&>button]:rounded-md! [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium [&>button]:[corner-shape:round]!">
+                    <Button data-timer-play="" variant="primary">
+                      Fallback
+                    </Button>
+                  </span>
+                  <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
+                    <LoadingButton physical />
+                  </span>
+                  <Button data-timer-secondary="" variant="secondary">
+                    Secondary
+                  </Button>
+                  <Button data-timer-secondary="" variant="danger">
+                    Danger
+                  </Button>
+                  <Button data-timer-secondary="" disabled variant="secondary">
+                    Disabled
+                  </Button>
+                  <span className="inline-flex">
+                    <ButtonWithIcon physical />
+                  </span>
+                  <ButtonIconOnly physical />
                 </div>
               </Box>
             </div>

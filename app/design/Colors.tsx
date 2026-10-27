@@ -28,8 +28,16 @@ const DESIGN_TOKENS = [
     definition: "amber-500",
   },
   {
+    name: "timer-paused",
+    definition: "orange-500",
+  },
+  {
     name: "danger",
     definition: "red-500",
+  },
+  {
+    name: "music",
+    definition: "cyan-500",
   },
   {
     name: "surface",

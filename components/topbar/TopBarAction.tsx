@@ -8,7 +8,7 @@ export function topBarActionClassName(showLabel = false): string {
     "focus-visible:outline-action flex shrink-0 cursor-pointer items-center focus-visible:outline-2";
   return showLabel
     ? `${base} rounded-lg text-foreground hover:bg-foreground/5 w-full gap-3 px-3 py-2 text-left text-sm focus-visible:-outline-offset-2`
-    : `${base} text-foreground hover:text-action hover:bg-foreground/8 aria-expanded:text-action aria-expanded:bg-foreground/8 size-8 justify-center rounded-full transition-colors duration-150 [corner-shape:round] focus-visible:-outline-offset-2 motion-reduce:transition-none`;
+    : `${base} text-foreground hover:bg-foreground/8 aria-expanded:text-action aria-expanded:bg-foreground/8 size-8 justify-center rounded-full transition-colors duration-150 [corner-shape:round] focus-visible:-outline-offset-2 motion-reduce:transition-none`;
 }
 
 export default function TopBarAction({

@@ -36,6 +36,10 @@ const themes = {
     label: "Blue",
     variables: "[--pill-accent:var(--color-action)]",
   },
+  music: {
+    label: "Music",
+    variables: "[--pill-accent:var(--color-music)]",
+  },
   purple: {
     label: "Purple",
     variables: "[--pill-accent:var(--color-secondary-accent)]",
@@ -49,10 +53,11 @@ const options: readonly Theme[] = [
   "yellow",
   "green",
   "blue",
+  "music",
   "purple",
 ];
 
-export default function FloatingPill() {
+export default function FloatingTask() {
   const [theme, setTheme] = useState<Theme>("dark");
   const selected = themes[theme];
 

@@ -3,7 +3,11 @@ import { useEffect, useRef, useState } from "react";
 
 import Button from "@/components/Button";
 
-export default function LoadingButton() {
+export default function LoadingButton({
+  physical = false,
+}: {
+  physical?: boolean;
+}) {
   const [loading, setLoading] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(
@@ -16,6 +20,7 @@ export default function LoadingButton() {
   );
   return (
     <Button
+      data-timer-play={physical ? "" : undefined}
       loading={loading}
       onClick={() => {
         setLoading(true);
