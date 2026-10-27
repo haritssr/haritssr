@@ -14,7 +14,6 @@ import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
-import TabBarButtom from "@/components/TabBarButtom";
 import { TOP_BAR_CAPSULE_CLASS_NAME } from "@/components/topbar/TopBarAction";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
@@ -66,7 +65,7 @@ export default function DesignSystem() {
       </PageHeader>
       <div className="space-y-16">
         <Section title="Principles">
-          <ol className="text-foreground [&>li::marker]:text-muted [&>li::after]:border-border list-outside list-decimal gap-16 space-y-2 leading-relaxed sm:columns-2 sm:[column-rule:1px_dashed_var(--color-border)] [&>li]:relative [&>li]:ml-7 [&>li]:break-inside-avoid [&>li]:pb-2 [&>li]:pl-1 [&>li::after]:absolute [&>li::after]:right-0 [&>li::after]:bottom-0 [&>li::after]:-left-7 [&>li::after]:border-b [&>li::after]:border-dashed [&>li::after]:content-['']">
+          <ol className="text-foreground [&>li::marker]:text-muted list-outside list-decimal space-y-2 leading-relaxed [&>li]:ml-7 [&>li]:pl-1">
             <li>
               A design system is a set of rules and opinions that shape the user
               interface and the experience as a whole.
@@ -290,18 +289,6 @@ export default function DesignSystem() {
               <ExternalLink href="https://vercel.com" name="Vercel" />.
             </li>
             <li>
-              Why is it called &quot;Components&quot;?
-              <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
-                <li>
-                  The name makes the purpose of this page clear in navigation.
-                </li>
-                <li>
-                  Blue, black, gray, and white keep the visual language focused
-                  and familiar.
-                </li>
-              </ul>
-            </li>
-            <li>
               Distinguish between link and button, link to navigate, button for
               action.
               <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
@@ -358,10 +345,10 @@ export default function DesignSystem() {
               documentation.
             </li>
             <li>
-              Controls use subtle shadows; floating controls sit one level
-              higher. Hover raises elevation and pressing lowers it. Disabled
-              controls and selects stay flat, and keyboard focus keeps a visible
-              outline.
+              Use shadows only for elements that need to stand out on the page.
+              Keep shadows subtle, with floating controls one level higher.
+              Hover raises elevation and pressing lowers it. Disabled controls
+              and selects stay flat, and keyboard focus keeps a visible outline.
             </li>
             <li>
               Strive for one line navigation layer on all screen views as
@@ -373,11 +360,6 @@ export default function DesignSystem() {
               on desktop, with the same <code>gap-5</code> at every size.
             </li>
             <li>
-              For Harimaki, supporting-feature modals should use{" "}
-              <code>grid-cols-1</code> and include a button at the bottom to
-              open the full page.
-            </li>
-            <li>
               The mobile tab bar should appear on every Harimaki page except
               Materi pages under the Belajar route.
             </li>
@@ -386,7 +368,12 @@ export default function DesignSystem() {
 
         <Section
           title="Layout"
-          description="A fluid grid with equal columns and consistent spacing. Resize the window to explore each breakpoint."
+          description={
+            <code className="font-mono wrap-anywhere">
+              grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+              gap-4 sm:gap-5
+            </code>
+          }
         >
           <Box title="Responsive Grid">
             <div className="text-muted flex flex-wrap items-center justify-between gap-3 text-sm">
@@ -416,10 +403,6 @@ export default function DesignSystem() {
                 </li>
               ))}
             </ul>
-            <code className="text-muted block font-mono text-base leading-relaxed wrap-anywhere">
-              grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
-              gap-4 sm:gap-5
-            </code>
           </Box>
         </Section>
 
@@ -756,30 +739,24 @@ export default function DesignSystem() {
             </div>
 
             <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
-              <Box name="TabBarButtom" title="Bottom Navigation Capsule">
-                <TabBarButtom preview />
-              </Box>
-            </div>
-
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
               <Box name="Slider" title="Slider">
                 <Slider />
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
               <Box name="ContextMenu" title="Context Menus">
                 <ContextMenu />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
               <Box name="Tabs" title="Tabs">
                 <Tabs />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 [&>div]:flex-1">
+            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
               <Box title="Input: Date">
                 <label className="block w-full sm:max-w-xs">
                   <span className="text-foreground/80 mb-1 block text-sm font-medium">
@@ -791,7 +768,7 @@ export default function DesignSystem() {
             </div>
 
             <div className="border-border-hover flex min-w-0 flex-col border-b border-b-0 border-dashed py-5 pb-0 md:col-span-2 [&>div]:flex-1">
-              <Box name="Colors" title="Design Tokens">
+              <Box name="Colors" title="Colors">
                 <DesignTokens />
               </Box>
             </div>
