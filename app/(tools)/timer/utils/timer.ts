@@ -119,6 +119,11 @@ export interface TimerHistory {
 
 export type TimerAction =
   | {
+      action: "restore";
+      date: string;
+      taskId: string;
+    }
+  | {
       action: "speed";
       date: string;
       taskId: string;

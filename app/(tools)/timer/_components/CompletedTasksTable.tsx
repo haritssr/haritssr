@@ -1,7 +1,9 @@
 import { Collapsible } from "@base-ui/react/collapsible";
+import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 import {
+  canUseTimer,
   formatTimerTime,
   taskCompletionTime,
   taskSpent,
@@ -10,6 +12,8 @@ import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import { SectionHeading } from "@/components/Section";
 import { SelectField } from "@/components/SelectField";
 import Table from "@/components/Table";
+
+import { useTimer } from "./TimerProvider";
 
 const SORT_OPTIONS = [
   { value: "reached", label: "Reached" },
@@ -46,7 +50,8 @@ export default function CompletedTasksTable({
   date: string;
   now: number;
 }) {
-  const [open, setOpen] = useState(false);
+  const { act, snapshot } = useTimer("act", "snapshot");
+  const [open, setOpen] = useState(true);
   const [sort, setSort] = useState<keyof typeof ORDER_OPTIONS>("reached");
   const [order, setOrder] = useState("desc");
   const orderOptions = ORDER_OPTIONS[sort];
@@ -94,7 +99,7 @@ export default function CompletedTasksTable({
           History
         </SectionHeading>
         <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-base underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
-          {open ? "Hide" : "View"}
+          {open ? "Hide" : "Show"}
         </Collapsible.Trigger>
         <div className="ml-auto flex flex-wrap items-center gap-4">
           {open ? (
@@ -175,7 +180,30 @@ export default function CompletedTasksTable({
                   {percentage >= 100 ? "100" : percentage.toFixed(0)}%
                 </td>
                 <td className="whitespace-nowrap">
-                  {reached ? "Reached" : "Done"}
+                  <div className="flex items-center justify-between gap-2">
+                    <span>{reached ? "Reached" : "Done"}</span>
+                    {!reached && (
+                      <button
+                        aria-label={`Restore ${task.activity} to active tasks`}
+                        className="text-muted hover:text-foreground focus-visible:outline-action inline-flex size-5 cursor-pointer items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        disabled={!canUseTimer(snapshot)}
+                        onClick={() => {
+                          void act({
+                            action: "restore",
+                            date,
+                            taskId: task.id,
+                          });
+                        }}
+                        title="Restore task"
+                        type="button"
+                      >
+                        <ArrowUturnLeftIcon
+                          aria-hidden="true"
+                          className="size-4"
+                        />
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}

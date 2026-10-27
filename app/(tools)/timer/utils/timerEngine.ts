@@ -165,6 +165,16 @@ function changeTask(
       finishTask(task, now);
       autoplayNextTask(day, command.autoplay, now);
     }
+  } else if (command.action === "restore") {
+    if (task.reachedAt === null || task.spent >= task.duration) {
+      throw new TimerStoreError(
+        "Only early finished activities can be restored.",
+        409
+      );
+    }
+    task.startedAt = null;
+    task.reachedAt = null;
+    task.notifiedAt = null;
   } else if (command.action === "pause") {
     task.startedAt = null;
   } else if (task.reachedAt !== null && task.notifiedAt === null) {

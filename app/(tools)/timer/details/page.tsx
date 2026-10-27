@@ -270,7 +270,8 @@ export default function TimerDetailsPage() {
             </li>
             <li>
               Reached marks a task that used its full duration. Done finishes
-              early and saves actual time spent.
+              early and saves actual time spent. Restore returns a Done task to
+              the active list paused, keeping its recorded time.
             </li>
             <li>
               Use the adjustments icon to edit an unfinished task. Its duration
@@ -303,7 +304,7 @@ export default function TimerDetailsPage() {
                 tasks use dark zinc through the foreground token.
               </li>
               <li>
-                History lists completed tasks below the grid. Use View or Hide
+                History lists completed tasks below the grid. Use Show or Hide
                 to toggle it.
               </li>
               <li>

@@ -29,7 +29,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/CompletedTasksTable.tsx",
-    "Collapsed History table, View/Hide controls, sorting, and completion status.",
+    "History table, Show/Hide controls, sorting, and completion status.",
   ],
   [
     "app/(tools)/timer/_components/TaskCard.tsx",

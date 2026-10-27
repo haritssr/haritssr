@@ -69,9 +69,11 @@ their opacity while unavailable; preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
 
 Completed tasks appear in `CompletedTasksTable` below the active task grid.
-The section defaults collapsed. View reveals the sort controls and table; Hide
-collapses them again. The expanded table wraps task names and descriptions and
-scrolls horizontally on narrow screens. `TaskList` partitions tasks using their current elapsed
+The section defaults expanded. Hide collapses the sort controls and table; Show
+reveals them again. The expanded table wraps task names and descriptions and
+scrolls horizontally on narrow screens. Restore returns an early Done task to
+the active list paused, preserving its time; Reached tasks cannot be restored.
+`TaskList` partitions tasks using their current elapsed
 time, so a task moves into the table as soon as its duration is reached.
 The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards

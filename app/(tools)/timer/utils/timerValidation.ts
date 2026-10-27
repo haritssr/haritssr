@@ -50,6 +50,11 @@ export const daySchema = z
 
 export const actionSchema = z.discriminatedUnion("action", [
   z.object({
+    action: z.literal("restore"),
+    date: dateSchema,
+    taskId: z.string().min(1).max(100),
+  }),
+  z.object({
     action: z.literal("speed"),
     date: dateSchema,
     taskId: z.string().min(1).max(100),
