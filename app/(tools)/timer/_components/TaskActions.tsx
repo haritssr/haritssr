@@ -176,7 +176,7 @@ function TaskIconActions({
         onClick={onToggle}
         size="icon-circle"
         title={label}
-        variant={running ? "timer-running" : "neutral-subtle"}
+        variant={running ? "timer-running" : "timer-paused"}
       >
         <ToggleIcon
           aria-hidden="true"
