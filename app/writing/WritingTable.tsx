@@ -8,13 +8,16 @@ export default function WritingTable() {
         <caption className="sr-only">Writing, newest first</caption>
         <tbody className="divide-border divide-y">
           {allWritingPosts.map((post) => (
-            <tr key={post.slug}>
+            <tr
+              className="group/row hover:bg-foreground/5 relative cursor-pointer"
+              key={post.slug}
+            >
               <th
                 className="w-full py-2.5 text-left font-normal sm:w-1/3"
                 scope="row"
               >
                 <InternalLink
-                  className="text-base"
+                  className="text-base group-hover/row:underline after:absolute after:inset-0 after:content-[''] active:scale-none!"
                   href={`/writing/${post.slug}`}
                   variant="inline"
                 >
