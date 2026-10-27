@@ -313,7 +313,7 @@ function TaskFormActions({
             className="w-full!"
             disabled={busy}
             onDelete={onDelete}
-            variant="secondary"
+            variant="danger"
           >
             Delete
           </DeleteTaskButton>
