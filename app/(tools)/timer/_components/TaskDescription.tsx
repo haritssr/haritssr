@@ -13,7 +13,7 @@ export default function TaskDescription({ task }: { task: TimerTask }) {
       <Popover.Root>
         <Popover.Trigger
           aria-label={`Show description for ${task.activity}`}
-          className="text-muted hover:text-muted/70 focus-visible:outline-action group flex h-5 w-fit cursor-pointer items-center justify-start gap-px rounded text-base leading-5 group-data-completed/task:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-sm"
+          className="text-muted hover:text-foreground focus-visible:outline-action group flex h-5 w-fit cursor-pointer items-center justify-start gap-px rounded text-base leading-5 group-data-completed/task:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-sm"
           openOnHover
         >
           <DocumentTextIcon

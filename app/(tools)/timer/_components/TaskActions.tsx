@@ -76,7 +76,8 @@ export default function TaskActions({
     <div className="flex min-w-0 items-center justify-end gap-2">
       {showDone ? null : (
         <DeleteTaskButton
-          className="shrink-0"
+          className="size-12! shrink-0"
+          data-timer-secondary=""
           title="Delete"
           dimWhenDisabled={unavailable}
           size="icon-circle"
@@ -89,7 +90,9 @@ export default function TaskActions({
         />
       )}
       <Button
-        className={`shrink-0 ${showDone ? "" : "select-none"}`}
+        className={`size-12! shrink-0 ${showDone ? "" : "select-none"}`}
+        data-timer-play={showDone ? undefined : ""}
+        data-timer-secondary={showDone ? "" : undefined}
         dimWhenDisabled={unavailable}
         size="icon-circle"
         disabled={disabled}
@@ -110,7 +113,8 @@ export default function TaskActions({
       </Button>
       {showDone ? (
         <Button
-          className="shrink-0 select-none"
+          className="size-12! shrink-0 select-none"
+          data-timer-play=""
           dimWhenDisabled={unavailable}
           size="icon-circle"
           disabled={disabled}
@@ -155,6 +159,7 @@ function TaskIconActions({
       {children}
       <Button
         aria-label={`Done: ${activity}`}
+        data-timer-secondary=""
         dimWhenDisabled={dimWhenDisabled}
         disabled={disabled}
         onClick={onDone}
@@ -166,6 +171,7 @@ function TaskIconActions({
       </Button>
       <Button
         aria-label={`${label}: ${activity}`}
+        data-timer-play=""
         dimWhenDisabled={dimWhenDisabled}
         disabled={disabled}
         onClick={onToggle}

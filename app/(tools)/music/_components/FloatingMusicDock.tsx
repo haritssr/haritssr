@@ -36,7 +36,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
   }
   const fullPlayer = (
     <div
-      className={`${styles.accent} border-border bg-background/70 shadow-foreground/10 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full border p-2 shadow-lg backdrop-blur-md [corner-shape:round]`}
+      className={`${styles.accent} corner-squircle border-border bg-background/70 shadow-foreground/10 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full border p-2 shadow-lg backdrop-blur-md`}
     >
       <InternalLink
         className="mr-auto min-w-0 flex-1"
@@ -62,11 +62,12 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
       </InternalLink>
       <Button
         aria-label="Next song"
+        data-timer-secondary=""
         onClick={() => {
           store.next();
         }}
         size="icon-circle"
-        variant="floating-outline"
+        variant="secondary-strong"
       >
         <ForwardIcon
           aria-hidden="true"
@@ -76,16 +77,18 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
       </Button>
       <Button
         aria-label="Pause and dismiss music"
+        data-timer-secondary=""
         onClick={() => {
           store.dismiss();
         }}
         size="icon-circle"
-        variant="floating-outline"
+        variant="secondary-strong"
       >
         <XMarkIcon aria-hidden="true" className="size-4.5" strokeWidth={2.5} />
       </Button>
       <Button
         aria-label={playing ? "Pause music" : "Play music"}
+        data-timer-play=""
         onClick={() => {
           store.toggle();
         }}

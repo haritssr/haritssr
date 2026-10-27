@@ -66,7 +66,7 @@ export default function FloatingPill() {
   return (
     <div className="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-center lg:justify-evenly">
       <div
-        className={`border-border bg-background/70 shadow-foreground/10 mx-auto flex min-h-13.25 w-full max-w-[22.4rem] items-center gap-1.5 rounded-full border py-2 pr-2 pl-4 shadow-lg backdrop-blur-md [corner-shape:round] lg:mx-0 ${selected.variables}`}
+        className={`corner-squircle border-border bg-background/70 shadow-foreground/10 mx-auto flex min-h-13.25 w-full max-w-[22.4rem] items-center gap-1.5 rounded-full border py-2 pr-2 pl-4 shadow-lg backdrop-blur-md lg:mx-0 ${selected.variables}`}
       >
         <div className="min-w-0 flex-1 space-y-1.5">
           <div className="flex min-w-0 items-center justify-between gap-2">
@@ -80,12 +80,18 @@ export default function FloatingPill() {
           </div>
           <progress
             aria-label="Creative session progress"
+            data-floating-progress=""
             className="bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block h-1.5 w-full appearance-none overflow-hidden rounded-full border-0 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--pill-accent) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--pill-accent)"
             max={100}
             value={40}
           />
         </div>
-        <Button aria-label="Next" size="icon-circle" variant="floating-outline">
+        <Button
+          aria-label="Next"
+          data-timer-secondary=""
+          size="icon-circle"
+          variant="secondary-strong"
+        >
           <ForwardIcon
             aria-hidden="true"
             className="size-4.5 translate-x-[0.5px] -translate-y-[0.5px]"
@@ -94,8 +100,9 @@ export default function FloatingPill() {
         </Button>
         <Button
           aria-label="Dismiss"
+          data-timer-secondary=""
           size="icon-circle"
-          variant="floating-outline"
+          variant="secondary-strong"
         >
           <XMarkIcon
             aria-hidden="true"
@@ -105,6 +112,7 @@ export default function FloatingPill() {
         </Button>
         <Button
           aria-label="Play"
+          data-timer-play=""
           size="icon-circle"
           variant={theme === "dark" ? "neutral-subtle" : "theme-fill"}
         >

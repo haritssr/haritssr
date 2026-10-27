@@ -82,7 +82,7 @@ function CompactActionMenu({
                 setOpen(false);
               }
             }}
-            className="border-border text-foreground corner-squircle w-48 max-w-[calc(100vw-2rem)] rounded-2xl border bg-white/80 shadow-xl outline-hidden backdrop-blur-lg"
+            className="navigation-material border-border text-foreground corner-squircle w-48 max-w-[calc(100vw-2rem)] rounded-lg border shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-2xl"
           >
             <TopBarActions
               layout="list"

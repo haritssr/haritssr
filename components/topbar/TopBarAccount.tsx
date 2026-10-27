@@ -64,7 +64,7 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
       </Menu.Trigger>
       <Menu.Portal>
         <Menu.Positioner align="end" sideOffset={12} className="z-60">
-          <Menu.Popup className="border-border text-foreground corner-squircle max-w-[calc(100vw-2rem)] space-y-2 rounded-2xl border bg-white/80 p-2 shadow-xl outline-hidden backdrop-blur-lg">
+          <Menu.Popup className="navigation-material border-border text-foreground corner-squircle max-w-[calc(100vw-2rem)] space-y-2 rounded-lg border p-2 shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
             <p className="text-muted text-sm break-all">{account.email}</p>
             <form
               action="/api/timer/auth/logout"

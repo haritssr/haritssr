@@ -170,7 +170,7 @@ export default function ArticleContentsPanel({
     </>
   );
   const appearance =
-    "border-middle-hover text-foreground flex flex-col overflow-hidden border bg-white/50 shadow-xl saturate-150 backdrop-blur-lg outline-hidden";
+    "navigation-material border-border text-foreground corner-squircle flex flex-col overflow-hidden border shadow-xl outline-hidden";
 
   if (desktop) {
     return (
@@ -184,7 +184,7 @@ export default function ArticleContentsPanel({
           sideOffset={12}
         >
           <Popover.Popup
-            className={`${styles.popover} ${appearance} rounded-xl`}
+            className={`${styles.popover} ${appearance} rounded-lg supports-[corner-shape:squircle]:rounded-2xl`}
             finalFocus={finalFocus}
           >
             {content}
@@ -200,7 +200,9 @@ export default function ArticleContentsPanel({
         className="bg-foreground/30 backdrop-blur-xs"
         swipeAnimation={styles.backdropFade}
       />
-      <Sheet className={`${styles.sheet} ${appearance} rounded-t-3xl`}>
+      <Sheet
+        className={`${styles.sheet} ${appearance} rounded-t-xl supports-[corner-shape:squircle]:rounded-t-3xl`}
+      >
         <SheetContent className="flex min-h-0 flex-col outline-hidden">
           <div
             aria-hidden="true"

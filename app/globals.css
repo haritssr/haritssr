@@ -6,6 +6,94 @@
   corner-shape: squircle;
 }
 
+@utility navigation-material {
+  @apply inset-shadow-sm inset-shadow-zinc-50/60;
+  background-color: var(--color-background);
+
+  @supports (backdrop-filter: blur(12px)) {
+    background-color: color-mix(
+      in srgb,
+      var(--color-background) 70%,
+      transparent
+    );
+    backdrop-filter: blur(12px);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--color-background);
+    backdrop-filter: none;
+  }
+}
+
+[data-floating-progress]::-webkit-progress-value {
+  box-shadow:
+    inset 0 1px 1px color-mix(in srgb, var(--color-zinc-50) 35%, transparent),
+    inset 0 -1px 1px
+      color-mix(in srgb, var(--color-foreground) 20%, transparent);
+}
+
+[data-floating-progress]::-moz-progress-bar {
+  box-shadow:
+    inset 0 1px 1px color-mix(in srgb, var(--color-zinc-50) 35%, transparent),
+    inset 0 -1px 1px
+      color-mix(in srgb, var(--color-foreground) 20%, transparent);
+}
+
+[data-timer-play] {
+  box-shadow:
+    inset 0 1px 1px color-mix(in srgb, var(--color-white) 30%, transparent),
+    0 2px 4px color-mix(in srgb, var(--color-foreground) 18%, transparent);
+  transition:
+    background-color 150ms,
+    box-shadow 150ms,
+    transform 150ms;
+
+  &:active:enabled {
+    box-shadow: inset 0 1px 2px
+      color-mix(in srgb, var(--color-foreground) 25%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:active:enabled {
+      transform: scale(0.96);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+[data-timer-secondary] {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-zinc-50) 80%, transparent),
+    transparent
+  );
+  box-shadow:
+    inset 0 1px 1px var(--color-zinc-50),
+    0 2px 4px color-mix(in srgb, var(--color-foreground) 10%, transparent);
+  transition:
+    background-color 150ms,
+    box-shadow 150ms,
+    transform 150ms;
+
+  &:active:enabled {
+    box-shadow: inset 0 1px 2px
+      color-mix(in srgb, var(--color-foreground) 12%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:active:enabled {
+      transform: scale(0.96);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
 @utility interactive-elevation {
   @apply shadow-control transition-[background-color,border-color,color,box-shadow,transform] duration-150;
 
@@ -388,6 +476,6 @@ article[data-lab-content]
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0s !important;
   }
 }
