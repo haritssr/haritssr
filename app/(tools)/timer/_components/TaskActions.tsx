@@ -76,7 +76,6 @@ export default function TaskActions({
     <div className="flex min-w-0 items-center justify-end gap-2">
       {showDone ? null : (
         <DeleteTaskButton
-          className="size-12! shrink-0"
           data-timer-secondary=""
           title="Delete"
           dimWhenDisabled={unavailable}
@@ -85,12 +84,12 @@ export default function TaskActions({
           onDelete={async () =>
             await act({ action: "delete", date, taskId: task.id })
           }
-          variant="secondary-strong"
+          variant="outline"
           aria-label={`Delete ${task.activity}`}
         />
       )}
       <Button
-        className={`size-12! shrink-0 ${showDone ? "" : "select-none"}`}
+        className={showDone ? "" : "select-none"}
         data-timer-play={showDone ? undefined : ""}
         data-timer-secondary={showDone ? "" : undefined}
         dimWhenDisabled={unavailable}
@@ -99,7 +98,7 @@ export default function TaskActions({
         aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
         title={showDone ? "Done" : label}
         onClick={showDone ? finishTask : toggleRunning}
-        variant={showDone ? "secondary-strong" : variant}
+        variant={showDone ? "outline" : variant}
       >
         {showDone ? (
           <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-5" />
@@ -113,7 +112,7 @@ export default function TaskActions({
       </Button>
       {showDone ? (
         <Button
-          className="size-12! shrink-0 select-none"
+          className="select-none"
           data-timer-play=""
           dimWhenDisabled={unavailable}
           size="icon-circle"
@@ -121,7 +120,7 @@ export default function TaskActions({
           aria-label={`${label}: ${task.activity}`}
           title={label}
           onClick={toggleRunning}
-          variant={running ? "timer-running" : "neutral-subtle"}
+          variant={variant}
         >
           <ToggleIcon
             aria-hidden="true"

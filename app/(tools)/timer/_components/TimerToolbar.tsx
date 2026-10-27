@@ -12,12 +12,14 @@ import { useId, useRef, useState, useSyncExternalStore } from "react";
 import type { ReactNode, Ref } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
+import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
 import useTimerTicking from "@/app/(tools)/timer/hooks/useTimerTicking";
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import Button from "@/components/Button";
 
 import PresetSettings from "./PresetSettings";
 import { AddTask } from "./TaskDialog";
+import { getTaskCollection } from "./taskState";
 
 function subscribePermission(onChange: () => void) {
   window.addEventListener("focus", onChange);
@@ -41,16 +43,25 @@ export default function TimerToolbar({
 }: {
   backupActions: ReactNode;
 }) {
-  const { snapshot } = useTimer("snapshot");
+  const { snapshot, clockOffset } = useTimer("snapshot", "clockOffset");
+  const timestamp = useTimerClock(snapshot, clockOffset);
+  const taskCount =
+    snapshot === undefined
+      ? undefined
+      : getTaskCollection(snapshot.day.tasks, snapshot.today, timestamp).active
+          .length;
   return (
-    <div className="border-border mb-5 flex w-full flex-wrap items-center justify-between gap-3 sm:justify-start">
-      <div className="shrink-0">
+    <div className="border-border flex w-full flex-wrap items-center gap-3">
+      <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-3">
         <AddTask disabled={!canUseTimer(snapshot)} />
-      </div>
-      <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-3 sm:ml-0">
         {backupActions}
         <TimerSettingsDialog />
       </div>
+      {taskCount === undefined ? null : (
+        <span className="text-muted ml-auto text-base tabular-nums">
+          {taskCount} {taskCount === 1 ? "task" : "tasks"}
+        </span>
+      )}
     </div>
   );
 }
@@ -63,10 +74,11 @@ function TimerSettingsDialog() {
         render={<Button size="icon-toolbar" variant="outline-toolbar" />}
       >
         <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
+        <span className="hidden lg:inline">Settings</span>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
-        <Dialog.Popup className="scrollbar-subtle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-4 outline-hidden">
+        <Dialog.Popup className="scrollbar-subtle floating-material text-foreground fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl p-4 outline-hidden">
           <Dialog.Title className="mb-5 text-center font-medium">
             Settings
           </Dialog.Title>

@@ -1,14 +1,14 @@
 .accent {
-  --music-progress-fill: var(--color-music-accent);
+  --music-progress-fill: var(--color-music);
 }
 
 .controls {
-  --color-action: var(--color-music-accent);
-  --color-action-hover: var(--color-music-accent);
+  --color-action: var(--color-music);
+  --color-action-hover: var(--color-music);
 }
 
 .volumeControls {
   --color-action: var(--color-foreground);
   --color-action-hover: var(--color-foreground);
-  --color-music-accent: var(--color-foreground);
+  --color-music: var(--color-foreground);
 }

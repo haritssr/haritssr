@@ -15,7 +15,7 @@ const examples = [
     running: false,
     paused: true,
     spent: 300,
-    meaning: "foreground",
+    meaning: "timer-paused",
     description: "Time is saved. Continue when you are ready.",
   },
   {

@@ -66,8 +66,8 @@ function TaskHeader({ task, date }: { task: TimerTask; date: string }) {
         <span className="inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
           <TaskSpeedControl task={task} date={date} showIcon={false} />
         </span>
-        <TaskDescription task={task} />
         <EditTask task={task} date={date} reached={false} />
+        <TaskDescription task={task} />
       </div>
     </div>
   );

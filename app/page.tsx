@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 
+import { TASK_LAYOUT } from "@/app/(tools)/timer/_components/taskPresentation";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
@@ -79,7 +80,7 @@ function PersonalDetails() {
     <section
       aria-label="About"
       id="Identity"
-      className="corner-squircle border-border/75 bg-interface-hover/50 min-w-0 space-y-4 rounded-2xl border p-4"
+      className={`${TASK_LAYOUT.surface} border-border min-w-0 space-y-4`}
     >
       <div className="flex items-center gap-4">
         <Image

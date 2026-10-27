@@ -4,15 +4,15 @@ import type Button from "@/components/Button";
 
 // Grid card dimensions and spacing. State colors are below the layout map.
 export const TASK_LAYOUT = {
-  collection: "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3",
+  collection: "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3",
   item: "flex flex-col gap-2",
   controls: "mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4",
   surface:
-    "corner-squircle rounded-[0.625rem] border-[0.5px] bg-linear-to-b from-zinc-50 to-zinc-100/70 pl-4 pr-3.5 py-3 shadow-md inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-[1.25rem]",
-  time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-sm",
-  progress: "h-2",
+    "corner-squircle rounded-[0.625rem] border-[0.5px] bg-linear-to-b from-zinc-50 to-zinc-100/70 pl-3.5 pr-3 py-2.5 shadow-md inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-[1.25rem]",
+  time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-[0.9375rem]",
+  progress: "h-1.5",
   running: "border-timer-running/80 shadow-timer-running/10",
-  paused: "border-border",
+  paused: "border-timer-paused/80 shadow-timer-paused/10",
   percentage: "",
 };
 
@@ -23,9 +23,9 @@ const TASK_STATE_APPEARANCE = {
     button: "timer-running",
   },
   paused: {
-    elapsed: "text-foreground",
-    progress: "var(--color-foreground)",
-    button: "neutral-subtle",
+    elapsed: "text-timer-paused",
+    progress: "var(--color-timer-paused)",
+    button: "timer-paused",
   },
   ready: {
     elapsed: "text-foreground",

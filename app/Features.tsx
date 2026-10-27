@@ -155,7 +155,7 @@ function TimerPreview() {
       <div className="min-w-0 flex-1 space-y-1.5">
         <div className="text-foreground flex min-w-0 items-center justify-between gap-2 text-xs">
           <span className="truncate font-medium">Focused work</span>
-          <span className="text-muted shrink-0 tabular-nums">12:30</span>
+          <span className="text-muted shrink-0 tabular-nums">-12:30</span>
         </div>
         <div className="bg-foreground/15 h-1.5 rounded-full">
           <div className="bg-foreground h-full w-3/5 rounded-full" />

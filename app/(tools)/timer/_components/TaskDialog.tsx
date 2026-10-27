@@ -211,7 +211,7 @@ export function EditTask({
       </Dialog.Trigger>
       <TaskFormDialog
         title="Edit Task"
-        submitLabel="Save"
+        submitLabel="Done"
         defaultActivity={drafts[task.id]?.activity ?? task.activity}
         defaultDescription={drafts[task.id]?.description ?? task.description}
         defaultDuration={drafts[task.id]?.duration ?? task.duration}
@@ -304,6 +304,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       </Dialog.Trigger>
       <TaskFormDialog
         title="New Task"
+        submitLabel="Add"
         showTaskPresets
         defaultActivity={drafts.add?.activity ?? suggestion.activity}
         defaultDescription={drafts.add?.description ?? suggestion.description}

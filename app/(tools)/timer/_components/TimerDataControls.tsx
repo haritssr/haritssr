@@ -146,10 +146,8 @@ export default function TimerDataControls({
             }}
             title="Export"
           >
-            <ArrowDownTrayIcon
-              aria-hidden="true"
-              className="size-4.5 stroke-2"
-            />
+            <ArrowUpTrayIcon aria-hidden="true" className="size-4.5 stroke-2" />
+            <span className="hidden lg:inline">Export</span>
           </ButtonGroupItem>
           <ButtonGroupItem
             aria-label="Import Timer backup"
@@ -159,7 +157,11 @@ export default function TimerDataControls({
             }}
             title="Import"
           >
-            <ArrowUpTrayIcon aria-hidden="true" className="size-4.5 stroke-2" />
+            <ArrowDownTrayIcon
+              aria-hidden="true"
+              className="size-4.5 stroke-2"
+            />
+            <span className="hidden lg:inline">Import</span>
           </ButtonGroupItem>
         </ButtonGroup>
       )}

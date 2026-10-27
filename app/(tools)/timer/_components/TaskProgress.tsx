@@ -77,29 +77,35 @@ export default function TaskProgress({
             className={`flex shrink-0 items-baseline gap-1 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} ${running ? appearance.elapsed : "text-muted"}`}
           >
             {compact ? (
-              <span className="text-muted">
-                -{formatTimerTime(Math.max(0, task.duration - spent))}
-              </span>
-            ) : null}
-            <span className={appearance.elapsed}>{percentageLabel}%</span>
+              <>
+                <span className="text-muted">
+                  -{formatTimerTime(Math.max(0, task.duration - spent))}
+                </span>
+                <span className={appearance.elapsed}>{percentageLabel}%</span>
+              </>
+            ) : (
+              <>
+                <span className="sr-only">
+                  {formatRemainingTime(task.duration - spent)}
+                </span>
+                <span aria-hidden="true" className="text-muted">
+                  -{formatTimerTime(Math.max(0, task.duration - spent))}
+                </span>
+              </>
+            )}
           </span>
         ) : null}
       </div>
       <progress
         aria-label={`${task.activity}: time spent`}
         aria-valuetext={`${formatTimerTime(spent)} of ${formatTimerTime(task.duration)}`}
-        data-floating-progress={compact ? "" : undefined}
+        data-floating-progress=""
         className={`bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_LAYOUT.progress}`}
         key={running ? "running" : "idle"}
         max={task.duration}
         style={progressStyle}
         value={spent}
       />
-      {!compact && title === undefined ? (
-        <span className="text-muted text-xs tabular-nums">
-          {formatTimerTime(Math.max(0, task.duration - spent))} remaining
-        </span>
-      ) : null}
     </div>
   );
 }

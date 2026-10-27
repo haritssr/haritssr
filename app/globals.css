@@ -6,6 +6,25 @@
   corner-shape: squircle;
 }
 
+@utility floating-material {
+  @apply border-border shadow-foreground/10 border shadow-lg;
+  background-color: var(--color-background);
+
+  @supports (backdrop-filter: blur(12px)) {
+    background-color: color-mix(
+      in srgb,
+      var(--color-background) 70%,
+      transparent
+    );
+    backdrop-filter: blur(12px);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--color-background);
+    backdrop-filter: none;
+  }
+}
+
 @utility navigation-material {
   @apply inset-shadow-sm inset-shadow-zinc-50/60;
   background-color: var(--color-background);
@@ -48,13 +67,13 @@
     box-shadow 150ms,
     transform 150ms;
 
-  &:active:enabled {
+  &:active:is(:enabled, a[href]) {
     box-shadow: inset 0 1px 2px
       color-mix(in srgb, var(--color-foreground) 25%, transparent);
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    &:active:enabled {
+    &:active:is(:enabled, a[href]) {
       transform: scale(0.96);
     }
   }
@@ -78,13 +97,13 @@
     box-shadow 150ms,
     transform 150ms;
 
-  &:active:enabled {
+  &:active:is(:enabled, a[href]) {
     box-shadow: inset 0 1px 2px
       color-mix(in srgb, var(--color-foreground) 12%, transparent);
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    &:active:enabled {
+    &:active:is(:enabled, a[href]) {
       transform: scale(0.96);
     }
   }
@@ -123,7 +142,8 @@
   --color-action-hover: var(--color-blue-700);
   --color-secondary-accent: var(--color-purple-500);
   --color-timer-running: var(--color-green-600);
-  --color-music-accent: var(--color-rose-600);
+  --color-timer-paused: var(--color-orange-500);
+  --color-music: var(--color-cyan-500);
   --color-contact-accent: color-mix(
     in oklab,
     var(--color-emerald-600) 80%,

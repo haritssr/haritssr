@@ -163,7 +163,7 @@ export default function CompletedTasksTable({
                 <td className="text-center tabular-nums">{index + 1}</td>
                 <th
                   scope="row"
-                  className="text-foreground max-w-64 min-w-40 px-3 py-3 text-left font-medium wrap-anywhere"
+                  className="max-w-64 min-w-40 px-3 py-3 text-left font-normal wrap-anywhere"
                 >
                   {task.activity}
                 </th>

@@ -31,7 +31,7 @@ run inside its `use client` boundary.
 Add and Edit use the same `TaskFormDialog` with controlled field state inside
 its mounted portal. Only Add shows the Preset task buttons, arranged in two columns below
 Duration. Selecting one fills Name, Description, and all duration units without
-submitting or closing. Done creates the task; Cancel and dismissal add nothing.
+submitting or closing. Add creates the task; Cancel and dismissal add nothing.
 Matching field values determine the selected task preset styling. Defaults include
 X Traversal (1h), YouTube (2h), House Keeping (1h), Short Break (10m),
 Long Break (30m), and Orientation (30m). The three new presets have empty
@@ -54,8 +54,8 @@ Within `TASK_LAYOUT`, `collection` controls the outer grid and gaps,
 `surface` controls the card shell, and `controls` controls the timer/action area.
 Element-specific styles stay beside their JSX in the component files above.
 
-The header places the title on the left, with speed, a document description icon, and an Adjustments Horizontal edit button on the right.
-Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and percentage, with remaining time below the progress bar. Edit is a plain icon matching the description icon in size.
+The header places the title on the left, with speed, an Adjustments Horizontal edit button, and a document description icon on the right.
+Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and negative remaining time. Edit is a plain icon matching the description icon in size.
 The description popover
 opens on hover or click. The speed button cycles through 1x, 1.5x, 2x,
 2.5x, and 3x, then returns to 1x. Each task defaults to 1x and saves its own speed
@@ -159,9 +159,10 @@ modules keep independent work separate:
   history reads start alongside validation-module loading and have a ten-second
   deadline covering both operations. Initial snapshot failures retry at most
   twice with a five-second base delay; focus, reconnect, and Try again can also
-  recover. When no snapshot exists, a failed load replaces the loading message
-  with the existing error and Try again control. Saves retain their fifteen-second
-  request timeout and are never automatically resent.
+  recover. On the Timer page, failures appear in the floating retry notification,
+  including when no snapshot exists. Saves retain their fifteen-second
+  request timeout and are never automatically resent. Refresh errors clear when a
+  fresh snapshot arrives; save errors remain available for explicit recovery.
 - [timerDatabase.ts](../server/timerDatabase.ts) owns SQL mapping and atomic
   Turso transactions, with indexed active/pending-date discovery performed once,
   date-scoped batched reads, changed-row writes, and a reused runtime client.
@@ -189,10 +190,11 @@ modules keep independent work separate:
   browser-local preference and unlock audio during the toggle interaction.
 - [useTimerNotifications.tsx](../hooks/useTimerNotifications.tsx) claims
   completions and supplies sound, browser notifications, and visible feedback.
-  Completion messages use the shared share-feedback toast: a capsule over the
-  mobile tab bar or at the desktop bottom right, with a task link to Timer and
-  a “Got it” action. They dismiss after five seconds; a new completion refreshes
-  the toast and its timeout.
+  Completion messages use the shared share-feedback toast in the floating dock,
+  above Music and Timer, with a task link and a circular dismissal button. They
+  stack for separate completions and stay visible until individually dismissed.
+  Timer errors use the same floating notification surface with a red Retry control
+  and remain visible until recovery.
 - [store.ts](../store.ts) persists daily records, and
   [timerSound.ts](../utils/timerSound.ts) generates sound.
 
@@ -213,9 +215,10 @@ before sending later queued commands; uncertain writes are not automatically
 resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
-Export and Import share a segmented icon-only group,
-beside the secondary Settings button, with native hover labels and accessible names.
-These controls sit beside Add Task on desktop and at the opposite end on mobile.
+Export and Import share a segmented group beside the secondary Settings button.
+They show icons on smaller screens and icons with labels from 1024px, with native
+hover labels and accessible names.
+These controls sit beside Add Task, with the task count at the opposite end.
 Settings opens a modal containing Notification, Autoplay, Multitask, and Sound
 switches. Its header shows only the centered Settings title. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use

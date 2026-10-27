@@ -69,10 +69,15 @@ function ContentsList({
 
   return (
     <List
-      className={`marker:text-foreground/70 space-y-3 text-base [&_li]:space-y-3 ${depth === 0 ? "list-decimal pl-8" : "list-disc pl-5"}`}
+      className={`marker:text-foreground/70 text-base [&_li]:space-y-3 ${depth === 0 ? "list-decimal space-y-3 pl-5" : "list-disc space-y-1.5 pl-5"}`}
     >
       {entries.map((entry) => (
-        <li key={entry.id}>
+        <li
+          className={
+            depth === 0 && activeId === entry.id ? "marker:text-action" : ""
+          }
+          key={entry.id}
+        >
           <InternalLink
             aria-current={activeId === entry.id ? "location" : undefined}
             className={`focus-visible:outline-action inline! rounded-sm text-base leading-6! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
@@ -85,7 +90,7 @@ function ContentsList({
             <ContentsLabel parts={entry.label} />
           </InternalLink>
           {entry.children.length > 0 ? (
-            <div>
+            <div className="mt-1">
               <ContentsList
                 activeId={activeId}
                 depth={depth + 1}
@@ -170,7 +175,7 @@ export default function ArticleContentsPanel({
     </>
   );
   const appearance =
-    "navigation-material border-border text-foreground corner-squircle flex flex-col overflow-hidden border shadow-xl outline-hidden";
+    "floating-material text-foreground flex flex-col overflow-hidden outline-hidden";
 
   if (desktop) {
     return (
@@ -184,7 +189,7 @@ export default function ArticleContentsPanel({
           sideOffset={12}
         >
           <Popover.Popup
-            className={`${styles.popover} ${appearance} rounded-lg supports-[corner-shape:squircle]:rounded-2xl`}
+            className={`${styles.popover} ${appearance} rounded-xl`}
             finalFocus={finalFocus}
           >
             {content}
@@ -200,9 +205,7 @@ export default function ArticleContentsPanel({
         className="bg-foreground/30 backdrop-blur-xs"
         swipeAnimation={styles.backdropFade}
       />
-      <Sheet
-        className={`${styles.sheet} ${appearance} rounded-t-xl supports-[corner-shape:squircle]:rounded-t-3xl`}
-      >
+      <Sheet className={`${styles.sheet} ${appearance} rounded-t-xl`}>
         <SheetContent className="flex min-h-0 flex-col outline-hidden">
           <div
             aria-hidden="true"

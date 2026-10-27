@@ -300,8 +300,9 @@ export default function TimerDetailsPage() {
           <div className="max-w-3xl">
             <ExplanationList>
               <li>
-                Running tasks use green-600. Paused, not started, and completed
-                tasks use dark zinc through the foreground token.
+                Running tasks use green-600 and paused tasks use the
+                timer-paused token (orange-500). Not started and completed tasks
+                use the foreground token.
               </li>
               <li>
                 History lists completed tasks below the grid. Use Show or Hide

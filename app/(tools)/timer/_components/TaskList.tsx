@@ -31,9 +31,12 @@ export default function TaskList() {
     timestamp
   );
   return (
-    <div className="min-w-0 space-y-5">
+    <div className="min-w-0 space-y-10">
       {active.length > 0 && (
-        <ul aria-label="Today's activities" className={TASK_LAYOUT.collection}>
+        <ul
+          aria-label="Today's activities"
+          className={`${TASK_LAYOUT.collection} border-border border-t border-dashed pt-4`}
+        >
           {active.map(({ task, state }) => (
             <li className="flex min-w-0" key={task.id}>
               <TaskCard date={snapshot.today} task={task} state={state} />

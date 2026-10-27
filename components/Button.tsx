@@ -24,6 +24,7 @@ type ButtonVariant =
   | "primary"
   | "primary-subtle"
   | "timer-running"
+  | "timer-paused"
   | "music"
   | "secondary"
   | "success-subtle"
@@ -37,8 +38,10 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
   "timer-running":
     "border border-transparent bg-timer-running font-medium text-white hover:bg-timer-running/90 focus-visible:outline-timer-running",
+  "timer-paused":
+    "border border-transparent bg-timer-paused font-medium text-white hover:bg-timer-paused/90 focus-visible:outline-timer-paused",
   music:
-    "border border-transparent bg-music-accent font-medium text-white hover:bg-music-accent/90 focus-visible:outline-music-accent",
+    "border border-transparent bg-music font-medium text-white hover:bg-music/90 focus-visible:outline-music",
   black:
     "bg-zinc-500 text-zinc-50 transition-colors duration-150 enabled:hover:bg-zinc-600 focus-visible:outline-zinc-500",
   "attention-subtle":
@@ -98,7 +101,7 @@ const BUTTON_SIZE_CLASS = {
   "icon-compact":
     "corner-squircle size-7 shrink-0 rounded-sm p-1 supports-[corner-shape:squircle]:rounded-md",
   "icon-toolbar":
-    "corner-squircle min-h-8.5 shrink-0 rounded-md px-2 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
+    "corner-squircle min-h-8.5 shrink-0 gap-1 rounded-md px-2 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
   default:
     "corner-squircle rounded-md px-3 py-1.5 supports-[corner-shape:squircle]:rounded-xl",

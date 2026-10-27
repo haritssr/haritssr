@@ -43,7 +43,7 @@ export default function Slider({
           className={`bg-border relative min-w-0 rounded-full ${variant === "music" ? "group-hover/slider:bg-slider-track-hover" : ""} ${orientation === "horizontal" ? "flex-1" : ""} ${trackClassName ?? (orientation === "vertical" ? "h-full w-1.5" : "h-2.5")}`}
         >
           <BaseSlider.Indicator
-            className={`${variant === "music" ? "bg-music-accent" : "bg-action"} absolute rounded-full ${orientation === "vertical" ? "w-full" : "h-full"}`}
+            className={`${variant === "music" ? "bg-music" : "bg-action"} absolute rounded-full ${orientation === "vertical" ? "w-full" : "h-full"}`}
           />
           <BaseSlider.Thumb
             aria-label={label}
