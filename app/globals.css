@@ -166,14 +166,11 @@
   );
   --color-action-hover: var(--color-blue-700);
   --color-secondary-accent: var(--color-purple-500);
+  --color-identity-accent: var(--color-violet-500);
   --color-timer-running: var(--color-green-600);
   --color-timer-paused: var(--color-orange-500);
   --color-music: var(--color-cyan-500);
-  --color-contact-accent: color-mix(
-    in oklab,
-    var(--color-emerald-600) 80%,
-    var(--color-emerald-500) 20%
-  );
+  --color-contact-accent: var(--color-emerald-600);
   --color-muted: color-mix(
     in srgb,
     var(--color-foreground) 70%,
