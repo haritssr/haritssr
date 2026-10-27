@@ -73,14 +73,14 @@ function useTimerRuntime(controller: TimerController) {
   }, [mutations]);
   const { snapshot, confirmed } = state;
   const clockOffset = snapshot?.clockOffset ?? 0;
-  useTimerSchedule(snapshot, clockOffset, mutations.refresh);
   useTimerAudio(snapshot, clockOffset);
-  useTimerNotifications({
+  const previewCompletion = useTimerNotifications({
     snapshot: confirmed,
     publish: mutations.receive,
     autoplay: confirmed?.preferences?.autoplay ?? false,
     notificationsEnabled: confirmed?.preferences?.notificationsEnabled ?? true,
   });
+  useTimerSchedule(snapshot, clockOffset, mutations.refresh, previewCompletion);
 }
 
 export default function TimerRuntime({

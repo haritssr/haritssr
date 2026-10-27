@@ -133,26 +133,28 @@ export const timerRelationships = [
       Commit --> Publish["timerMutations.receive: confirmed snapshot"]
       Commit --> Tabs["BroadcastChannel snapshots; focus and one polling tab"]
       Publish -->|projected state| Schedule["app/(tools)/timer/hooks/useTimerSchedule.ts"]
+      Schedule -->|local completion deadline| Preview["ShareToastViewport: immediate plain-text toast and ringing"]
       Schedule -->|earliest completion or Jakarta midnight| Refresh["TimerProvider.refresh: protected API"]
       Refresh --> Send
-      Publish -->|projected state| Audio["app/(tools)/timer/hooks/useTimerAudio.ts: ticking and warnings"]
+      Publish -->|projected state| Audio["app/(tools)/timer/hooks/useTimerAudio.ts: ticking"]
       Audio --> Owner["app/(tools)/timer/hooks/useTimerAudioOwner.ts: Web Lock or focus fallback"]
       Ticking["useTimerTicking.ts: settings subscription and audio unlock"] --> Preference["timerTicking.ts: browser preference"]
       Preference --> Audio
-      Owner --> Sound["app/(tools)/timer/utils/timerSound.ts: ticks and warnings"]
+      Owner --> Sound["app/(tools)/timer/utils/timerSound.ts: ticks and completion ringing"]
       Publish -->|confirmed state only| Notify["app/(tools)/timer/hooks/useTimerNotifications.tsx"]
       Notify -->|acknowledge: atomic completion claim| Send
-      Notify -->|claimed notification only| Feedback["visible message, reached sound, optional browser notification"]
+      Notify -->|claimed notification only| Feedback["confirm toast, optional browser notification"]
+      Feedback --> Preview
       Feedback --> Sound
       Feedback --> Worker["public/sw.js: notification click opens Timer"]
       class Act,Queue,Send,Publish,Refresh,Ticking,Preference attention
       class Local,Validate,Tx,Engine,Auto,Commit,Tabs success
-      class Schedule,Audio,Owner,Sound,Notify,Feedback,Worker danger
+      class Schedule,Preview,Audio,Owner,Sound,Notify,Feedback,Worker danger
       ${colors}`,
     notes: [
       "timerEngine applies settlement, actions, latest-running selection, and Autoplay inside one Turso write transaction. Saved preferences are read in the same transaction; confirmed snapshots publish only after commit.",
       "Refreshes derive progress from timestamps without rewriting running baselines. Completion and midnight boundaries persist when due. Failed transactions publish no changes. History includes accelerated live time across exactly 30 dates.",
-      "useTimerSchedule owns only completion and midnight refreshes. useTimerAudio owns ticking, warnings, and restored-audio listeners; useTimerTicking lets Settings subscribe to the local preference and unlock audio during the click. useTimerAudioOwner gives continuous audio to one eligible browser tab through Web Locks, falling back to the focused tab. Explicit action sounds remain in the clicked tab. timerTicking remembers Ticking across reloads and tabs in the same browser; pointer or key interaction can unlock restored audio.",
+      "useTimerSchedule owns only completion and midnight refreshes. useTimerAudio owns ticking and restored-audio listeners; useTimerTicking lets Settings subscribe to the local preference and unlock audio during the click. useTimerAudioOwner gives ticking audio to one eligible browser tab through Web Locks, falling back to the focused tab. Completion toasts share a repeating sound until dismissed. Explicit action sounds remain in the clicked tab. timerTicking remembers Ticking across reloads and tabs in the same browser; pointer or key interaction can unlock restored audio.",
       "useTimerNotifications submits acknowledge through the protected API. In Turso, the completion claim and Autoplay transition are atomic and read saved preferences. Only the winning claim shows feedback; imported historical completions are already acknowledged. The service worker opens or focuses Timer when a system notification is clicked.",
     ],
   },

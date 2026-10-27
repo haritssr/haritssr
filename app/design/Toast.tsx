@@ -3,6 +3,7 @@
 import { Toast as BaseToast } from "@base-ui/react/toast";
 import { useState } from "react";
 
+import { prepareTaskSound } from "@/app/(tools)/timer/utils/timerSound";
 import Box from "@/components/Box";
 import Button from "@/components/Button";
 import FloatingRetryNotification from "@/components/floating/FloatingRetryNotification";
@@ -16,8 +17,10 @@ export default function Toast() {
       <div className="flex flex-wrap items-center gap-2">
         <Button
           onClick={() => {
+            prepareTaskSound();
             add({
               id: "design-toast",
+              type: "timer-completion",
               description: "Your action was completed.",
               title: "Toast notification",
             });

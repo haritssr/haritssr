@@ -1,5 +1,5 @@
 import { Toast } from "@base-ui/react/toast";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import type {
@@ -8,11 +8,14 @@ import type {
 } from "@/app/(tools)/timer/utils/timer";
 import { sendTimerAction } from "@/app/(tools)/timer/utils/timerClient";
 import type { ReceivedTimerSnapshot } from "@/app/(tools)/timer/utils/timerClient";
-import {
-  playTaskSound,
-  prepareTaskSound,
-} from "@/app/(tools)/timer/utils/timerSound";
-import InternalLink from "@/components/InternalLink";
+
+function completionToast(notice: TimerNotice) {
+  return {
+    id: `timer-completion:${notice.date}/${notice.taskId}`,
+    title: "Task completed",
+    description: `${notice.activity} is done!`,
+  };
+}
 
 async function showCompletion(notice: TimerNotice) {
   if (!("Notification" in window) || Notification.permission !== "granted") {
@@ -60,8 +63,28 @@ export default function useTimerNotifications({
   autoplay: boolean;
   notificationsEnabled: boolean;
 }) {
-  const { add } = Toast.useToastManager();
+  const { add, update, close } = Toast.useToastManager();
   const claiming = useRef(new Set<string>());
+  const shown = useRef(new Set<string>());
+  const dismissed = useRef(new Set<string>());
+
+  const previewCompletion = useCallback(
+    (notice: TimerNotice) => {
+      const toast = completionToast(notice);
+      if (shown.current.has(toast.id)) {
+        return;
+      }
+      shown.current.add(toast.id);
+      add({
+        ...toast,
+        type: "timer-completion-pending",
+        onClose: () => {
+          dismissed.current.add(toast.id);
+        },
+      });
+    },
+    [add]
+  );
 
   useEffect(() => {
     if (!canUseTimer(snapshot)) {
@@ -72,6 +95,7 @@ export default function useTimerNotifications({
       if (claiming.current.has(key)) {
         continue;
       }
+      previewCompletion(notice);
       claiming.current.add(key);
       void sendTimerAction({
         action: "acknowledge",
@@ -81,16 +105,15 @@ export default function useTimerNotifications({
       })
         .then(async (result) => {
           publish(result.snapshot);
-          if (result.notification !== null) {
-            add({
-              title: "Task completed",
-              description: (
-                <InternalLink href="/timer" variant="footer">
-                  {result.notification.activity} is done!
-                </InternalLink>
-              ),
-            });
-            playTaskSound(prepareTaskSound(), "reached");
+          if (result.notification === null) {
+            // Another device already claimed this completion.
+            close(completionToast(notice).id);
+          } else {
+            const toast = completionToast(result.notification);
+            if (dismissed.current.has(toast.id)) {
+              return;
+            }
+            update(toast.id, { type: "timer-completion" });
             if (
               result.snapshot.preferences?.notificationsEnabled ??
               notificationsEnabled
@@ -106,5 +129,15 @@ export default function useTimerNotifications({
           claiming.current.delete(key);
         });
     }
-  }, [snapshot, publish, notificationsEnabled, autoplay, add]);
+  }, [
+    snapshot,
+    publish,
+    notificationsEnabled,
+    autoplay,
+    update,
+    close,
+    previewCompletion,
+  ]);
+
+  return previewCompletion;
 }

@@ -5,12 +5,16 @@ import {
   taskCompletionTime,
   timerMidnight,
 } from "@/app/(tools)/timer/utils/timer";
-import type { TimerSnapshot } from "@/app/(tools)/timer/utils/timer";
+import type {
+  TimerNotice,
+  TimerSnapshot,
+} from "@/app/(tools)/timer/utils/timer";
 
 export default function useTimerSchedule(
   snapshot: TimerSnapshot | undefined,
   clockOffset: number,
-  refresh: () => Promise<unknown>
+  refresh: () => Promise<unknown>,
+  onCompletion: (notice: TimerNotice) => void
 ) {
   useEffect(() => {
     if (!canUseTimer(snapshot)) {
@@ -24,6 +28,20 @@ export default function useTimerSchedule(
     }
     const timeout = window.setTimeout(
       () => {
+        const now = Date.now() + clockOffset;
+        for (const task of snapshot.day.tasks) {
+          if (
+            task.notifiedAt === null &&
+            taskCompletionTime(task) <=
+              Math.min(now, timerMidnight(snapshot.today))
+          ) {
+            onCompletion({
+              date: snapshot.today,
+              taskId: task.id,
+              activity: task.activity,
+            });
+          }
+        }
         void refresh();
       },
       Math.max(100, finish - Date.now() - clockOffset + 50)
@@ -31,5 +49,5 @@ export default function useTimerSchedule(
     return () => {
       window.clearTimeout(timeout);
     };
-  }, [snapshot, clockOffset, refresh]);
+  }, [snapshot, clockOffset, refresh, onCompletion]);
 }

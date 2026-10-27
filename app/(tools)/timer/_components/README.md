@@ -184,15 +184,20 @@ modules keep independent work separate:
   refreshes remain available in every tab.
 - [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules only the earliest
   task completion and midnight refreshes.
-- [useTimerAudio.ts](../hooks/useTimerAudio.ts) owns ticking, countdown warnings,
+- [useTimerAudio.ts](../hooks/useTimerAudio.ts) owns ticking,
   restored-audio activation listeners, and audio-owner coordination.
 - [useTimerTicking.ts](../hooks/useTimerTicking.ts) lets Settings subscribe to the
   browser-local preference and unlock audio during the toggle interaction.
 - [useTimerNotifications.tsx](../hooks/useTimerNotifications.tsx) claims
-  completions and supplies sound, browser notifications, and visible feedback.
+  completions and supplies browser notifications and visible feedback.
   Completion messages use the shared share-feedback toast in the floating dock,
-  above Music and Timer, with a task link and a circular dismissal button. They
-  stack for separate completions and stay visible until individually dismissed.
+  above Music and Timer, with plain task text and a circular Done button. They
+  stack for separate completions and ring until individually dismissed. Multiple
+  completion notifications share one repeating sound.
+  The local completion deadline displays and rings the toast immediately; server confirmation
+  enables browser alerts without delaying the message or sound. A dismissed
+  pending toast stays dismissed when confirmation arrives, and a completion
+  claimed by another device removes the local pending toast.
   Timer errors use the same floating notification surface with a red Retry control
   and remain visible until recovery.
 - [store.ts](../store.ts) persists daily records, and

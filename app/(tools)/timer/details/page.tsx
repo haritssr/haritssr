@@ -333,8 +333,10 @@ export default function TimerDetailsPage() {
               off and remembers your choice in this browser.
             </li>
             <li>
-              Countdown ticks play during the final 10 real seconds, even with
-              Ticking off, and speed up at 6 and 3 seconds remaining.
+              Completion messages appear and ring at the local deadline while
+              the server confirms the completion claim in the background.
+              Multiple notifications share one repeating sound. Only the Done
+              button is interactive.
             </li>
             <li>
               Timestamps recover progress after navigation, reload, or closing

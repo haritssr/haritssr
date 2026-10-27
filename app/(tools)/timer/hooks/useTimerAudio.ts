@@ -73,20 +73,16 @@ export default function useTimerAudio(
         }
       }
     }
-    const urgent = remaining <= 10;
-    if (canPlayAudio() && (urgent || (ticking && remaining < Infinity))) {
+    if (canPlayAudio() && ticking && remaining < Infinity) {
       const context = audio.current ?? prepareTaskSound();
       audio.current = context;
       playClockTick(context);
     }
-    if (remaining <= 3) {
-      return 250;
-    }
-    return remaining <= 6 ? 500 : 1000;
+    return 1000;
   });
 
   useEffect(() => {
-    if (!hasRunningTask) {
+    if (!hasRunningTask || !ticking) {
       return () => {
         /* No ticking timeout while idle. */
       };
@@ -100,5 +96,5 @@ export default function useTimerAudio(
     return () => {
       window.clearTimeout(timeout);
     };
-  }, [hasRunningTask]);
+  }, [hasRunningTask, ticking]);
 }

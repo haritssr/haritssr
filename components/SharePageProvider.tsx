@@ -2,9 +2,14 @@
 
 import { Toast } from "@base-ui/react/toast";
 import { CheckIcon } from "@heroicons/react/24/outline";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import type { ReactNode } from "react";
 
+import {
+  playCompletionRing,
+  playTaskSound,
+  prepareTaskSound,
+} from "@/app/(tools)/timer/utils/timerSound";
 import Button from "@/components/Button";
 import { FloatingDockNotice } from "@/components/floating/FloatingDock";
 import FloatingNotification, {
@@ -49,6 +54,33 @@ export function useSharePageUrl() {
 
 export function ShareToastViewport() {
   const { toasts } = Toast.useToastManager();
+  const ringing = toasts.some(
+    (toast) =>
+      (toast.type === "timer-completion" ||
+        toast.type === "timer-completion-pending") &&
+      toast.transitionStatus !== "ending"
+  );
+
+  useEffect(() => {
+    if (!ringing) {
+      return () => {
+        /* No completion sound is active. */
+      };
+    }
+    let stopRing = () => {
+      /* No ring has played yet. */
+    };
+    const ring = () => {
+      stopRing();
+      stopRing = playCompletionRing(prepareTaskSound());
+    };
+    ring();
+    const interval = window.setInterval(ring, 2500);
+    return () => {
+      window.clearInterval(interval);
+      stopRing();
+    };
+  }, [ringing]);
 
   if (toasts.length === 0) {
     return null;
@@ -61,7 +93,7 @@ export function ShareToastViewport() {
           {toasts.length} notifications
         </p>
       )}
-      <Toast.Viewport className="pointer-events-auto m-0 flex max-h-[40dvh] w-full list-none flex-col gap-3 overflow-y-auto outline-hidden sm:w-[22.4rem]">
+      <Toast.Viewport className="pointer-events-auto -m-3 flex max-h-[40dvh] w-[calc(100%+1.5rem)] list-none flex-col gap-3 overflow-y-auto p-3 outline-hidden sm:w-[calc(22.4rem+1.5rem)]">
         {toasts.map((toast) => (
           <Toast.Root
             className={`${FLOATING_NOTIFICATION_CLASS_NAME} data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right shrink-0 transition-[transform,opacity] duration-200 ease-out`}
@@ -73,7 +105,15 @@ export function ShareToastViewport() {
               <FloatingNotification
                 action={
                   <Toast.Close
-                    aria-label="Dismiss notification"
+                    onClick={() => {
+                      playTaskSound(prepareTaskSound(), "done");
+                    }}
+                    aria-label={
+                      toast.type === "timer-completion" ||
+                      toast.type === "timer-completion-pending"
+                        ? "Done"
+                        : "Dismiss notification"
+                    }
                     render={
                       <Button
                         data-timer-play=""

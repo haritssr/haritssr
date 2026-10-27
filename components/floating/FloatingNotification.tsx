@@ -1,4 +1,4 @@
-import { BellIcon } from "@heroicons/react/24/outline";
+import { BellAlertIcon } from "@heroicons/react/24/outline";
 import type { ReactNode } from "react";
 
 export const FLOATING_NOTIFICATION_CLASS_NAME =
@@ -13,10 +13,12 @@ export default function FloatingNotification({
 }) {
   return (
     <div className="flex min-h-10 items-center gap-2">
-      <BellIcon
+      <span
+        className="notification-bell text-foreground inline-flex shrink-0"
         aria-hidden="true"
-        className="text-foreground size-4.5 shrink-0"
-      />
+      >
+        <BellAlertIcon className="size-4.5" />
+      </span>
       <div className="min-w-0 flex-1">{children}</div>
       {action}
     </div>

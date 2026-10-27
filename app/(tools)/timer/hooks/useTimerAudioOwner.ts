@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 
-import {
-  canUseTimer,
-  taskCompletionTime,
-  timerMidnight,
-} from "@/app/(tools)/timer/utils/timer";
+import { canUseTimer, timerMidnight } from "@/app/(tools)/timer/utils/timer";
 import type { TimerSnapshot } from "@/app/(tools)/timer/utils/timer";
 
 // Coordinate continuous audio only; explicit actions sound in the clicked tab,
@@ -34,30 +30,21 @@ export default function useTimerAudioOwner(
     function start() {
       stop();
       fallback.current = false;
-      if (!canUseTimer(snapshot)) {
+      if (!ticking || !canUseTimer(snapshot)) {
         return;
       }
       const now = Date.now() + clockOffset;
-      const finishes = snapshot.day.tasks
-        .map(taskCompletionTime)
-        .filter((time) => time > now && time <= timerMidnight(snapshot.today));
       const hasRunning = snapshot.day.tasks.some(
         (task) => task.startedAt !== null
       );
       if (!hasRunning || now >= timerMidnight(snapshot.today)) {
         return;
       }
-      const wait = ticking
-        ? 0
-        : Math.max(0, Math.min(...finishes) - now - 10_000);
-      if (!Number.isFinite(wait)) {
-        return;
-      }
       controller = new AbortController();
       const { signal } = controller;
       timeout = window.setTimeout(() => {
         void acquire(signal);
-      }, wait);
+      }, 0);
     }
     async function acquire(signal: AbortSignal) {
       try {

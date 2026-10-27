@@ -153,7 +153,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/hooks/useTimerAudio.ts",
-    "Audio activation, ticking, countdown warnings, and audio ownership.",
+    "Audio activation, ticking, and audio ownership.",
   ],
   [
     "app/(tools)/timer/hooks/useTimerTicking.ts",
@@ -197,7 +197,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/hooks/useTimerAudioOwner.ts",
-    "Single-owner ticking and warning audio, with a focused-tab fallback.",
+    "Single-owner ticking audio, with a focused-tab fallback.",
   ],
   [
     "app/(tools)/timer/hooks/useTimerPolling.ts",
@@ -205,7 +205,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/utils/timerSound.ts",
-    "Action sounds, Quartz clock ticking, and countdown warnings.",
+    "Action sounds, Quartz clock ticking, and completion ringing.",
   ],
   [
     "app/(tools)/timer/utils/timer.ts",
