@@ -21,6 +21,12 @@ import PresetSettings from "./PresetSettings";
 import { AddTask } from "./TaskDialog";
 import { getTaskCollection } from "./taskState";
 
+const TASK_COUNT_STATES = [
+  { key: "running", label: "Running", color: "bg-timer-running" },
+  { key: "paused", label: "Paused", color: "bg-timer-paused" },
+  { key: "ready", label: "Not started", color: "bg-foreground" },
+] as const;
+
 function subscribePermission(onChange: () => void) {
   window.addEventListener("focus", onChange);
   window.addEventListener("timer-notifications", onChange);
@@ -45,22 +51,48 @@ export default function TimerToolbar({
 }) {
   const { snapshot, clockOffset } = useTimer("snapshot", "clockOffset");
   const timestamp = useTimerClock(snapshot, clockOffset);
-  const taskCount =
-    snapshot === undefined
-      ? undefined
-      : getTaskCollection(snapshot.day.tasks, snapshot.today, timestamp).active
-          .length;
+  const taskCounts = { running: 0, paused: 0, ready: 0 };
+  if (snapshot !== undefined) {
+    const { active } = getTaskCollection(
+      snapshot.day.tasks,
+      snapshot.today,
+      timestamp
+    );
+    for (const { state } of active) {
+      if (state.running) {
+        taskCounts.running += 1;
+      } else if (state.paused) {
+        taskCounts.paused += 1;
+      } else {
+        taskCounts.ready += 1;
+      }
+    }
+  }
   return (
-    <div className="border-border flex w-full flex-wrap items-center gap-3">
+    <div className="border-border flex w-full flex-wrap items-end gap-3">
       <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-3">
         <AddTask disabled={!canUseTimer(snapshot)} />
         {backupActions}
         <TimerSettingsDialog />
       </div>
-      {taskCount === undefined ? null : (
-        <span className="text-muted ml-auto text-base tabular-nums">
-          {taskCount} {taskCount === 1 ? "task" : "tasks"}
-        </span>
+      {snapshot === undefined ? null : (
+        <ul
+          aria-label="Task counts"
+          className="text-muted ml-auto flex items-center gap-3 text-base tabular-nums"
+        >
+          {TASK_COUNT_STATES.map(({ key, label, color }) => (
+            <li key={key} title={label} className="flex items-center gap-1.5">
+              <span
+                aria-hidden="true"
+                className={`${color} size-2 shrink-0 rounded-full`}
+              />
+              <span>
+                <span className="sr-only">{label}: </span>
+                {taskCounts[key]}
+              </span>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

@@ -44,10 +44,7 @@ export default function AnalogClock({
   const hours = (jakarta.getUTCHours() % 12) + minutes / 60;
 
   return (
-    <svg
-      className={`text-foreground drop-shadow-sm ${className}`}
-      viewBox="0 0 100 100"
-    >
+    <svg className={`text-foreground ${className}`} viewBox="0 0 100 100">
       <title>
         {time === null ? "Jakarta time · WIB" : `Jakarta time ${time} WIB`}
       </title>

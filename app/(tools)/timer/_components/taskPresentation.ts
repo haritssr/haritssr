@@ -8,11 +8,13 @@ export const TASK_LAYOUT = {
   item: "flex flex-col gap-2",
   controls: "mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4",
   surface:
-    "corner-squircle rounded-[0.625rem] border-[0.5px] bg-linear-to-b from-zinc-50 to-zinc-100/70 pl-3.5 pr-3 py-2.5 shadow-md inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-[1.25rem]",
+    "corner-squircle rounded-[0.625rem] border-[0.5px] bg-linear-to-b from-surface to-[color-mix(in_srgb,var(--task-surface-color,var(--color-foreground))_6%,var(--color-surface))] pl-3.5 pr-3 py-2.5 shadow-md inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-[1.25rem]",
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-[0.9375rem]",
   progress: "h-1.5",
-  running: "border-timer-running/80 shadow-timer-running/10",
-  paused: "border-timer-paused/80 shadow-timer-paused/10",
+  running:
+    "border-timer-running/80 shadow-timer-running/10 [--task-surface-color:var(--color-timer-running)]",
+  paused:
+    "border-timer-paused/80 shadow-timer-paused/10 [--task-surface-color:var(--color-timer-paused)]",
   percentage: "",
 };
 

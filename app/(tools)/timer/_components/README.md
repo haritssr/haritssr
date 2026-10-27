@@ -69,7 +69,7 @@ their opacity while unavailable; preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
 
 Completed tasks appear in `CompletedTasksTable` below the active task grid.
-The section defaults expanded. Hide collapses the sort controls and table; Show
+The section defaults collapsed. Hide collapses the sort controls and table; Show
 reveals them again. The expanded table wraps task names and descriptions and
 scrolls horizontally on narrow screens. Restore returns an early Done task to
 the active list paused, preserving its time; Reached tasks cannot be restored.
@@ -223,7 +223,9 @@ Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 Export and Import share a segmented group beside the secondary Settings button.
 They show icons on smaller screens and icons with labels from 1024px, with native
 hover labels and accessible names.
-These controls sit beside Add Task, with the task count at the opposite end.
+These controls sit beside Add Task, with running, paused, and not-started counts
+at the opposite end. Their dots use the green, orange, and foreground task colors,
+including when a count is zero. Completed tasks are excluded.
 Settings opens a modal containing Notification, Autoplay, Multitask, and Sound
 switches. Its header shows only the centered Settings title. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use

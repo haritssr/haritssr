@@ -51,7 +51,7 @@ export default function CompletedTasksTable({
   now: number;
 }) {
   const { act, snapshot } = useTimer("act", "snapshot");
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [sort, setSort] = useState<keyof typeof ORDER_OPTIONS>("reached");
   const [order, setOrder] = useState("desc");
   const orderOptions = ORDER_OPTIONS[sort];
