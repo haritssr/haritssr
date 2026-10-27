@@ -91,7 +91,7 @@ function PersonalDetails() {
           width={100}
         />
         <div className="min-w-0">
-          <p className="font-medium">{profileName}</p>
+          <p className="text-lg font-medium">{profileName}</p>
           <p className="text-muted">
             <span className="block sm:inline">Web Product Engineer</span>
             <span className="hidden sm:inline"> · </span>

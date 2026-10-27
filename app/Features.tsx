@@ -15,7 +15,7 @@ import type { ReactNode } from "react";
 import InstallButton from "@/components/InstallButton";
 
 const PREVIEW_PANEL =
-  "border-border bg-background shadow-foreground/5 w-full min-w-0 rounded-xl border text-sm shadow-lg";
+  "corner-squircle border-border bg-background shadow-foreground/5 w-full min-w-0 rounded-lg border text-sm shadow-lg supports-[corner-shape:squircle]:rounded-2xl";
 
 const features = [
   {
@@ -58,7 +58,7 @@ const features = [
 
 export default function Features() {
   return (
-    <ul className="grid grid-cols-1 overflow-hidden rounded-2xl sm:grid-cols-2 md:grid-cols-3">
+    <ul className="corner-squircle grid grid-cols-1 overflow-hidden rounded-xl supports-[corner-shape:squircle]:rounded-3xl sm:grid-cols-2 md:grid-cols-3">
       {features.map(({ title, shortcut, description, preview }) => (
         <li
           className="border-border bg-foreground/2 flex min-w-0 flex-col border-b border-dashed px-6 py-8 last:border-b-0 sm:max-md:not-nth-[2n]:border-r sm:max-md:nth-last-[-n+2]:border-b-0 md:not-nth-[3n]:border-r md:nth-last-[-n+3]:border-b-0"
@@ -100,7 +100,7 @@ function SearchPreview() {
         <span className="text-muted text-xs">⌘P</span>
       </PanelHeading>
       <div className="space-y-1 p-2">
-        <div className="bg-action/10 text-action flex items-center gap-2 rounded-md px-2 py-2">
+        <div className="corner-squircle bg-action/10 text-action flex items-center gap-2 rounded-md px-2 py-2 supports-[corner-shape:squircle]:rounded-xl">
           <DocumentTextIcon className="size-4 shrink-0" />
           <span>Writing</span>
           <span className="ml-auto">↵</span>

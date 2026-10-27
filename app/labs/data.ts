@@ -38,7 +38,7 @@ export const LabsData: readonly LabDomain[] = [
     slug: "harimaki",
     title: "Harimaki",
     logoSrc: "/icons/harimaki.svg",
-    description: "Explore reference hierarchies for mathematics and physics.",
+    description: "Explore hierarchies for mathematics and physics.",
     labs: [
       {
         slug: "matematika",
@@ -59,8 +59,7 @@ export const LabsData: readonly LabDomain[] = [
     ],
   },
   {
-    description:
-      "Explore layouts, spacing, and responsive styles with Tailwind.",
+    description: "Explore layouts, spacing, and responsive styles.",
     labs: [
       {
         slug: "position",
@@ -310,7 +309,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "Tailwind CSS",
   },
   {
-    description: "Explore React state, hooks, and reusable component patterns.",
+    description: "Explore React state, hooks, and component patterns.",
     labs: [
       {
         slug: "usestate-todo-list",
@@ -707,8 +706,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "React",
   },
   {
-    description:
-      "Explore routing, rendering, and server components in Next.js.",
+    description: "Explore routing and rendering in Next.js.",
     labs: [
       {
         slug: "router",
@@ -828,7 +826,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "Nextjs",
   },
   {
-    description: "Explore browser APIs, storage, and native web interactions.",
+    description: "Explore browser APIs and web interactions.",
     labs: [
       {
         slug: "clock",
@@ -1030,8 +1028,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "Browser",
   },
   {
-    description:
-      "Explore interface patterns, motion, and everyday interactions.",
+    description: "Explore interface patterns, motion, and interactions.",
     labs: [
       {
         slug: "gradient-cards",
@@ -1258,7 +1255,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "User Interface",
   },
   {
-    description: "Explore motion, atoms, and light through interactive demos.",
+    description: "Explore motion, atoms, and light through demos.",
     labs: [
       {
         slug: "quantities-and-units",
@@ -1383,7 +1380,7 @@ export const LabsData: readonly LabDomain[] = [
     title: "Physics",
   },
   {
-    description: "Explore algebra, geometry, and calculus through simulations.",
+    description: "Explore algebra, geometry, and calculus interactively.",
     groups: [
       { id: "chapters", title: "Chapters" },
       { id: "tools", title: "Tools" },
