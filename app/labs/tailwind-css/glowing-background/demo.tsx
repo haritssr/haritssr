@@ -17,7 +17,7 @@ export default function TailwindGlowingBackgroundDemo() {
         </PageDescription>
       </LabPageHeader>
 
-      <div className="h-auto rounded-lg bg-black px-2 py-6 sm:px-8 sm:py-16">
+      <div className="bg-foreground h-auto rounded-lg px-2 py-6 sm:px-8 sm:py-16">
         <div className="grid items-start justify-center gap-8">
           <div className="group relative">
             <div className="animate-tilt absolute -inset-0.5 rounded-lg bg-linear-to-r from-pink-600 to-purple-600 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200" />

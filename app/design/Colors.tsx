@@ -17,7 +17,7 @@ const DESIGN_TOKENS = [
   {
     name: "contact-accent",
     label: "contact",
-    definition: "emerald-600/80 + emerald-500/20",
+    definition: "eme-600/80 + eme-500/20",
   },
   {
     name: "success",
@@ -68,17 +68,8 @@ const DESIGN_TOKENS = [
     definition: "zinc-400",
   },
   {
-    name: "searchicon-hover",
-    label: "search-hover",
-    definition: "zinc-500",
-  },
-  {
     name: "muted",
     definition: "foreground/70 + background/30",
-  },
-  {
-    name: "switch-active",
-    definition: "zinc-600",
   },
   {
     name: "secondary-foreground",
@@ -94,10 +85,6 @@ const DESIGN_TOKENS = [
     name: "foreground",
     definition: "zinc-800",
   },
-  {
-    name: "black",
-    definition: "#18181b",
-  },
 ];
 
 export function DesignTokens() {
@@ -108,7 +95,7 @@ export function DesignTokens() {
           "--swatch-color": `var(--color-${name})`,
         };
         return (
-          <li className="flex items-start gap-4" key={name}>
+          <li className="flex items-center gap-4" key={name}>
             <div
               aria-hidden="true"
               className="corner-squircle border-foreground/10 size-10 shrink-0 rounded-lg border bg-(--swatch-color)"

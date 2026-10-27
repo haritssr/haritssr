@@ -37,7 +37,7 @@ function NotionLogo() {
   return (
     <div className="mr-2 flex shrink-0 items-center gap-2">
       <Image alt="" height={30} src="/icons/notion.jpg" width={30} />
-      <span className="text-lg font-semibold text-black">Notion</span>
+      <span className="text-foreground text-lg font-semibold">Notion</span>
     </div>
   );
 }

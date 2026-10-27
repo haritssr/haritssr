@@ -130,14 +130,14 @@ export default function NotionNavigationMenu() {
           >
             {typeof item.href === "string" ? (
               <NavigationMenu.Link
-                className="text-sm font-semibold text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                className="text-foreground text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 href={item.href}
               >
                 {item.label}
               </NavigationMenu.Link>
             ) : (
               <>
-                <NavigationMenu.Trigger className="group flex items-center gap-1 rounded text-sm font-semibold text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                <NavigationMenu.Trigger className="text-foreground group flex items-center gap-1 rounded text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                   <span>{item.label}</span>
                   <ChevronDownIcon
                     aria-hidden="true"
@@ -250,7 +250,7 @@ function MenuAction({
   return (
     <div className="mt-2 border-t border-zinc-200 px-1 pt-2">
       <NavigationMenu.Link
-        className="flex items-center justify-center gap-1 rounded-md border border-zinc-200 px-2 py-1 text-black hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+        className="text-foreground flex items-center justify-center gap-1 rounded-md border border-zinc-200 px-2 py-1 hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         href={action.href}
       >
         <ArrowDownCircleIcon

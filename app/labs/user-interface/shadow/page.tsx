@@ -103,9 +103,9 @@ const SHADOW_SAMPLES = [
       "corner-squircle border-border bg-zinc-900 text-white space-y-3 rounded-2xl border p-4 shadow-lg",
   },
   {
-    name: "Black",
+    name: "Foreground",
     className:
-      "corner-squircle border-black bg-black text-white space-y-3 rounded-2xl border p-4 shadow-lg",
+      "corner-squircle border-foreground bg-foreground text-white space-y-3 rounded-2xl border p-4 shadow-lg",
   },
 ];
 

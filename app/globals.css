@@ -133,7 +133,6 @@
 
 @theme static {
   --color-white: var(--color-surface);
-  --color-black: #18181b;
   --color-action: color-mix(
     in oklab,
     var(--color-blue-600) 60%,
@@ -162,7 +161,6 @@
   --color-attention: var(--color-amber-500);
   --color-danger: var(--color-red-500);
   --color-surface: #fafafa;
-  --color-switch-active: var(--color-zinc-600);
   --color-background: #fcfcfc;
   --color-foreground: var(--color-zinc-800);
   --color-border: var(--color-zinc-300);
@@ -177,7 +175,6 @@
   --color-secondary-hover-foreground: var(--color-zinc-700);
   --color-interface-hover: var(--color-zinc-100);
   --color-middle-hover: var(--color-zinc-200);
-  --color-searchicon-hover: var(--color-zinc-500);
 
   --breakpoint-xs: 450px;
   --breakpoint-sm: 640px;

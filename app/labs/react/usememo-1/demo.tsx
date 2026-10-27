@@ -113,12 +113,12 @@ function GreetingSelector({ value, onChange }: GreetingSelectorProps) {
 }
 
 function ThemeYeah({ name }: { name: string }) {
-  const [theme, setTheme] = useState("text-black bg-zinc-50");
+  const [theme, setTheme] = useState("text-foreground bg-zinc-50");
   function handleClick() {
     setTheme(
-      theme === "text-black bg-zinc-50"
+      theme === "text-foreground bg-zinc-50"
         ? "text-white bg-zinc-700"
-        : "text-black bg-zinc-50"
+        : "text-foreground bg-zinc-50"
     );
   }
   return (
