@@ -21,7 +21,11 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimerToolbar.tsx",
-    "Notification, Autoplay, Multitask, and Ticking switches, backup icons, and Add Task.",
+    "Add Task, backup actions, unsorted task counts, and the Settings trigger.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimerSettings.tsx",
+    "Page-scoped Base UI settings handle, general/daily triggers, preferences, and confirmation.",
   ],
   [
     "app/(tools)/timer/_components/TaskList.tsx",
@@ -34,6 +38,10 @@ export const implementationFiles = [
   [
     "app/(tools)/timer/_components/TaskCard.tsx",
     "Three-column desktop cards, header icons, progress/speed, and icon actions.",
+  ],
+  [
+    "app/(tools)/timer/_components/TaskCardView.tsx",
+    "Shared header, elapsed/availability/remaining display, and action layout for ordinary and daily tasks.",
   ],
   [
     "app/(tools)/timer/_components/TaskProgress.tsx",
@@ -58,6 +66,22 @@ export const implementationFiles = [
   [
     "app/(tools)/timer/_components/TaskFormDialog.tsx",
     "90%-height mobile Add/Edit sheets, desktop dialogs, focus, counters, and form actions.",
+  ],
+  [
+    "app/(tools)/timer/_components/DailyTaskSettings.tsx",
+    "Synced daily definitions, future-day scheduling, ordering, and Save/Cancel drafts.",
+  ],
+  [
+    "app/(tools)/timer/_components/DailyTaskFields.tsx",
+    "Memoized daily-task fields and stable edit/reorder/remove actions.",
+  ],
+  [
+    "app/(tools)/timer/_components/dailyTaskDraft.ts",
+    "Pure daily draft conversion, strict clock parsing, validation, and reordering.",
+  ],
+  [
+    "app/(tools)/timer/utils/dailyTasks.ts",
+    "Initial daily definitions, instance creation, reserved IDs, and compact window labels.",
   ],
   [
     "app/(tools)/timer/_components/DurationFields.tsx",

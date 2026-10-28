@@ -99,12 +99,30 @@ export default function TimerDetailsPage() {
               can explore read-only examples.
             </li>
             <li>
-              Each Jakarta calendar day starts empty, and running tasks stop at
-              midnight.
+              New Jakarta days start with your saved Daily Tasks, paused with
+              fresh progress. Existing dates are preserved, and running tasks
+              stop at midnight.
             </li>
             <li>
               Names allow 20 characters, descriptions allow 35, and durations
               range from one second to 24 hours.
+            </li>
+            <li>
+              Settings → Daily Tasks lets you add, remove, reorder, and schedule
+              your routine. Save applies to future days; Cancel discards the
+              draft. Daily descriptions allow up to 2,000 characters.
+            </li>
+            <li>
+              Daily tasks use real time at 1× and require a manual start. Their
+              definitions cannot be changed or deleted from today’s cards.
+              Finished daily cards stay visible; early Done tasks can be
+              restored from History.
+            </li>
+            <li>
+              Availability follows Jakarta time. Outside its window, a card is
+              muted and its start control locks. A running task pauses at
+              closing without changing its duration or reporting an unfinished
+              task as complete.
             </li>
             <li>
               Starting a task pauses the others unless Multitask is on; turning
@@ -119,8 +137,9 @@ export default function TimerDetailsPage() {
               restoring a Done task keeps its progress paused.
             </li>
             <li>
-              Autoplay prefers paused tasks and needs an open page; completion
-              alerts may be delayed if the browser closes or suspends.
+              Autoplay prefers paused ordinary tasks, skips daily tasks, and
+              needs an open page; completion alerts may be delayed if the
+              browser closes or suspends.
             </li>
             <li id="storage">
               Tasks, presets, and preferences sync across signed-in devices when
@@ -166,11 +185,14 @@ export default function TimerDetailsPage() {
                   <ExplanationList>
                     <li id="database-structure">
                       Days group tasks by Jakarta date; tasks store order,
-                      duration, progress, speed, and timestamps.
+                      duration, progress, speed, timestamps, and an optional
+                      JSON availability window.
                     </li>
                     <li>
-                      Preferences store Autoplay, Multitask, notifications, and
-                      presets, while database triggers maintain daily totals.
+                      Preferences store Autoplay, Multitask, notifications,
+                      presets, and JSON daily definitions, while database
+                      triggers maintain daily totals. Migration leaves existing
+                      task availability NULL; no new table is needed.
                     </li>
                     <li>
                       Revisions protect concurrent changes, and completion

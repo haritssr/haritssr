@@ -8,10 +8,12 @@ run inside its `use client` boundary.
 | --- | --- |
 | Header analog clock, ticking once per second in WIB and linking to Clock | [AnalogClock.tsx](AnalogClock.tsx), [Timer page](../page.tsx) |
 | Full-page Clock Sound checkbox and quartz ticks | [ClockSound.tsx](../clock/ClockSound.tsx) |
-| Notification, Autoplay, Multitask, and Sound toggles; Multitask confirmation | [TimerToolbar.tsx](TimerToolbar.tsx) |
+| Add Task, backup actions, task counts, and Settings trigger | [TimerToolbar.tsx](TimerToolbar.tsx) |
+| Page-scoped Settings handle, switches, and Multitask confirmation | [TimerSettings.tsx](TimerSettings.tsx) |
 | Export/Import, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
 | Active card structure, title, and description placement | [TaskCard.tsx](TaskCard.tsx) |
+| Shared presentation for ordinary and daily task cards | [TaskCardView.tsx](TaskCardView.tsx) |
 | Shared per-task speed button, with optional clock icon | [TaskSpeedControl.tsx](TaskSpeedControl.tsx) |
 | Completed task names, descriptions, times, percentages, and status | [CompletedTasksTable.tsx](CompletedTasksTable.tsx) |
 | Time display, percentage, and progress bar | [TaskProgress.tsx](TaskProgress.tsx) |
@@ -53,6 +55,11 @@ records remain readable and must be shortened when editing the task.
 Within `TASK_LAYOUT`, `collection` controls the outer grid and gaps,
 `surface` controls the card shell, and `controls` controls the timer/action area.
 Element-specific styles stay beside their JSX in the component files above.
+`TaskCardView` shares the presentation of ordinary and daily tasks. Its optional `timeDisplay` forwards to `TaskProgress`: `spent` hides the
+visible total-duration suffix on daily cards, while the default
+`spent-and-duration` preserves the ordinary Timer display. Both retain duration in the progress accessibility text.
+The optional `timeNote` places a short availability range between elapsed and
+remaining time on scheduled daily cards, at the same font size.
 
 The header places the title on the left, with speed, an Adjustments Horizontal edit button, and a document description icon on the right.
 Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and negative remaining time. Edit is a plain icon matching the description icon in size.
@@ -79,7 +86,11 @@ The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
 Display ticks align to estimated server-second boundaries, pause while the tab
-is hidden, and refresh immediately on return. [timerClock.ts](../utils/timerClock.ts)
+is hidden, and refresh immediately on return or focus. Idle clocks schedule the
+next availability boundary or midnight locally, without polling or per-second
+updates. Collections reuse one Jakarta day boundary and derive each task once;
+the toolbar counts tasks without sorting. TaskCard memoization compares its task,
+date, and primitive display state so unchanged cards skip clock renders. [timerClock.ts](../utils/timerClock.ts)
 estimates the clock offset from monotonic request duration and server timestamps,
 excluding server processing time. Response timing is captured before validation,
 and broadcasts preserve that calibration even when delivery is delayed.
@@ -224,7 +235,7 @@ older records remain readable without a migration. Action types and validation
 live in [timer.ts](../utils/timer.ts) and
 [timerValidation.ts](../utils/timerValidation.ts).
 
-Turso days start empty. Export creates a paused copy without changing live timers;
+New Turso days copy the saved Daily Tasks; existing dates are not backfilled. Export creates a paused copy without changing live timers;
 Import adds missing dates, fills empty days, skips identical records, and rejects
 all conflicting occupied dates before writing. Imported completion alerts are
 acknowledged. Saving requires network access; failures restore confirmed data
@@ -239,12 +250,12 @@ hover labels and accessible names.
 These controls sit beside Add Task, with running, paused, and not-started counts
 at the opposite end. Their dots use the green, orange, and foreground task colors,
 including when a count is zero. Completed tasks are excluded.
-Settings opens a modal containing Notification, Autoplay, Multitask, and Sound
-switches. Its header shows only the centered Settings title. Escape or clicking
+Settings opens a modal containing Alerts, Autoplay, Multitask, and Sound
+switches. Its header has the centered Settings title and a secondary Done button. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
 their section Save buttons. The
 switches retain their existing icons, followed by initially collapsed Duration
-Presets and Task Presets accordions. Duration lists allow 1–5 entries and task lists 1–10, with editable values,
+Presets, Task Presets, and Daily Tasks accordions. Duration lists allow 1–5 entries and task lists 1–10, with editable values,
 Add preset, Remove, and separate Save/Cancel controls.
 Drafts survive collapsing a section; closing Settings discards unsaved changes.
 Save keeps Settings open, disables that editor while saving, and retains the
@@ -258,3 +269,47 @@ the toolbar; save status, backup guidance, and success messages are omitted.
 Account access stays beside View Source in the shared top bar. Below 640px, both move into Page actions while the scrolling page title is visible. The Google photo opens an account menu with email and Sign out; missing or failed photos use a profile icon. Existing sessions gain photos after signing in again. Timer authorization remains owner-only.
 
 Task cards place Complete before Play/Pause or Continue, matching the floating timer. Task action buttons use Trash, Play, Pause, and outline Check icons with a heavier `strokeWidth={2.5}` with hover labels and accessible names. Start and Continue both use Play; Delete retains its confirmation dialog. The Edit Task header uses a text Delete button.
+
+## Daily Tasks
+
+`DailyTaskSettings.tsx` owns the draft and Save/Cancel lifecycle. Pure conversion,
+strict HH:mm parsing, and reordering live in `dailyTaskDraft.ts`; the memoized
+`DailyTaskFields.tsx` renders one task with stable callbacks. The field list mounts
+inside the accordion panel while draft state remains outside, preserving edits
+across collapse without constructing closed-panel fields. The editor provides
+add/remove, and Up/Down ordering. Names use the existing 20-character limit; daily
+descriptions allow 2,000 characters. The list may be empty and shares the existing
+100-task daily ceiling. Scheduled availability uses From/Until in WIB; Until 00:00
+means the following midnight. Overnight windows other than that cutoff are rejected.
+Closing Settings discards unsaved changes. `TimerSettings.tsx` owns one page-scoped
+Base UI handle: toolbar and card triggers send general/daily payloads, open the
+matching section, and restore focus through Base UI. The settings subtree is a
+sibling of the ticking toolbar; it has no custom window-event handoff. Definitions, ordering, and removal apply to future days only.
+
+`utils/dailyTasks.ts` supplies the initial X (30m), YouTube (2h), Housekeeping (1h),
+Morning Meditation (30m), Evening Meditation (30m), and Exercise (30m) definitions.
+Preferences persist them in `timer_preferences.daily_tasks`; the server copies them
+only when initializing a new Jakarta day, with reserved `daily:` IDs, zero spent
+time, paused state, and 1x speed. The existing `(date, id)` key and one transaction
+prevent duplicate instances. Existing dates and their availability are preserved.
+
+`timer_tasks.availability_window` stores JSON `{from, until}` in minutes after
+Jakarta midnight; NULL means anytime. Reads, snapshots, history, writes, and backups
+preserve this optional field. Legacy backups omit it and remain valid. Daily
+definitions remain preferences and are excluded from the history-only backup.
+
+Daily cards stay first in their saved order, including completed and exhausted
+cards, followed by active ordinary tasks. History and statistics still include
+their progress once. Daily cards show elapsed time, availability, and remaining
+daily duration without a total-duration suffix or recurring icon. Outside a window
+or after completion, they are muted and Play/Continue becomes a disabled lock.
+Descriptions and future-day Settings remain accessible. Done can finish a started
+task early; History can restore it without resetting progress.
+
+`taskWindowEnd`, `taskAvailable`, and `taskTransitionTime` share cutoff rules between
+display, optimistic commands, server settlement, refresh scheduling, floating
+eligibility, and audio. Opening is inclusive, closing exclusive. Closing a window
+pauses a task without marking it complete or issuing a completion alert. The
+remaining duration stays the daily allowance, even if less window time is left.
+Daily tasks cannot change speed, edit their current definition, or be deleted;
+Autoplay skips them. Ordinary task behavior is preserved.
