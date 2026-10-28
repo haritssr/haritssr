@@ -1,3 +1,6 @@
+import { taskTiming, taskCompletionTime, timerDayBounds } from "./timer";
+import type { TimerTask } from "./timer";
+
 export const TIMER_REQUEST_STARTED_HEADER = "X-Timer-Request-Started-At";
 export const TIMER_RESPONSE_TIME_HEADER = "X-Timer-Server-Time";
 
@@ -26,7 +29,39 @@ export function timerClockOffset(now: string, timing: TimerResponseTiming) {
   return offset + travel / 2;
 }
 
-export function timerDisplayDelay(now: number, clockOffset: number) {
+function timerDisplayDelay(now: number, clockOffset: number) {
   const phase = (((now + clockOffset) % 1000) + 1000) % 1000;
   return Math.max(1, Math.ceil(1000 - phase));
+}
+
+// Absolute server-time deadline; no polling or per-second timer while idle.
+export function timerNextDisplayAt(
+  tasks: TimerTask[],
+  date: string,
+  now: number
+) {
+  const bounds = timerDayBounds(date);
+  let next = bounds.end > now ? bounds.end : Infinity;
+  for (const task of tasks) {
+    const timing = taskTiming(task, bounds, now);
+    if (timing.opensAt > now) {
+      next = Math.min(next, timing.opensAt);
+    }
+    if (timing.closesAt > now) {
+      next = Math.min(next, timing.closesAt);
+    }
+    if (
+      task.startedAt !== null &&
+      task.reachedAt === null &&
+      timing.available &&
+      timing.spent < task.duration
+    ) {
+      next = Math.min(
+        next,
+        now + timerDisplayDelay(now, 0),
+        taskCompletionTime(task)
+      );
+    }
+  }
+  return next;
 }
