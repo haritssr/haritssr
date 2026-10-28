@@ -12,12 +12,13 @@ import {
   timerDatabaseTransaction,
   writeTimerDays,
 } from "@/app/(tools)/timer/server/timerDatabase";
+import { createDailyTasks } from "@/app/(tools)/timer/utils/dailyTasks";
 import {
   createEmptyTimerDay,
   shiftTimerDate,
   taskSpent,
+  taskTransitionTime,
   timerDate,
-  timerMidnight,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
 import type {
@@ -52,7 +53,7 @@ async function state(tx: Transaction) {
     const due = day.tasks.some(
       (task) =>
         task.startedAt !== null &&
-        (now >= timerMidnight(day.date) ||
+        (now >= taskTransitionTime(task, day.date) ||
           taskSpent(task, day.date, now) >= task.duration)
     );
     if (due) {
@@ -62,6 +63,10 @@ async function state(tx: Transaction) {
   let day = days.find((entry) => entry.date === today);
   if (!day) {
     day = createEmptyTimerDay(today);
+    day.tasks = createDailyTasks(preferences.dailyTasks);
+    if (day.tasks.length > 0) {
+      day.revision += 1;
+    }
     days.push(day);
   }
   return { now, today, days, previous, day, preferences };
@@ -102,7 +107,11 @@ export async function getTimerSnapshot(ifNoneMatch: string | null = null) {
       const matches =
         ifNoneMatch === "*" ||
         ifNoneMatch.split(",").some((tag) => tag.trim() === current.version);
-      if (matches && Date.now() < current.nextTransitionAt) {
+      if (
+        matches &&
+        current.hasToday &&
+        Date.now() < current.nextTransitionAt
+      ) {
         return { snapshot: null, version: current.version };
       }
     }

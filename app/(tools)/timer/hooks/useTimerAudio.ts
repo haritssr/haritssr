@@ -4,6 +4,7 @@ import useTimerAudioOwner from "@/app/(tools)/timer/hooks/useTimerAudioOwner";
 import {
   canUseTimer,
   taskSpent,
+  taskAvailable,
   timerMidnight,
 } from "@/app/(tools)/timer/utils/timer";
 import type { TimerSnapshot } from "@/app/(tools)/timer/utils/timer";
@@ -62,7 +63,11 @@ export default function useTimerAudio(
     let remaining = Infinity;
     if (now < timerMidnight(snapshot.today)) {
       for (const task of snapshot.day.tasks) {
-        if (task.startedAt === null || task.reachedAt !== null) {
+        if (
+          task.startedAt === null ||
+          task.reachedAt !== null ||
+          !taskAvailable(task, snapshot.today, now)
+        ) {
           continue;
         }
         const seconds =

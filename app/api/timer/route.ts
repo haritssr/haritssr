@@ -146,7 +146,8 @@ async function write(request: Request, preferences: boolean) {
   }
   const backup =
     !preferences && new URL(request.url).searchParams.has("backup");
-  const limit = backup ? 10 * 1024 * 1024 : 8192;
+  const ordinaryLimit = preferences ? 2 * 1024 * 1024 : 8192;
+  const limit = backup ? 10 * 1024 * 1024 : ordinaryLimit;
   if (Number(request.headers.get("content-length")) > limit) {
     return NextResponse.json(
       { error: "Request is too large." },

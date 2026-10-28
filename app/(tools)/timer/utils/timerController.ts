@@ -10,6 +10,9 @@ import {
 } from "@/app/(tools)/timer/utils/timerClient";
 import { TimerMutations } from "@/app/(tools)/timer/utils/timerMutations";
 
+import { DEFAULT_DAILY_TASKS } from "./dailyTasks";
+import type { DailyTaskDefinition } from "./dailyTasks";
+
 // Created only by the deferred runtime. Context shares this identity, not updates.
 export function createTimerController() {
   const mutations = new TimerMutations({
@@ -27,6 +30,8 @@ export function createTimerController() {
       await mutations.preferences({ durationPresets }),
     setTaskPresets: async (taskPresets: TimerTaskPreset[]) =>
       await mutations.preferences({ taskPresets }),
+    setDailyTasks: async (dailyTasks: DailyTaskDefinition[]) =>
+      await mutations.preferences({ dailyTasks }),
     setAutoplay: async (autoplay: boolean) =>
       await mutations.preferences({ autoplay }),
     setMultitask: async (multitask: boolean) =>
@@ -34,20 +39,29 @@ export function createTimerController() {
     setNotificationsEnabled: async (notificationsEnabled: boolean) =>
       await mutations.preferences({ notificationsEnabled }),
   };
+  const defaultPreferences = {
+    autoplay: false,
+    multitask: false,
+    notificationsEnabled: true,
+    durationPresets: DEFAULT_DURATION_PRESETS,
+    taskPresets: DEFAULT_TASK_PRESETS,
+    dailyTasks: DEFAULT_DAILY_TASKS,
+  };
   function read() {
     const state = mutations.getSnapshot();
     const { snapshot } = state;
+    const preferences = snapshot?.preferences ?? defaultPreferences;
     return {
       snapshot,
       pendingCount: state.pendingCount,
       drafts: state.drafts,
       clockOffset: snapshot?.clockOffset ?? 0,
-      autoplay: snapshot?.preferences?.autoplay ?? false,
-      multitask: snapshot?.preferences?.multitask ?? false,
-      notificationsEnabled: snapshot?.preferences?.notificationsEnabled ?? true,
-      durationPresets:
-        snapshot?.preferences?.durationPresets ?? DEFAULT_DURATION_PRESETS,
-      taskPresets: snapshot?.preferences?.taskPresets ?? DEFAULT_TASK_PRESETS,
+      autoplay: preferences.autoplay,
+      multitask: preferences.multitask,
+      notificationsEnabled: preferences.notificationsEnabled,
+      durationPresets: preferences.durationPresets,
+      taskPresets: preferences.taskPresets,
+      dailyTasks: preferences.dailyTasks,
       error: state.error ?? state.loadError,
       ...actions,
     };

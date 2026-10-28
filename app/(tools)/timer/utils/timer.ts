@@ -1,3 +1,12 @@
+import type { DailyTaskDefinition } from "./dailyTasks";
+
+export interface AvailabilityWindow {
+  from: number;
+  until: number;
+}
+
+export const MAX_TIMER_TASKS = 100;
+
 export const TIMER_SPEEDS = [1, 1.5, 2, 2.5, 3] as const;
 type TimerSpeed = (typeof TIMER_SPEEDS)[number];
 
@@ -12,6 +21,7 @@ export interface TimerTask {
   speed?: TimerSpeed;
   reachedAt: string | null;
   notifiedAt: string | null;
+  availabilityWindow?: AvailabilityWindow | null;
 }
 
 export interface TimerDay {
@@ -93,6 +103,7 @@ export interface TimerPreferences {
   notificationsEnabled: boolean;
   durationPresets: number[];
   taskPresets: TimerTaskPreset[];
+  dailyTasks: DailyTaskDefinition[];
 }
 
 export function canUseTimer(
@@ -192,20 +203,69 @@ export function shiftTimerDate(date: string, days: number) {
     .slice(0, 10);
 }
 
-export function timerMidnight(date: string) {
-  return Date.parse(`${shiftTimerDate(date, 1)}T00:00:00+07:00`);
+export interface TimerDayBounds {
+  start: number;
+  end: number;
 }
 
-export function taskSpent(task: TimerTask, date: string, now: number) {
+export function timerDayBounds(date: string): TimerDayBounds {
+  const start = Date.parse(`${date}T00:00:00+07:00`);
+  return { start, end: start + 86_400_000 };
+}
+
+export function timerMidnight(date: string) {
+  return timerDayBounds(date).end;
+}
+
+export function taskTiming(
+  task: TimerTask,
+  bounds: TimerDayBounds,
+  now: number
+) {
+  const opensAt = bounds.start + (task.availabilityWindow?.from ?? 0) * 60_000;
+  const closesAt =
+    bounds.start + (task.availabilityWindow?.until ?? 1440) * 60_000;
   const elapsed =
     task.startedAt === null
       ? 0
       : Math.max(
           0,
-          (Math.min(now, timerMidnight(date)) - Date.parse(task.startedAt)) /
-            1000
+          (Math.min(now, closesAt) - Date.parse(task.startedAt)) / 1000
         );
-  return Math.min(task.duration, task.spent + elapsed * (task.speed ?? 1));
+  return {
+    spent: Math.min(task.duration, task.spent + elapsed * (task.speed ?? 1)),
+    available: now >= opensAt && now < closesAt,
+    opensAt,
+    closesAt,
+  };
+}
+
+export function taskSpent(task: TimerTask, date: string, now: number) {
+  return taskTiming(task, timerDayBounds(date), now).spent;
+}
+
+export function taskWindowEnd(
+  task: Pick<TimerTask, "availabilityWindow">,
+  date: string
+) {
+  return (
+    timerDayBounds(date).start +
+    (task.availabilityWindow?.until ?? 1440) * 60_000
+  );
+}
+
+export function taskAvailable(task: TimerTask, date: string, now: number) {
+  const bounds = timerDayBounds(date);
+  return (
+    now >= bounds.start + (task.availabilityWindow?.from ?? 0) * 60_000 &&
+    now < bounds.start + (task.availabilityWindow?.until ?? 1440) * 60_000
+  );
+}
+
+export function taskTransitionTime(task: TimerTask, date: string) {
+  return task.startedAt === null
+    ? Infinity
+    : Math.min(taskCompletionTime(task), taskWindowEnd(task, date));
 }
 
 // The projected finish at the current speed, before the midnight cutoff.

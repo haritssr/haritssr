@@ -9,6 +9,7 @@ import type {
   Transaction,
 } from "@libsql/client";
 
+import { DEFAULT_DAILY_TASKS } from "@/app/(tools)/timer/utils/dailyTasks";
 import type {
   TimerDay,
   TimerPreferences,
@@ -16,10 +17,12 @@ import type {
 import {
   createEmptyTimerDay,
   timerMidnight,
+  taskWindowEnd,
 } from "@/app/(tools)/timer/utils/timer";
 import {
   daySchema,
   preferencesSchema,
+  availabilityWindowSchema,
 } from "@/app/(tools)/timer/utils/timerValidation";
 
 export function timerDatabase() {
@@ -50,6 +53,7 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
     spent_seconds REAL NOT NULL CHECK(spent_seconds >= 0 AND spent_seconds <= duration_seconds),
     speed REAL NOT NULL DEFAULT 1 CHECK(speed IN (1, 1.5, 2, 2.5, 3)),
     started_at TEXT, last_started_at TEXT, completed_at TEXT, notification_claimed_at TEXT,
+    availability_window TEXT,
     PRIMARY KEY(date, id),
     UNIQUE(date, position)
   )`,
@@ -61,7 +65,7 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
     autoplay INTEGER NOT NULL DEFAULT 0 CHECK(autoplay IN (0, 1)),
     multitask INTEGER NOT NULL DEFAULT 0 CHECK(multitask IN (0, 1)),
     notifications_enabled INTEGER NOT NULL DEFAULT 1 CHECK(notifications_enabled IN (0, 1)),
-    duration_presets TEXT, task_presets TEXT
+    duration_presets TEXT, task_presets TEXT, daily_tasks TEXT
   )`,
   "INSERT OR IGNORE INTO timer_preferences(id) VALUES (1)",
 ];
@@ -72,11 +76,23 @@ export async function initializeTimerDatabase(client: Client) {
     await tx.batch(TIMER_DATABASE_SCHEMA);
     const columns = await tx.execute("PRAGMA table_info(timer_preferences)");
     const names = new Set(columns.rows.map((column) => column.name));
-    const additions = ["duration_presets", "task_presets"]
+    const additions = ["duration_presets", "task_presets", "daily_tasks"]
       .filter((name) => !names.has(name))
       .map((name) => `ALTER TABLE timer_preferences ADD COLUMN ${name} TEXT`);
     if (additions.length > 0) {
       await tx.batch(additions);
+    }
+    await tx.execute({
+      sql: "UPDATE timer_preferences SET daily_tasks = ?, revision = revision + 1 WHERE id = 1 AND daily_tasks IS NULL",
+      args: [JSON.stringify(DEFAULT_DAILY_TASKS)],
+    });
+    const taskColumns = await tx.execute("PRAGMA table_info(timer_tasks)");
+    if (
+      !taskColumns.rows.some((column) => column.name === "availability_window")
+    ) {
+      await tx.execute(
+        "ALTER TABLE timer_tasks ADD COLUMN availability_window TEXT"
+      );
     }
     const dayColumns = await tx.execute("PRAGMA table_info(timer_days)");
     if (!dayColumns.rows.some((column) => column.name === "spent_seconds")) {
@@ -132,7 +148,7 @@ export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
       args: [today],
     },
     "SELECT revision FROM timer_preferences WHERE id = 1",
-    "SELECT date, started_at, duration_seconds, spent_seconds, speed FROM timer_tasks WHERE started_at IS NOT NULL",
+    "SELECT date, started_at, duration_seconds, spent_seconds, speed, availability_window FROM timer_tasks WHERE started_at IS NOT NULL",
   ]);
   const [preference] = preferences.rows;
   if (preference === undefined) {
@@ -151,11 +167,22 @@ export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
         1000;
     nextTransitionAt = Math.min(
       nextTransitionAt,
-      timerMidnight(task.date),
+      taskWindowEnd(
+        {
+          availabilityWindow:
+            typeof task.availability_window === "string"
+              ? availabilityWindowSchema.parse(
+                  JSON.parse(task.availability_window) as unknown
+                )
+              : null,
+        },
+        task.date
+      ),
       Number.isFinite(finish) ? finish : 0
     );
   }
   return {
+    hasToday: days.rows.some((day) => day.date === today),
     version: timerSnapshotVersion(
       today,
       days.rows.map((day) => {
@@ -229,6 +256,10 @@ function decodeDays(days: ResultSet, tasks: ResultSet) {
           : { lastStartedAt: task.last_started_at }),
         reachedAt: task.completed_at,
         notifiedAt: task.notification_claimed_at,
+        availabilityWindow:
+          typeof task.availability_window === "string"
+            ? (JSON.parse(task.availability_window) as unknown)
+            : null,
       })),
     })
   );
@@ -263,6 +294,10 @@ export async function readTimerState(tx: Transaction, date: string) {
         typeof row.task_presets === "string"
           ? (JSON.parse(row.task_presets) as unknown)
           : undefined,
+      dailyTasks:
+        typeof row.daily_tasks === "string"
+          ? (JSON.parse(row.daily_tasks) as unknown)
+          : undefined,
     }),
   };
 }
@@ -275,7 +310,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
     },
     { sql: "DELETE FROM timer_tasks WHERE date = ?", args: [day.date] },
     ...day.tasks.map((task, position) => ({
-      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, speed, started_at, last_started_at, completed_at, notification_claimed_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, speed, started_at, last_started_at, completed_at, notification_claimed_at, availability_window) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       args: [
         task.id,
         day.date,
@@ -289,12 +324,18 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
         task.lastStartedAt ?? null,
         task.reachedAt,
         task.notifiedAt,
+        availabilityValue(task),
       ],
     })),
   ]);
   if (statements.length > 0) {
     await tx.batch(statements);
   }
+}
+
+function availabilityValue(task: TimerDay["tasks"][number]) {
+  const window = task.availabilityWindow ?? null;
+  return window === null ? null : JSON.stringify(window);
 }
 
 function taskValues(task: TimerDay["tasks"][number], position: number) {
@@ -309,6 +350,7 @@ function taskValues(task: TimerDay["tasks"][number], position: number) {
     task.lastStartedAt ?? null,
     task.reachedAt,
     task.notifiedAt,
+    availabilityValue(task),
   ];
 }
 
@@ -368,12 +410,13 @@ export async function updateTimerDays(
         continue;
       }
       statements.push({
-        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, speed, started_at, last_started_at, completed_at, notification_claimed_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, speed, started_at, last_started_at, completed_at, notification_claimed_at, availability_window)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ON CONFLICT(date, id) DO UPDATE SET position = excluded.position, activity = excluded.activity,
           description = excluded.description, duration_seconds = excluded.duration_seconds, spent_seconds = excluded.spent_seconds,
           speed = excluded.speed, started_at = excluded.started_at, last_started_at = excluded.last_started_at,
-          completed_at = excluded.completed_at, notification_claimed_at = excluded.notification_claimed_at`,
+          completed_at = excluded.completed_at, notification_claimed_at = excluded.notification_claimed_at,
+          availability_window = excluded.availability_window`,
         args: [day.date, task.id, ...values],
       });
     }
@@ -436,7 +479,7 @@ export async function writeTimerPreferences(
   prefs: TimerPreferences
 ) {
   await tx.execute({
-    sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, notifications_enabled = ?, duration_presets = ?, task_presets = ? WHERE id = 1",
+    sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, notifications_enabled = ?, duration_presets = ?, task_presets = ?, daily_tasks = ? WHERE id = 1",
     args: [
       prefs.revision,
       Number(prefs.autoplay),
@@ -444,6 +487,7 @@ export async function writeTimerPreferences(
       Number(prefs.notificationsEnabled),
       JSON.stringify(prefs.durationPresets),
       JSON.stringify(prefs.taskPresets),
+      JSON.stringify(prefs.dailyTasks),
     ],
   });
 }

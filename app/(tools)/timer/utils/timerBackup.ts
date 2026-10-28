@@ -67,7 +67,11 @@ function canonicalDay(day: TimerDay) {
   return daySchema.parse({
     ...day,
     revision: 0,
-    tasks: day.tasks.map((task) => ({ ...task, speed: task.speed ?? 1 })),
+    tasks: day.tasks.map((task) => ({
+      ...task,
+      speed: task.speed ?? 1,
+      availabilityWindow: task.availabilityWindow ?? null,
+    })),
   });
 }
 function sameDay(first: TimerDay, second: TimerDay) {

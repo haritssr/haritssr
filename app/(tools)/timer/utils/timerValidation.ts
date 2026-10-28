@@ -4,9 +4,38 @@ import {
   DEFAULT_DURATION_PRESETS,
   DEFAULT_TASK_PRESETS,
   TIMER_SPEEDS,
+  MAX_TIMER_TASKS,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
 import { TASK_INPUT_LIMITS } from "@/app/(tools)/timer/utils/timerInput";
+
+import {
+  DEFAULT_DAILY_TASKS,
+  DAILY_DESCRIPTION_LIMIT,
+  isDailyTask,
+} from "./dailyTasks";
+
+export const availabilityWindowSchema = z
+  .object({
+    from: z.number().int().min(0).max(1439),
+    until: z.number().int().min(1).max(1440),
+  })
+  .refine(({ from, until }) => from < until);
+
+export const dailyTasksSchema = z
+  .array(
+    z.object({
+      id: z.string().startsWith("daily:").min(7).max(100),
+      activity: z.string().trim().min(1).max(TASK_INPUT_LIMITS.activity),
+      description: z.string().trim().max(DAILY_DESCRIPTION_LIMIT),
+      duration: z.number().int().min(1).max(86_400),
+      availabilityWindow: availabilityWindowSchema.nullable(),
+    })
+  )
+  .max(MAX_TIMER_TASKS)
+  .refine(
+    (tasks) => new Set(tasks.map((task) => task.id)).size === tasks.length
+  );
 
 const dateSchema = z.string().refine(validTimerDate);
 const instant = z.iso.datetime({ offset: true });
@@ -35,14 +64,16 @@ const taskSchema = z
     speed: z.literal(TIMER_SPEEDS).optional(),
     reachedAt: instant.nullable(),
     notifiedAt: instant.nullable(),
+    availabilityWindow: availabilityWindowSchema.nullable().optional(),
   })
-  .refine((task) => task.spent <= task.duration);
+  .refine((task) => task.spent <= task.duration)
+  .refine((task) => !isDailyTask(task) || (task.speed ?? 1) === 1);
 export const daySchema = z
   .object({
     schemaVersion: z.literal(1),
     date: dateSchema,
     revision: z.number().int().nonnegative(),
-    tasks: z.array(taskSchema).max(100),
+    tasks: z.array(taskSchema).max(MAX_TIMER_TASKS),
   })
   .refine(
     (day) => new Set(day.tasks.map((task) => task.id)).size === day.tasks.length
@@ -132,13 +163,22 @@ export const preferencesSchema = z.object({
   taskPresets: taskPresetsSchema.default(() =>
     DEFAULT_TASK_PRESETS.map((preset) => ({ ...preset }))
   ),
+  dailyTasks: dailyTasksSchema.default(() =>
+    structuredClone(DEFAULT_DAILY_TASKS)
+  ),
 });
 
 export const preferencesPatchSchema = preferencesSchema
-  .omit({ revision: true, durationPresets: true, taskPresets: true })
+  .omit({
+    revision: true,
+    durationPresets: true,
+    taskPresets: true,
+    dailyTasks: true,
+  })
   .extend({
     durationPresets: durationPresetsSchema,
     taskPresets: taskPresetsSchema,
+    dailyTasks: dailyTasksSchema,
   })
   .partial()
   .strict();

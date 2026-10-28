@@ -4,6 +4,8 @@ import {
   canUseTimer,
   taskCompletionTime,
   timerMidnight,
+  taskTransitionTime,
+  taskWindowEnd,
 } from "@/app/(tools)/timer/utils/timer";
 import type {
   TimerNotice,
@@ -24,7 +26,7 @@ export default function useTimerSchedule(
     }
     let finish = timerMidnight(snapshot.today);
     for (const task of snapshot.day.tasks) {
-      finish = Math.min(finish, taskCompletionTime(task));
+      finish = Math.min(finish, taskTransitionTime(task, snapshot.today));
     }
     const timeout = window.setTimeout(
       () => {
@@ -33,7 +35,7 @@ export default function useTimerSchedule(
           if (
             task.notifiedAt === null &&
             taskCompletionTime(task) <=
-              Math.min(now, timerMidnight(snapshot.today))
+              Math.min(now, taskWindowEnd(task, snapshot.today))
           ) {
             onCompletion({
               date: snapshot.today,

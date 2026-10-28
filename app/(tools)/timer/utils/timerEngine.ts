@@ -1,8 +1,10 @@
 import {
   taskCompletionTime,
+  MAX_TIMER_TASKS,
   taskSpent,
   timerDate,
-  timerMidnight,
+  taskAvailable,
+  taskWindowEnd,
 } from "@/app/(tools)/timer/utils/timer";
 import type {
   TimerAction,
@@ -11,6 +13,8 @@ import type {
   TimerPreferences,
   TimerTask,
 } from "@/app/(tools)/timer/utils/timer";
+
+import { isDailyTask, formatAvailabilityWindow } from "./dailyTasks";
 
 export class TimerStoreError extends Error {
   readonly status: number;
@@ -30,7 +34,8 @@ export function settleTimerDay(day: TimerDay, now: number) {
     const startedAt = Date.parse(task.startedAt);
     // Preserve the original start before settlement advances the elapsed-time baseline.
     task.lastStartedAt ??= task.startedAt;
-    const end = Math.min(now, timerMidnight(day.date));
+    const cutoff = taskWindowEnd(task, day.date);
+    const end = Math.min(now, cutoff);
     const completionTime = taskCompletionTime(task);
     task.spent = taskSpent(task, day.date, now);
     if (task.spent >= task.duration) {
@@ -38,9 +43,7 @@ export function settleTimerDay(day: TimerDay, now: number) {
       task.startedAt = null;
     } else {
       task.startedAt =
-        end >= timerMidnight(day.date)
-          ? null
-          : new Date(Math.max(startedAt, end)).toISOString();
+        end >= cutoff ? null : new Date(Math.max(startedAt, end)).toISOString();
     }
     changed = true;
   }
@@ -79,7 +82,11 @@ function autoplayNextTask(
     return;
   }
   const unfinished = day.tasks.filter(
-    (task) => task.reachedAt === null && task.spent < task.duration
+    (task) =>
+      !isDailyTask(task) &&
+      taskAvailable(task, day.date, now) &&
+      task.reachedAt === null &&
+      task.spent < task.duration
   );
   const next = unfinished.find((task) => task.spent > 0) ?? unfinished[0];
   if (next !== undefined) {
@@ -126,6 +133,30 @@ function editTaskDetails(
   task.duration = command.duration;
 }
 
+function startTask(
+  day: TimerDay,
+  task: TimerTask,
+  now: number,
+  multitask: boolean
+) {
+  if (task.reachedAt !== null || task.spent >= task.duration) {
+    throw new TimerStoreError("This activity has reached its duration.", 409);
+  }
+  if (!taskAvailable(task, day.date, now)) {
+    throw new TimerStoreError(
+      `Available ${formatAvailabilityWindow(task.availabilityWindow) ?? "on its scheduled day"} WIB.`,
+      409
+    );
+  }
+  if (!multitask) {
+    for (const entry of day.tasks) {
+      entry.startedAt = null;
+    }
+  }
+  task.startedAt = new Date(now).toISOString();
+  task.lastStartedAt = task.startedAt;
+}
+
 function changeTask(
   day: TimerDay,
   command: Exclude<TimerAction, { action: "add" | "single-task" }>,
@@ -135,6 +166,15 @@ function changeTask(
   const task = day.tasks.find((entry) => entry.id === command.taskId);
   if (task === undefined) {
     throw new TimerStoreError("Task not found.", 404);
+  }
+  if (
+    isDailyTask(task) &&
+    ["edit", "delete", "speed"].includes(command.action)
+  ) {
+    throw new TimerStoreError(
+      "Change Daily Tasks in Settings for future days.",
+      409
+    );
   }
   if (command.action === "delete") {
     day.tasks = day.tasks.filter((entry) => entry.id !== task.id);
@@ -150,16 +190,7 @@ function changeTask(
     // The caller settled elapsed time at the previous speed before this change.
     task.speed = command.speed;
   } else if (command.action === "start") {
-    if (task.reachedAt !== null || task.spent >= task.duration) {
-      throw new TimerStoreError("This activity has reached its duration.", 409);
-    }
-    if (command.multitask !== true) {
-      for (const entry of day.tasks) {
-        entry.startedAt = null;
-      }
-    }
-    task.startedAt = new Date(now).toISOString();
-    task.lastStartedAt = task.startedAt;
+    startTask(day, task, now, command.multitask === true);
   } else if (command.action === "done") {
     if (task.reachedAt === null) {
       finishTask(task, now);
@@ -202,8 +233,10 @@ function applyTimerAction(
     ) {
       return null;
     }
-    if (day.tasks.length >= 100) {
-      throw new TimerStoreError("Today already has 100 activities.");
+    if (day.tasks.length >= MAX_TIMER_TASKS) {
+      throw new TimerStoreError(
+        `Today already has ${MAX_TIMER_TASKS} activities.`
+      );
     }
     day.tasks.push({
       id: command.taskId ?? crypto.randomUUID(),
