@@ -110,8 +110,11 @@ substitute Unicode, plain text, `<sub>`/`<sup>`, or monospace notation.
 
 # Content and Routes
 
-- Every tool needs a Details page with **Logics** (axioms, rules, constraints,
-  design principles) and **How this works** (Pele component/data-flow diagram).
+- Every tool needs a Details page with **What you can do**, **What to know**,
+  **How it works** (a concise Pele data-flow diagram), and **Changelog**.
+  Keep capability bullets to one sentence, add useful tool-specific references,
+  and put detailed implementation maps in a closed technical disclosure.
+  Preserve existing section anchors when changing labels.
 - Never add redirects in `next.config.ts` or automatically when renaming routes.
   Legacy aliases are intentionally absent.
 - Lab routes are literal folders. Register title, description, tags, creation date,
@@ -432,6 +435,12 @@ Jakarta date/time columns.
 `public/sw.js` stays a standalone classic worker. Its event listeners delegate to
 separate lifecycle, notification, preparation/status, asset, and navigation handlers;
 cache names and the Music message protocol stay stable.
+
+All five tool Details pages use `app/(tools)/_components/ToolChangelog.tsx`:
+commit-message matches from the shared 24-hour history cache, oldest first, with
+separate Jakarta date/time columns. History loads inside Suspense; unavailable
+history leaves the documentation readable. These are message matches, not a
+file-path audit of all changes.
 
 Tree builds its route hierarchy and analytics from the discovery manifest. The
 shared ToggleList displays route links and child counts with independent disclosure

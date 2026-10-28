@@ -1,22 +1,14 @@
 export const commitRelationships = `flowchart TD
-  accTitle: Commit history storage, calculation, and display
-  accDescr: Git history is imported manually into Turso. Server-only cached reads load history and counts. Pure utilities prepare, filter, and summarize records using shared client-server contracts. Pages and the API use the results; the explorer validates API responses. The homepage reads only the count.
-  Git["Full Git checkout"] -->|explicit manual import| Import["app/(tools)/commits/import-commits.ts"]
-  Import --> Database[("Separate Turso commits database")]
-  Database --> Queries["commitsDatabase: validated server-only reads"]
-  Queries --> History["commitHistory: 24-hour history cache"]
-  Queries --> Count["commitHistory: separate 24-hour count cache"]
-  Count --> Home["Home commit count"]
-  History --> Summary["changelogSummary: pure filtering and aggregation"]
-  Summary --> Rules["changelog: periods, commit types, activity buckets"]
-  Summary --> Page["Commits page"]
-  History --> Reviews["Dated reviews and Music changelog"]
-  Summary --> API["GET /api/commits: browser and CDN caching"]
-  Selection["changelogSelection: URL filters"] --> Page
-  Selection --> API
-  Contracts["changelogTypes: selection and response contracts"] --> Summary
-  Contracts --> Parse["changelogResponse: validate API payloads"]
-  API --> Parse
-  Parse --> Explorer["ChangelogExplorer: URL filters and results"]
-  Page --> Explorer
+  accTitle: How commit history reaches the explorer
+  accDescr: A manual import copies Git history to a separate Turso database. Cached server reads feed the filtered explorer, API, dated reviews, and tool changelogs. Home uses a separate count cache, while weekly highlights are curated locally.
+  Git["Git history"] -->|manual import| Database[("Turso commits database")]
+  Database --> History["Shared history cache: 24 hours"]
+  Database --> Count["Separate count cache: 24 hours"]
+  Count --> Home["Homepage total"]
+  Filters["URL filters: period, date, type, and search"] --> Summary["Filter and summarize history"]
+  History --> Summary
+  Summary --> API["Commits page and cached API responses"]
+  API --> Explorer["Activity chart, summary, and timeline"]
+  History --> Tools["Dated reviews and tool changelogs"]
+  Local["Curated weekly summaries"] --> Changelog["Weekly changelog"]
 `;

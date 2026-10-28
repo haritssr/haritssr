@@ -48,6 +48,9 @@ export default function TreePage() {
       <PageHeader back={{ href: "/", name: "Home" }} path="/tree">
         <PageTitle>Tree</PageTitle>
         <PageDescription>Latest: 2026-10-22, Thu</PageDescription>
+        <nav aria-label="Tree">
+          <InternalLink href="/tree/details">Details</InternalLink>
+        </nav>
       </PageHeader>
       <div className="space-y-5">
         <Table>
@@ -80,7 +83,6 @@ export default function TreePage() {
             nodes={nodes.map(toToggleNode)}
           />
         </nav>
-        <InternalLink href="/tree/details">Details</InternalLink>
       </div>
     </>
   );

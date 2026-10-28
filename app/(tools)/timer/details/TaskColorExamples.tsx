@@ -7,7 +7,6 @@ const examples = [
     running: true,
     paused: false,
     spent: 450,
-    meaning: "timer-running",
     description: "Time is counting toward the duration.",
   },
   {
@@ -15,7 +14,6 @@ const examples = [
     running: false,
     paused: true,
     spent: 300,
-    meaning: "timer-paused",
     description: "Time is saved. Continue when you are ready.",
   },
   {
@@ -23,7 +21,6 @@ const examples = [
     running: false,
     paused: false,
     spent: 0,
-    meaning: "foreground",
     description: "The activity is ready to start.",
   },
 ] as const;
@@ -56,9 +53,8 @@ export default function TaskColorExamples() {
             className={`flex min-w-0 flex-col gap-5 ${TASK_LAYOUT.surface} ${appearance.surface}`}
           >
             <div className="space-y-1.5">
-              <p className="font-medium">{example.label}</p>
-              <p className={`text-sm font-medium ${appearance.elapsed}`}>
-                {example.meaning}
+              <p className={`font-medium ${appearance.elapsed}`}>
+                {example.label}
               </p>
               <p className="text-muted text-sm">{example.description}</p>
             </div>

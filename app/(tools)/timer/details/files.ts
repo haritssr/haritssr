@@ -53,7 +53,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TaskDialog.tsx",
-    "Add/Edit triggers, Shift+N shortcut, random suggestions, and form validation.",
+    "Add/Edit triggers, Shift+N shortcut, and form validation.",
   ],
   [
     "app/(tools)/timer/_components/TaskFormDialog.tsx",
@@ -105,7 +105,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/statistic/Statistics.tsx",
-    "Date selection, the 30-day chart, and activity history.",
+    "Date selection, the 30-day chart, and history refreshes limited to relevant changes.",
   ],
   [
     "app/(tools)/timer/details/page.tsx",
@@ -137,7 +137,11 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/hooks/useTimerClock.ts",
-    "Display-local clock shared by the task list and floating task UI.",
+    "Server-aligned display ticks, with immediate refresh on visibility changes.",
+  ],
+  [
+    "app/(tools)/timer/utils/timerClock.ts",
+    "Request-timing clock calibration and synchronized display boundaries.",
   ],
   [
     "components/floating/FloatingDock.tsx",

@@ -26,8 +26,7 @@ export const commitsRoute: RouteDoc = {
 export const weeklyChangelogRoute: RouteDoc = {
   route: "/commits/weekly-changelog",
   title: "Changelog",
-  description:
-    "Concise weekly highlights of site changes from January 2026 onward.",
+  description: "Monthly groups of weekly highlights from January 2026 onward.",
   group: "Commits",
 };
 
@@ -35,7 +34,7 @@ export const commitsDetailsRoute: RouteDoc = {
   route: "/commits/details",
   title: "Details",
   description:
-    "How commit history uses Turso, shared caches, and request-driven refreshes.",
+    "Explore commit filters, activity summaries, and how history updates.",
   group: "Commits",
 };
 
@@ -93,9 +92,18 @@ export const urlRoute: RouteDoc = {
   group: "Tools",
 };
 
+export const urlDetailsRoute: RouteDoc = {
+  route: "/url/details",
+  title: "Details",
+  description:
+    "Inspect URL parts, remove parameters, and understand local cleaning.",
+  group: "URL",
+};
+
 export const navigationRoutes: readonly RouteDoc[] = [
   musicRoute,
   urlRoute,
+  urlDetailsRoute,
   {
     route: "/music/details",
     title: "Details",
@@ -112,14 +120,15 @@ export const navigationRoutes: readonly RouteDoc[] = [
   {
     route: "/tree/details",
     title: "Details",
-    description: "How Tree organizes and displays the site's routes.",
+    description:
+      "Explore the site hierarchy, understand route counts, and browse Tree’s changes.",
     group: "Tree",
   },
   {
     route: "/timer/details",
     title: "Details",
     description:
-      "How Timer works, its daily storage, and source file locations.",
+      "Timer features, daily task rules, and how your progress is saved.",
     group: "Timer",
   },
   {
