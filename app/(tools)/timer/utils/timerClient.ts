@@ -34,7 +34,7 @@ async function fetchTimer(
   if (response.status === 304 && previous !== undefined) {
     const now = response.headers.get(TIMER_RESPONSE_TIME_HEADER);
     if (now === null) {
-      throw new Error("Timer time could not be synchronized. Try again.");
+      throw new Error("Couldn't sync. Try again.");
     }
     result = { ...previous, now };
   } else {

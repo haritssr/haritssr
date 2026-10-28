@@ -1,6 +1,7 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog } from "@base-ui/react/dialog";
 import { Switch } from "@base-ui/react/switch";
+import { Tooltip } from "@base-ui/react/tooltip";
 import {
   BellAlertIcon,
   Cog6ToothIcon,
@@ -8,7 +9,13 @@ import {
   SpeakerWaveIcon,
   Square3Stack3DIcon,
 } from "@heroicons/react/24/outline";
-import { useId, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import type { ReactNode, Ref } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
@@ -22,10 +29,27 @@ import { AddTask } from "./TaskDialog";
 import { getTaskCollection } from "./taskState";
 
 const TASK_COUNT_STATES = [
-  { key: "running", label: "Running", color: "bg-timer-running" },
-  { key: "paused", label: "Paused", color: "bg-timer-paused" },
-  { key: "ready", label: "Not started", color: "bg-foreground" },
+  {
+    key: "running",
+    label: "Running",
+    color: "bg-timer-running",
+    textColor: "text-timer-running",
+  },
+  {
+    key: "paused",
+    label: "Paused",
+    color: "bg-timer-paused",
+    textColor: "text-timer-paused",
+  },
+  {
+    key: "ready",
+    label: "Not started",
+    color: "bg-foreground",
+    textColor: "text-foreground",
+  },
 ] as const;
+
+type TaskCountKey = (typeof TASK_COUNT_STATES)[number]["key"];
 
 function subscribePermission(onChange: () => void) {
   window.addEventListener("focus", onChange);
@@ -69,32 +93,109 @@ export default function TimerToolbar({
     }
   }
   return (
-    <div className="border-border flex w-full flex-wrap items-end gap-3">
+    <div className="border-border flex w-full flex-wrap items-end gap-2 sm:gap-3">
       <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-3">
         <AddTask disabled={!canUseTimer(snapshot)} />
         {backupActions}
         <TimerSettingsDialog />
       </div>
-      {snapshot === undefined ? null : (
-        <ul
-          aria-label="Task counts"
-          className="text-muted ml-auto flex items-center gap-3 text-base tabular-nums"
-        >
-          {TASK_COUNT_STATES.map(({ key, label, color }) => (
-            <li key={key} title={label} className="flex items-center gap-1.5">
-              <span
-                aria-hidden="true"
-                className={`${color} size-2 shrink-0 rounded-full`}
-              />
-              <span>
-                <span className="sr-only">{label}: </span>
-                {taskCounts[key]}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
+      {snapshot === undefined ? null : <TaskCounts counts={taskCounts} />}
     </div>
+  );
+}
+
+function TaskCounts({ counts }: { counts: Record<TaskCountKey, number> }) {
+  const id = useId();
+  const [active, setActive] = useState<TaskCountKey | null>(null);
+  const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (timeout.current !== null) {
+        clearTimeout(timeout.current);
+      }
+    },
+    []
+  );
+
+  function showCount(key: TaskCountKey) {
+    if (timeout.current !== null) {
+      clearTimeout(timeout.current);
+    }
+    setActive(key);
+    timeout.current = setTimeout(() => {
+      setActive(null);
+      timeout.current = null;
+    }, 2000);
+  }
+
+  return (
+    <ul
+      aria-label="Task counts"
+      className="border-border bg-interface-hover text-muted ml-auto flex min-h-8.5 shrink-0 items-center rounded-md border px-1 text-sm tabular-nums sm:min-h-0 sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-base"
+    >
+      {TASK_COUNT_STATES.map(({ key, label, color, textColor }, index) => (
+        <li key={key} className="flex items-center">
+          {index === 0 ? null : (
+            <span aria-hidden="true" className="px-0.5 sm:hidden">
+              ·
+            </span>
+          )}
+          <Tooltip.Root open={active === key} triggerId={`${id}-${key}`}>
+            <Tooltip.Trigger
+              id={`${id}-${key}`}
+              aria-label={`${label}: ${counts[key]}`}
+              closeOnClick={false}
+              onClick={() => {
+                showCount(key);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  setActive(null);
+                }
+              }}
+              className={`${textColor} focus-visible:outline-action min-h-8 min-w-4 cursor-pointer rounded-sm px-0.5 font-medium outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 sm:hidden`}
+            >
+              {counts[key]}
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Positioner
+                side="top"
+                align="center"
+                sideOffset={8}
+                positionMethod="fixed"
+                className="pointer-events-none z-100 sm:hidden"
+              >
+                <Tooltip.Popup className="bg-foreground text-background rounded-md px-2.5 py-1.5 text-sm shadow-xl">
+                  {label}: {counts[key]}
+                  <Tooltip.Arrow className="data-[side=bottom]:bottom-full data-[side=bottom]:rotate-180 data-[side=top]:top-full">
+                    <svg
+                      aria-hidden="true"
+                      width="10"
+                      height="5"
+                      viewBox="0 0 10 5"
+                      className="fill-foreground"
+                    >
+                      <path d="M0 0h10L5 5Z" />
+                    </svg>
+                  </Tooltip.Arrow>
+                </Tooltip.Popup>
+              </Tooltip.Positioner>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+          <span title={label} className="hidden items-center gap-1.5 sm:flex">
+            <span
+              aria-hidden="true"
+              className={`${color} size-2 shrink-0 rounded-full`}
+            />
+            <span>
+              <span className="sr-only">{label}: </span>
+              {counts[key]}
+            </span>
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -109,11 +210,20 @@ function TimerSettingsDialog() {
         <span className="hidden lg:inline">Settings</span>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
-        <Dialog.Popup className="scrollbar-subtle floating-material text-foreground fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl p-4 outline-hidden">
-          <Dialog.Title className="mb-5 text-center font-medium">
-            Settings
-          </Dialog.Title>
+        <Dialog.Backdrop className="timer-dialog-backdrop bg-foreground/40 fixed inset-0 z-90" />
+        <Dialog.Popup className="corner-squircle scrollbar-subtle floating-material text-foreground fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg p-4 outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
+          <div className="mb-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+            <Dialog.Title className="col-start-2 text-center font-medium">
+              Settings
+            </Dialog.Title>
+            <div className="grid w-18 justify-self-end">
+              <Dialog.Close
+                render={<Button className="w-full!" variant="secondary" />}
+              >
+                Done
+              </Dialog.Close>
+            </div>
+          </div>
           <TimerSettings />
         </Dialog.Popup>
       </Dialog.Portal>
@@ -147,12 +257,12 @@ function TimerSettings() {
     <div className="space-y-5">
       <div className="divide-border space-y-2.5 divide-y divide-dashed [&>*:not(:last-child)]:pb-2.5">
         <TimerSettingSwitch
-          label="Notification"
+          label="Alerts"
           icon={<BellAlertIcon aria-hidden="true" className="size-4.5" />}
           title={
             permission === "denied" || permission === "unsupported"
               ? "Browser notifications unavailable"
-              : "Notification"
+              : "Alerts"
           }
           disabled={
             !canUseTimer(snapshot) ||
@@ -248,9 +358,9 @@ function MultitaskSetting() {
         }}
       />
       <AlertDialog.Portal>
-        <AlertDialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
+        <AlertDialog.Backdrop className="timer-dialog-backdrop bg-foreground/40 fixed inset-0 z-90" />
         <AlertDialog.Popup
-          className="border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-xl border p-5 outline-hidden"
+          className="corner-squircle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-90 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg border p-5 outline-hidden supports-[corner-shape:squircle]:rounded-2xl"
           initialFocus={cancelRef}
           finalFocus={toggleRef}
         >

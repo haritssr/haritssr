@@ -1,9 +1,10 @@
+import { Tooltip } from "@base-ui/react/tooltip";
 import {
   ArrowDownTrayIcon,
   ArrowUpTrayIcon,
 } from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
@@ -67,7 +68,29 @@ export default function TimerDataControls({
   const input = useRef<HTMLInputElement>(null);
   const [working, setWorking] = useState(false);
   const [backupError, setBackupError] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState("");
+  const feedbackTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const disabled = working || pendingCount > 0 || snapshot?.mode !== "turso";
+
+  useEffect(
+    () => () => {
+      if (feedbackTimeout.current !== null) {
+        clearTimeout(feedbackTimeout.current);
+      }
+    },
+    []
+  );
+
+  function showFeedback(label: string) {
+    if (feedbackTimeout.current !== null) {
+      clearTimeout(feedbackTimeout.current);
+    }
+    setFeedback(label);
+    feedbackTimeout.current = setTimeout(() => {
+      setFeedback("");
+      feedbackTimeout.current = null;
+    }, 2000);
+  }
 
   async function perform(operation: () => Promise<void>) {
     setWorking(true);
@@ -138,34 +161,92 @@ export default function TimerDataControls({
       </div>
       {children(
         <ButtonGroup aria-label="Timer backup">
-          <ButtonGroupItem
-            aria-label="Export Timer backup"
+          <BackupButton
+            label="Export"
+            open={feedback === "Export"}
             disabled={disabled}
             onClick={() => {
+              showFeedback("Export");
               void perform(exportData);
             }}
-            title="Export"
           >
             <ArrowUpTrayIcon aria-hidden="true" className="size-4.5 stroke-2" />
-            <span className="hidden lg:inline">Export</span>
-          </ButtonGroupItem>
-          <ButtonGroupItem
-            aria-label="Import Timer backup"
+          </BackupButton>
+          <BackupButton
+            label="Import"
+            open={feedback === "Import"}
             disabled={disabled}
             onClick={() => {
+              showFeedback("Import");
               input.current?.click();
             }}
-            title="Import"
           >
             <ArrowDownTrayIcon
               aria-hidden="true"
               className="size-4.5 stroke-2"
             />
-            <span className="hidden lg:inline">Import</span>
-          </ButtonGroupItem>
+          </BackupButton>
         </ButtonGroup>
       )}
     </>
+  );
+}
+
+function BackupButton({
+  label,
+  open,
+  disabled,
+  onClick,
+  children,
+}: {
+  label: string;
+  open: boolean;
+  disabled: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  const id = useId();
+  return (
+    <Tooltip.Root open={open} triggerId={id}>
+      <Tooltip.Trigger
+        id={id}
+        closeOnClick={false}
+        render={
+          <ButtonGroupItem
+            aria-label={`${label} Timer backup`}
+            disabled={disabled}
+            onClick={onClick}
+          />
+        }
+      >
+        {children}
+        <span className="hidden lg:inline">{label}</span>
+      </Tooltip.Trigger>
+      <Tooltip.Portal>
+        <Tooltip.Positioner
+          side="top"
+          align="center"
+          sideOffset={8}
+          positionMethod="fixed"
+          className="pointer-events-none z-100 sm:hidden"
+        >
+          <Tooltip.Popup className="bg-foreground text-background rounded-md px-2.5 py-1.5 text-sm shadow-xl">
+            {label}
+            <Tooltip.Arrow className="data-[side=bottom]:bottom-full data-[side=bottom]:rotate-180 data-[side=top]:top-full">
+              <svg
+                aria-hidden="true"
+                width="10"
+                height="5"
+                viewBox="0 0 10 5"
+                className="fill-foreground"
+              >
+                <path d="M0 0h10L5 5Z" />
+              </svg>
+            </Tooltip.Arrow>
+          </Tooltip.Popup>
+        </Tooltip.Positioner>
+      </Tooltip.Portal>
+    </Tooltip.Root>
   );
 }
 

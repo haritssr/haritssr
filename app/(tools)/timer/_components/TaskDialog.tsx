@@ -166,7 +166,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         showTaskPresets
         defaultActivity={drafts.add?.activity ?? ""}
         defaultDescription={drafts.add?.description ?? ""}
-        defaultDuration={drafts.add?.duration ?? 300}
+        defaultDuration={drafts.add?.duration ?? 0}
         busy={false}
         error={formError}
         onSubmit={submit}
