@@ -89,7 +89,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   secondary:
     "border border-zinc-300 bg-white font-medium text-foreground select-none hover:border-border-hover hover:bg-interface-hover data-popup-open:border-action focus-visible:outline-zinc-700",
   "profile-secondary":
-    "border border-border-hover/50 bg-white font-medium text-foreground select-none hover:border-border-hover hover:bg-interface-hover focus-visible:outline-zinc-700",
+    "border border-border-hover/50 bg-[white] font-medium text-foreground shadow-sm shadow-black/5 select-none hover:border-border-hover hover:bg-interface-hover focus-visible:outline-zinc-700",
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
 };

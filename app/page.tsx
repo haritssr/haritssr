@@ -83,25 +83,26 @@ function PersonalDetails() {
       id="Identity"
       className={`${TASK_LAYOUT.surface} border-border-hover/50 min-w-0 space-y-4 p-4!`}
     >
-      <div className="flex items-center gap-4">
-        <Image
-          alt={profileName}
-          className="size-[3lh] shrink-0 rounded-full sm:size-[2lh]"
-          height={100}
-          loading="eager"
-          src="/images/blur.jpg"
-          width={100}
-        />
-        <div className="min-w-0">
-          <p className="text-lg font-medium">{profileName}</p>
-          <p className="text-secondary-foreground">
-            <span className="block sm:inline">Web Product Engineer</span>
-            <span className="hidden sm:inline"> · </span>
-            <span className="block sm:inline">Science Teacher</span>
-          </p>
+      <div className="flex flex-col gap-4 md:flex-row md:items-stretch">
+        <div className="flex shrink-0 items-center gap-4">
+          <Image
+            alt={profileName}
+            className="size-[3lh] shrink-0 rounded-full"
+            height={100}
+            loading="eager"
+            src="/images/blur.jpg"
+            width={100}
+          />
+          <div className="min-w-0">
+            <p className="text-lg font-medium">{profileName}</p>
+            <p className="text-secondary-foreground">
+              <span className="block">Web Product Engineer</span>
+              <span className="block">Science Teacher</span>
+            </p>
+          </div>
         </div>
-        <div className="ml-auto hidden md:block">
-          <ProfileActions />
+        <div className="border-border hidden min-w-0 flex-1 border-l border-dashed pl-4 md:block">
+          <ProfileInvitation />
         </div>
       </div>
       <div className="border-border grid gap-4 border-t border-dashed pt-4 md:grid-cols-3">
@@ -139,13 +140,13 @@ function PersonalDetails() {
         <div className="hidden md:contents">
           <PersonalNotes />
         </div>
-        <div className="md:hidden">
-          <ProfileActions />
+        <div className="border-border border-t border-dashed pt-4 md:hidden">
+          <ProfileInvitation />
         </div>
         <Accordion className="md:hidden">
           <AccordionItem
             excludeFromContents
-            title="More Info"
+            title="More info about me"
             value="personal-notes"
             variant="profile"
           >
@@ -159,22 +160,39 @@ function PersonalDetails() {
   );
 }
 
+function ProfileInvitation() {
+  return (
+    <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <p className="text-secondary-foreground">
+        Need UI design or a high school lesson? Get in touch.
+      </p>
+      <ProfileActions />
+    </div>
+  );
+}
+
 function ProfileActions() {
   return (
-    <div className="flex flex-col gap-3 md:flex-row">
-      <ButtonLink
-        href="mailto:haritssr@gmail.com?subject=Design%20consultation"
-        size="profile"
-      >
-        Request a Design Consultation
-      </ButtonLink>
-      <ButtonLink
-        href="mailto:haritssr@gmail.com?subject=Lesson%20inquiry"
-        size="profile"
-        variant="profile-secondary"
-      >
-        Request a Private Lesson
-      </ButtonLink>
+    <div className="flex shrink-0 flex-col gap-3 lg:flex-row">
+      <div className="flex flex-col gap-1 text-center lg:text-left">
+        <ButtonLink
+          href="mailto:haritssr@gmail.com?subject=Design%20consultation"
+          size="profile"
+        >
+          Request a Design Consultation
+        </ButtonLink>
+        <p className="text-muted text-xs">UI/UX for web or mobile</p>
+      </div>
+      <div className="flex flex-col gap-1 text-center lg:text-left">
+        <ButtonLink
+          href="mailto:haritssr@gmail.com?subject=Lesson%20inquiry"
+          size="profile"
+          variant="profile-secondary"
+        >
+          Request a Private Lesson
+        </ButtonLink>
+        <p className="text-muted text-xs">Math, physics, or chemistry</p>
+      </div>
     </div>
   );
 }
@@ -191,7 +209,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
         <li>Former chess player, ±2000 Elo.</li>
         <li>I develop with Codex CLI in Zed.</li>
         <li>
-          JS, TS, Effect, React, Next.js, FP, Math, Physics, and Education.
+          JS, TS, Effect, React, Next.js, FP, Math, Physics, Edu, and Design.
         </li>
         <li>Background in Physics</li>
       </ul>

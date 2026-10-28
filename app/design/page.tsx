@@ -253,6 +253,7 @@ export default function DesignSystem() {
                 </ul>
               </div>
             </InterfacePrinciples>
+            <li>The devil is in the details.</li>
             <li>
               Consider UX through the{" "}
               <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />{" "}
