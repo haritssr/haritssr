@@ -162,9 +162,9 @@ substitute Unicode, plain text, `<sub>`/`<sup>`, or monospace notation.
 
 ## Homepage and shortcuts
 
-Contacts stay visible; background/principles move into More below 768px, with three
-columns on desktop. Features use a rounded, dashed-divider grid: one column below
-640px, two from 640px, and three from 768px, with a shortcut beside each title.
+Contacts and inquiry links stay visible; background/principles move into More Info
+below 768px, with three columns on desktop. Features use a rounded, dashed-divider
+grid: one column below 640px, two from 640px, and three from 768px, with a shortcut beside each title.
 Previews are decorative except Install.
 The homepage button and footer Install share a browser prompt requiring user
 activation; when unavailable, disable the homepage button and hide the footer action.

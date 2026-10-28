@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, Ref } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, Ref } from "react";
 
 type ButtonVariant =
   | "black"
@@ -23,6 +23,7 @@ type ButtonVariant =
   | "action-outline"
   | "primary"
   | "primary-subtle"
+  | "profile-secondary"
   | "timer-running"
   | "timer-paused"
   | "music"
@@ -86,7 +87,9 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "primary-subtle":
     "border border-transparent bg-action font-medium text-white transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action",
   secondary:
-    "border border-zinc-300 bg-white text-secondary-foreground select-none hover:bg-interface-hover hover:text-secondary-hover-foreground data-popup-open:border-action focus-visible:outline-zinc-700",
+    "border border-zinc-300 bg-white font-medium text-foreground select-none hover:border-border-hover hover:bg-interface-hover data-popup-open:border-action focus-visible:outline-zinc-700",
+  "profile-secondary":
+    "border border-border-hover/50 bg-white font-medium text-foreground select-none hover:border-border-hover hover:bg-interface-hover focus-visible:outline-zinc-700",
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
 };
@@ -118,6 +121,26 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   ref?: Ref<HTMLButtonElement>;
   variant?: ButtonVariant;
 };
+
+export function ButtonLink({
+  children,
+  className,
+  size = "default",
+  variant = "primary",
+  ...props
+}: AnchorHTMLAttributes<HTMLAnchorElement> & {
+  size?: "default" | "profile";
+  variant?: "primary" | "secondary" | "profile-secondary";
+}) {
+  return (
+    <a
+      {...props}
+      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${size === "profile" ? "corner-squircle min-h-10 rounded-md px-4 py-1 text-center supports-[corner-shape:squircle]:rounded-xl md:min-h-9.5" : BUTTON_SIZE_CLASS.default} ${className ?? ""}`}
+    >
+      {children}
+    </a>
+  );
+}
 
 const Button = function Button({
   children,

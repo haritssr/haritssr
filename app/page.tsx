@@ -11,6 +11,7 @@ import { Suspense } from "react";
 
 import { TASK_LAYOUT } from "@/app/(tools)/timer/_components/taskPresentation";
 import Accordion, { AccordionItem } from "@/components/Accordion";
+import { ButtonLink } from "@/components/Button";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
@@ -99,6 +100,9 @@ function PersonalDetails() {
             <span className="block sm:inline">Science Teacher</span>
           </p>
         </div>
+        <div className="ml-auto hidden md:block">
+          <ProfileActions />
+        </div>
       </div>
       <div className="border-border grid gap-4 border-t border-dashed pt-4 md:grid-cols-3">
         <ul
@@ -135,11 +139,15 @@ function PersonalDetails() {
         <div className="hidden md:contents">
           <PersonalNotes />
         </div>
+        <div className="md:hidden">
+          <ProfileActions />
+        </div>
         <Accordion className="md:hidden">
           <AccordionItem
             excludeFromContents
-            title="More"
+            title="More Info"
             value="personal-notes"
+            variant="profile"
           >
             <div className="space-y-4">
               <PersonalNotes mobile />
@@ -148,6 +156,26 @@ function PersonalDetails() {
         </Accordion>
       </div>
     </section>
+  );
+}
+
+function ProfileActions() {
+  return (
+    <div className="flex flex-col gap-3 md:flex-row">
+      <ButtonLink
+        href="mailto:haritssr@gmail.com?subject=Design%20consultation"
+        size="profile"
+      >
+        Request a Design Consultation
+      </ButtonLink>
+      <ButtonLink
+        href="mailto:haritssr@gmail.com?subject=Lesson%20inquiry"
+        size="profile"
+        variant="profile-secondary"
+      >
+        Request a Private Lesson
+      </ButtonLink>
+    </div>
   );
 }
 
@@ -203,7 +231,7 @@ function Tools({ count }: { count?: number }) {
   return (
     <nav
       aria-label="Tools"
-      className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5"
+      className="[&>a]:border-border-hover/50 [&>a:hover]:border-border-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5"
     >
       <IndexCard
         title="Timer"
