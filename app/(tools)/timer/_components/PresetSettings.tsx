@@ -10,6 +10,7 @@ import {
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Button from "@/components/Button";
 
+import DailyTaskSettings from "./DailyTaskSettings";
 import DurationFields from "./DurationFields";
 import { durationSeconds, durationValue } from "./durationValue";
 import type { DurationValue } from "./durationValue";
@@ -22,7 +23,11 @@ interface PresetDraft {
   duration: DurationValue;
 }
 
-export default function PresetSettings() {
+export default function PresetSettings({
+  dailyOpen = false,
+}: {
+  dailyOpen?: boolean;
+}) {
   return (
     <div className="space-y-3">
       <Accordion>
@@ -31,6 +36,7 @@ export default function PresetSettings() {
       <Accordion>
         <PresetEditor kind="task" />
       </Accordion>
+      <DailyTaskSettings defaultOpen={dailyOpen} />
     </div>
   );
 }

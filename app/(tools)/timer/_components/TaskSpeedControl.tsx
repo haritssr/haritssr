@@ -2,6 +2,7 @@ import { Button as BaseButton } from "@base-ui/react/button";
 import { ClockIcon } from "@heroicons/react/24/outline";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
+import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
 import { canUseTimer, TIMER_SPEEDS } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 
@@ -18,6 +19,16 @@ export default function TaskSpeedControl({
   const speed = task.speed ?? 1;
   const nextSpeed =
     TIMER_SPEEDS[(TIMER_SPEEDS.indexOf(speed) + 1) % TIMER_SPEEDS.length] ?? 1;
+  if (isDailyTask(task)) {
+    return (
+      <span
+        className="text-muted text-base tabular-nums"
+        title="Daily tasks use real time"
+      >
+        1x
+      </span>
+    );
+  }
   return (
     <BaseButton
       aria-label={`Speed for ${task.activity}: ${speed}x. Change to ${nextSpeed}x`}

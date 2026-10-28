@@ -1,8 +1,12 @@
-import { CheckIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 import type { ComponentProps, ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
+import {
+  isDailyTask,
+  formatAvailabilityWindow,
+} from "@/app/(tools)/timer/utils/dailyTasks";
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import {
@@ -12,12 +16,38 @@ import {
 import Button from "@/components/Button";
 
 import DeleteTaskButton from "./DeleteTaskButton";
+import type { TaskState } from "./taskState";
+
+function controlPresentation(
+  task: TimerTask,
+  state: TaskState,
+  unavailable: boolean
+) {
+  const { running, label, reached, available } = state;
+  const locked = !available || reached;
+  const window = formatAvailabilityWindow(task.availabilityWindow);
+  let ToggleIcon = running ? PauseIcon : PlayIcon;
+  let toggleLabel: string = label;
+  let toggleTitle: string = label;
+  if (locked) {
+    ToggleIcon = LockClosedIcon;
+    toggleLabel = "Locked";
+    toggleTitle = window === undefined ? "Locked" : `Locked · ${window} WIB`;
+  }
+  return {
+    showDone: isDailyTask(task) || running || task.spent > 0,
+    disabled: unavailable || locked,
+    doneDisabled: unavailable || reached || (!running && state.spent === 0),
+    ToggleIcon,
+    toggleLabel,
+    toggleTitle,
+  };
+}
 
 export default function TaskActions({
   date,
   task,
-  running,
-  label,
+  state,
   variant,
   presentation = "text",
   onPause,
@@ -25,17 +55,23 @@ export default function TaskActions({
 }: {
   date: string;
   task: TimerTask;
-  running: boolean;
-  label: string;
+  state: TaskState;
   variant: ComponentProps<typeof Button>["variant"];
   presentation?: "text" | "icons";
   onPause?: () => void;
   children?: ReactNode;
 }) {
   const { act, snapshot } = useTimer("act", "snapshot");
-  const showDone = running || task.spent > 0;
+  const { running, label } = state;
   const unavailable = !canUseTimer(snapshot);
-  const disabled = unavailable;
+  const {
+    showDone,
+    disabled,
+    doneDisabled,
+    toggleLabel,
+    toggleTitle,
+    ToggleIcon,
+  } = controlPresentation(task, state, unavailable);
   function toggleRunning() {
     if (running) {
       onPause?.();
@@ -71,7 +107,6 @@ export default function TaskActions({
     );
   }
 
-  const ToggleIcon = running ? PauseIcon : PlayIcon;
   return (
     <div className="flex min-w-0 items-center justify-end gap-2">
       {showDone ? null : (
@@ -94,7 +129,7 @@ export default function TaskActions({
         data-timer-secondary={showDone ? "" : undefined}
         dimWhenDisabled={unavailable}
         size="icon-circle"
-        disabled={disabled}
+        disabled={showDone ? doneDisabled : disabled}
         aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
         title={showDone ? "Done" : label}
         onClick={showDone ? finishTask : toggleRunning}
@@ -117,8 +152,8 @@ export default function TaskActions({
           dimWhenDisabled={unavailable}
           size="icon-circle"
           disabled={disabled}
-          aria-label={`${label}: ${task.activity}`}
-          title={label}
+          aria-label={`${toggleLabel}: ${task.activity}`}
+          title={toggleTitle}
           onClick={toggleRunning}
           variant={variant}
         >

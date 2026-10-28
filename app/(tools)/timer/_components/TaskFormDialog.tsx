@@ -221,10 +221,12 @@ export function TaskDescriptionField({
   value,
   onChange,
   disabled,
+  maxLength = TASK_INPUT_LIMITS.description,
 }: {
   value: string;
   onChange: (value: string) => void;
   disabled: boolean;
+  maxLength?: number;
 }) {
   const hintId = useId();
   const descriptionRef = useRef<HTMLInputElement>(null);
@@ -236,11 +238,11 @@ export function TaskDescriptionField({
           Description <span className="text-muted">(optional)</span>
         </span>
         <span
-          className={`text-xs tabular-nums ${length >= TASK_INPUT_LIMITS.description ? "text-danger font-medium" : "text-muted"}`}
+          className={`text-xs tabular-nums ${length >= maxLength ? "text-danger font-medium" : "text-muted"}`}
           id={hintId}
         >
           <span className="sr-only">Characters: </span>
-          {length}/{TASK_INPUT_LIMITS.description}
+          {length}/{maxLength}
         </span>
       </span>
       <span className="relative block">
@@ -250,7 +252,7 @@ export function TaskDescriptionField({
           type="text"
           value={value}
           disabled={disabled}
-          maxLength={TASK_INPUT_LIMITS.description}
+          maxLength={maxLength}
           name="description"
           onChange={(event) => {
             onChange(event.currentTarget.value);

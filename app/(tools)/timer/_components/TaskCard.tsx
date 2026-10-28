@@ -1,74 +1,95 @@
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
+import { memo } from "react";
+
+import {
+  isDailyTask,
+  formatAvailabilityWindow,
+} from "@/app/(tools)/timer/utils/dailyTasks";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 
 import TaskActions from "./TaskActions";
+import TaskCardView from "./TaskCardView";
 import TaskDescription from "./TaskDescription";
 import { EditTask } from "./TaskDialog";
-import { TASK_LAYOUT, taskAppearance } from "./taskPresentation";
-import TaskProgress from "./TaskProgress";
+import { taskAppearance } from "./taskPresentation";
 import TaskSpeedControl from "./TaskSpeedControl";
 import type { TaskState } from "./taskState";
+import { TimerSettingsTrigger } from "./TimerSettings";
 
-export default function TaskCard({
-  task,
-  date,
-  state,
-}: {
+interface TaskCardProps {
   task: TimerTask;
   date: string;
   state: TaskState;
-}) {
-  const { spent, reached, running, paused, label } = state;
-  const appearance = taskAppearance(running, paused, reached);
+}
 
-  if (reached) {
-    return null;
-  }
+const TaskCard = memo(
+  ({ task, date, state }: TaskCardProps) => {
+    const { reached, running, paused } = state;
+    const appearance = taskAppearance(
+      running,
+      paused && state.available,
+      reached
+    );
+    const daily = isDailyTask(task);
 
-  return (
-    <div
-      data-completed={reached || undefined}
-      className={`group/task min-w-0 flex-1 ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${appearance.surface}`}
-    >
-      <TaskHeader task={task} date={date} />
-      <div
-        className={`group-data-completed/task:*:opacity-60 ${TASK_LAYOUT.controls}`}
-      >
-        <div className="min-w-0">
-          <TaskProgress
+    if (reached && !daily) {
+      return null;
+    }
+
+    return (
+      <TaskCardView
+        task={task}
+        state={state}
+        timeDisplay={daily ? "spent" : "spent-and-duration"}
+        timeNote={formatAvailabilityWindow(task.availabilityWindow)}
+        className={daily && (!state.available || reached) ? "opacity-50" : ""}
+        headerActions={
+          <>
+            <span className="inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
+              <TaskSpeedControl task={task} date={date} showIcon={false} />
+            </span>
+            {daily ? (
+              <TimerSettingsTrigger
+                section="daily"
+                size="text"
+                variant="icon"
+                aria-label={`Daily settings for ${task.activity}`}
+                title="Daily Tasks"
+              >
+                <AdjustmentsHorizontalIcon
+                  aria-hidden="true"
+                  className="size-5"
+                  strokeWidth={1.5}
+                />
+              </TimerSettingsTrigger>
+            ) : (
+              <EditTask task={task} date={date} reached={false} />
+            )}
+            <TaskDescription task={task} />
+          </>
+        }
+        actions={
+          <TaskActions
+            date={date}
             task={task}
-            spent={spent}
-            running={running}
-            appearance={appearance}
+            state={state}
+            variant={appearance.button}
           />
-        </div>
-        <TaskActions
-          date={date}
-          task={task}
-          running={running}
-          label={label}
-          variant={appearance.button}
-        />
-      </div>
-    </div>
-  );
-}
+        }
+      />
+    );
+  },
+  (previous, next) =>
+    previous.task === next.task &&
+    previous.date === next.date &&
+    previous.state.spent === next.state.spent &&
+    previous.state.reached === next.state.reached &&
+    previous.state.running === next.state.running &&
+    previous.state.paused === next.state.paused &&
+    previous.state.available === next.state.available &&
+    previous.state.label === next.state.label
+);
 
-function TaskHeader({ task, date }: { task: TimerTask; date: string }) {
-  return (
-    <div className="flex min-w-0 items-center justify-between gap-3">
-      <p
-        className="text-foreground min-w-0 truncate text-lg font-medium"
-        title={task.activity}
-      >
-        {task.activity}
-      </p>
-      <div className="flex shrink-0 items-center gap-2">
-        <span className="inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
-          <TaskSpeedControl task={task} date={date} showIcon={false} />
-        </span>
-        <EditTask task={task} date={date} reached={false} />
-        <TaskDescription task={task} />
-      </div>
-    </div>
-  );
-}
+TaskCard.displayName = "TaskCard";
+
+export default TaskCard;

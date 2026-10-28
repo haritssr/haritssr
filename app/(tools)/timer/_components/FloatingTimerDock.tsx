@@ -131,8 +131,7 @@ function FloatingTimerPlayer({
       <TaskActions
         date={date}
         task={selected.task}
-        running={selected.state.running}
-        label={selected.state.label}
+        state={selected.state}
         variant={appearance.button}
         presentation="icons"
         onPause={onPause}

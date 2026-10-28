@@ -19,7 +19,8 @@ export function getFloatingTasks(
   return getTaskCollection(tasks, date, now)
     .active.filter(
       ({ task, state }) =>
-        state.running || (state.paused && task.id === retainedTaskId)
+        state.available &&
+        (state.running || (state.paused && task.id === retainedTaskId))
     )
     .toSorted(
       (first, second) => startedAt(second.task) - startedAt(first.task)

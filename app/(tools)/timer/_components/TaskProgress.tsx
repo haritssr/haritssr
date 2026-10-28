@@ -15,6 +15,8 @@ export default function TaskProgress({
   appearance,
   compact = false,
   showTitleIcon = true,
+  timeDisplay = "spent-and-duration",
+  timeNote,
   title,
 }: {
   task: TimerTask;
@@ -23,6 +25,8 @@ export default function TaskProgress({
   appearance: TaskAppearance;
   compact?: boolean;
   showTitleIcon?: boolean;
+  timeDisplay?: "spent-and-duration" | "spent";
+  timeNote?: string;
   title?: string;
 }) {
   const stackClass = compact
@@ -63,7 +67,7 @@ export default function TaskProgress({
               </>
             )}
           </span>
-          {title === undefined ? (
+          {title === undefined && timeDisplay === "spent-and-duration" ? (
             <>
               <span className="text-muted shrink-0 font-normal">/</span>
               <span className={`text-muted ${compact ? "truncate" : ""}`}>
@@ -72,6 +76,11 @@ export default function TaskProgress({
             </>
           ) : null}
         </span>
+        {timeNote === undefined ? null : (
+          <span className="text-muted min-w-0 text-center whitespace-normal normal-nums">
+            {timeNote}
+          </span>
+        )}
         {title === undefined ? (
           <span
             className={`flex shrink-0 items-baseline gap-1 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} ${running ? appearance.elapsed : "text-muted"}`}

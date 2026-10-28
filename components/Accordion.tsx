@@ -7,12 +7,18 @@ import type { ReactNode } from "react";
 export default function Accordion({
   children,
   className = "w-full",
+  defaultValue,
 }: {
   children: ReactNode;
   className?: string;
+  defaultValue?: string[];
 }) {
   return (
-    <BaseAccordion.Root className={className} multiple>
+    <BaseAccordion.Root
+      className={className}
+      defaultValue={defaultValue}
+      multiple
+    >
       {children}
     </BaseAccordion.Root>
   );
