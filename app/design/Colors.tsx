@@ -42,11 +42,15 @@ const DESIGN_TOKENS = [
   },
   {
     name: "music",
-    definition: "cyan-500",
+    definition: "teal-600",
   },
   {
     name: "surface",
     definition: "#fafafa",
+  },
+  {
+    name: "secondary-button-surface",
+    definition: "pure white",
   },
   {
     name: "background",

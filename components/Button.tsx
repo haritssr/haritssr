@@ -17,13 +17,11 @@ type ButtonVariant =
   | "outline"
   | "floating-outline"
   | "outline-interactive"
-  | "outline-toolbar"
   | "outline-regular"
   | "action-outline-regular"
   | "action-outline"
   | "primary"
   | "primary-subtle"
-  | "profile-secondary"
   | "timer-running"
   | "timer-paused"
   | "music"
@@ -33,6 +31,9 @@ type ButtonVariant =
 
 const BUTTON_BASE_CLASS =
   "inline-flex cursor-pointer items-center justify-center gap-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed";
+
+const BUTTON_SECONDARY_CLASS =
+  "border border-border-hover/50 bg-secondary-button-surface font-medium text-foreground shadow-sm shadow-black/5 transition-colors duration-150 select-none hover:border-border-hover hover:bg-interface-hover data-popup-open:border-action focus-visible:outline-secondary-hover-foreground";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "theme-fill":
@@ -64,18 +65,14 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-transparent bg-foreground/90 font-medium text-white transition-colors duration-150 enabled:hover:bg-foreground focus-visible:outline-foreground",
   "neutral-subtle-underlined":
     "gap-0 rounded-none p-0 font-semibold text-foreground underline underline-offset-2 transition-colors duration-150 hover:text-action focus-visible:outline-action",
-  "secondary-strong":
-    "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-foreground",
-  "floating-secondary":
-    "border border-border bg-white font-medium text-foreground transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-foreground",
+  "secondary-strong": BUTTON_SECONDARY_CLASS,
+  "floating-secondary": BUTTON_SECONDARY_CLASS,
   outline:
     "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "floating-outline":
     "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "outline-interactive":
     "border-border text-foreground border bg-transparent font-medium transition-[color,border-color,background-color,transform] duration-150 enabled:hover:bg-foreground/5 focus:border-foreground focus-visible:outline-foreground active:scale-95 active:border-foreground motion-reduce:transition-none",
-  "outline-toolbar":
-    "border-border text-foreground border bg-transparent transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-foreground motion-reduce:transition-none",
   "action-outline":
     "border border-action bg-surface font-medium text-action transition-colors duration-150 enabled:hover:bg-action/10 focus-visible:outline-action",
   "outline-regular":
@@ -86,10 +83,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "bg-action font-medium text-white hover:bg-action-hover focus-visible:outline-action",
   "primary-subtle":
     "border border-transparent bg-action font-medium text-white transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action",
-  secondary:
-    "border border-zinc-300 bg-white font-medium text-foreground select-none hover:border-border-hover hover:bg-interface-hover data-popup-open:border-action focus-visible:outline-zinc-700",
-  "profile-secondary":
-    "border border-border-hover/50 bg-[white] font-medium text-foreground shadow-sm shadow-black/5 select-none hover:border-border-hover hover:bg-interface-hover focus-visible:outline-zinc-700",
+  secondary: BUTTON_SECONDARY_CLASS,
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
 };
@@ -130,7 +124,7 @@ export function ButtonLink({
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & {
   size?: "default" | "profile";
-  variant?: "primary" | "secondary" | "profile-secondary";
+  variant?: "primary" | "secondary";
 }) {
   return (
     <a

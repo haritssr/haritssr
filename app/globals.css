@@ -170,7 +170,7 @@
   --color-identity-accent: var(--color-violet-500);
   --color-timer-running: var(--color-green-600);
   --color-timer-paused: var(--color-orange-500);
-  --color-music: var(--color-cyan-500);
+  --color-music: var(--color-teal-600);
   --color-contact-accent: var(--color-emerald-600);
   --color-muted: color-mix(
     in srgb,
@@ -185,6 +185,7 @@
   --color-attention: var(--color-amber-500);
   --color-danger: var(--color-red-500);
   --color-surface: #fafafa;
+  --color-secondary-button-surface: #fff;
   --color-background: #fcfcfc;
   --color-foreground: var(--color-zinc-800);
   --color-border: var(--color-zinc-300);

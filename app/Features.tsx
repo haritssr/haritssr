@@ -166,7 +166,7 @@ function TimerPreview() {
       </div>
       <span
         data-timer-secondary=""
-        className="border-border text-foreground flex size-10 shrink-0 items-center justify-center rounded-full border bg-transparent"
+        className="border-border-hover/50 bg-secondary-button-surface text-foreground flex size-10 shrink-0 items-center justify-center rounded-full border"
       >
         <CheckIcon className="size-5" strokeWidth={2.5} />
       </span>

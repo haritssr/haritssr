@@ -84,7 +84,7 @@ export default function TaskActions({
           onDelete={async () =>
             await act({ action: "delete", date, taskId: task.id })
           }
-          variant="outline"
+          variant="secondary"
           aria-label={`Delete ${task.activity}`}
         />
       )}
@@ -98,7 +98,7 @@ export default function TaskActions({
         aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
         title={showDone ? "Done" : label}
         onClick={showDone ? finishTask : toggleRunning}
-        variant={showDone ? "outline" : variant}
+        variant={showDone ? "secondary" : variant}
       >
         {showDone ? (
           <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-5" />

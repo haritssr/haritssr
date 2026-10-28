@@ -103,7 +103,7 @@ function TimerSettingsDialog() {
     <Dialog.Root>
       <Dialog.Trigger
         aria-label="Settings"
-        render={<Button size="icon-toolbar" variant="outline-toolbar" />}
+        render={<Button size="icon-toolbar" variant="outline" />}
       >
         <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
         <span className="hidden lg:inline">Settings</span>

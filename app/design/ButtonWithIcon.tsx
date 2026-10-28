@@ -11,7 +11,7 @@ export default function ButtonWithIcon({
     <Button
       data-timer-secondary={physical ? "" : undefined}
       size="icon-toolbar"
-      variant="outline-toolbar"
+      variant="secondary"
     >
       <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
       <span>Settings</span>

@@ -14,7 +14,7 @@ export default function ButtonIconOnly({
         data-timer-secondary={physical ? "" : undefined}
         size="icon-toolbar"
         title="Settings"
-        variant="outline-toolbar"
+        variant="secondary"
       >
         <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
       </Button>
@@ -23,7 +23,7 @@ export default function ButtonIconOnly({
         data-timer-secondary={physical ? "" : undefined}
         size="icon-circle"
         title="Done"
-        variant="outline"
+        variant="secondary"
       >
         <CheckIcon aria-hidden="true" className="size-5" strokeWidth={2.5} />
       </Button>
