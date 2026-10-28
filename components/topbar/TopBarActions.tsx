@@ -24,7 +24,11 @@ export default function TopBarActions({
   const list = layout === "list";
 
   return (
-    <div className={list ? "flex flex-col p-1" : TOP_BAR_CAPSULE_CLASS_NAME}>
+    <div
+      className={
+        list ? "flex flex-col p-1" : `${TOP_BAR_CAPSULE_CLASS_NAME} lg:gap-0.75`
+      }
+    >
       <TopBarSearch onSearch={onSearch} showLabel={list} />
       <TopBarShare showLabel={list} />
       <a

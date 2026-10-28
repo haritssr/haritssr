@@ -2,8 +2,9 @@
 
 import { Popover } from "@base-ui/react/popover";
 import { QueueListIcon } from "@heroicons/react/24/outline";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import { lockPageActionsBackground } from "./pageActionsScrollLock";
 import {
   TOP_BAR_CAPSULE_CLASS_NAME,
   topBarActionClassName,
@@ -40,6 +41,13 @@ function CompactActionMenu({
   const searchRequested = useRef(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const { openSearch } = useGlobalSearch();
+  useEffect(() => {
+    // Base UI leaves narrow, touch-opened popovers scrollable by design.
+    const release = open ? lockPageActionsBackground(document) : null;
+    return () => {
+      release?.();
+    };
+  }, [open]);
   const requestSearch = () => {
     if (triggerRef.current) {
       (onSearch ?? openSearch)(triggerRef.current);
@@ -67,14 +75,11 @@ function CompactActionMenu({
         <QueueListIcon aria-hidden="true" className="size-5" />
       </Popover.Trigger>
       <Popover.Portal keepMounted>
-        <Popover.Backdrop className="fixed inset-0 z-40 touch-none" />
-        <Popover.Positioner
-          align="end"
-          sideOffset={12}
-          className="z-50 touch-none"
-        >
+        <Popover.Backdrop className="fixed inset-0 z-80 touch-pinch-zoom" />
+        <Popover.Positioner align="end" sideOffset={12} className="z-90">
           <Popover.Popup
             aria-label="Page actions"
+            data-page-actions-scroll=""
             finalFocus={() =>
               searchRequested.current ? false : triggerRef.current
             }
@@ -87,7 +92,7 @@ function CompactActionMenu({
                 setOpen(false);
               }
             }}
-            className="navigation-material border-border text-foreground corner-squircle w-48 max-w-[calc(100vw-2rem)] rounded-lg border shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-2xl"
+            className="navigation-material border-border text-foreground corner-squircle max-h-(--available-height) w-48 max-w-[calc(100vw-2rem)] touch-pan-y touch-pinch-zoom overflow-y-auto overscroll-contain rounded-lg border shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-2xl"
           >
             <Popover.Close className="sr-only">
               Close page actions

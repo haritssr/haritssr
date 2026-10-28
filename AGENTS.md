@@ -143,6 +143,9 @@ substitute Unicode, plain text, `<sub>`/`<sup>`, or monospace notation.
 - Search, Share, View Source, and account controls stay inline at the page top and
   on Home. Below 640px, move them into Page actions only while the scrolled title
   is visible. Keep Contents separate from these actions and their sheet.
+- Page actions freezes background scrolling and interaction, including touch-opened
+  popovers. Keep its backdrop above floating controls, allow scrolling inside the
+  popup when needed, and release the lock on close or unmount before Search opens.
 - Nested pages with visible `h2`–`h6` content headings (including MDX/SectionHeading)
   show `TopBarContents` in its own pill right of the actions. Use rendered anchors,
   a desktop popover below its trigger, and a mobile sheet. Hide on Home/first-level
