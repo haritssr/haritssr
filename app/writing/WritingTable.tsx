@@ -3,10 +3,10 @@ import { allWritingPosts } from "@/utils/content/writing-posts";
 
 export default function WritingTable() {
   return (
-    <div className="scrollbar-subtle border-border w-full overflow-x-auto border-y">
+    <div className="scrollbar-subtle border-border w-full overflow-x-auto border-y border-dashed">
       <table className="text-foreground/90 w-full border-collapse sm:min-w-96">
         <caption className="sr-only">Writing, newest first</caption>
-        <tbody className="divide-border divide-y">
+        <tbody className="divide-border divide-y divide-dashed">
           {allWritingPosts.map((post) => (
             <tr
               className="group/row hover:bg-foreground/5 relative cursor-pointer"

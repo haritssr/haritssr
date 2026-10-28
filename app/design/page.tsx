@@ -304,8 +304,8 @@ export default function DesignSystem() {
               </ul>
             </li>
             <li>
-              Use flat buttons directly on the page and physical buttons inside
-              containers.
+              Use regular buttons directly on the page and physical buttons
+              inside containers.
             </li>
             <li>
               Prefer the system&apos;s basic colors and components to accelerate
@@ -408,8 +408,8 @@ export default function DesignSystem() {
         </Section>
 
         <Section title="UI Components">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 pt-0 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:top-0 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="IndexCard" title="Index Card">
                 <div className="grid gap-3.5 sm:grid-cols-2">
                   <IndexCard
@@ -446,74 +446,74 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pt-0 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Table" title="Table">
                 <Table />
               </Box>
             </div>
 
-            <div className="grid min-w-0 grid-cols-1 md:col-span-2 md:grid-cols-2 lg:grid-cols-4">
-              <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed lg:pr-3 [&>div]:flex-1">
+            <div className="grid min-w-0 grid-cols-1 gap-5 md:col-span-2 md:grid-cols-2 lg:grid-cols-4">
+              <div className="flex min-w-0 flex-col [&>div]:flex-1">
                 <Box name="Switch" title="Switch">
                   <Switch />
                 </Box>
               </div>
 
-              <div className="border-border-hover lg:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 lg:px-3 lg:after:absolute lg:after:inset-y-5 lg:after:right-0 lg:after:border-r lg:after:border-dashed [&>div]:flex-1">
+              <div className="flex min-w-0 flex-col [&>div]:flex-1">
                 <Box name="Tooltip" title="Tooltip">
                   <Tooltip />
                 </Box>
               </div>
 
-              <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed lg:px-3 [&>div]:flex-1">
+              <div className="flex min-w-0 flex-col [&>div]:flex-1">
                 <Box name="Modal" title="Modal">
                   <Modal />
                 </Box>
               </div>
 
-              <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 lg:pl-3 [&>div]:flex-1">
+              <div className="flex min-w-0 flex-col [&>div]:flex-1">
                 <Toast />
               </div>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Checkbox" title="Checkbox">
                 <Checkbox />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="NumberInput" title="Input: Number">
                 <NumberInput />
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Accordion" title="Accordion">
                 <Accordion />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="SelectField" title="Select">
                 <Select />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box name="ToggleList" title="Toggle list">
                 <ToggleList />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box name="FloatingTask" title="Task: Floating">
                 <FloatingTask />
                 <FloatingTaskVariations />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box title="Floating container shape">
                 <div className="flex flex-wrap items-start gap-5">
                   <div className="space-y-2">
@@ -536,7 +536,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box title="Materials">
                 <div className="flex flex-wrap items-start gap-5">
                   <div className="space-y-2">
@@ -553,7 +553,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box name="Button" title="Buttons">
                 <div className="flex flex-wrap items-center gap-3 [&>button]:leading-5 [&>button]:font-medium">
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
@@ -578,7 +578,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box name="Button" title="Buttons: Physical">
                 <div className="flex flex-wrap items-center gap-3 [&>button]:leading-5 [&>button]:font-medium">
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
@@ -611,13 +611,13 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box name="ButtonGroup" title="Button group">
                 <ButtonGroupExample />
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="InternalLink" title="Internal Link">
                 <div className="space-y-2">
                   <div>
@@ -637,7 +637,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="ExternalLink" title="External Link">
                 <div className="flex flex-col items-start gap-2">
                   <ExternalLink
@@ -653,7 +653,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box title="Input: Text">
                 <label className="block w-full sm:max-w-xs">
                   <span className="sr-only">Text input</span>
@@ -666,7 +666,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box title="Input: Search">
                 <label className="relative block w-full sm:max-w-xs">
                   <span className="sr-only">Search input</span>
@@ -684,7 +684,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Box" title="Box">
                 <ul className="grid gap-5 sm:grid-cols-2">
                   <Box as="li" headingAs="h3" name="Box" title="Exercise title">
@@ -704,7 +704,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box title="Text Area">
                 <textarea
                   aria-label="Text area example"
@@ -715,49 +715,49 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Breadcrumbs" title="Breadcrumbs">
                 <Breadcrumbs />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Badges" title="Badges">
                 <Badges />
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="BackButton" title="Back Button">
                 <BackButton href="/labs" name="Labs" />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Logo" title="Logo">
                 <Logo />
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Slider" title="Slider">
                 <Slider />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="ContextMenu" title="Context Menus">
                 <ContextMenu />
               </Box>
             </div>
 
-            <div className="border-border-hover md:after:border-border-hover relative flex min-w-0 flex-col border-b border-dashed py-5 md:pr-5 md:after:absolute md:after:inset-y-5 md:after:right-0 md:after:border-r md:after:border-dashed [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Tabs" title="Tabs">
                 <Tabs />
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-dashed py-5 md:pl-5 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box title="Input: Date">
                 <label className="block w-full sm:max-w-xs">
                   <span className="text-foreground/80 mb-1 block text-sm font-medium">
@@ -768,7 +768,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="border-border-hover flex min-w-0 flex-col border-b border-b-0 border-dashed py-5 pb-0 md:col-span-2 [&>div]:flex-1">
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box name="Colors" title="Colors">
                 <DesignTokens />
               </Box>
