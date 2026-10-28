@@ -58,7 +58,7 @@ export default function DesignSystem() {
       <PageHeader back={{ href: "/", name: "Home" }} path="/design">
         <PageTitle>Design</PageTitle>
         <PageDescription>
-          Shared design system for{" "}
+          Design system for{" "}
           <ExternalLink href="https://haritssr.com" name="haritssr.com" /> and{" "}
           <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
         </PageDescription>
