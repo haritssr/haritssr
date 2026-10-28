@@ -6,6 +6,17 @@ const decode = (text: string) => {
   }
 };
 
+export function normalizePastedURL(input: string) {
+  const source = input.trim();
+  if (
+    (source.startsWith("‘") && source.endsWith("’")) ||
+    (source.startsWith("“") && source.endsWith("”"))
+  ) {
+    return source.slice(1, -1).trim();
+  }
+  return input;
+}
+
 export function parseURL(input: string) {
   const source = input.trim();
   if (!source || !URL.canParse(source)) {

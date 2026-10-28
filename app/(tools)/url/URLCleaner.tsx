@@ -10,7 +10,12 @@ import Button from "@/components/Button";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
 
-import { cleanURL, parameterLabel, parseURL } from "./urlParts";
+import {
+  cleanURL,
+  normalizePastedURL,
+  parameterLabel,
+  parseURL,
+} from "./urlParts";
 
 function resizeURLField(field: HTMLTextAreaElement) {
   field.style.height = "auto";
@@ -173,10 +178,12 @@ export default function URLCleaner() {
             rows={1}
             spellCheck={false}
             autoCapitalize="none"
-            placeholder="https://example.com/page?utm_source=newsletter&category=books#reviews"
+            placeholder="Paste a URL to inspect and clean"
             value={input}
             aria-label="Original URL"
-            aria-describedby={input.trim() && !parsed ? "url-help" : undefined}
+            aria-describedby={
+              input.trim() && !parsed ? "url-example url-help" : "url-example"
+            }
             aria-invalid={input.trim() !== "" && !parsed}
             onChange={(event) => {
               resizeURLField(event.currentTarget);
@@ -185,7 +192,34 @@ export default function URLCleaner() {
               setRemoveFragment(false);
               setFeedback("");
             }}
+            onPaste={(event) => {
+              const pasted = event.clipboardData.getData("text/plain");
+              const normalized = normalizePastedURL(pasted);
+              if (normalized === pasted) {
+                return;
+              }
+              event.preventDefault();
+              const field = event.currentTarget;
+              field.setRangeText(
+                normalized,
+                field.selectionStart,
+                field.selectionEnd,
+                "end"
+              );
+              resizeURLField(field);
+              setInput(field.value);
+              setRemoved(new Set());
+              setRemoveFragment(false);
+              setFeedback("");
+            }}
           />
+          <p
+            id="url-example"
+            className="text-muted/80 mt-2 text-sm wrap-anywhere"
+          >
+            Example:
+            https://docs.example.com:8443/guides/setup?lang=en&amp;view=compact#install
+          </p>
           {input ? (
             <div className="absolute top-[7px] right-[7px] flex items-center gap-1.5">
               <button
