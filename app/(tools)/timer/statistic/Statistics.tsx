@@ -6,6 +6,7 @@ import useSWR from "swr";
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import {
   formatTimerTime,
+  shiftTimerDate,
   timerDate,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
@@ -46,9 +47,17 @@ export default function Statistics() {
     }
   );
 
-  const lastBroadcast = useRef<string | undefined>(undefined);
+  const lastBroadcast = useRef<
+    { revision: string; mode: TimerHistory["mode"] } | undefined
+  >(undefined);
   useEffect(() => {
     lastBroadcast.current = undefined;
+    if (!validDate) {
+      return () => {
+        /* No history subscription for an invalid selection. */
+      };
+    }
+    const firstDate = shiftTimerDate(date, -29);
     try {
       return subscribeTimerChanges((next) => {
         if (next !== undefined) {
@@ -57,11 +66,19 @@ export default function Statistics() {
             next.day.date,
             next.day.revision,
             next.notifications,
+            next.mode,
           ]);
-          if (lastBroadcast.current === revision) {
+          if (lastBroadcast.current?.revision === revision) {
             return;
           }
-          lastBroadcast.current = revision;
+          const modeChanged = lastBroadcast.current?.mode !== next.mode;
+          lastBroadcast.current = { revision, mode: next.mode };
+          const affectsHistory = next.notifications.some(
+            (notice) => notice.date >= firstDate && notice.date <= date
+          );
+          if (!modeChanged && date < next.today && !affectsHistory) {
+            return;
+          }
         }
         void mutate();
       });
@@ -70,7 +87,7 @@ export default function Statistics() {
         // Focus refresh and polling remain available if messaging fails.
       };
     }
-  }, [date, mutate]);
+  }, [date, mutate, validDate]);
 
   return (
     <div className="space-y-10">

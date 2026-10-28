@@ -3,6 +3,12 @@ import type {
   TimerPreferences,
   TimerSnapshot,
 } from "@/app/(tools)/timer/utils/timer";
+import {
+  TIMER_REQUEST_STARTED_HEADER,
+  TIMER_RESPONSE_TIME_HEADER,
+  timerClockOffset,
+} from "@/app/(tools)/timer/utils/timerClock";
+import type { TimerResponseTiming } from "@/app/(tools)/timer/utils/timerClock";
 
 export const TIMER_SNAPSHOT_KEY = "/api/timer";
 export function timerHistoryKey(date: string) {
@@ -15,15 +21,36 @@ export interface ReceivedTimerSnapshot extends TimerSnapshot {
 
 async function fetchTimer(
   url: string,
-  options?: RequestInit
-): Promise<unknown> {
+  options?: RequestInit,
+  previous?: TimerSnapshot
+) {
+  const started = performance.now();
   const response = await fetch(url, {
     ...options,
     cache: "no-store",
     signal: options?.signal ?? AbortSignal.timeout(15_000),
   });
-  const result: unknown = await response.json();
-  if (!response.ok) {
+  let result: unknown;
+  if (response.status === 304 && previous !== undefined) {
+    const now = response.headers.get(TIMER_RESPONSE_TIME_HEADER);
+    if (now === null) {
+      throw new Error("Timer time could not be synchronized. Try again.");
+    }
+    result = { ...previous, now };
+  } else {
+    result = await response.json();
+  }
+  // Schema loading and validation can finish later than the network response.
+  const timing: TimerResponseTiming = {
+    receivedAt: Date.now(),
+    elapsed: performance.now() - started,
+    serverReceivedAt: null,
+  };
+  const serverReceivedAt = response.headers.get(TIMER_REQUEST_STARTED_HEADER);
+  if (serverReceivedAt !== null && serverReceivedAt.trim() !== "") {
+    timing.serverReceivedAt = Number(serverReceivedAt);
+  }
+  if (!response.ok && response.status !== 304) {
     const message =
       typeof result === "object" &&
       result !== null &&
@@ -33,7 +60,7 @@ async function fetchTimer(
         : "Timer data could not be loaded.";
     throw new Error(message);
   }
-  return result;
+  return { data: result, timing, version: response.headers.get("ETag") };
 }
 
 async function loadTimer<T>(
@@ -54,29 +81,49 @@ async function loadTimer<T>(
 
 function received(
   snapshot: TimerSnapshot,
-  receivedAt = Date.now()
+  timing: TimerResponseTiming
 ): ReceivedTimerSnapshot {
   return {
     ...snapshot,
-    clockOffset: Date.parse(snapshot.now) - receivedAt,
+    clockOffset: timerClockOffset(snapshot.now, timing),
   };
 }
 
 let snapshotRequest: Promise<ReceivedTimerSnapshot> | undefined;
+let snapshotCache: { version: string; snapshot: TimerSnapshot } | undefined;
+
+function rememberSnapshot(snapshot: TimerSnapshot, version: string | null) {
+  snapshotCache = version === null ? undefined : { version, snapshot };
+}
 
 export async function fetchTimerSnapshot() {
   snapshotRequest ??= loadTimer(async (signal) => {
+    const previous = snapshotCache;
     const [{ snapshotSchema }, result] = await Promise.all([
       import("@/app/(tools)/timer/utils/timerValidation"),
-      fetchTimer("/api/timer", { signal }),
+      fetchTimer(
+        "/api/timer",
+        {
+          signal,
+          headers:
+            previous === undefined
+              ? undefined
+              : { "If-None-Match": previous.version },
+        },
+        previous?.snapshot
+      ),
     ]);
-    const snapshot = snapshotSchema.parse(result);
-    notifyTimerChanges(snapshot);
-    return received(snapshot);
+    const snapshot = received(snapshotSchema.parse(result.data), result.timing);
+    rememberSnapshot(snapshot, result.version);
+    notifyTimerChanges(snapshot, result.version);
+    return snapshot;
   });
   const request = snapshotRequest;
   try {
     return await request;
+  } catch (error) {
+    snapshotCache = undefined;
+    throw error;
   } finally {
     if (snapshotRequest === request) {
       snapshotRequest = undefined;
@@ -90,22 +137,23 @@ export async function fetchTimerHistory(date: string) {
       import("@/app/(tools)/timer/utils/timerValidation"),
       fetchTimer(`/api/timer?date=${date}`, { signal }),
     ]);
-    return historySchema.parse(result);
+    return historySchema.parse(result.data);
   });
 }
 
 export async function sendTimerAction(action: TimerAction) {
   const { changeSchema } =
     await import("@/app/(tools)/timer/utils/timerValidation");
-  const result = changeSchema.parse(
-    await fetchTimer("/api/timer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(action),
-    })
-  );
-  notifyTimerChanges(result.snapshot);
-  return { ...result, snapshot: received(result.snapshot) };
+  const response = await fetchTimer("/api/timer", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(action),
+  });
+  const result = changeSchema.parse(response.data);
+  const snapshot = received(result.snapshot, response.timing);
+  rememberSnapshot(snapshot, response.version);
+  notifyTimerChanges(snapshot, response.version);
+  return { ...result, snapshot };
 }
 
 export async function saveTimerPreferences(
@@ -113,16 +161,14 @@ export async function saveTimerPreferences(
 ) {
   const { snapshotSchema } =
     await import("@/app/(tools)/timer/utils/timerValidation");
-  const result = received(
-    snapshotSchema.parse(
-      await fetchTimer("/api/timer", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(patch),
-      })
-    )
-  );
-  notifyTimerChanges(result);
+  const response = await fetchTimer("/api/timer", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(patch),
+  });
+  const result = received(snapshotSchema.parse(response.data), response.timing);
+  rememberSnapshot(result, response.version);
+  notifyTimerChanges(result, response.version);
   return result;
 }
 
@@ -132,16 +178,27 @@ function timerChangeSource() {
   return changeSource;
 }
 
-function notifyTimerChanges(snapshot: TimerSnapshot) {
+function notifyTimerChanges(
+  snapshot: ReceivedTimerSnapshot,
+  version: string | null
+) {
   try {
     if (!("BroadcastChannel" in window)) {
       return;
     }
     const channel = new BroadcastChannel("haritssr-timer");
+    const sentAt = Date.now();
+    const { clockOffset, ...state } = snapshot;
+    // The broadcast timestamp and sentAt must describe the same instant, even
+    // when validation or a hidden receiving tab delays delivery.
     const message = {
       source: timerChangeSource(),
-      snapshot,
-      sentAt: Date.now(),
+      snapshot: {
+        ...state,
+        now: new Date(sentAt + clockOffset).toISOString(),
+      },
+      sentAt,
+      version,
     };
     // oxlint-disable-next-line unicorn/require-post-message-target-origin -- BroadcastChannel has no targetOrigin parameter.
     channel.postMessage(message);
@@ -185,8 +242,22 @@ export function subscribeTimerChanges(
           ? data.sentAt
           : Date.now();
       if (!disposed) {
+        if (result.success) {
+          rememberSnapshot(
+            result.data,
+            "version" in data && typeof data.version === "string"
+              ? data.version
+              : null
+          );
+        }
         listener(
-          result.success ? received(result.data, receivedAt) : undefined
+          result.success
+            ? received(result.data, {
+                receivedAt,
+                elapsed: 0,
+                serverReceivedAt: null,
+              })
+            : undefined
         );
       }
     } catch {

@@ -21,9 +21,16 @@ import {
   timerDate,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
+import {
+  TIMER_REQUEST_STARTED_HEADER,
+  TIMER_RESPONSE_TIME_HEADER,
+} from "@/app/(tools)/timer/utils/timerClock";
 
 export const runtime = "nodejs";
 const headers = { "Cache-Control": "private, no-store", Vary: "Cookie" };
+function timedHeaders(started: number) {
+  return { ...headers, [TIMER_REQUEST_STARTED_HEADER]: String(started) };
+}
 function failure(error: unknown) {
   if (error instanceof TimerStoreError || error instanceof ZodError) {
     return NextResponse.json(
@@ -79,6 +86,7 @@ function preview(date: string | null) {
 }
 
 export async function GET(request: Request) {
+  const started = Date.now();
   try {
     const query = new URL(request.url).searchParams;
     const owner = await isTimerOwner();
@@ -93,17 +101,31 @@ export async function GET(request: Request) {
     }
     const date = query.get("date");
     if (!owner) {
-      return NextResponse.json(preview(date), { headers });
+      return NextResponse.json(preview(date), {
+        headers: timedHeaders(started),
+      });
     }
-    const result =
-      date === null ? await getTimerSnapshot() : await getTimerHistory(date);
-    return NextResponse.json(result, { headers });
+    if (date !== null) {
+      return NextResponse.json(await getTimerHistory(date), {
+        headers: timedHeaders(started),
+      });
+    }
+    const result = await getTimerSnapshot(request.headers.get("If-None-Match"));
+    const snapshotHeaders = {
+      ...timedHeaders(started),
+      ETag: result.version,
+      [TIMER_RESPONSE_TIME_HEADER]: result.now,
+    };
+    return result.snapshot === null
+      ? new NextResponse(null, { status: 304, headers: snapshotHeaders })
+      : NextResponse.json(result.snapshot, { headers: snapshotHeaders });
   } catch (error) {
     return failure(error);
   }
 }
 
 async function write(request: Request, preferences: boolean) {
+  const started = Date.now();
   if (!timerSameOrigin(request)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403, headers });
   }
@@ -172,12 +194,12 @@ async function write(request: Request, preferences: boolean) {
         { status: 400, headers }
       );
     }
-    return NextResponse.json(
-      preferences
-        ? await changeTimerPreferences(payload)
-        : await changeTimer(payload),
-      { headers }
-    );
+    const { version, ...result } = preferences
+      ? await changeTimerPreferences(payload)
+      : await changeTimer(payload);
+    return NextResponse.json(result, {
+      headers: { ...timedHeaders(started), ETag: version },
+    });
   } catch (error) {
     return failure(error);
   } finally {

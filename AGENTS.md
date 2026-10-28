@@ -325,9 +325,14 @@ Vercel Production variables and redeploy before retrying.
   resend uncertain writes. No writable offline fallback, background scheduler,
   or Autoplay after all pages close.
 
-Snapshots read today plus running/unacknowledged dates via partial indexes;
-statistics read selected/active dates plus 30 summary rows. SQL triggers maintain
-saved totals; reads overlay live time. Backups read full history.
+Snapshot polls compare indexed day/preference revisions and running deadlines
+before loading tasks. Matching `ETag` / `If-None-Match` returns 304 with fresh
+`X-Timer-Server-Time`; mutations and broadcasts update the browser's memory-only
+snapshot version. Due transitions and midnight always force a full read. Full snapshots
+read today plus running/unacknowledged dates via partial indexes. Statistics uses
+a read-only transaction for the selected day, 30 summary rows, and running tasks
+within that window; unrelated broadcasts do not refresh historical selections.
+SQL triggers maintain saved totals; reads overlay live time. Backups read full history.
 
 Duration Presets allow 1–5 entries (one second–24 hours), Task Presets 1–10, with
 Save/Cancel. They sync and apply to Add/Edit without changing existing tasks.
@@ -342,6 +347,11 @@ warnings, `useTimerSchedule` completion/midnight refreshes, and `useTimerTicking
 Settings subscription/audio unlock. `timerInput` shares form/counter/schema limits
 while preserving broader legacy validation. Transport, scheduling, audio,
 notifications, and display clocks stay in focused `app/(tools)/timer/` modules.
+`timerClock.ts` estimates server time from monotonic request timing and the
+`X-Timer-Request-Started-At` response header, excluding server processing and
+validation delays. Same-device broadcasts preserve calibration. Visible display
+ticks align to estimated server seconds and refresh immediately after visibility
+changes; hidden display clocks stop ticking.
 
 Notifications are opt-in with on-screen fallback, no push service. Closed/suspended
 browsers may delay alerts; mobile may require installation. The existing service

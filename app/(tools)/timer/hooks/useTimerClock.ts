@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import type { TimerSnapshot } from "@/app/(tools)/timer/utils/timer";
+import { timerDisplayDelay } from "@/app/(tools)/timer/utils/timerClock";
 
 // Keep live progress updates local to the display, outside the shared provider.
 export default function useTimerClock(
@@ -19,13 +20,26 @@ export default function useTimerClock(
         /* No display clock while hidden or idle. */
       };
     }
-    const interval = window.setInterval(() => {
-      setNow(Date.now());
-    }, 1000);
-    return () => {
-      window.clearInterval(interval);
+    let timeout = 0;
+    const tick = () => {
+      window.clearTimeout(timeout);
+      if (document.hidden) {
+        return;
+      }
+      const timestamp = Date.now();
+      setNow(timestamp);
+      timeout = window.setTimeout(
+        tick,
+        timerDisplayDelay(timestamp, clockOffset)
+      );
     };
-  }, [ticking]);
+    tick();
+    document.addEventListener("visibilitychange", tick);
+    return () => {
+      window.clearTimeout(timeout);
+      document.removeEventListener("visibilitychange", tick);
+    };
+  }, [clockOffset, ticking]);
 
   return Math.max(now + clockOffset, Date.parse(snapshot?.now ?? "") || 0);
 }

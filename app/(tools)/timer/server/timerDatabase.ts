@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { setTimeout } from "node:timers/promises";
 
 import { createClient } from "@libsql/client";
@@ -11,6 +12,10 @@ import type {
 import type {
   TimerDay,
   TimerPreferences,
+} from "@/app/(tools)/timer/utils/timer";
+import {
+  createEmptyTimerDay,
+  timerMidnight,
 } from "@/app/(tools)/timer/utils/timer";
 import {
   daySchema,
@@ -102,10 +107,72 @@ export async function initializeTimerDatabase(client: Client) {
   }
 }
 
+const ACTIVE_DAY_DATES = `SELECT ? AS date
+  UNION SELECT date FROM timer_tasks WHERE started_at IS NOT NULL
+  UNION SELECT date FROM timer_tasks WHERE completed_at IS NOT NULL AND notification_claimed_at IS NULL`;
+
+export function timerSnapshotVersion(
+  today: string,
+  days: readonly Pick<TimerDay, "date" | "revision">[],
+  preferenceRevision: number
+) {
+  const revisions = days
+    .map((day) => [day.date, day.revision] as const)
+    .toSorted(([left], [right]) => left.localeCompare(right));
+  const hash = createHash("sha256")
+    .update(JSON.stringify([today, preferenceRevision, revisions]))
+    .digest("hex");
+  return `W/"timer-${hash}"`;
+}
+
+export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
+  const [days, preferences, running] = await tx.batch([
+    {
+      sql: `SELECT date, revision FROM timer_days WHERE date IN (${ACTIVE_DAY_DATES}) ORDER BY date`,
+      args: [today],
+    },
+    "SELECT revision FROM timer_preferences WHERE id = 1",
+    "SELECT date, started_at, duration_seconds, spent_seconds, speed FROM timer_tasks WHERE started_at IS NOT NULL",
+  ]);
+  const [preference] = preferences.rows;
+  if (preference === undefined) {
+    throw new Error("Run bun run migrate:timer to initialize Turso.");
+  }
+  let nextTransitionAt = timerMidnight(today);
+  for (const task of running.rows) {
+    if (typeof task.started_at !== "string" || typeof task.date !== "string") {
+      nextTransitionAt = 0;
+      break;
+    }
+    const finish =
+      Date.parse(task.started_at) +
+      ((Number(task.duration_seconds) - Number(task.spent_seconds)) /
+        Number(task.speed)) *
+        1000;
+    nextTransitionAt = Math.min(
+      nextTransitionAt,
+      timerMidnight(task.date),
+      Number.isFinite(finish) ? finish : 0
+    );
+  }
+  return {
+    version: timerSnapshotVersion(
+      today,
+      days.rows.map((day) => {
+        if (typeof day.date !== "string") {
+          throw new TypeError("Timer contains an invalid date.");
+        }
+        return { date: day.date, revision: Number(day.revision) };
+      }),
+      Number(preference.revision)
+    ),
+    nextTransitionAt,
+  };
+}
+
 async function dayQueries(
   tx: Transaction,
-  date?: string,
-  range?: { from: string; to: string }
+  date?: string
 ): Promise<InStatement[]> {
   if (date === undefined) {
     // Full history is reserved for backups and imports.
@@ -117,11 +184,8 @@ async function dayQueries(
   // Discover dates once. Separate branches use the small partial indexes instead
   // of scanning task history for an OR condition in both subsequent queries.
   const dates = await tx.execute({
-    sql: `SELECT ? AS date
-      UNION SELECT date FROM timer_tasks WHERE started_at IS NOT NULL
-      UNION SELECT date FROM timer_tasks WHERE completed_at IS NOT NULL AND notification_claimed_at IS NULL
-      ${range === undefined ? "" : "UNION SELECT date FROM timer_days WHERE date BETWEEN ? AND ?"}`,
-    args: range === undefined ? [date] : [date, range.from, range.to],
+    sql: ACTIVE_DAY_DATES,
+    args: [date],
   });
   const args = dates.rows.map((row) => row.date);
   const placeholders = args.map(() => "?").join(", ");
@@ -175,13 +239,9 @@ export async function readTimerDays(tx: Transaction, date?: string) {
   return decodeDays(days, tasks);
 }
 
-export async function readTimerState(
-  tx: Transaction,
-  date: string,
-  range?: { from: string; to: string }
-) {
+export async function readTimerState(tx: Transaction, date: string) {
   const [days, tasks, preferences] = await tx.batch([
-    ...(await dayQueries(tx, date, range)),
+    ...(await dayQueries(tx, date)),
     "SELECT * FROM timer_preferences WHERE id = 1",
   ]);
   const [row] = preferences.rows;
@@ -388,19 +448,39 @@ export async function writeTimerPreferences(
   });
 }
 
-export async function readTimerTotals(
+export async function readTimerHistoryState(
   tx: Transaction,
   from: string,
-  to: string
+  date: string
 ) {
-  const result = await tx.execute({
-    sql: "SELECT date, spent_seconds FROM timer_days WHERE date BETWEEN ? AND ?",
-    args: [from, to],
-  });
-  return new Map(
-    result.rows.map((row) => [
-      typeof row.date === "string" ? row.date : "",
-      Number(row.spent_seconds),
-    ])
-  );
+  const [days, tasks, running] = await tx.batch([
+    {
+      sql: "SELECT date, revision, spent_seconds FROM timer_days WHERE date BETWEEN ? AND ? ORDER BY date",
+      args: [from, date],
+    },
+    {
+      sql: "SELECT * FROM timer_tasks WHERE date = ? ORDER BY position",
+      args: [date],
+    },
+    {
+      // Keep this branch on the running-only index instead of scanning every
+      // task in the history window to satisfy the ordering.
+      sql: "SELECT * FROM timer_tasks INDEXED BY timer_tasks_running WHERE started_at IS NOT NULL AND date BETWEEN ? AND ? ORDER BY date, position",
+      args: [from, date],
+    },
+  ]);
+  return {
+    day:
+      decodeDays(days, tasks).find((day) => day.date === date) ??
+      createEmptyTimerDay(date),
+    runningDays: decodeDays(days, running).filter(
+      (day) => day.tasks.length > 0
+    ),
+    totals: new Map(
+      days.rows.map((row) => [
+        typeof row.date === "string" ? row.date : "",
+        Number(row.spent_seconds),
+      ])
+    ),
+  };
 }

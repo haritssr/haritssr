@@ -78,6 +78,11 @@ time, so a task moves into the table as soon as its duration is reached.
 The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
+Display ticks align to estimated server-second boundaries, pause while the tab
+is hidden, and refresh immediately on return. [timerClock.ts](../utils/timerClock.ts)
+estimates the clock offset from monotonic request duration and server timestamps,
+excluding server processing time. Response timing is captured before validation,
+and broadcasts preserve that calibration even when delivery is delayed.
 
 Outside `/timer`, `FloatingTimerDock` reuses compact `TaskProgress`, the icon presentation
 of `TaskActions`. Its wrapping title and muted remaining time (prefixed with `-`) sit above the progress bar
@@ -155,6 +160,10 @@ modules keep independent work separate:
 
 - [timerClient.ts](../utils/timerClient.ts) handles protected API requests,
   response validation, cache keys, and validated snapshot broadcasts between tabs.
+  In-memory snapshot versions travel through `ETag` / `If-None-Match`;
+  unchanged polls reuse confirmed tasks from a 304 response with fresh server
+  clock headers. Saves and broadcasts update the same memory cache. Failed
+  requests discard the transport cache so retries fetch full data.
   Concurrent snapshot reads in one tab share a single request. Snapshot and
   history reads start alongside validation-module loading and have a ten-second
   deadline covering both operations. Initial snapshot failures retry at most
@@ -166,8 +175,12 @@ modules keep independent work separate:
 - [timerDatabase.ts](../server/timerDatabase.ts) owns SQL mapping and atomic
   Turso transactions, with indexed active/pending-date discovery performed once,
   date-scoped batched reads, changed-row writes, and a reused runtime client.
-  Statistics reads only its 30-day window plus today and outstanding tasks;
-  backups and imports still read all history. Run `bun run migrate:timer` to add
+  Unchanged snapshot probes read only day/preference revisions and running
+  deadlines, using the existing partial indexes. A due completion or midnight
+  bypasses the version match. History uses a read-only transaction for selected
+  task rows, 30 summary rows, and running rows within that window, without
+  fetching unrelated tasks or preferences.
+  Backups and imports still read all history. Run `bun run migrate:timer` to add
   the pending-notification partial index. This module also owns preference writes
   and historical-total queries. [timerEngine.ts](../utils/timerEngine.ts) shares
   settlement, command preparation, and preference transitions between optimistic

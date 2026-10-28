@@ -3,9 +3,11 @@ import type { Transaction } from "@libsql/client";
 
 import {
   readTimerDays,
-  readTimerTotals,
+  readTimerHistoryState,
   writeTimerPreferences,
   readTimerState,
+  readTimerSnapshotVersion,
+  timerSnapshotVersion,
   updateTimerDays,
   timerDatabaseTransaction,
   writeTimerDays,
@@ -41,10 +43,10 @@ import {
 
 export { TimerStoreError } from "@/app/(tools)/timer/utils/timerEngine";
 
-async function state(tx: Transaction, range?: { from: string; to: string }) {
+async function state(tx: Transaction) {
   const now = Date.now();
   const today = timerDate(now);
-  const { days, preferences } = await readTimerState(tx, today, range);
+  const { days, preferences } = await readTimerState(tx, today);
   const previous = structuredClone(days);
   for (const day of days) {
     const due = day.tasks.some(
@@ -76,13 +78,47 @@ function snapshot(value: Awaited<ReturnType<typeof state>>): TimerSnapshot {
   };
 }
 
-export async function getTimerSnapshot() {
+function snapshotVersion(value: Awaited<ReturnType<typeof state>>) {
+  const activeDays = value.days.filter(
+    (day) =>
+      day.date === value.today ||
+      day.tasks.some(
+        (task) =>
+          task.startedAt !== null ||
+          (task.reachedAt !== null && task.notifiedAt === null)
+      )
+  );
+  return timerSnapshotVersion(
+    value.today,
+    activeDays,
+    value.preferences.revision
+  );
+}
+
+export async function getTimerSnapshot(ifNoneMatch: string | null = null) {
   const result = await timerDatabaseTransaction(async (tx) => {
+    if (ifNoneMatch !== null) {
+      const current = await readTimerSnapshotVersion(tx, timerDate());
+      const matches =
+        ifNoneMatch === "*" ||
+        ifNoneMatch.split(",").some((tag) => tag.trim() === current.version);
+      if (matches && Date.now() < current.nextTransitionAt) {
+        return { snapshot: null, version: current.version };
+      }
+    }
     const value = await state(tx);
     await updateTimerDays(tx, value.days, value.previous);
-    return snapshot(value);
+    return {
+      snapshot: snapshot(value),
+      version: snapshotVersion(value),
+    };
   });
-  return { ...result, now: new Date().toISOString() };
+  const now = new Date().toISOString();
+  return {
+    version: result.version,
+    now,
+    snapshot: result.snapshot === null ? null : { ...result.snapshot, now },
+  };
 }
 
 export async function changeTimer(payload: unknown) {
@@ -117,7 +153,11 @@ export async function changeTimer(payload: unknown) {
       value.now
     );
     await updateTimerDays(tx, value.days, value.previous);
-    return { snapshot: snapshot(value), notification };
+    return {
+      snapshot: snapshot(value),
+      notification,
+      version: snapshotVersion(value),
+    };
   });
   return {
     ...result,
@@ -138,7 +178,7 @@ export async function changeTimerPreferences(payload: unknown) {
     value.preferences.revision += 1;
     await updateTimerDays(tx, value.days, value.previous);
     await writeTimerPreferences(tx, value.preferences);
-    return snapshot(value);
+    return { ...snapshot(value), version: snapshotVersion(value) };
   });
   return { ...result, now: new Date().toISOString() };
 }
@@ -148,41 +188,33 @@ export async function getTimerHistory(date: string) {
     throw new TimerStoreError("Choose today or an earlier valid date.");
   }
   return await timerDatabaseTransaction(async (tx) => {
-    const value = await state(tx, {
-      from: date,
-      to: date,
-    });
-    await updateTimerDays(tx, value.days, value.previous);
-    const day = structuredClone(
-      value.days.find((entry) => entry.date === date) ??
-        createEmptyTimerDay(date)
-    );
-    settleTimerDay(day, value.now);
-    const totalsByDate = await readTimerTotals(
+    const now = Date.now();
+    const { day, runningDays, totals } = await readTimerHistoryState(
       tx,
       shiftTimerDate(date, -29),
       date
     );
+    for (const running of runningDays) {
+      const elapsed = running.tasks.reduce(
+        (sum, task) => sum + taskSpent(task, running.date, now) - task.spent,
+        0
+      );
+      totals.set(running.date, (totals.get(running.date) ?? 0) + elapsed);
+    }
+    settleTimerDay(day, now);
     return {
       day,
-      today: value.today,
+      today: timerDate(now),
       mode: "turso" as const,
       totals: Array.from({ length: 30 }, (_, index) => {
         const key = shiftTimerDate(date, index - 29);
         return {
           date: key,
-          spent: value.days.some((entry) => entry.date === key)
-            ? (
-                value.days.find((entry) => entry.date === key)?.tasks ?? []
-              ).reduce(
-                (total, task) => total + taskSpent(task, key, value.now),
-                0
-              )
-            : (totalsByDate.get(key) ?? 0),
+          spent: totals.get(key) ?? 0,
         };
       }),
     };
-  });
+  }, "read");
 }
 
 export async function exportTimer() {
