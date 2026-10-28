@@ -205,7 +205,9 @@ export default function ArticleContentsPanel({
         className="bg-foreground/30 backdrop-blur-xs"
         swipeAnimation={styles.backdropFade}
       />
-      <Sheet className={`${styles.sheet} ${appearance} rounded-t-xl`}>
+      <Sheet
+        className={`${styles.sheet} ${appearance} corner-squircle rounded-t-lg supports-[corner-shape:squircle]:rounded-t-2xl`}
+      >
         <SheetContent className="flex min-h-0 flex-col outline-hidden">
           <div
             aria-hidden="true"

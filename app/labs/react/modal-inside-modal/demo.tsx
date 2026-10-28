@@ -43,7 +43,7 @@ function ProfileDialog({
           className={`bg-foreground/50 fixed inset-0 backdrop-blur-xs ${backdropLayer}`}
         />
         <Dialog.Popup
-          className={`focus-visible:outline-action border-border fixed top-1/2 left-1/2 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border bg-white p-5 shadow-xl outline-hidden focus-visible:outline-2 sm:p-6 ${popupLayer}`}
+          className={`corner-squircle focus-visible:outline-action border-border fixed top-1/2 left-1/2 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border bg-white p-5 shadow-xl outline-hidden focus-visible:outline-2 supports-[corner-shape:squircle]:rounded-xl sm:p-6 ${popupLayer}`}
         >
           <Dialog.Title className="text-foreground/90 text-lg font-semibold">
             {title}

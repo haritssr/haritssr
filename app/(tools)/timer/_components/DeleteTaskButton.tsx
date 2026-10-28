@@ -53,7 +53,7 @@ export default function DeleteTaskButton({
           forceRender
           className="bg-foreground/40 fixed inset-0 z-100"
         />
-        <AlertDialog.Popup className="border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-100 w-[calc(100%-3rem)] max-w-xs -translate-x-1/2 -translate-y-1/2 rounded-xl border p-5 outline-hidden">
+        <AlertDialog.Popup className="corner-squircle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-100 w-[calc(100%-3rem)] max-w-xs -translate-x-1/2 -translate-y-1/2 rounded-lg border p-5 outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
           <AlertDialog.Title className="font-semibold">
             Delete task?
           </AlertDialog.Title>

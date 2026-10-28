@@ -53,7 +53,7 @@ export default function Inspector({
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/50 fixed inset-0 z-70 backdrop-blur-xs" />
         <Dialog.Popup
-          className="border-border bg-background focus-visible:outline-action fixed top-1/2 left-1/2 z-80 max-h-[calc(100dvh-2rem)] w-[92vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overscroll-contain rounded-2xl border p-5 shadow-xl outline-hidden sm:p-6"
+          className="corner-squircle border-border bg-background focus-visible:outline-action fixed top-1/2 left-1/2 z-80 max-h-[calc(100dvh-2rem)] w-[92vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overscroll-contain rounded-xl border p-5 shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-3xl sm:p-6"
           finalFocus={returnFocus}
         >
           <div className="mb-5 pr-10">

@@ -12,7 +12,7 @@ export default function Modal() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/40 fixed inset-0 z-90" />
-        <Dialog.Popup className="border-border bg-background text-foreground shadow-floating fixed inset-x-0 bottom-0 z-90 flex max-h-[90dvh] flex-col gap-5 overflow-y-auto overscroll-contain rounded-t-3xl border p-4 outline-hidden sm:inset-auto sm:top-1/2 sm:left-1/2 sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl">
+        <Dialog.Popup className="corner-squircle border-border bg-background text-foreground shadow-floating fixed inset-x-0 bottom-0 z-90 flex max-h-[90dvh] flex-col gap-5 overflow-y-auto overscroll-contain rounded-t-2xl border p-4 outline-hidden supports-[corner-shape:squircle]:rounded-t-4xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-lg sm:supports-[corner-shape:squircle]:rounded-2xl">
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
             <div className="grid w-22 justify-self-start">
               <Dialog.Close

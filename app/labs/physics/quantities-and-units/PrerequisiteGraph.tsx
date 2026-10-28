@@ -143,7 +143,7 @@ export default function PrerequisiteGraph({
       </div>
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
-        <Dialog.Popup className="bg-background text-foreground fixed inset-0 z-90 flex min-h-0 flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] outline-hidden">
+        <Dialog.Popup className="corner-squircle bg-background text-foreground fixed inset-0 z-90 flex min-h-0 flex-col overflow-hidden rounded-lg pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
           <div className="border-border flex shrink-0 items-center justify-between border-b px-3 py-2.5">
             <Dialog.Title className="text-sm font-medium">
               Prerequisite Graph

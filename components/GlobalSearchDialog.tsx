@@ -159,7 +159,7 @@ export default function GlobalSearchDialog({
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
         <Dialog.Popup
-          className={`${styles.popup} border-middle-hover text-foreground bg-background z-90 flex flex-col overflow-hidden rounded-t-3xl border shadow-xl outline-hidden sm:rounded-2xl`}
+          className={`${styles.popup} corner-squircle border-middle-hover text-foreground bg-background z-90 flex flex-col overflow-hidden rounded-t-2xl border shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-t-4xl sm:rounded-xl sm:supports-[corner-shape:squircle]:rounded-3xl`}
           finalFocus={() =>
             selectedItemRef.current ? false : triggerRef.current
           }

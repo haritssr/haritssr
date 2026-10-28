@@ -43,7 +43,7 @@ export default function EditSongDialog({
         <Dialog.Backdrop className="bg-foreground/50 fixed inset-0 z-80" />
         <Dialog.Popup
           finalFocus={finalFocus}
-          className={`${styles.accent} border-border bg-background fixed top-1/2 left-1/2 z-80 max-h-[85dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border p-5 shadow-xl outline-hidden`}
+          className={`${styles.accent} corner-squircle border-border bg-background fixed top-1/2 left-1/2 z-80 max-h-[85dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border p-5 shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-2xl`}
         >
           <Dialog.Title className="text-lg font-semibold">
             Edit song details

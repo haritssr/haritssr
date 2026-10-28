@@ -260,7 +260,7 @@ export default function FlowDiagram({
       </figure>
       <Dialog.Portal>
         <Dialog.Backdrop className="flow-diagram-backdrop bg-foreground/40 fixed inset-0 z-80 backdrop-blur-xs" />
-        <Dialog.Popup className="bg-background text-foreground fixed inset-0 z-90 flex min-h-0 min-w-0 flex-col gap-4 overflow-hidden p-4 outline-hidden sm:inset-4 sm:rounded-xl sm:p-6">
+        <Dialog.Popup className="corner-squircle bg-background text-foreground fixed inset-0 z-90 flex min-h-0 min-w-0 flex-col gap-4 overflow-hidden rounded-lg p-4 outline-hidden supports-[corner-shape:squircle]:rounded-2xl sm:inset-4 sm:p-6">
           <Dialog.Title className="sr-only">{title}</Dialog.Title>
           <Dialog.Description className="sr-only">
             Drag to pan, scroll, or focus the diagram and use the arrow keys.

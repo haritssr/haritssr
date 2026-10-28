@@ -370,7 +370,7 @@ function PeriodicTablePicker({
       <Dialog.Portal>
         <Dialog.Backdrop className="bg-foreground/30 fixed inset-0 z-90 backdrop-blur-xs" />
         <Dialog.Popup
-          className="bg-background border-border text-foreground fixed top-1/2 left-1/2 z-90 flex max-h-[90dvh] w-[calc(100vw-1.5rem)] max-w-6xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl border shadow-xl outline-hidden"
+          className="corner-squircle bg-background border-border text-foreground fixed top-1/2 left-1/2 z-90 flex max-h-[90dvh] w-[calc(100vw-1.5rem)] max-w-6xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-xl border shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-3xl"
           initialFocus={selectedElementRef}
         >
           <div className="border-border flex shrink-0 items-start justify-between gap-4 border-b p-4 sm:px-6">
