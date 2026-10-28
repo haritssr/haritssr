@@ -33,6 +33,7 @@ import LoadingButton from "./LoadingButton";
 import Logo from "./Logo";
 import Modal from "./Modal";
 import NumberInput from "./NumberInput";
+import ResponsiveSettingsControl from "./ResponsiveSettingsControl";
 import Select from "./Select";
 import Slider from "./Slider";
 import Switch from "./Switch";
@@ -83,7 +84,7 @@ export default function DesignSystem() {
             </li>
             <InterfacePrinciples>
               <div>
-                <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
+                <ul className="text-muted [&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
                   <li>
                     <ExternalLink
                       href="https://lawsofux.com/law-of-proximity/"
@@ -452,6 +453,15 @@ export default function DesignSystem() {
               </Box>
             </div>
 
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
+              <Box
+                name="ResponsiveSettingsControl"
+                title="Responsive settings control"
+              >
+                <ResponsiveSettingsControl />
+              </Box>
+            </div>
+
             <div className="grid min-w-0 grid-cols-1 gap-5 md:col-span-2 md:grid-cols-2 lg:grid-cols-4">
               <div className="flex min-w-0 flex-col [&>div]:flex-1">
                 <Box name="Switch" title="Switch">
@@ -523,14 +533,9 @@ export default function DesignSystem() {
                     >
                       <div className="h-8 w-40" />
                     </div>
-                    <p className="text-muted text-center text-sm">Navigation</p>
-                  </div>
-                  <div className="space-y-2">
-                    <div
-                      aria-hidden="true"
-                      className="corner-squircle border-border bg-background/70 shadow-foreground/10 h-14 w-48 rounded-full border shadow-lg backdrop-blur-md"
-                    />
-                    <p className="text-muted text-center text-sm">Task</p>
+                    <p className="text-muted text-center text-sm">
+                      Navigation &amp; Floating Task
+                    </p>
                   </div>
                 </div>
               </Box>
@@ -546,7 +551,7 @@ export default function DesignSystem() {
                     <p className="text-muted text-center text-sm">Stand out</p>
                   </div>
                   <div className="space-y-2">
-                    <div className="floating-material h-14 w-48 rounded-xl" />
+                    <div className="floating-material h-28 w-48 rounded-xl" />
                     <p className="text-muted text-center text-sm">Floating</p>
                   </div>
                 </div>
