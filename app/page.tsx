@@ -61,7 +61,7 @@ export default function Home() {
         description={homeDescription}
         path="/"
       />
-      <div className="space-y-16 pt-2">
+      <div className="space-y-16 pt-6 sm:pt-2">
         <PersonalDetails />
         <Section title="Tools">
           <Suspense fallback={<Tools />}>
@@ -83,7 +83,7 @@ function PersonalDetails() {
       id="Identity"
       className={`${TASK_LAYOUT.surface} border-border-hover/50 min-w-0 space-y-4 p-4!`}
     >
-      <div className="flex flex-col gap-4 md:flex-row md:items-stretch">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex shrink-0 items-center gap-4">
           <Image
             alt={profileName}
@@ -101,14 +101,14 @@ function PersonalDetails() {
             </p>
           </div>
         </div>
-        <div className="border-border hidden min-w-0 flex-1 border-l border-dashed pl-4 md:block">
+        <div className="border-border hidden min-w-0 border-l border-dashed pl-4 md:col-span-2 md:block">
           <ProfileInvitation />
         </div>
       </div>
       <div className="border-border grid gap-4 border-t border-dashed pt-4 md:grid-cols-3">
         <ul
           aria-label="Profile and contacts"
-          className="text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-1.5 pl-5 wrap-break-word"
+          className="text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
         >
           <li>
             At{" "}
@@ -146,7 +146,7 @@ function PersonalDetails() {
         <Accordion className="md:hidden">
           <AccordionItem
             excludeFromContents
-            title="More info about me"
+            title="More about me"
             value="personal-notes"
             variant="profile"
           >
@@ -164,7 +164,7 @@ function ProfileInvitation() {
   return (
     <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
       <p className="text-secondary-foreground">
-        Need UI design or a high school lesson? Get in touch.
+        Need UI design or a high school lesson?
       </p>
       <ProfileActions />
     </div>
@@ -181,17 +181,17 @@ function ProfileActions() {
         >
           Request a Design Consultation
         </ButtonLink>
-        <p className="text-muted text-xs">UI/UX for web or mobile</p>
+        <p className="text-muted/80 text-xs">UI/UX for web or mobile</p>
       </div>
       <div className="flex flex-col gap-1 text-center lg:text-left">
         <ButtonLink
           href="mailto:haritssr@gmail.com?subject=Lesson%20inquiry"
           size="profile"
-          variant="profile-secondary"
+          variant="secondary"
         >
           Request a Private Lesson
         </ButtonLink>
-        <p className="text-muted text-xs">Math, physics, or chemistry</p>
+        <p className="text-muted/80 text-xs">Math, physics, or chemistry</p>
       </div>
     </div>
   );
@@ -203,7 +203,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       <ul
         aria-label="Background and tools"
         id={mobile ? "personal-notes-mobile" : "personal-notes"}
-        className="border-border text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-1.5 pl-5 wrap-break-word md:border-l md:border-dashed md:pl-9"
+        className="border-border text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:border-l md:border-dashed md:pl-9"
       >
         <li>Touch typist, ±90 WPM.</li>
         <li>Former chess player, ±2000 Elo.</li>
@@ -215,7 +215,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       </ul>
       <ul
         aria-label="Principles"
-        className="border-border text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-1.5 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+        className="border-border text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
       >
         <li>
           <ExternalLink
