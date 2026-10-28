@@ -36,7 +36,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
   }
   const fullPlayer = (
     <div
-      className={`${styles.accent} corner-squircle border-border bg-background/70 shadow-foreground/10 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full border p-2 shadow-lg backdrop-blur-md`}
+      className={`${styles.accent} border-border bg-background/70 shadow-foreground/10 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full border p-2 shadow-lg backdrop-blur-md`}
     >
       <InternalLink
         className="mr-auto min-w-0 flex-1"

@@ -151,7 +151,7 @@ function SharePreview() {
 
 function TimerPreview() {
   return (
-    <div className="corner-squircle border-border bg-background/70 shadow-foreground/10 flex min-h-13.25 w-full min-w-0 items-center gap-1.5 rounded-full border py-2 pr-2 pl-4 shadow-lg backdrop-blur-md">
+    <div className="border-border bg-background/70 shadow-foreground/10 flex min-h-13.25 w-full min-w-0 items-center gap-1.5 rounded-full border py-2 pr-2 pl-4 shadow-lg backdrop-blur-md">
       <div className="min-w-0 flex-1 space-y-1.5">
         <div className="text-foreground flex min-w-0 items-center justify-between gap-2 text-sm leading-4">
           <span className="flex min-w-0 items-center gap-1 font-medium">

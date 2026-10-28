@@ -37,14 +37,14 @@ export default function TabBarButtom({
       className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.5rem,env(safe-area-inset-bottom))]! lg:hidden"} p-2`}
     >
       <div
-        className="corner-squircle border-border bg-background/70 shadow-foreground/5 mx-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md sm:max-w-[22.4rem]"
+        className="border-border bg-background/70 shadow-foreground/5 mx-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md sm:max-w-[22.4rem]"
         data-mobile-tabbar-surface={preview ? undefined : pathname}
       >
         <div className="relative flex w-full items-center gap-0.5">
           {activeIndex === -1 ? null : (
             <div
               aria-hidden="true"
-              className="corner-squircle bg-foreground/8 pointer-events-none absolute inset-y-0 left-0 w-[calc((100%_+_0.125rem)/var(--tab-count)_-_0.125rem)] translate-x-[calc(var(--active-index)*(100%_+_0.125rem))] rounded-full transition-transform duration-200 ease-out motion-reduce:transition-none"
+              className="bg-foreground/8 pointer-events-none absolute inset-y-0 left-0 w-[calc((100%_+_0.125rem)/var(--tab-count)_-_0.125rem)] translate-x-[calc(var(--active-index)*(100%_+_0.125rem))] rounded-full transition-transform duration-200 ease-out motion-reduce:transition-none"
               style={indicatorStyle}
             />
           )}
@@ -84,7 +84,7 @@ const IconWrapper = ({
   return (
     <Link
       aria-current={current}
-      className={`corner-squircle focus-visible:outline-action relative flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full px-1 py-1 transition-[color,background-color,scale] duration-150 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 motion-safe:active:scale-95 motion-reduce:transition-none ${appearance}`}
+      className={`focus-visible:outline-action relative flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full px-1 py-1 transition-[color,background-color,scale] duration-150 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 motion-safe:active:scale-95 motion-reduce:transition-none ${appearance}`}
       href={href}
       onClick={(event) => {
         if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
