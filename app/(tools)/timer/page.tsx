@@ -33,7 +33,7 @@ export default function TimerPage() {
             prefetch={false}
             title="Open clock"
           >
-            <AnalogClock className="size-24 sm:size-32" />
+            <AnalogClock className="size-22 sm:size-28" />
           </Link>
         }
       >

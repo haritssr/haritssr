@@ -64,9 +64,7 @@ export default function NumberInput({
     >
       <div
         className={
-          variant === "field"
-            ? "flex min-h-6 items-center justify-between gap-2"
-            : "sr-only"
+          variant === "field" ? "flex min-h-6 items-center gap-1" : "sr-only"
         }
       >
         <label

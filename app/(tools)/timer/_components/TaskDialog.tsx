@@ -11,137 +11,6 @@ import Button from "@/components/Button";
 
 import TaskFormDialog from "./TaskFormDialog";
 
-const TASK_SUGGESTIONS = [
-  {
-    activity: "Read a chapter",
-    description: "Read and note the main takeaway.",
-  },
-  {
-    activity: "Take a short walk",
-    description: "Step outside for a gentle walk.",
-  },
-  {
-    activity: "Practice a skill",
-    description: "Repeat one technique with focus.",
-  },
-  {
-    activity: "Tidy the desk",
-    description: "Clear and organize the desk.",
-  },
-  {
-    activity: "Plan tomorrow",
-    description: "Pick priorities for tomorrow.",
-  },
-  {
-    activity: "Stretch",
-    description: "Stretch your back and shoulders.",
-  },
-  {
-    activity: "Review notes",
-    description: "Review notes and mark key ideas.",
-  },
-  {
-    activity: "Work on a project",
-    description: "Finish one small milestone.",
-  },
-  {
-    activity: "Get some fresh air",
-    description: "Enjoy a quiet moment outside.",
-  },
-  {
-    activity: "Do a quick workout",
-    description: "Warm up, exercise, and cool down.",
-  },
-  {
-    activity: "Rest your eyes",
-    description: "Look away and rest your eyes.",
-  },
-  {
-    activity: "Take a screen break",
-    description: "Step away from screens and rest.",
-  },
-  {
-    activity: "Breathe slowly",
-    description: "Take slow, steady breaths.",
-  },
-  {
-    activity: "Make a cup of tea",
-    description: "Enjoy tea without distractions.",
-  },
-  {
-    activity: "Water the plants",
-    description: "Check soil and water the plants.",
-  },
-  {
-    activity: "Prepare a meal",
-    description: "Prepare a nourishing meal.",
-  },
-  {
-    activity: "Fold the laundry",
-    description: "Fold clothes and put them away.",
-  },
-  {
-    activity: "Clear the inbox",
-    description: "Reply and archive old messages.",
-  },
-  {
-    activity: "Write a journal",
-    description: "Write about your day and thoughts.",
-  },
-  {
-    activity: "Sketch an idea",
-    description: "Explore a rough idea on paper.",
-  },
-  {
-    activity: "Practice guitar",
-    description: "Practice a short piece of music.",
-  },
-  {
-    activity: "Learn new words",
-    description: "Use new words in a sentence.",
-  },
-  {
-    activity: "Solve a puzzle",
-    description: "Solve and explain your reasoning.",
-  },
-  {
-    activity: "Review flashcards",
-    description: "Review cards and repeat hard ones.",
-  },
-  {
-    activity: "Draft an outline",
-    description: "List and arrange the key points.",
-  },
-  {
-    activity: "Fix a small bug",
-    description: "Reproduce, fix, and review a bug.",
-  },
-  {
-    activity: "Organize files",
-    description: "Group files and remove duplicates.",
-  },
-  {
-    activity: "Plan the week",
-    description: "Review plans and pick priorities.",
-  },
-  {
-    activity: "Call a friend",
-    description: "Catch up and give your attention.",
-  },
-  {
-    activity: "Listen to music",
-    description: "Enjoy a few uninterrupted songs.",
-  },
-  {
-    activity: "Read a poem",
-    description: "Notice imagery and rhythm.",
-  },
-  {
-    activity: "Reflect on today",
-    description: "Note wins and one improvement.",
-  },
-];
-
 export function EditTask({
   task,
   date,
@@ -228,10 +97,6 @@ export function AddTask({ disabled }: { disabled: boolean }) {
   const { act, snapshot, drafts } = useTimer("act", "snapshot", "drafts");
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
-  const [suggestion, setSuggestion] = useState({
-    activity: "",
-    description: "",
-  });
   const [formError, setFormError] = useState<string | null>(null);
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -283,13 +148,6 @@ export function AddTask({ disabled }: { disabled: boolean }) {
     <Dialog.Root
       open={open}
       onOpenChange={(value) => {
-        if (value) {
-          setSuggestion(
-            TASK_SUGGESTIONS[
-              Math.floor(Math.random() * TASK_SUGGESTIONS.length)
-            ] ?? { activity: "New task", description: "" }
-          );
-        }
         setOpen(value);
         setFormError(null);
       }}
@@ -306,8 +164,8 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         title="New Task"
         submitLabel="Add"
         showTaskPresets
-        defaultActivity={drafts.add?.activity ?? suggestion.activity}
-        defaultDescription={drafts.add?.description ?? suggestion.description}
+        defaultActivity={drafts.add?.activity ?? ""}
+        defaultDescription={drafts.add?.description ?? ""}
         defaultDuration={drafts.add?.duration ?? 300}
         busy={false}
         error={formError}
