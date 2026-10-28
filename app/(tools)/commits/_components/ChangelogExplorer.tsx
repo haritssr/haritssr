@@ -1,6 +1,8 @@
 "use client";
 
 import {
+  ArrowPathIcon,
+  CalendarDaysIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   MagnifyingGlassIcon,
@@ -17,6 +19,7 @@ import useSWR from "swr";
 import CommitActivityChart from "@/app/(tools)/commits/_components/CommitActivityChart";
 import CommitTable from "@/app/(tools)/commits/_components/CommitTable";
 import Button from "@/components/Button";
+import { ButtonGroup, ButtonGroupItem } from "@/components/ButtonGroup";
 import Section from "@/components/Section";
 import { SelectField } from "@/components/SelectField";
 import {
@@ -25,7 +28,10 @@ import {
   periodRange,
   shiftPeriod,
 } from "@/utils/commits/changelog";
-import type { ChangelogPeriod } from "@/utils/commits/changelog";
+import type {
+  ActivityBucket,
+  ChangelogPeriod,
+} from "@/utils/commits/changelog";
 import { parseChangelogResult } from "@/utils/commits/changelogResponse";
 import {
   changelogParams,
@@ -45,7 +51,7 @@ const periodOptions: readonly { value: ChangelogPeriod; label: string }[] = [
 ];
 const typeOptions = [{ value: "all", label: "All changes" }, ...changeTypes];
 const INPUT_CLASS_NAME =
-  "interactive-elevation form-control border-border focus:border-action focus:ring-action/20 w-full min-w-0 rounded-lg border bg-white px-3 py-2 text-sm text-foreground outline-hidden placeholder:text-muted focus:ring-2";
+  "corner-squircle form-control border-border focus:border-action focus:ring-action/20 w-full min-w-0 rounded-md border bg-white px-3 py-2.5 text-sm text-foreground outline-hidden placeholder:text-muted focus:ring-2 supports-[corner-shape:squircle]:rounded-xl";
 const monthFormatter = new Intl.DateTimeFormat("en-GB", {
   month: "long",
   year: "numeric",
@@ -205,38 +211,7 @@ export default function ChangelogExplorer({
           </Button>
         </div>
       ) : null}
-      <Section
-        title="Activity"
-        description={`Commits per ${graphUnit} for ${label.toLowerCase()}. ${period === "day" ? "Hover a point for its count." : "Select a point to explore that period."} The graph follows all active filters.`}
-      >
-        <dl className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-          <Summary
-            label="Matching commits"
-            value={numberFormatter.format(total)}
-            detail={
-              type === "all"
-                ? "Across all change types"
-                : (changeTypes.find((entry) => entry.value === type)?.label ??
-                  type)
-            }
-          />
-          <Summary
-            label="Active days"
-            value={numberFormatter.format(activeDays)}
-            detail="Days with at least one matching commit"
-          />
-          <Summary
-            label="Busiest day"
-            value={
-              busiest === undefined ? "0" : numberFormatter.format(busiest[1])
-            }
-            detail={
-              busiest === undefined
-                ? "No activity in this selection"
-                : `${formatDay(busiest[0])} · matching commits`
-            }
-          />
-        </dl>
+      <Section title="Activity">
         <CommitActivityChart
           buckets={buckets}
           title={`Commits by ${graphUnit}`}
@@ -250,11 +225,19 @@ export default function ChangelogExplorer({
                   pickPeriod(bucket.period, bucket.key);
                 }
           }
-        />
+        >
+          <ActivitySummary
+            period={period}
+            buckets={buckets}
+            total={total}
+            activeDays={activeDays}
+            busiest={busiest}
+            type={type}
+          />
+        </CommitActivityChart>
         <p className="text-muted text-xs">
-          Commit counts show how often changes were recorded; they do not
-          measure the size of a change. Older messages without a recognized
-          commit prefix appear under Other.
+          Counts show recorded commits, not the size of each change;
+          unrecognized commit types appear under Other.
         </p>
       </Section>
 
@@ -342,114 +325,135 @@ function ChangelogFilters({
   const selectedRange = periodRange(period, anchor);
   return (
     <Section title="Filters">
-      <div className="flex flex-wrap gap-2">
-        {(["day", "week", "month", "year"] as const).map((value) => {
-          const currentRange = periodRange(value, initialDay);
-          const isActive =
-            period === value &&
-            selectedRange?.start === currentRange?.start &&
-            selectedRange?.end === currentRange?.end;
+      <div className="corner-squircle border-border bg-surface space-y-4 rounded-xl border p-4 supports-[corner-shape:squircle]:rounded-3xl sm:p-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+          <label className="min-w-0 flex-1" htmlFor={`${inputId}-search`}>
+            <span className="sr-only">Search commits</span>
+            <div className="relative">
+              <MagnifyingGlassIcon
+                aria-hidden="true"
+                className="text-muted pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+              />
+              <input
+                autoComplete="off"
+                className={`${INPUT_CLASS_NAME} pl-9`}
+                id={`${inputId}-search`}
+                onChange={(event) => {
+                  onQueryChange(event.currentTarget.value);
+                }}
+                placeholder="Search messages or commit hashes…"
+                type="search"
+                value={query}
+              />
+            </div>
+          </label>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="text-muted text-sm">Latest</span>
+            <ButtonGroup aria-label="Latest commit periods">
+              {(["day", "week", "month", "year"] as const).map((value) => {
+                const currentRange = periodRange(value, initialDay);
+                const isActive =
+                  period === value &&
+                  selectedRange?.start === currentRange?.start &&
+                  selectedRange?.end === currentRange?.end;
 
-          return (
-            <Button
-              aria-pressed={isActive}
-              className="aria-pressed:border-border-hover aria-pressed:bg-middle-hover aria-pressed:text-foreground aria-pressed:hover:bg-middle-hover"
-              key={value}
-              onClick={() => {
-                pickPeriod(value, initialDay);
-              }}
-              variant="secondary"
-            >
-              {value === "day" ? "Latest day" : `Latest ${value}`}
-            </Button>
-          );
-        })}
-        <Button
-          disabled={!activeFilter}
-          onClick={resetFilters}
-          variant="secondary"
-        >
-          Reset filters
-        </Button>
-      </div>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <SelectField
-          label="Time period"
-          options={periodOptions}
-          value={period}
-          onValueChange={(value) => {
-            const option = periodOptions.find((entry) => entry.value === value);
-            if (option) {
-              pickPeriod(option.value);
-            }
-          }}
-        />
-        <DateFilter
-          period={period}
-          anchor={anchor}
-          firstDay={firstDay}
-          lastDay={lastDay}
-          onChange={(day) => {
-            pickPeriod(period, day);
-          }}
-        />
-        <SelectField
-          label="Change type"
-          options={typeOptions}
-          value={type}
-          onValueChange={(value) => {
-            onTypeChange(value);
-          }}
-        />
-        <label className="min-w-0 space-y-2" htmlFor={`${inputId}-search`}>
-          <span className="text-foreground/80 block text-sm font-medium">
-            Search commits
-          </span>
-          <div className="relative">
-            <MagnifyingGlassIcon
-              aria-hidden="true"
-              className="text-muted pointer-events-none absolute top-2.5 left-3 size-4"
-            />
-            <input
-              autoComplete="off"
-              className={`${INPUT_CLASS_NAME} pl-9`}
-              id={`${inputId}-search`}
-              onChange={(event) => {
-                onQueryChange(event.currentTarget.value);
-              }}
-              placeholder="Message or hash…"
-              type="search"
-              value={query}
-            />
+                return (
+                  <ButtonGroupItem
+                    aria-label={`Latest ${value}`}
+                    aria-pressed={isActive}
+                    className="bg-secondary-button-surface aria-pressed:border-action aria-pressed:bg-action! aria-pressed:hover:bg-action-hover! min-h-10 px-3 capitalize aria-pressed:z-10 aria-pressed:text-white"
+                    key={value}
+                    onClick={() => {
+                      pickPeriod(value, initialDay);
+                    }}
+                  >
+                    {value}
+                  </ButtonGroupItem>
+                );
+              })}
+            </ButtonGroup>
           </div>
-        </label>
-      </div>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-foreground font-medium">{label}</p>
-        {period === "all" ? null : (
-          <div className="flex gap-2">
-            <Button
-              aria-label={`Previous ${period}`}
-              disabled={previousEnd < firstDay}
-              onClick={() => {
-                pickPeriod(period, previous);
-              }}
-              variant="secondary"
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <SelectField
+            label="Time period"
+            options={periodOptions}
+            value={period}
+            onValueChange={(value) => {
+              const option = periodOptions.find(
+                (entry) => entry.value === value
+              );
+              if (option) {
+                pickPeriod(option.value);
+              }
+            }}
+          />
+          <DateFilter
+            period={period}
+            anchor={anchor}
+            firstDay={firstDay}
+            lastDay={lastDay}
+            onChange={(day) => {
+              pickPeriod(period, day);
+            }}
+          />
+          <SelectField
+            label="Change type"
+            options={typeOptions}
+            value={type}
+            onValueChange={onTypeChange}
+          />
+        </div>
+        <div className="border-border flex flex-wrap items-center justify-between gap-3 border-t border-dashed pt-4">
+          <div className="flex min-w-0 flex-wrap items-center gap-3">
+            {period === "all" ? null : (
+              <ButtonGroup aria-label="Navigate commit periods">
+                <ButtonGroupItem
+                  aria-label={`Previous ${period}`}
+                  className="bg-secondary-button-surface size-10 p-0"
+                  disabled={previousEnd < firstDay}
+                  onClick={() => {
+                    pickPeriod(period, previous);
+                  }}
+                  title={`Previous ${period}`}
+                >
+                  <ChevronLeftIcon aria-hidden="true" className="size-4.5" />
+                </ButtonGroupItem>
+                <ButtonGroupItem
+                  aria-label={`Next ${period}`}
+                  className="bg-secondary-button-surface size-10 p-0"
+                  disabled={nextStart > lastDay}
+                  onClick={() => {
+                    pickPeriod(period, next);
+                  }}
+                  title={`Next ${period}`}
+                >
+                  <ChevronRightIcon aria-hidden="true" className="size-4.5" />
+                </ButtonGroupItem>
+              </ButtonGroup>
+            )}
+            <p
+              aria-live="polite"
+              aria-atomic="true"
+              className="text-foreground flex min-w-0 items-center gap-2 text-sm font-medium"
             >
-              <ChevronLeftIcon aria-hidden="true" className="size-4" /> Prev
-            </Button>
-            <Button
-              aria-label={`Next ${period}`}
-              disabled={nextStart > lastDay}
-              onClick={() => {
-                pickPeriod(period, next);
-              }}
-              variant="secondary"
-            >
-              Next <ChevronRightIcon aria-hidden="true" className="size-4" />
-            </Button>
+              <CalendarDaysIcon
+                aria-hidden="true"
+                className="text-muted size-4 shrink-0"
+              />
+              {label}
+            </p>
           </div>
-        )}
+          <Button
+            className="min-h-10"
+            disabled={!activeFilter}
+            onClick={resetFilters}
+            variant="ghost"
+          >
+            <ArrowPathIcon aria-hidden="true" className="size-4" />
+            Reset filters
+          </Button>
+        </div>
       </div>
     </Section>
   );
@@ -494,7 +498,7 @@ function DateFilter({
       }}
     />
   ) : (
-    <label className="min-w-0 space-y-2" htmlFor={`${inputId}-date`}>
+    <label className="min-w-0 space-y-1.5" htmlFor={`${inputId}-date`}>
       <span className="text-foreground/80 block text-sm font-medium">
         {dateLabel}
       </span>
@@ -515,6 +519,64 @@ function DateFilter({
   );
 }
 
+function ActivitySummary({
+  period,
+  buckets,
+  total,
+  activeDays,
+  busiest,
+  type,
+}: {
+  period: ChangelogPeriod;
+  buckets: readonly ActivityBucket[];
+  total: number;
+  activeDays: number;
+  busiest: ChangelogResult["busiest"];
+  type: string;
+}) {
+  let activeLabel = "Active days";
+  let activeValue = activeDays;
+  let activeDetail = "Days with matching commits";
+  let peakLabel = "Busiest day";
+  let peakValue = "—";
+  let peakDetail = "No matching activity";
+  if (period === "day") {
+    activeLabel = "Active hours";
+    activeValue = buckets.filter((bucket) => bucket.count > 0).length;
+    activeDetail = "Hours with matching commits";
+    peakLabel = "Peak hour";
+    const peakHour = buckets
+      .toSorted((left, right) => right.count - left.count)
+      .find((bucket) => bucket.count > 0);
+    if (peakHour) {
+      peakValue = peakHour.label;
+      peakDetail = `${numberFormatter.format(peakHour.count)} matching commits`;
+    }
+  } else if (busiest) {
+    peakValue = numberFormatter.format(busiest[1]);
+    peakDetail = formatDay(busiest[0]);
+  }
+  return (
+    <dl className="border-border sm:divide-border grid grid-cols-1 gap-4 border-y border-dashed py-5 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-dashed">
+      <Summary
+        label="Matching commits"
+        value={numberFormatter.format(total)}
+        detail={
+          type === "all"
+            ? "All change types"
+            : (changeTypes.find((entry) => entry.value === type)?.label ?? type)
+        }
+      />
+      <Summary
+        label={activeLabel}
+        value={numberFormatter.format(activeValue)}
+        detail={activeDetail}
+      />
+      <Summary label={peakLabel} value={peakValue} detail={peakDetail} />
+    </dl>
+  );
+}
+
 function Summary({
   label,
   value,
@@ -525,7 +587,7 @@ function Summary({
   detail: string;
 }) {
   return (
-    <div className="border-border flex flex-col gap-2 rounded-xl border p-5">
+    <div className="flex min-w-0 flex-col gap-1.5 sm:px-5 sm:first:pl-0 sm:last:pr-0">
       <dt className="text-muted text-sm">{label}</dt>
       <dd className="text-foreground text-3xl font-semibold tabular-nums">
         {value}

@@ -255,7 +255,9 @@ filters/limits drive later API reads with debounced search and Back/Forward supp
 
 Weekly changelog summaries cover January 2026–October 22. Weeks use days 1–7, 8–14,
 15–21, 22–28, and 29–month end; retain inactive weeks and mark the current week
-partial. Update summaries and cutoff together in `app/(tools)/commits/weekly-changelog/data.ts`.
+partial. Group the changelog by month, newest first, retain week fragment anchors,
+and keep month links available for navigation. Update summaries and cutoff together
+in `app/(tools)/commits/weekly-changelog/data.ts`.
 Dated reviews/model assessments cover fixed snapshots and appear in search/sitemap;
 model/reasoning labels are editorial estimates, not recorded usage.
 
