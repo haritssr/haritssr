@@ -67,7 +67,12 @@ function CompactActionMenu({
         <QueueListIcon aria-hidden="true" className="size-5" />
       </Popover.Trigger>
       <Popover.Portal keepMounted>
-        <Popover.Positioner align="end" sideOffset={12} className="z-50">
+        <Popover.Backdrop className="fixed inset-0 z-40 touch-none" />
+        <Popover.Positioner
+          align="end"
+          sideOffset={12}
+          className="z-50 touch-none"
+        >
           <Popover.Popup
             aria-label="Page actions"
             finalFocus={() =>
@@ -84,6 +89,9 @@ function CompactActionMenu({
             }}
             className="navigation-material border-border text-foreground corner-squircle w-48 max-w-[calc(100vw-2rem)] rounded-lg border shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-2xl"
           >
+            <Popover.Close className="sr-only">
+              Close page actions
+            </Popover.Close>
             <TopBarActions
               layout="list"
               pathname={pathname}
