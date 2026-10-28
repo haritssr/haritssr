@@ -33,7 +33,7 @@ export default function ExternalLink({
         {showArrow ? (
           <svg
             aria-hidden="true"
-            className="ml-0.5 inline size-4.5 align-middle"
+            className="-mt-0.5 ml-0.5 inline size-4 align-middle"
             fill="none"
             stroke="currentColor"
             strokeWidth={2}
