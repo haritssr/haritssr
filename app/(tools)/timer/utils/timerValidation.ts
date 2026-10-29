@@ -3,17 +3,12 @@ import { z } from "zod";
 import {
   DEFAULT_DURATION_PRESETS,
   DEFAULT_TASK_PRESETS,
-  TIMER_SPEEDS,
   MAX_TIMER_TASKS,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
 import { TASK_INPUT_LIMITS } from "@/app/(tools)/timer/utils/timerInput";
 
-import {
-  DEFAULT_DAILY_TASKS,
-  DAILY_DESCRIPTION_LIMIT,
-  isDailyTask,
-} from "./dailyTasks";
+import { DEFAULT_DAILY_TASKS, DAILY_DESCRIPTION_LIMIT } from "./dailyTasks";
 
 export const availabilityWindowSchema = z
   .object({
@@ -48,6 +43,7 @@ const taskDetails = {
     .min(TASK_INPUT_LIMITS.minimumDuration)
     .max(TASK_INPUT_LIMITS.maximumDuration),
 };
+// Object parsing strips retired fields such as speed from legacy backups.
 const taskSchema = z
   .object({
     id: z.string().min(1).max(100),
@@ -61,13 +57,11 @@ const taskSchema = z
     spent: z.number().min(0),
     startedAt: instant.nullable(),
     lastStartedAt: instant.optional(),
-    speed: z.literal(TIMER_SPEEDS).optional(),
     reachedAt: instant.nullable(),
     notifiedAt: instant.nullable(),
     availabilityWindow: availabilityWindowSchema.nullable().optional(),
   })
-  .refine((task) => task.spent <= task.duration)
-  .refine((task) => !isDailyTask(task) || (task.speed ?? 1) === 1);
+  .refine((task) => task.spent <= task.duration);
 export const daySchema = z
   .object({
     schemaVersion: z.literal(1),
@@ -84,12 +78,6 @@ export const actionSchema = z.discriminatedUnion("action", [
     action: z.literal("restore"),
     date: dateSchema,
     taskId: z.string().min(1).max(100),
-  }),
-  z.object({
-    action: z.literal("speed"),
-    date: dateSchema,
-    taskId: z.string().min(1).max(100),
-    speed: z.literal(TIMER_SPEEDS),
   }),
   z.object({
     action: z.literal("single-task"),

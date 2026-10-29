@@ -69,7 +69,6 @@ function canonicalDay(day: TimerDay) {
     revision: 0,
     tasks: day.tasks.map((task) => ({
       ...task,
-      speed: task.speed ?? 1,
       availabilityWindow: task.availabilityWindow ?? null,
     })),
   });

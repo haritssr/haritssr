@@ -51,7 +51,6 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
     activity TEXT NOT NULL, description TEXT NOT NULL,
     duration_seconds INTEGER NOT NULL CHECK(duration_seconds BETWEEN 1 AND 86400),
     spent_seconds REAL NOT NULL CHECK(spent_seconds >= 0 AND spent_seconds <= duration_seconds),
-    speed REAL NOT NULL DEFAULT 1 CHECK(speed IN (1, 1.5, 2, 2.5, 3)),
     started_at TEXT, last_started_at TEXT, completed_at TEXT, notification_claimed_at TEXT,
     availability_window TEXT,
     PRIMARY KEY(date, id),
@@ -148,7 +147,7 @@ export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
       args: [today],
     },
     "SELECT revision FROM timer_preferences WHERE id = 1",
-    "SELECT date, started_at, duration_seconds, spent_seconds, speed, availability_window FROM timer_tasks WHERE started_at IS NOT NULL",
+    "SELECT date, started_at, duration_seconds, spent_seconds, availability_window FROM timer_tasks WHERE started_at IS NOT NULL",
   ]);
   const [preference] = preferences.rows;
   if (preference === undefined) {
@@ -162,9 +161,7 @@ export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
     }
     const finish =
       Date.parse(task.started_at) +
-      ((Number(task.duration_seconds) - Number(task.spent_seconds)) /
-        Number(task.speed)) *
-        1000;
+      (Number(task.duration_seconds) - Number(task.spent_seconds)) * 1000;
     nextTransitionAt = Math.min(
       nextTransitionAt,
       taskWindowEnd(
@@ -249,7 +246,6 @@ function decodeDays(days: ResultSet, tasks: ResultSet) {
         description: task.description,
         duration: Number(task.duration_seconds),
         spent: Number(task.spent_seconds),
-        speed: Number(task.speed),
         startedAt: task.started_at,
         ...(task.last_started_at === null
           ? {}
@@ -310,7 +306,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
     },
     { sql: "DELETE FROM timer_tasks WHERE date = ?", args: [day.date] },
     ...day.tasks.map((task, position) => ({
-      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, speed, started_at, last_started_at, completed_at, notification_claimed_at, availability_window) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       args: [
         task.id,
         day.date,
@@ -319,7 +315,6 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
         task.description,
         task.duration,
         task.spent,
-        task.speed ?? 1,
         task.startedAt,
         task.lastStartedAt ?? null,
         task.reachedAt,
@@ -345,7 +340,6 @@ function taskValues(task: TimerDay["tasks"][number], position: number) {
     task.description,
     task.duration,
     task.spent,
-    task.speed ?? 1,
     task.startedAt,
     task.lastStartedAt ?? null,
     task.reachedAt,
@@ -410,11 +404,11 @@ export async function updateTimerDays(
         continue;
       }
       statements.push({
-        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, speed, started_at, last_started_at, completed_at, notification_claimed_at, availability_window)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ON CONFLICT(date, id) DO UPDATE SET position = excluded.position, activity = excluded.activity,
           description = excluded.description, duration_seconds = excluded.duration_seconds, spent_seconds = excluded.spent_seconds,
-          speed = excluded.speed, started_at = excluded.started_at, last_started_at = excluded.last_started_at,
+          started_at = excluded.started_at, last_started_at = excluded.last_started_at,
           completed_at = excluded.completed_at, notification_claimed_at = excluded.notification_claimed_at,
           availability_window = excluded.availability_window`,
         args: [day.date, task.id, ...values],

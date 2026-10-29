@@ -65,7 +65,6 @@ export function createDailyTasks(
         ? null
         : { ...definition.availabilityWindow },
     spent: 0,
-    speed: 1,
     startedAt: null,
     reachedAt: null,
     notifiedAt: null,

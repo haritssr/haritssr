@@ -318,8 +318,8 @@ Vercel Production variables and redeploy before retrying.
 
 - Start pauses other tasks unless Multitask is on; disabling it atomically keeps
   the most recently started task with the preference change.
-- Autoplay prefers paused unfinished tasks when none run. Speed: 1x–3x in 0.5x
-  steps. Done preserves actual time; Reached stops at duration.
+- Autoplay prefers paused unfinished tasks when none run. Tasks advance in real
+  time. Done preserves actual time; Reached stops at duration.
 - Duration must exceed spent time. Names: 20 characters; descriptions: 35 (shorten
   longer legacy descriptions on edit). Newly initialized days copy saved Daily
   Tasks; existing dates are not backfilled.
@@ -346,7 +346,7 @@ SQL triggers maintain saved totals; reads overlay live time. Backups read full h
 Duration Presets allow 1–5 entries (one second–24 hours), Task Presets 1–10, with
 Save/Cancel. They sync and apply to Add/Edit without changing existing tasks.
 Daily Tasks adds a saved JSON definition list below presets, with Save/Cancel; edits
-apply to future days. Reserved `daily:` instances use 1x, require a manual start,
+apply to future days. Reserved `daily:` instances require a manual start,
 remain visible after completion, and cannot be edited/deleted for the current day.
 The nullable JSON `timer_tasks.availability_window` uses Jakarta minutes (0–1440);
 opening is inclusive and closing pauses/locks without marking completion. Migration

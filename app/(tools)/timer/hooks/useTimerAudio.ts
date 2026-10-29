@@ -70,9 +70,7 @@ export default function useTimerAudio(
         ) {
           continue;
         }
-        const seconds =
-          (task.duration - taskSpent(task, snapshot.today, now)) /
-          (task.speed ?? 1);
+        const seconds = task.duration - taskSpent(task, snapshot.today, now);
         if (seconds > 0) {
           remaining = Math.min(remaining, seconds);
         }

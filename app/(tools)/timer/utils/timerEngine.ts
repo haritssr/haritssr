@@ -167,10 +167,7 @@ function changeTask(
   if (task === undefined) {
     throw new TimerStoreError("Task not found.", 404);
   }
-  if (
-    isDailyTask(task) &&
-    ["edit", "delete", "speed"].includes(command.action)
-  ) {
+  if (isDailyTask(task) && ["edit", "delete"].includes(command.action)) {
     throw new TimerStoreError(
       "Change Daily Tasks in Settings for future days.",
       409
@@ -180,15 +177,6 @@ function changeTask(
     day.tasks = day.tasks.filter((entry) => entry.id !== task.id);
   } else if (command.action === "edit") {
     editTaskDetails(task, command);
-  } else if (command.action === "speed") {
-    if (task.reachedAt !== null || task.spent >= task.duration) {
-      throw new TimerStoreError(
-        "Finished activities cannot change speed.",
-        409
-      );
-    }
-    // The caller settled elapsed time at the previous speed before this change.
-    task.speed = command.speed;
   } else if (command.action === "start") {
     startTask(day, task, now, command.multitask === true);
   } else if (command.action === "done") {

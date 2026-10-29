@@ -14,7 +14,6 @@ run inside its `use client` boundary.
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
 | Active card structure, title, and description placement | [TaskCard.tsx](TaskCard.tsx) |
 | Shared presentation for ordinary and daily task cards | [TaskCardView.tsx](TaskCardView.tsx) |
-| Shared per-task speed button, with optional clock icon | [TaskSpeedControl.tsx](TaskSpeedControl.tsx) |
 | Completed task names, descriptions, times, percentages, and status | [CompletedTasksTable.tsx](CompletedTasksTable.tsx) |
 | Time display, percentage, and progress bar | [TaskProgress.tsx](TaskProgress.tsx) |
 | Delete confirmation for card and edit dialog | [DeleteTaskButton.tsx](DeleteTaskButton.tsx) |
@@ -61,16 +60,10 @@ visible total-duration suffix on daily cards, while the default
 The optional `timeNote` places a short availability range between elapsed and
 remaining time on scheduled daily cards, at the same font size.
 
-The header places the title on the left, with speed, an Adjustments Horizontal edit button, and a document description icon on the right.
+The header places the title on the left, with an Adjustments Horizontal edit button, and a document description icon on the right.
 Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and negative remaining time. Edit is a plain icon matching the description icon in size.
 The description popover
-opens on hover or click. The speed button cycles through 1x, 1.5x, 2x,
-2.5x, and 3x, then returns to 1x. Each task defaults to 1x and saves its own speed
-across pauses and reloads. At 2x, each real second adds two seconds toward the
-task's duration; summaries include this accelerated time. Changing speed settles
-existing elapsed time at the old rate before applying the new rate, without
-starting a paused task or changing the most-recently-started ordering.
-The speed label uses tabular numerals and grows toward the left as its value changes.
+opens on hover or click. Tasks advance by one second per real second.
 Personal timer actions and Multitask keep
 their opacity while unavailable; preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
@@ -139,7 +132,7 @@ versioned `haritssr-timer-ticking:v1` key through
 storage events synchronize open tabs. If storage is blocked, the toggle still
 works in memory. When enabled, one shared Quartz clock
 mechanical tick repeats at a single pitch each real second while any personal task
-runs, regardless of task speed or the number of running tasks. It stops when all
+runs, regardless of the number of running tasks. It stops when all
 tasks pause, finish, or reach midnight, and continues across page navigation. It does not mute the existing
 Start, Pause, Done, or completion sounds. Audio setup happens in the toggle's
 click handler and on pointer/key interaction when restored ticking needs audio
@@ -149,7 +142,7 @@ before each tick, so overdue tasks stay silent while waiting for a server refres
 
 During the final 10 real seconds of a task, the same Quartz warning ticks play automatically,
 even with Sound off. They become faster with 6 and 3 seconds remaining and
-stop when the task pauses or finishes. Remaining time accounts for task speed.
+stop when the task pauses or finishes. Remaining time uses real elapsed time.
 
 The [provider](./TimerProvider.tsx) activates the deferred
 [runtime](./TimerRuntime.tsx) for owner sessions or Timer visits
@@ -227,9 +220,9 @@ modules keep independent work separate:
 - [store.ts](../store.ts) persists daily records, and
   [timerSound.ts](../utils/timerSound.ts) generates sound.
 
-The shared completion-time calculation in `timer.ts` accounts for task speed in
+The shared completion-time calculation in `timer.ts` uses real elapsed time for
 scheduling, stored completion timestamps, and completed-task ordering. The store
-accounts for each task's speed, concurrent starts, and atomic single-task transitions. Optional
+handles concurrent starts and atomic single-task transitions. Optional
 `lastStartedAt` timestamps preserve start order across elapsed-time updates;
 older records remain readable without a migration. Action types and validation
 live in [timer.ts](../utils/timer.ts) and
@@ -290,7 +283,7 @@ sibling of the ticking toolbar; it has no custom window-event handoff. Definitio
 Morning Meditation (30m), Evening Meditation (30m), and Exercise (30m) definitions.
 Preferences persist them in `timer_preferences.daily_tasks`; the server copies them
 only when initializing a new Jakarta day, with reserved `daily:` IDs, zero spent
-time, paused state, and 1x speed. The existing `(date, id)` key and one transaction
+time and paused state. The existing `(date, id)` key and one transaction
 prevent duplicate instances. Existing dates and their availability are preserved.
 
 `timer_tasks.availability_window` stores JSON `{from, until}` in minutes after
@@ -311,5 +304,11 @@ display, optimistic commands, server settlement, refresh scheduling, floating
 eligibility, and audio. Opening is inclusive, closing exclusive. Closing a window
 pauses a task without marking it complete or issuing a completion alert. The
 remaining duration stays the daily allowance, even if less window time is left.
-Daily tasks cannot change speed, edit their current definition, or be deleted;
+Daily tasks cannot edit their current definition or be deleted;
 Autoplay skips them. Ordinary task behavior is preserved.
+
+Tasks always advance in real time. Existing recorded progress is preserved. Legacy
+version-1 backups remain accepted: retired speed fields are discarded, and any
+unsettled running interval uses real elapsed time. New exports omit speed. Existing
+databases may retain an unused speed column; no migration is needed for its removal
+from the runtime.

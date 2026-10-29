@@ -7,9 +7,6 @@ export interface AvailabilityWindow {
 
 export const MAX_TIMER_TASKS = 100;
 
-export const TIMER_SPEEDS = [1, 1.5, 2, 2.5, 3] as const;
-type TimerSpeed = (typeof TIMER_SPEEDS)[number];
-
 export interface TimerTask {
   id: string;
   activity: string;
@@ -18,7 +15,6 @@ export interface TimerTask {
   spent: number;
   startedAt: string | null;
   lastStartedAt?: string;
-  speed?: TimerSpeed;
   reachedAt: string | null;
   notifiedAt: string | null;
   availabilityWindow?: AvailabilityWindow | null;
@@ -135,12 +131,6 @@ export type TimerAction =
       taskId: string;
     }
   | {
-      action: "speed";
-      date: string;
-      taskId: string;
-      speed: TimerSpeed;
-    }
-  | {
       action: "single-task";
       date: string;
     }
@@ -233,7 +223,7 @@ export function taskTiming(
           (Math.min(now, closesAt) - Date.parse(task.startedAt)) / 1000
         );
   return {
-    spent: Math.min(task.duration, task.spent + elapsed * (task.speed ?? 1)),
+    spent: Math.min(task.duration, task.spent + elapsed),
     available: now >= opensAt && now < closesAt,
     opensAt,
     closesAt,
@@ -268,12 +258,11 @@ export function taskTransitionTime(task: TimerTask, date: string) {
     : Math.min(taskCompletionTime(task), taskWindowEnd(task, date));
 }
 
-// The projected finish at the current speed, before the midnight cutoff.
+// The projected finish before the midnight cutoff.
 export function taskCompletionTime(task: TimerTask) {
   return task.startedAt === null
     ? Infinity
-    : Date.parse(task.startedAt) +
-        ((task.duration - task.spent) / (task.speed ?? 1)) * 1000;
+    : Date.parse(task.startedAt) + (task.duration - task.spent) * 1000;
 }
 
 export function formatTimerTime(seconds: number) {

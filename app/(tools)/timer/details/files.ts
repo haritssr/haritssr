@@ -37,7 +37,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TaskCard.tsx",
-    "Three-column desktop cards, header icons, progress/speed, and icon actions.",
+    "Three-column desktop cards, header icons, progress, and icon actions.",
   ],
   [
     "app/(tools)/timer/_components/TaskCardView.tsx",
@@ -46,10 +46,6 @@ export const implementationFiles = [
   [
     "app/(tools)/timer/_components/TaskProgress.tsx",
     "Current time, duration, percentage, and progress bar.",
-  ],
-  [
-    "app/(tools)/timer/_components/TaskSpeedControl.tsx",
-    "Shared text-only speed cycle, with an optional clock icon.",
   ],
   [
     "app/(tools)/timer/_components/TaskActions.tsx",

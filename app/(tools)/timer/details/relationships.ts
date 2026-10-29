@@ -83,13 +83,11 @@ export const timerRelationships = [
       Card --> Desc["TaskDescription.tsx: description popover"]
       View --> Progress["TaskProgress.tsx: time, percentage, progress bar"]
       Card --> Actions["TaskActions.tsx: Start, Pause, Continue, Done"]
-      Card --> Speed["TaskSpeedControl.tsx: speed cycle"]
       Dock["app/(tools)/timer/_components/FloatingTimerDock.tsx"] --> Clock
       Dock --> Selection["floatingTaskState.ts: running or retained paused; start order"]
       Selection --> State
       Dock --> Progress
       Dock -->|circular icon presentation| Actions
-      Dock -->|text only| Speed
       Card -->|EditTask| Dialog["TaskDialog.tsx: AddTask / EditTask"]
       Toolbar -->|Add Task / Shift+N| Dialog
       Dialog --> Input["app/(tools)/timer/utils/timerInput.ts: readTaskForm and input limits"]
@@ -102,18 +100,17 @@ export const timerRelationships = [
       Dialog -->|validated add / edit| Act["app/(tools)/timer/_components/TimerProvider.tsx: act"]
       Actions -->|start / pause / done| Act
       Delete -->|delete| Act
-      Speed -->|speed| Act
       Settings -->|setMultitask; single-task when needed| Act
       Actions --> Sound["app/(tools)/timer/utils/timerSound.ts: action feedback"]
-      class Client,Toolbar,Settings,List,Card,View,Daily,Completed,Desc,Progress,Actions,Dialog,Form,Duration,NumberInput,Delete,Dock,Speed,Data action
+      class Client,Toolbar,Settings,List,Card,View,Daily,Completed,Desc,Progress,Actions,Dialog,Form,Duration,NumberInput,Delete,Dock,Data action
       class State,Appearance,Time,Act,Clock,Selection,Input attention
       class Sound danger
       class Backups,Backup,Validation success
       ${colors}`,
     notes: [
       "getTaskCollection derives each task once with shared Jakarta day bounds, partitions active/completed tasks, preserves daily-card order, and supplies visible cards and counts. Toolbar counts use a single pass without sorting. getTaskState uses taskTiming to derive elapsed time, availability, completion, running/paused state, and the action label.",
-      "TaskCard composes live description, editing, speed, and action controls inside TaskCardView. TaskCardView shares the card layout and TaskProgress between ordinary and daily cards. Daily cards remain visible in saved order, expose future-day Settings, and lock outside their availability. CompletedTasksTable handles the collapsed completed list, sorting, and completion-time display.",
-      "FloatingTimerDock shares compact progress, speed, action handlers, and sounds. getFloatingTasks excludes completed tasks and stops showing the old day at midnight; it includes running tasks and the one paused from the dock. The task-count button cycles through tasks and preserves selection for the session. Both displays use useTimerClock, with the dock clock disabled on /timer.",
+      "TaskCard composes live description, editing, and action controls inside TaskCardView. TaskCardView shares the card layout and TaskProgress between ordinary and daily cards. Daily cards remain visible in saved order, expose future-day Settings, and lock outside their availability. CompletedTasksTable handles the collapsed completed list, sorting, and completion-time display.",
+      "FloatingTimerDock shares compact progress, action handlers, and sounds. getFloatingTasks excludes completed tasks and stops showing the old day at midnight; it includes running tasks and the one paused from the dock. The task-count button cycles through tasks and preserves selection for the session. Both displays use useTimerClock, with the dock clock disabled on /timer.",
       "TimerDataControls exports paused copies without changing live timers. Import validates the whole backup and atomically adds missing dates, fills empty days, or skips identical records. Conflicts reject every addition; imported completions do not alert again.",
       "AddTask opens with empty name and description fields and handles Shift+N. AddTask and EditTask both call readTaskForm from timerInput, whose limits are shared with field counters and server schemas, share TaskFormDialog and DurationFields, and submit through act. Add/Edit close after validation and keep failed drafts for reopening. DeleteTaskButton routes confirmed deletion back to its caller, which submits through act.",
     ],

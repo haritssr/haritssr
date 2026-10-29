@@ -12,7 +12,6 @@ import TaskCardView from "./TaskCardView";
 import TaskDescription from "./TaskDescription";
 import { EditTask } from "./TaskDialog";
 import { taskAppearance } from "./taskPresentation";
-import TaskSpeedControl from "./TaskSpeedControl";
 import type { TaskState } from "./taskState";
 import { TimerSettingsTrigger } from "./TimerSettings";
 
@@ -45,9 +44,6 @@ const TaskCard = memo(
         className={daily && (!state.available || reached) ? "opacity-50" : ""}
         headerActions={
           <>
-            <span className="inline-flex items-center [&>button]:min-h-5 [&>button]:min-w-0">
-              <TaskSpeedControl task={task} date={date} showIcon={false} />
-            </span>
             {daily ? (
               <TimerSettingsTrigger
                 section="daily"

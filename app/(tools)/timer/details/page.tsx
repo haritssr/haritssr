@@ -64,14 +64,12 @@ export default function TimerDetailsPage() {
               dialog is active.
             </li>
             <li>Start, pause, resume, edit, or finish tasks early.</li>
+            <li>Every task advances by one second per real second.</li>
             <li>
               Use Multitask to run tasks together or Autoplay to start the next
               unfinished task.
             </li>
-            <li>
-              Adjust timer speed from 1× to 3× and save your own duration and
-              task presets.
-            </li>
+            <li>Save your own duration and task presets.</li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or
               completion notifications.
@@ -113,10 +111,9 @@ export default function TimerDetailsPage() {
               draft. Daily descriptions allow up to 2,000 characters.
             </li>
             <li>
-              Daily tasks use real time at 1× and require a manual start. Their
-              definitions cannot be changed or deleted from today’s cards.
-              Finished daily cards stay visible; early Done tasks can be
-              restored from History.
+              Daily tasks require a manual start. Their definitions cannot be
+              changed or deleted from today’s cards. Finished daily cards stay
+              visible; early Done tasks can be restored from History.
             </li>
             <li>
               Availability follows Jakarta time. Outside its window, a card is
@@ -185,8 +182,8 @@ export default function TimerDetailsPage() {
                   <ExplanationList>
                     <li id="database-structure">
                       Days group tasks by Jakarta date; tasks store order,
-                      duration, progress, speed, timestamps, and an optional
-                      JSON availability window.
+                      duration, progress, timestamps, and an optional JSON
+                      availability window.
                     </li>
                     <li>
                       Preferences store Autoplay, Multitask, notifications,
