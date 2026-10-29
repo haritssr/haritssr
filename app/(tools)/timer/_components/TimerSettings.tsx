@@ -73,7 +73,9 @@ export default function TimerSettingsScope({
                 </Dialog.Title>
                 <div className="grid w-18 justify-self-end">
                   <Dialog.Close
-                    render={<Button className="w-full!" variant="secondary" />}
+                    render={
+                      <Button className="w-full!" variant="outline-regular" />
+                    }
                   >
                     Done
                   </Dialog.Close>
