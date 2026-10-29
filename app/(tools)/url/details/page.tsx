@@ -88,6 +88,21 @@ export default function URLDetailsPage() {
               access, or other required behavior.
             </li>
             <li>
+              See also{" "}
+              <ExternalLink
+                href="https://x.com/Majed_/status/2115747987343261792"
+                name="this post by Majed"
+                size="inherit"
+              />{" "}
+              and{" "}
+              <ExternalLink
+                href="https://x.com/satyaXBT/status/2115747118422044965"
+                name="this post by satyaXBT"
+                size="inherit"
+              />
+              .
+            </li>
+            <li>
               Surrounding curly quotes are removed automatically when you paste
               a URL.
             </li>
