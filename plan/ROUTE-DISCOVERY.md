@@ -1,4 +1,4 @@
-# Automatic route discovery plan
+# Automatic route discovery
 
 Status: proposed; implementation has not started.
 
@@ -38,20 +38,20 @@ just to discover URLs. Browser metadata continues to use `createPageMetadata`.
 
 ## Current architecture
 
-- [`utils/discovery/routeManifest.ts`](utils/discovery/routeManifest.ts) combines
+- [`utils/discovery/routeManifest.ts`](../utils/discovery/routeManifest.ts) combines
   manual route entries with labs, projects, and writing records.
-- [`data/routes.ts`](data/routes.ts) contains route descriptions, navigation
+- [`data/routes.ts`](../data/routes.ts) contains route descriptions, navigation
   suggestions, and search helpers. Preserve its public contracts during migration.
-- [`utils/discovery/labRoutes.ts`](utils/discovery/labRoutes.ts) and
-  [`utils/discovery/labCatalog.ts`](utils/discovery/labCatalog.ts) supply lab routes
+- [`utils/discovery/labRoutes.ts`](../utils/discovery/labRoutes.ts) and
+  [`utils/discovery/labCatalog.ts`](../utils/discovery/labCatalog.ts) supply lab routes
   and content metadata.
-- [`app/(tools)/tree/getRouteTree.ts`](app/(tools)/tree/getRouteTree.ts),
-  [`utils/discovery/searchIndex.ts`](utils/discovery/searchIndex.ts), and
-  [`app/sitemap.ts`](app/sitemap.ts) consume the combined manifest.
-- [`utils/content/validate-content.ts`](utils/content/validate-content.ts) currently
+- [`app/(tools)/tree/getRouteTree.ts`](../app/(tools)/tree/getRouteTree.ts),
+  [`utils/discovery/searchIndex.ts`](../utils/discovery/searchIndex.ts), and
+  [`app/sitemap.ts`](../app/sitemap.ts) consume the combined manifest.
+- [`utils/content/validate-content.ts`](../utils/content/validate-content.ts) currently
   checks registered entries against page files, but does not generally discover
   unregistered fixed pages.
-- [`utils/navigation/routePatterns.ts`](utils/navigation/routePatterns.ts) contains
+- [`utils/navigation/routePatterns.ts`](../utils/navigation/routePatterns.ts) contains
   dynamic pattern behavior and a source-directory mapping for grouped tools.
 
 Today, the registered fixed pages already cover the current filesystem. The change
