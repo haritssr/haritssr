@@ -19,14 +19,8 @@ const TASK_COUNT_STATES = [
     textColor: "text-timer-running",
   },
   {
-    key: "paused",
-    label: "Paused",
-    color: "bg-timer-paused",
-    textColor: "text-timer-paused",
-  },
-  {
-    key: "ready",
-    label: "Not started",
+    key: "notRunning",
+    label: "Not running",
     color: "bg-foreground",
     textColor: "text-foreground",
   },
@@ -41,10 +35,14 @@ export default function TimerToolbar({
 }) {
   const { snapshot, clockOffset } = useTimer("snapshot", "clockOffset");
   const timestamp = useTimerClock(snapshot, clockOffset);
-  const taskCounts =
+  const counts =
     snapshot === undefined
       ? { running: 0, paused: 0, ready: 0 }
       : getTaskCounts(snapshot.day.tasks, snapshot.today, timestamp);
+  const taskCounts = {
+    running: counts.running,
+    notRunning: counts.paused + counts.ready,
+  };
   return (
     <div className="border-border flex w-full flex-wrap items-end gap-2 border-b border-dashed pb-4 sm:gap-3">
       <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-3">

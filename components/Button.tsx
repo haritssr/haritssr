@@ -41,9 +41,9 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "theme-fill":
     "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
   "timer-running":
-    "border border-transparent bg-timer-running font-medium text-white hover:bg-timer-running/90 focus-visible:outline-timer-running",
+    "border border-transparent bg-foreground/90 font-medium text-white hover:bg-foreground focus-visible:outline-foreground",
   "timer-paused":
-    "border border-transparent bg-timer-paused font-medium text-white hover:bg-timer-paused/90 focus-visible:outline-timer-paused",
+    "border border-transparent bg-foreground/90 font-medium text-white hover:bg-foreground focus-visible:outline-foreground",
   "timer-secondary":
     "border-[0.5px] border-border bg-secondary-button-surface font-medium text-foreground shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-colors duration-150 select-none enabled:hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground",
   music:

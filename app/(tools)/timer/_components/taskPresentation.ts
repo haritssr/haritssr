@@ -12,9 +12,9 @@ export const TASK_LAYOUT = {
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-[0.9375rem]",
   progress: "h-1.5",
   running:
-    "border-timer-running/50 shadow-timer-running/10 [--task-surface-color:var(--color-timer-running)]",
+    "border-border shadow-foreground/10 [--task-surface-color:var(--color-foreground)]",
   paused:
-    "border-timer-paused/50 shadow-timer-paused/10 [--task-surface-color:var(--color-timer-paused)]",
+    "border-border shadow-foreground/10 [--task-surface-color:var(--color-foreground)]",
   percentage: "",
 };
 
@@ -25,17 +25,17 @@ const TASK_STATE_APPEARANCE = {
     button: "timer-running",
   },
   paused: {
-    elapsed: "text-timer-paused",
+    elapsed: "text-muted",
     progress: "var(--color-timer-paused)",
     button: "timer-paused",
   },
   ready: {
-    elapsed: "text-foreground",
+    elapsed: "text-muted",
     progress: "var(--color-foreground)",
     button: "neutral-subtle",
   },
   complete: {
-    elapsed: "text-foreground",
+    elapsed: "text-muted",
     progress: "var(--color-foreground)",
     button: "outline",
   },

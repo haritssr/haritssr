@@ -56,7 +56,7 @@ export default function TaskProgress({
         )}
         <span className="flex shrink-0 items-baseline gap-0.5">
           <span
-            className={`shrink-0 ${title === undefined ? "text-foreground" : "text-muted"}`}
+            className={`shrink-0 font-medium ${title === undefined ? appearance.elapsed : "text-muted"}`}
           >
             {title === undefined ? (
               formatTimerTime(spent)

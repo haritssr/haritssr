@@ -290,8 +290,9 @@ Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 Export and Import share a segmented group beside the secondary Settings button.
 They show icons on smaller screens and icons with labels from 1024px, with native
 hover labels and accessible names.
-These controls sit beside Add Task, with running, paused, and not-started counts
-at the opposite end. Their dots use the orange, green, and foreground task colors,
+These controls sit beside Add Task, with running and not-running counts
+at the opposite end. Their dots use orange for running and neutral foreground
+for not-running tasks,
 including when a count is zero. Completed tasks are excluded.
 Settings opens a modal containing Alerts, Autoplay, Multitask, Sound, and Desktop List View
 switches. Its header has the centered Settings title and a secondary Done button. Escape or clicking

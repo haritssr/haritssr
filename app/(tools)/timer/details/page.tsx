@@ -190,7 +190,7 @@ export default function TimerDetailsPage() {
         <Section
           id="task-colors"
           title="Task states"
-          description="Orange means running, green means paused, and neutral means ready to start."
+          description="Orange marks running tasks; other tasks use neutral colors."
         >
           <TaskColorExamples />
         </Section>

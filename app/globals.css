@@ -173,7 +173,7 @@
   --color-secondary-accent: var(--color-purple-500);
   --color-identity-accent: var(--color-violet-500);
   --color-timer-running: var(--color-orange-500);
-  --color-timer-paused: var(--color-green-600);
+  --color-timer-paused: var(--color-foreground);
   --color-music: var(--color-teal-600);
   --color-contact-accent: var(--color-emerald-600);
   --color-muted: color-mix(
