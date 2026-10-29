@@ -1,5 +1,6 @@
 import ToolChangelog from "@/app/(tools)/_components/ToolChangelog";
 import ExplanationList from "@/components/ExplanationList";
+import ExternalLink from "@/components/ExternalLink";
 import FlowDiagram from "@/components/FlowDiagram";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -74,6 +75,18 @@ export default function URLDetailsPage() {
           <ExplanationList>
             <li>The URL field receives focus when you open the tool.</li>
             <li>Enter a complete URL with its scheme, such as https://.</li>
+            <li>
+              Shared links can include tracking parameters, as highlighted in{" "}
+              <ExternalLink
+                href="https://x.com/Ihyvd014/status/2115497330082504960"
+                name="this X post"
+                size="inherit"
+              />
+              . For example, removing the query after the question mark from an
+              X post link leaves its post address intact. Check parameters
+              before removing them elsewhere: they may control search results,
+              access, or other required behavior.
+            </li>
             <li>
               Surrounding curly quotes are removed automatically when you paste
               a URL.
