@@ -106,8 +106,9 @@ Met and Missed tasks cannot be restored.
 time, so a task moves into the table as soon as its duration is reached or its
 availability window closes unfinished. Missed tasks retain their progress and
 are excluded from active counts without being marked Done or Met.
-On page load, daily and ordinary cards are ordered by state: running, paused,
-not started, then unavailable or reached cards. Completion percentage breaks
+On page load, running cards come first, followed by available cards with progress,
+unstarted cards, upcoming unavailable cards, and finished daily cards. Missed
+tasks whose windows have closed appear in History. Completion percentage breaks
 ties within each group; equal percentages preserve saved order. Cards keep their
 positions during the visit as states and percentages change. New or restored
 cards append; completed, missed, and deleted cards leave the active list. The

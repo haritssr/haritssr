@@ -142,12 +142,13 @@ export default function TimerDetailsPage() {
               window is open.
             </li>
             <li>
-              When you open the page, cards are ordered by state: running,
-              paused, not started, then muted or finished daily tasks. Within
-              each group, higher completion percentages come first; ties retain
-              their saved order. Cards keep their positions during your visit;
-              new or restored tasks appear at the end. The order resets when you
-              reopen the page or a new Jakarta day begins.
+              When you open the page, running tasks come first, followed by
+              available tasks with progress, unstarted tasks, upcoming tasks,
+              and finished daily tasks. Higher percentages come first within
+              each group; ties retain their saved order. Cards keep their
+              positions during your visit, and new or restored tasks appear at
+              the end. The order resets when you reopen the page or a new
+              Jakarta day begins.
             </li>
             <li>
               Availability follows Jakarta time. Before its window, a card is

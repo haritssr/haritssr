@@ -45,13 +45,16 @@ interface TaskEntry {
 }
 
 function taskOrder(state: TaskState) {
-  if (!state.available || state.reached) {
+  if (state.reached || state.missed) {
+    return 4;
+  }
+  if (!state.available) {
     return 3;
   }
   if (state.running) {
     return 0;
   }
-  return state.paused ? 1 : 2;
+  return state.spent > 0 ? 1 : 2;
 }
 
 function compareTasks(first: TaskEntry, second: TaskEntry) {
