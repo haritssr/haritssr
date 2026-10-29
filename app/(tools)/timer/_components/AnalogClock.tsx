@@ -85,8 +85,8 @@ export default function AnalogClock({
       {time !== null && (
         <g strokeLinecap="round">
           <line
-            className="stroke-muted"
-            strokeWidth="5"
+            className="stroke-muted/70"
+            strokeWidth="3.5"
             transform={`rotate(${hours * 30} 50 50)`}
             x1="50"
             x2="50"
