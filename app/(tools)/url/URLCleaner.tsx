@@ -140,6 +140,7 @@ export default function URLCleaner() {
   const sourceRef = useCallback((field: HTMLTextAreaElement) => {
     let width = field.clientWidth;
     resizeURLField(field);
+    field.focus({ preventScroll: true });
     const observer = new ResizeObserver(() => {
       if (field.clientWidth !== width) {
         width = field.clientWidth;

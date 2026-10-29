@@ -72,6 +72,7 @@ export default function URLDetailsPage() {
           contentClassName="max-w-3xl"
         >
           <ExplanationList>
+            <li>The URL field receives focus when you open the tool.</li>
             <li>Enter a complete URL with its scheme, such as https://.</li>
             <li>
               Surrounding curly quotes are removed automatically when you paste
