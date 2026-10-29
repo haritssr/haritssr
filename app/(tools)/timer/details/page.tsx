@@ -116,6 +116,11 @@ export default function TimerDetailsPage() {
               visible; early Done tasks can be restored from History.
             </li>
             <li>
+              Cards appear in this order: running, paused, not started, then
+              muted or finished daily tasks. Within each group, higher
+              completion percentages come first; ties retain their saved order.
+            </li>
+            <li>
               Availability follows Jakarta time. Outside its window, a card is
               muted and its start control locks. A running task pauses at
               closing without changing its duration or reporting an unfinished

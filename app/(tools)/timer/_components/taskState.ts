@@ -29,19 +29,19 @@ interface TaskEntry {
   state: TaskState;
 }
 
-function taskOrder(task: TimerTask) {
-  if (task.reachedAt !== null || task.spent >= task.duration) {
+function taskOrder(state: TaskState) {
+  if (!state.available || state.reached) {
     return 3;
   }
-  if (task.startedAt !== null) {
+  if (state.running) {
     return 0;
   }
-  return task.spent > 0 ? 1 : 2;
+  return state.paused ? 1 : 2;
 }
 
 function compareTasks(first: TaskEntry, second: TaskEntry) {
   return (
-    taskOrder(first.task) - taskOrder(second.task) ||
+    taskOrder(first.state) - taskOrder(second.state) ||
     second.state.spent / second.task.duration -
       first.state.spent / first.task.duration
   );
@@ -80,12 +80,12 @@ export function getTaskCollection(
   const bounds: TimerDayBounds = timerDayBounds(date);
   const active: TaskEntry[] = [];
   const completed: TaskEntry[] = [];
-  const daily: TaskEntry[] = [];
+  const visible: TaskEntry[] = [];
   const counts = { running: 0, paused: 0, ready: 0 };
   for (const task of tasks) {
     const entry = { task, state: getTaskState(task, date, now, bounds) };
-    if (isDailyTask(task)) {
-      daily.push(entry);
+    if (isDailyTask(task) || !entry.state.reached) {
+      visible.push(entry);
     }
     if (entry.state.reached) {
       completed.push(entry);
@@ -96,10 +96,11 @@ export function getTaskCollection(
   }
   active.sort(compareTasks);
   completed.sort(compareTasks);
+  visible.sort(compareTasks);
   return {
     active,
     completed: completed.map(({ task }) => task),
-    visible: [...daily, ...active.filter(({ task }) => !isDailyTask(task))],
+    visible,
     counts,
   };
 }

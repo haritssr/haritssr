@@ -75,6 +75,9 @@ scrolls horizontally on narrow screens. Restore returns an early Done task to
 the active list paused, preserving its time; Reached tasks cannot be restored.
 `TaskList` partitions tasks using their current elapsed
 time, so a task moves into the table as soon as its duration is reached.
+Visible cards share one ordering across daily and ordinary tasks: running,
+paused, not started, then unavailable or reached cards. Completion percentage
+breaks ties within each group; equal percentages preserve saved order.
 The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
