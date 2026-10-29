@@ -1,5 +1,5 @@
 import { Dialog } from "@base-ui/react/dialog";
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 
@@ -72,7 +72,7 @@ export function EditTask({
         title="Edit"
         aria-label={`Edit ${task.activity}`}
       >
-        <AdjustmentsHorizontalIcon
+        <PencilSquareIcon
           aria-hidden="true"
           className="size-5"
           strokeWidth={1.5}

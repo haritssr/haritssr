@@ -133,7 +133,7 @@ export default function TaskActions({
         aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
         title={showDone ? "Done" : label}
         onClick={showDone ? finishTask : toggleRunning}
-        variant={showDone ? "secondary" : variant}
+        variant={showDone ? "timer-secondary" : variant}
       >
         {showDone ? (
           <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-5" />
@@ -141,7 +141,7 @@ export default function TaskActions({
           <ToggleIcon
             aria-hidden="true"
             data-running={running}
-            className="size-5 data-[running=false]:translate-x-px"
+            className={`size-5 ${ToggleIcon === PlayIcon ? "translate-x-px" : ""}`}
           />
         )}
       </Button>
@@ -160,7 +160,7 @@ export default function TaskActions({
           <ToggleIcon
             aria-hidden="true"
             data-running={running}
-            className="size-5 data-[running=false]:translate-x-px"
+            className={`size-5 ${ToggleIcon === PlayIcon ? "translate-x-px" : ""}`}
           />
         </Button>
       ) : null}

@@ -60,7 +60,7 @@ visible total-duration suffix on daily cards, while the default
 The optional `timeNote` places a short availability range between elapsed and
 remaining time on scheduled daily cards, at the same font size.
 
-The header places the title on the left, with an Adjustments Horizontal edit button, and a document description icon on the right.
+The header places the title on the left, with a Pencil Square edit button, and a document description icon on the right.
 Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and negative remaining time. Edit is a plain icon matching the description icon in size.
 The description popover
 opens on hover or click. Tasks advance by one second per real second.

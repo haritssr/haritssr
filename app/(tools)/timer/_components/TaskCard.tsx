@@ -1,4 +1,4 @@
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { memo } from "react";
 
 import {
@@ -48,11 +48,11 @@ const TaskCard = memo(
               <TimerSettingsTrigger
                 section="daily"
                 size="text"
-                variant="icon"
+                variant="icon-muted"
                 aria-label={`Daily settings for ${task.activity}`}
                 title="Daily Tasks"
               >
-                <AdjustmentsHorizontalIcon
+                <PencilSquareIcon
                   aria-hidden="true"
                   className="size-5"
                   strokeWidth={1.5}

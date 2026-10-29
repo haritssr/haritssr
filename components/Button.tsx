@@ -7,6 +7,7 @@ type ButtonVariant =
   | "danger-subtle"
   | "ghost"
   | "icon"
+  | "icon-muted"
   | "icon-active"
   | "icon-hover"
   | "icon-active-hover"
@@ -24,6 +25,7 @@ type ButtonVariant =
   | "primary-subtle"
   | "timer-running"
   | "timer-paused"
+  | "timer-secondary"
   | "music"
   | "secondary"
   | "success-subtle"
@@ -42,6 +44,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-transparent bg-timer-running font-medium text-white hover:bg-timer-running/90 focus-visible:outline-timer-running",
   "timer-paused":
     "border border-transparent bg-timer-paused font-medium text-white hover:bg-timer-paused/90 focus-visible:outline-timer-paused",
+  "timer-secondary":
+    "border-[0.5px] border-border bg-secondary-button-surface font-medium text-foreground shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-colors duration-150 select-none hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground",
   music:
     "border border-transparent bg-music font-medium text-white hover:bg-music/90 focus-visible:outline-music",
   black:
@@ -55,6 +59,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   ghost:
     "font-medium text-zinc-700 transition-colors duration-150 hover:bg-zinc-100 focus-visible:outline-zinc-700",
   icon: "gap-0 text-foreground transition-colors duration-150 hover:text-action focus-visible:outline-action",
+  "icon-muted":
+    "gap-0 text-muted transition-colors duration-150 hover:text-foreground focus-visible:outline-action",
   "icon-hover":
     "gap-0 text-foreground transition-colors duration-150 enabled:hover:bg-foreground/5 hover:text-action focus-visible:outline-action",
   "icon-active-hover":

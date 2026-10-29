@@ -8,6 +8,16 @@ import { formatRemainingTime } from "@/components/floating/formatRemainingTime";
 import { TASK_LAYOUT } from "./taskPresentation";
 import type { TaskAppearance } from "./taskPresentation";
 
+function progressTrack(appearance: TaskAppearance, compact: boolean) {
+  if (!compact && appearance.button === "timer-running") {
+    return "color-mix(in oklab, var(--color-timer-running) 20%, var(--color-border))";
+  }
+  if (!compact && appearance.button === "timer-paused") {
+    return "color-mix(in oklab, var(--color-timer-paused) 20%, var(--color-border))";
+  }
+  return "var(--color-slider-track-hover)";
+}
+
 export default function TaskProgress({
   task,
   spent,
@@ -34,8 +44,12 @@ export default function TaskProgress({
     : "flex flex-col gap-1";
   const percentage = Math.min(100, (spent / task.duration) * 100);
   const percentageLabel = percentage.toFixed(0);
-  const progressStyle: CSSProperties & { "--timer-progress-fill": string } = {
+  const progressStyle: CSSProperties & {
+    "--timer-progress-fill": string;
+    "--timer-progress-track": string;
+  } = {
     "--timer-progress-fill": appearance.progress,
+    "--timer-progress-track": progressTrack(appearance, compact),
   };
   return (
     <div className={stackClass}>
@@ -77,7 +91,7 @@ export default function TaskProgress({
           ) : null}
         </span>
         {timeNote === undefined ? null : (
-          <span className="text-muted min-w-0 text-center whitespace-normal normal-nums">
+          <span className="text-muted min-w-0 text-center whitespace-normal tabular-nums">
             {timeNote}
           </span>
         )}
@@ -109,7 +123,7 @@ export default function TaskProgress({
         aria-label={`${task.activity}: time spent`}
         aria-valuetext={`${formatTimerTime(spent)} of ${formatTimerTime(task.duration)}`}
         data-floating-progress=""
-        className={`bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_LAYOUT.progress}`}
+        className={`block w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 bg-(--timer-progress-track) text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-(--timer-progress-track) [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_LAYOUT.progress}`}
         key={running ? "running" : "idle"}
         max={task.duration}
         style={progressStyle}

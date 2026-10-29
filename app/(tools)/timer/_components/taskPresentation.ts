@@ -12,9 +12,9 @@ export const TASK_LAYOUT = {
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-[0.9375rem]",
   progress: "h-1.5",
   running:
-    "border-timer-running/80 shadow-timer-running/10 [--task-surface-color:var(--color-timer-running)]",
+    "border-timer-running/50 shadow-timer-running/10 [--task-surface-color:var(--color-timer-running)]",
   paused:
-    "border-timer-paused/80 shadow-timer-paused/10 [--task-surface-color:var(--color-timer-paused)]",
+    "border-timer-paused/50 shadow-timer-paused/10 [--task-surface-color:var(--color-timer-paused)]",
   percentage: "",
 };
 
