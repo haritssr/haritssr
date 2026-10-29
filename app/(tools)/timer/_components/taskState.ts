@@ -11,8 +11,10 @@ function getTaskState(
   now: number,
   bounds = timerDayBounds(date)
 ) {
-  const { spent, available } = taskTiming(task, bounds, now);
+  const { spent, available, closesAt } = taskTiming(task, bounds, now);
   const reached = task.reachedAt !== null || spent >= task.duration;
+  const missed =
+    !reached && (task.availabilityWindow ?? null) !== null && now >= closesAt;
   const running = task.startedAt !== null && !reached && available;
   const paused = !running && !reached && spent > 0;
   let label: "Start" | "Pause" | "Continue" =
@@ -20,7 +22,15 @@ function getTaskState(
   if (running) {
     label = "Pause";
   }
-  return { spent, reached, running, paused, label, available };
+  return {
+    spent,
+    reached,
+    missed,
+    running,
+    paused,
+    label,
+    available,
+  };
 }
 
 export type TaskState = ReturnType<typeof getTaskState>;
@@ -51,7 +61,7 @@ function countState(
   counts: { running: number; paused: number; ready: number },
   state: TaskState
 ) {
-  if (state.reached) {
+  if (state.reached || state.missed) {
     return;
   }
   if (state.running) {
@@ -84,10 +94,10 @@ export function getTaskCollection(
   const counts = { running: 0, paused: 0, ready: 0 };
   for (const task of tasks) {
     const entry = { task, state: getTaskState(task, date, now, bounds) };
-    if (isDailyTask(task) || !entry.state.reached) {
+    if (!entry.state.missed && (isDailyTask(task) || !entry.state.reached)) {
       visible.push(entry);
     }
-    if (entry.state.reached) {
+    if (entry.state.reached || entry.state.missed) {
       completed.push(entry);
     } else {
       active.push(entry);

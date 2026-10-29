@@ -48,7 +48,7 @@ export function SelectField({
         value={value}
       >
         <Select.Trigger
-          className={`form-control flex w-full cursor-pointer items-center justify-between border text-left text-sm outline-hidden ${variant === "plain" ? "text-foreground/80 hover:text-foreground focus-visible:outline-action gap-1.5 rounded-lg border-transparent bg-transparent shadow-none focus-visible:outline-2" : "corner-squircle focus-visible:outline-action border-border text-foreground gap-3 rounded-md px-3 py-2.5 focus-visible:outline-2 supports-[corner-shape:squircle]:rounded-xl"}`}
+          className={`form-control flex w-full cursor-pointer items-center justify-between border text-left outline-hidden ${variant === "plain" ? "text-foreground/80 focus-visible:outline-action gap-0.5 rounded-lg border-transparent bg-transparent text-base shadow-none focus-visible:outline-2" : "corner-squircle focus-visible:outline-action border-border text-foreground gap-3 rounded-md px-3 py-2.5 text-sm focus-visible:outline-2 supports-[corner-shape:squircle]:rounded-xl"}`}
           id={id}
         >
           <span className="inline-flex min-w-0 items-center gap-2">
@@ -63,6 +63,7 @@ export function SelectField({
             <ChevronDownIcon
               aria-hidden="true"
               className={`shrink-0 ${variant === "plain" ? "size-4" : "text-foreground size-5"}`}
+              strokeWidth={variant === "plain" ? 2.5 : 1.5}
             />
           </Select.Icon>
         </Select.Trigger>
@@ -82,7 +83,11 @@ export function SelectField({
                       {option.label}
                     </Select.ItemText>
                     <Select.ItemIndicator className="absolute top-2.5 right-3">
-                      <CheckIcon aria-hidden="true" className="size-4" />
+                      <CheckIcon
+                        aria-hidden="true"
+                        className="size-4"
+                        strokeWidth={variant === "plain" ? 2.5 : 1.5}
+                      />
                     </Select.ItemIndicator>
                   </Select.Item>
                 ))}

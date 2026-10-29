@@ -50,12 +50,10 @@ export default function TaskColorExamples() {
         return (
           <li
             key={example.label}
-            className={`flex min-w-0 flex-col gap-5 ${TASK_LAYOUT.surface} ${appearance.surface}`}
+            className={`text-foreground flex min-w-0 flex-col gap-5 ${TASK_LAYOUT.surface}`}
           >
             <div className="space-y-1.5">
-              <p className={`font-medium ${appearance.elapsed}`}>
-                {example.label}
-              </p>
+              <p className="text-foreground font-medium">{example.label}</p>
               <p className="text-muted text-sm">{example.description}</p>
             </div>
             <div className="mt-auto">

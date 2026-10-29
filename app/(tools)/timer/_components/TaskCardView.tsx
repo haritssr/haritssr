@@ -35,20 +35,22 @@ export default function TaskCardView({
   return (
     <div
       data-completed={reached || undefined}
-      className={`group/task min-w-0 flex-1 ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${appearance.surface} ${className}`}
+      className={`group/task text-foreground min-w-0 flex-1 sm:group-data-desktop-list-view/task-list:py-2 sm:group-data-desktop-list-view/task-list:pr-2 sm:group-data-desktop-list-view/task-list:shadow-sm sm:@md/task-list:group-data-desktop-list-view/task-list:grid sm:@md/task-list:group-data-desktop-list-view/task-list:grid-cols-[minmax(0,1fr)_minmax(20rem,1fr)] sm:@md/task-list:group-data-desktop-list-view/task-list:items-center sm:@md/task-list:group-data-desktop-list-view/task-list:gap-6 lg:@md/task-list:group-data-desktop-list-view/task-list:grid-cols-2 ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${className}`}
     >
       <div className="flex min-w-0 items-center justify-between gap-3">
         <p
-          className="text-foreground min-w-0 truncate text-lg font-medium"
+          className="text-foreground min-w-0 truncate text-lg font-medium sm:group-data-desktop-list-view/task-list:text-base"
           title={task.activity}
         >
           {task.activity}
         </p>
-        <div className="flex shrink-0 items-center gap-2">{headerActions}</div>
+        <div className="flex shrink-0 items-center gap-2 sm:group-data-desktop-list-view/task-list:gap-3">
+          {headerActions}
+        </div>
       </div>
       {children}
       <div
-        className={`group-data-completed/task:*:opacity-60 ${TASK_LAYOUT.controls}`}
+        className={`min-w-0 group-data-completed/task:*:opacity-60 sm:group-data-desktop-list-view/task-list:mt-0 lg:group-data-desktop-list-view/task-list:gap-4 ${TASK_LAYOUT.controls}`}
       >
         <div className="min-w-0">
           <TaskProgress

@@ -46,7 +46,7 @@ export default function TimerToolbar({
       ? { running: 0, paused: 0, ready: 0 }
       : getTaskCounts(snapshot.day.tasks, snapshot.today, timestamp);
   return (
-    <div className="border-border flex w-full flex-wrap items-end gap-2 sm:gap-3">
+    <div className="border-border flex w-full flex-wrap items-end gap-2 border-b border-dashed pb-4 sm:gap-3">
       <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-3">
         <AddTask disabled={!canUseTimer(snapshot)} />
         {backupActions}
@@ -92,7 +92,7 @@ function TaskCounts({ counts }: { counts: Record<TaskCountKey, number> }) {
   return (
     <ul
       aria-label="Task counts"
-      className="border-border bg-interface-hover text-muted ml-auto flex min-h-8.5 shrink-0 items-center rounded-md border px-1 text-sm tabular-nums sm:min-h-0 sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-base"
+      className="border-border bg-interface-hover text-muted max-sm:corner-squircle ml-auto flex h-8.5 shrink-0 items-center rounded-md border px-1 text-sm tabular-nums max-sm:supports-[corner-shape:squircle]:rounded-xl sm:h-auto sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-base"
     >
       {TASK_COUNT_STATES.map(({ key, label, color, textColor }, index) => (
         <li key={key} className="flex items-center">

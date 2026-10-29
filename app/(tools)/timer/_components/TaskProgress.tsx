@@ -8,16 +8,6 @@ import { formatRemainingTime } from "@/components/floating/formatRemainingTime";
 import { TASK_LAYOUT } from "./taskPresentation";
 import type { TaskAppearance } from "./taskPresentation";
 
-function progressTrack(appearance: TaskAppearance, compact: boolean) {
-  if (!compact && appearance.button === "timer-running") {
-    return "color-mix(in oklab, var(--color-timer-running) 20%, var(--color-border))";
-  }
-  if (!compact && appearance.button === "timer-paused") {
-    return "color-mix(in oklab, var(--color-timer-paused) 20%, var(--color-border))";
-  }
-  return "var(--color-slider-track-hover)";
-}
-
 export default function TaskProgress({
   task,
   spent,
@@ -41,7 +31,7 @@ export default function TaskProgress({
 }) {
   const stackClass = compact
     ? "@container flex flex-col gap-1.5"
-    : "flex flex-col gap-1";
+    : "flex flex-col gap-1 sm:group-data-desktop-list-view/task-list:timer-list-progress-gap";
   const percentage = Math.min(100, (spent / task.duration) * 100);
   const percentageLabel = percentage.toFixed(0);
   const progressStyle: CSSProperties & {
@@ -49,12 +39,12 @@ export default function TaskProgress({
     "--timer-progress-track": string;
   } = {
     "--timer-progress-fill": appearance.progress,
-    "--timer-progress-track": progressTrack(appearance, compact),
+    "--timer-progress-track": "var(--color-slider-track-hover)",
   };
   return (
     <div className={stackClass}>
       <div
-        className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
+        className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : `${TASK_LAYOUT.time} sm:group-data-desktop-list-view/task-list:text-xs`}`}
       >
         {title === undefined ? null : (
           <span className="flex min-w-0 flex-1 items-center gap-1 text-sm leading-4 font-medium normal-nums">
@@ -66,7 +56,7 @@ export default function TaskProgress({
         )}
         <span className="flex shrink-0 items-baseline gap-0.5">
           <span
-            className={`shrink-0 ${title === undefined ? appearance.elapsed : "text-muted"}`}
+            className={`shrink-0 ${title === undefined ? "text-foreground" : "text-muted"}`}
           >
             {title === undefined ? (
               formatTimerTime(spent)
@@ -97,7 +87,7 @@ export default function TaskProgress({
         )}
         {title === undefined ? (
           <span
-            className={`flex shrink-0 items-baseline gap-1 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} ${running ? appearance.elapsed : "text-muted"}`}
+            className={`flex shrink-0 items-baseline gap-1 ${compact ? "hidden @min-[9rem]:inline" : TASK_LAYOUT.percentage} text-muted`}
           >
             {compact ? (
               <>

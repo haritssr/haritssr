@@ -96,6 +96,7 @@ export interface TimerPreferences {
   revision: number;
   autoplay: boolean;
   multitask: boolean;
+  desktopListView: boolean;
   notificationsEnabled: boolean;
   durationPresets: number[];
   taskPresets: TimerTaskPreset[];

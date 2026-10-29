@@ -32,6 +32,10 @@
   corner-shape: squircle;
 }
 
+@utility timer-list-progress-gap {
+  gap: 0.21875rem;
+}
+
 @utility floating-material {
   @apply border-border shadow-foreground/10 border shadow-lg;
   background-color: var(--color-background);
@@ -168,8 +172,8 @@
   --color-action-hover: var(--color-blue-700);
   --color-secondary-accent: var(--color-purple-500);
   --color-identity-accent: var(--color-violet-500);
-  --color-timer-running: var(--color-green-600);
-  --color-timer-paused: var(--color-orange-500);
+  --color-timer-running: var(--color-orange-500);
+  --color-timer-paused: var(--color-green-600);
   --color-music: var(--color-teal-600);
   --color-contact-accent: var(--color-emerald-600);
   --color-muted: color-mix(

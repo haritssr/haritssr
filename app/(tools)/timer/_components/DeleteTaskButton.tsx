@@ -46,7 +46,12 @@ export default function DeleteTaskButton({
           <Button aria-label="Delete task" title="Delete" {...buttonProps} />
         }
       >
-        {children ?? <TrashIcon aria-hidden="true" className="size-5" />}
+        {children ?? (
+          <TrashIcon
+            aria-hidden="true"
+            className="size-5 sm:group-data-desktop-list-view/task-list:size-4.5"
+          />
+        )}
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Backdrop

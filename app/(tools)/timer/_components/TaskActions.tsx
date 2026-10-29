@@ -44,6 +44,22 @@ function controlPresentation(
   };
 }
 
+function TaskToggleIcon({
+  Icon,
+  running,
+}: {
+  Icon: typeof PlayIcon | typeof PauseIcon | typeof LockClosedIcon;
+  running: boolean;
+}) {
+  return (
+    <Icon
+      aria-hidden="true"
+      data-running={running}
+      className={`${running ? "size-6 sm:group-data-desktop-list-view/task-list:size-5" : "size-5 sm:group-data-desktop-list-view/task-list:size-4"} ${Icon === PlayIcon ? "translate-x-px" : ""}`}
+    />
+  );
+}
+
 export default function TaskActions({
   date,
   task,
@@ -114,7 +130,7 @@ export default function TaskActions({
           data-timer-secondary=""
           title="Delete"
           dimWhenDisabled={unavailable}
-          size="icon-circle"
+          size="timer-card"
           disabled={disabled}
           onDelete={async () =>
             await act({ action: "delete", date, taskId: task.id })
@@ -124,25 +140,25 @@ export default function TaskActions({
         />
       )}
       <Button
-        className={showDone ? "" : "select-none"}
+        className={showDone ? "disabled:cursor-default" : "select-none"}
         data-timer-play={showDone ? undefined : ""}
         data-timer-secondary={showDone ? "" : undefined}
-        dimWhenDisabled={unavailable}
-        size="icon-circle"
+        dimWhenDisabled={showDone || unavailable}
+        size="timer-card"
         disabled={showDone ? doneDisabled : disabled}
         aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
-        title={showDone ? "Done" : label}
+        title={showDone && doneDisabled ? undefined : actionTitle}
         onClick={showDone ? finishTask : toggleRunning}
         variant={showDone ? "timer-secondary" : variant}
       >
         {showDone ? (
-          <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-5" />
-        ) : (
-          <ToggleIcon
+          <CheckIcon
+            strokeWidth={3.5}
             aria-hidden="true"
-            data-running={running}
-            className={`size-5 ${ToggleIcon === PlayIcon ? "translate-x-px" : ""}`}
+            className="size-5 sm:group-data-desktop-list-view/task-list:size-3.5"
           />
+        ) : (
+          <TaskToggleIcon Icon={ToggleIcon} running={running} />
         )}
       </Button>
       {showDone ? (
@@ -150,18 +166,14 @@ export default function TaskActions({
           className="select-none"
           data-timer-play=""
           dimWhenDisabled={unavailable}
-          size="icon-circle"
+          size="timer-card"
           disabled={disabled}
           aria-label={`${toggleLabel}: ${task.activity}`}
           title={toggleTitle}
           onClick={toggleRunning}
           variant={variant}
         >
-          <ToggleIcon
-            aria-hidden="true"
-            data-running={running}
-            className={`size-5 ${ToggleIcon === PlayIcon ? "translate-x-px" : ""}`}
-          />
+          <TaskToggleIcon Icon={ToggleIcon} running={running} />
         </Button>
       ) : null}
     </div>

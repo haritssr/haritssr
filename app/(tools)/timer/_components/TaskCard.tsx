@@ -39,9 +39,9 @@ const TaskCard = memo(
       <TaskCardView
         task={task}
         state={state}
-        timeDisplay={daily ? "spent" : "spent-and-duration"}
+        timeDisplay="spent"
         timeNote={formatAvailabilityWindow(task.availabilityWindow)}
-        className={daily && (!state.available || reached) ? "opacity-50" : ""}
+        className={daily && (!state.available || reached) ? "opacity-35" : ""}
         headerActions={
           <>
             {daily ? (

@@ -45,7 +45,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "timer-paused":
     "border border-transparent bg-timer-paused font-medium text-white hover:bg-timer-paused/90 focus-visible:outline-timer-paused",
   "timer-secondary":
-    "border-[0.5px] border-border bg-secondary-button-surface font-medium text-foreground shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-colors duration-150 select-none hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground",
+    "border-[0.5px] border-border bg-secondary-button-surface font-medium text-foreground shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-colors duration-150 select-none enabled:hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground",
   music:
     "border border-transparent bg-music font-medium text-white hover:bg-music/90 focus-visible:outline-music",
   black:
@@ -97,6 +97,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
 const BUTTON_SIZE_CLASS = {
   "icon-circle":
     "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
+  "timer-card":
+    "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5 sm:group-data-desktop-list-view/task-list:size-8 sm:group-data-desktop-list-view/task-list:p-1",
   "icon-circle-large":
     "size-11 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
   "icon-large":

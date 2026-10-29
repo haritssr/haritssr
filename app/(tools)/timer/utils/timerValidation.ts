@@ -144,6 +144,7 @@ export const preferencesSchema = z.object({
   revision: z.number().int().nonnegative(),
   autoplay: z.boolean(),
   multitask: z.boolean(),
+  desktopListView: z.boolean().default(false),
   notificationsEnabled: z.boolean(),
   durationPresets: durationPresetsSchema.default(() => [
     ...DEFAULT_DURATION_PRESETS,
@@ -159,11 +160,13 @@ export const preferencesSchema = z.object({
 export const preferencesPatchSchema = preferencesSchema
   .omit({
     revision: true,
+    desktopListView: true,
     durationPresets: true,
     taskPresets: true,
     dailyTasks: true,
   })
   .extend({
+    desktopListView: z.boolean(),
     durationPresets: durationPresetsSchema,
     taskPresets: taskPresetsSchema,
     dailyTasks: dailyTasksSchema,

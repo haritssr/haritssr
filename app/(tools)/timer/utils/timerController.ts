@@ -36,12 +36,15 @@ export function createTimerController() {
       await mutations.preferences({ autoplay }),
     setMultitask: async (multitask: boolean) =>
       await mutations.preferences({ multitask }),
+    setDesktopListView: async (desktopListView: boolean) =>
+      await mutations.preferences({ desktopListView }),
     setNotificationsEnabled: async (notificationsEnabled: boolean) =>
       await mutations.preferences({ notificationsEnabled }),
   };
   const defaultPreferences = {
     autoplay: false,
     multitask: false,
+    desktopListView: false,
     notificationsEnabled: true,
     durationPresets: DEFAULT_DURATION_PRESETS,
     taskPresets: DEFAULT_TASK_PRESETS,
@@ -58,6 +61,7 @@ export function createTimerController() {
       clockOffset: snapshot?.clockOffset ?? 0,
       autoplay: preferences.autoplay,
       multitask: preferences.multitask,
+      desktopListView: preferences.desktopListView,
       notificationsEnabled: preferences.notificationsEnabled,
       durationPresets: preferences.durationPresets,
       taskPresets: preferences.taskPresets,

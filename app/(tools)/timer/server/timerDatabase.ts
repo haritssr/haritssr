@@ -63,6 +63,7 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
     id INTEGER PRIMARY KEY CHECK(id = 1), revision INTEGER NOT NULL DEFAULT 0,
     autoplay INTEGER NOT NULL DEFAULT 0 CHECK(autoplay IN (0, 1)),
     multitask INTEGER NOT NULL DEFAULT 0 CHECK(multitask IN (0, 1)),
+    desktop_list_view INTEGER NOT NULL DEFAULT 0 CHECK(desktop_list_view IN (0, 1)),
     notifications_enabled INTEGER NOT NULL DEFAULT 1 CHECK(notifications_enabled IN (0, 1)),
     duration_presets TEXT, task_presets TEXT, daily_tasks TEXT
   )`,
@@ -80,6 +81,11 @@ export async function initializeTimerDatabase(client: Client) {
       .map((name) => `ALTER TABLE timer_preferences ADD COLUMN ${name} TEXT`);
     if (additions.length > 0) {
       await tx.batch(additions);
+    }
+    if (!names.has("desktop_list_view")) {
+      await tx.execute(
+        "ALTER TABLE timer_preferences ADD COLUMN desktop_list_view INTEGER NOT NULL DEFAULT 0 CHECK(desktop_list_view IN (0, 1))"
+      );
     }
     await tx.execute({
       sql: "UPDATE timer_preferences SET daily_tasks = ?, revision = revision + 1 WHERE id = 1 AND daily_tasks IS NULL",
@@ -281,6 +287,7 @@ export async function readTimerState(tx: Transaction, date: string) {
       revision: Number(row.revision),
       autoplay: row.autoplay === 1,
       multitask: row.multitask === 1,
+      desktopListView: row.desktop_list_view === 1,
       notificationsEnabled: row.notifications_enabled === 1,
       durationPresets:
         typeof row.duration_presets === "string"
@@ -473,11 +480,12 @@ export async function writeTimerPreferences(
   prefs: TimerPreferences
 ) {
   await tx.execute({
-    sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, notifications_enabled = ?, duration_presets = ?, task_presets = ?, daily_tasks = ? WHERE id = 1",
+    sql: "UPDATE timer_preferences SET revision = ?, autoplay = ?, multitask = ?, desktop_list_view = ?, notifications_enabled = ?, duration_presets = ?, task_presets = ?, daily_tasks = ? WHERE id = 1",
     args: [
       prefs.revision,
       Number(prefs.autoplay),
       Number(prefs.multitask),
+      Number(prefs.desktopListView),
       Number(prefs.notificationsEnabled),
       JSON.stringify(prefs.durationPresets),
       JSON.stringify(prefs.taskPresets),

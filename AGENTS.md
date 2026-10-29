@@ -350,10 +350,18 @@ Save/Cancel. They sync and apply to Add/Edit without changing existing tasks.
 Daily Tasks adds a saved JSON definition list below presets, with Save/Cancel; edits
 apply to future days. Reserved `daily:` instances require a manual start,
 remain visible after completion, and cannot be edited/deleted for the current day.
+Unfinished windowed tasks move to History as Missed at closing, retaining progress
+and leaving active counts; tasks whose windows have not opened remain visible.
 The nullable JSON `timer_tasks.availability_window` uses Jakarta minutes (0–1440);
 opening is inclusive and closing pauses/locks without marking completion. Migration
 adds it plus `timer_preferences.daily_tasks` and preserves existing task windows.
-Autoplay, Multitask, and notification preferences also sync. Ticking defaults off,
+Autoplay, Multitask, notification, and Desktop List View preferences also sync.
+Desktop List View defaults off; `timer_preferences.desktop_list_view` stores it
+as a boolean integer, added idempotently by `bun run migrate:timer`. When enabled,
+the task collection stays one column; from `lg`, tasks and History each occupy
+two columns of a four-column grid with `gap-8`
+(1024px). Cards become horizontal when the list is at least 28rem wide; narrower
+cards stack to avoid clipping. Phone card layouts are unchanged. Ticking defaults off,
 stays browser-local, and uses Web Locks for audio; completion feedback is claimed globally.
 
 `TimerProvider` shares the account check and retains lazy `TimerRuntime` after owner

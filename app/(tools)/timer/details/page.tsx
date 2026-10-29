@@ -70,6 +70,12 @@ export default function TimerDetailsPage() {
               unfinished task.
             </li>
             <li>Save your own duration and task presets.</li>
+            <li>
+              Enable Desktop List View in Settings for one column of task cards.
+              From 1024px, the task list and History each occupy half the
+              available width. Cards use horizontal layouts when the list has
+              enough space.
+            </li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or
               completion notifications.
@@ -97,6 +103,10 @@ export default function TimerDetailsPage() {
               can explore read-only examples.
             </li>
             <li>
+              Desktop List View defaults off and syncs with your account. Turn
+              it off to restore the responsive card grid.
+            </li>
+            <li>
               New Jakarta days start with your saved Daily Tasks, paused with
               fresh progress. Existing dates are preserved, and running tasks
               stop at midnight.
@@ -113,7 +123,8 @@ export default function TimerDetailsPage() {
             <li>
               Daily tasks require a manual start. Their definitions cannot be
               changed or deleted from today’s cards. Finished daily cards stay
-              visible; early Done tasks can be restored from History.
+              visible; early Done tasks can be restored from History while their
+              window is open.
             </li>
             <li>
               Cards appear in this order: running, paused, not started, then
@@ -121,17 +132,17 @@ export default function TimerDetailsPage() {
               completion percentages come first; ties retain their saved order.
             </li>
             <li>
-              Availability follows Jakarta time. Outside its window, a card is
-              muted and its start control locks. A running task pauses at
-              closing without changing its duration or reporting an unfinished
-              task as complete.
+              Availability follows Jakarta time. Before its window, a card is
+              muted and its start control locks. At closing, unfinished tasks
+              move to History as Missed, preserving time spent without marking
+              them complete. A running task pauses at closing.
             </li>
             <li>
               Starting a task pauses the others unless Multitask is on; turning
               it off keeps the most recently started task running.
             </li>
             <li>
-              Done saves the time actually spent, while Reached means the full
+              Done saves the time actually spent, while Met means the full
               duration was used.
             </li>
             <li>
@@ -160,7 +171,7 @@ export default function TimerDetailsPage() {
         <Section
           id="task-colors"
           title="Task states"
-          description="Green means running, orange means paused, and neutral means ready to start."
+          description="Orange means running, green means paused, and neutral means ready to start."
         >
           <TaskColorExamples />
         </Section>
@@ -191,10 +202,10 @@ export default function TimerDetailsPage() {
                       availability window.
                     </li>
                     <li>
-                      Preferences store Autoplay, Multitask, notifications,
-                      presets, and JSON daily definitions, while database
-                      triggers maintain daily totals. Migration leaves existing
-                      task availability NULL; no new table is needed.
+                      Preferences store Autoplay, Multitask, Desktop List View,
+                      notifications, presets, and JSON daily definitions, while
+                      database triggers maintain daily totals. Migration leaves
+                      existing task availability NULL; no new table is needed.
                     </li>
                     <li>
                       Revisions protect concurrent changes, and completion

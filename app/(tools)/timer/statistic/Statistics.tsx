@@ -22,7 +22,7 @@ import Table from "@/components/Table";
 
 function taskStatus(task: TimerTask) {
   if (task.spent >= task.duration) {
-    return "Reached";
+    return "Met";
   }
   if (task.reachedAt !== null) {
     return "Done";

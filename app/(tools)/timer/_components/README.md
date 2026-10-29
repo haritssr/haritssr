@@ -55,27 +55,49 @@ Within `TASK_LAYOUT`, `collection` controls the outer grid and gaps,
 `surface` controls the card shell, and `controls` controls the timer/action area.
 Element-specific styles stay beside their JSX in the component files above.
 `TaskCardView` shares the presentation of ordinary and daily tasks. Its optional `timeDisplay` forwards to `TaskProgress`: `spent` hides the
-visible total-duration suffix on daily cards, while the default
-`spent-and-duration` preserves the ordinary Timer display. Both retain duration in the progress accessibility text.
+visible total-duration suffix. All Timer cards use `spent`; the default
+`spent-and-duration` remains available to other consumers. Both retain duration in the progress accessibility text.
 The optional `timeNote` places a short 24-hour availability range between elapsed
 and remaining time on scheduled daily cards, at the same font size. Midnight at
 the end of the day is shown as `24`.
 
 The header places the title on the left, with a Pencil Square edit button, and a document description icon on the right.
-Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and negative remaining time. Edit is a plain icon matching the description icon in size.
+Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time and negative remaining time. Edit is a plain icon matching the description icon in size.
 The description popover
 opens on hover or click. Tasks advance by one second per real second.
-Personal timer actions and Multitask keep
-their opacity while unavailable; preview controls remain dimmed. Saves do not
+Desktop List View defaults off and syncs through the preference queue. `TaskList`
+subscribes to `desktopListView` and sets a collection data attribute. When enabled,
+the collection stays one column at every size. From `lg` (1024px), a four-column
+grid with `gap-8` places the list in the first two columns and History in the
+last two; below `lg` both use the full width. When the list is at least 28rem wide, `TaskCardView`
+places the header and controls side by side, vertically centered with `gap-6`.
+Below `lg`, the columns reserve at least 20rem for time and actions. From `lg`,
+the header and controls use an equal split. Progress fills the space beside the
+buttons with `gap-4`, so bars align across cards. Narrower list cards stack their content to
+avoid clipping.
+List-view task names and time text use `text-base` and `text-xs` respectively.
+In this horizontal layout, task action buttons use the usual circular styling
+at `size-8`; mobile cards retain their 40px targets.
+Below `sm`, card layout is unchanged. Named group variants let cards respond to
+the collection attribute without changing their memoized props. The floating
+player retains its layout.
+Unavailable Done controls are dimmed and have no hover effect or tooltip.
+Other personal timer actions and Multitask keep their opacity while unavailable;
+preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
 
-Completed tasks appear in `CompletedTasksTable` below the active task grid.
-The section defaults collapsed. Hide collapses the sort controls and table; Show
-reveals them again. The expanded table wraps task names and descriptions and
+Completed and missed tasks appear in `CompletedTasksTable` beside the list from
+`lg` when Desktop List View is enabled, and below the tasks otherwise.
+The section defaults collapsed except in Desktop List View from `lg`, where the
+table and sort controls stay visible without a Show/Hide control. Elsewhere, Hide
+collapses the sort controls and table; Show reveals them again. The expanded table wraps task names and descriptions and
 scrolls horizontally on narrow screens. Restore returns an early Done task to
-the active list paused, preserving its time; Reached tasks cannot be restored.
+the active list paused, preserving its time, while its window is still open;
+Met and Missed tasks cannot be restored.
 `TaskList` partitions tasks using their current elapsed
-time, so a task moves into the table as soon as its duration is reached.
+time, so a task moves into the table as soon as its duration is reached or its
+availability window closes unfinished. Missed tasks retain their progress and
+are excluded from active counts without being marked Done or Met.
 Visible cards share one ordering across daily and ordinary tasks: running,
 paused, not started, then unavailable or reached cards. Completion percentage
 breaks ties within each group; equal percentages preserve saved order.
@@ -245,9 +267,9 @@ Export and Import share a segmented group beside the secondary Settings button.
 They show icons on smaller screens and icons with labels from 1024px, with native
 hover labels and accessible names.
 These controls sit beside Add Task, with running, paused, and not-started counts
-at the opposite end. Their dots use the green, orange, and foreground task colors,
+at the opposite end. Their dots use the orange, green, and foreground task colors,
 including when a count is zero. Completed tasks are excluded.
-Settings opens a modal containing Alerts, Autoplay, Multitask, and Sound
+Settings opens a modal containing Alerts, Autoplay, Multitask, Sound, and Desktop List View
 switches. Its header has the centered Settings title and a secondary Done button. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
 their section Save buttons. The
@@ -295,13 +317,14 @@ Jakarta midnight; NULL means anytime. Reads, snapshots, history, writes, and bac
 preserve this optional field. Legacy backups omit it and remain valid. Daily
 definitions remain preferences and are excluded from the history-only backup.
 
-Daily cards stay first in their saved order, including completed and exhausted
-cards, followed by active ordinary tasks. History and statistics still include
-their progress once. Daily cards show elapsed time, availability, and remaining
-daily duration without a total-duration suffix or recurring icon. Outside a window
-or after completion, they are muted and Play/Continue becomes a disabled lock.
+Daily and ordinary cards share the same state-based ordering. Completed daily
+cards remain visible, while unfinished tasks with closed windows move into
+History as Missed. History and statistics still include their progress once.
+Daily cards show elapsed time, availability, and remaining daily duration without
+a total-duration suffix or recurring icon. Before a window or after completion,
+they are muted and Play/Continue becomes a disabled lock.
 Descriptions and future-day Settings remain accessible. Done can finish a started
-task early; History can restore it without resetting progress.
+task early; History can restore it without resetting progress while its window is open.
 
 `taskWindowEnd`, `taskAvailable`, and `taskTransitionTime` share cutoff rules between
 display, optimistic commands, server settlement, refresh scheduling, floating
