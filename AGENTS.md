@@ -388,7 +388,8 @@ idle clocks, and `useTimerDeadlineReminders`. Visible owner pages claim reminder
 through `claim-deadline-reminder`; a nullable `timer_tasks.deadline_reminder_at`
 timestamp, added by `migrate:timer`, deduplicates task/date toasts across devices.
 Running tasks that fit suppress warnings; finished tasks and closed windows clear
-them. The size-5 danger icon before Edit pulses with reduced-motion protection.
+them. The size-5 icon before Edit uses attention for upcoming deadlines and danger when
+there is not enough time to finish; it pulses with reduced-motion protection.
 Deadline toasts are silent, separate from completion claims/Autoplay, and do not
 use system notifications. Uncertain claim writes refresh without resending.
 Legacy backups accept missing claims; duplicate-import comparison ignores them.
