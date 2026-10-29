@@ -12,7 +12,7 @@ export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
     activity: "X",
     description: "",
     duration: 1800,
-    availabilityWindow: { from: 1080, until: 1440 },
+    availabilityWindow: { from: 1080, until: 1380 },
   },
   {
     id: "daily:youtube",
@@ -40,7 +40,7 @@ export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
     activity: "Evening Meditation",
     description: "",
     duration: 1800,
-    availabilityWindow: { from: 1080, until: 1320 },
+    availabilityWindow: { from: 1080, until: 1260 },
   },
   {
     id: "daily:exercise",
@@ -71,13 +71,10 @@ export function createDailyTasks(
   }));
 }
 
-function windowTime(minutes: number, end: boolean) {
-  const hour = Math.floor(minutes / 60) % 24;
-  // Preserve the approved compact 23pm label for an 11 PM closing time.
-  const displayHour = end && hour === 23 ? 23 : hour % 12 || 12;
+function windowTime(minutes: number) {
+  const hour = Math.floor(minutes / 60);
   const remainder = minutes % 60;
-  const clock = `${displayHour}${remainder === 0 ? "" : `:${String(remainder).padStart(2, "0")}`}`;
-  return end ? `${clock}${hour < 12 ? "am" : "pm"}` : clock;
+  return `${hour}${remainder === 0 ? "" : `:${String(remainder).padStart(2, "0")}`}`;
 }
 
 export function formatAvailabilityWindow(
@@ -85,5 +82,5 @@ export function formatAvailabilityWindow(
 ) {
   return window === null || window === undefined
     ? undefined
-    : `${windowTime(window.from, false)}-${windowTime(window.until, true)}`;
+    : `${windowTime(window.from)}-${windowTime(window.until)}`;
 }

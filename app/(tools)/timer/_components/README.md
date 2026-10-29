@@ -57,8 +57,9 @@ Element-specific styles stay beside their JSX in the component files above.
 `TaskCardView` shares the presentation of ordinary and daily tasks. Its optional `timeDisplay` forwards to `TaskProgress`: `spent` hides the
 visible total-duration suffix on daily cards, while the default
 `spent-and-duration` preserves the ordinary Timer display. Both retain duration in the progress accessibility text.
-The optional `timeNote` places a short availability range between elapsed and
-remaining time on scheduled daily cards, at the same font size.
+The optional `timeNote` places a short 24-hour availability range between elapsed
+and remaining time on scheduled daily cards, at the same font size. Midnight at
+the end of the day is shown as `24`.
 
 The header places the title on the left, with a Pencil Square edit button, and a document description icon on the right.
 Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time, duration, and negative remaining time. Edit is a plain icon matching the description icon in size.
