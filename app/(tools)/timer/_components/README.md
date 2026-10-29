@@ -43,13 +43,14 @@ keep each form section easy to locate. `DurationFields` is shared too.
 Task form parsing lives in [timerInput.ts](../utils/timerInput.ts). Its lightweight
 limits are shared with input counters and server schemas; stored legacy text keeps
 its existing broader limits. Live elapsed-time validation remains in Edit.
-Name allows 20 characters; the optional Description allows 35. Both show a
+Name allows 20 characters; the optional Description allows 35, or 2,000 for a
+daily task. Both show a
 character counter beside their labels, using `text-attention` for Name and
 `text-danger` for Description at the limit. Each field has
 a Clear button with a native Clear hover hint that empties it and returns focus
 to the field. Name and Description start at 40px tall; Description can be resized
-vertically and uses a subtle scrollbar when needed. Longer descriptions in existing
-records remain readable and must be shortened when editing the task.
+vertically and uses a subtle scrollbar when needed. Longer descriptions in ordinary
+legacy records remain readable and must be shortened when editing the task.
 
 `taskPresentation.ts` holds layout choices shared by the collection and cards.
 Within `TASK_LAYOUT`, `collection` controls the outer grid and gaps,
@@ -323,8 +324,8 @@ descriptions allow 2,000 characters. The list may be empty and shares the existi
 100-task daily ceiling. Scheduled availability uses From/Until in WIB; Until 00:00
 means the following midnight. Overnight windows other than that cutoff are rejected.
 Closing Settings discards unsaved changes. `TimerSettings.tsx` owns one page-scoped
-Base UI handle: toolbar and card triggers send general/daily payloads, open the
-matching section, and restore focus through Base UI. The settings subtree is a
+Base UI handle: the toolbar trigger opens Settings and restores focus through Base
+UI. The settings subtree is a
 sibling of the ticking toolbar; it has no custom window-event handoff. Definitions, ordering, and removal apply to future days only.
 
 `utils/dailyTasks.ts` supplies the initial X (30m), YouTube (2h), Housekeeping (1h),
@@ -345,7 +346,8 @@ History as Missed. History and statistics still include their progress once.
 Daily cards show elapsed time, availability, and remaining daily duration without
 a total-duration suffix or recurring icon. Before a window or after completion,
 they are muted and Play/Continue becomes a disabled lock.
-Descriptions and future-day Settings remain accessible. Done can finish a started
+Descriptions remain accessible, and unfinished cards can be edited for today.
+Done can finish a started
 task early; History can restore it without resetting progress while its window is open.
 
 `taskWindowEnd`, `taskAvailable`, and `taskTransitionTime` share cutoff rules between
@@ -353,8 +355,9 @@ display, optimistic commands, server settlement, refresh scheduling, floating
 eligibility, and audio. Opening is inclusive, closing exclusive. Closing a window
 pauses a task without marking it complete or issuing a completion alert. The
 remaining duration stays the daily allowance, even if less window time is left.
-Daily tasks cannot edit their current definition or be deleted;
-Autoplay skips them. Ordinary task behavior is preserved.
+Editing a daily card changes its name, description, and duration for today only;
+its availability and future-day definition are unchanged. Daily cards cannot be
+deleted, and Autoplay skips them. Ordinary task behavior is preserved.
 
 Tasks always advance in real time. Existing recorded progress is preserved. Legacy
 version-1 backups remain accepted: retired speed fields are discarded, and any

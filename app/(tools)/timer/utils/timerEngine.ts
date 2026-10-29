@@ -172,7 +172,7 @@ function changeTask(
   if (task === undefined) {
     throw new TimerStoreError("Task not found.", 404);
   }
-  if (isDailyTask(task) && ["edit", "delete"].includes(command.action)) {
+  if (isDailyTask(task) && command.action === "delete") {
     throw new TimerStoreError(
       "Change Daily Tasks in Settings for future days.",
       409

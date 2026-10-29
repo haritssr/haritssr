@@ -322,9 +322,9 @@ Vercel Production variables and redeploy before retrying.
   the most recently started task with the preference change.
 - Autoplay prefers paused unfinished tasks when none run. Tasks advance in real
   time. Done preserves actual time; Reached stops at duration.
-- Duration must exceed spent time. Names: 20 characters; descriptions: 35 (shorten
-  longer legacy descriptions on edit). Newly initialized days copy saved Daily
-  Tasks; existing dates are not backfilled.
+- Duration must exceed spent time. Names: 20 characters; ordinary descriptions:
+  35 (shorten longer legacy descriptions on edit); daily descriptions: 2,000.
+  Newly initialized days copy saved Daily Tasks; existing dates are not backfilled.
 - Timestamps drive time without per-second writes; tasks stop at Jakarta midnight.
   Transactions allow one device to claim each completion/transition.
 - Web Locks elect one visible owner tab to poll every 30 seconds running / two
@@ -349,7 +349,7 @@ Duration Presets allow 1–5 entries (one second–24 hours), Task Presets 1–1
 Save/Cancel. They sync and apply to Add/Edit without changing existing tasks.
 Daily Tasks adds a saved JSON definition list below presets, with Save/Cancel; edits
 apply to future days. Reserved `daily:` instances require a manual start,
-remain visible after completion, and cannot be edited/deleted for the current day.
+remain visible after completion, and can be edited for today but not deleted.
 Unfinished windowed tasks move to History as Missed at closing, retaining progress
 and leaving active counts; tasks whose windows have not opened remain visible.
 The nullable JSON `timer_tasks.availability_window` uses Jakarta minutes (0–1440);

@@ -1,4 +1,3 @@
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { memo } from "react";
 
 import {
@@ -14,7 +13,6 @@ import TaskDescription from "./TaskDescription";
 import { EditTask } from "./TaskDialog";
 import { taskAppearance } from "./taskPresentation";
 import type { TaskState } from "./taskState";
-import { TimerSettingsTrigger } from "./TimerSettings";
 
 interface TaskCardProps {
   task: TimerTask;
@@ -46,23 +44,7 @@ const TaskCard = memo(
         headerActions={
           <>
             <TaskDeadlineWarning state={state} />
-            {daily ? (
-              <TimerSettingsTrigger
-                section="daily"
-                size="text"
-                variant="icon-muted"
-                aria-label={`Daily settings for ${task.activity}`}
-                title="Daily Tasks"
-              >
-                <PencilSquareIcon
-                  aria-hidden="true"
-                  className="size-5"
-                  strokeWidth={1.5}
-                />
-              </TimerSettingsTrigger>
-            ) : (
-              <EditTask task={task} date={date} reached={false} />
-            )}
+            <EditTask task={task} date={date} reached={reached} />
             <TaskDescription task={task} />
           </>
         }

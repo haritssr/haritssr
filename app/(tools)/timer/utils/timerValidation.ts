@@ -95,12 +95,23 @@ export const actionSchema = z.discriminatedUnion("action", [
     taskId: z.string().min(1).max(100),
     multitask: z.boolean().optional(),
   }),
-  z.object({
-    action: z.literal("edit"),
-    date: dateSchema,
-    taskId: z.string().min(1).max(100),
-    ...taskDetails,
-  }),
+  z
+    .object({
+      action: z.literal("edit"),
+      date: dateSchema,
+      taskId: z.string().min(1).max(100),
+      ...taskDetails,
+      description: z.string().trim().max(DAILY_DESCRIPTION_LIMIT),
+    })
+    .refine(
+      ({ taskId, description }) =>
+        taskId.startsWith("daily:") ||
+        description.length <= TASK_INPUT_LIMITS.description,
+      {
+        path: ["description"],
+        message: "Use 35 characters or fewer for the description.",
+      }
+    ),
   z.object({
     action: z.literal("add"),
     taskId: z.uuid().optional(),

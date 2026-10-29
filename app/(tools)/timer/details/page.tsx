@@ -135,8 +135,9 @@ export default function TimerDetailsPage() {
               draft. Daily descriptions allow up to 2,000 characters.
             </li>
             <li>
-              Daily tasks require a manual start. Their definitions cannot be
-              changed or deleted from today’s cards. Finished daily cards stay
+              Daily tasks require a manual start. Editing a card changes only
+              today’s task; its schedule and future-day definition stay the
+              same. Daily cards cannot be deleted. Finished daily cards stay
               visible; early Done tasks can be restored from History while their
               window is open.
             </li>

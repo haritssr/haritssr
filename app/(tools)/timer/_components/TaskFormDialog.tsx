@@ -28,6 +28,8 @@ interface TaskFormDialogProps {
   defaultActivity: string;
   defaultDescription?: string;
   defaultDuration?: number;
+  descriptionLimit?: number;
+  notice?: string;
   showTaskPresets?: boolean;
   busy: boolean;
   error: string | null;
@@ -49,6 +51,8 @@ function TaskFormPopup({
   defaultActivity,
   defaultDescription = "",
   defaultDuration = 300,
+  descriptionLimit,
+  notice,
   showTaskPresets = false,
   busy,
   error,
@@ -79,6 +83,9 @@ function TaskFormPopup({
             void onSubmit(event);
           }}
         >
+          {notice === undefined ? null : (
+            <p className="text-muted text-sm">{notice}</p>
+          )}
           <TaskNameField
             value={activity}
             onChange={setActivity}
@@ -88,6 +95,7 @@ function TaskFormPopup({
           <TaskDescriptionField
             value={description}
             onChange={setDescription}
+            maxLength={descriptionLimit}
             disabled={busy}
           />
           <DurationFields

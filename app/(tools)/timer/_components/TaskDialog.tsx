@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
+import {
+  DAILY_DESCRIPTION_LIMIT,
+  isDailyTask,
+} from "@/app/(tools)/timer/utils/dailyTasks";
 import { canUseTimer, taskSpent } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import { readTaskForm } from "@/app/(tools)/timer/utils/timerInput";
@@ -28,9 +32,13 @@ export function EditTask({
   );
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const daily = isDailyTask(task);
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    const values = readTaskForm(new FormData(event.currentTarget));
+    const values = readTaskForm(
+      new FormData(event.currentTarget),
+      daily ? DAILY_DESCRIPTION_LIMIT : undefined
+    );
     if (typeof values === "string") {
       setFormError(values);
       return;
@@ -84,10 +92,12 @@ export function EditTask({
         defaultActivity={drafts[task.id]?.activity ?? task.activity}
         defaultDescription={drafts[task.id]?.description ?? task.description}
         defaultDuration={drafts[task.id]?.duration ?? task.duration}
+        descriptionLimit={daily ? DAILY_DESCRIPTION_LIMIT : undefined}
+        notice={daily ? "Changes apply to today." : undefined}
         busy={false}
         error={formError}
         onSubmit={submit}
-        onDelete={deleteTask}
+        onDelete={daily ? undefined : deleteTask}
       />
     </Dialog.Root>
   );
