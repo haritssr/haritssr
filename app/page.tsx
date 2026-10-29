@@ -163,7 +163,9 @@ function PersonalDetails() {
 function ProfileInvitation() {
   return (
     <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-      <p className="text-foreground">Need UI design or a high school lesson?</p>
+      <p className="text-foreground lg:max-w-32">
+        Need UI design or a high school lesson?
+      </p>
       <ProfileActions />
     </div>
   );
