@@ -77,10 +77,10 @@ export default function TimerDetailsPage() {
             </li>
             <li>Save your own duration and task presets.</li>
             <li>
-              Enable Desktop List View in Settings for one column of task cards.
-              From 1024px, the task list and History each occupy half the
-              available width. Cards use horizontal layouts when the list has
-              enough space.
+              Enable List View in Settings at 1024px and wider for one column of
+              task cards. At that width, the task list and History each occupy
+              half the available width. Cards use horizontal layouts when the
+              list has enough space.
             </li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or
@@ -109,8 +109,8 @@ export default function TimerDetailsPage() {
               can explore read-only examples.
             </li>
             <li>
-              Desktop List View defaults off and syncs with your account. Turn
-              it off to restore the responsive card grid.
+              List View defaults off and syncs with your account. Turn it off to
+              restore the responsive card grid.
             </li>
             <li>
               Deadline warnings clear while a running task can finish on time,
@@ -145,9 +145,11 @@ export default function TimerDetailsPage() {
               When you open the page, running tasks come first, followed by
               available tasks with progress, unstarted tasks, and upcoming
               tasks. Higher percentages come first within each group; ties
-              retain their saved order. Cards keep their positions during your
-              visit, and new or restored tasks appear at the end. The order
-              resets when you reopen the page or a new Jakarta day begins.
+              retain their saved order. Running tasks move to the top and stay
+              ordered by percentage during your visit. Other cards keep their
+              positions, and new or restored available tasks appear before
+              upcoming tasks. The order resets when you reopen the page or a new
+              Jakarta day begins.
             </li>
             <li>
               Availability follows Jakarta time. Before its window, a card is
@@ -222,7 +224,7 @@ export default function TimerDetailsPage() {
                       devices.
                     </li>
                     <li>
-                      Preferences store Autoplay, Multitask, Desktop List View,
+                      Preferences store Autoplay, Multitask, List View,
                       notifications, presets, and JSON daily definitions, while
                       database triggers maintain daily totals. Migration leaves
                       existing task availability NULL; no new table is needed.

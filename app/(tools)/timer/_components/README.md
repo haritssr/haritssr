@@ -67,7 +67,7 @@ The header places the title on the left, with a Pencil Square edit button, and a
 Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time and negative remaining time. Edit is a plain icon matching the description icon in size.
 The description popover
 opens on hover or click. Tasks advance by one second per real second.
-Desktop List View defaults off and syncs through the preference queue. `TaskList`
+List View defaults off and syncs through the preference queue. `TaskList`
 subscribes to `desktopListView` and sets a collection data attribute. When enabled,
 the collection stays one column at every size. From `lg` (1024px), a four-column
 grid with `gap-8` places the list in the first two columns and History in the
@@ -95,7 +95,7 @@ preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
 
 Completed and missed tasks appear in `CompletedTasksTable` beside the list from
-`lg` when Desktop List View is enabled, and below the tasks otherwise.
+`lg` when List View is enabled, and below the tasks otherwise.
 The section defaults collapsed at every size. Hide collapses the sort controls
 and table; Show reveals them again.
 The expanded table wraps task names and descriptions and
@@ -110,9 +110,10 @@ On page load, running cards come first, followed by available cards with progres
 unstarted cards, and upcoming unavailable cards. Missed
 tasks whose windows have closed appear in History. Completion percentage breaks
 ties within each group; equal percentages preserve saved order. Cards keep their
-positions during the visit as states and percentages change. New or restored
-cards append; completed, missed, and deleted cards leave the active list. The
-order resets on a new Jakarta day or when the page is reopened.
+positions during the visit except that running tasks move to the top, ordered by
+completion percentage. New or restored available cards appear before upcoming
+cards; completed, missed, and deleted cards leave the active list. The order
+resets on a new Jakarta day or when the page is reopened.
 The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
@@ -259,8 +260,8 @@ modules keep independent work separate:
   completions and supplies browser notifications and visible feedback.
   Completion messages use the shared share-feedback toast in the floating dock,
   above Music and Timer, with plain task text and a circular Done button. They
-  stack for separate completions and ring until individually dismissed. Multiple
-  completion notifications share one repeating sound.
+  stack for separate completions and ring until dismissed or automatically closed
+  after ten seconds. Multiple completion notifications share one repeating sound.
   The local completion deadline displays and rings the toast immediately; server confirmation
   enables browser alerts without delaying the message or sound. A dismissed
   pending toast stays dismissed when confirmation arrives, and a completion
@@ -291,8 +292,9 @@ Export and Import share a segmented group beside the secondary Settings button.
 They show icons on smaller screens and icons with labels from 1024px, with native
 hover labels and accessible names.
 These controls sit beside Add Task.
-Settings opens a modal containing Alerts, Autoplay, Multitask, Sound, and Desktop List View
-switches. Its header has the centered Settings title and a secondary Done button. Escape or clicking
+Settings contains Alerts, Autoplay, Multitask, Sound, and List View controls.
+The List View control appears at 1024px and wider.
+The Settings modal also contains the preset editors. Its header has the centered Settings title and a secondary Done button. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
 their section Save buttons. The
 switches retain their existing icons, followed by initially collapsed Duration

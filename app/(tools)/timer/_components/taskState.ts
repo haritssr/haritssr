@@ -64,20 +64,37 @@ function compareTasks(first: TaskEntry, second: TaskEntry) {
   );
 }
 
-export function reconcileTaskOrder(previous: string[], visible: string[]) {
-  const visibleIds = new Set(visible);
+export function reconcileTaskOrder(previous: string[], visible: TaskEntry[]) {
+  const visibleIds = new Set(visible.map(({ task }) => task.id));
+  const upcomingIds = new Set(
+    visible.filter(({ state }) => !state.available).map(({ task }) => task.id)
+  );
   const order = previous.filter((id) => visibleIds.has(id));
   const knownIds = new Set(order);
-  for (const id of visible) {
+  for (const { task, state } of visible) {
+    const { id } = task;
     if (!knownIds.has(id)) {
-      order.push(id);
+      const upcomingIndex = state.available
+        ? order.findIndex((existingId) => upcomingIds.has(existingId))
+        : -1;
+      if (upcomingIndex === -1) {
+        order.push(id);
+      } else {
+        order.splice(upcomingIndex, 0, id);
+      }
       knownIds.add(id);
     }
   }
-  return order.length === previous.length &&
-    order.every((id, index) => id === previous[index])
+  const running = visible.filter(({ state }) => state.running);
+  const runningIds = new Set(running.map(({ task }) => task.id));
+  const nextOrder = [
+    ...running.map(({ task }) => task.id),
+    ...order.filter((id) => !runningIds.has(id)),
+  ];
+  return nextOrder.length === previous.length &&
+    nextOrder.every((id, index) => id === previous[index])
     ? previous
-    : order;
+    : nextOrder;
 }
 
 export function getTaskCollection(

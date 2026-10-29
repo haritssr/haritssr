@@ -38,10 +38,7 @@ export default function TaskList() {
     timestamp
   );
   const previousOrder = ordering?.date === snapshot.today ? ordering.ids : [];
-  const nextOrder = reconcileTaskOrder(
-    previousOrder,
-    visible.map(({ task }) => task.id)
-  );
+  const nextOrder = reconcileTaskOrder(previousOrder, visible);
   if (ordering?.date !== snapshot.today || nextOrder !== ordering.ids) {
     setOrdering({ date: snapshot.today, ids: nextOrder });
   }

@@ -79,7 +79,10 @@ export default function TimerSettingsScope({
                   </Dialog.Close>
                 </div>
               </div>
-              <TimerSettingsControls dailyOpen={payload === "daily"} />
+              <div className="space-y-5">
+                <TimerSettingsControls />
+                <PresetSettings dailyOpen={payload === "daily"} />
+              </div>
             </Dialog.Popup>
           </Dialog.Portal>
         )}
@@ -105,7 +108,7 @@ function serverPermission() {
   return "default" as const;
 }
 
-function TimerSettingsControls({ dailyOpen }: { dailyOpen: boolean }) {
+function TimerSettingsControls() {
   const {
     snapshot,
     notificationsEnabled,
@@ -132,60 +135,66 @@ function TimerSettingsControls({ dailyOpen }: { dailyOpen: boolean }) {
   );
   const permission = permissionFailed ? "unsupported" : browserPermission;
   return (
-    <div className="space-y-5">
-      <div className="divide-border space-y-2.5 divide-y divide-dashed [&>*:not(:last-child)]:pb-2.5">
-        <TimerSettingSwitch
-          label="Alerts"
-          icon={<BellAlertIcon aria-hidden="true" className="size-4.5" />}
-          title={
-            permission === "denied" || permission === "unsupported"
-              ? "Browser notifications unavailable"
-              : "Alerts"
+    <div className="divide-border space-y-2.5 divide-y divide-dashed [&>*:not(:last-child)]:pb-2.5">
+      <TimerSettingSwitch
+        label="Alerts"
+        icon={
+          <BellAlertIcon aria-hidden="true" className="size-4.5 stroke-2" />
+        }
+        title={
+          permission === "denied" || permission === "unsupported"
+            ? "Browser notifications unavailable"
+            : "Alerts"
+        }
+        disabled={
+          !canUseTimer(snapshot) ||
+          permission === "denied" ||
+          permission === "unsupported"
+        }
+        checked={permission === "granted" && notificationsEnabled}
+        onCheckedChange={(pressed) => {
+          if (permission === "default") {
+            void Notification.requestPermission()
+              .then((result) => {
+                void setNotificationsEnabled(result === "granted");
+                window.dispatchEvent(new Event("timer-notifications"));
+              })
+              .catch(() => {
+                setPermissionFailed(true);
+              });
+          } else {
+            void setNotificationsEnabled(pressed);
           }
-          disabled={
-            !canUseTimer(snapshot) ||
-            permission === "denied" ||
-            permission === "unsupported"
-          }
-          checked={permission === "granted" && notificationsEnabled}
-          onCheckedChange={(pressed) => {
-            if (permission === "default") {
-              void Notification.requestPermission()
-                .then((result) => {
-                  void setNotificationsEnabled(result === "granted");
-                  window.dispatchEvent(new Event("timer-notifications"));
-                })
-                .catch(() => {
-                  setPermissionFailed(true);
-                });
-            } else {
-              void setNotificationsEnabled(pressed);
-            }
-          }}
-        />
+        }}
+      />
+      <TimerSettingSwitch
+        label="Autoplay"
+        icon={<ForwardIcon aria-hidden="true" className="size-4.5 stroke-2" />}
+        title="Autoplay"
+        disabled={!canUseTimer(snapshot)}
+        checked={autoplay}
+        onCheckedChange={(next) => {
+          void setAutoplay(next);
+        }}
+      />
+      <MultitaskSetting />
+      <TimerSettingSwitch
+        label="Sound"
+        title="Sound"
+        icon={
+          <SpeakerWaveIcon aria-hidden="true" className="size-4.5 stroke-2" />
+        }
+        disabled={!canUseTimer(snapshot)}
+        checked={tickingEnabled}
+        onCheckedChange={setTickingEnabled}
+      />
+      <div className="hidden lg:block">
         <TimerSettingSwitch
-          label="Autoplay"
-          icon={<ForwardIcon aria-hidden="true" className="size-4.5" />}
-          title="Autoplay"
-          disabled={!canUseTimer(snapshot)}
-          checked={autoplay}
-          onCheckedChange={(next) => {
-            void setAutoplay(next);
-          }}
-        />
-        <MultitaskSetting />
-        <TimerSettingSwitch
-          label="Sound"
-          title="Sound"
-          icon={<SpeakerWaveIcon aria-hidden="true" className="size-4.5" />}
-          disabled={!canUseTimer(snapshot)}
-          checked={tickingEnabled}
-          onCheckedChange={setTickingEnabled}
-        />
-        <TimerSettingSwitch
-          label="Desktop List View"
+          label="List View"
           title="Show horizontal task rows on screens 640px and wider"
-          icon={<ListBulletIcon aria-hidden="true" className="size-4.5" />}
+          icon={
+            <ListBulletIcon aria-hidden="true" className="size-4.5 stroke-2" />
+          }
           disabled={!canUseTimer(snapshot)}
           checked={desktopListView}
           onCheckedChange={(next) => {
@@ -193,7 +202,6 @@ function TimerSettingsControls({ dailyOpen }: { dailyOpen: boolean }) {
           }}
         />
       </div>
-      <PresetSettings dailyOpen={dailyOpen} />
     </div>
   );
 }
@@ -230,7 +238,12 @@ function MultitaskSetting() {
         checked={multitask}
         disabled={!canUseTimer(snapshot)}
         dimWhenDisabled={!canUseTimer(snapshot)}
-        icon={<Square3Stack3DIcon aria-hidden="true" className="size-4.5" />}
+        icon={
+          <Square3Stack3DIcon
+            aria-hidden="true"
+            className="size-4.5 stroke-2"
+          />
+        }
         label="Multitask"
         ref={toggleRef}
         onCheckedChange={(checked) => {
