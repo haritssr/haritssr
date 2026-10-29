@@ -105,7 +105,7 @@ function PersonalDetails() {
           <ProfileInvitation />
         </div>
       </div>
-      <div className="border-border grid gap-4 border-t border-dashed pt-4 md:grid-cols-3">
+      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-2 md:before:right-0 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed">
         <ul
           aria-label="Profile and contacts"
           className="text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
@@ -203,7 +203,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       <ul
         aria-label="Background and tools"
         id={mobile ? "personal-notes-mobile" : "personal-notes"}
-        className="border-border text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:border-l md:border-dashed md:pl-9"
+        className="border-border text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:-mt-4 md:border-l md:border-dashed md:pt-4 md:pl-9"
       >
         <li>Touch typist, ±90 WPM.</li>
         <li>Former chess player, ±2000 Elo.</li>
@@ -266,6 +266,19 @@ function Tools({ count }: { count?: number }) {
         }
       />
       <IndexCard
+        title={musicRoute.title}
+        description={musicRoute.description}
+        href={musicRoute.route}
+        headingLevel={3}
+        icon={
+          <MusicalNoteIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
         title="Commits"
         badge="DB"
         description="Recent code changes and updates across this site."
@@ -288,19 +301,6 @@ function Tools({ count }: { count?: number }) {
         headingLevel={3}
         icon={
           <QueueListIcon
-            aria-hidden="true"
-            className="text-foreground size-4.5 shrink-0"
-            strokeWidth={1.5}
-          />
-        }
-      />
-      <IndexCard
-        title={musicRoute.title}
-        description={musicRoute.description}
-        href={musicRoute.route}
-        headingLevel={3}
-        icon={
-          <MusicalNoteIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}
