@@ -266,11 +266,6 @@ export default function DesignSystem() {
               .
             </li>
             <li>
-              The Components system takes cues from the tools used to solve math
-              and physics problems: paper, pencils, whiteboards, and pencil
-              cases.
-            </li>
-            <li>
               Heavily inspired by{" "}
               <ExternalLink
                 href="https://developer.apple.com/videos/design/"
