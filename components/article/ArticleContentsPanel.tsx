@@ -69,7 +69,7 @@ function ContentsList({
 
   return (
     <List
-      className={`marker:text-foreground/70 text-base [&_li]:space-y-3 ${depth === 0 ? "list-decimal space-y-3 pl-5" : "list-disc space-y-1.5 pl-5"}`}
+      className={`marker:text-foreground/70 text-base [&_li]:space-y-3 ${depth === 0 ? "list-decimal space-y-3 pl-8" : "list-disc space-y-1.5 pl-5"}`}
     >
       {entries.map((entry) => (
         <li
