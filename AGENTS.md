@@ -48,8 +48,10 @@ review; Markdown/MDX are excluded from Oxfmt, but writing MDX needs content vali
 | `NODE_ENV=production bun run validate:content` | Content changes that could affect public lab availability, production filters, or local DB gates. |
 | `bun run fix <files...>` | Auto-fixable errors in edited files; review the diff. Never fix the whole project for a local change or run on passing/manual-only checks. |
 
-Simple visual changes need only scoped `check`, including inline styles and CSS
-custom properties when contracts and behavior stay unchanged. Do not typecheck them.
+Simple class or styling changes need only scoped `check`, including inline styles
+and CSS custom properties when contracts and behavior stay unchanged. Do not run
+`typecheck`, `knip`, or `knip:production` for these changes. If the same work also
+changes logic, types, imports, or the module graph, apply the relevant triggers above.
 
 # Design and Components
 
