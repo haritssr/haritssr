@@ -2,7 +2,7 @@
 
 import { Toast } from "@base-ui/react/toast";
 import { CheckIcon } from "@heroicons/react/24/outline";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 import {
@@ -53,7 +53,36 @@ export function useSharePageUrl() {
 }
 
 export function ShareToastViewport() {
-  const { toasts } = Toast.useToastManager();
+  const { toasts, close } = Toast.useToastManager();
+  const timers = useRef(new Map<string, ReturnType<typeof setTimeout>>());
+  useEffect(() => {
+    const activeIds = new Set(toasts.map((toast) => toast.id));
+    for (const [id, timer] of timers.current) {
+      if (!activeIds.has(id)) {
+        clearTimeout(timer);
+        timers.current.delete(id);
+      }
+    }
+    for (const toast of toasts) {
+      if (!timers.current.has(toast.id)) {
+        timers.current.set(
+          toast.id,
+          setTimeout(() => {
+            close(toast.id);
+          }, 10_000)
+        );
+      }
+    }
+  }, [toasts, close]);
+  useEffect(() => {
+    const activeTimers = timers.current;
+    return () => {
+      for (const timer of activeTimers.values()) {
+        clearTimeout(timer);
+      }
+      activeTimers.clear();
+    };
+  }, []);
   const ringing = toasts.some(
     (toast) =>
       (toast.type === "timer-completion" ||

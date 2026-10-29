@@ -110,10 +110,9 @@ export default function useTimerNotifications({
             close(completionToast(notice).id);
           } else {
             const toast = completionToast(result.notification);
-            if (dismissed.current.has(toast.id)) {
-              return;
+            if (!dismissed.current.has(toast.id)) {
+              update(toast.id, { type: "timer-completion" });
             }
-            update(toast.id, { type: "timer-completion" });
             if (
               result.snapshot.preferences?.notificationsEnabled ??
               notificationsEnabled
