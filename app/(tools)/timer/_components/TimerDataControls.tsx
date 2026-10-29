@@ -170,7 +170,7 @@ export default function TimerDataControls({
               void perform(exportData);
             }}
           >
-            <ArrowUpTrayIcon aria-hidden="true" className="size-4.5 stroke-2" />
+            <ArrowUpTrayIcon aria-hidden="true" className="size-4 stroke-2" />
           </BackupButton>
           <BackupButton
             label="Import"
@@ -181,10 +181,7 @@ export default function TimerDataControls({
               input.current?.click();
             }}
           >
-            <ArrowDownTrayIcon
-              aria-hidden="true"
-              className="size-4.5 stroke-2"
-            />
+            <ArrowDownTrayIcon aria-hidden="true" className="size-4 stroke-2" />
           </BackupButton>
         </ButtonGroup>
       )}
