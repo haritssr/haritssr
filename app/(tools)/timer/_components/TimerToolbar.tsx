@@ -24,7 +24,6 @@ export default function TimerToolbar({
           variant="outline"
         >
           <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
-          <span className="hidden lg:inline">Settings</span>
         </TimerSettingsTrigger>
       </div>
     </div>

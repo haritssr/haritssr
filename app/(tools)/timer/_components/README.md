@@ -289,8 +289,8 @@ resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
 Export and Import share a segmented group beside the secondary Settings button.
-They show icons on smaller screens and icons with labels from 1024px, with native
-hover labels and accessible names.
+Export and Import show icons on smaller screens and icons with labels from 1024px;
+Settings remains icon-only. The controls have accessible names.
 These controls sit beside Add Task.
 Settings contains Alerts, Autoplay, Multitask, Sound, and List View controls.
 The List View control appears at 1024px and wider.
