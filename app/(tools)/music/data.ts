@@ -37,22 +37,6 @@ export const includedMusic = [
     5_999_941
   ),
   track(
-    "all-for-you-live",
-    "All For You - Live.mp3",
-    "All For You (Live)",
-    "Seo In-guk, Jung Eun-ji",
-    273.37142857142857,
-    3_899_635
-  ),
-  track(
-    "yeowooya-suhyun",
-    "Yeowooya - SuhYun.mp3",
-    "Yeowooya",
-    "SuhYun",
-    220.42122448979592,
-    3_352_101
-  ),
-  track(
     "stand-by-me-onew",
     "Stand By Me - ONEW.mp3",
     "Stand By Me",

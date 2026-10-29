@@ -398,7 +398,7 @@ cross-tab claims/messages; `importMusic` owns sequential decoding/commits.
 subscription. See the [component guide](app/(tools)/music/_components/README.md) and
 Details' Pele diagram for module relationships.
 
-Seven included songs stream from deployed `public/music` assets, cataloged in
+Five included songs stream from deployed `public/music` assets, cataloged in
 `app/(tools)/music/data.ts`; add MP3s and metadata together. They require connectivity and
 cannot be removed through the player. Root-level MP3s remain Git-ignored.
 
