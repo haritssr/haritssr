@@ -1,6 +1,6 @@
 import { Collapsible } from "@base-ui/react/collapsible";
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 
 import {
   canUseTimer,
@@ -42,22 +42,6 @@ const ORDER_OPTIONS = {
   ],
 };
 
-function subscribeDesktop(onChange: () => void) {
-  const media = window.matchMedia("(min-width: 1024px)");
-  media.addEventListener("change", onChange);
-  return () => {
-    media.removeEventListener("change", onChange);
-  };
-}
-
-function isDesktop() {
-  return window.matchMedia("(min-width: 1024px)").matches;
-}
-
-function isServerDesktop() {
-  return false;
-}
-
 export default function CompletedTasksTable({
   tasks,
   date,
@@ -67,18 +51,8 @@ export default function CompletedTasksTable({
   date: string;
   now: number;
 }) {
-  const { act, snapshot, desktopListView } = useTimer(
-    "act",
-    "snapshot",
-    "desktopListView"
-  );
-  const [open, setOpen] = useState(false);
-  const desktop = useSyncExternalStore(
-    subscribeDesktop,
-    isDesktop,
-    isServerDesktop
-  );
-  const showHistory = (desktopListView && desktop) || open;
+  const { act, snapshot } = useTimer("act", "snapshot");
+  const [showHistory, setShowHistory] = useState(false);
   const [sort, setSort] = useState<keyof typeof ORDER_OPTIONS>("reached");
   const [order, setOrder] = useState("desc");
   const orderOptions = ORDER_OPTIONS[sort];
@@ -134,7 +108,7 @@ export default function CompletedTasksTable({
   return (
     <Collapsible.Root
       open={showHistory}
-      onOpenChange={setOpen}
+      onOpenChange={setShowHistory}
       render={<section aria-label="History" />}
       className="space-y-3 lg:group-data-desktop-list-view/task-layout:space-y-1.5"
     >
@@ -142,8 +116,8 @@ export default function CompletedTasksTable({
         <SectionHeading as="h3" variant="toolbar">
           History
         </SectionHeading>
-        <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-base underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 lg:group-data-desktop-list-view/task-layout:hidden">
-          {open ? "Hide" : "Show"}
+        <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-base underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
+          {showHistory ? "Hide" : "Show"}
         </Collapsible.Trigger>
         <div className="ml-auto flex flex-wrap items-center gap-4">
           {showHistory ? (
