@@ -114,14 +114,14 @@ export const navigationRoutes: readonly RouteDoc[] = [
   {
     route: "/tree",
     title: "Tree",
-    description: "Tree views of site map information architecture",
+    description: "Explore site routes, project files, and their structure.",
     group: "Tools",
   },
   {
     route: "/tree/details",
     title: "Details",
     description:
-      "Explore the site hierarchy, understand route counts, and browse Tree’s changes.",
+      "Explore site routes and project files, understand their patterns, and browse Tree’s changes.",
     group: "Tree",
   },
   {

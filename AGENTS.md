@@ -454,7 +454,20 @@ file-path audit of all changes.
 
 Tree builds its route hierarchy and analytics from the discovery manifest. The
 shared ToggleList displays route links and child counts with independent disclosure
-controls; branches start closed on Tree. See `/tree/details` for its rules and flow.
+controls; route branches start closed on Tree. Its separate project-file section
+uses a generated, Git-filtered path inventory at
+`app/(tools)/tree/_generated/projectFiles.json` (Git-ignored). Run
+`bun run generate:project-tree` to refresh it; development, check, typecheck, Knip,
+content validation, and build scripts generate it automatically. `tree/dev.ts`
+owns the file watcher and the single Next dev child process, forwarding shutdown.
+Use `bun run dev` so file additions, removals, moves, and ignore-rule changes update
+the inventory; an already-running older dev command needs one restart to adopt the
+watcher. Deployment imports the snapshot without Git or a source-tree scan.
+Generation requires Git; source archives without `.git` use a temporary empty
+index to apply the repository's ignore rules without modifying the source tree.
+`projectStructure.ts` derives the file tree and pattern analytics. ToggleList's
+opt-in subtree controls and unmounted closed panels apply only to the file tree;
+other consumers retain existing defaults. See `/tree/details` for rules and flow.
 
 ## Labs
 

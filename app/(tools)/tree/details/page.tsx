@@ -12,12 +12,12 @@ export const metadata = createPageMetadata({
   path: "/tree/details",
   title: "Tree Details",
   description:
-    "Explore the site hierarchy, understand route counts, and browse Tree’s changes.",
+    "Explore site routes and project files, understand their patterns, and browse Tree’s changes.",
 });
 
 const relationships = `flowchart TD
-  accTitle: How Tree builds the site hierarchy
-  accDescr: The shared route manifest supplies available pages and dynamic patterns. getRouteTree groups and sorts those routes, calculates counts, and sends them to the analytics table and expandable ToggleList. Disclosure controls reveal children independently of page links.
+  accTitle: How Tree builds route and project hierarchies
+  accDescr: The shared route manifest supplies page routes. A generated Git-filtered inventory supplies project file paths. Separate builders calculate analytics and hierarchies for two independent ToggleLists. The file tree supports folder-level subtree expansion.
   Manifest["Shared route manifest"] --> Builder["getRouteTree: group and sort routes"]
   Builder --> Counts["Count pages, patterns, and hierarchy levels"]
   Counts --> Table["Route analytics table"]
@@ -25,6 +25,12 @@ const relationships = `flowchart TD
   Nodes --> List["ToggleList: expandable site hierarchy"]
   List --> Controls["Open branches or expand and collapse all"]
   List --> Links["Follow links to site pages"]
+  Git["Tracked and nonignored untracked file paths"] --> Ignore["Apply ignore rules and exclude Git metadata"]
+  Ignore --> Snapshot["Generated project inventory"]
+  Snapshot --> Files["Build file hierarchy and pattern counts"]
+  Files --> FileTable["Project analytics table"]
+  Files --> FileList["Project ToggleList: folders and plain file names"]
+  FileList --> Subtree["Expand or collapse one folder subtree"]
 `;
 
 const metrics = [
@@ -54,7 +60,8 @@ export default function TreeDetailsPage() {
       <PageHeader back={{ href: "/tree", name: "Tree" }} path="/tree/details">
         <PageTitle>Details</PageTitle>
         <PageDescription>
-          Explore the site’s pages and see how they fit together.
+          Explore the site’s pages and project files, and see how they fit
+          together.
         </PageDescription>
       </PageHeader>
       <div className="space-y-16">
@@ -73,6 +80,17 @@ export default function TreeDetailsPage() {
             <li>
               Compare page totals, dynamic routes, and counts at each hierarchy
               level.
+            </li>
+            <li>
+              Browse the project’s actual folders and file names separately from
+              its page URLs.
+            </li>
+            <li>
+              Compare file types and observed App Router naming conventions.
+            </li>
+            <li>
+              Expand every folder, or use a folder’s right-hand button to expand
+              only its subtree.
             </li>
           </ExplanationList>
         </Section>
@@ -101,6 +119,53 @@ export default function TreeDetailsPage() {
             <li>
               The tree reflects the pages available in the current environment,
               so a local preview may differ from the public site.
+            </li>
+          </ExplanationList>
+        </Section>
+        <Section
+          id="project-file-rules"
+          title="Project file rules"
+          contentClassName="max-w-3xl"
+        >
+          <ExplanationList>
+            <li>
+              Files include tracked and untracked working files that pass Git’s
+              ignore rules, including nested rules and negation. Ignored tracked
+              files are also excluded.
+            </li>
+            <li>
+              Git’s administrative metadata and the generated inventory are
+              excluded. Only file paths are published; file contents and
+              absolute machine paths are not included.
+            </li>
+            <li>
+              Folders appear when they contain included files. The haritssr/
+              root starts open, other folders start closed, and folders sort
+              before files. Symlinks are listed without following their targets.
+            </li>
+            <li>
+              File names are plain text. The chevron opens one folder; the
+              right-hand subtree button opens that folder and every folder
+              beneath it.
+            </li>
+            <li>
+              Collapse subtree closes descendant folders while keeping the
+              selected folder open. Global controls affect only their own tree.
+            </li>
+            <li>
+              File-type counts use the final extension without regard to case.
+              Dotfiles with no further suffix count as extensionless. Folder
+              counts exclude the root, whose depth is zero.
+            </li>
+            <li>
+              App conventions count matching filenames and folder names under
+              app/. Only observed conventions appear, and these counts overlap
+              file-type totals.
+            </li>
+            <li>
+              During development, the file inventory refreshes when files or
+              repository ignore rules change. The public site shows the
+              inventory generated at deployment.
             </li>
           </ExplanationList>
         </Section>
@@ -142,7 +207,9 @@ export default function TreeDetailsPage() {
           <p className="max-w-3xl">
             Tree uses the same route manifest as search and the sitemap. The
             server builds the hierarchy and counts, and the browser handles
-            opening and closing branches.
+            opening and closing branches. A separate generated inventory
+            supplies the project-file tree and its analytics. Closed file
+            branches unmount their contents while retaining expansion state.
           </p>
           <FlowDiagram
             definition={relationships}

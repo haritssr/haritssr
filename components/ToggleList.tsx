@@ -1,19 +1,23 @@
 "use client";
 
 import { Collapsible } from "@base-ui/react/collapsible";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { useId, useState } from "react";
+import { Tooltip } from "@base-ui/react/tooltip";
+import {
+  ArrowsPointingInIcon,
+  ArrowsPointingOutIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
+import { useId, useMemo, useState } from "react";
 
 import Button from "@/components/Button";
 import InternalLink from "@/components/InternalLink";
+import {
+  getBranchDescendants,
+  setSubtreeOpen,
+} from "@/components/toggleListState";
+import type { ToggleListNode } from "@/components/toggleListState";
 
-export interface ToggleListNode {
-  readonly id: string;
-  readonly label: string;
-  readonly href?: string;
-  readonly count?: number;
-  readonly children?: readonly ToggleListNode[];
-}
+export type { ToggleListNode } from "@/components/toggleListState";
 
 const LEVEL_COLORS = [
   "bg-red-500/10 hover:bg-red-500/15",
@@ -22,23 +26,18 @@ const LEVEL_COLORS = [
   "bg-blue-500/10 hover:bg-blue-500/15",
 ] as const;
 
-function branchIds(nodes: readonly ToggleListNode[]): string[] {
-  return nodes.flatMap((node) => {
-    const { children } = node;
-    return children && children.length > 0
-      ? [node.id, ...branchIds(children)]
-      : [];
-  });
-}
-
 export default function ToggleList({
   nodes,
   label,
   initialExpanded = "roots",
+  subtreeControls = false,
+  keepMounted = true,
 }: {
   nodes: readonly ToggleListNode[];
   label: string;
   initialExpanded?: "roots" | "none";
+  subtreeControls?: boolean;
+  keepMounted?: boolean;
 }) {
   const listId = useId();
   const [expanded, setExpanded] = useState(
@@ -49,7 +48,8 @@ export default function ToggleList({
           .map((node) => node.id)
       )
   );
-  const ids = branchIds(nodes);
+  const branches = useMemo(() => getBranchDescendants(nodes), [nodes]);
+  const ids = [...branches.keys()];
   const allExpanded = ids.every((id) => expanded.has(id));
 
   function setOpen(id: string, open: boolean) {
@@ -62,6 +62,12 @@ export default function ToggleList({
       }
       return next;
     });
+  }
+
+  function setSubtree(id: string, open: boolean) {
+    setExpanded((previous) =>
+      setSubtreeOpen(previous, id, branches.get(id) ?? [], open)
+    );
   }
 
   return (
@@ -79,7 +85,7 @@ export default function ToggleList({
         </Button>
         <Button
           aria-controls={listId}
-          disabled={expanded.size === 0}
+          disabled={!ids.some((id) => expanded.has(id))}
           onClick={() => {
             setExpanded(new Set());
           }}
@@ -89,17 +95,22 @@ export default function ToggleList({
         </Button>
       </div>
       <div id={listId}>
-        <ul aria-label={label} className="font-mono text-sm">
-          {nodes.map((node) => (
-            <ToggleNode
-              depth={0}
-              expanded={expanded}
-              key={node.id}
-              node={node}
-              setOpen={setOpen}
-            />
-          ))}
-        </ul>
+        <Tooltip.Provider>
+          <ul aria-label={label} className="font-mono text-sm">
+            {nodes.map((node) => (
+              <ToggleNode
+                depth={0}
+                expanded={expanded}
+                key={node.id}
+                node={node}
+                setOpen={setOpen}
+                branches={branches}
+                keepMounted={keepMounted}
+                setSubtree={subtreeControls ? setSubtree : undefined}
+              />
+            ))}
+          </ul>
+        </Tooltip.Provider>
       </div>
     </div>
   );
@@ -110,13 +121,23 @@ function ToggleNode({
   node,
   expanded,
   setOpen,
+  branches,
+  keepMounted,
+  setSubtree,
 }: {
   depth: number;
   node: ToggleListNode;
   expanded: ReadonlySet<string>;
   setOpen: (id: string, open: boolean) => void;
+  branches: ReadonlyMap<string, readonly string[]>;
+  keepMounted: boolean;
+  setSubtree?: (id: string, open: boolean) => void;
 }) {
   const levelColor = LEVEL_COLORS[depth % LEVEL_COLORS.length];
+  const descendants = branches.get(node.id) ?? [];
+  const showSubtree = setSubtree !== undefined && descendants.length > 0;
+  const subtreeExpanded =
+    expanded.has(node.id) && descendants.every((id) => expanded.has(id));
 
   if (!node.children || node.children.length === 0) {
     return (
@@ -138,7 +159,54 @@ function ToggleNode({
         }}
         open={expanded.has(node.id)}
       >
-        {node.href === undefined && node.count === undefined ? (
+        {showSubtree ? (
+          <div className={`relative my-1 min-w-0 rounded ${levelColor}`}>
+            <Collapsible.Trigger className="group text-foreground focus-visible:outline-action flex w-full min-w-0 cursor-pointer items-start gap-2 rounded py-1.5 pr-9 pl-2 text-left outline-hidden focus-visible:outline-2">
+              <ChevronRightIcon
+                aria-hidden="true"
+                className="mt-0.5 size-4 shrink-0 stroke-2 group-data-panel-open:rotate-90"
+              />
+              <span className="min-w-0 wrap-anywhere">{node.label}</span>
+            </Collapsible.Trigger>
+            <Tooltip.Root>
+              <Tooltip.Trigger
+                aria-label={`${subtreeExpanded ? "Collapse" : "Expand"} subtree of ${node.label}`}
+                onClick={() => {
+                  setSubtree(node.id, !subtreeExpanded);
+                }}
+                render={
+                  <Button
+                    className="absolute top-1/2 right-1 size-6! -translate-y-1/2"
+                    size="icon-compact"
+                    variant="icon-hover"
+                  />
+                }
+              >
+                {subtreeExpanded ? (
+                  <ArrowsPointingInIcon aria-hidden="true" className="size-4" />
+                ) : (
+                  <ArrowsPointingOutIcon
+                    aria-hidden="true"
+                    className="size-4"
+                  />
+                )}
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Positioner
+                  side="top"
+                  sideOffset={6}
+                  className="z-50 max-w-[min(20rem,calc(100vw-2rem))]"
+                >
+                  <Tooltip.Popup className="corner-squircle bg-foreground text-background rounded-md px-2.5 py-1.5 text-sm wrap-anywhere shadow-lg supports-[corner-shape:squircle]:rounded-xl">
+                    {subtreeExpanded ? "Collapse" : "Expand"} subtree of{" "}
+                    {node.label}
+                  </Tooltip.Popup>
+                </Tooltip.Positioner>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+          </div>
+        ) : null}
+        {!showSubtree && node.href === undefined && node.count === undefined ? (
           <Collapsible.Trigger
             className={`group text-foreground focus-visible:outline-action my-1 flex w-full cursor-pointer items-start gap-2 rounded py-1.5 pr-1 pl-2 text-left outline-hidden focus-visible:outline-2 ${levelColor}`}
           >
@@ -148,7 +216,9 @@ function ToggleNode({
             />
             <span className="min-w-0 wrap-anywhere">{node.label}</span>
           </Collapsible.Trigger>
-        ) : (
+        ) : null}
+        {!showSubtree &&
+        (node.href !== undefined || node.count !== undefined) ? (
           <div
             className={`my-1 flex min-w-0 items-center gap-2 rounded py-1.5 pr-1 pl-2 ${levelColor}`}
           >
@@ -164,8 +234,8 @@ function ToggleNode({
             <NodeLabel node={node} />
             <span className="text-muted tabular-nums">{node.count}</span>
           </div>
-        )}
-        <Collapsible.Panel keepMounted>
+        ) : null}
+        <Collapsible.Panel keepMounted={keepMounted}>
           <ul className="border-border ml-4 border-l pl-1 sm:pl-2">
             {node.children.map((child) => (
               <ToggleNode
@@ -174,6 +244,9 @@ function ToggleNode({
                 key={child.id}
                 node={child}
                 setOpen={setOpen}
+                branches={branches}
+                keepMounted={keepMounted}
+                setSubtree={setSubtree}
               />
             ))}
           </ul>

@@ -9,6 +9,9 @@
 # next.js
 /.next/
 
+# Generated project-file inventory; recreated by Bun development/check/build scripts.
+/app/(tools)/tree/_generated/
+
 # misc
 .DS_Store
 *.pem
