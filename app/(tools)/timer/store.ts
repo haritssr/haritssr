@@ -164,7 +164,10 @@ export async function changeTimer(payload: unknown) {
     await updateTimerDays(tx, value.days, value.previous);
     return {
       snapshot: snapshot(value),
-      notification,
+      notification:
+        command.action === "claim-deadline-reminder" ? null : notification,
+      deadlineReminder:
+        command.action === "claim-deadline-reminder" ? notification : null,
       version: snapshotVersion(value),
     };
   });

@@ -9,6 +9,7 @@ import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 
 import TaskActions from "./TaskActions";
 import TaskCardView from "./TaskCardView";
+import TaskDeadlineWarning from "./TaskDeadlineWarning";
 import TaskDescription from "./TaskDescription";
 import { EditTask } from "./TaskDialog";
 import { taskAppearance } from "./taskPresentation";
@@ -44,6 +45,7 @@ const TaskCard = memo(
         className={daily && (!state.available || reached) ? "opacity-35" : ""}
         headerActions={
           <>
+            <TaskDeadlineWarning state={state} />
             {daily ? (
               <TimerSettingsTrigger
                 section="daily"
@@ -83,7 +85,10 @@ const TaskCard = memo(
     previous.state.running === next.state.running &&
     previous.state.paused === next.state.paused &&
     previous.state.available === next.state.available &&
-    previous.state.label === next.state.label
+    previous.state.label === next.state.label &&
+    previous.state.deadlineWarning === next.state.deadlineWarning &&
+    previous.state.latestStartAt === next.state.latestStartAt &&
+    previous.state.closesAt === next.state.closesAt
 );
 
 TaskCard.displayName = "TaskCard";

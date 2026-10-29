@@ -1,5 +1,6 @@
 import { taskTiming, taskCompletionTime, timerDayBounds } from "./timer";
 import type { TimerTask } from "./timer";
+import { taskDeadline } from "./timerDeadline";
 
 export const TIMER_REQUEST_STARTED_HEADER = "X-Timer-Request-Started-At";
 export const TIMER_RESPONSE_TIME_HEADER = "X-Timer-Server-Time";
@@ -43,6 +44,7 @@ export function timerNextDisplayAt(
   const bounds = timerDayBounds(date);
   let next = bounds.end > now ? bounds.end : Infinity;
   for (const task of tasks) {
+    next = Math.min(next, taskDeadline(task, bounds, now).nextAt);
     const timing = taskTiming(task, bounds, now);
     if (timing.opensAt > now) {
       next = Math.min(next, timing.opensAt);

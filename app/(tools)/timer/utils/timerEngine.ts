@@ -5,6 +5,7 @@ import {
   timerDate,
   taskAvailable,
   taskWindowEnd,
+  timerDayBounds,
 } from "@/app/(tools)/timer/utils/timer";
 import type {
   TimerAction,
@@ -15,6 +16,7 @@ import type {
 } from "@/app/(tools)/timer/utils/timer";
 
 import { isDailyTask, formatAvailabilityWindow } from "./dailyTasks";
+import { taskDeadline } from "./timerDeadline";
 
 export class TimerStoreError extends Error {
   readonly status: number;
@@ -159,7 +161,10 @@ function startTask(
 
 function changeTask(
   day: TimerDay,
-  command: Exclude<TimerAction, { action: "add" | "single-task" }>,
+  command: Exclude<
+    TimerAction,
+    { action: "add" | "single-task" | "claim-deadline-reminder" }
+  >,
   now: number
 ): TimerNotice | null {
   let notification: TimerNotice | null = null;
@@ -214,6 +219,19 @@ function applyTimerAction(
   now: number
 ): TimerNotice | null {
   let notification: TimerNotice | null = null;
+  if (command.action === "claim-deadline-reminder") {
+    const task = day.tasks.find((entry) => entry.id === command.taskId);
+    if (
+      task === undefined ||
+      (task.deadlineReminderAt ?? null) !== null ||
+      taskDeadline(task, timerDayBounds(day.date), now).warning === null
+    ) {
+      return null;
+    }
+    task.deadlineReminderAt = new Date(now).toISOString();
+    day.revision += 1;
+    return { date: day.date, taskId: task.id, activity: task.activity };
+  }
   if (command.action === "add") {
     if (
       command.taskId !== undefined &&

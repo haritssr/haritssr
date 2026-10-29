@@ -130,6 +130,10 @@ export const timerRelationships = [
       Local --> Tx["timerDatabase.ts: write transaction"]
       Tx --> Engine["timerEngine.ts: applyTimerCommand / applyTimerPreferencePatch"]
       Queue --> Engine
+      Deadline["useTimerDeadlineReminders: visible-page deadlines"] -->|claim-deadline-reminder| Send
+      Rules["timerDeadline: remaining duration plus ten minutes"] --> Deadline
+      Rules --> Engine
+      Commit -->|winning reminder claim| Reminder["Silent deadline toast; one per task/date"]
       Engine --> Auto["autoplayNextTask: only when no tasks run"]
       Engine --> Commit["Turso transaction commit"]
       Auto --> Commit

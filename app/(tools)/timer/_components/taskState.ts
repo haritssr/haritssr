@@ -4,6 +4,7 @@ import type {
   TimerDayBounds,
   TimerTask,
 } from "@/app/(tools)/timer/utils/timer";
+import { taskDeadline } from "@/app/(tools)/timer/utils/timerDeadline";
 
 function getTaskState(
   task: TimerTask,
@@ -22,6 +23,7 @@ function getTaskState(
   if (running) {
     label = "Pause";
   }
+  const deadline = taskDeadline(task, bounds, now);
   return {
     spent,
     reached,
@@ -30,6 +32,9 @@ function getTaskState(
     paused,
     label,
     available,
+    deadlineWarning: deadline.warning,
+    latestStartAt: deadline.latestStartAt,
+    closesAt: deadline.closesAt,
   };
 }
 

@@ -59,6 +59,7 @@ const taskSchema = z
     lastStartedAt: instant.optional(),
     reachedAt: instant.nullable(),
     notifiedAt: instant.nullable(),
+    deadlineReminderAt: instant.nullable().optional(),
     availabilityWindow: availabilityWindowSchema.nullable().optional(),
   })
   .refine((task) => task.spent <= task.duration);
@@ -74,6 +75,11 @@ export const daySchema = z
   );
 
 export const actionSchema = z.discriminatedUnion("action", [
+  z.object({
+    action: z.literal("claim-deadline-reminder"),
+    date: dateSchema,
+    taskId: z.string().min(1).max(100),
+  }),
   z.object({
     action: z.literal("restore"),
     date: dateSchema,
@@ -185,6 +191,7 @@ export const snapshotSchema = z.object({
 export const changeSchema = z.object({
   snapshot: snapshotSchema,
   notification: noticeSchema.nullable(),
+  deadlineReminder: noticeSchema.nullable().default(null),
 });
 export const historySchema = z.object({
   day: daySchema,

@@ -106,7 +106,9 @@ export function ShareToastViewport() {
                 action={
                   <Toast.Close
                     onClick={() => {
-                      playTaskSound(prepareTaskSound(), "done");
+                      if (toast.type !== "timer-deadline") {
+                        playTaskSound(prepareTaskSound(), "done");
+                      }
                     }}
                     aria-label={
                       toast.type === "timer-completion" ||

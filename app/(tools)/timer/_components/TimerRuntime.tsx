@@ -6,6 +6,7 @@ import useSWR from "swr";
 import FloatingTimerDock from "@/app/(tools)/timer/_components/FloatingTimerDock";
 import { TimerContext } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerAudio from "@/app/(tools)/timer/hooks/useTimerAudio";
+import useTimerDeadlineReminders from "@/app/(tools)/timer/hooks/useTimerDeadlineReminders";
 import useTimerNotifications from "@/app/(tools)/timer/hooks/useTimerNotifications";
 import useTimerPolling from "@/app/(tools)/timer/hooks/useTimerPolling";
 import useTimerSchedule from "@/app/(tools)/timer/hooks/useTimerSchedule";
@@ -81,6 +82,11 @@ function useTimerRuntime(controller: TimerController) {
     notificationsEnabled: confirmed?.preferences?.notificationsEnabled ?? true,
   });
   useTimerSchedule(snapshot, clockOffset, mutations.refresh, previewCompletion);
+  useTimerDeadlineReminders({
+    snapshot: confirmed,
+    pending: state.pendingCount > 0,
+    controller,
+  });
 }
 
 export default function TimerRuntime({

@@ -52,7 +52,7 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
     duration_seconds INTEGER NOT NULL CHECK(duration_seconds BETWEEN 1 AND 86400),
     spent_seconds REAL NOT NULL CHECK(spent_seconds >= 0 AND spent_seconds <= duration_seconds),
     started_at TEXT, last_started_at TEXT, completed_at TEXT, notification_claimed_at TEXT,
-    availability_window TEXT,
+    availability_window TEXT, deadline_reminder_at TEXT,
     PRIMARY KEY(date, id),
     UNIQUE(date, position)
   )`,
@@ -92,6 +92,13 @@ export async function initializeTimerDatabase(client: Client) {
       args: [JSON.stringify(DEFAULT_DAILY_TASKS)],
     });
     const taskColumns = await tx.execute("PRAGMA table_info(timer_tasks)");
+    if (
+      !taskColumns.rows.some((column) => column.name === "deadline_reminder_at")
+    ) {
+      await tx.execute(
+        "ALTER TABLE timer_tasks ADD COLUMN deadline_reminder_at TEXT"
+      );
+    }
     if (
       !taskColumns.rows.some((column) => column.name === "availability_window")
     ) {
@@ -258,6 +265,7 @@ function decodeDays(days: ResultSet, tasks: ResultSet) {
           : { lastStartedAt: task.last_started_at }),
         reachedAt: task.completed_at,
         notifiedAt: task.notification_claimed_at,
+        deadlineReminderAt: task.deadline_reminder_at ?? null,
         availabilityWindow:
           typeof task.availability_window === "string"
             ? (JSON.parse(task.availability_window) as unknown)
@@ -313,7 +321,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
     },
     { sql: "DELETE FROM timer_tasks WHERE date = ?", args: [day.date] },
     ...day.tasks.map((task, position) => ({
-      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window, deadline_reminder_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       args: [
         task.id,
         day.date,
@@ -327,6 +335,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
         task.reachedAt,
         task.notifiedAt,
         availabilityValue(task),
+        task.deadlineReminderAt ?? null,
       ],
     })),
   ]);
@@ -352,6 +361,7 @@ function taskValues(task: TimerDay["tasks"][number], position: number) {
     task.reachedAt,
     task.notifiedAt,
     availabilityValue(task),
+    task.deadlineReminderAt ?? null,
   ];
 }
 
@@ -411,13 +421,13 @@ export async function updateTimerDays(
         continue;
       }
       statements.push({
-        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window, deadline_reminder_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ON CONFLICT(date, id) DO UPDATE SET position = excluded.position, activity = excluded.activity,
           description = excluded.description, duration_seconds = excluded.duration_seconds, spent_seconds = excluded.spent_seconds,
           started_at = excluded.started_at, last_started_at = excluded.last_started_at,
           completed_at = excluded.completed_at, notification_claimed_at = excluded.notification_claimed_at,
-          availability_window = excluded.availability_window`,
+          availability_window = excluded.availability_window, deadline_reminder_at = excluded.deadline_reminder_at`,
         args: [day.date, task.id, ...values],
       });
     }

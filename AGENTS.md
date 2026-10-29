@@ -382,6 +382,17 @@ Notifications are opt-in with on-screen fallback, no push service. Closed/suspen
 browsers may delay alerts; mobile may require installation. The existing service
 worker registers locally when a permitted completion needs it.
 
+Window deadline reminders use remaining duration plus a fixed ten-minute buffer.
+`timerDeadline.ts` shares eligibility and next boundaries across display state,
+idle clocks, and `useTimerDeadlineReminders`. Visible owner pages claim reminders
+through `claim-deadline-reminder`; a nullable `timer_tasks.deadline_reminder_at`
+timestamp, added by `migrate:timer`, deduplicates task/date toasts across devices.
+Running tasks that fit suppress warnings; finished tasks and closed windows clear
+them. The size-5 danger icon before Edit pulses with reduced-motion protection.
+Deadline toasts are silent, separate from completion claims/Autoplay, and do not
+use system notifications. Uncertain claim writes refresh without resending.
+Legacy backups accept missing claims; duplicate-import comparison ignores them.
+
 ### Backups
 
 Export/Import accepts versioned history JSON ≤10 MB, excluding preferences/presets

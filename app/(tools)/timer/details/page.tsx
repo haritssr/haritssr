@@ -66,6 +66,12 @@ export default function TimerDetailsPage() {
             <li>Start, pause, resume, edit, or finish tasks early.</li>
             <li>Every task advances by one second per real second.</li>
             <li>
+              Windowed tasks warn ten minutes before the latest safe start,
+              using their remaining duration. A pulsing danger icon appears
+              before Edit, with one reminder toast per task each day across
+              devices.
+            </li>
+            <li>
               Use Multitask to run tasks together or Autoplay to start the next
               unfinished task.
             </li>
@@ -105,6 +111,14 @@ export default function TimerDetailsPage() {
             <li>
               Desktop List View defaults off and syncs with your account. Turn
               it off to restore the responsive card grid.
+            </li>
+            <li>
+              Deadline warnings clear while a running task can finish on time,
+              when it finishes, or when its window closes. If too little time
+              remains, the message becomes “Not enough time.” The icon stays
+              still with reduced motion. Reminders are silent, require an open,
+              visible page, and appear on reopening if already due; they do not
+              use system notifications or a background service.
             </li>
             <li>
               New Jakarta days start with your saved Daily Tasks, paused with
@@ -199,7 +213,9 @@ export default function TimerDetailsPage() {
                     <li id="database-structure">
                       Days group tasks by Jakarta date; tasks store order,
                       duration, progress, timestamps, and an optional JSON
-                      availability window.
+                      availability window. A separate deadline-reminder claim
+                      timestamp prevents duplicate reminder toasts across
+                      devices.
                     </li>
                     <li>
                       Preferences store Autoplay, Multitask, Desktop List View,

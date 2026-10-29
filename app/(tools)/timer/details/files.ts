@@ -1,5 +1,17 @@
 export const implementationFiles = [
   [
+    "app/(tools)/timer/utils/timerDeadline.ts",
+    "Shared window-warning eligibility, latest start, next boundary, and Jakarta time labels.",
+  ],
+  [
+    "app/(tools)/timer/_components/TaskDeadlineWarning.tsx",
+    "Danger warning before Edit, reduced-motion pulse, and accessible tooltip.",
+  ],
+  [
+    "app/(tools)/timer/hooks/useTimerDeadlineReminders.ts",
+    "Visible-page reminder scheduling, atomic claims, and silent deadline toasts.",
+  ],
+  [
     "app/(tools)/timer/page.tsx",
     "Timer page header, introduction, and navigation.",
   ],

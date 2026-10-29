@@ -18,6 +18,7 @@ run inside its `use client` boundary.
 | Time display, percentage, and progress bar | [TaskProgress.tsx](TaskProgress.tsx) |
 | Delete confirmation for card and edit dialog | [DeleteTaskButton.tsx](DeleteTaskButton.tsx) |
 | Start, Continue, Pause, and Done controls | [TaskActions.tsx](TaskActions.tsx) |
+| Pulsing availability deadline icon and tooltip | [TaskDeadlineWarning.tsx](TaskDeadlineWarning.tsx) |
 | Description hover target and popover | [TaskDescription.tsx](TaskDescription.tsx) |
 | Add/Edit triggers and save behavior | [TaskDialog.tsx](TaskDialog.tsx) |
 | Shared modal dimensions, fields, and header actions | [TaskFormDialog.tsx](TaskFormDialog.tsx) |
@@ -82,6 +83,12 @@ Below `sm`, card layout is unchanged. Named group variants let cards respond to
 the collection attribute without changing their memoized props. The floating
 player retains its layout.
 Unavailable Done controls are dimmed and have no hover effect or tooltip.
+Tasks with an availability window show a `size-5` danger warning before Edit
+when remaining duration plus a ten-minute buffer reaches the closing time.
+The icon pulses only when reduced motion is off. Running tasks that can finish
+on time suppress the warning; late running tasks still warn. Finished tasks and
+closed windows clear it. `timerDeadline.ts` shares eligibility and next boundaries
+between the card state, display clock, reminder scheduler, and server claim.
 Other personal timer actions and Multitask keep their opacity while unavailable;
 preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
@@ -227,6 +234,18 @@ modules keep independent work separate:
   refreshes remain available in every tab.
 - [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules only the earliest
   task completion and midnight refreshes.
+- [useTimerDeadlineReminders.ts](../hooks/useTimerDeadlineReminders.ts) schedules
+  window reminders from confirmed state while visible and reevaluates on focus.
+  It pauses claims during pending edits/actions. A protected
+  `claim-deadline-reminder` action rechecks eligibility and records
+  `timer_tasks.deadline_reminder_at` in the same write transaction. Only its
+  winner shows a silent `timer-deadline` toast, once per task/date across devices.
+  Toast titles are “Start soon” or “Not enough time”; the description contains
+  the task and closing time. Dismissal leaves the card warning visible. Open
+  toasts update if time runs out and close when the warning clears. Claims lost
+  to transport errors refresh confirmed state without automatically resending.
+  Legacy records/backups treat a missing claim as unclaimed; backup comparison
+  ignores claim timestamps. Historical dates never issue deadline reminders.
 - [useTimerAudio.ts](../hooks/useTimerAudio.ts) owns ticking,
   restored-audio activation listeners, and audio-owner coordination.
 - [useTimerTicking.ts](../hooks/useTimerTicking.ts) lets Settings subscribe to the

@@ -17,6 +17,7 @@ export interface TimerTask {
   lastStartedAt?: string;
   reachedAt: string | null;
   notifiedAt: string | null;
+  deadlineReminderAt?: string | null;
   availabilityWindow?: AvailabilityWindow | null;
 }
 
@@ -126,6 +127,11 @@ export interface TimerHistory {
 }
 
 export type TimerAction =
+  | {
+      action: "claim-deadline-reminder";
+      date: string;
+      taskId: string;
+    }
   | {
       action: "restore";
       date: string;
