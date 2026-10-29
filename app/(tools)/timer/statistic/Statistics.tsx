@@ -90,68 +90,73 @@ export default function Statistics() {
   }, [date, mutate, validDate]);
 
   return (
-    <div className="space-y-10">
-      <div className="space-y-4">
-        <div className="border-border flex flex-wrap items-end justify-between gap-4 border-b pb-5">
-          <label className="flex flex-col gap-2 text-sm">
-            <span>Review a day</span>
-            <input
-              className="form-control border-border bg-background focus-visible:outline-action min-w-0 rounded-lg border px-3 py-2 focus-visible:outline-2"
-              max={today}
-              onChange={(event) => {
-                setDate(event.target.value);
-              }}
-              type="date"
-              value={date}
-            />
-          </label>
-          <div className="flex items-center gap-3">
-            <span className="text-muted text-sm">Jakarta time · WIB</span>
-            <Button
-              variant="secondary"
-              disabled={date === today}
-              onClick={() => {
-                setDate(today);
-              }}
-            >
-              Today
-            </Button>
+    <div className="space-y-16">
+      <div className="flex flex-col gap-5">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <label className="flex flex-col gap-2 text-sm">
+              <span className="sr-only">Review a day</span>
+              <input
+                className="form-control border-border bg-background focus-visible:outline-action min-w-0 rounded-lg border px-3 py-2 focus-visible:outline-2"
+                max={today}
+                onChange={(event) => {
+                  setDate(event.target.value);
+                }}
+                type="date"
+                value={date}
+              />
+            </label>
+            <div className="flex items-center gap-3">
+              <span className="text-muted text-sm">UTC+7</span>
+              <Button
+                variant="secondary"
+                disabled={date === today}
+                onClick={() => {
+                  setDate(today);
+                }}
+              >
+                Today
+              </Button>
+            </div>
           </div>
-        </div>
-        {error === undefined ? null : (
-          <div
-            className="text-danger flex flex-wrap items-center gap-3"
-            role="alert"
-          >
-            <p>
-              {error instanceof Error
-                ? error.message
-                : "History could not be loaded."}
+          {error === undefined ? null : (
+            <div
+              className="text-danger flex flex-wrap items-center gap-3"
+              role="alert"
+            >
+              <p>
+                {error instanceof Error
+                  ? error.message
+                  : "History could not be loaded."}
+              </p>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  void mutate();
+                }}
+              >
+                Try again
+              </Button>
+            </div>
+          )}
+          {date.length > 0 && !validDate ? (
+            <p className="text-danger text-sm" role="alert">
+              Choose today or an earlier valid date.
             </p>
-            <Button
-              variant="secondary"
-              onClick={() => {
-                void mutate();
-              }}
-            >
-              Try again
-            </Button>
-          </div>
-        )}
-        {date.length > 0 && !validDate ? (
-          <p className="text-danger text-sm" role="alert">
-            Choose today or an earlier valid date.
-          </p>
+          ) : null}
+        </div>
+        {validDate && error === undefined && data === undefined ? (
+          <output className="text-muted block">Loading activities…</output>
+        ) : null}
+        {date.length === 0 ? (
+          <output className="text-muted block">
+            Choose a date to view its activities.
+          </output>
+        ) : null}
+        {validDate && data !== undefined ? (
+          <DailySummary tasks={data.day.tasks} />
         ) : null}
       </div>
-      {validDate && error === undefined && data === undefined ? (
-        <output className="text-muted block">Loading activities…</output>
-      ) : null}
-      {date.length === 0 ? (
-        <output className="text-muted block">
-          Choose a date to view its activities.
-        </output>
-      ) : null}
       {validDate && data !== undefined ? (
         <HistorySections history={data} />
       ) : null}
@@ -161,12 +166,8 @@ export default function Statistics() {
 
 function HistorySections({ history }: { history: TimerHistory }) {
   return (
-    <>
-      <DailySummary tasks={history.day.tasks} />
-      <Section
-        title="Last 30 days"
-        description="Daily totals across all activities for the 30 days ending on your selected date."
-      >
+    <div className="space-y-16">
+      <Section title="Last 30 days">
         <TimeChart totals={history.totals} />
       </Section>
       <Section
@@ -175,7 +176,7 @@ function HistorySections({ history }: { history: TimerHistory }) {
       >
         <ActivitiesTable tasks={history.day.tasks} />
       </Section>
-    </>
+    </div>
   );
 }
 
@@ -249,13 +250,6 @@ function ActivitiesTable({ tasks }: { tasks: TimerTask[] }) {
 
 function ActivityRow({ task, number }: { task: TimerTask; number: number }) {
   const status = taskStatus(task);
-  const statusColor = {
-    Running: "text-timer-running",
-    Paused: "text-foreground",
-    "Not started": "text-foreground",
-    Reached: "text-foreground",
-    Done: "text-foreground",
-  }[status];
 
   return (
     <tr className="divide-border divide-x">
@@ -274,15 +268,7 @@ function ActivityRow({ task, number }: { task: TimerTask; number: number }) {
       <td className="px-3 py-3 align-top whitespace-nowrap tabular-nums">
         {formatTimerTime(task.spent)}
       </td>
-      <td className={`px-3 py-3 align-top whitespace-nowrap ${statusColor}`}>
-        <span className="bg-foreground/5 inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-xs font-medium">
-          <span
-            aria-hidden="true"
-            className="size-1.5 rounded-full bg-current"
-          />
-          {status}
-        </span>
-      </td>
+      <td className="px-3 py-3 align-top whitespace-nowrap">{status}</td>
     </tr>
   );
 }

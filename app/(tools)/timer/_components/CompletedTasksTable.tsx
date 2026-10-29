@@ -143,8 +143,8 @@ export default function CompletedTasksTable({
           </caption>
           <thead>
             <tr className="divide-border bg-foreground/5 text-muted divide-x [&>th]:px-3 [&>th]:text-left [&>th]:font-medium">
-              <th scope="col" className="w-12 text-center">
-                No.
+              <th scope="col" className="w-10 text-center">
+                No
               </th>
               <th scope="col">Task</th>
               <th scope="col">Description</th>
@@ -158,12 +158,12 @@ export default function CompletedTasksTable({
             {rows.map(({ task, spent, percentage, reached }, index) => (
               <tr
                 key={task.id}
-                className="divide-border text-muted divide-x align-top [&>td]:px-3 [&>td]:py-3"
+                className="divide-border text-muted divide-x align-top [&>td]:px-3 [&>td]:py-2"
               >
                 <td className="text-center tabular-nums">{index + 1}</td>
                 <th
                   scope="row"
-                  className="max-w-64 min-w-40 px-3 py-3 text-left font-normal wrap-anywhere"
+                  className="max-w-64 min-w-40 px-3 py-2 text-left font-normal wrap-anywhere"
                 >
                   {task.activity}
                 </th>
