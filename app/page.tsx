@@ -81,7 +81,7 @@ function PersonalDetails() {
     <section
       aria-label="About"
       id="Identity"
-      className={`${TASK_LAYOUT.surface} border-border-hover/50 min-w-0 space-y-4 p-4!`}
+      className={`${TASK_LAYOUT.surface} border-border-hover/50 to-foreground/5! min-w-0 space-y-4 p-4!`}
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex shrink-0 items-center gap-4">
@@ -95,7 +95,7 @@ function PersonalDetails() {
           />
           <div className="min-w-0">
             <p className="text-lg font-medium">{profileName}</p>
-            <p className="text-secondary-foreground">
+            <p className="text-foreground">
               <span className="block">Web Product Engineer</span>
               <span className="block">Science Teacher</span>
             </p>
@@ -108,7 +108,7 @@ function PersonalDetails() {
       <div className="border-border grid gap-4 border-t border-dashed pt-4 md:grid-cols-3">
         <ul
           aria-label="Profile and contacts"
-          className="text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
+          className="text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
         >
           <li>
             At{" "}
@@ -162,10 +162,8 @@ function PersonalDetails() {
 
 function ProfileInvitation() {
   return (
-    <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-      <p className="text-secondary-foreground">
-        Need UI design or a high school lesson?
-      </p>
+    <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+      <p className="text-foreground">Need UI design or a high school lesson?</p>
       <ProfileActions />
     </div>
   );
@@ -173,17 +171,17 @@ function ProfileInvitation() {
 
 function ProfileActions() {
   return (
-    <div className="flex shrink-0 flex-col gap-3 lg:flex-row">
-      <div className="flex flex-col gap-1 text-center lg:text-left">
+    <div className="flex shrink-0 flex-col gap-3 lg:flex-row-reverse">
+      <div className="flex flex-col gap-1 text-center lg:text-right">
         <ButtonLink
           href="mailto:haritssr@gmail.com?subject=Design%20consultation"
           size="profile"
         >
           Request a Design Consultation
         </ButtonLink>
-        <p className="text-muted/80 text-xs">UI/UX for web or mobile</p>
+        <p className="text-muted/80 text-xs">UI/UX for web or mobile.</p>
       </div>
-      <div className="flex flex-col gap-1 text-center lg:text-left">
+      <div className="flex flex-col gap-1 text-center lg:text-right">
         <ButtonLink
           href="mailto:haritssr@gmail.com?subject=Lesson%20inquiry"
           size="profile"
@@ -191,7 +189,7 @@ function ProfileActions() {
         >
           Request a Private Lesson
         </ButtonLink>
-        <p className="text-muted/80 text-xs">Math, physics, or chemistry</p>
+        <p className="text-muted/80 text-xs">Math, physics, or chemistry.</p>
       </div>
     </div>
   );
@@ -203,7 +201,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       <ul
         aria-label="Background and tools"
         id={mobile ? "personal-notes-mobile" : "personal-notes"}
-        className="border-border text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:border-l md:border-dashed md:pl-9"
+        className="border-border text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:border-l md:border-dashed md:pl-9"
       >
         <li>Touch typist, ±90 WPM.</li>
         <li>Former chess player, ±2000 Elo.</li>
@@ -215,7 +213,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       </ul>
       <ul
         aria-label="Principles"
-        className="border-border text-secondary-foreground marker:text-muted min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+        className="border-border text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
       >
         <li>
           <ExternalLink
