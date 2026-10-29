@@ -16,7 +16,7 @@ export default function InterfacePrinciples({
       <div className="flex items-center gap-2">
         <span>User Interface Principles</span>
         <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
-          {open ? "Hide" : "View"}
+          {open ? "Hide" : "Show"}
         </Collapsible.Trigger>
       </div>
       <Collapsible.Panel>{children}</Collapsible.Panel>

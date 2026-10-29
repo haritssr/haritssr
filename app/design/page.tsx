@@ -27,13 +27,11 @@ import Checkbox from "./Checkbox";
 import { DesignTokens } from "./Colors";
 import ContextMenu from "./ContextMenu";
 import FloatingTask from "./FloatingTask";
-import FloatingTaskVariations from "./FloatingTaskVariations";
 import InterfacePrinciples from "./InterfacePrinciples";
 import LoadingButton from "./LoadingButton";
 import Logo from "./Logo";
 import Modal from "./Modal";
 import NumberInput from "./NumberInput";
-import ResponsiveSettingsControl from "./ResponsiveSettingsControl";
 import Select from "./Select";
 import Slider from "./Slider";
 import Switch from "./Switch";
@@ -68,23 +66,17 @@ export default function DesignSystem() {
         <Section title="Principles">
           <ol className="text-foreground [&>li::marker]:text-muted list-outside list-decimal space-y-2 leading-relaxed [&>li]:ml-7 [&>li]:pl-1">
             <li>
-              A design system is a set of rules and opinions that shape the user
-              interface and the experience as a whole.
-            </li>
-            <li>
               Design principles explain{" "}
               <span className="font-semibold">why</span> we make specific
               decisions; implementation explains{" "}
               <span className="font-semibold">how</span> they work in code.
             </li>
             <li>
-              Patterns emerge from multiple observations, not a single datum.
-              Mental rehearsal (usually in sleep or meditation) lets us replay
-              our experiences and recognize patterns faster.
+              Recognize patterns through repeated observation and reflection.
             </li>
             <InterfacePrinciples>
               <div>
-                <ul className="text-muted [&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
+                <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-5">
                   <li>
                     <ExternalLink
                       href="https://lawsofux.com/law-of-proximity/"
@@ -256,29 +248,18 @@ export default function DesignSystem() {
             </InterfacePrinciples>
             <li>The devil is in the details.</li>
             <li>
-              Consider UX through the{" "}
-              <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />{" "}
-              and{" "}
+              Draw inspiration from the{" "}
+              <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />,{" "}
               <ExternalLink
                 href="https://developer.apple.com/design/human-interface-guidelines/design-principles"
-                name="Apple’s Principles of Great Design"
+                name="Apple’s design principles"
               />
-              .
-            </li>
-            <li>
-              Heavily inspired by{" "}
+              ,{" "}
               <ExternalLink
                 href="https://developer.apple.com/videos/design/"
-                name="Apple design videos"
+                name="design videos"
               />
-              .
-            </li>
-            <li>
-              Digital services should expand what people can do while respecting
-              the limits of their attention and working memory.
-            </li>
-            <li>
-              I care deeply about UX/UI design, with references including{" "}
+              , and products from{" "}
               <ExternalLink href="https://www.apple.com" name="Apple" />,{" "}
               <ExternalLink href="https://linear.app" name="Linear" />,{" "}
               <ExternalLink href="https://www.raycast.com" name="Raycast" />,{" "}
@@ -286,117 +267,64 @@ export default function DesignSystem() {
               <ExternalLink href="https://vercel.com" name="Vercel" />.
             </li>
             <li>
-              Distinguish between link and button, link to navigate, button for
-              action.
-              <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
-                <li>
-                  Both need clear hover, active, and focus-visible states when
-                  those states are relevant.
-                </li>
-                <li>
-                  A link navigates; a button performs an action. Their visual
-                  treatment should reinforce that distinction.
-                </li>
-              </ul>
+              Digital services should expand what people can do while respecting
+              the limits of their attention and working memory.
             </li>
             <li>
-              Use regular buttons directly on the page and physical buttons
-              inside containers.
+              Use distinct links for navigation and buttons for actions, with
+              clear hover, active, and focus-visible states where relevant.
             </li>
             <li>
-              Prefer the system&apos;s basic colors and components to accelerate
-              development while maintaining consistency.
+              Use regular buttons on pages and physical buttons in containers.
             </li>
             <li>
-              Colors communicate purpose:
-              <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-4">
-                <li>
-                  <span className="text-action">Blue</span> (action) marks
-                  available actions.
-                </li>
-                <li>
-                  <span className="text-danger">Red</span> (danger) marks
-                  destructive actions and errors.
-                </li>
-                <li>
-                  <span className="text-success">Green</span> (success) marks
-                  completed tasks and successful outcomes.
-                </li>
-                <li>
-                  <span className="text-attention">Amber</span> (attention)
-                  highlights warnings and items that need attention.
-                </li>
-              </ul>
+              Use <span className="text-action">blue</span> for actions,{" "}
+              <span className="text-danger">red</span> for danger and errors,{" "}
+              <span className="text-success">green</span> for success,{" "}
+              <span className="text-timer-running">orange</span> for progress,
+              and <span className="text-attention">amber</span> for warnings.
             </li>
             <li>
-              Use Oklab/Oklch (not RGB or HSV) for random colors, palettes, and
-              gradients to ensure perceptually uniform, balanced results that
-              match human vision.
-            </li>
-            <li>
-              Components include responsive behavior and keyboard focus
-              treatment where interaction requires it.
+              Use Oklab or Oklch for perceptually balanced colors and gradients.
             </li>
             <li>
               Defining feature or update make it easy for sharing and
               documentation.
             </li>
             <li>
-              Use shadows only for elements that need to stand out on the page.
-              Keep shadows subtle, with floating controls one level higher.
-              Hover raises elevation and pressing lowers it. Disabled controls
-              and selects stay flat, and keyboard focus keeps a visible outline.
+              Use subtle shadows for emphasis, raising them on hover and
+              lowering them on press. Floating controls sit higher; disabled
+              controls and selects stay flat. Keep keyboard focus visible.
             </li>
             <li>
               Strive for one line navigation layer on all screen views as
               possible.
             </li>
             <li>The system works on mobile and desktop.</li>
-            <li>
-              The main grid uses one column on mobile, two on tablets, and four
-              on desktop, with the same <code>gap-5</code> at every size.
-            </li>
-            <li>
-              The mobile tab bar should appear on every Harimaki page except
-              Materi pages under the Belajar route.
-            </li>
+            <li>Hide the bottom tab bar on content pages.</li>
           </ol>
         </Section>
 
         <Section
           title="Layout"
           description={
-            <code className="font-mono wrap-anywhere">
+            <span className="wrap-anywhere">
               grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
               gap-4 sm:gap-5
-            </code>
+            </span>
           }
         >
           <Box title="Responsive Grid">
-            <div className="text-muted flex flex-wrap items-center justify-between gap-3 text-sm">
-              <p className="text-foreground text-lg font-semibold tracking-tight">
-                <span className="sm:hidden">1 column</span>
-                <span className="hidden sm:inline md:hidden">2 columns</span>
-                <span className="hidden md:inline lg:hidden">3 columns</span>
-                <span className="hidden lg:inline">4 columns</span>
-              </p>
-              <p className="text-muted text-sm tabular-nums">
-                <span className="sm:hidden">Default · gap-4</span>
-                <span className="hidden sm:inline md:hidden">sm · gap-5</span>
-                <span className="hidden md:inline lg:hidden">md · gap-5</span>
-                <span className="hidden lg:inline">lg · gap-5</span>
-              </p>
-            </div>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
               {[1, 2, 3, 4].map((item) => (
                 <li
-                  className="bg-interface-hover flex min-h-32 min-w-0 flex-col justify-between gap-5 rounded-lg p-5"
+                  className="bg-middle-hover flex min-h-32 min-w-0 flex-col justify-between gap-5 rounded-lg p-5"
                   key={item}
                 >
                   <span className="text-foreground text-4xl font-medium tracking-tight tabular-nums">
                     {item}
                   </span>
-                  <span className="text-muted text-sm">Equal-width column</span>
+                  <span className="text-muted text-sm">Responsive column</span>
                 </li>
               ))}
             </ul>
@@ -445,15 +373,6 @@ export default function DesignSystem() {
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Table" title="Table">
                 <Table />
-              </Box>
-            </div>
-
-            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
-              <Box
-                name="ResponsiveSettingsControl"
-                title="Responsive settings control"
-              >
-                <ResponsiveSettingsControl />
               </Box>
             </div>
 
@@ -514,7 +433,6 @@ export default function DesignSystem() {
             <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
               <Box name="FloatingTask" title="Task: Floating">
                 <FloatingTask />
-                <FloatingTaskVariations />
               </Box>
             </div>
 
