@@ -39,7 +39,7 @@ export default function Toast() {
       </div>
       {showError ? (
         <FloatingRetryNotification
-          message="Timer is taking too long to load. Try again."
+          message="Timer took too long. Try again."
           onRetry={() => {
             setShowError(false);
           }}

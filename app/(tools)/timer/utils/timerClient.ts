@@ -69,7 +69,7 @@ async function loadTimer<T>(
   const controller = new AbortController();
   const deadline = Promise.withResolvers<never>();
   const timeout = setTimeout(() => {
-    deadline.reject(new Error("Timer is taking too long to load. Try again."));
+    deadline.reject(new Error("Timer took too long. Try again."));
     controller.abort();
   }, 10_000);
   try {

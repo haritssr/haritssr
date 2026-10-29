@@ -46,8 +46,7 @@ function failure(error: unknown) {
   console.error("Timer storage operation failed.");
   return NextResponse.json(
     {
-      error:
-        "Timer data could not be saved or loaded. Check server configuration or try again.",
+      error: "Could not load or save Timer data.",
     },
     { status: 500, headers }
   );
