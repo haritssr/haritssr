@@ -33,7 +33,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimerToolbar.tsx",
-    "Add Task, backup actions, unsorted task counts, and the Settings trigger.",
+    "Add Task, backup actions, and the Settings trigger.",
   ],
   [
     "app/(tools)/timer/_components/TimerSettings.tsx",

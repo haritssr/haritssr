@@ -349,9 +349,9 @@ Duration Presets allow 1–5 entries (one second–24 hours), Task Presets 1–1
 Save/Cancel. They sync and apply to Add/Edit without changing existing tasks.
 Daily Tasks adds a saved JSON definition list below presets, with Save/Cancel; edits
 apply to future days. Reserved `daily:` instances require a manual start,
-remain visible after completion, and can be edited for today but not deleted.
-Unfinished windowed tasks move to History as Missed at closing, retaining progress
-and leaving active counts; tasks whose windows have not opened remain visible.
+move to History after completion, and can be edited for today but not deleted.
+Unfinished windowed tasks move to History as Missed at closing, retaining progress;
+tasks whose windows have not opened remain visible.
 The nullable JSON `timer_tasks.availability_window` uses Jakarta minutes (0–1440);
 opening is inclusive and closing pauses/locks without marking completion. Migration
 adds it plus `timer_preferences.daily_tasks` and preserves existing task windows.

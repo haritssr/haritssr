@@ -8,7 +8,7 @@ run inside its `use client` boundary.
 | --- | --- |
 | Header analog clock, ticking once per second in WIB and linking to Clock | [AnalogClock.tsx](AnalogClock.tsx), [Timer page](../page.tsx) |
 | Full-page Clock Sound checkbox and quartz ticks | [ClockSound.tsx](../clock/ClockSound.tsx) |
-| Add Task, backup actions, task counts, and Settings trigger | [TimerToolbar.tsx](TimerToolbar.tsx) |
+| Add Task, backup actions, and Settings trigger | [TimerToolbar.tsx](TimerToolbar.tsx) |
 | Page-scoped Settings handle, switches, and Multitask confirmation | [TimerSettings.tsx](TimerSettings.tsx) |
 | Export/Import, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
@@ -96,18 +96,18 @@ block unrelated controls or rapid task actions.
 
 Completed and missed tasks appear in `CompletedTasksTable` beside the list from
 `lg` when Desktop List View is enabled, and below the tasks otherwise.
-The section defaults collapsed except in Desktop List View from `lg`, where the
-table and sort controls stay visible without a Show/Hide control. Elsewhere, Hide
-collapses the sort controls and table; Show reveals them again. The expanded table wraps task names and descriptions and
+The section defaults collapsed at every size. Hide collapses the sort controls
+and table; Show reveals them again.
+The expanded table wraps task names and descriptions and
 scrolls horizontally on narrow screens. Restore returns an early Done task to
 the active list paused, preserving its time, while its window is still open;
 Met and Missed tasks cannot be restored.
 `TaskList` partitions tasks using their current elapsed
 time, so a task moves into the table as soon as its duration is reached or its
-availability window closes unfinished. Missed tasks retain their progress and
-are excluded from active counts without being marked Done or Met.
+availability window closes unfinished. Missed tasks retain their progress without
+being marked Done or Met.
 On page load, running cards come first, followed by available cards with progress,
-unstarted cards, upcoming unavailable cards, and finished daily cards. Missed
+unstarted cards, and upcoming unavailable cards. Missed
 tasks whose windows have closed appear in History. Completion percentage breaks
 ties within each group; equal percentages preserve saved order. Cards keep their
 positions during the visit as states and percentages change. New or restored
@@ -290,10 +290,7 @@ Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 Export and Import share a segmented group beside the secondary Settings button.
 They show icons on smaller screens and icons with labels from 1024px, with native
 hover labels and accessible names.
-These controls sit beside Add Task, with running and not-running counts
-at the opposite end. Their dots use orange for running and neutral foreground
-for not-running tasks,
-including when a count is zero. Completed tasks are excluded.
+These controls sit beside Add Task.
 Settings opens a modal containing Alerts, Autoplay, Multitask, Sound, and Desktop List View
 switches. Its header has the centered Settings title and a secondary Done button. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
@@ -343,11 +340,11 @@ preserve this optional field. Legacy backups omit it and remain valid. Daily
 definitions remain preferences and are excluded from the history-only backup.
 
 Daily and ordinary cards share the same state-based ordering. Completed daily
-cards remain visible, while unfinished tasks with closed windows move into
-History as Missed. History and statistics still include their progress once.
+tasks move to History, as do unfinished tasks with closed windows, marked Missed.
+History and statistics still include their progress once.
 Daily cards show elapsed time, availability, and remaining daily duration without
-a total-duration suffix or recurring icon. Before a window or after completion,
-they are muted and Play/Continue becomes a disabled lock.
+a total-duration suffix or recurring icon. Before a window, they are muted and
+Play/Continue becomes a disabled lock.
 Descriptions remain accessible, and unfinished cards can be edited for today.
 Done can finish a started
 task early; History can restore it without resetting progress while its window is open.

@@ -1,4 +1,3 @@
-import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
 import { taskTiming, timerDayBounds } from "@/app/(tools)/timer/utils/timer";
 import type {
   TimerDayBounds,
@@ -81,31 +80,6 @@ export function reconcileTaskOrder(previous: string[], visible: string[]) {
     : order;
 }
 
-function countState(
-  counts: { running: number; paused: number; ready: number },
-  state: TaskState
-) {
-  if (state.reached || state.missed) {
-    return;
-  }
-  if (state.running) {
-    counts.running += 1;
-  } else if (state.paused) {
-    counts.paused += 1;
-  } else {
-    counts.ready += 1;
-  }
-}
-
-export function getTaskCounts(tasks: TimerTask[], date: string, now: number) {
-  const bounds = timerDayBounds(date);
-  const counts = { running: 0, paused: 0, ready: 0 };
-  for (const task of tasks) {
-    countState(counts, getTaskState(task, date, now, bounds));
-  }
-  return counts;
-}
-
 export function getTaskCollection(
   tasks: TimerTask[],
   date: string,
@@ -115,10 +89,9 @@ export function getTaskCollection(
   const active: TaskEntry[] = [];
   const completed: TaskEntry[] = [];
   const visible: TaskEntry[] = [];
-  const counts = { running: 0, paused: 0, ready: 0 };
   for (const task of tasks) {
     const entry = { task, state: getTaskState(task, date, now, bounds) };
-    if (!entry.state.missed && (isDailyTask(task) || !entry.state.reached)) {
+    if (!entry.state.missed && !entry.state.reached) {
       visible.push(entry);
     }
     if (entry.state.reached || entry.state.missed) {
@@ -126,7 +99,6 @@ export function getTaskCollection(
     } else {
       active.push(entry);
     }
-    countState(counts, entry.state);
   }
   active.sort(compareTasks);
   completed.sort(compareTasks);
@@ -135,6 +107,5 @@ export function getTaskCollection(
     active,
     completed: completed.map(({ task }) => task),
     visible,
-    counts,
   };
 }

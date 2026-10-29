@@ -137,18 +137,17 @@ export default function TimerDetailsPage() {
             <li>
               Daily tasks require a manual start. Editing a card changes only
               today’s task; its schedule and future-day definition stay the
-              same. Daily cards cannot be deleted. Finished daily cards stay
-              visible; early Done tasks can be restored from History while their
-              window is open.
+              same. Daily cards cannot be deleted. Finished daily tasks move to
+              History; early Done tasks can be restored while their window is
+              open.
             </li>
             <li>
               When you open the page, running tasks come first, followed by
-              available tasks with progress, unstarted tasks, upcoming tasks,
-              and finished daily tasks. Higher percentages come first within
-              each group; ties retain their saved order. Cards keep their
-              positions during your visit, and new or restored tasks appear at
-              the end. The order resets when you reopen the page or a new
-              Jakarta day begins.
+              available tasks with progress, unstarted tasks, and upcoming
+              tasks. Higher percentages come first within each group; ties
+              retain their saved order. Cards keep their positions during your
+              visit, and new or restored tasks appear at the end. The order
+              resets when you reopen the page or a new Jakarta day begins.
             </li>
             <li>
               Availability follows Jakarta time. Before its window, a card is
