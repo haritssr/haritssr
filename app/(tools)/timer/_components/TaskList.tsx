@@ -1,12 +1,18 @@
+import { useState } from "react";
+
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
 
 import CompletedTasksTable from "./CompletedTasksTable";
 import TaskCard from "./TaskCard";
 import { TASK_LAYOUT } from "./taskPresentation";
-import { getTaskCollection } from "./taskState";
+import { getTaskCollection, reconcileTaskOrder } from "./taskState";
 
 export default function TaskList() {
+  const [ordering, setOrdering] = useState<{
+    date: string;
+    ids: string[];
+  } | null>(null);
   const { snapshot, clockOffset, error, desktopListView } = useTimer(
     "snapshot",
     "clockOffset",
@@ -31,6 +37,19 @@ export default function TaskList() {
     snapshot.today,
     timestamp
   );
+  const previousOrder = ordering?.date === snapshot.today ? ordering.ids : [];
+  const nextOrder = reconcileTaskOrder(
+    previousOrder,
+    visible.map(({ task }) => task.id)
+  );
+  if (ordering?.date !== snapshot.today || nextOrder !== ordering.ids) {
+    setOrdering({ date: snapshot.today, ids: nextOrder });
+  }
+  const visibleById = new Map(visible.map((entry) => [entry.task.id, entry]));
+  const orderedVisible = nextOrder.flatMap((id) => {
+    const entry = visibleById.get(id);
+    return entry === undefined ? [] : [entry];
+  });
   return (
     <div
       data-desktop-list-view={desktopListView || undefined}
@@ -42,7 +61,7 @@ export default function TaskList() {
           data-desktop-list-view={desktopListView || undefined}
           className={`group/task-list @container/task-list min-w-0 ${TASK_LAYOUT.collection} data-desktop-list-view:sm:grid-cols-1 data-desktop-list-view:sm:gap-3 data-desktop-list-view:lg:col-span-2 data-desktop-list-view:lg:grid-cols-1`}
         >
-          {visible.map(({ task, state }) => (
+          {orderedVisible.map(({ task, state }) => (
             <li className="flex min-w-0" key={task.id}>
               <TaskCard date={snapshot.today} task={task} state={state} />
             </li>

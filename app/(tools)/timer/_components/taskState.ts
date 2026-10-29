@@ -62,6 +62,22 @@ function compareTasks(first: TaskEntry, second: TaskEntry) {
   );
 }
 
+export function reconcileTaskOrder(previous: string[], visible: string[]) {
+  const visibleIds = new Set(visible);
+  const order = previous.filter((id) => visibleIds.has(id));
+  const knownIds = new Set(order);
+  for (const id of visible) {
+    if (!knownIds.has(id)) {
+      order.push(id);
+      knownIds.add(id);
+    }
+  }
+  return order.length === previous.length &&
+    order.every((id, index) => id === previous[index])
+    ? previous
+    : order;
+}
+
 function countState(
   counts: { running: number; paused: number; ready: number },
   state: TaskState

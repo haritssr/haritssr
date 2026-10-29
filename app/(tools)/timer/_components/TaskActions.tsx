@@ -125,7 +125,25 @@ export default function TaskActions({
 
   return (
     <div className="flex min-w-0 items-center justify-end gap-2">
-      {showDone ? null : (
+      {showDone ? (
+        <Button
+          className="disabled:cursor-default"
+          data-timer-secondary=""
+          dimWhenDisabled
+          size="timer-card"
+          disabled={doneDisabled}
+          aria-label={`Done: ${task.activity}`}
+          title={doneDisabled ? undefined : "Done"}
+          onClick={finishTask}
+          variant="timer-secondary"
+        >
+          <CheckIcon
+            strokeWidth={3.5}
+            aria-hidden="true"
+            className="size-5 sm:group-data-desktop-list-view/task-list:size-3.5"
+          />
+        </Button>
+      ) : (
         <DeleteTaskButton
           data-timer-secondary=""
           title="Delete"
@@ -140,42 +158,18 @@ export default function TaskActions({
         />
       )}
       <Button
-        className={showDone ? "disabled:cursor-default" : "select-none"}
-        data-timer-play={showDone ? undefined : ""}
-        data-timer-secondary={showDone ? "" : undefined}
-        dimWhenDisabled={showDone || unavailable}
+        className="select-none"
+        data-timer-play=""
+        dimWhenDisabled={unavailable}
         size="timer-card"
-        disabled={showDone ? doneDisabled : disabled}
-        aria-label={`${showDone ? "Done" : label}: ${task.activity}`}
-        title={showDone && doneDisabled ? undefined : actionTitle}
-        onClick={showDone ? finishTask : toggleRunning}
-        variant={showDone ? "timer-secondary" : variant}
+        disabled={disabled}
+        aria-label={`${toggleLabel}: ${task.activity}`}
+        title={toggleTitle}
+        onClick={toggleRunning}
+        variant={variant}
       >
-        {showDone ? (
-          <CheckIcon
-            strokeWidth={3.5}
-            aria-hidden="true"
-            className="size-5 sm:group-data-desktop-list-view/task-list:size-3.5"
-          />
-        ) : (
-          <TaskToggleIcon Icon={ToggleIcon} running={running} />
-        )}
+        <TaskToggleIcon Icon={ToggleIcon} running={running} />
       </Button>
-      {showDone ? (
-        <Button
-          className="select-none"
-          data-timer-play=""
-          dimWhenDisabled={unavailable}
-          size="timer-card"
-          disabled={disabled}
-          aria-label={`${toggleLabel}: ${task.activity}`}
-          title={toggleTitle}
-          onClick={toggleRunning}
-          variant={variant}
-        >
-          <TaskToggleIcon Icon={ToggleIcon} running={running} />
-        </Button>
-      ) : null}
     </div>
   );
 }
