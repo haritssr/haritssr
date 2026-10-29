@@ -142,6 +142,10 @@ export default function TimerDetailsPage() {
               open.
             </li>
             <li>
+              History shows its row count beside Show/Hide, even while the table
+              is hidden.
+            </li>
+            <li>
               When you open the page, running tasks come first, followed by
               available tasks with progress, unstarted tasks, and upcoming
               tasks. Higher percentages come first within each group; ties

@@ -112,13 +112,16 @@ export default function CompletedTasksTable({
       render={<section aria-label="History" />}
       className="space-y-3 lg:group-data-desktop-list-view/task-layout:space-y-1.5"
     >
-      <div className="flex flex-wrap items-center gap-1.5">
+      <div className="flex flex-wrap items-start gap-1.5">
         <SectionHeading as="h3" variant="toolbar">
           History
         </SectionHeading>
         <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-base underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
           {showHistory ? "Hide" : "Show"}
         </Collapsible.Trigger>
+        <span className="text-muted tabular-nums">
+          ({rows.length})<span className="sr-only"> tasks in history</span>
+        </span>
         <div className="ml-auto flex flex-wrap items-center gap-4">
           {showHistory ? (
             <>

@@ -97,7 +97,7 @@ block unrelated controls or rapid task actions.
 Completed and missed tasks appear in `CompletedTasksTable` beside the list from
 `lg` when List View is enabled, and below the tasks otherwise.
 The section defaults collapsed at every size. Hide collapses the sort controls
-and table; Show reveals them again.
+and table; Show reveals them again. The row count stays visible after Show/Hide.
 The expanded table wraps task names and descriptions and
 scrolls horizontally on narrow screens. Restore returns an early Done task to
 the active list paused, preserving its time, while its window is still open;
