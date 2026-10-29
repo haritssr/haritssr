@@ -256,12 +256,6 @@
     scrollbar-gutter: stable both-edges;
   }
 
-  html[data-page-actions-open],
-  html[data-page-actions-open] body {
-    overflow: hidden;
-    overscroll-behavior: none;
-  }
-
   /* Match reserved scrollbar gutters to modal backdrops. */
   html:has(.timer-dialog-backdrop),
   html:has(.flow-diagram-backdrop) {
