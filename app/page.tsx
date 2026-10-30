@@ -81,7 +81,7 @@ function PersonalDetails() {
     <section
       aria-label="About"
       id="Identity"
-      className={`${TASK_LAYOUT.surface} border-border-hover/50 to-foreground/5! min-w-0 space-y-4 p-4!`}
+      className={`${TASK_LAYOUT.surface} border-border-hover/50 from-background! to-foreground/5! min-w-0 space-y-4 rounded-xl! border! p-4! supports-[corner-shape:squircle]:rounded-3xl!`}
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex shrink-0 items-center gap-4">
@@ -105,7 +105,7 @@ function PersonalDetails() {
           <ProfileInvitation />
         </div>
       </div>
-      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-2 md:before:right-0 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed">
+      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-3 md:before:right-0 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed">
         <ul
           aria-label="Profile and contacts"
           className="text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
@@ -162,9 +162,9 @@ function PersonalDetails() {
 
 function ProfileInvitation() {
   return (
-    <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-      <p className="text-foreground lg:max-w-32">
-        Need UI design or a high school lesson?
+    <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-start">
+      <p className="text-foreground min-w-0 lg:flex-1">
+        Need a design or private lesson?
       </p>
       <ProfileActions />
     </div>
@@ -174,7 +174,7 @@ function ProfileInvitation() {
 function ProfileActions() {
   return (
     <div className="flex shrink-0 flex-col gap-3 lg:flex-row-reverse">
-      <div className="flex flex-col gap-1 text-center lg:text-right">
+      <div className="flex flex-col gap-1 text-left">
         <ButtonLink
           href="mailto:haritssr@gmail.com?subject=Design%20consultation"
           size="profile"
@@ -183,11 +183,11 @@ function ProfileActions() {
         </ButtonLink>
         <p className="text-muted/80 text-xs">UI/UX for web or mobile.</p>
       </div>
-      <div className="flex flex-col gap-1 text-center lg:text-right">
+      <div className="flex flex-col gap-1 text-left">
         <ButtonLink
           href="mailto:haritssr@gmail.com?subject=Lesson%20inquiry"
           size="profile"
-          variant="secondary"
+          variant="profile-secondary"
         >
           Request a Private Lesson
         </ButtonLink>
@@ -227,7 +227,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
           &gt; Hedonia
         </li>
         <li>Effective Accelerationism (e/acc)</li>
-        <li>Existence = f(constraints, maintainence)</li>
+        <li>Existence = f(constraints, maintenance)</li>
         <li>100% is easier than 98%</li>
         <li>What gets measured gets managed</li>
       </ul>

@@ -24,6 +24,7 @@ type ButtonVariant =
   | "action-outline"
   | "primary"
   | "primary-subtle"
+  | "profile-secondary"
   | "timer-running"
   | "timer-paused"
   | "timer-secondary"
@@ -92,6 +93,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "bg-action font-medium text-white hover:bg-action-hover focus-visible:outline-action",
   "primary-subtle":
     "border border-transparent bg-action font-medium text-white transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action",
+  "profile-secondary":
+    "bg-foreground/10 font-medium text-foreground transition-colors duration-150 select-none hover:bg-foreground/15 focus-visible:outline-foreground",
   secondary: BUTTON_SECONDARY_CLASS,
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
@@ -135,7 +138,7 @@ export function ButtonLink({
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & {
   size?: "default" | "profile";
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "profile-secondary" | "secondary";
 }) {
   return (
     <a
