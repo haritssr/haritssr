@@ -35,7 +35,7 @@ export default function TaskCardView({
   return (
     <div
       data-completed={reached || undefined}
-      className={`group/task text-foreground min-w-0 flex-1 sm:group-data-desktop-list-view/task-list:py-2 sm:group-data-desktop-list-view/task-list:pr-2 sm:group-data-desktop-list-view/task-list:shadow-sm sm:@md/task-list:group-data-desktop-list-view/task-list:grid sm:@md/task-list:group-data-desktop-list-view/task-list:grid-cols-[minmax(0,1fr)_minmax(20rem,1fr)] sm:@md/task-list:group-data-desktop-list-view/task-list:items-center sm:@md/task-list:group-data-desktop-list-view/task-list:gap-6 lg:@md/task-list:group-data-desktop-list-view/task-list:grid-cols-2 ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${className}`}
+      className={`group/task text-foreground min-w-0 flex-1 sm:group-data-desktop-list-view/task-list:py-2 sm:group-data-desktop-list-view/task-list:pr-2 sm:@md/task-list:group-data-desktop-list-view/task-list:grid sm:@md/task-list:group-data-desktop-list-view/task-list:grid-cols-[minmax(0,1fr)_minmax(20rem,1fr)] sm:@md/task-list:group-data-desktop-list-view/task-list:items-center sm:@md/task-list:group-data-desktop-list-view/task-list:gap-6 lg:@md/task-list:group-data-desktop-list-view/task-list:grid-cols-2 ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${className}`}
     >
       <div className="flex min-w-0 items-center justify-between gap-3">
         <p
