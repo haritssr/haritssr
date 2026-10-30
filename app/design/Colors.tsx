@@ -10,43 +10,20 @@ const DESIGN_TOKENS = [
     definition: "blue-700",
   },
   {
-    name: "secondary-accent",
-    label: "accent",
-    definition: "purple-500",
-  },
-  {
-    name: "identity-accent",
-    label: "identity",
+    name: "accent",
     definition: "violet-500",
   },
   {
-    name: "contact-accent",
-    label: "contact",
-    definition: "emerald-600",
-  },
-  {
     name: "success",
-    definition: "green-500/60 + green-600/40",
+    definition: "green-600",
   },
   {
-    name: "attention",
-    definition: "amber-500",
-  },
-  {
-    name: "timer-running",
+    name: "progress",
     definition: "orange-500",
-  },
-  {
-    name: "timer-paused",
-    definition: "foreground",
   },
   {
     name: "danger",
     definition: "red-500",
-  },
-  {
-    name: "music",
-    definition: "teal-600",
   },
   {
     name: "surface",

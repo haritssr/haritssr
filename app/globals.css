@@ -174,23 +174,19 @@
     var(--color-blue-500) 40%
   );
   --color-action-hover: var(--color-blue-700);
-  --color-secondary-accent: var(--color-purple-500);
-  --color-identity-accent: var(--color-violet-500);
-  --color-timer-running: var(--color-orange-500);
-  --color-timer-paused: var(--color-foreground);
-  --color-music: var(--color-teal-600);
-  --color-contact-accent: var(--color-emerald-600);
+  --color-accent: var(--color-violet-500);
+  --color-progress-hover: color-mix(
+    in srgb,
+    var(--color-progress) 98%,
+    var(--color-foreground)
+  );
   --color-muted: color-mix(
     in srgb,
     var(--color-foreground) 70%,
     var(--color-background)
   );
-  --color-success: color-mix(
-    in oklab,
-    var(--color-green-500) 60%,
-    var(--color-green-600)
-  );
-  --color-attention: var(--color-amber-500);
+  --color-success: var(--color-green-600);
+  --color-progress: var(--color-orange-500);
   --color-danger: var(--color-red-500);
   --color-surface: #fafafa;
   --color-secondary-button-surface: #fff;
@@ -262,6 +258,13 @@
     scroll-behavior: auto;
     scroll-padding-top: var(--topbar-height, 4rem);
     scrollbar-gutter: stable both-edges;
+    scrollbar-color: var(--color-zinc-400) transparent;
+  }
+
+  @supports selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-color: auto;
+    }
   }
 
   /* Match reserved scrollbar gutters to modal backdrops. */
@@ -296,21 +299,24 @@
 
   /* Default scrollbars; utilities can override these on specific areas. */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #e4e4e7;
-    border-radius: 9999px;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #a1a1aa;
+    background: var(--color-zinc-400);
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #71717a;
+    background: var(--color-zinc-500);
   }
 }
 
@@ -343,7 +349,7 @@ select:focus {
   input[type="reset"],
   input[type="submit"],
   input[type="button"],
-  button[type="submit"] {
+  button[type="submit"]:not(:where([data-custom-width])) {
     width: fit-content;
   }
 }
@@ -393,7 +399,7 @@ select:focus {
 
       &::-webkit-scrollbar-thumb:hover,
       &::-webkit-scrollbar-thumb:active {
-        background-color: var(--color-zinc-200);
+        background-color: var(--color-zinc-500);
       }
 
       &:hover {
@@ -423,7 +429,7 @@ select:focus {
 
 /* Thin scrollbars for compact scrollable content and lab overflow areas. */
 @utility scrollbar-subtle {
-  scrollbar-color: color-mix(in srgb, currentcolor 25%, transparent) transparent;
+  scrollbar-color: var(--color-zinc-400) transparent;
   scrollbar-width: thin;
 
   /* Let explicit scrollbar dimensions apply where WebKit styling is supported. */
@@ -442,14 +448,14 @@ select:focus {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, currentcolor 25%, transparent);
+    background: var(--color-zinc-400);
     background-clip: padding-box;
     border: 2px solid transparent;
     border-radius: 9999px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: color-mix(in srgb, currentcolor 40%, transparent);
+    background: var(--color-zinc-500);
     background-clip: padding-box;
   }
 }

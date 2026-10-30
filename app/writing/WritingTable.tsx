@@ -17,7 +17,8 @@ export default function WritingTable() {
                 scope="row"
               >
                 <InternalLink
-                  className="text-base group-hover/row:underline after:absolute after:inset-0 after:content-[''] active:scale-none!"
+                  className="text-base group-hover/row:underline after:absolute after:inset-0 after:content-['']"
+                  noScale
                   href={`/writing/${post.slug}`}
                   variant="inline"
                 >

@@ -92,7 +92,7 @@ function CompactActionMenu({
                 setOpen(false);
               }
             }}
-            className="navigation-material border-border text-foreground corner-squircle border-hairline max-h-(--available-height) w-48 max-w-[calc(100vw-2rem)] touch-pan-y touch-pinch-zoom overflow-y-auto overscroll-contain rounded-lg shadow-xl outline-hidden supports-[corner-shape:squircle]:rounded-2xl"
+            className="border-border bg-background text-foreground corner-squircle border-hairline inset-shadow-surface/60 max-h-(--available-height) w-48 max-w-[calc(100vw-2rem)] touch-pan-y touch-pinch-zoom overflow-y-auto overscroll-contain rounded-lg shadow-xl inset-shadow-sm outline-hidden supports-[corner-shape:squircle]:rounded-2xl"
           >
             <Popover.Close className="sr-only">
               Close page actions

@@ -15,13 +15,13 @@ const BADGES = [
     name: "Danger",
   },
   {
-    className: "border-attention/30 bg-attention/10",
-    dotClassName: "bg-attention",
-    name: "Attention",
+    className: "border-progress/30 bg-progress/10",
+    dotClassName: "bg-progress",
+    name: "Progress",
   },
   {
-    className: "border-secondary-accent/30 bg-secondary-accent/10",
-    dotClassName: "bg-secondary-accent",
+    className: "border-accent/30 bg-accent/10",
+    dotClassName: "bg-accent",
     name: "Information",
   },
 ] as const;

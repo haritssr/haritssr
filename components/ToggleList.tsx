@@ -176,8 +176,8 @@ function ToggleNode({
                 }}
                 render={
                   <Button
-                    className="absolute top-1/2 right-1 size-6! -translate-y-1/2"
-                    size="icon-compact"
+                    className="absolute top-1/2 right-1 -translate-y-1/2"
+                    size="icon-subtree"
                     variant="icon-hover"
                   />
                 }

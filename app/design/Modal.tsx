@@ -16,7 +16,7 @@ export default function Modal() {
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
             <div className="grid w-22 justify-self-start">
               <Dialog.Close
-                render={<Button className="w-full!" variant="secondary" />}
+                render={<Button className="w-full" variant="secondary" />}
               >
                 Cancel
               </Dialog.Close>
@@ -25,7 +25,7 @@ export default function Modal() {
               Modal title
             </Dialog.Title>
             <div className="grid w-22 justify-self-end">
-              <Dialog.Close render={<Button className="w-full!" />}>
+              <Dialog.Close render={<Button className="w-full" />}>
                 Continue
               </Dialog.Close>
             </div>

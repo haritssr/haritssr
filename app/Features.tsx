@@ -161,7 +161,7 @@ function TimerPreview() {
           <span className="text-muted shrink-0 tabular-nums">-12:30</span>
         </div>
         <div className="bg-slider-track-hover h-1.5 rounded-full">
-          <div className="bg-timer-running h-full w-3/5 rounded-full" />
+          <div className="bg-progress h-full w-3/5 rounded-full" />
         </div>
       </div>
       <span
@@ -172,7 +172,7 @@ function TimerPreview() {
       </span>
       <span
         data-timer-play=""
-        className="bg-timer-running flex size-10 shrink-0 items-center justify-center rounded-full text-white"
+        className="bg-progress flex size-10 shrink-0 items-center justify-center rounded-full text-white"
       >
         <PauseIcon className="size-5" />
       </span>

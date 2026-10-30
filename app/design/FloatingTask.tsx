@@ -24,9 +24,9 @@ const themes = {
     label: "Red",
     variables: "[--pill-accent:var(--color-danger)]",
   },
-  yellow: {
-    label: "Yellow",
-    variables: "[--pill-accent:var(--color-attention)]",
+  orange: {
+    label: "Orange",
+    variables: "[--pill-accent:var(--color-progress)]",
   },
   green: {
     label: "Green",
@@ -38,11 +38,11 @@ const themes = {
   },
   music: {
     label: "Music",
-    variables: "[--pill-accent:var(--color-music)]",
+    variables: "[--pill-accent:var(--color-accent)]",
   },
   purple: {
     label: "Purple",
-    variables: "[--pill-accent:var(--color-secondary-accent)]",
+    variables: "[--pill-accent:var(--color-accent)]",
   },
 } as const;
 
@@ -50,7 +50,7 @@ type Theme = keyof typeof themes;
 const options: readonly Theme[] = [
   "dark",
   "danger",
-  "yellow",
+  "orange",
   "green",
   "blue",
   "music",
@@ -60,6 +60,13 @@ const options: readonly Theme[] = [
 export default function FloatingTask() {
   const [theme, setTheme] = useState<Theme>("dark");
   const selected = themes[theme];
+  let playVariant: "neutral-subtle" | "timer-running" | "theme-fill" =
+    "theme-fill";
+  if (theme === "dark") {
+    playVariant = "neutral-subtle";
+  } else if (theme === "orange") {
+    playVariant = "timer-running";
+  }
 
   function moveTheme(direction: -1 | 1) {
     setTheme((current) => {
@@ -119,7 +126,7 @@ export default function FloatingTask() {
           aria-label="Play"
           data-timer-play=""
           size="icon-circle"
-          variant={theme === "dark" ? "neutral-subtle" : "theme-fill"}
+          variant={playVariant}
         >
           <PlayIcon aria-hidden="true" className="size-4.5 translate-x-px" />
         </Button>
@@ -170,11 +177,17 @@ export default function FloatingTask() {
                 className="focus-visible:outline-action flex size-5 shrink-0 items-center justify-center rounded border border-(--pill-accent) bg-white outline-hidden focus-visible:outline-2 data-checked:border-(--pill-accent) data-checked:bg-(--pill-accent)"
                 value={option}
               >
-                <Radio.Indicator className="text-white">
+                <Radio.Indicator
+                  className={
+                    option === "orange" ? "text-foreground" : "text-white"
+                  }
+                >
                   <CheckIcon aria-hidden="true" className="size-4" />
                 </Radio.Indicator>
               </Radio.Root>
-              <span className="sr-only text-(--pill-accent) sm:not-sr-only">
+              <span
+                className={`sr-only sm:not-sr-only ${option === "orange" ? "text-foreground" : "text-(--pill-accent)"}`}
+              >
                 {themes[option].label}
               </span>
             </label>

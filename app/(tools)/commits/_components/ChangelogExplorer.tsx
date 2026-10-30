@@ -359,9 +359,10 @@ function ChangelogFilters({
 
                 return (
                   <ButtonGroupItem
+                    activeStyle="action"
                     aria-label={`Latest ${value}`}
                     aria-pressed={isActive}
-                    className="bg-secondary-button-surface aria-pressed:border-action aria-pressed:bg-action! aria-pressed:hover:bg-action-hover! min-h-10 px-3 capitalize aria-pressed:z-10 aria-pressed:text-white"
+                    className="bg-secondary-button-surface aria-pressed:border-action min-h-10 px-3 capitalize aria-pressed:z-10 aria-pressed:text-white"
                     key={value}
                     onClick={() => {
                       pickPeriod(value, initialDay);

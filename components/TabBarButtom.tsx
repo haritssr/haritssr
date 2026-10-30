@@ -34,7 +34,7 @@ export default function TabBarButtom({
     <nav
       aria-label="Mobile navigation"
       data-mobile-tabbar={preview ? undefined : ""}
-      className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.5rem,env(safe-area-inset-bottom))]! lg:hidden"} p-2`}
+      className={`${preview ? "relative block pb-2" : "sticky bottom-0 block pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:hidden"} px-2 pt-2`}
     >
       <div
         className="border-border bg-background/70 shadow-foreground/5 border-hairline mx-auto w-full rounded-full p-1 shadow-sm backdrop-blur-md sm:max-w-[22.4rem]"

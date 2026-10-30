@@ -34,7 +34,7 @@ export default function Toast() {
             setShowError(true);
           }}
         >
-          Show error
+          Error
         </Button>
       </div>
       {showError ? (

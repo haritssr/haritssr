@@ -4,7 +4,6 @@ type ButtonVariant =
   | "black"
   | "attention-subtle"
   | "danger"
-  | "danger-secondary"
   | "danger-subtle"
   | "ghost"
   | "icon"
@@ -43,20 +42,18 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "theme-fill":
     "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
   "timer-running":
-    "border border-transparent bg-timer-running font-medium text-white hover:bg-timer-running/90 focus-visible:outline-timer-running",
+    "border border-transparent bg-progress font-medium text-white hover:bg-progress-hover focus-visible:outline-progress",
   "timer-paused":
     "border border-transparent bg-foreground/90 font-medium text-white hover:bg-foreground focus-visible:outline-foreground",
   "timer-secondary":
     "border-[0.5px] border-border bg-secondary-button-surface font-medium text-foreground shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-colors duration-150 select-none enabled:hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground",
   music:
-    "border border-transparent bg-music font-medium text-white hover:bg-music/90 focus-visible:outline-music",
+    "border border-transparent bg-accent font-medium text-white hover:bg-accent/90 focus-visible:outline-accent",
   black:
     "bg-zinc-500 text-zinc-50 transition-colors duration-150 enabled:hover:bg-zinc-600 focus-visible:outline-zinc-500",
   "attention-subtle":
-    "border border-transparent bg-attention font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-attention)_60%,var(--color-amber-600))] focus-visible:outline-attention",
+    "border border-transparent bg-progress font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-progress)_60%,var(--color-amber-600))] focus-visible:outline-progress",
   danger:
-    "border border-danger/30 bg-surface font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
-  "danger-secondary":
     "border border-transparent bg-danger/10 font-medium text-danger transition-colors duration-150 select-none enabled:hover:bg-danger/15 enabled:active:bg-danger/20 focus-visible:outline-danger",
   "danger-subtle":
     "border border-transparent bg-danger font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-danger)_60%,var(--color-red-600))] focus-visible:outline-danger",
@@ -94,7 +91,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "primary-subtle":
     "border border-transparent bg-action font-medium text-white transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action",
   "profile-secondary":
-    "bg-foreground/10 font-medium text-foreground transition-colors duration-150 select-none hover:bg-foreground/15 focus-visible:outline-foreground",
+    "bg-foreground/8 font-medium text-foreground transition-colors duration-150 select-none hover:bg-foreground/12 focus-visible:outline-foreground",
   secondary: BUTTON_SECONDARY_CLASS,
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
@@ -104,7 +101,13 @@ const BUTTON_SIZE_CLASS = {
   "icon-circle":
     "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
   "timer-card":
-    "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5 sm:group-data-desktop-list-view/task-list:size-8 sm:group-data-desktop-list-view/task-list:p-1",
+    "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5 sm:group-data-list-view/task-list:size-8 sm:group-data-list-view/task-list:p-1",
+  "icon-circle-contents":
+    "size-10.5 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
+  "icon-subtree":
+    "corner-squircle size-6 shrink-0 rounded-sm p-1 supports-[corner-shape:squircle]:rounded-md",
+  "icon-clear": "size-4.5 shrink-0 rounded-full p-0.5 [corner-shape:round]",
+  fallback: "rounded-md px-3 py-1.5 [corner-shape:round]",
   "icon-circle-large":
     "size-11 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
   "icon-large":
@@ -124,6 +127,7 @@ const BUTTON_SIZE_CLASS = {
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: keyof typeof BUTTON_SIZE_CLASS;
   iconOnly?: boolean;
+  align?: "center" | "between";
   loading?: boolean;
   dimWhenDisabled?: boolean;
   ref?: Ref<HTMLButtonElement>;
@@ -155,6 +159,7 @@ const Button = function Button({
   className,
   disabled,
   iconOnly = false,
+  align = "center",
   loading = false,
   dimWhenDisabled = true,
   size = "default",
@@ -167,7 +172,7 @@ const Button = function Button({
     <button
       {...props}
       aria-busy={loading}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" && size !== "icon-circle-large" && size !== "icon-compact" && size !== "icon-toolbar" ? "corner-squircle rounded-md p-2 supports-[corner-shape:squircle]:rounded-lg" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
+      className={`${BUTTON_BASE_CLASS.replace("justify-center", align === "between" ? "justify-between" : "justify-center")} ${BUTTON_VARIANT_CLASS[variant]} ${iconOnly && size !== "icon-small" && size !== "icon-circle" && size !== "icon-circle-large" && size !== "icon-compact" && size !== "icon-toolbar" ? "corner-squircle rounded-md p-2 supports-[corner-shape:squircle]:rounded-lg" : BUTTON_SIZE_CLASS[size]} ${dimWhenDisabled ? "disabled:opacity-50" : "disabled:opacity-100"} ${className ?? ""}`}
       disabled={disabled === true || loading}
       ref={ref}
       type={type}

@@ -50,7 +50,7 @@ function ContentsList({
   onSelect,
   depth = 0,
 }: ContentsListProps) {
-  const entryColor = depth === 0 ? "text-foreground!" : "text-foreground/65!";
+  const entryColor = depth === 0 ? "text-foreground" : "text-foreground/65";
   const List = depth === 0 ? "ol" : "ul";
 
   function select(event: MouseEvent<HTMLAnchorElement>, entry: ContentsEntry) {
@@ -80,12 +80,12 @@ function ContentsList({
         >
           <InternalLink
             aria-current={activeId === entry.id ? "location" : undefined}
-            className={`focus-visible:outline-action inline! rounded-sm text-base leading-6! wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 ${activeId === entry.id ? "text-action!" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
+            className={`focus-visible:outline-action rounded-sm wrap-anywhere hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 ${activeId === entry.id ? "text-action" : entryColor} ${entry.level === 1 ? "font-semibold" : ""}`}
             href={`#${encodeURIComponent(entry.id)}`}
             onClick={(event) => {
               select(event, entry);
             }}
-            variant="inline"
+            variant="contents"
           >
             <ContentsLabel parts={entry.label} />
           </InternalLink>
@@ -123,12 +123,15 @@ export default function ArticleContentsPanel({
 }) {
   const activeId = useActiveArticleSection(outline, open, topBarHeight);
   const closeIcon = (
-    <XMarkIcon aria-hidden="true" className="pointer-events-none size-5" />
+    <XMarkIcon
+      aria-hidden="true"
+      className="pointer-events-none size-5"
+      strokeWidth={2.5}
+    />
   );
-  const closeClassName = `${desktop ? "size-8" : "size-10"} rounded-full! p-0! [corner-shape:round]!`;
   const content = (
     <>
-      <div className="border-middle-hover flex shrink-0 items-center justify-between gap-2 border-b py-1 pr-2 pl-3">
+      <div className="border-middle-hover flex shrink-0 items-center justify-between gap-2 border-b py-1.5 pr-1.5 pl-3">
         {desktop ? (
           <Popover.Title className="text-foreground text-base font-medium">
             Table of Contents
@@ -145,17 +148,20 @@ export default function ArticleContentsPanel({
         {desktop ? (
           <Popover.Close
             aria-label="Close contents"
-            render={
-              <Button className={closeClassName} iconOnly variant="ghost" />
-            }
+            render={<Button size="icon-circle-contents" variant="secondary" />}
           >
             {closeIcon}
           </Popover.Close>
         ) : (
           <AriaButton
             aria-label="Close contents"
-            className={closeClassName}
-            render={(props) => <Button {...props} iconOnly variant="ghost" />}
+            render={(props) => (
+              <Button
+                {...props}
+                size="icon-circle-contents"
+                variant="secondary"
+              />
+            )}
             slot="close"
           >
             {closeIcon}
@@ -175,7 +181,7 @@ export default function ArticleContentsPanel({
     </>
   );
   const appearance =
-    "floating-material text-foreground flex flex-col overflow-hidden outline-hidden";
+    "text-foreground flex flex-col overflow-hidden outline-hidden";
 
   if (desktop) {
     return (
@@ -189,7 +195,7 @@ export default function ArticleContentsPanel({
           sideOffset={12}
         >
           <Popover.Popup
-            className={`${styles.popover} ${appearance} rounded-xl`}
+            className={`${styles.popover} ${appearance} floating-material rounded-xl`}
             finalFocus={finalFocus}
           >
             {content}
@@ -206,13 +212,9 @@ export default function ArticleContentsPanel({
         swipeAnimation={styles.backdropFade}
       />
       <Sheet
-        className={`${styles.sheet} ${appearance} corner-squircle rounded-t-lg supports-[corner-shape:squircle]:rounded-t-2xl`}
+        className={`${styles.sheet} ${appearance} corner-squircle border-border border-hairline bg-background shadow-foreground/10 rounded-t-lg shadow-lg supports-[corner-shape:squircle]:rounded-t-2xl`}
       >
         <SheetContent className="flex min-h-0 flex-col outline-hidden">
-          <div
-            aria-hidden="true"
-            className="bg-border mx-auto mt-3 h-1 w-10 shrink-0 rounded-full"
-          />
           {content}
         </SheetContent>
       </Sheet>

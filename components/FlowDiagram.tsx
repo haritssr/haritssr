@@ -163,7 +163,11 @@ export default function FlowDiagram({
         }
         // Token classes color outlines and add a subtle matching background.
         for (const token of ["action", "attention", "success", "danger"]) {
-          const color = theme.getPropertyValue(`--color-${token}`).trim();
+          const color = theme
+            .getPropertyValue(
+              `--color-${token === "attention" ? "progress" : token}`
+            )
+            .trim();
           for (const shape of element.querySelectorAll<SVGElement>(
             `.pele-node.${token} [stroke]`
           )) {

@@ -3,6 +3,8 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 
+import "katex/dist/katex.min.css";
+
 import { TASK_LAYOUT } from "@/app/(tools)/timer/_components/taskPresentation";
 import BackButton from "@/components/BackButton";
 import Box from "@/components/Box";
@@ -15,6 +17,7 @@ import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import Section from "@/components/Section";
 import { TOP_BAR_CAPSULE_CLASS_NAME } from "@/components/topbar/TopBarAction";
+import katexify from "@/utils/katexify";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import Accordion from "./Accordion";
@@ -65,6 +68,12 @@ export default function DesignSystem() {
       <div className="space-y-16">
         <Section title="Principles">
           <ol className="text-foreground [&>li::marker]:text-muted list-outside list-decimal space-y-2 leading-relaxed [&>li]:ml-7 [&>li]:pl-1">
+            <li>
+              {katexify(
+                String.raw`\text{Existence} = f(\text{constraints},\ \text{maintenance},\ \ldots)`,
+                false
+              )}
+            </li>
             <li>
               Design principles explain{" "}
               <span className="font-semibold">why</span> we make specific
@@ -271,8 +280,18 @@ export default function DesignSystem() {
               the limits of their attention and working memory.
             </li>
             <li>
+              <ExternalLink
+                href="https://stephango.com/concise"
+                name="Concise explanations accelerate progress"
+              />
+              .
+            </li>
+            <li>
               Each page should make it clear where users are, what they can do,
               what sections are available, and how to leave.
+            </li>
+            <li>
+              Minimize borders to reduce visual clutter and cognitive load.
             </li>
             <li>
               Use distinct links for navigation and buttons for actions, with
@@ -283,10 +302,9 @@ export default function DesignSystem() {
             </li>
             <li>
               Use <span className="text-action">blue</span> for actions,{" "}
-              <span className="text-danger">red</span> for danger and errors,{" "}
-              <span className="text-success">green</span> for success,{" "}
-              <span className="text-timer-running">orange</span> for progress,
-              and <span className="text-attention">amber</span> for warnings.
+              <span className="text-danger">red</span> for danger, errors, and
+              warnings, <span className="text-success">green</span> for success,{" "}
+              <span className="text-progress">orange</span> for progress.
             </li>
             <li>
               Use Oklab or Oklch for perceptually balanced colors and gradients.
@@ -481,15 +499,16 @@ export default function DesignSystem() {
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
                     <Button variant="primary">Primary</Button>
                   </span>
-                  <span className="inline-flex [&>button]:rounded-md! [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium [&>button]:[corner-shape:round]!">
-                    <Button variant="primary">Fallback</Button>
+                  <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
+                    <Button size="fallback" variant="primary">
+                      Fallback
+                    </Button>
                   </span>
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
                     <LoadingButton />
                   </span>
                   <Button variant="secondary">Secondary</Button>
                   <Button variant="danger">Danger</Button>
-                  <Button variant="danger-secondary">Danger secondary</Button>
                   <Button disabled variant="secondary">
                     Disabled
                   </Button>
@@ -509,8 +528,12 @@ export default function DesignSystem() {
                       Primary
                     </Button>
                   </span>
-                  <span className="inline-flex [&>button]:rounded-md! [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium [&>button]:[corner-shape:round]!">
-                    <Button data-timer-play="" variant="primary">
+                  <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
+                    <Button
+                      data-timer-play=""
+                      size="fallback"
+                      variant="primary"
+                    >
                       Fallback
                     </Button>
                   </span>

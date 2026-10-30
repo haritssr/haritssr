@@ -96,7 +96,7 @@ export default function APIPage() {
                 key={`${endpoint.method ?? "GET"} ${endpoint.href}`}
               >
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-muted font-mono text-xs">
+                  <span className="text-foreground font-mono text-base leading-6 font-medium">
                     {endpoint.method ?? "GET"}
                   </span>
                   <InternalLink href={endpoint.href}>

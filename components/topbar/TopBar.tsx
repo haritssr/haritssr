@@ -77,14 +77,18 @@ export default function TopBar() {
       ref={navigationRef}
     >
       <div
-        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-2 py-2 sm:px-4 sm:py-5 xl:px-0`}
+        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-2.5 pt-2.5 pb-2 sm:px-4 sm:py-5 xl:px-0`}
         data-show-title={showTitle}
       >
         {pathname === "/" ? (
           <BackButton
             href="/"
-            label="Home"
-            name="Harits Syah"
+            label="Home: scroll to top"
+            name="Home"
+            onNavigate={(event) => {
+              event.preventDefault();
+              scrollArticleToTop();
+            }}
             showChevron={false}
           />
         ) : (

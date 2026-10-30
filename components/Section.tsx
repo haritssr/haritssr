@@ -9,6 +9,7 @@ export type SectionProps = Omit<
   title: ReactNode;
   description?: ReactNode;
   contentClassName?: string;
+  spacing?: boolean;
   headingAs?: SectionHeadingProps["as"];
   headingClassName?: string;
   headingVariant?: SectionHeadingProps["variant"];
@@ -21,6 +22,7 @@ export default function Section({
   id,
   className = "",
   contentClassName = "",
+  spacing = true,
   headingAs,
   headingClassName,
   headingVariant,
@@ -36,7 +38,7 @@ export default function Section({
     <section
       {...props}
       aria-labelledby={labelId}
-      className={className.length > 0 ? `space-y-5 ${className}` : "space-y-5"}
+      className={`${spacing ? "space-y-5" : ""} ${className}`}
       id={id}
     >
       <SectionHeading

@@ -40,8 +40,9 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
       <form action="/api/timer/auth/login" method="get">
         <button
           type="submit"
+          data-custom-width=""
           aria-label={label}
-          className={`${className} ${showLabel ? "w-full!" : "w-8!"}`}
+          className={`${className} ${showLabel ? "w-full" : "w-8"}`}
           title={label}
         >
           {icon}
@@ -77,8 +78,14 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
             >
               <Menu.Item
                 nativeButton
-                render={<button aria-label="Sign out" type="submit" />}
-                className="text-secondary-foreground hover:bg-interface-hover hover:text-secondary-hover-foreground data-highlighted:bg-interface-hover data-highlighted:text-secondary-hover-foreground border-border focus-visible:outline-foreground block w-full! cursor-pointer rounded-md border bg-white px-3 py-1.5 text-center text-sm select-none focus-visible:outline-2"
+                render={
+                  <button
+                    aria-label="Sign out"
+                    data-custom-width=""
+                    type="submit"
+                  />
+                }
+                className="text-secondary-foreground hover:bg-interface-hover hover:text-secondary-hover-foreground data-highlighted:bg-interface-hover data-highlighted:text-secondary-hover-foreground border-border focus-visible:outline-foreground block w-full cursor-pointer rounded-md border bg-white px-3 py-1.5 text-center text-sm select-none focus-visible:outline-2"
               >
                 Sign out
               </Menu.Item>

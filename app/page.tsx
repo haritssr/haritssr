@@ -77,7 +77,7 @@ function PersonalDetails() {
     <section
       aria-label="About"
       id="Identity"
-      className={`${TASK_LAYOUT.surface} border-border-hover/25 from-background! to-foreground/5! min-w-0 space-y-4 rounded-xl! border! p-4! supports-[corner-shape:squircle]:rounded-3xl!`}
+      className={`${TASK_LAYOUT.profileSurface} border-border-hover/25 min-w-0 space-y-4`}
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex shrink-0 items-center gap-4">
@@ -122,10 +122,10 @@ function PersonalDetails() {
           </li>
           <li>Tangerang, Indonesia</li>
           <li>
-            <span className="text-identity-accent">haritssr</span> ={" "}
-            <span className="text-identity-accent">harits</span>{" "}
-            <span className="text-identity-accent">s</span>yah{" "}
-            <span className="text-identity-accent">r</span>ahmatullah
+            <span className="text-accent">haritssr</span> ={" "}
+            <span className="text-accent">harits</span>{" "}
+            <span className="text-accent">s</span>yah{" "}
+            <span className="text-accent">r</span>ahmatullah
           </li>
           {contacts.map((contact, index) => (
             <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
@@ -235,7 +235,7 @@ function Tools() {
   return (
     <nav
       aria-label="Tools"
-      className="[&>a]:border-border-hover/50 [&>a:hover]:border-border-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5"
+      className="sm:[&>a]:border-border-hover/50 sm:[&>a:hover]:border-border-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 [&>a]:border-transparent [&>a:hover]:border-transparent"
     >
       <IndexCard
         title="Timer"
@@ -312,7 +312,7 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span className="text-contact-accent" key={`u-${text.indexOf(chunk)}`}>
+        <span className="text-success" key={`u-${text.indexOf(chunk)}`}>
           {siteName}
         </span>
       ) : (
