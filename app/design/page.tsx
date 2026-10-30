@@ -271,6 +271,10 @@ export default function DesignSystem() {
               the limits of their attention and working memory.
             </li>
             <li>
+              Each page should make it clear where users are, what they can do,
+              what sections are available, and how to leave.
+            </li>
+            <li>
               Use distinct links for navigation and buttons for actions, with
               clear hover, active, and focus-visible states where relevant.
             </li>
