@@ -32,12 +32,16 @@
   corner-shape: squircle;
 }
 
+@utility border-hairline {
+  border-width: 0.5px;
+}
+
 @utility timer-list-progress-gap {
   gap: 0.21875rem;
 }
 
 @utility floating-material {
-  @apply border-border shadow-foreground/10 border shadow-lg;
+  @apply border-border shadow-foreground/10 border-hairline shadow-lg;
   background-color: var(--color-background);
 
   @supports (backdrop-filter: blur(12px)) {

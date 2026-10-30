@@ -37,7 +37,7 @@ export default function TabBarButtom({
       className={`${preview ? "relative block" : "sticky bottom-0 block pb-[max(0.5rem,env(safe-area-inset-bottom))]! lg:hidden"} p-2`}
     >
       <div
-        className="border-border bg-background/70 shadow-foreground/5 mx-auto w-full rounded-full border p-1 shadow-sm backdrop-blur-md sm:max-w-[22.4rem]"
+        className="border-border bg-background/70 shadow-foreground/5 border-hairline mx-auto w-full rounded-full p-1 shadow-sm backdrop-blur-md sm:max-w-[22.4rem]"
         data-mobile-tabbar-surface={preview ? undefined : pathname}
       >
         <div className="relative flex w-full items-center gap-0.5">

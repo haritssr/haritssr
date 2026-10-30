@@ -36,7 +36,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
   }
   const fullPlayer = (
     <div
-      className={`${styles.accent} border-border bg-background/70 shadow-foreground/10 flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full border p-2 shadow-lg backdrop-blur-md`}
+      className={`${styles.accent} border-border bg-background/70 shadow-foreground/10 border-hairline flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full p-2 shadow-lg backdrop-blur-md`}
     >
       <InternalLink
         className="mr-auto min-w-0 flex-1"
@@ -108,7 +108,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
       {error === null ? null : (
         <FloatingDockNotice>
           <p
-            className="border-border bg-background text-danger pointer-events-auto w-full rounded-xl border p-3 text-sm sm:w-[22.4rem]"
+            className="border-border bg-background text-danger border-hairline pointer-events-auto w-full rounded-xl p-3 text-sm sm:w-[22.4rem]"
             role="alert"
           >
             {error}

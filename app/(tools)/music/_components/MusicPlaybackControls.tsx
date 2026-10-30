@@ -165,7 +165,7 @@ export default function MusicPlaybackControls({
               <Popover.Popup
                 aria-label="Music volume"
                 initialFocus={false}
-                className={`${styles.volumeControls} border-border bg-background/70 shadow-foreground/10 flex flex-col items-center gap-2 rounded-full border px-2 pt-4 pb-2 shadow-lg outline-hidden backdrop-blur-md [corner-shape:round] ${volumeSupported ? "" : "w-40"}`}
+                className={`${styles.volumeControls} border-border bg-background/70 shadow-foreground/10 border-hairline flex flex-col items-center gap-2 rounded-full px-2 pt-4 pb-2 shadow-lg outline-hidden backdrop-blur-md [corner-shape:round] ${volumeSupported ? "" : "w-40"}`}
               >
                 {volumeSupported ? (
                   <Slider
