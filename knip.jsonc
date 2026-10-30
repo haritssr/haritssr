@@ -4,6 +4,7 @@
   "entry": [
     "public/sw.js",
     "app/[(]tools[)]/tree/{dev,generate-project-inventory}.ts!",
+    // Bun discovers this in normal mode; production mode still needs it explicitly.
     "utils/content/validate-content.ts!",
     // Bun discovers this script in development; production mode needs it explicitly.
     "app/[(]tools[)]/commits/import-commits.ts!",
