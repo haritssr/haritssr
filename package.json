@@ -14,8 +14,7 @@
     "typecheck": "bun run generate:project-tree && next typegen && tsc --noEmit --incremental false",
     "validate:content": "bun run generate:project-tree && bun --conditions=react-server utils/content/validate-content.ts",
     "migrate:timer": "bun 'app/(tools)/timer/migrate-timer.ts'",
-    "import:commits": "bun 'app/(tools)/commits/import-commits.ts'",
-    "sync:commits": "bun run import:commits"
+    "sync:commits": "bun 'app/(tools)/commits/import-commits.ts'"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

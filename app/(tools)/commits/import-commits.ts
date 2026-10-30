@@ -23,7 +23,7 @@ if (
   cliArgs.length > 1 ||
   (cliArgs.length === 1 && cliArgs[0] !== "--dry-run")
 ) {
-  throw new Error("Usage: bun run import:commits [--dry-run]");
+  throw new Error("Usage: bun run sync:commits [--dry-run]");
 }
 
 function git(args: string[]): string {

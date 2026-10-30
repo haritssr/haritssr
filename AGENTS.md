@@ -92,4 +92,4 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   The test-file policy still applies to `test` commits.
 - Never generate/restore `changelog.json`. Upload Git history to Turso only when
   explicitly requested with `bun run sync:commits`, never during development,
-  builds, or commits. `bun run import:commits --dry-run` validates without DB access.
+  builds, or commits. `bun run sync:commits --dry-run` validates without DB access.

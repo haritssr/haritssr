@@ -227,7 +227,7 @@ export default function CommitsDetailsPage() {
                       is intended, from a full Git checkout.
                     </li>
                     <li>
-                      Use <code>bun run import:commits --dry-run</code> to
+                      Use <code>bun run sync:commits --dry-run</code> to
                       validate without database access.
                     </li>
                     <li>
