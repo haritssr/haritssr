@@ -51,7 +51,7 @@ export default function ChapterPrerequisitesPage() {
             <li className="flex items-center gap-2">
               <span
                 aria-hidden="true"
-                className="border-attention bg-attention/10 size-3 rounded-sm border-2"
+                className="border-progress bg-progress/10 size-3 rounded-sm border-2"
               />
               Extensions
             </li>

@@ -82,9 +82,9 @@ const GROUP_STYLES: Record<
     stroke: "#8b5cf6",
   },
   Tes: {
-    chip: "border-emerald-200 bg-emerald-50 text-emerald-800",
-    dot: "bg-emerald-500",
-    node: "border-emerald-200 bg-emerald-50/80 text-emerald-950",
+    chip: "border-green-200 bg-green-50 text-green-800",
+    dot: "bg-green-500",
+    node: "border-green-200 bg-green-50/80 text-green-950",
     stroke: "#10b981",
   },
 };

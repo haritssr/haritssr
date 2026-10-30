@@ -48,7 +48,8 @@ export default function EulerPage() {
           contentClassName="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))] gap-x-4 gap-y-5"
         >
           <Section
-            className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0! rounded-xl border p-5"
+            className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0 rounded-xl border p-5"
+            spacing={false}
             headingAs="h3"
             headingClassName="text-lg font-semibold"
             title="Euler’s number"
@@ -64,7 +65,8 @@ export default function EulerPage() {
             />
           </Section>
           <Section
-            className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0! rounded-xl border p-5"
+            className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0 rounded-xl border p-5"
+            spacing={false}
             headingAs="h3"
             headingClassName="text-lg font-semibold"
             title="The circle constant"
@@ -78,7 +80,8 @@ export default function EulerPage() {
             <Equation tex={String.raw`C=2\pi r,\qquad \theta=\frac{s}{r}`} />
           </Section>
           <Section
-            className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0! rounded-xl border p-5"
+            className="border-border row-span-4 grid min-w-0 grid-rows-subgrid gap-5 space-y-0 rounded-xl border p-5"
+            spacing={false}
             headingAs="h3"
             headingClassName="text-lg font-semibold"
             title="The imaginary unit"

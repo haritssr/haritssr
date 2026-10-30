@@ -64,7 +64,7 @@ const groups: EmojiGroup[] = [
       { emoji: "🌵", name: "Cactus" },
     ],
     title: "Green things",
-    tone: "bg-emerald-500",
+    tone: "bg-green-500",
   },
   {
     category: "Color · blue",
@@ -271,7 +271,7 @@ const typeGroups: EmojiGroup[] = [
       { emoji: "🐝", name: "Honeybee" },
     ],
     title: "Animals",
-    tone: "bg-emerald-500",
+    tone: "bg-green-500",
   },
   {
     category: "Type · human body",
@@ -322,7 +322,7 @@ const typeGroups: EmojiGroup[] = [
       { emoji: "🍁", name: "Maple leaf" },
     ],
     title: "Plants & fungi",
-    tone: "bg-emerald-500",
+    tone: "bg-green-500",
   },
   {
     category: "Type · clothing",

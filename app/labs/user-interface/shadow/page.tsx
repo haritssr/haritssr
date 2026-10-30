@@ -25,7 +25,7 @@ const SHADOW_SAMPLES = [
   {
     name: "Attention",
     className:
-      "corner-squircle border-attention bg-attention text-foreground space-y-3 rounded-2xl border p-4 shadow-lg",
+      "corner-squircle border-progress bg-progress text-foreground space-y-3 rounded-2xl border p-4 shadow-lg",
   },
   {
     name: "Danger",

@@ -167,7 +167,7 @@ function Curve({
     <path
       d={curvePath(coefficients, from, to)}
       fill="none"
-      stroke={highlight ? "var(--color-attention)" : "var(--color-foreground)"}
+      stroke={highlight ? "var(--color-progress)" : "var(--color-foreground)"}
       strokeDasharray={dashed ? "5 4" : undefined}
       strokeLinecap="round"
       strokeWidth={highlight ? 3 : 2}
@@ -209,7 +209,7 @@ function Segment({
 }) {
   return (
     <line
-      stroke={highlight ? "var(--color-attention)" : "var(--color-muted)"}
+      stroke={highlight ? "var(--color-progress)" : "var(--color-muted)"}
       strokeDasharray={dashed ? "4 4" : undefined}
       strokeWidth={highlight ? 2.5 : 1.4}
       x1={xPixel(from[0])}
@@ -225,7 +225,7 @@ function Dot({ at, hollow = false }: { at: Pair; hollow?: boolean }) {
     <circle
       cx={xPixel(at[0])}
       cy={yPixel(at[1])}
-      fill={hollow ? "var(--color-background)" : "var(--color-attention)"}
+      fill={hollow ? "var(--color-background)" : "var(--color-progress)"}
       r="4"
       stroke="var(--color-foreground)"
       strokeWidth="1"
@@ -250,7 +250,7 @@ function Arrow({
   return (
     <g
       fill="none"
-      stroke={muted ? "var(--color-muted)" : "var(--color-attention)"}
+      stroke={muted ? "var(--color-muted)" : "var(--color-progress)"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
@@ -501,7 +501,7 @@ function Drawing({ concept }: { concept: QuadraticConcept }) {
       return (
         <Sketch>
           <rect
-            fill="var(--color-attention)"
+            fill="var(--color-progress)"
             fillOpacity="0.12"
             height="50"
             stroke="var(--color-foreground)"

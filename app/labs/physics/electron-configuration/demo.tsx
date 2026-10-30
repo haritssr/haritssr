@@ -330,7 +330,7 @@ export default function ElectronConfigurationDemo({
           </div>
         </div>
         {isConfigurationException(atomicNumber) ? (
-          <p className="border-attention mt-3 rounded-lg border bg-yellow-50 px-3 py-2 text-sm text-yellow-900">
+          <p className="border-progress mt-3 rounded-lg border bg-yellow-50 px-3 py-2 text-sm text-yellow-900">
             {element.name}&apos;s ground-state configuration differs from the
             simple Aufbau filling-order prediction.
           </p>

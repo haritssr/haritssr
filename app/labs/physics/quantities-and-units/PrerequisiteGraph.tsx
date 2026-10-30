@@ -331,7 +331,7 @@ function GraphToolbar({
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
-          className="bg-attention size-2.5 shrink-0 rounded-full"
+          className="bg-progress size-2.5 shrink-0 rounded-full"
         />
         Derived quantities
       </span>
@@ -345,7 +345,7 @@ function GraphToolbar({
       <span className="text-foreground/70 flex items-center gap-1.5">
         <span
           aria-hidden="true"
-          className="bg-secondary-accent size-2.5 shrink-0 rounded-full"
+          className="bg-accent size-2.5 shrink-0 rounded-full"
         />
         Indirect prerequisites
       </span>
@@ -469,7 +469,7 @@ function GraphViewport({
           <defs>
             {[
               ["direct", "var(--color-success)"],
-              ["indirect", "var(--color-secondary-accent)"],
+              ["indirect", "var(--color-accent)"],
               ["muted", "var(--color-border)"],
             ].map(([name, color]) => (
               <marker
@@ -507,7 +507,7 @@ function GraphViewport({
               markerName = "direct";
               edgeStrokeWidth = 2.5;
             } else if (isActive) {
-              edgeColor = "var(--color-secondary-accent)";
+              edgeColor = "var(--color-accent)";
               markerName = "indirect";
               edgeStrokeWidth = 2;
             }
@@ -552,7 +552,7 @@ function GraphViewport({
             stateStyles = "hover:border-success";
           }
 
-          let kindStyles = "border-attention/50 bg-attention/10";
+          let kindStyles = "border-progress/50 bg-progress/10";
 
           if (isSelected) {
             kindStyles = "";
