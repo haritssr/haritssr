@@ -110,7 +110,7 @@ export default function CompletedTasksTable({
       open={showHistory}
       onOpenChange={setShowHistory}
       render={<section aria-label="History" />}
-      className="space-y-3 lg:group-data-desktop-list-view/task-layout:space-y-1.5"
+      className="space-y-3 lg:group-data-list-view/task-layout:space-y-1.5"
     >
       <div className="flex flex-wrap items-start gap-1.5">
         <SectionHeading as="h3" variant="toolbar">
@@ -157,30 +157,37 @@ export default function CompletedTasksTable({
         </div>
       </div>
       <Collapsible.Panel>
-        <Table className="min-w-190 lg:group-data-desktop-list-view/task-layout:w-max lg:group-data-desktop-list-view/task-layout:min-w-full">
+        <Table className="min-w-190 lg:group-data-list-view/task-layout:w-max lg:group-data-list-view/task-layout:min-w-full">
           <caption className="sr-only">
             Completed and missed tasks with descriptions, time spent, total
             duration, progress, and status
           </caption>
           <thead>
-            <tr className="divide-border bg-foreground/5 text-muted divide-x [&>th]:px-3 [&>th]:text-left [&>th]:font-medium lg:group-data-desktop-list-view/task-layout:[&>th]:px-2 lg:group-data-desktop-list-view/task-layout:[&>th]:py-1.75">
+            <tr className="divide-border bg-foreground/5 text-muted divide-x [&>th]:px-3 [&>th]:text-left [&>th]:font-medium lg:group-data-list-view/task-layout:[&>th]:px-2 lg:group-data-list-view/task-layout:[&>th]:py-1.75">
               <th
                 scope="col"
-                className="w-10 text-center lg:group-data-desktop-list-view/task-layout:w-auto"
+                className="w-10 text-center lg:group-data-list-view/task-layout:w-auto"
               >
                 No
               </th>
               <th scope="col">Name</th>
               <th scope="col" aria-label="Description">
-                <span className="lg:group-data-desktop-list-view/task-layout:hidden">
+                <span className="lg:group-data-list-view/task-layout:hidden">
                   Description
                 </span>
-                <span className="hidden lg:group-data-desktop-list-view/task-layout:inline">
+                <span className="hidden lg:group-data-list-view/task-layout:inline">
                   Desc
                 </span>
               </th>
               <th scope="col">Spent</th>
-              <th scope="col">Duration</th>
+              <th scope="col" aria-label="Duration">
+                <span className="lg:group-data-list-view/task-layout:hidden">
+                  Duration
+                </span>
+                <span className="hidden lg:group-data-list-view/task-layout:inline">
+                  Dur
+                </span>
+              </th>
               <th scope="col">%</th>
               <th scope="col">Status</th>
             </tr>
@@ -193,17 +200,17 @@ export default function CompletedTasksTable({
               ) => (
                 <tr
                   key={task.id}
-                  className="divide-border text-muted divide-x align-top [&>td]:px-3 [&>td]:py-2 lg:group-data-desktop-list-view/task-layout:[&>td]:px-2 lg:group-data-desktop-list-view/task-layout:[&>td]:py-1.75"
+                  className="divide-border text-muted divide-x align-top [&>td]:px-3 [&>td]:py-2 lg:group-data-list-view/task-layout:[&>td]:px-2 lg:group-data-list-view/task-layout:[&>td]:py-1.75"
                 >
                   <td className="text-center tabular-nums">{index + 1}</td>
                   <th
                     scope="row"
-                    className="max-w-64 min-w-40 px-3 py-2 text-left font-normal wrap-anywhere lg:group-data-desktop-list-view/task-layout:min-w-0 lg:group-data-desktop-list-view/task-layout:px-2 lg:group-data-desktop-list-view/task-layout:py-1.75"
+                    className="max-w-64 min-w-40 px-3 py-2 text-left font-normal wrap-anywhere lg:group-data-list-view/task-layout:min-w-0 lg:group-data-list-view/task-layout:px-2 lg:group-data-list-view/task-layout:py-1.75"
                   >
                     {task.activity}
                   </th>
-                  <td className="max-w-80 min-w-48 wrap-anywhere whitespace-pre-wrap lg:group-data-desktop-list-view/task-layout:min-w-0">
-                    <div className="scrollbar-subtle lg:group-data-desktop-list-view/task-layout:max-w-48 lg:group-data-desktop-list-view/task-layout:overflow-x-auto lg:group-data-desktop-list-view/task-layout:whitespace-pre">
+                  <td className="max-w-80 min-w-48 wrap-anywhere whitespace-pre-wrap lg:group-data-list-view/task-layout:min-w-0">
+                    <div className="scrollbar-subtle lg:group-data-list-view/task-layout:max-w-48 lg:group-data-list-view/task-layout:overflow-x-auto lg:group-data-list-view/task-layout:whitespace-pre">
                       {task.description.trim() ? (
                         task.description
                       ) : (
@@ -219,7 +226,7 @@ export default function CompletedTasksTable({
                   </td>
                   <td className="tabular-nums">
                     {percentage >= 100 ? "100" : percentage.toFixed(0)}
-                    <span className="lg:group-data-desktop-list-view/task-layout:sr-only">
+                    <span className="lg:group-data-list-view/task-layout:sr-only">
                       %
                     </span>
                   </td>

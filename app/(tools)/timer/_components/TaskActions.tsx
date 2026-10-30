@@ -55,7 +55,7 @@ function TaskToggleIcon({
     <Icon
       aria-hidden="true"
       data-running={running}
-      className={`${running ? "size-6 sm:group-data-desktop-list-view/task-list:size-5" : "size-5 sm:group-data-desktop-list-view/task-list:size-4"} ${Icon === PlayIcon ? "translate-x-px" : ""}`}
+      className={`${running ? "size-6 sm:group-data-list-view/task-list:size-5" : "size-5 sm:group-data-list-view/task-list:size-4"} ${Icon === PlayIcon ? "translate-x-px" : ""}`}
     />
   );
 }
@@ -140,7 +140,7 @@ export default function TaskActions({
           <CheckIcon
             strokeWidth={3}
             aria-hidden="true"
-            className="size-5 sm:group-data-desktop-list-view/task-list:size-3.75"
+            className="size-5 sm:group-data-list-view/task-list:size-3.75"
           />
         </Button>
       ) : (
@@ -211,6 +211,7 @@ function TaskIconActions({
       </Button>
       <Button
         aria-label={`${label}: ${activity}`}
+        data-floating-space="timer"
         data-timer-play=""
         dimWhenDisabled={dimWhenDisabled}
         disabled={disabled}

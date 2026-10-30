@@ -13,7 +13,7 @@ function completionToast(notice: TimerNotice) {
   return {
     id: `timer-completion:${notice.date}/${notice.taskId}`,
     title: "Task completed",
-    description: `${notice.activity} is done!`,
+    description: notice.activity,
   };
 }
 

@@ -88,6 +88,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
       </Button>
       <Button
         aria-label={playing ? "Pause music" : "Play music"}
+        data-floating-space="music"
         data-timer-play=""
         onClick={() => {
           store.toggle();

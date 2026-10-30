@@ -147,6 +147,11 @@ export function ShareToastViewport() {
                     }
                     render={
                       <Button
+                        data-floating-space={
+                          toast.transitionStatus === "ending"
+                            ? undefined
+                            : "notification"
+                        }
                         data-timer-play=""
                         size="icon-circle"
                         variant="primary-subtle"

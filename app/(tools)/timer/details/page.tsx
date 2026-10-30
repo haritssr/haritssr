@@ -64,6 +64,14 @@ export default function TimerDetailsPage() {
               dialog is active.
             </li>
             <li>Start, pause, resume, edit, or finish tasks early.</li>
+            <li>
+              Press Space on Timer to pause the most recently started task or
+              resume it when no floating control takes priority.
+            </li>
+            <li>
+              Space activates the topmost notification, retry, floating Music,
+              or floating Timer, in that order.
+            </li>
             <li>Every task advances by one second per real second.</li>
             <li>
               Windowed tasks warn ten minutes before the latest safe start,
@@ -126,13 +134,14 @@ export default function TimerDetailsPage() {
               stop at midnight.
             </li>
             <li>
-              Names allow 20 characters, descriptions allow 35, and durations
+              Names allow 30 characters, descriptions allow 30, and durations
               range from one second to 24 hours.
             </li>
             <li>
               Settings → Daily Tasks lets you add, remove, reorder, and schedule
-              your routine. Save applies to future days; Cancel discards the
-              draft. Daily descriptions allow up to 2,000 characters.
+              up to 10 tasks in your routine. Save applies to future days;
+              Cancel discards the draft. Daily descriptions allow up to 2,000
+              characters.
             </li>
             <li>
               Daily tasks require a manual start. Editing a card changes only

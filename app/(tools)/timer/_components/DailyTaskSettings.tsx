@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
 import type { SubmitEvent } from "react";
 
-import { canUseTimer, MAX_TIMER_TASKS } from "@/app/(tools)/timer/utils/timer";
+import { MAX_DAILY_TASKS } from "@/app/(tools)/timer/utils/dailyTasks";
+import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Button from "@/components/Button";
 
@@ -65,7 +66,7 @@ export default function DailyTaskSettings({
     const values = parseDailyDrafts(entries);
     if (values === null) {
       setError(
-        "Use a name of 1–20 characters, a duration from one second to 24 hours, and an end time later than the start. Midnight ends the day."
+        "Use at most 10 tasks, a name of 1–30 characters, a duration from one second to 24 hours, and an end time later than the start. Midnight ends the day."
       );
       return;
     }
@@ -90,7 +91,7 @@ export default function DailyTaskSettings({
         value="daily"
         trailing={
           <span className="text-muted text-xs tabular-nums">
-            {entries.length}/{MAX_TIMER_TASKS}
+            {entries.length}/{MAX_DAILY_TASKS}
           </span>
         }
       >
@@ -113,7 +114,7 @@ export default function DailyTaskSettings({
           <Button
             className="w-full"
             variant="outline-regular"
-            disabled={disabled || entries.length >= MAX_TIMER_TASKS}
+            disabled={disabled || entries.length >= MAX_DAILY_TASKS}
             onClick={() => {
               const entry = newDailyTaskDraft();
               setDraft((current) => [...(current ?? saved), entry]);

@@ -4,6 +4,8 @@ The [Music page](../page.tsx) renders `MusicLibrary`; the root layout retains
 `MusicProvider` across navigation. The provider lazy-loads `MusicRuntime` on a
 Music visit or for a remembered visible player. The runtime creates one store,
 connects/disconnects it, handles Space, and renders the floating player.
+Floating controls take Space in order: notification, retry, Music, then Timer.
+Music keeps priority while its floating player is visible, including when paused.
 
 Music and Timer use separate floating pills, with Music above Timer when both
 are visible. Each pill spans the available width on phones, and both players'

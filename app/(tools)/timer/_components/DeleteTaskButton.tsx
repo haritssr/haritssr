@@ -49,7 +49,7 @@ export default function DeleteTaskButton({
         {children ?? (
           <TrashIcon
             aria-hidden="true"
-            className="size-5 sm:group-data-desktop-list-view/task-list:size-4.5"
+            className="size-5 sm:group-data-list-view/task-list:size-4.5"
           />
         )}
       </AlertDialog.Trigger>

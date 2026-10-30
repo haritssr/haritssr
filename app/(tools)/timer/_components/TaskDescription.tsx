@@ -38,6 +38,7 @@ export default function TaskDescription({ task }: { task: TimerTask }) {
               <Popover.Title className="sr-only">
                 {task.activity} description
               </Popover.Title>
+              <div aria-hidden="true">Description:</div>
               <Popover.Description
                 className={`wrap-anywhere whitespace-pre-wrap ${task.description.trim().length === 0 ? "text-background/70 italic" : ""}`}
               >

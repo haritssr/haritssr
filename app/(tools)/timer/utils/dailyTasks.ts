@@ -1,6 +1,7 @@
 import type { TimerTask, TimerTaskPreset, AvailabilityWindow } from "./timer";
 
 export const DAILY_DESCRIPTION_LIMIT = 2000;
+export const MAX_DAILY_TASKS = 10;
 
 export interface DailyTaskDefinition extends TimerTaskPreset {
   availabilityWindow: AvailabilityWindow | null;

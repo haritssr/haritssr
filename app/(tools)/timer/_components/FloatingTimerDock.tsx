@@ -9,6 +9,7 @@ import { taskAppearance } from "@/app/(tools)/timer/_components/taskPresentation
 import TaskProgress from "@/app/(tools)/timer/_components/TaskProgress";
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
+import useTimerPlaybackShortcut from "@/app/(tools)/timer/hooks/useTimerPlaybackShortcut";
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import Button from "@/components/Button";
 import { FloatingDockSlot } from "@/components/floating/FloatingDock";
@@ -51,6 +52,14 @@ export default function FloatingTimerDock() {
     error !== null && (pathname === "/timer" || canUseTimer(snapshot));
   const visible = selected !== undefined || showError;
 
+  const retainPausedTask = (taskId: string) => {
+    setSelection({ date, taskId, retainedTaskId: taskId });
+  };
+  useTimerPlaybackShortcut({
+    retainedTaskId: selection.date === date ? selection.retainedTaskId : null,
+    onToggle: retainPausedTask,
+  });
+
   if (!visible) {
     return null;
   }
@@ -61,10 +70,6 @@ export default function FloatingTimerDock() {
       setSelection((current) => ({ ...current, taskId: next.task.id }));
     }
   }
-
-  const retainPausedTask = (taskId: string) => {
-    setSelection({ date, taskId, retainedTaskId: taskId });
-  };
 
   return (
     <>
@@ -115,9 +120,9 @@ function FloatingTimerPlayer({
   const fullPlayer = (
     <div className="border-border bg-background/70 shadow-foreground/10 border-hairline flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full py-2 pr-2 pl-4 shadow-lg backdrop-blur-md">
       <InternalLink
-        className="text-foreground! hover:text-foreground! focus-visible:outline-action mr-auto min-w-0 flex-1 rounded-sm py-1 hover:no-underline! focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-1.5"
+        className="focus-visible:outline-action mr-auto min-w-0 flex-1 rounded-sm py-1 focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-1.5"
         href="/timer"
-        variant="inline"
+        variant="floating"
       >
         <TaskProgress
           task={selected.task}

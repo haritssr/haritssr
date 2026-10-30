@@ -60,7 +60,7 @@ export default function MusicDetailsPage() {
             <li>Keep listening across the site with the floating player.</li>
             <li>
               Press Space to play or pause on Music or while the floating player
-              is visible.
+              is visible. Notifications and retry actions take priority.
             </li>
             <li>
               Play imported songs offline after opening Music online to prepare

@@ -161,7 +161,7 @@ export default function MusicSongList({
             <div className="flex min-w-0 flex-1 basis-0 items-center gap-2 group-data-[current=true]/song:basis-64 sm:gap-0">
               <button
                 aria-label={`${track.id === current?.id && playing ? "Pause" : "Play"} ${track.title}${includedTrack(track.id) ? "" : " (imported song)"}`}
-                className="focus-visible:outline-action text-foreground group-data-[current=true]/song:text-music -my-2 flex min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-md text-left transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="focus-visible:outline-action text-foreground group-data-[current=true]/song:text-accent -my-2 flex min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-md text-left transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
                 onClick={() => {
                   if (track.id === current?.id) {
                     store.toggle();
@@ -172,12 +172,12 @@ export default function MusicSongList({
                 type="button"
               >
                 <MusicArtwork
-                  className="text-muted group-data-[current=true]/song:text-music h-10 w-5 [&>svg]:size-5"
+                  className="text-muted group-data-[current=true]/song:text-accent h-10 w-5 [&>svg]:size-5"
                   track={track}
                 />
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-1.5 text-sm font-medium">
-                    <span className="text-foreground group-data-[current=true]/song:text-music truncate">
+                    <span className="text-foreground group-data-[current=true]/song:text-accent truncate">
                       {track.title}
                     </span>
                     {includedTrack(track.id) ? null : (

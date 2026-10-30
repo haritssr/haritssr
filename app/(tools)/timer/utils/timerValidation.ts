@@ -8,7 +8,11 @@ import {
 } from "@/app/(tools)/timer/utils/timer";
 import { TASK_INPUT_LIMITS } from "@/app/(tools)/timer/utils/timerInput";
 
-import { DEFAULT_DAILY_TASKS, DAILY_DESCRIPTION_LIMIT } from "./dailyTasks";
+import {
+  DEFAULT_DAILY_TASKS,
+  DAILY_DESCRIPTION_LIMIT,
+  MAX_DAILY_TASKS,
+} from "./dailyTasks";
 
 export const availabilityWindowSchema = z
   .object({
@@ -17,7 +21,7 @@ export const availabilityWindowSchema = z
   })
   .refine(({ from, until }) => from < until);
 
-export const dailyTasksSchema = z
+const storedDailyTasksSchema = z
   .array(
     z.object({
       id: z.string().startsWith("daily:").min(7).max(100),
@@ -31,6 +35,9 @@ export const dailyTasksSchema = z
   .refine(
     (tasks) => new Set(tasks.map((task) => task.id)).size === tasks.length
   );
+export const dailyTasksSchema = storedDailyTasksSchema.refine(
+  (tasks) => tasks.length <= MAX_DAILY_TASKS
+);
 
 const dateSchema = z.string().refine(validTimerDate);
 const instant = z.iso.datetime({ offset: true });
@@ -109,7 +116,7 @@ export const actionSchema = z.discriminatedUnion("action", [
         description.length <= TASK_INPUT_LIMITS.description,
       {
         path: ["description"],
-        message: "Use 35 characters or fewer for the description.",
+        message: `Use ${TASK_INPUT_LIMITS.description} characters or fewer for the description.`,
       }
     ),
   z.object({
@@ -143,11 +150,12 @@ export const durationPresetsSchema = z
   )
   .min(1)
   .max(5);
-export const taskPresetsSchema = z
+const storedTaskPresetsSchema = z
   .array(
     z.object({
       id: z.string().min(1).max(100),
       ...taskDetails,
+      description: z.string().trim().max(35),
     })
   )
   .min(1)
@@ -156,6 +164,11 @@ export const taskPresetsSchema = z
     (presets) =>
       new Set(presets.map((preset) => preset.id)).size === presets.length
   );
+export const taskPresetsSchema = storedTaskPresetsSchema.refine((presets) =>
+  presets.every(
+    (preset) => preset.description.length <= TASK_INPUT_LIMITS.description
+  )
+);
 
 export const preferencesSchema = z.object({
   revision: z.number().int().nonnegative(),
@@ -166,10 +179,10 @@ export const preferencesSchema = z.object({
   durationPresets: durationPresetsSchema.default(() => [
     ...DEFAULT_DURATION_PRESETS,
   ]),
-  taskPresets: taskPresetsSchema.default(() =>
+  taskPresets: storedTaskPresetsSchema.default(() =>
     DEFAULT_TASK_PRESETS.map((preset) => ({ ...preset }))
   ),
-  dailyTasks: dailyTasksSchema.default(() =>
+  dailyTasks: storedDailyTasksSchema.default(() =>
     structuredClone(DEFAULT_DAILY_TASKS)
   ),
 });

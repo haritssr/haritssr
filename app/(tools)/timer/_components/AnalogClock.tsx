@@ -103,11 +103,11 @@ export default function AnalogClock({
             y2="19"
           />
           <g
-            className="stroke-attention"
+            className="stroke-progress"
             transform={`rotate(${seconds * 6} 50 50)`}
           >
             <line strokeWidth="1.6" x1="50" x2="50" y1="57" y2="12" />
-            <circle className="fill-attention" cx="50" cy="50" r="2" />
+            <circle className="fill-progress" cx="50" cy="50" r="2" />
           </g>
         </g>
       )}

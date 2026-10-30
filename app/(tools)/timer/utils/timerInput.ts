@@ -1,7 +1,7 @@
 // Shared input limits; stored legacy records intentionally allow longer text.
 export const TASK_INPUT_LIMITS = {
-  activity: 20,
-  description: 35,
+  activity: 30,
+  description: 30,
   minimumDuration: 1,
   maximumDuration: 86_400,
 } as const;
@@ -28,7 +28,7 @@ export function readTaskForm(
     return "Enter an activity name.";
   }
   if (activity.length > TASK_INPUT_LIMITS.activity) {
-    return "Use 20 characters or fewer for the activity name.";
+    return `Use ${TASK_INPUT_LIMITS.activity} characters or fewer for the activity name.`;
   }
   const descriptionValue = form.get("description");
   const description =

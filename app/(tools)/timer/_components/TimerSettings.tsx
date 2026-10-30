@@ -66,7 +66,7 @@ export default function TimerSettingsScope({
         {({ payload }) => (
           <Dialog.Portal>
             <Dialog.Backdrop className="timer-dialog-backdrop bg-foreground/40 fixed inset-0 z-90" />
-            <Dialog.Popup className="corner-squircle scrollbar-subtle floating-material text-foreground fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg p-4 outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
+            <Dialog.Popup className="corner-squircle scrollbar-subtle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed top-1/2 left-1/2 z-90 max-h-[90dvh] w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg p-4 shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
               <div className="mb-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
                 <Dialog.Title className="col-start-2 text-center font-medium">
                   Settings
@@ -74,7 +74,7 @@ export default function TimerSettingsScope({
                 <div className="grid w-18 justify-self-end">
                   <Dialog.Close
                     render={
-                      <Button className="w-full!" variant="outline-regular" />
+                      <Button className="w-full" variant="outline-regular" />
                     }
                   >
                     Done

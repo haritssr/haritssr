@@ -20,7 +20,7 @@ export default function TaskDeadlineWarning({ state }: { state: TaskState }) {
       <Popover.Root>
         <Popover.Trigger
           aria-label={message}
-          className={`focus-visible:outline-action flex size-5 shrink-0 cursor-pointer items-center justify-center rounded outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 ${state.deadlineWarning === "late" ? "text-danger" : "text-attention"}`}
+          className="focus-visible:outline-action text-danger flex size-5 shrink-0 cursor-pointer items-center justify-center rounded outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2"
           openOnHover
         >
           <ExclamationTriangleIcon

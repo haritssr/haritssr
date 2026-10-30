@@ -105,7 +105,7 @@ function PresetEditor({ kind }: { kind: "duration" | "task" }) {
     if (!validUnits || (task ? !tasks.success : !durations.success)) {
       setError(
         task
-          ? "Use a name of 1–20 characters, a description of up to 35, and a duration from one second to 24 hours."
+          ? "Use a name of 1–30 characters, a description of up to 30, and a duration from one second to 24 hours."
           : "Choose durations from one second to 24 hours."
       );
       return;

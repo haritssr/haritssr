@@ -4,6 +4,14 @@ Start at [TimerClient.tsx](../TimerClient.tsx) for the page structure. It compos
 Today, the toolbar, loading/error feedback, and the task list. These components
 run inside its `use client` boundary.
 
+`FloatingTimerDock` mounts [useTimerPlaybackShortcut](../hooks/useTimerPlaybackShortcut.ts)
+for the Timer page. It selects the most recently started task, retaining it for
+resuming after a keyboard pause. Completion, closed windows, deletion, and a new
+Jakarta day invalidate retained tasks. FloatingDock handles Space first for visible
+notifications, retry, Music, and Timer, in that order, by activating their existing
+controls. Music keeps priority while paused. Typing, focused controls, dialogs,
+modified keys, composition, and held-key repeats keep their normal behavior.
+
 | Change | File |
 | --- | --- |
 | Header analog clock, ticking once per second in WIB and linking to Clock | [AnalogClock.tsx](AnalogClock.tsx), [Timer page](../page.tsx) |
@@ -43,10 +51,9 @@ keep each form section easy to locate. `DurationFields` is shared too.
 Task form parsing lives in [timerInput.ts](../utils/timerInput.ts). Its lightweight
 limits are shared with input counters and server schemas; stored legacy text keeps
 its existing broader limits. Live elapsed-time validation remains in Edit.
-Name allows 20 characters; the optional Description allows 35, or 2,000 for a
+Name allows 30 characters; the optional Description allows 30, or 2,000 for a
 daily task. Both show a
-character counter beside their labels, using `text-attention` for Name and
-`text-danger` for Description at the limit. Each field has
+character counter beside their labels, using `text-danger` at the limit. Each field has
 a Clear button with a native Clear hover hint that empties it and returns focus
 to the field. Name and Description start at 40px tall; Description can be resized
 vertically and uses a subtle scrollbar when needed. Longer descriptions in ordinary
@@ -322,7 +329,7 @@ inside the accordion panel while draft state remains outside, preserving edits
 across collapse without constructing closed-panel fields. The editor provides
 add/remove, and Up/Down ordering. Names use the existing 20-character limit; daily
 descriptions allow 2,000 characters. The list may be empty and shares the existing
-100-task daily ceiling. Scheduled availability uses From/Until in WIB; Until 00:00
+10-task Daily Tasks limit. Scheduled availability uses From/Until in WIB; Until 00:00
 means the following midnight. Overnight windows other than that cutoff are rejected.
 Closing Settings discards unsaved changes. `TimerSettings.tsx` owns one page-scoped
 Base UI handle: the toolbar trigger opens Settings and restores focus through Base

@@ -69,7 +69,9 @@ export default function MusicRuntime({
         }
       }
     }
-    window.addEventListener("keydown", onKeyDown);
+    if (pathname !== "/timer") {
+      window.addEventListener("keydown", onKeyDown);
+    }
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };

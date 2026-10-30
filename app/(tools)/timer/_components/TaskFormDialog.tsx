@@ -75,7 +75,7 @@ function TaskFormPopup({
       <Dialog.Popup
         initialFocus={nameRef}
         style={SHEET_STYLE}
-        className="corner-squircle floating-material text-foreground fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-lg p-4 outline-hidden supports-[corner-shape:squircle]:rounded-t-2xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-lg sm:supports-[corner-shape:squircle]:rounded-2xl"
+        className="corner-squircle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-lg p-4 shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-t-2xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-lg sm:supports-[corner-shape:squircle]:rounded-2xl"
       >
         <form
           className="flex flex-col gap-5"
@@ -117,7 +117,8 @@ function TaskFormPopup({
                     <Button
                       key={preset.id}
                       aria-pressed={selected}
-                      className="h-8.5 w-full items-center justify-between!"
+                      align="between"
+                      className="h-8.5 w-full items-center"
                       variant={
                         selected ? "action-outline-regular" : "outline-regular"
                       }
@@ -174,7 +175,7 @@ export function TaskNameField({
       <span className="flex items-center justify-between">
         <span>Name</span>
         <span
-          className={`text-xs tabular-nums ${length >= TASK_INPUT_LIMITS.activity ? "text-attention font-medium" : "text-muted"}`}
+          className={`text-xs tabular-nums ${length >= TASK_INPUT_LIMITS.activity ? "text-danger font-medium" : "text-muted"}`}
           id={hintId}
         >
           <span className="sr-only">Characters: </span>
@@ -200,8 +201,8 @@ export function TaskNameField({
         <Button
           aria-label="Clear name"
           title="Clear"
-          className="absolute top-1/2 right-2.5 size-4.5! -translate-y-1/2"
-          size="icon-small"
+          className="absolute top-1/2 right-2.5 -translate-y-1/2"
+          size="icon-clear"
           disabled={disabled || length === 0}
           onClick={() => {
             onChange("");
@@ -272,8 +273,8 @@ export function TaskDescriptionField({
         <Button
           aria-label="Clear description"
           title="Clear"
-          className="absolute top-1/2 right-2.5 size-4.5! -translate-y-1/2"
-          size="icon-small"
+          className="absolute top-1/2 right-2.5 -translate-y-1/2"
+          size="icon-clear"
           disabled={disabled || length === 0}
           onClick={() => {
             onChange("");
@@ -314,13 +315,13 @@ function TaskFormActions({
         {onDelete === undefined ? (
           <Dialog.Close
             disabled={busy}
-            render={<Button className="w-full!" variant="secondary" />}
+            render={<Button className="w-full" variant="secondary" />}
           >
             Cancel
           </Dialog.Close>
         ) : (
           <DeleteTaskButton
-            className="w-full!"
+            className="w-full"
             disabled={busy}
             onDelete={onDelete}
             variant="danger"
@@ -331,7 +332,12 @@ function TaskFormActions({
       </div>
       <Dialog.Title className="text-center font-medium">{title}</Dialog.Title>
       <div className="grid w-18 justify-self-end">
-        <Button className="w-full!" loading={busy} type="submit">
+        <Button
+          className="w-full"
+          data-custom-width=""
+          loading={busy}
+          type="submit"
+        >
           {submitLabel}
         </Button>
       </div>

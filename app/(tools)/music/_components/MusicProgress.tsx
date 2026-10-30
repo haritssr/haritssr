@@ -33,7 +33,7 @@ export default function MusicProgress({
   return (
     <div className="space-y-1.5">
       <div className="text-muted relative flex justify-between text-xs tabular-nums">
-        <span className="text-music">{musicTime(position)}</span>
+        <span className="text-accent">{musicTime(position)}</span>
         <span>
           {duration > 0
             ? `-${musicTime(Math.max(0, duration - position))}`

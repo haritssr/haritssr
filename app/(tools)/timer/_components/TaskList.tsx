@@ -49,14 +49,14 @@ export default function TaskList() {
   });
   return (
     <div
-      data-desktop-list-view={desktopListView || undefined}
-      className={`group/task-layout relative min-w-0 space-y-10 data-desktop-list-view:lg:grid data-desktop-list-view:lg:grid-cols-4 data-desktop-list-view:lg:items-start data-desktop-list-view:lg:gap-8 data-desktop-list-view:lg:space-y-0 ${visible.length > 0 && completed.length > 0 ? "data-desktop-list-view:lg:after:border-border data-desktop-list-view:lg:after:pointer-events-none data-desktop-list-view:lg:after:absolute data-desktop-list-view:lg:after:inset-y-0 data-desktop-list-view:lg:after:left-1/2 data-desktop-list-view:lg:after:border-l data-desktop-list-view:lg:after:border-dashed data-desktop-list-view:lg:after:content-['']" : ""}`}
+      data-list-view={desktopListView || undefined}
+      className={`group/task-layout relative min-w-0 space-y-10 data-list-view:lg:grid data-list-view:lg:grid-cols-4 data-list-view:lg:items-start data-list-view:lg:gap-8 data-list-view:lg:space-y-0 ${visible.length > 0 && completed.length > 0 ? "data-list-view:lg:after:border-border data-list-view:lg:after:pointer-events-none data-list-view:lg:after:absolute data-list-view:lg:after:inset-y-0 data-list-view:lg:after:left-1/2 data-list-view:lg:after:border-l data-list-view:lg:after:border-dashed data-list-view:lg:after:content-['']" : ""}`}
     >
       {visible.length > 0 && (
         <ul
           aria-label="Today's activities"
-          data-desktop-list-view={desktopListView || undefined}
-          className={`group/task-list @container/task-list min-w-0 ${TASK_LAYOUT.collection} data-desktop-list-view:sm:grid-cols-1 data-desktop-list-view:sm:gap-3 data-desktop-list-view:lg:col-span-2 data-desktop-list-view:lg:grid-cols-1`}
+          data-list-view={desktopListView || undefined}
+          className={`group/task-list @container/task-list min-w-0 ${TASK_LAYOUT.collection} data-list-view:sm:grid-cols-1 data-list-view:sm:gap-3 data-list-view:lg:col-span-2 data-list-view:lg:grid-cols-1`}
         >
           {orderedVisible.map(({ task, state }) => (
             <li className="flex min-w-0" key={task.id}>
@@ -66,7 +66,7 @@ export default function TaskList() {
         </ul>
       )}
       {completed.length > 0 && (
-        <div className="min-w-0 lg:group-data-desktop-list-view/task-layout:col-span-2 lg:group-data-desktop-list-view/task-layout:col-start-3">
+        <div className="min-w-0 lg:group-data-list-view/task-layout:col-span-2 lg:group-data-list-view/task-layout:col-start-3">
           <CompletedTasksTable
             tasks={completed}
             date={snapshot.today}

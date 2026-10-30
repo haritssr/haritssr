@@ -24,6 +24,7 @@ export default function FloatingRetryNotification({
             <Button
               aria-label="Retry timer refresh"
               title="Retry"
+              data-floating-space="error"
               data-timer-play=""
               size="icon-circle"
               variant="danger-subtle"
