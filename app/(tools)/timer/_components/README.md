@@ -311,7 +311,7 @@ the toolbar; save status, backup guidance, and success messages are omitted.
 
 Account access stays beside View Source in the shared top bar. Below 640px, both move into Page actions while the scrolling page title is visible. The Google photo opens an account menu with email and Sign out; missing or failed photos use a profile icon. Existing sessions gain photos after signing in again. Timer authorization remains owner-only.
 
-Task cards place Complete before Play/Pause or Continue, matching the floating timer. Task action buttons use Trash, Play, Pause, and outline Check icons with a heavier `strokeWidth={2.5}` with hover labels and accessible names. Start and Continue both use Play; Delete retains its confirmation dialog. The Edit Task header uses a text Delete button.
+Task cards place Complete before Play/Pause or Continue, matching the floating timer. Task action buttons use Trash, Play, Pause, and outline Check icons with hover labels and accessible names. The Check icon uses `strokeWidth={3}` on cards and `2` in the floating timer. Start and Continue both use Play; Delete retains its confirmation dialog. The Edit Task header uses a text Delete button.
 
 ## Daily Tasks
 

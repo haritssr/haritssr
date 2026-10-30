@@ -138,9 +138,9 @@ export default function TaskActions({
           variant="timer-secondary"
         >
           <CheckIcon
-            strokeWidth={3.5}
+            strokeWidth={3}
             aria-hidden="true"
-            className="size-5 sm:group-data-desktop-list-view/task-list:size-3.5"
+            className="size-5 sm:group-data-desktop-list-view/task-list:size-3.75"
           />
         </Button>
       ) : (
@@ -207,7 +207,7 @@ function TaskIconActions({
         title="Done"
         variant="floating-secondary"
       >
-        <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-4.5" />
+        <CheckIcon strokeWidth={2} aria-hidden="true" className="size-4.5" />
       </Button>
       <Button
         aria-label={`${label}: ${activity}`}

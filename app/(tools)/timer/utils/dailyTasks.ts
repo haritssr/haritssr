@@ -82,5 +82,5 @@ export function formatAvailabilityWindow(
 ) {
   return window === null || window === undefined
     ? undefined
-    : `${windowTime(window.from)}-${windowTime(window.until)}`;
+    : `${windowTime(window.from)}/${windowTime(window.until)}`;
 }
