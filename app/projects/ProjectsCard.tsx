@@ -53,14 +53,12 @@ export default function ProjectsCard({
 
       <div className="flex space-x-2.5 px-3.5 pb-3.5">
         <Link
-          data-timer-secondary=""
-          className="corner-squircle border-border-hover/50 bg-secondary-button-surface text-foreground hover:border-border-hover hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground inline-flex w-1/2 items-center justify-center gap-1.5 rounded-md border px-3 py-2 text-center text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 supports-[corner-shape:squircle]:rounded-xl sm:py-1.5"
+          className="corner-squircle border-border text-foreground hover:bg-foreground/5 focus-visible:outline-foreground inline-flex min-h-8.5 w-1/2 items-center justify-center rounded-md border px-2 py-1.5 text-center text-sm transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 supports-[corner-shape:squircle]:rounded-xl motion-reduce:transition-none"
           href={`/projects/${getProjectSlug(title)}`}
         >
           Details
         </Link>
         <a
-          data-timer-play=""
           className="corner-squircle bg-foreground/90 text-background hover:bg-foreground inline-flex w-1/2 items-center justify-center rounded-md py-2 text-center text-sm transition-colors duration-150 select-none supports-[corner-shape:squircle]:rounded-xl sm:py-1.5"
           href={href}
           rel="noopener noreferrer"
