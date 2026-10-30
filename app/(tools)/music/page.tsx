@@ -20,7 +20,7 @@ export default function MusicPage() {
     <div className={styles.accent}>
       <PageHeader back={{ href: "/", name: "Home" }} path={musicRoute.route}>
         <PageTitle>{musicRoute.title}</PageTitle>
-        <PageDescription>{musicRoute.description}</PageDescription>
+        <PageDescription>Play and organize your music.</PageDescription>
         <nav aria-label="Music">
           <InternalLink href="/music/details">Details</InternalLink>
         </nav>
