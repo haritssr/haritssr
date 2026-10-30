@@ -332,7 +332,7 @@ export default function DesignSystem() {
         </Section>
 
         <Section title="UI Components">
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-8">
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="IndexCard" title="Index Card">
                 <div className="grid gap-3.5 sm:grid-cols-2">
@@ -376,7 +376,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="grid min-w-0 grid-cols-1 gap-5 md:col-span-2 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid min-w-0 grid-cols-1 gap-5 md:col-span-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
               <div className="flex min-w-0 flex-col [&>div]:flex-1">
                 <Box name="Switch" title="Switch">
                   <Switch />
