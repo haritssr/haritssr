@@ -7,7 +7,6 @@ import {
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Suspense } from "react";
 
 import { TASK_LAYOUT } from "@/app/(tools)/timer/_components/taskPresentation";
 import Accordion, { AccordionItem } from "@/components/Accordion";
@@ -17,7 +16,6 @@ import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
 import { musicRoute, urlRoute } from "@/data/routes";
-import { getCommitCount } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import Features from "./Features";
@@ -64,9 +62,7 @@ export default function Home() {
       <div className="space-y-16 pt-6 sm:pt-2">
         <PersonalDetails />
         <Section title="Tools">
-          <Suspense fallback={<Tools />}>
-            <LiveTools />
-          </Suspense>
+          <Tools />
         </Section>
         <Section title="Features">
           <Features />
@@ -235,17 +231,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
   );
 }
 
-async function LiveTools() {
-  let count: number | undefined;
-  try {
-    count = await getCommitCount();
-  } catch {
-    console.error("Homepage commit count could not be loaded.");
-  }
-  return <Tools count={count} />;
-}
-
-function Tools({ count }: { count?: number }) {
+function Tools() {
   return (
     <nav
       aria-label="Tools"
@@ -253,7 +239,6 @@ function Tools({ count }: { count?: number }) {
     >
       <IndexCard
         title="Timer"
-        badge="DB"
         description="A simple timer for focused work and everyday tasks."
         href="/timer"
         headingLevel={3}
@@ -280,10 +265,7 @@ function Tools({ count }: { count?: number }) {
       />
       <IndexCard
         title="Commits"
-        badge="DB"
         description="Recent code changes and updates across this site."
-        count={count}
-        countLabel="commits"
         href="/commits"
         headingLevel={3}
         icon={

@@ -31,13 +31,6 @@ function commitsDatabase(): Client {
   return client;
 }
 
-export async function readCommitCount() {
-  const result = await commitsDatabase().execute(
-    "SELECT COUNT(*) AS count FROM commits"
-  );
-  return z.number().int().nonnegative().parse(result.rows[0]?.count);
-}
-
 export async function readCommitHistory() {
   const result = await commitsDatabase().execute(
     "SELECT hash, date, subject FROM commits"

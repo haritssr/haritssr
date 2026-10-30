@@ -5,13 +5,7 @@ import { cache } from "react";
 import { prepareCommits } from "./changelog";
 import { summarizeCommits } from "./changelogSummary";
 import type { ChangelogResult, ChangelogSelection } from "./changelogTypes";
-import { readCommitCount, readCommitHistory } from "./commitsDatabase";
-
-export const getCommitCount = cache(
-  unstable_cache(readCommitCount, ["turso-commit-count-v1"], {
-    revalidate: 86_400,
-  })
-);
+import { readCommitHistory } from "./commitsDatabase";
 
 export const getCommitHistory = cache(
   unstable_cache(readCommitHistory, ["turso-commits-v2"], {
