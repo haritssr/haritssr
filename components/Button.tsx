@@ -4,6 +4,7 @@ type ButtonVariant =
   | "black"
   | "attention-subtle"
   | "danger"
+  | "danger-secondary"
   | "danger-subtle"
   | "ghost"
   | "icon"
@@ -54,6 +55,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-transparent bg-attention font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-attention)_60%,var(--color-amber-600))] focus-visible:outline-attention",
   danger:
     "border border-danger/30 bg-surface font-medium text-danger select-none hover:bg-danger/10 focus-visible:outline-danger",
+  "danger-secondary":
+    "border border-transparent bg-danger/10 font-medium text-danger transition-colors duration-150 select-none enabled:hover:bg-danger/15 enabled:active:bg-danger/20 focus-visible:outline-danger",
   "danger-subtle":
     "border border-transparent bg-danger font-medium text-white transition-colors duration-150 enabled:hover:bg-[color-mix(in_oklab,var(--color-danger)_60%,var(--color-red-600))] focus-visible:outline-danger",
   ghost:

@@ -489,6 +489,7 @@ export default function DesignSystem() {
                   </span>
                   <Button variant="secondary">Secondary</Button>
                   <Button variant="danger">Danger</Button>
+                  <Button variant="danger-secondary">Danger secondary</Button>
                   <Button disabled variant="secondary">
                     Disabled
                   </Button>
