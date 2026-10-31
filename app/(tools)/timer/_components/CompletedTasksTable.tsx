@@ -210,11 +210,11 @@ export default function CompletedTasksTable({
                     {task.activity}
                   </th>
                   <td className="max-w-80 min-w-48 wrap-anywhere whitespace-pre-wrap lg:group-data-list-view/task-layout:min-w-0">
-                    <div className="scrollbar-subtle lg:group-data-list-view/task-layout:max-w-48 lg:group-data-list-view/task-layout:overflow-x-auto lg:group-data-list-view/task-layout:whitespace-pre">
+                    <div className="scrollbar-hide lg:group-data-list-view/task-layout:w-10 lg:group-data-list-view/task-layout:overflow-x-auto lg:group-data-list-view/task-layout:whitespace-pre">
                       {task.description.trim() ? (
                         task.description
                       ) : (
-                        <span>—</span>
+                        <span>-</span>
                       )}
                     </div>
                   </td>
