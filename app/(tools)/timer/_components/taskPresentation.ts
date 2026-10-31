@@ -10,7 +10,7 @@ export const TASK_LAYOUT = {
   surface:
     "corner-squircle rounded-[0.625rem] border-[0.5px] bg-linear-to-b from-surface from-30% to-[color-mix(in_srgb,var(--task-surface-color,var(--color-foreground))_6%,var(--color-surface))] pl-3.5 pr-3 py-2.5 inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-[1.25rem]",
   profileSurface:
-    "corner-squircle rounded-xl border bg-linear-to-b from-background from-30% to-foreground/5 p-4 inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-3xl",
+    "corner-squircle rounded-xl border bg-linear-to-b from-secondary-button-surface from-30% to-background p-4 inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-3xl",
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-[0.9375rem]",
   progress: "h-1.5",
   running: "border-border [--task-surface-color:var(--color-foreground)]",
