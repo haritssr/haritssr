@@ -6,11 +6,11 @@ import {
   LinkIcon,
   CodeBracketIcon,
   RssIcon,
+  SquaresPlusIcon,
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { TASK_LAYOUT } from "@/app/(tools)/timer/_components/taskPresentation";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import { ButtonLink } from "@/components/Button";
 import ExternalLink from "@/components/ExternalLink";
@@ -62,7 +62,7 @@ export default function Home() {
         description={homeDescription}
         path="/"
       />
-      <div className="space-y-16 pt-6 sm:pt-2">
+      <div className="space-y-16 sm:pt-2 lg:pt-6">
         <PersonalDetails />
         <Section title="Tools">
           <Tools />
@@ -80,7 +80,7 @@ function PersonalDetails() {
     <section
       aria-label="About"
       id="Identity"
-      className={`${TASK_LAYOUT.profileSurface} border-border-hover/25 min-w-0 space-y-4`}
+      className="corner-squircle border-hairline border-border/40 bg-interface-hover min-w-0 space-y-4 rounded-3xl p-4"
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex shrink-0 items-center gap-4">
@@ -100,14 +100,14 @@ function PersonalDetails() {
             </p>
           </div>
         </div>
-        <div className="border-border hidden min-w-0 border-l border-dashed pl-4 md:col-span-2 md:block">
+        <div className="border-border before:border-border relative hidden min-w-0 border-l border-dashed pl-4 before:absolute before:-top-4 before:-left-px before:h-4 before:border-l before:border-dashed md:col-span-2 md:block">
           <ProfileInvitation />
         </div>
       </div>
-      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-3 md:before:right-0 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed">
+      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-3 md:before:-right-4 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed">
         <ul
           aria-label="Profile and contacts"
-          className="text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
+          className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
         >
           <li>
             At{" "}
@@ -139,7 +139,7 @@ function PersonalDetails() {
         <div className="hidden md:contents">
           <PersonalNotes />
         </div>
-        <div className="border-border border-t border-dashed pt-4 md:hidden">
+        <div className="border-border border-y border-dashed py-4 md:hidden">
           <ProfileInvitation />
         </div>
         <Accordion className="md:hidden">
@@ -162,7 +162,7 @@ function PersonalDetails() {
 function ProfileInvitation() {
   return (
     <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-start">
-      <p className="text-foreground min-w-0 lg:flex-1">
+      <p className="text-foreground min-w-0 font-medium lg:flex-1">
         Need a design or private lesson?
       </p>
       <ProfileActions />
@@ -180,17 +180,19 @@ function ProfileActions() {
         >
           Request a Design Consultation
         </ButtonLink>
-        <p className="text-muted/80 text-xs">UI/UX for web or mobile.</p>
+        <p className="text-muted pl-0.5 text-xs">UI/UX for web or mobile.</p>
       </div>
       <div className="flex flex-col gap-1 text-left">
         <ButtonLink
           href="mailto:haritssr@gmail.com?subject=Lesson%20inquiry"
           size="profile"
-          variant="profile-secondary"
+          variant="secondary"
         >
           Request a Private Lesson
         </ButtonLink>
-        <p className="text-muted/80 text-xs">Math, physics, or chemistry.</p>
+        <p className="text-muted pl-0.5 text-xs">
+          Math, physics, or chemistry.
+        </p>
       </div>
     </div>
   );
@@ -202,19 +204,19 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       <ul
         aria-label="Background and tools"
         id={mobile ? "personal-notes-mobile" : "personal-notes"}
-        className="border-border text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:-mt-4 md:border-l md:border-dashed md:pt-4 md:pl-9"
+        className="border-border text-muted marker:text-muted md:after:border-border relative min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:-mt-4 md:border-l md:border-dashed md:pt-4 md:pl-9 md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed"
       >
         <li>Touch typist, ±90 WPM.</li>
         <li>Former chess player, ±2000 Elo.</li>
         <li>I develop with Codex CLI in Zed.</li>
+        <li>Background in Physics</li>
         <li>
           JS, TS, Effect, React, Next.js, FP, Math, Physics, Edu, and Design.
         </li>
-        <li>Background in Physics</li>
       </ul>
       <ul
         aria-label="Principles"
-        className="border-border text-foreground marker:text-foreground min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9"
+        className="border-border text-muted marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9 md:before:absolute md:before:-top-3 md:before:-left-px md:before:h-3 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed"
       >
         <li>
           <ExternalLink
@@ -226,9 +228,9 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
           &gt; Hedonia
         </li>
         <li>Effective Accelerationism (e/acc)</li>
-        <li>Existence = f(constraints, maintenance)</li>
         <li>100% is easier than 98%</li>
         <li>What gets measured gets managed</li>
+        <li>Existence = f(constraints, maintenance)</li>
       </ul>
     </>
   );
@@ -238,8 +240,20 @@ function Tools() {
   return (
     <nav
       aria-label="Tools"
-      className="[&>a]:border-hairline [&>a]:border-border-hover/40 [&>a]:bg-secondary-button-surface [&>a:hover]:border-border-hover/40 [&>a:hover]:bg-surface-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 sm:[&_h3]:text-base [&>a]:shadow-xs sm:[&>a]:px-2 sm:[&>a]:py-2 sm:[&>a]:pl-3 [&>a:active]:scale-98 [&>a:active]:shadow-none [&>a>div>div:first-child>svg]:opacity-75 [&>a>div>div:last-child>svg]:opacity-50"
+      className="[&>a]:border-hairline [&>a]:border-border/40 [&>a]:bg-interface-hover [&>a:hover]:border-border [&>a:hover]:bg-middle-hover/70 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 sm:[&_h3]:text-base [&>a]:rounded-2xl [&>a]:px-3 [&>a]:py-2.5 [&>a:active]:scale-98 [&>a>div>div:first-child>svg]:stroke-2 [&>a>div>div:first-child>svg]:opacity-75"
     >
+      <IndexCard
+        title="Design"
+        href="/design"
+        headingLevel={3}
+        icon={
+          <SquaresPlusIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
       <IndexCard
         title="Timer"
         href="/timer"
