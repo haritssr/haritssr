@@ -42,7 +42,12 @@ export default function FooterClock() {
       <span>
         {clock !== null && (
           <time dateTime={clock.date}>
-            {clock.date}, {clock.weekday}
+            <span className="sm:hidden">
+              {clock.date.slice(2).replaceAll("-", "/")}
+            </span>
+            <span className="hidden sm:inline">
+              {clock.date}, {clock.weekday}
+            </span>
           </time>
         )}
       </span>
