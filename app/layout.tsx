@@ -82,8 +82,8 @@ export default function RootLayout({
       <body>
         <SiteStructuredData />
         <ServiceWorkerRegistration />
-        <GlobalSearchProvider>
-          <SharePageProvider>
+        <SharePageProvider>
+          <GlobalSearchProvider>
             <SiteShortcuts />
             <FloatingDock>
               <ShareToastViewport />
@@ -99,10 +99,10 @@ export default function RootLayout({
                 </TimerProvider>
               </MusicProvider>
             </FloatingDock>
-          </SharePageProvider>
-          <Footer />
-          <TabBarButtom />
-        </GlobalSearchProvider>
+            <Footer />
+            <TabBarButtom />
+          </GlobalSearchProvider>
+        </SharePageProvider>
       </body>
     </html>
   );
