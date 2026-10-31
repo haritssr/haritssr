@@ -141,7 +141,7 @@ export default function TopBar() {
 function TabBarTop({ pathname }: { pathname: string }) {
   return (
     <ul
-      className={`${styles.tabs} navigation-material border-border shadow-foreground/5 border-hairline absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.25 rounded-full p-1 shadow-sm [corner-shape:round] lg:flex`}
+      className={`${styles.tabs} navigation-material border-border shadow-foreground/5 border-hairline absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 rounded-full p-1 shadow-sm [corner-shape:round] lg:flex`}
       id="main-navigation"
     >
       {primaryNavigation.map(({ title, href }) => {
@@ -149,7 +149,7 @@ function TabBarTop({ pathname }: { pathname: string }) {
         return (
           <li className="flex min-w-0 items-center" key={href}>
             <Link
-              className={`focus-visible:outline-action flex items-center justify-center rounded-full px-3 py-1 font-medium whitespace-nowrap transition-colors duration-150 [corner-shape:round] focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none ${current ? "bg-foreground/8 text-action" : "text-foreground hover:bg-foreground/5"}`}
+              className={`focus-visible:outline-action flex items-center justify-center rounded-full px-3 py-1 font-medium whitespace-nowrap transition-colors duration-150 [corner-shape:round] focus-visible:outline-2 focus-visible:-outline-offset-2 motion-reduce:transition-none ${current ? "bg-interface-hover text-action" : "text-foreground hover:bg-interface-hover"}`}
               aria-current={current}
               href={href}
             >
