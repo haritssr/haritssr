@@ -16,7 +16,7 @@ export default function LabCard({
 }) {
   return (
     <IndexCard
-      className={className}
+      className={`bg-interface-hover [&:hover]:bg-middle-hover/70 [&:hover>div>div:last-child>svg]:text-foreground [&>p]:text-foreground/80 border-0 px-3.5 py-3 sm:[&_:is(h2,h3,h4)]:text-base [&:active]:scale-99 lg:[&:active]:scale-100 ${className ?? ""}`}
       href={`/labs/${lab.slug}`}
       title={lab.title}
       description={lab.description}

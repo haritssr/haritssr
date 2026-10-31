@@ -24,7 +24,7 @@ export default function ProjectsCard({
   const Heading = headingLevel === 3 ? "h3" : "h2";
   return (
     <div
-      className={`group corner-squircle border-hairline border-border/40 bg-interface-hover flex w-full flex-col justify-between overflow-hidden rounded-3xl p-4 selection:mx-auto ${className ?? ""}`}
+      className={`group corner-squircle bg-interface-hover flex w-full flex-col justify-between overflow-hidden rounded-3xl p-4 selection:mx-auto ${className ?? ""}`}
     >
       {/* Header + Title + Explanation */}
       <div className="flex flex-1 flex-col justify-between space-y-2 pb-2">
