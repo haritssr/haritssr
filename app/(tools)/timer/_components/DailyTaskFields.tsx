@@ -1,7 +1,6 @@
 import { Switch } from "@base-ui/react/switch";
 import { memo } from "react";
 
-import { DAILY_DESCRIPTION_LIMIT } from "../utils/dailyTasks";
 import type { DailyDraft } from "./dailyTaskDraft";
 import DurationFields from "./DurationFields";
 import { TaskDescriptionField, TaskNameField } from "./TaskFormDialog";
@@ -82,7 +81,7 @@ const DailyTaskFields = memo(
         onChange={(description) => {
           onUpdate(entry.id, { description });
         }}
-        maxLength={DAILY_DESCRIPTION_LIMIT}
+        maxLength={30}
         disabled={disabled}
       />
       <DurationFields
@@ -92,13 +91,12 @@ const DailyTaskFields = memo(
         }}
         disabled={disabled}
       />
-      <label
-        htmlFor={`daily-window-${entry.id}`}
-        className="flex items-center justify-between gap-3 text-sm"
-      >
-        Scheduled availability
+      <div className="flex items-center justify-between gap-3 text-sm">
+        <span id={`daily-window-label-${entry.id}`}>
+          Scheduled availability
+        </span>
         <Switch.Root
-          id={`daily-window-${entry.id}`}
+          aria-labelledby={`daily-window-label-${entry.id}`}
           checked={entry.window !== null}
           disabled={disabled}
           onCheckedChange={(checked) => {
@@ -110,7 +108,7 @@ const DailyTaskFields = memo(
         >
           <Switch.Thumb className="bg-surface block size-4 rounded-full data-checked:translate-x-4" />
         </Switch.Root>
-      </label>
+      </div>
       {entry.window === null ? null : (
         <div className="grid grid-cols-2 gap-2">
           <label className="min-w-0 space-y-1 text-sm">
