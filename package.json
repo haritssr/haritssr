@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "build": "bun run generate:project-tree && next build",
-    "check": "bun run generate:project-tree && ultracite check --threads=1",
+    "check": "ultracite check --threads=1",
     "dev": "bun 'app/(tools)/tree/dev.ts'",
     "fix": "ultracite fix --threads=1",
     "generate:project-tree": "bun 'app/(tools)/tree/generate-project-inventory.ts'",
