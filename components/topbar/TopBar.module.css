@@ -1,13 +1,63 @@
-.navigation {
-  isolation: isolate;
-}
+@reference "../../app/globals.css";
 
 .navigation[data-scrolled="false"] :global(.navigation-material) {
   box-shadow: none;
 }
 
+.navigation .row :global(.navigation-material) {
+  @apply border-hairline border-zinc-300;
+}
+
+.navigation[data-scrolled="true"] .row > :first-child,
+.navigation[data-scrolled="true"]
+  .row
+  > :last-child
+  :global(.navigation-material) {
+  @apply shadow-foreground/10 shadow-lg;
+}
+
+@supports (backdrop-filter: blur(24px)) {
+  .navigation[data-scrolled="true"] .row > :first-child,
+  .navigation[data-scrolled="true"]
+    .row
+    > :last-child
+    :global(.navigation-material) {
+    background-color: color-mix(
+      in srgb,
+      var(--color-background) 40%,
+      transparent
+    );
+    backdrop-filter: blur(24px);
+  }
+}
+
+.tabs {
+  @apply translucent-material;
+  box-shadow: none;
+}
+
 .tabs a:hover {
   font-variation-settings: "GRAD" 150;
+}
+
+@media (width >= 1024px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .row > :first-child,
+    .row > :last-child {
+      transition-property:
+        translate, color, background-color, border-color, box-shadow;
+      transition-duration: 150ms;
+      transition-timing-function: ease-out;
+    }
+  }
+
+  .navigation[data-scrolled="true"] .row > :first-child {
+    translate: -0.75rem 0;
+  }
+
+  .navigation[data-scrolled="true"] .row > :last-child {
+    translate: 0.75rem 0;
+  }
 }
 
 .row[data-show-title="true"] {
@@ -19,21 +69,32 @@
   justify-self: end;
 }
 
-.navigation[data-scrolled="true"]::before {
+.titleBackdrop {
+  position: relative;
+  isolation: isolate;
+}
+
+.titleBackdrop::before {
   position: absolute;
   z-index: -1;
-  inset: 0 0 -2rem;
+  inset: -1.5rem -3.5rem;
   pointer-events: none;
   content: "";
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--color-background) 55%, transparent),
-    color-mix(in srgb, var(--color-background) 25%, transparent) 55%,
-    transparent
-  );
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-background) 30%, transparent);
+  backdrop-filter: blur(12px);
+  mask-image: radial-gradient(ellipse, black 15%, transparent 75%);
 }
 
 @media (width < 640px) {
+  .navigation[data-scrolled="true"] .row > :first-child {
+    translate: -0.5rem 0;
+  }
+
+  .navigation[data-scrolled="true"] .row > :last-child {
+    translate: 0.5rem 0;
+  }
+
   .row[data-show-title="true"] {
     grid-template-columns: var(--topbar-side-width, 2.625rem) minmax(
         0,

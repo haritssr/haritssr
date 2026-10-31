@@ -1,7 +1,7 @@
 "use client";
 
 import { Popover } from "@base-ui/react/popover";
-import { QueueListIcon } from "@heroicons/react/24/outline";
+import { Bars2Icon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 
 import { lockPageActionsBackground } from "./pageActionsScrollLock";
@@ -72,7 +72,7 @@ function CompactActionMenu({
         ref={triggerRef}
         className={topBarActionClassName()}
       >
-        <QueueListIcon aria-hidden="true" className="size-5" />
+        <Bars2Icon aria-hidden="true" className="size-5 stroke-[1.5]" />
       </Popover.Trigger>
       <Popover.Portal keepMounted>
         <Popover.Backdrop className="fixed inset-0 z-80 touch-pinch-zoom" />

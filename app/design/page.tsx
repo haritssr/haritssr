@@ -490,6 +490,14 @@ export default function DesignSystem() {
                     <div className="floating-material h-28 w-48 rounded-xl" />
                     <p className="text-muted text-center text-sm">Floating</p>
                   </div>
+                  <div className="space-y-2">
+                    <div className="from-action/50 to-accent/50 relative isolate h-28 w-48 overflow-hidden rounded-xl bg-linear-to-br">
+                      <div className="translucent-material border-border shadow-foreground/10 border-hairline absolute inset-3 rounded-xl shadow-lg" />
+                    </div>
+                    <p className="text-muted text-center text-sm">
+                      Translucent
+                    </p>
+                  </div>
                 </div>
               </Box>
             </div>

@@ -33,7 +33,7 @@ export default function BackButton({
   return (
     <Link
       aria-label={label ?? `Back to ${name}`}
-      className={`group navigation-material border-border text-foreground shadow-foreground/5 focus-visible:outline-action hover:before:bg-foreground/8 border-hairline relative isolate flex min-h-10.5 w-fit min-w-10.5 shrink-0 items-center justify-center rounded-full py-2 font-medium shadow-sm transition-colors duration-150 [corner-shape:round] before:pointer-events-none before:absolute before:inset-1 before:-z-10 before:rounded-full before:transition-colors before:duration-150 hover:[font-variation-settings:"GRAD"_150] focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.95] motion-reduce:transition-none motion-reduce:before:transition-none ${padding}`}
+      className={`group navigation-material border-border text-foreground shadow-foreground/5 focus-visible:outline-action hover:before:bg-foreground/8 border-hairline relative isolate flex min-h-10.5 w-fit min-w-10.5 shrink-0 items-center justify-center rounded-full py-2 font-medium shadow-sm transition-colors duration-150 [corner-shape:round] before:pointer-events-none before:absolute before:inset-1 before:-z-10 before:rounded-full before:transition-colors before:duration-150 hover:[font-variation-settings:"GRAD"_150] focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.95] motion-reduce:transition-none motion-reduce:before:transition-none lg:active:scale-100 ${padding}`}
       href={href}
       onNavigate={onNavigate}
       prefetch={false}

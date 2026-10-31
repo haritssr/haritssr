@@ -78,7 +78,7 @@ export default function TopBar() {
       ref={navigationRef}
     >
       <div
-        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 p-3.5 lg:px-0 lg:py-5`}
+        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 p-4 lg:px-0 lg:py-5`}
         data-show-title={showTitle}
       >
         {pathname === "/" ? (
@@ -112,7 +112,7 @@ export default function TopBar() {
           // TitleWhileScroll
           <div className="flex min-w-0 flex-1 justify-center">
             <Link
-              className="text-foreground flex w-fit max-w-full min-w-0 items-center px-2 text-lg font-medium sm:px-4"
+              className={`${styles.titleBackdrop} text-foreground flex w-fit max-w-full min-w-0 items-center px-2 text-lg font-medium sm:px-4`}
               href={pathname}
               onNavigate={(event) => {
                 event.preventDefault();

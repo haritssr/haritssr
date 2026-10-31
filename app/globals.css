@@ -59,17 +59,30 @@
   }
 }
 
+@utility translucent-material {
+  background-color: color-mix(
+    in srgb,
+    var(--color-background) 40%,
+    transparent
+  );
+  backdrop-filter: blur(24px);
+}
+
+[data-floating-task] {
+  @apply border-hairline border-zinc-300;
+}
+
 @utility navigation-material {
   @apply inset-shadow-sm inset-shadow-zinc-50/60;
   background-color: var(--color-background);
 
-  @supports (backdrop-filter: blur(12px)) {
+  @supports (backdrop-filter: blur(16px)) {
     background-color: color-mix(
       in srgb,
-      var(--color-background) 70%,
+      var(--color-background) 50%,
       transparent
     );
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
   }
 
   @media (prefers-reduced-transparency: reduce) {
