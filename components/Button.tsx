@@ -39,7 +39,7 @@ const BUTTON_SECONDARY_CLASS =
   "border border-border-hover/50 bg-secondary-button-surface font-medium text-foreground shadow-sm shadow-black/5 transition-colors duration-150 select-none hover:border-border-hover hover:bg-interface-hover data-popup-open:border-action focus-visible:outline-secondary-hover-foreground";
 
 export const SECONDARY_BUTTON_CLASS =
-  "border-border bg-secondary-button-surface text-foreground border font-medium transition-colors duration-150 hover:not-disabled:bg-interface-hover focus-visible:outline-action";
+  "border-border bg-secondary-button-surface text-foreground border font-medium transition-colors duration-150 hover:not-disabled:border-[color-mix(in_srgb,var(--color-border)_70%,var(--color-border-hover))] hover:not-disabled:bg-[color-mix(in_srgb,var(--color-secondary-button-surface)_80%,var(--color-interface-hover))] focus-visible:outline-action";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "theme-fill":
@@ -150,7 +150,7 @@ export function ButtonLink({
   return (
     <a
       {...props}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${size === "profile" ? "corner-squircle min-h-10 rounded-md px-4 py-1 text-center supports-[corner-shape:squircle]:rounded-xl md:min-h-9.5" : BUTTON_SIZE_CLASS.default} ${className ?? ""}`}
+      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${size === "profile" ? "corner-squircle min-h-10 rounded-md px-4 py-0.5 text-center supports-[corner-shape:squircle]:rounded-xl md:min-h-9.5" : BUTTON_SIZE_CLASS.default} ${className ?? ""}`}
     >
       {children}
     </a>

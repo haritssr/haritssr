@@ -173,7 +173,7 @@
     var(--color-blue-600) 60%,
     var(--color-blue-500) 40%
   );
-  --color-action-hover: var(--color-blue-700);
+  --color-action-hover: var(--color-blue-600);
   --color-accent: var(--color-violet-500);
   --color-progress-hover: color-mix(
     in srgb,

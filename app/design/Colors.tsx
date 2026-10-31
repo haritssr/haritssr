@@ -7,7 +7,7 @@ const DESIGN_TOKENS = [
   },
   {
     name: "action-hover",
-    definition: "blue-700",
+    definition: "blue-600",
   },
   {
     name: "accent",
