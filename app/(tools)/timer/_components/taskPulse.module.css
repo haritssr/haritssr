@@ -1,0 +1,17 @@
+@media (prefers-reduced-motion: no-preference) {
+  .pulse {
+    border-radius: 1.25rem;
+    animation: task-pulse 1.4s ease-out;
+  }
+}
+
+@keyframes task-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  40% {
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--color-action) 45%, transparent);
+  }
+}

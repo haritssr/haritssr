@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
@@ -8,7 +8,21 @@ import TaskCard from "./TaskCard";
 import { TASK_LAYOUT } from "./taskPresentation";
 import { getTaskCollection, reconcileTaskOrder } from "./taskState";
 
+import styles from "./taskPulse.module.css";
+
 export default function TaskList() {
+  const [newTaskId, setNewTaskId] = useState<string | null>(null);
+  useEffect(() => {
+    const onAdd = (event: Event) => {
+      if (event instanceof CustomEvent && typeof event.detail === "string") {
+        setNewTaskId(event.detail);
+      }
+    };
+    window.addEventListener("timer-task-added", onAdd);
+    return () => {
+      window.removeEventListener("timer-task-added", onAdd);
+    };
+  }, []);
   const [ordering, setOrdering] = useState<{
     date: string;
     ids: string[];
@@ -59,7 +73,15 @@ export default function TaskList() {
           className={`group/task-list @container/task-list min-w-0 ${TASK_LAYOUT.collection} data-list-view:sm:grid-cols-1 data-list-view:sm:gap-3 data-list-view:lg:col-span-2 data-list-view:lg:grid-cols-1`}
         >
           {orderedVisible.map(({ task, state }) => (
-            <li className="flex min-w-0" key={task.id}>
+            <li
+              className={`flex min-w-0 ${task.id === newTaskId ? styles.pulse : ""}`}
+              key={task.id}
+              onAnimationEnd={(event) => {
+                if (event.target === event.currentTarget) {
+                  setNewTaskId(null);
+                }
+              }}
+            >
               <TaskCard date={snapshot.today} task={task} state={state} />
             </li>
           ))}

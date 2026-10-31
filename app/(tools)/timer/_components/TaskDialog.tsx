@@ -148,7 +148,16 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       return;
     }
     setFormError(null);
-    const saving = act({ action: "add", date: snapshot.today, ...values });
+    const taskId = crypto.randomUUID();
+    window.dispatchEvent(
+      new CustomEvent("timer-task-added", { detail: taskId })
+    );
+    const saving = act({
+      action: "add",
+      date: snapshot.today,
+      taskId,
+      ...values,
+    });
     setOpen(false);
     if (!(await saving)) {
       setFormError("The activity could not be saved. Please try again.");

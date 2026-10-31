@@ -68,6 +68,8 @@ visible total-duration suffix. All Timer cards use `spent`; the default
 The optional `timeNote` places a short 24-hour availability range between elapsed
 and remaining time on scheduled daily cards, at the same font size. Midnight at
 the end of the day is shown as `24`.
+Card text uses `select-none`. Newly added cards briefly pulse around their edge;
+the pulse is disabled for reduced motion and does not replay on page load.
 
 The header places the title on the left and a Pencil Square edit button on the right.
 Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time and negative remaining time.
@@ -92,7 +94,9 @@ Unavailable Done controls are dimmed and have no hover effect or tooltip.
 Tasks with an availability window show a `size-5` danger warning before Edit
 when remaining duration plus a ten-minute buffer reaches the closing time.
 The icon pulses only when reduced motion is off. Running tasks that can finish
-on time suppress the warning; late running tasks still warn. Finished tasks and
+on time suppress the warning; late running tasks still warn. When a task cannot
+finish before its window closes, its card also gets a danger border and subtle
+danger tint in grid and list views. Finished tasks and
 closed windows clear it. `timerDeadline.ts` shares eligibility and next boundaries
 between the card state, display clock, reminder scheduler, and server claim.
 Other personal timer actions and Multitask keep their opacity while unavailable;
@@ -335,7 +339,7 @@ UI. The settings subtree is a
 sibling of the ticking toolbar; it has no custom window-event handoff. Definitions, ordering, and removal apply to future days only.
 
 `utils/dailyTasks.ts` supplies the initial X (30m), YouTube (2h), Housekeeping (1h),
-Morning Meditation (30m), Evening Meditation (30m), and Exercise (30m) definitions.
+Morning Meditation (30m), Evening Meditation (30m), and Exercise (20m) definitions.
 Preferences persist them in `timer_preferences.daily_tasks`; the server copies them
 only when initializing a new Jakarta day, with reserved `daily:` IDs, zero spent
 time and paused state. The existing `(date, id)` key and one transaction

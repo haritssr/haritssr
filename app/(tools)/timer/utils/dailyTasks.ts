@@ -47,7 +47,7 @@ export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
     id: "daily:exercise",
     activity: "Exercise",
     description: "",
-    duration: 1800,
+    duration: 1200,
     availabilityWindow: null,
   },
 ];
