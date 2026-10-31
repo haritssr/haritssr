@@ -32,7 +32,10 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
         width={24}
       />
     ) : (
-      <UserCircleIcon aria-hidden="true" className="size-5 shrink-0" />
+      <UserCircleIcon
+        aria-hidden="true"
+        className="size-5.5 shrink-0 stroke-[1.5]"
+      />
     );
 
   if (!account) {

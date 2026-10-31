@@ -22,7 +22,7 @@ export default function TopBarShare({
         void handleShare();
       }}
     >
-      <LinkIcon aria-hidden="true" className="size-5 shrink-0" />
+      <LinkIcon aria-hidden="true" className="size-5 shrink-0 stroke-[1.5]" />
       {showLabel ? <span>Copy URL</span> : null}
     </TopBarAction>
   );

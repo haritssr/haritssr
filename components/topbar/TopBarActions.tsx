@@ -2,6 +2,7 @@
 
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
 
+import { showsMobileNavigation } from "@/utils/navigation/navigationState";
 import pageSourceUrl from "@/utils/navigation/pageSourceUrl";
 
 import TopBarAccount from "./TopBarAccount";
@@ -29,7 +30,15 @@ export default function TopBarActions({
         list ? "flex flex-col p-1" : `${TOP_BAR_CAPSULE_CLASS_NAME} lg:gap-0.75`
       }
     >
-      <TopBarSearch onSearch={onSearch} showLabel={list} />
+      <TopBarSearch
+        className={
+          !list && showsMobileNavigation(pathname)
+            ? "hidden lg:flex"
+            : undefined
+        }
+        onSearch={onSearch}
+        showLabel={list}
+      />
       <TopBarShare showLabel={list} />
       <a
         aria-label="View this page's source code (opens in a new tab)"
@@ -39,7 +48,10 @@ export default function TopBarActions({
         target="_blank"
         title="View Source"
       >
-        <CodeBracketIcon aria-hidden="true" className="size-5 shrink-0" />
+        <CodeBracketIcon
+          aria-hidden="true"
+          className="size-5 shrink-0 stroke-[1.5]"
+        />
         {list ? <span>View Source</span> : null}
       </a>
       <div className={list ? "w-full" : "flex shrink-0 items-center"}>

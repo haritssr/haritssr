@@ -164,15 +164,18 @@ export function useGlobalSearch() {
 export default function TopBarSearch({
   onSearch,
   showLabel = false,
+  className,
 }: {
   onSearch?: (trigger: HTMLButtonElement) => void;
   showLabel?: boolean;
+  className?: string;
 }) {
   const { openSearch, prepareSearch, topBarTriggerRef } = useGlobalSearch();
   const { hasOpened, open } = useContext(GlobalSearchStatusContext);
 
   return (
     <TopBarAction
+      className={className}
       aria-controls={hasOpened ? "global-search-dialog" : undefined}
       aria-expanded={open}
       aria-haspopup="dialog"

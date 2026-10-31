@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
@@ -83,8 +84,17 @@ export default function TopBar() {
         {pathname === "/" ? (
           <BackButton
             href="/"
+            icon={
+              <Image
+                alt=""
+                className="size-5.5 translate-x-0.25"
+                height={24}
+                src="/icons/haritssr.svg"
+                width={24}
+              />
+            }
             label="Home: scroll to top"
-            name="Home"
+            name="haritssr.com"
             onNavigate={(event) => {
               event.preventDefault();
               scrollArticleToTop();
