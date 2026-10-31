@@ -81,15 +81,15 @@
 [data-floating-progress]::-webkit-progress-value {
   box-shadow:
     inset 0 1px 1px color-mix(in srgb, var(--color-zinc-50) 35%, transparent),
-    inset 0 -1px 1px
-      color-mix(in srgb, var(--color-foreground) 20%, transparent);
+    inset 0 -0.5px 0.5px
+      color-mix(in srgb, var(--color-foreground) 10%, transparent);
 }
 
 [data-floating-progress]::-moz-progress-bar {
   box-shadow:
     inset 0 1px 1px color-mix(in srgb, var(--color-zinc-50) 35%, transparent),
-    inset 0 -1px 1px
-      color-mix(in srgb, var(--color-foreground) 20%, transparent);
+    inset 0 -0.5px 0.5px
+      color-mix(in srgb, var(--color-foreground) 10%, transparent);
 }
 
 [data-timer-play] {

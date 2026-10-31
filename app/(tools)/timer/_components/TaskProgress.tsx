@@ -81,7 +81,7 @@ export default function TaskProgress({
           ) : null}
         </span>
         {timeNote === undefined ? null : (
-          <span className="text-muted min-w-0 text-center whitespace-normal tabular-nums">
+          <span className="text-slider-track-hover min-w-0 text-center text-sm whitespace-normal tabular-nums sm:group-data-list-view/task-list:text-xs">
             {timeNote}
           </span>
         )}
