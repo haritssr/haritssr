@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { SECONDARY_BUTTON_CLASS } from "@/components/Button";
 import { getProjectSlug } from "@/utils/navigation/projectSlug";
 
 interface ProjectsCardType {
@@ -23,10 +24,10 @@ export default function ProjectsCard({
   const Heading = headingLevel === 3 ? "h3" : "h2";
   return (
     <div
-      className={`group corner-squircle border-border flex w-full flex-col justify-between overflow-hidden rounded-3xl border selection:mx-auto ${className ?? ""}`}
+      className={`group corner-squircle border-hairline border-border/40 bg-interface-hover flex w-full flex-col justify-between overflow-hidden rounded-3xl p-4 selection:mx-auto ${className ?? ""}`}
     >
       {/* Header + Title + Explanation */}
-      <div className="flex flex-1 flex-col justify-between space-y-2 p-3.5 pt-3 pb-2">
+      <div className="flex flex-1 flex-col justify-between space-y-2 pb-2">
         <div className="flex items-center space-x-2">
           <Image
             alt=""
@@ -41,19 +42,19 @@ export default function ProjectsCard({
           </Heading>
         </div>
 
-        <p className="text-foreground/70 leading-relaxed">{description}</p>
+        <p className="text-foreground leading-relaxed">{description}</p>
 
         {/* Site Link (Text Only) */}
-        <p className="border-border border-t border-dashed pt-2">
+        <p className="pt-2">
           <span className="text-muted text-base">
             {href.startsWith("https://www.") ? href.slice(12) : href.slice(8)}
           </span>
         </p>
       </div>
 
-      <div className="flex space-x-2.5 px-3.5 pb-3.5">
+      <div className="flex space-x-2.5">
         <Link
-          className="corner-squircle border-border text-foreground hover:bg-foreground/5 focus-visible:outline-foreground inline-flex min-h-8.5 w-1/2 items-center justify-center rounded-md border px-2 py-1.5 text-center text-sm transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 supports-[corner-shape:squircle]:rounded-xl motion-reduce:transition-none"
+          className={`corner-squircle inline-flex min-h-8.5 w-1/2 items-center justify-center rounded-md px-2 py-1.5 text-center text-sm focus-visible:outline-2 focus-visible:outline-offset-2 supports-[corner-shape:squircle]:rounded-xl motion-reduce:transition-none ${SECONDARY_BUTTON_CLASS}`}
           href={`/projects/${getProjectSlug(title)}`}
         >
           Details

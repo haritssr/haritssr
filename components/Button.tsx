@@ -38,6 +38,9 @@ const BUTTON_BASE_CLASS =
 const BUTTON_SECONDARY_CLASS =
   "border border-border-hover/50 bg-secondary-button-surface font-medium text-foreground shadow-sm shadow-black/5 transition-colors duration-150 select-none hover:border-border-hover hover:bg-interface-hover data-popup-open:border-action focus-visible:outline-secondary-hover-foreground";
 
+export const SECONDARY_BUTTON_CLASS =
+  "border-border bg-secondary-button-surface text-foreground border font-medium transition-colors duration-150 hover:not-disabled:bg-interface-hover focus-visible:outline-action";
+
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "theme-fill":
     "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
@@ -92,7 +95,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-transparent bg-action font-medium text-white transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action",
   "profile-secondary":
     "bg-foreground/8 font-medium text-foreground transition-colors duration-150 select-none hover:bg-foreground/12 focus-visible:outline-foreground",
-  secondary: BUTTON_SECONDARY_CLASS,
+  secondary: SECONDARY_BUTTON_CLASS,
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
 };
