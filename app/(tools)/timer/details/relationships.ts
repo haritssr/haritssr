@@ -62,7 +62,7 @@ export const timerRelationships = [
       "The task list derives display state once per shared clock update. Cards receive that state; controls send changes through the provider instead of writing records directly.",
     definition: `flowchart TD
       accTitle: Timer UI component and function relationships
-      accDescr: TimerClient composes the toolbar and list. TaskList uses getTaskCollection to derive active and completed tasks. Cards compose descriptions, progress, and actions. Add and Edit share a form and duration fields. All mutations use TimerProvider act.
+      accDescr: TimerClient composes the toolbar and list. TaskList uses getTaskCollection to derive active and completed tasks. Cards compose progress and actions. Add and Edit share a form and duration fields. All mutations use TimerProvider act.
       Client["TimerClient.tsx"] --> Toolbar["TimerToolbar.tsx: preferences and view"]
       Client --> List["TaskList.tsx: one shared clock"]
       Client --> Data["TimerDataControls.tsx: Export, Import, errors"]
@@ -79,7 +79,6 @@ export const timerRelationships = [
       Settings --> Daily["DailyTaskSettings.tsx: future daily definitions"]
       Daily -->|save dailyTasks| Act
       View -->|taskAppearance / TASK_LAYOUT| Appearance["taskPresentation.ts"]
-      Card --> Desc["TaskDescription.tsx: description popover"]
       View --> Progress["TaskProgress.tsx: time, percentage, progress bar"]
       Card --> Actions["TaskActions.tsx: Start, Pause, Continue, Done"]
       Dock["app/(tools)/timer/_components/FloatingTimerDock.tsx"] --> Clock

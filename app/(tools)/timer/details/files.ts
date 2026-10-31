@@ -64,10 +64,6 @@ export const implementationFiles = [
     "Start, Continue, Pause, and Done controls, text/icon presentations, and sounds.",
   ],
   [
-    "app/(tools)/timer/_components/TaskDescription.tsx",
-    "Description hover target, popover, and empty message.",
-  ],
-  [
     "app/(tools)/timer/_components/TaskDialog.tsx",
     "Add/Edit triggers, Shift+N shortcut, and form validation.",
   ],

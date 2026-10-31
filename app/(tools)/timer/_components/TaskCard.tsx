@@ -9,7 +9,6 @@ import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import TaskActions from "./TaskActions";
 import TaskCardView from "./TaskCardView";
 import TaskDeadlineWarning from "./TaskDeadlineWarning";
-import TaskDescription from "./TaskDescription";
 import { EditTask } from "./TaskDialog";
 import { taskAppearance } from "./taskPresentation";
 import type { TaskState } from "./taskState";
@@ -45,7 +44,6 @@ const TaskCard = memo(
           <>
             <TaskDeadlineWarning state={state} />
             <EditTask task={task} date={date} reached={reached} />
-            <TaskDescription task={task} />
           </>
         }
         actions={

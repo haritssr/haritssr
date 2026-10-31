@@ -20,14 +20,13 @@ modified keys, composition, and held-key repeats keep their normal behavior.
 | Page-scoped Settings handle, switches, and Multitask confirmation | [TimerSettings.tsx](TimerSettings.tsx) |
 | Export/Import, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
-| Active card structure, title, and description placement | [TaskCard.tsx](TaskCard.tsx) |
+| Active card structure and title | [TaskCard.tsx](TaskCard.tsx) |
 | Shared presentation for ordinary and daily task cards | [TaskCardView.tsx](TaskCardView.tsx) |
 | Completed task names, descriptions, times, percentages, and status | [CompletedTasksTable.tsx](CompletedTasksTable.tsx) |
 | Time display, percentage, and progress bar | [TaskProgress.tsx](TaskProgress.tsx) |
 | Delete confirmation for card and edit dialog | [DeleteTaskButton.tsx](DeleteTaskButton.tsx) |
 | Start, Continue, Pause, and Done controls | [TaskActions.tsx](TaskActions.tsx) |
 | Pulsing availability deadline icon and tooltip | [TaskDeadlineWarning.tsx](TaskDeadlineWarning.tsx) |
-| Description hover target and popover | [TaskDescription.tsx](TaskDescription.tsx) |
 | Add/Edit triggers and save behavior | [TaskDialog.tsx](TaskDialog.tsx) |
 | Shared modal dimensions, fields, and header actions | [TaskFormDialog.tsx](TaskFormDialog.tsx) |
 | Settings preset list editors, draft validation, and Save/Cancel | [PresetSettings.tsx](PresetSettings.tsx) |
@@ -70,10 +69,9 @@ The optional `timeNote` places a short 24-hour availability range between elapse
 and remaining time on scheduled daily cards, at the same font size. Midnight at
 the end of the day is shown as `24`.
 
-The header places the title on the left, with a Pencil Square edit button, and a document description icon on the right.
-Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time and negative remaining time. Edit is a plain icon matching the description icon in size.
-The description popover
-opens on hover or click. Tasks advance by one second per real second.
+The header places the title on the left and a Pencil Square edit button on the right.
+Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time and negative remaining time.
+Tasks advance by one second per real second.
 List View defaults off and syncs through the preference queue. `TaskList`
 subscribes to `desktopListView` and sets a collection data attribute. When enabled,
 the collection stays one column at every size. From `lg` (1024px), a four-column
