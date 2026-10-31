@@ -19,6 +19,14 @@ interface Endpoint {
   authenticated?: boolean;
 }
 
+const methodColors: Record<string, string> = {
+  GET: "bg-[#00d1ad]/10 text-[#008c75]",
+  POST: "bg-[#72c4ef]/10 text-[#167ba9]",
+  PUT: "bg-[#dc8be9]/10 text-[#a13db1]",
+  PATCH: "bg-[#b7a0f3]/10 text-[#7753c3]",
+  DELETE: "bg-[#f18ba6]/10 text-[#c04468]",
+};
+
 const endpoints: Endpoint[] = [
   {
     href: "/api/commits?period=month&date=2026-10-01&limit=50",
@@ -96,9 +104,14 @@ export default function APIPage() {
                 key={`${endpoint.method ?? "GET"} ${endpoint.href}`}
               >
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-foreground font-mono text-base leading-6 font-medium">
-                    {endpoint.method ?? "GET"}
-                  </span>
+                  {(endpoint.method ?? "GET").split(" / ").map((method) => (
+                    <span
+                      className={`rounded-md px-2 py-0 font-mono text-sm leading-6 font-medium ${methodColors[method]}`}
+                      key={method}
+                    >
+                      {method}
+                    </span>
+                  ))}
                   <InternalLink href={endpoint.href}>
                     {endpoint.href}
                   </InternalLink>
