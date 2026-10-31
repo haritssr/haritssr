@@ -41,11 +41,10 @@ export default function MusicPlaybackControls({
   const [volumeOpen, setVolumeOpen] = useState(false);
   const muted = session.muted || session.volume === 0;
   const current = store.currentTrack();
-  const repeatLabels = { off: "Off", all: "All", one: "One" };
+  const repeatLabels = { all: "All", one: "One" };
   const nextRepeat: Record<MusicSession["repeat"], MusicSession["repeat"]> = {
-    off: "all",
     all: "one",
-    one: "off",
+    one: "all",
   };
   return (
     <div
@@ -118,9 +117,7 @@ export default function MusicPlaybackControls({
               repeat: nextRepeat[session.repeat],
             });
           }}
-          variant={
-            session.repeat === "off" ? "icon-hover" : "icon-active-hover"
-          }
+          variant="icon-active-hover"
         >
           <span aria-hidden="true" className="relative block size-5">
             <ArrowPathRoundedSquareIcon className="size-5" />

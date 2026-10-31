@@ -24,7 +24,7 @@ export interface MusicSession {
   volume: number;
   muted: boolean;
   shuffle: boolean;
-  repeat: "off" | "all" | "one";
+  repeat: "all" | "one";
   dismissed: boolean;
   history: string[];
   visited: string[];
@@ -42,7 +42,7 @@ export function emptySession(): MusicSession {
     volume: 0.5,
     muted: false,
     shuffle: false,
-    repeat: "off",
+    repeat: "all",
     dismissed: true,
     history: [],
     visited: [],

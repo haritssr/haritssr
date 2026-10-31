@@ -90,8 +90,8 @@ export default function MusicDetailsPage() {
               times, and keep successful imports if another file fails.
             </li>
             <li>
-              Repeat One repeats a finished song; manual Next wraps to the first
-              song even when repeat is off.
+              The queue repeats after the last song. Repeat One repeats the
+              current song; manual Next advances through the queue.
             </li>
             <li>
               Reloading restores playback paused, and playing in another tab
