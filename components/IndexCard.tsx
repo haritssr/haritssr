@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 interface IndexCardProps {
   title: string;
   badge?: string;
-  description: string;
+  description?: string;
   count?: number;
   countLabel?: string;
   icon: ReactNode;
@@ -57,7 +57,9 @@ export default function IndexCard({
           )}
         </div>
       </div>
-      <p className="text-foreground/70 hidden sm:block">{description}</p>
+      {description === undefined ? null : (
+        <p className="text-foreground/70 hidden sm:block">{description}</p>
+      )}
     </>
   );
   const cardClassName = `corner-squircle border-border block h-full rounded-2xl border px-3 py-2.5 max-sm:border-border/50 max-sm:bg-interface-hover sm:space-y-1 ${className ?? ""}`;

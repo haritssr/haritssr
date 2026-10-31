@@ -235,11 +235,10 @@ function Tools() {
   return (
     <nav
       aria-label="Tools"
-      className="sm:[&>a]:border-border-hover/50 sm:[&>a:hover]:border-border-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 [&>a]:border-transparent [&>a:hover]:border-transparent"
+      className="[&>a]:border-hairline [&>a]:border-border-hover/40 [&>a]:bg-secondary-button-surface [&>a]:shadow-floating [&>a:hover]:border-border-hover/40 [&>a:hover]:bg-surface-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 sm:[&_h3]:text-base sm:[&>a]:px-2 sm:[&>a]:py-2 sm:[&>a]:pl-3 [&>a>div>div:first-child>svg]:opacity-75 [&>a>div>div:last-child>svg]:opacity-50"
     >
       <IndexCard
         title="Timer"
-        description="A simple timer for focused work and everyday tasks."
         href="/timer"
         headingLevel={3}
         icon={
@@ -252,7 +251,6 @@ function Tools() {
       />
       <IndexCard
         title={musicRoute.title}
-        description={musicRoute.description}
         href={musicRoute.route}
         headingLevel={3}
         icon={
@@ -265,7 +263,6 @@ function Tools() {
       />
       <IndexCard
         title="Commits"
-        description="Recent code changes and updates across this site."
         href="/commits"
         headingLevel={3}
         icon={
@@ -278,7 +275,6 @@ function Tools() {
       />
       <IndexCard
         title="Tree"
-        description="Tree views of site map information architecture"
         href="/tree"
         headingLevel={3}
         icon={
@@ -291,7 +287,6 @@ function Tools() {
       />
       <IndexCard
         title={urlRoute.title}
-        description={urlRoute.description}
         href={urlRoute.route}
         headingLevel={3}
         icon={
