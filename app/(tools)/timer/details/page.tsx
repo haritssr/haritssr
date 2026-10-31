@@ -74,6 +74,11 @@ export default function TimerDetailsPage() {
             </li>
             <li>Every task advances by one second per real second.</li>
             <li>
+              While a task runs, the Timer page’s browser tab shows its name and
+              remaining time. With multiple tasks, it shows the one finishing
+              soonest.
+            </li>
+            <li>
               Windowed tasks warn ten minutes before the latest safe start,
               using their remaining duration. A pulsing warning icon appears
               before Edit, turning red when there is not enough time to finish,
