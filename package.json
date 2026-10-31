@@ -14,6 +14,7 @@
     "typecheck": "bun run generate:project-tree && next typegen && tsc --noEmit --incremental false",
     "validate:content": "bun run generate:project-tree && bun --conditions=react-server utils/content/validate-content.ts",
     "migrate:timer": "bun 'app/(tools)/timer/migrate-timer.ts'",
+    "update:data": "bun run generate:project-tree && bun run sync:commits",
     "sync:commits": "bun 'app/(tools)/commits/import-commits.ts'"
   },
   "dependencies": {

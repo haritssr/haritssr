@@ -5,9 +5,12 @@ import PageTitle from "@/components/PageTitle";
 import Section, { SectionHeading } from "@/components/Section";
 import { commitsRoute, weeklyChangelogRoute } from "@/data/routes";
 import { formatDay } from "@/utils/commits/changelog";
+import { getCommitHistory } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
-import { reviewedThrough, weeklyChangelog } from "./data";
+import { buildWeeks, reviewedThrough } from "./data";
+
+export const revalidate = 300;
 
 export const metadata = createPageMetadata({
   title: weeklyChangelogRoute.title,
@@ -25,7 +28,7 @@ const shortMonthFormatter = new Intl.DateTimeFormat("en-GB", {
   timeZone: "UTC",
 });
 
-function groupMonths() {
+function groupMonths(weeklyChangelog: ReturnType<typeof buildWeeks>) {
   const grouped = new Map<string, typeof weeklyChangelog>();
   for (const week of weeklyChangelog) {
     const key = week.start.slice(0, 7);
@@ -44,8 +47,8 @@ function groupMonths() {
   });
 }
 
-export default function WeeklyChangelogPage() {
-  const months = groupMonths();
+export default async function WeeklyChangelogPage() {
+  const months = groupMonths(buildWeeks(await getCommitHistory()));
   return (
     <>
       <PageHeader
@@ -54,7 +57,7 @@ export default function WeeklyChangelogPage() {
       >
         <PageTitle>{weeklyChangelogRoute.title}</PageTitle>
         <PageDescription>
-          Weekly highlights from January 2026, reviewed through{" "}
+          Weekly changes from January 2026, curated through{" "}
           <time dateTime={reviewedThrough}>{formatDay(reviewedThrough)}</time>
           {" · Jakarta time (WIB)"}
         </PageDescription>
@@ -76,12 +79,12 @@ export default function WeeklyChangelogPage() {
       </PageHeader>
       <div className="space-y-16">
         <p className="text-muted max-w-3xl text-sm">
-          These are curated highlights; browse{" "}
+          Entries after the curated cutoff are commit subjects; browse{" "}
           <InternalLink href={commitsRoute.route} variant="inline">
             all commits
           </InternalLink>{" "}
           for individual changes. Weeks are grouped within each month, and the
-          latest reviewed week may be partial.
+          latest week may be partial.
         </p>
         {months.map((month) => (
           <div
@@ -131,8 +134,8 @@ export default function WeeklyChangelogPage() {
                           {week.description}
                         </p>
                         <ul className="marker:text-muted max-w-3xl list-outside list-disc space-y-2 pl-5">
-                          {week.changes.map((change) => (
-                            <li key={change}>{change}</li>
+                          {week.changes.map((change, index) => (
+                            <li key={`${change}-${index}`}>{change}</li>
                           ))}
                         </ul>
                       </div>

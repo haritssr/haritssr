@@ -10,6 +10,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development
 
+- Describe styling and layout using Tailwind CSS terms by default, unless the
+  user asks otherwise.
 - Use Bun. Install with `bun install --frozen-lockfile` only when dependencies
   are missing or differ from the lockfile.
 - Reuse the dev server. Run `bun run dev` only when needed and none exists, never
@@ -90,6 +92,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
 - Review staged changes and related docs; update guidance in the same change.
   The test-file policy still applies to `test` commits.
-- Never generate/restore `changelog.json`. Upload Git history to Turso only when
-  explicitly requested with `bun run sync:commits`, never during development,
-  builds, or commits. `bun run sync:commits --dry-run` validates without DB access.
+- Never generate/restore `changelog.json`. Upload Git history to Turso automatically after successful checks on pushes to
+  main, or when explicitly requested; never during development, builds, or commits. `bun run sync:commits --dry-run` validates without DB access.

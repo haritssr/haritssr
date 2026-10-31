@@ -44,3 +44,10 @@ jobs:
 
       - name: Build production routes
         run: bun run build
+
+      - name: Update public data
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          TURSO_COMMITS_DATABASE_URL: ${{ secrets.TURSO_COMMITS_DATABASE_URL }}
+          TURSO_COMMITS_AUTH_TOKEN: ${{ secrets.TURSO_COMMITS_AUTH_TOKEN }}
+        run: bun run update:data

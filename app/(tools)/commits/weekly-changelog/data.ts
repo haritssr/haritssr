@@ -1,3 +1,6 @@
+import { commitDay } from "@/utils/commits/changelog";
+import type { ChangelogCommit } from "@/utils/commits/changelog";
+
 interface WeekSummary {
   description: string;
   changes: string[];
@@ -230,36 +233,52 @@ const monthNames = [
   "Dec",
 ];
 
-function buildWeeks(): WeeklyEntry[] {
-  const year = Number(reviewedThrough.slice(0, 4));
-  const lastMonth = Number(reviewedThrough.slice(5, 7));
+export function buildWeeks(commits: readonly ChangelogCommit[]): WeeklyEntry[] {
+  const lastDay =
+    commits
+      .map((commit) => commitDay(commit.date))
+      .filter((day) => day > reviewedThrough)
+      .toSorted()
+      .at(-1) ?? reviewedThrough;
+  const lastYear = Number(lastDay.slice(0, 4));
   const weeks: WeeklyEntry[] = [];
 
-  for (let month = 1; month <= lastMonth; month += 1) {
-    const monthKey = `${year}-${String(month).padStart(2, "0")}`;
-    const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  for (let year = 2026; year <= lastYear; year += 1) {
+    for (let month = 1; month <= 12; month += 1) {
+      const monthKey = `${year}-${String(month).padStart(2, "0")}`;
+      const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
 
-    for (let day = 1; day <= daysInMonth; day += 7) {
-      const start = `${monthKey}-${String(day).padStart(2, "0")}`;
-      if (start > reviewedThrough) {
-        break;
+      for (let day = 1; day <= daysInMonth; day += 7) {
+        const start = `${monthKey}-${String(day).padStart(2, "0")}`;
+        if (start > lastDay) {
+          break;
+        }
+        const scheduledEnd = `${monthKey}-${String(Math.min(day + 6, daysInMonth)).padStart(2, "0")}`;
+        const partial = scheduledEnd > lastDay;
+        const summary = summaries[start];
+        const newSubjects = commits
+          .filter((commit) => {
+            const commitDate = commitDay(commit.date);
+            return (
+              commitDate > reviewedThrough &&
+              commitDate >= start &&
+              commitDate <= scheduledEnd
+            );
+          })
+          .map((commit) => commit.subject);
+
+        weeks.push({
+          start,
+          end: partial ? lastDay : scheduledEnd,
+          title: `${monthNames[month - 1]} Week#${Math.ceil(day / 7)}`,
+          partial,
+          description:
+            summary?.description ??
+            (newSubjects.length ? "Commit subjects" : "No recorded changes."),
+          changes: [...(summary?.changes ?? []), ...newSubjects],
+        });
       }
-      const scheduledEnd = `${monthKey}-${String(Math.min(day + 6, daysInMonth)).padStart(2, "0")}`;
-      const partial = scheduledEnd > reviewedThrough;
-      const summary = summaries[start];
-
-      weeks.push({
-        start,
-        end: partial ? reviewedThrough : scheduledEnd,
-        title: `${monthNames[month - 1]} Week#${Math.ceil(day / 7)}`,
-        partial,
-        description: summary?.description ?? "No recorded changes.",
-        changes: summary?.changes ?? [],
-      });
     }
   }
-
   return weeks.toReversed();
 }
-
-export const weeklyChangelog = buildWeeks();

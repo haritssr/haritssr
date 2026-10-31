@@ -50,7 +50,9 @@ export default function TreePage() {
     <>
       <PageHeader back={{ href: "/", name: "Home" }} path="/tree">
         <PageTitle>Tree</PageTitle>
-        <PageDescription>Latest: 2026-10-29, Thu</PageDescription>
+        <PageDescription>
+          Explore site routes and project files.
+        </PageDescription>
         <nav aria-label="Tree">
           <InternalLink href="/tree/details">Details</InternalLink>
         </nav>

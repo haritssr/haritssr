@@ -82,16 +82,12 @@ export default function CommitsDetailsPage() {
         <Section id="refresh" title="What to know" contentClassName="max-w-3xl">
           <ExplanationList>
             <li>
-              History is uploaded manually from Git, so committing or deploying
-              does not publish it automatically.
+              History is uploaded from Git after checks pass on pushes to main.
             </li>
+            <li>History and API responses use five-minute caches.</li>
             <li>
-              History, the homepage count, and API responses each use 24-hour
-              caches.
-            </li>
-            <li>
-              Expired data refreshes when requested, so new commits may take
-              longer than 24 hours to appear.
+              Expired data refreshes when requested, so cached responses can
+              temporarily lag behind an import.
             </li>
             <li>
               The homepage total and explorer can temporarily differ because
@@ -126,8 +122,8 @@ export default function CommitsDetailsPage() {
               Messages without a recognized commit prefix appear under Other.
             </li>
             <li>
-              The weekly changelog contains curated summaries rather than every
-              commit.
+              The weekly changelog combines curated summaries with newer commit
+              subjects.
             </li>
           </ExplanationList>
         </Section>
@@ -201,7 +197,7 @@ export default function CommitsDetailsPage() {
                             {name}
                           </th>
                           <td className="px-3 py-2 align-top whitespace-nowrap">
-                            24 hours
+                            {name === "Home count" ? "24 hours" : "5 minutes"}
                           </td>
                           <td className="px-3 py-2 align-top">{detail}</td>
                         </tr>
@@ -210,9 +206,9 @@ export default function CommitsDetailsPage() {
                   </Table>
                   <p id="consumers" className="max-w-3xl">
                     Server data is shared across the explorer, dated reviews,
-                    tool changelogs, and API; weekly highlights are curated
-                    locally. Browser and CDN hits can delay a request reaching
-                    the server cache.
+                    tool changelogs, weekly entries, and API; older weekly
+                    highlights are curated locally. Browser and CDN hits can
+                    delay a request reaching the server cache.
                   </p>
                 </Section>
                 <Section
@@ -223,8 +219,9 @@ export default function CommitsDetailsPage() {
                 >
                   <ExplanationList>
                     <li>
-                      Run <code>bun run sync:commits</code> only when an upload
-                      is intended, from a full Git checkout.
+                      The main-branch workflow runs{" "}
+                      <code>bun run update:data</code>
+                      after checks pass, using a full Git checkout.
                     </li>
                     <li>
                       Use <code>bun run sync:commits --dry-run</code> to
@@ -235,8 +232,9 @@ export default function CommitsDetailsPage() {
                       the data or API caches.
                     </li>
                     <li>
-                      API responses allow another 24 hours of stale data during
-                      revalidation; failed fresh reads return an uncached 503.
+                      API responses allow another five minutes of stale data
+                      during revalidation; failed fresh reads return an uncached
+                      503.
                     </li>
                     <li>
                       The explorer debounces filter changes and supports Back

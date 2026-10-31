@@ -9,7 +9,7 @@ import { readCommitHistory } from "./commitsDatabase";
 
 export const getCommitHistory = cache(
   unstable_cache(readCommitHistory, ["turso-commits-v2"], {
-    revalidate: 86_400,
+    revalidate: 300,
   })
 );
 

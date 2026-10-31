@@ -21,6 +21,8 @@ import {
 } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: commitsRoute.title,
   description: commitsRoute.description,
