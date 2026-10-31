@@ -62,7 +62,7 @@ export default function Home() {
         description={homeDescription}
         path="/"
       />
-      <div className="space-y-16 sm:pt-2 lg:pt-6">
+      <div className="space-y-16 sm:pt-2">
         <PersonalDetails />
         <Section title="Tools">
           <Tools />
@@ -104,7 +104,7 @@ function PersonalDetails() {
           <ProfileInvitation />
         </div>
       </div>
-      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-3 md:before:-right-4 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed">
+      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-4.5 md:before:-right-4 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed">
         <ul
           aria-label="Profile and contacts"
           className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
@@ -204,7 +204,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       <ul
         aria-label="Background and tools"
         id={mobile ? "personal-notes-mobile" : "personal-notes"}
-        className="border-border text-muted marker:text-muted md:after:border-border relative min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:-mt-4 md:border-l md:border-dashed md:pt-4 md:pl-9 md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed"
+        className="border-border text-muted marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:-mt-4 md:border-l md:border-dashed md:pt-4 md:pl-9 md:before:absolute md:before:-top-0.5 md:before:-left-px md:before:h-0.5 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed"
       >
         <li>Touch typist, ±90 WPM.</li>
         <li>Former chess player, ±2000 Elo.</li>
@@ -216,7 +216,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       </ul>
       <ul
         aria-label="Principles"
-        className="border-border text-muted marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9 md:before:absolute md:before:-top-3 md:before:-left-px md:before:h-3 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed"
+        className="border-border text-muted marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9 md:before:absolute md:before:-top-4.5 md:before:-left-px md:before:h-4.5 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed"
       >
         <li>
           <ExternalLink
@@ -240,20 +240,8 @@ function Tools() {
   return (
     <nav
       aria-label="Tools"
-      className="[&>a]:border-hairline [&>a]:border-border/40 [&>a]:bg-interface-hover [&>a:hover]:border-border [&>a:hover]:bg-middle-hover/70 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 sm:[&_h3]:text-base [&>a]:rounded-2xl [&>a]:px-3 [&>a]:py-2.5 [&>a:active]:scale-98 [&>a>div>div:first-child>svg]:stroke-2 [&>a>div>div:first-child>svg]:opacity-75"
+      className="[&>a]:border-hairline [&>a]:border-border/40 [&>a]:bg-interface-hover [&>a:hover]:border-border [&>a:hover]:bg-middle-hover/70 grid gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 sm:[&_h3]:text-base [&>a]:rounded-2xl [&>a]:px-3 [&>a]:py-2.5 [&>a:active]:scale-98 [&>a>div>div:first-child>svg]:stroke-2 [&>a>div>div:first-child>svg]:opacity-75"
     >
-      <IndexCard
-        title="Design"
-        href="/design"
-        headingLevel={3}
-        icon={
-          <SquaresPlusIcon
-            aria-hidden="true"
-            className="text-foreground size-4.5 shrink-0"
-            strokeWidth={1.5}
-          />
-        }
-      />
       <IndexCard
         title="Timer"
         href="/timer"
@@ -332,6 +320,18 @@ function Tools() {
         headingLevel={3}
         icon={
           <RssIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
+        title="Design"
+        href="/design"
+        headingLevel={3}
+        icon={
+          <SquaresPlusIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}
