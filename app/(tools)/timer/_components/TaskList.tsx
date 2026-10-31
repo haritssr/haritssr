@@ -50,7 +50,7 @@ export default function TaskList() {
   return (
     <div
       data-list-view={desktopListView || undefined}
-      className={`group/task-layout relative min-w-0 space-y-10 data-list-view:lg:grid data-list-view:lg:grid-cols-4 data-list-view:lg:items-start data-list-view:lg:gap-8 data-list-view:lg:space-y-0 ${visible.length > 0 && completed.length > 0 ? "data-list-view:lg:after:border-border data-list-view:lg:after:pointer-events-none data-list-view:lg:after:absolute data-list-view:lg:after:inset-y-0 data-list-view:lg:after:left-1/2 data-list-view:lg:after:border-l data-list-view:lg:after:border-dashed data-list-view:lg:after:content-['']" : ""}`}
+      className="group/task-layout min-w-0 space-y-10 data-list-view:lg:grid data-list-view:lg:grid-cols-4 data-list-view:lg:items-start data-list-view:lg:gap-8 data-list-view:lg:space-y-0"
     >
       {visible.length > 0 && (
         <ul
