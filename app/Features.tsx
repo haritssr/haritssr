@@ -58,10 +58,10 @@ const features = [
 
 export default function Features() {
   return (
-    <ul className="corner-squircle grid grid-cols-1 overflow-hidden rounded-xl supports-[corner-shape:squircle]:rounded-3xl sm:grid-cols-2 md:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
       {features.map(({ title, shortcut, description, preview }) => (
         <li
-          className="border-border bg-foreground/2 flex min-w-0 flex-col border-b border-dashed px-6 pt-6 pb-6 last:border-b-0 sm:max-md:not-nth-[2n]:border-r sm:max-md:nth-last-[-n+2]:border-b-0 md:not-nth-[3n]:border-r md:nth-last-[-n+3]:border-b-0"
+          className="corner-squircle bg-interface-hover flex min-w-0 flex-col rounded-lg px-6 py-5 supports-[corner-shape:squircle]:rounded-2xl"
           key={title}
         >
           <div

@@ -291,7 +291,8 @@ export default function DesignSystem() {
               what sections are available, and how to leave.
             </li>
             <li>
-              Minimize borders to reduce visual clutter and cognitive load.
+              Minimize borders for grouping and separation. Use spacing, color,
+              translucency, or strategically show and hide elements instead.
             </li>
             <li>
               Use distinct links for navigation and buttons for actions, with
