@@ -31,11 +31,12 @@ const DESIGN_TOKENS = [
   },
   {
     name: "secondary-button-surface",
+    label: "white",
     definition: "pure white",
   },
   {
     name: "background",
-    definition: "#fcfcfc",
+    definition: "#fff",
   },
   {
     name: "surface-hover",

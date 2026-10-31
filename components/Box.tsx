@@ -14,7 +14,7 @@ export default function Box({
   children: ReactNode;
 }) {
   return (
-    <Container className="corner-squircle border-border flex min-w-0 flex-col overflow-hidden rounded-xl border bg-white">
+    <Container className="corner-squircle border-border bg-background flex min-w-0 flex-col overflow-hidden rounded-lg border supports-[corner-shape:squircle]:rounded-2xl">
       <div className="border-border text-foreground from-surface to-interface-hover/70 flex items-center justify-between gap-2 border-b border-dashed bg-linear-to-b px-3 py-2">
         <Heading className="text-foreground/90 min-w-0 text-sm font-medium">
           {title}
@@ -26,8 +26,8 @@ export default function Box({
       <div
         className={
           Container === "li"
-            ? "text-foreground flex min-w-0 flex-1 flex-col gap-5 p-5"
-            : "grid gap-5 p-4 [&>button]:justify-self-start"
+            ? "bg-background text-foreground flex min-w-0 flex-1 flex-col gap-5 p-5"
+            : "bg-background grid gap-5 p-4 [&>button]:justify-self-start"
         }
       >
         {children}

@@ -74,15 +74,7 @@ export default function DesignSystem() {
                 false
               )}
             </li>
-            <li>
-              Design principles explain{" "}
-              <span className="font-semibold">why</span> we make specific
-              decisions; implementation explains{" "}
-              <span className="font-semibold">how</span> they work in code.
-            </li>
-            <li>
-              Recognize patterns through repeated observation and reflection.
-            </li>
+            <li>The devil is in the details.</li>
             <InterfacePrinciples>
               <div>
                 <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-5">
@@ -255,10 +247,65 @@ export default function DesignSystem() {
                 </ul>
               </div>
             </InterfacePrinciples>
-            <li>The devil is in the details.</li>
+            <li>The system works on mobile and desktop.</li>
+            <li>
+              <ExternalLink
+                href="https://stephango.com/concise"
+                name="Concise explanations accelerate progress"
+              />
+              .
+            </li>
+            <li>Hide the bottom tab bar on content pages.</li>
+            <li>
+              Recognize patterns through repeated observation and reflection.
+            </li>
+            <li>
+              Use regular buttons on pages and physical buttons in containers.
+            </li>
+            <li>
+              Use Oklab or Oklch for perceptually balanced colors and gradients.
+            </li>
+            <li>
+              Strive for one line navigation layer on all screen views as
+              possible.
+            </li>
+            <li>
+              Defining feature or update make it easy for sharing and
+              documentation.
+            </li>
+            <li>
+              Use <span className="text-action">blue</span> for actions,{" "}
+              <span className="text-danger">red</span> for danger, errors, and
+              warnings, <span className="text-success">green</span> for success,{" "}
+              <span className="text-progress">orange</span> for progress.
+            </li>
+            <li>
+              Design principles explain{" "}
+              <span className="font-semibold">why</span> we make specific
+              decisions; implementation explains{" "}
+              <span className="font-semibold">how</span> they work in code.
+            </li>
+            <li>
+              Each page should make it clear where users are, what they can do,
+              what sections are available, and how to leave.
+            </li>
+            <li>
+              Digital services should <u>expand what people can do</u> while
+              respecting the <u>limits of their attention and working memory</u>
+              .
+            </li>
+            <li>
+              Use distinct links for navigation and buttons for actions, with
+              clear hover, active, and focus-visible states where relevant.
+            </li>
+            <li>
+              Minimize borders for grouping and separation. Use spacing, color,
+              translucency, or strategically show and hide elements instead.
+            </li>
             <li>
               Draw inspiration from the{" "}
               <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />,{" "}
+              <ExternalLink href="https://www.nngroup.com/" name="NN/g" />,{" "}
               <ExternalLink
                 href="https://developer.apple.com/design/human-interface-guidelines/design-principles"
                 name="Apple’s design principles"
@@ -276,55 +323,10 @@ export default function DesignSystem() {
               <ExternalLink href="https://vercel.com" name="Vercel" />.
             </li>
             <li>
-              Digital services should expand what people can do while respecting
-              the limits of their attention and working memory.
-            </li>
-            <li>
-              <ExternalLink
-                href="https://stephango.com/concise"
-                name="Concise explanations accelerate progress"
-              />
-              .
-            </li>
-            <li>
-              Each page should make it clear where users are, what they can do,
-              what sections are available, and how to leave.
-            </li>
-            <li>
-              Minimize borders for grouping and separation. Use spacing, color,
-              translucency, or strategically show and hide elements instead.
-            </li>
-            <li>
-              Use distinct links for navigation and buttons for actions, with
-              clear hover, active, and focus-visible states where relevant.
-            </li>
-            <li>
-              Use regular buttons on pages and physical buttons in containers.
-            </li>
-            <li>
-              Use <span className="text-action">blue</span> for actions,{" "}
-              <span className="text-danger">red</span> for danger, errors, and
-              warnings, <span className="text-success">green</span> for success,{" "}
-              <span className="text-progress">orange</span> for progress.
-            </li>
-            <li>
-              Use Oklab or Oklch for perceptually balanced colors and gradients.
-            </li>
-            <li>
-              Defining feature or update make it easy for sharing and
-              documentation.
-            </li>
-            <li>
               Use subtle shadows for emphasis, raising them on hover and
               lowering them on press. Floating controls sit higher; disabled
               controls and selects stay flat. Keep keyboard focus visible.
             </li>
-            <li>
-              Strive for one line navigation layer on all screen views as
-              possible.
-            </li>
-            <li>The system works on mobile and desktop.</li>
-            <li>Hide the bottom tab bar on content pages.</li>
           </ol>
         </Section>
 
@@ -341,7 +343,7 @@ export default function DesignSystem() {
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
               {[1, 2, 3, 4].map((item) => (
                 <li
-                  className="bg-middle-hover flex min-h-32 min-w-0 flex-col justify-between gap-5 rounded-lg p-5"
+                  className="bg-interface-hover flex min-h-32 min-w-0 flex-col justify-between gap-5 rounded-lg p-5"
                   key={item}
                 >
                   <span className="text-foreground text-4xl font-medium tracking-tight tabular-nums">
@@ -355,7 +357,7 @@ export default function DesignSystem() {
         </Section>
 
         <Section title="UI Components">
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-8">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="IndexCard" title="Index Card">
                 <div className="grid gap-3.5 sm:grid-cols-2">
@@ -399,7 +401,7 @@ export default function DesignSystem() {
               </Box>
             </div>
 
-            <div className="grid min-w-0 grid-cols-1 gap-5 md:col-span-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            <div className="grid min-w-0 grid-cols-1 gap-5 md:col-span-2 md:grid-cols-2 lg:grid-cols-4">
               <div className="flex min-w-0 flex-col [&>div]:flex-1">
                 <Box name="Switch" title="Switch">
                   <Switch />
