@@ -77,7 +77,7 @@ export default function TopBar() {
       ref={navigationRef}
     >
       <div
-        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 px-2.5 pt-2.5 pb-2 sm:px-4 sm:py-5 xl:px-0`}
+        className={`${styles.row} relative mx-auto flex max-w-5xl items-center justify-between gap-2 p-3.5 lg:px-0 lg:py-5`}
         data-show-title={showTitle}
       >
         {pathname === "/" ? (

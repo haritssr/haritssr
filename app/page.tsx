@@ -4,6 +4,8 @@ import {
   ClockIcon,
   MusicalNoteIcon,
   LinkIcon,
+  CodeBracketIcon,
+  RssIcon,
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -15,8 +17,9 @@ import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
 import Section from "@/components/Section";
 import { PageStructuredData } from "@/components/StructuredData";
-import { musicRoute, urlRoute } from "@/data/routes";
+import { apiRoute, musicRoute, urlRoute } from "@/data/routes";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
+import { RSS_PATH } from "@/utils/metadata/site";
 
 import Features from "./Features";
 
@@ -235,7 +238,7 @@ function Tools() {
   return (
     <nav
       aria-label="Tools"
-      className="[&>a]:border-hairline [&>a]:border-border-hover/40 [&>a]:bg-secondary-button-surface [&>a]:shadow-floating [&>a:hover]:border-border-hover/40 [&>a:hover]:bg-surface-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 sm:[&_h3]:text-base sm:[&>a]:px-2 sm:[&>a]:py-2 sm:[&>a]:pl-3 [&>a>div>div:first-child>svg]:opacity-75 [&>a>div>div:last-child>svg]:opacity-50"
+      className="[&>a]:border-hairline [&>a]:border-border-hover/40 [&>a]:bg-secondary-button-surface [&>a:hover]:border-border-hover/40 [&>a:hover]:bg-surface-hover grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 sm:[&_h3]:text-base [&>a]:shadow-xs sm:[&>a]:px-2 sm:[&>a]:py-2 sm:[&>a]:pl-3 [&>a:active]:scale-98 [&>a:active]:shadow-none [&>a>div>div:first-child>svg]:opacity-75 [&>a>div>div:last-child>svg]:opacity-50"
     >
       <IndexCard
         title="Timer"
@@ -291,6 +294,30 @@ function Tools() {
         headingLevel={3}
         icon={
           <LinkIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
+        title={apiRoute.title}
+        href={apiRoute.route}
+        headingLevel={3}
+        icon={
+          <CodeBracketIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
+        title="RSS"
+        href={RSS_PATH}
+        headingLevel={3}
+        icon={
+          <RssIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}

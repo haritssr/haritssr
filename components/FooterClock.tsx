@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { ReactNode } from "react";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const twoDigits = (value: number) => String(value).padStart(2, "0");
@@ -15,7 +14,7 @@ function formatLocalClock(timestamp: number) {
   };
 }
 
-export default function FooterClock({ children }: { children: ReactNode }) {
+export default function FooterClock() {
   const [timestamp, setTimestamp] = useState<number | null>(null);
 
   useEffect(() => {
@@ -39,29 +38,26 @@ export default function FooterClock({ children }: { children: ReactNode }) {
   const clock = timestamp === null ? null : formatLocalClock(timestamp);
 
   return (
-    <div className="mb-3 grid min-w-0 grid-cols-1 items-center gap-x-5 gap-y-3 lg:grid-cols-[minmax(0,1fr)_auto]">
-      <div className="flex min-h-6 min-w-0">{children}</div>
-      <div className="flex h-6 min-w-0 items-center justify-between gap-4 leading-6 whitespace-nowrap tabular-nums lg:block">
-        <span>
-          {clock !== null && (
-            <time dateTime={clock.date}>
-              {clock.date}, {clock.weekday}
-            </time>
-          )}
-        </span>
-        {timestamp !== null && <span className="hidden lg:inline">, </span>}
-        <span>
-          {timestamp === null ? (
-            <span aria-hidden="true" className="invisible">
-              00:00:00
-            </span>
-          ) : (
-            <time dateTime={new Date(timestamp).toISOString()}>
-              {clock?.time}
-            </time>
-          )}
-        </span>
-      </div>
+    <div className="flex h-6 min-w-0 items-center justify-between gap-4 leading-6 whitespace-nowrap tabular-nums lg:block">
+      <span>
+        {clock !== null && (
+          <time dateTime={clock.date}>
+            {clock.date}, {clock.weekday}
+          </time>
+        )}
+      </span>
+      {timestamp !== null && <span className="hidden lg:inline">, </span>}
+      <span>
+        {timestamp === null ? (
+          <span aria-hidden="true" className="invisible">
+            00:00:00
+          </span>
+        ) : (
+          <time dateTime={new Date(timestamp).toISOString()}>
+            {clock?.time}
+          </time>
+        )}
+      </span>
     </div>
   );
 }
