@@ -93,11 +93,17 @@ export default function URLDetailsPage() {
                 href="https://x.com/Majed_/status/2115747987343261792"
                 name="this post by Majed"
                 size="inherit"
-              />{" "}
-              and{" "}
+              />
+              ,{" "}
               <ExternalLink
                 href="https://x.com/satyaXBT/status/2115747118422044965"
                 name="this post by satyaXBT"
+                size="inherit"
+              />
+              , and{" "}
+              <ExternalLink
+                href="https://x.com/FFBuncho/status/2115633205802090497"
+                name="this post by FFBuncho"
                 size="inherit"
               />
               .
