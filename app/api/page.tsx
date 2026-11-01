@@ -1,3 +1,5 @@
+import Badge from "@/components/Badge";
+import HttpMethodBadge from "@/components/HttpMethodBadge";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -18,14 +20,6 @@ interface Endpoint {
   method?: string;
   authenticated?: boolean;
 }
-
-const methodColors: Record<string, string> = {
-  GET: "bg-[#00d1ad]/10 text-[#008c75]",
-  POST: "bg-[#72c4ef]/10 text-[#167ba9]",
-  PUT: "bg-[#dc8be9]/10 text-[#a13db1]",
-  PATCH: "bg-[#b7a0f3]/10 text-[#7753c3]",
-  DELETE: "bg-[#f18ba6]/10 text-[#c04468]",
-};
 
 const endpoints: Endpoint[] = [
   {
@@ -105,24 +99,13 @@ export default function APIPage() {
               >
                 <div className="flex flex-wrap items-center gap-2">
                   {(endpoint.method ?? "GET").split(" / ").map((method) => (
-                    <span
-                      className={`rounded-md px-2 py-0 font-mono text-sm leading-6 font-medium ${methodColors[method]}`}
-                      key={method}
-                    >
-                      {method}
-                    </span>
+                    <HttpMethodBadge key={method} method={method} />
                   ))}
                   <InternalLink href={endpoint.href}>
                     {endpoint.href}
                   </InternalLink>
                   {endpoint.authenticated === true && (
-                    <span className="border-border bg-foreground/5 text-foreground/70 inline-flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium">
-                      <span
-                        aria-hidden="true"
-                        className="bg-muted size-1.5 shrink-0 rounded-full"
-                      />
-                      Authenticated
-                    </span>
+                    <Badge>Authenticated</Badge>
                   )}
                 </div>
                 <p className="text-muted">{endpoint.description}</p>

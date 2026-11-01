@@ -180,7 +180,6 @@
 }
 
 @theme static {
-  --color-white: var(--color-surface);
   --color-action: color-mix(
     in oklab,
     var(--color-blue-600) 60%,

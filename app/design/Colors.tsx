@@ -30,12 +30,7 @@ const DESIGN_TOKENS = [
     definition: "#fafafa",
   },
   {
-    name: "secondary-button-surface",
-    label: "white",
-    definition: "pure white",
-  },
-  {
-    name: "background",
+    name: "white",
     definition: "#fff",
   },
   {

@@ -7,9 +7,15 @@ import "katex/dist/katex.min.css";
 
 import { TASK_LAYOUT } from "@/app/(tools)/timer/_components/taskPresentation";
 import BackButton from "@/components/BackButton";
+import Badge from "@/components/Badge";
+import Bento from "@/components/Bento";
 import Box from "@/components/Box";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Button from "@/components/Button";
 import ExternalLink from "@/components/ExternalLink";
+import HttpMethodBadge, {
+  HTTP_METHOD_COLORS,
+} from "@/components/HttpMethodBadge";
 import IndexCard from "@/components/IndexCard";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -21,8 +27,6 @@ import katexify from "@/utils/katexify";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import Accordion from "./Accordion";
-import Badges from "./Badges";
-import Breadcrumbs from "./Breadcrumbs";
 import ButtonGroupExample from "./ButtonGroup";
 import ButtonIconOnly from "./ButtonIconOnly";
 import ButtonWithIcon from "./ButtonWithIcon";
@@ -359,6 +363,53 @@ export default function DesignSystem() {
         <Section title="Components">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="Bento" title="Bento">
+                <Bento title="This is the text you see">
+                  <div className="text-muted space-y-5">
+                    <p>
+                      A bento keeps a small piece of information close at hand
+                      and opens into a larger space when you want more detail.
+                      The title remains visible at the top while the content
+                      below it can be explored at your own pace.
+                    </p>
+                    <p>
+                      This example contains several paragraphs to show how the
+                      panel handles longer text. On a small screen, the panel
+                      stays within the available height and its contents scroll
+                      instead of extending beyond the edge of the viewport.
+                    </p>
+                    <p>
+                      The same layout can hold explanations, lists, or other
+                      related content. Keep the opening label clear enough that
+                      readers know what they will find before they expand it.
+                    </p>
+                    <p>
+                      When you are finished, use the close button or press
+                      Escape to return to the page. You can open the panel again
+                      whenever you need to revisit the information.
+                    </p>
+                  </div>
+                </Bento>
+                <Bento shape="squircle" title="Squircle bento">
+                  <p className="text-muted">
+                    The squircle shape opens the same expandable panel.
+                  </p>
+                </Bento>
+                <div className="bg-interface-hover rounded-2xl p-4">
+                  <Bento
+                    title="Contained bento"
+                    variant="contained"
+                    width="fit"
+                  >
+                    <p className="text-muted">
+                      The contained variant uses a darker background and
+                      control.
+                    </p>
+                  </Bento>
+                </div>
+              </Box>
+            </div>
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="IndexCard" title="Index Card">
                 <div className="grid gap-3.5 sm:grid-cols-2">
                   <IndexCard
@@ -660,13 +711,29 @@ export default function DesignSystem() {
 
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Breadcrumbs" title="Breadcrumbs">
-                <Breadcrumbs />
+                <Breadcrumbs routeLabels={{ "/design": "Design" }} />
               </Box>
             </div>
 
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
-              <Box name="Badges" title="Badges">
-                <Badges />
+              <Box name="Badge" title="Badges">
+                <div className="flex flex-wrap gap-2">
+                  <Badge>General</Badge>
+                  <Badge variant="success">Success</Badge>
+                  <Badge variant="danger">Danger</Badge>
+                  <Badge variant="progress">Progress</Badge>
+                  <Badge variant="information">Information</Badge>
+                </div>
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="HttpMethodBadge" title="HTTP methods">
+                <div className="flex flex-wrap gap-2">
+                  {Object.keys(HTTP_METHOD_COLORS).map((method) => (
+                    <HttpMethodBadge key={method} method={method} />
+                  ))}
+                </div>
               </Box>
             </div>
 
@@ -702,12 +769,11 @@ export default function DesignSystem() {
 
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box title="Input: Date">
-                <label className="block w-full sm:max-w-xs">
-                  <span className="text-foreground/80 mb-1 block text-sm font-medium">
-                    Choose a date
-                  </span>
-                  <input className={FORM_CONTROL_CLASS_NAME} type="date" />
-                </label>
+                <input
+                  aria-label="Choose a date"
+                  className={FORM_CONTROL_CLASS_NAME}
+                  type="date"
+                />
               </Box>
             </div>
 
