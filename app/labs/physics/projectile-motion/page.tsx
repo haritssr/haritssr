@@ -5,7 +5,7 @@ import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 
 import "katex/dist/katex.min.css";
 import { getLabMetadata } from "@/app/labs/data";
-import Accordion, { AccordionItem } from "@/components/Accordion";
+import Bento from "@/components/Bento";
 import Box from "@/components/Box";
 import ExternalLink from "@/components/ExternalLink";
 import InternalLink from "@/components/InternalLink";
@@ -375,26 +375,23 @@ export default function ProjectileMotionPage() {
                 {katexify("10\\,\\mathrm{m\\,s^{-1}}", false)}. Find its flight
                 time and range.
               </p>
-              <Accordion className="mt-auto w-full">
-                <AccordionItem
-                  excludeFromContents
-                  title="Show solution"
-                  value="horizontal-launch"
-                  panelClassName="space-y-4"
-                >
-                  <p>
-                    The initial vertical velocity is zero. Solve for the falling
-                    time, then use the horizontal velocity.
-                  </p>
-                  <div className="overflow-x-auto">
-                    {katexify(
-                      "T=\\sqrt{\\frac{2h}{g}}=\\sqrt{\\frac{40}{9.81}}\\approx2.02\\,\\mathrm{s}",
-                      true
-                    )}
-                    {katexify("R=10T\\approx20.19\\,\\mathrm{m}", true)}
+              <div className="mt-auto w-full">
+                <Bento title="Show solution" shape="squircle" width="full">
+                  <div className="space-y-4">
+                    <p>
+                      The initial vertical velocity is zero. Solve for the
+                      falling time, then use the horizontal velocity.
+                    </p>
+                    <div className="overflow-x-auto">
+                      {katexify(
+                        "T=\\sqrt{\\frac{2h}{g}}=\\sqrt{\\frac{40}{9.81}}\\approx2.02\\,\\mathrm{s}",
+                        true
+                      )}
+                      {katexify("R=10T\\approx20.19\\,\\mathrm{m}", true)}
+                    </div>
                   </div>
-                </AccordionItem>
-              </Accordion>
+                </Bento>
+              </div>
             </Box>
             <Box as="li" headingAs="h3" title="Compare two launch angles">
               <p>
@@ -404,28 +401,25 @@ export default function ProjectileMotionPage() {
                 {katexify("60^\\circ", false)}. Which goes farther, and which
                 stays airborne longer?
               </p>
-              <Accordion className="mt-auto w-full">
-                <AccordionItem
-                  excludeFromContents
-                  title="Show solution"
-                  value="complementary-angles"
-                  panelClassName="space-y-4"
-                >
-                  <p>
-                    Both land at the same range because{" "}
-                    {katexify("\\sin60^\\circ=\\sin120^\\circ", false)}. The
-                    steeper launch has a larger upward velocity and stays
-                    airborne longer.
-                  </p>
-                  <div className="overflow-x-auto">
-                    {katexify("R\\approx35.31\\,\\mathrm{m}", true)}
-                    {katexify(
-                      "T_{30^\\circ}\\approx2.04\\,\\mathrm{s},\\qquad T_{60^\\circ}\\approx3.53\\,\\mathrm{s}",
-                      true
-                    )}
+              <div className="mt-auto w-full">
+                <Bento title="Show solution" shape="squircle" width="full">
+                  <div className="space-y-4">
+                    <p>
+                      Both land at the same range because{" "}
+                      {katexify("\\sin60^\\circ=\\sin120^\\circ", false)}. The
+                      steeper launch has a larger upward velocity and stays
+                      airborne longer.
+                    </p>
+                    <div className="overflow-x-auto">
+                      {katexify("R\\approx35.31\\,\\mathrm{m}", true)}
+                      {katexify(
+                        "T_{30^\\circ}\\approx2.04\\,\\mathrm{s},\\qquad T_{60^\\circ}\\approx3.53\\,\\mathrm{s}",
+                        true
+                      )}
+                    </div>
                   </div>
-                </AccordionItem>
-              </Accordion>
+                </Bento>
+              </div>
             </Box>
           </ul>
         </Section>

@@ -1,6 +1,6 @@
 import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
-import Accordion, { AccordionItem } from "@/components/Accordion";
+import Bento from "@/components/Bento";
 import Box from "@/components/Box";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
@@ -155,18 +155,17 @@ export default function LogarithmsPage() {
           }
         >
           <ul className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-            {logarithmRules.map((rule, index) => (
+            {logarithmRules.map((rule) => (
               <Box as="li" headingAs="h3" key={rule.title} title={rule.title}>
                 <Equation tex={rule.formula} />
                 <p className="text-muted text-sm leading-6">
                   {rule.explanation}
                 </p>
-                <Accordion className="mt-auto w-full">
-                  <AccordionItem
-                    panelClassName="bg-transparent"
-                    excludeFromContents
+                <div className="mt-auto w-full">
+                  <Bento
                     title="Show derivation"
-                    value={`rule-${index + 1}-derivation`}
+                    width="fit"
+                    controlColor="dark"
                   >
                     <ol
                       className="space-y-3"
@@ -178,12 +177,12 @@ export default function LogarithmsPage() {
                         </li>
                       ))}
                     </ol>
-                    <p className="mt-4 text-sm font-medium">Example</p>
+                    <p className="mt-4 pl-3 text-sm font-medium">Example</p>
                     <div className="mt-2">
                       <Equation tex={rule.example} />
                     </div>
-                  </AccordionItem>
-                </Accordion>
+                  </Bento>
+                </div>
               </Box>
             ))}
           </ul>
@@ -274,7 +273,7 @@ export default function LogarithmsPage() {
           description={<>Work out each answer, then reveal the solution.</>}
         >
           <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {logarithmExercises.map((exercise, index) => (
+            {logarithmExercises.map((exercise) => (
               <Box
                 as="li"
                 headingAs="h3"
@@ -282,13 +281,8 @@ export default function LogarithmsPage() {
                 title={exercise.title}
               >
                 <Equation tex={exercise.expression} />
-                <Accordion className="mt-auto w-full">
-                  <AccordionItem
-                    panelClassName="bg-transparent"
-                    excludeFromContents
-                    title="Show solution"
-                    value={`exercise-${index + 1}-solution`}
-                  >
+                <div className="mt-auto w-full">
+                  <Bento title="Show solution" shape="squircle" width="full">
                     <ol className="space-y-3">
                       {exercise.steps.map((step) => (
                         <li key={step}>
@@ -299,8 +293,8 @@ export default function LogarithmsPage() {
                     <p className="text-muted mt-4 text-sm leading-6">
                       {exercise.explanation}
                     </p>
-                  </AccordionItem>
-                </Accordion>
+                  </Bento>
+                </div>
               </Box>
             ))}
           </ul>

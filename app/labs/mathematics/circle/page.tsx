@@ -1,6 +1,6 @@
 import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
-import Accordion, { AccordionItem } from "@/components/Accordion";
+import Bento from "@/components/Bento";
 import Box from "@/components/Box";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
@@ -249,13 +249,8 @@ export default function CirclePage() {
                     </span>
                   ))}
                 </p>
-                <Accordion className="mt-auto w-full">
-                  <AccordionItem
-                    excludeFromContents
-                    title="Show solution"
-                    value={exercise.title}
-                    panelClassName="bg-transparent"
-                  >
+                <div className="mt-auto w-full">
+                  <Bento title="Show solution" shape="squircle" width="full">
                     <ol className="space-y-3">
                       {exercise.steps.map((step) => (
                         <li key={step}>
@@ -266,8 +261,8 @@ export default function CirclePage() {
                     <p className="text-muted mt-4 text-sm leading-7">
                       {exercise.explanation}
                     </p>
-                  </AccordionItem>
-                </Accordion>
+                  </Bento>
+                </div>
               </Box>
             ))}
           </ul>

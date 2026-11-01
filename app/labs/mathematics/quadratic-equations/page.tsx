@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import { getLabMetadata } from "@/app/labs/data";
-import Accordion, { AccordionItem } from "@/components/Accordion";
+import Bento from "@/components/Bento";
 import Box from "@/components/Box";
 import PageDescription from "@/components/PageDescription";
 import Section from "@/components/Section";
@@ -213,31 +213,24 @@ export default function QuadraticEquationsPage() {
             <>Solve each equation on paper, then reveal the explanation.</>
           }
         >
-          <ul className="space-y-4">
-            {exercises.map(
-              ({ prompt, expression, working, explanation }, index) => (
-                <Box as="li" headingAs="h3" key={expression} title={prompt}>
-                  <div className="overflow-x-auto py-3">
-                    {katexify(expression, true)}
-                  </div>
-                  <Accordion className="mt-auto w-full">
-                    <AccordionItem
-                      panelClassName="bg-transparent"
-                      excludeFromContents
-                      title="Show solution"
-                      value={`exercise-${index + 1}-solution`}
-                    >
-                      <div className="overflow-x-auto py-3">
-                        {katexify(working, true)}
-                      </div>
-                      <p className="text-muted text-sm leading-6">
-                        {explanation}
-                      </p>
-                    </AccordionItem>
-                  </Accordion>
-                </Box>
-              )
-            )}
+          <ul className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            {exercises.map(({ prompt, expression, working, explanation }) => (
+              <Box as="li" headingAs="h3" key={expression} title={prompt}>
+                <div className="overflow-x-auto py-3">
+                  {katexify(expression, true)}
+                </div>
+                <div className="mt-auto w-full">
+                  <Bento title="Show solution" width="fit">
+                    <div className="overflow-x-auto py-3">
+                      {katexify(working, true)}
+                    </div>
+                    <p className="text-muted text-sm leading-6">
+                      {explanation}
+                    </p>
+                  </Bento>
+                </div>
+              </Box>
+            ))}
           </ul>
         </Section>
       </div>

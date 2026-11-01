@@ -11,7 +11,7 @@ import {
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import Accordion, { AccordionItem } from "@/components/Accordion";
+import Bento from "@/components/Bento";
 import { ButtonLink } from "@/components/Button";
 import ExternalLink from "@/components/ExternalLink";
 import IndexCard from "@/components/IndexCard";
@@ -139,21 +139,16 @@ function PersonalDetails() {
         <div className="hidden md:contents">
           <PersonalNotes />
         </div>
-        <div className="border-border border-y border-dashed py-4 md:hidden">
+        <div className="border-border border-t border-dashed pt-4 md:hidden">
           <ProfileInvitation />
         </div>
-        <Accordion className="md:hidden">
-          <AccordionItem
-            excludeFromContents
-            title="More about me"
-            value="personal-notes"
-            variant="profile"
-          >
+        <div className="flex justify-center md:hidden">
+          <Bento title="More about me" variant="contained" width="fit">
             <div className="space-y-4">
               <PersonalNotes mobile />
             </div>
-          </AccordionItem>
-        </Accordion>
+          </Bento>
+        </div>
       </div>
     </section>
   );
@@ -204,7 +199,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       <ul
         aria-label="Background and tools"
         id={mobile ? "personal-notes-mobile" : "personal-notes"}
-        className="border-border text-muted marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:-mt-4 md:border-l md:border-dashed md:pt-4 md:pl-9 md:before:absolute md:before:-top-0.5 md:before:-left-px md:before:h-0.5 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed lg:after:-bottom-5 lg:after:h-5"
+        className={`${mobile ? "text-foreground/80" : "text-muted"} border-border marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word md:-mt-4 md:border-l md:border-dashed md:pt-4 md:pl-9 md:before:absolute md:before:-top-0.5 md:before:-left-px md:before:h-0.5 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed lg:after:-bottom-5 lg:after:h-5`}
       >
         <li>Touch typist, ±90 WPM.</li>
         <li>Former chess player, ±2000 Elo.</li>
@@ -216,7 +211,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
       </ul>
       <ul
         aria-label="Principles"
-        className="border-border text-muted marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9 md:before:absolute md:before:-top-4.5 md:before:-left-px md:before:h-4.5 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed lg:after:-bottom-5 lg:after:h-5"
+        className={`${mobile ? "text-foreground/80" : "text-muted"} border-border marker:text-muted md:before:border-border md:after:border-border relative min-w-0 list-outside list-disc space-y-2 border-t border-dashed pt-4 pl-5 wrap-break-word md:border-t-0 md:border-l md:pt-0 md:pl-9 md:before:absolute md:before:-top-4.5 md:before:-left-px md:before:h-4.5 md:before:border-l md:before:border-dashed md:after:absolute md:after:-bottom-4 md:after:-left-px md:after:h-4 md:after:border-l md:after:border-dashed lg:after:-bottom-5 lg:after:h-5`}
       >
         <li>
           <ExternalLink
