@@ -137,6 +137,12 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
 };
 
+export function buttonLinkClassName(
+  variant: "primary" | "profile-secondary" | "secondary"
+) {
+  return `${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${BUTTON_SIZE_CLASS.default}`;
+}
+
 export function ButtonLink({
   children,
   className,
@@ -150,7 +156,7 @@ export function ButtonLink({
   return (
     <a
       {...props}
-      className={`${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${size === "profile" ? "corner-squircle min-h-10 rounded-md px-4 py-0.5 text-center supports-[corner-shape:squircle]:rounded-xl md:min-h-9.5" : BUTTON_SIZE_CLASS.default} ${className ?? ""}`}
+      className={`${size === "profile" ? `${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} corner-squircle min-h-10 rounded-md px-4 py-0.5 text-center supports-[corner-shape:squircle]:rounded-xl md:min-h-9.5` : buttonLinkClassName(variant)} ${className ?? ""}`}
     >
       {children}
     </a>

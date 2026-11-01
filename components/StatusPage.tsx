@@ -1,24 +1,12 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import Button, { buttonLinkClassName } from "@/components/Button";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 
-const STATUS_ACTION_BASE_CLASS =
-  "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-center text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action";
-
-const STATUS_ACTION_VARIANT_CLASS = {
-  primary: "bg-action font-medium text-white hover:bg-action-hover",
-  secondary:
-    "border-border border bg-white text-secondary-foreground select-none hover:bg-interface-hover hover:text-secondary-hover-foreground",
-} as const;
-
-function getStatusActionClassName(
-  variant: keyof typeof STATUS_ACTION_VARIANT_CLASS
-) {
-  return `${STATUS_ACTION_BASE_CLASS} ${STATUS_ACTION_VARIANT_CLASS[variant]}`;
-}
+type StatusActionVariant = "primary" | "secondary";
 
 export function StatusActionButton({
   children,
@@ -27,16 +15,12 @@ export function StatusActionButton({
 }: {
   children: ReactNode;
   onClick: () => void;
-  variant?: keyof typeof STATUS_ACTION_VARIANT_CLASS;
+  variant?: StatusActionVariant;
 }) {
   return (
-    <button
-      className={getStatusActionClassName(variant)}
-      onClick={onClick}
-      type="button"
-    >
+    <Button onClick={onClick} variant={variant}>
       {children}
-    </button>
+    </Button>
   );
 }
 
@@ -47,10 +31,10 @@ export function StatusActionLink({
 }: {
   children: ReactNode;
   href: string;
-  variant?: keyof typeof STATUS_ACTION_VARIANT_CLASS;
+  variant?: StatusActionVariant;
 }) {
   return (
-    <Link className={getStatusActionClassName(variant)} href={href}>
+    <Link className={buttonLinkClassName(variant)} href={href}>
       {children}
     </Link>
   );
