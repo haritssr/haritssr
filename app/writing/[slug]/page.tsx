@@ -82,15 +82,19 @@ export default async function WritingPostPage({
           {post.title}
         </PageTitle>
         <PageDescription>{post.summary}</PageDescription>
-        <div className="flex items-center text-sm">
+        <div className="text-foreground/70 flex items-center gap-2 text-sm">
           <time dateTime={post.publishedAt}>
             {formatDate(post.publishedAt)}
           </time>
-          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
-          &nbsp;&nbsp;
+          <span
+            aria-hidden="true"
+            className="size-0.5 shrink-0 rounded-full bg-current"
+          />
           <p>{post.wordCount} Words</p>
-          &nbsp;&nbsp; <span className="text-foreground/60">•</span>{" "}
-          &nbsp;&nbsp;
+          <span
+            aria-hidden="true"
+            className="size-0.5 shrink-0 rounded-full bg-current"
+          />
           <p>{Math.ceil(post.wordCount / 200)} Min</p>
         </div>
       </PageHeader>
