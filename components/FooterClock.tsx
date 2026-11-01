@@ -7,14 +7,18 @@ const twoDigits = (value: number) => String(value).padStart(2, "0");
 
 function formatLocalClock(timestamp: number) {
   const now = new Date(timestamp);
+  const date = `${now.getFullYear()}-${twoDigits(now.getMonth() + 1)}-${twoDigits(now.getDate())}`;
   return {
-    date: `${now.getFullYear()}-${twoDigits(now.getMonth() + 1)}-${twoDigits(now.getDate())}`,
+    date,
+    shortDate: date.slice(2).replaceAll("-", "/"),
     weekday: WEEKDAYS[now.getDay()],
-    time: `${twoDigits(now.getHours())}:${twoDigits(now.getMinutes())}:${twoDigits(now.getSeconds())}`,
+    hoursMinutes: `${twoDigits(now.getHours())}:${twoDigits(now.getMinutes())}`,
+    seconds: `:${twoDigits(now.getSeconds())}`,
+    dateTime: now.toISOString(),
   };
 }
 
-export default function FooterClock() {
+function useLocalTimestamp() {
   const [timestamp, setTimestamp] = useState<number | null>(null);
 
   useEffect(() => {
@@ -35,31 +39,35 @@ export default function FooterClock() {
     };
   }, []);
 
+  return timestamp;
+}
+
+export default function FooterClock() {
+  const timestamp = useLocalTimestamp();
   const clock = timestamp === null ? null : formatLocalClock(timestamp);
 
   return (
-    <div className="flex h-6 min-w-0 items-center justify-between gap-4 leading-6 whitespace-nowrap tabular-nums lg:block">
+    <div className="flex h-6 min-w-0 items-center justify-between gap-4 leading-6 whitespace-nowrap tabular-nums max-sm:block lg:block">
       <span>
         {clock !== null && (
           <time dateTime={clock.date}>
-            <span className="sm:hidden">
-              {clock.date.slice(2).replaceAll("-", "/")}
-            </span>
+            <span className="sm:hidden">{clock.shortDate}</span>
             <span className="hidden sm:inline">
               {clock.date}, {clock.weekday}
             </span>
           </time>
         )}
       </span>
-      {timestamp !== null && <span className="hidden lg:inline">, </span>}
+      {clock !== null && <span className="sm:hidden lg:inline">, </span>}
       <span>
-        {timestamp === null ? (
+        {clock === null ? (
           <span aria-hidden="true" className="invisible">
             00:00:00
           </span>
         ) : (
-          <time dateTime={new Date(timestamp).toISOString()}>
-            {clock?.time}
+          <time dateTime={clock.dateTime}>
+            {clock.hoursMinutes}
+            <span className="hidden sm:inline">{clock.seconds}</span>
           </time>
         )}
       </span>

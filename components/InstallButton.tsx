@@ -95,17 +95,19 @@ export default function InstallButton({
 
   if (!isFeature) {
     return (
-      <button
+      <Button
         aria-keyshortcuts="Alt+I"
-        className="hover:text-foreground focus-visible:text-foreground cursor-pointer rounded-sm transition-colors select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+        className="sm:hover:text-foreground max-sm:bg-interface-hover! max-sm:text-foreground w-fit border-0! py-2 sm:w-auto sm:rounded-sm sm:bg-transparent sm:p-0 sm:text-[15px] sm:font-normal sm:text-inherit sm:hover:bg-transparent"
         data-install-trigger=""
         onClick={() => {
           void install();
         }}
         type="button"
+        variant="secondary"
       >
-        Install
-      </button>
+        <span className="sm:hidden">Install App</span>
+        <span className="hidden sm:inline">Install</span>
+      </Button>
     );
   }
 
