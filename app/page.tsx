@@ -80,7 +80,7 @@ function PersonalDetails() {
     <section
       aria-label="About"
       id="Identity"
-      className="corner-squircle bg-interface-hover min-w-0 space-y-4 rounded-3xl p-4 lg:p-5"
+      className="corner-squircle bg-interface-hover min-w-0 space-y-4 rounded-3xl p-4 lg:p-6 lg:pb-5"
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex shrink-0 items-center gap-4">
@@ -100,14 +100,14 @@ function PersonalDetails() {
             </p>
           </div>
         </div>
-        <div className="border-border before:border-border relative hidden min-w-0 border-l border-dashed pl-4 before:absolute before:-top-4 before:-left-px before:h-4 before:border-l before:border-dashed md:col-span-2 md:block lg:before:-top-5 lg:before:h-5">
+        <div className="border-border before:border-border relative hidden min-w-0 border-l border-dashed pl-4 before:absolute before:-top-4 before:-left-px before:h-4 before:border-l before:border-dashed md:col-span-2 md:block lg:before:-top-6 lg:before:h-6">
           <ProfileInvitation />
         </div>
       </div>
-      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-4.5 md:before:-right-4 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed lg:before:-right-5">
+      <div className="md:before:border-border relative grid gap-4 md:grid-cols-3 md:before:absolute md:before:-top-4.5 md:before:-right-4 md:before:left-[calc((100%+1rem)/3)] md:before:border-t md:before:border-dashed lg:before:-right-6">
         <ul
           aria-label="Profile and contacts"
-          className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-2 pl-5 wrap-break-word"
+          className="text-muted marker:text-muted min-w-0 list-outside list-disc space-y-1.5 pl-5 wrap-break-word"
         >
           <li>
             At{" "}
