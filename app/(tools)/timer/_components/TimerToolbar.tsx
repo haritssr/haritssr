@@ -34,7 +34,7 @@ export default function TimerToolbar({
           <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
         </TimerSettingsTrigger>
         <Bento title="History" trigger="secondary" modalSize="wide">
-          {snapshot && completed.length > 0 ? (
+          {snapshot ? (
             <CompletedTasksTable
               tasks={completed}
               date={snapshot.today}

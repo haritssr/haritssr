@@ -110,7 +110,7 @@ export default function CompletedTasksTable({
           )
         )}
       </ul>
-      <div className="hidden lg:block">
+      <div className={rows.length === 0 ? "block" : "hidden lg:block"}>
         <Table>
           <caption className="sr-only">
             Completed and missed tasks with descriptions, time spent, total
@@ -159,6 +159,13 @@ export default function CompletedTasksTable({
             </tr>
           </thead>
           <tbody className="divide-border divide-y">
+            {rows.length === 0 ? (
+              <tr>
+                <td className="text-muted px-3 py-4" colSpan={7}>
+                  No completed or missed tasks today.
+                </td>
+              </tr>
+            ) : null}
             {rows.map(
               (
                 { task, spent, percentage, reached, missed, closed, status },
