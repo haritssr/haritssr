@@ -45,7 +45,7 @@ export default function TabBarButtom({
     >
       <div className="mx-auto flex w-full items-stretch gap-2 sm:max-w-[26.2rem]">
         <div
-          className="border-border bg-background/70 shadow-foreground/5 border-hairline flex h-14 min-w-0 flex-1 items-center rounded-full p-1 shadow-sm backdrop-blur-md"
+          className="border-border bg-background/70 shadow-foreground/10 border-hairline flex h-14 min-w-0 flex-1 items-center rounded-full p-1 shadow-lg backdrop-blur-md sm:shadow-xl"
           data-mobile-tabbar-surface={preview ? undefined : pathname}
         >
           <div className="relative flex w-full items-center gap-0.5">
@@ -71,7 +71,7 @@ export default function TabBarButtom({
         <button
           aria-label="Search"
           aria-haspopup="dialog"
-          className="border-border bg-background/70 text-foreground/90 shadow-foreground/5 focus-visible:outline-action hover:bg-foreground/5 border-hairline flex size-14 shrink-0 items-center justify-center rounded-full shadow-sm backdrop-blur-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+          className="border-border bg-background/70 text-foreground/90 shadow-foreground/10 focus-visible:outline-action hover:bg-foreground/5 border-hairline flex size-14 shrink-0 items-center justify-center rounded-full shadow-lg backdrop-blur-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none sm:shadow-xl"
           onClick={(event) => {
             openSearch(event.currentTarget);
           }}
