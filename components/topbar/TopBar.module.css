@@ -40,15 +40,13 @@
   font-variation-settings: "GRAD" 150;
 }
 
-@media (width >= 1024px) {
-  @media (prefers-reduced-motion: no-preference) {
-    .row > :first-child,
-    .row > :last-child {
-      transition-property:
-        translate, color, background-color, border-color, box-shadow;
-      transition-duration: 150ms;
-      transition-timing-function: ease-out;
-    }
+@media (prefers-reduced-motion: no-preference) {
+  .row > :first-child,
+  .row > :last-child {
+    transition-property:
+      translate, color, background-color, border-color, box-shadow;
+    transition-duration: 1000ms;
+    transition-timing-function: ease-out;
   }
 }
 
