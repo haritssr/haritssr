@@ -28,7 +28,7 @@ export default function DurationFields({
       <legend className={hideLegend ? "sr-only" : "mb-2 text-sm"}>
         Duration
       </legend>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,6.25rem),1fr))] gap-2">
+      <div className="[&_label]:text-muted/70 grid grid-cols-[repeat(auto-fit,minmax(min(100%,6.25rem),1fr))] gap-2">
         {(["hours", "minutes", "seconds"] as const).map((unit) => (
           <NumberInput
             disabled={disabled}
@@ -56,10 +56,7 @@ export default function DurationFields({
         ))}
       </div>
       {presets === undefined || presets.length === 0 ? null : (
-        <fieldset
-          aria-label="Duration presets"
-          className="border-border border-t border-dashed pt-3"
-        >
+        <fieldset aria-label="Duration presets">
           <div className="grid grid-cols-[repeat(auto-fit,minmax(4rem,1fr))] gap-2">
             {presets.map((seconds, index) => (
               <Button

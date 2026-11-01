@@ -50,7 +50,7 @@ keep each form section easy to locate. `DurationFields` is shared too.
 Task form parsing lives in [timerInput.ts](../utils/timerInput.ts). Its lightweight
 limits are shared with input counters and server schemas; stored legacy text keeps
 its existing broader limits. Live elapsed-time validation remains in Edit.
-Name allows 30 characters; the optional Description allows 30, or 2,000 for a
+Name allows 30 characters; the required Description allows 30, or 2,000 for a
 daily task. Both show a
 character counter beside their labels, using `text-danger` at the limit. Each field has
 a Clear button with a native Clear hover hint that empties it and returns focus
@@ -83,11 +83,9 @@ Other personal timer actions and Multitask keep their opacity while unavailable;
 preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
 
-Completed and missed tasks appear in `CompletedTasksTable` below the tasks.
-The section defaults collapsed at every size. Hide collapses the sort controls
-and table; Show reveals them again. The row count stays visible after Show/Hide.
-The expanded table wraps task names and descriptions and
-scrolls horizontally on narrow screens. Restore returns an early Done task to
+The History button beside Settings opens `CompletedTasksTable` in a Bento modal.
+On desktop the table gives descriptions the remaining width and keeps task names
+on one line; narrow screens show stacked task cards. Restore returns an early Done task to
 the active list paused, preserving its time, while its window is still open;
 Met and Missed tasks cannot be restored.
 `TaskList` partitions tasks using their current elapsed

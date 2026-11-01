@@ -33,6 +33,9 @@ export function readTaskForm(
   const descriptionValue = form.get("description");
   const description =
     typeof descriptionValue === "string" ? descriptionValue.trim() : "";
+  if (description.length === 0) {
+    return "Enter a description.";
+  }
   if (description.length > descriptionLimit) {
     return `Use ${descriptionLimit} characters or fewer for the description.`;
   }

@@ -66,7 +66,7 @@ export default function DailyTaskSettings({
     const values = parseDailyDrafts(entries);
     if (values === null) {
       setError(
-        "Use at most 10 tasks, a name of 1–30 characters, a duration from one second to 24 hours, and an end time later than the start. Midnight ends the day."
+        "Use at most 10 tasks, a name and description of 1–30 characters, a duration from one second to 24 hours, and an end time later than the start. Midnight ends the day."
       );
       return;
     }

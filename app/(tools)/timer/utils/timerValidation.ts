@@ -36,7 +36,9 @@ const storedDailyTasksSchema = z
     (tasks) => new Set(tasks.map((task) => task.id)).size === tasks.length
   );
 export const dailyTasksSchema = storedDailyTasksSchema.refine(
-  (tasks) => tasks.length <= MAX_DAILY_TASKS
+  (tasks) =>
+    tasks.length <= MAX_DAILY_TASKS &&
+    tasks.every((task) => task.description.length > 0)
 );
 
 const dateSchema = z.string().refine(validTimerDate);
@@ -108,7 +110,7 @@ export const actionSchema = z.discriminatedUnion("action", [
       date: dateSchema,
       taskId: z.string().min(1).max(100),
       ...taskDetails,
-      description: z.string().trim().max(DAILY_DESCRIPTION_LIMIT),
+      description: z.string().trim().min(1).max(DAILY_DESCRIPTION_LIMIT),
     })
     .refine(
       ({ taskId, description }) =>
@@ -124,6 +126,7 @@ export const actionSchema = z.discriminatedUnion("action", [
     taskId: z.uuid().optional(),
     date: dateSchema,
     ...taskDetails,
+    description: z.string().trim().min(1).max(TASK_INPUT_LIMITS.description),
   }),
   ...(["pause", "done", "acknowledge", "delete"] as const).map((action) =>
     z.object({
@@ -166,7 +169,9 @@ const storedTaskPresetsSchema = z
   );
 export const taskPresetsSchema = storedTaskPresetsSchema.refine((presets) =>
   presets.every(
-    (preset) => preset.description.length <= TASK_INPUT_LIMITS.description
+    (preset) =>
+      preset.description.length > 0 &&
+      preset.description.length <= TASK_INPUT_LIMITS.description
   )
 );
 

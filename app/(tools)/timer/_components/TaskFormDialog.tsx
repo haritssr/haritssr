@@ -75,7 +75,7 @@ function TaskFormPopup({
       <Dialog.Popup
         initialFocus={nameRef}
         style={SHEET_STYLE}
-        className="corner-squircle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-lg p-4 shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-t-2xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-lg sm:supports-[corner-shape:squircle]:rounded-2xl"
+        className="corner-squircle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-xl p-4 shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-t-3xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:supports-[corner-shape:squircle]:rounded-3xl"
       >
         <form
           className="flex flex-col gap-5"
@@ -118,7 +118,7 @@ function TaskFormPopup({
                       key={preset.id}
                       aria-pressed={selected}
                       align="between"
-                      className="h-8.5 w-full items-center"
+                      className="h-9 w-full items-center"
                       variant={
                         selected ? "action-outline-regular" : "outline-regular"
                       }
@@ -129,7 +129,7 @@ function TaskFormPopup({
                       }}
                     >
                       <span>{preset.activity}</span>
-                      <span className="text-muted shrink-0">
+                      <span className="text-muted/70 shrink-0">
                         {formatPresetDuration(preset.duration)}
                       </span>
                     </Button>
@@ -243,9 +243,7 @@ export function TaskDescriptionField({
   return (
     <label className="flex flex-col gap-2 text-sm">
       <span className="flex items-center justify-between">
-        <span>
-          Description <span className="text-muted">(optional)</span>
-        </span>
+        <span>Description</span>
         <span
           className={`text-xs tabular-nums ${length >= maxLength ? "text-danger font-medium" : "text-muted"}`}
           id={hintId}
@@ -263,6 +261,7 @@ export function TaskDescriptionField({
           disabled={disabled}
           maxLength={maxLength}
           name="description"
+          required
           onChange={(event) => {
             onChange(event.currentTarget.value);
           }}

@@ -56,8 +56,8 @@ export default function TimerDetailsPage() {
               Set timers for focused work, breaks, and everyday tasks.
             </li>
             <li id="daily-activities">
-              Add a task with a name, optional description, and duration, or
-              fill it from a saved preset.
+              Add a task with a name, description, and duration, or fill it from
+              a saved preset.
             </li>
             <li>
               Press Shift+N on Timer to open a blank task form when no field or
@@ -150,8 +150,8 @@ export default function TimerDetailsPage() {
               open.
             </li>
             <li>
-              History shows its row count beside Show/Hide, even while the table
-              is hidden.
+              Open History beside Settings to review today’s finished and missed
+              tasks.
             </li>
             <li>
               When you open the page, running tasks come first, followed by

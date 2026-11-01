@@ -1,6 +1,4 @@
-import { Collapsible } from "@base-ui/react/collapsible";
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
 
 import {
   canUseTimer,
@@ -10,37 +8,9 @@ import {
   taskWindowEnd,
 } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
-import { SectionHeading } from "@/components/Section";
-import { SelectField } from "@/components/SelectField";
 import Table from "@/components/Table";
 
 import { useTimer } from "./TimerProvider";
-
-const SORT_OPTIONS = [
-  { value: "reached", label: "Date" },
-  { value: "percentage", label: "Percentage" },
-  { value: "status", label: "Status" },
-  { value: "spent", label: "Spent" },
-];
-
-const ORDER_OPTIONS = {
-  reached: [
-    { value: "desc", label: "Newest" },
-    { value: "asc", label: "Oldest" },
-  ],
-  percentage: [
-    { value: "desc", label: "Highest first" },
-    { value: "asc", label: "Lowest first" },
-  ],
-  status: [
-    { value: "desc", label: "Met first" },
-    { value: "asc", label: "Missed first" },
-  ],
-  spent: [
-    { value: "desc", label: "Longest first" },
-    { value: "asc", label: "Shortest first" },
-  ],
-};
 
 export default function CompletedTasksTable({
   tasks,
@@ -52,10 +22,6 @@ export default function CompletedTasksTable({
   now: number;
 }) {
   const { act, snapshot } = useTimer("act", "snapshot");
-  const [showHistory, setShowHistory] = useState(false);
-  const [sort, setSort] = useState<keyof typeof ORDER_OPTIONS>("reached");
-  const [order, setOrder] = useState("desc");
-  const orderOptions = ORDER_OPTIONS[sort];
   const rows = tasks
     .map((task) => {
       const spent = taskSpent(task, date, now);
@@ -85,79 +51,67 @@ export default function CompletedTasksTable({
         missed,
         closed,
         status,
-        statusOrder: reached ? 2 : Number(!missed),
         reachedTime,
       };
     })
-    .toSorted((first, second) => {
-      const timeOrder = second.reachedTime - first.reachedTime;
-      const direction = order === "desc" ? 1 : -1;
-      if (sort === "percentage") {
-        return (second.percentage - first.percentage) * direction || timeOrder;
-      }
-      if (sort === "spent") {
-        return (second.spent - first.spent) * direction || timeOrder;
-      }
-      if (sort === "status") {
-        return (
-          (second.statusOrder - first.statusOrder) * direction || timeOrder
-        );
-      }
-      return timeOrder * direction;
-    });
+    .toSorted((first, second) => second.reachedTime - first.reachedTime);
   return (
-    <Collapsible.Root
-      open={showHistory}
-      onOpenChange={setShowHistory}
-      render={<section aria-label="History" />}
-      className="space-y-3 lg:group-data-list-view/task-layout:space-y-1.5"
-    >
-      <div className="flex flex-wrap items-start gap-1.5">
-        <SectionHeading as="h3" variant="toolbar">
-          History
-        </SectionHeading>
-        <Collapsible.Trigger className="text-muted hover:text-foreground focus-visible:outline-action cursor-pointer rounded-sm text-base underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2">
-          {showHistory ? "Hide" : "Show"}
-        </Collapsible.Trigger>
-        <span className="text-muted tabular-nums">
-          ({rows.length})<span className="sr-only"> tasks in history</span>
-        </span>
-        <div className="ml-auto flex flex-wrap items-center gap-4">
-          {showHistory ? (
-            <>
-              <div className="[&>div>label]:sr-only">
-                <SelectField
-                  label="Sort by"
-                  options={SORT_OPTIONS}
-                  variant="plain"
-                  value={sort}
-                  onValueChange={(value) => {
-                    if (
-                      value === "reached" ||
-                      value === "percentage" ||
-                      value === "status" ||
-                      value === "spent"
-                    ) {
-                      setSort(value);
-                    }
-                  }}
-                />
+    <div className="min-w-0 space-y-3">
+      <ul
+        className="space-y-3 lg:hidden"
+        aria-label="Completed and missed tasks"
+      >
+        {rows.map(
+          ({ task, spent, percentage, reached, missed, closed, status }) => (
+            <li key={task.id} className="border-border rounded-xl border p-3">
+              <div className="flex items-start justify-between gap-3">
+                <p className="font-medium wrap-anywhere">{task.activity}</p>
+                {!reached && !missed && !closed && (
+                  <button
+                    type="button"
+                    aria-label={`Restore ${task.activity} to active tasks`}
+                    title="Restore task"
+                    disabled={!canUseTimer(snapshot)}
+                    className="text-muted hover:text-foreground focus-visible:outline-action inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-sm focus-visible:outline-2 disabled:opacity-50"
+                    onClick={() => {
+                      void act({ action: "restore", date, taskId: task.id });
+                    }}
+                  >
+                    <ArrowUturnLeftIcon aria-hidden="true" className="size-4" />
+                  </button>
+                )}
               </div>
-              <div className="[&>div>label]:sr-only">
-                <SelectField
-                  label="Order"
-                  options={orderOptions}
-                  variant="plain"
-                  value={order}
-                  onValueChange={setOrder}
-                />
-              </div>
-            </>
-          ) : null}
-        </div>
-      </div>
-      <Collapsible.Panel>
-        <Table className="min-w-190 lg:group-data-list-view/task-layout:w-max lg:group-data-list-view/task-layout:min-w-full">
+              <p className="text-muted mt-1 text-sm wrap-anywhere whitespace-pre-wrap">
+                {task.description.trim() ? task.description : "-"}
+              </p>
+              <dl className="text-muted mt-3 grid grid-cols-2 gap-2 text-sm tabular-nums">
+                <div>
+                  <dt>Spent</dt>
+                  <dd className="text-foreground">{formatTimerTime(spent)}</dd>
+                </div>
+                <div>
+                  <dt>Duration</dt>
+                  <dd className="text-foreground">
+                    {formatTimerTime(task.duration)}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Progress</dt>
+                  <dd className="text-foreground">
+                    {percentage >= 100 ? "100" : percentage.toFixed(0)}%
+                  </dd>
+                </div>
+                <div>
+                  <dt>Status</dt>
+                  <dd className="text-foreground">{status}</dd>
+                </div>
+              </dl>
+            </li>
+          )
+        )}
+      </ul>
+      <div className="hidden lg:block">
+        <Table>
           <caption className="sr-only">
             Completed and missed tasks with descriptions, time spent, total
             duration, progress, and status
@@ -170,7 +124,9 @@ export default function CompletedTasksTable({
               >
                 No
               </th>
-              <th scope="col">Name</th>
+              <th scope="col" className="w-px whitespace-nowrap">
+                Name
+              </th>
               <th scope="col" aria-label="Description">
                 <span className="lg:group-data-list-view/task-layout:hidden">
                   Description
@@ -179,8 +135,14 @@ export default function CompletedTasksTable({
                   Desc
                 </span>
               </th>
-              <th scope="col">Spent</th>
-              <th scope="col" aria-label="Duration">
+              <th scope="col" className="w-px whitespace-nowrap">
+                Spent
+              </th>
+              <th
+                scope="col"
+                aria-label="Duration"
+                className="w-px whitespace-nowrap"
+              >
                 <span className="lg:group-data-list-view/task-layout:hidden">
                   Duration
                 </span>
@@ -188,8 +150,12 @@ export default function CompletedTasksTable({
                   Dur
                 </span>
               </th>
-              <th scope="col">%</th>
-              <th scope="col">Status</th>
+              <th scope="col" className="w-px whitespace-nowrap">
+                %
+              </th>
+              <th scope="col" className="w-px whitespace-nowrap">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody className="divide-border divide-y">
@@ -205,12 +171,12 @@ export default function CompletedTasksTable({
                   <td className="text-center tabular-nums">{index + 1}</td>
                   <th
                     scope="row"
-                    className="max-w-64 min-w-40 px-3 py-2 text-left font-normal wrap-anywhere lg:group-data-list-view/task-layout:min-w-0 lg:group-data-list-view/task-layout:px-2 lg:group-data-list-view/task-layout:py-1.75"
+                    className="px-3 py-2 text-left font-normal whitespace-nowrap"
                   >
                     {task.activity}
                   </th>
-                  <td className="max-w-80 min-w-48 wrap-anywhere whitespace-pre-wrap lg:group-data-list-view/task-layout:min-w-0">
-                    <div className="scrollbar-hide lg:group-data-list-view/task-layout:w-10 lg:group-data-list-view/task-layout:overflow-x-auto lg:group-data-list-view/task-layout:whitespace-pre">
+                  <td className="wrap-anywhere whitespace-pre-wrap">
+                    <div>
                       {task.description.trim() ? (
                         task.description
                       ) : (
@@ -261,7 +227,7 @@ export default function CompletedTasksTable({
             )}
           </tbody>
         </Table>
-      </Collapsible.Panel>
-    </Collapsible.Root>
+      </div>
+    </div>
   );
 }

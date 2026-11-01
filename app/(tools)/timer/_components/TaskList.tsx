@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
 
-import CompletedTasksTable from "./CompletedTasksTable";
 import TaskCard from "./TaskCard";
 import { TASK_LAYOUT } from "./taskPresentation";
 import { getTaskCollection, reconcileTaskOrder } from "./taskState";
@@ -45,7 +44,7 @@ export default function TaskList() {
       </output>
     );
   }
-  const { visible, completed } = getTaskCollection(
+  const { visible } = getTaskCollection(
     snapshot.day.tasks,
     snapshot.today,
     timestamp
@@ -81,15 +80,6 @@ export default function TaskList() {
             </li>
           ))}
         </ul>
-      )}
-      {completed.length > 0 && (
-        <div className="min-w-0">
-          <CompletedTasksTable
-            tasks={completed}
-            date={snapshot.today}
-            now={timestamp}
-          />
-        </div>
       )}
     </div>
   );
