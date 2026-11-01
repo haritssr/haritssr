@@ -48,9 +48,11 @@ export default function useTimerAudio(
       }
     }
     window.addEventListener("pointerdown", resumeAudio);
+    window.addEventListener("click", resumeAudio);
     window.addEventListener("keydown", resumeAudio);
     return () => {
       window.removeEventListener("pointerdown", resumeAudio);
+      window.removeEventListener("click", resumeAudio);
       window.removeEventListener("keydown", resumeAudio);
     };
   }, [ticking]);

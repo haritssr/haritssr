@@ -2,10 +2,23 @@ let taskAudioContext: AudioContext | undefined;
 
 export function prepareTaskSound() {
   try {
+    // A saved ticking preference does not grant audio permission after reload.
+    if (
+      typeof navigator !== "undefined" &&
+      navigator.userActivation !== undefined &&
+      !navigator.userActivation.hasBeenActive
+    ) {
+      return taskAudioContext ?? null;
+    }
+    if (taskAudioContext?.state === "closed") {
+      taskAudioContext = undefined;
+    }
     taskAudioContext ??= new AudioContext();
-    void taskAudioContext.resume().catch(() => {
-      // Audio availability must not interrupt timer controls.
-    });
+    if (taskAudioContext.state !== "running") {
+      void taskAudioContext.resume().catch(() => {
+        // Audio availability must not interrupt timer controls.
+      });
+    }
     return taskAudioContext;
   } catch {
     return null;
