@@ -643,21 +643,7 @@ export default function DesignSystem() {
 
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Box" title="Box">
-                <ul className="grid gap-5 sm:grid-cols-2">
-                  <Box as="li" headingAs="h3" name="Box" title="Exercise title">
-                    <p>Use a heading and list item for exercise cards.</p>
-                  </Box>
-                  <Box
-                    as="li"
-                    headingAs="h3"
-                    name="Box"
-                    title="Another exercise"
-                  >
-                    <p>
-                      Cards stretch to the same height within each grid row.
-                    </p>
-                  </Box>
-                </ul>
+                <div aria-hidden="true" className="h-32" />
               </Box>
             </div>
 
