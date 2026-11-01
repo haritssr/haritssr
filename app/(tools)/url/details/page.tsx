@@ -52,11 +52,14 @@ export default function URLDetailsPage() {
               fragment.
             </li>
             <li>
-              Copy individual path segments, parameter names, or parameter
-              values.
+              Select individual path segments, parameter names, or values.
             </li>
             <li>
               Remove individual parameters or use Remove all and Keep all.
+            </li>
+            <li>
+              Turn on Automatic to remove the query and anything after it as you
+              enter a URL. Adjust the selections if needed.
             </li>
             <li>Choose whether to remove the fragment after the hash sign.</li>
             <li>
@@ -100,10 +103,22 @@ export default function URLDetailsPage() {
                 name="this post by satyaXBT"
                 size="inherit"
               />
-              , and{" "}
+              ,{" "}
               <ExternalLink
                 href="https://x.com/FFBuncho/status/2115633205802090497"
                 name="this post by FFBuncho"
+                size="inherit"
+              />
+              ,{" "}
+              <ExternalLink
+                href="https://x.com/hey_madni/status/2115783112982675862"
+                name="this post by hey_madni"
+                size="inherit"
+              />
+              , and{" "}
+              <ExternalLink
+                href="https://x.com/kettukaa/status/2115602089053458642"
+                name="this post by kettukaa"
                 size="inherit"
               />
               .
@@ -113,8 +128,9 @@ export default function URLDetailsPage() {
               a URL.
             </li>
             <li>
-              All parameters and the fragment stay included until you select
-              them for removal.
+              With Automatic off, all parameters and the fragment stay included
+              until you select them for removal. Turning the switch off resets
+              the removal selections.
             </li>
             <li>
               Repeated parameters can be removed individually, and retained

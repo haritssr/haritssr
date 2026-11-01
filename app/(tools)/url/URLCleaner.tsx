@@ -13,6 +13,7 @@ import { cleanURL, parseURL } from "./urlParts";
 export default function URLCleaner() {
   const { add } = Toast.useToastManager();
   const [input, setInput] = useState("");
+  const [automatic, setAutomatic] = useState(false);
   const [removed, setRemoved] = useState(() => new Set<number>());
   const [removeFragment, setRemoveFragment] = useState(false);
   const [feedback, setFeedback] = useState("");
@@ -20,9 +21,23 @@ export default function URLCleaner() {
   const result = cleanURL(parsed, removed, removeFragment);
 
   function changeInput(value: string) {
+    const next = parseURL(value);
     setInput(value);
-    setRemoved(new Set());
-    setRemoveFragment(false);
+    setRemoved(
+      new Set(automatic && next ? next.parameters.map((_, index) => index) : [])
+    );
+    setRemoveFragment(automatic && next?.query !== null && !!next);
+    setFeedback("");
+  }
+
+  function changeAutomatic(checked: boolean) {
+    setAutomatic(checked);
+    setRemoved(
+      new Set(
+        checked && parsed ? parsed.parameters.map((_, index) => index) : []
+      )
+    );
+    setRemoveFragment(checked && !!parsed && parsed.query !== null);
     setFeedback("");
   }
 
@@ -70,19 +85,13 @@ export default function URLCleaner() {
       <URLInput
         value={input}
         invalid={input.trim() !== "" && !parsed}
+        automatic={automatic}
+        onAutomaticChange={changeAutomatic}
         onChange={changeInput}
       />
       {parsed ? (
         <>
-          <URLInspection
-            parsed={parsed}
-            removed={removed}
-            removeFragment={removeFragment}
-            onRemovedChange={changeRemoved}
-            onParameterChange={changeParameter}
-            onFragmentChange={changeFragment}
-          />
-          <Section title="Cleaned URL">
+          <Section title="Result">
             <div className="flex flex-col gap-3">
               <textarea
                 aria-label="Cleaned URL"
@@ -104,6 +113,14 @@ export default function URLCleaner() {
               </div>
             </div>
           </Section>
+          <URLInspection
+            parsed={parsed}
+            removed={removed}
+            removeFragment={removeFragment}
+            onRemovedChange={changeRemoved}
+            onParameterChange={changeParameter}
+            onFragmentChange={changeFragment}
+          />
         </>
       ) : null}
     </div>

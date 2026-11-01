@@ -8,24 +8,13 @@ import Button from "@/components/Button";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
 
-import CompactCopyButton from "./CompactCopyButton";
 import { parameterLabel } from "./urlParts";
 import type { ParsedURL } from "./urlParts";
 
-function CopyCell({ value, label }: { value: string; label: string }) {
+function ValueCell({ value }: { value: string }) {
   return (
-    <td className="group/cell text-muted relative py-2 pr-2 pl-3 align-middle font-normal">
-      <div className="flex min-h-6 items-center pr-22">
-        <span className="min-w-0 flex-1 wrap-anywhere">
-          {value || "(empty value)"}
-        </span>
-        <CompactCopyButton
-          key={value}
-          value={value}
-          label={label}
-          className="pointer-events-none absolute top-2 right-2 opacity-0 group-focus-within/cell:pointer-events-auto group-focus-within/cell:opacity-100 group-hover/cell:pointer-events-auto group-hover/cell:opacity-100 [@media(hover:none)]:pointer-events-auto [@media(hover:none)]:opacity-100"
-        />
-      </div>
+    <td className="text-muted px-3 py-2 align-middle font-normal wrap-anywhere">
+      {value || "(empty value)"}
     </td>
   );
 }
@@ -80,39 +69,7 @@ export default function URLInspection({
     : [];
 
   return (
-    <div className="space-y-12">
-      {hierarchy.length ? (
-        <Section title="Hierarchy" className="min-w-0">
-          <Table aria-label="URL path hierarchy">
-            <thead>
-              <tr className="divide-border bg-foreground/5 divide-x">
-                <th
-                  scope="col"
-                  className="w-px px-3 text-left font-medium whitespace-nowrap"
-                >
-                  Level
-                </th>
-                <th scope="col" className="px-3 text-left font-medium">
-                  Path
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-border divide-y">
-              {hierarchy.map((path, index) => (
-                <tr key={`${index}:${path}`} className="divide-border divide-x">
-                  <td className="text-muted px-3 py-2 align-middle">
-                    {index + 1}
-                  </td>
-                  <CopyCell
-                    value={path}
-                    label={`Hierarchy ${index + 1} path`}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Section>
-      ) : null}
+    <div className="grid gap-12 lg:grid-cols-2">
       <Section title="Parameters" className="min-w-0">
         {parsed.parameters.length ? (
           <div className="flex flex-col gap-3">
@@ -170,11 +127,8 @@ export default function URLInspection({
                           }}
                         />
                       </td>
-                      <CopyCell value={parameter.name} label="Parameter name" />
-                      <CopyCell
-                        value={parameter.value}
-                        label="Parameter value"
-                      />
+                      <ValueCell value={parameter.name} />
+                      <ValueCell value={parameter.value} />
                     </tr>
                   );
                 })}
@@ -185,7 +139,7 @@ export default function URLInspection({
           <p className="text-muted">This URL has no query parameters.</p>
         )}
       </Section>
-      <Section title="Fragment">
+      <Section title="Fragment" className="min-w-0">
         {parsed.fragment ? (
           <div className="flex min-w-0 items-center gap-3">
             <RemovalCheckbox
@@ -203,6 +157,35 @@ export default function URLInspection({
           <p className="text-muted">This URL has no fragment.</p>
         )}
       </Section>
+      {hierarchy.length ? (
+        <Section title="Hierarchy" className="w-fit max-w-full min-w-0">
+          <Table aria-label="URL path hierarchy">
+            <thead>
+              <tr className="divide-border bg-foreground/5 divide-x">
+                <th
+                  scope="col"
+                  className="w-px px-3 text-left font-medium whitespace-nowrap"
+                >
+                  Level
+                </th>
+                <th scope="col" className="px-3 text-left font-medium">
+                  Path
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-border divide-y">
+              {hierarchy.map((path, index) => (
+                <tr key={`${index}:${path}`} className="divide-border divide-x">
+                  <td className="text-muted px-3 py-2 align-middle">
+                    {index + 1}
+                  </td>
+                  <ValueCell value={path} />
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Section>
+      ) : null}
     </div>
   );
 }

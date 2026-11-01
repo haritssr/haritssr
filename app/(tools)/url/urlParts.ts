@@ -14,7 +14,7 @@ export function normalizePastedURL(input: string) {
   ) {
     return source.slice(1, -1).trim();
   }
-  return input;
+  return source;
 }
 
 export function parseURL(input: string) {

@@ -1,5 +1,6 @@
 "use client";
 
+import { Switch } from "@base-ui/react/switch";
 import { useCallback, useRef } from "react";
 
 import CompactCopyButton from "./CompactCopyButton";
@@ -17,10 +18,14 @@ function resizeURLField(field: HTMLTextAreaElement) {
 export default function URLInput({
   value,
   invalid,
+  automatic,
+  onAutomaticChange,
   onChange,
 }: {
   value: string;
   invalid: boolean;
+  automatic: boolean;
+  onAutomaticChange: (checked: boolean) => void;
   onChange: (value: string) => void;
 }) {
   const fieldRef = useRef<HTMLTextAreaElement | null>(null);
@@ -58,7 +63,7 @@ export default function URLInput({
         <textarea
           id="source-url"
           ref={sourceRef}
-          className={`${URL_FIELD_CLASS_NAME} pr-40`}
+          className={URL_FIELD_CLASS_NAME}
           rows={1}
           spellCheck={false}
           autoCapitalize="none"
@@ -89,26 +94,48 @@ export default function URLInput({
             onChange(field.value);
           }}
         />
-        <p
-          id="url-example"
-          className="text-muted/80 mt-2 text-sm wrap-anywhere"
-        >
-          Example:
-          https://docs.example.com:8443/guides/setup?lang=en&amp;view=compact#install
-        </p>
-        {value ? (
-          <div className="absolute top-[7px] right-[7px] flex items-center gap-1.5">
-            <button
-              type="button"
-              aria-label="Clear URL"
-              className="text-foreground bg-foreground/5 hover:bg-foreground/10 focus-visible:outline-action cursor-pointer rounded-md px-1.5 py-0.5 text-sm focus-visible:outline-2"
-              onClick={clear}
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+          <p
+            id="url-example"
+            className="text-muted/80 min-w-0 text-sm break-all"
+          >
+            <span className="select-none">Example: </span>
+            https://docs.example.com:8443/guides/setup?lang=en&amp;view=compact#install
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <label
+              htmlFor="automatic-parse"
+              className="flex shrink-0 cursor-pointer items-center gap-2 text-sm"
             >
-              Clear
-            </button>
-            <CompactCopyButton key={value} value={value} label="Original URL" />
+              Automatic
+              <Switch.Root
+                id="automatic-parse"
+                checked={automatic}
+                onCheckedChange={onAutomaticChange}
+                className="focus-visible:outline-action data-checked:bg-action bg-border block w-11 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2"
+              >
+                <Switch.Thumb className="bg-surface block h-4 w-4 rounded-full transition-transform duration-100 data-checked:translate-x-5" />
+              </Switch.Root>
+            </label>
+            {value ? (
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  aria-label="Clear URL"
+                  className="text-foreground bg-foreground/5 hover:bg-foreground/10 focus-visible:outline-action cursor-pointer rounded-md px-1.5 py-0.5 text-sm focus-visible:outline-2"
+                  onClick={clear}
+                >
+                  Clear
+                </button>
+                <CompactCopyButton
+                  key={value}
+                  value={value}
+                  label="Original URL"
+                />
+              </div>
+            ) : null}
           </div>
-        ) : null}
+        </div>
       </div>
       {invalid ? (
         <p id="url-help" className="text-danger text-sm">
