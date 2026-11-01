@@ -58,6 +58,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   TOC Sheet and supporting controls.
 - Use `Section`, `PageHeader`, and `PageTitle` for page layouts. Keep lab
   interactive content full width and render mathematics through `@/utils/katexify`.
+- Write concise page and card descriptions, aiming for around 10 words when a
+  description helps. Prioritize clarity over the count and let text wrap naturally;
+  do not truncate it to force a particular number of lines.
 - Keep route-specific code beside its page, feature-shared code in `_components/`,
   and site-wide UI in `components/`. Register labs in `app/labs/data.ts`.
 - Each tool needs a Details page. Read `app/(tools)/<tool>/details/page.tsx` and
