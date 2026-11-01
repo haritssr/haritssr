@@ -50,6 +50,34 @@ export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
     duration: 1200,
     availabilityWindow: null,
   },
+  {
+    id: "daily:working-1",
+    activity: "Working #1",
+    description: "",
+    duration: 5400,
+    availabilityWindow: null,
+  },
+  {
+    id: "daily:working-2",
+    activity: "Working #2",
+    description: "",
+    duration: 5400,
+    availabilityWindow: null,
+  },
+  {
+    id: "daily:working-3",
+    activity: "Working #3",
+    description: "",
+    duration: 5400,
+    availabilityWindow: null,
+  },
+  {
+    id: "daily:working-4",
+    activity: "Working #4",
+    description: "",
+    duration: 5400,
+    availabilityWindow: null,
+  },
 ];
 
 export function isDailyTask(task: Pick<TimerTask, "id">) {

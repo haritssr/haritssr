@@ -45,7 +45,7 @@ export const DEFAULT_DURATION_PRESETS = [300, 900, 1800, 3600];
 export const DEFAULT_TASK_PRESETS: TimerTaskPreset[] = [
   {
     id: "x-traversal",
-    activity: "X Traversal",
+    activity: "X",
     description: "bookmarks, for you tab",
     duration: 3600,
   },
@@ -294,7 +294,7 @@ function createTimerDay(date: string): TimerDay {
     tasks: [
       {
         id: "daily-x",
-        activity: "X Traversal",
+        activity: "X",
         description: "x bookmarks doom scrolling",
         duration: 3600,
       },
