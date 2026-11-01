@@ -12,7 +12,7 @@ import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 const relationships = `flowchart TD
   accTitle: URL inspection and cleaning
-  accDescr: URLCleaner keeps the entered URL and removal choices in browser memory. parseURL validates and separates the URL, parameterLabel decodes labels for display, and cleanURL combines the retained raw parts. Copy controls write the chosen text to the clipboard.
+  accDescr: URLInput handles entry, paste normalization, and clearing. URLCleaner keeps the entered URL and removal choices in browser memory, parsing the URL once per render. URLInspection displays the path, parameters, and fragment. parameterLabel decodes labels for display, and cleanURL combines retained raw parts from the parsed URL. Copy controls write the chosen text to the clipboard.
   Input["Entered URL"] --> Parse["parseURL: validate and separate parts"]
   Parse --> View["Inspect the path, parameters, and fragment"]
   View --> Choices["Choose parameters and fragment to remove"]

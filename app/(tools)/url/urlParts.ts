@@ -19,7 +19,13 @@ export function normalizePastedURL(input: string) {
 
 export function parseURL(input: string) {
   const source = input.trim();
-  if (!source || !URL.canParse(source)) {
+  if (!source) {
+    return null;
+  }
+  let url: URL;
+  try {
+    url = new URL(source);
+  } catch {
     return null;
   }
   const hashIndex = source.indexOf("#");
@@ -31,15 +37,17 @@ export function parseURL(input: string) {
     fragment: hashIndex === -1 ? "" : source.slice(hashIndex),
     query,
     parameters: query === null ? [] : query.split("&"),
+    pathname: url.pathname,
   };
 }
 
+export type ParsedURL = NonNullable<ReturnType<typeof parseURL>>;
+
 export function cleanURL(
-  input: string,
+  parsed: ParsedURL | null,
   removed: ReadonlySet<number>,
   removeFragment: boolean
 ) {
-  const parsed = parseURL(input);
   if (!parsed) {
     return "";
   }
