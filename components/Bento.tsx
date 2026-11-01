@@ -37,7 +37,7 @@ export default function Bento({
       ) : (
         <Dialog.Trigger
           data-bento-trigger=""
-          className={`text-foreground/90 focus-visible:outline-action flex max-w-full cursor-pointer items-center justify-between gap-3 py-1.5 pr-1.5 pl-4 text-left font-medium focus-visible:outline-2 focus-visible:outline-offset-2 ${shape === "squircle" ? "corner-squircle rounded-2xl" : "rounded-full"} ${variant === "contained" ? "bg-middle-hover" : "bg-interface-hover"} ${(width ?? (variant === "contained" ? "full" : "fit")) === "full" ? "w-full" : "w-fit"}`}
+          className={`text-foreground/90 focus-visible:outline-action flex max-w-full cursor-pointer items-center justify-between gap-2 py-1.5 pr-1.5 pl-4 text-left font-medium focus-visible:outline-2 focus-visible:outline-offset-2 ${shape === "squircle" ? "corner-squircle rounded-2xl" : "rounded-full"} ${variant === "contained" ? "bg-middle-hover" : "bg-interface-hover"} ${(width ?? (variant === "contained" ? "full" : "fit")) === "full" ? "w-full" : "w-fit"}`}
         >
           <span>{title}</span>
           <span
