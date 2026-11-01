@@ -6,7 +6,6 @@ import { Switch } from "@base-ui/react/switch";
 import {
   BellAlertIcon,
   ForwardIcon,
-  ListBulletIcon,
   SpeakerWaveIcon,
   Square3Stack3DIcon,
 } from "@heroicons/react/24/outline";
@@ -117,16 +116,12 @@ function TimerSettingsControls() {
     setNotificationsEnabled,
     autoplay,
     setAutoplay,
-    desktopListView,
-    setDesktopListView,
   } = useTimer(
     "snapshot",
     "notificationsEnabled",
     "setNotificationsEnabled",
     "autoplay",
-    "setAutoplay",
-    "desktopListView",
-    "setDesktopListView"
+    "setAutoplay"
   );
   const { tickingEnabled, setTickingEnabled } = useTimerTicking();
   const [permissionFailed, setPermissionFailed] = useState(false);
@@ -190,20 +185,6 @@ function TimerSettingsControls() {
         checked={tickingEnabled}
         onCheckedChange={setTickingEnabled}
       />
-      <div className="hidden lg:block">
-        <TimerSettingSwitch
-          label="List View"
-          title="Show horizontal task rows on screens 640px and wider"
-          icon={
-            <ListBulletIcon aria-hidden="true" className="size-4.5 stroke-2" />
-          }
-          disabled={!canUseTimer(snapshot)}
-          checked={desktopListView}
-          onCheckedChange={(next) => {
-            void setDesktopListView(next);
-          }}
-        />
-      </div>
     </div>
   );
 }

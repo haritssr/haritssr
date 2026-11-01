@@ -36,22 +36,30 @@ export default function TaskCardView({
     <div
       data-completed={reached || undefined}
       data-late={state.deadlineWarning === "late" || undefined}
-      className={`group/task text-foreground data-late:border-danger data-late:to-danger/10 min-w-0 flex-1 select-none sm:group-data-list-view/task-list:py-2 sm:group-data-list-view/task-list:pr-2 sm:@md/task-list:group-data-list-view/task-list:grid sm:@md/task-list:group-data-list-view/task-list:grid-cols-[minmax(0,1fr)_minmax(20rem,1fr)] sm:@md/task-list:group-data-list-view/task-list:items-center sm:@md/task-list:group-data-list-view/task-list:gap-6 lg:@md/task-list:group-data-list-view/task-list:grid-cols-2 ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${className}`}
+      className={`group/task text-foreground min-w-0 flex-1 select-none ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${className}`}
     >
-      <div className="flex min-w-0 items-center justify-between gap-3">
-        <p
-          className="text-foreground min-w-0 truncate text-lg font-medium sm:group-data-list-view/task-list:text-base"
-          title={task.activity}
-        >
-          {task.activity}
-        </p>
-        <div className="flex shrink-0 items-center gap-2 sm:group-data-list-view/task-list:gap-3">
-          {headerActions}
+      <div className="flex min-w-0 items-center justify-between gap-3 sm:flex-1">
+        <div className="min-w-0">
+          <p
+            className="text-foreground truncate text-base font-medium"
+            title={task.activity}
+          >
+            {task.activity}
+          </p>
+          {task.description.trim() !== "" && (
+            <p
+              className="text-foreground/50 hidden truncate text-xs font-normal sm:block"
+              title={task.description}
+            >
+              {task.description}
+            </p>
+          )}
         </div>
+        <div className="flex shrink-0 items-center gap-2">{headerActions}</div>
       </div>
       {children}
       <div
-        className={`min-w-0 group-data-completed/task:*:opacity-60 sm:group-data-list-view/task-list:mt-0 lg:group-data-list-view/task-list:gap-4 ${TASK_LAYOUT.controls}`}
+        className={`min-w-0 group-data-completed/task:*:opacity-60 sm:mt-0 sm:w-1/2 ${TASK_LAYOUT.controls}`}
       >
         <div className="min-w-0">
           <TaskProgress

@@ -27,11 +27,10 @@ export default function TaskList() {
     date: string;
     ids: string[];
   } | null>(null);
-  const { snapshot, clockOffset, error, desktopListView } = useTimer(
+  const { snapshot, clockOffset, error } = useTimer(
     "snapshot",
     "clockOffset",
-    "error",
-    "desktopListView"
+    "error"
   );
   const timestamp = useTimerClock(snapshot, clockOffset);
   if (snapshot === undefined) {
@@ -62,15 +61,11 @@ export default function TaskList() {
     return entry === undefined ? [] : [entry];
   });
   return (
-    <div
-      data-list-view={desktopListView || undefined}
-      className="group/task-layout min-w-0 space-y-10 data-list-view:lg:grid data-list-view:lg:grid-cols-4 data-list-view:lg:items-start data-list-view:lg:gap-8 data-list-view:lg:space-y-0"
-    >
+    <div className="min-w-0 space-y-10">
       {visible.length > 0 && (
         <ul
           aria-label="Today's activities"
-          data-list-view={desktopListView || undefined}
-          className={`group/task-list @container/task-list min-w-0 ${TASK_LAYOUT.collection} data-list-view:sm:grid-cols-1 data-list-view:sm:gap-3 data-list-view:lg:col-span-2 data-list-view:lg:grid-cols-1`}
+          className={`min-w-0 md:w-3/5 ${TASK_LAYOUT.collection}`}
         >
           {orderedVisible.map(({ task, state }) => (
             <li
@@ -88,7 +83,7 @@ export default function TaskList() {
         </ul>
       )}
       {completed.length > 0 && (
-        <div className="min-w-0 lg:group-data-list-view/task-layout:col-span-2 lg:group-data-list-view/task-layout:col-start-3">
+        <div className="min-w-0">
           <CompletedTasksTable
             tasks={completed}
             date={snapshot.today}

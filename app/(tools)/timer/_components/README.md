@@ -42,7 +42,7 @@ its mounted portal. Only Add shows the Preset task buttons, arranged in two colu
 Duration. Selecting one fills Name, Description, and all duration units without
 submitting or closing. Add creates the task; Cancel and dismissal add nothing.
 Matching field values determine the selected task preset styling. Defaults include
-X Traversal (1h), YouTube (2h), House Keeping (1h), Short Break (10m),
+X (1h), YouTube (2h), House Keeping (1h), Short Break (10m),
 Long Break (30m), and Orientation (30m). The three new presets have empty
 descriptions; existing saved lists retain their configured entries. Duration labels
 use compact h, m, and s units. In that file, `TaskNameField`, `TaskDescriptionField`, and `TaskFormActions`
@@ -72,39 +72,18 @@ Card text uses `select-none`. Newly added cards briefly pulse around their edge;
 the pulse is disabled for reduced motion and does not replay on page load.
 
 The header places the title on the left and a Pencil Square edit button on the right.
-Cards use two columns from `sm` and three from `lg`. Below the header, time and progress fill the space beside the circular actions, with `gap-2` matching the gap between buttons. The time row shows elapsed time and negative remaining time.
-Tasks advance by one second per real second.
-List View defaults off and syncs through the preference queue. `TaskList`
-subscribes to `desktopListView` and sets a collection data attribute. When enabled,
-the collection stays one column at every size. From `lg` (1024px), a four-column
-grid with `gap-8` places the list in the first two columns and History in the
-last two; below `lg` both use the full width. When the list is at least 28rem wide, `TaskCardView`
-places the header and controls side by side, vertically centered with `gap-6`.
-Below `lg`, the columns reserve at least 20rem for time and actions. From `lg`,
-the header and controls use an equal split. Progress fills the space beside the
-buttons with `gap-4`, so bars align across cards. Narrower list cards stack their content to
-avoid clipping.
-List-view task names and time text use `text-base` and `text-xs` respectively.
-In this horizontal layout, task action buttons use the usual circular styling
-at `size-8`; mobile cards retain their 40px targets.
-Below `sm`, card layout is unchanged. Named group variants let cards respond to
-the collection attribute without changing their memoized props. The floating
-player retains its layout.
+Cards form one column. Their title and controls stack on mobile and sit side by side from `sm` with `gap-3`. The time row shows elapsed time and negative remaining time. Tasks advance by one second per real second.
 Unavailable Done controls are dimmed and have no hover effect or tooltip.
 Tasks with an availability window show a `size-5` danger warning before Edit
 when remaining duration plus a ten-minute buffer reaches the closing time.
 The icon pulses only when reduced motion is off. Running tasks that can finish
-on time suppress the warning; late running tasks still warn. When a task cannot
-finish before its window closes, its card also gets a danger border and subtle
-danger tint in grid and list views. Finished tasks and
-closed windows clear it. `timerDeadline.ts` shares eligibility and next boundaries
+on time suppress the warning; late running tasks still warn. Finished tasks and closed windows clear the warning. `timerDeadline.ts` shares eligibility and next boundaries
 between the card state, display clock, reminder scheduler, and server claim.
 Other personal timer actions and Multitask keep their opacity while unavailable;
 preview controls remain dimmed. Saves do not
 block unrelated controls or rapid task actions.
 
-Completed and missed tasks appear in `CompletedTasksTable` beside the list from
-`lg` when List View is enabled, and below the tasks otherwise.
+Completed and missed tasks appear in `CompletedTasksTable` below the tasks.
 The section defaults collapsed at every size. Hide collapses the sort controls
 and table; Show reveals them again. The row count stays visible after Show/Hide.
 The expanded table wraps task names and descriptions and
@@ -301,8 +280,7 @@ Export and Import share a segmented group beside the secondary Settings button.
 Export and Import show icons on smaller screens and icons with labels from 1024px;
 Settings remains icon-only. The controls have accessible names.
 These controls sit beside Add Task.
-Settings contains Alerts, Autoplay, Multitask, Sound, and List View controls.
-The List View control appears at 1024px and wider.
+Settings contains Alerts, Autoplay, Multitask, and Sound controls.
 The Settings modal also contains the preset editors. Its header has the centered Settings title and a secondary Done button. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
 their section Save buttons. The

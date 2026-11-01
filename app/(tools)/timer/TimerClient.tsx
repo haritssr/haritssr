@@ -8,7 +8,7 @@ import TimerToolbar from "./_components/TimerToolbar";
 export default function TimerClient() {
   return (
     <TimerSettingsScope>
-      <div className="space-y-4">
+      <div className="space-y-6">
         <TimerDataControls>
           {(backupActions) => <TimerToolbar backupActions={backupActions} />}
         </TimerDataControls>

@@ -90,10 +90,8 @@ export default function TimerDetailsPage() {
             </li>
             <li>Save your own duration and task presets.</li>
             <li>
-              Enable List View in Settings at 1024px and wider for one column of
-              task cards. At that width, the task list and History each occupy
-              half the available width. Cards use horizontal layouts when the
-              list has enough space.
+              Task cards stack on mobile and show their controls beside the
+              title on larger screens.
             </li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or
@@ -120,10 +118,6 @@ export default function TimerDetailsPage() {
             <li>
               Only the site owner can sign in to manage personal tasks; visitors
               can explore read-only examples.
-            </li>
-            <li>
-              List View defaults off and syncs with your account. Turn it off to
-              restore the responsive card grid.
             </li>
             <li>
               Deadline warnings clear while a running task can finish on time,
@@ -197,6 +191,11 @@ export default function TimerDetailsPage() {
               connected; ticking sounds stay local to each browser.
             </li>
             <li>
+              After a refresh, your browser may require a click, tap, or key
+              press before ticking sounds resume. The countdown continues
+              independently of sound.
+            </li>
+            <li>
               Saving needs a connection; failed saves restore confirmed data and
               keep form drafts available for retry.
             </li>
@@ -242,10 +241,10 @@ export default function TimerDetailsPage() {
                       devices.
                     </li>
                     <li>
-                      Preferences store Autoplay, Multitask, List View,
-                      notifications, presets, and JSON daily definitions, while
-                      database triggers maintain daily totals. Migration leaves
-                      existing task availability NULL; no new table is needed.
+                      Preferences store Autoplay, Multitask, notifications,
+                      presets, and JSON daily definitions, while database
+                      triggers maintain daily totals. Migration leaves existing
+                      task availability NULL; no new table is needed.
                     </li>
                     <li>
                       Revisions protect concurrent changes, and completion

@@ -14,8 +14,8 @@ export default function TimerToolbar({
 }) {
   const { snapshot } = useTimer("snapshot");
   return (
-    <div className="flex w-full flex-wrap items-end gap-2 sm:gap-3">
-      <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-3">
+    <div className="flex w-full flex-wrap items-end gap-3">
+      <div className="flex min-w-0 flex-wrap items-center gap-3">
         <AddTask disabled={!canUseTimer(snapshot)} />
         {backupActions}
         <TimerSettingsTrigger
