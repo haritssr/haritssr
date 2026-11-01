@@ -1,7 +1,7 @@
 .sheet {
   width: 100%;
-  height: 90dvh;
-  max-height: calc(var(--visual-viewport-height, 100dvh) * 0.9);
+  height: 60dvh;
+  max-height: calc(var(--visual-viewport-height, 100dvh) * 0.6);
   flex-shrink: 0;
   padding-bottom: env(safe-area-inset-bottom);
 }

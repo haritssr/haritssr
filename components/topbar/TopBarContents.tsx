@@ -3,6 +3,7 @@
 import { Popover } from "@base-ui/react/popover";
 import { Bars3BottomRightIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { SheetTrigger } from "react-aria-components/Sheet";
 
@@ -13,6 +14,7 @@ import {
   TOP_BAR_CAPSULE_CLASS_NAME,
   topBarActionClassName,
 } from "./TopBarAction";
+import TopBarActions from "./TopBarActions";
 
 const ContentsPanel = dynamic(
   async () => await import("../article/ArticleContentsPanel")
@@ -22,11 +24,16 @@ export default function TopBarContents({
   outline,
   navigation,
   topBarHeight,
+  pathname,
+  onSearch,
 }: {
   outline: ArticleOutline;
   navigation: ReturnType<typeof useArticleContentsNavigation>;
   topBarHeight: number;
+  pathname: string;
+  onSearch: () => void;
 }) {
+  const mobileContentRef = useRef<HTMLDivElement>(null);
   const {
     desktop,
     open,
@@ -54,6 +61,17 @@ export default function TopBarContents({
       finalFocus={finalFocus}
       sheetRef={sheetRef}
       onSelect={selectEntry}
+      mobileContentRef={mobileContentRef}
+      mobileActions={
+        desktop ? undefined : (
+          <TopBarActions
+            pathname={pathname}
+            layout="sheet"
+            onSearch={onSearch}
+            accountPortalContainer={mobileContentRef}
+          />
+        )
+      }
     />
   ) : null;
 

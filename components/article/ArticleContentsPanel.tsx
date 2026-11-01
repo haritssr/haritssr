@@ -4,7 +4,7 @@ import { Popover } from "@base-ui/react/popover";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { memo } from "react";
-import type { MouseEvent, Ref } from "react";
+import type { MouseEvent, ReactNode, Ref, RefObject } from "react";
 import { Button as AriaButton } from "react-aria-components/Button";
 import { Heading } from "react-aria-components/Heading";
 import {
@@ -113,6 +113,8 @@ export default function ArticleContentsPanel({
   onSelect,
   sheetRef,
   topBarHeight,
+  mobileActions,
+  mobileContentRef,
 }: Pick<ContentsListProps, "onSelect"> & {
   topBarHeight: number;
   desktop: boolean;
@@ -120,6 +122,8 @@ export default function ArticleContentsPanel({
   outline: ArticleOutline;
   finalFocus: () => false | HTMLElement | null;
   sheetRef: Ref<HTMLDivElement>;
+  mobileActions?: ReactNode;
+  mobileContentRef?: RefObject<HTMLDivElement | null>;
 }) {
   const activeId = useActiveArticleSection(outline, open, topBarHeight);
   const closeIcon = (
@@ -148,7 +152,13 @@ export default function ArticleContentsPanel({
         {desktop ? (
           <Popover.Close
             aria-label="Close contents"
-            render={<Button size="icon-circle-contents" variant="secondary" />}
+            render={
+              <Button
+                className="size-7! p-0! [&>svg]:size-4!"
+                size="icon-circle-contents"
+                variant="secondary"
+              />
+            }
           >
             {closeIcon}
           </Popover.Close>
@@ -180,8 +190,7 @@ export default function ArticleContentsPanel({
       </nav>
     </>
   );
-  const appearance =
-    "text-foreground flex flex-col overflow-hidden outline-hidden";
+  const appearance = "text-foreground flex flex-col outline-hidden";
 
   if (desktop) {
     return (
@@ -195,7 +204,7 @@ export default function ArticleContentsPanel({
           sideOffset={12}
         >
           <Popover.Popup
-            className={`${styles.popover} ${appearance} floating-material rounded-xl`}
+            className={`${styles.popover} ${appearance} floating-material overflow-hidden rounded-xl`}
             finalFocus={finalFocus}
           >
             {content}
@@ -214,8 +223,18 @@ export default function ArticleContentsPanel({
       <Sheet
         className={`${styles.sheet} ${appearance} corner-squircle border-border border-hairline bg-background shadow-foreground/10 rounded-t-lg shadow-lg supports-[corner-shape:squircle]:rounded-t-2xl`}
       >
-        <SheetContent className="flex min-h-0 flex-col outline-hidden">
-          {content}
+        <SheetContent
+          ref={mobileContentRef}
+          className="relative flex min-h-0 flex-1 flex-col outline-hidden"
+        >
+          {mobileActions !== undefined && mobileActions !== null ? (
+            <div className="absolute bottom-full left-1/2 mb-3 -translate-x-1/2">
+              {mobileActions}
+            </div>
+          ) : null}
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-t-lg supports-[corner-shape:squircle]:rounded-t-2xl">
+            {content}
+          </div>
         </SheetContent>
       </Sheet>
     </SheetOverlay>

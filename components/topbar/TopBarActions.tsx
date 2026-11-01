@@ -1,6 +1,7 @@
 "use client";
 
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
+import type { RefObject } from "react";
 
 import { showsMobileNavigation } from "@/utils/navigation/navigationState";
 import pageSourceUrl from "@/utils/navigation/pageSourceUrl";
@@ -17,24 +18,27 @@ export default function TopBarActions({
   pathname,
   onSearch,
   layout = "pill",
+  accountPortalContainer,
 }: {
   pathname: string;
-  layout?: "pill" | "list";
+  layout?: "pill" | "list" | "sheet";
+  accountPortalContainer?: RefObject<HTMLElement | null>;
   onSearch?: (trigger: HTMLButtonElement) => void;
 }) {
   const list = layout === "list";
+  let className = `${TOP_BAR_CAPSULE_CLASS_NAME} lg:gap-0.75`;
+  if (list) {
+    className = "flex flex-col p-1";
+  } else if (layout === "sheet") {
+    className =
+      "bg-background border-border border-hairline shadow-foreground/10 flex w-fit items-center gap-1 rounded-full p-1 shadow-lg [corner-shape:round]";
+  }
 
   return (
-    <div
-      className={
-        list ? "flex flex-col p-1" : `${TOP_BAR_CAPSULE_CLASS_NAME} lg:gap-0.75`
-      }
-    >
+    <div className={className}>
       <TopBarSearch
         className={
-          !list && showsMobileNavigation(pathname)
-            ? "hidden lg:flex"
-            : undefined
+          showsMobileNavigation(pathname) ? "hidden lg:flex" : undefined
         }
         onSearch={onSearch}
         showLabel={list}
@@ -55,7 +59,10 @@ export default function TopBarActions({
         {list ? <span>View Source</span> : null}
       </a>
       <div className={list ? "w-full" : "flex shrink-0 items-center"}>
-        <TopBarAccount showLabel={list} />
+        <TopBarAccount
+          showLabel={list}
+          portalContainer={accountPortalContainer}
+        />
       </div>
     </div>
   );

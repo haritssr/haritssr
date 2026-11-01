@@ -3,12 +3,19 @@
 import { Menu } from "@base-ui/react/menu";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import type { RefObject } from "react";
 
 import { useTimerSession } from "@/utils/timerSession";
 
 import { topBarActionClassName } from "./TopBarAction";
 
-export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
+export default function TopBarAccount({
+  showLabel,
+  portalContainer,
+}: {
+  showLabel: boolean;
+  portalContainer?: RefObject<HTMLElement | null>;
+}) {
   const { data } = useTimerSession();
   const [failedPicture, setFailedPicture] = useState<string | null>(null);
   const account = data?.account;
@@ -66,7 +73,7 @@ export default function TopBarAccount({ showLabel }: { showLabel: boolean }) {
         {icon}
         {showLabel ? <span>{label}</span> : null}
       </Menu.Trigger>
-      <Menu.Portal>
+      <Menu.Portal container={portalContainer}>
         <Menu.Positioner
           align="end"
           sideOffset={12}

@@ -28,8 +28,8 @@ function isVisible(heading: HTMLElement, article: HTMLElement) {
     return false;
   }
 
-  // Modal isolation can mark the article itself aria-hidden while the TOC is
-  // open. Keep its outline, but still exclude hidden content within the article.
+  // Modal isolation can mark the article or its descendants aria-hidden.
+  // Keep its outline during Base UI isolation, while excluding hidden content.
   for (
     let ancestor: HTMLElement | null = heading;
     ancestor !== null && article.contains(ancestor);
@@ -39,7 +39,9 @@ function isVisible(heading: HTMLElement, article: HTMLElement) {
       ancestor.matches(
         'dialog, .sr-only, [hidden], [data-toc-ignore], [role="dialog"], [role="alertdialog"]'
       ) ||
-      (ancestor !== article && ancestor.getAttribute("aria-hidden") === "true")
+      (ancestor !== article &&
+        ancestor.getAttribute("aria-hidden") === "true" &&
+        !Object.hasOwn(ancestor.dataset, "baseUiInert"))
     ) {
       return false;
     }

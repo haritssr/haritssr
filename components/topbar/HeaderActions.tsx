@@ -52,24 +52,35 @@ function NestedHeaderActions({
 
   return (
     <div className={GROUP_CLASS}>
-      <TopBarActionMenu
-        compact={compact}
-        pathname={pathname}
-        onSearch={(trigger) => {
-          if (navigation.open) {
-            navigation.runAfterClose(() => {
+      {navigation.desktop || !visible ? (
+        <TopBarActionMenu
+          compact={compact}
+          pathname={pathname}
+          onSearch={(trigger) => {
+            if (navigation.open) {
+              navigation.runAfterClose(() => {
+                openSearch(trigger);
+              });
+            } else {
               openSearch(trigger);
-            });
-          } else {
-            openSearch(trigger);
-          }
-        }}
-      />
+            }
+          }}
+        />
+      ) : null}
       {visible ? (
         <TopBarContents
           outline={outline}
           navigation={navigation}
           topBarHeight={topBarHeight}
+          pathname={pathname}
+          onSearch={() => {
+            navigation.runAfterClose(() => {
+              const trigger = navigation.triggerRef.current;
+              if (trigger) {
+                openSearch(trigger);
+              }
+            });
+          }}
         />
       ) : null}
     </div>
