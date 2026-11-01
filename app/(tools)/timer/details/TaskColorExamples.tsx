@@ -1,4 +1,4 @@
-import { TASK_LAYOUT, taskAppearance } from "../_components/taskPresentation";
+import { taskAppearance } from "../_components/taskPresentation";
 import TaskProgress from "../_components/TaskProgress";
 
 const examples = [
@@ -28,7 +28,7 @@ const examples = [
 export default function TaskColorExamples() {
   return (
     <ul
-      className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
       aria-label="Example task colors"
     >
       {examples.map((example) => {
@@ -50,13 +50,13 @@ export default function TaskColorExamples() {
         return (
           <li
             key={example.label}
-            className={`text-foreground flex min-w-0 flex-col gap-5 ${TASK_LAYOUT.surface}`}
+            className="corner-squircle border-border bg-background flex min-w-0 flex-col gap-5 rounded-xl border p-4 supports-[corner-shape:squircle]:rounded-2xl"
           >
             <div className="space-y-1.5">
               <p className="text-foreground font-medium">{example.label}</p>
               <p className="text-muted text-sm">{example.description}</p>
             </div>
-            <div className="mt-auto">
+            <div className="bg-interface-hover mt-auto rounded-lg p-3">
               <TaskProgress
                 task={task}
                 spent={example.spent}
