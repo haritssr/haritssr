@@ -204,7 +204,7 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
         <li>Touch typist, ±90 WPM.</li>
         <li>Former chess player, ±2000 Elo.</li>
         <li>I develop with Codex CLI in Zed.</li>
-        <li>Background in Physics</li>
+        <li>Background in Physics.</li>
         <li>
           JS, TS, Effect, React, Next.js, FP, Math, Physics, Edu, and Design.
         </li>
@@ -220,12 +220,12 @@ function PersonalNotes({ mobile = false }: { mobile?: boolean }) {
             showArrow={false}
             variant="muted"
           />{" "}
-          &gt; Hedonia
+          &gt; Hedonia.
         </li>
-        <li>Effective Accelerationism (e/acc)</li>
-        <li>100% is easier than 98%</li>
-        <li>What gets measured gets managed</li>
-        <li>Existence = f(constraints, maintenance)</li>
+        <li>Effective Accelerationism (e/acc).</li>
+        <li>100% is easier than 98%.</li>
+        <li>What gets measured gets managed.</li>
+        <li>Existence = f(constraints, maintenance).</li>
       </ul>
     </>
   );
