@@ -32,7 +32,7 @@ export const includedMusic = [
     "all-for-you",
     "All For You.mp3",
     "All For You",
-    "Seo In-guk, Jung Eun-ji (MV)",
+    "Seo In-guk, Jung Eun-ji",
     249.96571428571428,
     5_999_941
   ),
