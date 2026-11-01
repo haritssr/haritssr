@@ -91,7 +91,7 @@ export default function APIPage() {
       </PageHeader>
       <div className="space-y-16">
         <Section title="Endpoints">
-          <ul className="max-w-full space-y-5">
+          <ul className="max-w-3xl space-y-8">
             {endpoints.map((endpoint) => (
               <li
                 className="min-w-0 space-y-1"
