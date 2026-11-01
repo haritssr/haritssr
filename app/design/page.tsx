@@ -346,7 +346,7 @@ export default function DesignSystem() {
                   className="bg-interface-hover flex min-h-32 min-w-0 flex-col justify-between gap-5 rounded-lg p-5"
                   key={item}
                 >
-                  <span className="text-foreground text-4xl font-medium tracking-tight tabular-nums">
+                  <span className="text-muted text-4xl font-medium tracking-tight tabular-nums">
                     {item}
                   </span>
                   <span className="text-muted text-sm">Responsive column</span>
@@ -356,7 +356,7 @@ export default function DesignSystem() {
           </Box>
         </Section>
 
-        <Section title="UI Components">
+        <Section title="Components">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="IndexCard" title="Index Card">
