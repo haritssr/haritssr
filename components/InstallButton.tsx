@@ -97,7 +97,7 @@ export default function InstallButton({
     return (
       <Button
         aria-keyshortcuts="Alt+I"
-        className="sm:hover:text-foreground max-sm:bg-interface-hover! max-sm:text-foreground w-fit border-0! py-2 sm:w-auto sm:rounded-sm sm:bg-transparent sm:p-0 sm:text-[15px] sm:font-normal sm:text-inherit sm:hover:bg-transparent"
+        className="hover:text-foreground rounded-sm border-0! bg-transparent p-0 text-[15px] font-normal text-inherit shadow-none hover:bg-transparent"
         data-install-trigger=""
         onClick={() => {
           void install();
@@ -105,8 +105,7 @@ export default function InstallButton({
         type="button"
         variant="secondary"
       >
-        <span className="sm:hidden">Install App</span>
-        <span className="hidden sm:inline">Install</span>
+        Install
       </Button>
     );
   }
