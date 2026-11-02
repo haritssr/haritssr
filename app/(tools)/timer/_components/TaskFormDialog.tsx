@@ -75,7 +75,7 @@ function TaskFormPopup({
       <Dialog.Popup
         initialFocus={nameRef}
         style={SHEET_STYLE}
-        className="corner-squircle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-xl p-4 shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-t-3xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:supports-[corner-shape:squircle]:rounded-3xl"
+        className="corner-squircle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-xl p-3 shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-t-3xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:supports-[corner-shape:squircle]:rounded-3xl"
       >
         <form
           className="flex flex-col gap-5"
