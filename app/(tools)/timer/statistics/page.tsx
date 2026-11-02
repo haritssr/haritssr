@@ -8,7 +8,7 @@ import Statistics from "./Statistics";
 
 export const metadata = createPageMetadata({
   title: "Statistics",
-  path: "/timer/statistic",
+  path: "/timer/statistics",
   description:
     "Review daily activities and how you spent your time over 30 days.",
 });
@@ -18,12 +18,11 @@ export default function TimerStatisticsPage() {
     <>
       <PageHeader
         back={{ href: "/timer", name: "Timer" }}
-        path="/timer/statistic"
+        path="/timer/statistics"
       >
         <PageTitle>Statistics</PageTitle>
         <PageDescription>
-          See where your time went. Choose a day to review its activities and
-          the previous 30 days of time spent.
+          Review daily activities and time spent over 30 days.
         </PageDescription>
       </PageHeader>
       <TimerContent>

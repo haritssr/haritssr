@@ -33,7 +33,7 @@ export default function TimerPage() {
             prefetch={false}
             title="Open clock"
           >
-            <AnalogClock className="size-22 sm:size-28" />
+            <AnalogClock className="size-22 sm:size-26" />
           </Link>
         }
       >
@@ -47,7 +47,7 @@ export default function TimerPage() {
         </PageDescription>
         <nav aria-label="Timer" className="flex flex-wrap gap-3">
           <InternalLink href="/timer/details">Details</InternalLink>
-          <InternalLink href="/timer/statistic">Statistics</InternalLink>
+          <InternalLink href="/timer/statistics">Statistics</InternalLink>
         </nav>
       </PageHeader>
       <TimerContent>

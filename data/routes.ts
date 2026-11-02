@@ -132,7 +132,7 @@ export const navigationRoutes: readonly RouteDoc[] = [
     group: "Timer",
   },
   {
-    route: "/timer/statistic",
+    route: "/timer/statistics",
     title: "Statistics",
     description: "Review daily activities and time spent over 30 days.",
     group: "Timer",

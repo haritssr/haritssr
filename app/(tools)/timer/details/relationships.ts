@@ -32,7 +32,7 @@ export const timerRelationships = [
       Runtime -->|snapshot loading and broadcasts| Transport
       Controller --> Mutations["app/(tools)/timer/utils/timerMutations.ts: ordered optimistic changes"]
       Mutations -->|sendTimerAction / saveTimerPreferences| Transport["app/(tools)/timer/utils/timerClient.ts"]
-      StatsPage["app/(tools)/timer/statistic/page.tsx"] --> Stats["app/(tools)/timer/statistic/Statistics.tsx"]
+      StatsPage["app/(tools)/timer/statistics/page.tsx"] --> Stats["app/(tools)/timer/statistics/Statistics.tsx"]
       Stats -->|fetchTimerHistory| Transport
       Transport -->|protected GET / POST / PATCH| API["app/api/timer/route.ts"]
       API --> Store["app/(tools)/timer/store.ts: snapshots, actions, preferences, history"]

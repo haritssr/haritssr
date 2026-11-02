@@ -99,7 +99,7 @@ export default function TimerDetailsPage() {
             </li>
             <li id="statistics">
               Review daily history and 30-day totals in{" "}
-              <InternalLink href="/timer/statistic" variant="inline">
+              <InternalLink href="/timer/statistics" variant="inline">
                 Statistics
               </InternalLink>
               .
@@ -133,13 +133,13 @@ export default function TimerDetailsPage() {
               stop at midnight.
             </li>
             <li>
-              Names allow 30 characters, descriptions allow 30, and durations
+              Names allow 30 characters, descriptions allow 38, and durations
               range from one second to 24 hours.
             </li>
             <li>
               Settings → Daily Tasks lets you add, remove, reorder, and schedule
               up to 10 tasks in your routine. Save applies to future days;
-              Cancel discards the draft. Daily descriptions allow up to 2,000
+              Cancel discards the draft. Daily descriptions allow up to 38
               characters.
             </li>
             <li>

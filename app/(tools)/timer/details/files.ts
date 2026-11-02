@@ -128,11 +128,11 @@ export const implementationFiles = [
     "Account session, Google login, callback, and sign-out endpoints.",
   ],
   [
-    "app/(tools)/timer/statistic/page.tsx",
+    "app/(tools)/timer/statistics/page.tsx",
     "Statistics page header and metadata.",
   ],
   [
-    "app/(tools)/timer/statistic/Statistics.tsx",
+    "app/(tools)/timer/statistics/Statistics.tsx",
     "Date selection, the 30-day chart, and history refreshes limited to relevant changes.",
   ],
   [
