@@ -24,7 +24,7 @@ function PlaybackIcon({ playing }: { playing: boolean }) {
   return playing ? (
     <PauseIcon aria-hidden="true" className="size-6" />
   ) : (
-    <PlayIcon aria-hidden="true" className="size-6" />
+    <PlayIcon aria-hidden="true" className="size-6 translate-x-px" />
   );
 }
 
