@@ -50,8 +50,8 @@ keep each form section easy to locate. `DurationFields` is shared too.
 Task form parsing lives in [timerInput.ts](../utils/timerInput.ts). Its lightweight
 limits are shared with input counters and server schemas; stored legacy text keeps
 its existing broader limits. Live elapsed-time validation remains in Edit.
-Name allows 30 characters; the required Description allows 30, or 2,000 for a
-daily task. Both show a
+Name allows 30 characters; the required Description allows 38 for ordinary and
+daily tasks. Both show a
 character counter beside their labels, using `text-danger` at the limit. Each field has
 a Clear button with a native Clear hover hint that empties it and returns focus
 to the field. Name and Description start at 40px tall; Description can be resized
@@ -305,9 +305,11 @@ strict HH:mm parsing, and reordering live in `dailyTaskDraft.ts`; the memoized
 `DailyTaskFields.tsx` renders one task with stable callbacks. The field list mounts
 inside the accordion panel while draft state remains outside, preserving edits
 across collapse without constructing closed-panel fields. The editor provides
-add/remove, and Up/Down ordering. Names use the existing 20-character limit; daily
-descriptions allow 2,000 characters. The list may be empty and shares the existing
-10-task Daily Tasks limit. Scheduled availability uses From/Until in WIB; Until 00:00
+add/remove, and Up/Down ordering. Names allow 30 characters; daily
+descriptions allow 38 characters. The list may be empty and shares the existing
+10-task Daily Tasks limit. Validation identifies the task and field, shows its
+error beside the task, and focuses the affected input on Save.
+Scheduled availability uses From/Until in WIB; Until 00:00
 means the following midnight. Overnight windows other than that cutoff are rejected.
 Closing Settings discards unsaved changes. `TimerSettings.tsx` owns one page-scoped
 Base UI handle: the toolbar trigger opens Settings and restores focus through Base

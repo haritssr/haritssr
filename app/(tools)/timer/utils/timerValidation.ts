@@ -26,7 +26,7 @@ const storedDailyTasksSchema = z
     z.object({
       id: z.string().startsWith("daily:").min(7).max(100),
       activity: z.string().trim().min(1).max(TASK_INPUT_LIMITS.activity),
-      description: z.string().trim().max(DAILY_DESCRIPTION_LIMIT),
+      description: z.string().trim().max(2000),
       duration: z.number().int().min(1).max(86_400),
       availabilityWindow: availabilityWindowSchema.nullable(),
     })
@@ -35,10 +35,30 @@ const storedDailyTasksSchema = z
   .refine(
     (tasks) => new Set(tasks.map((task) => task.id)).size === tasks.length
   );
-export const dailyTasksSchema = storedDailyTasksSchema.refine(
-  (tasks) =>
-    tasks.length <= MAX_DAILY_TASKS &&
-    tasks.every((task) => task.description.length > 0)
+export const dailyTasksSchema = storedDailyTasksSchema.superRefine(
+  (tasks, context) => {
+    if (tasks.length > MAX_DAILY_TASKS) {
+      context.addIssue({
+        code: "custom",
+        message: `Use at most ${MAX_DAILY_TASKS} daily tasks.`,
+      });
+    }
+    for (const [index, task] of tasks.entries()) {
+      if (task.description.length === 0) {
+        context.addIssue({
+          code: "custom",
+          path: [index, "description"],
+          message: "Enter a description.",
+        });
+      } else if (task.description.length > DAILY_DESCRIPTION_LIMIT) {
+        context.addIssue({
+          code: "custom",
+          path: [index, "description"],
+          message: `Use ${DAILY_DESCRIPTION_LIMIT} characters or fewer for the description.`,
+        });
+      }
+    }
+  }
 );
 
 const dateSchema = z.string().refine(validTimerDate);
@@ -158,7 +178,7 @@ const storedTaskPresetsSchema = z
     z.object({
       id: z.string().min(1).max(100),
       ...taskDetails,
-      description: z.string().trim().max(35),
+      description: z.string().trim().max(TASK_INPUT_LIMITS.description),
     })
   )
   .min(1)

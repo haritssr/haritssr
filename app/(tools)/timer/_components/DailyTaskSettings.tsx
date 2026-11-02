@@ -12,7 +12,7 @@ import {
   newDailyTaskDraft,
   parseDailyDrafts,
 } from "./dailyTaskDraft";
-import type { DailyDraft } from "./dailyTaskDraft";
+import type { DailyDraft, DailyDraftError } from "./dailyTaskDraft";
 import DailyTaskFields from "./DailyTaskFields";
 import { useTimer } from "./TimerProvider";
 
@@ -29,6 +29,7 @@ export default function DailyTaskSettings({
   const [draft, setDraft] = useState<DailyDraft[] | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldError, setFieldError] = useState<DailyDraftError | null>(null);
   const saved = useMemo(() => dailyTaskDrafts(dailyTasks), [dailyTasks]);
   const entries = draft ?? saved;
   const disabled = busy || !canUseTimer(snapshot);
@@ -41,6 +42,7 @@ export default function DailyTaskSettings({
         )
       );
       setError(null);
+      setFieldError(null);
     },
     [saved]
   );
@@ -48,6 +50,7 @@ export default function DailyTaskSettings({
     (id: string, step: -1 | 1) => {
       setDraft((current) => moveDailyDraft(current ?? saved, id, step));
       setError(null);
+      setFieldError(null);
     },
     [saved]
   );
@@ -57,22 +60,48 @@ export default function DailyTaskSettings({
         (current ?? saved).filter((entry) => entry.id !== id)
       );
       setError(null);
+      setFieldError(null);
     },
     [saved]
   );
 
   async function save(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    const values = parseDailyDrafts(entries);
-    if (values === null) {
-      setError(
-        "Use at most 10 tasks, a name and description of 1–30 characters, a duration from one second to 24 hours, and an end time later than the start. Midnight ends the day."
+    const result = parseDailyDrafts(entries);
+    if (!result.success) {
+      setFieldError(result.error);
+      const index = entries.findIndex(
+        (entry) => entry.id === result.error.taskId
       );
+      const entry = entries.find((item) => item.id === result.error.taskId);
+      const name = entry?.activity.trim() ?? "";
+      const label = name.length > 0 ? ` (${name})` : "";
+      setError(
+        entry === undefined
+          ? result.error.message
+          : `Task ${index + 1}${label}: ${result.error.message}`
+      );
+      if (entry !== undefined) {
+        const fieldset = event.currentTarget.querySelector(
+          `[data-daily-task="${CSS.escape(entry.id)}"]`
+        );
+        let selector = 'fieldset input:not([type="hidden"])';
+        if (
+          result.error.field === "activity" ||
+          result.error.field === "description"
+        ) {
+          selector = `input[name="${result.error.field}"]`;
+        } else if (result.error.field === "window") {
+          selector = 'input[type="time"]';
+        }
+        fieldset?.querySelector<HTMLInputElement>(selector)?.focus();
+      }
       return;
     }
     setError(null);
+    setFieldError(null);
     setBusy(true);
-    const success = await setDailyTasks(values);
+    const success = await setDailyTasks(result.data);
     setBusy(false);
     if (success) {
       setDraft(null);
@@ -107,6 +136,7 @@ export default function DailyTaskSettings({
           <DailyTaskRows
             entries={entries}
             disabled={disabled}
+            fieldError={fieldError}
             onUpdate={update}
             onMove={move}
             onRemove={remove}
@@ -119,6 +149,7 @@ export default function DailyTaskSettings({
               const entry = newDailyTaskDraft();
               setDraft((current) => [...(current ?? saved), entry]);
               setError(null);
+              setFieldError(null);
             }}
           >
             Add daily task
@@ -135,6 +166,7 @@ export default function DailyTaskSettings({
               onClick={() => {
                 setDraft(null);
                 setError(null);
+                setFieldError(null);
               }}
             >
               Cancel
@@ -156,12 +188,14 @@ export default function DailyTaskSettings({
 function DailyTaskRows({
   entries,
   disabled,
+  fieldError,
   onUpdate,
   onMove,
   onRemove,
 }: {
   entries: DailyDraft[];
   disabled: boolean;
+  fieldError: DailyDraftError | null;
   onUpdate: (id: string, patch: Partial<DailyDraft>) => void;
   onMove: (id: string, step: -1 | 1) => void;
   onRemove: (id: string) => void;
@@ -175,6 +209,7 @@ function DailyTaskRows({
           index={index}
           count={entries.length}
           disabled={disabled}
+          error={fieldError?.taskId === entry.id ? fieldError : null}
           onUpdate={onUpdate}
           onMove={onMove}
           onRemove={onRemove}

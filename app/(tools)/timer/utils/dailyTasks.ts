@@ -1,6 +1,7 @@
 import type { TimerTask, TimerTaskPreset, AvailabilityWindow } from "./timer";
+import { TASK_INPUT_LIMITS } from "./timerInput";
 
-export const DAILY_DESCRIPTION_LIMIT = 2000;
+export const DAILY_DESCRIPTION_LIMIT = TASK_INPUT_LIMITS.description;
 export const MAX_DAILY_TASKS = 10;
 
 export interface DailyTaskDefinition extends TimerTaskPreset {
@@ -25,7 +26,7 @@ export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
   {
     id: "daily:housekeeping",
     activity: "Housekeeping",
-    description: "Shower, watering plants, floor cleaning, wash dishes.",
+    description: "Shower, plants, floors, dishes.",
     duration: 3600,
     availabilityWindow: null,
   },

@@ -1,7 +1,7 @@
 import { Switch } from "@base-ui/react/switch";
 import { memo } from "react";
 
-import type { DailyDraft } from "./dailyTaskDraft";
+import type { DailyDraft, DailyDraftError } from "./dailyTaskDraft";
 import DurationFields from "./DurationFields";
 import { TaskDescriptionField, TaskNameField } from "./TaskFormDialog";
 
@@ -13,6 +13,7 @@ interface DailyTaskFieldsProps {
   index: number;
   count: number;
   disabled: boolean;
+  error: DailyDraftError | null;
   onUpdate: (id: string, patch: Partial<DailyDraft>) => void;
   onMove: (id: string, step: -1 | 1) => void;
   onRemove: (id: string) => void;
@@ -24,11 +25,18 @@ const DailyTaskFields = memo(
     index,
     count,
     disabled,
+    error,
     onUpdate,
     onMove,
     onRemove,
   }: DailyTaskFieldsProps) => (
-    <fieldset disabled={disabled} className="min-w-0 space-y-3">
+    <fieldset
+      disabled={disabled}
+      data-daily-task={entry.id}
+      aria-invalid={error ? true : undefined}
+      aria-describedby={error ? `${entry.id}-error` : undefined}
+      className={`min-w-0 space-y-3 ${error ? "[&_input:focus]:border-danger [&_input:focus]:ring-danger/20" : ""}`}
+    >
       <legend className="text-foreground mb-3 w-full font-medium">
         <span className="flex flex-wrap items-center justify-between gap-3">
           <span>Task {index + 1}</span>
@@ -69,6 +77,11 @@ const DailyTaskFields = memo(
           </span>
         </span>
       </legend>
+      {error ? (
+        <p id={`${entry.id}-error`} className="text-danger text-sm">
+          {error.message}
+        </p>
+      ) : null}
       <TaskNameField
         value={entry.activity}
         onChange={(activity) => {
@@ -81,7 +94,6 @@ const DailyTaskFields = memo(
         onChange={(description) => {
           onUpdate(entry.id, { description });
         }}
-        maxLength={30}
         disabled={disabled}
       />
       <DurationFields

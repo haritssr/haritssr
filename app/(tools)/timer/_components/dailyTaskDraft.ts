@@ -1,4 +1,5 @@
 import type { DailyTaskDefinition } from "../utils/dailyTasks";
+import { TASK_INPUT_LIMITS } from "../utils/timerInput";
 import { dailyTasksSchema } from "../utils/timerValidation";
 import { durationSeconds, durationValue } from "./durationValue";
 import type { DurationValue } from "./durationValue";
@@ -9,6 +10,12 @@ export interface DailyDraft {
   description: string;
   duration: DurationValue;
   window: { from: string; until: string } | null;
+}
+
+export interface DailyDraftError {
+  taskId?: string;
+  field?: "activity" | "description" | "duration" | "window";
+  message: string;
 }
 
 function timeValue(minutes: number) {
@@ -66,18 +73,28 @@ export function moveDailyDraft(
 
 export function parseDailyDrafts(
   entries: DailyDraft[]
-): DailyTaskDefinition[] | null {
-  const validUnits = entries.every(
+):
+  | { success: true; data: DailyTaskDefinition[] }
+  | { success: false; error: DailyDraftError } {
+  const invalidUnits = entries.find(
     (entry) =>
-      Object.values(entry.duration).every(
+      !Object.values(entry.duration).every(
         (unit) =>
           unit !== "" && Number.isInteger(Number(unit)) && Number(unit) >= 0
-      ) &&
-      Number(entry.duration.minutes) <= 59 &&
-      Number(entry.duration.seconds) <= 59
+      ) ||
+      Number(entry.duration.minutes) > 59 ||
+      Number(entry.duration.seconds) > 59
   );
-  if (!validUnits) {
-    return null;
+  if (invalidUnits) {
+    return {
+      success: false,
+      error: {
+        taskId: invalidUnits.id,
+        field: "duration",
+        message:
+          "Use whole, nonnegative duration values, with minutes and seconds from 0 to 59.",
+      },
+    };
   }
   const result = dailyTasksSchema.safeParse(
     entries.map((entry) => {
@@ -98,5 +115,46 @@ export function parseDailyDrafts(
       };
     })
   );
-  return result.success ? result.data : null;
+  if (result.success) {
+    return { success: true, data: result.data };
+  }
+  const [issue] = result.error.issues;
+  const [index, field] = issue.path;
+  const entry = typeof index === "number" ? entries[index] : undefined;
+  let { message } = issue;
+  if (field === "activity") {
+    message =
+      (entry?.activity.trim().length ?? 0) > 0
+        ? `Use ${TASK_INPUT_LIMITS.activity} characters or fewer for the name.`
+        : "Enter a name.";
+  } else if (field === "description") {
+    const length = entry?.description.trim().length ?? 0;
+    message =
+      length > 0
+        ? `Description has ${length} characters; use ${TASK_INPUT_LIMITS.description} or fewer.`
+        : "Enter a description.";
+  } else if (field === "duration") {
+    message = "Choose a duration from one second to 24 hours.";
+  } else if (field === "availabilityWindow") {
+    message =
+      "Choose valid From and Until times, with Until later than From. Use 00:00 to end at midnight.";
+  }
+  let errorField: DailyDraftError["field"];
+  if (field === "availabilityWindow") {
+    errorField = "window";
+  } else if (
+    field === "activity" ||
+    field === "description" ||
+    field === "duration"
+  ) {
+    errorField = field;
+  }
+  return {
+    success: false,
+    error: {
+      taskId: entry?.id,
+      field: errorField,
+      message,
+    },
+  };
 }

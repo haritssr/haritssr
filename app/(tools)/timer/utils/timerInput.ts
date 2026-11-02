@@ -1,7 +1,7 @@
 // Shared input limits; stored legacy records intentionally allow longer text.
 export const TASK_INPUT_LIMITS = {
   activity: 30,
-  description: 30,
+  description: 38,
   minimumDuration: 1,
   maximumDuration: 86_400,
 } as const;
