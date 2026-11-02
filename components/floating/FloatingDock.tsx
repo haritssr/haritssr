@@ -127,7 +127,7 @@ export default function FloatingDock({ children }: { children: ReactNode }) {
           ref={setNoticeTarget}
         />
         <div
-          className={`${hasPlayers ? "flex" : "hidden"} w-full flex-col items-end gap-2 sm:w-auto sm:items-center`}
+          className={`${hasPlayers ? "flex" : "hidden"} w-full max-w-full min-w-0 flex-col items-end gap-2 sm:w-auto sm:items-center`}
           ref={setTarget}
         />
       </div>
@@ -147,7 +147,7 @@ export function FloatingDockSlot({
   return target
     ? createPortal(
         <div
-          className={`${position === "music" ? "order-1" : "order-2"} flex w-full flex-col items-end gap-2 sm:w-auto sm:items-center`}
+          className={`${position === "music" ? "order-1" : "order-2"} flex w-full max-w-full min-w-0 flex-col items-end gap-2 sm:w-auto sm:items-center`}
         >
           {children}
         </div>,

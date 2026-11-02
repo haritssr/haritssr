@@ -13,7 +13,6 @@ import {
   todayModelSuitabilityRoute,
   weeklyChangelogRoute,
 } from "@/data/routes";
-import { formatDay } from "@/utils/commits/changelog";
 import { parseChangelogSelection } from "@/utils/commits/changelogSelection";
 import {
   getChangelogSummary,
@@ -39,8 +38,8 @@ export default async function CommitsPage() {
       <PageHeader back={{ href: "/", name: "Home" }} path={commitsRoute.route}>
         <PageTitle>{commitsRoute.title}</PageTitle>
         <PageDescription>
-          {new Intl.NumberFormat("en-US").format(count)} commits and counting,
-          from {formatDay(firstDay)} to {formatDay(lastDay)} · UTC+7
+          {new Intl.NumberFormat("en-US").format(count)} commits · {firstDay} –{" "}
+          {lastDay}
         </PageDescription>
         <nav aria-label="Changelog" className="flex flex-wrap gap-3">
           <InternalLink href={commitsDetailsRoute.route}>

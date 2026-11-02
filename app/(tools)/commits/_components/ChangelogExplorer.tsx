@@ -51,14 +51,14 @@ const periodOptions: readonly { value: ChangelogPeriod; label: string }[] = [
 ];
 const typeOptions = [{ value: "all", label: "All changes" }, ...changeTypes];
 const INPUT_CLASS_NAME =
-  "corner-squircle form-control border-border focus:border-action focus:ring-action/20 w-full min-w-0 rounded-md border bg-white px-3 py-2.5 text-sm text-foreground outline-hidden placeholder:text-muted focus:ring-2 supports-[corner-shape:squircle]:rounded-xl";
+  "form-control border-border text-foreground/90 placeholder:text-muted focus:border-foreground/80 focus:ring-foreground/20 h-10 w-full min-w-0 appearance-none rounded-lg border bg-white px-3 py-2 text-sm leading-5 font-normal outline-hidden focus:ring-2";
 const monthFormatter = new Intl.DateTimeFormat("en-GB", {
   month: "long",
   year: "numeric",
   timeZone: "UTC",
 });
 const numberFormatter = new Intl.NumberFormat("en-GB");
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 10;
 
 function rangeLabel(period: ChangelogPeriod, anchor: string): string {
   const range = periodRange(period, anchor);
@@ -88,6 +88,12 @@ function subscribeLocation(listener: () => void) {
 const getLocation = () => window.location.search;
 const getServerLocation = () => "";
 
+function parseTimelineSelection(params: URLSearchParams, initialDay: string) {
+  const timelineParams = new URLSearchParams(params);
+  timelineParams.set("limit", params.get("timelineLimit") ?? String(PAGE_SIZE));
+  return parseChangelogSelection(timelineParams, initialDay);
+}
+
 async function fetchSelection(url: string): Promise<ChangelogResult> {
   const response = await fetch(url);
   if (!response.ok) {
@@ -109,7 +115,7 @@ export default function ChangelogExplorer({
     getServerLocation
   );
   const selection = useMemo(
-    () => parseChangelogSelection(new URLSearchParams(search), initialDay),
+    () => parseTimelineSelection(new URLSearchParams(search), initialDay),
     [search, initialDay]
   );
   const { period, anchor, type, query, limit } = selection;
@@ -145,11 +151,12 @@ export default function ChangelogExplorer({
   ) {
     const url = new URL(window.location.href);
     const next = {
-      ...parseChangelogSelection(url.searchParams, initialDay),
+      ...parseTimelineSelection(url.searchParams, initialDay),
       ...patch,
     };
+    url.searchParams.delete("limit");
     for (const [name, value] of changelogParams(next)) {
-      url.searchParams.set(name, value);
+      url.searchParams.set(name === "limit" ? "timelineLimit" : name, value);
     }
     window.history[replace ? "replaceState" : "pushState"](null, "", url);
     window.dispatchEvent(new Event("changelog-filters"));
@@ -178,7 +185,10 @@ export default function ChangelogExplorer({
   }
 
   return (
-    <div aria-busy={pending} className="space-y-16">
+    <div
+      aria-busy={pending}
+      className="relative w-full min-w-0 space-y-16 overflow-hidden"
+    >
       <ChangelogFilters
         period={period}
         anchor={anchor}
@@ -322,17 +332,17 @@ function ChangelogFilters({
   const previousEnd = periodRange(period, previous)?.end ?? firstDay;
   const nextStart = periodRange(period, next)?.start ?? lastDay;
   const label = rangeLabel(period, anchor);
-  const selectedRange = periodRange(period, anchor);
   return (
     <Section title="Filters">
-      <div className="corner-squircle border-border bg-surface space-y-4 rounded-xl border p-4 supports-[corner-shape:squircle]:rounded-3xl sm:p-5">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+      <div className="scrollbar-subtle flex w-full min-w-0 flex-wrap items-center gap-2 sm:flex-nowrap sm:overflow-x-auto sm:p-1">
+        <div className="w-full sm:min-w-44 sm:flex-1">
           <label className="min-w-0 flex-1" htmlFor={`${inputId}-search`}>
             <span className="sr-only">Search commits</span>
             <div className="relative">
               <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="text-muted pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+                strokeWidth={1.5}
               />
               <input
                 autoComplete="off"
@@ -347,35 +357,8 @@ function ChangelogFilters({
               />
             </div>
           </label>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <span className="text-muted text-sm">Latest</span>
-            <ButtonGroup aria-label="Latest commit periods">
-              {(["day", "week", "month", "year"] as const).map((value) => {
-                const currentRange = periodRange(value, initialDay);
-                const isActive =
-                  period === value &&
-                  selectedRange?.start === currentRange?.start &&
-                  selectedRange?.end === currentRange?.end;
-
-                return (
-                  <ButtonGroupItem
-                    activeStyle="action"
-                    aria-label={`Latest ${value}`}
-                    aria-pressed={isActive}
-                    className="bg-secondary-button-surface aria-pressed:border-action min-h-10 px-3 capitalize aria-pressed:z-10 aria-pressed:text-white"
-                    key={value}
-                    onClick={() => {
-                      pickPeriod(value, initialDay);
-                    }}
-                  >
-                    {value}
-                  </ButtonGroupItem>
-                );
-              })}
-            </ButtonGroup>
-          </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="contents sm:flex sm:shrink-0 sm:items-center sm:gap-2 [&>div>button]:h-10 [&>div>button]:py-2 [&>div>label]:sr-only">
           <SelectField
             label="Time period"
             options={periodOptions}
@@ -405,8 +388,8 @@ function ChangelogFilters({
             onValueChange={onTypeChange}
           />
         </div>
-        <div className="border-border flex flex-wrap items-center justify-between gap-3 border-t border-dashed pt-4">
-          <div className="flex min-w-0 flex-wrap items-center gap-3">
+        <div className="contents sm:flex sm:shrink-0 sm:items-center sm:gap-2">
+          <div className="flex items-center gap-2">
             {period === "all" ? null : (
               <ButtonGroup aria-label="Navigate commit periods">
                 <ButtonGroupItem
@@ -433,11 +416,7 @@ function ChangelogFilters({
                 </ButtonGroupItem>
               </ButtonGroup>
             )}
-            <p
-              aria-live="polite"
-              aria-atomic="true"
-              className="text-foreground flex min-w-0 items-center gap-2 text-sm font-medium"
-            >
+            <p aria-live="polite" aria-atomic="true" className="sr-only">
               <CalendarDaysIcon
                 aria-hidden="true"
                 className="text-muted size-4 shrink-0"
@@ -446,13 +425,25 @@ function ChangelogFilters({
             </p>
           </div>
           <Button
-            className="min-h-10"
+            className="min-h-10 whitespace-nowrap"
+            disabled={period === "all" || anchor === initialDay}
+            onClick={() => {
+              pickPeriod(period, initialDay);
+            }}
+            variant="secondary"
+          >
+            Latest
+          </Button>
+          <Button
+            aria-label="Reset filters"
+            className="size-10"
             disabled={!activeFilter}
+            iconOnly
             onClick={resetFilters}
-            variant="ghost"
+            title="Reset filters"
+            variant="secondary"
           >
             <ArrowPathIcon aria-hidden="true" className="size-4" />
-            Reset filters
           </Button>
         </div>
       </div>
@@ -500,9 +491,7 @@ function DateFilter({
     />
   ) : (
     <label className="min-w-0 space-y-1.5" htmlFor={`${inputId}-date`}>
-      <span className="text-foreground/80 block text-sm font-medium">
-        {dateLabel}
-      </span>
+      <span className="sr-only">{dateLabel}</span>
       <input
         className={`${INPUT_CLASS_NAME} disabled:opacity-50`}
         disabled={period === "all"}
@@ -558,7 +547,7 @@ function ActivitySummary({
     peakDetail = formatDay(busiest[0]);
   }
   return (
-    <dl className="border-border sm:divide-border grid grid-cols-1 gap-4 border-y border-dashed py-5 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-dashed">
+    <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3">
       <Summary
         label="Matching commits"
         value={numberFormatter.format(total)}
@@ -588,12 +577,16 @@ function Summary({
   detail: string;
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-1.5 sm:px-5 sm:first:pl-0 sm:last:pr-0">
-      <dt className="text-muted text-sm">{label}</dt>
-      <dd className="text-foreground text-3xl font-semibold tabular-nums">
+    <div className="bg-foreground/5 corner-squircle grid min-w-0 grid-cols-1 gap-y-1 rounded-lg px-4 py-3 supports-[corner-shape:squircle]:rounded-2xl sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-3">
+      <dt className="text-foreground row-start-2 text-base sm:row-start-1">
+        {label}
+      </dt>
+      <dd className="text-foreground row-start-1 text-3xl font-semibold tabular-nums sm:col-start-2 sm:row-span-2 sm:self-center">
         {value}
       </dd>
-      <dd className="text-muted mt-auto text-xs">{detail}</dd>
+      <dd className="text-muted row-start-3 text-xs sm:row-start-2">
+        {detail}
+      </dd>
     </div>
   );
 }

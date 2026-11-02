@@ -85,17 +85,23 @@ export default function CommitTable({
   models?: Readonly<Record<string, ModelRecommendation>>;
 }) {
   return (
-    <Table className={models ? "min-w-xl table-fixed" : "table-fixed"}>
+    <Table className={models ? "min-w-xl table-auto" : "min-w-96 table-auto"}>
       <caption className="sr-only">{caption}</caption>
       <thead>
         <tr className="divide-border bg-foreground/5 divide-x">
           <th className="px-3 text-left font-medium" scope="col">
             Message
           </th>
-          <th className="w-28 px-3 text-left font-medium sm:w-32" scope="col">
+          <th
+            className="w-px px-3 text-left font-medium whitespace-nowrap"
+            scope="col"
+          >
             Date
           </th>
-          <th className="w-20 px-3 text-left font-medium" scope="col">
+          <th
+            className="w-px px-3 text-left font-medium whitespace-nowrap"
+            scope="col"
+          >
             Time
           </th>
           {models ? (
@@ -149,10 +155,10 @@ function CommitRow({
           size="inherit"
         />
       </td>
-      <td className="text-muted px-3 py-3 align-top tabular-nums">
+      <td className="text-muted px-3 py-3 align-top whitespace-nowrap tabular-nums">
         <time dateTime={commit.date}>{timestamp.slice(0, 10)}</time>
       </td>
-      <td className="text-muted px-3 py-3 align-top tabular-nums">
+      <td className="text-muted px-3 py-3 align-top whitespace-nowrap tabular-nums">
         <time dateTime={commit.date}>{timestamp.slice(11, 16)}</time>
       </td>
       {recommendation === undefined ? null : (

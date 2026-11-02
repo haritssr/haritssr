@@ -269,6 +269,11 @@
     scrollbar-color: var(--color-zinc-400) transparent;
   }
 
+  /* Keep the explorer's wide scrollable content inside the mobile viewport. */
+  html:has([data-page-path="/commits"]) {
+    overflow-x: hidden;
+  }
+
   @supports selector(::-webkit-scrollbar) {
     html {
       scrollbar-color: auto;

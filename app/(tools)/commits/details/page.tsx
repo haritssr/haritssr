@@ -67,8 +67,8 @@ export default function CommitsDetailsPage() {
               down from a week, month, year, or all-history view.
             </li>
             <li>
-              Load more timeline entries and share the current filters through
-              the page URL.
+              Start with 10 timeline entries, load 10 more at a time, and share
+              the current filters through the page URL.
             </li>
             <li>
               Read curated weekly highlights on the{" "}
@@ -112,7 +112,7 @@ export default function CommitsDetailsPage() {
             </li>
             <li>
               Charts and summary totals include every matching commit, even when
-              only 50 timeline entries are visible.
+              only 10 timeline entries are visible.
             </li>
             <li>
               Counts describe recorded commits, not the size or effort of each

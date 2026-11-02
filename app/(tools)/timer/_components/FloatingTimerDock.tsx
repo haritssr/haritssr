@@ -120,7 +120,7 @@ function FloatingTimerPlayer({
   const fullPlayer = (
     <div
       data-floating-task=""
-      className="translucent-material border-border shadow-foreground/10 border-hairline flex min-h-(--floating-tabbar-height,3.3125rem) items-center gap-1.5 rounded-full py-2 pr-2 pl-4 shadow-lg sm:shadow-xl"
+      className="translucent-material border-border shadow-foreground/10 border-hairline flex min-h-(--floating-tabbar-height,3.3125rem) w-full max-w-full min-w-0 items-center gap-1.5 rounded-full py-2 pr-2 pl-4 shadow-lg sm:shadow-xl"
     >
       <InternalLink
         className="focus-visible:outline-action mr-auto min-w-0 flex-1 rounded-sm py-1 focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-1.5"
@@ -166,7 +166,7 @@ function FloatingTimerPlayer({
     <FloatingDockSlot position="timer">
       <section
         aria-label="Floating task"
-        className="pointer-events-auto w-full sm:w-[22.4rem]"
+        className="pointer-events-auto w-full max-w-full min-w-0 sm:w-[22.4rem]"
       >
         {fullPlayer}
       </section>

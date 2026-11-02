@@ -25,13 +25,13 @@ export function parseChangelogSelection(
   const validDate =
     isCalendarDate(date) && date >= "0001-01-01" && date <= "9998-12-31";
   const type = params.get("type") ?? "all";
-  const limit = Number(params.get("limit") ?? 50);
+  const limit = Number(params.get("limit") ?? 10);
   return {
     period: isPeriod(period) ? period : "day",
     anchor: validDate ? date : initialDay,
     type: changeTypes.some((entry) => entry.value === type) ? type : "all",
     query: (params.get("q") ?? "").slice(0, 200),
-    limit: Number.isInteger(limit) ? Math.min(5000, Math.max(50, limit)) : 50,
+    limit: Number.isInteger(limit) ? Math.min(5000, Math.max(10, limit)) : 10,
   };
 }
 
