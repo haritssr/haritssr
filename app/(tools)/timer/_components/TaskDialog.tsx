@@ -76,7 +76,7 @@ export function EditTask({
       }}
     >
       <Dialog.Trigger
-        className="text-muted hover:text-foreground focus-visible:outline-action flex h-5 w-fit shrink-0 cursor-pointer items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+        className={`focus-visible:outline-action flex h-5 w-fit shrink-0 cursor-pointer items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2 ${open ? "text-action" : "text-muted hover:text-foreground"}`}
         title="Edit"
         aria-label={`Edit ${task.activity}`}
       >
