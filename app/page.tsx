@@ -94,9 +94,15 @@ function PersonalDetails() {
           />
           <div className="min-w-0">
             <p className="text-lg font-medium">{profileName}</p>
-            <p className="text-foreground">
-              <span className="block">Web Product Engineer</span>
-              <span className="block">Science Teacher</span>
+            <p className="text-muted">
+              <span className="block">
+                Web Product Engineer{" "}
+                <span className="text-foreground/50 ml-0.5 text-sm">4yrs</span>
+              </span>
+              <span className="block">
+                Science Teacher{" "}
+                <span className="text-foreground/50 ml-0.5 text-sm">6yrs</span>
+              </span>
             </p>
           </div>
         </div>
@@ -123,7 +129,10 @@ function PersonalDetails() {
               showArrow={false}
             />
           </li>
-          <li>Tangerang, Indonesia</li>
+          <li>
+            Tangerang, Indonesia{" "}
+            <span className="text-foreground/50 ml-0.5 text-sm">UTC+7</span>
+          </li>
           <li>
             <span className="text-accent">haritssr</span> ={" "}
             <span className="text-accent">harits</span>{" "}
@@ -139,15 +148,20 @@ function PersonalDetails() {
         <div className="hidden md:contents">
           <PersonalNotes />
         </div>
-        <div className="border-border border-t border-dashed pt-4 md:hidden">
-          <ProfileInvitation />
-        </div>
-        <div className="flex justify-center md:hidden">
-          <Bento title="More about me" variant="contained" width="fit">
+        <div className="flex justify-start md:hidden">
+          <Bento
+            title="More about me"
+            trigger="bento-text"
+            variant="contained"
+            width="fit"
+          >
             <div className="space-y-4">
               <PersonalNotes mobile />
             </div>
           </Bento>
+        </div>
+        <div className="border-border border-t border-dashed pt-4 md:hidden">
+          <ProfileInvitation />
         </div>
       </div>
     </section>
@@ -157,8 +171,8 @@ function PersonalDetails() {
 function ProfileInvitation() {
   return (
     <div className="flex h-full flex-col gap-4 lg:flex-row lg:items-start">
-      <p className="text-foreground min-w-0 font-medium lg:flex-1">
-        Need a design or private lesson?
+      <p className="text-foreground min-w-0 text-lg font-medium lg:flex-1 lg:text-xl">
+        Need design or lesson help?
       </p>
       <ProfileActions />
     </div>
@@ -167,15 +181,17 @@ function ProfileInvitation() {
 
 function ProfileActions() {
   return (
-    <div className="flex shrink-0 flex-col gap-3 lg:flex-row-reverse">
-      <div className="flex flex-col gap-1 text-left">
+    <div className="grid shrink-0 grid-cols-1 gap-3 lg:grid-cols-2">
+      <div className="flex flex-col gap-1 text-left lg:order-last">
         <ButtonLink
           href="mailto:haritssr@gmail.com?subject=Design%20consultation"
           size="profile"
         >
-          Request a Design Consultation
+          Discuss a Design
         </ButtonLink>
-        <p className="text-muted pl-0.5 text-xs">UI/UX for web or mobile.</p>
+        <p className="text-muted pl-0.5 text-sm sm:text-xs">
+          Web or mobile UI/UX
+        </p>
       </div>
       <div className="flex flex-col gap-1 text-left">
         <ButtonLink
@@ -183,10 +199,10 @@ function ProfileActions() {
           size="profile"
           variant="secondary"
         >
-          Request a Private Lesson
+          Book a Lesson
         </ButtonLink>
-        <p className="text-muted pl-0.5 text-xs">
-          Math, physics, or chemistry.
+        <p className="text-muted pl-0.5 text-sm sm:text-xs">
+          Math, physics, or chemistry
         </p>
       </div>
     </div>
@@ -343,7 +359,7 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span className="text-success" key={`u-${text.indexOf(chunk)}`}>
+        <span className="text-accent" key={`u-${text.indexOf(chunk)}`}>
           {siteName}
         </span>
       ) : (

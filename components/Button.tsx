@@ -122,6 +122,8 @@ const BUTTON_SIZE_CLASS = {
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
   default:
     "corner-squircle rounded-md px-3 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
+  compact:
+    "corner-squircle rounded-md px-2 py-0.5 supports-[corner-shape:squircle]:rounded-lg",
   "mobile-roomy":
     "corner-squircle rounded-md px-3 py-2 supports-[corner-shape:squircle]:rounded-xl sm:py-1.5",
   text: "rounded-none p-0",
@@ -156,7 +158,7 @@ export function ButtonLink({
   return (
     <a
       {...props}
-      className={`${size === "profile" ? `${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} corner-squircle min-h-10 rounded-md px-4 py-0.5 text-center supports-[corner-shape:squircle]:rounded-xl md:min-h-9.5` : buttonLinkClassName(variant)} ${className ?? ""}`}
+      className={`${size === "profile" ? `${BUTTON_BASE_CLASS} ${BUTTON_VARIANT_CLASS[variant]} ${variant === "primary" ? "border border-transparent" : ""} corner-squircle min-h-10 rounded-md px-4 py-0.5 text-center supports-[corner-shape:squircle]:rounded-xl md:min-h-9.5` : buttonLinkClassName(variant)} ${className ?? ""}`}
     >
       {children}
     </a>

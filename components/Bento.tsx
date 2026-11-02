@@ -25,7 +25,7 @@ export default function Bento({
   shape?: "round" | "squircle";
   width?: "fit" | "full";
   controlColor?: "dark" | "action";
-  trigger?: "bento" | "secondary";
+  trigger?: "bento" | "bento-text" | "secondary";
   modalSize?: "regular" | "wide";
 }) {
   return (
@@ -37,15 +37,17 @@ export default function Bento({
       ) : (
         <Dialog.Trigger
           data-bento-trigger=""
-          className={`text-foreground/90 focus-visible:outline-action flex max-w-full cursor-pointer items-center justify-between gap-2 py-1.5 pr-1.5 pl-4 text-left font-medium focus-visible:outline-2 focus-visible:outline-offset-2 ${shape === "squircle" ? "corner-squircle rounded-2xl" : "rounded-full"} ${variant === "contained" ? "bg-middle-hover" : "bg-interface-hover"} ${(width ?? (variant === "contained" ? "full" : "fit")) === "full" ? "w-full" : "w-fit"}`}
+          className={`text-foreground/90 focus-visible:outline-action flex max-w-full cursor-pointer items-center justify-between gap-2 text-left font-medium focus-visible:outline-2 focus-visible:outline-offset-2 ${trigger === "bento-text" ? "min-h-10 px-4 py-2" : "py-1.5 pr-1.5 pl-4"} ${shape === "squircle" ? "corner-squircle rounded-2xl" : "rounded-full"} ${variant === "contained" ? "bg-middle-hover" : "bg-interface-hover"} ${(width ?? (variant === "contained" ? "full" : "fit")) === "full" ? "w-full" : "w-fit"}`}
         >
           <span>{title}</span>
-          <span
-            aria-hidden="true"
-            className={`${CONTROL_CLASS_NAME} ${(controlColor ?? (variant === "contained" ? "dark" : "action")) === "dark" ? "bg-foreground/90" : "bg-action"} text-white/90 hover:text-white`}
-          >
-            <PlusIcon className="size-5" strokeWidth={3} />
-          </span>
+          {trigger === "bento" ? (
+            <span
+              aria-hidden="true"
+              className={`${CONTROL_CLASS_NAME} ${(controlColor ?? (variant === "contained" ? "dark" : "action")) === "dark" ? "bg-foreground/90" : "bg-action"} text-white/90 hover:text-white`}
+            >
+              <PlusIcon className="size-5" strokeWidth={3} />
+            </span>
+          ) : null}
         </Dialog.Trigger>
       )}
       <Dialog.Portal>

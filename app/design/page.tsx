@@ -395,6 +395,9 @@ export default function DesignSystem() {
                     The squircle shape opens the same expandable panel.
                   </p>
                 </Bento>
+                <Bento title="Text-only bento" trigger="bento-text">
+                  <p className="text-muted">A bento without a plus icon.</p>
+                </Bento>
                 <div className="bg-interface-hover rounded-2xl p-4">
                   <Bento
                     title="Contained bento"
@@ -561,6 +564,9 @@ export default function DesignSystem() {
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
                     <Button variant="primary">Primary</Button>
                   </span>
+                  <Button size="compact" variant="primary">
+                    Compact
+                  </Button>
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
                     <Button size="fallback" variant="primary">
                       Fallback
