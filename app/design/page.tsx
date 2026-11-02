@@ -12,7 +12,9 @@ import Bento from "@/components/Bento";
 import Box from "@/components/Box";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Button from "@/components/Button";
+import ExplanationList from "@/components/ExplanationList";
 import ExternalLink from "@/components/ExternalLink";
+import FlowDiagram from "@/components/FlowDiagram";
 import HttpMethodBadge, {
   HTTP_METHOD_COLORS,
 } from "@/components/HttpMethodBadge";
@@ -21,7 +23,7 @@ import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import Section from "@/components/Section";
+import Section, { SectionHeading } from "@/components/Section";
 import { TOP_BAR_CAPSULE_CLASS_NAME } from "@/components/topbar/TopBarAction";
 import katexify from "@/utils/katexify";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
@@ -34,6 +36,7 @@ import Checkbox from "./Checkbox";
 import { DesignTokens } from "./Colors";
 import ContextMenu from "./ContextMenu";
 import FloatingTask from "./FloatingTask";
+import FontPreview from "./FontPreview";
 import InterfacePrinciples from "./InterfacePrinciples";
 import LoadingButton from "./LoadingButton";
 import Logo from "./Logo";
@@ -58,17 +61,27 @@ export const metadata = createPageMetadata({
 const FORM_CONTROL_CLASS_NAME =
   "form-control w-full appearance-none rounded-lg border border-border bg-white px-3 py-2 text-sm leading-5 font-normal text-foreground/90 outline-hidden placeholder:text-muted focus:border-foreground/80 focus:ring-2 focus:ring-foreground/20 sm:max-w-xs";
 
+const EXAMPLE_FLOW = `flowchart LR
+  accTitle: Example flow
+  accDescr: An idea is designed and then shared.
+  Idea --> Design --> Share
+`;
+
 export default function DesignSystem() {
   return (
-    <>
-      <PageHeader back={{ href: "/", name: "Home" }} path="/design">
-        <PageTitle>Design</PageTitle>
-        <PageDescription>
-          Design system for{" "}
-          <ExternalLink href="https://haritssr.com" name="haritssr.com" /> and{" "}
-          <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />.
-        </PageDescription>
-      </PageHeader>
+    <FontPreview
+      header={
+        <PageHeader back={{ href: "/", name: "Home" }} path="/design">
+          <PageTitle>Design</PageTitle>
+          <PageDescription>
+            Design system for{" "}
+            <ExternalLink href="https://haritssr.com" name="haritssr.com" /> and{" "}
+            <ExternalLink href="https://www.harimaki.com" name="harimaki.com" />
+            .
+          </PageDescription>
+        </PageHeader>
+      }
+    >
       <div className="space-y-16">
         <Section title="Principles">
           <ol className="text-foreground [&>li::marker]:text-muted list-outside list-decimal space-y-2 leading-relaxed [&>li]:ml-7 [&>li]:pl-1">
@@ -362,6 +375,77 @@ export default function DesignSystem() {
 
         <Section title="Components">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="Section" title="Section">
+                <Section
+                  action={<InternalLink href="/labs">View labs</InternalLink>}
+                  description="A short description of this section."
+                  headingAs="h3"
+                  title="Recent work"
+                >
+                  <p>Content belongs here.</p>
+                </Section>
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="SectionHeading" title="Section heading">
+                <SectionHeading as="h3">Default heading</SectionHeading>
+                <SectionHeading as="h3" variant="compact">
+                  Compact heading
+                </SectionHeading>
+                <SectionHeading as="h3" variant="toolbar">
+                  Toolbar heading
+                </SectionHeading>
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="PageHeader" title="Page header">
+                <PageHeader aside={<Badge>New</Badge>}>
+                  <span className="text-foreground text-2xl font-bold">
+                    Example page
+                  </span>
+                  <PageDescription>A short page introduction.</PageDescription>
+                </PageHeader>
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="PageTitle" title="Page title">
+                <PageTitle>Example page title</PageTitle>
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="PageDescription" title="Page description">
+                <PageDescription>A short page introduction.</PageDescription>
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="ExplanationList" title="Explanation list">
+                <ExplanationList>
+                  <li>Explain the first idea.</li>
+                  <li>Follow with a related detail.</li>
+                </ExplanationList>
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col md:col-span-2 [&>div]:flex-1">
+              <Box name="FlowDiagram" title="Flow diagram">
+                <FlowDiagram definition={EXAMPLE_FLOW} title="Example flow" />
+              </Box>
+            </div>
+
+            <div className="flex min-w-0 flex-col [&>div]:flex-1">
+              <Box name="StatusPage" title="Status page">
+                <InternalLink href="/labs/user-interface/error-pages">
+                  Explore error pages
+                </InternalLink>
+              </Box>
+            </div>
+
             <div className="flex min-w-0 flex-col [&>div]:flex-1">
               <Box name="Bento" title="Bento">
                 <Bento title="This is the text you see">
@@ -791,6 +875,6 @@ export default function DesignSystem() {
           </div>
         </Section>
       </div>
-    </>
+    </FontPreview>
   );
 }

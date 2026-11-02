@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Design Geist";
+  src: url("/fonts/design/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Design Geist Mono";
+  src: url("/fonts/design/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Design Geist Serif";
+  src: url("/fonts/design/GeistSerif-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Design Maple Mono";
+  src: url("/fonts/design/MapleMono-Variable.ttf") format("truetype");
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Design Maple Mono NF";
+  src: url("/fonts/design/MapleMono-NF-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Design Maple Mono NF";
+  src: url("/fonts/design/MapleMono-NF-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+.preview[data-preview-font="geist"] {
+  font-family: "Design Geist", sans-serif;
+}
+
+.preview[data-preview-font="geist-mono"] {
+  font-family: "Design Geist Mono", monospace;
+}
+
+.preview[data-preview-font="geist-serif"] {
+  font-family: "Design Geist Serif", serif;
+}
+
+.preview[data-preview-font="maple"] {
+  font-family: "Design Maple Mono", monospace;
+}
+
+.preview[data-preview-font="maple-nf"] {
+  font-family: "Design Maple Mono NF", monospace;
+}
+
+.preview:not([data-preview-font="inter"]) :global(.font-mono),
+.preview:not([data-preview-font="inter"]) :global(.font-sans) {
+  font-family: inherit;
+}
