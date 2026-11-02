@@ -15,7 +15,7 @@ export default function Box({
 }) {
   return (
     <Container className="corner-squircle border-border bg-background flex min-w-0 flex-col overflow-hidden rounded-lg border drop-shadow-xs supports-[corner-shape:squircle]:rounded-2xl [&_button[data-bento-trigger]]:ml-auto [&_button[data-bento-trigger]]:justify-self-end">
-      <div className="border-border flex items-center justify-between gap-2 px-4 pt-3">
+      <div className="border-border mx-4 flex items-center justify-between gap-2 border-b border-dashed pt-2 pb-1.5">
         <Heading className="text-foreground min-w-0 font-medium">
           {title}
         </Heading>
