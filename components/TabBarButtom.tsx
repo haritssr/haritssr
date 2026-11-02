@@ -41,9 +41,9 @@ export default function TabBarButtom({
     <nav
       aria-label="Mobile navigation"
       data-mobile-tabbar={preview ? undefined : ""}
-      className={`${preview ? "relative block pb-2" : "sticky bottom-0 block pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:hidden"} px-2 pt-2`}
+      className={`${preview ? "relative block pb-2" : "sticky bottom-0 block pb-[max(0.5rem,env(safe-area-inset-bottom))] md:hidden"} px-2 pt-2`}
     >
-      <div className="mx-auto flex w-full items-stretch gap-1.5 sm:max-w-[26.2rem]">
+      <div className="mx-auto flex w-full items-stretch gap-1.5 sm:max-w-[22.4rem]">
         <div
           className="border-border bg-background/70 shadow-foreground/10 border-hairline flex h-14 min-w-0 flex-1 items-center rounded-full p-1 shadow-lg backdrop-blur-md sm:shadow-xl"
           data-mobile-tabbar-surface={preview ? undefined : pathname}
