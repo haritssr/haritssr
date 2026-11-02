@@ -64,7 +64,7 @@ export function ShareToastViewport() {
       }
     }
     for (const toast of toasts) {
-      if (!timers.current.has(toast.id)) {
+      if (toast.type !== "timer-deadline" && !timers.current.has(toast.id)) {
         timers.current.set(
           toast.id,
           setTimeout(() => {
@@ -132,6 +132,7 @@ export function ShareToastViewport() {
           >
             <Toast.Content>
               <FloatingNotification
+                tone={toast.type === "timer-deadline" ? "danger" : "neutral"}
                 action={
                   <Toast.Close
                     onClick={() => {
@@ -154,7 +155,11 @@ export function ShareToastViewport() {
                         }
                         data-timer-play=""
                         size="icon-circle"
-                        variant="primary-subtle"
+                        variant={
+                          toast.type === "timer-deadline"
+                            ? "danger-subtle"
+                            : "primary-subtle"
+                        }
                       />
                     }
                   >
@@ -166,8 +171,12 @@ export function ShareToastViewport() {
                   </Toast.Close>
                 }
               >
-                <Toast.Title className="text-foreground text-sm leading-5 font-medium" />
-                <Toast.Description className="text-muted m-0 truncate text-xs leading-4" />
+                <Toast.Title
+                  className={`${toast.type === "timer-deadline" ? "text-danger" : "text-foreground"} text-sm leading-5 font-medium`}
+                />
+                <Toast.Description
+                  className={`text-muted m-0 text-xs leading-4 ${toast.type === "timer-deadline" ? "wrap-anywhere" : "truncate"}`}
+                />
               </FloatingNotification>
             </Toast.Content>
           </Toast.Root>

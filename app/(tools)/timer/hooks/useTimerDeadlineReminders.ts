@@ -14,7 +14,10 @@ function deadlineToast(task: TimerTask, date: string, now: number) {
     id: `timer-deadline:${date}/${task.id}`,
     type: "timer-deadline",
     title: deadline.warning === "late" ? "Not enough time" : "Start soon",
-    description: `${task.activity} · closes at ${formatDeadlineTime(deadline.closesAt)}.`,
+    description:
+      deadline.warning === "late"
+        ? `${task.activity} · Not enough time to finish before ${formatDeadlineTime(deadline.closesAt)}.`
+        : `${task.activity} · Start by ${formatDeadlineTime(deadline.latestStartAt)} to finish before ${formatDeadlineTime(deadline.closesAt)}.`,
   };
 }
 

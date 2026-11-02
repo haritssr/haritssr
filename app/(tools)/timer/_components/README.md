@@ -233,7 +233,10 @@ modules keep independent work separate:
   `timer_tasks.deadline_reminder_at` in the same write transaction. Only its
   winner shows a silent `timer-deadline` toast, once per task/date across devices.
   Toast titles are “Start soon” or “Not enough time”; the description contains
-  the task and closing time. Dismissal leaves the card warning visible. Open
+  the task, latest safe start, and closing time. Deadline toasts use a red warning
+  icon and title, show the full message, and stay visible until dismissed or the
+  warning clears, without the ten-second timeout used by other toasts.
+  Dismissal leaves the card warning visible. Open
   toasts update if time runs out and close when the warning clears. Claims lost
   to transport errors refresh confirmed state without automatically resending.
   Legacy records/backups treat a missing claim as unclaimed; backup comparison

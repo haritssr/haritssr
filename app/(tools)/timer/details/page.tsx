@@ -82,7 +82,9 @@ export default function TimerDetailsPage() {
               Windowed tasks warn ten minutes before the latest safe start,
               using their remaining duration. A pulsing warning icon appears
               before Edit, turning red when there is not enough time to finish,
-              with one reminder toast per task each day across devices.
+              with one reminder toast per task each day across devices. The red
+              reminder stays visible until dismissed or the warning clears,
+              showing the full task name and deadline guidance.
             </li>
             <li>
               Use Multitask to run tasks together or Autoplay to start the next

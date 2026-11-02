@@ -1,4 +1,7 @@
-import { BellAlertIcon } from "@heroicons/react/24/outline";
+import {
+  BellAlertIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/outline";
 import type { ReactNode } from "react";
 
 export const FLOATING_NOTIFICATION_CLASS_NAME =
@@ -7,17 +10,20 @@ export const FLOATING_NOTIFICATION_CLASS_NAME =
 export default function FloatingNotification({
   children,
   action,
+  tone = "neutral",
 }: {
   children: ReactNode;
   action: ReactNode;
+  tone?: "neutral" | "danger";
 }) {
+  const Icon = tone === "danger" ? ExclamationTriangleIcon : BellAlertIcon;
   return (
     <div className="flex min-h-10 items-center gap-2">
       <span
-        className="notification-bell text-foreground inline-flex shrink-0"
+        className={`${tone === "danger" ? "text-danger" : "notification-bell text-foreground"} inline-flex shrink-0`}
         aria-hidden="true"
       >
-        <BellAlertIcon className="size-4.5" />
+        <Icon className="size-4.5" />
       </span>
       <div className="min-w-0 flex-1">{children}</div>
       {action}
