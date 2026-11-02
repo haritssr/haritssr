@@ -70,10 +70,12 @@ export default function URLInspection({
 
   return (
     <div className="grid gap-12 lg:grid-cols-2">
-      <Section title="Parameters" className="min-w-0">
-        {parsed.parameters.length ? (
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap gap-3">
+      <Section
+        title="Parameters"
+        className="min-w-0"
+        action={
+          parsed.parameters.length ? (
+            <div className="flex flex-wrap gap-2">
               <Button
                 variant="outline"
                 onClick={() => {
@@ -93,6 +95,11 @@ export default function URLInspection({
                 Keep all
               </Button>
             </div>
+          ) : null
+        }
+      >
+        {parsed.parameters.length ? (
+          <div className="flex flex-col gap-3">
             <Table aria-label="URL parameters">
               <thead>
                 <tr className="divide-border bg-foreground/5 divide-x">
@@ -166,7 +173,7 @@ export default function URLInspection({
                   scope="col"
                   className="w-px px-3 text-left font-medium whitespace-nowrap"
                 >
-                  Level
+                  No
                 </th>
                 <th scope="col" className="px-3 text-left font-medium">
                   Path

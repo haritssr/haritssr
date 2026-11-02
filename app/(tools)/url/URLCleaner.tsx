@@ -91,7 +91,18 @@ export default function URLCleaner() {
       />
       {parsed ? (
         <>
-          <Section title="Result">
+          <Section
+            title="Result"
+            action={
+              <Button
+                onClick={() => {
+                  void copyResult();
+                }}
+              >
+                Copy
+              </Button>
+            }
+          >
             <div className="flex flex-col gap-3">
               <textarea
                 aria-label="Cleaned URL"
@@ -101,16 +112,9 @@ export default function URLCleaner() {
                 value={result}
                 spellCheck={false}
               />
-              <div className="flex flex-wrap items-center gap-3">
-                <Button
-                  onClick={() => {
-                    void copyResult();
-                  }}
-                >
-                  Copy
-                </Button>
-                <output className="text-muted text-sm">{feedback}</output>
-              </div>
+              <output className="text-muted text-sm empty:hidden">
+                {feedback}
+              </output>
             </div>
           </Section>
           <URLInspection

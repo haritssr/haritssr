@@ -7,6 +7,7 @@ export type SectionProps = Omit<
 > & {
   children?: ReactNode;
   title: ReactNode;
+  action?: ReactNode;
   description?: ReactNode;
   contentClassName?: string;
   spacing?: boolean;
@@ -18,6 +19,7 @@ export type SectionProps = Omit<
 export default function Section({
   children,
   title,
+  action,
   description,
   id,
   className = "",
@@ -33,6 +35,17 @@ export default function Section({
   const hasDescription = description !== undefined && description !== null;
   const wrapContent =
     children !== undefined && children !== null && contentClassName.length > 0;
+  const heading = (
+    <SectionHeading
+      as={headingAs}
+      className={headingClassName}
+      id={labelId}
+      spacingAfter={hasDescription ? "default" : "section"}
+      variant={headingVariant}
+    >
+      {title}
+    </SectionHeading>
+  );
 
   return (
     <section
@@ -41,15 +54,16 @@ export default function Section({
       className={`${spacing ? "space-y-5" : ""} ${className}`}
       id={id}
     >
-      <SectionHeading
-        as={headingAs}
-        className={headingClassName}
-        id={labelId}
-        spacingAfter={hasDescription ? "default" : "section"}
-        variant={headingVariant}
-      >
-        {title}
-      </SectionHeading>
+      {action === undefined || action === null ? (
+        heading
+      ) : (
+        <div
+          className={`flex min-w-0 flex-wrap items-end justify-between gap-3 [&>[data-section-heading]]:mb-0 ${spacing ? "mb-2.5!" : ""}`}
+        >
+          {heading}
+          {action}
+        </div>
+      )}
       {hasDescription ? <p className="text-muted mb-5">{description}</p> : null}
       {wrapContent ? (
         <div className={contentClassName}>{children}</div>

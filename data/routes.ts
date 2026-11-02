@@ -88,7 +88,7 @@ export const musicRoute: RouteDoc = {
 export const urlRoute: RouteDoc = {
   route: "/url",
   title: "URL",
-  description: "Remove URL parameters and fragments.",
+  description: "Remove parameters and fragments.",
   group: "Tools",
 };
 
