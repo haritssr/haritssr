@@ -31,7 +31,7 @@ export default function TaskProgress({
 }) {
   const stackClass = compact
     ? "@container flex flex-col gap-1.5"
-    : "flex flex-col gap-1 sm:group-data-list-view/task-list:timer-list-progress-gap";
+    : "flex flex-col gap-1 sm:gap-0.5";
   const percentage = Math.min(100, (spent / task.duration) * 100);
   const percentageLabel = percentage.toFixed(0);
   const progressStyle: CSSProperties & {
@@ -44,7 +44,7 @@ export default function TaskProgress({
   return (
     <div className={stackClass}>
       <div
-        className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : `${TASK_LAYOUT.time} sm:group-data-list-view/task-list:text-xs`}`}
+        className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : `${TASK_LAYOUT.time} text-base sm:group-data-list-view/task-list:text-sm`}`}
       >
         {title === undefined ? null : (
           <span className="flex min-w-0 flex-1 items-center gap-1 text-sm leading-4 font-medium normal-nums">
@@ -81,7 +81,7 @@ export default function TaskProgress({
           ) : null}
         </span>
         {timeNote === undefined ? null : (
-          <span className="text-slider-track-hover min-w-0 text-center text-sm whitespace-normal tabular-nums sm:group-data-list-view/task-list:text-xs">
+          <span className="text-slider-track-hover min-w-0 text-center text-base whitespace-normal tabular-nums sm:group-data-list-view/task-list:text-sm">
             {timeNote}
           </span>
         )}
