@@ -97,13 +97,14 @@ export default function InstallButton({
     return (
       <Button
         aria-keyshortcuts="Alt+I"
-        className="hover:text-foreground rounded-sm border-0! bg-transparent p-0 text-[15px] font-normal text-inherit shadow-none hover:bg-transparent"
+        className="hover:text-foreground text-[15px] font-normal text-inherit"
         data-install-trigger=""
         onClick={() => {
           void install();
         }}
         type="button"
-        variant="secondary"
+        size="text"
+        variant="icon"
       >
         Install
       </Button>
