@@ -1,7 +1,7 @@
 .results > [role="option"] + [role="option"]::before {
   position: absolute;
   inset: -5px 0.5rem auto;
-  border-top: 1px dashed var(--color-border);
+  border-top: 1px dashed var(--color-zinc-200);
   content: "";
   pointer-events: none;
 }
