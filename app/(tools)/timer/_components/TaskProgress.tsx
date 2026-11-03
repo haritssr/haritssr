@@ -41,10 +41,10 @@ export function MobileCircularProgress({
           −{formatTimerTime(Math.max(0, task.duration - spent))}
         </span>
       </div>
-      <div className="relative flex size-10 shrink-0 items-center justify-center">
+      <div className="grid size-10 shrink-0 place-items-center">
         <svg
           aria-hidden="true"
-          className="absolute inset-0 size-full -rotate-90 p-0.5"
+          className="col-start-1 row-start-1 size-8.5 -rotate-90"
           viewBox="0 0 64 64"
         >
           <circle
@@ -71,7 +71,7 @@ export function MobileCircularProgress({
         </svg>
         <span
           aria-hidden="true"
-          className={`text-timer-progress tabular-nums ${appearance.elapsed}`}
+          className={`text-timer-progress col-start-1 row-start-1 leading-none tabular-nums ${appearance.elapsed}`}
         >
           {percentage.toFixed(0)}
         </span>
