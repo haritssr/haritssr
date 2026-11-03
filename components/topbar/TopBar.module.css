@@ -58,13 +58,15 @@
   translate: 0.5rem 0;
 }
 
-.row[data-show-title="true"] {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
-}
+@media (width < 768px) {
+  .row[data-show-title="true"] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
 
-.row[data-show-title="true"] > :last-child {
-  justify-self: end;
+  .row[data-show-title="true"] > :last-child {
+    justify-self: end;
+  }
 }
 
 .titleBackdrop {

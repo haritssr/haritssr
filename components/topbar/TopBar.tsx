@@ -110,7 +110,7 @@ export default function TopBar() {
         )}
         {showTitle ? (
           // TitleWhileScroll
-          <div className="flex min-w-0 flex-1 justify-center">
+          <div className="flex min-w-0 flex-1 justify-center md:hidden">
             <Link
               className={`${styles.titleBackdrop} text-foreground flex w-fit max-w-full min-w-0 items-center px-2 text-lg font-medium sm:px-4`}
               href={pathname}
@@ -124,9 +124,8 @@ export default function TopBar() {
               <p className="truncate">{header.title}</p>
             </Link>
           </div>
-        ) : (
-          <TabBarTop pathname={pathname} />
-        )}
+        ) : null}
+        <TabBarTop pathname={pathname} />
         <HeaderActions
           key={pathname}
           pathname={pathname}
