@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useContext, useEffect, useState, useSyncExternalStore } from "react";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 
 import FloatingTimerDock from "@/app/(tools)/timer/_components/FloatingTimerDock";
 import { getTaskCollection } from "@/app/(tools)/timer/_components/taskState";
@@ -18,6 +18,7 @@ import {
   fetchTimerSnapshot,
   subscribeTimerChanges,
   TIMER_SNAPSHOT_KEY,
+  subscribeTimerRecovery,
 } from "@/app/(tools)/timer/utils/timerClient";
 import type { ReceivedTimerSnapshot } from "@/app/(tools)/timer/utils/timerClient";
 import { createTimerController } from "@/app/(tools)/timer/utils/timerController";
@@ -113,41 +114,50 @@ function useTimerPageTitle(
 function useTimerRuntime(controller: TimerController) {
   const polling = useTimerPolling();
   const { mutations } = controller;
+  const { mutate } = useSWRConfig();
   const state = useSyncExternalStore(
     mutations.subscribe,
     mutations.getSnapshot,
     mutations.getSnapshot
   );
-  const { data, error: loadError } = useSWR<ReceivedTimerSnapshot, Error>(
-    TIMER_SNAPSHOT_KEY,
-    fetchTimerSnapshot,
-    {
-      refreshInterval: (snapshot) => {
-        const latest = mutations.getSnapshot().confirmed ?? snapshot;
-        if (!polling || latest?.mode === "demo") {
-          return 0;
-        }
-        return latest?.day.tasks.some((task) => task.startedAt !== null) ===
-          true
-          ? 30_000
-          : 120_000;
-      },
-      refreshWhenHidden: false,
-      shouldRetryOnError: true,
-      errorRetryCount: 2,
-      errorRetryInterval: 5000,
+  useSWR<ReceivedTimerSnapshot, Error>(TIMER_SNAPSHOT_KEY, fetchTimerSnapshot, {
+    refreshInterval: (snapshot) => {
+      const latest = mutations.getSnapshot().confirmed ?? snapshot;
+      if (
+        !polling ||
+        latest?.mode === "demo" ||
+        mutations.getSnapshot().loadFailure !== null
+      ) {
+        return 0;
+      }
+      return latest?.day.tasks.some((task) => task.startedAt !== null) === true
+        ? 30_000
+        : 120_000;
+    },
+    refreshWhenHidden: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    // The shared controller schedules recovery for every read entry point.
+    shouldRetryOnError: false,
+    onSuccess: mutations.receive,
+    onError: mutations.loadFailed,
+  });
+  useEffect(() => {
+    if (state.confirmed !== undefined) {
+      // Manual reads, saves and broadcasts must also clear SWR's polling error.
+      void mutate(TIMER_SNAPSHOT_KEY, state.confirmed, { revalidate: false });
     }
+  }, [mutate, state.confirmed]);
+  useEffect(
+    () =>
+      subscribeTimerRecovery(
+        state.loadFailure,
+        state.loadFailures,
+        polling,
+        mutations.refresh
+      ),
+    [mutations, polling, state.loadFailure, state.loadFailures]
   );
-  useEffect(() => {
-    if (data !== undefined) {
-      mutations.receive(data);
-    }
-  }, [data, mutations]);
-  useEffect(() => {
-    if (loadError !== undefined) {
-      mutations.loadFailed(loadError);
-    }
-  }, [loadError, mutations]);
   useEffect(() => {
     try {
       return subscribeTimerChanges((snapshot) => {

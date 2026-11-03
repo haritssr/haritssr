@@ -214,15 +214,23 @@ modules keep independent work separate:
   In-memory snapshot versions travel through `ETag` / `If-None-Match`;
   unchanged polls reuse confirmed tasks from a 304 response with fresh server
   clock headers. Saves and broadcasts update the same memory cache. Failed
-  requests discard the transport cache so retries fetch full data.
+  requests discard the transport cache so retries fetch full data. A 304 with a
+  missing or invalid server timestamp falls back once to a full GET within the
+  same deadline; stale server timestamps are never reused.
   Concurrent snapshot reads in one tab share a single request. Snapshot and
   history reads start alongside validation-module loading and have a ten-second
-  deadline covering both operations. Initial snapshot failures retry at most
-  twice with a five-second base delay; focus, reconnect, and Try again can also
-  recover. On the Timer page, failures appear in the floating retry notification,
-  including when no snapshot exists. Saves retain their fifteen-second
-  request timeout and are never automatically resent. Refresh errors clear when a
-  fresh snapshot arrives; save errors remain available for explicit recovery.
+  deadline covering both operations. Transient snapshot failures retry after 5,
+  10, 20, then 30 seconds without a retry-count limit, respecting Retry-After.
+  Only the visible, online polling owner retries in the background; focus,
+  reconnect, and Try again can also recover. Authentication, validation, and
+  other permanent read failures do not retry automatically. With loaded tasks,
+  the floating notice says “Reconnecting…” for the first two transient failures;
+  the third failure shows Timer unavailable while recovery continues. Initial-load
+  and save failures are immediately actionable. Saves retain their fifteen-second
+  request timeout and are never automatically resent. Fresh reads, saves, and
+  validated broadcasts clear read failures and SWR polling errors together; read
+  recovery preserves save errors and failed drafts. Client diagnostics contain
+  only failure category, status, resource kind, and duration.
 - [timerDatabase.ts](../server/timerDatabase.ts) owns SQL mapping and atomic
   Turso transactions, with indexed active/pending-date discovery performed once,
   date-scoped batched reads, changed-row writes, and a reused runtime client.

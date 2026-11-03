@@ -214,6 +214,11 @@ export default function TimerDetailsPage() {
               connected; ticking sounds stay local to each browser.
             </li>
             <li>
+              If sync drops, loaded tasks remain visible while Timer reconnects
+              automatically. Repeated failures show a Retry control. Failed
+              saves keep your drafts and are never resent automatically.
+            </li>
+            <li>
               After a refresh, your browser may require a click, tap, or key
               press before ticking sounds resume. The countdown continues
               independently of sound.

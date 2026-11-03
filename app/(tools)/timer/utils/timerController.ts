@@ -7,6 +7,7 @@ import {
   fetchTimerSnapshot,
   saveTimerPreferences,
   sendTimerAction,
+  TimerReadError,
 } from "@/app/(tools)/timer/utils/timerClient";
 import { TimerMutations } from "@/app/(tools)/timer/utils/timerMutations";
 
@@ -67,6 +68,12 @@ export function createTimerController() {
       taskPresets: preferences.taskPresets,
       dailyTasks: preferences.dailyTasks,
       error: state.error ?? state.loadError,
+      reconnecting:
+        state.error === null &&
+        state.confirmed !== undefined &&
+        state.loadFailure instanceof TimerReadError &&
+        state.loadFailures < 3 &&
+        state.loadFailure.retryable,
       ...actions,
     };
   }

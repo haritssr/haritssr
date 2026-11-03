@@ -9,15 +9,17 @@ import FloatingNotification, {
 export default function FloatingRetryNotification({
   message,
   onRetry,
+  reconnecting = false,
 }: {
   message: string;
   onRetry: () => void;
+  reconnecting?: boolean;
 }) {
   return (
     <FloatingDockNotice>
       <div
         className={`${FLOATING_NOTIFICATION_CLASS_NAME} sm:w-[22.4rem]`}
-        role="alert"
+        role={reconnecting ? "status" : "alert"}
       >
         <FloatingNotification
           action={
@@ -26,7 +28,7 @@ export default function FloatingRetryNotification({
               title="Retry"
               data-floating-space="error"
               size="icon-circle"
-              variant="danger-subtle"
+              variant={reconnecting ? "outline" : "danger-subtle"}
               onClick={onRetry}
             >
               <ArrowPathIcon
@@ -38,10 +40,10 @@ export default function FloatingRetryNotification({
           }
         >
           <p className="text-foreground text-sm leading-5 font-medium">
-            Timer unavailable
+            {reconnecting ? "Reconnecting…" : "Timer unavailable"}
           </p>
           <p className="text-muted text-xs leading-4 wrap-break-word">
-            {message}
+            {reconnecting ? "Retrying Timer sync automatically." : message}
           </p>
         </FloatingNotification>
       </div>

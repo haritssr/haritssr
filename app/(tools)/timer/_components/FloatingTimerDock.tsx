@@ -20,10 +20,11 @@ import InternalLink from "@/components/InternalLink";
 
 export default function FloatingTimerDock() {
   const pathname = usePathname();
-  const { snapshot, clockOffset, error, refresh } = useTimer(
+  const { snapshot, clockOffset, error, reconnecting, refresh } = useTimer(
     "snapshot",
     "clockOffset",
     "error",
+    "reconnecting",
     "refresh"
   );
   const showTasks = pathname !== "/timer" && canUseTimer(snapshot);
@@ -77,6 +78,7 @@ export default function FloatingTimerDock() {
     <>
       {showError ? (
         <FloatingRetryNotification
+          reconnecting={reconnecting}
           message={error}
           onRetry={() => {
             void refresh();

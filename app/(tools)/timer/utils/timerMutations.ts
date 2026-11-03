@@ -29,6 +29,8 @@ interface MutationState {
   pendingCount: number;
   error: string | null;
   loadError: string | null;
+  loadFailure: Error | null;
+  loadFailures: number;
   drafts: Record<string, TaskDraft>;
 }
 interface Transport {
@@ -106,6 +108,7 @@ export class TimerMutations {
   private readonly latestDraft = new Map<string, number>();
   private readonly queue: PendingChange[] = [];
   private processing = false;
+  private refreshing: Promise<ReceivedTimerSnapshot | null> | undefined;
   private sequence = 0;
   private state: MutationState = {
     confirmed: undefined,
@@ -113,6 +116,8 @@ export class TimerMutations {
     pendingCount: 0,
     error: null,
     loadError: null,
+    loadFailure: null,
+    loadFailures: 0,
     drafts: {},
   };
   private readonly transport: Transport;
@@ -133,33 +138,46 @@ export class TimerMutations {
       ...this.state,
       confirmed: reconcile(this.state.confirmed, next),
       loadError: null,
+      loadFailure: null,
+      loadFailures: 0,
     };
     this.publish();
   };
 
   loadFailed = (error: Error) => {
-    this.state = { ...this.state, loadError: error.message };
+    if (this.state.loadFailure === error) {
+      return;
+    }
+    this.state = {
+      ...this.state,
+      loadError: error.message,
+      loadFailure: error,
+      loadFailures: this.state.loadFailures + 1,
+    };
     this.publish();
   };
 
   refresh = async () => {
+    this.refreshing ??= this.load();
+    return await this.refreshing;
+  };
+
+  private async load() {
     try {
       const next = await this.transport.refresh();
-      this.state = { ...this.state, error: null };
       this.receive(next);
       return next;
     } catch (error) {
-      this.state = {
-        ...this.state,
-        loadError:
-          error instanceof Error
-            ? error.message
-            : "Timer could not be refreshed.",
-      };
-      this.publish();
+      this.loadFailed(
+        error instanceof Error
+          ? error
+          : new Error("Timer could not be refreshed.")
+      );
       return null;
+    } finally {
+      this.refreshing = undefined;
     }
-  };
+  }
 
   act = async (action: TimerAction) =>
     await this.enqueue({
@@ -294,7 +312,12 @@ export class TimerMutations {
             this.state = { ...this.state, drafts };
           }
           this.receive(next);
-        } catch {
+        } catch (refreshError) {
+          this.loadFailed(
+            refreshError instanceof Error
+              ? refreshError
+              : new Error("Timer could not be refreshed.")
+          );
           for (const pending of this.queue.splice(0)) {
             this.reject(
               pending,
