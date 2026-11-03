@@ -6,7 +6,6 @@ import {
   LinkIcon,
   CodeBracketIcon,
   RssIcon,
-  SquaresPlusIcon,
 } from "@heroicons/react/24/outline";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -334,18 +333,6 @@ function Tools() {
         headingLevel={3}
         icon={
           <RssIcon
-            aria-hidden="true"
-            className="text-foreground size-4.5 shrink-0"
-            strokeWidth={1.5}
-          />
-        }
-      />
-      <IndexCard
-        title="Design"
-        href="/design"
-        headingLevel={3}
-        icon={
-          <SquaresPlusIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}
