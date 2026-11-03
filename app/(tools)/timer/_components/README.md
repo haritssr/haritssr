@@ -230,7 +230,8 @@ modules keep independent work separate:
   request timeout and are never automatically resent. Fresh reads, saves, and
   validated broadcasts clear read failures and SWR polling errors together; read
   recovery preserves save errors and failed drafts. Client diagnostics contain
-  only failure category, status, resource kind, and duration.
+  only failure category, status, resource kind, and duration. Slow API reads expose
+  Server-Timing and log status/duration; storage failures log only sanitized codes.
 - [timerDatabase.ts](../server/timerDatabase.ts) owns SQL mapping and atomic
   Turso transactions, with indexed active/pending-date discovery performed once,
   date-scoped batched reads, changed-row writes, and a reused runtime client.

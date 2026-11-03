@@ -43,7 +43,16 @@ function failure(error: unknown) {
       { status: error instanceof TimerStoreError ? error.status : 400, headers }
     );
   }
-  console.error("Timer storage operation failed.");
+  const code =
+    error instanceof Error &&
+    "code" in error &&
+    typeof error.code === "string" &&
+    /^(?:SQLITE_[A-Z_]+|HRANA_[A-Z_]+|SERVER_ERROR|FETCH_ERROR|TIMEOUT|TRANSACTION_CLOSED)$/.test(
+      error.code
+    )
+      ? error.code
+      : "UNKNOWN";
+  console.error("Timer storage operation failed.", { code });
   return NextResponse.json(
     {
       error: "Could not load or save Timer data.",
@@ -84,8 +93,7 @@ function preview(date: string | null) {
   };
 }
 
-export async function GET(request: Request) {
-  const started = Date.now();
+async function read(request: Request, started: number) {
   try {
     const query = new URL(request.url).searchParams;
     const owner = await isTimerOwner();
@@ -121,6 +129,17 @@ export async function GET(request: Request) {
   } catch (error) {
     return failure(error);
   }
+}
+
+export async function GET(request: Request) {
+  const started = Date.now();
+  const response = await read(request, started);
+  const duration = Date.now() - started;
+  response.headers.set("Server-Timing", `timer;dur=${duration}`);
+  if (duration >= 5000 || response.status >= 400) {
+    console.warn("Timer API read.", { status: response.status, duration });
+  }
+  return response;
 }
 
 async function write(request: Request, preferences: boolean) {
