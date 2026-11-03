@@ -153,7 +153,6 @@ export function ShareToastViewport() {
                             ? undefined
                             : "notification"
                         }
-                        data-timer-play=""
                         size="icon-circle"
                         variant={
                           toast.type === "timer-deadline"

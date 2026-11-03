@@ -25,7 +25,6 @@ export default function FloatingRetryNotification({
               aria-label="Retry timer refresh"
               title="Retry"
               data-floating-space="error"
-              data-timer-play=""
               size="icon-circle"
               variant="danger-subtle"
               onClick={onRetry}

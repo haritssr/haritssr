@@ -9,7 +9,19 @@ Music keeps priority while its floating player is visible, including when paused
 
 Music and Timer use separate floating pills, with Music above Timer when both
 are visible. Each pill spans the available width on phones, and both players'
-controls remain accessible.
+controls remain accessible. Below `md`, downward scrolling docks the players
+between minimized navigation and Search when bottom navigation is available.
+Docked pills retain their title and Play/Pause; secondary controls and remaining
+time are hidden. Both players share the available gap when present. Upward
+scrolling or expanding navigation restores both full pills. On routes without
+bottom navigation, full controls stay in the normal floating position. Pausing
+keeps a docked player available.
+Live pills animate position and width over 240ms while docking or expanding;
+rapid reversals continue from their current visual position. Reduced motion skips
+this animation, and route changes do not trigger it.
+Both expanded pills are 40px tall, with a single row of content and no progress
+bar. Music shows its icon, title, remaining time, Close, and Play/Pause.
+Controls use thick neutral icons, compact spacing, and no button circles.
 
 | Responsibility | File |
 | --- | --- |

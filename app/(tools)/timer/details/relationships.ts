@@ -26,7 +26,7 @@ export const timerRelationships = [
       Controller -->|selected state and actions| Dock["app/(tools)/timer/_components/FloatingTimerDock.tsx"]
       Dock -->|portal slot| Host["components/floating/FloatingDock.tsx"]
       Host -->|combined Music and Timer geometry| Position["components/floating/useFloatingDockPosition.ts"]
-      Position --> Navigation["components/TabBarButtom.tsx"]
+      Position --> Navigation["components/TabBarBottom.tsx"]
       Client --> Toolbar["TimerToolbar.tsx"]
       Client --> List["TaskList.tsx"]
       Runtime -->|snapshot loading and broadcasts| Transport

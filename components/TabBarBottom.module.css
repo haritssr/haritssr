@@ -1,0 +1,82 @@
+.frame {
+  display: flex;
+  height: 3.25rem;
+  align-items: flex-end;
+}
+
+.row {
+  container-type: inline-size;
+  height: 3.25rem;
+  transition: height 200ms ease-out;
+}
+
+.row[data-collapsed="true"] {
+  height: 2.625rem;
+}
+
+.pill {
+  position: relative;
+  width: calc(100% - 3.5rem);
+  overflow: hidden;
+  transition: width 200ms ease-out;
+}
+
+.pill[data-collapsed="true"] {
+  width: 2.625rem;
+}
+
+.search {
+  width: 3.25rem;
+  transition:
+    width 200ms ease-out,
+    background-color 150ms;
+}
+
+.row[data-collapsed="true"] .search {
+  width: 2.625rem;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition:
+    width 200ms ease-out,
+    height 200ms ease-out;
+}
+
+.row[data-collapsed="true"] .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.tabs {
+  width: calc(100cqw - 3.5rem - 0.25rem - 1px);
+  flex-shrink: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.pill[data-collapsed="true"] .tabs {
+  opacity: 0;
+}
+
+.expand {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.pill[data-collapsed="true"] .expand {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill,
+  .tabs,
+  .expand,
+  .row,
+  .search,
+  .icon {
+    transition: none;
+  }
+}

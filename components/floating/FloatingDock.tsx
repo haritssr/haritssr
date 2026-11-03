@@ -13,7 +13,10 @@ import {
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
+import { useMobileControls } from "./MobileControlsProvider";
 import useFloatingDockPosition from "./useFloatingDockPosition";
+
+import styles from "./FloatingDock.module.css";
 
 type DockPosition = "music" | "timer";
 type DockCounts = Record<DockPosition | "notice", number>;
@@ -59,6 +62,7 @@ function isSpaceShortcut(event: KeyboardEvent) {
 
 export default function FloatingDock({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const { playersDocked } = useMobileControls();
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
   const [noticeTarget, setNoticeTarget] = useState<HTMLDivElement | null>(null);
   const [counts, setCounts] = useState<DockCounts>({
@@ -67,7 +71,7 @@ export default function FloatingDock({ children }: { children: ReactNode }) {
     notice: 0,
   });
   const count = counts.music + counts.timer + counts.notice;
-  const ref = useFloatingDockPosition(count > 0, pathname);
+  const ref = useFloatingDockPosition(count > 0, pathname, playersDocked);
   const onKeyDown = useEffectEvent((event: KeyboardEvent) => {
     if (!isSpaceShortcut(event)) {
       return;
@@ -119,6 +123,7 @@ export default function FloatingDock({ children }: { children: ReactNode }) {
     <DockContext value={value}>
       {children}
       <div
+        data-collapsed={playersDocked}
         className={`${count === 0 ? "hidden" : "flex"} pointer-events-none fixed inset-x-0 bottom-[var(--floating-dock-bottom,max(0.5rem,env(safe-area-inset-bottom)))] z-50 mx-auto w-full max-w-5xl flex-col items-end gap-2 px-2 [--floating-safe-bottom:env(safe-area-inset-bottom,0px)] sm:bottom-[var(--floating-dock-bottom,1.5rem)] sm:items-center sm:px-4 xl:px-0`}
         ref={ref}
       >
@@ -127,7 +132,8 @@ export default function FloatingDock({ children }: { children: ReactNode }) {
           ref={setNoticeTarget}
         />
         <div
-          className={`${hasPlayers ? "flex" : "hidden"} w-full max-w-full min-w-0 flex-col items-end gap-2 sm:w-auto sm:items-center`}
+          className={`${styles.players} ${hasPlayers ? "flex" : "hidden"} w-full max-w-full min-w-0 flex-col items-end gap-2 sm:w-auto sm:items-center`}
+          data-collapsed={playersDocked}
           ref={setTarget}
         />
       </div>
@@ -143,11 +149,15 @@ export function FloatingDockSlot({
   position: DockPosition;
 }) {
   const { register, target } = useFloatingDock();
+  const { playersDocked } = useMobileControls();
   useEffect(() => register(position), [position, register]);
   return target
     ? createPortal(
         <div
-          className={`${position === "music" ? "order-1" : "order-2"} flex w-full max-w-full min-w-0 flex-col items-end gap-2 sm:w-auto sm:items-center`}
+          className={`${styles.slot} group/floating ${position === "music" ? "order-1" : "order-2"} flex w-full max-w-full min-w-0 flex-col items-end gap-2 sm:w-auto sm:items-center`}
+          data-collapsed={playersDocked}
+          data-player={position}
+          data-mobile-collapse-region=""
         >
           {children}
         </div>,

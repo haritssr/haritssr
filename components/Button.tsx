@@ -17,12 +17,14 @@ type ButtonVariant =
   | "floating-secondary"
   | "outline"
   | "floating-outline"
+  | "floating-control"
   | "outline-interactive"
   | "outline-regular"
   | "action-outline-regular"
   | "action-outline"
   | "primary"
   | "primary-subtle"
+  | "primary-floating"
   | "profile-secondary"
   | "timer-running"
   | "timer-paused"
@@ -42,10 +44,12 @@ export const SECONDARY_BUTTON_CLASS =
   "border-border bg-secondary-button-surface text-foreground border font-medium transition-colors duration-150 hover:not-disabled:border-[color-mix(in_srgb,var(--color-border)_70%,var(--color-border-hover))] hover:not-disabled:bg-[color-mix(in_srgb,var(--color-secondary-button-surface)_80%,var(--color-interface-hover))] focus-visible:outline-action";
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
+  "floating-control":
+    "text-foreground transition-colors duration-150 enabled:hover:text-muted focus-visible:outline-action",
   "theme-fill":
     "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
   "timer-running":
-    "border border-transparent bg-progress font-medium text-white hover:bg-progress-hover focus-visible:outline-progress",
+    "border border-transparent bg-danger font-medium text-white hover:bg-danger/90 focus-visible:outline-danger",
   "timer-paused":
     "border border-transparent bg-foreground/90 font-medium text-white hover:bg-foreground focus-visible:outline-foreground",
   "timer-secondary":
@@ -93,6 +97,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "bg-action font-medium text-white hover:bg-action-hover focus-visible:outline-action",
   "primary-subtle":
     "border border-transparent bg-action font-medium text-white transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action",
+  "primary-floating":
+    "border border-transparent bg-action font-medium text-white shadow-lg transition-colors duration-150 enabled:hover:bg-action/90 focus-visible:outline-action md:shadow-none",
   "profile-secondary":
     "bg-foreground/8 font-medium text-foreground transition-colors duration-150 select-none hover:bg-foreground/12 focus-visible:outline-foreground",
   secondary: SECONDARY_BUTTON_CLASS,
@@ -101,6 +107,10 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
 };
 
 const BUTTON_SIZE_CLASS = {
+  "responsive-floating":
+    "h-10.25 shrink-0 rounded-full px-4 py-0 [corner-shape:round] md:corner-squircle md:h-auto md:rounded-md md:px-3 md:py-1.5 md:supports-[corner-shape:squircle]:rounded-xl",
+  "floating-control":
+    "relative h-10 w-7 shrink-0 gap-0 rounded-full p-0 before:absolute before:inset-x-0 before:-inset-y-0.5 before:rounded-full group-data-[collapsed=true]/floating:before:-inset-x-0.5",
   "icon-circle":
     "size-10 shrink-0 rounded-full p-2 [corner-shape:round] sm:p-1.5",
   "timer-card":
@@ -119,6 +129,8 @@ const BUTTON_SIZE_CLASS = {
     "corner-squircle size-7 shrink-0 rounded-sm p-1 supports-[corner-shape:squircle]:rounded-md",
   "icon-toolbar":
     "corner-squircle min-h-8.5 shrink-0 gap-1 rounded-md px-2 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
+  "responsive-toolbar":
+    "corner-squircle shrink-0 rounded-md p-1.5 md:px-3 supports-[corner-shape:squircle]:rounded-xl",
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
   default:
     "corner-squircle rounded-md px-3 py-1.5 supports-[corner-shape:squircle]:rounded-xl",

@@ -113,9 +113,10 @@ estimates the clock offset from monotonic request duration and server timestamps
 excluding server processing time. Response timing is captured before validation,
 and broadcasts preserve that calibration even when delivery is delayed.
 
-Outside `/timer`, `FloatingTimerDock` reuses compact `TaskProgress`, the icon presentation
-of `TaskActions`. Its wrapping title and muted remaining time (prefixed with `-`) sit above the progress bar
-and form one link occupying half the dock, with circular actions beside it. It shows one
+Outside `/timer`, `FloatingTimerDock` uses the shared 40px `FloatingPlayer` surface
+and the icon presentation of `TaskActions`. Its clock, title, and danger-colored remaining
+time (prefixed with `-`) form one link, followed by bare neutral controls.
+The floating player has no progress bar. It shows one
 running task, initially the most recently started, with a task-count button that
 cycles through tasks when needed. Manual selection survives navigation. Pausing from the dock retains
 one paused task for Continue or Done; unrelated paused tasks are not added.
@@ -125,10 +126,16 @@ Turso running tasks use the dock.
 
 The shared `FloatingDock` displays Music above Timer as separate pills when both
 are visible. Each pill spans the available width on phones, and both players'
-controls remain accessible. The Timer pill has a task switcher when multiple
+controls remain accessible. Below `md`, downward scrolling docks both players
+between minimized navigation and Search. Docked pills keep their title and
+Play/Pause, hiding remaining time and secondary controls. On routes without
+bottom navigation they retain their full controls and normal position. Upward
+scrolling or expanding navigation restores both full pills. Pausing keeps
+the docked control available. `MobileControlsProvider` owns the shared scroll
+and docking state; notifications stay expanded. The Timer pill has a task switcher when multiple
 tasks are available, Complete, and Play/Pause. The dock measures its content and
-reserves footer clearance once. Its minimum height matches the navigation surface, with a 53px
-fallback when absent.
+preserves footer clearance while the controls shrink. Player height is always
+40px, independent of navigation height.
 [useFloatingDockPosition.ts](../../../../components/floating/useFloatingDockPosition.ts)
 measures the real navigation surface and matches its bottom screen gap above it.
 Without mobile navigation it uses safe-area-aware bottom clearance; desktop

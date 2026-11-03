@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import MusicProvider from "@/app/(tools)/music/_components/MusicProvider";
 import TimerProvider from "@/app/(tools)/timer/_components/TimerProvider";
 import FloatingDock from "@/components/floating/FloatingDock";
+import MobileControlsProvider from "@/components/floating/MobileControlsProvider";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import SharePageProvider, {
@@ -11,7 +12,7 @@ import SharePageProvider, {
 } from "@/components/SharePageProvider";
 import SiteShortcuts from "@/components/SiteShortcuts";
 import { SiteStructuredData } from "@/components/StructuredData";
-import TabBarButtom from "@/components/TabBarButtom";
+import TabBarBottom from "@/components/TabBarBottom";
 import TopBar from "@/components/topbar/TopBar";
 import { GlobalSearchProvider } from "@/components/topbar/TopBarSearch";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
@@ -84,23 +85,25 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <SharePageProvider>
           <GlobalSearchProvider>
-            <SiteShortcuts />
-            <FloatingDock>
-              <ShareToastViewport />
-              <MusicProvider>
-                <TimerProvider>
-                  <TopBar />
-                  <main
-                    className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 sm:pt-5 xl:px-0"
-                    id="main-content"
-                  >
-                    {children}
-                  </main>
-                </TimerProvider>
-              </MusicProvider>
-            </FloatingDock>
-            <Footer />
-            <TabBarButtom />
+            <MobileControlsProvider>
+              <SiteShortcuts />
+              <FloatingDock>
+                <ShareToastViewport />
+                <MusicProvider>
+                  <TimerProvider>
+                    <TopBar />
+                    <main
+                      className="mx-auto w-full max-w-5xl flex-auto shrink-0 px-4 pb-(--floating-footer-clearance,1rem) sm:pt-5 md:pb-0 xl:px-0"
+                      id="main-content"
+                    >
+                      {children}
+                    </main>
+                  </TimerProvider>
+                </MusicProvider>
+              </FloatingDock>
+              <Footer />
+              <TabBarBottom />
+            </MobileControlsProvider>
           </GlobalSearchProvider>
         </SharePageProvider>
       </body>

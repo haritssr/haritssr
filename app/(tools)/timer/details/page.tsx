@@ -65,6 +65,16 @@ export default function TimerDetailsPage() {
             </li>
             <li>Start, pause, resume, edit, or finish tasks early.</li>
             <li>
+              The slim floating player shows remaining time, Done, and
+              Play/Pause. Switch tasks when multiple timers are available.
+            </li>
+            <li>
+              On mobile, scrolling down docks each player’s title and Play/Pause
+              between minimized navigation and Search. Scroll up or expand
+              navigation to restore full controls. Pages without bottom
+              navigation keep full controls.
+            </li>
+            <li>
               Press Space on Timer to pause the most recently started task or
               resume it when no floating control takes priority.
             </li>

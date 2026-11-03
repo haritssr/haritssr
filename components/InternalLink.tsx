@@ -40,17 +40,24 @@ export default function InternalLink({
   if (variant === "contents") {
     interaction = "hover:underline";
   } else if (variant === "floating") {
-    interaction = "text-foreground hover:text-foreground";
+    interaction =
+      "text-foreground hover:text-foreground rounded-sm focus-visible:outline-action focus-visible:outline-2 focus-visible:outline-offset-2";
   } else if (variant === "footer") {
     interaction =
       "text-foreground/70 rounded-sm select-none transition-[color,transform] hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current hover:underline";
+  }
+
+  let pressScale = "";
+  if (!noScale) {
+    pressScale =
+      variant === "floating" ? "active:scale-98" : "active:scale-[0.95]";
   }
 
   return (
     <Link
       aria-current={ariaCurrent}
       aria-keyshortcuts={ariaKeyShortcuts}
-      className={`group ${variant === "contents" ? "" : "inline-block"} cursor-pointer transition-transform ${noScale ? "" : "active:scale-[0.95]"} motion-reduce:transition-none ${interaction} ${appearance} ${className ?? ""}`}
+      className={`group ${variant === "contents" ? "" : "inline-block"} cursor-pointer transition-transform ${pressScale} motion-reduce:transition-none ${interaction} ${appearance} ${className ?? ""}`}
       href={href}
       onClick={onClick}
       prefetch={false}

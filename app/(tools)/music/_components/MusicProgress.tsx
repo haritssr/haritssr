@@ -7,29 +7,12 @@ import Slider from "@/components/Slider";
 import { musicTime } from "../utils/musicState";
 import type MusicStore from "../utils/MusicStore";
 
-export default function MusicProgress({
-  store,
-  compact = false,
-}: {
-  store: MusicStore;
-  compact?: boolean;
-}) {
+export default function MusicProgress({ store }: { store: MusicStore }) {
   const { position, duration } = useSyncExternalStore(
     store.subscribeClock,
     store.getClock,
     store.getClock
   );
-  if (compact) {
-    return (
-      <progress
-        aria-label="Song progress"
-        data-floating-progress=""
-        className="bg-slider-track-hover [&::-webkit-progress-bar]:bg-slider-track-hover block h-1.5 w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--music-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--music-progress-fill)"
-        max={duration || 1}
-        value={Math.min(position, duration || 0)}
-      />
-    );
-  }
   return (
     <div className="space-y-1.5">
       <div className="text-muted relative flex justify-between text-xs tabular-nums">

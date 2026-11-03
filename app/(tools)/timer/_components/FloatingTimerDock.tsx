@@ -1,19 +1,21 @@
 "use client";
 
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { getFloatingTasks } from "@/app/(tools)/timer/_components/floatingTaskState";
 import TaskActions from "@/app/(tools)/timer/_components/TaskActions";
 import { taskAppearance } from "@/app/(tools)/timer/_components/taskPresentation";
-import TaskProgress from "@/app/(tools)/timer/_components/TaskProgress";
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
 import useTimerPlaybackShortcut from "@/app/(tools)/timer/hooks/useTimerPlaybackShortcut";
-import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
+import { canUseTimer, formatTimerTime } from "@/app/(tools)/timer/utils/timer";
 import Button from "@/components/Button";
 import { FloatingDockSlot } from "@/components/floating/FloatingDock";
+import FloatingPlayer from "@/components/floating/FloatingPlayer";
 import FloatingRetryNotification from "@/components/floating/FloatingRetryNotification";
+import { formatRemainingTime } from "@/components/floating/formatRemainingTime";
 import InternalLink from "@/components/InternalLink";
 
 export default function FloatingTimerDock() {
@@ -118,23 +120,37 @@ function FloatingTimerPlayer({
     selected.state.reached
   );
   const fullPlayer = (
-    <div
-      data-floating-task=""
-      className="translucent-material border-border shadow-foreground/10 border-hairline flex min-h-(--floating-tabbar-height,3.3125rem) w-full max-w-full min-w-0 items-center gap-1.5 rounded-full py-2 pr-2 pl-4 shadow-lg sm:shadow-xl"
-    >
+    <FloatingPlayer>
       <InternalLink
-        className="focus-visible:outline-action mr-auto min-w-0 flex-1 rounded-sm py-1 focus-visible:outline-2 focus-visible:outline-offset-2 [&_progress]:h-1.5"
+        className="relative mr-1 min-w-0 flex-1 before:absolute before:inset-x-0 before:-inset-y-3.5"
         href="/timer"
         variant="floating"
       >
-        <TaskProgress
-          task={selected.task}
-          spent={selected.state.spent}
-          running={selected.state.running}
-          appearance={appearance}
-          compact
-          title={selected.task.activity}
-        />
+        <span className="flex min-w-0 items-center justify-between gap-2 text-sm leading-4">
+          <span className="flex min-w-0 items-center gap-1 font-medium">
+            <ClockIcon
+              aria-hidden="true"
+              className="size-4.25 shrink-0 group-data-[collapsed=true]/floating:size-4.5"
+            />
+            <span className="truncate">{selected.task.activity}</span>
+          </span>
+          <span
+            data-floating-details=""
+            className="text-danger shrink-0 whitespace-nowrap tabular-nums"
+          >
+            <span className="sr-only">
+              {formatRemainingTime(
+                selected.task.duration - selected.state.spent
+              )}
+            </span>
+            <span aria-hidden="true">
+              -
+              {formatTimerTime(
+                Math.max(0, selected.task.duration - selected.state.spent)
+              )}
+            </span>
+          </span>
+        </span>
       </InternalLink>
       <TaskActions
         date={date}
@@ -146,12 +162,12 @@ function FloatingTimerPlayer({
       >
         {taskCount > 1 ? (
           <Button
+            data-floating-details=""
             aria-label={`Switch task: ${selectedIndex + 1} of ${taskCount}. Next task`}
-            data-timer-secondary=""
             onClick={onSelectNext}
-            size="icon-circle"
+            size="floating-control"
             title={`Next task (${selectedIndex + 1}/${taskCount})`}
-            variant="secondary-strong"
+            variant="floating-control"
           >
             <span className="text-xs whitespace-nowrap tabular-nums">
               {selectedIndex + 1}/{taskCount}
@@ -159,7 +175,7 @@ function FloatingTimerPlayer({
           </Button>
         ) : null}
       </TaskActions>
-    </div>
+    </FloatingPlayer>
   );
 
   return (

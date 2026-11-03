@@ -128,24 +128,22 @@ export default function TaskActions({
       {showDone ? (
         <Button
           className="disabled:cursor-default"
-          data-timer-secondary=""
           dimWhenDisabled
           size="timer-card"
           disabled={doneDisabled}
           aria-label={`Done: ${task.activity}`}
           title={doneDisabled ? undefined : "Done"}
           onClick={finishTask}
-          variant="timer-secondary"
+          variant="secondary"
         >
           <CheckIcon
-            strokeWidth={3}
+            strokeWidth={2}
             aria-hidden="true"
             className="size-5 sm:group-data-list-view/task-list:size-3.75"
           />
         </Button>
       ) : (
         <DeleteTaskButton
-          data-timer-secondary=""
           title="Delete"
           dimWhenDisabled={unavailable}
           size="timer-card"
@@ -159,7 +157,6 @@ export default function TaskActions({
       )}
       <Button
         className="select-none"
-        data-timer-play=""
         dimWhenDisabled={unavailable}
         size="timer-card"
         disabled={disabled}
@@ -195,35 +192,34 @@ function TaskIconActions({
 }) {
   const ToggleIcon = running ? PauseIcon : PlayIcon;
   return (
-    <div className="flex shrink-0 items-center gap-1.5">
+    <div data-floating-actions="" className="flex shrink-0 items-center">
       {children}
       <Button
         aria-label={`Done: ${activity}`}
-        data-timer-secondary=""
+        data-floating-details=""
         dimWhenDisabled={dimWhenDisabled}
         disabled={disabled}
         onClick={onDone}
-        size="icon-circle"
+        size="floating-control"
         title="Done"
-        variant="floating-secondary"
+        variant="floating-control"
       >
-        <CheckIcon strokeWidth={2} aria-hidden="true" className="size-4.5" />
+        <CheckIcon strokeWidth={2.5} aria-hidden="true" className="size-5" />
       </Button>
       <Button
         aria-label={`${label}: ${activity}`}
         data-floating-space="timer"
-        data-timer-play=""
         dimWhenDisabled={dimWhenDisabled}
         disabled={disabled}
         onClick={onToggle}
-        size="icon-circle"
+        size="floating-control"
         title={label}
-        variant={running ? "timer-running" : "timer-paused"}
+        variant="floating-control"
       >
         <ToggleIcon
           aria-hidden="true"
           data-running={running}
-          className="size-4.5 data-[running=false]:translate-x-px"
+          className="size-5 data-[running=false]:translate-x-px"
         />
       </Button>
     </div>

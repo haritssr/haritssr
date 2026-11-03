@@ -57,7 +57,16 @@ export default function MusicDetailsPage() {
             <li>
               Shuffle, repeat, seek, and adjust the volume while listening.
             </li>
-            <li>Keep listening across the site with the floating player.</li>
+            <li>
+              Keep listening across the site with a slim floating player showing
+              remaining time, Close, and Play/Pause.
+            </li>
+            <li>
+              On mobile, scrolling down docks the title and Play/Pause between
+              minimized navigation and Search. Scroll up or expand navigation to
+              restore full controls. Pages without bottom navigation keep the
+              full player.
+            </li>
             <li>
               Press Space to play or pause on Music or while the floating player
               is visible. Notifications and retry actions take priority.

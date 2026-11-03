@@ -112,7 +112,6 @@ export default function TaskProgress({
       <progress
         aria-label={`${task.activity}: time spent`}
         aria-valuetext={`${formatTimerTime(spent)} of ${formatTimerTime(task.duration)}`}
-        data-floating-progress=""
         className={`block w-full min-w-0 appearance-none overflow-hidden rounded-full border-0 bg-(--timer-progress-track) text-inherit [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-(--timer-progress-fill) [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-(--timer-progress-track) [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-(--timer-progress-fill) ${compact ? "h-1" : TASK_LAYOUT.progress}`}
         key={running ? "running" : "idle"}
         max={task.duration}

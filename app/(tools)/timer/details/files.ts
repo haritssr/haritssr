@@ -275,7 +275,7 @@ export const integrationFiles = [
     "Shared buttons, including circular timer actions and small field-clear controls.",
   ],
   [
-    "components/TabBarButtom.tsx",
+    "components/TabBarBottom.tsx",
     "Mobile navigation surface measured for floating Timer placement.",
   ],
   [
