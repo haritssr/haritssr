@@ -134,10 +134,10 @@ function PersonalDetails() {
             <span className="text-foreground/50 ml-0.5 text-sm">UTC+7</span>
           </li>
           <li>
-            <span className="text-accent">haritssr</span> ={" "}
-            <span className="text-accent">harits</span>{" "}
-            <span className="text-accent">s</span>yah{" "}
-            <span className="text-accent">r</span>ahmatullah
+            <span className="text-foreground">haritssr</span> ={" "}
+            <span className="text-foreground">harits</span>{" "}
+            <span className="text-foreground">s</span>yah{" "}
+            <span className="text-foreground">r</span>ahmatullah
           </li>
           {contacts.map((contact, index) => (
             <li id={index === 0 ? "contacts" : undefined} key={contact.link}>
@@ -157,6 +157,9 @@ function PersonalDetails() {
           >
             <div className="space-y-4">
               <PersonalNotes mobile />
+              <p className="border-border text-muted border-t border-dashed pt-4 text-sm">
+                2021-2026 &#169; Harits Syah
+              </p>
             </div>
           </Bento>
         </div>
@@ -359,7 +362,7 @@ function highlightSiteName(text: string, siteName = "haritssr") {
     .split("§§")
     .map((chunk) =>
       chunk === siteName ? (
-        <span className="text-accent" key={`u-${text.indexOf(chunk)}`}>
+        <span className="text-foreground" key={`u-${text.indexOf(chunk)}`}>
           {siteName}
         </span>
       ) : (
