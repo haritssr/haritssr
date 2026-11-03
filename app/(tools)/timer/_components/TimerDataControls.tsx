@@ -10,7 +10,6 @@ import type { ReactNode } from "react";
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { timerDate } from "@/app/(tools)/timer/utils/timer";
 import Button from "@/components/Button";
-import { ButtonGroup, ButtonGroupItem } from "@/components/ButtonGroup";
 
 async function exportData() {
   const response = await fetch("/api/timer?backup=1", { cache: "no-store" });
@@ -108,59 +107,54 @@ export default function TimerDataControls({
   }
 
   return (
-    <>
-      <div className="space-y-2 text-sm">
-        <Suspense>
-          <SignInError />
-        </Suspense>
-        <div className="flex flex-wrap items-center gap-3">
-          {snapshot?.mode === "demo" ? (
-            <p className="text-muted">
-              Sample activities. Personal Timer access is restricted to the
-              owner.
-            </p>
-          ) : null}
-        </div>
-        <input
-          accept="application/json,.json"
-          aria-label="Import Timer backup"
-          className="sr-only"
-          disabled={disabled}
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-            event.target.value = "";
-            if (file === undefined) {
-              return;
-            }
-            void perform(async () => {
-              await importData(file);
-              await refresh();
-            });
-          }}
-          ref={input}
-          tabIndex={-1}
-          type="file"
-        />
-        {backupError === null ? null : (
-          <div
-            className="text-danger flex flex-wrap items-center gap-3"
-            role="alert"
+    <div className="flex flex-col gap-2 text-sm">
+      <Suspense>
+        <SignInError />
+      </Suspense>
+      {snapshot?.mode === "demo" ? (
+        <p className="text-muted">
+          Sample activities. Personal Timer access is restricted to the owner.
+        </p>
+      ) : null}
+      <input
+        accept="application/json,.json"
+        aria-label="Import Timer backup"
+        hidden
+        disabled={disabled}
+        onChange={(event) => {
+          const file = event.target.files?.[0];
+          event.target.value = "";
+          if (file === undefined) {
+            return;
+          }
+          void perform(async () => {
+            await importData(file);
+            await refresh();
+          });
+        }}
+        ref={input}
+        tabIndex={-1}
+        type="file"
+      />
+      {backupError === null ? null : (
+        <div
+          className="text-danger flex flex-wrap items-center gap-3"
+          role="alert"
+        >
+          <p>{backupError}</p>
+          <Button
+            onClick={() => {
+              setBackupError(null);
+              void refresh();
+            }}
+            variant="outline"
           >
-            <p>{backupError}</p>
-            <Button
-              onClick={() => {
-                setBackupError(null);
-                void refresh();
-              }}
-              variant="outline"
-            >
-              Retry
-            </Button>
-          </div>
-        )}
-      </div>
+            Retry
+          </Button>
+        </div>
+      )}
       {children(
-        <ButtonGroup aria-label="Timer backup">
+        <>
           <BackupButton
             label="Export"
             open={feedback === "Export"}
@@ -183,9 +177,9 @@ export default function TimerDataControls({
           >
             <ArrowDownTrayIcon aria-hidden="true" className="size-4 stroke-2" />
           </BackupButton>
-        </ButtonGroup>
+        </>
       )}
-    </>
+    </div>
   );
 }
 
@@ -209,15 +203,17 @@ function BackupButton({
         id={id}
         closeOnClick={false}
         render={
-          <ButtonGroupItem
+          <Button
             aria-label={`${label} Timer backup`}
+            size="responsive-toolbar"
             disabled={disabled}
             onClick={onClick}
+            variant="outline"
           />
         }
       >
-        {children}
-        <span className="hidden lg:inline">{label}</span>
+        <span className="md:hidden">{children}</span>
+        <span className="hidden md:inline">{label}</span>
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Positioner

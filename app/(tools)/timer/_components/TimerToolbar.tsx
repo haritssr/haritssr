@@ -23,15 +23,19 @@ export default function TimerToolbar({
     : [];
   return (
     <div className="flex w-full flex-wrap items-end gap-3">
-      <div className="flex min-w-0 flex-wrap items-center gap-3">
+      <div className="flex min-w-0 flex-wrap items-center gap-2">
         <AddTask disabled={!canUseTimer(snapshot)} />
         {backupActions}
         <TimerSettingsTrigger
           aria-label="Settings"
-          size="icon-toolbar"
+          size="responsive-toolbar"
           variant="outline"
         >
-          <Cog6ToothIcon aria-hidden="true" className="size-4.5 stroke-2" />
+          <Cog6ToothIcon
+            aria-hidden="true"
+            className="size-4.5 stroke-2 md:hidden"
+          />
+          <span className="hidden md:inline">Settings</span>
         </TimerSettingsTrigger>
         <Bento title="History" trigger="secondary" modalSize="wide">
           {snapshot ? (

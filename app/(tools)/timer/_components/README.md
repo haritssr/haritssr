@@ -284,10 +284,15 @@ before sending later queued commands; uncertain writes are not automatically
 resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
-Export and Import share a segmented group beside the secondary Settings button.
-Export and Import show icons on smaller screens and icons with labels from 1024px;
-Settings remains icon-only. The controls have accessible names.
-These controls sit beside Add Task.
+Export and Import are separate buttons beside the secondary Settings button.
+Export, Import, and Settings show icons on smaller screens and text from 768px.
+The controls have accessible names.
+These controls sit beside Add Task on desktop. Below 768px, Add Task is a
+41px-high blue pill labeled “Add Task” in white, matching the topbar action
+capsule height. It is fixed 16px from the right, above navigation and
+floating players or notices, with safe-area clearance. It uses the same task
+dialog, disabled state, and Shift+N shortcut. Extra mobile bottom padding keeps
+the final task reachable above it.
 Settings contains Alerts, Autoplay, Multitask, and Sound controls.
 The Settings modal also contains the preset editors. Its header has the centered Settings title and a secondary Done button. Escape or clicking
 outside closes the modal; switches save immediately, while preset changes use
@@ -301,8 +306,9 @@ draft with an inline error on failure. Cancel restores saved values. Presets syn
 through the existing preference mutation queue and Turso. Duration presets apply
 to Add and Edit; task presets only appear in Add. Existing tasks and open task
 form values are unaffected. `TimerDataControls` owns
-backup state and passes its actions into `TimerToolbar`. Only errors appear above
-the toolbar; save status, backup guidance, and success messages are omitted.
+backup state and passes its actions into `TimerToolbar`. Errors and the demo
+notice share the toolbar stack; absent messages leave no empty space at any
+screen size. Save status, backup guidance, and success messages are omitted.
 
 Account access stays beside View Source in the shared top bar. Below 640px, both move into Page actions while the scrolling page title is visible. The Google photo opens an account menu with email and Sign out; missing or failed photos use a profile icon. Existing sessions gain photos after signing in again. Timer authorization remains owner-only.
 

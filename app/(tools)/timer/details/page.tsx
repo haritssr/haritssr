@@ -60,6 +60,10 @@ export default function TimerDetailsPage() {
               a saved preset.
             </li>
             <li>
+              On mobile, add tasks with the floating Add Task button above the
+              bottom controls. Desktop keeps Add Task in the toolbar.
+            </li>
+            <li>
               Press Shift+N on Timer to open a blank task form when no field or
               dialog is active.
             </li>

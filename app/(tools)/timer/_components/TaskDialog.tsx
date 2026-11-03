@@ -172,10 +172,17 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       }}
     >
       <Dialog.Trigger
+        aria-label="Add task"
         aria-keyshortcuts="Shift+N"
         disabled={disabled}
         ref={triggerRef}
-        render={<Button variant="primary-subtle" />}
+        render={
+          <Button
+            className="fixed right-4 bottom-[var(--floating-controls-clearance,calc(5rem+env(safe-area-inset-bottom,0px)))] z-50 md:static"
+            size="responsive-floating"
+            variant="primary-floating"
+          />
+        }
       >
         <span>Add Task</span>
       </Dialog.Trigger>
