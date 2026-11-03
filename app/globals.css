@@ -64,6 +64,30 @@
   backdrop-filter: blur(24px);
 }
 
+@utility menu-material {
+  border: 0.5px solid
+    color-mix(in srgb, var(--color-border-hover) 65%, transparent);
+  background-color: var(--color-interface-hover);
+  box-shadow:
+    inset 0 1px 0 var(--color-background),
+    0 12px 28px rgb(0 0 0 / 18%),
+    0 2px 6px rgb(0 0 0 / 8%);
+
+  @supports (backdrop-filter: blur(24px)) {
+    background-color: color-mix(
+      in srgb,
+      var(--color-interface-hover) 88%,
+      transparent
+    );
+    backdrop-filter: blur(24px) saturate(150%);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--color-interface-hover);
+    backdrop-filter: none;
+  }
+}
+
 [data-floating-task] {
   @apply border-hairline border-zinc-300;
 }

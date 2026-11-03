@@ -621,6 +621,10 @@ export default function DesignSystem() {
               <Box title="Materials">
                 <div className="flex flex-wrap items-start gap-5">
                   <div className="space-y-2">
+                    <div className="menu-material h-28 w-48 rounded-xl" />
+                    <p className="text-muted text-center text-sm">Menu</p>
+                  </div>
+                  <div className="space-y-2">
                     <div
                       className={`${TASK_LAYOUT.surface} border-border h-28 w-48`}
                     />
