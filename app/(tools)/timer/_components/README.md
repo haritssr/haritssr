@@ -71,8 +71,15 @@ the end of the day is shown as `24`.
 Card text uses `select-none`. Newly added cards briefly pulse around their edge;
 the pulse is disabled for reduced motion and does not replay on page load.
 
-The header places the title on the left and a Pencil Square edit button on the right.
-Cards form one column. Their title and controls stack on mobile and sit side by side from `sm` with `gap-3`. The time row shows elapsed time and negative remaining time. Tasks advance by one second per real second.
+The header shows the title and optional single-line description. Long descriptions
+truncate; the full text remains available in Edit Task. At every screen size,
+Edit appears beside the title, followed by the progress and action controls. On mobile, a
+circular progress indicator sits beside stacked elapsed and remaining times; from `sm`, a
+linear bar shows them side by side. Scheduled windows appear beside the mobile
+description. Empty rings have no colored arc. Desktop controls size to their
+contents so long times and scheduled windows stay clear of the action buttons;
+the title and description use the remaining space. Tasks advance by one second
+per real second.
 Unavailable Done controls are dimmed and have no hover effect or tooltip.
 Tasks with an availability window show a `size-5` danger warning before Edit
 when remaining duration plus a ten-minute buffer reaches the closing time.
@@ -96,10 +103,18 @@ On page load, running cards come first, followed by available cards with progres
 unstarted cards, and upcoming unavailable cards. Missed
 tasks whose windows have closed appear in History. Completion percentage breaks
 ties within each group; equal percentages preserve saved order. Cards keep their
-positions during the visit except that running tasks move to the top, ordered by
-completion percentage. New or restored available cards appear before upcoming
+relative positions within the available or upcoming group during the visit,
+except that running tasks move to the top, ordered by completion percentage.
+New or restored available cards appear before upcoming
 cards; completed, missed, and deleted cards leave the active list. The order
 resets on a new Jakarta day or when the page is reopened.
+Upcoming cards are grouped in a Base UI Collapsible below all available cards.
+The Upcoming trigger and chevron display their live count when any
+exist, including when no tasks are available. The disclosure starts collapsed
+on each visit and new Jakarta day; its state is local to the mounted page.
+Tasks move into the available group automatically when their windows open,
+even while the disclosure is collapsed. With no upcoming tasks, the disclosure
+is omitted. Both groups share the existing card rendering and new-task pulse.
 The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
@@ -285,7 +300,7 @@ resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
 Export and Import are separate buttons beside the secondary Settings button.
-Export, Import, and Settings show icons on smaller screens and text from 768px.
+Export, Import, Settings, and History use text labels at every screen size.
 The controls have accessible names.
 These controls sit beside Add Task on desktop. Below 768px, Add Task is a
 41px-high blue pill labeled “Add Task” in white, matching the topbar action

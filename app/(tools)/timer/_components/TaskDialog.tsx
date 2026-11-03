@@ -76,13 +76,13 @@ export function EditTask({
       }}
     >
       <Dialog.Trigger
-        className={`focus-visible:outline-action flex h-5 w-fit shrink-0 cursor-pointer items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2 ${open ? "text-action" : "text-muted hover:text-foreground"}`}
+        className={`focus-visible:outline-action relative flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded before:absolute before:-inset-1 focus-visible:outline-2 focus-visible:outline-offset-2 ${open ? "text-action" : "text-foreground/50 hover:text-foreground"}`}
         title="Edit"
         aria-label={`Edit ${task.activity}`}
       >
         <PencilSquareIcon
           aria-hidden="true"
-          className="size-5"
+          className="size-4"
           strokeWidth={1.5}
         />
       </Dialog.Trigger>

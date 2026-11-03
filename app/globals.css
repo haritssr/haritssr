@@ -236,6 +236,8 @@
   --radius-sm: calc(0.5rem - 4px);
 
   --text-tiny: 0.9rem;
+  --text-timer: 13px;
+  --text-timer-progress: 10px;
 
   --shadow-control:
     0 1px 2px rgb(24 24 27 / var(--control-shadow-opacity)),

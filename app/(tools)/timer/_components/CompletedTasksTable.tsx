@@ -8,6 +8,7 @@ import {
   taskWindowEnd,
 } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
+import Badge from "@/components/Badge";
 import Table from "@/components/Table";
 
 import { useTimer } from "./TimerProvider";
@@ -63,16 +64,24 @@ export default function CompletedTasksTable({
       >
         {rows.map(
           ({ task, spent, percentage, reached, missed, closed, status }) => (
-            <li key={task.id} className="border-border rounded-xl border p-3">
-              <div className="flex items-start justify-between gap-3">
-                <p className="font-medium wrap-anywhere">{task.activity}</p>
+            <li key={task.id} className="bg-interface-hover rounded-2xl p-3">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium wrap-anywhere">{task.activity}</p>
+                  {task.description.trim() !== "" && (
+                    <p className="text-muted mt-0.5 text-sm wrap-anywhere whitespace-pre-wrap">
+                      {task.description}
+                    </p>
+                  )}
+                </div>
+                <Badge variant={missed ? "danger" : "general"}>{status}</Badge>
                 {!reached && !missed && !closed && (
                   <button
                     type="button"
                     aria-label={`Restore ${task.activity} to active tasks`}
                     title="Restore task"
                     disabled={!canUseTimer(snapshot)}
-                    className="text-muted hover:text-foreground focus-visible:outline-action inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-sm focus-visible:outline-2 disabled:opacity-50"
+                    className="text-muted hover:text-foreground focus-visible:outline-action -my-2 inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full focus-visible:outline-2 disabled:opacity-50"
                     onClick={() => {
                       void act({ action: "restore", date, taskId: task.id });
                     }}
@@ -81,10 +90,7 @@ export default function CompletedTasksTable({
                   </button>
                 )}
               </div>
-              <p className="text-muted mt-1 text-sm wrap-anywhere whitespace-pre-wrap">
-                {task.description.trim() ? task.description : "-"}
-              </p>
-              <dl className="text-muted mt-3 grid grid-cols-2 gap-2 text-sm tabular-nums">
+              <dl className="text-muted border-border/60 mt-3 grid grid-cols-3 gap-2 border-t pt-2 text-sm tabular-nums">
                 <div>
                   <dt>Spent</dt>
                   <dd className="text-foreground">{formatTimerTime(spent)}</dd>
@@ -100,10 +106,6 @@ export default function CompletedTasksTable({
                   <dd className="text-foreground">
                     {percentage >= 100 ? "100" : percentage.toFixed(0)}%
                   </dd>
-                </div>
-                <div>
-                  <dt>Status</dt>
-                  <dd className="text-foreground">{status}</dd>
                 </div>
               </dl>
             </li>

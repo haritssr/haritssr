@@ -1,3 +1,5 @@
+import { Collapsible } from "@base-ui/react/collapsible";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
@@ -11,6 +13,10 @@ import styles from "./taskPulse.module.css";
 
 export default function TaskList() {
   const [newTaskId, setNewTaskId] = useState<string | null>(null);
+  const [upcoming, setUpcoming] = useState<{
+    date: string;
+    open: boolean;
+  } | null>(null);
   useEffect(() => {
     const onAdd = (event: Event) => {
       if (event instanceof CustomEvent && typeof event.detail === "string") {
@@ -59,27 +65,55 @@ export default function TaskList() {
     const entry = visibleById.get(id);
     return entry === undefined ? [] : [entry];
   });
+  const available = orderedVisible.filter(({ state }) => state.available);
+  const upcomingTasks = orderedVisible.filter(({ state }) => !state.available);
+  const upcomingOpen = upcoming?.date === snapshot.today && upcoming.open;
+  const renderTask = ({ task, state }: (typeof orderedVisible)[number]) => (
+    <li
+      className={`flex min-w-0 ${task.id === newTaskId ? styles.pulse : ""}`}
+      key={task.id}
+      onAnimationEnd={(event) => {
+        if (event.target === event.currentTarget) {
+          setNewTaskId(null);
+        }
+      }}
+    >
+      <TaskCard date={snapshot.today} task={task} state={state} />
+    </li>
+  );
   return (
-    <div className="min-w-0 space-y-10">
-      {visible.length > 0 && (
+    <div className="min-w-0 space-y-3 lg:w-1/2">
+      {available.length > 0 && (
         <ul
           aria-label="Today's activities"
-          className={`min-w-0 md:w-3/5 ${TASK_LAYOUT.collection}`}
+          className={`min-w-0 ${TASK_LAYOUT.collection}`}
         >
-          {orderedVisible.map(({ task, state }) => (
-            <li
-              className={`flex min-w-0 ${task.id === newTaskId ? styles.pulse : ""}`}
-              key={task.id}
-              onAnimationEnd={(event) => {
-                if (event.target === event.currentTarget) {
-                  setNewTaskId(null);
-                }
-              }}
-            >
-              <TaskCard date={snapshot.today} task={task} state={state} />
-            </li>
-          ))}
+          {available.map(renderTask)}
         </ul>
+      )}
+      {upcomingTasks.length > 0 && (
+        <Collapsible.Root
+          open={upcomingOpen}
+          onOpenChange={(open) => {
+            setUpcoming({ date: snapshot.today, open });
+          }}
+        >
+          <Collapsible.Trigger className="text-foreground/50 focus-visible:outline-action inline-flex cursor-pointer items-center gap-1 text-left text-sm focus-visible:outline-2 focus-visible:outline-offset-2">
+            Upcoming ({upcomingTasks.length})
+            <ChevronDownIcon
+              aria-hidden="true"
+              className={`size-4 shrink-0 ${upcomingOpen ? "rotate-180" : ""}`}
+            />
+          </Collapsible.Trigger>
+          <Collapsible.Panel className="pt-2">
+            <ul
+              aria-label="Upcoming tasks"
+              className={`min-w-0 ${TASK_LAYOUT.collection}`}
+            >
+              {upcomingTasks.map(renderTask)}
+            </ul>
+          </Collapsible.Panel>
+        </Collapsible.Root>
       )}
     </div>
   );

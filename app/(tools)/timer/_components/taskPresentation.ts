@@ -5,10 +5,11 @@ import type Button from "@/components/Button";
 // Grid card dimensions and spacing. State colors are below the layout map.
 export const TASK_LAYOUT = {
   collection: "grid grid-cols-1 gap-3",
-  item: "flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3",
-  controls: "mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4",
+  item: "flex min-w-0 flex-row items-center gap-2 sm:gap-3",
+  controls:
+    "grid min-w-0 grid-cols-[auto_auto] items-center gap-2 sm:grid-cols-[max-content_auto] sm:gap-4",
   surface:
-    "corner-squircle bg-interface-hover rounded-2xl pl-3.5 pr-3 py-2.5 sm:rounded-3xl sm:py-2 sm:pr-2.5 sm:pl-4",
+    "corner-squircle bg-interface-hover rounded-2xl pl-3.5 pr-3 py-2 sm:rounded-3xl sm:pr-2.5 sm:pl-4",
   profileSurface:
     "corner-squircle rounded-xl border bg-linear-to-b from-secondary-button-surface from-30% to-background p-4 inset-shadow-[0_2px_0_var(--color-zinc-50)] backdrop-blur-md supports-[corner-shape:squircle]:rounded-3xl",
   time: "flex items-baseline justify-between gap-1 whitespace-nowrap text-sm",

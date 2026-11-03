@@ -129,8 +129,6 @@ const BUTTON_SIZE_CLASS = {
     "corner-squircle size-7 shrink-0 rounded-sm p-1 supports-[corner-shape:squircle]:rounded-md",
   "icon-toolbar":
     "corner-squircle min-h-8.5 shrink-0 gap-1 rounded-md px-2 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
-  "responsive-toolbar":
-    "corner-squircle shrink-0 rounded-md p-1.5 md:px-3 supports-[corner-shape:squircle]:rounded-xl",
   "icon-small": "size-4 shrink-0 rounded-full p-0.5 [corner-shape:round]",
   default:
     "corner-squircle rounded-md px-3 py-1.5 supports-[corner-shape:squircle]:rounded-xl",

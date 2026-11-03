@@ -1,4 +1,3 @@
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import type { ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
@@ -25,19 +24,9 @@ export default function TimerToolbar({
     <div className="flex w-full flex-wrap items-end gap-3">
       <div className="flex min-w-0 flex-wrap items-center gap-2">
         <AddTask disabled={!canUseTimer(snapshot)} />
+        <TimerSettingsTrigger variant="outline">Settings</TimerSettingsTrigger>
         {backupActions}
-        <TimerSettingsTrigger
-          aria-label="Settings"
-          size="responsive-toolbar"
-          variant="outline"
-        >
-          <Cog6ToothIcon
-            aria-hidden="true"
-            className="size-4.5 stroke-2 md:hidden"
-          />
-          <span className="hidden md:inline">Settings</span>
-        </TimerSettingsTrigger>
-        <Bento title="History" trigger="secondary" modalSize="wide">
+        <Bento title="History" trigger="outline" modalSize="wide">
           {snapshot ? (
             <CompletedTasksTable
               tasks={completed}

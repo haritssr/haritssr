@@ -3,7 +3,7 @@ import type { ComponentProps, ReactNode } from "react";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 
 import { TASK_LAYOUT, taskAppearance } from "./taskPresentation";
-import TaskProgress from "./TaskProgress";
+import TaskProgress, { MobileCircularProgress } from "./TaskProgress";
 import type { TaskState } from "./taskState";
 
 export default function TaskCardView({
@@ -38,38 +38,56 @@ export default function TaskCardView({
       data-late={state.deadlineWarning === "late" || undefined}
       className={`group/task text-foreground min-w-0 flex-1 select-none ${TASK_LAYOUT.surface} ${TASK_LAYOUT.item} ${className}`}
     >
-      <div className="flex min-w-0 items-center justify-between gap-3 sm:flex-1">
-        <div className="min-w-0">
+      <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:block">
+        <div className="flex h-4 min-w-0 items-center gap-1 sm:h-auto">
           <p
-            className="text-foreground truncate text-base font-medium"
+            className="text-foreground min-w-0 truncate text-sm leading-4 font-medium sm:text-base sm:leading-normal"
             title={task.activity}
           >
             {task.activity}
           </p>
+          <div className="flex shrink-0 items-center gap-1">
+            {headerActions}
+          </div>
+        </div>
+        <div
+          className={`flex h-4 min-w-0 items-center gap-1 text-sm leading-4 sm:text-xs ${task.description.trim() === "" ? "sm:hidden" : ""}`}
+        >
           {task.description.trim() !== "" && (
             <p
-              className="text-foreground/50 hidden truncate text-xs font-normal sm:block"
+              className="text-foreground/50 min-w-0 truncate font-normal"
               title={task.description}
             >
               {task.description}
             </p>
           )}
+          {timeNote !== undefined && (
+            <span className="text-foreground/50 shrink-0 sm:hidden">
+              {timeNote}
+            </span>
+          )}
         </div>
-        <div className="flex shrink-0 items-center gap-2">{headerActions}</div>
       </div>
       {children}
       <div
-        className={`min-w-0 group-data-completed/task:*:opacity-60 sm:mt-0 sm:w-1/2 ${TASK_LAYOUT.controls}`}
+        className={`shrink-0 group-data-completed/task:*:opacity-60 ${TASK_LAYOUT.controls}`}
       >
         <div className="min-w-0">
-          <TaskProgress
+          <MobileCircularProgress
             task={task}
             spent={spent}
-            running={running}
             appearance={appearance}
-            timeDisplay={timeDisplay}
-            timeNote={timeNote}
           />
+          <div className="hidden sm:block sm:min-w-40">
+            <TaskProgress
+              task={task}
+              spent={spent}
+              running={running}
+              appearance={appearance}
+              timeDisplay={timeDisplay}
+              timeNote={timeNote}
+            />
+          </div>
         </div>
         {actions}
       </div>

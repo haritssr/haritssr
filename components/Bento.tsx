@@ -25,13 +25,16 @@ export default function Bento({
   shape?: "round" | "squircle";
   width?: "fit" | "full";
   controlColor?: "dark" | "action";
-  trigger?: "bento" | "bento-text" | "secondary";
+  trigger?: "bento" | "bento-text" | "secondary" | "outline";
   modalSize?: "regular" | "wide";
 }) {
   return (
     <Dialog.Root>
-      {trigger === "secondary" ? (
-        <Dialog.Trigger render={<Button variant="secondary" />}>
+      {trigger === "secondary" || trigger === "outline" ? (
+        <Dialog.Trigger
+          aria-label={title}
+          render={<Button variant={trigger} />}
+        >
           {title}
         </Dialog.Trigger>
       ) : (

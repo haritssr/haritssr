@@ -1,8 +1,4 @@
 import { Tooltip } from "@base-ui/react/tooltip";
-import {
-  ArrowDownTrayIcon,
-  ArrowUpTrayIcon,
-} from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
@@ -163,9 +159,7 @@ export default function TimerDataControls({
               showFeedback("Export");
               void perform(exportData);
             }}
-          >
-            <ArrowUpTrayIcon aria-hidden="true" className="size-4 stroke-2" />
-          </BackupButton>
+          />
           <BackupButton
             label="Import"
             open={feedback === "Import"}
@@ -174,9 +168,7 @@ export default function TimerDataControls({
               showFeedback("Import");
               input.current?.click();
             }}
-          >
-            <ArrowDownTrayIcon aria-hidden="true" className="size-4 stroke-2" />
-          </BackupButton>
+          />
         </>
       )}
     </div>
@@ -188,13 +180,11 @@ function BackupButton({
   open,
   disabled,
   onClick,
-  children,
 }: {
   label: string;
   open: boolean;
   disabled: boolean;
   onClick: () => void;
-  children: ReactNode;
 }) {
   const id = useId();
   return (
@@ -205,15 +195,13 @@ function BackupButton({
         render={
           <Button
             aria-label={`${label} Timer backup`}
-            size="responsive-toolbar"
             disabled={disabled}
             onClick={onClick}
             variant="outline"
           />
         }
       >
-        <span className="md:hidden">{children}</span>
-        <span className="hidden md:inline">{label}</span>
+        {label}
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Positioner

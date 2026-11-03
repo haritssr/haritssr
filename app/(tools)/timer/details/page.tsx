@@ -106,8 +106,9 @@ export default function TimerDetailsPage() {
             </li>
             <li>Save your own duration and task presets.</li>
             <li>
-              Task cards stack on mobile and show their controls beside the
-              title on larger screens.
+              Task cards show controls beside the title and description. Mobile
+              uses a progress ring beside stacked elapsed and remaining times;
+              larger screens use a linear progress bar.
             </li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or
@@ -170,14 +171,20 @@ export default function TimerDetailsPage() {
               tasks.
             </li>
             <li>
+              Upcoming tasks start collapsed below available tasks. The Upcoming
+              toggle displays their count and lets you expand or hide the cards.
+              Tasks appear automatically when their window opens. Upcoming tasks
+              collapse again when you reopen Timer or a new Jakarta day begins.
+            </li>
+            <li>
               When you open the page, running tasks come first, followed by
               available tasks with progress, unstarted tasks, and upcoming
               tasks. Higher percentages come first within each group; ties
               retain their saved order. Running tasks move to the top and stay
               ordered by percentage during your visit. Other cards keep their
-              positions, and new or restored available tasks appear before
-              upcoming tasks. The order resets when you reopen the page or a new
-              Jakarta day begins.
+              relative positions within the available or upcoming group, and new
+              or restored available tasks appear before upcoming tasks. The
+              order resets when you reopen the page or a new Jakarta day begins.
             </li>
             <li>
               Availability follows Jakarta time. Before its window, a card is
@@ -224,7 +231,7 @@ export default function TimerDetailsPage() {
         <Section
           id="task-colors"
           title="Task states"
-          description="Orange marks running tasks; other tasks use neutral colors."
+          description="Red marks running tasks; other tasks use neutral colors."
         >
           <TaskColorExamples />
         </Section>

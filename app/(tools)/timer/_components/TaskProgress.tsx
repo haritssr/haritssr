@@ -8,6 +8,85 @@ import { formatRemainingTime } from "@/components/floating/formatRemainingTime";
 import { TASK_LAYOUT } from "./taskPresentation";
 import type { TaskAppearance } from "./taskPresentation";
 
+export function MobileCircularProgress({
+  task,
+  spent,
+  appearance,
+}: {
+  task: TimerTask;
+  spent: number;
+  appearance: TaskAppearance;
+}) {
+  const percentage = Math.max(0, Math.min(100, (spent / task.duration) * 100));
+  const progressStyle: CSSProperties & {
+    "--timer-progress-fill": string;
+    "--timer-progress-track": string;
+  } = {
+    "--timer-progress-fill": appearance.progress,
+    "--timer-progress-track": "var(--color-slider-track-hover)",
+  };
+  return (
+    <div
+      className="flex shrink-0 items-center gap-2 sm:hidden"
+      style={progressStyle}
+    >
+      <div className="text-timer flex flex-col items-end gap-0.5 leading-4 tabular-nums">
+        <span className={`font-medium ${appearance.elapsed}`}>
+          {formatTimerTime(spent)}
+        </span>
+        <span
+          className="text-foreground/50"
+          aria-label={formatRemainingTime(task.duration - spent)}
+        >
+          −{formatTimerTime(Math.max(0, task.duration - spent))}
+        </span>
+      </div>
+      <div className="relative flex size-10 shrink-0 items-center justify-center">
+        <svg
+          aria-hidden="true"
+          className="absolute inset-0 size-full -rotate-90 p-0.5"
+          viewBox="0 0 64 64"
+        >
+          <circle
+            cx="32"
+            cy="32"
+            r="27"
+            fill="none"
+            stroke="var(--timer-progress-track)"
+            strokeWidth="10"
+          />
+          {percentage > 0 && (
+            <circle
+              cx="32"
+              cy="32"
+              r="27"
+              fill="none"
+              stroke="var(--timer-progress-fill)"
+              strokeWidth="10"
+              strokeLinecap="round"
+              pathLength="100"
+              strokeDasharray={`${percentage} 100`}
+            />
+          )}
+        </svg>
+        <span
+          aria-hidden="true"
+          className={`text-timer-progress tabular-nums ${appearance.elapsed}`}
+        >
+          {percentage.toFixed(0)}
+        </span>
+      </div>
+      <progress
+        className="sr-only"
+        aria-label={`${task.activity}: time spent`}
+        aria-valuetext={`${formatTimerTime(spent)} of ${formatTimerTime(task.duration)}`}
+        max={task.duration}
+        value={spent}
+      />
+    </div>
+  );
+}
+
 export default function TaskProgress({
   task,
   spent,
@@ -44,7 +123,7 @@ export default function TaskProgress({
   return (
     <div className={stackClass}>
       <div
-        className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : `${TASK_LAYOUT.time} text-base sm:group-data-list-view/task-list:text-sm`}`}
+        className={`tabular-nums ${compact ? `flex min-w-0 items-center justify-between gap-2 text-sm leading-4` : TASK_LAYOUT.time}`}
       >
         {title === undefined ? null : (
           <span className="flex min-w-0 flex-1 items-center gap-1 text-sm leading-4 font-medium normal-nums">
@@ -81,7 +160,7 @@ export default function TaskProgress({
           ) : null}
         </span>
         {timeNote === undefined ? null : (
-          <span className="text-slider-track-hover min-w-0 text-center text-base whitespace-normal tabular-nums sm:group-data-list-view/task-list:text-sm">
+          <span className="text-foreground/50 min-w-0 text-center text-xs whitespace-normal tabular-nums sm:text-base sm:group-data-list-view/task-list:text-sm">
             {timeNote}
           </span>
         )}
@@ -101,7 +180,7 @@ export default function TaskProgress({
                 <span className="sr-only">
                   {formatRemainingTime(task.duration - spent)}
                 </span>
-                <span aria-hidden="true" className="text-muted">
+                <span aria-hidden="true" className="text-foreground/50">
                   -{formatTimerTime(Math.max(0, task.duration - spent))}
                 </span>
               </>
