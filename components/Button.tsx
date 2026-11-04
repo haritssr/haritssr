@@ -22,6 +22,7 @@ type ButtonVariant =
   | "outline-regular"
   | "outline-white"
   | "action-outline-regular"
+  | "tonal"
   | "action-outline"
   | "primary"
   | "primary-subtle"
@@ -94,6 +95,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border-border text-foreground border bg-transparent font-normal transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "outline-white":
     "border-border text-foreground border bg-white font-normal transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-action",
+  tonal:
+    "bg-foreground/5 font-normal text-foreground transition-colors duration-150 enabled:hover:bg-foreground/10 focus-visible:outline-action",
   "action-outline-regular":
     "border border-action bg-surface font-normal text-action transition-colors duration-150 enabled:hover:bg-action/10 focus-visible:outline-action",
   primary:
