@@ -23,7 +23,7 @@ export function MobileTaskProgress({
   return (
     <div className="flex shrink-0 items-center sm:hidden">
       <div className="text-timer flex flex-col items-end gap-0.5 leading-4 tabular-nums">
-        <span className={`font-medium ${appearance.elapsed}`}>
+        <span className={`${appearance.weight} ${appearance.elapsed}`}>
           {timerProgressPercent(spent, task.duration)}%
         </span>
         <span
@@ -91,7 +91,7 @@ export default function TaskProgress({
         )}
         <span className="flex shrink-0 items-baseline gap-0.5">
           <span
-            className={`shrink-0 font-medium ${title === undefined ? appearance.elapsed : "text-muted"}`}
+            className={`shrink-0 ${title === undefined ? `${appearance.weight} ${appearance.elapsed}` : "text-muted font-medium"}`}
           >
             {title === undefined ? (
               formatTimerTime(spent)

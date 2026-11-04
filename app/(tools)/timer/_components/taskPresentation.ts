@@ -22,21 +22,27 @@ export const TASK_LAYOUT = {
 const TASK_STATE_APPEARANCE = {
   running: {
     elapsed: "text-success",
+    weight: "font-medium",
     progress: "var(--color-success)",
     button: "timer-running",
   },
   paused: {
     elapsed: "text-foreground",
+    weight: "font-medium",
     progress: "var(--color-foreground)",
     button: "timer-paused",
   },
   ready: {
-    elapsed: "text-foreground",
+    // Nothing spent yet, so 0:00 matches the remaining time beside it.
+    elapsed: "text-foreground/50",
+    weight: "font-normal",
     progress: "var(--color-foreground)",
-    button: "neutral-subtle",
+    // Matches the Done button so waiting tasks don't outweigh running ones.
+    button: "secondary",
   },
   complete: {
     elapsed: "text-foreground",
+    weight: "font-medium",
     progress: "var(--color-foreground)",
     button: "outline",
   },
@@ -44,6 +50,7 @@ const TASK_STATE_APPEARANCE = {
   string,
   {
     elapsed: string;
+    weight: string;
     progress: string;
     button: ComponentProps<typeof Button>["variant"];
   }
@@ -71,6 +78,7 @@ export function taskAppearance(
   }
   return {
     elapsed: appearance.elapsed,
+    weight: appearance.weight,
     progress: appearance.progress,
     button: appearance.button,
     surface,
