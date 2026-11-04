@@ -128,11 +128,11 @@ export default function URLInput({
           />
           {value ? null : (
             <Button
-              className="absolute top-1/2 right-2 -translate-y-1/2"
+              className="absolute top-1/2 right-1.25 -translate-y-1/2"
               onClick={() => {
                 void paste();
               }}
-              size="compact"
+              size="input-action"
               variant="primary"
             >
               Paste

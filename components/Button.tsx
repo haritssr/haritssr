@@ -134,6 +134,7 @@ const BUTTON_SIZE_CLASS = {
     "corner-squircle rounded-md px-3 py-1.5 supports-[corner-shape:squircle]:rounded-xl",
   compact:
     "corner-squircle rounded-md px-2 py-0.5 supports-[corner-shape:squircle]:rounded-lg",
+  "input-action": "rounded-md px-2.5 py-1",
   "mobile-roomy":
     "corner-squircle rounded-md px-3 py-2 supports-[corner-shape:squircle]:rounded-xl sm:py-1.5",
   text: "rounded-none p-0",
