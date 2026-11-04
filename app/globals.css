@@ -186,6 +186,7 @@
 }
 
 @theme static {
+  --color-accordion-open-surface: var(--color-blue-50);
   --color-action: color-mix(
     in oklab,
     var(--color-blue-600) 60%,

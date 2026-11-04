@@ -6,7 +6,7 @@ import DurationFields from "./DurationFields";
 import { TaskDescriptionField, TaskNameField } from "./TaskFormDialog";
 
 const TIME_INPUT_CLASS =
-  "form-control border-border bg-background focus:border-action focus:ring-action/20 w-full min-w-0 rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2";
+  "form-control border-border bg-white focus:border-action focus:ring-action/20 w-full min-w-0 cursor-pointer rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer";
 
 interface DailyTaskFieldsProps {
   entry: DailyDraft;
@@ -127,6 +127,7 @@ const DailyTaskFields = memo(
             <span>From (WIB)</span>
             <input
               type="time"
+              step={900}
               required
               className={TIME_INPUT_CLASS}
               value={entry.window.from}
@@ -144,6 +145,7 @@ const DailyTaskFields = memo(
             <span>Until (WIB)</span>
             <input
               type="time"
+              step={900}
               required
               className={TIME_INPUT_CLASS}
               value={entry.window.until}

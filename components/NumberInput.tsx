@@ -91,7 +91,7 @@ export default function NumberInput({
           </button>
         ) : null}
       </div>
-      <NumberField.Group className="corner-squircle border-border focus-within:border-action flex min-w-0 items-center rounded-md border supports-[corner-shape:squircle]:rounded-xl">
+      <NumberField.Group className="corner-squircle border-border focus-within:border-action flex min-w-0 items-center rounded-md border bg-white supports-[corner-shape:squircle]:rounded-xl">
         <NumberField.Decrement
           aria-label={`Decrease ${label}`}
           className="group corner-squircle border-border text-foreground hover:bg-interface-hover focus-visible:outline-action flex h-8 w-9 shrink-0 cursor-pointer items-center justify-center rounded-l-md border-r focus-visible:outline-2 data-disabled:cursor-not-allowed data-disabled:hover:bg-transparent supports-[corner-shape:squircle]:rounded-l-xl"

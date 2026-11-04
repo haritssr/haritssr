@@ -130,6 +130,7 @@ function PresetEditor({ kind }: { kind: "duration" | "task" }) {
     <AccordionItem
       excludeFromContents
       title={title}
+      variant="active-border"
       trailing={
         <span className="text-muted text-xs tabular-nums">
           {entries.length}/{limit}

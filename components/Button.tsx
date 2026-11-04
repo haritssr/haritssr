@@ -20,6 +20,7 @@ type ButtonVariant =
   | "floating-control"
   | "outline-interactive"
   | "outline-regular"
+  | "outline-white"
   | "action-outline-regular"
   | "action-outline"
   | "primary"
@@ -91,6 +92,8 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
     "border border-action bg-surface font-medium text-action transition-colors duration-150 enabled:hover:bg-action/10 focus-visible:outline-action",
   "outline-regular":
     "border-border text-foreground border bg-transparent font-normal transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
+  "outline-white":
+    "border-border text-foreground border bg-white font-normal transition-colors duration-150 enabled:hover:bg-interface-hover focus-visible:outline-action",
   "action-outline-regular":
     "border border-action bg-surface font-normal text-action transition-colors duration-150 enabled:hover:bg-action/10 focus-visible:outline-action",
   primary:

@@ -77,7 +77,7 @@ export function TimerDownloadButton() {
         }}
       >
         <span aria-live="polite">
-          {working ? "Downloading..." : "Download all record"}
+          {working ? "Downloading..." : "Download all my data"}
         </span>
       </Button>
       {error === null ? null : (

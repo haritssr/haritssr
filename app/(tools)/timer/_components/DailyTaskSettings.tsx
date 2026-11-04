@@ -117,6 +117,7 @@ export default function DailyTaskSettings({
       <AccordionItem
         excludeFromContents
         title="Daily Tasks"
+        variant="active-border"
         value="daily"
         trailing={
           <span className="text-muted text-xs tabular-nums">
@@ -143,7 +144,7 @@ export default function DailyTaskSettings({
           />
           <Button
             className="w-full"
-            variant="outline-regular"
+            variant="outline-white"
             disabled={disabled || entries.length >= MAX_DAILY_TASKS}
             onClick={() => {
               const entry = newDailyTaskDraft();
