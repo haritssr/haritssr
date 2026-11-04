@@ -65,9 +65,9 @@ export const timerRelationships = [
       accDescr: TimerClient composes the toolbar and list. TaskList uses getTaskCollection to derive active and completed tasks. Cards compose progress and actions. Add and Edit share a form and duration fields. All mutations use TimerProvider act.
       Client["TimerClient.tsx"] --> Toolbar["TimerToolbar.tsx: preferences and view"]
       Client --> List["TaskList.tsx: one shared clock"]
-      Client --> Data["TimerDataControls.tsx: Export, Import, errors"]
-      Data --> Backups["app/(tools)/timer/utils/timerBackup.ts: validation and conflict-safe merge"]
-      Data --> Backup["protected Timer API: backup import and export"]
+      Client --> Data["TimerDataControls.tsx: Export and errors"]
+      Backup --> Backups["app/(tools)/timer/utils/timerBackup.ts: backup creation"]
+      Data --> Backup["protected Timer API: backup export"]
       List --> Clock["app/(tools)/timer/hooks/useTimerClock.ts: display-local clock"]
       List -->|getTaskCollection calls getTaskState| State["taskState.ts: sort, partition, elapsed state"]
       State -->|active tasks and derived state| Card["TaskCard.tsx"]
@@ -109,7 +109,7 @@ export const timerRelationships = [
       "getTaskCollection derives each task once with shared Jakarta day bounds and partitions active/completed tasks. Active and visible cards share one sorted collection; the toolbar derives History from the completed collection. The browser title selects the earliest running task in one pass, preserving progress and saved-order ties. getTaskState uses taskTiming to derive elapsed time, availability, completion, running/paused state, and the action label.",
       "TaskCard composes live description, editing, and action controls inside TaskCardView. TaskCardView shares the card layout and TaskProgress between ordinary and daily cards. TaskList keeps visible cards in their initial order during a visit. Daily cards can be edited for today and lock outside their availability. CompletedTasksTable handles the completed list, sorting, and completion-time display.",
       "FloatingTimerDock shares compact progress, action handlers, and sounds. getFloatingTasks excludes completed tasks and stops showing the old day at midnight; it includes running tasks and the one paused from the dock. The task-count button cycles through tasks and preserves selection for the session. Both displays use useTimerClock, with the dock clock disabled on /timer.",
-      "TimerDataControls exports paused copies without changing live timers. Import validates the whole backup and atomically adds missing dates, fills empty days, or skips identical records. Conflicts reject every addition; imported completions do not alert again.",
+      "TimerDataControls exports paused copies without changing live timers. The separate migration command can restore backups with conflict checks.",
       "AddTask opens with empty name and description fields and handles Shift+N. AddTask and EditTask both call readTaskForm from timerInput, whose limits are shared with field counters and server schemas, share TaskFormDialog and DurationFields, and submit through act. Add/Edit close after validation and keep failed drafts for reopening. DeleteTaskButton routes confirmed deletion back to its caller, which submits through act.",
     ],
   },

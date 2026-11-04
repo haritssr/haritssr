@@ -11,7 +11,6 @@ import {
   exportTimer,
   getTimerHistory,
   getTimerSnapshot,
-  importTimer,
   TimerStoreError,
 } from "@/app/(tools)/timer/store";
 import {
@@ -162,10 +161,13 @@ async function write(request: Request, preferences: boolean) {
       { status: 415, headers }
     );
   }
-  const backup =
-    !preferences && new URL(request.url).searchParams.has("backup");
-  const ordinaryLimit = preferences ? 2 * 1024 * 1024 : 8192;
-  const limit = backup ? 10 * 1024 * 1024 : ordinaryLimit;
+  if (new URL(request.url).searchParams.has("backup")) {
+    return NextResponse.json(
+      { error: "Backup import is unavailable." },
+      { status: 405, headers }
+    );
+  }
+  const limit = preferences ? 2 * 1024 * 1024 : 8192;
   if (Number(request.headers.get("content-length")) > limit) {
     return NextResponse.json(
       { error: "Request is too large." },
@@ -201,9 +203,6 @@ async function write(request: Request, preferences: boolean) {
       chunks.push(value);
     }
     const body = Buffer.concat(chunks).toString("utf-8");
-    if (backup) {
-      return NextResponse.json(await importTimer(body), { headers });
-    }
     let payload: unknown;
     try {
       payload = JSON.parse(body) as unknown;

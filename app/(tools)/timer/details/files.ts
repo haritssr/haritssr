@@ -29,11 +29,11 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimerDataControls.tsx",
-    "Icon-only toolbar Export/Import actions, authentication, and backup errors.",
+    "Settings download action, authentication, and backup errors.",
   ],
   [
     "app/(tools)/timer/_components/TimerToolbar.tsx",
-    "Add Task, backup actions, and the Settings trigger.",
+    "Add Task, view controls, and the Settings trigger.",
   ],
   [
     "app/(tools)/timer/_components/TimerSettings.tsx",

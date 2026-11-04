@@ -9,6 +9,14 @@ import Button from "@/components/Button";
 const CONTROL_CLASS_NAME =
   "flex size-8 shrink-0 items-center justify-center rounded-full transition-colors motion-reduce:transition-none";
 
+function textTriggerSize(icon: ReactNode) {
+  return icon === undefined ? "default" : "icon-toolbar";
+}
+
+function textTriggerContent(icon: ReactNode, title: string): ReactNode {
+  return icon ?? title;
+}
+
 export default function Bento({
   title,
   children,
@@ -18,6 +26,8 @@ export default function Bento({
   controlColor,
   trigger = "bento",
   modalSize = "regular",
+  closeButtonSize = "regular",
+  triggerIcon,
 }: {
   title: string;
   children: ReactNode;
@@ -27,15 +37,20 @@ export default function Bento({
   controlColor?: "dark" | "action";
   trigger?: "bento" | "bento-text" | "secondary" | "outline";
   modalSize?: "regular" | "wide";
+  closeButtonSize?: "regular" | "compact";
+  triggerIcon?: ReactNode;
 }) {
   return (
     <Dialog.Root>
       {trigger === "secondary" || trigger === "outline" ? (
         <Dialog.Trigger
           aria-label={title}
-          render={<Button variant={trigger} />}
+          title={title}
+          render={
+            <Button variant={trigger} size={textTriggerSize(triggerIcon)} />
+          }
         >
-          {title}
+          {textTriggerContent(triggerIcon, title)}
         </Dialog.Trigger>
       ) : (
         <Dialog.Trigger
@@ -65,7 +80,7 @@ export default function Bento({
             </Dialog.Title>
             <Dialog.Close
               aria-label="Close"
-              className={`${CONTROL_CLASS_NAME} text-foreground/90 focus-visible:outline-action hover:bg-middle-hover absolute top-3 right-3 size-10.5 cursor-pointer bg-[color-mix(in_srgb,var(--color-interface-hover)_50%,var(--color-middle-hover))] focus-visible:outline-2 focus-visible:outline-offset-2`}
+              className={`${CONTROL_CLASS_NAME} text-foreground/90 focus-visible:outline-action hover:bg-middle-hover absolute cursor-pointer bg-[color-mix(in_srgb,var(--color-interface-hover)_50%,var(--color-middle-hover))] focus-visible:outline-2 focus-visible:outline-offset-2 ${closeButtonSize === "compact" ? "top-3.25 right-3.25 size-10" : "top-3 right-3 size-10.5"}`}
             >
               <XMarkIcon
                 aria-hidden="true"

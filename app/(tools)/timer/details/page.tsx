@@ -121,9 +121,7 @@ export default function TimerDetailsPage() {
               </InternalLink>
               .
             </li>
-            <li>
-              Export your task history as a backup or import a previous backup.
-            </li>
+            <li>Export your task history as a backup.</li>
           </ExplanationList>
         </Section>
         <Section
@@ -228,8 +226,8 @@ export default function TimerDetailsPage() {
               keep form drafts available for retry.
             </li>
             <li>
-              Backups include task history up to 10 MB; imports restore paused
-              tasks and reject conflicting dates.
+              Backups contain task history as paused tasks. The command-line
+              migration tool can restore them and rejects conflicting dates.
             </li>
           </ExplanationList>
         </Section>

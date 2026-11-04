@@ -24,6 +24,7 @@ import Button from "@/components/Button";
 import useTimerTicking from "../hooks/useTimerTicking";
 import { canUseTimer } from "../utils/timer";
 import PresetSettings from "./PresetSettings";
+import { TimerDownloadButton } from "./TimerDataControls";
 import { useTimer } from "./TimerProvider";
 
 type SettingsSection = "general" | "daily";
@@ -82,6 +83,7 @@ export default function TimerSettingsScope({
               </div>
               <div className="space-y-5">
                 <TimerSettingsControls />
+                <TimerDownloadButton />
                 <PresetSettings dailyOpen={payload === "daily"} />
               </div>
             </Dialog.Popup>

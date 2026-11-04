@@ -10,7 +10,6 @@ import {
   timerSnapshotVersion,
   updateTimerDays,
   timerDatabaseTransaction,
-  writeTimerDays,
 } from "@/app/(tools)/timer/server/timerDatabase";
 import { createDailyTasks } from "@/app/(tools)/timer/utils/dailyTasks";
 import {
@@ -25,11 +24,7 @@ import type {
   TimerAction,
   TimerSnapshot,
 } from "@/app/(tools)/timer/utils/timer";
-import {
-  createTimerBackup,
-  mergeTimerBackup,
-  parseTimerBackup,
-} from "@/app/(tools)/timer/utils/timerBackup";
+import { createTimerBackup } from "@/app/(tools)/timer/utils/timerBackup";
 import {
   applyTimerCommand,
   applyTimerPreferencePatch,
@@ -234,16 +229,4 @@ export async function exportTimer() {
     async (tx) => createTimerBackup(await readTimerDays(tx), Date.now()),
     "read"
   );
-}
-
-export async function importTimer(text: string) {
-  const incoming = parseTimerBackup(text);
-  return await timerDatabaseTransaction(async (tx) => {
-    const { additions, skipped } = mergeTimerBackup(
-      await readTimerDays(tx),
-      incoming
-    );
-    await writeTimerDays(tx, additions);
-    return { imported: additions.length, skipped };
-  });
 }

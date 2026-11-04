@@ -16,9 +16,9 @@ modified keys, composition, and held-key repeats keep their normal behavior.
 | --- | --- |
 | Header analog clock, ticking once per second in WIB and linking to Clock | [AnalogClock.tsx](AnalogClock.tsx), [Timer page](../page.tsx) |
 | Full-page Clock Sound checkbox and quartz ticks | [ClockSound.tsx](../clock/ClockSound.tsx) |
-| Add Task, backup actions, and Settings trigger | [TimerToolbar.tsx](TimerToolbar.tsx) |
+| Add Task, view controls, and Settings trigger | [TimerToolbar.tsx](TimerToolbar.tsx) |
 | Page-scoped Settings handle, switches, and Multitask confirmation | [TimerSettings.tsx](TimerSettings.tsx) |
-| Export/Import, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
+| Export, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |
 | Collection spacing, order, and loading state | [TaskList.tsx](TaskList.tsx) |
 | Active card structure and title | [TaskCard.tsx](TaskCard.tsx) |
 | Shared presentation for ordinary and daily task cards | [TaskCardView.tsx](TaskCardView.tsx) |
@@ -132,8 +132,9 @@ excluding server processing time. Response timing is captured before validation,
 and broadcasts preserve that calibration even when delivery is delayed.
 
 Outside `/timer`, `FloatingTimerDock` uses the shared 40px `FloatingPlayer` surface
-and the icon presentation of `TaskActions`. Its clock, title, and danger-colored remaining
-time (prefixed with `-`) form one link, followed by bare neutral controls.
+and the icon presentation of `TaskActions`. Its clock, title, muted truncated
+description, and progress-colored remaining time (prefixed with `-`) form one link,
+followed by bare neutral controls. The description uses at most half the text area.
 The floating player has no progress bar. It shows one
 running task, initially the most recently started, with a task-count button that
 cycles through tasks when needed. Manual selection survives navigation. Pausing from the dock retains
@@ -308,7 +309,7 @@ live in [timer.ts](../utils/timer.ts) and
 [timerValidation.ts](../utils/timerValidation.ts).
 
 New Turso days copy the saved Daily Tasks; existing dates are not backfilled. Export creates a paused copy without changing live timers;
-Import adds missing dates, fills empty days, skips identical records, and rejects
+The migration command imports missing dates, fills empty days, skips identical records, and rejects
 all conflicting occupied dates before writing. Imported completion alerts are
 acknowledged. Saving requires network access; failures restore confirmed data
 and retain failed form drafts in memory. Recovery refreshes authoritative data
@@ -316,8 +317,10 @@ before sending later queued commands; uncertain writes are not automatically
 resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
-Export and Import are separate buttons beside the secondary Settings button.
-Export, Import, Settings, and History use text labels at every screen size.
+Settings and History use icons with accessible labels at every screen size.
+Settings contains the download button below Sound, with a loading label during download.
+The view buttons sit opposite Settings and History in the toolbar. Day shows the
+task list; Week, Month, and Year show placeholder labels until their views are built.
 The controls have accessible names.
 These controls sit beside Add Task on desktop. Below 768px, Add Task is a
 41px-high blue pill labeled “Add Task” in white, matching the topbar action
@@ -337,8 +340,8 @@ Save keeps Settings open, disables that editor while saving, and retains the
 draft with an inline error on failure. Cancel restores saved values. Presets sync
 through the existing preference mutation queue and Turso. Duration presets apply
 to Add and Edit; task presets only appear in Add. Existing tasks and open task
-form values are unaffected. `TimerDataControls` owns
-backup state and passes its actions into `TimerToolbar`. Errors and the demo
+form values are unaffected. `TimerDataControls` owns the download action and
+its errors in Settings. Sign-in errors and the demo
 notice share the toolbar stack; absent messages leave no empty space at any
 screen size. Save status, backup guidance, and success messages are omitted.
 
