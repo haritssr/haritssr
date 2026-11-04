@@ -1,4 +1,6 @@
 import type { DailyTaskDefinition } from "../utils/dailyTasks";
+import { taskKind } from "../utils/timer";
+import type { TaskKind } from "../utils/timer";
 import { TASK_INPUT_LIMITS } from "../utils/timerInput";
 import { inputTime, inputWindow } from "../utils/timerTime";
 import { dailyTasksSchema } from "../utils/timerValidation";
@@ -10,6 +12,7 @@ export interface DailyDraft {
   activity: string;
   description: string;
   duration: DurationValue;
+  kind: TaskKind;
   window: { from: string; until: string } | null;
 }
 
@@ -25,12 +28,13 @@ export function dailyTaskDrafts(tasks: DailyTaskDefinition[]): DailyDraft[] {
     activity: task.activity,
     description: task.description,
     duration: durationValue(task.duration),
+    kind: taskKind(task),
     window:
-      task.availabilityWindow === null
+      task.period === null
         ? null
         : {
-            from: inputTime(task.availabilityWindow.from),
-            until: inputTime(task.availabilityWindow.until),
+            from: inputTime(task.period.from),
+            until: inputTime(task.period.until),
           },
   }));
 }
@@ -41,6 +45,7 @@ export function newDailyTaskDraft(): DailyDraft {
     activity: "",
     description: "",
     duration: durationValue(1800),
+    kind: "work",
     window: null,
   };
 }
@@ -87,16 +92,17 @@ export function parseDailyDrafts(
   }
   const result = dailyTasksSchema.safeParse(
     entries.map((entry) => {
-      let availabilityWindow = null;
+      let period = null;
       if (entry.window !== null) {
-        availabilityWindow = inputWindow(entry.window.from, entry.window.until);
+        period = inputWindow(entry.window.from, entry.window.until);
       }
       return {
         id: entry.id,
         activity: entry.activity,
         description: entry.description,
         duration: durationSeconds(entry.duration),
-        availabilityWindow,
+        kind: entry.kind,
+        period,
       };
     })
   );
@@ -120,12 +126,12 @@ export function parseDailyDrafts(
         : "Enter a description.";
   } else if (field === "duration") {
     message = "Choose a duration from one second to 24 hours.";
-  } else if (field === "availabilityWindow") {
+  } else if (field === "period") {
     message =
       "Choose From and Until in 15-minute increments, at least 15 minutes apart. Use 00:00 to end at midnight.";
   }
   let errorField: DailyDraftError["field"];
-  if (field === "availabilityWindow") {
+  if (field === "period") {
     errorField = "window";
   } else if (
     field === "activity" ||

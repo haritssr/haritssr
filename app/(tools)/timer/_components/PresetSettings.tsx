@@ -2,7 +2,8 @@ import { useState } from "react";
 import type { SubmitEvent } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
-import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
+import { canUseTimer, taskKind } from "@/app/(tools)/timer/utils/timer";
+import type { TaskKind } from "@/app/(tools)/timer/utils/timer";
 import {
   durationPresetsSchema,
   taskPresetsSchema,
@@ -15,12 +16,14 @@ import DurationFields from "./DurationFields";
 import { durationSeconds, durationValue } from "./durationValue";
 import type { DurationValue } from "./durationValue";
 import { TaskDescriptionField, TaskNameField } from "./TaskFormDialog";
+import TaskKindField from "./TaskKindField";
 
 interface PresetDraft {
   id: string;
   activity: string;
   description: string;
   duration: DurationValue;
+  kind?: TaskKind;
 }
 
 export default function PresetSettings({
@@ -181,6 +184,13 @@ function PresetEditor({ kind }: { kind: "duration" | "task" }) {
                     value={entry.description}
                     onChange={(description) => {
                       update(entry.id, { description });
+                    }}
+                    disabled={disabled}
+                  />
+                  <TaskKindField
+                    value={taskKind(entry)}
+                    onChange={(value) => {
+                      update(entry.id, { kind: value });
                     }}
                     disabled={disabled}
                   />

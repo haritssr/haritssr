@@ -7,19 +7,19 @@ import {
 import type { ResizeEdge } from "../_components/timelineSelection";
 import { useTimer } from "../_components/TimerProvider";
 import { canUseTimer, timerDayBounds } from "../utils/timer";
-import type { AvailabilityWindow, TimerTask } from "../utils/timer";
+import type { Period, TimerTask } from "../utils/timer";
 import { timelineTime } from "../utils/timerTime";
 import { trackTimelineDrag } from "./timelineDrag";
 
 interface ResizePreview {
   taskId: string;
-  window: AvailabilityWindow;
+  window: Period;
 }
 interface ResizeGesture {
   mode: "pointer" | "touch" | "keyboard";
   task: TimerTask;
-  original: AvailabilityWindow;
-  candidate: AvailabilityWindow;
+  original: Period;
+  candidate: Period;
   fingerprint: string;
   edge: ResizeEdge | "move";
   handle: HTMLButtonElement;
@@ -51,12 +51,12 @@ export default function useTimelineResize(date: string, editable: boolean) {
     const task = snapshot.day.tasks.find((entry) => entry.id === taskId);
     if (
       !task ||
-      task.availabilityWindow === null ||
-      task.availabilityWindow === undefined ||
+      task.period === null ||
+      task.period === undefined ||
       task.startedAt !== null ||
       task.reachedAt !== null ||
       task.spent >= task.duration ||
-      bounds.start + task.availabilityWindow.from * 60_000 <= now
+      bounds.start + task.period.from * 60_000 <= now
     ) {
       return null;
     }
@@ -84,7 +84,7 @@ export default function useTimelineResize(date: string, editable: boolean) {
       action: "resize-scheduled",
       date,
       taskId: gesture.task.id,
-      availabilityWindow: gesture.candidate,
+      period: gesture.candidate,
     }).then((saved) => {
       setMessage(
         saved
@@ -158,7 +158,7 @@ export default function useTimelineResize(date: string, editable: boolean) {
         return false;
       }
       const latest = context(taskId);
-      const original = latest?.task.availabilityWindow;
+      const original = latest?.task.period;
       if (latest === null || original === null || original === undefined) {
         return false;
       }

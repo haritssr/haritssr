@@ -8,3 +8,28 @@
   width: var(--timeline-width);
   height: var(--timeline-height);
 }
+
+/*
+ * Schedule colors by kind and state. Rules share specificity, so order sets
+ * precedence: kind first, then running, then completed or missed.
+ */
+.kind[data-kind="leisure"] {
+  --color-schedule-surface: var(--color-schedule-leisure-surface);
+  --color-schedule-accent: var(--color-schedule-leisure-accent);
+  --color-schedule-foreground: var(--color-schedule-leisure-foreground);
+  --color-schedule-muted-surface: var(--color-schedule-leisure-muted-surface);
+  --color-schedule-muted-accent: var(--color-schedule-leisure-muted-accent);
+  --color-schedule-muted-foreground: var(--color-schedule-leisure-muted-accent);
+}
+
+.kind[data-running] {
+  --color-schedule-surface: var(--color-schedule-running-surface);
+  --color-schedule-accent: var(--color-success);
+  --color-schedule-foreground: var(--color-schedule-running-foreground);
+}
+
+.kind:is([data-completed], [data-missed]) {
+  --color-schedule-surface: var(--color-schedule-muted-surface);
+  --color-schedule-accent: var(--color-schedule-muted-accent);
+  --color-schedule-foreground: var(--color-schedule-muted-foreground);
+}

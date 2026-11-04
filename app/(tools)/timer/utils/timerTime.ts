@@ -1,5 +1,5 @@
 // Formatting and parsing for minutes since Jakarta midnight (0–1440).
-import type { AvailabilityWindow } from "./timer";
+import type { Period } from "./timer";
 
 const pad = (value: number) => String(value).padStart(2, "0");
 
@@ -29,7 +29,7 @@ export function inputWindow(from: unknown, until: unknown) {
 }
 
 /** `08:00–09:30`, or an em dash without a window. */
-export function windowRange(window: AvailabilityWindow | null | undefined) {
+export function windowRange(window: Period | null | undefined) {
   return window === null || window === undefined
     ? "—"
     : `${timelineTime(window.from)}–${timelineTime(window.until)}`;
@@ -42,9 +42,7 @@ function compactTime(minutes: number) {
 }
 
 /** Compact task-card window, e.g. `18/19:30`. */
-export function formatAvailabilityWindow(
-  window: AvailabilityWindow | null | undefined
-) {
+export function formatPeriod(window: Period | null | undefined) {
   return window === null || window === undefined
     ? undefined
     : `${compactTime(window.from)}/${compactTime(window.until)}`;

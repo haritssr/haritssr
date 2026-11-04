@@ -4,7 +4,7 @@ import type { TimerController } from "./timerController";
 
 function isUnstartedScheduledTask(task: TimerTask) {
   return (
-    (task.availabilityWindow ?? null) !== null &&
+    (task.period ?? null) !== null &&
     task.lastStartedAt === undefined &&
     task.startedAt === null &&
     task.spent === 0 &&

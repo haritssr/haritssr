@@ -6,7 +6,8 @@ import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { TASK_INPUT_LIMITS } from "@/app/(tools)/timer/utils/timerInput";
 import Button from "@/components/Button";
 
-import type { AvailabilityWindow } from "../utils/timer";
+import type { Period, TaskKind } from "../utils/timer";
+import { taskKind } from "../utils/timer";
 import { inputTime } from "../utils/timerTime";
 import DeleteTaskButton from "./DeleteTaskButton";
 import DurationFields from "./DurationFields";
@@ -15,6 +16,7 @@ import {
   durationValue,
   formatPresetDuration,
 } from "./durationValue";
+import TaskKindField from "./TaskKindField";
 
 const INPUT_CLASS =
   "form-control border-border bg-white focus:border-action focus:ring-action/20 w-full rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2";
@@ -30,7 +32,8 @@ interface TaskFormDialogProps {
   defaultActivity: string;
   defaultDescription?: string;
   defaultDuration?: number;
-  defaultAvailabilityWindow?: AvailabilityWindow;
+  defaultKind?: TaskKind;
+  defaultPeriod?: Period;
   activityLimit?: number;
   descriptionLimit?: number;
   notice?: string;
@@ -55,7 +58,8 @@ function TaskFormPopup({
   defaultActivity,
   defaultDescription = "",
   defaultDuration = 300,
-  defaultAvailabilityWindow,
+  defaultKind = "work",
+  defaultPeriod,
   activityLimit,
   descriptionLimit,
   notice,
@@ -71,13 +75,22 @@ function TaskFormPopup({
   );
   const [activity, setActivity] = useState(defaultActivity);
   const [description, setDescription] = useState(defaultDescription);
+  const [kind, setKind] = useState<TaskKind>(defaultKind);
   const [duration, setDuration] = useState(() =>
     durationValue(defaultDuration)
   );
+  const [windowFrom, setWindowFrom] = useState(
+    inputTime(defaultPeriod?.from ?? 0)
+  );
+  const [windowUntil, setWindowUntil] = useState(
+    inputTime(defaultPeriod?.until ?? 0)
+  );
+  // Both fields at 00:00 mean no window; descriptions are optional with one.
+  const hasWindow = windowFrom !== "00:00" || windowUntil !== "00:00";
   const nameRef = useRef<HTMLInputElement>(null);
   return (
     <>
-      <Dialog.Backdrop className="timer-dialog-backdrop bg-foreground/40 fixed inset-0 z-90" />
+      <Dialog.Backdrop className="timer-dialog-backdrop bg-foreground/40 fixed inset-0 z-90 backdrop-blur-xs" />
       <Dialog.Popup
         initialFocus={nameRef}
         style={SHEET_STYLE}
@@ -103,7 +116,13 @@ function TaskFormPopup({
             value={description}
             onChange={setDescription}
             maxLength={descriptionLimit}
-            optional={defaultAvailabilityWindow !== undefined}
+            optional={hasWindow}
+            disabled={busy}
+          />
+          <TaskKindField
+            name="kind"
+            value={kind}
+            onChange={setKind}
             disabled={busy}
           />
           <DurationFields
@@ -112,43 +131,48 @@ function TaskFormPopup({
             disabled={busy}
             presets={durationPresets}
           />
-          {defaultAvailabilityWindow === undefined ? null : (
-            <fieldset disabled={busy} className="space-y-2">
-              <legend className="mb-2 text-sm">Available time</legend>
-              <div className="grid grid-cols-2 gap-2">
-                {(["from", "until"] as const).map((boundary) => {
-                  const minutes = defaultAvailabilityWindow[boundary];
-                  const value = inputTime(minutes);
-                  return (
-                    <label key={boundary} className="min-w-0 space-y-1 text-sm">
-                      <span className="text-muted/70">
-                        {boundary === "from" ? "From" : "Until"}
-                      </span>
-                      <input
-                        type="time"
-                        step={900}
-                        name={boundary}
-                        defaultValue={value}
-                        className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
-                        required
-                      />
-                    </label>
-                  );
-                })}
-              </div>
-              <p className="text-muted text-xs">
-                Use 15-minute increments. An end time of 00:00 means midnight.
-              </p>
-            </fieldset>
-          )}
+          <fieldset disabled={busy} className="space-y-2">
+            <legend className="mb-2 text-sm">Period</legend>
+            <div className="grid grid-cols-2 gap-2">
+              <label className="min-w-0 space-y-1 text-sm">
+                <span className="text-muted/70">From</span>
+                <input
+                  type="time"
+                  step={900}
+                  name="from"
+                  value={windowFrom}
+                  onChange={(event) => {
+                    setWindowFrom(event.currentTarget.value);
+                  }}
+                  className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
+                  required
+                />
+              </label>
+              <label className="min-w-0 space-y-1 text-sm">
+                <span className="text-muted/70">Until</span>
+                <input
+                  type="time"
+                  step={900}
+                  name="until"
+                  value={windowUntil}
+                  onChange={(event) => {
+                    setWindowUntil(event.currentTarget.value);
+                  }}
+                  className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
+                  required
+                />
+              </label>
+            </div>
+          </fieldset>
           {showTaskPresets ? (
             <fieldset className="space-y-3" disabled={busy}>
-              <legend className="mb-2 text-sm">Preset</legend>
+              <legend className="mb-2 text-sm">Presets</legend>
               <div className="grid grid-cols-2 gap-2">
                 {taskPresets.map((preset) => {
                   const selected =
                     activity === preset.activity &&
                     description === preset.description &&
+                    kind === taskKind(preset) &&
                     durationSeconds(duration) === preset.duration;
                   return (
                     <Button
@@ -161,6 +185,7 @@ function TaskFormPopup({
                       }
                       onClick={() => {
                         setActivity(preset.activity);
+                        setKind(taskKind(preset));
                         setDescription(preset.description);
                         setDuration(durationValue(preset.duration));
                       }}

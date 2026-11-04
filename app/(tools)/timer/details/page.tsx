@@ -158,11 +158,22 @@ export default function TimerDetailsPage() {
               characters.
             </li>
             <li>
+              Every task has a Type, Work or Leisure, set in the task form,
+              Presets, and Daily Tasks. Choosing a preset also sets its Type.
+              Scheduled blocks in Day and Month are violet for Work and amber
+              for Leisure. Running blocks turn green, and finished or missed
+              blocks fade in their own color. Tasks saved before Type existed
+              count as Work.
+            </li>
+            <li>
               Unscheduled daily tasks start manually. Editing a card changes
-              only today’s task, including its available time. Future-day
-              definitions stay the same. Daily cards cannot be deleted. Finished
-              daily tasks move to History; early Done tasks can be restored
-              while their window is open.
+              only today’s task, including its available window. Future-day
+              definitions stay the same. Task forms always show the Period; set
+              From and Until to move a task onto the timeline, or leave both at
+              00:00 for no window. A period can be changed but not removed.
+              Daily cards cannot be deleted. Finished daily tasks move to
+              History; early Done tasks can be restored while their window is
+              open.
             </li>
             <li>
               Open History beside Settings to review today’s finished and missed

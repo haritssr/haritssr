@@ -2,8 +2,13 @@
 import { useId } from "react";
 import type { CSSProperties, RefObject } from "react";
 
-import { formatTimerTime, taskTiming, timerDayBounds } from "../utils/timer";
-import type { AvailabilityWindow, TimerTask } from "../utils/timer";
+import {
+  formatTimerTime,
+  taskKind,
+  taskTiming,
+  timerDayBounds,
+} from "../utils/timer";
+import type { Period, TimerTask } from "../utils/timer";
 import { cardTimeRange, timelineTime } from "../utils/timerTime";
 import { EditTask } from "./TaskDialog";
 import { layoutTimelineTasks } from "./timelineLayout";
@@ -25,8 +30,8 @@ function positionStyle(position: number): TimelineStyle {
 export interface TimelineInteraction {
   root: RefObject<HTMLDivElement | null>;
   surface: RefObject<HTMLButtonElement | null>;
-  selection: AvailabilityWindow | null;
-  resizePreview: { taskId: string; window: AvailabilityWindow } | null;
+  selection: Period | null;
+  resizePreview: { taskId: string; window: Period } | null;
   message: string;
   resizeMessage: string;
 }
@@ -60,7 +65,7 @@ export default function TaskTimeline({
           task.id === resizePreview.taskId
             ? {
                 ...task,
-                availabilityWindow: resizePreview.window,
+                period: resizePreview.window,
                 duration:
                   (resizePreview.window.until - resizePreview.window.from) * 60,
               }
@@ -79,7 +84,7 @@ export default function TaskTimeline({
           startedAt: null,
           reachedAt: null,
           notifiedAt: null,
-          availabilityWindow: selection,
+          period: selection,
         },
       ]
     : resizedTasks;
@@ -110,7 +115,7 @@ export default function TaskTimeline({
       </output>
       <section
         aria-label="Hourly schedule"
-        className="border-border pl-1 lg:rounded-lg lg:border lg:p-3"
+        className="border-border lg:corner-squircle pl-1 lg:rounded-3xl lg:border lg:p-3"
       >
         <div ref={interaction?.root} className="relative mt-3 mb-4 ml-12 h-640">
           {editable ? (
@@ -221,10 +226,11 @@ function TimelineCard({
   };
   return (
     <div
+      data-kind={taskKind(task)}
       data-running={running || undefined}
       data-completed={reached || undefined}
       data-missed={missed || undefined}
-      className={`${styles.event} absolute flex gap-0.5 py-0.75 ${preview ? "pointer-events-none z-20" : "z-10"} ${running ? "[--color-schedule-accent:var(--color-success)] [--color-schedule-foreground:var(--color-schedule-running-foreground)] [--color-schedule-surface:var(--color-schedule-running-surface)]" : ""} ${reached || missed ? "[--color-schedule-accent:var(--color-schedule-muted-accent)] [--color-schedule-foreground:var(--color-schedule-muted-foreground)] [--color-schedule-surface:var(--color-schedule-muted-surface)]" : ""}`}
+      className={`${styles.event} ${styles.kind} absolute flex gap-0.5 py-0.75 pr-0.5 ${preview ? "pointer-events-none z-20" : "z-10"}`}
       style={geometry}
       title={progress !== null && until - from < 30 ? progress : undefined}
     >
@@ -248,7 +254,7 @@ function TimelineCard({
           ) : null}
           <div className="pointer-events-none relative flex w-full min-w-0 flex-col select-none">
             <div className="flex items-center justify-between gap-1">
-              <span className="text-schedule-accent truncate leading-4 font-medium">
+              <span className="text-schedule-title truncate leading-4 font-medium">
                 {task.activity}
               </span>
               <span className="flex shrink-0 items-center gap-1">

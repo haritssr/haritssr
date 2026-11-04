@@ -120,6 +120,10 @@ export const implementationFiles = [
     "Add/Edit triggers, Shift+N shortcut, and form validation.",
   ],
   [
+    "app/(tools)/timer/_components/TaskKindField.tsx",
+    "Work/Leisure toggle shared by the task form, Presets, and Daily Tasks.",
+  ],
+  [
     "app/(tools)/timer/_components/TaskFormDialog.tsx",
     "90%-height mobile Add/Edit sheets, desktop dialogs, focus, counters, and form actions.",
   ],

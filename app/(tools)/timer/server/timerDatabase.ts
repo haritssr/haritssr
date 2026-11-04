@@ -16,13 +16,14 @@ import type {
 } from "@/app/(tools)/timer/utils/timer";
 import {
   createEmptyTimerDay,
+  taskKind,
   timerMidnight,
   taskWindowEnd,
 } from "@/app/(tools)/timer/utils/timer";
 import {
   daySchema,
   preferencesSchema,
-  availabilityWindowSchema,
+  periodSchema,
 } from "@/app/(tools)/timer/utils/timerValidation";
 
 export function timerDatabase() {
@@ -52,7 +53,8 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
     duration_seconds INTEGER NOT NULL CHECK(duration_seconds BETWEEN 1 AND 86400),
     spent_seconds REAL NOT NULL CHECK(spent_seconds >= 0 AND spent_seconds <= duration_seconds),
     started_at TEXT, last_started_at TEXT, completed_at TEXT, notification_claimed_at TEXT,
-    availability_window TEXT, deadline_reminder_at TEXT,
+    period TEXT, deadline_reminder_at TEXT,
+    kind TEXT NOT NULL DEFAULT 'work' CHECK(kind IN ('work', 'leisure')),
     PRIMARY KEY(date, id),
     UNIQUE(date, position)
   )`,
@@ -69,6 +71,109 @@ const TIMER_DATABASE_SCHEMA: InStatement[] = [
   )`,
   "INSERT OR IGNORE INTO timer_preferences(id) VALUES (1)",
 ];
+
+/** Legacy name of `period`, in `timer_tasks` and daily task JSON. */
+const LEGACY_PERIOD_COLUMN = "availability_window";
+const LEGACY_PERIOD_KEY = "availabilityWindow";
+
+/**
+ * Renames `availability_window` to `period` (or adds `period` to old tables),
+ * then rewrites any legacy `availabilityWindow` keys in saved daily tasks.
+ * Safe to run repeatedly.
+ */
+async function migratePeriods(tx: Transaction, columns: Set<string>) {
+  if (!columns.has("period")) {
+    await tx.execute(
+      columns.has(LEGACY_PERIOD_COLUMN)
+        ? `ALTER TABLE timer_tasks RENAME COLUMN ${LEGACY_PERIOD_COLUMN} TO period`
+        : "ALTER TABLE timer_tasks ADD COLUMN period TEXT"
+    );
+  }
+  const preferences = await tx.execute(
+    "SELECT daily_tasks FROM timer_preferences WHERE id = 1"
+  );
+  const value = preferences.rows[0]?.daily_tasks;
+  if (typeof value !== "string" || !value.includes(LEGACY_PERIOD_KEY)) {
+    return;
+  }
+  const entries = JSON.parse(value) as unknown;
+  if (!Array.isArray(entries)) {
+    return;
+  }
+  const renamed = entries.map((entry: unknown) => {
+    if (
+      typeof entry !== "object" ||
+      entry === null ||
+      !(LEGACY_PERIOD_KEY in entry)
+    ) {
+      return entry;
+    }
+    const { [LEGACY_PERIOD_KEY]: period, ...rest } = entry as Record<
+      string,
+      unknown
+    >;
+    return { ...rest, period };
+  });
+  await tx.execute({
+    sql: "UPDATE timer_preferences SET daily_tasks = ?, revision = revision + 1 WHERE id = 1",
+    args: [JSON.stringify(renamed)],
+  });
+}
+
+/** Activities tagged Leisure when the `kind` column is first added. */
+const INITIAL_LEISURE_ACTIVITIES = [
+  "X",
+  "YouTube",
+  "Orientation",
+  "Digital Clutter",
+];
+
+/**
+ * One-time migration: adds `timer_tasks.kind` and tags saved tasks, daily
+ * tasks, and task presets. Runs only while the column is missing.
+ */
+async function addTaskKinds(tx: Transaction) {
+  const placeholders = INITIAL_LEISURE_ACTIVITIES.map(() => "?").join(", ");
+  await tx.batch([
+    "ALTER TABLE timer_tasks ADD COLUMN kind TEXT NOT NULL DEFAULT 'work' CHECK(kind IN ('work', 'leisure'))",
+    {
+      sql: `UPDATE timer_tasks SET kind = 'leisure' WHERE activity IN (${placeholders})`,
+      args: INITIAL_LEISURE_ACTIVITIES,
+    },
+  ]);
+  const preferences = await tx.execute(
+    "SELECT daily_tasks, task_presets FROM timer_preferences WHERE id = 1"
+  );
+  const [row] = preferences.rows;
+  if (row === undefined) {
+    return;
+  }
+  const tag = (value: unknown): string | null => {
+    if (typeof value !== "string") {
+      return null;
+    }
+    const entries = JSON.parse(value) as unknown;
+    if (!Array.isArray(entries)) {
+      return value;
+    }
+    return JSON.stringify(
+      entries.map((entry: unknown) =>
+        typeof entry === "object" && entry !== null && "activity" in entry
+          ? {
+              ...entry,
+              kind: INITIAL_LEISURE_ACTIVITIES.includes(String(entry.activity))
+                ? "leisure"
+                : "work",
+            }
+          : entry
+      )
+    );
+  };
+  await tx.execute({
+    sql: "UPDATE timer_preferences SET daily_tasks = ?, task_presets = ?, revision = revision + 1 WHERE id = 1",
+    args: [tag(row.daily_tasks), tag(row.task_presets)],
+  });
+}
 
 export async function initializeTimerDatabase(client: Client) {
   const tx = await client.transaction("write");
@@ -99,12 +204,16 @@ export async function initializeTimerDatabase(client: Client) {
         "ALTER TABLE timer_tasks ADD COLUMN deadline_reminder_at TEXT"
       );
     }
-    if (
-      !taskColumns.rows.some((column) => column.name === "availability_window")
-    ) {
-      await tx.execute(
-        "ALTER TABLE timer_tasks ADD COLUMN availability_window TEXT"
-      );
+    await migratePeriods(
+      tx,
+      new Set(
+        taskColumns.rows.flatMap((column) =>
+          typeof column.name === "string" ? [column.name] : []
+        )
+      )
+    );
+    if (!taskColumns.rows.some((column) => column.name === "kind")) {
+      await addTaskKinds(tx);
     }
     const dayColumns = await tx.execute("PRAGMA table_info(timer_days)");
     if (!dayColumns.rows.some((column) => column.name === "spent_seconds")) {
@@ -160,7 +269,7 @@ export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
       args: [today],
     },
     "SELECT revision FROM timer_preferences WHERE id = 1",
-    "SELECT date, started_at, duration_seconds, spent_seconds, availability_window FROM timer_tasks WHERE started_at IS NOT NULL",
+    "SELECT date, started_at, duration_seconds, spent_seconds, period FROM timer_tasks WHERE started_at IS NOT NULL",
   ]);
   const [preference] = preferences.rows;
   if (preference === undefined) {
@@ -179,11 +288,9 @@ export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
       nextTransitionAt,
       taskWindowEnd(
         {
-          availabilityWindow:
-            typeof task.availability_window === "string"
-              ? availabilityWindowSchema.parse(
-                  JSON.parse(task.availability_window) as unknown
-                )
+          period:
+            typeof task.period === "string"
+              ? periodSchema.parse(JSON.parse(task.period) as unknown)
               : null,
         },
         task.date
@@ -266,10 +373,11 @@ function decodeDays(days: ResultSet, tasks: ResultSet) {
         reachedAt: task.completed_at,
         notifiedAt: task.notification_claimed_at,
         deadlineReminderAt: task.deadline_reminder_at ?? null,
-        availabilityWindow:
-          typeof task.availability_window === "string"
-            ? (JSON.parse(task.availability_window) as unknown)
+        period:
+          typeof task.period === "string"
+            ? (JSON.parse(task.period) as unknown)
             : null,
+        kind: task.kind ?? undefined,
       })),
     })
   );
@@ -348,7 +456,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
     },
     { sql: "DELETE FROM timer_tasks WHERE date = ?", args: [day.date] },
     ...day.tasks.map((task, position) => ({
-      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window, deadline_reminder_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      sql: "INSERT INTO timer_tasks(id, date, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, period, deadline_reminder_at, kind) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       args: [
         task.id,
         day.date,
@@ -363,6 +471,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
         task.notifiedAt,
         availabilityValue(task),
         task.deadlineReminderAt ?? null,
+        taskKind(task),
       ],
     })),
   ]);
@@ -372,7 +481,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
 }
 
 function availabilityValue(task: TimerDay["tasks"][number]) {
-  const window = task.availabilityWindow ?? null;
+  const window = task.period ?? null;
   return window === null ? null : JSON.stringify(window);
 }
 
@@ -389,6 +498,7 @@ function taskValues(task: TimerDay["tasks"][number], position: number) {
     task.notifiedAt,
     availabilityValue(task),
     task.deadlineReminderAt ?? null,
+    taskKind(task),
   ];
 }
 
@@ -448,13 +558,14 @@ export async function updateTimerDays(
         continue;
       }
       statements.push({
-        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, availability_window, deadline_reminder_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        sql: `INSERT INTO timer_tasks(date, id, position, activity, description, duration_seconds, spent_seconds, started_at, last_started_at, completed_at, notification_claimed_at, period, deadline_reminder_at, kind)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ON CONFLICT(date, id) DO UPDATE SET position = excluded.position, activity = excluded.activity,
           description = excluded.description, duration_seconds = excluded.duration_seconds, spent_seconds = excluded.spent_seconds,
           started_at = excluded.started_at, last_started_at = excluded.last_started_at,
           completed_at = excluded.completed_at, notification_claimed_at = excluded.notification_claimed_at,
-          availability_window = excluded.availability_window, deadline_reminder_at = excluded.deadline_reminder_at`,
+          period = excluded.period, deadline_reminder_at = excluded.deadline_reminder_at,
+          kind = excluded.kind`,
         args: [day.date, task.id, ...values],
       });
     }

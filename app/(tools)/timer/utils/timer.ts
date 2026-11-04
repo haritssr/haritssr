@@ -1,11 +1,18 @@
 import type { DailyTaskDefinition } from "./dailyTasks";
 
-export interface AvailabilityWindow {
+export interface Period {
   from: number;
   until: number;
 }
 
 export const MAX_TIMER_TASKS = 100;
+
+/** Schedule category; a missing value reads as Work. */
+export type TaskKind = "work" | "leisure";
+
+export function taskKind(task: { kind?: TaskKind }): TaskKind {
+  return task.kind ?? "work";
+}
 
 export interface TimerTask {
   id: string;
@@ -18,7 +25,8 @@ export interface TimerTask {
   reachedAt: string | null;
   notifiedAt: string | null;
   deadlineReminderAt?: string | null;
-  availabilityWindow?: AvailabilityWindow | null;
+  period?: Period | null;
+  kind?: TaskKind;
 }
 
 export interface TimerDay {
@@ -39,6 +47,7 @@ export interface TimerTaskPreset {
   activity: string;
   description: string;
   duration: number;
+  kind?: TaskKind;
 }
 
 export const DEFAULT_DURATION_PRESETS = [300, 900, 1800, 3600];
@@ -159,13 +168,14 @@ export type TimerAction =
       activity: string;
       description: string;
       duration: number;
-      availabilityWindow?: AvailabilityWindow;
+      period?: Period;
+      kind?: TaskKind;
     }
   | {
       action: "resize-scheduled";
       date: string;
       taskId: string;
-      availabilityWindow: AvailabilityWindow;
+      period: Period;
     }
   | {
       action: "edit";
@@ -174,7 +184,8 @@ export type TimerAction =
       activity: string;
       description: string;
       duration: number;
-      availabilityWindow?: AvailabilityWindow;
+      period?: Period;
+      kind?: TaskKind;
     }
   | {
       action: "pause" | "done" | "acknowledge" | "delete";
@@ -248,9 +259,8 @@ export function taskTiming(
   bounds: TimerDayBounds,
   now: number
 ) {
-  const opensAt = bounds.start + (task.availabilityWindow?.from ?? 0) * 60_000;
-  const closesAt =
-    bounds.start + (task.availabilityWindow?.until ?? 1440) * 60_000;
+  const opensAt = bounds.start + (task.period?.from ?? 0) * 60_000;
+  const closesAt = bounds.start + (task.period?.until ?? 1440) * 60_000;
   const elapsed =
     task.startedAt === null
       ? 0
@@ -270,21 +280,15 @@ export function taskSpent(task: TimerTask, date: string, now: number) {
   return taskTiming(task, timerDayBounds(date), now).spent;
 }
 
-export function taskWindowEnd(
-  task: Pick<TimerTask, "availabilityWindow">,
-  date: string
-) {
-  return (
-    timerDayBounds(date).start +
-    (task.availabilityWindow?.until ?? 1440) * 60_000
-  );
+export function taskWindowEnd(task: Pick<TimerTask, "period">, date: string) {
+  return timerDayBounds(date).start + (task.period?.until ?? 1440) * 60_000;
 }
 
 export function taskAvailable(task: TimerTask, date: string, now: number) {
   const bounds = timerDayBounds(date);
   return (
-    now >= bounds.start + (task.availabilityWindow?.from ?? 0) * 60_000 &&
-    now < bounds.start + (task.availabilityWindow?.until ?? 1440) * 60_000
+    now >= bounds.start + (task.period?.from ?? 0) * 60_000 &&
+    now < bounds.start + (task.period?.until ?? 1440) * 60_000
   );
 }
 

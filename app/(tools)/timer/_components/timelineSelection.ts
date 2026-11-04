@@ -1,4 +1,4 @@
-import type { AvailabilityWindow } from "../utils/timer";
+import type { Period } from "../utils/timer";
 
 export function firstFutureSlot(minute: number) {
   return Math.max(0, Math.min(96, Math.floor(minute / 15) + 1));
@@ -13,10 +13,7 @@ export function timelineSlot(
   return Math.max(first, Math.min(95, Math.floor(((y - top) / height) * 96)));
 }
 
-export function selectedWindow(
-  anchor: number,
-  slot: number
-): AvailabilityWindow {
+export function selectedWindow(anchor: number, slot: number): Period {
   return {
     from: Math.min(anchor, slot) * 15,
     until: (Math.max(anchor, slot) + 1) * 15,
@@ -26,12 +23,12 @@ export function selectedWindow(
 export type ResizeEdge = "from" | "until";
 
 export function resizedWindow(
-  original: AvailabilityWindow,
+  original: Period,
   edge: ResizeEdge,
   boundary: number,
   first: number,
   spent: number
-): AvailabilityWindow | null {
+): Period | null {
   const minimum = Math.max(15, (Math.floor(spent / 900) + 1) * 15);
   const earliest = first * 15;
   if (

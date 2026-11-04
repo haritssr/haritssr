@@ -17,7 +17,7 @@ import type {
 
 import { isDailyTask } from "./dailyTasks";
 import { taskDeadline } from "./timerDeadline";
-import { formatAvailabilityWindow } from "./timerTime";
+import { formatPeriod } from "./timerTime";
 
 const SCHEDULED_START_GRACE = 60_000;
 
@@ -136,8 +136,11 @@ function editTaskDetails(
   task.activity = command.activity;
   task.description = command.description;
   task.duration = command.duration;
-  if (command.availabilityWindow !== undefined) {
-    task.availabilityWindow = { ...command.availabilityWindow };
+  if (command.kind !== undefined) {
+    task.kind = command.kind;
+  }
+  if (command.period !== undefined) {
+    task.period = { ...command.period };
   }
 }
 
@@ -152,7 +155,7 @@ function startTask(
   }
   if (!taskAvailable(task, day.date, now)) {
     throw new TimerStoreError(
-      `Available ${formatAvailabilityWindow(task.availabilityWindow) ?? "on its scheduled day"} WIB.`,
+      `Available ${formatPeriod(task.period) ?? "on its scheduled day"} WIB.`,
       409
     );
   }
@@ -173,11 +176,11 @@ function resizeScheduledTask(
 ) {
   const { start } = timerDayBounds(day.date);
   if (
-    task.availabilityWindow === null ||
-    task.availabilityWindow === undefined ||
+    task.period === null ||
+    task.period === undefined ||
     task.startedAt !== null ||
-    start + task.availabilityWindow.from * 60_000 <= now ||
-    start + command.availabilityWindow.from * 60_000 <= now
+    start + task.period.from * 60_000 <= now ||
+    start + command.period.from * 60_000 <= now
   ) {
     throw new TimerStoreError(
       "Only upcoming tasks can be resized into future time.",
@@ -190,9 +193,8 @@ function resizeScheduledTask(
     taskId: task.id,
     activity: task.activity,
     description: task.description,
-    availabilityWindow: command.availabilityWindow,
-    duration:
-      (command.availabilityWindow.until - command.availabilityWindow.from) * 60,
+    period: command.period,
+    duration: (command.period.until - command.period.from) * 60,
   });
 }
 
@@ -290,10 +292,8 @@ function applyTimerAction(
       );
     }
     if (
-      command.availabilityWindow !== undefined &&
-      timerDayBounds(day.date).start +
-        command.availabilityWindow.from * 60_000 <=
-        now
+      command.period !== undefined &&
+      timerDayBounds(day.date).start + command.period.from * 60_000 <= now
     ) {
       throw new TimerStoreError("Choose a future availability window.", 409);
     }
@@ -302,9 +302,10 @@ function applyTimerAction(
       activity: command.activity,
       description: command.description,
       duration: command.duration,
-      ...(command.availabilityWindow === undefined
+      ...(command.kind === undefined ? {} : { kind: command.kind }),
+      ...(command.period === undefined
         ? {}
-        : { availabilityWindow: { ...command.availabilityWindow } }),
+        : { period: { ...command.period } }),
       spent: 0,
       startedAt: null,
       reachedAt: null,
@@ -354,8 +355,7 @@ function scheduledStartTime(
   notBefore: number
 ) {
   const opensAt =
-    timerDayBounds(day.date).start +
-    (task.availabilityWindow?.from ?? 0) * 60_000;
+    timerDayBounds(day.date).start + (task.period?.from ?? 0) * 60_000;
   return now - opensAt <= SCHEDULED_START_GRACE
     ? Math.min(now, Math.max(opensAt, notBefore))
     : now;
@@ -374,13 +374,10 @@ function startScheduledTasks(
   const open = day.tasks
     .filter(
       (task) =>
-        (task.availabilityWindow ?? null) !== null &&
-        taskAvailable(task, day.date, now)
+        (task.period ?? null) !== null && taskAvailable(task, day.date, now)
     )
     .toSorted(
-      (first, second) =>
-        (second.availabilityWindow?.from ?? 0) -
-        (first.availabilityWindow?.from ?? 0)
+      (first, second) => (second.period?.from ?? 0) - (first.period?.from ?? 0)
     );
   const due = open.filter((task) => requested.has(task.id));
   // A single-task handoff settles the paused task at the backdated start, and

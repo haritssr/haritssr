@@ -13,8 +13,7 @@ export default function TimerCalendarDay({
 }) {
   const scheduled = scheduledCalendarTasks(day);
   const unscheduled = day.tasks.filter(
-    (task) =>
-      task.availabilityWindow === null || task.availabilityWindow === undefined
+    (task) => task.period === null || task.period === undefined
   );
   return (
     <div className="space-y-4">

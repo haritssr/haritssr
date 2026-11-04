@@ -34,8 +34,7 @@ export default function CompletedTasksTable({
       }
       const reached = spent >= task.duration;
       const closed =
-        (task.availabilityWindow ?? null) !== null &&
-        now >= taskWindowEnd(task, date);
+        (task.period ?? null) !== null && now >= taskWindowEnd(task, date);
       const missed = !reached && task.reachedAt === null && closed;
       let status = "Done";
       if (reached) {
@@ -46,7 +45,7 @@ export default function CompletedTasksTable({
       if (missed) {
         reachedTime = taskWindowEnd(task, date);
       }
-      const availableTime = windowRange(task.availabilityWindow);
+      const availableTime = windowRange(task.period);
       return {
         task,
         availableTime,

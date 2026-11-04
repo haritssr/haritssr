@@ -58,15 +58,9 @@ export function resolveCalendarDays(
 
 export function scheduledCalendarTasks(day: TimerDay | undefined) {
   return (day?.tasks ?? [])
-    .filter(
-      (task) =>
-        task.availabilityWindow !== null &&
-        task.availabilityWindow !== undefined
-    )
+    .filter((task) => task.period !== null && task.period !== undefined)
     .toSorted(
-      (first, second) =>
-        (first.availabilityWindow?.from ?? 0) -
-        (second.availabilityWindow?.from ?? 0)
+      (first, second) => (first.period?.from ?? 0) - (second.period?.from ?? 0)
     );
 }
 

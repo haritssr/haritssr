@@ -13,8 +13,7 @@ function getTaskState(
 ) {
   const { spent, available, closesAt } = taskTiming(task, bounds, now);
   const reached = task.reachedAt !== null || spent >= task.duration;
-  const missed =
-    !reached && (task.availabilityWindow ?? null) !== null && now >= closesAt;
+  const missed = !reached && (task.period ?? null) !== null && now >= closesAt;
   const running = task.startedAt !== null && !reached && available;
   const paused = !running && !reached && spent > 0;
   let label: "Start" | "Pause" | "Continue" =

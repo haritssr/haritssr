@@ -1,7 +1,8 @@
 /* oxlint-disable no-await-in-loop -- Commands must save in order; recovery must finish before the next write. */
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import type {
-  AvailabilityWindow,
+  Period,
+  TaskKind,
   TimerAction,
   TimerPreferences,
 } from "@/app/(tools)/timer/utils/timer";
@@ -16,10 +17,11 @@ type Mutation = { action: TimerAction } | { preferences: PreferencePatch };
 interface TaskDraft {
   taskId?: string;
   date?: string;
-  availabilityWindow?: AvailabilityWindow;
+  period?: Period;
   activity: string;
   description: string;
   duration: number;
+  kind?: TaskKind;
 }
 interface PendingChange {
   id: number;
@@ -262,12 +264,11 @@ export class TimerMutations {
         activity: action.activity,
         description: action.description,
         duration: action.duration,
+        ...(action.kind === undefined ? {} : { kind: action.kind }),
         ...(action.action === "add"
           ? { taskId: action.taskId, date: action.date }
           : {}),
-        ...(action.availabilityWindow === undefined
-          ? {}
-          : { availabilityWindow: action.availabilityWindow }),
+        ...(action.period === undefined ? {} : { period: action.period }),
       };
     }
     if (
@@ -283,10 +284,8 @@ export class TimerMutations {
         drafts[key] = {
           activity: task.activity,
           description: task.description,
-          duration:
-            (action.availabilityWindow.until - action.availabilityWindow.from) *
-            60,
-          availabilityWindow: { ...action.availabilityWindow },
+          duration: (action.period.until - action.period.from) * 60,
+          period: { ...action.period },
         };
       }
     }

@@ -7,7 +7,7 @@ import {
 } from "../_components/timelineSelection";
 import { useTimer } from "../_components/TimerProvider";
 import { canUseTimer, timerDayBounds } from "../utils/timer";
-import type { AvailabilityWindow } from "../utils/timer";
+import type { Period } from "../utils/timer";
 import { timelineTime } from "../utils/timerTime";
 import { trackTimelineDrag } from "./timelineDrag";
 
@@ -24,7 +24,7 @@ export default function useTimelineCreation(date: string, editable: boolean) {
     "clockOffset"
   );
   const surface = useRef<HTMLButtonElement>(null);
-  const [selection, setSelection] = useState<AvailabilityWindow | null>(null);
+  const [selection, setSelection] = useState<Period | null>(null);
   const [message, setMessage] = useState("");
   const eligibility = useEffectEvent(() => {
     const now = Date.now() + clockOffset;
@@ -37,31 +37,29 @@ export default function useTimelineCreation(date: string, editable: boolean) {
       ? firstFutureSlot((now - bounds.start) / 60_000)
       : 96;
   });
-  const save = useEffectEvent(
-    (window: AvailabilityWindow, creationDate: string) => {
-      if (creationDate !== date || window.from < eligibility() * 15) {
-        setMessage("Choose a future time. Selection canceled.");
-        return;
-      }
-      const taskId = crypto.randomUUID();
-      setMessage("Saving New Task.");
-      void act({
-        action: "add",
-        date,
-        taskId,
-        activity: "New Task",
-        description: "",
-        duration: (window.until - window.from) * 60,
-        availabilityWindow: window,
-      }).then((saved) => {
-        setMessage(
-          saved
-            ? "New Task created."
-            : "Task could not be saved. Open Add Task to recover your draft."
-        );
-      });
+  const save = useEffectEvent((window: Period, creationDate: string) => {
+    if (creationDate !== date || window.from < eligibility() * 15) {
+      setMessage("Choose a future time. Selection canceled.");
+      return;
     }
-  );
+    const taskId = crypto.randomUUID();
+    setMessage("Saving New Task.");
+    void act({
+      action: "add",
+      date,
+      taskId,
+      activity: "New Task",
+      description: "",
+      duration: (window.until - window.from) * 60,
+      period: window,
+    }).then((saved) => {
+      setMessage(
+        saved
+          ? "New Task created."
+          : "Task could not be saved. Open Add Task to recover your draft."
+      );
+    });
+  });
 
   useEffect(() => {
     const element = surface.current;
@@ -77,7 +75,7 @@ export default function useTimelineCreation(date: string, editable: boolean) {
       gesture = null;
       setSelection(null);
     };
-    const announce = (window: AvailabilityWindow) => {
+    const announce = (window: Period) => {
       setSelection(window);
       setMessage(
         `New Task, ${timelineTime(window.from)} to ${timelineTime(window.until)}.`

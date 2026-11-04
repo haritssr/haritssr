@@ -46,9 +46,11 @@ export function readTaskForm(
   if (description.length > descriptionLimit) {
     return `Use ${descriptionLimit} characters or fewer for the description.`;
   }
+  const kindValue = form.get("kind");
   return {
     activity,
     description,
     duration,
+    kind: kindValue === "leisure" ? ("leisure" as const) : ("work" as const),
   };
 }

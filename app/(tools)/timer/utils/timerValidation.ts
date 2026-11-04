@@ -19,18 +19,20 @@ import {
 } from "./dailyTasks";
 import { monthDates, validTimerMonth } from "./timerCalendar";
 
-export const availabilityWindowSchema = z
+export const periodSchema = z
   .object({
     from: z.number().int().min(0).max(1439),
     until: z.number().int().min(1).max(1440),
   })
   .refine(({ from, until }) => from < until);
 
-export const scheduledWindowSchema = availabilityWindowSchema.refine(
+export const scheduledWindowSchema = periodSchema.refine(
   ({ from, until }) =>
     until - from >= 15 && from % 15 === 0 && until % 15 === 0,
   "Choose times in 15-minute increments, at least 15 minutes apart."
 );
+
+const taskKindSchema = z.enum(["work", "leisure"]);
 
 const storedDailyTasksSchema = z
   .array(
@@ -39,7 +41,8 @@ const storedDailyTasksSchema = z
       activity: z.string().trim().min(1).max(TASK_INPUT_LIMITS.activity),
       description: z.string().trim().max(2000),
       duration: z.number().int().min(1).max(86_400),
-      availabilityWindow: availabilityWindowSchema.nullable(),
+      period: periodSchema.nullable(),
+      kind: taskKindSchema.optional(),
     })
   )
   .max(MAX_TIMER_TASKS)
@@ -56,14 +59,14 @@ export const dailyTasksSchema = storedDailyTasksSchema.superRefine(
     }
     for (const [index, task] of tasks.entries()) {
       if (
-        task.availabilityWindow !== null &&
-        (task.availabilityWindow.until - task.availabilityWindow.from < 15 ||
-          task.availabilityWindow.from % 15 !== 0 ||
-          task.availabilityWindow.until % 15 !== 0)
+        task.period !== null &&
+        (task.period.until - task.period.from < 15 ||
+          task.period.from % 15 !== 0 ||
+          task.period.until % 15 !== 0)
       ) {
         context.addIssue({
           code: "custom",
-          path: [index, "availabilityWindow"],
+          path: [index, "period"],
           message:
             "Choose times in 15-minute increments, at least 15 minutes apart.",
         });
@@ -95,30 +98,49 @@ const taskDetails = {
     .int()
     .min(TASK_INPUT_LIMITS.minimumDuration)
     .max(TASK_INPUT_LIMITS.maximumDuration),
+  kind: taskKindSchema.optional(),
 };
+/** Reads the legacy `availabilityWindow` key from old backups as `period`. */
+function renameLegacyPeriod(value: unknown) {
+  if (
+    typeof value !== "object" ||
+    value === null ||
+    !("availabilityWindow" in value) ||
+    "period" in value
+  ) {
+    return value;
+  }
+  const { availabilityWindow: period, ...rest } = value;
+  return { ...rest, period };
+}
+
 // Object parsing strips retired fields such as speed from legacy backups.
-const taskSchema = z
-  .object({
-    id: z.string().min(1).max(100),
-    activity: z.string().trim().min(1).max(120),
-    description: z.string().max(2000),
-    duration: z
-      .number()
-      .int()
-      .min(TASK_INPUT_LIMITS.minimumDuration)
-      .max(TASK_INPUT_LIMITS.maximumDuration),
-    spent: z
-      .number()
-      .min(0)
-      .transform((value) => timerMilliseconds(value) / 1000),
-    startedAt: instant.nullable(),
-    lastStartedAt: instant.optional(),
-    reachedAt: instant.nullable(),
-    notifiedAt: instant.nullable(),
-    deadlineReminderAt: instant.nullable().optional(),
-    availabilityWindow: availabilityWindowSchema.nullable().optional(),
-  })
-  .refine((task) => task.spent <= task.duration);
+const taskSchema = z.preprocess(
+  renameLegacyPeriod,
+  z
+    .object({
+      id: z.string().min(1).max(100),
+      activity: z.string().trim().min(1).max(120),
+      description: z.string().max(2000),
+      duration: z
+        .number()
+        .int()
+        .min(TASK_INPUT_LIMITS.minimumDuration)
+        .max(TASK_INPUT_LIMITS.maximumDuration),
+      spent: z
+        .number()
+        .min(0)
+        .transform((value) => timerMilliseconds(value) / 1000),
+      startedAt: instant.nullable(),
+      lastStartedAt: instant.optional(),
+      reachedAt: instant.nullable(),
+      notifiedAt: instant.nullable(),
+      deadlineReminderAt: instant.nullable().optional(),
+      period: periodSchema.nullable().optional(),
+      kind: taskKindSchema.optional(),
+    })
+    .refine((task) => task.spent <= task.duration)
+);
 export const daySchema = z
   .object({
     schemaVersion: z.literal(1),
@@ -160,12 +182,12 @@ export const actionSchema = z.discriminatedUnion("action", [
     action: z.literal("resize-scheduled"),
     date: dateSchema,
     taskId: z.string().min(1).max(100),
-    availabilityWindow: scheduledWindowSchema,
+    period: scheduledWindowSchema,
   }),
   z
     .object({
       action: z.literal("edit"),
-      availabilityWindow: scheduledWindowSchema.optional(),
+      period: scheduledWindowSchema.optional(),
       date: dateSchema,
       taskId: z.string().min(1).max(100),
       ...taskDetails,
@@ -173,14 +195,14 @@ export const actionSchema = z.discriminatedUnion("action", [
       description: z.string().trim().max(TASK_FORM_INPUT_LIMITS.description),
     })
     .refine(
-      ({ description, availabilityWindow }) =>
-        description.length > 0 || availabilityWindow !== undefined,
+      ({ description, period }) =>
+        description.length > 0 || period !== undefined,
       { path: ["description"], message: "Enter a description." }
     ),
   z
     .object({
       action: z.literal("add"),
-      availabilityWindow: scheduledWindowSchema.optional(),
+      period: scheduledWindowSchema.optional(),
       taskId: z.uuid().optional(),
       date: dateSchema,
       ...taskDetails,
@@ -188,8 +210,8 @@ export const actionSchema = z.discriminatedUnion("action", [
       description: z.string().trim().max(TASK_FORM_INPUT_LIMITS.description),
     })
     .refine(
-      ({ description, availabilityWindow }) =>
-        description.length > 0 || availabilityWindow !== undefined,
+      ({ description, period }) =>
+        description.length > 0 || period !== undefined,
       { path: ["description"], message: "Enter a description." }
     ),
   ...(["pause", "done", "acknowledge", "delete"] as const).map((action) =>

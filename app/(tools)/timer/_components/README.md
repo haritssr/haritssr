@@ -124,7 +124,7 @@ live in [timerTime.ts](../utils/timerTime.ts). `TimerClient` owns the one-minute
 clock and passes it to `TaskList`. The timeline retains every scheduled window
 all day, including running, paused, completed, and missed tasks. Blocks span their
 exact opening/closing minutes; running cards use opaque green surfaces and the
-progress accent, other active cards use violet, and past cards are muted violet. Overlapping windows share
+progress accent, other active cards use their kind's color (violet for Work, amber for Leisure), and past cards are muted in that color. Overlapping windows share
 horizontal lanes, calculated by [timelineLayout.ts](timelineLayout.ts). Its
 full-height timeline displays every hour from 00:00 to 24:00 in the page flow,
 without internal scrolling. A red line shows Jakarta time, updating at least once per minute.
@@ -138,9 +138,13 @@ creates nothing; Escape and canceled gestures discard the selection. Release sav
 New Task with an empty description and a duration matching its selected window,
 using the existing authenticated writer. Scheduled Add/Edit forms allow empty
 descriptions; ordinary forms and Daily Tasks settings still require descriptions.
-Scheduled forms show Duration controls separately from Available time. Saving
+Task forms show Duration controls separately from the Period. Saving
 uses the entered duration independently of the window, including seconds and presets.
-Unscheduled forms retain the same duration controls.
+The Period fields (From/Until) are always shown in Add and Edit
+forms. Both at 00:00 mean no window, and descriptions are required only then.
+Setting a window on an unscheduled task sends it with the existing `edit`
+action, so the task moves to the timeline; windows that already ended today are
+rejected. Clearing an existing window is not supported and shows an error.
 Failed additions preserve their ID and window for explicit recovery through Add Task;
 uncertain writes are never automatically resent.
 [useTimelineResize.ts](../hooks/useTimelineResize.ts) delegates top/bottom edge
@@ -376,6 +380,21 @@ before sending later queued commands; uncertain writes are not automatically
 resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
+A task's availability window is `period` (type `Period`) in code, API payloads,
+daily task JSON, and the `timer_tasks.period` column. The migration renames the
+legacy `availability_window` column and rewrites legacy `availabilityWindow`
+daily-task keys; `taskSchema` still accepts `availabilityWindow` from old
+backups and local JSON imports. Run the migration before deploying this code.
+
+Each task, task preset, and daily task has an optional `kind` (`work` or
+`leisure`; missing means Work), edited with [TaskKindField](TaskKindField.tsx).
+Choosing a preset sets the form's kind. `timer_tasks.kind` is added by the
+migration, which also tags X, YouTube, Orientation, and Digital Clutter as
+Leisure in saved tasks, daily tasks, and presets once, when the column is
+created; back up first. Schedule colors come from `data-kind` and the
+state attributes in [TaskTimeline.module.css](TaskTimeline.module.css), where
+rule order makes running (green) and completed or missed (faded) override kind.
+
 Settings and History use icons with accessible labels at every screen size.
 Settings contains the download button below Sound, with a loading label during download.
 The view buttons sit opposite Settings and History in the toolbar. Day
@@ -458,7 +477,7 @@ only when initializing a new Jakarta day, with reserved `daily:` IDs, zero spent
 time and paused state. The existing `(date, id)` key and one transaction
 prevent duplicate instances. Existing dates and their availability are preserved.
 
-`timer_tasks.availability_window` stores JSON `{from, until}` in minutes after
+`timer_tasks.period` stores JSON `{from, until}` in minutes after
 Jakarta midnight; NULL means anytime. Reads, snapshots, history, writes, and backups
 preserve this optional field. Legacy backups omit it and remain valid. Daily
 definitions remain preferences and are excluded from the history-only backup.

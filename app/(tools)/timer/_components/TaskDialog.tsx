@@ -5,7 +5,12 @@ import type { ReactElement, SubmitEvent } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
-import { canUseTimer, taskSpent } from "@/app/(tools)/timer/utils/timer";
+import {
+  canUseTimer,
+  taskKind,
+  taskSpent,
+  timerDayBounds,
+} from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import {
   TASK_FORM_INPUT_LIMITS,
@@ -18,7 +23,8 @@ import { scheduledWindowSchema } from "../utils/timerValidation";
 import TaskFormDialog from "./TaskFormDialog";
 
 function formWindow(form: FormData) {
-  if (!form.has("from")) {
+  // Both fields at 00:00 mean the task has no available window.
+  if (form.get("from") === "00:00" && form.get("until") === "00:00") {
     return null;
   }
   const result = scheduledWindowSchema.safeParse(
@@ -52,22 +58,35 @@ export function EditTask({
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const availabilityWindow = formWindow(form);
-    if (typeof availabilityWindow === "string") {
-      setFormError(availabilityWindow);
+    const period = formWindow(form);
+    if (typeof period === "string") {
+      setFormError(period);
+      return;
+    }
+    if (period === null && (task.period ?? null) !== null) {
+      setFormError("A period can be changed but not removed.");
       return;
     }
     const values = readTaskForm(
       form,
       TASK_FORM_INPUT_LIMITS.description,
       TASK_FORM_INPUT_LIMITS.activity,
-      availabilityWindow !== null
+      period !== null
     );
     if (typeof values === "string") {
       setFormError(values);
       return;
     }
-    if (values.duration <= taskSpent(task, date, Date.now() + clockOffset)) {
+    const now = Date.now() + clockOffset;
+    if (
+      period !== null &&
+      (task.period ?? null) === null &&
+      timerDayBounds(date).start + period.until * 60_000 <= now
+    ) {
+      setFormError("Choose an end time later than now.");
+      return;
+    }
+    if (values.duration <= taskSpent(task, date, now)) {
       setFormError("Choose a duration longer than the time already spent.");
       return;
     }
@@ -77,7 +96,7 @@ export function EditTask({
       date,
       taskId: task.id,
       ...values,
-      ...(availabilityWindow === null ? {} : { availabilityWindow }),
+      ...(period === null ? {} : { period }),
     });
     setOpen(false);
     if (!(await saving)) {
@@ -126,14 +145,15 @@ export function EditTask({
         defaultActivity={drafts[task.id]?.activity ?? task.activity}
         defaultDescription={drafts[task.id]?.description ?? task.description}
         defaultDuration={drafts[task.id]?.duration ?? task.duration}
-        defaultAvailabilityWindow={
-          drafts[task.id]?.availabilityWindow ??
-          task.availabilityWindow ??
-          undefined
-        }
+        defaultKind={drafts[task.id]?.kind ?? taskKind(task)}
+        defaultPeriod={drafts[task.id]?.period ?? task.period ?? undefined}
         activityLimit={TASK_FORM_INPUT_LIMITS.activity}
         descriptionLimit={TASK_FORM_INPUT_LIMITS.description}
-        notice={daily ? "Changes apply to today." : undefined}
+        notice={
+          daily
+            ? `Changes apply to ${date === snapshot?.today ? "today" : date}.`
+            : undefined
+        }
         busy={false}
         error={formError}
         onSubmit={submit}
@@ -183,16 +203,16 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       return;
     }
     const form = new FormData(event.currentTarget);
-    const availabilityWindow = formWindow(form);
-    if (typeof availabilityWindow === "string") {
-      setFormError(availabilityWindow);
+    const period = formWindow(form);
+    if (typeof period === "string") {
+      setFormError(period);
       return;
     }
     const values = readTaskForm(
       form,
       TASK_FORM_INPUT_LIMITS.description,
       TASK_FORM_INPUT_LIMITS.activity,
-      availabilityWindow !== null
+      period !== null
     );
     if (typeof values === "string") {
       setFormError(values);
@@ -208,7 +228,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       date: snapshot.today,
       taskId,
       ...values,
-      ...(availabilityWindow === null ? {} : { availabilityWindow }),
+      ...(period === null ? {} : { period }),
     });
     setOpen(false);
     if (!(await saving)) {
@@ -230,8 +250,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         ref={triggerRef}
         render={
           <Button
-            className="fixed right-4 bottom-[var(--floating-controls-clearance,calc(5rem+env(safe-area-inset-bottom,0px)))] z-50 [--button-press-scale:0.98] md:static"
-            data-timer-play=""
+            className="fixed right-4 bottom-[var(--floating-controls-clearance,calc(5rem+env(safe-area-inset-bottom,0px)))] z-50 md:static"
             size="responsive-floating"
             variant="primary-floating"
           />
@@ -248,10 +267,11 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         defaultActivity={drafts.add?.activity ?? ""}
         defaultDescription={drafts.add?.description ?? ""}
         defaultDuration={drafts.add?.duration ?? 0}
-        defaultAvailabilityWindow={drafts.add?.availabilityWindow}
+        defaultKind={drafts.add?.kind}
+        defaultPeriod={drafts.add?.period}
         notice={
           drafts.add?.date !== undefined && drafts.add.date !== snapshot?.today
-            ? "Recovered from an earlier day. Choose a future time for today before saving."
+            ? "Recovered from a different day. Check the period before saving."
             : undefined
         }
         busy={false}

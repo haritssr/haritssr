@@ -29,7 +29,7 @@ export function taskDeadline(
   let warning: "soon" | "late" | null = null;
   let nextAt = Infinity;
   if (
-    (task.availabilityWindow ?? null) !== null &&
+    (task.period ?? null) !== null &&
     task.reachedAt === null &&
     remaining > 0 &&
     now < timing.closesAt

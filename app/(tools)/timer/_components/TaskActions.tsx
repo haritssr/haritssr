@@ -10,7 +10,7 @@ import {
   playTaskSound,
   prepareTaskSound,
 } from "@/app/(tools)/timer/utils/timerSound";
-import { formatAvailabilityWindow } from "@/app/(tools)/timer/utils/timerTime";
+import { formatPeriod } from "@/app/(tools)/timer/utils/timerTime";
 import Button from "@/components/Button";
 
 import DeleteTaskButton from "./DeleteTaskButton";
@@ -23,7 +23,7 @@ function controlPresentation(
 ) {
   const { running, label, reached, available } = state;
   const locked = !available || reached;
-  const window = formatAvailabilityWindow(task.availabilityWindow);
+  const window = formatPeriod(task.period);
   let ToggleIcon = running ? PauseIcon : PlayIcon;
   let toggleLabel: string = label;
   let toggleTitle: string = label;

@@ -185,23 +185,42 @@
   }
 }
 
+/* Inline so each card's accent and foreground overrides apply to its title. */
+@theme inline {
+  --color-schedule-title: color-mix(
+    in srgb,
+    var(--color-schedule-accent) 60%,
+    var(--color-schedule-foreground)
+  );
+}
+
 @theme static {
+  /* Work (violet) is the default; Leisure (amber) is applied per card in TaskTimeline.module.css. */
+  --color-schedule-surface: var(--color-violet-50);
+  --color-schedule-accent: var(--color-violet-600);
+  --color-schedule-foreground: var(--color-violet-800);
   --color-work-surface: var(--color-violet-50);
   --color-work-foreground: var(--color-violet-700);
   --color-leisure-surface: var(--color-amber-50);
   --color-leisure-foreground: var(--color-amber-800);
-  --color-schedule-surface: var(--color-purple-50);
-  --color-schedule-accent: var(--color-purple-600);
-  --color-schedule-foreground: var(--color-purple-800);
+  --color-schedule-leisure-surface: var(--color-amber-50);
+  --color-schedule-leisure-accent: var(--color-amber-600);
+  --color-schedule-leisure-foreground: var(--color-amber-900);
   --color-schedule-running-surface: var(--color-green-50);
   --color-schedule-running-foreground: var(--color-green-900);
   --color-schedule-muted-surface: color-mix(
     in srgb,
-    var(--color-purple-50) 50%,
+    var(--color-violet-50) 50%,
     var(--color-background)
   );
-  --color-schedule-muted-accent: var(--color-purple-300);
+  --color-schedule-muted-accent: var(--color-violet-300);
   --color-schedule-muted-foreground: var(--color-schedule-muted-accent);
+  --color-schedule-leisure-muted-surface: color-mix(
+    in srgb,
+    var(--color-amber-50) 50%,
+    var(--color-background)
+  );
+  --color-schedule-leisure-muted-accent: var(--color-amber-300);
   --color-accordion-open-surface: var(--color-blue-50);
   --color-action: color-mix(
     in oklab,

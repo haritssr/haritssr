@@ -3,7 +3,7 @@ import type { TimerTask } from "../utils/timer";
 export function layoutTimelineTasks(tasks: TimerTask[]) {
   const scheduled = tasks
     .flatMap((task, order) => {
-      const window = task.availabilityWindow;
+      const window = task.period;
       return window === null || window === undefined
         ? []
         : [

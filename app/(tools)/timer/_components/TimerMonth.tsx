@@ -1,9 +1,12 @@
+import { taskKind } from "../utils/timer";
 import type { TimerDay } from "../utils/timer";
 import {
   calendarDateLabel,
   monthCells,
   scheduledCalendarTasks,
 } from "../utils/timerCalendar";
+
+import styles from "./TaskTimeline.module.css";
 
 const weekdays = [
   "Sunday",
@@ -95,7 +98,8 @@ function MonthDay({
         {tasks.slice(0, 3).map((task, index) => (
           <span
             key={task.id}
-            className={`bg-schedule-surface text-schedule-accent text-timer-progress block truncate rounded-xs px-0.5 leading-4 sm:px-1 sm:text-xs ${index === 2 ? "hidden sm:block" : ""}`}
+            data-kind={taskKind(task)}
+            className={`${styles.kind} bg-schedule-surface text-schedule-accent text-timer-progress block truncate rounded-xs px-0.5 leading-4 sm:px-1 sm:text-xs ${index === 2 ? "hidden sm:block" : ""}`}
             title={task.activity}
           >
             {task.activity}
