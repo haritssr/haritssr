@@ -1,4 +1,5 @@
 let taskAudioContext: AudioContext | undefined;
+const clockTickBuffers = new WeakMap<AudioContext, AudioBuffer>();
 
 export function prepareTaskSound() {
   try {
@@ -88,7 +89,7 @@ export function playCompletionRing(context: AudioContext | null) {
 }
 
 // A short broadband impact and a damped body mimic a mechanical escapement.
-function playQuartzTick(context: AudioContext) {
+function createQuartzTickBuffer(context: AudioContext) {
   const pitch = 3100;
   const body = 950;
   const decay = 0.009;
@@ -115,6 +116,15 @@ function playQuartzTick(context: AudioContext) {
       Math.sin(2 * Math.PI * body * time) * Math.exp(-time / decay);
     samples[index] =
       attack * (impact * 0.35 + mechanism * 0.2 + resonance * weight) * 0.25;
+  }
+  return buffer;
+}
+
+function playQuartzTick(context: AudioContext) {
+  let buffer = clockTickBuffers.get(context);
+  if (buffer === undefined) {
+    buffer = createQuartzTickBuffer(context);
+    clockTickBuffers.set(context, buffer);
   }
   const source = context.createBufferSource();
   source.buffer = buffer;

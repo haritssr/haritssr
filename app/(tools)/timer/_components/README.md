@@ -122,8 +122,11 @@ Display ticks align to estimated server-second boundaries, pause while the tab
 is hidden, and refresh immediately on return or focus. Idle clocks schedule the
 next availability boundary or midnight locally, without polling or per-second
 updates. Collections reuse one Jakarta day boundary and derive each task once;
-the toolbar counts tasks without sorting. TaskCard memoization compares its task,
-date, and primitive display state so unchanged cards skip clock renders. [timerClock.ts](../utils/timerClock.ts)
+active and visible cards share one sorted collection. The toolbar derives History
+from the completed collection. The browser title selects the earliest running
+task in one pass, keeping progress and saved-order ties. TaskCard memoization
+compares its task, date, and primitive display state so unchanged cards skip clock
+renders. [timerClock.ts](../utils/timerClock.ts)
 estimates the clock offset from monotonic request duration and server timestamps,
 excluding server processing time. Response timing is captured before validation,
 and broadcasts preserve that calibration even when delivery is delayed.
@@ -212,8 +215,11 @@ modules keep independent work separate:
 - [timerClient.ts](../utils/timerClient.ts) handles protected API requests,
   response validation, cache keys, and validated snapshot broadcasts between tabs.
   In-memory snapshot versions travel through `ETag` / `If-None-Match`;
-  unchanged polls reuse confirmed tasks from a 304 response with fresh server
-  clock headers. Saves and broadcasts update the same memory cache. Failed
+  unchanged polls reuse already validated task and preference references from a
+  304 response with fresh server clock headers, without reparsing the snapshot.
+  The new timestamp still passes its schema validation.
+  New response bodies and broadcasts still receive full schema validation.
+  Saves and broadcasts update the same memory cache. Failed
   requests discard the transport cache so retries fetch full data. A 304 with a
   missing or invalid server timestamp falls back once to a full GET within the
   same deadline; stale server timestamps are never reused.
@@ -289,7 +295,9 @@ modules keep independent work separate:
   Timer errors use the same floating notification surface with a red Retry control
   and remain visible until recovery.
 - [store.ts](../store.ts) persists daily records, and
-  [timerSound.ts](../utils/timerSound.ts) generates sound.
+  [timerSound.ts](../utils/timerSound.ts) generates sound. Quartz ticking reuses
+  one generated buffer per audio context through a weak cache, with a fresh
+  playback node and its existing disconnection cleanup for each tick.
 
 The shared completion-time calculation in `timer.ts` uses real elapsed time for
 scheduling, stored completion timestamps, and completed-task ordering. The store

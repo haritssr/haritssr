@@ -5,7 +5,7 @@ import { useContext, useEffect, useState, useSyncExternalStore } from "react";
 import useSWR, { useSWRConfig } from "swr";
 
 import FloatingTimerDock from "@/app/(tools)/timer/_components/FloatingTimerDock";
-import { getTaskCollection } from "@/app/(tools)/timer/_components/taskState";
+import { getEarliestRunningTask } from "@/app/(tools)/timer/_components/taskState";
 import { TimerContext } from "@/app/(tools)/timer/_components/TimerProvider";
 import useTimerAudio from "@/app/(tools)/timer/hooks/useTimerAudio";
 import useTimerDeadlineReminders from "@/app/(tools)/timer/hooks/useTimerDeadlineReminders";
@@ -54,12 +54,7 @@ function useTimerPageTitle(
         Date.now() + clockOffset,
         Date.parse(snapshotNow) || 0
       );
-      const [running] = getTaskCollection(day.tasks, day.date, now)
-        .active.filter(({ state }) => state.running)
-        .toSorted(
-          (a, b) =>
-            a.task.duration - a.state.spent - (b.task.duration - b.state.spent)
-        );
+      const running = getEarliestRunningTask(day.tasks, day.date, now);
       if (running !== undefined) {
         const characters = [
           ...titleSegmenter.segment(running.task.activity),

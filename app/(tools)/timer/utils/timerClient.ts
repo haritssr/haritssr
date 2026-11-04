@@ -129,6 +129,7 @@ async function fetchTimer(
   previous?: TimerSnapshot
 ): Promise<{
   data: unknown;
+  cachedSnapshot: TimerSnapshot | undefined;
   timing: TimerResponseTiming;
   version: string | null;
 }> {
@@ -147,6 +148,7 @@ async function fetchTimer(
     throw new TimerReadError("Couldn't sync. Try again.", "network");
   }
   let result: unknown;
+  let cachedSnapshot: TimerSnapshot | undefined;
   if (response.status === 304) {
     const now = response.headers.get(TIMER_RESPONSE_TIME_HEADER);
     if (
@@ -169,7 +171,9 @@ async function fetchTimer(
         304
       );
     }
-    result = { ...previous, now };
+    // The cache already passed schema validation; retain its nested identities.
+    cachedSnapshot = { ...previous, now };
+    result = cachedSnapshot;
   } else {
     // Classify HTTP failures even when a proxy returns HTML instead of JSON.
     result = await response.json().catch(() => {
@@ -201,7 +205,12 @@ async function fetchTimer(
       retryAfter(response)
     );
   }
-  return { data: result, timing, version: response.headers.get("ETag") };
+  return {
+    data: result,
+    cachedSnapshot,
+    timing,
+    version: response.headers.get("ETag"),
+  };
 }
 
 async function loadTimer<T>(
@@ -281,7 +290,14 @@ export async function fetchTimerSnapshot() {
         previous?.snapshot
       ),
     ]);
-    const snapshot = received(snapshotSchema.parse(result.data), result.timing);
+    if (result.cachedSnapshot !== undefined) {
+      // Only the new clock header needs validation on an unchanged response.
+      snapshotSchema.shape.now.parse(result.cachedSnapshot.now);
+    }
+    const snapshot = received(
+      result.cachedSnapshot ?? snapshotSchema.parse(result.data),
+      result.timing
+    );
     rememberSnapshot(snapshot, result.version);
     notifyTimerChanges(snapshot, result.version);
     return snapshot;

@@ -105,12 +105,8 @@ export function getTaskCollection(
   const bounds: TimerDayBounds = timerDayBounds(date);
   const active: TaskEntry[] = [];
   const completed: TaskEntry[] = [];
-  const visible: TaskEntry[] = [];
   for (const task of tasks) {
     const entry = { task, state: getTaskState(task, date, now, bounds) };
-    if (!entry.state.missed && !entry.state.reached) {
-      visible.push(entry);
-    }
     if (entry.state.reached || entry.state.missed) {
       completed.push(entry);
     } else {
@@ -119,10 +115,41 @@ export function getTaskCollection(
   }
   active.sort(compareTasks);
   completed.sort(compareTasks);
-  visible.sort(compareTasks);
   return {
     active,
     completed: completed.map(({ task }) => task),
-    visible,
+    visible: active,
   };
+}
+
+export function getEarliestRunningTask(
+  tasks: TimerTask[],
+  date: string,
+  now: number
+) {
+  const bounds = timerDayBounds(date);
+  let earliest: TaskEntry | undefined;
+  let remaining = Infinity;
+  for (const task of tasks) {
+    if (task.startedAt === null) {
+      continue;
+    }
+    const state = getTaskState(task, date, now, bounds);
+    if (!state.running) {
+      continue;
+    }
+    const entry = { task, state };
+    const seconds = task.duration - state.spent;
+    if (
+      seconds < remaining ||
+      (seconds === remaining &&
+        earliest !== undefined &&
+        compareTasks(entry, earliest) < 0)
+    ) {
+      // Equal finish times retain the collection's progress and saved ordering.
+      earliest = entry;
+      remaining = seconds;
+    }
+  }
+  return earliest;
 }
