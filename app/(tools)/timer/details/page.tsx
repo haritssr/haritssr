@@ -194,12 +194,15 @@ export default function TimerDetailsPage() {
               Month shows a Monday-first calendar of scheduled tasks. Select a
               date to open Day, or use the arrows and Today shortcut to
               navigate. Past days show saved activities and a read-only
-              schedule. Future days preview recurring daily tasks without saving
-              them. On these days the list shows only tasks without available
-              time; scheduled tasks appear on the timeline, with time spent on
-              past days. Only today allows task changes. Calendar cells show two
-              task labels on mobile, three on larger screens, and a count for
-              the rest.
+              schedule. Future days show recurring daily tasks and saved plans.
+              Drag the timeline to add a task for that date, then move, resize,
+              or edit it as needed. Add Task also works on future dates. Changes
+              stay specific to the selected date; other dates and daily
+              definitions stay the same. Only today has playback controls. On
+              these days the list shows only tasks without available time;
+              scheduled tasks appear on the timeline, with time spent on past
+              days. Calendar cells show two task labels on mobile, three on
+              larger screens, and a count for the rest.
             </li>
             <li>
               Week shows Monday to Sunday as read-only hourly schedules. Select

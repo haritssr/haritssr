@@ -1,5 +1,8 @@
 /* oxlint-disable no-await-in-loop -- Commands must save in order; recovery must finish before the next write. */
-import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
+import {
+  canUseTimer,
+  isTimerPlanningAction,
+} from "@/app/(tools)/timer/utils/timer";
 import type {
   Period,
   TaskKind,
@@ -67,8 +70,14 @@ function project(snapshot: ReceivedTimerSnapshot, change: PendingChange) {
   const now = Math.max(change.now, Date.parse(snapshot.now));
   if ("action" in change.mutation) {
     const command = change.mutation.action;
-    if (command.date !== next.today) {
-      throw new Error("The day has changed. Refresh to see today's tasks.");
+    if (
+      command.date !== next.day.date ||
+      command.date < next.today ||
+      (command.date > next.today && !isTimerPlanningAction(command))
+    ) {
+      throw new Error(
+        "This task date cannot be changed here. Refresh the selected day."
+      );
     }
     applyTimerCommand(next.day, command, next.preferences, now);
   } else if (next.preferences !== undefined) {

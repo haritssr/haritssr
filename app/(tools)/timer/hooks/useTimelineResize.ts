@@ -1,11 +1,11 @@
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 
+import { useTaskEditing } from "../_components/TaskEditing";
 import {
   firstFutureSlot,
   resizedWindow,
 } from "../_components/timelineSelection";
 import type { ResizeEdge } from "../_components/timelineSelection";
-import { useTimer } from "../_components/TimerProvider";
 import { canUseTimer, timerDayBounds } from "../utils/timer";
 import type { Period, TimerTask } from "../utils/timer";
 import { timelineTime } from "../utils/timerTime";
@@ -28,11 +28,7 @@ interface ResizeGesture {
 }
 
 export default function useTimelineResize(date: string, editable: boolean) {
-  const { act, snapshot, clockOffset } = useTimer(
-    "act",
-    "snapshot",
-    "clockOffset"
-  );
+  const { act, snapshot, clockOffset } = useTaskEditing();
   const root = useRef<HTMLDivElement>(null);
   const [preview, setPreview] = useState<ResizePreview | null>(null);
   const [message, setMessage] = useState("");
@@ -42,8 +38,8 @@ export default function useTimelineResize(date: string, editable: boolean) {
     if (
       !editable ||
       !canUseTimer(snapshot) ||
-      snapshot.today !== date ||
-      now < bounds.start ||
+      snapshot.day.date !== date ||
+      date < snapshot.today ||
       now >= bounds.end
     ) {
       return null;

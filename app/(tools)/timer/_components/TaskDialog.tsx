@@ -3,7 +3,6 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import type { ReactElement, SubmitEvent } from "react";
 
-import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
 import {
   canUseTimer,
@@ -20,6 +19,7 @@ import Button from "@/components/Button";
 
 import { inputWindow } from "../utils/timerTime";
 import { scheduledWindowSchema } from "../utils/timerValidation";
+import { useTaskEditing } from "./TaskEditing";
 import TaskFormDialog from "./TaskFormDialog";
 
 function formWindow(form: FormData) {
@@ -46,12 +46,7 @@ export function EditTask({
   reached: boolean;
   trigger?: ReactElement;
 }) {
-  const { act, snapshot, drafts, clockOffset } = useTimer(
-    "act",
-    "snapshot",
-    "drafts",
-    "clockOffset"
-  );
+  const { act, snapshot, drafts, clockOffset } = useTaskEditing();
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const daily = isDailyTask(task);
@@ -164,7 +159,7 @@ export function EditTask({
 }
 
 export function AddTask({ disabled }: { disabled: boolean }) {
-  const { act, snapshot, drafts } = useTimer("act", "snapshot", "drafts");
+  const { act, snapshot, drafts } = useTaskEditing();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -225,7 +220,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
     );
     const saving = act({
       action: "add",
-      date: snapshot.today,
+      date: snapshot.day.date,
       taskId,
       ...values,
       ...(period === null ? {} : { period }),
@@ -270,7 +265,8 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         defaultKind={drafts.add?.kind}
         defaultPeriod={drafts.add?.period}
         notice={
-          drafts.add?.date !== undefined && drafts.add.date !== snapshot?.today
+          drafts.add?.date !== undefined &&
+          drafts.add.date !== snapshot?.day.date
             ? "Recovered from a different day. Check the period before saving."
             : undefined
         }

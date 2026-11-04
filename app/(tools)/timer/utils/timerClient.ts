@@ -2,6 +2,7 @@ import type {
   TimerAction,
   TimerPreferences,
   TimerSnapshot,
+  TimerDay,
 } from "@/app/(tools)/timer/utils/timer";
 import {
   TIMER_REQUEST_STARTED_HEADER,
@@ -9,6 +10,8 @@ import {
   timerClockOffset,
 } from "@/app/(tools)/timer/utils/timerClock";
 import type { TimerResponseTiming } from "@/app/(tools)/timer/utils/timerClock";
+
+import { validTimerDate } from "./timer";
 
 export const TIMER_SNAPSHOT_KEY = "/api/timer";
 export function timerHistoryKey(date: string) {
@@ -337,6 +340,81 @@ export async function fetchTimerHistory(date: string) {
     ]);
     return historySchema.parse(result.data);
   }, "history");
+}
+
+export async function sendTimerPlanAction(action: TimerAction) {
+  const { snapshotSchema } = await import("./timerValidation");
+  const response = await fetchTimer("/api/timer?plan=1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(action),
+  });
+  const result = received(snapshotSchema.parse(response.data), response.timing);
+  if (result.day.date !== action.date || result.mode !== "turso") {
+    throw new Error("Timer returned an unexpected task plan.");
+  }
+  notifyTimerPlanChanges(action.date);
+  return result;
+}
+
+export function timerPlanSnapshot(
+  day: TimerDay,
+  snapshot: ReceivedTimerSnapshot
+): ReceivedTimerSnapshot {
+  return { ...snapshot, day, notifications: [] };
+}
+
+function notifyTimerPlanChanges(date: string) {
+  try {
+    window.dispatchEvent(
+      new CustomEvent("timer-plan-changed", { detail: date })
+    );
+    if ("BroadcastChannel" in window) {
+      const channel = new BroadcastChannel("haritssr-timer-plans");
+      // oxlint-disable-next-line unicorn/require-post-message-target-origin -- BroadcastChannel has no targetOrigin parameter.
+      channel.postMessage({ date });
+      channel.close();
+    }
+  } catch {
+    // A notification failure must not retry an already committed plan.
+  }
+}
+
+export function subscribeTimerPlanChanges(listener: (date: string) => void) {
+  const local = (event: Event) => {
+    if (
+      event instanceof CustomEvent &&
+      typeof event.detail === "string" &&
+      validTimerDate(event.detail)
+    ) {
+      listener(event.detail);
+    }
+  };
+  let channel: BroadcastChannel | undefined;
+  try {
+    if ("BroadcastChannel" in window) {
+      channel = new BroadcastChannel("haritssr-timer-plans");
+      channel.addEventListener("message", (event: MessageEvent<unknown>) => {
+        const { data } = event;
+        if (
+          typeof data === "object" &&
+          data !== null &&
+          "date" in data &&
+          typeof data.date === "string" &&
+          validTimerDate(data.date)
+        ) {
+          listener(data.date);
+        }
+      });
+    }
+  } catch {
+    // Focus and polling still refresh saved plans.
+  }
+  window.addEventListener("timer-plan-changed", local);
+  return () => {
+    window.removeEventListener("timer-plan-changed", local);
+    channel?.close();
+  };
 }
 
 export async function sendTimerAction(action: TimerAction) {

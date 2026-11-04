@@ -7,6 +7,7 @@ import {
 } from "@/app/(tools)/timer/server/timerAuth";
 import {
   changeTimer,
+  changeTimerPlan,
   changeTimerPreferences,
   exportTimer,
   getTimerHistory,
@@ -243,6 +244,17 @@ async function write(request: Request, preferences: boolean) {
         { error: "Use valid JSON." },
         { status: 400, headers }
       );
+    }
+    if (new URL(request.url).searchParams.has("plan")) {
+      if (preferences) {
+        return NextResponse.json(
+          { error: "Use POST for task planning." },
+          { status: 405, headers }
+        );
+      }
+      return NextResponse.json(await changeTimerPlan(payload), {
+        headers: timedHeaders(started),
+      });
     }
     const { version, ...result } = preferences
       ? await changeTimerPreferences(payload)

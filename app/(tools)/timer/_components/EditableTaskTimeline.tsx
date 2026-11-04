@@ -3,7 +3,7 @@ import useTimelineResize from "../hooks/useTimelineResize";
 import type { TimerTask } from "../utils/timer";
 import TaskTimeline from "./TaskTimeline";
 
-/** Today's timeline with drag-to-create, resize, and move gestures. */
+/** Editable today/future timelines with creation, resize, and move gestures. */
 export default function EditableTaskTimeline({
   tasks,
   date,

@@ -30,6 +30,9 @@ export const timerRelationships = [
       Client -->|React.lazy| Calendar["TimerCalendarContent.tsx: TimerWeek / TimerMonth / TimerCalendarDay date browsing"]
       Client --> CalendarRead["hooks/useTimerCalendar.ts: account-scoped month and cross-month week reads"]
       CalendarRead -->|fetchTimerCalendar| Transport
+      Client --> Planner["hooks/useTimerPlanning.ts: isolated date writers"]
+      Planner --> PlanMutations["timerPlanning.ts: separate TimerMutations and drafts"]
+      PlanMutations -->|POST plan=1| API
       Runtime -->|snapshot loading and broadcasts| Transport
       Controller --> Mutations["app/(tools)/timer/utils/timerMutations.ts: ordered optimistic changes"]
       Mutations -->|sendTimerAction / saveTimerPreferences| Transport["app/(tools)/timer/utils/timerClient.ts"]
@@ -53,7 +56,7 @@ export const timerRelationships = [
       "TimerProvider checks the shared account session and loads TimerRuntime for the owner or a Timer page, recovering saved running tasks on direct navigation or reload. Anonymous visitors elsewhere do not load Timer state. TimerRuntime creates one controller and registers it with the provider once. SWR loads confirmed snapshots; timerMutations projects ordered pending changes in memory. useTimer subscribes directly to selected fields with stable action functions; mounting it in app/layout.tsx keeps scheduling and completion effects alive across navigation.",
       "FloatingTimerDock reuses the shared snapshot outside /timer. FloatingDock displays full Music and Timer pills with Music above Timer, keeping both sets of controls accessible. Completion feedback uses the shared toast. useFloatingDockPosition measures the dock and mobile navigation gap and reserves footer clearance.",
       "act projects the change immediately, then timerMutations calls sendTimerAction in order through the protected API. Task actions read saved preferences in the same Turso transaction. Optimistic projection and server commands share settlement and preference rules; server authorization, date checks, revisions, and notification claims remain authoritative. timerDatabase owns preference writes and historical-total queries as well as task persistence. receive protects newer confirmed revisions and rebases pending changes; failed writes restore confirmed state and preserve form drafts. Reads and committed changes broadcast validated snapshots to other tabs without another fetch. One visible tab owns periodic polling through Web Locks.",
-      "Statistics uses GET /api/timer?date=YYYY-MM-DD for history and 30-day totals. Calendar browsing uses GET /api/timer?month=YYYY-MM with bounded read-only queries and unsaved future daily previews. Calendar responses stay outside the mutation runtime. The API checks access before returning personal Turso records.",
+      "Statistics uses GET /api/timer?date=YYYY-MM-DD for history and 30-day totals. Calendar browsing uses GET /api/timer?month=YYYY-MM with bounded read-only queries. Future plans use POST /api/timer?plan=1 and a separate ordered writer; first saves seed the selected date, and calendar reads retain saved overrides. Future snapshots stay outside the live mutation runtime. The API checks access before returning personal Turso records.",
     ],
   },
   {

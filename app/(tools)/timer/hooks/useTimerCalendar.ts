@@ -8,6 +8,7 @@ import type { TimerCalendar } from "../utils/timerCalendar";
 import {
   fetchTimerCalendar,
   subscribeTimerChanges,
+  subscribeTimerPlanChanges,
 } from "../utils/timerClient";
 
 /**
@@ -78,15 +79,24 @@ function useMonthCalendar(month: string, active: boolean) {
       };
     }
     try {
-      return subscribeTimerChanges(() => {
+      const unsubscribe = subscribeTimerChanges(() => {
         void mutate();
       });
+      const unsubscribePlans = subscribeTimerPlanChanges((date) => {
+        if (date.startsWith(month)) {
+          void mutate();
+        }
+      });
+      return () => {
+        unsubscribe();
+        unsubscribePlans();
+      };
     } catch {
       return () => {
         /* Focus revalidation and polling remain available. */
       };
     }
-  }, [mutate, ready]);
+  }, [month, mutate, ready]);
   const calendar =
     ready && data?.month === month && data.mode === mode ? data : undefined;
   return {

@@ -2,6 +2,7 @@
 
 import { Suspense, lazy, useState } from "react";
 
+import { TaskEditingContext } from "./_components/TaskEditing";
 import TaskList from "./_components/TaskList";
 import TimerDataControls from "./_components/TimerDataControls";
 import {
@@ -14,6 +15,7 @@ import TimerToolbar from "./_components/TimerToolbar";
 import TimerYear from "./_components/TimerYear";
 import useTimerCalendar from "./hooks/useTimerCalendar";
 import useTimerClock from "./hooks/useTimerClock";
+import useTimerPlanning from "./hooks/useTimerPlanning";
 import { shiftTimerDate, timerDate } from "./utils/timer";
 import {
   calendarLoadingLabel,
@@ -57,6 +59,10 @@ export default function TimerClient() {
     day.date === today && snapshot ? snapshot.day : day
   );
   const day = days?.find((entry) => entry.date === selectedDate);
+  const planning = useTimerPlanning(
+    day,
+    view === "day" && selectedDate > today
+  );
   function selectDate(date: string) {
     setSelection(date === today ? null : date);
     setDisplayedMonth(date.slice(0, 7));
@@ -81,68 +87,70 @@ export default function TimerClient() {
     }
   }
   return (
-    <TimerSettingsScope>
-      <div className="space-y-4 pb-18 md:space-y-5 md:pb-0">
-        <TimerDataControls>
-          <TimerToolbar
-            view={view}
-            onViewChange={selectView}
-            editableDate={selectedDate === today}
-            heading={<TimerDateHeading date={periodDate} period={view} />}
-            dateControls={
-              <TimerDateControls
-                date={periodDate}
-                today={today}
-                period={view}
-                onChange={changePeriod}
-              />
-            }
-          />
-        </TimerDataControls>
-        {needsCalendar ? (
-          <Suspense
-            fallback={
-              <output className="text-muted block">
-                {calendarLoadingLabel(
-                  view,
-                  viewPeriodDate(view, month, week, selectedDate)
-                )}
-              </output>
-            }
-          >
-            <TimerCalendarContent
+    <TaskEditingContext value={planning}>
+      <TimerSettingsScope>
+        <div className="space-y-4 pb-18 md:space-y-5 md:pb-0">
+          <TimerDataControls>
+            <TimerToolbar
               view={view}
-              calendar={calendar}
-              error={error}
-              retry={retry}
-              month={month}
-              week={week}
+              onViewChange={selectView}
+              editableDate={selectedDate === today || planning !== null}
+              heading={<TimerDateHeading date={periodDate} period={view} />}
+              dateControls={
+                <TimerDateControls
+                  date={periodDate}
+                  today={today}
+                  period={view}
+                  onChange={changePeriod}
+                />
+              }
+            />
+          </TimerDataControls>
+          {needsCalendar ? (
+            <Suspense
+              fallback={
+                <output className="text-muted block">
+                  {calendarLoadingLabel(
+                    view,
+                    viewPeriodDate(view, month, week, selectedDate)
+                  )}
+                </output>
+              }
+            >
+              <TimerCalendarContent
+                view={view}
+                calendar={calendar}
+                error={error}
+                retry={retry}
+                month={month}
+                week={week}
+                today={today}
+                selectedDate={selectedDate}
+                days={days}
+                day={day}
+                now={now}
+                onSelect={(date) => {
+                  selectDate(date);
+                  setView("day");
+                }}
+              />
+            </Suspense>
+          ) : null}
+          {view === "year" ? (
+            <TimerYear
+              year={month.slice(0, 4)}
               today={today}
-              selectedDate={selectedDate}
-              days={days}
-              day={day}
-              now={now}
-              onSelect={(date) => {
-                selectDate(date);
-                setView("day");
+              onSelect={(next) => {
+                setDisplayedMonth(next);
+                setView("month");
               }}
             />
-          </Suspense>
-        ) : null}
-        {view === "year" ? (
-          <TimerYear
-            year={month.slice(0, 4)}
-            today={today}
-            onSelect={(next) => {
-              setDisplayedMonth(next);
-              setView("month");
-            }}
-          />
-        ) : null}
-        {view === "day" && selectedDate === today ? (
-          <TaskList now={now} />
-        ) : null}
-      </div>
-    </TimerSettingsScope>
+          ) : null}
+          {view === "day" && selectedDate === today ? (
+            <TaskList now={now} />
+          ) : null}
+        </div>
+      </TimerSettingsScope>
+    </TaskEditingContext>
   );
 }

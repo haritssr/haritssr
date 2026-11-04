@@ -74,8 +74,9 @@ export function resolveCalendarDays(
 ) {
   const byDate = new Map(saved.map((day) => [day.date, day]));
   return monthDates(month).map((date) => {
-    if (date <= today) {
-      return byDate.get(date) ?? createEmptyTimerDay(date);
+    const stored = byDate.get(date);
+    if (stored !== undefined || date <= today) {
+      return stored ?? createEmptyTimerDay(date);
     }
     return {
       ...createEmptyTimerDay(date),

@@ -399,9 +399,10 @@ Settings and History use icons with accessible labels at every screen size.
 Settings contains the download button below Sound, with a loading label during download.
 The date heading and its controls (Today, then previous/next) share the first row on mobile; below, the view buttons sit left and a joined History/Settings group sits right, with Settings last under the next-date button. From `md` everything sits on one row: heading left, then Today, previous/next, view buttons, the joined History/Settings group, and Add Task. Add Task floats bottom right on mobile. Day
 (the internal `day` value) shows the selected date. Today uses the live task
-list and timeline; other dates use read-only cards and a timeline, including
-finished and missed tasks. Add Task is disabled outside today. Settings and
-Today History keep their existing behavior. Day navigation includes a date
+list and timeline; past dates use read-only cards and a timeline, including
+finished and missed tasks. Future dates allow planning through Add Task and the
+timeline, with editing, moving, resizing, and deletion of manual tasks. Playback
+controls remain restricted to today. Settings and Today History keep their existing behavior. Day navigation includes a date
 heading (`Thu, Nov 5, 2026` on mobile, `Thursday, November 5, 2026` from `md`;
 the ISO date stays in `dateTime` and the tooltip), previous/next day controls, and a Today shortcut.
 
@@ -430,9 +431,10 @@ tasks without a window, with no intro or count text; timeline
 cards on ended days show spent / duration (in `title` for blocks under 30 minutes).
 `useTimerCalendar` reads `/api/timer?month=YYYY-MM` only for Week, Month, and
 non-today Day views. The endpoint uses bounded date queries and read-only transactions;
-future dates project current daily definitions without creating records, while
-missing past days are empty. Demo requests use sample days. Calendar reads
-never enter the live mutation runtime or automatic-start scheduler. SWR keys
+future dates without records project current daily definitions. Saving a plan
+materializes that date with its recurring tasks and overrides; later calendar
+reads use the saved day. Missing past days are empty. Demo requests use sample
+days. Calendar reads never enter the live mutation runtime or automatic-start scheduler. SWR keys
 include month and account identity; mode checks hide data during account
 transitions. Focus, polling, broadcasts, and snapshot revisions refresh visible
 data. Today’s cell uses the live snapshot. Loading and failed reads provide
@@ -519,3 +521,19 @@ version-1 backups remain accepted: retired speed fields are discarded, and any
 unsettled running interval uses real elapsed time. New exports omit speed. Existing
 databases may retain an unused speed column; no migration is needed for its removal
 from the runtime.
+
+Future planning uses `POST /api/timer?plan=1`, with the existing owner and origin
+checks. Only add, edit, delete, and resize-scheduled commands for strictly future
+dates are accepted. The write transaction reads and updates only the selected
+day, seeding daily definitions when the first plan is saved. No schema migration
+is required. The current day's running tasks and notification claims are untouched.
+
+`TaskEditingContext` overrides only the editing controls, leaving playback,
+Settings, and automatic starts on the live provider. `useTimerPlanning` keeps a
+separate `TimerMutations` writer per account and selected date, retaining failed
+drafts across navigation. It shares ordered writes and read recovery without
+resending uncertain commands. Future snapshots retain the real Jakarta today
+and never enter the live snapshot cache. A separate plan-change channel refreshes
+month reads without publishing a future snapshot to the runtime. Gesture
+eligibility permits all quarter-hour slots on future days, and still rejects
+past dates and opened windows today. Saved plans become the live day at midnight.

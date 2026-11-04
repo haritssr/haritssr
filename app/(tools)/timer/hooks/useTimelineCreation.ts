@@ -1,11 +1,11 @@
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 
+import { useTaskEditing } from "../_components/TaskEditing";
 import {
   firstFutureSlot,
   selectedWindow,
   timelineSlot,
 } from "../_components/timelineSelection";
-import { useTimer } from "../_components/TimerProvider";
 import { canUseTimer, timerDayBounds } from "../utils/timer";
 import type { Period } from "../utils/timer";
 import { timelineTime } from "../utils/timerTime";
@@ -18,11 +18,7 @@ interface Gesture {
 }
 
 export default function useTimelineCreation(date: string, editable: boolean) {
-  const { act, snapshot, clockOffset } = useTimer(
-    "act",
-    "snapshot",
-    "clockOffset"
-  );
+  const { act, snapshot, clockOffset } = useTaskEditing();
   const surface = useRef<HTMLButtonElement>(null);
   const [selection, setSelection] = useState<Period | null>(null);
   const [message, setMessage] = useState("");
@@ -31,8 +27,8 @@ export default function useTimelineCreation(date: string, editable: boolean) {
     const bounds = timerDayBounds(date);
     return editable &&
       canUseTimer(snapshot) &&
-      snapshot.today === date &&
-      now >= bounds.start &&
+      snapshot.day.date === date &&
+      date >= snapshot.today &&
       now < bounds.end
       ? firstFutureSlot((now - bounds.start) / 60_000)
       : 96;
@@ -141,7 +137,7 @@ export default function useTimelineCreation(date: string, editable: boolean) {
       const first = eligibility();
       if (first >= 96) {
         cancel();
-        setMessage("No future time is available today.");
+        setMessage("No future time is available on this day.");
         return;
       }
       cursor = Math.max(first, Math.min(95, cursor));

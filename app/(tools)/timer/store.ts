@@ -15,6 +15,7 @@ import {
 import { createDailyTasks } from "@/app/(tools)/timer/utils/dailyTasks";
 import {
   createEmptyTimerDay,
+  isTimerPlanningAction,
   shiftTimerDate,
   taskSpent,
   taskTransitionTime,
@@ -177,6 +178,47 @@ export async function changeTimer(payload: unknown) {
     ...result,
     snapshot: { ...result.snapshot, now: new Date().toISOString() },
   };
+}
+
+export async function changeTimerPlan(payload: unknown) {
+  const parsed = actionSchema.safeParse(payload);
+  if (!parsed.success || !isTimerPlanningAction(parsed.data)) {
+    throw new TimerStoreError(
+      "Only task planning changes are allowed for future days."
+    );
+  }
+  const command = parsed.data;
+  const result = await timerDatabaseTransaction(async (tx) => {
+    const now = Date.now();
+    const today = timerDate(now);
+    if (command.date <= today) {
+      throw new TimerStoreError(
+        "This is no longer a future day. Return to Day to edit today's tasks.",
+        409
+      );
+    }
+    const { days, preferences } = await readTimerCalendarState(
+      tx,
+      command.date,
+      command.date
+    );
+    const previous = structuredClone(days);
+    const day = days[0] ?? {
+      ...createEmptyTimerDay(command.date),
+      tasks: createDailyTasks(preferences.dailyTasks),
+    };
+    applyTimerCommand(day, command, preferences, now);
+    await updateTimerDays(tx, [day], previous);
+    return {
+      day,
+      today,
+      now: new Date(now).toISOString(),
+      mode: "turso" as const,
+      preferences,
+      notifications: [],
+    };
+  });
+  return { ...result, now: new Date().toISOString() };
 }
 
 export async function changeTimerPreferences(payload: unknown) {

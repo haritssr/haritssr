@@ -194,6 +194,15 @@ export type TimerAction =
       taskId: string;
     };
 
+export function isTimerPlanningAction(action: TimerAction) {
+  return (
+    action.action === "add" ||
+    action.action === "edit" ||
+    action.action === "delete" ||
+    action.action === "resize-scheduled"
+  );
+}
+
 const TIMER_TIME_ZONE = "Asia/Jakarta";
 
 const dateFormatter = new Intl.DateTimeFormat("en-CA", {

@@ -37,7 +37,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimerCalendarDay.tsx",
-    "Read-only saved days and future previews; lists unscheduled tasks beside the timeline.",
+    "Read-only past days and editable future plans; unscheduled tasks beside the timeline.",
   ],
   [
     "app/(tools)/timer/_components/TimerCalendarContent.tsx",
@@ -50,6 +50,18 @@ export const implementationFiles = [
   [
     "app/(tools)/timer/hooks/useTimerCalendar.ts",
     "Account-scoped month reads, cross-month weeks, revalidation, errors, and live-data isolation.",
+  ],
+  [
+    "app/(tools)/timer/_components/TaskEditing.tsx",
+    "Date-scoped editing controls, separate from live playback and scheduling.",
+  ],
+  [
+    "app/(tools)/timer/hooks/useTimerPlanning.ts",
+    "Per-account future-day writers and drafts retained across navigation.",
+  ],
+  [
+    "app/(tools)/timer/utils/timerPlanning.ts",
+    "Isolated ordered future-plan writes and uncertain-write read recovery.",
   ],
   [
     "app/(tools)/timer/utils/timerCalendar.ts",
