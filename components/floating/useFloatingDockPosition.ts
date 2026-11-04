@@ -70,7 +70,10 @@ export default function useFloatingDockPosition(
       const { height } = dock.getBoundingClientRect();
       // Preserve document space while controls shrink, avoiding scroll feedback.
       reservation.current.height = Math.max(reservation.current.height, height);
-      let bottom = desktop ? 1.5 * rem : Math.max(0.5 * rem, safeBottom);
+      const deepPath = pathname.split("/").filter(Boolean).length >= 3;
+      let bottom = window.matchMedia("(min-width: 768px)").matches
+        ? (deepPath ? 2.75 : 1) * rem
+        : Math.max(0.5 * rem, safeBottom);
       const footerGap = bottom;
       let gap = 0.75 * rem;
       const bounds = navigation?.getBoundingClientRect();

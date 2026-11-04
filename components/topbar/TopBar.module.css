@@ -9,6 +9,7 @@
 }
 
 .navigation[data-scrolled="true"] .row > :first-child,
+.navigation[data-scrolled="true"] .tabs,
 .navigation[data-scrolled="true"]
   .row
   > :last-child

@@ -8,7 +8,6 @@ import {
 } from "@/data/routes";
 
 import Breadcrumbs from "./Breadcrumbs";
-import InstallButton from "./InstallButton";
 
 const breadcrumbLabels = Object.fromEntries<string>([
   ["/labs", "Labs"],
@@ -30,16 +29,13 @@ const breadcrumbLabels = Object.fromEntries<string>([
 
 export default function Footer() {
   return (
-    <footer className="text-foreground/70 mt-30 mb-(--floating-footer-clearance,1rem) hidden w-full text-[15px] sm:mb-5 md:block">
-      <div className="mx-auto grid w-full max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 sm:gap-x-5 sm:gap-y-3 xl:px-0">
-        <div className="col-span-2 row-start-1 min-w-0 sm:col-span-1 sm:col-start-1">
+    <footer className="text-foreground/70 mt-30 mb-(--floating-footer-clearance,1rem) hidden w-full text-[15px] sm:mb-3 md:block">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-5 px-4 xl:px-0">
+        <div className="min-w-0 flex-1">
           <Breadcrumbs routeLabels={breadcrumbLabels} />
         </div>
-        <div className="col-start-1 row-start-2">
-          2021-2026 &#169; <span>Harits Syah</span>
-        </div>
-        <div className="col-start-2 row-start-2 justify-self-end not-has-[button]:hidden">
-          <InstallButton />
+        <div className="shrink-0">
+          2021-2026 &#169; haritssr.com · <span>Harits Syah</span>
         </div>
       </div>
     </footer>

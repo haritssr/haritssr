@@ -1,8 +1,10 @@
 "use client";
 
-import { CodeBracketIcon } from "@heroicons/react/24/outline";
+import { ClockIcon, CodeBracketIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import type { RefObject } from "react";
 
+import InstallButton from "@/components/InstallButton";
 import { showsMobileNavigation } from "@/utils/navigation/navigationState";
 import pageSourceUrl from "@/utils/navigation/pageSourceUrl";
 
@@ -43,7 +45,20 @@ export default function TopBarActions({
         onSearch={onSearch}
         showLabel={list}
       />
+      <Link
+        aria-label="Open timer"
+        className={topBarActionClassName(list)}
+        href="/timer"
+        title="Timer"
+      >
+        <ClockIcon
+          aria-hidden="true"
+          className="size-5 shrink-0 stroke-[1.5]"
+        />
+        {list ? <span>Timer</span> : null}
+      </Link>
       <TopBarShare showLabel={list} />
+      <InstallButton showLabel={list} />
       <a
         aria-label="View this page's source code (opens in a new tab)"
         className={topBarActionClassName(list)}

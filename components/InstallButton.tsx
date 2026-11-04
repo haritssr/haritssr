@@ -1,8 +1,10 @@
 "use client";
 
+import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import { useSyncExternalStore } from "react";
 
 import Button from "@/components/Button";
+import TopBarAction from "@/components/topbar/TopBarAction";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -78,9 +80,11 @@ async function install() {
 }
 
 export default function InstallButton({
-  placement = "footer",
+  placement = "topbar",
+  showLabel = false,
 }: {
-  placement?: "footer" | "feature";
+  placement?: "topbar" | "feature";
+  showLabel?: boolean;
 }) {
   const prompt = useSyncExternalStore(
     subscribe,
@@ -95,19 +99,22 @@ export default function InstallButton({
 
   if (!isFeature) {
     return (
-      <Button
+      <TopBarAction
+        aria-label="Install app"
         aria-keyshortcuts="Alt+I"
-        className="hover:text-foreground text-[15px] font-normal text-inherit"
         data-install-trigger=""
         onClick={() => {
           void install();
         }}
-        type="button"
-        size="text"
-        variant="icon"
+        showLabel={showLabel}
+        title="Install app"
       >
-        Install
-      </Button>
+        <ArrowDownCircleIcon
+          aria-hidden="true"
+          className="size-5.5 shrink-0 stroke-[1.5]"
+        />
+        {showLabel ? <span>Install</span> : null}
+      </TopBarAction>
     );
   }
 
