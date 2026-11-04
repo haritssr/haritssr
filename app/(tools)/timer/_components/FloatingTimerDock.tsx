@@ -129,16 +129,25 @@ function FloatingTimerPlayer({
         variant="floating"
       >
         <span className="flex min-w-0 items-center justify-between gap-2 text-sm leading-4">
-          <span className="flex min-w-0 items-center gap-1 font-medium">
+          <span className="flex min-w-0 flex-1 items-center gap-1 font-medium">
             <ClockIcon
               aria-hidden="true"
               className="size-4.25 shrink-0 group-data-[collapsed=true]/floating:size-4.5"
             />
             <span className="truncate">{selected.task.activity}</span>
+            {selected.task.description.trim() === "" ? null : (
+              <span
+                className="text-foreground/50 max-w-1/2 min-w-0 truncate font-normal"
+                data-floating-details=""
+                title={selected.task.description}
+              >
+                {selected.task.description}
+              </span>
+            )}
           </span>
           <span
             data-floating-details=""
-            className="text-danger shrink-0 whitespace-nowrap tabular-nums"
+            className="text-progress shrink-0 whitespace-nowrap tabular-nums"
           >
             <span className="sr-only">
               {formatRemainingTime(

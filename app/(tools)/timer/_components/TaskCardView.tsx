@@ -51,7 +51,7 @@ export default function TaskCardView({
           </div>
           <span
             aria-hidden="true"
-            className={`shrink-0 text-sm leading-4 tabular-nums sm:hidden ${appearance.elapsed}`}
+            className="text-foreground/50 shrink-0 text-xs leading-4 tabular-nums sm:hidden"
           >
             {Math.max(0, Math.min(100, (spent / task.duration) * 100)).toFixed(
               0

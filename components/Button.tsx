@@ -49,7 +49,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "theme-fill":
     "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
   "timer-running":
-    "border border-transparent bg-danger font-medium text-white hover:bg-danger/90 focus-visible:outline-danger",
+    "border border-transparent bg-progress font-medium text-white hover:bg-progress/90 focus-visible:outline-progress",
   "timer-paused":
     "border border-transparent bg-foreground font-medium text-white hover:bg-foreground/90 focus-visible:outline-foreground",
   "timer-secondary":
