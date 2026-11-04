@@ -18,11 +18,6 @@
   flex-direction: column;
 }
 
-:global(main):has(.frame) > :global(header) {
-  flex-shrink: 0;
-  margin-block: clamp(0.75rem, 3dvh, 1.5rem) clamp(0.75rem, 4dvh, 3rem);
-}
-
 :global(body):has(.frame) > :global(footer) {
   flex-shrink: 0;
   margin-top: clamp(0.75rem, 3dvh, 1.5rem);

@@ -17,11 +17,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/clock/page.tsx",
-    "Full-page Jakarta clock and Sound control.",
-  ],
-  [
-    "app/(tools)/timer/clock/ClockSound.tsx",
-    "Clock-only Sound checkbox and visible-page, second-aligned quartz ticking.",
+    "Full-page Jakarta clock with a visually hidden accessible page heading.",
   ],
   [
     "app/(tools)/timer/TimerClient.tsx",

@@ -15,7 +15,7 @@ modified keys, composition, and held-key repeats keep their normal behavior.
 | Change | File |
 | --- | --- |
 | Header analog clock, ticking once per second in WIB and linking to Clock | [AnalogClock.tsx](AnalogClock.tsx), [Timer page](../page.tsx) |
-| Full-page Clock Sound checkbox and quartz ticks | [ClockSound.tsx](../clock/ClockSound.tsx) |
+| Full-page Jakarta clock with a visually hidden heading | [Clock page](../clock/page.tsx) |
 | Add Task, view controls, and Settings trigger | [TimerToolbar.tsx](TimerToolbar.tsx) |
 | Page-scoped Settings handle, switches, and Multitask confirmation | [TimerSettings.tsx](TimerSettings.tsx) |
 | Export, authentication errors, and backup errors | [TimerDataControls.tsx](TimerDataControls.tsx) |

@@ -18,8 +18,6 @@ export const timerRelationships = [
       Page["app/(tools)/timer/page.tsx"] --> Client["app/(tools)/timer/TimerClient.tsx"]
       Page --> Date["TimerDate.tsx: date label from app/(tools)/timer/utils/timer.ts"]
       ClockPage["app/(tools)/timer/clock/page.tsx"] --> ClockFace["AnalogClock.tsx: Jakarta time"]
-      ClockPage --> ClockSound["app/(tools)/timer/clock/ClockSound.tsx: Sound checkbox and visible-page ticks"]
-      ClockSound --> Sound["app/(tools)/timer/utils/timerSound.ts: shared quartz tick"]
       Provider -->|loads once when needed| Runtime["app/(tools)/timer/_components/TimerRuntime.tsx"]
       Runtime -->|creates and registers once| Controller["app/(tools)/timer/utils/timerController.ts: stable actions and selections"]
       Controller -->|selected snapshot, preferences, actions| Client
