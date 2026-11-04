@@ -127,7 +127,7 @@
 
   @media (prefers-reduced-motion: no-preference) {
     &:active:is(:enabled, a[href]) {
-      transform: scale(0.96);
+      transform: scale(var(--button-press-scale, 0.96));
     }
   }
 
@@ -186,6 +186,18 @@
 }
 
 @theme static {
+  --color-schedule-surface: var(--color-purple-50);
+  --color-schedule-accent: var(--color-purple-600);
+  --color-schedule-foreground: var(--color-purple-800);
+  --color-schedule-running-surface: var(--color-green-50);
+  --color-schedule-running-foreground: var(--color-green-900);
+  --color-schedule-muted-surface: color-mix(
+    in srgb,
+    var(--color-purple-50) 50%,
+    var(--color-background)
+  );
+  --color-schedule-muted-accent: var(--color-purple-300);
+  --color-schedule-muted-foreground: var(--color-schedule-muted-accent);
   --color-accordion-open-surface: var(--color-blue-50);
   --color-action: color-mix(
     in oklab,

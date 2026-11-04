@@ -128,6 +128,11 @@ export interface TimerHistory {
 
 export type TimerAction =
   | {
+      action: "start-scheduled";
+      date: string;
+      taskIds: string[];
+    }
+  | {
       action: "claim-deadline-reminder";
       date: string;
       taskId: string;
@@ -154,6 +159,13 @@ export type TimerAction =
       activity: string;
       description: string;
       duration: number;
+      availabilityWindow?: AvailabilityWindow;
+    }
+  | {
+      action: "resize-scheduled";
+      date: string;
+      taskId: string;
+      availabilityWindow: AvailabilityWindow;
     }
   | {
       action: "edit";
@@ -162,6 +174,7 @@ export type TimerAction =
       activity: string;
       description: string;
       duration: number;
+      availabilityWindow?: AvailabilityWindow;
     }
   | {
       action: "pause" | "done" | "acknowledge" | "delete";

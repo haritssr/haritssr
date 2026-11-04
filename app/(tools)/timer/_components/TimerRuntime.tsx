@@ -7,6 +7,7 @@ import useSWR, { useSWRConfig } from "swr";
 import FloatingTimerDock from "@/app/(tools)/timer/_components/FloatingTimerDock";
 import { getEarliestRunningTask } from "@/app/(tools)/timer/_components/taskState";
 import { TimerContext } from "@/app/(tools)/timer/_components/TimerProvider";
+import useScheduledTaskStarts from "@/app/(tools)/timer/hooks/useScheduledTaskStarts";
 import useTimerAudio from "@/app/(tools)/timer/hooks/useTimerAudio";
 import useTimerDeadlineReminders from "@/app/(tools)/timer/hooks/useTimerDeadlineReminders";
 import useTimerNotifications from "@/app/(tools)/timer/hooks/useTimerNotifications";
@@ -108,6 +109,7 @@ function useTimerPageTitle(
 
 function useTimerRuntime(controller: TimerController) {
   const polling = useTimerPolling();
+  useScheduledTaskStarts(controller);
   const { mutations } = controller;
   const { mutate } = useSWRConfig();
   const state = useSyncExternalStore(

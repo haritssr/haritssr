@@ -1,0 +1,10 @@
+.hour {
+  top: var(--timeline-position);
+}
+
+.event {
+  top: var(--timeline-position);
+  left: var(--timeline-left);
+  width: var(--timeline-width);
+  height: var(--timeline-height);
+}

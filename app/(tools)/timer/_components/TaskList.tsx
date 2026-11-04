@@ -1,22 +1,23 @@
-import { Collapsible } from "@base-ui/react/collapsible";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
-import useTimerClock from "@/app/(tools)/timer/hooks/useTimerClock";
 
+import { canUseTimer } from "../utils/timer";
+import { scheduledCalendarTasks } from "../utils/timerCalendar";
 import TaskCard from "./TaskCard";
 import { TASK_LAYOUT } from "./taskPresentation";
 import { getTaskCollection, reconcileTaskOrder } from "./taskState";
+import TaskTimeline from "./TaskTimeline";
 
 import styles from "./taskPulse.module.css";
 
-export default function TaskList() {
+// Gesture code loads after first paint; the static timeline renders meanwhile.
+const EditableTaskTimeline = lazy(
+  async () => await import("./EditableTaskTimeline")
+);
+
+export default function TaskList({ now }: { now: number }) {
   const [newTaskId, setNewTaskId] = useState<string | null>(null);
-  const [upcoming, setUpcoming] = useState<{
-    date: string;
-    open: boolean;
-  } | null>(null);
   useEffect(() => {
     const onAdd = (event: Event) => {
       if (event instanceof CustomEvent && typeof event.detail === "string") {
@@ -32,28 +33,16 @@ export default function TaskList() {
     date: string;
     ids: string[];
   } | null>(null);
-  const { snapshot, clockOffset, error } = useTimer(
-    "snapshot",
-    "clockOffset",
-    "error"
-  );
-  const timestamp = useTimerClock(snapshot, clockOffset);
+  const { snapshot, error } = useTimer("snapshot", "error");
   if (snapshot === undefined) {
     return error === null ? (
       <output className="text-muted block">Loading today’s activities…</output>
     ) : null;
   }
-  if (snapshot.mode === "turso" && snapshot.day.tasks.length === 0) {
-    return (
-      <output className="text-muted block">
-        No tasks yet. Add a task to get started.
-      </output>
-    );
-  }
   const { visible } = getTaskCollection(
     snapshot.day.tasks,
     snapshot.today,
-    timestamp
+    now
   );
   const previousOrder = ordering?.date === snapshot.today ? ordering.ids : [];
   const nextOrder = reconcileTaskOrder(previousOrder, visible);
@@ -66,8 +55,11 @@ export default function TaskList() {
     return entry === undefined ? [] : [entry];
   });
   const available = orderedVisible.filter(({ state }) => state.available);
-  const upcomingTasks = orderedVisible.filter(({ state }) => !state.available);
-  const upcomingOpen = upcoming?.date === snapshot.today && upcoming.open;
+  const timeline = {
+    tasks: scheduledCalendarTasks(snapshot.day),
+    date: snapshot.today,
+    now,
+  };
   const renderTask = ({ task, state }: (typeof orderedVisible)[number]) => (
     <li
       className={`flex min-w-0 ${task.id === newTaskId ? styles.pulse : ""}`}
@@ -82,38 +74,29 @@ export default function TaskList() {
     </li>
   );
   return (
-    <div className="min-w-0 space-y-3 lg:w-1/2">
-      {available.length > 0 && (
-        <ul
-          aria-label="Today's activities"
-          className={`min-w-0 ${TASK_LAYOUT.collection}`}
-        >
-          {available.map(renderTask)}
-        </ul>
-      )}
-      {upcomingTasks.length > 0 && (
-        <Collapsible.Root
-          open={upcomingOpen}
-          onOpenChange={(open) => {
-            setUpcoming({ date: snapshot.today, open });
-          }}
-        >
-          <Collapsible.Trigger className="text-foreground/50 focus-visible:outline-action inline-flex cursor-pointer items-center gap-1 text-left text-sm focus-visible:outline-2 focus-visible:outline-offset-2">
-            Upcoming ({upcomingTasks.length})
-            <ChevronDownIcon
-              aria-hidden="true"
-              className={`size-4 shrink-0 ${upcomingOpen ? "rotate-180" : ""}`}
-            />
-          </Collapsible.Trigger>
-          <Collapsible.Panel className="pt-2">
-            <ul
-              aria-label="Upcoming tasks"
-              className={`min-w-0 ${TASK_LAYOUT.collection}`}
-            >
-              {upcomingTasks.map(renderTask)}
-            </ul>
-          </Collapsible.Panel>
-        </Collapsible.Root>
+    <div className="grid min-w-0 grid-cols-1 items-start gap-5 lg:grid-cols-2">
+      <div className="min-w-0 space-y-3">
+        {available.length === 0 ? (
+          <p className="text-muted text-sm">
+            No available tasks. Add a task or wait for a scheduled window to
+            open.
+          </p>
+        ) : null}
+        {available.length > 0 && (
+          <ul
+            aria-label="Today's activities"
+            className={`min-w-0 ${TASK_LAYOUT.collection}`}
+          >
+            {available.map(renderTask)}
+          </ul>
+        )}
+      </div>
+      {canUseTimer(snapshot) ? (
+        <Suspense fallback={<TaskTimeline {...timeline} editable />}>
+          <EditableTaskTimeline {...timeline} />
+        </Suspense>
+      ) : (
+        <TaskTimeline {...timeline} editable={false} />
       )}
     </div>
   );

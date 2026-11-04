@@ -3,16 +3,14 @@ import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 import type { ComponentProps, ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
-import {
-  isDailyTask,
-  formatAvailabilityWindow,
-} from "@/app/(tools)/timer/utils/dailyTasks";
+import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import {
   playTaskSound,
   prepareTaskSound,
 } from "@/app/(tools)/timer/utils/timerSound";
+import { formatAvailabilityWindow } from "@/app/(tools)/timer/utils/timerTime";
 import Button from "@/components/Button";
 
 import DeleteTaskButton from "./DeleteTaskButton";

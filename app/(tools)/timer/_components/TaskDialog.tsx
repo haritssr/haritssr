@@ -1,7 +1,7 @@
 import { Dialog } from "@base-ui/react/dialog";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
-import type { SubmitEvent } from "react";
+import type { ReactElement, SubmitEvent } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
@@ -13,16 +13,32 @@ import {
 } from "@/app/(tools)/timer/utils/timerInput";
 import Button from "@/components/Button";
 
+import { inputWindow } from "../utils/timerTime";
+import { scheduledWindowSchema } from "../utils/timerValidation";
 import TaskFormDialog from "./TaskFormDialog";
+
+function formWindow(form: FormData) {
+  if (!form.has("from")) {
+    return null;
+  }
+  const result = scheduledWindowSchema.safeParse(
+    inputWindow(form.get("from"), form.get("until"))
+  );
+  return result.success
+    ? result.data
+    : "Choose times in 15-minute increments, at least 15 minutes apart.";
+}
 
 export function EditTask({
   task,
   date,
   reached,
+  trigger,
 }: {
   task: TimerTask;
   date: string;
   reached: boolean;
+  trigger?: ReactElement;
 }) {
   const { act, snapshot, drafts, clockOffset } = useTimer(
     "act",
@@ -35,10 +51,17 @@ export function EditTask({
   const daily = isDailyTask(task);
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const availabilityWindow = formWindow(form);
+    if (typeof availabilityWindow === "string") {
+      setFormError(availabilityWindow);
+      return;
+    }
     const values = readTaskForm(
-      new FormData(event.currentTarget),
+      form,
       TASK_FORM_INPUT_LIMITS.description,
-      TASK_FORM_INPUT_LIMITS.activity
+      TASK_FORM_INPUT_LIMITS.activity,
+      availabilityWindow !== null
     );
     if (typeof values === "string") {
       setFormError(values);
@@ -49,7 +72,13 @@ export function EditTask({
       return;
     }
     setFormError(null);
-    const saving = act({ action: "edit", date, taskId: task.id, ...values });
+    const saving = act({
+      action: "edit",
+      date,
+      taskId: task.id,
+      ...values,
+      ...(availabilityWindow === null ? {} : { availabilityWindow }),
+    });
     setOpen(false);
     if (!(await saving)) {
       setFormError(
@@ -76,23 +105,32 @@ export function EditTask({
         setFormError(null);
       }}
     >
-      <Dialog.Trigger
-        className={`focus-visible:outline-action relative flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded before:absolute before:-inset-1 focus-visible:outline-2 focus-visible:outline-offset-2 ${open ? "text-action" : "text-foreground/50 hover:text-foreground"}`}
-        title="Edit"
-        aria-label={`Edit ${task.activity}`}
-      >
-        <PencilSquareIcon
-          aria-hidden="true"
-          className="size-4"
-          strokeWidth={1.5}
-        />
-      </Dialog.Trigger>
+      {trigger ? (
+        <Dialog.Trigger render={trigger} aria-label={`Edit ${task.activity}`} />
+      ) : (
+        <Dialog.Trigger
+          className={`focus-visible:outline-action relative flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded before:absolute before:-inset-1 focus-visible:outline-2 focus-visible:outline-offset-2 ${open ? "text-action" : "text-foreground/50 hover:text-foreground"}`}
+          title="Edit"
+          aria-label={`Edit ${task.activity}`}
+        >
+          <AdjustmentsHorizontalIcon
+            aria-hidden="true"
+            className="size-4"
+            strokeWidth={1.5}
+          />
+        </Dialog.Trigger>
+      )}
       <TaskFormDialog
         title="Edit Task"
         submitLabel="Save"
         defaultActivity={drafts[task.id]?.activity ?? task.activity}
         defaultDescription={drafts[task.id]?.description ?? task.description}
         defaultDuration={drafts[task.id]?.duration ?? task.duration}
+        defaultAvailabilityWindow={
+          drafts[task.id]?.availabilityWindow ??
+          task.availabilityWindow ??
+          undefined
+        }
         activityLimit={TASK_FORM_INPUT_LIMITS.activity}
         descriptionLimit={TASK_FORM_INPUT_LIMITS.description}
         notice={daily ? "Changes apply to today." : undefined}
@@ -144,17 +182,24 @@ export function AddTask({ disabled }: { disabled: boolean }) {
     if (snapshot === undefined) {
       return;
     }
+    const form = new FormData(event.currentTarget);
+    const availabilityWindow = formWindow(form);
+    if (typeof availabilityWindow === "string") {
+      setFormError(availabilityWindow);
+      return;
+    }
     const values = readTaskForm(
-      new FormData(event.currentTarget),
+      form,
       TASK_FORM_INPUT_LIMITS.description,
-      TASK_FORM_INPUT_LIMITS.activity
+      TASK_FORM_INPUT_LIMITS.activity,
+      availabilityWindow !== null
     );
     if (typeof values === "string") {
       setFormError(values);
       return;
     }
     setFormError(null);
-    const taskId = crypto.randomUUID();
+    const taskId = drafts.add?.taskId ?? crypto.randomUUID();
     window.dispatchEvent(
       new CustomEvent("timer-task-added", { detail: taskId })
     );
@@ -163,6 +208,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       date: snapshot.today,
       taskId,
       ...values,
+      ...(availabilityWindow === null ? {} : { availabilityWindow }),
     });
     setOpen(false);
     if (!(await saving)) {
@@ -184,7 +230,8 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         ref={triggerRef}
         render={
           <Button
-            className="fixed right-4 bottom-[var(--floating-controls-clearance,calc(5rem+env(safe-area-inset-bottom,0px)))] z-50 md:static"
+            className="fixed right-4 bottom-[var(--floating-controls-clearance,calc(5rem+env(safe-area-inset-bottom,0px)))] z-50 [--button-press-scale:0.98] md:static"
+            data-timer-play=""
             size="responsive-floating"
             variant="primary-floating"
           />
@@ -201,6 +248,12 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         defaultActivity={drafts.add?.activity ?? ""}
         defaultDescription={drafts.add?.description ?? ""}
         defaultDuration={drafts.add?.duration ?? 0}
+        defaultAvailabilityWindow={drafts.add?.availabilityWindow}
+        notice={
+          drafts.add?.date !== undefined && drafts.add.date !== snapshot?.today
+            ? "Recovered from an earlier day. Choose a future time for today before saving."
+            : undefined
+        }
         busy={false}
         error={formError}
         onSubmit={submit}

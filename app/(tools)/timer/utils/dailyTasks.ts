@@ -100,17 +100,3 @@ export function createDailyTasks(
     notifiedAt: null,
   }));
 }
-
-function windowTime(minutes: number) {
-  const hour = Math.floor(minutes / 60);
-  const remainder = minutes % 60;
-  return `${hour}${remainder === 0 ? "" : `:${String(remainder).padStart(2, "0")}`}`;
-}
-
-export function formatAvailabilityWindow(
-  window: AvailabilityWindow | null | undefined
-) {
-  return window === null || window === undefined
-    ? undefined
-    : `${windowTime(window.from)}/${windowTime(window.until)}`;
-}

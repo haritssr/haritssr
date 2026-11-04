@@ -1,6 +1,7 @@
 /* oxlint-disable no-await-in-loop -- Commands must save in order; recovery must finish before the next write. */
 import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
 import type {
+  AvailabilityWindow,
   TimerAction,
   TimerPreferences,
 } from "@/app/(tools)/timer/utils/timer";
@@ -13,6 +14,9 @@ import {
 type PreferencePatch = Partial<Omit<TimerPreferences, "revision">>;
 type Mutation = { action: TimerAction } | { preferences: PreferencePatch };
 interface TaskDraft {
+  taskId?: string;
+  date?: string;
+  availabilityWindow?: AvailabilityWindow;
   activity: string;
   description: string;
   duration: number;
@@ -47,7 +51,7 @@ function draftKey(mutation: Mutation) {
   if (action.action === "add") {
     return "add";
   }
-  if (action.action === "edit") {
+  if (action.action === "edit" || action.action === "resize-scheduled") {
     return action.taskId;
   }
   return null;
@@ -258,7 +262,33 @@ export class TimerMutations {
         activity: action.activity,
         description: action.description,
         duration: action.duration,
+        ...(action.action === "add"
+          ? { taskId: action.taskId, date: action.date }
+          : {}),
+        ...(action.availabilityWindow === undefined
+          ? {}
+          : { availabilityWindow: action.availabilityWindow }),
       };
+    }
+    if (
+      key !== null &&
+      action?.action === "resize-scheduled" &&
+      (this.latestDraft.get(key) ?? 0) <= change.id
+    ) {
+      const task = this.state.confirmed?.day.tasks.find(
+        (entry) => entry.id === action.taskId
+      );
+      if (task !== undefined) {
+        this.latestDraft.set(key, change.id);
+        drafts[key] = {
+          activity: task.activity,
+          description: task.description,
+          duration:
+            (action.availabilityWindow.until - action.availabilityWindow.from) *
+            60,
+          availabilityWindow: { ...action.availabilityWindow },
+        };
+      }
     }
     this.state = {
       ...this.state,

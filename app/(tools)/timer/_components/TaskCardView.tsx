@@ -49,15 +49,6 @@ export default function TaskCardView({
           <div className="flex shrink-0 items-center gap-1">
             {headerActions}
           </div>
-          <span
-            aria-hidden="true"
-            className="text-foreground/50 shrink-0 text-xs leading-4 tabular-nums sm:hidden"
-          >
-            {Math.max(0, Math.min(100, (spent / task.duration) * 100)).toFixed(
-              0
-            )}
-            %
-          </span>
         </div>
         <div
           className={`flex h-4 min-w-0 items-center gap-1 text-sm leading-4 sm:text-xs ${task.description.trim() === "" ? "sm:hidden" : ""}`}

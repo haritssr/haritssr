@@ -21,7 +21,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/TimerClient.tsx",
-    "Page composition: Today, toolbar, feedback, and task collection.",
+    "Page composition: Today, toolbar, shared clock, and task collection.",
   ],
   [
     "app/(tools)/timer/_components/TimerDataControls.tsx",
@@ -37,7 +37,39 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TaskList.tsx",
-    "Shared task clock, state calculation, and active/completed collections.",
+    "Available task list and schedule layout; loads timeline gestures lazily for editable days.",
+  ],
+  [
+    "app/(tools)/timer/_components/TaskTimeline.tsx",
+    "Static all-day scheduled cards, green running states, previews, past-day progress, and current-time line.",
+  ],
+  [
+    "app/(tools)/timer/_components/EditableTaskTimeline.tsx",
+    "Lazily loaded editing layer that attaches creation and resize gestures to TaskTimeline.",
+  ],
+  [
+    "app/(tools)/timer/hooks/timelineDrag.ts",
+    "Shared pointer and touch-hold tracking for timeline creation and resize gestures.",
+  ],
+  [
+    "app/(tools)/timer/utils/timerTime.ts",
+    "Minute formatting and HH:mm parsing for timeline labels, cards, inputs, and windows.",
+  ],
+  [
+    "app/(tools)/timer/hooks/useTimelineCreation.ts",
+    "Future-time selection with mouse dragging, touch holds, keyboard controls, and task creation.",
+  ],
+  [
+    "app/(tools)/timer/hooks/useTimelineResize.ts",
+    "Top/bottom edge resizing, touch holds, keyboard controls, live previews, and conflict cancellation.",
+  ],
+  [
+    "app/(tools)/timer/_components/timelineSelection.ts",
+    "Quarter-hour snapping, future boundaries, creation ranges, and progress-aware resize limits.",
+  ],
+  [
+    "app/(tools)/timer/_components/timelineLayout.ts",
+    "Deterministic overlap lanes for scheduled tasks.",
   ],
   [
     "app/(tools)/timer/_components/CompletedTasksTable.tsx",
@@ -178,6 +210,14 @@ export const implementationFiles = [
   [
     "app/(tools)/timer/hooks/useTimerSchedule.ts",
     "Completion and midnight refresh deadlines and timeout cleanup.",
+  ],
+  [
+    "app/(tools)/timer/utils/scheduledTaskStarts.ts",
+    "In-memory window observation, idle queue, and conditional automatic-start requests.",
+  ],
+  [
+    "app/(tools)/timer/hooks/useScheduledTaskStarts.ts",
+    "Open-window starts, overlap batch tracking, and duplicate-safe scheduled commands.",
   ],
   [
     "app/(tools)/timer/hooks/useTimerAudio.ts",

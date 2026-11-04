@@ -1,9 +1,6 @@
 import { memo } from "react";
 
-import {
-  isDailyTask,
-  formatAvailabilityWindow,
-} from "@/app/(tools)/timer/utils/dailyTasks";
+import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 
 import TaskActions from "./TaskActions";
@@ -38,12 +35,11 @@ const TaskCard = memo(
         task={task}
         state={state}
         timeDisplay="spent"
-        timeNote={formatAvailabilityWindow(task.availabilityWindow)}
         className={daily && (!state.available || reached) ? "opacity-35" : ""}
         headerActions={
           <>
-            <TaskDeadlineWarning state={state} />
             <EditTask task={task} date={date} reached={reached} />
+            <TaskDeadlineWarning state={state} />
           </>
         }
         actions={

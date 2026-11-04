@@ -14,14 +14,15 @@ export const TASK_FORM_INPUT_LIMITS = {
 export function readTaskForm(
   form: FormData,
   descriptionLimit: number = TASK_INPUT_LIMITS.description,
-  activityLimit: number = TASK_INPUT_LIMITS.activity
+  activityLimit: number = TASK_INPUT_LIMITS.activity,
+  descriptionOptional = false
 ) {
   const hours = Number(form.get("hours"));
   const minutes = Number(form.get("minutes"));
   const seconds = Number(form.get("seconds"));
   const duration = hours * 3600 + minutes * 60 + seconds;
   if (
-    ![hours, minutes, seconds].every(Number.isInteger) ||
+    ![hours, minutes, seconds, duration].every(Number.isInteger) ||
     duration < TASK_INPUT_LIMITS.minimumDuration ||
     duration > TASK_INPUT_LIMITS.maximumDuration
   ) {
@@ -39,7 +40,7 @@ export function readTaskForm(
   const descriptionValue = form.get("description");
   const description =
     typeof descriptionValue === "string" ? descriptionValue.trim() : "";
-  if (description.length === 0) {
+  if (description.length === 0 && !descriptionOptional) {
     return "Enter a description.";
   }
   if (description.length > descriptionLimit) {

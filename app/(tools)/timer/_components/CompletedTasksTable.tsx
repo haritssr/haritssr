@@ -8,6 +8,7 @@ import {
   taskWindowEnd,
 } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
+import { windowRange } from "@/app/(tools)/timer/utils/timerTime";
 import Badge from "@/components/Badge";
 import Table from "@/components/Table";
 
@@ -44,8 +45,10 @@ export default function CompletedTasksTable({
       if (missed) {
         reachedTime = taskWindowEnd(task, date);
       }
+      const availableTime = windowRange(task.availabilityWindow);
       return {
         task,
+        availableTime,
         spent,
         percentage: Math.min(100, (spent / task.duration) * 100),
         reached,
@@ -63,7 +66,16 @@ export default function CompletedTasksTable({
         aria-label="Completed and missed tasks"
       >
         {rows.map(
-          ({ task, spent, percentage, reached, missed, closed, status }) => (
+          ({
+            task,
+            availableTime,
+            spent,
+            percentage,
+            reached,
+            missed,
+            closed,
+            status,
+          }) => (
             <li key={task.id} className="bg-interface-hover rounded-2xl p-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
@@ -93,6 +105,10 @@ export default function CompletedTasksTable({
                 )}
               </div>
               <dl className="text-muted border-border/60 mt-3 grid grid-cols-3 gap-2 border-t pt-2 text-sm tabular-nums">
+                <div className="col-span-3">
+                  <dt>Available time</dt>
+                  <dd className="text-foreground">{availableTime}</dd>
+                </div>
                 <div>
                   <dt>Spent</dt>
                   <dd className="text-foreground">{formatTimerTime(spent)}</dd>
@@ -117,8 +133,8 @@ export default function CompletedTasksTable({
       <div className={rows.length === 0 ? "block" : "hidden lg:block"}>
         <Table>
           <caption className="sr-only">
-            Completed and missed tasks with descriptions, time spent, total
-            duration, progress, and status
+            Completed and missed tasks with descriptions, available time in
+            Jakarta, time spent, total duration, progress, and status
           </caption>
           <thead>
             <tr className="divide-border bg-foreground/5 text-muted divide-x [&>th]:px-3 [&>th]:text-left [&>th]:font-medium lg:group-data-list-view/task-layout:[&>th]:px-2 lg:group-data-list-view/task-layout:[&>th]:py-1.75">
@@ -138,6 +154,9 @@ export default function CompletedTasksTable({
                 <span className="hidden lg:group-data-list-view/task-layout:inline">
                   Desc
                 </span>
+              </th>
+              <th scope="col" className="w-px whitespace-nowrap">
+                Available time
               </th>
               <th scope="col" className="w-px whitespace-nowrap">
                 Spent
@@ -165,14 +184,23 @@ export default function CompletedTasksTable({
           <tbody className="divide-border divide-y">
             {rows.length === 0 ? (
               <tr>
-                <td className="text-muted px-3 py-4" colSpan={7}>
+                <td className="text-muted px-3 py-4" colSpan={8}>
                   No completed or missed tasks today.
                 </td>
               </tr>
             ) : null}
             {rows.map(
               (
-                { task, spent, percentage, reached, missed, closed, status },
+                {
+                  task,
+                  availableTime,
+                  spent,
+                  percentage,
+                  reached,
+                  missed,
+                  closed,
+                  status,
+                },
                 index
               ) => (
                 <tr
@@ -194,6 +222,9 @@ export default function CompletedTasksTable({
                         <span>-</span>
                       )}
                     </div>
+                  </td>
+                  <td className="whitespace-nowrap tabular-nums">
+                    {availableTime}
                   </td>
                   <td className="whitespace-nowrap tabular-nums">
                     {formatTimerTime(spent)}

@@ -147,7 +147,7 @@ function FloatingTimerPlayer({
           </span>
           <span
             data-floating-details=""
-            className="text-progress shrink-0 whitespace-nowrap tabular-nums"
+            className="text-success shrink-0 whitespace-nowrap tabular-nums"
           >
             <span className="sr-only">
               {formatRemainingTime(

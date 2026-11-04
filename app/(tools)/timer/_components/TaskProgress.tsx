@@ -21,7 +21,8 @@ export function MobileTaskProgress({
     <div className="flex shrink-0 items-center sm:hidden">
       <div className="text-timer flex flex-col items-end gap-0.5 leading-4 tabular-nums">
         <span className={`font-medium ${appearance.elapsed}`}>
-          {formatTimerTime(spent)}
+          {Math.max(0, Math.min(100, (spent / task.duration) * 100)).toFixed(0)}
+          %
         </span>
         <span
           className="text-foreground/50"

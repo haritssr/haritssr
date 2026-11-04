@@ -158,37 +158,75 @@ export default function TimerDetailsPage() {
               characters.
             </li>
             <li>
-              Daily tasks require a manual start. Editing a card changes only
-              today’s task; its schedule and future-day definition stay the
-              same. Daily cards cannot be deleted. Finished daily tasks move to
-              History; early Done tasks can be restored while their window is
-              open.
+              Unscheduled daily tasks start manually. Editing a card changes
+              only today’s task, including its available time. Future-day
+              definitions stay the same. Daily cards cannot be deleted. Finished
+              daily tasks move to History; early Done tasks can be restored
+              while their window is open.
             </li>
             <li>
               Open History beside Settings to review today’s finished and missed
-              tasks.
+              tasks. Available time shows each scheduled window in Jakarta time;
+              tasks without a window show —.
             </li>
             <li>
-              Upcoming tasks start collapsed below available tasks. The Upcoming
-              toggle displays their count and lets you expand or hide the cards.
-              Tasks appear automatically when their window opens. Upcoming tasks
-              collapse again when you reopen Timer or a new Jakarta day begins.
+              Day shows available tasks alongside an hourly schedule, stacked
+              below the list on mobile. Blocks show scheduled availability
+              windows in 15-minute increments, at least 15 minutes long. Cards
+              stay in the timeline all day, including completed and missed
+              tasks. Running cards turn green; other active cards stay purple.
+              Select an active card’s edit icon to edit today’s task. Cards show
+              descriptions for windows of 30 minutes or longer. The red line
+              marks the current Jakarta time.
+            </li>
+            <li>
+              Drag empty future time to create New Task with no description.
+              Selection snaps to 15-minute slots, and the timer duration matches
+              the selected window. On touchscreens, hold then drag; ordinary
+              swipes scroll. With the timeline focused, use arrow keys to move,
+              Enter to begin and save, and Escape to cancel. Scheduled task
+              descriptions are optional. Their editor has separate Duration and
+              Available time controls, so planned work can be shorter than the
+              available window. Failed additions can be recovered through Add
+              Task.
+            </li>
+            <li>
+              Drag a card up or down to move its available window in 15-minute
+              steps, keeping the window length. Use the icon beside the title to
+              edit. Drag a card’s top or bottom edge to expand or shorten its
+              available time in 15-minute steps. The timer duration follows the
+              resized window. Hover an edge to see the resize cursor; on
+              touchscreens, hold the edge before dragging. Focus an edge and use
+              arrow keys, then Enter to save or Escape to cancel. Resizing stays
+              in future time and keeps at least 15 minutes, longer than any time
+              already spent. Failed resizes can be recovered in the task editor.
+            </li>
+            <li>
+              Scheduled tasks start when their window opens, or when you return
+              during an open window. Multitask starts all due tasks. Otherwise,
+              the latest opening wins, ties follow saved order, and the current
+              task pauses. Other overlapping tasks remain available for manual
+              start during the visit. Paused tasks stay paused. Starts within a
+              minute of opening count from the opening; later starts count from
+              now, without adding time while the app was closed. The red line
+              crosses above timeline cards; running tasks also appear first in
+              the list with green progress.
             </li>
             <li>
               When you open the page, running tasks come first, followed by
-              available tasks with progress, unstarted tasks, and upcoming
-              tasks. Higher percentages come first within each group; ties
-              retain their saved order. Running tasks move to the top and stay
-              ordered by percentage during your visit. Other cards keep their
-              relative positions within the available or upcoming group, and new
-              or restored available tasks appear before upcoming tasks. The
-              order resets when you reopen the page or a new Jakarta day begins.
+              available tasks with progress and unstarted tasks. Higher
+              percentages come first within each group; ties retain their saved
+              order. Running tasks move to the top and stay ordered by
+              percentage during your visit. Other cards keep their relative
+              positions within the available group. Upcoming tasks are placed by
+              opening time in the timeline. The order resets when you reopen the
+              page or a new Jakarta day begins.
             </li>
             <li>
-              Availability follows Jakarta time. Before its window, a card is
-              muted and its start control locks. At closing, unfinished tasks
-              move to History as Missed, preserving time spent without marking
-              them complete. A running task pauses at closing.
+              Availability follows Jakarta time. Before its window, a task
+              appears in the timeline. At closing, unfinished tasks move to
+              History as Missed, preserving time spent without marking them
+              complete. A running task pauses at closing.
             </li>
             <li>
               Starting a task pauses the others unless Multitask is on; turning

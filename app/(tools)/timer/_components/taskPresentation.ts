@@ -21,8 +21,8 @@ export const TASK_LAYOUT = {
 
 const TASK_STATE_APPEARANCE = {
   running: {
-    elapsed: "text-progress",
-    progress: "var(--color-progress)",
+    elapsed: "text-success",
+    progress: "var(--color-success)",
     button: "timer-running",
   },
   paused: {

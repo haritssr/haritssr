@@ -24,6 +24,12 @@ export const availabilityWindowSchema = z
   })
   .refine(({ from, until }) => from < until);
 
+export const scheduledWindowSchema = availabilityWindowSchema.refine(
+  ({ from, until }) =>
+    until - from >= 15 && from % 15 === 0 && until % 15 === 0,
+  "Choose times in 15-minute increments, at least 15 minutes apart."
+);
+
 const storedDailyTasksSchema = z
   .array(
     z.object({
@@ -47,6 +53,19 @@ export const dailyTasksSchema = storedDailyTasksSchema.superRefine(
       });
     }
     for (const [index, task] of tasks.entries()) {
+      if (
+        task.availabilityWindow !== null &&
+        (task.availabilityWindow.until - task.availabilityWindow.from < 15 ||
+          task.availabilityWindow.from % 15 !== 0 ||
+          task.availabilityWindow.until % 15 !== 0)
+      ) {
+        context.addIssue({
+          code: "custom",
+          path: [index, "availabilityWindow"],
+          message:
+            "Choose times in 15-minute increments, at least 15 minutes apart.",
+        });
+      }
       if (task.description.length === 0) {
         context.addIssue({
           code: "custom",
@@ -108,6 +127,11 @@ export const daySchema = z
 
 export const actionSchema = z.discriminatedUnion("action", [
   z.object({
+    action: z.literal("start-scheduled"),
+    date: dateSchema,
+    taskIds: z.array(z.string().min(1).max(100)).min(1).max(MAX_TIMER_TASKS),
+  }),
+  z.object({
     action: z.literal("claim-deadline-reminder"),
     date: dateSchema,
     taskId: z.string().min(1).max(100),
@@ -128,29 +152,41 @@ export const actionSchema = z.discriminatedUnion("action", [
     multitask: z.boolean().optional(),
   }),
   z.object({
-    action: z.literal("edit"),
+    action: z.literal("resize-scheduled"),
     date: dateSchema,
     taskId: z.string().min(1).max(100),
-    ...taskDetails,
-    activity: z.string().trim().min(1).max(TASK_FORM_INPUT_LIMITS.activity),
-    description: z
-      .string()
-      .trim()
-      .min(1)
-      .max(TASK_FORM_INPUT_LIMITS.description),
+    availabilityWindow: scheduledWindowSchema,
   }),
-  z.object({
-    action: z.literal("add"),
-    taskId: z.uuid().optional(),
-    date: dateSchema,
-    ...taskDetails,
-    activity: z.string().trim().min(1).max(TASK_FORM_INPUT_LIMITS.activity),
-    description: z
-      .string()
-      .trim()
-      .min(1)
-      .max(TASK_FORM_INPUT_LIMITS.description),
-  }),
+  z
+    .object({
+      action: z.literal("edit"),
+      availabilityWindow: scheduledWindowSchema.optional(),
+      date: dateSchema,
+      taskId: z.string().min(1).max(100),
+      ...taskDetails,
+      activity: z.string().trim().min(1).max(TASK_FORM_INPUT_LIMITS.activity),
+      description: z.string().trim().max(TASK_FORM_INPUT_LIMITS.description),
+    })
+    .refine(
+      ({ description, availabilityWindow }) =>
+        description.length > 0 || availabilityWindow !== undefined,
+      { path: ["description"], message: "Enter a description." }
+    ),
+  z
+    .object({
+      action: z.literal("add"),
+      availabilityWindow: scheduledWindowSchema.optional(),
+      taskId: z.uuid().optional(),
+      date: dateSchema,
+      ...taskDetails,
+      activity: z.string().trim().min(1).max(TASK_FORM_INPUT_LIMITS.activity),
+      description: z.string().trim().max(TASK_FORM_INPUT_LIMITS.description),
+    })
+    .refine(
+      ({ description, availabilityWindow }) =>
+        description.length > 0 || availabilityWindow !== undefined,
+      { path: ["description"], message: "Enter a description." }
+    ),
   ...(["pause", "done", "acknowledge", "delete"] as const).map((action) =>
     z.object({
       action: z.literal(action),

@@ -1,5 +1,6 @@
 import type { DailyTaskDefinition } from "../utils/dailyTasks";
 import { TASK_INPUT_LIMITS } from "../utils/timerInput";
+import { inputTime, inputWindow } from "../utils/timerTime";
 import { dailyTasksSchema } from "../utils/timerValidation";
 import { durationSeconds, durationValue } from "./durationValue";
 import type { DurationValue } from "./durationValue";
@@ -18,18 +19,6 @@ export interface DailyDraftError {
   message: string;
 }
 
-function timeValue(minutes: number) {
-  return `${String(Math.floor(minutes / 60) % 24).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}`;
-}
-
-function timeMinutes(time: string) {
-  if (!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(time)) {
-    return Number.NaN;
-  }
-  const [hours, minutes] = time.split(":").map(Number);
-  return hours * 60 + minutes;
-}
-
 export function dailyTaskDrafts(tasks: DailyTaskDefinition[]): DailyDraft[] {
   return tasks.map((task) => ({
     id: task.id,
@@ -40,8 +29,8 @@ export function dailyTaskDrafts(tasks: DailyTaskDefinition[]): DailyDraft[] {
       task.availabilityWindow === null
         ? null
         : {
-            from: timeValue(task.availabilityWindow.from),
-            until: timeValue(task.availabilityWindow.until),
+            from: inputTime(task.availabilityWindow.from),
+            until: inputTime(task.availabilityWindow.until),
           },
   }));
 }
@@ -100,11 +89,7 @@ export function parseDailyDrafts(
     entries.map((entry) => {
       let availabilityWindow = null;
       if (entry.window !== null) {
-        const until = timeMinutes(entry.window.until);
-        availabilityWindow = {
-          from: timeMinutes(entry.window.from),
-          until: until === 0 ? 1440 : until,
-        };
+        availabilityWindow = inputWindow(entry.window.from, entry.window.until);
       }
       return {
         id: entry.id,
@@ -137,7 +122,7 @@ export function parseDailyDrafts(
     message = "Choose a duration from one second to 24 hours.";
   } else if (field === "availabilityWindow") {
     message =
-      "Choose valid From and Until times, with Until later than From. Use 00:00 to end at midnight.";
+      "Choose From and Until in 15-minute increments, at least 15 minutes apart. Use 00:00 to end at midnight.";
   }
   let errorField: DailyDraftError["field"];
   if (field === "availabilityWindow") {

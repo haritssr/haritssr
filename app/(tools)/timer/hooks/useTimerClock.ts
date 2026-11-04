@@ -7,7 +7,8 @@ import { timerNextDisplayAt } from "@/app/(tools)/timer/utils/timerClock";
 export default function useTimerClock(
   snapshot: TimerSnapshot | undefined,
   clockOffset: number,
-  enabled = true
+  enabled = true,
+  maximumDelay = Infinity
 ) {
   const [now, setNow] = useState(() => Date.now());
   const day = snapshot?.day;
@@ -28,7 +29,12 @@ export default function useTimerClock(
       const timestamp = Date.now();
       setNow(timestamp);
       const serverNow = timestamp + clockOffset;
-      const next = timerNextDisplayAt(tasks, date, serverNow);
+      const next = Math.min(
+        timerNextDisplayAt(tasks, date, serverNow),
+        Number.isFinite(maximumDelay)
+          ? serverNow + maximumDelay - (serverNow % maximumDelay)
+          : Infinity
+      );
       if (Number.isFinite(next)) {
         timeout = window.setTimeout(
           tick,
@@ -44,7 +50,7 @@ export default function useTimerClock(
       document.removeEventListener("visibilitychange", tick);
       window.removeEventListener("focus", tick);
     };
-  }, [clockOffset, enabled, day]);
+  }, [clockOffset, enabled, day, maximumDelay]);
 
   return Math.max(now + clockOffset, Date.parse(snapshot?.now ?? "") || 0);
 }

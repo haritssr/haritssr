@@ -6,6 +6,8 @@ import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { TASK_INPUT_LIMITS } from "@/app/(tools)/timer/utils/timerInput";
 import Button from "@/components/Button";
 
+import type { AvailabilityWindow } from "../utils/timer";
+import { inputTime } from "../utils/timerTime";
 import DeleteTaskButton from "./DeleteTaskButton";
 import DurationFields from "./DurationFields";
 import {
@@ -15,7 +17,7 @@ import {
 } from "./durationValue";
 
 const INPUT_CLASS =
-  "form-control border-border bg-background focus:border-action focus:ring-action/20 w-full rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2";
+  "form-control border-border bg-white focus:border-action focus:ring-action/20 w-full rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2";
 
 const SHEET_STYLE: CSSProperties & { "--timer-safe-bottom": string } = {
   "--timer-safe-bottom":
@@ -28,6 +30,7 @@ interface TaskFormDialogProps {
   defaultActivity: string;
   defaultDescription?: string;
   defaultDuration?: number;
+  defaultAvailabilityWindow?: AvailabilityWindow;
   activityLimit?: number;
   descriptionLimit?: number;
   notice?: string;
@@ -52,6 +55,7 @@ function TaskFormPopup({
   defaultActivity,
   defaultDescription = "",
   defaultDuration = 300,
+  defaultAvailabilityWindow,
   activityLimit,
   descriptionLimit,
   notice,
@@ -99,6 +103,7 @@ function TaskFormPopup({
             value={description}
             onChange={setDescription}
             maxLength={descriptionLimit}
+            optional={defaultAvailabilityWindow !== undefined}
             disabled={busy}
           />
           <DurationFields
@@ -107,6 +112,35 @@ function TaskFormPopup({
             disabled={busy}
             presets={durationPresets}
           />
+          {defaultAvailabilityWindow === undefined ? null : (
+            <fieldset disabled={busy} className="space-y-2">
+              <legend className="mb-2 text-sm">Available time</legend>
+              <div className="grid grid-cols-2 gap-2">
+                {(["from", "until"] as const).map((boundary) => {
+                  const minutes = defaultAvailabilityWindow[boundary];
+                  const value = inputTime(minutes);
+                  return (
+                    <label key={boundary} className="min-w-0 space-y-1 text-sm">
+                      <span className="text-muted/70">
+                        {boundary === "from" ? "From" : "Until"}
+                      </span>
+                      <input
+                        type="time"
+                        step={900}
+                        name={boundary}
+                        defaultValue={value}
+                        className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
+                        required
+                      />
+                    </label>
+                  );
+                })}
+              </div>
+              <p className="text-muted text-xs">
+                Use 15-minute increments. An end time of 00:00 means midnight.
+              </p>
+            </fieldset>
+          )}
           {showTaskPresets ? (
             <fieldset className="space-y-3" disabled={busy}>
               <legend className="mb-2 text-sm">Preset</legend>
@@ -236,11 +270,13 @@ export function TaskDescriptionField({
   onChange,
   disabled,
   maxLength = TASK_INPUT_LIMITS.description,
+  optional = false,
 }: {
   value: string;
   onChange: (value: string) => void;
   disabled: boolean;
   maxLength?: number;
+  optional?: boolean;
 }) {
   const hintId = useId();
   const descriptionRef = useRef<HTMLInputElement>(null);
@@ -266,7 +302,7 @@ export function TaskDescriptionField({
           disabled={disabled}
           maxLength={maxLength}
           name="description"
-          required
+          required={!optional}
           onChange={(event) => {
             onChange(event.currentTarget.value);
           }}

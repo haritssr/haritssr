@@ -65,9 +65,8 @@ Element-specific styles stay beside their JSX in the component files above.
 `TaskCardView` shares the presentation of ordinary and daily tasks. Its optional `timeDisplay` forwards to `TaskProgress`: `spent` hides the
 visible total-duration suffix. All Timer cards use `spent`; the default
 `spent-and-duration` remains available to other consumers. Both retain duration in the progress accessibility text.
-The optional `timeNote` places a short 24-hour availability range between elapsed
-and remaining time on scheduled daily cards, at the same font size. Midnight at
-the end of the day is shown as `24`.
+Task list cards omit available-time labels; scheduled windows remain visible on
+the timeline and in the task editor.
 Card text uses `select-none`. Newly added cards briefly pulse around their edge;
 the pulse is disabled for reduced motion and does not replay on page load.
 
@@ -81,7 +80,7 @@ contents so long times and scheduled windows stay clear of the action buttons;
 the title and description use the remaining space. Tasks advance by one second
 per real second.
 Unavailable Done controls are dimmed and have no hover effect or tooltip.
-Tasks with an availability window show a `size-5` danger warning before Edit
+Tasks with an availability window show a `size-5` danger warning after Edit
 when remaining duration plus a ten-minute buffer reaches the closing time.
 The icon pulses only when reduced motion is off. Running tasks that can finish
 on time suppress the warning; late running tasks still warn. Finished tasks and closed windows clear the warning. `timerDeadline.ts` shares eligibility and next boundaries
@@ -92,7 +91,10 @@ block unrelated controls or rapid task actions.
 
 The History button beside Settings opens `CompletedTasksTable` in a Bento modal.
 On desktop the table gives descriptions the remaining width and keeps task names
-on one line; narrow screens show stacked task cards. Restore returns an early Done task to
+on one line; narrow screens show stacked task cards. Both layouts include Available
+time as a Jakarta `HH:mm–HH:mm` range, with `24:00` for midnight and `—` for tasks
+without windows. The desktop column sits between Description and Spent.
+Restore returns an early Done task to
 the active list paused, preserving its time, while its window is still open;
 Met and Missed tasks cannot be restored.
 `TaskList` partitions tasks using their current elapsed
@@ -108,13 +110,51 @@ except that running tasks move to the top, ordered by completion percentage.
 New or restored available cards appear before upcoming
 cards; completed, missed, and deleted cards leave the active list. The order
 resets on a new Jakarta day or when the page is reopened.
-Upcoming cards are grouped in a Base UI Collapsible below all available cards.
-The Upcoming trigger and chevron display their live count when any
-exist, including when no tasks are available. The disclosure starts collapsed
-on each visit and new Jakarta day; its state is local to the mounted page.
-Tasks move into the available group automatically when their windows open,
-even while the disclosure is collapsed. With no upcoming tasks, the disclosure
-is omitted. Both groups share the existing card rendering and new-task pulse.
+Today uses `grid-cols-1 gap-5 lg:grid-cols-2` for the available task list and
+[TaskTimeline.tsx](TaskTimeline.tsx). `TaskTimeline` only renders; when editing is
+allowed, `TaskList` lazily loads [EditableTaskTimeline.tsx](EditableTaskTimeline.tsx),
+which attaches the gesture hooks and shows the static timeline while loading.
+Both gesture hooks share pointer and touch-hold tracking in
+[timelineDrag.ts](../hooks/timelineDrag.ts); minute formatting and HH:mm parsing
+live in [timerTime.ts](../utils/timerTime.ts). `TimerClient` owns the one-minute
+clock and passes it to `TaskList`. The timeline retains every scheduled window
+all day, including running, paused, completed, and missed tasks. Blocks span their
+exact opening/closing minutes; running cards use opaque green surfaces and the
+progress accent, other active cards use violet, and past cards are muted violet. Overlapping windows share
+horizontal lanes, calculated by [timelineLayout.ts](timelineLayout.ts). Its
+full-height timeline displays every hour from 00:00 to 24:00 in the page flow,
+without internal scrolling. A red line shows Jakarta time, updating at least once per minute.
+The red line stays above cards without intercepting pointer events. Active cards
+have an edit icon; completed and missed cards are read-only. Only future eligible
+cards have move and resize controls.
+[useTimelineCreation.ts](../hooks/useTimelineCreation.ts) selects empty future time
+with primary-button dragging, touch hold-and-drag, or arrow keys and Enter.
+[timelineSelection.ts](timelineSelection.ts) snaps to 15-minute slots. A plain click
+creates nothing; Escape and canceled gestures discard the selection. Release saves
+New Task with an empty description and a duration matching its selected window,
+using the existing authenticated writer. Scheduled Add/Edit forms allow empty
+descriptions; ordinary forms and Daily Tasks settings still require descriptions.
+Scheduled forms show Duration controls separately from Available time. Saving
+uses the entered duration independently of the window, including seconds and presets.
+Unscheduled forms retain the same duration controls.
+Failed additions preserve their ID and window for explicit recovery through Add Task;
+uncertain writes are never automatically resent.
+[useTimelineResize.ts](../hooks/useTimelineResize.ts) delegates top/bottom edge
+controls from the timeline container, separate from edit and creation buttons.
+Card bodies select on press and drag vertically in 15-minute steps, preserving
+window length. Only the edit icon opens the editor; clicking the body does not.
+Cards use `cursor-grab` and `cursor-grabbing` with a selection ring.
+Edges use `cursor-ns-resize` without visible grip bars; touch holds activate moving or resizing.
+Both edges snap to 15 minutes and keep the window in future time. Arrow keys preview,
+Enter saves, and Escape cancels. Minimum window length is 15 minutes and must exceed
+recorded spent time. Live previews update overlap lanes, description visibility,
+and short-card alignment. The `resize-scheduled` command computes matching duration
+in the engine while preserving current task text. Date/permission changes, opened
+windows, and conflicting task updates cancel gestures. Failed writes retain an edit
+draft with the proposed window and duration; uncertain writes are never retried automatically.
+Available scheduled tasks appear in both the timeline and task list. Running tasks
+move to the top of the list with green progress. Empty timelines remain visible;
+tasks without windows stay in the available list.
 The list uses [useTimerClock.ts](../hooks/useTimerClock.ts) for one
 clock across all cards and computes each task's state once per render. Cards
 receive that state instead of creating their own intervals.
@@ -264,6 +304,21 @@ modules keep independent work separate:
   refreshes remain available in every tab.
 - [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules only the earliest
   task completion and midnight refreshes.
+- [useScheduledTaskStarts.ts](../hooks/useScheduledTaskStarts.ts) starts never-started
+  scheduled tasks at opening and on return during an open window, across routes.
+  Multitask starts every due task; otherwise the latest opening wins (saved order
+  breaks ties) and pauses the current task after preserving elapsed progress.
+  Overlap batches are handled once per mounted runtime; skipped tasks remain
+  available for manual start. Starts arriving within 60 seconds of opening are
+  backdated to the opening (never before the paused task's last settlement), so
+  timer, throttling, and network delay cannot leave a full-window task short.
+  Later starts, including reopening during a still-open window, count from the
+  server start. Paused tasks remain paused.
+  [scheduledTaskStarts.ts](../utils/scheduledTaskStarts.ts) owns subscription and
+  in-memory attempt tracking. The protected `start-scheduled` action rechecks open
+  windows, start history, priority, and Multitask inside the existing transaction.
+  Duplicate requests cannot fall through to older overlaps; uncertain writes are
+  never automatically resent. Closing windows and day rollover end eligibility.
 - [useTimerDeadlineReminders.ts](../hooks/useTimerDeadlineReminders.ts) schedules
   window reminders from confirmed state while visible and reevaluates on focus.
   It pauses claims during pending edits/actions. A protected
@@ -382,9 +437,9 @@ definitions remain preferences and are excluded from the history-only backup.
 Daily and ordinary cards share the same state-based ordering. Completed daily
 tasks move to History, as do unfinished tasks with closed windows, marked Missed.
 History and statistics still include their progress once.
-Daily cards show elapsed time, availability, and remaining daily duration without
-a total-duration suffix or recurring icon. Before a window, they are muted and
-Play/Continue becomes a disabled lock.
+Daily cards show elapsed time and remaining daily duration without
+a total-duration suffix or recurring icon. Before a window, tasks appear in the
+timeline with no playback controls.
 Descriptions remain accessible, and unfinished cards can be edited for today.
 Done can finish a started
 task early; History can restore it without resetting progress while its window is open.

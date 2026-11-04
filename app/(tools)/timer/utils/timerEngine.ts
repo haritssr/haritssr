@@ -15,8 +15,11 @@ import type {
   TimerTask,
 } from "@/app/(tools)/timer/utils/timer";
 
-import { isDailyTask, formatAvailabilityWindow } from "./dailyTasks";
+import { isDailyTask } from "./dailyTasks";
 import { taskDeadline } from "./timerDeadline";
+import { formatAvailabilityWindow } from "./timerTime";
+
+const SCHEDULED_START_GRACE = 60_000;
 
 export class TimerStoreError extends Error {
   readonly status: number;
@@ -133,6 +136,9 @@ function editTaskDetails(
   task.activity = command.activity;
   task.description = command.description;
   task.duration = command.duration;
+  if (command.availabilityWindow !== undefined) {
+    task.availabilityWindow = { ...command.availabilityWindow };
+  }
 }
 
 function startTask(
@@ -159,11 +165,48 @@ function startTask(
   task.lastStartedAt = task.startedAt;
 }
 
+function resizeScheduledTask(
+  day: TimerDay,
+  task: TimerTask,
+  command: Extract<TimerAction, { action: "resize-scheduled" }>,
+  now: number
+) {
+  const { start } = timerDayBounds(day.date);
+  if (
+    task.availabilityWindow === null ||
+    task.availabilityWindow === undefined ||
+    task.startedAt !== null ||
+    start + task.availabilityWindow.from * 60_000 <= now ||
+    start + command.availabilityWindow.from * 60_000 <= now
+  ) {
+    throw new TimerStoreError(
+      "Only upcoming tasks can be resized into future time.",
+      409
+    );
+  }
+  editTaskDetails(task, {
+    action: "edit",
+    date: command.date,
+    taskId: task.id,
+    activity: task.activity,
+    description: task.description,
+    availabilityWindow: command.availabilityWindow,
+    duration:
+      (command.availabilityWindow.until - command.availabilityWindow.from) * 60,
+  });
+}
+
 function changeTask(
   day: TimerDay,
   command: Exclude<
     TimerAction,
-    { action: "add" | "single-task" | "claim-deadline-reminder" }
+    {
+      action:
+        | "add"
+        | "single-task"
+        | "claim-deadline-reminder"
+        | "start-scheduled";
+    }
   >,
   now: number
 ): TimerNotice | null {
@@ -180,6 +223,8 @@ function changeTask(
   }
   if (command.action === "delete") {
     day.tasks = day.tasks.filter((entry) => entry.id !== task.id);
+  } else if (command.action === "resize-scheduled") {
+    resizeScheduledTask(day, task, command, now);
   } else if (command.action === "edit") {
     editTaskDetails(task, command);
   } else if (command.action === "start") {
@@ -215,7 +260,7 @@ function changeTask(
 
 function applyTimerAction(
   day: TimerDay,
-  command: TimerAction,
+  command: Exclude<TimerAction, { action: "start-scheduled" }>,
   now: number
 ): TimerNotice | null {
   let notification: TimerNotice | null = null;
@@ -244,11 +289,22 @@ function applyTimerAction(
         `Today already has ${MAX_TIMER_TASKS} activities.`
       );
     }
+    if (
+      command.availabilityWindow !== undefined &&
+      timerDayBounds(day.date).start +
+        command.availabilityWindow.from * 60_000 <=
+        now
+    ) {
+      throw new TimerStoreError("Choose a future availability window.", 409);
+    }
     day.tasks.push({
       id: command.taskId ?? crypto.randomUUID(),
       activity: command.activity,
       description: command.description,
       duration: command.duration,
+      ...(command.availabilityWindow === undefined
+        ? {}
+        : { availabilityWindow: { ...command.availabilityWindow } }),
       spent: 0,
       startedAt: null,
       reachedAt: null,
@@ -270,6 +326,15 @@ export function applyTimerCommand(
   preferences: TimerPreferences | undefined,
   now: number
 ) {
+  if (action.action === "start-scheduled") {
+    startScheduledTasks(
+      day,
+      action.taskIds,
+      preferences?.multitask === true,
+      now
+    );
+    return null;
+  }
   settleTimerDay(day, now);
   let command = action;
   if (command.action === "start") {
@@ -278,6 +343,92 @@ export function applyTimerCommand(
     command = { ...command, autoplay: preferences?.autoplay };
   }
   return applyTimerAction(day, command, now);
+}
+
+// Auto-starts that arrive shortly after a window opens count from the opening,
+// absorbing timer, throttling, and network delay. Later arrivals use `now`.
+function scheduledStartTime(
+  day: TimerDay,
+  task: TimerTask,
+  now: number,
+  notBefore: number
+) {
+  const opensAt =
+    timerDayBounds(day.date).start +
+    (task.availabilityWindow?.from ?? 0) * 60_000;
+  return now - opensAt <= SCHEDULED_START_GRACE
+    ? Math.min(now, Math.max(opensAt, notBefore))
+    : now;
+}
+
+function startScheduledTasks(
+  day: TimerDay,
+  taskIds: string[],
+  multitask: boolean,
+  now: number
+) {
+  const requested = new Set(taskIds);
+  // Rank every open scheduled window before checking start history. A
+  // duplicate request must not fall through to an older overlap after its
+  // winner has already started (or was manually paused in another tab).
+  const open = day.tasks
+    .filter(
+      (task) =>
+        (task.availabilityWindow ?? null) !== null &&
+        taskAvailable(task, day.date, now)
+    )
+    .toSorted(
+      (first, second) =>
+        (second.availabilityWindow?.from ?? 0) -
+        (first.availabilityWindow?.from ?? 0)
+    );
+  const due = open.filter((task) => requested.has(task.id));
+  // A single-task handoff settles the paused task at the backdated start, and
+  // never before its last settlement, so no time is counted twice.
+  const latestRunningStart = Math.max(
+    -Infinity,
+    ...day.tasks
+      .filter((task) => task.startedAt !== null)
+      .map((task) => Date.parse(task.startedAt ?? ""))
+  );
+  const handoffAt =
+    multitask || due[0] === undefined
+      ? now
+      : scheduledStartTime(day, due[0], now, latestRunningStart);
+  settleTimerDay(day, handoffAt);
+  let started = false;
+  for (const task of multitask ? due : due.slice(0, 1)) {
+    if (
+      task.startedAt !== null ||
+      task.lastStartedAt !== undefined ||
+      task.spent !== 0 ||
+      task.reachedAt !== null
+    ) {
+      continue;
+    }
+    if (
+      !multitask &&
+      open
+        .slice(0, open.indexOf(task))
+        .some(
+          (entry) =>
+            entry.lastStartedAt !== undefined || entry.startedAt !== null
+        )
+    ) {
+      continue;
+    }
+    startTask(
+      day,
+      task,
+      multitask ? scheduledStartTime(day, task, now, -Infinity) : handoffAt,
+      multitask
+    );
+    day.revision += 1;
+    started = true;
+  }
+  if (!started && handoffAt < now) {
+    settleTimerDay(day, now);
+  }
 }
 
 export function applyTimerPreferencePatch(
