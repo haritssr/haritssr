@@ -50,8 +50,8 @@ keep each form section easy to locate. `DurationFields` is shared too.
 Task form parsing lives in [timerInput.ts](../utils/timerInput.ts). Its lightweight
 limits are shared with input counters and server schemas; stored legacy text keeps
 its existing broader limits. Live elapsed-time validation remains in Edit.
-Name allows 30 characters; the required Description allows 38 for ordinary and
-daily tasks. Both show a
+Adding and editing tasks allows 25 characters for Name and 36 for the required
+Description, including daily tasks. Both show a
 character counter beside their labels, using `text-danger` at the limit. Each field has
 a Clear button with a native Clear hover hint that empties it and returns focus
 to the field. Name and Description start at 40px tall; Description can be resized

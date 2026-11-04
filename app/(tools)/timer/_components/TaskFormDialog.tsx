@@ -28,6 +28,7 @@ interface TaskFormDialogProps {
   defaultActivity: string;
   defaultDescription?: string;
   defaultDuration?: number;
+  activityLimit?: number;
   descriptionLimit?: number;
   notice?: string;
   showTaskPresets?: boolean;
@@ -51,6 +52,7 @@ function TaskFormPopup({
   defaultActivity,
   defaultDescription = "",
   defaultDuration = 300,
+  activityLimit,
   descriptionLimit,
   notice,
   showTaskPresets = false,
@@ -91,6 +93,7 @@ function TaskFormPopup({
             onChange={setActivity}
             disabled={busy}
             inputRef={nameRef}
+            maxLength={activityLimit}
           />
           <TaskDescriptionField
             value={description}
@@ -160,11 +163,13 @@ export function TaskNameField({
   onChange,
   disabled,
   inputRef,
+  maxLength = TASK_INPUT_LIMITS.activity,
 }: {
   value: string;
   onChange: (value: string) => void;
   disabled: boolean;
   inputRef?: RefObject<HTMLInputElement | null>;
+  maxLength?: number;
 }) {
   const localRef = useRef<HTMLInputElement>(null);
   const fieldRef = inputRef ?? localRef;
@@ -175,11 +180,11 @@ export function TaskNameField({
       <span className="flex items-center justify-between">
         <span>Name</span>
         <span
-          className={`text-xs tabular-nums ${length >= TASK_INPUT_LIMITS.activity ? "text-danger font-medium" : "text-muted"}`}
+          className={`text-xs tabular-nums ${length >= maxLength ? "text-danger font-medium" : "text-muted"}`}
           id={hintId}
         >
           <span className="sr-only">Characters: </span>
-          {length}/{TASK_INPUT_LIMITS.activity}
+          {length}/{maxLength}
         </span>
       </span>
       <span className="relative block">
@@ -188,7 +193,7 @@ export function TaskNameField({
           className={`${INPUT_CLASS} h-10 pr-11.5`}
           value={value}
           disabled={disabled}
-          maxLength={TASK_INPUT_LIMITS.activity}
+          maxLength={maxLength}
           name="activity"
           onChange={(event) => {
             onChange(event.currentTarget.value);

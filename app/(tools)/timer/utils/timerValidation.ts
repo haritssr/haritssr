@@ -6,7 +6,10 @@ import {
   MAX_TIMER_TASKS,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
-import { TASK_INPUT_LIMITS } from "@/app/(tools)/timer/utils/timerInput";
+import {
+  TASK_FORM_INPUT_LIMITS,
+  TASK_INPUT_LIMITS,
+} from "@/app/(tools)/timer/utils/timerInput";
 
 import {
   DEFAULT_DAILY_TASKS,
@@ -124,29 +127,29 @@ export const actionSchema = z.discriminatedUnion("action", [
     taskId: z.string().min(1).max(100),
     multitask: z.boolean().optional(),
   }),
-  z
-    .object({
-      action: z.literal("edit"),
-      date: dateSchema,
-      taskId: z.string().min(1).max(100),
-      ...taskDetails,
-      description: z.string().trim().min(1).max(DAILY_DESCRIPTION_LIMIT),
-    })
-    .refine(
-      ({ taskId, description }) =>
-        taskId.startsWith("daily:") ||
-        description.length <= TASK_INPUT_LIMITS.description,
-      {
-        path: ["description"],
-        message: `Use ${TASK_INPUT_LIMITS.description} characters or fewer for the description.`,
-      }
-    ),
+  z.object({
+    action: z.literal("edit"),
+    date: dateSchema,
+    taskId: z.string().min(1).max(100),
+    ...taskDetails,
+    activity: z.string().trim().min(1).max(TASK_FORM_INPUT_LIMITS.activity),
+    description: z
+      .string()
+      .trim()
+      .min(1)
+      .max(TASK_FORM_INPUT_LIMITS.description),
+  }),
   z.object({
     action: z.literal("add"),
     taskId: z.uuid().optional(),
     date: dateSchema,
     ...taskDetails,
-    description: z.string().trim().min(1).max(TASK_INPUT_LIMITS.description),
+    activity: z.string().trim().min(1).max(TASK_FORM_INPUT_LIMITS.activity),
+    description: z
+      .string()
+      .trim()
+      .min(1)
+      .max(TASK_FORM_INPUT_LIMITS.description),
   }),
   ...(["pause", "done", "acknowledge", "delete"] as const).map((action) =>
     z.object({

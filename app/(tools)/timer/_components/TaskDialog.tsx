@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
-import {
-  DAILY_DESCRIPTION_LIMIT,
-  isDailyTask,
-} from "@/app/(tools)/timer/utils/dailyTasks";
+import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
 import { canUseTimer, taskSpent } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
-import { readTaskForm } from "@/app/(tools)/timer/utils/timerInput";
+import {
+  TASK_FORM_INPUT_LIMITS,
+  readTaskForm,
+} from "@/app/(tools)/timer/utils/timerInput";
 import Button from "@/components/Button";
 
 import TaskFormDialog from "./TaskFormDialog";
@@ -37,7 +37,8 @@ export function EditTask({
     event.preventDefault();
     const values = readTaskForm(
       new FormData(event.currentTarget),
-      daily ? DAILY_DESCRIPTION_LIMIT : undefined
+      TASK_FORM_INPUT_LIMITS.description,
+      TASK_FORM_INPUT_LIMITS.activity
     );
     if (typeof values === "string") {
       setFormError(values);
@@ -92,7 +93,8 @@ export function EditTask({
         defaultActivity={drafts[task.id]?.activity ?? task.activity}
         defaultDescription={drafts[task.id]?.description ?? task.description}
         defaultDuration={drafts[task.id]?.duration ?? task.duration}
-        descriptionLimit={daily ? DAILY_DESCRIPTION_LIMIT : undefined}
+        activityLimit={TASK_FORM_INPUT_LIMITS.activity}
+        descriptionLimit={TASK_FORM_INPUT_LIMITS.description}
         notice={daily ? "Changes apply to today." : undefined}
         busy={false}
         error={formError}
@@ -142,7 +144,11 @@ export function AddTask({ disabled }: { disabled: boolean }) {
     if (snapshot === undefined) {
       return;
     }
-    const values = readTaskForm(new FormData(event.currentTarget));
+    const values = readTaskForm(
+      new FormData(event.currentTarget),
+      TASK_FORM_INPUT_LIMITS.description,
+      TASK_FORM_INPUT_LIMITS.activity
+    );
     if (typeof values === "string") {
       setFormError(values);
       return;
@@ -190,6 +196,8 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         title="New Task"
         submitLabel="Add"
         showTaskPresets
+        activityLimit={TASK_FORM_INPUT_LIMITS.activity}
+        descriptionLimit={TASK_FORM_INPUT_LIMITS.description}
         defaultActivity={drafts.add?.activity ?? ""}
         defaultDescription={drafts.add?.description ?? ""}
         defaultDuration={drafts.add?.duration ?? 0}

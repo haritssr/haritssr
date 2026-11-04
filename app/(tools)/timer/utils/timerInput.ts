@@ -6,9 +6,15 @@ export const TASK_INPUT_LIMITS = {
   maximumDuration: 86_400,
 } as const;
 
+export const TASK_FORM_INPUT_LIMITS = {
+  activity: 25,
+  description: 36,
+} as const;
+
 export function readTaskForm(
   form: FormData,
-  descriptionLimit: number = TASK_INPUT_LIMITS.description
+  descriptionLimit: number = TASK_INPUT_LIMITS.description,
+  activityLimit: number = TASK_INPUT_LIMITS.activity
 ) {
   const hours = Number(form.get("hours"));
   const minutes = Number(form.get("minutes"));
@@ -27,8 +33,8 @@ export function readTaskForm(
   if (activity.length === 0) {
     return "Enter an activity name.";
   }
-  if (activity.length > TASK_INPUT_LIMITS.activity) {
-    return `Use ${TASK_INPUT_LIMITS.activity} characters or fewer for the activity name.`;
+  if (activity.length > activityLimit) {
+    return `Use ${activityLimit} characters or fewer for the activity name.`;
   }
   const descriptionValue = form.get("description");
   const description =

@@ -150,8 +150,8 @@ export default function TimerDetailsPage() {
               stop at midnight.
             </li>
             <li>
-              Names allow 30 characters, descriptions allow 38, and durations
-              range from one second to 24 hours.
+              Task names allow 25 characters and descriptions allow 36 when
+              adding or editing. Durations range from one second to 24 hours.
             </li>
             <li>
               Settings → Daily Tasks lets you add, remove, reorder, and schedule
