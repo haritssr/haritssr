@@ -8,7 +8,7 @@ import { formatRemainingTime } from "@/components/floating/formatRemainingTime";
 import { TASK_LAYOUT } from "./taskPresentation";
 import type { TaskAppearance } from "./taskPresentation";
 
-export function MobileCircularProgress({
+export function MobileTaskProgress({
   task,
   spent,
   appearance,
@@ -17,19 +17,8 @@ export function MobileCircularProgress({
   spent: number;
   appearance: TaskAppearance;
 }) {
-  const percentage = Math.max(0, Math.min(100, (spent / task.duration) * 100));
-  const progressStyle: CSSProperties & {
-    "--timer-progress-fill": string;
-    "--timer-progress-track": string;
-  } = {
-    "--timer-progress-fill": appearance.progress,
-    "--timer-progress-track": "var(--color-slider-track-hover)",
-  };
   return (
-    <div
-      className="flex shrink-0 items-center gap-2 sm:hidden"
-      style={progressStyle}
-    >
+    <div className="flex shrink-0 items-center sm:hidden">
       <div className="text-timer flex flex-col items-end gap-0.5 leading-4 tabular-nums">
         <span className={`font-medium ${appearance.elapsed}`}>
           {formatTimerTime(spent)}
@@ -39,41 +28,6 @@ export function MobileCircularProgress({
           aria-label={formatRemainingTime(task.duration - spent)}
         >
           −{formatTimerTime(Math.max(0, task.duration - spent))}
-        </span>
-      </div>
-      <div className="grid size-10 shrink-0 place-items-center">
-        <svg
-          aria-hidden="true"
-          className="col-start-1 row-start-1 size-8.5 -rotate-90"
-          viewBox="0 0 64 64"
-        >
-          <circle
-            cx="32"
-            cy="32"
-            r="27"
-            fill="none"
-            stroke="var(--timer-progress-track)"
-            strokeWidth="10"
-          />
-          {percentage > 0 && (
-            <circle
-              cx="32"
-              cy="32"
-              r="27"
-              fill="none"
-              stroke="var(--timer-progress-fill)"
-              strokeWidth="10"
-              strokeLinecap="round"
-              pathLength="100"
-              strokeDasharray={`${percentage} 100`}
-            />
-          )}
-        </svg>
-        <span
-          aria-hidden="true"
-          className={`text-timer-progress col-start-1 row-start-1 leading-none tabular-nums ${appearance.elapsed}`}
-        >
-          {percentage.toFixed(0)}
         </span>
       </div>
       <progress
@@ -160,7 +114,7 @@ export default function TaskProgress({
           ) : null}
         </span>
         {timeNote === undefined ? null : (
-          <span className="text-foreground/50 min-w-0 text-center text-xs whitespace-normal tabular-nums sm:text-base sm:group-data-list-view/task-list:text-sm">
+          <span className="text-foreground/50 min-w-0 text-center whitespace-normal tabular-nums">
             {timeNote}
           </span>
         )}

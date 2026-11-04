@@ -3,7 +3,7 @@ import type { ComponentProps, ReactNode } from "react";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 
 import { TASK_LAYOUT, taskAppearance } from "./taskPresentation";
-import TaskProgress, { MobileCircularProgress } from "./TaskProgress";
+import TaskProgress, { MobileTaskProgress } from "./TaskProgress";
 import type { TaskState } from "./taskState";
 
 export default function TaskCardView({
@@ -49,6 +49,15 @@ export default function TaskCardView({
           <div className="flex shrink-0 items-center gap-1">
             {headerActions}
           </div>
+          <span
+            aria-hidden="true"
+            className={`shrink-0 text-sm leading-4 tabular-nums sm:hidden ${appearance.elapsed}`}
+          >
+            {Math.max(0, Math.min(100, (spent / task.duration) * 100)).toFixed(
+              0
+            )}
+            %
+          </span>
         </div>
         <div
           className={`flex h-4 min-w-0 items-center gap-1 text-sm leading-4 sm:text-xs ${task.description.trim() === "" ? "sm:hidden" : ""}`}
@@ -73,7 +82,7 @@ export default function TaskCardView({
         className={`shrink-0 group-data-completed/task:*:opacity-60 ${TASK_LAYOUT.controls}`}
       >
         <div className="min-w-0">
-          <MobileCircularProgress
+          <MobileTaskProgress
             task={task}
             spent={spent}
             appearance={appearance}

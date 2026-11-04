@@ -67,9 +67,11 @@ export default function CompletedTasksTable({
             <li key={task.id} className="bg-interface-hover rounded-2xl p-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium wrap-anywhere">{task.activity}</p>
+                  <p className="leading-5 font-medium wrap-anywhere">
+                    {task.activity}
+                  </p>
                   {task.description.trim() !== "" && (
-                    <p className="text-muted mt-0.5 text-sm wrap-anywhere whitespace-pre-wrap">
+                    <p className="text-muted text-sm leading-4 wrap-anywhere whitespace-pre-wrap">
                       {task.description}
                     </p>
                   )}

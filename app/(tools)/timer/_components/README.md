@@ -73,10 +73,10 @@ the pulse is disabled for reduced motion and does not replay on page load.
 
 The header shows the title and optional single-line description. Long descriptions
 truncate; the full text remains available in Edit Task. At every screen size,
-Edit appears beside the title, followed by the progress and action controls. On mobile, a
-circular progress indicator sits beside stacked elapsed and remaining times; from `sm`, a
-linear bar shows them side by side. Scheduled windows appear beside the mobile
-description. Empty rings have no colored arc. Desktop controls size to their
+Edit appears beside the title, followed by the progress and action controls. On mobile,
+the percentage appears beside Edit, with remaining time below elapsed time; from `sm`, a
+linear bar shows the times side by side. Scheduled windows appear beside the mobile
+description. Desktop controls size to their
 contents so long times and scheduled windows stay clear of the action buttons;
 the title and description use the remaining space. Tasks advance by one second
 per real second.
