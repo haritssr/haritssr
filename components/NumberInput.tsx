@@ -78,7 +78,7 @@ export default function NumberInput({
         {variant === "field" && onReset && value !== null && value !== 0 ? (
           <button
             aria-label={`Reset ${label} to zero`}
-            className="text-muted hover:text-foreground focus-visible:outline-action flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
+            className="text-muted hover:text-foreground focus-visible:outline-action relative flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-sm before:absolute before:-inset-1 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
             disabled={props.disabled}
             onClick={() => {
               inputRef.current?.focus();
@@ -87,7 +87,7 @@ export default function NumberInput({
             title={`Reset ${label} to zero`}
             type="button"
           >
-            <ArrowPathIcon aria-hidden="true" className="size-4" />
+            <ArrowPathIcon aria-hidden="true" className="size-3.5" />
           </button>
         ) : null}
       </div>

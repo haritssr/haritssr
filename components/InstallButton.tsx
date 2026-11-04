@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowDownOnSquareIcon } from "@heroicons/react/24/outline";
 import { useSyncExternalStore } from "react";
 
 import Button from "@/components/Button";
@@ -109,9 +109,9 @@ export default function InstallButton({
         showLabel={showLabel}
         title="Install app"
       >
-        <ArrowDownCircleIcon
+        <ArrowDownOnSquareIcon
           aria-hidden="true"
-          className="size-5.5 shrink-0 stroke-[1.5]"
+          className="size-5 shrink-0 stroke-[1.5]"
         />
         {showLabel ? <span>Install</span> : null}
       </TopBarAction>

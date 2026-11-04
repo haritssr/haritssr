@@ -24,7 +24,7 @@ export default function DurationFields({
   const totalSeconds = durationSeconds(duration);
 
   return (
-    <fieldset className="space-y-3" disabled={disabled}>
+    <fieldset className="space-y-2" disabled={disabled}>
       <legend className={hideLegend ? "sr-only" : "mb-2 text-sm"}>
         Duration
       </legend>
