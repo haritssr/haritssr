@@ -10,7 +10,7 @@ export default function FloatingPlayer({
   return (
     <div
       data-floating-task=""
-      className={`translucent-material border-border shadow-foreground/10 border-hairline relative flex h-10 w-full min-w-0 items-center rounded-full pr-1.5 pl-3 shadow-lg sm:shadow-xl ${className}`}
+      className={`translucent-material border-border shadow-foreground/10 border-hairline relative flex h-10 w-full min-w-0 items-center rounded-full pr-1.5 pl-3 shadow-md sm:shadow-lg ${className}`}
     >
       {children}
     </div>

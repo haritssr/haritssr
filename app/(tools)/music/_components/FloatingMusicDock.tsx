@@ -94,7 +94,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
       <FloatingDockSlot position="music">
         <section
           aria-label="Floating music player"
-          className={`${styles.accent} pointer-events-auto w-full sm:w-[22.4rem]`}
+          className={`${styles.accent} pointer-events-auto w-full sm:w-80`}
         >
           {fullPlayer}
         </section>

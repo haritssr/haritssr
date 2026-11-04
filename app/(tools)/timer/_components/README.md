@@ -157,7 +157,7 @@ preserves footer clearance while the controls shrink. Player height is always
 [useFloatingDockPosition.ts](../../../../components/floating/useFloatingDockPosition.ts)
 measures the real navigation surface and matches its bottom screen gap above it.
 Without mobile navigation it uses safe-area-aware bottom clearance; desktop
-aligns a 22.4rem bar to the site's content width. The dock overlays page content;
+aligns the 20rem player bars to the site's content width. The dock overlays page content;
 mobile footer clearance uses the dock height and a stable safe-area-aware gap,
 independent of the sticky navigation position, to avoid a measurement feedback loop.
 Completion messages share the dock.

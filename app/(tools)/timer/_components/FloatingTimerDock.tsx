@@ -184,7 +184,7 @@ function FloatingTimerPlayer({
     <FloatingDockSlot position="timer">
       <section
         aria-label="Floating task"
-        className="pointer-events-auto w-full max-w-full min-w-0 sm:w-[22.4rem]"
+        className="pointer-events-auto w-full max-w-full min-w-0 sm:w-80"
       >
         {fullPlayer}
       </section>

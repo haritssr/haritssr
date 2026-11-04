@@ -6,7 +6,7 @@ import FloatingPlayer from "@/components/floating/FloatingPlayer";
 
 export default function FloatingTask() {
   return (
-    <FloatingPlayer className="mx-auto max-w-[22.4rem] lg:mx-0">
+    <FloatingPlayer className="mx-auto max-w-80 lg:mx-0">
       <div
         data-floating-details=""
         className="flex min-w-0 flex-1 items-center justify-between gap-2"
