@@ -13,7 +13,7 @@ export function TabsList({
 }) {
   return (
     <BaseTabs.List
-      className={`bg-middle-hover flex w-full max-w-full gap-1 overflow-x-auto rounded-full p-1 ${className}`}
+      className={`bg-interface-hover flex h-8.5 w-full max-w-full gap-0 overflow-x-auto rounded-[7px] p-0.75 sm:gap-1 ${className}`}
       {...props}
     />
   );
@@ -27,7 +27,7 @@ export function TabsTab({
 }) {
   return (
     <BaseTabs.Tab
-      className={`text-foreground/70 hover:text-foreground data-active:text-foreground focus-visible:outline-action flex min-h-9 min-w-fit flex-1 cursor-pointer items-center justify-center rounded-full px-3 text-sm font-medium whitespace-nowrap outline-hidden transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 data-active:bg-white data-active:shadow-sm motion-reduce:transition-none ${className}`}
+      className={`text-foreground/50 hover:text-foreground data-active:text-foreground focus-visible:outline-action flex min-h-0 min-w-fit flex-1 cursor-pointer items-center justify-center rounded px-1.5 text-sm font-normal whitespace-nowrap outline-hidden transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 data-active:bg-white data-active:shadow-sm data-active:shadow-black/20 motion-reduce:transition-none sm:px-3 ${className}`}
       {...props}
     />
   );

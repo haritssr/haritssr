@@ -3,7 +3,6 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 
-import { ButtonGroup, ButtonGroupItem } from "@/components/ButtonGroup";
 import { SelectField } from "@/components/SelectField";
 
 import styles from "./FontPreview.module.css";
@@ -31,9 +30,9 @@ export default function FontPreview({
   return (
     <div className={styles.preview} data-preview-font={font}>
       {header}
-      <div className="@container mb-12 space-y-2">
+      <div className="mb-12 space-y-2">
         <p className="text-muted text-sm">Preview font</p>
-        <div className="max-w-56 @min-[36rem]:hidden [&_label]:sr-only">
+        <div className="max-w-56 [&_label]:sr-only">
           <SelectField
             label="Preview font"
             options={fonts}
@@ -45,21 +44,6 @@ export default function FontPreview({
               }
             }}
           />
-        </div>
-        <div className="hidden @min-[36rem]:block">
-          <ButtonGroup aria-label="Preview font">
-            {fonts.map(({ value, label }) => (
-              <ButtonGroupItem
-                aria-pressed={font === value}
-                key={value}
-                onClick={() => {
-                  setFont(value);
-                }}
-              >
-                {label}
-              </ButtonGroupItem>
-            ))}
-          </ButtonGroup>
         </div>
       </div>
       {children}
