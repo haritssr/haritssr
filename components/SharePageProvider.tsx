@@ -171,11 +171,9 @@ export function ShareToastViewport() {
                 }
               >
                 <Toast.Title
-                  className={`${toast.type === "timer-deadline" ? "text-danger" : "text-foreground"} text-sm leading-5 font-medium`}
+                  className={`${toast.type === "timer-deadline" ? "text-danger" : "text-foreground"} truncate text-sm leading-5 font-medium`}
                 />
-                <Toast.Description
-                  className={`text-muted m-0 text-xs leading-4 ${toast.type === "timer-deadline" ? "wrap-anywhere" : "truncate"}`}
-                />
+                <Toast.Description className="text-muted m-0 truncate text-xs leading-4" />
               </FloatingNotification>
             </Toast.Content>
           </Toast.Root>
