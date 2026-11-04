@@ -21,7 +21,31 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/TimerClient.tsx",
-    "Page composition: Today, toolbar, shared clock, and task collection.",
+    "Page composition: selected Day, Month, date navigation, toolbar, and loading feedback.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimerMonth.tsx",
+    "Sunday-first calendar, scheduled task labels, overflow counts, and date selection.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimerCalendarDay.tsx",
+    "Read-only saved days and future previews; lists unscheduled tasks beside the timeline.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimerCalendarContent.tsx",
+    "Lazily loaded Month and non-today Day content with loading and Retry states.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimerDateNavigation.tsx",
+    "Selected date or month heading, previous/next navigation, and Today shortcut.",
+  ],
+  [
+    "app/(tools)/timer/hooks/useTimerCalendar.ts",
+    "Account-scoped calendar reads, revalidation, errors, and live-data isolation.",
+  ],
+  [
+    "app/(tools)/timer/utils/timerCalendar.ts",
+    "Calendar types, month geometry, recurring previews, and scheduled-task ordering.",
   ],
   [
     "app/(tools)/timer/_components/TimerDataControls.tsx",
@@ -29,7 +53,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimerToolbar.tsx",
-    "Add Task, view controls, and the Settings trigger.",
+    "Add Task, view controls, the Settings trigger, and the date navigation on one row from md.",
   ],
   [
     "app/(tools)/timer/_components/TimerSettings.tsx",

@@ -3,6 +3,7 @@ import type { Transaction } from "@libsql/client";
 
 import {
   readTimerDays,
+  readTimerCalendarState,
   readTimerHistoryState,
   writeTimerPreferences,
   readTimerState,
@@ -36,6 +37,12 @@ import {
   actionSchema,
   preferencesPatchSchema,
 } from "@/app/(tools)/timer/utils/timerValidation";
+
+import {
+  monthDates,
+  resolveCalendarDays,
+  validTimerMonth,
+} from "./utils/timerCalendar";
 
 export { TimerStoreError } from "@/app/(tools)/timer/utils/timerEngine";
 
@@ -188,6 +195,31 @@ export async function changeTimerPreferences(payload: unknown) {
     return { ...snapshot(value), version: snapshotVersion(value) };
   });
   return { ...result, now: new Date().toISOString() };
+}
+
+export async function getTimerCalendar(month: string) {
+  if (!validTimerMonth(month)) {
+    throw new TimerStoreError("Choose a valid month.");
+  }
+  return await timerDatabaseTransaction(async (tx) => {
+    const dates = monthDates(month);
+    const { days, preferences } = await readTimerCalendarState(
+      tx,
+      `${month}-01`,
+      dates.at(-1) ?? `${month}-01`
+    );
+    const now = Date.now();
+    const today = timerDate(now);
+    for (const day of days) {
+      settleTimerDay(day, now);
+    }
+    return {
+      month,
+      today,
+      mode: "turso" as const,
+      days: resolveCalendarDays(month, today, days, preferences.dailyTasks),
+    };
+  }, "read");
 }
 
 export async function getTimerHistory(date: string) {

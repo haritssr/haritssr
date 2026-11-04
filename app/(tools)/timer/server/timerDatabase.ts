@@ -280,6 +280,51 @@ export async function readTimerDays(tx: Transaction, date?: string) {
   return decodeDays(days, tasks);
 }
 
+function decodePreferences(row: ResultSet["rows"][number]) {
+  return preferencesSchema.parse({
+    revision: Number(row.revision),
+    autoplay: row.autoplay === 1,
+    multitask: row.multitask === 1,
+    desktopListView: row.desktop_list_view === 1,
+    notificationsEnabled: row.notifications_enabled === 1,
+    durationPresets:
+      typeof row.duration_presets === "string"
+        ? (JSON.parse(row.duration_presets) as unknown)
+        : undefined,
+    taskPresets:
+      typeof row.task_presets === "string"
+        ? (JSON.parse(row.task_presets) as unknown)
+        : undefined,
+    dailyTasks:
+      typeof row.daily_tasks === "string"
+        ? (JSON.parse(row.daily_tasks) as unknown)
+        : undefined,
+  });
+}
+
+export async function readTimerCalendarState(
+  tx: Transaction,
+  from: string,
+  until: string
+) {
+  const [days, tasks, preferences] = await tx.batch([
+    {
+      sql: "SELECT * FROM timer_days WHERE date BETWEEN ? AND ? ORDER BY date",
+      args: [from, until],
+    },
+    {
+      sql: "SELECT * FROM timer_tasks WHERE date BETWEEN ? AND ? ORDER BY date, position",
+      args: [from, until],
+    },
+    "SELECT * FROM timer_preferences WHERE id = 1",
+  ]);
+  const [row] = preferences.rows;
+  if (row === undefined) {
+    throw new Error("Run bun run migrate:timer to initialize Turso.");
+  }
+  return { days: decodeDays(days, tasks), preferences: decodePreferences(row) };
+}
+
 export async function readTimerState(tx: Transaction, date: string) {
   const [days, tasks, preferences] = await tx.batch([
     ...(await dayQueries(tx, date)),
@@ -291,25 +336,7 @@ export async function readTimerState(tx: Transaction, date: string) {
   }
   return {
     days: decodeDays(days, tasks),
-    preferences: preferencesSchema.parse({
-      revision: Number(row.revision),
-      autoplay: row.autoplay === 1,
-      multitask: row.multitask === 1,
-      desktopListView: row.desktop_list_view === 1,
-      notificationsEnabled: row.notifications_enabled === 1,
-      durationPresets:
-        typeof row.duration_presets === "string"
-          ? (JSON.parse(row.duration_presets) as unknown)
-          : undefined,
-      taskPresets:
-        typeof row.task_presets === "string"
-          ? (JSON.parse(row.task_presets) as unknown)
-          : undefined,
-      dailyTasks:
-        typeof row.daily_tasks === "string"
-          ? (JSON.parse(row.daily_tasks) as unknown)
-          : undefined,
-    }),
+    preferences: decodePreferences(row),
   };
 }
 

@@ -215,7 +215,7 @@ async function fetchTimer(
 
 async function loadTimer<T>(
   load: (signal: AbortSignal) => Promise<T>,
-  resource: "snapshot" | "history"
+  resource: "snapshot" | "history" | "calendar"
 ): Promise<T> {
   const started = performance.now();
   const controller = new AbortController();
@@ -313,6 +313,20 @@ export async function fetchTimerSnapshot() {
       snapshotRequest = undefined;
     }
   }
+}
+
+export async function fetchTimerCalendar(month: string) {
+  return await loadTimer(async (signal) => {
+    const [{ calendarSchema }, result] = await Promise.all([
+      import("@/app/(tools)/timer/utils/timerValidation"),
+      fetchTimer(`/api/timer?month=${encodeURIComponent(month)}`, { signal }),
+    ]);
+    const calendar = calendarSchema.parse(result.data);
+    if (calendar.month !== month) {
+      throw new Error("Timer returned a different month.");
+    }
+    return calendar;
+  }, "calendar");
 }
 
 export async function fetchTimerHistory(date: string) {

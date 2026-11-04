@@ -16,6 +16,7 @@ import {
   DAILY_DESCRIPTION_LIMIT,
   MAX_DAILY_TASKS,
 } from "./dailyTasks";
+import { monthDates, validTimerMonth } from "./timerCalendar";
 
 export const availabilityWindowSchema = z
   .object({
@@ -289,3 +290,21 @@ export const historySchema = z.object({
     .array(z.object({ date: dateSchema, spent: z.number().nonnegative() }))
     .length(30),
 });
+
+export const calendarSchema = z
+  .object({
+    month: z.string().refine(validTimerMonth),
+    today: dateSchema,
+    mode: z.enum(["turso", "demo"]),
+    days: z.array(daySchema).min(28).max(31),
+  })
+  .refine(({ month, days }) => {
+    if (!validTimerMonth(month)) {
+      return false;
+    }
+    const dates = monthDates(month);
+    return (
+      days.length === dates.length &&
+      days.every((day, index) => day.date === dates[index])
+    );
+  });

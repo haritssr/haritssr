@@ -146,7 +146,7 @@ export const navigationRoutes: readonly RouteDoc[] = [
   {
     route: "/timer",
     title: "Timer",
-    description: "A simple timer for focused work and everyday tasks.",
+    description: "Schedule and time daily tasks.",
     group: "Tools",
   },
   ...topLevelNavigation.map((route) => ({

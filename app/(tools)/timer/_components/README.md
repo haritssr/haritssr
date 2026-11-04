@@ -374,8 +374,33 @@ Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
 Settings and History use icons with accessible labels at every screen size.
 Settings contains the download button below Sound, with a loading label during download.
-The view buttons sit opposite Settings and History in the toolbar. Day shows the
-task list; Week, Month, and Year show placeholder labels until their views are built.
+The view buttons sit opposite Settings and History in the toolbar. Day
+(the internal `day` value) shows the selected date. Today uses the live task
+list and timeline; other dates use read-only cards and a timeline, including
+finished and missed tasks. Add Task is disabled outside today. Settings and
+Today History keep their existing behavior. Day navigation includes a date
+heading, previous/next day controls, and a Today shortcut.
+
+Month renders a Sunday-first calendar through `TimerMonth`. Each date is one
+keyboard-accessible button that opens Day. Cells show scheduled tasks in
+available-time order (saved order breaks ties), with two labels on mobile,
+three from `sm`, and +N for overflow. Today has a red date marker. Month
+navigation uses previous/next month controls and a Today shortcut. Week and
+Year remain placeholders.
+
+`TimerClient` loads Month and non-today Day content with `React.lazy` and Suspense
+([TimerCalendarContent.tsx](TimerCalendarContent.tsx)). Non-today Day lists only
+tasks without a window, with no intro or count text; timeline
+cards on ended days show spent / duration (in `title` for blocks under 30 minutes).
+`useTimerCalendar` reads `/api/timer?month=YYYY-MM` only for Month and non-today
+Day views. The endpoint uses bounded date queries and read-only transactions;
+future dates project current daily definitions without creating records, while
+missing past days are empty. Demo requests use sample days. Calendar reads
+never enter the live mutation runtime or automatic-start scheduler. SWR keys
+include month and account identity; mode checks hide data during account
+transitions. Focus, polling, broadcasts, and snapshot revisions refresh visible
+data. Today’s cell uses the live snapshot. Loading and failed reads provide
+feedback and a Retry button.
 The controls have accessible names.
 These controls sit beside Add Task on desktop. Below 768px, Add Task is a
 41px-high blue pill labeled “Add Task” in white, matching the topbar action

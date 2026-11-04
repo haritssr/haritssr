@@ -180,6 +180,17 @@ export default function TimerDetailsPage() {
               marks the current Jakarta time.
             </li>
             <li>
+              Month shows a Sunday-first calendar of scheduled tasks. Select a
+              date to open Day, or use the arrows and Today shortcut to
+              navigate. Past days show saved activities and a read-only
+              schedule. Future days preview recurring daily tasks without saving
+              them. On these days the list shows only tasks without available
+              time; scheduled tasks appear on the timeline, with time spent on
+              past days. Only today allows task changes. Calendar cells show two
+              task labels on mobile, three on larger screens, and a count for
+              the rest. Week and Year remain placeholders.
+            </li>
+            <li>
               Drag empty future time to create New Task with no description.
               Selection snaps to 15-minute slots, and the timer duration matches
               the selected window. On touchscreens, hold then drag; ordinary

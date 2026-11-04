@@ -16,7 +16,6 @@ export const timerRelationships = [
       accDescr: The root layout mounts TimerProvider. TimerClient reads its shared snapshot. The deferred runtime shares one controller through the provider; controls subscribe to selected fields. The controller and Statistics call the protected Timer API. The store applies timerEngine rules inside Turso transactions.
       Layout["app/layout.tsx"] -->|mounts across navigation| Provider["app/(tools)/timer/_components/TimerProvider.tsx: lazy activation and selected subscriptions"]
       Page["app/(tools)/timer/page.tsx"] --> Client["app/(tools)/timer/TimerClient.tsx"]
-      Page --> Date["TimerDate.tsx: date label from app/(tools)/timer/utils/timer.ts"]
       ClockPage["app/(tools)/timer/clock/page.tsx"] --> ClockFace["AnalogClock.tsx: Jakarta time"]
       Provider -->|loads once when needed| Runtime["app/(tools)/timer/_components/TimerRuntime.tsx"]
       Runtime -->|creates and registers once| Controller["app/(tools)/timer/utils/timerController.ts: stable actions and selections"]
@@ -27,13 +26,16 @@ export const timerRelationships = [
       Position --> Navigation["components/TabBarBottom.tsx"]
       Client --> Toolbar["TimerToolbar.tsx"]
       Client --> List["TaskList.tsx"]
+      Client -->|React.lazy| Calendar["TimerCalendarContent.tsx: TimerMonth / TimerCalendarDay date browsing"]
+      Client --> CalendarRead["hooks/useTimerCalendar.ts: account-scoped month reads"]
+      CalendarRead -->|fetchTimerCalendar| Transport
       Runtime -->|snapshot loading and broadcasts| Transport
       Controller --> Mutations["app/(tools)/timer/utils/timerMutations.ts: ordered optimistic changes"]
       Mutations -->|sendTimerAction / saveTimerPreferences| Transport["app/(tools)/timer/utils/timerClient.ts"]
       StatsPage["app/(tools)/timer/statistics/page.tsx"] --> Stats["app/(tools)/timer/statistics/Statistics.tsx"]
       Stats -->|fetchTimerHistory| Transport
       Transport -->|protected GET / POST / PATCH| API["app/api/timer/route.ts"]
-      API --> Store["app/(tools)/timer/store.ts: snapshots, actions, preferences, history"]
+      API --> Store["app/(tools)/timer/store.ts: snapshots, actions, preferences, history, calendar"]
       Store --> Engine["app/(tools)/timer/utils/timerEngine.ts: shared commands and preferences"]
       Mutations --> Engine
       Store --> Database["app/(tools)/timer/server/timerDatabase.ts: SQL mapping and transactions"]
@@ -50,7 +52,7 @@ export const timerRelationships = [
       "TimerProvider checks the shared account session and loads TimerRuntime for the owner or a Timer page, recovering saved running tasks on direct navigation or reload. Anonymous visitors elsewhere do not load Timer state. TimerRuntime creates one controller and registers it with the provider once. SWR loads confirmed snapshots; timerMutations projects ordered pending changes in memory. useTimer subscribes directly to selected fields with stable action functions; mounting it in app/layout.tsx keeps scheduling and completion effects alive across navigation.",
       "FloatingTimerDock reuses the shared snapshot outside /timer. FloatingDock displays full Music and Timer pills with Music above Timer, keeping both sets of controls accessible. Completion feedback uses the shared toast. useFloatingDockPosition measures the dock and mobile navigation gap and reserves footer clearance.",
       "act projects the change immediately, then timerMutations calls sendTimerAction in order through the protected API. Task actions read saved preferences in the same Turso transaction. Optimistic projection and server commands share settlement and preference rules; server authorization, date checks, revisions, and notification claims remain authoritative. timerDatabase owns preference writes and historical-total queries as well as task persistence. receive protects newer confirmed revisions and rebases pending changes; failed writes restore confirmed state and preserve form drafts. Reads and committed changes broadcast validated snapshots to other tabs without another fetch. One visible tab owns periodic polling through Web Locks.",
-      "Statistics uses GET /api/timer?date=YYYY-MM-DD for history and 30-day totals. The API checks access before returning personal Turso records.",
+      "Statistics uses GET /api/timer?date=YYYY-MM-DD for history and 30-day totals. Calendar browsing uses GET /api/timer?month=YYYY-MM with bounded read-only queries and unsaved future daily previews. Calendar responses stay outside the mutation runtime. The API checks access before returning personal Turso records.",
     ],
   },
   {

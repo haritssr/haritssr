@@ -8,10 +8,9 @@ import PageTitle from "@/components/PageTitle";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import AnalogClock from "./_components/AnalogClock";
-import TimerDate from "./_components/TimerDate";
 import TimerClient from "./TimerClient";
 
-const description = "A simple timer for focused work and everyday tasks.";
+const description = "Schedule and time daily tasks.";
 
 export const metadata = createPageMetadata({
   title: "Timer",
@@ -38,13 +37,7 @@ export default function TimerPage() {
         }
       >
         <PageTitle>Timer</PageTitle>
-        <PageDescription>
-          <span className="block min-h-lh">
-            <TimerContent fallback="Jakarta time · WIB">
-              <TimerDate />
-            </TimerContent>
-          </span>
-        </PageDescription>
+        <PageDescription>{description}</PageDescription>
         <nav aria-label="Timer" className="flex flex-wrap gap-3">
           <InternalLink href="/timer/details">Details</InternalLink>
           <InternalLink href="/timer/statistics">Statistics</InternalLink>

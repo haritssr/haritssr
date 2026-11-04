@@ -10,9 +10,11 @@ import {
   changeTimerPreferences,
   exportTimer,
   getTimerHistory,
+  getTimerCalendar,
   getTimerSnapshot,
   TimerStoreError,
 } from "@/app/(tools)/timer/store";
+import { DEFAULT_DAILY_TASKS } from "@/app/(tools)/timer/utils/dailyTasks";
 import {
   createSampleTimerDay,
   shiftTimerDate,
@@ -20,6 +22,11 @@ import {
   timerDate,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
+import {
+  monthDates,
+  resolveCalendarDays,
+  validTimerMonth,
+} from "@/app/(tools)/timer/utils/timerCalendar";
 import {
   TIMER_REQUEST_STARTED_HEADER,
   TIMER_RESPONSE_TIME_HEADER,
@@ -104,6 +111,31 @@ async function read(request: Request, started: number) {
         );
       }
       return NextResponse.json(await exportTimer(), { headers });
+    }
+    const month = query.get("month");
+    if (month !== null) {
+      if (!validTimerMonth(month) || query.has("date")) {
+        throw new TimerStoreError(
+          "Choose a valid month without a date filter."
+        );
+      }
+      const today = timerDate();
+      const calendar = owner
+        ? await getTimerCalendar(month)
+        : {
+            month,
+            today,
+            mode: "demo" as const,
+            days: resolveCalendarDays(
+              month,
+              today,
+              monthDates(month)
+                .filter((date) => date <= today)
+                .map(createSampleTimerDay),
+              DEFAULT_DAILY_TASKS
+            ),
+          };
+      return NextResponse.json(calendar, { headers: timedHeaders(started) });
     }
     const date = query.get("date");
     if (!owner) {
