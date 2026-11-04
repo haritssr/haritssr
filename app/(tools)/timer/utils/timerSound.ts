@@ -47,27 +47,27 @@ export function playCompletionRing(context: AudioContext | null) {
     const gain = context.createGain();
     const start = context.currentTime;
     gain.gain.setValueAtTime(0.0001, start);
-    for (const offset of [0, 0.5]) {
+    const notes = [523.25, 659.25, 783.99, 1046.5];
+    const oscillator = context.createOscillator();
+    oscillator.type = "sine";
+    for (const [index, frequency] of notes.entries()) {
+      const offset = index * 0.15;
+      oscillator.frequency.setValueAtTime(frequency, start + offset);
       gain.gain.setValueAtTime(0.0001, start + offset);
-      gain.gain.linearRampToValueAtTime(0.05, start + offset + 0.02);
-      gain.gain.setValueAtTime(0.05, start + offset + 0.3);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + offset + 0.4);
+      gain.gain.linearRampToValueAtTime(0.07, start + offset + 0.015);
+      gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        start + offset + (index === notes.length - 1 ? 0.4 : 0.14)
+      );
     }
+    oscillator.connect(gain);
     gain.connect(context.destination);
-    const oscillators = [440, 480].map((frequency) => {
-      const oscillator = context.createOscillator();
-      oscillator.frequency.value = frequency;
-      oscillator.connect(gain);
-      oscillator.start(start);
-      oscillator.stop(start + 0.9);
-      return oscillator;
-    });
-    oscillators[0]?.addEventListener(
+    oscillator.start(start);
+    oscillator.stop(start + 0.9);
+    oscillator.addEventListener(
       "ended",
       () => {
-        for (const oscillator of oscillators) {
-          oscillator.disconnect();
-        }
+        oscillator.disconnect();
         gain.disconnect();
       },
       { once: true }
@@ -75,10 +75,8 @@ export function playCompletionRing(context: AudioContext | null) {
     return () => {
       gain.gain.cancelScheduledValues(context.currentTime);
       gain.gain.setValueAtTime(0, context.currentTime);
-      for (const oscillator of oscillators) {
-        oscillator.stop();
-        oscillator.disconnect();
-      }
+      oscillator.stop();
+      oscillator.disconnect();
       gain.disconnect();
     };
   } catch {
