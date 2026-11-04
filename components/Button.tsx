@@ -51,7 +51,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "timer-running":
     "border border-transparent bg-danger font-medium text-white hover:bg-danger/90 focus-visible:outline-danger",
   "timer-paused":
-    "border border-transparent bg-foreground/90 font-medium text-white hover:bg-foreground focus-visible:outline-foreground",
+    "border border-transparent bg-foreground font-medium text-white hover:bg-foreground/90 focus-visible:outline-foreground",
   "timer-secondary":
     "border-[0.5px] border-border bg-secondary-button-surface font-medium text-foreground shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-colors duration-150 select-none enabled:hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground",
   music:
@@ -76,7 +76,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "icon-active":
     "gap-0 text-action transition-colors duration-150 focus-visible:outline-action",
   "neutral-subtle":
-    "border border-transparent bg-foreground/90 font-medium text-white transition-colors duration-150 enabled:hover:bg-foreground focus-visible:outline-foreground",
+    "border border-transparent bg-foreground font-medium text-white transition-colors duration-150 enabled:hover:bg-foreground/90 focus-visible:outline-foreground",
   "neutral-subtle-underlined":
     "gap-0 rounded-none p-0 font-semibold text-foreground underline underline-offset-2 transition-colors duration-150 hover:text-action focus-visible:outline-action",
   "secondary-strong": BUTTON_SECONDARY_CLASS,
