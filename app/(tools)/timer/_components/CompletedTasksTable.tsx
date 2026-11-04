@@ -6,6 +6,7 @@ import {
   taskCompletionTime,
   taskSpent,
   taskWindowEnd,
+  timerProgressPercent,
 } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import { windowRange } from "@/app/(tools)/timer/utils/timerTime";
@@ -50,7 +51,7 @@ export default function CompletedTasksTable({
         task,
         availableTime,
         spent,
-        percentage: Math.min(100, (spent / task.duration) * 100),
+        percentage: timerProgressPercent(spent, task.duration),
         reached,
         missed,
         closed,
@@ -121,9 +122,7 @@ export default function CompletedTasksTable({
                 </div>
                 <div>
                   <dt>Progress</dt>
-                  <dd className="text-foreground">
-                    {percentage >= 100 ? "100" : percentage.toFixed(0)}%
-                  </dd>
+                  <dd className="text-foreground">{percentage}%</dd>
                 </div>
               </dl>
             </li>
@@ -233,7 +232,7 @@ export default function CompletedTasksTable({
                     {formatTimerTime(task.duration)}
                   </td>
                   <td className="tabular-nums">
-                    {percentage >= 100 ? "100" : percentage.toFixed(0)}
+                    {percentage}
                     <span className="lg:group-data-list-view/task-layout:sr-only">
                       %
                     </span>

@@ -78,7 +78,11 @@ linear bar shows the times side by side. Scheduled windows appear beside the mob
 description. Desktop controls size to their
 contents so long times and scheduled windows stay clear of the action buttons;
 the title and description use the remaining space. Tasks advance by one second
-per real second.
+per real second. Elapsed-time arithmetic uses integer milliseconds, and stored
+fractional seconds are normalized to that precision when read. This prevents
+floating-point drift from leaving a fully timed window just below completion.
+Displayed percentages round down; only a met duration displays 100%. Genuine
+shortfalls and manual pauses remain incomplete.
 Unavailable Done controls are dimmed and have no hover effect or tooltip.
 Tasks with an availability window show a `size-5` danger warning after Edit
 when remaining duration plus a ten-minute buffer reaches the closing time.

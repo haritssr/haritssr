@@ -1,7 +1,10 @@
 import { ClockIcon } from "@heroicons/react/24/outline";
 import type { CSSProperties } from "react";
 
-import { formatTimerTime } from "@/app/(tools)/timer/utils/timer";
+import {
+  formatTimerTime,
+  timerProgressPercent,
+} from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import { formatRemainingTime } from "@/components/floating/formatRemainingTime";
 
@@ -21,8 +24,7 @@ export function MobileTaskProgress({
     <div className="flex shrink-0 items-center sm:hidden">
       <div className="text-timer flex flex-col items-end gap-0.5 leading-4 tabular-nums">
         <span className={`font-medium ${appearance.elapsed}`}>
-          {Math.max(0, Math.min(100, (spent / task.duration) * 100)).toFixed(0)}
-          %
+          {timerProgressPercent(spent, task.duration)}%
         </span>
         <span
           className="text-foreground/50"
@@ -66,8 +68,7 @@ export default function TaskProgress({
   const stackClass = compact
     ? "@container flex flex-col gap-1.5"
     : "flex flex-col gap-1 sm:gap-0.5";
-  const percentage = Math.min(100, (spent / task.duration) * 100);
-  const percentageLabel = percentage.toFixed(0);
+  const percentageLabel = timerProgressPercent(spent, task.duration);
   const progressStyle: CSSProperties & {
     "--timer-progress-fill": string;
     "--timer-progress-track": string;

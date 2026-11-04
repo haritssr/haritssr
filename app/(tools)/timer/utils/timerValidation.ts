@@ -5,6 +5,7 @@ import {
   DEFAULT_TASK_PRESETS,
   MAX_TIMER_TASKS,
   validTimerDate,
+  timerMilliseconds,
 } from "@/app/(tools)/timer/utils/timer";
 import {
   TASK_FORM_INPUT_LIMITS,
@@ -106,7 +107,10 @@ const taskSchema = z
       .int()
       .min(TASK_INPUT_LIMITS.minimumDuration)
       .max(TASK_INPUT_LIMITS.maximumDuration),
-    spent: z.number().min(0),
+    spent: z
+      .number()
+      .min(0)
+      .transform((value) => timerMilliseconds(value) / 1000),
     startedAt: instant.nullable(),
     lastStartedAt: instant.optional(),
     reachedAt: instant.nullable(),

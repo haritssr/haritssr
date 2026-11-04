@@ -227,6 +227,22 @@ export function timerMidnight(date: string) {
   return timerDayBounds(date).end;
 }
 
+// Runtime timestamps have millisecond precision. Keep elapsed arithmetic in the
+// same integer unit so repeated settlements cannot lose the final fraction.
+export function timerMilliseconds(seconds: number) {
+  return Math.round(seconds * 1000);
+}
+
+export function timerProgressPercent(spent: number, duration: number) {
+  return Math.max(
+    0,
+    Math.min(
+      100,
+      Math.floor((timerMilliseconds(spent) * 100) / timerMilliseconds(duration))
+    )
+  );
+}
+
 export function taskTiming(
   task: TimerTask,
   bounds: TimerDayBounds,
@@ -238,12 +254,12 @@ export function taskTiming(
   const elapsed =
     task.startedAt === null
       ? 0
-      : Math.max(
-          0,
-          (Math.min(now, closesAt) - Date.parse(task.startedAt)) / 1000
-        );
+      : Math.max(0, Math.min(now, closesAt) - Date.parse(task.startedAt));
   return {
-    spent: Math.min(task.duration, task.spent + elapsed),
+    spent: Math.min(
+      task.duration,
+      (timerMilliseconds(task.spent) + elapsed) / 1000
+    ),
     available: now >= opensAt && now < closesAt,
     opensAt,
     closesAt,
@@ -282,11 +298,13 @@ export function taskTransitionTime(task: TimerTask, date: string) {
 export function taskCompletionTime(task: TimerTask) {
   return task.startedAt === null
     ? Infinity
-    : Date.parse(task.startedAt) + (task.duration - task.spent) * 1000;
+    : Date.parse(task.startedAt) +
+        timerMilliseconds(task.duration) -
+        timerMilliseconds(task.spent);
 }
 
 export function formatTimerTime(seconds: number) {
-  const value = Math.max(0, Math.floor(seconds));
+  const value = Math.max(0, Math.floor(timerMilliseconds(seconds) / 1000));
   const hours = Math.floor(value / 3600);
   const minutes = Math.floor((value % 3600) / 60);
   const remainder = String(value % 60).padStart(2, "0");
