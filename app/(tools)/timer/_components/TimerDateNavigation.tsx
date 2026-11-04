@@ -42,7 +42,9 @@ export default function TimerDateNavigation({
             onChange(today);
           }}
         >
-          Today
+          <span className={date === today ? "text-action" : undefined}>
+            Today
+          </span>
         </Button>
         <Button
           variant="outline"

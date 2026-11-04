@@ -72,7 +72,7 @@ export default function TimerClient() {
   }
   return (
     <TimerSettingsScope>
-      <div className="space-y-4 pb-18 md:pb-0">
+      <div className="space-y-4 pb-18 md:space-y-5 md:pb-0">
         <TimerDataControls>
           <TimerToolbar
             view={view}
