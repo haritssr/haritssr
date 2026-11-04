@@ -9,13 +9,13 @@ import {
 import styles from "./TaskTimeline.module.css";
 
 const weekdays = [
-  "Sunday",
   "Monday",
   "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
   "Saturday",
+  "Sunday",
 ];
 
 export default function TimerMonth({
@@ -82,12 +82,12 @@ function MonthDay({
   return (
     <button
       type="button"
-      aria-label={`${calendarDateLabel(date)}, ${tasks.length} scheduled tasks${date > today ? ", preview" : ""}`}
+      aria-label={`${calendarDateLabel(date)}, ${tasks.length} scheduled tasks${date > today ? ", future day" : ""}`}
       aria-current={date === today ? "date" : undefined}
       onClick={() => {
         onSelect(date);
       }}
-      className={`focus-visible:outline-action hover:bg-interface-hover border-border relative flex min-h-28 min-w-0 cursor-pointer flex-col gap-1 border-b px-0.5 py-2 text-left outline-hidden focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 sm:min-h-40 sm:gap-1.5 sm:px-1 ${selected ? "bg-interface-hover/50" : ""}`}
+      className={`focus-visible:outline-action hover:bg-interface-hover border-border relative flex min-w-0 cursor-pointer flex-col gap-1 border-b px-0.5 py-2 text-left outline-hidden focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 sm:gap-1.5 sm:px-1 ${selected ? "bg-interface-hover/50" : ""}`}
     >
       <span
         className={`mx-auto flex size-7 shrink-0 items-center justify-center rounded-full text-sm tabular-nums ${date === today ? "bg-danger text-white" : "text-foreground"}`}

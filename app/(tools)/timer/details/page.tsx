@@ -160,10 +160,10 @@ export default function TimerDetailsPage() {
             <li>
               Every task has a Type, Work or Leisure, set in the task form,
               Presets, and Daily Tasks. Choosing a preset also sets its Type.
-              Scheduled blocks in Day and Month are violet for Work and amber
-              for Leisure. Running blocks turn green, and finished or missed
-              blocks fade in their own color. Tasks saved before Type existed
-              count as Work.
+              Scheduled blocks in Day, Week, and Month are violet for Work and
+              amber for Leisure. Running blocks turn green, and finished or
+              missed blocks fade in their own color. Tasks saved before Type
+              existed count as Work.
             </li>
             <li>
               Unscheduled daily tasks start manually. Editing a card changes
@@ -191,7 +191,7 @@ export default function TimerDetailsPage() {
               marks the current Jakarta time.
             </li>
             <li>
-              Month shows a Sunday-first calendar of scheduled tasks. Select a
+              Month shows a Monday-first calendar of scheduled tasks. Select a
               date to open Day, or use the arrows and Today shortcut to
               navigate. Past days show saved activities and a read-only
               schedule. Future days preview recurring daily tasks without saving
@@ -199,7 +199,18 @@ export default function TimerDetailsPage() {
               time; scheduled tasks appear on the timeline, with time spent on
               past days. Only today allows task changes. Calendar cells show two
               task labels on mobile, three on larger screens, and a count for
-              the rest. Week and Year remain placeholders.
+              the rest.
+            </li>
+            <li>
+              Week shows Monday to Sunday as read-only hourly schedules. Select
+              a date to open Day for editing or playback, or use the arrows and
+              Today shortcut to change weeks. Weeks that cross months load both.
+            </li>
+            <li>
+              Year shows twelve Monday-first mini calendars, with the current
+              month in red and today circled. Select a month to open it, or use
+              the arrows and Today shortcut to change years. Year loads no task
+              data.
             </li>
             <li>
               Drag empty future time to create New Task with no description.

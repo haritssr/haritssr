@@ -1,26 +1,34 @@
 "use client";
 
 import { Suspense, lazy, useState } from "react";
-import type { ReactNode } from "react";
 
 import TaskList from "./_components/TaskList";
 import TimerDataControls from "./_components/TimerDataControls";
-import TimerDateNavigation from "./_components/TimerDateNavigation";
+import {
+  TimerDateControls,
+  TimerDateHeading,
+} from "./_components/TimerDateNavigation";
 import { useTimer } from "./_components/TimerProvider";
 import TimerSettingsScope from "./_components/TimerSettings";
 import TimerToolbar from "./_components/TimerToolbar";
+import TimerYear from "./_components/TimerYear";
 import useTimerCalendar from "./hooks/useTimerCalendar";
 import useTimerClock from "./hooks/useTimerClock";
-import { timerDate } from "./utils/timer";
-import { calendarLoadingLabel } from "./utils/timerCalendar";
+import { shiftTimerDate, timerDate } from "./utils/timer";
+import {
+  calendarLoadingLabel,
+  viewPeriodDate,
+  weekStart,
+} from "./utils/timerCalendar";
+import type { TimerView } from "./utils/timerCalendar";
 
-// Today's Day view never downloads the Month and other-day views.
+// Today's Day view never downloads the Week, Month, and other-day views.
 const TimerCalendarContent = lazy(
   async () => await import("./_components/TimerCalendarContent")
 );
 
 export default function TimerClient() {
-  const [view, setView] = useState<"day" | "week" | "month" | "year">("day");
+  const [view, setView] = useState<TimerView>("day");
   const { snapshot, clockOffset } = useTimer("snapshot", "clockOffset");
   const now = useTimerClock(snapshot, clockOffset, true, 60_000);
   const today = snapshot?.today ?? timerDate(now);
@@ -28,13 +36,23 @@ export default function TimerClient() {
   const [selection, setSelection] = useState<string | null>(null);
   const selectedDate = selection ?? today;
   const [displayedMonth, setDisplayedMonth] = useState<string | null>(null);
-  const month =
-    view === "month"
-      ? (displayedMonth ?? selectedDate.slice(0, 7))
-      : selectedDate.slice(0, 7);
+  const [displayedWeek, setDisplayedWeek] = useState<string | null>(null);
+  const week = displayedWeek ?? weekStart(selectedDate);
+  let month = selectedDate.slice(0, 7);
+  // Year shares Month's displayed month so switching between them keeps the year.
+  if (view === "month" || view === "year") {
+    month = displayedMonth ?? month;
+  } else if (view === "week") {
+    month = week.slice(0, 7);
+  }
   const needsCalendar =
-    view === "month" || (view === "day" && selectedDate !== today);
-  const { calendar, error, retry } = useTimerCalendar(month, needsCalendar);
+    view === "day" ? selectedDate !== today : view !== "year";
+  // A week that crosses a month boundary also reads the following month.
+  const { calendar, error, retry } = useTimerCalendar(
+    month,
+    needsCalendar,
+    view === "week" ? shiftTimerDate(week, 6).slice(0, 7) : month
+  );
   const days = calendar?.days.map((day) =>
     day.date === today && snapshot ? snapshot.day : day
   );
@@ -42,33 +60,25 @@ export default function TimerClient() {
   function selectDate(date: string) {
     setSelection(date === today ? null : date);
     setDisplayedMonth(date.slice(0, 7));
+    setDisplayedWeek(null);
   }
   function selectView(next: typeof view) {
-    if (next === "month") {
+    if (next === "month" || next === "year") {
       setDisplayedMonth(selectedDate.slice(0, 7));
+    } else if (next === "week") {
+      setDisplayedWeek(null);
     }
     setView(next);
   }
-  let navigation: ReactNode = null;
-  if (view === "day") {
-    navigation = (
-      <TimerDateNavigation
-        date={selectedDate}
-        today={today}
-        onChange={selectDate}
-      />
-    );
-  } else if (view === "month") {
-    navigation = (
-      <TimerDateNavigation
-        monthly
-        date={`${month}-01`}
-        today={today}
-        onChange={(date) => {
-          setDisplayedMonth(date.slice(0, 7));
-        }}
-      />
-    );
+  const periodDate = viewPeriodDate(view, `${month}-01`, week, selectedDate);
+  function changePeriod(date: string) {
+    if (view === "week") {
+      setDisplayedWeek(weekStart(date));
+    } else if (view === "month" || view === "year") {
+      setDisplayedMonth(date.slice(0, 7));
+    } else {
+      selectDate(date);
+    }
   }
   return (
     <TimerSettingsScope>
@@ -78,7 +88,15 @@ export default function TimerClient() {
             view={view}
             onViewChange={selectView}
             editableDate={selectedDate === today}
-            navigation={navigation}
+            heading={<TimerDateHeading date={periodDate} period={view} />}
+            dateControls={
+              <TimerDateControls
+                date={periodDate}
+                today={today}
+                period={view}
+                onChange={changePeriod}
+              />
+            }
           />
         </TimerDataControls>
         {needsCalendar ? (
@@ -87,7 +105,7 @@ export default function TimerClient() {
               <output className="text-muted block">
                 {calendarLoadingLabel(
                   view,
-                  view === "month" ? month : selectedDate
+                  viewPeriodDate(view, month, week, selectedDate)
                 )}
               </output>
             }
@@ -98,6 +116,7 @@ export default function TimerClient() {
               error={error}
               retry={retry}
               month={month}
+              week={week}
               today={today}
               selectedDate={selectedDate}
               days={days}
@@ -110,11 +129,18 @@ export default function TimerClient() {
             />
           </Suspense>
         ) : null}
+        {view === "year" ? (
+          <TimerYear
+            year={month.slice(0, 4)}
+            today={today}
+            onSelect={(next) => {
+              setDisplayedMonth(next);
+              setView("month");
+            }}
+          />
+        ) : null}
         {view === "day" && selectedDate === today ? (
           <TaskList now={now} />
-        ) : null}
-        {view === "week" || view === "year" ? (
-          <p className="capitalize">{view}</p>
         ) : null}
       </div>
     </TimerSettingsScope>

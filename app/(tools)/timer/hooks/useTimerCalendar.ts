@@ -10,7 +10,38 @@ import {
   subscribeTimerChanges,
 } from "../utils/timerClient";
 
-export default function useTimerCalendar(month: string, active: boolean) {
+/**
+ * Reads `month`, plus `endMonth` when a displayed week crosses into it. Both
+ * months must load before the combined calendar is returned.
+ */
+export default function useTimerCalendar(
+  month: string,
+  active: boolean,
+  endMonth = month
+) {
+  const spansMonths = endMonth !== month;
+  const first = useMonthCalendar(month, active);
+  const second = useMonthCalendar(endMonth, active && spansMonths);
+  if (!spansMonths) {
+    return first;
+  }
+  return {
+    calendar:
+      first.calendar && second.calendar
+        ? {
+            ...first.calendar,
+            days: [...first.calendar.days, ...second.calendar.days],
+          }
+        : undefined,
+    error: first.error ?? second.error,
+    retry: () => {
+      first.retry();
+      second.retry();
+    },
+  };
+}
+
+function useMonthCalendar(month: string, active: boolean) {
   const { snapshot } = useTimer("snapshot");
   const account = useCalendarAccount(snapshot?.mode);
   const { identity, mode } = account;

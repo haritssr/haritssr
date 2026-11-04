@@ -26,8 +26,9 @@ export const timerRelationships = [
       Position --> Navigation["components/TabBarBottom.tsx"]
       Client --> Toolbar["TimerToolbar.tsx"]
       Client --> List["TaskList.tsx"]
-      Client -->|React.lazy| Calendar["TimerCalendarContent.tsx: TimerMonth / TimerCalendarDay date browsing"]
-      Client --> CalendarRead["hooks/useTimerCalendar.ts: account-scoped month reads"]
+      Client --> Year["TimerYear.tsx: data-free year overview"]
+      Client -->|React.lazy| Calendar["TimerCalendarContent.tsx: TimerWeek / TimerMonth / TimerCalendarDay date browsing"]
+      Client --> CalendarRead["hooks/useTimerCalendar.ts: account-scoped month and cross-month week reads"]
       CalendarRead -->|fetchTimerCalendar| Transport
       Runtime -->|snapshot loading and broadcasts| Transport
       Controller --> Mutations["app/(tools)/timer/utils/timerMutations.ts: ordered optimistic changes"]

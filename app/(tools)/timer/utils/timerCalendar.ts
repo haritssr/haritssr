@@ -28,9 +28,37 @@ export function shiftTimerMonth(month: string, amount: number) {
   return date.toISOString().slice(0, 7);
 }
 
+export type TimerView = "day" | "week" | "month" | "year";
+
+/** Monday that starts the week containing `date`. */
+export function weekStart(date: string) {
+  const weekday = new Date(`${date}T00:00:00Z`).getUTCDay();
+  return shiftTimerDate(date, -((weekday + 6) % 7));
+}
+
+/** Monday-to-Sunday dates of the week containing `date`. */
+export function weekDates(date: string) {
+  const start = weekStart(date);
+  return Array.from({ length: 7 }, (_, index) => shiftTimerDate(start, index));
+}
+
+/** Week range heading, e.g. `Nov 2 – 8, 2026`. */
+export function weekRangeLabel(date: string) {
+  const start = weekStart(date);
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).formatRange(
+    new Date(`${start}T00:00:00Z`),
+    new Date(`${shiftTimerDate(start, 6)}T00:00:00Z`)
+  );
+}
+
 export function monthCells(month: string) {
   const dates = monthDates(month);
-  const leading = new Date(`${month}-01T00:00:00Z`).getUTCDay();
+  const leading = (new Date(`${month}-01T00:00:00Z`).getUTCDay() + 6) % 7;
   const count = Math.max(35, Math.ceil((leading + dates.length) / 7) * 7);
   return Array.from(
     { length: count },
@@ -64,13 +92,26 @@ export function scheduledCalendarTasks(day: TimerDay | undefined) {
     );
 }
 
-/** Loading text naming what is being fetched for the current calendar view. */
-export function calendarLoadingLabel(
-  view: "day" | "week" | "month" | "year",
-  date: string
+/** Date that identifies the period shown by `view`. */
+export function viewPeriodDate(
+  view: TimerView,
+  month: string,
+  week: string,
+  selectedDate: string
 ) {
-  return view === "month"
-    ? `Loading scheduled tasks for ${calendarDateLabel(`${date.slice(0, 7)}-01`, true)}…`
+  if (view === "month" || view === "year") {
+    return month;
+  }
+  return view === "week" ? week : selectedDate;
+}
+
+/** Loading text naming what is being fetched for the current calendar view. */
+export function calendarLoadingLabel(view: TimerView, date: string) {
+  if (view === "month") {
+    return `Loading scheduled tasks for ${calendarDateLabel(`${date.slice(0, 7)}-01`, true)}…`;
+  }
+  return view === "week"
+    ? `Loading scheduled tasks for ${weekRangeLabel(date)}…`
     : `Loading activities for ${date}…`;
 }
 
@@ -83,11 +124,13 @@ export function calendarDateLabel(date: string, monthOnly = false) {
   }).format(new Date(`${date}T00:00:00Z`));
 }
 
-/** ISO 8601 date with a short weekday, e.g. `2026-11-04, Wed`. */
-export function isoDateLabel(date: string) {
-  const weekday = new Intl.DateTimeFormat("en-US", {
+/** Compact heading for mobile, e.g. `Wed, Nov 4, 2026`. */
+export function shortDateLabel(date: string) {
+  return new Intl.DateTimeFormat("en-US", {
     timeZone: "UTC",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
     weekday: "short",
   }).format(new Date(`${date}T00:00:00Z`));
-  return `${date}, ${weekday}`;
 }

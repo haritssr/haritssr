@@ -397,26 +397,39 @@ rule order makes running (green) and completed or missed (faded) override kind.
 
 Settings and History use icons with accessible labels at every screen size.
 Settings contains the download button below Sound, with a loading label during download.
-The view buttons sit opposite Settings and History in the toolbar. Day
+The date heading and its controls (Today, then previous/next) share the first row on mobile; below, the view buttons sit left and a joined History/Settings group sits right, with Settings last under the next-date button. From `md` everything sits on one row: heading left, then Today, previous/next, view buttons, the joined History/Settings group, and Add Task. Add Task floats bottom right on mobile. Day
 (the internal `day` value) shows the selected date. Today uses the live task
 list and timeline; other dates use read-only cards and a timeline, including
 finished and missed tasks. Add Task is disabled outside today. Settings and
 Today History keep their existing behavior. Day navigation includes a date
-heading, previous/next day controls, and a Today shortcut.
+heading (`Thu, Nov 5, 2026` on mobile, `Thursday, November 5, 2026` from `md`;
+the ISO date stays in `dateTime` and the tooltip), previous/next day controls, and a Today shortcut.
 
-Month renders a Sunday-first calendar through `TimerMonth`. Each date is one
+Month renders a Monday-first calendar through `TimerMonth`. Each date is one
 keyboard-accessible button that opens Day. Cells show scheduled tasks in
 available-time order (saved order breaks ties), with two labels on mobile,
 three from `sm`, and +N for overflow. Today has a red date marker. Month
-navigation uses previous/next month controls and a Today shortcut. Week and
-Year remain placeholders.
+navigation uses previous/next month controls and a Today shortcut.
 
-`TimerClient` loads Month and non-today Day content with `React.lazy` and Suspense
+Week renders `TimerWeek`: Monday-to-Sunday read-only schedules sharing one hour
+axis, with running, completed, and missed colors from `timelineCardState`. Each
+date header is a button that opens Day, where editing and playback live. Week
+navigation moves seven days and shows a Today shortcut that hides in the current week. A week that
+crosses months reads both months through `useTimerCalendar(month, active,
+endMonth)`, and shows content only after both load.
+
+Year renders `TimerYear` directly in `TimerClient`, without calendar reads: twelve
+Monday-first mini calendars (two columns on mobile, three from `sm`, four from
+`lg`). The current month name is red and today has a red circle. Each month is
+one button that opens Month. Year shares Month's displayed month, so its arrows
+move twelve months and switching between Year and Month keeps the year.
+
+`TimerClient` loads Week, Month, and non-today Day content with `React.lazy` and Suspense
 ([TimerCalendarContent.tsx](TimerCalendarContent.tsx)). Non-today Day lists only
 tasks without a window, with no intro or count text; timeline
 cards on ended days show spent / duration (in `title` for blocks under 30 minutes).
-`useTimerCalendar` reads `/api/timer?month=YYYY-MM` only for Month and non-today
-Day views. The endpoint uses bounded date queries and read-only transactions;
+`useTimerCalendar` reads `/api/timer?month=YYYY-MM` only for Week, Month, and
+non-today Day views. The endpoint uses bounded date queries and read-only transactions;
 future dates project current daily definitions without creating records, while
 missing past days are empty. Demo requests use sample days. Calendar reads
 never enter the live mutation runtime or automatic-start scheduler. SWR keys

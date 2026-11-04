@@ -168,7 +168,7 @@ export default function TaskTimeline({
   );
 }
 
-function timelineCardState(
+export function timelineCardState(
   task: TimerTask,
   date: string,
   now: number,

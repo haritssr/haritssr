@@ -1,55 +1,101 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import Button from "@/components/Button";
+import { ButtonGroup, ButtonGroupItem } from "@/components/ButtonGroup";
 
 import { shiftTimerDate } from "../utils/timer";
 import {
   calendarDateLabel,
-  isoDateLabel,
+  shortDateLabel,
   shiftTimerMonth,
+  weekRangeLabel,
+  weekStart,
 } from "../utils/timerCalendar";
+import type { TimerView } from "../utils/timerCalendar";
 
-export default function TimerDateNavigation({
+const groupLabel = {
+  day: "Day",
+  week: "Week",
+  month: "Month",
+  year: "Year",
+} as const;
+
+function periodState(date: string, today: string, period: TimerView) {
+  const move = (amount: number) => {
+    if (period === "month" || period === "year") {
+      const months = period === "year" ? amount * 12 : amount;
+      return `${shiftTimerMonth(date.slice(0, 7), months)}-01`;
+    }
+    return shiftTimerDate(date, period === "week" ? amount * 7 : amount);
+  };
+  let isCurrentPeriod = date === today;
+  if (period === "month") {
+    isCurrentPeriod = date.slice(0, 7) === today.slice(0, 7);
+  } else if (period === "week") {
+    isCurrentPeriod = weekStart(date) === weekStart(today);
+  } else if (period === "year") {
+    isCurrentPeriod = date.slice(0, 4) === today.slice(0, 4);
+  }
+  return { move, isCurrentPeriod };
+}
+
+/** Heading for the displayed day, week, month, or year. */
+export function TimerDateHeading({
+  date,
+  period,
+}: {
+  date: string;
+  period: TimerView;
+}) {
+  let heading = (
+    <time dateTime={date} title={date}>
+      <span className="md:hidden">{shortDateLabel(date)}</span>
+      <span className="hidden md:inline">{calendarDateLabel(date)}</span>
+    </time>
+  );
+  if (period === "month") {
+    heading = <>{calendarDateLabel(date, true)}</>;
+  } else if (period === "week") {
+    heading = <>{weekRangeLabel(date)}</>;
+  } else if (period === "year") {
+    heading = <>{date.slice(0, 4)}</>;
+  }
+  return (
+    <h2 className="min-w-0 text-xl font-medium" aria-live="polite">
+      {heading}
+    </h2>
+  );
+}
+
+/** Previous/next controls and the Today shortcut, in toolbar order. */
+export function TimerDateControls({
   date,
   today,
-  monthly = false,
+  period,
   onChange,
 }: {
   date: string;
   today: string;
-  monthly?: boolean;
+  period: TimerView;
   onChange: (date: string) => void;
 }) {
-  const move = (amount: number) =>
-    monthly
-      ? `${shiftTimerMonth(date.slice(0, 7), amount)}-01`
-      : shiftTimerDate(date, amount);
+  const { move, isCurrentPeriod } = periodState(date, today, period);
   return (
-    <div className="flex items-center justify-between gap-3">
-      <h2 className="min-w-0 text-lg font-medium" aria-live="polite">
-        {monthly ? (
-          calendarDateLabel(date, true)
-        ) : (
-          <time dateTime={date} title={calendarDateLabel(date)}>
-            {isoDateLabel(date)}
-          </time>
-        )}
-      </h2>
-      <div className="flex shrink-0 items-center gap-2">
+    <div className="flex shrink-0 items-center gap-2">
+      {isCurrentPeriod ? null : (
         <Button
-          variant="outline"
+          className="min-h-8.5"
+          variant="tonal"
           onClick={() => {
             onChange(today);
           }}
         >
-          <span className={date === today ? "text-action" : undefined}>
-            Today
-          </span>
+          Today
         </Button>
-        <Button
-          variant="outline"
-          size="icon-toolbar"
-          aria-label={monthly ? "Previous month" : "Previous day"}
+      )}
+      <ButtonGroup aria-label={`${groupLabel[period]} navigation`}>
+        <ButtonGroupItem
+          aria-label={`Previous ${period}`}
           onClick={() => {
             onChange(move(-1));
           }}
@@ -58,11 +104,9 @@ export default function TimerDateNavigation({
             aria-hidden="true"
             className="size-4.5 -translate-x-px"
           />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon-toolbar"
-          aria-label={monthly ? "Next month" : "Next day"}
+        </ButtonGroupItem>
+        <ButtonGroupItem
+          aria-label={`Next ${period}`}
           onClick={() => {
             onChange(move(1));
           }}
@@ -71,8 +115,8 @@ export default function TimerDateNavigation({
             aria-hidden="true"
             className="size-4.5 translate-x-px"
           />
-        </Button>
-      </div>
+        </ButtonGroupItem>
+      </ButtonGroup>
     </div>
   );
 }

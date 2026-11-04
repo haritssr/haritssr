@@ -21,11 +21,19 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/TimerClient.tsx",
-    "Page composition: selected Day, Month, date navigation, toolbar, and loading feedback.",
+    "Page composition: selected Day, Week, Month, Year, date navigation, toolbar, and loading feedback.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimerYear.tsx",
+    "Twelve Monday-first mini calendars that open Month, with today highlighted.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimerWeek.tsx",
+    "Read-only Monday-to-Sunday schedules with shared hours and date selection.",
   ],
   [
     "app/(tools)/timer/_components/TimerMonth.tsx",
-    "Sunday-first calendar, scheduled task labels, overflow counts, and date selection.",
+    "Monday-first calendar, scheduled task labels, overflow counts, and date selection.",
   ],
   [
     "app/(tools)/timer/_components/TimerCalendarDay.tsx",
@@ -33,15 +41,15 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimerCalendarContent.tsx",
-    "Lazily loaded Month and non-today Day content with loading and Retry states.",
+    "Lazily loaded Week, Month, and non-today Day content with loading and Retry states.",
   ],
   [
     "app/(tools)/timer/_components/TimerDateNavigation.tsx",
-    "Selected date or month heading, previous/next navigation, and Today shortcut.",
+    "Date heading, and the Today shortcut with previous/next controls.",
   ],
   [
     "app/(tools)/timer/hooks/useTimerCalendar.ts",
-    "Account-scoped calendar reads, revalidation, errors, and live-data isolation.",
+    "Account-scoped month reads, cross-month weeks, revalidation, errors, and live-data isolation.",
   ],
   [
     "app/(tools)/timer/utils/timerCalendar.ts",
@@ -53,7 +61,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimerToolbar.tsx",
-    "Add Task, view controls, the Settings trigger, and the date navigation on one row from md.",
+    "Date heading with its Today and previous/next controls, above the view buttons, a joined History/Settings group, and Add Task; one row from md.",
   ],
   [
     "app/(tools)/timer/_components/TimerSettings.tsx",

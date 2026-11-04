@@ -1,18 +1,20 @@
 import Button from "@/components/Button";
 
 import type { TimerDay } from "../utils/timer";
-import type { TimerCalendar } from "../utils/timerCalendar";
-import { calendarLoadingLabel } from "../utils/timerCalendar";
+import type { TimerCalendar, TimerView } from "../utils/timerCalendar";
+import { calendarLoadingLabel, viewPeriodDate } from "../utils/timerCalendar";
 import TimerCalendarDay from "./TimerCalendarDay";
 import TimerMonth from "./TimerMonth";
+import TimerWeek from "./TimerWeek";
 
-/** Month and non-today Day views; loaded only when one of them is opened. */
+/** Week, Month, and non-today Day views; loaded only when one of them is opened. */
 export default function TimerCalendarContent({
   view,
   calendar,
   error,
   retry,
   month,
+  week,
   today,
   selectedDate,
   days,
@@ -20,11 +22,13 @@ export default function TimerCalendarContent({
   now,
   onSelect,
 }: {
-  view: "day" | "week" | "month" | "year";
+  view: TimerView;
   calendar: TimerCalendar | undefined;
   error: Error | undefined;
   retry: () => void;
   month: string;
+  /** Any date in the displayed week. */
+  week: string;
   today: string;
   selectedDate: string;
   days: TimerDay[] | undefined;
@@ -35,7 +39,10 @@ export default function TimerCalendarContent({
   if (calendar === undefined && !error) {
     return (
       <output className="text-muted block">
-        {calendarLoadingLabel(view, view === "month" ? month : selectedDate)}
+        {calendarLoadingLabel(
+          view,
+          viewPeriodDate(view, month, week, selectedDate)
+        )}
       </output>
     );
   }
@@ -50,6 +57,15 @@ export default function TimerCalendarContent({
         </div>
       ) : null}
       {view === "day" && day ? <TimerCalendarDay day={day} now={now} /> : null}
+      {view === "week" && days ? (
+        <TimerWeek
+          date={week}
+          today={today}
+          days={days}
+          now={now}
+          onSelect={onSelect}
+        />
+      ) : null}
       {view === "month" && days ? (
         <TimerMonth
           key={month}
