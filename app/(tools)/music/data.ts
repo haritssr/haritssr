@@ -37,14 +37,6 @@ export const includedMusic = [
     5_999_941
   ),
   track(
-    "stand-by-me-onew",
-    "Stand By Me - ONEW.mp3",
-    "Stand By Me",
-    "ONEW",
-    247.19673469387754,
-    4_099_604
-  ),
-  track(
     "yeowooya-joy",
     "Yeowooya - Joy.mp3",
     "Yeowooya",
