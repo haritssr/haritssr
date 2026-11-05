@@ -74,7 +74,7 @@ export default function useTimelineResize(date: string, editable: boolean) {
     ) {
       return;
     }
-    setMessage("Saving available time.");
+    setMessage("Saving period.");
     void act({
       action: "resize-scheduled",
       date,
@@ -83,7 +83,7 @@ export default function useTimelineResize(date: string, editable: boolean) {
     }).then((saved) => {
       setMessage(
         saved
-          ? "Available time and duration updated."
+          ? "Period and duration updated."
           : "Resize could not be saved. Open the task editor to recover your changes."
       );
     });

@@ -151,11 +151,11 @@ uncertain writes are never automatically resent.
 [useTimelineResize.ts](../hooks/useTimelineResize.ts) delegates top/bottom edge
 controls from the timeline container, separate from edit and creation buttons.
 Card bodies select on press and drag vertically in 15-minute steps, preserving
-window length. Only the edit icon opens the editor; clicking the body does not.
+period length. Only the edit icon opens the editor; clicking the body does not.
 Cards use `cursor-grab` and `cursor-grabbing` with a selection ring.
 Edges use `cursor-ns-resize` without visible grip bars; touch holds activate moving or resizing.
 Both edges snap to 15 minutes and keep the window in future time. Arrow keys preview,
-Enter saves, and Escape cancels. Minimum window length is 15 minutes and must exceed
+Enter saves, and Escape cancels. Minimum period length is 15 minutes and must exceed
 recorded spent time. Live previews update overlap lanes, description visibility,
 and short-card alignment. The `resize-scheduled` command computes matching duration
 in the engine while preserving current task text. Date/permission changes, opened

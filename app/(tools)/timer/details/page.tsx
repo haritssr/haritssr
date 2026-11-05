@@ -177,8 +177,8 @@ export default function TimerDetailsPage() {
             </li>
             <li>
               Open History beside Settings to review today’s finished and missed
-              tasks. Available time shows each scheduled window in Jakarta time;
-              tasks without a window show —.
+              tasks. Period shows each scheduled period in Jakarta time; tasks
+              without a scheduled period show —.
             </li>
             <li>
               Day shows available tasks alongside an hourly schedule, stacked
@@ -199,7 +199,7 @@ export default function TimerDetailsPage() {
               or edit it as needed. Add Task also works on future dates. Changes
               stay specific to the selected date; other dates and daily
               definitions stay the same. Only today has playback controls. On
-              these days the list shows only tasks without available time;
+              these days the list shows only tasks without a scheduled period;
               scheduled tasks appear on the timeline, with time spent on past
               days. Calendar cells show two task labels on mobile, three on
               larger screens, and a count for the rest.
@@ -222,20 +222,19 @@ export default function TimerDetailsPage() {
               swipes scroll. With the timeline focused, use arrow keys to move,
               Enter to begin and save, and Escape to cancel. Scheduled task
               descriptions are optional. Their editor has separate Duration and
-              Available time controls, so planned work can be shorter than the
-              available window. Failed additions can be recovered through Add
-              Task.
+              Period controls, so planned work can be shorter than the period.
+              Failed additions can be recovered through Add Task.
             </li>
             <li>
-              Drag a card up or down to move its available window in 15-minute
-              steps, keeping the window length. Use the icon beside the title to
-              edit. Drag a card’s top or bottom edge to expand or shorten its
-              available time in 15-minute steps. The timer duration follows the
-              resized window. Hover an edge to see the resize cursor; on
-              touchscreens, hold the edge before dragging. Focus an edge and use
-              arrow keys, then Enter to save or Escape to cancel. Resizing stays
-              in future time and keeps at least 15 minutes, longer than any time
-              already spent. Failed resizes can be recovered in the task editor.
+              Drag a card up or down to move its period in 15-minute steps,
+              keeping the period length. Use the icon beside the title to edit.
+              Drag a card’s top or bottom edge to expand or shorten its period
+              in 15-minute steps. The timer duration follows the resized period.
+              Hover an edge to see the resize cursor; on touchscreens, hold the
+              edge before dragging. Focus an edge and use arrow keys, then Enter
+              to save or Escape to cancel. Resizing stays in future time and
+              keeps at least 15 minutes, longer than any time already spent.
+              Failed resizes can be recovered in the task editor.
             </li>
             <li>
               Scheduled tasks start when their window opens, or when you return

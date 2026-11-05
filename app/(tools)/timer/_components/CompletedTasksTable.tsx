@@ -107,7 +107,7 @@ export default function CompletedTasksTable({
               </div>
               <dl className="text-muted border-border/60 mt-3 grid grid-cols-3 gap-2 border-t pt-2 text-sm tabular-nums">
                 <div className="col-span-3">
-                  <dt>Available time</dt>
+                  <dt>Period</dt>
                   <dd className="text-foreground">{availableTime}</dd>
                 </div>
                 <div>
@@ -132,8 +132,8 @@ export default function CompletedTasksTable({
       <div className={rows.length === 0 ? "block" : "hidden lg:block"}>
         <Table>
           <caption className="sr-only">
-            Completed and missed tasks with descriptions, available time in
-            Jakarta, time spent, total duration, progress, and status
+            Completed and missed tasks with descriptions, period in Jakarta,
+            time spent, total duration, progress, and status
           </caption>
           <thead>
             <tr className="divide-border bg-foreground/5 text-muted divide-x [&>th]:px-3 [&>th]:text-left [&>th]:font-medium lg:group-data-list-view/task-layout:[&>th]:px-2 lg:group-data-list-view/task-layout:[&>th]:py-1.75">
@@ -155,7 +155,7 @@ export default function CompletedTasksTable({
                 </span>
               </th>
               <th scope="col" className="w-px whitespace-nowrap">
-                Available time
+                Period
               </th>
               <th scope="col" className="w-px whitespace-nowrap">
                 Spent

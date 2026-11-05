@@ -101,11 +101,11 @@ export default function TaskTimeline({
         Escape to cancel.
       </p>
       <p id={resizeInstructionsId} className="sr-only">
-        Drag the top or bottom edge to resize available time and timer duration.
-        Drag a card to move its available time while keeping its duration. Use
-        the edit icon beside the title to edit a card. On touchscreens, hold
-        before dragging. Use arrow keys for 15-minute steps, Enter to save, and
-        Escape to cancel.
+        Drag the top or bottom edge to resize the period and timer duration.
+        Drag a card to move its period while keeping its duration. Use the edit
+        icon beside the title to edit a card. On touchscreens, hold before
+        dragging. Use arrow keys for 15-minute steps, Enter to save, and Escape
+        to cancel.
       </p>
       <output aria-live="polite" className="sr-only">
         {interaction?.resizeMessage}
