@@ -272,7 +272,7 @@ function TimelineCard({
       data-running={running || undefined}
       data-completed={reached || undefined}
       data-missed={missed || undefined}
-      className={`${styles.event} ${styles.kind} py-timeline-card absolute flex gap-0.5 ${preview ? "pointer-events-none z-20" : "z-10"}`}
+      className={`${styles.event} ${styles.kind} py-timeline-card lg:py-timeline-card-lg absolute flex gap-0.5 ${preview ? "pointer-events-none z-20" : "z-10"}`}
       style={geometry}
       title={progress !== null && until - from < 30 ? progress : undefined}
     >
