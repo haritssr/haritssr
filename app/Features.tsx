@@ -54,6 +54,12 @@ const features = [
     description: "Add the site to your home screen for quick access.",
     preview: <InstallPreview />,
   },
+  {
+    title: "Blur",
+    shortcut: "⌘B/Ctrl+B",
+    description: "Blur the page to see which elements pull attention.",
+    preview: <BlurPreview />,
+  },
 ];
 
 export default function Features() {
@@ -73,7 +79,16 @@ export default function Features() {
           <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <h3 className="text-foreground font-medium">{title}</h3>
             <kbd className="text-foreground/70 text-sm whitespace-nowrap">
-              {shortcut}
+              {shortcut.split("⌘").map((part, index) => (
+                <span key={index}>
+                  {index > 0 ? (
+                    <span className="mr-0.5 inline-block align-middle text-lg leading-none">
+                      ⌘
+                    </span>
+                  ) : null}
+                  {part}
+                </span>
+              ))}
             </kbd>
           </div>
           <p className="text-muted mt-1">{description}</p>
@@ -217,6 +232,25 @@ function InstallPreview() {
         </div>
         <InstallButton placement="feature" />
       </div>
+    </div>
+  );
+}
+
+function BlurPreview() {
+  return (
+    <div className={`${PREVIEW_PANEL} relative overflow-hidden`}>
+      <div className="space-y-3 p-4">
+        <div className="text-foreground text-base font-semibold">Timer</div>
+        <div className="bg-foreground/10 h-1.5 w-4/5 rounded-full" />
+        <div className="bg-foreground/10 h-1.5 w-3/5 rounded-full" />
+        <div className="flex items-center justify-between gap-3 pt-1">
+          <div className="bg-foreground/10 h-1.5 w-2/5 rounded-full" />
+          <span className="bg-foreground flex size-8 shrink-0 items-center justify-center rounded-full text-white">
+            <PauseIcon className="size-4" />
+          </span>
+        </div>
+      </div>
+      <div className="bg-background/20 absolute inset-0 backdrop-blur-sm backdrop-grayscale" />
     </div>
   );
 }

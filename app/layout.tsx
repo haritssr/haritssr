@@ -11,6 +11,7 @@ import SharePageProvider, {
   ShareToastViewport,
 } from "@/components/SharePageProvider";
 import SiteShortcuts from "@/components/SiteShortcuts";
+import SquintOverlay from "@/components/SquintOverlay";
 import { SiteStructuredData } from "@/components/StructuredData";
 import TabBarBottom from "@/components/TabBarBottom";
 import TopBar from "@/components/topbar/TopBar";
@@ -87,6 +88,7 @@ export default function RootLayout({
           <GlobalSearchProvider>
             <MobileControlsProvider>
               <SiteShortcuts />
+              <SquintOverlay />
               <FloatingDock>
                 <ShareToastViewport />
                 <MusicProvider>
