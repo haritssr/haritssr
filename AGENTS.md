@@ -91,6 +91,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # Commits
 
 - Commit only with explicit permission; it does not authorize database uploads.
+- Never add `Co-Authored-By` trailers or other AI attribution lines to commit messages.
 - Use `type(context): message`, e.g. `fix(TopBar): align back icon`. Types:
   `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
 - Review staged changes and related docs; update guidance in the same change.
