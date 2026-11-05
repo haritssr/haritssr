@@ -33,6 +33,7 @@ type ButtonVariant =
   | "timer-secondary"
   | "music"
   | "secondary"
+  | "secondary-regular"
   | "success-subtle"
   | "theme-fill";
 
@@ -108,6 +109,10 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "profile-secondary":
     "bg-foreground/8 font-medium text-foreground transition-colors duration-150 select-none hover:bg-foreground/12 focus-visible:outline-foreground",
   secondary: SECONDARY_BUTTON_CLASS,
+  "secondary-regular": SECONDARY_BUTTON_CLASS.replace(
+    "font-medium",
+    "font-normal"
+  ),
   "success-subtle":
     "border border-transparent bg-success font-medium text-white transition-colors duration-150 focus-visible:outline-success",
 };

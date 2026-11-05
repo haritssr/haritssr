@@ -70,7 +70,7 @@ export function TimerDownloadButton() {
   return (
     <div className="space-y-2">
       <Button
-        variant="primary"
+        variant="secondary-regular"
         disabled={working || pendingCount > 0 || snapshot?.mode !== "turso"}
         onClick={() => {
           void download();
