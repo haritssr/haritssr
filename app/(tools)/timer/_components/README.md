@@ -127,25 +127,40 @@ exact opening/closing minutes; running cards use opaque green surfaces and the
 progress accent, other active cards use their kind's color (violet for Work, amber for Leisure), and past cards are muted in that color. Overlapping windows share
 horizontal lanes, calculated by [timelineLayout.ts](timelineLayout.ts). Its
 full-height timeline displays every hour from 00:00 to 24:00 in the page flow,
-without internal scrolling. A red line shows Jakarta time, updating at least once per minute.
+without internal scrolling. The "6-hour timeline" setting (off by default, saved with the
+other preferences in `timer_preferences.paged_timeline` and read through
+[usePagedTimeline.ts](../hooks/usePagedTimeline.ts)) instead shows one 6-hour
+page at a time, a quarter of that height. [ScheduleTimeline.tsx](ScheduleTimeline.tsx)
+chooses the page through [useTimelineWindow.ts](../hooks/useTimelineWindow.ts): the
+page holding the current time, or on other days the first scheduled task's page
+(06:00–12:00 without tasks), until a page is chosen. A floating
+[TimelinePager.tsx](TimelinePager.tsx) at the top right steps to the neighbouring
+pages, labelled with their ranges, with a red dot toward the current time. Cards
+crossing a page edge are clipped with a square edge and lose that edge's resize
+handle; creation and move/resize gestures map pointer positions to the visible
+minutes. Week view always shows 24 hours. A red line shows Jakarta time, updating at least once per minute.
 The red line stays above cards without intercepting pointer events. Active cards
 have an edit icon; completed and missed cards are read-only. Only future eligible
 cards have move and resize controls.
 [useTimelineCreation.ts](../hooks/useTimelineCreation.ts) selects empty future time
 with primary-button dragging, touch hold-and-drag, or arrow keys and Enter.
-[timelineSelection.ts](timelineSelection.ts) snaps to 15-minute slots. A plain click
+[PastTimeShade.tsx](PastTimeShade.tsx) shades today's elapsed time with a
+not-allowed cursor; pressing or touching it shows "Can't plan in the past" for
+three seconds. [timelineSelection.ts](timelineSelection.ts) snaps to 15-minute slots. A plain click
 creates nothing; Escape and canceled gestures discard the selection. Release saves
 New Task with an empty description and a duration matching its selected window,
 using the existing authenticated writer. Scheduled Add/Edit forms allow empty
 descriptions; ordinary forms and Daily Tasks settings still require descriptions.
 Task forms show Duration controls separately from the Period. Saving
 uses the entered duration independently of the window, including seconds and presets.
-The Period fields (From/Until) are always shown in Add and Edit
-forms. Both at 00:00 mean the all-day period (0–1440), which keeps the task
-off the timeline, and descriptions are required only then. Setting a period
-sends it with the existing `edit` action, so the task moves to the timeline;
-periods that already ended today are rejected. Setting both back to 00:00
-removes a task's time.
+Add and Edit forms show the Period with an All day switch, on for tasks
+without a scheduled period. All day submits 00:00 to 00:00, read as the all-day
+period (0–1440), which keeps the task off the timeline; descriptions are
+required only then. Turning it off reveals From/Until, prefilled with an hour
+from the next 15-minute slot when empty. Setting a period sends it with the
+existing `edit` action, so the task moves to the timeline; periods that already
+ended today are rejected. Turning All day back on removes a task's time. The
+History table shows All day for these tasks.
 Failed additions preserve their ID and window for explicit recovery through Add Task;
 uncertain writes are never automatically resent.
 [useTimelineResize.ts](../hooks/useTimelineResize.ts) delegates top/bottom edge

@@ -266,6 +266,9 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
+  /* Vertical padding per side of a timeline card; two sides make a 3px gap. */
+  --spacing-timeline-card: 1.5px;
+
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
   --radius-dialog: calc(var(--radius-md) + var(--spacing) * 4 + 1px);

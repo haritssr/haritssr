@@ -110,6 +110,11 @@ export default function TimerDetailsPage() {
               uses a progress ring beside stacked elapsed and remaining times;
               larger screens use a linear progress bar.
             </li>
+            <li>
+              Optionally show the schedule in 6-hour pages with floating buttons
+              to the neighbouring hours; the full 24-hour timeline remains the
+              default.
+            </li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or
               completion notifications.
@@ -168,17 +173,17 @@ export default function TimerDetailsPage() {
             <li>
               Unscheduled daily tasks start manually. Editing a card changes
               only today’s task, including its period. Future-day definitions
-              stay the same. Task forms always show the Period; set From and
-              Until to move a task onto the timeline, or leave both at 00:00 for
-              an all-day period, which keeps it out of the timeline. Setting
-              both back to 00:00 removes a task’s time. Daily cards cannot be
-              deleted. Finished daily tasks move to History; early Done tasks
-              can be restored while their window is open.
+              stay the same. In task forms, the Period’s All day switch keeps a
+              task off the timeline. Turn it off and set From and Until to move
+              the task onto the timeline, or turn it back on to remove its time.
+              Daily cards cannot be deleted. Finished daily tasks move to
+              History; early Done tasks can be restored while their window is
+              open.
             </li>
             <li>
               Open History beside Settings to review today’s finished and missed
-              tasks. Period shows each scheduled period in Jakarta time; tasks
-              without a scheduled period show —.
+              tasks. Period shows each scheduled period in Jakarta time, or All
+              day for tasks without one.
             </li>
             <li>
               Day shows available tasks alongside an hourly schedule, stacked
@@ -217,13 +222,15 @@ export default function TimerDetailsPage() {
             </li>
             <li>
               Drag empty future time to create New Task with no description.
-              Selection snaps to 15-minute slots, and the timer duration matches
-              the selected window. On touchscreens, hold then drag; ordinary
-              swipes scroll. With the timeline focused, use arrow keys to move,
-              Enter to begin and save, and Escape to cancel. Scheduled task
-              descriptions are optional. Their editor has separate Duration and
-              Period controls, so planned work can be shorter than the period.
-              Failed additions can be recovered through Add Task.
+              Elapsed time today is shaded; pressing it explains that planning
+              in the past is not possible. Selection snaps to 15-minute slots,
+              and the timer duration matches the selected window. On
+              touchscreens, hold then drag; ordinary swipes scroll. With the
+              timeline focused, use arrow keys to move, Enter to begin and save,
+              and Escape to cancel. Scheduled task descriptions are optional.
+              Their editor has separate Duration and Period controls, so planned
+              work can be shorter than the period. Failed additions can be
+              recovered through Add Task.
             </li>
             <li>
               Drag a card up or down to move its period in 15-minute steps,

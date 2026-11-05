@@ -17,7 +17,11 @@ interface Gesture {
   slot: number;
 }
 
-export default function useTimelineCreation(date: string, editable: boolean) {
+export default function useTimelineCreation(
+  date: string,
+  editable: boolean,
+  view: Period
+) {
   const { act, snapshot, clockOffset } = useTaskEditing();
   const surface = useRef<HTMLButtonElement>(null);
   const [selection, setSelection] = useState<Period | null>(null);
@@ -87,7 +91,7 @@ export default function useTimelineCreation(date: string, editable: boolean) {
           return false;
         }
         const rect = element.getBoundingClientRect();
-        const anchor = timelineSlot(y, rect.top, rect.height, 0);
+        const anchor = timelineSlot(y, rect.top, rect.height, 0, view);
         if (anchor < eligibility()) {
           setMessage("Choose a future time.");
           return false;
@@ -111,7 +115,13 @@ export default function useTimelineCreation(date: string, editable: boolean) {
           return;
         }
         const rect = element.getBoundingClientRect();
-        gesture.slot = timelineSlot(y, rect.top, rect.height, eligibility());
+        gesture.slot = timelineSlot(
+          y,
+          rect.top,
+          rect.height,
+          eligibility(),
+          view
+        );
         announce(selectedWindow(gesture.anchor, gesture.slot));
       },
       end(committed) {
@@ -140,11 +150,13 @@ export default function useTimelineCreation(date: string, editable: boolean) {
         setMessage("No future time is available on this day.");
         return;
       }
-      cursor = Math.max(first, Math.min(95, cursor));
+      const lowest = Math.max(first, view.from / 15);
+      const highest = view.until / 15 - 1;
+      cursor = Math.max(lowest, Math.min(highest, cursor));
       if (event.key === "ArrowUp" || event.key === "ArrowDown") {
         cursor = Math.max(
-          first,
-          Math.min(95, cursor + (event.key === "ArrowDown" ? 1 : -1))
+          lowest,
+          Math.min(highest, cursor + (event.key === "ArrowDown" ? 1 : -1))
         );
         if (gesture?.mode === "keyboard") {
           gesture.slot = cursor;
@@ -188,6 +200,6 @@ export default function useTimelineCreation(date: string, editable: boolean) {
       element.removeEventListener("blur", cancel);
       window.removeEventListener("keydown", escape);
     };
-  }, [date, editable]);
+  }, [date, editable, view]);
   return { surface, selection, message };
 }

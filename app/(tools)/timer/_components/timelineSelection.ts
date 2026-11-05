@@ -4,13 +4,23 @@ export function firstFutureSlot(minute: number) {
   return Math.max(0, Math.min(96, Math.floor(minute / 15) + 1));
 }
 
+/** The quarter-hour slot under `y`, within the visible `view` and not before `first`. */
 export function timelineSlot(
   y: number,
   top: number,
   height: number,
-  first: number
+  first: number,
+  view: Period
 ) {
-  return Math.max(first, Math.min(95, Math.floor(((y - top) / height) * 96)));
+  const firstSlot = view.from / 15;
+  const slots = (view.until - view.from) / 15;
+  return Math.max(
+    first,
+    Math.min(
+      firstSlot + slots - 1,
+      firstSlot + Math.floor(((y - top) / height) * slots)
+    )
+  );
 }
 
 export function selectedWindow(anchor: number, slot: number): Period {

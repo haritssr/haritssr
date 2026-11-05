@@ -88,6 +88,30 @@ export const implementationFiles = [
     "Static all-day scheduled cards, green running states, previews, past-day progress, and current-time line.",
   ],
   [
+    "app/(tools)/timer/_components/ScheduleTimeline.tsx",
+    "Chooses the visible hours for a day's schedule and renders the static or editable timeline.",
+  ],
+  [
+    "app/(tools)/timer/_components/TimelinePager.tsx",
+    "Floating previous/next buttons labelled with 6-hour ranges for the paged timeline.",
+  ],
+  [
+    "app/(tools)/timer/hooks/useTimelineWindow.ts",
+    "Selects the whole day or a 6-hour page, opening on the current time or first task.",
+  ],
+  [
+    "app/(tools)/timer/hooks/usePagedTimeline.ts",
+    "Reads and saves the account's 6-hour timeline preference.",
+  ],
+  [
+    "app/(tools)/timer/utils/timerLocalSetting.ts",
+    "Shared boolean localStorage preference store with cross-tab synchronization.",
+  ],
+  [
+    "app/(tools)/timer/utils/timelineWindow.ts",
+    "Page ranges and overlap checks for the 6-hour timeline.",
+  ],
+  [
     "app/(tools)/timer/_components/EditableTaskTimeline.tsx",
     "Lazily loaded editing layer that attaches creation and resize gestures to TaskTimeline.",
   ],

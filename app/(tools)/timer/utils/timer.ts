@@ -126,6 +126,8 @@ export interface TimerPreferences {
   autoplay: boolean;
   multitask: boolean;
   desktopListView: boolean;
+  /** Shows the schedule in 6-hour pages instead of the whole day. */
+  pagedTimeline: boolean;
   notificationsEnabled: boolean;
   durationPresets: number[];
   taskPresets: TimerTaskPreset[];

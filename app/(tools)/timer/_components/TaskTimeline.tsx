@@ -2,6 +2,8 @@
 import { useId } from "react";
 import type { CSSProperties, RefObject } from "react";
 
+import type { TimelinePagerState } from "../hooks/useTimelineWindow";
+import { overlapsView } from "../utils/timelineWindow";
 import {
   formatTimerTime,
   taskKind,
@@ -10,8 +12,10 @@ import {
 } from "../utils/timer";
 import type { Period, TimerTask } from "../utils/timer";
 import { cardTimeRange, timelineTime } from "../utils/timerTime";
+import PastTimeShade from "./PastTimeShade";
 import { EditTask } from "./TaskDialog";
 import { layoutTimelineTasks } from "./timelineLayout";
+import TimelinePager, { TimeOfDayIcon } from "./TimelinePager";
 
 import styles from "./TaskTimeline.module.css";
 
@@ -45,12 +49,17 @@ export default function TaskTimeline({
   date,
   now,
   editable,
+  view,
+  pager = null,
   interaction,
 }: {
   tasks: TimerTask[];
   date: string;
   now: number;
   editable: boolean;
+  /** Minutes shown: the whole day, or one 6-hour page. */
+  view: Period;
+  pager?: TimelinePagerState | null;
   interaction?: TimelineInteraction;
 }) {
   const selection = interaction?.selection ?? null;
@@ -90,6 +99,8 @@ export default function TaskTimeline({
     : resizedTasks;
   const bounds = timerDayBounds(date);
   const minute = Math.max(0, Math.min(1440, (now - bounds.start) / 60_000));
+  const span = view.until - view.from;
+  const percent = (value: number) => ((value - view.from) / span) * 100;
   return (
     <section
       aria-label={`Schedule for ${date}`}
@@ -115,9 +126,18 @@ export default function TaskTimeline({
       </output>
       <section
         aria-label="Hourly schedule"
-        className="border-border lg:corner-squircle pl-1 lg:rounded-3xl lg:border lg:p-3"
+        className="border-border lg:corner-squircle relative flow-root lg:rounded-3xl lg:border lg:p-3"
       >
-        <div ref={interaction?.root} className="relative mt-3 mb-4 ml-12 h-640">
+        {pager === null ? null : <TimelinePager {...pager} />}
+        {span === 1440 ? null : (
+          <span className="text-muted pointer-events-none absolute top-0 left-0 flex h-8.5 w-6 items-center justify-center lg:top-2 lg:left-2.75">
+            <TimeOfDayIcon period={view} className="size-6 shrink-0" />
+          </span>
+        )}
+        <div
+          ref={interaction?.root}
+          className={`relative mb-4 ml-12 ${span === 1440 ? "mt-3 h-640" : "mt-12 h-160 lg:mt-14"}`}
+        >
           {editable ? (
             <button
               ref={interaction?.surface}
@@ -127,35 +147,49 @@ export default function TaskTimeline({
               className="focus-visible:outline-action absolute inset-0 h-full w-full cursor-crosshair select-none focus-visible:outline-2 focus-visible:outline-offset-2"
             />
           ) : null}
-          {hours.map((hour) => (
-            <div
-              key={hour}
-              className={`${styles.hour} border-border pointer-events-none absolute inset-x-0 -translate-y-1/2 border-t`}
-              style={positionStyle((hour / 24) * 100)}
-            >
-              <span className="text-muted absolute -top-2.5 -left-12 text-xs tabular-nums">
-                {timelineTime(hour * 60)}
-              </span>
-            </div>
-          ))}
-          {layoutTimelineTasks(previewTasks).map((entry) => (
-            <TimelineCard
-              key={entry.task.id}
-              entry={entry}
-              originalTask={originalTasks.get(entry.task.id) ?? entry.task}
-              date={date}
-              now={now}
-              editable={editable}
-              preview={entry.task.id === previewId}
-              resizing={resizePreview?.taskId === entry.task.id}
-              instructionsId={resizeInstructionsId}
-            />
-          ))}
-          {now >= bounds.start && now < bounds.end ? (
+          <PastTimeShade
+            editable={editable}
+            now={now}
+            bounds={bounds}
+            view={view}
+          />
+          {hours
+            .filter((hour) => hour * 60 >= view.from && hour * 60 <= view.until)
+            .map((hour) => (
+              <div
+                key={hour}
+                className={`${styles.hour} border-border pointer-events-none absolute inset-x-0 -translate-y-1/2 border-t`}
+                style={positionStyle(percent(hour * 60))}
+              >
+                <span className="text-muted absolute -top-2.5 -left-12 text-xs tabular-nums">
+                  {timelineTime(hour * 60)}
+                </span>
+              </div>
+            ))}
+          {layoutTimelineTasks(previewTasks)
+            .filter((entry) => overlapsView(entry.from, entry.until, view))
+            .map((entry) => (
+              <TimelineCard
+                key={entry.task.id}
+                entry={entry}
+                view={view}
+                originalTask={originalTasks.get(entry.task.id) ?? entry.task}
+                date={date}
+                now={now}
+                editable={editable}
+                preview={entry.task.id === previewId}
+                resizing={resizePreview?.taskId === entry.task.id}
+                instructionsId={resizeInstructionsId}
+              />
+            ))}
+          {now >= bounds.start &&
+          now < bounds.end &&
+          minute >= view.from &&
+          minute <= view.until ? (
             <div
               aria-label={`Current time ${timelineTime(Math.floor(minute))} WIB`}
               className={`${styles.hour} bg-danger pointer-events-none absolute right-0 -left-12 z-30 h-0.5 rounded-full lg:-right-1.5`}
-              style={positionStyle((minute / 1440) * 100)}
+              style={positionStyle(percent(minute))}
             >
               <span className="bg-danger absolute top-1/2 left-0 inline-flex h-4 -translate-y-1/2 items-center rounded-full px-1 pt-px text-xs leading-none text-white tabular-nums">
                 {timelineTime(Math.floor(minute))}
@@ -198,6 +232,7 @@ export function timelineCardState(
 
 function TimelineCard({
   entry,
+  view,
   originalTask,
   date,
   now,
@@ -207,6 +242,7 @@ function TimelineCard({
   instructionsId,
 }: {
   entry: ReturnType<typeof layoutTimelineTasks>[number];
+  view: Period;
   originalTask: TimerTask;
   date: string;
   now: number;
@@ -215,12 +251,18 @@ function TimelineCard({
   resizing: boolean;
   instructionsId: string;
 }) {
-  const { task, from, until, lane, lanes } = entry;
+  const { task, lane, lanes } = entry;
+  // A card crossing a page edge shows only the part inside the view.
+  const clippedStart = entry.from < view.from;
+  const clippedEnd = entry.until > view.until;
+  const from = Math.max(entry.from, view.from);
+  const until = Math.min(entry.until, view.until);
+  const span = view.until - view.from;
   const { reached, missed, running, canEdit, canMove, progress } =
     timelineCardState(task, date, now, editable, preview);
   const geometry: TimelineStyle = {
-    "--timeline-position": `${(from / 1440) * 100}%`,
-    "--timeline-height": `${((until - from) / 1440) * 100}%`,
+    "--timeline-position": `${((from - view.from) / span) * 100}%`,
+    "--timeline-height": `${((until - from) / span) * 100}%`,
     "--timeline-left": `${(lane / lanes) * 100}%`,
     "--timeline-width": `${100 / lanes}%`,
   };
@@ -230,7 +272,7 @@ function TimelineCard({
       data-running={running || undefined}
       data-completed={reached || undefined}
       data-missed={missed || undefined}
-      className={`${styles.event} ${styles.kind} absolute flex gap-0.5 py-0.75 pr-0.5 ${preview ? "pointer-events-none z-20" : "z-10"}`}
+      className={`${styles.event} ${styles.kind} py-timeline-card absolute flex gap-0.5 ${preview ? "pointer-events-none z-20" : "z-10"}`}
       style={geometry}
       title={progress !== null && until - from < 30 ? progress : undefined}
     >
@@ -240,7 +282,7 @@ function TimelineCard({
       />
       <div className="relative h-full min-w-0 flex-1">
         <div
-          className={`corner-squircle bg-schedule-surface text-schedule-foreground relative flex h-full flex-col items-start ${until - from === 15 ? "justify-center" : "justify-start"} overflow-hidden rounded-xs px-1.5 py-1 text-sm supports-[corner-shape:squircle]:rounded-md ${resizing ? "ring-schedule-accent ring-1 ring-inset" : ""}`}
+          className={`corner-squircle bg-schedule-surface text-schedule-foreground relative flex h-full flex-col items-start ${until - from === 15 ? "justify-center" : "justify-start"} overflow-hidden rounded-xs px-1.5 py-1 text-sm supports-[corner-shape:squircle]:rounded-md ${clippedStart ? "rounded-t-none supports-[corner-shape:squircle]:rounded-t-none" : ""} ${clippedEnd ? "rounded-b-none supports-[corner-shape:squircle]:rounded-b-none" : ""} ${resizing ? "ring-schedule-accent ring-1 ring-inset" : ""}`}
         >
           {canMove ? (
             <button
@@ -259,7 +301,7 @@ function TimelineCard({
               </span>
               <span className="flex shrink-0 items-center gap-1">
                 <span className="text-schedule-foreground/60 text-xs whitespace-nowrap tabular-nums">
-                  {cardTimeRange(from, until)}
+                  {cardTimeRange(entry.from, entry.until)}
                 </span>
                 {canEdit ? (
                   <span className="[&_button:hover]:text-schedule-foreground [&_button:focus-visible]:text-schedule-foreground [&_button]:text-schedule-foreground/50 pointer-events-auto relative z-20 shrink-0">
@@ -281,19 +323,21 @@ function TimelineCard({
           </div>
         </div>
         {canMove
-          ? (["from", "until"] as const).map((edge) => (
-              <button
-                key={edge}
-                type="button"
-                data-resize-task={task.id}
-                data-resize-edge={edge}
-                aria-label={`Resize ${edge === "from" ? "start" : "end"} of ${task.activity}, ${timelineTime(edge === "from" ? from : until)}`}
-                aria-describedby={instructionsId}
-                aria-keyshortcuts="ArrowUp ArrowDown Enter Escape"
-                title={`Resize ${edge === "from" ? "start" : "end"}`}
-                className={`focus-visible:outline-action absolute inset-x-0 z-10 flex h-2 cursor-ns-resize items-center justify-center select-none focus-visible:outline-2 focus-visible:-outline-offset-2 ${edge === "from" ? "top-0" : "bottom-0"}`}
-              />
-            ))
+          ? (["from", "until"] as const)
+              .filter((edge) => !(edge === "from" ? clippedStart : clippedEnd))
+              .map((edge) => (
+                <button
+                  key={edge}
+                  type="button"
+                  data-resize-task={task.id}
+                  data-resize-edge={edge}
+                  aria-label={`Resize ${edge === "from" ? "start" : "end"} of ${task.activity}, ${timelineTime(edge === "from" ? from : until)}`}
+                  aria-describedby={instructionsId}
+                  aria-keyshortcuts="ArrowUp ArrowDown Enter Escape"
+                  title={`Resize ${edge === "from" ? "start" : "end"}`}
+                  className={`focus-visible:outline-action absolute inset-x-0 z-10 flex h-2 cursor-ns-resize items-center justify-center select-none focus-visible:outline-2 focus-visible:-outline-offset-2 ${edge === "from" ? "top-0" : "bottom-0"}`}
+                />
+              ))
           : null}
       </div>
     </div>

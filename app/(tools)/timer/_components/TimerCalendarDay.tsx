@@ -1,5 +1,3 @@
-import { Suspense, lazy } from "react";
-
 import type { TimerDay } from "../utils/timer";
 import {
   canUseTimer,
@@ -8,14 +6,10 @@ import {
   taskSpent,
 } from "../utils/timer";
 import { scheduledCalendarTasks } from "../utils/timerCalendar";
+import ScheduleTimeline from "./ScheduleTimeline";
 import { EditTask } from "./TaskDialog";
 import { useTaskEditing } from "./TaskEditing";
 import { TASK_LAYOUT } from "./taskPresentation";
-import TaskTimeline from "./TaskTimeline";
-
-const EditableTaskTimeline = lazy(
-  async () => await import("./EditableTaskTimeline")
-);
 
 export default function TimerCalendarDay({
   day: selectedDay,
@@ -31,7 +25,6 @@ export default function TimerCalendarDay({
     selectedDay.date > editing.snapshot.today;
   const day = editable ? (editing.snapshot?.day ?? selectedDay) : selectedDay;
   const scheduled = scheduledCalendarTasks(day);
-  const timeline = { tasks: scheduled, date: day.date, now };
 
   const unscheduled = day.tasks.filter(
     (task) => scheduledPeriod(task) === null
@@ -43,7 +36,7 @@ export default function TimerCalendarDay({
           {editing.error}
         </p>
       ) : null}
-      <div className="grid min-w-0 grid-cols-1 items-start gap-5 lg:grid-cols-2">
+      <div className="grid min-w-0 grid-cols-1 items-start gap-3 lg:grid-cols-2 lg:gap-5">
         <div className="min-w-0 space-y-3">
           {day.tasks.length === 0 ? (
             <p className="text-muted text-sm">No activities for this day.</p>
@@ -82,13 +75,12 @@ export default function TimerCalendarDay({
             </ul>
           ) : null}
         </div>
-        {editable ? (
-          <Suspense fallback={<TaskTimeline {...timeline} editable />}>
-            <EditableTaskTimeline {...timeline} />
-          </Suspense>
-        ) : (
-          <TaskTimeline {...timeline} editable={false} />
-        )}
+        <ScheduleTimeline
+          tasks={scheduled}
+          date={day.date}
+          now={now}
+          editable={editable}
+        />
       </div>
     </div>
   );

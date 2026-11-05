@@ -1,4 +1,5 @@
 import { Dialog } from "@base-ui/react/dialog";
+import { Switch } from "@base-ui/react/switch";
 import { useId, useRef, useState } from "react";
 import type { CSSProperties, RefObject, SubmitEvent } from "react";
 
@@ -7,7 +8,7 @@ import { TASK_INPUT_LIMITS } from "@/app/(tools)/timer/utils/timerInput";
 import Button from "@/components/Button";
 
 import type { Period, TaskKind } from "../utils/timer";
-import { taskKind } from "../utils/timer";
+import { isAllDay, taskKind, timerDate, timerDayBounds } from "../utils/timer";
 import { inputTime } from "../utils/timerTime";
 import DeleteTaskButton from "./DeleteTaskButton";
 import DurationFields from "./DurationFields";
@@ -85,8 +86,24 @@ function TaskFormPopup({
   const [windowUntil, setWindowUntil] = useState(
     inputTime(defaultPeriod?.until ?? 0)
   );
-  // Both fields at 00:00 mean no window; descriptions are optional with one.
-  const hasWindow = windowFrom !== "00:00" || windowUntil !== "00:00";
+  const [allDay, setAllDay] = useState(() => isAllDay(defaultPeriod));
+  // Both fields at 00:00 are also the whole day; descriptions are optional
+  // only for tasks with a scheduled period.
+  const hasWindow =
+    !allDay && (windowFrom !== "00:00" || windowUntil !== "00:00");
+  const allDayLabelId = useId();
+  function chooseAllDay(checked: boolean) {
+    setAllDay(checked);
+    if (checked || windowFrom !== "00:00" || windowUntil !== "00:00") {
+      return;
+    }
+    // Start an hour-long period at the next 15-minute slot in Jakarta.
+    const now = Date.now();
+    const minutes = (now - timerDayBounds(timerDate(now)).start) / 60_000;
+    const from = Math.min(1380, Math.ceil(minutes / 15) * 15);
+    setWindowFrom(inputTime(from));
+    setWindowUntil(inputTime(Math.min(1440, from + 60)));
+  }
   const nameRef = useRef<HTMLInputElement>(null);
   return (
     <>
@@ -133,36 +150,56 @@ function TaskFormPopup({
           />
           <fieldset disabled={busy} className="space-y-2">
             <legend className="mb-2 text-sm">Period</legend>
-            <div className="grid grid-cols-2 gap-2">
-              <label className="min-w-0 space-y-1 text-sm">
-                <span className="text-muted/70">From</span>
-                <input
-                  type="time"
-                  step={900}
-                  name="from"
-                  value={windowFrom}
-                  onChange={(event) => {
-                    setWindowFrom(event.currentTarget.value);
-                  }}
-                  className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
-                  required
-                />
-              </label>
-              <label className="min-w-0 space-y-1 text-sm">
-                <span className="text-muted/70">Until</span>
-                <input
-                  type="time"
-                  step={900}
-                  name="until"
-                  value={windowUntil}
-                  onChange={(event) => {
-                    setWindowUntil(event.currentTarget.value);
-                  }}
-                  className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
-                  required
-                />
-              </label>
+            <div className="flex items-center justify-between gap-3 text-sm">
+              <span id={allDayLabelId}>All day</span>
+              <Switch.Root
+                aria-labelledby={allDayLabelId}
+                checked={allDay}
+                disabled={busy}
+                onCheckedChange={chooseAllDay}
+                className="focus-visible:outline-action data-checked:bg-action bg-border block w-10 shrink-0 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2 data-disabled:cursor-not-allowed"
+              >
+                <Switch.Thumb className="bg-surface block size-4 rounded-full data-checked:translate-x-4" />
+              </Switch.Root>
             </div>
+            {/* All day submits 00:00 to 00:00, which the form reads as 0–1440. */}
+            {allDay ? (
+              <>
+                <input type="hidden" name="from" value="00:00" />
+                <input type="hidden" name="until" value="00:00" />
+              </>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <label className="min-w-0 space-y-1 text-sm">
+                  <span className="text-muted/70">From</span>
+                  <input
+                    type="time"
+                    step={900}
+                    name="from"
+                    value={windowFrom}
+                    onChange={(event) => {
+                      setWindowFrom(event.currentTarget.value);
+                    }}
+                    className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
+                    required
+                  />
+                </label>
+                <label className="min-w-0 space-y-1 text-sm">
+                  <span className="text-muted/70">Until</span>
+                  <input
+                    type="time"
+                    step={900}
+                    name="until"
+                    value={windowUntil}
+                    onChange={(event) => {
+                      setWindowUntil(event.currentTarget.value);
+                    }}
+                    className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
+                    required
+                  />
+                </label>
+              </div>
+            )}
           </fieldset>
           {showTaskPresets ? (
             <fieldset className="space-y-3" disabled={busy}>

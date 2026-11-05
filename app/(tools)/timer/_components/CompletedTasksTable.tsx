@@ -46,7 +46,8 @@ export default function CompletedTasksTable({
       if (missed) {
         reachedTime = taskWindowEnd(task, date);
       }
-      const availableTime = windowRange(scheduledPeriod(task));
+      const period = scheduledPeriod(task);
+      const availableTime = period === null ? "All day" : windowRange(period);
       return {
         task,
         availableTime,

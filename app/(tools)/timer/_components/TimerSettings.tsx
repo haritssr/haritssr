@@ -5,6 +5,7 @@ import { Dialog } from "@base-ui/react/dialog";
 import { Switch } from "@base-ui/react/switch";
 import {
   BellAlertIcon,
+  ClockIcon,
   ForwardIcon,
   SpeakerWaveIcon,
   Square3Stack3DIcon,
@@ -21,6 +22,7 @@ import type { ComponentProps, ReactNode, Ref } from "react";
 
 import Button from "@/components/Button";
 
+import usePagedTimeline from "../hooks/usePagedTimeline";
 import useTimerTicking from "../hooks/useTimerTicking";
 import { canUseTimer } from "../utils/timer";
 import PresetSettings from "./PresetSettings";
@@ -83,8 +85,10 @@ export default function TimerSettingsScope({
               </div>
               <div className="space-y-5">
                 <TimerSettingsControls />
-                <TimerDownloadButton />
-                <PresetSettings dailyOpen={payload === "daily"} />
+                <div className="space-y-3">
+                  <TimerDownloadButton />
+                  <PresetSettings dailyOpen={payload === "daily"} />
+                </div>
               </div>
             </Dialog.Popup>
           </Dialog.Portal>
@@ -126,6 +130,7 @@ function TimerSettingsControls() {
     "setAutoplay"
   );
   const { tickingEnabled, setTickingEnabled } = useTimerTicking();
+  const { paged, setPaged } = usePagedTimeline();
   const [permissionFailed, setPermissionFailed] = useState(false);
   const browserPermission = useSyncExternalStore(
     subscribePermission,
@@ -186,6 +191,16 @@ function TimerSettingsControls() {
         disabled={!canUseTimer(snapshot)}
         checked={tickingEnabled}
         onCheckedChange={setTickingEnabled}
+      />
+      <TimerSettingSwitch
+        label="6-hour timeline"
+        title="Show the schedule in 6-hour pages"
+        icon={<ClockIcon aria-hidden="true" className="size-4.5 stroke-2" />}
+        disabled={false}
+        checked={paged}
+        onCheckedChange={(next) => {
+          void setPaged(next);
+        }}
       />
     </div>
   );
@@ -315,7 +330,7 @@ function TimerSettingSwitch({
         id={id}
         ref={ref}
         aria-label={label}
-        className={`focus-visible:outline-action data-checked:bg-action bg-border not-data-disabled:not-data-checked:hover:bg-border-hover/60 not-data-disabled:data-checked:hover:bg-action/85 block w-11 shrink-0 cursor-pointer rounded-full p-1 outline-hidden transition-colors duration-150 focus-visible:outline-2 data-disabled:cursor-not-allowed ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
+        className={`focus-visible:outline-action data-checked:bg-action bg-border block w-11 shrink-0 cursor-pointer rounded-full p-1 outline-hidden transition-colors duration-150 focus-visible:outline-2 data-disabled:cursor-not-allowed ${dimWhenDisabled ? "data-disabled:opacity-50" : "data-disabled:opacity-100"}`}
         disabled={disabled}
         onCheckedChange={onCheckedChange}
         checked={checked}

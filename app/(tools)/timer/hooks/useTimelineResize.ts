@@ -27,7 +27,11 @@ interface ResizeGesture {
   moved: boolean;
 }
 
-export default function useTimelineResize(date: string, editable: boolean) {
+export default function useTimelineResize(
+  date: string,
+  editable: boolean,
+  view: Period
+) {
   const { act, snapshot, clockOffset } = useTaskEditing();
   const root = useRef<HTMLDivElement>(null);
   const [preview, setPreview] = useState<ResizePreview | null>(null);
@@ -238,7 +242,8 @@ export default function useTimelineResize(date: string, editable: boolean) {
         }
         update(
           gesture.original[gesture.edge === "move" ? "from" : gesture.edge] +
-            ((y - originY) / element.getBoundingClientRect().height) * 1440
+            ((y - originY) / element.getBoundingClientRect().height) *
+              (view.until - view.from)
         );
       },
       end,
@@ -328,6 +333,6 @@ export default function useTimelineResize(date: string, editable: boolean) {
       element.removeEventListener("contextmenu", contextMenu);
       window.removeEventListener("keydown", escape);
     };
-  }, [date, editable]);
+  }, [date, editable, view]);
   return { root, preview, message };
 }
