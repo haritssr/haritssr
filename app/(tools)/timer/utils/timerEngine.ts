@@ -1,4 +1,7 @@
 import {
+  allDayPeriod,
+  isAllDay,
+  scheduledPeriod,
   taskCompletionTime,
   MAX_TIMER_TASKS,
   taskSpent,
@@ -155,7 +158,7 @@ function startTask(
   }
   if (!taskAvailable(task, day.date, now)) {
     throw new TimerStoreError(
-      `Available ${formatPeriod(task.period) ?? "on its scheduled day"} WIB.`,
+      `Available ${formatPeriod(scheduledPeriod(task)) ?? "on its scheduled day"} WIB.`,
       409
     );
   }
@@ -292,8 +295,9 @@ function applyTimerAction(
       );
     }
     if (
-      command.period !== undefined &&
-      timerDayBounds(day.date).start + command.period.from * 60_000 <= now
+      !isAllDay(command.period) &&
+      timerDayBounds(day.date).start + (command.period?.from ?? 0) * 60_000 <=
+        now
     ) {
       throw new TimerStoreError("Choose a future availability window.", 409);
     }
@@ -303,9 +307,7 @@ function applyTimerAction(
       description: command.description,
       duration: command.duration,
       ...(command.kind === undefined ? {} : { kind: command.kind }),
-      ...(command.period === undefined
-        ? {}
-        : { period: { ...command.period } }),
+      period: { ...(command.period ?? allDayPeriod()) },
       spent: 0,
       startedAt: null,
       reachedAt: null,
@@ -354,8 +356,7 @@ function scheduledStartTime(
   now: number,
   notBefore: number
 ) {
-  const opensAt =
-    timerDayBounds(day.date).start + (task.period?.from ?? 0) * 60_000;
+  const opensAt = timerDayBounds(day.date).start + task.period.from * 60_000;
   return now - opensAt <= SCHEDULED_START_GRACE
     ? Math.min(now, Math.max(opensAt, notBefore))
     : now;
@@ -374,11 +375,9 @@ function startScheduledTasks(
   const open = day.tasks
     .filter(
       (task) =>
-        (task.period ?? null) !== null && taskAvailable(task, day.date, now)
+        scheduledPeriod(task) !== null && taskAvailable(task, day.date, now)
     )
-    .toSorted(
-      (first, second) => (second.period?.from ?? 0) - (first.period?.from ?? 0)
-    );
+    .toSorted((first, second) => second.period.from - first.period.from);
   const due = open.filter((task) => requested.has(task.id));
   // A single-task handoff settles the paused task at the backdated start, and
   // never before its last settlement, so no time is counted twice.

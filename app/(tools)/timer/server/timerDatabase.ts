@@ -15,6 +15,7 @@ import type {
   TimerPreferences,
 } from "@/app/(tools)/timer/utils/timer";
 import {
+  allDayPeriod,
   createEmptyTimerDay,
   taskKind,
   timerMidnight,
@@ -78,8 +79,9 @@ const LEGACY_PERIOD_KEY = "availabilityWindow";
 
 /**
  * Renames `availability_window` to `period` (or adds `period` to old tables),
- * then rewrites any legacy `availabilityWindow` keys in saved daily tasks.
- * Safe to run repeatedly.
+ * then fills every empty period with the all-day period (0–1440) in saved
+ * tasks and in daily task JSON, which also drops legacy `availabilityWindow`
+ * keys. Safe to run repeatedly.
  */
 async function migratePeriods(tx: Transaction, columns: Set<string>) {
   if (!columns.has("period")) {
@@ -89,35 +91,47 @@ async function migratePeriods(tx: Transaction, columns: Set<string>) {
         : "ALTER TABLE timer_tasks ADD COLUMN period TEXT"
     );
   }
+  await tx.execute({
+    sql: "UPDATE timer_tasks SET period = ? WHERE period IS NULL",
+    args: [JSON.stringify(allDayPeriod())],
+  });
   const preferences = await tx.execute(
     "SELECT daily_tasks FROM timer_preferences WHERE id = 1"
   );
   const value = preferences.rows[0]?.daily_tasks;
-  if (typeof value !== "string" || !value.includes(LEGACY_PERIOD_KEY)) {
+  if (typeof value !== "string") {
     return;
   }
   const entries = JSON.parse(value) as unknown;
   if (!Array.isArray(entries)) {
     return;
   }
-  const renamed = entries.map((entry: unknown) => {
-    if (
-      typeof entry !== "object" ||
-      entry === null ||
-      !(LEGACY_PERIOD_KEY in entry)
-    ) {
+  let changed = false;
+  const filled = entries.map((entry: unknown) => {
+    if (typeof entry !== "object" || entry === null) {
       return entry;
     }
-    const { [LEGACY_PERIOD_KEY]: period, ...rest } = entry as Record<
-      string,
-      unknown
-    >;
+    const fields = new Map<string, unknown>(Object.entries(entry));
+    const rest = Object.fromEntries(
+      [...fields].filter(([key]) => key !== LEGACY_PERIOD_KEY)
+    );
+    const period: unknown =
+      fields.get("period") ?? fields.get(LEGACY_PERIOD_KEY) ?? allDayPeriod();
+    if (
+      fields.has(LEGACY_PERIOD_KEY) ||
+      fields.get("period") === null ||
+      !fields.has("period")
+    ) {
+      changed = true;
+    }
     return { ...rest, period };
   });
-  await tx.execute({
-    sql: "UPDATE timer_preferences SET daily_tasks = ?, revision = revision + 1 WHERE id = 1",
-    args: [JSON.stringify(renamed)],
-  });
+  if (changed) {
+    await tx.execute({
+      sql: "UPDATE timer_preferences SET daily_tasks = ?, revision = revision + 1 WHERE id = 1",
+      args: [JSON.stringify(filled)],
+    });
+  }
 }
 
 /** Activities tagged Leisure when the `kind` column is first added. */
@@ -291,7 +305,7 @@ export async function readTimerSnapshotVersion(tx: Transaction, today: string) {
           period:
             typeof task.period === "string"
               ? periodSchema.parse(JSON.parse(task.period) as unknown)
-              : null,
+              : allDayPeriod(),
         },
         task.date
       ),
@@ -481,8 +495,7 @@ export async function writeTimerDays(tx: Transaction, days: TimerDay[]) {
 }
 
 function availabilityValue(task: TimerDay["tasks"][number]) {
-  const window = task.period ?? null;
-  return window === null ? null : JSON.stringify(window);
+  return JSON.stringify(task.period);
 }
 
 function taskValues(task: TimerDay["tasks"][number], position: number) {

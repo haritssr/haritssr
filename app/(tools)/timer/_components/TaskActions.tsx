@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
-import { canUseTimer } from "@/app/(tools)/timer/utils/timer";
+import { canUseTimer, scheduledPeriod } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import {
   playTaskSound,
@@ -23,7 +23,7 @@ function controlPresentation(
 ) {
   const { running, label, reached, available } = state;
   const locked = !available || reached;
-  const window = formatPeriod(task.period);
+  const window = formatPeriod(scheduledPeriod(task));
   let ToggleIcon = running ? PauseIcon : PlayIcon;
   let toggleLabel: string = label;
   let toggleTitle: string = label;

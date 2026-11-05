@@ -6,6 +6,7 @@ import type { ReactElement, SubmitEvent } from "react";
 import { isDailyTask } from "@/app/(tools)/timer/utils/dailyTasks";
 import {
   canUseTimer,
+  isAllDay,
   taskKind,
   taskSpent,
   timerDayBounds,
@@ -23,10 +24,7 @@ import { useTaskEditing } from "./TaskEditing";
 import TaskFormDialog from "./TaskFormDialog";
 
 function formWindow(form: FormData) {
-  // Both fields at 00:00 mean the task has no available window.
-  if (form.get("from") === "00:00" && form.get("until") === "00:00") {
-    return null;
-  }
+  // Both fields at 00:00 give 0–1440, the all-day period.
   const result = scheduledWindowSchema.safeParse(
     inputWindow(form.get("from"), form.get("until"))
   );
@@ -58,15 +56,11 @@ export function EditTask({
       setFormError(period);
       return;
     }
-    if (period === null && (task.period ?? null) !== null) {
-      setFormError("A period can be changed but not removed.");
-      return;
-    }
     const values = readTaskForm(
       form,
       TASK_FORM_INPUT_LIMITS.description,
       TASK_FORM_INPUT_LIMITS.activity,
-      period !== null
+      !isAllDay(period)
     );
     if (typeof values === "string") {
       setFormError(values);
@@ -74,8 +68,8 @@ export function EditTask({
     }
     const now = Date.now() + clockOffset;
     if (
-      period !== null &&
-      (task.period ?? null) === null &&
+      !isAllDay(period) &&
+      isAllDay(task.period) &&
       timerDayBounds(date).start + period.until * 60_000 <= now
     ) {
       setFormError("Choose an end time later than now.");
@@ -91,7 +85,7 @@ export function EditTask({
       date,
       taskId: task.id,
       ...values,
-      ...(period === null ? {} : { period }),
+      period,
     });
     setOpen(false);
     if (!(await saving)) {
@@ -207,7 +201,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       form,
       TASK_FORM_INPUT_LIMITS.description,
       TASK_FORM_INPUT_LIMITS.activity,
-      period !== null
+      !isAllDay(period)
     );
     if (typeof values === "string") {
       setFormError(values);
@@ -223,7 +217,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       date: snapshot.day.date,
       taskId,
       ...values,
-      ...(period === null ? {} : { period }),
+      period,
     });
     setOpen(false);
     if (!(await saving)) {

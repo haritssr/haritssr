@@ -141,10 +141,11 @@ descriptions; ordinary forms and Daily Tasks settings still require descriptions
 Task forms show Duration controls separately from the Period. Saving
 uses the entered duration independently of the window, including seconds and presets.
 The Period fields (From/Until) are always shown in Add and Edit
-forms. Both at 00:00 mean no window, and descriptions are required only then.
-Setting a window on an unscheduled task sends it with the existing `edit`
-action, so the task moves to the timeline; windows that already ended today are
-rejected. Clearing an existing window is not supported and shows an error.
+forms. Both at 00:00 mean the all-day period (0–1440), which keeps the task
+off the timeline, and descriptions are required only then. Setting a period
+sends it with the existing `edit` action, so the task moves to the timeline;
+periods that already ended today are rejected. Setting both back to 00:00
+removes a task's time.
 Failed additions preserve their ID and window for explicit recovery through Add Task;
 uncertain writes are never automatically resent.
 [useTimelineResize.ts](../hooks/useTimelineResize.ts) delegates top/bottom edge
@@ -380,11 +381,15 @@ before sending later queued commands; uncertain writes are not automatically
 resent. Backup controls wait for queued saves to finish.
 Initialize or migrate through `bun run migrate:timer`; see the root AGENTS.md.
 
-A task's availability window is `period` (type `Period`) in code, API payloads,
-daily task JSON, and the `timer_tasks.period` column. The migration renames the
-legacy `availability_window` column and rewrites legacy `availabilityWindow`
-daily-task keys; `taskSchema` still accepts `availabilityWindow` from old
-backups and local JSON imports. Run the migration before deploying this code.
+A task's period is `period` (type `Period`, minutes of the day) in code,
+API payloads, daily task JSON, and the `timer_tasks.period` column. Every task
+has one: tasks without a scheduled time use the all-day period `0–1440`
+(`allDayPeriod()`), and `scheduledPeriod(task)` returns `null` for them, so
+they stay off the timeline, never show as missed, and start manually. The
+migration renames the legacy `availability_window` column, fills empty periods
+with all day, and rewrites legacy `availabilityWindow` and `null` daily-task
+values. Readers and `taskSchema` also treat a missing or `null` period (old
+backups, local JSON imports) as all day. Run the migration before deploying.
 
 Each task, task preset, and daily task has an optional `kind` (`work` or
 `leisure`; missing means Work), edited with [TaskKindField](TaskKindField.tsx).

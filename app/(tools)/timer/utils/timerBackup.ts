@@ -70,7 +70,7 @@ function canonicalDay(day: TimerDay) {
     tasks: day.tasks.map((task) => ({
       ...task,
       deadlineReminderAt: null,
-      period: task.period ?? null,
+      period: task.period,
     })),
   });
 }

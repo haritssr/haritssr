@@ -1,5 +1,5 @@
 import type { DailyTaskDefinition } from "../utils/dailyTasks";
-import { taskKind } from "../utils/timer";
+import { allDayPeriod, isAllDay, taskKind } from "../utils/timer";
 import type { TaskKind } from "../utils/timer";
 import { TASK_INPUT_LIMITS } from "../utils/timerInput";
 import { inputTime, inputWindow } from "../utils/timerTime";
@@ -29,13 +29,12 @@ export function dailyTaskDrafts(tasks: DailyTaskDefinition[]): DailyDraft[] {
     description: task.description,
     duration: durationValue(task.duration),
     kind: taskKind(task),
-    window:
-      task.period === null
-        ? null
-        : {
-            from: inputTime(task.period.from),
-            until: inputTime(task.period.until),
-          },
+    window: isAllDay(task.period)
+      ? null
+      : {
+          from: inputTime(task.period.from),
+          until: inputTime(task.period.until),
+        },
   }));
 }
 
@@ -92,7 +91,7 @@ export function parseDailyDrafts(
   }
   const result = dailyTasksSchema.safeParse(
     entries.map((entry) => {
-      let period = null;
+      let period = allDayPeriod();
       if (entry.window !== null) {
         period = inputWindow(entry.window.from, entry.window.until);
       }

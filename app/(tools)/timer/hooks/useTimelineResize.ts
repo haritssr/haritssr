@@ -6,7 +6,7 @@ import {
   resizedWindow,
 } from "../_components/timelineSelection";
 import type { ResizeEdge } from "../_components/timelineSelection";
-import { canUseTimer, timerDayBounds } from "../utils/timer";
+import { canUseTimer, scheduledPeriod, timerDayBounds } from "../utils/timer";
 import type { Period, TimerTask } from "../utils/timer";
 import { timelineTime } from "../utils/timerTime";
 import { trackTimelineDrag } from "./timelineDrag";
@@ -47,8 +47,7 @@ export default function useTimelineResize(date: string, editable: boolean) {
     const task = snapshot.day.tasks.find((entry) => entry.id === taskId);
     if (
       !task ||
-      task.period === null ||
-      task.period === undefined ||
+      scheduledPeriod(task) === null ||
       task.startedAt !== null ||
       task.reachedAt !== null ||
       task.spent >= task.duration ||
@@ -154,8 +153,8 @@ export default function useTimelineResize(date: string, editable: boolean) {
         return false;
       }
       const latest = context(taskId);
-      const original = latest?.task.period;
-      if (latest === null || original === null || original === undefined) {
+      const original = latest === null ? null : scheduledPeriod(latest.task);
+      if (latest === null || original === null) {
         return false;
       }
       gesture = {

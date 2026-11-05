@@ -1,5 +1,6 @@
 import { taskAppearance } from "../_components/taskPresentation";
 import TaskProgress from "../_components/TaskProgress";
+import { allDayPeriod } from "../utils/timer";
 
 const examples = [
   {
@@ -42,6 +43,7 @@ export default function TaskColorExamples() {
           activity: example.label,
           description: example.description,
           duration: 900,
+          period: allDayPeriod(),
           spent: example.spent,
           startedAt: null,
           reachedAt: null,

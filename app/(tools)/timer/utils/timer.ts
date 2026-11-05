@@ -1,8 +1,27 @@
 import type { DailyTaskDefinition } from "./dailyTasks";
 
+/** Minutes of the Jakarta day; `0–1440` is the whole day. */
 export interface Period {
   from: number;
   until: number;
+}
+
+/** A fresh whole-day period, used by tasks without a scheduled time. */
+export function allDayPeriod(): Period {
+  return { from: 0, until: 1440 };
+}
+
+export function isAllDay(period: Period | null | undefined) {
+  return (
+    period === null ||
+    period === undefined ||
+    (period.from === 0 && period.until === 1440)
+  );
+}
+
+/** The period when the task has a time on the timeline, otherwise `null`. */
+export function scheduledPeriod(task: { period?: Period | null }) {
+  return isAllDay(task.period) ? null : (task.period ?? null);
 }
 
 export const MAX_TIMER_TASKS = 100;
@@ -25,7 +44,7 @@ export interface TimerTask {
   reachedAt: string | null;
   notifiedAt: string | null;
   deadlineReminderAt?: string | null;
-  period?: Period | null;
+  period: Period;
   kind?: TaskKind;
 }
 
@@ -268,8 +287,8 @@ export function taskTiming(
   bounds: TimerDayBounds,
   now: number
 ) {
-  const opensAt = bounds.start + (task.period?.from ?? 0) * 60_000;
-  const closesAt = bounds.start + (task.period?.until ?? 1440) * 60_000;
+  const opensAt = bounds.start + task.period.from * 60_000;
+  const closesAt = bounds.start + task.period.until * 60_000;
   const elapsed =
     task.startedAt === null
       ? 0
@@ -290,14 +309,14 @@ export function taskSpent(task: TimerTask, date: string, now: number) {
 }
 
 export function taskWindowEnd(task: Pick<TimerTask, "period">, date: string) {
-  return timerDayBounds(date).start + (task.period?.until ?? 1440) * 60_000;
+  return timerDayBounds(date).start + task.period.until * 60_000;
 }
 
 export function taskAvailable(task: TimerTask, date: string, now: number) {
   const bounds = timerDayBounds(date);
   return (
-    now >= bounds.start + (task.period?.from ?? 0) * 60_000 &&
-    now < bounds.start + (task.period?.until ?? 1440) * 60_000
+    now >= bounds.start + task.period.from * 60_000 &&
+    now < bounds.start + task.period.until * 60_000
   );
 }
 
@@ -350,6 +369,7 @@ function createTimerDay(date: string): TimerDay {
       },
     ].map((task) => ({
       ...task,
+      period: allDayPeriod(),
       spent: 0,
       startedAt: null,
       reachedAt: null,
@@ -382,6 +402,7 @@ export function createSampleTimerDay(date: string): TimerDay {
         activity,
         description,
         duration,
+        period: allDayPeriod(),
         spent: 0,
         startedAt: null,
         reachedAt: null,

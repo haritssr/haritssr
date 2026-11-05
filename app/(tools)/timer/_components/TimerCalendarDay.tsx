@@ -1,7 +1,12 @@
 import { Suspense, lazy } from "react";
 
 import type { TimerDay } from "../utils/timer";
-import { canUseTimer, formatTimerTime, taskSpent } from "../utils/timer";
+import {
+  canUseTimer,
+  formatTimerTime,
+  scheduledPeriod,
+  taskSpent,
+} from "../utils/timer";
 import { scheduledCalendarTasks } from "../utils/timerCalendar";
 import { EditTask } from "./TaskDialog";
 import { useTaskEditing } from "./TaskEditing";
@@ -29,7 +34,7 @@ export default function TimerCalendarDay({
   const timeline = { tasks: scheduled, date: day.date, now };
 
   const unscheduled = day.tasks.filter(
-    (task) => task.period === null || task.period === undefined
+    (task) => scheduledPeriod(task) === null
   );
   return (
     <div className="space-y-4">

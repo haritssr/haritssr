@@ -1,6 +1,11 @@
 import { createDailyTasks } from "./dailyTasks";
 import type { DailyTaskDefinition } from "./dailyTasks";
-import { createEmptyTimerDay, shiftTimerDate, validTimerDate } from "./timer";
+import {
+  createEmptyTimerDay,
+  scheduledPeriod,
+  shiftTimerDate,
+  validTimerDate,
+} from "./timer";
 import type { TimerDay } from "./timer";
 
 export interface TimerCalendar {
@@ -87,10 +92,8 @@ export function resolveCalendarDays(
 
 export function scheduledCalendarTasks(day: TimerDay | undefined) {
   return (day?.tasks ?? [])
-    .filter((task) => task.period !== null && task.period !== undefined)
-    .toSorted(
-      (first, second) => (first.period?.from ?? 0) - (second.period?.from ?? 0)
-    );
+    .filter((task) => scheduledPeriod(task) !== null)
+    .toSorted((first, second) => first.period.from - second.period.from);
 }
 
 /** Date that identifies the period shown by `view`. */

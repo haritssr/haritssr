@@ -1,3 +1,4 @@
+import { allDayPeriod } from "./timer";
 import type { TimerTask, TimerTaskPreset, Period } from "./timer";
 import { TASK_INPUT_LIMITS } from "./timerInput";
 
@@ -5,7 +6,7 @@ export const DAILY_DESCRIPTION_LIMIT = TASK_INPUT_LIMITS.description;
 export const MAX_DAILY_TASKS = 10;
 
 export interface DailyTaskDefinition extends TimerTaskPreset {
-  period: Period | null;
+  period: Period;
 }
 
 export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
@@ -30,7 +31,7 @@ export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
     activity: "Housekeeping",
     description: "Shower, plants, floors, dishes.",
     duration: 3600,
-    period: null,
+    period: allDayPeriod(),
   },
   {
     id: "daily:meditation-morning",
@@ -51,35 +52,35 @@ export const DEFAULT_DAILY_TASKS: DailyTaskDefinition[] = [
     activity: "Exercise",
     description: "",
     duration: 1200,
-    period: null,
+    period: allDayPeriod(),
   },
   {
     id: "daily:working-1",
     activity: "Working #1",
     description: "",
     duration: 5400,
-    period: null,
+    period: allDayPeriod(),
   },
   {
     id: "daily:working-2",
     activity: "Working #2",
     description: "",
     duration: 5400,
-    period: null,
+    period: allDayPeriod(),
   },
   {
     id: "daily:working-3",
     activity: "Working #3",
     description: "",
     duration: 5400,
-    period: null,
+    period: allDayPeriod(),
   },
   {
     id: "daily:working-4",
     activity: "Working #4",
     description: "",
     duration: 5400,
-    period: null,
+    period: allDayPeriod(),
   },
 ];
 
@@ -92,7 +93,7 @@ export function createDailyTasks(
 ): TimerTask[] {
   return definitions.map((definition) => ({
     ...definition,
-    period: definition.period === null ? null : { ...definition.period },
+    period: { ...definition.period },
     spent: 0,
     startedAt: null,
     reachedAt: null,

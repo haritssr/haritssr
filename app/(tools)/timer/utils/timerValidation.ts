@@ -4,6 +4,8 @@ import {
   DEFAULT_DURATION_PRESETS,
   DEFAULT_TASK_PRESETS,
   MAX_TIMER_TASKS,
+  allDayPeriod,
+  isAllDay,
   validTimerDate,
   timerMilliseconds,
 } from "@/app/(tools)/timer/utils/timer";
@@ -34,6 +36,11 @@ export const scheduledWindowSchema = periodSchema.refine(
 
 const taskKindSchema = z.enum(["work", "leisure"]);
 
+/** Stored periods; a missing or null value (older data) reads as all day. */
+const storedPeriodSchema = periodSchema
+  .nullish()
+  .transform((period) => period ?? allDayPeriod());
+
 const storedDailyTasksSchema = z
   .array(
     z.object({
@@ -41,7 +48,7 @@ const storedDailyTasksSchema = z
       activity: z.string().trim().min(1).max(TASK_INPUT_LIMITS.activity),
       description: z.string().trim().max(2000),
       duration: z.number().int().min(1).max(86_400),
-      period: periodSchema.nullable(),
+      period: storedPeriodSchema,
       kind: taskKindSchema.optional(),
     })
   )
@@ -59,7 +66,7 @@ export const dailyTasksSchema = storedDailyTasksSchema.superRefine(
     }
     for (const [index, task] of tasks.entries()) {
       if (
-        task.period !== null &&
+        !isAllDay(task.period) &&
         (task.period.until - task.period.from < 15 ||
           task.period.from % 15 !== 0 ||
           task.period.until % 15 !== 0)
@@ -136,7 +143,7 @@ const taskSchema = z.preprocess(
       reachedAt: instant.nullable(),
       notifiedAt: instant.nullable(),
       deadlineReminderAt: instant.nullable().optional(),
-      period: periodSchema.nullable().optional(),
+      period: storedPeriodSchema,
       kind: taskKindSchema.optional(),
     })
     .refine((task) => task.spent <= task.duration)
@@ -195,8 +202,7 @@ export const actionSchema = z.discriminatedUnion("action", [
       description: z.string().trim().max(TASK_FORM_INPUT_LIMITS.description),
     })
     .refine(
-      ({ description, period }) =>
-        description.length > 0 || period !== undefined,
+      ({ description, period }) => description.length > 0 || !isAllDay(period),
       { path: ["description"], message: "Enter a description." }
     ),
   z
@@ -210,8 +216,7 @@ export const actionSchema = z.discriminatedUnion("action", [
       description: z.string().trim().max(TASK_FORM_INPUT_LIMITS.description),
     })
     .refine(
-      ({ description, period }) =>
-        description.length > 0 || period !== undefined,
+      ({ description, period }) => description.length > 0 || !isAllDay(period),
       { path: ["description"], message: "Enter a description." }
     ),
   ...(["pause", "done", "acknowledge", "delete"] as const).map((action) =>

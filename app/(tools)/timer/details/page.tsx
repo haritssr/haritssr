@@ -167,13 +167,13 @@ export default function TimerDetailsPage() {
             </li>
             <li>
               Unscheduled daily tasks start manually. Editing a card changes
-              only today’s task, including its available window. Future-day
-              definitions stay the same. Task forms always show the Period; set
-              From and Until to move a task onto the timeline, or leave both at
-              00:00 for no window. A period can be changed but not removed.
-              Daily cards cannot be deleted. Finished daily tasks move to
-              History; early Done tasks can be restored while their window is
-              open.
+              only today’s task, including its period. Future-day definitions
+              stay the same. Task forms always show the Period; set From and
+              Until to move a task onto the timeline, or leave both at 00:00 for
+              an all-day period, which keeps it out of the timeline. Setting
+              both back to 00:00 removes a task’s time. Daily cards cannot be
+              deleted. Finished daily tasks move to History; early Done tasks
+              can be restored while their window is open.
             </li>
             <li>
               Open History beside Settings to review today’s finished and missed

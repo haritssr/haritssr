@@ -1,4 +1,8 @@
-import { taskTiming, timerDayBounds } from "@/app/(tools)/timer/utils/timer";
+import {
+  scheduledPeriod,
+  taskTiming,
+  timerDayBounds,
+} from "@/app/(tools)/timer/utils/timer";
 import type {
   TimerDayBounds,
   TimerTask,
@@ -13,7 +17,7 @@ function getTaskState(
 ) {
   const { spent, available, closesAt } = taskTiming(task, bounds, now);
   const reached = task.reachedAt !== null || spent >= task.duration;
-  const missed = !reached && (task.period ?? null) !== null && now >= closesAt;
+  const missed = !reached && scheduledPeriod(task) !== null && now >= closesAt;
   const running = task.startedAt !== null && !reached && available;
   const paused = !running && !reached && spent > 0;
   let label: "Start" | "Pause" | "Continue" =

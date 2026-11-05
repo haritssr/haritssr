@@ -1,10 +1,15 @@
-import { canUseTimer, taskTiming, timerDayBounds } from "./timer";
+import {
+  canUseTimer,
+  scheduledPeriod,
+  taskTiming,
+  timerDayBounds,
+} from "./timer";
 import type { TimerTask } from "./timer";
 import type { TimerController } from "./timerController";
 
 function isUnstartedScheduledTask(task: TimerTask) {
   return (
-    (task.period ?? null) !== null &&
+    scheduledPeriod(task) !== null &&
     task.lastStartedAt === undefined &&
     task.startedAt === null &&
     task.spent === 0 &&

@@ -7,6 +7,7 @@ import {
   taskSpent,
   taskWindowEnd,
   timerProgressPercent,
+  scheduledPeriod,
 } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
 import { windowRange } from "@/app/(tools)/timer/utils/timerTime";
@@ -34,7 +35,7 @@ export default function CompletedTasksTable({
       }
       const reached = spent >= task.duration;
       const closed =
-        (task.period ?? null) !== null && now >= taskWindowEnd(task, date);
+        scheduledPeriod(task) !== null && now >= taskWindowEnd(task, date);
       const missed = !reached && task.reachedAt === null && closed;
       let status = "Done";
       if (reached) {
@@ -45,7 +46,7 @@ export default function CompletedTasksTable({
       if (missed) {
         reachedTime = taskWindowEnd(task, date);
       }
-      const availableTime = windowRange(task.period);
+      const availableTime = windowRange(scheduledPeriod(task));
       return {
         task,
         availableTime,

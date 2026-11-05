@@ -1,4 +1,4 @@
-import { taskCompletionTime, taskTiming } from "./timer";
+import { scheduledPeriod, taskCompletionTime, taskTiming } from "./timer";
 import type { TimerDayBounds, TimerTask } from "./timer";
 
 const REMINDER_BUFFER = 10 * 60_000;
@@ -29,7 +29,7 @@ export function taskDeadline(
   let warning: "soon" | "late" | null = null;
   let nextAt = Infinity;
   if (
-    (task.period ?? null) !== null &&
+    scheduledPeriod(task) !== null &&
     task.reachedAt === null &&
     remaining > 0 &&
     now < timing.closesAt
