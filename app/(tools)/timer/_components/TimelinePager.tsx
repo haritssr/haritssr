@@ -92,7 +92,7 @@ export default function TimelinePager({
     />
   );
   return (
-    <div className="corner-squircle bg-background/80 absolute top-0 right-0 z-40 rounded-md backdrop-blur-xs supports-[corner-shape:squircle]:rounded-xl lg:top-2 lg:right-2">
+    <div className="corner-squircle bg-background/80 absolute top-0 right-0 z-20 rounded-md backdrop-blur-xs supports-[corner-shape:squircle]:rounded-xl lg:top-2 lg:right-2">
       <Tooltip.Provider>
         <ButtonGroup aria-label="Schedule hours">
           {previous === null ? null : (

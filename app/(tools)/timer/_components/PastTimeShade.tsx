@@ -70,7 +70,7 @@ export default function PastTimeShade({
       />
       <output
         aria-live="polite"
-        className={`bg-foreground absolute inset-x-0 top-1 z-40 mx-auto w-fit max-w-full rounded-full px-3 py-1 text-center text-sm text-white ${notice ? "" : "sr-only"}`}
+        className={`bg-foreground absolute inset-x-0 top-1 z-20 mx-auto w-fit max-w-full rounded-full px-3 py-1 text-center text-sm text-white ${notice ? "" : "sr-only"}`}
       >
         {notice ? "Can't plan in the past. Pick a time after now." : ""}
       </output>

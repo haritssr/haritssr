@@ -239,7 +239,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
         ref={triggerRef}
         render={
           <Button
-            className="fixed right-4 bottom-[var(--floating-controls-clearance,calc(5rem+env(safe-area-inset-bottom,0px)))] z-50 md:static"
+            className="fixed right-4 bottom-[var(--floating-controls-clearance,calc(5rem+env(safe-area-inset-bottom,0px)))] max-md:z-50 md:static"
             size="responsive-floating"
             variant="primary-floating"
           />
