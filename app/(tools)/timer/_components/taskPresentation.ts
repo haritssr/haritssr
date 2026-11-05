@@ -27,9 +27,9 @@ const TASK_STATE_APPEARANCE = {
     button: "timer-running",
   },
   paused: {
-    elapsed: "text-foreground",
+    elapsed: "text-zinc-700",
     weight: "font-medium",
-    progress: "var(--color-foreground)",
+    progress: "var(--color-zinc-700)",
     button: "timer-paused",
   },
   ready: {
