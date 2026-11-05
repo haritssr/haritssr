@@ -96,7 +96,7 @@ function MobileTabBar({
               {activeIndex === -1 ? null : (
                 <div
                   aria-hidden="true"
-                  className="bg-foreground/8 pointer-events-none absolute inset-y-0.5 left-0.5 w-[calc(100%/var(--tab-count)_-_0.25rem)] translate-x-[calc(var(--active-index)*(100%_+_0.25rem))] rounded-full transition-transform duration-200 ease-out motion-reduce:transition-none"
+                  className="bg-foreground/8 pointer-events-none absolute inset-y-0.5 left-0.5 w-[calc((100%_-_0.25rem)/var(--tab-count))] translate-x-[calc(var(--active-index)*100%)] rounded-full transition-transform duration-200 ease-out motion-reduce:transition-none"
                   style={indicatorStyle}
                 />
               )}
