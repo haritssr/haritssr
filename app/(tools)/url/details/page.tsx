@@ -63,6 +63,10 @@ export default function URLDetailsPage() {
             </li>
             <li>Choose whether to remove the fragment after the hash sign.</li>
             <li>
+              See the prefix, start, end, and suffix of any text fragment (
+              <code>#:~:text=</code>) in its own section.
+            </li>
+            <li>
               Preview and copy the cleaned URL as you change your selections.
             </li>
             <li>

@@ -55,6 +55,48 @@ export function cleanURL(
   return `${parsed.base}${kept.length ? `?${kept.join("&")}` : ""}${removeFragment ? "" : parsed.fragment}`;
 }
 
+/** Automatic mode drops the fragment after a query or when it holds a text fragment. */
+export function removeFragmentAutomatically(parsed: ParsedURL | null) {
+  return (
+    parsed !== null &&
+    (parsed.query !== null || parseTextFragments(parsed.fragment).length > 0)
+  );
+}
+
+export interface TextFragment {
+  prefix: string;
+  start: string;
+  end: string;
+  suffix: string;
+}
+
+/** Reads `text=` directives that follow `:~:` in a fragment. */
+export function parseTextFragments(fragment: string): TextFragment[] {
+  const marker = fragment.indexOf(":~:");
+  if (marker === -1) {
+    return [];
+  }
+  return fragment
+    .slice(marker + 3)
+    .split("&")
+    .filter((directive) => directive.startsWith("text="))
+    .map((directive) => {
+      const parts = directive.slice(5).split(",");
+      const prefix =
+        parts[0]?.endsWith("-") && parts.length > 1 ? parts.shift() : undefined;
+      const suffix =
+        parts.length > 1 && parts.at(-1)?.startsWith("-") === true
+          ? parts.pop()
+          : undefined;
+      return {
+        prefix: decode(prefix?.slice(0, -1) ?? ""),
+        start: decode(parts[0] ?? ""),
+        end: decode(parts[1] ?? ""),
+        suffix: decode(suffix?.slice(1) ?? ""),
+      };
+    });
+}
+
 export function parameterLabel(raw: string) {
   const index = raw.indexOf("=");
   const name = index === -1 ? raw : raw.slice(0, index);

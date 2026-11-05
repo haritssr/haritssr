@@ -8,7 +8,7 @@ import Button from "@/components/Button";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
 
-import { parameterLabel } from "./urlParts";
+import { parameterLabel, parseTextFragments } from "./urlParts";
 import type { ParsedURL } from "./urlParts";
 
 function ValueCell({ value }: { value: string }) {
@@ -59,6 +59,7 @@ export default function URLInspection({
   onFragmentChange: (checked: boolean) => void;
 }) {
   const fragmentId = useId();
+  const textFragments = parseTextFragments(parsed.fragment);
   const hierarchy = parsed.pathname.startsWith("/")
     ? [
         "/",
@@ -158,10 +159,59 @@ export default function URLInspection({
               <span className="text-muted block text-sm">
                 {parsed.fragment.slice(1)}
               </span>
+              {textFragments.map((fragment, index) => (
+                <span key={index} className="block text-sm">
+                  ({[fragment.start, fragment.end].filter(Boolean).join(" … ")})
+                </span>
+              ))}
             </div>
           </div>
         ) : (
           <p className="text-muted">This URL has no fragment.</p>
+        )}
+      </Section>
+      <Section title="Text fragment" className="min-w-0">
+        {textFragments.length ? (
+          <Table aria-label="URL text fragments">
+            <thead>
+              <tr className="divide-border bg-foreground/5 divide-x">
+                <th scope="col" className="px-3 text-left font-medium">
+                  Part
+                </th>
+                <th scope="col" className="px-3 text-left font-medium">
+                  Text
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-border divide-y">
+              {textFragments.map((fragment, index) =>
+                (
+                  [
+                    ["Prefix", fragment.prefix],
+                    ["Start", fragment.start],
+                    ["End", fragment.end],
+                    ["Suffix", fragment.suffix],
+                  ] as const
+                )
+                  .filter(([, text]) => text)
+                  .map(([part, text]) => (
+                    <tr
+                      key={`${index}:${part}`}
+                      className="divide-border divide-x"
+                    >
+                      <td className="px-3 py-2 align-middle whitespace-nowrap">
+                        {textFragments.length > 1
+                          ? `${part} ${index + 1}`
+                          : part}
+                      </td>
+                      <ValueCell value={text} />
+                    </tr>
+                  ))
+              )}
+            </tbody>
+          </Table>
+        ) : (
+          <p className="text-muted">This URL has no text fragment.</p>
         )}
       </Section>
       {hierarchy.length ? (

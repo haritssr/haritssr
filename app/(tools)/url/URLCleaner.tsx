@@ -8,7 +8,7 @@ import Section from "@/components/Section";
 
 import URLInput, { URL_FIELD_CLASS_NAME } from "./URLInput";
 import URLInspection from "./URLInspection";
-import { cleanURL, parseURL } from "./urlParts";
+import { cleanURL, parseURL, removeFragmentAutomatically } from "./urlParts";
 
 export default function URLCleaner() {
   const { add } = Toast.useToastManager();
@@ -26,7 +26,7 @@ export default function URLCleaner() {
     setRemoved(
       new Set(automatic && next ? next.parameters.map((_, index) => index) : [])
     );
-    setRemoveFragment(automatic && next?.query !== null && !!next);
+    setRemoveFragment(automatic && removeFragmentAutomatically(next));
     setFeedback("");
   }
 
@@ -37,7 +37,7 @@ export default function URLCleaner() {
         checked && parsed ? parsed.parameters.map((_, index) => index) : []
       )
     );
-    setRemoveFragment(checked && !!parsed && parsed.query !== null);
+    setRemoveFragment(checked && removeFragmentAutomatically(parsed));
     setFeedback("");
   }
 
