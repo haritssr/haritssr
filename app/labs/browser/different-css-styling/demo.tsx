@@ -2,6 +2,8 @@ import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
 import { SectionHeading } from "@/components/Section";
 
+import styles from "./demo.module.css";
+
 export default function DifferentCssStylingDemo() {
   return (
     <>
@@ -29,7 +31,7 @@ export default function DifferentCssStylingDemo() {
         <div className="h-25 w-25 rounded-md bg-[#d1d1d6] p-2">
           Tailwind CSS
         </div>
-        <div className="box">CSS Module</div>
+        <div className={styles.box}>CSS Module</div>
       </div>
     </>
   );

@@ -9,6 +9,8 @@ import PageDescription from "@/components/PageDescription";
 // native version
 // import { useEffect } from "react";
 
+import styles from "./demo.module.css";
+
 export default function IntersectionObserverDemo() {
   return (
     // <IntersectionObserverAPINative />
@@ -90,7 +92,9 @@ function IntersectionObserverAPIHooks() {
           {isMyElementVisible ? "The rocket will launch" : "The rocket in idle"}
         </h2>
         <p ref={rocketRef}>
-          <span className={`rocket ${isRocketVisible ? "animateRocket" : ""}`}>
+          <span
+            className={`${styles.rocket} ${isRocketVisible ? styles.animateRocket : ""}`}
+          >
             🚀
           </span>
         </p>
