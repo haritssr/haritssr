@@ -233,7 +233,23 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/statistics/Statistics.tsx",
-    "Date selection, the 30-day chart, and history refreshes limited to relevant changes.",
+    "Date and range selection, the day summary and table, and history refreshes limited to relevant changes.",
+  ],
+  [
+    "app/(tools)/timer/statistics/TimeChart.tsx",
+    "Stacked Work and Leisure columns with budget ticks, average line, tooltip, and table view.",
+  ],
+  [
+    "app/(tools)/timer/statistics/WeekdayHeatmap.tsx",
+    "Weekday by week heatmap of time spent.",
+  ],
+  [
+    "app/(tools)/timer/statistics/RangeSelect.tsx",
+    "The 7, 30, and 90-day range buttons.",
+  ],
+  [
+    "app/(tools)/timer/statistics/chartFormat.ts",
+    "Date and duration labels for the statistics charts.",
   ],
   [
     "app/(tools)/timer/details/page.tsx",

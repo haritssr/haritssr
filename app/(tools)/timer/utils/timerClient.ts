@@ -14,8 +14,8 @@ import type { TimerResponseTiming } from "@/app/(tools)/timer/utils/timerClock";
 import { validTimerDate } from "./timer";
 
 export const TIMER_SNAPSHOT_KEY = "/api/timer";
-export function timerHistoryKey(date: string) {
-  return `/api/timer?date=${date}`;
+export function timerHistoryKey(date: string, days: number) {
+  return `/api/timer?date=${date}&days=${days}`;
 }
 
 export interface ReceivedTimerSnapshot extends TimerSnapshot {
@@ -332,11 +332,11 @@ export async function fetchTimerCalendar(month: string) {
   }, "calendar");
 }
 
-export async function fetchTimerHistory(date: string) {
+export async function fetchTimerHistory(date: string, days: number) {
   return await loadTimer(async (signal) => {
     const [{ historySchema }, result] = await Promise.all([
       import("@/app/(tools)/timer/utils/timerValidation"),
-      fetchTimer(`/api/timer?date=${date}`, { signal }),
+      fetchTimer(timerHistoryKey(date, days), { signal }),
     ]);
     return historySchema.parse(result.data);
   }, "history");

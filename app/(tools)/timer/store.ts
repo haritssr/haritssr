@@ -17,6 +17,7 @@ import {
   createEmptyTimerDay,
   isTimerPlanningAction,
   shiftTimerDate,
+  taskKind,
   taskSpent,
   taskTransitionTime,
   timerDate,
@@ -264,7 +265,7 @@ export async function getTimerCalendar(month: string) {
   }, "read");
 }
 
-export async function getTimerHistory(date: string) {
+export async function getTimerHistory(date: string, days: number) {
   if (!validTimerDate(date) || date > timerDate()) {
     throw new TimerStoreError("Choose today or an earlier valid date.");
   }
@@ -272,26 +273,30 @@ export async function getTimerHistory(date: string) {
     const now = Date.now();
     const { day, runningDays, totals } = await readTimerHistoryState(
       tx,
-      shiftTimerDate(date, -29),
+      shiftTimerDate(date, -(days - 1)),
       date
     );
     for (const running of runningDays) {
-      const elapsed = running.tasks.reduce(
-        (sum, task) => sum + taskSpent(task, running.date, now) - task.spent,
-        0
-      );
-      totals.set(running.date, (totals.get(running.date) ?? 0) + elapsed);
+      const total = totals.get(running.date);
+      if (total === undefined) {
+        continue;
+      }
+      for (const task of running.tasks) {
+        const elapsed = taskSpent(task, running.date, now) - task.spent;
+        total.spent += elapsed;
+        total[taskKind(task)] += elapsed;
+      }
     }
     settleTimerDay(day, now);
     return {
       day,
       today: timerDate(now),
       mode: "turso" as const,
-      totals: Array.from({ length: 30 }, (_, index) => {
-        const key = shiftTimerDate(date, index - 29);
+      totals: Array.from({ length: days }, (_, index) => {
+        const key = shiftTimerDate(date, index - (days - 1));
         return {
           date: key,
-          spent: totals.get(key) ?? 0,
+          ...(totals.get(key) ?? { spent: 0, budget: 0, work: 0, leisure: 0 }),
         };
       }),
     };

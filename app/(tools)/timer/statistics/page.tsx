@@ -1,3 +1,5 @@
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
 import { TimerContent } from "@/app/(tools)/timer/_components/TimerProvider";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -10,7 +12,7 @@ export const metadata = createPageMetadata({
   title: "Statistics",
   path: "/timer/statistics",
   description:
-    "Review daily activities and how you spent your time over 30 days.",
+    "Review daily activities and how you spent your time over 7 to 90 days.",
 });
 
 export default function TimerStatisticsPage() {
@@ -22,12 +24,14 @@ export default function TimerStatisticsPage() {
       >
         <PageTitle>Statistics</PageTitle>
         <PageDescription>
-          Review daily activities and time spent over 30 days.
+          Review daily activities and time spent over 7, 30 or 90 days.
         </PageDescription>
       </PageHeader>
-      <TimerContent>
-        <Statistics />
-      </TimerContent>
+      <NuqsAdapter>
+        <TimerContent>
+          <Statistics />
+        </TimerContent>
+      </NuqsAdapter>
     </>
   );
 }

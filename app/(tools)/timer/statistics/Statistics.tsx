@@ -1,11 +1,15 @@
 "use client";
 
+import { parseAsStringLiteral, useQueryState } from "nuqs";
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import {
+  DEFAULT_HISTORY_RANGE,
+  TIMER_HISTORY_RANGES,
   formatTimerTime,
+  historyRange,
   shiftTimerDate,
   timerDate,
   validTimerDate,
@@ -19,6 +23,14 @@ import {
 import Button from "@/components/Button";
 import Section from "@/components/Section";
 import Table from "@/components/Table";
+
+import RangeSelect from "./RangeSelect";
+import TimeChart from "./TimeChart";
+import WeekdayHeatmap from "./WeekdayHeatmap";
+
+const rangeParser = parseAsStringLiteral(
+  TIMER_HISTORY_RANGES.map(String)
+).withDefault(String(DEFAULT_HISTORY_RANGE));
 
 function taskStatus(task: TimerTask) {
   if (task.spent >= task.duration) {
@@ -37,11 +49,14 @@ export default function Statistics() {
   const { snapshot } = useTimer("snapshot");
   const [date, setDate] = useState(() => timerDate());
   const today = snapshot?.today ?? timerDate();
+  const [rangeValue, setRangeValue] = useQueryState("range", rangeParser);
+  const days = historyRange(rangeValue) ?? DEFAULT_HISTORY_RANGE;
   const validDate = validTimerDate(date) && date <= today;
   const { data, error, mutate } = useSWR<TimerHistory, Error>(
-    validDate ? timerHistoryKey(date) : null,
-    async () => await fetchTimerHistory(date),
+    validDate ? timerHistoryKey(date, days) : null,
+    async () => await fetchTimerHistory(date, days),
     {
+      keepPreviousData: true,
       refreshInterval: (history) => (history?.mode === "demo" ? 0 : 60_000),
       shouldRetryOnError: false,
     }
@@ -57,7 +72,7 @@ export default function Statistics() {
         /* No history subscription for an invalid selection. */
       };
     }
-    const firstDate = shiftTimerDate(date, -29);
+    const firstDate = shiftTimerDate(date, -(days - 1));
     try {
       return subscribeTimerChanges((next) => {
         if (next !== undefined) {
@@ -87,7 +102,7 @@ export default function Statistics() {
         // Focus refresh and polling remain available if messaging fails.
       };
     }
-  }, [date, mutate, validDate]);
+  }, [date, days, mutate, validDate]);
 
   return (
     <div className="space-y-16">
@@ -106,7 +121,13 @@ export default function Statistics() {
                 value={date}
               />
             </label>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <RangeSelect
+                onChange={(range) => {
+                  void setRangeValue(String(range));
+                }}
+                value={days}
+              />
               <span className="text-muted text-sm">UTC+7</span>
               <Button
                 variant="secondary"
@@ -158,17 +179,31 @@ export default function Statistics() {
         ) : null}
       </div>
       {validDate && data !== undefined ? (
-        <HistorySections history={data} />
+        <HistorySections history={data} loading={data.totals.length !== days} />
       ) : null}
     </div>
   );
 }
 
-function HistorySections({ history }: { history: TimerHistory }) {
+function HistorySections({
+  history,
+  loading,
+}: {
+  history: TimerHistory;
+  loading: boolean;
+}) {
   return (
     <div className="space-y-16">
-      <Section title="Last 30 days">
-        <TimeChart totals={history.totals} />
+      <Section title={`Last ${history.totals.length} days`}>
+        <div
+          aria-busy={loading}
+          className={`space-y-6 transition-opacity ${loading ? "opacity-60" : ""}`}
+        >
+          <TimeChart totals={history.totals} />
+          {history.totals.length >= 30 ? (
+            <WeekdayHeatmap totals={history.totals} />
+          ) : null}
+        </div>
       </Section>
       <Section
         title="Activities"
@@ -270,117 +305,5 @@ function ActivityRow({ task, number }: { task: TimerTask; number: number }) {
       </td>
       <td className="px-3 py-3 align-top whitespace-nowrap">{status}</td>
     </tr>
-  );
-}
-
-function TimeChart({ totals }: { totals: TimerHistory["totals"] }) {
-  const width = 960;
-  const height = 300;
-  const left = 60;
-  const right = width - 20;
-  const top = 20;
-  const bottom = height - 60;
-  const step = (right - left) / Math.max(1, totals.length);
-  const maximum = Math.max(
-    1,
-    Math.ceil(Math.max(...totals.map((day) => day.spent / 3600)))
-  );
-  const y = (hours: number) => bottom - (hours / maximum) * (bottom - top);
-  const total = totals.reduce((sum, day) => sum + day.spent, 0);
-
-  return (
-    <figure className="border-border space-y-4 rounded-xl border p-4 sm:p-6">
-      <figcaption className="flex flex-wrap justify-between gap-2 text-sm">
-        <span>
-          {totals[0]?.date} – {totals.at(-1)?.date}
-        </span>
-        <span className="text-muted">
-          30-day total{" "}
-          <span className="text-foreground ml-2 font-medium tabular-nums">
-            {formatTimerTime(total)}
-          </span>
-        </span>
-      </figcaption>
-      <div
-        className="scrollbar-subtle overflow-x-auto"
-        aria-label="Time spent chart; scroll horizontally on smaller screens"
-      >
-        {/* oxlint-disable jsx-a11y/prefer-tag-over-role -- SVG needs image semantics for its axes and bars. */}
-        <svg
-          aria-label="Daily time spent over 30 days"
-          className="w-full min-w-160 font-sans text-xs tabular-nums"
-          role="img"
-          viewBox={`0 0 ${width} ${height}`}
-        >
-          <title>Daily time spent over 30 days</title>
-          <desc>
-            {totals
-              .map((day) => `${day.date}: ${formatTimerTime(day.spent)}`)
-              .join("; ")}
-          </desc>
-          {Array.from({ length: 5 }, (_, index) => {
-            const hours = (maximum * index) / 4;
-            return (
-              <g key={index}>
-                <line
-                  className="stroke-border"
-                  strokeDasharray="3 5"
-                  x1={left}
-                  x2={right}
-                  y1={y(hours)}
-                  y2={y(hours)}
-                />
-                <text
-                  className="text-muted fill-current"
-                  dominantBaseline="middle"
-                  textAnchor="end"
-                  x={left - 10}
-                  y={y(hours)}
-                >
-                  {Number(hours.toFixed(2))}h
-                </text>
-              </g>
-            );
-          })}
-          {totals.map((day, index) => (
-            <g key={day.date}>
-              <rect
-                className={
-                  index === totals.length - 1
-                    ? "fill-action"
-                    : "fill-foreground/20 hover:fill-foreground/40"
-                }
-                height={Math.max(0, bottom - y(day.spent / 3600))}
-                rx={3}
-                width={step * 0.65}
-                x={left + index * step + step * 0.175}
-                y={y(day.spent / 3600)}
-              >
-                <title>
-                  {day.date}: {formatTimerTime(day.spent)}
-                </title>
-              </rect>
-              <text
-                className="text-muted fill-current"
-                textAnchor="middle"
-                x={left + index * step + step / 2}
-                y={bottom + 22}
-              >
-                {Number(day.date.slice(-2))}
-              </text>
-            </g>
-          ))}
-          <text
-            className="text-muted fill-current"
-            textAnchor="middle"
-            x={(left + right) / 2}
-            y={height - 8}
-          >
-            Day of month · Jakarta time (WIB)
-          </text>
-        </svg>
-        {/* oxlint-enable jsx-a11y/prefer-tag-over-role */}
-      </div>
-    </figure>
   );
 }

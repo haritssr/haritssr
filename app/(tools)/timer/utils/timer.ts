@@ -151,11 +151,46 @@ export interface TimerSnapshot {
   preferences?: TimerPreferences;
 }
 
+/** Ranges, in days, that the statistics history can cover. */
+export const TIMER_HISTORY_RANGES = [7, 30, 90] as const;
+export type TimerHistoryRange = (typeof TIMER_HISTORY_RANGES)[number];
+export const DEFAULT_HISTORY_RANGE: TimerHistoryRange = 30;
+
+export function historyRange(value: unknown): TimerHistoryRange | null {
+  const days = typeof value === "string" ? Number(value) : value;
+  return TIMER_HISTORY_RANGES.find((range) => range === days) ?? null;
+}
+
+/** One day of history; `work + leisure` equals `spent`, all in seconds. */
+export interface TimerDayTotal {
+  date: string;
+  spent: number;
+  budget: number;
+  work: number;
+  leisure: number;
+}
+
 export interface TimerHistory {
   day: TimerDay;
   today: string;
   mode: "turso" | "demo";
-  totals: { date: string; spent: number }[];
+  totals: TimerDayTotal[];
+}
+
+/** Sums spent and planned seconds for one day, split by task kind. */
+export function summarizeTimerDay(
+  tasks: TimerTask[],
+  date: string,
+  now: number
+): Omit<TimerDayTotal, "date"> {
+  const total = { spent: 0, budget: 0, work: 0, leisure: 0 };
+  for (const task of tasks) {
+    const spent = taskSpent(task, date, now);
+    total.spent += spent;
+    total.budget += task.duration;
+    total[taskKind(task)] += spent;
+  }
+  return total;
 }
 
 export type TimerAction =

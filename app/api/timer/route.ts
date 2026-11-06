@@ -17,9 +17,11 @@ import {
 } from "@/app/(tools)/timer/store";
 import { DEFAULT_DAILY_TASKS } from "@/app/(tools)/timer/utils/dailyTasks";
 import {
+  DEFAULT_HISTORY_RANGE,
   createSampleTimerDay,
+  historyRange,
   shiftTimerDate,
-  taskSpent,
+  summarizeTimerDay,
   timerDate,
   validTimerDate,
 } from "@/app/(tools)/timer/utils/timer";
@@ -68,7 +70,7 @@ function failure(error: unknown) {
   );
 }
 
-function preview(date: string | null) {
+function preview(date: string | null, days: number) {
   const now = Date.now();
   const today = timerDate(now);
   if (date === null) {
@@ -87,14 +89,11 @@ function preview(date: string | null) {
     day: createSampleTimerDay(date),
     today,
     mode: "demo",
-    totals: Array.from({ length: 30 }, (_, index) => {
-      const key = shiftTimerDate(date, index - 29);
+    totals: Array.from({ length: days }, (_, index) => {
+      const key = shiftTimerDate(date, index - (days - 1));
       return {
         date: key,
-        spent: createSampleTimerDay(key).tasks.reduce(
-          (sum, task) => sum + taskSpent(task, key, now),
-          0
-        ),
+        ...summarizeTimerDay(createSampleTimerDay(key).tasks, key, now),
       };
     }),
   };
@@ -139,13 +138,19 @@ async function read(request: Request, started: number) {
       return NextResponse.json(calendar, { headers: timedHeaders(started) });
     }
     const date = query.get("date");
+    const days = query.has("days")
+      ? historyRange(query.get("days"))
+      : DEFAULT_HISTORY_RANGE;
+    if (days === null) {
+      throw new TimerStoreError("Choose 7, 30 or 90 days of history.");
+    }
     if (!owner) {
-      return NextResponse.json(preview(date), {
+      return NextResponse.json(preview(date, days), {
         headers: timedHeaders(started),
       });
     }
     if (date !== null) {
-      return NextResponse.json(await getTimerHistory(date), {
+      return NextResponse.json(await getTimerHistory(date, days), {
         headers: timedHeaders(started),
       });
     }

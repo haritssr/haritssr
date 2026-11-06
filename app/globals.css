@@ -199,6 +199,8 @@
   --color-schedule-surface: var(--color-violet-50);
   --color-schedule-accent: var(--color-violet-600);
   --color-schedule-foreground: var(--color-violet-800);
+  --color-series-work: var(--color-violet-600);
+  --color-series-leisure: var(--color-amber-600);
   --color-work-surface: var(--color-violet-50);
   --color-work-foreground: var(--color-violet-700);
   --color-leisure-surface: var(--color-amber-50);

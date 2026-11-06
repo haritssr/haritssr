@@ -12,6 +12,7 @@ import type {
 import { DEFAULT_DAILY_TASKS } from "@/app/(tools)/timer/utils/dailyTasks";
 import type {
   TimerDay,
+  TimerDayTotal,
   TimerPreferences,
 } from "@/app/(tools)/timer/utils/timer";
 import {
@@ -671,12 +672,14 @@ export async function writeTimerPreferences(
   });
 }
 
+export type TimerDayTotals = Omit<TimerDayTotal, "date">;
+
 export async function readTimerHistoryState(
   tx: Transaction,
   from: string,
   date: string
 ) {
-  const [days, tasks, running] = await tx.batch([
+  const [days, tasks, running, kinds] = await tx.batch([
     {
       sql: "SELECT date, revision, spent_seconds FROM timer_days WHERE date BETWEEN ? AND ? ORDER BY date",
       args: [from, date],
@@ -691,7 +694,26 @@ export async function readTimerHistoryState(
       sql: "SELECT * FROM timer_tasks INDEXED BY timer_tasks_running WHERE started_at IS NOT NULL AND date BETWEEN ? AND ? ORDER BY date, position",
       args: [from, date],
     },
+    {
+      sql: "SELECT date, kind, SUM(spent_seconds) AS spent, SUM(duration_seconds) AS budget FROM timer_tasks WHERE date BETWEEN ? AND ? GROUP BY date, kind",
+      args: [from, date],
+    },
   ]);
+  const totals = new Map<string, TimerDayTotals>();
+  for (const row of days.rows) {
+    const key = typeof row.date === "string" ? row.date : "";
+    totals.set(key, { spent: 0, budget: 0, work: 0, leisure: 0 });
+  }
+  for (const row of kinds.rows) {
+    const total = totals.get(typeof row.date === "string" ? row.date : "");
+    if (total === undefined) {
+      continue;
+    }
+    const spent = Number(row.spent);
+    total[row.kind === "leisure" ? "leisure" : "work"] += spent;
+    total.spent += spent;
+    total.budget += Number(row.budget);
+  }
   return {
     day:
       decodeDays(days, tasks).find((day) => day.date === date) ??
@@ -699,11 +721,6 @@ export async function readTimerHistoryState(
     runningDays: decodeDays(days, running).filter(
       (day) => day.tasks.length > 0
     ),
-    totals: new Map(
-      days.rows.map((row) => [
-        typeof row.date === "string" ? row.date : "",
-        Number(row.spent_seconds),
-      ])
-    ),
+    totals,
   };
 }

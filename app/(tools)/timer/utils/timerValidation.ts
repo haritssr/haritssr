@@ -4,6 +4,7 @@ import {
   DEFAULT_DURATION_PRESETS,
   DEFAULT_TASK_PRESETS,
   MAX_TIMER_TASKS,
+  TIMER_HISTORY_RANGES,
   allDayPeriod,
   isAllDay,
   validTimerDate,
@@ -324,8 +325,16 @@ export const historySchema = z.object({
   today: dateSchema,
   mode: z.enum(["turso", "demo"]),
   totals: z
-    .array(z.object({ date: dateSchema, spent: z.number().nonnegative() }))
-    .length(30),
+    .array(
+      z.object({
+        date: dateSchema,
+        spent: z.number().nonnegative(),
+        budget: z.number().nonnegative(),
+        work: z.number().nonnegative(),
+        leisure: z.number().nonnegative(),
+      })
+    )
+    .refine((totals) => TIMER_HISTORY_RANGES.some((n) => n === totals.length)),
 });
 
 export const calendarSchema = z

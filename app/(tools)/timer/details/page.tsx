@@ -122,11 +122,13 @@ export default function TimerDetailsPage() {
               completion notifications.
             </li>
             <li id="statistics">
-              Review daily history and 30-day totals in{" "}
+              Review daily history in{" "}
               <InternalLink href="/timer/statistics" variant="inline">
                 Statistics
               </InternalLink>
-              .
+              . Switch between 7, 30, and 90 days to see Work and Leisure time
+              stacked against each day’s budget, a 7-day average, and a weekday
+              heatmap. Every chart has a table view.
             </li>
             <li>Export your task history as a backup.</li>
           </ExplanationList>
@@ -368,7 +370,8 @@ export default function TimerDetailsPage() {
                       changes, completion, and midnight load a full snapshot.
                     </li>
                     <li>
-                      Statistics reads the selected day, 30 daily totals, and
+                      Statistics reads the selected day, daily Work, Leisure,
+                      and budget totals for the chosen 7, 30, or 90 days, and
                       running tasks in that window in a read-only transaction.
                     </li>
                     <li>
