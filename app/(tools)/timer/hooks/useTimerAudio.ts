@@ -12,10 +12,8 @@ import {
   playClockTick,
   prepareTaskSound,
 } from "@/app/(tools)/timer/utils/timerSound";
-import {
-  getTickingEnabled,
-  subscribeTicking,
-} from "@/app/(tools)/timer/utils/timerTicking";
+
+import { getTickingEnabled, subscribeTicking } from "./useTimerTicking";
 
 function getServerTickingEnabled() {
   return false;

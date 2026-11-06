@@ -1,11 +1,12 @@
 import { useSyncExternalStore } from "react";
 
+import { createLocalSetting } from "@/app/(tools)/timer/utils/timerLocalSetting";
 import { prepareTaskSound } from "@/app/(tools)/timer/utils/timerSound";
-import {
-  getTickingEnabled,
-  setTickingEnabled,
-  subscribeTicking,
-} from "@/app/(tools)/timer/utils/timerTicking";
+
+const ticking = createLocalSetting("haritssr-timer-ticking:v1");
+
+export const getTickingEnabled = ticking.get;
+export const subscribeTicking = ticking.subscribe;
 
 function serverTickingEnabled() {
   return false;
@@ -15,7 +16,7 @@ function changeTickingEnabled(enabled: boolean) {
   if (enabled) {
     prepareTaskSound();
   }
-  setTickingEnabled(enabled);
+  ticking.set(enabled);
 }
 
 export default function useTimerTicking() {

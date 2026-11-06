@@ -5,6 +5,7 @@ import { canUseTimer, timerDayBounds } from "../utils/timer";
 import type { TimerTask } from "../utils/timer";
 import { sendTimerAction } from "../utils/timerClient";
 import type { ReceivedTimerSnapshot } from "../utils/timerClient";
+import { subscribeWake } from "../utils/timerClock";
 import type { TimerController } from "../utils/timerController";
 import { formatDeadlineTime, taskDeadline } from "../utils/timerDeadline";
 
@@ -47,8 +48,6 @@ export default function useTimerDeadlineReminders({
     }
     const active = snapshot;
     const bounds = timerDayBounds(active.today);
-    let timeout = 0;
-    let disposed = false;
 
     async function claim(taskId: string) {
       try {
@@ -124,9 +123,8 @@ export default function useTimerDeadlineReminders({
     }
 
     function scan() {
-      window.clearTimeout(timeout);
-      if (disposed || document.hidden || pending) {
-        return;
+      if (pending) {
+        return null;
       }
       const now = Date.now() + active.clockOffset;
       let next = bounds.end > now ? bounds.end : Infinity;
@@ -153,18 +151,8 @@ export default function useTimerDeadlineReminders({
           void claim(task.id);
         }
       }
-      if (Number.isFinite(next)) {
-        timeout = window.setTimeout(scan, Math.max(100, next - now + 50));
-      }
+      return Number.isFinite(next) ? Math.max(100, next - now + 50) : null;
     }
-    scan();
-    document.addEventListener("visibilitychange", scan);
-    window.addEventListener("focus", scan);
-    return () => {
-      disposed = true;
-      window.clearTimeout(timeout);
-      document.removeEventListener("visibilitychange", scan);
-      window.removeEventListener("focus", scan);
-    };
+    return subscribeWake(scan).stop;
   }, [snapshot, pending, controller, add, update, close]);
 }

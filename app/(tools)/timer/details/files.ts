@@ -304,10 +304,6 @@ export const implementationFiles = [
     "In-memory window observation, idle queue, and conditional automatic-start requests.",
   ],
   [
-    "app/(tools)/timer/hooks/useScheduledTaskStarts.ts",
-    "Open-window starts, overlap batch tracking, and duplicate-safe scheduled commands.",
-  ],
-  [
     "app/(tools)/timer/hooks/useTimerAudio.ts",
     "Audio activation, ticking, and audio ownership.",
   ],
@@ -322,10 +318,6 @@ export const implementationFiles = [
   [
     "app/(tools)/timer/utils/timerInput.ts",
     "Shared task-input limits and form parsing; legacy stored limits remain separate.",
-  ],
-  [
-    "app/(tools)/timer/utils/timerTicking.ts",
-    "Browser-persisted Ticking preference, hydration-safe reads, and tab synchronization.",
   ],
   [
     "app/(tools)/timer/hooks/useTimerNotifications.tsx",

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useEffectEvent } from "react";
 
 import {
   canUseTimer,
@@ -18,6 +18,9 @@ export default function useTimerSchedule(
   refresh: () => Promise<unknown>,
   onCompletion: (notice: TimerNotice) => void
 ) {
+  // Read the latest callbacks without re-arming the timer when they change.
+  const refreshLatest = useEffectEvent(refresh);
+  const complete = useEffectEvent(onCompletion);
   useEffect(() => {
     if (!canUseTimer(snapshot)) {
       return () => {
@@ -37,19 +40,19 @@ export default function useTimerSchedule(
             taskCompletionTime(task) <=
               Math.min(now, taskWindowEnd(task, snapshot.today))
           ) {
-            onCompletion({
+            complete({
               date: snapshot.today,
               taskId: task.id,
               activity: task.activity,
             });
           }
         }
-        void refresh();
+        void refreshLatest();
       },
       Math.max(100, finish - Date.now() - clockOffset + 50)
     );
     return () => {
       window.clearTimeout(timeout);
     };
-  }, [snapshot, clockOffset, refresh, onCompletion]);
+  }, [snapshot, clockOffset]);
 }

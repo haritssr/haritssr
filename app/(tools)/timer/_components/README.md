@@ -246,7 +246,7 @@ or one running task, no confirmation is needed.
 
 The Sound switch controls ticking, defaults off, and stores its setting in browser localStorage under the
 versioned `haritssr-timer-ticking:v1` key through
-[timerTicking.ts](../utils/timerTicking.ts). Both on and off survive reloads;
+[useTimerTicking.ts](../hooks/useTimerTicking.ts). Both on and off survive reloads;
 storage events synchronize open tabs. If storage is blocked, the toggle still
 works in memory. When enabled, one shared Quartz clock
 mechanical tick repeats at a single pitch each real second while any personal task
@@ -331,7 +331,7 @@ modules keep independent work separate:
   refreshes remain available in every tab.
 - [useTimerSchedule.ts](../hooks/useTimerSchedule.ts) schedules only the earliest
   task completion and midnight refreshes.
-- [useScheduledTaskStarts.ts](../hooks/useScheduledTaskStarts.ts) starts never-started
+- [scheduledTaskStarts.ts](../utils/scheduledTaskStarts.ts) starts never-started
   scheduled tasks at opening and on return during an open window, across routes.
   Multitask starts every due task; otherwise the latest opening wins (saved order
   breaks ties) and pauses the current task after preserving elapsed progress.

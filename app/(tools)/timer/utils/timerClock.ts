@@ -67,3 +67,42 @@ export function timerNextDisplayAt(
   }
   return next;
 }
+
+/**
+ * Runs `scan` now and again whenever it asks, until the returned function is
+ * called. `scan` returns the delay in milliseconds until its next run, or null
+ * to wait. Focus and tab visibility also rescan, because timers are throttled
+ * or paused while a tab is hidden. Hidden tabs skip the scan unless
+ * `whenHidden` is set. The returned `wake` rescans on demand.
+ */
+export function subscribeWake(
+  scan: () => number | null,
+  { whenHidden = false }: { whenHidden?: boolean } = {}
+) {
+  let timeout = 0;
+  let stopped = false;
+  function wake() {
+    window.clearTimeout(timeout);
+    if (stopped || (document.hidden && !whenHidden)) {
+      return;
+    }
+    const delay = scan();
+    // A scan may have rescheduled itself while it ran.
+    window.clearTimeout(timeout);
+    if (!stopped && delay !== null && Number.isFinite(delay)) {
+      timeout = window.setTimeout(wake, delay);
+    }
+  }
+  window.addEventListener("focus", wake);
+  document.addEventListener("visibilitychange", wake);
+  wake();
+  return {
+    wake,
+    stop: () => {
+      stopped = true;
+      window.clearTimeout(timeout);
+      window.removeEventListener("focus", wake);
+      document.removeEventListener("visibilitychange", wake);
+    },
+  };
+}

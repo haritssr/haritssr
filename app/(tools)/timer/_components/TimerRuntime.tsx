@@ -7,12 +7,12 @@ import useSWR, { useSWRConfig } from "swr";
 import FloatingTimerDock from "@/app/(tools)/timer/_components/FloatingTimerDock";
 import { getEarliestRunningTask } from "@/app/(tools)/timer/_components/taskState";
 import { TimerContext } from "@/app/(tools)/timer/_components/TimerProvider";
-import useScheduledTaskStarts from "@/app/(tools)/timer/hooks/useScheduledTaskStarts";
 import useTimerAudio from "@/app/(tools)/timer/hooks/useTimerAudio";
 import useTimerDeadlineReminders from "@/app/(tools)/timer/hooks/useTimerDeadlineReminders";
 import useTimerNotifications from "@/app/(tools)/timer/hooks/useTimerNotifications";
 import useTimerPolling from "@/app/(tools)/timer/hooks/useTimerPolling";
 import useTimerSchedule from "@/app/(tools)/timer/hooks/useTimerSchedule";
+import { subscribeScheduledTaskStarts } from "@/app/(tools)/timer/utils/scheduledTaskStarts";
 import { formatTimerTime } from "@/app/(tools)/timer/utils/timer";
 import type { TimerSnapshot } from "@/app/(tools)/timer/utils/timer";
 import {
@@ -22,6 +22,7 @@ import {
   subscribeTimerRecovery,
 } from "@/app/(tools)/timer/utils/timerClient";
 import type { ReceivedTimerSnapshot } from "@/app/(tools)/timer/utils/timerClient";
+import { subscribeWake } from "@/app/(tools)/timer/utils/timerClock";
 import { createTimerController } from "@/app/(tools)/timer/utils/timerController";
 import type { TimerController } from "@/app/(tools)/timer/utils/timerController";
 
@@ -45,11 +46,9 @@ function useTimerPageTitle(
     const { day, now: snapshotNow } = snapshot;
     let pageTitle = document.title;
     let timerTitle: string | null = null;
-    let timeout = 0;
     function tick() {
-      window.clearTimeout(timeout);
       if (window.location.pathname !== "/timer") {
-        return;
+        return null;
       }
       const now = Math.max(
         Date.now() + clockOffset,
@@ -68,13 +67,15 @@ function useTimerPageTitle(
         if (document.title !== timerTitle) {
           document.title = timerTitle;
         }
-        timeout = window.setTimeout(tick, Math.max(1, 1000 - (now % 1000)));
-      } else if (timerTitle !== null) {
+        return Math.max(1, 1000 - (now % 1000));
+      }
+      if (timerTitle !== null) {
         if (document.title === timerTitle) {
           document.title = pageTitle;
         }
         timerTitle = null;
       }
+      return null;
     }
     const observer = new MutationObserver(() => {
       if (
@@ -92,14 +93,11 @@ function useTimerPageTitle(
       subtree: true,
       characterData: true,
     });
-    document.addEventListener("visibilitychange", tick);
-    window.addEventListener("focus", tick);
-    tick();
+    // The title keeps counting in a hidden tab, so the tab strip stays current.
+    const scheduler = subscribeWake(tick, { whenHidden: true });
     return () => {
       observer.disconnect();
-      window.clearTimeout(timeout);
-      document.removeEventListener("visibilitychange", tick);
-      window.removeEventListener("focus", tick);
+      scheduler.stop();
       if (timerTitle !== null && document.title === timerTitle) {
         document.title = pageTitle;
       }
@@ -109,7 +107,7 @@ function useTimerPageTitle(
 
 function useTimerRuntime(controller: TimerController) {
   const polling = useTimerPolling();
-  useScheduledTaskStarts(controller);
+  useEffect(() => subscribeScheduledTaskStarts(controller), [controller]);
   const { mutations } = controller;
   const { mutate } = useSWRConfig();
   const state = useSyncExternalStore(

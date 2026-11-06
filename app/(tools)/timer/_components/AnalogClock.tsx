@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { subscribeWake } from "../utils/timerClock";
+
 const MARKS = Array.from({ length: 60 }, (_, index) => index);
 const TIME_FORMATTER = new Intl.DateTimeFormat("en-GB", {
   timeZone: "Asia/Jakarta",
@@ -58,24 +60,14 @@ export default function AnalogClock({
 }) {
   const [timestamp, setTimestamp] = useState<number | null>(null);
 
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    const tick = () => {
-      clearTimeout(timeout);
-      if (document.hidden) {
-        return;
-      }
-      setTimestamp(Date.now());
-      timeout = setTimeout(tick, 1000 - (Date.now() % 1000));
-    };
-
-    tick();
-    document.addEventListener("visibilitychange", tick);
-    return () => {
-      clearTimeout(timeout);
-      document.removeEventListener("visibilitychange", tick);
-    };
-  }, []);
+  useEffect(
+    () =>
+      subscribeWake(() => {
+        setTimestamp(Date.now());
+        return 1000 - (Date.now() % 1000);
+      }).stop,
+    []
+  );
 
   const time = timestamp === null ? null : TIME_FORMATTER.format(timestamp);
   const jakarta = new Date((timestamp ?? 0) + 7 * 60 * 60 * 1000);

@@ -5,6 +5,7 @@ import {
   timerDayBounds,
 } from "./timer";
 import type { TimerTask } from "./timer";
+import { subscribeWake } from "./timerClock";
 import type { TimerController } from "./timerController";
 
 function isUnstartedScheduledTask(task: TimerTask) {
@@ -21,8 +22,6 @@ function isUnstartedScheduledTask(task: TimerTask) {
 export function subscribeScheduledTaskStarts(controller: TimerController) {
   const attempted = new Set<string>();
   let date = "";
-  let timeout = 0;
-  let disposed = false;
   let saving = false;
 
   async function start(taskIds: string[], today: string) {
@@ -36,21 +35,17 @@ export function subscribeScheduledTaskStarts(controller: TimerController) {
       taskIds,
     });
     saving = false;
-    scan();
+    scheduler.wake();
   }
 
   function scan() {
-    window.clearTimeout(timeout);
-    if (disposed) {
-      return;
-    }
     const {
       confirmed: snapshot,
       pendingCount,
       loadFailure,
     } = controller.mutations.getSnapshot();
     if (!canUseTimer(snapshot)) {
-      return;
+      return null;
     }
     if (date !== snapshot.today) {
       date = snapshot.today;
@@ -75,9 +70,6 @@ export function subscribeScheduledTaskStarts(controller: TimerController) {
         next = Math.min(next, timing.closesAt);
       }
     }
-    if (Number.isFinite(next)) {
-      timeout = window.setTimeout(scan, Math.max(100, next - now + 50));
-    }
     if (
       due.length > 0 &&
       !saving &&
@@ -86,16 +78,13 @@ export function subscribeScheduledTaskStarts(controller: TimerController) {
     ) {
       void start(due, date);
     }
+    return Number.isFinite(next) ? Math.max(100, next - now + 50) : null;
   }
-  const unsubscribe = controller.mutations.subscribe(scan);
-  window.addEventListener("focus", scan);
-  document.addEventListener("visibilitychange", scan);
-  scan();
+  // Scheduled starts must fire even while the tab is hidden.
+  const scheduler = subscribeWake(scan, { whenHidden: true });
+  const unsubscribe = controller.mutations.subscribe(scheduler.wake);
   return () => {
-    disposed = true;
-    window.clearTimeout(timeout);
     unsubscribe();
-    window.removeEventListener("focus", scan);
-    document.removeEventListener("visibilitychange", scan);
+    scheduler.stop();
   };
 }
