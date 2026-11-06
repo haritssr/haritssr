@@ -12,6 +12,16 @@ Scope: all 163 routes; audit mode. The audit made no application, dependency, or
 - Route totals include async outputs: `/timer` 994,259 bytes, `/music` 926,939, `/` 921,161, `/design` 1,007,247. These are neither initial-load transfer measurements nor expected savings.
 - Assets and CSS excluded from JavaScript ranking. Exported fonts and images are not evidence they are requested by every browser.
 
+## Update after the audit
+
+Timer validation schemas (`timerValidation.ts`, and so zod) are now loaded with a
+dynamic `import()` on save, so they are no longer in the first `/timer` load.
+Candidate 3 (narrow Zod imports) therefore no longer affects initial load. A Timer
+test fails if browser-side files import `zod` or `timerValidation` statically.
+Candidates 1 and 2 still describe the remaining preset and task-form UI chunks.
+The byte figures below come from the original baseline and have not been
+re-measured.
+
 ## Ranked candidates
 
 ### 1. Defer Timer preset settings until Settings opens

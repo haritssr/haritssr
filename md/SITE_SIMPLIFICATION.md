@@ -31,9 +31,6 @@ changing placement.
 
 ## Code simplifications
 
-- The [homepage](../app/page.tsx) imports `TASK_LAYOUT` from Timer to style the
-  profile. Move shared surface styling into site-wide UI or design tokens so the
-  homepage does not depend on a tool.
 - [Feature previews](../app/Features.tsx) reproduce search, contents, sharing,
   and timer interfaces. Removing the previews eliminates a second visual
   representation to maintain when those features change.
@@ -44,6 +41,8 @@ changing placement.
 - Removed the live homepage commit count and its database request.
 - Removed the tools section's asynchronous wrapper and Suspense boundary; tools
   now render directly.
+- The homepage no longer imports `TASK_LAYOUT` from Timer, so it does not
+  depend on a tool for styling.
 - Removed the unused cached count helper and database count query. Commit history
   remains available through the existing Commits functionality.
 
