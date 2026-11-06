@@ -93,6 +93,8 @@ export default function useTimerDeadlineReminders({
         visibleToasts.set(toast.id, { date: latest.today, taskId });
         add({
           ...toast,
+          // Deadline warnings stay until dismissed or the deadline passes.
+          timeout: 0,
           onClose: () => {
             visibleToasts.delete(toast.id);
           },

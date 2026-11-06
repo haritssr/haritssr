@@ -2,7 +2,7 @@
 
 import { Toast } from "@base-ui/react/toast";
 import { CheckIcon } from "@heroicons/react/24/outline";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
 import type { ReactNode } from "react";
 
 import {
@@ -24,7 +24,7 @@ export default function SharePageProvider({
   children: ReactNode;
 }) {
   return (
-    <Toast.Provider limit={Number.POSITIVE_INFINITY} timeout={0}>
+    <Toast.Provider limit={Number.POSITIVE_INFINITY} timeout={10_000}>
       {children}
     </Toast.Provider>
   );
@@ -53,36 +53,7 @@ export function useSharePageUrl() {
 }
 
 export function ShareToastViewport() {
-  const { toasts, close } = Toast.useToastManager();
-  const timers = useRef(new Map<string, ReturnType<typeof setTimeout>>());
-  useEffect(() => {
-    const activeIds = new Set(toasts.map((toast) => toast.id));
-    for (const [id, timer] of timers.current) {
-      if (!activeIds.has(id)) {
-        clearTimeout(timer);
-        timers.current.delete(id);
-      }
-    }
-    for (const toast of toasts) {
-      if (toast.type !== "timer-deadline" && !timers.current.has(toast.id)) {
-        timers.current.set(
-          toast.id,
-          setTimeout(() => {
-            close(toast.id);
-          }, 10_000)
-        );
-      }
-    }
-  }, [toasts, close]);
-  useEffect(() => {
-    const activeTimers = timers.current;
-    return () => {
-      for (const timer of activeTimers.values()) {
-        clearTimeout(timer);
-      }
-      activeTimers.clear();
-    };
-  }, []);
+  const { toasts } = Toast.useToastManager();
   const ringing = toasts.some(
     (toast) =>
       (toast.type === "timer-completion" ||
@@ -125,7 +96,7 @@ export function ShareToastViewport() {
       <Toast.Viewport className="pointer-events-auto -m-3 flex max-h-[40dvh] w-[calc(100%+1.5rem)] list-none flex-col gap-3 overflow-y-auto p-3 outline-hidden sm:w-[calc(22.4rem+1.5rem)]">
         {toasts.map((toast) => (
           <Toast.Root
-            className={`${FLOATING_NOTIFICATION_CLASS_NAME} data-ending-style:animate-out data-ending-style:fade-out data-ending-style:slide-out-to-right data-starting-style:animate-in data-starting-style:fade-in data-starting-style:slide-in-from-right shrink-0 transition-[transform,opacity] duration-200 ease-out`}
+            className={`${FLOATING_NOTIFICATION_CLASS_NAME} shrink-0`}
             key={toast.id}
             swipeDirection={[]}
             toast={toast}
