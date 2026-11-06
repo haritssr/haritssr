@@ -9,6 +9,7 @@ import {
   weekDates,
 } from "../utils/timerCalendar";
 import { cardTimeRange, timelineTime } from "../utils/timerTime";
+import ScrollMirror from "./ScrollMirror";
 import { timelineCardState } from "./TaskTimeline";
 import { layoutTimelineTasks } from "./timelineLayout";
 
@@ -44,8 +45,8 @@ export default function TimerWeek({
   const byDate = new Map(days.map((day) => [day.date, day]));
   const dates = weekDates(date);
   return (
-    <div className="scrollbar-subtle min-w-0 overflow-x-auto select-none">
-      <div className="min-w-2xl">
+    <ScrollMirror>
+      <div className="isolate min-w-2xl">
         <div className="border-border grid grid-cols-[3rem_repeat(7,minmax(0,1fr))] border-b pb-2">
           <span aria-hidden="true" />
           {dates.map((entry) => (
@@ -80,7 +81,7 @@ export default function TimerWeek({
           ))}
         </div>
       </div>
-    </div>
+    </ScrollMirror>
   );
 }
 
