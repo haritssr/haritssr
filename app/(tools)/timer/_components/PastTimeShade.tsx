@@ -64,7 +64,7 @@ export default function PastTimeShade({
     <>
       <div
         aria-hidden="true"
-        className={`${styles.event} bg-foreground/5 absolute cursor-not-allowed select-none`}
+        className={`${styles.event} bg-foreground/3 lg:corner-squircle absolute cursor-not-allowed select-none lg:rounded-r-sm lg:supports-[corner-shape:squircle]:rounded-r-xl`}
         style={geometry}
         onPointerDown={explain}
       />

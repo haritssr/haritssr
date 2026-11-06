@@ -123,8 +123,7 @@ Both gesture hooks share pointer and touch-hold tracking in
 live in [timerTime.ts](../utils/timerTime.ts). `TimerClient` owns the one-minute
 clock and passes it to `TaskList`. The timeline retains every scheduled window
 all day, including running, paused, completed, and missed tasks. Blocks span their
-exact opening/closing minutes; running cards use opaque green surfaces and the
-progress accent, other active cards use their kind's color (violet for Work, amber for Leisure), and past cards are muted in that color. Overlapping windows share
+exact opening/closing minutes; active cards, running included, use their kind's color (violet for Work, amber for Leisure), and past cards are muted in that color. Overlapping windows share
 horizontal lanes, calculated by [timelineLayout.ts](timelineLayout.ts). Its
 full-height timeline displays every hour from 00:00 to 24:00 in the page flow,
 without internal scrolling. The "6-hour timeline" setting (off by default, saved with the
@@ -413,7 +412,7 @@ migration, which also tags X, YouTube, Orientation, and Digital Clutter as
 Leisure in saved tasks, daily tasks, and presets once, when the column is
 created; back up first. Schedule colors come from `data-kind` and the
 state attributes in [TaskTimeline.module.css](TaskTimeline.module.css), where
-rule order makes running (green) and completed or missed (faded) override kind.
+rule order makes completed or missed (faded) override kind.
 
 Settings and History use icons with accessible labels at every screen size.
 Settings contains the download button below Sound, with a loading label during download.

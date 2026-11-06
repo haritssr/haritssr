@@ -206,8 +206,6 @@
   --color-schedule-leisure-surface: var(--color-amber-50);
   --color-schedule-leisure-accent: var(--color-amber-600);
   --color-schedule-leisure-foreground: var(--color-amber-900);
-  --color-schedule-running-surface: var(--color-green-50);
-  --color-schedule-running-foreground: var(--color-green-900);
   --color-schedule-muted-surface: color-mix(
     in srgb,
     var(--color-violet-50) 50%,
@@ -220,7 +218,7 @@
     var(--color-amber-50) 50%,
     var(--color-background)
   );
-  --color-schedule-leisure-muted-accent: var(--color-amber-300);
+  --color-schedule-leisure-muted-accent: var(--color-amber-600);
   --color-accordion-open-surface: var(--color-blue-50);
   --color-action: color-mix(
     in oklab,
