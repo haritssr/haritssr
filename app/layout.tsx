@@ -36,7 +36,6 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "Harits Syah",
   },
-  description: "Developer, teacher, and founder.",
   icons: {
     icon: [
       {
