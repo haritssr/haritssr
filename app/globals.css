@@ -219,7 +219,12 @@
     var(--color-amber-50) 50%,
     var(--color-background)
   );
-  --color-schedule-leisure-muted-accent: var(--color-amber-600);
+  /* Amber-300 reads as neon yellow; fading amber-600 keeps the orange hue. */
+  --color-schedule-leisure-muted-accent: color-mix(
+    in srgb,
+    var(--color-amber-600) 50%,
+    var(--color-background)
+  );
   --color-accordion-open-surface: var(--color-blue-50);
   --color-action: color-mix(
     in oklab,
