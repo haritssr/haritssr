@@ -132,10 +132,10 @@ export default function TaskActions({
           aria-label={`Done: ${task.activity}`}
           title={doneDisabled ? undefined : "Done"}
           onClick={finishTask}
-          variant="secondary"
+          variant="timer-secondary"
         >
           <CheckIcon
-            strokeWidth={2}
+            strokeWidth={2.5}
             aria-hidden="true"
             className="size-5 sm:group-data-list-view/task-list:size-3.75"
           />
@@ -149,7 +149,7 @@ export default function TaskActions({
           onDelete={async () =>
             await act({ action: "delete", date, taskId: task.id })
           }
-          variant="secondary"
+          variant="timer-secondary"
           aria-label={`Delete ${task.activity}`}
         />
       )}

@@ -38,7 +38,7 @@ const TASK_STATE_APPEARANCE = {
     weight: "font-normal",
     progress: "var(--color-foreground)",
     // Matches the Done button so waiting tasks don't outweigh running ones.
-    button: "secondary",
+    button: "timer-secondary",
   },
   complete: {
     elapsed: "text-foreground",

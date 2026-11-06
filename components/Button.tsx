@@ -56,7 +56,7 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "timer-paused":
     "border border-transparent bg-zinc-700 font-medium text-white hover:bg-zinc-700/90 focus-visible:outline-zinc-700",
   "timer-secondary":
-    "border-[0.5px] border-border bg-secondary-button-surface font-medium text-foreground shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-colors duration-150 select-none enabled:hover:bg-interface-hover focus-visible:outline-secondary-hover-foreground",
+    "border border-transparent bg-secondary-button-surface font-medium text-zinc-700 shadow-[0_0_4px_color-mix(in_srgb,var(--color-foreground)_15%,transparent)] transition-shadow duration-150 select-none enabled:hover:shadow-[0_0_8px_color-mix(in_srgb,var(--color-foreground)_30%,transparent)] focus-visible:outline-secondary-hover-foreground",
   music:
     "border border-transparent bg-accent font-medium text-white hover:bg-accent/90 focus-visible:outline-accent",
   black:
