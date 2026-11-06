@@ -1,7 +1,7 @@
 "use client";
 
 import { MusicalNoteIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
+import { ForwardIcon, PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 import { usePathname } from "next/navigation";
 import { useSyncExternalStore } from "react";
 
@@ -63,6 +63,16 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
         <XMarkIcon aria-hidden="true" className="size-5" strokeWidth={2.5} />
       </Button>
       <Button
+        aria-label="Next song"
+        onClick={() => {
+          store.next();
+        }}
+        size="floating-control"
+        variant="floating-control"
+      >
+        <ForwardIcon aria-hidden="true" className="size-5 translate-x-px" />
+      </Button>
+      <Button
         aria-label={playing ? "Pause music" : "Play music"}
         data-floating-space="music"
         onClick={() => {
@@ -94,7 +104,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
       <FloatingDockSlot position="music">
         <section
           aria-label="Floating music player"
-          className={`${styles.accent} pointer-events-auto w-full sm:w-80`}
+          className={`${styles.accent} pointer-events-auto w-full sm:w-[22.4rem]`}
         >
           {fullPlayer}
         </section>

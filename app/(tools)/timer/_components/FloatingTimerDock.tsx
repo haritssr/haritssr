@@ -171,20 +171,18 @@ function FloatingTimerPlayer({
         presentation="icons"
         onPause={onPause}
       >
-        {taskCount > 1 ? (
-          <Button
-            data-floating-details=""
-            aria-label={`Switch task: ${selectedIndex + 1} of ${taskCount}. Next task`}
-            onClick={onSelectNext}
-            size="floating-control"
-            title={`Next task (${selectedIndex + 1}/${taskCount})`}
-            variant="floating-control"
-          >
-            <span className="text-xs whitespace-nowrap tabular-nums">
-              {selectedIndex + 1}/{taskCount}
-            </span>
-          </Button>
-        ) : null}
+        <Button
+          data-floating-details=""
+          aria-label={`Switch task: ${selectedIndex + 1} of ${taskCount}. Next task`}
+          onClick={onSelectNext}
+          size="floating-control"
+          title={`Next task (${selectedIndex + 1}/${taskCount})`}
+          variant="floating-control"
+        >
+          <span className="text-xs whitespace-nowrap tabular-nums">
+            {selectedIndex + 1}/{taskCount}
+          </span>
+        </Button>
       </TaskActions>
     </FloatingPlayer>
   );
@@ -193,7 +191,7 @@ function FloatingTimerPlayer({
     <FloatingDockSlot position="timer">
       <section
         aria-label="Floating task"
-        className="pointer-events-auto w-full max-w-full min-w-0 sm:w-80"
+        className="pointer-events-auto w-full max-w-full min-w-0 sm:w-[22.4rem]"
       >
         {fullPlayer}
       </section>

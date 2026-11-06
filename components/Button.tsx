@@ -48,7 +48,7 @@ export const SECONDARY_BUTTON_CLASS =
 
 const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "floating-control":
-    "text-foreground transition-colors duration-150 enabled:hover:text-muted focus-visible:outline-action",
+    "text-zinc-700 transition-colors duration-150 enabled:hover:text-muted focus-visible:outline-action",
   "theme-fill":
     "border border-transparent bg-(--pill-accent) text-white transition-opacity duration-150 enabled:hover:opacity-90 focus-visible:outline-action",
   "timer-running":
