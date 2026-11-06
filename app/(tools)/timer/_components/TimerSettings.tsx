@@ -22,7 +22,7 @@ import type { ComponentProps, ReactNode, Ref } from "react";
 
 import Button from "@/components/Button";
 
-import usePagedTimeline from "../hooks/usePagedTimeline";
+import { useTimelineSettings } from "../hooks/useTimelineMode";
 import useTimerTicking from "../hooks/useTimerTicking";
 import { canUseTimer } from "../utils/timer";
 import PresetSettings from "./PresetSettings";
@@ -130,7 +130,7 @@ function TimerSettingsControls() {
     "setAutoplay"
   );
   const { tickingEnabled, setTickingEnabled } = useTimerTicking();
-  const { paged, setPaged } = usePagedTimeline();
+  const { paged, setPaged, follow, setFollow } = useTimelineSettings();
   const [permissionFailed, setPermissionFailed] = useState(false);
   const browserPermission = useSyncExternalStore(
     subscribePermission,
@@ -200,6 +200,16 @@ function TimerSettingsControls() {
         checked={paged}
         onCheckedChange={(next) => {
           void setPaged(next);
+        }}
+      />
+      <TimerSettingSwitch
+        label="Follow now"
+        title="Scroll the full-day schedule inside the screen height, opening at the current time"
+        icon={<ClockIcon aria-hidden="true" className="size-4.5 stroke-2" />}
+        disabled={false}
+        checked={follow}
+        onCheckedChange={(next) => {
+          void setFollow(next);
         }}
       />
     </div>

@@ -1,6 +1,9 @@
 import useTimelineCreation from "../hooks/useTimelineCreation";
 import useTimelineResize from "../hooks/useTimelineResize";
-import type { TimelinePagerState } from "../hooks/useTimelineWindow";
+import type {
+  TimelinePagerState,
+  TimelineScroll,
+} from "../hooks/useTimelineWindow";
 import type { Period, TimerTask } from "../utils/timer";
 import TaskTimeline from "./TaskTimeline";
 
@@ -11,12 +14,14 @@ export default function EditableTaskTimeline({
   now,
   view,
   pager,
+  scroll,
 }: {
   tasks: TimerTask[];
   date: string;
   now: number;
   view: Period;
   pager: TimelinePagerState | null;
+  scroll: TimelineScroll | null;
 }) {
   const { surface, selection, message } = useTimelineCreation(date, true, view);
   const {
@@ -32,6 +37,7 @@ export default function EditableTaskTimeline({
       editable
       view={view}
       pager={pager}
+      scroll={scroll}
       interaction={{
         root,
         surface,

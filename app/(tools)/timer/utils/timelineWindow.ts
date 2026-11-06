@@ -25,3 +25,27 @@ export function pageAt(minute: number) {
 export function overlapsView(from: number, until: number, view: Period) {
   return until > view.from && from < view.until;
 }
+
+/** Rem of timeline height per hour, shared by every timeline mode. */
+export const HOUR_REM = 160 / 24;
+
+/** Minutes of context kept above the current time when the follow-now frame opens. */
+export const FOLLOW_LEAD_MINUTES = 30;
+
+/** A 12-hour hour with its suffix, such as `6AM`. */
+function hourLabel(minute: number) {
+  const hour = Math.floor(minute / 60) % 24;
+  return `${hour % 12 || 12}${hour < 12 ? "AM" : "PM"}`;
+}
+
+/** A compact range that drops the shared suffix: `1-6PM`, or `6AM-12PM` when suffixes differ. */
+export function periodRange(period: Period) {
+  const start = hourLabel(period.from);
+  const end = hourLabel(period.until);
+  const startSuffix = start.slice(-2);
+  const endSuffix = end.slice(-2);
+  if (startSuffix === endSuffix) {
+    return `${start.slice(0, -2)}-${end}`;
+  }
+  return `${start}-${end}`;
+}

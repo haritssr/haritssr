@@ -113,7 +113,9 @@ export default function TimerDetailsPage() {
             <li>
               Optionally show the schedule in 6-hour pages with floating buttons
               to the neighbouring hours; the full 24-hour timeline remains the
-              default.
+              default. A &ldquo;Follow now&rdquo; setting instead scrolls the
+              full 24-hour timeline inside the available screen height, opening
+              just before the current time, with a Now button to return.
             </li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or

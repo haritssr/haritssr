@@ -272,6 +272,7 @@ export const preferencesSchema = z.object({
   multitask: z.boolean(),
   desktopListView: z.boolean().default(false),
   pagedTimeline: z.boolean().default(false),
+  followNowTimeline: z.boolean().default(false),
   notificationsEnabled: z.boolean(),
   durationPresets: durationPresetsSchema.default(() => [
     ...DEFAULT_DURATION_PRESETS,
@@ -289,6 +290,7 @@ export const preferencesPatchSchema = preferencesSchema
     revision: true,
     desktopListView: true,
     pagedTimeline: true,
+    followNowTimeline: true,
     durationPresets: true,
     taskPresets: true,
     dailyTasks: true,
@@ -296,6 +298,7 @@ export const preferencesPatchSchema = preferencesSchema
   .extend({
     desktopListView: z.boolean(),
     pagedTimeline: z.boolean(),
+    followNowTimeline: z.boolean(),
     durationPresets: durationPresetsSchema,
     taskPresets: taskPresetsSchema,
     dailyTasks: dailyTasksSchema,

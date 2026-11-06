@@ -45,6 +45,7 @@ export default function TimerToolbar({
           {(["day", "week", "month", "year"] as const).map((option) => (
             <ButtonGroupItem
               key={option}
+              spacing="roomy"
               aria-pressed={view === option}
               onClick={() => {
                 onViewChange(option);

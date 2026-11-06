@@ -93,23 +93,23 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimelinePager.tsx",
-    "Floating previous/next buttons labelled with 6-hour ranges for the paged timeline.",
+    "Floating page buttons for the paged timeline and a Now button for the follow-now timeline.",
   ],
   [
     "app/(tools)/timer/hooks/useTimelineWindow.ts",
-    "Selects the whole day or a 6-hour page, opening on the current time or first task.",
-  ],
-  [
-    "app/(tools)/timer/hooks/usePagedTimeline.ts",
-    "Reads and saves the account's 6-hour timeline preference.",
+    "Selects the whole day or a 6-hour page, and sizes and positions the follow-now scrolling frame.",
   ],
   [
     "app/(tools)/timer/utils/timerLocalSetting.ts",
     "Shared boolean localStorage preference store with cross-tab synchronization.",
   ],
   [
+    "app/(tools)/timer/hooks/useTimelineMode.ts",
+    "Reads and saves the account's 6-hour and Follow now timeline preferences.",
+  ],
+  [
     "app/(tools)/timer/utils/timelineWindow.ts",
-    "Page ranges and overlap checks for the 6-hour timeline.",
+    "Page ranges, hour height and overlap checks.",
   ],
   [
     "app/(tools)/timer/_components/EditableTaskTimeline.tsx",

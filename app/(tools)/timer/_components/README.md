@@ -128,8 +128,12 @@ horizontal lanes, calculated by [timelineLayout.ts](timelineLayout.ts). Its
 full-height timeline displays every hour from 00:00 to 24:00 in the page flow,
 without internal scrolling. The "6-hour timeline" setting (off by default, saved with the
 other preferences in `timer_preferences.paged_timeline` and read through
-[usePagedTimeline.ts](../hooks/usePagedTimeline.ts)) instead shows one 6-hour
-page at a time, a quarter of that height. [ScheduleTimeline.tsx](ScheduleTimeline.tsx)
+[useTimelineMode.ts](../hooks/useTimelineMode.ts)) instead shows one 6-hour
+page at a time, a quarter of that height. The "Follow now" setting
+(`timer_preferences.follow_now_timeline`, exclusive with the 6-hour setting) keeps the
+full 24-hour timeline but scrolls it inside a frame whose maximum height is the screen
+height available below it. The frame opens scrolled to 30 minutes before the current
+time and stays put as time passes; a Now button scrolls back. [ScheduleTimeline.tsx](ScheduleTimeline.tsx)
 chooses the page through [useTimelineWindow.ts](../hooks/useTimelineWindow.ts): the
 page holding the current time, or on other days the first scheduled task's page
 (06:00–12:00 without tasks), until a page is chosen. A floating

@@ -9,7 +9,7 @@ const EditableTaskTimeline = lazy(
   async () => await import("./EditableTaskTimeline")
 );
 
-/** A day's schedule, paged by 6 hours when that setting is on. */
+/** A day's schedule: the whole day, 6-hour pages, or the full day scrolled to the current time. */
 export default function ScheduleTimeline({
   tasks,
   date,
@@ -21,13 +21,20 @@ export default function ScheduleTimeline({
   now: number;
   editable: boolean;
 }) {
-  const { view, pager } = useTimelineWindow(tasks, date, now);
-  const timeline = { tasks, date, now, view, pager };
-  return editable ? (
-    <Suspense fallback={<TaskTimeline {...timeline} editable />}>
-      <EditableTaskTimeline {...timeline} />
-    </Suspense>
-  ) : (
-    <TaskTimeline {...timeline} editable={false} />
+  const { view, pager, ref, scroll } = useTimelineWindow(tasks, date, now);
+  const timeline = { tasks, date, now, view, pager, scroll };
+  return (
+    <div
+      ref={ref}
+      className="lg:corner-squircle lg:border-border min-w-0 lg:rounded-xl lg:border lg:border-dashed lg:py-3 lg:pr-1 lg:pl-2 lg:supports-[corner-shape:squircle]:rounded-3xl"
+    >
+      {editable ? (
+        <Suspense fallback={<TaskTimeline {...timeline} editable />}>
+          <EditableTaskTimeline {...timeline} />
+        </Suspense>
+      ) : (
+        <TaskTimeline {...timeline} editable={false} />
+      )}
+    </div>
   );
 }

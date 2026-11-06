@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 import { ButtonGroup, ButtonGroupItem } from "@/components/ButtonGroup";
 
 import type { TimelinePagerState } from "../hooks/useTimelineWindow";
-import { isDaytime, PAGE_COUNT, pagePeriod } from "../utils/timelineWindow";
+import { isDaytime } from "../utils/timelineWindow";
 import type { Period } from "../utils/timer";
 
 /** A sun for daytime periods and a moon for night periods. */
@@ -23,24 +23,6 @@ export function TimeOfDayIcon({
 }) {
   const Icon = isDaytime(period) ? SunIcon : MoonIcon;
   return <Icon aria-hidden="true" className={className} />;
-}
-
-/** A 12-hour hour with its suffix, such as `6AM`. */
-function hourLabel(minute: number) {
-  const hour = Math.floor(minute / 60) % 24;
-  return `${hour % 12 || 12}${hour < 12 ? "AM" : "PM"}`;
-}
-
-/** A compact range that drops the shared suffix: `1-6PM`, or `6AM-12PM` when suffixes differ. */
-function pageRange(period: Period) {
-  const start = hourLabel(period.from);
-  const end = hourLabel(period.until);
-  const startSuffix = start.slice(-2);
-  const endSuffix = end.slice(-2);
-  if (startSuffix === endSuffix) {
-    return `${start.slice(0, -2)}-${end}`;
-  }
-  return `${start}-${end}`;
 }
 
 /** A pager button that names the hours it opens in a tooltip on hover or focus. */
@@ -58,7 +40,9 @@ function PagerButton({
       <Tooltip.Trigger
         aria-label={label}
         onClick={onClick}
-        render={<ButtonGroupItem className="min-h-8.5 min-w-8.5" />}
+        render={
+          <ButtonGroupItem className="min-h-8.5 min-w-8.5" spacing="roomy" />
+        }
       >
         {children}
       </Tooltip.Trigger>
@@ -77,14 +61,44 @@ function PagerButton({
   );
 }
 
-/** Floating buttons that step the 6-hour timeline to the previous or next page, or back to the current time. */
+/** Floating buttons that step the timeline earlier or later, or back to the current time. */
 export default function TimelinePager({
-  page,
-  nowPage,
-  select,
-}: TimelinePagerState) {
-  const previous = page > 0 ? pagePeriod(page - 1) : null;
-  const next = page < PAGE_COUNT - 1 ? pagePeriod(page + 1) : null;
+  previous,
+  now,
+  next,
+  inset = false,
+}: TimelinePagerState & {
+  /** Moves the pager left of a visible scroll bar on small screens. */
+  inset?: boolean;
+}) {
+  // A lone Now button (follow-now mode) floats as its own circle.
+  if (previous === null && next === null && now !== null) {
+    return (
+      <Tooltip.Provider>
+        <Tooltip.Root>
+          <Tooltip.Trigger
+            aria-label={now.label}
+            onClick={() => {
+              now.select();
+            }}
+            className="bg-background focus-visible:outline-action hover:inset-ring-foreground/50 absolute top-4 right-5 z-20 flex size-9 cursor-pointer items-center justify-center rounded-full drop-shadow-lg transition-shadow duration-150 hover:inset-ring-1 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+          >
+            <span
+              aria-hidden="true"
+              className="bg-danger size-6 rounded-full"
+            />
+          </Tooltip.Trigger>
+          <Tooltip.Portal>
+            <Tooltip.Positioner side="bottom" sideOffset={6} className="z-50">
+              <Tooltip.Popup className="corner-squircle bg-foreground text-background rounded-md px-2 py-1 text-xs shadow-lg supports-[corner-shape:squircle]:rounded-lg">
+                {now.label}
+              </Tooltip.Popup>
+            </Tooltip.Positioner>
+          </Tooltip.Portal>
+        </Tooltip.Root>
+      </Tooltip.Provider>
+    );
+  }
   const dot = (
     <span
       aria-hidden="true"
@@ -92,14 +106,16 @@ export default function TimelinePager({
     />
   );
   return (
-    <div className="corner-squircle bg-background/80 absolute top-0 right-0 z-20 rounded-md backdrop-blur-xs supports-[corner-shape:squircle]:rounded-xl lg:top-2 lg:right-2">
+    <div
+      className={`corner-squircle bg-background/80 absolute top-0 ${inset ? "right-3" : "right-0"} z-20 rounded-md backdrop-blur-xs supports-[corner-shape:squircle]:rounded-xl lg:top-2 lg:right-2`}
+    >
       <Tooltip.Provider>
         <ButtonGroup aria-label="Schedule hours">
           {previous === null ? null : (
             <PagerButton
-              label={`Show ${pageRange(previous)}${nowPage === page - 1 ? ", current time" : ""}`}
+              label={previous.label}
               onClick={() => {
-                select(page - 1);
+                previous.select();
               }}
             >
               <ChevronLeftIcon
@@ -108,11 +124,11 @@ export default function TimelinePager({
               />
             </PagerButton>
           )}
-          {nowPage === null || nowPage === page ? null : (
+          {now === null ? null : (
             <PagerButton
-              label={`Now, ${pageRange(pagePeriod(nowPage))}`}
+              label={now.label}
               onClick={() => {
-                select(nowPage);
+                now.select();
               }}
             >
               {dot}
@@ -120,9 +136,9 @@ export default function TimelinePager({
           )}
           {next === null ? null : (
             <PagerButton
-              label={`Show ${pageRange(next)}${nowPage === page + 1 ? ", current time" : ""}`}
+              label={next.label}
               onClick={() => {
-                select(page + 1);
+                next.select();
               }}
             >
               <ChevronRightIcon

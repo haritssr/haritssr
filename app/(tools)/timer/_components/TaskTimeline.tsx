@@ -1,9 +1,12 @@
 /* oxlint-disable shadcn/no-inline-styles -- Minute and lane geometry is expressed only through CSS custom properties. */
 import { useId } from "react";
-import type { CSSProperties, RefObject } from "react";
+import type { CSSProperties, ReactNode, RefObject } from "react";
 
-import type { TimelinePagerState } from "../hooks/useTimelineWindow";
-import { overlapsView } from "../utils/timelineWindow";
+import type {
+  TimelinePagerState,
+  TimelineScroll,
+} from "../hooks/useTimelineWindow";
+import { HOUR_REM, overlapsView } from "../utils/timelineWindow";
 import {
   formatTimerTime,
   taskKind,
@@ -51,6 +54,7 @@ export default function TaskTimeline({
   editable,
   view,
   pager = null,
+  scroll = null,
   interaction,
 }: {
   tasks: TimerTask[];
@@ -60,6 +64,8 @@ export default function TaskTimeline({
   /** Minutes shown: the whole day, or one 6-hour page. */
   view: Period;
   pager?: TimelinePagerState | null;
+  /** Scrolls the full day inside the available screen height. */
+  scroll?: TimelineScroll | null;
   interaction?: TimelineInteraction;
 }) {
   const selection = interaction?.selection ?? null;
@@ -126,79 +132,129 @@ export default function TaskTimeline({
       </output>
       <section
         aria-label="Hourly schedule"
-        className="border-border lg:corner-squircle relative flow-root lg:rounded-3xl lg:border lg:p-3"
+        className="lg:corner-squircle relative isolate flow-root lg:rounded-2xl"
       >
-        {pager === null ? null : <TimelinePager {...pager} />}
+        {pager === null ? null : (
+          <TimelinePager {...pager} inset={scroll !== null} />
+        )}
         {span === 1440 ? null : (
           <span className="text-muted pointer-events-none absolute top-0 left-0 flex h-8.5 w-6 items-center justify-center lg:top-2 lg:left-2.75">
             <TimeOfDayIcon period={view} className="size-6 shrink-0" />
           </span>
         )}
-        <div
-          ref={interaction?.root}
-          className={`relative mb-4 ml-12 ${span === 1440 ? "mt-3 h-640" : "mt-12 h-160 lg:mt-14"}`}
-        >
-          {editable ? (
-            <button
-              ref={interaction?.surface}
-              type="button"
-              aria-label="Create a scheduled task"
-              aria-describedby={instructionsId}
-              className="focus-visible:outline-action absolute inset-0 h-full w-full cursor-crosshair select-none focus-visible:outline-2 focus-visible:outline-offset-2"
-            />
-          ) : null}
-          <PastTimeShade
-            editable={editable}
-            now={now}
-            bounds={bounds}
-            view={view}
-          />
-          {hours
-            .filter((hour) => hour * 60 >= view.from && hour * 60 <= view.until)
-            .map((hour) => (
-              <div
-                key={hour}
-                className={`${styles.hour} border-border pointer-events-none absolute inset-x-0 -translate-y-1/2 border-t`}
-                style={positionStyle(percent(hour * 60))}
-              >
-                <span className="text-muted absolute -top-2.5 -left-12 text-xs tabular-nums">
-                  {timelineTime(hour * 60)}
-                </span>
-              </div>
-            ))}
-          {layoutTimelineTasks(previewTasks)
-            .filter((entry) => overlapsView(entry.from, entry.until, view))
-            .map((entry) => (
-              <TimelineCard
-                key={entry.task.id}
-                entry={entry}
-                view={view}
-                originalTask={originalTasks.get(entry.task.id) ?? entry.task}
-                date={date}
-                now={now}
-                editable={editable}
-                preview={entry.task.id === previewId}
-                resizing={resizePreview?.taskId === entry.task.id}
-                instructionsId={resizeInstructionsId}
+        <ScrollFrame scroll={scroll}>
+          <div
+            ref={interaction?.root}
+            className={`relative mb-4 ml-12 ${span === 1440 ? "mt-3" : "mt-12 lg:mt-14"}`}
+            style={{ height: `${(span / 60) * HOUR_REM}rem` }}
+          >
+            {editable ? (
+              <button
+                ref={interaction?.surface}
+                type="button"
+                aria-label="Create a scheduled task"
+                aria-describedby={instructionsId}
+                className="focus-visible:outline-action absolute inset-0 h-full w-full cursor-crosshair select-none focus-visible:outline-2 focus-visible:outline-offset-2"
               />
-            ))}
-          {now >= bounds.start &&
-          now < bounds.end &&
-          minute >= view.from &&
-          minute <= view.until ? (
-            <div
-              aria-label={`Current time ${timelineTime(Math.floor(minute))} WIB`}
-              className={`${styles.hour} bg-danger pointer-events-none absolute right-0 -left-12 z-30 h-0.5 rounded-full lg:-right-1.5`}
-              style={positionStyle(percent(minute))}
-            >
-              <span className="bg-danger absolute top-1/2 left-0 inline-flex h-4 -translate-y-1/2 items-center rounded-full px-1 pt-px text-xs leading-none text-white tabular-nums">
-                {timelineTime(Math.floor(minute))}
-              </span>
-            </div>
-          ) : null}
-        </div>
+            ) : null}
+            <PastTimeShade
+              editable={editable}
+              now={now}
+              bounds={bounds}
+              view={view}
+            />
+            {hours
+              .filter(
+                (hour) => hour * 60 >= view.from && hour * 60 <= view.until
+              )
+              .map((hour) => (
+                <div
+                  key={hour}
+                  className={`${styles.hour} border-border pointer-events-none absolute inset-x-0 -translate-y-1/2 border-t`}
+                  style={positionStyle(percent(hour * 60))}
+                >
+                  <span className="text-muted absolute top-1/2 -left-10 -translate-y-1/2 text-xs leading-none tabular-nums">
+                    {timelineTime(hour * 60)}
+                  </span>
+                </div>
+              ))}
+            {layoutTimelineTasks(previewTasks)
+              .filter((entry) => overlapsView(entry.from, entry.until, view))
+              .map((entry) => (
+                <TimelineCard
+                  key={entry.task.id}
+                  entry={entry}
+                  view={view}
+                  originalTask={originalTasks.get(entry.task.id) ?? entry.task}
+                  date={date}
+                  now={now}
+                  editable={editable}
+                  preview={entry.task.id === previewId}
+                  resizing={resizePreview?.taskId === entry.task.id}
+                  instructionsId={resizeInstructionsId}
+                />
+              ))}
+            <NowLine
+              visible={now >= bounds.start && now < bounds.end}
+              minute={minute}
+              view={view}
+            />
+          </div>
+        </ScrollFrame>
       </section>
     </section>
+  );
+}
+
+/** The red current-time line and its pill, when the time is inside `view`. */
+function NowLine({
+  visible,
+  minute,
+  view,
+}: {
+  visible: boolean;
+  minute: number;
+  view: Period;
+}) {
+  if (!visible || minute < view.from || minute > view.until) {
+    return null;
+  }
+  const percent = ((minute - view.from) / (view.until - view.from)) * 100;
+  return (
+    <div
+      aria-label={`Current time ${timelineTime(Math.floor(minute))} WIB`}
+      className={`${styles.hour} bg-danger pointer-events-none absolute right-0 -left-12 z-30 h-0.5 rounded-full`}
+      style={positionStyle(percent)}
+    >
+      <span className="bg-danger absolute top-1/2 left-0 inline-flex h-4 -translate-y-1/2 items-center rounded-full px-1 pt-px text-xs leading-none text-white tabular-nums">
+        {timelineTime(Math.floor(minute))}
+      </span>
+    </div>
+  );
+}
+
+/** Scrolls the full-day timeline inside the available height in follow-now mode. */
+function ScrollFrame({
+  scroll,
+  children,
+}: {
+  scroll: TimelineScroll | null;
+  children: ReactNode;
+}) {
+  const attach = scroll?.attach;
+  return (
+    <div
+      ref={attach}
+      data-timeline-frame={scroll === null ? undefined : ""}
+      className={
+        scroll === null
+          ? "contents"
+          : "lg:corner-squircle overflow-y-auto overscroll-contain pr-1 lg:rounded-r-lg lg:supports-[corner-shape:squircle]:rounded-r-2xl"
+      }
+      style={scroll === null ? undefined : { maxHeight: scroll.height }}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -276,13 +332,9 @@ function TimelineCard({
       style={geometry}
       title={progress !== null && until - from < 30 ? progress : undefined}
     >
-      <span
-        aria-hidden="true"
-        className="bg-schedule-accent pointer-events-none h-full w-0.75 shrink-0 rounded-full [corner-shape:round]"
-      />
       <div className="relative h-full min-w-0 flex-1">
         <div
-          className={`corner-squircle bg-schedule-surface text-schedule-foreground relative flex h-full flex-col items-start ${until - from === 15 ? "justify-center" : "justify-start"} overflow-hidden rounded-xs px-1.5 py-1 text-sm supports-[corner-shape:squircle]:rounded-md ${clippedStart ? "rounded-t-none supports-[corner-shape:squircle]:rounded-t-none" : ""} ${clippedEnd ? "rounded-b-none supports-[corner-shape:squircle]:rounded-b-none" : ""} ${resizing ? "ring-schedule-accent ring-1 ring-inset" : ""}`}
+          className={`corner-squircle bg-schedule-surface text-schedule-foreground relative flex h-full gap-1.5 overflow-hidden rounded-xs px-1 py-1 text-sm supports-[corner-shape:squircle]:rounded-md ${clippedStart ? "rounded-t-none supports-[corner-shape:squircle]:rounded-t-none" : ""} ${clippedEnd ? "rounded-b-none supports-[corner-shape:squircle]:rounded-b-none" : ""} ${resizing ? "ring-schedule-accent ring-1 ring-inset" : ""}`}
         >
           {canMove ? (
             <button
@@ -294,7 +346,13 @@ function TimelineCard({
               className={`focus-visible:outline-action absolute inset-0 select-none focus-visible:outline-2 focus-visible:-outline-offset-2 ${resizing ? "cursor-grabbing" : "cursor-grab"}`}
             />
           ) : null}
-          <div className="pointer-events-none relative flex w-full min-w-0 flex-col select-none">
+          <span
+            aria-hidden="true"
+            className="bg-schedule-accent pointer-events-none w-0.75 shrink-0 self-stretch rounded-full [corner-shape:round]"
+          />
+          <div
+            className={`pointer-events-none relative flex min-w-0 flex-1 flex-col select-none ${until - from === 15 ? "self-center" : "self-start"}`}
+          >
             <div className="flex items-center justify-between gap-1">
               <span className="text-schedule-title truncate leading-4 font-medium">
                 {task.activity}

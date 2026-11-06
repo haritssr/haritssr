@@ -35,15 +35,18 @@ const PRESSED_CLASS = {
 export function ButtonGroupItem({
   className,
   tone = "action",
+  spacing = "default",
   ...props
 }: Omit<ComponentProps<typeof BaseButton>, "className"> & {
   className?: string;
   tone?: keyof typeof PRESSED_CLASS;
+  /** `roomy` adds horizontal padding for timer view and paging controls. */
+  spacing?: "default" | "roomy";
 }) {
   return (
     <BaseButton
       {...props}
-      className={`corner-squircle border-border text-foreground ${PRESSED_CLASS[tone]} hover:bg-interface-hover focus-visible:outline-foreground relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center gap-1 border px-2 py-1.5 text-sm transition-colors duration-150 first:ml-0 first:rounded-l-md last:rounded-r-md focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 supports-[corner-shape:squircle]:first:rounded-l-xl supports-[corner-shape:squircle]:last:rounded-r-xl motion-reduce:transition-none ${className ?? ""}`}
+      className={`corner-squircle border-border text-foreground ${PRESSED_CLASS[tone]} hover:bg-interface-hover focus-visible:outline-foreground relative -ml-px inline-flex min-h-8.5 cursor-pointer items-center justify-center gap-1 border py-1.5 text-sm ${spacing === "roomy" ? "px-2.5" : "px-2"} transition-colors duration-150 first:ml-0 first:rounded-l-md last:rounded-r-md focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 supports-[corner-shape:squircle]:first:rounded-l-xl supports-[corner-shape:squircle]:last:rounded-r-xl motion-reduce:transition-none ${className ?? ""}`}
     />
   );
 }
