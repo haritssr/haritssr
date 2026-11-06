@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "types": ["bun-types", "mdx"],
-    "noImplicitAny": true,
-    "strictNullChecks": true,
     "target": "ES2023",
-    "importHelpers": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -18,7 +15,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "paths": {
-      "*": ["./*"],
       "@/*": ["./*"]
     },
     "incremental": true,

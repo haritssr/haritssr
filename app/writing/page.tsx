@@ -1,6 +1,6 @@
-import PageDescription from "components/PageDescription";
 import type { Metadata } from "next";
 
+import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
