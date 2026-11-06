@@ -32,6 +32,61 @@
   }
 }
 
+/*
+ * Scroll edge effect: content passing under the bar softly blurs and fades
+ * out below the floating controls instead of ending at a hard edge.
+ */
+.navigation {
+  isolation: isolate;
+}
+
+.navigation::before,
+.navigation::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 -2.5rem;
+  pointer-events: none;
+  content: "";
+  opacity: 0;
+}
+
+/* Tint plus a light blur that reaches the full fade distance. */
+.navigation::before {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-background) 80%, transparent),
+    transparent
+  );
+  mask-image: linear-gradient(to bottom, black 30%, transparent);
+}
+
+/* A stronger blur that fades out sooner, so blur eases off in steps. */
+.navigation::after {
+  mask-image: linear-gradient(to bottom, black 20%, transparent 65%);
+}
+
+@supports (backdrop-filter: blur(4px)) {
+  .navigation::before {
+    backdrop-filter: blur(3px);
+  }
+
+  .navigation::after {
+    backdrop-filter: blur(10px);
+  }
+}
+
+.navigation[data-scrolled="true"]::before,
+.navigation[data-scrolled="true"]::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .navigation::before,
+  .navigation::after {
+    transition: opacity 300ms ease-out;
+  }
+}
+
 .tabs {
   @apply translucent-material;
   box-shadow: none;
@@ -44,19 +99,10 @@
 @media (prefers-reduced-motion: no-preference) {
   .row > :first-child,
   .row > :last-child {
-    transition-property:
-      translate, color, background-color, border-color, box-shadow;
+    transition-property: color, background-color, border-color, box-shadow;
     transition-duration: 1000ms;
     transition-timing-function: ease-out;
   }
-}
-
-.navigation[data-scrolled="true"] .row > :first-child {
-  translate: -0.5rem 0;
-}
-
-.navigation[data-scrolled="true"] .row > :last-child {
-  translate: 0.5rem 0;
 }
 
 @media (width < 768px) {
