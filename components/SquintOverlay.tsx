@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Cmd/Ctrl+B (blur) toggles a blurred grayscale layer over the page; Esc or a click closes it. */
+/** Cmd/Ctrl+B (blur) toggles a blurred layer over the page; Esc or a click closes it. */
 export default function SquintOverlay() {
   const [open, setOpen] = useState(false);
 
@@ -44,7 +44,7 @@ export default function SquintOverlay() {
   return (
     <div
       aria-hidden="true"
-      className="bg-background/70 supports-[backdrop-filter]:bg-background/20 fixed inset-0 z-100 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-grayscale"
+      className="bg-background/70 supports-[backdrop-filter]:bg-background/20 fixed inset-0 z-100 supports-[backdrop-filter]:backdrop-blur-sm"
       onClick={() => {
         setOpen(false);
       }}
