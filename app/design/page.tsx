@@ -264,7 +264,7 @@ export default function DesignSystem() {
                 </ul>
               </div>
             </InterfacePrinciples>
-            <li>The system works on mobile and desktop.</li>
+            <li>Hide the bottom tab bar on content pages.</li>
             <li>
               <ExternalLink
                 href="https://stephango.com/concise"
@@ -272,15 +272,15 @@ export default function DesignSystem() {
               />
               .
             </li>
-            <li>Hide the bottom tab bar on content pages.</li>
             <li>
               Recognize patterns through repeated observation and reflection.
             </li>
             <li>
-              Use regular buttons on pages and physical buttons in containers.
+              Use Oklab or Oklch for perceptually balanced colors and gradients.
             </li>
             <li>
-              Use Oklab or Oklch for perceptually balanced colors and gradients.
+              Every modal should appear instantly, with no animation or
+              transition.
             </li>
             <li>
               Strive for one line navigation layer on all screen views as
@@ -289,6 +289,23 @@ export default function DesignSystem() {
             <li>
               Defining feature or update make it easy for sharing and
               documentation.
+            </li>
+            <li>
+              Responsive design system: works on phone, tablet, and desktop
+              screen sizes.
+            </li>
+            <li>
+              Inspired by{" "}
+              <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />,{" "}
+              <ExternalLink href="https://www.nngroup.com/" name="NN/g" />,{" "}
+              <ExternalLink
+                href="https://developer.apple.com/design/human-interface-guidelines/design-principles"
+                name="Apple’s design principles"
+              />
+              , <ExternalLink href="https://linear.app" name="Linear" />,{" "}
+              <ExternalLink href="https://www.raycast.com" name="Raycast" />,{" "}
+              <ExternalLink href="https://dub.co" name="Dub" />, and{" "}
+              <ExternalLink href="https://vercel.com" name="Vercel" />.
             </li>
             <li>
               Use <span className="text-action">blue</span> for actions,{" "}
@@ -307,8 +324,14 @@ export default function DesignSystem() {
               what sections are available, and how to leave.
             </li>
             <li>
-              Digital services should <u>expand what people can do</u> while
-              respecting the <u>limits of their attention and working memory</u>
+              Digital services should{" "}
+              <span className="text-danger">
+                expand what people can do (ability)
+              </span>{" "}
+              yet respect{" "}
+              <span className="text-danger">
+                limits of attention and working memory (cognitive load)
+              </span>
               .
             </li>
             <li>
@@ -318,26 +341,6 @@ export default function DesignSystem() {
             <li>
               Minimize borders for grouping and separation. Use spacing, color,
               translucency, or strategically show and hide elements instead.
-            </li>
-            <li>
-              Draw inspiration from the{" "}
-              <ExternalLink href="https://lawsofux.com/" name="Laws of UX" />,{" "}
-              <ExternalLink href="https://www.nngroup.com/" name="NN/g" />,{" "}
-              <ExternalLink
-                href="https://developer.apple.com/design/human-interface-guidelines/design-principles"
-                name="Apple’s design principles"
-              />
-              ,{" "}
-              <ExternalLink
-                href="https://developer.apple.com/videos/design/"
-                name="design videos"
-              />
-              , and products from{" "}
-              <ExternalLink href="https://www.apple.com" name="Apple" />,{" "}
-              <ExternalLink href="https://linear.app" name="Linear" />,{" "}
-              <ExternalLink href="https://www.raycast.com" name="Raycast" />,{" "}
-              <ExternalLink href="https://dub.co" name="Dub" />, and{" "}
-              <ExternalLink href="https://vercel.com" name="Vercel" />.
             </li>
             <li>
               Use subtle shadows for emphasis, raising them on hover and
@@ -652,9 +655,6 @@ export default function DesignSystem() {
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
                     <Button variant="primary">Primary</Button>
                   </span>
-                  <Button size="compact" variant="primary">
-                    Compact
-                  </Button>
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
                     <Button size="fallback" variant="primary">
                       Fallback
@@ -696,15 +696,6 @@ export default function DesignSystem() {
                   <span className="inline-flex [&>button]:border [&>button]:border-transparent [&>button]:leading-5 [&>button]:font-medium">
                     <LoadingButton physical />
                   </span>
-                  <Button data-timer-secondary="" variant="secondary">
-                    Secondary
-                  </Button>
-                  <Button data-timer-secondary="" variant="danger">
-                    Danger
-                  </Button>
-                  <Button data-timer-secondary="" disabled variant="secondary">
-                    Disabled
-                  </Button>
                   <span className="inline-flex">
                     <ButtonWithIcon physical />
                   </span>
