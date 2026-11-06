@@ -4,8 +4,9 @@ import { usePathname } from "next/navigation";
 import { createContext, use, useMemo } from "react";
 import type { ReactNode } from "react";
 
-import useMobileNavigationCollapse from "@/components/useMobileNavigationCollapse";
 import { showsMobileNavigation } from "@/utils/navigation/navigationState";
+
+import useMobileNavigationCollapse from "./useMobileNavigationCollapse";
 
 const MobileControlsContext = createContext({
   collapsed: false,

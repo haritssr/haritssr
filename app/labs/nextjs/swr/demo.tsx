@@ -4,8 +4,9 @@ import useSWR from "swr";
 
 import LabPageHeader from "@/app/labs/_components/LabPageHeader";
 import PageDescription from "@/components/PageDescription";
-import { fetchPeople } from "@/utils/fetchPeople";
-import type { Person } from "@/utils/fetchPeople";
+
+import { fetchPeople } from "./fetchPeople";
+import type { Person } from "./fetchPeople";
 
 export default function NextjsSWRDemo() {
   return (

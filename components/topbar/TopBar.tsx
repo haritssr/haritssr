@@ -7,11 +7,11 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 import { scrollArticleToTop } from "@/components/article/useArticleContentsNavigation";
 import BackButton from "@/components/BackButton";
-import useScrolledPageHeader from "@/components/useScrolledPageHeader";
 import { primaryNavigation } from "@/data/navigation";
 import { navigationCurrent } from "@/utils/navigation/navigationState";
 
 import HeaderActions from "./HeaderActions";
+import useScrolledPageHeader from "./useScrolledPageHeader";
 import useTopBarHeight from "./useTopBarHeight";
 
 import styles from "./TopBar.module.css";

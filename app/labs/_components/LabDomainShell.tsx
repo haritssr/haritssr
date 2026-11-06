@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 
 import { LabHeaderContext } from "@/app/labs/_components/LabPageHeader";
-import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter";
 
 interface LabDomainShellProps {
   children: React.ReactNode;
@@ -13,6 +12,10 @@ interface LabDomainShellProps {
     slug: string;
     title: string;
   }[];
+}
+
+function capitalizeFirstLetter(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 export default function LabDomainShell({
@@ -34,10 +37,7 @@ export default function LabDomainShell({
   const fallbackTitle =
     labSlug === undefined || labSlug.length === 0
       ? domainTitle
-      : labSlug
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
+      : labSlug.split("-").map(capitalizeFirstLetter).join(" ");
   const title = isIndexPage ? domainTitle : (lab?.title ?? fallbackTitle);
   const backButtonName = segments.length === 3 ? domainTitle : prevRoute;
 
