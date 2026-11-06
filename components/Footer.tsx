@@ -29,7 +29,7 @@ const breadcrumbLabels = Object.fromEntries<string>([
 
 export default function Footer() {
   return (
-    <footer className="text-foreground/70 mt-30 mb-(--floating-footer-clearance,1rem) hidden w-full text-[15px] sm:mb-3 md:block">
+    <footer className="text-foreground/70 mt-10 mb-(--floating-footer-clearance,1rem) hidden w-full text-[15px] sm:mb-3 md:block">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-5 px-4 xl:px-0">
         <div className="min-w-0 flex-1">
           <Breadcrumbs routeLabels={breadcrumbLabels} />
