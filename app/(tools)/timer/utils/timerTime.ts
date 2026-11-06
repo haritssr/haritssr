@@ -28,6 +28,28 @@ export function inputWindow(from: unknown, until: unknown) {
   return { from: inputMinutes(from), until: end === 0 ? 1440 : end };
 }
 
+export const SCHEDULED_WINDOW_MESSAGE =
+  "Choose times in 15-minute increments, at least 15 minutes apart.";
+
+/** Whether a window lies within one day, uses 15-minute steps and spans at least 15 minutes. */
+export function isScheduledWindow({
+  from,
+  until,
+}: {
+  from: number;
+  until: number;
+}) {
+  return (
+    Number.isInteger(from) &&
+    Number.isInteger(until) &&
+    from >= 0 &&
+    until <= 1440 &&
+    until - from >= 15 &&
+    from % 15 === 0 &&
+    until % 15 === 0
+  );
+}
+
 /** `08:00–09:30`, or an em dash without a window. */
 export function windowRange(window: Period | null | undefined) {
   return window === null || window === undefined

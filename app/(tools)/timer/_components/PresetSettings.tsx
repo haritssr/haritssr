@@ -4,10 +4,6 @@ import type { SubmitEvent } from "react";
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 import { canUseTimer, taskKind } from "@/app/(tools)/timer/utils/timer";
 import type { TaskKind } from "@/app/(tools)/timer/utils/timer";
-import {
-  durationPresetsSchema,
-  taskPresetsSchema,
-} from "@/app/(tools)/timer/utils/timerValidation";
 import Accordion, { AccordionItem } from "@/components/Accordion";
 import Button from "@/components/Button";
 
@@ -24,6 +20,11 @@ interface PresetDraft {
   description: string;
   duration: DurationValue;
   kind?: TaskKind;
+}
+
+// Loaded when saving, so the schemas stay out of the first page load.
+async function loadSchemas() {
+  return await import("@/app/(tools)/timer/utils/timerValidation");
 }
 
 export default function PresetSettings({
@@ -101,6 +102,7 @@ function PresetEditor({ kind }: { kind: "duration" | "task" }) {
         Number(entry.duration.minutes) <= 59 &&
         Number(entry.duration.seconds) <= 59
     );
+    const { durationPresetsSchema, taskPresetsSchema } = await loadSchemas();
     const durations = durationPresetsSchema.safeParse(
       values.map((entry) => entry.duration)
     );

@@ -11,6 +11,46 @@ const TIME_FORMATTER = new Intl.DateTimeFormat("en-GB", {
   hourCycle: "h23",
 });
 
+/** The static dial; one element identity lets React skip it on every tick. */
+const FACE = (
+  <>
+    <circle
+      className="fill-background stroke-border"
+      cx="50"
+      cy="50"
+      r="49"
+      strokeWidth="1"
+    />
+    {MARKS.map((mark) => (
+      <line
+        className={mark % 5 === 0 ? "stroke-muted" : "stroke-border"}
+        key={mark}
+        strokeLinecap="round"
+        strokeWidth={mark % 5 === 0 ? 1.6 : 1}
+        transform={`rotate(${mark * 6} 50 50)`}
+        x1="50"
+        x2="50"
+        y1="7"
+        y2={mark % 5 === 0 ? "15" : "12"}
+      />
+    ))}
+    <g className="fill-muted text-xs font-medium" textAnchor="middle">
+      <text x="50" y="28">
+        12
+      </text>
+      <text x="76" y="55">
+        3
+      </text>
+      <text x="50" y="81">
+        6
+      </text>
+      <text x="24" y="55">
+        9
+      </text>
+    </g>
+  </>
+);
+
 export default function AnalogClock({
   className = "absolute top-0 right-0 h-full w-auto",
 }: {
@@ -48,40 +88,7 @@ export default function AnalogClock({
       <title>
         {time === null ? "Jakarta time · WIB" : `Jakarta time ${time} WIB`}
       </title>
-      <circle
-        className="fill-background stroke-border"
-        cx="50"
-        cy="50"
-        r="49"
-        strokeWidth="1"
-      />
-      {MARKS.map((mark) => (
-        <line
-          className={mark % 5 === 0 ? "stroke-muted" : "stroke-border"}
-          key={mark}
-          strokeLinecap="round"
-          strokeWidth={mark % 5 === 0 ? 1.6 : 1}
-          transform={`rotate(${mark * 6} 50 50)`}
-          x1="50"
-          x2="50"
-          y1="7"
-          y2={mark % 5 === 0 ? "15" : "12"}
-        />
-      ))}
-      <g className="fill-muted text-xs font-medium" textAnchor="middle">
-        <text x="50" y="28">
-          12
-        </text>
-        <text x="76" y="55">
-          3
-        </text>
-        <text x="50" y="81">
-          6
-        </text>
-        <text x="24" y="55">
-          9
-        </text>
-      </g>
+      {FACE}
       {time !== null && (
         <g strokeLinecap="round">
           <line

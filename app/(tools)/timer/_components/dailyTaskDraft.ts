@@ -3,7 +3,6 @@ import { allDayPeriod, isAllDay, taskKind } from "../utils/timer";
 import type { TaskKind } from "../utils/timer";
 import { TASK_INPUT_LIMITS } from "../utils/timerInput";
 import { inputTime, inputWindow } from "../utils/timerTime";
-import { dailyTasksSchema } from "../utils/timerValidation";
 import { durationSeconds, durationValue } from "./durationValue";
 import type { DurationValue } from "./durationValue";
 
@@ -64,11 +63,12 @@ export function moveDailyDraft(
   return next;
 }
 
-export function parseDailyDrafts(
+export async function parseDailyDrafts(
   entries: DailyDraft[]
-):
+): Promise<
   | { success: true; data: DailyTaskDefinition[] }
-  | { success: false; error: DailyDraftError } {
+  | { success: false; error: DailyDraftError }
+> {
   const invalidUnits = entries.find(
     (entry) =>
       !Object.values(entry.duration).every(
@@ -89,6 +89,7 @@ export function parseDailyDrafts(
       },
     };
   }
+  const { dailyTasksSchema } = await import("../utils/timerValidation");
   const result = dailyTasksSchema.safeParse(
     entries.map((entry) => {
       let period = allDayPeriod();

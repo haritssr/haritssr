@@ -21,6 +21,7 @@ import {
   MAX_DAILY_TASKS,
 } from "./dailyTasks";
 import { monthDates, validTimerMonth } from "./timerCalendar";
+import { SCHEDULED_WINDOW_MESSAGE, isScheduledWindow } from "./timerTime";
 
 export const periodSchema = z
   .object({
@@ -29,10 +30,9 @@ export const periodSchema = z
   })
   .refine(({ from, until }) => from < until);
 
-export const scheduledWindowSchema = periodSchema.refine(
-  ({ from, until }) =>
-    until - from >= 15 && from % 15 === 0 && until % 15 === 0,
-  "Choose times in 15-minute increments, at least 15 minutes apart."
+const scheduledWindowSchema = periodSchema.refine(
+  isScheduledWindow,
+  SCHEDULED_WINDOW_MESSAGE
 );
 
 const taskKindSchema = z.enum(["work", "leisure"]);

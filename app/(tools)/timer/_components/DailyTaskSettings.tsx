@@ -67,7 +67,8 @@ export default function DailyTaskSettings({
 
   async function save(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    const result = parseDailyDrafts(entries);
+    const form = event.currentTarget;
+    const result = await parseDailyDrafts(entries);
     if (!result.success) {
       setFieldError(result.error);
       const index = entries.findIndex(
@@ -82,7 +83,7 @@ export default function DailyTaskSettings({
           : `Task ${index + 1}${label}: ${result.error.message}`
       );
       if (entry !== undefined) {
-        const fieldset = event.currentTarget.querySelector(
+        const fieldset = form.querySelector(
           `[data-daily-task="${CSS.escape(entry.id)}"]`
         );
         let selector = 'fieldset input:not([type="hidden"])';

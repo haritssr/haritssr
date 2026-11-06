@@ -18,19 +18,18 @@ import {
 } from "@/app/(tools)/timer/utils/timerInput";
 import Button from "@/components/Button";
 
-import { inputWindow } from "../utils/timerTime";
-import { scheduledWindowSchema } from "../utils/timerValidation";
+import {
+  SCHEDULED_WINDOW_MESSAGE,
+  inputWindow,
+  isScheduledWindow,
+} from "../utils/timerTime";
 import { useTaskEditing } from "./TaskEditing";
 import TaskFormDialog from "./TaskFormDialog";
 
 function formWindow(form: FormData) {
   // Both fields at 00:00 give 0–1440, the all-day period.
-  const result = scheduledWindowSchema.safeParse(
-    inputWindow(form.get("from"), form.get("until"))
-  );
-  return result.success
-    ? result.data
-    : "Choose times in 15-minute increments, at least 15 minutes apart.";
+  const window = inputWindow(form.get("from"), form.get("until"));
+  return isScheduledWindow(window) ? window : SCHEDULED_WINDOW_MESSAGE;
 }
 
 export function EditTask({
