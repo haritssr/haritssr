@@ -241,16 +241,16 @@ function BlurPreview() {
     <div className={`${PREVIEW_PANEL} relative overflow-hidden`}>
       <div className="space-y-3 p-4">
         <div className="text-foreground text-base font-semibold">Timer</div>
-        <div className="bg-foreground/10 h-1.5 w-4/5 rounded-full" />
+        <div className="bg-schedule-accent h-1.5 w-4/5 rounded-full" />
         <div className="bg-foreground/10 h-1.5 w-3/5 rounded-full" />
         <div className="flex items-center justify-between gap-3 pt-1">
-          <div className="bg-foreground/10 h-1.5 w-2/5 rounded-full" />
-          <span className="bg-foreground flex size-8 shrink-0 items-center justify-center rounded-full text-white">
+          <div className="bg-success h-1.5 w-2/5 rounded-full" />
+          <span className="bg-success flex size-8 shrink-0 items-center justify-center rounded-full text-white">
             <PauseIcon className="size-4" />
           </span>
         </div>
       </div>
-      <div className="bg-background/20 absolute inset-0 backdrop-blur-sm backdrop-grayscale" />
+      <div className="bg-background/20 absolute inset-0 backdrop-blur-sm" />
     </div>
   );
 }
