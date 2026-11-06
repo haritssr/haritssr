@@ -371,6 +371,18 @@ export const implementationFiles = [
     "app/(tools)/timer/seed-timer.ts",
     "Creates sample history for the previous 30 completed days.",
   ],
+  [
+    "app/(tools)/timer/utils/timerTestFixtures.ts",
+    "Jakarta-time builders for tasks, days and preferences shared by the Timer tests.",
+  ],
+  [
+    "app/(tools)/timer/server/timerDatabase.test.ts",
+    "Schema creation, old-database upgrade and storage round trips on a throwaway SQLite file.",
+  ],
+  [
+    ".githooks/pre-push",
+    "Runs the Timer tests before every push; skip once with --no-verify.",
+  ],
 ] as const;
 
 export const integrationFiles = [

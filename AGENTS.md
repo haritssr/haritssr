@@ -22,9 +22,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   existing build and no server exists; never build first or use it for checks.
 - Never launch temporary Chrome, including headless/automation sessions. Reuse
   an existing browser or verify without one.
-- Never create, add, rename, or restore `*.test.*`, `*.spec.*`, or files under
-  `test/`, `tests/`, or `__tests__/`. Modify existing tests only when explicitly
-  requested. Use existing tests or focused non-test checks.
+- Tests exist only for Timer, as `app/(tools)/timer/**/*.test.ts` run by
+  `bun test`. Never create, add, rename, or restore `*.test.*`, `*.spec.*`, or
+  files under `test/`, `tests/`, or `__tests__/` anywhere else. Use focused
+  non-test checks elsewhere.
 - Use the smallest set of task-specific skills.
 - Keep [README.md](README.md) a short public introduction and feature behavior
   on its Details route.
@@ -41,6 +42,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `bun run check <files...>` | Changed supported source, CSS, or JSON, including classes and JSX copy. Pass changed paths; exclude assets and Markdown/MDX. |
 | `bun run check` | Lint/format config, dependencies, or refactors across shared modules and consumers. Otherwise scope it. |
 | `bun run typecheck` | Imports/exports, types, props, JSX structure, logic/hooks, API handlers, route folders/params, data shapes, TS/Next config, or type-affecting dependencies. Skip styling, static copy, unchanged-shape values, Markdown, and assets. |
+| `bun run test:timer` | Timer engine, store/database, schema, validation, backup, preference, or timeline-window logic or data shape. Update or add the matching Timer test in the same change; a failing test means the change broke behavior, so fix the code or, only when the behavior change is intended, the test. |
 | `bun run knip` | Module/dependency graph changes: imports/exports, source/route files, dependencies, scripts, discovery entry points, or Knip config. |
 | `bun run knip:production` | Production entry points, conditional imports, dependency classification, or production Knip config. |
 | `bun run validate:content` | Lab catalog/routes, discontinued records, writing MDX/frontmatter, catalog/route/search discovery, frontmatter parsing, or validator utilities. |
@@ -95,6 +97,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Use `type(context): message`, e.g. `fix(TopBar): align back icon`. Types:
   `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.
 - Review staged changes and related docs; update guidance in the same change.
-  The test-file policy still applies to `test` commits.
+  Timer tests may be committed as `test`; the test-file policy still applies.
 - Never generate/restore `changelog.json`. Upload Git history to Turso automatically after successful checks on pushes to
   main, or when explicitly requested; never during development, builds, or commits. `bun run sync:commits --dry-run` validates without DB access.

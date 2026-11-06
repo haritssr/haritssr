@@ -10,6 +10,13 @@
     "app/[(]tools[)]/commits/import-commits.ts!",
     "app/[(]tools[)]/timer/{migrate-timer,seed-timer}.ts!",
     "app/writing/content/*.mdx",
+    // Timer tests run with `bun test`; they are entry points in normal mode only.
+    "app/[(]tools[)]/timer/**/*.test.ts",
+  ],
+  // Tests and their fixtures are not production code.
+  "ignore": [
+    "app/[(]tools[)]/timer/**/*.test.ts",
+    "app/[(]tools[)]/timer/utils/timerTestFixtures.ts",
   ],
   "ignoreDependencies": [
     // The trailing ! scopes this to production mode. next.config.ts loads the

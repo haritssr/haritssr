@@ -1,0 +1,5 @@
+#!/bin/sh
+# Blocks a push while the Timer tests fail. Skip once with: git push --no-verify
+PATH="$HOME/.bun/bin:$PATH"
+echo "Running Timer tests before push…"
+exec bun run test:timer

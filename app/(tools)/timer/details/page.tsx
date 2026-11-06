@@ -117,6 +117,13 @@ export default function TimerDetailsPage() {
               full 24-hour timeline inside the available screen height, opening
               just before the current time, with a Now button to return.
             </li>
+            <li id="tests">
+              Timer logic and data shape are covered by{" "}
+              <code>bun run test:timer</code> (engine, date and time math,
+              validation of old and new data, backups, and an upgrade of an old
+              database). A git pre-push hook runs it; update the matching test
+              whenever you change Timer logic or fields.
+            </li>
             <li id="time-and-notifications">
               Keep timers visible across the site and enable ticking sounds or
               completion notifications.

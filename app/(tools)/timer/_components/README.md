@@ -560,3 +560,16 @@ and never enter the live snapshot cache. A separate plan-change channel refreshe
 month reads without publishing a future snapshot to the runtime. Gesture
 eligibility permits all quarter-hour slots on future days, and still rejects
 past dates and opened windows today. Saved plans become the live day at midnight.
+
+## Tests
+
+`bun run test:timer` runs the Timer tests (`*.test.ts` beside the code) with
+`bun test`: the engine, Jakarta date and time math, validation and backups
+(including older stored shapes and a drift check that the preference fields
+agree across the type, schemas and database), timeline windows and layout, and
+database creation, upgrade from an old schema and round trips on a temporary
+SQLite file. The database tests never use Turso; they point the environment at
+a local file first and refuse any other URL. `.githooks/pre-push` runs the suite
+before every push (`bun install` enables it through the `prepare` script; skip
+once with `git push --no-verify`). Add or update a test whenever you change
+engine behavior, schemas or stored fields.

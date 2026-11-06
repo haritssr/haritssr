@@ -13,6 +13,8 @@
     "start": "next start",
     "typecheck": "bun run generate:project-tree && next typegen && tsc --noEmit --incremental false",
     "validate:content": "bun run generate:project-tree && bun --conditions=react-server utils/content/validate-content.ts",
+    "prepare": "git config core.hooksPath .githooks || true",
+    "test:timer": "bun test 'app/(tools)/timer'",
     "migrate:timer": "bun 'app/(tools)/timer/migrate-timer.ts'",
     "update:data": "bun run generate:project-tree && bun run sync:commits",
     "sync:commits": "bun 'app/(tools)/commits/import-commits.ts'"
