@@ -4,7 +4,7 @@ import type Button from "@/components/Button";
 
 // Grid card dimensions and spacing. State colors are below the layout map.
 export const TASK_LAYOUT = {
-  collection: "grid grid-cols-1 gap-3",
+  collection: "grid grid-cols-1 gap-3 lg:gap-2.5",
   item: "flex min-w-0 flex-row items-center gap-3 lg:gap-6",
   controls:
     "grid min-w-0 grid-cols-[auto_auto] items-center gap-2 sm:grid-cols-[max-content_auto] sm:gap-4",

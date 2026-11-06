@@ -151,7 +151,9 @@ function TaskFormPopup({
           <fieldset disabled={busy} className="space-y-2">
             <legend className="mb-2 text-sm">Period</legend>
             <div className="flex items-center justify-between gap-3 text-sm">
-              <span id={allDayLabelId}>All day</span>
+              <span id={allDayLabelId} className="text-muted/70">
+                All day
+              </span>
               <Switch.Root
                 aria-labelledby={allDayLabelId}
                 checked={allDay}

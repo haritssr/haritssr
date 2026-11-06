@@ -37,7 +37,7 @@ export default function TimerCalendarDay({
         </p>
       ) : null}
       <div className="grid min-w-0 grid-cols-1 items-start gap-3 lg:grid-cols-2 lg:gap-5">
-        <div className="min-w-0 space-y-3">
+        <div className="lg:corner-squircle lg:border-border min-w-0 space-y-3 lg:space-y-2.5 lg:rounded-2xl lg:border lg:border-dashed lg:p-2.5 lg:supports-[corner-shape:squircle]:rounded-4xl">
           {day.tasks.length === 0 ? (
             <p className="text-muted text-sm">No activities for this day.</p>
           ) : null}

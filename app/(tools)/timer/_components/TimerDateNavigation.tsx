@@ -61,7 +61,7 @@ export function TimerDateHeading({
     heading = <>{date.slice(0, 4)}</>;
   }
   return (
-    <h2 className="min-w-0 text-xl font-medium" aria-live="polite">
+    <h2 className="min-w-0 text-xl font-medium md:text-2xl" aria-live="polite">
       {heading}
     </h2>
   );
