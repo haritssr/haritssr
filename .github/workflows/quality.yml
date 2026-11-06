@@ -30,6 +30,9 @@ jobs:
       - name: Check types
         run: bun run typecheck
 
+      - name: Run Timer tests
+        run: bun run test:timer
+
       - name: Check all project code
         run: bun run knip
 
