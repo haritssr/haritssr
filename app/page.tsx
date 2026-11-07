@@ -157,7 +157,7 @@ function PersonalDetails() {
             <div className="space-y-4">
               <PersonalNotes mobile />
               <p className="border-border text-muted border-t border-dashed pt-4 text-sm">
-                2021-2026 &#169; Harits Syah
+                2021-2026 &#169; haritssr.com · <span>Harits Syah</span>
               </p>
             </div>
           </Bento>
@@ -268,6 +268,18 @@ function Tools() {
         }
       />
       <IndexCard
+        title={urlRoute.title}
+        href={urlRoute.route}
+        headingLevel={3}
+        icon={
+          <LinkIcon
+            aria-hidden="true"
+            className="text-foreground size-4.5 shrink-0"
+            strokeWidth={1.5}
+          />
+        }
+      />
+      <IndexCard
         title={musicRoute.title}
         href={musicRoute.route}
         headingLevel={3}
@@ -297,18 +309,6 @@ function Tools() {
         headingLevel={3}
         icon={
           <QueueListIcon
-            aria-hidden="true"
-            className="text-foreground size-4.5 shrink-0"
-            strokeWidth={1.5}
-          />
-        }
-      />
-      <IndexCard
-        title={urlRoute.title}
-        href={urlRoute.route}
-        headingLevel={3}
-        icon={
-          <LinkIcon
             aria-hidden="true"
             className="text-foreground size-4.5 shrink-0"
             strokeWidth={1.5}
