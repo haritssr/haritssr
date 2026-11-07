@@ -13,7 +13,8 @@ export default function FloatingNotification({
   tone = "neutral",
 }: {
   children: ReactNode;
-  action: ReactNode;
+  /** Optional trailing control; informational notices have none. */
+  action?: ReactNode;
   tone?: "neutral" | "danger";
 }) {
   const Icon = tone === "danger" ? ExclamationTriangleIcon : BellAlertIcon;
