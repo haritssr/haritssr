@@ -57,6 +57,7 @@ const TaskCard = memo(
     previous.task === next.task &&
     previous.date === next.date &&
     previous.state.spent === next.state.spent &&
+    previous.state.phase === next.state.phase &&
     previous.state.reached === next.state.reached &&
     previous.state.running === next.state.running &&
     previous.state.paused === next.state.paused &&

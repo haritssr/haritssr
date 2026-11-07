@@ -1,62 +1,21 @@
-import {
-  scheduledPeriod,
-  taskTiming,
-  timerDayBounds,
-} from "@/app/(tools)/timer/utils/timer";
+import { timerDayBounds } from "@/app/(tools)/timer/utils/timer";
 import type {
   TimerDayBounds,
   TimerTask,
 } from "@/app/(tools)/timer/utils/timer";
-import { taskDeadline } from "@/app/(tools)/timer/utils/timerDeadline";
 
-function getTaskState(
-  task: TimerTask,
-  date: string,
-  now: number,
-  bounds = timerDayBounds(date)
-) {
-  const { spent, available, closesAt } = taskTiming(task, bounds, now);
-  const reached = task.reachedAt !== null || spent >= task.duration;
-  const missed = !reached && scheduledPeriod(task) !== null && now >= closesAt;
-  const running = task.startedAt !== null && !reached && available;
-  const paused = !running && !reached && spent > 0;
-  let label: "Start" | "Pause" | "Continue" =
-    task.spent === 0 ? "Start" : "Continue";
-  if (running) {
-    label = "Pause";
-  }
-  const deadline = taskDeadline(task, bounds, now);
-  return {
-    spent,
-    reached,
-    missed,
-    running,
-    paused,
-    label,
-    available,
-    deadlineWarning: deadline.warning,
-    latestStartAt: deadline.latestStartAt,
-    closesAt: deadline.closesAt,
-  };
-}
+import { PHASE_ORDER, getTaskState } from "./taskStatus";
+import type { TaskState } from "./taskStatus";
 
-export type TaskState = ReturnType<typeof getTaskState>;
+export type { TaskState } from "./taskStatus";
+
 interface TaskEntry {
   task: TimerTask;
   state: TaskState;
 }
 
 function taskOrder(state: TaskState) {
-  if (state.reached || state.missed) {
-    return 4;
-  }
-  if (!state.available) {
-    return 3;
-  }
-  if (state.running) {
-    return 0;
-  }
-  return state.spent > 0 ? 1 : 2;
+  return PHASE_ORDER[state.phase];
 }
 
 function compareTasks(first: TaskEntry, second: TaskEntry) {

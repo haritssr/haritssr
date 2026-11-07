@@ -209,7 +209,11 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/taskState.ts",
-    "Task ordering, completion partition, elapsed time, and control state.",
+    "Task ordering, completion partition, and earliest running task.",
+  ],
+  [
+    "app/(tools)/timer/_components/taskStatus.ts",
+    "One phase per task (upcoming, ready, running, paused, reached, missed) and its derived flags.",
   ],
   [
     "app/(tools)/timer/_components/floatingTaskState.ts",
