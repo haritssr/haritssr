@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useLayoutEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
@@ -32,8 +32,34 @@ export default function TimerDataControls({
   children: ReactNode;
 }) {
   const { snapshot } = useTimer("snapshot");
+  const ref = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const element = ref.current;
+    if (!element) {
+      return () => {
+        /* Nothing mounted to measure. */
+      };
+    }
+    const root = document.documentElement;
+    function measure() {
+      root.style.setProperty(
+        "--timer-toolbar-height",
+        `${ref.current?.offsetHeight ?? 0}px`
+      );
+    }
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    measure();
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--timer-toolbar-height");
+    };
+  }, []);
   return (
-    <div className="flex flex-col gap-2 text-sm">
+    <div
+      ref={ref}
+      className="bg-background sticky top-[var(--topbar-height,4rem)] z-20 flex flex-col gap-2 pb-2 text-sm"
+    >
       <Suspense>
         <SignInError />
       </Suspense>

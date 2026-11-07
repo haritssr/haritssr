@@ -8,9 +8,17 @@ import type { ReactNode } from "react";
  * Wraps horizontally scrolling content with a second scrollbar above it on
  * mobile. Both bars stay in sync, and the bottom bar remains the real scroller.
  */
-export default function ScrollMirror({ children }: { children: ReactNode }) {
+export default function ScrollMirror({
+  children,
+  header,
+}: {
+  children: ReactNode;
+  /** Sticky row kept under the toolbar; its horizontal scroll follows the body. */
+  header?: ReactNode;
+}) {
   const top = useRef<HTMLDivElement>(null);
   const bottom = useRef<HTMLDivElement>(null);
+  const headerClip = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
@@ -31,24 +39,42 @@ export default function ScrollMirror({ children }: { children: ReactNode }) {
     }
     measure();
 
-    const follow = (source: HTMLElement, target: HTMLElement) => () => {
-      if (target.scrollLeft !== source.scrollLeft) {
-        target.scrollLeft = source.scrollLeft;
+    const clip = headerClip.current;
+    const followBar = () => {
+      if (bar.scrollLeft !== body.scrollLeft) {
+        bar.scrollLeft = body.scrollLeft;
       }
     };
-    const onTopScroll = follow(bar, body);
-    const onBottomScroll = follow(body, bar);
-    bar.addEventListener("scroll", onTopScroll, { passive: true });
-    body.addEventListener("scroll", onBottomScroll, { passive: true });
+    const followBody = () => {
+      if (body.scrollLeft !== bar.scrollLeft) {
+        body.scrollLeft = bar.scrollLeft;
+      }
+    };
+    const onBodyScroll = () => {
+      followBar();
+      if (clip && clip.scrollLeft !== body.scrollLeft) {
+        clip.scrollLeft = body.scrollLeft;
+      }
+    };
+    bar.addEventListener("scroll", followBody, { passive: true });
+    body.addEventListener("scroll", onBodyScroll, { passive: true });
     return () => {
       observer.disconnect();
-      bar.removeEventListener("scroll", onTopScroll);
-      body.removeEventListener("scroll", onBottomScroll);
+      bar.removeEventListener("scroll", followBody);
+      body.removeEventListener("scroll", onBodyScroll);
     };
   }, []);
 
   return (
     <div className="min-w-0 select-none">
+      {header === undefined ? null : (
+        <div
+          ref={headerClip}
+          className="bg-background sticky top-[calc(var(--topbar-height,4rem)+var(--timer-toolbar-height,0px))] z-10 overflow-hidden"
+        >
+          {header}
+        </div>
+      )}
       <div
         ref={top}
         aria-hidden="true"

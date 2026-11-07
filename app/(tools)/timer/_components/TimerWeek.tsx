@@ -45,20 +45,25 @@ export default function TimerWeek({
   const byDate = new Map(days.map((day) => [day.date, day]));
   const dates = weekDates(date);
   return (
-    <ScrollMirror>
-      <div className="isolate min-w-2xl">
-        <div className="border-border grid grid-cols-[3rem_repeat(7,minmax(0,1fr))] border-b pb-2">
-          <span aria-hidden="true" />
-          {dates.map((entry) => (
-            <WeekDayHeader
-              key={entry}
-              date={entry}
-              today={today}
-              count={scheduledCalendarTasks(byDate.get(entry)).length}
-              onSelect={onSelect}
-            />
-          ))}
+    <ScrollMirror
+      header={
+        <div className="isolate min-w-2xl">
+          <div className="border-border grid grid-cols-[3rem_repeat(7,minmax(0,1fr))] border-b pb-2">
+            <span aria-hidden="true" />
+            {dates.map((entry) => (
+              <WeekDayHeader
+                key={entry}
+                date={entry}
+                today={today}
+                count={scheduledCalendarTasks(byDate.get(entry)).length}
+                onSelect={onSelect}
+              />
+            ))}
+          </div>
         </div>
+      }
+    >
+      <div className="isolate min-w-2xl">
         <div className="relative mt-3 mb-4 grid h-360 grid-cols-[3rem_repeat(7,minmax(0,1fr))]">
           <div aria-hidden="true" className="relative">
             {hours.map((hour) => (
