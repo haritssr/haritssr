@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { CSSProperties } from "react";
+import type { CSSProperties, PointerEvent } from "react";
 
 import type { Period } from "../utils/timer";
 import { firstFutureSlot } from "./timelineSelection";
@@ -11,6 +11,7 @@ import styles from "./TaskTimeline.module.css";
 const NOTICE_MS = 3000;
 
 type TimelineStyle = CSSProperties & Record<`--timeline-${string}`, string>;
+type NoticeStyle = CSSProperties & Record<"--notice-top", string>;
 
 /**
  * Shades the part of today's timeline that can no longer hold a new task. A
@@ -29,6 +30,7 @@ export default function PastTimeShade({
   view: Period;
 }) {
   const [notice, setNotice] = useState(false);
+  const [noticeTop, setNoticeTop] = useState(0);
   const timer = useRef(0);
   useEffect(
     () => () => {
@@ -36,7 +38,11 @@ export default function PastTimeShade({
     },
     []
   );
-  const explain = () => {
+  const explain = (event: PointerEvent<HTMLDivElement>) => {
+    // Show the notice just above the press so it is visible wherever it lands.
+    const parent = event.currentTarget.offsetParent;
+    const top = parent?.getBoundingClientRect().top ?? 0;
+    setNoticeTop(Math.max(event.clientY - top - 48, 4));
     window.clearTimeout(timer.current);
     setNotice(true);
     timer.current = window.setTimeout(() => {
@@ -60,6 +66,7 @@ export default function PastTimeShade({
     "--timeline-width": "100%",
     "--timeline-height": `${((until - view.from) / (view.until - view.from)) * 100}%`,
   };
+  const noticeStyle: NoticeStyle = { "--notice-top": `${noticeTop}px` };
   return (
     <>
       <div
@@ -70,9 +77,19 @@ export default function PastTimeShade({
       />
       <output
         aria-live="polite"
-        className={`bg-foreground absolute inset-x-0 top-1 z-20 mx-auto w-fit max-w-full rounded-full px-3 py-1 text-center text-sm text-white ${notice ? "" : "sr-only"}`}
+        style={noticeStyle}
+        className={`bg-foreground corner-squircle absolute inset-x-0 top-(--notice-top) z-20 mx-auto w-fit max-w-full rounded-lg px-3 py-1 text-center text-sm whitespace-nowrap text-white supports-[corner-shape:squircle]:rounded-2xl ${notice ? "" : "sr-only"}`}
       >
-        {notice ? "Can't plan in the past. Pick a time after now." : ""}
+        {notice ? (
+          <>
+            <span className="md:hidden">Can&apos;t plan in the past.</span>
+            <span className="hidden md:inline">
+              Can&apos;t plan in the past. Pick a time after now.
+            </span>
+          </>
+        ) : (
+          ""
+        )}
       </output>
     </>
   );
