@@ -37,6 +37,33 @@ export default function CommitActivityChart({
           </div>
         </>
       )}
+      {peak === 0 ? null : (
+        <details className="text-sm">
+          <summary className="text-muted focus-visible:outline-action cursor-pointer rounded-sm">
+            Table view
+          </summary>
+          <table className="mt-2 w-full text-left tabular-nums">
+            <thead className="text-muted text-xs">
+              <tr>
+                <th className="py-1 pr-4 font-normal" scope="col">
+                  Period
+                </th>
+                <th className="py-1 text-right font-normal" scope="col">
+                  Commits
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {plot.buckets.map((bucket) => (
+                <tr className="border-border border-t" key={bucket.key}>
+                  <td className="py-1 pr-4">{bucket.description}</td>
+                  <td className="py-1 text-right">{bucket.count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      )}
       <p className="text-muted text-xs">
         {plot.onPick
           ? "Select a bar to explore its period."
@@ -94,7 +121,6 @@ function ActivityPlot({
               <g key={count}>
                 <line
                   className="stroke-border/70"
-                  strokeDasharray={count === 0 ? undefined : "3 5"}
                   strokeWidth={1}
                   x1={LEFT}
                   x2={RIGHT}
