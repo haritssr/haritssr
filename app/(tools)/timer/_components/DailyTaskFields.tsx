@@ -112,9 +112,7 @@ const DailyTaskFields = memo(
         disabled={disabled}
       />
       <div className="flex items-center justify-between gap-3 text-sm">
-        <span id={`daily-window-label-${entry.id}`}>
-          Scheduled availability
-        </span>
+        <span id={`daily-window-label-${entry.id}`}>Scheduled period</span>
         <Switch.Root
           aria-labelledby={`daily-window-label-${entry.id}`}
           checked={entry.window !== null}
