@@ -320,6 +320,10 @@ export const implementationFiles = [
     "Stable actions and cached field selections over the mutation controller.",
   ],
   [
+    "app/(tools)/timer/utils/timerConnection.ts",
+    "Loading, ready, reconnecting, or failed status derived from read failures.",
+  ],
+  [
     "app/(tools)/timer/utils/timerInput.ts",
     "Shared task-input limits and form parsing; legacy stored limits remain separate.",
   ],

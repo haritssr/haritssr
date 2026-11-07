@@ -7,8 +7,8 @@ import {
   fetchTimerSnapshot,
   saveTimerPreferences,
   sendTimerAction,
-  TimerReadError,
 } from "@/app/(tools)/timer/utils/timerClient";
+import { timerConnection } from "@/app/(tools)/timer/utils/timerConnection";
 import { TimerMutations } from "@/app/(tools)/timer/utils/timerMutations";
 
 import { DEFAULT_DAILY_TASKS } from "./dailyTasks";
@@ -58,6 +58,7 @@ export function createTimerController() {
     const state = mutations.getSnapshot();
     const { snapshot } = state;
     const preferences = snapshot?.preferences ?? defaultPreferences;
+    const connection = timerConnection(state);
     return {
       snapshot,
       pendingCount: state.pendingCount,
@@ -72,12 +73,8 @@ export function createTimerController() {
       taskPresets: preferences.taskPresets,
       dailyTasks: preferences.dailyTasks,
       error: state.error ?? state.loadError,
-      reconnecting:
-        state.error === null &&
-        state.confirmed !== undefined &&
-        state.loadFailure instanceof TimerReadError &&
-        state.loadFailures < 3 &&
-        state.loadFailure.retryable,
+      connection,
+      reconnecting: connection === "reconnecting",
       ...actions,
     };
   }
