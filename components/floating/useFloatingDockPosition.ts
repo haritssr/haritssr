@@ -127,6 +127,7 @@ export default function useFloatingDockPosition(
 
     function schedulePosition() {
       if (!frame) {
+        // oxlint-disable-next-line react/immutability -- The pending animation frame is local to this effect.
         frame = requestAnimationFrame(updatePosition);
       }
     }

@@ -75,6 +75,7 @@ export default function useArticleOutline(
 
     function scheduleCollect() {
       if (!frame) {
+        // oxlint-disable-next-line react/immutability -- The pending animation frame is local to this effect.
         frame = requestAnimationFrame(collect);
       }
     }

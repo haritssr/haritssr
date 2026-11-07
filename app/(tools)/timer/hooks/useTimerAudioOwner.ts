@@ -40,6 +40,7 @@ export default function useTimerAudioOwner(
       if (!hasRunning || now >= timerMidnight(snapshot.today)) {
         return;
       }
+      // oxlint-disable-next-line react/immutability -- The controller is local to this effect and replaced on each start.
       controller = new AbortController();
       const { signal } = controller;
       timeout = window.setTimeout(() => {
@@ -55,6 +56,7 @@ export default function useTimerAudioOwner(
             owner.current = true;
             // oxlint-disable-next-line promise/avoid-new -- Web Locks holds ownership until this promise is released.
             await new Promise<void>((resolve) => {
+              // oxlint-disable-next-line react/immutability -- The release callback is local to this effect and set by the held lock.
               release = resolve;
             });
           }

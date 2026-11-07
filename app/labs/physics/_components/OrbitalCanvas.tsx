@@ -364,6 +364,7 @@ export function OrbitalCanvas({
     }
     const resizeObserver = new ResizeObserver(() => {
       const bounds = canvas.getBoundingClientRect();
+      // oxlint-disable-next-line react/immutability -- The pending animation frame is local to this effect.
       ({ width, height } = bounds);
       scheduleDraw();
     });

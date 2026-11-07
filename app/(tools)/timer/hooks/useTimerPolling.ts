@@ -29,6 +29,7 @@ export default function useTimerPolling() {
             setPolling(true);
             // oxlint-disable-next-line promise/avoid-new -- Hold the polling lock until the tab hides or unmounts.
             await new Promise<void>((resolve) => {
+              // oxlint-disable-next-line react/immutability -- The release callback is local to this effect and set by the held lock.
               release = resolve;
             });
           }

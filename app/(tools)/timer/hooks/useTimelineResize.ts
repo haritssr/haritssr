@@ -106,6 +106,7 @@ export default function useTimelineResize(
     const cancel = () => {
       tracker.reset();
       window.clearInterval(watchdog);
+      // oxlint-disable-next-line react/immutability -- The active gesture is local to this effect and set by its pointer handlers.
       gesture = null;
       setPreview(null);
     };

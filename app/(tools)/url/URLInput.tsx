@@ -39,6 +39,7 @@ export default function URLInput({
     field.focus({ preventScroll: true });
     const observer = new ResizeObserver(() => {
       if (field.clientWidth !== width) {
+        // oxlint-disable-next-line react/immutability -- The observer callback tracks the last measured width for this field.
         width = field.clientWidth;
         resizeURLField(field);
       }

@@ -198,6 +198,7 @@ export default function FlowDiagram({
 
     void render();
     return () => {
+      // oxlint-disable-next-line react/immutability -- The cancelled flag is local to this effect and set by its cleanup.
       cancelled = true;
     };
   }, [definition, id, mathLabels, nearby]);

@@ -76,6 +76,7 @@ export default function useMusicOffline(
         }
         const channel = new MessageChannel();
         port?.close();
+        // oxlint-disable-next-line react/immutability -- The message port is local to this effect and replaced on each attempt.
         port = channel.port1;
         port.addEventListener("message", (event: MessageEvent<unknown>) => {
           if (cancelled || attempt !== sequence) {

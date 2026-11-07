@@ -72,6 +72,7 @@ export default function useTimelineCreation(
     let cursor = 0;
     const cancel = () => {
       tracker.reset();
+      // oxlint-disable-next-line react/immutability -- The active gesture is local to this effect and set by its pointer handlers.
       gesture = null;
       setSelection(null);
     };
