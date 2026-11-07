@@ -19,6 +19,8 @@ import {
 } from "./durationValue";
 import TaskKindField from "./TaskKindField";
 
+import styles from "./TaskFormDialog.module.css";
+
 const INPUT_CLASS =
   "form-control border-border bg-white focus:border-action focus:ring-action/20 w-full rounded-lg border px-2.5 py-1.5 text-base outline-hidden focus:ring-2";
 
@@ -29,6 +31,8 @@ const SHEET_STYLE: CSSProperties & { "--timer-safe-bottom": string } = {
 
 interface TaskFormDialogProps {
   title: string;
+  /** Shown under the title, such as the day a new task is added to. */
+  subtitle?: string;
   submitLabel?: string;
   defaultActivity: string;
   defaultDescription?: string;
@@ -55,6 +59,7 @@ export default function TaskFormDialog(props: TaskFormDialogProps) {
 
 function TaskFormPopup({
   title,
+  subtitle,
   submitLabel = "Done",
   defaultActivity,
   defaultDescription = "",
@@ -111,145 +116,152 @@ function TaskFormPopup({
       <Dialog.Popup
         initialFocus={nameRef}
         style={SHEET_STYLE}
-        className="corner-squircle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed inset-x-0 bottom-0 z-90 h-[90dvh] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-t-xl p-3 shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-t-3xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:supports-[corner-shape:squircle]:rounded-3xl"
+        className="corner-squircle border-border border-hairline bg-background text-foreground shadow-foreground/10 fixed inset-x-0 bottom-0 z-90 flex h-[90dvh] max-h-[90dvh] flex-col overflow-hidden rounded-t-xl shadow-lg outline-hidden supports-[corner-shape:squircle]:rounded-t-3xl sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:w-[calc(100%-2rem)] sm:max-w-sm sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:supports-[corner-shape:squircle]:rounded-3xl"
       >
         <form
-          className="flex flex-col gap-5"
+          className={`${styles.sheet} relative flex min-h-0 flex-1 flex-col`}
           onSubmit={(event) => {
             void onSubmit(event);
           }}
         >
-          {notice === undefined ? null : (
-            <p className="text-muted text-sm">{notice}</p>
-          )}
-          <TaskNameField
-            value={activity}
-            onChange={setActivity}
-            disabled={busy}
-            inputRef={nameRef}
-            maxLength={activityLimit}
-          />
-          <TaskDescriptionField
-            value={description}
-            onChange={setDescription}
-            maxLength={descriptionLimit}
-            optional={hasWindow}
-            disabled={busy}
-          />
-          <TaskKindField
-            name="kind"
-            value={kind}
-            onChange={setKind}
-            disabled={busy}
-          />
-          <DurationFields
-            value={duration}
-            onChange={setDuration}
-            disabled={busy}
-            presets={durationPresets}
-          />
-          <fieldset disabled={busy} className="space-y-2">
-            <legend className="mb-2 text-sm">Period</legend>
-            <div className="flex items-center justify-between gap-3 text-sm">
-              <span id={allDayLabelId} className="text-muted/70">
-                All day
-              </span>
-              <Switch.Root
-                aria-labelledby={allDayLabelId}
-                checked={allDay}
-                disabled={busy}
-                onCheckedChange={chooseAllDay}
-                className="focus-visible:outline-action data-checked:bg-action bg-border block w-10 shrink-0 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2 data-disabled:cursor-not-allowed"
-              >
-                <Switch.Thumb className="bg-surface block size-4 rounded-full data-checked:translate-x-4" />
-              </Switch.Root>
-            </div>
-            {/* All day submits 00:00 to 00:00, which the form reads as 0–1440. */}
-            {allDay ? (
-              <>
-                <input type="hidden" name="from" value="00:00" />
-                <input type="hidden" name="until" value="00:00" />
-              </>
-            ) : (
-              <div className="grid grid-cols-2 gap-2">
-                <label className="min-w-0 space-y-1 text-sm">
-                  <span className="text-muted/70">From</span>
-                  <input
-                    type="time"
-                    step={900}
-                    name="from"
-                    value={windowFrom}
-                    onChange={(event) => {
-                      setWindowFrom(event.currentTarget.value);
-                    }}
-                    className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
-                    required
-                  />
-                </label>
-                <label className="min-w-0 space-y-1 text-sm">
-                  <span className="text-muted/70">Until</span>
-                  <input
-                    type="time"
-                    step={900}
-                    name="until"
-                    value={windowUntil}
-                    onChange={(event) => {
-                      setWindowUntil(event.currentTarget.value);
-                    }}
-                    className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
-                    required
-                  />
-                </label>
-              </div>
-            )}
-          </fieldset>
-          {showTaskPresets ? (
-            <fieldset className="space-y-3" disabled={busy}>
-              <legend className="mb-2 text-sm">Presets</legend>
-              <div className="grid grid-cols-2 gap-2">
-                {taskPresets.map((preset) => {
-                  const selected =
-                    activity === preset.activity &&
-                    description === preset.description &&
-                    kind === taskKind(preset) &&
-                    durationSeconds(duration) === preset.duration;
-                  return (
-                    <Button
-                      key={preset.id}
-                      aria-pressed={selected}
-                      align="between"
-                      className="h-9 w-full items-center"
-                      variant={
-                        selected ? "action-outline-regular" : "outline-regular"
-                      }
-                      onClick={() => {
-                        setActivity(preset.activity);
-                        setKind(taskKind(preset));
-                        setDescription(preset.description);
-                        setDuration(durationValue(preset.duration));
-                      }}
-                    >
-                      <span>{preset.activity}</span>
-                      <span className="text-muted/70 shrink-0">
-                        {formatPresetDuration(preset.duration)}
-                      </span>
-                    </Button>
-                  );
-                })}
-              </div>
-            </fieldset>
-          ) : null}
-          {error === null ? null : (
-            <p className="text-danger text-sm" role="alert">
-              {error}
-            </p>
-          )}
           <TaskFormActions
             busy={busy}
             onDelete={onDelete}
             submitLabel={submitLabel}
+            subtitle={subtitle}
             title={title}
           />
+          <div
+            className={`${styles.body} flex flex-col gap-5 overflow-y-auto overscroll-contain p-3 pt-18`}
+          >
+            {notice === undefined ? null : (
+              <p className="text-muted text-sm">{notice}</p>
+            )}
+            <TaskNameField
+              value={activity}
+              onChange={setActivity}
+              disabled={busy}
+              inputRef={nameRef}
+              maxLength={activityLimit}
+            />
+            <TaskDescriptionField
+              value={description}
+              onChange={setDescription}
+              maxLength={descriptionLimit}
+              optional={hasWindow}
+              disabled={busy}
+            />
+            <TaskKindField
+              name="kind"
+              value={kind}
+              onChange={setKind}
+              disabled={busy}
+            />
+            <DurationFields
+              value={duration}
+              onChange={setDuration}
+              disabled={busy}
+              presets={durationPresets}
+            />
+            <fieldset disabled={busy} className="space-y-2">
+              <legend className="mb-2 text-sm">Period</legend>
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <span id={allDayLabelId} className="text-muted/70">
+                  All day
+                </span>
+                <Switch.Root
+                  aria-labelledby={allDayLabelId}
+                  checked={allDay}
+                  disabled={busy}
+                  onCheckedChange={chooseAllDay}
+                  className="focus-visible:outline-action data-checked:bg-action bg-border block w-10 shrink-0 cursor-pointer rounded-full p-1 outline-hidden focus-visible:outline-2 data-disabled:cursor-not-allowed"
+                >
+                  <Switch.Thumb className="bg-surface block size-4 rounded-full data-checked:translate-x-4" />
+                </Switch.Root>
+              </div>
+              {/* All day submits 00:00 to 00:00, which the form reads as 0–1440. */}
+              {allDay ? (
+                <>
+                  <input type="hidden" name="from" value="00:00" />
+                  <input type="hidden" name="until" value="00:00" />
+                </>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  <label className="min-w-0 space-y-1 text-sm">
+                    <span className="text-muted/70">From</span>
+                    <input
+                      type="time"
+                      step={900}
+                      name="from"
+                      value={windowFrom}
+                      onChange={(event) => {
+                        setWindowFrom(event.currentTarget.value);
+                      }}
+                      className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
+                      required
+                    />
+                  </label>
+                  <label className="min-w-0 space-y-1 text-sm">
+                    <span className="text-muted/70">Until</span>
+                    <input
+                      type="time"
+                      step={900}
+                      name="until"
+                      value={windowUntil}
+                      onChange={(event) => {
+                        setWindowUntil(event.currentTarget.value);
+                      }}
+                      className={`${INPUT_CLASS} cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer`}
+                      required
+                    />
+                  </label>
+                </div>
+              )}
+            </fieldset>
+            {showTaskPresets ? (
+              <fieldset className="space-y-3" disabled={busy}>
+                <legend className="mb-2 text-sm">Presets</legend>
+                <div className="grid grid-cols-2 gap-2">
+                  {taskPresets.map((preset) => {
+                    const selected =
+                      activity === preset.activity &&
+                      description === preset.description &&
+                      kind === taskKind(preset) &&
+                      durationSeconds(duration) === preset.duration;
+                    return (
+                      <Button
+                        key={preset.id}
+                        aria-pressed={selected}
+                        align="between"
+                        className="h-9 w-full items-center"
+                        variant={
+                          selected
+                            ? "action-outline-regular"
+                            : "outline-regular"
+                        }
+                        onClick={() => {
+                          setActivity(preset.activity);
+                          setKind(taskKind(preset));
+                          setDescription(preset.description);
+                          setDuration(durationValue(preset.duration));
+                        }}
+                      >
+                        <span>{preset.activity}</span>
+                        <span className="text-muted/70 shrink-0">
+                          {formatPresetDuration(preset.duration)}
+                        </span>
+                      </Button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ) : null}
+            {error === null ? null : (
+              <p className="text-danger text-sm" role="alert">
+                {error}
+              </p>
+            )}
+          </div>
         </form>
       </Dialog.Popup>
     </>
@@ -406,15 +418,19 @@ function TaskFormActions({
   busy,
   onDelete,
   title,
+  subtitle,
   submitLabel,
 }: {
   busy: boolean;
   title: string;
+  subtitle?: string;
   submitLabel: string;
   onDelete?: () => Promise<void>;
 }) {
   return (
-    <div className="order-first grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+    <div
+      className={`${styles.header} grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-3 px-3`}
+    >
       <div className="grid w-18 justify-self-start">
         {onDelete === undefined ? (
           <Dialog.Close
@@ -434,7 +450,14 @@ function TaskFormActions({
           </DeleteTaskButton>
         )}
       </div>
-      <Dialog.Title className="text-center font-medium">{title}</Dialog.Title>
+      <div className="text-center">
+        <Dialog.Title className="font-medium">{title}</Dialog.Title>
+        {subtitle === undefined ? null : (
+          <Dialog.Description className="text-muted text-xs">
+            {subtitle}
+          </Dialog.Description>
+        )}
+      </div>
       <div className="grid w-18 justify-self-end">
         <Button
           className="w-full"

@@ -12,6 +12,7 @@ import {
   timerDayBounds,
 } from "@/app/(tools)/timer/utils/timer";
 import type { TimerTask } from "@/app/(tools)/timer/utils/timer";
+import { shortDateLabel } from "@/app/(tools)/timer/utils/timerCalendar";
 import {
   TASK_FORM_INPUT_LIMITS,
   readTaskForm,
@@ -248,6 +249,7 @@ export function AddTask({ disabled }: { disabled: boolean }) {
       </Dialog.Trigger>
       <TaskFormDialog
         title="New Task"
+        subtitle={snapshot ? shortDateLabel(snapshot.day.date) : undefined}
         submitLabel="Add"
         showTaskPresets
         activityLimit={TASK_FORM_INPUT_LIMITS.activity}

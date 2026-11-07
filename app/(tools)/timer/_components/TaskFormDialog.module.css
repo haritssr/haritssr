@@ -1,0 +1,50 @@
+/*
+ * Hard scroll edge effect: the form scrolls under an overlaid header. Content
+ * passing under it is cut off at a crisp edge behind a blurred, mostly opaque
+ * bar, and a hairline appears once something is underneath.
+ */
+.header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  background: color-mix(in srgb, var(--color-background) 85%, transparent);
+}
+
+@supports (backdrop-filter: blur(4px)) {
+  .header {
+    backdrop-filter: blur(12px);
+  }
+}
+
+.header::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  pointer-events: none;
+  content: "";
+  background: var(--color-border);
+}
+
+/* Hidden at the top of the form, fading in over the first rem of scrolling. */
+@supports (animation-timeline: scroll()) {
+  .sheet {
+    timeline-scope: --task-sheet-scroll;
+  }
+
+  .body {
+    scroll-timeline: --task-sheet-scroll block;
+  }
+
+  .header::after {
+    opacity: 0;
+    animation: header-edge linear both;
+    animation-timeline: --task-sheet-scroll;
+    animation-range: 0 1rem;
+  }
+}
+
+@keyframes header-edge {
+  to {
+    opacity: 1;
+  }
+}
