@@ -200,6 +200,18 @@
   --color-schedule-foreground: var(--color-violet-800);
   --color-series-work: var(--color-violet-600);
   --color-series-leisure: var(--color-amber-600);
+  --color-series-feat: #2a78d6;
+  --color-series-fix: #eb6834;
+  --color-series-refactor: #1baf7a;
+  --color-series-style: #eda100;
+  --color-series-docs: #e87ba4;
+  --color-series-chore: #008300;
+  --color-series-other: #9b9a95;
+  --color-heat-1: var(--color-blue-100);
+  --color-heat-2: var(--color-blue-200);
+  --color-heat-3: var(--color-blue-400);
+  --color-heat-4: var(--color-blue-600);
+  --color-heat-5: var(--color-blue-800);
   --color-work-surface: var(--color-violet-50);
   --color-work-foreground: var(--color-violet-700);
   --color-leisure-surface: var(--color-amber-50);

@@ -9,6 +9,8 @@ export const commitRelationships = `flowchart TD
   History --> Summary
   Summary --> API["Commits page and cached API responses"]
   API --> Explorer["Activity chart, summary, and timeline"]
+  History --> Insights["All-history insights and monthly change mix"]
   History --> Tools["Dated reviews and tool changelogs"]
   Local["Curated weekly summaries"] --> Changelog["Weekly changelog"]
+  Insights --> Changelog
 `;

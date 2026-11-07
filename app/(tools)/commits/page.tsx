@@ -1,4 +1,5 @@
 import ChangelogExplorer from "@/app/(tools)/commits/_components/ChangelogExplorer";
+import CommitInsights from "@/app/(tools)/commits/_components/CommitInsights";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
@@ -17,6 +18,7 @@ import { parseChangelogSelection } from "@/utils/commits/changelogSelection";
 import {
   getChangelogSummary,
   getChangelogResult,
+  getCommitInsights,
 } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
@@ -33,6 +35,7 @@ export default async function CommitsPage() {
   const initial = await getChangelogResult(
     parseChangelogSelection(new URLSearchParams(), lastDay)
   );
+  const insights = await getCommitInsights();
   return (
     <>
       <PageHeader back={{ href: "/", name: "Home" }} path={commitsRoute.route}>
@@ -51,6 +54,7 @@ export default async function CommitsPage() {
         </nav>
       </PageHeader>
       <div className="space-y-16">
+        <CommitInsights insights={insights} />
         <ChangelogExplorer initial={initial} initialDay={lastDay} />
         <nav
           aria-label="Commit analyses"

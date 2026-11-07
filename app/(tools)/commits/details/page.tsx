@@ -67,6 +67,12 @@ export default function CommitsDetailsPage() {
               down from a week, month, year, or all-history view.
             </li>
             <li>
+              See all-history insights above the filters: commits per active
+              day, the busiest day, the longest streak, the share made after
+              midnight, a 12-month change-type mix, the most-touched areas, and
+              a weekday-by-time rhythm. Each chart has a table view.
+            </li>
+            <li>
               Start with 10 timeline entries, load 10 more at a time, and share
               the current filters through the page URL.
             </li>
@@ -120,6 +126,11 @@ export default function CommitsDetailsPage() {
             </li>
             <li>
               Messages without a recognized commit prefix appear under Other.
+            </li>
+            <li>
+              Insights ignore the filters. Areas come from the scope in subjects
+              like feat(Timer), so commits without one are not counted, and
+              differences in capitalization are merged.
             </li>
             <li>
               The weekly changelog combines curated summaries with newer commit

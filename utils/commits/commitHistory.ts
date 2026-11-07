@@ -6,6 +6,7 @@ import { prepareCommits } from "./changelog";
 import { summarizeCommits } from "./changelogSummary";
 import type { ChangelogResult, ChangelogSelection } from "./changelogTypes";
 import { readCommitHistory } from "./commitsDatabase";
+import { commitInsights } from "./insights";
 
 /** Tag that `POST /api/commits/revalidate` expires after an import. */
 export const COMMIT_HISTORY_TAG = "commit-history";
@@ -35,4 +36,9 @@ export async function getChangelogResult(
 export async function getChangelogSummary() {
   const { prepared, firstDay, lastDay } = await getPreparedHistory();
   return { count: prepared.length, firstDay, lastDay };
+}
+
+export async function getCommitInsights() {
+  const { prepared } = await getPreparedHistory();
+  return commitInsights(prepared);
 }
