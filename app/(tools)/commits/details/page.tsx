@@ -81,7 +81,8 @@ export default function CommitsDetailsPage() {
               <InternalLink href={weeklyChangelogRoute.route} variant="inline">
                 Changelog
               </InternalLink>{" "}
-              page.
+              page. The newest three months start open, older months fold away,
+              and each month shows its commit count and change-type mix.
             </li>
           </ExplanationList>
         </Section>

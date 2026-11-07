@@ -1,11 +1,22 @@
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import type { CSSProperties } from "react";
+
+import {
+  TYPE_BACKGROUND,
+  TypeLegend,
+} from "@/app/(tools)/commits/_components/CommitTypeChart";
 import InternalLink from "@/components/InternalLink";
 import PageDescription from "@/components/PageDescription";
 import PageHeader from "@/components/PageHeader";
 import PageTitle from "@/components/PageTitle";
-import Section, { SectionHeading } from "@/components/Section";
 import { commitsRoute, weeklyChangelogRoute } from "@/data/routes";
 import { formatDay } from "@/utils/commits/changelog";
-import { getCommitHistory } from "@/utils/commits/commitHistory";
+import {
+  getCommitHistory,
+  getCommitInsights,
+} from "@/utils/commits/commitHistory";
+import { INSIGHT_TYPES } from "@/utils/commits/insights";
+import type { MonthlyMix } from "@/utils/commits/insights";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import { buildWeeks, reviewedThrough } from "./data";
@@ -18,6 +29,9 @@ export const metadata = createPageMetadata({
   path: weeklyChangelogRoute.route,
 });
 
+/** Months at the top stay open; older ones fold away until chosen. */
+const OPEN_MONTHS = 3;
+const numberFormatter = new Intl.NumberFormat("en-GB");
 const monthFormatter = new Intl.DateTimeFormat("en-GB", {
   month: "long",
   year: "numeric",
@@ -27,6 +41,8 @@ const shortMonthFormatter = new Intl.DateTimeFormat("en-GB", {
   month: "short",
   timeZone: "UTC",
 });
+
+type ShareStyle = CSSProperties & Record<"--share", string>;
 
 function groupMonths(weeklyChangelog: ReturnType<typeof buildWeeks>) {
   const grouped = new Map<string, typeof weeklyChangelog>();
@@ -47,8 +63,51 @@ function groupMonths(weeklyChangelog: ReturnType<typeof buildWeeks>) {
   });
 }
 
+/** "15–21 Oct", or "28 Oct" for a single day. */
+function weekRange(start: string, end: string) {
+  const month = shortMonthFormatter.format(new Date(`${end}T00:00:00Z`));
+  const first = Number(start.slice(8));
+  const last = Number(end.slice(8));
+  return first === last ? `${last} ${month}` : `${first}–${last} ${month}`;
+}
+
+function MonthMix({ mix }: { mix: MonthlyMix | undefined }) {
+  if (mix === undefined || mix.total === 0) {
+    return null;
+  }
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-2 w-full gap-0.5 sm:w-56"
+      title={INSIGHT_TYPES.filter(({ value }) => mix.counts[value] > 0)
+        .map(({ label, value }) => `${label} ${mix.counts[value]}`)
+        .join(", ")}
+    >
+      {INSIGHT_TYPES.filter(({ value }) => mix.counts[value] > 0).map(
+        ({ value }) => {
+          const segmentStyle: ShareStyle = {
+            "--share": String(mix.counts[value]),
+          };
+          return (
+            <span
+              className={`h-full min-w-0.5 grow-(--share) basis-0 rounded-xs ${TYPE_BACKGROUND[value]}`}
+              key={value}
+              style={segmentStyle}
+            />
+          );
+        }
+      )}
+    </span>
+  );
+}
+
 export default async function WeeklyChangelogPage() {
-  const months = groupMonths(buildWeeks(await getCommitHistory()));
+  const [history, insights] = await Promise.all([
+    getCommitHistory(),
+    getCommitInsights(),
+  ]);
+  const months = groupMonths(buildWeeks(history));
+  const mixes = new Map(insights.months.map((mix) => [mix.key, mix]));
   return (
     <>
       <PageHeader
@@ -68,7 +127,7 @@ export default async function WeeklyChangelogPage() {
           <span className="text-muted">Jump to</span>
           {months.map((month) => (
             <InternalLink
-              href={`#month-${month.key}`}
+              href={`#week-${month.weeks.at(0)?.start ?? month.key}`}
               key={month.key}
               variant="inline"
             >
@@ -77,79 +136,93 @@ export default async function WeeklyChangelogPage() {
           ))}
         </nav>
       </PageHeader>
-      <div className="space-y-16">
-        <p className="text-muted max-w-3xl text-sm">
-          Entries after the curated cutoff are commit subjects; browse{" "}
-          <InternalLink href={commitsRoute.route} variant="inline">
-            all commits
-          </InternalLink>{" "}
-          for individual changes. Weeks are grouped within each month, and the
-          latest week may be partial.
-        </p>
-        {months.map((month) => (
-          <div
-            className="corner-squircle border-border rounded-xl border p-4 supports-[corner-shape:squircle]:rounded-3xl sm:p-5"
-            key={month.key}
-          >
-            <Section id={`month-${month.key}`} title={month.title}>
-              <ul className="divide-border divide-y divide-dashed">
-                {month.weeks.map((week) => (
-                  <li
-                    className="py-5 first:pt-0 last:pb-0"
-                    id={`week-${week.start}`}
-                    key={week.start}
-                  >
-                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <SectionHeading
-                          as="h3"
-                          variant="toolbar"
-                          data-toc-ignore=""
-                        >
-                          Week {Math.ceil(Number(week.start.slice(-2)) / 7)}
-                        </SectionHeading>
-                        {week.partial ? (
-                          <span className="bg-action/10 text-action rounded-full px-2 py-0.5 text-xs font-medium">
-                            Partial week
-                          </span>
-                        ) : null}
+      <div className="space-y-6">
+        <div className="max-w-3xl space-y-3">
+          <p className="text-muted text-sm">
+            Entries after the curated cutoff are commit subjects; browse{" "}
+            <InternalLink href={commitsRoute.route} variant="inline">
+              all commits
+            </InternalLink>{" "}
+            for individual changes. The latest week may be partial, and the{" "}
+            {OPEN_MONTHS} newest months start open.
+          </p>
+          <p className="text-muted text-sm">
+            The bar beside each month shows its mix of change types.
+          </p>
+          <TypeLegend totals={insights.typeTotals} />
+        </div>
+        <div className="divide-border border-border divide-y border-y">
+          {months.map((month, index) => {
+            const mix = mixes.get(month.key);
+            return (
+              <details
+                className="group/month"
+                id={`month-${month.key}`}
+                key={month.key}
+                open={index < OPEN_MONTHS}
+              >
+                <summary className="bg-background focus-visible:outline-action sticky top-[var(--topbar-height,4rem)] z-10 flex cursor-pointer list-none flex-wrap items-center gap-x-4 gap-y-2 py-4 [&::-webkit-details-marker]:hidden">
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="text-muted size-5 shrink-0 -rotate-90 transition-transform group-open/month:rotate-0"
+                  />
+                  <span className="text-foreground text-xl font-semibold">
+                    {month.title}
+                  </span>
+                  <span className="text-muted text-sm tabular-nums">
+                    {mix === undefined
+                      ? null
+                      : `${numberFormatter.format(mix.total)} commits · `}
+                    {month.weeks.length}{" "}
+                    {month.weeks.length === 1 ? "week" : "weeks"}
+                  </span>
+                  <span className="ml-auto flex w-full sm:w-auto">
+                    <MonthMix mix={mix} />
+                  </span>
+                </summary>
+                <ol className="divide-border divide-y divide-dashed pb-6">
+                  {month.weeks.map((week) => (
+                    <li
+                      className="grid gap-x-8 gap-y-2 py-5 first:pt-1 last:pb-0 sm:grid-cols-[9rem_minmax(0,1fr)]"
+                      id={`week-${week.start}`}
+                      key={week.start}
+                    >
+                      <div className="text-sm">
+                        <p className="text-foreground font-medium tabular-nums">
+                          <time dateTime={week.start}>
+                            {weekRange(week.start, week.end)}
+                          </time>
+                        </p>
+                        <p className="text-muted tabular-nums">
+                          {numberFormatter.format(week.count)} commits
+                          {week.partial ? " · partial" : ""}
+                        </p>
                       </div>
-                      <p className="text-muted text-sm tabular-nums">
-                        <time dateTime={week.start}>
-                          {formatDay(week.start)}
-                        </time>
-                        {week.end === week.start ? null : (
-                          <>
-                            {" – "}
-                            <time dateTime={week.end}>
-                              {formatDay(week.end)}
-                            </time>
-                          </>
-                        )}
-                      </p>
-                    </div>
-                    {week.changes.length > 0 ? (
-                      <div className="mt-3 space-y-3">
-                        <p className="text-secondary-foreground max-w-3xl">
+                      <div className="max-w-3xl min-w-0 space-y-2">
+                        <p
+                          className={
+                            week.changes.length > 0
+                              ? "text-foreground font-medium"
+                              : "text-muted"
+                          }
+                        >
                           {week.description}
                         </p>
-                        <ul className="marker:text-muted max-w-3xl list-outside list-disc space-y-2 pl-5">
-                          {week.changes.map((change, index) => (
-                            <li key={`${change}-${index}`}>{change}</li>
-                          ))}
-                        </ul>
+                        {week.changes.length > 0 ? (
+                          <ul className="marker:text-muted text-secondary-foreground list-outside list-disc space-y-1.5 pl-5 text-sm">
+                            {week.changes.map((change, changeIndex) => (
+                              <li key={`${change}-${changeIndex}`}>{change}</li>
+                            ))}
+                          </ul>
+                        ) : null}
                       </div>
-                    ) : (
-                      <p className="text-muted mt-2 text-sm">
-                        {week.description}
-                      </p>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </Section>
-          </div>
-        ))}
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            );
+          })}
+        </div>
       </div>
     </>
   );

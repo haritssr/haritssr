@@ -11,6 +11,8 @@ interface WeeklyEntry extends WeekSummary {
   end: string;
   title: string;
   partial: boolean;
+  /** Commits made during the week. */
+  count: number;
 }
 
 // Curated from Git history through e7442486deb52ebd3569aec77b6b0766f7dc702c.
@@ -256,15 +258,12 @@ export function buildWeeks(commits: readonly ChangelogCommit[]): WeeklyEntry[] {
         const scheduledEnd = `${monthKey}-${String(Math.min(day + 6, daysInMonth)).padStart(2, "0")}`;
         const partial = scheduledEnd > lastDay;
         const summary = summaries[start];
-        const newSubjects = commits
-          .filter((commit) => {
-            const commitDate = commitDay(commit.date);
-            return (
-              commitDate > reviewedThrough &&
-              commitDate >= start &&
-              commitDate <= scheduledEnd
-            );
-          })
+        const inWeek = commits.filter((commit) => {
+          const commitDate = commitDay(commit.date);
+          return commitDate >= start && commitDate <= scheduledEnd;
+        });
+        const newSubjects = inWeek
+          .filter((commit) => commitDay(commit.date) > reviewedThrough)
           .map((commit) => commit.subject);
 
         weeks.push({
@@ -272,6 +271,7 @@ export function buildWeeks(commits: readonly ChangelogCommit[]): WeeklyEntry[] {
           end: partial ? lastDay : scheduledEnd,
           title: `${monthNames[month - 1]} Week#${Math.ceil(day / 7)}`,
           partial,
+          count: inWeek.length,
           description:
             summary?.description ??
             (newSubjects.length ? "Commit subjects" : "No recorded changes."),
