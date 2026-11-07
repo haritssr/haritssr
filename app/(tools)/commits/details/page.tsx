@@ -15,6 +15,7 @@ import {
 } from "@/data/routes";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
+import OwnerCacheSetup from "./OwnerCacheSetup";
 import { commitRelationships } from "./relationships";
 
 export const metadata = createPageMetadata({
@@ -263,6 +264,7 @@ export default function CommitsDetailsPage() {
             </AccordionItem>
           </Accordion>
         </Section>
+        <OwnerCacheSetup />
         <ToolChangelog tool="commits" />
       </div>
     </>
