@@ -92,6 +92,7 @@ export default function DesignSystem() {
               )}
             </li>
             <li>The devil is in the details.</li>
+            <li>Show, don’t tell.</li>
             <InterfacePrinciples>
               <div>
                 <ul className="[&>li::marker]:text-muted mt-1 list-outside list-disc space-y-1 pl-5">
