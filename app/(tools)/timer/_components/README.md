@@ -126,22 +126,16 @@ all day, including running, paused, completed, and missed tasks. Blocks span the
 exact opening/closing minutes; active cards, running included, use their kind's color (violet for Work, amber for Leisure), and past cards are muted in that color. Overlapping windows share
 horizontal lanes, calculated by [timelineLayout.ts](timelineLayout.ts). Its
 full-height timeline displays every hour from 00:00 to 24:00 in the page flow,
-without internal scrolling. The "6-hour timeline" setting (off by default, saved with the
-other preferences in `timer_preferences.paged_timeline` and read through
-[useTimelineMode.ts](../hooks/useTimelineMode.ts)) instead shows one 6-hour
-page at a time, a quarter of that height. The "Follow now" setting
-(`timer_preferences.follow_now_timeline`, exclusive with the 6-hour setting) keeps the
+without internal scrolling. The "Follow now" setting (off by default, saved with the other
+preferences in `timer_preferences.follow_now_timeline` and read through
+[useTimelineMode.ts](../hooks/useTimelineMode.ts)) keeps the
 full 24-hour timeline but scrolls it inside a frame whose maximum height is the screen
 height available below it. The frame opens scrolled to 30 minutes before the current
-time and stays put as time passes; a Now button scrolls back. [ScheduleTimeline.tsx](ScheduleTimeline.tsx)
-chooses the page through [useTimelineWindow.ts](../hooks/useTimelineWindow.ts): the
-page holding the current time, or on other days the first scheduled task's page
-(06:00–12:00 without tasks), until a page is chosen. A floating
-[TimelinePager.tsx](TimelinePager.tsx) at the top right steps to the neighbouring
-pages, labelled with their ranges, with a red dot toward the current time. Cards
-crossing a page edge are clipped with a square edge and lose that edge's resize
-handle; creation and move/resize gestures map pointer positions to the visible
-minutes. Week view always shows 24 hours. A red line shows Jakarta time, updating at least once per minute.
+time and stays put as time passes; a floating "Back to Now" button at the top right
+([TimelinePager.tsx](TimelinePager.tsx)) scrolls back whenever the red line is out of
+view. [ScheduleTimeline.tsx](ScheduleTimeline.tsx) sizes the frame through
+[useTimelineWindow.ts](../hooks/useTimelineWindow.ts). Creation and move/resize
+gestures map pointer positions to the timeline's minutes. Week view always shows 24 hours. A red line shows Jakarta time, updating at least once per minute.
 The red line stays above cards without intercepting pointer events. Active cards
 have an edit icon; completed and missed cards are read-only. Only future eligible
 cards have move and resize controls.
@@ -501,7 +495,7 @@ add/remove, and Up/Down ordering. Names allow 30 characters; daily
 descriptions allow 38 characters. The list may be empty and shares the existing
 10-task Daily Tasks limit. Validation identifies the task and field, shows its
 error beside the task, and focuses the affected input on Save.
-Scheduled availability uses From/Until in WIB; Until 00:00
+Scheduled period uses From/Until in WIB; Until 00:00
 means the following midnight. Overnight windows other than that cutoff are rejected.
 Closing Settings discards unsaved changes. `TimerSettings.tsx` owns one page-scoped
 Base UI handle: the toolbar trigger opens Settings and restores focus through Base

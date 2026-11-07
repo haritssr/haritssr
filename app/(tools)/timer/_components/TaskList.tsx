@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 
 import { useTimer } from "@/app/(tools)/timer/_components/TimerProvider";
 
-import { canUseTimer } from "../utils/timer";
+import { canUseTimer, isAllDay } from "../utils/timer";
 import { scheduledCalendarTasks } from "../utils/timerCalendar";
 import ScheduleTimeline from "./ScheduleTimeline";
 import TaskCard from "./TaskCard";
@@ -50,6 +51,9 @@ export default function TaskList({ now }: { now: number }) {
     return entry === undefined ? [] : [entry];
   });
   const available = orderedVisible.filter(({ state }) => state.available);
+  // Tasks in an open scheduled window are Now; the rest have no set time.
+  const nowTasks = available.filter(({ task }) => !isAllDay(task.period));
+  const allDayTasks = available.filter(({ task }) => isAllDay(task.period));
   const renderTask = ({ task, state }: (typeof orderedVisible)[number]) => (
     <li
       className={`flex min-w-0 ${task.id === newTaskId ? styles.pulse : ""}`}
@@ -65,21 +69,25 @@ export default function TaskList({ now }: { now: number }) {
   );
   return (
     <div className="grid min-w-0 grid-cols-1 items-start gap-3 lg:grid-cols-2 lg:gap-5">
-      <div className="lg:corner-squircle lg:border-border min-w-0 space-y-3 lg:space-y-2.5 lg:rounded-2xl lg:border lg:border-dashed lg:p-2.5 lg:supports-[corner-shape:squircle]:rounded-4xl">
+      <div className="min-w-0 space-y-3 lg:space-y-5">
         {available.length === 0 ? (
-          <p className="text-muted text-sm">
-            No available tasks. Add a task or wait for a scheduled window to
-            open.
-          </p>
+          <TaskArea>
+            <p className="text-muted text-sm">
+              No available tasks. Add a task or wait for a scheduled window to
+              open.
+            </p>
+          </TaskArea>
         ) : null}
-        {available.length > 0 && (
-          <ul
-            aria-label="Today's activities"
-            className={`min-w-0 ${TASK_LAYOUT.collection}`}
-          >
-            {available.map(renderTask)}
-          </ul>
-        )}
+        {nowTasks.length > 0 ? (
+          <TaskArea label="Now" framed={false}>
+            {nowTasks.map(renderTask)}
+          </TaskArea>
+        ) : null}
+        {allDayTasks.length > 0 ? (
+          <TaskArea label="All day" framed={false}>
+            {allDayTasks.map(renderTask)}
+          </TaskArea>
+        ) : null}
       </div>
       <ScheduleTimeline
         tasks={scheduledCalendarTasks(snapshot.day)}
@@ -87,6 +95,46 @@ export default function TaskList({ now }: { now: number }) {
         now={now}
         editable={canUseTimer(snapshot)}
       />
+    </div>
+  );
+}
+
+/** An area of task cards with its label above it, or a bare message. */
+function TaskArea({
+  label,
+  framed = true,
+  children,
+}: {
+  label?: string;
+  /** Draws the dashed border and padding around the cards. */
+  framed?: boolean;
+  children: ReactNode;
+}) {
+  const area = (
+    <section
+      aria-label={label === undefined ? undefined : `${label} activities`}
+      className={
+        framed
+          ? "corner-squircle border-border min-w-0 rounded-2xl border border-dashed p-2.5 supports-[corner-shape:squircle]:rounded-4xl"
+          : "min-w-0"
+      }
+    >
+      {label === undefined ? (
+        children
+      ) : (
+        <ul className={`min-w-0 ${TASK_LAYOUT.collection}`}>{children}</ul>
+      )}
+    </section>
+  );
+  if (label === undefined) {
+    return area;
+  }
+  return (
+    <div className="min-w-0 space-y-1.5">
+      <h3 className={`text-foreground/50 text-sm ${framed ? "px-2.5" : ""}`}>
+        {label}
+      </h3>
+      {area}
     </div>
   );
 }

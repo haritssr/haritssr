@@ -111,11 +111,10 @@ export default function TimerDetailsPage() {
               larger screens use a linear progress bar.
             </li>
             <li>
-              Optionally show the schedule in 6-hour pages with floating buttons
-              to the neighbouring hours; the full 24-hour timeline remains the
-              default. A &ldquo;Follow now&rdquo; setting instead scrolls the
-              full 24-hour timeline inside the available screen height, opening
-              just before the current time, with a Now button to return.
+              The full 24-hour timeline is the default. A &ldquo;Follow
+              now&rdquo; setting scrolls it inside the available screen height,
+              opening just before the current time, with a Back to Now button to
+              return.
             </li>
             <li id="tests">
               Timer logic and data shape are covered by{" "}
@@ -198,13 +197,15 @@ export default function TimerDetailsPage() {
             </li>
             <li>
               Day shows available tasks alongside an hourly schedule, stacked
-              below the list on mobile. Blocks show scheduled availability
-              windows in 15-minute increments, at least 15 minutes long. Cards
-              stay in the timeline all day, including completed and missed
-              tasks. Running cards turn green; other active cards stay purple.
-              Select an active card’s edit icon to edit today’s task. Cards show
-              descriptions for windows of 30 minutes or longer. The red line
-              marks the current Jakarta time.
+              below the lists on mobile. Tasks in an open scheduled window sit
+              in a Now area, and tasks without a set time in an All day area.
+              Blocks show scheduled availability windows in 15-minute
+              increments, at least 15 minutes long. Cards stay in the timeline
+              all day, including completed and missed tasks. Running cards turn
+              green; other active cards stay purple. Select an active card’s
+              edit icon to edit today’s task. Cards show descriptions for
+              windows of 30 minutes or longer. The red line marks the current
+              Jakarta time.
             </li>
             <li>
               Month shows a Monday-first calendar of scheduled tasks. Select a
