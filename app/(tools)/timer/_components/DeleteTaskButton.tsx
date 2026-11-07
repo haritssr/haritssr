@@ -58,19 +58,19 @@ export default function DeleteTaskButton({
           forceRender
           className="bg-foreground/40 fixed inset-0 z-100"
         />
-        <AlertDialog.Popup className="corner-squircle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-100 w-[calc(100%-3rem)] max-w-xs -translate-x-1/2 -translate-y-1/2 rounded-lg border p-5 outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
-          <AlertDialog.Title className="font-semibold">
+        <AlertDialog.Popup className="corner-squircle border-border bg-background text-foreground shadow-floating fixed top-1/2 left-1/2 z-100 w-[calc(100%-3rem)] max-w-72 -translate-x-1/2 -translate-y-1/2 rounded-lg border p-4 outline-hidden supports-[corner-shape:squircle]:rounded-2xl">
+          <AlertDialog.Title className="text-base leading-6 font-semibold">
             Delete task?
           </AlertDialog.Title>
-          <AlertDialog.Description className="text-muted mt-2 text-sm">
+          <AlertDialog.Description className="text-muted mt-1 text-sm leading-5">
             This task will be permanently deleted.
           </AlertDialog.Description>
           {error ? (
-            <p className="text-danger mt-3 text-sm" role="alert">
+            <p className="text-danger mt-2 text-sm leading-5" role="alert">
               The task could not be deleted. Please try again.
             </p>
           ) : null}
-          <div className="mt-5 flex justify-end gap-3">
+          <div className="mt-4 flex justify-end gap-2">
             <AlertDialog.Close
               disabled={deleting}
               render={<Button variant="secondary" />}
