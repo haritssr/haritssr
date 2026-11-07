@@ -5,8 +5,46 @@ interface Drag {
   id: number;
   x: number;
   y: number;
+  /** The element's top edge when the drag began, to account for scrolling. */
+  top: number;
+  /** The latest pointer position, used while scrolling under a still pointer. */
+  lastY: number;
   active: boolean;
   moved: boolean;
+}
+
+/** Pixels from a visible edge where dragging starts to scroll. */
+const SCROLL_EDGE = 64;
+/** Pixels scrolled per frame with the pointer at or beyond the edge. */
+const SCROLL_SPEED = 22;
+
+function cssPixels(name: string) {
+  return (
+    Number(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue(name)
+        .replace("px", "")
+    ) || 0
+  );
+}
+
+/** The scrollable frame holding `element`, or the page when there is none. */
+function scrollTarget(element: HTMLElement) {
+  const frame = element.closest<HTMLElement>("[data-timeline-frame]");
+  if (frame !== null && frame.scrollHeight > frame.clientHeight) {
+    const { top, bottom } = frame.getBoundingClientRect();
+    return { top, bottom, by: (delta: number) => (frame.scrollTop += delta) };
+  }
+  // Sticky headers cover the top of the page; keep the drag zone below them.
+  const top =
+    cssPixels("--topbar-height") + cssPixels("--timer-toolbar-height");
+  return {
+    top,
+    bottom: window.innerHeight,
+    by: (delta: number) => {
+      window.scrollBy(0, delta);
+    },
+  };
 }
 
 export interface TimelineDragHandlers {
@@ -32,8 +70,43 @@ export function trackTimelineDrag(
 ) {
   let drag: Drag | null = null;
   let hold = 0;
+  let frame = 0;
+  /** The pointer's origin in current screen coordinates, following scrolling. */
+  const originNow = (current: Drag) =>
+    current.y + element.getBoundingClientRect().top - current.top;
+  const stopScrolling = () => {
+    window.cancelAnimationFrame(frame);
+    frame = 0;
+  };
+  const scrollStep = () => {
+    frame = 0;
+    const current = drag;
+    if (current === null || !current.active || !current.moved) {
+      return;
+    }
+    const target = scrollTarget(element);
+    let delta = 0;
+    if (current.lastY > target.bottom - SCROLL_EDGE) {
+      delta =
+        Math.min(
+          1.5,
+          (current.lastY - (target.bottom - SCROLL_EDGE)) / SCROLL_EDGE
+        ) * SCROLL_SPEED;
+    } else if (current.lastY < target.top + SCROLL_EDGE) {
+      delta =
+        -Math.min(
+          1.5,
+          (target.top + SCROLL_EDGE - current.lastY) / SCROLL_EDGE
+        ) * SCROLL_SPEED;
+    }
+    if (delta !== 0) {
+      target.by(delta);
+    }
+    frame = window.requestAnimationFrame(scrollStep);
+  };
   const reset = () => {
     window.clearTimeout(hold);
+    stopScrolling();
     drag = null;
   };
   const cancel = () => {
@@ -57,6 +130,8 @@ export function trackTimelineDrag(
       id,
       x,
       y,
+      top: element.getBoundingClientRect().top,
+      lastY: y,
       active: mode === "pointer",
       moved: false,
     };
@@ -86,7 +161,19 @@ export function trackTimelineDrag(
       handlers.moved?.();
     }
     if (current.moved) {
-      handlers.drag(y, current.y);
+      current.lastY = y;
+      handlers.drag(y, originNow(current));
+      if (frame === 0) {
+        frame = window.requestAnimationFrame(scrollStep);
+      }
+    }
+  };
+  // Scrolling under a still pointer, by wheel or by the edge scroll above,
+  // moves the card or selection with it.
+  const onScroll = () => {
+    const current = drag;
+    if (current !== null && current.active && current.moved) {
+      handlers.drag(current.lastY, originNow(current));
     }
   };
   const finish = () => {
@@ -188,6 +275,7 @@ export function trackTimelineDrag(
   };
   element.addEventListener("pointerdown", pointerDown);
   element.addEventListener("touchstart", touchStart, { passive: true });
+  window.addEventListener("scroll", onScroll, true);
   window.addEventListener("pointermove", pointerMove);
   window.addEventListener("pointerup", pointerUp);
   window.addEventListener("pointercancel", pointerCancel);
@@ -202,6 +290,7 @@ export function trackTimelineDrag(
       reset();
       element.removeEventListener("pointerdown", pointerDown);
       element.removeEventListener("touchstart", touchStart);
+      window.removeEventListener("scroll", onScroll, true);
       window.removeEventListener("pointermove", pointerMove);
       window.removeEventListener("pointerup", pointerUp);
       window.removeEventListener("pointercancel", pointerCancel);
