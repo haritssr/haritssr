@@ -64,6 +64,7 @@ export default function FloatingMusicDock({ store }: { store: MusicStore }) {
       </Button>
       <Button
         aria-label="Next song"
+        data-floating-details=""
         onClick={() => {
           store.next();
         }}
